@@ -86,7 +86,7 @@ HealStatusAbility:
 	ld [hl], a
 	ld hl, BecameHealthyText
 	call StdBattleTextBox
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jp z, UpdateBattleMonInParty
 	jp UpdateEnemyMonInParty
@@ -209,7 +209,7 @@ DownloadAbility:
 	call ShowAbilityActivation
 	call DisableAnimations
 	ld hl, wEnemyMonDefense
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .ok
 	ld hl, wBattleMonDefense
@@ -219,7 +219,7 @@ DownloadAbility:
 	ld a, [hl]
 	ld c, a
 	ld hl, wEnemyMonSpclDef + 1
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .ok2
 	ld hl, wBattleMonSpclDef + 1
@@ -257,7 +257,7 @@ AnticipationAbility:
 ; whatever type they are listed as (e.g. HP is Normal). It will also (as of 5gen)
 ; treat Counter/Mirror Coat (and Metal Burst) as attacking moves of their type.
 ; It also ignores Pixilate.
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld hl, wEnemyMonMoves
 	jr z, .got_move_ptr
@@ -282,7 +282,7 @@ AnticipationAbility:
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
 	rst AddNTimes
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld de, wPlayerMoveStruct
 	jr z, .got_move_struct
@@ -319,7 +319,7 @@ AnticipationAbility:
 	ld hl, Moves
 	ld bc, MOVE_LENGTH
 	rst AddNTimes
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld de, wPlayerMoveStruct
 	jr z, .got_move_struct2
@@ -333,7 +333,7 @@ ForewarnAbility:
 ; A note on moves with non-regular damage: Bulbapedia and Showdown has conflicting info on
 ; what power these moves actually have. I am using Showdown numbers here which assigns
 ; 160 to counter moves and 80 to everything else with nonstandard base power.
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld hl, wEnemyMonMoves
 	jr z, .got_move_ptr
@@ -822,7 +822,7 @@ JustifiedAbility:
 	jr AttackUpAbility
 MoxieAbility:
 	; Don't run if battle is over
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy
 	ld a, [wBattleMode]
@@ -1170,7 +1170,7 @@ HarvestAbility:
 	call RegainItemByAbility
 
 	; For the player, update backup items
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ret nz
 	jp SetBackupItem
@@ -1211,7 +1211,7 @@ RegainItemByAbility:
 	pop hl
 	call StdBattleTextBox
 	pop bc
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Item
@@ -1236,7 +1236,7 @@ MoodyAbility:
 
 	; First, check how many stats aren't maxed out
 	ld hl, wPlayerStatLevels
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .got_stat_levels
 	ld hl, wEnemyStatLevels
@@ -1448,7 +1448,7 @@ AnalyticAbility:
 ; 130% damage if opponent went first
 	ld a, [wEnemyGoesFirst] ; 0 = player goes first
 	ld b, a
-	ld a, [hBattleTurn] ; 0 = player's turn
+	ldh a, [hBattleTurn] ; 0 = player's turn
 	xor b ; nz if opponent went first
 	ret z
 	ld a, $da
@@ -1642,7 +1642,7 @@ RegeneratorAbility:
 	call ShowAbilityActivation
 	farcall GetThirdMaxHP
 	farcall RestoreHP
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jp z, UpdateBattleMonInParty
 	jp UpdateEnemyMonInParty

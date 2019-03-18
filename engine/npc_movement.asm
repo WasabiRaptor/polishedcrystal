@@ -243,7 +243,7 @@ CheckFacingObject:: ; 6fd9
 
 .asm_6ff1
 	xor a
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call IsNPCAtCoord
 	ret nc
 	ld hl, OBJECT_DIRECTION_WALKING
@@ -271,7 +271,7 @@ IsNPCAtCoord: ; 7041
 	ld bc, wObjectStructs
 	xor a
 .loop
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	call DoesObjectHaveASprite
 	jr z, .next
 
@@ -302,9 +302,9 @@ IsNPCAtCoord: ; 7041
 	jr nz, .ok
 
 .ok2
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld l, a
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	cp l
 	jr nz, .setcarry
 
@@ -319,9 +319,9 @@ IsNPCAtCoord: ; 7041
 	ld a, [hl]
 	cp e
 	jr nz, .next
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld l, a
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	cp l
 	jr nz, .setcarry
 
@@ -330,7 +330,7 @@ IsNPCAtCoord: ; 7041
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	inc a
 	cp NUM_OBJECT_STRUCTS
 	jr nz, .loop

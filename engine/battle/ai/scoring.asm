@@ -180,7 +180,7 @@ AI_Types: ; 38635
 	push bc
 	push de
 	ld a, 1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	farcall BattleCheckTypeMatchup
 	pop de
 	pop bc
@@ -412,7 +412,7 @@ AI_Smart_Sleep: ; 387e3
 AI_Smart_LeechHit: ; 387f7
 	push hl
 	ld a, 1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	farcall BattleCheckTypeMatchup
 	pop hl
 
@@ -1336,7 +1336,7 @@ AI_Smart_PriorityHit: ; 38d5a
 
 ; Greatly encourage this move if it will KO the player.
 	ld a, $1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	push hl
 	farcall EnemyAttackDamage
 	farcall BattleCommand_damagecalc
@@ -1957,7 +1957,7 @@ AI_Smart_RapidSpin: ; 39084
 AI_Smart_HiddenPower: ; 3909e
 	push hl
 	ld a, 1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 
 ; Calculate Hidden Power's type and base power based on enemy's DVs.
 	farcall HiddenPowerDamageStats
@@ -2754,7 +2754,7 @@ AI_Aggressive: ; 39369
 
 AIDamageCalc: ; 393e7
 	ld a, 1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ld a, [wEnemyMoveStruct + MOVE_EFFECT]
 	ld de, 1
 	ld hl, .ConstantDamageEffects
@@ -2837,7 +2837,7 @@ AI_Cautious: ; 39418
 AI_Status: ; 39453
 ; Dismiss status moves that don't affect the player.
 	ld a, 1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ld hl, wBuffer1 - 1
 	ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1

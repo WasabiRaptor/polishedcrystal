@@ -484,7 +484,7 @@ BTBuyMenu:
 
 BuyMenu_InitGFX:
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	farcall FadeOutPalettes
 	call ClearBGPalettes
 	call ClearTileMap
@@ -942,11 +942,11 @@ BargainShopAskPurchaseQuantity:
 	add hl, de
 	inc hl
 	ld a, [hli]
-	ld [hMoneyTemp + 2], a
+	ldh [hMoneyTemp + 2], a
 	ld a, [hl]
-	ld [hMoneyTemp + 1], a
+	ldh [hMoneyTemp + 1], a
 	xor a
-	ld [hMoneyTemp], a
+	ldh [hMoneyTemp], a
 	and a
 	ret
 
@@ -1005,11 +1005,11 @@ TMMartAskPurchaseQuantity:
 	add hl, de
 	inc hl
 	ld a, [hli]
-	ld [hMoneyTemp + 2], a
+	ldh [hMoneyTemp + 2], a
 	ld a, [hl]
-	ld [hMoneyTemp + 1], a
+	ldh [hMoneyTemp + 1], a
 	xor a
-	ld [hMoneyTemp], a
+	ldh [hMoneyTemp], a
 	and a
 	ret
 
@@ -1073,7 +1073,7 @@ BlueCardMartComparePoints:
 	add hl, de
 	inc hl
 	ld a, [hl]
-	ld [hMoneyTemp], a
+	ldh [hMoneyTemp], a
 ; compare point balance with cost
 	ld d, a
 	ld a, [wBlueCardBalance]
@@ -1082,7 +1082,7 @@ BlueCardMartComparePoints:
 
 BTMartCompareBP:
 ; compare BP balance with cost
-	ld a, [hMoneyTemp + 2]
+	ldh a, [hMoneyTemp + 2]
 	ld d, a
 	ld a, [wBattlePoints]
 	cp d

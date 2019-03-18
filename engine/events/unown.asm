@@ -96,7 +96,7 @@ Special_DisplayUnownWords: ; 8ae68
 .load
 	call LoadMenuDataHeader
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call MenuBox
 	call UpdateSprites
 	call ApplyTilemap

@@ -47,7 +47,7 @@ Pack: ; 10000
 
 .InitGFX: ; 10046 (4:4046)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Pack_InitGFX
 	ld a, [wcf64]
 	ld [wJumptableIndex], a
@@ -187,7 +187,7 @@ Pack: ; 10000
 	ld [wOptions1], a
 .declined
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Pack_InitGFX
 	call WaitBGMap_DrawPackGFX
 	jp Pack_InitColors
@@ -544,7 +544,7 @@ UseItem: ; 10311
 	jr z, .NoPokemon
 	call DoItemEffect
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Pack_InitGFX
 	call WaitBGMap_DrawPackGFX
 	jp Pack_InitColors
@@ -687,7 +687,7 @@ GiveItem: ; 103fd
 	pop af
 	ld [wOptions1], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Pack_InitGFX
 	call WaitBGMap_DrawPackGFX
 	jp Pack_InitColors
@@ -755,7 +755,7 @@ BattlePack: ; 10493
 
 .InitGFX: ; 104d9 (4:44d9)
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Pack_InitGFX
 	ld a, [wcf64]
 	ld [wJumptableIndex], a
@@ -838,7 +838,7 @@ BattlePack: ; 10493
 	ld [wCurrPocket], a
 	call ClearPocketList
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call WaitBGMap_DrawPackGFX
 	ld hl, Text_PackEmptyString
 	call Pack_PrintTextNoScroll
@@ -989,7 +989,7 @@ TMHMSubmenu: ; 105dc (4:45dc)
 	and a
 	jr nz, .quit_run_script
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Pack_InitGFX
 	call WaitBGMap_DrawPackGFX
 	jp Pack_InitColors
@@ -1036,7 +1036,7 @@ InitPackBuffers: ; 1068a
 
 DepositSellInitPackBuffers: ; 106a5
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld [wJumptableIndex], a
 	ld [wcf64], a
 	ld [wCurrPocket], a

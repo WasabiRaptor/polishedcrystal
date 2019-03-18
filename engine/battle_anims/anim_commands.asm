@@ -5,16 +5,16 @@ PlayBattleAnim: ; cc0d6
 	ld hl, rIE
 	set LCD_STAT, [hl]
 
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 
 	ld a, 5
-	ld [rSVBK], a
+	ldh [rSVBK], a
 
 	call _PlayBattleAnim
 
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 
 	ld hl, rIE
 	res LCD_STAT, [hl]
@@ -31,7 +31,7 @@ _PlayBattleAnim: ; cc0e4
 	call DelayFrame
 
 	ld c, 1
-	ld a, [rKEY1]
+	ldh a, [rKEY1]
 	bit 7, a
 	jr nz, .asm_cc0ff
 	ld c, 3
@@ -45,10 +45,10 @@ _PlayBattleAnim: ; cc0e4
 	call BattleAnimRunScript
 
 	pop af
-	ld [hVBlank], a
+	ldh [hVBlank], a
 
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 
 	ld c, 3
 	call DelayFrames
@@ -71,8 +71,8 @@ BattleAnimRunScript: ; cc11c
 	call BattleAnimRequestPals
 
 	xor a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 	call DelayFrame
 	call BattleAnimRestoreHuds
 
@@ -147,7 +147,7 @@ BattleAnimClearHud: ; cc1a1
 	call WaitTop
 	call ClearActorHud
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Delay2
 	jp WaitTop
 ; cc1bb
@@ -157,31 +157,31 @@ BattleAnimRestoreHuds: ; cc1bb
 	call DelayFrame
 	call WaitTop
 
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, $1
-	ld [rSVBK], a
+	ldh [rSVBK], a
 
 	call UpdateBattleHuds
 
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call Delay2
 	jp WaitTop
 ; cc1e2
 
 BattleAnimRequestPals: ; cc1e2
 
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	ld b, a
 	ld a, [wBGP]
 	cp b
 	call nz, BattleAnim_SetBGPals
 
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	ld b, a
 	ld a, [wOBP0]
 	cp b
@@ -191,7 +191,7 @@ BattleAnimRequestPals: ; cc1e2
 
 ClearActorHud: ; cc207
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .player
 
@@ -856,14 +856,14 @@ BattleAnimCmd_CheckPokeball: ; cc5d0 (33:45d0)
 	ret
 
 BattleAnimCmd_Transform: ; cc5dc (33:45dc)
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, 1
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .player
 
@@ -887,13 +887,13 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 BattleAnimCmd_UpdateActorPic: ; cc622 (33:4622)
 
 	ld de, VTiles0 tile $00
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .player
 
@@ -907,10 +907,10 @@ BattleAnimCmd_UpdateActorPic: ; cc622 (33:4622)
 	jp Request2bpp
 
 BattleAnimCmd_RaiseSub: ; cc640 (33:4640)
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, 6
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	xor a
 	call GetSRAMBank
 
@@ -925,7 +925,7 @@ GetSubstitutePic: ; cc64c
 	or b
 	jr nz, .loop
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .player
 
@@ -954,7 +954,7 @@ GetSubstitutePic: ; cc64c
 .done
 	call CloseSRAM
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 .CopyPic
@@ -987,7 +987,7 @@ GetSubstitutePic: ; cc64c
 	push bc
 	push bc
 	inc c
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld a, c
 	ld bc, 6 tiles
@@ -999,7 +999,7 @@ GetSubstitutePic: ; cc64c
 	rst AddNTimes
 	pop bc
 	inc b
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .okay2
 	inc b
@@ -1027,17 +1027,17 @@ GetSubstitutePic: ; cc64c
 	jp FarCopyBytes
 
 BattleAnimCmd_MinimizeOpp: ; cc6cf (33:46cf)
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, $1
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	xor a
 	call GetSRAMBank
 	call GetMinimizePic
 	call Request2bpp
 	call CloseSRAM
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 GetMinimizePic: ; cc6e7 (33:46e7)
@@ -1051,7 +1051,7 @@ GetMinimizePic: ; cc6e7 (33:46e7)
 	or b
 	jr nz, .loop
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .player
 
@@ -1082,10 +1082,10 @@ INCBIN "gfx/battle/minimize.2bpp"
 ; cc735
 
 BattleAnimCmd_Minimize: ; cc735 (33:4735)
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, $1
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	xor a
 	call GetSRAMBank
 	call GetMinimizePic
@@ -1093,18 +1093,18 @@ BattleAnimCmd_Minimize: ; cc735 (33:4735)
 	call Request2bpp
 	call CloseSRAM
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 BattleAnimCmd_DropSub: ; cc750 (33:4750)
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, $1
-	ld [rSVBK], a
+	ldh [rSVBK], a
 
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .player
 
@@ -1118,21 +1118,21 @@ BattleAnimCmd_DropSub: ; cc750 (33:4750)
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 BattleAnimCmd_BeatUp: ; cc776 (33:4776)
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, $1
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 
 	ld a, [wBattleAnimParam]
 	ld [wCurPartySpecies], a ; CurPartySpecies
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .player
 
@@ -1154,17 +1154,17 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	ld b, CGB_BATTLE_COLORS
 	call GetCGBLayout
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 BattleAnimCmd_OAMOn: ; cc7bb (33:47bb)
 	xor a
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 BattleAnimCmd_OAMOff: ; cc7bf (33:47bf)
 	ld a, $1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 BattleAnimCmd_ClearSprites: ; cc7c4 (33:47c4)
@@ -1200,7 +1200,7 @@ BattleAnimCmd_Sound: ; cc7cd (33:47cd)
 ; cc7fc
 
 .GetCryTrack: ; cc7fc (33:47fc)
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy
 
@@ -1222,12 +1222,12 @@ rept 4
 	add hl, de
 endr
 
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, 1
-	ld [rSVBK], a
+	ldh [rSVBK], a
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy
 
@@ -1284,7 +1284,7 @@ endr
 
 .done
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 ; cc871 (33:4871)
 
@@ -1360,24 +1360,24 @@ BattleAnim_RevertPals: ; cc8f6
 	lb de, %11100100, %11100100
 	call DmgToCgbObjPals
 	xor a
-	ld [hSCX], a
-	ld [hSCY], a
+	ldh [hSCX], a
+	ldh [hSCY], a
 	call DelayFrame
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 ; cc91a
 
 BattleAnim_SetBGPals: ; cc91a
-	ld [rBGP], a
-	ld a, [rSVBK]
+	ldh [rBGP], a
+	ldh a, [rSVBK]
 	push af
 	ld a, $5
-	ld [rSVBK], a
+	ldh [rSVBK], a
 if !DEF(MONOCHROME)
 	ld a, b
 	cp $1b
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	jr z, .is_1b
 	cp $1b
 	jr nz, .not_1b
@@ -1406,7 +1406,7 @@ if !DEF(MONOCHROME)
 .not_1b
 	push af
 else
-	ld a, [rBGP]
+	ldh a, [rBGP]
 endc
 	ld hl, wBGPals
 	ld de, wUnknBGPals
@@ -1418,34 +1418,34 @@ endc
 if !DEF(MONOCHROME)
 	pop af
 else
-	ld a, [rBGP]
+	ldh a, [rBGP]
 endc
 	ld b, a
 	ld c, 2
 	call CopyPals
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 ; cc94b
 
 BattleAnim_SetOBPals: ; cc94b
-	ld [rOBP0], a
-	ld a, [rSVBK]
+	ldh [rOBP0], a
+	ldh a, [rSVBK]
 	push af
 	ld a, $5
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld hl, wOBPals palette PAL_BATTLE_OB_GRAY
 	ld de, wUnknOBPals palette PAL_BATTLE_OB_GRAY
-	ld a, [rOBP0]
+	ldh a, [rOBP0]
 	ld b, a
 	ld c, $2
 	call CopyPals
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ld a, $1
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	ret
 ; cc96e
 

@@ -6,7 +6,7 @@ BattleCommand_transform:
 	bit SUBSTATUS_TRANSFORMED, [hl]
 	jp nz, BattleEffect_ButItFailed
 
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld hl, wEnemyMonSpecies
 	ld de, wEnemyMonItem
@@ -55,7 +55,7 @@ BattleCommand_transform:
 	call ResetActorDisable
 	ld hl, wBattleMonSpecies
 	ld de, wEnemyMonSpecies
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .got_mon_species
 	ld hl, wEnemyMonSpecies
@@ -133,7 +133,7 @@ BattleCommand_transform:
 	call BattleSideCopy
 	call _CheckBattleEffects
 	jr c, .mimic_anims
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld a, [wPlayerMinimized]
 	jr z, .got_byte
@@ -163,7 +163,7 @@ BattleCommand_transform:
 	call StdBattleTextBox
 
 	; Update revealed moves if player transformed: the AI knows what its own moves are...
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .move_reveal_done
 	ld hl, wBattleMonMoves
@@ -173,7 +173,7 @@ BattleCommand_transform:
 
 .move_reveal_done
 	; Copy ability
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, .copy_player_ability
 	ld a, [wEnemyAbility]

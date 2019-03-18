@@ -35,7 +35,7 @@ HandleCurNPCStep:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res 6, [hl]
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	and a
 	jr nz, .notPlayer
 ; hardcode for crossing over connections
@@ -542,26 +542,26 @@ MapObjectMovementPattern:
 
 .RandomWalkY:
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and %00000001
 	jp .RandomWalkContinue
 
 .RandomWalkX:
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and %00000001
 	or  %00000010
 	jp .RandomWalkContinue
 
 .RandomWalkXY:
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and %00000011
 	jp .RandomWalkContinue
 
 .RandomSpin1:
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and %00001100
 	ld hl, OBJECT_FACING
 	add hl, bc
@@ -575,7 +575,7 @@ MapObjectMovementPattern:
 	and %00001100
 	ld d, a
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and %00001100
 	cp d
 	jr nz, .keep
@@ -1015,7 +1015,7 @@ MapObjectMovementPattern:
 	add hl, bc
 	ld [hl], PERSON_ACTION_STEP
 	ld hl, wCenteredObject
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	cp [hl]
 	jr z, .load_6
 	ld hl, OBJECT_STEP_TYPE
@@ -1034,14 +1034,14 @@ MapObjectMovementPattern:
 	call CopyCurCoordsToNextCoords
 RandomStepDuration_Slow: ; 4b1d
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and $fe
 	jr SetRandomStepDuration
 ; 4b26
 
 RandomStepDuration_Fast: ; 4b26
 	call Random
-	ld a, [hRandomAdd]
+	ldh a, [hRandomAdd]
 	and $3e
 SetRandomStepDuration: ; 4b2d
 	ld hl, OBJECT_STEP_DURATION
@@ -1873,7 +1873,7 @@ ApplyMovementToFollower: ; 54b8
 	ret z
 	ld a, [wObjectFollow_Leader]
 	ld d, a
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	cp d
 	ret nz
 	ld a, e
@@ -2026,7 +2026,7 @@ ShakeScreen: ; 5565
 
 DespawnEmote: ; 5579
 	push bc
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld c, a
 	call .DeleteEmote
 	pop bc
@@ -2087,7 +2087,7 @@ CopyTempObjectData: ; 55b9
 	ld [hli], a
 	ld a, [de]
 	ld [hli], a
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	ld [hli], a
 	push hl
 	ld hl, OBJECT_NEXT_MAP_X
@@ -2112,7 +2112,7 @@ UpdateMapObjectDataAndSprites:: ; 55e0
 	ld bc, wObjectStructs
 	xor a
 .loop
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call DoesObjectHaveASprite
 	jr z, .ok
 	call UpdateCurObjectData
@@ -2121,7 +2121,7 @@ UpdateMapObjectDataAndSprites:: ; 55e0
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	inc a
 	cp NUM_OBJECT_STRUCTS
 	jr nz, .loop
@@ -2135,7 +2135,7 @@ BattleStart_HideAllSpritesExceptBattleParticipants: ; 5602, called at battle sta
 	ld a, [wBattleScriptFlags]
 	bit 7, a
 	jr z, .ok
-	ld a, [hLastTalked]
+	ldh a, [hLastTalked]
 	and a
 	jr z, .ok
 	call RespawnObject ; respawn opponent
@@ -2175,13 +2175,13 @@ MaskAllObjectStructs: ; 5645
 	xor a
 	ld bc, wObjectStructs
 .loop
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call SetFacing_Standing
 	ld hl, OBJECT_STRUCT_LENGTH
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	inc a
 	cp NUM_OBJECT_STRUCTS
 	jr nz, .loop
@@ -2284,7 +2284,7 @@ CheckCurSpriteCoveredByTextBox: ; 56cd
 	jr c, .ok3
 	sub BG_MAP_WIDTH
 .ok3
-	ld [hCurSpriteXCoord], a
+	ldh [hCurSpriteXCoord], a
 ; y coord
 	ld a, [wPlayerBGMapOffsetY]
 	ld e, a
@@ -2314,7 +2314,7 @@ CheckCurSpriteCoveredByTextBox: ; 56cd
 	jr c, .ok6
 	sub BG_MAP_HEIGHT
 .ok6
-	ld [hCurSpriteYCoord], a
+	ldh [hCurSpriteYCoord], a
 	; priority check
 	ld hl, OBJECT_PALETTE
 	add hl, bc
@@ -2328,18 +2328,18 @@ CheckCurSpriteCoveredByTextBox: ; 56cd
 	ld e, a
 .ok7
 	ld a, d
-	ld [hCurSpriteXPixel], a
+	ldh [hCurSpriteXPixel], a
 .loop
-	ld a, [hCurSpriteXPixel]
+	ldh a, [hCurSpriteXPixel]
 	ld d, a
-	ld a, [hUsedSpriteTile]
+	ldh a, [hUsedSpriteTile]
 	add e
 	dec a
 	cp SCREEN_HEIGHT
 	jr nc, .ok9
 	ld b, a
 .next
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	add d
 	dec a
 	cp SCREEN_WIDTH
@@ -2370,14 +2370,14 @@ HandleNPCStep::
 	xor a
 	ld bc, wObjectStructs
 .loop
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call DoesObjectHaveASprite
 	call nz, HandleCurNPCStep
 	ld hl, OBJECT_STRUCT_LENGTH
 	add hl, bc
 	ld b, h
 	ld c, l
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	inc a
 	cp NUM_OBJECT_STRUCTS
 	jr nz, .loop
@@ -2472,7 +2472,7 @@ StartFollow:: ; 5803
 SetLeaderIfVisible: ; 5815
 	call CheckObjectVisibility
 	ret c
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	ld [wObjectFollow_Leader], a
 	ret
 ; 581f
@@ -2489,7 +2489,7 @@ SetFollowerIfVisible: ; 582c
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_00
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	ld [wObjectFollow_Follower], a
 	ret
 ; 5847
@@ -2640,15 +2640,15 @@ _UpdateSprites:: ; 5920
 	bit 0, a
 	ret z
 	xor a
-	ld [hUsedSpriteIndex], a
-	ld a, [hOAMUpdate]
+	ldh [hUsedSpriteIndex], a
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, 1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call InitSprites
 	call .fill
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	ret
 
 .fill
@@ -2658,7 +2658,7 @@ _UpdateSprites:: ; 5920
 	jr z, .ok
 	ld b, 28 * 4
 .ok
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	cp b
 	ret nc
 	ld l, a
@@ -2804,7 +2804,7 @@ PRIORITY_HIGH EQU $30
 	add hl, bc
 	ld a, [hl]
 	and %01111111
-	ld [hCurSpriteTile], a
+	ldh [hCurSpriteTile], a
 	xor a
 	bit 7, [hl]
 	jr nz, .skip1
@@ -2833,7 +2833,7 @@ PRIORITY_HIGH EQU $30
 	jr z, .skip4
 	or %10000000
 .skip4
-	ld [hCurSpriteOAMFlags], a
+	ldh [hCurSpriteOAMFlags], a
 	ld hl, OBJECT_SPRITE_X
 	add hl, bc
 	ld a, [hl]
@@ -2844,7 +2844,7 @@ PRIORITY_HIGH EQU $30
 	ld e, a
 	ld a, [wPlayerBGMapOffsetX]
 	add e
-	ld [hCurSpriteXPixel], a
+	ldh [hCurSpriteXPixel], a
 	ld hl, OBJECT_SPRITE_Y
 	add hl, bc
 	ld a, [hl]
@@ -2855,7 +2855,7 @@ PRIORITY_HIGH EQU $30
 	ld e, a
 	ld a, [wPlayerBGMapOffsetY]
 	add e
-	ld [hCurSpriteYPixel], a
+	ldh [hCurSpriteYPixel], a
 	ld hl, OBJECT_FACING_STEP
 	add hl, bc
 	ld a, [hl]
@@ -2871,28 +2871,28 @@ PRIORITY_HIGH EQU $30
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	ld c, a
 	ld b, wSprites / $100
 	ld a, [hli]
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	add c
 	cp wSpritesEnd % $100
 	jr nc, .full
 .addsprite
-	ld a, [hCurSpriteYPixel]
+	ldh a, [hCurSpriteYPixel]
 	add [hl]
 	inc hl
 	ld [bc], a
 	inc c
-	ld a, [hCurSpriteXPixel]
+	ldh a, [hCurSpriteXPixel]
 	add [hl]
 	inc hl
 	ld [bc], a
 	inc c
 	ld e, [hl]
 	inc hl
-	ld a, [hCurSpriteTile]
+	ldh a, [hCurSpriteTile]
 	bit 2, e
 	jr z, .nope1
 	xor a
@@ -2916,19 +2916,19 @@ PRIORITY_HIGH EQU $30
 	ld a, e
 	bit 1, a
 	jr z, .nope2
-	ld a, [hCurSpriteOAMFlags]
+	ldh a, [hCurSpriteOAMFlags]
 	or e
 .nope2
 	and %11110000
 	or d
 	ld [bc], a
 	inc c
-	ld a, [hUsedSpriteTile]
+	ldh a, [hUsedSpriteTile]
 	dec a
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	jr nz, .addsprite
 	ld a, c
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 .done
 	xor a
 	ret

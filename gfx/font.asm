@@ -79,14 +79,14 @@ _LoadStandardMaybeOpaqueFont:
 	ld hl, VTiles0 tile "A"
 	lb bc, BANK(FontNormal), 111
 	pop af
-	ld [hRequestOpaque1bpp], a
+	ldh [hRequestOpaque1bpp], a
 	push af
 	call GetMaybeOpaque1bpp
 	ld de, FontCommon
 	ld hl, VTiles0 tile "▷"
 	lb bc, BANK(FontCommon), 11
 	pop af
-	ld [hRequestOpaque1bpp], a
+	ldh [hRequestOpaque1bpp], a
 	jp GetMaybeOpaque1bpp
 
 LoadStandardFontPointer::

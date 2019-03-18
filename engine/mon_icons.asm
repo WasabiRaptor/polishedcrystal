@@ -190,7 +190,7 @@ LoadPartyMenuMonIcon:
 	ret
 
 .SpawnItemIcon: ; 8e8df (23:68df)
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	ld hl, wPartyMon1Item
 	call GetPartyLocation
 	ld a, [hl]
@@ -280,7 +280,7 @@ LoadTradeAnimationMonIcon:
 InitPartyMenuIcon: ; 8e908 (23:6908)
 	ld a, [wCurIconTile]
 	push af
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	ld hl, wPartySpecies
 	ld e, a
 	ld d, $0
@@ -288,7 +288,7 @@ InitPartyMenuIcon: ; 8e908 (23:6908)
 	ld a, [hl]
 	ld [wCurIcon], a
 	call GetMemIconGFX
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 ; y coord
 rept 4
 	add a
@@ -308,7 +308,7 @@ endr
 
 SetPartyMonIconAnimSpeed: ; 8e936 (23:6936)
 	push bc
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 	ld b, a
 	call .getspeed
 	ld a, b

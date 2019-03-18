@@ -65,13 +65,13 @@ StartMenu:: ; 125cd
 	dw .ReturnRedraw
 
 .Exit:
-	ld a, [hOAMUpdate]
+	ldh a, [hOAMUpdate]
 	push af
 	ld a, 1
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 	call LoadFontsExtra
 	pop af
-	ld [hOAMUpdate], a
+	ldh [hOAMUpdate], a
 .ReturnEnd:
 	call ExitMenu
 .ReturnEnd2:
@@ -81,7 +81,7 @@ StartMenu:: ; 125cd
 .GetInput:
 ; Return carry on exit, and no-carry on selection.
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call SetUpMenu
 	ld a, $ff
 	ld [wMenuSelection], a
@@ -105,14 +105,14 @@ StartMenu:: ; 125cd
 .ExitMenuRunScript: ; 12691
 	call ExitMenu
 	ld a, HMENURETURN_SCRIPT
-	ld [hMenuReturn], a
+	ldh [hMenuReturn], a
 	ret
 ; 12699
 
 .ExitMenuRunScriptCloseText: ; 12699
 	call ExitMenu
 	ld a, HMENURETURN_SCRIPT
-	ld [hMenuReturn], a
+	ldh [hMenuReturn], a
 	jr .ReturnEnd2
 ; 126a2
 
@@ -1231,19 +1231,19 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 	ld a, MON_MAXHP
 	call GetPartyParamLocation
 	ld a, [hli]
-	ld [hDividend + 0], a
+	ldh [hDividend + 0], a
 	ld a, [hl]
-	ld [hDividend + 1], a
+	ldh [hDividend + 1], a
 	ld a, 5
-	ld [hDivisor], a
+	ldh [hDivisor], a
 	ld b, 2
 	call Divide
 	ld a, MON_HP + 1
 	call GetPartyParamLocation
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	sub [hl]
 	dec hl
-	ld a, [hQuotient + 1]
+	ldh a, [hQuotient + 1]
 	sbc [hl]
 	ret
 ; 12f26
@@ -1441,10 +1441,10 @@ MoveScreenLoop:
 	call JoyTextDelay
 
 	; allow d-pad to be held, but not a/b/start/select
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and BUTTONS
 	ld b, a
-	ld a, [hJoyDown]
+	ldh a, [hJoyDown]
 	and D_PAD
 	or b
 	rrca
@@ -1801,7 +1801,7 @@ SetUpMoveScreenBG: ; 13172
 	call ClearTileMap
 	call ClearSprites
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld b, CGB_PARTY_MENU
 	call GetCGBLayout
 	farcall LoadStatsGFX
@@ -1849,7 +1849,7 @@ MoveScreen_ListMoves:
 	lb bc, 14, 18
 	call ClearBox
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld hl, wMoveScreenMoves
 	ld b, a
 	ld a, [wMoveScreenOffset]
@@ -1987,12 +1987,12 @@ PlaceMoveData:
 	ld de, String_MoveSwap
 	call PlaceString
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 
 .not_swapping
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 
 	hlcoord 10, 12
 	ld de, String_PowAcc
@@ -2081,11 +2081,11 @@ PlaceMoveData:
 	; between 0-100
 	ld a, BANK(Moves)
 	call GetFarByte
-	ld [hMultiplicand], a
+	ldh [hMultiplicand], a
 	ld a, 100
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	call Multiply
-	ld a, [hProduct]
+	ldh a, [hProduct]
 	; don't increase a for 0% moves
 	and a
 	jr z, .no_inc
@@ -2107,7 +2107,7 @@ PlaceMoveData:
 	hlcoord 1, 14
 	predef PrintMoveDesc
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ret
 ; 132ba
 

@@ -7,16 +7,16 @@ MapSetup_Sound_Off:: ; 3b4e
 	push bc
 	push af
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_MapSetup_Sound_Off)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	call _MapSetup_Sound_Off
 
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	pop af
@@ -34,16 +34,16 @@ UpdateSound:: ; 3b6a
 	push bc
 	push af
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_UpdateSound)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	call _UpdateSound
 
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	pop af
@@ -58,14 +58,14 @@ _LoadMusicByte:: ; 3b86
 ; wCurMusicByte = [a:de]
 GLOBAL LoadMusicByte
 
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	ld a, [de]
 	ld [wCurMusicByte], a
 	ld a, BANK(LoadMusicByte)
 
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
 ; 3b97
@@ -87,10 +87,10 @@ PlayMusic:: ; 3b97
 	push bc
 	push af
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlayMusic) ; and BANK(_MapSetup_Sound_Off)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	ld a, e
@@ -105,7 +105,7 @@ PlayMusic:: ; 3b97
 
 .end
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	pop af
 	pop bc
@@ -123,10 +123,10 @@ PlayMusic2:: ; 3bbc
 	push bc
 	push af
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlayMusic)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	push de
@@ -137,7 +137,7 @@ PlayMusic2:: ; 3bbc
 	call _PlayMusic
 
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	pop af
@@ -157,12 +157,12 @@ PlayCryHeader:: ; 3be3
 	push bc
 	push af
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 
 	; Cry headers are stuck in one bank.
 	ld a, BANK(CryHeaders)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	ld hl, CryHeaders
@@ -185,13 +185,13 @@ endr
 	ld [wCryLength + 1], a
 
 	ld a, BANK(_PlayCryHeader)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	call _PlayCryHeader
 
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	pop af
@@ -223,10 +223,10 @@ PlaySFX:: ; 3c23
 	jr c, .done
 
 .play
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlaySFX)
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 	ld a, e
@@ -234,7 +234,7 @@ PlaySFX:: ; 3c23
 	call _PlaySFX
 
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 
 .done
@@ -325,12 +325,12 @@ FadeInMusic:: ; 3cae
 
 SkipMusic::
 ; Skip a frames of music.
-	ld [hBuffer], a
+	ldh [hBuffer], a
 	ld a, [wMusicPlaying]
 	push af
 	xor a
 	ld [wMusicPlaying], a
-	ld a, [hBuffer]
+	ldh a, [hBuffer]
 .loop
 	call UpdateSound
 	dec a
@@ -561,11 +561,11 @@ TerminateExpBarSound:: ; 3dfe
 	xor a
 	ld [wChannel5Flags], a
 	ld [wSoundInput], a
-	ld [rNR10], a
-	ld [rNR11], a
-	ld [rNR12], a
-	ld [rNR13], a
-	ld [rNR14], a
+	ldh [rNR10], a
+	ldh [rNR11], a
+	ldh [rNR12], a
+	ldh [rNR13], a
+	ldh [rNR14], a
 	ret
 ; 3e10
 

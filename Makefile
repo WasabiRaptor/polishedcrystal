@@ -1,149 +1,224 @@
-NAME := polishedcrystal
-VERSION := 3.0.0-beta
-
-TITLE := PKPCRYSTAL
-MCODE := PKPC
-ROMVERSION := 0x30
-
-FILLER = 0x00
-
-ifneq ($(wildcard rgbds/.*),)
-RGBDS_DIR = rgbds/
+ifeq (,$(shell which sha1sum))
+SHA1 := shasum
 else
-RGBDS_DIR =
+SHA1 := sha1sum
 endif
 
-RGBASM_FLAGS =
-RGBLINK_FLAGS = -n $(ROM_NAME).sym -m $(ROM_NAME).map -l contents/contents.link -p $(FILLER)
-RGBFIX_FLAGS = -csjv -t $(TITLE) -i $(MCODE) -n $(ROMVERSION) -p $(FILLER) -k 01 -l 0x33 -m 0x10 -r 3
+RGBASM := rgbasm
+RGBFIX := rgbfix
+RGBGFX := rgbgfx
+RGBLINK := rgblink
 
-CFLAGS = -O3 -std=c11 -Wall -Wextra -pedantic
+PYTHON := python 
+pcm := $(PYTHON) extras/pokemontools/pcm.py pcm
 
-ifeq ($(filter faithful,$(MAKECMDGOALS)),faithful)
-RGBASM_FLAGS += -DFAITHFUL
-endif
-ifeq ($(filter nortc,$(MAKECMDGOALS)),nortc)
-RGBASM_FLAGS += -DNO_RTC
-endif
-ifeq ($(filter monochrome,$(MAKECMDGOALS)),monochrome)
-RGBASM_FLAGS += -DMONOCHROME
-endif
-ifeq ($(filter noir,$(MAKECMDGOALS)),noir)
-RGBASM_FLAGS += -DNOIR
-endif
-ifeq ($(filter hgss,$(MAKECMDGOALS)),hgss)
-RGBASM_FLAGS += -DHGSS
-endif
+roms := pokebrass.gbc
+
+BUILD_DIR := build/
+
+brass_obj := \
+$(BUILD_DIR)main.o \
+$(BUILD_DIR)home.o \
+$(BUILD_DIR)ram.o \
+$(BUILD_DIR)audio.o \
+$(BUILD_DIR)audio/musicplayer.o \
+$(BUILD_DIR)data/pokemon/dex_entries.o \
+$(BUILD_DIR)data/pokemon/egg_moves.o \
+$(BUILD_DIR)data/pokemon/evos_attacks.o \
+$(BUILD_DIR)data/maps/map_data.o \
+$(BUILD_DIR)data/text/common.o \
+$(BUILD_DIR)data/tilesets.o \
+$(BUILD_DIR)engine/credits.o \
+$(BUILD_DIR)engine/events.o \
+$(BUILD_DIR)gfx/pics.o \
+$(BUILD_DIR)gfx/sprites.o \
+
 ifeq ($(filter debug,$(MAKECMDGOALS)),debug)
 RGBASM_FLAGS += -DDEBUG
 endif
 
+### Build targets
 
 .SUFFIXES:
-.PHONY: all clean crystal faithful nortc debug monochrome bankfree freespace compare tools
+.PHONY: all brass clean debug compare tools
 .SECONDEXPANSION:
-.PRECIOUS: %.2bpp %.1bpp %.lz %.o
+.PRECIOUS:
+.SECONDARY:
 
-
-roms_md5      = roms.md5
-bank_ends_txt = contents/bank_ends.txt
-sorted_sym    = contents/$(NAME).sym
-
-PYTHON = python
-CC     = gcc
-RM     = rm -f
-GFX    = $(PYTHON) gfx.py
-MD5    = md5sum
-
-LZ            = tools/lzcomp
-SCAN_INCLUDES = tools/scan_includes
-
-bank_ends := $(PYTHON) contents/bank_ends.py $(NAME)-$(VERSION)
-
-
-crystal_obj := \
-main.o \
-home.o \
-ram.o \
-audio.o \
-audio/musicplayer.o \
-data/pokemon/dex_entries.o \
-data/pokemon/egg_moves.o \
-data/pokemon/evos_attacks.o \
-data/maps/map_data.o \
-data/text/common.o \
-data/tilesets.o \
-engine/credits.o \
-engine/events.o \
-gfx/pics.o \
-gfx/sprites.o
-
-
-all: crystal
-
-crystal: FILLER = 0x00
-crystal: ROM_NAME = $(NAME)-$(VERSION)
-crystal: $(NAME)-$(VERSION).gbc
-
-faithful: crystal
-nortc: crystal
-monochrome: crystal
-noir: crystal
-hgss: crystal
-debug: crystal
-
-bankfree: FILLER = 0xff
-bankfree: ROM_NAME = $(NAME)-$(VERSION)-0xff
-bankfree: $(NAME)-$(VERSION)-0xff.gbc
-
-freespace: $(bank_ends_txt) $(roms_md5) $(sorted_sym)
-
-
-# Build tools when building the rom
-ifeq ($(filter clean tools,$(MAKECMDGOALS)),)
-Makefile: tools
-endif
-
-tools: $(LZ) $(SCAN_INCLUDES)
-
-$(LZ): $(LZ).c
-	$(CC) $(CFLAGS) -o $@ $<
-
-$(SCAN_INCLUDES): $(SCAN_INCLUDES).c
-	$(CC) $(CFLAGS) -o $@ $<
-
+all: brass
+brass: $(roms)
 
 clean:
-	$(RM) $(crystal_obj) $(wildcard $(NAME)-*.gbc) $(wildcard $(NAME)-*.map) $(wildcard $(NAME)-*.sym)
+	rm -f $(BUILD_DIR)$(roms) $(brass_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
+	rm -r $(BUILD_DIR)
+	$(MAKE) clean -C tools/
 
-compare: crystal
-	$(MD5) -c $(roms_md5)
+compare: $(roms)
+	@$(SHA1) -c roms.sha1
+
+tools:
+	$(MAKE) -C tools/
 
 
-$(bank_ends_txt): crystal bankfree ; $(bank_ends) > $@
-$(roms_md5): crystal ; $(MD5) $(NAME)-$(VERSION).gbc > $@
-$(sorted_sym): crystal ; tail -n +3 $(NAME)-$(VERSION).sym | sort -o $@
+$(brass_obj):   RGBASMFLAGS = -D _BRASS
+
+# The dep rules have to be explicit or else missing files won't be reported.
+# As a side effect, they're evaluated immediately instead of when the rule is invoked.
+# It doesn't look like $(shell) can be deferred so there might not be a better way.
+define DEP
+$1: $2 $$(shell tools/scan_includes $2)
+	$$(RGBASM) $$(RGBASMFLAGS) -L -o $$@ $$<
+endef
+
+# Build tools when building the rom.
+# This has to happen before the rules are processed, since that's when scan_includes is run.
+ifeq (,$(filter clean tools,$(MAKECMDGOALS)))
+
+$(info $(shell $(MAKE) -C tools))
+
+$(foreach obj, $(brass_obj), $(eval $(call DEP,$(obj),$(subst $(BUILD_DIR),,$(obj:.o=.asm)))))
+
+endif
 
 
-%.o: dep = $(shell $(SCAN_INCLUDES) $(@D)/$*.asm)
-%.o: %.asm $$(dep)
-	$(RGBDS_DIR)rgbasm $(RGBASM_FLAGS) -o $@ $<
+$(roms): $(BUILD_DIR) $(brass_obj)
+	$(RGBLINK) -n $(BUILD_DIR)pokebrass.sym -m $(BUILD_DIR)pokebrass.map -l contents/contents.link -o $(BUILD_DIR)$@ $(brass_obj)
+	$(RGBFIX) -Cjv -k 01 -l 0x33 -m 0x1B -p 0 -r 3 -t "POKEMON BRASS" $(BUILD_DIR)$@
+	tools/sort_symfile.sh $(BUILD_DIR)pokebrass.sym
 
-.gbc:
-%.gbc: $(crystal_obj)
-	$(RGBDS_DIR)rgblink $(RGBLINK_FLAGS) -o $@ $^
-	$(RGBDS_DIR)rgbfix $(RGBFIX_FLAGS) $@
 
-%.2bpp: %.png ; $(GFX) 2bpp $<
-%.1bpp: %.png ; $(GFX) 1bpp $<
+$(BUILD_DIR):
+	mkdir -p $(BUILD_DIR)
+	mkdir -p $(BUILD_DIR)audio
+	mkdir -p $(BUILD_DIR)data
+	mkdir -p $(BUILD_DIR)data/pokemon
+	mkdir -p $(BUILD_DIR)data/maps
+	mkdir -p $(BUILD_DIR)data/text
+	mkdir -p $(BUILD_DIR)engine
+	mkdir -p $(BUILD_DIR)gfx
 
-gfx/pokemon/%/bitmask.asm gfx/pokemon/%/frames.asm: gfx/pokemon/%/front.2bpp
 
-%.lz: % ; $(LZ) $< $@
 
-%.pal: ; $(error ERROR: Cannot find '$@')
-%.png: ; $(error ERROR: Cannot find '$@')
-%.asm: ; $(error ERROR: Cannot find '$@')
-%.bin: ; $(error ERROR: Cannot find '$@')
-%.ablk: ; $(error ERROR: Cannot find '$@')
-%.tilemap: ; $(error ERROR: Cannot find '$@')
+# For files that the compressor can't match, there will be a .lz file suffixed with the md5 hash of the correct uncompressed file.
+# If the hash of the uncompressed file matches, use this .lz instead.
+# This allows pngs to be used for compressed graphics and still match.
+
+%.lz: hash = $(shell tools/md5 $(*D)/$(*F) | sed "s/\(.\{8\}\).*/\1/")
+%.lz: %
+	$(eval filename := $@.$(hash))
+	$(if $(wildcard $(filename)),\
+		cp $(filename) $@,\
+		tools/lzcomp -- $< $@)
+
+
+### Pokemon pic animation rules
+
+gfx/pokemon/%/front.animated.2bpp: gfx/pokemon/%/front.2bpp gfx/pokemon/%/front.dimensions
+	tools/pokemon_animation_graphics -o $@ $^
+gfx/pokemon/%/front.animated.tilemap: gfx/pokemon/%/front.2bpp gfx/pokemon/%/front.dimensions
+	tools/pokemon_animation_graphics -t $@ $^
+gfx/pokemon/%/bitmask.asm: gfx/pokemon/%/front.animated.tilemap gfx/pokemon/%/front.dimensions
+	tools/pokemon_animation -b $^ > $@
+gfx/pokemon/%/frames.asm: gfx/pokemon/%/front.animated.tilemap gfx/pokemon/%/front.dimensions
+	tools/pokemon_animation -f $^ > $@
+
+
+
+### Misc file-specific graphics rules
+
+gfx/pokemon/%/back.2bpp: rgbgfx += -h
+
+gfx/trainers/%.2bpp: rgbgfx += -h
+
+gfx/portraits/%.2bpp: rgbgfx += -h
+
+gfx/new_game/shrink1.2bpp: rgbgfx += -h
+gfx/new_game/shrink2.2bpp: rgbgfx += -h
+
+gfx/mail/dragonite.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/large_note.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/surf_mail_border.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/flower_mail_border.1bpp: tools/gfx += --remove-whitespace
+gfx/mail/litebluemail_border.1bpp: tools/gfx += --remove-whitespace
+
+gfx/pokedex/pokedex.2bpp: tools/gfx += --trim-whitespace
+gfx/pokedex/sgb.2bpp: tools/gfx += --trim-whitespace
+gfx/pokedex/slowpoke.2bpp: tools/gfx += --trim-whitespace
+
+gfx/pokegear/pokegear.2bpp: rgbgfx += -x2
+gfx/pokegear/pokegear_sprites.2bpp: tools/gfx += --trim-whitespace
+
+gfx/mystery_gift/mystery_gift.2bpp: tools/gfx += --trim-whitespace
+
+gfx/title/crystal.2bpp: tools/gfx += --interleave --png=$<
+gfx/title/old_fg.2bpp: tools/gfx += --interleave --png=$<
+gfx/title/logo.2bpp: rgbgfx += -x 4
+
+gfx/trade/ball.2bpp: tools/gfx += --remove-whitespace
+gfx/trade/game_boy_n64.2bpp: tools/gfx += --trim-whitespace
+
+gfx/slots/slots_2.2bpp: tools/gfx += --interleave --png=$<
+gfx/slots/slots_3.2bpp: tools/gfx += --interleave --png=$< --remove-duplicates --keep-whitespace --remove-xflip
+
+gfx/card_flip/card_flip_2.2bpp: tools/gfx += --remove-whitespace
+
+gfx/battle_anims/angels.2bpp: tools/gfx += --trim-whitespace
+gfx/battle_anims/beam.2bpp: tools/gfx += --remove-xflip --remove-yflip --remove-whitespace
+gfx/battle_anims/bubble.2bpp: tools/gfx += --trim-whitespace
+gfx/battle_anims/charge.2bpp: tools/gfx += --trim-whitespace
+gfx/battle_anims/egg.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/explosion.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/hit.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/horn.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/lightning.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/misc.2bpp: tools/gfx += --remove-duplicates --remove-xflip
+gfx/battle_anims/noise.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/objects.2bpp: tools/gfx += --remove-whitespace --remove-xflip
+gfx/battle_anims/pokeball.2bpp: tools/gfx += --remove-xflip --keep-whitespace
+gfx/battle_anims/reflect.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/rocks.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/skyattack.2bpp: tools/gfx += --remove-whitespace
+gfx/battle_anims/status.2bpp: tools/gfx += --remove-whitespace
+
+gfx/player/chris.2bpp: rgbgfx += -h
+gfx/player/chris_back.2bpp: rgbgfx += -h
+gfx/player/kris.2bpp: rgbgfx += -h
+gfx/player/kris_back.2bpp: rgbgfx += -h
+
+gfx/trainer_card/chris_card.2bpp: rgbgfx += -h
+gfx/trainer_card/kris_card.2bpp: rgbgfx += -h
+gfx/trainer_card/leaders.2bpp: tools/gfx += --trim-whitespace
+
+gfx/overworld/chris_fish.2bpp: tools/gfx += --trim-whitespace
+gfx/overworld/kris_fish.2bpp: tools/gfx += --trim-whitespace
+
+gfx/battle/dude.2bpp: rgbgfx += -h
+
+gfx/font/unused_bold_font.1bpp: tools/gfx += --trim-whitespace
+
+gfx/sgb/sgb_border.2bpp: tools/gfx += --trim-whitespace
+
+gfx/unknown/unknown_egg.2bpp: rgbgfx += -h
+
+
+### Catch-all graphics rules
+
+%.2bpp: %.png
+	$(RGBGFX) $(rgbgfx) -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -o $@ $@)
+
+%.1bpp: %.png
+	$(RGBGFX) $(rgbgfx) -d1 -o $@ $<
+	$(if $(tools/gfx),\
+		tools/gfx $(tools/gfx) -d1 -o $@ $@)
+
+%.gbcpal: %.png
+	$(RGBGFX) -p $@ $<
+
+%.dimensions: %.png
+	tools/png_dimensions $< $@
+
+%.wav:;
+%.pcm: %.wav
+	@$(pcm) $<

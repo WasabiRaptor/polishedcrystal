@@ -4,7 +4,7 @@
 UserPartyAttr::
 ; Return z if wildmon
 	push af
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, OTPartyAttrPre
 BattlePartyAttrPre:
@@ -27,7 +27,7 @@ DoBattlePartyAttr:
 OpponentPartyAttr::
 ; Return z if wildmon
 	push af
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, BattlePartyAttrPre
 OTPartyAttrPre:
@@ -52,23 +52,23 @@ ResetDamage::
 
 BattleCommand_switchturn::
 SwitchTurn::
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, SetEnemyTurn
 SetPlayerTurn::
 	xor a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ret
 
 SetEnemyTurn::
 	ld a, 1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ret
 
 UpdateOpponentInParty::
 	call CallOpponentTurn
 UpdateUserInParty::
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr nz, UpdateEnemyMonInParty
 	; fallthrough
@@ -127,7 +127,7 @@ GetBackupItemAddr::
 
 SetBackupItem::
 	; If backup is empty, replace with b if our turn (even in trainer battles)
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ret nz
 
@@ -199,7 +199,7 @@ UserCanLoseItem::
 	call IsInArray
 	jr nc, .pop_and_ret_nz
 	inc hl
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld de, wBattleMonSpecies
 	jr z, .got_species
@@ -229,7 +229,7 @@ GetOpponentUsedItemAddr::
 	call CallOpponentTurn
 GetUsedItemAddr::
 ; Returns addr for user's POV's UsedItem
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ld hl, wPartyUsedItems
 	ld a, [wCurBattleMon]
@@ -610,7 +610,7 @@ CheckIfTargetIsGhostType::
 	ld a, GHOST
 CheckIfTargetIsSomeType::
 	ld b, a
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	jr CheckIfSomeoneIsSomeType
 CheckIfUserIsFlyingType::
 	ld a, FLYING
@@ -634,7 +634,7 @@ CheckIfUserIsIceType::
 	ld a, ICE
 CheckIfUserIsSomeType::
 	ld b, a
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	xor 1
 CheckIfSomeoneIsSomeType
 	ld c, a
@@ -668,7 +668,7 @@ CompareHP::
 ; return c if HP<bc, z if HP=bc, nc+nz if HP>bc
 	push hl
 	ld hl, wBattleMonHP
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .got_hp
 	ld hl, wEnemyMonHP
@@ -702,7 +702,7 @@ CheckContactMove::
 	ret
 
 HasUserFainted::
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, HasPlayerFainted
 HasEnemyFainted::
@@ -710,7 +710,7 @@ HasEnemyFainted::
 	jr CheckIfHPIsZero
 
 HasOpponentFainted::
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, HasEnemyFainted
 HasPlayerFainted::
@@ -734,7 +734,7 @@ GetWeatherAfterCloudNine::
 
 CheckSpeedWithQuickClaw::
 	; Quick Claw has a chance to override speed
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	ld e, a
 	ld d, 0
 	push de
@@ -746,7 +746,7 @@ CheckSpeedWithQuickClaw::
 	call SwitchTurn
 	call .do_it
 	ld a, e
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	ld a, d ; +1: player, -1: enemy, 0: both/neither
 	and a
 	jr z, CheckSpeed
@@ -771,7 +771,7 @@ CheckSpeedWithQuickClaw::
 	call StdBattleTextBox
 	pop de
 	inc d
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	ret z
 	dec d
@@ -784,7 +784,7 @@ CheckSpeed::
 ; outspeeds, otherwise nz, randomly on tie (which also sets carry)
 	; save battle turn so this can be used without screwing it up
 	; (needed for AI)
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	ld e, a
 	call SetPlayerTurn
 	farcall GetSpeed
@@ -793,7 +793,7 @@ CheckSpeed::
 	farcall GetSpeed
 	; restore turn
 	ld a, e
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	pop de
 	; bc is enemy speed, de player
 	ld a, b
@@ -805,7 +805,7 @@ CheckSpeed::
 	jr c, .player_first
 	jr nz, .enemy_first
 	; Speed is equal, so randomize. Account for linking.
-	ld a, [hSerialConnectionStatus]
+	ldh a, [hSerialConnectionStatus]
 	cp USING_INTERNAL_CLOCK
 	ld b, 0
 	jr z, .secondary_player
@@ -850,7 +850,7 @@ GetBattleVarAddr:: ; 39e7
 
 ; Enemy turn uses the second byte instead.
 ; This lets battle variable calls be side-neutral.
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	and a
 	jr z, .getvar
 	inc hl
@@ -928,14 +928,14 @@ GetBattleVarAddr:: ; 39e7
 
 FarCopyRadioText:: ; 3a90
 	inc hl
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ld a, e
 	ld l, a
@@ -945,7 +945,7 @@ FarCopyRadioText:: ; 3a90
 	ld bc, 2 * SCREEN_WIDTH
 	rst CopyBytes
 	pop af
-	ld [hROMBank], a
+	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
 ; 3ab2
@@ -967,7 +967,7 @@ StdBattleTextBox:: ; 3ad5
 
 GLOBAL BattleText
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 
 	ld a, BANK(BattleText)

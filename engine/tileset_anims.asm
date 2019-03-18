@@ -9,10 +9,10 @@ _AnimateTileset:: ; fc000
 	ld a, [wTilesetAnim + 1]
 	ld d, a
 
-	ld a, [hTileAnimFrame]
+	ldh a, [hTileAnimFrame]
 	ld l, a
 	inc a
-	ld [hTileAnimFrame], a
+	ldh [hTileAnimFrame], a
 
 	ld h, 0
 	add hl, hl
@@ -370,7 +370,7 @@ TilesetHotelAnim::
 DoneTileAnimation: ; fc2fb
 ; Reset the animation command loop.
 	xor a
-	ld [hTileAnimFrame], a
+	ldh [hTileAnimFrame], a
 
 WaitTileAnimation: ; fc2fe
 ; Do nothing this frame.
@@ -1305,7 +1305,7 @@ endr
 
 FlickeringCaveEntrancePalette: ; fc71e
 ; We don't want to mess with non-standard palettes.
-	ld a, [rBGP]
+	ldh a, [rBGP]
 	cp %11100100
 	ret nz
 ; We only want to be here if we're in a dark cave.
@@ -1313,14 +1313,14 @@ FlickeringCaveEntrancePalette: ; fc71e
 	cp $ff ; 3,3,3,3
 	ret nz
 
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	ld a, 5 ; wra5: gfx
-	ld [rSVBK], a
+	ldh [rSVBK], a
 ; Ready for BGPD input...
 	ld a, %10100000 ; auto-increment, index $20 (pal 4 color 0)
-	ld [rBGPI], a
-	ld a, [hVBlankCounter]
+	ldh [rBGPI], a
+	ldh a, [hVBlankCounter]
 	and %00000010
 	jr nz, .bit1set
 	ld hl, wUnknBGPals palette PAL_BG_YELLOW
@@ -1331,12 +1331,12 @@ FlickeringCaveEntrancePalette: ; fc71e
 
 .okay
 	ld a, [hli]
-	ld [rBGPD], a
+	ldh [rBGPD], a
 	ld a, [hli]
-	ld [rBGPD], a
+	ldh [rBGPD], a
 
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 ; fc750
 

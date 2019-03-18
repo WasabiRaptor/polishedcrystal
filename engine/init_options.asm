@@ -63,12 +63,12 @@ SetInitialOptions:
 
 	xor a
 	ld [wJumptableIndex], a
-	ld [hJoyPressed], a
+	ldh [hJoyPressed], a
 	ld c, NUM_INITIAL_OPTIONS
 .print_text_loop ; this next will display the settings of each option when the menu is opened
 	push bc
 	xor a
-	ld [hJoyLast], a
+	ldh [hJoyLast], a
 	call GetInitialOptionPointer
 	pop bc
 	ld hl, wJumptableIndex
@@ -79,12 +79,12 @@ SetInitialOptions:
 	xor a
 	ld [wJumptableIndex], a
 	inc a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call ApplyTilemapInVBlank
 
 .joypad_loop
 	call JoyTextDelay
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and START | B_BUTTON
 	jr nz, .ExitOptions
 	call InitialOptionsControl
@@ -103,7 +103,7 @@ SetInitialOptions:
 	call PlaySFX
 	call WaitSFX
 	pop af
-	ld [hInMenu], a
+	ldh [hInMenu], a
 	ret
 ; e4241
 
@@ -165,7 +165,7 @@ GetInitialOptionPointer: ; e42d6
 
 InitialOptions_Natures:
 	ld hl, wInitialOptions
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
 	bit NATURES_OPT, [hl]
@@ -189,7 +189,7 @@ InitialOptions_Natures:
 
 InitialOptions_Abilities:
 	ld hl, wInitialOptions
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
 	bit ABILITIES_OPT, [hl]
@@ -213,7 +213,7 @@ InitialOptions_Abilities:
 
 InitialOptions_ColorVariation:
 	ld hl, wInitialOptions
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
 	bit COLOR_VARY_OPT, [hl]
@@ -237,7 +237,7 @@ InitialOptions_ColorVariation:
 
 InitialOptions_PerfectIVs:
 	ld hl, wInitialOptions
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
 	bit PERFECT_IVS_OPT, [hl]
@@ -261,7 +261,7 @@ InitialOptions_PerfectIVs:
 
 InitialOptions_TradedMon:
 	ld hl, wInitialOptions
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
 	bit TRADED_AS_OT_OPT, [hl]
@@ -285,7 +285,7 @@ InitialOptions_TradedMon:
 
 InitialOptions_NuzlockeMode:
 	ld hl, wInitialOptions
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
 	bit NUZLOCKE_MODE, [hl]
@@ -310,7 +310,7 @@ InitialOptions_NuzlockeMode:
 InitialOptions_Done:
 	ld hl, wInitialOptions
 	res RESET_INIT_OPTS, [hl]
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 	and A_BUTTON
 	jr nz, .Exit
 	and a
@@ -327,7 +327,7 @@ YesString:
 
 InitialOptionsControl: ; e452a
 	ld hl, wJumptableIndex
-	ld a, [hJoyLast]
+	ldh a, [hJoyLast]
 	cp D_DOWN
 	jr z, .DownPressed
 	cp D_UP

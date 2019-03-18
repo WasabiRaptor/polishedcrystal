@@ -18,14 +18,14 @@ AI_SwitchOrTryItem: ; 38000
 	jr z, .can_switch
 
 	; check if we're trapped by an ability
-	ld a, [hBattleTurn]
+	ldh a, [hBattleTurn]
 	push af
 	ld a, 1
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	farcall CheckIfTrappedByAbility
 	pop bc
 	ld a, b
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	jr z, DontSwitch
 
 	ld a, [wPlayerSubStatus2]
@@ -514,7 +514,7 @@ AIUpdateHUD: ; 38387
 	call UpdateEnemyMonInParty
 	farcall UpdateEnemyHUD
 	ld a, $1
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld hl, wEnemyItemState
 	dec [hl]
 	scf
@@ -671,7 +671,7 @@ AI_Switch: ; 3846c
 	ld hl, wEnemySubStatus4
 	res SUBSTATUS_RAGE, [hl]
 	xor a
-	ld [hBattleTurn], a
+	ldh [hBattleTurn], a
 	farcall PursuitSwitch
 
 	push af

@@ -3,14 +3,14 @@ _DoFadePalettes::
 ; wUnkn(BG|OB)Pals: Palettes we're fading towards
 ; c: Fade duration
 ; wPalFadeMode can be 0 (fade everything), 1 (fade BG), 2 (fade OBJ)
-	ld a, [rSVBK]
+	ldh a, [rSVBK]
 	push af
 	push hl
 	push de
 .restart_dofade
 	push bc
 	ld a, BANK(wBGPals)
-	ld [rSVBK], a
+	ldh [rSVBK], a
 
 	; No matter what, we always take up to 31 color fade steps.
 	; Evenly divide DelayFrames in case the fade duration is more.
@@ -155,7 +155,7 @@ _DoFadePalettes::
 	pop de
 	pop hl
 	pop af
-	ld [rSVBK], a
+	ldh [rSVBK], a
 	ret
 
 .getGreen:
@@ -257,5 +257,5 @@ _DoFadePalettes::
 	ld [hl], a
 .delay_finished
 	ld c, b
-	ld [hCGBPalUpdate], a
+	ldh [hCGBPalUpdate], a
 	jp DelayFrames

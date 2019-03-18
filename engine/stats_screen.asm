@@ -1,9 +1,9 @@
 StatsScreenInit: ; 4dc8a
 	ld hl, StatsScreenMain
-	ld a, [hMapAnims]
+	ldh a, [hMapAnims]
 	push af
 	xor a
-	ld [hMapAnims], a ; disable overworld tile animations
+	ldh [hMapAnims], a ; disable overworld tile animations
 	ld a, [wBoxAlignment] ; whether sprite is to be mirrorred
 	push af
 	ld a, [wJumptableIndex]
@@ -31,7 +31,7 @@ StatsScreenInit: ; 4dc8a
 	pop af
 	ld [wBoxAlignment], a
 	pop af
-	ld [hMapAnims], a
+	ldh [hMapAnims], a
 	ret
 ; 0x4dcd2
 
@@ -209,7 +209,7 @@ StatsScreen_GetJoypad: ; 4de2c (13:5e2c)
 	jr .clear_flags
 
 .notbreedmon
-	ld a, [hJoyPressed]
+	ldh a, [hJoyPressed]
 .clear_flags
 	and a
 	ret
@@ -316,7 +316,7 @@ StatsScreen_JoypadAction: ; 4de54 (13:5e54)
 StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	call .PlaceHPBar
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	ld [wCurSpecies], a
@@ -415,7 +415,7 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 	ld [wd265], a
 	ld [wCurSpecies], a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	call .ClearBox
 	call .LoadPokeBall
 	call .PageTilemap
@@ -589,15 +589,15 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 	farcall CalcExpAtLevel
 	ld hl, wTempMonExp + 2
 	ld hl, wTempMonExp + 2
-	ld a, [hQuotient + 2]
+	ldh a, [hQuotient + 2]
 	sub [hl]
 	dec hl
 	ld [wBuffer3], a
-	ld a, [hQuotient + 1]
+	ldh a, [hQuotient + 1]
 	sbc [hl]
 	dec hl
 	ld [wBuffer2], a
-	ld a, [hQuotient]
+	ldh a, [hQuotient]
 	sbc [hl]
 	ld [wBuffer1], a
 	ret
@@ -1096,16 +1096,16 @@ StatsScreen_LoadTextBoxSpaceGFX: ; 4e307 (13:6307)
 	push bc
 	push af
 	call DelayFrame
-	ld a, [rVBK]
+	ldh a, [rVBK]
 	push af
 	ld a, $1
-	ld [rVBK], a
+	ldh [rVBK], a
 	ld de, TextBoxSpaceGFX
 	lb bc, BANK(TextBoxSpaceGFX), 1
 	ld hl, VTiles2 tile $7f
 	call Get1bpp
 	pop af
-	ld [rVBK], a
+	ldh [rVBK], a
 	pop af
 	pop bc
 	pop de
@@ -1115,7 +1115,7 @@ StatsScreen_LoadTextBoxSpaceGFX: ; 4e307 (13:6307)
 
 EggStatsScreen: ; 4e33a
 	xor a
-	ld [hBGMapMode], a
+	ldh [hBGMapMode], a
 	ld hl, wCurHPPal
 	call SetHPPal
 	ld b, CGB_STATS_SCREEN_HP_PALS

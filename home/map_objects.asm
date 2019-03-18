@@ -19,16 +19,16 @@ GetSpriteVTile:: ; 180e
 	push hl
 	push de
 	push bc
-	ld [hUsedSpriteIndex], a
+	ldh [hUsedSpriteIndex], a
 	farcall GetSprite
 	ld hl, wSpriteFlags
 	res 5, [hl]
 	; SPRITE_BIG_GYARADOS uses the last object_struct
-	ld a, [hUsedSpriteIndex]
+	ldh a, [hUsedSpriteIndex]
 	cp SPRITE_BIG_GYARADOS
 	ld a, NUM_OBJECT_STRUCTS - 1
 	jr z, .got_sprite_tile
-	ld a, [hObjectStructIndexBuffer]
+	ldh a, [hObjectStructIndexBuffer]
 .got_sprite_tile
 	cp FIRST_VRAM1_OBJECT_STRUCT
 	jr c, .continue
@@ -40,7 +40,7 @@ GetSpriteVTile:: ; 180e
 	ld b, a
 	add a, b
 	add a, b
-	ld [hUsedSpriteTile], a
+	ldh [hUsedSpriteTile], a
 	push af
 	farcall GetUsedSprite
 	pop af
@@ -62,7 +62,7 @@ DoesSpriteHaveFacings:: ; 1836
 	push hl
 
 	ld b, a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_DoesSpriteHaveFacings)
 	rst Bankswitch
@@ -107,7 +107,7 @@ GetTileCollision:: ; 185d
 	ld d, 0
 	add hl, de
 
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(TileCollisionTable)
 	rst Bankswitch
@@ -161,14 +161,14 @@ GetMapObject:: ; 18d2
 
 CheckObjectVisibility:: ; 18de
 ; Sets carry if the object is not visible on the screen.
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call GetMapObject
 	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
 	add hl, bc
 	ld a, [hl]
 	cp -1
 	jr z, .not_visible
-	ld [hObjectStructIndexBuffer], a
+	ldh [hObjectStructIndexBuffer], a
 	call GetObjectStruct
 	and a
 	ret
@@ -253,15 +253,15 @@ CheckObjectTime:: ; 18f5
 ; 194d
 
 _CopyObjectStruct:: ; 1956
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call UnmaskObject
-	ld a, [hMapObjectIndexBuffer]
+	ldh a, [hMapObjectIndexBuffer]
 	call GetMapObject
 	farjp CopyObjectStruct
 ; 1967
 
 ApplyDeletionToMapObject:: ; 1967
-	ld [hMapObjectIndexBuffer], a
+	ldh [hMapObjectIndexBuffer], a
 	call GetMapObject
 	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
 	add hl, bc
@@ -312,7 +312,7 @@ CopyPlayerObjectTemplate:: ; 19a6
 LoadMovementDataPointer:: ; 19e9
 ; Load the movement data pointer for person a.
 	ld [wMovementPerson], a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	ld [wMovementDataPointer], a
 	ld a, l
 	ld [wMovementDataPointer + 1], a
@@ -407,7 +407,7 @@ endr
 
 CopySpriteMovementData:: ; 1a61
 	ld l, a
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(SpriteMovementData)
 	rst Bankswitch
@@ -476,7 +476,7 @@ endr
 
 _GetMovementByte:: ; 1aae
 ; Switch to the movement data bank
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
 	rst Bankswitch

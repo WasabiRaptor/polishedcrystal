@@ -13,7 +13,7 @@ TossItem:: ; 2f53
 	push hl
 	push de
 	push bc
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_TossItem)
 	rst Bankswitch
@@ -31,7 +31,7 @@ TossItem:: ; 2f53
 
 ReceiveItem:: ; 2f66
 	push bc
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_ReceiveItem)
 	rst Bankswitch
@@ -63,7 +63,7 @@ CheckItem:: ; 2f79
 	push hl
 	push de
 	push bc
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_CheckItem)
 	rst Bankswitch
@@ -92,7 +92,7 @@ CheckTMHM:: ; d3fb
 
 CountItem::
 	push bc
-	ld a, [hROMBank]
+	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_CountItem)
 	rst Bankswitch
