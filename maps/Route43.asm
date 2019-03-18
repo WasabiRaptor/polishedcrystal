@@ -1,43 +1,41 @@
 Route43_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 3 ; callbacks
+	callback MAPCALLBACK_NEWMAP, UnknownScript_0x19d051
+	callback MAPCALLBACK_TILES, Route43RainScript
+	callback MAPCALLBACK_OBJECTS, Route43RebattleBreederScript
 
-.MapCallbacks: db 2
-	dbw MAPCALLBACK_NEWMAP, UnknownScript_0x19d051
-	dbw MAPCALLBACK_OBJECTS, Route43RebattleBreederScript
+	db 5 ; warp events
+	warp_event  9, 51, ROUTE_43_MAHOGANY_GATE, 1
+	warp_event 10, 51, ROUTE_43_MAHOGANY_GATE, 2
+	warp_event 17, 35, ROUTE_43_GATE, 3
+	warp_event 17, 31, ROUTE_43_GATE, 1
+	warp_event 18, 31, ROUTE_43_GATE, 2
 
-Route43_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $33, $9, 1, ROUTE_43_MAHOGANY_GATE
-	warp_def $33, $a, 2, ROUTE_43_MAHOGANY_GATE
-	warp_def $23, $11, 3, ROUTE_43_GATE
-	warp_def $1f, $11, 1, ROUTE_43_GATE
-	warp_def $1f, $12, 2, ROUTE_43_GATE
+	db 3 ; bg events
+	bg_event 13,  3, SIGNPOST_JUMPTEXT, Route43Sign1Text
+	bg_event 11, 49, SIGNPOST_JUMPTEXT, Route43Sign2Text
+	bg_event 16, 38, SIGNPOST_JUMPTEXT, Route43TrainerTipsText
 
-.XYTriggers: db 0
+	db 13 ; object events
+	object_event  1,  6, SPRITE_LADY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, Route43SightseerfScript, -1
+	object_event 13,  5, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerPokemaniacBen, -1
+	object_event 13, 20, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_TRAINER, 3, TrainerPokemaniacBrent1, -1
+	object_event 14,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerPokemaniacRon, -1
+	object_event  4, 16, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerFisherMarvin, -1
+	object_event  8, 10, SPRITE_PICNICKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 2, TrainerPicnickerTiffany1, -1
+	object_event 13, 40, SPRITE_CAMPER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerCamperSpencer, -1
+	object_event  8, 32, SPRITE_BREEDER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerBreederJody, -1
+	object_event 11, 24, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerSrandjrIvyandamy1, -1
+	object_event 11, 25, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerSrandjrIvyandamy2, -1
+	cuttree_event  2, 28, EVENT_ROUTE_43_CUT_TREE
+	fruittree_event  1, 26, FRUITTREE_ROUTE_43, PERSIM_BERRY
+	itemball_event 12, 32, MAX_ETHER, 1, EVENT_ROUTE_43_MAX_ETHER
 
-.Signposts: db 3
-	signpost 3, 13, SIGNPOST_READ, Route43Sign1
-	signpost 49, 11, SIGNPOST_READ, Route43Sign2
-	signpost 38, 16, SIGNPOST_READ, Route43TrainerTips
-
-.PersonEvents: db 13
-	person_event SPRITE_LADY, 6, 1, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route43SightseerfScript, -1
-	person_event SPRITE_SUPER_NERD, 5, 13, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 2, TrainerPokemaniacBen, -1
-	person_event SPRITE_SUPER_NERD, 20, 13, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 3, TrainerPokemaniacBrent1, -1
-	person_event SPRITE_SUPER_NERD, 7, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 2, TrainerPokemaniacRon, -1
-	person_event SPRITE_FISHER, 16, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 4, TrainerFisherMarvin, -1
-	person_event SPRITE_LASS, 10, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 2, TrainerPicnickerTiffany1, -1
-	person_event SPRITE_YOUNGSTER, 40, 13, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 3, TrainerCamperSpencer, -1
-	person_event SPRITE_BREEDER, 32, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 3, TrainerBreederJody, -1
-	person_event SPRITE_LASS, 24, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerSrandjrIvyandamy1, -1
-	person_event SPRITE_LASS, 25, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerSrandjrIvyandamy2, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 28, 2, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 26, 1, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FruitTreeScript_0x19d266, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 32, 12, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MAX_ETHER, 1, EVENT_ROUTE_43_MAX_ETHER
-
-const_value set 2
+	const_def 1 ; object constants
 	const ROUTE43_SIGHTSEER_F
 
 Route43RebattleBreederScript:
@@ -47,39 +45,49 @@ Route43RebattleBreederScript:
 UnknownScript_0x19d051:
 	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
 	iftrue UnknownScript_0x19d05c
-	domaptrigger ROUTE_43_GATE, $0
+	setmapscene ROUTE_43_GATE, $0
+	return
+
+Route43RainScript:
+	special Special_GetOvercastIndex
+	ifequal LAKE_OF_RAGE_OVERCAST, .flood
+	changemap Route43_BlockData
+	return
+
+.flood
+	changemap Route43Raining_BlockData
 	return
 
 UnknownScript_0x19d05c:
-	domaptrigger ROUTE_43_GATE, $1
+	setmapscene ROUTE_43_GATE, $1
 	return
 
 Route43SightseerfScript:
-	faceplayer
-	opentext
 	checkevent EVENT_GOT_FLAME_ORB_FROM_ROUTE_43_LEADER
-	iftrue .GotFlameOrb
+	iftrue_jumptextfaceplayer .AfterText2
+	faceplayer
 	checkevent EVENT_BEAT_SIGHTSEERF_LENIE
 	iftrue .Beaten
 	checkevent EVENT_BEAT_BREEDER_JODY_ONCE
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_SR_AND_JR_IVY_AND_AMY
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_CAMPER_SPENCER
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_POKEMANIAC_BEN
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_POKEMANIAC_BRENT
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_POKEMANIAC_RON
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_FISHER_MARVIN
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_PICNICKER_TIFFANY
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
+	opentext
 	writetext .QuestionText
 	yesorno
-	iffalse .NoBattle
+	iffalse_jumpopenedtext .RefusedText
 	writetext .SeenText
 	waitbutton
 	closetext
@@ -89,122 +97,143 @@ Route43SightseerfScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_SIGHTSEERF_LENIE
-	opentext
 .Beaten:
+	opentext
 	writetext .AfterText1
 	buttonsound
 	verbosegiveitem FLAME_ORB
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_FLAME_ORB_FROM_ROUTE_43_LEADER
-.GotFlameOrb:
-	writetext .AfterText2
-	waitbutton
-.Done:
-	closetext
-	end
+	thisopenedtext
 
-.RouteNotCleared:
-	writetext .IntroText
-	waitbutton
-	closetext
-	end
+.AfterText2:
+	text "I love visiting"
+	line "new places and"
 
-.NoBattle:
-	writetext .RefusedText
-	waitbutton
-	closetext
-	end
+	para "challenging every"
+	line "trainer there."
+
+	para "I'll keep looking"
+	line "for strong train-"
+	cont "ers like you."
+	done
 
 .IntroText:
-	text "TODO"
+	text "I'm seeking out"
+	line "strong trainers"
+
+	para "in Johto, but I"
+	line "haven't found any."
+
+	para "Hmmm… You seem"
+	line "promising."
+
+	para "I can see it in"
+	line "your eyes."
+
+	para "Let's battle--but"
+	line "first, I want to"
+
+	para "see you conquer"
+	line "this route by"
+
+	para "beating everyone"
+	line "else."
 	done
 
 .QuestionText:
-	text "TODO"
+	text "Excellent! Time to"
+	line "test my new stra-"
+	cont "tegy…"
+
+	para "Ready for a"
+	line "battle?"
 	done
 
 .RefusedText:
-	text "TODO"
+	text "Aw… I was so"
+	line "anxious!"
+
+	para "Don't make me"
+	line "wait!"
 	done
 
 .SeenText:
-	text "TODO"
+	text "Let's see how"
+	line "strong Johto's"
+	cont "trainers can be."
+
+	para "Face my Flame Orb"
+	line "strategy!"
 	done
 
 .BeatenText:
-	text "TODO"
+	text "Awesome! ♥"
 	done
 
 .AfterText1:
-	text "TODO"
-	done
+	text "Wow! I've finally"
+	line "found what I was"
+	cont "looking for!"
 
-.AfterText2:
-	text "TODO"
+	para "I'll give you a"
+	line "Flame Orb, but"
+
+	para "please be careful"
+	line "if you give it to"
+	cont "a #mon."
 	done
 
 TrainerBreederJody:
-	trainer EVENT_BEAT_BREEDER_JODY, BREEDER, JODY, BreederJodySeenText, BreederJodyBeatenText, 0, BreederJodyScript
+	trainer BREEDER, JODY, EVENT_BEAT_BREEDER_JODY, BreederJodySeenText, BreederJodyBeatenText, 0, BreederJodyScript
 
 BreederJodyScript:
 	setevent EVENT_BEAT_BREEDER_JODY_ONCE
 	end_if_just_battled
-	opentext
-	writetext BreederJodyAfterText
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer BreederJodyAfterText
 
-TrainerSrandjrIvyandamy1:
-	trainer EVENT_BEAT_SR_AND_JR_IVY_AND_AMY, SR_AND_JR, IVYANDAMY1, SrandjrIvyandamy1SeenText, SrandjrIvyandamy1BeatenText, 0, SrandjrIvyandamy1Script
+GenericTrainerSrandjrIvyandamy1:
+	generictrainer SR_AND_JR, IVYANDAMY1, EVENT_BEAT_SR_AND_JR_IVY_AND_AMY, SrandjrIvyandamy1SeenText, SrandjrIvyandamy1BeatenText
 
-SrandjrIvyandamy1Script:
-	end_if_just_battled
-	opentext
-	writetext SrandjrIvyandamy1AfterText
-	waitbutton
-	closetext
-	end
+	text "Ivy: I don't want"
+	line "my junior to think"
+	cont "I can't help her."
+	done
 
-TrainerSrandjrIvyandamy2:
-	trainer EVENT_BEAT_SR_AND_JR_IVY_AND_AMY, SR_AND_JR, IVYANDAMY2, SrandjrIvyandamy2SeenText, SrandjrIvyandamy2BeatenText, 0, SrandjrIvyandamy2Script
+GenericTrainerSrandjrIvyandamy2:
+	generictrainer SR_AND_JR, IVYANDAMY2, EVENT_BEAT_SR_AND_JR_IVY_AND_AMY, SrandjrIvyandamy2SeenText, SrandjrIvyandamy2BeatenText
 
-SrandjrIvyandamy2Script:
-	end_if_just_battled
-	opentext
-	writetext SrandjrIvyandamy2AfterText
-	waitbutton
-	closetext
-	end
+	text "Amy: I hope my"
+	line "senior noticed"
+	cont "how hard I tried."
+	done
 
-TrainerCamperSpencer:
-	trainer EVENT_BEAT_CAMPER_SPENCER, CAMPER, SPENCER, CamperSpencerSeenText, CamperSpencerBeatenText, 0, CamperSpencerScript
+GenericTrainerCamperSpencer:
+	generictrainer CAMPER, SPENCER, EVENT_BEAT_CAMPER_SPENCER, CamperSpencerSeenText, CamperSpencerBeatenText
 
-CamperSpencerScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x19d57e
-	waitbutton
-	closetext
-	end
+	text "What is going on"
+	line "at Lake of Rage?"
 
-TrainerPokemaniacBen:
-	trainer EVENT_BEAT_POKEMANIAC_BEN, POKEMANIAC, BEN, PokemaniacBenSeenText, PokemaniacBenBeatenText, 0, PokemaniacBenScript
+	para "We were planning"
+	line "to camp there."
+	done
 
-PokemaniacBenScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x19d2d2
-	waitbutton
-	closetext
-	end
+GenericTrainerPokemaniacBen:
+	generictrainer POKEMANIAC, BEN, EVENT_BEAT_POKEMANIAC_BEN, PokemaniacBenSeenText, PokemaniacBenBeatenText
+
+	text "What else do I"
+	line "like besides"
+	cont "#mon?"
+
+	para "Mary on the radio."
+	line "I bet she's cute!"
+	done
 
 TrainerPokemaniacBrent1:
-	trainer EVENT_BEAT_POKEMANIAC_BRENT, POKEMANIAC, BRENT1, PokemaniacBrent1SeenText, PokemaniacBrent1BeatenText, 0, PokemaniacBrent1Script
+	trainer POKEMANIAC, BRENT1, EVENT_BEAT_POKEMANIAC_BRENT, PokemaniacBrent1SeenText, PokemaniacBrent1BeatenText, 0, PokemaniacBrent1Script
 
 PokemaniacBrent1Script:
 	writecode VAR_CALLERID, PHONE_POKEMANIAC_BRENT
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_BRENT
 	iftrue UnknownScript_0x19d0cf
@@ -222,8 +251,8 @@ UnknownScript_0x19d0b8:
 	scall UnknownScript_0x19d130
 UnknownScript_0x19d0bb:
 	askforphonenumber PHONE_POKEMANIAC_BRENT
-	if_equal $1, UnknownScript_0x19d140
-	if_equal $2, UnknownScript_0x19d13c
+	ifequal $1, UnknownScript_0x19d140
+	ifequal $2, UnknownScript_0x19d13c
 	trainertotext POKEMANIAC, BRENT1, $0
 	scall UnknownScript_0x19d134
 	jump UnknownScript_0x19d138
@@ -232,10 +261,10 @@ UnknownScript_0x19d0cf:
 	scall UnknownScript_0x19d144
 	winlosstext PokemaniacBrent1BeatenText, 0
 	copybytetovar wBrentFightCount
-	if_equal 3, .Fight3
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 3, .Fight3
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight3:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight3
@@ -278,60 +307,56 @@ UnknownScript_0x19d0cf:
 
 UnknownScript_0x19d12c:
 	jumpstd asknumber1m
-	end
 
 UnknownScript_0x19d130:
 	jumpstd asknumber2m
-	end
 
 UnknownScript_0x19d134:
 	jumpstd registerednumberm
-	end
 
 UnknownScript_0x19d138:
 	jumpstd numberacceptedm
-	end
 
 UnknownScript_0x19d13c:
 	jumpstd numberdeclinedm
-	end
 
 UnknownScript_0x19d140:
 	jumpstd phonefullm
-	end
 
 UnknownScript_0x19d144:
 	jumpstd rematchm
-	end
 
-TrainerPokemaniacRon:
-	trainer EVENT_BEAT_POKEMANIAC_RON, POKEMANIAC, RON, PokemaniacRonSeenText, PokemaniacRonBeatenText, 0, PokemaniacRonScript
+GenericTrainerPokemaniacRon:
+	generictrainer POKEMANIAC, RON, EVENT_BEAT_POKEMANIAC_RON, PokemaniacRonSeenText, PokemaniacRonBeatenText
 
-PokemaniacRonScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x19d3f8
-	waitbutton
-	closetext
-	end
+	text "It's OK for people"
+	line "to like different"
+	cont "types of #mon."
 
-TrainerFisherMarvin:
-	trainer EVENT_BEAT_FISHER_MARVIN, FISHER, MARVIN, FisherMarvinSeenText, FisherMarvinBeatenText, 0, FisherMarvinScript
+	para "#mon isn't just"
+	line "about having the"
+	cont "most powerful one."
+	done
 
-FisherMarvinScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x19d4d3
-	waitbutton
-	closetext
-	end
+GenericTrainerFisherMarvin:
+	generictrainer FISHER, MARVIN, EVENT_BEAT_FISHER_MARVIN, FisherMarvinSeenText, FisherMarvinBeatenText
+
+	text "Kurt's Lure Ball"
+	line "is the best for"
+
+	para "catching hooked"
+	line "#mon."
+
+	para "It's much more"
+	line "effective than a"
+	cont "Ultra Ball."
+	done
 
 TrainerPicnickerTiffany1:
-	trainer EVENT_BEAT_PICNICKER_TIFFANY, PICNICKER, TIFFANY1, PicnickerTiffany1SeenText, PicnickerTiffany1BeatenText, 0, PicnickerTiffany1Script
+	trainer PICNICKER, TIFFANY1, EVENT_BEAT_PICNICKER_TIFFANY, PicnickerTiffany1SeenText, PicnickerTiffany1BeatenText, 0, PicnickerTiffany1Script
 
 PicnickerTiffany1Script:
 	writecode VAR_CALLERID, PHONE_PICNICKER_TIFFANY
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_TIFFANY
 	iftrue UnknownScript_0x19d1c1
@@ -353,8 +378,8 @@ UnknownScript_0x19d1aa:
 	scall UnknownScript_0x19d23d
 UnknownScript_0x19d1ad:
 	askforphonenumber PHONE_PICNICKER_TIFFANY
-	if_equal $1, UnknownScript_0x19d24d
-	if_equal $2, UnknownScript_0x19d249
+	ifequal $1, UnknownScript_0x19d24d
+	ifequal $2, UnknownScript_0x19d249
 	trainertotext PICNICKER, TIFFANY1, $0
 	scall UnknownScript_0x19d241
 	jump UnknownScript_0x19d245
@@ -363,10 +388,10 @@ UnknownScript_0x19d1c1:
 	scall UnknownScript_0x19d251
 	winlosstext PicnickerTiffany1BeatenText, 0
 	copybytetovar wTiffanyFightCount
-	if_equal 3, .Fight3
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 3, .Fight3
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight3:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight3
@@ -419,58 +444,34 @@ UnknownScript_0x19d230:
 	jump UnknownScript_0x19d259
 
 UnknownScript_0x19d233:
-	writetext UnknownText_0x19d64b
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x19d64b
 
 UnknownScript_0x19d239:
 	jumpstd asknumber1f
-	end
 
 UnknownScript_0x19d23d:
 	jumpstd asknumber2f
-	end
 
 UnknownScript_0x19d241:
 	jumpstd registerednumberf
-	end
 
 UnknownScript_0x19d245:
 	jumpstd numberacceptedf
-	end
 
 UnknownScript_0x19d249:
 	jumpstd numberdeclinedf
-	end
 
 UnknownScript_0x19d24d:
 	jumpstd phonefullf
-	end
 
 UnknownScript_0x19d251:
 	jumpstd rematchf
-	end
 
 UnknownScript_0x19d255:
 	jumpstd giftf
-	end
 
 UnknownScript_0x19d259:
 	jumpstd packfullf
-	end
-
-Route43Sign1:
-	jumptext Route43Sign1Text
-
-Route43Sign2:
-	jumptext Route43Sign2Text
-
-Route43TrainerTips:
-	jumptext Route43TrainerTipsText
-
-FruitTreeScript_0x19d266:
-	fruittree FRUITTREE_ROUTE_43
 
 PokemaniacBenSeenText:
 	text "I love #mon!"
@@ -485,15 +486,6 @@ PokemaniacBenSeenText:
 PokemaniacBenBeatenText:
 	text "How could you do"
 	line "this to me?"
-	done
-
-UnknownText_0x19d2d2:
-	text "What else do I"
-	line "like besides"
-	cont "#mon?"
-
-	para "Mary on the radio."
-	line "I bet she's cute!"
 	done
 
 PokemaniacBrent1SeenText:
@@ -529,16 +521,6 @@ PokemaniacRonBeatenText:
 	line "pretty right on!"
 	done
 
-UnknownText_0x19d3f8:
-	text "It's OK for people"
-	line "to like different"
-	cont "types of #mon."
-
-	para "#mon isn't just"
-	line "about having the"
-	cont "most powerful one."
-	done
-
 FisherMarvinSeenText:
 	text "I'm in a slump."
 
@@ -554,18 +536,6 @@ FisherMarvinBeatenText:
 	line "better anyway."
 	done
 
-UnknownText_0x19d4d3:
-	text "Kurt's Lure Ball"
-	line "is the best for"
-
-	para "catching hooked"
-	line "#mon."
-
-	para "It's much more"
-	line "effective than a"
-	cont "Ultra Ball."
-	done
-
 CamperSpencerSeenText:
 	text "I can do so much"
 	line "with my #mon--"
@@ -577,19 +547,11 @@ CamperSpencerBeatenText:
 	line "at all…"
 	done
 
-UnknownText_0x19d57e:
-	text "What is going on"
-	line "at Lake of Rage?"
-
-	para "We were planning"
-	line "to camp there."
-	done
-
 PicnickerTiffany1SeenText:
 	text "Are you going to"
 	line "Lake of Rage too?"
 
-	para "Let's play for a "
+	para "Let's play for a"
 	line "little while!"
 	done
 
@@ -644,12 +606,6 @@ SrandjrIvyandamy1BeatenText:
 	cont "my junior…"
 	done
 
-SrandjrIvyandamy1AfterText:
-	text "Ivy: I don't want"
-	line "my junior to think"
-	cont "I can't help her."
-	done
-
 SrandjrIvyandamy2SeenText:
 	text "Amy: A trainer!"
 	line "Senior, please"
@@ -659,12 +615,6 @@ SrandjrIvyandamy2SeenText:
 SrandjrIvyandamy2BeatenText:
 	text "Amy: We couldn't"
 	line "do it…"
-	done
-
-SrandjrIvyandamy2AfterText:
-	text "Amy: I hope my"
-	line "senior noticed"
-	cont "how hard I tried."
 	done
 
 Route43Sign1Text:

@@ -1,37 +1,33 @@
 GoldenrodDeptStore5F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_OBJECTS, GoldenrodDeptStore5FCheckIfSunday
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_OBJECTS, GoldenrodDeptStore5FCheckIfSunday
+	db 3 ; warp events
+	warp_event 12,  0, GOLDENROD_DEPT_STORE_4F, 1
+	warp_event 15,  0, GOLDENROD_DEPT_STORE_6F, 1
+	warp_event  2,  0, GOLDENROD_DEPT_STORE_ELEVATOR, 1
 
-GoldenrodDeptStore5F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $0, $c, 1, GOLDENROD_DEPT_STORE_4F
-	warp_def $0, $f, 1, GOLDENROD_DEPT_STORE_6F
-	warp_def $0, $2, 1, GOLDENROD_DEPT_STORE_ELEVATOR
+	db 1 ; bg events
+	bg_event 14,  0, SIGNPOST_JUMPTEXT, GoldenrodDeptStore5FDirectoryText
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event  7,  5, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x560ce, EVENT_GOLDENROD_DEPT_STORE_5F_HAPPINESS_EVENT_LADY
+	object_event  8,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, pokemart, MARTTYPE_TM, MART_GOLDENROD_5F_TM, -1
+	object_event  6,  3, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, trade, TRADE_WITH_MIKE_FOR_MACHOP, -1
+	object_event  3,  6, SPRITE_LASS, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x562ad, -1
+	object_event  9,  1, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 2, 2, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x562f3, -1
+	object_event 13,  5, SPRITE_TWIN, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, GoldenrodDeptStore5FTwinScript, -1
 
-.Signposts: db 2
-	signpost 0, 14, SIGNPOST_JUMPTEXT, GoldenrodDeptStore5FDirectoryText
-	signpost 0, 3, SIGNPOST_JUMPSTD, elevatorbutton
-
-.PersonEvents: db 6
-	person_event SPRITE_RECEPTIONIST, 5, 7, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x560ce, EVENT_GOLDENROD_DEPT_STORE_5F_HAPPINESS_EVENT_LADY
-	person_event SPRITE_CLERK, 5, 8, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_MART, 0, MARTTYPE_TM, MART_GOLDENROD_5F_TM, -1
-	person_event SPRITE_COOLTRAINER_M, 3, 6, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, NPCTrade0Script, -1
-	person_event SPRITE_LASS, 6, 3, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x562ad, -1
-	person_event SPRITE_POKEFAN_M, 1, 9, SPRITEMOVEDATA_STANDING_DOWN, 2, 2, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x562f3, -1
-	person_event SPRITE_TWIN, 5, 13, SPRITEMOVEDATA_WANDER, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, GoldenrodDeptStore5FTwinScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const GOLDENRODDEPTSTORE5F_RECEPTIONIST
 
 GoldenrodDeptStore5FCheckIfSunday:
 	checkcode VAR_WEEKDAY
-	if_equal SUNDAY, .yes
+	ifequal SUNDAY, .yes
 	disappear GOLDENRODDEPTSTORE5F_RECEPTIONIST
 	return
 
@@ -43,7 +39,7 @@ ReceptionistScript_0x560ce:
 	faceplayer
 	opentext
 	checkcode VAR_WEEKDAY
-	if_not_equal SUNDAY, .EventIsOver
+	ifnotequal SUNDAY, .EventIsOver
 	checktmhm TM_RETURN
 	iftrue .EventIsOver
 	checkflag ENGINE_GOLDENROD_MALL_5F_HAPPINESS_EVENT
@@ -51,69 +47,48 @@ ReceptionistScript_0x560ce:
 	special GetFirstPokemonHappiness
 	writetext UnknownText_0x56143
 	buttonsound
-	if_greater_than $95, .VeryHappy
-	jump .SomewhatHappy
+	ifgreater $95, .VeryHappy
+	jumpopenedtext UnknownText_0x561a6
 
 .VeryHappy:
 	writetext UnknownText_0x5615a
 	buttonsound
 	verbosegivetmhm TM_RETURN
 	setflag ENGINE_GOLDENROD_MALL_5F_HAPPINESS_EVENT
-	closetext
-	end
-
-.SomewhatHappy:
-	writetext UnknownText_0x561a6
-	waitbutton
-	closetext
-	end
+	endtext
 
 .EventIsOver:
-	writetext UnknownText_0x56202
-	waitbutton
-	closetext
-	end
+	thisopenedtext
+
+	text "There are sure to"
+	line "be TMs that are"
+
+	para "just perfect for"
+	line "your #mon."
+	done
 
 GoldenrodDeptStore5FTwinScript:
+	checkflag ENGINE_DAILY_MYSTERY_GIFT
+	iftrue_jumptextfaceplayer .ComeBackText
 	faceplayer
 	opentext
-	checkflag ENGINE_DAILY_MYSTERY_GIFT
-	iftrue .GotDailyBerry
 	writetext UnknownText_0x56279
 	buttonsound
-	callasm .PickRandomMysteryGift
+	random MARANGABERRY - ORAN_BERRY + 1
+	addvar ORAN_BERRY
 	itemtotext $0, $1
 	giveitem ITEM_FROM_MEM
-	iffalse .NoRoom
+	iffalse_jumpopenedtext MysteryGiftGirl_NoRoomText
 	writetext MysteryGiftGirl_GiveItemText
 	itemnotify
 	setflag ENGINE_DAILY_MYSTERY_GIFT
-.GotDailyBerry
-	writetext MysteryGiftGirl_ComeBackText
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-.NoRoom:
-	writetext MysteryGiftGirl_NoRoomText
-	waitbutton
-	closetext
-	end
-
-.PickRandomMysteryGift:
-	ld a, APICOT_BERRY - ORAN_BERRY + 1
-	call RandomRange
-	add ORAN_BERRY
-	ld [ScriptVar], a
-	ret
-
-NPCTrade0Script:
-	faceplayer
-	opentext
-	trade $0
-	waitbutton
-	closetext
-	end
+.ComeBackText:
+	text "You can have"
+	line "another Berry"
+	cont "tomorrow."
+	done
 
 UnknownText_0x56143:
 	text "Hello. Oh, your"
@@ -136,14 +111,6 @@ UnknownText_0x561a6:
 	line "it good TM moves."
 	done
 
-UnknownText_0x56202:
-	text "There are sure to"
-	line "be TMs that are"
-
-	para "just perfect for"
-	line "your #mon."
-	done
-
 UnknownText_0x56279:
 	text "Looking at the"
 	line "ground while I was"
@@ -158,17 +125,11 @@ UnknownText_0x56279:
 MysteryGiftGirl_GiveItemText:
 	text "<PLAYER> received"
 	line "@"
-	text_from_ram StringBuffer4
+	text_from_ram wStringBuffer4
 	text "!@"
 	sound_item
 	text_waitbutton
 	db "@"
-
-MysteryGiftGirl_ComeBackText:
-	text "You can have"
-	line "another Berry"
-	cont "tomorrow."
-	done
 
 MysteryGiftGirl_NoRoomText:
 	text "But you can't"

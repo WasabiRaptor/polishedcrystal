@@ -1,47 +1,30 @@
 WhirlIslandB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 9 ; warp events
+	warp_event  5,  5, WHIRL_ISLAND_NW, 2
+	warp_event 35,  3, WHIRL_ISLAND_NE, 2
+	warp_event 29,  9, WHIRL_ISLAND_NE, 3
+	warp_event  9, 31, WHIRL_ISLAND_SW, 3
+	warp_event 23, 31, WHIRL_ISLAND_SW, 2
+	warp_event 31, 29, WHIRL_ISLAND_SE, 2
+	warp_event 25, 21, WHIRL_ISLAND_B2F, 1
+	warp_event 13, 27, WHIRL_ISLAND_B2F, 2
+	warp_event 17, 21, WHIRL_ISLAND_CAVE, 1
 
-WhirlIslandB1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 9
-	warp_def $5, $5, 2, WHIRL_ISLAND_NW
-	warp_def $3, $23, 2, WHIRL_ISLAND_NE
-	warp_def $9, $1d, 3, WHIRL_ISLAND_NE
-	warp_def $1f, $9, 3, WHIRL_ISLAND_SW
-	warp_def $1f, $17, 2, WHIRL_ISLAND_SW
-	warp_def $1d, $1f, 2, WHIRL_ISLAND_SE
-	warp_def $15, $19, 1, WHIRL_ISLAND_B2F
-	warp_def $1b, $d, 2, WHIRL_ISLAND_B2F
-	warp_def $15, $11, 1, WHIRL_ISLAND_CAVE
+	db 3 ; bg events
+	bg_event 30,  4, SIGNPOST_ITEM + RARE_CANDY, EVENT_WHIRL_ISLAND_B1F_HIDDEN_RARE_CANDY
+	bg_event 36, 18, SIGNPOST_ITEM + ULTRA_BALL, EVENT_WHIRL_ISLAND_B1F_HIDDEN_ULTRA_BALL
+	bg_event  2, 23, SIGNPOST_ITEM + FULL_RESTORE, EVENT_WHIRL_ISLAND_B1F_HIDDEN_FULL_RESTORE
 
-.XYTriggers: db 0
-
-.Signposts: db 3
-	signpost 4, 30, SIGNPOST_ITEM, WhirlIslandB1FHiddenRareCandy
-	signpost 18, 36, SIGNPOST_ITEM, WhirlIslandB1FHiddenUltraBall
-	signpost 23, 2, SIGNPOST_ITEM, WhirlIslandB1FHiddenFullRestore
-
-.PersonEvents: db 6
-	person_event SPRITE_BALL_CUT_FRUIT, 13, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, FULL_RESTORE, 1, EVENT_WHIRL_ISLAND_B1F_FULL_RESTORE
-	person_event SPRITE_BALL_CUT_FRUIT, 18, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, CARBOS, 1, EVENT_WHIRL_ISLAND_B1F_CARBOS
-	person_event SPRITE_BALL_CUT_FRUIT, 23, 33, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, CALCIUM, 1, EVENT_WHIRL_ISLAND_B1F_CALCIUM
-	person_event SPRITE_BALL_CUT_FRUIT, 8, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, BIG_NUGGET, 1, EVENT_WHIRL_ISLAND_B1F_BIG_NUGGET
-	person_event SPRITE_BALL_CUT_FRUIT, 26, 19, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ESCAPE_ROPE, 1, EVENT_WHIRL_ISLAND_B1F_ESCAPE_ROPE
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 26, 23, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, WhirlIslandB1FBoulder, -1
-
-WhirlIslandB1FBoulder:
-	jumpstd strengthboulder
-
-WhirlIslandB1FHiddenRareCandy:
-	dwb EVENT_WHIRL_ISLAND_B1F_HIDDEN_RARE_CANDY, RARE_CANDY
-
-
-WhirlIslandB1FHiddenUltraBall:
-	dwb EVENT_WHIRL_ISLAND_B1F_HIDDEN_ULTRA_BALL, ULTRA_BALL
-
-
-WhirlIslandB1FHiddenFullRestore:
-	dwb EVENT_WHIRL_ISLAND_B1F_HIDDEN_FULL_RESTORE, FULL_RESTORE
+	db 6 ; object events
+	itemball_event  7, 13, FULL_RESTORE, 1, EVENT_WHIRL_ISLAND_B1F_FULL_RESTORE
+	itemball_event  2, 18, CARBOS, 1, EVENT_WHIRL_ISLAND_B1F_CARBOS
+	itemball_event 33, 23, CALCIUM, 1, EVENT_WHIRL_ISLAND_B1F_CALCIUM
+	itemball_event 17,  8, BIG_NUGGET, 1, EVENT_WHIRL_ISLAND_B1F_BIG_NUGGET
+	itemball_event 19, 26, ESCAPE_ROPE, 1, EVENT_WHIRL_ISLAND_B1F_ESCAPE_ROPE
+	strengthboulder_event 23, 26

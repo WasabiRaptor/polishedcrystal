@@ -1,29 +1,26 @@
 OlivineCafe_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4,  7, OLIVINE_CITY, 6
+	warp_event  5,  7, OLIVINE_CITY, 6
 
-OlivineCafe_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $4, 6, OLIVINE_CITY
-	warp_def $7, $5, 6, OLIVINE_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 7 ; object events
+	object_event  6,  2, SPRITE_BAKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BakerScript_0x9c8c1, -1
+	object_event  4,  4, SPRITE_LYRA, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, OlivineCafeLyraScript, EVENT_GOT_AMULET_COIN_FROM_LYRA
+	object_event  9,  3, SPRITE_FISHING_GURU, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9c9c5, -1
+	object_event  9,  6, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9ca09, -1
+	object_event  7,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, (1 << MORN), 0, PERSONTYPE_COMMAND, jumptextfaceplayer, OlivineCafeOfficerText, -1
+	object_event  7,  4, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, (1 << DAY), 0, PERSONTYPE_COMMAND, jumptextfaceplayer, OlivineCafeYoungsterText, -1
+	object_event  3,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, (1 << NITE), 0, PERSONTYPE_COMMAND, jumptextfaceplayer, OlivineCafeFisherText, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 7
-	person_event SPRITE_BAKER, 2, 6, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BakerScript_0x9c8c1, -1
-	person_event SPRITE_LYRA, 4, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, OlivineCafeLyraScript, EVENT_GOT_AMULET_COIN_FROM_LYRA
-	person_event SPRITE_FISHING_GURU, 3, 9, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FishingGuruScript_0x9c8d9, -1
-	person_event SPRITE_SAILOR, 6, 9, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x9c8dc, -1
-	person_event SPRITE_OFFICER, 4, 7, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, (1 << MORN), 0, PERSONTYPE_SCRIPT, 0, OlivineCafeOfficerScript, -1
-	person_event SPRITE_YOUNGSTER, 4, 7, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, (1 << DAY), 0, PERSONTYPE_SCRIPT, 0, OlivineCafeYoungsterScript, -1
-	person_event SPRITE_FISHER, 2, 3, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, (1 << NITE), 0, PERSONTYPE_SCRIPT, 0, OlivineCafeFisherScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const OLIVINECAFE_BAKER
 	const OLIVINECAFE_LYRA
 
@@ -31,10 +28,10 @@ BakerScript_0x9c8c1:
 	faceplayer
 	opentext
 	checkevent EVENT_BEAT_BAKER_CHELSIE
-	iftrue BakerChelsieAfterScript
+	iftrue_jumpopenedtext BakerChelsieAfterText
 	writetext BakerChelsieGreetingText
 	yesorno
-	iffalse BakerChelsieNoBattleScript
+	iffalse_jumpopenedtext BakerChelsieNoBattleText
 	writetext BakerChelsieSeenText
 	waitbutton
 	closetext
@@ -45,17 +42,15 @@ BakerScript_0x9c8c1:
 	reloadmapafterbattle
 	setevent EVENT_BEAT_BAKER_CHELSIE
 	opentext
-BakerChelsieAfterScript:
-	writetext BakerChelsieAfterText
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-BakerChelsieNoBattleScript:
-	writetext BakerChelsieNoBattleText
-	waitbutton
-	closetext
-	end
+BakerChelsieAfterText:
+	text "I always add vita-"
+	line "mins to my bread."
+
+	para "They make my #-"
+	line "mon stronger."
+	done
 
 OlivineCafeLyraScript:
 	faceplayer
@@ -63,42 +58,22 @@ OlivineCafeLyraScript:
 	writetext OlivineCafeLyraText1
 	buttonsound
 	verbosegiveitem AMULET_COIN
-	iffalse .BagFull
+	iffalse_endtext
 	writetext OlivineCafeLyraText2
 	waitbutton
 	closetext
 	checkcode VAR_FACING
-	if_not_equal UP, .GoStraightDown
-	applymovement OLIVINECAFE_LYRA, OlivineCafeMovementData_Lyra1
+	ifnotequal UP, .GoStraightDown
+	applyonemovement OLIVINECAFE_LYRA, step_right
 .GoStraightDown
-	applymovement OLIVINECAFE_LYRA, OlivineCafeMovementData_Lyra2
+	applymovement OLIVINECAFE_LYRA, OlivineCafeMovementData_LyraLeaves
 	playsound SFX_EXIT_BUILDING
 	disappear OLIVINECAFE_LYRA
 	setevent EVENT_GOT_AMULET_COIN_FROM_LYRA
 	waitsfx
-.BagFull
 	end
 
-FishingGuruScript_0x9c8d9:
-	jumptextfaceplayer UnknownText_0x9c9c5
-
-SailorScript_0x9c8dc:
-	jumptextfaceplayer UnknownText_0x9ca09
-
-OlivineCafeOfficerScript:
-	jumptextfaceplayer OlivineCafeOfficerText
-
-OlivineCafeYoungsterScript:
-	jumptextfaceplayer OlivineCafeYoungsterText
-
-OlivineCafeFisherScript:
-	jumptextfaceplayer OlivineCafeFisherText
-
-OlivineCafeMovementData_Lyra1:
-	step_right
-	step_end
-
-OlivineCafeMovementData_Lyra2:
+OlivineCafeMovementData_LyraLeaves:
 	step_down
 	step_down
 	step_down
@@ -127,7 +102,7 @@ UnknownText_0x9ca09:
 	done
 
 BakerChelsieGreetingText:
-	text "My Pokemon are on"
+	text "My #mon are on"
 	line "the rise!"
 
 	para "I raised them with"
@@ -147,14 +122,6 @@ BakerChelsieBeatenText:
 	text "You are strong."
 	line "Are you eating my"
 	cont "special bread?"
-	done
-
-BakerChelsieAfterText:
-	text "I always add vita-"
-	line "mins to my bread."
-
-	para "They make my #-"
-	line "mon stronger."
 	done
 
 BakerChelsieNoBattleText:

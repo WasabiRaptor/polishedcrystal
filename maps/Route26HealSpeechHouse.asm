@@ -1,29 +1,22 @@
 Route26HealSpeechHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, ROUTE_26, 2
+	warp_event  3,  7, ROUTE_26, 2
 
-Route26HealSpeechHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 2, ROUTE_26
-	warp_def $7, $3, 2, ROUTE_26
+	db 1 ; bg events
+	bg_event  7,  1, SIGNPOST_JUMPSTD, picturebookshelf
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 7, SIGNPOST_JUMPSTD, picturebookshelf
-
-.PersonEvents: db 1
-	person_event SPRITE_TEACHER, 3, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, TeacherScript_0x7b125, -1
+	db 1 ; object events
+	object_event  2,  3, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, TeacherScript_0x7b125, -1
 
 TeacherScript_0x7b125:
-	faceplayer
-	opentext
-	writetext UnknownText_0x7b14d
-	waitbutton
-	closetext
+	showtextfaceplayer UnknownText_0x7b14d
 	special Special_FadeBlackQuickly
 	special Special_ReloadSpritesNoPalettes
 	playmusic MUSIC_HEAL
@@ -31,11 +24,7 @@ TeacherScript_0x7b125:
 	pause 60
 	special Special_FadeInQuickly
 	special RestartMapMusic
-	opentext
-	writetext UnknownText_0x7b18b
-	waitbutton
-	closetext
-	end
+	jumptext UnknownText_0x7b18b
 
 UnknownText_0x7b14d:
 	text "Your #mon look"

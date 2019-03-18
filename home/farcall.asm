@@ -7,12 +7,20 @@ FarCall_de::
 	push af
 	ld a, [hBuffer]
 	rst Bankswitch
-	call .de
+	call _de_
 	jr ReturnFarCall
 
-.de
-	push de
-	ret
+AnonBankPush::
+	ld [hFarCallSavedA], a
+	ld a, h
+	ld [hPredefTemp + 1], a
+	ld a, l
+	ld [hPredefTemp], a
+	pop hl
+	ld a, [hROMBank]
+	push af
+	ld a, [hli]
+	jr DoFarCall_BankInA
 
 FarCall_hl::
 ; Call a:hl.
@@ -23,14 +31,52 @@ FarCall_hl::
 	push af
 	jr DoFarCall
 
+FarPointerCall::
+	ld a, [hROMBank]
+	push af
+	ld a, [hli]
+	ld [hBuffer], a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	jr DoFarCall
+
+CallOpponentTurn::
+	ld [hFarCallSavedA], a
+	ld a, h
+	ld [hPredefTemp + 1], a
+	ld a, l
+	ld [hPredefTemp], a
+
+	pop hl
+	call SwitchTurn
+	call RetrieveHLAndCallFunction
+	push af
+	call SwitchTurn
+	pop af
+	ret
+
+StackCallInBankB:
+	ld a, b
+StackCallInBankA:
+	ld [hBuffer], a
+	ld a, h
+	ld [hPredefTemp + 1], a
+	ld a, l
+	ld [hPredefTemp], a
+	pop hl
+	ld a, [hROMBank]
+	push af
+	jr DoFarCall
+
 RstFarCall::
 ; Call the following dba pointer on the stack.
 ; Preserves a, bc, de, hl
 	ld [hFarCallSavedA], a
 	ld a, h
-	ld [hPredefTemp], a
-	ld a, l
 	ld [hPredefTemp + 1], a
+	ld a, l
+	ld [hPredefTemp], a
 	pop hl
 	ld a, [hli]
 	ld [hBuffer], a
@@ -49,6 +95,7 @@ RstFarCall::
 	ld l, a
 DoFarCall:
 	ld a, [hBuffer]
+DoFarCall_BankInA:
 	and $7f
 	rst Bankswitch
 	call RetrieveHLAndCallFunction
@@ -70,11 +117,37 @@ ReturnFarCall::
 	ld a, [hFarCallSavedA]
 	ret
 
+RunFunctionInWRA6::
+	GLOBAL wDecompressScratch
+	ld a, BANK(wDecompressScratch)
+
+; fallthrough
+StackCallInWRAMBankA::
+	ld [hBuffer], a
+	ld a, h
+	ld [hPredefTemp + 1], a
+	ld a, l
+	ld [hPredefTemp], a
+
+; fallthrough
+StackCallInWRAMBankA_continue:
+	pop hl
+	ld a, [rSVBK]
+	push af
+	ld a, [hBuffer]
+	ld [rSVBK], a
+	call RetrieveHLAndCallFunction
+	ld [hBuffer], a
+	pop af
+	ld [rSVBK], a
+	ld a, [hBuffer]
+	ret
+
 RetrieveHLAndCallFunction:
 	push hl
 	ld hl, hPredefTemp
 	ld a, [hli]
-	ld l, [hl]
-	ld h, a
+	ld h, [hl]
+	ld l, a
 	ld a, [hFarCallSavedA]
 	ret

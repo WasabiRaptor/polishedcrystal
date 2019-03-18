@@ -1,28 +1,25 @@
 BellchimeTrail_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script BellchimeTrailStepDownTrigger
 
-.MapTriggers: db 1
-	dw BellchimeTrailStepDownTrigger
+	db 1 ; callbacks
+	callback MAPCALLBACK_OBJECTS, SetupValerieMorningWalkCallback
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_OBJECTS, SetupValerieMorningWalkCallback
+	db 3 ; warp events
+	warp_event  4,  4, WISE_TRIOS_ROOM, 1
+	warp_event  4,  5, WISE_TRIOS_ROOM, 2
+	warp_event 21,  9, TIN_TOWER_1F, 1 ; hole
 
-BellchimeTrail_MapEventHeader:
+	db 1 ; coord events
+	coord_event 21,  9, 1, BellchimeTrailPanUpTrigger
 
-.Warps: db 3
-	warp_def $4, $4, 1, WISE_TRIOS_ROOM
-	warp_def $5, $4, 2, WISE_TRIOS_ROOM
-	warp_def $9, $15, 1, TIN_TOWER_1F ; hole
+	db 1 ; bg events
+	bg_event 22, 12, SIGNPOST_JUMPTEXT, TinTowerSignText
 
-.XYTriggers: db 1
-	xy_trigger 1, $9, $15, BellchimeTrailPanUpTrigger
+	db 1 ; object events
+	object_event 16,  6, SPRITE_VALERIE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BellchimeTrailValerieScript, EVENT_VALERIE_BELLCHIME_TRAIL
 
-.Signposts: db 1
-	signpost 12, 22, SIGNPOST_JUMPTEXT, TinTowerSignText
-
-.PersonEvents: db 1
-	person_event SPRITE_VALERIE, 6, 16, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BellchimeTrailValerieScript, EVENT_VALERIE_BELLCHIME_TRAIL
-
-const_value set 2
+	const_def 1 ; object constants
 	const BELLCHIMETRAIL_VALERIE
 
 BellchimeTrailStepDownTrigger:
@@ -31,17 +28,13 @@ BellchimeTrailStepDownTrigger:
 
 .Script:
 	checkcode VAR_YCOORD
-	if_not_equal $9, .Done
+	ifnotequal $9, .Done
 	checkcode VAR_XCOORD
-	if_not_equal $15, .Done
-	applymovement PLAYER, .StepDownMovement
+	ifnotequal $15, .Done
+	applyonemovement PLAYER, step_down
 .Done
-	dotrigger $1
+	setscene $1
 	end
-
-.StepDownMovement:
-	step_down
-	step_end
 
 SetupValerieMorningWalkCallback:
 	checkevent EVENT_FOUGHT_SUICUNE
@@ -50,7 +43,7 @@ SetupValerieMorningWalkCallback:
 	iffalse .Appear
 	checkflag ENGINE_VALERIE_MORNING_WALK
 	iftrue .Disappear
-	checkmorn
+	checktime 1 << MORN
 	iffalse .Disappear
 .Appear:
 	appear BELLCHIMETRAIL_VALERIE
@@ -62,7 +55,7 @@ SetupValerieMorningWalkCallback:
 
 BellchimeTrailPanUpTrigger:
 	playsound SFX_EXIT_BUILDING
-	applymovement PLAYER, .HidePlayerMovement
+	applyonemovement PLAYER, hide_person
 	waitsfx
 	applymovement PLAYER, .PanUpMovement
 	disappear PLAYER
@@ -70,13 +63,9 @@ BellchimeTrailPanUpTrigger:
 	special Special_FadeOutMusic
 	special FadeOutPalettes
 	pause 15
-	dotrigger $0
-	warpfacing UP, TIN_TOWER_1F, $7, $f
+	setscene $0
+	warpfacing UP, TIN_TOWER_1F, 7, 15
 	end
-
-.HidePlayerMovement:
-	hide_person
-	step_end
 
 .PanUpMovement:
 	step_up
@@ -107,7 +96,7 @@ BellchimeTrailValerieScript:
 .Listened:
 	writetext .BattleText
 	yesorno
-	iffalse .Refused
+	iffalse_jumpopenedtext .RefusedText
 	writetext .AcceptedText
 	waitbutton
 	closetext
@@ -121,13 +110,13 @@ BellchimeTrailValerieScript:
 	writetext .RewardText
 	buttonsound
 	verbosegivetmhm TM_DAZZLINGLEAM
-	setevent EVENT_GOT_TM60_DAZZLINGLEAM_FROM_VALERIE
+	setevent EVENT_GOT_TM49_DAZZLINGLEAM_FROM_VALERIE
 	writetext .FarewellText
 .Depart
 	waitbutton
 	closetext
 	checkcode VAR_FACING
-	if_not_equal RIGHT, .SkipGoAround
+	ifnotequal RIGHT, .SkipGoAround
 	applymovement BELLCHIMETRAIL_VALERIE, .ValerieGoesAroundMovement
 .SkipGoAround
 	applymovement BELLCHIMETRAIL_VALERIE, .ValerieDepartsMovement
@@ -136,9 +125,6 @@ BellchimeTrailValerieScript:
 	setflag ENGINE_VALERIE_MORNING_WALK
 	end
 
-.Refused:
-	jumpopenedtext .RefusedText
-
 .Rematch:
 	writetext .RematchText
 	waitbutton
@@ -146,7 +132,7 @@ BellchimeTrailValerieScript:
 	winlosstext .RematchBeatenText, 0
 	setlasttalked BELLCHIMETRAIL_VALERIE
 	checkcode VAR_BADGES
-	if_equal 16, .Battle3
+	ifequal 16, .Battle3
 	checkevent EVENT_BEAT_ELITE_FOUR
 	iftrue .Battle2
 	loadtrainer VALERIE, 1

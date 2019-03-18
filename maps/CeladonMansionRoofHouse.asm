@@ -1,53 +1,50 @@
 CeladonMansionRoofHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, CELADON_MANSION_ROOF, 3
+	warp_event  3,  7, CELADON_MANSION_ROOF, 3
 
-CeladonMansionRoofHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 3, CELADON_MANSION_ROOF
-	warp_def $7, $3, 3, CELADON_MANSION_ROOF
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  3,  2, SPRITE_PHARMACIST, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, CeladonMansionRoofHousePharmacistScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_PHARMACIST, 2, 3, SPRITEMOVEDATA_STANDING_DOWN, 2, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, PharmacistScript_0x71afd, -1
-
-PharmacistScript_0x71afd:
+CeladonMansionRoofHousePharmacistScript:
+	checkevent EVENT_GOT_TM03_CURSE
+	iftrue_jumptextfaceplayer .CurseText
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_TM03_CURSE
-	iftrue UnknownScript_0x71b21
-	writetext UnknownText_0x71b27
+	writetext .IntroText
 	buttonsound
-	checknite
-	iftrue UnknownScript_0x71b14
-	writetext UnknownText_0x71b4a
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x71b14:
-	writetext UnknownText_0x71ba3
+	checktime 1 << NITE
+	iffalse_jumpopenedtext .NotNiteText
+	writetext .StoryText
 	buttonsound
 	verbosegivetmhm TM_CURSE
 	setevent EVENT_GOT_TM03_CURSE
-UnknownScript_0x71b21:
-	writetext UnknownText_0x71db3
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-UnknownText_0x71b27:
+.CurseText:
+	text "TM03 is Curse."
+
+	para "It's a terrifying"
+	line "move that slowly"
+
+	para "whittles down the"
+	line "victim's HP."
+	done
+
+.IntroText:
 	text "Let me recount a"
 	line "terrifying tale…"
 	done
 
-UnknownText_0x71b4a:
+.NotNiteText:
 	text "Then again, it's"
 	line "not as scary while"
 
@@ -58,7 +55,7 @@ UnknownText_0x71b4a:
 	line "sunset, OK?"
 	done
 
-UnknownText_0x71ba3:
+.StoryText:
 	text "Once upon a time,"
 	line "there was a little"
 
@@ -111,14 +108,4 @@ UnknownText_0x71ba3:
 	para "For listening so"
 	line "patiently, you may"
 	cont "take this--TM03!"
-	done
-
-UnknownText_0x71db3:
-	text "TM03 is Curse."
-
-	para "It's a terrifying"
-	line "move that slowly"
-
-	para "whittles down the"
-	line "victim's HP."
 	done

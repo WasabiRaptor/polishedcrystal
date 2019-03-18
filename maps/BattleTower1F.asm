@@ -1,50 +1,44 @@
 BattleTower1F_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script BattleTower1FTrigger0
 
-.MapTriggers: db 1
-	dw BattleTower1FTrigger0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event 10, 13, BATTLE_TOWER_OUTSIDE, 3
+	warp_event 11, 13, BATTLE_TOWER_OUTSIDE, 4
+	warp_event 10,  0, BATTLE_TOWER_ELEVATOR, 1
+	warp_event  0,  5, BATTLE_TOWER_2F, 1
 
-BattleTower1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $d, $a, 3, BATTLE_TOWER_OUTSIDE
-	warp_def $d, $b, 4, BATTLE_TOWER_OUTSIDE
-	warp_def $0, $a, 1, BATTLE_TOWER_ELEVATOR
-	warp_def $5, $0, 1, BATTLE_TOWER_2F
+	db 1 ; bg events
+	bg_event 11,  7, SIGNPOST_READ, MapBattleTower1FSignpost0Script
 
-.XYTriggers: db 0
+	db 9 ; object events
+	object_event 10,  7, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x9e3e2, -1
+	pc_nurse_event  6, 6
+	object_event 14,  6, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, pokemart, MARTTYPE_BP, MART_BT_1, -1
+	object_event 16,  6, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, pokemart, MARTTYPE_BP, MART_BT_2, -1
+	object_event 18,  6, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, pokemart, MARTTYPE_BP, MART_BT_3, -1
+	object_event  6, 12, SPRITE_BURGLAR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BattleTowerPharmacistScript, -1
+	object_event 16, 11, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Text_BattleTowerCooltrainerF, -1
+	object_event  2, 10, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Text_BattleTowerBugCatcher, -1
+	object_event 20,  9, SPRITE_GRANNY, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Text_BattleTowerGranny, -1
 
-.Signposts: db 1
-	signpost 7, 11, SIGNPOST_READ, MapBattleTower1FSignpost0Script
-
-.PersonEvents: db 9
-	person_event SPRITE_RECEPTIONIST, 7, 10, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x9e3e2, -1
-	person_event SPRITE_NURSE, 6, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_CLERK, 6, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_MART, 0, MARTTYPE_BP, MART_BT_1, -1
-	person_event SPRITE_CLERK, 6, 16, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_MART, 0, MARTTYPE_BP, MART_BT_2, -1
-	person_event SPRITE_CLERK, 6, 18, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_MART, 0, MARTTYPE_BP, MART_BT_3, -1
-	person_event SPRITE_DRAGON_TAMER, 12, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, BattleTowerDragonTamerScript, -1
-	person_event SPRITE_COOLTRAINER_F, 11, 16, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_JUMPTEXTFP, 0, Text_BattleTowerCooltrainerF, -1
-	person_event SPRITE_BUG_CATCHER, 10, 2, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_JUMPTEXTFP, 0, Text_BattleTowerBugCatcher, -1
-	person_event SPRITE_GRANNY, 9, 20, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, Text_BattleTowerGranny, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const BATTLETOWER1F_RECEPTIONIST
 
 BattleTower1FTrigger0:
 	special Special_BattleTower_CheckSaveFileExistsAndIsYours
 	iffalse .Done
 	special Special_BattleTower_GetChallengeState ; copybytetovar sBattleTowerChallengeState
-	if_equal BATTLETOWER_CHALLENGE_IN_PROGESS, .ContinueChallenge
-	if_equal BATTLETOWER_SAVED_AND_LEFT, .ResumeChallenge
+	ifequal BATTLETOWER_CHALLENGE_IN_PROGESS, .ContinueChallenge
+	ifequal BATTLETOWER_SAVED_AND_LEFT, .ResumeChallenge
 	jump .Done
 
 .ResumeChallenge
-	opentext
-	writetext Text_WeveBeenWaitingForYou
-	waitbutton
-	closetext
+	showtext Text_WeveBeenWaitingForYou
 	priorityjump Script_ResumeBattleTowerChallenge
 	end
 
@@ -53,79 +47,37 @@ BattleTower1FTrigger0:
 	writebyte BATTLETOWER_NO_CHALLENGE
 	special Special_BattleTower_SetChallengeState
 .Done
-	dotrigger $1
+	setscene $1
 	end
 
 MapBattleTower1FSignpost0Script:
 	opentext
 	writetext Text_ReadBattleTowerRules
 	yesorno
-	iffalse UnknownScript_0x9e3e0
-	writetext Text_BattleTowerRules
-	waitbutton
-UnknownScript_0x9e3e0:
-	closetext
-	end
+	iffalse_endtext
+	jumpopenedtext Text_BattleTowerRules
 
 ReceptionistScript_0x9e3e2:
-; TODO: let the player fight in Battle Tower once it's finished
-;	special Special_BattleTower_GetChallengeState ; copybytetovar sBattleTowerChallengeState
-;	if_equal $3, Script_BeatenAllTrainers2 ; maps/BattleTowerBattleRoom.asm
-;	opentext
-;	writetext Text_BattleTowerWelcomesYou
-;	buttonsound
-;	special Special_BattleTower_CheckNewSaveFile ; if new save file: bit 1, [sBattleTowerNewSaveFile]
-;	if_not_equal $0, Script_Menu_ChallengeExplanationCancel
-;	jump Script_BattleTowerIntroductionYesNo
-	faceplayer
+	special Special_BattleTower_GetChallengeState ; copybytetovar sBattleTowerChallengeState
+	ifequal $3, Script_BeatenAllTrainers2 ; maps/BattleTowerBattleRoom.asm
 	opentext
-	writetext .NotYetImplementedText
-	waitbutton
-	checkevent EVENT_260
-	iftrue .GotFreeBP
-	writetext .FreeBPText
-	checkcode VAR_BATTLEPOINTS
-	addvar 10
-	writevarcode VAR_BATTLEPOINTS
-	setevent EVENT_260
-.GotFreeBP
-	closetext
-	end
-
-.NotYetImplementedText
-	text "I'm sorry, Battle"
-	line "Tower is not yet"
-	cont "ready."
-	done
-
-.FreeBPText
-	text "Please take these"
-	line "Battle Points as"
-	cont "compensation."
-
-	para "You can trade them"
-	line "for useful items"
-
-	para "at the Exchange"
-	line "Service Corner."
-
-	para "<PLAYER> received"
-	line "10 Battle Points!@"
-	sound_item
-	text_waitbutton
-	db "@"
+	writetext Text_BattleTowerWelcomesYou
+	buttonsound
+	special Special_BattleTower_CheckNewSaveFile ; if new save file: bit 1, [sBattleTowerNewSaveFile]
+	ifnotequal $0, Script_Menu_ChallengeExplanationCancel
+	jump Script_BattleTowerIntroductionYesNo
 
 Script_Menu_ChallengeExplanationCancel:
 	writetext Text_WantToGoIntoABattleRoom
 	special Special_BattleTower_MainMenu
-	if_equal $1, Script_ChoseChallenge
-	if_equal $2, Script_BattleTowerExplanation
-	jump Script_BattleTowerHopeToServeYouAgain
+	ifequal $1, Script_ChoseChallenge
+	ifequal $2, Script_BattleTowerExplanation
+	jumpopenedtext Text_WeHopeToServeYouAgain
 
 Script_ChoseChallenge:
 	special Special_BattleTower_ResetTrainersSRAM
 	special Special_BattleTower_CheckForRules
-	if_not_equal $0, Script_WaitButton
+	ifnotequal $0, Script_WaitButton
 	special Special_BattleTower_FindChallengeLevel
 	writetext Text_ConfirmBattleRoomLevel
 	yesorno
@@ -133,10 +85,10 @@ Script_ChoseChallenge:
 	writetext Text_SaveBeforeEnteringBattleRoom
 	yesorno
 	iffalse Script_Menu_ChallengeExplanationCancel
-	dotrigger $0
+	setscene $0
 	special Special_TryQuickSave
 	iffalse Script_Menu_ChallengeExplanationCancel
-	dotrigger $1
+	setscene $1
 	special Special_BattleTower_MarkNewSaveFile ; set 1, [sBattleTowerNewSaveFile]
 	special Special_BattleTower_BeginChallenge
 	writetext Text_RightThisWayToYourBattleRoom
@@ -149,16 +101,16 @@ Script_ResumeBattleTowerChallenge:
 	special Special_BattleTower_LoadLevelGroup
 Script_WalkToBattleTowerElevator:
 	musicfadeout MUSIC_NONE, 8
-	domaptrigger BATTLE_TOWER_BATTLE_ROOM, $0
-	domaptrigger BATTLE_TOWER_ELEVATOR, $0
-	domaptrigger BATTLE_TOWER_HALLWAY, $0
+	setmapscene BATTLE_TOWER_BATTLE_ROOM, $0
+	setmapscene BATTLE_TOWER_ELEVATOR, $0
+	setmapscene BATTLE_TOWER_HALLWAY, $0
 	follow BATTLETOWER1F_RECEPTIONIST, PLAYER
 	applymovement BATTLETOWER1F_RECEPTIONIST, MovementData_BattleTower1FWalkToElevator
 	special Special_BattleTower_MaxVolume
 	warpsound
 	disappear BATTLETOWER1F_RECEPTIONIST
 	stopfollow
-	applymovement PLAYER, MovementData_BattleTower1FPlayerEntersElevator
+	applyonemovement PLAYER, step_up
 	warpcheck
 	end
 
@@ -166,18 +118,17 @@ Script_GivePlayerHisPrize:
 	writebyte BATTLETOWER_WON_CHALLENGE
 	special Special_BattleTower_SetChallengeState
 	checkcode VAR_BATTLEPOINTS
-	if_greater_than 252, .MaxPoints
+	ifgreater 252, .MaxPoints
 	addvar 3
 	writevarcode VAR_BATTLEPOINTS
 .Finish:
 	writetext Text_PlayerGotReward
 	writebyte BATTLETOWER_RECEIVED_REWARD
 	special Special_BattleTower_SetChallengeState
-	closetext
-	end
+	endtext
 
 .MaxPoints:
-	loadvar BattlePoints, 255
+	loadvar wBattlePoints, 255
 	jump .Finish
 
 Script_BattleTowerIntroductionYesNo:
@@ -190,61 +141,44 @@ Script_BattleTowerSkipExplanation:
 	special Special_BattleTower_MarkNewSaveFile
 	jump Script_Menu_ChallengeExplanationCancel
 
-Script_BattleTowerHopeToServeYouAgain:
-	writetext Text_WeHopeToServeYouAgain
-	waitbutton
-	closetext
-	end
-
 Script_WaitButton:
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 BattleTower_LeftWithoutSaving:
 	opentext
 	writetext Text_BattleTower_LeftWithoutSaving
 	waitbutton
-	jump Script_BattleTowerHopeToServeYouAgain
+	jumpopenedtext Text_WeHopeToServeYouAgain
 
-BattleTowerDragonTamerScript:
+BattleTowerPharmacistScript:
 	faceplayer
 	opentext
-	checkevent EVENT_LISTENED_TO_WATER_PULSE_INTRO
-	iftrue BattleTowerTutorWaterPulseScript
-	writetext BattleTowerDragonTamerText
+	checkevent EVENT_LISTENED_TO_TRICK_INTRO
+	iftrue BattleTowerTutorTrickScript
+	writetext BattleTowerPharmacistText
 	waitbutton
-	setevent EVENT_LISTENED_TO_WATER_PULSE_INTRO
-BattleTowerTutorWaterPulseScript:
-	writetext Text_BattleTowerTutorWaterPulse
+	setevent EVENT_LISTENED_TO_TRICK_INTRO
+BattleTowerTutorTrickScript:
+	writetext Text_BattleTowerTutorTrick
 	waitbutton
 	checkitem SILVER_LEAF
 	iffalse .NoSilverLeaf
 	writetext Text_BattleTowerTutorQuestion
 	yesorno
 	iffalse .TutorRefused
-	writebyte WATER_PULSE
+	writebyte TRICK
 	writetext Text_BattleTowerTutorClear
 	special Special_MoveTutor
-	if_equal $0, .TeachMove
+	ifequal $0, .TeachMove
 .TutorRefused
-	writetext Text_BattleTowerTutorRefused
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_BattleTowerTutorRefused
 
 .NoSilverLeaf
-	writetext Text_BattleTowerTutorNoSilverLeaf
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_BattleTowerTutorNoSilverLeaf
 
 .TeachMove
 	takeitem SILVER_LEAF
-	writetext Text_BattleTowerTutorTaught
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_BattleTowerTutorTaught
 
 MovementData_BattleTower1FWalkToElevator:
 	step_up
@@ -253,7 +187,6 @@ MovementData_BattleTower1FWalkToElevator:
 	step_up
 	step_up
 	step_up
-MovementData_BattleTower1FPlayerEntersElevator:
 	step_up
 	step_end
 
@@ -398,41 +331,45 @@ Text_ConfirmBattleRoomLevel:
 
 	para "Battle Room at"
 	line "<LV>@"
-	deciram ScriptVar, 1, 2
+	deciram wScriptVar, 1, 2
 	text "0. Is that OK?"
 	done
 
-BattleTowerDragonTamerText:
-	text "I'm going to beat"
-	line "the Tower Tycoon"
+BattleTowerPharmacistText:
+	text "The trainers here"
+	line "strategically use"
+	cont "held items."
 
-	para "with my Seadra's"
-	line "awesome Water"
-	cont "Pulse attack!"
+	para "But I've got a"
+	line "trick up my"
+	cont "sleeve--I'll swap"
+
+	para "their items for"
+	line "mine with Trick!"
 	done
 
-Text_BattleTowerTutorWaterPulse:
+Text_BattleTowerTutorTrick:
 	text "I'll teach your"
 	line "#mon how to"
 
-	para "use Water Pulse"
+	para "use Trick…"
 	line "for a Silver Leaf."
 	done
 
 Text_BattleTowerTutorNoSilverLeaf:
-	text "You don't have a"
-	line "Silver Leaf…"
+	text "Tch. You don't have"
+	line "a Silver Leaf…"
 	done
 
 Text_BattleTowerTutorQuestion:
 	text "Should I teach"
 	line "your #mon"
-	cont "Water Pulse?"
+	cont "Trick?"
 	done
 
 Text_BattleTowerTutorRefused:
 	text "Talk to me if you"
-	line "change your mind!"
+	line "change your mind."
 	done
 
 Text_BattleTowerTutorClear:
@@ -441,8 +378,8 @@ Text_BattleTowerTutorClear:
 
 Text_BattleTowerTutorTaught:
 	text "Now your #mon"
-	line "can use Water"
-	cont "Pulse too!"
+	line "can use Trick too!"
+	cont "Isn't it devious?"
 	done
 
 Text_BattleTowerCooltrainerF:

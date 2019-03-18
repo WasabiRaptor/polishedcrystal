@@ -1,40 +1,37 @@
 HallOfFame_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script HallOfFameEntranceTrigger
 
-.MapTriggers: db 1
-	dw HallOfFameTrigger0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4, 13, LANCES_ROOM, 3
+	warp_event  5, 13, LANCES_ROOM, 4
 
-HallOfFame_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $d, $4, 3, LANCES_ROOM
-	warp_def $d, $5, 4, LANCES_ROOM
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  4, 12, SPRITE_LANCE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_LANCE, 12, 4, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const HALLOFFAME_LANCE
 
-HallOfFameTrigger0:
-	priorityjump HallOfFameScript
+HallOfFameEntranceTrigger:
+	priorityjump .Script
 	end
 
-HallOfFameScript:
+.Script:
 	follow HALLOFFAME_LANCE, PLAYER
-	applymovement HALLOFFAME_LANCE, HallOfFame_WalkUpWithLance
+	applymovement HALLOFFAME_LANCE, .WalkUpMovement
 	stopfollow
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	opentext
-	writetext HallOfFame_LanceText
+	writetext .LanceText1
 	waitbutton
 	checkcode VAR_BADGES
-	if_equal 16, .CheckGoldTrophy
+	ifequal 16, .CheckGoldTrophy
 	checkevent EVENT_DECO_SILVER_TROPHY
 	iftrue .NoTrophy
 	jump .SilverTrophy
@@ -43,39 +40,39 @@ HallOfFameScript:
 	iftrue .NoTrophy
 	jump .GoldTrophy
 .SilverTrophy
-	writetext HallOfFame_LanceTrophyText
+	writetext .LanceTrophyText
 	waitbutton
 	setevent EVENT_DECO_SILVER_TROPHY
-	writetext HallOfFame_SilverTrophyText
+	writetext .SilverTrophyText
 	playsound SFX_ITEM
 	pause 60
 	waitbutton
-	writetext HallOfFame_SilverTrophySentText
+	writetext .SilverTrophySentText
 	waitbutton
 	jump .NoTrophy
 .GoldTrophy
-	writetext HallOfFame_LanceTrophyText
+	writetext .LanceTrophyText
 	waitbutton
 	setevent EVENT_DECO_GOLD_TROPHY
-	writetext HallOfFame_GoldTrophyText
+	writetext .GoldTrophyText
 	playsound SFX_ITEM
 	pause 60
 	waitbutton
-	writetext HallOfFame_GoldTrophySentText
+	writetext .GoldTrophySentText
 	waitbutton
 	jump .NoTrophy
 .NoTrophy
-	writetext HallOfFame_LanceMoreText
+	writetext .LanceText2
 	waitbutton
 	closetext
-	spriteface HALLOFFAME_LANCE, UP
-	applymovement PLAYER, HallOfFame_SlowlyApproachMachine
-	dotrigger $1
+	turnobject HALLOFFAME_LANCE, UP
+	applyonemovement PLAYER, slow_step_up
+	setscene $1
 	pause 15
 	writebyte 2 ; Machine is in the Hall of Fame
 	special HealMachineAnim
 	checkcode VAR_BADGES
-	if_less_than 16, .NotATrueRematch
+	ifless 16, .NotATrueRematch
 	setevent EVENT_BEAT_ELITE_FOUR_AGAIN
 .NotATrueRematch
 	setevent EVENT_BEAT_ELITE_FOUR
@@ -84,16 +81,18 @@ HallOfFameScript:
 	setevent EVENT_OLIVINE_PORT_SPRITES_BEFORE_HALL_OF_FAME
 	clearevent EVENT_OLIVINE_PORT_SPRITES_AFTER_HALL_OF_FAME
 	special RespawnOneOffs
-	domaptrigger SPROUT_TOWER_3F, $1
+	setmapscene SPROUT_TOWER_3F, $1
 	special HealParty
 	checkevent EVENT_GOT_SS_TICKET_FROM_ELM
 	iftrue .SkipPhoneCall
 	specialphonecall SPECIALCALL_SSTICKET
+	setevent EVENT_BATTLE_TOWER_OPEN
+	clearevent EVENT_BATTLE_TOWER_CLOSED
 .SkipPhoneCall:
 	halloffame
 	end
 
-HallOfFame_WalkUpWithLance:
+.WalkUpMovement:
 	step_up
 	step_up
 	step_up
@@ -106,11 +105,7 @@ HallOfFame_WalkUpWithLance:
 	turn_head_left
 	step_end
 
-HallOfFame_SlowlyApproachMachine:
-	slow_step_up
-	step_end
-
-HallOfFame_LanceText:
+.LanceText1:
 	text "Lance: It's been a"
 	line "long time since I"
 	cont "last came here."
@@ -126,7 +121,7 @@ HallOfFame_LanceText:
 	cont "inducted."
 	done
 
-HallOfFame_LanceTrophyText:
+.LanceTrophyText:
 	text "Take this as a"
 	line "memento of what"
 
@@ -134,7 +129,7 @@ HallOfFame_LanceTrophyText:
 	line "here today."
 	done
 
-HallOfFame_LanceMoreText:
+.LanceText2:
 	text "Here today, we"
 	line "witnessed the rise"
 
@@ -166,22 +161,22 @@ HallOfFame_LanceMoreText:
 	line "as Champions!"
 	done
 
-HallOfFame_GoldTrophyText:
+.GoldTrophyText:
 	text "<PLAYER> received"
 	line "Gold Trophy."
 	done
 
-HallOfFame_GoldTrophySentText:
+.GoldTrophySentText:
 	text "Gold Trophy"
 	line "was sent home."
 	done
 
-HallOfFame_SilverTrophyText:
+.SilverTrophyText:
 	text "<PLAYER> received"
 	line "Silver Trophy."
 	done
 
-HallOfFame_SilverTrophySentText:
+.SilverTrophySentText:
 	text "Silver Trophy"
 	line "was sent home."
 	done

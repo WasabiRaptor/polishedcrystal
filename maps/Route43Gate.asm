@@ -1,29 +1,25 @@
 Route43Gate_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script Route43GateTrigger0
 
-.MapTriggers: db 1
-	dw Route43GateTrigger0
+	db 0 ; callbacks
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, UnknownScript_0x19abca
+	db 4 ; warp events
+	warp_event  4,  0, ROUTE_43, 4
+	warp_event  5,  0, ROUTE_43, 5
+	warp_event  4,  7, ROUTE_43, 3
+	warp_event  5,  7, ROUTE_43, 3
 
-Route43Gate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $0, $4, 4, ROUTE_43
-	warp_def $0, $5, 5, ROUTE_43
-	warp_def $7, $4, 3, ROUTE_43
-	warp_def $7, $5, 3, ROUTE_43
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 3 ; object events
+	object_event  2,  4, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x19ad41, EVENT_ROUTE_43_GATE_ROCKETS
+	object_event  7,  4, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x19ad41, EVENT_ROUTE_43_GATE_ROCKETS
+	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, OfficerScript_0x19ac85, EVENT_LAKE_OF_RAGE_CIVILIANS
 
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_ROCKET, 4, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, RocketScript_0x19ac82, EVENT_ROUTE_43_GATE_ROCKETS
-	person_event SPRITE_ROCKET, 4, 7, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, RocketScript_0x19ac82, EVENT_ROUTE_43_GATE_ROCKETS
-	person_event SPRITE_OFFICER, 4, 0, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, OfficerScript_0x19ac85, EVENT_LAKE_OF_RAGE_CIVILIANS
-
-const_value set 2
+	const_def 1 ; object constants
 	const ROUTE43GATE_ROCKET1
 	const ROUTE43GATE_ROCKET2
 
@@ -31,36 +27,26 @@ Route43GateTrigger0:
 	priorityjump UnknownScript_0x19abda
 	end
 
-UnknownScript_0x19abca:
-	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue UnknownScript_0x19abd5
-	domaptrigger ROUTE_43, $0
-	return
-
-UnknownScript_0x19abd5:
-	domaptrigger ROUTE_43, $1
-	return
-
 UnknownScript_0x19abda:
 	playmusic MUSIC_ROCKET_ENCOUNTER
 	checkcode VAR_FACING
-	if_equal DOWN, UnknownScript_0x19abea
-	if_equal UP, UnknownScript_0x19ac38
-	dotrigger $1
+	ifequal DOWN, UnknownScript_0x19abea
+	ifequal UP, UnknownScript_0x19ac38
+	setscene $1
 	end
 
 UnknownScript_0x19abea:
-	applymovement PLAYER, MovementData_0x19aca2
+	applyonemovement PLAYER, step_down
 	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET2, 15
 	applymovement ROUTE43GATE_ROCKET2, MovementData_0x19acbb
-	spriteface ROUTE43GATE_ROCKET1, UP
+	turnobject ROUTE43GATE_ROCKET1, UP
 	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET1, 15
 	applymovement ROUTE43GATE_ROCKET1, MovementData_0x19aca4
 	opentext
 	writetext UnknownText_0x19acd2
 	buttonsound
 	checkmoney $0, 999
-	if_equal $0, UnknownScript_0x19ac12
+	ifequal $0, UnknownScript_0x19ac12
 	jump UnknownScript_0x19ac1d
 
 UnknownScript_0x19ac12:
@@ -78,21 +64,21 @@ UnknownScript_0x19ac28:
 	closetext
 	applymovement ROUTE43GATE_ROCKET1, MovementData_0x19acaa
 	applymovement ROUTE43GATE_ROCKET2, MovementData_0x19acc1
-	dotrigger $1
+	setscene $1
 	special RestartMapMusic
 	end
 
 UnknownScript_0x19ac38:
 	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET1, 15
 	applymovement ROUTE43GATE_ROCKET1, MovementData_0x19acaf
-	spriteface ROUTE43GATE_ROCKET2, DOWN
+	turnobject ROUTE43GATE_ROCKET2, DOWN
 	showemote EMOTE_SHOCK, ROUTE43GATE_ROCKET2, 15
 	applymovement ROUTE43GATE_ROCKET2, MovementData_0x19acc7
 	opentext
 	writetext UnknownText_0x19acd2
 	buttonsound
 	checkmoney $0, 999
-	if_equal $0, UnknownScript_0x19ac5c
+	ifequal $0, UnknownScript_0x19ac5c
 	jump UnknownScript_0x19ac67
 
 UnknownScript_0x19ac5c:
@@ -110,95 +96,81 @@ UnknownScript_0x19ac72:
 	closetext
 	applymovement ROUTE43GATE_ROCKET2, MovementData_0x19accd
 	applymovement ROUTE43GATE_ROCKET1, MovementData_0x19acb5
-	dotrigger $1
+	setscene $1
 	special RestartMapMusic
 	end
 
-RocketScript_0x19ac82:
-	jumptextfaceplayer UnknownText_0x19ad41
-
 OfficerScript_0x19ac85:
+	checkevent EVENT_GOT_TM36_SLUDGE_BOMB
+	iftrue_jumptextfaceplayer UnknownText_0x19ae2d
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_TM36_SLUDGE_BOMB
-	iftrue UnknownScript_0x19ac9c
 	writetext UnknownText_0x19ad9b
 	buttonsound
 	verbosegivetmhm TM_SLUDGE_BOMB
 	setevent EVENT_GOT_TM36_SLUDGE_BOMB
-	closetext
-	end
-
-UnknownScript_0x19ac9c:
-	writetext UnknownText_0x19ae2d
-	waitbutton
-	closetext
-	end
-
-MovementData_0x19aca2:
-	step_down
-	step_end
+	endtext
 
 MovementData_0x19aca4:
-	big_step_up
-	big_step_up
-	big_step_right
-	big_step_right
+	run_step_up
+	run_step_up
+	run_step_right
+	run_step_right
 	turn_head_up
 	step_end
 
 MovementData_0x19acaa:
-	big_step_left
-	big_step_left
-	big_step_down
-	big_step_down
+	run_step_left
+	run_step_left
+	run_step_down
+	run_step_down
 	step_end
 
 MovementData_0x19acaf:
-	big_step_down
-	big_step_down
-	big_step_right
-	big_step_right
+	run_step_down
+	run_step_down
+	run_step_right
+	run_step_right
 	turn_head_down
 	step_end
 
 MovementData_0x19acb5:
-	big_step_left
-	big_step_left
-	big_step_up
-	big_step_up
+	run_step_left
+	run_step_left
+	run_step_up
+	run_step_up
 	turn_head_down
 	step_end
 
 MovementData_0x19acbb:
-	big_step_up
-	big_step_up
-	big_step_left
-	big_step_left
+	run_step_up
+	run_step_up
+	run_step_left
+	run_step_left
 	turn_head_up
 	step_end
 
 MovementData_0x19acc1:
-	big_step_right
-	big_step_right
-	big_step_down
-	big_step_down
+	run_step_right
+	run_step_right
+	run_step_down
+	run_step_down
 	turn_head_up
 	step_end
 
 MovementData_0x19acc7:
-	big_step_down
-	big_step_down
-	big_step_left
-	big_step_left
+	run_step_down
+	run_step_down
+	run_step_left
+	run_step_left
 	turn_head_down
 	step_end
 
 MovementData_0x19accd:
-	big_step_right
-	big_step_right
-	big_step_up
-	big_step_up
+	run_step_right
+	run_step_right
+	run_step_up
+	run_step_up
 	step_end
 
 UnknownText_0x19acd2:

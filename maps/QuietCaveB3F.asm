@@ -1,28 +1,25 @@
 QuietCaveB3F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  8, 31, QUIET_CAVE_B2F, 5 ; hole
+	warp_event 33,  7, QUIET_CAVE_B2F, 6
+	warp_event 15,  9, QUIET_CAVE_B3F, 4
+	warp_event  5, 11, QUIET_CAVE_B3F, 3
 
-QuietCaveB3F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $1f, $8, 5, QUIET_CAVE_B2F ; hole
-	warp_def $7, $21, 6, QUIET_CAVE_B2F
-	warp_def $9, $f, 4, QUIET_CAVE_B3F
-	warp_def $b, $5, 3, QUIET_CAVE_B3F
+	db 2 ; bg events
+	bg_event 16, 20, SIGNPOST_ITEM + PP_UP, EVENT_QUIET_CAVE_B3F_HIDDEN_PP_UP
+	bg_event 12, 22, SIGNPOST_ITEM + MAX_REVIVE, EVENT_QUIET_CAVE_B3F_HIDDEN_MAX_REVIVE
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  5,  5, SPRITE_MARLEY, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, QuietCaveB3FMarleyScript, EVENT_QUIET_CAVE_MARLEY
+	tmhmball_event  7, 22, TM_FOCUS_BLAST, EVENT_QUIET_CAVE_B3F_TM_FOCUS_BLAST
 
-.Signposts: db 2
-	signpost 20, 16, SIGNPOST_ITEM, QuietCaveB3FHiddenPPUp
-	signpost 22, 12, SIGNPOST_ITEM, QuietCaveB3FHiddenMaxRevive
-
-.PersonEvents: db 2
-	person_event SPRITE_MARLEY, 5, 5, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, QuietCaveB3FMarleyScript, EVENT_QUIET_CAVE_MARLEY
-	person_event SPRITE_BALL_CUT_FRUIT, 22, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TMHMBALL, 0, TM_FOCUS_BLAST, EVENT_QUIET_CAVE_B3F_TM_FOCUS_BLAST
-
-const_value set 2
+	const_def 1 ; object constants
 	const QUIETCAVEB3F_MARLEY
 
 QuietCaveB3FMarleyScript:
@@ -32,7 +29,7 @@ QuietCaveB3FMarleyScript:
 	opentext
 	writetext .ChallengeText
 	yesorno
-	iffalse .No
+	iffalse_jumpopenedtext .NoText
 	writetext .YesText
 	waitbutton
 	closetext
@@ -47,7 +44,7 @@ QuietCaveB3FMarleyScript:
 	writetext .ItemText
 	buttonsound
 	verbosegiveitem POWER_ANKLET
-	iffalse .Done
+	iffalse_endtext
 	writetext .GoodbyeText
 	waitbutton
 	closetext
@@ -57,16 +54,6 @@ QuietCaveB3FMarleyScript:
 	pause 15
 	special Special_FadeInQuickly
 	clearevent EVENT_BATTLE_TOWER_MARLEY
-	end
-
-.Done:
-	closetext
-	end
-
-.No:
-	writetext .NoText
-	waitbutton
-	closetext
 	end
 
 .ChallengeText:
@@ -117,9 +104,3 @@ QuietCaveB3FMarleyScript:
 
 	para "Bye-bye…"
 	done
-
-QuietCaveB3FHiddenPPUp:
-	dwb EVENT_QUIET_CAVE_B3F_HIDDEN_PP_UP, PP_UP
-
-QuietCaveB3FHiddenMaxRevive
-	dwb EVENT_QUIET_CAVE_B3F_HIDDEN_MAX_REVIVE, MAX_REVIVE

@@ -2,8 +2,13 @@
 
 These changes have been made since the current 2.2.0 release. If you build the project as-is, it will include all of them.
 
+> What's the point of going through all the trouble of the debug process if you're going to go and fiddle with the game afterwards…?
+>
+> — Satoru Iwata, "[Iwata Asks – Pokémon HeartGold Version & SoulSilver Version](https://www.nintendo.co.uk/Iwata-Asks/Iwata-Asks-Pokemon-HeartGold-Version-SoulSilver-Version/Iwata-Asks-Pokemon-HeartGold-Version-SoulSilver-Version/1-Just-Making-The-Last-Train/1-Just-Making-The-Last-Train-225842.html)"
+
+
 * Add: Medicine and Berry pockets in the Bag.
-* Add: Store up to 20 phone numbers in Pokégear.
+* Add: Store up to 30 phone numbers in Pokégear.
 * Add: Always keep the option to Teleport away from Indigo Plateau.
 * Add: Portrait for the meteorite in Pewter Museum.
 * Add: Special sprite for Red's Pikachu.
@@ -27,8 +32,7 @@ These changes have been made since the current 2.2.0 release. If you build the p
    * Gengar has the ability Cursed Body. (Can also have Levitate in non-Faithful.)
    * Raikou, Entei, and Suicune have the hidden ability Inner Focus. (Faithful only.)
    * New item: Protect Pads (abbreviated "Protective Pads"). "Protect the holder from effects caused by making direct contact with the target."
-   * Paralysis halves Speed.
-   * Timer Ball catch rate multiplier is 1 + (turns passed * 3) / 10.
+   * Timer Ball catch rate multiplier is 1 + (turns passed × 3) / 10.
    * Nest Ball catch rate multiplier is (41 − enemy mon level) / 5.
 * Add: Flash is required to return Falkner to the Gym.
 * Add: Replace Spike Cannon with Icicle Spear.
@@ -44,6 +48,14 @@ These changes have been made since the current 2.2.0 release. If you build the p
 * Add: Replace Twister with Aqua Jet.
 * Add: Replace Sludge with Venoshock.
 * Add: Replace Egg Bomb with Skill Swap.
+* Add: Replace Mist with Amnesia.
+* Add: Replace Fury Cutter with Bug Bite.
+* Add: Replace Harden with Rock Blast.
+* Add: Replace Triple Kick with Drain Punch.
+* Add: Replace Lock-On with Power Whip.
+* Add: Replace Flail with Gyro Ball.
+* Add: Replace Moonlight and Morning Sun with Knock Off and "HealingLight".
+* Add: Replace Fury Attack and Fury Cutter with Trick and "Fury Strikes".
 * Add: Giga Impact.
 * Add: NPC trainers can have nicknamed Pokémon.
 * Add: NPC trainers can have custom EVs.
@@ -56,6 +68,10 @@ These changes have been made since the current 2.2.0 release. If you build the p
 * Add: Yanma is Bug/Dragon.
 * Add: Ampharos is Electric/Dragon.
 * Add: Noctowl is Ghost/Flying.
+* Add: Bellossom is Grass/Fairy.
+* Add: Celebi is Grass/Fairy.
+* Add: Rapidash is Fire/Fairy.
+* Add: Octillery is Water/Fire.
 * Add: Politoed can learn Energy Ball.
 * Add: Pidgeot can learn Focus Blast.
 * Add: Misdreavus can learn Disarm Voice.
@@ -64,11 +80,13 @@ These changes have been made since the current 2.2.0 release. If you build the p
 * Add: Give in-game trades good natures.
 * Add: TM prices from OR/AS.
 * Add: Show quantity in Bag in marts.
+* Add: Fancier Bag interface with color-coded pockets.
 * Add: Get a free Premier Ball with every 10 Balls bought.
 * Add: Show Pokémon portraits when using field moves (thanks to TPP:AC).
 * Add: Time boundaries from HG/SS (day lasts until 8 PM, not 6 PM).
 * Add: Use DVs to vary Pokémon colors like in Stadium.
 * Add: Update random Wonder Trade OT names.
+* Add: Teleport switches in trainer battles, like Let's Go.
 * Add: Rock Smash has 60 power (non-Faithful).
 * Add: Strength is Fighting-type (non-Faithful).
 * Add: Submission has 120 power (non-Faithful).
@@ -83,8 +101,8 @@ These changes have been made since the current 2.2.0 release. If you build the p
 * Add: Oak's lab looks different from Elm's lab.
 * Add: Grass-green for Faraway Island.
 * Add: TM prices from OR/AS.
-* Add: 15 Atk/10 Def DVs result in a Naive nature (+Spe −Sp.Def), not Hardy (neutral).
 * Add: Update random Wonder Trade OT names.
+* Add: Mr. Pokémon gives you a non-OT Ditto, not an Egg, for the Masuda breeding method.
 * Add: Use original Jynx sprite.
 * Add: Make overworld sprites darker at night.
 * Add: Goldenrod Dept. Store and Celadon Mansion roofs have a dark sky at night.
@@ -112,17 +130,28 @@ These changes have been made since the current 2.2.0 release. If you build the p
 * Add: Three battle styles: set, switch, and predict.
 * Add: Battle Scene → Battle Effects.
 * Add: Final Lyra battle.
+* Add: Kurt makes Balls right away.
+* Add: Bug-Catching Contest prizes from HGSS.
+* Add: Hidden Grottoes.
 * Add: Unown ! and ?.
 * Add: In-battle symbol to show that Nuzlocke mode prevents capture.
+* Add: More Grass-type Pokémon can learn Earth Power and Earthquake.
 * Add: Status icons in battle.
+* Add: You can Wonder Trade Eggs.
+* Add: Hidden Power guru finds your Pokémon's Hidden Power.
+* Add: Hidden Power can be Fairy-type in non-Faithful.
 * Add: Reset initial options by pressing Left+B at the title screen.
 * Add: Music resumes where it left off after a battle (from TPP).
 * Add: Use a proper menu for resurrecting Fossils.
+* Add: Press B in the battle menu to move the cursor to Run.
 * Add: Music player with piano roll by Sanqui.
 * Add: Instant text option.
 * Add: Imperial or metric units.
 * Add: 12-hour or 24-hour clock.
 * Add: Item icons in the Bag.
+* Add: Pokédex shows shiny palettes after getting the Shiny Charm.
+* Add: New Game+ preserves your money, Battle Points, and PC Pokémon.
+* Add: Phone call trainers ask automatically for your number.
 * Add: Replace Jigglypuff Poster with Marill Poster.
 * Add: Briefly beep to warn of low HP.
 * Add: Play B/W final Pokémon music for Gym Leaders and Elite 4.
@@ -136,12 +165,17 @@ These changes have been made since the current 2.2.0 release. If you build the p
 * Add: Vending machines have a 1/32 chance of giving an extra item.
 * Add: Cross whirlpools, don't remove them (like HGSS).
 * Add: Rename RageCandyBar to Cake of Rage.
+* Add: Rename Guard Spec. to Guard Stats.
+* Add: Rename Kay to Carrie (from Pokémon Stadium 2).
+* Add: Rename Slowbro to the Squatter Pokémon. <https://lparchive.org/Pokemon-Blue/code.html>
+
 * Fix: Lt. Surge's electric fence color does not override speech bubbles.
 * Fix: Zap Cannon has 120 power.
 * Fix: Pay Day pays 5 times the user's level, not 2.
 * Fix: Explosion and Self-Destruct do not halve Defense.
 * Fix: Quick Ball catch rate multiplier is 5 on the first turn.
 * Fix: Minimize raises evasion by two stages.
+* Fix: Gen 7 critical hit chances (1/24, 1/8, 1/2, 1/1)
 * Fix: Munchlax, Magnezone, and Tangrowth have their relatives' cries.
 * Fix: Game console names in room.
 * Fix: Yellow Forest gate clerk does not face you.
@@ -152,6 +186,7 @@ These changes have been made since the current 2.2.0 release. If you build the p
 * Fix: Fix some sprites.
 * Fix: Sandstorm and Hail double, not halve, Special Defense and Defense.
 * Fix: Enemy Psystrike uses player's Defense.
+* Fix: TMs do not refresh PP.
 * Fix: Sketch fails if user is transformed.
 * Fix: Wild encounter battle transitions correctly depend on relative levels.
 * Fix: Dig and Fly prevent capture.

@@ -1,32 +1,33 @@
 WiseTriosRoom_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_OBJECTS, UnknownScript_0x98574
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_OBJECTS, UnknownScript_0x98574
+	db 3 ; warp events
+	warp_event  7,  4, BELLCHIME_TRAIL, 1
+	warp_event  7,  5, BELLCHIME_TRAIL, 2
+	warp_event  1,  4, ECRUTEAK_HOUSE, 5
 
-WiseTriosRoom_MapEventHeader:
+	db 1 ; coord events
+	coord_event  7,  4, 0, UnknownScript_0x985a3
 
-.Warps: db 3
-	warp_def $4, $7, 1, BELLCHIME_TRAIL
-	warp_def $5, $7, 2, BELLCHIME_TRAIL
-	warp_def $4, $1, 5, ECRUTEAK_HOUSE
+	db 0 ; bg events
 
-.XYTriggers: db 1
-	xy_trigger 0, $4, $7, UnknownScript_0x985a3
+	db 6 ; object events
+	object_event  6,  2, SPRITE_ELDER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9862b, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_1
+	object_event  6,  7, SPRITE_ELDER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9868b, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_1
+	object_event  7,  5, SPRITE_ELDER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x987af, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_1
+	object_event  4,  2, SPRITE_ELDER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 2, TrainerElderGaku, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_2
+	object_event  4,  6, SPRITE_ELDER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 2, TrainerElderMasa, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_2
+	object_event  6,  4, SPRITE_ELDER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 2, TrainerElderKoji, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_2
 
-.Signposts: db 0
-
-.PersonEvents: db 6
-	person_event SPRITE_ELDER, 5, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ElderScript_0x985a0, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_1
-	person_event SPRITE_ELDER, 4, 6, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 2, TrainerElderKoji, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_2
-	person_event SPRITE_ELDER, 2, 6, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ElderScript_0x9859a, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_1
-	person_event SPRITE_ELDER, 2, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 2, TrainerElderGaku, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_2
-	person_event SPRITE_ELDER, 7, 6, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ElderScript_0x9859d, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_1
-	person_event SPRITE_ELDER, 6, 4, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 2, TrainerElderMasa, EVENT_WISE_TRIOS_ROOM_WISE_TRIO_2
-
-const_value set 2
+	const_def 1 ; object constants
+	const WISETRIOSROOM_ELDER1
+	const WISETRIOSROOM_ELDER2
 	const WISETRIOSROOM_ELDER3
+	const WISETRIOSROOM_ELDER4
+	const WISETRIOSROOM_ELDER5
 	const WISETRIOSROOM_ELDER6
 
 UnknownScript_0x98574:
@@ -50,57 +51,37 @@ UnknownScript_0x98593:
 	setevent EVENT_WISE_TRIOS_ROOM_WISE_TRIO_2
 	return
 
-ElderScript_0x9859a:
-	jumptextfaceplayer UnknownText_0x9862b
-
-ElderScript_0x9859d:
-	jumptextfaceplayer UnknownText_0x9868b
-
-ElderScript_0x985a0:
-	jumptextfaceplayer UnknownText_0x987af
-
 UnknownScript_0x985a3:
-	spriteface WISETRIOSROOM_ELDER3, UP
-	spriteface PLAYER, DOWN
+	turnobject WISETRIOSROOM_ELDER3, UP
+	turnobject PLAYER, DOWN
 	showemote EMOTE_SHOCK, WISETRIOSROOM_ELDER3, 20
 	follow PLAYER, WISETRIOSROOM_ELDER3
 	applymovement PLAYER, MovementData_0x98622
 	stopfollow
-	spriteface PLAYER, RIGHT
-	opentext
-	writetext UnknownText_0x98712
-	waitbutton
-	closetext
+	turnobject PLAYER, RIGHT
+	showtext UnknownText_0x98712
 	applymovement WISETRIOSROOM_ELDER3, MovementData_0x98625
-	spriteface WISETRIOSROOM_ELDER3, LEFT
+	turnobject WISETRIOSROOM_ELDER3, LEFT
 	end
 
 TrainerElderGaku:
-	trainer EVENT_BEAT_ELDER_GAKU, ELDER, GAKU, ElderGakuSeenText, ElderGakuBeatenText, 0, ElderGakuScript
+	trainer ELDER, GAKU, EVENT_BEAT_ELDER_GAKU, ElderGakuSeenText, ElderGakuBeatenText, 0, ElderGakuScript
 
 ElderGakuScript:
-	opentext
-	writetext UnknownText_0x98938
-	waitbutton
-	closetext
-	end
+	jumptext UnknownText_0x98938
 
 TrainerElderMasa:
-	trainer EVENT_BEAT_ELDER_MASA, ELDER, MASA, ElderMasaSeenText, ElderMasaBeatenText, 0, ElderMasaScript
+	trainer ELDER, MASA, EVENT_BEAT_ELDER_MASA, ElderMasaSeenText, ElderMasaBeatenText, 0, ElderMasaScript
 
 ElderMasaScript:
-	opentext
-	writetext UnknownText_0x98a35
-	waitbutton
-	closetext
-	end
+	jumptext UnknownText_0x98a35
 
 TrainerElderKoji:
-	trainer EVENT_BEAT_ELDER_KOJI, ELDER, KOJI, ElderKojiSeenText, ElderKojiBeatenText, 0, ElderKojiScript
+	trainer ELDER, KOJI, EVENT_BEAT_ELDER_KOJI, ElderKojiSeenText, ElderKojiBeatenText, 0, ElderKojiScript
 
 ElderKojiScript:
 	checkevent EVENT_KOJI_ALLOWS_YOU_PASSAGE_TO_TIN_TOWER
-	iftrue UnknownScript_0x9861b
+	iftrue_jumptext UnknownText_0x98db5
 	pause 10
 	showemote EMOTE_SHOCK, WISETRIOSROOM_ELDER6, 20
 	opentext
@@ -110,16 +91,9 @@ ElderKojiScript:
 	waitbutton
 	closetext
 	applymovement WISETRIOSROOM_ELDER6, MovementData_0x98628
-	spriteface WISETRIOSROOM_ELDER6, UP
+	turnobject WISETRIOSROOM_ELDER6, UP
 	setevent EVENT_KOJI_ALLOWS_YOU_PASSAGE_TO_TIN_TOWER
-	dotrigger $1
-	end
-
-UnknownScript_0x9861b:
-	opentext
-	writetext UnknownText_0x98db5
-	waitbutton
-	closetext
+	setscene $1
 	end
 
 MovementData_0x98622:
@@ -255,7 +229,11 @@ UnknownText_0x98a35:
 	line "were two nine-tier"
 	cont "towers here."
 
+if DEF(FAITHFUL)
+	para "The Brass Tower,"
+else
 	para "The Gong Tower,"
+endc
 	line "which was said to"
 
 	para "waken #mon, and"
@@ -277,7 +255,11 @@ UnknownText_0x98a35:
 	line "was said to make"
 
 	para "its roost atop the"
+if DEF(FAITHFUL)
+	line "Brass Tower."
+else
 	line "Gong Tower."
+endc
 
 	para "However…"
 
@@ -322,7 +304,7 @@ UnknownText_0x98cac:
 	text "I see…"
 
 	para "We, the Wise Trio,"
-	line "have been given "
+	line "have been given"
 
 	para "the responsibility"
 	line "of protecting the"

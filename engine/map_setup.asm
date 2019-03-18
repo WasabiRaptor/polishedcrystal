@@ -1,4 +1,3 @@
-
 RunMapSetupScript:: ; 15363
 	ld a, [hMapEntryMethod]
 	and $f
@@ -14,182 +13,7 @@ RunMapSetupScript:: ; 15363
 	jp ReadMapSetupScript
 ; 15377
 
-MapSetupScripts: ; 15377
-	dw MapSetupScript_Warp
-	dw MapSetupScript_Continue
-	dw MapSetupScript_ReloadMap
-	dw MapSetupScript_Teleport
-	dw MapSetupScript_Door
-	dw MapSetupScript_Fall
-	dw MapSetupScript_Connection
-	dw MapSetupScript_LinkReturn
-	dw MapSetupScript_Train
-	dw MapSetupScript_Submenu
-	dw MapSetupScript_BadWarp
-	dw MapSetupScript_Fly
-; 1538f
-
-MapSetupScript_Teleport: ; 1538f
-	db map_prolong_sprites
-MapSetupScript_Fly: ; 15390
-	db map_fade_out_palettes
-	db map_keep_roam
-MapSetupScript_Warp: ; 15392
-	db map_lcd_off
-	db map_sound_off
-	db map_load_spawn
-	db map_attributes
-	db map_change_callback
-	db map_spawn_coord
-	db map_player_coord
-	db map_anchor_screen
-	db map_load_blocks
-	db map_buffer_screen
-	db map_load_graphics
-	db map_time_of_day
-	db map_load_objects
-	db map_lcd_on
-	db map_palettes
-	db map_face_down
-	db map_sprites
-	db map_bike_music
-	db map_max_volume
-	db map_fade_in_palettes
-	db map_animations_on
-	db map_wildmons
-	db map_end
-
-MapSetupScript_BadWarp: ; 153a9
-	db map_load_spawn
-	db map_attributes
-	db map_change_callback
-	db map_spawn_coord
-	db map_player_coord
-	db map_anchor_screen
-	db map_load_blocks
-	db map_buffer_screen
-	db map_lcd_off
-	db map_load_graphics
-	db map_time_of_day
-	db map_fade_out_music
-	db map_lcd_on
-	db map_load_objects
-	db map_palettes
-	db map_face_down
-	db map_sprites
-	db map_fade_music
-	db map_fade_in_palettes
-	db map_animations_on
-	db map_wildmons
-	db map_end
-
-MapSetupScript_Connection: ; 153bf
-	db map_animations_off
-	db map_load_connection
-	db map_attributes
-	db map_change_callback
-	db map_player_coord
-	db map_load_blocks
-	db map_load_tileset_header
-	db map_save_screen
-	db map_load_objects
-	db map_fade_music
-	db map_palettes
-	db map_stop_script
-	db map_keep_palettes
-	db map_wildmons
-	db map_update_roam
-	db map_animations_on
-	db map_end
-
-MapSetupScript_Fall: ; 153d0
-	db map_prolong_sprites
-MapSetupScript_Door: ; 153d1
-	db map_fade_out_palettes
-MapSetupScript_Train: ; 153d2
-	db map_load_warp
-	db map_attributes
-	db map_warp_face
-	db map_change_callback
-	db map_player_coord
-	db map_load_blocks
-	db map_buffer_screen
-	db map_lcd_off
-	db map_load_graphics
-	db map_time_of_day
-	db map_fade_out_music
-	db map_lcd_on
-	db map_load_objects
-	db map_palettes
-	db map_sprites
-	db map_fade_music
-	db map_fade_in_palettes
-	db map_animations_on
-	db map_wildmons
-	db map_update_roam
-	db map_end
-
-MapSetupScript_ReloadMap: ; 153e7
-	db map_fade
-	db map_clear_bg_palettes
-	db map_lcd_off
-	db map_sound_off
-	db map_load_blocks
-	db map_connection_blocks
-	db map_load_graphics
-	db map_time_of_day
-	db map_lcd_on
-	db map_palettes
-	db map_sprites
-	db map_music_force
-	db map_fade_in_palettes
-	db map_animations_on
-	db map_wildmons
-	db map_end
-
-MapSetupScript_LinkReturn: ; 153f7
-	db map_fade
-	db map_lcd_off
-	db map_sound_off
-	db map_change_callback
-	db map_load_blocks
-	db map_buffer_screen
-	db map_load_graphics
-	db map_time_of_day
-	db map_lcd_on
-	db map_palettes
-	db map_sprites
-	db map_bike_music
-	db map_fade_in_palettes
-	db map_animations_on
-	db map_wildmons
-	db map_text_scroll_off
-	db map_end
-
-MapSetupScript_Continue: ; 15408
-	db map_lcd_off
-	db map_sound_off
-	db map_attributes_2
-	db map_anchor_screen
-	db map_start_callback
-	db map_load_blocks
-	db map_connection_blocks
-	db map_buffer_screen
-	db map_load_graphics
-	db map_time_of_day
-	db map_lcd_on
-	db map_palettes
-	db map_sprites
-	db map_bike_music
-	db map_fade_in_palettes
-	db map_animations_on
-	db map_wildmons
-	db map_end
-
-MapSetupScript_Submenu: ; 1541a
-	db map_load_blocks
-	db map_connection_blocks
-	db map_end
+INCLUDE "data/maps/setup_scripts.asm"
 
 
 ReadMapSetupScript: ; 1541d
@@ -203,9 +27,9 @@ ReadMapSetupScript: ; 1541d
 	ld c, a
 	ld b, 0
 	ld hl, MapSetupCommands
-rept 3
 	add hl, bc
-endr
+	add hl, bc
+	add hl, bc
 
 	; bank
 	ld b, [hl]
@@ -281,16 +105,9 @@ MapSetupCommands: ; 15440
 	dba ActivateMapAnims ; 29
 	dba SuspendMapAnims ; 2a
 	dba RetainOldPalettes ; 2b
-	dba DontScrollText ; 2c
-	dba ReturnFromMapSetupScript ; 2d
+	dba ReturnFromMapSetupScript ; 2c
+	dba DecompressMetatiles ; 2d
 ; 154ca
-
-
-DontScrollText: ; 154ca
-	xor a
-	ld [wDisableTextAcceleration], a
-	ret
-; 154cf
 
 ActivateMapAnims: ; 154cf
 	ld a, $1
@@ -307,9 +124,79 @@ SuspendMapAnims: ; 154d3
 LoadObjectsRunCallback_02: ; 154d7
 	ld a, MAPCALLBACK_OBJECTS
 	call RunMapCallback
-	farcall LoadObjectMasks
+	call LoadObjectMasks
 	farjp InitializeVisibleSprites
 ; 154ea (5:54ea)
+
+LoadObjectMasks: ; 2454f
+	ld hl, wObjectMasks
+	xor a
+	ld bc, NUM_OBJECTS
+	call ByteFill
+	ld bc, wMapObjects
+	ld de, wObjectMasks
+	xor a
+.loop
+	push af
+	push bc
+	push de
+	call GetObjectTimeMask
+	jr c, .next
+	call CheckObjectFlag
+.next
+	pop de
+	ld [de], a
+	inc de
+	pop bc
+	ld hl, OBJECT_LENGTH
+	add hl, bc
+	ld b, h
+	ld c, l
+	pop af
+	inc a
+	cp NUM_OBJECTS
+	jr nz, .loop
+	ret
+
+CheckObjectFlag: ; 2457d (9:457d)
+	ld hl, MAPOBJECT_SPRITE
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .masked
+	ld hl, MAPOBJECT_EVENT_FLAG
+	add hl, bc
+	ld a, [hli]
+	ld e, a
+	ld a, [hl]
+	ld d, a
+	cp -1
+	jr nz, .check
+	ld a, e
+	cp -1
+	jr z, .unmasked
+	jr .masked
+.check
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
+	and a
+	jr nz, .masked
+.unmasked
+	xor a
+	ret
+
+.masked
+	ld a, -1
+	scf
+	ret
+
+GetObjectTimeMask: ; 245a7 (9:45a7)
+	call CheckObjectTime
+	ld a, -1
+	ret c
+	xor a
+	ret
 
 DelayClearingOldSprites: ; 154eb
 	ld hl, wPlayerSpriteSetupFlags
@@ -336,16 +223,16 @@ CheckReplaceKrisSprite: ; 154f7
 
 .CheckBiking: ; 1550c (5:550c)
 	and a
-	ld hl, BikeFlags
-	bit 1, [hl]
+	ld hl, wOWState
+	bit OWSTATE_BIKING_FORCED, [hl]
 	ret z
 	ld a, PLAYER_BIKE
-	ld [PlayerState], a
+	ld [wPlayerState], a
 	scf
 	ret
 
 .CheckSurfing2: ; 1551a (5:551a)
-	ld a, [PlayerState]
+	ld a, [wPlayerState]
 	and a ; cp PLAYER_NORMAL
 	jr z, .nope
 	cp PLAYER_SLIP
@@ -357,18 +244,16 @@ CheckReplaceKrisSprite: ; 154f7
 	call GetMapPermission
 	cp INDOOR
 	jr z, .checkbiking
-	cp PERM_5
-	jr z, .checkbiking
 	cp DUNGEON
 	jr z, .checkbiking
 	jr .nope
 .checkbiking
-	ld a, [PlayerState]
+	ld a, [wPlayerState]
 	cp PLAYER_BIKE
 	jr nz, .nope
 .surfing
 	ld a, PLAYER_NORMAL
-	ld [PlayerState], a
+	ld [wPlayerState], a
 	scf
 	ret
 
@@ -379,13 +264,13 @@ CheckReplaceKrisSprite: ; 154f7
 .CheckSurfing: ; 1554e (5:554e)
 	call CheckOnWater
 	jr nz, .ret_nc
-	ld a, [PlayerState]
+	ld a, [wPlayerState]
 	cp PLAYER_SURF
 	jr z, ._surfing
 	cp PLAYER_SURF_PIKA
 	jr z, ._surfing
 	ld a, PLAYER_SURF
-	ld [PlayerState], a
+	ld [wPlayerState], a
 ._surfing
 	scf
 	ret
@@ -402,23 +287,42 @@ FadeOldMapMusic: ; 15567
 RetainOldPalettes: ; 1556d
 	farjp _UpdateTimePals
 
-RotatePalettesRightMapAndMusic: ; 15574
+RotatePalettesRightMapAndMusic:
 	ld e, 0
-	ld a, [MusicFadeIDLo]
+	ld a, [wMusicFadeIDLo]
 	ld d, 0
-	ld a, [MusicFadeIDHi]
+	ld a, [wMusicFadeIDHi]
 	ld a, $4
-	ld [MusicFade], a
-	jp RotateThreePalettesRight
-; 15587
+	ld [wMusicFade], a
+	farjp FadeOutPalettes
 
 ForceMapMusic: ; 15587
-	ld a, [PlayerState]
+	ld a, [wPlayerState]
 	cp PLAYER_BIKE
 	jr nz, .notbiking
 	call VolumeOff
 	ld a, $88
-	ld [MusicFade], a
+	ld [wMusicFade], a
 .notbiking
 	jp TryRestartMapMusic
-; 1559a
+
+DecompressMetatiles:
+	ld hl, wTilesetBlocksBank
+	ld c, BANK(wDecompressedMetatiles)
+	call .Decompress
+
+	ld hl, wTilesetAttributesBank
+	ld c, BANK(wDecompressedAttributes)
+
+.Decompress:
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, wDecompressedMetatiles
+	ld a, c
+	call StackCallInWRAMBankA
+
+.Function
+	jp FarDecompressAtB_D000

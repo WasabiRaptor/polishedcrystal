@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 """
 Find unused tiles and blocks.
@@ -11,23 +12,26 @@ import sys
 from collections import defaultdict
 
 code_directory         = './'
-tileset_filename       = 'constants/tilemap_constants.asm'
-map_headers_filename   = 'maps/map_headers.asm'
-map_headers_2_filename = 'maps/second_map_headers.asm'
-block_data_filename    = 'maps/block_data.asm'
-block_filename_fmt     = 'maps/%s.blk'
-metatile_filename_fmt  = 'tilesets/%s_metatiles.bin'
+tileset_filename       = 'constants/tileset_constants.asm'
+map_headers_filename   = 'data/maps/maps.asm'
+map_headers_2_filename = 'data/maps/attributes.asm'
+block_data_filename    = 'data/maps/blocks.asm'
+block_filename_fmt     = 'maps/%s.ablk'
+metatile_filename_fmt  = 'data/tilesets/%s_metatiles.bin'
+attribute_filename_fmt = 'data/tilesets/%s_attributes.bin'
 
-tileset_names = ['johto1', 'johto2', 'kanto1', 'johto3', 'house1', 'house2',
-                 'pokecenter', 'gate', 'port', 'lab', 'facility', 'mart',
-                 'mansion', 'game_corner', 'gym1', 'house3', 'gym2', 'gym3',
-                 'lighthouse', 'kanto2', 'pokecom', 'battle_tower', 'tower',
-                 'cave', 'park', 'ruins', 'radio_tower', 'warehouse',
-                 'ice_path', 'forest', 'safari', 'alph', 'pokemon_mansion',
-                 'faraway', 'tunnel', 'decor', 'shamouti', 'museum', 'hotel',
-                 'quiet_cave', 'valencia']
+tileset_names = [
+	'johto_traditional', 'johto_modern', 'battle_tower_outside', 'johto_overcast',
+	'kanto', 'indigo_plateau', 'shamouti_island', 'valencia_island', 'faraway_island',
+	'johto_house', 'kanto_house', 'traditional_house', 'pokecenter', 'pokecom_center',
+	'mart', 'gate', 'gym', 'magnet_train', 'champions_room', 'port', 'lab',
+	'facility', 'celadon_mansion', 'game_corner', 'home_decor_store', 'museum',
+	'hotel', 'sprout_tower', 'battle_tower_inside', 'radio_tower', 'lighthouse',
+	'underground', 'cave', 'quiet_cave', 'ice_path', 'tunnel', 'forest', 'park',
+	'safari_zone', 'ruins_of_alph', 'alph_word_room', 'pokemon_mansion'
+]
 
-# {'TILESET_JOHTO_1': 'johto1', ...}
+# {'TILESET_PC_JOHTO_1': 'johto1', ...}
 tileset_ids = {}
 # {'NewBarkTown': 'johto1', ...}
 map_tilesets = {}
@@ -89,22 +93,22 @@ def read_tileset_ids():
 	with open(code_directory + tileset_filename, 'r') as f:
 		for line in f:
 			line = line.strip()
-			if line.startswith('const_value '):
+			if line.startswith('const PAL_BG_'):
+				break
+			elif line.startswith('const_def '):
 				parts = line.split()
-				tileset_id = int(parts[2])
+				tileset_id = int(parts[1])
 			elif line.startswith('const '):
 				parts = line.split()
 				tileset_name = parts[1]
 				tileset_ids[tileset_name] = tileset_names[tileset_id - 1]
 				tileset_id += 1
-			elif line.startswith('const_def'):
-				break
 
 def read_map_tilesets():
 	with open(code_directory + map_headers_filename, 'r') as f:
 		for line in f:
 			line = line.strip()
-			if line.startswith('map_header '):
+			if line.startswith('map '):
 				parts = line.split()
 				map_name = parts[1].rstrip(',')
 				tileset_name = parts[2].rstrip(',')
@@ -119,8 +123,8 @@ def read_block_filenames():
 			line = line.strip()
 			if line.endswith('_BlockData:'):
 				map_names.append(line[:-11])
-			elif line.startswith('INCBIN "maps/') and line.endswith('.blk"'):
-				block_data_name = line[13:-5]
+			elif line.startswith('INCBIN "maps/') and line.endswith('.ablk.lz"'):
+				block_data_name = line[13:-9]
 				for map_name in map_names:
 					if map_name != block_data_name:
 						map_block_data_exceptions[map_name] = block_data_name
@@ -137,7 +141,7 @@ def read_used_block_ids_2():
 	with open(code_directory + map_headers_2_filename, 'r') as f:
 		for line in f:
 			line = line.strip()
-			if line.startswith('map_header_2 '):
+			if line.startswith('map_attributes '):
 				parts = line.split()
 				map_name = parts[1].rstrip(',')
 				used_block_id = parts[3].rstrip(',')
@@ -150,14 +154,17 @@ def read_used_block_ids_2():
 
 def read_used_tile_ids():
 	for tileset_id in tileset_ids.values():
-		with open(code_directory + metatile_filename_fmt % tileset_id, 'rb') as f:
+		tileset_used_tile_ids[tileset_id] = set()
+		with open(code_directory + metatile_filename_fmt % tileset_id, 'rb') as f, open(code_directory + attribute_filename_fmt % tileset_id, 'rb') as g:
 			block_id = 0
 			while True:
 				used_tile_ids = [ord(b) for b in f.read(16)]
-				if not used_tile_ids:
+				used_tile_attrs = [ord(b) for b in g.read(16)]
+				if not used_tile_ids or not used_tile_attrs:
 					break
+				used_tile_indexes = [b + (0x80 if c & 0b1000 else 0) for (b, c) in zip(used_tile_ids, used_tile_attrs)]
 				if block_id in tileset_used_block_ids[tileset_id]:
-					tileset_used_tile_ids[tileset_id].update(used_tile_ids)
+					tileset_used_tile_ids[tileset_id].update(used_tile_indexes)
 				block_id += 1
 
 def find_unused_block_ids():
@@ -170,7 +177,7 @@ def find_unused_block_ids():
 
 def find_unused_tile_ids():
 	for tileset_id, used_tile_ids in tileset_used_tile_ids.items():
-		domain = set(range(0x00, 0x70)) | set(range(0x80, 0x100))
+		domain = set(range(0x100)) - {0x7F}
 		unused_tile_ids = build_unused_ids(used_tile_ids, domain)
 		tileset_unused_tile_ids[tileset_id].update(unused_tile_ids)
 
@@ -185,7 +192,7 @@ def main():
 	read_used_block_ids()
 	print('Reading used block IDs from %s...' % map_headers_2_filename, file=sys.stderr)
 	read_used_block_ids_2()
-	print('Reading used tile IDs from each %s...' % (metatile_filename_fmt % '##'), file=sys.stderr)
+	print('Reading used tile IDs from each %s and %s...' % (metatile_filename_fmt % '##', attribute_filename_fmt % '##'), file=sys.stderr)
 	read_used_tile_ids()
 	print('Finding unused block IDs...', file=sys.stderr)
 	find_unused_block_ids()

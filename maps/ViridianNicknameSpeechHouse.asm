@@ -1,46 +1,21 @@
 ViridianNicknameSpeechHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, VIRIDIAN_CITY, 2
+	warp_event  3,  7, VIRIDIAN_CITY, 2
 
-ViridianNicknameSpeechHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 2, VIRIDIAN_CITY
-	warp_def $7, $3, 2, VIRIDIAN_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 4
-	person_event SPRITE_POKEFAN_M, 4, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x9ae3a, -1
-	person_event SPRITE_TWIN, 4, 5, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, TwinScript_0x9ae3d, -1
-	person_event SPRITE_HOOTHOOT, 2, 5, SPRITEMOVEDATA_POKEMON, 0, 2, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, Hooty, -1
-	person_event SPRITE_RATTATA, 3, 6, SPRITEMOVEDATA_POKEMON, 0, 2, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, Rattey, -1
-
-PokefanMScript_0x9ae3a:
-	jumptextfaceplayer UnknownText_0x9ae54
-
-TwinScript_0x9ae3d:
-	jumptextfaceplayer UnknownText_0x9aecb
-
-Hooty:
-	opentext
-	writetext HootyText
-	cry HOOTHOOT
-	waitbutton
-	closetext
-	end
-
-Rattey:
-	opentext
-	writetext RatteyText
-	cry RATTATA
-	waitbutton
-	closetext
-	end
+	db 4 ; object events
+	object_event  2,  4, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9ae54, -1
+	object_event  5,  4, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9aecb, -1
+	object_event  5,  2, SPRITE_HOOTHOOT, SPRITEMOVEDATA_POKEMON, 0, 2, -1, -1, PAL_NPC_BROWN, PERSONTYPE_POKEMON, HOOTHOOT, HootyText, -1
+	object_event  6,  3, SPRITE_RATTATA, SPRITEMOVEDATA_POKEMON, 0, 2, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_POKEMON, RATTATA, RatteyText, -1
 
 UnknownText_0x9ae54:
 	text "Do you put a lot"

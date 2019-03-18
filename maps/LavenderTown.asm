@@ -1,93 +1,162 @@
 LavenderTown_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, LavenderTownFlyPoint
+	db 7 ; warp events
+	warp_event  5,  7, LAVENDER_POKECENTER_1F, 1
+	warp_event  5, 11, MR_FUJIS_HOUSE, 1
+	warp_event  3, 15, LAVENDER_TOWN_SPEECH_HOUSE, 1
+	warp_event  7, 15, LAVENDER_NAME_RATER, 1
+	warp_event  1,  7, LAVENDER_MART, 2
+	warp_event 13, 13, SOUL_HOUSE, 1
+	warp_event 14,  7, LAV_RADIO_TOWER_1F, 1
 
-LavenderTown_MapEventHeader:
+	db 0 ; coord events
+; TODO:
+;	coord_event  8,  5, 0, LavenderTownExpositionTrigger1
+;	coord_event  9,  5, 0, LavenderTownExpositionTrigger2
+;	coord_event 10,  5, 0, LavenderTownExpositionTrigger3
 
-.Warps: db 7
-	warp_def $7, $5, 1, LAVENDER_POKECENTER_1F
-	warp_def $b, $5, 1, MR_FUJIS_HOUSE
-	warp_def $f, $3, 1, LAVENDER_TOWN_SPEECH_HOUSE
-	warp_def $f, $7, 1, LAVENDER_NAME_RATER
-	warp_def $7, $1, 2, LAVENDER_MART
-	warp_def $d, $d, 1, SOUL_HOUSE
-	warp_def $7, $e, 1, LAV_RADIO_TOWER_1F
+	db 4 ; bg events
+	bg_event 11,  5, SIGNPOST_JUMPTEXT, LavenderTownSignText
+	bg_event 15,  9, SIGNPOST_JUMPTEXT, KantoRadioStationSignText
+	bg_event  3, 11, SIGNPOST_JUMPTEXT, VolunteerPokemonHouseSignText
+	bg_event 15, 15, SIGNPOST_JUMPTEXT, SoulHouseSignText
 
-.XYTriggers: db 0
+	db 8 ; object events
+	object_event 14,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAVENDER_TOWN_FLEEING_YOUNGSTER
+	object_event 12,  9, SPRITE_HIKER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderTownPokefanMText, -1
+	object_event  2, 17, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderTownTeacherText, -1
+	object_event 14, 14, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderTownGrampsText, -1
+	object_event  6, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderTownYoungsterText, -1
+	object_event  8, 18, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderTownSuperNerdText, EVENT_LAVENDER_TOWN_FLEEING_YOUNGSTER ; TODO: EVENT_EXORCISED_LAV_RADIO_TOWER
+	object_event  9, 19, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderTownCooltrainerFText, EVENT_LAVENDER_TOWN_FLEEING_YOUNGSTER ; TODO: EVENT_EXORCISED_LAV_RADIO_TOWER
+	object_event 11, 17, SPRITE_ROCKER, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderTownRockerText, EVENT_LAVENDER_TOWN_FLEEING_YOUNGSTER ; TODO: EVENT_EXORCISED_LAV_RADIO_TOWER
 
-.Signposts: db 4
-	signpost 5, 11, SIGNPOST_READ, LavenderTownSign
-	signpost 9, 15, SIGNPOST_READ, KantoRadioStationSign
-	signpost 11, 3, SIGNPOST_READ, VolunteerPokemonHouseSign
-	signpost 15, 15, SIGNPOST_READ, SoulHouseSign
+	const_def 1 ; object constants
+	const LAVENDERTOWN_YOUNGSTER1
 
-.PersonEvents: db 4
-	person_event SPRITE_POKEFAN_M, 9, 12, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x1ad6e4, -1
-	person_event SPRITE_TEACHER, 17, 2, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, TeacherScript_0x1ad6e7, -1
-	person_event SPRITE_GRAMPS, 14, 14, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrampsScript_0x1ad6ea, -1
-	person_event SPRITE_YOUNGSTER, 13, 6, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 1, YoungsterScript_0x1ad6ed, -1
+LavenderTownExpositionTrigger1:
+	moveobject LAVENDERTOWN_YOUNGSTER1, 14, 8
+	showemote EMOTE_SHOCK, PLAYER, 15
+	appear LAVENDERTOWN_YOUNGSTER1
+	applymovement LAVENDERTOWN_YOUNGSTER1, .ApproachPlayerMovement
+	scall LavenderTownSharedExpositionScript
+	applymovement LAVENDERTOWN_YOUNGSTER1, .GoAroundPlayerMovement
+	jump LavenderTownFinishExpositionScript
 
-LavenderTownFlyPoint:
+.ApproachPlayerMovement:
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_up
+	big_step_up
+	step_end
+
+.GoAroundPlayerMovement:
+	step_right
+	big_step_up
+	step_end
+
+LavenderTownExpositionTrigger2:
+	showemote EMOTE_SHOCK, PLAYER, 15
+	playsound SFX_ENTER_DOOR
+	appear LAVENDERTOWN_YOUNGSTER1
+	waitsfx
+	applymovement LAVENDERTOWN_YOUNGSTER1, .ApproachPlayerMovement
+	scall LavenderTownSharedExpositionScript
+	applymovement LAVENDERTOWN_YOUNGSTER1, .GoAroundPlayerMovement
+	jump LavenderTownFinishExpositionScript
+
+.ApproachPlayerMovement:
+	step_down
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_up
+	big_step_up
+	step_end
+
+.GoAroundPlayerMovement:
+	step_right
+	big_step_up
+	step_end
+
+LavenderTownExpositionTrigger3:
+	showemote EMOTE_SHOCK, PLAYER, 15
+	playsound SFX_ENTER_DOOR
+	appear LAVENDERTOWN_YOUNGSTER1
+	waitsfx
+	applymovement LAVENDERTOWN_YOUNGSTER1, .ApproachPlayerMovement
+	scall LavenderTownSharedExpositionScript
+	applymovement LAVENDERTOWN_YOUNGSTER1, .GoAroundPlayerMovement
+	jump LavenderTownFinishExpositionScript
+
+.ApproachPlayerMovement:
+	step_down
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_left
+	big_step_up
+	big_step_up
+	step_end
+
+.GoAroundPlayerMovement:
+	step_left
+	big_step_up
+	step_end
+
+LavenderTownSharedExpositionScript:
+	playsound SFX_TACKLE
+	applymovement LAVENDERTOWN_YOUNGSTER1, .BumpMovement
+	thistext
+
+	text "Aah! G-g-ghost!"
+
+	para "The Radio Tower"
+	line "is teeming with"
+	cont "monsters!"
+
+	para "Run for the"
+	line "hills!"
+	done
+
+.BumpMovement:
+	fix_facing
+	set_sliding
+	jump_step_down
+	remove_sliding
+	remove_fixed_facing
+	step_sleep_8
+	step_sleep_8
+	step_up
+	step_up
+	step_end
+
+LavenderTownFinishExpositionScript:
+	turnobject PLAYER, UP
+	applymovement LAVENDERTOWN_YOUNGSTER1, .LeaveMovement
+	disappear LAVENDERTOWN_YOUNGSTER1
+	setevent EVENT_ROUTE_8_PROTESTORS
+	clearevent EVENT_ROUTE_8_KANTO_POKEMON_FEDERATION
 	setflag ENGINE_FLYPOINT_LAVENDER
-	return
+	setscene $1
+	end
 
-PokefanMScript_0x1ad6e4:
-	jumptextfaceplayer UnknownText_0x1ad702
-
-TeacherScript_0x1ad6e7:
-	jumptextfaceplayer UnknownText_0x1ad73a
-
-GrampsScript_0x1ad6ea:
-	jumptextfaceplayer UnknownText_0x1ad75c
-
-YoungsterScript_0x1ad6ed:
-	jumptextfaceplayer UnknownText_0x1ad7ac
-
-LavenderTownSign:
-	jumptext LavenderTownSignText
-
-KantoRadioStationSign:
-	jumptext KantoRadioStationSignText
-
-VolunteerPokemonHouseSign:
-	jumptext VolunteerPokemonHouseSignText
-
-SoulHouseSign:
-	jumptext SoulHouseSignText
-
-UnknownText_0x1ad702:
-	text "That's quite some"
-	line "building, eh?"
-
-	para "It's Kanto's Radio"
-	line "Tower."
-	done
-
-UnknownText_0x1ad73a:
-	text "Kanto has many"
-	line "good radio shows."
-	done
-
-UnknownText_0x1ad75c:
-	text "People come from"
-	line "all over to pay"
-
-	para "their respects to"
-	line "the departed souls"
-	cont "of #mon."
-	done
-
-UnknownText_0x1ad7ac:
-	text "You need a #"
-	line "Flute to wake"
-	cont "sleeping #mon."
-
-	para "Every trainer has"
-	line "to know that!"
-	done
+.LeaveMovement:
+	big_step_up
+	big_step_up
+	big_step_up
+	big_step_up
+	big_step_up
+	step_end
 
 LavenderTownSignText:
 	text "Lavender Town"
@@ -111,8 +180,67 @@ VolunteerPokemonHouseSignText:
 	done
 
 SoulHouseSignText:
-	text "House of Memories"
+	text "House of Souls"
 
 	para "May the Souls of"
 	line "#mon Rest Easy"
+	done
+
+LavenderTownPokefanMText:
+	text "That's quite some"
+	line "building, eh?"
+
+	para "It's Kanto's Radio"
+	line "Tower."
+	done
+
+LavenderTownTeacherText:
+	text "Kanto has many"
+	line "good radio shows."
+	done
+
+LavenderTownGrampsText:
+	text "People come from"
+	line "all over to pay"
+
+	para "their respects to"
+	line "the departed souls"
+	cont "of #mon."
+	done
+
+LavenderTownYoungsterText:
+	text "You need a #"
+	line "Flute to wake"
+	cont "sleeping #mon."
+
+	para "Every trainer has"
+	line "to know that!"
+	done
+
+LavenderTownSuperNerdText:
+	text "Go back inside the"
+	line "Radio Tower?"
+
+	para "You must be"
+	line "crazy!"
+	done
+
+LavenderTownCooltrainerFText:
+	text "The Tower's"
+	line "haunted, I just"
+	cont "know it!"
+
+	para "I'm so freaked"
+	line "out!"
+	done
+
+LavenderTownRockerText:
+	text "I thought a job at"
+	line "the Radio Tower"
+
+	para "would be my big"
+	line "break, but I'm not"
+
+	para "going back there"
+	line "until it's safe."
 	done

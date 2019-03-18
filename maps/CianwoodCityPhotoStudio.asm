@@ -1,35 +1,32 @@
 CianwoodCityPhotoStudio_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, CIANWOOD_CITY, 5
+	warp_event  3,  7, CIANWOOD_CITY, 5
 
-CianwoodCityPhotoStudio_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 5, CIANWOOD_CITY
-	warp_def $7, $3, 5, CIANWOOD_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_FISHING_GURU, 3, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, FishingGuruScript_0x9e0e0, -1
+	db 1 ; object events
+	object_event  2,  3, SPRITE_FISHING_GURU, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, FishingGuruScript_0x9e0e0, -1
 
 FishingGuruScript_0x9e0e0:
 	faceplayer
 	opentext
 	checkflag ENGINE_DAILY_PHOTOGRAPH
-	iftrue .AlreadyTookPhoto
+	iftrue_jumpopenedtext PhotoStudioAlreadyDoneText
 	writetext PhotoStudioGreetingText
 	yesorno
-	iffalse .RefusedPhoto
+	iffalse_jumpopenedtext PhotoStudioRefusedText
 	writetext PhotoStudioWhichMonText
 	buttonsound
 	special Special_CianwoodPhotograph
-	if_equal $0, .NoPicture
-	if_equal $1, .EggPicture
+	ifequal $0, .NoPicture
+	ifequal $1, .EggPicture
 	setflag ENGINE_DAILY_PHOTOGRAPH
 	writetext PhotoStudioHoldStillText
 	waitbutton
@@ -40,7 +37,7 @@ FishingGuruScript_0x9e0e0:
 	waitsfx
 	pause 10
 	special FadeInPalettes
-	copybytetovar CurPartySpecies
+	copybytetovar wCurPartySpecies
 	pokepic 0, 1
 	cry 0
 	waitsfx
@@ -49,34 +46,16 @@ FishingGuruScript_0x9e0e0:
 	writetext PhotoStudioPrestoText
 	special PlayCurMonCry
 	waitbutton
-	writetext PhotoStudioComeAgainText
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-.AlreadyTookPhoto:
-	writetext PhotoStudioAlreadyDoneText
-	waitbutton
-	closetext
-	end
-
-.RefusedPhoto:
-	writetext PhotoStudioRefusedText
-	waitbutton
-	closetext
-	end
+	text "Come again, OK?"
+	done
 
 .NoPicture:
-	writetext PhotoStudioNoPictureText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext PhotoStudioNoPictureText
 
 .EggPicture:
-	writetext PhotoStudioEggPictureText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext PhotoStudioEggPictureText
 
 PhotoStudioGreetingText:
 	text "I am Cameron"
@@ -106,12 +85,10 @@ PhotoStudioHoldStillText:
 PhotoStudioPrestoText:
 	text "Presto! All done."
 
-	para "Your #mon"
+	para "Your @"
+	text_from_ram wStringBuffer3
+	text ""
 	line "looks happier!"
-	done
-
-PhotoStudioComeAgainText:
-	text "Come again, OK?"
 	done
 
 PhotoStudioAlreadyDoneText:

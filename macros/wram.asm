@@ -1,4 +1,3 @@
-
 flag_array: MACRO
 	ds ((\1) + 7) / 8
 ENDM
@@ -108,7 +107,7 @@ ENDM
 
 
 channel_struct: MACRO
-; Addreses are Channel1 (c101).
+; Addreses are wChannel1 (c101).
 \1MusicID::           dw
 \1MusicBank::         db
 \1Flags::             db ; 0:on/off 1:subroutine 3:sfx 4:noise 5:rest
@@ -304,7 +303,6 @@ object_struct: MACRO
 \1Object30:: ds 1
 \1Object31:: ds 1
 \1Range:: ds 1
-	ds 7
 \1StructEnd::
 ENDM
 
@@ -322,7 +320,6 @@ map_object: MACRO
 \1ObjectRange::     ds 1
 \1ObjectScript::    ds 2
 \1ObjectEventFlag:: ds 2
-	ds 2
 endm
 
 sprite_anim_struct: MACRO

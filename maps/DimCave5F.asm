@@ -1,34 +1,31 @@
 DimCave5F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_CMDQUEUE, DimCave5FSetUpStoneTable
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_CMDQUEUE, DimCave5FSetUpStoneTable
+	db 4 ; warp events
+	warp_event 13, 31, ROUTE_10_NORTH, 5
+	warp_event  2, 16, DIM_CAVE_4F, 1
+	warp_event 27, 29, DIM_CAVE_4F, 2
+	warp_event 28, 25, DIM_CAVE_4F, 3
 
-DimCave5F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $1f, $d, 5, ROUTE_10_NORTH
-	warp_def $10, $2, 1, DIM_CAVE_4F
-	warp_def $1d, $1b, 2, DIM_CAVE_4F
-	warp_def $19, $1c, 3, DIM_CAVE_4F
+	db 1 ; bg events
+	bg_event 12, 28, SIGNPOST_ITEM + X_SPCL_ATK, EVENT_DIM_CAVE_5F_HIDDEN_X_SPCL_ATK
 
-.XYTriggers: db 0
+	db 8 ; object events
+	strengthboulder_event 25,  5, EVENT_BOULDER_IN_DIM_CAVE_5F
+	object_event 13,  4, SPRITE_RILEY, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DimCave5FRileyScript, EVENT_DIM_CAVE_RILEY
+	object_event 24, 17, SPRITE_REAL_SUPER_NERD, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSuper_nerdFoote, -1
+	object_event 13, 25, SPRITE_ENGINEER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerEngineerHoward, -1
+	object_event 21, 28, SPRITE_REAL_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 5, GenericTrainerSuper_nerdDave, -1
+	itemball_event 13, 13, RARE_CANDY, 1, EVENT_DIM_CAVE_5F_RARE_CANDY
+	itemball_event  9, 27, DUSK_STONE, 1, EVENT_DIM_CAVE_5F_DUSK_STONE
+	itemball_event 31, 14, HYPER_POTION, 1, EVENT_DIM_CAVE_5F_HYPER_POTION
 
-.Signposts: db 1
-	signpost 28, 12, SIGNPOST_ITEM, DimCave5FHiddenXSpclAtk
-
-.PersonEvents: db 8
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 5, 25, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DimCave5FBoulder, EVENT_BOULDER_IN_DIM_CAVE_5F
-	person_event SPRITE_RILEY, 4, 13, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DimCave5FRileyScript, EVENT_DIM_CAVE_RILEY
-	person_event SPRITE_SUPER_NERD, 17, 24, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 3, TrainerSuper_nerdFoote, -1
-	person_event SPRITE_ENGINEER, 25, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerEngineerHoward, -1
-	person_event SPRITE_SUPER_NERD, 28, 21, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 5, TrainerSuper_nerdDave, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 13, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, RARE_CANDY, 1, EVENT_DIM_CAVE_5F_RARE_CANDY
-	person_event SPRITE_BALL_CUT_FRUIT, 26, 25, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, DUSK_STONE, 1, EVENT_DIM_CAVE_5F_DUSK_STONE
-	person_event SPRITE_BALL_CUT_FRUIT, 30, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, HYPER_POTION, 1, EVENT_DIM_CAVE_5F_HYPER_POTION
-
-const_value set 2
+	const_def 1 ; object constants
 	const DIMCAVE5F_BOULDER
 	const DIMCAVE5F_RILEY
 
@@ -50,13 +47,8 @@ DimCave5FSetUpStoneTable:
 	pause 30
 	playsound SFX_STRENGTH
 	earthquake 80
-	opentext
-	writetext .Text
-	waitbutton
-	closetext
-	end
+	thistext
 
-.Text:
 	text "The boulder fell"
 	line "through."
 	done
@@ -68,7 +60,7 @@ DimCave5FRileyScript:
 	opentext
 	writetext .ChallengeText
 	yesorno
-	iffalse .No
+	iffalse_jumpopenedtext .NoText
 	writetext .YesText
 	waitbutton
 	closetext
@@ -83,7 +75,7 @@ DimCave5FRileyScript:
 	writetext .ItemText
 	buttonsound
 	verbosegiveitem POWER_BRACER
-	iffalse .Done
+	iffalse_endtext
 	writetext .GoodbyeText
 	waitbutton
 	closetext
@@ -93,16 +85,6 @@ DimCave5FRileyScript:
 	pause 15
 	special Special_FadeInQuickly
 	clearevent EVENT_BATTLE_TOWER_RILEY
-	end
-
-.Done:
-	closetext
-	end
-
-.No:
-	writetext .NoText
-	waitbutton
-	closetext
 	end
 
 .ChallengeText:
@@ -181,16 +163,18 @@ DimCave5FRileyScript:
 	line "way out."
 	done
 
-TrainerSuper_nerdFoote:
-	trainer EVENT_BEAT_SUPER_NERD_FOOTE, SUPER_NERD, FOOTE, .SeenText, .BeatenText, 0, .Script
+GenericTrainerSuper_nerdFoote:
+	generictrainer SUPER_NERD, FOOTE, EVENT_BEAT_SUPER_NERD_FOOTE, .SeenText, .BeatenText
 
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
+	text "Save one life or"
+	line "save five?"
+
+	para "As a #mon"
+	line "trainer, you may"
+
+	para "have the power to"
+	line "save all six!"
+	done
 
 .SeenText:
 	text "I have a conundrum"
@@ -209,27 +193,16 @@ TrainerSuper_nerdFoote:
 	cont "How Zen!"
 	done
 
-.AfterText:
-	text "Save one life or"
-	line "save five?"
+GenericTrainerEngineerHoward:
+	generictrainer ENGINEER, HOWARD, EVENT_BEAT_ENGINEER_HOWARD, .SeenText, .BeatenText
 
-	para "As a #mon"
-	line "trainer, you may"
+	text "Water flows south"
+	line "from Cerulean Cape"
 
-	para "have the power to"
-	line "save all six!"
+	para "and follows a"
+	line "steady course to"
+	cont "the Power Plant."
 	done
-
-TrainerEngineerHoward:
-	trainer EVENT_BEAT_ENGINEER_HOWARD, ENGINEER, HOWARD, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "This waterfall"
@@ -241,25 +214,15 @@ TrainerEngineerHoward:
 	text "No! A blackout…"
 	done
 
-.AfterText:
-	text "Water flows south"
-	line "from Cerulean Cape"
+GenericTrainerSuper_nerdDave:
+	generictrainer SUPER_NERD, DAVE, EVENT_BEAT_SUPER_NERD_DAVE, .SeenText, .BeatenText
 
-	para "and follows a"
-	line "steady course to"
-	cont "the Power Plant."
+	text "You need a mining"
+	line "pick to mine."
+
+	para "But you can't get"
+	line "them around here."
 	done
-
-TrainerSuper_nerdDave:
-	trainer EVENT_BEAT_SUPER_NERD_DAVE, SUPER_NERD, DAVE, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "I've maxed out my"
@@ -274,16 +237,3 @@ TrainerSuper_nerdDave:
 	line "battling…"
 	done
 
-.AfterText:
-	text "You need a mining"
-	line "pick to mine."
-
-	para "But you can't get"
-	line "them around here."
-	done
-
-DimCave5FBoulder:
-	jumpstd strengthboulder
-
-DimCave5FHiddenXSpclAtk:
-	dwb EVENT_DIM_CAVE_5F_HIDDEN_X_SPCL_ATK, X_SPCL_ATK

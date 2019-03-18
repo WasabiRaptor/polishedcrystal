@@ -1,35 +1,32 @@
 CeladonUniversityHyperTestRoom_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2, 11, CELADON_UNIVERSITY_2F, 4
+	warp_event  3, 11, CELADON_UNIVERSITY_2F, 4
 
-CeladonUniversityHyperTestRoom_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $b, $2, 4, CELADON_UNIVERSITY_2F
-	warp_def $b, $3, 4, CELADON_UNIVERSITY_2F
+	db 5 ; bg events
+	bg_event  2,  1, SIGNPOST_READ, CeladonUniversityHyperTestRoomMagikarpSign
+	bg_event  6,  1, SIGNPOST_JUMPTEXT, CeladonUniversityHyperTestRoomBookshelf1Text
+	bg_event  7,  1, SIGNPOST_JUMPTEXT, CeladonUniversityHyperTestRoomBookshelf2Text
+	bg_event  7,  4, SIGNPOST_RIGHT, CeladonUniversityHyperTestRoomComputer
+	bg_event  7,  6, SIGNPOST_RIGHT, CeladonUniversityHyperTestRoomComputer
 
-.XYTriggers: db 0
-
-.Signposts: db 5
-	signpost 1, 2, SIGNPOST_READ, CeladonUniversityHyperTestRoomMagikarpSign
-	signpost 1, 6, SIGNPOST_READ, CeladonUniversityHyperTestRoomBookshelf1
-	signpost 1, 7, SIGNPOST_READ, CeladonUniversityHyperTestRoomBookshelf2
-	signpost 4, 7, SIGNPOST_RIGHT, CeladonUniversityHyperTestRoomComputer
-	signpost 6, 7, SIGNPOST_RIGHT, CeladonUniversityHyperTestRoomComputer
-
-.PersonEvents: db 4
-	person_event SPRITE_WESTWOOD, 2, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CeladonUniversityHyperTestRoomWestwoodScript, -1
-	person_event SPRITE_SCIENTIST, 7, 6, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonUniversityHyperTestRoomScientistScript, -1
-	person_event SPRITE_TWIN, 6, 1, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, CeladonUniversityHyperTestRoomTwin1Script, -1
-	person_event SPRITE_TWIN, 8, 1, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, CeladonUniversityHyperTestRoomTwin2Script, -1
+	db 4 ; object events
+	object_event  4,  2, SPRITE_WESTWOOD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CeladonUniversityHyperTestRoomWestwoodScript, -1
+	object_event  6,  7, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityHyperTestRoomScientistText, -1
+	object_event  1,  6, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityHyperTestRoomTwin1Text, -1
+	object_event  1,  8, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityHyperTestRoomTwin2Text, -1
 
 CeladonUniversityHyperTestRoomWestwoodScript:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_DRAGON_RAGE_MAGIKARP
-	iftrue .TestComplete
+	iftrue_jumpopenedtext .TestOverText
 	checkevent EVENT_PASSED_CELADON_HYPER_TEST
 	iftrue .GiveMagikarp
 	writetext .GreetingText
@@ -42,9 +39,9 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 .HeardIntro
 	writetext .QuestionText
 	yesorno
-	iffalse .NoHyperTest
+	iffalse_jumpopenedtext .RefusedText
 	checkflag ENGINE_TOOK_HYPER_TEST
-	iftrue .TookHyperTestToday
+	iftrue_jumpopenedtext .AlreadyTookText
 	setflag ENGINE_TOOK_HYPER_TEST
 	writetext .BeginText
 	waitbutton
@@ -58,10 +55,10 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	closepokepic
 	opentext
 	writetext .Question1QuestionText
-	loadmenudata .Question1MenuData
+	loadmenu .Question1MenuData
 	verticalmenu
 	closewindow
-	if_not_equal $2, .WrongAnswer
+	ifnotequal $2, .WrongAnswer
 	waitsfx
 	playsound SFX_ELEVATOR_END
 	writetext .CorrectText
@@ -74,10 +71,10 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	waitsfx
 	opentext
 	writetext .Question2QuestionText
-	loadmenudata .Question2MenuData
+	loadmenu .Question2MenuData
 	verticalmenu
 	closewindow
-	if_not_equal $3, .WrongAnswer
+	ifnotequal $3, .WrongAnswer
 	waitsfx
 	playsound SFX_ELEVATOR_END
 	writetext .CorrectText
@@ -86,10 +83,10 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	writetext .Question3IntroText
 	waitbutton
 	writetext .Question3QuestionText
-	loadmenudata .Question3MenuData
+	loadmenu .Question3MenuData
 	verticalmenu
 	closewindow
-	if_not_equal $4, .WrongAnswer
+	ifnotequal $4, .WrongAnswer
 	waitsfx
 	playsound SFX_ELEVATOR_END
 	writetext .CorrectText
@@ -98,10 +95,10 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	writetext .Question4IntroText
 	waitbutton
 	writetext .Question4QuestionText
-	loadmenudata .Question4MenuData
+	loadmenu .Question4MenuData
 	verticalmenu
 	closewindow
-	if_not_equal $1, .WrongAnswer
+	ifnotequal $1, .WrongAnswer
 	waitsfx
 	playsound SFX_ELEVATOR_END
 	writetext .CorrectText
@@ -110,10 +107,10 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	writetext .Question5IntroText
 	waitbutton
 	writetext .Question5QuestionText
-	loadmenudata .Question5MenuData
+	loadmenu .Question5MenuData
 	verticalmenu
 	closewindow
-	if_not_equal $3, .WrongAnswer
+	ifnotequal $3, .WrongAnswer
 	waitsfx
 	playsound SFX_ELEVATOR_END
 	writetext .CorrectText
@@ -122,10 +119,10 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	writetext .Question6IntroText
 	waitbutton
 	writetext .Question6QuestionText
-	loadmenudata .Question6MenuData
+	loadmenu .Question6MenuData
 	verticalmenu
 	closewindow
-	if_not_equal $4, .WrongAnswer
+	ifnotequal $4, .WrongAnswer
 	waitsfx
 	playsound SFX_ELEVATOR_END
 	writetext .CorrectText
@@ -137,7 +134,7 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	waitbutton
 
 	checkcode VAR_PARTYCOUNT
-	if_equal 6, .PartyFull
+	ifequal 6, .PartyFull
 	writetext .ReceivedMagikarpText
 	playsound SFX_CAUGHT_MON
 	waitsfx
@@ -146,38 +143,15 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	writebyte ULTRA_BALL
 	special SetLastPartyMonBall
 	setevent EVENT_GOT_DRAGON_RAGE_MAGIKARP
-
-.TestComplete:
-	writetext .TestOverText
-	waitbutton
-	closetext
-	end
-
-.NoHyperTest:
-	writetext .RefusedText
-	waitbutton
-	closetext
-	end
-
-.TookHyperTestToday:
-	writetext .AlreadyTookText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext .TestOverText
 
 .WrongAnswer:
 	waitsfx
 	playsound SFX_WRONG
-	writetext .WrongAnswerText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext .WrongAnswerText
 
 .PartyFull:
-	writetext .PartyFullText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext .PartyFullText
 
 .GreetingText:
 	text "Prof.Westwood?"
@@ -430,10 +404,7 @@ CeladonUniversityHyperTestRoomWestwoodScript:
 	db "Prof.Willow@"
 	db "Prof.Westwood@"
 
-CeladonUniversityHyperTestRoomScientistScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityHyperTestRoomScientistText:
 	text "The Hyper Test is"
 	line "a rite of passage"
 
@@ -446,18 +417,12 @@ CeladonUniversityHyperTestRoomScientistScript:
 	cont "the utmost!"
 	done
 
-CeladonUniversityHyperTestRoomTwin1Script:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityHyperTestRoomTwin1Text:
 	text "I'll pass the Hyper"
 	line "Test before you!"
 	done
 
-CeladonUniversityHyperTestRoomTwin2Script:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityHyperTestRoomTwin2Text:
 	text "No, I'll pass the"
 	line "Hyper Test before"
 	cont "you!"
@@ -469,17 +434,13 @@ CeladonUniversityHyperTestRoomMagikarpSign:
 	cry MAGIKARP
 	waitbutton
 	closepokepic
-	jumptext .Text
+	thistext
 
-.Text:
 	text "A Magikarp is"
 	line "swimming around."
 	done
 
-CeladonUniversityHyperTestRoomBookshelf1:
-	jumptext .Text
-
-.Text:
+CeladonUniversityHyperTestRoomBookshelf1Text:
 	text "This book has a"
 	line "bookmark in it."
 
@@ -487,10 +448,7 @@ CeladonUniversityHyperTestRoomBookshelf1:
 	line "with it yet!"
 	done
 
-CeladonUniversityHyperTestRoomBookshelf2:
-	jumptext .Text
-
-.Text:
+CeladonUniversityHyperTestRoomBookshelf2Text:
 	text "It's a copy of"
 	line "Nintendo Power!"
 
@@ -500,9 +458,8 @@ CeladonUniversityHyperTestRoomBookshelf2:
 	done
 
 CeladonUniversityHyperTestRoomComputer:
-	jumptext .Text
+	thistext
 
-.Text:
 	text "There's a file on"
 	line "the desktop named"
 	cont "questions.txt."

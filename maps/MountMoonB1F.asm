@@ -1,40 +1,26 @@
 MountMoonB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 8 ; warp events
+	warp_event 26,  4, MOUNT_MOON_1F, 2
+	warp_event  5,  3, MOUNT_MOON_1F, 3
+	warp_event  3, 11, MOUNT_MOON_1F, 4
+	warp_event 15, 15, MOUNT_MOON_B2F, 1
+	warp_event 13,  3, MOUNT_MOON_B2F, 2
+	warp_event 16, 22, MOUNT_MOON_B2F, 3
+	warp_event 27, 23, MOUNT_MOON_B2F, 4
+	warp_event 27, 25, ROUTE_4, 1
 
-MountMoonB1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 10
-	warp_def $14, $1a, 2, MOUNT_MOON_1F
-	warp_def $3, $5, 3, MOUNT_MOON_1F
-	warp_def $b, $3, 4, MOUNT_MOON_1F
-	warp_def $1f, $f, 1, MOUNT_MOON_B2F
-	warp_def $3, $d, 2, MOUNT_MOON_B2F
-	warp_def $16, $10, 3, MOUNT_MOON_B2F
-	warp_def $d, $f, 4, MOUNT_MOON_B2F
-	warp_def $f, $f, 1, ROUTE_4
-	warp_def $3, $17, 5, MOUNT_MOON_B2F
-	warp_def $5, $17, 1, MOUNT_MOON_SQUARE
+	db 2 ; bg events
+	bg_event  5, 18, SIGNPOST_ITEM + STAR_PIECE, EVENT_MOUNT_MOON_B1F_HIDDEN_STAR_PIECE
+	bg_event 24, 10, SIGNPOST_ITEM + MOON_STONE, EVENT_MOUNT_MOON_B1F_HIDDEN_MOON_STONE
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 18, 5, SIGNPOST_ITEM, MountMoonB1FHiddenStarPiece
-	signpost 26, 24, SIGNPOST_ITEM, MountMoonB1FHiddenMoonStone
-
-.PersonEvents: db 1
-	person_event SPRITE_POKEFAN_M, 20, 5, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, MountMoonB1FPokefanmScript, -1
-
-MountMoonB1FPokefanmScript:
-	jumptextfaceplayer MountMoonB1FPokefanmText
-
-MountMoonB1FHiddenStarPiece:
-	dwb EVENT_MOUNT_MOON_B1F_HIDDEN_STAR_PIECE, STAR_PIECE
-
-MountMoonB1FHiddenMoonStone:
-	dwb EVENT_MOUNT_MOON_B1F_HIDDEN_MOON_STONE, MOON_STONE
+	db 1 ; object events
+	object_event  5, 20, SPRITE_HIKER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, MountMoonB1FPokefanmText, -1
 
 MountMoonB1FPokefanmText:
 	text "I'm excavating for"

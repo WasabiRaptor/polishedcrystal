@@ -17,40 +17,45 @@ GetSpritePalette:: ; 17ff
 
 GetSpriteVTile:: ; 180e
 	push hl
+	push de
 	push bc
-	ld hl, UsedSprites + 2
-	ld c, SPRITE_GFX_LIST_CAPACITY - 1
+	ld [hUsedSpriteIndex], a
+	farcall GetSprite
+	ld hl, wSpriteFlags
+	res 5, [hl]
+	; SPRITE_BIG_GYARADOS uses the last object_struct
+	ld a, [hUsedSpriteIndex]
+	cp SPRITE_BIG_GYARADOS
+	ld a, NUM_OBJECT_STRUCTS - 1
+	jr z, .got_sprite_tile
+	ld a, [hObjectStructIndexBuffer]
+.got_sprite_tile
+	cp FIRST_VRAM1_OBJECT_STRUCT
+	jr c, .continue
+	set 5, [hl]
+	sub FIRST_VRAM1_OBJECT_STRUCT
+.continue
+	add a, a
+	add a, a
 	ld b, a
-	ld a, [hMapObjectIndexBuffer]
-	cp 0
-	jr z, .nope
-	ld a, b
-.loop
-	cp [hl]
-	jr z, .found
-rept 2
-	inc hl
-endr
-	dec c
-	jr nz, .loop
-	ld a, [UsedSprites + 1]
-	scf
-	jr .done
-
-.nope
-	ld a, [UsedSprites + 1]
-	jr .done
-
-.found
-	inc hl
+	add a, b
+	add a, b
+	ld [hUsedSpriteTile], a
+	push af
+	farcall GetUsedSprite
+	pop af
+	ld b, a
 	xor a
-	ld a, [hl]
-
-.done
+	ld a, b
+	ld hl, wSpriteFlags
+	bit 5, [hl]
+	jr nz, .using_vbk1
+	or $80
+.using_vbk1
 	pop bc
+	pop de
 	pop hl
 	ret
-; 1836
 
 DoesSpriteHaveFacings:: ; 1836
 	push de
@@ -76,16 +81,16 @@ DoesSpriteHaveFacings:: ; 1836
 ; 184a
 
 GetPlayerStandingTile:: ; 184a
-	ld a, [PlayerStandingTile]
+	ld a, [wPlayerStandingTile]
 	call GetTileCollision
 	ld b, a
 	ret
 ; 1852
 
 CheckOnWater:: ; 1852
-	ld a, [PlayerStandingTile]
+	ld a, [wPlayerStandingTile]
 	call GetTileCollision
-	sub 1
+	sub WATERTILE
 	ret z
 	and a
 	ret
@@ -135,7 +140,7 @@ CheckSpinTile::
 	ret
 
 CheckStandingOnEntrance:: ; 18c3
-	ld a, [PlayerStandingTile]
+	ld a, [wPlayerStandingTile]
 	cp COLL_DOOR
 	ret z
 	cp COLL_STAIRCASE
@@ -146,9 +151,9 @@ CheckStandingOnEntrance:: ; 18c3
 
 GetMapObject:: ; 18d2
 ; Return the location of map object a in bc.
-	ld hl, MapObjects
+	ld hl, wMapObjects
 	ld bc, OBJECT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	ret
@@ -185,7 +190,7 @@ CheckObjectTime:: ; 18f5
 	cp -1
 	jr z, .timeofday_always
 	ld hl, .TimeOfDayValues_191e
-	ld a, [TimeOfDay]
+	ld a, [wTimeOfDay]
 	add l
 	ld l, a
 	jr nc, .ok
@@ -300,7 +305,8 @@ CopyPlayerObjectTemplate:: ; 19a6
 	inc de
 	pop hl
 	ld bc, OBJECT_LENGTH - 1
-	jp CopyBytes
+	rst CopyBytes
+	ret
 ; 19b8
 
 LoadMovementDataPointer:: ; 19e9
@@ -312,6 +318,7 @@ LoadMovementDataPointer:: ; 19e9
 	ld [wMovementDataPointer + 1], a
 	ld a, h
 	ld [wMovementDataPointer + 2], a
+
 	ld a, [wMovementPerson]
 	call CheckObjectVisibility
 	ret c
@@ -324,7 +331,7 @@ LoadMovementDataPointer:: ; 19e9
 	add hl, bc
 	ld [hl], STEP_TYPE_00
 
-	ld hl, VramState
+	ld hl, wVramState
 	set 7, [hl]
 	and a
 	ret
@@ -336,7 +343,7 @@ FindFirstEmptyObjectStruct:: ; 1a13
 ; Preserves BC and DE.
 	push bc
 	push de
-	ld hl, ObjectStructs
+	ld hl, wObjectStructs
 	ld de, OBJECT_STRUCT_LENGTH
 	ld c, NUM_OBJECT_STRUCTS
 .loop
@@ -390,9 +397,8 @@ rept SPRITEMOVEDATA_FIELDS
 endr
 	ld a, BANK(SpriteMovementData)
 	call GetFarByte
-rept 2
 	add a
-endr
+	add a
 	and $c
 	pop de
 	pop bc
@@ -495,7 +501,7 @@ _GetMovementByte:: ; 1aae
 ; 1ac6
 
 UpdateSprites:: ; 1ad2
-	ld a, [VramState]
+	ld a, [wVramState]
 	bit 0, a
 	ret z
 
@@ -505,8 +511,8 @@ UpdateSprites:: ; 1ad2
 
 GetObjectStruct:: ; 1ae5
 	ld bc, OBJECT_STRUCT_LENGTH
-	ld hl, ObjectStructs
-	call AddNTimes
+	ld hl, wObjectStructs
+	rst AddNTimes
 	ld b, h
 	ld c, l
 	ret

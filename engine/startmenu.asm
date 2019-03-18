@@ -7,7 +7,7 @@ StartMenu:: ; 125cd
 
 	farcall ReanchorBGMap_NoOAMUpdate
 
-	ld hl, StatusFlags2
+	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	ld hl, .MenuDataHeader
 	jr z, .GotMenuData
@@ -16,12 +16,12 @@ StartMenu:: ; 125cd
 
 	call LoadMenuDataHeader
 	call .SetUpMenuItems
-	ld a, [wd0d2]
+	ld a, [wBattleMenuCursorBuffer]
 	ld [wMenuCursorBuffer], a
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatusBox
 	call SafeUpdateSprites
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call BGMapAnchorTopLeft
 	farcall LoadFonts_NoOAMUpdate
 	call .DrawBugContestStatus
 	call UpdateTimePals
@@ -31,14 +31,14 @@ StartMenu:: ; 125cd
 	call UpdateSprites
 	call UpdateTimePals
 	call .SetUpMenuItems
-	ld a, [wd0d2]
+	ld a, [wBattleMenuCursorBuffer]
 	ld [wMenuCursorBuffer], a
 
 .Select:
 	call .GetInput
 	jr c, .Exit
 	ld a, [wMenuCursorBuffer]
-	ld [wd0d2], a
+	ld [wBattleMenuCursorBuffer], a
 	call PlayClickSFX
 	call PlaceHollowCursor
 	call .OpenMenu
@@ -84,9 +84,9 @@ StartMenu:: ; 125cd
 	ld [hBGMapMode], a
 	call SetUpMenu
 	ld a, $ff
-	ld [MenuSelection], a
+	ld [wMenuSelection], a
 .loop
-	call GetScrollingMenuJoypad
+	call ReadMenuJoypad
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
 	jr z, .b
@@ -118,18 +118,14 @@ StartMenu:: ; 125cd
 
 .ExitMenuCallFuncCloseText: ; 126a2
 	call ExitMenu
-	ld hl, wQueuedScriptAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wQueuedScriptBank]
-	call FarCall_hl
+	ld hl, wQueuedScriptBank
+	call FarPointerCall
 	jr .ReturnEnd2
 ; 126b1
 
 .ReturnRedraw: ; 126b1
 	call ClearBGPalettes
-	call Call_ExitMenu
+	call ExitMenu
 	call ReloadTilesetAndPalettes
 	call DrawVariableLengthMenuBox
 	call .DrawBugContestStatus
@@ -155,7 +151,7 @@ StartMenu:: ; 125cd
 .MenuData:
 	db %10101000 ; x padding, wrap around, start can close
 	dn 0, 0 ; rows, columns
-	dw MenuItemsList
+	dw wMenuItemsList
 	dw .MenuString
 	dw .Items
 
@@ -184,7 +180,7 @@ StartMenu:: ; 125cd
 .NullDesc:      	db "@"
 
 .OpenMenu: ; 127e5
-	ld a, [MenuSelection]
+	ld a, [wMenuSelection]
 	call .GetMenuAccountTextPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -194,7 +190,7 @@ StartMenu:: ; 125cd
 
 .MenuString: ; 127ef
 	push de
-	ld a, [MenuSelection]
+	ld a, [wMenuSelection]
 	call .GetMenuAccountTextPointer
 	inc hl
 	inc hl
@@ -224,14 +220,14 @@ endr
 	ld [wWhichIndexSet], a
 	call .FillMenuList
 
-	ld hl, StatusFlags
+	ld hl, wStatusFlags
 	bit 0, [hl]
 	jr z, .no_pokedex
 	xor a ; pokedex
 	call .AppendMenuList
 .no_pokedex
 
-	ld a, [PartyCount]
+	ld a, [wPartyCount]
 	and a
 	jr z, .no_pokemon
 	ld a, 1 ; pokemon
@@ -241,7 +237,7 @@ endr
 	ld a, [wLinkMode]
 	and a
 	jr nz, .no_pack
-	ld hl, StatusFlags2
+	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	jr nz, .no_pack
 	ld a, 2 ; pack
@@ -261,7 +257,7 @@ endr
 	ld a, [wLinkMode]
 	and a
 	jr nz, .no_save
-	ld hl, StatusFlags2
+	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	ld a, 8 ; quit
 	jr nz, .write
@@ -275,19 +271,19 @@ endr
 	ld a, 6 ; exit
 	call .AppendMenuList
 	ld a, c
-	ld [MenuItemsList], a
+	ld [wMenuItemsList], a
 	ret
 ; 1288d
 
 
 .FillMenuList: ; 1288d
 	xor a
-	ld hl, MenuItemsList
+	ld hl, wMenuItemsList
 	ld [hli], a
 	ld a, -1
-	ld bc, MenuItemsListEnd - (MenuItemsList + 1)
+	ld bc, wMenuItemsListEnd - (wMenuItemsList + 1)
 	call ByteFill
-	ld de, MenuItemsList + 1
+	ld de, wMenuItemsList + 1
 	ld c, 0
 	ret
 ; 128a0
@@ -300,14 +296,14 @@ endr
 ; 128a4
 
 .DrawBugContestStatusBox: ; 128d1
-	ld hl, StatusFlags2
+	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	ret z
 	farjp StartMenu_DrawBugContestStatusBox
 ; 128de
 
 .DrawBugContestStatus: ; 128de
-	ld hl, StatusFlags2
+	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	jr nz, .contest
 	ret
@@ -383,7 +379,7 @@ StartMenu_Status: ; 12928
 
 StartMenu_Pokedex: ; 12937
 
-	ld a, [PartyCount]
+	ld a, [wPartyCount]
 	and a
 	jr z, .asm_12949
 
@@ -403,7 +399,7 @@ StartMenu_Pokegear: ; 1294c
 	farcall InitPokegearPalettes
 	farcall PokeGear
 	call CloseSubmenu
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	call SetPalettes
 	call DelayFrame
 	xor a
@@ -431,7 +427,7 @@ StartMenu_Pack: ; 1295b
 
 StartMenu_Pokemon: ; 12976
 
-	ld a, [PartyCount]
+	ld a, [wPartyCount]
 	and a
 	jr z, .return
 
@@ -439,7 +435,7 @@ StartMenu_Pokemon: ; 12976
 
 .choosemenu
 	xor a
-	ld [PartyMenuActionText], a ; Choose a POKéMON.
+	ld [wPartyMenuActionText], a ; Choose a POKéMON.
 	call ClearBGPalettes
 
 .menu
@@ -450,13 +446,16 @@ StartMenu_Pokemon: ; 12976
 .menunoreload
 	farcall WritePartyMenuTilemap
 	farcall PrintPartyMenuText
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	call SetPalettes ; load regular palettes?
 	call DelayFrame
 	farcall PartyMenuSelect
 	jr c, .return ; if cancelled or pressed B
 
 	call PokemonActionSubmenu
+	push af
+	call SFXDelay2
+	pop af
 	cp 3
 	jr z, .menu
 	cp 0
@@ -480,19 +479,19 @@ StartMenu_Pokemon: ; 12976
 ; 129d5
 
 HasNoItems: ; 129d5
-	ld a, [NumItems]
+	ld a, [wNumItems]
 	and a
 	ret nz
-	ld a, [NumMedicine]
+	ld a, [wNumMedicine]
 	and a
 	ret nz
-	ld a, [NumBalls]
+	ld a, [wNumBalls]
 	and a
 	ret nz
-	ld a, [NumBerries]
+	ld a, [wNumBerries]
 	and a
 	ret nz
-	ld a, [NumKeyItems]
+	ld a, [wNumKeyItems]
 	and a
 	ret nz
 	scf
@@ -521,7 +520,7 @@ TossItemFromPC: ; 129f4
 	pop af
 	jr c, .quit
 	pop hl
-	ld a, [wd107]
+	ld a, [wCurItemQuantity]
 	call TossItem
 	call PartyMonItemName
 	ld hl, .TossedThisMany
@@ -574,7 +573,7 @@ CantUseItemText: ; 12a67
 
 
 PartyMonItemName: ; 12a6c
-	ld a, [CurItem]
+	ld a, [wCurItem]
 	ld [wd265], a
 	call GetItemName
 	jp CopyName1
@@ -595,7 +594,7 @@ PokemonActionSubmenu: ; 12a88
 	call ClearBox
 	farcall MonSubmenu
 	call GetCurNick
-	ld a, [MenuSelection]
+	ld a, [wMenuSelection]
 	ld hl, .Actions
 	ld de, 3
 	call IsInArray
@@ -637,11 +636,11 @@ PokemonActionSubmenu: ; 12a88
 SwitchPartyMons: ; 12aec
 
 ; Don't try if there's nothing to switch!
-	ld a, [PartyCount]
+	ld a, [wPartyCount]
 	cp 2
 	jr c, .DontSwitch
 
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	inc a
 	ld [wSwitchMon], a
 
@@ -649,7 +648,7 @@ SwitchPartyMons: ; 12aec
 	farcall InitPartyMenuNoCancel
 
 	ld a, 4
-	ld [PartyMenuActionText], a
+	ld [wPartyMenuActionText], a
 	farcall WritePartyMenuTilemap
 	farcall PrintPartyMenuText
 
@@ -657,9 +656,9 @@ SwitchPartyMons: ; 12aec
 	ld bc, 20 * 2
 	ld a, [wSwitchMon]
 	dec a
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], "▷"
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	call SetPalettes
 	call DelayFrame
 
@@ -670,7 +669,7 @@ SwitchPartyMons: ; 12aec
 	farcall _SwitchPartyMons
 
 	xor a
-	ld [PartyMenuActionText], a
+	ld [wPartyMenuActionText], a
 
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
@@ -681,7 +680,7 @@ SwitchPartyMons: ; 12aec
 
 .DontSwitch:
 	xor a
-	ld [PartyMenuActionText], a
+	ld [wPartyMenuActionText], a
 	jp CancelPokemonAction
 ; 12b60
 
@@ -689,10 +688,22 @@ SwitchPartyMons: ; 12aec
 GiveTakePartyMonItem: ; 12b60
 
 ; Eggs can't hold items!
-	ld a, [CurPartySpecies]
-	cp EGG
-	jr z, .cancel
+	ld a, MON_IS_EGG
+	call GetPartyParamLocation
+	bit MON_IS_EGG_F, [hl]
+	jr nz, .cancel
 
+	call GetPartyItemLocation
+	ld a, [hl]
+	and a
+	ld de, .noItemString
+	jr z, .not_holding_anything
+	ld [wNamedObjectIndexBuffer], a
+	call GetItemName
+	ld de, wStringBuffer1
+.not_holding_anything
+	hlcoord 1, 16
+	call PlaceString
 	ld hl, GiveTakeItemMenuData
 	call LoadMenuDataHeader
 	call VerticalMenu
@@ -700,10 +711,10 @@ GiveTakePartyMonItem: ; 12b60
 	jr c, .cancel
 
 	call GetCurNick
-	ld hl, StringBuffer1
+	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	ld a, [wMenuCursorY]
 	cp 1
 	jr nz, .take
@@ -727,6 +738,8 @@ GiveTakePartyMonItem: ; 12b60
 	ret
 ; 12ba9
 
+.noItemString
+	db "No held item@"
 
 .GiveItem:
 
@@ -768,10 +781,8 @@ TryGiveItemToPartymon: ; 12bd9
 	and a
 	jr z, .give_item_to_mon
 
-	push hl
 	ld d, a
-	farcall ItemIsMail
-	pop hl
+	call ItemIsMail
 	jr c, .please_remove_mail
 	ld a, [hl]
 	jr .already_holding_item
@@ -796,22 +807,22 @@ TryGiveItemToPartymon: ; 12bd9
 	call GiveItemToPokemon
 	ld a, [wd265]
 	push af
-	ld a, [CurItem]
+	ld a, [wCurItem]
 	ld [wd265], a
 	pop af
-	ld [CurItem], a
+	ld [wCurItem], a
 	call ReceiveItemFromPokemon
 	jr nc, .bag_full
 
 	ld hl, TookAndMadeHoldText
 	call MenuTextBoxBackup
 	ld a, [wd265]
-	ld [CurItem], a
+	ld [wCurItem], a
 	jp GivePartyItem
 
 .bag_full
 	ld a, [wd265]
-	ld [CurItem], a
+	ld [wCurItem], a
 	call ReceiveItemFromPokemon
 	ld hl, ItemStorageIsFullText
 	jp MenuTextBoxBackup
@@ -821,10 +832,10 @@ TryGiveItemToPartymon: ; 12bd9
 GivePartyItem: ; 12c4c
 
 	call GetPartyItemLocation
-	ld a, [CurItem]
+	ld a, [wCurItem]
 	ld [hl], a
 	ld d, a
-	farcall ItemIsMail
+	call ItemIsMail
 	ret nc
 	jp ComposeMailMessage
 ; 12c60
@@ -838,11 +849,11 @@ TakePartyItem: ; 12c60
 	and a
 	jr z, .asm_12c8c
 
-	ld [CurItem], a
+	ld [wCurItem], a
 	call ReceiveItemFromPokemon
 	jr nc, .asm_12c94
 
-	farcall ItemIsMail
+	call ItemIsMail
 	call GetPartyItemLocation
 	ld a, [hl]
 	ld [wd265], a
@@ -863,7 +874,7 @@ TakePartyItem: ; 12c60
 
 GiveTakeItemMenuData: ; 12c9b
 	db %01010000
-	db 12, 12 ; start coords
+	db 12, 13 ; start coords
 	db 17, 19 ; end coords
 	dw .Items
 	db 1 ; default option
@@ -929,7 +940,7 @@ GetPartyItemLocation: ; 12cd7
 ReceiveItemFromPokemon: ; 12cdf
 	ld a, $1
 	ld [wItemQuantityChangeBuffer], a
-	ld hl, NumItems
+	ld hl, wNumItems
 	jp ReceiveItem
 ; 12cea
 
@@ -937,7 +948,7 @@ ReceiveItemFromPokemon: ; 12cdf
 GiveItemToPokemon: ; 12cea (4:6cea)
 	ld a, $1
 	ld [wItemQuantityChangeBuffer], a
-	ld hl, NumItems
+	ld hl, wNumItems
 	jp TossItem
 
 StartMenuYesNo: ; 12cf5
@@ -950,29 +961,29 @@ StartMenuYesNo: ; 12cf5
 ComposeMailMessage: ; 12cfe (4:6cfe)
 	ld de, wTempMailMessage
 	farcall _ComposeMailMessage
-	ld hl, PlayerName
+	ld hl, wPlayerName
 	ld de, wTempMailAuthor
 	ld bc, NAME_LENGTH - 1
-	call CopyBytes
-	ld hl, PlayerID
+	rst CopyBytes
+	ld hl, wPlayerID
 	ld bc, 2
-	call CopyBytes
-	ld a, [CurPartySpecies]
+	rst CopyBytes
+	ld a, [wCurPartySpecies]
 	ld [de], a
 	inc de
-	ld a, [CurItem]
+	ld a, [wCurItem]
 	ld [de], a
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld hl, sPartyMail
 	ld bc, MAIL_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, wTempMail
 	ld bc, MAIL_STRUCT_LENGTH
 	ld a, BANK(sPartyMail)
 	call GetSRAMBank
-	call CopyBytes
+	rst CopyBytes
 	jp CloseSRAM
 
 MonMailAction: ; 12d45
@@ -1005,7 +1016,7 @@ MonMailAction: ; 12d45
 	ld hl, .sendmailtopctext
 	call StartMenuYesNo
 	jr c, .RemoveMailToBag
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld b, a
 	farcall SendMailToPC
 	jr c, .MailboxFull
@@ -1024,7 +1035,7 @@ MonMailAction: ; 12d45
 	jr c, .done
 	call GetPartyItemLocation
 	ld a, [hl]
-	ld [CurItem], a
+	ld [wCurItem], a
 	call ReceiveItemFromPokemon
 	jr nc, .BagIsFull
 	call GetPartyItemLocation
@@ -1037,7 +1048,7 @@ MonMailAction: ; 12d45
 .BagIsFull:
 	ld hl, .bagfulltext
 	call MenuTextBoxBackup
-	jr .done
+	; fallthrough
 
 .done
 	ld a, $3
@@ -1104,11 +1115,11 @@ OpenPartyStats: ; 12e00
 	call ClearSprites
 ; PartyMon
 	xor a
-	ld [MonType], a
+	ld [wMonType], a
 	call LowVolume
 	predef StatsScreenInit
 	call MaxVolume
-	call Call_ExitMenu
+	call ExitMenu
 	xor a
 	ret
 ; 12e1b
@@ -1116,33 +1127,28 @@ OpenPartyStats: ; 12e00
 
 MonMenu_Cut: ; 12e1b
 	farcall CutFunction
+_MonMenu_StandardCheck:
 	ld a, [wFieldMoveSucceeded]
 	cp $1
-	jr nz, .Fail
+	jr nz, _MonMenu_StandardFail
+_MonMenu_StandardSuccess:
 	ld b, $4
 	ld a, $2
 	ret
 
-.Fail:
+_MonMenu_StandardFail:
 	ld a, $3
 	ret
 ; 12e30
 
-
 MonMenu_Fly: ; 12e30
 	farcall FlyFunction
 	ld a, [wFieldMoveSucceeded]
-	cp $2
-	jr z, .Fail
 	cp $0
 	jr z, .Error
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	cp $2
+	jr z, _MonMenu_StandardFail
+	jr _MonMenu_StandardSuccess
 
 .Error:
 	xor a
@@ -1150,101 +1156,52 @@ MonMenu_Fly: ; 12e30
 
 MonMenu_Flash: ; 12e55
 	farcall OWFlash
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	jr _MonMenu_StandardCheck
 ; 12e6a
 
 MonMenu_Strength: ; 12e6a
 	farcall StrengthFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	jr _MonMenu_StandardCheck
 ; 12e7f
 
 MonMenu_Whirlpool: ; 12e7f
 	farcall WhirlpoolFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	jr _MonMenu_StandardCheck
 ; 12e94
 
 MonMenu_Waterfall: ; 12e94
 	farcall WaterfallFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	jr _MonMenu_StandardCheck
 ; 12ea9
 
 MonMenu_Teleport: ; 12ea9
 	farcall TeleportFunction
+_MonMenu_AlternateCheck:
 	ld a, [wFieldMoveSucceeded]
 	and a
-	jr z, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	jr z, _MonMenu_StandardFail
+	jr _MonMenu_StandardSuccess
 ; 12ebd
 
 MonMenu_Surf: ; 12ebd
 	farcall SurfFunction
-	ld a, [wFieldMoveSucceeded]
-	and a
-	jr z, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	jr _MonMenu_AlternateCheck
 ; 12ed1
 
 MonMenu_Dig: ; 12ed1
 	farcall DigFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
+	jr _MonMenu_StandardCheck
 ; 12ee6
+
+MonMenu_Headbutt: ; 12f26
+	farcall HeadbuttFunction
+	jr _MonMenu_StandardCheck
+; 12f3b
+
+MonMenu_RockSmash: ; 12f3b
+	farcall RockSmashFunction
+	jr _MonMenu_StandardCheck
+; 12f50
 
 MonMenu_Softboiled_MilkDrink: ; 12ee6
 	call .CheckMonHasEnoughHP
@@ -1258,7 +1215,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 
 .finish
 	xor a
-	ld [PartyMenuActionText], a
+	ld [wPartyMenuActionText], a
 	ld a, $3
 	ret
 ; 12f00
@@ -1291,110 +1248,121 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 	ret
 ; 12f26
 
-MonMenu_Headbutt: ; 12f26
-	farcall HeadbuttFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
+	const_def
+	const MOVESCREEN_NORMAL
+	const MOVESCREEN_DELETER
+	const MOVESCREEN_NEWMOVE
+	const MOVESCREEN_REMINDER
 
-.Fail:
-	ld a, $3
-	ret
-; 12f3b
-
-MonMenu_RockSmash: ; 12f3b
-	farcall RockSmashFunction
-	ld a, [wFieldMoveSucceeded]
-	cp $1
-	jr nz, .Fail
-	ld b, $4
-	ld a, $2
-	ret
-
-.Fail:
-	ld a, $3
-	ret
-; 12f50
-
-ChooseMoveToDelete: ; 12f5b
-	ld hl, Options1
+ChooseMoveToDelete:
+	ld hl, wOptions1
 	ld a, [hl]
 	push af
 	set NO_TEXT_SCROLL, [hl]
 	call LoadFontsBattleExtra
-	call .ChooseMoveToDelete
+	ld a, MOVESCREEN_DELETER
+	ld [wMoveScreenMode], a
+	call MoveScreenLoop
 	pop bc
-	ld a, b
-	ld [Options1], a
 	push af
+	ld a, b
+	ld [wOptions1], a
 	call ClearBGPalettes
 	pop af
 	ret
-; 12f73
 
-.ChooseMoveToDelete
-	call SetUpMoveScreenBG
-	ld de, DeleteMoveScreenAttrs
-	call SetMenuAttributes
-	call SetUpMoveList
-	ld hl, w2DMenuFlags1
-	set 6, [hl]
-	jr .enter_loop
-
-.loop
-	call ScrollingMenuJoypad
-	bit 1, a
-	jp nz, .b_button
-	bit 0, a
-	jp nz, .a_button
-
-.enter_loop
-	call PrepareToPlaceMoveData
-	call PlaceMoveData
-	jp .loop
-; 12f9c
-
-.a_button
-	and a
-	jr .finish
-
-.b_button
-	scf
-
-.finish
-	push af
-	xor a
-	ld [wSwitchMon], a
-	ld hl, w2DMenuFlags1
-	res 6, [hl]
-	call ClearSprites
-	call ClearTileMap
-	pop af
-	ret
-; 12fb2
-
-DeleteMoveScreenAttrs: ; 12fb2
-	db 3, 1
-	db 3, 1
-	db $40, $00
-	dn 2, 0
-	db D_UP | D_DOWN | A_BUTTON | B_BUTTON
-; 12fba
-
-ManagePokemonMoves: ; 12fba
-	ld a, [CurPartySpecies]
-	cp EGG
-	jr z, .egg
-	ld hl, Options1
+ChooseMoveToForget:
+	ld hl, wOptions1
 	ld a, [hl]
 	push af
 	set NO_TEXT_SCROLL, [hl]
+	call LoadTileMapToTempTileMap
+	call LoadFontsBattleExtra
+	ld a, MOVESCREEN_NEWMOVE
+	ld [wMoveScreenMode], a
+	call MoveScreenLoop
+	pop bc
+	push af
+	ld a, b
+	ld [wOptions1], a
+	call ClearBGPalettes
+	ld a, [wBattleMode]
+	and a
+	jr z, .tm_tutor
+
+	; Level up in battle
+	call ClearTileMap
+	call ClearSprites
+	call ClearPalettes
+	call DelayFrame
+	call UpdateSprites
+	farcall FinishBattleAnim
+	farcall _LoadBattleFontsHPBar
+	farcall GetMonBackpic
+	call LoadTempTileMapToTileMap
+	jr .done
+
+.tm_tutor
+	farcall LoadPartyMenuGFX
+	farcall InitPartyMenuWithCancel
+	farcall InitPartyMenuGFX
+	farcall WritePartyMenuTilemap
+	farcall PrintPartyMenuText
+	call SpeechTextBox
+.done
+	call ApplyTilemapInVBlank
+	call SetPalettes
+	call DelayFrame
+	pop af
+	ret
+
+ChooseMoveToRelearn:
+	ld hl, wOptions1
+	ld a, [hl]
+	push af
+	set NO_TEXT_SCROLL, [hl]
+	call LoadFontsBattleExtra
+	ld a, MOVESCREEN_REMINDER
+	ld [wMoveScreenMode], a
+	call MoveScreenLoop
+	pop bc
+	push af
+	ld a, b
+	ld [wOptions1], a
+	jr c, .no_moves
+	call ClearBGPalettes
+	ld a, [wCurPartyMon]
+	push af
+	farcall LoadPartyMenuGFX
+	farcall InitPartyMenuWithCancel
+	farcall InitPartyMenuGFX
+	farcall WritePartyMenuTilemap
+	farcall PrintPartyMenuText
+	pop af
+	ld [wCurPartyMon], a
+	pop af
+	push af
+	call nz, SpeechTextBox
+	call ApplyTilemapInVBlank
+	call SetPalettes
+	call DelayFrame
+.no_moves
+	pop af
+	ret
+
+ManagePokemonMoves: ; 12fba
+	ld a, [wCurPartySpecies]
+	cp EGG
+	jr z, .egg
+	ld hl, wOptions1
+	ld a, [hl]
+	push af
+	set NO_TEXT_SCROLL, [hl]
+	xor a
+	ld [wMoveScreenMode], a
 	call MoveScreenLoop
 	pop af
-	ld [Options1], a
+	ld [wOptions1], a
 	call ClearBGPalettes
 
 .egg
@@ -1402,186 +1370,335 @@ ManagePokemonMoves: ; 12fba
 	ret
 ; 12fd5
 
-MoveScreenLoop: ; 12fd5
-	ld a, [CurPartyMon]
-	inc a
-	ld [wPartyMenuCursor], a
-	call SetUpMoveScreenBG
-	call Function132d3
-	ld de, MoveScreenAttributes
-	call SetMenuAttributes
-.loop
-	call SetUpMoveList
-	ld hl, w2DMenuFlags1
-	set 6, [hl]
-	jr .skip_joy
-
-.joy_loop
-	call ScrollingMenuJoypad
-	bit 1, a
-	jp nz, .b_button
-	bit 0, a
-	jp nz, .a_button
-	bit 4, a
-	jp nz, .d_right
-	bit 5, a
-	jp nz, .d_left
-
-.skip_joy
-	call PrepareToPlaceMoveData
-	ld a, [wMoveSwapBuffer]
-	and a
-	jr nz, .moving_move
-	call PlaceMoveData
-	jp .joy_loop
-
-.moving_move
-	hlcoord 1, 12
-	lb bc, 5, SCREEN_WIDTH - 2
-	call ClearBox
-	hlcoord 1, 14
-	ld de, String_MoveSwap
-	call PlaceString
-	jp .joy_loop
-.b_button
-	call PlayClickSFX
-	call WaitSFX
-	ld a, [wMoveSwapBuffer]
-	and a
-	jp z, .exit
-
-	ld a, [wMoveSwapBuffer]
-	ld [wMenuCursorY], a
+MoveScreenLoop:
+; Returns:
+; a = >0: f = nc|nz; selected move (index in wMoveScreenSelectedMove)
+; a =  0: f = nc|z;  user pressed B
+;         f = c;     no options existed, move screen was aborted early
 	xor a
-	ld [wMoveSwapBuffer], a
-	hlcoord 1, 2
-	lb bc, 8, SCREEN_WIDTH - 2
-	call ClearBox
-	jp .loop
-; 1305b
+	ld [wMoveScreenSelectedMove], a
+	ld [wMoveScreenCursor], a
+	ld [wMoveScreenOffset], a
+	ld [wMoveScreenNumMoves], a
 
-.d_right
-	ld a, [wMoveSwapBuffer]
+	; Zero the first 4 moves to avoid oddities if we have less than 4 total
+	ld hl, wMoveScreenMoves
+	ld b, NUM_MOVES
+	xor a
+.zero_movescreenmoves
+	ld [hli], a
+	dec b
+	jr nz, .zero_movescreenmoves
+	ld a, [wMoveScreenMode]
+	cp MOVESCREEN_REMINDER
+	jr z, .movecopy_reminder
+
+	; Copy over moves from the party struct
+	ld bc, NUM_MOVES
+	ld a, MON_MOVES
+	call GetPartyParamLocation
+	ld de, wMoveScreenMoves
+.movecopy_loop
+	ld a, [hli]
 	and a
-	jp nz, .joy_loop
+	jr z, .movecopy_done
+	ld [de], a
+	inc de
+	inc b
+	dec c
+	jr nz, .movecopy_loop
 
-	ld a, [CurPartyMon]
+.movecopy_done
+	; If we're learning a new move, append the move to the move list buffer
+	ld a, [wMoveScreenMode]
+	cp MOVESCREEN_NEWMOVE
+	jr nz, .newmove_done
+	ld a, [wPutativeTMHMMove]
+	ld [de], a
+	inc b
+	jr .newmove_done
+
+.movecopy_reminder
+	call GetForgottenMoves
+	ld b, c
+.newmove_done
+	ld a, b
+	ld [wMoveScreenNumMoves], a
+	sub 1
+	ret c ; no moves
+
+	; Initialize the interface
+	call SetUpMoveScreenBG
+	call MoveScreen_ListMoves
+	jr .loop
+.outer_loop
+	call MoveScreen_ListMovesFast
+.pressed_start
+	ld c, 5
+	call DelayFrames
+.loop
+	farcall PlaySpriteAnimationsAndDelayFrame
+	call JoyTextDelay
+
+	; allow d-pad to be held, but not a/b/start/select
+	ld a, [hJoyPressed]
+	and BUTTONS
 	ld b, a
-	push bc
-	call .cycle_right
-	pop bc
-	ld a, [CurPartyMon]
-	cp b
-	jp z, .joy_loop
-	jp MoveScreenLoop
-
-.d_left
-	ld a, [wMoveSwapBuffer]
-	and a
-	jp nz, .joy_loop
-	ld a, [CurPartyMon]
-	ld b, a
-	push bc
-	call .cycle_left
-	pop bc
-	ld a, [CurPartyMon]
-	cp b
-	jp z, .joy_loop
-	jp MoveScreenLoop
-
-.cycle_right
-	ld a, [CurPartyMon]
-	inc a
-	ld [CurPartyMon], a
+	ld a, [hJoyDown]
+	and D_PAD
+	or b
+	rrca
+	jr c, .pressed_a
+	rrca
+	jr c, .pressed_b
+	rrca
+	jr c, .pressed_select
+	rrca
+	jr c, .pressed_start
+	rrca
+	jr c, .pressed_right
+	rrca
+	jp c, .pressed_left
+	rrca
+	jp c, .pressed_up
+	rrca
+	jp c, .pressed_down
+	jr .loop
+.pressed_a
+	ld a, [wMoveScreenMode]
+	and a ; cp MOVESCREEN_NORMAL
+	jr z, .swap_move
+	ld de, SFX_READ_TEXT_2
+	call PlaySFX
+	ld a, [wMoveScreenCursor]
+	ld c, a
+	ld a, [wMoveScreenOffset]
+	add c
 	ld c, a
 	ld b, 0
-	ld hl, PartySpecies
+	ld hl, wMoveScreenMoves
 	add hl, bc
 	ld a, [hl]
-	cp -1
-	jr z, .cycle_left
-	cp EGG
-	ret nz
-	jr .cycle_right
-
-.cycle_left
-	ld a, [CurPartyMon]
+	ld [wMoveScreenSelectedMove], a
+	ld a, [wMoveScreenMode]
+	cp MOVESCREEN_NEWMOVE
+	ld a, c
+	jr nz, .ok
+	ld a, [hl]
+	push bc
+	call IsHMMove
+	pop bc
+	ld a, c
+	jr nc, .ok
+	cp 4 ; selected new move
+	jr z, .ok
+	ld hl, Text_CantForgetHM
+	call PrintTextNoBox
+	jr .outer_loop
+.ok
+	inc a
+	and a
+	ret
+.pressed_b
+	ld de, SFX_READ_TEXT_2
+	call PlaySFX
+	ld a, [wMoveSwapBuffer]
 	and a
 	ret z
-.cycle_left_loop
-	ld a, [CurPartyMon]
-	dec a
-	ld [CurPartyMon], a
-	ld c, a
-	ld b, 0
-	ld hl, PartySpecies
-	add hl, bc
-	ld a, [hl]
-	cp EGG
-	ret nz
-	ld a, [CurPartyMon]
+	xor a
+	ld [wMoveSwapBuffer], a
+	jp .outer_loop
+.pressed_select
+	ld a, [wMoveScreenMode]
 	and a
-	jr z, .cycle_right
-	jr .cycle_left_loop
-; 130c6
-
-.a_button
-	call PlayClickSFX
-	call WaitSFX
+	jp nz, .loop
+.swap_move
+	; check if we are in swap mode
 	ld a, [wMoveSwapBuffer]
 	and a
-	jr nz, .place_move
-	ld a, [wMenuCursorY]
+	jp nz, .perform_swap
+	ld a, [wMoveScreenCursor]
+	inc a
 	ld [wMoveSwapBuffer], a
-	call PlaceHollowCursor
-	jp .moving_move
-
-.place_move
-	ld hl, PartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [CurPartyMon]
-	call AddNTimes
-	push hl
-	call .copy_move
-	pop hl
-	ld bc, MON_PP - MON_MOVES
-	add hl, bc
-	call .copy_move
-	ld a, [wBattleMode]
-	jr z, .swap_moves
-	ld hl, BattleMonMoves
-	ld bc, BATTLEMON_STRUCT_LENGTH
-	ld a, [CurPartyMon]
-	call AddNTimes
-	push hl
-	call .copy_move
-	pop hl
-	ld bc, (BattleMonPP - BattleMonMoves)
-	add hl, bc
-	call .copy_move
-
-.swap_moves
-	ld de, SFX_SWITCH_POKEMON
-	call PlaySFX
-	call WaitSFX
-	ld de, SFX_SWITCH_POKEMON
-	call PlaySFX
-	call WaitSFX
-	hlcoord 1, 2
-	lb bc, 8, 18
-	call ClearBox
-	hlcoord 10, 10
-	lb bc, 1, 9
-	call ClearBox
-	jp .loop
-; 1313a
-
-.copy_move
-	push hl
-	ld a, [wMenuCursorY]
+	jp .outer_loop
+.pressed_right
+	ld a, [wMoveScreenMode]
+	and a
+	jr z, .species_right
+	ld a, [wMoveScreenCursor]
+	cp 3
+	jp z, .far_down
+	ld a, [wMoveScreenNumMoves]
 	dec a
+	cp 4
+	jp c, .update_screen_cursor
+	ld a, 3
+	jp .update_screen_cursor
+.species_right
+	ld a, [wPartyCount]
+	ld d, a
+	ld a, [wCurPartyMon]
+	dec d
+	cp d
+	jp z, .loop
+.loop_right
+	inc a
+	ld d, a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld hl, wPartyMon1IsEgg
+	rst AddNTimes
+	ld a, [hl]
+	and IS_EGG_MASK
+	ld a, d
+	jr nz, .loop_right_invalid
+	ld hl, wPartyMon1Species
+	rst AddNTimes
+	ld a, [hl]
+	call IsAPokemon
+	ld a, d
+	jr c, .loop_right_invalid
+	ld [wCurPartyMon], a
+	jp MoveScreenLoop
+.loop_right_invalid
+	ld a, [wPartyCount]
+	dec a
+	cp d
+	ld a, d
+	jp z, .loop
+	jr .loop_right
+.pressed_left
+	ld a, [wMoveScreenMode]
+	and a
+	jp z, .species_left
+	ld a, [wMoveScreenCursor]
+	and a
+	jr z, .far_up
+	xor a
+	jr .update_screen_cursor
+.species_left
+	ld a, [wCurPartyMon]
+	and a
+	jp z, .loop
+.loop_left
+	dec a
+	ld d, a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld hl, wPartyMon1IsEgg
+	rst AddNTimes
+	ld a, [hl]
+	and IS_EGG_MASK
+	ld a, d
+	jr nz, .loop_left_invalid
+	ld hl, wPartyMon1Species
+	rst AddNTimes
+	ld a, [hl]
+	call IsAPokemon
+	ld a, d
+	jr c, .loop_left_invalid
+	ld [wCurPartyMon], a
+	jp MoveScreenLoop
+.loop_left_invalid
+	and a
+	jp z, .loop
+	jr .loop_left
+.pressed_up
+	ld a, [wMoveScreenCursor]
+	and a
+	jr z, .scroll_up
+	dec a
+	jr .update_screen_cursor
+.pressed_down
+	ld a, [wMoveScreenNumMoves]
+	ld b, a
+	ld a, [wMoveScreenCursor]
+	cp 3
+	jr z, .scroll_down
+	inc a
+	cp b
+	jp nc, .outer_loop ; less than 4 moves
+.update_screen_cursor
+	ld [wMoveScreenCursor], a
+	jp .outer_loop
+.far_up
+	ld a, [wMoveScreenOffset]
+	sub 4
+	jr nc, .update_screen_offset
+	xor a
+	jr .update_screen_offset
+.scroll_up
+	ld a, [wMoveScreenOffset]
+	and a
+	jp z, .outer_loop
+	dec a
+	jr .update_screen_offset
+.far_down
+	ld a, [wMoveScreenNumMoves]
+	sub 4
+	ld b, a
+	ld a, [wMoveScreenOffset]
+	add 4
+	cp b
+	jr c, .update_screen_offset
+	ld a, b
+	jr .update_screen_offset
+.scroll_down
+	ld a, [wMoveScreenNumMoves]
+	ld b, a
+	ld a, [wMoveScreenOffset]
+	add 4
+	sub b
+	jp nc, .outer_loop
+	ld a, [wMoveScreenOffset]
+	inc a
+.update_screen_offset
+	ld [wMoveScreenOffset], a
+	call MoveScreen_ListMoves
+	jp .loop
+
+.perform_swap
+	ld a, [wBattleMode]
+	and a
+	jr z, .regular_swap_move
+
+	; If we're transformed, the Moves screen shows our original moveset.
+	; So swapping in the moves screen swap our original moves, while
+	; swapping in the battle interface swaps our temporary moves.
+	ld a, [wPlayerSubStatus2]
+	bit SUBSTATUS_TRANSFORMED, a
+	jr nz, .regular_swap_move
+	ld a, [wMoveScreenCursor]
+	inc a
+	ld [wMenuCursorY], a
+	farcall SwapBattleMoves
+	jr .finish_swap
+
+.regular_swap_move
+	ld a, MON_MOVES
+	call GetPartyParamLocation
+	call .swap_location
+	ld a, MON_PP
+	call GetPartyParamLocation
+	call .swap_location
+
+.finish_swap
+	ld hl, wMoveScreenMoves
+	call .swap_location
+	ld de, SFX_SWITCH_POKEMON
+	call PlaySFX
+	call WaitSFX
+	ld de, SFX_SWITCH_POKEMON
+	call PlaySFX
+	call WaitSFX
+	xor a
+	ld [wMoveSwapBuffer], a
+	call MoveScreen_ListMoves
+	jp .loop
+
+.swap_location
+	ld a, [wMoveScreenCursor]
+	ld b, 0
 	ld c, a
-	ld b, $0
+	push hl
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -1589,7 +1706,6 @@ MoveScreenLoop: ; 12fd5
 	ld a, [wMoveSwapBuffer]
 	dec a
 	ld c, a
-	ld b, $0
 	add hl, bc
 	ld a, [de]
 	ld b, [hl]
@@ -1597,24 +1713,84 @@ MoveScreenLoop: ; 12fd5
 	ld a, b
 	ld [de], a
 	ret
-; 13154
 
-.exit
-	xor a
-	ld [wMoveSwapBuffer], a
-	ld hl, w2DMenuFlags1
-	res 6, [hl]
-	call ClearSprites
-	jp ClearTileMap
-; 13163
+GetForgottenMoves::
+; retrieve a list of a mon's forgotten moves, excluding ones beyond level
+; and moves the mon already knows
+	ld a, MON_SPECIES
+	call GetPartyParamLocation
+	ld a, [hl]
+	dec a
+	ld b, 0
+	ld c, a
+	ld hl, EvosAttacksPointers
+	add hl, bc
+	add hl, bc
+	ld a, BANK(EvosAttacksPointers)
+	call GetFarHalfword
+.skip_evos
+	ld a, BANK(EvosAttacks)
+	call GetFarByte
+	inc hl
+	and a
+	jr nz, .skip_evos
 
-MoveScreenAttributes: ; 13163
-	db 3, 1
-	db 3, 1
-	db $40, $00
-	dn 2, 0
-	db D_UP | D_DOWN | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
-; 1316b
+	ld de, wMoveScreenMoves
+	ld c, a
+	ld b, 100 ; Gen VII behaviour
+	inc b ; so that we can use jr nc
+.loop
+	ld a, BANK(EvosAttacks)
+	call GetFarByte
+	inc hl
+	and a
+	ret z
+	cp b
+	ret nc
+	ld a, BANK(EvosAttacks)
+	call GetFarByte
+	inc hl
+
+	; exclude moves the user already knows
+	push hl
+	push bc
+	ld b, a
+	ld a, MON_MOVES
+	call GetPartyParamLocation
+	ld c, NUM_MOVES
+	ld a, b
+	call .move_exists
+	jr z, .already_knows_move
+	pop bc
+	push bc
+	jr .move_ok
+	ld b, 0
+	ld hl, wMoveScreenMoves
+	call .move_exists
+	jr z, .already_knows_move
+.move_ok
+	pop bc
+	pop hl
+	ld [de], a
+	inc de
+	inc c
+	jr .loop
+.already_knows_move
+	pop bc
+	pop hl
+	jr .loop
+
+.move_exists
+	ld b, a
+.move_exists_loop
+	ld a, [hli]
+	cp b
+	ret z
+	dec c
+	jr nz, .move_exists_loop
+	inc c ; ret nz
+	ld a, b
+	ret
 
 String_MoveSwap: ; 1316b
 	db "Switch with?@"
@@ -1626,12 +1802,14 @@ SetUpMoveScreenBG: ; 13172
 	call ClearSprites
 	xor a
 	ld [hBGMapMode], a
+	ld b, CGB_PARTY_MENU
+	call GetCGBLayout
 	farcall LoadStatsGFX
 	farcall ClearSpriteAnims2
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld e, a
 	ld d, $0
-	ld hl, PartySpecies
+	ld hl, wPartySpecies
 	add hl, de
 	ld a, [hl]
 	ld [wd265], a
@@ -1646,9 +1824,9 @@ SetUpMoveScreenBG: ; 13172
 	lb bc, 2, 3
 	call ClearBox
 	xor a
-	ld [MonType], a
-	ld hl, PartyMonNicknames
-	ld a, [CurPartyMon]
+	ld [wMonType], a
+	ld hl, wPartyMonNicknames
+	ld a, [wCurPartyMon]
 	call GetNick
 	hlcoord 5, 1
 	call PlaceString
@@ -1656,77 +1834,182 @@ SetUpMoveScreenBG: ; 13172
 	farcall CopyPkmnToTempMon
 	pop hl
 	call PrintLevel
-	ld hl, PlayerHPPal
+	ld hl, wPlayerHPPal
 	call SetHPPal
+	call SetPalettes
 	hlcoord 16, 0
 	lb bc, 1, 3
 	jp ClearBox
 ; 131ef
 
-SetUpMoveList: ; 131ef
+MoveScreen_ListMoves:
+	ld c, 2
+	call DelayFrames
+	hlcoord 1, 2
+	lb bc, 14, 18
+	call ClearBox
 	xor a
 	ld [hBGMapMode], a
-	ld [wMoveSwapBuffer], a
-	ld [MonType], a
-	predef CopyPkmnToTempMon
-	ld hl, TempMonMoves
+	ld hl, wMoveScreenMoves
+	ld b, a
+	ld a, [wMoveScreenOffset]
+	ld c, a
+	add hl, bc
 	ld de, wListMoves_MoveIndicesBuffer
 	ld bc, NUM_MOVES
-	call CopyBytes
-	ld a, SCREEN_WIDTH * 2
-	ld [Buffer1], a
+	rst CopyBytes
+	ld a, SCREEN_WIDTH * 2 ; move list spacing
+	ld [wBuffer1], a
 	hlcoord 2, 3
 	predef ListMoves
+
+	; Get PP -- either current PP, or default PP for the move
+	ld hl, wListMoves_MoveIndicesBuffer
+	ld de, wTempMonMoves
+	ld bc, NUM_MOVES
+	rst CopyBytes
+
+	; Get default PP for moves
+	ld c, NUM_MOVES
+	ld hl, wTempMonMoves
+	ld de, wTempMonPP
+.defaultpp_loop
+	ld a, [hli]
+	push hl
+	push bc
+	ld hl, Moves + MOVE_PP
+	ld bc, MOVE_LENGTH
+	dec a
+	rst AddNTimes
+	ld a, BANK(Moves)
+	call GetFarByte
+	ld [de], a
+	inc de
+	pop bc
+	pop hl
+	dec c
+	jr nz, .defaultpp_loop
+
+	; Get current PP for current moves
+	ld a, [wMoveScreenMode]
+	cp MOVESCREEN_REMINDER
+	jr z, .got_pp
+	ld a, MON_PP
+	call GetPartyParamLocation
+	ld c, NUM_MOVES
+	ld de, wTempMonPP
+	ld a, [wMoveScreenOffset]
+.currentpp_loop
+	and a
+	jr z, .currentpp_ok
+	dec a
+	jr .currentpp_next
+.currentpp_ok
+	push af
+	ld a, [hl]
+	ld [de], a
+	inc de
+	pop af
+.currentpp_next
+	inc hl
+	dec c
+	jr nz, .currentpp_loop
+
+.got_pp
+	; Now we have things set up correctly
 	hlcoord 10, 4
 	predef ListMovePP
-	call WaitBGMap
-	call SetPalettes
-	ld a, [wNumMoves]
-	inc a
-	ld [w2DMenuNumRows], a
+	hlcoord 1, 12, wAttrMap
+	ld bc, 6
+	xor a
+	call ByteFill
+
+	farcall ApplyAttrMap
+
+MoveScreen_ListMovesFast:
 	hlcoord 0, 11
 	lb bc, 5, 18
-	jp TextBox
-; 13235
-
-PrepareToPlaceMoveData: ; 13235
-	ld hl, PartyMon1Moves
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [CurPartyMon]
-	call AddNTimes
-	ld a, [wMenuCursorY]
-	dec a
+	call TextBox
+	ld hl, wTempMonMoves
+	ld a, [wMoveScreenCursor]
 	ld c, a
-	ld b, $0
+	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	ld [CurMove], a
-	hlcoord 1, 12
-	lb bc, 5, 18
-	jp ClearBox
-; 13256
+	ld [wCurMove], a
 
-PlaceMoveData: ; 13256
+	hlcoord 1, 1 ; 2 below topmost position
+	ld bc, SCREEN_WIDTH * 2
+	ld a, [wMoveSwapBuffer]
+	ld d, a
+	ld a, [wMoveScreenCursor]
+	inc a
+	ld e, a
+	xor a
+.cursor_loop
+	inc a
+	add hl, bc
+	ld [hl], " "
+	cp d
+	jr nz, .not_selected_swap
+	ld [hl], "▷"
+.not_selected_swap
+	cp e
+	jr nz, .not_selected
+	ld [hl], "▶"
+.not_selected
+	cp NUM_MOVES
+	jr nz, .cursor_loop
+	ld a, [wMoveScreenOffset]
+	and a
+	jr z, .skip_up
+	hlcoord 18, 2
+	ld a, "▲"
+	ld [hl], a
+.skip_up
+	ld a, [wMoveScreenOffset]
+	ld b, a
+	ld a, [wMoveScreenNumMoves]
+	sub b
+	sub 5
+	jr c, .skip_down
+	hlcoord 18, 10
+	ld a, "▼"
+	ld [hl], a
+.skip_down
+	jp PlaceMoveData
+
+PlaceMoveData:
+	ld a, [wMoveSwapBuffer]
+	and a
+	jr z, .not_swapping
+	hlcoord 1, 14
+	ld de, String_MoveSwap
+	call PlaceString
+	ld a, $1
+	ld [hBGMapMode], a
+	ret
+
+.not_swapping
 	xor a
 	ld [hBGMapMode], a
 
-	ld b, SCGB_MOVE_LIST
-	call GetSGBLayout
-
-	hlcoord 7, 12
+	hlcoord 10, 12
 	ld de, String_PowAcc
 	call PlaceString
 
-	ld a, [CurMove]
+	ld a, [wCurMove]
 	dec a
 	ld hl, Moves + MOVE_CATEGORY
 	ld bc, MOVE_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
+	ld b, a
+	push bc
 	ld hl, CategoryIconGFX
 	ld bc, 2 tiles
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, VTiles2 tile $59
@@ -1737,21 +2020,29 @@ PlaceMoveData: ; 13256
 	inc hl
 	ld [hl], $5a
 
-	ld a, [CurMove]
+	ld a, [wCurMove]
 	dec a
 	ld hl, Moves + MOVE_TYPE
 	ld bc, MOVE_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
+	pop bc
+	ld c, a
+	ld de, wUnknBGPals palette 0 + 2
+	push af
+	farcall LoadCategoryAndTypePals
+	call SetPalettes
+
+	pop af
 	ld hl, TypeIconGFX
-	ld bc, 4 tiles
-	call AddNTimes
+	ld bc, 4 * LEN_1BPP_TILE
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, VTiles2 tile $5b
 	lb bc, BANK(TypeIconGFX), 4
-	call Request2bpp
+	call Request1bpp
 	hlcoord 3, 12
 	ld [hl], $5b
 	inc hl
@@ -1761,14 +2052,14 @@ PlaceMoveData: ; 13256
 	inc hl
 	ld [hl], $5e
 
-	ld a, [CurMove]
+	ld a, [wCurMove]
 	dec a
 	ld hl, Moves + MOVE_POWER
 	ld bc, MOVE_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	hlcoord 8, 12
+	hlcoord 10, 12
 	cp 2
 	jr c, .no_power
 	ld [wd265], a
@@ -1781,11 +2072,11 @@ PlaceMoveData: ; 13256
 	call PlaceString
 
 .place_accuracy
-	ld a, [CurMove]
+	ld a, [wCurMove]
 	dec a
 	ld hl, Moves + MOVE_ACC
 	ld bc, MOVE_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	; convert internal accuracy representation to a number
 	; between 0-100
 	ld a, BANK(Moves)
@@ -1800,7 +2091,7 @@ PlaceMoveData: ; 13256
 	jr z, .no_inc
 	inc a
 .no_inc
-	hlcoord 13, 12
+	hlcoord 15, 12
 	cp 2
 	jr c, .no_acc
 	ld [wd265], a
@@ -1824,71 +2115,9 @@ String_na: ; 132cf
 	db "---@"
 
 String_PowAcc:
-	db "/   <BOLDP>/   %@"
+	db "   <BOLDP>/   %@"
 
-Function132d3: ; 132d3
-	call Function132da
-	jp Function132fe
-; 132da
-
-Function132da: ; 132da
-	ld a, [CurPartyMon]
-	and a
-	ret z
-	ld c, a
-	ld e, a
-	ld d, 0
-	ld hl, PartyCount
-	add hl, de
-.loop
-	ld a, [hl]
-	and a
-	jr z, .prev
-	cp EGG
-	jr z, .prev
-	cp NUM_POKEMON + 1
-	jr c, .legal
-
-.prev
-	dec hl
-	dec c
-	jr nz, .loop
-	ret
-
-.legal
-	hlcoord 16, 0
-	ld [hl], "◀"
-	ret
-; 132fe
-
-Function132fe: ; 132fe
-	ld a, [CurPartyMon]
-	inc a
-	ld c, a
-	ld a, [PartyCount]
-	cp c
-	ret z
-	ld e, c
-	ld d, 0
-	ld hl, PartySpecies
-	add hl, de
-.loop
-	ld a, [hl]
-	cp -1
-	ret z
-	and a
-	jr z, .next
-	cp EGG
-	jr z, .next
-	cp NUM_POKEMON + 1
-	jr c, .legal
-
-.next
-	inc hl
-	jr .loop
-
-.legal
-	hlcoord 18, 0
-	ld [hl], "▶"
-	ret
-; 13327
+Text_CantForgetHM:
+; HM moves can't be forgotten now.
+	text_jump UnknownText_0x1c5772
+	db "@"

@@ -1,24 +1,21 @@
 EmbeddedTower_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  6, 23, ROUTE_47, 6
+	warp_event  7, 23, ROUTE_47, 6
 
-EmbeddedTower_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $17, $a, 6, ROUTE_47
-	warp_def $17, $b, 6, ROUTE_47
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  8,  9, SPRITE_STEVEN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EmbeddedTowerSteven1Script, EVENT_EMBEDDED_TOWER_STEVEN_1
+	object_event  4, 11, SPRITE_STEVEN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EmbeddedTowerSteven2Script, EVENT_EMBEDDED_TOWER_STEVEN_2
 
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_STEVEN, 9, 12, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EmbeddedTowerSteven1Script, EVENT_EMBEDDED_TOWER_STEVEN_1
-	person_event SPRITE_STEVEN, 11, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EmbeddedTowerSteven2Script, EVENT_EMBEDDED_TOWER_STEVEN_2
-
-const_value set 2
+	const_def 1 ; object constants
 	const EMBEDDEDTOWER_STEVEN1
 	const EMBEDDEDTOWER_STEVEN2
 
@@ -26,7 +23,7 @@ EmbeddedTowerSteven1Script:
 	faceplayer
 	opentext
 	checkevent EVENT_BEAT_STEVEN
-	iftrue EmbeddedTowerBeatSteven1Script
+	iftrue .Beaten
 	checkevent EVENT_LISTENED_TO_STEVEN_INTRO
 	iftrue .HeardIntro
 	writetext EmbeddedTowerSteven1IntroText
@@ -36,10 +33,10 @@ EmbeddedTowerSteven1Script:
 	writetext EmbeddedTowerSteven1TowerText
 	waitbutton
 	checkevent EVENT_BEAT_ELITE_FOUR
-	iffalse .NotYet
+	iffalse_jumpopenedtext EmbeddedTowerSteven1NotNowText
 	writetext EmbeddedTowerSteven1ChallengeText
 	yesorno
-	iffalse .Refused
+	iffalse_jumpopenedtext EmbeddedTowerSteven1NoText
 	writetext EmbeddedTowerSteven1YesText
 	waitbutton
 	closetext
@@ -50,43 +47,25 @@ EmbeddedTowerSteven1Script:
 	reloadmapafterbattle
 	setevent EVENT_BEAT_STEVEN
 	opentext
-	jump EmbeddedTowerBeatSteven1Script
-
-.NotYet:
-	writetext EmbeddedTowerSteven1NotNowText
-	waitbutton
-	closetext
-	end
-
-.Refused:
-	writetext EmbeddedTowerSteven1NoText
-	waitbutton
-	closetext
-	end
-
-EmbeddedTowerBeatSteven1Script:
+.Beaten:
 	checkevent EVENT_GOT_MUSCLE_BAND_FROM_STEVEN
-	iftrue .GotMuscleBand
+	iftrue_jumpopenedtext EmbeddedTowerSteven1AfterText
 	writetext EmbeddedTowerSteven1ItemText
 	waitbutton
 	verbosegiveitem MUSCLE_BAND
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_MUSCLE_BAND_FROM_STEVEN
 .GotMuscleBand
-	writetext EmbeddedTowerSteven1AfterText
-	waitbutton
-.Done:
-	closetext
-	end
+	jumpopenedtext EmbeddedTowerSteven1AfterText
 
 EmbeddedTowerSteven2Script:
+	checkevent EVENT_BEAT_STEVEN
+	iftrue_jumptextfaceplayer EmbeddedTowerSteven2AfterText
 	faceplayer
 	opentext
-	checkevent EVENT_BEAT_STEVEN
-	iftrue .Beat
 	writetext EmbeddedTowerSteven2ChallengeText
 	yesorno
-	iffalse .Refused
+	iffalse_jumpopenedtext EmbeddedTowerSteven2NoText
 	writetext EmbeddedTowerSteven2YesText
 	waitbutton
 	closetext
@@ -97,17 +76,7 @@ EmbeddedTowerSteven2Script:
 	reloadmapafterbattle
 	setevent EVENT_BEAT_STEVEN
 	opentext
-.Beat:
-	writetext EmbeddedTowerSteven2AfterText
-	waitbutton
-	closetext
-	end
-
-.Refused:
-	writetext EmbeddedTowerSteven2NoText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext EmbeddedTowerSteven2AfterText
 
 EmbeddedTowerSteven1IntroText:
 	text "Hello! I'm Steven."
@@ -145,7 +114,7 @@ EmbeddedTowerSteven1TowerText:
 
 EmbeddedTowerSteven1NotNowText:
 	text "Steven: Your"
-	line "Pokemon are look-"
+	line "#mon are look-"
 	cont "ing pretty good."
 
 	para "If you can beat"
@@ -157,7 +126,7 @@ EmbeddedTowerSteven1NotNowText:
 
 EmbeddedTowerSteven1ChallengeText:
 	text "Steven: Your"
-	line "Pokemon are look-"
+	line "#mon are look-"
 	cont "ing pretty good."
 
 	para "Since we're both"

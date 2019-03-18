@@ -1,47 +1,38 @@
 SaffronTrainStation_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  8, 17, SAFFRON_CITY, 6
+	warp_event  9, 17, SAFFRON_CITY, 6
+	warp_event  6,  5, GOLDENROD_MAGNET_TRAIN_STATION, 4
+	warp_event 11,  5, GOLDENROD_MAGNET_TRAIN_STATION, 3
 
-SaffronTrainStation_MapEventHeader:
+	db 1 ; coord events
+	coord_event 11,  6, 0, Script_ArriveFromGoldenrod
 
-.Warps: db 4
-	warp_def $11, $8, 6, SAFFRON_CITY
-	warp_def $11, $9, 6, SAFFRON_CITY
-	warp_def $5, $6, 4, GOLDENROD_MAGNET_TRAIN_STATION
-	warp_def $5, $b, 3, GOLDENROD_MAGNET_TRAIN_STATION
+	db 0 ; bg events
 
-.XYTriggers: db 1
-	xy_trigger 0, $6, $b, Script_ArriveFromGoldenrod
+	db 4 ; object events
+	object_event  9,  9, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, OfficerScript_0x18a81e, -1
+	object_event 10, 14, SPRITE_GYM_GUY, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GymGuyScript_0x18a875, -1
+	object_event  6, 11, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x18aaab, EVENT_SAFFRON_TRAIN_STATION_POPULATION
+	object_event  6, 10, SPRITE_LASS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x18ab20, EVENT_SAFFRON_TRAIN_STATION_POPULATION
 
-.Signposts: db 0
-
-.PersonEvents: db 4
-	person_event SPRITE_OFFICER, 9, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, OfficerScript_0x18a81e, -1
-	person_event SPRITE_GYM_GUY, 14, 10, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GymGuyScript_0x18a875, -1
-	person_event SPRITE_TEACHER, 11, 6, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TeacherScript_0x18a889, EVENT_SAFFRON_TRAIN_STATION_POPULATION
-	person_event SPRITE_LASS, 10, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, LassScript_0x18a88c, EVENT_SAFFRON_TRAIN_STATION_POPULATION
-
-const_value set 2
+	const_def 1 ; object constants
 	const SAFFRONTRAINSTATION_OFFICER
 
 OfficerScript_0x18a81e:
+	checkevent EVENT_RESTORED_POWER_TO_KANTO
+	iffalse_jumptextfaceplayer UnknownText_0x18a8a9
 	faceplayer
 	opentext
-	checkevent EVENT_RESTORED_POWER_TO_KANTO
-	iftrue .MagnetTrainToGoldenrod
-	writetext UnknownText_0x18a8a9
-	waitbutton
-	closetext
-	end
-
-.MagnetTrainToGoldenrod:
 	writetext UnknownText_0x18a8dd
 	yesorno
-	iffalse .DecidedNotToRide
+	iffalse_jumpopenedtext UnknownText_0x18a978
 	checkitem PASS
-	iffalse .PassNotInBag
+	iffalse_jumpopenedtext UnknownText_0x18a956
 	writetext UnknownText_0x18a917
 	waitbutton
 	closetext
@@ -51,57 +42,20 @@ OfficerScript_0x18a81e:
 	special Special_MagnetTrain
 	warpcheck
 	newloadmap MAPSETUP_TRAIN
-	applymovement PLAYER, .MovementBoardTheTrain
-	wait $14
-	end
-
-.MovementBoardTheTrain:
-	turn_head_down
-	step_end
-
-.PassNotInBag:
-	writetext UnknownText_0x18a956
-	waitbutton
-	closetext
-	end
-
-.DecidedNotToRide:
-	writetext UnknownText_0x18a978
-	waitbutton
-	closetext
+	applyonemovement PLAYER, turn_head_down
+	wait 36
 	end
 
 Script_ArriveFromGoldenrod:
 	applymovement SAFFRONTRAINSTATION_OFFICER, MovementData_0x18a88f
 	applymovement PLAYER, MovementData_0x18a8a1
 	applymovement SAFFRONTRAINSTATION_OFFICER, MovementData_0x18a894
-	opentext
-	writetext UnknownText_0x18a993
-	waitbutton
-	closetext
-	end
+	jumptext UnknownText_0x18a993
 
 GymGuyScript_0x18a875:
-	faceplayer
-	opentext
 	checkevent EVENT_RETURNED_MACHINE_PART
-	iftrue UnknownScript_0x18a883
-	writetext UnknownText_0x18a9ca
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x18a883:
-	writetext UnknownText_0x18aa61
-	waitbutton
-	closetext
-	end
-
-TeacherScript_0x18a889:
-	jumptextfaceplayer UnknownText_0x18aaab
-
-LassScript_0x18a88c:
-	jumptextfaceplayer UnknownText_0x18ab20
+	iftrue_jumptextfaceplayer UnknownText_0x18aa61
+	jumptextfaceplayer UnknownText_0x18a9ca
 
 MovementData_0x18a88f:
 	step_up

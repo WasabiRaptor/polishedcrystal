@@ -1,93 +1,73 @@
 SilphCo3F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event 11,  0, SILPH_CO_2F, 2
 
-SilphCo3F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $0, $b, 2, SILPH_CO_2F
+	db 8 ; bg events
+	bg_event  3,  2, SIGNPOST_JUMPTEXT, SilphCo3FDeptSignText
+	bg_event  9,  2, SIGNPOST_JUMPTEXT, SilphCo3FDeptSignText
+	bg_event  5,  0, SIGNPOST_JUMPTEXT, SilphCo3FElevatorText
+	bg_event  0,  3, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  6,  3, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  7,  3, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event 12,  3, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event 13,  3, SIGNPOST_JUMPSTD, difficultbookshelf
 
-.XYTriggers: db 0
-
-.Signposts: db 8
-	signpost 2, 3, SIGNPOST_JUMPTEXT, SilphCo3FDeptSignText
-	signpost 2, 9, SIGNPOST_JUMPTEXT, SilphCo3FDeptSignText
-	signpost 0, 5, SIGNPOST_JUMPTEXT, SilphCo3FElevatorText
-	signpost 3, 0, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 3, 6, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 3, 7, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 3, 12, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 3, 13, SIGNPOST_JUMPSTD, difficultbookshelf
-
-.PersonEvents: db 6
-	person_event SPRITE_SILPH_EMPLOYEE, 5, 10, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, SilphCo3FSilphEmployeeScript, -1
-	person_event SPRITE_SCIENTIST, 5, 2, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SilphCo3FScientist1Script, -1
-	person_event SPRITE_SCIENTIST, 7, 8, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SilphCo3FScientist2Script, -1
-	person_event SPRITE_SCIENTIST, 4, 14, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SilphCo3FScientist3Script, -1
-	person_event SPRITE_OFFICER, 1, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SilphCo3FOfficerScript, -1
-	person_event SPRITE_GENTLEMAN, 6, 6, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, SilphCo3FGentlemanScript, -1
+	db 6 ; object events
+	object_event 10,  5, SPRITE_SILPH_EMPLOYEE, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SilphCo3FSilphEmployeeScript, -1
+	object_event  2,  5, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, SilphCo3FScientist1Text, -1
+	object_event  8,  7, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, SilphCo3FScientist2Text, -1
+	object_event 14,  4, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, pokemart, MARTTYPE_SILPH, MART_SILPH_CO, -1
+	object_event 13,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, SilphCo3FOfficerText, -1
+	object_event  6,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, SilphCo3FGentlemanText, -1
 
 SilphCo3FSilphEmployeeScript:
+	checkevent EVENT_GOT_CHERISH_BALL_FROM_SAFFRON
+	iftrue_jumptextfaceplayer .Text2
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_CHERISH_BALL_FROM_SAFFRON
-	iftrue .GotItem
-	writetext SilphCo3FSilphEmployeeText1
+	writetext .Text1
 	buttonsound
 	verbosegiveitem CHERISH_BALL
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_CHERISH_BALL_FROM_SAFFRON
-.GotItem:
-	writetext SilphCo3FSilphEmployeeText2
-	waitbutton
-.Done:
-	closetext
-	end
+	thisopenedtext
 
-SilphCo3FScientist1Script:
-	jumptextfaceplayer SilphCo3FScientist1Text
-
-SilphCo3FScientist2Script:
-	jumptextfaceplayer SilphCo3FScientist2Text
-
-SilphCo3FScientist3Script:
-	faceplayer
-	opentext
-	pokemart MARTTYPE_SILPH, MART_SILPH_CO
-	closetext
-	end
-
-SilphCo3FOfficerScript:
-	jumptextfaceplayer SilphCo3FOfficerText
-
-SilphCo3FGentlemanScript:
-	jumptextfaceplayer SilphCo3FGentlemanText
-
-SilphCo3FSilphEmployeeText1:
-	text "Silph and Devon"
-	line "partnered up"
-
-	para "to design some"
-	line "special new #"
-	cont "Balls."
-
-	para "We sell them in"
-	line "Kanto, Johto, and"
-	cont "Hoenn."
-
-	para "But they're not"
-	line "all on the market"
-	cont "yet. Like this!"
-	done
-
-SilphCo3FSilphEmployeeText2:
-	text "That's an un-"
-	line "released proto-"
-	cont "type # Ball."
+.Text2:
+	text "That's a very"
+	line "rare type of"
+	cont "# Ball."
 
 	para "Don't waste it!"
+	done
+
+.Text1:
+	text "I'm from a family"
+	line "of # Ball"
+	cont "creators."
+
+	para "My father Kurt is"
+	line "teaching my daugh-"
+	cont "ter how to make"
+
+	para "Apricorn Balls"
+	line "while I'm busy"
+	cont "working here."
+
+	para "You helped them"
+	line "out in Azalea"
+	cont "Town? Great!"
+
+	para "I'm glad my Maizie"
+	line "is doing well."
+
+	para "Take this as a"
+	line "thank-you!"
 	done
 
 SilphCo3FScientist1Text:

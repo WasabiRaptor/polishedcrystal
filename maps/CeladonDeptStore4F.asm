@@ -1,27 +1,23 @@
 CeladonDeptStore4F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event 12,  0, CELADON_DEPT_STORE_5F, 1
+	warp_event 15,  0, CELADON_DEPT_STORE_3F, 2
+	warp_event  2,  0, CELADON_DEPT_STORE_ELEVATOR, 1
 
-CeladonDeptStore4F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $0, $c, 1, CELADON_DEPT_STORE_5F
-	warp_def $0, $f, 2, CELADON_DEPT_STORE_3F
-	warp_def $0, $2, 1, CELADON_DEPT_STORE_ELEVATOR
+	db 1 ; bg events
+	bg_event 14,  0, SIGNPOST_JUMPTEXT, CeladonDeptStore4FDirectoryText
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 0, 14, SIGNPOST_JUMPTEXT, CeladonDeptStore4FDirectoryText
-	signpost 0, 3, SIGNPOST_JUMPSTD, elevatorbutton
-
-.PersonEvents: db 4
-	person_event SPRITE_CLERK, 5, 13, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_MART, 0, MARTTYPE_STANDARD, MART_CELADON_4F, -1
-	person_event SPRITE_SUPER_NERD, 6, 7, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x70f21, -1
-	person_event SPRITE_YOUNGSTER, 2, 8, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x70f55, -1
-	person_event SPRITE_CLERK, 5, 15, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, PosterClerkScript, -1
+	db 4 ; object events
+	object_event 13,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, pokemart, MARTTYPE_STANDARD, MART_CELADON_4F, -1
+	object_event  7,  6, SPRITE_SUPER_NERD, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x70f21, -1
+	object_event  8,  2, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x70f55, -1
+	object_event 15,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, PosterClerkScript, -1
 
 PosterClerkScript:
 	faceplayer
@@ -29,18 +25,17 @@ PosterClerkScript:
 	writetext PosterClerkText
 .Start:
 	special PlaceMoneyTopRight
-	loadmenudata .MenuData
+	loadmenu .MenuData
 	verticalmenu
 	closewindow
-	if_equal $1, .MarillPoster
-	if_equal $2, .ClefairyPoster
-	if_equal $3, .PikachuPoster
-	closetext
-	end
+	ifequal $1, .MarillPoster
+	ifequal $2, .ClefairyPoster
+	ifequal $3, .PikachuPoster
+	endtext
 
 .MarillPoster:
 	checkmoney $0, 3200
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_POSTER_3
 	iftrue .AlreadyBought
 	takemoney $0, 3200
@@ -54,7 +49,7 @@ PosterClerkScript:
 
 .ClefairyPoster:
 	checkmoney $0, 4800
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_POSTER_2
 	iftrue .AlreadyBought
 	takemoney $0, 4800
@@ -68,7 +63,7 @@ PosterClerkScript:
 
 .PikachuPoster:
 	checkmoney $0, 6400
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_POSTER_1
 	iftrue .AlreadyBought
 	takemoney $0, 6400

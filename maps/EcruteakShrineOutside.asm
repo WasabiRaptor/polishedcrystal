@@ -1,45 +1,25 @@
 EcruteakShrineOutside_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 5 ; warp events
+	warp_event  5,  3, ECRUTEAK_SHRINE_INSIDE, 1
+	warp_event  4, 12, ECRUTEAK_CITY, 4
+	warp_event  5, 12, ECRUTEAK_CITY, 4
+	warp_event  6, 12, ECRUTEAK_CITY, 5
+	warp_event  7, 12, ECRUTEAK_CITY, 5
 
-EcruteakShrineOutside_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $3, $5, 1, ECRUTEAK_SHRINE_INSIDE
-	warp_def $b, $4, 4, ECRUTEAK_CITY
-	warp_def $b, $5, 4, ECRUTEAK_CITY
-	warp_def $b, $6, 5, ECRUTEAK_CITY
-	warp_def $b, $7, 5, ECRUTEAK_CITY
+	db 2 ; bg events
+	bg_event  3,  8, SIGNPOST_JUMPTEXT, EcruteakShrineOutsideStatueText
+	bg_event  8,  8, SIGNPOST_JUMPTEXT, EcruteakShrineOutsideStatueText
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 8, 3, SIGNPOST_READ, EcruteakShrineOutsideStatueScript
-	signpost 8, 8, SIGNPOST_READ, EcruteakShrineOutsideStatueScript
-
-.PersonEvents: db 3
-	person_event SPRITE_TWIN, 4, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakShrineOutsideTwinScript, -1
-	person_event SPRITE_HOOTHOOT, 4, 9, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, EcruteakShrineOutsideHoothootScript, -1
-	person_event SPRITE_SAGE, 10, 2, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakShrineOutsideSageScript, -1
-
-EcruteakShrineOutsideTwinScript:
-	jumptextfaceplayer EcruteakShrineOutsideTwinText
-
-EcruteakShrineOutsideHoothootScript:
-	opentext
-	writetext EcruteakShrineOutsideHoothootText
-	cry HOOTHOOT
-	waitbutton
-	closetext
-	end
-
-EcruteakShrineOutsideSageScript:
-	jumptextfaceplayer EcruteakShrineOutsideSageText
-
-EcruteakShrineOutsideStatueScript:
-	jumptext EcruteakShrineOutsideStatueText
+	db 3 ; object events
+	object_event  8,  4, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, EcruteakShrineOutsideTwinText, -1
+	object_event  9,  4, SPRITE_HOOTHOOT, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_POKEMON, HOOTHOOT, EcruteakShrineOutsideHoothootText, -1
+	object_event  2, 10, SPRITE_SAGE, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, EcruteakShrineOutsideSageText, -1
 
 EcruteakShrineOutsideTwinText:
 	text "My Hoothoot's"

@@ -1,13 +1,12 @@
 RefreshScreen:: ; 2dba
-
 	call ClearWindowData
 	ld a, [hROMBank]
 	push af
-	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; and BANK(LoadFonts_NoOAMUpdate)
+	ld a, BANK(ReanchorBGMap_NoOAMUpdate) ; BANK(LoadFonts_NoOAMUpdate)
 	rst Bankswitch
 
 	call ReanchorBGMap_NoOAMUpdate
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call BGMapAnchorTopLeft
 	call LoadFonts_NoOAMUpdate
 
 	pop af
@@ -15,6 +14,9 @@ RefreshScreen:: ; 2dba
 	ret
 ; 2dcf
 
+RefreshScreen_BridgeUpdate::
+	call GetMovementPermissions
+	farjp ReanchorBGMap_NoOAMUpdate_NoDelay
 
 CloseText:: ; 2dcf
 	ld a, [hOAMUpdate]
@@ -26,7 +28,7 @@ CloseText:: ; 2dcf
 
 	pop af
 	ld [hOAMUpdate], a
-	ld hl, VramState
+	ld hl, wVramState
 	res 6, [hl]
 	ret
 ; 2de2
@@ -35,16 +37,19 @@ CloseText:: ; 2dcf
 	call ClearWindowData
 	xor a
 	ld [hBGMapMode], a
-	call OverworldTextModeSwitch
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call LoadMapPart
+	call BGMapAnchorTopLeft
 	xor a
 	ld [hBGMapMode], a
 	call SafeUpdateSprites
+	farcall ReloadVisibleSprites
 	ld a, $90
 	ld [hWY], a
 	call ReplaceKrisSprite
-	farcall ReturnFromMapSetupScript
-	jp LoadStandardFont
+	xor a
+	ld [hBGMapMode], a
+
+	farjp ReturnFromMapSetupScript
 ; 2e08
 
 OpenText:: ; 2e08
@@ -56,7 +61,7 @@ OpenText:: ; 2e08
 
 	call ReanchorBGMap_NoOAMUpdate
 	call SpeechTextBox
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	call BGMapAnchorTopLeft
 	call LoadFonts_NoOAMUpdate
 	pop af
 	rst Bankswitch
@@ -64,13 +69,14 @@ OpenText:: ; 2e08
 	ret
 ; 2e20
 
-_OpenAndCloseMenu_HDMATransferTileMapAndAttrMap:: ; 2e20
+BGMapAnchorTopLeft::
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
 
-	farcall OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
+	ld b, 0
+	call SafeCopyTilemapAtOnce
 
 	pop af
 	ld [hOAMUpdate], a

@@ -1,31 +1,28 @@
 EcruteakPokeCenter1F_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script EcruteakPokeCenter1FBillWalksUpTrigger
 
-.MapTriggers: db 1
-	dw EcruteakPokeCenter1FBillWalksUpTrigger
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, ECRUTEAK_CITY, 6
+	warp_event  6,  7, ECRUTEAK_CITY, 6
+	warp_event  0,  7, POKECENTER_2F, 1
 
-EcruteakPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 6, ECRUTEAK_CITY
-	warp_def $7, $6, 6, ECRUTEAK_CITY
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalMortyScript
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event  6,  3, SPRITE_BILL, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakPokeCenter1FBillScript, EVENT_ECRUTEAK_POKE_CENTER_BILL
+	pc_nurse_event  5, 1
+	object_event 11,  6, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakPokeCenter1FPokefanMScript, -1
+	object_event 11,  5, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakPokeCenter1FLassScript, -1
+	object_event  1,  4, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, EcruteakPokeCenter1FCooltrainerFText, -1
+	object_event  8,  1, SPRITE_GYM_GUY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, EcruteakPokeCenter1FGymGuyText, -1
 
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalMortyScript
-
-.PersonEvents: db 6
-	person_event SPRITE_BILL, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakPokeCenter1FBillScript, EVENT_ECRUTEAK_POKE_CENTER_BILL
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_POKEFAN_M, 6, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakPokeCenter1FPokefanMScript, -1
-	person_event SPRITE_LASS, 5, 11, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakPokeCenter1FLassScript, -1
-	person_event SPRITE_COOLTRAINER_F, 4, 1, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, EcruteakPokeCenter1FCooltrainerFText, -1
-	person_event SPRITE_GYM_GUY, 1, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, EcruteakPokeCenter1FGymGuyText, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const ECRUTEAKPOKECENTER1F_BILL
 
 EcruteakPokeCenter1FBillWalksUpTrigger:
@@ -34,15 +31,15 @@ EcruteakPokeCenter1FBillWalksUpTrigger:
 
 .Script:
 	pause 30
-	moveperson ECRUTEAKPOKECENTER1F_BILL, 0, 7
+	moveobject ECRUTEAKPOKECENTER1F_BILL, 0, 7
 	playsound SFX_EXIT_BUILDING
 	appear ECRUTEAKPOKECENTER1F_BILL
-	spriteface ECRUTEAKPOKECENTER1F_BILL, RIGHT
+	turnobject ECRUTEAKPOKECENTER1F_BILL, RIGHT
 	waitsfx
 	applymovement ECRUTEAKPOKECENTER1F_BILL, .Movement1
 	pause 60
 	applymovement ECRUTEAKPOKECENTER1F_BILL, .Movement2
-	dotrigger $1
+	setscene $1
 	end
 
 .Movement1:
@@ -65,9 +62,8 @@ EcruteakPokeCenter1FBillWalksUpTrigger:
 
 PokemonJournalMortyScript:
 	setflag ENGINE_READ_MORTY_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Special Feature:"
@@ -102,17 +98,18 @@ EcruteakPokeCenter1FBillScript:
 .heardintro
 	writetext .QuestionText
 	yesorno
-	iffalse .No
+	iffalse_jumpopenedtext .NoText
 	writetext .YesText
 	buttonsound
 	waitsfx
 	checkcode VAR_PARTYCOUNT
-	if_equal $6, .NoRoom
+	ifequal $6, .NoRoom
 	writetext .GotEeveeText
 	playsound SFX_CAUGHT_MON
 	waitsfx
 	givepoke EEVEE, 5
 	givepokeitem .GiftEeveeMail
+	callasm .SetEeveeMailOT
 	writebyte GREAT_BALL
 	special SetLastPartyMonBall
 	setevent EVENT_GOT_EEVEE
@@ -120,9 +117,9 @@ EcruteakPokeCenter1FBillScript:
 	waitbutton
 	closetext
 	checkcode VAR_FACING
-	spriteface PLAYER, DOWN
-	if_not_equal UP, .noleftstep
-	applymovement ECRUTEAKPOKECENTER1F_BILL, .StepAroundMovement
+	turnobject PLAYER, DOWN
+	ifnotequal UP, .noleftstep
+	applyonemovement ECRUTEAKPOKECENTER1F_BILL, step_left
 .noleftstep
 	applymovement ECRUTEAKPOKECENTER1F_BILL, .LeaveMovement
 	playsound SFX_EXIT_BUILDING
@@ -132,10 +129,12 @@ EcruteakPokeCenter1FBillScript:
 	end
 
 .NoRoom:
-	jumpopenedtext .NoRoomText
+	thisopenedtext
 
-.No:
-	jumpopenedtext .NoText
+	text "Whoa, wait. You"
+	line "can't carry any"
+	cont "more #mon."
+	done
 
 .IntroText:
 	text "Hi, I'm Bill. And"
@@ -189,12 +188,6 @@ EcruteakPokeCenter1FBillScript:
 	line "Eevee!"
 	done
 
-.NoRoomText:
-	text "Whoa, wait. You"
-	line "can't carry any"
-	cont "more #mon."
-	done
-
 .GoodbyeText:
 	text "Bill: Prof.Elm"
 	line "claims Eevee may"
@@ -217,10 +210,6 @@ EcruteakPokeCenter1FBillScript:
 	line "do?"
 	done
 
-.StepAroundMovement:
-	step_left
-	step_end
-
 .LeaveMovement:
 	step_down
 	step_down
@@ -230,19 +219,34 @@ EcruteakPokeCenter1FBillScript:
 
 .GiftEeveeMail:
 	db   EON_MAIL
-	db   "Greetings from"
-	next "Kanto! -- Oak@"
-	db 0
+	db   "Please keep this"
+	next "#mon safe!@@@@@@"
+
+.SetEeveeMailOT:
+	ld hl, sPartyMon1MailAuthor
+	ld a, [wPartyCount]
+	dec a
+	ld bc, MAIL_STRUCT_LENGTH
+	rst AddNTimes
+	push hl
+	pop de
+	ld hl, .EeveeMailOTID
+	ld bc, .EeveeMailOTIDEnd - .EeveeMailOTID
+	ld a, BANK(sPartyMail)
+	call GetSRAMBank
+	rst CopyBytes
+	jp CloseSRAM
+
+.EeveeMailOTID:
+	db "Prof.Oak@@"
+	bigdw 00001
+.EeveeMailOTIDEnd
 
 EcruteakPokeCenter1FPokefanMScript:
 	checkevent EVENT_GOT_HM03_SURF
-	iftrue .GotSurf
-	jumptextfaceplayer .Text1
+	iftrue_jumptextfaceplayer .SurfText
+	thistextfaceplayer
 
-.GotSurf:
-	jumptextfaceplayer .Text2
-
-.Text1:
 	text "The way the Kimono"
 	line "Girls dance is"
 
@@ -251,7 +255,7 @@ EcruteakPokeCenter1FPokefanMScript:
 	cont "use their #mon."
 	done
 
-.Text2:
+.SurfText:
 	text "You must be hoping"
 	line "to battle more"
 	cont "people, right?"
@@ -273,23 +277,9 @@ EcruteakPokeCenter1FLassScript:
 	yesorno
 	iffalse .No
 	checkevent EVENT_ECRUTEAK_POKE_CENTER_BILL
-	iffalse .Here
-	jumpopenedtext .YesText
+	iffalse_jumpopenedtext .HereText
+	thisopenedtext
 
-.No:
-	checkevent EVENT_ECRUTEAK_POKE_CENTER_BILL
-	iffalse .Here
-	jumpopenedtext .NoText
-
-.Here:
-	jumpopenedtext .HereText
-
-.QuestionText:
-	text "Do you know who"
-	line "Bill is?"
-	done
-
-.YesText:
 	text "I once heard that"
 	line "Bill's mother used"
 
@@ -300,9 +290,18 @@ EcruteakPokeCenter1FLassScript:
 	line "here so often."
 	done
 
-.NoText:
+.No:
+	checkevent EVENT_ECRUTEAK_POKE_CENTER_BILL
+	iffalse_jumpopenedtext .HereText
+	thisopenedtext
+
 	text "Oh… Never mind"
 	line "then."
+	done
+
+.QuestionText:
+	text "Do you know who"
+	line "Bill is?"
 	done
 
 .HereText:

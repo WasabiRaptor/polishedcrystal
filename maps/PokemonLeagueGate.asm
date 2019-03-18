@@ -1,58 +1,41 @@
 PokemonLeagueGate_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 8 ; warp events
+	warp_event 19,  7, ROUTE_22, 1
+	warp_event 20,  7, ROUTE_22, 1
+	warp_event 10, 17, ROUTE_26, 1
+	warp_event 11, 17, ROUTE_26, 1
+	warp_event 10,  0, ROUTE_23, 1
+	warp_event 11,  0, ROUTE_23, 2
+	warp_event  1,  7, ROUTE_28, 2
+	warp_event  2,  7, ROUTE_28, 2
 
-PokemonLeagueGate_MapEventHeader:
+	db 2 ; coord events
+	coord_event 10, 10, 0, PokemonLeagueGateXYTriggerScript1
+	coord_event 11, 10, 0, PokemonLeagueGateXYTriggerScript2
 
-.Warps: db 8
-	warp_def $7, $13, 1, ROUTE_22
-	warp_def $7, $14, 1, ROUTE_22
-	warp_def $11, $a, 1, ROUTE_26
-	warp_def $11, $b, 1, ROUTE_26
-	warp_def $0, $a, 1, ROUTE_23
-	warp_def $0, $b, 2, ROUTE_23
-	warp_def $7, $1, 2, ROUTE_28
-	warp_def $7, $2, 2, ROUTE_28
+	db 0 ; bg events
 
-.XYTriggers: db 2
-	xy_trigger 0, $a, $a, PokemonLeagueGateXYTriggerScript1
-	xy_trigger 0, $a, $b, PokemonLeagueGateXYTriggerScript2
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_OFFICER, 10, 8, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, OfficerScript_0x9ba03, -1
-	person_event SPRITE_BLACK_BELT, 5, 7, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BlackBeltScript_0x9ba21, EVENT_OPENED_MT_SILVER
-	person_event SPRITE_BLACK_BELT, 5, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BlackBeltScript_0x9ba24, EVENT_FOUGHT_SNORLAX
+	db 3 ; object events
+	object_event  8, 10, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, OfficerScript_0x9ba03, -1
+	object_event  7,  5, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9baf1, EVENT_OPENED_MT_SILVER
+	object_event 14,  5, SPRITE_BLACK_BELT, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9bb37, EVENT_FOUGHT_SNORLAX
 
 PokemonLeagueGateXYTriggerScript2:
-	applymovement PLAYER, PokemonLeagueGateXYTriggerScript2Movement
-
+	applyonemovement PLAYER, step_left
 PokemonLeagueGateXYTriggerScript1:
-	spriteface PLAYER, LEFT
+	turnobject PLAYER, LEFT
 	jump UnknownScript_0x9ba04
 
 OfficerScript_0x9ba03:
 	faceplayer
 UnknownScript_0x9ba04:
-	opentext
-	writetext UnknownText_0x9ba29
-	waitbutton
-	closetext
-	dotrigger $1
+	showtext UnknownText_0x9ba29
+	setscene $1
 	end
-
-BlackBeltScript_0x9ba21:
-	jumptextfaceplayer UnknownText_0x9baf1
-
-BlackBeltScript_0x9ba24:
-	jumptextfaceplayer UnknownText_0x9bb37
-
-PokemonLeagueGateXYTriggerScript2Movement:
-	step_left
-	step_end
 
 UnknownText_0x9ba29:
 	text "Only trainers who"

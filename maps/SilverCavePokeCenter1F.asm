@@ -1,94 +1,63 @@
 SilverCavePokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, SILVER_CAVE_OUTSIDE, 1
+	warp_event  6,  7, SILVER_CAVE_OUTSIDE, 1
+	warp_event  0,  7, POKECENTER_2F, 1
 
-SilverCavePokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 1, SILVER_CAVE_OUTSIDE
-	warp_def $7, $6, 1, SILVER_CAVE_OUTSIDE
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalLanceScript
 
-.XYTriggers: db 0
+	db 3 ; object events
+	pc_nurse_event  5, 1
+	object_event  9,  4, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 1, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SilverCavePokeCenterGrampsScript, -1
+	object_event  2,  4, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 1, 2, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, SilverCavePokeCenter1FGrannyText, -1
 
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalLanceScript
+PokemonJournalLanceScript:
+	setflag ENGINE_READ_LANCE_JOURNAL
+	thistext
 
-.PersonEvents: db 3
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, NurseScript_0x1ae59a, -1
-	person_event SPRITE_GRANNY, 4, 2, SPRITEMOVEDATA_STANDING_LEFT, 1, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrannyScript_0x1ae59d, -1
-	person_event SPRITE_GRAMPS, 4, 9, SPRITEMOVEDATA_STANDING_DOWN, 1, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SilverCavePokeCenterGrampsScript, -1
+	text "#mon Journal"
 
-NurseScript_0x1ae59a:
-	jumpstd pokecenternurse
+	para "Special Feature:"
+	line "Champion Lance!"
 
-GrannyScript_0x1ae59d:
-	jumptextfaceplayer .Text
+	para "Lance has been"
+	line "spotted buying"
 
-.Text:
-	text "Trainers who seek"
-	line "power climb Mt."
-
-	para "Silver despite its"
-	line "many dangers…"
-
-	para "With their trusted"
-	line "#mon, they must"
-
-	para "feel they can go"
-	line "anywhere…"
+	para "his capes at Cel-"
+	line "adon Dept.Store."
 	done
 
 SilverCavePokeCenterGrampsScript:
+	checkevent EVENT_GOT_EXPERT_BELT
+	iftrue_jumptextfaceplayer .AfterText
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_EXPERT_BELT
-	iftrue .GotItem
-	writetext .Text1
+	writetext .GreetingText
 	waitbutton
 	checkcode VAR_PKMN_JOURNALS
-	if_equal 0, .ReadNone
-	if_equal NUM_POKEMON_JOURNALS, .ReadThemAll
-	writetext .Text3
-	waitbutton
-	closetext
-	end
+	ifequal 0, .ReadNone
+	ifequal NUM_POKEMON_JOURNALS, .ReadThemAll
+	thisopenedtext
 
-.ReadNone:
-	writetext .Text2
-	waitbutton
-	closetext
-	end
+	text "Oh, you've read @"
+	deciram wScriptVar, 1, 2
+	text ""
+	line "of them?"
 
-.ReadThemAll:
-	writetext .Text4
-	buttonsound
-	verbosegiveitem EXPERT_BELT
-	iffalse .Done
-	setevent EVENT_GOT_EXPERT_BELT
-.GotItem:
-	writetext .Text5
-	waitbutton
-.Done:
-	closetext
-	end
-
-.Text1:
-	text "In my youth I was"
-	line "a talented trainer"
-	cont "myself."
-
-	para "Now I just read"
-	line "about others in"
-	cont "#mon Journal."
-
-	para "Are you a Journal"
-	line "reader too?"
+	para "Not bad, but I've"
+	line "read all 33!"
 	done
 
-.Text2:
+.ReadNone:
+	thisopenedtext
+
 	text "You haven't read"
 	line "any? What a shame."
 
@@ -101,17 +70,37 @@ SilverCavePokeCenterGrampsScript:
 	cont "rare issues."
 	done
 
-.Text3:
-	text "Oh, you've read @"
-	deciram ScriptVar, 1, 2
-	text ""
-	line "of them?"
+.ReadThemAll:
+	writetext .ReadAllText
+	buttonsound
+	verbosegiveitem EXPERT_BELT
+	iffalse_endtext
+	setevent EVENT_GOT_EXPERT_BELT
+	thisopenedtext
 
-	para "Not bad, but I've"
-	line "read all 33!"
+.AfterText:
+	text "That Belt's not"
+	line "just for show."
+
+	para "It'll power up your"
+	line "#mon if they"
+	cont "hold it."
 	done
 
-.Text4:
+.GreetingText:
+	text "In my youth I was"
+	line "a talented trainer"
+	cont "myself."
+
+	para "Now I just read"
+	line "about others in"
+	cont "#mon Journal."
+
+	para "Are you a Journal"
+	line "reader too?"
+	done
+
+.ReadAllText:
 	text "You've read them"
 	line "all? Then you're"
 
@@ -122,28 +111,16 @@ SilverCavePokeCenterGrampsScript:
 	line "you're a fan!"
 	done
 
-.Text5:
-	text "That Belt's not"
-	line "just for show."
+SilverCavePokeCenter1FGrannyText:
+	text "Trainers who seek"
+	line "power climb Mt."
 
-	para "It'll power up your"
-	line "#mon if they"
-	cont "hold it."
-	done
+	para "Silver despite its"
+	line "many dangers…"
 
-PokemonJournalLanceScript:
-	setflag ENGINE_READ_LANCE_JOURNAL
-	jumptext PokemonJournalLanceText
+	para "With their trusted"
+	line "#mon, they must"
 
-PokemonJournalLanceText:
-	text "#mon Journal"
-
-	para "Special Feature:"
-	line "Champion Lance!"
-
-	para "Lance has been"
-	line "spotted buying"
-
-	para "his capes at Cel-"
-	line "adon Dept.Store."
+	para "feel they can go"
+	line "anywhere…"
 	done

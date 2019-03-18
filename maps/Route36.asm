@@ -1,52 +1,50 @@
 Route36_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_OBJECTS, Route36ArthurCallback
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_OBJECTS, Route36ArthurCallback
+	db 6 ; warp events
+	warp_event 22,  8, ROUTE_36_NATIONAL_PARK_GATE, 3
+	warp_event 22,  9, ROUTE_36_NATIONAL_PARK_GATE, 4
+	warp_event 51, 13, ROUTE_36_RUINS_OF_ALPH_GATE, 1
+	warp_event 52, 13, ROUTE_36_RUINS_OF_ALPH_GATE, 2
+	warp_event 61,  8, ROUTE_36_VIOLET_GATE, 1
+	warp_event 61,  9, ROUTE_36_VIOLET_GATE, 2
 
-Route36_MapEventHeader:
+	db 2 ; coord events
+	coord_event 24,  7, 1, Route36SuicuneScript
+	coord_event 26,  7, 1, Route36SuicuneScript
 
-.Warps: db 6
-	warp_def $8, $12, 3, ROUTE_36_NATIONAL_PARK_GATE
-	warp_def $9, $12, 4, ROUTE_36_NATIONAL_PARK_GATE
-	warp_def $d, $2f, 1, ROUTE_36_RUINS_OF_ALPH_GATE
-	warp_def $d, $30, 2, ROUTE_36_RUINS_OF_ALPH_GATE
-	warp_def $8, $39, 1, ROUTE_36_VIOLET_GATE
-	warp_def $9, $39, 2, ROUTE_36_VIOLET_GATE
+	db 4 ; bg events
+	bg_event 33,  1, SIGNPOST_JUMPTEXT, Route36TrainerTips2Text
+	bg_event 49, 11, SIGNPOST_JUMPTEXT, RuinsOfAlphNorthSignText
+	bg_event 59,  7, SIGNPOST_JUMPTEXT, Route36SignText
+	bg_event 25,  7, SIGNPOST_JUMPTEXT, Route36TrainerTips1Text
 
-.XYTriggers: db 2
-	xy_trigger 1, $7, $14, Route36SuicuneScript
-	xy_trigger 1, $7, $16, Route36SuicuneScript
+	db 11 ; object events
+	object_event 39,  9, SPRITE_WEIRD_TREE, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_36_SUDOWOODO
+	object_event 53,  6, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ArthurScript, EVENT_ROUTE_36_ARTHUR_OF_THURSDAY
+	object_event 37, 12, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, Route36FloriaScript, EVENT_FLORIA_AT_SUDOWOODO
+	object_event 25,  6, SPRITE_SUICUNE, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_36
+	object_event 30,  6, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route36CooltrainerfChiaraScript, -1
+	object_event 24, 13, SPRITE_PSYCHIC, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerPsychicMark, -1
+	object_event 35, 14, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_TRAINER, 5, TrainerSchoolboyAlan1, -1
+	object_event 57,  9, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LassScript_0x1940e0, -1
+	object_event 48,  9, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, Route36RockSmashGuyScript, -1
+	fruittree_event 25,  4, FRUITTREE_ROUTE_36, RAWST_BERRY
+	object_event 50,  5, SPRITE_TWIN, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerSchoolgirlMolly, -1
 
-.Signposts: db 4
-	signpost 1, 29, SIGNPOST_READ, Route36TrainerTips2
-	signpost 11, 45, SIGNPOST_READ, RuinsOfAlphNorthSign
-	signpost 7, 55, SIGNPOST_READ, Route36Sign
-	signpost 7, 21, SIGNPOST_READ, Route36TrainerTips1
-
-.PersonEvents: db 11
-	person_event SPRITE_WEIRD_TREE, 9, 35, SPRITEMOVEDATA_SUDOWOODO, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SudowoodoScript, EVENT_ROUTE_36_SUDOWOODO
-	person_event SPRITE_YOUNGSTER, 6, 49, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ArthurScript, EVENT_ROUTE_36_ARTHUR_OF_THURSDAY
-	person_event SPRITE_LASS, 12, 33, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route36FloriaScript, EVENT_FLORIA_AT_SUDOWOODO
-	person_event SPRITE_SUICUNE, 6, 21, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_SAW_SUICUNE_ON_ROUTE_36
-	person_event SPRITE_YOUNGSTER, 13, 20, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 3, TrainerPsychicMark, -1
-	person_event SPRITE_YOUNGSTER, 14, 31, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 5, TrainerSchoolboyAlan1, -1
-	person_event SPRITE_LASS, 9, 53, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LassScript_0x1940e0, -1
-	person_event SPRITE_FISHER, 9, 44, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, Route36RockSmashGuyScript, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 4, 21, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route36FruitTree, -1
-	person_event SPRITE_TWIN, 5, 46, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerSchoolgirlMolly, -1
-	person_event SPRITE_COOLTRAINER_F, -2, 30, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const ROUTE36_WEIRD_TREE
 	const ROUTE36_ARTHUR
 	const ROUTE36_FLORIA
 	const ROUTE36_SUICUNE
+	const ROUTE36_COOLTRAINERF
 
 Route36ArthurCallback:
 	checkcode VAR_WEEKDAY
-	if_equal THURSDAY, .ArthurAppears
+	ifequal THURSDAY, .ArthurAppears
 	disappear ROUTE36_ARTHUR
 	return
 
@@ -58,53 +56,43 @@ Route36SuicuneScript:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	pause 15
 	playsound SFX_WARP_FROM
-	spriteface PLAYER, UP
+	turnobject PLAYER, UP
 	applymovement ROUTE36_SUICUNE, Route36SuicuneMovement
 	disappear ROUTE36_SUICUNE
-	spriteface PLAYER, DOWN
+	turnobject PLAYER, DOWN
 	pause 10
-	dotrigger $0
+	setscene $0
 	clearevent EVENT_SAW_SUICUNE_AT_CIANWOOD_CITY
-	domaptrigger CIANWOOD_CITY, $1
+	setmapscene CIANWOOD_CITY, $1
 	end
 
 SudowoodoScript:
 	checkitem SQUIRTBOTTLE
 	iftrue .Fight
-
 	waitsfx
 	playsound SFX_SANDSTORM
-	applymovement ROUTE36_WEIRD_TREE, SudowoodoShakeMovement
+	applyonemovement ROUTE36_WEIRD_TREE, tree_shake
 	end
 
 .Fight:
 	opentext
 	writetext UseSquirtbottleText
 	yesorno
-	iffalse DidntUseSquirtbottleScript
+	iffalse_endtext
 	closetext
 WateredWeirdTreeScript:: ; export (for when you use Squirtbottle from pack)
-	opentext
-	writetext UsedSquirtbottleText
-	waitbutton
-	closetext
+	showtext UsedSquirtbottleText
 	waitsfx
 	playsound SFX_SANDSTORM
-	applymovement ROUTE36_WEIRD_TREE, SudowoodoShakeMovement
-	opentext
-	writetext SudowoodoAttackedText
-	waitbutton
-	closetext
+	applyonemovement ROUTE36_WEIRD_TREE, tree_shake
+	showtext SudowoodoAttackedText
+	writecode VAR_BATTLETYPE, BATTLETYPE_TRAP
 	loadwildmon SUDOWOODO, 20
 	startbattle
 	setevent EVENT_FOUGHT_SUDOWOODO
-	if_equal $2, DidntCatchSudowoodo
+	ifequal $2, DidntCatchSudowoodo
 	disappear ROUTE36_WEIRD_TREE
 	reloadmapafterbattle
-	end
-
-DidntUseSquirtbottleScript:
-	closetext
 	end
 
 DidntCatchSudowoodo:
@@ -112,7 +100,6 @@ DidntCatchSudowoodo:
 	applymovement ROUTE36_WEIRD_TREE, WeirdTreeMovement_Flee
 	disappear ROUTE36_WEIRD_TREE
 	special MapCallbackSprites_LoadUsedSpritesGFX
-	special RefreshSprites
 	end
 
 Route36FloriaScript:
@@ -126,7 +113,7 @@ Route36FloriaScript:
 	closetext
 	clearevent EVENT_FLORIA_AT_FLOWER_SHOP
 	checkcode VAR_FACING
-	if_equal UP, .Up
+	ifequal UP, .Up
 	applymovement ROUTE36_FLORIA, FloriaMovement1
 	disappear ROUTE36_FLORIA
 	end
@@ -137,10 +124,7 @@ Route36FloriaScript:
 	end
 
 .SecondTimeTalking:
-	writetext FloriaText2
-	waitbutton
-	closetext
-	end
+	jumpopenedtext FloriaText2
 
 Route36RockSmashGuyScript:
 	faceplayer
@@ -149,10 +133,7 @@ Route36RockSmashGuyScript:
 	iftrue .AlreadyGotRockSmash
 	checkevent EVENT_FOUGHT_SUDOWOODO
 	iftrue .ClearedSudowoodo
-	writetext RockSmashGuyText1
-	waitbutton
-	closetext
-	end
+	jumpopenedtext RockSmashGuyText1
 
 .ClearedSudowoodo:
 	writetext RockSmashGuyText2
@@ -160,33 +141,18 @@ Route36RockSmashGuyScript:
 	verbosegivetmhm TM_ROCK_SMASH
 	setevent EVENT_GOT_TM50_ROCK_SMASH
 .AlreadyGotRockSmash:
-	writetext RockSmashGuyText3
-	waitbutton
-	closetext
-	end
+	jumpopenedtext RockSmashGuyText3
 
 LassScript_0x1940e0:
-	faceplayer
-	opentext
 	checkevent EVENT_FOUGHT_SUDOWOODO
-	iftrue .ClearedSudowoodo
-	writetext UnknownText_0x1945b8
-	waitbutton
-	closetext
-	end
-
-.ClearedSudowoodo:
-	writetext UnknownText_0x19469e
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer UnknownText_0x19469e
+	jumptextfaceplayer UnknownText_0x1945b8
 
 TrainerSchoolboyAlan1:
-	trainer EVENT_BEAT_SCHOOLBOY_ALAN, SCHOOLBOY, ALAN1, SchoolboyAlan1SeenText, SchoolboyAlan1BeatenText, 0, .Script
+	trainer SCHOOLBOY, ALAN1, EVENT_BEAT_SCHOOLBOY_ALAN, SchoolboyAlan1SeenText, SchoolboyAlan1BeatenText, 0, .Script
 
 .Script:
 	writecode VAR_CALLERID, PHONE_SCHOOLBOY_ALAN
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_ALAN
 	iftrue .ChooseRematch
@@ -199,28 +165,28 @@ TrainerSchoolboyAlan1:
 	writetext UnknownText_0x1947aa
 	buttonsound
 	setevent EVENT_ALAN_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	callstd asknumber1m
 	jump .ContinueAskForPhoneNumber
 
 .AskAgainForPhoneNumber:
-	scall .AskNumber2
+	callstd asknumber2m
 .ContinueAskForPhoneNumber:
 	askforphonenumber PHONE_SCHOOLBOY_ALAN
-	if_equal $1, .PhoneFull
-	if_equal $2, .NumberDeclined
+	ifequal $1, .PhoneFull
+	ifequal $2, .NumberDeclined
 	trainertotext SCHOOLBOY, ALAN1, $0
-	scall .RegisteredNumber
-	jump .NumberAccepted
+	callstd registerednumberm
+	jumpstd numberacceptedm
 
 .ChooseRematch:
-	scall .Rematch
+	callstd rematchm
 	winlosstext SchoolboyAlan1BeatenText, 0
 	copybytetovar wAlanFightCount
-	if_equal 4, .Fight4
-	if_equal 3, .Fight3
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 4, .Fight4
+	ifequal 3, .Fight3
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight4:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight4
@@ -273,73 +239,156 @@ TrainerSchoolboyAlan1:
 	end
 
 .GiveFireStone:
-	scall .Gift
+	callstd giftm
 	verbosegiveitem FIRE_STONE
 	iffalse .BagFull
 	clearflag ENGINE_ALAN_HAS_FIRE_STONE
 	setevent EVENT_ALAN_GAVE_FIRE_STONE
-	jump .NumberAccepted
+	jumpstd numberacceptedm
 
 .BagFull:
-	jump .PackFull
-
-.AskNumber1:
-	jumpstd asknumber1m
-	end
-
-.AskNumber2:
-	jumpstd asknumber2m
-	end
-
-.RegisteredNumber:
-	jumpstd registerednumberm
-	end
+	jumpstd packfullm
 
 .NumberAccepted:
 	jumpstd numberacceptedm
-	end
 
 .NumberDeclined:
 	jumpstd numberdeclinedm
-	end
 
 .PhoneFull:
 	jumpstd phonefullm
-	end
 
-.Rematch:
-	jumpstd rematchm
-	end
-
-.Gift:
-	jumpstd giftm
-	end
-
-.PackFull:
-	jumpstd packfullm
-	end
-
-TrainerPsychicMark:
-	trainer EVENT_BEAT_PSYCHIC_MARK, PSYCHIC_T, MARK, PsychicMarkSeenText, PsychicMarkBeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
+Route36CooltrainerfChiaraScript:
+	checkevent EVENT_GOT_BINDING_BAND_FROM_ROUTE_36_LEADER
+	iftrue_jumptextfaceplayer .AfterText2
+	faceplayer
+	checkevent EVENT_BEAT_COOLTRAINERF_CHIARA
+	iftrue .Beaten
+	checkevent EVENT_BEAT_SCHOOLBOY_ALAN
+	iffalse_jumptext .IntroText
+	checkevent EVENT_BEAT_PSYCHIC_MARK
+	iffalse_jumptext .IntroText
+	checkevent EVENT_BEAT_SCHOOLGIRL_MOLLY
+	iffalse_jumptext .IntroText
+	checkevent EVENT_BEAT_TWINS_ANN_AND_ANNE
+	iffalse_jumptext .IntroText
+	checkevent EVENT_BEAT_PSYCHIC_GREG
+	iffalse_jumptext .IntroText
+	checkevent EVENT_BEAT_BEAUTY_CALLIE
+	iffalse_jumptext .IntroText
+	checkevent EVENT_BEAT_BEAUTY_CASSANDRA
+	iffalse_jumptext .IntroText
 	opentext
-	writetext UnknownText_0x19471e
+	writetext .QuestionText
+	yesorno
+	iffalse_jumpopenedtext .RefusedText
+	writetext .SeenText
 	waitbutton
 	closetext
-	end
-
-TrainerSchoolgirlMolly:
-	trainer EVENT_BEAT_SCHOOLGIRL_MOLLY, SCHOOLGIRL, MOLLY, SchoolgirlMollySeenText, SchoolgirlMollyBeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
+	winlosstext .BeatenText, 0
+	setlasttalked ROUTE36_COOLTRAINERF
+	loadtrainer COOLTRAINERF, CHIARA
+	startbattle
+	reloadmapafterbattle
+	setevent EVENT_BEAT_COOLTRAINERF_CHIARA
+.Beaten:
 	opentext
-	writetext SchoolgirlMollyAfterText
-	waitbutton
-	closetext
-	end
+	writetext .AfterText1
+	buttonsound
+	verbosegiveitem BINDING_BAND
+	iffalse_endtext
+	setevent EVENT_GOT_BINDING_BAND_FROM_ROUTE_36_LEADER
+	thisopenedtext
+
+.AfterText2:
+	text "With skill like"
+	line "yours, I'm not the"
+
+	para "only elite trainer"
+	line "who'll want to test"
+	cont "you."
+	done
+
+.IntroText:
+	text "I saw how you woke"
+	line "up that Sudowoodo."
+
+	para "You did great!"
+
+	para "And you have a"
+	line "Plain Badge."
+	cont "So do I!"
+
+	para "How about this?"
+	line "Take out all the"
+
+	para "trainers on Routes"
+	line "36 and 37."
+
+	para "Then I'll fight"
+	line "you myself!"
+	done
+
+.QuestionText:
+	text "So you beat every-"
+	line "one else in the"
+	cont "area."
+
+	para "Then it's time for"
+	line "our showdown!"
+
+	para "I use a Binding"
+	line "Band to press my"
+	cont "advantage."
+
+	para "Think you're ready"
+	line "for me?"
+	done
+
+.RefusedText:
+	text "Well, I'm ready"
+	line "when you are!"
+	done
+
+.SeenText:
+	text "You won't last"
+	line "long against my"
+	cont "technique!"
+	done
+
+.BeatenText:
+	text "I'm the one who"
+	line "didn't last?!"
+	done
+
+.AfterText1:
+	text "You observed my"
+	line "technique and"
+	cont "countered it."
+
+	para "Why not try it"
+	line "yourself?"
+
+	para "Here, it's for"
+	line "you!"
+	done
+
+GenericTrainerPsychicMark:
+	generictrainer PSYCHIC_T, MARK, EVENT_BEAT_PSYCHIC_MARK, PsychicMarkSeenText, PsychicMarkBeatenText
+
+	text "I'd be strong if"
+	line "only I could tell"
+
+	para "what my opponent"
+	line "was thinking."
+	done
+
+GenericTrainerSchoolgirlMolly:
+	generictrainer SCHOOLGIRL, MOLLY, EVENT_BEAT_SCHOOLGIRL_MOLLY, SchoolgirlMollySeenText, SchoolgirlMollyBeatenText
+
+	text "I still have a"
+	line "lot to learn."
+	done
 
 ArthurScript:
 	faceplayer
@@ -347,7 +396,7 @@ ArthurScript:
 	checkevent EVENT_GOT_HARD_STONE_FROM_ARTHUR
 	iftrue .AlreadyGotStone
 	checkcode VAR_WEEKDAY
-	if_not_equal THURSDAY, ArthurNotThursdayScript
+	ifnotequal THURSDAY, ArthurNotThursdayScript
 	checkevent EVENT_MET_ARTHUR_OF_THURSDAY
 	iftrue .MetArthur
 	writetext MeetArthurText
@@ -359,42 +408,16 @@ ArthurScript:
 	verbosegiveitem HARD_STONE
 	iffalse .BagFull
 	setevent EVENT_GOT_HARD_STONE_FROM_ARTHUR
-	writetext ArthurGaveGiftText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ArthurGaveGiftText
 
 .AlreadyGotStone:
 	writetext ArthurThursdayText
 	waitbutton
 .BagFull:
-	closetext
-	end
+	endtext
 
 ArthurNotThursdayScript:
-	writetext ArthurNotThursdayText
-	waitbutton
-	closetext
-	end
-
-Route36Sign:
-	jumptext Route36SignText
-
-RuinsOfAlphNorthSign:
-	jumptext RuinsOfAlphNorthSignText
-
-Route36TrainerTips1:
-	jumptext Route36TrainerTips1Text
-
-Route36TrainerTips2:
-	jumptext Route36TrainerTips2Text
-
-Route36FruitTree:
-	fruittree FRUITTREE_ROUTE_36
-
-SudowoodoShakeMovement:
-	tree_shake ; shake
-	step_end
+	jumpopenedtext ArthurNotThursdayText
 
 WeirdTreeMovement_Flee:
 	fast_jump_step_up
@@ -518,7 +541,11 @@ RockSmashGuyText2:
 
 RockSmashGuyText3:
 	text "That happens to be"
+if DEF(FAITHFUL)
 	line "Rock Smash."
+else
+	line "Brick Break."
+endc
 
 	para "You can shatter"
 	line "rocks with just a"
@@ -528,7 +555,11 @@ RockSmashGuyText3:
 
 	para "If any rocks are"
 	line "in your way, just"
+if DEF(FAITHFUL)
 	cont "smash 'em up!"
+else
+	cont "break 'em up!"
+endc
 	done
 
 UnknownText_0x1945b8:
@@ -561,14 +592,6 @@ PsychicMarkBeatenText:
 	text "I misread you!"
 	done
 
-UnknownText_0x19471e:
-	text "I'd be strong if"
-	line "only I could tell"
-
-	para "what my opponent"
-	line "was thinking."
-	done
-
 SchoolgirlMollySeenText:
 	text "Mr.Earl taught me"
 	line "how to battle with"
@@ -577,11 +600,6 @@ SchoolgirlMollySeenText:
 
 SchoolgirlMollyBeatenText:
 	text "My studying…"
-	done
-
-SchoolgirlMollyAfterText:
-	text "I still have a"
-	line "lot to learn."
 	done
 
 SchoolboyAlan1SeenText:

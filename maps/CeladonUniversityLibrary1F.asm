@@ -1,51 +1,42 @@
 CeladonUniversityLibrary1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  6, 11, CELADON_UNIVERSITY_1F, 4
+	warp_event  7, 11, CELADON_UNIVERSITY_1F, 4
+	warp_event  7,  0, CELADON_UNIVERSITY_LIBRARY_2F, 1
 
-CeladonUniversityLibrary1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $b, $6, 4, CELADON_UNIVERSITY_1F
-	warp_def $b, $7, 4, CELADON_UNIVERSITY_1F
-	warp_def $0, $7, 1, CELADON_UNIVERSITY_LIBRARY_2F
+	db 14 ; bg events
+	bg_event  4,  0, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FSignpost1Text
+	bg_event 10,  0, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FSignpost2Text
+	bg_event  0,  3, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf1Text
+	bg_event  1,  3, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf2Text
+	bg_event  2,  3, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf3Text
+	bg_event  3,  3, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf4Text
+	bg_event  4,  3, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf5Text
+	bg_event  5,  3, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf6Text
+	bg_event  0,  7, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf7Text
+	bg_event  1,  7, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf8Text
+	bg_event  2,  7, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf9Text
+	bg_event  3,  7, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf10Text
+	bg_event  4,  7, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf11Text
+	bg_event  5,  7, SIGNPOST_JUMPTEXT, CeladonUniversityLibrary1FBookshelf12Text
 
-.XYTriggers: db 0
+	db 8 ; object events
+	object_event  6,  3, SPRITE_LADY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLibrary1FLadyText, -1
+	object_event 11,  3, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLibrary1FGentlemanText, -1
+	object_event  0,  5, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLibrary1FCooltrainerfText, -1
+	object_event  9,  5, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FGameboyKidScript, -1
+	object_event  3,  8, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLibrary1FPokefan_fText, -1
+	object_event 11,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FCooltrainermScript, -1
+	object_event  2, 11, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLibrary1FTeacherText, -1
+	object_event 10,  3, SPRITE_BOOK_PAPER_POKEDEX, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptext, CeladonUniversityLibrary1FBookText, -1
 
-.Signposts: db 14
-	signpost 0, 4, SIGNPOST_READ, CeladonUniversityLibrary1FSignpost1
-	signpost 0, 10, SIGNPOST_READ, CeladonUniversityLibrary1FSignpost2
-	signpost 3, 0, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf1
-	signpost 3, 1, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf2
-	signpost 3, 2, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf3
-	signpost 3, 3, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf4
-	signpost 3, 4, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf5
-	signpost 3, 5, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf6
-	signpost 7, 0, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf7
-	signpost 7, 1, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf8
-	signpost 7, 2, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf9
-	signpost 7, 3, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf10
-	signpost 7, 4, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf11
-	signpost 7, 5, SIGNPOST_READ, CeladonUniversityLibrary1FBookshelf12
-
-.PersonEvents: db 8
-	person_event SPRITE_GAMEBOY_KID, 5, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FGameboyKidScript, -1
-	person_event SPRITE_LADY, 3, 6, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FLadyScript, -1
-	person_event SPRITE_GENTLEMAN, 3, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FGentlemanScript, -1
-	person_event SPRITE_COOLTRAINER_F, 5, 0, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FCooltrainerfScript, -1
-	person_event SPRITE_POKEFAN_F, 8, 3, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FPokefan_fScript, -1
-	person_event SPRITE_COOLTRAINER_M, 8, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FCooltrainermScript, -1
-	person_event SPRITE_TEACHER, 11, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FTeacherScript, -1
-	person_event SPRITE_BOOK_UNOWN_R, 3, 10, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, CeladonUniversityLibrary1FBookScript, -1
-
-const_value set 2
-	const CELADONUNIVERSITYLIBRARY1F_GAMEBOY_KID
-
-CeladonUniversityLibrary1FLadyScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLibrary1FLadyText:
 	text "This library is on"
 	line "university"
 	cont "grounds, but it's"
@@ -56,18 +47,12 @@ CeladonUniversityLibrary1FLadyScript:
 	para "Isn't that great?"
 	done
 
-CeladonUniversityLibrary1FGentlemanScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLibrary1FGentlemanText:
 	text "Shh! Can't you see"
 	line "I'm reading here?"
 	done
 
-CeladonUniversityLibrary1FCooltrainerfScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLibrary1FCooltrainerfText:
 	text "Prof.Oak used to"
 	line "teach here, so the"
 
@@ -80,12 +65,8 @@ CeladonUniversityLibrary1FCooltrainerfScript:
 	done
 
 CeladonUniversityLibrary1FGameboyKidScript:
-	faceplayer
-	opentext
-	writetext .Text
-	waitbutton
-	closetext
-	spriteface CELADONUNIVERSITYLIBRARY1F_GAMEBOY_KID, DOWN
+	showtextfaceplayer .Text
+	turnobject LAST_TALKED, DOWN
 	end
 
 .Text:
@@ -95,10 +76,7 @@ CeladonUniversityLibrary1FGameboyKidScript:
 	para "I'm playing Tetris!"
 	done
 
-CeladonUniversityLibrary1FPokefan_fScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLibrary1FPokefan_fText:
 	text "We have a mutual"
 	line "lending agreement"
 
@@ -107,21 +85,16 @@ CeladonUniversityLibrary1FPokefan_fScript:
 	done
 
 CeladonUniversityLibrary1FCooltrainermScript:
+	checkevent EVENT_GOT_FOCUS_BAND_IN_UNIVERSITY
+	iftrue_jumptextfaceplayer .Text2
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_FOCUS_BAND_IN_UNIVERSITY
-	iftrue .GotItem
 	writetext .Text1
 	buttonsound
 	verbosegiveitem FOCUS_BAND
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_FOCUS_BAND_IN_UNIVERSITY
-.GotItem:
-	writetext .Text2
-	waitbutton
-.Done:
-	closetext
-	end
+	jumpopenedtext .Text2
 
 .Text1:
 	text "I have a big test"
@@ -144,10 +117,7 @@ CeladonUniversityLibrary1FCooltrainermScript:
 	cont "that Focus Band."
 	done
 
-CeladonUniversityLibrary1FTeacherScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLibrary1FTeacherText:
 	text "I'm the head"
 	line "librarian."
 
@@ -158,10 +128,7 @@ CeladonUniversityLibrary1FTeacherScript:
 	line "This IS a library."
 	done
 
-CeladonUniversityLibrary1FBookScript:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookText:
 	text "It's a book about"
 	line "flower arranging."
 
@@ -169,10 +136,7 @@ CeladonUniversityLibrary1FBookScript:
 	line "the cover."
 	done
 
-CeladonUniversityLibrary1FSignpost1:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FSignpost1Text:
 	text "Please do not"
 	line "disturb students"
 
@@ -180,10 +144,7 @@ CeladonUniversityLibrary1FSignpost1:
 	line "library."
 	done
 
-CeladonUniversityLibrary1FSignpost2:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FSignpost2Text:
 	text "Please do not"
 	line "bring food or"
 
@@ -191,10 +152,7 @@ CeladonUniversityLibrary1FSignpost2:
 	line "the library."
 	done
 
-CeladonUniversityLibrary1FBookshelf1:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf1Text:
 	text "Huh? Someone left"
 	line "an old photograph"
 	cont "in this book."
@@ -207,10 +165,7 @@ CeladonUniversityLibrary1FBookshelf1:
 	cont "an Oddish."
 	done
 
-CeladonUniversityLibrary1FBookshelf2:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf2Text:
 	text "It's a photo album"
 	line "containing many"
 
@@ -222,10 +177,7 @@ CeladonUniversityLibrary1FBookshelf2:
 	cont "on the cover."
 	done
 
-CeladonUniversityLibrary1FBookshelf3:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf3Text:
 	text "It's a book about"
 	line "a man who taught"
 
@@ -237,10 +189,7 @@ CeladonUniversityLibrary1FBookshelf3:
 	line "of friends."
 	done
 
-CeladonUniversityLibrary1FBookshelf4:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf4Text:
 	text "It's a book about"
 	line "#mon palin-"
 	cont "dromes."
@@ -250,10 +199,7 @@ CeladonUniversityLibrary1FBookshelf4:
 	cont "on the cover."
 	done
 
-CeladonUniversityLibrary1FBookshelf5:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf5Text:
 	text "This book is about"
 	line "Toy #mon that"
 
@@ -265,10 +211,7 @@ CeladonUniversityLibrary1FBookshelf5:
 	line "cute."
 	done
 
-CeladonUniversityLibrary1FBookshelf6:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf6Text:
 	text "It's a book about"
 	line "a #mon puppet"
 	cont "that can't tell"
@@ -279,10 +222,7 @@ CeladonUniversityLibrary1FBookshelf6:
 	cont "cover."
 	done
 
-CeladonUniversityLibrary1FBookshelf7:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf7Text:
 	text "It's a bo…"
 	line "wait…"
 
@@ -296,10 +236,7 @@ CeladonUniversityLibrary1FBookshelf7:
 	line "box art."
 	done
 
-CeladonUniversityLibrary1FBookshelf8:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf8Text:
 	text "It's a book writ-"
 	line "ten by a fishing"
 	cont "guru providing"
@@ -312,10 +249,7 @@ CeladonUniversityLibrary1FBookshelf8:
 	cont "cover."
 	done
 
-CeladonUniversityLibrary1FBookshelf9:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf9Text:
 	text "It's a manual"
 	line "explaining the"
 
@@ -323,10 +257,7 @@ CeladonUniversityLibrary1FBookshelf9:
 	line "Card game."
 	done
 
-CeladonUniversityLibrary1FBookshelf10:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf10Text:
 	text "It's a cookbook"
 	line "full of #mon-"
 	cont "themed recipes!"
@@ -337,10 +268,7 @@ CeladonUniversityLibrary1FBookshelf10:
 	cont "Snacks…"
 	done
 
-CeladonUniversityLibrary1FBookshelf11:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf11Text:
 	text "It's a guide to"
 	line "Poffin blending."
 
@@ -349,10 +277,7 @@ CeladonUniversityLibrary1FBookshelf11:
 	cont "cover."
 	done
 
-CeladonUniversityLibrary1FBookshelf12:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLibrary1FBookshelf12Text:
 	text "“The Secret Life"
 	line "of Laughter” by"
 	cont "Joe King."

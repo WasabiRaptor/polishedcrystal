@@ -1,56 +1,70 @@
 ShamoutiPokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, ShamoutiPokeCenter1FFixStairScript
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, ShamoutiPokeCenter1FFixStairScript
+	db 3 ; warp events
+	warp_event  5,  7, SHAMOUTI_ISLAND, 1
+	warp_event  6,  7, SHAMOUTI_ISLAND, 1
+	warp_event  0,  7, POKECENTER_2F, 1
 
-ShamoutiPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 1, SHAMOUTI_ISLAND
-	warp_def $7, $6, 1, SHAMOUTI_ISLAND
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalLoreleiScript
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  6,  3, SPRITE_IVY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ShamoutiPokeCenter1FIvyScript, EVENT_SHAMOUTI_POKE_CENTER_IVY
+	pc_nurse_event  5, 1
 
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalLoreleiScript
-
-.PersonEvents: db 2
-	person_event SPRITE_IVY, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ShamoutiPokeCenter1FIvyScript, EVENT_SHAMOUTI_POKE_CENTER_IVY
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ShamoutiPokeCenter1FNurseScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const SHAMOUTIPOKECENTER1F_IVY
 
 ShamoutiPokeCenter1FFixStairScript:
-	changeblock $0, $6, $39
+	changeblock 0, 6, $39
 	return
 
-ShamoutiPokeCenter1FNurseScript:
-	jumpstd pokecenternurse
+PokemonJournalLoreleiScript:
+	setflag ENGINE_READ_LORELEI_JOURNAL
+	thistext
+
+	text "#mon Journal"
+
+	para "Special Feature:"
+	line "Ex-Elite Lorelei!"
+
+	para "Lorelei is said to"
+	line "have a complete"
+
+	para "collection of"
+	line "#mon dolls."
+	done
 
 ShamoutiPokeCenter1FIvyScript:
 	faceplayer
 	opentext
 	checkevent EVENT_LISTENED_TO_IVY_INTRO
-	iftrue .heardintro
+	iftrue .HeardIntro
 	writetext .GreetingText
 	waitbutton
 	setevent EVENT_LISTENED_TO_IVY_INTRO
-.heardintro
+.HeardIntro
 	writetext .OfferText
-	loadmenudata .KantoStarterMenuData
+	loadmenu .KantoStarterMenuData
 	verticalmenu
 	closewindow
-	if_equal $1, .Bulbasaur
-	if_equal $2, .Charmander
-	if_equal $3, .Squirtle
-	writetext .RefusedText
-	waitbutton
-	closetext
-	end
+	ifequal $1, .Bulbasaur
+	ifequal $2, .Charmander
+	ifequal $3, .Squirtle
+	thisopenedtext
+
+	text "Ivy: Hm, I thought"
+	line "you'd be happy to"
+
+	para "raise a rare"
+	line "#mon…"
+	done
 
 .Bulbasaur:
 	setevent EVENT_GOT_BULBASAUR_FROM_IVY
@@ -58,7 +72,7 @@ ShamoutiPokeCenter1FIvyScript:
 	buttonsound
 	waitsfx
 	checkcode VAR_PARTYCOUNT
-	if_equal $6, .NoRoom
+	ifequal $6, .NoRoom
 	pokenamemem BULBASAUR, $0
 	writetext .ReceivedKantoStarterText
 	playsound SFX_CAUGHT_MON
@@ -73,7 +87,7 @@ ShamoutiPokeCenter1FIvyScript:
 	buttonsound
 	waitsfx
 	checkcode VAR_PARTYCOUNT
-	if_equal $6, .NoRoom
+	ifequal $6, .NoRoom
 	pokenamemem CHARMANDER, $0
 	writetext .ReceivedKantoStarterText
 	playsound SFX_CAUGHT_MON
@@ -88,7 +102,7 @@ ShamoutiPokeCenter1FIvyScript:
 	buttonsound
 	waitsfx
 	checkcode VAR_PARTYCOUNT
-	if_equal $6, .NoRoom
+	ifequal $6, .NoRoom
 	pokenamemem SQUIRTLE, $0
 	writetext .ReceivedKantoStarterText
 	playsound SFX_CAUGHT_MON
@@ -100,9 +114,9 @@ ShamoutiPokeCenter1FIvyScript:
 	waitbutton
 	closetext
 	checkcode VAR_FACING
-	spriteface PLAYER, DOWN
-	if_not_equal UP, .noleftstep
-	applymovement SHAMOUTIPOKECENTER1F_IVY, .LeftMovement
+	turnobject PLAYER, DOWN
+	ifnotequal UP, .noleftstep
+	applyonemovement SHAMOUTIPOKECENTER1F_IVY, step_left
 .noleftstep
 	applymovement SHAMOUTIPOKECENTER1F_IVY, .DownMovement
 	playsound SFX_EXIT_BUILDING
@@ -116,10 +130,12 @@ ShamoutiPokeCenter1FIvyScript:
 	end
 
 .NoRoom:
-	writetext .NoRoomText
-	waitbutton
-	closetext
-	end
+	thisopenedtext
+
+	text "Ivy: Oh, there's no"
+	line "more room in your"
+	cont "party…"
+	done
 
 .GreetingText:
 	text "Ivy: Oh! You're"
@@ -169,20 +185,6 @@ ShamoutiPokeCenter1FIvyScript:
 	line "want?"
 	done
 
-.RefusedText:
-	text "Ivy: Hm, I thought"
-	line "you'd be happy to"
-
-	para "raise a rare"
-	line "#mon…"
-	done
-
-.NoRoomText:
-	text "Ivy: Oh, there's no"
-	line "more room in your"
-	cont "party…"
-	done
-
 .ChoseKantoStarterText:
 	text "Ivy: I think"
 	line "that's a great"
@@ -192,7 +194,7 @@ ShamoutiPokeCenter1FIvyScript:
 .ReceivedKantoStarterText:
 	text "<PLAYER> received"
 	line "@"
-	text_from_ram StringBuffer3
+	text_from_ram wStringBuffer3
 	text "!"
 	done
 
@@ -207,7 +209,7 @@ ShamoutiPokeCenter1FIvyScript:
 	para "know you'll take"
 	line "good care of that"
 	cont "@"
-	text_from_ram StringBuffer3
+	text_from_ram wStringBuffer3
 	text "."
 
 	para "Well, I need to"
@@ -219,6 +221,13 @@ ShamoutiPokeCenter1FIvyScript:
 	para "Say hi to Prof.Oak"
 	line "for me!"
 	done
+
+.DownMovement:
+	step_down
+	step_down
+	step_down
+	step_down
+	step_end
 
 .KantoStarterMenuData:
 	db $40 ; flags
@@ -234,31 +243,3 @@ ShamoutiPokeCenter1FIvyScript:
 	db "Charmander@"
 	db "Squirtle@"
 	db "Cancel@"
-
-.LeftMovement:
-	step_left
-	step_end
-
-.DownMovement:
-	step_down
-	step_down
-	step_down
-	step_down
-	step_end
-
-PokemonJournalLoreleiScript:
-	setflag ENGINE_READ_LORELEI_JOURNAL
-	jumptext PokemonJournalLoreleiText
-
-PokemonJournalLoreleiText:
-	text "#mon Journal"
-
-	para "Special Feature:"
-	line "Ex-Elite Lorelei!"
-
-	para "Lorelei is said to"
-	line "have a complete"
-
-	para "collection of"
-	line "#mon dolls."
-	done

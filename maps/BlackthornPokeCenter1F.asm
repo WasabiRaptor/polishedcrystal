@@ -1,33 +1,29 @@
 BlackthornPokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, BLACKTHORN_CITY, 5
+	warp_event  6,  7, BLACKTHORN_CITY, 5
+	warp_event  0,  7, POKECENTER_2F, 1
 
-BlackthornPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 5, BLACKTHORN_CITY
-	warp_def $7, $6, 5, BLACKTHORN_CITY
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalClairScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalClairScript
-
-.PersonEvents: db 5
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_SCIENTIST, 1, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ProfOaksAide4Script, -1
-	person_event SPRITE_COOLTRAINER_M, 6, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_JUMPSTD, 0, happinesschecknpc, -1
-	person_event SPRITE_GENTLEMAN, 4, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, BlackthornPokeCenter1FGentlemanText, -1
-	person_event SPRITE_TWIN, 4, 1, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, BlackthornPokeCenter1FTwinText, -1
+	db 5 ; object events
+	pc_nurse_event  5, 1
+	object_event  8,  1, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ProfOaksAide4Script, -1
+	object_event 11,  6, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumpstd, happinesschecknpc, -1
+	object_event  8,  4, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, BlackthornPokeCenter1FGentlemanText, -1
+	object_event  1,  4, SPRITE_TWIN, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, BlackthornPokeCenter1FTwinText, -1
 
 PokemonJournalClairScript:
 	setflag ENGINE_READ_CLAIR_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Special Feature:"
@@ -42,38 +38,48 @@ PokemonJournalClairScript:
 	done
 
 ProfOaksAide4Script:
+	checkevent EVENT_GOT_LUCKY_EGG_FROM_PROF_OAKS_AIDE
+	iftrue_jumptextfaceplayer .ExplainText
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_LUCKY_EGG_FROM_PROF_OAKS_AIDE
-	iftrue .Explain
 	writetext .HiText
 	waitbutton
 	count_seen_caught
 	checkcode VAR_DEXCAUGHT
-	if_greater_than 59, .HereYouGo
-.UhOh
-	writetext .UhOhText
-	waitbutton
-	closetext
-	end
+	ifgreater 59, .HereYouGo
+	thisopenedtext
+
+	text "Let's see…"
+	line "Uh-oh! You've only"
+
+	para "caught @"
+	deciram wd003, 1, 3
+	text " kinds"
+	line "of #mon."
+
+	para "Come back and see"
+	line "me when you catch"
+	cont "60 kinds."
+	done
 
 .HereYouGo
 	writetext .HereYouGoText
 	waitbutton
 	verbosegiveitem LUCKY_EGG
-	iffalse .NoRoom
+	iffalse_jumpopenedtext .NoRoomText
 	setevent EVENT_GOT_LUCKY_EGG_FROM_PROF_OAKS_AIDE
-.Explain
-	writetext .ExplainText
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-.NoRoom
-	writetext .NoRoomText
-	waitbutton
-	closetext
-	end
+.ExplainText:
+	text "That Lucky Egg"
+	line "helps a #mon"
+
+	para "gain more exper-"
+	line "ience than usual."
+
+	para "Use it to com-"
+	line "plete the #dex!"
+	done
 
 .HiText:
 	text "Hello there! I'm"
@@ -90,20 +96,6 @@ ProfOaksAide4Script:
 
 	para "at least 60 kinds"
 	line "of #mon?"
-	done
-
-.UhOhText:
-	text "Let's see…"
-	line "Uh-oh! You've only"
-
-	para "caught @"
-	deciram wd003, 1, 3
-	text " kinds"
-	line "of #mon."
-
-	para "Come back and see"
-	line "me when you catch"
-	cont "60 kinds."
 	done
 
 .HereYouGoText:
@@ -123,17 +115,6 @@ ProfOaksAide4Script:
 	text "Oh! I see you"
 	line "don't have any"
 	cont "room for this."
-	done
-
-.ExplainText:
-	text "That Lucky Egg"
-	line "helps a #mon"
-
-	para "gain more exper-"
-	line "ience than usual."
-
-	para "Use it to com-"
-	line "plete the #dex!"
 	done
 
 BlackthornPokeCenter1FGentlemanText:

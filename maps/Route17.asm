@@ -1,49 +1,46 @@
 Route17_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, UnknownScript_0x1ad0ab
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, UnknownScript_0x1ad0ab
+	db 0 ; warp events
 
-Route17_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 0
+	db 6 ; bg events
+	bg_event 11, 71, SIGNPOST_ITEM + MAX_ETHER, EVENT_ROUTE_17_HIDDEN_MAX_ETHER
+	bg_event 10, 123, SIGNPOST_ITEM + MAX_ELIXIR, EVENT_ROUTE_17_HIDDEN_MAX_ELIXIR
+	bg_event  9, 64, SIGNPOST_JUMPTEXT, Route17Notice1Text
+	bg_event  9, 71, SIGNPOST_JUMPTEXT, Route17TrainerTips1Text
+	bg_event  9, 94, SIGNPOST_JUMPTEXT, Route17TrainerTips2Text
+	bg_event  9, 101, SIGNPOST_JUMPTEXT, Route17Notice2Text
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 71, 11, SIGNPOST_ITEM, Route17HiddenMaxEther
-	signpost 123, 10, SIGNPOST_ITEM, Route17HiddenMaxElixer
-
-.PersonEvents: db 12
-	person_event SPRITE_BIKER, 9, 12, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 4, TrainerBikerDale, -1
-	person_event SPRITE_BIKER, 17, 4, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 4, TrainerBikerReilly, -1
-	person_event SPRITE_BIKER, 24, 18, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 3, TrainerBikerJacob, -1
-	person_event SPRITE_BIKER, 37, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 3, TrainerBikerDan, -1
-	person_event SPRITE_BIKER, 56, 3, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 3, TrainerBikerGlenn, -1
-	person_event SPRITE_BIKER, 65, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 2, TrainerBikerJoel, -1
-	person_event SPRITE_BIKER, 72, 13, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 4, TrainerBikerAiden, -1
-	person_event SPRITE_BIKER, 86, 3, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 2, TrainerBikerTeddy, -1
-	person_event SPRITE_BIKER, 128, 6, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
-	person_event SPRITE_ROUGHNECK, 29, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerRoughneckBrian, -1
-	person_event SPRITE_ROUGHNECK, 42, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 2, TrainerRoughneckTheron, -1
-	person_event SPRITE_ROUGHNECK, 91, 4, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 2, TrainerRoughneckMarkey, -1
+	db 12 ; object events
+	object_event 12,  9, SPRITE_BIKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBikerDale, -1
+	object_event  4, 17, SPRITE_BIKER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBikerReilly, -1
+	object_event 18, 24, SPRITE_BIKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBikerJacob, -1
+	object_event  2, 37, SPRITE_BIKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBikerDan, -1
+	object_event  3, 56, SPRITE_BIKER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBikerGlenn, -1
+	object_event  9, 65, SPRITE_BIKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerBikerJoel, -1
+	object_event 13, 72, SPRITE_BIKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBikerAiden, -1
+	object_event  3, 86, SPRITE_BIKER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerBikerTeddy, -1
+	object_event  6, 128, SPRITE_BIKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event  1, 29, SPRITE_ROUGHNECK, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerRoughneckBrian, -1
+	object_event  6, 42, SPRITE_ROUGHNECK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerRoughneckTheron, -1
+	object_event  4, 91, SPRITE_ROUGHNECK, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerRoughneckMarkey, -1
 
 UnknownScript_0x1ad0ab:
 	setflag ENGINE_ALWAYS_ON_BIKE
 	setflag ENGINE_DOWNHILL
 	return
 
-TrainerBikerReilly:
-	trainer EVENT_BEAT_BIKER_REILLY, BIKER, REILLY, BikerReillySeenText, BikerReillyBeatenText, 0, BikerReillyScript
+GenericTrainerBikerReilly:
+	generictrainer BIKER, REILLY, EVENT_BEAT_BIKER_REILLY, BikerReillySeenText, BikerReillyBeatenText
 
-BikerReillyScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ad13b
-	waitbutton
-	closetext
-	end
+	text "Don't get cocky,"
+	line "you Johto punk!"
+	done
 
 BikerReillySeenText:
 	text "Hey, you! You're"
@@ -54,21 +51,16 @@ BikerReillyBeatenText:
 	text "Whoa, you kick!"
 	done
 
-UnknownText_0x1ad13b:
-	text "Don't get cocky,"
-	line "you Johto punk!"
+GenericTrainerBikerJoel:
+	generictrainer BIKER, JOEL, EVENT_BEAT_BIKER_JOEL, BikerJoelSeenText, BikerJoelBeatenText
+
+	text "I look cool, but"
+	line "I'm weak, so I'm"
+	cont "not really cool."
+
+	para "I have to train"
+	line "harder…"
 	done
-
-TrainerBikerJoel:
-	trainer EVENT_BEAT_BIKER_JOEL, BIKER, JOEL, BikerJoelSeenText, BikerJoelBeatenText, 0, BikerJoelScript
-
-BikerJoelScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ad196
-	waitbutton
-	closetext
-	end
 
 BikerJoelSeenText:
 	text "Wow. That's a cool"
@@ -80,25 +72,13 @@ BikerJoelBeatenText:
 	line "look cool…"
 	done
 
-UnknownText_0x1ad196:
-	text "I look cool, but"
-	line "I'm weak, so I'm"
-	cont "not really cool."
+GenericTrainerBikerGlenn:
+	generictrainer BIKER, GLENN, EVENT_BEAT_BIKER_GLENN, BikerGlennSeenText, BikerGlennBeatenText
 
-	para "I have to train"
-	line "harder…"
+	text "Hands-free riding"
+	line "is considered cool"
+	cont "on Cycling Road."
 	done
-
-TrainerBikerGlenn:
-	trainer EVENT_BEAT_BIKER_GLENN, BIKER, GLENN, BikerGlennSeenText, BikerGlennBeatenText, 0, BikerGlennScript
-
-BikerGlennScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ad225
-	waitbutton
-	closetext
-	end
 
 BikerGlennSeenText:
 	text "Hey! Want to have"
@@ -110,22 +90,13 @@ BikerGlennBeatenText:
 	line "awesome torque!"
 	done
 
-UnknownText_0x1ad225:
-	text "Hands-free riding"
-	line "is considered cool"
-	cont "on Cycling Road."
+GenericTrainerBikerDale:
+	generictrainer BIKER, DALE, EVENT_BEAT_BIKER_DALE, BikerDaleSeenText, BikerDaleBeatenText
+
+	text "You're so cool!"
+	line "You don't do any-"
+	cont "thing halfway!"
 	done
-
-TrainerBikerDale:
-	trainer EVENT_BEAT_BIKER_DALE, BIKER, DALE, BikerDaleSeenText, BikerDaleBeatenText, 0, BikerDaleScript
-
-BikerDaleScript:
-	end_if_just_battled
-	opentext
-	writetext BikerDaleAfterText
-	waitbutton
-	closetext
-	end
 
 BikerDaleSeenText:
 	text "You're gonna lose!"
@@ -137,22 +108,13 @@ BikerDaleBeatenText:
 	line "a little off…"
 	done
 
-BikerDaleAfterText:
-	text "You're so cool!"
-	line "You don't do any-"
-	cont "thing halfway!"
+GenericTrainerBikerJacob:
+	generictrainer BIKER, JACOB, EVENT_BEAT_BIKER_JACOB, BikerJacobSeenText, BikerJacobBeatenText
+
+	text "Chopper? Oh, I"
+	line "was talking about"
+	cont "my Bicycle!"
 	done
-
-TrainerBikerJacob:
-	trainer EVENT_BEAT_BIKER_JACOB, BIKER, JACOB, BikerJacobSeenText, BikerJacobBeatenText, 0, BikerJacobScript
-
-BikerJacobScript:
-	end_if_just_battled
-	opentext
-	writetext BikerJacobAfterText
-	waitbutton
-	closetext
-	end
 
 BikerJacobSeenText:
 	text "Modding my"
@@ -166,22 +128,16 @@ BikerJacobBeatenText:
 	text "Argh. I failed!"
 	done
 
-BikerJacobAfterText:
-	text "Chopper? Oh, I"
-	line "was talking about"
-	cont "my Bicycle!"
+GenericTrainerBikerAiden:
+	generictrainer BIKER, AIDEN, EVENT_BEAT_BIKER_AIDEN, BikerAidenSeenText, BikerAidenBeatenText
+
+	text "Gaon gaooon!"
+	line "Buwaribaribari…!"
+
+	para "There, my engine"
+	line "imitation has"
+	cont "evolved!"
 	done
-
-TrainerBikerAiden:
-	trainer EVENT_BEAT_BIKER_AIDEN, BIKER, AIDEN, BikerAidenSeenText, BikerAidenBeatenText, 0, BikerAidenScript
-
-BikerAidenScript:
-	end_if_just_battled
-	opentext
-	writetext BikerAidenAfterText
-	waitbutton
-	closetext
-	end
 
 BikerAidenSeenText:
 	text "Vroom vroom!"
@@ -197,25 +153,15 @@ BikerAidenBeatenText:
 	line "I'm out of breath…"
 	done
 
-BikerAidenAfterText:
-	text "Gaon gaooon!"
-	line "Buwaribaribari…!"
+GenericTrainerBikerDan:
+	generictrainer BIKER, DAN, EVENT_BEAT_BIKER_DAN, BikerDanSeenText, BikerDanBeatenText
 
-	para "There, my engine"
-	line "imitation has"
-	cont "evolved!"
+	text "I love this melan-"
+	line "choly melody."
+
+	para "It really suits me"
+	line "well…"
 	done
-
-TrainerBikerDan:
-	trainer EVENT_BEAT_BIKER_DAN, BIKER, DAN, BikerDanSeenText, BikerDanBeatenText, 0, BikerDanScript
-
-BikerDanScript:
-	end_if_just_battled
-	opentext
-	writetext BikerDanAfterText
-	waitbutton
-	closetext
-	end
 
 BikerDanSeenText:
 	text "Parara parapara"
@@ -230,24 +176,14 @@ BikerDanBeatenText:
 	text "Paaraaraaaaa…"
 	done
 
-BikerDanAfterText:
-	text "I love this melan-"
-	line "choly melody."
+GenericTrainerBikerTeddy:
+	generictrainer BIKER, TEDDY, EVENT_BEAT_BIKER_TEDDY, BikerTeddySeenText, BikerTeddyBeatenText
 
-	para "It really suits me"
-	line "well…"
+	text "I love the way you"
+	line "do battle, too!"
+
+	cont "Consider me a fan!"
 	done
-
-TrainerBikerTeddy:
-	trainer EVENT_BEAT_BIKER_TEDDY, BIKER, TEDDY, BikerTeddySeenText, BikerTeddyBeatenText, 0, BikerTeddyScript
-
-BikerTeddyScript:
-	end_if_just_battled
-	opentext
-	writetext BikerTeddyAfterText
-	waitbutton
-	closetext
-	end
 
 BikerTeddySeenText:
 	text "Hey, that's a cool"
@@ -258,23 +194,12 @@ BikerTeddyBeatenText:
 	text "Great job."
 	done
 
-BikerTeddyAfterText:
-	text "I love the way you"
-	line "do battle, too!"
+GenericTrainerRoughneckBrian:
+	generictrainer ROUGHNECK, BRIAN, EVENT_BEAT_ROUGHNECK_BRIAN, RoughneckBrianSeenText, RoughneckBrianBeatenText
 
-	cont "Consider me a fan!"
+	text "See you later!"
+	line "Come back anytime!"
 	done
-
-TrainerRoughneckBrian:
-	trainer EVENT_BEAT_ROUGHNECK_BRIAN, ROUGHNECK, BRIAN, RoughneckBrianSeenText, RoughneckBrianBeatenText, 0, RoughneckBrianScript
-
-RoughneckBrianScript:
-	end_if_just_battled
-	opentext
-	writetext RoughneckBrianAfterText
-	waitbutton
-	closetext
-	end
 
 RoughneckBrianSeenText:
 	text "Hey, who told you"
@@ -286,21 +211,15 @@ RoughneckBrianBeatenText:
 	text "Crash!"
 	done
 
-RoughneckBrianAfterText:
-	text "See you later!"
-	line "Come back anytime!"
+GenericTrainerRoughneckTheron:
+	generictrainer ROUGHNECK, THERON, EVENT_BEAT_ROUGHNECK_THERON, RoughneckTheronSeenText, RoughneckTheronBeatenText
+
+	text "You wanna join"
+	line "my team?"
+
+	para "Won't you give it"
+	line "a try?"
 	done
-
-TrainerRoughneckTheron:
-	trainer EVENT_BEAT_ROUGHNECK_THERON, ROUGHNECK, THERON, RoughneckTheronSeenText, RoughneckTheronBeatenText, 0, RoughneckTheronScript
-
-RoughneckTheronScript:
-	end_if_just_battled
-	opentext
-	writetext RoughneckTheronAfterText
-	waitbutton
-	closetext
-	end
 
 RoughneckTheronSeenText:
 	text "I'll toughen you"
@@ -312,24 +231,14 @@ RoughneckTheronBeatenText:
 	text "I lost. I lost!"
 	done
 
-RoughneckTheronAfterText:
-	text "You wanna join"
-	line "my team?"
+GenericTrainerRoughneckMarkey:
+	generictrainer ROUGHNECK, MARKEY, EVENT_BEAT_ROUGHNECK_MARKEY, RoughneckMarkeySeenText, RoughneckMarkeyBeatenText
 
-	para "Won't you give it"
-	line "a try?"
+	text "All right!"
+
+	para "That fighting"
+	line "yell was great!"
 	done
-
-TrainerRoughneckMarkey:
-	trainer EVENT_BEAT_ROUGHNECK_MARKEY, ROUGHNECK, MARKEY, RoughneckMarkeySeenText, RoughneckMarkeyBeatenText, 0, RoughneckMarkeyScript
-
-RoughneckMarkeyScript:
-	end_if_just_battled
-	opentext
-	writetext RoughneckMarkeyAfterText
-	waitbutton
-	closetext
-	end
 
 RoughneckMarkeySeenText:
 	text "Hey hey hey!"
@@ -342,15 +251,40 @@ RoughneckMarkeyBeatenText:
 	text "All right, thanks!"
 	done
 
-RoughneckMarkeyAfterText:
-	text "All right!"
+Route17Notice1Text:
+	text "It's a notice."
 
-	para "That fighting"
-	line "yell was great!"
+	para "Watch out for"
+	line "discarded items!"
 	done
 
-Route17HiddenMaxEther:
-	dwb EVENT_ROUTE_17_HIDDEN_MAX_ETHER, MAX_ETHER
+Route17TrainerTips1Text:
+	text "Trainer Tips"
 
-Route17HiddenMaxElixer:
-	dwb EVENT_ROUTE_17_HIDDEN_MAX_ELIXER, MAX_ELIXER
+	para "All #mon are"
+	line "unique."
+
+	para "Two #mon of the"
+	line "same species and"
+	cont "level may still"
+
+	para "look, act, and"
+	line "grow differently."
+	done
+
+Route17TrainerTips2Text:
+	text "Trainer Tips"
+
+	para "Open the Start"
+	line "menu to stay in"
+	cont "place while on a"
+	cont "slope."
+	done
+
+Route17Notice2Text:
+	text "It's a notice."
+
+	para "Don't throw the"
+	line "game, throw #"
+	cont "Balls instead!"
+	done

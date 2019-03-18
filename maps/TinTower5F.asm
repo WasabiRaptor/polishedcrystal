@@ -1,29 +1,19 @@
 TinTower5F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  9, 15, TIN_TOWER_6F, 2
+	warp_event  0,  4, TIN_TOWER_4F, 1
+	warp_event  0, 14, TIN_TOWER_4F, 3
+	warp_event 15, 15, TIN_TOWER_4F, 4
 
-TinTower5F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $f, $9, 2, TIN_TOWER_6F
-	warp_def $4, $0, 1, TIN_TOWER_4F
-	warp_def $e, $0, 3, TIN_TOWER_4F
-	warp_def $f, $e, 4, TIN_TOWER_4F
+	db 2 ; bg events
+	bg_event 14, 14, SIGNPOST_ITEM + FULL_RESTORE, EVENT_TIN_TOWER_5F_HIDDEN_FULL_RESTORE
+	bg_event  1, 15, SIGNPOST_ITEM + CARBOS, EVENT_TIN_TOWER_5F_HIDDEN_CARBOS
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 14, 14, SIGNPOST_ITEM, TinTower5FHiddenFullRestore
-	signpost 15, 1, SIGNPOST_ITEM, TinTower5FHiddenCarbos
-
-.PersonEvents: db 1
-	person_event SPRITE_BALL_CUT_FRUIT, 9, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, RARE_CANDY, 1, EVENT_TIN_TOWER_5F_RARE_CANDY
-
-TinTower5FHiddenFullRestore:
-	dwb EVENT_TIN_TOWER_5F_HIDDEN_FULL_RESTORE, FULL_RESTORE
-
-
-TinTower5FHiddenCarbos:
-	dwb EVENT_TIN_TOWER_5F_HIDDEN_CARBOS, CARBOS
+	db 1 ; object events
+	itemball_event  7,  9, RARE_CANDY, 1, EVENT_TIN_TOWER_5F_RARE_CANDY

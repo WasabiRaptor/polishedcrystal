@@ -1,38 +1,28 @@
 VictoryRoad1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event 11, 21, ROUTE_23, 3
+	warp_event  3,  3, VICTORY_ROAD_2F, 2
 
-VictoryRoad1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $15, $b, 3, ROUTE_23
-	warp_def $3, $3, 2, VICTORY_ROAD_2F
+	db 1 ; bg events
+	bg_event  5, 19, SIGNPOST_ITEM + FULL_HEAL, EVENT_VICTORY_ROAD_1F_HIDDEN_FULL_HEAL
 
-.XYTriggers: db 0
+	db 3 ; object events
+	object_event 12,  6, SPRITE_VETERAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerVeteranmMatt, -1
+	itemball_event 14,  2, MAX_REVIVE, 1, EVENT_VICTORY_ROAD_1F_MAX_REVIVE
+	itemball_event 17,  2, FULL_HEAL, 1, EVENT_VICTORY_ROAD_1F_FULL_HEAL
 
-.Signposts: db 1
-	signpost 19, 5, SIGNPOST_ITEM, VictoryRoad1FHiddenFullHeal
+GenericTrainerVeteranmMatt:
+	generictrainer VETERANM, MATT, EVENT_BEAT_VETERANM_MATT, VeteranmMattSeenText, VeteranmMattBeatenText
 
-.PersonEvents: db 3
-	person_event SPRITE_VETERAN_M, 6, 12, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 3, TrainerVeteranmMatt, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MAX_REVIVE, 1, EVENT_VICTORY_ROAD_1F_MAX_REVIVE
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, FULL_HEAL, 1, EVENT_VICTORY_ROAD_1F_FULL_HEAL
-
-TrainerVeteranmMatt:
-	trainer EVENT_BEAT_VETERANM_MATT, VETERANM, MATT, VeteranmMattSeenText, VeteranmMattBeatenText, 0, VeteranmMattScript
-
-VeteranmMattScript:
-	end_if_just_battled
-	opentext
-	writetext VeteranmMattAfterText
-	waitbutton
-	closetext
-	end
-
-VictoryRoad1FHiddenFullHeal:
-	dwb EVENT_VICTORY_ROAD_1F_HIDDEN_FULL_HEAL, FULL_HEAL
+	text "I concede, you're"
+	line "better than me!"
+	done
 
 VeteranmMattSeenText:
 	text "I can see you're"
@@ -44,7 +34,3 @@ VeteranmMattBeatenText:
 	text "I had a chance…"
 	done
 
-VeteranmMattAfterText:
-	text "I concede, you're"
-	line "better than me!"
-	done

@@ -1,50 +1,47 @@
 UndergroundPathSwitchRoomEntrances_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, UndergroundPathSwitchRoomEntrancesUpdateDoorPositions
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, UndergroundPathSwitchRoomEntrancesUpdateDoorPositions
+	db 9 ; warp events
+	warp_event 23,  3, WAREHOUSE_ENTRANCE, 6
+	warp_event 22, 10, UNDERGROUND_WAREHOUSE, 1
+	warp_event 23, 10, UNDERGROUND_WAREHOUSE, 2
+	warp_event  5, 23, WAREHOUSE_ENTRANCE, 2
+	warp_event  4, 27, GOLDENROD_CITY, 14
+	warp_event  5, 27, GOLDENROD_CITY, 14
+	warp_event 21, 23, WAREHOUSE_ENTRANCE, 1
+	warp_event 20, 27, GOLDENROD_CITY, 13
+	warp_event 21, 27, GOLDENROD_CITY, 13
 
-UndergroundPathSwitchRoomEntrances_MapEventHeader:
+	db 2 ; coord events
+	coord_event 19,  4, 0, UndergroundSilverTrigger1
+	coord_event 19,  5, 0, UndergroundSilverTrigger2
 
-.Warps: db 9
-	warp_def $3, $17, 6, WAREHOUSE_ENTRANCE
-	warp_def $a, $16, 1, UNDERGROUND_WAREHOUSE
-	warp_def $a, $17, 2, UNDERGROUND_WAREHOUSE
-	warp_def $17, $5, 2, WAREHOUSE_ENTRANCE
-	warp_def $1b, $4, 14, GOLDENROD_CITY
-	warp_def $1b, $5, 14, GOLDENROD_CITY
-	warp_def $17, $15, 1, WAREHOUSE_ENTRANCE
-	warp_def $1b, $14, 13, GOLDENROD_CITY
-	warp_def $1b, $15, 13, GOLDENROD_CITY
+	db 6 ; bg events
+	bg_event 16,  1, SIGNPOST_READ, Switch1Script
+	bg_event 10,  1, SIGNPOST_READ, Switch2Script
+	bg_event  2,  1, SIGNPOST_READ, Switch3Script
+	bg_event 20, 11, SIGNPOST_READ, EmergencySwitchScript
+	bg_event  8,  9, SIGNPOST_ITEM + MAX_POTION, EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_HIDDEN_MAX_POTION
+	bg_event  1,  8, SIGNPOST_ITEM + REVIVE, EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_HIDDEN_REVIVE
 
-.XYTriggers: db 2
-	xy_trigger 0, $4, $13, UndergroundSilverTrigger1
-	xy_trigger 0, $5, $13, UndergroundSilverTrigger2
+	db 12 ; object events
+	object_event 23,  3, SPRITE_SILVER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_RIVAL_UNDERGROUND_PATH
+	object_event  9, 12, SPRITE_BURGLAR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerBurglarDuncan, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event  4,  8, SPRITE_BURGLAR, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerBurglarOrson, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 17,  2, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerGruntM13, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 11,  2, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerGruntM11, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event  3,  2, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerGruntM25, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 19, 12, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerGruntF3, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event  3, 25, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UndergroundPathSwitchRoomEntrances_TeacherText, -1
+	object_event  8, 24, SPRITE_SUPER_NERD, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, UndergroundPathSwitchRoomEntrances_SuperNerd1Text, -1
+	object_event 19, 25, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UndergroundPathSwitchRoomEntrances_SuperNerd2Text, -1
+	itemball_event  1, 12, SMOKE_BALL, 1, EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_SMOKE_BALL
+	itemball_event 14,  9, FULL_HEAL, 1, EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_FULL_HEAL
 
-.Signposts: db 6
-	signpost 1, 16, SIGNPOST_READ, Switch1Script
-	signpost 1, 10, SIGNPOST_READ, Switch2Script
-	signpost 1, 2, SIGNPOST_READ, Switch3Script
-	signpost 11, 20, SIGNPOST_READ, EmergencySwitchScript
-	signpost 9, 8, SIGNPOST_ITEM, UndergroundPathSwitchRoomEntrancesHiddenMaxPotion
-	signpost 8, 1, SIGNPOST_ITEM, UndergroundPathSwitchRoomEntrancesHiddenRevive
-
-.PersonEvents: db 12
-	person_event SPRITE_SILVER, 3, 23, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_RIVAL_UNDERGROUND_PATH
-	person_event SPRITE_PHARMACIST, 12, 9, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 2, TrainerBurglarDuncan, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_PHARMACIST, 8, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 2, TrainerBurglarOrson, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_ROCKET, 2, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerGruntM13, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_ROCKET, 2, 11, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerGruntM11, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_ROCKET, 2, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerGruntM25, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_ROCKET_GIRL, 12, 19, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerGruntF3, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_TEACHER, 25, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TeacherScript_0x7ca7d, -1
-	person_event SPRITE_SUPER_NERD, 24, 8, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, UndergroundPathSwitchRoomEntrancesSuperNerd1Script, -1
-	person_event SPRITE_SUPER_NERD, 25, 19, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SuperNerdScript_0x7ca7a, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 1, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, SMOKE_BALL, 1, EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_SMOKE_BALL
-	person_event SPRITE_BALL_CUT_FRUIT, 9, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, FULL_HEAL, 1, EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_FULL_HEAL
-
-const_value set 2
+	const_def 1 ; object constants
 	const UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER
 
 UNDERGROUND_DOOR_CLOSED1 EQU $2a
@@ -131,17 +128,8 @@ UndergroundPathSwitchRoomEntrancesUpdateDoorPositions:
 .false14
 	return
 
-TeacherScript_0x7ca7d:
-	jumptextfaceplayer UndergroundPathSwitchRoomEntrances_TeacherText
-
-UndergroundPathSwitchRoomEntrancesSuperNerd1Script:
-	jumptextfaceplayer UndergroundPathSwitchRoomEntrances_SuperNerd1Text
-
-SuperNerdScript_0x7ca7a:
-	jumptextfaceplayer UndergroundPathSwitchRoomEntrances_SuperNerd2Text
-
 UndergroundSilverTrigger1:
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	showemote EMOTE_SHOCK, PLAYER, 15
 	special Special_FadeOutMusic
 	pause 15
@@ -149,18 +137,18 @@ UndergroundSilverTrigger1:
 	appear UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER
 	waitsfx
 	applymovement UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER, UndergroundSilverApproachMovement1
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	scall UndergroundSilverBattleScript
 	applymovement UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER, UndergroundSilverRetreatMovement1
 	playsound SFX_EXIT_BUILDING
 	disappear UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER
-	dotrigger 1
+	setscene 1
 	waitsfx
 	playmapmusic
 	end
 
 UndergroundSilverTrigger2:
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	showemote EMOTE_SHOCK, PLAYER, 15
 	special Special_FadeOutMusic
 	pause 15
@@ -168,12 +156,12 @@ UndergroundSilverTrigger2:
 	appear UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER
 	waitsfx
 	applymovement UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER, UndergroundSilverApproachMovement2
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	scall UndergroundSilverBattleScript
 	applymovement UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER, UndergroundSilverRetreatMovement2
 	playsound SFX_EXIT_BUILDING
 	disappear UNDERGROUNDPATHSWITCHROOMENTRANCES_SILVER
-	dotrigger 1
+	setscene 1
 	waitsfx
 	playmapmusic
 	end
@@ -182,13 +170,10 @@ UndergroundSilverBattleScript:
 	checkevent EVENT_RIVAL_BURNED_TOWER
 	iftrue .Continue
 	setevent EVENT_RIVAL_BURNED_TOWER
-	domaptrigger BURNED_TOWER_1F, 1
+	setmapscene BURNED_TOWER_1F, 1
 .Continue:
 	playmusic MUSIC_RIVAL_ENCOUNTER
-	opentext
-	writetext UndergroundSilverBeforeText
-	waitbutton
-	closetext
+	showtext UndergroundSilverBeforeText
 	setevent EVENT_RIVAL_UNDERGROUND_PATH
 	checkevent EVENT_GOT_TOTODILE_FROM_ELM
 	iftrue .Totodile
@@ -223,77 +208,67 @@ UndergroundSilverBattleScript:
 .FinishRivalBattle:
 	special DeleteSavedMusic
 	playmusic MUSIC_RIVAL_AFTER
-	opentext
-	writetext UndergroundSilverAfterText
-	waitbutton
-	closetext
-	end
+	jumptext UndergroundSilverAfterText
 
-TrainerGruntM11:
-	trainer EVENT_BEAT_ROCKET_GRUNTM_11, GRUNTM, 11, GruntM11SeenText, GruntM11BeatenText, 0, GruntM11Script
+GenericTrainerGruntM11:
+	generictrainer GRUNTM, 11, EVENT_BEAT_ROCKET_GRUNTM_11, GruntM11SeenText, GruntM11BeatenText
 
-GruntM11Script:
-	end_if_just_battled
-	opentext
-	writetext GruntM11AfterText
-	waitbutton
-	closetext
-	end
+	text "I'm confused too…"
+	line "The switch on the"
 
-TrainerGruntM25:
-	trainer EVENT_BEAT_ROCKET_GRUNTM_25, GRUNTM, 25, GruntM25SeenText, GruntM25BeatenText, 0, GruntM25Script
+	para "end is the one to"
+	line "press first, but…"
+	done
 
-GruntM25Script:
-	end_if_just_battled
-	opentext
-	writetext GruntM25AfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerGruntM25:
+	generictrainer GRUNTM, 25, EVENT_BEAT_ROCKET_GRUNTM_25, GruntM25SeenText, GruntM25BeatenText
 
-TrainerBurglarDuncan:
-	trainer EVENT_BEAT_BURGLAR_DUNCAN, BURGLAR, DUNCAN, BurglarDuncanSeenText, BurglarDuncanBeatenText, 0, BurglarDuncanScript
+	text "All right. A hint!"
 
-BurglarDuncanScript:
-	end_if_just_battled
-	opentext
-	writetext BurglarDuncanAfterText
-	waitbutton
-	closetext
-	end
+	para "Change the order"
+	line "of switching."
 
-TrainerBurglarOrson:
-	trainer EVENT_BEAT_BURGLAR_ORSON, BURGLAR, ORSON, BurglarOrsonSeenText, BurglarOrsonBeatenText, 0, BurglarOrsonScript
+	para "That'll change the"
+	line "ways the shutters"
+	cont "open and close."
+	done
 
-BurglarOrsonScript:
-	end_if_just_battled
-	opentext
-	writetext BurglarOrsonAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerBurglarDuncan:
+	generictrainer BURGLAR, DUNCAN, EVENT_BEAT_BURGLAR_DUNCAN, BurglarDuncanSeenText, BurglarDuncanBeatenText
 
-TrainerGruntM13:
-	trainer EVENT_BEAT_ROCKET_GRUNTM_13, GRUNTM, 13, GruntM13SeenText, GruntM13BeatenText, 0, GruntM13Script
+	text "Steal and sell!"
+	line "That's basic in"
+	cont "crime, kid!"
+	done
 
-GruntM13Script:
-	end_if_just_battled
-	opentext
-	writetext GruntM13AfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerBurglarOrson:
+	generictrainer BURGLAR, ORSON, EVENT_BEAT_BURGLAR_ORSON, BurglarOrsonSeenText, BurglarOrsonBeatenText
 
-TrainerGruntF3:
-	trainer EVENT_BEAT_ROCKET_GRUNTF_3, GRUNTF, 3, GruntF3SeenText, GruntF3BeatenText, 0, GruntF3Script
+	text "Underground Ware-"
+	line "house?"
 
-GruntF3Script:
-	end_if_just_battled
-	opentext
-	writetext GruntF3AfterText
-	waitbutton
-	closetext
-	end
+	para "What do you want"
+	line "to go there for?"
+
+	para "There's nothing"
+	line "down there."
+	done
+
+GenericTrainerGruntM13:
+	generictrainer GRUNTM, 13, EVENT_BEAT_ROCKET_GRUNTM_13, GruntM13SeenText, GruntM13BeatenText
+
+	text "You must have ice"
+	line "in your veins to"
+	cont "dis Team Rocket."
+	done
+
+GenericTrainerGruntF3:
+	generictrainer GRUNTF, 3, EVENT_BEAT_ROCKET_GRUNTF_3, GruntF3SeenText, GruntF3BeatenText
+
+	text "Go wherever you'd"
+	line "like! Get lost!"
+	cont "See if I care!"
+	done
 
 Switch1Script:
 	opentext
@@ -304,9 +279,9 @@ Switch1Script:
 	writetext SwitchRoomText_OffTurnOn
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
-	copybytetovar UndergroundSwitchPositions
+	copybytetovar wUndergroundSwitchPositions
 	addvar 1
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	setevent EVENT_SWITCH_1
 	jump UndergroundPathSwitchRoomEntrances_UpdateDoors
 
@@ -314,9 +289,9 @@ Switch1Script:
 	writetext SwitchRoomText_OnTurnOff
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
-	copybytetovar UndergroundSwitchPositions
+	copybytetovar wUndergroundSwitchPositions
 	addvar -1
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	clearevent EVENT_SWITCH_1
 	jump UndergroundPathSwitchRoomEntrances_UpdateDoors
 
@@ -329,9 +304,9 @@ Switch2Script:
 	writetext SwitchRoomText_OffTurnOn
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
-	copybytetovar UndergroundSwitchPositions
+	copybytetovar wUndergroundSwitchPositions
 	addvar 2
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	setevent EVENT_SWITCH_2
 	jump UndergroundPathSwitchRoomEntrances_UpdateDoors
 
@@ -339,9 +314,9 @@ Switch2Script:
 	writetext SwitchRoomText_OnTurnOff
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
-	copybytetovar UndergroundSwitchPositions
+	copybytetovar wUndergroundSwitchPositions
 	addvar -2
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	clearevent EVENT_SWITCH_2
 	jump UndergroundPathSwitchRoomEntrances_UpdateDoors
 
@@ -354,9 +329,9 @@ Switch3Script:
 	writetext SwitchRoomText_OffTurnOn
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
-	copybytetovar UndergroundSwitchPositions
+	copybytetovar wUndergroundSwitchPositions
 	addvar 3
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	setevent EVENT_SWITCH_3
 	jump UndergroundPathSwitchRoomEntrances_UpdateDoors
 
@@ -364,9 +339,9 @@ Switch3Script:
 	writetext SwitchRoomText_OnTurnOff
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
-	copybytetovar UndergroundSwitchPositions
+	copybytetovar wUndergroundSwitchPositions
 	addvar -3
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	clearevent EVENT_SWITCH_3
 	jump UndergroundPathSwitchRoomEntrances_UpdateDoors
 
@@ -380,7 +355,7 @@ EmergencySwitchScript:
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
 	writebyte 7
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	setevent EVENT_EMERGENCY_SWITCH
 	setevent EVENT_SWITCH_1
 	setevent EVENT_SWITCH_2
@@ -392,7 +367,7 @@ EmergencySwitchScript:
 	yesorno
 	iffalse UndergroundPathSwitchRoomEntrances_DontToggle
 	writebyte 0
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	clearevent EVENT_EMERGENCY_SWITCH
 	clearevent EVENT_SWITCH_1
 	clearevent EVENT_SWITCH_2
@@ -400,19 +375,18 @@ EmergencySwitchScript:
 	jump UndergroundPathSwitchRoomEntrances_UpdateDoors
 
 UndergroundPathSwitchRoomEntrances_DontToggle:
-	closetext
-	end
+	endtext
 
 UndergroundPathSwitchRoomEntrances_UpdateDoors:
-	copybytetovar UndergroundSwitchPositions
-	if_equal 0, .Position0
-	if_equal 1, .Position1
-	if_equal 2, .Position2
-	if_equal 3, .Position3
-	if_equal 4, .Position4
-	if_equal 5, .Position5
-	if_equal 6, .Position6
-	if_equal 7, .EmergencyPosition
+	copybytetovar wUndergroundSwitchPositions
+	ifequal 0, .Position0
+	ifequal 1, .Position1
+	ifequal 2, .Position2
+	ifequal 3, .Position3
+	ifequal 4, .Position4
+	ifequal 5, .Position5
+	ifequal 6, .Position6
+	ifequal 7, .EmergencyPosition
 .Position0:
 	playsound SFX_ENTER_DOOR
 	scall .Clear4
@@ -427,8 +401,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	scall .Clear13
 	scall .Clear14
 	reloadmappart
-	closetext
-	end
+	endtext
 
 .Position1:
 	playsound SFX_ENTER_DOOR
@@ -440,8 +413,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	scall .Clear12
 	scall .Clear14
 	reloadmappart
-	closetext
-	end
+	endtext
 
 .Position2:
 	playsound SFX_ENTER_DOOR
@@ -453,8 +425,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	scall .Clear13
 	scall .Clear14
 	reloadmappart
-	closetext
-	end
+	endtext
 
 .Position3:
 	playsound SFX_ENTER_DOOR
@@ -466,8 +437,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	scall .Clear12
 	scall .Clear14
 	reloadmappart
-	closetext
-	end
+	endtext
 
 .Position4:
 	playsound SFX_ENTER_DOOR
@@ -479,8 +449,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	scall .Clear13
 	scall .Clear14
 	reloadmappart
-	closetext
-	end
+	endtext
 
 .Position5:
 	playsound SFX_ENTER_DOOR
@@ -492,8 +461,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	scall .Clear12
 	scall .Clear14
 	reloadmappart
-	closetext
-	end
+	endtext
 
 .Position6:
 	playsound SFX_ENTER_DOOR
@@ -505,8 +473,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	scall .Clear10
 	scall .Clear13
 	reloadmappart
-	closetext
-	end
+	endtext
 
 .EmergencyPosition:
 	playsound SFX_ENTER_DOOR
@@ -524,7 +491,7 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	reloadmappart
 	closetext
 	writebyte 6
-	copyvartobyte UndergroundSwitchPositions
+	copyvartobyte wUndergroundSwitchPositions
 	end
 
 .Set4:
@@ -646,14 +613,6 @@ UndergroundPathSwitchRoomEntrances_UpdateDoors:
 	doorstate 16, OPEN2
 	clearevent EVENT_SWITCH_14
 	end
-
-UndergroundPathSwitchRoomEntrancesHiddenMaxPotion:
-	dwb EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_HIDDEN_MAX_POTION, MAX_POTION
-
-
-UndergroundPathSwitchRoomEntrancesHiddenRevive:
-	dwb EVENT_UNDERGROUND_PATH_SWITCH_ROOM_ENTRANCES_HIDDEN_REVIVE, REVIVE
-
 
 UndergroundSilverApproachMovement1:
 	step_down
@@ -816,14 +775,6 @@ GruntM11BeatenText:
 	line "by indecision!"
 	done
 
-GruntM11AfterText:
-	text "I'm confused too…"
-	line "The switch on the"
-
-	para "end is the one to"
-	line "press first, but…"
-	done
-
 GruntM25SeenText:
 	text "Kwahaha!"
 
@@ -840,17 +791,6 @@ GruntM25BeatenText:
 	line "I blew it."
 	done
 
-GruntM25AfterText:
-	text "All right. A hint!"
-
-	para "Change the order"
-	line "of switching."
-
-	para "That'll change the"
-	line "ways the shutters"
-	cont "open and close."
-	done
-
 BurglarDuncanSeenText:
 	text "Fork over your"
 	line "goodies!"
@@ -858,12 +798,6 @@ BurglarDuncanSeenText:
 
 BurglarDuncanBeatenText:
 	text "Mercy!"
-	done
-
-BurglarDuncanAfterText:
-	text "Steal and sell!"
-	line "That's basic in"
-	cont "crime, kid!"
 	done
 
 BurglarOrsonSeenText:
@@ -879,17 +813,6 @@ BurglarOrsonBeatenText:
 	text "Over the top!"
 	done
 
-BurglarOrsonAfterText:
-	text "Underground Ware-"
-	line "house?"
-
-	para "What do you want"
-	line "to go there for?"
-
-	para "There's nothing"
-	line "down there."
-	done
-
 GruntM13SeenText:
 	text "I don't care if"
 	line "you're lost."
@@ -902,12 +825,6 @@ GruntM13SeenText:
 GruntM13BeatenText:
 	text "Urk! Yeah, think"
 	line "you're cool, huh?"
-	done
-
-GruntM13AfterText:
-	text "You must have ice"
-	line "in your veins to"
-	cont "dis Team Rocket."
 	done
 
 SwitchRoomText_Switch1:
@@ -929,12 +846,6 @@ GruntF3SeenText:
 
 GruntF3BeatenText:
 	text "How could you?"
-	done
-
-GruntF3AfterText:
-	text "Go wherever you'd"
-	line "like! Get lost!"
-	cont "See if I care!"
 	done
 
 SwitchRoomText_OffTurnOn:

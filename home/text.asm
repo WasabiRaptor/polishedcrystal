@@ -1,6 +1,8 @@
-ClearBox:: ; fb6
+ClearSpeechBox::
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
+	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
+ClearBox::
 ; Fill a c*b box at hl with blank tiles.
-
 	ld a, " "
 
 FillBoxWithByte::
@@ -18,32 +20,32 @@ FillBoxWithByte::
 	dec b
 	jr nz, .row
 	ret
-; fc8
 
-ClearTileMap:: ; fc8
-; Fill TileMap with blank tiles.
+ClearScreen::
+	ld a, PAL_BG_TEXT
+	hlcoord 0, 0, wAttrMap
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	call ByteFill
 
+ClearTileMap::
+; Fill wTileMap with blank tiles.
 	hlcoord 0, 0
 	ld a, " "
-	ld bc, TileMapEnd - TileMap
+	ld bc, wTileMapEnd - wTileMap
 	call ByteFill
 
 	; Update the BG Map.
 	ld a, [rLCDC]
 	bit 7, a
 	ret z
-	jp WaitBGMap
-; fdb
+	jp ApplyTilemapInVBlank
 
-ClearScreen:: ; fdb
-	ld a, PAL_BG_TEXT
-	hlcoord 0, 0, AttrMap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
-	jr ClearTileMap
-; fe8
+SpeechTextBox::
+; Standard textbox.
+	hlcoord TEXTBOX_X, TEXTBOX_Y
+	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
 
-TextBox:: ; fe8
+TextBox::
 ; Draw a text box at hl with room for
 ; b lines of c characters each.
 ; Places a border around the textbox,
@@ -55,9 +57,8 @@ TextBox:: ; fe8
 	pop hl
 	pop bc
 	jr TextBoxPalette
-; ff1
 
-TextBoxBorder:: ; ff1
+TextBoxBorder::
 
 	; Top
 	push hl
@@ -94,9 +95,8 @@ TextBoxBorder:: ; ff1
 	ld [hl], "┘"
 
 	ret
-; 101e
 
-.PlaceChars: ; 101e
+.PlaceChars:
 ; Place char a c times.
 	ld d, c
 .loop
@@ -104,18 +104,15 @@ TextBoxBorder:: ; ff1
 	dec d
 	jr nz, .loop
 	ret
-; 1024
 
-TextBoxPalette:: ; 1024
+TextBoxPalette::
 ; Fill text box width c height b at hl with pal 7
-	ld de, AttrMap - TileMap
+	ld de, wAttrMap - wTileMap
 	add hl, de
-rept 2
 	inc b
-endr
-rept 2
+	inc b
 	inc c
-endr
+	inc c
 	ld a, PAL_BG_TEXT
 .col
 	push bc
@@ -131,48 +128,35 @@ endr
 	dec b
 	jr nz, .col
 	ret
-; 103e
 
-SpeechTextBox:: ; 103e
-; Standard textbox.
-	hlcoord TEXTBOX_X, TEXTBOX_Y
-	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
-	jp TextBox
-; 1048
-
-RadioTerminator:: ; 1052
+RadioTerminator::
 	ld hl, .stop
 	ret
 .stop	db "@"
-; 1057
 
-PrintText:: ; 1057
+PrintText::
 	call SetUpTextBox
-BuenaPrintText:: ; 105a
+PrintTextNoBox::
 	push hl
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
-	call ClearBox
+	call ClearSpeechBox
 	pop hl
 
-PrintTextBoxText:: ; 1065
+PrintTextBoxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	jp PlaceWholeStringInBoxAtOnce
-; 106c
 
-SetUpTextBox:: ; 106c
+SetUpTextBox::
 	push hl
 	call SpeechTextBox
 	call UpdateSprites
 	call ApplyTilemap
 	pop hl
 	ret
-; 1078
 
-PlaceString:: ; 1078
+PlaceString::
 	push hl
 
-PlaceNextChar:: ; 1079
+PlaceNextChar::
 	ld a, [de]
 	cp "@"
 	jr nz, CheckDict
@@ -181,11 +165,13 @@ PlaceNextChar:: ; 1079
 	pop hl
 	ret
 
-NextChar:: ; 1083
+NextChar::
 	inc de
-	jp PlaceNextChar
+	jr PlaceNextChar
 
-CheckDict:: ; 1087
+CheckDict::
+	cp $60
+	jp nc, .notDict
 dict: macro
 if \1 == 0
 	and a
@@ -206,14 +192,13 @@ endm
 	dict "<FAR>",    TextFar
 	dict "<LNBRK>",  LineBreak
 	dict "<NEXT>",   NextChar
-	dict "<LINK2>",  LinkButtonSound
+	dict "<_CONT>",  LinkButtonSound
 	dict "<SCRL2>",  ScrollText
 	dict "<NL>",     NextLineChar
 	dict "<LINE>",   LineChar
 	dict "<PARA>",   Paragraph
 	dict "<PLAYER>", PrintPlayerName
 	dict "<RIVAL>",  PrintRivalName
-	dict "#",        PlacePoke
 	dict "<CONT>",   ContText
 	dict "<TRENDY>", PrintTrendyPhrase
 	dict "<DONE>",   DoneText
@@ -221,12 +206,35 @@ endm
 	dict "<TARGET>", PlaceMoveTargetsName
 	dict "<USER>",   PlaceMoveUsersName
 	dict "<ENEMY>",  PlaceEnemysName
+	dict "#",        PlacePoke
+	dict "le",       PlaceLe
+	dict "ng",       PlaceNg
+	dict "te",       PlaceTe
+	dict "as",       PlaceAs
+	dict "or",       PlaceOr
+	dict "ou",       PlaceOu
+	dict "re",       PlaceRe
+	dict "in",       PlaceIn
+	dict "er",       PlaceEr
+	dict "on",       PlaceOn
+	dict "th",       PlaceTh
+	dict "and",      PlaceAnd
+	dict "the",      PlaceThe
+	dict "you",      PlaceYou
+	dict "#mon",     PlacePokemon
+	dict "to",       PlaceTo
+	dict "have",     PlaceHave
+	dict "that",     PlaceThat
+	dict "for",      PlaceFor
+	dict "with",     PlaceWith
+	dict "an",       PlaceAn
+	dict "ing",      PlaceIng
 	dict2 "¯", " "
 
+.notDict
 	ld [hli], a
 	call PrintLetterDelay
 	jp NextChar
-; 0x117b
 
 print_name: macro
 	push de
@@ -234,55 +242,114 @@ print_name: macro
 	jp PlaceCommandCharacter
 endm
 
-PrintPlayerName:   print_name PlayerName   ; 118d
-PrintRivalName:    print_name RivalName    ; 1194
-PrintTrendyPhrase: print_name TrendyPhrase ; 119b
-PlacePoke:         print_name .PokeText    ; 11c5
+PrintPlayerName:   print_name wPlayerName
+PrintRivalName:    print_name wRivalName
+PrintTrendyPhrase: print_name wTrendyPhrase
 
-.PokeText:
-	db "Poké@" ; 1288
+PlaceLe: print_name .LeText
+.LeText: db "l", "e", "@"
 
-PlaceMoveTargetsName:: ; 11fd
+PlaceNg: print_name .NgText
+.NgText: db "n", "g", "@"
+
+PlaceTe: print_name .TeText
+.TeText: db "t", "e", "@"
+
+PlaceAs: print_name .AsText
+.AsText: db "a", "s", "@"
+
+PlaceOr: print_name .OrText
+.OrText: db "o", "r", "@"
+
+PlaceOu: print_name .OuText
+.OuText: db "o", "u", "@"
+
+PlaceRe: print_name .ReText
+.ReText: db "r", "e", "@"
+
+PlaceIn: print_name .InText
+.InText: db "i", "n", "@"
+
+PlaceEr: print_name .ErText
+.ErText: db "e", "r", "@"
+
+PlaceOn: print_name .OnText
+.OnText: db "o", "n", "@"
+
+PlaceTh: print_name .ThText
+.ThText: db "t", "h", "@"
+
+PlaceAnd: print_name .AndText
+.AndText: db "a", "n", "d", "@"
+
+PlacePoke: print_name .PokeText
+.PokeText: db "Poké@"
+
+PlaceThe: print_name .TheText
+.TheText: db "t", "h", "e", "@"
+
+PlaceYou: print_name .YouText
+.YouText: db "y", "o", "u", "@"
+
+PlacePokemon: print_name .PokemonText
+.PokemonText: db "Pokémon@"
+
+PlaceTo: print_name .ToText
+.ToText: db "t", "o", "@"
+
+PlaceHave: print_name .HaveText
+.HaveText: db "h", "a", "v", "e", "@"
+
+PlaceThat: print_name .ThatText
+.ThatText: db "t", "h", "a", "t", "@"
+
+PlaceFor: print_name .ForText
+.ForText: db "f", "o", "r", "@"
+
+PlaceWith: print_name .WithText
+.WithText: db "w", "i", "t", "h", "@"
+
+PlaceAn: print_name .AnText
+.AnText: db "a", "n", "@"
+
+PlaceIng: print_name .IngText
+.IngText: db "i", "n", "g", "@"
+
+PlaceMoveTargetsName::
 	ld a, [hBattleTurn]
 	xor 1
 	jr PlaceMoveTargetsName_5A
 
-PlaceMoveUsersName:: ; 1203
+PlaceMoveUsersName::
 	ld a, [hBattleTurn]
 
-PlaceMoveTargetsName_5A: ; 1205
+PlaceMoveTargetsName_5A:
 	push de
 	and a
 	jr nz, .enemy
 
-	ld de, BattleMonNick
+	ld de, wBattleMonNick
 	jr PlaceCommandCharacter
 
 .enemy:
-	ld de, .EnemyText ; Enemy
+	ld de, .EnemyText
 	call PlaceString
 	ld h, b
 	ld l, c
-	ld de, EnemyMonNick
+	ld de, wEnemyMonNick
 	jr PlaceCommandCharacter
 
 .EnemyText:
-	db "Foe @" ; 1295
+	db "Foe @"
 
-PlaceEnemysName:: ; 121b
+PlaceEnemysName::
 	push de
 
 	ld a, [wLinkMode]
 	and a
 	jr nz, .linkbattle
 
-	ld a, [TrainerClass]
-	cp RIVAL1
-	jr z, .rival
-	cp RIVAL2
-	jr z, .rival
-
-	ld de, OTClassName
+	ld de, wOTClassName
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -291,56 +358,44 @@ PlaceEnemysName:: ; 121b
 	push bc
 	farcall Battle_GetTrainerName
 	pop hl
-	ld de, StringBuffer1
-	jr PlaceCommandCharacter
-
-.rival:
-	ld de, OTClassName
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, .SpaceText
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, RivalName
+	ld de, wStringBuffer1
 	jr PlaceCommandCharacter
 
 .linkbattle:
-	ld de, OTClassName
+	ld de, wOTClassName
 	jr PlaceCommandCharacter
 
 .SpaceText:
-	db " @" ; 12a2
+	db " @"
 
-PlaceCommandCharacter:: ; 126a
+PlaceCommandCharacter::
 	call PlaceString
 	ld h, b
 	ld l, c
 	pop de
 	jp NextChar
-; 0x1273
 
-NextLineChar:: ; 12a7
+NextLineChar::
+	ld a, [wTextBoxFlags]
+	bit NO_LINE_SPACING, a
+	jr nz, LineBreak
 	pop hl
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
 	push hl
 	jp NextChar
-; 12b0
 
-LineBreak:: ; 12b0
+LineBreak::
 	pop hl
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	push hl
 	jp NextChar
-; 12b9
 
-TextFar:: ; 12b9
+TextFar::
 	pop hl
 	push de
-	ld bc, -TileMap + $10000
+	ld bc, -wTileMap + $10000
 	add hl, bc
 	ld de, -SCREEN_WIDTH
 	ld c, 1
@@ -377,16 +432,14 @@ TextFar:: ; 12b9
 	add hl, bc
 	push hl
 	jp NextChar
-; 12ea
 
-LineChar:: ; 12ea
+LineChar::
 	pop hl
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	push hl
 	jp NextChar
-; 0x12f2
 
-Paragraph:: ; 12f2
+Paragraph::
 	push de
 
 	ld a, [wLinkMode]
@@ -397,18 +450,30 @@ Paragraph:: ; 12f2
 .linkbattle
 	call Text_WaitBGMap
 	call ButtonSound
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
-	call ClearBox
+	call ClearSpeechBox
 	call UnloadBlinkingCursor
+	ld a, [wOptions1]
+	and AUTOSCROLL_MASK
+	cp AUTOSCROLL_AORB
 	ld c, 20
+	jr z, .got_delay
+	bit NO_TEXT_SCROLL, a
+	jr nz, .got_delay
+	and %11
+	jr z, .got_delay
+	ld c, 5
+.loop
+	dec a
+	jr z, .got_delay
+	sla c
+	jr .loop
+.got_delay
 	call DelayFrames
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
 	jp NextChar
-; 131f
 
-LinkButtonSound:: ; 131f
+LinkButtonSound::
 	ld a, [wLinkMode]
 	or a
 	jr nz, .communication
@@ -425,16 +490,15 @@ LinkButtonSound:: ; 131f
 	or a
 	call z, UnloadBlinkingCursor
 
-ScrollText:: ; 1337
+ScrollText::
 	push de
 	call TextScroll
 	call TextScroll
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	pop de
 	jp NextChar
-; 1345
 
-ContText:: ; 1345
+ContText::
 	push de
 	ld de, .cont
 	ld b, h
@@ -445,10 +509,9 @@ ContText:: ; 1345
 	pop de
 	jp NextChar
 
-.cont	db $4b, "@"
-; 1356
+.cont	db "<_CONT>@"
 
-PromptText:: ; 135a
+PromptText::
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
 	jr z, .ok
@@ -462,22 +525,20 @@ PromptText:: ; 135a
 	jr z, DoneText
 	call UnloadBlinkingCursor
 
-DoneText:: ; 137c
+DoneText::
 	pop hl
 	ld de, .stop
 	dec de
 	ret
 .stop	db "@"
-; 1383
 
-NullChar:: ; 1383
+NullChar::
 	ld a, "?"
 	ld [hli], a
 	call PrintLetterDelay
 	jp NextChar
-; 138c
 
-TextScroll:: ; 138c
+TextScroll::
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	decoord TEXTBOX_INNERX, TEXTBOX_INNERY - 1
 	ld a, TEXTBOX_INNERH - 1
@@ -493,12 +554,10 @@ TextScroll:: ; 138c
 	dec c
 	jr nz, .row
 
-rept 2
 	inc de
-endr
-rept 2
+	inc de
 	inc hl
-endr
+	inc hl
 	pop af
 	dec a
 	jr nz, .col
@@ -509,36 +568,32 @@ endr
 	call ByteFill
 	ld c, 5
 	jp DelayFrames
-; 13b6
 
-Text_WaitBGMap:: ; 13b6
+Text_WaitBGMap::
 	push bc
 	ld a, [hOAMUpdate]
 	push af
 	ld a, 1
 	ld [hOAMUpdate], a
 
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 
 	pop af
 	ld [hOAMUpdate], a
 	pop bc
 	ret
-; 13c6
 
-LoadBlinkingCursor:: ; 13c7
+LoadBlinkingCursor::
 	ld a, "▼"
 	ldcoord_a 18, 17
 	ret
-; 13cd
 
-UnloadBlinkingCursor:: ; 13cd
+UnloadBlinkingCursor::
 	lda_coord 17, 17
 	ldcoord_a 18, 17
 	ret
-; 13d4
 
-FarString:: ; 13d4
+FarString::
 	ld b, a
 	ld a, [hROMBank]
 	push af
@@ -550,22 +605,20 @@ FarString:: ; 13d4
 	pop af
 	rst Bankswitch
 	ret
-; 13e0
 
-PlaceWholeStringInBoxAtOnce:: ; 13e5
-	ld a, [TextBoxFlags]
+PlaceWholeStringInBoxAtOnce::
+	ld a, [wTextBoxFlags]
 	push af
 	set 1, a
-	ld [TextBoxFlags], a
+	ld [wTextBoxFlags], a
 
 	call DoTextUntilTerminator
 
 	pop af
-	ld [TextBoxFlags], a
+	ld [wTextBoxFlags], a
 	ret
-; 13f6
 
-DoTextUntilTerminator:: ; 13f6
+DoTextUntilTerminator::
 	ld a, [hli]
 	cp "@"
 	ret z
@@ -578,9 +631,8 @@ DoTextUntilTerminator:: ; 13f6
 	ld c, a
 	ld b, 0
 	ld hl, TextCommands
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -590,9 +642,8 @@ endr
 	; jp de
 	push de
 	ret
-; 1410
 
-TextCommands:: ; 1410
+TextCommands::
 	dw Text_Start          ; $00 <START>
 	dw Text_FromRAM        ; $01 <RAM>
 	dw Text_BCD            ; $02 <BCD>
@@ -616,9 +667,8 @@ TextCommands:: ; 1410
 	dw Text_StringBuffer   ; $14 <BUFFER>
 	dw Text_WeekDay        ; $15 <DAY>
 	dw Text_Jump           ; $16 <FAR>
-; 143e
 
-Text_Start:: ; 143e
+Text_Start::
 ; write text until "@"
 ; [$00]["...@"]
 
@@ -631,9 +681,8 @@ Text_Start:: ; 143e
 	ld l, e
 	inc hl
 	ret
-; 1449
 
-Text_FromRAM:: ; 1449
+Text_FromRAM::
 ; text_from_ram
 ; write text from a ram address
 ; little endian
@@ -649,9 +698,8 @@ Text_FromRAM:: ; 1449
 	call PlaceString
 	pop hl
 	ret
-; 1455
 
-Text_Jump:: ; 1455
+Text_Jump::
 ; text_jump
 ; write text from a different bank
 ; little endian
@@ -679,9 +727,8 @@ Text_Jump:: ; 1455
 	ld [hROMBank], a
 	ld [MBC3RomBank], a
 	ret
-; 1470
 
-Text_BCD:: ; 1470
+Text_BCD::
 ; write bcd from address, typically ram
 ; [$02][addr][flags]
 ; flags: see PrintBCDNumber
@@ -700,9 +747,8 @@ Text_BCD:: ; 1470
 	ld c, l
 	pop hl
 	ret
-; 1480
 
-Text_Move:: ; 1480
+Text_Move::
 ; move to a new tile
 ; [$03][addr]
 
@@ -713,9 +759,8 @@ Text_Move:: ; 1480
 	ld [wMenuScrollPosition + 2 + 1], a
 	ld b, a
 	ret
-; 148b
 
-Text_Box:: ; 148b
+Text_Box::
 ; draw a box
 ; little endian
 ; [$04][addr][height][width]
@@ -734,17 +779,15 @@ Text_Box:: ; 148b
 	call TextBox
 	pop hl
 	ret
-; 149b
 
-Text_Low:: ; 149b
+Text_Low::
 ; write text at (1,16)
 ; [$05]
 
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	ret
-; 149f
 
-Text_WaitButton:: ; 149f
+Text_WaitButton::
 ; wait for button press
 ; show arrow
 ; [$06]
@@ -761,9 +804,8 @@ Text_WaitButton:: ; 149f
 	call UnloadBlinkingCursor
 	pop hl
 	ret
-; 14ba
 
-Text_Scroll:: ; 14ba
+Text_Scroll::
 ; pushes text up two lines and sets the BC cursor to the border tile
 ; below the first character column of the text box.
 	push hl
@@ -773,9 +815,8 @@ Text_Scroll:: ; 14ba
 	pop hl
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	ret
-; 14c9
 
-Text_ASM:: ; 14c9
+Text_ASM::
 	bit 7, h
 	jr nz, .not_rom
 	jp hl
@@ -784,9 +825,8 @@ Text_ASM:: ; 14c9
 	ld a, "@"
 	ld [hl], a
 	ret
-; 14d2
 
-Text_PrintNum:: ; 14d2
+Text_PrintNum::
 ; [$09][addr][hi:bytes lo:digits]
 	ld a, [hli]
 	ld e, a
@@ -802,16 +842,15 @@ Text_PrintNum:: ; 14d2
 	ld a, b
 	and $f0
 	swap a
-	set PRINTNUM_RIGHTALIGN_F, a
+	set PRINTNUM_LEFTALIGN_F, a
 	ld b, a
 	call PrintNum
 	ld b, h
 	ld c, l
 	pop hl
 	ret
-; 14ed
 
-Text_Exit:: ; 14ed
+Text_Exit::
 	push hl
 	push bc
 	call GetJoypad
@@ -824,9 +863,8 @@ Text_Exit:: ; 14ed
 	pop bc
 	pop hl
 	ret
-; 1500
 
-Text_PlaySound:: ; 1500
+Text_PlaySound::
 ; chars:
 ;   $0b, $0e, $0f, $10, $11, $12, $13
 ; see TextSFX
@@ -843,9 +881,8 @@ Text_PlaySound:: ; 1500
 	jr z, .done
 	cp b
 	jr z, .play
-rept 2
 	inc hl
-endr
+	inc hl
 	jr .loop
 
 .play
@@ -861,9 +898,8 @@ endr
 	pop hl
 	pop bc
 	ret
-; 1522
 
-TextSFX:: ; 152d
+TextSFX::
 	dbw "<DEX2>",   SFX_DEX_FANFARE_50_79
 	dbw "<BEEP>",   SFX_FANFARE
 	dbw "<DEX1>",   SFX_DEX_FANFARE_20_49
@@ -872,9 +908,8 @@ TextSFX:: ; 152d
 	dbw "<DEX3>",   SFX_DEX_FANFARE_80_109
 	dbw "<SLOTS>",  SFX_SLOT_MACHINE_START
 	db -1
-; 1543
 
-Text_Dots:: ; 1543
+Text_Dots::
 ; [$0C][num]
 	ld a, [hli]
 	ld d, a
@@ -901,9 +936,8 @@ Text_Dots:: ; 1543
 	ld c, l
 	pop hl
 	ret
-; 1562
 
-Text_ButtonSound:: ; 1562
+Text_ButtonSound::
 ; wait for key down
 ; display arrow
 	push hl
@@ -912,48 +946,52 @@ Text_ButtonSound:: ; 1562
 	pop bc
 	pop hl
 	ret
-; 156a
 
-Text_StringBuffer:: ; 156a
+Text_StringBuffer::
 ; Print a string from one of the following:
-; 0: StringBuffer3
-; 1: StringBuffer4
-; 2: StringBuffer5
-; 3: StringBuffer2
-; 4: StringBuffer1
-; 5: EnemyMonNick
-; 6: BattleMonNick
+; 0: wStringBuffer3
+; 1: wStringBuffer4
+; 2: wStringBuffer5
+; 3: wStringBuffer2
+; 4: wStringBuffer1
+; 5: wEnemyMonNick
+; 6: wBattleMonNick
 ; [$14][id]
 
 	ld a, [hli]
 	push hl
 	ld e, a
 	ld d, 0
-	ld hl, StringBufferPointers
-rept 2
+	ld hl, .StringBufferPointers
 	add hl, de
-endr
-	ld a, BANK(StringBufferPointers)
-	call GetFarHalfword
-	ld d, h
-	ld e, l
+	add hl, de
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
 	ld h, b
 	ld l, c
 	call PlaceString
 	pop hl
 	ret
-; 1582
 
-Text_WeekDay:: ; 1582
+.StringBufferPointers::
+	dw wStringBuffer3
+	dw wStringBuffer4
+	dw wStringBuffer5
+	dw wStringBuffer2
+	dw wStringBuffer1
+	dw wEnemyMonNick
+	dw wBattleMonNick
+
+Text_WeekDay::
 	call GetWeekday
 	push hl
 	push bc
 	ld c, a
 	ld b, 0
 	ld hl, .Days
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -968,7 +1006,7 @@ endr
 	pop hl
 	ret
 
-.Days: ; 15a2
+.Days:
 	dw .Sun
 	dw .Mon
 	dw .Tues
@@ -985,4 +1023,3 @@ endr
 .Fri:    db "Fri@"
 .Satur:  db "Satur@"
 .Day:    db "day@"
-; 15d8

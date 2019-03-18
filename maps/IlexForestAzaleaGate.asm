@@ -1,31 +1,22 @@
 IlexForestAzaleaGate_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  0,  4, ILEX_FOREST, 2
+	warp_event  0,  5, ILEX_FOREST, 3
+	warp_event  9,  4, AZALEA_TOWN, 7
+	warp_event  9,  5, AZALEA_TOWN, 8
 
-IlexForestAzaleaGate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $4, $0, 2, ILEX_FOREST
-	warp_def $5, $0, 3, ILEX_FOREST
-	warp_def $4, $9, 7, AZALEA_TOWN
-	warp_def $5, $9, 8, AZALEA_TOWN
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_OFFICER, 2, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, OfficerScript_0x62c7a, -1
-	person_event SPRITE_GRANNY, 6, 1, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, GrannyScript_0x62c7d, -1
-	person_event SPRITE_SCIENTIST, 3, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 1, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ProfOaksAide1Script, -1
-
-OfficerScript_0x62c7a:
-	jumptextfaceplayer UnknownText_0x62c80
-
-GrannyScript_0x62c7d:
-	jumptextfaceplayer UnknownText_0x62cb0
+	db 3 ; object events
+	object_event  5,  2, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x62c80, -1
+	object_event  1,  6, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x62cb0, -1
+	object_event  8,  3, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 1, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ProfOaksAide1Script, -1
 
 ProfOaksAide1Script:
 	faceplayer
@@ -36,12 +27,9 @@ ProfOaksAide1Script:
 	waitbutton
 	count_seen_caught
 	checkcode VAR_DEXCAUGHT
-	if_greater_than 14, .HereYouGo
+	ifgreater 14, .HereYouGo
 .UhOh
-	writetext ProfOaksAide1UhOhText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide1UhOhText
 
 .HereYouGo
 	writetext ProfOaksAide1HereYouGoText
@@ -55,16 +43,10 @@ ProfOaksAide1Script:
 	itemnotify
 	setevent EVENT_GOT_NEST_BALLS_FROM_PROF_OAKS_AIDE
 .Explain
-	writetext ProfOaksAide1ExplainText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide1ExplainText
 
 .NoRoom
-	writetext ProfOaksAide1NoRoomText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide1NoRoomText
 
 UnknownText_0x62c80:
 	text "Ilex Forest is"

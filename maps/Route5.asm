@@ -1,29 +1,23 @@
 Route5_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event 17, 27, ROUTE_5_UNDERGROUND_ENTRANCE, 1
+	warp_event  8, 31, ROUTE_5_SAFFRON_CITY_GATE, 1
+	warp_event  9, 31, ROUTE_5_SAFFRON_CITY_GATE, 2
+	warp_event 10, 21, ROUTE_5_CLEANSE_TAG_SPEECH_HOUSE, 1
 
-Route5_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $1b, $11, 1, ROUTE_5_UNDERGROUND_ENTRANCE
-	warp_def $1f, $8, 1, ROUTE_5_SAFFRON_CITY_GATE
-	warp_def $1f, $9, 2, ROUTE_5_SAFFRON_CITY_GATE
-	warp_def $15, $a, 1, ROUTE_5_CLEANSE_TAG_SPEECH_HOUSE
+	db 1 ; bg events
+	bg_event 17, 29, SIGNPOST_JUMPTEXT, Route5UndergroundPathSignText
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event 17, 28, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, PokefanMScript_0x1adb19Text, EVENT_ROUTE_5_6_POKEFAN_M_BLOCKS_UNDERGROUND_PATH
 
-.Signposts: db 1
-	signpost 29, 17, SIGNPOST_READ, Route5UndergroundPathSign
-
-.PersonEvents: db 1
-	person_event SPRITE_POKEFAN_M, 28, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x1adb19, EVENT_ROUTE_5_6_POKEFAN_M_BLOCKS_UNDERGROUND_PATH
-
-PokefanMScript_0x1adb19:
-	jumptextfaceplayer .Text
-
-.Text:
+PokefanMScript_0x1adb19Text:
 	text "The road is closed"
 	line "until the problem"
 
@@ -31,10 +25,7 @@ PokefanMScript_0x1adb19:
 	line "is solved."
 	done
 
-Route5UndergroundPathSign:
-	jumptext .Text
-
-.Text:
+Route5UndergroundPathSignText:
 	text "Underground Path"
 
 	para "Cerulean City -"

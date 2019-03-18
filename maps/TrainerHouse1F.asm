@@ -1,53 +1,26 @@
 TrainerHouse1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  4, 11, VIRIDIAN_CITY, 3
+	warp_event  5, 11, VIRIDIAN_CITY, 3
+	warp_event  8,  2, TRAINER_HOUSE_B1F, 1
 
-TrainerHouse1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $b, $4, 3, VIRIDIAN_CITY
-	warp_def $b, $5, 3, VIRIDIAN_CITY
-	warp_def $2, $8, 1, TRAINER_HOUSE_B1F
+	db 3 ; bg events
+	bg_event  7,  0, SIGNPOST_JUMPTEXT, UnknownText_0x9b1f4
+	bg_event  9,  0, SIGNPOST_JUMPTEXT, UnknownText_0x9b25d
+	bg_event  4,  6, SIGNPOST_JUMPTEXT, UnknownText_0x9b2c1
 
-.XYTriggers: db 0
-
-.Signposts: db 3
-	signpost 0, 7, SIGNPOST_READ, MapTrainerHouse1FSignpost0Script
-	signpost 0, 9, SIGNPOST_READ, MapTrainerHouse1FSignpost1Script
-	signpost 6, 4, SIGNPOST_READ, MapTrainerHouse1FSignpost2Script
-
-.PersonEvents: db 5
-	person_event SPRITE_RECEPTIONIST, 10, 0, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x9af67, -1
-	person_event SPRITE_COOLTRAINER_M, 10, 8, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CooltrainerMScript_0x9af6a, -1
-	person_event SPRITE_COOLTRAINER_F, 2, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 2, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, CooltrainerFScript_0x9af6d, -1
-	person_event SPRITE_YOUNGSTER, 7, 7, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, YoungsterScript_0x9af70, -1
-	person_event SPRITE_GENTLEMAN, 4, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GentlemanScript_0x9af73, -1
-
-ReceptionistScript_0x9af67:
-	jumptextfaceplayer UnknownText_0x9af7f
-
-CooltrainerMScript_0x9af6a:
-	jumptextfaceplayer UnknownText_0x9b025
-
-CooltrainerFScript_0x9af6d:
-	jumptextfaceplayer UnknownText_0x9b0b5
-
-YoungsterScript_0x9af70:
-	jumptextfaceplayer UnknownText_0x9b11d
-
-GentlemanScript_0x9af73:
-	jumptextfaceplayer UnknownText_0x9b1c9
-
-MapTrainerHouse1FSignpost0Script:
-	jumptext UnknownText_0x9b1f4
-
-MapTrainerHouse1FSignpost1Script:
-	jumptext UnknownText_0x9b25d
-
-MapTrainerHouse1FSignpost2Script:
-	jumptext UnknownText_0x9b2c1
+	db 5 ; object events
+	object_event  0, 10, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9af7f, -1
+	object_event  8, 10, SPRITE_ACE_TRAINER_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9b025, -1
+	object_event  6,  2, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 2, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9b0b5, -1
+	object_event  7,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9b11d, -1
+	object_event  2,  4, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9b1c9, -1
 
 UnknownText_0x9af7f:
 	text "Welcome to Trainer"
@@ -71,14 +44,18 @@ UnknownText_0x9b025:
 	line "town closest to"
 	cont "Indigo Plateau."
 
+	para "It's known as the"
+	line "gateway to Indigo"
+	cont "Plateau!"
+
 	para "They built this"
 	line "place because so"
 
 	para "many trainers pass"
 	line "through on their"
 
-	para "way up to Indigo"
-	line "Plateau."
+	para "way up to the"
+	line "#mon League."
 	done
 
 UnknownText_0x9b0b5:

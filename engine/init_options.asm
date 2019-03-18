@@ -2,11 +2,11 @@ NUM_INITIAL_OPTIONS EQU 6
 
 SetInitialOptions:
 	ld a, $10
-	ld [MusicFade], a
+	ld [wMusicFade], a
 
 	xor a ; MUSIC_NONE
-	ld [MusicFadeIDLo], a
-	ld [MusicFadeIDHi], a
+	ld [wMusicFadeIDLo], a
+	ld [wMusicFadeIDHi], a
 	ld c, 8
 	call DelayFrames
 
@@ -18,13 +18,13 @@ SetInitialOptions:
 	xor a
 	call ByteFill
 
-	hlcoord 0, 0, AttrMap
+	hlcoord 0, 0, wAttrMap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	xor a
 	call ByteFill
 
 	ld hl, .BGPalette
-	ld de, UnknBGPals
+	ld de, wUnknBGPals
 	ld bc, 1 palettes
 	ld a, $5
 	call FarCopyWRAM
@@ -36,7 +36,7 @@ SetInitialOptions:
 
 	farcall ApplyPals
 
-	call WaitBGMap2
+	call ApplyAttrAndTilemapInVBlank
 	call SetPalettes
 
 	ld hl, .InitialOptionsText
@@ -57,8 +57,8 @@ SetInitialOptions:
 	ld de, .InitialOptionsString
 	call PlaceString
 
-;	ld b, SCGB_DIPLOMA
-;	call GetSGBLayout
+;	ld b, CGB_DIPLOMA
+;	call GetCGBLayout
 ;	call SetPalettes
 
 	xor a
@@ -80,7 +80,7 @@ SetInitialOptions:
 	ld [wJumptableIndex], a
 	inc a
 	ld [hBGMapMode], a
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 
 .joypad_loop
 	call JoyTextDelay
@@ -122,7 +122,7 @@ else
 endc
 
 .BGTile:
-INCBIN "gfx/misc/init_bg.2bpp"
+INCBIN "gfx/new_game/init_bg.2bpp"
 
 .InitialOptionsString:
 	db "Natures<LNBRK>"
@@ -164,7 +164,7 @@ GetInitialOptionPointer: ; e42d6
 	dw InitialOptions_Done
 
 InitialOptions_Natures:
-	ld hl, InitialOptions
+	ld hl, wInitialOptions
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
@@ -188,7 +188,7 @@ InitialOptions_Natures:
 	ret
 
 InitialOptions_Abilities:
-	ld hl, InitialOptions
+	ld hl, wInitialOptions
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
@@ -212,7 +212,7 @@ InitialOptions_Abilities:
 	ret
 
 InitialOptions_ColorVariation:
-	ld hl, InitialOptions
+	ld hl, wInitialOptions
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
@@ -236,7 +236,7 @@ InitialOptions_ColorVariation:
 	ret
 
 InitialOptions_PerfectIVs:
-	ld hl, InitialOptions
+	ld hl, wInitialOptions
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
@@ -260,7 +260,7 @@ InitialOptions_PerfectIVs:
 	ret
 
 InitialOptions_TradedMon:
-	ld hl, InitialOptions
+	ld hl, wInitialOptions
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
@@ -284,7 +284,7 @@ InitialOptions_TradedMon:
 	ret
 
 InitialOptions_NuzlockeMode:
-	ld hl, InitialOptions
+	ld hl, wInitialOptions
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT | A_BUTTON
 	jr nz, .Toggle
@@ -308,7 +308,7 @@ InitialOptions_NuzlockeMode:
 	ret
 
 InitialOptions_Done:
-	ld hl, InitialOptions
+	ld hl, wInitialOptions
 	res RESET_INIT_OPTS, [hl]
 	ld a, [hJoyPressed]
 	and A_BUTTON
@@ -372,9 +372,9 @@ InitialOptions_UpdateCursorPosition: ; e455c
 	add hl, bc
 	ld a, [hl]
 	; hlcoord 1, a
-	ld hl, TileMap
+	ld hl, wTileMap
 	ld bc, SCREEN_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	inc hl
 	ld [hl], "▶"
 	ret

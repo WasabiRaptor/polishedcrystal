@@ -16,8 +16,8 @@ _OptionsMenu: ; e41d0
 
 	xor a
 	ld [wJumptableIndex], a
-	ld b, SCGB_DIPLOMA
-	call GetSGBLayout
+	ld b, CGB_DIPLOMA
+	call GetCGBLayout
 	call SetPalettes
 
 .joypad_loop
@@ -65,12 +65,12 @@ OptionsMenu_LoadOptions:
 	call z, UpdateFrame
 	ld a, 1
 	ld [hBGMapMode], a
-	jp WaitBGMap
+	jp ApplyTilemapInVBlank
 
 StringOptions1: ; e4241
 	db "Text Speed<LNBRK>"
 	db "        :<LNBRK>"
-	db "Battle Scene<LNBRK>"
+	db "Battle Effects<LNBRK>"
 	db "        :<LNBRK>"
 	db "Battle Style<LNBRK>"
 	db "        :<LNBRK>"
@@ -90,12 +90,12 @@ StringOptions2:
 	db "        :<LNBRK>"
 	db "#dex Units<LNBRK>"
 	db "        :<LNBRK>"
+	db "Text Autoscroll<LNBRK>"
+	db "        :<LNBRK>"
+	db "Turning Speed<LNBRK>"
+	db "        :<LNBRK>"
 	db "Typeface<LNBRK>"
 	db "        :<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
 	db "<LNBRK>"
 	db "<LNBRK>"
 	db "Previous<LNBRK>"
@@ -114,9 +114,8 @@ GetOptionPointer: ; e42d6
 .page1
 	ld d, 0
 	ld hl, .Pointers
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -135,9 +134,9 @@ endr
 
 	dw Options_ClockFormat
 	dw Options_PokedexUnits
+	dw Options_TextAutoscroll
+	dw Options_TurningSpeed
 	dw Options_Typeface
-	dw Options_Unused
-	dw Options_Unused
 	dw Options_Unused
 	dw Options_NextPrevious
 	dw Options_Done
@@ -145,45 +144,31 @@ endr
 
 
 Options_TextSpeed: ; e42f5
-	call GetTextSpeed
+	ld a, [wOptions1]
+	and %11
+	ld c, a
 	ld a, [hJoyPressed]
+	dec c
 	bit D_LEFT_F, a
-	jr nz, .LeftPressed
+	jr nz, .ok
+	inc c
 	bit D_RIGHT_F, a
 	jr z, .NonePressed
-	ld a, c ; right pressed
-	cp INST_TEXT
-	jr c, .Increase
-	ld c, FAST_TEXT +- 1
-
-.Increase:
 	inc c
-	ld a, e
-	jr .Save
-
-.LeftPressed:
+.ok
 	ld a, c
-	and a
-	jr nz, .Decrease
-	ld c, INST_TEXT + 1
-
-.Decrease:
-	dec c
-	ld a, d
-
-.Save:
-	ld b, a
-	ld a, [Options1]
-	and $f0
-	or b
-	ld [Options1], a
+	and $3
+	ld c, a
+	ld a, [wOptions1]
+	and $fc
+	or c
+	ld [wOptions1], a
 
 .NonePressed:
 	ld b, 0
 	ld hl, .Strings
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -194,10 +179,10 @@ endr
 ; e4331
 
 .Strings:
+	dw .Instant
 	dw .Fast
 	dw .Medium
 	dw .Slow
-	dw .Instant
 
 .Fast:
 	db "Fast   @"
@@ -210,43 +195,8 @@ endr
 ; e4346
 
 
-INST_RATE EQU 0
-FAST_RATE EQU 1
-MED_RATE  EQU 3
-SLOW_RATE EQU 5
-
-GetTextSpeed: ; e4346
-	ld a, [Options1] ; This converts the number of frames, to 0, 1, 2 representing speed
-	and 7
-	cp SLOW_RATE
-	jr z, .slow
-	cp MED_RATE
-	jr z, .medium
-	cp FAST_RATE
-	jr z, .fast
-	ld c, INST_TEXT
-	lb de, SLOW_RATE, FAST_RATE
-	ret
-
-.slow
-	ld c, SLOW_TEXT
-	lb de, MED_RATE, INST_RATE
-	ret
-
-.medium
-	ld c, MED_TEXT
-	lb de, FAST_RATE, SLOW_RATE
-	ret
-
-.fast
-	ld c, FAST_TEXT
-	lb de, INST_RATE, MED_RATE
-	ret
-; e4365
-
-
 Options_BattleEffects: ; e4365
-	ld hl, Options1
+	ld hl, wOptions1
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT
 	jr nz, .Toggle
@@ -278,7 +228,7 @@ Options_BattleEffects: ; e4365
 
 
 Options_BattleStyle: ; e43a0
-	ld hl, Options2
+	ld hl, wOptions2
 	ld a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
@@ -333,7 +283,7 @@ Options_BattleStyle: ; e43a0
 
 
 Options_RunningShoes: ; e44c1
-	ld hl, Options2
+	ld hl, wOptions2
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT
 	jr nz, .Toggle
@@ -365,7 +315,7 @@ Options_RunningShoes: ; e44c1
 
 
 Options_Frame: ; e44fa
-	ld hl, TextBoxFrame
+	ld hl, wTextBoxFrame
 	ld a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
@@ -392,7 +342,7 @@ Options_Frame: ; e44fa
 .Save:
 	ld [hl], a
 UpdateFrame: ; e4512
-	ld a, [TextBoxFrame]
+	ld a, [wTextBoxFrame]
 	hlcoord 16, 11 ; where on the screen the number is drawn
 	add "1"
 	ld [hl], a
@@ -403,7 +353,7 @@ UpdateFrame: ; e4512
 
 
 Options_Sound: ; e43dd
-	ld hl, Options1
+	ld hl, wOptions1
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT
 	jr nz, .Toggle
@@ -440,7 +390,7 @@ Options_Sound: ; e43dd
 
 
 Options_ClockFormat:
-	ld hl, Options2
+	ld hl, wOptions2
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT
 	jr nz, .Toggle
@@ -470,7 +420,7 @@ Options_ClockFormat:
 
 
 Options_PokedexUnits:
-	ld hl, Options2
+	ld hl, wOptions2
 	ld a, [hJoyPressed]
 	and D_LEFT | D_RIGHT
 	jr nz, .Toggle
@@ -499,8 +449,94 @@ Options_PokedexUnits:
 	db "Metric  @"
 
 
+Options_TextAutoscroll:
+	ld a, [hJoyPressed]
+	ld b, a
+	ld a, [wOptions1]
+	and AUTOSCROLL_MASK
+	sub 4
+	bit D_LEFT_F, b
+	jr nz, .ok
+	add 4
+	bit D_RIGHT_F, b
+	jr z, .not_changing
+	add 4
+.ok
+	and AUTOSCROLL_MASK
+	ld c, a
+	ld a, [wOptions1]
+	and $f3
+	or c
+	ld [wOptions1], a
+	ld a, c
+
+.not_changing
+	rrca
+	ld b, 0
+	ld c, a
+	ld hl, .Strings
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	hlcoord 11, 7
+	call PlaceString
+	and a
+	ret
+
+.Strings:
+	dw .None
+	dw .Start
+	dw .AandB
+	dw .AorB
+
+.None:
+	db "None   @"
+.Start:
+	db "Start  @"
+.AandB:
+	db "A and B@"
+.AorB:
+	db "A or B @"
+
+
+Options_TurningSpeed:
+	ld a, [hJoyPressed]
+	and D_LEFT | D_RIGHT
+	ld a, [wOptions1]
+	jr z, .not_changing
+	xor TURNING_SPEED_MASK
+	ld [wOptions1], a
+
+.not_changing
+	and TURNING_SPEED_MASK
+	rrca
+	rrca
+	rrca
+	ld b, 0
+	ld c, a
+	ld hl, .Strings
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	hlcoord 11, 9
+	call PlaceString
+	and a
+	ret
+
+.Strings:
+	dw .Slow
+	dw .Fast
+
+.Slow:
+	db "Slow@"
+.Fast:
+	db "Fast@"
+
+
 Options_Typeface:
-	ld hl, Options2
+	ld hl, wOptions2
 	ld a, [hl]
 	and FONT_MASK
 	ld c, a
@@ -529,24 +565,28 @@ Options_Typeface:
 	dec c
 
 .Save:
+	push hl
+	push bc
+	call .NonePressed
+	pop bc
+	pop hl
 	ld a, [hl]
 	and $ff - FONT_MASK
 	or c
 	ld [hl], a
-	push bc
-	call LoadStandardFont
-	pop bc
+	call .NonePressed
+	call ApplyTilemapInVBlank
+	jp LoadStandardFont
 
 .NonePressed:
 	ld b, 0
 	ld hl, .Strings
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	hlcoord 11, 7
+	hlcoord 11, 11
 	call PlaceString
 	and a
 	ret
@@ -632,7 +672,7 @@ OptionsControl: ; e452a
 .DownPressed:
 	ld a, [hl] ; load the cursor position to a
 
-	cp $2
+	cp $4
 	jr nz, .DownOK
 	ld a, [wCurrentOptionsPage]
 	and a
@@ -659,7 +699,7 @@ OptionsControl: ; e452a
 	and a
 	ld a, [hl]
 	jr z, .UpOK
-	ld [hl], $2 ; skip missing options on page 2
+	ld [hl], $4 ; skip missing options on page 2
 	scf
 	ret
 .UpOK
@@ -685,7 +725,7 @@ Options_UpdateCursorPosition: ; e455c
 	hlcoord 1, 2
 	ld bc, 2 * SCREEN_WIDTH
 	ld a, [wJumptableIndex]
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], "▶"
 	ret
 ; e4579

@@ -1,9 +1,8 @@
-MenuMonIconColors::
-INCLUDE "data/mon_icon_pals.asm"
+INCLUDE "data/pokemon/menu_icon_pals.asm"
 
 LoadOverworldMonIcon: ; 8e82b
 	ld a, e
-	ld [CurIcon], a
+	ld [wCurIcon], a
 	ld l, a
 	ld h, 0
 	add hl, hl
@@ -22,9 +21,8 @@ SetMenuMonIconColor:
 	push af
 
 	ld a, [wd265]
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	call GetMenuMonIconPalette
-	ld hl, Sprites + 3
 	jr ProcessMenuMonIconColor
 
 SetMenuMonIconColor_NoShiny:
@@ -34,11 +32,24 @@ SetMenuMonIconColor_NoShiny:
 	push af
 
 	ld a, [wd265]
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	and a
-	call GetMenuMonIconPalette_PredeterminedShininess
-	ld hl, Sprites + 3
+	call GetMenuMonIconPalette.got_shininess
 	jr ProcessMenuMonIconColor
+
+LoadFlyMonColor:
+	push hl
+	push de
+	push bc
+	push af
+	ld a, MON_SPECIES
+	call GetPartyParamLocation
+	ld a, [hl]
+	ld [wCurPartySpecies], a
+	ld a, MON_SHINY
+	call GetPartyParamLocation
+	call GetMenuMonIconPalette
+	jp ProcessMenuMonIconColor
 
 LoadPartyMenuMonIconColors:
 	push hl
@@ -46,22 +57,29 @@ LoadPartyMenuMonIconColors:
 	push bc
 	push af
 
-	ld a, [PartyCount]
+	ld a, [wPartyCount]
 	sub c
-	ld [CurPartyMon], a
+	ld [wCurPartyMon], a
+
 	ld d, 0
 	ld e, a
-	ld hl, PartySpecies
+
+	ld hl, wPartyMon1Item
+	call GetPartyLocation
+	ld a, [hl]
+	ld [wCurIconMonHasItemOrMail], a
+
+	ld hl, wPartySpecies
 	add hl, de
 	ld a, [hl]
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	ld a, MON_SHINY
 	call GetPartyParamLocation
 	call GetMenuMonIconPalette
 	push af
 
-	ld hl, Sprites + 3
-	ld a, [CurPartyMon]
+	ld hl, wSprites + 3
+	ld a, [wCurPartyMon]
 	swap a
 
 	ld d, 0
@@ -69,7 +87,28 @@ LoadPartyMenuMonIconColors:
 
 	add hl, de
 	pop af
+
+	ld de, 4
+	ld [hl], a
+	add hl, de
+	ld [hl], a
+	add hl, de
+	push hl
+	add hl, de
+	ld [hl], a
+	pop hl
+	ld d, a
+	ld a, [wCurIconMonHasItemOrMail]
+	and a
+	ld a, PAL_OW_RED ; same color for item or mail
+	jr nz, .ok
+	ld a, d
+.ok
+	ld [hl], a
+	jr ProcessMenuMonIconColor.finish
+
 ProcessMenuMonIconColor:
+	ld hl, wSprites + 3
 	ld c, 4
 	ld de, 4
 
@@ -79,24 +118,46 @@ ProcessMenuMonIconColor:
 	dec c
 	jr nz, .colorIcon
 
+.finish
 	pop af
 	pop bc
 	pop de
 	pop hl
 	ret
 
+GetMonIconPalette::
+	push af
+	ld a, [wCurIcon]
+	and a
+	jr GetMenuMonIconPalette.got_species
+
 GetMenuMonIconPalette::
+	ld a, [wCurPartySpecies]
+	cp GYARADOS
+	jr nz, .not_red_gyarados
+
+	inc hl ; Form is in the byte after Shiny
+	ld a, [hl]
+	dec hl
+	and FORM_MASK
+	cp GYARADOS_RED_FORM
+	jr nz, .not_red_gyarados
+	xor a ; PAL_OW_RED
+	jr .done
+
+.not_red_gyarados
 ; check shininess at hl
 	ld a, [hl]
 	and SHINY_MASK
 	jr z, .not_shiny
 	scf
-	jr GetMenuMonIconPalette_PredeterminedShininess
+	jr .got_shininess
 .not_shiny
 	and a
-GetMenuMonIconPalette_PredeterminedShininess:
+.got_shininess:
 	push af
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
+.got_species:
 	dec a
 	ld c, a
 	ld b, 0
@@ -109,6 +170,7 @@ GetMenuMonIconPalette_PredeterminedShininess:
 	swap a
 .shiny
 	and $f
+.done
 	ld l, a
 	ret
 
@@ -128,21 +190,14 @@ LoadPartyMenuMonIcon:
 	ret
 
 .SpawnItemIcon: ; 8e8df (23:68df)
-	push bc
 	ld a, [hObjectStructIndexBuffer]
-	ld hl, PartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
-	pop bc
+	ld hl, wPartyMon1Item
+	call GetPartyLocation
 	ld a, [hl]
 	and a
 	ret z
-	push hl
-	push bc
 	ld d, a
-	farcall ItemIsMail
-	pop bc
-	pop hl
+	call ItemIsMail
 	jr c, .mail
 	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
 	jr .okay
@@ -160,11 +215,11 @@ LoadNamingScreenMonIcon:
 	push de
 	push bc
 
-	ld hl, TempMonShiny
+	ld hl, wTempMonShiny
 	call SetMenuMonIconColor
 
 	ld a, [wd265]
-	ld [CurIcon], a
+	ld [wCurIcon], a
 	xor a
 	call GetIconGFX
 	depixel 4, 4, 4, 0
@@ -189,10 +244,10 @@ LoadMoveMenuMonIcon:
 	call SetMenuMonIconColor
 
 	ld a, [wd265]
-	ld [CurIcon], a
+	ld [wCurIcon], a
 	xor a
 	call GetIconGFX
-	lb de, 3 * 8 + 2, 4 * 8 + 4
+	depixel 3, 4, 2, 4
 	ld a, SPRITE_ANIM_INDEX_PARTY_MON
 	call InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
@@ -212,7 +267,7 @@ LoadTradeAnimationMonIcon:
 	call SetMenuMonIconColor_NoShiny
 
 	ld a, [wd265]
-	ld [CurIcon], a
+	ld [wCurIcon], a
 	ld a, $62
 	ld [wCurIconTile], a
 	call GetMemIconGFX
@@ -226,12 +281,12 @@ InitPartyMenuIcon: ; 8e908 (23:6908)
 	ld a, [wCurIconTile]
 	push af
 	ld a, [hObjectStructIndexBuffer]
-	ld hl, PartySpecies
+	ld hl, wPartySpecies
 	ld e, a
 	ld d, $0
 	add hl, de
 	ld a, [hl]
-	ld [CurIcon], a
+	ld [wCurIcon], a
 	call GetMemIconGFX
 	ld a, [hObjectStructIndexBuffer]
 ; y coord
@@ -287,7 +342,7 @@ PokegearFlyMap_GetMonIcon: ; 8e9ac
 ; Load species icon into VRAM at tile a
 	push de
 	ld a, [wd265]
-	ld [CurIcon], a
+	ld [wCurIcon], a
 	pop de
 	ld a, e
 	jp GetIconGFX
@@ -296,7 +351,7 @@ PokegearFlyMap_GetMonIcon: ; 8e9ac
 FlyFunction_GetMonIcon: ; 8e9bc (23:69bc)
 	push de
 	ld a, [wd265]
-	ld [CurIcon], a
+	ld [wCurIcon], a
 	pop de
 	ld a, e
 	jp GetIcon_a
@@ -317,8 +372,8 @@ GetIconGFX: ; 8e9de
 	ret
 
 HeldItemIcons:
-INCBIN "gfx/icon/mail.2bpp"
-INCBIN "gfx/icon/item.2bpp"
+INCBIN "gfx/icons/mail.2bpp"
+INCBIN "gfx/icons/item.2bpp"
 ; 8ea17
 
 GetIcon_a: ; 8ea1b
@@ -340,7 +395,7 @@ endr
 
 ; The icons are contiguous, in order and of the same
 ; size, so the pointer table is somewhat redundant.
-	ld a, [CurIcon]
+	ld a, [wCurIcon]
 	push hl
 	ld l, a
 	ld h, 0
@@ -360,7 +415,7 @@ endr
 ; Extended icon bank routine by com3tiin
 ; http://www.pokecommunity.com/showthread.php?t=338470
 GetMonIconBank:
-	ld a, [CurIcon]
+	ld a, [wCurIcon]
 	cp TAUROS ; first mon in Icons2
 	lb bc, BANK(Icons1), 8
 	ret c

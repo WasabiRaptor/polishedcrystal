@@ -1,39 +1,37 @@
 GoldenrodBikeShop_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, GOLDENROD_CITY, 2
+	warp_event  3,  7, GOLDENROD_CITY, 2
 
-GoldenrodBikeShop_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 2, GOLDENROD_CITY
-	warp_def $7, $3, 2, GOLDENROD_CITY
+	db 10 ; bg events
+	bg_event  1,  2, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  0,  3, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  1,  3, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  0,  5, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  1,  5, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  0,  6, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  1,  6, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  6,  6, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  7,  6, SIGNPOST_JUMPTEXT, UnknownText_0x548ed
+	bg_event  3,  0, SIGNPOST_JUMPTEXT, UnknownText_0x548c0
 
-.XYTriggers: db 0
-
-.Signposts: db 9
-	signpost 2, 1, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 3, 0, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 3, 1, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 5, 0, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 5, 1, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 6, 0, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 6, 1, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 6, 6, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-	signpost 6, 7, SIGNPOST_READ, MapGoldenrodBikeShopSignpost8Script
-
-.PersonEvents: db 1
-	person_event SPRITE_CLERK, 2, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, ClerkScript_0x54750, -1
+	db 1 ; object events
+	object_event  7,  2, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ClerkScript_0x54750, -1
 
 ClerkScript_0x54750:
+	checkevent EVENT_GOT_BICYCLE
+	iftrue_jumptextfaceplayer UnknownText_0x5485f
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_BICYCLE
-	iftrue UnknownScript_0x54775
 	writetext UnknownText_0x54787
 	yesorno
-	iffalse UnknownScript_0x5477b
+	iffalse_jumpopenedtext UnknownText_0x54898
 	writetext UnknownText_0x547f8
 	buttonsound
 	waitsfx
@@ -44,20 +42,15 @@ ClerkScript_0x54750:
 	itemnotify
 	setflag ENGINE_BIKE_SHOP_CALL_ENABLED
 	setevent EVENT_GOT_BICYCLE
-UnknownScript_0x54775:
-	writetext UnknownText_0x5485f
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-UnknownScript_0x5477b:
-	writetext UnknownText_0x54898
-	waitbutton
-	closetext
-	end
+UnknownText_0x5485f:
+	text "My Bicycles are"
+	line "first-rate! You"
 
-MapGoldenrodBikeShopSignpost8Script:
-	jumptext UnknownText_0x548ed
+	para "can ride them"
+	line "anywhere."
+	done
 
 UnknownText_0x54787:
 	text "…sigh… I opened"
@@ -87,14 +80,6 @@ UnknownText_0x54848:
 	line "Bicycle."
 	done
 
-UnknownText_0x5485f:
-	text "My Bicycles are"
-	line "first-rate! You"
-
-	para "can ride them"
-	line "anywhere."
-	done
-
 UnknownText_0x54898:
 	text "…sigh… Oh, for"
 	line "the kindness of"
@@ -104,4 +89,11 @@ UnknownText_0x54898:
 UnknownText_0x548ed:
 	text "It's a shiny new"
 	line "Bicycle!"
+	done
+
+UnknownText_0x548c0:
+	text "Just released!"
+
+	para "First-rate compact"
+	line "Bicycles!"
 	done

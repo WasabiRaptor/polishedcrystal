@@ -1,72 +1,67 @@
 SafariZoneNorth_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 9 ; warp events
+	warp_event 41, 32, SAFARI_ZONE_EAST, 3
+	warp_event 41, 33, SAFARI_ZONE_EAST, 4
+	warp_event 10, 37, SAFARI_ZONE_WEST, 3
+	warp_event 11, 37, SAFARI_ZONE_WEST, 4
+	warp_event 22, 37, SAFARI_ZONE_HUB, 7
+	warp_event 23, 37, SAFARI_ZONE_HUB, 8
+	warp_event 37,  5, SAFARI_ZONE_NORTH_REST_HOUSE, 1
+	warp_event  4, 37, SAFARI_ZONE_WEST, 1
+	warp_event  5, 37, SAFARI_ZONE_WEST, 2
 
-SafariZoneNorth_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 9
-	warp_def $20, $29, 3, SAFARI_ZONE_EAST
-	warp_def $21, $29, 4, SAFARI_ZONE_EAST
-	warp_def $25, $a, 3, SAFARI_ZONE_WEST
-	warp_def $25, $b, 4, SAFARI_ZONE_WEST
-	warp_def $25, $16, 7, SAFARI_ZONE_HUB
-	warp_def $25, $17, 8, SAFARI_ZONE_HUB
-	warp_def $5, $25, 1, SAFARI_ZONE_NORTH_REST_HOUSE
-	warp_def $25, $4, 1, SAFARI_ZONE_WEST
-	warp_def $25, $5, 2, SAFARI_ZONE_WEST
+	db 6 ; bg events
+	bg_event 15, 33, SIGNPOST_JUMPTEXT, SafariZoneNorthAreaSignText
+	bg_event 38,  6, SIGNPOST_JUMPTEXT, SafariZoneNorthRestHouseSignText
+	bg_event 28, 30, SIGNPOST_JUMPTEXT, SafariZoneNorthTrainerTips1SignText
+	bg_event 20, 34, SIGNPOST_JUMPTEXT, SafariZoneNorthTrainerTips2SignText
+	bg_event  5, 27, SIGNPOST_JUMPTEXT, SafariZoneNorthTrainerTips3SignText
+	bg_event 31, 19, SIGNPOST_ITEM + LUCKY_PUNCH, EVENT_SAFARI_ZONE_NORTH_HIDDEN_LUCKY_PUNCH
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event 18, 23, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBattleGirlPadma, -1
+	object_event  7,  7, SPRITE_REAL_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerYoungsterTyler, -1
+	object_event 36,  9, SPRITE_BEAUTY, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBeautyRachael, -1
+	object_event 15, 14, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SafariZoneNorthCooltrainerFScript, -1
+	itemball_event 24, 18, EVIOLITE, 1, EVENT_SAFARI_ZONE_NORTH_EVIOLITE
+	itemball_event 21,  9, PROTEIN, 1, EVENT_SAFARI_ZONE_NORTH_PROTEIN
 
-.Signposts: db 6
-	signpost 33, 15, SIGNPOST_READ, SafariZoneNorthAreaSign
-	signpost 6, 38, SIGNPOST_READ, SafariZoneNorthRestHouseSign
-	signpost 30, 28, SIGNPOST_READ, SafariZoneNorthTrainerTips1Sign
-	signpost 34, 20, SIGNPOST_READ, SafariZoneNorthTrainerTips2Sign
-	signpost 27, 5, SIGNPOST_READ, SafariZoneNorthTrainerTips3Sign
-	signpost 19, 31, SIGNPOST_ITEM, SafariZoneNorthHiddenLuckyPunch
+GenericTrainerBattleGirlPadma:
+	generictrainer BATTLE_GIRL, PADMA, EVENT_BEAT_BATTLE_GIRL_PADMA, BattleGirlPadmaSeenText, BattleGirlPadmaBeatenText
 
-.PersonEvents: db 6
-	person_event SPRITE_COOLTRAINER_F, 23, 18, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerBattleGirlPadma, -1
-	person_event SPRITE_YOUNGSTER, 7, 7, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerYoungsterTyler, -1
-	person_event SPRITE_BEAUTY, 9, 36, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBeautyRachael, -1
-	person_event SPRITE_COOLTRAINER_F, 14, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, SafariZoneNorthCooltrainerFScript, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 18, 24, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, EVIOLITE, 1, EVENT_SAFARI_ZONE_NORTH_EVIOLITE
-	person_event SPRITE_BALL_CUT_FRUIT, 9, 21, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, PROTEIN, 1, EVENT_SAFARI_ZONE_NORTH_PROTEIN
+	text "If you throw your"
+	line "emotions into"
 
-TrainerBattleGirlPadma:
-	trainer EVENT_BEAT_BATTLE_GIRL_PADMA, BATTLE_GIRL, PADMA, BattleGirlPadmaSeenText, BattleGirlPadmaBeatenText, 0, BattleGirlPadmaScript
+	para "training, you'll"
+	line "become strong!"
+	done
 
-BattleGirlPadmaScript:
-	end_if_just_battled
-	opentext
-	writetext BattleGirlPadmaAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerYoungsterTyler:
+	generictrainer YOUNGSTER, TYLER, EVENT_BEAT_YOUNGSTER_TYLER, YoungsterTylerSeenText, YoungsterTylerBeatenText
 
-TrainerYoungsterTyler:
-	trainer EVENT_BEAT_YOUNGSTER_TYLER, YOUNGSTER, TYLER, YoungsterTylerSeenText, YoungsterTylerBeatenText, 0, YoungsterTylerScript
+	text "#mon leap out"
+	line "when you least"
+	cont "expect it."
+	done
 
-YoungsterTylerScript:
-	end_if_just_battled
-	opentext
-	writetext YoungsterTylerAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerBeautyRachael:
+	generictrainer BEAUTY, RACHAEL, EVENT_BEAT_BEAUTY_RACHAEL, BeautyRachaelSeenText, BeautyRachaelBeatenText
 
-TrainerBeautyRachael:
-	trainer EVENT_BEAT_BEAUTY_RACHAEL, BEAUTY, RACHAEL, BeautyRachaelSeenText, BeautyRachaelBeatenText, 0, BeautyRachaelScript
+	text "I was a Black Belt"
+	line "just one year ago."
 
-BeautyRachaelScript:
-	end_if_just_battled
-	opentext
-	writetext BeautyRachaelAfterText
-	waitbutton
-	closetext
-	end
+	para "The power of med-"
+	line "ical science is"
+
+	para "amazing, wouldn't"
+	line "you say?"
+	done
 
 SafariZoneNorthCooltrainerFScript:
 	faceplayer
@@ -87,43 +82,16 @@ SafariZoneNorthTutorDoubleEdgeScript:
 	writebyte DOUBLE_EDGE
 	writetext Text_SafariZoneNorthTutorClear
 	special Special_MoveTutor
-	if_equal $0, .TeachMove
+	ifequal $0, .TeachMove
 .TutorRefused
-	writetext Text_SafariZoneNorthTutorRefused
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_SafariZoneNorthTutorRefused
 
 .NoSilverLeaf
-	writetext Text_SafariZoneNorthTutorNoSilverLeaf
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_SafariZoneNorthTutorNoSilverLeaf
 
 .TeachMove
 	takeitem SILVER_LEAF
-	writetext Text_SafariZoneNorthTutorTaught
-	waitbutton
-	closetext
-	end
-
-SafariZoneNorthAreaSign:
-	jumptext SafariZoneNorthAreaSignText
-
-SafariZoneNorthRestHouseSign:
-	jumptext SafariZoneNorthRestHouseSignText
-
-SafariZoneNorthTrainerTips1Sign:
-	jumptext SafariZoneNorthTrainerTips1SignText
-
-SafariZoneNorthTrainerTips2Sign:
-	jumptext SafariZoneNorthTrainerTips2SignText
-
-SafariZoneNorthTrainerTips3Sign:
-	jumptext SafariZoneNorthTrainerTips3SignText
-
-SafariZoneNorthHiddenLuckyPunch:
-	dwb EVENT_SAFARI_ZONE_NORTH_HIDDEN_LUCKY_PUNCH, LUCKY_PUNCH
+	jumpopenedtext Text_SafariZoneNorthTutorTaught
 
 BattleGirlPadmaSeenText:
 	text "I spar with my"
@@ -134,14 +102,6 @@ BattleGirlPadmaSeenText:
 BattleGirlPadmaBeatenText:
 	text "We'll have to"
 	line "train harder!"
-	done
-
-BattleGirlPadmaAfterText:
-	text "If you throw your"
-	line "emotions into"
-
-	para "training, you'll"
-	line "become strong!"
 	done
 
 YoungsterTylerSeenText:
@@ -157,12 +117,6 @@ YoungsterTylerBeatenText:
 	text "I'm sorry!"
 	done
 
-YoungsterTylerAfterText:
-	text "#mon leap out"
-	line "when you least"
-	cont "expect it."
-	done
-
 BeautyRachaelSeenText:
 	text "My sundress is"
 	line "perfect for a day"
@@ -173,17 +127,6 @@ BeautyRachaelSeenText:
 BeautyRachaelBeatenText:
 	text "It's not great"
 	line "for battling…"
-	done
-
-BeautyRachaelAfterText:
-	text "I was a Black Belt"
-	line "just one year ago."
-
-	para "The power of med-"
-	line "ical science is"
-
-	para "amazing, wouldn't"
-	line "you say?"
 	done
 
 SafariZoneNorthCooltrainerFText:

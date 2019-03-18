@@ -1,37 +1,5 @@
-ResetMapBufferEventFlags:: ; 2e50
-	xor a
-	ld hl, EventFlags
-	ld [hli], a
-	ret
-; 2e56
-
-ResetBikeFlags:: ; 2e56
-	xor a
-	ld hl, BikeFlags
-	ld [hli], a
-	ld [hl], a
-	ret
-; 2e5d
-
-ResetFlashIfOutOfCave:: ; 2e5d
-	ld a, [wPermission]
-	cp ROUTE
-	jr z, .asm_2e69
-	cp TOWN
-	jr z, .asm_2e69
-	ret
-
-.asm_2e69
-	ld hl, StatusFlags
-	res 2, [hl]
-	ret
-; 2e6f
-
-
 EventFlagAction:: ; 0x2e6f
-	ld hl, EventFlags
-	jp FlagAction
-
+	ld hl, wEventFlags
 FlagAction:: ; 0x2e76
 ; Perform action b on bit de in flag array hl.
 

@@ -1,28 +1,22 @@
 QuietCaveB2F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event 21,  3, QUIET_CAVE_B1F, 6
+	warp_event 17, 25, QUIET_CAVE_B1F, 7
+	warp_event 23, 33, QUIET_CAVE_B1F, 8
+	warp_event 29,  3, QUIET_CAVE_B1F, 9
+	warp_event 10, 31, QUIET_CAVE_B3F, 1
+	warp_event 33,  5, QUIET_CAVE_B3F, 2
 
-QuietCaveB2F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $3, $15, 6, QUIET_CAVE_B1F
-	warp_def $19, $11, 7, QUIET_CAVE_B1F
-	warp_def $21, $17, 8, QUIET_CAVE_B1F
-	warp_def $3, $1d, 9, QUIET_CAVE_B1F
-	warp_def $1f, $a, 1, QUIET_CAVE_B3F
-	warp_def $5, $21, 2, QUIET_CAVE_B3F
+	db 1 ; bg events
+	bg_event 16, 11, SIGNPOST_ITEM + CALCIUM, EVENT_QUIET_CAVE_B2F_HIDDEN_CALCIUM
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 11, 16, SIGNPOST_ITEM, QuietCaveB2FHiddenCalcium
-
-.PersonEvents: db 3
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 10, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, DUSK_BALL, 1, EVENT_QUIET_CAVE_B2F_DUSK_BALL
-	person_event SPRITE_BALL_CUT_FRUIT, 23, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, RAZOR_CLAW, 1, EVENT_QUIET_CAVE_B2F_RAZOR_CLAW
-	person_event SPRITE_BALL_CUT_FRUIT, 11, 19, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, SAFE_GOGGLES, 1, EVENT_QUIET_CAVE_B2F_SAFE_GOGGLES
-
-QuietCaveB2FHiddenCalcium:
-	dwb EVENT_QUIET_CAVE_B2F_HIDDEN_CALCIUM, CALCIUM
+	db 3 ; object events
+	itemball_event 10,  3, DUSK_BALL, 1, EVENT_QUIET_CAVE_B2F_DUSK_BALL
+	itemball_event  9, 23, RAZOR_CLAW, 1, EVENT_QUIET_CAVE_B2F_RAZOR_CLAW
+	itemball_event 19, 11, SAFE_GOGGLES, 1, EVENT_QUIET_CAVE_B2F_SAFE_GOGGLES

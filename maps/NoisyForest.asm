@@ -1,44 +1,41 @@
 NoisyForest_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  6,  4, ROCKY_BEACH, 2
+	warp_event  6,  5, ROCKY_BEACH, 3
+	warp_event 35, 28, SHAMOUTI_SHRINE_RUINS, 1
+	warp_event 35, 29, SHAMOUTI_SHRINE_RUINS, 2
 
-NoisyForest_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $4, $6, 2, ROCKY_BEACH
-	warp_def $5, $6, 3, ROCKY_BEACH
-	warp_def $1c, $23, 1, SHAMOUTI_SHRINE_RUINS
-	warp_def $1d, $23, 2, SHAMOUTI_SHRINE_RUINS
+	db 5 ; bg events
+	bg_event 15,  9, SIGNPOST_JUMPTEXT, NoisyForestSignpostText
+	bg_event 25, 31, SIGNPOST_JUMPTEXT, NoisyForestSignpostText
+	bg_event 32,  2, SIGNPOST_ITEM + ULTRA_BALL, EVENT_NOISY_FOREST_HIDDEN_ULTRA_BALL
+	bg_event 34, 18, SIGNPOST_ITEM + TINYMUSHROOM, EVENT_NOISY_FOREST_HIDDEN_TINYMUSHROOM
+	bg_event  7, 29, SIGNPOST_ITEM + FULL_RESTORE, EVENT_NOISY_FOREST_HIDDEN_FULL_RESTORE
 
-.XYTriggers: db 0
+	db 15 ; object events
+	object_event 20, 19, SPRITE_ANABEL, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, NoisyForestAnabelScript, EVENT_NOISY_FOREST_ANABEL
+	object_event 10, 15, SPRITE_BIRD_KEEPER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBird_keeperTrent, -1
+	object_event 24, 31, SPRITE_MARILL, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, NoisyForestPikabluScript, EVENT_NOISY_FOREST_PIKABLU
+	object_event 20,  4, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBug_maniacPierre, -1
+	object_event  4, 27, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerBug_maniacDylan, -1
+	object_event 31, 17, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerGuitaristfJaclyn, -1
+	object_event 12, 30, SPRITE_ROCKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerGuitaristmEzekiel, -1
+	object_event 20, 34, SPRITE_HIKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerHikerLester, -1
+	object_event 13,  6, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, (1 << MORN) | (1 << DAY), PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, NoisyForestTeacherText, -1
+	object_event 40, 15, SPRITE_CHILD, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, NoisyForestChildText, -1
+	itemball_event 41,  2, BALMMUSHROOM, 1, EVENT_NOISY_FOREST_BALMMUSHROOM
+	itemball_event 16, 28, MULCH, 1, EVENT_NOISY_FOREST_MULCH
+	tmhmball_event 17, 23, TM_DRAIN_PUNCH, EVENT_NOISY_FOREST_TM_DRAIN_PUNCH
+	cuttree_event 40, 12, EVENT_NOISY_FOREST_CUT_TREE_1
+	cuttree_event 12, 21, EVENT_NOISY_FOREST_CUT_TREE_2
 
-.Signposts: db 5
-	signpost 9, 15, SIGNPOST_READ, NoisyForestSignpostScript
-	signpost 31, 25, SIGNPOST_READ, NoisyForestSignpostScript
-	signpost 2, 32, SIGNPOST_ITEM, NoisyForestHiddenUltraBall
-	signpost 18, 34, SIGNPOST_ITEM, NoisyForestHiddenTinyMushroom
-	signpost 29, 7, SIGNPOST_ITEM, NoisyForestHiddenFullRestore
-
-.PersonEvents: db 15
-	person_event SPRITE_ANABEL, 19, 20, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, NoisyForestAnabelScript, EVENT_NOISY_FOREST_ANABEL
-	person_event SPRITE_YOUNGSTER, 15, 10, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerBird_keeperTrent, -1
-	person_event SPRITE_MARILL, 31, 24, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, NoisyForestPikabluScript, EVENT_NOISY_FOREST_PIKABLU
-	person_event SPRITE_SUPER_NERD, 4, 20, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBug_maniacPierre, -1
-	person_event SPRITE_SUPER_NERD, 27, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 1, TrainerBug_maniacDylan, -1
-	person_event SPRITE_COOLTRAINER_F, 17, 31, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerGuitaristfJaclyn, -1
-	person_event SPRITE_ROCKER, 30, 12, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerGuitaristmEzekiel, -1
-	person_event SPRITE_POKEFAN_M, 34, 20, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 2, TrainerHikerLester, -1
-	person_event SPRITE_TEACHER, 6, 13, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, (1 << MORN) | (1 << DAY), (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, NoisyForestTeacherScript, -1
-	person_event SPRITE_CHILD, 15, 40, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, NoisyForestChildScript, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 41, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, BALMMUSHROOM, 1, EVENT_NOISY_FOREST_BALMMUSHROOM
-	person_event SPRITE_BALL_CUT_FRUIT, 28, 16, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MULCH, 1, EVENT_NOISY_FOREST_MULCH
-	person_event SPRITE_BALL_CUT_FRUIT, 23, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TMHMBALL, 0, TM_U_TURN, EVENT_NOISY_FOREST_TM_U_TURN
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 40, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_NOISY_FOREST_CUT_TREE_1
-	person_event SPRITE_BALL_CUT_FRUIT, 21, 12, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_NOISY_FOREST_CUT_TREE_2
-
-const_value set 2
+	const_def 1 ; object constants
 	const NOISYFOREST_ANABEL
 	const NOISYFOREST_YOUNGSTER
 	const NOISYFOREST_MARILL
@@ -50,7 +47,7 @@ NoisyForestAnabelScript:
 	opentext
 	writetext .ChallengeText
 	yesorno
-	iffalse .No
+	iffalse_jumpopenedtext .NoText
 	writetext .YesText
 	waitbutton
 	closetext
@@ -65,7 +62,7 @@ NoisyForestAnabelScript:
 	writetext .ItemText
 	buttonsound
 	verbosegiveitem POWER_BAND
-	iffalse .Done
+	iffalse_endtext
 	writetext .GoodbyeText
 	waitbutton
 	closetext
@@ -75,16 +72,6 @@ NoisyForestAnabelScript:
 	pause 15
 	special Special_FadeInQuickly
 	clearevent EVENT_BATTLE_TOWER_ANABEL
-	end
-
-.Done:
-	closetext
-	end
-
-.No:
-	writetext .NoText
-	waitbutton
-	closetext
 	end
 
 .ChallengeText:
@@ -135,16 +122,14 @@ NoisyForestAnabelScript:
 	line "time we meet…"
 	done
 
-TrainerBug_maniacPierre:
-	trainer EVENT_BEAT_BUG_MANIAC_PIERRE, BUG_MANIAC, PIERRE, .SeenText, .BeatenText, 0, .Script
+GenericTrainerBug_maniacPierre:
+	generictrainer BUG_MANIAC, PIERRE, EVENT_BEAT_BUG_MANIAC_PIERRE, .SeenText, .BeatenText
 
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
+	text "Bzzz… Bzzz…"
+
+	para "That noise is"
+	line "stuck in my head…"
+	done
 
 .SeenText:
 	text "My #mon love"
@@ -158,23 +143,15 @@ TrainerBug_maniacPierre:
 	text "Bzzz! I lost!"
 	done
 
-.AfterText:
-	text "Bzzz… Bzzz…"
+GenericTrainerBug_maniacDylan:
+	generictrainer BUG_MANIAC, DYLAN, EVENT_BEAT_BUG_MANIAC_DYLAN, .SeenText, .BeatenText
 
-	para "That noise is"
-	line "stuck in my head…"
+	text "There's something"
+	line "about the buzz of"
+
+	para "this forest that"
+	line "bugs just love."
 	done
-
-TrainerBug_maniacDylan:
-	trainer EVENT_BEAT_BUG_MANIAC_DYLAN, BUG_MANIAC, DYLAN, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "I've never seen my"
@@ -186,24 +163,12 @@ TrainerBug_maniacDylan:
 	line "so happy!"
 	done
 
-.AfterText:
-	text "There's something"
-	line "about the buzz of"
+GenericTrainerGuitaristfJaclyn:
+	generictrainer GUITARISTF, JACLYN, EVENT_BEAT_GUITARISTF_JACLYN, .SeenText, .BeatenText
 
-	para "this forest that"
-	line "bugs just love."
+	text "Wait up! I'm not"
+	line "done singing!"
 	done
-
-TrainerGuitaristfJaclyn:
-	trainer EVENT_BEAT_GUITARISTF_JACLYN, GUITARISTF, JACLYN, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "Let my guitar"
@@ -216,21 +181,15 @@ TrainerGuitaristfJaclyn:
 	text "Giyaaaah!"
 	done
 
-.AfterText:
-	text "Wait up! I'm not"
-	line "done singing!"
+GenericTrainerGuitaristmEzekiel:
+	generictrainer GUITARISTM, EZEKIEL, EVENT_BEAT_GUITARISTM_EZEKIEL, .SeenText, .BeatenText
+
+	text "If you listen"
+	line "carefully, you can"
+
+	para "hear the rhythm of"
+	line "the forest's hum."
 	done
-
-TrainerGuitaristmEzekiel:
-	trainer EVENT_BEAT_GUITARISTM_EZEKIEL, GUITARISTM, EZEKIEL, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "Battle? Yeah, I'm"
@@ -241,24 +200,15 @@ TrainerGuitaristmEzekiel:
 	text "Wow. Good stuff."
 	done
 
-.AfterText:
-	text "If you listen"
-	line "carefully, you can"
+GenericTrainerHikerLester:
+	generictrainer HIKER, LESTER, EVENT_BEAT_HIKER_LESTER, .SeenText, .BeatenText
 
-	para "hear the rhythm of"
-	line "the forest's hum."
+	text "What, can't a Hiker"
+	line "explore a forest"
+
+	para "instead of a moun-"
+	line "tain now and then?"
 	done
-
-TrainerHikerLester:
-	trainer EVENT_BEAT_HIKER_LESTER, HIKER, LESTER, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "Yahoo!"
@@ -271,24 +221,16 @@ TrainerHikerLester:
 	line "me up!"
 	done
 
-.AfterText:
-	text "What, can't a Hiker"
-	line "explore a forest"
+GenericTrainerBird_keeperTrent:
+	generictrainer BIRD_KEEPER, TRENT, EVENT_BEAT_BIRD_KEEPER_TRENT, .SeenText, .BeatenText
 
-	para "instead of a moun-"
-	line "tain now and then?"
+	text "I get up early"
+	line "every day to train"
+	cont "my birds here."
+
+	para "The din is part of"
+	line "our training."
 	done
-
-TrainerBird_keeperTrent:
-	trainer EVENT_BEAT_BIRD_KEEPER_TRENT, BIRD_KEEPER, TRENT, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "The early bird"
@@ -300,19 +242,7 @@ TrainerBird_keeperTrent:
 	line "the worm…"
 	done
 
-.AfterText:
-	text "I get up early"
-	line "every day to train"
-	cont "my birds here."
-
-	para "The din is part of"
-	line "our training."
-	done
-
-NoisyForestTeacherScript:
-	jumptextfaceplayer .Text
-
-.Text:
+NoisyForestTeacherText:
 	text "I come here for my"
 	line "morning stroll."
 
@@ -321,29 +251,19 @@ NoisyForestTeacherScript:
 	cont "my steps!"
 	done
 
-NoisyForestChildScript:
-	jumptextfaceplayer .Text
-
-.Text:
+NoisyForestChildText:
 	text "Gah! This place"
 	line "is deafening!"
 	done
 
 NoisyForestPikabluScript:
-	opentext
-	writetext .PikabluText
-	cry MARILL
-	waitbutton
-	closetext
+	showcrytext .PikabluText, MARILL
 	disappear NOISYFOREST_YOUNGSTER
-	moveperson NOISYFOREST_YOUNGSTER, 19, 36
+	moveobject NOISYFOREST_YOUNGSTER, 19, 36
 	appear NOISYFOREST_YOUNGSTER
 	applymovement NOISYFOREST_YOUNGSTER, .WalkToYou
-	spriteface PLAYER, DOWN
-	opentext
-	writetext .OwnerText1
-	waitbutton
-	closetext
+	turnobject PLAYER, DOWN
+	showtext .OwnerText1
 	disappear NOISYFOREST_MARILL
 	opentext
 	writetext .OwnerText2
@@ -357,7 +277,7 @@ NoisyForestPikabluScript:
 	closetext
 	applymovement NOISYFOREST_YOUNGSTER, .WalkAway
 	disappear NOISYFOREST_YOUNGSTER
-	moveperson NOISYFOREST_YOUNGSTER, 10, 15
+	moveobject NOISYFOREST_YOUNGSTER, 10, 15
 	appear NOISYFOREST_YOUNGSTER
 	clearevent EVENT_SHAMOUTI_ISLAND_PIKABLU_GUY
 	end
@@ -424,18 +344,6 @@ NoisyForestPikabluScript:
 	step_left
 	step_end
 
-NoisyForestSignpostScript:
-	jumptext .Text
-
-.Text:
+NoisyForestSignpostText:
 	text "Noisy Forest"
 	done
-
-NoisyForestHiddenUltraBall:
-	dwb EVENT_NOISY_FOREST_HIDDEN_ULTRA_BALL, ULTRA_BALL
-
-NoisyForestHiddenTinyMushroom:
-	dwb EVENT_NOISY_FOREST_HIDDEN_TINYMUSHROOM, TINYMUSHROOM
-
-NoisyForestHiddenFullRestore:
-	dwb EVENT_NOISY_FOREST_HIDDEN_FULL_RESTORE, FULL_RESTORE

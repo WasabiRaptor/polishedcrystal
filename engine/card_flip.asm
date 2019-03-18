@@ -1,9 +1,9 @@
-CARDFLIP_LIGHT_OFF EQU $e4
-CARDFLIP_LIGHT_ON  EQU $e5
+CARDFLIP_LIGHT_OFF EQU $f3
+CARDFLIP_LIGHT_ON  EQU $f4
 CARDFLIP_DECK_SIZE EQU 4 * 6
 
 _CardFlip: ; e00ee (38:40ee)
-	ld hl, Options1
+	ld hl, wOptions1
 	set NO_TEXT_SCROLL, [hl]
 	call ClearBGPalettes
 	call ClearTileMap
@@ -27,17 +27,16 @@ _CardFlip: ; e00ee (38:40ee)
 	ld hl, CardFlipOffButtonGFX
 	ld de, VTiles1 tile (CARDFLIP_LIGHT_OFF - $80)
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 	ld hl, CardFlipOnButtonGFX
 	ld de, VTiles1 tile (CARDFLIP_LIGHT_ON - $80)
 	ld bc, 1 tiles
-	call CopyBytes
+	rst CopyBytes
 
-	call CardFlip_ShiftDigitsLeftTwoPixels
 	call CardFlip_InitTilemap
 	call CardFlip_InitAttrPals
 	call EnableLCD
-	call WaitBGMap2
+	call ApplyAttrAndTilemapInVBlank
 	ld a, $e4
 	call DmgToCgbBGPals
 	ld de, $e4e4
@@ -50,10 +49,10 @@ _CardFlip: ; e00ee (38:40ee)
 	ld [wCardFlipCursorX], a
 
 ;	ld de, MUSIC_GAME_CORNER
-;	ld a, [MapGroup]
+;	ld a, [wMapGroup]
 ;	cp GROUP_GOLDENROD_GAME_CORNER
 ;	jr nz, .celadon_game_corner
-;	ld a, [MapNumber]
+;	ld a, [wMapNumber]
 ;	cp MAP_GOLDENROD_GAME_CORNER
 ;	jr nz, .celadon_game_corner
 ;	ld de, MUSIC_GAME_CORNER_DPPT
@@ -72,7 +71,7 @@ _CardFlip: ; e00ee (38:40ee)
 	call PlaySFX
 	call WaitSFX
 	call ClearBGPalettes
-	ld hl, Options1
+	ld hl, wOptions1
 	res NO_TEXT_SCROLL, [hl]
 	ret
 
@@ -81,9 +80,8 @@ _CardFlip: ; e00ee (38:40ee)
 	ld e, a
 	ld d, 0
 	ld hl, .Jumptable
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -129,9 +127,9 @@ endr
 ; 0xe01d2
 
 .DeductCoins: ; e01d2
-	ld a, [Coins]
+	ld a, [wCoins]
 	ld h, a
-	ld a, [Coins + 1]
+	ld a, [wCoins + 1]
 	ld l, a
 	ld a, h
 	and a
@@ -149,9 +147,9 @@ endr
 	ld de, -3
 	add hl, de
 	ld a, h
-	ld [Coins], a
+	ld [wCoins], a
 	ld a, l
-	ld [Coins + 1], a
+	ld [wCoins + 1], a
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	xor a
@@ -178,7 +176,7 @@ endr
 	hlcoord 9, 0
 	ld bc, SCREEN_WIDTH
 	ld a, [wCardFlipNumCardsPlayed]
-	call AddNTimes
+	rst AddNTimes
 	ld [hl], CARDFLIP_LIGHT_ON
 	ld a, $1
 	ld [hBGMapMode], a
@@ -192,7 +190,7 @@ endr
 	call DelayFrames
 	hlcoord 2, 6
 	call PlaceCardFaceDown
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	ld hl, .ChooseACardText
 	call CardFlip_UpdateCoinBalanceDisplay
 	xor a
@@ -282,9 +280,8 @@ endr
 	ld e, a
 	ld d, 0
 	ld hl, wDeck
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [wCardFlipWhichCard]
 	ld e, a
 	add hl, de
@@ -296,7 +293,7 @@ endr
 	ld [hl], TRUE
 	call GetCoordsOfChosenCard
 	call CardFlip_DisplayCardFaceUp
-	call WaitBGMap2
+	call ApplyAttrAndTilemapInVBlank
 	jp .Increment
 ; e0314
 
@@ -387,7 +384,7 @@ CollapseCursorPosition: ; e0398
 	ld hl, 0
 	ld bc, 6
 	ld a, [wCardFlipCursorY]
-	call AddNTimes
+	rst AddNTimes
 	ld b, $0
 	ld a, [wCardFlipCursorX]
 	ld c, a
@@ -441,9 +438,8 @@ CardFlip_DisplayCardFaceUp: ; e03ec
 	ld e, a
 	ld d, 0
 	ld hl, .Deck
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
@@ -475,7 +471,7 @@ endr
 	pop hl
 
 	; Set the attributes
-	ld de, AttrMap - TileMap
+	ld de, wAttrMap - wTileMap
 	add hl, de
 	ld a, [wCardFlipFaceUpCard]
 	and 3
@@ -521,7 +517,7 @@ CardFlip_PrintCoinBalance: ; e049c
 	ld de, .CoinStr
 	call PlaceString
 	hlcoord 14, 16
-	ld de, Coins
+	ld de, wCoins
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
 	jp PrintNum
 ; e04bc
@@ -585,7 +581,7 @@ CardFlip_CopyToBox: ; e04f7 (38:44f7)
 ; e0509 (38:4509)
 
 CardFlip_CopyOAM: ; e0509
-	ld de, Sprites
+	ld de, wSprites
 	ld a, [hli]
 .loop
 	push af
@@ -608,18 +604,6 @@ CardFlip_CopyOAM: ; e0509
 	jr nz, .loop
 	ret
 ; e0521
-
-CardFlip_ShiftDigitsLeftTwoPixels: ; e0521 (38:4521)
-	ld de, VTiles1 tile ("0" & $7f)
-	ld hl, VTiles1 tile ("0" & $7f) + 2
-	ld bc, 10 tiles - 2
-	call CopyBytes
-	ld hl, VTiles1 tile $7f + 1 tiles - 2
-	xor a
-	ld [hli], a
-	ld [hl], a
-	ret
-; e0534 (38:4534)
 
 CardFlip_BlankDiscardedCardSlot: ; e0534
 	xor a
@@ -663,9 +647,8 @@ CardFlip_BlankDiscardedCardSlot: ; e0534
 	and a
 	jr nz, .discarded2
 	hlcoord 13, 3
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $36
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -674,9 +657,8 @@ endr
 
 .discarded2
 	hlcoord 13, 3
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $36
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -691,9 +673,8 @@ endr
 	and a
 	jr nz, .discarded1
 	hlcoord 13, 4
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $3b
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -702,9 +683,8 @@ endr
 
 .discarded1
 	hlcoord 13, 4
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $3d
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -719,9 +699,8 @@ endr
 	and a
 	jr nz, .discarded4
 	hlcoord 13, 6
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $36
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -730,9 +709,8 @@ endr
 
 .discarded4
 	hlcoord 13, 6
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $36
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -747,9 +725,8 @@ endr
 	and a
 	jr nz, .discarded3
 	hlcoord 13, 7
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $3c
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -758,9 +735,8 @@ endr
 
 .discarded3
 	hlcoord 13, 7
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $3d
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -775,9 +751,8 @@ endr
 	and a
 	jr nz, .discarded6
 	hlcoord 13, 9
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $36
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -786,9 +761,8 @@ endr
 
 .discarded6
 	hlcoord 13, 9
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $36
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -803,9 +777,8 @@ endr
 	and a
 	jr nz, .discarded5
 	hlcoord 13, 10
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $3c
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -814,9 +787,8 @@ endr
 
 .discarded5
 	hlcoord 13, 10
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld [hl], $3d
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -1171,28 +1143,28 @@ CardFlip_CheckWinCondition: ; e0637
 ; 0xe081b
 
 .AddCoinPlaySFX: ; e081b
-	ld a, [Coins]
+	ld a, [wCoins]
 	ld h, a
-	ld a, [Coins + 1]
+	ld a, [wCoins + 1]
 	ld l, a
 	inc hl
 	ld a, h
-	ld [Coins], a
+	ld [wCoins], a
 	ld a, l
-	ld [Coins + 1], a
+	ld [wCoins + 1], a
 	ld de, SFX_PAY_DAY
 	jp PlaySFX
 ; e0833
 
 .IsCoinCaseFull: ; e0833
-	ld a, [Coins]
+	ld a, [wCoins]
 	cp 50000 / $100
 	jr c, .less
 	jr z, .check_low
 	jr .more
 
 .check_low
-	ld a, [Coins + 1]
+	ld a, [wCoins + 1]
 	cp 50000 % $100
 	jr c, .less
 
@@ -1213,29 +1185,29 @@ PlaceOAMCardBorder: ; e0849
 
 .SpriteData: ; e0853
 	db 18
-	dsprite 0, 0, 0, 0, $04, $00
-	dsprite 0, 0, 1, 0, $06, $00
-	dsprite 0, 0, 2, 0, $06, $00
-	dsprite 0, 0, 3, 0, $06, $00
-	dsprite 0, 0, 4, 0, $04, $20
+	dsprite 0, 0, 0, 0, $04, $0
+	dsprite 0, 0, 1, 0, $06, $0
+	dsprite 0, 0, 2, 0, $06, $0
+	dsprite 0, 0, 3, 0, $06, $0
+	dsprite 0, 0, 4, 0, $04, $0 | X_FLIP
 
-	dsprite 1, 0, 0, 0, $05, $00
-	dsprite 1, 0, 4, 0, $05, $20
+	dsprite 1, 0, 0, 0, $05, $0
+	dsprite 1, 0, 4, 0, $05, $0 | X_FLIP
 
-	dsprite 2, 0, 0, 0, $05, $00
-	dsprite 2, 0, 4, 0, $05, $20
+	dsprite 2, 0, 0, 0, $05, $0
+	dsprite 2, 0, 4, 0, $05, $0 | X_FLIP
 
-	dsprite 3, 0, 0, 0, $05, $00
-	dsprite 3, 0, 4, 0, $05, $20
+	dsprite 3, 0, 0, 0, $05, $0
+	dsprite 3, 0, 4, 0, $05, $0 | X_FLIP
 
-	dsprite 4, 0, 0, 0, $05, $00
-	dsprite 4, 0, 4, 0, $05, $20
+	dsprite 4, 0, 0, 0, $05, $0
+	dsprite 4, 0, 4, 0, $05, $0 | X_FLIP
 
-	dsprite 5, 0, 0, 0, $04, $40
-	dsprite 5, 0, 1, 0, $06, $40
-	dsprite 5, 0, 2, 0, $06, $40
-	dsprite 5, 0, 3, 0, $06, $40
-	dsprite 5, 0, 4, 0, $04, $60
+	dsprite 5, 0, 0, 0, $04, $0 | Y_FLIP
+	dsprite 5, 0, 1, 0, $06, $0 | Y_FLIP
+	dsprite 5, 0, 2, 0, $06, $0 | Y_FLIP
+	dsprite 5, 0, 3, 0, $06, $0 | Y_FLIP
+	dsprite 5, 0, 4, 0, $04, $0 | X_FLIP | Y_FLIP
 ; e089c
 
 ChooseCard_HandleJoypad: ; e089c
@@ -1281,9 +1253,8 @@ ChooseCard_HandleJoypad: ; e089c
 	ld [hl], a
 	cp $3
 	jr c, .left_to_number_gp
-rept 2
 	dec [hl]
-endr
+	dec [hl]
 	jp .play_sound
 
 .left_to_number_gp
@@ -1311,9 +1282,8 @@ endr
 	ld [hl], a
 	cp $4
 	ret nc
-rept 2
 	inc [hl]
-endr
+	inc [hl]
 	jr .play_sound
 
 .d_up ; e090a
@@ -1342,9 +1312,8 @@ endr
 	ld [hl], a
 	cp $3
 	jr c, .up_to_mon_group
-rept 2
 	dec [hl]
-endr
+	dec [hl]
 	jr .play_sound
 
 .up_to_mon_group
@@ -1372,9 +1341,8 @@ endr
 	ld [hl], a
 	cp $6
 	ret nc
-rept 2
 	inc [hl]
-endr
+	inc [hl]
 
 .play_sound ; e0959
 	ld de, SFX_POKEBALLS_PLACED_ON_TABLE
@@ -1384,9 +1352,8 @@ endr
 CardFlip_UpdateCursorOAM: ; e0960
 	call ClearSprites
 	call CollapseCursorPosition
-rept 2
 	add hl, hl
-endr
+	add hl, hl
 	ld de, .OAMData
 	add hl, de
 	ld a, [hli]
@@ -1470,174 +1437,174 @@ endm
 
 .SingleTile: ; e0a41
 	db 6
-	dsprite   0, 0,  -1, 7, $00, $80
-	dsprite   0, 0,   0, 0, $02, $80
-	dsprite   0, 0,   1, 0, $03, $80
-	dsprite   0, 5,  -1, 7, $00, $c0
-	dsprite   0, 5,   0, 0, $02, $c0
-	dsprite   0, 5,   1, 0, $03, $80
+	dsprite   0, 0,  -1, 7, $00, $0 | BEHIND_BG
+	dsprite   0, 0,   0, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 5,  -1, 7, $00, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   0, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   1, 0, $03, $0 | BEHIND_BG
 
 .PokeGroup: ; e0a5a
 	db 26
-	dsprite   0, 0,  -1, 7, $00, $80
-	dsprite   0, 0,   0, 0, $02, $80
-	dsprite   0, 0,   1, 0, $00, $a0
-	dsprite   1, 0,  -1, 7, $01, $80
-	dsprite   1, 0,   1, 0, $01, $a0
-	dsprite   2, 0,  -1, 7, $01, $80
-	dsprite   2, 0,   1, 0, $03, $80
-	dsprite   3, 0,  -1, 7, $01, $80
-	dsprite   3, 0,   1, 0, $03, $80
-	dsprite   4, 0,  -1, 7, $01, $80
-	dsprite   4, 0,   1, 0, $03, $80
-	dsprite   5, 0,  -1, 7, $01, $80
-	dsprite   5, 0,   1, 0, $03, $80
-	dsprite   6, 0,  -1, 7, $01, $80
-	dsprite   6, 0,   1, 0, $03, $80
-	dsprite   7, 0,  -1, 7, $01, $80
-	dsprite   7, 0,   1, 0, $03, $80
-	dsprite   8, 0,  -1, 7, $01, $80
-	dsprite   8, 0,   1, 0, $03, $80
-	dsprite   9, 0,  -1, 7, $01, $80
-	dsprite   9, 0,   1, 0, $03, $80
-	dsprite  10, 0,  -1, 7, $01, $80
-	dsprite  10, 0,   1, 0, $03, $80
-	dsprite  10, 1,  -1, 7, $00, $c0
-	dsprite  10, 1,   0, 0, $02, $c0
-	dsprite  10, 1,   1, 0, $03, $80
+	dsprite   0, 0,  -1, 7, $00, $0 | BEHIND_BG
+	dsprite   0, 0,   0, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   1, 0, $00, $0 | X_FLIP | BEHIND_BG
+	dsprite   1, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   1, 0,   1, 0, $01, $0 | X_FLIP | BEHIND_BG
+	dsprite   2, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   2, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   3, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   3, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   4, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   4, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   5, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   5, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   6, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   6, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   7, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   7, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   8, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   8, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   9, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   9, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite  10, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite  10, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite  10, 1,  -1, 7, $00, $0 | Y_FLIP | BEHIND_BG
+	dsprite  10, 1,   0, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite  10, 1,   1, 0, $03, $0 | BEHIND_BG
 
 .NumGroup: ; e0ac3
 	db 20
-	dsprite   0, 0,  -1, 7, $00, $80
-	dsprite   0, 0,   0, 0, $02, $80
-	dsprite   0, 0,   1, 0, $02, $80
-	dsprite   0, 0,   2, 0, $03, $80
-	dsprite   0, 0,   3, 0, $02, $80
-	dsprite   0, 0,   4, 0, $03, $80
-	dsprite   0, 0,   5, 0, $02, $80
-	dsprite   0, 0,   6, 0, $03, $80
-	dsprite   0, 0,   7, 0, $02, $80
-	dsprite   0, 0,   8, 0, $03, $80
-	dsprite   0, 5,  -1, 7, $00, $c0
-	dsprite   0, 5,   0, 0, $02, $c0
-	dsprite   0, 5,   1, 0, $02, $c0
-	dsprite   0, 5,   2, 0, $03, $80
-	dsprite   0, 5,   3, 0, $02, $c0
-	dsprite   0, 5,   4, 0, $03, $80
-	dsprite   0, 5,   5, 0, $02, $c0
-	dsprite   0, 5,   6, 0, $03, $80
-	dsprite   0, 5,   7, 0, $02, $c0
-	dsprite   0, 5,   8, 0, $03, $80
+	dsprite   0, 0,  -1, 7, $00, $0 | BEHIND_BG
+	dsprite   0, 0,   0, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   1, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   2, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 0,   3, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   4, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 0,   5, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   6, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 0,   7, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   8, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 5,  -1, 7, $00, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   0, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   1, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   2, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 5,   3, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   4, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 5,   5, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   6, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 5,   7, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   0, 5,   8, 0, $03, $0 | BEHIND_BG
 
 .NumGroupPair: ; e0b14
 	db 30
-	dsprite   0, 0,   0, 0, $00, $80
-	dsprite   0, 0,   1, 0, $02, $80
-	dsprite   0, 0,   2, 0, $02, $80
-	dsprite   0, 0,   3, 0, $03, $80
-	dsprite   0, 0,   4, 0, $02, $80
-	dsprite   0, 0,   5, 0, $03, $80
-	dsprite   0, 0,   6, 0, $02, $80
-	dsprite   0, 0,   7, 0, $03, $80
-	dsprite   0, 0,   8, 0, $02, $80
-	dsprite   0, 0,   9, 0, $03, $80
-	dsprite   1, 0,   0, 0, $01, $80
-	dsprite   1, 0,   3, 0, $03, $80
-	dsprite   1, 0,   5, 0, $03, $80
-	dsprite   1, 0,   7, 0, $03, $80
-	dsprite   1, 0,   9, 0, $03, $80
-	dsprite   2, 0,   0, 0, $01, $80
-	dsprite   2, 0,   3, 0, $03, $80
-	dsprite   2, 0,   5, 0, $03, $80
-	dsprite   2, 0,   7, 0, $03, $80
-	dsprite   2, 0,   9, 0, $03, $80
-	dsprite   2, 1,   0, 0, $00, $c0
-	dsprite   2, 1,   1, 0, $02, $c0
-	dsprite   2, 1,   2, 0, $02, $c0
-	dsprite   2, 1,   3, 0, $03, $80
-	dsprite   2, 1,   4, 0, $03, $80
-	dsprite   2, 1,   5, 0, $03, $80
-	dsprite   2, 1,   6, 0, $03, $80
-	dsprite   2, 1,   7, 0, $03, $80
-	dsprite   2, 1,   8, 0, $03, $80
-	dsprite   2, 1,   9, 0, $03, $80
+	dsprite   0, 0,   0, 0, $00, $0 | BEHIND_BG
+	dsprite   0, 0,   1, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   2, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 0,   4, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   5, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 0,   6, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   7, 0, $03, $0 | BEHIND_BG
+	dsprite   0, 0,   8, 0, $02, $0 | BEHIND_BG
+	dsprite   0, 0,   9, 0, $03, $0 | BEHIND_BG
+	dsprite   1, 0,   0, 0, $01, $0 | BEHIND_BG
+	dsprite   1, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   1, 0,   5, 0, $03, $0 | BEHIND_BG
+	dsprite   1, 0,   7, 0, $03, $0 | BEHIND_BG
+	dsprite   1, 0,   9, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 0,   0, 0, $01, $0 | BEHIND_BG
+	dsprite   2, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 0,   5, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 0,   7, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 0,   9, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 1,   0, 0, $00, $0 | Y_FLIP | BEHIND_BG
+	dsprite   2, 1,   1, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   2, 1,   2, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite   2, 1,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 1,   4, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 1,   5, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 1,   6, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 1,   7, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 1,   8, 0, $03, $0 | BEHIND_BG
+	dsprite   2, 1,   9, 0, $03, $0 | BEHIND_BG
 
 .PokeGroupPair: ; e0b8d
 	db 38
-	dsprite   0, 0,  -1, 7, $00, $80
-	dsprite   0, 0,   3, 0, $00, $a0
-	dsprite   1, 0,  -1, 7, $01, $80
-	dsprite   1, 0,   3, 0, $01, $a0
-	dsprite   2, 0,  -1, 7, $01, $80
-	dsprite   2, 0,   3, 0, $01, $a0
-	dsprite   3, 0,  -1, 7, $01, $80
-	dsprite   3, 0,   1, 0, $03, $80
-	dsprite   3, 0,   3, 0, $03, $80
-	dsprite   4, 0,  -1, 7, $01, $80
-	dsprite   4, 0,   1, 0, $03, $80
-	dsprite   4, 0,   3, 0, $03, $80
-	dsprite   5, 0,  -1, 7, $01, $80
-	dsprite   5, 0,   1, 0, $03, $80
-	dsprite   5, 0,   3, 0, $03, $80
-	dsprite   6, 0,  -1, 7, $01, $80
-	dsprite   6, 0,   1, 0, $03, $80
-	dsprite   6, 0,   3, 0, $03, $80
-	dsprite   7, 0,  -1, 7, $01, $80
-	dsprite   7, 0,   1, 0, $03, $80
-	dsprite   7, 0,   3, 0, $03, $80
-	dsprite   8, 0,  -1, 7, $01, $80
-	dsprite   8, 0,   1, 0, $03, $80
-	dsprite   8, 0,   3, 0, $03, $80
-	dsprite   9, 0,  -1, 7, $01, $80
-	dsprite   9, 0,   1, 0, $03, $80
-	dsprite   9, 0,   3, 0, $03, $80
-	dsprite  10, 0,  -1, 7, $01, $80
-	dsprite  10, 0,   1, 0, $03, $80
-	dsprite  10, 0,   3, 0, $03, $80
-	dsprite  11, 0,  -1, 7, $01, $80
-	dsprite  11, 0,   1, 0, $03, $80
-	dsprite  11, 0,   3, 0, $03, $80
-	dsprite  11, 1,  -1, 7, $00, $c0
-	dsprite  11, 1,   0, 0, $02, $c0
-	dsprite  11, 1,   1, 0, $03, $c0
-	dsprite  11, 1,   2, 0, $02, $c0
-	dsprite  11, 1,   3, 0, $03, $e0
+	dsprite   0, 0,  -1, 7, $00, $0 | BEHIND_BG
+	dsprite   0, 0,   3, 0, $00, $0 | X_FLIP | BEHIND_BG
+	dsprite   1, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   1, 0,   3, 0, $01, $0 | X_FLIP | BEHIND_BG
+	dsprite   2, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   2, 0,   3, 0, $01, $0 | X_FLIP | BEHIND_BG
+	dsprite   3, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   3, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   3, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   4, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   4, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   4, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   5, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   5, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   5, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   6, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   6, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   6, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   7, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   7, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   7, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   8, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   8, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   8, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite   9, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite   9, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite   9, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite  10, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite  10, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite  10, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite  11, 0,  -1, 7, $01, $0 | BEHIND_BG
+	dsprite  11, 0,   1, 0, $03, $0 | BEHIND_BG
+	dsprite  11, 0,   3, 0, $03, $0 | BEHIND_BG
+	dsprite  11, 1,  -1, 7, $00, $0 | Y_FLIP | BEHIND_BG
+	dsprite  11, 1,   0, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite  11, 1,   1, 0, $03, $0 | Y_FLIP | BEHIND_BG
+	dsprite  11, 1,   2, 0, $02, $0 | Y_FLIP | BEHIND_BG
+	dsprite  11, 1,   3, 0, $03, $0 | X_FLIP | Y_FLIP | BEHIND_BG
 
 .Impossible: ; e0c26
 	db 4
-	dsprite   0, 0,   0, 0, $00, $80
-	dsprite   0, 0,   1, 0, $00, $a0
-	dsprite   1, 0,   0, 0, $00, $c0
-	dsprite   1, 0,   1, 0, $00, $e0
+	dsprite   0, 0,   0, 0, $00, $0 | BEHIND_BG
+	dsprite   0, 0,   1, 0, $00, $0 | X_FLIP | BEHIND_BG
+	dsprite   1, 0,   0, 0, $00, $0 | Y_FLIP | BEHIND_BG
+	dsprite   1, 0,   1, 0, $00, $0 | X_FLIP | Y_FLIP | BEHIND_BG
 ; e0c37
 
 CardFlip_InitAttrPals: ; e0c37 (38:4c37)
-	hlcoord 0, 0, AttrMap
+	hlcoord 0, 0, wAttrMap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	xor a
 	call ByteFill
 
-	hlcoord 12, 1, AttrMap
+	hlcoord 12, 1, wAttrMap
 	lb bc, 2, 2
 	ld a, $1
 	call CardFlip_FillBox
 
-	hlcoord 14, 1, AttrMap
+	hlcoord 14, 1, wAttrMap
 	lb bc, 2, 2
 	ld a, $2
 	call CardFlip_FillBox
 
-	hlcoord 16, 1, AttrMap
+	hlcoord 16, 1, wAttrMap
 	lb bc, 2, 2
 	ld a, $3
 	call CardFlip_FillBox
 
-	hlcoord 18, 1, AttrMap
+	hlcoord 18, 1, wAttrMap
 	lb bc, 2, 2
 	ld a, $4
 	call CardFlip_FillBox
 
-	hlcoord 9, 0, AttrMap
+	hlcoord 9, 0, wAttrMap
 	lb bc, 12, 1
 	ld a, $1
 	call CardFlip_FillBox
@@ -1647,9 +1614,9 @@ CardFlip_InitAttrPals: ; e0c37 (38:4c37)
 	ld a, $5
 	ld [rSVBK], a
 	ld hl, .palettes
-	ld de, UnknBGPals
+	ld de, wUnknBGPals
 	ld bc, 9 palettes
-	call CopyBytes
+	rst CopyBytes
 	pop af
 	ld [rSVBK], a
 	ret

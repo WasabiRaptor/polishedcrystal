@@ -1,28 +1,19 @@
 CeruleanWaterShowSpeechHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, CERULEAN_CITY, 11
+	warp_event  3,  7, CERULEAN_CITY, 11
 
-CeruleanWaterShowSpeechHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 11, CERULEAN_CITY
-	warp_def $7, $3, 11, CERULEAN_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_COOLTRAINER_M, 4, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeruleanWaterShowSpeechHouseCooltrainerMScript, EVENT_TRAINERS_IN_CERULEAN_GYM
-	person_event SPRITE_SUPER_NERD, 3, 6, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, CeruleanWaterShowSpeechHouseSuperNerdScript, -1
-
-CeruleanWaterShowSpeechHouseCooltrainerMScript:
-	jumptextfaceplayer CeruleanWaterShowSpeechHouseCooltrainerMText
-
-CeruleanWaterShowSpeechHouseSuperNerdScript:
-	jumptextfaceplayer CeruleanWaterShowSpeechHouseSuperNerdText
+	db 2 ; object events
+	object_event  2,  4, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, CeruleanWaterShowSpeechHouseCooltrainerMText, EVENT_TRAINERS_IN_CERULEAN_GYM
+	object_event  6,  3, SPRITE_SUPER_NERD, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, CeruleanWaterShowSpeechHouseSuperNerdText, -1
 
 CeruleanWaterShowSpeechHouseCooltrainerMText:
 	text "Misty sometimes"
@@ -36,7 +27,7 @@ CeruleanWaterShowSpeechHouseCooltrainerMText:
 CeruleanWaterShowSpeechHouseSuperNerdText:
 	text "I drew some graff-"
 	line "iti on the roof of"
-	cont "Celadon Mansion."
+	cont "Celadon Condo."
 
 	para "Have you seen it?"
 	line "It's a bit hidden,"

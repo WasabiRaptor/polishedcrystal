@@ -1,27 +1,24 @@
 DragonShrine_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script DragonShrineTrigger0
 
-.MapTriggers: db 1
-	dw DragonShrineTrigger0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4,  9, DRAGONS_DEN_B1F, 2
+	warp_event  5,  9, DRAGONS_DEN_B1F, 2
 
-DragonShrine_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $9, $4, 2, DRAGONS_DEN_B1F
-	warp_def $9, $5, 2, DRAGONS_DEN_B1F
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 4 ; object events
+	object_event  5,  1, SPRITE_ELDER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_SCRIPT, 0, ElderScript_0x18d1a5, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
+	object_event  4,  8, SPRITE_CLAIR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_DRAGON_SHRINE_CLAIR
+	object_event  2,  4, SPRITE_ELDER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x18d840, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
+	object_event  7,  4, SPRITE_ELDER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x18d8b1, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 
-.Signposts: db 0
-
-.PersonEvents: db 4
-	person_event SPRITE_ELDER, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, ElderScript_0x18d1a5, EVENT_GAVE_KURT_APRICORNS
-	person_event SPRITE_CLAIR, 8, 4, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_DRAGON_SHRINE_CLAIR
-	person_event SPRITE_ELDER, 4, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, ElderScript_0x18d205, EVENT_GAVE_KURT_APRICORNS
-	person_event SPRITE_ELDER, 4, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, ElderScript_0x18d20d, EVENT_GAVE_KURT_APRICORNS
-
-const_value set 2
+	const_def 1 ; object constants
 	const DRAGONSHRINE_ELDER1
 	const DRAGONSHRINE_CLAIR
 
@@ -31,98 +28,92 @@ DragonShrineTrigger0:
 
 DragonShrineTestScript:
 	applymovement PLAYER, MovementData_0x18d2bf
-	applymovement DRAGONSHRINE_ELDER1, MovementData_0x18d2c7
+	applyonemovement DRAGONSHRINE_ELDER1, slow_step_down
 	opentext
 	writetext UnknownText_0x18d2ea
 	buttonsound
 .Question1:
-	setevent EVENT_RECEIVED_BALLS_FROM_KURT
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	writetext UnknownText_0x18d3bc
 	buttonsound
-	loadmenudata MenuDataHeader_0x18d215
+	loadmenu MenuDataHeader_0x18d215
 	verticalmenu
 	closewindow
-	if_equal $1, .RightAnswer
-	if_equal $2, .WrongAnswer
-	if_equal $3, .RightAnswer
+	ifequal $1, .RightAnswer
+	ifequal $2, .WrongAnswer
+	ifequal $3, .RightAnswer
 	end
 
 .Question2:
-	setevent EVENT_DRAGON_SHRINE_QUESTION_2
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
 	writetext UnknownText_0x18d3d3
 	buttonsound
-	loadmenudata MenuDataHeader_0x18d234
+	loadmenu MenuDataHeader_0x18d234
 	verticalmenu
 	closewindow
-	if_equal $1, .RightAnswer
-	if_equal $2, .RightAnswer
-	if_equal $3, .WrongAnswer
+	ifequal $1, .RightAnswer
+	ifequal $2, .RightAnswer
+	ifequal $3, .WrongAnswer
 .Question3:
-	setevent EVENT_DRAGON_SHRINE_QUESTION_3
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_4
 	writetext UnknownText_0x18d3f3
 	buttonsound
-	loadmenudata MenuDataHeader_0x18d258
+	loadmenu MenuDataHeader_0x18d258
 	verticalmenu
 	closewindow
-	if_equal $1, .WrongAnswer
-	if_equal $2, .RightAnswer
-	if_equal $3, .RightAnswer
+	ifequal $1, .WrongAnswer
+	ifequal $2, .RightAnswer
+	ifequal $3, .RightAnswer
 .Question4:
-	setevent EVENT_DRAGON_SHRINE_QUESTION_4
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_5
 	writetext UnknownText_0x18d420
 	buttonsound
-	loadmenudata MenuDataHeader_0x18d283
+	loadmenu MenuDataHeader_0x18d283
 	verticalmenu
 	closewindow
-	if_equal $1, .RightAnswer
-	if_equal $2, .WrongAnswer
-	if_equal $3, .RightAnswer
+	ifequal $1, .RightAnswer
+	ifequal $2, .WrongAnswer
+	ifequal $3, .RightAnswer
 .Question5:
-	setevent EVENT_DRAGON_SHRINE_QUESTION_5
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_6
 	writetext UnknownText_0x18d44a
 	buttonsound
-	loadmenudata MenuDataHeader_0x18d2a5
+	loadmenu MenuDataHeader_0x18d2a5
 	verticalmenu
 	closewindow
-	if_equal $1, .WrongAnswer
-	if_equal $2, .WrongAnswer
-	if_equal $3, .RightAnswer
+	ifequal $1, .WrongAnswer
+	ifequal $2, .WrongAnswer
+	ifequal $3, .RightAnswer
 .RightAnswer:
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_5
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_6
 	iftrue .PassedTheTest
 	writetext UnknownText_0x18d82d
 	buttonsound
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_4
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_5
 	iftrue .Question5
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_3
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_4
 	iftrue .Question4
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_2
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
 	iftrue .Question3
-	checkevent EVENT_RECEIVED_BALLS_FROM_KURT
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	iftrue .Question2
 .WrongAnswer:
 	closetext
-	spriteface DRAGONSHRINE_ELDER1, LEFT
-	opentext
-	writetext UnknownText_0x18d7f6
-	waitbutton
-	closetext
-	spriteface DRAGONSHRINE_ELDER1, DOWN
-	opentext
-	writetext UnknownText_0x18d816
-	waitbutton
-	closetext
+	turnobject DRAGONSHRINE_ELDER1, LEFT
+	showtext UnknownText_0x18d7f6
+	turnobject DRAGONSHRINE_ELDER1, DOWN
+	showtext UnknownText_0x18d816
 	setevent EVENT_ANSWERED_DRAGON_MASTER_QUIZ_WRONG
 	opentext
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_5
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_6
 	iftrue .Question5
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_4
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_5
 	iftrue .Question4
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_3
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_4
 	iftrue .Question3
-	checkevent EVENT_DRAGON_SHRINE_QUESTION_2
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
 	iftrue .Question2
-	checkevent EVENT_RECEIVED_BALLS_FROM_KURT
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_2
 	iftrue .Question1
 .PassedTheTest:
 	writetext UnknownText_0x18d47c
@@ -133,38 +124,23 @@ DragonShrineTestScript:
 	playmusic MUSIC_CLAIR
 	appear DRAGONSHRINE_CLAIR
 	waitsfx
-	spriteface PLAYER, DOWN
+	turnobject PLAYER, DOWN
 	pause 30
 	applymovement DRAGONSHRINE_CLAIR, MovementData_0x18d2d4
-	spriteface DRAGONSHRINE_CLAIR, RIGHT
-	spriteface PLAYER, LEFT
-	spriteface DRAGONSHRINE_ELDER1, LEFT
-	opentext
-	writetext UnknownText_0x18d916
-	waitbutton
-	closetext
+	turnobject DRAGONSHRINE_CLAIR, RIGHT
+	turnobject PLAYER, LEFT
+	turnobject DRAGONSHRINE_ELDER1, LEFT
+	showtext UnknownText_0x18d916
 	special Special_FadeOutMusic
 	applymovement DRAGONSHRINE_CLAIR, MovementData_0x18d2da
-	opentext
-	writetext UnknownText_0x18d974
-	waitbutton
-	closetext
+	showtext UnknownText_0x18d974
 	applymovement DRAGONSHRINE_CLAIR, MovementData_0x18d2dd
-	opentext
-	writetext UnknownText_0x18d983
-	waitbutton
-	closetext
+	showtext UnknownText_0x18d983
 	applymovement DRAGONSHRINE_ELDER1, MovementData_0x18d2c9
-	spriteface DRAGONSHRINE_CLAIR, UP
-	opentext
-	writetext UnknownText_0x18d520
-	waitbutton
-	closetext
+	turnobject DRAGONSHRINE_CLAIR, UP
+	showtext UnknownText_0x18d520
 	showemote EMOTE_SHOCK, DRAGONSHRINE_CLAIR, 15
-	opentext
-	writetext UnknownText_0x18d9ae
-	waitbutton
-	closetext
+	showtext UnknownText_0x18d9ae
 	applymovement DRAGONSHRINE_CLAIR, MovementData_0x18d2e0
 	opentext
 	writetext UnknownText_0x18d9bf
@@ -174,53 +150,44 @@ DragonShrineTestScript:
 	waitsfx
 	special RestartMapMusic
 	specialphonecall SPECIALCALL_MASTERBALL
-	dotrigger $1
-	domaptrigger DRAGONS_DEN_B1F, $1
+	setscene $1
+	setmapscene DRAGONS_DEN_B1F, $1
 	writetext UnknownText_0x18d9f2
 	buttonsound
 	writetext UnknownText_0x18da0b
 	waitbutton
 	closetext
 	applymovement DRAGONSHRINE_ELDER1, MovementData_0x18d2ce
-	spriteface DRAGONSHRINE_CLAIR, UP
+	turnobject DRAGONSHRINE_CLAIR, UP
 	applymovement DRAGONSHRINE_ELDER1, MovementData_0x18d2d1
-	spriteface PLAYER, UP
-	opentext
-	writetext UnknownText_0x18d5a3
-	waitbutton
-	closetext
-	opentext
-	writetext UnknownText_0x18dab4
-	waitbutton
-	closetext
+	turnobject PLAYER, UP
+	showtext UnknownText_0x18d5a3
+	showtext UnknownText_0x18dab4
 	applymovement DRAGONSHRINE_CLAIR, MovementData_0x18d2e3
 	playsound SFX_ENTER_DOOR
 	disappear DRAGONSHRINE_CLAIR
 	waitsfx
-	setevent EVENT_GAVE_KURT_APRICORNS
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
 	end
 
 ElderScript_0x18d1a5:
-	faceplayer
-	opentext
-	checkevent EVENT_GAVE_KURT_APRICORNS
-	iftrue .DontGiveDratiniYet
-	checkevent EVENT_JUST_RECEIVED_DRATINI
-	iftrue .ReceivedDratini
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_1
+	iftrue_jumptextfaceplayer UnknownText_0x18d5e5
+	checkevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_7
+	iftrue_jumptextfaceplayer UnknownText_0x18d6ca
 	checkevent EVENT_GOT_DRATINI
 	iffalse .GiveDratini
 	checkevent EVENT_BEAT_RIVAL_IN_MT_MOON
-	iftrue .BeatRivalInMtMoon
-	writetext UnknownText_0x18d724
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer UnknownText_0x18d782
+	jumptextfaceplayer UnknownText_0x18d724
 
 .GiveDratini:
+	faceplayer
+	opentext
 	writetext UnknownText_0x18d604
 	waitbutton
 	checkcode VAR_PARTYCOUNT
-	if_equal 6, .PartyFull
+	ifequal 6, .PartyFull
 	writetext UnknownText_0x18d697
 	playsound SFX_CAUGHT_MON
 	waitsfx
@@ -232,52 +199,11 @@ ElderScript_0x18d1a5:
 	special TeachDratiniExtremeSpeed
 .NoExtremeSpeed
 	setevent EVENT_GOT_DRATINI
-	setevent EVENT_JUST_RECEIVED_DRATINI
-	writetext UnknownText_0x18d6ca
-	waitbutton
-	closetext
-	end
+	setevent EVENT_TEMPORARY_UNTIL_MAP_RELOAD_7
+	jumpopenedtext UnknownText_0x18d6ca
 
 .PartyFull:
-	writetext UnknownText_0x18d6ac
-	waitbutton
-	closetext
-	end
-
-.BeatRivalInMtMoon:
-	writetext UnknownText_0x18d782
-	waitbutton
-	closetext
-	end
-
-.DontGiveDratiniYet:
-	writetext UnknownText_0x18d5e5
-	waitbutton
-	closetext
-	end
-
-.ReceivedDratini:
-	writetext UnknownText_0x18d6ca
-	waitbutton
-	closetext
-	end
-
-ElderScript_0x18d205:
-	faceplayer
-	opentext
-	writetext UnknownText_0x18d840
-	waitbutton
-	closetext
-	end
-
-ElderScript_0x18d20d:
-	faceplayer
-	opentext
-	writetext UnknownText_0x18d8b1
-	waitbutton
-	closetext
-	end
-
+	jumpopenedtext UnknownText_0x18d6ac
 
 MenuDataHeader_0x18d215:
 	db $40 ; flags
@@ -293,7 +219,6 @@ MenuData2_0x18d21d:
 	db "Underling@"
 	db "Friend@"
 
-
 MenuDataHeader_0x18d234:
 	db $40 ; flags
 	db 04, 09 ; start coords
@@ -307,7 +232,6 @@ MenuData2_0x18d23c:
 	db "Strategy@"
 	db "Training@"
 	db "Cheating@"
-
 
 MenuDataHeader_0x18d258:
 	db $40 ; flags
@@ -323,7 +247,6 @@ MenuData2_0x18d260:
 	db "Tough person@"
 	db "Anybody@"
 
-
 MenuDataHeader_0x18d283:
 	db $40 ; flags
 	db 04, 08 ; start coords
@@ -337,7 +260,6 @@ MenuData2_0x18d28b:
 	db "Love@"
 	db "Violence@"
 	db "Knowledge@"
-
 
 MenuDataHeader_0x18d2a5:
 	db $40 ; flags
@@ -353,7 +275,6 @@ MenuData2_0x18d2ad:
 	db "Weak@"
 	db "Both@"
 
-
 MovementData_0x18d2bf:
 	slow_step_up
 	slow_step_up
@@ -362,10 +283,6 @@ MovementData_0x18d2bf:
 	slow_step_up
 	slow_step_up
 	slow_step_up
-	step_end
-
-MovementData_0x18d2c7:
-	slow_step_down
 	step_end
 
 MovementData_0x18d2c9:
@@ -395,7 +312,7 @@ MovementData_0x18d2d4:
 
 MovementData_0x18d2da:
 	fix_facing
-	big_step_left
+	run_step_left
 	step_end
 
 MovementData_0x18d2dd:

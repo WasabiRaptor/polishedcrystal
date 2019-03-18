@@ -1,25 +1,22 @@
 SeagallopFerryNavelGate_MapScriptHeader:
+	db 2 ; scene scripts
+	scene_script SeagallopFerryNavelGateTrigger0
+	scene_script SeagallopFerryNavelGateTrigger1
 
-.MapTriggers: db 2
-	dw SeagallopFerryNavelGateTrigger0
-	dw SeagallopFerryNavelGateTrigger1
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, SeagallopFerryNavelGateVisited
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, SeagallopFerryNavelGateVisited
+	db 1 ; warp events
+	warp_event  6,  0, NAVEL_ROCK_OUTSIDE, 1
 
-SeagallopFerryNavelGate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $0, $6, 1, NAVEL_ROCK_OUTSIDE
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  6,  4, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SeagallopFerryNavelGateSailorScript, EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_SAILOR, 4, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SeagallopFerryNavelGateSailorScript, EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
-
-const_value set 2
+	const_def 1 ; object constants
 	const SEAGALLOPFERRYNAVELGATE_SAILOR
 
 SeagallopFerryNavelGateTrigger1:
@@ -34,12 +31,9 @@ SeagallopFerryNavelGateVisited:
 SeagallopFerryNavelGate_PlayerArrives:
 	applymovement SEAGALLOPFERRYNAVELGATE_SAILOR, SeagallopFerryNavelGateSailorArrive1MovementData
 	applymovement PLAYER, SeagallopFerryNavelGatePlayerArriveMovementData
-	opentext
-	writetext SeagallopFerryNavelRockRefusedText
-	waitbutton
-	closetext
+	showtext SeagallopFerryNavelRockRefusedText
 	applymovement SEAGALLOPFERRYNAVELGATE_SAILOR, SeagallopFerryNavelGateSailorArrive2MovementData
-	dotrigger $0
+	setscene $0
 	end
 
 SeagallopFerryNavelGateSailorScript:
@@ -51,9 +45,9 @@ SeagallopFerryNavelGateSailorScript:
 	writetext SeagallopFerryNavelToVermilionText
 	waitbutton
 	closetext
-	spriteface SEAGALLOPFERRYNAVELGATE_SAILOR, DOWN
+	turnobject SEAGALLOPFERRYNAVELGATE_SAILOR, DOWN
 	pause 10
-	applymovement SEAGALLOPFERRYNAVELGATE_SAILOR, SeagallopFerryNavelGateSailorDepartMovementData
+	applyonemovement SEAGALLOPFERRYNAVELGATE_SAILOR, step_down
 	playsound SFX_EXIT_BUILDING
 	disappear SEAGALLOPFERRYNAVELGATE_SAILOR
 	waitsfx
@@ -62,19 +56,12 @@ SeagallopFerryNavelGateSailorScript:
 	special FadeOutPalettes
 	waitsfx
 	appear SEAGALLOPFERRYNAVELGATE_SAILOR
-	domaptrigger SEAGALLOP_FERRY_VERMILION_GATE, $1
-	warp SEAGALLOP_FERRY_VERMILION_GATE, $6, $5
+	setmapscene SEAGALLOP_FERRY_VERMILION_GATE, $1
+	warp SEAGALLOP_FERRY_VERMILION_GATE, 6, 5
 	end
 
 .RefuseFerry
-	writetext SeagallopFerryNavelRockRefusedText
-	waitbutton
-	closetext
-	end
-
-SeagallopFerryNavelGateSailorDepartMovementData:
-	step_down
-	step_end
+	jumpopenedtext SeagallopFerryNavelRockRefusedText
 
 SeagallopFerryNavelGatePlayerDepartMovementData:
 	step_down

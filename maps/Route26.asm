@@ -1,56 +1,53 @@
 Route26_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_SPRITES, Route26DragonTamerSprite
+	db 3 ; warp events
+	warp_event  7,  5, POKEMON_LEAGUE_GATE, 3
+	warp_event 15, 57, ROUTE_26_HEAL_SPEECH_HOUSE, 1
+	warp_event  5, 71, ROUTE_26_DAY_OF_WEEK_SIBLINGS_HOUSE, 1
 
-Route26_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $5, $7, 3, POKEMON_LEAGUE_GATE
-	warp_def $39, $f, 1, ROUTE_26_HEAL_SPEECH_HOUSE
-	warp_def $47, $5, 1, ROUTE_26_DAY_OF_WEEK_SIBLINGS_HOUSE
+	db 1 ; bg events
+	bg_event  8,  6, SIGNPOST_JUMPTEXT, Route26SignText
 
-.XYTriggers: db 0
+	db 11 ; object events
+	object_event  9, 38, SPRITE_DRAGON_TAMER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerDragonTamerKazu, -1
+	object_event 14, 24, SPRITE_ACE_TRAINER_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 2, TrainerCooltrainermGaven1, -1
+	object_event 10, 56, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerCooltrainerfJoyce, -1
+	object_event  5,  8, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
+	object_event 13, 79, SPRITE_PSYCHIC, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerPsychicRichard, -1
+	object_event  2, 82, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBattleGirlRonda, -1
+	object_event  6, 100, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerFisherScott, -1
+	object_event 10, 92, SPRITE_DRAGON_TAMER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerDragonTamerErick, -1
+	fruittree_event 14, 54, FRUITTREE_ROUTE_26, SITRUS_BERRY
+	itemball_event  9, 15, MAX_ELIXIR, 1, EVENT_ROUTE_26_MAX_ELIXIR
+	tmhmball_event 13, 34, TM_DRAGON_CLAW, EVENT_ROUTE_26_TM_DRAGON_CLAW
 
-.Signposts: db 1
-	signpost 6, 8, SIGNPOST_READ, Route26Sign
+GenericTrainerDragonTamerKazu:
+	generictrainer DRAGON_TAMER, KAZU, EVENT_BEAT_DRAGON_TAMER_KAZU, DragonTamerKazuSeenText, DragonTamerKazuBeatenText
 
-.PersonEvents: db 11
-	person_event SPRITE_GUIDE_GENT, 38, 9, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 3, TrainerDragonTamerKazu, -1
-	person_event SPRITE_COOLTRAINER_M, 24, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerCooltrainermGaven1, -1
-	person_event SPRITE_COOLTRAINER_F, 56, 10, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerCooltrainerfJoyce, -1
-	person_event SPRITE_COOLTRAINER_F, 8, 5, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 4, TrainerCooltrainerfBeth1, -1
-	person_event SPRITE_YOUNGSTER, 79, 13, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 2, TrainerPsychicRichard, -1
-	person_event SPRITE_COOLTRAINER_F, 82, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerBattleGirlRonda, -1
-	person_event SPRITE_FISHER, 100, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 1, TrainerFisherScott, -1
-	person_event SPRITE_GUIDE_GENT, 92, 10, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 3, TrainerDragonTamerErick, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 54, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FruitTreeScript_0x1a4ec2, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MAX_ELIXER, 1, EVENT_ROUTE_26_MAX_ELIXER
-	person_event SPRITE_BALL_CUT_FRUIT, 34, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TMHMBALL, 0, TM_DRAGON_PULSE, EVENT_ROUTE_26_TM_DRAGON_PULSE
+	text "It's going to be"
+	line "tough to win at"
+	cont "the League."
 
-Route26DragonTamerSprite:
-	variablesprite SPRITE_GUIDE_GENT, SPRITE_DRAGON_TAMER
-	return
+	para "I need to do some"
+	line "more training."
 
-TrainerDragonTamerKazu:
-	trainer EVENT_BEAT_DRAGON_TAMER_KAZU, DRAGON_TAMER, KAZU, DragonTamerKazuSeenText, DragonTamerKazuBeatenText, 0, DragonTamerKazuScript
+	para "I hear that the"
+	line "League's Elite"
 
-DragonTamerKazuScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1a4f08
-	waitbutton
-	closetext
-	end
+	para "Four are tougher"
+	line "than Gym Leaders."
+	done
 
 TrainerCooltrainermGaven1:
-	trainer EVENT_BEAT_COOLTRAINERM_GAVEN, COOLTRAINERM, GAVEN1, CooltrainermGaven1SeenText, CooltrainermGaven1BeatenText, 0, CooltrainermGaven1Script
+	trainer COOLTRAINERM, GAVEN1, EVENT_BEAT_COOLTRAINERM_GAVEN, CooltrainermGaven1SeenText, CooltrainermGaven1BeatenText, 0, CooltrainermGaven1Script
 
 CooltrainermGaven1Script:
 	writecode VAR_CALLERID, PHONE_COOLTRAINERM_GAVEN
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_GAVEN
 	iftrue UnknownScript_0x1a4d79
@@ -68,8 +65,8 @@ UnknownScript_0x1a4d62:
 	scall UnknownScript_0x1a4dc3
 UnknownScript_0x1a4d65:
 	askforphonenumber PHONE_COOLTRAINERM_GAVEN
-	if_equal $1, UnknownScript_0x1a4dd3
-	if_equal $2, UnknownScript_0x1a4dcf
+	ifequal $1, UnknownScript_0x1a4dd3
+	ifequal $2, UnknownScript_0x1a4dcf
 	trainertotext COOLTRAINERM, GAVEN1, $0
 	scall UnknownScript_0x1a4dc7
 	jump UnknownScript_0x1a4dcb
@@ -78,9 +75,9 @@ UnknownScript_0x1a4d79:
 	scall UnknownScript_0x1a4dd7
 	winlosstext CooltrainermGaven1BeatenText, 0
 	copybytetovar wGavenFightCount
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight2:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight2
@@ -112,49 +109,43 @@ UnknownScript_0x1a4d79:
 
 UnknownScript_0x1a4dbf:
 	jumpstd asknumber1m
-	end
 
 UnknownScript_0x1a4dc3:
 	jumpstd asknumber2m
-	end
 
 UnknownScript_0x1a4dc7:
 	jumpstd registerednumberm
-	end
 
 UnknownScript_0x1a4dcb:
 	jumpstd numberacceptedm
-	end
 
 UnknownScript_0x1a4dcf:
 	jumpstd numberdeclinedm
-	end
 
 UnknownScript_0x1a4dd3:
 	jumpstd phonefullm
-	end
 
 UnknownScript_0x1a4dd7:
 	jumpstd rematchm
-	end
 
-TrainerCooltrainerfJoyce:
-	trainer EVENT_BEAT_COOLTRAINERF_JOYCE, COOLTRAINERF, JOYCE, CooltrainerfJoyceSeenText, CooltrainerfJoyceBeatenText, 0, CooltrainerfJoyceScript
+GenericTrainerCooltrainerfJoyce:
+	generictrainer COOLTRAINERF, JOYCE, EVENT_BEAT_COOLTRAINERF_JOYCE, CooltrainerfJoyceSeenText, CooltrainerfJoyceBeatenText
 
-CooltrainerfJoyceScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1a50d7
-	waitbutton
-	closetext
-	end
+	text "I've defeated"
+	line "eight Gym Leaders,"
+
+	para "so I was feeling"
+	line "confident."
+
+	para "I'll have to try"
+	line "harder next time."
+	done
 
 TrainerCooltrainerfBeth1:
-	trainer EVENT_BEAT_COOLTRAINERF_BETH, COOLTRAINERF, BETH1, CooltrainerfBeth1SeenText, CooltrainerfBeth1BeatenText, 0, CooltrainerfBeth1Script
+	trainer COOLTRAINERF, BETH1, EVENT_BEAT_COOLTRAINERF_BETH, CooltrainerfBeth1SeenText, CooltrainerfBeth1BeatenText, 0, CooltrainerfBeth1Script
 
 CooltrainerfBeth1Script:
 	writecode VAR_CALLERID, PHONE_COOLTRAINERF_BETH
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_BETH
 	iftrue UnknownScript_0x1a4e35
@@ -172,8 +163,8 @@ UnknownScript_0x1a4e1e:
 	scall UnknownScript_0x1a4e7f
 UnknownScript_0x1a4e21:
 	askforphonenumber PHONE_COOLTRAINERF_BETH
-	if_equal $1, UnknownScript_0x1a4e8f
-	if_equal $2, UnknownScript_0x1a4e8b
+	ifequal $1, UnknownScript_0x1a4e8f
+	ifequal $2, UnknownScript_0x1a4e8b
 	trainertotext COOLTRAINERF, BETH1, $0
 	scall UnknownScript_0x1a4e83
 	jump UnknownScript_0x1a4e87
@@ -182,9 +173,9 @@ UnknownScript_0x1a4e35:
 	scall UnknownScript_0x1a4e93
 	winlosstext CooltrainerfBeth1BeatenText, 0
 	copybytetovar wBethFightCount
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight2:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight2
@@ -216,81 +207,69 @@ UnknownScript_0x1a4e35:
 
 UnknownScript_0x1a4e7b:
 	jumpstd asknumber1f
-	end
 
 UnknownScript_0x1a4e7f:
 	jumpstd asknumber2f
-	end
 
 UnknownScript_0x1a4e83:
 	jumpstd registerednumberf
-	end
 
 UnknownScript_0x1a4e87:
 	jumpstd numberacceptedf
-	end
 
 UnknownScript_0x1a4e8b:
 	jumpstd numberdeclinedf
-	end
 
 UnknownScript_0x1a4e8f:
 	jumpstd phonefullf
-	end
 
 UnknownScript_0x1a4e93:
 	jumpstd rematchf
-	end
 
-TrainerPsychicRichard:
-	trainer EVENT_BEAT_PSYCHIC_RICHARD, PSYCHIC_T, RICHARD, PsychicRichardSeenText, PsychicRichardBeatenText, 0, PsychicRichardScript
+GenericTrainerPsychicRichard:
+	generictrainer PSYCHIC_T, RICHARD, EVENT_BEAT_PSYCHIC_RICHARD, PsychicRichardSeenText, PsychicRichardBeatenText
 
-PsychicRichardScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1a5278
-	waitbutton
-	closetext
-	end
+	text "People and #mon"
+	line "grow from their"
+	cont "experiences."
 
-TrainerBattleGirlRonda:
-	trainer EVENT_BEAT_BATTLE_GIRL_RONDA, BATTLE_GIRL, RONDA, BattleGirlRondaSeenText, BattleGirlRondaBeatenText, 0, BattleGirlRondaScript
+	para "Don't get lazy and"
+	line "complacent."
+	done
 
-BattleGirlRondaScript:
-	end_if_just_battled
-	opentext
-	writetext BattleGirlRondaAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerBattleGirlRonda:
+	generictrainer BATTLE_GIRL, RONDA, EVENT_BEAT_BATTLE_GIRL_RONDA, BattleGirlRondaSeenText, BattleGirlRondaBeatenText
 
-TrainerFisherScott:
-	trainer EVENT_BEAT_FISHER_SCOTT, FISHER, SCOTT, FisherScottSeenText, FisherScottBeatenText, 0, FisherScottScript
+	text "You see some of"
+	line "the world's str-"
 
-FisherScottScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1a5326
-	waitbutton
-	closetext
-	end
+	para "ongest trainers"
+	line "come through here."
 
-TrainerDragonTamerErick:
-	trainer EVENT_BEAT_DRAGON_TAMER_ERICK, DRAGON_TAMER, ERICK, DragonTamerErickSeenText, DragonTamerErickBeatenText, 0, DragonTamerErickScript
+	para "And I get to fight"
+	line "them all!"
+	done
 
-DragonTamerErickScript:
-	end_if_just_battled
-	opentext
-	writetext DragonTamerErickAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerFisherScott:
+	generictrainer FISHER, SCOTT, EVENT_BEAT_FISHER_SCOTT, FisherScottSeenText, FisherScottBeatenText
 
-Route26Sign:
-	jumptext Route26SignText
+	text "Just like in fish-"
+	line "ing, it's all over"
 
-FruitTreeScript_0x1a4ec2:
-	fruittree FRUITTREE_ROUTE_26
+	para "in #mon if you"
+	line "give up."
+	done
+
+GenericTrainerDragonTamerErick:
+	generictrainer DRAGON_TAMER, ERICK, EVENT_BEAT_DRAGON_TAMER_ERICK, DragonTamerErickSeenText, DragonTamerErickBeatenText
+
+	text "Victory Road is"
+	line "harsh."
+
+	para "Every trainer must"
+	line "forge their own"
+	cont "way through it."
+	done
 
 DragonTamerKazuSeenText:
 	text "I'm making my"
@@ -302,21 +281,6 @@ DragonTamerKazuSeenText:
 
 DragonTamerKazuBeatenText:
 	text "I blew it!"
-	done
-
-UnknownText_0x1a4f08:
-	text "It's going to be"
-	line "tough to win at"
-	cont "the League."
-
-	para "I need to do some"
-	line "more training."
-
-	para "I hear that the"
-	line "League's Elite"
-
-	para "Four are tougher"
-	line "than Gym Leaders."
 	done
 
 CooltrainermGaven1SeenText:
@@ -358,17 +322,6 @@ CooltrainerfJoyceSeenText:
 CooltrainerfJoyceBeatenText:
 	text "No! I don't"
 	line "believe this!"
-	done
-
-UnknownText_0x1a50d7:
-	text "I've defeated"
-	line "eight Gym Leaders,"
-
-	para "so I was feeling"
-	line "confident."
-
-	para "I'll have to try"
-	line "harder next time."
 	done
 
 CooltrainerfBeth1SeenText:
@@ -413,15 +366,6 @@ PsychicRichardBeatenText:
 	text "Good battle!"
 	done
 
-UnknownText_0x1a5278:
-	text "People and #mon"
-	line "grow from their"
-	cont "experiences."
-
-	para "Don't get lazy and"
-	line "complacent."
-	done
-
 BattleGirlRondaSeenText:
 	text "Stop! I challenge"
 	line "you to a duel!"
@@ -429,17 +373,6 @@ BattleGirlRondaSeenText:
 
 BattleGirlRondaBeatenText:
 	text "Victory is yours!"
-	done
-
-BattleGirlRondaAfterText:
-	text "You see some of"
-	line "the world's str-"
-
-	para "ongest trainers"
-	line "come through here."
-
-	para "And I get to fight"
-	line "them all!"
 	done
 
 FisherScottSeenText:
@@ -456,14 +389,6 @@ FisherScottBeatenText:
 	line "battle!"
 	done
 
-UnknownText_0x1a5326:
-	text "Just like in fish-"
-	line "ing, it's all over"
-
-	para "in #mon if you"
-	line "give up."
-	done
-
 DragonTamerErickSeenText:
 	text "Here be dragons!"
 	done
@@ -471,15 +396,6 @@ DragonTamerErickSeenText:
 DragonTamerErickBeatenText:
 	text "My dragons were"
 	line "conquered…"
-	done
-
-DragonTamerErickAfterText:
-	text "Victory Road is"
-	line "harsh."
-
-	para "Every trainer must"
-	line "forge their own"
-	cont "way through it."
 	done
 
 Route26SignText:

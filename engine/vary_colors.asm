@@ -18,25 +18,25 @@ CopyDVsToColorVaryDVs:
 	ld a, $5
 	ld [rSVBK], a
 
-	ld hl, ColorVaryDVs
-; ColorVaryDVs = HPAtkDV
+	ld hl, wColorVaryDVs
+; wColorVaryDVs = HPAtkDV
 	ld a, e
 	ld [hli], a
-; ColorVaryDVs+1 = DefSpdDV
+; wColorVaryDVs+1 = DefSpdDV
 	ld a, d
 	ld [hli], a
 	inc hl
 	inc hl
-; ColorVaryShiny = Shiny
+; wColorVaryShiny = Shiny
 	ld a, b
 	ld [hld], a
 	ld a, c
 	ld d, a
 	pop bc
-; ColorVarySpecies = Species
+; wColorVarySpecies = Species
 	ld a, b
 	ld [hld], a
-; ColorVaryDVs+2 = SatSdfDV
+; wColorVaryDVs+2 = SatSdfDV
 	ld a, c
 	ld [hl], a
 
@@ -46,7 +46,7 @@ CopyDVsToColorVaryDVs:
 
 GetColorChannelVariedByDV:
 ; d = color, e = DV
-; a <- d + (e & %11) - (e & %1100 >> 2), clamped to [0, 31]
+; a <- d + (e & %11) - (e & %1100 >> 2), ±5 if not in [0, 31]
 	ld a, e
 	cp %0010 ; override a +2
 	jr z, .plus4
@@ -58,15 +58,15 @@ GetColorChannelVariedByDV:
 	srl e
 	sub e
 .floor
-	jr c, .zero
+	jr c, .up
 .ceil
 	cp 32
 	ret c
-	ld a, 31
+	sub 5
 	ret
 
-.zero
-	xor a
+.up
+	add 5
 	ret
 
 .plus4
@@ -167,15 +167,19 @@ VaryColorsByDVs::
 ; [hl+2] = GGGR:RRRR
 ; [hl+3] = 0BBB:BBGG
 
-; DVs in ColorVaryDVs
+; DVs in wColorVaryDVs
 ; [bc+0] = hhhh:aaaa
 ; [bc+1] = dddd:ssss
 ; [bc+2] = pppp:qqqq
 
-; [ColorVarySpecies] = species
-; [ColorVaryShiny] = shiny
+; [wColorVarySpecies] = species
+; [wColorVaryShiny] = shiny
 
-	ld a, [InitialOptions]
+if DEF(MONOCHROME) || DEF(NOIR)
+	ret
+endc
+
+	ld a, [wInitialOptions]
 	bit COLOR_VARY_OPT, a
 	ret z
 
@@ -184,9 +188,9 @@ VaryColorsByDVs::
 	ld a, $5
 	ld [rSVBK], a
 
-	ld bc, ColorVaryDVs
+	ld bc, wColorVaryDVs
 
-	ld a, [ColorVarySpecies]
+	ld a, [wColorVarySpecies]
 	cp SMEARGLE
 	jr z, .Smeargle
 
@@ -277,7 +281,7 @@ VaryColorsByDVs::
 	ld d, 0
 	push hl
 	ld hl, .SmearglePals
-	ld a, [ColorVaryShiny]
+	ld a, [wColorVaryShiny]
 	and SHINY_MASK
 	jr z, .not_shiny
 	ld hl, .SmeargleShinyPals
@@ -290,9 +294,9 @@ VaryColorsByDVs::
 	ld e, a
 	pop hl
 ;;; DarkRGB = base paint color
-rept 3
 	inc hl
-endr
+	inc hl
+	inc hl
 	ld a, e
 	ld [hld], a
 	ld a, d
@@ -380,17 +384,17 @@ else
 endc
 
 VaryBGPal0ByTempMonDVs:
-	ld hl, TempMonDVs
-	ld a, [TempMonSpecies]
+	ld hl, wTempMonDVs
+	ld a, [wTempMonSpecies]
 	ld b, a
 	call CopyDVsToColorVaryDVs
-	ld hl, UnknBGPals + 2
+	ld hl, wUnknBGPals palette 0 + 2
 	jp VaryColorsByDVs
 
 VaryBGPal1ByTempMonDVs:
-	ld hl, TempMonDVs
-	ld a, [TempMonSpecies]
+	ld hl, wTempMonDVs
+	ld a, [wTempMonSpecies]
 	ld b, a
 	call CopyDVsToColorVaryDVs
-	ld hl, UnknBGPals + 1 palettes + 2
+	ld hl, wUnknBGPals palette 1 + 2
 	jp VaryColorsByDVs

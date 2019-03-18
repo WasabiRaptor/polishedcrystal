@@ -1,37 +1,25 @@
 CeruleanCave2F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event 11,  3, CERULEAN_CAVE_1F, 2
+	warp_event 31,  3, CERULEAN_CAVE_1F, 3
+	warp_event  3,  5, CERULEAN_CAVE_1F, 4
+	warp_event 24,  8, CERULEAN_CAVE_1F, 6
+	warp_event 21,  9, CERULEAN_CAVE_1F, 7
+	warp_event  5, 13, CERULEAN_CAVE_1F, 8
 
-CeruleanCave2F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $3, $b, 2, CERULEAN_CAVE_1F
-	warp_def $3, $1f, 3, CERULEAN_CAVE_1F
-	warp_def $5, $3, 4, CERULEAN_CAVE_1F
-	warp_def $8, $18, 6, CERULEAN_CAVE_1F
-	warp_def $9, $15, 7, CERULEAN_CAVE_1F
-	warp_def $d, $5, 8, CERULEAN_CAVE_1F
+	db 3 ; bg events
+	bg_event 17, 19, SIGNPOST_ITEM + PROTEIN, EVENT_CERULEAN_CAVE_2F_HIDDEN_PROTEIN
+	bg_event 16,  4, SIGNPOST_ITEM + NUGGET, EVENT_CERULEAN_CAVE_2F_HIDDEN_NUGGET
+	bg_event 13, 17, SIGNPOST_ITEM + HYPER_POTION, EVENT_CERULEAN_CAVE_2F_HIDDEN_HYPER_POTION
 
-.XYTriggers: db 0
-
-.Signposts: db 3
-	signpost 19, 17, SIGNPOST_ITEM, CeruleanCave2FHiddenProtein
-	signpost 4, 16, SIGNPOST_ITEM, CeruleanCave2FHiddenNugget
-	signpost 17, 13, SIGNPOST_ITEM, CeruleanCave2FHiddenHyperPotion
-
-.PersonEvents: db 4
-	person_event SPRITE_BALL_CUT_FRUIT, 11, 31, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, FULL_RESTORE, 1, EVENT_CERULEAN_CAVE_2F_FULL_RESTORE
-	person_event SPRITE_BALL_CUT_FRUIT, 17, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, PP_UP, 1, EVENT_CERULEAN_CAVE_2F_PP_UP
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 27, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ULTRA_BALL, 1, EVENT_CERULEAN_CAVE_2F_ULTRA_BALL
-	person_event SPRITE_BALL_CUT_FRUIT, 7, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, DUSK_STONE, 1, EVENT_CERULEAN_CAVE_2F_DUSK_STONE
-
-CeruleanCave2FHiddenProtein:
-	dwb EVENT_CERULEAN_CAVE_2F_HIDDEN_PROTEIN, PROTEIN
-
-CeruleanCave2FHiddenNugget:
-	dwb EVENT_CERULEAN_CAVE_2F_HIDDEN_NUGGET, NUGGET
-
-CeruleanCave2FHiddenHyperPotion:
-	dwb EVENT_CERULEAN_CAVE_2F_HIDDEN_HYPER_POTION, HYPER_POTION
+	db 4 ; object events
+	itemball_event 31, 11, FULL_RESTORE, 1, EVENT_CERULEAN_CAVE_2F_FULL_RESTORE
+	itemball_event  7, 17, PP_UP, 1, EVENT_CERULEAN_CAVE_2F_PP_UP
+	itemball_event 27, 15, ULTRA_BALL, 1, EVENT_CERULEAN_CAVE_2F_ULTRA_BALL
+	itemball_event  2,  7, DUSK_STONE, 1, EVENT_CERULEAN_CAVE_2F_DUSK_STONE

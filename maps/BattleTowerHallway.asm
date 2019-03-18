@@ -1,33 +1,30 @@
-const_value set 2
+	const_def 1 ; object constants
 	const BATTLETOWERHALLWAY_RECEPTIONIST
 
 BattleTowerHallway_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script BattleTowerHallwayTrigger0
 
-.MapTriggers: db 1
-	dw BattleTowerHallwayTrigger0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event 11,  1, BATTLE_TOWER_ELEVATOR, 1
+	warp_event  5,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event  7,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event  9,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event 13,  0, BATTLE_TOWER_BATTLE_ROOM, 1
+	warp_event 15,  0, BATTLE_TOWER_BATTLE_ROOM, 1
 
-BattleTowerHallway_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $1, $b, 1, BATTLE_TOWER_ELEVATOR
-	warp_def $0, $5, 1, BATTLE_TOWER_BATTLE_ROOM
-	warp_def $0, $7, 1, BATTLE_TOWER_BATTLE_ROOM
-	warp_def $0, $9, 1, BATTLE_TOWER_BATTLE_ROOM
-	warp_def $0, $d, 1, BATTLE_TOWER_BATTLE_ROOM
-	warp_def $0, $f, 1, BATTLE_TOWER_BATTLE_ROOM
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_RECEPTIONIST, 2, 11, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
+	db 1 ; object events
+	object_event 11,  2, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
 
 BattleTowerHallwayTrigger0:
 	priorityjump .ChooseBattleRoom
-	dotrigger $1
+	setscene $1
 	end
 
 .ChooseBattleRoom:
@@ -42,7 +39,7 @@ BattleTowerHallwayTrigger0:
 	ld a, BANK(wBTChoiceOfLvlGroup)
 	ld [rSVBK], a
 	ld a, [wBTChoiceOfLvlGroup]
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 
 	pop af
 	ld [rSVBK], a
@@ -52,14 +49,14 @@ BattleTowerHallwayTrigger0:
 ; at least it should look like that
 ; because all warps lead to the same room
 .WalkToChosenBattleRoom: ; 0x9f5dc
-	if_equal 3, .L30L40
-	if_equal 4, .L30L40
-	if_equal 5, .L50L60
-	if_equal 6, .L50L60
-	if_equal 7, .L70L80
-	if_equal 8, .L70L80
-	if_equal 9, .L90L100
-	if_equal 10, .L90L100
+	ifequal 3, .L30L40
+	ifequal 4, .L30L40
+	ifequal 5, .L50L60
+	ifequal 6, .L50L60
+	ifequal 7, .L70L80
+	ifequal 8, .L70L80
+	ifequal 9, .L90L100
+	ifequal 10, .L90L100
 	applymovement BATTLETOWERHALLWAY_RECEPTIONIST, MovementData_BattleTowerHallwayWalkTo1020Room
 	jump .EnterBattleRoom
 
@@ -80,13 +77,10 @@ BattleTowerHallwayTrigger0:
 	jump .EnterBattleRoom
 
 .EnterBattleRoom: ; 0x9f61f
-	faceperson PLAYER, BATTLETOWERHALLWAY_RECEPTIONIST
-	opentext
-	writetext Text_PleaseStepThisWay
-	waitbutton
-	closetext
+	faceobject PLAYER, BATTLETOWERHALLWAY_RECEPTIONIST
+	showtext Text_PleaseStepThisWay
 	stopfollow
-	applymovement PLAYER, MovementData_BattleTowerHallwayPlayerEntersBattleRoom
+	applyonemovement PLAYER, step_up
 	warpcheck
 	end
 
@@ -113,10 +107,6 @@ MovementData_BattleTowerHallwayWalkTo5060Room:
 	step_up
 	step_left
 	turn_head_right
-	step_end
-
-MovementData_BattleTowerHallwayPlayerEntersBattleRoom:
-	step_up
 	step_end
 
 Text_PleaseStepThisWay: ; 0x9ec26

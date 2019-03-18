@@ -1,25 +1,19 @@
 UragaChannelWest_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event 16,  9, SCARY_CAVE_1F, 2
 
-UragaChannelWest_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $9, $8, 2, SCARY_CAVE_1F
+	db 2 ; bg events
+	bg_event 17, 11, SIGNPOST_JUMPTEXT, ScaryCaveWestSignText
+	bg_event 15, 11, SIGNPOST_ITEM + BIG_PEARL, EVENT_URAGA_CHANNEL_WEST_HIDDEN_BIG_PEARL
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 11, 9, SIGNPOST_READ, ScaryCaveWestSign
-	signpost 11, 7, SIGNPOST_ITEM, UragaChannelWestHiddenBigPearl
-
-.PersonEvents: db 1
-	person_event SPRITE_ENGINEER, 9, 5, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, UragaChannelWestEngineerScript, -1
-
-UragaChannelWestEngineerScript:
-	jumptextfaceplayer UragaChannelWestEngineerText
+	db 1 ; object events
+	object_event 13,  9, SPRITE_ENGINEER, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, UragaChannelWestEngineerText, -1
 
 UragaChannelWestEngineerText:
 	text "The currents wash"
@@ -34,9 +28,6 @@ UragaChannelWestEngineerText:
 	line "would work better…"
 	done
 
-ScaryCaveWestSign:
-	jumptext ScaryCaveWestSignText
-
 ScaryCaveWestSignText:
 	text "Uraga Channel"
 	line "Ahead"
@@ -44,6 +35,3 @@ ScaryCaveWestSignText:
 	para "Enter west from"
 	line "Route 18 only!"
 	done
-
-UragaChannelWestHiddenBigPearl:
-	dwb EVENT_URAGA_CHANNEL_WEST_HIDDEN_BIG_PEARL, BIG_PEARL

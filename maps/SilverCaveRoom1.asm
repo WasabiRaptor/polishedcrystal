@@ -1,30 +1,20 @@
 SilverCaveRoom1_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  9, 33, SILVER_CAVE_OUTSIDE, 2
+	warp_event 15,  1, SILVER_CAVE_ROOM_2, 1
 
-SilverCaveRoom1_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $21, $9, 2, SILVER_CAVE_OUTSIDE
-	warp_def $1, $f, 1, SILVER_CAVE_ROOM_2
+	db 2 ; bg events
+	bg_event 16, 23, SIGNPOST_ITEM + DIRE_HIT, EVENT_SILVER_CAVE_ROOM_1_HIDDEN_DIRE_HIT
+	bg_event 17, 12, SIGNPOST_ITEM + ULTRA_BALL, EVENT_SILVER_CAVE_ROOM_1_HIDDEN_ULTRA_BALL
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 23, 16, SIGNPOST_ITEM, SilverCaveRoom1HiddenDireHit
-	signpost 12, 17, SIGNPOST_ITEM, SilverCaveRoom1HiddenUltraBall
-
-.PersonEvents: db 4
-	person_event SPRITE_BALL_CUT_FRUIT, 9, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MAX_ELIXER, 1, EVENT_SILVER_CAVE_ROOM_1_MAX_ELIXER
-	person_event SPRITE_BALL_CUT_FRUIT, 29, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, PROTEIN, 1, EVENT_SILVER_CAVE_ROOM_1_PROTEIN
-	person_event SPRITE_BALL_CUT_FRUIT, 30, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ESCAPE_ROPE, 1, EVENT_SILVER_CAVE_ROOM_1_ESCAPE_ROPE
-	person_event SPRITE_BALL_CUT_FRUIT, 18, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ULTRA_BALL, 1, EVENT_SILVER_CAVE_ROOM_1_ULTRA_BALL
-
-SilverCaveRoom1HiddenDireHit:
-	dwb EVENT_SILVER_CAVE_ROOM_1_HIDDEN_DIRE_HIT, DIRE_HIT
-
-
-SilverCaveRoom1HiddenUltraBall:
-	dwb EVENT_SILVER_CAVE_ROOM_1_HIDDEN_ULTRA_BALL, ULTRA_BALL
+	db 4 ; object events
+	itemball_event  4,  9, MAX_ELIXIR, 1, EVENT_SILVER_CAVE_ROOM_1_MAX_ELIXIR
+	itemball_event 15, 29, PROTEIN, 1, EVENT_SILVER_CAVE_ROOM_1_PROTEIN
+	itemball_event  5, 30, ESCAPE_ROPE, 1, EVENT_SILVER_CAVE_ROOM_1_ESCAPE_ROPE
+	itemball_event  7, 18, ULTRA_BALL, 1, EVENT_SILVER_CAVE_ROOM_1_ULTRA_BALL

@@ -8,8 +8,8 @@ _DummyGame: ; e1e5b (38:5e5b)
 
 .LoadGFXAndPals:
 	call DisableLCD
-	ld b, SCGB_DIPLOMA
-	call GetSGBLayout
+	ld b, CGB_DIPLOMA
+	call GetCGBLayout
 	farcall ClearSpriteAnims
 	ld hl, DummyGameGFX
 	ld de, VTiles2 tile $00
@@ -34,7 +34,7 @@ _DummyGame: ; e1e5b (38:5e5b)
 	ld [wJumptableIndex], a
 	ld a, $1
 	ld [hBGMapMode], a
-	ld a, $e3
+	ld a, %11100011
 	ld [rLCDC], a
 	ld a, $e4
 	call DmgToCgbBGPals
@@ -602,7 +602,7 @@ DummyGame_InterpretJoypad_AnimateCursor: ; e21a1 (38:61a1)
 ; e2221 (38:6221)
 
 DummyGameGFX: ; e2221
-INCBIN "gfx/misc/dummy_game.w16.2bpp.lz"
+INCBIN "gfx/dummy_game/dummy_game.w16.2bpp.lz"
 
 MissingDummyGameGFX:
 ; Graphics for an unused Game Corner

@@ -1,29 +1,26 @@
 LavRadioTower1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_OBJECTS, LavRadioTower1FUpstairsScript
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_OBJECTS, LavRadioTower1FUpstairsScript
+	db 3 ; warp events
+	warp_event  2,  7, LAVENDER_TOWN, 7
+	warp_event  3,  7, LAVENDER_TOWN, 7
+	warp_event 15,  0, LAV_RADIO_TOWER_2F, 255
 
-LavRadioTower1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $2, 7, LAVENDER_TOWN
-	warp_def $7, $3, 7, LAVENDER_TOWN
-	warp_def $0, $f, 255, LAV_RADIO_TOWER_2F
+	db 2 ; bg events
+	bg_event 11,  0, SIGNPOST_JUMPTEXT, UnknownText_0x7f2e3
+	bg_event  5,  0, SIGNPOST_JUMPTEXT, UnknownText_0x7f32d
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 0, 11, SIGNPOST_READ, MapLavRadioTower1FSignpost0Script
-	signpost 0, 5, SIGNPOST_READ, MapLavRadioTower1FSignpost1Script
-
-.PersonEvents: db 5
-	person_event SPRITE_RECEPTIONIST, 6, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x7ee63, -1
-	person_event SPRITE_OFFICER, 1, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, OfficerScript_0x7ee66, -1
-	person_event SPRITE_SUPER_NERD, 3, 1, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, SuperNerdScript_0x7ee69, -1
-	person_event SPRITE_GENTLEMAN, 1, 9, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GentlemanScript_0x7ee6c, -1
-	person_event SPRITE_SUPER_NERD, 6, 14, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SuperNerdScript_0x7eea2, -1
+	db 5 ; object events
+	object_event  6,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7eebf, -1
+	object_event 15,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7eefa, -1
+	object_event  1,  3, SPRITE_SUPER_NERD, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7ef90, -1
+	object_event  9,  1, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GentlemanScript_0x7ee6c, -1
+	object_event 14,  6, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SuperNerdScript_0x7eea2, -1
 
 LavRadioTower1FUpstairsScript:
 	checkevent EVENT_EXORCISED_LAV_RADIO_TOWER
@@ -35,70 +32,58 @@ LavRadioTower1FUpstairsScript:
 	warpmod 1, LAV_RADIO_TOWER_2F
 	return
 
-ReceptionistScript_0x7ee63:
-	jumptextfaceplayer UnknownText_0x7eebf
-
-OfficerScript_0x7ee66:
-	jumptextfaceplayer UnknownText_0x7eefa
-
-SuperNerdScript_0x7ee69:
-	jumptextfaceplayer UnknownText_0x7ef90
-
 GentlemanScript_0x7ee6c:
 	faceplayer
 	opentext
 	checkflag ENGINE_EXPN_CARD
-	iftrue .UnknownScript_0x7ee8e
+	iftrue_jumpopenedtext .UnknownText_0x7f141
 	checkevent EVENT_RETURNED_MACHINE_PART
 	iftrue .UnknownScript_0x7ee80
-	writetext UnknownText_0x7effb
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x7effb
 
 .UnknownScript_0x7ee80:
 	writetext UnknownText_0x7f0a1
 	buttonsound
 	stringtotext .expncardname, $1
-	scall .UnknownScript_0x7ee94
+	callstd receiveitem
 	setflag ENGINE_EXPN_CARD
-.UnknownScript_0x7ee8e:
-	writetext UnknownText_0x7f141
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-.UnknownScript_0x7ee94:
-	jumpstd receiveitem
-	end
+.UnknownText_0x7f141:
+	text "With that thing,"
+	line "you can tune into"
+
+	para "the radio programs"
+	line "here in Kanto."
+
+	para "Gahahahaha!"
+	done
 
 .expncardname
 	db "Expn.Card@"
 
 SuperNerdScript_0x7eea2:
-	faceplayer
-	opentext
 	checkflag ENGINE_EXPN_CARD
-	iftrue UnknownScript_0x7eeb0
-	writetext UnknownText_0x7f193
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer UnknownText_0x7f248
+	thistextfaceplayer
 
-UnknownScript_0x7eeb0:
-	writetext UnknownText_0x7f248
-	waitbutton
-	closetext
-	end
+	text "Hey there!"
 
-MapLavRadioTower1FSignpost0Script:
-	jumptext UnknownText_0x7f2e3
+	para "I am the super"
+	line "Music Director!"
 
-MapLavRadioTower1FSignpost1Script:
-	jumptext UnknownText_0x7f32d
+	para "Huh? Your #gear"
+	line "can't tune into my"
 
-UnknownScript_0x7eebc:
-	jumptext UnknownText_0x7f36b
+	para "music programs."
+	line "How unfortunate!"
+
+	para "If you get a Expn."
+	line "Card upgrade, you"
+
+	para "can tune in. You'd"
+	line "better get one!"
+	done
 
 UnknownText_0x7eebf:
 	text "Welcome!"
@@ -168,35 +153,6 @@ UnknownText_0x7f0a1:
 
 	para "Please take this"
 	line "as my thanks."
-	done
-
-UnknownText_0x7f141:
-	text "With that thing,"
-	line "you can tune into"
-
-	para "the radio programs"
-	line "here in Kanto."
-
-	para "Gahahahaha!"
-	done
-
-UnknownText_0x7f193:
-	text "Hey there!"
-
-	para "I am the super"
-	line "Music Director!"
-
-	para "Huh? Your #gear"
-	line "can't tune into my"
-
-	para "music programs."
-	line "How unfortunate!"
-
-	para "If you get a Expn."
-	line "Card upgrade, you"
-
-	para "can tune in. You'd"
-	line "better get one!"
 	done
 
 UnknownText_0x7f248:

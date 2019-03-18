@@ -1,5 +1,5 @@
 AddPhoneNumber:: ; 90000
-	call _CheckCellNum
+	call CheckCellNum
 	jr c, .cant_add
 	call Phone_FindOpenSlot
 	jr nc, .cant_add
@@ -14,7 +14,7 @@ AddPhoneNumber:: ; 90000
 
 
 DelCellNum:: ; 9000f
-	call _CheckCellNum
+	call CheckCellNum
 	jr nc, .not_in_list
 	xor a
 	ld [hl], a
@@ -26,10 +26,6 @@ DelCellNum:: ; 9000f
 ; 90019
 
 CheckCellNum:: ; 90019
-	jp _CheckCellNum ; wtf
-; 9001c
-
-_CheckCellNum: ; 9001c
 	ld hl, wPhoneList
 	ld b, CONTACT_LIST_SIZE
 .loop
@@ -68,7 +64,7 @@ Phone_FindOpenSlot: ; 9002d
 
 GetRemainingSpaceInPhoneList: ; 90040
 	xor a
-	ld [Buffer1], a
+	ld [wBuffer1], a
 	ld hl, PermanentNumbers
 .loop
 	ld a, [hli]
@@ -79,9 +75,9 @@ GetRemainingSpaceInPhoneList: ; 90040
 	push bc
 	push hl
 	ld c, a
-	call _CheckCellNum
+	call CheckCellNum
 	jr c, .elm_or_mom_in_list
-	ld hl, Buffer1
+	ld hl, wBuffer1
 	inc [hl]
 
 .elm_or_mom_in_list
@@ -93,14 +89,12 @@ GetRemainingSpaceInPhoneList: ; 90040
 
 .done
 	ld a, CONTACT_LIST_SIZE
-	ld hl, Buffer1
+	ld hl, wBuffer1
 	sub [hl]
 	ret
 ; 90066
 
-PermanentNumbers: ; 90066
-	db PHONECONTACT_MOM, PHONECONTACT_ELM, -1
-; 90069
+INCLUDE "data/phone/permanent_numbers.asm"
 
 
 FarPlaceString: ; 90069
@@ -173,7 +167,7 @@ CheckPhoneContactTimeOfDay: ; 900ad (24:40ad)
 
 ChooseRandomCaller: ; 900bf (24:40bf)
 ; If no one is available to call, don't return anything.
-	ld a, [EngineBuffer3]
+	ld a, [wEngineBuffer3]
 	and a
 	jr z, .NothingToSample
 
@@ -188,7 +182,7 @@ ChooseRandomCaller: ; 900bf (24:40bf)
 ; Return the caller ID you just sampled.
 	ld c, a
 	ld b, 0
-	ld hl, EngineBuffer4
+	ld hl, wEngineBuffer4
 	add hl, bc
 	ld a, [hl]
 	scf
@@ -201,8 +195,8 @@ ChooseRandomCaller: ; 900bf (24:40bf)
 GetAvailableCallers: ; 900de (24:40de)
 	farcall CheckTime
 	ld a, c
-	ld [EngineBuffer1], a ; wd03e (aliases: MenuItemsList, CurFruitTree, CurInput)
-	ld hl, EngineBuffer3
+	ld [wEngineBuffer1], a
+	ld hl, wEngineBuffer3
 	ld bc, 11
 	xor a
 	call ByteFill
@@ -210,38 +204,38 @@ GetAvailableCallers: ; 900de (24:40de)
 	ld a, CONTACT_LIST_SIZE
 
 .loop
-	ld [EngineBuffer2], a
+	ld [wEngineBuffer2], a
 	ld a, [de]
 	and a
 	jr z, .not_good_for_call
 	ld hl, PhoneContacts + PHONE_CONTACT_SCRIPT2_TIME
 	ld bc, PHONE_TABLE_WIDTH
-	call AddNTimes
-	ld a, [EngineBuffer1] ; wd03e (aliases: MenuItemsList, CurFruitTree, CurInput)
+	rst AddNTimes
+	ld a, [wEngineBuffer1]
 	and [hl]
 	jr z, .not_good_for_call
 	ld bc, PHONE_CONTACT_MAP_GROUP - PHONE_CONTACT_SCRIPT2_TIME
 	add hl, bc
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	cp [hl]
 	jr nz, .different_map
 	inc hl
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	cp [hl]
 	jr z, .not_good_for_call
 .different_map
-	ld a, [EngineBuffer3]
+	ld a, [wEngineBuffer3]
 	ld c, a
 	ld b, $0
 	inc a
-	ld [EngineBuffer3], a
-	ld hl, EngineBuffer4
+	ld [wEngineBuffer3], a
+	ld hl, wEngineBuffer4
 	add hl, bc
 	ld a, [de]
 	ld [hl], a
 .not_good_for_call
 	inc de
-	ld a, [EngineBuffer2]
+	ld a, [wEngineBuffer2]
 	dec a
 	jr nz, .loop
 	ret
@@ -256,7 +250,7 @@ CheckSpecialPhoneCall:: ; 90136 (24:4136)
 	ld b, 0
 	ld hl, SpecialPhoneCallList
 	ld a, 6
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -264,9 +258,8 @@ CheckSpecialPhoneCall:: ; 90136 (24:4136)
 	jr nc, .NoPhoneCall
 
 	call .DoSpecialPhoneCall
-rept 2
 	inc hl
-endr
+	inc hl
 	ld a, [hli]
 	ld e, a
 	push hl
@@ -303,7 +296,8 @@ endr
 	ld b, 0
 	ld hl, SpecialPhoneCallList
 	ld a, 6
-	jp AddNTimes
+	rst AddNTimes
+	ret
 
 SpecialCallOnlyWhenOutside: ; 90188
 	ld a, [wPermission]
@@ -336,7 +330,7 @@ Function90199: ; 90199 (24:4199)
 	ld [wCurrentCaller], a
 	ld hl, PhoneContacts
 	ld bc, PHONE_TABLE_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld hl, PHONE_CONTACT_SCRIPT1_TIME
@@ -348,12 +342,12 @@ Function90199: ; 90199 (24:4199)
 	; use the "Just talk to that person" script.
 	ld hl, PHONE_CONTACT_MAP_GROUP
 	add hl, de
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	cp [hl]
 	jr nz, .GetPhoneScript
 	ld hl, PHONE_CONTACT_MAP_NUMBER
 	add hl, de
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	cp [hl]
 	jr nz, .GetPhoneScript
 	ld b, BANK(PhoneScript_JustTalkToThem)
@@ -411,10 +405,10 @@ LoadCallerScript: ; 9020d (24:420d)
 	ld hl, PhoneContacts
 	ld bc, 12
 	ld a, e
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(PhoneContacts)
 .proceed
-	ld de, EngineBuffer2
+	ld de, wEngineBuffer2
 	ld bc, 12
 	jp FarCopyBytes
 ; 90233 (24:4233)
@@ -453,9 +447,6 @@ Script_SpecialBillCall:: ; 0x90255
 
 RingTwice_StartCall: ; 9026f
 	call .Ring
-	;jp .Ring
-; 9027c
-
 .Ring: ; 9027c (24:427c)
 	call Phone_StartRinging
 	call Phone_Wait20Frames
@@ -463,8 +454,6 @@ RingTwice_StartCall: ; 9026f
 	call Phone_Wait20Frames
 	call Phone_CallerTextbox
 	call Phone_Wait20Frames
-	;jp Phone_CallerTextboxWithName
-
 Phone_CallerTextboxWithName: ; 90292 (24:4292)
 	ld a, [wCurrentCaller]
 	ld b, a
@@ -472,15 +461,12 @@ Phone_CallerTextboxWithName: ; 90292 (24:4292)
 
 PhoneCall:: ; 9029a
 	ld a, b
-	ld [PhoneScriptBank], a
+	ld [wPhoneScriptBank], a
 	ld a, e
-	ld [PhoneCallerLo], a
+	ld [wPhoneCallerLo], a
 	ld a, d
-	ld [PhoneCallerHi], a
+	ld [wPhoneCallerHi], a
 	call Phone_FirstOfTwoRings
-	;jp Phone_FirstOfTwoRings
-; 902b3
-
 Phone_FirstOfTwoRings: ; 902b3
 	call Phone_StartRinging
 	call Phone_Wait20Frames
@@ -488,21 +474,17 @@ Phone_FirstOfTwoRings: ; 902b3
 	call Phone_Wait20Frames
 	call Phone_CallerTextbox
 	call Phone_Wait20Frames
-	;jp Phone_CallerTextboxWithName2
-; 902c9
-
 Phone_CallerTextboxWithName2: ; 902c9
 	call Phone_CallerTextbox
 	hlcoord 1, 2
 	ld [hl], "<PHONE>"
-rept 2
 	inc hl
-endr
-	ld a, [PhoneScriptBank]
+	inc hl
+	ld a, [wPhoneScriptBank]
 	ld b, a
-	ld a, [PhoneCallerLo]
+	ld a, [wPhoneCallerLo]
 	ld e, a
-	ld a, [PhoneCallerHi]
+	ld a, [wPhoneCallerHi]
 	ld d, a
 	jp FarPlaceString
 ; 902e3
@@ -561,25 +543,21 @@ Phone_StartRinging: ; 9033f
 	call PlaySFX
 	call Phone_CallerTextbox
 	call UpdateSprites
-	farjp PhoneRing_LoadEDTile
-; 90355
+	jp ApplyTilemap
 
 HangUp_Wait20Frames: ; 90355
 Phone_Wait20Frames:
 	ld c, 20
 	call DelayFrames
-	farjp PhoneRing_LoadEDTile
-; 90363
-
+	jp ApplyTilemap
 
 Function90363: ; 90363 (24:4363)
 	push bc
 	call Phone_CallerTextbox
 	hlcoord 1, 1
 	ld [hl], "<PHONE>"
-rept 2
 	inc hl
-endr
+	inc hl
 	ld d, h
 	ld e, l
 	pop bc
@@ -620,7 +598,7 @@ GetCallerTrainerClass: ; 9039a
 	push hl
 	ld hl, PhoneContacts + PHONE_CONTACT_TRAINER_CLASS
 	ld bc, PHONE_TABLE_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hli]
 	ld b, [hl]
 	ld c, a
@@ -648,18 +626,38 @@ GetCallerName: ; 903a9 (24:43a9)
 	jp PlaceString
 
 .NotTrainer:
+	ld a, b
+	and a
+	jr z, .Blank
 	push hl
 	ld c, b
 	ld b, 0
 	ld hl, NonTrainerCallerNames
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
 	pop hl
 	jp PlaceString
+
+.Blank:
+	ld a, "<SHARP>"
+	ld [hli], a
+	ld a, [wPokegearPhoneScrollPosition]
+	ld b, a
+	ld a, [wPokegearPhoneLoadNameBuffer]
+	add b
+	inc a
+	ld de, wPokegearNumberBuffer
+	ld [de], a
+	lb bc, PRINTNUM_LEFTALIGN | 1, 2
+	call PrintNum
+	ld de, .filler
+	jp PlaceString
+
+.filler
+	db " -------@"
 ; 903d6 (24:43d6)
 
 NonTrainerCallerNames: ; 903d6
@@ -671,7 +669,7 @@ NonTrainerCallerNames: ; 903d6
 	dw .lyra
 	dw .buena
 
-.none db "----------@"
+.none db "@"
 .mom db "Mom:@"
 .bill db "Bill:<LNBRK>   #maniac@"
 .elm db "Prof.Elm:<LNBRK>   #mon Prof.@"
@@ -705,7 +703,7 @@ GetCallerLocation: ; 90439
 	ld a, [wCurrentCaller]
 	ld hl, PhoneContacts + PHONE_CONTACT_MAP_GROUP
 	ld bc, PHONE_TABLE_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld b, [hl]
 	inc hl
 	ld c, [hl]
@@ -718,117 +716,9 @@ GetCallerLocation: ; 90439
 	ret
 ; 9045f
 
-PhoneContacts: ; 9045f
-phone: MACRO
-	db  \1, \2 ; trainer
-	map \3     ; map
-	db  \4
-	dba \5 ; script 1
-	db  \6
-	dba \7 ; script 2
-ENDM
+INCLUDE "data/phone/phone_contacts.asm"
 
-	phone TRAINER_NONE, PHONE_00,              N_A,                       0, UnusedPhoneScript,   0, UnusedPhoneScript
-	phone TRAINER_NONE, PHONECONTACT_MOM,      KRISS_HOUSE_1F,            7, MomPhoneScript,      0, UnusedPhoneScript
-	phone TRAINER_NONE, PHONECONTACT_BIKESHOP, OAKS_LAB,                  0, UnusedPhoneScript,   0, UnusedPhoneScript
-	phone TRAINER_NONE, PHONECONTACT_BILL,     N_A,                       7, BillPhoneScript1,    0, BillPhoneScript2
-	phone TRAINER_NONE, PHONECONTACT_ELM,      ELMS_LAB,                  7, ElmPhoneScript1,     0, ElmPhoneScript2
-	phone TRAINER_NONE, PHONECONTACT_LYRA,     LYRAS_HOUSE_1F,            7, LyraPhoneScript,     0, LyraPhoneScript2
-	phone SCHOOLBOY,    JACK1,                 NATIONAL_PARK,             7, JackPhoneScript1,    7, JackPhoneScript2
-	phone POKEFANF,     BEVERLY1,              NATIONAL_PARK,             7, BeverlyPhoneScript1, 7, BeverlyPhoneScript2
-	phone SAILOR,       HUEY1,                 OLIVINE_LIGHTHOUSE_2F,     7, HueyPhoneScript1,    7, HueyPhoneScript2
-	phone TRAINER_NONE, PHONE_00,              N_A,                       0, UnusedPhoneScript,   0, UnusedPhoneScript
-	phone TRAINER_NONE, PHONE_00,              N_A,                       0, UnusedPhoneScript,   0, UnusedPhoneScript
-	phone COOLTRAINERM, GAVEN1,                ROUTE_26,                  7, GavenPhoneScript1,   7, GavenPhoneScript2
-	phone COOLTRAINERF, BETH1,                 ROUTE_26,                  7, BethPhoneScript1,    7, BethPhoneScript2
-	phone BIRD_KEEPER,  JOSE1,                 ROUTE_27,                  7, JosePhoneScript1,    7, JosePhoneScript2
-	phone COOLTRAINERF, REENA1,                ROUTE_27,                  7, ReenaPhoneScript1,   7, ReenaPhoneScript2
-	phone YOUNGSTER,    JOEY1,                 ROUTE_30,                  7, JoeyPhoneScript1,    7, JoeyPhoneScript2
-	phone BUG_CATCHER,  WADE1,                 ROUTE_31,                  7, WadePhoneScript1,    7, WadePhoneScript2
-	phone FISHER,       RALPH1,                ROUTE_32,                  7, RalphPhoneScript1,   7, RalphPhoneScript2
-	phone PICNICKER,    LIZ1,                  ROUTE_32,                  7, LizPhoneScript1,     7, LizPhoneScript2
-	phone HIKER,        ANTHONY1,              ROUTE_33,                  7, AnthonyPhoneScript1, 7, AnthonyPhoneScript2
-	phone CAMPER,       TODD1,                 ROUTE_34,                  7, ToddPhoneScript1,    7, ToddPhoneScript2
-	phone PICNICKER,    GINA1,                 ROUTE_34,                  7, GinaPhoneScript1,    7, GinaPhoneScript2
-	phone JUGGLER,      IRWIN1,                ROUTE_35,                  7, IrwinPhoneScript1,   7, IrwinPhoneScript2
-	phone BUG_CATCHER,  ARNIE1,                ROUTE_35,                  7, ArniePhoneScript1,   7, ArniePhoneScript2
-	phone SCHOOLBOY,    ALAN1,                 ROUTE_36,                  7, AlanPhoneScript1,    7, AlanPhoneScript2
-	phone TRAINER_NONE, PHONE_00,              N_A,                       0, UnusedPhoneScript,   0, UnusedPhoneScript
-	phone LASS,         DANA1,                 ROUTE_38,                  7, DanaPhoneScript1,    7, DanaPhoneScript2
-	phone SCHOOLBOY,    CHAD1,                 ROUTE_38,                  7, ChadPhoneScript1,    7, ChadPhoneScript2
-	phone POKEFANM,     DEREK1,                ROUTE_39,                  7, DerekPhoneScript1,   7, DerekPhoneScript2
-	phone FISHER,       TULLY1,                ROUTE_42,                  7, TullyPhoneScript1,   7, TullyPhoneScript2
-	phone POKEMANIAC,   BRENT1,                ROUTE_43,                  7, BrentPhoneScript1,   7, BrentPhoneScript2
-	phone PICNICKER,    TIFFANY1,              ROUTE_43,                  7, TiffanyPhoneScript1, 7, TiffanyPhoneScript2
-	phone BIRD_KEEPER,  VANCE1,                ROUTE_44,                  7, VancePhoneScript1,   7, VancePhoneScript2
-	phone FISHER,       WILTON1,               ROUTE_44,                  7, WiltonPhoneScript1,  7, WiltonPhoneScript2
-	phone BLACKBELT_T,  KENJI1,                ROUTE_45,                  7, KenjiPhoneScript1,   7, KenjiPhoneScript2
-	phone HIKER,        PARRY1,                ROUTE_45,                  7, ParryPhoneScript1,   7, ParryPhoneScript2
-	phone PICNICKER,    ERIN1,                 ROUTE_46,                  7, ErinPhoneScript1,    7, ErinPhoneScript2
-	phone TRAINER_NONE, PHONECONTACT_BUENA,    GOLDENROD_DEPT_STORE_ROOF, 7, BuenaPhoneScript1,   7, BuenaPhoneScript2
-; 90627
-
-SpecialPhoneCallList: ; 90627
-	; SPECIALCALL_POKERUS
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_ELM
-	dba ElmPhoneScript2
-
-	; SPECIALCALL_ROBBED
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_ELM
-	dba ElmPhoneScript2
-
-	; SPECIALCALL_ASSISTANT
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_ELM
-	dba ElmPhoneScript2
-
-	; SPECIALCALL_WEIRDBROADCAST
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_ELM
-	dba ElmPhoneScript2
-
-	; SPECIALCALL_SSTICKET
-	dw SpecialCallWhereverYouAre
-	db PHONE_ELM
-	dba ElmPhoneScript2
-
-	; SPECIALCALL_BIKESHOP
-	dw SpecialCallWhereverYouAre
-	db PHONE_OAK ; ????????
-	dba BikeShopPhoneScript ; bike shop
-
-	; SPECIALCALL_WORRIED
-	dw SpecialCallWhereverYouAre
-	db PHONE_MOM
-	dba MomPhoneLectureScript
-
-	; SPECIALCALL_MASTERBALL
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_ELM
-	dba ElmPhoneScript2
-
-	; SPECIALCALL_YELLOWFOREST
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_LYRA
-	dba LyraPhoneScript2
-
-	; SPECIALCALL_FIRSTBADGE
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_LYRA
-	dba LyraPhoneScript2
-
-	; SPECIALCALL_SECONDBADGE
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_BILL
-	dba BillPhoneScript2
-
-	; SPECIALCALL_LYRASEGG
-	dw SpecialCallOnlyWhenOutside
-	db PHONE_LYRA
-	dba LyraPhoneScript2
-; 90657
+INCLUDE "data/phone/special_calls.asm"
 
 UnknownScript_0x90657: ; 0x90657
 	writetext UnknownText_0x9065b

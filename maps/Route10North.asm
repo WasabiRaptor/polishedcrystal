@@ -1,41 +1,41 @@
 Route10North_MapScriptHeader:
+	db 2 ; scene scripts
+	scene_script Route10NorthTrigger0
+	scene_script Route10NorthTrigger1
 
-.MapTriggers: db 2
-	dw Route10NorthTrigger0
-	dw Route10NorthTrigger1
+	db 2 ; callbacks
+	callback MAPCALLBACK_NEWMAP, Route10NorthFlyPoint
+	callback MAPCALLBACK_OBJECTS, Route10NorthZapdos
 
-.MapCallbacks: db 2
-	dbw MAPCALLBACK_NEWMAP, Route10NorthFlyPoint
-	dbw MAPCALLBACK_OBJECTS, Route10NorthZapdos
+	db 5 ; warp events
+	warp_event 11, 35, ROUTE_10_POKECENTER_1F, 1
+	warp_event  3, 51, POWER_PLANT, 1
+	warp_event  4, 43, ROCK_TUNNEL_2F, 1
+	warp_event  8, 33, ROCK_TUNNEL_1F, 1
+	warp_event 10,  1, DIM_CAVE_5F, 1
 
-Route10North_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $23, $b, 1, ROUTE_10_POKECENTER_1F
-	warp_def $33, $3, 1, POWER_PLANT
-	warp_def $2b, $4, 1, ROCK_TUNNEL_2F
-	warp_def $21, $8, 1, ROCK_TUNNEL_1F
-	warp_def $1, $a, 1, DIM_CAVE_5F
+	db 2 ; bg events
+	bg_event  5, 53, SIGNPOST_JUMPTEXT, PowerPlantSignText
+	bg_event  7, 35, SIGNPOST_JUMPTEXT, RockTunnelSignText
 
-.XYTriggers: db 0
+	db 10 ; object events
+	object_event 13, 44, SPRITE_ZAPDOS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, Route10Zapdos, EVENT_ROUTE_10_ZAPDOS
+	object_event  6, 52, SPRITE_LAWRENCE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_ROUTE_10
+	object_event 14, 52, SPRITE_ZAPDOS, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCES_ZAPDOS_ROUTE_10
+	object_event 12, 52, SPRITE_CHRIS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_CHRIS_IN_NAVEL_ROCK
+	object_event 12, 52, SPRITE_KRIS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_KRIS_IN_NAVEL_ROCK
+	itemball_event 11,  3, FULL_RESTORE, 1, EVENT_ROUTE_10_FULL_RESTORE
+	cuttree_event  7, 21, EVENT_ROUTE_10_CUT_TREE_1
+	cuttree_event  9, 21, EVENT_ROUTE_10_CUT_TREE_2
+	cuttree_event 11, 21, EVENT_ROUTE_10_CUT_TREE_3
+	cuttree_event 13, 21, EVENT_ROUTE_10_CUT_TREE_4
 
-.Signposts: db 2
-	signpost 53, 5, SIGNPOST_READ, PowerPlantSign
-	signpost 35, 7, SIGNPOST_READ, Route10RockTunnelSign
+; SPRITE_MOM is not in this map's overworld sprite set, so it default to the
+; player sprite, whatever gender they are.
 
-.PersonEvents: db 10
-	person_event SPRITE_ZAPDOS, 44, 13, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, Route10Zapdos, EVENT_ROUTE_10_ZAPDOS
-	person_event SPRITE_CERULEAN_CAPE_MISTY, 52, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_ROUTE_10
-	person_event SPRITE_ZAPDOS, 52, 14, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCES_ZAPDOS_ROUTE_10
-	person_event SPRITE_CHRIS, 52, 12, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_CHRIS_IN_NAVEL_ROCK
-	person_event SPRITE_KRIS, 52, 12, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_KRIS_IN_NAVEL_ROCK
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 11, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, FULL_RESTORE, 1, EVENT_ROUTE_10_FULL_RESTORE
-	person_event SPRITE_BALL_CUT_FRUIT, 21, 7, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_10_CUT_TREE_1
-	person_event SPRITE_BALL_CUT_FRUIT, 21, 9, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_10_CUT_TREE_2
-	person_event SPRITE_BALL_CUT_FRUIT, 21, 11, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_10_CUT_TREE_3
-	person_event SPRITE_BALL_CUT_FRUIT, 21, 13, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_10_CUT_TREE_4
-
-const_value set 2
+	const_def 1 ; object constants
 	const ROUTE10_ZAPDOS
 	const ROUTE10_LAWRENCE
 	const ROUTE10_LAWRENCES_ZAPDOS
@@ -64,62 +64,56 @@ Route10NorthZapdos:
 	return
 
 Route10NorthLawrenceEncounter1Script:
-	applymovement PLAYER, Route10NorthMovementData_PlayerStepDown
+	applyonemovement PLAYER, step_down
 	showemote EMOTE_SHOCK, ROUTE10_LAWRENCE, 15
 	special Special_FadeOutMusic
 	pause 15
 	applymovement ROUTE10_LAWRENCE, Route10NorthMovementData_LawrenceApproach1
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	playmusic MUSIC_ZINNIA_ENCOUNTER_ORAS
-	opentext
-	writetext Route10NorthLawrenceGreetingText
-	waitbutton
-	closetext
+	showtext Route10NorthLawrenceGreetingText
 	follow ROUTE10_LAWRENCE, PLAYER
 	applymovement ROUTE10_LAWRENCE, Route10NorthMovementData_LawrenceShowZapdos
 	stopfollow
-	spriteface ROUTE10_LAWRENCE, UP
-	spriteface PLAYER, UP
+	turnobject ROUTE10_LAWRENCE, UP
+	turnobject PLAYER, UP
 	checkflag ENGINE_PLAYER_IS_FEMALE
 	iftrue .FemalePan
 	appear ROUTE10_CHRIS
-	applymovement PLAYER, Route10NorthMovementData_HidePlayer
+	applyonemovement PLAYER, hide_person
 	applymovement PLAYER, Route10NorthMovementData_PanUp
 	pause 40
+	disappear ROUTE10_LAWRENCE
+	moveobject ROUTE10_LAWRENCE, 13, 52
+	appear ROUTE10_LAWRENCE
 	applymovement PLAYER, Route10NorthMovementData_PanDown
-	applymovement PLAYER, Route10NorthMovementData_ShowPlayer
+	applyonemovement PLAYER, show_person
 	disappear ROUTE10_CHRIS
 	jump .Finish
 .FemalePan
 	appear ROUTE10_KRIS
-	applymovement PLAYER, Route10NorthMovementData_HidePlayer
+	applyonemovement PLAYER, hide_person
 	applymovement PLAYER, Route10NorthMovementData_PanUp
 	pause 40
 	disappear ROUTE10_LAWRENCE
-	moveperson ROUTE10_LAWRENCE, 13, 52
+	moveobject ROUTE10_LAWRENCE, 13, 52
 	appear ROUTE10_LAWRENCE
 	applymovement PLAYER, Route10NorthMovementData_PanDown
-	applymovement PLAYER, Route10NorthMovementData_ShowPlayer
+	applyonemovement PLAYER, show_person
 	disappear ROUTE10_KRIS
 .Finish
-	spriteface ROUTE10_LAWRENCE, LEFT
-	spriteface PLAYER, RIGHT
-	opentext
-	writetext Route10NorthLawrenceZapdosText
-	waitbutton
-	closetext
+	turnobject ROUTE10_LAWRENCE, LEFT
+	turnobject PLAYER, RIGHT
+	showtext Route10NorthLawrenceZapdosText
 	appear ROUTE10_LAWRENCES_ZAPDOS
 	playsound SFX_BALL_POOF
-	spriteface ROUTE10_LAWRENCE, RIGHT
+	turnobject ROUTE10_LAWRENCE, RIGHT
 	waitsfx
 	pause 15
 	cry ZAPDOS
 	waitsfx
-	spriteface ROUTE10_LAWRENCE, DOWN
-	opentext
-	writetext Route10NorthLawrenceFlyText
-	waitbutton
-	closetext
+	turnobject ROUTE10_LAWRENCE, DOWN
+	showtext Route10NorthLawrenceFlyText
 	playsound SFX_FLY
 	special Special_FadeBlackQuickly
 	special Special_ReloadSpritesNoPalettes
@@ -128,12 +122,7 @@ Route10NorthLawrenceEncounter1Script:
 	waitsfx
 	pause 15
 	special Special_FadeInQuickly
-	variablesprite SPRITE_CERULEAN_CAPE_MISTY, SPRITE_MISTY
-	checkevent EVENT_TRAINERS_IN_CERULEAN_GYM
-	iftrue .Misty
-	variablesprite SPRITE_CERULEAN_CAPE_MISTY, SPRITE_BEAUTY
-.Misty
-	dotrigger $0
+	setscene $0
 	special RestartMapMusic
 	end
 
@@ -141,57 +130,49 @@ Route10NorthLawrenceEncounter2Script:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	special Special_FadeOutMusic
 	pause 15
-	variablesprite SPRITE_CERULEAN_CAPE_MISTY, SPRITE_LAWRENCE
-	special MapCallbackSprites_LoadUsedSpritesGFX
 	checkcode VAR_FACING
-	if_equal UP, .up
-	if_equal DOWN, .down
-	if_equal LEFT, .left
+	ifequal UP, .up
+	ifequal DOWN, .down
+	ifequal LEFT, .left
 .right
-	moveperson ROUTE10_LAWRENCE, 7, 44
-	moveperson ROUTE10_LAWRENCES_ZAPDOS, 10, 44
+	moveobject ROUTE10_LAWRENCE, 7, 44
+	moveobject ROUTE10_LAWRENCES_ZAPDOS, 10, 44
 	appear ROUTE10_LAWRENCE
 	applymovement ROUTE10_LAWRENCE, Route10NorthMovementData_LawrenceApproach2LeftRight
-	spriteface PLAYER, LEFT
+	turnobject PLAYER, LEFT
 	jump .continue
 .up
-	moveperson ROUTE10_LAWRENCE, 8, 44
-	moveperson ROUTE10_LAWRENCES_ZAPDOS, 12, 44
+	moveobject ROUTE10_LAWRENCE, 8, 44
+	moveobject ROUTE10_LAWRENCES_ZAPDOS, 12, 44
 	appear ROUTE10_LAWRENCE
 	applymovement ROUTE10_LAWRENCE, Route10NorthMovementData_LawrenceApproach2UpDown
-	spriteface ROUTE10_LAWRENCE, DOWN
+	turnobject ROUTE10_LAWRENCE, DOWN
 	jump .continue
 .down
-	moveperson ROUTE10_LAWRENCE, 8, 44
-	moveperson ROUTE10_LAWRENCES_ZAPDOS, 12, 44
+	moveobject ROUTE10_LAWRENCE, 8, 44
+	moveobject ROUTE10_LAWRENCES_ZAPDOS, 12, 44
 	appear ROUTE10_LAWRENCE
 	applymovement ROUTE10_LAWRENCE, Route10NorthMovementData_LawrenceApproach2UpDown
-	spriteface ROUTE10_LAWRENCE, UP
+	turnobject ROUTE10_LAWRENCE, UP
 	jump .continue
 .left
-	moveperson ROUTE10_LAWRENCE, 9, 44
-	moveperson ROUTE10_LAWRENCES_ZAPDOS, 12, 44
+	moveobject ROUTE10_LAWRENCE, 9, 44
+	moveobject ROUTE10_LAWRENCES_ZAPDOS, 12, 44
 	appear ROUTE10_LAWRENCE
 	applymovement ROUTE10_LAWRENCE, Route10NorthMovementData_LawrenceApproach2LeftRight
 .continue
 	playmusic MUSIC_ZINNIA_ENCOUNTER_ORAS
-	opentext
-	writetext Route10NorthLawrenceSpeechText
-	waitbutton
-	closetext
+	showtext Route10NorthLawrenceSpeechText
 	pause 15
 	appear ROUTE10_LAWRENCES_ZAPDOS
 	playsound SFX_BALL_POOF
-	spriteface ROUTE10_LAWRENCE, LEFT
+	turnobject ROUTE10_LAWRENCE, LEFT
 	waitsfx
 	pause 15
 	cry ZAPDOS
 	waitsfx
-	spriteface ROUTE10_LAWRENCE, DOWN
-	opentext
-	writetext Route10NorthLawrenceFlyText
-	waitbutton
-	closetext
+	turnobject ROUTE10_LAWRENCE, DOWN
+	showtext Route10NorthLawrenceFlyText
 	playsound SFX_FLY
 	special Special_FadeBlackQuickly
 	special Special_ReloadSpritesNoPalettes
@@ -200,11 +181,6 @@ Route10NorthLawrenceEncounter2Script:
 	waitsfx
 	pause 15
 	special Special_FadeInQuickly
-	variablesprite SPRITE_CERULEAN_CAPE_MISTY, SPRITE_MISTY
-	checkevent EVENT_TRAINERS_IN_CERULEAN_GYM
-	iftrue .Misty
-	variablesprite SPRITE_CERULEAN_CAPE_MISTY, SPRITE_BEAUTY
-.Misty
 	setevent EVENT_HEARD_LAWRENCES_FINAL_SPEECH
 	clearevent EVENT_LAWRENCE_SHAMOUTI_SHRINE_RUINS
 	special RestartMapMusic
@@ -239,12 +215,6 @@ Route10Zapdos:
 	jump Route10NorthLawrenceEncounter2Script
 .end
 	end
-
-Route10RockTunnelSign:
-	jumptext RockTunnelSignText
-
-PowerPlantSign:
-	jumptext PowerPlantSignText
 
 ZapdosText:
 	text "Gyaoo!"
@@ -338,7 +308,7 @@ Route10NorthLawrenceSpeechText:
 
 	para "I'll show you that"
 	line "I deserve to own"
-	cont "those Pokemon."
+	cont "those #mon."
 	done
 
 RockTunnelSignText:
@@ -348,10 +318,6 @@ RockTunnelSignText:
 PowerPlantSignText:
 	text "Kanto Power Plant"
 	done
-
-Route10NorthMovementData_PlayerStepDown:
-	step_down
-	step_end
 
 Route10NorthMovementData_LawrenceApproach1:
 	step_left
@@ -370,10 +336,6 @@ Route10NorthMovementData_LawrenceApproach2LeftRight:
 	step_right
 	step_right
 	step_right
-	step_end
-
-Route10NorthMovementData_HidePlayer:
-	hide_person
 	step_end
 
 Route10NorthMovementData_PanUp:
@@ -400,8 +362,4 @@ Route10NorthMovementData_PanDown:
 	step_down
 	step_down
 	remove_fixed_facing
-	step_end
-
-Route10NorthMovementData_ShowPlayer:
-	show_person
 	step_end

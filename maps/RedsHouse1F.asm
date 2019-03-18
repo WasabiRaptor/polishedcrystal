@@ -1,48 +1,27 @@
 RedsHouse1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  2,  7, PALLET_TOWN, 1
+	warp_event  3,  7, PALLET_TOWN, 1
+	warp_event  7,  0, REDS_HOUSE_2F, 1
 
-RedsHouse1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $2, 1, PALLET_TOWN
-	warp_def $7, $3, 1, PALLET_TOWN
-	warp_def $0, $7, 1, REDS_HOUSE_2F
+	db 1 ; bg events
+	bg_event  5,  1, SIGNPOST_UP, RedsHouse1FTVScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 5, SIGNPOST_READ, RedsHouse1FTV
-
-.PersonEvents: db 1
-	person_event SPRITE_REDS_MOM, 3, 5, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, RedsMom, -1
+	db 1 ; object events
+	object_event  5,  3, SPRITE_REDS_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, RedsMom, -1
 
 RedsMom:
-	faceplayer
-	opentext
 	checkevent EVENT_MET_REDS_MOM
-	iftrue .MetAlready
-	writetext RedsMomText1
-	waitbutton
-	closetext
+	iftrue_jumptextfaceplayer .Text2
 	setevent EVENT_MET_REDS_MOM
-	end
-.MetAlready:
-	writetext RedsMomText2
-	waitbutton
-	closetext
-	end
+	thistextfaceplayer
 
-RedsHouse1FTV:
-	checkcode VAR_FACING
-	if_not_equal UP, .wrongside
-	jumptext RedsHouse1FTVText
-.wrongside
-	jumpstd tv
-
-RedsMomText1:
 	text "Hi!"
 
 	para "Red's been away"
@@ -63,7 +42,7 @@ RedsMomText1:
 	cont "about him."
 	done
 
-RedsMomText2:
+.Text2:
 	text "I worry about Red"
 	line "getting hurt or"
 
@@ -76,7 +55,9 @@ RedsMomText2:
 	para "do."
 	done
 
-RedsHouse1FTVText:
+RedsHouse1FTVScript:
+	thistext
+
 	text "They have programs"
 	line "that aren't shown"
 	cont "in Johto…"

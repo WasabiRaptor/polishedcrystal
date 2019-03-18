@@ -1,25 +1,22 @@
 GoldenrodDeptStoreElevator_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  1,  3, GOLDENROD_DEPT_STORE_1F, -1
+	warp_event  2,  3, GOLDENROD_DEPT_STORE_1F, -1
 
-GoldenrodDeptStoreElevator_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $3, $1, 255, GOLDENROD_DEPT_STORE_1F
-	warp_def $3, $2, 255, GOLDENROD_DEPT_STORE_1F
+	db 1 ; bg events
+	bg_event  3,  0, SIGNPOST_READ, GoldenrodDeptStoreElevatorButton
 
-.XYTriggers: db 0
+	db 0 ; object events
 
-.Signposts: db 1
-	signpost 0, 3, SIGNPOST_READ, MapGoldenrodDeptStoreElevatorSignpost0Script
-
-.PersonEvents: db 0
-
-MapGoldenrodDeptStoreElevatorSignpost0Script:
+GoldenrodDeptStoreElevatorButton:
 	opentext
-	elevator Elevator_0x566e0
+	elevator .Floors
 	closetext
 	iffalse .Done
 	pause 5
@@ -32,9 +29,6 @@ MapGoldenrodDeptStoreElevatorSignpost0Script:
 	iftrue .BoxLayout1
 	checkevent EVENT_WAREHOUSE_LAYOUT_2
 	iftrue .BoxLayout2
-	checkevent EVENT_WAREHOUSE_LAYOUT_3
-	iftrue .BoxLayout3
-.BoxLayout3:
 	setevent EVENT_WAREHOUSE_LAYOUT_1
 	clearevent EVENT_WAREHOUSE_LAYOUT_2
 	clearevent EVENT_WAREHOUSE_LAYOUT_3
@@ -53,7 +47,7 @@ MapGoldenrodDeptStoreElevatorSignpost0Script:
 .Done:
 	end
 
-Elevator_0x566e0:
+.Floors:
 	db 7 ; floors
 	elevfloor _B1F, 2, GOLDENROD_DEPT_STORE_B1F
 	elevfloor _1F,  4, GOLDENROD_DEPT_STORE_1F

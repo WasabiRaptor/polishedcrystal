@@ -11,7 +11,7 @@ LCD:: ; 552
 	push bc
 	ld a, [rLY]
 	ld c, a
-	ld b, LYOverrides >> 8
+	ld b, wLYOverrides >> 8
 	ld a, [bc]
 	ld b, a
 	ld a, [hLCDCPointer]
@@ -96,8 +96,10 @@ DisableLCD:: ; 568
 .wait
 ; Wait until VBlank would normally happen
 	ld a, [rLY]
-	cp 145
-	jr nz, .wait
+	cp $90
+	jr c, .wait
+	cp $99
+	jr z, .wait
 
 	ld a, [rLCDC]
 	and %01111111 ; lcd enable off

@@ -10,20 +10,20 @@ _Diploma: ; 1dd702
 	ld hl, DiplomaTilemap
 	decoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call CopyBytes
+	rst CopyBytes
 	ld de, .PlayerString
 	hlcoord 2, 5
 	call PlaceString
-	ld de, PlayerName
+	ld de, wPlayerName
 	hlcoord 9, 5
 	call PlaceString
 	ld de, .DiplomaString
 	hlcoord 2, 8
 	call PlaceString
 	call EnableLCD
-	call WaitBGMap
-	ld b, SCGB_DIPLOMA
-	call GetSGBLayout
+	call ApplyTilemapInVBlank
+	ld b, CGB_DIPLOMA
+	call GetCGBLayout
 	call SetPalettes
 	call DelayFrame
 	jp WaitPressAorB_BlinkCursor
@@ -42,7 +42,7 @@ _Diploma: ; 1dd702
 ; 1dd7ae
 
 DiplomaGFX: ; 1dd805
-INCBIN "gfx/misc/diploma.2bpp.lz"
+INCBIN "gfx/diploma/diploma.2bpp.lz"
 
 DiplomaTilemap: ; 1ddc4b
-INCBIN "gfx/misc/diploma.tilemap"
+INCBIN "gfx/diploma/diploma.tilemap"

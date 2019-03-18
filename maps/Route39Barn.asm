@@ -1,27 +1,20 @@
 Route39Barn_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  3,  7, ROUTE_39, 1
+	warp_event  4,  7, ROUTE_39, 1
 
-Route39Barn_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $3, 1, ROUTE_39
-	warp_def $7, $4, 1, ROUTE_39
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_TWIN, 3, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TwinScript_0x9cc76, -1
-	person_event SPRITE_TWIN, 3, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, TwinScript_0x9cc90, -1
-	person_event SPRITE_MILTANK, 3, 3, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MooMoo, -1
-
-const_value set 2
-	const ROUTE39BARN_TWIN1
-	const ROUTE39BARN_TWIN2
+	db 3 ; object events
+	object_event  3,  3, SPRITE_MILTANK, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MooMoo, -1
+	object_event  2,  3, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, TwinScript_0x9cc76, -1
+	object_event  4,  3, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, TwinScript_0x9cc90, -1
 
 TwinScript_0x9cc76:
 	faceplayer
@@ -31,14 +24,14 @@ TwinScript_0x9cc76:
 	writetext Text_MoomooIsSick
 	waitbutton
 	closetext
-	spriteface ROUTE39BARN_TWIN1, RIGHT
+	turnobject LAST_TALKED, RIGHT
 	end
 
 .FeedingMooMoo:
 	writetext Text_WereFeedingMoomoo
 	waitbutton
 	closetext
-	spriteface ROUTE39BARN_TWIN1, RIGHT
+	turnobject LAST_TALKED, RIGHT
 	end
 
 TwinScript_0x9cc90:
@@ -49,20 +42,20 @@ TwinScript_0x9cc90:
 	writetext Text_MoomooIsSick
 	waitbutton
 	closetext
-	spriteface ROUTE39BARN_TWIN2, LEFT
+	turnobject LAST_TALKED, LEFT
 	end
 
 .FeedingMooMoo:
 	writetext Text_WereFeedingMoomoo
 	waitbutton
 	closetext
-	spriteface ROUTE39BARN_TWIN2, LEFT
+	turnobject LAST_TALKED, LEFT
 	end
 
 MooMoo:
-	opentext
 	checkevent EVENT_HEALED_MOOMOO
 	iftrue .HappyCow
+	opentext
 	writetext Text_WeakMoo
 	writebyte MILTANK
 	special PlaySlowCry
@@ -70,59 +63,45 @@ MooMoo:
 	writetext Text_ItsCryIsWeak
 	checkevent EVENT_TALKED_TO_FARMER_ABOUT_MOOMOO
 	iftrue .GiveBerry
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .GiveBerry:
 	buttonsound
 	writetext Text_AskGiveBerry
 	yesorno
-	iffalse .Refused
+	iffalse_jumpopenedtext Text_RefusedToGiveBerry
 	checkitem ORAN_BERRY
 	iffalse .MaybeSitrusBerry
 	takeitem ORAN_BERRY
-	copybytetovar MooMooBerries
+	copybytetovar wMooMooBerries
 	addvar 1
-	copyvartobyte MooMooBerries
-	if_equal 3, .ThreeOranBerries
-	if_equal 5, .FiveOranBerries
-	if_equal 7, .SevenOranBerries
-	writetext Text_GaveOranBerry
-	waitbutton
-	closetext
-	end
+	copyvartobyte wMooMooBerries
+	ifequal 3, .ThreeOranBerries
+	ifequal 5, .FiveOranBerries
+	ifequal 7, .SevenOranBerries
+	jumpopenedtext Text_GaveOranBerry
 
 .MaybeSitrusBerry:
 	checkitem SITRUS_BERRY
-	iffalse .NoBerriesInBag
+	iffalse_jumpopenedtext Text_NoBerries
 	takeitem SITRUS_BERRY
-	copybytetovar MooMooBerries
+	copybytetovar wMooMooBerries
 	addvar 2
-	copyvartobyte MooMooBerries
-	if_greater_than 6, .SevenSitrusBerries
-	if_greater_than 4, .FiveSitrusBerries
-	if_greater_than 2, .ThreeSitrusBerries
-	writetext Text_GaveSitrusBerry
-	waitbutton
-	closetext
-	end
+	copyvartobyte wMooMooBerries
+	ifgreater 6, .SevenSitrusBerries
+	ifgreater 4, .FiveSitrusBerries
+	ifgreater 2, .ThreeSitrusBerries
+	jumpopenedtext Text_GaveSitrusBerry
 
 .ThreeOranBerries:
 	writetext Text_GaveOranBerry
 	buttonsound
-	writetext Text_LittleHealthier
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_LittleHealthier
 
 .FiveOranBerries:
 	writetext Text_GaveOranBerry
 	buttonsound
-	writetext Text_QuiteHealthy
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_QuiteHealthy
 
 .SevenOranBerries:
 	playmusic MUSIC_HEAL
@@ -130,27 +109,18 @@ MooMoo:
 	pause 60
 	buttonsound
 	special RestartMapMusic
-	writetext Text_TotallyHealthy
-	waitbutton
-	closetext
 	setevent EVENT_HEALED_MOOMOO
-	end
+	jumpopenedtext Text_TotallyHealthy
 
 .ThreeSitrusBerries:
 	writetext Text_GaveSitrusBerry
 	buttonsound
-	writetext Text_LittleHealthier
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_LittleHealthier
 
 .FiveSitrusBerries:
 	writetext Text_GaveSitrusBerry
 	buttonsound
-	writetext Text_QuiteHealthy
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_QuiteHealthy
 
 .SevenSitrusBerries:
 	playmusic MUSIC_HEAL
@@ -158,29 +128,11 @@ MooMoo:
 	pause 60
 	buttonsound
 	special RestartMapMusic
-	writetext Text_TotallyHealthy
-	waitbutton
-	closetext
 	setevent EVENT_HEALED_MOOMOO
-	end
-
-.NoBerriesInBag:
-	writetext Text_NoBerries
-	waitbutton
-	closetext
-	end
-
-.Refused:
-	writetext Text_RefusedToGiveBerry
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_TotallyHealthy
 
 .HappyCow:
-	writetext UnknownText_0x9cd92
-	cry MILTANK
-	waitbutton
-	closetext
+	showcrytext UnknownText_0x9cd92, MILTANK
 	end
 
 Text_MoomooIsSick:

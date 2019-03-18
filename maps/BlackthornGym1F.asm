@@ -1,46 +1,43 @@
 BlackthornGym1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, BlackthornGym1FBoulderCallback
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, BlackthornGym1FBoulderCallback
+	db 7 ; warp events
+	warp_event  4, 17, BLACKTHORN_CITY, 1
+	warp_event  5, 17, BLACKTHORN_CITY, 1
+	warp_event  1,  7, BLACKTHORN_GYM_2F, 1
+	warp_event  7,  9, BLACKTHORN_GYM_2F, 2
+	warp_event  2,  6, BLACKTHORN_GYM_2F, 3
+	warp_event  7,  7, BLACKTHORN_GYM_2F, 4
+	warp_event  7,  6, BLACKTHORN_GYM_2F, 5
 
-BlackthornGym1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 7
-	warp_def $11, $4, 1, BLACKTHORN_CITY
-	warp_def $11, $5, 1, BLACKTHORN_CITY
-	warp_def $7, $1, 1, BLACKTHORN_GYM_2F
-	warp_def $9, $7, 2, BLACKTHORN_GYM_2F
-	warp_def $6, $2, 3, BLACKTHORN_GYM_2F
-	warp_def $7, $7, 4, BLACKTHORN_GYM_2F
-	warp_def $6, $7, 5, BLACKTHORN_GYM_2F
+	db 2 ; bg events
+	bg_event  3, 15, SIGNPOST_READ, BlackthornGymStatue
+	bg_event  6, 15, SIGNPOST_READ, BlackthornGymStatue
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 15, 3, SIGNPOST_READ, BlackthornGymStatue
-	signpost 15, 6, SIGNPOST_READ, BlackthornGymStatue
-
-.PersonEvents: db 5
-	person_event SPRITE_CLAIR, 3, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, BlackthornGymClairScript, -1
-	person_event SPRITE_GYM_GUY, 15, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, BlackthornGymGuyScript, -1
-	person_event SPRITE_DRAGON_TAMER, 14, 1, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerDragonTamerPaul, -1
-	person_event SPRITE_COOLTRAINER_M, 6, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerCooltrainermMike, -1
-	person_event SPRITE_COOLTRAINER_F, 2, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerCooltrainerfLola, -1
+	db 5 ; object events
+	object_event  5,  3, SPRITE_CLAIR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BlackthornGymClairScript, -1
+	object_event  7, 15, SPRITE_GYM_GUY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, BlackthornGymGuyScript, -1
+	object_event  1, 14, SPRITE_DRAGON_TAMER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerDragonTamerPaul, -1
+	object_event  6,  6, SPRITE_ACE_TRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerCooltrainermMike, -1
+	object_event  9,  2, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerCooltrainerfLola, -1
 
 BlackthornGym1FBoulderCallback:
 	checkevent EVENT_BOULDER_IN_BLACKTHORN_GYM_1
 	iffalse .skip1
-	changeblock $8, $2, $3b
+	changeblock 8, 2, $3b
 .skip1
 	checkevent EVENT_BOULDER_IN_BLACKTHORN_GYM_2
 	iffalse .skip2
-	changeblock $2, $4, $3a
+	changeblock 2, 4, $3a
 .skip2
 	checkevent EVENT_BOULDER_IN_BLACKTHORN_GYM_3
 	iffalse .skip3
-	changeblock $8, $6, $3b
+	changeblock 8, 6, $3b
 .skip3
 	return
 
@@ -51,30 +48,23 @@ BlackthornGymStatue:
 	jumpstd gymstatue1
 .Beaten:
 	checkcode VAR_BADGES
-	if_greater_than 15, .LyraToo
+	ifgreater 15, .LyraToo
 	jumpstd gymstatue2
 .LyraToo
 	jumpstd gymstatue3
 
 BlackthornGymClairScript:
-	faceplayer
-	opentext
 	checkflag ENGINE_RISINGBADGE
-	iftrue .AlreadyGotBadge
+	iftrue_jumptextfaceplayer ClairPokemonLeagueDirectionsText
 	checkevent EVENT_BEAT_CLAIR
-	iftrue .FightDone
-	writetext .IntroText
-	waitbutton
-	closetext
+	iftrue_jumptextfaceplayer .TooMuchToExpectText
+	showtextfaceplayer .IntroText
 	winlosstext .WinText, 0
 	loadtrainer CLAIR, 1
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_CLAIR
-	opentext
-	writetext .GoToDragonsDenText
-	waitbutton
-	closetext
+	showtext .GoToDragonsDenText
 	setevent EVENT_BEAT_DRAGON_TAMER_PAUL
 	setevent EVENT_BEAT_COOLTRAINERM_CODY
 	setevent EVENT_BEAT_COOLTRAINERM_MIKE
@@ -84,12 +74,6 @@ BlackthornGymClairScript:
 	setevent EVENT_BLACKTHORN_CITY_GRAMPS_BLOCKS_DRAGONS_DEN
 	clearevent EVENT_BLACKTHORN_CITY_GRAMPS_NOT_BLOCKING_DRAGONS_DEN
 	end
-
-.FightDone:
-	jumpopenedtext .TooMuchToExpectText
-
-.AlreadyGotBadge:
-	jumpopenedtext ClairPokemonLeagueDirectionsText
 
 .IntroText:
 	text "I am Clair."
@@ -198,13 +182,9 @@ ClairPokemonLeagueDirectionsText:
 
 BlackthornGymGuyScript:
 	checkevent EVENT_BEAT_CLAIR
-	iftrue .Won
-	jumptextfaceplayer .Text
+	iftrue_jumptextfaceplayer .WinText
+	thistextfaceplayer
 
-.Won:
-	jumptextfaceplayer .WinText
-
-.Text:
 	text "Yo! Champ in"
 	line "making!"
 
@@ -243,7 +223,7 @@ BlackthornGymGuyScript:
 	done
 
 GenericTrainerDragonTamerPaul:
-	generictrainer EVENT_BEAT_DRAGON_TAMER_PAUL, DRAGON_TAMER, PAUL, .SeenText, .BeatenText
+	generictrainer DRAGON_TAMER, PAUL, EVENT_BEAT_DRAGON_TAMER_PAUL, .SeenText, .BeatenText
 
 	text "Lance told you"
 	line "that he'd like to"
@@ -266,7 +246,7 @@ GenericTrainerDragonTamerPaul:
 	done
 
 GenericTrainerCooltrainermMike:
-	generictrainer EVENT_BEAT_COOLTRAINERM_MIKE, COOLTRAINERM, MIKE, .SeenText, .BeatenText
+	generictrainer COOLTRAINERM, MIKE, EVENT_BEAT_COOLTRAINERM_MIKE, .SeenText, .BeatenText
 
 	text "I know my short-"
 	line "comings now."
@@ -286,7 +266,7 @@ GenericTrainerCooltrainermMike:
 	done
 
 GenericTrainerCooltrainerfLola:
-	generictrainer EVENT_BEAT_COOLTRAINERF_LOLA, COOLTRAINERF, LOLA, .SeenText, .BeatenText
+	generictrainer COOLTRAINERF, LOLA, EVENT_BEAT_COOLTRAINERF_LOLA, .SeenText, .BeatenText
 
 	text "Dragons are weak"
 	line "against Dragon-"

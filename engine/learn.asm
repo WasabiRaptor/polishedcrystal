@@ -1,18 +1,20 @@
 LearnMove: ; 6508
 	call LoadTileMapToTempTileMap
-	ld a, [CurPartyMon]
-	ld hl, PartyMonNicknames
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
 	call GetNick
-	ld hl, StringBuffer1
+	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .loop
-	ld hl, PartyMon1Moves
+	ld hl, wForgettingMove
+	res FORGETTING_MOVE_F, [hl]
+	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, [CurPartyMon]
-	call AddNTimes
+	ld a, [wCurPartyMon]
+	rst AddNTimes
 	ld d, h
 	ld e, l
 	ld b, NUM_MOVES
@@ -42,17 +44,20 @@ LearnMove: ; 6508
 	ld a, [wBattleMode]
 	and a
 	jr z, .not_disabled
-	ld a, [DisabledMove]
+	ld a, [wDisabledMove]
 	cp b
 	jr nz, .not_disabled
 	xor a
-	ld [DisabledMove], a
-	ld [PlayerDisableCount], a
+	ld [wDisabledMove], a
+	ld [wPlayerDisableCount], a
 .not_disabled
 
 	call GetMoveName
 	ld hl, Text_1_2_and_Poof ; 1, 2 and…
 	call PrintText
+
+	ld hl, wForgettingMove
+	set FORGETTING_MOVE_F, [hl]
 	pop de
 	pop hl
 
@@ -67,38 +72,50 @@ LearnMove: ; 6508
 	dec a
 	ld hl, Moves + MOVE_PP
 	ld bc, MOVE_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
 	pop de
 	pop hl
+	ld b, a
 
-	ld [hl], a
+; Are we forgetting a move?
+	ld a, [wForgettingMove]
+	cp FORGETTING_MOVE | LEARNING_TM
+	jr nz, .pp_ok
+; Is the old move's current PP less than the new move's PP?
+	ld a, [hl]
+	cp b
+	jr nc, .pp_ok
+; TMs won't give free PP
+	ld b, a
+.pp_ok
+	ld [hl], b
 
 	ld a, [wBattleMode]
 	and a
 	jp z, .learned
 
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld b, a
-	ld a, [CurBattleMon]
+	ld a, [wCurBattleMon]
 	cp b
 	jp nz, .learned
 
-	ld a, [PlayerSubStatus2]
+	ld a, [wPlayerSubStatus2]
 	bit SUBSTATUS_TRANSFORMED, a
 	jp nz, .learned
 
 	ld h, d
 	ld l, e
-	ld de, BattleMonMoves
+	ld de, wBattleMonMoves
 	ld bc, NUM_MOVES
-	call CopyBytes
-	ld bc, PartyMon1PP - (PartyMon1Moves + NUM_MOVES)
+	rst CopyBytes
+	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES)
 	add hl, bc
-	ld de, BattleMonPP
+	ld de, wBattleMonPP
 	ld bc, NUM_MOVES
-	call CopyBytes
+	rst CopyBytes
 	jp .learned
 
 .cancel
@@ -131,72 +148,24 @@ ForgetMove: ; 65d3
 	push hl
 	ld de, wListMoves_MoveIndicesBuffer
 	ld bc, NUM_MOVES
-	call CopyBytes
-	pop hl
-.loop
-	push hl
+	rst CopyBytes
 	ld hl, Text_ForgetWhich
 	call PrintText
-	hlcoord 5, 2
-	lb bc, NUM_MOVES * 2, MOVE_NAME_LENGTH
-	call TextBox
-	hlcoord 5 + 2, 2 + 2
-	ld a, SCREEN_WIDTH * 2
-	ld [Buffer1], a
-	predef ListMoves
-	; wMenuData3
-	ld a, $4
-	ld [w2DMenuCursorInitY], a
-	ld a, $6
-	ld [w2DMenuCursorInitX], a
-	ld a, [wNumMoves]
-	inc a
-	ld [w2DMenuNumRows], a
-	ld a, $1
-	ld [w2DMenuNumCols], a
-	ld [wMenuCursorY], a
-	ld [wMenuCursorX], a
-	ld a, $3
-	ld [wMenuJoypadFilter], a
-	ld a, $20
-	ld [w2DMenuFlags1], a
-	xor a
-	ld [w2DMenuFlags2], a
-	ld a, $20
-	ld [w2DMenuCursorOffsets], a
-	call StaticMenuJoypad
-	push af
-	call Call_LoadTempTileMapToTileMap
-	pop af
-	pop hl
-	bit 1, a
-	jr nz, .cancel
-	push hl
-	ld a, [wMenuCursorY]
+	farcall ChooseMoveToForget
+	jr z, .cancel
+	cp 5 ; user chose the new move itself, meaning cancel
+	jr z, .cancel
 	dec a
 	ld c, a
 	ld b, 0
-	add hl, bc
-	ld a, [hl]
-	push af
-	push bc
-	call IsHMMove
-	pop bc
-	pop de
-	ld a, d
-	jr c, .hmmove
+	ld a, [wMoveScreenSelectedMove]
 	pop hl
 	add hl, bc
 	and a
 	ret
 
-.hmmove
-	ld hl, Text_CantForgetHM
-	call PrintText
-	pop hl
-	jr .loop
-
 .cancel
+	pop hl
 	scf
 	ret
 ; 666b
@@ -247,9 +216,3 @@ Text_1_2_and_Poof: ; 6684
 	text_jump UnknownText_0x1c574e
 	db "@"
 ; 669a
-
-Text_CantForgetHM: ; 669a
-; HM moves can't be forgotten now.
-	text_jump UnknownText_0x1c5772
-	db "@"
-; 669f

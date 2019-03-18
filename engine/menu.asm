@@ -6,45 +6,25 @@ _2DMenu_:: ; 2400e
 	call Draw2DMenu
 	call UpdateSprites
 	call ApplyTilemap
-	jp Get2DMenuSelection
-; 24022
-
-_InterpretBattleMenu:: ; 24022
-	ld hl, CopyMenuData2
-	ld a, [wMenuData2_2DMenuItemStringsBank]
-	call FarCall_hl
-
-	call Draw2DMenu
-	call UpdateSprites
-	call ApplyTilemap
-	jp Get2DMenuSelection
-; 2403c
-
-Draw2DMenu: ; 24085
-	xor a
-	ld [hBGMapMode], a
-	call MenuBox
-	jp Place2DMenuItemStrings
-; 2408f
 
 Get2DMenuSelection: ; 2408f
 	call Init2DMenuCursorPosition
-	call StaticMenuJoypad
+	call DoMenuJoypadLoop
 	call MenuClickSound
 	ld a, [wMenuData2Flags]
 	bit 1, a
 	jr z, .skip
 	call GetMenuJoypad
 	bit SELECT_F, a
-	jr nz, .quit1
+	jr nz, .quit
 
 .skip
 	ld a, [wMenuData2Flags]
-	bit 0, a
-	jr nz, .skip2
+	rra
+	jr c, .skip2
 	call GetMenuJoypad
 	bit B_BUTTON_F, a
-	jr nz, .quit2
+	jr nz, .quit
 
 .skip2
 	ld a, [w2DMenuNumCols]
@@ -59,11 +39,7 @@ Get2DMenuSelection: ; 2408f
 	and a
 	ret
 
-.quit1
-	scf
-	ret
-
-.quit2
+.quit
 	scf
 	ret
 ; 240cd
@@ -80,6 +56,11 @@ GetMenuNumberOfRows: ; 240d3
 	and $f
 	ret
 ; 240db
+
+Draw2DMenu: ; 24085
+	xor a
+	ld [hBGMapMode], a
+	call MenuBox
 
 Place2DMenuItemStrings:
 	ld hl, wMenuData2_2DMenuItemStringsAddr
@@ -216,9 +197,7 @@ Init2DMenuCursorPosition: ; 2411a (9:411a)
 ; 241a8
 
 
-_StaticMenuJoypad:: ; 241a8
-	call Place2DMenuCursor
-_ScrollingMenuJoypad:: ; 241ab
+_DoMenuJoypadLoop::
 	ld hl, w2DMenuFlags2
 	res 7, [hl]
 	ld a, [hBGMapMode]
@@ -227,33 +206,36 @@ _ScrollingMenuJoypad:: ; 241ab
 	pop af
 	ld [hBGMapMode], a
 	ret
-; 241ba
 
-MenuJoypadLoop: ; 24216
+MenuJoypadLoop:
 .loop
 	call Move2DMenuCursor
 	call .BGMap_OAM
 	call Do2DMenuRTCJoypad
-	ret nc
+	jr nc, .done
 	call _2DMenuInterpretJoypad
-	ret c
+	jr c, .done
 	ld a, [w2DMenuFlags1]
 	bit 7, a
-	ret nz
+	jr nz, .done
 	call GetMenuJoypad
 	ld b, a
 	ld a, [wMenuJoypadFilter]
 	and b
 	jr z, .loop
-	ret
-; 24238
+.done
+	jp Move2DMenuCursor
 
 .BGMap_OAM: ; 24238
 	ld a, [hOAMUpdate]
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
-	call WaitBGMap
+	ld [hBGMapMode], a
+	ld a, [w2DMenuFlags1]
+	bit 6, a
+	call z, DelayFrame
+	call Delay2
 	pop af
 	ld [hOAMUpdate], a
 	xor a
@@ -262,7 +244,10 @@ MenuJoypadLoop: ; 24216
 ; 24249
 
 Do2DMenuRTCJoypad: ; 24249
+	jr .handleLoop
 .loopRTC
+	call DelayFrame
+.handleLoop
 	call RTC
 	call Menu_WasButtonPressed
 	ret c
@@ -277,7 +262,11 @@ Menu_WasButtonPressed: ; 24259
 	ld a, [w2DMenuFlags1]
 	bit 6, a
 	jr z, .skip_to_joypad
+	ld a, $1
+	ld [hBGMapMode], a
 	farcall PlaySpriteAnimationsAndDelayFrame
+	xor a
+	ld [hBGMapMode], a
 
 .skip_to_joypad
 	call JoyTextDelay
@@ -291,13 +280,13 @@ Menu_WasButtonPressed: ; 24259
 _2DMenuInterpretJoypad: ; 24270
 	call GetMenuJoypad
 	bit A_BUTTON_F, a
-	jp nz, .a_b_start_select
+	jp nz, .a_start_select
 	bit B_BUTTON_F, a
-	jp nz, .a_b_start_select
+	jp nz, .b_button
 	bit SELECT_F, a
-	jp nz, .a_b_start_select
+	jp nz, .a_start_select
 	bit START_F, a
-	jp nz, .a_b_start_select
+	jp nz, .a_start_select
 	bit D_RIGHT_F, a
 	jr nz, .d_right
 	bit D_LEFT_F, a
@@ -410,10 +399,18 @@ _2DMenuInterpretJoypad: ; 24270
 	ret
 ; 24318
 
-.a_b_start_select ; 24318
+.b_button
+	ld a, [wIsBattleMenu]
+	and a ; should B move to Run?
+	jr z, .no_b_run
+	; Run is the bottom-right item
+	ld a, $2
+	ld [wMenuCursorX], a
+	ld [wMenuCursorY], a
+.a_start_select
+.no_b_run
 	xor a
 	ret
-; 2431a
 
 Move2DMenuCursor: ; 2431a
 	ld hl, wCursorCurrentTile
@@ -434,22 +431,24 @@ Place2DMenuCursor: ; 24329
 	ld a, [w2DMenuCursorOffsets]
 	swap a
 	and $f
+	jr z, .got_row
 	ld c, a
 	ld a, [wMenuCursorY]
 	ld b, a
 	xor a
-	dec b
-	jr z, .got_row
+	jr .handleLoop
 .row_loop
 	add c
+.handleLoop
 	dec b
 	jr nz, .row_loop
 
 .got_row
 	ld c, SCREEN_WIDTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [w2DMenuCursorOffsets]
 	and $f
+	jr z, .got_col
 	ld c, a
 	ld a, [wMenuCursorX]
 	ld b, a
@@ -504,23 +503,20 @@ _PushWindow:: ; 24374
 ; Otherwise, reset bit 0 of 7:[wWindowStackPointer].
 	ld a, [wMenuFlags]
 	bit 6, a
-	jr nz, .bit_6
-	bit 7, a
-	jr z, .not_bit_7
+	jr z, .not_bit_6
 
-.bit_6
 	ld hl, wWindowStackPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	set 0, [hl]
-	call MenuBoxCoord2Tile
+	call PushWindow_MenuBoxCoordToTile
 	call .copy
-	call MenuBoxCoord2Attr
+	call PushWindow_MenuBoxCoordToAttr
 	call .copy
 	jr .done
 
-.not_bit_7
+.not_bit_6
 	pop hl ; last-pushed register was de
 	push hl
 	ld a, [hld]
@@ -549,9 +545,7 @@ _PushWindow:: ; 24374
 ; 243cd
 
 .copy ; 243cd
-	call GetMenuBoxDims
-	inc b
-	inc c
+	call GetTileBackupMenuBoxDims
 
 .row
 	push bc
@@ -616,7 +610,7 @@ _ExitMenu:: ; 243e8
 Error_Cant_ExitMenu: ; 2445d
 	ld hl, .Text_NoWindowsAvailableForPopping
 	call PrintText
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 .InfiniteLoop:
 	jr .InfiniteLoop
 ; 24468
@@ -690,8 +684,8 @@ _InitVerticalMenuCursor:: ; 2446d
 	ld [hli], a
 ; wCursorOffCharacter, wCursorCurrentTile
 	xor a
-rept 3
 	ld [hli], a
-endr
+	ld [hli], a
+	ld [hli], a
 	ret
 ; 244c3

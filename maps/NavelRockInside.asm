@@ -1,32 +1,29 @@
 NavelRockInside_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 14 ; warp events
+	warp_event  7, 81, NAVEL_ROCK_OUTSIDE, 3
+	warp_event  8, 64, NAVEL_ROCK_INSIDE, 3
+	warp_event  3,  3, NAVEL_ROCK_INSIDE, 2
+	warp_event  9,  5, NAVEL_ROCK_INSIDE, 5
+	warp_event 23, 85, NAVEL_ROCK_INSIDE, 4
+	warp_event 23,  3, NAVEL_ROCK_INSIDE, 7
+	warp_event  5, 45, NAVEL_ROCK_INSIDE, 6
+	warp_event  2, 42, NAVEL_ROCK_INSIDE, 9
+	warp_event  2, 32, NAVEL_ROCK_INSIDE, 8
+	warp_event  5, 35, NAVEL_ROCK_INSIDE, 11
+	warp_event  5, 25, NAVEL_ROCK_INSIDE, 10
+	warp_event  2, 22, NAVEL_ROCK_INSIDE, 13
+	warp_event  2, 12, NAVEL_ROCK_INSIDE, 12
+	warp_event  5, 15, NAVEL_ROCK_ROOF, 1
 
-NavelRockInside_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 14
-	warp_def $57, $9, 3, NAVEL_ROCK_OUTSIDE
-	warp_def $43, $9, 3, NAVEL_ROCK_INSIDE
-	warp_def $3, $3, 2, NAVEL_ROCK_INSIDE
-	warp_def $5, $9, 5, NAVEL_ROCK_INSIDE
-	warp_def $55, $17, 4, NAVEL_ROCK_INSIDE
-	warp_def $3, $17, 7, NAVEL_ROCK_INSIDE
-	warp_def $2d, $5, 6, NAVEL_ROCK_INSIDE
-	warp_def $2a, $2, 9, NAVEL_ROCK_INSIDE
-	warp_def $20, $2, 8, NAVEL_ROCK_INSIDE
-	warp_def $23, $5, 11, NAVEL_ROCK_INSIDE
-	warp_def $19, $5, 10, NAVEL_ROCK_INSIDE
-	warp_def $16, $2, 13, NAVEL_ROCK_INSIDE
-	warp_def $c, $2, 12, NAVEL_ROCK_INSIDE
-	warp_def $f, $5, 1, NAVEL_ROCK_ROOF
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 12, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, SACRED_ASH, 1, EVENT_NAVEL_ROCK_SACRED_ASH
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 37, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MASTER_BALL, 1, EVENT_NAVEL_ROCK_MASTER_BALL
+	db 2 ; object events
+	itemball_event 12, 12, SACRED_ASH, 1, EVENT_NAVEL_ROCK_SACRED_ASH
+	itemball_event 37, 12, MASTER_BALL, 1, EVENT_NAVEL_ROCK_MASTER_BALL
 

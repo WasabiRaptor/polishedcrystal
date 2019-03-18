@@ -1,13 +1,15 @@
-INCLUDE "includes.asm"
+INCLUDE "constants.asm"
 
 
 SECTION "NULL", ROM0
 
 NULL::
 
-INCLUDE "rst.asm"
-INCLUDE "interrupts.asm"
+INCLUDE "home/rst.asm"
+INCLUDE "home/interrupts.asm"
 
+SECTION "High Home", ROM0
+INCLUDE "home/highhome.asm"
 
 SECTION "Header", ROM0
 
@@ -20,7 +22,6 @@ SECTION "Home", ROM0
 
 INCLUDE "home/init.asm"
 INCLUDE "home/vblank.asm"
-INCLUDE "home/delay.asm"
 INCLUDE "home/rtc.asm"
 INCLUDE "home/fade.asm"
 INCLUDE "home/lcd.asm"
@@ -44,38 +45,26 @@ INCLUDE "home/farcall.asm"
 INCLUDE "home/predef.asm"
 INCLUDE "home/window.asm"
 INCLUDE "home/flag.asm"
-
-xor_a:: ; 2ec6
-	xor a
-	ret
-; 2ec8
-
-xor_a_dec_a:: ; 2ec8
-	xor a
-	dec a
-	ret
-; 2ecb
+INCLUDE "home/restore_music.asm"
 
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a
 	ld [hMapAnims], a
-	ld a, [VramState]
-	res 0, a
-	ld [VramState], a
-	xor a
 	ld [wSpriteUpdatesEnabled], a
+	ld a, [wVramState]
+	res 0, a
+	ld [wVramState], a
 	ret
 ; 0x2ee4
 
 EnableSpriteUpdates:: ; 2ee4
 	ld a, $1
 	ld [wSpriteUpdatesEnabled], a
-	ld a, [VramState]
-	set 0, a
-	ld [VramState], a
-	ld a, $1
 	ld [hMapAnims], a
+	ld a, [wVramState]
+	set 0, a
+	ld [wVramState], a
 	ret
 ; 2ef6
 
@@ -101,23 +90,12 @@ INCLUDE "home/item.asm"
 INCLUDE "home/random.asm"
 INCLUDE "home/sram.asm"
 
-; Register aliases
-
-_hl_:: ; 2fec
-	jp hl
-; 2fed
-
-_de_:: ; 2fed
-	push de
-	ret
-; 2fef
-
 INCLUDE "home/double_speed.asm"
 
 ClearSprites:: ; 300b
 ; Erase OAM data
-	ld hl, Sprites
-	ld b, SpritesEnd - Sprites
+	ld hl, wSprites
+	ld b, wSpritesEnd - wSprites
 	xor a
 .loop
 	ld [hli], a
@@ -128,9 +106,9 @@ ClearSprites:: ; 300b
 
 HideSprites:: ; 3016
 ; Set all OAM y-positions to 160 to hide them offscreen
-	ld hl, Sprites
+	ld hl, wSprites
 	ld de, 4 ; length of an OAM struct
-	ld b, (SpritesEnd - Sprites) / 4 ; number of OAM structs
+	ld b, (wSpritesEnd - wSprites) / 4 ; number of OAM structs
 	ld a, 160 ; y
 .loop
 	ld [hl], a
@@ -140,15 +118,12 @@ HideSprites:: ; 3016
 	ret
 ; 3026
 
-INCLUDE "home/copy2.asm"
-
 _Jumptable:
 	push de
 	ld e, a
 	ld d, 0
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -156,15 +131,15 @@ endr
 	jp hl
 
 LoadTileMapToTempTileMap:: ; 309d
-; Load TileMap into TempTileMap
+; Load wTileMap into wTempTileMap
 	ld a, [rSVBK]
 	push af
-	ld a, BANK(TempTileMap)
+	ld a, BANK(wTempTileMap)
 	ld [rSVBK], a
 	hlcoord 0, 0
-	decoord 0, 0, TempTileMap
-	ld bc, TileMapEnd - TileMap
-	call CopyBytes
+	decoord 0, 0, wTempTileMap
+	ld bc, wTileMapEnd - wTileMap
+	rst CopyBytes
 	pop af
 	ld [rSVBK], a
 	ret
@@ -180,23 +155,23 @@ Call_LoadTempTileMapToTileMap:: ; 30b4
 ; 30bf
 
 LoadTempTileMapToTileMap:: ; 30bf
-; Load TempTileMap into TileMap
+; Load wTempTileMap into wTileMap
 	ld a, [rSVBK]
 	push af
-	ld a, BANK(TempTileMap)
+	ld a, BANK(wTempTileMap)
 	ld [rSVBK], a
-	hlcoord 0, 0, TempTileMap
+	hlcoord 0, 0, wTempTileMap
 	decoord 0, 0
-	ld bc, TileMapEnd - TileMap
-	call CopyBytes
+	ld bc, wTileMapEnd - wTileMap
+	rst CopyBytes
 	pop af
 	ld [rSVBK], a
 	ret
 ; 30d6
 
 CopyName1:: ; 30d6
-; Copies the name from de to StringBuffer2
-	ld hl, StringBuffer2
+; Copies the name from de to wStringBuffer2
+	ld hl, wStringBuffer2
 
 CopyName2:: ; 30d9
 ; Copies the name from de to hl
@@ -208,30 +183,6 @@ CopyName2:: ; 30d9
 	jr nz, .loop
 	ret
 ; 30e1
-
-IsInArray:: ; 30e1
-; Find value a for every de bytes in array hl.
-; Return index in b and carry if found.
-	ld b, 0
-	ld c, a
-.loop
-	ld a, [hl]
-	cp -1
-	jr z, .NotInArray
-	cp c
-	jr z, .InArray
-	inc b
-	add hl, de
-	jr .loop
-
-.NotInArray:
-	and a
-	ret
-
-.InArray:
-	scf
-	ret
-; 30f4
 
 SkipNames:: ; 0x30f4
 ; Skip a names.
@@ -250,80 +201,54 @@ INCLUDE "home/math.asm"
 PrintLetterDelay:: ; 313d
 ; Wait before printing the next letter.
 
-; The text speed setting in Options1 is actually a frame count:
+; The text speed setting in wOptions1 is actually a frame count:
 ; 	fast: 1 frame
 ; 	mid:  3 frames
 ; 	slow: 5 frames
 
-; TextBoxFlags[!0] and A or B override text speed with a one-frame delay.
-; Options1[4] and TextBoxFlags[!1] disable the delay.
+; wTextBoxFlags[!0] and A or B override text speed with a one-frame delay.
+; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
 
-	ld a, [Options1]
-	bit NO_TEXT_SCROLL, a
-	ret nz
-
-; non-scrolling text?
-	ld a, [TextBoxFlags]
+	ld a, [wTextBoxFlags]
 	bit 1, a
 	ret z
+	bit 0, a
+	jr z, .forceFastScroll
 
+	ld a, [wOptions1]
+	bit NO_TEXT_SCROLL, a
+	ret nz
+	and %11
+	ret z
+	ld a, $1
+	ld [hBGMapHalf], a
+.forceFastScroll
 	push hl
 	push de
 	push bc
-
-	ld hl, hOAMUpdate
-	ld a, [hl]
-	push af
-
-; orginally turned oam update off...
-;	ld a, 1
-	ld [hl], a
-
 ; force fast scroll?
-	ld a, [TextBoxFlags]
+	ld a, [wTextBoxFlags]
 	bit 0, a
-	jr z, .fast
-
+	ld a, 2
+	jr z, .updateDelay
 ; text speed
-	ld a, [Options1]
-	and %111
-	jr .updatedelay
-
-.fast
-	ld a, 1
-
-.updatedelay
-	ld [TextDelayFrames], a
-
-.checkjoypad
-	call GetJoypad
-
-; input override
-	ld a, [wDisableTextAcceleration]
+	ld a, [wOptions1]
+	and %11
+	rlca
+.updateDelay
+	dec a
+	ld [wTextDelayFrames], a
+.textDelayLoop
+	ld a, [wTextDelayFrames]
 	and a
-	jr nz, .wait
-
-; Wait one frame if holding A or B.
-	ld a, [hJoyDown]
-	bit 0, a ; A_BUTTON
-	jr z, .checkb
-	jr .delay
-.checkb
-	bit 1, a ; B_BUTTON
-	jr z, .wait
-
-.delay
+	jr z, .done
 	call DelayFrame
-	jr .end
-
-.wait
-	ld a, [TextDelayFrames]
-	and a
-	jr nz, .checkjoypad
-
-.end
-	pop af
-	ld [hOAMUpdate], a
+	call GetJoypad
+; Finish execution if A or B is pressed
+	ld a, [hJoyDown]
+	and A_BUTTON | B_BUTTON
+	jr z, .textDelayLoop
+.done
 	pop bc
 	pop de
 	pop hl
@@ -350,49 +275,15 @@ CopyDataUntil:: ; 318c
 ; 0x3198
 
 PrintNum:: ; 3198
-	ld a, [hROMBank]
-	push af
-	ld a, BANK(_PrintNum)
-	rst Bankswitch
-
-	call _PrintNum
-
-	pop af
-	rst Bankswitch
+	homecall _PrintNum
 	ret
 ; 31a4
 
 FarPrintText:: ; 31b0
 	ld [hBuffer], a
-	ld a, [hROMBank]
-	push af
-	ld a, [hBuffer]
-	rst Bankswitch
-
-	call PrintText
-
-	pop af
-	rst Bankswitch
+	homecall PrintText, [hBuffer]
 	ret
 ; 31be
-
-CallPointerAt:: ; 31be
-	ld a, [hROMBank]
-	push af
-	ld a, [hli]
-	rst Bankswitch
-
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
-	call _hl_
-
-	pop hl
-	ld a, h
-	rst Bankswitch
-	ret
-; 31cd
 
 QueueScript:: ; 31cd
 ; Push pointer hl in the current bank to wQueuedScriptBank.
@@ -446,125 +337,6 @@ CompareLong:: ; 31e4
 	ret
 ; 31f3
 
-ClearBGPalettes:: ; 31f3
-	call ClearPalettes
-WaitBGMap:: ; 31f6
-; Tell VBlank to update BG Map
-	ld a, 1 ; BG Map 0 tiles
-	ld [hBGMapMode], a
-; Wait for it to do its magic
-	ld c, 4
-	jp DelayFrames
-; 3200
-
-WaitBGMap2:: ; 0x3200
-	ld a, 2
-	ld [hBGMapMode], a
-	ld c, 4
-	call DelayFrames
-	ld a, 1
-	ld [hBGMapMode], a
-	ld c, 4
-	jp DelayFrames
-; 0x3218
-
-ApplyTilemap:: ; 321c
-	ld a, [wSpriteUpdatesEnabled]
-	cp 0
-	jr z, .dmg
-
-	ld a, 1
-	ld [hBGMapMode], a
-	jr LoadEDTile
-
-.dmg
-; WaitBGMap
-	ld a, 1
-	ld [hBGMapMode], a
-	ld c, 4
-	jp DelayFrames
-; 3238
-
-LoadEDTile:: ; 323d
-	ld a, [hBGMapMode]
-	push af
-	xor a
-	ld [hBGMapMode], a
-
-	ld a, [hMapAnims]
-	push af
-	xor a
-	ld [hMapAnims], a
-
-.wait
-	ld a, [rLY]
-	cp $7f
-	jr c, .wait
-
-	di
-	ld a, BANK(VTiles3)
-	ld [rVBK], a
-	hlcoord 0, 0, AttrMap
-	call .StackPointerMagic
-	xor a ; ld a, BANK(VTiles0)
-	ld [rVBK], a
-	hlcoord 0, 0
-	call .StackPointerMagic
-
-.wait2
-	ld a, [rLY]
-	cp $7f
-	jr c, .wait2
-	ei
-
-	pop af
-	ld [hMapAnims], a
-	pop af
-	ld [hBGMapMode], a
-	ret
-; 327b
-
-.StackPointerMagic: ; 327b
-; Copy all tiles to VBGMap
-	ld [hSPBuffer], sp
-	ld sp, hl
-	ld a, [hBGMapAddress + 1]
-	ld h, a
-	ld l, 0
-	ld a, SCREEN_HEIGHT
-	ld [hTilesPerCycle], a
-	lb bc, (1 << 1), (rSTAT % $100) ; b: not in v/hblank
-
-.loop
-rept SCREEN_WIDTH / 2
-	pop de
-; if in v/hblank, wait until not in v/hblank
-.loop\@
-	ld a, [$ff00+c]
-	and b
-	jr nz, .loop\@
-; load BGMap0
-	ld [hl], e
-	inc l
-	ld [hl], d
-	inc l
-endr
-
-	ld de, $20 - SCREEN_WIDTH
-	add hl, de
-	ld a, [hTilesPerCycle]
-	dec a
-	ld [hTilesPerCycle], a
-	jr nz, .loop
-
-	ld a, [hSPBuffer]
-	ld l, a
-	ld a, [hSPBuffer + 1]
-	ld h, a
-	ld sp, hl
-	ret
-; 32f9
-
 SetPalettes:: ; 32f9
 ; Inits the Palettes
 ; depending on the system the monochromes palettes or color palettes
@@ -582,11 +354,11 @@ ClearPalettes:: ; 3317
 	ld a, [rSVBK]
 	push af
 
-	ld a, BANK(BGPals)
+	ld a, BANK(wBGPals)
 	ld [rSVBK], a
 
-; Fill BGPals and OBPals with $ffff (white)
-	ld hl, BGPals
+; Fill wBGPals and wOBPals with $ffff (white)
+	ld hl, wBGPals
 if !DEF(MONOCHROME)
 	ld bc, 16 palettes
 	ld a, $ff
@@ -611,10 +383,9 @@ endc
 	ret
 ; 333e
 
-GetMemSGBLayout:: ; 333e
-	ld b, SCGB_RAM
-GetSGBLayout:: ; 3340
-; load sgb packets unless dmg
+GetMemCGBLayout:: ; 333e
+	ld b, CGB_RAM
+GetCGBLayout:: ; 3340
 	predef_jump Predef_LoadCGBLayout
 ; 334e
 
@@ -627,15 +398,14 @@ SetHPPal:: ; 334e
 
 GetHPPal:: ; 3353
 ; Get palette for hp bar pixel length e in d.
-
 	ld d, HP_GREEN
 	ld a, e
-	cp 24
+	cp 25
 	ret nc
-	inc d ; yellow
+	inc d ; HP_YELLOW
 	cp 10
 	ret nc
-	inc d ; red
+	inc d ; HP_RED
 	ret
 ; 335f
 
@@ -666,7 +436,7 @@ CountSetBits:: ; 0x335f
 ; 0x3376
 
 GetWeekday:: ; 3376
-	ld a, [CurDay]
+	ld a, [wCurDay]
 .mod
 	sub 7
 	jr nc, .mod
@@ -679,15 +449,15 @@ INCLUDE "home/pokedex_flags.asm"
 NamesPointers:: ; 33ab
 	dba PokemonNames
 	dba MoveNames
-	dbw 0, 0
+	dba ApricornNames
 	dba ItemNames
-	dbw 0, PartyMonOT
-	dbw 0, OTPartyMonOT
+	dbw 0, wPartyMonOT
+	dbw 0, wOTPartyMonOT
 	dba TrainerClassNames
 ; 33c0
 
 GetName:: ; 33c3
-; Return name CurSpecies from name list wNamedObjectTypeBuffer in StringBuffer1.
+; Return name wCurSpecies from name list wNamedObjectTypeBuffer in wStringBuffer1.
 
 	ld a, [hROMBank]
 	push af
@@ -699,8 +469,8 @@ GetName:: ; 33c3
 	cp PKMN_NAME
 	jr nz, .NotPokeName
 
-	ld a, [CurSpecies]
-	ld [wd265], a
+	ld a, [wCurSpecies]
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, PKMN_NAME_LENGTH
 	add hl, de
@@ -714,22 +484,22 @@ GetName:: ; 33c3
 	ld e, a
 	ld d, 0
 	ld hl, NamesPointers
-rept 3
 	add hl, de
-endr
+	add hl, de
+	add hl, de
 	ld a, [hli]
 	rst Bankswitch
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
-	ld a, [CurSpecies]
+	ld a, [wCurSpecies]
 	dec a
 	call GetNthString
 
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	ld bc, ITEM_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
 .done
 	pop de
@@ -765,7 +535,7 @@ GetBasePokemonName:: ; 3420
 	push hl
 	call GetPokemonName
 
-	ld hl, StringBuffer1
+	ld hl, wStringBuffer1
 .loop
 	ld a, [hl]
 	cp "@"
@@ -785,7 +555,7 @@ GetBasePokemonName:: ; 3420
 ; 343b
 
 GetPokemonName:: ; 343b
-; Get Pokemon name wd265.
+; Get Pokemon name wNamedObjectIndexBuffer.
 
 	ld a, [hROMBank]
 	push af
@@ -794,7 +564,7 @@ GetPokemonName:: ; 343b
 	rst Bankswitch
 
 ; Each name is ten characters
-	ld a, [wd265]
+	ld a, [wNamedObjectIndexBuffer]
 	dec a
 	ld d, 0
 	ld e, a
@@ -808,11 +578,11 @@ GetPokemonName:: ; 343b
 	add hl, de
 
 ; Terminator
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	push de
 	ld bc, PKMN_NAME_LENGTH - 1
-	call CopyBytes
-	ld hl, StringBuffer1 + PKMN_NAME_LENGTH - 1
+	rst CopyBytes
+	ld hl, wStringBuffer1 + PKMN_NAME_LENGTH - 1
 	ld [hl], "@"
 	pop de
 
@@ -822,29 +592,47 @@ GetPokemonName:: ; 343b
 	ret
 ; 3468
 
+GetCurItemName::
+; Get item name from item in CurItem
+	ld a, [wCurItem]
+	ld [wNamedObjectIndexBuffer], a
 GetItemName:: ; 3468
-; Get item name wd265.
+; Get item name wNamedObjectIndexBuffer.
 
 	push hl
 	push bc
-	ld a, [wd265]
-	ld [CurSpecies], a
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurSpecies], a
 	ld a, ITEM_NAME
 	ld [wNamedObjectTypeBuffer], a
 	call GetName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	pop bc
 	pop hl
 	ret
 ; 3487
 
+GetApricornName::
+; Get apricorn name wNamedObjectIndexBuffer.
+	push hl
+	push bc
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurSpecies], a
+	ld a, APRICORN_NAME
+	ld [wNamedObjectTypeBuffer], a
+	call GetName
+	ld de, wStringBuffer1
+	pop bc
+	pop hl
+	ret
+
 GetTMHMName:: ; 3487
-; Get TM/HM name by item id wd265.
+; Get TM/HM name by item id wNamedObjectIndexBuffer.
 
 	push hl
 	push de
 	push bc
-	ld a, [wd265]
+	ld a, [wNamedObjectIndexBuffer]
 	push af
 
 ; TM/HM prefix
@@ -861,11 +649,11 @@ GetTMHMName:: ; 3487
 	ld bc, .TMTextEnd - .TMText
 
 .asm_34a1
-	ld de, StringBuffer1
-	call CopyBytes
+	ld de, wStringBuffer1
+	rst CopyBytes
 
 ; TM/HM number
-	ld a, [wd265]
+	ld a, [wNamedObjectIndexBuffer]
 	ld c, a
 
 ; HM numbers start from 51, not 1
@@ -902,11 +690,11 @@ GetTMHMName:: ; 3487
 	ld [de], a
 
 	pop af
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	pop bc
 	pop de
 	pop hl
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	ret
 
 .TMText:
@@ -945,6 +733,13 @@ IsHMMove:: ; 34e7
 	db -1
 ; 34f8
 
+ItemIsMail:: ; b9e76
+	ld a, d
+	cp FLOWER_MAIL
+	ccf
+	ret
+; b9e80
+
 GetMoveName:: ; 34f8
 	push hl
 
@@ -952,10 +747,10 @@ GetMoveName:: ; 34f8
 	ld [wNamedObjectTypeBuffer], a
 
 	ld a, [wNamedObjectIndexBuffer] ; move id
-	ld [CurSpecies], a
+	ld [wCurSpecies], a
 
 	call GetName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 
 	pop hl
 	ret
@@ -981,7 +776,7 @@ ScrollingMenu:: ; 350c
 ; 3524
 
 .UpdatePalettes: ; 3524
-	ld hl, VramState
+	ld hl, wVramState
 	bit 0, [hl]
 	jp nz, UpdateTimePals
 	jp SetPalettes
@@ -1105,7 +900,13 @@ HandleStoneQueue:: ; 3567
 	ld a, [hld]
 	cp d
 	jr nz, .not_on_warp
-	jr .found_warp
+	pop af
+	ld d, a
+	ld a, [wCurrMapWarpCount]
+	sub d
+	inc a
+	scf
+	ret
 
 .not_on_warp
 	ld a, 5
@@ -1122,19 +923,9 @@ HandleStoneQueue:: ; 3567
 .nope2
 	and a
 	ret
-
-.found_warp
-	pop af
-	ld d, a
-	ld a, [wCurrMapWarpCount]
-	sub d
-	inc a
-	scf
-	ret
 ; 35de
 
 .IsObjectInStoneTable: ; 35de
-	inc e
 	ld hl, CMDQUEUE_ADDR
 	add hl, bc
 	ld a, [hli]
@@ -1190,7 +981,7 @@ CheckTrainerBattle:: ; 360d
 
 ; Skip the player object.
 	ld a, 1
-	ld de, MapObjects + OBJECT_LENGTH
+	ld de, wMapObjects + OBJECT_LENGTH
 
 .loop
 
@@ -1274,21 +1065,21 @@ CheckTrainerBattle:: ; 360d
 	pop af
 	ld [hLastTalked], a
 	ld a, b
-	ld [EngineBuffer2], a
+	ld [wEngineBuffer2], a
 	ld a, c
-	ld [EngineBuffer3], a
+	ld [wEngineBuffer3], a
 	jr LoadTrainer_continue
 ; 3674
 
 TalkToTrainer:: ; 3674
 	ld a, 1
-	ld [EngineBuffer2], a
+	ld [wEngineBuffer2], a
 	ld a, -1
-	ld [EngineBuffer3], a
+	ld [wEngineBuffer3], a
 
 LoadTrainer_continue:: ; 367e
-	ld a, [MapScriptHeaderBank]
-	ld [EngineBuffer1], a
+	ld a, [wMapScriptHeaderBank]
+	ld [wEngineBuffer1], a
 
 	ld a, [hLastTalked]
 	call GetMapObject
@@ -1301,7 +1092,7 @@ LoadTrainer_continue:: ; 367e
 	push af
 	ld hl, MAPOBJECT_SCRIPT_POINTER
 	add hl, bc
-	ld a, [EngineBuffer1]
+	ld a, [wEngineBuffer1]
 	call GetFarHalfword
 	ld de, wTempTrainerHeader
 	pop af
@@ -1310,7 +1101,7 @@ LoadTrainer_continue:: ; 367e
 	jr z, .skipCopyingLossPtrAndScriptPtr
 	ld bc, wTempTrainerHeaderEnd - wTempTrainerHeader
 .skipCopyingLossPtrAndScriptPtr
-	ld a, [EngineBuffer1]
+	ld a, [wEngineBuffer1]
 	call FarCopyBytes
 	pop af
 	jr nz, .notGenericTrainer
@@ -1364,11 +1155,11 @@ FacingPlayerDistance:: ; 36ad
 	add hl, bc
 	ld e, [hl]
 
-	ld a, [PlayerStandingMapX]
+	ld a, [wPlayerStandingMapX]
 	cp d
 	jr z, .CheckY
 
-	ld a, [PlayerStandingMapY]
+	ld a, [wPlayerStandingMapY]
 	cp e
 	jr z, .CheckX
 
@@ -1376,7 +1167,7 @@ FacingPlayerDistance:: ; 36ad
 	ret
 
 .CheckY:
-	ld a, [PlayerStandingMapY]
+	ld a, [wPlayerStandingMapY]
 	sub e
 	jr z, .NotFacing
 	jr nc, .Above
@@ -1394,7 +1185,7 @@ FacingPlayerDistance:: ; 36ad
 	jr .CheckFacing
 
 .CheckX:
-	ld a, [PlayerStandingMapX]
+	ld a, [wPlayerStandingMapX]
 	sub d
 	jr z, .NotFacing
 	jr nc, .Left
@@ -1433,29 +1224,11 @@ PrintWinLossText:: ; 3718
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [MapScriptHeaderBank]
+	ld a, [wMapScriptHeaderBank]
 	call FarPrintText
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	jp WaitPressAorB_BlinkCursor
 ; 3741
-
-IsAPokemon:: ; 3741
-; Return carry if species a is not a Pokemon.
-	and a
-	jr z, .NotAPokemon
-	cp EGG
-	jr z, .Pokemon
-	cp NUM_POKEMON + 1
-	jr c, .Pokemon
-
-.NotAPokemon:
-	scf
-	ret
-
-.Pokemon:
-	and a
-	ret
-; 3750
 
 DrawBattleHPBar:: ; 3750
 ; Draw an HP bar d tiles long at hl
@@ -1466,14 +1239,14 @@ DrawBattleHPBar:: ; 3750
 	push bc
 
 ; Place 'HP:'
-	ld a, $63
+	ld a, "<HP1>"
 	ld [hli], a
-	ld a, $64
+	inc a ; ld a, "<HP2>"
 	ld [hli], a
 
 ; Draw a template
 	push hl
-	ld a, $65 ; empty bar
+	inc a ; ld a, "<NOHP>" ; empty bar
 .template
 	ld [hli], a
 	dec d
@@ -1498,7 +1271,7 @@ DrawBattleHPBar:: ; 3750
 	jr c, .lastbar
 
 	ld e, a
-	ld a, $6d ; full bar
+	ld a, "<FULLHP>"
 	ld [hli], a
 	ld a, e
 	and a
@@ -1506,8 +1279,8 @@ DrawBattleHPBar:: ; 3750
 	jr .fill
 
 .lastbar
-	ld a, $65  ; empty bar
-	add e      ; + e
+	ld a, "<NOHP>"
+	add e
 	ld [hl], a
 
 .done
@@ -1522,7 +1295,7 @@ PrepMonFrontpic:: ; 3786
 	ld [wBoxAlignment], a
 
 _PrepMonFrontpic:: ; 378b
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	jr c, .not_pokemon
 
@@ -1542,16 +1315,16 @@ _PrepMonFrontpic:: ; 378b
 	xor a
 	ld [wBoxAlignment], a
 	inc a
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	ret
 ; 37b6
 
 INCLUDE "home/cry.asm"
 
 PrintLevel:: ; 382d
-; Print TempMonLevel at hl
+; Print wTempMonLevel at hl
 
-	ld a, [TempMonLevel]
+	ld a, [wTempMonLevel]
 	ld [hl], "<LV>"
 	inc hl
 
@@ -1563,13 +1336,12 @@ PrintLevel:: ; 382d
 ; 3-digit numbers overwrite the :L.
 	dec hl
 	inc c
-	jr Print8BitNumRightAlign
-; 383d
+	; fallthrough
 
 Print8BitNumRightAlign:: ; 3842
 	ld [wd265], a
 	ld de, wd265
-	ld b, PRINTNUM_RIGHTALIGN | 1
+	ld b, PRINTNUM_LEFTALIGN | 1
 	jp PrintNum
 ; 384d
 
@@ -1583,7 +1355,7 @@ GetBaseData:: ; 3856
 	rst Bankswitch
 
 ; Egg doesn't have BaseData
-	ld a, [CurSpecies]
+	ld a, [wCurSpecies]
 	cp EGG
 	jr z, .egg
 
@@ -1591,22 +1363,18 @@ GetBaseData:: ; 3856
 	dec a
 	ld bc, BASEMON_STRUCT_LENGTH
 	ld hl, BaseData
-	call AddNTimes
-	ld de, CurBaseData
+	rst AddNTimes
+	ld de, wCurBaseData
 	ld bc, BASEMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	jr .end
 
 .egg
 ;; Sprite dimensions
 	ld a, $55 ; 5x5
-	ld [BasePicSize], a
+	ld [wBasePicSize], a
 
 .end
-; Replace Pokedex # with species
-	ld a, [CurSpecies]
-	ld [BaseDexNo], a
-
 	pop af
 	rst Bankswitch
 	pop hl
@@ -1619,7 +1387,7 @@ GetBaseData:: ; 3856
 GetNature::
 ; 'b' contains the target Nature to check
 ; returns nature in b
-	ld a, [InitialOptions]
+	ld a, [wInitialOptions]
 	bit NATURES_OPT, a
 	jr z, .no_nature
 	ld a, b
@@ -1635,16 +1403,20 @@ GetNature::
 GetLeadAbility::
 ; Returns ability of lead mon unless it's an Egg. Used for field
 ; abilities
-	ld a, [PartyMon1Species]
-	xor EGG
+	ld a, [wPartyMon1IsEgg]
+	and IS_EGG_MASK
+	xor IS_EGG_MASK
 	ret z
-	xor EGG ; revert to original species
-	ret z ; in case species was 0
+	ld a, [wPartyMon1Species]
+	inc a
+	ret z
+	dec a
+	ret z
 	push bc
 	push de
 	push hl
 	ld c, a
-	ld a, [PartyMon1Ability]
+	ld a, [wPartyMon1Ability]
 	ld b, a
 	call GetAbility
 	ld a, b
@@ -1658,45 +1430,41 @@ GetAbility::
 ; 'c' contains the target species
 ; returns ability in b
 ; preserves curspecies and base data
-	ld a, [InitialOptions]
-	bit ABILITIES_OPT, a
-	jr z, .no_ability
-	push de
-	ld a, [CurSpecies]
-	ld d, a
-	ld a, c
-	ld [CurSpecies], a
-	call GetBaseData
+	anonbankpush BaseData
+
+.Function:
+	ld a, [wInitialOptions]
+	and ABILITIES_OPTMASK
+	jr z, .got_ability
+
+	push hl
+	push bc
+	ld hl, BASEMON_ABILITIES
+	ld b, 0
+	ld a, BASEMON_STRUCT_LENGTH
+	dec c
+	rst AddNTimes
+	pop bc
+	push bc
 	ld a, b
 	and ABILITY_MASK
-	cp HIDDEN_ABILITY
-	jr z, .hidden_ability
+	cp ABILITY_1
+	jr z, .got_ability_ptr
+	inc hl
 	cp ABILITY_2
-	jr z, .ability_2
-.ability_1
-	ld a, [BaseAbility1]
-	jr .restore_species
-.ability_2
-	ld a, [BaseAbility2]
-	jr .restore_species
-.hidden_ability
-	ld a, [BaseHiddenAbility]
-.restore_species
+	jr z, .got_ability_ptr
+	inc hl
+.got_ability_ptr
+	ld a, [hl]
+	pop bc
+	pop hl
+.got_ability
 	ld b, a
-	ld a, d
-	ld [CurSpecies], a
-	call GetBaseData
-	pop de
 	ret
-
-.no_ability:
-	ld b, NO_ABILITY
-	ret
-
 
 GetCurNick:: ; 389c
-	ld a, [CurPartyMon]
-	ld hl, PartyMonNicknames
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
 
 GetNick:: ; 38a2
 ; Get nickname a from list hl.
@@ -1705,11 +1473,11 @@ GetNick:: ; 38a2
 	push bc
 
 	call SkipNames
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 
 	push de
 	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	pop de
 
 	pop bc
@@ -1799,13 +1567,13 @@ PrintBCDDigit:: ; 38f2
 ; 0x3917
 
 GetPartyParamLocation:: ; 3917
-; Get the location of parameter a from CurPartyMon in hl
+; Get the location of parameter a from wCurPartyMon in hl
 	push bc
-	ld hl, PartyMons
+	ld hl, wPartyMons
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	call GetPartyLocation
 	pop bc
 	ret
@@ -1815,11 +1583,21 @@ GetPartyLocation::
 ; Add the length of a PartyMon struct to hl a times.
 	push bc
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	pop bc
 	ret
 
 INCLUDE "home/battle.asm"
+
+HalveBC::
+	srl b
+	rr c
+FloorBC::
+	ld a, c
+	or b
+	ret nz
+	inc c
+	ret
 
 PushLYOverrides:: ; 3b0c
 
@@ -1827,18 +1605,18 @@ PushLYOverrides:: ; 3b0c
 	and a
 	ret z
 
-	ld a, LYOverridesBackup % $100
-	ld [Requested2bppSource], a
-	ld a, LYOverridesBackup / $100
-	ld [Requested2bppSource + 1], a
+	ld a, wLYOverridesBackup % $100
+	ld [hRequestedVTileSource], a
+	ld a, wLYOverridesBackup / $100
+	ld [hRequestedVTileSource + 1], a
 
-	ld a, LYOverrides % $100
-	ld [Requested2bppDest], a
-	ld a, LYOverrides / $100
-	ld [Requested2bppDest + 1], a
+	ld a, wLYOverrides % $100
+	ld [hRequestedVTileDest], a
+	ld a, wLYOverrides / $100
+	ld [hRequestedVTileDest + 1], a
 
-	ld a, (LYOverridesEnd - LYOverrides) / 16
-	ld [Requested2bpp], a
+	ld a, (wLYOverridesEnd - wLYOverrides) / 16
+	ld [hLYOverrideStackCopyAmount], a
 	ret
 ; 3b2a
 

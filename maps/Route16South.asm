@@ -1,35 +1,32 @@
 Route16South_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, UnknownScript_0x1ad318
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, UnknownScript_0x1ad318
+	db 2 ; warp events
+	warp_event  9, 10, ROUTE_16_17_GATE, 1
+	warp_event  9, 11, ROUTE_16_17_GATE, 2
 
-Route16South_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $a, $9, 1, ROUTE_16_17_GATE
-	warp_def $b, $9, 2, ROUTE_16_17_GATE
+	db 1 ; bg events
+	bg_event  5,  9, SIGNPOST_JUMPTEXT, CyclingRoadSignText
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 9, 5, SIGNPOST_READ, CyclingRoadSign
-
-.PersonEvents: db 1
-	person_event SPRITE_OFFICER_F, 11, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, OfficerfJamieScript, -1
+	db 1 ; object events
+	object_event  6, 11, SPRITE_OFFICER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, OfficerfJamieScript, -1
 
 UnknownScript_0x1ad318:
 	setflag ENGINE_ALWAYS_ON_BIKE
 	return
 
 OfficerfJamieScript:
+	checktime 1 << NITE
+	iffalse_jumptextfaceplayer OfficerfJamieDaytimeText
+	checkevent EVENT_BEAT_OFFICERF_JAMIE
+	iftrue_jumptextfaceplayer OfficerfJamieAfterText
 	faceplayer
 	opentext
-	checknite
-	iffalse .NoFight
-	checkevent EVENT_BEAT_OFFICERF_JAMIE
-	iftrue .AfterScript
 	special SaveMusic
 	playmusic MUSIC_OFFICER_ENCOUNTER
 	writetext OfficerfJamieSeenText
@@ -40,23 +37,7 @@ OfficerfJamieScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_OFFICERF_JAMIE
-	closetext
-	end
-
-.AfterScript:
-	writetext OfficerfJamieAfterText
-	waitbutton
-	closetext
-	end
-
-.NoFight:
-	writetext OfficerfJamieDaytimeText
-	waitbutton
-	closetext
-	end
-
-CyclingRoadSign:
-	jumptext CyclingRoadSignText
+	endtext
 
 OfficerfJamieSeenText:
 	text "Hey you! Are you"

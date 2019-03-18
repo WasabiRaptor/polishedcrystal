@@ -1,31 +1,28 @@
 GoldenrodDeptStoreB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 2 ; callbacks
+	callback MAPCALLBACK_TILES, UnknownScript_0x7d781
+	callback MAPCALLBACK_NEWMAP, UnknownScript_0x7d7ac
 
-.MapCallbacks: db 2
-	dbw MAPCALLBACK_TILES, UnknownScript_0x7d781
-	dbw MAPCALLBACK_NEWMAP, UnknownScript_0x7d7ac
+	db 3 ; warp events
+	warp_event 17,  2, UNDERGROUND_WAREHOUSE, 3
+	warp_event  9,  4, GOLDENROD_DEPT_STORE_ELEVATOR, 1
+	warp_event 10,  4, GOLDENROD_DEPT_STORE_ELEVATOR, 2
 
-GoldenrodDeptStoreB1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $2, $11, 3, UNDERGROUND_WAREHOUSE
-	warp_def $4, $9, 1, GOLDENROD_DEPT_STORE_ELEVATOR
-	warp_def $4, $a, 2, GOLDENROD_DEPT_STORE_ELEVATOR
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 8
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 10, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ETHER, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_ETHER
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, METAL_COAT, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_METAL_COAT
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, BURN_HEAL, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_BURN_HEAL
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ULTRA_BALL, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_ULTRA_BALL
-	person_event SPRITE_BLACK_BELT, 10, 9, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, BlackBeltScript_0x7d7b0, -1
-	person_event SPRITE_BLACK_BELT, 8, 4, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, BlackBeltScript_0x7d7b3, -1
-	person_event SPRITE_BLACK_BELT, 13, 6, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, BlackBeltScript_0x7d7b6, -1
-	person_event SPRITE_MACHOKE, 7, 7, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, MachokeScript_0x7d7b9, -1
+	db 8 ; object events
+	itemball_event 10, 15, ETHER, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_ETHER
+	itemball_event 14,  2, METAL_COAT, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_METAL_COAT
+	itemball_event  6,  3, BURN_HEAL, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_BURN_HEAL
+	itemball_event 15, 15, ULTRA_BALL, 1, EVENT_GOLDENROD_DEPT_STORE_B1F_ULTRA_BALL
+	object_event  9, 10, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7d7cb, -1
+	object_event  4,  8, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7d82c, -1
+	object_event  6, 13, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7d875, -1
+	object_event  7,  7, SPRITE_MACHOKE, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_POKEMON, MACHOKE, UnknownText_0x7d8bb, -1
 
 UnknownScript_0x7d781:
 	checkevent EVENT_RECEIVED_CARD_KEY
@@ -33,7 +30,7 @@ UnknownScript_0x7d781:
 	jump UnknownScript_0x7d791
 
 UnknownScript_0x7d78a:
-	changeblock $10, $4, $d
+	changeblock 16, 4, $d
 	jump UnknownScript_0x7d791
 
 UnknownScript_0x7d791:
@@ -41,37 +38,20 @@ UnknownScript_0x7d791:
 	iftrue .Layout2
 	checkevent EVENT_WAREHOUSE_LAYOUT_3
 	iftrue .Layout3
-	changeblock $a, $8, $d
+	changeblock 10, 8, $d
 	return
 
 .Layout2:
-	changeblock $4, $a, $d
+	changeblock 4, 10, $d
 	return
 
 .Layout3:
-	changeblock $a, $c, $d
+	changeblock 10, 12, $d
 	return
 
 UnknownScript_0x7d7ac:
 	clearevent EVENT_WAREHOUSE_BLOCKED_OFF
 	return
-
-BlackBeltScript_0x7d7b0:
-	jumptextfaceplayer UnknownText_0x7d7cb
-
-BlackBeltScript_0x7d7b3:
-	jumptextfaceplayer UnknownText_0x7d82c
-
-BlackBeltScript_0x7d7b6:
-	jumptextfaceplayer UnknownText_0x7d875
-
-MachokeScript_0x7d7b9:
-	opentext
-	writetext UnknownText_0x7d8bb
-	cry MACHOKE
-	waitbutton
-	closetext
-	end
 
 UnknownText_0x7d7cb:
 	text "Hey, kid! You're"

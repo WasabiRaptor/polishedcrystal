@@ -1,32 +1,28 @@
 LavenderPokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, LAVENDER_TOWN, 1
+	warp_event  6,  7, LAVENDER_TOWN, 1
+	warp_event  0,  7, POKECENTER_2F, 1
 
-LavenderPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 1, LAVENDER_TOWN
-	warp_def $7, $6, 1, LAVENDER_TOWN
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalMrFujiScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalMrFujiScript
-
-.PersonEvents: db 4
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_YOUNGSTER, 5, 1, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, YoungsterScript_0x7e6a9, -1
-	person_event SPRITE_GENTLEMAN, 6, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x7e6bd, -1
-	person_event SPRITE_TEACHER, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x7e710, -1
+	db 4 ; object events
+	pc_nurse_event  5, 1
+	object_event  1,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, LavenderPokeCenter1FYoungsterScript, -1
+	object_event 11,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderPokeCenter1FGentlemanText, -1
+	object_event  6,  3, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, LavenderPokeCenter1FTeacherText, -1
 
 PokemonJournalMrFujiScript:
 	setflag ENGINE_READ_MR_FUJI_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Editor: The shy"
@@ -42,15 +38,23 @@ PokemonJournalMrFujiScript:
 	line "ender Town."
 	done
 
-YoungsterScript_0x7e6a9:
+LavenderPokeCenter1FYoungsterScript:
 	checkevent EVENT_RETURNED_MACHINE_PART
-	iftrue .ReturnedMachinePart
-	jumptextfaceplayer .Text1
+	iffalse_jumptextfaceplayer .NoMachinePartText
+	checkevent EVENT_EXORCISED_LAV_RADIO_TOWER
+	iffalse_jumptextfaceplayer .NoExorcismText
+	thistextfaceplayer
 
-.ReturnedMachinePart:
-	jumptextfaceplayer .Text2
+	text "The Director of"
+	line "the Radio Station"
+	cont "sure was happy."
 
-.Text1:
+	para "He said they're"
+	line "finally back on"
+	cont "the air!"
+	done
+
+.NoMachinePartText:
 	text "If the Power Plant"
 	line "isn't running, the"
 
@@ -58,24 +62,23 @@ YoungsterScript_0x7e6a9:
 	line "run either…"
 
 	para "It also means the"
-	line "Radio Station"
-	cont "can't broadcast…"
+	line "Radio Tower can't"
+	cont "broadcast…"
 	done
 
-.Text2:
-	text "The Director of"
-	line "the Radio Station"
-	cont "sure was happy."
+.NoExorcismText:
+	text "The Power Plant is"
+	line "running smoothly"
+	cont "again, but the"
 
-	para "He said they're"
-	line "back on the air"
+	para "Radio Tower still"
+	line "isn't broadcasting."
 
-	para "because the Power"
-	line "Plant is running"
-	cont "smoothly again."
+	para "What's going on"
+	line "over there?"
 	done
 
-UnknownText_0x7e6bd:
+LavenderPokeCenter1FGentlemanText:
 	text "To the north of"
 	line "Lavender is Rock"
 
@@ -84,7 +87,7 @@ UnknownText_0x7e6bd:
 	cont "Power Plant."
 	done
 
-UnknownText_0x7e710:
+LavenderPokeCenter1FTeacherText:
 	text "There's a radio"
 	line "program that plays"
 	cont "# Flute music."

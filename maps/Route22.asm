@@ -1,31 +1,28 @@
 Route22_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event  3,  5, POKEMON_LEAGUE_GATE, 1
 
-Route22_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $5, $3, 1, POKEMON_LEAGUE_GATE
+	db 1 ; bg events
+	bg_event  6,  6, SIGNPOST_JUMPTEXT, VictoryRoadEntranceSignText
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event 14, 11, SPRITE_KUKUI, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, KukuiScript, -1
+	object_event 20,  2, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Route22CooltrainerfText, -1
 
-.Signposts: db 1
-	signpost 7, 5, SIGNPOST_READ, VictoryRoadEntranceSign
-
-.PersonEvents: db 2
-	person_event SPRITE_KUKUI, 11, 14, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, KukuiScript, -1
-	person_event SPRITE_COOLTRAINER_F, 2, 20, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, Route22CooltrainerfScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const ROUTE22_KUKUI
 
 KukuiScript:
+	checkevent EVENT_BEAT_KUKUI
+	iftrue_jumptextfaceplayer .AfterText
 	faceplayer
 	opentext
-	checkevent EVENT_BEAT_KUKUI
-	iftrue .Beaten
 	checkevent EVENT_INTRODUCED_KUKUI
 	iftrue .Introduced
 	writetext .IntroText
@@ -34,7 +31,7 @@ KukuiScript:
 	writetext .RematchText
 .Question
 	yesorno
-	iffalse .Refused
+	iffalse_jumpopenedtext .RefusedText
 	writetext .SeenText
 	waitbutton
 	closetext
@@ -51,18 +48,26 @@ KukuiScript:
 	reloadmapafterbattle
 	setevent EVENT_INTRODUCED_KUKUI
 	setevent EVENT_BEAT_KUKUI
-	opentext
-.Beaten:
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
+	thistext
 
-.Refused:
-	writetext .RefusedText
-	waitbutton
-	closetext
-	end
+.AfterText:
+	text "Amazing! I went"
+	line "right at you, and"
+	cont "you still won!"
+
+	para "No wonder you're"
+	line "the Champion!"
+
+	para "I need to train"
+	line "harder before I'm"
+
+	para "ready for the"
+	line "League."
+
+	para "And when I do,"
+	line "I'll battle you"
+	cont "again! Woo!"
+	done
 
 .IntroText:
 	text "Hey there!"
@@ -77,7 +82,7 @@ KukuiScript:
 	cont "Alola!"
 
 	para "But we don't have a"
-	line "Pokemon League, so"
+	line "#mon League, so"
 
 	para "I came to Kanto to"
 	line "battle the Elite"
@@ -124,25 +129,6 @@ KukuiScript:
 	cont "went all out…"
 	done
 
-.AfterText:
-	text "Amazing! I went"
-	line "right at you, and"
-	cont "you still won!"
-
-	para "No wonder you're"
-	line "the Champion!"
-
-	para "I need to train"
-	line "harder before I'm"
-
-	para "ready for the"
-	line "League."
-
-	para "And when I do,"
-	line "I'll battle you"
-	cont "again! Woo!"
-	done
-
 .RefusedText:
 	text "Totally focused on"
 	line "your own quest,"
@@ -151,10 +137,7 @@ KukuiScript:
 	para "I respect that!"
 	done
 
-Route22CooltrainerfScript:
-	jumptextfaceplayer .Text
-
-.Text:
+Route22CooltrainerfText:
 	text "The name “Kanto”"
 	line "means “east of the"
 	cont "barrier.”"
@@ -164,10 +147,7 @@ Route22CooltrainerfScript:
 	cont "Mt.Silver."
 	done
 
-VictoryRoadEntranceSign:
-	jumptext .Text
-
-.Text:
+VictoryRoadEntranceSignText:
 	text "Route 22"
 
 	para "#mon League"

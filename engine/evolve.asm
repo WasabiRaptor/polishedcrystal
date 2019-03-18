@@ -1,8 +1,8 @@
 EvolvePokemon: ; 421d8
-	ld hl, EvolvableFlags
+	ld hl, wEvolvableFlags
 	xor a
 	ld [hl], a
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld c, a
 	ld b, SET_FLAG
 	call EvoFlagAction
@@ -10,16 +10,16 @@ EvolveAfterBattle: ; 421e6
 	xor a
 	ld [wMonTriedToEvolve], a
 	dec a
-	ld [CurPartyMon], a
+	ld [wCurPartyMon], a
 	push hl
 	push bc
 	push de
-	ld hl, PartyCount
+	ld hl, wPartyCount
 
 	push hl
 
 EvolveAfterBattle_MasterLoop
-	ld hl, CurPartyMon
+	ld hl, wCurPartyMon
 	inc [hl]
 
 	pop hl
@@ -29,33 +29,32 @@ EvolveAfterBattle_MasterLoop
 	cp $ff
 	jp z, .ReturnToMap
 
-	ld [Buffer1], a
+	ld [wEvolutionOldSpecies], a
 
 	push hl
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld c, a
-	ld hl, EvolvableFlags
+	ld hl, wEvolvableFlags
 	ld b, CHECK_FLAG
 	call EvoFlagAction
 	ld a, c
 	and a
 	jp z, EvolveAfterBattle_MasterLoop
 
-	ld a, [Buffer1]
+	ld a, [wEvolutionOldSpecies]
 	dec a
 	ld b, 0
 	ld c, a
 	ld hl, EvosAttacksPointers
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
 	push hl
 	xor a
-	ld [MonType], a
+	ld [wMonType], a
 	predef CopyPkmnToTempMon
 	pop hl
 
@@ -93,7 +92,7 @@ endr
 	jp z, .happiness
 
 ; EVOLVE_STAT
-	ld a, [TempMonLevel]
+	ld a, [wTempMonLevel]
 	cp [hl]
 	jp c, .dont_evolve_1
 
@@ -101,8 +100,8 @@ endr
 	jp z, .dont_evolve_1
 
 	push hl
-	ld de, TempMonAttack
-	ld hl, TempMonDefense
+	ld de, wTempMonAttack
+	ld hl, wTempMonDefense
 	ld c, 2
 	call StringCmp
 	ld a, ATK_EQ_DEF
@@ -122,7 +121,7 @@ endr
 
 
 .happiness
-	ld a, [TempMonHappiness]
+	ld a, [wTempMonHappiness]
 	cp HAPPINESS_TO_EVOLVE
 	jp c, .dont_evolve_2
 
@@ -130,10 +129,10 @@ endr
 	jp z, .dont_evolve_2
 
 	; Spiky-eared Pichu cannot evolve
-	ld a, [TempMonSpecies]
+	ld a, [wTempMonSpecies]
 	cp PICHU
 	jr nz, .not_spiky_eared_pichu
-	ld a, [TempMonForm]
+	ld a, [wTempMonForm]
 	and FORM_MASK
 	cp 2
 	jp z, .dont_evolve_2
@@ -146,13 +145,13 @@ endr
 	jp z, .happiness_daylight
 
 ; TR_NITE
-	ld a, [TimeOfDay]
+	ld a, [wTimeOfDay]
 	cp NITE
 	jp nz, .dont_evolve_3
 	jp .proceed
 
 .happiness_daylight
-	ld a, [TimeOfDay]
+	ld a, [wTimeOfDay]
 	cp NITE
 	jp z, .dont_evolve_3
 	jp .proceed
@@ -160,7 +159,7 @@ endr
 .item
 	ld a, [hli]
 	ld b, a
-	ld a, [CurItem]
+	ld a, [wCurItem]
 	cp b
 	jp nz, .dont_evolve_3
 
@@ -175,17 +174,17 @@ endr
 .holding
 	ld a, [hli]
 	ld b, a
-	ld a, [TempMonItem]
+	ld a, [wTempMonItem]
 	cp b
 	jp nz, .dont_evolve_3
 	xor a
-	ld [TempMonItem], a
+	ld [wTempMonItem], a
 	jp .proceed
 
 .location
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	ld b, a
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	ld c, a
 	push hl
 	call GetWorldMapLocation
@@ -201,7 +200,7 @@ endr
 	push hl
 	push bc
 	ld b, a
-	ld hl, TempMonMoves
+	ld hl, wTempMonMoves
 rept 4
 	ld a, [hli]
 	cp b
@@ -220,7 +219,7 @@ endr
 	ld a, [hli]
 	push hl
 	push bc
-	ld hl, TempMonSpecies
+	ld hl, wTempMonSpecies
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -234,24 +233,24 @@ endr
 .level
 	ld a, [hli]
 	ld b, a
-	ld a, [TempMonLevel]
+	ld a, [wTempMonLevel]
 	cp b
 	jp c, .dont_evolve_3
 	call IsMonHoldingEverstone
 	jp z, .dont_evolve_3
 
 .proceed
-	ld a, [TempMonLevel]
-	ld [CurPartyLevel], a
+	ld a, [wTempMonLevel]
+	ld [wCurPartyLevel], a
 	ld a, $1
 	ld [wMonTriedToEvolve], a
 
 	push hl
 
 	ld a, [hl]
-	ld [Buffer2], a
-	ld a, [CurPartyMon]
-	ld hl, PartyMonNicknames
+	ld [wBuffer2], a
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
 	call GetNick
 	call CopyName1
 	ld hl, Text_WhatEvolving
@@ -283,9 +282,9 @@ endr
 	pop hl
 
 	ld a, [hl]
-	ld [CurSpecies], a
-	ld [TempMonSpecies], a
-	ld [Buffer2], a
+	ld [wCurSpecies], a
+	ld [wTempMonSpecies], a
+	ld [wBuffer2], a
 	ld [wd265], a
 	call GetPokemonName
 
@@ -306,15 +305,15 @@ endr
 	call UpdateSpeciesNameIfNotNicknamed
 	call GetBaseData
 
-	ld hl, TempMonEVs - 1
-	ld de, TempMonMaxHP
+	ld hl, wTempMonEVs - 1
+	ld de, wTempMonMaxHP
 	ld b, TRUE
 	predef CalcPkmnStats
 
-	ld a, [CurPartyMon]
-	ld hl, PartyMons
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld e, l
 	ld d, h
 	ld bc, MON_MAXHP
@@ -322,14 +321,14 @@ endr
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
-	ld hl, TempMonMaxHP + 1
+	ld hl, wTempMonMaxHP + 1
 	ld a, [hld]
 	sub c
 	ld c, a
 	ld a, [hl]
 	sbc b
 	ld b, a
-	ld hl, TempMonHP + 1
+	ld hl, wTempMonHP + 1
 	ld a, [hl]
 	add c
 	ld [hld], a
@@ -337,14 +336,14 @@ endr
 	adc b
 	ld [hl], a
 
-	ld hl, TempMonSpecies
+	ld hl, wTempMonSpecies
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call CopyBytes
+	rst CopyBytes
 
-	ld a, [CurSpecies]
+	ld a, [wCurSpecies]
 	ld [wd265], a
 	xor a
-	ld [MonType], a
+	ld [wMonType], a
 	call LearnEvolutionMove
 	call LearnLevelMoves
 	ld a, [wd265]
@@ -355,14 +354,14 @@ endr
 	cp UNOWN
 	jr nz, .skip_unown
 
-	ld hl, TempMonForm
+	ld hl, wTempMonForm
 	predef GetVariant
 	farcall UpdateUnownDex
 
 .skip_unown
 	pop de
 	pop hl
-	ld a, [TempMonSpecies]
+	ld a, [wTempMonSpecies]
 	ld [hl], a
 	push hl
 	ld l, e
@@ -395,15 +394,11 @@ endr
 ; 42414
 
 UpdateSpeciesNameIfNotNicknamed: ; 42414
-	ld a, [CurSpecies]
-	push af
-	ld a, [BaseDexNo]
+	ld a, [wEvolutionOldSpecies]
 	ld [wd265], a
 	call GetPokemonName
-	pop af
-	ld [CurSpecies], a
-	ld hl, StringBuffer1
-	ld de, StringBuffer2
+	ld hl, wStringBuffer1
+	ld de, wStringBuffer2
 .loop
 	ld a, [de]
 	inc de
@@ -413,18 +408,19 @@ UpdateSpeciesNameIfNotNicknamed: ; 42414
 	cp "@"
 	jr nz, .loop
 
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld bc, PKMN_NAME_LENGTH
-	ld hl, PartyMonNicknames
-	call AddNTimes
+	ld hl, wPartyMonNicknames
+	rst AddNTimes
 	push hl
-	ld a, [CurSpecies]
+	ld a, [wCurSpecies]
 	ld [wd265], a
 	call GetPokemonName
-	ld hl, StringBuffer1
+	ld hl, wStringBuffer1
 	pop de
 	ld bc, PKMN_NAME_LENGTH
-	jp CopyBytes
+	rst CopyBytes
+	ret
 ; 42454
 
 CancelEvolution: ; 42454
@@ -437,10 +433,10 @@ CancelEvolution: ; 42454
 
 IsMonHoldingEverstone: ; 42461
 	push hl
-	ld a, [CurPartyMon]
-	ld hl, PartyMon1Item
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, [hl]
 	cp EVERSTONE
 	pop hl
@@ -474,7 +470,7 @@ Text_WhatEvolving: ; 0x42482
 
 LearnEvolutionMove:
 	ld a, [wd265]
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	dec a
 	ld b, 0
 	ld c, a
@@ -486,10 +482,10 @@ LearnEvolutionMove:
 
 	push hl
 	ld d, a
-	ld hl, PartyMon1Moves
-	ld a, [CurPartyMon]
+	ld hl, wPartyMon1Moves
+	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 
 	ld b, NUM_MOVES
 .check_move
@@ -505,7 +501,7 @@ LearnEvolutionMove:
 	call GetMoveName
 	call CopyName1
 	predef LearnMove
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	ld [wd265], a
 
 .has_move
@@ -515,14 +511,13 @@ LearnEvolutionMove:
 
 LearnLevelMoves: ; 42487
 	ld a, [wd265]
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	dec a
 	ld b, 0
 	ld c, a
 	ld hl, EvosAttacksPointers
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -538,17 +533,17 @@ endr
 	jr z, .done
 
 	ld b, a
-	ld a, [CurPartyLevel]
+	ld a, [wCurPartyLevel]
 	cp b
 	ld a, [hli]
 	jr nz, .find_move
 
 	push hl
 	ld d, a
-	ld hl, PartyMon1Moves
-	ld a, [CurPartyMon]
+	ld hl, wPartyMon1Moves
+	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 
 	ld b, NUM_MOVES
 .check_move
@@ -574,21 +569,21 @@ endr
 	jr .find_move
 
 .done
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	ret
 ; 424e1
 
 
 FillMoves: ; 424e1
-; Fill in moves at de for CurPartySpecies at CurPartyLevel
+; Fill in moves at de for wCurPartySpecies at wCurPartyLevel
 
 	push hl
 	push de
 	push bc
 	ld hl, EvosAttacksPointers
 	ld b, 0
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	dec a
 	add a
 	rl b
@@ -612,10 +607,10 @@ FillMoves: ; 424e1
 	and a
 	jp z, .done
 	ld b, a
-	ld a, [CurPartyLevel]
+	ld a, [wCurPartyLevel]
 	cp b
 	jp c, .done
-	ld a, [Buffer1]
+	ld a, [wEvolutionOldSpecies]
 	and a
 	jr z, .CheckMove
 	ld a, [wd002]
@@ -648,11 +643,11 @@ FillMoves: ; 424e1
 	ld h, d
 	ld l, e
 	call ShiftMoves
-	ld a, [Buffer1]
+	ld a, [wEvolutionOldSpecies]
 	and a
 	jr z, .ShiftedMove
 	push de
-	ld bc, PartyMon1PP - (PartyMon1Moves + NUM_MOVES - 1)
+	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES - 1)
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -665,7 +660,7 @@ FillMoves: ; 424e1
 .LearnMove:
 	ld a, [hl]
 	ld [de], a
-	ld a, [Buffer1]
+	ld a, [wEvolutionOldSpecies]
 	and a
 	jr z, .NextMove
 	push hl
@@ -676,7 +671,7 @@ FillMoves: ; 424e1
 	dec a
 	ld hl, Moves + MOVE_PP
 	ld bc, MOVE_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
 	pop hl
@@ -712,32 +707,31 @@ EvoFlagAction: ; 42577
 ; 42581
 
 GetPreEvolution: ; 42581
-; Find the first mon to evolve into CurPartySpecies.
+; Find the first mon to evolve into wCurPartySpecies.
 
-; Return carry and the new species in CurPartySpecies
+; Return carry and the new species in wCurPartySpecies
 ; if a pre-evolution is found.
 
 	ld c, 0
 .loop ; For each Pokemon...
 	ld hl, EvosAttacksPointers
 	ld b, 0
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 .loop2 ; For each evolution...
 	ld a, [hli]
 	and a
-	jr z, .no_evolve ; If we jump, this Pokemon does not evolve into CurPartySpecies.
+	jr z, .no_evolve ; If we jump, this Pokemon does not evolve into wCurPartySpecies.
 	cp EVOLVE_STAT ; This evolution type has the extra parameter of stat comparison.
 	jr nz, .not_tyrogue
 	inc hl
 
 .not_tyrogue
 	inc hl
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	cp [hl]
 	jr z, .found_preevo
 	inc hl
@@ -756,7 +750,7 @@ endr
 .found_preevo
 	inc c
 	ld a, c
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	scf
 	ret
 ; 425b1

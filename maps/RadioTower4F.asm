@@ -1,49 +1,40 @@
 RadioTower4F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  0,  0, RADIO_TOWER_5F, 1
+	warp_event  9,  0, RADIO_TOWER_3F, 2
+	warp_event 12,  0, RADIO_TOWER_5F, 2
+	warp_event 17,  0, RADIO_TOWER_3F, 3
 
-RadioTower4F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $0, $0, 1, RADIO_TOWER_5F
-	warp_def $0, $9, 2, RADIO_TOWER_3F
-	warp_def $0, $c, 2, RADIO_TOWER_5F
-	warp_def $0, $11, 3, RADIO_TOWER_3F
+	db 2 ; bg events
+	bg_event  7,  0, SIGNPOST_JUMPTEXT, UnknownText_0x5effe
+	bg_event 15,  0, SIGNPOST_JUMPTEXT, UnknownText_0x5f00d
 
-.XYTriggers: db 0
+	db 7 ; object events
+	object_event  5,  6, SPRITE_ROCKET, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerGruntM10, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event  6,  4, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5ec12, EVENT_RADIO_TOWER_CIVILIANS_AFTER
+	object_event 14,  6, SPRITE_BUENA, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, MaryScript_0x5eb85, -1
+	object_event 12,  7, SPRITE_MEOWTH, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_POKEMON, MEOWTH, RadioTowerMeowthText, -1
+	object_event 14,  1, SPRITE_PROTON, SPRITEMOVEDATA_STANDING_LEFT, 0, 2, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerProton1, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 12,  4, SPRITE_ROCKET_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerGruntF4, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event  4,  2, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerRocketScientistRich, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
 
-.Signposts: db 2
-	signpost 0, 7, SIGNPOST_READ, MapRadioTower4FSignpost0Script
-	signpost 0, 15, SIGNPOST_READ, MapRadioTower4FSignpost1Script
-
-.PersonEvents: db 7
-	person_event SPRITE_ROCKET, 6, 5, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerGruntM10, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_FISHER, 4, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, FisherScript_0x5eb82, EVENT_RADIO_TOWER_CIVILIANS_AFTER
-	person_event SPRITE_TEACHER, 6, 14, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, TeacherScript_0x5eb85, -1
-	person_event SPRITE_MEOWTH, 7, 12, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, RadioTowerMeowth, -1
-	person_event SPRITE_PROTON, 1, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 2, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 2, TrainerProton1, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_ROCKET_GIRL, 4, 12, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerGruntF4, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_SCIENTIST, 2, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerRocketScientistRich, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-
-const_value set 2
+	const_def 1 ; object constants
 	const RADIOTOWER4F_ROCKET
 
-FisherScript_0x5eb82:
-	jumptextfaceplayer UnknownText_0x5ec12
-
-TeacherScript_0x5eb85:
+MaryScript_0x5eb85:
 	faceplayer
 	opentext
 	checkevent EVENT_GOT_PINK_BOW_FROM_MARY
 	iftrue UnknownScript_0x5ebac
 	checkevent EVENT_CLEARED_RADIO_TOWER
 	iftrue UnknownScript_0x5eb99
-	writetext UnknownText_0x5ec68
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x5ec68
 
 UnknownScript_0x5eb99:
 	writetext UnknownText_0x5ecab
@@ -60,66 +51,44 @@ UnknownScript_0x5ebac:
 	writetext UnknownText_0x5ed2c
 	waitbutton
 UnknownScript_0x5ebb0:
-	closetext
-	end
+	endtext
 
-RadioTowerMeowth:
-	opentext
-	writetext RadioTowerMeowthText
-	cry MEOWTH
-	waitbutton
-	closetext
-	end
+GenericTrainerGruntM10:
+	generictrainer GRUNTM, 10, EVENT_BEAT_ROCKET_GRUNTM_10, GruntM10SeenText, GruntM10BeatenText
 
-TrainerGruntM10:
-	trainer EVENT_BEAT_ROCKET_GRUNTM_10, GRUNTM, 10, GruntM10SeenText, GruntM10BeatenText, 0, GruntM10Script
+	text "I don't believe"
+	line "it! I was beaten!"
+	done
 
-GruntM10Script:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5ede2
-	waitbutton
-	closetext
-	end
+GenericTrainerProton1:
+	generictrainer PROTON, PROTON1, EVENT_BEAT_PROTON_1, Proton1SeenText, Proton1BeatenText
 
-TrainerProton1:
-	trainer EVENT_BEAT_PROTON_1, PROTON, PROTON1, Proton1SeenText, Proton1BeatenText, 0, Proton1Script
+	text "You've earned my"
+	line "respect, so here's"
+	cont "some advice."
 
-Proton1Script:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5ee69
-	waitbutton
-	closetext
-	end
+	para "It's not too late."
+	line "You can still turn"
+	cont "back."
+	done
 
-TrainerGruntF4:
-	trainer EVENT_BEAT_ROCKET_GRUNTF_4, GRUNTF, 4, GruntF4SeenText, GruntF4BeatenText, 0, GruntF4Script
+GenericTrainerGruntF4:
+	generictrainer GRUNTF, 4, EVENT_BEAT_ROCKET_GRUNTF_4, GruntF4SeenText, GruntF4BeatenText
 
-GruntF4Script:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5ef31
-	waitbutton
-	closetext
-	end
+	text "I love my"
+	line "beautiful self!"
 
-TrainerRocketScientistRich:
-	trainer EVENT_BEAT_ROCKET_SCIENTIST_RICH, ROCKET_SCIENTIST, RICH, RocketScientistRichSeenText, RocketScientistRichBeatenText, 0, RocketScientistRichScript
+	para "Who cares about"
+	line "#mon?"
+	done
 
-RocketScientistRichScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5efcb
-	waitbutton
-	closetext
-	end
+GenericTrainerRocketScientistRich:
+	generictrainer ROCKET_SCIENTIST, RICH, EVENT_BEAT_ROCKET_SCIENTIST_RICH, RocketScientistRichSeenText, RocketScientistRichBeatenText
 
-MapRadioTower4FSignpost0Script:
-	jumptext UnknownText_0x5effe
-
-MapRadioTower4FSignpost1Script:
-	jumptext UnknownText_0x5f00d
+	text "Do you honestly"
+	line "believe you can"
+	cont "stop Team Rocket?"
+	done
 
 UnknownText_0x5ec12:
 	text "I listened to the"
@@ -179,11 +148,6 @@ GruntM10BeatenText:
 	text "No! Unbelievable!"
 	done
 
-UnknownText_0x5ede2:
-	text "I don't believe"
-	line "it! I was beaten!"
-	done
-
 Proton1SeenText:
 	text "Stop! I'm known as"
 	line "the Team Rocket"
@@ -196,16 +160,6 @@ Proton1SeenText:
 Proton1BeatenText:
 	text "The fortress came"
 	line "down!"
-	done
-
-UnknownText_0x5ee69:
-	text "You've earned my"
-	line "respect, so here's"
-	cont "some advice."
-
-	para "It's not too late."
-	line "You can still turn"
-	cont "back."
 	done
 
 GruntF4SeenText:
@@ -224,14 +178,6 @@ GruntF4BeatenText:
 	line "useless!"
 	done
 
-UnknownText_0x5ef31:
-	text "I love my"
-	line "beautiful self!"
-
-	para "Who cares about"
-	line "#mon?"
-	done
-
 RocketScientistRichSeenText:
 	text "Most excellent."
 
@@ -245,12 +191,6 @@ RocketScientistRichBeatenText:
 
 	para "All grand plans"
 	line "come with snags."
-	done
-
-UnknownText_0x5efcb:
-	text "Do you honestly"
-	line "believe you can"
-	cont "stop Team Rocket?"
 	done
 
 UnknownText_0x5effe:

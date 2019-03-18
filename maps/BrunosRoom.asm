@@ -1,116 +1,83 @@
 BrunosRoom_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script BrunosRoomEntranceTrigger
 
-.MapTriggers: db 1
-	dw BrunosRoomTrigger0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, BrunosRoomDoorCallback
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, BrunosRoomBrunosRoomDoors
+	db 4 ; warp events
+	warp_event  4, 17, KOGAS_ROOM, 3
+	warp_event  5, 17, KOGAS_ROOM, 4
+	warp_event  4,  2, KARENS_ROOM, 1
+	warp_event  5,  2, KARENS_ROOM, 2
 
-BrunosRoom_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $11, $4, 3, KOGAS_ROOM
-	warp_def $11, $5, 4, KOGAS_ROOM
-	warp_def $2, $4, 1, KARENS_ROOM
-	warp_def $2, $5, 2, KARENS_ROOM
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  5,  7, SPRITE_BRUNO, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BrunoScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_BRUNO, 7, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, BrunoScript_0x1809c5, -1
-
-BrunosRoomTrigger0:
-	priorityjump UnknownScript_0x1809ad
+BrunosRoomEntranceTrigger:
+	priorityjump .Script
 	end
 
-BrunosRoomBrunosRoomDoors:
-	checkevent EVENT_BRUNOS_ROOM_ENTRANCE_CLOSED
-	iffalse .KeepDoorClosed
-	changeblock $4, $e, $2a
-.KeepDoorClosed:
-	checkevent EVENT_BRUNOS_ROOM_EXIT_OPEN
-	iffalse .OpenDoor
-	changeblock $4, $2, $16
-.OpenDoor:
-	return
-
-UnknownScript_0x1809ad:
-	applymovement PLAYER, MovementData_0x1809f9
+.Script:
+	applymovement PLAYER, WalkIntoEliteFourRoomMovement
 	refreshscreen
 	playsound SFX_STRENGTH
 	earthquake 80
-	changeblock $4, $e, $2a
+	changeblock 4, 14, $2a
 	reloadmappart
 	closetext
-	dotrigger $1
+	setscene $1
 	setevent EVENT_BRUNOS_ROOM_ENTRANCE_CLOSED
 	waitsfx
 	end
 
-BrunoScript_0x1809c5:
-	faceplayer
+BrunosRoomDoorCallback:
+	checkevent EVENT_BRUNOS_ROOM_ENTRANCE_CLOSED
+	iffalse .KeepDoorClosed
+	changeblock 4, 14, $2a
+.KeepDoorClosed:
+	checkevent EVENT_BRUNOS_ROOM_EXIT_OPEN
+	iffalse .OpenDoor
+	changeblock 4, 2, $16
+.OpenDoor:
+	return
+
+BrunoScript:
 	checkcode VAR_BADGES
-	if_equal 16, BrunoRematchScript
+	ifequal 16, .Rematch
 	checkevent EVENT_BEAT_ELITE_4_BRUNO
-	iftrue UnknownScript_0x1809f3
-	opentext
-	writetext UnknownText_0x1809fe
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x180b23, 0
+	iftrue_jumptextfaceplayer .AfterText
+	showtextfaceplayer .SeenText
+	winlosstext .BeatenText, 0
 	loadtrainer BRUNO, 1
 	startbattle
 	reloadmapafterbattle
-	scall UnknownScript_0x1809f3
-	jump BrunoEndBattleScript
+	showtext .AfterText
+	jump .EndBattle
 
-UnknownScript_0x1809f3:
-	opentext
-	writetext UnknownText_0x180b3c
-	waitbutton
-	closetext
-	end
-
-BrunoRematchScript:
+.Rematch:
 	checkevent EVENT_BEAT_ELITE_4_BRUNO
-	iftrue .AfterBattle
-	opentext
-	writetext BrunoBeforeRematchText
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x180b23, 0
+	iftrue_jumptextfaceplayer .AfterRematchText
+	showtextfaceplayer .SeenRematchText
+	winlosstext .BeatenText, 0
 	loadtrainer BRUNO, 2
 	startbattle
 	reloadmapafterbattle
-	scall .AfterBattle
-	jump BrunoEndBattleScript
-
-.AfterBattle:
-	opentext
-	writetext BrunoAfterRematchText
-	waitbutton
-	closetext
-	end
-
-BrunoEndBattleScript:
+	showtext .AfterRematchText
+.EndBattle:
 	playsound SFX_ENTER_DOOR
-	changeblock $4, $2, $16
+	changeblock 4, 2, $16
 	reloadmappart
 	setevent EVENT_BRUNOS_ROOM_EXIT_OPEN
 	setevent EVENT_BEAT_ELITE_4_BRUNO
 	waitsfx
 	end
 
-MovementData_0x1809f9:
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
-
-UnknownText_0x1809fe:
+.SeenText:
 	text "I am Bruno of the"
 	line "Elite Four."
 
@@ -140,12 +107,12 @@ UnknownText_0x1809fe:
 	para "Hoo hah!"
 	done
 
-UnknownText_0x180b23:
+.BeatenText:
 	text "Why? How could we"
 	line "lose?"
 	done
 
-UnknownText_0x180b3c:
+.AfterText:
 	text "Having lost, I"
 	line "have no right to"
 	cont "say anything…"
@@ -154,7 +121,7 @@ UnknownText_0x180b3c:
 	line "challenge!"
 	done
 
-BrunoBeforeRematchText:
+.SeenRematchText:
 	text "Hello again."
 
 	para "As one of the"
@@ -170,7 +137,7 @@ BrunoBeforeRematchText:
 	para "Get ready!"
 	done
 
-BrunoAfterRematchText:
+.AfterRematchText:
 	text "We tried hard."
 
 	para "Continue on!"

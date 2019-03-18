@@ -1,30 +1,27 @@
 GiovannisCave_MapScriptHeader:
+	db 2 ; scene scripts
+	scene_script GiovannisCaveTrigger0
+	scene_script GiovannisCaveTrigger1
 
-.MapTriggers: db 2
-	dw GiovannisCaveTrigger0
-	dw GiovannisCaveTrigger1
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event 15,  7, TOHJO_FALLS, 3
 
-GiovannisCave_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $7, $f, 3, TOHJO_FALLS
+	db 2 ; bg events
+	bg_event 15,  2, SIGNPOST_READ, GiovannisCaveRadioScript
+	bg_event 12,  6, SIGNPOST_ITEM + BERSERK_GENE, EVENT_GIOVANNIS_CAVE_HIDDEN_BERSERK_GENE
 
-.XYTriggers: db 0
+	db 5 ; object events
+	object_event 15,  6, SPRITE_CELEBI, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GIOVANNIS_CAVE_CELEBI
+	object_event 14,  5, SPRITE_LYRA, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GIOVANNIS_CAVE_LYRA
+	object_event 15,  3, SPRITE_GIOVANNI, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GIOVANNIS_CAVE_GIOVANNI
+	smashrock_event 13, 6
+	smashrock_event 16, 2
 
-.Signposts: db 2
-	signpost 2, 15, SIGNPOST_READ, GiovannisCaveRadioScript
-	signpost 6, 12, SIGNPOST_ITEM, GiovannisCaveHiddenBerserkGene
-
-.PersonEvents: db 5
-	person_event SPRITE_CELEBI, 6, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GIOVANNIS_CAVE_CELEBI
-	person_event SPRITE_LYRA, 5, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GIOVANNIS_CAVE_LYRA
-	person_event SPRITE_GIOVANNI, 3, 15, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GIOVANNIS_CAVE_GIOVANNI
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 6, 13, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GiovannisCaveRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 2, 16, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GiovannisCaveRock, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const GIOVANNISCAVE_CELEBI
 	const GIOVANNISCAVE_LYRA
 	const GIOVANNISCAVE_GIOVANNI
@@ -36,42 +33,24 @@ GiovannisCaveTrigger0:
 
 GiovannisCaveCelebiEventScript:
 	pause 30
-	spriteface PLAYER, UP
-	spriteface GIOVANNISCAVE_LYRA, UP
+	turnobject PLAYER, UP
+	turnobject GIOVANNISCAVE_LYRA, UP
 	showemote EMOTE_SHOCK, GIOVANNISCAVE_GIOVANNI, 15
-	spriteface GIOVANNISCAVE_GIOVANNI, DOWN
-	opentext
-	writetext GiovannisCaveGiovanniIntroText
-	waitbutton
-	closetext
-	applymovement GIOVANNISCAVE_GIOVANNI, GiovannisCave_GiovanniStepsDownMovementData
-	opentext
-	writetext GiovannisCaveGiovanniMemoriesText
-	waitbutton
-	closetext
-	spriteface GIOVANNISCAVE_LYRA, RIGHT
-	opentext
-	writetext GiovannisCaveLyraQuestionsText
-	waitbutton
-	closetext
+	turnobject GIOVANNISCAVE_GIOVANNI, DOWN
+	showtext GiovannisCaveGiovanniIntroText
+	applyonemovement GIOVANNISCAVE_GIOVANNI, slow_step_down
+	showtext GiovannisCaveGiovanniMemoriesText
+	turnobject GIOVANNISCAVE_LYRA, RIGHT
+	showtext GiovannisCaveLyraQuestionsText
 	showemote EMOTE_SHOCK, GIOVANNISCAVE_LYRA, 15
-	opentext
-	writetext GiovannisCaveLyraRecognizesGiovanniText
-	waitbutton
-	closetext
+	showtext GiovannisCaveLyraRecognizesGiovanniText
 	playmusic MUSIC_ROCKET_OVERTURE
-	spriteface GIOVANNISCAVE_LYRA, UP
-	spriteface GIOVANNISCAVE_GIOVANNI, UP
-	opentext
-	writetext GiovannisCaveBroadcastText
-	waitbutton
-	closetext
-	spriteface GIOVANNISCAVE_GIOVANNI, DOWN
-	opentext
-	writetext GiovannisCaveGiovanniIMustGoText
-	waitbutton
-	closetext
-	domaptrigger GIOVANNIS_CAVE, $0
+	turnobject GIOVANNISCAVE_LYRA, UP
+	turnobject GIOVANNISCAVE_GIOVANNI, UP
+	showtext GiovannisCaveBroadcastText
+	turnobject GIOVANNISCAVE_GIOVANNI, DOWN
+	showtext GiovannisCaveGiovanniIMustGoText
+	setmapscene GIOVANNIS_CAVE, $0
 	clearevent EVENT_TIME_TRAVELING
 	winlosstext GiovannisCaveGiovanniBeatenText, 0
 	setlasttalked GIOVANNISCAVE_GIOVANNI
@@ -80,25 +59,16 @@ GiovannisCaveCelebiEventScript:
 	reloadmapafterbattle
 	setevent EVENT_TIME_TRAVELING
 	applymovement GIOVANNISCAVE_GIOVANNI, GiovannisCave_GiovanniStepsBackMovementData
-	opentext
-	writetext GiovannisCaveGiovanniAfterText
-	waitbutton
-	closetext
+	showtext GiovannisCaveGiovanniAfterText
 	applymovement GIOVANNISCAVE_GIOVANNI, GiovannisCave_GiovanniLeavesMovementData
 	playsound SFX_ENTER_DOOR
 	disappear GIOVANNISCAVE_GIOVANNI
 	waitsfx
-	spriteface PLAYER, DOWN
-	spriteface GIOVANNISCAVE_LYRA, DOWN
-	opentext
-	writetext GiovannisCaveBroadcastAfterText
-	waitbutton
-	closetext
-	applymovement GIOVANNISCAVE_LYRA, GiovannisCave_LyraStepsDownMovementData
-	opentext
-	writetext GiovannisCaveLyraFeelsSorryText
-	waitbutton
-	closetext
+	turnobject PLAYER, DOWN
+	turnobject GIOVANNISCAVE_LYRA, DOWN
+	showtext GiovannisCaveBroadcastAfterText
+	applyonemovement GIOVANNISCAVE_LYRA, slow_step_down
+	showtext GiovannisCaveLyraFeelsSorryText
 	playsound SFX_GAME_FREAK_LOGO_GS
 	special FadeOutPalettes
 	pause 30
@@ -107,10 +77,7 @@ GiovannisCaveCelebiEventScript:
 	showemote EMOTE_SHOCK, PLAYER, 15
 	applymovement PLAYER, GiovannisCave_PlayerStepsAsideMovementData
 	applymovement GIOVANNISCAVE_LYRA, GiovannisCave_LyraLooksAroundMovementData
-	opentext
-	writetext GiovannisCaveLyraWantsToLeaveText
-	waitbutton
-	closetext
+	showtext GiovannisCaveLyraWantsToLeaveText
 	playsound SFX_PROTECT
 	applymovement GIOVANNISCAVE_CELEBI, GiovannisCave_CelebiFloatsMovementData
 	waitsfx
@@ -120,7 +87,7 @@ GiovannisCaveCelebiEventScript:
 	waitsfx
 	disappear GIOVANNISCAVE_CELEBI
 	disappear GIOVANNISCAVE_LYRA
-	warp CINNABAR_LAB, $1e, $10
+	warp CINNABAR_LAB, 30, 16
 	end
 
 GiovannisCaveRadioScript:
@@ -129,12 +96,6 @@ GiovannisCaveRadioScript:
 	jumptext GiovannisCaveRadioText
 .AfterTimeTravel
 	jumptext GiovannisCaveRadioAfterTimeTravelText
-
-GiovannisCaveHiddenBerserkGene:
-	dwb EVENT_GIOVANNIS_CAVE_HIDDEN_BERSERK_GENE, BERSERK_GENE
-
-GiovannisCaveRock:
-	jumpstd smashrock
 
 GiovannisCaveRadioText:
 	text "There is a radio"
@@ -149,11 +110,6 @@ GiovannisCaveRadioAfterTimeTravelText:
 	para "Giovanni must have"
 	line "left it here…"
 	done
-
-GiovannisCave_GiovanniStepsDownMovementData:
-GiovannisCave_LyraStepsDownMovementData:
-	slow_step_down
-	step_end
 
 GiovannisCave_GiovanniStepsBackMovementData:
 	turn_head_down

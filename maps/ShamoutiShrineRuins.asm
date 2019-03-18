@@ -1,38 +1,31 @@
 ShamoutiShrineRuins_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2, 18, NOISY_FOREST, 3
+	warp_event  2, 19, NOISY_FOREST, 4
 
-ShamoutiShrineRuins_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $12, $2, 3, NOISY_FOREST
-	warp_def $13, $2, 4, NOISY_FOREST
+	db 1 ; bg events
+	bg_event  7, 10, SIGNPOST_ITEM + MAX_REVIVE, EVENT_SHAMOUTI_SHRINE_RUINS_HIDDEN_MAX_REVIVE
 
-.XYTriggers: db 0
+	db 4 ; object events
+	object_event  8, 11, SPRITE_LAWRENCE, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ShamoutiShrineRuinsLawrenceScript, EVENT_LAWRENCE_SHAMOUTI_SHRINE_RUINS
+	object_event 10, 17, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, ShamoutiShrineRuinsGrampsText, -1
+	object_event 14, 13, SPRITE_LADY, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, ShamoutiShrineRuinsLadyText, -1
+	itemball_event  4, 27, RARE_CANDY, 1, EVENT_SHAMOUTI_SHRINE_RUINS_RARE_CANDY
 
-.Signposts: db 1
-	signpost 10, 7, SIGNPOST_ITEM, ShamoutiShrineRuinsHiddenMaxRevive
-
-.PersonEvents: db 4
-	person_event SPRITE_LAWRENCE, 11, 8, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ShamoutiShrineRuinsLawrenceScript, EVENT_LAWRENCE_SHAMOUTI_SHRINE_RUINS
-	person_event SPRITE_GRAMPS, 17, 10, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, ShamoutiShrineRuinsGrampsScript, -1
-	person_event SPRITE_LADY, 13, 14, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ShamoutiShrineRuinsLadyScript, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 27, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, RARE_CANDY, 1, EVENT_SHAMOUTI_SHRINE_RUINS_RARE_CANDY
-
-const_value set 2
+	const_def 1 ; object constants
 	const SHAMOUTISHRINERUINS_LAWRENCE
 
 ShamoutiShrineRuinsLawrenceScript:
 	special Special_FadeOutMusic
 	pause 15
 	playmusic MUSIC_ZINNIA_ENCOUNTER_ORAS
-	faceplayer
-	opentext
-	writetext .SeenText
-	waitbutton
-	closetext
+	showtextfaceplayer .SeenText
 	winlosstext .BeatenText, 0
 	setlasttalked SHAMOUTISHRINERUINS_LAWRENCE
 	loadtrainer LAWRENCE, 1
@@ -49,27 +42,23 @@ ShamoutiShrineRuinsLawrenceScript:
 	waitbutton
 	closetext
 	checkcode VAR_FACING
-	if_equal UP, .up
-	if_equal DOWN, .down
-	if_equal LEFT, .left
+	ifequal UP, .up
+	ifequal DOWN, .down
+	ifequal LEFT, .left
 .right
-	spriteface SHAMOUTISHRINERUINS_LAWRENCE, RIGHT
+	turnobject SHAMOUTISHRINERUINS_LAWRENCE, RIGHT
 	jump .continue
 .up
-	spriteface SHAMOUTISHRINERUINS_LAWRENCE, UP
+	turnobject SHAMOUTISHRINERUINS_LAWRENCE, UP
 	jump .continue
 .down
-	spriteface SHAMOUTISHRINERUINS_LAWRENCE, DOWN
+	turnobject SHAMOUTISHRINERUINS_LAWRENCE, DOWN
 	jump .continue
 .left
-	spriteface SHAMOUTISHRINERUINS_LAWRENCE, LEFT
+	turnobject SHAMOUTISHRINERUINS_LAWRENCE, LEFT
 .continue
 	pause 40
-	faceplayer
-	opentext
-	writetext .GoodbyeText
-	waitbutton
-	closetext
+	showtextfaceplayer .GoodbyeText
 	playsound SFX_WARP_TO
 	special Special_FadeBlackQuickly
 	special Special_ReloadSpritesNoPalettes
@@ -150,7 +139,7 @@ ShamoutiShrineRuinsLawrenceScript:
 
 .GoodbyeText:
 	text "My dream was to"
-	line "own that Pokemon,"
+	line "own that #mon,"
 
 	para "but you've proven"
 	line "yourself worthy."
@@ -162,10 +151,7 @@ ShamoutiShrineRuinsLawrenceScript:
 	para "Farewell."
 	done
 
-ShamoutiShrineRuinsGrampsScript:
-	jumptextfaceplayer .Text
-
-.Text:
+ShamoutiShrineRuinsGrampsText:
 	text "This shrine was"
 	line "magnificent when"
 	cont "I was a child."
@@ -190,10 +176,7 @@ ShamoutiShrineRuinsGrampsScript:
 	cont "us safe."
 	done
 
-ShamoutiShrineRuinsLadyScript:
-	jumptextfaceplayer .Text
-
-.Text:
+ShamoutiShrineRuinsLadyText:
 	text "I simply had to"
 	line "stop at Shamouti"
 
@@ -204,6 +187,3 @@ ShamoutiShrineRuinsLadyScript:
 	line "a talking #mon"
 	cont "here somewhere."
 	done
-
-ShamoutiShrineRuinsHiddenMaxRevive:
-	dwb EVENT_SHAMOUTI_SHRINE_RUINS_HIDDEN_MAX_REVIVE, MAX_REVIVE

@@ -1,28 +1,25 @@
 GoldenrodMagnetTrainStation_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  8, 17, GOLDENROD_CITY, 5
+	warp_event  9, 17, GOLDENROD_CITY, 5
+	warp_event  6,  5, SAFFRON_TRAIN_STATION, 4
+	warp_event 11,  5, SAFFRON_TRAIN_STATION, 3
 
-GoldenrodMagnetTrainStation_MapEventHeader:
+	db 1 ; coord events
+	coord_event 11,  6, 0, Script_ArriveFromSaffron
 
-.Warps: db 4
-	warp_def $11, $8, 5, GOLDENROD_CITY
-	warp_def $11, $9, 5, GOLDENROD_CITY
-	warp_def $5, $6, 4, SAFFRON_TRAIN_STATION
-	warp_def $5, $b, 3, SAFFRON_TRAIN_STATION
+	db 0 ; bg events
 
-.XYTriggers: db 1
-	xy_trigger 0, $6, $b, Script_ArriveFromSaffron
+	db 3 ; object events
+	object_event  9,  9, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, OfficerScript_0x550ec, -1
+	object_event 11, 14, SPRITE_GENTLEMAN, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x552a3, EVENT_GOLDENROD_TRAIN_STATION_GENTLEMAN
+	object_event  6, 12, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GoldenrodMagnetTrainStationCooltrainerfScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_OFFICER, 9, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, OfficerScript_0x550ec, -1
-	person_event SPRITE_GENTLEMAN, 14, 11, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GentlemanScript_0x55143, EVENT_GOLDENROD_TRAIN_STATION_GENTLEMAN
-	person_event SPRITE_COOLTRAINER_F, 12, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GoldenrodMagnetTrainStationCooltrainerfScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const GOLDENRODMAGNETTRAINSTATION_OFFICER
 
 OfficerScript_0x550ec:
@@ -30,17 +27,14 @@ OfficerScript_0x550ec:
 	opentext
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .MagnetTrainToSaffron
-	writetext UnknownText_0x55160
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x55160
 
 .MagnetTrainToSaffron:
 	writetext UnknownText_0x551b7
 	yesorno
-	iffalse .DecidedNotToRide
+	iffalse_jumpopenedtext UnknownText_0x5524f
 	checkitem PASS
-	iffalse .PassNotInBag
+	iffalse_jumpopenedtext UnknownText_0x5522c
 	writetext UnknownText_0x551ed
 	waitbutton
 	closetext
@@ -50,38 +44,15 @@ OfficerScript_0x550ec:
 	special Special_MagnetTrain
 	warpcheck
 	newloadmap MAPSETUP_TRAIN
-	applymovement PLAYER, .MovementBoardTheTrain
-	wait $14
-	end
-
-.MovementBoardTheTrain:
-	turn_head_down
-	step_end
-
-.PassNotInBag:
-	writetext UnknownText_0x5522c
-	waitbutton
-	closetext
-	end
-
-.DecidedNotToRide:
-	writetext UnknownText_0x5524f
-	waitbutton
-	closetext
+	applyonemovement PLAYER, turn_head_down
+	wait 36
 	end
 
 Script_ArriveFromSaffron:
 	applymovement GOLDENRODMAGNETTRAINSTATION_OFFICER, MovementData_0x55146
 	applymovement PLAYER, MovementData_0x55158
 	applymovement GOLDENRODMAGNETTRAINSTATION_OFFICER, MovementData_0x5514b
-	opentext
-	writetext UnknownText_0x5526a
-	waitbutton
-	closetext
-	end
-
-GentlemanScript_0x55143:
-	jumptextfaceplayer UnknownText_0x552a3
+	jumptext UnknownText_0x5526a
 
 GoldenrodMagnetTrainStationCooltrainerfScript:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO

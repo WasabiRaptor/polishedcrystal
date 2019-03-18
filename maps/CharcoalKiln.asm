@@ -1,49 +1,28 @@
 CharcoalKiln_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  3,  7, AZALEA_TOWN, 2
+	warp_event  4,  7, AZALEA_TOWN, 2
 
-CharcoalKiln_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $3, 2, AZALEA_TOWN
-	warp_def $7, $4, 2, AZALEA_TOWN
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_BLACK_BELT, 4, 1, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CharcoalKilnBoss, EVENT_CHARCOAL_KILN_BOSS
-	person_event SPRITE_YOUNGSTER, 3, 4, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CharcoalKilnApprentice, EVENT_CHARCOAL_KILN_APPRENTICE
-	person_event SPRITE_FARFETCH_D, 6, 8, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CharcoalKilnFarfetchd, EVENT_CHARCOAL_KILN_FARFETCH_D
+	db 3 ; object events
+	object_event  1,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CharcoalKilnBoss, EVENT_CHARCOAL_KILN_BOSS
+	object_event  4,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CharcoalKilnApprentice, EVENT_CHARCOAL_KILN_APPRENTICE
+	object_event  8,  6, SPRITE_FARFETCH_D, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CharcoalKilnFarfetchdScript, EVENT_CHARCOAL_KILN_FARFETCH_D
 
 CharcoalKilnBoss:
-	faceplayer
-	opentext
 	checkevent EVENT_GOT_HM01_CUT
-	iftrue .GotCut
+	iftrue_jumptextfaceplayer .Text3
 	checkevent EVENT_CLEARED_SLOWPOKE_WELL
-	iftrue .SavedSlowpoke
-	writetext .Text1
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer .Text2
+	thistextfaceplayer
 
-.SavedSlowpoke:
-	writetext .Text2
-	waitbutton
-	closetext
-	end
-
-.GotCut:
-	writetext .Text3
-	waitbutton
-	closetext
-	end
-
-.Text1:
 	text "All the Slowpoke"
 	line "have disappeared"
 	cont "from the town."
@@ -82,32 +61,18 @@ CharcoalKilnBoss:
 	done
 
 CharcoalKilnApprentice:
+	checkevent EVENT_GOT_CHARCOAL_IN_CHARCOAL_KILN
+	iftrue_jumptextfaceplayer .Text3
+	checkevent EVENT_GOT_HM01_CUT
+	iffalse_jumptextfaceplayer .Text1
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_CHARCOAL_IN_CHARCOAL_KILN
-	iftrue .YoureTheCoolest
-	checkevent EVENT_GOT_HM01_CUT
-	iftrue .Thanks
-	writetext .Text1
-	waitbutton
-	closetext
-	end
-
-.Thanks:
 	writetext .Text2
 	buttonsound
 	verbosegiveitem CHARCOAL
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_CHARCOAL_IN_CHARCOAL_KILN
-.Done:
-	closetext
-	end
-
-.YoureTheCoolest:
-	writetext .Text3
-	waitbutton
-	closetext
-	end
+	endtext
 
 .Text1:
 	text "Where have all the"
@@ -138,13 +103,9 @@ CharcoalKilnApprentice:
 	line "est, man!"
 	done
 
-CharcoalKilnFarfetchd:
+CharcoalKilnFarfetchdScript:
 	faceplayer
-	opentext
-	writetext .Text
-	cry FARFETCH_D
-	waitbutton
-	closetext
+	showcrytext .Text, FARFETCH_D
 	end
 
 .Text:

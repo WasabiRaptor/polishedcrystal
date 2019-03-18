@@ -10,10 +10,10 @@ _TitleScreen: ; 10ed67
 
 ; Reset timing variables
 	ld hl, wJumptableIndex
-	ld [hli], a ; cf63 ; Scene?
-	ld [hli], a ; cf64
-	ld [hli], a ; cf65 ; Timer lo
-	ld [hl], a  ; cf66 ; Timer hi
+	ld [hli], a ; wJumptableIndex
+	ld [hli], a ; wIntroSceneFrameCounter
+	ld [hli], a ; wTitleScreenTimerLo
+	ld [hl], a  ; wTitleScreenTimerHi
 
 ; Turn LCD off
 	call DisableLCD
@@ -32,7 +32,7 @@ _TitleScreen: ; 10ed67
 
 ; Clear screen palettes
 	hlbgcoord 0, 0
-	ld bc, 20 bgrows
+	ld bc, SCREEN_WIDTH * BG_MAP_WIDTH
 	xor a
 	call ByteFill
 
@@ -43,7 +43,7 @@ _TitleScreen: ; 10ed67
 
 ; line 0 (copyright)
 	hlbgcoord 0, 0, VBGMap1
-	ld bc, 1 bgrows
+	ld bc, BG_MAP_WIDTH
 	ld a, 7 ; palette
 	call ByteFill
 
@@ -54,27 +54,27 @@ _TitleScreen: ; 10ed67
 
 ; lines 3-4
 	hlbgcoord 0, 3
-	ld bc, 2 bgrows
+	ld bc, 2 * BG_MAP_WIDTH
 	ld a, 2
 	call ByteFill
 ; line 5
 	hlbgcoord 0, 5
-	ld bc, 1 bgrows
+	ld bc, BG_MAP_WIDTH
 	ld a, 3
 	call ByteFill
 ; line 6
 	hlbgcoord 0, 6
-	ld bc, 1 bgrows
+	ld bc, BG_MAP_WIDTH
 	ld a, 4
 	call ByteFill
 ; line 7
 	hlbgcoord 0, 7
-	ld bc, 1 bgrows
+	ld bc, BG_MAP_WIDTH
 	ld a, 5
 	call ByteFill
 ; lines 8-9
 	hlbgcoord 0, 8
-	ld bc, 2 bgrows
+	ld bc, 2 * BG_MAP_WIDTH
 	ld a, 6
 	call ByteFill
 
@@ -87,7 +87,7 @@ _TitleScreen: ; 10ed67
 
 ; Suicune gfx
 	hlbgcoord 0, 12
-	ld bc, 6 bgrows ; the rest of the screen
+	ld bc, 6 * BG_MAP_WIDTH ; the rest of the screen
 	ld a, 8
 	call ByteFill
 
@@ -110,26 +110,26 @@ _TitleScreen: ; 10ed67
 
 ; Clear screen tiles
 	hlbgcoord 0, 0
-	ld bc, 64 bgrows
+	ld bc, 64 * BG_MAP_WIDTH
 	ld a, " "
 	call ByteFill
 
 ; Draw Pokemon logo
 	hlcoord 0, 3
-	lb bc, 7, 20
-	lb de, $80, $14
+	lb bc, 7, SCREEN_WIDTH
+	lb de, $80, SCREEN_WIDTH
 	call DrawTitleGraphic
 
 ; Draw copyright text
 	hlbgcoord 4, 0, VBGMap1
 	lb bc, 1, 13
-	lb de, $c, $10
+	lb de, $0c, 0
 	call DrawTitleGraphic
 
 IF DEF(FAITHFUL)
 	hlbgcoord 17, 0, VBGMap1
 	lb bc, 1, 1
-	lb de, $19, $10
+	lb de, $19, 0
 	call DrawTitleGraphic
 endc
 
@@ -149,14 +149,14 @@ endc
 
 ; Update palette colors
 	ld hl, TitleScreenPalettes
-	ld de, UnknBGPals
-	ld bc, 4 * 32
-	call CopyBytes
+	ld de, wUnknBGPals
+	ld bc, 16 palettes
+	rst CopyBytes
 
 	ld hl, TitleScreenPalettes
-	ld de, BGPals
-	ld bc, 4 * 32
-	call CopyBytes
+	ld de, wBGPals
+	ld bc, 16 palettes
+	rst CopyBytes
 
 ; Restore WRAM bank
 	pop af
@@ -167,29 +167,13 @@ endc
 
 	ld a, [rSVBK]
 	push af
-	ld a, BANK(LYOverrides)
+	ld a, BANK(wLYOverrides)
 	ld [rSVBK], a
 
-; Make alternating lines come in from opposite sides
-
-; ( This part is actually totally pointless, you can't
-;   see anything until these values are overwritten!  )
-
-	ld b, 80 / 2 ; alternate for 80 lines
-	ld hl, LYOverrides
-.loop
-; $00 is the middle position
-	ld [hl], +112 ; coming from the left
-	inc hl
-	ld [hl], -112 ; coming from the right
-	inc hl
-	dec b
-	jr nz, .loop
-
-; Make sure the rest of the buffer is empty
-	ld hl, LYOverrides + 80
+; Make sure the LYOverrides buffer is empty
+	ld hl, wLYOverrides
 	xor a
-	ld bc, LYOverridesEnd - (LYOverrides + 80)
+	ld bc, wLYOverridesEnd - wLYOverrides
 	call ByteFill
 
 ; Let LCD Stat know we're messing around with SCX
@@ -204,9 +188,8 @@ endc
 	call ChannelsOff
 	call EnableLCD
 
-; Set sprite size to 8x16
 	ld a, [rLCDC]
-	set 2, a
+	set 2, a ; 8x16 sprites
 	ld [rLCDC], a
 
 	ld a, +112
@@ -225,7 +208,7 @@ endc
 	ld [hBGMapMode], a
 
 	xor a
-	ld [UnknBGPals + 2], a
+	ld [wUnknBGPals palette 0 + 2], a
 
 ; Play starting sound effect
 	call SFXChannelsOff
@@ -236,7 +219,7 @@ endc
 ; 10eea7
 
 SuicuneFrameIterator: ; 10eea7
-	ld hl, UnknBGPals + 2
+	ld hl, wUnknBGPals palette 0 + 2
 	ld a, [hl]
 	ld c, a
 	inc [hl]
@@ -259,8 +242,7 @@ SuicuneFrameIterator: ; 10eea7
 	call LoadSuicuneFrame
 	ld a, $1
 	ld [hBGMapMode], a
-	ld a, $3
-	ld [hBGMapThird], a
+	ld [hBGMapHalf], a
 	ret
 ; 10eece
 
@@ -286,7 +268,7 @@ LoadSuicuneFrame: ; 10eed2
 	ld a, SCREEN_WIDTH - 8
 	add l
 	ld l, a
-	ld a, 0 ; not xor a; preserve carry flag?
+	ld a, 0 ; not xor a; preserve carry flag
 	adc h
 	ld h, a
 	ld a, 8
@@ -328,7 +310,7 @@ DrawTitleGraphic: ; 10eeef
 ; 10ef06
 
 InitializeBackground: ; 10ef06
-	ld hl, Sprites
+	ld hl, wSprites
 	lb de, -$22, $0
 	ld c, 5
 .loop
@@ -354,9 +336,8 @@ InitializeBackground: ; 10ef06
 	ld b, a
 	ld a, e
 	ld [hli], a
-rept 2
 	inc e
-endr
+	inc e
 	ld a, $80
 	ld [hli], a
 	dec c
@@ -370,7 +351,7 @@ AnimateTitleCrystal: ; 10ef32
 
 ; Stop at y=6
 ; y is really from the bottom of the sprite, which is two tiles high
-	ld hl, Sprites
+	ld hl, wSprites
 	ld a, [hl]
 	cp 6 + $10
 	ret z
@@ -381,9 +362,9 @@ AnimateTitleCrystal: ; 10ef32
 	ld a, [hl]
 	add 2
 	ld [hli], a
-rept 3
 	inc hl
-endr
+	inc hl
+	inc hl
 	dec c
 	jr nz, .loop
 

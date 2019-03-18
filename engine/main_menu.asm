@@ -1,12 +1,10 @@
 MainMenu: ; 49cdc
-	farcall DeleteSavedMusic
-	xor a
-	ld [wDisableTextAcceleration], a
+	call DeleteSavedMusic
 	call Function49ed0
-	ld b, SCGB_DIPLOMA
-	call GetSGBLayout
+	ld b, CGB_DIPLOMA
+	call GetCGBLayout
 	call SetPalettes
-	ld hl, GameTimerPause
+	ld hl, wGameTimerPause
 	res 0, [hl]
 	call MainMenu_GetWhichMenu
 	ld [wWhichIndexSet], a
@@ -17,7 +15,7 @@ MainMenu: ; 49cdc
 	call CloseWindow
 	ret c
 	call ClearTileMap
-	ld a, [MenuSelection]
+	ld a, [wMenuSelection]
 	ld hl, .Jumptable
 	rst JumpTable
 	jr MainMenu
@@ -42,21 +40,23 @@ MainMenu: ; 49cdc
 .Strings: ; 49d24
 	db "Continue@"
 	db "New Game@"
+	db "New Game+@"
 	db "Options@"
 	db "Music Player@"
 
 .Jumptable: ; 0x49d60
-
 	dw MainMenu_Continue
 	dw MainMenu_NewGame
+	dw MainMenu_NewGamePlus
 	dw MainMenu_Options
 	dw MainMenu_MusicPlayer
 ; 0x49d6c
 
 CONTINUE       EQU 0
 NEW_GAME       EQU 1
-OPTION         EQU 2
-MUSIC_PLAYER   EQU 3
+NEW_GAME_PLUS  EQU 2
+OPTION         EQU 3
+MUSIC_PLAYER   EQU 4
 
 MainMenuItems:
 ; .NewGameMenu: ; 0x49d6c
@@ -72,6 +72,14 @@ MainMenuItems:
 	db OPTION
 	db MUSIC_PLAYER
 	db -1
+; .NewGamePlusMenu:
+	db 5
+	db CONTINUE
+	db NEW_GAME
+	db NEW_GAME_PLUS
+	db OPTION
+	db MUSIC_PLAYER
+	db -1
 
 MainMenu_GetWhichMenu: ; 49da4
 	ld a, [wSaveFileExists]
@@ -81,7 +89,20 @@ MainMenu_GetWhichMenu: ; 49da4
 	ret
 
 .next
+	ld a, BANK(sPlayerData)
+	call GetSRAMBank
+	ld hl, sPlayerData + (wEventFlags + (EVENT_BEAT_LEAF >> 3)) - wPlayerData
+	ld de, wEventFlags + (EVENT_BEAT_LEAF >> 3)
+	ld a, [hl]
+	ld [de], a
+	call CloseSRAM
+	eventflagcheck EVENT_BEAT_LEAF
+	jr nz, .next2
 	ld a, $1 ; Continue
+	ret
+
+.next2
+	ld a, $2 ; New Game+
 	ret
 ; 49de4
 
@@ -92,7 +113,7 @@ MainMenuJoypadLoop: ; 49de4
 	ld a, [w2DMenuFlags1]
 	set 5, a
 	ld [w2DMenuFlags1], a
-	call GetScrollingMenuJoypad
+	call ReadMenuJoypad
 	ld a, [wMenuJoypad]
 	cp B_BUTTON
 	jr z, .b_button
@@ -117,13 +138,13 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 	xor a
 	ld [hBGMapMode], a
 	call .PlaceBox
-	ld hl, Options1
+	ld hl, wOptions1
 	ld a, [hl]
 	push af
 	set NO_TEXT_SCROLL, [hl]
 	call .PlaceTime
 	pop af
-	ld [Options1], a
+	ld [wOptions1], a
 	ld a, $1
 	ld [hBGMapMode], a
 	ret
@@ -156,10 +177,10 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 if DEF(NO_RTC)
 	ld a, BANK(sPlayerData)
 	call GetSRAMBank
-	ld hl, sPlayerData + (wNoRTC - wPlayerData)
+	ld hl, sPlayerData + wNoRTC - wPlayerData
 	ld de, wNoRTC
 	ld bc, 5
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 endc
 
@@ -229,6 +250,9 @@ Function49ed0: ; 49ed0
 MainMenu_NewGame: ; 49ee0
 	farjp NewGame
 ; 49ee7
+
+MainMenu_NewGamePlus:
+	farjp NewGamePlus
 
 MainMenu_Options: ; 49ee7
 	farjp OptionsMenu

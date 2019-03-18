@@ -1,35 +1,26 @@
 WarmBeachHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, WARM_BEACH, 3
+	warp_event  3,  7, WARM_BEACH, 3
 
-WarmBeachHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 3, WARM_BEACH
-	warp_def $7, $3, 3, WARM_BEACH
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 3 ; object events
+	object_event  2,  3, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, WarmBeachHouseGrampsText, -1
+	object_event  5,  3, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, WarmBeachHouseGrannyText, -1
+	object_event  3,  3, SPRITE_BOOK_PAPER_POKEDEX, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, WarmBeachHouseBookScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_GRAMPS, 3, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, WarmBeachHouseGrampsScript, -1
-	person_event SPRITE_GRANNY, 3, 5, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, WarmBeachHouseGrannyScript, -1
-	person_event SPRITE_BOOK_UNOWN_R, 3, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, WarmBeachHouseBookScript, -1
-
-WarmBeachHouseGrampsScript:
-	jumptextfaceplayer .Text
-
-.Text:
+WarmBeachHouseGrampsText:
 	text "TODO"
 	done
 
-WarmBeachHouseGrannyScript:
-	jumptextfaceplayer .Text
-
-.Text:
+WarmBeachHouseGrannyText:
 	text "TODO"
 	done
 
@@ -37,18 +28,34 @@ WarmBeachHouseBookScript:
 	opentext
 	writetext .Text0
 	yesorno
-	iffalse .Done
+	iffalse_endtext
 	writetext .Text1
 	yesorno
-	iffalse .Done
+	iffalse_endtext
 	writetext .Text2
 	yesorno
-	iffalse .Done
-	writetext .Text3
-	waitbutton
-.Done
-	closetext
-	end
+	iffalse_endtext
+	thisopenedtext
+
+	text "From the trio of"
+	line "islands, ancient"
+	cont "spheres shall you"
+	cont "take."
+
+	para "For between life"
+	line "and death, all the"
+	cont "difference you'll"
+	cont "make."
+
+	para "Climb to the"
+	line "shrine to right"
+	cont "what is wrong,"
+
+	para "and the world"
+	line "shall be healed"
+	cont "by the guardian's"
+	cont "song…"
+	done
 
 .Text0:
 	text "The Shamouti"
@@ -91,25 +98,4 @@ WarmBeachHouseBookScript:
 	cont "beast of the sea."
 
 	para "Keep reading?"
-	done
-
-.Text3:
-	text "From the trio of"
-	line "islands, ancient"
-	cont "spheres shall you"
-	cont "take."
-
-	para "For between life"
-	line "and death, all the"
-	cont "difference you'll"
-	cont "make."
-
-	para "Climb to the"
-	line "shrine to right"
-	cont "what is wrong,"
-
-	para "and the world"
-	line "shall be healed"
-	cont "by the guardian's"
-	cont "song…"
 	done

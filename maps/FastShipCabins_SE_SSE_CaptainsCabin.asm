@@ -1,115 +1,88 @@
 FastShipCabins_SE_SSE_CaptainsCabin_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event  2,  7, FAST_SHIP_1F, 8
+	warp_event  3,  7, FAST_SHIP_1F, 8
+	warp_event  2, 19, FAST_SHIP_1F, 9
+	warp_event  3, 19, FAST_SHIP_1F, 9
+	warp_event  2, 33, FAST_SHIP_1F, 10
+	warp_event  3, 33, FAST_SHIP_1F, 10
 
-FastShipCabins_SE_SSE_CaptainsCabin_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $7, $2, 8, FAST_SHIP_1F
-	warp_def $7, $3, 8, FAST_SHIP_1F
-	warp_def $13, $2, 9, FAST_SHIP_1F
-	warp_def $13, $3, 9, FAST_SHIP_1F
-	warp_def $21, $2, 10, FAST_SHIP_1F
-	warp_def $21, $3, 10, FAST_SHIP_1F
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 11 ; object events
+	object_event  2, 17, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, GentlemanScript_0x75f1f, EVENT_FAST_SHIP_CABINS_SE_SSE_GENTLEMAN
+	object_event  3, 17, SPRITE_TWIN, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7630d, EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_1
+	object_event  2, 25, SPRITE_TWIN, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TwinScript_0x75ebb, EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_2
+	object_event  3, 25, SPRITE_CAPTAIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CaptainScript_0x75ea7, -1
+	object_event  5,  6, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 5, GenericTrainerPokefanmColin, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
+	object_event  2,  4, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerTwinsMegandpeg1, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
+	object_event  3,  4, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerTwinsMegandpeg2, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
+	object_event  5,  5, SPRITE_PSYCHIC, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 5, GenericTrainerPsychicRodney, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
+	object_event  2,  3, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerPokefanmJeremy, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
+	object_event  5,  5, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerPokefanfGeorgia, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
+	object_event  1, 15, SPRITE_REAL_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerSupernerdShawn, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
 
-.Signposts: db 0
-
-.PersonEvents: db 11
-	person_event SPRITE_GENTLEMAN, 17, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, GentlemanScript_0x75f1f, EVENT_FAST_SHIP_CABINS_SE_SSE_GENTLEMAN
-	person_event SPRITE_TWIN, 17, 3, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TwinScript_0x75f6d, EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_1
-	person_event SPRITE_TWIN, 25, 2, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TwinScript_0x75ebb, EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_2
-	person_event SPRITE_CAPTAIN, 25, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CaptainScript_0x75ea7, -1
-	person_event SPRITE_POKEFAN_M, 6, 5, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 5, TrainerPokefanmColin, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
-	person_event SPRITE_TWIN, 4, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerTwinsMegandpeg1, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
-	person_event SPRITE_TWIN, 4, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerTwinsMegandpeg2, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
-	person_event SPRITE_YOUNGSTER, 5, 5, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 5, TrainerPsychicRodney, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
-	person_event SPRITE_POKEFAN_M, 3, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerPokefanmJeremy, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
-	person_event SPRITE_POKEFAN_F, 5, 5, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerPokefanfGeorgia, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
-	person_event SPRITE_SUPER_NERD, 15, 1, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 2, TrainerSupernerdShawn, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
-
-const_value set 2
+	const_def 1 ; object constants
 	const FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN
 	const FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1
 	const FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2
 
 CaptainScript_0x75ea7:
-	faceplayer
-	opentext
 	checkevent EVENT_FAST_SHIP_FIRST_TIME
-	iftrue UnknownScript_0x75eb5
-	writetext UnknownText_0x76012
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x75eb5:
-	writetext UnknownText_0x76064
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer UnknownText_0x76064
+	jumptextfaceplayer UnknownText_0x76012
 
 TwinScript_0x75ebb:
-	spriteface FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2, RIGHT
-	opentext
-	writetext UnknownText_0x761e0
-	waitbutton
-	closetext
-	faceplayer
-	opentext
-	writetext UnknownText_0x7621f
-	waitbutton
-	closetext
+	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2, RIGHT
+	showtext UnknownText_0x761e0
+	showtextfaceplayer UnknownText_0x7621f
 	special Special_FadeBlackQuickly
 	special Special_ReloadSpritesNoPalettes
 	disappear FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2
 	applymovement PLAYER, MovementData_0x76004
-	moveperson FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, $3, $13
+	moveobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, 3, 19
 	appear FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1
-	spriteface PLAYER, UP
-	spriteface FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, UP
+	turnobject PLAYER, UP
+	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, UP
 	special Special_FadeInQuickly
-	spriteface FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, DOWN
+	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, DOWN
 	showemote EMOTE_SHOCK, FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, 15
 	applymovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN1, MovementData_0x7600c
-	spriteface FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, RIGHT
+	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, RIGHT
 	checkflag ENGINE_PLAYER_IS_FEMALE
 	iftrue UnknownScript_0x75f03
-	opentext
-	writetext UnknownText_0x76284
-	waitbutton
-	closetext
+	showtext UnknownText_0x76284
 	jump UnknownScript_0x75f09
 
 UnknownScript_0x75f03:
-	opentext
-	writetext UnknownText_0x762c6
-	waitbutton
-	closetext
+	showtext UnknownText_0x762c6
 UnknownScript_0x75f09:
-	spriteface FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2, DOWN
-	applymovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, MovementData_0x76010
+	turnobject FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_TWIN2, DOWN
+	applyonemovement FASTSHIPCABINS_SE_SSE_CAPTAINSCABIN_GENTLEMAN, step_down
 	opentext
 	writetext UnknownText_0x76143
 	buttonsound
 	setevent EVENT_VERMILION_PORT_SAILOR_AT_GANGWAY
-	domaptrigger FAST_SHIP_1F, $0
+	setmapscene FAST_SHIP_1F, $0
 	jump UnknownScript_0x75f37
 
 GentlemanScript_0x75f1f:
+	checkevent EVENT_GOT_MACHO_BRACE_FROM_GRANDPA_ON_SS_AQUA
+	iftrue_jumptextfaceplayer UnknownText_0x761be
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_MACHO_BRACE_FROM_GRANDPA_ON_SS_AQUA
-	iftrue UnknownScript_0x75f67
 	checkevent EVENT_FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN_TWIN_2
 	iftrue UnknownScript_0x75f58
 	writetext UnknownText_0x760ae
 	waitbutton
 	closetext
-	domaptrigger FAST_SHIP_1F, $0
+	setmapscene FAST_SHIP_1F, $0
 	end
 
 UnknownScript_0x75f37:
@@ -126,128 +99,88 @@ UnknownScript_0x75f37:
 	waitbutton
 	setevent EVENT_FAST_SHIP_HAS_ARRIVED
 	setevent EVENT_FAST_SHIP_FOUND_GIRL
-	closetext
-	end
+	endtext
 
 UnknownScript_0x75f58:
 	writetext UnknownText_0x7619b
 	buttonsound
 	verbosegiveitem MACHO_BRACE
-	iffalse UnknownScript_0x75f65
+	iffalse_endtext
 	setevent EVENT_GOT_MACHO_BRACE_FROM_GRANDPA_ON_SS_AQUA
-UnknownScript_0x75f65:
-	closetext
-	end
+	endtext
 
-UnknownScript_0x75f67:
-	writetext UnknownText_0x761be
-	waitbutton
-	closetext
-	end
+GenericTrainerPokefanmColin:
+	generictrainer POKEFANM, COLIN, EVENT_BEAT_POKEFANM_COLIN, PokefanmColinSeenText, PokefanmColinBeatenText
 
-TwinScript_0x75f6d:
-	faceplayer
-	opentext
-	writetext UnknownText_0x7630d
-	waitbutton
-	closetext
-	end
+	text "You're traveling"
+	line "all alone?"
 
-TrainerPokefanmColin:
-	trainer EVENT_BEAT_POKEFANM_COLIN, POKEFANM, COLIN, PokefanmColinSeenText, PokefanmColinBeatenText, 0, PokefanmColinScript
+	para "Isn't your mom"
+	line "worried?"
+	done
 
-PokefanmColinScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x7635b
-	waitbutton
-	closetext
-	end
+GenericTrainerTwinsMegandpeg1:
+	generictrainer TWINS, MEGANDPEG1, EVENT_BEAT_TWINS_MEG_AND_PEG, TwinsMegandpeg1SeenText, TwinsMegandpeg1BeatenText
 
-TrainerTwinsMegandpeg1:
-	trainer EVENT_BEAT_TWINS_MEG_AND_PEG, TWINS, MEGANDPEG1, TwinsMegandpeg1SeenText, TwinsMegandpeg1BeatenText, 0, TwinsMegandpeg1Script
+	text "Baby is a rude"
+	line "name to call us"
+	cont "girls!"
+	done
 
-TwinsMegandpeg1Script:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x763c2
-	waitbutton
-	closetext
-	end
+GenericTrainerTwinsMegandpeg2:
+	generictrainer TWINS, MEGANDPEG2, EVENT_BEAT_TWINS_MEG_AND_PEG, TwinsMegandpeg2SeenText, TwinsMegandpeg2BeatenText
 
-TrainerTwinsMegandpeg2:
-	trainer EVENT_BEAT_TWINS_MEG_AND_PEG, TWINS, MEGANDPEG2, TwinsMegandpeg2SeenText, TwinsMegandpeg2BeatenText, 0, TwinsMegandpeg2Script
+	text "Sometimes, kids"
+	line "are smarter than"
+	cont "grown-ups!"
+	done
 
-TwinsMegandpeg2Script:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76428
-	waitbutton
-	closetext
-	end
+GenericTrainerPsychicRodney:
+	generictrainer PSYCHIC_T, RODNEY, EVENT_BEAT_PSYCHIC_RODNEY, PsychicRodneySeenText, PsychicRodneyBeatenText
 
-TrainerPsychicRodney:
-	trainer EVENT_BEAT_PSYCHIC_RODNEY, PSYCHIC_T, RODNEY, PsychicRodneySeenText, PsychicRodneyBeatenText, 0, PsychicRodneyScript
+	text "I get it. You can"
+	line "hear Johto's radio"
+	cont "on the Fast Ship."
+	done
 
-PsychicRodneyScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76497
-	waitbutton
-	closetext
-	end
+GenericTrainerPokefanmJeremy:
+	generictrainer POKEFANM, JEREMY, EVENT_BEAT_POKEFANM_JEREMY, PokefanmJeremySeenText, PokefanmJeremyBeatenText
 
-TrainerPokefanmJeremy:
-	trainer EVENT_BEAT_POKEFANM_JEREMY, POKEFANM, JEREMY, PokefanmJeremySeenText, PokefanmJeremyBeatenText, 0, PokefanmJeremyScript
+	text "I must go to the"
+	line "#mon Salon and"
+	cont "fix them up nice!"
+	done
 
-PokefanmJeremyScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x7651c
-	waitbutton
-	closetext
-	end
+GenericTrainerPokefanfGeorgia:
+	generictrainer POKEFANF, GEORGIA, EVENT_BEAT_POKEFANF_GEORGIA, PokefanfGeorgiaSeenText, PokefanfGeorgiaBeatenText
 
-TrainerPokefanfGeorgia:
-	trainer EVENT_BEAT_POKEFANF_GEORGIA, POKEFANF, GEORGIA, PokefanfGeorgiaSeenText, PokefanfGeorgiaBeatenText, 0, PokefanfGeorgiaScript
+	text "Oh, yes! I have to"
+	line "get my #mon out"
+	cont "of Day-Care!"
+	done
 
-PokefanfGeorgiaScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76596
-	waitbutton
-	closetext
-	end
+GenericTrainerSupernerdShawn:
+	generictrainer SUPER_NERD, SHAWN, EVENT_BEAT_SUPER_NERD_SHAWN, SupernerdShawnSeenText, SupernerdShawnBeatenText
 
-TrainerSupernerdShawn:
-	trainer EVENT_BEAT_SUPER_NERD_SHAWN, SUPER_NERD, SHAWN, SupernerdShawnSeenText, SupernerdShawnBeatenText, 0, SupernerdShawnScript
-
-SupernerdShawnScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x7660f
-	waitbutton
-	closetext
-	end
+	text "You should use the"
+	line "right Balls to fit"
+	cont "the situation."
+	done
 
 MovementData_0x76004:
-	big_step_right
-	big_step_up
-	big_step_up
-	big_step_up
-	big_step_up
-	big_step_up
-	big_step_up
+	run_step_right
+	run_step_up
+	run_step_up
+	run_step_up
+	run_step_up
+	run_step_up
+	run_step_up
 	step_end
 
 MovementData_0x7600c:
 	step_up
 	step_up
 	turn_head_left
-	step_end
-
-MovementData_0x76010:
-	step_down
 	step_end
 
 UnknownText_0x76012:
@@ -357,14 +290,6 @@ PokefanmColinBeatenText:
 	text "You're strong!"
 	done
 
-UnknownText_0x7635b:
-	text "You're traveling"
-	line "all alone?"
-
-	para "Isn't your mom"
-	line "worried?"
-	done
-
 TwinsMegandpeg1SeenText:
 	text "You think I'm a"
 	line "baby?"
@@ -373,12 +298,6 @@ TwinsMegandpeg1SeenText:
 
 TwinsMegandpeg1BeatenText:
 	text "Oh! We lost!"
-	done
-
-UnknownText_0x763c2:
-	text "Baby is a rude"
-	line "name to call us"
-	cont "girls!"
 	done
 
 TwinsMegandpeg2SeenText:
@@ -392,12 +311,6 @@ TwinsMegandpeg2BeatenText:
 	text "Oh! We lost!"
 	done
 
-UnknownText_0x76428:
-	text "Sometimes, kids"
-	line "are smarter than"
-	cont "grown-ups!"
-	done
-
 PsychicRodneySeenText:
 	text "Ssh! My brain is"
 	line "picking up radio"
@@ -407,12 +320,6 @@ PsychicRodneySeenText:
 PsychicRodneyBeatenText:
 	text "…I hear some-"
 	line "thing!"
-	done
-
-UnknownText_0x76497:
-	text "I get it. You can"
-	line "hear Johto's radio"
-	cont "on the Fast Ship."
 	done
 
 PokefanmJeremySeenText:
@@ -426,12 +333,6 @@ PokefanmJeremyBeatenText:
 	line "ful #mon!"
 	done
 
-UnknownText_0x7651c:
-	text "I must go to the"
-	line "#mon Salon and"
-	cont "fix them up nice!"
-	done
-
 PokefanfGeorgiaSeenText:
 	text "I'm going to shop"
 	line "at the Dept.Store"
@@ -443,12 +344,6 @@ PokefanfGeorgiaBeatenText:
 	line "to do?"
 	done
 
-UnknownText_0x76596:
-	text "Oh, yes! I have to"
-	line "get my #mon out"
-	cont "of Day-Care!"
-	done
-
 SupernerdShawnSeenText:
 	text "What kinds of #"
 	line "Balls do you have"
@@ -458,12 +353,6 @@ SupernerdShawnSeenText:
 SupernerdShawnBeatenText:
 	text "Wait! Stop! Don't!"
 	line "Please!"
-	done
-
-UnknownText_0x7660f:
-	text "You should use the"
-	line "right Balls to fit"
-	cont "the situation."
 	done
 
 UnknownText_0x76645:

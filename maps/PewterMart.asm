@@ -1,35 +1,20 @@
 PewterMart_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, PEWTER_CITY, 3
+	warp_event  3,  7, PEWTER_CITY, 3
 
-PewterMart_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 3, PEWTER_CITY
-	warp_def $7, $3, 3, PEWTER_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_CLERK, 3, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ClerkScript_0x1a2dcb, -1
-	person_event SPRITE_YOUNGSTER, 2, 9, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, YoungsterScript_0x1a2dd2, -1
-	person_event SPRITE_SUPER_NERD, 6, 6, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, SuperNerdScript_0x1a2dd5, -1
-
-ClerkScript_0x1a2dcb:
-	opentext
-	pokemart MARTTYPE_STANDARD, MART_PEWTER
-	closetext
-	end
-
-YoungsterScript_0x1a2dd2:
-	jumptextfaceplayer UnknownText_0x1a2dd8
-
-SuperNerdScript_0x1a2dd5:
-	jumptextfaceplayer UnknownText_0x1a2e3a
+	db 3 ; object events
+	mart_clerk_event  1,  3, MARTTYPE_STANDARD, MART_PEWTER
+	object_event  9,  2, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x1a2dd8, -1
+	object_event  6,  6, SPRITE_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x1a2e3a, -1
 
 UnknownText_0x1a2dd8:
 	text "Hi! Check out my"

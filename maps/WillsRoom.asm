@@ -1,115 +1,82 @@
 WillsRoom_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script WillsRoomEntranceTrigger
 
-.MapTriggers: db 1
-	dw WillsRoomTrigger0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, WillsRoomDoorCallback
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, UnknownScript_0x1804cb
+	db 3 ; warp events
+	warp_event  5, 17, INDIGO_PLATEAU_POKECENTER_1F, 4
+	warp_event  4,  2, KOGAS_ROOM, 1
+	warp_event  5,  2, KOGAS_ROOM, 2
 
-WillsRoom_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $11, $5, 4, INDIGO_PLATEAU_POKECENTER_1F
-	warp_def $2, $4, 1, KOGAS_ROOM
-	warp_def $2, $5, 2, KOGAS_ROOM
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  5,  7, SPRITE_WILL, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, WillScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_WILL, 7, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, WillScript_0x1804f8, -1
-
-WillsRoomTrigger0:
-	priorityjump UnknownScript_0x1804e0
+WillsRoomEntranceTrigger:
+	priorityjump .Script
 	end
 
-UnknownScript_0x1804cb:
-	checkevent EVENT_WILLS_ROOM_ENTRANCE_CLOSED
-	iffalse UnknownScript_0x1804d5
-	changeblock $4, $e, $2a
-UnknownScript_0x1804d5:
-	checkevent EVENT_WILLS_ROOM_EXIT_OPEN
-	iffalse UnknownScript_0x1804df
-	changeblock $4, $2, $16
-UnknownScript_0x1804df:
-	return
-
-UnknownScript_0x1804e0:
-	applymovement PLAYER, MovementData_0x18052c
+.Script:
+	applymovement PLAYER, WalkIntoEliteFourRoomMovement
 	refreshscreen
 	playsound SFX_STRENGTH
 	earthquake 80
-	changeblock $4, $e, $2a
+	changeblock 4, 14, $2a
 	reloadmappart
 	closetext
-	dotrigger $1
+	setscene $1
 	setevent EVENT_WILLS_ROOM_ENTRANCE_CLOSED
 	waitsfx
 	end
 
-WillScript_0x1804f8:
-	faceplayer
+WillsRoomDoorCallback:
+	checkevent EVENT_WILLS_ROOM_ENTRANCE_CLOSED
+	iffalse .KeepDoorClosed
+	changeblock 4, 14, $2a
+.KeepDoorClosed:
+	checkevent EVENT_WILLS_ROOM_EXIT_OPEN
+	iffalse .OpenDoor
+	changeblock 4, 2, $16
+.OpenDoor:
+	return
+
+WillScript:
 	checkcode VAR_BADGES
-	if_equal 16, WillRematchScript
+	ifequal 16, .Rematch
 	checkevent EVENT_BEAT_ELITE_4_WILL
-	iftrue UnknownScript_0x180526
-	opentext
-	writetext UnknownText_0x180531
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x18062c, 0
+	iftrue_jumptextfaceplayer .AfterText
+	showtextfaceplayer .SeenText
+	winlosstext .BeatenText, 0
 	loadtrainer WILL, 1
 	startbattle
 	reloadmapafterbattle
-	scall UnknownScript_0x180526
-	jump WillEndBattleScript
+	showtext .AfterText
+	jump .EndBattle
 
-UnknownScript_0x180526:
-	opentext
-	writetext UnknownText_0x180644
-	waitbutton
-	closetext
-	end
-
-WillRematchScript:
+.Rematch:
 	checkevent EVENT_BEAT_ELITE_4_WILL
-	iftrue .AfterBattle
-	opentext
-	writetext WillBeforeRematchText
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x18062c, 0
+	iftrue_jumptextfaceplayer .AfterRematchText
+	showtextfaceplayer .SeenRematchText
+	winlosstext .BeatenText, 0
 	loadtrainer WILL, 2
 	startbattle
 	reloadmapafterbattle
-	scall .AfterBattle
-	jump WillEndBattleScript
-
-.AfterBattle:
-	opentext
-	writetext WillAfterRematchText
-	waitbutton
-	closetext
-	end
-
-WillEndBattleScript:
+	showtext .AfterRematchText
+.EndBattle:
 	playsound SFX_ENTER_DOOR
-	changeblock $4, $2, $16
+	changeblock 4, 2, $16
 	reloadmappart
 	setevent EVENT_WILLS_ROOM_EXIT_OPEN
 	setevent EVENT_BEAT_ELITE_4_WILL
 	waitsfx
 	end
 
-MovementData_0x18052c:
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
-
-UnknownText_0x180531:
+.SeenText:
 	text "Welcome to the"
 	line "#mon League,"
 	cont "<PLAYER>."
@@ -135,12 +102,12 @@ UnknownText_0x180531:
 	line "option!"
 	done
 
-UnknownText_0x18062c:
+.BeatenText:
 	text "I… I can't…"
 	line "believe it…"
 	done
 
-UnknownText_0x180644:
+.AfterText:
 	text "Even though I was"
 	line "defeated, I won't"
 	cont "change my course."
@@ -158,7 +125,7 @@ UnknownText_0x180644:
 	line "of the Elite Four."
 	done
 
-WillBeforeRematchText:
+.SeenRematchText:
 	text "So, you have"
 	line "finally appeared."
 
@@ -174,7 +141,7 @@ WillBeforeRematchText:
 	line "battle!"
 	done
 
-WillAfterRematchText:
+.AfterRematchText:
 	text "I've expended all"
 	line "my power."
 

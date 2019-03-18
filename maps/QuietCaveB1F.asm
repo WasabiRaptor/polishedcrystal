@@ -1,81 +1,66 @@
 QuietCaveB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 9 ; warp events
+	warp_event  5, 25, QUIET_CAVE_1F, 2
+	warp_event 29, 23, QUIET_CAVE_1F, 3
+	warp_event 19, 11, QUIET_CAVE_1F, 4
+	warp_event  3, 15, QUIET_CAVE_1F, 5
+	warp_event 31, 15, QUIET_CAVE_1F, 6
+	warp_event 21,  3, QUIET_CAVE_B2F, 1
+	warp_event 17, 25, QUIET_CAVE_B2F, 2
+	warp_event 23, 33, QUIET_CAVE_B2F, 3
+	warp_event 32,  2, QUIET_CAVE_B2F, 4
 
-QuietCaveB1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 9
-	warp_def $19, $5, 2, QUIET_CAVE_1F
-	warp_def $17, $1d, 3, QUIET_CAVE_1F
-	warp_def $b, $13, 4, QUIET_CAVE_1F
-	warp_def $f, $3, 5, QUIET_CAVE_1F
-	warp_def $f, $1f, 6, QUIET_CAVE_1F
-	warp_def $3, $15, 1, QUIET_CAVE_B2F
-	warp_def $19, $11, 2, QUIET_CAVE_B2F
-	warp_def $21, $17, 3, QUIET_CAVE_B2F
-	warp_def $2, $20, 4, QUIET_CAVE_B2F
+	db 1 ; bg events
+	bg_event 26, 33, SIGNPOST_ITEM + HYPER_POTION, EVENT_QUIET_CAVE_B1F_HIDDEN_HYPER_POTION
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event 25,  4, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerBattleGirlKagami, -1
+	object_event 21, 17, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerPokemaniacAidan, -1
+	object_event 33, 30, SPRITE_HIKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerHikerSteve, -1
+	object_event  4,  7, SPRITE_PSYCHIC, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerPsychicVirgil, -1
+	itemball_event  8,  3, BIG_PEARL, 1, EVENT_QUIET_CAVE_B1F_BIG_PEARL
+	itemball_event 14, 13, ELIXIR, 1, EVENT_QUIET_CAVE_B1F_ELIXIR
 
-.Signposts: db 1
-	signpost 33, 26, SIGNPOST_ITEM, QuietCaveB1FHiddenHyperPotion
+GenericTrainerBattleGirlKagami:
+	generictrainer BATTLE_GIRL, KAGAMI, EVENT_BEAT_BATTLE_GIRL_KAGAMI, BattleGirlKagamiSeenText, BattleGirlKagamiBeatenText
 
-.PersonEvents: db 6
-	person_event SPRITE_COOLTRAINER_F, 4, 25, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 1, TrainerBattleGirlKagami, -1
-	person_event SPRITE_SUPER_NERD, 17, 21, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 4, TrainerPokemaniacAidan, -1
-	person_event SPRITE_POKEFAN_M, 30, 33, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 4, TrainerHikerSteve, -1
-	person_event SPRITE_YOUNGSTER, 7, 4, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 2, TrainerPsychicVirgil, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, BIG_PEARL, 1, EVENT_QUIET_CAVE_B1F_BIG_PEARL
-	person_event SPRITE_BALL_CUT_FRUIT, 13, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ELIXER, 1, EVENT_QUIET_CAVE_B1F_ELIXIR
+	text "I come here to"
+	line "train in peace"
+	cont "and solitude."
+	done
 
-TrainerBattleGirlKagami:
-	trainer EVENT_BEAT_BATTLE_GIRL_KAGAMI, BATTLE_GIRL, KAGAMI, BattleGirlKagamiSeenText, BattleGirlKagamiBeatenText, 0, BattleGirlKagamiScript
+GenericTrainerPokemaniacAidan:
+	generictrainer POKEMANIAC, AIDAN, EVENT_BEAT_POKEMANIAC_AIDAN, PokemaniacAidanSeenText, PokemaniacAidanBeatenText
 
-BattleGirlKagamiScript:
-	end_if_just_battled
-	opentext
-	writetext BattleGirlKagamiAfterText
-	waitbutton
-	closetext
-	end
+	text "Sometimes a"
+	line "#mon in a"
 
-TrainerPokemaniacAidan:
-	trainer EVENT_BEAT_POKEMANIAC_AIDAN, POKEMANIAC, AIDAN, PokemaniacAidanSeenText, PokemaniacAidanBeatenText, 0, PokemaniacAidanScript
+	para "certain area will"
+	line "know a rare move."
+	done
 
-PokemaniacAidanScript:
-	end_if_just_battled
-	opentext
-	writetext PokemaniacAidanAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerHikerSteve:
+	generictrainer HIKER, STEVE, EVENT_BEAT_HIKER_STEVE, HikerSteveSeenText, HikerSteveBeatenText
 
-TrainerHikerSteve:
-	trainer EVENT_BEAT_HIKER_STEVE, HIKER, STEVE, HikerSteveSeenText, HikerSteveBeatenText, 0, HikerSteveScript
+	text "Spelunking is also"
+	line "called caving."
 
-HikerSteveScript:
-	end_if_just_battled
-	opentext
-	writetext HikerSteveAfterText
-	waitbutton
-	closetext
-	end
+	para "It means exploring"
+	line "caves!"
+	done
 
-TrainerPsychicVirgil:
-	trainer EVENT_BEAT_PSYCHIC_VIRGIL, PSYCHIC_T, VIRGIL, PsychicVirgilSeenText, PsychicVirgilBeatenText, 0, PsychicVirgilScript
+GenericTrainerPsychicVirgil:
+	generictrainer PSYCHIC_T, VIRGIL, EVENT_BEAT_PSYCHIC_VIRGIL, PsychicVirgilSeenText, PsychicVirgilBeatenText
 
-PsychicVirgilScript:
-	end_if_just_battled
-	opentext
-	writetext PsychicVirgilAfterText
-	waitbutton
-	closetext
-	end
-
-QuietCaveB1FHiddenHyperPotion:
-	dwb EVENT_QUIET_CAVE_B1F_HIDDEN_HYPER_POTION, HYPER_POTION
+	text "The silence helps"
+	line "focus my ESP."
+	done
 
 BattleGirlKagamiSeenText:
 	text "Don't disturb my"
@@ -84,12 +69,6 @@ BattleGirlKagamiSeenText:
 
 BattleGirlKagamiBeatenText:
 	text "Not good enough…"
-	done
-
-BattleGirlKagamiAfterText:
-	text "I come here to"
-	line "train in peace"
-	cont "and solitude."
 	done
 
 PokemaniacAidanSeenText:
@@ -101,14 +80,6 @@ PokemaniacAidanSeenText:
 
 PokemaniacAidanBeatenText:
 	text "My #mon…"
-	done
-
-PokemaniacAidanAfterText:
-	text "Sometimes a"
-	line "#mon in a"
-
-	para "certain area will"
-	line "know a rare move."
 	done
 
 HikerSteveSeenText:
@@ -124,14 +95,6 @@ HikerSteveBeatenText:
 	line "loser…"
 	done
 
-HikerSteveAfterText:
-	text "Spelunking is also"
-	line "called caving."
-
-	para "It means exploring"
-	line "caves!"
-	done
-
 PsychicVirgilSeenText:
 	text "Shh! Be quiet!"
 	done
@@ -141,7 +104,3 @@ PsychicVirgilBeatenText:
 	line "be so loud?"
 	done
 
-PsychicVirgilAfterText:
-	text "The silence helps"
-	line "focus my ESP."
-	done

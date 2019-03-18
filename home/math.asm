@@ -1,13 +1,20 @@
-AddNTimes:: ; 0x30fe
-; Add bc * a to hl.
+_AddNTimes:: ; 0x30fe
+; Add bc * a to hl. Don't optimize this for space.
 	and a
 	ret z
+
+	push bc
 .loop
+	rra ; and a from below and above resets carry
+	jr nc, .noadd
 	add hl, bc
-	dec a
+.noadd
+	sla c
+	rl b
+	and a
 	jr nz, .loop
+	pop bc
 	ret
-; 0x3105
 
 SimpleMultiply:: ; 3105
 ; Return a * c.
@@ -26,17 +33,24 @@ SimpleMultiply:: ; 3105
 ; 3110
 
 
-SimpleDivide:: ; 3110
+SimpleDivide::
 ; Divide a by c. Return quotient b and remainder a.
+	inc c
+	dec c
+	jr z, .div0
 	ld b, 0
+	and a
+	ret z
 .loop
 	inc b
 	sub c
 	jr nc, .loop
-	dec b
+	ret z
 	add c
+	dec b
 	ret
-; 3119
+.div0
+	rst 0 ; crash
 
 
 Multiply:: ; 3119
@@ -44,9 +58,11 @@ Multiply:: ; 3119
 ; All values are big endian.
 	push hl
 	push bc
+	push de
 
 	farcall _Multiply
 
+	pop de
 	pop bc
 	pop hl
 	ret
@@ -59,15 +75,9 @@ Divide:: ; 3124
 	push hl
 	push de
 	push bc
-	ld a, [hROMBank]
-	push af
-	ld a, BANK(_Divide)
-	rst Bankswitch
 
-	call _Divide
+	homecall _Divide
 
-	pop af
-	rst Bankswitch
 	pop bc
 	pop de
 	pop hl

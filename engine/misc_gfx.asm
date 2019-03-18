@@ -1,6 +1,5 @@
 HDMATransferTileMapToWRAMBank3:: ; 10402d
-	ld hl, .Function
-	jp CallInSafeGFXMode
+	call CallInSafeGFXMode
 
 .Function:
 	decoord 0, 0
@@ -13,11 +12,10 @@ HDMATransferTileMapToWRAMBank3:: ; 10402d
 ; 104047
 
 HDMATransferAttrMapToWRAMBank3: ; 104047
-	ld hl, .Function
-	jp CallInSafeGFXMode
+	call CallInSafeGFXMode
 
 .Function:
-	decoord 0, 0, AttrMap
+	decoord 0, 0, wAttrMap
 	ld hl, wScratchAttrMap
 	call CutAndPasteAttrMap
 	ld a, $1
@@ -27,17 +25,15 @@ HDMATransferAttrMapToWRAMBank3: ; 104047
 ; 104061
 
 ReloadMapPart:: ; 104061
-	ld hl, .Function
-	jp CallInSafeGFXMode
+	call CallInSafeGFXMode
 
 .Function:
-	decoord 0, 0, AttrMap
+	decoord 0, 0, wAttrMap
 	ld hl, wScratchAttrMap
 	call CutAndPasteAttrMap
 	decoord 0, 0
 	ld hl, wScratchTileMap
 	call CutAndPasteTilemap
-	call DelayFrame
 
 	di
 	ld a, [rVBK]
@@ -45,52 +41,43 @@ ReloadMapPart:: ; 104061
 	ld a, $1
 	ld [rVBK], a
 	ld hl, wScratchAttrMap
-	call HDMATransfer_Wait127Scanlines_toBGMap
+	call DoHBlankHDMATransfer_toBGMap
 	ld a, $0
 	ld [rVBK], a
 	ld hl, wScratchTileMap
-	call HDMATransfer_Wait127Scanlines_toBGMap
+	call DoHBlankHDMATransfer_toBGMap
 	pop af
 	ld [rVBK], a
-	ei
+	reti
 
-	ret
+HDMATransferToWRAMBank3: ; 10419d (41:419d)
+	ld a, h
+	ld [rHDMA1], a
+	ld a, l
+	ld [rHDMA2], a
+	ld a, [hBGMapAddress + 1]
+	and $1f
+	ld [rHDMA3], a
+	ld a, [hBGMapAddress]
+	ld [rHDMA4], a
 
-OpenAndCloseMenu_HDMATransferTileMapAndAttrMap:: ; 104110
-; OpenText
-	ld hl, .Function
-	jp CallInSafeGFXMode
+	ld a, $23
+	ld [hDMATransfer], a
+	; fallthrough
 
-.Function:
-	; Transfer AttrMap and Tilemap to BGMap
-	; Fill vBGAttrs with $00
-	; Fill vBGTiles with " "
-	decoord 0, 0, AttrMap
-	ld hl, wScratchAttrMap
-	call CutAndPasteAttrMap
-	decoord 0, 0
-	ld hl, wScratchTileMap
-	call CutAndPasteTilemap
+WaitDMATransfer:
+	jr .handleLoop
+.loop
 	call DelayFrame
-
-	di
-	ld a, [rVBK]
-	push af
-	ld a, $1
-	ld [rVBK], a
-	ld hl, wScratchAttrMap
-	call HDMATransfer_Wait123Scanlines_toBGMap
-	ld a, $0
-	ld [rVBK], a
-	ld hl, wScratchTileMap
-	call HDMATransfer_Wait123Scanlines_toBGMap
-	pop af
-	ld [rVBK], a
-	ei
+.handleLoop
+	ld a, [hDMATransfer]
+	and a
+	jr nz, .loop
 	ret
-; 104148
 
-CallInSafeGFXMode: ; 104177
+CallInSafeGFXMode:
+	pop hl
+
 	ld a, [hBGMapMode]
 	push af
 	ld a, [hMapAnims]
@@ -100,12 +87,12 @@ CallInSafeGFXMode: ; 104177
 	ld [hMapAnims], a
 	ld a, [rSVBK]
 	push af
-	ld a, $6
+	ld a, BANK(wScratchTileMap)
 	ld [rSVBK], a
 	ld a, [rVBK]
 	push af
 
-	call ._hl_
+	call _hl_
 
 	pop af
 	ld [rVBK], a
@@ -116,50 +103,44 @@ CallInSafeGFXMode: ; 104177
 	pop af
 	ld [hBGMapMode], a
 	ret
-; 10419c
 
-._hl_ ; 10419c
-	jp hl
-; 10419d
-
-HDMATransferToWRAMBank3: ; 10419d (41:419d)
-	call _LoadHDMAParameters
-	ld a, $23
-	ld [hDMATransfer], a
-.loop
-	call DelayFrame
-	ld a, [hDMATransfer]
-	and a
-	jr nz, .loop
-	ret
-
-HDMATransfer_Wait127Scanlines_toBGMap: ; 1041ad (41:41ad)
-; HDMA transfer from hl to [hBGMapAddress]
-; hBGMapAddress -> de
-; 2 * SCREEN_HEIGHT -> c
+DoHBlankHDMATransfer_toBGMap:
 	ld a, [hBGMapAddress + 1]
 	ld d, a
 	ld a, [hBGMapAddress]
 	ld e, a
-	ld c, 2 * SCREEN_HEIGHT
-	jr HDMATransfer_Wait127Scanlines
+	ld c, $23
+	ld a, h
+	ld [rHDMA1], a
+	ld a, l
+	and $f0
+	ld [rHDMA2], a
+	ld a, d
+	and $1f
+	ld [rHDMA3], a
+	ld a, e
+	and $f0
+	ld [rHDMA4], a
+	di
+	ld a, [rLY]
+	add c ; calculate end LY
+	cp $80 ; is the end LY greater than the max LY
+	call nc, DI_DelayFrame ; if so, delay a frame to reset the LY
+	set 7, c
+.waitHBlank
+	ld a, [rSTAT]
+	and $3
+	jr nz, .waitHBlank
+	ld hl, rHDMA5
+	ld [hl], c
+	ld a, $ff
+.waitHDMALoop
+	cp [hl]
+	jr nz, .waitHDMALoop
+	reti
 
-HDMATransfer_Wait123Scanlines_toBGMap: ; 1041b7 (41:41b7)
-; HDMA transfer from hl to [hBGMapAddress]
-; hBGMapAddress -> de
-; 2 * SCREEN_HEIGHT -> c
-; $7b --> b
-	ld a, [hBGMapAddress + 1]
-	ld d, a
-	ld a, [hBGMapAddress]
-	ld e, a
-	lb bc, $7b, 2 * SCREEN_HEIGHT
-	jr _continue_HDMATransfer
-; 1041c1 (41:41c1)
-
-HDMATransfer_Wait127Scanlines:
+DoHBlankHDMATransfer
 	ld b, $7f
-_continue_HDMATransfer:
 ; a lot of waiting around for hardware registers
 	; [rHDMA1, rHDMA2] = hl & $fff0
 	ld a, h
@@ -175,61 +156,29 @@ _continue_HDMATransfer:
 	and $f0 ; high nybble
 	ld [rHDMA4], a
 	; e = c | %10000000
-	ld a, c
-	dec c
-	or $80
-	ld e, a
-	; d = b - c + 1
-	ld a, b
-	sub c
-	ld d, a
-	; while [rLY] >= d: pass
-.ly_loop
+	dec c ; c = number of LYs needed
+	ld e, c
+	set 7, e ; hblank dma transfers
 	ld a, [rLY]
-	cp d
-	jr nc, .ly_loop
+	add c ; calculate end LY
+	cp b ; is the end LY greater than the max LY
+	call nc, DI_DelayFrame ; if so, delay a frame to reset the LY
 
-	di
-	; while [rSTAT] & 3: pass
-.rstat_loop_1
-	ld a, [rSTAT]
-	and $3
-	jr nz, .rstat_loop_1
-	; while not [rSTAT] & 3: pass
-.rstat_loop_2
-	ld a, [rSTAT]
-	and $3
-	jr z, .rstat_loop_2
-	; load the 5th byte of HDMA
-	ld a, e
-	ld [rHDMA5], a
-	; wait until rLY advances (c + 1) times
-	ld a, [rLY]
-	inc c
-	ld hl, rLY
-.final_ly_loop
-	cp [hl]
-	jr z, .final_ly_loop
-	ld a, [hl]
-	dec c
-	jr nz, .final_ly_loop
+	lb bc, %11, rSTAT & $ff
+.noHBlankWait
+	ld a, [c]
+	and b
+	jr z, .noHBlankWait
+.hBlankWaitLoop
+	ld a, [c]
+	and b
+	jr nz, .hBlankWaitLoop
 	ld hl, rHDMA5
-	res 7, [hl]
-	ei
-
-	ret
-; 10424e
-
-_LoadHDMAParameters: ; 10424e (41:424e)
-	ld a, h
-	ld [rHDMA1], a
-	ld a, l
-	ld [rHDMA2], a
-	ld a, [hBGMapAddress + 1]
-	and $1f
-	ld [rHDMA3], a
-	ld a, [hBGMapAddress]
-	ld [rHDMA4], a
+	ld [hl], e
+	ld a, $ff
+.waitForHDMA
+	cp [hl]
+	jr nz, .waitForHDMA
 	ret
 
 CutAndPasteTilemap: ; 10425f (41:425f)
@@ -275,139 +224,31 @@ CutAndPasteMap: ; 104265 (41:4265)
 	ld [hMapObjectIndexBuffer], a
 	ret
 
-_Get2bpp:: ; 104284
-	; 2bpp when bit 7 of [rLCDC]
-	; switch to WRAM bank 6
-	ld a, [rSVBK]
-	push af
-	ld a, $6
-	ld [rSVBK], a
-
-	push bc
-	push hl
-
-	; Copy c tiles of the 2bpp from b:de to wScratchTileMap
-	ld a, b ; bank
-	ld l, c ; number of tiles
-	ld h, $0
-rept 4
-	add hl, hl ; multiply by 16 (16 bytes of a 2bpp = 8 x 8 tile)
-endr
-	ld b, h
-	ld c, l
-	ld h, d ; address
-	ld l, e
-	ld de, wScratchTileMap
-	call FarCopyBytes
-
-	pop hl
-	pop bc
-
-	push bc
-	call DelayFrame
-	pop bc
-
-	ld d, h
-	ld e, l
-	ld hl, wScratchTileMap
-	call HDMATransfer_Wait127Scanlines
-
-	; restore the previous bank
-	pop af
-	ld [rSVBK], a
-	ret
-; 1042b2
-
-_Get1bpp:: ; 1042b2
-	; 1bpp when bit 7 of [rLCDC]
-.loop
-	ld a, c
-	cp $10
-	jp c, .bankswitch
-	jp z, .bankswitch
-	push bc
-	push hl
-	push de
-	ld c, $10
-	call .bankswitch
-	pop de
-	ld hl, $80
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
-	lb bc, 1, 0
-	add hl, bc
-	pop bc
-	ld a, c
-	sub $10
-	ld c, a
-	jr .loop
-; 1042d6
-
-.bankswitch ; 1042d6
-	ld a, [rSVBK]
-	push af
-	ld a, $6
-	ld [rSVBK], a
-
-	push bc
-	push hl
-
-	ld a, b
-	ld l, c
-	ld h, $0
-rept 3
-	add hl, hl ; multiply by 8
-endr
-	ld c, l
-	ld b, h
-	ld h, d
-	ld l, e
-	ld de, wScratchTileMap
-	call FarCopyBytesDouble_DoubleBankSwitch
-
-	pop hl
-	pop bc
-
-	push bc
-	call DelayFrame
-	pop bc
-
-	ld d, h
-	ld e, l
-	ld hl, wScratchTileMap
-	call HDMATransfer_Wait127Scanlines
-
-	pop af
-	ld [rSVBK], a
-	ret
-; 104303
-
 HDMATransfer_OnlyTopFourRows: ; 104303
-	ld hl, .Function
-	jp CallInSafeGFXMode
-; 104309
+	call CallInSafeGFXMode
 
 .Function:
 	ld hl, wScratchTileMap
 	decoord 0, 0
 	call .Copy
 	ld hl, wScratchTileMap + $80
-	decoord 0, 0, AttrMap
+	decoord 0, 0, wAttrMap
 	call .Copy
+	di
 	ld a, $1
 	ld [rVBK], a
 	ld c, $8
 	ld hl, wScratchTileMap + $80
 	debgcoord 0, 0, VBGMap1
-	call HDMATransfer_Wait127Scanlines
+	call DoHBlankHDMATransfer
 	xor a
 	ld [rVBK], a
 	ld c, $8
 	ld hl, wScratchTileMap
 	debgcoord 0, 0, VBGMap1
-	jp HDMATransfer_Wait127Scanlines
+	call DoHBlankHDMATransfer
+
+	reti
 
 .Copy: ; 10433a (41:433a)
 	ld b, 4
@@ -428,7 +269,20 @@ HDMATransfer_OnlyTopFourRows: ; 104303
 	dec b
 	jr nz, .outer_loop
 	ret
-; 104350
+
+DI_DelayFrame:
+	ld a, [rLY]
+	push bc
+	ld b, a
+.loop
+	ld a, [rLY]
+	and a
+	jr z, .done
+	cp b
+	jr nc, .loop
+.done
+	pop bc
+	ret
 
 ShockEmote:      INCBIN "gfx/emotes/shock.2bpp"
 QuestionEmote:   INCBIN "gfx/emotes/question.2bpp"
@@ -439,7 +293,8 @@ BoltEmote:       INCBIN "gfx/emotes/bolt.2bpp"
 SleepEmote:      INCBIN "gfx/emotes/sleep.2bpp"
 FishEmote:       INCBIN "gfx/emotes/fish.2bpp"
 
-JumpShadowGFX:   INCBIN "gfx/ow_fx/shadow.2bpp"
-FishingRodGFX2:  INCBIN "gfx/ow_fx/fishing2.2bpp"
-BoulderDustGFX:  INCBIN "gfx/ow_fx/boulderdust.2bpp"
-ShakingGrassGFX: INCBIN "gfx/ow_fx/shaking_grass.2bpp"
+JumpShadowGFX:   INCBIN "gfx/overworld/shadow.2bpp"
+FishingRodGFX:   INCBIN "gfx/overworld/fishing_rod.2bpp"
+BoulderDustGFX:  INCBIN "gfx/overworld/boulderdust.2bpp"
+ShakingGrassGFX: INCBIN "gfx/overworld/shaking_grass.2bpp"
+PuddleSplashGFX: INCBIN "gfx/overworld/puddle_splash.2bpp"

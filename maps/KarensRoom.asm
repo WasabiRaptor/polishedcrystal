@@ -1,116 +1,83 @@
 KarensRoom_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script KarensRoomEntranceTrigger
 
-.MapTriggers: db 1
-	dw KarensRoomTrigger0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, KarensRoomDoorCallback
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, UnknownScript_0x180bc1
+	db 4 ; warp events
+	warp_event  4, 17, BRUNOS_ROOM, 3
+	warp_event  5, 17, BRUNOS_ROOM, 4
+	warp_event  4,  2, LANCES_ROOM, 1
+	warp_event  5,  2, LANCES_ROOM, 2
 
-KarensRoom_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $11, $4, 3, BRUNOS_ROOM
-	warp_def $11, $5, 4, BRUNOS_ROOM
-	warp_def $2, $4, 1, LANCES_ROOM
-	warp_def $2, $5, 2, LANCES_ROOM
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  5,  7, SPRITE_KAREN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, KarenScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_KAREN, 7, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, KarenScript_0x180bee, -1
-
-KarensRoomTrigger0:
-	priorityjump UnknownScript_0x180bd6
+KarensRoomEntranceTrigger:
+	priorityjump .Script
 	end
 
-UnknownScript_0x180bc1:
-	checkevent EVENT_KARENS_ROOM_ENTRANCE_CLOSED
-	iffalse UnknownScript_0x180bcb
-	changeblock $4, $e, $2a
-UnknownScript_0x180bcb:
-	checkevent EVENT_KARENS_ROOM_EXIT_OPEN
-	iffalse UnknownScript_0x180bd5
-	changeblock $4, $2, $16
-UnknownScript_0x180bd5:
-	return
-
-UnknownScript_0x180bd6:
-	applymovement PLAYER, MovementData_0x180c22
+.Script:
+	applymovement PLAYER, WalkIntoEliteFourRoomMovement
 	refreshscreen
 	playsound SFX_STRENGTH
 	earthquake 80
-	changeblock $4, $e, $2a
+	changeblock 4, 14, $2a
 	reloadmappart
 	closetext
-	dotrigger $1
+	setscene $1
 	setevent EVENT_KARENS_ROOM_ENTRANCE_CLOSED
 	waitsfx
 	end
 
-KarenScript_0x180bee:
-	faceplayer
+KarensRoomDoorCallback:
+	checkevent EVENT_KARENS_ROOM_ENTRANCE_CLOSED
+	iffalse .KeepDoorClosed
+	changeblock 4, 14, $2a
+.KeepDoorClosed:
+	checkevent EVENT_KARENS_ROOM_EXIT_OPEN
+	iffalse .OpenDoor
+	changeblock 4, 2, $16
+.OpenDoor:
+	return
+
+KarenScript:
 	checkcode VAR_BADGES
-	if_equal 16, KarenRematchScript
+	ifequal 16, .Rematch
 	checkevent EVENT_BEAT_ELITE_4_KAREN
-	iftrue UnknownScript_0x180c1c
-	opentext
-	writetext UnknownText_0x180c27
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x180cf8, 0
+	iftrue_jumptextfaceplayer .AfterText
+	showtextfaceplayer .SeenText
+	winlosstext .BeatenText, 0
 	loadtrainer KAREN, 1
 	startbattle
 	reloadmapafterbattle
-	scall UnknownScript_0x180c1c
-	jump KarenEndBattleScript
+	showtext .AfterText
+	jump .EndBattle
 
-UnknownScript_0x180c1c:
-	opentext
-	writetext UnknownText_0x180d29
-	waitbutton
-	closetext
-	end
-
-KarenRematchScript:
+.Rematch:
 	checkevent EVENT_BEAT_ELITE_4_KAREN
-	iftrue .AfterBattle
-	opentext
-	writetext KarenBeforeRematchText
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x180cf8, 0
+	iftrue_jumptextfaceplayer .AfterRematchText
+	showtextfaceplayer .SeenRematchText
+	winlosstext .BeatenText, 0
 	loadtrainer KAREN, 2
 	startbattle
 	reloadmapafterbattle
-	scall .AfterBattle
-	jump KarenEndBattleScript
-
-.AfterBattle:
-	opentext
-	writetext KarenAfterRematchText
-	waitbutton
-	closetext
-	end
-
-KarenEndBattleScript:
+	showtext .AfterRematchText
+.EndBattle:
 	playsound SFX_ENTER_DOOR
-	changeblock $4, $2, $16
+	changeblock 4, 2, $16
 	reloadmappart
 	setevent EVENT_KARENS_ROOM_EXIT_OPEN
 	setevent EVENT_BEAT_ELITE_4_KAREN
 	waitsfx
 	end
 
-MovementData_0x180c22:
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
-
-UnknownText_0x180c27:
+.SeenText:
 	text "I am Karen of the"
 	line "Elite Four."
 
@@ -133,13 +100,13 @@ UnknownText_0x180c27:
 	para "Let's go."
 	done
 
-UnknownText_0x180cf8:
+.BeatenText:
 	text "Well, aren't you"
 	line "good. I like that"
 	cont "in a trainer."
 	done
 
-UnknownText_0x180d29:
+.AfterText:
 	text "Strong #mon."
 
 	para "Weak #mon."
@@ -162,7 +129,7 @@ UnknownText_0x180d29:
 	line "pion is waiting."
 	done
 
-KarenBeforeRematchText:
+.SeenRematchText:
 	text "You fought through"
 	line "the ranks to reach"
 	cont "me. I'm impressed."
@@ -176,7 +143,7 @@ KarenBeforeRematchText:
 	para "Let's begin!"
 	done
 
-KarenAfterRematchText:
+.AfterRematchText:
 	text "I will not stray"
 	line "from my chosen"
 	cont "path."

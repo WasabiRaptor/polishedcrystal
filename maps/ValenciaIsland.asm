@@ -1,33 +1,27 @@
 ValenciaIsland_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event 18, 19, IVYS_LAB, 1
+	warp_event  5, 19, IVYS_HOUSE, 1
+	warp_event  3, 11, VALENCIA_HOUSE, 1
 
-ValenciaIsland_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $13, $12, 1, IVYS_LAB
-	warp_def $13, $5, 1, IVYS_HOUSE
-	warp_def $b, $3, 1, VALENCIA_HOUSE
+	db 5 ; bg events
+	bg_event  8, 12, SIGNPOST_JUMPTEXT, ValenciaIslandSignText
+	bg_event 11,  5, SIGNPOST_JUMPTEXT, ValenciaIslandGoneFishingSignText
+	bg_event 13,  5, SIGNPOST_JUMPTEXT, ValenciaIslandLockedDoorText
+	bg_event 15, 19, SIGNPOST_JUMPTEXT, IvysLabSignText
+	bg_event 13,  3, SIGNPOST_JUMPTEXT, IvysHouseSignText
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  7,  8, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, ValenciaIslandCooltrainermText, -1
+	object_event 10, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, ValenciaIslandYoungsterScript, -1
 
-.Signposts: db 5
-	signpost 12, 8, SIGNPOST_READ, ValenciaIslandSign
-	signpost 5, 11, SIGNPOST_READ, ValenciaIslandGoneFishingSign
-	signpost 5, 13, SIGNPOST_READ, ValenciaIslandLockedDoor
-	signpost 19, 15, SIGNPOST_READ, IvysLabSign
-	signpost 3, 13, SIGNPOST_READ, IvysHouseSign
-
-.PersonEvents: db 2
-	person_event SPRITE_COOLTRAINER_M, 8, 7, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ValenciaIslandCooltrainermScript, -1
-	person_event SPRITE_YOUNGSTER, 18, 10, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ValenciaIslandYoungsterScript, -1
-
-ValenciaIslandCooltrainermScript:
-	jumptextfaceplayer .Text
-
-.Text:
+ValenciaIslandCooltrainermText:
 	text "A couple of strong"
 	line "trainers live in"
 	cont "that house."
@@ -42,13 +36,9 @@ ValenciaIslandCooltrainermScript:
 
 ValenciaIslandYoungsterScript:
 	checkflag ENGINE_PLAYER_IS_FEMALE
-	iftrue .Female
-	jumptextfaceplayer .Text1
+	iftrue_jumptextfaceplayer .Text2
+	thistextfaceplayer
 
-.Female
-	jumptextfaceplayer .Text2
-
-.Text1:
 	text "Prof.Ivy is smokin'"
 	line "hot, don't you"
 	cont "think?"
@@ -56,48 +46,33 @@ ValenciaIslandYoungsterScript:
 
 .Text2:
 	text "You may be cute,"
-	text "but Prof.Ivy is"
-	line "smokin' hot!"
+	line "but Prof.Ivy is"
+	cont "smokin' hot!"
 	done
 
-ValenciaIslandSign:
-	jumptext .Text
-
-.Text:
+ValenciaIslandSignText:
 	text "Valencia Island"
 
 	para "Bitter Oranges"
 	line "and Sweet Breezes"
 	done
 
-ValenciaIslandGoneFishingSign:
-	jumptext .Text
-
-.Text:
+ValenciaIslandGoneFishingSignText:
 	text "Gone Fishing"
 
 	para "(On vacation"
 	line "in Alola!)"
 	done
 
-ValenciaIslandLockedDoor:
-	jumptext .Text
-
-.Text:
+ValenciaIslandLockedDoorText:
 	text "It's locked…"
 	done
 
-IvysLabSign:
-	jumptext .Text
-
-.Text:
+IvysLabSignText:
 	text "Ivy Research"
 	line "№.2 Bayview"
 	done
 
-IvysHouseSign:
-	jumptext .Text
-
-.Text:
+IvysHouseSignText:
 	text "Ivy's House"
 	done

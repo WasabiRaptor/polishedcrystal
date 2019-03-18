@@ -1,40 +1,37 @@
 FastShip1F_MapScriptHeader:
+	db 2 ; scene scripts
+	scene_script FastShip1FTrigger0
+	scene_script FastShip1FTrigger1
 
-.MapTriggers: db 2
-	dw FastShip1FTrigger0
-	dw FastShip1FTrigger1
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 12 ; warp events
+	warp_event 25,  1, FAST_SHIP_1F, -1
+	warp_event 27,  8, FAST_SHIP_CABINS_NNW_NNE_NE, 1
+	warp_event 23,  8, FAST_SHIP_CABINS_NNW_NNE_NE, 2
+	warp_event 19,  8, FAST_SHIP_CABINS_NNW_NNE_NE, 3
+	warp_event 15,  8, FAST_SHIP_CABINS_SW_SSW_NW, 1
+	warp_event 15, 15, FAST_SHIP_CABINS_SW_SSW_NW, 2
+	warp_event 19, 15, FAST_SHIP_CABINS_SW_SSW_NW, 4
+	warp_event 23, 15, FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN, 1
+	warp_event 27, 15, FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN, 3
+	warp_event  3, 15, FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN, 5
+	warp_event  6, 14, FAST_SHIP_B1F, 1
+	warp_event 30, 14, FAST_SHIP_B1F, 2
 
-FastShip1F_MapEventHeader:
+	db 2 ; coord events
+	coord_event 24,  6, 2, WorriedGrandpaTriggerLeft
+	coord_event 25,  6, 2, WorriedGrandpaTriggerRight
 
-.Warps: db 12
-	warp_def $1, $19, -1, FAST_SHIP_1F
-	warp_def $8, $1b, 1, FAST_SHIP_CABINS_NNW_NNE_NE
-	warp_def $8, $17, 2, FAST_SHIP_CABINS_NNW_NNE_NE
-	warp_def $8, $13, 3, FAST_SHIP_CABINS_NNW_NNE_NE
-	warp_def $8, $f, 1, FAST_SHIP_CABINS_SW_SSW_NW
-	warp_def $f, $f, 2, FAST_SHIP_CABINS_SW_SSW_NW
-	warp_def $f, $13, 4, FAST_SHIP_CABINS_SW_SSW_NW
-	warp_def $f, $17, 1, FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN
-	warp_def $f, $1b, 3, FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN
-	warp_def $f, $3, 5, FAST_SHIP_CABINS_SE_SSE_CAPTAINS_CABIN
-	warp_def $e, $6, 1, FAST_SHIP_B1F
-	warp_def $e, $1e, 2, FAST_SHIP_B1F
+	db 0 ; bg events
 
-.XYTriggers: db 2
-	xy_trigger 2, $6, $18, WorriedGrandpaTriggerLeft
-	xy_trigger 2, $6, $19, WorriedGrandpaTriggerRight
+	db 4 ; object events
+	object_event 25,  2, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x75160, -1
+	object_event 19,  6, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_FAST_SHIP_1F_GENTLEMAN
+	object_event 14,  7, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x751d0, -1
+	object_event 22, 17, SPRITE_SAILOR, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x753c0, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 4
-	person_event SPRITE_SAILOR, 2, 25, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x75160, -1
-	person_event SPRITE_GENTLEMAN, 6, 19, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_FAST_SHIP_1F_GENTLEMAN
-	person_event SPRITE_SAILOR, 7, 14, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x751d0, -1
-	person_event SPRITE_SAILOR, 17, 22, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x751e4, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const FASTSHIP1F_SAILOR1
 	const FASTSHIP1F_GENTLEMAN
 
@@ -54,11 +51,11 @@ FastShip1FPriorityJump2:
 	clearevent EVENT_FAST_SHIP_HAS_ARRIVED
 	checkevent EVENT_FAST_SHIP_FIRST_TIME
 	iftrue .SkipGrandpa
-	dotrigger $2
+	setscene $2
 	end
 
 .SkipGrandpa:
-	dotrigger $0
+	setscene $0
 	end
 
 SailorScript_0x75160:
@@ -67,17 +64,17 @@ SailorScript_0x75160:
 	checkevent EVENT_FAST_SHIP_HAS_ARRIVED
 	iftrue .Arrived
 	checkevent EVENT_FAST_SHIP_DESTINATION_OLIVINE
-	iftrue .Olivine
-	writetext UnknownText_0x7523b
-	waitbutton
-	closetext
-	end
+	iftrue_jumpopenedtext UnknownText_0x7529b
+	thisopenedtext
 
-.Olivine:
-	writetext UnknownText_0x7529b
-	waitbutton
-	closetext
-	end
+	text "Fast Ship S.S.Aqua"
+	line "is en route to"
+	cont "Vermilion City."
+
+	para "We will make an"
+	line "announcement when"
+	cont "we arrive."
+	done
 
 .Arrived:
 	checkevent EVENT_FAST_SHIP_DESTINATION_OLIVINE
@@ -90,8 +87,8 @@ SailorScript_0x75160:
 	special FadeOutPalettes
 	waitsfx
 	setevent EVENT_VERMILION_PORT_SAILOR_AT_GANGWAY
-	domaptrigger VERMILION_PORT, $1
-	warp VERMILION_PORT, $7, $11
+	setmapscene VERMILION_PORT, $1
+	warp VERMILION_PORT, 7, 17
 	end
 
 ._Olivine:
@@ -103,13 +100,13 @@ SailorScript_0x75160:
 	special FadeOutPalettes
 	waitsfx
 	setevent EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
-	domaptrigger OLIVINE_PORT, $1
-	warp OLIVINE_PORT, $7, $17
+	setmapscene OLIVINE_PORT, $1
+	warp OLIVINE_PORT, 7, 23
 	end
 
 .LetThePlayerOut:
 	checkcode VAR_FACING
-	if_equal RIGHT, .YouAreFacingRight
+	ifequal RIGHT, .YouAreFacingRight
 	applymovement FASTSHIP1F_SAILOR1, MovementData_0x7520e
 	applymovement PLAYER, MovementData_0x75235
 	end
@@ -120,41 +117,23 @@ SailorScript_0x75160:
 	end
 
 SailorScript_0x751d0:
-	faceplayer
-	opentext
 	checkevent EVENT_FAST_SHIP_FIRST_TIME
-	iftrue .Vermilion
-	writetext UnknownText_0x752f9
-	waitbutton
-	closetext
-	end
-
-.Vermilion:
-	writetext UnknownText_0x7534f
-	waitbutton
-	closetext
-	end
-
-SailorScript_0x751e4:
-	jumptextfaceplayer UnknownText_0x753c0
+	iftrue_jumptextfaceplayer UnknownText_0x7534f
+	jumptextfaceplayer UnknownText_0x752f9
 
 WorriedGrandpaTriggerRight:
-	moveperson FASTSHIP1F_GENTLEMAN, $14, $6
-
+	moveobject FASTSHIP1F_GENTLEMAN, 20, 6
 WorriedGrandpaTriggerLeft:
 	appear FASTSHIP1F_GENTLEMAN
 	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x7521b
 	playsound SFX_TACKLE
 	applymovement PLAYER, MovementData_0x7522e
-	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x75220
-	opentext
-	writetext UnknownText_0x75412
-	waitbutton
-	closetext
-	spriteface PLAYER, RIGHT
+	applyonemovement FASTSHIP1F_GENTLEMAN, step_right
+	showtext UnknownText_0x75412
+	turnobject PLAYER, RIGHT
 	applymovement FASTSHIP1F_GENTLEMAN, MovementData_0x75222
 	disappear FASTSHIP1F_GENTLEMAN
-	dotrigger $0
+	setscene $0
 	end
 
 MovementData_0x7520e:
@@ -179,32 +158,28 @@ MovementData_0x75217:
 	step_end
 
 MovementData_0x7521b:
-	big_step_right
-	big_step_right
-	big_step_right
-	big_step_right
-	step_end
-
-MovementData_0x75220:
-	step_right
+	run_step_right
+	run_step_right
+	run_step_right
+	run_step_right
 	step_end
 
 MovementData_0x75222:
-	big_step_down
-	big_step_right
-	big_step_right
-	big_step_right
-	big_step_right
-	big_step_right
-	big_step_right
-	big_step_down
-	big_step_down
-	big_step_down
-	big_step_down
+	run_step_down
+	run_step_right
+	run_step_right
+	run_step_right
+	run_step_right
+	run_step_right
+	run_step_right
+	run_step_down
+	run_step_down
+	run_step_down
+	run_step_down
 	step_end
 
 MovementData_0x7522e:
-	big_step_right
+	run_step_right
 	turn_head_left
 	step_end
 
@@ -217,16 +192,6 @@ MovementData_0x75238:
 	step_right
 	step_up
 	step_end
-
-UnknownText_0x7523b:
-	text "Fast Ship S.S.Aqua"
-	line "is en route to"
-	cont "Vermilion City."
-
-	para "We will make an"
-	line "announcement when"
-	cont "we arrive."
-	done
 
 UnknownText_0x7529b:
 	text "Fast Ship S.S.Aqua"

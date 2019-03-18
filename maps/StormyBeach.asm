@@ -1,43 +1,36 @@
 StormyBeach_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event 30,  4, MURKY_SWAMP, 1
+	warp_event 31,  4, MURKY_SWAMP, 2
 
-StormyBeach_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $4, $1e, 1, MURKY_SWAMP
-	warp_def $4, $1f, 2, MURKY_SWAMP
+	db 1 ; bg events
+	bg_event 17,  6, SIGNPOST_ITEM + STARDUST, EVENT_STORMY_BEACH_HIDDEN_STARDUST
 
-.XYTriggers: db 0
+	db 11 ; object events
+	object_event  5, 13, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerSwimmerfBarbara, -1
+	object_event 14,  8, SPRITE_BIRD_KEEPER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBird_keeperJulian, -1
+	object_event 28,  7, SPRITE_CAMPER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerCamperFelix, -1
+	object_event 24, 11, SPRITE_PICNICKER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerPicnickerLily, -1
+	object_event 26, 17, SPRITE_SWIMMER_GUY, SPRITEMOVEDATA_SWIM_AROUND, 1, 1, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, StormyBeachSwimmermText, -1
+	object_event 32, 12, SPRITE_GRAMPS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_COMMAND, jumptextfaceplayer, StormyBeachGrampsText, -1
+	itemball_event 34,  7, ZINC, 1, EVENT_STORMY_BEACH_ZINC
+	smashrock_event 16, 6
+	smashrock_event 17, 7
+	smashrock_event 12, 9
+	smashrock_event 18, 10
 
-.Signposts: db 1
-	signpost 6, 17, SIGNPOST_ITEM, StormyBeachHiddenStardust
+GenericTrainerSwimmerfBarbara:
+	generictrainer SWIMMERF, BARBARA, EVENT_BEAT_SWIMMERF_BARBARA, .SeenText, .BeatenText
 
-.PersonEvents: db 11
-	person_event SPRITE_GOLDENROD_LYRA, 13, 5, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 4, TrainerSwimmerfBarbara, -1
-	person_event SPRITE_YOUNGSTER, 8, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBird_keeperJulian, -1
-	person_event SPRITE_YOUNGSTER, 7, 28, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 4, TrainerCamperFelix, -1
-	person_event SPRITE_LASS, 11, 24, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 3, TrainerPicnickerLily, -1
-	person_event SPRITE_SWIMMER_GUY, 17, 26, SPRITEMOVEDATA_SWIM_AROUND, 1, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, StormyBeachSwimmermScript, -1
-	person_event SPRITE_GRAMPS, 12, 32, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, StormyBeachGrampsScript, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 7, 34, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ZINC, 1, EVENT_STORMY_BEACH_ZINC
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 6, 16, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, StormyBeachRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 7, 17, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, StormyBeachRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 9, 12, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, StormyBeachRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 10, 18, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, StormyBeachRock, -1
-
-TrainerSwimmerfBarbara:
-	trainer EVENT_BEAT_SWIMMERF_BARBARA, SWIMMERF, BARBARA, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
+	text "I'm being dragged"
+	line "by the tides…"
+	done
 
 .SeenText:
 	text "I was resting for"
@@ -53,21 +46,13 @@ TrainerSwimmerfBarbara:
 	cont "I lost."
 	done
 
-.AfterText:
-	text "I'm being dragged"
-	line "by the tides…"
+GenericTrainerBird_keeperJulian:
+	generictrainer BIRD_KEEPER, JULIAN, EVENT_BEAT_BIRD_KEEPER_JULIAN, .SeenText, .BeatenText
+
+	text "It's harder to fly"
+	line "in stormy places"
+	cont "like this."
 	done
-
-TrainerBird_keeperJulian:
-	trainer EVENT_BEAT_BIRD_KEEPER_JULIAN, BIRD_KEEPER, JULIAN, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "I'm training my"
@@ -82,22 +67,16 @@ TrainerBird_keeperJulian:
 	line "What a pity!"
 	done
 
-.AfterText:
-	text "It's harder to fly"
-	line "in stormy places"
-	cont "like this."
+GenericTrainerCamperFelix:
+	generictrainer CAMPER, FELIX, EVENT_BEAT_CAMPER_FELIX, .SeenText, .BeatenText
+
+	text "We're having a"
+	line "barbecue later!"
+
+	para "All I need is some"
+	line "firewood for my"
+	cont "#mon to light."
 	done
-
-TrainerCamperFelix:
-	trainer EVENT_BEAT_CAMPER_FELIX, CAMPER, FELIX, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "I'm searching for"
@@ -110,25 +89,14 @@ TrainerCamperFelix:
 	line "a no…"
 	done
 
-.AfterText:
-	text "We're having a"
-	line "barbecue later!"
+GenericTrainerPicnickerLily:
+	generictrainer PICNICKER, LILY, EVENT_BEAT_PICNICKER_LILY, .SeenText, .BeatenText
 
-	para "All I need is some"
-	line "firewood for my"
-	cont "#mon to light."
+	text "I came here for a"
+	line "picnic, but forgot"
+	cont "the food!"
+	cont "How embarrassing!"
 	done
-
-TrainerPicnickerLily:
-	trainer EVENT_BEAT_PICNICKER_LILY, PICNICKER, LILY, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "I'm hungry!"
@@ -139,17 +107,7 @@ TrainerPicnickerLily:
 	line "an empty stomach!"
 	done
 
-.AfterText:
-	text "I came here for a"
-	line "picnic, but forgot"
-	cont "the food!"
-	cont "How embarrassing!"
-	done
-
-StormyBeachSwimmermScript:
-	jumptextfaceplayer .Text
-
-.Text:
+StormyBeachSwimmermText:
 	text "We're here on a"
 	line "camping trip,"
 
@@ -157,10 +115,7 @@ StormyBeachSwimmermScript:
 	line "doesn't look great…"
 	done
 
-StormyBeachGrampsScript:
-	jumptextfaceplayer .Text
-
-.Text:
+StormyBeachGrampsText:
 	text "Can you feel it in"
 	line "the air? A storm"
 	cont "is brewing."
@@ -170,9 +125,3 @@ StormyBeachGrampsScript:
 	cont "to explore the"
 	cont "swamp."
 	done
-
-StormyBeachRock:
-	jumpstd smashrock
-
-StormyBeachHiddenStardust:
-	dwb EVENT_STORMY_BEACH_HIDDEN_STARDUST, STARDUST

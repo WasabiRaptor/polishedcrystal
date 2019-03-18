@@ -1,79 +1,69 @@
 Route1617Gate_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 5 ; warp events
+	warp_event  0,  5, ROUTE_16_SOUTH, 1
+	warp_event  0,  6, ROUTE_16_SOUTH, 2
+	warp_event  9,  5, ROUTE_16_NORTHEAST, 1
+	warp_event  9,  6, ROUTE_16_NORTHEAST, 2
+	warp_event  8,  8, ROUTE_16_17_GATE_2F, 1
 
-Route1617Gate_MapEventHeader:
+	db 5 ; coord events
+	coord_event  5,  3, 0, UnknownScript_0x733ed
+	coord_event  5,  4, 0, UnknownScript_0x733ed
+	coord_event  5,  5, 0, Route1617GateStepUpOneTrigger
+	coord_event  5,  6, 0, Route1617GateStepUpTwoTrigger
+	coord_event  5,  7, 0, Route1617GateStepUpThreeTrigger
 
-.Warps: db 5
-	warp_def $5, $0, 1, ROUTE_16_SOUTH
-	warp_def $6, $0, 2, ROUTE_16_SOUTH
-	warp_def $5, $9, 1, ROUTE_16_NORTHEAST
-	warp_def $6, $9, 2, ROUTE_16_NORTHEAST
-	warp_def $8, $8, 1, ROUTE_16_17_GATE_2F
+	db 0 ; bg events
 
-.XYTriggers: db 5
-	xy_trigger 0, $3, $5, UnknownScript_0x733ed
-	xy_trigger 0, $4, $5, UnknownScript_0x733ed
-	xy_trigger 0, $5, $5, StepUpOneTrigger
-	xy_trigger 0, $6, $5, StepUpTwoTrigger
-	xy_trigger 0, $7, $5, StepUpThreeTrigger
+	db 1 ; object events
+	object_event  5,  1, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x73408, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_OFFICER, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, OfficerScript_0x733ea, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const ROUTE1617GATE_OFFICER
 
-OfficerScript_0x733ea:
-	jumptextfaceplayer UnknownText_0x73408
-
-StepUpOneTrigger:
+Route1617GateStepUpOneTrigger:
 	checkitem BICYCLE
-	iftrue DoNothingScript
-	applymovement PLAYER, StepUpOneMovementData
+	iftrue Route1617GateDoNothingScript
+	applyonemovement PLAYER, step_up
 	jump UnknownScript_0x733f3
 
-StepUpTwoTrigger:
+Route1617GateStepUpTwoTrigger:
 	checkitem BICYCLE
-	iftrue DoNothingScript
-	applymovement PLAYER, StepUpTwoMovementData
+	iftrue Route1617GateDoNothingScript
+	applymovement PLAYER, Route1617GateStepUpTwoMovementData
 	jump UnknownScript_0x733f3
 
-StepUpThreeTrigger:
+Route1617GateStepUpThreeTrigger:
 	checkitem BICYCLE
-	iftrue DoNothingScript
-	applymovement PLAYER, StepUpThreeMovementData
+	iftrue Route1617GateDoNothingScript
+	applymovement PLAYER, Route1617GateStepUpThreeMovementData
 	jump UnknownScript_0x733f3
 
 UnknownScript_0x733ed:
 	checkitem BICYCLE
-	iftrue DoNothingScript
+	iftrue Route1617GateDoNothingScript
 UnknownScript_0x733f3:
 	showemote EMOTE_SHOCK, ROUTE1617GATE_OFFICER, 15
-	spriteface PLAYER, UP
-	opentext
-	writetext UnknownText_0x73496
-	waitbutton
-	closetext
+	turnobject PLAYER, UP
+	showtext UnknownText_0x73496
 	applymovement PLAYER, MovementData_0x73405
-DoNothingScript:
+Route1617GateDoNothingScript:
 	end
+
+Route1617GateStepUpThreeMovementData:
+	step_up
+Route1617GateStepUpTwoMovementData:
+	step_up
+	step_up
+	step_end
 
 MovementData_0x73405:
 	step_right
 	turn_head_left
-	step_end
-
-StepUpThreeMovementData:
-	step_up
-StepUpTwoMovementData:
-	step_up
-StepUpOneMovementData:
-	step_up
 	step_end
 
 UnknownText_0x73408:

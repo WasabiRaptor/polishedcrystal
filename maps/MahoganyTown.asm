@@ -1,35 +1,32 @@
 MahoganyTown_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, MahoganyTownFlyPoint
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, MahoganyTownFlyPoint
+	db 5 ; warp events
+	warp_event 11,  7, MAHOGANY_MART_1F, 1
+	warp_event 17,  7, MAHOGANY_RED_GYARADOS_SPEECH_HOUSE, 1
+	warp_event  6, 13, MAHOGANY_GYM, 1
+	warp_event 15, 13, MAHOGANY_POKECENTER_1F, 1
+	warp_event  9,  1, ROUTE_43_MAHOGANY_GATE, 3
 
-MahoganyTown_MapEventHeader:
+	db 2 ; coord events
+	coord_event 19,  8, 0, UnknownScript_0x190013
+	coord_event 19,  9, 0, UnknownScript_0x190013
 
-.Warps: db 5
-	warp_def $7, $b, 1, MAHOGANY_MART_1F
-	warp_def $7, $11, 1, MAHOGANY_RED_GYARADOS_SPEECH_HOUSE
-	warp_def $d, $6, 1, MAHOGANY_GYM
-	warp_def $d, $f, 1, MAHOGANY_POKECENTER_1F
-	warp_def $1, $9, 3, ROUTE_43_MAHOGANY_GATE
+	db 3 ; bg events
+	bg_event  1,  5, SIGNPOST_JUMPTEXT, MahoganyTownSignText
+	bg_event  9,  7, SIGNPOST_READ, MahoganyTownSouvenirShopSign
+	bg_event  3, 13, SIGNPOST_JUMPTEXT, MahoganyGymSignText
 
-.XYTriggers: db 2
-	xy_trigger 0, $8, $13, UnknownScript_0x190013
-	xy_trigger 0, $9, $13, UnknownScript_0x190013
+	db 4 ; object events
+	object_event 19,  8, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x19002e, EVENT_MAHOGANY_TOWN_POKEFAN_M_BLOCKS_EAST
+	object_event  5,  8, SPRITE_GRAMPS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrampsScript_0x19007e, -1
+	object_event  6, 14, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x190276, EVENT_MAHOGANY_TOWN_POKEFAN_M_BLOCKS_GYM
+	object_event 12,  8, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x1902f2, EVENT_MAHOGANY_MART_OWNERS
 
-.Signposts: db 3
-	signpost 5, 1, SIGNPOST_READ, MahoganyTownSign
-	signpost 7, 9, SIGNPOST_READ, MahoganyTownSouvenirShopSign
-	signpost 13, 3, SIGNPOST_READ, MahoganyGymSign
-
-.PersonEvents: db 4
-	person_event SPRITE_POKEFAN_M, 8, 19, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x19002e, EVENT_MAHOGANY_TOWN_POKEFAN_M_BLOCKS_EAST
-	person_event SPRITE_GRAMPS, 9, 6, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrampsScript_0x19007e, -1
-	person_event SPRITE_FISHER, 14, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, FisherScript_0x190092, EVENT_MAHOGANY_TOWN_POKEFAN_M_BLOCKS_GYM
-	person_event SPRITE_NEW_BARK_LYRA, 8, 12, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LassScript_0x190095, EVENT_MAHOGANY_MART_OWNERS
-
-const_value set 2
+	const_def 1 ; object constants
 	const MAHOGANYTOWN_POKEFAN_M
 
 MahoganyTownFlyPoint:
@@ -40,9 +37,9 @@ UnknownScript_0x190013:
 	showemote EMOTE_SHOCK, MAHOGANYTOWN_POKEFAN_M, 15
 	applymovement MAHOGANYTOWN_POKEFAN_M, MovementData_0x1900a9
 	follow PLAYER, MAHOGANYTOWN_POKEFAN_M
-	applymovement PLAYER, MovementData_0x1900a7
+	applyonemovement PLAYER, step_left
 	stopfollow
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	scall UnknownScript_0x19002f
 	applymovement MAHOGANYTOWN_POKEFAN_M, MovementData_0x1900ad
 	end
@@ -51,93 +48,45 @@ PokefanMScript_0x19002e:
 	faceplayer
 UnknownScript_0x19002f:
 	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue UnknownScript_0x190039
-	scall UnknownScript_0x190040
-	end
-
-UnknownScript_0x190039:
-	opentext
-	writetext UnknownText_0x1901a6
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x190040:
+	iftrue_jumptext UnknownText_0x1901a6
 	opentext
 	writetext UnknownText_0x1900b0
 	special PlaceMoneyTopRight
 	yesorno
-	iffalse UnknownScript_0x190072
+	iffalse_jumpopenedtext UnknownText_0x190178
 	checkmoney $0, 300
-	if_equal $2, UnknownScript_0x19006c
+	ifequal $2, UnknownScript_0x19006c
 	giveitem RAGECANDYBAR
-	iffalse UnknownScript_0x190078
+	iffalse_jumpopenedtext UnknownText_0x190188
 	waitsfx
 	playsound SFX_TRANSACTION
 	takemoney $0, 300
 	special PlaceMoneyTopRight
-	writetext UnknownText_0x19014a
-	waitbutton
-	closetext
-	end
+	thisopenedtext
+
+	text "Good! Savor it!"
+	done
 
 UnknownScript_0x19006c:
-	writetext UnknownText_0x19015b
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-UnknownScript_0x190072:
-	writetext UnknownText_0x190178
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x190078:
-	writetext UnknownText_0x190188
-	waitbutton
-	closetext
-	end
+	text "You don't have"
+	line "enough money."
+	done
 
 GrampsScript_0x19007e:
-	faceplayer
-	opentext
 	checkevent EVENT_CLEARED_ROCKET_HIDEOUT
-	iftrue UnknownScript_0x19008c
-	writetext UnknownText_0x1901e5
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x19008c:
-	writetext UnknownText_0x19021d
-	waitbutton
-	closetext
-	end
-
-FisherScript_0x190092:
-	jumptextfaceplayer UnknownText_0x190276
-
-LassScript_0x190095:
-	jumptextfaceplayer UnknownText_0x1902f2
-
-MahoganyTownSign:
-	jumptext MahoganyTownSignText
+	iftrue_jumptextfaceplayer UnknownText_0x19021d
+	jumptextfaceplayer UnknownText_0x1901e5
 
 MahoganyTownSouvenirShopSign:
 	checkevent EVENT_MAHOGANY_MART_OWNERS
-	iftrue .rockets
-	jumptext MahoganyTownSouvenirShopSignText2
+	iftrue_jumptext MahoganyTownSouvenirShopSignText1
+	thistext
 
-.rockets
-	jumptext MahoganyTownSouvenirShopSignText1
-
-MahoganyGymSign:
-	jumptext MahoganyGymSignText
-
-MovementData_0x1900a7:
-	step_left
-	step_end
+	text "Grandma's"
+	line "Souvenir Shop"
+	done
 
 MovementData_0x1900a9:
 	step_right
@@ -159,21 +108,17 @@ UnknownText_0x1900b0:
 	para "Since you're new,"
 	line "you should try a"
 
+if DEF(FAITHFUL)
+	para "yummy RageCandy-"
+	line "Bar!"
+else
 	para "yummy Cake of"
 	line "Rage!"
+endc
 
 	para "Right now, it can"
 	line "be yours for just"
 	cont "¥300! Want one?"
-	done
-
-UnknownText_0x19014a:
-	text "Good! Savor it!"
-	done
-
-UnknownText_0x19015b:
-	text "You don't have"
-	line "enough money."
 	done
 
 UnknownText_0x190178:
@@ -186,7 +131,11 @@ UnknownText_0x190188:
 	done
 
 UnknownText_0x1901a6:
+if DEF(FAITHFUL)
+	text "RageCandyBars are"
+else
 	text "Cakes of Rage are"
+endc
 	line "sold out."
 
 	para "I'm packing up."
@@ -248,11 +197,6 @@ MahoganyTownSouvenirShopSignText1:
 
 	para "No Need to Be"
 	line "Alarmed"
-	done
-
-MahoganyTownSouvenirShopSignText2:
-	text "Grandma's"
-	line "Souvenir Shop"
 	done
 
 MahoganyGymSignText:

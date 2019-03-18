@@ -1,116 +1,83 @@
 KogasRoom_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script KogasRoomEntranceTrigger
 
-.MapTriggers: db 1
-	dw KogasRoomTrigger0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, KogasRoomDoorCallback
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, UnknownScript_0x18072d
+	db 4 ; warp events
+	warp_event  4, 17, WILLS_ROOM, 2
+	warp_event  5, 17, WILLS_ROOM, 3
+	warp_event  4,  2, BRUNOS_ROOM, 1
+	warp_event  5,  2, BRUNOS_ROOM, 2
 
-KogasRoom_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $11, $4, 2, WILLS_ROOM
-	warp_def $11, $5, 3, WILLS_ROOM
-	warp_def $2, $4, 1, BRUNOS_ROOM
-	warp_def $2, $5, 2, BRUNOS_ROOM
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  5,  7, SPRITE_KOGA, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, KogaScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_KOGA, 7, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, KogaScript_0x18075a, -1
-
-KogasRoomTrigger0:
-	priorityjump UnknownScript_0x180742
+KogasRoomEntranceTrigger:
+	priorityjump .Script
 	end
 
-UnknownScript_0x18072d:
-	checkevent EVENT_KOGAS_ROOM_ENTRANCE_CLOSED
-	iffalse UnknownScript_0x180737
-	changeblock $4, $e, $2a
-UnknownScript_0x180737:
-	checkevent EVENT_KOGAS_ROOM_EXIT_OPEN
-	iffalse UnknownScript_0x180741
-	changeblock $4, $2, $16
-UnknownScript_0x180741:
-	return
-
-UnknownScript_0x180742:
-	applymovement PLAYER, MovementData_0x18078e
+.Script:
+	applymovement PLAYER, WalkIntoEliteFourRoomMovement
 	refreshscreen
 	playsound SFX_STRENGTH
 	earthquake 80
-	changeblock $4, $e, $2a
+	changeblock 4, 14, $2a
 	reloadmappart
 	closetext
-	dotrigger $1
+	setscene $1
 	setevent EVENT_KOGAS_ROOM_ENTRANCE_CLOSED
 	waitsfx
 	end
 
-KogaScript_0x18075a:
-	faceplayer
+KogasRoomDoorCallback:
+	checkevent EVENT_KOGAS_ROOM_ENTRANCE_CLOSED
+	iffalse .KeepDoorClosed
+	changeblock 4, 14, $2a
+.KeepDoorClosed:
+	checkevent EVENT_KOGAS_ROOM_EXIT_OPEN
+	iffalse .OpenDoor
+	changeblock 4, 2, $16
+.OpenDoor:
+	return
+
+KogaScript:
 	checkcode VAR_BADGES
-	if_equal 16, KogaRematchScript
+	ifequal 16, .Rematch
 	checkevent EVENT_BEAT_ELITE_4_KOGA
-	iftrue UnknownScript_0x180788
-	opentext
-	writetext UnknownText_0x180793
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x1808a9, 0
+	iftrue_jumptextfaceplayer .AfterText
+	showtextfaceplayer .SeenText
+	winlosstext .BeatenText, 0
 	loadtrainer KOGA, 1
 	startbattle
 	reloadmapafterbattle
-	scall UnknownScript_0x180788
-	jump KogaEndBattleScript
+	showtext .AfterText
+	jump .EndBattle
 
-UnknownScript_0x180788:
-	opentext
-	writetext UnknownText_0x1808ca
-	waitbutton
-	closetext
-	end
-
-KogaRematchScript:
+.Rematch:
 	checkevent EVENT_BEAT_ELITE_4_KOGA
-	iftrue .AfterBattle
-	opentext
-	writetext KogeBeforeRematchText
-	waitbutton
-	closetext
-	winlosstext UnknownText_0x1808a9, 0
+	iftrue_jumptextfaceplayer .AfterRematchText
+	showtextfaceplayer .SeenRematchText
+	winlosstext .BeatenText, 0
 	loadtrainer KOGA, 2
 	startbattle
 	reloadmapafterbattle
-	scall .AfterBattle
-	jump KogaEndBattleScript
-
-.AfterBattle:
-	opentext
-	writetext KogaAfterRematchText
-	waitbutton
-	closetext
-	end
-
-KogaEndBattleScript:
+	showtext .AfterRematchText
+.EndBattle:
 	playsound SFX_ENTER_DOOR
-	changeblock $4, $2, $16
+	changeblock 4, 2, $16
 	reloadmappart
 	setevent EVENT_KOGAS_ROOM_EXIT_OPEN
 	setevent EVENT_BEAT_ELITE_4_KOGA
 	waitsfx
 	end
 
-MovementData_0x18078e:
-	step_up
-	step_up
-	step_up
-	step_up
-	step_end
-
-UnknownText_0x180793:
+.SeenText:
 	text "Fwahahahaha!"
 
 	para "I am Koga of the"
@@ -139,13 +106,13 @@ UnknownText_0x180793:
 	line "see soon enough!"
 	done
 
-UnknownText_0x1808a9:
+.BeatenText:
 	text "Ah!"
 	line "You have proven"
 	cont "your worth!"
 	done
 
-UnknownText_0x1808ca:
+.AfterText:
 	text "I subjected you to"
 	line "everything I could"
 	cont "muster."
@@ -159,7 +126,7 @@ UnknownText_0x1808ca:
 	cont "abilities to test!"
 	done
 
-KogeBeforeRematchText:
+.SeenRematchText:
 	text "Your arrival is"
 	line "indeed impressive,"
 	cont "as is your look of"
@@ -174,7 +141,7 @@ KogeBeforeRematchText:
 	line "what I mean!"
 	done
 
-KogaAfterRematchText:
+.AfterRematchText:
 	text "Never have I met"
 	line "the likes of you."
 

@@ -1,16 +1,16 @@
-INCLUDE "includes.asm"
+INCLUDE "constants.asm"
+
 
 SECTION "Events", ROMX
 
-
 OverworldLoop:: ; 966b0
 	xor a
-	ld [MapStatus], a
+	ld [wMapStatus], a
 .loop
-	ld a, [MapStatus]
+	ld a, [wMapStatus]
 	ld hl, .jumps
 	rst JumpTable
-	ld a, [MapStatus]
+	ld a, [wMapStatus]
 	cp 3 ; done
 	jr nz, .loop
 .done
@@ -25,60 +25,57 @@ OverworldLoop:: ; 966b0
 
 DisableEvents: ; 966cb
 	xor a
-	ld [ScriptFlags3], a
+	ld [wScriptFlags3], a
 	ret
 ; 966d0
 
 EnableEvents:: ; 966d0
 	ld a, $ff
-	ld [ScriptFlags3], a
+	ld [wScriptFlags3], a
 	ret
 ; 966d6
 
 EnableWildEncounters: ; 96706
-	ld hl, ScriptFlags3
+	ld hl, wScriptFlags3
 	set 4, [hl]
 	ret
 ; 9670c
 
 CheckWarpConnxnScriptFlag: ; 9670c
-	ld hl, ScriptFlags3
+	ld hl, wScriptFlags3
 	bit 2, [hl]
 	ret
 ; 96712
 
 CheckCoordEventScriptFlag: ; 96712
-	ld hl, ScriptFlags3
+	ld hl, wScriptFlags3
 	bit 1, [hl]
 	ret
 ; 96718
 
 CheckStepCountScriptFlag: ; 96718
-	ld hl, ScriptFlags3
+	ld hl, wScriptFlags3
 	bit 0, [hl]
 	ret
 ; 9671e
 
 CheckWildEncountersScriptFlag: ; 9671e
-	ld hl, ScriptFlags3
+	ld hl, wScriptFlags3
 	bit 4, [hl]
 	ret
 ; 96724
 
 StartMap: ; 96724
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	xor a
-	ld [ScriptRunning], a
-	ld hl, MapStatus
-	ld bc, wMapStatusEnd - MapStatus
+	ld [wScriptRunning], a
+	ld hl, wMapStatus
+	ld bc, wMapStatusEnd - wMapStatus
 	call ByteFill
 	farcall InitCallReceiveDelay
 	call ClearJoypad
 EnterMap: ; 9673e
-	xor a
-	ld [wXYComparePointer], a
-	ld [wXYComparePointer + 1], a
 	call SetUpFiveStepWildEncounterCooldown
 	farcall RunMapSetupScript
 	call DisableEvents
@@ -93,72 +90,61 @@ EnterMap: ; 9673e
 	cp MAPSETUP_RELOADMAP
 	jr nz, .dontresetpoison
 	xor a
-	ld [PoisonStepCount], a
+	ld [wPoisonStepCount], a
 .dontresetpoison
 
 	xor a ; end map entry
 	ld [hMapEntryMethod], a
 	ld a, 2 ; HandleMap
-	ld [MapStatus], a
-	farjp DeleteSavedMusic
+	ld [wMapStatus], a
+	jp DeleteSavedMusic
 ; 9676d
 
-HandleMap: ; 96773
+HandleMap:
 	call ResetOverworldDelay
 	call HandleMapTimeAndJoypad
 	call HandleCmdQueue
 	call MapEvents
 
 ; Not immediately entering a connected map will cause problems.
-	ld a, [MapStatus]
+	ld a, [wMapStatus]
 	cp 2 ; HandleMap
 	ret nz
 
 	call HandleMapObjects
 	call NextOverworldFrame
 	call HandleMapBackground
-	jp CheckPlayerState
-; 96795
-
-MapEvents: ; 96795
-	ld a, [MapEventStatus]
-	ld hl, .jumps
-	rst JumpTable
+	call CheckPlayerState
+	xor a
 	ret
 
-.jumps
-	dw .events
-	dw .no_events
-; 967a1
-
-.events ; 967a1
+MapEvents: ; 96795
+	ld a, [wMapEventStatus]
+	and a
+	ret nz
 	call PlayerEvents
 	call DisableEvents
 	farcall ScriptEvents
-.no_events ; 967ae
 	ret
-; 967ae
 
-MaxOverworldDelay: ; 967af
-	db 2
-; 967b0
-
-ResetOverworldDelay: ; 967b0
-	ld a, [MaxOverworldDelay]
-	ld [OverworldDelay], a
+ResetOverworldDelay:
+	ld hl, wOverworldDelay
+	bit 7, [hl]
+	res 7, [hl]
+	ret nz
+	ld [hl], 2
 	ret
-; 967b7
 
-NextOverworldFrame: ; 967b7
-	ld a, [OverworldDelay]
+NextOverworldFrame:
+	ld a, [wOverworldDelay]
 	and a
-	ret z
-	ld c, a
-	jp DelayFrames
-; 967c1
+	jp nz, DelayFrame
+	ld a, $82
+	ld [wOverworldDelay], a
+	ret
 
 HandleMapTimeAndJoypad: ; 967c1
-	ld a, [MapEventStatus]
+	ld a, [wMapEventStatus]
 	cp 1 ; no events
 	ret z
 
@@ -173,11 +159,10 @@ HandleMapObjects: ; 967d1
 	jp _CheckObjectEnteringVisibleRange
 ; 967e1
 
-HandleMapBackground: ; 967e1
+HandleMapBackground:
 	farcall _UpdateSprites
 	farcall ScrollScreen
 	farjp PlaceMapNameSign
-; 967f4
 
 CheckPlayerState: ; 967f4
 	ld a, [wPlayerStepFlags]
@@ -190,12 +175,12 @@ CheckPlayerState: ; 967f4
 	call EnableEvents
 .events
 	xor a ; events
-	ld [MapEventStatus], a
+	ld [wMapEventStatus], a
 	ret
 
 .noevents
 	ld a, 1 ; no events
-	ld [MapEventStatus], a
+	ld [wMapEventStatus], a
 	ret
 ; 96812
 
@@ -209,7 +194,7 @@ _CheckObjectEnteringVisibleRange: ; 96812
 PlayerEvents: ; 9681f
 	xor a
 ; If there's already a player event, don't interrupt it.
-	ld a, [ScriptRunning]
+	ld a, [wScriptRunning]
 	and a
 	ret nz
 
@@ -239,9 +224,9 @@ PlayerEvents: ; 9681f
 	farcall EnableScriptMode
 	pop af
 
-	ld [ScriptRunning], a
+	ld [wScriptRunning], a
 	call DoPlayerEvent
-	ld a, [ScriptRunning]
+	ld a, [wScriptRunning]
 	cp PLAYEREVENT_CONNECTION
 	jr z, .ok2
 	cp PLAYEREVENT_JOYCHANGEFACING
@@ -311,7 +296,7 @@ CheckTileEvent: ; 96874
 	ret
 
 .warp_tile
-	ld a, [PlayerStandingTile]
+	ld a, [wPlayerStandingTile]
 	cp COLL_HOLE
 	jr nz, .not_pit
 	ld a, PLAYEREVENT_FALL
@@ -328,11 +313,11 @@ CheckTileEvent: ; 96874
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [MapScriptHeaderBank]
+	ld a, [wMapScriptHeaderBank]
 	jp CallScript
 ; 968c7
 
-CheckWildEncounterCooldown:: ; 968c7
+CheckWildEncounterCooldown: ; 968c7
 	ld hl, wWildEncounterCooldown
 	ld a, [hl]
 	and a
@@ -359,28 +344,32 @@ DoMapTrigger: ; 968ec
 	cp c
 	jr nc, .nope
 
+	add a
 	ld e, a
 	ld d, 0
 	ld hl, wCurrMapTriggerHeaderPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-rept 2
 	add hl, de
-endr
 
-	ld a, [MapScriptHeaderBank]
+	ld a, [wMapScriptHeaderBank]
+	ld b, a
 	call GetFarHalfword
-	ld a, [MapScriptHeaderBank]
+	ld a, b
+	call GetFarByte
+	cp end_command
+	ret z ; boost efficiency of maps with dummy triggers
+	ld a, b
 	call CallScript
 
-	ld hl, ScriptFlags
+	ld hl, wScriptFlags
 	res 3, [hl]
 
 	farcall EnableScriptMode
 	farcall ScriptEvents
 
-	ld hl, ScriptFlags
+	ld hl, wScriptFlags
 	bit 3, [hl]
 	jr z, .nope
 
@@ -403,7 +392,7 @@ CheckTimeEvents: ; 9693a
 	and a
 	jr nz, .nothing
 
-	ld hl, StatusFlags2
+	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	jr z, .do_daily
 
@@ -478,6 +467,10 @@ PlayTalkObject: ; 969ac
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
 	pop de
+	push bc
+	ld c, 3
+	call SFXDelayFrames
+	pop bc
 	ret
 ; 969b5
 
@@ -508,18 +501,12 @@ TryObjectEvent: ; 969b5
 	ret
 
 .pointers:
-	dw .script     ; PERSONTYPE_SCRIPT
-	dw .itemball   ; PERSONTYPE_ITEMBALL
-	dw .tmhmball   ; PERSONTYPE_TMHMBALL
-	dw .jumptext   ; PERSONTYPE_JUMPTEXT
-	dw .jumptextfp ; PERSONTYPE_JUMPTEXTFP
-	dw .jumpstd    ; PERSONTYPE_JUMPSTD
-	dw .trainer    ; PERSONTYPE_TRAINER
-	dw .trainer    ; PERSONTYPE_GENERICTRAINER
-	dw .mart       ; PERSONTYPE_MART
-	dw .pokemon    ; PERSONTYPE_POKEMON
-	dw .npctrade   ; PERSONTYPE_NPCTRADE
-	dw .fruittree  ; PERSONTYPE_FRUITTREE
+	dw .script   ; PERSONTYPE_SCRIPT
+	dw .pokeball ; PERSONTYPE_POKEBALL
+	dw .trainer  ; PERSONTYPE_TRAINER
+	dw .trainer  ; PERSONTYPE_GENERICTRAINER
+	dw .pokemon  ; PERSONTYPE_POKEMON
+	dw .command  ; PERSONTYPE_COMMAND
 
 .script:
 	ld hl, MAPOBJECT_SCRIPT_POINTER
@@ -527,25 +514,19 @@ TryObjectEvent: ; 969b5
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [MapScriptHeaderBank]
+	ld a, [wMapScriptHeaderBank]
 	jp CallScript
 ; 96a12
 
-.itemball:
-	ld a, PLAYEREVENT_ITEMBALL
-	jr .continue_ball
-
-.tmhmball:
-	ld a, PLAYEREVENT_TMHMBALL
-.continue_ball
-	push af
-	ld hl, MAPOBJECT_SCRIPT_POINTER
+.pokeball:
+	ld hl, MAPOBJECT_RANGE
 	add hl, bc
 	ld a, [hli]
-	ld e, [hl]
-	ld hl, CurItemBallContents
-	ld [hli], a
-	ld [hl], e
+	push af
+	ld a, [hli]
+	ld [wCurItemBallContents], a
+	ld a, [hl]
+	ld [wCurItemBallQuantity], a
 	pop af
 	scf
 	ret
@@ -556,67 +537,42 @@ TryObjectEvent: ; 969b5
 	scf
 	ret
 
-.jumptext:
-	ld a, jumptext_command
-	jr .continue_text
-
-.jumptextfp:
-	ld a, jumptextfaceplayer_command
-.continue_text
-	ld hl, MAPOBJECT_SCRIPT_POINTER
-	add hl, bc
-	ld de, wTemporaryScriptBuffer
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	jr .call_temporary_script_buffer
-
-.jumpstd:
-	ld hl, MAPOBJECT_SCRIPT_POINTER
-	add hl, bc
-	ld a, [hl]
-	ld hl, wTemporaryScriptBuffer + 1
-	ld [hld], a
-	ld [hl], jumpstd_command
-.call_temporary_script_buffer
-	ld hl, wTemporaryScriptBuffer
-.call_script_in_bank
-	ld a, [MapScriptHeaderBank]
-	jp CallScript
-
-.mart:
-	ld hl, MAPOBJECT_SCRIPT_POINTER
-	add hl, bc
-	ld de, wTemporaryScriptBuffer
-	ld a, pokemart_command
-	ld [de], a
-	inc de
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, [hl]
-	ld [de], a
-	jr .call_temporary_script_buffer
-
-.npctrade:
-	; TODO
-
 .pokemon:
-	; TODO
-
-.fruittree:
-	ld hl, MAPOBJECT_SCRIPT_POINTER
+	ld hl, MAPOBJECT_RANGE
 	add hl, bc
+	ld a, [hli]
+	ld [wScriptVar], a
+	ld de, wTemporaryScriptBuffer
+	ld a, showcrytext_command
+	ld [de], a
+	inc de
+rept 2
+	ld a, [hli]
+	ld [de], a
+	inc de
+endr
+	xor a
+	ld [de], a
+	inc de
+	ld a, end_command
+	ld [de], a
+	jr .callTemporaryScriptBuffer
+
+.command:
+	ld hl, MAPOBJECT_RANGE
+	add hl, bc
+	ld de, wTemporaryScriptBuffer
+rept 3
+	ld a, [hli]
+	ld [de], a
+	inc de
+endr
 	ld a, [hl]
-	ld hl, wTemporaryScriptBuffer + 1
-	ld [hld], a
-	ld [hl], fruittree_command
-	jr .call_script_in_bank
-; 96a34
+	ld [de], a
+.callTemporaryScriptBuffer:
+	ld hl, wTemporaryScriptBuffer
+	ld a, [wMapScriptHeaderBank]
+	jp CallScript
 
 TryReadSign: ; 96a38
 	call CheckFacingSign
@@ -625,22 +581,24 @@ TryReadSign: ; 96a38
 	ret
 
 .IsSign:
-	ld a, [EngineBuffer3]
+	ld a, [wEngineBuffer3]
+	cp SIGNPOST_ITEM
+	jp nc, .itemifset
 	ld hl, .signs
 	rst JumpTable
 	ret
 
 .signs
-	dw .read      ; SIGNPOST_READ
-	dw .up        ; SIGNPOST_UP
-	dw .down      ; SIGNPOST_DOWN
-	dw .right     ; SIGNPOST_RIGHT
-	dw .left      ; SIGNPOST_LEFT
-	dw .ifset     ; SIGNPOST_IFSET
-	dw .ifnotset  ; SIGNPOST_IFNOTSET
-	dw .itemifset ; SIGNPOST_ITEM
-	dw .jumptext  ; SIGNPOST_JUMPTEXT
-	dw .jumpstd   ; SIGNPOST_JUMPSTD
+	dw .read     ; SIGNPOST_READ
+	dw .up       ; SIGNPOST_UP
+	dw .down     ; SIGNPOST_DOWN
+	dw .right    ; SIGNPOST_RIGHT
+	dw .left     ; SIGNPOST_LEFT
+	dw .ifset    ; SIGNPOST_IFSET
+	dw .ifnotset ; SIGNPOST_IFNOTSET
+	dw .jumptext ; SIGNPOST_JUMPTEXT
+	dw .jumpstd  ; SIGNPOST_JUMPSTD
+	dw .ifnotset ; SIGNPOST_GROTTOITEM
 ; 96a59
 
 .up
@@ -654,35 +612,46 @@ TryReadSign: ; 96a38
 	jr .checkdir
 .left
 	ld b, OW_LEFT
-	jr .checkdir
+	; fallthrough
 
 .checkdir
-	ld a, [PlayerDirection]
+	ld a, [wPlayerDirection]
 	and %1100
 	cp b
 	jp nz, .dontread
 
 .read
 	call PlayTalkObject
-	ld hl, EngineBuffer4
+	ld hl, wEngineBuffer4
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 .callMapScriptAndReturnCarry
-	ld a, [MapScriptHeaderBank]
+	ld a, [wMapScriptHeaderBank]
 .callScriptAndReturnCarry
 	call CallScript
 	scf
 	ret
 
 .itemifset
-	call CheckSignFlag
+	ld a, [wCurSignpostScriptAddr]
+	ld e, a
+	ld a, [wCurSignpostScriptAddr+1]
+	ld d, a
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
+	and a
 	jp nz, .dontread
 	call PlayTalkObject
-	ld a, [MapScriptHeaderBank]
-	ld de, EngineBuffer1
-	ld bc, 3
-	call FarCopyBytes
+	ld hl, wEngineBuffer1
+	ld a, [wCurSignpostScriptAddr]
+	ld [hli], a
+	ld a, [wCurSignpostScriptAddr+1]
+	ld [hli], a
+	ld a, [wCurSignpostType]
+	sub SIGNPOST_ITEM
+	ld [hl], a
 	ld a, BANK(HiddenItemScript)
 	ld hl, HiddenItemScript
 	jr .callScriptAndReturnCarry
@@ -702,8 +671,6 @@ TryReadSign: ; 96a38
 	pop hl
 	inc hl
 	inc hl
-	ld a, [MapScriptHeaderBank]
-	call GetFarHalfword
 	jr .callMapScriptAndReturnCarry
 
 .dontread
@@ -734,12 +701,12 @@ TryReadSign: ; 96a38
 ; 96ad8
 
 CheckSignFlag: ; 96ad8
-	ld hl, EngineBuffer4
+	ld hl, wEngineBuffer4
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	push hl
-	ld a, [MapScriptHeaderBank]
+	ld a, [wMapScriptHeaderBank]
 	call GetFarHalfword
 	ld e, l
 	ld d, h
@@ -750,6 +717,36 @@ CheckSignFlag: ; 96ad8
 	pop hl
 	ret
 ; 96af0
+
+HiddenItemScript: ; 0x13625
+	opentext
+	copybytetovar wEngineBuffer3
+	itemtotext $0, $0
+	writetext .found_text
+	giveitem ITEM_FROM_MEM
+	iffalse .bag_full
+	callasm SetMemEvent
+	specialsound
+	itemnotify
+	endtext
+
+.bag_full ; 0x1363e
+	buttonsound
+	pocketisfull
+	endtext
+
+.found_text ; 0x13645
+	; found @ !
+	text_jump UnknownText_0x1c0a1c
+	db "@"
+
+SetMemEvent: ; 1364f
+	ld hl, wEngineBuffer1
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ld b, SET_FLAG
+	jp EventFlagAction
 
 PlayerMovement: ; 96af0
 	farcall DoPlayerMovement
@@ -839,7 +836,6 @@ CheckMenuOW: ; 96b30
 	ret
 
 .Select:
-	call PlayTalkObject
 	ld a, BANK(SelectMenuScript)
 	ld hl, SelectMenuScript
 	call CallScript
@@ -860,8 +856,8 @@ SelectMenuScript: ; 96b5f
 StartMenuCallback:
 SelectMenuCallback: ; 96b66
 	copybytetovar hMenuReturn
-	if_equal HMENURETURN_SCRIPT, .Script
-	if_equal HMENURETURN_ASM, .Asm
+	ifequal HMENURETURN_SCRIPT, .Script
+	ifequal HMENURETURN_ASM, .Asm
 	end
 ; 96b72
 
@@ -889,9 +885,9 @@ CountStep: ; 96b79
 	jr c, .doscript
 
 	; Count the step for poison and total steps
-	ld hl, PoisonStepCount
+	ld hl, wPoisonStepCount
 	inc [hl]
-	ld hl, StepCount
+	ld hl, wStepCount
 	inc [hl]
 	; Every 256 steps, increase the happiness of all your Pokemon.
 	jr nz, .skip_happiness
@@ -902,7 +898,7 @@ CountStep: ; 96b79
 	; Every 256 steps, offset from the happiness incrementor by 128 steps,
 	; decrease the hatch counter of all your eggs until you reach the first
 	; one that is ready to hatch.
-	ld a, [StepCount]
+	ld a, [wStepCount]
 	cp $80
 	jr nz, .skip_egg
 
@@ -914,7 +910,7 @@ CountStep: ; 96b79
 	farcall DaycareStep
 
 	; Every four steps, deal damage to all Poisoned Pokemon
-	ld hl, PoisonStepCount
+	ld hl, wPoisonStepCount
 	ld a, [hl]
 	cp 4
 	jr c, .skip_poison
@@ -951,8 +947,8 @@ DoRepelStep: ; 96bd7
 	ret nz
 
 	ld a, [wRepelType]
-	ld [CurItem], a
-	ld hl, NumItems
+	ld [wCurItem], a
+	ld hl, wNumItems
 	call CheckItem
 
 	ld a, BANK(RepelWoreOffScript)
@@ -966,8 +962,27 @@ DoRepelStep: ; 96bd7
 	ret
 ; 96beb
 
+RepelWoreOffScript: ; 0x13619
+	thistext
+
+	; REPEL's effect wore off.
+	text_jump UnknownText_0x1bd308
+	db "@"
+
+UseAnotherRepelScript:
+	opentext
+	writetext .text
+	yesorno
+	iffalse_endtext
+	callasm DoItemEffect
+	endtext
+
+.text:
+	text_jump UseAnotherRepelText
+	db "@"
+
 DoPlayerEvent: ; 96beb
-	ld a, [ScriptRunning]
+	ld a, [wScriptRunning]
 	and a
 	ret z
 
@@ -980,15 +995,15 @@ DoPlayerEvent: ; 96beb
 	ld c, a
 	ld b, 0
 	ld hl, PlayerEventScriptPointers
-rept 3
 	add hl, bc
-endr
+	add hl, bc
+	add hl, bc
 	ld a, [hli]
-	ld [ScriptBank], a
+	ld [wScriptBank], a
 	ld a, [hli]
-	ld [ScriptPos], a
+	ld [wScriptPos], a
 	ld a, [hl]
-	ld [ScriptPos + 1], a
+	ld [wScriptPos + 1], a
 	ret
 ; 96c0c
 
@@ -1043,10 +1058,448 @@ EdgeWarpScript: ; 4
 ; 96c4f
 
 ChangeDirectionScript: ; 9
-	deactivatefacing 3
+	deactivatefacing 6
 	callasm EnableWildEncounters
 	end
 ; 96c56
 
+; More overworld event handling.
+
+WarpToSpawnPoint:: ; 97c28
+	ld hl, wStatusFlags2
+	res 1, [hl] ; ENGINE_SAFARI_ZONE?
+	res 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
+	ret
+; 97c30
+
+RunMemScript: ; 97c30
+; If there is no script here, we don't need to be here.
+	ld a, [wMapReentryScriptQueueFlag]
+	and a
+	ret z
+; Execute the script at (wMapReentryScriptBank):(wMapReentryScriptAddress).
+	ld hl, wMapReentryScriptAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wMapReentryScriptBank]
+	call CallScript
+	scf
+; Clear the buffer for the next script.
+	push af
+	xor a
+	ld hl, wMapReentryScriptQueueFlag
+	ld bc, 8
+	call ByteFill
+	pop af
+	ret
+; 97c4f
+
+LoadScriptBDE:: ; 97c4f
+; If there's already a script here, don't overwrite.
+	ld hl, wMapReentryScriptQueueFlag
+	ld a, [hl]
+	and a
+	ret nz
+; Set the flag
+	ld [hl], 1
+	inc hl
+; Load the script pointer b:de into (wMapReentryScriptBank):(wMapReentryScriptAddress)
+	ld [hl], b
+	inc hl
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	scf
+	ret
+; 97c5f
+
+CheckFacingTileEvent: ; 97c5f
+	call GetFacingTileCoord
+	ld [wEngineBuffer1], a
+	ld c, a
+	farcall CheckFacingTileForStd
+	jr c, .done
+
+	ld a, [wEngineBuffer1]
+	cp COLL_WHIRLPOOL
+	jr z, .whirlpool
+	cp COLL_WATERFALL
+	jr z, .waterfall
+	cp COLL_HEADBUTT_TREE
+	jr z, .headbutt
+	farcall TrySurfOW
+	jr nc, .noevent
+.done
+	call PlayClickSFX
+	ld a, $ff
+	scf
+	ret
+
+.whirlpool
+	farcall TryWhirlpoolOW
+	jr .done
+
+.waterfall
+	farcall TryWaterfallOW
+	jr .done
+
+.headbutt
+	farcall TryHeadbuttOW
+	jr c, .done
+.noevent
+	xor a
+	ret
+; 97cc0
+
+
+RandomEncounter:: ; 97cc0
+; Random encounter
+	call CheckWildEncounterCooldown
+	jr c, .nope
+	call CanUseSweetScent
+	jr nc, .nope
+	ld hl, wStatusFlags2
+	bit 1, [hl] ; ENGINE_SAFARI_GAME
+	jr nz, .safari_game
+	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
+	jr nz, .bug_contest
+	farcall TryWildEncounter
+	jr nz, .nope
+.ok
+	ld a, BANK(WildBattleScript)
+	ld hl, WildBattleScript
+.done
+	call CallScript
+	scf
+	ret
+
+.safari_game
+	farcall TryWildEncounter
+	jr nz, .nope
+	ld a, BANK(SafariGameBattleScript)
+	ld hl, SafariGameBattleScript
+	jr .done
+
+.bug_contest
+	call _TryWildEncounter_BugContest
+	jr nc, .nope
+	ld a, BANK(BugCatchingContestBattleScript)
+	ld hl, BugCatchingContestBattleScript
+	jr .done
+
+.nope
+	ld a, 1
+	and a
+	ret
+; 97cf9
+
+WildBattleScript: ; 97cf9
+	randomwildmon
+	startbattle
+	reloadmapafterbattle
+	end
+; 97cfd
+
+CanUseSweetScent:: ; 97cfd
+	ld hl, wStatusFlags
+	bit 5, [hl]
+	jr nz, .no
+	ld a, [wPermission]
+	cp CAVE
+	jr z, .ice_check
+	cp DUNGEON
+	jr z, .ice_check
+	farcall CheckGrassCollision
+	jr nc, .no
+
+.ice_check
+	ld a, [wPlayerStandingTile]
+	cp COLL_ICE
+	jr z, .no
+	scf
+	ret
+
+.no
+	and a
+	ret
+; 97d23
+
+_TryWildEncounter_BugContest: ; 97d23
+	call TryWildEncounter_BugContest
+	ret nc
+; Pick a random mon out of ContestMons.
+.loop
+	call Random
+	cp 100 << 1
+	jr nc, .loop
+	srl a
+	ld hl, ContestMons
+	ld de, 4
+.CheckMon:
+	sub [hl]
+	jr c, .GotMon
+	add hl, de
+	jr .CheckMon
+.GotMon:
+	inc hl
+; Species
+	ld a, [hli]
+	ld [wTempWildMonSpecies], a
+; Min level
+	ld a, [hli]
+	ld d, a
+; Max level
+	ld a, [hl]
+	sub d
+	jr nz, .RandomLevel
+; If min and max are the same.
+	ld a, d
+	jr .GotLevel
+.RandomLevel:
+; Get a random level between the min and max.
+	ld c, a
+	inc c
+	call Random
+	ld a, [hRandomAdd]
+	call SimpleDivide
+	add d
+.GotLevel:
+	ld [wCurPartyLevel], a
+	xor a
+	farjp CheckRepelEffect
+; 97d31
+
+TryWildEncounter_BugContest: ; 97d64
+	ld a, [wPlayerStandingTile]
+	cp COLL_LONG_GRASS
+	ld b, 40 percent
+	jr z, .ok
+	ld b, 20 percent
+
+.ok
+	farcall ApplyMusicEffectOnEncounterRate
+	farcall ApplyCleanseTagEffectOnEncounterRate
+	call Random
+	ld a, [hRandomAdd]
+	cp b
+	ret c
+	ld a, 1
+	and a
+	ret
+; 97d87
+
+INCLUDE "data/wild/bug_contest_mons.asm"
+
+DoBikeStep:: ; 97db3
+	; If the bike shop owner doesn't have our number, or
+	; if we've already gotten the call, we don't have to
+	; be here.
+	ld hl, wStatusFlags2
+	bit 4, [hl] ; ENGINE_BIKE_SHOP_CALL_ENABLED
+	jr z, .NoCall
+
+	; If we're not on the bike, we don't have to be here.
+	ld a, [wPlayerState]
+	cp PLAYER_BIKE
+	jr nz, .NoCall
+
+	; If we're not in an area of phone service, we don't
+	; have to be here.
+	call GetMapHeaderPhoneServiceNybble
+	and a
+	jr nz, .NoCall
+
+	; Check the bike step count and check whether we've
+	; taken 65536 of them yet.
+	ld hl, wBikeStep
+	ld a, [hli]
+	ld d, a
+	ld e, [hl]
+	cp 255
+	jr nz, .increment
+	ld a, e
+	cp 255
+	jr z, .dont_increment
+
+.increment
+	inc de
+	ld [hl], e
+	dec hl
+	ld [hl], d
+
+.dont_increment
+	; If we've taken at least 1024 steps, have the bike
+	;  shop owner try to call us.
+	ld a, d
+	cp 1024 >> 8
+	jr c, .NoCall
+
+	; If a call has already been queued, don't overwrite
+	; that call.
+	ld a, [wSpecialPhoneCallID]
+	and a
+	jr nz, .NoCall
+
+	; Queue the call.
+	ld a, SPECIALCALL_BIKESHOP
+	ld [wSpecialPhoneCallID], a
+	xor a
+	ld [wSpecialPhoneCallID + 1], a
+	ld hl, wStatusFlags2
+	res 4, [hl] ; ENGINE_BIKE_SHOP_CALL_ENABLED
+	scf
+	ret
+
+.NoCall:
+	xor a
+	ret
+; 97df9
+
+; TODO: simplify command queue engine to just handle stone tables
+
+ClearCmdQueue:: ; 97df9
+	ld hl, wCmdQueue
+	ld de, CMDQUEUE_ENTRY_SIZE
+	ld c, CMDQUEUE_CAPACITY
+	xor a
+.loop
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .loop
+	ret
+; 97e08
+
+HandleCmdQueue:: ; 97e08
+	ld hl, wCmdQueue
+	xor a
+.loop
+	ld [hMapObjectIndexBuffer], a
+	ld a, [hl]
+	and a
+	jr z, .skip
+	push hl
+	ld b, h
+	ld c, l
+	call HandleQueuedCommand
+	pop hl
+
+.skip
+	ld de, CMDQUEUE_ENTRY_SIZE
+	add hl, de
+	ld a, [hMapObjectIndexBuffer]
+	inc a
+	cp CMDQUEUE_CAPACITY
+	jr nz, .loop
+	ret
+; 97e25
+
+WriteCmdQueue:: ; 97e31
+	push bc
+	push de
+	call .GetNextEmptyEntry
+	ld d, h
+	ld e, l
+	pop hl
+	pop bc
+	ret c
+	ld a, b
+	ld bc, CMDQUEUE_ENTRY_SIZE - 1
+	call FarCopyBytes
+	xor a
+	ld [hl], a
+	ret
+; 97e45
+
+.GetNextEmptyEntry: ; 97e45
+	ld hl, wCmdQueue
+	ld de, CMDQUEUE_ENTRY_SIZE
+	ld c, CMDQUEUE_CAPACITY
+.loop
+	ld a, [hl]
+	and a
+	jr z, .done
+	add hl, de
+	dec c
+	jr nz, .loop
+	scf
+	ret
+
+.done
+	ld a, CMDQUEUE_CAPACITY
+	sub c
+	and a
+	ret
+; 97e5c
+
+DelCmdQueue:: ; 97e5c
+	ld hl, wCmdQueue
+	ld de, CMDQUEUE_ENTRY_SIZE
+	ld c, CMDQUEUE_CAPACITY
+.loop
+	ld a, [hl]
+	cp b
+	jr z, .done
+	add hl, de
+	dec c
+	jr nz, .loop
+	and a
+	ret
+
+.done
+	xor a
+	ld [hl], a
+	scf
+	ret
+; 97e72
+
+HandleQueuedCommand: ; 97f42
+	ld de, wPlayerStruct
+	ld a, NUM_OBJECT_STRUCTS
+.loop
+	push af
+
+	ld hl, OBJECT_SPRITE
+	add hl, de
+	ld a, [hl]
+	and a
+	jr z, .next
+
+	ld hl, OBJECT_MOVEMENTTYPE
+	add hl, de
+	ld a, [hl]
+	cp SPRITEMOVEDATA_STRENGTH_BOULDER
+	jr nz, .next
+
+	ld hl, OBJECT_NEXT_TILE
+	add hl, de
+	ld a, [hl]
+	cp COLL_HOLE
+	jr nz, .next
+
+	ld hl, OBJECT_DIRECTION_WALKING
+	add hl, de
+	ld a, [hl]
+	cp STANDING
+	jr nz, .next
+	call HandleStoneQueue
+	jr c, .fall_down_hole
+
+.next
+	ld hl, OBJECT_STRUCT_LENGTH
+	add hl, de
+	ld d, h
+	ld e, l
+
+	pop af
+	dec a
+	jr nz, .loop
+	ret
+
+.fall_down_hole
+	pop af
+	ret
+; 97ea3
+
 INCLUDE "engine/scripting.asm"
-INCLUDE "engine/events_2.asm"

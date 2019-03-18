@@ -1,47 +1,44 @@
 CinnabarVolcano1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_CMDQUEUE, CinnabarVolcano1FBouldersFall
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_CMDQUEUE, CinnabarVolcano1FBouldersFall
+	db 10 ; warp events
+	warp_event 13, 25, CINNABAR_ISLAND, 2
+	warp_event  5, 13, CINNABAR_VOLCANO_B1F, 1
+	warp_event 14, 20, CINNABAR_VOLCANO_B1F, 2
+	warp_event 25, 19, CINNABAR_VOLCANO_B1F, 3
+	warp_event 22,  8, CINNABAR_VOLCANO_B1F, 4
+	warp_event  8, 21, CINNABAR_VOLCANO_B1F, 8
+	warp_event 20, 19, CINNABAR_VOLCANO_B1F, 9
+	warp_event 18,  9, CINNABAR_VOLCANO_B1F, 10
+	warp_event 10,  7, CINNABAR_VOLCANO_B1F, 11
+	warp_event 15,  3, CINNABAR_VOLCANO_B1F, 12
 
-CinnabarVolcano1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 10
-	warp_def $19, $d, 2, CINNABAR_ISLAND
-	warp_def $d, $5, 1, CINNABAR_VOLCANO_B1F
-	warp_def $14, $e, 2, CINNABAR_VOLCANO_B1F
-	warp_def $13, $19, 3, CINNABAR_VOLCANO_B1F
-	warp_def $8, $16, 4, CINNABAR_VOLCANO_B1F
-	warp_def $15, $8, 8, CINNABAR_VOLCANO_B1F
-	warp_def $13, $14, 9, CINNABAR_VOLCANO_B1F
-	warp_def $9, $12, 10, CINNABAR_VOLCANO_B1F
-	warp_def $7, $a, 11, CINNABAR_VOLCANO_B1F
-	warp_def $3, $f, 12, CINNABAR_VOLCANO_B1F
+	db 1 ; bg events
+	bg_event 13,  1, SIGNPOST_ITEM + FULL_RESTORE, EVENT_CINNABAR_VOLCANO_1F_HIDDEN_FULL_RESTORE
 
-.XYTriggers: db 0
+	db 15 ; object events
+	object_event  4,  9, SPRITE_BUCK, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FBuckScript, EVENT_CINNABAR_VOLCANO_BUCK
+	strengthboulder_event  6, 16, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_1
+	strengthboulder_event 15, 22, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_2
+	strengthboulder_event 19,  4, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_3
+	strengthboulder_event  5,  4, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_4
+	strengthboulder_event 23, 16
+	object_event  2, 19, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerScientistOskar, -1
+	object_event 17, 24, SPRITE_REAL_SUPER_NERD, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerSuperNerdLuis, -1
+	smashrock_event  5, 18
+	smashrock_event 11, 21
+	smashrock_event 35, 23
+	smashrock_event 19, 11
+	smashrock_event 25, 12
+	smashrock_event 13, 2
+	smashrock_event  8, 4
 
-.Signposts: db 1
-	signpost 1, 13, SIGNPOST_ITEM, CinnabarVolcano1FHiddenFullRestore
-
-.PersonEvents: db 15
-	person_event SPRITE_BUCK, 9, 4, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FBuckScript, EVENT_CINNABAR_VOLCANO_BUCK
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 16, 6, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FBoulder, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 22, 15, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FBoulder, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_2
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 4, 19, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FBoulder, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_3
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 4, 5, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FBoulder, EVENT_BOULDER_IN_CINNABAR_VOLCANO_1F_4
-	person_event SPRITE_SCIENTIST, 19, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerScientistOskar, -1
-	person_event SPRITE_SUPER_NERD, 24, 17, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 2, TrainerSuperNerdLuis, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 16, 23, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FBoulder, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 18, 5, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 21, 11, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 23, 35, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 11, 19, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 12, 25, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 2, 13, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FRock, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 4, 8, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcano1FRock, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const CINNABARVOLCANO1F_BUCK
 	const CINNABARVOLCANO1F_BOULDER1
 	const CINNABARVOLCANO1F_BOULDER2
@@ -82,11 +79,7 @@ CinnabarVolcano1FBouldersFall:
 .Fall:
 	pause 30
 	scall .FX
-	opentext
-	writetext CinnabarVolcano1FBoulderFellText
-	waitbutton
-	closetext
-	end
+	jumptext CinnabarVolcano1FBoulderFellText
 
 .FX:
 	playsound SFX_STRENGTH
@@ -100,7 +93,7 @@ CinnabarVolcano1FBuckScript:
 	opentext
 	writetext .ChallengeText
 	yesorno
-	iffalse .No
+	iffalse_jumpopenedtext .NoText
 	writetext .YesText
 	waitbutton
 	closetext
@@ -115,7 +108,7 @@ CinnabarVolcano1FBuckScript:
 	writetext .ItemText
 	buttonsound
 	verbosegiveitem POWER_BELT
-	iffalse .Done
+	iffalse_endtext
 	writetext .GoodbyeText
 	waitbutton
 	closetext
@@ -125,16 +118,6 @@ CinnabarVolcano1FBuckScript:
 	pause 15
 	special Special_FadeInQuickly
 	clearevent EVENT_BATTLE_TOWER_BUCK
-	end
-
-.Done:
-	closetext
-	end
-
-.No:
-	writetext .NoText
-	waitbutton
-	closetext
 	end
 
 .ChallengeText:
@@ -203,36 +186,27 @@ CinnabarVolcano1FBuckScript:
 	cont "Bye-bye!"
 	done
 
-TrainerScientistOskar:
-	trainer EVENT_BEAT_SCIENTIST_OSKAR, SCIENTIST, OSKAR, ScientistOskarSeenText, ScientistOskarBeatenText, 0, ScientistOskarScript
+GenericTrainerScientistOskar:
+	generictrainer SCIENTIST, OSKAR, EVENT_BEAT_SCIENTIST_OSKAR, ScientistOskarSeenText, ScientistOskarBeatenText
 
-ScientistOskarScript:
-	end_if_just_battled
-	opentext
-	writetext ScientistOskarAfterText
-	waitbutton
-	closetext
-	end
+	text "It's important to"
+	line "study natural"
+	cont "disasters so we"
 
-TrainerSuperNerdLuis:
-	trainer EVENT_BEAT_SUPER_NERD_LUIS, SUPER_NERD, LUIS, SuperNerdLuisSeenText, SuperNerdLuisBeatenText, 0, SuperNerdLuisScript
+	para "can prepare for"
+	line "the next one."
+	done
 
-SuperNerdLuisScript:
-	end_if_just_battled
-	opentext
-	writetext SuperNerdLuisAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerSuperNerdLuis:
+	generictrainer SUPER_NERD, LUIS, EVENT_BEAT_SUPER_NERD_LUIS, SuperNerdLuisSeenText, SuperNerdLuisBeatenText
 
-CinnabarVolcano1FBoulder:
-	jumpstd strengthboulder
+	text "It's so thrilling"
+	line "to be inside a"
+	cont "volcano!"
 
-CinnabarVolcano1FRock:
-	jumpstd smashrock
-
-CinnabarVolcano1FHiddenFullRestore:
-	dwb EVENT_CINNABAR_VOLCANO_1F_HIDDEN_FULL_RESTORE, FULL_RESTORE
+	para "But scary at the"
+	line "same time."
+	done
 
 ScientistOskarSeenText:
 	text "I'm studying the"
@@ -243,15 +217,6 @@ ScientistOskarSeenText:
 ScientistOskarBeatenText:
 	text "Better luck next"
 	line "time!"
-	done
-
-ScientistOskarAfterText:
-	text "It's important to"
-	line "study natural"
-	cont "disasters so we"
-
-	para "can prepare for"
-	line "the next one."
 	done
 
 SuperNerdLuisSeenText:
@@ -268,15 +233,6 @@ SuperNerdLuisSeenText:
 SuperNerdLuisBeatenText:
 	text "You just taught"
 	line "me…"
-	done
-
-SuperNerdLuisAfterText:
-	text "It's so thrilling"
-	line "to be inside a"
-	cont "volcano!"
-
-	para "But scary at the"
-	line "same time."
 	done
 
 CinnabarVolcano1FBoulderFellText:

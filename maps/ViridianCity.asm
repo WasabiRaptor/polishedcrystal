@@ -1,39 +1,37 @@
 ViridianCity_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, ViridianCityFlyPoint
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, ViridianCityFlyPoint
+	db 8 ; warp events
+	warp_event 32,  7, VIRIDIAN_GYM, 1
+	warp_event 21,  5, VIRIDIAN_NICKNAME_SPEECH_HOUSE, 1
+	warp_event 23, 15, TRAINER_HOUSE_1F, 1
+	warp_event 29, 19, VIRIDIAN_MART, 2
+	warp_event 23, 25, VIRIDIAN_POKECENTER_1F, 1
+	warp_event 20, 33, ROUTE_1_VIRIDIAN_GATE, 1
+	warp_event 21, 33, ROUTE_1_VIRIDIAN_GATE, 2
+	warp_event 21,  9, VIRIDIAN_SCHOOL_HOUSE, 1
 
-ViridianCity_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 8
-	warp_def $7, $20, 1, VIRIDIAN_GYM
-	warp_def $5, $15, 1, VIRIDIAN_NICKNAME_SPEECH_HOUSE
-	warp_def $f, $17, 1, TRAINER_HOUSE_1F
-	warp_def $13, $1d, 2, VIRIDIAN_MART
-	warp_def $19, $17, 1, VIRIDIAN_POKECENTER_1F
-	warp_def $21, $1c, 1, ROUTE_1_VIRIDIAN_GATE
-	warp_def $21, $1d, 2, ROUTE_1_VIRIDIAN_GATE
-	warp_def $9, $15, 1, VIRIDIAN_SCHOOL_HOUSE
+	db 5 ; bg events
+	bg_event 17, 17, SIGNPOST_JUMPTEXT, ViridianCitySignText
+	bg_event 27,  7, SIGNPOST_JUMPTEXT, ViridianGymSignText
+	bg_event 19,  1, SIGNPOST_JUMPTEXT, ViridianCityTrainerTips1Text
+	bg_event 21, 29, SIGNPOST_JUMPTEXT, ViridianCityTrainerTips2Text
+	bg_event 21, 15, SIGNPOST_JUMPTEXT, TrainerHouseSignText
 
-.XYTriggers: db 0
-
-.Signposts: db 4
-	signpost 17, 17, SIGNPOST_READ, ViridianCitySign
-	signpost 7, 27, SIGNPOST_READ, ViridianGymSign
-	signpost 1, 19, SIGNPOST_READ, ViridianCityWelcomeSign
-	signpost 15, 21, SIGNPOST_READ, TrainerHouseSign
-
-.PersonEvents: db 8
-	person_event SPRITE_GRAMPS, 5, 18, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrampsScript_0x1a9a4c, -1
-	person_event SPRITE_GRAMPS, 8, 32, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, GrampsScript_0x1a9a61, EVENT_BLUE_IN_CINNABAR
-	person_event SPRITE_GRAMPS, 8, 30, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, GrampsScript_0x1a9a61, EVENT_VIRIDIAN_GYM_BLUE
-	person_event SPRITE_FISHER, 23, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, FisherScript_0x1a9a75, -1
-	person_event SPRITE_BUG_CATCHER, 21, 17, SPRITEMOVEDATA_WANDER, 3, 3, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, BugCatcherScript_0x1a9a90, -1
-	person_event SPRITE_YOUNGSTER, 23, 31, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ViridianCityYoungsterScript, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 4, 14, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_VIRIDIAN_CITY_CUT_TREE_1
-	person_event SPRITE_BALL_CUT_FRUIT, 22, 8, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_VIRIDIAN_CITY_CUT_TREE_2
+	db 8 ; object events
+	object_event 18,  5, SPRITE_GRAMPS, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrampsScript_0x1a9a4c, -1
+	object_event 32,  8, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, GrampsScript_0x1a9a61, EVENT_BLUE_IN_CINNABAR
+	object_event 30,  8, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, GrampsScript_0x1a9a61, EVENT_VIRIDIAN_GYM_BLUE
+	object_event  6, 23, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, FisherScript_0x1a9a75, -1
+	object_event 17, 21, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_WANDER, 3, 3, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x1a9daa, -1
+	object_event 31, 23, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 2, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, ViridianCityYoungsterText, -1
+	cuttree_event 14,  4, EVENT_VIRIDIAN_CITY_CUT_TREE_1
+	cuttree_event  8, 22, EVENT_VIRIDIAN_CITY_CUT_TREE_2
 
 ViridianCityFlyPoint:
 	setflag ENGINE_FLYPOINT_VIRIDIAN
@@ -44,33 +42,13 @@ GrampsScript_0x1a9a4c:
 	opentext
 	writetext UnknownText_0x1a9aa5
 	yesorno
-	iffalse UnknownScript_0x1a9a5b
-	writetext UnknownText_0x1a9b6f
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x1a9a5b:
-	writetext UnknownText_0x1a9bb7
-	waitbutton
-	closetext
-	end
+	iffalse_jumpopenedtext UnknownText_0x1a9bb7
+	jumpopenedtext UnknownText_0x1a9b6f
 
 GrampsScript_0x1a9a61:
-	faceplayer
-	opentext
 	checkevent EVENT_BLUE_IN_CINNABAR
-	iftrue .BlueReturned
-	writetext UnknownText_0x1a9c11
-	waitbutton
-	closetext
-	end
-
-.BlueReturned:
-	writetext UnknownText_0x1a9c7e
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer UnknownText_0x1a9c7e
+	jumptextfaceplayer UnknownText_0x1a9c11
 
 FisherScript_0x1a9a75:
 	faceplayer
@@ -91,43 +69,16 @@ ViridianCityTutorDreamEaterScript:
 	writebyte DREAM_EATER
 	writetext Text_ViridianCityTutorClear
 	special Special_MoveTutor
-	if_equal $0, .TeachMove
+	ifequal $0, .TeachMove
 .TutorRefused
-	writetext Text_ViridianCityTutorRefused
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_ViridianCityTutorRefused
 
 .NoSilverLeaf
-	writetext Text_ViridianCityTutorNoSilverLeaf
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_ViridianCityTutorNoSilverLeaf
 
 .TeachMove
 	takeitem SILVER_LEAF
-	writetext Text_ViridianCityTutorTaught
-	waitbutton
-	closetext
-	end
-
-BugCatcherScript_0x1a9a90:
-	jumptextfaceplayer UnknownText_0x1a9daa
-
-ViridianCityYoungsterScript:
-	jumptextfaceplayer ViridianCityYoungsterText
-
-ViridianCitySign:
-	jumptext ViridianCitySignText
-
-ViridianGymSign:
-	jumptext ViridianGymSignText
-
-ViridianCityWelcomeSign:
-	jumptext ViridianCityWelcomeSignText
-
-TrainerHouseSign:
-	jumptext TrainerHouseSignText
+	jumpopenedtext Text_ViridianCityTutorTaught
 
 UnknownText_0x1a9aa5:
 	text "Hey, kid! I just"
@@ -283,12 +234,30 @@ ViridianGymSignText:
 	line "text is illegible…"
 	done
 
-ViridianCityWelcomeSignText:
-	text "Welcome to"
-	line "Viridian City,"
+ViridianCityTrainerTips1Text:
+	text "Trainer Tips"
 
-	para "The Gateway to"
-	line "Indigo Plateau"
+	para "Catch #mon"
+	line "and expand your"
+	cont "collection!"
+
+	para "The more you have,"
+	line "the easier it is"
+	cont "to fight!"
+	done
+
+ViridianCityTrainerTips2Text:
+	text "Trainer Tips"
+
+	para "The world is a"
+	line "big place!"
+
+	para "Don't just run or"
+	line "Fly everywhere--"
+	cont "look around you!"
+
+	para "You'll find new and"
+	line "exciting things!"
 	done
 
 TrainerHouseSignText:

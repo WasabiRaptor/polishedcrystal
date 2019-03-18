@@ -1,29 +1,26 @@
 EcruteakShrineInside_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  5, 11, ECRUTEAK_SHRINE_OUTSIDE, 1
+	warp_event  6, 11, ECRUTEAK_SHRINE_OUTSIDE, 1
 
-EcruteakShrineInside_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $b, $5, 1, ECRUTEAK_SHRINE_OUTSIDE
-	warp_def $b, $6, 1, ECRUTEAK_SHRINE_OUTSIDE
+	db 2 ; bg events
+	bg_event  5,  6, SIGNPOST_JUMPTEXT, EcruteakShrineInsideAltarText
+	bg_event  6,  6, SIGNPOST_JUMPTEXT, EcruteakShrineInsideAltarText
 
-.XYTriggers: db 0
+	db 5 ; object events
+	object_event  7,  6, SPRITE_SABRINA, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakShrineInsideReiScript, -1
+	object_event  3,  8, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, EcruteakShrineInsideGrampsText, -1
+	object_event 10,  5, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, EcruteakShrineInsideSageText, -1
+	object_event  1,  6, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, EcruteakShrineInsideGrannyText, -1
+	object_event 10,  3, SPRITE_FURRET, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
 
-.Signposts: db 2
-	signpost 6, 5, SIGNPOST_READ, EcruteakShrineInsideAltarScript
-	signpost 6, 6, SIGNPOST_READ, EcruteakShrineInsideAltarScript
-
-.PersonEvents: db 6
-	person_event SPRITE_SABRINA, 6, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakShrineInsideReiScript, -1
-	person_event SPRITE_GRAMPS, 8, 3, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakShrineInsideGrampsScript, -1
-	person_event SPRITE_SAGE, 5, 10, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EcruteakShrineInsideSageScript, -1
-	person_event SPRITE_GRANNY, 6, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, EcruteakShrineInsideGrannyScript, -1
-	person_event SPRITE_FURRET, 2, 10, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const ECRUTEAKSHRINEINSIDE_REI
 
 EcruteakShrineInsideReiScript:
@@ -32,22 +29,24 @@ EcruteakShrineInsideReiScript:
 	checkflag ENGINE_DAILY_SHRINE_VISIT
 	iftrue .ReiDone
 	writetext EcruteakShrineInsideReiGreetingText
-	loadmenudata .ReiMenuDataHeader
+	loadmenu .ReiMenuDataHeader
 	verticalmenu
 	closewindow
-	if_equal $1, .ReiBless
-	if_equal $2, .ReiBattle
+	ifequal $1, .ReiBless
+	ifequal $2, .ReiBattle
 	jump .ReiCancel
 
 .ReiBless
 	writetext EcruteakShrineInsideReiBlessText
 	buttonsound
 	special Special_ReiBlessing
-	if_equal $0, .ReiCancel
-	if_equal $1, .EggBlessing
+	ifequal $0, .ReiCancel
+	ifequal $1, .EggBlessing
 	setflag ENGINE_DAILY_SHRINE_VISIT
 	writetext EcruteakShrineInsideReiBlessingText
 	special PlayCurMonCry
+	waitbutton
+	writetext EcruteakShrineInsideHappinessText
 	waitbutton
 	jump .ReiDone
 
@@ -59,7 +58,7 @@ EcruteakShrineInsideReiScript:
 	winlosstext EcruteakShrineInsideReiBeatenText, 0
 	setlasttalked ECRUTEAKSHRINEINSIDE_REI
 	checkcode VAR_BADGES
-	if_equal 16, .Battle3
+	ifequal 16, .Battle3
 	checkevent EVENT_BEAT_ELITE_FOUR
 	iftrue .Battle2
 	loadtrainer REI, 1
@@ -83,22 +82,13 @@ EcruteakShrineInsideReiScript:
 	opentext
 
 .ReiDone
-	writetext EcruteakShrineInsideReiComeAgainText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext EcruteakShrineInsideReiComeAgainText
 
 .ReiCancel
-	writetext EcruteakShrineInsideReiCancelText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext EcruteakShrineInsideReiCancelText
 
 .EggBlessing
-	writetext EcruteakShrineInsideReiBlessEggText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext EcruteakShrineInsideReiBlessEggText
 
 .ReiMenuDataHeader:
 	db $40 ; flags
@@ -113,18 +103,6 @@ EcruteakShrineInsideReiScript:
 	db "Blessing@"
 	db "Battle@"
 	db "Cancel@"
-
-EcruteakShrineInsideGrampsScript:
-	jumptextfaceplayer EcruteakShrineInsideGrampsText
-
-EcruteakShrineInsideSageScript:
-	jumptextfaceplayer EcruteakShrineInsideSageText
-
-EcruteakShrineInsideGrannyScript:
-	jumptextfaceplayer EcruteakShrineInsideGrannyText
-
-EcruteakShrineInsideAltarScript:
-	jumptext EcruteakShrineInsideAltarText
 
 EcruteakShrineInsideReiGreetingText:
 	text "Rei: Oh, hello."
@@ -151,8 +129,14 @@ EcruteakShrineInsideReiBlessingText:
 	cont "peace."
 	done
 
+EcruteakShrineInsideHappinessText:
+	text_from_ram wStringBuffer3
+	text " looks"
+	line "content."
+	done
+
 EcruteakShrineInsideReiBlessEggText:
-	text "Rei: I'm can't"
+	text "Rei: I can't"
 	line "bless an Egg."
 	done
 

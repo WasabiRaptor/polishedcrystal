@@ -1,51 +1,36 @@
 Route2North_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event 15, 19, ROUTE_2_NUGGET_SPEECH_HOUSE, 1
+	warp_event 16, 35, ROUTE_2_GATE, 1
+	warp_event 17, 35, ROUTE_2_GATE, 2
+	warp_event 12,  9, DIGLETTS_CAVE, 3
+	warp_event  1, 11, VIRIDIAN_FOREST_PEWTER_GATE, 3
+	warp_event  2, 11, VIRIDIAN_FOREST_PEWTER_GATE, 4
 
-Route2North_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $13, $f, 1, ROUTE_2_NUGGET_SPEECH_HOUSE
-	warp_def $23, $10, 1, ROUTE_2_GATE
-	warp_def $23, $11, 2, ROUTE_2_GATE
-	warp_def $9, $c, 3, DIGLETTS_CAVE
-	warp_def $b, $1, 3, VIRIDIAN_FOREST_PEWTER_GATE
-	warp_def $b, $2, 4, VIRIDIAN_FOREST_PEWTER_GATE
+	db 1 ; bg events
+	bg_event 11, 11, SIGNPOST_JUMPTEXT, UnknownText_0x1ac49f
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event  6,  6, SPRITE_BUG_MANIAC, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBug_maniacEd, -1
+	itemball_event 19,  4, CARBOS, 1, EVENT_ROUTE_2_CARBOS
+	fruittree_event  7, 13, FRUITTREE_ROUTE_2, LUM_BERRY
+	cuttree_event  5, 10, EVENT_ROUTE_2_CUT_TREE_1
+	cuttree_event 15, 22, EVENT_ROUTE_2_CUT_TREE_2
+	object_event 12, 10, SPRITE_COOLTRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Route2NorthCooltrainermText, EVENT_VERMILION_CITY_SNORLAX
 
-.Signposts: db 1
-	signpost 11, 11, SIGNPOST_READ, MapRoute2Signpost1Script
+GenericTrainerBug_maniacEd:
+	generictrainer BUG_MANIAC, ED, EVENT_BEAT_BUG_MANIAC_ED, Bug_maniacEdSeenText, Bug_maniacEdBeatenText
 
-.PersonEvents: db 6
-	person_event SPRITE_BUG_MANIAC, 6, 6, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBug_maniacEd, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 4, 19, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, CARBOS, 1, EVENT_ROUTE_2_CARBOS
-	person_event SPRITE_BALL_CUT_FRUIT, 13, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FruitTreeScript_0x1ac306, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 10, 5, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_2_CUT_TREE_1
-	person_event SPRITE_BALL_CUT_FRUIT, 22, 15, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_2_CUT_TREE_2
-	person_event SPRITE_COOLTRAINER_M, 10, 12, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route2NorthCooltrainermScript, EVENT_VERMILION_CITY_SNORLAX
-
-TrainerBug_maniacEd:
-	trainer EVENT_BEAT_BUG_MANIAC_ED, BUG_MANIAC, ED, Bug_maniacEdSeenText, Bug_maniacEdBeatenText, 0, Bug_maniacEdScript
-
-Bug_maniacEdScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ac3cf
-	waitbutton
-	closetext
-	end
-
-Route2NorthCooltrainermScript:
-	jumptextfaceplayer Route2NorthCooltrainermText
-
-MapRoute2Signpost1Script:
-	jumptext UnknownText_0x1ac49f
-
-FruitTreeScript_0x1ac306:
-	fruittree FRUITTREE_ROUTE_2
+	text "They'll really"
+	line "sting when you"
+	cont "take a bath."
+	done
 
 Bug_maniacEdSeenText:
 	text "If you walk in"
@@ -57,12 +42,6 @@ Bug_maniacEdSeenText:
 
 Bug_maniacEdBeatenText:
 	text "Ouch, ouch, ouch!"
-	done
-
-UnknownText_0x1ac3cf:
-	text "They'll really"
-	line "sting when you"
-	cont "take a bath."
 	done
 
 Route2NorthCooltrainermText:

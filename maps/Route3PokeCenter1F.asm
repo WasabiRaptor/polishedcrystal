@@ -1,42 +1,42 @@
 Route3PokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, ROUTE_3, 2
+	warp_event  6,  7, ROUTE_3, 2
+	warp_event  0,  7, POKECENTER_2F, 1
 
-Route3PokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 2, ROUTE_3
-	warp_def $7, $6, 2, ROUTE_3
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalKarenScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalKarenScript
-
-.PersonEvents: db 4
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route3PokeCenter1FNurseScript, -1
-	person_event SPRITE_POKEFAN_M, 4, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, Route3PokeCenter1FPokefanM1Script, -1
-	person_event SPRITE_POKEFAN_M, 5, 2, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, Route3PokeCenter1FPokefanM2Script, -1
-	person_event SPRITE_YOUNGSTER, 3, 11, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, Route3PokeCenter1FYoungsterScript, -1
-
-Route3PokeCenter1FNurseScript:
-	jumpstd pokecenternurse
-
-Route3PokeCenter1FPokefanM1Script:
-	jumptextfaceplayer Route3PokeCenter1FPokefanM1Text
-
-Route3PokeCenter1FPokefanM2Script:
-	jumptextfaceplayer Route3PokeCenter1FPokefanM2Text
-
-Route3PokeCenter1FYoungsterScript:
-	jumptextfaceplayer Route3PokeCenter1FYoungsterText
+	db 4 ; object events
+	pc_nurse_event  5, 1
+	object_event  9,  4, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_COMMAND, jumptextfaceplayer, Route3PokeCenter1FPokefanM1Text, -1
+	object_event  2,  5, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, Route3PokeCenter1FPokefanM2Text, -1
+	object_event 11,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, Route3PokeCenter1FYoungsterText, -1
 
 PokemonJournalKarenScript:
 	setflag ENGINE_READ_KAREN_JOURNAL
-	jumptext PokemonJournalKarenText
+	thistext
+
+	text "#mon Journal"
+
+	para "Special Feature:"
+	line "Elite Four Karen!"
+
+	para "Karen supposedly"
+	line "began training"
+
+	para "Dark-type #mon"
+	line "to help overcome"
+
+	para "their sinister"
+	line "reputation."
+	done
 
 Route3PokeCenter1FPokefanM1Text:
 	text "A few years ago"
@@ -78,20 +78,4 @@ Route3PokeCenter1FYoungsterText:
 	para "You never know who"
 	line "or what you'll en-"
 	cont "counter."
-	done
-
-PokemonJournalKarenText:
-	text "#mon Journal"
-
-	para "Special Feature:"
-	line "Elite Four Karen!"
-
-	para "Karen supposedly"
-	line "began training"
-
-	para "Dark-type #mon"
-	line "to help overcome"
-
-	para "their sinister"
-	line "reputation."
 	done

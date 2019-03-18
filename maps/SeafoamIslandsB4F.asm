@@ -1,31 +1,28 @@
 SeafoamIslandsB4F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event  3,  3, SEAFOAM_ISLANDS_B3F, 5
+	warp_event  7, 11, SEAFOAM_ISLANDS_B3F, 6
+	warp_event 25,  7, SEAFOAM_ISLANDS_B3F, 7
+	warp_event 27,  2, SEAFOAM_ISLANDS_B3F, 8
+	warp_event 31, 13, SEAFOAM_ISLANDS_B3F, 9
+	warp_event 37, 13, SEAFOAM_ISLANDS_B3F, 10
 
-SeafoamIslandsB4F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $3, $3, 5, SEAFOAM_ISLANDS_B3F
-	warp_def $b, $7, 6, SEAFOAM_ISLANDS_B3F
-	warp_def $7, $19, 7, SEAFOAM_ISLANDS_B3F
-	warp_def $2, $1b, 8, SEAFOAM_ISLANDS_B3F
-	warp_def $d, $1f, 9, SEAFOAM_ISLANDS_B3F
-	warp_def $d, $25, 10, SEAFOAM_ISLANDS_B3F
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 5 ; object events
+	object_event 22, 13, SPRITE_ARTICUNO, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, SeafoamIslandsArticuno, EVENT_SEAFOAM_ISLANDS_ARTICUNO
+	object_event 16, 16, SPRITE_LAPRAS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_FINAL_BIRD_SURF
+	object_event 21, 16, SPRITE_LAWRENCE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_FINAL_BIRD
+	itemball_event 33,  7, NEVERMELTICE, 1, EVENT_SEAFOAM_ISLANDS_B4F_NEVERMELTICE
+	itemball_event 23,  2, ULTRA_BALL, 1, EVENT_SEAFOAM_ISLANDS_B4F_ULTRA_BALL
 
-.Signposts: db 0
-
-.PersonEvents: db 5
-	person_event SPRITE_ARTICUNO, 13, 22, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SeafoamIslandsArticuno, EVENT_SEAFOAM_ISLANDS_ARTICUNO
-	person_event SPRITE_LAPRAS, 16, 16, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_FINAL_BIRD_SURF
-	person_event SPRITE_LAWRENCE, 16, 21, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_FINAL_BIRD
-	person_event SPRITE_BALL_CUT_FRUIT, 7, 33, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, NEVERMELTICE, 1, EVENT_SEAFOAM_ISLANDS_B4F_NEVERMELTICE
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 23, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ULTRA_BALL, 1, EVENT_SEAFOAM_ISLANDS_B4F_ULTRA_BALL
-
-const_value set 2
+	const_def 1 ; object constants
 	const SEAFOAMISLANDSB4F_ARTICUNO
 	const SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	const SEAFOAMISLANDSB4F_LAWRENCE
@@ -35,57 +32,54 @@ SeafoamIslandsB4FLawrenceEncounterScript:
 	special Special_FadeOutMusic
 	pause 15
 	checkcode VAR_FACING
-	if_equal UP, .up
-	if_equal DOWN, .down
-	if_equal LEFT, .left
+	ifequal UP, .up
+	ifequal DOWN, .down
+	ifequal LEFT, .left
 .right
 	appear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE_SURF, SeafoamIslandsB4FMovementData_LawrenceSurfApproach1
-	spriteface SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
+	turnobject SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
 	disappear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	appear SEAFOAMISLANDSB4F_LAWRENCE
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE, SeafoamIslandsB4FMovementData_LawrenceApproach
-	spriteface PLAYER, DOWN
+	turnobject PLAYER, DOWN
 	jump .continue
 .up
-	moveperson SEAFOAMISLANDSB4F_LAWRENCE_SURF, 17, 16
+	moveobject SEAFOAMISLANDSB4F_LAWRENCE_SURF, 17, 16
 	appear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE_SURF, SeafoamIslandsB4FMovementData_LawrenceSurfApproach2
-	spriteface SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
+	turnobject SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
 	disappear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	appear SEAFOAMISLANDSB4F_LAWRENCE
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE, SeafoamIslandsB4FMovementData_LawrenceApproach
-	spriteface SEAFOAMISLANDSB4F_LAWRENCE, RIGHT
-	spriteface PLAYER, LEFT
+	turnobject SEAFOAMISLANDSB4F_LAWRENCE, RIGHT
+	turnobject PLAYER, LEFT
 	jump .continue
 .down
-	moveperson SEAFOAMISLANDSB4F_LAWRENCE_SURF, 17, 16
+	moveobject SEAFOAMISLANDSB4F_LAWRENCE_SURF, 17, 16
 	appear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE_SURF, SeafoamIslandsB4FMovementData_LawrenceSurfApproach2
-	spriteface SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
+	turnobject SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
 	disappear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	appear SEAFOAMISLANDSB4F_LAWRENCE
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE, SeafoamIslandsB4FMovementData_LawrenceApproach
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE, SeafoamIslandsB4FMovementData_LawrenceContinueDown
-	spriteface SEAFOAMISLANDSB4F_LAWRENCE, RIGHT
-	spriteface PLAYER, LEFT
+	turnobject SEAFOAMISLANDSB4F_LAWRENCE, RIGHT
+	turnobject PLAYER, LEFT
 	jump .continue
 .left
-	moveperson SEAFOAMISLANDSB4F_LAWRENCE_SURF, 18, 16
+	moveobject SEAFOAMISLANDSB4F_LAWRENCE_SURF, 18, 16
 	appear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE_SURF, SeafoamIslandsB4FMovementData_LawrenceSurfApproach3
-	spriteface SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
+	turnobject SEAFOAMISLANDSB4F_LAWRENCE_SURF, UP
 	disappear SEAFOAMISLANDSB4F_LAWRENCE_SURF
 	appear SEAFOAMISLANDSB4F_LAWRENCE
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE, SeafoamIslandsB4FMovementData_LawrenceApproach
 	applymovement SEAFOAMISLANDSB4F_LAWRENCE, SeafoamIslandsB4FMovementData_LawrenceContinueLeft
 .continue
 	playmusic MUSIC_ZINNIA_ENCOUNTER_ORAS
-	opentext
-	writetext SeafoamIslandsB4FLawrenceSpeechText
-	waitbutton
-	closetext
-	spriteface SEAFOAMISLANDSB4F_LAWRENCE, UP
+	showtext SeafoamIslandsB4FLawrenceSpeechText
+	turnobject SEAFOAMISLANDSB4F_LAWRENCE, UP
 	opentext
 	writetext SeafoamIslandsB4FLawrenceEscapeRopeText
 	pause 15
@@ -175,7 +169,7 @@ SeafoamIslandsB4FLawrenceSpeechText:
 
 	para "I'll show you that"
 	line "I deserve to own"
-	cont "those Pokemon."
+	cont "those #mon."
 	done
 
 SeafoamIslandsB4FLawrenceEscapeRopeText:

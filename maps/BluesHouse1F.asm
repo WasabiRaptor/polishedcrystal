@@ -1,90 +1,28 @@
 BluesHouse1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  2,  7, PALLET_TOWN, 2
+	warp_event  3,  7, PALLET_TOWN, 2
+	warp_event  7,  0, BLUES_HOUSE_2F, 1
 
-BluesHouse1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $2, 2, PALLET_TOWN
-	warp_def $7, $3, 2, PALLET_TOWN
-	warp_def $0, $7, 1, BLUES_HOUSE_2F
+	db 1 ; bg events
+	bg_event  5,  1, SIGNPOST_UP, RedsHouse1FTVScript
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  2,  3, SPRITE_DAISY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DaisyScript, -1
 
-.Signposts: db 1
-	signpost 1, 5, SIGNPOST_READ, BluesHouse1FTV
-
-.PersonEvents: db 1
-	person_event SPRITE_DAISY, 3, 2, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DaisyScript_0x19b0d0, -1
-
-DaisyScript_0x19b0d0:
-	faceplayer
-	opentext
+DaisyScript:
 	checkcode VAR_HOUR
-	if_equal $f, UnknownScript_0x19b0de
-	writetext UnknownText_0x19b130
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x19b0de:
+	ifequal 15, .Massage
 	checkflag ENGINE_TEA_IN_BLUES_HOUSE
-	iftrue UnknownScript_0x19b11e
-	writetext UnknownText_0x19b1b6
-	yesorno
-	iffalse UnknownScript_0x19b124
-	writetext UnknownText_0x19b244
-	waitbutton
-	special Special_DaisyMassage
-	if_equal 0, UnknownScript_0x19b124
-	if_equal 1, UnknownScript_0x19b12a
-	setflag ENGINE_TEA_IN_BLUES_HOUSE
-	writetext UnknownText_0x19b266
-	waitbutton
-	closetext
-	special FadeOutPalettes
-	special SaveMusic
-	playmusic MUSIC_HEAL
-	pause 60
-	special FadeInPalettes
-	special RestoreMusic
-	opentext
-	writetext UnknownText_0x19b296
-	special PlayCurMonCry
-	buttonsound
-	writetext UnknownText_0x19b2aa
-	waitbutton
-	closetext
-	end
+	iftrue .After
+	thistextfaceplayer
 
-UnknownScript_0x19b11e:
-	writetext UnknownText_0x19b2fa
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x19b124:
-	writetext UnknownText_0x19b334
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x19b12a:
-	writetext UnknownText_0x19b377
-	waitbutton
-	closetext
-	end
-
-BluesHouse1FTV:
-	checkcode VAR_FACING
-	if_not_equal UP, .wrongside
-	jumptext BluesHouse1FTVText
-.wrongside
-	jumpstd tv
-
-UnknownText_0x19b130:
 	text "Daisy: Hi! My kid"
 	line "brother is the Gym"
 
@@ -98,7 +36,44 @@ UnknownText_0x19b130:
 	line "for the trainers."
 	done
 
-UnknownText_0x19b1b6:
+.Massage:
+	faceplayer
+	opentext
+	writetext .IntroText
+	yesorno
+	iffalse .NoMassage
+	writetext .QuestionText
+	waitbutton
+	special Special_DaisyMassage
+	ifequal 0, .NoMassage
+	ifequal 1, .EggMassage
+	setflag ENGINE_TEA_IN_BLUES_HOUSE
+	writetext .OkayText
+	waitbutton
+	closetext
+	special FadeOutPalettes
+	special SaveMusic
+	playmusic MUSIC_HEAL
+	pause 60
+	special FadeInPalettes
+	special RestoreMusic
+	opentext
+	writetext .LooksContentText
+	special PlayCurMonCry
+	buttonsound
+	thisopenedtext
+
+	text "Daisy: There you"
+	line "go! All done."
+
+	para "See? Doesn't it"
+	line "look nice?"
+
+	para "It's such a cute"
+	line "#mon."
+	done
+
+.IntroText:
 	text "Daisy: Hi! Good"
 	line "timing. I'm about"
 	cont "to have some tea."
@@ -113,35 +88,9 @@ UnknownText_0x19b1b6:
 	line "to groom one?"
 	done
 
-UnknownText_0x19b244:
-	text "Daisy: Which one"
-	line "should I groom?"
-	done
+.After:
+	thistextfaceplayer
 
-UnknownText_0x19b266:
-	text "Daisy: OK, I'll"
-	line "get it looking"
-	cont "nice in no time."
-	done
-
-UnknownText_0x19b296:
-	text_from_ram StringBuffer3
-	text " looks"
-	line "content."
-	done
-
-UnknownText_0x19b2aa:
-	text "Daisy: There you"
-	line "go! All done."
-
-	para "See? Doesn't it"
-	line "look nice?"
-
-	para "It's such a cute"
-	line "#mon."
-	done
-
-UnknownText_0x19b2fa:
 	text "Daisy: I always"
 	line "have tea around"
 
@@ -149,7 +98,9 @@ UnknownText_0x19b2fa:
 	line "join me."
 	done
 
-UnknownText_0x19b334:
+.NoMassage:
+	thistext
+
 	text "Daisy: You don't"
 	line "want to have one"
 
@@ -157,14 +108,27 @@ UnknownText_0x19b334:
 	line "just have tea."
 	done
 
-UnknownText_0x19b377:
+.QuestionText:
+	text "Daisy: Which one"
+	line "should I groom?"
+	done
+
+.OkayText:
+	text "Daisy: OK, I'll"
+	line "get it looking"
+	cont "nice in no time."
+	done
+
+.LooksContentText:
+	text_from_ram wStringBuffer3
+	text " looks"
+	line "content."
+	done
+
+.EggMassage:
+	thistext
+
 	text "Daisy: Oh, sorry."
 	line "I honestly can't"
 	cont "groom an Egg."
-	done
-
-BluesHouse1FTVText:
-	text "They have programs"
-	line "that aren't shown"
-	cont "in Johto…"
 	done

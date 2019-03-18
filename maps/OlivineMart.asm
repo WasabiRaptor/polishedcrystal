@@ -1,35 +1,20 @@
 OlivineMart_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, OLIVINE_CITY, 7
+	warp_event  3,  7, OLIVINE_CITY, 7
 
-OlivineMart_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 7, OLIVINE_CITY
-	warp_def $7, $3, 7, OLIVINE_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_CLERK, 3, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ClerkScript_0x9cac7, -1
-	person_event SPRITE_COOLTRAINER_F, 2, 6, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CooltrainerFScript_0x9cace, -1
-	person_event SPRITE_LASS, 6, 1, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LassScript_0x9cad1, -1
-
-ClerkScript_0x9cac7:
-	opentext
-	pokemart MARTTYPE_STANDARD, MART_OLIVINE
-	closetext
-	end
-
-CooltrainerFScript_0x9cace:
-	jumptextfaceplayer UnknownText_0x9cad4
-
-LassScript_0x9cad1:
-	jumptextfaceplayer UnknownText_0x9cb16
+	db 3 ; object events
+	mart_clerk_event  1,  3, MARTTYPE_STANDARD, MART_OLIVINE
+	object_event  6,  2, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9cad4, -1
+	object_event  1,  6, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9cb16, -1
 
 UnknownText_0x9cad4:
 	text "Do your #mon"

@@ -1,4 +1,4 @@
-MovementPointers: ; 5075
+MovementPointers:
 	dw Movement_turn_head_down        ; 00
 	dw Movement_turn_head_up          ; 01
 	dw Movement_turn_head_left        ; 02
@@ -71,7 +71,7 @@ MovementPointers: ; 5075
 	dw Movement_step_sleep_8          ; 45
 	dw Movement_step_sleep            ; 46
 	dw Movement_step_end              ; 47
-	dw Movement_48                    ; 48
+	dw Movement_step_resume           ; 48
 	dw Movement_remove_person         ; 49
 	dw Movement_step_loop             ; 4a
 	dw Movement_4b                    ; 4b
@@ -89,8 +89,14 @@ MovementPointers: ; 5075
 	dw Movement_rock_smash            ; 57
 	dw Movement_return_dig            ; 58
 	dw Movement_skyfall_top           ; 59
-; 5129
-
+	dw Movement_run_step_down         ; 5a
+	dw Movement_run_step_up           ; 5b
+	dw Movement_run_step_left         ; 5c
+	dw Movement_run_step_right        ; 5d
+	dw Movement_fast_step_down        ; 5e
+	dw Movement_fast_step_up          ; 5f
+	dw Movement_fast_step_left        ; 60
+	dw Movement_fast_step_right       ; 61
 
 Movement_teleport_from: ; 5129
 	ld hl, OBJECT_STEP_TYPE
@@ -204,7 +210,8 @@ Movement_step_loop: ; 51b8
 	jp ContinueReadingMovement
 ; 51c1
 
-Movement_step_end: ; 51c1
+Movement_step_resume:
+Movement_step_end:
 	call RestoreDefaultMovement
 	ld hl, OBJECT_MOVEMENTTYPE
 	add hl, bc
@@ -214,36 +221,12 @@ Movement_step_end: ; 51c1
 	add hl, bc
 	ld [hl], $0
 
-	ld hl, VramState
+	ld hl, wVramState
 	res 7, [hl]
 
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
-	ret
-; 51db
-
-Movement_48: ; 51db
-	call RestoreDefaultMovement
-	ld hl, OBJECT_MOVEMENTTYPE
-	add hl, bc
-	ld [hl], a
-
-	ld hl, OBJECT_MOVEMENT_BYTE_INDEX
-	add hl, bc
-	ld [hl], $0
-
-	call JumpMovementPointer
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld [hl], a
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_03
-
-	ld hl, VramState
-	res 7, [hl]
 	ret
 ; 51fd
 
@@ -256,7 +239,7 @@ Movement_remove_person: ; 51fd
 	ld [hl], -1
 
 .not_leading
-	ld hl, VramState
+	ld hl, wVramState
 	res 7, [hl]
 	ret
 ; 5210
@@ -270,7 +253,7 @@ Movement_4b: ; 5210
 	add hl, bc
 	ld [hl], STEP_TYPE_04
 
-	ld hl, VramState
+	ld hl, wVramState
 	res 7, [hl]
 	ret
 ; 5222
@@ -310,9 +293,8 @@ Movement_step_sleep_8: ; 523e
 Movement_step_sleep: ; 5242
 ; parameters:
 ;	duration (DecimalParam)
-
 	call JumpMovementPointer
-	jr Movement_step_sleep_common
+	; fallthrough
 
 Movement_step_sleep_common: ; 5247
 	ld hl, OBJECT_STEP_DURATION
@@ -448,7 +430,7 @@ Movement_turn_head_left: ; 52e6
 
 Movement_turn_head_right: ; 52ea
 	ld a, OW_RIGHT
-	jr TurnHead
+	; fallthrough
 
 TurnHead: ; 52ee
 	ld hl, OBJECT_FACING
@@ -465,66 +447,90 @@ TurnHead: ; 52ee
 	ret
 ; 5300
 
-Movement_slow_step_down: ; 5300
+Movement_slow_step_down:
 	ld a, STEP_SLOW << 2 | DOWN
-	jp NormalStep
-; 5305
+	jr Movement_do_step
 
-Movement_slow_step_up: ; 5305
+Movement_slow_step_up:
 	ld a, STEP_SLOW << 2 | UP
-	jp NormalStep
-; 530a
+	jr Movement_do_step
 
-Movement_slow_step_left: ; 530a
+Movement_slow_step_left:
 	ld a, STEP_SLOW << 2 | LEFT
-	jp NormalStep
-; 530f
+	jr Movement_do_step
 
-Movement_slow_step_right: ; 530f
+Movement_slow_step_right:
 	ld a, STEP_SLOW << 2 | RIGHT
-	jp NormalStep
-; 5314
+	jr Movement_do_step
 
-Movement_step_down: ; 5314
+Movement_step_down:
 	ld a, STEP_WALK << 2 | DOWN
-	jp NormalStep
-; 5319
+	jr Movement_do_step
 
-Movement_step_up: ; 5319
+Movement_step_up:
 	ld a, STEP_WALK << 2 | UP
-	jp NormalStep
-; 531e
+	jr Movement_do_step
 
-Movement_step_left: ; 531e
+Movement_step_left:
 	ld a, STEP_WALK << 2 | LEFT
-	jp NormalStep
-; 5323
+	jr Movement_do_step
 
-Movement_step_right: ; 5323
+Movement_step_right:
 	ld a, STEP_WALK << 2 | RIGHT
-	jp NormalStep
-; 5328
+	jr Movement_do_step
 
-Movement_big_step_down: ; 5328
+Movement_fast_step_down:
+	ld a, STEP_RUN << 2 | DOWN
+	jr Movement_do_step
+
+Movement_fast_step_up:
+	ld a, STEP_RUN << 2 | UP
+	jr Movement_do_step
+
+Movement_fast_step_left:
+	ld a, STEP_RUN << 2 | LEFT
+	jr Movement_do_step
+
+Movement_fast_step_right:
+	ld a, STEP_RUN << 2 | RIGHT
+	jr Movement_do_step
+
+Movement_big_step_down:
 	ld a, STEP_BIKE << 2 | DOWN
-	jp NormalStep
-; 532d
+	jr Movement_do_step
 
-Movement_big_step_up: ; 532d
+Movement_big_step_up:
 	ld a, STEP_BIKE << 2 | UP
-	jp NormalStep
-; 5332
+	jr Movement_do_step
 
-Movement_big_step_left: ; 5332
+Movement_big_step_left:
 	ld a, STEP_BIKE << 2 | LEFT
-	jp NormalStep
-; 5337
+	jr Movement_do_step
 
-Movement_big_step_right: ; 5337
+Movement_big_step_right:
 	ld a, STEP_BIKE << 2 | RIGHT
+Movement_do_step:
+	ld d, PERSON_ACTION_STEP
+Movement_normal_step:
 	jp NormalStep
-; 533c
 
+Movement_run_step_down:
+	ld a, STEP_RUN << 2 | DOWN  ; STEP_RUN
+	jr Movement_do_run
+
+Movement_run_step_up:
+	ld a, STEP_RUN << 2 | UP    ; STEP_RUN
+	jr Movement_do_run
+
+Movement_run_step_left:
+	ld a, STEP_RUN << 2 | LEFT  ; STEP_RUN
+	jr Movement_do_run
+
+Movement_run_step_right:
+	ld a, STEP_RUN << 2 | RIGHT ; STEP_RUN
+Movement_do_run:
+	ld d, PERSON_ACTION_RUN
+	jr Movement_normal_step
 
 Movement_turn_away_down: ; 533c
 	ld a, STEP_SLOW << 2 | DOWN
@@ -567,22 +573,22 @@ Movement_turn_in_right: ; 535f
 ; 5364
 
 Movement_turn_waterfall_down: ; 5364
-	ld a, STEP_BIKE << 2 | DOWN
+	ld a, STEP_WALK << 2 | DOWN
 	jp TurningStep
 ; 5369
 
 Movement_turn_waterfall_up: ; 5369
-	ld a, STEP_BIKE << 2 | UP
+	ld a, STEP_WALK << 2 | UP
 	jp TurningStep
 ; 536e
 
 Movement_turn_waterfall_left: ; 536e
-	ld a, STEP_BIKE << 2 | LEFT
+	ld a, STEP_WALK << 2 | LEFT
 	jp TurningStep
 ; 5373
 
 Movement_turn_waterfall_right: ; 5373
-	ld a, STEP_BIKE << 2 | RIGHT
+	ld a, STEP_WALK << 2 | RIGHT
 	jp TurningStep
 ; 5378
 
@@ -628,22 +634,22 @@ Movement_slide_step_right: ; 539b
 ; 53a0
 
 Movement_fast_slide_step_down: ; 53a0
-	ld a, STEP_BIKE << 2 | DOWN
+	ld a, STEP_RUN << 2 | DOWN
 	jp SlideStep
 ; 53a5
 
 Movement_fast_slide_step_up: ; 53a5
-	ld a, STEP_BIKE << 2 | UP
+	ld a, STEP_RUN << 2 | UP
 	jp SlideStep
 ; 53aa
 
 Movement_fast_slide_step_left: ; 53aa
-	ld a, STEP_BIKE << 2 | LEFT
+	ld a, STEP_RUN << 2 | LEFT
 	jp SlideStep
 ; 53af
 
 Movement_fast_slide_step_right: ; 53af
-	ld a, STEP_BIKE << 2 | RIGHT
+	ld a, STEP_RUN << 2 | RIGHT
 	jp SlideStep
 ; 53b4
 
@@ -723,7 +729,7 @@ Movement_turn_step_left: ; 53f8
 
 Movement_turn_step_right: ; 53fc
 	ld a, OW_RIGHT
-	jr TurnStep
+	; fallthrough
 
 TurnStep: ; 5400
 	ld hl, OBJECT_29 ; new facing
@@ -741,16 +747,19 @@ TurnStep: ; 5400
 ; 5412
 
 NormalStep: ; 5412
+	push de
 	call InitStep
 	call UpdateTallGrassFlags
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], PERSON_ACTION_STEP
+	pop de
+	ld [hl], d
 
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	bit INVISIBLE, [hl]
-	jr nz, .skip_grass
+	jr nz, .skip_effect
 
 	ld hl, OBJECT_NEXT_TILE
 	add hl, bc
@@ -759,13 +768,16 @@ NormalStep: ; 5412
 	jr z, .shake_grass
 	cp COLL_TALL_GRASS
 	jr z, .shake_grass
+
 	cp COLL_PUDDLE
-	jr nz, .skip_grass
+	jr nz, .skip_effect
+	call SplashPuddle
+	jr .skip_effect
 
 .shake_grass
 	call ShakeGrass
 
-.skip_grass
+.skip_effect
 	ld hl, wCenteredObject
 	ld a, [hMapObjectIndexBuffer]
 	cp [hl]
@@ -843,7 +855,7 @@ JumpStep: ; 548a
 
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
-	res 3, [hl]
+	res OVERHEAD, [hl]
 
 	ld hl, OBJECT_ACTION
 	add hl, bc

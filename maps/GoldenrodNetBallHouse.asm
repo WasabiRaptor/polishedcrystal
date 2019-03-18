@@ -1,44 +1,42 @@
 GoldenrodNetBallHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, GOLDENROD_CITY, 19
+	warp_event  3,  7, GOLDENROD_CITY, 19
 
-GoldenrodNetBallHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 19, GOLDENROD_CITY
-	warp_def $7, $3, 19, GOLDENROD_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_YOUNGSTER, 4, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, GoldenrodNetBallHouseYoungsterScript, -1
-	person_event SPRITE_BUG_CATCHER, 3, 6, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, GoldenrodNetBallHouseBugCatcherScript, -1
+	db 2 ; object events
+	object_event  2,  4, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, GoldenrodNetBallHouseYoungsterScript, -1
+	object_event  6,  3, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, GoldenrodNetBallHouseBugCatcherText, -1
 
 GoldenrodNetBallHouseYoungsterScript:
+	checkevent EVENT_GOT_NET_BALL_FROM_GOLDENROD
+	iftrue_jumptextfaceplayer .Text2
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_NET_BALL_FROM_GOLDENROD
-	iftrue .GotItem
-	writetext GoldenrodNetBallHouseYoungsterText1
+	writetext .Text1
 	buttonsound
 	verbosegiveitem NET_BALL
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_NET_BALL_FROM_GOLDENROD
-.GotItem:
-	writetext GoldenrodNetBallHouseYoungsterText2
-	waitbutton
-.Done:
-	closetext
-	end
+	thisopenedtext
 
-GoldenrodNetBallHouseBugCatcherScript:
-	jumptextfaceplayer GoldenrodNetBallHouseBugCatcherText
+.Text2:
+	text "Sometimes you get"
+	line "really lucky and"
+	cont "catch a #mon at"
 
-GoldenrodNetBallHouseYoungsterText1:
+	para "full HP. I love"
+	line "that feeling."
+	done
+
+.Text1:
 	text "I stocked up on"
 	line "Net Balls to catch"
 	cont "a Pineco, but got"
@@ -48,15 +46,6 @@ GoldenrodNetBallHouseYoungsterText1:
 
 	para "I won't be needing"
 	line "this anymore."
-	done
-
-GoldenrodNetBallHouseYoungsterText2:
-	text "Sometimes you get"
-	line "really lucky and"
-	cont "catch a #mon at"
-
-	para "full HP. I love"
-	line "that feeling."
 	done
 
 GoldenrodNetBallHouseBugCatcherText:

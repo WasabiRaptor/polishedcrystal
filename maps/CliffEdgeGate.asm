@@ -1,27 +1,21 @@
 CliffEdgeGate_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event 17, 19, CIANWOOD_CITY, 8
+	warp_event  3, 19, ROUTE_47, 1
 
-CliffEdgeGate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $13, $11, 8, CIANWOOD_CITY
-	warp_def $13, $3, 1, ROUTE_47
+	db 1 ; bg events
+	bg_event 17,  6, SIGNPOST_ITEM + BIG_PEARL, EVENT_CLIFF_EDGE_GATE_HIDDEN_BIG_PEARL
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 6, 17, SIGNPOST_ITEM, CliffEdgeGateHiddenBigPearl
-
-.PersonEvents: db 3
-	person_event SPRITE_RECEPTIONIST, 16, 11, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CliffEdgeGateReceptionistScript, EVENT_YELLOW_FOREST_ROCKET_TAKEOVER
-	person_event SPRITE_SCIENTIST, 4, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ProfOaksAide3Script, EVENT_YELLOW_FOREST_ROCKET_TAKEOVER
-	person_event SPRITE_ROCKET, 16, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerGruntM12, EVENT_CLEARED_YELLOW_FOREST
-
-CliffEdgeGateReceptionistScript:
-	jumptextfaceplayer CliffEdgeGateReceptionistText
+	db 3 ; object events
+	object_event 11, 16, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, CliffEdgeGateReceptionistText, EVENT_YELLOW_FOREST_ROCKET_TAKEOVER
+	object_event  3,  4, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ProfOaksAide3Script, EVENT_YELLOW_FOREST_ROCKET_TAKEOVER
+	object_event 17, 16, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerGruntM12, EVENT_CLEARED_YELLOW_FOREST
 
 ProfOaksAide3Script:
 	faceplayer
@@ -32,12 +26,9 @@ ProfOaksAide3Script:
 	waitbutton
 	count_seen_caught
 	checkcode VAR_DEXCAUGHT
-	if_greater_than 44, .HereYouGo
+	ifgreater 44, .HereYouGo
 .UhOh
-	writetext ProfOaksAide3UhOhText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide3UhOhText
 
 .HereYouGo
 	writetext ProfOaksAide3HereYouGoText
@@ -46,30 +37,21 @@ ProfOaksAide3Script:
 	iffalse .NoRoom
 	setevent EVENT_GOT_MACHO_BRACE_FROM_PROF_OAKS_AIDE
 .Explain
-	writetext ProfOaksAide3ExplainText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide3ExplainText
 
 .NoRoom
-	writetext ProfOaksAide3NoRoomText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide3NoRoomText
 
-TrainerGruntM12:
-	trainer EVENT_BEAT_ROCKET_GRUNTM_12, GRUNTM, 12, GruntM12SeenText, GruntM12BeatenText, 0, GruntM12Script
+GenericTrainerGruntM12:
+	generictrainer GRUNTM, 12, EVENT_BEAT_ROCKET_GRUNTM_12, GruntM12SeenText, GruntM12BeatenText
 
-GruntM12Script:
-	end_if_just_battled
-	opentext
-	writetext GruntM12AfterText
-	waitbutton
-	closetext
-	end
+	text "Yellow Forest is"
+	line "full of rare"
+	cont "#mon."
 
-CliffEdgeGateHiddenBigPearl:
-	dwb EVENT_CLIFF_EDGE_GATE_HIDDEN_BIG_PEARL, BIG_PEARL
+	para "We're nabbing them"
+	line "all for ourselves!"
+	done
 
 CliffEdgeGateReceptionistText:
 	text "Yellow Forest is"
@@ -161,11 +143,3 @@ GruntM12BeatenText:
 	line "to lose!"
 	done
 
-GruntM12AfterText:
-	text "Yellow Forest is"
-	line "full of rare"
-	cont "#mon."
-
-	para "We're nabbing them"
-	line "all for ourselves!"
-	done

@@ -1,17 +1,16 @@
 ; Event scripting commands.
 
-
 EnableScriptMode::
 	push af
 	ld a, SCRIPT_READ
-	ld [ScriptMode], a
+	ld [wScriptMode], a
 	pop af
 	ret
 
 ScriptEvents::
 	call StartScript
 .loop
-	ld a, [ScriptMode]
+	ld a, [wScriptMode]
 	ld hl, .modes
 	rst JumpTable
 	call CheckScript
@@ -30,27 +29,27 @@ EndScript:
 WaitScript:
 	call StopScript
 
-	ld hl, ScriptDelay
+	ld hl, wScriptDelay
 	dec [hl]
 	ret nz
 
-	farcall Function58b9
+	farcall ReleaseAllMapObjects
 
 	ld a, SCRIPT_READ
-	ld [ScriptMode], a
+	ld [wScriptMode], a
 	jp StartScript
 
 WaitScriptMovement:
 	call StopScript
 
-	ld hl, VramState
+	ld hl, wVramState
 	bit 7, [hl]
 	ret nz
 
-	farcall Function58b9
+	farcall ReleaseAllMapObjects
 
 	ld a, SCRIPT_READ
-	ld [ScriptMode], a
+	ld [wScriptMode], a
 	jp StartScript
 
 RunScriptCommand:
@@ -67,21 +66,21 @@ ScriptCommandTable:
 	dw Script_jump                       ; 03
 	dw Script_farjump                    ; 04
 	dw Script_ptjump                     ; 05
-	dw Script_if_equal                   ; 06
-	dw Script_if_not_equal               ; 07
+	dw Script_ifequal                    ; 06
+	dw Script_ifnotequal                 ; 07
 	dw Script_iffalse                    ; 08
 	dw Script_iftrue                     ; 09
-	dw Script_if_greater_than            ; 0a
-	dw Script_if_less_than               ; 0b
+	dw Script_ifgreater                  ; 0a
+	dw Script_ifless                     ; 0b
 	dw Script_jumpstd                    ; 0c
 	dw Script_callstd                    ; 0d
 	dw Script_callasm                    ; 0e
 	dw Script_special                    ; 0f
 	dw Script_ptcallasm                  ; 10
-	dw Script_checkmaptriggers           ; 11
-	dw Script_domaptrigger               ; 12
-	dw Script_checktriggers              ; 13
-	dw Script_dotrigger                  ; 14
+	dw Script_checkmapscene              ; 11
+	dw Script_setmapscene                ; 12
+	dw Script_checkscene                 ; 13
+	dw Script_setscene                   ; 14
 	dw Script_writebyte                  ; 15
 	dw Script_addvar                     ; 16
 	dw Script_random                     ; 17
@@ -117,143 +116,163 @@ ScriptCommandTable:
 	dw Script_setflag                    ; 35
 	dw Script_wildon                     ; 36
 	dw Script_wildoff                    ; 37
-	dw Script_xycompare                  ; 38
-	dw Script_warpmod                    ; 39
-	dw Script_blackoutmod                ; 3a
-	dw Script_warp                       ; 3b
-	dw Script_readmoney                  ; 3c
-	dw Script_readcoins                  ; 3d
-	dw Script_RAM2MEM                    ; 3e
-	dw Script_pokenamemem                ; 3f
-	dw Script_itemtotext                 ; 40
-	dw Script_mapnametotext              ; 41
-	dw Script_trainertotext              ; 42
-	dw Script_stringtotext               ; 43
-	dw Script_itemnotify                 ; 44
-	dw Script_pocketisfull               ; 45
-	dw Script_textbox                    ; 46
-	dw Script_refreshscreen              ; 47
-	dw Script_closetext                  ; 48
-	dw Script_farwritetext               ; 49
-	dw Script_writetext                  ; 4a
-	dw Script_repeattext                 ; 4b
-	dw Script_yesorno                    ; 4c
-	dw Script_loadmenudata               ; 4d
-	dw Script_closewindow                ; 4e
-	dw Script_jumptextfaceplayer         ; 4f
-	dw Script_farjumptext                ; 50
-	dw Script_jumptext                   ; 51
-	dw Script_waitbutton                 ; 52
-	dw Script_buttonsound                ; 53
-	dw Script_pokepic                    ; 54
-	dw Script_closepokepic               ; 55
-	dw Script__2dmenu                    ; 56
-	dw Script_verticalmenu               ; 57
-	dw Script_randomwildmon              ; 58
-	dw Script_loadmemtrainer             ; 59
-	dw Script_loadwildmon                ; 5a
-	dw Script_loadtrainer                ; 5b
-	dw Script_startbattle                ; 5c
-	dw Script_reloadmapafterbattle       ; 5d
-	dw Script_catchtutorial              ; 5e
-	dw Script_trainertext                ; 5f
-	dw Script_trainerflagaction          ; 60
-	dw Script_winlosstext                ; 61
-	dw Script_scripttalkafter            ; 62
-	dw Script_end_if_just_battled        ; 63
-	dw Script_check_just_battled         ; 64
-	dw Script_setlasttalked              ; 65
-	dw Script_applymovement              ; 66
-	dw Script_applymovement2             ; 67
-	dw Script_faceplayer                 ; 68
-	dw Script_faceperson                 ; 69
-	dw Script_variablesprite             ; 6a
-	dw Script_disappear                  ; 6b
-	dw Script_appear                     ; 6c
-	dw Script_follow                     ; 6d
-	dw Script_stopfollow                 ; 6e
-	dw Script_moveperson                 ; 6f
-	dw Script_writepersonxy              ; 70
-	dw Script_loademote                  ; 71
-	dw Script_showemote                  ; 72
-	dw Script_spriteface                 ; 73
-	dw Script_follownotexact             ; 74
-	dw Script_earthquake                 ; 75
-	dw Script_changemap                  ; 76
-	dw Script_changeblock                ; 77
-	dw Script_reloadmap                  ; 78
-	dw Script_reloadmappart              ; 79
-	dw Script_writecmdqueue              ; 7a
-	dw Script_delcmdqueue                ; 7b
-	dw Script_playmusic                  ; 7c
-	dw Script_encountermusic             ; 7d
-	dw Script_musicfadeout               ; 7e
-	dw Script_playmapmusic               ; 7f
-	dw Script_dontrestartmapmusic        ; 80
-	dw Script_cry                        ; 81
-	dw Script_playsound                  ; 82
-	dw Script_waitsfx                    ; 83
-	dw Script_warpsound                  ; 84
-	dw Script_specialsound               ; 85
-	dw Script_passtoengine               ; 86
-	dw Script_newloadmap                 ; 87
-	dw Script_pause                      ; 88
-	dw Script_deactivatefacing           ; 89
-	dw Script_priorityjump               ; 8a
-	dw Script_warpcheck                  ; 8b
-	dw Script_ptpriorityjump             ; 8c
-	dw Script_return                     ; 8d
-	dw Script_end                        ; 8e
-	dw Script_reloadandreturn            ; 8f
-	dw Script_end_all                    ; 90
-	dw Script_pokemart                   ; 91
-	dw Script_elevator                   ; 92
-	dw Script_trade                      ; 93
-	dw Script_askforphonenumber          ; 94
-	dw Script_phonecall                  ; 95
-	dw Script_hangup                     ; 96
-	dw Script_describedecoration         ; 97
-	dw Script_fruittree                  ; 98
-	dw Script_specialphonecall           ; 99
-	dw Script_checkphonecall             ; 9a
-	dw Script_verbosegiveitem            ; 9b
-	dw Script_verbosegiveitem2           ; 9c
-	dw Script_swarm                      ; 9d
-	dw Script_halloffame                 ; 9e
-	dw Script_credits                    ; 9f
-	dw Script_warpfacing                 ; a0
-	dw Script_battletowertext            ; a1
-	dw Script_landmarktotext             ; a2
-	dw Script_trainerclassname           ; a3
-	dw Script_name                       ; a4
-	dw Script_wait                       ; a5
-	dw Script_check_save                 ; a6
-	dw Script_count_seen_caught          ; a7
-	dw Script_trainerpic                 ; a8
-	dw Script_givetmhm                   ; a9
-	dw Script_checktmhm                  ; aa
-	dw Script_verbosegivetmhm            ; ab
-	dw Script_tmhmnotify                 ; ac
-	dw Script_tmhmtotext                 ; ad
-	dw Script_checkdarkness              ; ae
-	dw Script_checkunits                 ; af
-	dw Script_unowntypeface              ; b0
-	dw Script_restoretypeface            ; b1
-	dw Script_jumpstashedtext            ; b2
-	dw Script_jumpopenedtext             ; b3
+	dw Script_warpmod                    ; 38
+	dw Script_blackoutmod                ; 39
+	dw Script_warp                       ; 3a
+	dw Script_readmoney                  ; 3b
+	dw Script_readcoins                  ; 3c
+	dw Script_RAM2MEM                    ; 3d
+	dw Script_pokenamemem                ; 3e
+	dw Script_itemtotext                 ; 3f
+	dw Script_mapnametotext              ; 40
+	dw Script_trainertotext              ; 41
+	dw Script_stringtotext               ; 42
+	dw Script_itemnotify                 ; 43
+	dw Script_pocketisfull               ; 44
+	dw Script_opentext                   ; 45
+	dw Script_refreshscreen              ; 46
+	dw Script_closetext                  ; 47
+	dw Script_farwritetext               ; 48
+	dw Script_writetext                  ; 49
+	dw Script_repeattext                 ; 4a
+	dw Script_yesorno                    ; 4b
+	dw Script_loadmenu                   ; 4c
+	dw Script_closewindow                ; 4d
+	dw Script_jumptextfaceplayer         ; 4e
+	dw Script_farjumptext                ; 4f
+	dw Script_jumptext                   ; 50
+	dw Script_waitbutton                 ; 51
+	dw Script_buttonsound                ; 52
+	dw Script_pokepic                    ; 53
+	dw Script_closepokepic               ; 54
+	dw Script__2dmenu                    ; 55
+	dw Script_verticalmenu               ; 56
+	dw Script_randomwildmon              ; 57
+	dw Script_loadmemtrainer             ; 58
+	dw Script_loadwildmon                ; 59
+	dw Script_loadtrainer                ; 5a
+	dw Script_startbattle                ; 5b
+	dw Script_reloadmapafterbattle       ; 5c
+	dw Script_catchtutorial              ; 5d
+	dw Script_trainertext                ; 5e
+	dw Script_trainerflagaction          ; 5f
+	dw Script_winlosstext                ; 60
+	dw Script_scripttalkafter            ; 61
+	dw Script_end_if_just_battled        ; 62
+	dw Script_check_just_battled         ; 63
+	dw Script_setlasttalked              ; 64
+	dw Script_applymovement              ; 65
+	dw Script_applymovement2             ; 66
+	dw Script_faceplayer                 ; 67
+	dw Script_faceobject                 ; 68
+	dw Script_variablesprite             ; 69
+	dw Script_disappear                  ; 6a
+	dw Script_appear                     ; 6b
+	dw Script_follow                     ; 6c
+	dw Script_stopfollow                 ; 6d
+	dw Script_moveobject                 ; 6e
+	dw Script_writepersonxy              ; 6f
+	dw Script_loademote                  ; 70
+	dw Script_showemote                  ; 71
+	dw Script_turnobject                 ; 72
+	dw Script_follownotexact             ; 73
+	dw Script_earthquake                 ; 74
+	dw Script_changemap                  ; 75
+	dw Script_changeblock                ; 76
+	dw Script_reloadmap                  ; 77
+	dw Script_reloadmappart              ; 78
+	dw Script_writecmdqueue              ; 79
+	dw Script_delcmdqueue                ; 7a
+	dw Script_playmusic                  ; 7b
+	dw Script_encountermusic             ; 7c
+	dw Script_musicfadeout               ; 7d
+	dw Script_playmapmusic               ; 7e
+	dw Script_dontrestartmapmusic        ; 7f
+	dw Script_cry                        ; 80
+	dw Script_playsound                  ; 81
+	dw Script_waitsfx                    ; 82
+	dw Script_warpsound                  ; 83
+	dw Script_specialsound               ; 84
+	dw Script_passtoengine               ; 85
+	dw Script_newloadmap                 ; 86
+	dw Script_pause                      ; 87
+	dw Script_deactivatefacing           ; 88
+	dw Script_priorityjump               ; 89
+	dw Script_warpcheck                  ; 8a
+	dw Script_ptpriorityjump             ; 8b
+	dw Script_return                     ; 8c
+	dw Script_end                        ; 8d
+	dw Script_reloadandreturn            ; 8e
+	dw Script_endall                     ; 8f
+	dw Script_pokemart                   ; 90
+	dw Script_elevator                   ; 91
+	dw Script_trade                      ; 92
+	dw Script_askforphonenumber          ; 93
+	dw Script_phonecall                  ; 94
+	dw Script_hangup                     ; 95
+	dw Script_describedecoration         ; 96
+	dw Script_fruittree                  ; 97
+	dw Script_specialphonecall           ; 98
+	dw Script_checkphonecall             ; 99
+	dw Script_verbosegiveitem            ; 9a
+	dw Script_verbosegiveitem2           ; 9b
+	dw Script_swarm                      ; 9c
+	dw Script_halloffame                 ; 9d
+	dw Script_credits                    ; 9e
+	dw Script_warpfacing                 ; 9f
+	dw Script_battletowertext            ; a0
+	dw Script_landmarktotext             ; a1
+	dw Script_trainerclassname           ; a2
+	dw Script_name                       ; a3
+	dw Script_wait                       ; a4
+	dw Script_check_save                 ; a5
+	dw Script_count_seen_caught          ; a6
+	dw Script_trainerpic                 ; a7
+	dw Script_givetmhm                   ; a8
+	dw Script_checktmhm                  ; a9
+	dw Script_verbosegivetmhm            ; aa
+	dw Script_tmhmnotify                 ; ab
+	dw Script_tmhmtotext                 ; ac
+	dw Script_checkdarkness              ; ad
+	dw Script_checkunits                 ; ae
+	dw Script_unowntypeface              ; af
+	dw Script_restoretypeface            ; b0
+	dw Script_jumpstashedtext            ; b1
+	dw Script_jumpopenedtext             ; b2
+	dw Script_iftrue_jumptext            ; b3
+	dw Script_iffalse_jumptext           ; b4
+	dw Script_iftrue_jumptextfaceplayer  ; b5
+	dw Script_iffalse_jumptextfaceplayer ; b6
+	dw Script_iftrue_jumpopenedtext      ; b7
+	dw Script_iffalse_jumpopenedtext     ; b8
+	dw Script_thistext                   ; b9
+	dw Script_thistextfaceplayer         ; ba
+	dw Script_thisopenedtext             ; bb
+	dw Script_showtext                   ; bc
+	dw Script_showtextfaceplayer         ; bd
+	dw Script_applyonemovement           ; be
+	dw Script_showcrytext                ; bf
+	dw Script_endtext                    ; c0
+	dw Script_waitendtext                ; c1
+	dw Script_iftrue_endtext             ; c2
+	dw Script_iffalse_endtext            ; c3
+	dw Script_loadgrottomon              ; c4
+	dw Script_giveapricorn               ; c5
+	dw Script_paintingpic                ; c6
+	dw Script_checkegg                   ; c7
 
 StartScript:
-	ld hl, ScriptFlags
+	ld hl, wScriptFlags
 	set SCRIPT_RUNNING, [hl]
 	ret
 
 CheckScript:
-	ld hl, ScriptFlags
+	ld hl, wScriptFlags
 	bit SCRIPT_RUNNING, [hl]
 	ret
 
 StopScript:
-	ld hl, ScriptFlags
+	ld hl, wScriptFlags
 	res SCRIPT_RUNNING, [hl]
 	ret
 
@@ -271,11 +290,10 @@ Script_callasm:
 
 Script_special:
 ; parameters:
-;     predefined_script (MultiByteParam)
+;     predefined_script (SingleByteParam)
 	call GetScriptByte
 	ld e, a
-	call GetScriptByte
-	ld d, a
+	ld d, 0
 	farjp Special
 
 Script_ptcallasm:
@@ -293,26 +311,89 @@ Script_ptcallasm:
 	ld a, b
 	jp FarCall_hl
 
+Script_iftrue_jumptextfaceplayer:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	ld a, [wScriptVar]
+	and a
+	jr nz, Script_jumptextfaceplayer
+	jp SkipTwoScriptBytes
+
+Script_iffalse_jumptextfaceplayer:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	ld a, [wScriptVar]
+	and a
+	jp nz, SkipTwoScriptBytes
+; fallthrough
+
 Script_jumptextfaceplayer:
 ; parameters:
 ;     text_pointer (RawTextPointerLabelParam)
 	call _GetTextPointer
+	jr _Do_textfaceplayer
+
+Script_thistextfaceplayer:
+	call _GetThisTextPointer
+_Do_textfaceplayer:
 	ld b, BANK(JumpTextFacePlayerScript)
 	ld hl, JumpTextFacePlayerScript
 	jp ScriptJump
+
+Script_iftrue_jumptext:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	ld a, [wScriptVar]
+	and a
+	jr nz, Script_jumptext
+	jp SkipTwoScriptBytes
+
+Script_iffalse_jumptext:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	ld a, [wScriptVar]
+	and a
+	jp nz, SkipTwoScriptBytes
+; fallthrough
 
 Script_jumptext:
 ; parameters:
 ;     text_pointer (RawTextPointerLabelParam)
 	call _GetTextPointer
+	jr _Do_jumptext
+
+Script_thistext:
+	call _GetThisTextPointer
+_Do_jumptext:
 	ld b, BANK(JumpTextScript)
 	ld hl, JumpTextScript
 	jp ScriptJump
+
+Script_iftrue_jumpopenedtext:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	ld a, [wScriptVar]
+	and a
+	jr nz, Script_jumpopenedtext
+	jp SkipTwoScriptBytes
+
+Script_iffalse_jumpopenedtext:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	ld a, [wScriptVar]
+	and a
+	jp nz, SkipTwoScriptBytes
+; fallthrough
 
 Script_jumpopenedtext:
 ; parameters:
 ;     text_pointer (RawTextPointerLabelParam)
 	call _GetTextPointer
+	jr _Do_jumpopenedtext
+
+Script_thisopenedtext:
+	call _GetThisTextPointer
+_Do_jumpopenedtext:
 	ld b, BANK(JumpOpenedTextScript)
 	ld hl, JumpOpenedTextScript
 	jp ScriptJump
@@ -323,16 +404,23 @@ JumpTextScript:
 	opentext
 JumpOpenedTextScript:
 	repeattext -1, -1
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 _GetTextPointer:
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld [wScriptTextBank], a
 	call GetScriptByte
 	ld [wScriptTextAddr], a
 	call GetScriptByte
+	ld [wScriptTextAddr + 1], a
+	ret
+
+_GetThisTextPointer:
+	ld a, [wScriptBank]
+	ld [wScriptTextBank], a
+	ld a, [wScriptPos]
+	ld [wScriptTextAddr], a
+	ld a, [wScriptPos + 1]
 	ld [wScriptTextAddr + 1], a
 	ret
 
@@ -350,7 +438,7 @@ Script_farjumptext:
 	jp ScriptJump
 
 Script_jumpstashedtext:
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld [wScriptTextBank], a
 	ld a, [wStashedTextPointer]
 	ld [wScriptTextAddr], a
@@ -367,7 +455,7 @@ Script_writetext:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	jp MapTextbox
 
@@ -411,7 +499,7 @@ Script_buttonsound:
 	push af
 	ld a, $1
 	ld [hOAMUpdate], a
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	call ButtonSound
 	pop af
 	ld [hOAMUpdate], a
@@ -423,10 +511,10 @@ Script_yesorno:
 	jr c, .no
 	ld a, TRUE
 .no
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
-Script_loadmenudata:
+Script_loadmenu:
 ; parameters:
 ;     data (MenuDataPointerParam)
 	call GetScriptByte
@@ -434,7 +522,7 @@ Script_loadmenudata:
 	call GetScriptByte
 	ld h, a
 	ld de, LoadMenuDataHeader
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	call Call_a_de
 	jp UpdateSprites
 
@@ -449,36 +537,36 @@ Script_pokepic:
 	call GetScriptByte
 	and a
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	call GetScriptByte
-	ld [IsCurMonInParty], a
+	ld [wIsCurMonInParty], a
 	farjp Pokepic
 
 Script_closepokepic:
 	farjp ClosePokepic
 
 Script_verticalmenu:
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld hl, VerticalMenu
 	call FarCall_hl
 	ld a, [wMenuCursorY]
 	jr nc, .ok
 	xor a
 .ok
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script__2dmenu:
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld hl, _2DMenu
 	call FarCall_hl
 	ld a, [wMenuCursorBuffer]
 	jr nc, .ok
 	xor a
 .ok
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_battletowertext:
@@ -496,13 +584,12 @@ Script_verbosegiveitem:
 ;     quantity (DecimalParam)
 	call Script_giveitem
 	call CurItemName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	ld a, 1
 	call CopyConvertedText
 	ld b, BANK(GiveItemScript)
 	ld de, GiveItemScript
 	jp ScriptCall
-
 
 GiveItemScript:
 	writetext ReceivedItemText
@@ -522,7 +609,6 @@ ReceivedItemText:
 	text_jump UnknownText_0x1c4719
 	db "@"
 
-
 Script_verbosegiveitem2:
 ; parameters:
 ;     item (ItemLabelByte)
@@ -530,22 +616,22 @@ Script_verbosegiveitem2:
 	call GetScriptByte
 	cp -1
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
-	ld [CurItem], a
+	ld [wCurItem], a
 	call GetScriptByte
 	call GetVarAction
 	ld a, [de]
 	ld [wItemQuantityChangeBuffer], a
-	ld hl, NumItems
+	ld hl, wNumItems
 	call ReceiveItem
 	ld a, TRUE
 	jr c, .ok2
 	xor a
 .ok2
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call CurItemName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	ld a, 1
 	call CopyConvertedText
 	ld b, BANK(GiveItemScript)
@@ -577,12 +663,11 @@ Script_specialsound:
 	call PlaySFX
 	jp WaitSFX
 
-
 GetPocketName:
 	farcall CheckItemPocket
 	ld a, [wItemAttributeParamBuffer]
 	dec a
-	ld hl, .Pockets
+	ld hl, ItemPocketNames
 	and $7
 	add a
 	ld e, a
@@ -591,50 +676,30 @@ GetPocketName:
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	ld hl, StringBuffer3
+	ld hl, wStringBuffer3
 	jp CopyName2
 
-.Pockets:
-	dw .Item
-	dw .Medicine
-	dw .Ball
-	dw .TM ; impossible
-	dw .Berry
-	dw .Key
-
-.Item:
-	db "Item Pocket@"
-.Medicine:
-	db "Med.Pocket@"
-.Ball:
-	db "Ball Pocket@"
-.TM:
-	db "TM Pocket@"
-.Berry:
-	db "Berry Pocket@"
-.Key:
-	db "Key Pocket@"
+INCLUDE "data/items/pocket_names.asm"
 
 GetTMHMPocketName:
 	ld hl, .TMHMPocket
 	ld d, h
 	ld e, l
-	ld hl, StringBuffer3
+	ld hl, wStringBuffer3
 	jp CopyName2
 
 .TMHMPocket:
 	db "TM Pocket@"
 
 CurItemName:
-	ld a, [CurItem]
+	ld a, [wCurItem]
 	ld [wd265], a
 	jp GetItemName
 
 CurTMHMName:
-	ld a, [CurTMHM]
+	ld a, [wCurTMHM]
 	ld [wd265], a
 	jp GetTMHMName
-
 
 PutItemInPocketText:
 	text_jump UnknownText_0x1c472c
@@ -644,47 +709,48 @@ PocketIsFullText:
 	text_jump UnknownText_0x1c474b
 	db "@"
 
-
 Script_pokemart:
 ; parameters:
 ;     dialog_id (SingleByteParam)
-;     mart_id (MultiByteParam)
+;     mart_id (SingleByteParam)
 	call Script_faceplayer
-	call Script_textbox
+	call Script_opentext
 	call GetScriptByte
 	ld c, a
 	call GetScriptByte
-	ld d, 0
 	ld e, a
-	ld a, [ScriptBank]
+	ld d, 0
+	ld a, [wScriptBank]
 	ld b, a
 	farcall OpenMartDialog
-	call Script_closetext
-	jp Script_end
+	jp Script_endtext
 
 Script_elevator:
 ; parameters:
 ;     floor_list_pointer (PointerLabelParam)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
 	ld e, a
 	call GetScriptByte
 	ld d, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	farcall Elevator
 	ret c
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_trade:
 ; parameters:
 ;     trade_id (SingleByteParam)
+	call Script_faceplayer
+	call Script_opentext
 	call GetScriptByte
 	ld e, a
-	farjp NPCTrade
+	farcall NPCTrade
+	jp Script_waitendtext
 
 Script_phonecall:
 ; parameters:
@@ -693,7 +759,7 @@ Script_phonecall:
 	ld e, a
 	call GetScriptByte
 	ld d, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	farjp PhoneCall
 
@@ -718,7 +784,7 @@ Script_askforphonenumber:
 	call GetScriptByte
 	ld a, 2
 .done
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_describedecoration:
@@ -734,8 +800,11 @@ Script_describedecoration:
 Script_fruittree:
 ; parameters:
 ;     tree_id (SingleByteParam)
+;     fruit_id (SingleByteParam)
 	call GetScriptByte
-	ld [CurFruitTree], a
+	ld [wCurFruitTree], a
+	call GetScriptByte
+	ld [wCurFruit], a
 	ld b, BANK(FruitTreeScript)
 	ld hl, FruitTreeScript
 	jp ScriptJump
@@ -759,13 +828,13 @@ Script_trainertext:
 	call GetScriptByte
 	ld c, a
 	ld b, 0
-	ld hl, WalkingX
+	ld hl, wWalkingX
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [EngineBuffer1]
+	ld a, [wEngineBuffer1]
 	ld b, a
 	jp MapTextbox
 
@@ -774,7 +843,7 @@ Script_scripttalkafter:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [EngineBuffer1]
+	ld a, [wEngineBuffer1]
 	ld b, a
 	jp ScriptJump
 
@@ -782,8 +851,8 @@ Script_trainerflagaction:
 ; parameters:
 ;     action (SingleByteParam)
 	xor a
-	ld [ScriptVar], a
-	ld hl, wd041
+	ld [wScriptVar], a
+	ld hl, wTempTrainerEventFlagLo
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -794,7 +863,7 @@ Script_trainerflagaction:
 	and a
 	ret z
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_winlosstext:
@@ -820,16 +889,16 @@ Script_end_if_just_battled:
 
 Script_check_just_battled:
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ld a, [wRunningTrainerBattleScript]
 	and a
 	ret nz
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_encountermusic:
-	ld a, [OtherTrainerClass]
+	ld a, [wOtherTrainerClass]
 	ld e, a
 	farjp PlayTrainerEncounterMusic
 
@@ -838,45 +907,43 @@ Script_playmapmusic:
 
 Script_playmusic:
 ; parameters:
-;     music_pointer (MultiByteParam)
+;     music_pointer (SingleByteParam)
 	ld de, MUSIC_NONE
 	call PlayMusic
 	xor a
-	ld [MusicFade], a
+	ld [wMusicFade], a
 	call MaxVolume
 	call GetScriptByte
 	ld e, a
-	call GetScriptByte
-	ld d, a
+	ld d, 0
 	jp PlayMusic
 
 Script_musicfadeout:
 ; parameters:
-;     music (MultiByteParam)
+;     music (SingleByteParam)
 ;     fadetime (SingleByteParam)
 	call GetScriptByte
-	ld [MusicFadeID], a
-	call GetScriptByte
-	ld [MusicFadeID + 1], a
+	ld [wMusicFadeID], a
+	xor a
+	ld [wMusicFadeID + 1], a
 	call GetScriptByte
 	and $7f
-	ld [MusicFade], a
+	ld [wMusicFade], a
 	ret
 
 Script_playsound:
 ; parameters:
-;     sound_pointer (MultiByteParam)
+;     sound_pointer (SingleByteParam)
 	call GetScriptByte
 	ld e, a
-	call GetScriptByte
-	ld d, a
-	jp PlaySFX
+	ld d, 0
+	jp WaitPlaySFX
 
 Script_waitsfx:
 	jp WaitSFX
 
 Script_warpsound:
-	ld a, [PlayerStandingTile]
+	ld a, [wPlayerStandingTile]
 	ld de, SFX_ENTER_DOOR
 	cp COLL_DOOR
 	jr z, .play
@@ -889,40 +956,66 @@ Script_warpsound:
 
 Script_cry:
 ; parameters:
-;     cry_id (MultiByteParam)
+;     cry_id (SingleByteParam)
 	call GetScriptByte
-	push af
-	call GetScriptByte
-	pop af
 	and a
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
 	jp PlayCry
-
-GetScriptPerson:
-	and a
-	ret z
-	cp LAST_TALKED
-	ret z
-	dec a
-	ret
 
 Script_setlasttalked:
 ; parameters:
 ;     person (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	ld [hLastTalked], a
 	ret
+
+Script_applyonemovement:
+; parameters:
+;     person (SingleByteParam)
+;     data (MovementDataParam)
+	call GetScriptByte
+	ld c, a
+
+	push bc
+	ld a, c
+	farcall SetFlagsForMovement_1
+	pop bc
+
+	push bc
+	farcall SetFlagsForMovement_2
+	pop bc
+
+	ld a, [wScriptPos]
+	ld l, a
+	ld a, [wScriptPos + 1]
+	ld h, a
+	call SkipTwoScriptBytes
+	ld a, [wScriptBank]
+	ld b, a
+	call GetMovementData
+	ret c
+
+	ld a, SCRIPT_WAIT_MOVEMENT
+	ld [wScriptMode], a
+	jp StopScript
 
 Script_applymovement:
 ; parameters:
 ;     person (SingleByteParam)
 ;     data (MovementPointerLabelParam)
 	call GetScriptByte
-	call GetScriptPerson
 	ld c, a
+	jr ApplyMovement
+
+Script_applymovement2:
+; apply movement to last talked
+; parameters:
+;     data (MovementPointerLabelParam)
+	ld a, [hLastTalked]
+	ld c, a
+; fallthrough
 
 ApplyMovement:
 	push bc
@@ -931,32 +1024,21 @@ ApplyMovement:
 	pop bc
 
 	push bc
-	call SetFlagsForMovement_2
+	farcall SetFlagsForMovement_2
 	pop bc
 
 	call GetScriptByte
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	call GetMovementData
 	ret c
 
 	ld a, SCRIPT_WAIT_MOVEMENT
-	ld [ScriptMode], a
+	ld [wScriptMode], a
 	jp StopScript
-
-SetFlagsForMovement_2:
-	farjp _SetFlagsForMovement_2
-
-Script_applymovement2:
-; apply movement to last talked
-; parameters:
-;     data (MovementPointerLabelParam)
-	ld a, [hLastTalked]
-	ld c, a
-	jp ApplyMovement
 
 Script_faceplayer:
 	ld a, [hLastTalked]
@@ -972,21 +1054,19 @@ Script_faceplayer:
 	ld e, a
 	ld a, [hLastTalked]
 	ld d, a
-	jp ApplyPersonFacing
+	jr ApplyPersonFacing
 
-Script_faceperson:
+Script_faceobject:
 ; parameters:
 ;     person1 (SingleByteParam)
 ;     person2 (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	cp LAST_TALKED
 	jr c, .ok
 	ld a, [hLastTalked]
 .ok
 	ld e, a
 	call GetScriptByte
-	call GetScriptPerson
 	cp LAST_TALKED
 	jr nz, .ok2
 	ld a, [hLastTalked]
@@ -1001,14 +1081,13 @@ Script_faceperson:
 	add a
 	ld e, a
 	ld d, c
-	jp ApplyPersonFacing
+	jr ApplyPersonFacing
 
-Script_spriteface:
+Script_turnobject:
 ; parameters:
 ;     person (SingleByteParam)
 ;     facing (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	cp LAST_TALKED
 	jr nz, .ok
 	ld a, [hLastTalked]
@@ -1018,7 +1097,7 @@ Script_spriteface:
 	add a
 	add a
 	ld e, a
-	jp ApplyPersonFacing
+	; fallthrough
 
 ApplyPersonFacing:
 	ld a, d
@@ -1031,7 +1110,7 @@ ApplyPersonFacing:
 	push bc
 	call DoesSpriteHaveFacings
 	pop bc
-	jr c, .not_visible ; STILL_SPRITE
+	jr c, .not_visible ; STANDING_SPRITE
 	ld hl, OBJECT_FLAGS1
 	add hl, bc
 	bit FIXED_FACING, [hl]
@@ -1039,7 +1118,7 @@ ApplyPersonFacing:
 	pop de
 	ld a, e
 	call SetSpriteDirection
-	ld hl, VramState
+	ld hl, wVramState
 	bit 6, [hl]
 	jr nz, .text_state
 	call .DisableTextTiles
@@ -1071,17 +1150,17 @@ Script_variablesprite:
 	call GetScriptByte
 	ld e, a
 	ld d, $0
-	ld hl, VariableSprites
+	ld [hUsedSpriteIndex], a
+	ld hl, wVariableSprites
 	add hl, de
 	call GetScriptByte
 	ld [hl], a
-	ret
+	farjp ReloadSpriteIndex
 
 Script_appear:
 ; parameters:
 ;     person (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	call _CopyObjectStruct
 	ld a, [hMapObjectIndexBuffer]
 	ld b, 0 ; clear
@@ -1091,7 +1170,6 @@ Script_disappear:
 ; parameters:
 ;     person (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	cp LAST_TALKED
 	jr nz, .ok
 	ld a, [hLastTalked]
@@ -1126,23 +1204,20 @@ Script_follow:
 ;     person2 (SingleByteParam)
 ;     person1 (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	ld b, a
 	call GetScriptByte
-	call GetScriptPerson
 	ld c, a
 	farjp StartFollow
 
 Script_stopfollow:
 	farjp StopFollow
 
-Script_moveperson:
+Script_moveobject:
 ; parameters:
 ;     person (SingleByteParam)
 ;     x (SingleByteParam)
 ;     y (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	ld b, a
 	call GetScriptByte
 	add 4
@@ -1156,7 +1231,6 @@ Script_writepersonxy:
 ; parameters:
 ;     person (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	cp LAST_TALKED
 	jr nz, .ok
 	ld a, [hLastTalked]
@@ -1169,10 +1243,8 @@ Script_follownotexact:
 ;     person2 (SingleByteParam)
 ;     person1 (SingleByteParam)
 	call GetScriptByte
-	call GetScriptPerson
 	ld b, a
 	call GetScriptByte
-	call GetScriptPerson
 	ld c, a
 	farjp FollowNotExact
 
@@ -1182,7 +1254,7 @@ Script_loademote:
 	call GetScriptByte
 	cp -1
 	jr nz, .not_var_emote
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .not_var_emote
 	ld c, a
 	farjp LoadEmote
@@ -1193,15 +1265,14 @@ Script_showemote:
 ;     person (SingleByteParam)
 ;     time (DecimalParam)
 	call GetScriptByte
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
-	call GetScriptPerson
 	cp LAST_TALKED
 	jr z, .ok
 	ld [hLastTalked], a
 .ok
 	call GetScriptByte
-	ld [ScriptDelay], a
+	ld [wScriptDelay], a
 	ld b, BANK(ShowEmoteScript)
 	ld de, ShowEmoteScript
 	jp ScriptCall
@@ -1223,24 +1294,24 @@ ShowEmoteScript:
 	step_sleep_1
 	step_end
 
-
 Script_earthquake:
 ; parameters:
 ;     param (DecimalParam)
 	ld hl, EarthquakeMovement
-	ld de, wd002
+	ld de, wEarthquakeMovementDataBuffer
 	ld bc, EarthquakeMovementEnd - EarthquakeMovement
-	call CopyBytes
+	rst CopyBytes
 	call GetScriptByte
-	ld [wd003], a
-	and (1 << 6) - 1
-	ld [wd005], a
+	ld [wEarthquakeMovementDataBuffer + 1], a
+	and %111111
+	add a, a
+	ld [wEarthquakeMovementDataBuffer + 3], a
 	ld b, BANK(.script)
 	ld de, .script
 	jp ScriptCall
 
 .script
-	applymovement PLAYER, wd002
+	applymovement PLAYER, wEarthquakeMovementDataBuffer
 	end
 
 EarthquakeMovement:
@@ -1258,9 +1329,9 @@ Script_loadmemtrainer:
 	ld a, (1 << 7) | 1
 	ld [wBattleScriptFlags], a
 	ld a, [wTempTrainerClass]
-	ld [OtherTrainerClass], a
+	ld [wOtherTrainerClass], a
 	ld a, [wTempTrainerID]
-	ld [OtherTrainerID], a
+	ld [wOtherTrainerID], a
 	ret
 
 Script_loadwildmon:
@@ -1270,9 +1341,9 @@ Script_loadwildmon:
 	ld a, (1 << 7)
 	ld [wBattleScriptFlags], a
 	call GetScriptByte
-	ld [TempWildMonSpecies], a
+	ld [wTempWildMonSpecies], a
 	call GetScriptByte
-	ld [CurPartyLevel], a
+	ld [wCurPartyLevel], a
 	ret
 
 Script_loadtrainer:
@@ -1282,9 +1353,9 @@ Script_loadtrainer:
 	ld a, (1 << 7) | 1
 	ld [wBattleScriptFlags], a
 	call GetScriptByte
-	ld [OtherTrainerClass], a
+	ld [wOtherTrainerClass], a
 	call GetScriptByte
-	ld [OtherTrainerID], a
+	ld [wOtherTrainerID], a
 	ret
 
 Script_startbattle:
@@ -1292,14 +1363,14 @@ Script_startbattle:
 	predef StartBattle
 	ld a, [wBattleResult]
 	and $3f
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_catchtutorial:
 ; parameters:
 ;     byte (SingleByteParam)
 	call GetScriptByte
-	ld [BattleType], a
+	ld [wBattleType], a
 	call BufferScreen
 	farcall CatchTutorial
 	ld a, 1
@@ -1307,11 +1378,7 @@ Script_catchtutorial:
 	jp Script_reloadmap
 
 Script_reloadmapafterbattle:
-	push bc
-	push de
-	call RestoreBattleItems
-	pop de
-	pop bc
+	farcall PostBattleTasks
 	ld hl, wBattleScriptFlags
 	ld d, [hl]
 	ld [hl], $0
@@ -1330,7 +1397,6 @@ Script_reloadmapafterbattle:
 	jr z, .was_wild
 	farcall MomTriesToBuySomething
 	farcall RunPostBattleAbilities
-	farcall RemoveToxicAfterBattle
 	jr .done
 
 .was_wild
@@ -1338,7 +1404,6 @@ Script_reloadmapafterbattle:
 	bit 1, a ; set on fleeing
 	jr nz, .skip_pickup
 	farcall RunPostBattleAbilities
-	farcall RemoveToxicAfterBattle
 .skip_pickup
 	ld a, [wBattleResult]
 	bit 7, a
@@ -1347,7 +1412,7 @@ Script_reloadmapafterbattle:
 	ld de, Script_SpecialBillCall
 	farcall LoadScriptBDE
 .done
-	jp Script_reloadmap
+; fallthrough
 
 Script_reloadmap:
 	xor a
@@ -1361,7 +1426,7 @@ Script_reloadmap:
 Script_scall:
 ; parameters:
 ;     pointer (ScriptPointerLabelParam)
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	call GetScriptByte
 	ld e, a
@@ -1398,7 +1463,7 @@ ScriptCall:
 ; Bug: The script stack has a capacity of 5 scripts, yet there is
 ; nothing to stop you from pushing a sixth script.  The high part
 ; of the script address can then be overwritten by modifications
-; to ScriptDelay, causing the script to return to the rst/interrupt
+; to wScriptDelay, causing the script to return to the rst/interrupt
 ; space.
 
 	push de
@@ -1407,28 +1472,28 @@ ScriptCall:
 	inc [hl]
 	ld d, $0
 	ld hl, wScriptStack
-rept 3
 	add hl, de
-endr
+	add hl, de
+	add hl, de
 	pop de
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld [hli], a
-	ld a, [ScriptPos]
+	ld a, [wScriptPos]
 	ld [hli], a
-	ld a, [ScriptPos + 1]
+	ld a, [wScriptPos + 1]
 	ld [hl], a
 	ld a, b
-	ld [ScriptBank], a
+	ld [wScriptBank], a
 	ld a, e
-	ld [ScriptPos], a
+	ld [wScriptPos], a
 	ld a, d
-	ld [ScriptPos + 1], a
+	ld [wScriptPos + 1], a
 	ret
 
 CallCallback::
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	or $80
-	ld [ScriptBank], a
+	ld [wScriptBank], a
 	jp ScriptCall
 
 Script_jump:
@@ -1438,7 +1503,7 @@ Script_jump:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	jp ScriptJump
 
@@ -1470,7 +1535,7 @@ Script_ptjump:
 Script_iffalse:
 ; parameters:
 ;     pointer (ScriptPointerLabelParam)
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	and a
 	jp nz, SkipTwoScriptBytes
 	jp Script_jump
@@ -1478,62 +1543,62 @@ Script_iffalse:
 Script_iftrue:
 ; parameters:
 ;     pointer (ScriptPointerLabelParam)
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	and a
 	jp nz, Script_jump
 	jp SkipTwoScriptBytes
 
-Script_if_equal:
+Script_ifequal:
 ; parameters:
 ;     byte (SingleByteParam)
 ;     pointer (ScriptPointerLabelParam)
 	call GetScriptByte
-	ld hl, ScriptVar
+	ld hl, wScriptVar
 	cp [hl]
 	jr z, Script_jump
 	jr SkipTwoScriptBytes
 
-Script_if_not_equal:
+Script_ifnotequal:
 ; parameters:
 ;     byte (SingleByteParam)
 ;     pointer (ScriptPointerLabelParam)
 	call GetScriptByte
-	ld hl, ScriptVar
+	ld hl, wScriptVar
 	cp [hl]
 	jr nz, Script_jump
 	jr SkipTwoScriptBytes
 
-Script_if_greater_than:
+Script_ifgreater:
 ; parameters:
 ;     byte (SingleByteParam)
 ;     pointer (ScriptPointerLabelParam)
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	ld b, a
 	call GetScriptByte
 	cp b
 	jr c, Script_jump
 	jr SkipTwoScriptBytes
 
-Script_if_less_than:
+Script_ifless:
 ; parameters:
 ;     byte (SingleByteParam)
 ;     pointer (ScriptPointerLabelParam)
 	call GetScriptByte
 	ld b, a
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	cp b
 	jr c, Script_jump
 	jr SkipTwoScriptBytes
 
 Script_jumpstd:
 ; parameters:
-;     predefined_script (MultiByteParam)
+;     predefined_script (SingleByteParam)
 	call StdScript
 	jr ScriptJump
 
 Script_callstd:
 ; parameters:
-;     predefined_script (MultiByteParam)
+;     predefined_script (SingleByteParam)
 	call StdScript
 	ld d, h
 	ld e, l
@@ -1542,12 +1607,11 @@ Script_callstd:
 StdScript:
 	call GetScriptByte
 	ld e, a
-	call GetScriptByte
-	ld d, a
+	ld d, 0
 	ld hl, StdScripts
-rept 3
 	add hl, de
-endr
+	add hl, de
+	add hl, de
 	ld a, BANK(StdScripts)
 	call GetFarByte
 	ld b, a
@@ -1561,38 +1625,38 @@ SkipTwoScriptBytes:
 
 ScriptJump:
 	ld a, b
-	ld [ScriptBank], a
+	ld [wScriptBank], a
 	ld a, l
-	ld [ScriptPos], a
+	ld [wScriptPos], a
 	ld a, h
-	ld [ScriptPos + 1], a
+	ld [wScriptPos + 1], a
 	ret
 
 Script_priorityjump:
 ; parameters:
 ;     pointer (ScriptPointerLabelParam)
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld [wPriorityScriptBank], a
 	call GetScriptByte
 	ld [wPriorityScriptAddr], a
 	call GetScriptByte
 	ld [wPriorityScriptAddr + 1], a
-	ld hl, ScriptFlags
+	ld hl, wScriptFlags
 	set 3, [hl]
 	ret
 
-Script_checktriggers:
+Script_checkscene:
 	call CheckTriggers
 	jr z, .no_triggers
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 .no_triggers
 	ld a, $ff
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
-Script_checkmaptriggers:
+Script_checkmapscene:
 ; parameters:
 ;     map_group (SingleByteParam)
 ;     map_id (SingleByteParam)
@@ -1605,24 +1669,24 @@ Script_checkmaptriggers:
 	or e
 	jr z, .no_triggers
 	ld a, [de]
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 .no_triggers
 	ld a, $ff
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
-Script_dotrigger:
+Script_setscene:
 ; parameters:
 ;     trigger_id (SingleByteParam)
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	ld b, a
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	ld c, a
 	jr DoTrigger
 
-Script_domaptrigger:
+Script_setmapscene:
 ; parameters:
 ;     map_group (MapGroupParam)
 ;     map_id (MapIdParam)
@@ -1648,7 +1712,7 @@ Script_copybytetovar:
 	call GetScriptByte
 	ld h, a
 	ld a, [hl]
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_copyvartobyte:
@@ -1658,7 +1722,7 @@ Script_copyvartobyte:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	ld [hl], a
 	ret
 
@@ -1678,14 +1742,14 @@ Script_writebyte:
 ; parameters:
 ;     value (SingleByteParam)
 	call GetScriptByte
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_addvar:
 ; parameters:
 ;     value (SingleByteParam)
 	call GetScriptByte
-	ld hl, ScriptVar
+	ld hl, wScriptVar
 	add [hl]
 	ld [hl], a
 	ret
@@ -1694,7 +1758,7 @@ Script_random:
 ; parameters:
 ;     input (SingleByteParam)
 	call GetScriptByte
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	and a
 	ret z
 
@@ -1723,11 +1787,11 @@ Script_random:
 
 .finish
 	push af
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	ld c, a
 	pop af
 	call SimpleDivide
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 .Divide256byC:
@@ -1748,7 +1812,7 @@ Script_checkcode:
 	call GetScriptByte
 	call GetVarAction
 	ld a, [de]
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_writevarcode:
@@ -1756,7 +1820,7 @@ Script_writevarcode:
 ;     variable_id (SingleByteParam)
 	call GetScriptByte
 	call GetVarAction
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	ld [de], a
 	ret
 
@@ -1781,11 +1845,11 @@ Script_pokenamemem:
 	call GetScriptByte
 	and a
 	jr nz, .gotit
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .gotit
 	ld [wd265], a
 	call GetPokemonName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 
 ConvertMemToText:
 	call GetScriptByte
@@ -1795,38 +1859,38 @@ ConvertMemToText:
 .ok
 
 CopyConvertedText:
-	ld hl, StringBuffer3
-	ld bc, StringBuffer4 - StringBuffer3
-	call AddNTimes
+	ld hl, wStringBuffer3
+	ld bc, wStringBuffer4 - wStringBuffer3
+	rst AddNTimes
 	jp CopyName2
 
 Script_itemtotext:
 ; parameters:
-;     item (ItemLabelByte); use 0 to draw from ScriptVar
+;     item (ItemLabelByte); use 0 to draw from wScriptVar
 ;     memory (SingleByteParam)
 	call GetScriptByte
 	and a
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
 	ld [wd265], a
 	call GetItemName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	jr ConvertMemToText
 
 Script_mapnametotext:
 ; parameters:
 ;     memory (SingleByteParam)
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	ld b, a
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	ld c, a
 	call GetWorldMapLocation
 
 ConvertLandmarkToText:
 	ld e, a
 	farcall GetLandmarkName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	jp ConvertMemToText
 
 Script_landmarktotext:
@@ -1858,9 +1922,9 @@ Script_name:
 
 ContinueToGetName:
 	call GetScriptByte
-	ld [CurSpecies], a
+	ld [wCurSpecies], a
 	call GetName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	jp ConvertMemToText
 
 Script_trainerclassname:
@@ -1877,36 +1941,36 @@ Script_readmoney:
 ;     memory (SingleByteParam)
 	call ResetStringBuffer1
 	call GetMoneyAccount
-	ld hl, StringBuffer1
-	lb bc, PRINTNUM_RIGHTALIGN | 3, 6
+	ld hl, wStringBuffer1
+	lb bc, PRINTNUM_LEFTALIGN | 3, 6
 	call PrintNum
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	jp ConvertMemToText
 
 Script_readcoins:
 ; parameters:
 ;     memory (SingleByteParam)
 	call ResetStringBuffer1
-	ld hl, StringBuffer1
-	ld de, Coins
-	lb bc, PRINTNUM_RIGHTALIGN | 2, 6
+	ld hl, wStringBuffer1
+	ld de, wCoins
+	lb bc, PRINTNUM_LEFTALIGN | 2, 6
 	call PrintNum
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	jp ConvertMemToText
 
 Script_RAM2MEM:
 ; parameters:
 ;     memory (SingleByteParam)
 	call ResetStringBuffer1
-	ld de, ScriptVar
-	ld hl, StringBuffer1
-	lb bc, PRINTNUM_RIGHTALIGN | 1, 3
+	ld hl, wStringBuffer1
+	ld de, wScriptVar
+	lb bc, PRINTNUM_LEFTALIGN | 1, 3
 	call PrintNum
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	jp ConvertMemToText
 
 ResetStringBuffer1:
-	ld hl, StringBuffer1
+	ld hl, wStringBuffer1
 	ld bc, NAME_LENGTH
 	ld a, "@"
 	jp ByteFill
@@ -1919,10 +1983,10 @@ Script_stringtotext:
 	ld e, a
 	call GetScriptByte
 	ld d, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld hl, CopyName1
 	call FarCall_hl
-	ld de, StringBuffer2
+	ld de, wStringBuffer2
 	jp ConvertMemToText
 
 Script_givepokeitem:
@@ -1932,14 +1996,14 @@ Script_givepokeitem:
 	ld l, a
 	call GetScriptByte
 	ld h, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	call GetFarByte
 	ld b, a
 	push bc
 	inc hl
 	ld bc, MAIL_MSG_LENGTH
 	ld de, wd002
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	call FarCopyBytes
 	pop bc
 	farjp GivePokeItem
@@ -1951,7 +2015,7 @@ Script_checkpokeitem:
 	ld e, a
 	call GetScriptByte
 	ld d, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	farjp CheckPokeItem
 
@@ -1962,20 +2026,20 @@ Script_giveitem:
 	call GetScriptByte
 	cp ITEM_FROM_MEM
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
-	ld [CurItem], a
+	ld [wCurItem], a
 	call GetScriptByte
 	ld [wItemQuantityChangeBuffer], a
-	ld hl, NumItems
+	ld hl, wNumItems
 	call ReceiveItem
 	jr nc, .full
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 .full
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_takeitem:
@@ -1985,32 +2049,32 @@ Script_takeitem:
 	call GetScriptByte
 	cp ITEM_FROM_MEM
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
-	ld [CurItem], a
+	ld [wCurItem], a
 	call GetScriptByte
 	ld [wItemQuantityChangeBuffer], a
 	ld a, -1
-	ld [CurItemQuantity], a
-	ld hl, NumItems
+	ld [wCurItemQuantity], a
+	ld hl, wNumItems
 	call TossItem
 	ret nc
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_checkitem:
 ; parameters:
 ;     item (ItemLabelByte)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
-	ld [CurItem], a
-	ld hl, NumItems
+	ld [wCurItem], a
+	ld hl, wNumItems
 	call CheckItem
 	ret nc
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_givemoney:
@@ -2048,13 +2112,13 @@ CompareMoneyAction:
 .two
 	ld a, 2
 .done
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 GetMoneyAccount:
 	call GetScriptByte
 	and a
-	ld de, Money
+	ld de, wMoney
 	ret z
 	ld de, wMomsMoney
 	ret
@@ -2104,53 +2168,76 @@ Script_checktime:
 ; parameters:
 ;     time (SingleByteParam)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	farcall CheckTime
 	call GetScriptByte
 	and c
 	ret z
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_checkpoke:
 ; parameters:
 ;     pkmn (PokemonParam)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
-	ld hl, PartySpecies
+	ld hl, wPartySpecies
 	ld de, 1
 	call IsInArray
 	ret nc
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
+	ret
+
+Script_checkegg:
+	xor a
+	ld [wScriptVar], a
+	ld a, [wCurPartyMon]
+	push af
+	ld a, [wPartyCount]
+.loop
+	dec a
+	push af
+	ld [wCurPartyMon], a
+	ld a, MON_FORM
+	call GetPartyParamLocation
+	bit MON_IS_EGG_F, [hl]
+	jr z, .next
+	ld a, TRUE
+	ld [wScriptVar], a
+.next
+	pop af
+	jr nz, .loop
+	pop af
+	ld [wCurPartyMon], a
 	ret
 
 Script_addcellnum:
 ; parameters:
 ;     person (SingleByteParam)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
 	ld c, a
 	farcall AddPhoneNumber
 	ret nc
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_delcellnum:
 ; parameters:
 ;     person (SingleByteParam)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
 	ld c, a
 	farcall DelCellNum
 	ret nc
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_checkcellnum:
@@ -2159,21 +2246,21 @@ Script_checkcellnum:
 ; returns false if the cell number is not in your phone
 
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
 	ld c, a
 	farcall CheckCellNum
 	ret nc
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_specialphonecall:
 ; parameters:
-;     call_id (MultiByteParam)
+;     call_id (SingleByteParam)
 	call GetScriptByte
 	ld [wSpecialPhoneCallID], a
-	call GetScriptByte
+	xor a
 	ld [wSpecialPhoneCallID + 1], a
 	ret
 
@@ -2185,7 +2272,7 @@ Script_checkphonecall:
 	jr z, .ok
 	ld a, TRUE
 .ok
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_givepoke:
@@ -2197,16 +2284,16 @@ Script_givepoke:
 ;     trainer_name_pointer (MultiByteParam)
 ;     pkmn_nickname (MultiByteParam)
 	call GetScriptByte
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	call GetScriptByte
-	ld [CurPartyLevel], a
+	ld [wCurPartyLevel], a
 	call GetScriptByte
-	ld [CurItem], a
+	ld [wCurItem], a
 	call GetScriptByte
 	and a
 	ld b, a
 	jr z, .ok
-	ld hl, ScriptPos
+	ld hl, wScriptPos
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
@@ -2217,26 +2304,26 @@ Script_givepoke:
 .ok
 	farcall GivePoke
 	ld a, b
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_giveegg:
 ; parameters:
 ;     pkmn (PokemonParam)
 ;     level (DecimalParam)
-; if no room in the party, return 0 in ScriptVar; else, return 2
+; if no room in the party, return 0 in wScriptVar; else, return 2
 
 	xor a ; PARTYMON
-	ld [ScriptVar], a
-	ld [MonType], a
+	ld [wScriptVar], a
+	ld [wMonType], a
 	call GetScriptByte
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	call GetScriptByte
-	ld [CurPartyLevel], a
+	ld [wCurPartyLevel], a
 	farcall GiveEgg
 	ret nc
 	ld a, 2
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_setevent:
@@ -2273,7 +2360,7 @@ Script_checkevent:
 	jr z, .false
 	ld a, TRUE
 .false
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_setflag:
@@ -2310,29 +2397,20 @@ Script_checkflag:
 	jr z, .false
 	ld a, TRUE
 .false
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 _EngineFlagAction:
 	farjp EngineFlagAction
 
 Script_wildoff:
-	ld hl, StatusFlags
+	ld hl, wStatusFlags
 	set 5, [hl] ; wild encounters on/off
 	ret
 
 Script_wildon:
-	ld hl, StatusFlags
+	ld hl, wStatusFlags
 	res 5, [hl] ; wild encounters on/off
-	ret
-
-Script_xycompare:
-; parameters:
-;     pointer (MultiByteParam)
-	call GetScriptByte
-	ld [wXYComparePointer], a
-	call GetScriptByte
-	ld [wXYComparePointer + 1], a
 	ret
 
 Script_warpfacing:
@@ -2361,15 +2439,15 @@ Script_warp:
 	call GetScriptByte
 	and a
 	jr z, .not_ok
-	ld [MapGroup], a
+	ld [wMapGroup], a
 	call GetScriptByte
-	ld [MapNumber], a
+	ld [wMapNumber], a
 	call GetScriptByte
-	ld [XCoord], a
+	ld [wXCoord], a
 	call GetScriptByte
-	ld [YCoord], a
+	ld [wYCoord], a
 	ld a, -1
-	ld [wd001], a
+	ld [wDefaultSpawnpoint], a
 	ld a, MAPSETUP_WARP
 	ld [hMapEntryMethod], a
 	ld a, 1
@@ -2381,7 +2459,7 @@ Script_warp:
 	call GetScriptByte
 	call GetScriptByte
 	ld a, -1
-	ld [wd001], a
+	ld [wDefaultSpawnpoint], a
 	ld a, MAPSETUP_BADWARP
 	ld [hMapEntryMethod], a
 	ld a, 1
@@ -2394,11 +2472,11 @@ Script_warpmod:
 ;     map_group (MapGroupParam)
 ;     map_id (MapIdParam)
 	call GetScriptByte
-	ld [BackupWarpNumber], a
+	ld [wBackupWarpNumber], a
 	call GetScriptByte
-	ld [BackupMapGroup], a
+	ld [wBackupMapGroup], a
 	call GetScriptByte
-	ld [BackupMapNumber], a
+	ld [wBackupMapNumber], a
 	ret
 
 Script_blackoutmod:
@@ -2423,7 +2501,7 @@ Script_writecmdqueue:
 	ld e, a
 	call GetScriptByte
 	ld d, a
-	ld a, [ScriptBank]
+	ld a, [wScriptBank]
 	ld b, a
 	jp WriteCmdQueue
 
@@ -2431,24 +2509,24 @@ Script_delcmdqueue:
 ; parameters:
 ;     byte (SingleByteParam)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
 	ld b, a
 	call DelCmdQueue
 	ret c
 	ld a, 1
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_changemap:
 ; parameters:
 ;     map_data_pointer (MapDataPointerParam)
 	call GetScriptByte
-	ld [MapBlockDataBank], a
+	ld [wMapBlockDataBank], a
 	call GetScriptByte
-	ld [MapBlockDataPointer], a
+	ld [wMapBlockDataPointer], a
 	call GetScriptByte
-	ld [MapBlockDataPointer + 1], a
+	ld [wMapBlockDataPointer + 1], a
 	call ChangeMap
 	jp BufferScreen
 
@@ -2471,7 +2549,7 @@ Script_changeblock:
 Script_reloadmappart::
 	xor a
 	ld [hBGMapMode], a
-	call OverworldTextModeSwitch
+	call LoadMapPart
 	call GetMovementPermissions
 	farcall ReloadMapPart
 	jp UpdateSprites
@@ -2494,16 +2572,29 @@ Script_reloadandreturn:
 	call Script_newloadmap
 	jp Script_end
 
-Script_textbox:
+Script_opentext:
 	jp OpenText
 
 Script_refreshscreen:
 	jp RefreshScreen
 
-Script_closetext:
-	call _OpenAndCloseMenu_HDMATransferTileMapAndAttrMap
-	jp CloseText
+Script_showtextfaceplayer:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	call Script_faceplayer
+; fallthrough
 
+Script_showtext:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+	call Script_opentext
+	call Script_writetext
+	call Script_waitbutton
+; fallthrough
+
+Script_closetext:
+	call BGMapAnchorTopLeft
+	jp CloseText
 
 Script_passtoengine:
 ; parameters:
@@ -2523,11 +2614,11 @@ Script_pause:
 	call GetScriptByte
 	and a
 	jr z, .loop
-	ld [ScriptDelay], a
+	ld [wScriptDelay], a
 .loop
 	ld c, 2
 	call DelayFrames
-	ld hl, ScriptDelay
+	ld hl, wScriptDelay
 	dec [hl]
 	jr nz, .loop
 	ret
@@ -2538,10 +2629,10 @@ Script_deactivatefacing:
 	call GetScriptByte
 	and a
 	jr z, .no_time
-	ld [ScriptDelay], a
+	ld [wScriptDelay], a
 .no_time
 	ld a, SCRIPT_WAIT
-	ld [ScriptMode], a
+	ld [wScriptMode], a
 	jp StopScript
 
 Script_ptpriorityjump:
@@ -2552,23 +2643,18 @@ Script_ptpriorityjump:
 
 Script_end:
 	call ExitScriptSubroutine
-	jr c, .resume
-	ret
-
-.resume
+	ret nc
 	xor a
-	ld [ScriptRunning], a
+	ld [wScriptRunning], a
 	ld a, SCRIPT_OFF
-	ld [ScriptMode], a
-	ld hl, ScriptFlags
+	ld [wScriptMode], a
+	ld hl, wScriptFlags
 	res 0, [hl]
 	jp StopScript
 
 Script_return:
 	call ExitScriptSubroutine
-	jr c, .dummy
-.dummy
-	ld hl, ScriptFlags
+	ld hl, wScriptFlags
 	res 0, [hl]
 	jp StopScript
 
@@ -2583,47 +2669,47 @@ ExitScriptSubroutine:
 	ld e, [hl]
 	ld d, $0
 	ld hl, wScriptStack
-rept 3
 	add hl, de
-endr
+	add hl, de
+	add hl, de
 	ld a, [hli]
 	ld b, a
 	and " "
-	ld [ScriptBank], a
+	ld [wScriptBank], a
 	ld a, [hli]
 	ld e, a
-	ld [ScriptPos], a
+	ld [wScriptPos], a
 	ld a, [hl]
 	ld d, a
-	ld [ScriptPos + 1], a
+	ld [wScriptPos + 1], a
 	and a
 	ret
 .done
 	scf
 	ret
 
-Script_end_all:
+Script_endall:
 	xor a
 	ld [wScriptStackSize], a
-	ld [ScriptRunning], a
+	ld [wScriptRunning], a
 	ld a, SCRIPT_OFF
-	ld [ScriptMode], a
-	ld hl, ScriptFlags
+	ld [wScriptMode], a
+	ld hl, wScriptFlags
 	res 0, [hl]
 	jp StopScript
 
 Script_halloffame:
-	ld hl, GameTimerPause
+	ld hl, wGameTimerPause
 	res 0, [hl]
 	farcall HallOfFame
-	ld hl, GameTimerPause
+	ld hl, wGameTimerPause
 	set 0, [hl]
 	jr ReturnFromCredits
 
 Script_credits:
 	farcall LeafCredits
 ReturnFromCredits:
-	call Script_end_all
+	call Script_endall
 	ld a, $3
 	call LoadMapStatus
 	jp StopScript
@@ -2647,16 +2733,16 @@ Script_wait:
 Script_check_save:
 	farcall CheckSave
 	ld a, c
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_count_seen_caught:
-	ld hl, PokedexSeen
-	ld b, EndPokedexSeen - PokedexSeen
+	ld hl, wPokedexSeen
+	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
 	ld [wd002], a
-	ld hl, PokedexCaught
-	ld b, EndPokedexCaught - PokedexCaught
+	ld hl, wPokedexCaught
+	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	ld [wd003], a
 	ret
@@ -2667,38 +2753,38 @@ Script_trainerpic:
 	call GetScriptByte
 	and a
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
-	ld [TrainerClass], a
+	ld [wTrainerClass], a
 	farjp Trainerpic
 
 Script_givetmhm:
 ; parameters:
 ;     tmhm (TMHMLabelByte)
 	call GetScriptByte
-	ld [CurTMHM], a
+	ld [wCurTMHM], a
 	ld [wItemQuantityChangeBuffer], a
 	call ReceiveTMHM
 	jr nc, .full
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 .full
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_checktmhm:
 ; parameters:
 ;     tmhm (TMHMLabelByte)
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	call GetScriptByte
-	ld [CurTMHM], a
+	ld [wCurTMHM], a
 	call CheckTMHM
 	ret nc
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_verbosegivetmhm:
@@ -2706,7 +2792,7 @@ Script_verbosegivetmhm:
 ;     tmhm (TMHMLabelByte)
 	call Script_givetmhm
 	call CurTMHMName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	ld a, 1
 	call CopyConvertedText
 	ld b, BANK(GiveTMHMScript)
@@ -2730,16 +2816,16 @@ Script_tmhmnotify:
 
 Script_tmhmtotext:
 ; parameters:
-;     tmhm (TMHMLabelByte); use 0 to draw from ScriptVar
+;     tmhm (TMHMLabelByte); use 0 to draw from wScriptVar
 ;     memory (SingleByteParam)
 	call GetScriptByte
 	and a
 	jr nz, .ok
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 .ok
 	ld [wd265], a
 	call GetTMHMName
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	call ConvertMemToText
 
 	; off by one error?
@@ -2752,40 +2838,122 @@ Script_tmhmtotext:
 	ld [wPutativeTMHMMove], a
 	call GetMoveName
 
-	ld hl, StringBuffer3 + 4 ; assume all TM names are 4 characters, "TM##"
+	ld hl, wStringBuffer3 + 4 ; assume all TM names are 4 characters, "TM##"
 	ld a, " "
 	ld [hli], a
 	jp CopyName2
 
 Script_checkdarkness:
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	push hl
-	ld hl, StatusFlags
+	ld hl, wStatusFlags
 	bit 2, [hl] ; Flash
 	pop hl
 	ret nz
 	ld a, TRUE
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_checkunits:
-	ld a, [Options2]
+	ld a, [wOptions2]
 	bit POKEDEX_UNITS, a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 Script_unowntypeface:
-	ld a, [Options2]
-	ld [OptionsBuffer], a
+	ld a, [wOptions2]
+	ld [wOptionsBuffer], a
 	and $ff - FONT_MASK
 	or UNOWN_FONT
-	ld [Options2], a
+	ld [wOptions2], a
 	jp LoadStandardFont
 
 Script_restoretypeface:
-	ld a, [OptionsBuffer]
-	ld [Options2], a
+	ld a, [wOptionsBuffer]
+	ld [wOptions2], a
 	xor a
-	ld [OptionsBuffer], a
+	ld [wOptionsBuffer], a
 	jp LoadStandardFont
+
+Script_iftrue_endtext:
+	ld a, [wScriptVar]
+	and a
+	ret z
+	jr Script_endtext
+
+Script_iffalse_endtext:
+	ld a, [wScriptVar]
+	and a
+	ret nz
+	jr Script_endtext
+
+Script_waitendtext:
+	call Script_waitbutton
+Script_endtext:
+	call Script_closetext
+	jp Script_end
+
+Script_showcrytext:
+; parameters:
+;     text_pointer (RawTextPointerLabelParam)
+;     cry_id (SingleByteParam)
+	call Script_opentext
+	call Script_writetext
+	call Script_cry
+	call Script_waitbutton
+	jp Script_closetext
+
+Script_loadgrottomon:
+	farcall GetHiddenGrottoContents
+	ld [wTempWildMonSpecies], a
+	call PlayCry
+	ld a, (1 << 7)
+	ld [wBattleScriptFlags], a
+	farcall GetCurHiddenGrottoLevel
+	ld [wCurPartyLevel], a
+	ret
+
+Script_giveapricorn:
+; parameters:
+;     apricorn (SingleByteParam)
+;     quantity (SingleByteParam)
+	call GetScriptByte
+	cp ITEM_FROM_MEM
+	jr nz, .ok
+	ld a, [wScriptVar]
+.ok
+	ld [wCurItem], a
+	call GetScriptByte
+	ld [wItemQuantityChangeBuffer], a
+
+	ld hl, wApricorns
+	ld a, [wCurItem]
+	dec a
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [wItemQuantityChangeBuffer]
+	add [hl]
+	cp 100
+	jr nc, .full
+	ld [hl], a
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+
+.full
+	xor a
+	ld [wScriptVar], a
+	ret
+
+Script_paintingpic:
+; parameters:
+;     painting (PaintingParam)
+	call GetScriptByte
+	and a
+	jr nz, .ok
+	ld a, [wScriptVar]
+.ok
+	ld [wTrainerClass], a
+	farjp Paintingpic

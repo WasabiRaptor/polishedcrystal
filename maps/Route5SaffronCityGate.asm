@@ -1,46 +1,23 @@
 Route5SaffronCityGate_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  4,  0, ROUTE_5, 2
+	warp_event  5,  0, ROUTE_5, 3
+	warp_event  4,  7, SAFFRON_CITY, 9
+	warp_event  5,  7, SAFFRON_CITY, 9
 
-Route5SaffronCityGate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $0, $4, 2, ROUTE_5
-	warp_def $0, $5, 3, ROUTE_5
-	warp_def $7, $4, 9, SAFFRON_CITY
-	warp_def $7, $5, 9, SAFFRON_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  0,  4, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, Route5SaffronCityGateOfficerText, -1
+	object_event  6,  4, SPRITE_BLACK_BELT, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route5SaffronCityGateBlackBeltScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_OFFICER, 4, 0, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, OfficerScript_0x18b5b9, -1
-	person_event SPRITE_BLACK_BELT, 4, 6, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, Route5SaffronCityGateBlackBeltScript, -1
-
-OfficerScript_0x18b5b9:
-	jumptextfaceplayer UnknownText_0x18b5bc
-
-Route5SaffronCityGateBlackBeltScript:
-	faceplayer
-	opentext
-	checkevent EVENT_GOT_PROTEIN_FROM_SAFFRON_GATE
-	iftrue .GotItem
-	writetext Route5SaffronCityGateBlackBeltText1
-	buttonsound
-	verbosegiveitem PROTEIN
-	iffalse .Done
-	setevent EVENT_GOT_PROTEIN_FROM_SAFFRON_GATE
-.GotItem:
-	writetext Route5SaffronCityGateBlackBeltText2
-	waitbutton
-.Done:
-	closetext
-	end
-
-UnknownText_0x18b5bc:
+Route5SaffronCityGateOfficerText:
 	text "You're from Johto,"
 	line "aren't you?"
 
@@ -49,7 +26,25 @@ UnknownText_0x18b5bc:
 	cont "don't you agree?"
 	done
 
-Route5SaffronCityGateBlackBeltText1:
+Route5SaffronCityGateBlackBeltScript:
+	checkevent EVENT_GOT_PROTEIN_FROM_SAFFRON_GATE
+	iftrue_jumptextfaceplayer .Text2
+	faceplayer
+	opentext
+	writetext .Text1
+	buttonsound
+	verbosegiveitem PROTEIN
+	iffalse_endtext
+	setevent EVENT_GOT_PROTEIN_FROM_SAFFRON_GATE
+	thisopenedtext
+
+.Text2:
+	text "Eat lots of Pro-"
+	line "tein and see your"
+	cont "strength grow!"
+	done
+
+.Text1:
 	text "Get a load of"
 	line "these muscles!"
 
@@ -62,10 +57,4 @@ Route5SaffronCityGateBlackBeltText1:
 
 	para "you'll need some"
 	line "of this."
-	done
-
-Route5SaffronCityGateBlackBeltText2:
-	text "Eat lots of Pro-"
-	line "tein and see your"
-	cont "strength grow!"
 	done

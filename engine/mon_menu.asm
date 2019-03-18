@@ -1,41 +1,4 @@
-MonMenuOptionStrings: ; 24caf
-	db "Stats@"
-	db "Switch@"
-	db "Item@"
-	db "Cancel@"
-	db "Moves@"
-	db "Mail@"
-	db "Error!@"
-; 24cd9
-
-MonMenuOptions: ; 24cd9
-
-; Moves
-	db MONMENU_FIELD_MOVE, MONMENU_CUT,        CUT
-	db MONMENU_FIELD_MOVE, MONMENU_FLY,        FLY
-	db MONMENU_FIELD_MOVE, MONMENU_SURF,       SURF
-	db MONMENU_FIELD_MOVE, MONMENU_STRENGTH,   STRENGTH
-	db MONMENU_FIELD_MOVE, MONMENU_FLASH,      FLASH
-	db MONMENU_FIELD_MOVE, MONMENU_WATERFALL,  WATERFALL
-	db MONMENU_FIELD_MOVE, MONMENU_WHIRLPOOL,  WHIRLPOOL
-	db MONMENU_FIELD_MOVE, MONMENU_DIG,        DIG
-	db MONMENU_FIELD_MOVE, MONMENU_TELEPORT,   TELEPORT
-	db MONMENU_FIELD_MOVE, MONMENU_SOFTBOILED, SOFTBOILED
-	db MONMENU_FIELD_MOVE, MONMENU_HEADBUTT,   HEADBUTT
-	db MONMENU_FIELD_MOVE, MONMENU_ROCKSMASH,  ROCK_SMASH
-	db MONMENU_FIELD_MOVE, MONMENU_MILKDRINK,  MILK_DRINK
-
-; Options
-	db MONMENU_MENUOPTION, MONMENU_STATS,      1 ; STATS
-	db MONMENU_MENUOPTION, MONMENU_SWITCH,     2 ; SWITCH
-	db MONMENU_MENUOPTION, MONMENU_ITEM,       3 ; ITEM
-	db MONMENU_MENUOPTION, MONMENU_CANCEL,     4 ; CANCEL
-	db MONMENU_MENUOPTION, MONMENU_MOVE,       5 ; MOVE
-	db MONMENU_MENUOPTION, MONMENU_MAIL,       6 ; MAIL
-	db MONMENU_MENUOPTION, MONMENU_ERROR,      7 ; ERROR!
-
-	db -1
-; 24d19
+INCLUDE "data/mon_menu.asm"
 
 MonSubmenu: ; 24d19
 	xor a
@@ -50,7 +13,7 @@ MonSubmenu: ; 24d19
 	ld a, 1
 	ld [hBGMapMode], a
 	call MonMenuLoop
-	ld [MenuSelection], a
+	ld [wMenuSelection], a
 
 	jp ExitMenu
 ; 24d3f
@@ -65,7 +28,7 @@ MonSubmenu: ; 24d19
 
 .GetTopCoord: ; 24d47
 ; TopCoord = 1 + BottomCoord - 2 * (NumSubmenuItems + 1)
-	ld a, [Buffer1]
+	ld a, [wBuffer1]
 	inc a
 	add a
 	ld b, a
@@ -80,12 +43,12 @@ MonMenuLoop: ; 24d59
 .loop
 	ld a, $a0 ; flags
 	ld [wMenuData2Flags], a
-	ld a, [Buffer1] ; items
+	ld a, [wBuffer1] ; items
 	ld [wMenuData2Items], a
 	call InitVerticalMenuCursor
 	ld hl, w2DMenuFlags1
 	set 6, [hl]
-	call StaticMenuJoypad
+	call DoMenuJoypadLoop
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
 	ld a, [hJoyPressed]
@@ -104,7 +67,7 @@ MonMenuLoop: ; 24d59
 	dec a
 	ld c, a
 	ld b, 0
-	ld hl, Buffer2
+	ld hl, wBuffer2
 	add hl, bc
 	ld a, [hl]
 	ret
@@ -114,7 +77,7 @@ PopulateMonMenu: ; 24d91
 	call MenuBoxCoord2Tile
 	ld bc, $2a ; 42
 	add hl, bc
-	ld de, Buffer2
+	ld de, wBuffer2
 .loop
 	ld a, [de]
 	inc de
@@ -137,7 +100,7 @@ GetMonMenuString: ; 24db0
 	call IsInArray
 	dec hl
 	ld a, [hli]
-	cp 1
+	cp MONMENU_MENUOPTION
 	jr z, .NotMove
 	inc hl
 	ld a, [hl]
@@ -157,7 +120,7 @@ GetMonMenuString: ; 24db0
 
 GetMonSubmenuItems: ; 24dd4
 	call ResetMonSubmenu
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .egg
 	ld a, [wLinkMode]
@@ -201,7 +164,7 @@ GetMonSubmenuItems: ; 24dd4
 	ld a, MON_ITEM
 	call GetPartyParamLocation
 	ld d, [hl]
-	farcall ItemIsMail
+	call ItemIsMail
 	pop hl
 	ld a, MONMENU_MAIL
 	jr c, .ok
@@ -211,7 +174,7 @@ GetMonSubmenuItems: ; 24dd4
 	call AddMonMenuItem
 
 .skip2
-	ld a, [Buffer1]
+	ld a, [wBuffer1]
 	cp NUM_MON_SUBMENU_ITEMS
 	jr z, .ok2
 	ld a, MONMENU_CANCEL
@@ -251,17 +214,17 @@ IsFieldMove: ; 24e52
 
 ResetMonSubmenu: ; 24e68
 	xor a
-	ld [Buffer1], a
-	ld hl, Buffer2
+	ld [wBuffer1], a
+	ld hl, wBuffer2
 	ld bc, NUM_MON_SUBMENU_ITEMS + 1
 	jp ByteFill
 ; 24e76
 
 TerminateMonSubmenu: ; 24e76
-	ld a, [Buffer1]
+	ld a, [wBuffer1]
 	ld e, a
 	ld d, $0
-	ld hl, Buffer2
+	ld hl, wBuffer2
 	add hl, de
 	ld [hl], -1
 	ret
@@ -271,12 +234,12 @@ AddMonMenuItem: ; 24e83
 	push hl
 	push de
 	push af
-	ld a, [Buffer1]
+	ld a, [wBuffer1]
 	ld e, a
 	inc a
-	ld [Buffer1], a
+	ld [wBuffer1], a
 	ld d, $0
-	ld hl, Buffer2
+	ld hl, wBuffer2
 	add hl, de
 	pop af
 	ld [hl], a
@@ -284,52 +247,3 @@ AddMonMenuItem: ; 24e83
 	pop hl
 	ret
 ; 24e99
-
-BattleMonMenu: ; 24e99
-	ld hl, MenuDataHeader_0x24ed4
-	call CopyMenuDataHeader
-	xor a
-	ld [hBGMapMode], a
-	call MenuBox
-	call UpdateSprites
-	call PlaceVerticalMenuItems
-	call WaitBGMap
-	call CopyMenuData2
-	ld a, [wMenuData2Flags]
-	bit 7, a
-	jr z, .set_carry
-	call InitVerticalMenuCursor
-	ld hl, w2DMenuFlags1
-	set 6, [hl]
-	call StaticMenuJoypad
-	ld de, SFX_READ_TEXT_2
-	call PlaySFX
-	ld a, [hJoyPressed]
-	bit B_BUTTON_F, a
-	jr z, .clear_carry
-	ret z
-
-.set_carry
-	scf
-	ret
-
-.clear_carry
-	and a
-	ret
-; 24ed4
-
-MenuDataHeader_0x24ed4: ; 24ed4
-	db $00 ; flags
-	db 11, 11 ; start coords
-	db 17, 19 ; end coords
-	dw MenuData2_0x24edc
-	db 1 ; default option
-; 24edc
-
-MenuData2_0x24edc: ; 24edc
-	db $c0 ; flags
-	db 3 ; items
-	db "Switch@"
-	db "Stats@"
-	db "Cancel@"
-; 24ef2

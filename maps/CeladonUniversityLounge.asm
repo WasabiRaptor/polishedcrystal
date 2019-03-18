@@ -1,31 +1,28 @@
 CeladonUniversityLounge_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4, 11, CELADON_UNIVERSITY_1F, 10
+	warp_event  5, 11, CELADON_UNIVERSITY_1F, 10
 
-CeladonUniversityLounge_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $b, $4, 10, CELADON_UNIVERSITY_1F
-	warp_def $b, $5, 10, CELADON_UNIVERSITY_1F
+	db 3 ; bg events
+	bg_event  7,  5, SIGNPOST_JUMPTEXT, CeladonUniversityLoungeBookshelf1Text
+	bg_event  7,  8, SIGNPOST_READ, CeladonUniversityLoungeBookshelf2
+	bg_event  0,  7, SIGNPOST_RIGHT, CeladonUniversityLoungeComputer
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event  5,  8, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CeladonUniversityLoungeNeeshaScript, -1
+	object_event  3,  1, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLoungeLassText, -1
+	object_event  5,  3, SPRITE_RICH_BOY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLoungeRichBoyText, -1
+	object_event  5,  4, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLoungeCooltrainerfText, -1
+	object_event  2,  5, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLoungeSuper_nerd1Text, -1
+	object_event  1,  8, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonUniversityLoungeSuper_nerd2Text, -1
 
-.Signposts: db 3
-	signpost 5, 7, SIGNPOST_READ, CeladonUniversityLoungeBookshelf1
-	signpost 8, 7, SIGNPOST_READ, CeladonUniversityLoungeBookshelf2
-	signpost 7, 0, SIGNPOST_RIGHT, CeladonUniversityLoungeComputer
-
-.PersonEvents: db 6
-	person_event SPRITE_COOLTRAINER_F, 8, 5, SPRITEMOVEDATA_SPINCOUNTERCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, CeladonUniversityLoungeNeeshaScript, -1
-	person_event SPRITE_LASS, 1, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLoungeLassScript, -1
-	person_event SPRITE_RICH_BOY, 3, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLoungeRichBoyScript, -1
-	person_event SPRITE_COOLTRAINER_F, 4, 5, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CeladonUniversityLoungeCooltrainerfScript, -1
-	person_event SPRITE_SUPER_NERD, 5, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLoungeSuper_nerd1Script, -1
-	person_event SPRITE_SUPER_NERD, 8, 1, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, CeladonUniversityLoungeSuper_nerd2Script, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const CELADONUNIVERSITYLOUNGE_NEESHA
 
 CeladonUniversityLoungeNeeshaScript:
@@ -41,7 +38,7 @@ CeladonUniversityLoungeNeeshaScript:
 	writetext .IntroText2
 .AfterIntro
 	yesorno
-	iffalse .NoBattle
+	iffalse_jumpopenedtext .NoBattleText
 	writetext .SeenText
 	waitbutton
 	closetext
@@ -55,36 +52,19 @@ CeladonUniversityLoungeNeeshaScript:
 .Beaten
 	setevent EVENT_INTRODUCED_CELADON_FOUR
 	checkevent EVENT_BEAT_COOLTRAINERM_COREY
-	iffalse .NotFinished
+	iffalse_jumpopenedtext .AfterText1
 	checkevent EVENT_BEAT_COOLTRAINERM_RAYMOND
-	iffalse .NotFinished
+	iffalse_jumpopenedtext .AfterText1
 	checkevent EVENT_BEAT_COOLTRAINERM_FERGUS
-	iffalse .NotFinished
+	iffalse_jumpopenedtext .AfterText1
 	checkevent EVENT_GOT_CHOICE_BAND_FROM_CELADON_FOUR
-	iftrue .GotItem
+	iftrue_jumpopenedtext .FinalText
 	writetext .AfterText2
 	buttonsound
 	verbosegiveitem CHOICE_BAND
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_CHOICE_BAND_FROM_CELADON_FOUR
-.GotItem:
-	writetext .FinalText
-	waitbutton
-.Done:
-	closetext
-	end
-
-.NoBattle:
-	writetext .NoBattleText
-	waitbutton
-	closetext
-	end
-
-.NotFinished:
-	writetext .AfterText1
-	waitbutton
-	closetext
-	end
+	jumpopenedtext .FinalText
 
 .IntroText1:
 	text "Hi! I'm Neesha!"
@@ -164,10 +144,7 @@ CeladonUniversityLoungeNeeshaScript:
 	line "you, trainer!"
 	done
 
-CeladonUniversityLoungeLassScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLoungeLassText:
 	text "Next month we're"
 	line "going on a trip"
 	cont "to Mt.Moon."
@@ -176,10 +153,7 @@ CeladonUniversityLoungeLassScript:
 	line "Clefairy!"
 	done
 
-CeladonUniversityLoungeRichBoyScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLoungeRichBoyText:
 	text "Have you ever"
 	line "wondered why"
 
@@ -192,10 +166,7 @@ CeladonUniversityLoungeRichBoyScript:
 	cont "Hyper Balls!"
 	done
 
-CeladonUniversityLoungeCooltrainerfScript:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLoungeCooltrainerfText:
 	text "#mon with"
 	line "reduced physical"
 
@@ -204,10 +175,7 @@ CeladonUniversityLoungeCooltrainerfScript:
 	cont "enter a # Ball."
 	done
 
-CeladonUniversityLoungeSuper_nerd1Script:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLoungeSuper_nerd1Text:
 	text "What do you get if"
 	line "you cross a joke"
 
@@ -217,10 +185,7 @@ CeladonUniversityLoungeSuper_nerd1Script:
 	para "………………………………"
 	done
 
-CeladonUniversityLoungeSuper_nerd2Script:
-	jumptextfaceplayer .Text
-
-.Text:
+CeladonUniversityLoungeSuper_nerd2Text:
 	text "I'm writing scripts"
 	line "for a game."
 
@@ -228,10 +193,7 @@ CeladonUniversityLoungeSuper_nerd2Script:
 	line "asm!"
 	done
 
-CeladonUniversityLoungeBookshelf1:
-	jumptext .Text
-
-.Text:
+CeladonUniversityLoungeBookshelf1Text:
 	text "It's stuffed full"
 	line "of copies of"
 	cont "#mon manga!"
@@ -247,14 +209,10 @@ CeladonUniversityLoungeBookshelf2:
 	iffalse .Done
 	setevent EVENT_GOT_PP_MAX_IN_UNIVERSITY
 .Done
-	closetext
-	end
+	endtext
 
 .GotItem
-	writetext .Text2
-	waitbutton
-	closetext
-	end
+	jumpopenedtext .Text2
 
 .Text1:
 	text "This book has a"
@@ -270,9 +228,8 @@ CeladonUniversityLoungeBookshelf2:
 	done
 
 CeladonUniversityLoungeComputer:
-	jumptext .Text
+	thistext
 
-.Text:
 	text "There's a player"
 	line "character running"
 

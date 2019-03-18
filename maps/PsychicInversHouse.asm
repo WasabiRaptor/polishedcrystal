@@ -1,37 +1,32 @@
 PsychicInversHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, ROUTE_16_WEST, 1
+	warp_event  3,  7, ROUTE_16_WEST, 1
 
-PsychicInversHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 1, ROUTE_16_WEST
-	warp_def $7, $3, 1, ROUTE_16_WEST
+	db 1 ; bg events
+	bg_event  7,  1, SIGNPOST_JUMPSTD, difficultbookshelf
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  2,  2, SPRITE_PSYCHIC, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, PsychicInverScript, -1
+	object_event  6,  3, SPRITE_HEX_MANIAC, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, PsychicInversHouseHexManiacText, -1
 
-.Signposts: db 1
-	signpost 1, 7, SIGNPOST_JUMPSTD, difficultbookshelf
-
-.PersonEvents: db 2
-	person_event SPRITE_YOUNGSTER, 2, 2, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, PsychicInverScript, -1
-	person_event SPRITE_HEX_MANIAC, 3, 6, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_JUMPTEXTFP, 0, PsychicInversHouseHexManiacText, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const PSYCHICINVERSHOUSE_INVER
 
 PsychicInverScript:
+	checkflag ENGINE_FOUGHT_PSYCHIC_INVER
+	iftrue_jumptextfaceplayer PsychicInverTomorrowText
 	faceplayer
 	opentext
-	checkflag ENGINE_FOUGHT_PSYCHIC_INVER
-	iftrue .Tomorrow
 	writetext PsychicInverGreetingText
-	waitbutton
-	writetext PsychicInverChallengeText
 	yesorno
-	iffalse .No
+	iffalse_jumpopenedtext PsychicInverNoText
 	writetext PsychicInverYesText
 	waitbutton
 	closetext
@@ -44,12 +39,12 @@ PsychicInverScript:
 	startbattle
 	reloadmapafterbattle
 	opentext
-	copybytetovar InverseBattleScore
-	if_equal 0, .Score0
-	if_greater_than 127, .Score0 ; negative
-	if_less_than 4, .Score1_3
-	if_less_than 7, .Score4_6
-	if_less_than 10, .Score7_9
+	copybytetovar wInverseBattleScore
+	ifequal 0, .Score0
+	ifgreater 127, .Score0 ; negative
+	ifless 4, .Score1_3
+	ifless 7, .Score4_6
+	ifless 10, .Score7_9
 	writetext InverseBattle10PointRewardText
 	writebyte RARE_CANDY
 .Reward
@@ -58,8 +53,7 @@ PsychicInverScript:
 .GiveReward
 	buttonsound
 	verbosegiveitem ITEM_FROM_MEM
-	closetext
-	end
+	endtext
 
 .Score0
 	writetext InverseBattle0PointRewardText
@@ -75,39 +69,15 @@ PsychicInverScript:
 
 .Score4_6
 	writetext InverseBattle4_6PointRewardText
-	callasm .RandomBerry
+	random MARANGABERRY - LUM_BERRY + 1
+	addvar LUM_BERRY
 	jump .Reward
 
 .Score7_9
 	writetext InverseBattle7_9PointRewardText
-	callasm .RandomStone
+	random EVERSTONE - LEAF_STONE + 1
+	addvar LEAF_STONE
 	jump .Reward
-
-.No
-	writetext PsychicInverNoText
-	waitbutton
-	closetext
-	end
-
-.Tomorrow:
-	writetext PsychicInverTomorrowText
-	waitbutton
-	closetext
-	end
-
-.RandomBerry:
-	ld a, APICOT_BERRY - LUM_BERRY + 1
-	call RandomRange
-	add LUM_BERRY
-	ld [ScriptVar], a
-	ret
-
-.RandomStone:
-	ld a, EVERSTONE - LEAF_STONE + 1
-	call RandomRange
-	add LEAF_STONE
-	ld [ScriptVar], a
-	ret
 
 PsychicInverGreetingText:
 	text "Oh. I wasn't ex-"
@@ -120,10 +90,8 @@ PsychicInverGreetingText:
 
 	para "I call this an"
 	line "Inverse Battle!"
-	done
 
-PsychicInverChallengeText:
-	text "What do you think?"
+	para "What do you think?"
 	line "Would you care to"
 	cont "try an Inverse"
 	cont "Battle?"

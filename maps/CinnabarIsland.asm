@@ -1,30 +1,27 @@
 CinnabarIsland_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, CinnabarIslandFlyPoint
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, CinnabarIslandFlyPoint
+	db 3 ; warp events
+	warp_event 11, 15, CINNABAR_POKECENTER_1F, 1
+	warp_event 18,  9, CINNABAR_VOLCANO_1F, 1
+	warp_event  7,  7, POKEMON_MANSION_1F, 1
 
-CinnabarIsland_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $f, $b, 1, CINNABAR_POKECENTER_1F
-	warp_def $9, $12, 1, CINNABAR_VOLCANO_1F
-	warp_def $7, $7, 1, POKEMON_MANSION_1F
+	db 4 ; bg events
+	bg_event  9, 15, SIGNPOST_JUMPTEXT, CinnabarIslandGymSignText
+	bg_event  9, 11, SIGNPOST_JUMPTEXT, CinnabarIslandSignText
+	bg_event 21, 11, SIGNPOST_JUMPTEXT, CinnabarIslandVolcanoWarningSignText
+	bg_event 11, 12, SIGNPOST_ITEM + RARE_CANDY, EVENT_CINNABAR_ISLAND_HIDDEN_RARE_CANDY
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event 20, 14, SPRITE_BLUE, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarIslandBlue, EVENT_BLUE_IN_CINNABAR
+	itemball_event 22,  2, MAGMARIZER, 1, EVENT_CINNABAR_ISLAND_MAGMARIZER
 
-.Signposts: db 4
-	signpost 15, 9, SIGNPOST_READ, CinnabarIslandGymSign
-	signpost 11, 9, SIGNPOST_READ, CinnabarIslandSign
-	signpost 11, 21, SIGNPOST_READ, CinnabarIslandVolcanoWarningSign
-	signpost 12, 11, SIGNPOST_ITEM, CinnabarIslandHiddenRareCandy
-
-.PersonEvents: db 2
-	person_event SPRITE_BLUE, 14, 20, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarIslandBlue, EVENT_BLUE_IN_CINNABAR
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 22, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MAGMARIZER, 1, EVENT_CINNABAR_ISLAND_MAGMARIZER
-
-const_value set 2
+	const_def 1 ; object constants
 	const CINNABARISLAND_BLUE
 
 CinnabarIslandFlyPoint:
@@ -43,41 +40,23 @@ CinnabarIslandBlue:
 	writetext CinnabarIslandBlueBattleText
 	waitbutton
 	checkcode VAR_BADGES
-	if_greater_than 14, .Ready
-	writetext CinnabarIslandBlueNotReadyText
-	waitbutton
-	closetext
-	end
+	ifgreater 14, .Ready
+	jumpopenedtext CinnabarIslandBlueNotReadyText
 
 .Ready
 	writetext CinnabarIslandBlueReadyText
 	waitbutton
 	closetext
 	playsound SFX_WARP_TO
-	applymovement CINNABARISLAND_BLUE, CinnabarIslandBlueTeleport
+	applyonemovement CINNABARISLAND_BLUE, teleport_from
 	disappear CINNABARISLAND_BLUE
 	clearevent EVENT_VIRIDIAN_GYM_BLUE
 	end
 
-CinnabarIslandGymSign:
-	jumptext CinnabarIslandGymSignText
-
-CinnabarIslandSign:
-	jumptext CinnabarIslandSignText
-
-CinnabarIslandVolcanoWarningSign:
-	jumptext CinnabarIslandVolcanoWarningSignText
-
-CinnabarIslandHiddenRareCandy:
-	dwb EVENT_CINNABAR_ISLAND_HIDDEN_RARE_CANDY, RARE_CANDY
-
-CinnabarIslandBlueTeleport:
-	teleport_from
-	step_end
-
 CinnabarIslandBlueText:
 	text "Who are you?"
 
+if !DEF(DEBUG)
 	para "Well, it's plain"
 	line "to see that you're"
 	cont "a trainer…"
@@ -130,6 +109,7 @@ CinnabarIslandBlueText:
 
 	para "But, anyway, I'm"
 	line "still a trainer."
+endc
 	done
 
 CinnabarIslandBlueBattleText:

@@ -1,20 +1,17 @@
 ScaryCaveB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  5, 19, SCARY_CAVE_1F, 3
+	warp_event 19,  3, SCARY_CAVE_1F, 4
 
-ScaryCaveB1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $13, $5, 3, SCARY_CAVE_1F
-	warp_def $3, $13, 4, SCARY_CAVE_1F
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, BIG_NUGGET, 1, EVENT_SCARY_CAVE_B1F_BIG_NUGGET
-	person_event SPRITE_BALL_CUT_FRUIT, 19, 21, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, BLACK_SLUDGE, 1, EVENT_SCARY_CAVE_B1F_BLACK_SLUDGE
+	db 2 ; object events
+	itemball_event  2, 15, BIG_NUGGET, 1, EVENT_SCARY_CAVE_B1F_BIG_NUGGET
+	itemball_event 21, 19, BLACK_SLUDGE, 1, EVENT_SCARY_CAVE_B1F_BLACK_SLUDGE
 

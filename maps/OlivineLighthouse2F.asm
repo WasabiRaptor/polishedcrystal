@@ -1,44 +1,38 @@
 OlivineLighthouse2F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event  3, 11, OLIVINE_LIGHTHOUSE_1F, 3
+	warp_event  5,  3, OLIVINE_LIGHTHOUSE_3F, 2
+	warp_event 16, 13, OLIVINE_LIGHTHOUSE_1F, 4
+	warp_event 17, 13, OLIVINE_LIGHTHOUSE_1F, 5
+	warp_event 16, 11, OLIVINE_LIGHTHOUSE_3F, 4
+	warp_event 17, 11, OLIVINE_LIGHTHOUSE_3F, 5
 
-OlivineLighthouse2F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $b, $3, 3, OLIVINE_LIGHTHOUSE_1F
-	warp_def $3, $5, 2, OLIVINE_LIGHTHOUSE_3F
-	warp_def $d, $10, 4, OLIVINE_LIGHTHOUSE_1F
-	warp_def $d, $11, 5, OLIVINE_LIGHTHOUSE_1F
-	warp_def $b, $10, 4, OLIVINE_LIGHTHOUSE_3F
-	warp_def $b, $11, 5, OLIVINE_LIGHTHOUSE_3F
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_SAILOR, 3, 9, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerSailorHuey1, -1
-	person_event SPRITE_GENTLEMAN, 8, 17, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerGentlemanAlfred, -1
+	db 2 ; object events
+	object_event  9,  3, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerSailorHuey1, -1
+	object_event 17,  8, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerGentlemanAlfred, -1
 
 TrainerGentlemanAlfred:
-	trainer EVENT_BEAT_GENTLEMAN_ALFRED, GENTLEMAN, ALFRED, GentlemanAlfredSeenText, GentlemanAlfredBeatenText, 0, GentlemanAlfredScript
+	trainer GENTLEMAN, ALFRED, EVENT_BEAT_GENTLEMAN_ALFRED, GentlemanAlfredSeenText, GentlemanAlfredBeatenText, 0, GentlemanAlfredScript
 
 GentlemanAlfredScript:
 	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5b13e
-	waitbutton
-	closetext
-	end
+	checkevent EVENT_JASMINE_RETURNED_TO_GYM
+	iftrue_jumptextfaceplayer GentlemanAlfredFinalText
+	jumptextfaceplayer UnknownText_0x5b13e
 
 TrainerSailorHuey1:
-	trainer EVENT_BEAT_SAILOR_HUEY, SAILOR, HUEY1, SailorHuey1SeenText, SailorHuey1BeatenText, 0, SailorHuey1Script
+	trainer SAILOR, HUEY1, EVENT_BEAT_SAILOR_HUEY, SailorHuey1SeenText, SailorHuey1BeatenText, 0, SailorHuey1Script
 
 SailorHuey1Script:
 	writecode VAR_CALLERID, PHONE_SAILOR_HUEY
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_HUEY
 	iftrue UnknownScript_0x5afc7
@@ -54,8 +48,8 @@ UnknownScript_0x5afb0:
 	scall UnknownScript_0x5b057
 UnknownScript_0x5afb3:
 	askforphonenumber PHONE_SAILOR_HUEY
-	if_equal $1, UnknownScript_0x5b067
-	if_equal $2, UnknownScript_0x5b063
+	ifequal $1, UnknownScript_0x5b067
+	ifequal $2, UnknownScript_0x5b063
 	trainertotext SAILOR, HUEY1, $0
 	scall UnknownScript_0x5b05b
 	jump UnknownScript_0x5b05f
@@ -64,10 +58,10 @@ UnknownScript_0x5afc7:
 	scall UnknownScript_0x5b06b
 	winlosstext SailorHuey1BeatenText, 0
 	copybytetovar wHueyFightCount
-	if_equal 3, .Fight3
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 3, .Fight3
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight3:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight3
@@ -131,31 +125,24 @@ UnknownScript_0x5b03f:
 
 UnknownScript_0x5b053:
 	jumpstd asknumber1m
-	end
 
 UnknownScript_0x5b057:
 	jumpstd asknumber2m
-	end
 
 UnknownScript_0x5b05b:
 	jumpstd registerednumberm
-	end
 
 UnknownScript_0x5b05f:
 	jumpstd numberacceptedm
-	end
 
 UnknownScript_0x5b063:
 	jumpstd numberdeclinedm
-	end
 
 UnknownScript_0x5b067:
 	jumpstd phonefullm
-	end
 
 UnknownScript_0x5b06b:
 	jumpstd rematchm
-	end
 
 UnknownScript_0x5b06f:
 	setevent EVENT_HUEY_PROTEIN
@@ -164,7 +151,6 @@ UnknownScript_0x5b06f:
 
 UnknownScript_0x5b076:
 	jumpstd rematchgiftm
-	end
 
 SailorHuey1SeenText:
 	text "Men of the sea are"
@@ -197,6 +183,18 @@ UnknownText_0x5b13e:
 
 	para "can't be cured by"
 	line "ordinary medicine."
+	done
+
+GentlemanAlfredFinalText:
+	text "Up top is a #-"
+	line "mon that keeps the"
+	cont "Lighthouse lit."
+
+	para "You helped cure"
+	line "its sickness?"
+
+	para "You've done us a"
+	line "real service!"
 	done
 
 UnknownText_0x5b1b6:

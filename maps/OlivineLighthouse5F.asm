@@ -1,57 +1,51 @@
 OlivineLighthouse5F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 7 ; warp events
+	warp_event  9, 15, OLIVINE_LIGHTHOUSE_6F, 1
+	warp_event  3,  5, OLIVINE_LIGHTHOUSE_4F, 2
+	warp_event  9,  7, OLIVINE_LIGHTHOUSE_4F, 3
+	warp_event 16,  7, OLIVINE_LIGHTHOUSE_4F, 9
+	warp_event 17,  7, OLIVINE_LIGHTHOUSE_4F, 10
+	warp_event 16,  5, OLIVINE_LIGHTHOUSE_6F, 2
+	warp_event 17,  5, OLIVINE_LIGHTHOUSE_6F, 3
 
-OlivineLighthouse5F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 7
-	warp_def $f, $9, 1, OLIVINE_LIGHTHOUSE_6F
-	warp_def $5, $3, 2, OLIVINE_LIGHTHOUSE_4F
-	warp_def $7, $9, 3, OLIVINE_LIGHTHOUSE_4F
-	warp_def $7, $10, 9, OLIVINE_LIGHTHOUSE_4F
-	warp_def $7, $11, 10, OLIVINE_LIGHTHOUSE_4F
-	warp_def $5, $10, 2, OLIVINE_LIGHTHOUSE_6F
-	warp_def $5, $11, 3, OLIVINE_LIGHTHOUSE_6F
+	db 1 ; bg events
+	bg_event  3, 13, SIGNPOST_ITEM + HYPER_POTION, EVENT_OLIVINE_LIGHTHOUSE_5F_HIDDEN_HYPER_POTION
 
-.XYTriggers: db 0
+	db 5 ; object events
+	object_event  8, 11, SPRITE_SAILOR, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSailorErnest, -1
+	object_event  8,  3, SPRITE_BIRD_KEEPER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBird_keeperDenis, -1
+	itemball_event 15, 12, RARE_CANDY, 1, EVENT_OLIVINE_LIGHTHOUSE_5F_RARE_CANDY
+	itemball_event  6, 15, SUPER_REPEL, 1, EVENT_OLIVINE_LIGHTHOUSE_5F_SUPER_REPEL
+	tmhmball_event  2, 13, TM_ENERGY_BALL, EVENT_OLIVINE_LIGHTHOUSE_5F_TM_ENERGY_BALL
 
-.Signposts: db 1
-	signpost 13, 3, SIGNPOST_ITEM, OlivineLighthouse5FHiddenHyperPotion
+GenericTrainerBird_keeperDenis:
+	generictrainer BIRD_KEEPER, DENIS, EVENT_BEAT_BIRD_KEEPER_DENIS, Bird_keeperDenisSeenText, Bird_keeperDenisBeatenText
 
-.PersonEvents: db 5
-	person_event SPRITE_SAILOR, 11, 8, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerSailorErnest, -1
-	person_event SPRITE_YOUNGSTER, 3, 8, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerBird_keeperDenis, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, RARE_CANDY, 1, EVENT_OLIVINE_LIGHTHOUSE_5F_RARE_CANDY
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, SUPER_REPEL, 1, EVENT_OLIVINE_LIGHTHOUSE_5F_SUPER_REPEL
-	person_event SPRITE_BALL_CUT_FRUIT, 13, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TMHMBALL, 0, TM_ENERGY_BALL, EVENT_OLIVINE_LIGHTHOUSE_5F_TM_ENERGY_BALL
+	text "My #mon learned"
+	line "how to use Fly in"
+	cont "Cianwood."
 
-TrainerBird_keeperDenis:
-	trainer EVENT_BEAT_BIRD_KEEPER_DENIS, BIRD_KEEPER, DENIS, Bird_keeperDenisSeenText, Bird_keeperDenisBeatenText, 0, Bird_keeperDenisScript
+	para "Well, since I'm a"
+	line "loser, I'll Fly"
+	cont "across the sea…"
+	done
 
-Bird_keeperDenisScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x60ac3
-	waitbutton
-	closetext
-	end
+GenericTrainerSailorErnest:
+	generictrainer SAILOR, ERNEST, EVENT_BEAT_SAILOR_ERNEST, SailorErnestSeenText, SailorErnestBeatenText
 
-TrainerSailorErnest:
-	trainer EVENT_BEAT_SAILOR_ERNEST, SAILOR, ERNEST, SailorErnestSeenText, SailorErnestBeatenText, 0, SailorErnestScript
+	text "A Gym Leader isn't"
+	line "just about being"
 
-SailorErnestScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x60a1f
-	waitbutton
-	closetext
-	end
-
-OlivineLighthouse5FHiddenHyperPotion:
-	dwb EVENT_OLIVINE_LIGHTHOUSE_5F_HIDDEN_HYPER_POTION, HYPER_POTION
-
+	para "strong. A Leader"
+	line "also needs to be"
+	cont "compassionate."
+	done
 
 SailorErnestSeenText:
 	text "I wanted to battle"
@@ -66,15 +60,6 @@ SailorErnestBeatenText:
 	line "overwhelming!"
 	done
 
-UnknownText_0x60a1f:
-	text "A Gym Leader isn't"
-	line "just about being"
-
-	para "strong. A Leader"
-	line "also needs to be"
-	cont "compassionate."
-	done
-
 Bird_keeperDenisSeenText:
 	text "We're pretty high"
 	line "up here. My bird"
@@ -87,12 +72,3 @@ Bird_keeperDenisBeatenText:
 	text "Oops…They crashed…"
 	done
 
-UnknownText_0x60ac3:
-	text "My #mon learned"
-	line "how to use Fly in"
-	cont "Cianwood."
-
-	para "Well, since I'm a"
-	line "loser, I'll Fly"
-	cont "across the sea…"
-	done

@@ -1,26 +1,20 @@
 SilverCaveRoom2_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event 17, 31, SILVER_CAVE_ROOM_1, 2
+	warp_event 11,  5, SILVER_CAVE_ROOM_3, 1
+	warp_event 13, 21, SILVER_CAVE_ITEM_ROOMS, 1
+	warp_event 23,  3, SILVER_CAVE_ITEM_ROOMS, 2
 
-SilverCaveRoom2_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $1f, $11, 2, SILVER_CAVE_ROOM_1
-	warp_def $5, $b, 1, SILVER_CAVE_ROOM_3
-	warp_def $15, $d, 1, SILVER_CAVE_ITEM_ROOMS
-	warp_def $3, $17, 2, SILVER_CAVE_ITEM_ROOMS
+	db 1 ; bg events
+	bg_event 14, 31, SIGNPOST_ITEM + MAX_POTION, EVENT_SILVER_CAVE_ROOM_2_HIDDEN_MAX_POTION
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 31, 14, SIGNPOST_ITEM, SilverCaveRoom2HiddenMaxPotion
-
-.PersonEvents: db 3
-	person_event SPRITE_BALL_CUT_FRUIT, 10, 24, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, CALCIUM, 1, EVENT_SILVER_CAVE_ROOM_2_CALCIUM
-	person_event SPRITE_BALL_CUT_FRUIT, 24, 22, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ULTRA_BALL, 1, EVENT_SILVER_CAVE_ROOM_2_ULTRA_BALL
-	person_event SPRITE_BALL_CUT_FRUIT, 20, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, PP_UP, 1, EVENT_SILVER_CAVE_ROOM_2_PP_UP
-
-SilverCaveRoom2HiddenMaxPotion:
-	dwb EVENT_SILVER_CAVE_ROOM_2_HIDDEN_MAX_POTION, MAX_POTION
+	db 3 ; object events
+	itemball_event 24, 10, CALCIUM, 1, EVENT_SILVER_CAVE_ROOM_2_CALCIUM
+	itemball_event 22, 24, ULTRA_BALL, 1, EVENT_SILVER_CAVE_ROOM_2_ULTRA_BALL
+	itemball_event  4, 20, PP_UP, 1, EVENT_SILVER_CAVE_ROOM_2_PP_UP

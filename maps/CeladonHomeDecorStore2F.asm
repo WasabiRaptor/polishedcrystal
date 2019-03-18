@@ -1,23 +1,20 @@
 CeladonHomeDecorStore2F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  9,  0, CELADON_HOME_DECOR_STORE_1F, 3
+	warp_event  6,  0, CELADON_HOME_DECOR_STORE_3F, 1
 
-CeladonHomeDecorStore2F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $0, $9, 3, CELADON_HOME_DECOR_STORE_1F
-	warp_def $0, $6, 1, CELADON_HOME_DECOR_STORE_3F
+	db 1 ; bg events
+	bg_event  8,  0, SIGNPOST_JUMPTEXT, CeladonHomeDecorStore2FDirectoryText
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 0, 8, SIGNPOST_READ, CeladonHomeDecorStore2FDirectory
-
-.PersonEvents: db 2
-	person_event SPRITE_CLERK, 5, 9, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore2FClerkScript, -1
-	person_event SPRITE_POKEFAN_F, 1, 3, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore2FPokefanfScript, -1
+	db 2 ; object events
+	object_event  9,  5, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore2FClerkScript, -1
+	object_event  3,  1, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonHomeDecorStore2FPokefanfText, -1
 
 CeladonHomeDecorStore2FClerkScript:
 	faceplayer
@@ -25,18 +22,17 @@ CeladonHomeDecorStore2FClerkScript:
 	writetext CeladonHomeDecorStore2FClerkText
 .Start:
 	special PlaceMoneyTopRight
-	loadmenudata .MenuData
+	loadmenu .MenuData
 	verticalmenu
 	closewindow
-	if_equal $1, .PinkBed
-	if_equal $2, .PolkaDotBed
-	if_equal $3, .PikachuBed
-	closetext
-	end
+	ifequal $1, .PinkBed
+	ifequal $2, .PolkaDotBed
+	ifequal $3, .PikachuBed
+	endtext
 
 .PinkBed:
 	checkmoney $0, 62000
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_BED_2
 	iftrue .AlreadyBought
 	takemoney $0, 62000
@@ -50,7 +46,7 @@ CeladonHomeDecorStore2FClerkScript:
 
 .PolkaDotBed:
 	checkmoney $0, 94000
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_BED_3
 	iftrue .AlreadyBought
 	takemoney $0, 94000
@@ -64,7 +60,7 @@ CeladonHomeDecorStore2FClerkScript:
 
 .PikachuBed:
 	checkmoney $0, 126000
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_BED_4
 	iftrue .AlreadyBought
 	takemoney $0, 126000
@@ -100,12 +96,6 @@ CeladonHomeDecorStore2FClerkScript:
 	db "PolkaDot  ¥94000@"
 	db "Pikachu  ¥126000@"
 	db "Cancel@"
-
-CeladonHomeDecorStore2FPokefanfScript:
-	jumptextfaceplayer CeladonHomeDecorStore2FPokefanfText
-
-CeladonHomeDecorStore2FDirectory:
-	jumptext CeladonHomeDecorStore2FDirectoryText
 
 CeladonHomeDecorStore2FClerkText:
 	text "Welcome! Are you"

@@ -8,18 +8,17 @@ InitClock: ; 90672 (24:4672)
 	xor a
 	ld [wSpriteUpdatesEnabled], a
 	ld a, $10
-	ld [MusicFade], a
+	ld [wMusicFade], a
 	ld a, MUSIC_NONE % $100
-	ld [MusicFadeIDLo], a
+	ld [wMusicFadeIDLo], a
 	ld a, MUSIC_NONE / $100
-	ld [MusicFadeIDHi], a
-	ld c, 8
-	call DelayFrames
-	call RotateFourPalettesLeft
+	ld [wMusicFadeIDHi], a
+	ld c, 31
+	call FadeToBlack
 	call ClearTileMap
 	call ClearSprites
-	ld b, SCGB_DIPLOMA
-	call GetSGBLayout
+	ld b, CGB_DIPLOMA
+	call GetCGBLayout
 	xor a
 	ld [hBGMapMode], a
 	call LoadStandardFont
@@ -28,13 +27,15 @@ InitClock: ; 90672 (24:4672)
 	lb bc, BANK(TimesetBackgroundGFX), 1
 	call Request1bpp
 	call .ClearScreen
-	call WaitBGMap
-	call RotateFourPalettesRight
+	call ApplyTilemapInVBlank
+	call SetPalettes
+	ld c, 10
+	call DelayFrames
 if !DEF(DEBUG)
 	ld hl, Text_WokeUpOak
 	call PrintText
 endc
-	ld hl, wc608
+	ld hl, wTimesetBuffer
 	ld bc, 50
 	xor a
 	call ByteFill
@@ -62,7 +63,7 @@ endc
 	jr nc, .SetHourLoop
 
 	ld a, [wInitHourBuffer]
-	ld [StringBuffer2 + 1], a
+	ld [wStringBuffer2 + 1], a
 	call .ClearScreen
 	ld hl, Text_WhatHrs
 	call PrintText
@@ -91,8 +92,8 @@ endc
 	call SetMinutes
 	jr nc, .SetMinutesLoop
 
-	ld a, [BattleMonNick + 5]
-	ld [StringBuffer2 + 2], a
+	ld a, [wInitMinuteBuffer]
+	ld [wStringBuffer2 + 2], a
 	call .ClearScreen
 	ld hl, Text_WhoaMins
 	call PrintText
@@ -165,7 +166,7 @@ SetHour: ; 90795 (24:4795)
 	call ByteFill
 	hlcoord 4, 9
 	call DisplayHourOClock
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	and a
 	ret
 
@@ -203,7 +204,7 @@ SetMinutes: ; 90810 (24:4810)
 	ret
 
 .d_down
-	ld hl, BattleMonNick + 5
+	ld hl, wInitMinuteBuffer
 	ld a, [hl]
 	and a
 	jr nz, .decrease
@@ -214,7 +215,7 @@ SetMinutes: ; 90810 (24:4810)
 	jr .finish_dpad
 
 .d_up
-	ld hl, BattleMonNick + 5
+	ld hl, wInitMinuteBuffer
 	ld a, [hl]
 	cp 59
 	jr c, .increase
@@ -229,7 +230,7 @@ SetMinutes: ; 90810 (24:4810)
 	call ByteFill
 	hlcoord 12, 9
 	call DisplayMinutesWithMinString
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	and a
 	ret
 .a_button
@@ -237,7 +238,7 @@ SetMinutes: ; 90810 (24:4810)
 	ret
 
 DisplayMinutesWithMinString: ; 90859 (24:4859)
-	ld de, BattleMonNick + 5
+	ld de, wInitMinuteBuffer
 	call PrintTwoDigitNumberRightAlign
 	inc hl
 	ld de, String_min
@@ -249,7 +250,7 @@ PrintTwoDigitNumberRightAlign: ; 90867 (24:4867)
 	ld [hli], a
 	ld [hl], a
 	pop hl
-	lb bc, PRINTNUM_RIGHTALIGN | 1, 2
+	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	jp PrintNum
 ; 90874 (24:4874)
 
@@ -319,7 +320,7 @@ OakText_ResponseToSetTime: ; 0x908b8
 	call PrintHour
 	ld [hl], ":"
 	inc hl
-	ld de, BattleMonNick + 5
+	ld de, wInitMinuteBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	call PrintNum
 	ld b, h
@@ -361,7 +362,7 @@ OakText_ResponseToSetTime: ; 0x908b8
 ; 0x908fb
 
 TimesetBackgroundGFX: ; 908fb
-INCBIN "gfx/misc/timeset_bg.1bpp"
+INCBIN "gfx/new_game/timeset_bg.1bpp"
 
 Special_SetDayOfWeek: ; 90913
 	ld a, [hInMenu]
@@ -400,7 +401,7 @@ Special_SetDayOfWeek: ; 90913
 	call YesNoBox
 	jr c, .loop
 	ld a, [wTempDayOfWeek]
-	ld [StringBuffer2], a
+	ld [wStringBuffer2], a
 	call SetDayOfWeek
 	call LoadStandardFont
 	pop af
@@ -458,7 +459,7 @@ Special_SetDayOfWeek: ; 90913
 	call ClearBox
 	hlcoord 10, 5
 	call .PlaceWeekdayString
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	and a
 	ret
 ; 909de
@@ -469,9 +470,8 @@ Special_SetDayOfWeek: ; 90913
 	ld e, a
 	ld d, 0
 	ld hl, .WeekdayStrings
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
@@ -537,7 +537,7 @@ Special_InitialSetDSTFlag: ; 90a54
 	ld a, [hMinutes]
 	ld c, a
 	decoord 1, 14
-	farcall PrintHoursMins
+	call PrintHoursMins
 	ld hl, .DSTIsThatOK
 	ret
 ; 90a83 (24:4a83)
@@ -567,7 +567,7 @@ Special_InitialClearDSTFlag: ; 90a88
 	ld a, [hMinutes]
 	ld c, a
 	decoord 1, 14
-	farcall PrintHoursMins
+	call PrintHoursMins
 	ld hl, .IsThatOK
 	ret
 ; 90ab7
@@ -619,7 +619,7 @@ GetTimeOfDayString: ; 90b58 (24:4b58)
 
 AdjustHourForAMorPM:
 ; Convert the hour stored in c (0-23) to a 1-12 value
-	ld a, [Options2]
+	ld a, [wOptions2]
 	bit CLOCK_FORMAT, a
 	ld a, c
 	ret nz
@@ -634,3 +634,58 @@ AdjustHourForAMorPM:
 .midnight
 	ld a, 12
 	ret
+
+PrintHoursMins ; 1dd6bb (77:56bb)
+; Hours in b, minutes in c
+	ld a, [wOptions2]
+	bit CLOCK_FORMAT, a
+	ld a, b
+	jr nz, .h24
+	cp 12
+	push af
+	jr c, .AM
+	jr z, .PM
+	sub 12
+	jr .PM
+.AM:
+	or a
+	jr nz, .PM
+	ld a, 12
+.PM:
+	ld b, a
+.h24:
+; Crazy stuff happening with the stack
+	push bc
+	ld hl, sp+$1
+	push de
+	push hl
+	pop de
+	pop hl
+	ld [hl], " "
+	lb bc, 1, 2
+	call PrintNum
+	ld [hl], ":"
+	inc hl
+	ld d, h
+	ld e, l
+	ld hl, sp+$0
+	push de
+	push hl
+	pop de
+	pop hl
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+	pop bc
+	ld a, [wOptions2]
+	bit CLOCK_FORMAT, a
+	ret nz
+	ld de, .String_AM
+	pop af
+	jr c, .place_am_pm
+	ld de, .String_PM
+.place_am_pm
+	inc hl
+	jp PlaceString
+
+.String_AM: db "AM@" ; 1dd6fc
+.String_PM: db "PM@" ; 1dd6ff

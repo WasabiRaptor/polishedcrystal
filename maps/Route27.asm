@@ -1,112 +1,97 @@
 Route27_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_SPRITES, Route27DragonTamerSprite
+	db 3 ; warp events
+	warp_event 33,  7, ROUTE_27_REST_HOUSE, 1
+	warp_event 26,  5, TOHJO_FALLS, 1
+	warp_event 36,  5, TOHJO_FALLS, 2
 
-Route27_MapEventHeader:
+	db 2 ; coord events
+	coord_event 18, 10, 0, UnknownScript_0x1a0873
+	coord_event 19, 10, 0, UnknownScript_0x1a0881
 
-.Warps: db 3
-	warp_def $7, $21, 1, ROUTE_27_REST_HOUSE
-	warp_def $5, $1a, 1, TOHJO_FALLS
-	warp_def $5, $24, 2, TOHJO_FALLS
+	db 1 ; bg events
+	bg_event 25,  7, SIGNPOST_JUMPTEXT, TohjoFallsSignText
 
-.XYTriggers: db 2
-	xy_trigger 0, $a, $12, UnknownScript_0x1a0873
-	xy_trigger 0, $a, $13, UnknownScript_0x1a0881
+	db 12 ; object events
+	object_event 48, 12, SPRITE_VETERAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route27VeteranfScript, -1
+	object_event 21, 10, SPRITE_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x1a0a71, -1
+	object_event 48,  7, SPRITE_ACE_TRAINER_M, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerCooltrainermBlake, -1
+	object_event 58,  6, SPRITE_ACE_TRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerAceDuoJakeandbri1, -1
+	object_event 59,  6, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerAceDuoJakeandbri2, -1
+	object_event 72, 10, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 4, TrainerCooltrainerfReena, -1
+	object_event 37,  6, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerCooltrainerfMegan, -1
+	object_event 65,  7, SPRITE_PSYCHIC, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerPsychicGilbert, -1
+	object_event 58, 13, SPRITE_BIRD_KEEPER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerBird_keeperJose1, -1
+	itemball_event 53, 12, RARE_CANDY, 1, EVENT_ROUTE_27_RARE_CANDY
+	itemball_event 71,  4, DESTINY_KNOT, 1, EVENT_ROUTE_27_DESTINY_KNOT
+	fruittree_event 60, 12, FRUITTREE_ROUTE_27, LUM_BERRY
 
-.Signposts: db 1
-	signpost 7, 25, SIGNPOST_READ, TohjoFallsSign
-
-.PersonEvents: db 13
-	person_event SPRITE_VETERAN_F, 12, 48, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, Route27VeteranfScript, -1
-	person_event SPRITE_FISHER, 10, 21, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 3, FisherScript_0x1a089c, -1
-	person_event SPRITE_COOLTRAINER_M, 7, 48, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerCooltrainermBlake, -1
-	person_event SPRITE_COOLTRAINER_M, 6, 58, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerAceDuoJakeandbri1, -1
-	person_event SPRITE_COOLTRAINER_F, 6, 59, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 1, TrainerAceDuoJakeandbri2, -1
-	person_event SPRITE_COOLTRAINER_F, 10, 72, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 4, TrainerCooltrainerfReena, -1
-	person_event SPRITE_COOLTRAINER_F, 6, 37, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerCooltrainerfMegan, -1
-	person_event SPRITE_YOUNGSTER, 7, 65, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 3, TrainerPsychicGilbert, -1
-	person_event SPRITE_YOUNGSTER, 13, 58, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBird_keeperJose1, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 58, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TMHMBALL, 0, TM_DRAGON_CLAW, EVENT_ROUTE_27_TM_DRAGON_CLAW
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 53, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, RARE_CANDY, 1, EVENT_ROUTE_27_RARE_CANDY
-	person_event SPRITE_BALL_CUT_FRUIT, 4, 71, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, DESTINY_KNOT, 1, EVENT_ROUTE_27_DESTINY_KNOT
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 60, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FruitTreeScript_Route27LumBerry, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const ROUTE27_VETERAN_F
 	const ROUTE27_FISHER
 
-Route27DragonTamerSprite:
-	variablesprite SPRITE_GUIDE_GENT, SPRITE_DRAGON_TAMER
-	return
-
 UnknownScript_0x1a0873:
-	spriteface ROUTE27_FISHER, LEFT
+	turnobject ROUTE27_FISHER, LEFT
 	showemote EMOTE_SHOCK, ROUTE27_FISHER, 15
 	applymovement ROUTE27_FISHER, MovementData_0x1a0a66
 	jump UnknownScript_0x1a088c
 
 UnknownScript_0x1a0881:
-	spriteface ROUTE27_FISHER, LEFT
+	turnobject ROUTE27_FISHER, LEFT
 	showemote EMOTE_SHOCK, ROUTE27_FISHER, 15
-	applymovement ROUTE27_FISHER, MovementData_0x1a0a69
+	applyonemovement ROUTE27_FISHER, step_left
 UnknownScript_0x1a088c:
-	spriteface PLAYER, RIGHT
+	turnobject PLAYER, RIGHT
 	opentext
 	writetext UnknownText_0x1a0a6b
 	buttonsound
 	writetext UnknownText_0x1a0a71
 	waitbutton
 	closetext
-	dotrigger $1
+	setscene $1
 	end
 
-FisherScript_0x1a089c:
-	jumptextfaceplayer UnknownText_0x1a0a71
-
-FruitTreeScript_Route27LumBerry:
-	fruittree FRUITTREE_ROUTE_27
-
 Route27VeteranfScript:
-	faceplayer
-	opentext
 	checkevent EVENT_GOT_CHOICE_SPECS_FROM_ROUTE_27_LEADER
-	iftrue .GotChoiceSpecs
+	iftrue_jumptextfaceplayer .AfterText2
+	faceplayer
 	checkevent EVENT_BEAT_VETERANF_LITVYAK
 	iftrue .Beaten
 	checkevent EVENT_BEAT_PSYCHIC_GILBERT
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_BIRD_KEEPER_JOSE
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_COOLTRAINERM_BLAKE
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_ACE_DUO_JAKE_AND_BRI
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_COOLTRAINERF_REENA
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_COOLTRAINERF_MEGAN
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_DRAGON_TAMER_KAZU
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_COOLTRAINERM_GAVEN
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_COOLTRAINERF_JOYCE
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_COOLTRAINERF_BETH
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_PSYCHIC_RICHARD
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_BATTLE_GIRL_RONDA
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_FISHER_SCOTT
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
 	checkevent EVENT_BEAT_DRAGON_TAMER_ERICK
-	iffalse .RouteNotCleared
+	iffalse_jumptext .IntroText
+	opentext
 	writetext .QuestionText
 	yesorno
-	iffalse .NoBattle
+	iffalse_jumpopenedtext .RefusedText
 	writetext .SeenText
 	waitbutton
 	closetext
@@ -116,31 +101,20 @@ Route27VeteranfScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_VETERANF_LITVYAK
-	opentext
 .Beaten:
+	opentext
 	writetext .AfterText1
 	buttonsound
 	verbosegiveitem CHOICE_SPECS
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_CHOICE_SPECS_FROM_ROUTE_27_LEADER
-.GotChoiceSpecs:
-	writetext .AfterText2
-	waitbutton
-.Done:
-	closetext
-	end
+	thisopenedtext
 
-.RouteNotCleared:
-	writetext .IntroText
-	waitbutton
-	closetext
-	end
-
-.NoBattle:
-	writetext .RefusedText
-	waitbutton
-	closetext
-	end
+.AfterText2:
+	text "Good luck! Say"
+	line "hello to Lance"
+	cont "for me."
+	done
 
 .IntroText:
 	text "Hm! If you're here,"
@@ -201,29 +175,22 @@ Route27VeteranfScript:
 	line "yourself."
 	done
 
-.AfterText2:
-	text "Good luck! Say"
-	line "hello to Lance"
-	cont "for me."
+GenericTrainerPsychicGilbert:
+	generictrainer PSYCHIC_T, GILBERT, EVENT_BEAT_PSYCHIC_GILBERT, PsychicGilbertSeenText, PsychicGilbertBeatenText
+
+	text "With your skills,"
+	line "you'll do well at"
+	cont "the League."
+
+	para "That's what my"
+	line "premonition says."
 	done
 
-TrainerPsychicGilbert:
-	trainer EVENT_BEAT_PSYCHIC_GILBERT, PSYCHIC_T, GILBERT, PsychicGilbertSeenText, PsychicGilbertBeatenText, 0, PsychicGilbertScript
-
-PsychicGilbertScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1a0dd2
-	waitbutton
-	closetext
-	end
-
 TrainerBird_keeperJose1:
-	trainer EVENT_BEAT_BIRD_KEEPER_JOSE, BIRD_KEEPER, JOSE1, Bird_keeperJose1SeenText, Bird_keeperJose1BeatenText, 0, Bird_keeperJose1Script
+	trainer BIRD_KEEPER, JOSE1, EVENT_BEAT_BIRD_KEEPER_JOSE, Bird_keeperJose1SeenText, Bird_keeperJose1BeatenText, 0, Bird_keeperJose1Script
 
 Bird_keeperJose1Script:
 	writecode VAR_CALLERID, PHONE_BIRDKEEPER_JOSE
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_JOSE
 	iftrue UnknownScript_0x1a08ff
@@ -243,8 +210,8 @@ UnknownScript_0x1a08e8:
 	scall UnknownScript_0x1a095b
 UnknownScript_0x1a08eb:
 	askforphonenumber PHONE_BIRDKEEPER_JOSE
-	if_equal $1, UnknownScript_0x1a096b
-	if_equal $2, UnknownScript_0x1a0967
+	ifequal $1, UnknownScript_0x1a096b
+	ifequal $2, UnknownScript_0x1a0967
 	trainertotext BIRD_KEEPER, JOSE1, $0
 	scall UnknownScript_0x1a095f
 	jump UnknownScript_0x1a0963
@@ -253,9 +220,9 @@ UnknownScript_0x1a08ff:
 	scall UnknownScript_0x1a096f
 	winlosstext Bird_keeperJose1BeatenText, 0
 	copybytetovar wJoseFightCount
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight2:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight2
@@ -297,79 +264,70 @@ UnknownScript_0x1a0954:
 
 UnknownScript_0x1a0957:
 	jumpstd asknumber1m
-	end
 
 UnknownScript_0x1a095b:
 	jumpstd asknumber2m
-	end
 
 UnknownScript_0x1a095f:
 	jumpstd registerednumberm
-	end
 
 UnknownScript_0x1a0963:
 	jumpstd numberacceptedm
-	end
 
 UnknownScript_0x1a0967:
 	jumpstd numberdeclinedm
-	end
 
 UnknownScript_0x1a096b:
 	jumpstd phonefullm
-	end
 
 UnknownScript_0x1a096f:
 	jumpstd rematchm
-	end
 
 UnknownScript_0x1a0973:
 	jumpstd giftm
-	end
 
 UnknownScript_0x1a0977:
 	jumpstd packfullm
-	end
 
-TrainerCooltrainermBlake:
-	trainer EVENT_BEAT_COOLTRAINERM_BLAKE, COOLTRAINERM, BLAKE, CooltrainermBlakeSeenText, CooltrainermBlakeBeatenText, 0, CooltrainermBlakeScript
+GenericTrainerCooltrainermBlake:
+	generictrainer COOLTRAINERM, BLAKE, EVENT_BEAT_COOLTRAINERM_BLAKE, CooltrainermBlakeSeenText, CooltrainermBlakeBeatenText
 
-CooltrainermBlakeScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1a0b0b
-	waitbutton
-	closetext
-	end
+	text "If you prevail on"
+	line "this harsh trek,"
 
-TrainerAceDuoJakeandbri1:
-	trainer EVENT_BEAT_ACE_DUO_JAKE_AND_BRI, ACE_DUO, JAKEANDBRI1, AceDuoJakeandbri1SeenText, AceDuoJakeandbri1BeatenText, 0, AceDuoJakeandbri1Script
+	para "the truth will be"
+	line "revealed!"
 
-AceDuoJakeandbri1Script:
-	end_if_just_battled
-	opentext
-	writetext AceDuoJakeandbri1AfterText
-	waitbutton
-	closetext
-	end
+	para "Heh, sorry, I just"
+	line "wanted to say"
+	cont "something cool."
+	done
 
-TrainerAceDuoJakeandbri2:
-	trainer EVENT_BEAT_ACE_DUO_JAKE_AND_BRI, ACE_DUO, JAKEANDBRI2, AceDuoJakeandbri2SeenText, AceDuoJakeandbri2BeatenText, 0, AceDuoJakeandbri2Script
+GenericTrainerAceDuoJakeandbri1:
+	generictrainer ACE_DUO, JAKEANDBRI1, EVENT_BEAT_ACE_DUO_JAKE_AND_BRI, AceDuoJakeandbri1SeenText, AceDuoJakeandbri1BeatenText
 
-AceDuoJakeandbri2Script:
-	end_if_just_battled
-	opentext
-	writetext AceDuoJakeandbri2AfterText
-	waitbutton
-	closetext
-	end
+	text "Jake: A good"
+	line "trainer can recog-"
+
+	para "nize other good"
+	line "trainers."
+	done
+
+GenericTrainerAceDuoJakeandbri2:
+	generictrainer ACE_DUO, JAKEANDBRI2, EVENT_BEAT_ACE_DUO_JAKE_AND_BRI, AceDuoJakeandbri2SeenText, AceDuoJakeandbri2BeatenText
+
+	text "Bri: Good trainers"
+	line "also know how to"
+
+	para "fight alongside"
+	line "each other."
+	done
 
 TrainerCooltrainerfReena:
-	trainer EVENT_BEAT_COOLTRAINERF_REENA, COOLTRAINERF, REENA1, CooltrainerfReena1SeenText, CooltrainerfReena1BeatenText, 0, CooltrainerfReena1Script
+	trainer COOLTRAINERF, REENA1, EVENT_BEAT_COOLTRAINERF_REENA, CooltrainerfReena1SeenText, CooltrainerfReena1BeatenText, 0, CooltrainerfReena1Script
 
 CooltrainerfReena1Script:
 	writecode VAR_CALLERID, PHONE_COOLTRAINERF_REENA
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_REENA
 	iftrue UnknownScript_0x1a09e9
@@ -387,8 +345,8 @@ UnknownScript_0x1a09d2:
 	scall UnknownScript_0x1a0a33
 UnknownScript_0x1a09d5:
 	askforphonenumber PHONE_COOLTRAINERF_REENA
-	if_equal $1, UnknownScript_0x1a0a43
-	if_equal $2, UnknownScript_0x1a0a3f
+	ifequal $1, UnknownScript_0x1a0a43
+	ifequal $2, UnknownScript_0x1a0a3f
 	trainertotext COOLTRAINERF, REENA1, $0
 	scall UnknownScript_0x1a0a37
 	jump UnknownScript_0x1a0a3b
@@ -397,9 +355,9 @@ UnknownScript_0x1a09e9:
 	scall UnknownScript_0x1a0a47
 	winlosstext CooltrainerfReena1BeatenText, 0
 	copybytetovar wReenaFightCount
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight2:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight2
@@ -431,53 +389,45 @@ UnknownScript_0x1a09e9:
 
 UnknownScript_0x1a0a2f:
 	jumpstd asknumber1f
-	end
 
 UnknownScript_0x1a0a33:
 	jumpstd asknumber2f
-	end
 
 UnknownScript_0x1a0a37:
 	jumpstd registerednumberf
-	end
 
 UnknownScript_0x1a0a3b:
 	jumpstd numberacceptedf
-	end
 
 UnknownScript_0x1a0a3f:
 	jumpstd numberdeclinedf
-	end
 
 UnknownScript_0x1a0a43:
 	jumpstd phonefullf
-	end
 
 UnknownScript_0x1a0a47:
 	jumpstd rematchf
-	end
 
-TrainerCooltrainerfMegan:
-	trainer EVENT_BEAT_COOLTRAINERF_MEGAN, COOLTRAINERF, MEGAN, CooltrainerfMeganSeenText, CooltrainerfMeganBeatenText, 0, CooltrainerfMeganScript
+GenericTrainerCooltrainerfMegan:
+	generictrainer COOLTRAINERF, MEGAN, EVENT_BEAT_COOLTRAINERF_MEGAN, CooltrainerfMeganSeenText, CooltrainerfMeganBeatenText
 
-CooltrainerfMeganScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1a0cce
-	waitbutton
-	closetext
-	end
+	text "I'm checking out"
+	line "pre- and post-"
+	cont "evolution #mon."
 
-TohjoFallsSign:
-	jumptext TohjoFallsSignText
+	para "Evolution really"
+	line "does make #mon"
+	cont "stronger."
+
+	para "But evolved forms"
+	line "also learn moves"
+	cont "later on."
+	done
 
 MovementData_0x1a0a66:
 	step_left
 	step_left
-	step_end
-
-MovementData_0x1a0a69:
-	step_left
+	turn_head_left
 	step_end
 
 UnknownText_0x1a0a6b:
@@ -506,18 +456,6 @@ CooltrainermBlakeBeatenText:
 	text "Yow!"
 	done
 
-UnknownText_0x1a0b0b:
-	text "If you prevail on"
-	line "this harsh trek,"
-
-	para "the truth will be"
-	line "revealed!"
-
-	para "Heh, sorry, I just"
-	line "wanted to say"
-	cont "something cool."
-	done
-
 AceDuoJakeandbri1SeenText:
 	text "Jake: Hm? You're"
 	line "good, aren't you?"
@@ -526,14 +464,6 @@ AceDuoJakeandbri1SeenText:
 AceDuoJakeandbri1BeatenText:
 	text "Jake: Just as I"
 	line "thought!"
-	done
-
-AceDuoJakeandbri1AfterText:
-	text "Jake: A good"
-	line "trainer can recog-"
-
-	para "nize other good"
-	line "trainers."
 	done
 
 AceDuoJakeandbri2SeenText:
@@ -545,14 +475,6 @@ AceDuoJakeandbri2SeenText:
 AceDuoJakeandbri2BeatenText:
 	text "Bri: Our teamwork"
 	line "wasn't enough…"
-	done
-
-AceDuoJakeandbri2AfterText:
-	text "Bri: Good trainers"
-	line "also know how to"
-
-	para "fight alongside"
-	line "each other."
 	done
 
 CooltrainerfReena1SeenText:
@@ -589,20 +511,6 @@ CooltrainerfMeganBeatenText:
 	line "strong!"
 	done
 
-UnknownText_0x1a0cce:
-	text "I'm checking out"
-	line "pre- and post-"
-	cont "evolution #mon."
-
-	para "Evolution really"
-	line "does make #mon"
-	cont "stronger."
-
-	para "But evolved forms"
-	line "also learn moves"
-	cont "later on."
-	done
-
 PsychicGilbertSeenText:
 	text "Don't say a thing!"
 
@@ -618,15 +526,6 @@ PsychicGilbertSeenText:
 
 PsychicGilbertBeatenText:
 	text "You're too much!"
-	done
-
-UnknownText_0x1a0dd2:
-	text "With your skills,"
-	line "you'll do well at"
-	cont "the League."
-
-	para "That's what my"
-	line "premonition says."
 	done
 
 Bird_keeperJose1SeenText:

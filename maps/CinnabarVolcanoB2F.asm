@@ -1,35 +1,32 @@
 CinnabarVolcanoB2F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, CinnabarVolcanoB2FBouldersLand
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_TILES, CinnabarVolcanoB2FBouldersLand
+	db 3 ; warp events
+	warp_event 13,  3, CINNABAR_VOLCANO_B1F, 5
+	warp_event 25, 19, CINNABAR_VOLCANO_B1F, 6
+	warp_event  6,  6, CINNABAR_VOLCANO_B1F, 7 ; hole
 
-CinnabarVolcanoB2F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $3, $d, 5, CINNABAR_VOLCANO_B1F
-	warp_def $13, $19, 6, CINNABAR_VOLCANO_B1F
-	warp_def $6, $6, 7, CINNABAR_VOLCANO_B1F ; hole
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 4 ; object events
+	object_event 18, 22, SPRITE_MOLTRES, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, CinnabarVolcanoMoltres, EVENT_CINNABAR_VOLCANO_MOLTRES
+	object_event 12, 24, SPRITE_LAWRENCE, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_FINAL_BIRD
+	smashrock_event 21, 19
+	itemball_event 18,  3, FLAME_ORB, 1, EVENT_CINNABAR_VOLCANO_B2F_FLAME_ORB
 
-.Signposts: db 0
-
-.PersonEvents: db 4
-	person_event SPRITE_MOLTRES, 22, 18, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, CinnabarVolcanoMoltres, EVENT_CINNABAR_VOLCANO_MOLTRES
-	person_event SPRITE_LAWRENCE, 24, 12, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LAWRENCE_FINAL_BIRD
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 19, 21, SPRITEMOVEDATA_SMASHABLE_ROCK, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CinnabarVolcanoB2FRock, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 18, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, FLAME_ORB, 1, EVENT_CINNABAR_VOLCANO_B2F_FLAME_ORB
-
-const_value set 2
+	const_def 1 ; object constants
 	const CINNABARVOLCANOB2F_MOLTRES
 	const CINNABARVOLCANOB2F_LAWRENCE
 
 CinnabarVolcanoB2FBouldersLand:
 	checkevent EVENT_BOULDER_IN_CINNABAR_VOLCANO_B1F
 	iffalse .skip1
-	changeblock $6, $6, $5f
+	changeblock 6, 6, $5f
 .skip1
 	return
 
@@ -38,39 +35,36 @@ CinnabarVolcanoB2FLawrenceEncounterScript:
 	special Special_FadeOutMusic
 	pause 15
 	checkcode VAR_FACING
-	if_equal UP, .up
-	if_equal DOWN, .down
-	if_equal LEFT, .left
+	ifequal UP, .up
+	ifequal DOWN, .down
+	ifequal LEFT, .left
 .right
 	appear CINNABARVOLCANOB2F_LAWRENCE
 	applymovement CINNABARVOLCANOB2F_LAWRENCE, CinnabarVolcanoB2FMovementData_LawrenceApproachLeftRight
-	spriteface PLAYER, DOWN
+	turnobject PLAYER, DOWN
 	jump .continue
 .up
-	moveperson CINNABARVOLCANOB2F_LAWRENCE, 13, 24
+	moveobject CINNABARVOLCANOB2F_LAWRENCE, 13, 24
 	appear CINNABARVOLCANOB2F_LAWRENCE
 	applymovement CINNABARVOLCANOB2F_LAWRENCE, CinnabarVolcanoB2FMovementData_LawrenceApproachUp
-	spriteface CINNABARVOLCANOB2F_LAWRENCE, UP
-	spriteface PLAYER, DOWN
+	turnobject CINNABARVOLCANOB2F_LAWRENCE, UP
+	turnobject PLAYER, DOWN
 	jump .continue
 .down
-	moveperson CINNABARVOLCANOB2F_LAWRENCE, 13, 24
+	moveobject CINNABARVOLCANOB2F_LAWRENCE, 13, 24
 	appear CINNABARVOLCANOB2F_LAWRENCE
 	applymovement CINNABARVOLCANOB2F_LAWRENCE, CinnabarVolcanoB2FMovementData_LawrenceApproachDown
 	jump .continue
 .left
-	moveperson CINNABARVOLCANOB2F_LAWRENCE, 14, 24
+	moveobject CINNABARVOLCANOB2F_LAWRENCE, 14, 24
 	appear CINNABARVOLCANOB2F_LAWRENCE
 	applymovement CINNABARVOLCANOB2F_LAWRENCE, CinnabarVolcanoB2FMovementData_LawrenceApproachLeftRight
-	spriteface CINNABARVOLCANOB2F_LAWRENCE, UP
-	spriteface PLAYER, DOWN
+	turnobject CINNABARVOLCANOB2F_LAWRENCE, UP
+	turnobject PLAYER, DOWN
 .continue
 	playmusic MUSIC_ZINNIA_ENCOUNTER_ORAS
-	opentext
-	writetext CinnabarVolcanoB2FLawrenceSpeechText
-	waitbutton
-	closetext
-	spriteface CINNABARVOLCANOB2F_LAWRENCE, UP
+	showtext CinnabarVolcanoB2FLawrenceSpeechText
+	turnobject CINNABARVOLCANOB2F_LAWRENCE, UP
 	opentext
 	writetext CinnabarVolcanoB2FLawrenceEscapeRopeText
 	pause 15
@@ -114,9 +108,6 @@ CinnabarVolcanoMoltres:
 	jump CinnabarVolcanoB2FLawrenceEncounterScript
 .end
 	end
-
-CinnabarVolcanoB2FRock:
-	jumpstd smashrock
 
 MoltresText:
 	text "Gyaoo!"
@@ -165,7 +156,7 @@ CinnabarVolcanoB2FLawrenceSpeechText:
 
 	para "I'll show you that"
 	line "I deserve to own"
-	cont "those Pokemon."
+	cont "those #mon."
 	done
 
 CinnabarVolcanoB2FLawrenceEscapeRopeText:

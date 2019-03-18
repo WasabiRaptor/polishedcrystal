@@ -1,50 +1,36 @@
 RadioTower1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  2,  7, GOLDENROD_CITY, 11
+	warp_event  3,  7, GOLDENROD_CITY, 11
+	warp_event 15,  0, RADIO_TOWER_2F, 2
 
-RadioTower1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $2, 11, GOLDENROD_CITY
-	warp_def $7, $3, 11, GOLDENROD_CITY
-	warp_def $0, $f, 2, RADIO_TOWER_2F
+	db 2 ; bg events
+	bg_event  3,  0, SIGNPOST_JUMPTEXT, UnknownText_0x5d5e7
+	bg_event 13,  0, SIGNPOST_JUMPTEXT, UnknownText_0x5d631
 
-.XYTriggers: db 0
+	db 7 ; object events
+	object_event  8,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x5cd3d, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 14,  6, SPRITE_WHITNEY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, RadioTower1FWhitneyScript, EVENT_GOLDENROD_GYM_WHITNEY
+	object_event  5,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x5cd29, -1
+	object_event 17,  5, SPRITE_LASS, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5d476, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 17,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5d4ac, EVENT_GOLDENROD_CITY_CIVILIANS
+	object_event 14,  1, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerGruntM3, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
+	object_event 12,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, CooltrainerFScript_0x5cdd5, EVENT_GOLDENROD_CITY_CIVILIANS
 
-.Signposts: db 2
-	signpost 0, 3, SIGNPOST_READ, MapRadioTower1FSignpost0Script
-	signpost 0, 13, SIGNPOST_READ, MapRadioTower1FSignpost1Script
-
-.PersonEvents: db 7
-	person_event SPRITE_RECEPTIONIST, 6, 8, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x5cd3d, EVENT_GOLDENROD_CITY_CIVILIANS
-	person_event SPRITE_WHITNEY, 6, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, RadioTower1FWhitneyScript, EVENT_GOLDENROD_GYM_WHITNEY
-	person_event SPRITE_RECEPTIONIST, 6, 5, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, ReceptionistScript_0x5cd29, -1
-	person_event SPRITE_LASS, 5, 17, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, LassScript_0x5ce51, EVENT_GOLDENROD_CITY_CIVILIANS
-	person_event SPRITE_YOUNGSTER, 3, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, YoungsterScript_0x5ce54, EVENT_GOLDENROD_CITY_CIVILIANS
-	person_event SPRITE_ROCKET, 1, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerGruntM3, EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	person_event SPRITE_COOLTRAINER_F, 6, 12, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CooltrainerFScript_0x5cdd5, EVENT_GOLDENROD_CITY_CIVILIANS
-
-const_value set 2
+	const_def 1 ; object constants
 	const RADIOTOWER1F_FELICITY
 	const RADIOTOWER1F_WHITNEY
 
 ReceptionistScript_0x5cd29:
-	faceplayer
-	opentext
 	checkflag ENGINE_ROCKETS_IN_RADIO_TOWER
-	iftrue UnknownScript_0x5cd37
-	writetext UnknownText_0x5ce77
-	waitbutton
-	closetext
-	end
-
-UnknownScript_0x5cd37:
-	writetext UnknownText_0x5ce81
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer UnknownText_0x5ce81
+	jumptextfaceplayer UnknownText_0x5ce77
 
 ReceptionistScript_0x5cd3d:
 	faceplayer
@@ -65,7 +51,7 @@ ReceptionistScript_0x5cd3d:
 .skip
 	special Special_PrintTodaysLuckyNumber
 	checkflag ENGINE_LUCKY_NUMBER_SHOW
-	iftrue .GameOver
+	iftrue_jumpopenedtext UnknownText_0x5cf7e
 	writetext UnknownText_0x5cf3a
 	buttonsound
 	closetext
@@ -82,17 +68,11 @@ ReceptionistScript_0x5cd3d:
 	closetext
 	applymovement RADIOTOWER1F_FELICITY, MovementData_0x5ce74
 	opentext
-	if_equal 1, .FirstPlace
-	if_equal 2, .SecondPlace
-	if_equal 3, .ThirdPlace
-	if_equal 4, .FourthPlace
-	jump .NoPrize
-
-.GameOver:
-	writetext UnknownText_0x5cf7e
-	waitbutton
-	closetext
-	end
+	ifequal 1, .FirstPlace
+	ifequal 2, .SecondPlace
+	ifequal 3, .ThirdPlace
+	ifequal 4, .FourthPlace
+	jumpopenedtext UnknownText_0x5d0c0
 
 .FirstPlace:
 	writetext WonFirstPlaceText
@@ -100,10 +80,10 @@ ReceptionistScript_0x5cd3d:
 	waitsfx
 	buttonsound
 	giveitem MASTER_BALL
-	iffalse .BagFull
+	iffalse_jumpopenedtext UnknownText_0x5d0e6
 	itemnotify
 	setflag ENGINE_LUCKY_NUMBER_SHOW
-	jump .GameOver
+	jumpopenedtext UnknownText_0x5cf7e
 
 .SecondPlace:
 	writetext WonSecondPlaceText
@@ -111,10 +91,10 @@ ReceptionistScript_0x5cd3d:
 	waitsfx
 	buttonsound
 	giveitem BOTTLE_CAP
-	iffalse .BagFull
+	iffalse_jumpopenedtext UnknownText_0x5d0e6
 	itemnotify
 	setflag ENGINE_LUCKY_NUMBER_SHOW
-	jump .GameOver
+	jumpopenedtext UnknownText_0x5cf7e
 
 .ThirdPlace:
 	writetext WonThirdPlaceText
@@ -122,10 +102,10 @@ ReceptionistScript_0x5cd3d:
 	waitsfx
 	buttonsound
 	giveitem PP_MAX
-	iffalse .BagFull
+	iffalse_jumpopenedtext UnknownText_0x5d0e6
 	itemnotify
 	setflag ENGINE_LUCKY_NUMBER_SHOW
-	jump .GameOver
+	jumpopenedtext UnknownText_0x5cf7e
 
 .FourthPlace:
 	writetext WonFourthPlaceText
@@ -133,31 +113,25 @@ ReceptionistScript_0x5cd3d:
 	waitsfx
 	buttonsound
 	giveitem PP_UP
-	iffalse .BagFull
+	iffalse_jumpopenedtext UnknownText_0x5d0e6
 	itemnotify
 	setflag ENGINE_LUCKY_NUMBER_SHOW
-	jump .GameOver
+	thisopenedtext
 
-.NoPrize:
-	writetext UnknownText_0x5d0c0
-	waitbutton
-	closetext
-	end
-
-.BagFull:
-	writetext UnknownText_0x5d0e6
-	waitbutton
-	closetext
-	end
+UnknownText_0x5cf7e:
+	text "Please come back"
+	line "next week for the"
+	cont "next Lucky Number."
+	done
 
 CooltrainerFScript_0x5cdd5:
+	checkevent EVENT_GOLDENROD_GYM_WHITNEY
+	iftrue_jumptextfaceplayer UnknownText_0x5d3e5
 	faceplayer
 	opentext
-	checkevent EVENT_GOLDENROD_GYM_WHITNEY
-	iftrue UnknownScript_0x5ce2d
 	writetext UnknownText_0x5d12d
 	yesorno
-	iffalse UnknownScript_0x5ce4b
+	iffalse_jumpopenedtext UnknownText_0x5d443
 	writetext UnknownText_0x5d1f2
 	yesorno
 	iffalse UnknownScript_0x5ce42
@@ -186,7 +160,7 @@ CooltrainerFScript_0x5cdd5:
 	writetext UnknownText_0x5d37b
 	buttonsound
 	stringtotext RadioCardText, $1
-	scall UnknownScript_0x5ce3e
+	callstd receiveitem
 	writetext UnknownText_0x5d3c0
 	buttonsound
 	setflag ENGINE_RADIO_CARD
@@ -195,74 +169,35 @@ CooltrainerFScript_0x5cdd5:
 	closetext
 	showemote EMOTE_SHOCK, RADIOTOWER1F_WHITNEY, 15
 	applymovement RADIOTOWER1F_WHITNEY, RadioTower1FWhitneyApproachesMovementData
-	spriteface PLAYER, RIGHT
-	opentext
-	writetext RadioTower1FWhitney2Text
-	waitbutton
-	closetext
+	turnobject PLAYER, RIGHT
+	showtext RadioTower1FWhitney2Text
 	applymovement RADIOTOWER1F_WHITNEY, RadioTower1FWhitneyLeaves1MovementData
-	spriteface PLAYER, LEFT
+	turnobject PLAYER, LEFT
 	applymovement RADIOTOWER1F_WHITNEY, RadioTower1FWhitneyLeaves2MovementData
 	disappear RADIOTOWER1F_WHITNEY
-	end
-
-UnknownScript_0x5ce2d:
-	writetext UnknownText_0x5d3e5
-	waitbutton
-	closetext
 	end
 
 RadioCardText:
 	db "Radio Card@"
 
-UnknownScript_0x5ce3e:
-	jumpstd receiveitem
-	end
-
 UnknownScript_0x5ce42:
 	playsound SFX_WRONG
-	writetext UnknownText_0x5d409
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x5d409
 
-UnknownScript_0x5ce4b:
-	writetext UnknownText_0x5d443
-	waitbutton
-	closetext
-	end
+GenericTrainerGruntM3:
+	generictrainer GRUNTM, 3, EVENT_BEAT_ROCKET_GRUNTM_3, GruntM3SeenText, GruntM3BeatenText
 
-LassScript_0x5ce51:
-	jumptextfaceplayer UnknownText_0x5d476
+	text "You're too strong."
 
-YoungsterScript_0x5ce54:
-	jumptextfaceplayer UnknownText_0x5d4ac
-
-TrainerGruntM3:
-	trainer EVENT_BEAT_ROCKET_GRUNTM_3, GRUNTM, 3, GruntM3SeenText, GruntM3BeatenText, 0, GruntM3Script
-
-GruntM3Script:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5d5a2
-	waitbutton
-	closetext
-	end
+	para "Our plan could be"
+	line "ruined. I must"
+	cont "warn the others…"
+	done
 
 RadioTower1FWhitneyScript:
-	faceplayer
-	opentext
-	writetext RadioTower1FWhitney1Text
-	waitbutton
-	closetext
-	spriteface RADIOTOWER1F_WHITNEY, LEFT
+	showtextfaceplayer RadioTower1FWhitney1Text
+	turnobject RADIOTOWER1F_WHITNEY, LEFT
 	end
-
-MapRadioTower1FSignpost0Script:
-	jumptext UnknownText_0x5d5e7
-
-MapRadioTower1FSignpost1Script:
-	jumptext UnknownText_0x5d631
 
 MovementData_0x5ce71:
 	step_right
@@ -328,7 +263,7 @@ ExplainLuckyNumberShowText:
 UnknownText_0x5cf3a:
 	text "This week's ID"
 	line "number is @"
-	text_from_ram StringBuffer3
+	text_from_ram wStringBuffer3
 	text "."
 	done
 
@@ -340,12 +275,6 @@ UnknownText_0x5cf5a:
 UnknownText_0x5cf79:
 	text "……"
 	line "……"
-	done
-
-UnknownText_0x5cf7e:
-	text "Please come back"
-	line "next week for the"
-	cont "next Lucky Number."
 	done
 
 WonFirstPlaceText:
@@ -535,14 +464,6 @@ GruntM3SeenText:
 GruntM3BeatenText:
 	text "Too strong! We"
 	line "must watch you…"
-	done
-
-UnknownText_0x5d5a2:
-	text "You're too strong."
-
-	para "Our plan could be"
-	line "ruined. I must"
-	cont "warn the others…"
 	done
 
 RadioTower1FWhitney1Text:

@@ -1,22 +1,19 @@
 FireIslandRoof_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event  3,  7, FIRE_ISLAND, 2
 
-FireIslandRoof_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $7, $3, 2, FIRE_ISLAND
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  5,  5, SPRITE_CANDELA, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FireIslandRoofCandelaScript, EVENT_SHAMOUTI_COAST_CANDELA
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_CANDELA, 5, 5, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FireIslandRoofCandelaScript, EVENT_SHAMOUTI_COAST_CANDELA
-
-const_value set 2
+	const_def 1 ; object constants
 	const FIREISLANDROOF_CANDELA
 
 FireIslandRoofCandelaScript:
@@ -33,21 +30,15 @@ FireIslandRoofCandelaScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_CANDELA
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
+	showtext .AfterText
 	playsound SFX_WARP_TO
-	applymovement FIREISLANDROOF_CANDELA, FireIslandRoofCandelaTeleport
+	applyonemovement FIREISLANDROOF_CANDELA, teleport_from
 	disappear FIREISLANDROOF_CANDELA
 	clearevent EVENT_CELADON_UNIVERSITY_CANDELA
 	end
 
 .Refused:
-	writetext .RefusedText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext .RefusedText
 
 .GreetingText:
 	text "TODO"
@@ -68,7 +59,3 @@ FireIslandRoofCandelaScript:
 .RefusedText:
 	text "TODO"
 	done
-
-FireIslandRoofCandelaTeleport:
-	teleport_from
-	step_end

@@ -1,23 +1,20 @@
 ManiasHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, CIANWOOD_CITY, 1
+	warp_event  3,  7, CIANWOOD_CITY, 1
 
-ManiasHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 1, CIANWOOD_CITY
-	warp_def $7, $3, 1, CIANWOOD_CITY
+	db 2 ; bg events
+	bg_event  5,  1, SIGNPOST_JUMPSTD, radio2
+	bg_event  7,  1, SIGNPOST_JUMPSTD, picturebookshelf
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 1, 5, SIGNPOST_JUMPSTD, radio2
-	signpost 1, 7, SIGNPOST_JUMPSTD, picturebookshelf
-
-.PersonEvents: db 1
-	person_event SPRITE_ROCKER, 4, 2, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ManiaScript, -1
+	db 1 ; object events
+	object_event  2,  4, SPRITE_ROCKER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, ManiaScript, -1
 
 ManiaScript:
 	faceplayer
@@ -44,32 +41,23 @@ ManiaScript:
 .alreadyhavebuffy
 	checkflag ENGINE_WOBBUFFET_GIVEN
 	iffalse .returnbuffy
-	writetext ManiaText_TakeCareOfWobbuffet
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ManiaText_TakeCareOfWobbuffet
 
 .partyfull
-	writetext ManiaText_PartyFull
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ManiaText_PartyFull
 
 .refusetotakebuffy
-	writetext ManiaText_IfHeComesBack
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ManiaText_IfHeComesBack
 
 .returnbuffy
 	writetext ManiaText_CanIHaveMyMonBack
 	yesorno
 	iffalse .refused
 	special SpecialReturnWobbuffet
-	if_equal $0, .wrong
-	if_equal $1, .refused
-	if_equal $3, .superhappy
-	if_equal $4, .default_postevent
+	ifequal $0, .wrong
+	ifequal $1, .refused
+	ifequal $3, .superhappy
+	ifequal $4, .default_postevent
 	writetext ManiaText_ThankYou
 	waitbutton
 	closetext
@@ -77,10 +65,7 @@ ManiaScript:
 	end
 
 .wrong
-	writetext ManiaText_WobbuffetNotThere
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ManiaText_WobbuffetNotThere
 
 .superhappy
 	writetext ManiaText_WobbuffetLikesYou
@@ -90,22 +75,13 @@ ManiaScript:
 	end
 
 .refused
-	writetext ManiaText_SameAsBeingRobbed
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ManiaText_SameAsBeingRobbed
 
 .nothingleft
-	writetext ManiaText_WobbuffetIsYourLastMon
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ManiaText_WobbuffetIsYourLastMon
 
 .default_postevent
-	writetext ManiaText_HappinessSpeech
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ManiaText_HappinessSpeech
 
 ManiaText_AskLookAfterWobbuffet:
 	text "I, I'm in shock!"

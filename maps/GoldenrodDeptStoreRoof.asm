@@ -1,37 +1,30 @@
 GoldenrodDeptStoreRoof_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 2 ; callbacks
+	callback MAPCALLBACK_TILES, GoldenrodDeptStoreRoofCheckSaleChangeBlock
+	callback MAPCALLBACK_OBJECTS, GoldenrodDeptStoreRoofCheckSaleChangeClerk
 
-.MapCallbacks: db 2
-	dbw MAPCALLBACK_TILES, GoldenrodDeptStoreRoofCheckSaleChangeBlock
-	dbw MAPCALLBACK_OBJECTS, GoldenrodDeptStoreRoofCheckSaleChangeClerk
+	db 1 ; warp events
+	warp_event 13,  1, GOLDENROD_DEPT_STORE_6F, 3
 
-GoldenrodDeptStoreRoof_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $1, $d, 3, GOLDENROD_DEPT_STORE_6F
+	db 4 ; bg events
+	bg_event 15,  3, SIGNPOST_RIGHT, Binoculars1
+	bg_event 15,  5, SIGNPOST_RIGHT, Binoculars2
+	bg_event 15,  6, SIGNPOST_RIGHT, Binoculars3
+	bg_event  3,  0, SIGNPOST_UP, PokeDollVendingMachine
 
-.XYTriggers: db 0
-
-.Signposts: db 4
-	signpost 3, 15, SIGNPOST_RIGHT, Binoculars1
-	signpost 5, 15, SIGNPOST_RIGHT, Binoculars2
-	signpost 6, 15, SIGNPOST_RIGHT, Binoculars3
-	signpost 0, 3, SIGNPOST_UP, PokeDollVendingMachine
-
-.PersonEvents: db 8
-	person_event SPRITE_FISHER, 1, 2, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, FisherScript_0x56749, -1
-	person_event SPRITE_SUPER_NERD, 6, 14, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, SuperNerdScript_0x56757, EVENT_GOLDENROD_SALE_ON
-	person_event SPRITE_CLERK, 4, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ClerkScript_0x5673f, EVENT_GOLDENROD_SALE_OFF
-	person_event SPRITE_POKEFAN_F, 3, 10, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, PokefanFScript_0x56746, -1
-	person_event SPRITE_TWIN, 4, 3, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, TwinScript_0x56754, EVENT_GOLDENROD_SALE_ON
-	person_event SPRITE_POKEFAN_M, 0, 7, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x5676a, EVENT_GOLDENROD_SALE_OFF
-	person_event SPRITE_TEACHER, 3, 5, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, TeacherScript_0x5676d, EVENT_GOLDENROD_SALE_OFF
-	person_event SPRITE_BUG_CATCHER, 6, 1, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, BugCatcherScript_0x56770, EVENT_GOLDENROD_SALE_OFF
-
-const_value set 2
-	const GOLDENRODDEPTSTOREROOF_FISHER
-	const GOLDENRODDEPTSTOREROOF_SUPER_NERD
+	db 8 ; object events
+	object_event  2,  1, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, FisherScript_0x56749, -1
+	object_event 10,  3, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5677f, -1
+	object_event 14,  6, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, SuperNerdScript_0x56757, EVENT_GOLDENROD_SALE_ON
+	object_event  3,  4, SPRITE_TWIN, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x56839, EVENT_GOLDENROD_SALE_ON
+	object_event  1,  4, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, pokemart, MARTTYPE_ROOFTOP, 0, EVENT_GOLDENROD_SALE_OFF
+	object_event  7,  0, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5688e, EVENT_GOLDENROD_SALE_OFF
+	object_event  5,  3, SPRITE_TEACHER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x56901, EVENT_GOLDENROD_SALE_OFF
+	object_event  1,  6, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x56942, EVENT_GOLDENROD_SALE_OFF
 
 GoldenrodDeptStoreRoofCheckSaleChangeBlock:
 	checkflag ENGINE_GOLDENROD_DEPT_STORE_SALE_IS_ON
@@ -39,8 +32,8 @@ GoldenrodDeptStoreRoofCheckSaleChangeBlock:
 	return
 
 .ChangeBlock:
-	changeblock $0, $2, $3f
-	changeblock $0, $4, $f
+	changeblock 0, 2, $3f
+	changeblock 0, 4, $f
 	return
 
 GoldenrodDeptStoreRoofCheckSaleChangeClerk:
@@ -55,22 +48,13 @@ GoldenrodDeptStoreRoofCheckSaleChangeClerk:
 	setevent EVENT_GOLDENROD_SALE_ON
 	return
 
-ClerkScript_0x5673f:
-	opentext
-	pokemart MARTTYPE_ROOFTOP, 0
-	closetext
-	end
-
-PokefanFScript_0x56746:
-	jumptextfaceplayer UnknownText_0x5677f
-
 FisherScript_0x56749:
 	faceplayer
 	opentext
-	writetext UnknownText_0x567d2
-	waitbutton
 	checkevent EVENT_DECO_VOLTORB_DOLL
 	iftrue .AlreadyGotVoltorbDoll
+	writetext UnknownText_0x567d2
+	waitbutton
 	writetext GoldenrodDeptStoreRoofFisherDuplicateText
 	waitbutton
 	setevent EVENT_DECO_VOLTORB_DOLL
@@ -80,37 +64,19 @@ FisherScript_0x56749:
 	buttonsound
 	writetext VoltorbDollSentText
 	waitbutton
+.AlreadyGotVoltorbDoll
 	writetext GoldenrodDeptStoreRoofFisherCatchEmAllText
 	waitbutton
-.AlreadyGotVoltorbDoll
 	closetext
-	spriteface GOLDENRODDEPTSTOREROOF_FISHER, UP
+	turnobject LAST_TALKED, UP
 	end
-
-TwinScript_0x56754:
-	jumptextfaceplayer UnknownText_0x56839
 
 SuperNerdScript_0x56757:
-	opentext
-	writetext UnknownText_0x56867
-	waitbutton
-	closetext
-	spriteface GOLDENRODDEPTSTOREROOF_SUPER_NERD, UP
-	opentext
-	writetext UnknownText_0x56871
-	waitbutton
-	closetext
-	spriteface GOLDENRODDEPTSTOREROOF_SUPER_NERD, RIGHT
+	showtext UnknownText_0x56867
+	faceplayer
+	showtext UnknownText_0x56871
+	turnobject LAST_TALKED, RIGHT
 	end
-
-PokefanMScript_0x5676a:
-	jumptextfaceplayer UnknownText_0x5688e
-
-TeacherScript_0x5676d:
-	jumptextfaceplayer UnknownText_0x56901
-
-BugCatcherScript_0x56770:
-	jumptextfaceplayer UnknownText_0x56942
 
 Binoculars1:
 	jumptext Binoculars1Text
@@ -126,18 +92,17 @@ PokeDollVendingMachine:
 	writetext PokeDollVendingMachineText
 .Start:
 	special PlaceMoneyTopRight
-	loadmenudata .MenuData
+	loadmenu .MenuData
 	verticalmenu
 	closewindow
-	if_equal $1, .JigglypuffDoll
-	if_equal $2, .GeodudeDoll
-	if_equal $3, .OddishDoll
-	closetext
-	end
+	ifequal $1, .JigglypuffDoll
+	ifequal $2, .DittoDoll
+	ifequal $3, .MeowthDoll
+	endtext
 
 .JigglypuffDoll:
 	checkmoney $0, 2400
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_JIGGLYPUFF_DOLL
 	iftrue .AlreadyBought
 	takemoney $0, 2400
@@ -149,31 +114,31 @@ PokeDollVendingMachine:
 	waitbutton
 	jump .Start
 
-.GeodudeDoll:
+.DittoDoll:
 	checkmoney $0, 2400
-	if_equal $2, .NotEnoughMoney
-	checkevent EVENT_DECO_GEODUDE_DOLL
+	ifequal $2, .NotEnoughMoney
+	checkevent EVENT_DECO_DITTO_DOLL
 	iftrue .AlreadyBought
 	takemoney $0, 2400
-	setevent EVENT_DECO_GEODUDE_DOLL
-	writetext BoughtGeodudeDollText
+	setevent EVENT_DECO_DITTO_DOLL
+	writetext BoughtDittoDollText
 	playsound SFX_TRANSACTION
 	waitbutton
-	writetext GeodudeDollSentText
+	writetext DittoDollSentText
 	waitbutton
 	jump .Start
 
-.OddishDoll:
+.MeowthDoll:
 	checkmoney $0, 2400
-	if_equal $2, .NotEnoughMoney
-	checkevent EVENT_DECO_ODDISH_DOLL
+	ifequal $2, .NotEnoughMoney
+	checkevent EVENT_DECO_MEOWTH_DOLL
 	iftrue .AlreadyBought
 	takemoney $0, 2400
-	setevent EVENT_DECO_ODDISH_DOLL
-	writetext BoughtOddishDollText
+	setevent EVENT_DECO_MEOWTH_DOLL
+	writetext BoughtMeowthDollText
 	playsound SFX_TRANSACTION
 	waitbutton
-	writetext OddishDollSentText
+	writetext MeowthDollSentText
 	waitbutton
 	jump .Start
 
@@ -198,8 +163,8 @@ PokeDollVendingMachine:
 	db $80 ; flags
 	db 4 ; items
 	db "Jigglypuff  ¥2400@"
-	db "Geodude     ¥2400@"
-	db "Oddish      ¥2400@"
+	db "Ditto       ¥2400@"
+	db "Meowth      ¥2400@"
 	db "Cancel@"
 
 UnknownText_0x5677f:
@@ -242,7 +207,7 @@ VoltorbDollSentText:
 
 GoldenrodDeptStoreRoofFisherCatchEmAllText:
 	text "I heard there are"
-	line "22 kinds of dolls."
+	line "30 kinds of dolls."
 	done
 
 UnknownText_0x56839:
@@ -352,22 +317,22 @@ JigglypuffDollSentText:
 	line "was sent home."
 	done
 
-BoughtGeodudeDollText:
+BoughtDittoDollText:
 	text "<PLAYER> bought"
-	line "Geodude Doll."
+	line "Ditto Doll."
 	done
 
-GeodudeDollSentText:
-	text "Geodude Doll"
+DittoDollSentText:
+	text "Ditto Doll"
 	line "was sent home."
 	done
 
-BoughtOddishDollText:
+BoughtMeowthDollText:
 	text "<PLAYER> bought"
-	line "Oddish Doll."
+	line "Meowth Doll."
 	done
 
-OddishDollSentText:
-	text "Oddish Doll"
+MeowthDollSentText:
+	text "Meowth Doll"
 	line "was sent home."
 	done

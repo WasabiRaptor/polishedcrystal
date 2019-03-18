@@ -1,9 +1,9 @@
 UpdateTimeOfDayPal:: ; 8c001
 	call UpdateTime
-	ld a, [TimeOfDay]
-	ld [CurTimeOfDay], a
+	ld a, [wTimeOfDay]
+	ld [wCurTimeOfDay], a
 	call GetTimePalette
-	ld [TimeOfDayPal], a
+	ld [wTimeOfDayPal], a
 	ret
 ; 8c011
 
@@ -17,29 +17,29 @@ _TimeOfDayPals:: ; 8c011
 	jr nz, .dontchange
 
 ; do we need to bother updating?
-	ld a, [TimeOfDay]
-	ld hl, CurTimeOfDay
+	ld a, [wTimeOfDay]
+	ld hl, wCurTimeOfDay
 	cp [hl]
 	jr z, .dontchange
 
 ; if so, the time of day has changed
-	ld a, [TimeOfDay]
-	ld [CurTimeOfDay], a
+	ld a, [wTimeOfDay]
+	ld [wCurTimeOfDay], a
 
 ; get palette id
 	call GetTimePalette
 
 ; same palette as before?
-	ld hl, TimeOfDayPal
+	ld hl, wTimeOfDayPal
 	cp [hl]
 	jr z, .dontchange
 
 ; update palette id
-	ld [TimeOfDayPal], a
+	ld [wTimeOfDayPal], a
 
 
-; save bg palette 8
-	ld hl, UnknBGPals + 7 palettes
+; save bg palette 7
+	ld hl, wUnknBGPals palette 7
 
 ; save wram bank
 	ld a, [rSVBK]
@@ -64,13 +64,13 @@ _TimeOfDayPals:: ; 8c011
 	ld [rSVBK], a
 
 
-; update sgb pals
-	ld b, SCGB_MAPPALS
-	call GetSGBLayout
+; update cgb pals
+	ld b, CGB_MAPPALS
+	call GetCGBLayout
 
 
-; restore bg palette 8
-	ld hl, UnknOBPals - 1 ; last byte in UnknBGPals
+; restore bg palette 7
+	ld hl, wUnknBGPals palette 7 + 1 palettes - 1 ; last byte in UnknBGPals
 
 ; save wram bank
 	ld a, [rSVBK]
@@ -115,20 +115,13 @@ _UpdateTimePals:: ; 8c070
 	jp DmgToCgbTimePals
 ; 8c079
 
-FadeInPalettes:: ; 8c079
-	ld c, $12
-	call GetTimePalFade
-	ld b, $4
-	jp ConvertTimePalsDecHL
-; 8c084
+FadeInPalettes::
+	ld c, 10
+	jp FadePalettes
 
-FadeOutPalettes:: ; 8c084
-	call FillWhiteBGColor
-	ld c, $9
-	call GetTimePalFade
-	ld b, $4
-	jp ConvertTimePalsIncHL
-; 8c092
+FadeOutPalettes::
+	ld c, 10
+	jp FadeToWhite
 
 Special_BattleTower_Fade: ; 8c092
 	call FillWhiteBGColor
@@ -137,9 +130,9 @@ Special_BattleTower_Fade: ; 8c092
 	ld b, $4
 .asm_8c09c
 	call DmgToCgbTimePals
-rept 3
 	inc hl
-endr
+	inc hl
+	inc hl
 	ld c, $7
 	call DelayFrames
 	dec b
@@ -168,12 +161,12 @@ FillWhiteBGColor: ; 8c0c1
 	ld a, $5
 	ld [rSVBK], a
 
-	ld hl, UnknBGPals
+	ld hl, wUnknBGPals
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]
 	ld d, a
-	ld hl, UnknBGPals + 1 palettes
+	ld hl, wUnknBGPals palette 1
 	ld c, 6
 .loop
 	ld a, e
@@ -211,7 +204,7 @@ ReplaceTimeOfDayPals: ; 8c0e5
 	ret
 
 .DarkCave:
-	ld a, [StatusFlags]
+	ld a, [wStatusFlags]
 	bit 2, a ; Flash
 	jr nz, .UsedFlash
 	ld a, %11111111 ; 3, 3, 3, 3
@@ -236,13 +229,12 @@ ReplaceTimeOfDayPals: ; 8c0e5
 ; 8c117
 
 GetTimePalette: ; 8c117
-	ld a, [TimeOfDay]
+	ld a, [wTimeOfDay]
 	ld e, a
 	ld d, 0
 	ld hl, .TimePalettes
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -300,9 +292,9 @@ DmgToCgbTimePals: ; 8c14e
 ConvertTimePalsIncHL: ; 8c15e
 .loop
 	call DmgToCgbTimePals
-rept 3
 	inc hl
-endr
+	inc hl
+	inc hl
 	ld c, 2
 	call DelayFrames
 	dec b
@@ -313,9 +305,9 @@ endr
 ConvertTimePalsDecHL: ; 8c16d
 .loop
 	call DmgToCgbTimePals
-rept 3
 	dec hl
-endr
+	dec hl
+	dec hl
 	ld c, 2
 	call DelayFrames
 	dec b

@@ -1,29 +1,26 @@
 AzaleaGym_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4, 15, AZALEA_TOWN, 5
+	warp_event  5, 15, AZALEA_TOWN, 5
 
-AzaleaGym_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $f, $4, 5, AZALEA_TOWN
-	warp_def $f, $5, 5, AZALEA_TOWN
+	db 2 ; bg events
+	bg_event  3, 13, SIGNPOST_READ, AzaleaGymStatue
+	bg_event  6, 13, SIGNPOST_READ, AzaleaGymStatue
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 13, 3, SIGNPOST_READ, AzaleaGymStatue
-	signpost 13, 6, SIGNPOST_READ, AzaleaGymStatue
-
-.PersonEvents: db 7
-	person_event SPRITE_BUGSY, 7, 5, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, AzaleaGymBugsyScript, -1
-	person_event SPRITE_GYM_GUY, 13, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, AzaleaGymGuyScript, -1
-	person_event SPRITE_BUG_CATCHER, 3, 5, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerBug_catcherBenny, -1
-	person_event SPRITE_BUG_CATCHER, 8, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBug_catcherAl, -1
-	person_event SPRITE_BUG_CATCHER, 2, 0, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBug_catcherJosh, -1
-	person_event SPRITE_TWIN, 10, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerTwinsAmyandmay1, -1
-	person_event SPRITE_TWIN, 10, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerTwinsAmyandmay2, -1
+	db 7 ; object events
+	object_event  5,  7, SPRITE_BUGSY, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, AzaleaGymBugsyScript, -1
+	object_event  7, 13, SPRITE_GYM_GUY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, AzaleaGymGuyScript, -1
+	object_event  5,  3, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerBug_catcherBenny, -1
+	object_event  8,  8, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBug_catcherAl, -1
+	object_event  0,  2, SPRITE_BUG_CATCHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBug_catcherJosh, -1
+	object_event  4, 10, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerTwinsAmyandmay1, -1
+	object_event  5, 10, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerTwinsAmyandmay2, -1
 
 AzaleaGymStatue:
 	trainertotext BUGSY, 1, $1
@@ -32,19 +29,15 @@ AzaleaGymStatue:
 	jumpstd gymstatue1
 .Beaten:
 	checkcode VAR_BADGES
-	if_greater_than 9, .LyraToo
+	ifgreater 9, .LyraToo
 	jumpstd gymstatue2
 .LyraToo
 	jumpstd gymstatue3
 
 AzaleaGymBugsyScript:
-	faceplayer
-	opentext
 	checkevent EVENT_BEAT_BUGSY
-	iftrue .FightDone
-	writetext .SeenText
-	waitbutton
-	closetext
+	iftrue_jumptextfaceplayer .AfterText
+	showtextfaceplayer .SeenText
 	winlosstext .BeatenText, 0
 	loadtrainer BUGSY, 1
 	startbattle
@@ -55,22 +48,29 @@ AzaleaGymBugsyScript:
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_HIVEBADGE
-	domaptrigger AZALEA_TOWN, $1
-.FightDone:
-	checkevent EVENT_GOT_TM49_FURY_CUTTER
-	iftrue .GotFuryCutter
+	setmapscene AZALEA_TOWN, $1
 	setevent EVENT_BEAT_TWINS_AMY_AND_MAY
 	setevent EVENT_BEAT_BUG_CATCHER_BENNY
 	setevent EVENT_BEAT_BUG_CATCHER_AL
 	setevent EVENT_BEAT_BUG_CATCHER_JOSH
 	writetext .HiveBadgeSpeech
 	buttonsound
-	verbosegivetmhm TM_FURY_CUTTER
-	setevent EVENT_GOT_TM49_FURY_CUTTER
-	jumpopenedtext .FuryCutterSpeech
+	verbosegivetmhm TM_U_TURN
+	setevent EVENT_GOT_TM69_U_TURN
+	thisopenedtext
 
-.GotFuryCutter:
-	jumpopenedtext .BugMonsAreDeep
+	text "TM69 contains"
+	line "U-turn."
+
+	para "It lets your #-"
+	line "mon attack, then"
+
+	para "switch out right"
+	line "away."
+
+	para "Isn't that great?"
+	line "I discovered it!"
+	done
 
 .SeenText:
 	text "I'm Bugsy!"
@@ -128,23 +128,7 @@ AzaleaGymBugsyScript:
 	line "you to have this."
 	done
 
-.FuryCutterSpeech:
-	text "TM49 contains"
-	line "Fury Cutter."
-
-	para "If you don't miss,"
-	line "it gets stronger"
-	cont "every turn."
-
-	para "The longer your"
-	line "battle goes, the"
-	cont "better it gets."
-
-	para "Isn't that great?"
-	line "I discovered it!"
-	done
-
-.BugMonsAreDeep:
+.AfterText:
 	text "Bug #mon are"
 	line "deep. There are"
 
@@ -157,13 +141,9 @@ AzaleaGymBugsyScript:
 
 AzaleaGymGuyScript:
 	checkevent EVENT_BEAT_BUGSY
-	iftrue .Won
-	jumptextfaceplayer .Text
+	iftrue_jumptextfaceplayer .WinText
+	thistextfaceplayer
 
-.Won:
-	jumptextfaceplayer .WinText
-
-.Text:
 	text "Yo, challenger!"
 
 	para "Bugsy's young, but"
@@ -198,7 +178,7 @@ AzaleaGymGuyScript:
 	done
 
 GenericTrainerBug_catcherBenny:
-	generictrainer EVENT_BEAT_BUG_CATCHER_BENNY, BUG_CATCHER, BENNY, .SeenText, .BeatenText
+	generictrainer BUG_CATCHER, BENNY, EVENT_BEAT_BUG_CATCHER_BENNY, .SeenText, .BeatenText
 
 	text "#mon become"
 	line "stronger if they"
@@ -219,7 +199,7 @@ GenericTrainerBug_catcherBenny:
 	done
 
 GenericTrainerBug_catcherAl:
-	generictrainer EVENT_BEAT_BUG_CATCHER_AL, BUG_CATCHER, AL, .SeenText, .BeatenText
+	generictrainer BUG_CATCHER, AL, EVENT_BEAT_BUG_CATCHER_AL, .SeenText, .BeatenText
 
 	text "They're so cool,"
 	line "but most girls"
@@ -244,7 +224,7 @@ GenericTrainerBug_catcherAl:
 	done
 
 GenericTrainerBug_catcherJosh:
-	generictrainer EVENT_BEAT_BUG_CATCHER_JOSH, BUG_CATCHER, JOSH, .SeenText, .BeatenText
+	generictrainer BUG_CATCHER, JOSH, EVENT_BEAT_BUG_CATCHER_JOSH, .SeenText, .BeatenText
 
 	text "I guess I should"
 	line "teach them better"
@@ -266,7 +246,7 @@ GenericTrainerBug_catcherJosh:
 	done
 
 GenericTrainerTwinsAmyandmay1:
-	generictrainer EVENT_BEAT_TWINS_AMY_AND_MAY, TWINS, AMYANDMAY1, .SeenText, TrainerTwinsAmyandmayBeatenText
+	generictrainer TWINS, AMYANDMAY1, EVENT_BEAT_TWINS_AMY_AND_MAY, .SeenText, TrainerTwinsAmyandmayBeatenText
 
 	text "Amy: You're"
 	line "really strong!"
@@ -279,20 +259,22 @@ GenericTrainerTwinsAmyandmay1:
 	done
 
 GenericTrainerTwinsAmyandmay2:
-	generictrainer EVENT_BEAT_TWINS_AMY_AND_MAY, TWINS, AMYANDMAY2, .SeenText, TrainerTwinsAmyandmayBeatenText
+	generictrainer TWINS, AMYANDMAY2, EVENT_BEAT_TWINS_AMY_AND_MAY, .SeenText, TrainerTwinsAmyandmayBeatenText
 
-	text "May: Our bug #-"
-	line "mon lost! Oh, what"
-	cont "a shame."
+	text "Mimi: Our bug"
+	line "#mon lost!"
+
+	para "Oh, what a"
+	line "shame."
 	done
 
 .SeenText:
-	text "May: You want to"
+	text "Mimi: You want to"
 	line "see the Leader?"
 	cont "We come first!"
 	done
 
 TrainerTwinsAmyandmayBeatenText:
-	text "Amy & May: Oh,"
+	text "Amy & Mimi: Oh,"
 	line "double goodness!"
 	done

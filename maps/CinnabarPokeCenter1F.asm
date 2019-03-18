@@ -1,31 +1,27 @@
 CinnabarPokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, CINNABAR_ISLAND, 1
+	warp_event  6,  7, CINNABAR_ISLAND, 1
+	warp_event  0,  7, POKECENTER_2F, 1
 
-CinnabarPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 1, CINNABAR_ISLAND
-	warp_def $7, $6, 1, CINNABAR_ISLAND
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalBlaineScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalBlaineScript
-
-.PersonEvents: db 3
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_COOLTRAINER_F, 5, 2, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, UnknownText_0x1ab335, -1
-	person_event SPRITE_FISHER, 4, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, UnknownText_0x1ab37f, -1
+	db 3 ; object events
+	pc_nurse_event  5, 1
+	object_event  2,  5, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, CinnabarPokeCenter1FCooltrainerfText, -1
+	object_event  9,  4, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, CinnabarPokeCenter1FFisherText, -1
 
 PokemonJournalBlaineScript:
 	setflag ENGINE_READ_BLAINE_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Special Feature:"
@@ -39,7 +35,7 @@ PokemonJournalBlaineScript:
 	cont "riddles."
 	done
 
-UnknownText_0x1ab335:
+CinnabarPokeCenter1FCooltrainerfText:
 	text "Cinnabar Gym's"
 	line "Blaine apparently"
 
@@ -48,7 +44,7 @@ UnknownText_0x1ab335:
 	cont "cave…"
 	done
 
-UnknownText_0x1ab37f:
+CinnabarPokeCenter1FFisherText:
 	text "It's been a year"
 	line "since the volcano"
 	cont "erupted."

@@ -1,58 +1,41 @@
 Route18West_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, Route18WestAlwaysOnBike
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, Route18WestAlwaysOnBike
+	db 2 ; warp events
+	warp_event 19,  6, ROUTE_18_GATE, 1
+	warp_event 19,  7, ROUTE_18_GATE, 2
 
-Route18West_MapEventHeader:
+	db 1 ; coord events
+	coord_event 12,  0, 0, Route18WestBikeCheckScript
 
-.Warps: db 2
-	warp_def $6, $13, 1, ROUTE_18_GATE
-	warp_def $7, $13, 2, ROUTE_18_GATE
+	db 1 ; bg events
+	bg_event -1,  5, SIGNPOST_JUMPTEXT, UragaChannelSignText
 
-.XYTriggers: db 1
-	xy_trigger 0, $0, $c, Route18WestBikeCheckScript
-
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_BIKER, 2, 6, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 4, TrainerBikerCharles, -1
+	db 1 ; object events
+	object_event  6,  2, SPRITE_BIKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBikerCharles, -1
 
 Route18WestAlwaysOnBike:
 	setflag ENGINE_ALWAYS_ON_BIKE
 	return
 
 Route18WestBikeCheckScript:
-	callasm .CheckPlayerState
-	if_equal PLAYER_BIKE, .done
-	opentext
-	writetext Route18WestBikeWarningText
-	waitbutton
-	closetext
-	applymovement PLAYER, Route18WestStepDownMovementData
+	copybytetovar wPlayerState
+	ifequal PLAYER_BIKE, .done
+	showtext Route18WestBikeWarningText
+	applyonemovement PLAYER, step_down
 .done
 	end
 
-.CheckPlayerState:
-	ld a, [PlayerState]
-	ld [ScriptVar], a
-	ret
+GenericTrainerBikerCharles:
+	generictrainer BIKER, CHARLES, EVENT_BEAT_BIKER_CHARLES, BikerCharlesSeenText, BikerCharlesBeatenText
 
-TrainerBikerCharles:
-	trainer EVENT_BEAT_BIKER_CHARLES, BIKER, CHARLES, BikerCharlesSeenText, BikerCharlesBeatenText, 0, BikerCharlesScript
-
-BikerCharlesScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ad293
-	waitbutton
-	closetext
-	end
-
-Route18WestStepDownMovementData:
-	step_down
-	step_end
+	text "Reckless driving"
+	line "causes accidents!"
+	cont "Take it easy!"
+	done
 
 BikerCharlesSeenText:
 	text "We're fearless"
@@ -62,12 +45,6 @@ BikerCharlesSeenText:
 BikerCharlesBeatenText:
 	text "Arrrgh! Crash and"
 	line "burn!"
-	done
-
-UnknownText_0x1ad293:
-	text "Reckless driving"
-	line "causes accidents!"
-	cont "Take it easy!"
 	done
 
 Route18WestBikeWarningText:

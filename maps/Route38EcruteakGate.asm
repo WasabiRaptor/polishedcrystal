@@ -1,27 +1,21 @@
 Route38EcruteakGate_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  0,  4, ROUTE_38, 1
+	warp_event  0,  5, ROUTE_38, 2
+	warp_event  9,  4, ECRUTEAK_CITY, 14
+	warp_event  9,  5, ECRUTEAK_CITY, 15
 
-Route38EcruteakGate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $4, $0, 1, ROUTE_38
-	warp_def $5, $0, 2, ROUTE_38
-	warp_def $4, $9, 14, ECRUTEAK_CITY
-	warp_def $5, $9, 15, ECRUTEAK_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_OFFICER, 2, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, OfficerScript_0x9cbd7, -1
-	person_event SPRITE_SCIENTIST, 3, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ProfOaksAide2Script, -1
-
-OfficerScript_0x9cbd7:
-	jumptextfaceplayer UnknownText_0x9cbda
+	db 2 ; object events
+	object_event  5,  2, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x9cbda, -1
+	object_event  8,  3, SPRITE_SCIENTIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, ProfOaksAide2Script, -1
 
 ProfOaksAide2Script:
 	faceplayer
@@ -32,12 +26,9 @@ ProfOaksAide2Script:
 	waitbutton
 	count_seen_caught
 	checkcode VAR_DEXCAUGHT
-	if_greater_than 29, .HereYouGo
+	ifgreater 29, .HereYouGo
 .UhOh
-	writetext ProfOaksAide2UhOhText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide2UhOhText
 
 .HereYouGo
 	writetext ProfOaksAide2HereYouGoText
@@ -46,16 +37,10 @@ ProfOaksAide2Script:
 	iffalse .NoRoom
 	setevent EVENT_GOT_EXP_SHARE_FROM_PROF_OAKS_AIDE
 .Explain
-	writetext ProfOaksAide2ExplainText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide2ExplainText
 
 .NoRoom
-	writetext ProfOaksAide2NoRoomText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext ProfOaksAide2NoRoomText
 
 UnknownText_0x9cbda:
 	text "Where did you say"

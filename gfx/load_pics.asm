@@ -1,37 +1,36 @@
 GetVariant: ; 51040
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	cp PIKACHU
-	jp z, .GetPikachuVariant
+	jr z, .GetPikachuVariant
 	cp MEWTWO
 	jp z, .GetMewtwoVariant
 
-; Return MonVariant based on Form at hl
-; Unown: 1-26, Pichu: 1-2, Arbok: 1-2, Magikarp: 1-11
+; Return CurForm based on Form at hl
 	ld a, [hl]
 	and FORM_MASK
 	jr nz, .ok
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	cp ARBOK
 	jr nz, .not_kanto_arbok
 	push bc
 	push de
-	farcall RegionCheck
+	call RegionCheck
 	ld a, e
 	pop de
 	pop bc
 	and a
 	jr z, .not_kanto_arbok
 .kanto_arbok
-	ld a, 2 ; arbok with form 0 in kanto becomes variant 2
+	ld a, ARBOK_KANTO_FORM
 	jr .ok
 .not_kanto_arbok
 	ld a, 1 ; safeguard: form 0 becomes variant 1
 .ok
-	ld [MonVariant], a
+	ld [wCurForm], a
 	ret
 
 .GetPikachuVariant:
-; Return Pikachu form (1-5) in MonVariant
+; Return Pikachu form (1-5) in wCurForm
 ; hl-8 is ...MonMove1
 ; hl-7 is ...MonMove2
 ; hl-6 is ...MonMove3
@@ -40,18 +39,18 @@ GetVariant: ; 51040
 
 	ld a, [hl]
 	and FORM_MASK
-	cp 4 ; Pika or ChuChu
+	cp PIKACHU_RED_FORM
 	jr nc, .use_form
 
 	push bc
-	ld bc, TempMonForm
+	ld bc, wTempMonForm
 	ld a, b
 	cp h
 	jr nz, .nottemp1
 	ld a, c
 	cp l
 	jr nz, .nottemp1
-	; skip TempMonID through TempMonSdfEV
+	; skip wTempMonID through wTempMonSdfEV
 	ld bc, -11
 	add hl, bc
 .nottemp1
@@ -59,48 +58,45 @@ GetVariant: ; 51040
 	add hl, bc
 	pop bc
 
-	ld a, 3 ; Surf
-	ld [MonVariant], a
-rept 4
+	ld a, PIKACHU_SURF_FORM
+	ld [wCurForm], a
+rept NUM_MOVES
 	ld a, [hli]
 	cp SURF
 	ret z
 endr
 
-rept 4
+rept NUM_MOVES
 	dec hl
 endr
-	ld a, 2 ; Fly
-	ld [MonVariant], a
-rept 4
+	ld a, PIKACHU_FLY_FORM
+	ld [wCurForm], a
+rept NUM_MOVES
 	ld a, [hli]
 	cp FLY
 	ret z
 endr
 
 .plain
-	ld a, 1 ; plain
-	ld [MonVariant], a
-	ret
-
+	ld a, PIKACHU_PLAIN_FORM
 .use_form
-	ld [MonVariant], a
+	ld [wCurForm], a
 	ret
 
 .GetMewtwoVariant:
-; Return Mewtwo form (1-2) in MonVariant
+; Return Mewtwo form (1-2) in wCurForm
 ; hl-9 is ...MonItem
 ; hl is ...MonForm
 
 	push bc
-	ld bc, TempMonForm
+	ld bc, wTempMonForm
 	ld a, b
 	cp h
 	jr nz, .nottemp2
 	ld a, c
 	cp l
 	jr nz, .nottemp2
-	; skip TempMonID through TempMonSdfEV
+	; skip wTempMonID through wTempMonSdfEV
 	ld bc, -11
 	add hl, bc
 .nottemp2
@@ -110,19 +106,16 @@ endr
 
 	ld a, [hl]
 	cp ARMOR_SUIT
+	ld a, MEWTWO_ARMORED_FORM
 	jr z, .armored_mewtwo
-	ld a, 1 ; plain
-	ld [MonVariant], a
-	ret
-
+	dec a ; MEWTWO_PLAIN_FORM
 .armored_mewtwo
-	ld a, 2 ; armored
-	ld [MonVariant], a
+	ld [wCurForm], a
 	ret
 
 GetFrontpic: ; 51077
-	ld a, [CurPartySpecies]
-	ld [CurSpecies], a
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 	call IsAPokemon
 	ret c
 	ld a, [rSVBK]
@@ -130,11 +123,11 @@ GetFrontpic: ; 51077
 	call _GetFrontpic
 	pop af
 	ld [rSVBK], a
-	ret
+	jp CloseSRAM
 
 FrontpicPredef: ; 5108b
-	ld a, [CurPartySpecies]
-	ld [CurSpecies], a
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 	call IsAPokemon
 	ret c
 	ld a, [rSVBK]
@@ -142,31 +135,44 @@ FrontpicPredef: ; 5108b
 	xor a
 	ld [hBGMapMode], a
 	call _GetFrontpic
+	ld a, BANK(VTiles3)
+	ld [rVBK], a
 	call GetAnimatedFrontpic
+	xor a
+	ld [rVBK], a
 	pop af
 	ld [rSVBK], a
-	ret
+	jp CloseSRAM
 
 _GetFrontpic: ; 510a5
+	ld a, BANK(sScratch)
+	call GetSRAMBank
 	push de
 	call GetBaseData
-	ld a, [BasePicSize]
+	ld a, [wBasePicSize]
 	and $f
 	ld b, a
 	push bc
 	call GetFrontpicPointer
-	ld a, $6
+	ld a, BANK(wDecompressScratch)
 	ld [rSVBK], a
 	ld a, b
-	ld de, wDecompressScratch + $800
+	ld de, wDecompressScratch
 	call FarDecompress
+	; Save decompressed size
+	swap e
+	swap d
+	ld a, d
+	and $f0
+	or e
+	ld [sScratch], a
 	pop bc
-	ld hl, wDecompressScratch
-	ld de, wDecompressScratch + $800
+	ld hl, sScratch + 1 tiles
+	ld de, wDecompressScratch
 	call PadFrontpic
 	pop hl
 	push hl
-	ld de, wDecompressScratch
+	ld de, sScratch + 1 tiles
 	ld c, 7 * 7
 	ld a, [hROMBank]
 	ld b, a
@@ -175,65 +181,15 @@ _GetFrontpic: ; 510a5
 	ret
 
 GetFrontpicPointer: ; 510d7
-GLOBAL PicPointers, PikachuPicPointers, PichuPicPointers, ArbokPicPointers, MagikarpPicPointers, UnownPicPointers, MewtwoPicPointers
-
-	ld a, [CurPartySpecies]
-	cp PIKACHU
-	jr z, .pikachu
-	cp PICHU
-	jr z, .pichu
-	cp ARBOK
-	jr z, .arbok
-	cp MAGIKARP
-	jr z, .magikarp
-	cp UNOWN
-	jr z, .unown
-	cp MEWTWO
-	jr z, .mewtwo
-	ld a, [CurPartySpecies]
-	ld d, BANK(PicPointers)
-	ld hl, PicPointers
-	jr .ok
-
-.pikachu
-	ld a, [MonVariant]
-	ld d, BANK(PikachuPicPointers)
-	ld hl, PikachuPicPointers
-	jr .ok
-
-.pichu
-	ld a, [MonVariant]
-	ld d, BANK(PichuPicPointers)
-	ld hl, PichuPicPointers
-	jr .ok
-
-.arbok
-	ld a, [MonVariant]
-	ld d, BANK(ArbokPicPointers)
-	ld hl, ArbokPicPointers
-	jr .ok
-
-.magikarp
-	ld a, [MonVariant]
-	ld d, BANK(MagikarpPicPointers)
-	ld hl, MagikarpPicPointers
-	jr .ok
-
-.unown
-	ld a, [MonVariant]
-	ld d, BANK(UnownPicPointers)
-	ld hl, UnownPicPointers
-	jr .ok
-
-.mewtwo
-	ld a, [MonVariant]
-	ld d, BANK(MewtwoPicPointers)
-	ld hl, MewtwoPicPointers
-
-.ok
+	ld a, [wCurPartySpecies]
+	call GetRelevantPicPointers
+	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld bc, 6
-	call AddNTimes
+	rst AddNTimes
 	ld a, d
 	call GetFarByte
 	push af
@@ -247,7 +203,7 @@ GetAnimatedFrontpic: ; 51103
 	ld a, $1
 	ld [rVBK], a
 	push hl
-	ld de, wDecompressScratch
+	ld de, sScratch + 1 tiles
 	ld c, 7 * 7
 	ld a, [hROMBank]
 	ld b, a
@@ -256,107 +212,56 @@ GetAnimatedFrontpic: ; 51103
 	ld de, 7 * 7 tiles
 	add hl, de
 	push hl
-	ld a, $1
-	ld hl, BasePicSize
+	ld a, BANK(wBasePicSize)
+	ld hl, wBasePicSize
 	call GetFarWRAMByte
 	pop hl
 	and $f
-	ld de, w6_d800 + 5 * 5 tiles
+	ld de, wDecompressScratch + 5 * 5 tiles
 	ld c, 5 * 5
-if !DEF(FAITHFUL)
-	push af
-	ld a, [CurSpecies]
-	cp DIGLETT
-	jr nz, .not_alolan_diglett
-	ld c, 5 * 5 + 10
-.not_alolan_diglett
-	pop af
-endc
 	cp 5
 	jr z, .got_dims
-	ld de, w6_d800 + 6 * 6 tiles
+	ld de, wDecompressScratch + 6 * 6 tiles
 	ld c, 6 * 6
 	cp 6
 	jr z, .got_dims
-	ld de, w6_d800 + 7 * 7 tiles
-
-	push hl
-	ld a, [CurSpecies]
-	ld c, a
-	ld hl, .LargeSpriteSizes
-.loop
-	ld a, [hli]
-	cp c
-	jr z, .found
-	cp -1
-	jr z, .found
-	inc hl
-	jr .loop
-.found
-	ld a, [hl]
-	ld c, a
-	pop hl
-
+	ld de, wDecompressScratch + 7 * 7 tiles
 .got_dims
+	; Get animation size (total - base sprite size)
+	ld a, [sScratch]
+	sub c
+	ret z ; Return if there's no animation
+	ld c, a
 	push hl
 	push bc
-	call LoadOrientedFrontpicTiles
+	call LoadFrontpicTiles
 	pop bc
 	pop hl
-
+	ld de, wDecompressScratch
+	ld a, [hROMBank]
+	ld b, a
+; Improved routine by pfero
+; https://gitgud.io/pfero/axyllagame/commit/486f4ed432ca49e5d1305b6402cc5540fe9d3aaa
+	; If we can load it in a single pass, just do it
 	ld a, c
-	cp $80 - 7 * 7 + 1
+	sub (128 - 7 * 7)
 	jr c, .no_overflow
-
-	push bc
-	ld de, wDecompressScratch
-	ld a, [hROMBank]
-	ld b, a
-	ld c, $80 - 7 * 7 - 1
+	; Otherwise, we load the first part...
+	inc a
+	ld [sScratch], a
+	ld c, (127 - 7 * 7)
 	call Get2bpp
-	ld de, w6_d800 + $7f tiles
-	ld hl, wDecompressScratch
-	ld bc, ($80 - 7 * 7 - 1) * $10
-	call LoadFrontpic
-	pop bc
-
-	ld a, BANK(VTiles4)
-	ld [rVBK], a
-	ld a, c
-	sub $80 - 7 * 7 - 1 - 1
-	ld c, a
+	; Then move up a bit and load the rest
+	ld de, wDecompressScratch + (127 - 7 * 7) tiles
 	ld hl, VTiles4
-
-.no_overflow
-	ld de, wDecompressScratch
 	ld a, [hROMBank]
 	ld b, a
-	call Get2bpp
-	xor a
-	ld [rVBK], a
-	ret
+	ld a, [sScratch]
+	ld c, a
+.no_overflow
+	jp Get2bpp
 
-.LargeSpriteSizes:
-; species, max tile - size + 1
-	db PIKACHU,    $63 - 7 * 7 + 1 ; Flying Pikachu
-	db GLACEON,    $64 - 7 * 7 + 1
-if !DEF(FAITHFUL)
-	db DUGTRIO,    $6e - 7 * 7 + 1
-endc
-	db MAMOSWINE,  $6f - 7 * 7 + 1
-	db PORYGON_Z,  $6f - 7 * 7 + 1
-	db SYLVEON,    $71 - 7 * 7 + 1
-	db MISMAGIUS,  $71 - 7 * 7 + 1
-	db ELECTIVIRE, $76 - 7 * 7 + 1
-	db WEAVILE,    $80 - 7 * 7 + 1
-	db LEAFEON,    $81 - 7 * 7 + 1
-	db GLISCOR,    $83 - 7 * 7 + 1
-	db RHYPERIOR,  $85 - 7 * 7 + 1
-	db TOGEKISS,   $88 - 7 * 7 + 1
-	db MAGMORTAR,  $8b - 7 * 7 + 1
-	db -1,         7 * 7
-
-LoadOrientedFrontpicTiles: ; 5114f
+LoadFrontpicTiles: ; 5114f
 	ld hl, wDecompressScratch
 ; bc = c * $10
 	swap c
@@ -370,78 +275,48 @@ LoadOrientedFrontpicTiles: ; 5114f
 	push bc
 	call LoadFrontpic
 	pop bc
+; don't access echo ram
+	ld a, c
+	and a
+	jr z, .handle_loop
+	inc b
+	jr .handle_loop
 ; load the remaining bytes in batches of $100
 .loop
 	push bc
 	ld c, $0
 	call LoadFrontpic
 	pop bc
+.handle_loop
 	dec b
 	jr nz, .loop
 	ret
 
 GetBackpic: ; 5116c
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ret c
 
-	ld a, [CurPartySpecies]
+	ld a, [wCurPartySpecies]
 	ld b, a
-	ld a, [MonVariant]
+	ld a, [wCurForm]
 	ld c, a
 	ld a, [rSVBK]
 	push af
 	ld a, $6
 	ld [rSVBK], a
 	push de
-
-GLOBAL PicPointers, PikachuPicPointers, PichuPicPointers, ArbokPicPointers, MagikarpPicPointers, UnownPicPointers, MewtwoPicPointers
-	ld hl, PicPointers
 	ld a, b
-	ld d, BANK(PicPointers)
-	cp PIKACHU
-	jr nz, .not_pikachu
-	ld hl, PikachuPicPointers
+	push bc
+	call GetRelevantPicPointers
+	pop bc
+	ld a, b
+	jr nc, .notvariant
 	ld a, c
-	ld d, BANK(PikachuPicPointers)
-	jr .ok
-.not_pikachu
-	cp PICHU
-	jr nz, .not_pichu
-	ld hl, PichuPicPointers
-	ld a, c
-	ld d, BANK(PichuPicPointers)
-	jr .ok
-.not_pichu
-	cp ARBOK
-	jr nz, .not_arbok
-	ld hl, ArbokPicPointers
-	ld a, c
-	ld d, BANK(ArbokPicPointers)
-	jr .ok
-.not_arbok
-	cp MAGIKARP
-	jr nz, .not_magikarp
-	ld hl, MagikarpPicPointers
-	ld a, c
-	ld d, BANK(MagikarpPicPointers)
-	jr .ok
-.not_magikarp
-	cp UNOWN
-	jr nz, .not_unown
-	ld hl, UnownPicPointers
-	ld a, c
-	ld d, BANK(UnownPicPointers)
-.not_unown
-	cp MEWTWO
-	jr nz, .ok
-	ld hl, MewtwoPicPointers
-	ld a, c
-	ld d, BANK(MewtwoPicPointers)
-.ok
+.notvariant
 	dec a
 	ld bc, 6
-	call AddNTimes
+	rst AddNTimes
 	ld bc, 3
 	add hl, bc
 	ld a, d
@@ -466,19 +341,19 @@ GLOBAL PicPointers, PikachuPicPointers, PichuPicPointers, ArbokPicPointers, Magi
 	ret
 
 GetTrainerPic: ; 5120d
-	ld a, [TrainerClass]
+	ld a, [wTrainerClass]
 	and a
 	ret z
 	cp NUM_TRAINER_CLASSES
 	ret nc
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	xor a
 	ld [hBGMapMode], a
 	ld hl, TrainerPicPointers
-	ld a, [TrainerClass]
+	ld a, [wTrainerClass]
 	dec a
 	ld bc, 3
-	call AddNTimes
+	rst AddNTimes
 	ld a, [rSVBK]
 	push af
 	ld a, $6
@@ -491,6 +366,7 @@ GetTrainerPic: ; 5120d
 	ld a, BANK(TrainerPicPointers)
 	call GetFarHalfword
 	pop af
+_Decompress7x7Pic:
 	ld de, wDecompressScratch
 	call FarDecompress
 	pop hl
@@ -501,10 +377,33 @@ GetTrainerPic: ; 5120d
 	call Get2bpp
 	pop af
 	ld [rSVBK], a
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	ld a, $1
 	ld [hBGMapMode], a
 	ret
+
+GetPaintingPic:
+	ld a, [wTrainerClass]
+	call ApplyTilemapInVBlank
+	xor a
+	ld [hBGMapMode], a
+	ld hl, PaintingPicPointers
+	ld a, [wTrainerClass]
+	ld bc, 3
+	rst AddNTimes
+	ld a, [rSVBK]
+	push af
+	ld a, $6
+	ld [rSVBK], a
+	push de
+	ld a, BANK(PaintingPicPointers)
+	call GetFarByte
+	push af
+	inc hl
+	ld a, BANK(PaintingPicPointers)
+	call GetFarHalfword
+	pop af
+	jr _Decompress7x7Pic
 
 DecompressPredef: ; 5125d
 ; Decompress lz data from b:hl to scratch space at 6:d000, then copy it to address de.
@@ -607,7 +506,7 @@ PadFrontpic: ; 512ab
 	jr nz, .five_loop
 	ld c, 7 tiles
 	xor a
-	jp .Fill
+	; fallthrough
 
 .Fill:
 	ld [hli], a
@@ -643,3 +542,19 @@ LoadFrontpic: ; 512f2
 	jr nz, .right_loop
 	pop bc
 	ret
+
+GetRelevantPicPointers:
+; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantPicPointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+INCLUDE "data/pokemon/variant_pic_pointer_table.asm"

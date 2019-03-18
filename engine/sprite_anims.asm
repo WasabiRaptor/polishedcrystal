@@ -168,7 +168,7 @@ DoAnimFrame: ; 8d24b
 .move_vertical
 	ld a, e
 	ld d, $20
-	call .Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -234,7 +234,7 @@ DoAnimFrame: ; 8d24b
 	jr c, .asm_8d4cd
 	dec [hl]
 	ld d, $28
-	call .Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -273,7 +273,7 @@ DoAnimFrame: ; 8d24b
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld a, [hl]
-	call Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -347,7 +347,7 @@ DoAnimFrame: ; 8d24b
 
 	push af
 	push de
-	call .Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -355,7 +355,7 @@ DoAnimFrame: ; 8d24b
 
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -388,19 +388,19 @@ DoAnimFrame: ; 8d24b
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld a, [hl]
-rept 3
 	inc [hl]
-endr
+	inc [hl]
+	inc [hl]
 	push af
 	push de
-	call .Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -439,7 +439,7 @@ endr
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call .Sprites_Cosine
+	call Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -464,7 +464,7 @@ endr
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call .Sprites_Cosine
+	call Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -499,7 +499,7 @@ endr
 	add hl, bc
 	ld a, [hl]
 	inc [hl]
-	call .Sprites_Cosine
+	call Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -522,7 +522,7 @@ endr
 	cpl
 	inc a
 	ld d, $20
-	call .Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -541,7 +541,7 @@ endr
 	cpl
 	inc a
 	ld d, $20
-	call .Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
@@ -552,23 +552,23 @@ endr
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	ld d, [hl]
-rept 3
 	inc [hl]
-endr
+	inc [hl]
+	inc [hl]
 
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld a, [hl]
 	push af
 	push de
-	call .Sprites_Sine
+	call Sine
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc
 	ld [hl], a
 	pop de
 	pop af
-	call .Sprites_Cosine
+	call Cosine
 
 	ld hl, SPRITEANIMSTRUCT_XOFFSET
 	add hl, bc
@@ -612,16 +612,8 @@ endr
 	ret
 ; 8d6d8 (23:56d8)
 
-.IncrementSpriteAnimStruct0B: ; 8d6d8
+.IncrementSpriteAnimStruct0B:
 	ld hl, SPRITEANIMSTRUCT_JUMPTABLE_INDEX
 	add hl, bc
 	inc [hl]
 	ret
-; 8d6de
-
-.Sprites_Sine: ; 8d6de (23:56de)
-	jp Sprites_Sine
-
-.Sprites_Cosine: ; 8d6e2 (23:56e2)
-	jp Sprites_Cosine
-; 8d6e6 (23:56e6)

@@ -1,30 +1,29 @@
 BattleTowerOutside_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script BattleTowerOutsideStepDownTrigger
 
-.MapTriggers: db 1
-	dw BattleTowerOutsideStepDownTrigger
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  8, 21, ROUTE_40_BATTLE_TOWER_GATE, 3
+	warp_event  9, 21, ROUTE_40_BATTLE_TOWER_GATE, 4
+	warp_event  8,  9, BATTLE_TOWER_1F, 1 ; hole
+	warp_event  9,  9, BATTLE_TOWER_1F, 2 ; hole
 
-BattleTowerOutside_MapEventHeader:
+	db 2 ; coord events
+	coord_event  8,  9, 1, BattleTowerOutsidePanUpTrigger1
+	coord_event  9,  9, 1, BattleTowerOutsidePanUpTrigger2
 
-.Warps: db 4
-	warp_def $15, $8, 3, ROUTE_40_BATTLE_TOWER_GATE
-	warp_def $15, $9, 4, ROUTE_40_BATTLE_TOWER_GATE
-	warp_def $9, $8, 1, BATTLE_TOWER_1F ; hole
-	warp_def $9, $9, 2, BATTLE_TOWER_1F ; hole
+	db 1 ; bg events
+	bg_event 10, 10, SIGNPOST_JUMPTEXT, BattleTowerOutsideSignText
 
-.XYTriggers: db 2
-	xy_trigger 1, $9, $8, BattleTowerOutsidePanUpTrigger1
-	xy_trigger 1, $9, $9, BattleTowerOutsidePanUpTrigger2
-
-.Signposts: db 1
-	signpost 10, 10, SIGNPOST_JUMPTEXT, BattleTowerOutsideSignText
-
-.PersonEvents: db 4
-	person_event SPRITE_YOUNGSTER, 12, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_JUMPTEXTFP, 0, BattleTowerOutsideYoungsterText, -1
-	person_event SPRITE_BEAUTY, 11, 13, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_JUMPTEXTFP, 0, BattleTowerOutsideBeautyText, -1
-	person_event SPRITE_SAILOR, 18, 12, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, BattleTowerOutsideSailorText, -1
-	person_event SPRITE_LASS, 24, 12, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
+	db 6 ; object events
+	object_event  6, 12, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, BattleTowerOutsideYoungsterScript, -1
+	object_event 13, 11, SPRITE_BEAUTY, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, BattleTowerOutsideBeautyScript, -1
+	object_event 12, 18, SPRITE_SAILOR, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, BattleTowerOutsideSailorText, EVENT_BATTLE_TOWER_CLOSED
+	object_event 12, 24, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
+	object_event  8,  9, SPRITE_BIG_LAPRAS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptext, BattleTowerOutsideDoorsClosedText, EVENT_BATTLE_TOWER_OPEN
+	object_event  9,  9, SPRITE_BIG_LAPRAS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptext, BattleTowerOutsideDoorsClosedText, EVENT_BATTLE_TOWER_OPEN
 
 BattleTowerOutsideStepDownTrigger:
 	priorityjump .Script
@@ -32,34 +31,29 @@ BattleTowerOutsideStepDownTrigger:
 
 .Script:
 	checkcode VAR_YCOORD
-	if_not_equal $9, .Done
+	ifnotequal $9, .Done
 	checkcode VAR_XCOORD
-	if_equal $8, .Down
-	if_equal $9, .Down
-	jump .Done
+	ifequal $8, .Down
+	ifnotequal $9, .Done
 .Down
-	applymovement PLAYER, .StepDownMovement
+	applyonemovement PLAYER, step_down
 .Done
-	dotrigger $1
+	setscene $1
 	end
-
-.StepDownMovement:
-	step_down
-	step_end
 
 BattleTowerOutsidePanUpTrigger1:
 	scall BattleTowerOutsidePanUpHelperScript
-	warpfacing UP, BATTLE_TOWER_1F, $a, $d
+	warpfacing UP, BATTLE_TOWER_1F, 10, 13
 	end
 
 BattleTowerOutsidePanUpTrigger2:
 	scall BattleTowerOutsidePanUpHelperScript
-	warpfacing UP, BATTLE_TOWER_1F, $b, $d
+	warpfacing UP, BATTLE_TOWER_1F, 11, 13
 	end
 
 BattleTowerOutsidePanUpHelperScript:
 	playsound SFX_EXIT_BUILDING
-	applymovement PLAYER, .HidePlayerMovement
+	applyonemovement PLAYER, hide_person
 	waitsfx
 	applymovement PLAYER, .PanUpMovement
 	disappear PLAYER
@@ -67,12 +61,8 @@ BattleTowerOutsidePanUpHelperScript:
 	special Special_FadeOutMusic
 	special FadeOutPalettes
 	pause 15
-	dotrigger $0
+	setscene $0
 	end
-
-.HidePlayerMovement:
-	hide_person
-	step_end
 
 .PanUpMovement:
 	step_up
@@ -89,7 +79,19 @@ BattleTowerOutsideSignText:
 	line "Trainer Challenge!"
 	done
 
-BattleTowerOutsideYoungsterText:
+BattleTowerOutsideYoungsterScript:
+	checkevent EVENT_BATTLE_TOWER_OPEN
+	iftrue_jumptextfaceplayer .OpenText
+	thistextfaceplayer
+
+	text "Wow, the Battle"
+	line "Tower is huge! My"
+
+	para "neck is tired from"
+	line "looking up at it."
+	done
+
+.OpenText:
 	text "Wow, the Battle"
 	line "Tower is huge!"
 
@@ -98,7 +100,22 @@ BattleTowerOutsideYoungsterText:
 	cont "in there!"
 	done
 
-BattleTowerOutsideBeautyText:
+BattleTowerOutsideBeautyScript:
+	checkevent EVENT_BATTLE_TOWER_OPEN
+	iftrue_jumptextfaceplayer .OpenText
+	thistextfaceplayer
+
+	text "What on earth do"
+	line "they do here?"
+
+	para "If the name says"
+	line "anything, I guess"
+
+	para "it must be for"
+	line "#mon battles."
+	done
+
+.OpenText:
 	text "You can use only"
 	line "three #mon."
 
@@ -118,4 +135,9 @@ BattleTowerOutsideSailorText:
 
 	para "I have to win it"
 	line "all. That I must!"
+	done
+
+BattleTowerOutsideDoorsClosedText:
+	text "The Battle Tower's"
+	line "doors are closed…"
 	done

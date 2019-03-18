@@ -1,35 +1,42 @@
 Route33_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_TILES, Route33RainScript
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event 11,  9, UNION_CAVE_1F, 3
 
-Route33_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $9, $b, 3, UNION_CAVE_1F
+	db 1 ; bg events
+	bg_event 11, 11, SIGNPOST_JUMPTEXT, Route33SignText
 
-.XYTriggers: db 0
+	db 3 ; object events
+	object_event  6, 13, SPRITE_HIKER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 2, TrainerHikerAnthony, -1
+	object_event 12, 17, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSchoolgirlImogen, -1
+	fruittree_event 14, 16, FRUITTREE_ROUTE_33, PECHA_BERRY
 
-.Signposts: db 1
-	signpost 11, 11, SIGNPOST_READ, Route33Sign
+Route33RainScript:
+	special Special_GetOvercastIndex
+	ifequal AZALEA_OVERCAST, .rain
+	changemap Route33_BlockData
+	return
 
-.PersonEvents: db 3
-	person_event SPRITE_POKEFAN_M, 13, 6, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 2, TrainerHikerAnthony, -1
-	person_event SPRITE_TWIN, 17, 12, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerSchoolgirlImogen, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 16, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route33FruitTreeScript, -1
+.rain
+	changemap Route33Raining_BlockData
+	return
 
 TrainerHikerAnthony:
-	trainer EVENT_BEAT_HIKER_ANTHONY, HIKER, ANTHONY1, HikerAnthony1SeenText, HikerAnthony1BeatenText, 0, .Script
+	trainer HIKER, ANTHONY1, EVENT_BEAT_HIKER_ANTHONY, HikerAnthony1SeenText, HikerAnthony1BeatenText, 0, .Script
 
 .Script:
 	writecode VAR_CALLERID, PHONE_HIKER_ANTHONY
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_ANTHONY
 	iftrue .Rematch
 	checkflag ENGINE_DUNSPARCE_SWARM
-	iftrue .Swarm
+	iftrue_jumpopenedtext HikerAnthonyDunsparceText
 	checkcellnum PHONE_HIKER_ANTHONY
 	iftrue .NumberAccepted
 	checkevent EVENT_ANTHONY_ASKED_FOR_PHONE_NUMBER
@@ -37,28 +44,28 @@ TrainerHikerAnthony:
 	writetext HikerAnthony1AfterText
 	buttonsound
 	setevent EVENT_ANTHONY_ASKED_FOR_PHONE_NUMBER
-	scall .AskNumber1
+	callstd asknumber1m
 	jump .AskForPhoneNumber
 
 .AskAgain:
-	scall .AskNumber2
+	callstd asknumber2m
 .AskForPhoneNumber:
 	askforphonenumber PHONE_HIKER_ANTHONY
-	if_equal $1, .PhoneFull
-	if_equal $2, .NumberDeclined
+	ifequal $1, .PhoneFull
+	ifequal $2, .NumberDeclined
 	trainertotext HIKER, ANTHONY1, $0
-	scall .RegisteredNumber
-	jump .NumberAccepted
+	callstd registerednumberm
+	jumpstd numberacceptedm
 
 .Rematch:
-	scall .RematchStd
+	callstd rematchm
 	winlosstext HikerAnthony1BeatenText, 0
 	copybytetovar wAnthonyFightCount
-	if_equal 4, .Fight4
-	if_equal 3, .Fight3
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 4, .Fight4
+	ifequal 3, .Fight3
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight4:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight4
@@ -110,56 +117,22 @@ TrainerHikerAnthony:
 	clearflag ENGINE_ANTHONY
 	end
 
-.Swarm:
-	writetext HikerAnthonyDunsparceText
-	waitbutton
-	closetext
-	end
-
-.AskNumber1:
-	jumpstd asknumber1m
-	end
-
-.AskNumber2:
-	jumpstd asknumber2m
-	end
-
-.RegisteredNumber:
-	jumpstd registerednumberm
-	end
-
 .NumberAccepted:
 	jumpstd numberacceptedm
-	end
 
 .NumberDeclined:
 	jumpstd numberdeclinedm
-	end
 
 .PhoneFull:
 	jumpstd phonefullm
-	end
 
-.RematchStd:
-	jumpstd rematchm
-	end
+GenericTrainerSchoolgirlImogen:
+	generictrainer SCHOOLGIRL, IMOGEN, EVENT_BEAT_SCHOOLGIRL_IMOGEN, SchoolgirlImogenSeenText, SchoolgirlImogenBeatenText
 
-TrainerSchoolgirlImogen:
-	trainer EVENT_BEAT_SCHOOLGIRL_IMOGEN, SCHOOLGIRL, IMOGEN, SchoolgirlImogenSeenText, SchoolgirlImogenBeatenText, 0, SchoolgirlImogenScript
-
-SchoolgirlImogenScript:
-	end_if_just_battled
-	opentext
-	writetext SchoolgirlImogenAfterText
-	waitbutton
-	closetext
-	end
-
-Route33Sign:
-	jumptext Route33SignText
-
-Route33FruitTreeScript:
-	fruittree FRUITTREE_ROUTE_33
+	text "I'm trying hard so"
+	line "I can be the star"
+	cont "in my class."
+	done
 
 HikerAnthony1SeenText:
 	text "I came through the"
@@ -199,12 +172,6 @@ SchoolgirlImogenSeenText:
 SchoolgirlImogenBeatenText:
 	text "So there are bet-"
 	line "ter trainers…"
-	done
-
-SchoolgirlImogenAfterText:
-	text "I'm trying hard so"
-	line "I can be the star"
-	cont "in my class."
 	done
 
 Route33SignText:

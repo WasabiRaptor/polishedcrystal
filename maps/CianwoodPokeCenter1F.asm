@@ -1,33 +1,29 @@
 CianwoodPokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, CIANWOOD_CITY, 3
+	warp_event  6,  7, CIANWOOD_CITY, 3
+	warp_event  0,  7, POKECENTER_2F, 1
 
-CianwoodPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 3, CIANWOOD_CITY
-	warp_def $7, $6, 3, CIANWOOD_CITY
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalChuckScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalChuckScript
-
-.PersonEvents: db 5
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_GYM_GUY, 3, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, CianwoodGymGuyScript, -1
-	person_event SPRITE_LASS, 5, 1, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x9dbed, -1
-	person_event SPRITE_SUPER_NERD, 7, 9, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x9ded7, -1
-	person_event SPRITE_RICH_BOY, 5, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_JUMPTEXTFP, 0, CianwoodPokeCenterRichBoyText, -1
+	db 5 ; object events
+	pc_nurse_event  5, 1
+	object_event  6,  3, SPRITE_GYM_GUY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, CianwoodGymGuyScript, -1
+	object_event  1,  5, SPRITE_LASS, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, CianwoodPokeCenter1FLassText, -1
+	object_event  9,  7, SPRITE_SUPER_NERD, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, CianwoodPokeCenter1FSuperNerdText, -1
+	object_event 11,  5, SPRITE_RICH_BOY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, CianwoodPokeCenter1FRichBoyText, -1
 
 PokemonJournalChuckScript:
 	setflag ENGINE_READ_CHUCK_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Special Feature:"
@@ -46,26 +42,20 @@ PokemonJournalChuckScript:
 	done
 
 CianwoodGymGuyScript:
+	checkevent EVENT_BEAT_CHUCK
+	iftrue_jumptextfaceplayer .WinText
+	checkevent EVENT_GOT_HM04_STRENGTH
+	iftrue_jumptextfaceplayer .Text
 	faceplayer
 	opentext
-	checkevent EVENT_BEAT_CHUCK
-	iftrue .Won
 	writetext .Text
 	waitbutton
-	checkevent EVENT_GOT_HM04_STRENGTH
-	iftrue .Done
 	writetext .StrengthText1
 	buttonsound
 	verbosegivetmhm HM_STRENGTH
 	setevent EVENT_GOT_HM04_STRENGTH
 	writetext .StrengthText2
-	waitbutton
-.Done
-	closetext
-	end
-
-.Won:
-	jumpopenedtext .WinText
+	waitendtext
 
 .Text:
 	text "The #mon Gym"
@@ -125,7 +115,7 @@ CianwoodGymGuyScript:
 	cont "looking at you!"
 	done
 
-UnknownText_0x9dbed:
+CianwoodPokeCenter1FLassText:
 	text "Did you meet the"
 	line "#Maniac?"
 
@@ -134,7 +124,7 @@ UnknownText_0x9dbed:
 	cont "rare #mon."
 	done
 
-UnknownText_0x9ded7:
+CianwoodPokeCenter1FSuperNerdText:
 	text "I love showing off"
 	line "the #mon that"
 
@@ -148,7 +138,7 @@ UnknownText_0x9ded7:
 	line "off my #mon!"
 	done
 
-CianwoodPokeCenterRichBoyText:
+CianwoodPokeCenter1FRichBoyText:
 	text "There's no #"
 	line "Mart in this town,"
 

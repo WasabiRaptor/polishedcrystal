@@ -1,35 +1,32 @@
 CeruleanGym_MapScriptHeader:
+	db 2 ; scene scripts
+	scene_script CeruleanGymTrigger0
+	scene_script CeruleanGymTrigger1
 
-.MapTriggers: db 2
-	dw CeruleanGymTrigger0
-	dw CeruleanGymTrigger1
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4, 15, CERULEAN_CITY, 5
+	warp_event  5, 15, CERULEAN_CITY, 5
 
-CeruleanGym_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $f, $4, 5, CERULEAN_CITY
-	warp_def $f, $5, 5, CERULEAN_CITY
+	db 3 ; bg events
+	bg_event  3,  8, SIGNPOST_IFNOTSET, CeruleanGymHiddenMachinePart
+	bg_event  2, 13, SIGNPOST_READ, CeruleanGymStatue1
+	bg_event  6, 13, SIGNPOST_READ, CeruleanGymStatue2
 
-.XYTriggers: db 0
+	db 8 ; object events
+	object_event  4, 10, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_CERULEAN_GYM_ROCKET
+	object_event  5,  3, SPRITE_MISTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, MistyScript_0x188432, EVENT_TRAINERS_IN_CERULEAN_GYM
+	object_event  4,  6, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSwimmerfDiana, EVENT_TRAINERS_IN_CERULEAN_GYM
+	object_event  1,  9, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerSwimmerfBriana, EVENT_TRAINERS_IN_CERULEAN_GYM
+	object_event  8,  9, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSwimmerfViola, EVENT_TRAINERS_IN_CERULEAN_GYM
+	object_event  0,  4, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSailorParker, EVENT_TRAINERS_IN_CERULEAN_GYM
+	object_event  9,  4, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSailorEddie, EVENT_TRAINERS_IN_CERULEAN_GYM
+	object_event  3, 13, SPRITE_GYM_GUY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, CeruleanGymGuyScript, EVENT_TRAINERS_IN_CERULEAN_GYM
 
-.Signposts: db 3
-	signpost 8, 3, SIGNPOST_IFNOTSET, CeruleanGymHiddenMachinePart
-	signpost 13, 2, SIGNPOST_READ, CeruleanGymStatue1
-	signpost 13, 6, SIGNPOST_READ, CeruleanGymStatue2
-
-.PersonEvents: db 8
-	person_event SPRITE_ROCKET, 10, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_CERULEAN_GYM_ROCKET
-	person_event SPRITE_MISTY, 3, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, MistyScript_0x188432, EVENT_TRAINERS_IN_CERULEAN_GYM
-	person_event SPRITE_SWIMMER_GIRL, 6, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 3, TrainerSwimmerfDiana, EVENT_TRAINERS_IN_CERULEAN_GYM
-	person_event SPRITE_SWIMMER_GIRL, 9, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 1, TrainerSwimmerfBriana, EVENT_TRAINERS_IN_CERULEAN_GYM
-	person_event SPRITE_SWIMMER_GIRL, 9, 8, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 3, TrainerSwimmerfJoy, EVENT_TRAINERS_IN_CERULEAN_GYM
-	person_event SPRITE_SAILOR, 4, 0, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerSailorParker, EVENT_TRAINERS_IN_CERULEAN_GYM
-	person_event SPRITE_SAILOR, 4, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerSailorEddie, EVENT_TRAINERS_IN_CERULEAN_GYM
-	person_event SPRITE_GYM_GUY, 13, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeruleanGymGuyScript, EVENT_TRAINERS_IN_CERULEAN_GYM
-
-const_value set 2
+	const_def 1 ; object constants
 	const CERULEANGYM_ROCKET
 
 CeruleanGymTrigger1:
@@ -42,33 +39,24 @@ UnknownScript_0x1883de:
 	playsound SFX_TACKLE
 	applymovement CERULEANGYM_ROCKET, MovementData_0x1884eb
 	playmusic MUSIC_ROCKET_ENCOUNTER
-	opentext
-	writetext UnknownText_0x1884fb
-	waitbutton
-	closetext
+	showtext UnknownText_0x1884fb
 	showemote EMOTE_SHOCK, CERULEANGYM_ROCKET, 15
 	applymovement CERULEANGYM_ROCKET, MovementData_0x1884f7
-	opentext
-	writetext UnknownText_0x188574
-	waitbutton
-	closetext
-	applymovement CERULEANGYM_ROCKET, MovementData_0x1884f5
-	opentext
-	writetext UnknownText_0x1885a5
-	waitbutton
-	closetext
+	showtext UnknownText_0x188574
+	applyonemovement CERULEANGYM_ROCKET, big_step_down
+	showtext UnknownText_0x1885a5
 	applymovement CERULEANGYM_ROCKET, MovementData_0x1884e8
 	playsound SFX_EXIT_BUILDING
 	disappear CERULEANGYM_ROCKET
 	setevent EVENT_MET_ROCKET_GRUNT_AT_CERULEAN_GYM
 	clearevent EVENT_FOUND_MACHINE_PART_IN_CERULEAN_GYM
 	clearevent EVENT_ROUTE_24_ROCKET
-	dotrigger $0
-	domaptrigger POWER_PLANT, $0
+	setscene $0
+	setmapscene POWER_PLANT, $0
 	waitsfx
 	special RestartMapMusic
 	pause 15
-	spriteface PLAYER, DOWN
+	turnobject PLAYER, DOWN
 	pause 15
 	end
 
@@ -86,7 +74,7 @@ MistyScript_0x188432:
 	reloadmapafterbattle
 	setevent EVENT_BEAT_MISTY
 	setevent EVENT_BEAT_SWIMMERF_DIANA
-	setevent EVENT_BEAT_SWIMMERF_JOY
+	setevent EVENT_BEAT_SWIMMERF_VIOLA
 	setevent EVENT_BEAT_SWIMMERF_BRIANA
 	setevent EVENT_BEAT_SAILOR_PARKER
 	setevent EVENT_BEAT_SAILOR_EDDIE
@@ -96,9 +84,9 @@ MistyScript_0x188432:
 	waitsfx
 	setflag ENGINE_CASCADEBADGE
 	checkcode VAR_BADGES
-	if_equal 9, .FirstBadge
-	if_equal 10, .SecondBadge
-	if_equal 12, .LyrasEgg
+	ifequal 9, .FirstBadge
+	ifequal 10, .SecondBadge
+	ifequal 12, .LyrasEgg
 	jump .FightDone
 .FirstBadge:
 	specialphonecall SPECIALCALL_FIRSTBADGE
@@ -111,99 +99,74 @@ MistyScript_0x188432:
 .LyrasEgg:
 	specialphonecall SPECIALCALL_LYRASEGG
 .FightDone:
-	checkevent EVENT_GOT_TM55_SCALD
-	iftrue MistyAfterTMScript
+	checkevent EVENT_GOT_TM63_WATER_PULSE
+	iftrue_jumpopenedtext UnknownText_0x188782
 	writetext MistyGiveTMText
 	buttonsound
-	verbosegivetmhm TM_SCALD
-	setevent EVENT_GOT_TM55_SCALD
-	writetext MistyOutroText
-	waitbutton
-	closetext
-	end
+	verbosegivetmhm TM_WATER_PULSE
+	setevent EVENT_GOT_TM63_WATER_PULSE
+	jumpopenedtext MistyOutroText
 
-MistyAfterTMScript:
-	writetext UnknownText_0x188782
-	waitbutton
-	closetext
-	end
+GenericTrainerSwimmerfDiana:
+	generictrainer SWIMMERF, DIANA, EVENT_BEAT_SWIMMERF_DIANA, SwimmerfDianaSeenText, SwimmerfDianaBeatenText
 
-TrainerSwimmerfDiana:
-	trainer EVENT_BEAT_SWIMMERF_DIANA, SWIMMERF, DIANA, SwimmerfDianaSeenText, SwimmerfDianaBeatenText, 0, SwimmerfDianaScript
+	text "I'll be swimming"
+	line "quietly."
+	done
 
-SwimmerfDianaScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x188856
-	waitbutton
-	closetext
-	end
+GenericTrainerSwimmerfViola:
+	generictrainer SWIMMERF, VIOLA, EVENT_BEAT_SWIMMERF_VIOLA, SwimmerfViolaSeenText, SwimmerfViolaBeatenText
 
-TrainerSwimmerfJoy:
-	trainer EVENT_BEAT_SWIMMERF_JOY, SWIMMERF, JOY, SwimmerfJoySeenText, SwimmerfJoyBeatenText, 0, SwimmerfJoyScript
+	text "Swimming is good"
+	line "for both beauty"
+	cont "and health!"
 
-SwimmerfJoyScript:
-	end_if_just_battled
-	opentext
-	writetext SwimmerfJoyAfterText
-	waitbutton
-	closetext
-	end
+	para "Just look at"
+	line "Misty, you'll see."
+	done
 
-TrainerSwimmerfBriana:
-	trainer EVENT_BEAT_SWIMMERF_BRIANA, SWIMMERF, BRIANA, SwimmerfBrianaSeenText, SwimmerfBrianaBeatenText, 0, SwimmerfBrianaScript
+GenericTrainerSwimmerfBriana:
+	generictrainer SWIMMERF, BRIANA, EVENT_BEAT_SWIMMERF_BRIANA, SwimmerfBrianaSeenText, SwimmerfBrianaBeatenText
 
-SwimmerfBrianaScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1888c0
-	waitbutton
-	closetext
-	end
+	text "Don't be too smug"
+	line "about beating me."
 
-TrainerSailorParker:
-	trainer EVENT_BEAT_SAILOR_PARKER, SAILOR, PARKER, SailorParkerSeenText, SailorParkerBeatenText, 0, SailorParkerScript
+	para "Misty will destroy"
+	line "you if you get"
+	cont "complacent."
+	done
 
-SailorParkerScript:
-	end_if_just_battled
-	opentext
-	writetext SailorParkerAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerSailorParker:
+	generictrainer SAILOR, PARKER, EVENT_BEAT_SAILOR_PARKER, SailorParkerSeenText, SailorParkerBeatenText
 
-TrainerSailorEddie:
-	trainer EVENT_BEAT_SAILOR_EDDIE, SAILOR, EDDIE, SailorEddieSeenText, SailorEddieBeatenText, 0, SailorEddieScript
+	text "Misty has gotten"
+	line "much better in the"
+	cont "past few years."
 
-SailorEddieScript:
-	end_if_just_battled
-	opentext
-	writetext SailorEddieAfterText
-	waitbutton
-	closetext
-	end
+	para "Don't let your"
+	line "guard down, or"
+	cont "you'll be crushed!"
+	done
+
+GenericTrainerSailorEddie:
+	generictrainer SAILOR, EDDIE, EVENT_BEAT_SAILOR_EDDIE, SailorEddieSeenText, SailorEddieBeatenText
+
+	text "Hey, let's go for"
+	line "a swim!"
+
+	para "Sailors have to"
+	line "be able to swim!"
+	done
 
 CeruleanGymGuyScript:
-	faceplayer
-	opentext
 	checkevent EVENT_BEAT_MISTY
-	iftrue .CeruleanGymGuyWinScript
-	writetext CeruleanGymGuyText
-	waitbutton
-	closetext
-	end
-
-.CeruleanGymGuyWinScript:
-	writetext CeruleanGymGuyWinText
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer CeruleanGymGuyWinText
+	jumptextfaceplayer CeruleanGymGuyText
 
 CeruleanGymHiddenMachinePart:
-	dw EVENT_FOUND_MACHINE_PART_IN_CERULEAN_GYM, .Script
-.Script:
+	dw EVENT_FOUND_MACHINE_PART_IN_CERULEAN_GYM
 	checkevent EVENT_LEARNED_ABOUT_MACHINE_PART
-	iffalse .SomethingUnderwater
+	iffalse_jumptext CeruleanGymSomethingUnderwaterText
 	giveitem MACHINE_PART
 	opentext
 	itemtotext MACHINE_PART, $0
@@ -214,9 +177,6 @@ CeruleanGymHiddenMachinePart:
 	closetext
 	setevent EVENT_FOUND_MACHINE_PART_IN_CERULEAN_GYM
 	end
-
-.SomethingUnderwater:
-	jumptext CeruleanGymSomethingUnderwaterText
 
 CeruleanGymStatue1:
 	checkevent EVENT_TRAINERS_IN_CERULEAN_GYM
@@ -237,31 +197,27 @@ CeruleanGymStatue:
 	jumpstd gymstatue2
 
 MovementData_0x1884e3:
-	big_step_down
-	big_step_down
-	big_step_down
-	big_step_down
+	run_step_down
+	run_step_down
+	run_step_down
+	run_step_down
 	step_end
 
 MovementData_0x1884e8:
-	big_step_right
-	big_step_down
+	run_step_right
+	run_step_down
 	step_end
 
 MovementData_0x1884eb:
 	fix_facing
-	db $39 ; movement
+	set_sliding
 	jump_step_up
-	db $38 ; movement
+	remove_sliding
 	remove_fixed_facing
 	step_sleep_8
 	step_sleep_8
 	step_down
 	step_down
-	step_end
-
-MovementData_0x1884f5:
-	big_step_down
 	step_end
 
 MovementData_0x1884f7:
@@ -355,10 +311,10 @@ MistyGiveTMText:
 
 MistyOutroText:
 	text "It contains the"
-	line "move Scald. It can"
+	line "move Water Pulse."
 
-	para "sometimes burn"
-	line "your foe."
+	para "It can sometimes"
+	line "confuse your foe."
 	done
 
 UnknownText_0x188782:
@@ -385,12 +341,7 @@ SwimmerfDianaBeatenText:
 	line "the winner!"
 	done
 
-UnknownText_0x188856:
-	text "I'll be swimming"
-	line "quietly."
-	done
-
-SwimmerfJoySeenText:
+SwimmerfViolaSeenText:
 	text "Swimming isn't"
 	line "just about speed!"
 
@@ -398,18 +349,9 @@ SwimmerfJoySeenText:
 	line "beauty and grace!"
 	done
 
-SwimmerfJoyBeatenText:
+SwimmerfViolaBeatenText:
 	text "I lost"
 	line "beautifully…"
-	done
-
-SwimmerfJoyAfterText:
-	text "Swimming is good"
-	line "for both beauty"
-	cont "and health!"
-
-	para "Just look at"
-	line "Misty, you'll see."
 	done
 
 SwimmerfBrianaSeenText:
@@ -423,15 +365,6 @@ SwimmerfBrianaBeatenText:
 	line "disposed of me…"
 	done
 
-UnknownText_0x1888c0:
-	text "Don't be too smug"
-	line "about beating me."
-
-	para "Misty will destroy"
-	line "you if you get"
-	cont "complacent."
-	done
-
 SailorParkerSeenText:
 	text "Alright! Come"
 	line "and get me!"
@@ -439,16 +372,6 @@ SailorParkerSeenText:
 
 SailorParkerBeatenText:
 	text "This can't be…"
-	done
-
-SailorParkerAfterText:
-	text "Misty has gotten"
-	line "much better in the"
-	cont "past few years."
-
-	para "Don't let your"
-	line "guard down, or"
-	cont "you'll be crushed!"
 	done
 
 SailorEddieSeenText:
@@ -461,14 +384,6 @@ SailorEddieSeenText:
 SailorEddieBeatenText:
 	text "You can't win with"
 	line "strength alone."
-	done
-
-SailorEddieAfterText:
-	text "Hey, let's go for"
-	line "a swim!"
-
-	para "Sailors have to"
-	line "be able to swim!"
 	done
 
 CeruleanGymGuyText:
@@ -494,7 +409,7 @@ CeruleanGymGuyWinText:
 CeruleanGymFoundMachinePartText:
 	text "<PLAYER> found"
 	line "@"
-	text_from_ram StringBuffer3
+	text_from_ram wStringBuffer3
 	text "!"
 	done
 

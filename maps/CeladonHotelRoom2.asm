@@ -1,21 +1,18 @@
 CeladonHotelRoom2_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  3,  5, CELADON_HOTEL_2F, 3
+	warp_event  4,  5, CELADON_HOTEL_2F, 3
 
-CeladonHotelRoom2_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $5, $3, 3, CELADON_HOTEL_2F
-	warp_def $5, $4, 3, CELADON_HOTEL_2F
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_SUPER_NERD, 2, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, CeladonHotelRoom2SuperNerdScript, -1
+	db 1 ; object events
+	object_event  3,  2, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BROWN, PERSONTYPE_SCRIPT, 0, CeladonHotelRoom2SuperNerdScript, -1
 
 CeladonHotelRoom2SuperNerdScript:
 	faceplayer
@@ -24,30 +21,22 @@ CeladonHotelRoom2SuperNerdScript:
 	waitbutton
 	writetext .Text2
 	yesorno
-	iffalse .NoBottleCap
+	iffalse_jumpopenedtext .Text5
+	checkitem BOTTLE_CAP
+	iffalse_jumpopenedtext .Text5
 	takeitem BOTTLE_CAP
-	iffalse .NoBottleCap
 	writetext .Text3
 	waitbutton
 	writetext .Text4
 	waitbutton
 	verbosegiveitem CHERISH_BALL
-	iffalse .NoRoom
-	closetext
-	end
-
-.NoBottleCap:
-	writetext .Text5
-	waitbutton
-	closetext
-	end
-
-.NoRoom:
+	iftrue_endtext
 	giveitem BOTTLE_CAP
-	writetext .Text6
-	waitbutton
-	closetext
-	end
+	thisopenedtext
+
+	text "Drat. Maybe"
+	line "later?"
+	done
 
 .Text1:
 	text "I used to collect"
@@ -95,9 +84,4 @@ CeladonHotelRoom2SuperNerdScript:
 	para "I know Fishermen"
 	line "snag them some-"
 	cont "times…"
-	done
-
-.Text6:
-	text "Drat. Maybe"
-	line "later?"
 	done

@@ -1,35 +1,32 @@
 CeladonDeptStoreElevator_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  1,  3, CELADON_DEPT_STORE_1F, -1
+	warp_event  2,  3, CELADON_DEPT_STORE_1F, -1
 
-CeladonDeptStoreElevator_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $3, $1, 255, CELADON_DEPT_STORE_1F
-	warp_def $3, $2, 255, CELADON_DEPT_STORE_1F
+	db 1 ; bg events
+	bg_event  3,  0, SIGNPOST_READ, CeladonDeptStoreElevatorButton
 
-.XYTriggers: db 0
+	db 0 ; object events
 
-.Signposts: db 1
-	signpost 0, 3, SIGNPOST_READ, MapCeladonDeptStoreElevatorSignpost0Script
-
-.PersonEvents: db 0
-
-MapCeladonDeptStoreElevatorSignpost0Script:
+CeladonDeptStoreElevatorButton:
 	opentext
-	elevator Elevator_0x713be
+	elevator .Floors
 	closetext
-	iffalse .End
+	iffalse .Done
 	pause 5
 	playsound SFX_ELEVATOR
 	earthquake 60
 	waitsfx
-.End:
+.Done:
 	end
 
-Elevator_0x713be:
+.Floors:
 	db 6 ; floors
 	elevfloor _1F, 4, CELADON_DEPT_STORE_1F
 	elevfloor _2F, 3, CELADON_DEPT_STORE_2F

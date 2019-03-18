@@ -1,25 +1,22 @@
 CeladonHomeDecorStore3F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  6,  0, CELADON_HOME_DECOR_STORE_2F, 2
+	warp_event  9,  0, CELADON_HOME_DECOR_STORE_4F, 1
 
-CeladonHomeDecorStore3F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $0, $6, 2, CELADON_HOME_DECOR_STORE_2F
-	warp_def $0, $9, 1, CELADON_HOME_DECOR_STORE_4F
+	db 1 ; bg events
+	bg_event  8,  0, SIGNPOST_JUMPTEXT, CeladonHomeDecorStore3FDirectoryText
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 0, 8, SIGNPOST_READ, CeladonHomeDecorStore3FDirectory
-
-.PersonEvents: db 4
-	person_event SPRITE_CLERK, 7, 7, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore3FClerk1Script, -1
-	person_event SPRITE_CLERK, 7, 8, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore3FClerk2Script, -1
-	person_event SPRITE_YOUNGSTER, 5, 3, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore3FYoungsterScript, -1
-	person_event SPRITE_BEAUTY, 3, 9, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore3FBeautyScript, -1
+	db 4 ; object events
+	object_event  7,  7, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore3FClerk1Script, -1
+	object_event  8,  7, SPRITE_CLERK, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, CeladonHomeDecorStore3FClerk2Script, -1
+	object_event  3,  5, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WALK_UP_DOWN, 1, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonHomeDecorStore3FYoungsterText, -1
+	object_event  9,  3, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, CeladonHomeDecorStore3FBeautyText, -1
 
 CeladonHomeDecorStore3FClerk1Script:
 	faceplayer
@@ -27,18 +24,17 @@ CeladonHomeDecorStore3FClerk1Script:
 	writetext CeladonHomeDecorStore3FClerk1Text
 .Start:
 	special PlaceMoneyTopRight
-	loadmenudata .MenuData
+	loadmenu .MenuData
 	verticalmenu
 	closewindow
-	if_equal $1, .RedCarpet
-	if_equal $2, .YellowCarpet
-	if_equal $3, .GreenCarpet
-	closetext
-	end
+	ifequal $1, .RedCarpet
+	ifequal $2, .YellowCarpet
+	ifequal $3, .GreenCarpet
+	endtext
 
 .RedCarpet:
 	checkmoney $0, 45000
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_CARPET_1
 	iftrue .AlreadyBought
 	takemoney $0, 45000
@@ -52,7 +48,7 @@ CeladonHomeDecorStore3FClerk1Script:
 
 .YellowCarpet:
 	checkmoney $0, 45000
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_CARPET_3
 	iftrue .AlreadyBought
 	takemoney $0, 45000
@@ -66,7 +62,7 @@ CeladonHomeDecorStore3FClerk1Script:
 
 .GreenCarpet:
 	checkmoney $0, 45000
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_CARPET_4
 	iftrue .AlreadyBought
 	takemoney $0, 45000
@@ -104,16 +100,16 @@ CeladonHomeDecorStore3FClerk1Script:
 	db "Cancel@"
 
 CeladonHomeDecorStore3FClerk2Script:
+	checkevent EVENT_DECO_CARPET_2
+	iftrue_jumptextfaceplayer CeladonHomeDecorStore3FClerk2Text
 	faceplayer
 	opentext
-	checkevent EVENT_DECO_CARPET_2
-	iftrue .Sold
 	special PlaceMoneyTopRight
 	writetext CeladonHomeDecorStore3FClerk2SaleText
 	yesorno
-	iffalse .Refused
+	iffalse_jumpopenedtext CeladonHomeDecorStore3FClerk2NoText
 	checkmoney $0, 35000
-	if_equal $2, .NotEnoughMoney
+	ifequal $2, .NotEnoughMoney
 	takemoney $0, 35000
 	setevent EVENT_DECO_CARPET_2
 	writetext BoughtBlueCarpetText
@@ -121,37 +117,10 @@ CeladonHomeDecorStore3FClerk2Script:
 	waitbutton
 	writetext BlueCarpetSentText
 	waitbutton
-	writetext CeladonHomeDecorStore3FClerk2YesText
-	waitbutton
-	closetext
-	end
-
-.Sold:
-	writetext CeladonHomeDecorStore3FClerk2Text
-	waitbutton
-	closetext
-	end
-
-.Refused:
-	writetext CeladonHomeDecorStore3FClerk2NoText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext CeladonHomeDecorStore3FClerk2YesText
 
 .NotEnoughMoney:
-	writetext CeladonHomeDecorStore3FNoMoneyText
-	waitbutton
-	closetext
-	end
-
-CeladonHomeDecorStore3FYoungsterScript:
-	jumptextfaceplayer CeladonHomeDecorStore3FYoungsterText
-
-CeladonHomeDecorStore3FBeautyScript:
-	jumptextfaceplayer CeladonHomeDecorStore3FBeautyText
-
-CeladonHomeDecorStore3FDirectory:
-	jumptext CeladonHomeDecorStore3FDirectoryText
+	jumpopenedtext CeladonHomeDecorStore3FNoMoneyText
 
 CeladonHomeDecorStore3FClerk1Text:
 	text "Welcome! Would"

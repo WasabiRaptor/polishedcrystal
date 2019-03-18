@@ -4,6 +4,14 @@ UpdateItemIconAndDescription::
 
 UpdateTMHMIconAndDescriptionAndOwnership::
 	farcall UpdateTMHMDescriptionAndOwnership
+	ld a, [wMenuSelection]
+	cp -1
+	jr z, .cancel
+	call LoadTMHMIcon
+	jr .ok
+.cancel
+	call ClearTMHMIcon
+.ok
 	farcall LoadTMHMIconPalette
 	jp SetPalettes
 
@@ -11,7 +19,7 @@ UpdateItemIconAndDescriptionAndBagQuantity::
 	farcall UpdateItemDescriptionAndBagQuantity
 UpdateItemIcon::
 	ld hl, ItemIconPointers
-	ld a, [CurSpecies]
+	ld a, [wCurSpecies]
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -19,289 +27,43 @@ UpdateItemIcon::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld de, VTiles2 tile $17
+	ld de, VTiles2 tile $1e
 	call GetItemIconBank
 	call DecompressRequest2bpp
 	farcall LoadItemIconPalette
 	jp SetPalettes
 
 GetItemIconBank:
-	lb bc, BANK(ItemIcons1), $9
-	ld a, [CurSpecies]
-	cp SCOPE_LENS
+	lb bc, BANK(ItemIcons1), 9
+	ld a, [wCurSpecies]
+	cp SCOPE_LENS ; first icon in ItemIcons2
 	ret c
-	cp STARDUST
+	cp METAL_POWDER ; after Scope Lens, but in ItemIcons1
 	ret z
-	cp CHOICE_SCARF
+	cp QUICK_POWDER ; after Scope Lens, but in ItemIcons1
+	ret z
+	cp STARDUST ; after Scope Lens, but in ItemIcons1
+	ret z
+	cp CHOICE_SCARF ; after Scope Lens, but in ItemIcons1
 	ret z
 	cp ITEM_FROM_MEM
 	ret z
-	lb bc, BANK(ItemIcons2), $9
+	lb bc, BANK(ItemIcons2), 9
 	ret
 
 LoadTMHMIcon::
 	ld hl, TMHMIcon
-	ld de, VTiles2 tile $17
-	lb bc, BANK(TMHMIcon), $9
+	ld de, VTiles2 tile $1e
+	lb bc, BANK(TMHMIcon), 9
 	jp DecompressRequest2bpp
 
-ItemIconPointers:
-	dw NoItemIcon
-	dw PokeBallIcon
-	dw GreatBallIcon
-	dw UltraBallIcon
-	dw MasterBallIcon
-	dw SafariBallIcon
-	dw LevelBallIcon
-	dw LureBallIcon
-	dw MoonBallIcon
-	dw FriendBallIcon
-	dw FastBallIcon
-	dw HeavyBallIcon
-	dw LoveBallIcon
-	dw ParkBallIcon
-	dw RepeatBallIcon
-	dw TimerBallIcon
-	dw NestBallIcon
-	dw NetBallIcon
-	dw DiveBallIcon
-	dw LuxuryBallIcon
-	dw HealBallIcon
-	dw QuickBallIcon
-	dw DuskBallIcon
-	dw PremierBallIcon
-	dw CherishBallIcon
-	dw PotionIcon
-	dw SuperPotionIcon
-	dw HyperPotionIcon
-	dw MaxPotionIcon
-	dw AntidoteIcon
-	dw BurnHealIcon
-	dw ParlyzHealIcon
-	dw AwakeningIcon
-	dw IceHealIcon
-	dw FullHealIcon
-	dw FullRestoreIcon
-	dw ReviveIcon
-	dw MaxReviveIcon
-	dw EtherIcon
-	dw MaxEtherIcon
-	dw ElixirIcon
-	dw MaxElixirIcon
-	dw HPUpIcon
-	dw ProteinIcon
-	dw IronIcon
-	dw CarbosIcon
-	dw CalciumIcon
-	dw ZincIcon
-	dw RareCandyIcon
-	dw PPUpIcon
-	dw PPMaxIcon
-	dw FreshWaterIcon
-	dw SodaPopIcon
-	dw LemonadeIcon
-	dw MoomooMilkIcon
-	dw RageCandyBarIcon
-	dw SacredAshIcon
-	dw EnergyPowderIcon
-	dw EnergyRootIcon
-	dw HealPowderIcon
-	dw RevivalHerbIcon
-	dw XAttackIcon
-	dw XDefendIcon
-	dw XSpeedIcon
-	dw XSpclAtkIcon
-	dw XSpclDefIcon
-	dw DireHitIcon
-	dw GuardSpecIcon
-	dw XAccuracyIcon
-	dw RepelIcon
-	dw SuperRepelIcon
-	dw MaxRepelIcon
-	dw EscapeRopeIcon
-	dw PokeDollIcon
-	dw AbilityCapIcon
-	dw LeafStoneIcon
-	dw FireStoneIcon
-	dw WaterStoneIcon
-	dw ThunderStoneIcon
-	dw MoonStoneIcon
-	dw SunStoneIcon
-	dw DuskStoneIcon
-	dw ShinyStoneIcon
-	dw IceStoneIcon
-	dw EverstoneIcon
-	dw BicycleIcon
-	dw OldRodIcon
-	dw GoodRodIcon
-	dw SuperRodIcon
-	dw CoinCaseIcon
-	dw ItemfinderIcon
-	dw ExpShareIcon
-	dw MysteryEggIcon
-	dw SquirtBottleIcon
-	dw SecretPotionIcon
-	dw RedScaleIcon
-	dw CardKeyIcon
-	dw BasementKeyIcon
-	dw SSTicketIcon
-	dw PassIcon
-	dw MachinePartIcon
-	dw LostItemIcon
-	dw RainbowWingIcon
-	dw SilverWingIcon
-	dw ClearBellIcon
-	dw GSBallIcon
-	dw BlueCardIcon
-	dw OrangeTicketIcon
-	dw MysticTicketIcon
-	dw OldSeaMapIcon
-	dw ShinyCharmIcon
-	dw OvalCharmIcon
-	dw SilphScope2Icon
-	dw CheriBerryIcon
-	dw ChestoBerryIcon
-	dw PechaBerryIcon
-	dw RawstBerryIcon
-	dw AspearBerryIcon
-	dw LeppaBerryIcon
-	dw OranBerryIcon
-	dw PersimBerryIcon
-	dw LumBerryIcon
-	dw SitrusBerryIcon
-	dw FigyBerryIcon
-	dw LiechiBerryIcon
-	dw GanlonBerryIcon
-	dw SalacBerryIcon
-	dw PetayaBerryIcon
-	dw ApicotBerryIcon
-	dw RedApricornIcon
-	dw BluApricornIcon
-	dw YlwApricornIcon
-	dw GrnApricornIcon
-	dw WhtApricornIcon
-	dw BlkApricornIcon
-	dw PnkApricornIcon
-	dw SilkScarfIcon
-	dw BlackBeltIcon
-	dw SharpBeakIcon
-	dw PoisonBarbIcon
-	dw SoftSandIcon
-	dw HardStoneIcon
-	dw SilverPowderIcon
-	dw SpellTagIcon
-	dw MetalCoatIcon
-	dw CharcoalIcon
-	dw MysticWaterIcon
-	dw MiracleSeedIcon
-	dw MagnetIcon
-	dw TwistedSpoonIcon
-	dw NeverMeltIceIcon
-	dw DragonFangIcon
-	dw BlackGlassesIcon
-	dw PinkBowIcon
-	dw BrightPowderIcon
-	dw ScopeLensIcon
-	dw QuickClawIcon
-	dw KingsRockIcon
-	dw FocusBandIcon
-	dw LeftoversIcon
-	dw LuckyEggIcon
-	dw AmuletCoinIcon
-	dw CleanseTagIcon
-	dw SmokeBallIcon
-	dw BerserkGeneIcon
-	dw LightBallIcon
-	dw StickIcon
-	dw ThickClubIcon
-	dw LuckyPunchIcon
-	dw MetalPowderIcon
-	dw QuickPowderIcon
-	dw ArmorSuitIcon
-	dw AirBalloonIcon
-	dw AssaultVestIcon
-	dw BigRootIcon
-	dw BindingBandIcon
-	dw DestinyKnotIcon
-	dw EvioliteIcon
-	dw ExpertBeltIcon
-	dw FocusSashIcon
-	dw GripClawIcon
-	dw LifeOrbIcon
-	dw LightClayIcon
-	dw MetronomeIIcon
-	dw MuscleBandIcon
-	dw ProtectPadsIcon
-	dw RockyHelmetIcon
-	dw SafeGogglesIcon
-	dw ShedShellIcon
-	dw ShellBellIcon
-	dw SootheBellIcon
-	dw WeakPolicyIcon
-	dw WideLensIcon
-	dw WiseGlassesIcon
-	dw ZoomLensIcon
-	dw MentalHerbIcon
-	dw PowerHerbIcon
-	dw WhiteHerbIcon
-	dw DampRockIcon
-	dw HeatRockIcon
-	dw SmoothRockIcon
-	dw IcyRockIcon
-	dw ChoiceBandIcon
-	dw ChoiceScarfIcon
-	dw ChoiceSpecsIcon
-	dw FlameOrbIcon
-	dw ToxicOrbIcon
-	dw BlackSludgeIcon
-	dw MachoBraceIcon
-	dw PowerWeightIcon
-	dw PowerBracerIcon
-	dw PowerBeltIcon
-	dw PowerLensIcon
-	dw PowerBandIcon
-	dw PowerAnkletIcon
-	dw DragonScaleIcon
-	dw UpGradeIcon
-	dw DubiousDiscIcon
-	dw ProtectorIcon
-	dw ElectirizerIcon
-	dw MagmarizerIcon
-	dw RazorFangIcon
-	dw RazorClawIcon
-	dw OddSouvenirIcon
-	dw NuggetIcon
-	dw BigNuggetIcon
-	dw TinyMushroomIcon
-	dw BigMushroomIcon
-	dw BalmMushroomIcon
-	dw PearlIcon
-	dw BigPearlIcon
-	dw PearlStringIcon
-	dw StardustIcon
-	dw StarPieceIcon
-	dw BrickPieceIcon
-	dw RareBoneIcon
-	dw SilverLeafIcon
-	dw GoldLeafIcon
-	dw SlowpokeTailIcon
-	dw BottleCapIcon
-	dw HelixFossilIcon
-	dw DomeFossilIcon
-	dw OldAmberIcon
-	dw MulchIcon
-	dw SweetHoneyIcon
-	dw FlowerMailIcon
-	dw SurfMailIcon
-	dw LiteBlueMailIcon
-	dw PortraitMailIcon
-	dw LovelyMailIcon
-	dw EonMailIcon
-	dw MorphMailIcon
-	dw BlueSkyMailIcon
-	dw MusicMailIcon
-	dw MirageMailIcon
-	dw NoItemIcon
+ClearTMHMIcon::
+	ld hl, NoItemIcon
+	ld de, VTiles2 tile $1e
+	lb bc, BANK(NoItemIcon), 9
+	jp DecompressRequest2bpp
+
+INCLUDE "data/items/icon_pointers.asm"
 
 
 SECTION "Item Icons 1", ROMX
@@ -379,9 +141,9 @@ XDefendIcon:
 XSpeedIcon:
 XSpclAtkIcon:
 XSpclDefIcon:
+XAccuracyIcon:
 DireHitIcon:
-GuardSpecIcon:
-XAccuracyIcon:    INCBIN "gfx/items/battle_item.2bpp.lz"
+GuardSpecIcon:    INCBIN "gfx/items/battle_item.2bpp.lz"
 RepelIcon:
 SuperRepelIcon:
 MaxRepelIcon:     INCBIN "gfx/items/repel.2bpp.lz"
@@ -426,6 +188,7 @@ OldSeaMapIcon:    INCBIN "gfx/items/old_sea_map.2bpp.lz"
 ShinyCharmIcon:   INCBIN "gfx/items/shiny_charm.2bpp.lz"
 OvalCharmIcon:    INCBIN "gfx/items/oval_charm.2bpp.lz"
 SilphScope2Icon:  INCBIN "gfx/items/silphscope2.2bpp.lz"
+ApricornBoxIcon:  INCBIN "gfx/items/apricorn_box.2bpp.lz"
 CheriBerryIcon:   INCBIN "gfx/items/cheri_berry.2bpp.lz"
 ChestoBerryIcon:  INCBIN "gfx/items/chesto_berry.2bpp.lz"
 PechaBerryIcon:   INCBIN "gfx/items/pecha_berry.2bpp.lz"
@@ -442,13 +205,11 @@ GanlonBerryIcon:  INCBIN "gfx/items/ganlon_berry.2bpp.lz"
 SalacBerryIcon:   INCBIN "gfx/items/salac_berry.2bpp.lz"
 PetayaBerryIcon:  INCBIN "gfx/items/petaya_berry.2bpp.lz"
 ApicotBerryIcon:  INCBIN "gfx/items/apicot_berry.2bpp.lz"
-RedApricornIcon:
-BluApricornIcon:
-YlwApricornIcon:
-GrnApricornIcon:
-WhtApricornIcon:
-BlkApricornIcon:
-PnkApricornIcon:  INCBIN "gfx/items/apricorn.2bpp.lz"
+JabocaBerryIcon:  INCBIN "gfx/items/jaboca_berry.2bpp.lz"
+RowapBerryIcon:   INCBIN "gfx/items/rowap_berry.2bpp.lz"
+KeeBerryIcon:     INCBIN "gfx/items/kee_berry.2bpp.lz"
+MarangaBerryIcon: INCBIN "gfx/items/marangaberry.2bpp.lz"
+PewterCrunchIcon: INCBIN "gfx/items/pewtercrunch.2bpp.lz"
 SilkScarfIcon:
 ChoiceScarfIcon:  INCBIN "gfx/items/scarf.2bpp.lz"
 BlackBeltIcon:    INCBIN "gfx/items/black_belt.2bpp.lz"
@@ -512,9 +273,7 @@ WiseGlassesIcon:  INCBIN "gfx/items/wise_glasses.2bpp.lz"
 ZoomLensIcon:     INCBIN "gfx/items/zoom_lens.2bpp.lz"
 MentalHerbIcon:
 PowerHerbIcon:
-WhiteHerbIcon:
-SilverLeafIcon:
-GoldLeafIcon:     INCBIN "gfx/items/leaf.2bpp.lz"
+WhiteHerbIcon:    INCBIN "gfx/items/herb.2bpp.lz"
 DampRockIcon:     INCBIN "gfx/items/damp_rock.2bpp.lz"
 HeatRockIcon:     INCBIN "gfx/items/heat_rock.2bpp.lz"
 SmoothRockIcon:   INCBIN "gfx/items/smooth_rock.2bpp.lz"
@@ -550,6 +309,8 @@ BigPearlIcon:     INCBIN "gfx/items/big_pearl.2bpp.lz"
 PearlStringIcon:  INCBIN "gfx/items/pearl_string.2bpp.lz"
 StarPieceIcon:    INCBIN "gfx/items/star_piece.2bpp.lz"
 BrickPieceIcon:   INCBIN "gfx/items/brick_piece.2bpp.lz"
+SilverLeafIcon:
+GoldLeafIcon:     INCBIN "gfx/items/leaf.2bpp.lz"
 SlowpokeTailIcon: INCBIN "gfx/items/slowpoketail.2bpp.lz"
 BottleCapIcon:    INCBIN "gfx/items/bottle_cap.2bpp.lz"
 HelixFossilIcon:  INCBIN "gfx/items/helix_fossil.2bpp.lz"

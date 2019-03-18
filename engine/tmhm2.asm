@@ -1,18 +1,12 @@
 TMHMPocket: ; 2c76f (b:476f)
 	ld a, $1
 	ld [hInMenu], a
-	call CountTMsHMs ; This stores the count to wd265.
-	and a
-	jr z, .noicon
-	farcall LoadTMHMIcon
-.noicon
 	call TMHM_PocketLoop
 	ld a, 0 ; not xor a; preserve carry flag
 	ld [hInMenu], a
 	ret nc
 	call PlaceHollowCursor
-	call WaitBGMap
-	ld a, [CurTMHM]
+	ld a, [wCurTMHM]
 	scf
 	ret
 
@@ -51,7 +45,7 @@ TMHM_PocketLoop: ; 2c8d3 (b:48d3)
 
 TMHM_JoypadLoop: ; 2c915 (b:4915)
 	call TMHM_DisplayPocketItems
-	call StaticMenuJoypad
+	call DoMenuJoypadLoop
 	ld b, a
 	ld a, [wMenuCursorY]
 	dec a
@@ -72,22 +66,26 @@ TMHM_JoypadLoop: ; 2c915 (b:4915)
 	bit D_LEFT_F, a
 	jp nz, TMHM_ExitPocket
 TMHM_ShowTMMoveDescription: ; 2c946 (b:4946)
-	call TMHM_CheckHoveringOverCancel
-	jp nc, TMHM_ExitPocket
+	call TMHM_GetCurrentTMHM
 	hlcoord 0, 12
 	lb bc, 4, SCREEN_WIDTH - 2
 	call TextBox
 	farcall LoadTMHMIconPalette
 	call SetPalettes
-	ld a, [CurTMHM]
+	ld a, [wCurTMHM]
 	cp NUM_TMS + NUM_HMS + 1
-	jr nc, TMHM_JoypadLoop
+	jr nc, .Cancel
 	ld [wd265], a
 	predef GetTMHMMove
 	ld a, [wd265]
-	ld [CurSpecies], a
+	ld [wCurSpecies], a
 	hlcoord 1, 14
 	call PrintMoveDesc
+	farcall LoadTMHMIcon
+	jp TMHM_JoypadLoop
+
+.Cancel:
+	farcall ClearTMHMIcon
 	jp TMHM_JoypadLoop
 
 TMHM_ChooseTMorHM: ; 2c974 (b:4974)
@@ -102,7 +100,7 @@ TMHM_ChooseTMorHM: ; 2c974 (b:4974)
 	ld a, [wd265]
 	cp b
 	jr z, _TMHM_ExitPack ; our cursor was hovering over CANCEL
-TMHM_CheckHoveringOverCancel: ; 2c98a (b:498a)
+TMHM_GetCurrentTMHM: ; 2c98a (b:498a)
 	call TMHM_GetCurrentPocketPosition
 	ld a, [wMenuCursorY]
 	ld b, a
@@ -117,8 +115,7 @@ TMHM_CheckHoveringOverCancel: ; 2c98a (b:498a)
 	jr nz, .loop
 	ld a, c
 .okay
-	ld [CurTMHM], a
-	cp -1
+	ld [wCurTMHM], a
 	ret
 
 TMHM_ExitPack: ; 2c9a5 (b:49a5)
@@ -163,7 +160,7 @@ TMHM_ScrollPocket: ; 2c9b1 (b:49b1)
 	jp TMHM_ShowTMMoveDescription
 
 TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
-	ld a, [BattleType]
+	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jp z, Tutorial_TMHMPocket
 
@@ -203,7 +200,7 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	ld [hl], "H"
 	inc hl
 	ld de, wd265
-	lb bc, PRINTNUM_RIGHTALIGN | 1, 2
+	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
 	pop af
 	ld [wd265], a
@@ -227,9 +224,9 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 
 .NotTMHM:
 	call TMHMPocket_GetCurrentLineCoord
-rept 3
 	inc hl
-endr
+	inc hl
+	inc hl
 	push de
 	ld de, TMHM_String_Cancel
 	call PlaceString
@@ -286,8 +283,8 @@ TMHM_PlaySFX_ReadText2: ; 2cad6 (b:4ad6)
 ; 2cadf (b:4adf)
 
 CountTMsHMs: ; 2cb2a (b:4b2a)
-	ld hl, TMsHMs
-	ld b, TMsHMsEnd - TMsHMs
+	ld hl, wTMsHMs
+	ld b, wTMsHMsEnd - wTMsHMs
 	jp CountSetBits
 
 InnerCheckTMHM:
@@ -299,7 +296,7 @@ InnerCheckTMHM:
 	ld e, a
 	ld d, 0
 	ld b, CHECK_FLAG
-	ld hl, TMsHMs
+	ld hl, wTMsHMs
 	call FlagAction
 	ld a, c
 	pop de
@@ -310,13 +307,12 @@ InnerCheckTMHM:
 PrintMoveDesc: ; 2cb3e
 	push hl
 	ld hl, MoveDescriptions
-	ld a, [CurSpecies]
+	ld a, [wCurSpecies]
 	dec a
 	ld c, a
 	ld b, 0
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
@@ -325,61 +321,79 @@ endr
 ; 2cb52
 
 AskTeachTMHM: ; 2c7bf (b:47bf)
-	ld hl, Options1
+	ld hl, wOptions1
 	ld a, [hl]
 	push af
 	res NO_TEXT_SCROLL, [hl]
-	ld a, [CurTMHM]
-	ld [wCurTMHM], a
-	predef GetTMHMMove
+	ld hl, wForgettingMove
+	set LEARNING_TM_F, [hl]
 	ld a, [wCurTMHM]
+	ld [wCurTMHMBuffer], a
+	predef GetTMHMMove
+	ld a, [wCurTMHMBuffer]
 	ld [wPutativeTMHMMove], a
 	call GetMoveName
 	call CopyName1
 	ld hl, Text_BootedTM ; Booted up a TM
-	ld a, [CurTMHM]
+	ld a, [wCurTMHM]
 	cp HM01 + 1 ; off by one error?
 	jr c, .TM
+
+	; allow full PP restore for HMs
+	ld hl, wForgettingMove
+	res LEARNING_TM_F, [hl]
 	ld hl, Text_BootedHM ; Booted up an HM
 .TM:
 	call PrintText
+	ld de, SFX_CHOOSE_PC_OPTION
+	call WaitPlaySFX
+	call Text_WaitButton
 	ld hl, Text_ItContained
 	call PrintText
 	call YesNoBox
 	pop bc
 	ld a, b
-	ld [Options1], a
+	ld [wOptions1], a
+	ld hl, wForgettingMove
+	res LEARNING_TM_F, [hl]
 	ret
 
 ChooseMonToLearnTMHM: ; 2c7fb
-	ld hl, StringBuffer2
+	ld hl, wStringBuffer2
 	ld de, wTMHMMoveNameBackup
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	call ClearBGPalettes
 ChooseMonToLearnTMHM_NoRefresh: ; 2c80a
 	farcall LoadPartyMenuGFX
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuGFX
-	ld a, $3 ; TeachWhichPKMNString
-	ld [PartyMenuActionText], a
+	ld a, [wPutativeTMHMMove]
+	and a
+	ld a, 3 ; TeachWhichPKMNString
+	jr nz, .got_text
+	ld a, 9 ; TutorWhichPKMNString
+.got_text
+	ld [wPartyMenuActionText], a
 .loopback
 	farcall WritePartyMenuTilemap
 	farcall PrintPartyMenuText
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	call SetPalettes
 	call DelayFrame
 	farcall PartyMenuSelect
+	ret c
 	push af
-	ld a, [CurPartySpecies]
-	cp EGG
+	ld a, MON_IS_EGG
+	call GetPartyParamLocation
+	bit MON_IS_EGG_F, [hl]
 	pop bc ; now contains the former contents of af
-	jr z, .egg
+	jr nz, .egg
 	push bc
 	ld hl, wTMHMMoveNameBackup
-	ld de, StringBuffer2
+	ld de, wStringBuffer2
 	ld bc, 12
-	call CopyBytes
+	rst CopyBytes
 	pop af ; now contains the original contents of af
 	ret
 
@@ -402,8 +416,8 @@ TeachTMHM: ; 2c867
 	predef CanLearnTMHMMove
 
 	push bc
-	ld a, [CurPartyMon]
-	ld hl, PartyMonNicknames
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
 	call GetNick
 	pop bc
 
@@ -419,7 +433,7 @@ TeachTMHM: ; 2c867
 	jr .nope
 
 .compatible
-	farcall KnowsMove
+	call KnowsMove
 	jr c, .nope
 
 	predef LearnMove
@@ -427,7 +441,7 @@ TeachTMHM: ; 2c867
 	and a
 	jr z, .nope
 
-	ld a, [CurTMHM]
+	ld a, [wCurTMHM]
 	call IsHM
 	ret c
 
@@ -443,6 +457,32 @@ TeachTMHM: ; 2c867
 	scf
 	ret
 ; 2c8bf (b:48bf)
+
+KnowsMove: ; f9ea
+	ld a, MON_MOVES
+	call GetPartyParamLocation
+	ld a, [wPutativeTMHMMove]
+	ld b, a
+	ld c, NUM_MOVES
+.loop
+	ld a, [hli]
+	cp b
+	jr z, .knows_move
+	dec c
+	jr nz, .loop
+	and a
+	ret
+
+.knows_move
+	ld hl, .Text_knows
+	call PrintText
+	scf
+	ret
+
+.Text_knows: ; 0xfa06
+	; knows @ .
+	text_jump UnknownText_0x1c5ea8
+	db "@"
 
 Text_BootedTM: ; 0x2c8bf
 	; Booted up a TM.

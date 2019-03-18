@@ -1,37 +1,34 @@
 FastShipB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  1,  9, FAST_SHIP_1F, 11
+	warp_event 27, 11, FAST_SHIP_1F, 12
 
-FastShipB1F_MapEventHeader:
+	db 2 ; coord events
+	coord_event 26,  5, 0, UnknownScript_0x7673c
+	coord_event 27,  5, 0, UnknownScript_0x76751
 
-.Warps: db 2
-	warp_def $9, $1, 11, FAST_SHIP_1F
-	warp_def $b, $1b, 12, FAST_SHIP_1F
+	db 0 ; bg events
 
-.XYTriggers: db 2
-	xy_trigger 0, $5, $1a, UnknownScript_0x7673c
-	xy_trigger 0, $5, $1b, UnknownScript_0x76751
+	db 13 ; object events
+	object_event 26,  4, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x76767, EVENT_FAST_SHIP_B1F_SAILOR_LEFT
+	object_event 27,  4, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x76767, EVENT_FAST_SHIP_B1F_SAILOR_RIGHT
+	object_event  5,  9, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSailorJeff, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
+	object_event  2,  2, SPRITE_PICNICKER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerPicnickerDebra, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
+	object_event 22,  7, SPRITE_JUGGLER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerJugglerFritz, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
+	object_event 10, 11, SPRITE_BAKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerBakerSharyn, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
+	object_event 13,  2, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerSailorGarrett, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
+	object_event 21,  6, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerFisherJonah, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
+	object_event 11,  9, SPRITE_BLACK_BELT, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBlackbeltWai, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
+	object_event 19,  2, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerSailorKenneth, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
+	object_event  5,  9, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerTeacherShirley, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
+	object_event 10,  7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerSchoolboyNate, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
+	object_event 10,  9, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerSchoolboyRicky, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
 
-.Signposts: db 0
-
-.PersonEvents: db 13
-	person_event SPRITE_SAILOR, 4, 26, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SailorScript_0x76767, EVENT_FAST_SHIP_B1F_SAILOR_LEFT
-	person_event SPRITE_SAILOR, 4, 27, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SailorScript_0x76767, EVENT_FAST_SHIP_B1F_SAILOR_RIGHT
-	person_event SPRITE_SAILOR, 9, 5, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerSailorJeff, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
-	person_event SPRITE_LASS, 2, 2, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 1, TrainerPicnickerDebra, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
-	person_event SPRITE_SUPER_NERD, 7, 22, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 1, TrainerJugglerFritz, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
-	person_event SPRITE_BAKER, 11, 10, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerBakerSharyn, EVENT_FAST_SHIP_PASSENGERS_FIRST_TRIP
-	person_event SPRITE_SAILOR, 2, 13, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerSailorGarrett, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
-	person_event SPRITE_FISHER, 6, 21, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 3, TrainerFisherJonah, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
-	person_event SPRITE_BLACK_BELT, 9, 11, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 3, TrainerBlackbeltWai, EVENT_FAST_SHIP_PASSENGERS_EASTBOUND
-	person_event SPRITE_SAILOR, 2, 19, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerSailorKenneth, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
-	person_event SPRITE_TEACHER, 9, 5, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 3, TrainerTeacherShirley, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
-	person_event SPRITE_YOUNGSTER, 7, 10, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 1, TrainerSchoolboyNate, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
-	person_event SPRITE_YOUNGSTER, 9, 10, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 1, TrainerSchoolboyRicky, EVENT_FAST_SHIP_PASSENGERS_WESTBOUND
-
-const_value set 2
+	const_def 1 ; object constants
 	const FASTSHIPB1F_SAILOR1
 	const FASTSHIPB1F_SAILOR2
 
@@ -39,7 +36,7 @@ UnknownScript_0x7673c:
 	checkevent EVENT_FAST_SHIP_B1F_SAILOR_RIGHT
 	iftrue UnknownScript_0x76766
 	applymovement FASTSHIPB1F_SAILOR2, MovementData_0x76876
-	moveperson FASTSHIPB1F_SAILOR1, $1a, $4
+	moveobject FASTSHIPB1F_SAILOR1, 26, 4
 	appear FASTSHIPB1F_SAILOR1
 	pause 5
 	disappear FASTSHIPB1F_SAILOR2
@@ -49,189 +46,153 @@ UnknownScript_0x76751:
 	checkevent EVENT_FAST_SHIP_B1F_SAILOR_LEFT
 	iftrue UnknownScript_0x76766
 	applymovement FASTSHIPB1F_SAILOR1, MovementData_0x76871
-	moveperson FASTSHIPB1F_SAILOR2, $1b, $4
+	moveobject FASTSHIPB1F_SAILOR2, 27, 4
 	appear FASTSHIPB1F_SAILOR2
 	pause 5
 	disappear FASTSHIPB1F_SAILOR1
-	end
-
 UnknownScript_0x76766:
 	end
 
 SailorScript_0x76767:
+	checkevent EVENT_FAST_SHIP_FIRST_TIME
+	iftrue_jumptextfaceplayer UnknownText_0x7699d
 	faceplayer
 	opentext
-	checkevent EVENT_FAST_SHIP_FIRST_TIME
-	iftrue UnknownScript_0x767a0
 	checkevent EVENT_FAST_SHIP_LAZY_SAILOR
 	iftrue UnknownScript_0x7678d
 	checkevent EVENT_FAST_SHIP_INFORMED_ABOUT_LAZY_SAILOR
-	iftrue UnknownScript_0x76787
-	writetext UnknownText_0x7687b
-	waitbutton
-	closetext
+	iftrue_jumpopenedtext UnknownText_0x76907
 	setevent EVENT_FAST_SHIP_INFORMED_ABOUT_LAZY_SAILOR
 	clearevent EVENT_FAST_SHIP_CABINS_NNW_NNE_NE_SAILOR
-	end
-
-UnknownScript_0x76787:
-	writetext UnknownText_0x76907
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x7687b
 
 UnknownScript_0x7678d:
 	writetext UnknownText_0x7692e
 	checkevent EVENT_FAST_SHIP_FOUND_GIRL
 	iffalse UnknownScript_0x76799
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 UnknownScript_0x76799:
 	buttonsound
-	writetext UnknownText_0x7696d
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x7696d
 
-UnknownScript_0x767a0:
-	writetext UnknownText_0x7699d
-	waitbutton
-	closetext
-	end
+GenericTrainerSailorJeff:
+	generictrainer SAILOR, JEFF, EVENT_BEAT_SAILOR_JEFF, SailorJeffSeenText, SailorJeffBeatenText
 
-TrainerSailorJeff:
-	trainer EVENT_BEAT_SAILOR_JEFF, SAILOR, JEFF, SailorJeffSeenText, SailorJeffBeatenText, 0, SailorJeffScript
+	text "I guess I can't"
+	line "win if I don't get"
+	cont "serious."
+	done
 
-SailorJeffScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76a38
-	waitbutton
-	closetext
-	end
+GenericTrainerPicnickerDebra:
+	generictrainer PICNICKER, DEBRA, EVENT_BEAT_PICNICKER_DEBRA, PicnickerDebraSeenText, PicnickerDebraBeatenText
 
-TrainerPicnickerDebra:
-	trainer EVENT_BEAT_PICNICKER_DEBRA, PICNICKER, DEBRA, PicnickerDebraSeenText, PicnickerDebraBeatenText, 0, PicnickerDebraScript
+	text "Saffron, Celadon…"
+	line "I hear there are"
 
-PicnickerDebraScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76a99
-	waitbutton
-	closetext
-	end
+	para "many big cities"
+	line "in Kanto."
+	done
 
-TrainerJugglerFritz:
-	trainer EVENT_BEAT_JUGGLER_FRITZ, JUGGLER, FRITZ, JugglerFritzSeenText, JugglerFritzBeatenText, 0, JugglerFritzScript
+GenericTrainerJugglerFritz:
+	generictrainer JUGGLER, FRITZ, EVENT_BEAT_JUGGLER_FRITZ, JugglerFritzSeenText, JugglerFritzBeatenText
 
-JugglerFritzScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76b02
-	waitbutton
-	closetext
-	end
+	text "No more ships for"
+	line "me. Next time,"
 
-TrainerBakerSharyn:
-	trainer EVENT_BEAT_BAKER_SHARYN, BAKER, SHARYN, BakerSharynSeenText, BakerSharynBeatenText, 0, BakerSharynScript
+	para "I'm taking the"
+	line "Magnet Train."
+	done
 
-BakerSharynScript:
-	end_if_just_battled
-	opentext
-	writetext BakerSharynAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerBakerSharyn:
+	generictrainer BAKER, SHARYN, EVENT_BEAT_BAKER_SHARYN, BakerSharynSeenText, BakerSharynBeatenText
 
-TrainerSailorGarrett:
-	trainer EVENT_BEAT_SAILOR_GARRETT, SAILOR, GARRETT, SailorGarrettSeenText, SailorGarrettBeatenText, 0, SailorGarrettScript
+	text "I may not be the"
+	line "best at battles,"
 
-SailorGarrettScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76b7a
-	waitbutton
-	closetext
-	end
+	para "but people love"
+	line "my baking."
+	done
 
-TrainerFisherJonah:
-	trainer EVENT_BEAT_FISHER_JONAH, FISHER, JONAH, FisherJonahSeenText, FisherJonahBeatenText, 0, FisherJonahScript
+GenericTrainerSailorGarrett:
+	generictrainer SAILOR, GARRETT, EVENT_BEAT_SAILOR_GARRETT, SailorGarrettSeenText, SailorGarrettBeatenText
 
-FisherJonahScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76c22
-	waitbutton
-	closetext
-	end
+	text "We get different"
+	line "passengers from"
 
-TrainerBlackbeltWai:
-	trainer EVENT_BEAT_BLACKBELT_WAI, BLACKBELT_T, WAI, BlackbeltWaiSeenText, BlackbeltWaiBeatenText, 0, BlackbeltWaiScript
+	para "Vermilion City to"
+	line "Olivine City."
+	done
 
-BlackbeltWaiScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76c9e
-	waitbutton
-	closetext
-	end
+GenericTrainerFisherJonah:
+	generictrainer FISHER, JONAH, EVENT_BEAT_FISHER_JONAH, FisherJonahSeenText, FisherJonahBeatenText
 
-TrainerSailorKenneth:
-	trainer EVENT_BEAT_SAILOR_KENNETH, SAILOR, KENNETH, SailorKennethSeenText, SailorKennethBeatenText, 0, SailorKennethScript
+	text "I plan to fish off"
+	line "Vermilion's pier."
+	done
 
-SailorKennethScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76d5f
-	waitbutton
-	closetext
-	end
+GenericTrainerBlackbeltWai:
+	generictrainer BLACKBELT_T, WAI, EVENT_BEAT_BLACKBELT_WAI, BlackbeltWaiSeenText, BlackbeltWaiBeatenText
 
-TrainerTeacherShirley:
-	trainer EVENT_BEAT_TEACHER_SHIRLEY, TEACHER, SHIRLEY, TeacherShirleySeenText, TeacherShirleyBeatenText, 0, TeacherShirleyScript
+	text "I couldn't find"
+	line "the Karate King in"
+	cont "Johto."
 
-TeacherShirleyScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76de1
-	waitbutton
-	closetext
-	end
+	para "He's supposed to"
+	line "be training in a"
+	cont "cave somewhere."
+	done
 
-TrainerSchoolboyNate:
-	trainer EVENT_BEAT_SCHOOLBOY_NATE, SCHOOLBOY, NATE, SchoolboyNateSeenText, SchoolboyNateBeatenText, 0, SchoolboyNateScript
+GenericTrainerSailorKenneth:
+	generictrainer SAILOR, KENNETH, EVENT_BEAT_SAILOR_KENNETH, SailorKennethSeenText, SailorKennethBeatenText
 
-SchoolboyNateScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76e3d
-	waitbutton
-	closetext
-	end
+	text "Eight Badges!"
+	line "They must prove"
 
-TrainerSchoolboyRicky:
-	trainer EVENT_BEAT_SCHOOLBOY_RICKY, SCHOOLBOY, RICKY, SchoolboyRickySeenText, SchoolboyRickyBeatenText, 0, SchoolboyRickyScript
+	para "that you've beaten"
+	line "Gym Leaders."
 
-SchoolboyRickyScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x76eb6
-	waitbutton
-	closetext
-	end
+	para "No wonder you're"
+	line "so good!"
+	done
+
+GenericTrainerTeacherShirley:
+	generictrainer TEACHER, SHIRLEY, EVENT_BEAT_TEACHER_SHIRLEY, TeacherShirleySeenText, TeacherShirleyBeatenText
+
+	text "We're on a field"
+	line "trip to the ruins"
+	cont "outside Violet."
+	done
+
+GenericTrainerSchoolboyNate:
+	generictrainer SCHOOLBOY, NATE, EVENT_BEAT_SCHOOLBOY_NATE, SchoolboyNateSeenText, SchoolboyNateBeatenText
+
+	text "Radios pick up"
+	line "strange signals"
+	cont "inside the ruins."
+	done
+
+GenericTrainerSchoolboyRicky:
+	generictrainer SCHOOLBOY, RICKY, EVENT_BEAT_SCHOOLBOY_RICKY, SchoolboyRickySeenText, SchoolboyRickyBeatenText
+
+	text "I read in a #-"
+	line "mon Journal that"
+
+	para "there are four of"
+	line "those stone panels"
+	cont "in the ruins."
+	done
 
 MovementData_0x76871:
 	fix_facing
-	big_step_right
+	run_step_right
 	remove_fixed_facing
 	turn_head_down
 	step_end
 
 MovementData_0x76876:
 	fix_facing
-	big_step_left
+	run_step_left
 	remove_fixed_facing
 	turn_head_down
 	step_end
@@ -292,12 +253,6 @@ SailorJeffBeatenText:
 	line "break's over!"
 	done
 
-UnknownText_0x76a38:
-	text "I guess I can't"
-	line "win if I don't get"
-	cont "serious."
-	done
-
 PicnickerDebraSeenText:
 	text "I'm so bored."
 	line "Want to battle?"
@@ -308,14 +263,6 @@ PicnickerDebraBeatenText:
 	line "strong!"
 	done
 
-UnknownText_0x76a99:
-	text "Saffron, Celadon…"
-	line "I hear there are"
-
-	para "many big cities"
-	line "in Kanto."
-	done
-
 JugglerFritzSeenText:
 	text "Urrf…"
 	line "I'm seasick!"
@@ -324,14 +271,6 @@ JugglerFritzSeenText:
 JugglerFritzBeatenText:
 	text "I can't move any-"
 	line "more…"
-	done
-
-UnknownText_0x76b02:
-	text "No more ships for"
-	line "me. Next time,"
-
-	para "I'm taking the"
-	line "Magnet Train."
 	done
 
 BakerSharynSeenText:
@@ -345,14 +284,6 @@ BakerSharynBeatenText:
 	line "is a winner."
 	done
 
-BakerSharynAfterText:
-	text "I may not be the"
-	line "best at battles,"
-
-	para "but people love"
-	line "my baking."
-	done
-
 SailorGarrettSeenText:
 	text "This is where we"
 	line "sailors work!"
@@ -361,14 +292,6 @@ SailorGarrettSeenText:
 SailorGarrettBeatenText:
 	text "I lost on my home"
 	line "field…"
-	done
-
-UnknownText_0x76b7a:
-	text "We get different"
-	line "passengers from"
-
-	para "Vermilion City to"
-	line "Olivine City."
 	done
 
 FisherJonahSeenText:
@@ -385,11 +308,6 @@ FisherJonahBeatenText:
 	line "anymore…"
 	done
 
-UnknownText_0x76c22:
-	text "I plan to fish off"
-	line "Vermilion's pier."
-	done
-
 BlackbeltWaiSeenText:
 	text "I'm building up my"
 	line "legs by bracing"
@@ -401,16 +319,6 @@ BlackbeltWaiSeenText:
 BlackbeltWaiBeatenText:
 	text "Rocked and rolled"
 	line "over!"
-	done
-
-UnknownText_0x76c9e:
-	text "I couldn't find"
-	line "the Karate King in"
-	cont "Johto."
-
-	para "He's supposed to"
-	line "be training in a"
-	cont "cave somewhere."
 	done
 
 SailorKennethSeenText:
@@ -426,17 +334,6 @@ SailorKennethBeatenText:
 	line "ing is obvious…"
 	done
 
-UnknownText_0x76d5f:
-	text "Eight Badges!"
-	line "They must prove"
-
-	para "that you've beaten"
-	line "Gym Leaders."
-
-	para "No wonder you're"
-	line "so good!"
-	done
-
 TeacherShirleySeenText:
 	text "Don't lay a finger"
 	line "on my students!"
@@ -446,12 +343,6 @@ TeacherShirleyBeatenText:
 	text "Aaack!"
 	done
 
-UnknownText_0x76de1:
-	text "We're on a field"
-	line "trip to the ruins"
-	cont "outside Violet."
-	done
-
 SchoolboyNateSeenText:
 	text "Do you know the"
 	line "Ruins of Alph?"
@@ -459,12 +350,6 @@ SchoolboyNateSeenText:
 
 SchoolboyNateBeatenText:
 	text "Yaargh!"
-	done
-
-UnknownText_0x76e3d:
-	text "Radios pick up"
-	line "strange signals"
-	cont "inside the ruins."
 	done
 
 SchoolboyRickySeenText:
@@ -477,11 +362,3 @@ SchoolboyRickyBeatenText:
 	text "I was done in!"
 	done
 
-UnknownText_0x76eb6:
-	text "I read in a #-"
-	line "mon Journal that"
-
-	para "there are four of"
-	line "those stone panels"
-	cont "in the ruins."
-	done

@@ -1,26 +1,23 @@
 OlivineGym_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4, 15, OLIVINE_CITY, 2
+	warp_event  5, 15, OLIVINE_CITY, 2
 
-OlivineGym_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $f, $4, 2, OLIVINE_CITY
-	warp_def $f, $5, 2, OLIVINE_CITY
+	db 2 ; bg events
+	bg_event  3, 13, SIGNPOST_READ, OlivineGymStatue
+	bg_event  6, 13, SIGNPOST_READ, OlivineGymStatue
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 13, 3, SIGNPOST_READ, OlivineGymStatue
-	signpost 13, 6, SIGNPOST_READ, OlivineGymStatue
-
-.PersonEvents: db 4
-	person_event SPRITE_JASMINE, 3, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, JasmineScript_0x9c12f, EVENT_OLIVINE_GYM_JASMINE
-	person_event SPRITE_GYM_GUY, 13, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, OlivineGymGuyScript, -1
-	person_event SPRITE_GENTLEMAN, 10, 3, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 2, OlivineGymGentlemanPreston, EVENT_OLIVINE_GYM_JASMINE
-	person_event SPRITE_LASS, 7, 6, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 2, OlivineGymLassConnie, EVENT_OLIVINE_GYM_JASMINE
+	db 4 ; object events
+	object_event  5,  3, SPRITE_JASMINE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, JasmineScript_0x9c12f, EVENT_OLIVINE_GYM_JASMINE
+	object_event  7, 13, SPRITE_GYM_GUY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, OlivineGymGuyScript, -1
+	object_event  3, 10, SPRITE_GENTLEMAN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 2, OlivineGymGentlemanPreston, EVENT_OLIVINE_GYM_JASMINE
+	object_event  6,  7, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_TRAINER, 2, OlivineGymLassConnie, EVENT_OLIVINE_GYM_JASMINE
 
 JasmineScript_0x9c12f:
 	faceplayer
@@ -35,97 +32,106 @@ JasmineScript_0x9c12f:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_JASMINE
-	clearevent EVENT_ROUTE_42_OFFICER
-	domaptrigger ROUTE_42, $1
 	opentext
 	writetext UnknownText_0x9c33a
 	playsound SFX_GET_BADGE
 	waitsfx
 	setflag ENGINE_MINERALBADGE
 	callstd goldenrodrockets
+	setmapscene ROUTE_42, $1
 .FightDone:
 	checkevent EVENT_GOT_TM23_IRON_TAIL
-	iftrue UnknownScript_0x9c172
+	iftrue_jumpopenedtext UnknownText_0x9c3d1
 	writetext UnknownText_0x9c354
 	buttonsound
 	verbosegivetmhm TM_IRON_TAIL
 	setevent EVENT_GOT_TM23_IRON_TAIL
-	writetext UnknownText_0x9c3a5
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-UnknownScript_0x9c172:
-	writetext UnknownText_0x9c3d1
-	waitbutton
-	closetext
-	end
+	text "…You could use"
+	line "that TM to teach"
+	cont "Iron Tail."
+	done
 
 OlivineGymGuyScript:
-	faceplayer
 	checkevent EVENT_BEAT_JASMINE
-	iftrue .OlivineGymGuyWinScript
+	iftrue_jumptextfaceplayer OlivineGymGuyWinText
 	checkevent EVENT_JASMINE_RETURNED_TO_GYM
-	iffalse .OlivineGymGuyPreScript
-	opentext
-	writetext OlivineGymGuyText
-	waitbutton
-	closetext
-	end
+	iffalse_jumptextfaceplayer OlivineGymGuyPreText
+	thistextfaceplayer
 
-.OlivineGymGuyWinScript:
-	opentext
-	writetext OlivineGymGuyWinText
-	waitbutton
-	closetext
-	end
+	text "Jasmine uses the"
+	line "newly discovered"
+	cont "Steel-type."
 
-.OlivineGymGuyPreScript:
-	opentext
-	writetext OlivineGymGuyPreText
-	waitbutton
-	closetext
-	end
+	para "I don't know very"
+	line "much about it."
+	done
 
 OlivineGymLassConnie:
-	trainer EVENT_SPOKE_TO_LASS_CONNIE, 0, 0, OlivineGymLassConnieSeenText, 0, 0, OlivineGymLassConnieScript
+	trainer 0, 0, EVENT_SPOKE_TO_LASS_CONNIE, .SeenText, 0, 0, .Script
 
-OlivineGymLassConnieScript:
+.Script:
 	end_if_just_battled
-	faceplayer
-	opentext
 	checkevent EVENT_BEAT_JASMINE
-	iftrue .BeatJasmine
-	writetext OlivineGymLassConnieSeenText
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer .AfterText
+	thistextfaceplayer
 
-.BeatJasmine
-	writetext OlivineGymLassConnieAfterText
-	waitbutton
-	closetext
-	end
+.SeenText:
+	text "Giggle… I know"
+	line "how capable you"
+
+	para "are from the"
+	line "Lighthouse."
+
+	para "It's time you"
+	line "showed that to"
+	cont "Jasmine!"
+
+	para "Good luck!"
+	done
+
+.AfterText:
+	text "You are amazing…"
+	line "You should aim"
+
+	para "even higher, with"
+	line "such potential."
+
+	para "Have you been to"
+	line "Mahogany Town?"
+	done
 
 OlivineGymGentlemanPreston:
-	trainer EVENT_SPOKE_TO_GENTLEMAN_PRESTON, 0, 0, OlivineGymGentlemanPrestonSeenText, 0, 0, OlivineGymGentlemanPrestonScript
+	trainer 0, 0, EVENT_SPOKE_TO_GENTLEMAN_PRESTON, .SeenText, 0, 0, .Script
 
-OlivineGymGentlemanPrestonScript:
+.Script:
 	end_if_just_battled
-	faceplayer
-	opentext
 	checkevent EVENT_BEAT_JASMINE
-	iftrue .BeatJasmine
-	writetext OlivineGymGentlemanPrestonSeenText
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer .AfterText
+	thistextfaceplayer
 
-.BeatJasmine
-	writetext OlivineGymGentlemanPrestonAfterText
-	waitbutton
-	closetext
-	end
+.SeenText:
+	text "I knew you'd"
+	line "come here."
+
+	para "Thank you for"
+	line "helping the"
+	cont "Gym Leader,"
+
+	para "but battle is a"
+	line "separate matter."
+
+	para "Go for it!"
+	done
+
+.AfterText:
+	text "Impressive!"
+	line "You should earn"
+
+	para "more badges with"
+	line "that much skill."
+	done
 
 OlivineGymStatue:
 	trainertotext JASMINE, 1, $1
@@ -138,7 +144,7 @@ OlivineGymStatue:
 	jumpstd gymstatue1
 .Beaten
 	checkcode VAR_BADGES
-	if_greater_than 13, .LyraToo
+	ifgreater 13, .LyraToo
 	jumpstd gymstatue2
 .LyraToo
 	jumpstd gymstatue3
@@ -201,25 +207,10 @@ UnknownText_0x9c354:
 	line "this too…"
 	done
 
-UnknownText_0x9c3a5:
-	text "…You could use"
-	line "that TM to teach"
-	cont "Iron Tail."
-	done
-
 UnknownText_0x9c3d1:
 	text "Um… I don't know"
 	line "how to say this,"
 	cont "but good luck…"
-	done
-
-OlivineGymGuyText:
-	text "Jasmine uses the"
-	line "newly discovered"
-	cont "Steel-type."
-
-	para "I don't know very"
-	line "much about it."
 	done
 
 OlivineGymGuyWinText:
@@ -244,51 +235,4 @@ OlivineGymGuyPreText:
 	para "A strong trainer"
 	line "has to be compas-"
 	cont "sionate."
-	done
-
-OlivineGymGentlemanPrestonSeenText:
-	text "I knew you'd"
-	line "come here."
-
-	para "Thank you for"
-	line "helping the"
-	cont "Gym Leader,"
-
-	para "but battle is a"
-	line "separate matter."
-
-	para "Go for it!"
-	done
-
-OlivineGymGentlemanPrestonAfterText:
-	text "Impressive!"
-	line "You should earn"
-
-	para "more badges with"
-	line "that much skill."
-	done
-
-OlivineGymLassConnieSeenText:
-	text "Giggle… I know"
-	line "how capable you"
-
-	para "are from the"
-	line "Lighthouse."
-
-	para "It's time you"
-	line "showed that to"
-	cont "Jasmine!"
-
-	para "Good luck!"
-	done
-
-OlivineGymLassConnieAfterText:
-	text "You are amazing…"
-	line "You should aim"
-
-	para "even higher, with"
-	line "such potential."
-
-	para "Have you been to"
-	line "Mahogany Town?"
 	done

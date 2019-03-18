@@ -1,25 +1,22 @@
 TinTower8F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 6 ; warp events
+	warp_event  0,  5, TIN_TOWER_7F, 2
+	warp_event  0, 11, TIN_TOWER_9F, 1
+	warp_event 14,  7, TIN_TOWER_9F, 2
+	warp_event  8,  3, TIN_TOWER_9F, 3
+	warp_event 12, 15, TIN_TOWER_9F, 6
+	warp_event  4,  9, TIN_TOWER_9F, 7
 
-TinTower8F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 6
-	warp_def $5, $0, 2, TIN_TOWER_7F
-	warp_def $b, $0, 1, TIN_TOWER_9F
-	warp_def $7, $e, 2, TIN_TOWER_9F
-	warp_def $3, $8, 3, TIN_TOWER_9F
-	warp_def $f, $c, 6, TIN_TOWER_9F
-	warp_def $9, $4, 7, TIN_TOWER_9F
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_BALL_CUT_FRUIT, 13, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, BIG_NUGGET, 1, EVENT_TIN_TOWER_8F_BIG_NUGGET
-	person_event SPRITE_BALL_CUT_FRUIT, 6, 9, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MAX_ELIXER, 1, EVENT_TIN_TOWER_8F_MAX_ELIXER
-	person_event SPRITE_BALL_CUT_FRUIT, 1, 1, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, FULL_RESTORE, 1, EVENT_TIN_TOWER_8F_FULL_RESTORE
+	db 3 ; object events
+	itemball_event  5, 13, BIG_NUGGET, 1, EVENT_TIN_TOWER_8F_BIG_NUGGET
+	itemball_event  9,  6, MAX_ELIXIR, 1, EVENT_TIN_TOWER_8F_MAX_ELIXIR
+	itemball_event  1,  1, FULL_RESTORE, 1, EVENT_TIN_TOWER_8F_FULL_RESTORE
 

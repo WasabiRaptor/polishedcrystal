@@ -1,21 +1,18 @@
-INCLUDE "includes.asm"
+INCLUDE "constants.asm"
 
 
 SECTION "Audio", ROMX
 
 INCLUDE "audio/engine.asm"
 
-INCLUDE "audio/trainer_encounters.asm"
+INCLUDE "data/trainers/encounter_music.asm"
 
-Music:
 INCLUDE "audio/music_pointers.asm"
 
 INCLUDE "audio/music/nothing.asm"
 
-Cries:
 INCLUDE "audio/cry_pointers.asm"
 
-SFX:
 INCLUDE "audio/sfx_pointers.asm"
 
 
@@ -178,6 +175,7 @@ INCLUDE "audio/music/rby/ceruleancave.asm"
 INCLUDE "audio/music/rby/cinnabarmansion.asm"
 INCLUDE "audio/music/rby/diglettscave.asm"
 INCLUDE "audio/music/rby/indigoplateau.asm"
+INCLUDE "audio/music/rby/bikeriding.asm"
 
 
 SECTION "RBY Music 2", ROMX
@@ -185,13 +183,16 @@ SECTION "RBY Music 2", ROMX
 INCLUDE "audio/music/rby/lavendertown.asm"
 INCLUDE "audio/music/rby/lookjessiejames.asm"
 INCLUDE "audio/music/rby/pokemontower.asm"
+INCLUDE "audio/music/rby/surfing.asm"
 INCLUDE "audio/music/rby/surfingpikachu.asm"
 
 
 SECTION "RSE Music 1", ROMX
 
+INCLUDE "audio/music/rse/surfing.asm"
 INCLUDE "audio/music/rse/abandonedship.asm"
 INCLUDE "audio/music/rse/championbattle.asm"
+INCLUDE "audio/music/rse/evergrandecity.asm"
 INCLUDE "audio/music/rse/dewfordtown.asm"
 INCLUDE "audio/music/rse/frontierbrainbattle.asm"
 
@@ -269,6 +270,7 @@ INCLUDE "audio/music/bw/wcsbattle.asm"
 SECTION "B2W2 Music 1", ROMX
 
 INCLUDE "audio/music/b2w2/championbattle.asm"
+INCLUDE "audio/music/b2w2/hiddengrotto.asm"
 
 
 SECTION "B2W2 Music 2", ROMX
@@ -276,6 +278,7 @@ SECTION "B2W2 Music 2", ROMX
 INCLUDE "audio/music/b2w2/reversalmountainwhite.asm"
 INCLUDE "audio/music/b2w2/roadtoreversalmountain.asm"
 INCLUDE "audio/music/b2w2/whitetreehollow.asm"
+INCLUDE "audio/music/b2w2/marinetube.asm"
 
 
 SECTION "XY Music 1", ROMX
@@ -292,6 +295,12 @@ INCLUDE "audio/music/xy/laverrecity.asm"
 INCLUDE "audio/music/xy/powerplant.asm"
 INCLUDE "audio/music/xy/rivalbattle.asm"
 INCLUDE "audio/music/xy/titlescreen.asm"
+
+
+SECTION "XY Music 3", ROMX
+
+INCLUDE "audio/music/xy/scaryhouse.asm"
+INCLUDE "audio/music/xy/legendarybattle.asm"
 
 
 SECTION "ORAS Music 1", ROMX
@@ -318,9 +327,28 @@ INCLUDE "audio/music/sm/trainerbattle.asm"
 INCLUDE "audio/music/sm/wildbattle.asm"
 
 
-SECTION "Music Custom", ROMX
+SECTION "Prism Music", ROMX
 
-INCLUDE "audio/music/custom/lugiassong.asm"
+INCLUDE "audio/music/prism/wildbattle.asm"
+INCLUDE "audio/music/prism/trainerbattle.asm"
+INCLUDE "audio/music/prism/gymleaderbattle.asm"
+INCLUDE "audio/music/prism/palettebattle.asm"
+
+
+SECTION "Go Music", ROMX
+
+INCLUDE "audio/music/go/wildbattle.asm"
+INCLUDE "audio/music/go/gymbattle.asm"
+
+
+SECTION "Stadium Music", ROMX
+
+INCLUDE "audio/music/stadium/mewtwobattle.asm"
+
+
+SECTION "Movie 2000 Music", ROMX
+
+INCLUDE "audio/music/m02/lugiassong.asm"
 
 
 SECTION "Sound Effects", ROMX
@@ -335,7 +363,6 @@ INCLUDE "audio/sfx_crystal.asm"
 
 SECTION "Cries", ROMX
 
-CryHeaders::
-INCLUDE "audio/cry_headers.asm"
+INCLUDE "data/pokemon/cries.asm"
 
 INCLUDE "audio/cries.asm"

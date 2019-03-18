@@ -1,32 +1,28 @@
 MahoganyPokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, MAHOGANY_TOWN, 4
+	warp_event  6,  7, MAHOGANY_TOWN, 4
+	warp_event  0,  7, POKECENTER_2F, 1
 
-MahoganyPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 4, MAHOGANY_TOWN
-	warp_def $7, $6, 4, MAHOGANY_TOWN
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalPryceScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalPryceScript
-
-.PersonEvents: db 4
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_POKEFAN_M, 4, 9, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x19a362, -1
-	person_event SPRITE_YOUNGSTER, 3, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x19a3b3, -1
-	person_event SPRITE_COOLTRAINER_F, 3, 2, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x19a418, -1
+	db 4 ; object events
+	pc_nurse_event  5, 1
+	object_event  9,  4, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, MahoganyPokeCenter1FPokefanmText, -1
+	object_event  1,  3, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, MahoganyPokeCenter1FYoungsterText, -1
+	object_event  2,  3, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, MahoganyPokeCenter1FCooltrainerfText, -1
 
 PokemonJournalPryceScript:
 	setflag ENGINE_READ_PRYCE_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Special Feature:"
@@ -47,7 +43,7 @@ PokemonJournalPryceScript:
 	cont "winter trainer”."
 	done
 
-UnknownText_0x19a362:
+MahoganyPokeCenter1FPokefanmText:
 	text "What's this? Team"
 	line "Rocket has come"
 	cont "back?"
@@ -57,7 +53,7 @@ UnknownText_0x19a362:
 	cont "Rage…"
 	done
 
-UnknownText_0x19a3b3:
+MahoganyPokeCenter1FYoungsterText:
 	text "I stop my #mon"
 	line "from evolving too"
 	cont "early."
@@ -68,7 +64,7 @@ UnknownText_0x19a3b3:
 	cont "evolve."
 	done
 
-UnknownText_0x19a418:
+MahoganyPokeCenter1FCooltrainerfText:
 	text "#mon do become"
 	line "stronger when they"
 

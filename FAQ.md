@@ -2,17 +2,22 @@
 
 If you have a question about playing Polished Crystal, or think you've found a bug, please read this FAQ first.
 
+> At the time, I was asking really obvious questions like: "So 'wireless' means you're getting rid of the wires, right?"
+>
+> — Tsunekazu Ishihara, "[Iwata Asks – Pokémon HeartGold Version & SoulSilver Version](https://www.nintendo.co.uk/Iwata-Asks/Iwata-Asks-Pokemon-HeartGold-Version-SoulSilver-Version/Iwata-Asks-Pokemon-HeartGold-Version-SoulSilver-Version/4-The-Power-of-Science-is-Staggering-/4-The-Power-of-Science-is-Staggering--226003.html)"
+
 
 ### Is there a Pokédex document I can refer to?
 
 The game's data files do a fairly good job of listing things you'll want to know.
 
-* [Base stats and TM learnsets](data/base_stats/)
-* [Level-up learnsets and evolution methods](data/evos_attacks.asm)
-* [Egg moves](data/egg_moves.asm)
-* [Move attributes](battle/moves/moves.asm)
-* [TM+HM+tutor list](engine/tmhm.asm#L48)
+* [Base stats and TM learnsets](data/pokemon/base_stats/)
+* [Level-up learnsets and evolution methods](data/pokemon/evos_attacks.asm)
+* [Egg moves](data/pokemon/egg_moves.asm)
+* [Move attributes](data/moves/moves.asm)
+* [TM+HM+tutor list](data/moves/tmhm_moves.asm)
 * [Wild Pokémon](data/wild/)
+* [Hidden Grottoes](data/events/hidden_grottoes/grottoes.asm)
 
 
 ### How do I evolve my Pokémon?

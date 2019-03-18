@@ -1,82 +1,96 @@
 #!/usr/bin/env python
-
-"""
-Transposes the bytes of the metatiles.bin and palette_map.asm files for a
-particular tileset.
-"""
+# -*- coding: utf-8 -*-
 
 from __future__ import print_function
 
-import sys
+"""
+Transposes the bytes of the metatiles.bin and attributes.bin files.
+"""
 
-from itertools import izip_longest
+# {'tileset name': {old block id: new block id, ...}, ...}
+tilesets_moved = {}
 
-def chunk(L, n, fillvalue=None):
-	return izip_longest(*[iter(L)] * n, fillvalue=fillvalue)
+tileset_maps = {
+'johto_traditional': ['NewBarkTown'],
+}
 
-def build_map(mapfile):
-	mapping = {}
-	revmap = {}
-	with open(mapfile, 'r') as f:
-		for line in f:
-			if '<->' in line:
-				a, b = line.split('<->')
-				a, b = int(a, 16), int(b, 16)
-				mapping[a], mapping[b] = b, a
-				revmap[b], revmap[a] = a, b
-			elif '->' in line:
-				a, b = line.split('->')
-				a, b = int(a, 16), int(b, 16)
-				mapping[a] = b
-				revmap[b] = a
-	return (mapping, revmap)
+BANK1 = 1 << 3
+XFLIP = 1 << 5
+YFLIP = 1 << 6
 
-def transpose_metatiles(metatiles, mapping):
-	data = []
-	with open(metatiles, 'rb') as f:
-		for a in f.read():
-			data.append(chr(mapping.get(ord(a), ord(a))))
-	with open(metatiles, 'wb') as f:
-		f.write(''.join(data))
+for tileset_name in sorted(tileset_maps.keys()):
+	for map_name in sorted(tileset_maps[tileset_name]):
+		moved = tilesets_moved.get(tileset_name, {})
 
-def transpose_palette(palette, revmap):
-	data = []
-	with open(palette, 'r') as f:
-		for line in f:
-			line = line.strip()
-			if not line.startswith('tilepal '):
-				continue
-			parts = [p.strip() for p in line.split(',')]
-			data.extend(parts[1:9])
-			if len(data) == 0x70:
-				data.extend(['ROOF'] * 0x10)
-	data.extend(['ROOF'] * (0x100 - len(data)))
-	with open(palette, 'wb') as f:
-		for i in range(32):
-			if i == 14:
-				f.write('\nrept 8\n\tdb $ff\nendr\n\n')
-				continue
-			elif i == 15:
-				continue
-			seg = 0 if i < 14 else 1
-			row = [revmap.get(i*8+j, i*8+j) for j in range(8)]
-			line = '\ttilepal %d, %s\n' % (seg, ', '.join(data[b] for b in row))
+		print(map_name)
+
+		map_path = 'maps/%s.ablk' % map_name
+
+		with open(map_path, 'rb') as f:
+			map_data = map(ord, f.read())
+
+		for i, bid in enumerate(map_data):
+			if bid in moved:
+				bid2 = moved[bid]
+				map_data[i] = bid2
+
+		with open(map_path, 'wb') as f:
+			for v in map_data:
+				f.write(chr(v))
+
+
+def chunks(s, n):
+	return [s[i:i+n] for i in range(0, len(s), n)]
+
+
+for tileset_name in sorted(tileset_maps.keys()):
+	moved = tilesets_moved.get(tileset_name, {})
+	inv_moved = {v: k for k, v in moved.items()}
+
+	print(tileset_name)
+
+	metatiles_path = 'data/tilesets/%s_metatiles.bin' % tileset_name
+	attributes_path = 'data/tilesets/%s_attributes.bin' % tileset_name
+	collisions_path = 'data/tilesets/%s_collision.asm' % tileset_name
+
+	with open(metatiles_path, 'rb') as f:
+		metatile_data = chunks(map(ord, f.read()), 16)
+	with open(attributes_path, 'rb') as f:
+		attribute_data = chunks(map(ord, f.read()), 16)
+	with open(collisions_path, 'r') as f:
+		collision_data = f.readlines()
+
+	metatile_data_2 = []
+	attribute_data_2 = []
+	collision_data_2 = []
+
+	for bid in range(len(metatile_data)):
+		if bid in inv_moved:
+			bid = inv_moved[bid]
+			if bid >= len(metatile_data):
+				bid = 0x00
+		metatile_data_2.append(metatile_data[bid])
+		attribute_data_2.append(attribute_data[bid])
+		collision_data_2.append(collision_data[bid])
+
+	bid = len(metatile_data_2)
+	while bid in inv_moved:
+		bid = inv_moved[len(metatile_data)]
+		if bid >= len(metatile_data):
+			bid = 0x00
+		metatile_data_2.append(metatile_data[bid])
+		attribute_data_2.append(attribute_data[bid])
+		collision_data_2.append(collision_data[bid])
+		bid = len(metatile_data_2)
+
+	with open(metatiles_path, 'wb') as f:
+		for mt in metatile_data_2:
+			for v in mt:
+				f.write(chr(v))
+	with open(attributes_path, 'wb') as f:
+		for mt in attribute_data_2:
+			for v in mt:
+				f.write(chr(v))
+	with open(collisions_path, 'w') as f:
+		for line in collision_data_2:
 			f.write(line)
-
-def main():
-	if len(sys.argv) < 3:
-		print('Usage: %s map.txt tilesetID' % sys.argv[0])
-		print('       Transpose metatiles.bin and palette_map.asm')
-		sys.exit(1)
-
-	mapfile = sys.argv[1]
-	tilesetID = sys.argv[2]
-	metatiles = 'tilesets/%s_metatiles.bin' % tilesetID
-	palette = 'tilesets/%s_palette_map.asm' % tilesetID
-
-	mapping, revmap = build_map(mapfile)
-	transpose_metatiles(metatiles, mapping)
-	transpose_palette(palette, revmap)
-
-if __name__ == '__main__':
-	main()

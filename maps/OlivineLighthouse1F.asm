@@ -1,61 +1,50 @@
 OlivineLighthouse1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 5 ; warp events
+	warp_event 10, 17, OLIVINE_CITY, 8
+	warp_event 11, 17, OLIVINE_CITY, 8
+	warp_event  3, 11, OLIVINE_LIGHTHOUSE_2F, 1
+	warp_event 16, 13, OLIVINE_LIGHTHOUSE_2F, 3
+	warp_event 17, 13, OLIVINE_LIGHTHOUSE_2F, 4
 
-OlivineLighthouse1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $11, $a, 8, OLIVINE_CITY
-	warp_def $11, $b, 8, OLIVINE_CITY
-	warp_def $b, $3, 1, OLIVINE_LIGHTHOUSE_2F
-	warp_def $d, $10, 3, OLIVINE_LIGHTHOUSE_2F
-	warp_def $d, $11, 4, OLIVINE_LIGHTHOUSE_2F
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_SAILOR, 2, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x5ae67, -1
-	person_event SPRITE_POKEFAN_F, 9, 16, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, PokefanFScript_0x5ae6a, -1
+	db 2 ; object events
+	object_event  8,  2, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SailorScript_0x5ae67, -1
+	object_event 16,  9, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5aec2, -1
 
 SailorScript_0x5ae67:
+	checkevent EVENT_GOT_FULL_RESTORE_FROM_LIGHTHOUSE
+	iftrue_jumptextfaceplayer .Text2
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_FULL_RESTORE_FROM_LIGHTHOUSE
-	iftrue .GotItem
-	writetext OlivineLighthouse1FSailorText1
+	writetext .Text1
 	buttonsound
 	verbosegiveitem FULL_RESTORE
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_FULL_RESTORE_FROM_LIGHTHOUSE
-.GotItem:
-	writetext OlivineLighthouse1FSailorText2
-	waitbutton
-.Done:
-	closetext
-	end
+	thisopenedtext
 
-PokefanFScript_0x5ae6a:
-	jumptextfaceplayer UnknownText_0x5aec2
+.Text2:
+	text "The trainers here"
+	line "are all keen to"
+	cont "battle."
 
-OlivineLighthouse1FSailorText1:
+	para "Be prepared!"
+	done
+
+.Text1:
 	text "People are train-"
 	line "ing hard at this"
 	cont "Lighthouse."
 
 	para "You should take"
 	line "this."
-	done
-
-OlivineLighthouse1FSailorText2:
-	text "The trainers here"
-	line "are all keen to"
-	cont "battle."
-
-	para "Be prepared!"
 	done
 
 UnknownText_0x5aec2:

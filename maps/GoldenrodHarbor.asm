@@ -1,35 +1,34 @@
 GoldenrodHarbor_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event 31, 16, GOLDENROD_HARBOR_GATE, 1
+	warp_event 31, 17, GOLDENROD_HARBOR_GATE, 2
 
-GoldenrodHarbor_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $10, $1f, 1, GOLDENROD_HARBOR_GATE
-	warp_def $11, $1f, 2, GOLDENROD_HARBOR_GATE
+	db 3 ; bg events
+	bg_event 29, 19, SIGNPOST_JUMPTEXT, GoldenrodHarborSignText
+	bg_event 28, 15, SIGNPOST_JUMPTEXT, GoldenrodHarborCrateSignText
+	bg_event 22, 21, SIGNPOST_ITEM + REVIVE, EVENT_GOLDENROD_HARBOR_HIDDEN_REVIVE
 
-.XYTriggers: db 0
-
-.Signposts: db 3
-	signpost 19, 29, SIGNPOST_READ, GoldenrodHarborSign
-	signpost 15, 28, SIGNPOST_READ, GoldenrodHarborCrateSign
-	signpost 21, 22, SIGNPOST_ITEM, GoldenrodHarborHiddenRevive
-
-.PersonEvents: db 12
-	person_event SPRITE_FISHER, 3, 17, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, GoldenrodHarborFisherScript, -1
-	person_event SPRITE_FISHER, 5, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 1, TrainerFisherPaton, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, STAR_PIECE, 1, EVENT_GOLDENROD_HARBOR_STAR_PIECE
-	person_event SPRITE_LASS, 15, 27, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, GoldenrodHarborLass1Script, -1
-	person_event SPRITE_POKEFAN_M, 15, 22, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, GoldenrodHarborPokefanmScript, -1
-	person_event SPRITE_MAGIKARP, 15, 21, SPRITEMOVEDATA_DOLL, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, GoldenrodHarborMagikarpScript, -1
-	person_event SPRITE_YOUNGSTER, 15, 16, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, GoldenrodHarborYoungsterScript, -1
-	person_event SPRITE_FISHER, 20, 14, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, Jacques, -1
-	person_event SPRITE_ROCKET, 16, 40, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GOLDENROD_CITY_ROCKET_SCOUT
-	person_event SPRITE_SWIMMER_GIRL, 8, 31, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 5, TrainerSwimmerfKatie, -1
-	person_event SPRITE_SWIMMER_GUY, 28, 18, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerSwimmermJames, -1
-	person_event SPRITE_LASS, 19, 18, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, GoldenrodHarborLass2Script, -1
+	db 14 ; object events
+	object_event 17,  3, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GoldenrodHarborFisherScript, -1
+	object_event 13,  5, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerFisherPaton, -1
+	itemball_event 13,  3, STAR_PIECE, 1, EVENT_GOLDENROD_HARBOR_STAR_PIECE
+	object_event 27, 15, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, pokemart, MARTTYPE_ADVENTURER, MART_GOLDENROD_HARBOR, -1
+	object_event 22, 15, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, GoldenrodHarborPokefanmScript, -1
+	object_event 21, 15, SPRITE_MAGIKARP, SPRITEMOVEDATA_DOLL, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, GoldenrodHarborMagikarpText, -1
+	object_event 16, 15, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, GoldenrodHarborYoungsterScript, -1
+	object_event 14, 20, SPRITE_REAL_FISHER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, trade, TRADE_WITH_JACQUES_FOR_GRIMER, -1
+	object_event 40, 16, SPRITE_ROCKET, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_GOLDENROD_CITY_ROCKET_SCOUT
+	object_event 31,  8, SPRITE_SWIMMER_GIRL, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 5, GenericTrainerSwimmerfKatie, -1
+	object_event 18, 28, SPRITE_SWIMMER_GUY, SPRITEMOVEDATA_SPINCLOCKWISE, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerSwimmermJames, -1
+	object_event 18, 19, SPRITE_LASS, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, GoldenrodHarborLass2Text, -1
+	object_event  6, 26, SPRITE_SAILBOAT_TOP, SPRITEMOVEDATA_SAILBOAT_TOP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, end, NULL, -1
+	object_event  6, 26, SPRITE_SAILBOAT_BOTTOM, SPRITEMOVEDATA_SAILBOAT_BOTTOM, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, end, NULL, -1
 
 GoldenrodHarborFisherScript:
 	faceplayer
@@ -50,68 +49,45 @@ GoldenrodHarborTutorHyperVoiceScript:
 	writebyte HYPER_VOICE
 	writetext Text_GoldenrodHarborTutorClear
 	special Special_MoveTutor
-	if_equal $0, .TeachMove
+	ifequal $0, .TeachMove
 .TutorRefused
-	writetext Text_GoldenrodHarborTutorRefused
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_GoldenrodHarborTutorRefused
 
 .NoSilverLeaf
-	writetext Text_GoldenrodHarborTutorNoSilverLeaf
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_GoldenrodHarborTutorNoSilverLeaf
 
 .TeachMove
 	takeitem SILVER_LEAF
-	writetext Text_GoldenrodHarborTutorTaught
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_GoldenrodHarborTutorTaught
 
-TrainerFisherPaton:
-	trainer EVENT_BEAT_FISHER_PATON, FISHER, PATON, FisherPatonSeenText, FisherPatonBeatenText, 0, TrainerFisherPatonScript
+GenericTrainerFisherPaton:
+	generictrainer FISHER, PATON, EVENT_BEAT_FISHER_PATON, FisherPatonSeenText, FisherPatonBeatenText
 
-TrainerFisherPatonScript:
-	end_if_just_battled
-	opentext
-	writetext FisherPatonAfterText
-	waitbutton
-	closetext
-	end
+	text "You're working"
+	line "on a #dex?"
+	cont "That's neat!"
+	done
 
-TrainerSwimmerfKatie:
-	trainer EVENT_BEAT_SWIMMERF_KATIE, SWIMMERF, KATIE, SwimmerfKatieSeenText, SwimmerfKatieBeatenText, 0, SwimmerfKatieScript
+GenericTrainerSwimmerfKatie:
+	generictrainer SWIMMERF, KATIE, EVENT_BEAT_SWIMMERF_KATIE, SwimmerfKatieSeenText, SwimmerfKatieBeatenText
 
-SwimmerfKatieScript:
-	end_if_just_battled
-	opentext
-	writetext SwimmerfKatieAfterText
-	waitbutton
-	closetext
-	end
+	text "Why is the sea"
+	line "blue?"
 
-TrainerSwimmermJames:
-	trainer EVENT_BEAT_SWIMMERM_JAMES, SWIMMERM, JAMES, SwimmermJamesSeenText, SwimmermJamesBeatenText, 0, SwimmermJamesScript
+	para "I heard it ref-"
+	line "lects the sky…"
 
-SwimmermJamesScript:
-	end_if_just_battled
-	opentext
-	writetext SwimmermJamesAfterText
-	waitbutton
-	closetext
-	end
+	para "But then why is"
+	line "the sky blue?"
+	done
 
-GoldenrodHarborLass1Script:
-	faceplayer
-	opentext
-	pokemart MARTTYPE_ADVENTURER, MART_GOLDENROD_HARBOR
-	closetext
-	end
+GenericTrainerSwimmermJames:
+	generictrainer SWIMMERM, JAMES, EVENT_BEAT_SWIMMERM_JAMES, SwimmermJamesSeenText, SwimmermJamesBeatenText
 
-GoldenrodHarborMagikarpScript:
-	jumptextfaceplayer GoldenrodHarborMagikarpText
+	text "Can't a Swimmer"
+	line "use a rowboat"
+	cont "sometimes?"
+	done
 
 GoldenrodHarborPokefanmScript:
 	faceplayer
@@ -119,21 +95,20 @@ GoldenrodHarborPokefanmScript:
 	writetext GoldenrodHarborDollVendorText
 .Start:
 	special PlaceMoneyTopRight
-	loadmenudata .MenuData
+	loadmenu .MenuData
 	verticalmenu
 	closewindow
-	if_equal $1, .MagikarpDoll
-	if_equal $2, .TentacoolDoll
-	if_equal $3, .ShellderDoll
-	closetext
-	end
+	ifequal $1, .MagikarpDoll
+	ifequal $2, .MarillDoll
+	ifequal $3, .OctilleryDoll
+	endtext
 
 .MagikarpDoll:
-	checkmoney $0, 1200
-	if_equal $2, .NotEnoughMoney
+	checkmoney $0, 1400
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_MAGIKARP_DOLL
 	iftrue .AlreadyBought
-	takemoney $0, 1200
+	takemoney $0, 1400
 	setevent EVENT_DECO_MAGIKARP_DOLL
 	writetext GoldenrodHarborMagikarpDollText
 	playsound SFX_TRANSACTION
@@ -142,31 +117,31 @@ GoldenrodHarborPokefanmScript:
 	waitbutton
 	jump .Start
 
-.TentacoolDoll:
-	checkmoney $0, 2400
-	if_equal $2, .NotEnoughMoney
-	checkevent EVENT_DECO_TENTACOOL_DOLL
+.MarillDoll:
+	checkmoney $0, 5600
+	ifequal $2, .NotEnoughMoney
+	checkevent EVENT_DECO_MARILL_DOLL
 	iftrue .AlreadyBought
-	takemoney $0, 2400
-	setevent EVENT_DECO_TENTACOOL_DOLL
-	writetext GoldenrodHarborTentacoolDollText
+	takemoney $0, 5600
+	setevent EVENT_DECO_MARILL_DOLL
+	writetext GoldenrodHarborMarillDollText
 	playsound SFX_TRANSACTION
 	waitbutton
-	writetext GoldenrodHarborTentacoolDollSentText
+	writetext GoldenrodHarborMarillDollSentText
 	waitbutton
 	jump .Start
 
-.ShellderDoll:
-	checkmoney $0, 3600
-	if_equal $2, .NotEnoughMoney
-	checkevent EVENT_DECO_SHELLDER_DOLL
+.OctilleryDoll:
+	checkmoney $0, 11200
+	ifequal $2, .NotEnoughMoney
+	checkevent EVENT_DECO_OCTILLERY_DOLL
 	iftrue .AlreadyBought
-	takemoney $0, 3600
-	setevent EVENT_DECO_SHELLDER_DOLL
-	writetext GoldenrodHarborShellderDollText
+	takemoney $0, 11200
+	setevent EVENT_DECO_OCTILLERY_DOLL
+	writetext GoldenrodHarborOctilleryDollText
 	playsound SFX_TRANSACTION
 	waitbutton
-	writetext GoldenrodHarborShellderDollSentText
+	writetext GoldenrodHarborOctilleryDollSentText
 	waitbutton
 	jump .Start
 
@@ -190,9 +165,9 @@ GoldenrodHarborPokefanmScript:
 .MenuData2:
 	db $80 ; flags
 	db 4 ; items
-	db "Magikarp    ¥1200@"
-	db "Tentacool   ¥2400@"
-	db "Shellder    ¥3600@"
+	db "Magikarp    ¥1400@"
+	db "Marill      ¥5600@"
+	db "Octillery  ¥11200@"
 	db "Cancel@"
 
 GoldenrodHarborYoungsterScript:
@@ -201,21 +176,20 @@ GoldenrodHarborYoungsterScript:
 	writetext GoldenrodHarborPlantVendorText
 .Start:
 	special PlaceMoneyTopRight
-	loadmenudata .MenuData
+	loadmenu .MenuData
 	verticalmenu
 	closewindow
-	if_equal $1, .MagnaPlant
-	if_equal $2, .TropicPlant
-	if_equal $3, .JumboPlant
-	closetext
-	end
+	ifequal $1, .MagnaPlant
+	ifequal $2, .TropicPlant
+	ifequal $3, .JumboPlant
+	endtext
 
 .MagnaPlant:
-	checkmoney $0, 5400
-	if_equal $2, .NotEnoughMoney
+	checkmoney $0, 6400
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_PLANT_1
 	iftrue .AlreadyBought
-	takemoney $0, 5400
+	takemoney $0, 6400
 	setevent EVENT_DECO_PLANT_1
 	writetext GoldenrodHarborMagnaPlantText
 	playsound SFX_TRANSACTION
@@ -225,11 +199,11 @@ GoldenrodHarborYoungsterScript:
 	jump .Start
 
 .TropicPlant:
-	checkmoney $0, 8600
-	if_equal $2, .NotEnoughMoney
+	checkmoney $0, 9600
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_PLANT_2
 	iftrue .AlreadyBought
-	takemoney $0, 8600
+	takemoney $0, 9600
 	setevent EVENT_DECO_PLANT_2
 	writetext GoldenrodHarborTropicPlantText
 	playsound SFX_TRANSACTION
@@ -239,11 +213,11 @@ GoldenrodHarborYoungsterScript:
 	jump .Start
 
 .JumboPlant:
-	checkmoney $0, 10800
-	if_equal $2, .NotEnoughMoney
+	checkmoney $0, 12800
+	ifequal $2, .NotEnoughMoney
 	checkevent EVENT_DECO_PLANT_3
 	iftrue .AlreadyBought
-	takemoney $0, 10800
+	takemoney $0, 12800
 	setevent EVENT_DECO_PLANT_3
 	writetext GoldenrodHarborJumboPlantText
 	playsound SFX_TRANSACTION
@@ -272,30 +246,10 @@ GoldenrodHarborYoungsterScript:
 .MenuData2:
 	db $80 ; flags
 	db 4 ; items
-	db "Magna P.    ¥5400@"
-	db "Tropic P.   ¥8600@"
-	db "Jumbo P.   ¥10800@"
+	db "Magna P.    ¥6400@"
+	db "Tropic P.   ¥9600@"
+	db "Jumbo P.   ¥12800@"
 	db "Cancel@"
-
-Jacques:
-	faceplayer
-	opentext
-	trade $6
-	waitbutton
-	closetext
-	end
-
-GoldenrodHarborLass2Script:
-	jumptextfaceplayer GoldenrodHarborLass2Text
-
-GoldenrodHarborSign:
-	jumptext GoldenrodHarborSignText
-
-GoldenrodHarborCrateSign:
-	jumptext GoldenrodHarborCrateSignText
-
-GoldenrodHarborHiddenRevive:
-	dw EVENT_GOLDENROD_HARBOR_HIDDEN_REVIVE, REVIVE
 
 GoldenrodHarborFisherText:
 	text "If you're fishing,"
@@ -355,12 +309,6 @@ FisherPatonBeatenText:
 	line "interesting?"
 	done
 
-FisherPatonAfterText:
-	text "You're working"
-	line "on a #dex?"
-	cont "That's neat!"
-	done
-
 SwimmerfKatieSeenText:
 	text "Swimming in the"
 	line "deep blue sea"
@@ -372,17 +320,6 @@ SwimmerfKatieBeatenText:
 	line "Now I feel blue…"
 	done
 
-SwimmerfKatieAfterText:
-	text "Why is the sea"
-	line "blue?"
-
-	para "I heard it ref-"
-	line "lects the sky…"
-
-	para "But then why is"
-	line "the sky blue?"
-	done
-
 SwimmermJamesSeenText:
 	text "I can swim, but"
 	line "I can also row!"
@@ -391,12 +328,6 @@ SwimmermJamesSeenText:
 SwimmermJamesBeatenText:
 	text "Maybe I can't"
 	line "battle…"
-	done
-
-SwimmermJamesAfterText:
-	text "Can't a Swimmer"
-	line "use a rowboat"
-	cont "sometimes?"
 	done
 
 GoldenrodHarborMagikarpText:
@@ -422,23 +353,23 @@ GoldenrodHarborMagikarpDollSentText:
 	line "was sent home."
 	done
 
-GoldenrodHarborTentacoolDollText:
+GoldenrodHarborMarillDollText:
 	text "<PLAYER> bought"
-	line "Tentacool Doll."
+	line "Marill Doll."
 	done
 
-GoldenrodHarborTentacoolDollSentText:
-	text "Tentacool Doll"
+GoldenrodHarborMarillDollSentText:
+	text "Marill Doll"
 	line "was sent home."
 	done
 
-GoldenrodHarborShellderDollText:
+GoldenrodHarborOctilleryDollText:
 	text "<PLAYER> bought"
-	line "Shellder Doll."
+	line "Octillery Doll."
 	done
 
-GoldenrodHarborShellderDollSentText:
-	text "Shellder Doll"
+GoldenrodHarborOctilleryDollSentText:
+	text "Octillery Doll"
 	line "was sent home."
 	done
 

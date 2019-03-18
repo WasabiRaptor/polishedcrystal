@@ -1,22 +1,19 @@
 WhirlIslandSW_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 5 ; warp events
+	warp_event  5,  7, ROUTE_41, 3
+	warp_event 17,  3, WHIRL_ISLAND_B1F, 5
+	warp_event  3,  3, WHIRL_ISLAND_B1F, 4
+	warp_event  3, 15, WHIRL_ISLAND_NW, 3
+	warp_event 17, 15, WHIRL_ISLAND_B2F, 4
 
-WhirlIslandSW_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $7, $5, 3, ROUTE_41
-	warp_def $3, $11, 5, WHIRL_ISLAND_B1F
-	warp_def $3, $3, 4, WHIRL_ISLAND_B1F
-	warp_def $f, $3, 3, WHIRL_ISLAND_NW
-	warp_def $f, $11, 4, WHIRL_ISLAND_B2F
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ULTRA_BALL, 1, EVENT_WHIRL_ISLAND_SW_ULTRA_BALL
+	db 1 ; object events
+	itemball_event 15,  2, ULTRA_BALL, 1, EVENT_WHIRL_ISLAND_SW_ULTRA_BALL
 

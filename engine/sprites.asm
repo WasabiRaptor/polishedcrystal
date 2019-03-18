@@ -22,7 +22,7 @@ PlaySpriteAnimations: ; 8cf69
 	push bc
 	push af
 
-	ld a, Sprites % $100
+	ld a, wSprites % $100
 	ld [wCurrSpriteOAMAddr], a
 	call DoNextFrameForAllSprites
 
@@ -59,11 +59,11 @@ DoNextFrameForAllSprites: ; 8cf7a
 
 	ld a, [wCurrSpriteOAMAddr]
 	ld l, a
-	ld h, Sprites / $100
+	ld h, wSprites / $100
 
-.loop2 ; Clear (Sprites + [wCurrSpriteOAMAddr] --> SpritesEnd)
+.loop2 ; Clear (wSprites + [wCurrSpriteOAMAddr] --> wSpritesEnd)
 	ld a, l
-	cp SpritesEnd % $100
+	cp wSpritesEnd % $100
 	ret nc
 	xor a
 	ld [hli], a
@@ -96,11 +96,11 @@ DoNextFrameForFirst16Sprites: ; 8cfa8 (23:4fa8)
 
 	ld a, [wCurrSpriteOAMAddr]
 	ld l, a
-	ld h, (Sprites + $40) / $100
+	ld h, (wSprites + $40) / $100
 
-.loop2 ; Clear (Sprites + [wCurrSpriteOAMAddr] --> Sprites + $40)
+.loop2 ; Clear (wSprites + [wCurrSpriteOAMAddr] --> wSprites + $40)
 	ld a, l
-	cp (Sprites + 16 * 4) % $100
+	cp (wSprites + 16 * 4) % $100
 	ret nc
 	xor a
 	ld [hli], a
@@ -147,9 +147,9 @@ InitSpriteAnimStruct:: ; 8cfd6
 	ld e, a
 	ld d, 0
 	ld hl, SpriteAnimSeqData
-rept 3
 	add hl, de
-endr
+	add hl, de
+	add hl, de
 	ld e, l
 	ld d, h
 ; Set hl to the first field (field 0) in the current structure.
@@ -245,7 +245,7 @@ UpdateAnimFrame: ; 8d04c
 	push bc
 	ld a, [wCurrSpriteOAMAddr]
 	ld e, a
-	ld d, Sprites / $100
+	ld d, wSprites / $100
 	ld a, [hli]
 	ld c, a ; number of objects
 .loop
@@ -298,7 +298,7 @@ UpdateAnimFrame: ; 8d04c
 	inc de
 	ld a, e
 	ld [wCurrSpriteOAMAddr], a
-	cp SpritesEnd % $100
+	cp wSpritesEnd % $100
 	jr nc, .reached_the_end
 	dec c
 	jr nz, .loop
@@ -517,135 +517,18 @@ GetFrameOAMPointer: ; 8d1a2
 	ld e, a
 	ld d, 0
 	ld hl, SpriteAnimOAMData
-rept 3
 	add hl, de
-endr
+	add hl, de
+	add hl, de
 	ret
 ; 8d1ac
 
-SpriteAnimSeqData: ; 8d1c4
-	; frameset sequence, tile
-; SPRITE_ANIM_INDEX_PARTY_MON
-	db SPRITE_ANIM_FRAMESET_PARTY_MON, SPRITE_ANIM_SEQ_PARTY_MON, $00
-; SPRITE_ANIM_INDEX_NAMING_SCREEN_CURSOR
-	db SPRITE_ANIM_FRAMESET_TEXT_ENTRY_CURSOR, SPRITE_ANIM_SEQ_NAMING_SCREEN_CURSOR, $05
-; SPRITE_ANIM_INDEX_GAMEFREAK_LOGO
-	db SPRITE_ANIM_FRAMESET_GAMEFREAK_LOGO, SPRITE_ANIM_SEQ_GAMEFREAK_LOGO, $00
-; SPRITE_ANIM_INDEX_SLOTS_GOLEM
-	db SPRITE_ANIM_FRAMESET_SLOTS_GOLEM, SPRITE_ANIM_SEQ_SLOTS_GOLEM, $07
-; SPRITE_ANIM_INDEX_SLOTS_CHANSEY
-	db SPRITE_ANIM_FRAMESET_SLOTS_CHANSEY, SPRITE_ANIM_SEQ_SLOTS_CHANSEY, $07
-; SPRITE_ANIM_INDEX_SLOTS_EGG
-	db SPRITE_ANIM_FRAMESET_SLOTS_EGG, SPRITE_ANIM_SEQ_SLOTS_EGG, $07
-; SPRITE_ANIM_INDEX_COMPOSE_MAIL_CURSOR
-	db SPRITE_ANIM_FRAMESET_TEXT_ENTRY_CURSOR, SPRITE_ANIM_SEQ_COMPOSE_MAIL_CURSOR, $05
-; SPRITE_ANIM_INDEX_RED_WALK
-	db SPRITE_ANIM_FRAMESET_RED_WALK, SPRITE_ANIM_SEQ_NULL, $00
-;; SPRITE_ANIM_INDEX_DUMMY_GAME
-;	db SPRITE_ANIM_FRAMESET_STILL_CURSOR, SPRITE_ANIM_SEQ_DUMMY_GAME_CURSOR, $08
-; SPRITE_ANIM_INDEX_POKEGEAR_MODE_ARROW
-	db SPRITE_ANIM_FRAMESET_STILL_CURSOR, SPRITE_ANIM_SEQ_POKEGEAR_MODE_ARROW, $08
-; SPRITE_ANIM_INDEX_TRADE_POKE_BALL
-	db SPRITE_ANIM_FRAMESET_TRADE_POKE_BALL, SPRITE_ANIM_SEQ_TRADE_POKE_BALL, $00
-; SPRITE_ANIM_INDEX_TRADE_POOF
-	db SPRITE_ANIM_FRAMESET_TRADE_POOF, SPRITE_ANIM_SEQ_NULL, $00
-; SPRITE_ANIM_INDEX_TRADE_TUBE_BULGE
-	db SPRITE_ANIM_FRAMESET_TRADE_TUBE_BULGE, SPRITE_ANIM_SEQ_TRADE_TUBE_BULGE, $00
-; SPRITE_ANIM_INDEX_TRADEMON_ICON
-	db SPRITE_ANIM_FRAMESET_TRADEMON_ICON, SPRITE_ANIM_SEQ_TRADEMON_IN_TUBE, $00
-; SPRITE_ANIM_INDEX_TRADE_BUBBLE
-	db SPRITE_ANIM_FRAMESET_TRADEMON_BUBBLE, SPRITE_ANIM_SEQ_TRADEMON_IN_TUBE, $00
-; SPRITE_ANIM_INDEX_EVOLUTION_BALL_OF_LIGHT
-	db SPRITE_ANIM_FRAMESET_EVOLUTION_BALL_OF_LIGHT, SPRITE_ANIM_SEQ_REVEAL_NEW_MON, $00
-; SPRITE_ANIM_INDEX_RADIO_TUNING_KNOB
-	db SPRITE_ANIM_FRAMESET_RADIO_TUNING_KNOB, SPRITE_ANIM_SEQ_RADIO_TUNING_KNOB, $00
-; SPRITE_ANIM_INDEX_MAGNET_TRAIN_RED
-	db SPRITE_ANIM_FRAMESET_MAGNET_TRAIN_RED, SPRITE_ANIM_SEQ_NULL, $00
-; SPRITE_ANIM_INDEX_LEAF
-	db SPRITE_ANIM_FRAMESET_LEAF, SPRITE_ANIM_SEQ_CUT_GRASS_LEAVES, $00
-; SPRITE_ANIM_INDEX_CUT_TREE
-	db SPRITE_ANIM_FRAMESET_CUT_TREE, SPRITE_ANIM_SEQ_NULL, $00
-; SPRITE_ANIM_INDEX_FLY_LEAF
-	db SPRITE_ANIM_FRAMESET_LEAF, SPRITE_ANIM_SEQ_FLY_LEAF, $00
-; SPRITE_ANIM_INDEX_EGG_CRACK
-	db SPRITE_ANIM_FRAMESET_EGG_CRACK, SPRITE_ANIM_SEQ_NULL, $00
-; SPRITE_ANIM_INDEX_HEADBUTT
-	db SPRITE_ANIM_FRAMESET_HEADBUTT, SPRITE_ANIM_SEQ_NULL, $00
-; SPRITE_ANIM_INDEX_EGG_HATCH
-	db SPRITE_ANIM_FRAMESET_EGG_HATCH, SPRITE_ANIM_SEQ_REVEAL_NEW_MON, $00
-; SPRITE_ANIM_INDEX_BLUE_WALK
-	db SPRITE_ANIM_FRAMESET_BLUE_WALK, SPRITE_ANIM_SEQ_NULL, $00
-; SPRITE_ANIM_INDEX_MAGNET_TRAIN_BLUE
-	db SPRITE_ANIM_FRAMESET_MAGNET_TRAIN_BLUE, SPRITE_ANIM_SEQ_NULL, $00
-; SPRITE_ANIM_INDEX_INTRO_SUICUNE
-	db SPRITE_ANIM_FRAMESET_INTRO_SUICUNE, SPRITE_ANIM_SEQ_INTRO_SUICUNE, $00
-; SPRITE_ANIM_INDEX_INTRO_PICHU
-	db SPRITE_ANIM_FRAMESET_INTRO_PICHU, SPRITE_ANIM_SEQ_PICHU_WOOPER, $00
-; SPRITE_ANIM_INDEX_INTRO_WOOPER
-	db SPRITE_ANIM_FRAMESET_INTRO_WOOPER, SPRITE_ANIM_SEQ_PICHU_WOOPER, $00
-; SPRITE_ANIM_INDEX_INTRO_UNOWN
-	db SPRITE_ANIM_FRAMESET_INTRO_UNOWN_1, SPRITE_ANIM_SEQ_UNOWN, $00
-; SPRITE_ANIM_INDEX_INTRO_UNOWN_F
-	db SPRITE_ANIM_FRAMESET_INTRO_UNOWN_F, SPRITE_ANIM_SEQ_UNOWN_F, $00
-; SPRITE_ANIM_INDEX_INTRO_SUICUNE_AWAY
-	db SPRITE_ANIM_FRAMESET_INTRO_SUICUNE_AWAY, SPRITE_ANIM_SEQ_SUICUNE_AWAY, $00
-; SPRITE_ANIM_INDEX_CELEBI
-	db SPRITE_ANIM_FRAMESET_CELEBI_LEFT, SPRITE_ANIM_SEQ_NULL, $00
-; 8d24b
+INCLUDE "data/sprite_anims/sequences.asm"
 
-INCLUDE "engine/sprite_anims.asm" ; DoAnimFrame
+INCLUDE "engine/sprite_anims.asm"
 
-INCLUDE "data/sprite_engine.asm"
-; SpriteAnimFrameData
-; SpriteAnimOAMData
-
-Sprites_Cosine: ; 8e72a
-	add $10
-Sprites_Sine: ; 8e72c
-; floor(d * sin(a * pi/32))
-	and $3f
-	cp $20
-	jr nc, .negative
-	call .ApplySineWave
-	ld a, h
-	ret
-
-.negative
-	and $1f
-	call .ApplySineWave
-	ld a, h
-	cpl
-	inc a
-	ret
-; 8e741
-
-.ApplySineWave: ; 8e741
-	ld e, a
-	ld a, d
-	ld d, 0
-	ld hl, .sinewave
-	add hl, de
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld hl, 0
-.multiply
-	srl a
-	jr nc, .even
-	add hl, de
-
-.even
-	sla e
-	rl d
-	and a
-	jr nz, .multiply
-	ret
-; 8e75d
-
-.sinewave ; 8e75d
-	sine_wave $100
-
+INCLUDE "data/sprite_anims/framesets.asm"
+INCLUDE "data/sprite_anims/oam.asm"
 
 AnimateEndOfExpBar: ; 8e79d
 	ld de, EndOfExpBarGFX
@@ -667,7 +550,7 @@ AnimateEndOfExpBar: ; 8e79d
 ; 8e7c6
 
 .AnimateFrame: ; 8e7c6
-	ld hl, Sprites
+	ld hl, wSprites
 	ld c, $8
 .anim_loop
 	ld a, c
@@ -683,7 +566,7 @@ AnimateEndOfExpBar: ; 8e79d
 
 	push de
 	push hl
-	call Sprites_Sine
+	call Sine
 	pop hl
 	pop de
 	add 13 * 8
@@ -692,7 +575,7 @@ AnimateEndOfExpBar: ; 8e79d
 	pop af
 	push de
 	push hl
-	call Sprites_Cosine
+	call Cosine
 	pop hl
 	pop de
 	add 19 * 8 + 4

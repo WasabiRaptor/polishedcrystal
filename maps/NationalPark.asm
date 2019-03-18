@@ -1,50 +1,39 @@
 NationalPark_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event 35, 18, ROUTE_36_NATIONAL_PARK_GATE, 1
+	warp_event 35, 19, ROUTE_36_NATIONAL_PARK_GATE, 2
+	warp_event 12, 47, ROUTE_35_NATIONAL_PARK_GATE, 1
+	warp_event 13, 47, ROUTE_35_NATIONAL_PARK_GATE, 2
 
-NationalPark_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 4
-	warp_def $12, $23, 1, ROUTE_36_NATIONAL_PARK_GATE
-	warp_def $13, $23, 2, ROUTE_36_NATIONAL_PARK_GATE
-	warp_def $2f, $c, 1, ROUTE_35_NATIONAL_PARK_GATE
-	warp_def $2f, $d, 2, ROUTE_35_NATIONAL_PARK_GATE
+	db 4 ; bg events
+	bg_event 16, 44, SIGNPOST_JUMPTEXT, UnknownText_0x5c750
+	bg_event 29, 31, SIGNPOST_JUMPTEXT, UnknownText_0x5c771
+	bg_event 14,  4, SIGNPOST_JUMPTEXT, UnknownText_0x5c7c6
+	bg_event  8, 47, SIGNPOST_ITEM + FULL_HEAL, EVENT_NATIONAL_PARK_HIDDEN_FULL_HEAL
 
-.XYTriggers: db 0
-
-.Signposts: db 4
-	signpost 44, 16, SIGNPOST_READ, MapNationalParkSignpost0Script
-	signpost 31, 29, SIGNPOST_READ, MapNationalParkSignpost1Script
-	signpost 47, 8, SIGNPOST_ITEM, NationalParkHiddenFullHeal
-	signpost 4, 14, SIGNPOST_READ, MapNationalParkSignpost3Script
-
-.PersonEvents: db 15
-	person_event SPRITE_GAMEBOY_KID, 6, 28, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GameboyKidScript_0x5c037, -1
-	person_event SPRITE_LASS, 24, 17, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, LassScript_0x5c002, -1
-	person_event SPRITE_POKEFAN_F, 4, 16, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, PokefanFScript_0x5c005, -1
-	person_event SPRITE_TEACHER, 40, 29, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, TeacherScript_0x5c008, -1
-	person_event SPRITE_TWIN, 41, 13, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 0, TrainerSchoolgirlEliza, -1
-	person_event SPRITE_YOUNGSTER, 41, 12, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 0, TrainerSchoolboyJohnny, -1
-	person_event SPRITE_TEACHER, 41, 19, SPRITEMOVEDATA_WANDER, 2, 1, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TeacherScript_0x5c029, -1
-	person_event SPRITE_PERSIAN, 40, 28, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, NationalParkPersian, -1
-	person_event SPRITE_YOUNGSTER, 23, 29, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerSchoolboyJack1, -1
-	person_event SPRITE_POKEFAN_F, 29, 20, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerPokefanfBeverly1, -1
-	person_event SPRITE_POKEFAN_M, 9, 18, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerPokefanmWilliam, -1
-	person_event SPRITE_LASS, 14, 10, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerLassKrise, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 12, 37, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, SHINY_STONE, 1, EVENT_NATIONAL_PARK_SHINY_STONE
-	person_event SPRITE_BALL_CUT_FRUIT, 43, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TMHMBALL, 0, TM_DIG, EVENT_NATIONAL_PARK_TM_DIG
-	person_event SPRITE_BUG_MANIAC, 13, 28, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerBugManiacLou, -1
-
-const_value set 2
-	const NATIONALPARK_GAMEBOY_KID
-
-LassScript_0x5c002:
-	jumptextfaceplayer UnknownText_0x5c1d3
-
-PokefanFScript_0x5c005:
-	jumptextfaceplayer UnknownText_0x5c22e
+	db 16 ; object events
+	object_event 17, 24, SPRITE_LASS, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5c1d3, -1
+	object_event 16,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5c22e, -1
+	object_event 29, 40, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, TeacherScript_0x5c008, -1
+	object_event 28,  6, SPRITE_GAMEBOY_KID, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, GameboyKidScript_0x5c037, -1
+	object_event 13, 41, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 0, GenericTrainerSchoolgirlEliza, -1
+	object_event 12, 41, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 0, GenericTrainerSchoolboyJohnny, -1
+	object_event 19, 41, SPRITE_TEACHER, SPRITEMOVEDATA_WANDER, 2, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x5c3bc, -1
+	object_event 28, 40, SPRITE_PERSIAN, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, PERSONTYPE_POKEMON, PERSIAN, NationalParkPersianText, -1
+	object_event 29, 23, SPRITE_YOUNGSTER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerSchoolboyJack1, -1
+	object_event 20, 29, SPRITE_POKEFAN_F, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_TRAINER, 2, TrainerPokefanfBeverly1, -1
+	object_event 18,  9, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerPokefanmWilliam, -1
+	object_event 10, 14, SPRITE_LASS, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerLassKrise, -1
+	object_event 28, 13, SPRITE_BUG_MANIAC, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBugManiacLou, -1
+	object_event  4, 19, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, OfficermKeithScript, -1
+	itemball_event 37, 12, SHINY_STONE, 1, EVENT_NATIONAL_PARK_SHINY_STONE
+	tmhmball_event  3, 43, TM_DIG, EVENT_NATIONAL_PARK_TM_DIG
 
 TeacherScript_0x5c008:
 	faceplayer
@@ -60,69 +49,63 @@ UnknownScript_0x5c01d:
 	writetext UnknownText_0x5c30d
 	waitbutton
 UnknownScript_0x5c021:
-	closetext
-	end
+	endtext
 
-TrainerBugManiacLou:
-	trainer EVENT_BEAT_BUG_MANIAC_LOU, BUG_MANIAC, LOU, BugManiacLouSeenText, BugManiacLouBeatenText, 0, BugManiacLouScript
-
-BugManiacLouScript:
-	end_if_just_battled
-	opentext
-	writetext BugManiacLouAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerSchoolgirlEliza:
-	trainer EVENT_BEAT_SCHOOLGIRL_ELIZA, SCHOOLGIRL, ELIZA, SchoolgirlElizaSeenText, SchoolgirlElizaBeatenText, 0, SchoolgirlElizaScript
-
-SchoolgirlElizaScript:
-	end_if_just_battled
-	opentext
-	writetext SchoolgirlElizaAfterText
-	waitbutton
-	closetext
-	end
-
-TrainerSchoolboyJohnny:
-	trainer EVENT_BEAT_SCHOOLBOY_JOHNNY, SCHOOLBOY, JOHNNY, SchoolboyJohnnySeenText, SchoolboyJohnnyBeatenText, 0, SchoolboyJohnnyScript
-
-SchoolboyJohnnyScript:
-	end_if_just_battled
-	opentext
-	writetext SchoolboyJohnnyAfterText
-	waitbutton
-	closetext
-	end
-
-TeacherScript_0x5c029:
-	jumptextfaceplayer UnknownText_0x5c3bc
-
-NationalParkPersian:
+OfficermKeithScript:
+	checktime 1 << NITE
+	iffalse_jumptextfaceplayer OfficermKeithDaytimeText
+	checkevent EVENT_BEAT_OFFICERM_KEITH
+	iftrue_jumptextfaceplayer OfficermKeithAfterText
 	faceplayer
 	opentext
-	writetext NationalParkPersianText
-	cry PERSIAN
+	special SaveMusic
+	playmusic MUSIC_OFFICER_ENCOUNTER
+	writetext OfficermKeithSeenText
 	waitbutton
 	closetext
-	end
+	winlosstext OfficermKeithWinText, 0
+	loadtrainer OFFICERM, KEITH
+	startbattle
+	reloadmapafterbattle
+	setevent EVENT_BEAT_OFFICERM_KEITH
+	endtext
+
+GenericTrainerBugManiacLou:
+	generictrainer BUG_MANIAC, LOU, EVENT_BEAT_BUG_MANIAC_LOU, BugManiacLouSeenText, BugManiacLouBeatenText
+
+	text "I used to be just"
+	line "a Bug Catcher,"
+
+	para "but I evolved into"
+	line "a Bug Maniac!"
+	done
+
+GenericTrainerSchoolgirlEliza:
+	generictrainer SCHOOLGIRL, ELIZA, EVENT_BEAT_SCHOOLGIRL_ELIZA, SchoolgirlElizaSeenText, SchoolgirlElizaBeatenText
+
+	text "I don't care!"
+	line "I still love"
+	cont "Oddish."
+	done
+
+GenericTrainerSchoolboyJohnny:
+	generictrainer SCHOOLBOY, JOHNNY, EVENT_BEAT_SCHOOLBOY_JOHNNY, SchoolboyJohnnySeenText, SchoolboyJohnnyBeatenText
+
+	text "Yeah, well, I"
+	line "still prefer"
+	cont "Bellsprout."
+	done
 
 GameboyKidScript_0x5c037:
-	faceplayer
-	opentext
-	writetext UnknownText_0x5c42a
-	waitbutton
-	closetext
-	spriteface NATIONALPARK_GAMEBOY_KID, DOWN
+	showtextfaceplayer UnknownText_0x5c42a
+	turnobject LAST_TALKED, DOWN
 	end
 
 TrainerSchoolboyJack1:
-	trainer EVENT_BEAT_SCHOOLBOY_JACK, SCHOOLBOY, JACK1, SchoolboyJack1SeenText, SchoolboyJack1BeatenText, 0, SchoolboyJack1Script
+	trainer SCHOOLBOY, JACK1, EVENT_BEAT_SCHOOLBOY_JACK, SchoolboyJack1SeenText, SchoolboyJack1BeatenText, 0, SchoolboyJack1Script
 
 SchoolboyJack1Script:
 	writecode VAR_CALLERID, PHONE_SCHOOLBOY_JACK
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_JACK
 	iftrue UnknownScript_0x5c088
@@ -140,8 +123,8 @@ UnknownScript_0x5c071:
 	scall UnknownScript_0x5c100
 UnknownScript_0x5c074:
 	askforphonenumber PHONE_SCHOOLBOY_JACK
-	if_equal $1, UnknownScript_0x5c110
-	if_equal $2, UnknownScript_0x5c10c
+	ifequal $1, UnknownScript_0x5c110
+	ifequal $2, UnknownScript_0x5c10c
 	trainertotext SCHOOLBOY, JACK1, $0
 	scall UnknownScript_0x5c104
 	jump UnknownScript_0x5c108
@@ -150,11 +133,11 @@ UnknownScript_0x5c088:
 	scall UnknownScript_0x5c114
 	winlosstext SchoolboyJack1BeatenText, 0
 	copybytetovar wJackFightCount
-	if_equal 4, .Fight4
-	if_equal 3, .Fight3
-	if_equal 2, .Fight2
-	if_equal 1, .Fight1
-	if_equal 0, .LoadFight0
+	ifequal 4, .Fight4
+	ifequal 3, .Fight3
+	ifequal 2, .Fight2
+	ifequal 1, .Fight1
+	ifequal 0, .LoadFight0
 .Fight4:
 	checkevent EVENT_RESTORED_POWER_TO_KANTO
 	iftrue .LoadFight4
@@ -208,49 +191,40 @@ UnknownScript_0x5c088:
 
 UnknownScript_0x5c0fc:
 	jumpstd asknumber1m
-	end
 
 UnknownScript_0x5c100:
 	jumpstd asknumber2m
-	end
 
 UnknownScript_0x5c104:
 	jumpstd registerednumberm
-	end
 
 UnknownScript_0x5c108:
 	jumpstd numberacceptedm
-	end
 
 UnknownScript_0x5c10c:
 	jumpstd numberdeclinedm
-	end
 
 UnknownScript_0x5c110:
 	jumpstd phonefullm
-	end
 
 UnknownScript_0x5c114:
 	jumpstd rematchm
-	end
 
-TrainerPokefanmWilliam:
-	trainer EVENT_BEAT_POKEFANM_WILLIAM, POKEFANM, WILLIAM, PokefanmWilliamSeenText, PokefanmWilliamBeatenText, 0, PokefanmWilliamScript
+GenericTrainerPokefanmWilliam:
+	generictrainer POKEFANM, WILLIAM, EVENT_BEAT_POKEFANM_WILLIAM, PokefanmWilliamSeenText, PokefanmWilliamBeatenText
 
-PokefanmWilliamScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5c645
-	waitbutton
-	closetext
-	end
+	text "I lost the battle,"
+	line "but my #mon win"
+
+	para "the prize for"
+	line "being most lovely."
+	done
 
 TrainerPokefanfBeverly1:
-	trainer EVENT_BEAT_POKEFANF_BEVERLY, POKEFANF, BEVERLY1, PokefanfBeverly1SeenText, PokefanfBeverly1BeatenText, 0, PokefanfBeverly1Script
+	trainer POKEFANF, BEVERLY1, EVENT_BEAT_POKEFANF_BEVERLY, PokefanfBeverly1SeenText, PokefanfBeverly1BeatenText, 0, PokefanfBeverly1Script
 
 PokefanfBeverly1Script:
 	writecode VAR_CALLERID, PHONE_POKEFAN_BEVERLY
-	end_if_just_battled
 	opentext
 	checkflag ENGINE_BEVERLY_HAS_NUGGET
 	iftrue UnknownScript_0x5c177
@@ -270,8 +244,8 @@ UnknownScript_0x5c160:
 	scall UnknownScript_0x5c193
 UnknownScript_0x5c163:
 	askforphonenumber PHONE_POKEFAN_BEVERLY
-	if_equal $1, UnknownScript_0x5c1a3
-	if_equal $2, UnknownScript_0x5c19f
+	ifequal $1, UnknownScript_0x5c1a3
+	ifequal $2, UnknownScript_0x5c19f
 	trainertotext POKEFANF, BEVERLY1, $0
 	scall UnknownScript_0x5c197
 	jump UnknownScript_0x5c19b
@@ -287,66 +261,39 @@ UnknownScript_0x5c186:
 	jump UnknownScript_0x5c1ab
 
 UnknownScript_0x5c189:
-	writetext UnknownText_0x5c68a
-	waitbutton
-	closetext
-	end
+	jumpopenedtext UnknownText_0x5c68a
 
 UnknownScript_0x5c18f:
 	jumpstd asknumber1f
-	end
 
 UnknownScript_0x5c193:
 	jumpstd asknumber2f
-	end
 
 UnknownScript_0x5c197:
 	jumpstd registerednumberf
-	end
 
 UnknownScript_0x5c19b:
 	jumpstd numberacceptedf
-	end
 
 UnknownScript_0x5c19f:
 	jumpstd numberdeclinedf
-	end
 
 UnknownScript_0x5c1a3:
 	jumpstd phonefullf
-	end
 
 UnknownScript_0x5c1a7:
 	jumpstd giftf
-	end
 
 UnknownScript_0x5c1ab:
 	jumpstd packfullf
-	end
 
-TrainerLassKrise:
-	trainer EVENT_BEAT_LASS_KRISE, LASS, KRISE, LassKriseSeenText, LassKriseBeatenText, 0, LassKriseScript
+GenericTrainerLassKrise:
+	generictrainer LASS, KRISE, EVENT_BEAT_LASS_KRISE, LassKriseSeenText, LassKriseBeatenText
 
-LassKriseScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x5c71d
-	waitbutton
-	closetext
-	end
-
-MapNationalParkSignpost0Script:
-	jumptext UnknownText_0x5c750
-
-MapNationalParkSignpost1Script:
-	jumptext UnknownText_0x5c771
-
-MapNationalParkSignpost3Script:
-	jumptext UnknownText_0x5c7c6
-
-NationalParkHiddenFullHeal:
-	dwb EVENT_NATIONAL_PARK_HIDDEN_FULL_HEAL, FULL_HEAL
-
+	text "I thought you were"
+	line "staring at me"
+	cont "because I'm cute!"
+	done
 
 UnknownText_0x5c1d3:
 	text "Look! Check out my"
@@ -402,12 +349,6 @@ SchoolgirlElizaBeatenText:
 	text "My poor Oddish…"
 	done
 
-SchoolgirlElizaAfterText:
-	text "I don't care!"
-	line "I still love"
-	cont "Oddish."
-	done
-
 SchoolboyJohnnySeenText:
 	text "Bellsprout is just"
 	line "the coolest!"
@@ -417,12 +358,6 @@ SchoolboyJohnnySeenText:
 
 SchoolboyJohnnyBeatenText:
 	text "Bellsprout, no…"
-	done
-
-SchoolboyJohnnyAfterText:
-	text "Yeah, well, I"
-	line "still prefer"
-	cont "Bellsprout."
 	done
 
 UnknownText_0x5c3bc:
@@ -471,7 +406,7 @@ UnknownText_0x5c4f3:
 
 	para "For example…"
 
-	para "There are 70 kinds"
+	para "There are 75 kinds" ; NUM_TMS
 	line "of TMs."
 
 	para "Traded #mon"
@@ -511,14 +446,6 @@ PokefanmWilliamBeatenText:
 	text "M-my #mon!"
 	done
 
-UnknownText_0x5c645:
-	text "I lost the battle,"
-	line "but my #mon win"
-
-	para "the prize for"
-	line "being most lovely."
-	done
-
 UnknownText_0x5c68a:
 	text "My friend keeps a"
 	line "Marill!"
@@ -541,12 +468,6 @@ LassKriseBeatenText:
 	text "…Hmmm…"
 	done
 
-UnknownText_0x5c71d:
-	text "I thought you were"
-	line "staring at me"
-	cont "because I'm cute!"
-	done
-
 BugManiacLouSeenText:
 	text "Nobody can beat"
 	line "my passion for"
@@ -557,12 +478,35 @@ BugManiacLouBeatenText:
 	text "How can this be?!"
 	done
 
-BugManiacLouAfterText:
-	text "I used to be just"
-	line "a Bug Catcher,"
+OfficermKeithSeenText:
+	text "Halt! What are"
+	line "you doing out"
+	cont "this late?"
+	done
 
-	para "but I evolved into"
-	line "a Bug Maniac!"
+OfficermKeithWinText:
+	text "You know how to"
+	line "defend yourself!"
+	done
+
+OfficermKeithAfterText:
+	text "The park stays"
+	line "open at night,"
+
+	para "because Officers"
+	line "like me keep it"
+	cont "safe!"
+	done
+
+OfficermKeithDaytimeText:
+	text "Enjoying the"
+	line "park, are you?"
+
+	para "Always take a"
+	line "#mon with you"
+
+	para "if you go in the"
+	line "tall grass!"
 	done
 
 UnknownText_0x5c750:
@@ -584,7 +528,7 @@ UnknownText_0x5c771:
 UnknownText_0x5c7c6:
 	text "Trainer Tips"
 
-	para "Pokemon become"
+	para "#mon become"
 	line "happier from"
 
 	para "haircuts, bless-"

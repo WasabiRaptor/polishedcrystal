@@ -1,39 +1,35 @@
 BattleTowerBattleRoom_MapScriptHeader:
+	db 1 ; scene scripts
+	scene_script BattleTowerBattleRoomEnterBattleRoom
 
-.MapTriggers: db 1
-	dw BattleTowerBattleRoomEnterBattleRoom
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  3,  7, BATTLE_TOWER_HALLWAY, 4
+	warp_event  4,  7, BATTLE_TOWER_HALLWAY, 4
 
-BattleTowerBattleRoom_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $3, 4, BATTLE_TOWER_HALLWAY
-	warp_def $7, $4, 4, BATTLE_TOWER_HALLWAY
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  4,  0, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_BATTLE_TOWER_BATTLE_ROOM_YOUNGSTER
+	object_event  2,  6, SPRITE_RECEPTIONIST, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_YOUNGSTER, 0, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_BATTLE_TOWER_BATTLE_ROOM_YOUNGSTER
-	person_event SPRITE_RECEPTIONIST, 6, 2, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const BATTLETOWERBATTLEROOM_OPPONENT
 	const BATTLETOWERBATTLEROOM_RECEPTIONIST
 
 BattleTowerBattleRoomEnterBattleRoom:
 	disappear BATTLETOWERBATTLEROOM_OPPONENT
 	priorityjump Script_BattleRoom
-	dotrigger $1
+	setscene $1
 	end
 
 Script_BattleRoom:
 	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerWalksIn
 ; beat all 7 opponents in a row
 Script_BattleRoomLoop:
-	writebyte BATTLETOWERBATTLEROOM_OPPONENT
 	special Special_BattleTower_LoadOpponentTrainerAndPokemonsWithOTSprite
 	appear BATTLETOWERBATTLEROOM_OPPONENT
 	warpsound
@@ -46,18 +42,15 @@ Script_BattleRoomLoop:
 	special Special_BattleTower_Battle ; calls predef startbattle
 	special FadeOutPalettes
 	reloadmap
-	if_not_equal $0, Script_FailedBattleTowerChallenge
+	ifnotequal $0, Script_FailedBattleTowerChallenge
 	copybytetovar wNrOfBeatenBattleTowerTrainers ; wcf64
-	if_equal BATTLETOWER_NROFTRAINERS, Script_BeatenAllTrainers
+	ifequal BATTLETOWER_NROFTRAINERS, Script_BeatenAllTrainers
 	applymovement BATTLETOWERBATTLEROOM_OPPONENT, MovementData_BattleTowerBattleRoomOpponentWalksOut
 	warpsound
 	disappear BATTLETOWERBATTLEROOM_OPPONENT
 	applymovement BATTLETOWERBATTLEROOM_RECEPTIONIST, MovementData_BattleTowerBattleRoomReceptionistWalksToPlayer
-	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerTurnsToFaceReceptionist
-	opentext
-	writetext Text_YourPokemonWillBeHealedToFullHealth
-	waitbutton
-	closetext
+	applyonemovement PLAYER, turn_head_down
+	showtext Text_YourPokemonWillBeHealedToFullHealth
 	special SaveMusic
 	playmusic MUSIC_HEAL
 	special FadeOutPalettes
@@ -67,7 +60,7 @@ Script_BattleRoomLoop:
 	special RestoreMusic
 	opentext
 	copybytetovar wNrOfBeatenBattleTowerTrainers
-	if_equal BATTLETOWER_NROFTRAINERS - 1, .WarnAboutTycoon
+	ifequal BATTLETOWER_NROFTRAINERS - 1, .WarnAboutTycoon
 	writetext Text_NextUpOpponentNo
 	jump .ShownText
 .WarnAboutTycoon
@@ -77,7 +70,7 @@ Script_BattleRoomLoop:
 	iffalse Script_DontBattleNextOpponent
 Script_ContinueAndBattleNextOpponent:
 	closetext
-	applymovement PLAYER, MovementData_BattleTowerBattleRoomPlayerTurnsToFaceNextOpponent
+	applyonemovement PLAYER, turn_head_right
 	applymovement BATTLETOWERBATTLEROOM_RECEPTIONIST, MovementData_BattleTowerBattleRoomReceptionistWalksAway
 	jump Script_BattleRoomLoop
 
@@ -101,27 +94,23 @@ Script_DontSaveAndEndTheSession:
 	special Special_BattleTower_SetChallengeState
 	closetext
 	special FadeOutPalettes
-	warpfacing UP, BATTLE_TOWER_1F, $a, $8
-	opentext
-	jump Script_BattleTowerHopeToServeYouAgain
+	warpfacing UP, BATTLE_TOWER_1F, 10, 8
+	jumptext Text_WeHopeToServeYouAgain
 
 Script_FailedBattleTowerChallenge:
 	pause 60
 	special Special_BattleTower_Fade
-	warpfacing UP, BATTLE_TOWER_1F, $a, $8
+	warpfacing UP, BATTLE_TOWER_1F, 10, 8
 	writebyte BATTLETOWER_NO_CHALLENGE
 	special Special_BattleTower_SetChallengeState
-	opentext
-	writetext Text_ThanksForVisiting
-	waitbutton
-	closetext
+	showtext Text_ThanksForVisiting
 	end
 
 Script_BeatenAllTrainers:
 	pause 60
 	setevent EVENT_BEAT_PALMER
 	special Special_BattleTower_Fade
-	warpfacing UP, BATTLE_TOWER_1F, $a, $8
+	warpfacing UP, BATTLE_TOWER_1F, 10, 8
 Script_BeatenAllTrainers2:
 	opentext
 	writetext Text_CongratulationsYouveBeatenAllTheTrainers
@@ -159,12 +148,7 @@ MovementData_BattleTowerBattleRoomReceptionistWalksAway:
 	slow_step_down
 	slow_step_down
 	slow_step_left
-MovementData_BattleTowerBattleRoomPlayerTurnsToFaceNextOpponent:
 	turn_head_right
-	step_end
-
-MovementData_BattleTowerBattleRoomPlayerTurnsToFaceReceptionist:
-	turn_head_down
 	step_end
 
 Text_YourPokemonWillBeHealedToFullHealth:
@@ -176,7 +160,7 @@ Text_YourPokemonWillBeHealedToFullHealth:
 Text_NextUpOpponentNo:
 	text "Next up, opponent"
 	line "no.@"
-	text_from_ram StringBuffer3
+	text_from_ram wStringBuffer3
 	text ". Ready?"
 	done
 

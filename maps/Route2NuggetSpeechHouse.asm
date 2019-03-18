@@ -1,40 +1,42 @@
 Route2NuggetSpeechHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, ROUTE_2_NORTH, 1
+	warp_event  3,  7, ROUTE_2_NORTH, 1
 
-Route2NuggetSpeechHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 1, ROUTE_2_NORTH
-	warp_def $7, $3, 1, ROUTE_2_NORTH
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  1,  4, SPRITE_FISHER, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, Route2NuggetSpeechHouseFisherScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_FISHER, 4, 1, SPRITEMOVEDATA_WALK_UP_DOWN, 2, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, FisherScript_0x9b847, -1
-
-FisherScript_0x9b847:
+Route2NuggetSpeechHouseFisherScript:
+	checkevent EVENT_GOT_NUGGET_FROM_GUY
+	iftrue_jumptextfaceplayer .Text2
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_NUGGET_FROM_GUY
-	iftrue .GotItem
-	writetext UnknownText_0x9b865
+	writetext .Text1
 	buttonsound
 	verbosegiveitem NUGGET
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_NUGGET_FROM_GUY
-.GotItem:
-	writetext UnknownText_0x9b8e5
-	waitbutton
-.Done:
-	closetext
-	end
+	thisopenedtext
 
-UnknownText_0x9b865:
+.Text2:
+	text "That's a Nugget."
+
+	para "I can't give you"
+	line "any nuggets of"
+
+	para "wisdom, so that'll"
+	line "have to do!"
+	done
+
+.Text1:
 	text "Hi! Wow, I'm glad"
 	line "to see you."
 
@@ -45,14 +47,4 @@ UnknownText_0x9b865:
 	para "I'm super-happy!"
 	line "Let me give you a"
 	cont "little present."
-	done
-
-UnknownText_0x9b8e5:
-	text "That's a Nugget."
-
-	para "I can't give you"
-	line "any nuggets of"
-
-	para "wisdom, so that'll"
-	line "have to do!"
 	done

@@ -1,24 +1,21 @@
 SeagallopFerryVermilionGate_MapScriptHeader:
+	db 2 ; scene scripts
+	scene_script SeagallopFerryVermilionGateTrigger0
+	scene_script SeagallopFerryVermilionGateTrigger1
 
-.MapTriggers: db 2
-	dw SeagallopFerryVermilionGateTrigger0
-	dw SeagallopFerryVermilionGateTrigger1
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event  6,  0, VERMILION_CITY, 11
 
-SeagallopFerryVermilionGate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $0, $6, 11, VERMILION_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 1 ; object events
+	object_event  6,  4, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SeagallopFerryVermilionGateSailorScript, EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
 
-.Signposts: db 0
-
-.PersonEvents: db 1
-	person_event SPRITE_SAILOR, 4, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SeagallopFerryVermilionGateSailorScript, EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
-
-const_value set 2
+	const_def 1 ; object constants
 	const SEAGALLOPFERRYVERMILIONGATE_SAILOR
 
 SeagallopFerryVermilionGateTrigger1:
@@ -29,12 +26,9 @@ SeagallopFerryVermilionGateTrigger0:
 SeagallopFerryVermilionGate_PlayerArrives:
 	applymovement SEAGALLOPFERRYVERMILIONGATE_SAILOR, SeagallopFerryVermilionGateSailorArrive1MovementData
 	applymovement PLAYER, SeagallopFerryVermilionGatePlayerArriveMovementData
-	opentext
-	writetext SeagallopFerryVermilionCityRefusedText
-	waitbutton
-	closetext
+	showtext SeagallopFerryVermilionCityRefusedText
 	applymovement SEAGALLOPFERRYVERMILIONGATE_SAILOR, SeagallopFerryVermilionGateSailorArrive2MovementData
-	dotrigger $0
+	setscene $0
 	end
 
 SeagallopFerryVermilionGateSailorScript:
@@ -55,10 +49,7 @@ SeagallopFerryVermilionGateSailorScript:
 	iftrue .have_mysticticket_no_orangeticket
 	checkitem OLD_SEA_MAP
 	iftrue .use_old_sea_map
-	writetext SeagallopFerryClosedText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext SeagallopFerryClosedText
 
 .have_orangeticket
 	checkitem MYSTICTICKET
@@ -70,8 +61,8 @@ SeagallopFerryVermilionGateSailorScript:
 	yesorno
 	iffalse .no_ferry
 	scall SeagallopFerryDepartureScript
-	domaptrigger SEAGALLOP_FERRY_SHAMOUTI_GATE, $1
-	warp SEAGALLOP_FERRY_SHAMOUTI_GATE, $6, $5
+	setmapscene SEAGALLOP_FERRY_SHAMOUTI_GATE, $1
+	warp SEAGALLOP_FERRY_SHAMOUTI_GATE, 6, 5
 	end
 
 .have_mysticticket_no_orangeticket
@@ -82,19 +73,19 @@ SeagallopFerryVermilionGateSailorScript:
 	yesorno
 	iffalse .no_ferry
 	scall SeagallopFerryDepartureScript
-	domaptrigger SEAGALLOP_FERRY_NAVEL_GATE, $1
-	warp SEAGALLOP_FERRY_NAVEL_GATE, $6, $5
+	setmapscene SEAGALLOP_FERRY_NAVEL_GATE, $1
+	warp SEAGALLOP_FERRY_NAVEL_GATE, 6, 5
 	end
 
 .have_orangeticket_and_mysticticket
 	checkitem OLD_SEA_MAP
 	iftrue .have_three_tickets
 	writetext SeagallopFerryWhichTicketText
-	loadmenudata OrangeMysticMenuDataHeader
+	loadmenu OrangeMysticMenuDataHeader
 	verticalmenu
 	closewindow
-	if_equal $1, .use_orangeticket
-	if_equal $2, .use_mysticticket
+	ifequal $1, .use_orangeticket
+	ifequal $2, .use_mysticticket
 	jump .no_ferry
 
 .use_old_sea_map
@@ -102,41 +93,38 @@ SeagallopFerryVermilionGateSailorScript:
 	yesorno
 	iffalse .no_ferry
 	scall SeagallopFerryDepartureScript
-	domaptrigger FARAWAY_ISLAND, $1
-	warp FARAWAY_ISLAND, $c, $2a
+	setmapscene FARAWAY_ISLAND, $1
+	warp FARAWAY_ISLAND, 12, 42
 	end
 
 .use_mysticticket_or_old_sea_map
 	writetext SeagallopFerryWhichTicketText
-	loadmenudata MysticOldSeaMapMenuDataHeader
+	loadmenu MysticOldSeaMapMenuDataHeader
 	verticalmenu
 	closewindow
-	if_equal $1, .use_mysticticket
-	if_equal $2, .use_old_sea_map
+	ifequal $1, .use_mysticticket
+	ifequal $2, .use_old_sea_map
 	jump .no_ferry
 
 .use_orangeticket_or_old_sea_map
 	writetext SeagallopFerryWhichTicketText
-	loadmenudata OrangeOldSeaMapMenuDataHeader
+	loadmenu OrangeOldSeaMapMenuDataHeader
 	verticalmenu
 	closewindow
-	if_equal $1, .use_orangeticket
-	if_equal $2, .use_old_sea_map
+	ifequal $1, .use_orangeticket
+	ifequal $2, .use_old_sea_map
 	jump .no_ferry
 
 .have_three_tickets
 	writetext SeagallopFerryWhichTicketText
-	loadmenudata ThreeTicketsMenuDataHeader
+	loadmenu ThreeTicketsMenuDataHeader
 	verticalmenu
 	closewindow
-	if_equal $1, .use_orangeticket
-	if_equal $2, .use_mysticticket
-	if_equal $3, .use_old_sea_map
+	ifequal $1, .use_orangeticket
+	ifequal $2, .use_mysticticket
+	ifequal $3, .use_old_sea_map
 .no_ferry:
-	writetext SeagallopFerryVermilionCityRefusedText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext SeagallopFerryVermilionCityRefusedText
 
 OrangeMysticMenuDataHeader:
 	db $40 ; flags
@@ -199,9 +187,9 @@ SeagallopFerryDepartureScript:
 	writetext SeagallopFerryDepartureText
 	waitbutton
 	closetext
-	spriteface SEAGALLOPFERRYVERMILIONGATE_SAILOR, DOWN
+	turnobject SEAGALLOPFERRYVERMILIONGATE_SAILOR, DOWN
 	pause 10
-	applymovement SEAGALLOPFERRYVERMILIONGATE_SAILOR, SeagallopFerryVermilionGateSailorDepartMovementData
+	applyonemovement SEAGALLOPFERRYVERMILIONGATE_SAILOR, step_down
 	playsound SFX_EXIT_BUILDING
 	disappear SEAGALLOPFERRYVERMILIONGATE_SAILOR
 	waitsfx
@@ -211,10 +199,6 @@ SeagallopFerryDepartureScript:
 	waitsfx
 	appear SEAGALLOPFERRYVERMILIONGATE_SAILOR
 	end
-
-SeagallopFerryVermilionGateSailorDepartMovementData:
-	step_down
-	step_end
 
 SeagallopFerryVermilionGatePlayerDepartMovementData:
 	step_down

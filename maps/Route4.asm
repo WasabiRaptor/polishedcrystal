@@ -1,85 +1,83 @@
 Route4_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4,  7, MOUNT_MOON_B1F, 8
+	warp_event 19,  5, MOUNT_MOON_SQUARE, 1
 
-Route4_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $5, $2, 8, MOUNT_MOON_B1F
+	db 3 ; bg events
+	bg_event  7,  9, SIGNPOST_JUMPTEXT, MtMoonSignText
+	bg_event 17,  9, SIGNPOST_JUMPTEXT, CableCarSignText
+	bg_event 15,  4, SIGNPOST_ITEM + ULTRA_BALL, EVENT_ROUTE_4_HIDDEN_ULTRA_BALL
 
-.XYTriggers: db 0
+	db 11 ; object events
+	object_event 51,  5, SPRITE_REAL_YOUNGSTER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 5, GenericTrainerYoungsterOliver, -1
+	object_event 38, 13, SPRITE_LASS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 5, GenericTrainerLassJennifer, -1
+	object_event 28,  6, SPRITE_BIRD_KEEPER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBird_keeperHank, -1
+	object_event 12, 10, SPRITE_PICNICKER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 5, GenericTrainerPicnickerHope, -1
+	object_event 35,  8, SPRITE_PICNICKER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerPicnickerSharon, -1
+	object_event 26, 13, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, Route4SuperNerd1Script, -1
+	object_event 29, 13, SPRITE_SUPER_NERD, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, Route4SuperNerd2Script, -1
+	object_event 19,  7, SPRITE_ENGINEER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route4EngineerScript, EVENT_MT_MOON_RIVAL
+	object_event 17,  5, SPRITE_ENGINEER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_MT_MOON_RIVAL
+	itemball_event 42,  5, HP_UP, 1, EVENT_ROUTE_4_HP_UP
+	object_event 68,  6, SPRITE_ACE_TRAINER_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_BEAT_BLUE
 
-.Signposts: db 2
-	signpost 7, 5, SIGNPOST_READ, MtMoonSign
-	signpost 3, 18, SIGNPOST_ITEM, Route4HiddenUltraBall
+GenericTrainerYoungsterOliver:
+	generictrainer YOUNGSTER, OLIVER, EVENT_BEAT_YOUNGSTER_OLIVER, YoungsterOliverSeenText, YoungsterOliverBeatenText
 
-.PersonEvents: db 9
-	person_event SPRITE_YOUNGSTER, 3, 49, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 5, TrainerYoungsterOliver, -1
-	person_event SPRITE_LASS, 11, 36, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 5, TrainerLassJennifer, -1
-	person_event SPRITE_YOUNGSTER, 9, 25, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBird_keeperHank, -1
-	person_event SPRITE_LASS, 8, 10, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 5, TrainerPicnickerHope, -1
-	person_event SPRITE_LASS, 6, 33, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 4, TrainerPicnickerSharon, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 40, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, HP_UP, 1, EVENT_ROUTE_4_HP_UP
-	person_event SPRITE_SUPER_NERD, 3, 17, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, Route4SuperNerd1Script, -1
-	person_event SPRITE_SUPER_NERD, 3, 20, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route4SuperNerd2Script, -1
-	person_event SPRITE_COOLTRAINER_M, 4, 66, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_BEAT_BLUE
+	text "People say that"
+	line "I ask too many"
+	cont "questions, but"
 
-TrainerYoungsterOliver:
-	trainer EVENT_BEAT_YOUNGSTER_OLIVER, YOUNGSTER, OLIVER, YoungsterOliverSeenText, YoungsterOliverBeatenText, 0, YoungsterOliverScript
+	para "that's what kids"
+	line "do, right?"
+	done
 
-YoungsterOliverScript:
-	end_if_just_battled
-	opentext
-	writetext YoungsterOliverAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerLassJennifer:
+	generictrainer LASS, JENNIFER, EVENT_BEAT_LASS_JENNIFER, LassJenniferSeenText, LassJenniferBeatenText
 
-TrainerLassJennifer:
-	trainer EVENT_BEAT_LASS_JENNIFER, LASS, JENNIFER, LassJenniferSeenText, LassJenniferBeatenText, 0, LassJenniferScript
+	text "#mon are so"
+	line "much fun."
+	cont "Don't you agree?"
+	done
 
-LassJenniferScript:
-	end_if_just_battled
-	opentext
-	writetext LassJenniferAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerBird_keeperHank:
+	generictrainer BIRD_KEEPER, HANK, EVENT_BEAT_BIRD_KEEPER_HANK, Bird_keeperHankSeenText, Bird_keeperHankBeatenText
 
-TrainerBird_keeperHank:
-	trainer EVENT_BEAT_BIRD_KEEPER_HANK, BIRD_KEEPER, HANK, Bird_keeperHankSeenText, Bird_keeperHankBeatenText, 0, Bird_keeperHankScript
+	text "If you have a"
+	line "specific #mon"
 
-Bird_keeperHankScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ae258
-	waitbutton
-	closetext
-	end
+	para "that you want to"
+	line "raise, put it out"
 
-TrainerPicnickerHope:
-	trainer EVENT_BEAT_PICNICKER_HOPE, PICNICKER, HOPE, PicnickerHopeSeenText, PicnickerHopeBeatenText, 0, PicnickerHopeScript
+	para "first, then switch"
+	line "it right away."
 
-PicnickerHopeScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ae320
-	waitbutton
-	closetext
-	end
+	para "That's how to do"
+	line "it."
+	done
 
-TrainerPicnickerSharon:
-	trainer EVENT_BEAT_PICNICKER_SHARON, PICNICKER, SHARON, PicnickerSharonSeenText, PicnickerSharonBeatenText, 0, PicnickerSharonScript
+GenericTrainerPicnickerHope:
+	generictrainer PICNICKER, HOPE, EVENT_BEAT_PICNICKER_HOPE, PicnickerHopeSeenText, PicnickerHopeBeatenText
 
-PicnickerSharonScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ae369
-	waitbutton
-	closetext
-	end
+	text "I heard Clefairy"
+	line "appear at Mt.Moon."
+
+	para "But where could"
+	line "they be?"
+	done
+
+GenericTrainerPicnickerSharon:
+	generictrainer PICNICKER, SHARON, EVENT_BEAT_PICNICKER_SHARON, PicnickerSharonSeenText, PicnickerSharonBeatenText
+
+	text "……I'll go train"
+	line "some more…"
+	done
 
 Route4SuperNerd1Script:
 	faceplayer
@@ -100,25 +98,16 @@ Route4TutorIronHeadScript:
 	writebyte IRON_HEAD
 	writetext Text_Route4TutorsClear
 	special Special_MoveTutor
-	if_equal $0, .TeachMove
+	ifequal $0, .TeachMove
 .TutorRefused
-	writetext Text_Route4Tutor1Refused
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_Route4Tutor1Refused
 
 .NoSilverLeaf
-	writetext Text_Route4TutorsNoSilverLeaf
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_Route4TutorsNoSilverLeaf
 
 .TeachMove
 	takeitem SILVER_LEAF
-	writetext Text_Route4Tutor1Taught
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_Route4Tutor1Taught
 
 Route4SuperNerd2Script:
 	faceplayer
@@ -139,31 +128,22 @@ Route4TutorAquaTailScript:
 	writebyte AQUA_TAIL
 	writetext Text_Route4TutorsClear
 	special Special_MoveTutor
-	if_equal $0, .TeachMove
+	ifequal $0, .TeachMove
 .TutorRefused
-	writetext Text_Route4Tutor2Refused
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_Route4Tutor2Refused
 
 .NoSilverLeaf
-	writetext Text_Route4TutorsNoSilverLeaf
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_Route4TutorsNoSilverLeaf
 
 .TeachMove
 	takeitem SILVER_LEAF
-	writetext Text_Route4Tutor2Taught
-	waitbutton
-	closetext
+	jumpopenedtext Text_Route4Tutor2Taught
+
+Route4EngineerScript:
+	showtext Route4EngineerText1
+	showtextfaceplayer Route4EngineerText2
+	turnobject LAST_TALKED, UP
 	end
-
-MtMoonSign:
-	jumptext MtMoonSignText
-
-Route4HiddenUltraBall:
-	dwb EVENT_ROUTE_4_HIDDEN_ULTRA_BALL, ULTRA_BALL
 
 YoungsterOliverSeenText:
 	text "Hi! What's your"
@@ -174,15 +154,6 @@ YoungsterOliverSeenText:
 YoungsterOliverBeatenText:
 	text "I was just"
 	line "asking…"
-	done
-
-YoungsterOliverAfterText:
-	text "People say that"
-	line "I ask too many"
-	cont "questions, but"
-
-	para "that's what kids"
-	line "do, right?"
 	done
 
 LassJenniferSeenText:
@@ -197,12 +168,6 @@ LassJenniferBeatenText:
 	text "Wheeee!"
 	done
 
-LassJenniferAfterText:
-	text "#mon are so"
-	line "much fun."
-	cont "Don't you agree?"
-	done
-
 Bird_keeperHankSeenText:
 	text "I'm raising my"
 	line "#mon. Want to"
@@ -212,20 +177,6 @@ Bird_keeperHankSeenText:
 Bird_keeperHankBeatenText:
 	text "Ack! I lost that"
 	line "one…"
-	done
-
-UnknownText_0x1ae258:
-	text "If you have a"
-	line "specific #mon"
-
-	para "that you want to"
-	line "raise, put it out"
-
-	para "first, then switch"
-	line "it right away."
-
-	para "That's how to do"
-	line "it."
 	done
 
 PicnickerHopeSeenText:
@@ -241,14 +192,6 @@ PicnickerHopeBeatenText:
 	line "strong."
 	done
 
-UnknownText_0x1ae320:
-	text "I heard Clefairy"
-	line "appear at Mt.Moon."
-
-	para "But where could"
-	line "they be?"
-	done
-
 PicnickerSharonSeenText:
 	text "Um…"
 	line "I…"
@@ -258,17 +201,12 @@ PicnickerSharonBeatenText:
 	text "…"
 	done
 
-UnknownText_0x1ae369:
-	text "……I'll go train"
-	line "some more…"
-	done
-
 Route4SuperNerd1Text:
 	text "#mon with tough"
 	line "heads are best!"
 
-	para "Rhydon, Marowak,"
-	line "Golem!"
+	para "Arcanine, Golem,"
+	line "Snorlax!"
 
 	para "Don't you agree?"
 	done
@@ -277,8 +215,8 @@ Route4SuperNerd2Text:
 	text "#mon with long"
 	line "tails are best!"
 
-	para "Gyarados, Golduck,"
-	line "Blastoise!"
+	para "Slowbro, Golduck,"
+	line "Feraligatr!"
 
 	para "Don't you agree?"
 	done
@@ -342,7 +280,27 @@ Text_Route4Tutor2Taught:
 	cont "Aqua Tail!"
 	done
 
+Route4EngineerText1:
+	text "Get those bolts"
+	line "tighter!"
+	done
+
+Route4EngineerText2:
+	text "The cable car's"
+	line "out right now."
+
+	para "Until we're done"
+	line "fixing it,"
+
+	para "Mt.Moon Square"
+	line "is closed."
+	done
+
 MtMoonSignText:
-	text "Mt.Moon"
-	line "Tunnel Entrance"
+	text "Mt.Moon Tunnel"
+	done
+
+CableCarSignText:
+	text "Cable Car to"
+	line "Mt.Moon Square"
 	done

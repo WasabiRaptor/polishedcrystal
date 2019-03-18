@@ -1,48 +1,36 @@
 RockTunnel1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 8 ; warp events
+	warp_event 15,  3, ROUTE_10_NORTH, 4
+	warp_event 11, 25, ROUTE_10_SOUTH, 1
+	warp_event  5,  3, ROCK_TUNNEL_B1F, 1
+	warp_event 15,  9, ROCK_TUNNEL_B1F, 2
+	warp_event 25,  3, ROCK_TUNNEL_B1F, 3
+	warp_event 27, 13, ROCK_TUNNEL_B1F, 4
+	warp_event  4, 13, ROCK_TUNNEL_B1F, 5
+	warp_event  6, 15, ROCK_TUNNEL_2F, 2
 
-RockTunnel1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 8
-	warp_def $3, $f, 4, ROUTE_10_NORTH
-	warp_def $19, $b, 1, ROUTE_10_SOUTH
-	warp_def $3, $5, 1, ROCK_TUNNEL_B1F
-	warp_def $9, $f, 2, ROCK_TUNNEL_B1F
-	warp_def $3, $19, 3, ROCK_TUNNEL_B1F
-	warp_def $d, $1b, 4, ROCK_TUNNEL_B1F
-	warp_def $d, $4, 5, ROCK_TUNNEL_B1F
-	warp_def $f, $6, 2, ROCK_TUNNEL_2F
+	db 2 ; bg events
+	bg_event 23,  4, SIGNPOST_ITEM + X_ACCURACY, EVENT_ROCK_TUNNEL_1F_HIDDEN_X_ACCURACY
+	bg_event  4, 18, SIGNPOST_ITEM + X_DEFEND, EVENT_ROCK_TUNNEL_1F_HIDDEN_X_DEFEND
 
-.XYTriggers: db 0
+	db 3 ; object events
+	object_event 23, 18, SPRITE_HIKER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerHikerSeamus, -1
+	itemball_event 21, 15, ELIXIR, 1, EVENT_ROCK_TUNNEL_1F_ELIXIR
+	itemball_event 10, 15, HP_UP, 1, EVENT_ROCK_TUNNEL_1F_HP_UP
 
-.Signposts: db 2
-	signpost 4, 23, SIGNPOST_ITEM, RockTunnel1FHiddenXAccuracy
-	signpost 18, 4, SIGNPOST_ITEM, RockTunnel1FHiddenXDefend
+GenericTrainerHikerSeamus:
+	generictrainer HIKER, SEAMUS, EVENT_BEAT_HIKER_SEAMUS, HikerSeamusSeenText, HikerSeamusBeatenText
 
-.PersonEvents: db 3
-	person_event SPRITE_POKEFAN_M, 18, 23, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_TRAINER, 3, TrainerHikerSeamus, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 21, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ELIXER, 1, EVENT_ROCK_TUNNEL_1F_ELIXER
-	person_event SPRITE_BALL_CUT_FRUIT, 15, 10, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, HP_UP, 1, EVENT_ROCK_TUNNEL_1F_HP_UP
-
-TrainerHikerSeamus:
-	trainer EVENT_BEAT_HIKER_SEAMUS, HIKER, SEAMUS, HikerSeamusSeenText, HikerSeamusBeatenText, 0, HikerSeamusScript
-
-HikerSeamusScript:
-	end_if_just_battled
-	opentext
-	writetext HikerSeamusAfterText
-	waitbutton
-	closetext
-	end
-
-RockTunnel1FHiddenXAccuracy:
-	dwb EVENT_ROCK_TUNNEL_1F_HIDDEN_X_ACCURACY, X_ACCURACY
-
-RockTunnel1FHiddenXDefend:
-	dwb EVENT_ROCK_TUNNEL_1F_HIDDEN_X_DEFEND, X_DEFEND
+	text "Was Rock Tunnel"
+	line "always this much"
+	cont "of a trek?"
+	done
 
 HikerSeamusSeenText:
 	text "Almost…"
@@ -54,8 +42,3 @@ HikerSeamusBeatenText:
 	line "your energy?"
 	done
 
-HikerSeamusAfterText:
-	text "Was Rock Tunnel"
-	line "always this much"
-	cont "of a trek?"
-	done

@@ -1,49 +1,40 @@
 Route14_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 0 ; warp events
 
-Route14_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 0
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 12 ; object events
+	object_event 13,  8, SPRITE_POKEFAN_M, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerPokefanmTrevor, -1
+	object_event 11, 21, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerPokefanmCarter, -1
+	object_event 11, 29, SPRITE_BIRD_KEEPER, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBird_keeperRoy, -1
+	object_event 15, 14, SPRITE_BIRD_KEEPER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerBird_keeperJosh, -1
+	object_event  4, 17, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerSchoolboyConnor, -1
+	object_event  4, 15, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerSchoolboyTorin, -1
+	object_event  4, 13, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerSchoolboyTravis, -1
+	object_event  9, 15, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerTeacherClarice, -1
+	object_event  7,  7, SPRITE_TEACHER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, trade, TRADE_WITH_KIM_FOR_CHANSEY, -1
+	cuttree_event  5, 10, EVENT_ROUTE_14_CUT_TREE_1
+	cuttree_event 11, 16, EVENT_ROUTE_14_CUT_TREE_2
+	cuttree_event  3, 26, EVENT_ROUTE_14_CUT_TREE_3
 
-.Signposts: db 0
+GenericTrainerPokefanmTrevor:
+	generictrainer POKEFANM, TREVOR, EVENT_BEAT_POKEFANM_TREVOR, PokefanmTrevorSeenText, PokefanmTrevorBeatenText
 
-.PersonEvents: db 12
-	person_event SPRITE_POKEFAN_M, 8, 13, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerPokefanmTrevor, -1
-	person_event SPRITE_POKEFAN_M, 21, 11, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerPokefanmCarter, -1
-	person_event SPRITE_YOUNGSTER, 29, 11, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBird_keeperRoy, -1
-	person_event SPRITE_YOUNGSTER, 14, 15, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerBird_keeperJosh, -1
-	person_event SPRITE_YOUNGSTER, 17, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerSchoolboyConnor, -1
-	person_event SPRITE_YOUNGSTER, 15, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerSchoolboyTorin, -1
-	person_event SPRITE_YOUNGSTER, 13, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerSchoolboyTravis, -1
-	person_event SPRITE_TEACHER, 15, 9, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_TRAINER, 4, TrainerTeacherClarice, -1
-	person_event SPRITE_TEACHER, 7, 7, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 4, Kim, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 10, 5, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_14_CUT_TREE_1
-	person_event SPRITE_BALL_CUT_FRUIT, 16, 11, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_14_CUT_TREE_2
-	person_event SPRITE_BALL_CUT_FRUIT, 26, 3, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_ROUTE_14_CUT_TREE_3
+	text "If only there were"
+	line "an easy way to"
 
-Kim:
-	faceplayer
-	opentext
-	trade $5
-	waitbutton
-	closetext
-	end
+	para "identify where I"
+	line "got my #mon…"
 
-TrainerPokefanmTrevor:
-	trainer EVENT_BEAT_POKEFANM_TREVOR, POKEFANM, TREVOR, PokefanmTrevorSeenText, PokefanmTrevorBeatenText, 0, PokefanmTrevorScript
-
-PokefanmTrevorScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ad660
-	waitbutton
-	closetext
-	end
+	para "Oh! I can just"
+	line "check its stats!"
+	done
 
 PokefanmTrevorSeenText:
 	text "Hi. Did you know…?"
@@ -61,27 +52,15 @@ PokefanmTrevorBeatenText:
 	line "this Psyduck?"
 	done
 
-UnknownText_0x1ad660:
-	text "If only there were"
-	line "an easy way to"
+GenericTrainerPokefanmCarter:
+	generictrainer POKEFANM, CARTER, EVENT_BEAT_POKEFANM_CARTER, PokefanmCarterSeenText, PokefanmCarterBeatenText
 
-	para "identify where I"
-	line "got my #mon…"
+	text "Squirtle, Charman-"
+	line "der and Bulbasaur…"
 
-	para "Oh! I can just"
-	line "check its stats!"
+	para "I think that's a"
+	line "well-balanced mix."
 	done
-
-TrainerPokefanmCarter:
-	trainer EVENT_BEAT_POKEFANM_CARTER, POKEFANM, CARTER, PokefanmCarterSeenText, PokefanmCarterBeatenText, 0, PokefanmCarterScript
-
-PokefanmCarterScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ad508
-	waitbutton
-	closetext
-	end
 
 PokefanmCarterSeenText:
 	text "Let me tell you,"
@@ -95,24 +74,15 @@ PokefanmCarterBeatenText:
 	text "Awaaah!"
 	done
 
-UnknownText_0x1ad508:
-	text "Squirtle, Charman-"
-	line "der and Bulbasaur…"
+GenericTrainerBird_keeperRoy:
+	generictrainer BIRD_KEEPER, ROY, EVENT_BEAT_BIRD_KEEPER_ROY, Bird_keeperRoySeenText, Bird_keeperRoyBeatenText
 
-	para "I think that's a"
-	line "well-balanced mix."
+	text "You have #mon"
+	line "that know the HM"
+
+	para "move Fly, don't"
+	line "you? I envy you."
 	done
-
-TrainerBird_keeperRoy:
-	trainer EVENT_BEAT_BIRD_KEEPER_ROY, BIRD_KEEPER, ROY, Bird_keeperRoySeenText, Bird_keeperRoyBeatenText, 0, Bird_keeperRoyScript
-
-Bird_keeperRoyScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x1ad5a4
-	waitbutton
-	closetext
-	end
 
 Bird_keeperRoySeenText:
 	text "My dream is to fly"
@@ -125,24 +95,13 @@ Bird_keeperRoyBeatenText:
 	line "can't ever fly…"
 	done
 
-UnknownText_0x1ad5a4:
-	text "You have #mon"
-	line "that know the HM"
+GenericTrainerBird_keeperJosh:
+	generictrainer BIRD_KEEPER, BIRD_KEEPER_JOSH, EVENT_BEAT_BIRD_KEEPER_JOSH, .SeenText, .BeatenText
 
-	para "move Fly, don't"
-	line "you? I envy you."
+	text "Maybe I should lie"
+	line "and say I'm in the"
+	cont "heavyweight class…"
 	done
-
-TrainerBird_keeperJosh:
-	trainer EVENT_BEAT_BIRD_KEEPER_JOSH, BIRD_KEEPER, BIRD_KEEPER_JOSH, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "My weight puts me"
@@ -160,22 +119,15 @@ TrainerBird_keeperJosh:
 	cont "floats!"
 	done
 
-.AfterText:
-	text "Maybe I should lie"
-	line "and say I'm in the"
-	cont "heavyweight class…"
+GenericTrainerSchoolboyConnor:
+	generictrainer SCHOOLBOY, SCHOOLBOY_CONNOR, EVENT_BEAT_SCHOOLBOY_CONNOR, .SeenText, .BeatenText
+
+	text "Don't rush, and"
+	line "take the road one"
+	cont "step at a time."
+
+	para "Great advice!"
 	done
-
-TrainerSchoolboyConnor:
-	trainer EVENT_BEAT_SCHOOLBOY_CONNOR, SCHOOLBOY, SCHOOLBOY_CONNOR, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "I can't wait to go"
@@ -188,24 +140,13 @@ TrainerSchoolboyConnor:
 	line "of a hurry."
 	done
 
-.AfterText:
-	text "Don't rush, and"
-	line "take the road one"
-	cont "step at a time."
+GenericTrainerSchoolboyTorin:
+	generictrainer SCHOOLBOY, TORIN, EVENT_BEAT_SCHOOLBOY_TORIN, .SeenText, .BeatenText
 
-	para "Great advice!"
+	text "All right! Next"
+	line "time, I won't make"
+	cont "any mistakes!"
 	done
-
-TrainerSchoolboyTorin:
-	trainer EVENT_BEAT_SCHOOLBOY_TORIN, SCHOOLBOY, TORIN, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "It's good to put"
@@ -217,22 +158,13 @@ TrainerSchoolboyTorin:
 	text "I see. I see."
 	done
 
-.AfterText:
-	text "All right! Next"
-	line "time, I won't make"
-	cont "any mistakes!"
+GenericTrainerSchoolboyTravis:
+	generictrainer SCHOOLBOY, TRAVIS, EVENT_BEAT_SCHOOLBOY_TRAVIS, .SeenText, .BeatenText
+
+	text "Maybe I should"
+	line "join your study"
+	cont "sessions!"
 	done
-
-TrainerSchoolboyTravis:
-	trainer EVENT_BEAT_SCHOOLBOY_TRAVIS, SCHOOLBOY, TRAVIS, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "Do you have after-"
@@ -244,22 +176,16 @@ TrainerSchoolboyTravis:
 	text "So strong…"
 	done
 
-.AfterText:
-	text "Maybe I should"
-	line "join your study"
-	cont "sessions!"
+GenericTrainerTeacherClarice:
+	generictrainer TEACHER, CLARICE, EVENT_BEAT_TEACHER_CLARICE, .SeenText, .BeatenText
+
+	text "Don't relax just"
+	line "'cause you won."
+
+	para "Once you get home,"
+	line "you should do a"
+	cont "full review!"
 	done
-
-TrainerTeacherClarice:
-	trainer EVENT_BEAT_TEACHER_CLARICE, TEACHER, CLARICE, .SeenText, .BeatenText, 0, .Script
-
-.Script:
-	end_if_just_battled
-	opentext
-	writetext .AfterText
-	waitbutton
-	closetext
-	end
 
 .SeenText:
 	text "All right, let's"
@@ -273,11 +199,3 @@ TrainerTeacherClarice:
 	cont "battle."
 	done
 
-.AfterText:
-	text "Don't relax just"
-	line "'cause you won."
-
-	para "Once you get home,"
-	line "you should do a"
-	cont "full review!"
-	done

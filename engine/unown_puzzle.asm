@@ -20,7 +20,7 @@ UnownPuzzle: ; e1190
 	ld hl, UnownPuzzleCursorGFX
 	ld de, VTiles1 tile $60
 	ld bc, 4 tiles
-	call CopyBytes
+	rst CopyBytes
 	ld hl, UnownPuzzleStartCancelLZ
 	ld de, VTiles1 tile $6d
 	call Decompress
@@ -44,11 +44,11 @@ UnownPuzzle: ; e1190
 	ld [wHoldingUnownPuzzlePiece], a
 	ld [wUnownPuzzleCursorPosition], a
 	ld [wUnownPuzzleHeldPiece], a
-	ld a, $93
+	ld a, %10010011
 	ld [rLCDC], a
-	call WaitBGMap
-	ld b, SCGB_UNOWN_PUZZLE
-	call GetSGBLayout
+	call ApplyTilemapInVBlank
+	ld b, CGB_UNOWN_PUZZLE
+	call GetCGBLayout
 	ld a, $e4
 	call DmgToCgbBGPals
 	ld a, $24
@@ -84,7 +84,7 @@ UnownPuzzle: ; e1190
 	call ClearBGPalettes
 	call ClearTileMap
 	call ClearSprites
-	ld a, $e3
+	ld a, %11100011
 	ld [rLCDC], a
 	ret
 ; e124e
@@ -177,9 +177,8 @@ UnownPuzzleJumptable: ; e12ca
 	ld e, a
 	ld d, 0
 	ld hl, .Jumptable
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -313,7 +312,7 @@ UnownPuzzle_A: ; e1376
 	ld [wUnownPuzzleHeldPiece], a
 	call RedrawUnownPuzzlePieces
 	call FillUnoccupiedPuzzleSpace
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	call WaitSFX
 	ld a, TRUE
 	ld [wHoldingUnownPuzzlePiece], a
@@ -328,7 +327,7 @@ UnownPuzzle_A: ; e1376
 	ld a, [wUnownPuzzleHeldPiece]
 	ld [hl], a
 	call PlaceUnownPuzzlePieceGFX
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	xor a
 	ld [wUnownPuzzleHeldPiece], a
 	call RedrawUnownPuzzlePieces
@@ -547,7 +546,7 @@ RedrawUnownPuzzlePieces: ; e14d9
 	ld hl, .OAM_NotHoldingPiece
 
 .load
-	ld de, Sprites
+	ld de, wSprites
 .loop
 	ld a, [hli]
 	cp -1
@@ -571,27 +570,27 @@ RedrawUnownPuzzlePieces: ; e14d9
 ; e150f
 
 .OAM_HoldingPiece: ; e150f
-	dsprite -1, -4, -1, -4, $00, $00
-	dsprite -1, -4,  0, -4, $01, $00
-	dsprite -1, -4,  0,  4, $02, $00
-	dsprite  0, -4, -1, -4, $0c, $00
-	dsprite  0, -4,  0, -4, $0d, $00
-	dsprite  0, -4,  0,  4, $0e, $00
-	dsprite  0,  4, -1, -4, $18, $00
-	dsprite  0,  4,  0, -4, $19, $00
-	dsprite  0,  4,  0,  4, $1a, $00
+	dsprite -1, -4, -1, -4, $00, $0
+	dsprite -1, -4,  0, -4, $01, $0
+	dsprite -1, -4,  0,  4, $02, $0
+	dsprite  0, -4, -1, -4, $0c, $0
+	dsprite  0, -4,  0, -4, $0d, $0
+	dsprite  0, -4,  0,  4, $0e, $0
+	dsprite  0,  4, -1, -4, $18, $0
+	dsprite  0,  4,  0, -4, $19, $0
+	dsprite  0,  4,  0,  4, $1a, $0
 	db -1
 
 .OAM_NotHoldingPiece: ; e1534
-	dsprite -1, -4, -1, -4, $00, $00
-	dsprite -1, -4,  0, -4, $01, $00
-	dsprite -1, -4,  0,  4, $00, $20 ; xflip
-	dsprite  0, -4, -1, -4, $02, $00
-	dsprite  0, -4,  0, -4, $03, $00
-	dsprite  0, -4,  0,  4, $02, $20 ; xflip
-	dsprite  0,  4, -1, -4, $00, $40 ; yflip
-	dsprite  0,  4,  0, -4, $01, $40 ; yflip
-	dsprite  0,  4,  0,  4, $00, $60 ; xflip, yflip
+	dsprite -1, -4, -1, -4, $00, $0
+	dsprite -1, -4,  0, -4, $01, $0
+	dsprite -1, -4,  0,  4, $00, $0 | X_FLIP
+	dsprite  0, -4, -1, -4, $02, $0
+	dsprite  0, -4,  0, -4, $03, $0
+	dsprite  0, -4,  0,  4, $02, $0 | X_FLIP
+	dsprite  0,  4, -1, -4, $00, $0 | Y_FLIP
+	dsprite  0,  4,  0, -4, $01, $0 | Y_FLIP
+	dsprite  0,  4,  0,  4, $00, $0 | X_FLIP | Y_FLIP
 	db -1
 
 UnownPuzzleCoordData: ; e1559
@@ -831,14 +830,13 @@ GFXHeaders: ; e1703
 INCBIN "gfx/unown_puzzle/tile_borders.2bpp"
 
 LoadUnownPuzzlePiecesGFX: ; e17a3
-	ld a, [ScriptVar]
+	ld a, [wScriptVar]
 	and 3
 	ld e, a
 	ld d, 0
 	ld hl, .LZPointers
-rept 2
 	add hl, de
-endr
+	add hl, de
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

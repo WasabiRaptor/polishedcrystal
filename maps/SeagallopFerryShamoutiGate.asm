@@ -1,25 +1,22 @@
 SeagallopFerryShamoutiGate_MapScriptHeader:
+	db 2 ; scene scripts
+	scene_script SeagallopFerryShamoutiGateTrigger0
+	scene_script SeagallopFerryShamoutiGateTrigger1
 
-.MapTriggers: db 2
-	dw SeagallopFerryShamoutiGateTrigger0
-	dw SeagallopFerryShamoutiGateTrigger1
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 1 ; warp events
+	warp_event  6,  0, BEAUTIFUL_BEACH, 1
 
-SeagallopFerryShamoutiGate_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 1
-	warp_def $0, $6, 1, BEAUTIFUL_BEACH
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  6,  4, SPRITE_SAILOR, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SeagallopFerryShamoutiGateSailorScript, EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
+	object_event  4,  1, SPRITE_TWIN, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, SeagallopFerryShamoutiGateTwinText, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_SAILOR, 4, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SeagallopFerryShamoutiGateSailorScript, EVENT_OLIVINE_PORT_SAILOR_AT_GANGWAY
-	person_event SPRITE_TWIN, 1, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, SeagallopFerryShamoutiGateTwinScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const SEAGALLOPFERRYSHAMOUTIGATE_SAILOR
 
 SeagallopFerryShamoutiGateTrigger1:
@@ -31,12 +28,9 @@ SeagallopFerryShamoutiGate_PlayerArrives:
 	setflag ENGINE_SEEN_SHAMOUTI_ISLAND
 	applymovement SEAGALLOPFERRYSHAMOUTIGATE_SAILOR, SeagallopFerryShamoutiGateSailorArrive1MovementData
 	applymovement PLAYER, SeagallopFerryShamoutiGatePlayerArriveMovementData
-	opentext
-	writetext SeagallopFerryShamoutiIslandRefusedText
-	waitbutton
-	closetext
+	showtext SeagallopFerryShamoutiIslandRefusedText
 	applymovement SEAGALLOPFERRYSHAMOUTIGATE_SAILOR, SeagallopFerryShamoutiGateSailorArrive2MovementData
-	dotrigger $0
+	setscene $0
 	end
 
 SeagallopFerryShamoutiGateSailorScript:
@@ -45,11 +39,11 @@ SeagallopFerryShamoutiGateSailorScript:
 	checkevent EVENT_GOT_A_POKEMON_FROM_IVY
 	iffalse .OnlyVermilion
 	writetext SeagallopFerryShamoutiWhichIslandText
-	loadmenudata VermilionValenciaMenuDataHeader
+	loadmenu VermilionValenciaMenuDataHeader
 	verticalmenu
 	closewindow
-	if_equal $1, .ToVermilion
-	if_equal $2, .ToValencia
+	ifequal $1, .ToVermilion
+	ifequal $2, .ToValencia
 	jump .RefuseFerry
 
 .OnlyVermilion
@@ -58,28 +52,25 @@ SeagallopFerryShamoutiGateSailorScript:
 	iffalse .RefuseFerry
 .ToVermilion
 	scall SeagallopFerryShamoutiDepartureScript
-	domaptrigger SEAGALLOP_FERRY_VERMILION_GATE, $1
-	warp SEAGALLOP_FERRY_VERMILION_GATE, $6, $5
+	setmapscene SEAGALLOP_FERRY_VERMILION_GATE, $1
+	warp SEAGALLOP_FERRY_VERMILION_GATE, 6, 5
 	end
 
 .ToValencia:
 	scall SeagallopFerryShamoutiDepartureScript
-	warp VALENCIA_PORT, $b, $5
+	warp VALENCIA_PORT, 11, 5
 	end
 
 .RefuseFerry
-	writetext SeagallopFerryShamoutiIslandRefusedText
-	waitbutton
-	closetext
-	end
+	jumpopenedtext SeagallopFerryShamoutiIslandRefusedText
 
 SeagallopFerryShamoutiDepartureScript:
 	writetext SeagallopFerryShamoutiDepartureText
 	waitbutton
 	closetext
-	spriteface SEAGALLOPFERRYSHAMOUTIGATE_SAILOR, DOWN
+	turnobject SEAGALLOPFERRYSHAMOUTIGATE_SAILOR, DOWN
 	pause 10
-	applymovement SEAGALLOPFERRYSHAMOUTIGATE_SAILOR, SeagallopFerryShamoutiGateSailorDepartMovementData
+	applyonemovement SEAGALLOPFERRYSHAMOUTIGATE_SAILOR, step_down
 	playsound SFX_EXIT_BUILDING
 	disappear SEAGALLOPFERRYSHAMOUTIGATE_SAILOR
 	waitsfx
@@ -103,13 +94,6 @@ VermilionValenciaMenuDataHeader:
 	db "Vermilion City@"
 	db "Valencia Island@"
 	db "Cancel@"
-
-SeagallopFerryShamoutiGateTwinScript:
-	jumptextfaceplayer SeagallopFerryShamoutiGateTwinText
-
-SeagallopFerryShamoutiGateSailorDepartMovementData:
-	step_down
-	step_end
 
 SeagallopFerryShamoutiGatePlayerDepartMovementData:
 	step_down

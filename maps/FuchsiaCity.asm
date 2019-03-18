@@ -1,98 +1,51 @@
 FuchsiaCity_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_NEWMAP, FuchsiaCityFlyPoint
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_NEWMAP, FuchsiaCityFlyPoint
+	db 11 ; warp events
+	warp_event  5, 13, FUCHSIA_MART, 2
+	warp_event  8, 27, FUCHSIA_GYM, 1
+	warp_event 11, 27, FUCHSIA_BILL_SPEECH_HOUSE, 1
+	warp_event 19, 27, FUCHSIA_POKECENTER_1F, 1
+	warp_event 27, 27, SAFARI_ZONE_WARDENS_HOME, 1
+	warp_event 18,  3, SAFARI_ZONE_FUCHSIA_GATE, 3
+	warp_event 37, 22, ROUTE_15_FUCHSIA_GATE, 1
+	warp_event 37, 23, ROUTE_15_FUCHSIA_GATE, 2
+	warp_event  7, 33, ROUTE_19_FUCHSIA_GATE, 1
+	warp_event  8, 33, ROUTE_19_FUCHSIA_GATE, 2
+	warp_event 15, 27, FUCHSIA_SAFARI_BALL_HOUSE, 1
 
-FuchsiaCity_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 10
-	warp_def $d, $5, 2, FUCHSIA_MART
-	warp_def $1b, $8, 1, FUCHSIA_GYM
-	warp_def $1b, $b, 1, FUCHSIA_BILL_SPEECH_HOUSE
-	warp_def $1b, $13, 1, FUCHSIA_POKECENTER_1F
-	warp_def $1b, $1b, 1, SAFARI_ZONE_WARDENS_HOME
-	warp_def $3, $12, 3, SAFARI_ZONE_FUCHSIA_GATE
-	warp_def $16, $25, 1, ROUTE_15_FUCHSIA_GATE
-	warp_def $17, $25, 2, ROUTE_15_FUCHSIA_GATE
-	warp_def $21, $7, 1, ROUTE_19_FUCHSIA_GATE
-	warp_def $21, $8, 2, ROUTE_19_FUCHSIA_GATE
+	db 14 ; bg events
+	bg_event 21, 15, SIGNPOST_JUMPTEXT, FuchsiaCitySignText
+	bg_event  5, 29, SIGNPOST_JUMPTEXT, FuchsiaGymSignText
+	bg_event 25, 15, SIGNPOST_JUMPTEXT, SafariZoneOfficeSignText
+	bg_event 22, 13, SIGNPOST_JUMPTEXT, SafariZoneOfficeClosedSignText
+	bg_event 27, 29, SIGNPOST_JUMPTEXT, WardensHomeSignText
+	bg_event 17,  5, SIGNPOST_JUMPTEXT, SafariZoneClosedSignText
+	bg_event 14, 19, SIGNPOST_JUMPTEXT, NoLitteringSignText
+	bg_event  7,  7, SIGNPOST_JUMPTEXT, SafariZoneExhibitSignText
+	bg_event 13,  7, SIGNPOST_JUMPTEXT, SafariZoneExhibitSignText
+	bg_event 27,  7, SIGNPOST_JUMPTEXT, SafariZoneExhibitSignText
+	bg_event 33,  7, SIGNPOST_JUMPTEXT, SafariZoneExhibitSignText
+	bg_event 31, 13, SIGNPOST_JUMPTEXT, SafariZoneExhibitSignText
+	bg_event 31, 27, SIGNPOST_JUMPTEXT, HouseForSaleSignText
+	bg_event 11, 35, SIGNPOST_JUMPTEXT, FuchsiaCityCarefulSwimmingSignText
 
-.XYTriggers: db 0
-
-.Signposts: db 14
-	signpost 15, 21, SIGNPOST_READ, FuchsiaCitySign
-	signpost 29, 5, SIGNPOST_READ, FuchsiaGymSign
-	signpost 15, 25, SIGNPOST_READ, SafariZoneOfficeSign
-	signpost 13, 22, SIGNPOST_READ, SafariZoneOfficeClosedSign
-	signpost 29, 27, SIGNPOST_READ, WardensHomeSign
-	signpost 5, 17, SIGNPOST_READ, SafariZoneClosedSign
-	signpost 19, 14, SIGNPOST_READ, NoLitteringSign
-	signpost 7, 7, SIGNPOST_READ, SafariZoneExhibitSign
-	signpost 7, 13, SIGNPOST_READ, SafariZoneExhibitSign
-	signpost 7, 27, SIGNPOST_READ, SafariZoneExhibitSign
-	signpost 7, 33, SIGNPOST_READ, SafariZoneExhibitSign
-	signpost 13, 31, SIGNPOST_READ, SafariZoneExhibitSign
-	signpost 27, 31, SIGNPOST_READ, HouseForSaleSign
-	signpost 35, 11, SIGNPOST_READ, FuchsiaCityCarefulSwimmingSign
-
-.PersonEvents: db 6
-	person_event SPRITE_YOUNGSTER, 18, 23, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, YoungsterScript_0x194b22, -1
-	person_event SPRITE_POKEFAN_M, 8, 10, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 1, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x194b25, -1
-	person_event SPRITE_TEACHER, 13, 16, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, TeacherScript_0x194b28, -1
-	person_event SPRITE_POKEFAN_F, 8, 28, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, FuchsiaCityPokefanFScript, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 19, 16, SPRITEMOVEDATA_CUTTABLE_TREE, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, cuttree, EVENT_FUCHSIA_CITY_CUT_TREE
-	person_event SPRITE_BALL_CUT_FRUIT, 17, 14, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FruitTreeScript_0x194b43, -1
+	db 6 ; object events
+	object_event 23, 18, SPRITE_YOUNGSTER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x194b45, -1
+	object_event 10,  8, SPRITE_POKEFAN_M, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 1, 1, -1, -1, PAL_NPC_BROWN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x194b83, -1
+	object_event 16, 13, SPRITE_TEACHER, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x194bd3, -1
+	object_event 28,  8, SPRITE_POKEFAN_F, SPRITEMOVEDATA_WANDER, 2, 2, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, FuchsiaCityPokefanFText, -1
+	cuttree_event 16, 19, EVENT_FUCHSIA_CITY_CUT_TREE
+	fruittree_event 14, 17, FRUITTREE_FUCHSIA_CITY, LIECHI_BERRY
 
 FuchsiaCityFlyPoint:
 	setflag ENGINE_FLYPOINT_FUCHSIA
 	return
-
-YoungsterScript_0x194b22:
-	jumptextfaceplayer UnknownText_0x194b45
-
-PokefanMScript_0x194b25:
-	jumptextfaceplayer UnknownText_0x194b83
-
-TeacherScript_0x194b28:
-	jumptextfaceplayer UnknownText_0x194bd3
-
-FuchsiaCityPokefanFScript:
-	jumptextfaceplayer FuchsiaCityPokefanFText
-
-FuchsiaCitySign:
-	jumptext FuchsiaCitySignText
-
-FuchsiaGymSign:
-	jumptext FuchsiaGymSignText
-
-SafariZoneOfficeSign:
-	jumptext SafariZoneOfficeSignText
-
-SafariZoneOfficeClosedSign:
-	jumptext SafariZoneOfficeClosedSignText
-
-WardensHomeSign:
-	jumptext WardensHomeSignText
-
-SafariZoneClosedSign:
-	jumptext SafariZoneClosedSignText
-
-NoLitteringSign:
-	jumptext NoLitteringSignText
-
-SafariZoneExhibitSign:
-	jumptext SafariZoneExhibitSignText
-
-HouseForSaleSign:
-	jumptext HouseForSaleSignText
-
-FuchsiaCityCarefulSwimmingSign:
-	jumptext FuchsiaCityCarefulSwimmingSignText
-
-FruitTreeScript_0x194b43:
-	fruittree FRUITTREE_FUCHSIA_CITY
 
 UnknownText_0x194b45:
 	text "One of the Elite"

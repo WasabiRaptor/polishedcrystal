@@ -13,7 +13,7 @@ LoadWildMonData: ; 29ff8
 	inc hl
 	ld de, wMornEncounterRate
 	ld bc, 3
-	call CopyBytes
+	rst CopyBytes
 .done_copy
 	call _WaterWildmonLookup
 	ld a, 0 ; not xor a; preserve carry flag
@@ -76,6 +76,7 @@ FindNest: ; 2a01f
 	ld a, [hli]
 	cp MAP_NAVEL_ROCK_INSIDE
 	jr nz, .not_navel_rock_map
+	pop hl
 	ret
 
 	ld a, [hli]
@@ -84,10 +85,10 @@ FindNest: ; 2a01f
 	ld a, [hli]
 .not_navel_rock_map
 	ld c, a
-rept 3
 	inc hl
-endr
-	ld a, NUM_WILDMONS_PER_AREA_TIME_OF_DAY * 3
+	inc hl
+	inc hl
+	ld a, NUM_GRASSMON * 3
 	call .SearchMapForMon
 	jr nc, .next_grass
 	ld [de], a
@@ -95,7 +96,7 @@ endr
 
 .next_grass
 	pop hl
-	ld bc, WILDMON_GRASS_STRUCTURE_LENGTH
+	ld bc, GRASS_WILDDATA_LENGTH
 	add hl, bc
 	jr .FindGrass
 ; 2a06e
@@ -130,9 +131,8 @@ endr
 	ld a, [wNamedObjectIndexBuffer]
 	cp [hl]
 	jr z, .found
-rept 2
 	inc hl
-endr
+	inc hl
 	pop af
 	dec a
 	jr nz, .ScanMapLoop
@@ -141,8 +141,7 @@ endr
 
 .found
 	pop af
-	jp .AppendNest
-; 2a09c
+	; fallthrough
 
 .AppendNest: ; 2a09c
 	push de
@@ -233,8 +232,8 @@ TryWildEncounter::
 
 .no_battle
 	xor a ; BATTLETYPE_NORMAL
-	ld [TempWildMonSpecies], a
-	ld [BattleType], a
+	ld [wTempWildMonSpecies], a
+	ld [wBattleType], a
 	ld a, 1
 	and a
 	ret
@@ -254,7 +253,7 @@ GetMapEncounterRate: ; 2a111
 	call CheckOnWater
 	ld a, 3
 	jr z, .ok
-	ld a, [TimeOfDay]
+	ld a, [wTimeOfDay]
 .ok
 	ld c, a
 	ld b, 0
@@ -283,9 +282,9 @@ ApplyMusicEffectOnEncounterRate:: ; 2a124
 
 ApplyCleanseTagEffectOnEncounterRate::
 ; Cleanse Tag halves encounter rate.
-	ld hl, PartyMon1Item
+	ld hl, wPartyMon1Item
 	ld de, PARTYMON_STRUCT_LENGTH
-	ld a, [PartyCount]
+	ld a, [wPartyCount]
 	ld c, a
 .loop
 	ld a, [hl]
@@ -303,7 +302,7 @@ ApplyCleanseTagEffectOnEncounterRate::
 SetBattlerLevel:
 ; Sets c to the level of the first nonfainted mon (to be sent first into wild fights)
 	push bc
-	ld hl, PartyMon1HP
+	ld hl, wPartyMon1HP
 	ld bc, PARTYMON_STRUCT_LENGTH - 1
 .loop
 	ld a, [hli]
@@ -333,24 +332,23 @@ _ChooseWildEncounter:
 	pop bc
 	jp c, .startwildbattle
 
-rept 3
 	inc hl
-endr
+	inc hl
+	inc hl
 	push bc
 	call CheckOnWater
 	pop bc
-	ld de, .WaterMonTable
+	ld de, WaterMonProbTable
 	ld b, $4
 	jr z, .got_table
-rept 2
 	inc hl
-endr
-	ld a, [TimeOfDay]
+	inc hl
+	ld a, [wTimeOfDay]
 	push bc
 	ld bc, $e
-	call AddNTimes
+	rst AddNTimes
 	pop bc
-	ld de, .GrassMonTable
+	ld de, GrassMonProbTable
 	ld b, $c
 
 .got_table
@@ -365,16 +363,16 @@ endr
 .force_loop
 	inc hl ; We don't care about level
 	ld a, [hli]
-	ld [CurSpecies], a
+	ld [wCurSpecies], a
 	push bc
 	push hl
 	call GetBaseData
 	pop hl
 	pop bc
-	ld a, [BaseType1]
+	ld a, [wBaseType1]
 	cp c
 	jr z, .can_force_type
-	ld a, [BaseType2]
+	ld a, [wBaseType2]
 	cp c
 	jr z, .can_force_type
 	dec b
@@ -434,7 +432,7 @@ endr
 ; Store the level
 .ok
 	ld a, b
-	ld [CurPartyLevel], a
+	ld [wCurPartyLevel], a
 	ld b, [hl]
 	ld a, b
 	pop hl
@@ -444,22 +442,22 @@ endr
 	cp UNOWN
 	jr nz, .unown_check_done
 
-	ld a, [UnlockedUnowns]
+	ld a, [wUnlockedUnowns]
 	and a
 	jr z, .nowildbattle
 
 .unown_check_done
 	; Check if we're forcing type
-	ld [CurSpecies], a
+	ld [wCurSpecies], a
 	push bc
 	push hl
 	call GetBaseData
 	pop hl
 	pop bc
-	ld a, [BaseType1]
+	ld a, [wBaseType1]
 	cp c
 	jr z, .type_ok
-	ld a, [BaseType2]
+	ld a, [wBaseType2]
 	cp c
 	jr z, .type_ok
 	inc c
@@ -475,21 +473,21 @@ endr
 
 .loadwildmon
 	ld a, b
-	ld [TempWildMonSpecies], a
+	ld [wTempWildMonSpecies], a
 
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	cp GROUP_SOUL_HOUSE_B1F ; Soul House or Lavender Radio Tower
 	jr nz, .not_ghost
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	cp MAP_SOUL_HOUSE_B1F ; first Ghost map in its group
 	jr c, .not_ghost
 	ld a, SILPHSCOPE2
-	ld [CurItem], a
-	ld hl, NumKeyItems
+	ld [wCurItem], a
+	ld hl, wNumKeyItems
 	call CheckItem
 	jr c, .not_ghost
 	ld a, BATTLETYPE_GHOST
-	ld [BattleType], a
+	ld [wBattleType], a
 .not_ghost
 
 .startwildbattle
@@ -497,21 +495,7 @@ endr
 	ret
 ; 2a1cb
 
-.GrassMonTable: ; 2a1cb
-	db 30,  $0 ; 30% chance
-	db 60,  $2 ; 30% chance
-	db 80,  $4 ; 20% chance
-	db 90,  $6 ; 10% chance
-	db 95,  $8 ;  5% chance
-	db 98,  $a ;  3% chance
-	db 100, $c ;  2% chance
-; 2a1d9
-
-.WaterMonTable: ; 2a1d9
-	db 60,  $0 ; 60% chance
-	db 90,  $2 ; 30% chance
-	db 100, $4 ; 10% chance
-; 2a1df
+INCLUDE "data/wild/probabilities.asm"
 
 CheckRepelEffect::
 ; If there is no active Repel, there's no need to be here.
@@ -520,14 +504,16 @@ CheckRepelEffect::
 	jr z, .encounter
 	call SetBattlerLevel
 
-	ld a, [CurPartyLevel]
+	ld a, [wCurPartyLevel]
 	cp c
 .encounter
 	ccf
 	ret
 
 ApplyAbilityEffectsOnEncounterMon:
+; Consider making the abilities more useful in non-faithful
 	call GetLeadAbility
+	ret z
 	ld hl, .AbilityEffects
 	jp BattleJumptable
 
@@ -570,24 +556,30 @@ ApplyAbilityEffectsOnEncounterMon:
 .halve_encounter_rate
 	srl b
 .avoid_rate_underflow
-	ret nc
+	ld a, b
+	and a
+	ret nz
 	ld b, 1
 	ret
 
 .Hustle:
 .Pressure:
 .VitalSpirit:
-; Increase encounter rate by 50% if the foe's level exceed leading non-fainted mon
-	ld a, [CurPartyLevel]
-	cp c
+; Vanilla 3gen+: 50% to force upper bound in a level range
+; Since we don't have level ranges, 50% to increase level by 1/8 (min 1)
+	call Random
+	rrca
 	ret c
-	ret z
-	jr .semidouble_encounter_rate
+	ld a, c
+	cp 100
+	ret nc
+	inc c
+	ret
 
 .Intimidate:
 .KeenEye:
 ; Halve encounter rate if enemy is 5+ levels below leading nonfainted mon
-	ld a, [CurPartyLevel]
+	ld a, [wCurPartyLevel]
 	add 5
 	cp c
 	ret nc
@@ -631,7 +623,7 @@ _WaterWildmonLookup: ; 2a21d
 	jr _NormalWildmonOK
 
 _GetGrassWildmonPointer:
-	farcall RegionCheck
+	call RegionCheck
 	ld a, e
 	ld hl, JohtoGrassWildMons
 	and a ; cp JOHTO_REGION
@@ -643,7 +635,7 @@ _GetGrassWildmonPointer:
 	ret
 
 _GetWaterWildmonPointer:
-	farcall RegionCheck
+	call RegionCheck
 	ld a, e
 	ld hl, JohtoWaterWildMons
 	and a ; cp JOHTO_REGION
@@ -657,7 +649,7 @@ _GetWaterWildmonPointer:
 _SwarmWildmonCheck
 	call CopyCurrMapDE
 	push hl
-	ld hl, SwarmFlags
+	ld hl, wSwarmFlags
 	bit 2, [hl]
 	pop hl
 	jr z, .CheckYanma
@@ -674,7 +666,7 @@ _SwarmWildmonCheck
 
 .CheckYanma:
 	push hl
-	ld hl, SwarmFlags
+	ld hl, wSwarmFlags
 	bit 3, [hl]
 	pop hl
 	jr z, _NoSwarmWildmon
@@ -699,9 +691,9 @@ _NormalWildmonOK
 ; 2a27f
 
 CopyCurrMapDE: ; 2a27f
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	ld d, a
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	ld e, a
 	ret
 ; 2a288
@@ -801,7 +793,7 @@ CheckEncounterRoamMon: ; 2a2ce
 	ld c, a
 	ld b, 0
 	ld a, wRoamMon1End - wRoamMon1 ; length of the RoamMon struct
-	call AddNTimes
+	rst AddNTimes
 	ld a, d
 	cp [hl]
 	jr nz, .DontEncounterRoamMon
@@ -810,15 +802,15 @@ CheckEncounterRoamMon: ; 2a2ce
 	cp [hl]
 	jr nz, .DontEncounterRoamMon
 ; We've decided to take on a beast, so stage its information for battle.
-rept 3
 	dec hl
-endr
+	dec hl
+	dec hl
 	ld a, [hli]
-	ld [TempWildMonSpecies], a
+	ld [wTempWildMonSpecies], a
 	ld a, [hl]
-	ld [CurPartyLevel], a
+	ld [wCurPartyLevel], a
 	ld a, BATTLETYPE_ROAMING
-	ld [BattleType], a
+	ld [wBattleType], a
 
 	pop hl
 	scf
@@ -915,9 +907,8 @@ UpdateRoamMons: ; 2a30d
 	inc hl
 	ld c, a
 	ld b, $0
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	ld a, [wRoamMons_LastMapGroup]
 	cp [hl]
 	jr nz, .done
@@ -983,11 +974,11 @@ JumpRoamMon: ; 2a3cd
 	jr .innerloop
 ; Check to see if the selected map is the one the player is currently in.  If so, try again.
 .ok
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	cp [hl]
 	jr nz, .done
 	inc hl
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	cp [hl]
 	jr z, .loop
 	dec hl
@@ -1004,36 +995,14 @@ _BackUpMapIndices: ; 2a3f6
 	ld [wRoamMons_LastMapNumber], a
 	ld a, [wRoamMons_CurrentMapGroup]
 	ld [wRoamMons_LastMapGroup], a
-	ld a, [MapNumber]
+	ld a, [wMapNumber]
 	ld [wRoamMons_CurrentMapNumber], a
-	ld a, [MapGroup]
+	ld a, [wMapGroup]
 	ld [wRoamMons_CurrentMapGroup], a
 	ret
 ; 2a40f
 
-RoamMaps: ; 2a40f
-; Maps that roaming monsters can be on,
-; and possible maps they can jump to.
-; Notably missing are Route 40 and
-; Route 41, which are water routes.
-	roam_map ROUTE_29, 2, ROUTE_30, ROUTE_46
-	roam_map ROUTE_30, 2, ROUTE_29, ROUTE_31
-	roam_map ROUTE_31, 3, ROUTE_30, ROUTE_32, ROUTE_36
-	roam_map ROUTE_32, 3, ROUTE_36, ROUTE_31, ROUTE_33
-	roam_map ROUTE_33, 2, ROUTE_32, ROUTE_34
-	roam_map ROUTE_34, 2, ROUTE_33, ROUTE_35
-	roam_map ROUTE_35, 2, ROUTE_34, ROUTE_36
-	roam_map ROUTE_36, 4, ROUTE_35, ROUTE_31, ROUTE_32, ROUTE_37
-	roam_map ROUTE_37, 3, ROUTE_36, ROUTE_38, ROUTE_42
-	roam_map ROUTE_38, 3, ROUTE_37, ROUTE_39, ROUTE_42
-	roam_map ROUTE_39, 1, ROUTE_38
-	roam_map ROUTE_42, 4, ROUTE_43, ROUTE_44, ROUTE_37, ROUTE_38
-	roam_map ROUTE_43, 2, ROUTE_42, ROUTE_44
-	roam_map ROUTE_44, 3, ROUTE_42, ROUTE_43, ROUTE_45
-	roam_map ROUTE_45, 2, ROUTE_44, ROUTE_46
-	roam_map ROUTE_46, 2, ROUTE_45, ROUTE_29
-	db -1
-; 2a4a0
+INCLUDE "data/wild/roammon_maps.asm"
 
 ValidateTempWildMonSpecies: ; 2a4a0
 ; Due to a development oversight, this function is called with the wild Pokemon's level, not its species, in a.
@@ -1066,9 +1035,9 @@ RandomPhoneRareWildMon: ; 2a4ab
 	push hl
 	ld bc, 5 + 4 * 2 ; Location of the level of the 5th wild Pokemon in that map
 	add hl, bc
-	ld a, [TimeOfDay]
+	ld a, [wTimeOfDay]
 	ld bc, 7 * 2
-	call AddNTimes
+	rst AddNTimes
 .randloop1
 	call Random
 	and $3
@@ -1076,9 +1045,8 @@ RandomPhoneRareWildMon: ; 2a4ab
 	dec a
 	ld c, a
 	ld b, $0
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 ; We now have the pointer to one of the last (rarest) three wild Pokemon found in that area.
 	inc hl
 	ld c, [hl] ; Contains the species index of this rare Pokemon
@@ -1102,7 +1070,7 @@ endr
 	pop bc
 	jr nz, .done
 ; Since we haven't seen it, have the caller tell us about it.
-	ld de, StringBuffer1
+	ld de, wStringBuffer1
 	call CopyName1
 	ld a, c
 	ld [wNamedObjectIndexBuffer], a
@@ -1110,12 +1078,12 @@ endr
 	ld hl, .SawRareMonText
 	call PrintText
 	xor a
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 .done
 	ld a, $1
-	ld [ScriptVar], a
+	ld [wScriptVar], a
 	ret
 
 .SawRareMonText:
@@ -1138,7 +1106,7 @@ RandomPhoneWildMon: ; 2a51f
 .ok
 	ld bc, 5 + 0 * 2
 	add hl, bc
-	ld a, [TimeOfDay]
+	ld a, [wTimeOfDay]
 	inc a
 	ld bc, 7 * 2
 .loop
@@ -1152,17 +1120,17 @@ RandomPhoneWildMon: ; 2a51f
 	and $3
 	ld c, a
 	ld b, $0
-rept 2
 	add hl, bc
-endr
+	add hl, bc
 	inc hl
 	ld a, [hl]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
-	ld hl, StringBuffer1
-	ld de, StringBuffer4
+	ld hl, wStringBuffer1
+	ld de, wStringBuffer4
 	ld bc, PKMN_NAME_LENGTH
-	jp CopyBytes
+	rst CopyBytes
+	ret
 ; 2a567
 
 RandomPhoneMon: ; 2a567
@@ -1173,13 +1141,13 @@ RandomPhoneMon: ; 2a567
 	dec a
 	ld c, a
 	ld b, 0
-rept 3
 	add hl, bc
-endr
+	add hl, bc
+	add hl, bc
 	ld a, BANK(TrainerGroups)
 	call GetFarByte
 	inc hl
-	ld [TrainerGroupBank], a
+	ld [wTrainerGroupBank], a
 	ld a, BANK(TrainerGroups)
 	call GetFarHalfword
 
@@ -1187,7 +1155,7 @@ endr
 	dec e
 	jr z, .skipped
 .skip
-	ld a, [TrainerGroupBank]
+	ld a, [wTrainerGroupBank]
 	call GetFarByte
 	inc hl
 	cp -1
@@ -1196,13 +1164,13 @@ endr
 .skipped
 
 .skip_name
-	ld a, [TrainerGroupBank]
+	ld a, [wTrainerGroupBank]
 	call GetFarByte
 	inc hl
 	cp "@"
 	jr nz, .skip_name
 
-	ld a, [TrainerGroupBank]
+	ld a, [wTrainerGroupBank]
 	call GetFarByte
 	inc hl
 
@@ -1253,7 +1221,7 @@ endr
 .count_mon
 	inc e
 	add hl, bc
-	ld a, [TrainerGroupBank]
+	ld a, [wTrainerGroupBank]
 	call GetFarByte
 	cp -1
 	jr nz, .count_mon
@@ -1274,14 +1242,15 @@ endr
 .got_mon
 
 	inc hl ; species
-	ld a, [TrainerGroupBank]
+	ld a, [wTrainerGroupBank]
 	call GetFarByte
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
-	ld hl, StringBuffer1
-	ld de, StringBuffer4
+	ld hl, wStringBuffer1
+	ld de, wStringBuffer4
 	ld bc, PKMN_NAME_LENGTH
-	jp CopyBytes
+	rst CopyBytes
+	ret
 ; 2a5e9
 
 

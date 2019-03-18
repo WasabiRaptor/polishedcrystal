@@ -1,8 +1,8 @@
 ReadPartyMonMail: ; b9229
-	ld a, [CurPartyMon]
+	ld a, [wCurPartyMon]
 	ld hl, sPartyMail
 	ld bc, MAIL_STRUCT_LENGTH
-	call AddNTimes
+	rst AddNTimes
 	ld d, h
 	ld e, l
 ReadAnyMail: ; b9237
@@ -23,8 +23,8 @@ ReadAnyMail: ; b9237
 	pop de
 	call .LoadGFX
 	call EnableLCD
-	call WaitBGMap
-	ld a, [Buffer3]
+	call ApplyTilemapInVBlank
+	ld a, [wBuffer3]
 	ld e, a
 	farcall LoadMailPalettes
 	call SetPalettes
@@ -52,11 +52,11 @@ ReadAnyMail: ; b9237
 	ld de, sPartyMon1MailAuthorID - sPartyMon1Mail
 	add hl, de
 	ld a, [hli]
-	ld [Buffer1], a
+	ld [wBuffer1], a
 	ld a, [hli]
-	ld [Buffer2], a
+	ld [wBuffer2], a
 	ld a, [hli]
-	ld [CurPartySpecies], a
+	ld [wCurPartySpecies], a
 	ld b, [hl]
 	call CloseSRAM
 	ld hl, MailGFXPointers
@@ -68,9 +68,8 @@ ReadAnyMail: ; b9237
 	cp -1
 	jr z, .invalid
 	inc c
-rept 2
 	inc hl
-endr
+	inc hl
 	jr .loop2
 
 .invalid
@@ -79,7 +78,7 @@ endr
 
 .got_pointer
 	ld a, c
-	ld [Buffer3], a
+	ld [wBuffer3], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -547,7 +546,7 @@ LoadPortraitMailGFX: ; b96ca
 	call Mail_DrawRowLoop
 	call LovelyEonMail_PlaceIcons
 	ld a, $1
-	ld [MonVariant], a
+	ld [wCurForm], a
 	hlcoord 1, 10
 	call PrepMonFrontpic
 	pop hl
@@ -676,12 +675,12 @@ MailGFX_PlaceMessage: ; b9803
 	ld de, wTempMail
 	ld a, BANK(sPartyMail)
 	call GetSRAMBank
-	call CopyBytes
+	rst CopyBytes
 	call CloseSRAM
 	ld hl, wTempMailAuthor
 	ld de, wMonOrItemNameBuffer
 	ld bc, NAME_LENGTH - 1
-	call CopyBytes
+	rst CopyBytes
 	ld a, "@"
 	ld [wTempMailAuthor], a
 	ld [wMonOrItemNameBuffer + NAME_LENGTH - 1], a
@@ -692,7 +691,7 @@ MailGFX_PlaceMessage: ; b9803
 	ld a, [de]
 	and a
 	ret z
-	ld a, [Buffer3]
+	ld a, [wBuffer3]
 	hlcoord 8, 14
 	cp $3 ; PORTRAITMAIL
 	jr z, .place_author
@@ -889,9 +888,8 @@ LoadMailGFX_Color3: ; b991e
 .loop
 	ld a, [de]
 	inc de
-rept 2
 	ld [hli], a
-endr
+	ld [hli], a
 	dec c
 	jr nz, .loop
 	ret
@@ -1029,25 +1027,3 @@ INCBIN "gfx/mail/0b9e26.1bpp"
 
 PortraitMailBorderGFX: ; b9e4e
 INCBIN "gfx/mail/0b9e4e.1bpp"
-
-
-ItemIsMail: ; b9e76
-	ld a, d
-	ld hl, .items
-	ld de, 1
-	jp IsInArray
-; b9e80
-
-.items
-	db FLOWER_MAIL
-	db SURF_MAIL
-	db LITEBLUEMAIL
-	db PORTRAITMAIL
-	db LOVELY_MAIL
-	db EON_MAIL
-	db MORPH_MAIL
-	db BLUESKY_MAIL
-	db MUSIC_MAIL
-	db MIRAGE_MAIL
-	db -1
-; b9e8b

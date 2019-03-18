@@ -1,39 +1,36 @@
 IvysLab_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  4, 11, VALENCIA_ISLAND, 1
+	warp_event  5, 11, VALENCIA_ISLAND, 1
 
-IvysLab_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $b, $4, 1, VALENCIA_ISLAND
-	warp_def $b, $5, 1, VALENCIA_ISLAND
+	db 14 ; bg events
+	bg_event  5,  0, SIGNPOST_JUMPTEXT, IvysLabWindowText
+	bg_event  2,  1, SIGNPOST_READ, IvysLabHealingMachine
+	bg_event  6,  1, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  7,  1, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  8,  1, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  9,  1, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  0,  7, SIGNPOST_READ, PokemonJournalProfIvyScript
+	bg_event  1,  7, SIGNPOST_READ, PokemonJournalProfIvyScript
+	bg_event  2,  7, SIGNPOST_READ, PokemonJournalProfIvyScript
+	bg_event  3,  7, SIGNPOST_READ, PokemonJournalProfIvyScript
+	bg_event  6,  7, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  7,  7, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  8,  7, SIGNPOST_JUMPSTD, difficultbookshelf
+	bg_event  9,  7, SIGNPOST_JUMPSTD, difficultbookshelf
 
-.XYTriggers: db 0
+	db 3 ; object events
+	object_event  4,  3, SPRITE_IVY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ProfIvyScript, -1
+	object_event  5,  3, SPRITE_NIDORINO, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, IvysLabNidorinoScript, -1
+	object_event  2,  9, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, IvysLabHopeScript, -1
 
-.Signposts: db 14
-	signpost 1, 2, SIGNPOST_READ, IvysLabHealingMachine
-	signpost 0, 5, SIGNPOST_JUMPTEXT, IvysLabWindowText
-	signpost 1, 6, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 1, 7, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 1, 8, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 1, 9, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 7, 0, SIGNPOST_READ, PokemonJournalProfIvyScript
-	signpost 7, 1, SIGNPOST_READ, PokemonJournalProfIvyScript
-	signpost 7, 2, SIGNPOST_READ, PokemonJournalProfIvyScript
-	signpost 7, 3, SIGNPOST_READ, PokemonJournalProfIvyScript
-	signpost 7, 6, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 7, 7, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 7, 8, SIGNPOST_JUMPSTD, difficultbookshelf
-	signpost 7, 9, SIGNPOST_JUMPSTD, difficultbookshelf
-
-.PersonEvents: db 3
-	person_event SPRITE_IVY, 2, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ProfIvyScript, -1
-	person_event SPRITE_NIDORINO, 2, 6, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, IvysLabNidorinoScript, -1
-	person_event SPRITE_COOLTRAINER_F, 9, 2, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, IvysLabHopeScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const IVYSLAB_IVY
 	const IVYSLAB_NIDORINO
 
@@ -44,9 +41,9 @@ ProfIvyScript:
 	iftrue .GetItem
 	writetext .RequestText
 	yesorno
-	iffalse .NoBerry
+	iffalse_jumpopenedtext .NoBerryText
 	checkitem LIECHI_BERRY
-	iffalse .NoBerry
+	iffalse_jumpopenedtext .NoBerryText
 	takeitem LIECHI_BERRY
 	checkitem LIECHI_BERRY
 	iffalse .Return1
@@ -57,7 +54,7 @@ ProfIvyScript:
 	writetext .OkayText
 	waitbutton
 	closetext
-	spriteface IVYSLAB_IVY, RIGHT
+	turnobject IVYSLAB_IVY, RIGHT
 	pause 15
 	playmusic MUSIC_HEAL
 	pause 60
@@ -79,14 +76,14 @@ ProfIvyScript:
 	writetext .ThanksText
 	buttonsound
 	verbosegiveitem MOON_STONE
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_MOON_STONE_FROM_IVY
 .GotItem:
 	checkevent EVENT_BEAT_PROF_IVY
-	iftrue .Beaten
+	iftrue_jumpopenedtext .AfterText
 	writetext .ChallengeText
 	yesorno
-	iffalse .NoBattle
+	iffalse_jumpopenedtext .NoText
 	writetext .SeenText
 	waitbutton
 	closetext
@@ -96,29 +93,22 @@ ProfIvyScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_PROF_IVY
-	opentext
-.Beaten:
-	writetext .AfterText
-	waitbutton
-.Done:
-	closetext
-	end
+	jumptext .AfterText
 
 .Return2:
 	giveitem LIECHI_BERRY
 .Return1:
 	giveitem LIECHI_BERRY
-.NoBerry:
-	writetext .NoBerryText
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-.NoBattle:
-	writetext .NoText
-	waitbutton
-	closetext
-	end
+.NoBerryText:
+	text "Ivy: I under-"
+	line "stand…"
+
+	para "You don't have"
+	line "three Liechi"
+	cont "Berries to spare."
+	done
 
 .RequestText:
 	text "Ivy: Hello again,"
@@ -136,15 +126,6 @@ ProfIvyScript:
 	para "Can you please"
 	line "find three Liechi"
 	cont "Berries for it?"
-	done
-
-.NoBerryText:
-	text "Ivy: I under-"
-	line "stand…"
-
-	para "You don't have"
-	line "three Liechi"
-	cont "Berries to spare."
 	done
 
 .OkayText:
@@ -197,22 +178,10 @@ ProfIvyScript:
 	done
 
 IvysLabHopeScript:
-	faceplayer
-	opentext
 	checkevent EVENT_HEALED_NIDORINO
-	iftrue .HealedNidorino
-	writetext .Text1
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer .Text2
+	thistextfaceplayer
 
-.HealedNidorino:
-	writetext .Text2
-	waitbutton
-	closetext
-	end
-
-.Text1:
 	text "Hope: Prof.Ivy"
 	line "takes care of the"
 
@@ -231,59 +200,28 @@ IvysLabHopeScript:
 	done
 
 IvysLabNidorinoScript:
-	opentext
 	checkevent EVENT_HEALED_NIDORINO
 	iftrue .Healed
+	opentext
 	writetext .WeakCry
 	writebyte NIDORINO
 	special PlaySlowCry
 	buttonsound
-	writetext .WeakText
-	waitbutton
-	closetext
-	end
+	thisopenedtext
 
-.Healed:
-	writetext IvysLabNidorinoText
-	cry NIDORINO
-	waitbutton
-	closetext
-	end
+	text "Its cry is weak…"
+	done
 
 .WeakCry:
 	text "Nidorino: Gyun…"
 	done
 
-.WeakText:
-	text "Its cry is weak…"
-	done
+.Healed:
+	showcrytext IvysLabNidorinoText, NIDORINO
+	end
 
 IvysLabNidorinoText:
 	text "Nidorino: Gyun!"
-	done
-
-IvysLabHealingMachine:
-	opentext
-	writetext .Text
-	yesorno
-	iftrue .HealParty
-	closetext
-	end
-
-.HealParty:
-	special HealParty
-	special SaveMusic
-	playmusic MUSIC_NONE
-	writebyte 1 ; Machine is in Elm's Lab
-	special HealMachineAnim
-	pause 30
-	special RestoreMusic
-	closetext
-	end
-
-.Text:
-	text "Would you like to"
-	line "heal your #mon?"
 	done
 
 IvysLabWindowText:
@@ -293,11 +231,32 @@ IvysLabWindowText:
 	line "is blowing in."
 	done
 
-PokemonJournalProfIvyScript:
-	setflag ENGINE_READ_PROF_IVY_JOURNAL
-	jumptext .Text
+IvysLabHealingMachine:
+	opentext
+	writetext .Text
+	yesorno
+	iftrue .HealParty
+	endtext
+
+.HealParty:
+	special HealParty
+	special SaveMusic
+	playmusic MUSIC_NONE
+	writebyte 1 ; Machine is in Elm's Lab
+	special HealMachineAnim
+	pause 30
+	special RestoreMusic
+	endtext
 
 .Text:
+	text "Would you like to"
+	line "heal your #mon?"
+	done
+
+PokemonJournalProfIvyScript:
+	setflag ENGINE_READ_PROF_IVY_JOURNAL
+	thistext
+
 	text "#mon Journal"
 
 	para "Special Feature:"

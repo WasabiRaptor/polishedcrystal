@@ -1,36 +1,32 @@
 OlivinePokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, OLIVINE_CITY, 1
+	warp_event  6,  7, OLIVINE_CITY, 1
+	warp_event  0,  7, POKECENTER_2F, 1
 
-OlivinePokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 1, OLIVINE_CITY
-	warp_def $7, $6, 1, OLIVINE_CITY
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalJasmineScript
 
-.XYTriggers: db 0
+	db 5 ; object events
+	object_event  8,  1, SPRITE_BEAUTY, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, BeautyCharlotteScript, -1
+	pc_nurse_event  5, 1
+	object_event  2,  6, SPRITE_FISHING_GURU, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumpstd, happinesschecknpc, -1
+	object_event  2,  3, SPRITE_REAL_FISHER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, OlivinePokeCenter1FFisherText, -1
+	object_event 11,  6, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, OlivinePokeCenter1FTeacherText, -1
 
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalJasmineScript
-
-.PersonEvents: db 5
-	person_event SPRITE_BEAUTY, 1, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, BeautyCharlotteScript, -1
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_FISHING_GURU, 6, 2, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 1, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, happinesschecknpc, -1
-	person_event SPRITE_FISHER, 3, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x9c00e, -1
-	person_event SPRITE_TEACHER, 6, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x9c086, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const OLIVINEPOKECENTER1F_BEAUTY
 
 PokemonJournalJasmineScript:
 	setflag ENGINE_READ_JASMINE_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Special Feature:"
@@ -45,13 +41,13 @@ PokemonJournalJasmineScript:
 	done
 
 BeautyCharlotteScript:
+	checkevent EVENT_BEAT_BEAUTY_CHARLOTTE
+	iftrue_jumptextfaceplayer .AfterText
 	faceplayer
 	opentext
-	checkevent EVENT_BEAT_BEAUTY_CHARLOTTE
-	iftrue .After
 	writetext .GreetingText
 	yesorno
-	iffalse .NoBattle
+	iffalse_jumpopenedtext .NoBattleText
 	writetext .SeenText
 	waitbutton
 	closetext
@@ -61,12 +57,13 @@ BeautyCharlotteScript:
 	startbattle
 	reloadmapafterbattle
 	setevent EVENT_BEAT_BEAUTY_CHARLOTTE
-	opentext
-.After:
-	jumpopenedtext .AfterText
+	thistext
 
-.NoBattle:
-	jumpopenedtext .NoBattleText
+.AfterText:
+	text "How cool is it"
+	line "to have such a"
+	cont "special #mon?"
+	done
 
 .GreetingText:
 	text "Oh, are you a"
@@ -103,13 +100,7 @@ BeautyCharlotteScript:
 	text "Amazing battle!"
 	done
 
-.AfterText:
-	text "How cool is it"
-	line "to have such a"
-	cont "special #mon?"
-	done
-
-UnknownText_0x9c00e:
+OlivinePokeCenter1FFisherText:
 	text "There's this guy in"
 	line "Cianwood City who"
 	cont "looks weak, but he"
@@ -121,7 +112,7 @@ UnknownText_0x9c00e:
 	line "big boulders."
 	done
 
-UnknownText_0x9c086:
+OlivinePokeCenter1FTeacherText:
 	text "There's a person"
 	line "in Cianwood City"
 	cont "across the sea."

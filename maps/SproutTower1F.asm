@@ -1,37 +1,28 @@
 SproutTower1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 5 ; warp events
+	warp_event  7, 15, VIOLET_CITY, 7
+	warp_event  8, 15, VIOLET_CITY, 7
+	warp_event  4,  4, SPROUT_TOWER_2F, 1
+	warp_event  0,  6, SPROUT_TOWER_2F, 2
+	warp_event 15,  3, SPROUT_TOWER_2F, 3
 
-SproutTower1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $f, $7, 7, VIOLET_CITY
-	warp_def $f, $8, 7, VIOLET_CITY
-	warp_def $4, $4, 1, SPROUT_TOWER_2F
-	warp_def $6, $0, 2, SPROUT_TOWER_2F
-	warp_def $3, $f, 3, SPROUT_TOWER_2F
+	db 2 ; bg events
+	bg_event  5, 15, SIGNPOST_JUMPTEXT, UnknownText_0x1846d6
+	bg_event 10, 15, SIGNPOST_JUMPTEXT, UnknownText_0x1846d6
 
-.XYTriggers: db 0
-
-.Signposts: db 2
-	signpost 15, 5, SIGNPOST_READ, MapSproutTower1FSignpost1Script
-	signpost 15, 10, SIGNPOST_READ, MapSproutTower1FSignpost1Script
-
-.PersonEvents: db 6
-	person_event SPRITE_SAGE, 4, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SageScript_0x1844fe, -1
-	person_event SPRITE_SAGE, 7, 4, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, SageScript_0x184501, -1
-	person_event SPRITE_GRANNY, 12, 9, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrannyScript_0x184504, -1
-	person_event SPRITE_TEACHER, 9, 7, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, TeacherScript_0x184507, -1
-	person_event SPRITE_SAGE, 5, 1, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 4, TrainerSageChow, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 7, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, PARLYZ_HEAL, 1, EVENT_SPROUT_TOWER1F_PARLYZ_HEAL
-
-SageScript_0x1844fe:
-	jumptextfaceplayer UnknownText_0x1845d8
-
-SageScript_0x184501:
-	jumptextfaceplayer UnknownText_0x18460a
+	db 6 ; object events
+	object_event  5,  4, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x1845d8, -1
+	object_event  4,  7, SPRITE_SAGE, SPRITEMOVEDATA_WANDER, 1, 1, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x18460a, -1
+	object_event  9, 12, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, GrannyScript_0x184504, -1
+	object_event  7,  9, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x18469d, -1
+	object_event  1,  5, SPRITE_SAGE, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 4, GenericTrainerSageChow, -1
+	itemball_event 14,  7, PARALYZEHEAL, 1, EVENT_SPROUT_TOWER1F_PARALYZEHEAL
 
 GrannyScript_0x184504:
 	checkunits
@@ -40,22 +31,16 @@ GrannyScript_0x184504:
 .metric
 	jumptextfaceplayer UnknownText_0x184649_Metric
 
-TeacherScript_0x184507:
-	jumptextfaceplayer UnknownText_0x18469d
+GenericTrainerSageChow:
+	generictrainer SAGE, CHOW, EVENT_BEAT_SAGE_CHOW, SageChowSeenText, SageChowBeatenText
 
-TrainerSageChow:
-	trainer EVENT_BEAT_SAGE_CHOW, SAGE, CHOW, SageChowSeenText, SageChowBeatenText, 0, SageChowScript
+	text "All living beings"
+	line "coexist through"
+	cont "cooperation."
 
-SageChowScript:
-	end_if_just_battled
-	opentext
-	writetext UnknownText_0x184583
-	waitbutton
-	closetext
-	end
-
-MapSproutTower1FSignpost1Script:
-	jumptext UnknownText_0x1846d6
+	para "We must always be"
+	line "thankful for this."
+	done
 
 SageChowSeenText:
 	text "We stand guard in"
@@ -68,15 +53,6 @@ SageChowSeenText:
 
 SageChowBeatenText:
 	text "Th-Thank you!"
-	done
-
-UnknownText_0x184583:
-	text "All living beings"
-	line "coexist through"
-	cont "cooperation."
-
-	para "We must always be"
-	line "thankful for this."
 	done
 
 UnknownText_0x1845d8:

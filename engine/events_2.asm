@@ -1,633 +1,861 @@
-; More overworld event handling.
+ReturnFromMapSetupScript:: ; b8000
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetWorldMapLocation
+	ld [wCurrentLandmark], a
+	call .CheckNationalParkGate
+	jr z, .nationalparkgate
 
+	call GetMapPermission
+	cp GATE
+	jr nz, .not_gate
 
-WarpToSpawnPoint:: ; 97c28
-	ld hl, StatusFlags2
-	res 1, [hl] ; ENGINE_SAFARI_ZONE?
-	res 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
+.nationalparkgate
+	ld a, -1
+	ld [wCurrentLandmark], a
+
+.not_gate
+	ld hl, wEnteredMapFromContinue
+	bit 1, [hl]
+	res 1, [hl]
+	jr nz, .dont_do_map_sign
+
+	call .CheckMovingWithinLandmark
+	jr z, .dont_do_map_sign
+	ld a, [wCurrentLandmark]
+	ld [wPreviousLandmark], a
+
+	call .CheckSpecialMap
+	jr z, .dont_do_map_sign
+
+	ld a, [wCurrentLandmark]
+	cp LUCKY_ISLAND
+	jr nz, .not_lucky_island
+	eventflagcheck EVENT_LUCKY_ISLAND_CIVILIANS
+	jr nz, .dont_do_map_sign
+.not_lucky_island
+
+; Landmark sign timer:
+; $80-$70: Sliding out (old sign)
+; $6f-$6d: Loading new graphics
+; $6c-$5d: Sliding in
+; $5c-$10: Remains visible
+; $0f-$00: Sliding out
+	ld a, [wLandmarkSignTimer]
+	sub $70
+	jr nc, .sliding_out
+	add $70
+	cp $10
+	jr c, .sliding_out
+	sub $5d
+	jr c, .visible
+	cp $10
+	jr c, .sliding_in
+
+	; was loading new graphics -- just reload them again
+	ld a, $70
+	jr .value_ok
+.sliding_in
+	push bc
+	ld b, a
+	ld a, $80
+	sub b
+	pop bc
+	jr .value_ok
+.visible
+	ld a, $80
+	jr .value_ok
+.sliding_out
+	add $70
+.value_ok
+	ld [wLandmarkSignTimer], a
 	ret
-; 97c30
 
-RunMemScript:: ; 97c30
-; If there is no script here, we don't need to be here.
-	ld a, [wMapReentryScriptQueueFlag]
-	and a
+.dont_do_map_sign
+	ld a, [wCurrentLandmark]
+	ld [wPreviousLandmark], a
+	ld a, $90
+	ld [rWY], a
+	ld [hWY], a
+	xor a
+	ld [hLCDCPointer], a
+	ret
+; b8064
+
+.CheckMovingWithinLandmark: ; b8064
+	ld a, [wCurrentLandmark]
+	ld c, a
+	ld a, [wPreviousLandmark]
+	cp c
 	ret z
-; Execute the script at (wMapReentryScriptBank):(wMapReentryScriptAddress).
-	ld hl, wMapReentryScriptAddress
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wMapReentryScriptBank]
-	call CallScript
-	scf
-; Clear the buffer for the next script.
-	push af
-	xor a
-	ld hl, wMapReentryScriptQueueFlag
-	ld bc, 8
-	call ByteFill
-	pop af
+	and a ; cp SPECIAL_MAP
 	ret
-; 97c4f
+; b8070
 
-LoadScriptBDE:: ; 97c4f
-; If there's already a script here, don't overwrite.
-	ld hl, wMapReentryScriptQueueFlag
-	ld a, [hl]
+.CheckSpecialMap: ; b8070
+	cp -1
+	ret z
+	and a ; cp SPECIAL_MAP
+	ret z
+	cp RADIO_TOWER
+	ret z
+	cp LAV_RADIO_TOWER
+	ret z
+	cp UNDERGROUND
+	ret z
+	cp POWER_PLANT
+	ret z
+	cp POKEMON_MANSION
+	ret z
+	cp CINNABAR_LAB
+	ret z
+	ld a, $1
 	and a
+	ret
+; b8089
+
+.CheckNationalParkGate: ; b8089
+	ld a, [wMapGroup]
+	cp GROUP_ROUTE_35_NATIONAL_PARK_GATE
 	ret nz
-; Set the flag
-	ld [hl], 1
-	inc hl
-; Load the script pointer b:de into (wMapReentryScriptBank):(wMapReentryScriptAddress)
-	ld [hl], b
-	inc hl
-	ld [hl], e
-	inc hl
-	ld [hl], d
-	scf
+	ld a, [wMapNumber]
+	cp MAP_ROUTE_35_NATIONAL_PARK_GATE
+	ret z
+	cp MAP_ROUTE_36_NATIONAL_PARK_GATE
 	ret
-; 97c5f
-
-CheckFacingTileEvent:: ; 97c5f
-	call GetFacingTileCoord
-	ld [EngineBuffer1], a
-	ld c, a
-	farcall CheckFacingTileForStd
-	jr c, .done
-
-	ld a, [EngineBuffer1]
-	cp COLL_WHIRLPOOL
-	jr nz, .waterfall
-	farcall TryWhirlpoolOW
-	jr .done
-
-.waterfall
-	ld a, [EngineBuffer1]
-	cp COLL_WATERFALL
-	jr nz, .headbutt
-	farcall TryWaterfallOW
-	jr .done
-
-.headbutt
-	ld a, [EngineBuffer1]
-	cp COLL_HEADBUTT_TREE
-	jr nz, .surf
-	farcall TryHeadbuttOW
-	jr c, .done
-	jr .noevent
-
-.surf
-	farcall TrySurfOW
-	jr nc, .noevent
-	jr .done
-
-.noevent
-	xor a
-	ret
-
-.done
-	call PlayClickSFX
-	ld a, $ff
-	scf
-	ret
-; 97cc0
+; b8098
 
 
-RandomEncounter:: ; 97cc0
-; Random encounter
-
-	call CheckWildEncounterCooldown
-	jr c, .nope
-	call CanUseSweetScent
-	jr nc, .nope
-	ld hl, StatusFlags2
-	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
-	jr nz, .bug_contest
-	farcall TryWildEncounter
-	jr nz, .nope
-	jr .ok
-
-.bug_contest
-	call _TryWildEncounter_BugContest
-	jr nc, .nope
-	jr .ok_bug_contest
-
-.nope
-	ld a, 1
+PlaceMapNameSign:: ; b8098 (2e:4098)
+	; Sign is slightly delayed to move it away from the map connection setup
+	ld hl, wLandmarkSignTimer
+	ld a, [hl]
 	and a
-	ret
-
-.ok
-	ld a, BANK(WildBattleScript)
-	ld hl, WildBattleScript
-	jr .done
-
-.ok_bug_contest
-	ld a, BANK(BugCatchingContestBattleScript)
-	ld hl, BugCatchingContestBattleScript
-	jr .done
-
-.done
-	call CallScript
-	scf
-	ret
-; 97cf9
-
-WildBattleScript: ; 97cf9
-	randomwildmon
-	startbattle
-	reloadmapafterbattle
-	end
-; 97cfd
-
-CanUseSweetScent:: ; 97cfd
-	ld hl, StatusFlags
-	bit 5, [hl]
-	jr nz, .no
-	ld a, [wPermission]
-	cp CAVE
-	jr z, .ice_check
-	cp DUNGEON
-	jr z, .ice_check
-	farcall CheckGrassCollision
-	jr nc, .no
-
-.ice_check
-	ld a, [PlayerStandingTile]
-	cp COLL_ICE
-	jr z, .no
-	scf
-	ret
-
-.no
-	and a
-	ret
-; 97d23
-
-_TryWildEncounter_BugContest: ; 97d23
-	call TryWildEncounter_BugContest
+	jr z, .sliding_out
+	dec [hl]
+	sub $70
+	jr nc, .sliding_out
+	add $70
+	cp $6f
 	ret nc
-	call ChooseWildEncounter_BugContest
-	farjp CheckRepelEffect
-; 97d31
-
-ChooseWildEncounter_BugContest:: ; 97d31
-; Pick a random mon out of ContestMons.
-
-.loop
-	call Random
-	cp 100 << 1
-	jr nc, .loop
-	srl a
-
-	ld hl, ContestMons
-	ld de, 4
-.CheckMon:
-	sub [hl]
-	jr c, .GotMon
-	add hl, de
-	jr .CheckMon
-
-.GotMon:
-	inc hl
-
-; Species
-	ld a, [hli]
-	ld [TempWildMonSpecies], a
-
-; Min level
-	ld a, [hli]
-	ld d, a
-
-; Max level
-	ld a, [hl]
-
-	sub d
-	jr nz, .RandomLevel
-
-; If min and max are the same.
-	ld a, d
-	jr .GotLevel
-
-.RandomLevel:
-; Get a random level between the min and max.
-	ld c, a
-	inc c
-	call Random
-	ld a, [hRandomAdd]
-	call SimpleDivide
-	add d
-
-.GotLevel:
-	ld [CurPartyLevel], a
-
-	xor a
-	ret
-; 97d64
-
-TryWildEncounter_BugContest: ; 97d64
-	ld a, [PlayerStandingTile]
-	cp COLL_LONG_GRASS
-	ld b, 40 percent
-	jr z, .ok
-	ld b, 20 percent
-
-.ok
-	farcall ApplyMusicEffectOnEncounterRate
-	farcall ApplyCleanseTagEffectOnEncounterRate
-	call Random
-	ld a, [hRandomAdd]
-	cp b
-	ret c
-	ld a, 1
-	and a
-	ret
-; 97d87
-
-ContestMons: ; 97d87
-	;   %, species,   min, max
-	db 15, CATERPIE,    7, 18
-	db 15, WEEDLE,      7, 18
-	db 10, METAPOD,     9, 18
-	db 10, KAKUNA,      9, 18
-	db  5, BUTTERFREE, 12, 15
-	db  5, BEEDRILL,   12, 15
-	db 10, VENONAT,    10, 16
-	db 10, PARAS,      10, 17
-	db  5, VENOMOTH,   12, 15
-	db  5, YANMA,      13, 14
-	db  5, SCYTHER,    13, 14
-	db  5, PINSIR,     13, 14
-; 97db3
-
-DoBikeStep:: ; 97db3
-	; If the bike shop owner doesn't have our number, or
-	; if we've already gotten the call, we don't have to
-	; be here.
-	ld hl, StatusFlags2
-	bit 4, [hl] ; ENGINE_BIKE_SHOP_CALL_ENABLED
-	jr z, .NoCall
-
-	; If we're not on the bike, we don't have to be here.
-	ld a, [PlayerState]
-	cp PLAYER_BIKE
-	jr nz, .NoCall
-
-	; If we're not in an area of phone service, we don't
-	; have to be here.
-	call GetMapHeaderPhoneServiceNybble
-	and a
-	jr nz, .NoCall
-
-	; Check the bike step count and check whether we've
-	; taken 65536 of them yet.
-	ld hl, wBikeStep
-	ld a, [hli]
-	ld d, a
-	ld e, [hl]
-	cp 255
-	jr nz, .increment
-	ld a, e
-	cp 255
-	jr z, .dont_increment
-
-.increment
-	inc de
-	ld [hl], e
-	dec hl
-	ld [hl], d
-
-.dont_increment
-	; If we've taken at least 1024 steps, have the bike
-	;  shop owner try to call us.
-	ld a, d
-	cp 1024 >> 8
-	jr c, .NoCall
-
-	; If a call has already been queued, don't overwrite
-	; that call.
-	ld a, [wSpecialPhoneCallID]
-	and a
-	jr nz, .NoCall
-
-	; Queue the call.
-	ld a, SPECIALCALL_BIKESHOP
-	ld [wSpecialPhoneCallID], a
-	xor a
-	ld [wSpecialPhoneCallID + 1], a
-	ld hl, StatusFlags2
-	res 4, [hl] ; ENGINE_BIKE_SHOP_CALL_ENABLED
-	scf
-	ret
-
-.NoCall:
-	xor a
-	ret
-; 97df9
-
-ClearCmdQueue:: ; 97df9
-	ld hl, wCmdQueue
-	ld de, 6
-	ld c, 4
-	xor a
-.loop
-	ld [hl], a
-	add hl, de
-	dec c
-	jr nz, .loop
-	ret
-; 97e08
-
-HandleCmdQueue:: ; 97e08
-	ld hl, wCmdQueue
-	xor a
-.loop
-	ld [hMapObjectIndexBuffer], a
-	ld a, [hl]
-	and a
-	jr z, .skip
+	sub $6d
+	jr c, .graphics_ok
+	jp nz, LoadMapNameSignGFX
 	push hl
+	call InitMapNameFrame
+	farcall HDMATransfer_OnlyTopFourRows
+	pop hl
+.graphics_ok
+	ld a, [hl]
+	cp $5d
+	jr nc, .sliding_in
+	cp $10
+	jr c, .sliding_out
+	ld a, $70
+	jr .got_value
+.sliding_in
+	sub $5d
+	add a
+	add $70
+	jr .got_value
+.sliding_out
+	push bc
+	ld b, a
+	ld a, $90
+	sub b
+	sub b
+	pop bc
+.got_value
+	ld [rWY], a
+	ld [hWY], a
+	sub $90
+	ret nz
+	ld [hLCDCPointer], a
+	ret
+
+LoadMapNameSignGFX: ; b80c6
+	; load opaque space
+	ld hl, VTiles0 tile POPUP_MAP_FRAME_SPACE
+	call GetOpaque1bppSpaceTile
+	; load sign frame
+	ld hl, VTiles0 tile POPUP_MAP_FRAME_START
+	ld de, MapEntryFrameGFX
+	lb bc, BANK(MapEntryFrameGFX), POPUP_MAP_FRAME_SIZE
+	call Get2bpp
+	; clear landmark name area
+	ld hl, VTiles0 tile POPUP_MAP_NAME_START
+	ld e, POPUP_MAP_NAME_SIZE
+.clear_loop
+	push hl
+	push de
+	call GetOpaque1bppSpaceTile
+	pop de
+	pop hl
+	ld bc, LEN_2BPP_TILE
+	add hl, bc
+	dec e
+	jr nz, .clear_loop
+	; wStringBuffer1 = current landmark name
+	ld a, [wCurrentLandmark]
+	ld e, a
+	farcall GetLandmarkName
+	; c = length of landmark name
+	ld c, 0
+	push hl
+	ld hl, wStringBuffer1
+.length_loop
+	ld a, [hli]
+	cp "@"
+	jr z, .got_length
+	inc c
+	jr .length_loop
+.got_length
+	pop hl
+	; bc = byte offset to center landmark name
+	ld a, SCREEN_WIDTH - 2
+	sub c
+	srl a
+	ld h, 0
+	ld l, a
+rept 4
+	add hl, hl
+endr
 	ld b, h
 	ld c, l
-	call HandleQueuedCommand
-	pop hl
-
-.skip
-	ld de, CMDQUEUE_ENTRY_SIZE
-	add hl, de
-	ld a, [hMapObjectIndexBuffer]
-	inc a
-	cp CMDQUEUE_CAPACITY
-	jr nz, .loop
-	ret
-; 97e25
-
-WriteCmdQueue:: ; 97e31
-	push bc
-	push de
-	call .GetNextEmptyEntry
+	ld hl, VTiles3 tile POPUP_MAP_NAME_START
+	add hl, bc
+	; de = start of vram buffer
 	ld d, h
 	ld e, l
-	pop hl
-	pop bc
-	ret c
-	ld a, b
-	ld bc, CMDQUEUE_ENTRY_SIZE - 1
-	call FarCopyBytes
-	xor a
-	ld [hl], a
-	ret
-; 97e45
-
-.GetNextEmptyEntry: ; 97e45
-	ld hl, wCmdQueue
-	ld de, CMDQUEUE_ENTRY_SIZE
-	ld c, CMDQUEUE_CAPACITY
+	; hl = start of landmark name
+	ld hl, wStringBuffer1
 .loop
-	ld a, [hl]
-	and a
-	jr z, .done
-	add hl, de
-	dec c
-	jr nz, .loop
-	scf
-	ret
-
-.done
-	ld a, CMDQUEUE_CAPACITY
-	sub c
-	and a
-	ret
-; 97e5c
-
-DelCmdQueue:: ; 97e5c
-	ld hl, wCmdQueue
-	ld de, CMDQUEUE_ENTRY_SIZE
-	ld c, CMDQUEUE_CAPACITY
-.loop
-	ld a, [hl]
-	cp b
-	jr z, .done
-	add hl, de
-	dec c
-	jr nz, .loop
-	and a
-	ret
-
-.done
-	xor a
-	ld [hl], a
-	scf
-	ret
-; 97e72
-
-_DelCmdQueue: ; 97e72
-	ld hl, CMDQUEUE_TYPE
-	add hl, bc
-	ld [hl], 0
-	ret
-; 97e79
-
-HandleQueuedCommand:
-	ld hl, CMDQUEUE_TYPE
-	add hl, bc
-	ld a, [hl]
-	cp 5
-	jr c, .okay
-	xor a
-
-.okay
-	ld e, a
-	ld d, 0
-	ld hl, .Jumptable_ba
-rept 3
-	add hl, de
-endr
+	; a = tile offset into font graphic
 	ld a, [hli]
+	cp "@"
+	ret z
+	; save position in landmark name
+	push hl
+	; spaces are unique
+	cp "¯"
+	jr z, .space
+	cp " "
+	jr nz, .not_space
+.space
+	ld hl, TextBoxSpaceGFX
+	jr .got_tile
+.not_space
+	sub $80
+	; bc = byte offset into font graphic (a * 8)
+	push hl
+	ld h, 0
+	ld l, a
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld b, h
+	ld c, l
+	pop hl
+	; hl = start of font tile graphic
+	push de
+	farcall LoadStandardFontPointer
+	pop de
+	add hl, bc
+.got_tile
+	; save position in vram
+	push de
+	; swap hl and de, so de = font tile graphic, and hl = vram
+	push hl
+	ld h, d
+	ld l, e
+	pop de
+	; get font tile into vram
+	call GetOpaque1bppFontTile
+	; restore hl = position in vram
+	pop hl
+	; increment position in vram
+	ld bc, LEN_2BPP_TILE
+	add hl, bc
+	; de = position in vram
+	ld d, h
+	ld e, l
+	; restore hl = position in landmark name
+	pop hl
+	jr .loop
+; b80d3
+
+InitMapNameFrame: ; b80d3
+; InitMapSignAttrMap
+	hlcoord 0, 0
+	ld de, wAttrMap - wTileMap
+	add hl, de
+	; top row
+	ld a, BEHIND_BG | PAL_BG_TEXT
+	ld bc, SCREEN_WIDTH - 1
+	call ByteFill
+	or X_FLIP
+	ld [hli], a
+	; middle rows
+rept 2
+	and $ff - X_FLIP
+	ld [hli], a
+	ld bc, SCREEN_WIDTH - 2
+	call ByteFill
+	or X_FLIP
+	ld [hli], a
+endr
+	; bottom row
+	and $ff - X_FLIP
+	ld bc, SCREEN_WIDTH - 1
+	call ByteFill
+	or X_FLIP
+	ld [hl], a
+; PlaceMapNameFrame
+	hlcoord 0, 0
+	; top left
+	ld a, POPUP_MAP_FRAME_START ; $f8
+	ld [hli], a
+	; top row
+	inc a ; $f9
+	call .FillTopBottom
+	; top right
+	dec a ; $f8
+	ld [hli], a
+	; left, first line
+	ld a, POPUP_MAP_FRAME_START + 3 ; $fb
+	ld [hli], a
+	; first line
+	call .FillUpperMiddle
+	; right, first line
+	ld [hli], a
+	; left, second line
+	inc a ; $fc
+	ld [hli], a
+	; second line
+	call .FillLowerMiddle
+	; right, second line
+	ld [hli], a
+	; bottom left
+	inc a ; $fd
+	ld [hli], a
+	; bottom
+	inc a ; $fe
+	call .FillTopBottom
+	; bottom right
+	dec a ; $fd
+	ld [hl], a
+	ret
+; b815b
+
+.FillUpperMiddle: ; b815b
 	push af
+	ld a, POPUP_MAP_FRAME_SPACE
+	ld c, SCREEN_WIDTH - 2
+.loop
+	ld [hli], a
+	dec c
+	jr nz, .loop
+	pop af
+	ret
+
+.FillLowerMiddle:
+	push af
+	ld a, POPUP_MAP_NAME_START
+	ld c, SCREEN_WIDTH - 2
+.loop2
+	ld [hli], a
+	inc a
+	dec c
+	jr nz, .loop2
+	pop af
+	ret
+; b8164
+
+.FillTopBottom: ; b8164
+	ld c, 5
+	jr .enterloop
+
+.continueloop
+	ld [hli], a
+	ld [hli], a
+
+.enterloop
+	inc a
+	ld [hli], a
+	ld [hli], a
+	dec a
+	dec c
+	jr nz, .continueloop
+	ret
+; b8172
+
+
+CheckForHiddenItems: ; b8172
+; Checks to see if there are hidden items on the screen that have not yet been found.  If it finds one, returns carry.
+	ld a, [wMapScriptHeaderBank]
+	ld [wBuffer1], a
+; Get the coordinate of the bottom right corner of the screen.
+	ld a, [wXCoord]
+	add SCREEN_WIDTH / 4
+	ld [wBuffer4], a
+	ld a, [wYCoord]
+	add SCREEN_HEIGHT / 4
+	ld [wBuffer3], a
+; Get the pointer for the first signpost header in the map...
+	ld hl, wCurrentMapSignpostHeaderPointer
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	pop af
-	jp FarCall_hl
-
-.Jumptable_ba: ; 97e94
-	dba CmdQueue_Null
-	dba CmdQueue_Null
-	dba CmdQueue_StoneTable
-	dba CmdQueue_Type3
-	dba CmdQueue_Type4
-; 97ea3
-
-CmdQueueAnonymousJumptable: ; 97ea3
-	ld hl, CMDQUEUE_05
-	add hl, bc
-	ld a, [hl]
-	pop hl
-	rst JumpTable
-	ret
-; 97eab
-
-CmdQueueAnonJT_Increment: ; 97eab
-	ld hl, CMDQUEUE_05
-	add hl, bc
-	inc [hl]
-	ret
-; 97eb1
-
-CmdQueueAnonJT_Decrement: ; 97eb1
-	ld hl, CMDQUEUE_05
-	add hl, bc
-	dec [hl]
-CmdQueue_Null: ; 97eb7
-	ret
-; 97eb7
-
-CmdQueue_Type4: ; 97ebc
-	call CmdQueueAnonymousJumptable
-	; anonymous dw
-	dw .zero
-	dw .one
-; 97ec3
-
-.zero ; 97ec3
-	ld a, [hSCY]
-	ld hl, 4
-	add hl, bc
-	ld [hl], a
-	call CmdQueueAnonJT_Increment
-.one ; 97ecd
-	ld hl, 1
-	add hl, bc
-	ld a, [hl]
-	dec a
-	ld [hl], a
-	jr z, .finish
-	and $1
-	jr z, .add
-	ld hl, 2
-	add hl, bc
-	ld a, [hSCY]
-	sub [hl]
-	ld [hSCY], a
-	ret
-
-.add
-	ld hl, 2
-	add hl, bc
-	ld a, [hSCY]
-	add [hl]
-	ld [hSCY], a
-	ret
-
-.finish
-	ld hl, 4
-	add hl, bc
-	ld a, [hl]
-	ld [hSCY], a
-	jp _DelCmdQueue
-; 97ef9
-
-CmdQueue_Type3: ; 97ef9
-	call CmdQueueAnonymousJumptable
-	; anonymous dw
-	dw .zero
-	dw .one
-	dw .two
-; 97f02
-
-.zero ; 97f02
-	call .IsPlayerFacingDown
-	jr z, .PlayerNotFacingDown
-	call CmdQueueAnonJT_Increment
-.one ; 97f0a
-	call .IsPlayerFacingDown
-	jr z, .PlayerNotFacingDown
-	call CmdQueueAnonJT_Increment
-
-	ld hl, 2
-	add hl, bc
-	ld a, [hl]
-	ld [wd173], a
-	ret
-; 97f1b
-
-.two ; 97f1b
-	call .IsPlayerFacingDown
-	jr z, .PlayerNotFacingDown
-	call CmdQueueAnonJT_Decrement
-
-	ld hl, 3
-	add hl, bc
-	ld a, [hl]
-	ld [wd173], a
-	ret
-; 97f2c
-
-.PlayerNotFacingDown: ; 97f2c
-	ld a, $7f
-	ld [wd173], a
-	ld hl, 5
-	add hl, bc
-	ld [hl], 0
-	ret
-; 97f38
-
-.IsPlayerFacingDown: ; 97f38
-	push bc
-	ld bc, PlayerStruct
-	call GetSpriteDirection
+; ... before even checking to see if there are any signposts on this map.
+	ld a, [wCurrentMapSignpostCount]
 	and a
-	pop bc
-	ret
-; 97f42
-
-CmdQueue_StoneTable: ; 97f42
-	ld de, PlayerStruct
-	ld a, NUM_OBJECT_STRUCTS
+	jr z, .nosignpostitems
+; For i = 1:wCurrentMapSignpostCount...
 .loop
-	push af
-
-	ld hl, OBJECT_SPRITE
-	add hl, de
-	ld a, [hl]
+; Store the counter in wBuffer2, and store the signpost header pointer in the stack.
+	ld [wBuffer2], a
+	push hl
+; Get the Y coordinate of the signpost.
+	call .GetFarByte
+	ld e, a
+; Is the Y coordinate of the signpost on the screen?  If not, go to the next signpost.
+	ld a, [wBuffer3]
+	sub e
+	jr c, .next
+	cp SCREEN_HEIGHT / 2
+	jr nc, .next
+; Is the X coordinate of the signpost on the screen?  If not, go to the next signpost.
+	call .GetFarByte
+	ld d, a
+	ld a, [wBuffer4]
+	sub d
+	jr c, .next
+	cp SCREEN_WIDTH / 2
+	jr nc, .next
+; Is this signpost a hidden item?  If not, go to the next signpost.
+	call .GetFarByte
+	cp SIGNPOST_GROTTOITEM
+	jr z, .grottoitem
+	cp SIGNPOST_ITEM
+	jr c, .next
+; Has this item already been found?  If not, set off the Itemfinder.
+	call .GetFarByte
+	ld e, a
+	call .GetFarByte
+	ld d, a
+	jr .checkitem
+.grottoitem
+	call .GetFarByte
+	call .GetFarByte
+	ld de, EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
+.checkitem
+	ld b, CHECK_FLAG
+	call EventFlagAction
+	ld a, c
 	and a
-	jr z, .next
-
-	ld hl, OBJECT_MOVEMENTTYPE
-	add hl, de
-	ld a, [hl]
-	cp STEP_TYPE_SKYFALL_TOP
-	jr nz, .next
-
-	ld hl, OBJECT_NEXT_TILE
-	add hl, de
-	ld a, [hl]
-	cp COLL_HOLE
-	jr nz, .next
-
-	ld hl, OBJECT_DIRECTION_WALKING
-	add hl, de
-	ld a, [hl]
-	cp STANDING
-	jr nz, .next
-	call HandleStoneQueue
-	jr c, .fall_down_hole
+	jr z, .itemnearby
 
 .next
-	ld hl, OBJECT_STRUCT_LENGTH
+; Restore the signpost header pointer and increment it by the length of a signpost header.
+	pop hl
+	ld bc, 5
+	add hl, bc
+; Restore the signpost counter and decrement it.  If it hits zero, there are no hidden items in range.
+	ld a, [wBuffer2]
+	dec a
+	jr nz, .loop
+
+.nosignpostitems
+	xor a
+	ret
+
+.itemnearby
+	pop hl
+	scf
+	ret
+; b81e2
+
+.GetFarByte: ; b81e2
+	ld a, [wBuffer1]
+	call GetFarByte
+	inc hl
+	ret
+; b81ea
+
+TreeItemEncounter:
+	call Random
+	cp 15 percent
+	jr c, .silver_leaf
+	cp 30 percent
+	jr c, .gold_leaf
+	ld a, NO_ITEM
+	jr .item
+.silver_leaf
+	ld a, SILVER_LEAF
+	jr .item
+.gold_leaf
+	ld a, GOLD_LEAF
+.item
+	ld [wScriptVar], a
+	ret
+
+RockItemEncounter:
+	ld hl, .RockItems
+	call Random
+.loop
+	sub [hl]
+	jr c, .ok
+	inc hl
+	inc hl
+	jr .loop
+.ok
+	ld a, [hli]
+	cp -1
+	ld a, NO_ITEM
+	jr z, .done
+	ld a, [hl]
+.done
+	ld [wScriptVar], a
+	ret
+
+.RockItems:
+	db 1, HELIX_FOSSIL
+	db 1, DOME_FOSSIL
+	db 1, OLD_AMBER
+	db 1, BIG_NUGGET
+	db 2, RARE_BONE
+	db 4, NUGGET
+	db 6, STAR_PIECE
+	db 12, BIG_PEARL
+	db 18, STARDUST
+	db 24, HARD_STONE
+	db 24, SOFT_SAND
+	db 48, PEARL
+	db 64, BRICK_PIECE
+	db 48, NO_ITEM
+	db -1
+
+TreeMonEncounter: ; b81ea
+	xor a
+	ld [wTempWildMonSpecies], a
+	ld [wCurPartyLevel], a
+
+	ld hl, TreeMonMaps
+	call GetTreeMonSet
+	jr nc, .no_battle
+
+	call GetTreeMons
+	jr nc, .no_battle
+
+	call GetTreeMon
+	jr nc, .no_battle
+
+	ld a, BATTLETYPE_TREE
+	ld [wBattleType], a
+	ld a, 1
+	ld [wScriptVar], a
+	ret
+
+.no_battle
+	xor a
+	ld [wScriptVar], a
+	ret
+; b8219
+
+RockMonEncounter: ; b8219
+
+	xor a
+	ld [wTempWildMonSpecies], a
+	ld [wCurPartyLevel], a
+
+	ld hl, RockMonMaps
+	call GetTreeMonSet
+	jr nc, .no_battle
+
+	call GetTreeMons
+	jr nc, .no_battle
+
+	ld a, 10
+	call RandomRange
+	cp 4
+	jr nc, .no_battle
+
+	call SelectTreeMon
+	jr nc, .no_battle
+
+	ret
+
+.no_battle
+	xor a
+	ret
+; b823e
+
+	db $05 ; ????
+
+GetTreeMonSet: ; b823f
+; Return carry and treemon set in a
+; if the current map is in table hl.
+	ld a, [wMapNumber]
+	ld e, a
+	ld a, [wMapGroup]
+	ld d, a
+.loop
+	ld a, [hli]
+	cp -1
+	jr z, .not_in_table
+
+	cp d
+	jr nz, .skip2
+
+	ld a, [hli]
+	cp e
+	jr nz, .skip1
+
+	jr .in_table
+
+.skip2
+	inc hl
+.skip1
+	inc hl
+	jr .loop
+
+.not_in_table
+	xor a
+	ret
+
+.in_table
+	ld a, [hl]
+	scf
+	ret
+; b825e
+
+INCLUDE "data/wild/treemon_maps.asm"
+
+GetTreeMons: ; b82d2
+; Return the address of TreeMon table a in hl.
+; Return nc if table a doesn't exist.
+
+	cp 8
+	jr nc, .quit
+
+	and a
+	jr z, .quit
+
+	ld e, a
+	ld d, 0
+	ld hl, TreeMons
+	add hl, de
+	add hl, de
+
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	scf
+	ret
+
+.quit
+	xor a
+	ret
+; b82e8
+
+INCLUDE "data/wild/treemons.asm"
+
+GetTreeMon: ; b83e5
+	push hl
+	call GetTreeScore
+	pop hl
+	and a
+	jr z, .bad
+	cp 1
+	jr z, .good
+	cp 2
+	jr z, .rare
+	ret
+
+.bad
+	ld a, 10
+	call RandomRange
+	and a
+	jr nz, NoTreeMon
+	jr SelectTreeMon
+
+.good
+	ld a, 10
+	call RandomRange
+	cp 5
+	jr nc, NoTreeMon
+	jr SelectTreeMon
+
+.rare
+	ld a, 10
+	call RandomRange
+	cp 8
+	jr nc, NoTreeMon
+.skip
+	ld a, [hli]
+	cp -1
+	jr nz, .skip
+	; fallthrough
+
+SelectTreeMon: ; b841f
+; Read a TreeMons table and pick one monster at random.
+	ld a, 100
+	call RandomRange
+.loop
+	sub [hl]
+	jr c, .ok
+	inc hl
+	inc hl
+	inc hl
+	jr .loop
+
+.ok
+	ld a, [hli]
+	cp -1
+	jr z, NoTreeMon
+
+	ld a, [hli]
+	ld [wTempWildMonSpecies], a
+	ld a, [hl]
+	ld [wCurPartyLevel], a
+	scf
+	ret
+
+NoTreeMon: ; b843b
+	xor a
+	ld [wTempWildMonSpecies], a
+	ld [wCurPartyLevel], a
+	ret
+; b8443
+
+GetTreeScore: ; b8443
+	call .CoordScore
+	ld [wBuffer1], a
+	call .OTIDScore
+	ld [wBuffer2], a
+	ld c, a
+	ld a, [wBuffer1]
+	sub c
+	jr z, .rare
+	jr nc, .ok
+	add 10
+.ok
+	cp 5
+	jr c, .good
+
+.bad
+	xor a
+	ret
+
+.good
+	ld a, 1
+	ret
+
+.rare
+	ld a, 2
+	ret
+; b8466
+
+.CoordScore: ; b8466
+	call GetFacingTileCoord
+	ld hl, 0
+	ld c, e
+	ld b, 0
+	ld a, d
+
+	and a
+	jr z, .next
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+.next
+
+	add hl, bc
+	ld c, d
+	add hl, bc
+
+	ld a, h
+	ld [hDividend], a
+	ld a, l
+	ld [hDividend + 1], a
+	ld a, 5
+	ld [hDivisor], a
+	ld b, 2
+	call Divide
+
+	ld a, [hQuotient + 1]
+	ld [hDividend], a
+	ld a, [hQuotient + 2]
+	ld [hDividend + 1], a
+	ld a, 10
+	ld [hDivisor], a
+	ld b, 2
+	call Divide
+
+	ld a, [hQuotient + 3]
+	ret
+; b849d
+
+.OTIDScore: ; b849d
+	ld a, [wPlayerID]
+	ld [hDividend], a
+	ld a, [wPlayerID + 1]
+	ld [hDividend + 1], a
+	ld a, 10
+	ld [hDivisor], a
+	ld b, 2
+	call Divide
+	ld a, [hQuotient + 3]
+	ret
+; b84b3
+
+LoadFishingGFX: ; b84b3
+	ld a, [rVBK]
+	push af
+	xor a
+	ld [rVBK], a
+
+	ld de, FishingGFX
+	ld a, [wPlayerGender]
+	bit 0, a
+	jr z, .got_gender
+	ld de, KrisFishingGFX
+.got_gender
+
+	ld hl, VTiles0 tile $02
+	call .LoadGFX
+	ld hl, VTiles0 tile $06
+	call .LoadGFX
+	ld hl, VTiles0 tile $0a
+	call .LoadGFX
+	ld hl, VTiles0 tile $7c
+	call .LoadGFX
+
+	pop af
+	ld [rVBK], a
+	ret
+; b84e3
+
+.LoadGFX: ; b84e3
+	lb bc, BANK(FishingGFX), 2
+	push de
+	call Get2bpp
+	pop de
+	ld hl, 2 tiles
 	add hl, de
 	ld d, h
 	ld e, l
-
-	pop af
-	dec a
-	jr nz, .loop
 	ret
+; b84f2
 
-.fall_down_hole
-	pop af
-	ret
-; 97f7e
+FishingGFX: ; b84f2
+INCBIN "gfx/overworld/chris_fish.2bpp"
+; b8582
+
+KrisFishingGFX: ; b8582
+INCBIN "gfx/overworld/kris_fish.2bpp"
+; b8612

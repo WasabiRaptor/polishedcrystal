@@ -1,69 +1,59 @@
 PokemonMansion1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5, 27, CINNABAR_ISLAND, 3
+	warp_event  6, 27, CINNABAR_ISLAND, 3
+	warp_event 21, 23, POKEMON_MANSION_B1F, 1
 
-PokemonMansion1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $1b, $5, 3, CINNABAR_ISLAND
-	warp_def $1b, $6, 3, CINNABAR_ISLAND
-	warp_def $17, $15, 1, POKEMON_MANSION_B1F
+	db 8 ; bg events
+	bg_event 21, 12, SIGNPOST_ITEM + FULL_RESTORE, EVENT_POKEMON_MANSION_1F_HIDDEN_FULL_RESTORE
+	bg_event 14, 23, SIGNPOST_READ, PokemonMansion1FHiddenPPUp
+	bg_event  2,  5, SIGNPOST_JUMPTEXT, PokemonMansion1FMewtwoStatueText
+	bg_event 15, 23, SIGNPOST_JUMPTEXT, PokemonMansion1FFlowerPotText
+	bg_event 18, 23, SIGNPOST_JUMPTEXT, PokemonMansion1FFlowerPotText
+	bg_event 19, 23, SIGNPOST_JUMPTEXT, PokemonMansion1FFlowerPotText
+	bg_event 18, 19, SIGNPOST_JUMPTEXT, PokemonMansion1FFlowerPotText
+	bg_event 19, 19, SIGNPOST_JUMPTEXT, PokemonMansion1FFlowerPotText
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event  9, 10, SPRITE_BURGLAR, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBurglarPete, -1
+	object_event 27, 14, SPRITE_BURGLAR, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBurglarLouis, -1
+	itemball_event  6,  4, MOON_STONE, 1, EVENT_POKEMON_MANSION_1F_MOON_STONE
+	itemball_event 14,  3, ESCAPE_ROPE, 1, EVENT_POKEMON_MANSION_1F_ESCAPE_ROPE
+	itemball_event 17, 22, PROTEIN, 1, EVENT_POKEMON_MANSION_1F_PROTEIN
+	itemball_event 27, 22, IRON, 1, EVENT_POKEMON_MANSION_1F_IRON
 
-.Signposts: db 8
-	signpost 12, 21, SIGNPOST_ITEM, PokemonMansion1FHiddenFullRestore
-	signpost 23, 14, SIGNPOST_READ, PokemonMansion1FHiddenPPUp
-	signpost 5, 2, SIGNPOST_READ, PokemonMansion1FMewtwoStatue
-	signpost 23, 15, SIGNPOST_READ, PokemonMansion1FFlowerPot
-	signpost 23, 18, SIGNPOST_READ, PokemonMansion1FFlowerPot
-	signpost 23, 19, SIGNPOST_READ, PokemonMansion1FFlowerPot
-	signpost 19, 18, SIGNPOST_READ, PokemonMansion1FFlowerPot
-	signpost 19, 19, SIGNPOST_READ, PokemonMansion1FFlowerPot
+GenericTrainerBurglarPete:
+	generictrainer BURGLAR, PETE, EVENT_BEAT_BURGLAR_PETE, BurglarPeteSeenText, BurglarPeteBeatenText
 
-.PersonEvents: db 6
-	person_event SPRITE_PHARMACIST, 10, 9, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 3, TrainerBurglarPete, -1
-	person_event SPRITE_PHARMACIST, 14, 27, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 3, TrainerBurglarLouis, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 4, 6, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, MOON_STONE, 1, EVENT_POKEMON_MANSION_1F_MOON_STONE
-	person_event SPRITE_BALL_CUT_FRUIT, 3, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, ESCAPE_ROPE, 1, EVENT_POKEMON_MANSION_1F_ESCAPE_ROPE
-	person_event SPRITE_BALL_CUT_FRUIT, 22, 17, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, PROTEIN, 1, EVENT_POKEMON_MANSION_1F_PROTEIN
-	person_event SPRITE_BALL_CUT_FRUIT, 22, 27, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, IRON, 1, EVENT_POKEMON_MANSION_1F_IRON
+	text "Some valuable"
+	line "items probably"
 
-TrainerBurglarPete:
-	trainer EVENT_BEAT_BURGLAR_PETE, BURGLAR, PETE, BurglarPeteSeenText, BurglarPeteBeatenText, 0, BurglarPeteScript
+	para "survived the"
+	line "eruption."
+	done
 
-BurglarPeteScript:
-	end_if_just_battled
-	opentext
-	writetext BurglarPeteAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerBurglarLouis:
+	generictrainer BURGLAR, LOUIS, EVENT_BEAT_BURGLAR_LOUIS, BurglarLouisSeenText, BurglarLouisBeatenText
 
-TrainerBurglarLouis:
-	trainer EVENT_BEAT_BURGLAR_LOUIS, BURGLAR, LOUIS, BurglarLouisSeenText, BurglarLouisBeatenText, 0, BurglarLouisScript
-
-BurglarLouisScript:
-	end_if_just_battled
-	opentext
-	writetext BurglarLouisAfterText
-	waitbutton
-	closetext
-	end
-
-PokemonMansion1FHiddenFullRestore:
-	dwb EVENT_POKEMON_MANSION_1F_HIDDEN_FULL_RESTORE, FULL_RESTORE
+	text "I just want to"
+	line "find some loot"
+	cont "and get out."
+	done
 
 PokemonMansion1FHiddenPPUp:
 	checkevent EVENT_POKEMON_MANSION_1F_HIDDEN_PP_UP
-	iftrue PokemonMansion1FFlowerPot
+	iftrue_jumptext PokemonMansion1FFlowerPotText
 	giveitem PP_UP
 	iffalse .PackFull
 	opentext
 	itemtotext PP_UP, $0
-	writetext PokemonMansion1FFoundPPUpText
+	writetext PokemonMansion1FFoundItemText
 	playsound SFX_ITEM
 	waitsfx
 	itemnotify
@@ -74,18 +64,9 @@ PokemonMansion1FHiddenPPUp:
 .PackFull:
 	opentext
 	itemtotext PP_UP, $0
-	writetext PokemonMansion1FFoundPPUpText
+	writetext PokemonMansion1FFoundItemText
 	buttonsound
-	writetext PokemonMansion1FNoRoomForPPUpText
-	waitbutton
-	closetext
-	end
-
-PokemonMansion1FMewtwoStatue:
-	jumptext PokemonMansion1FMewtwoStatueText
-
-PokemonMansion1FFlowerPot:
-	jumptext PokemonMansion1FFlowerPotText
+	jumpopenedtext PokemonMansion1FNoRoomForItemText
 
 BurglarPeteSeenText:
 	text "Who are you? There"
@@ -97,14 +78,6 @@ BurglarPeteBeatenText:
 	text "Ouch!"
 	done
 
-BurglarPeteAfterText:
-	text "Some valuable"
-	line "items probably"
-
-	para "survived the"
-	line "eruption."
-	done
-
 BurglarLouisSeenText:
 	text "This place is"
 	line "creepy!"
@@ -114,20 +87,14 @@ BurglarLouisBeatenText:
 	text "Ayah!"
 	done
 
-BurglarLouisAfterText:
-	text "I just want to"
-	line "find some loot"
-	cont "and get out."
-	done
-
-PokemonMansion1FFoundPPUpText:
+PokemonMansion1FFoundItemText:
 	text "<PLAYER> found"
 	line "@"
-	text_from_ram StringBuffer3
+	text_from_ram wStringBuffer3
 	text "!"
 	done
 
-PokemonMansion1FNoRoomForPPUpText:
+PokemonMansion1FNoRoomForItemText:
 	text "But <PLAYER> can't"
 	line "hold another item…"
 	done

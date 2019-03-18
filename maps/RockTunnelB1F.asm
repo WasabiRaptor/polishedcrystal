@@ -1,58 +1,47 @@
 RockTunnelB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 5 ; warp events
+	warp_event  3,  3, ROCK_TUNNEL_1F, 3
+	warp_event 17,  9, ROCK_TUNNEL_1F, 4
+	warp_event 23,  3, ROCK_TUNNEL_1F, 5
+	warp_event 27, 19, ROCK_TUNNEL_1F, 6
+	warp_event  3, 13, ROCK_TUNNEL_1F, 7
 
-RockTunnelB1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $3, $3, 3, ROCK_TUNNEL_1F
-	warp_def $9, $11, 4, ROCK_TUNNEL_1F
-	warp_def $3, $17, 5, ROCK_TUNNEL_1F
-	warp_def $13, $1b, 6, ROCK_TUNNEL_1F
-	warp_def $d, $3, 7, ROCK_TUNNEL_1F
+	db 1 ; bg events
+	bg_event  3, 18, SIGNPOST_ITEM + MAX_POTION, EVENT_ROCK_TUNNEL_B1F_HIDDEN_MAX_POTION
 
-.XYTriggers: db 0
+	db 6 ; object events
+	object_event 27, 14, SPRITE_FIREBREATHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerFirebreatherDick, -1
+	object_event 24, 24, SPRITE_HEX_MANIAC, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerHexManiacVivian, -1
+	itemball_event  7, 17, IRON, 1, EVENT_ROCK_TUNNEL_B1F_IRON
+	itemball_event  8,  4, PP_UP, 1, EVENT_ROCK_TUNNEL_B1F_PP_UP
+	itemball_event 15,  2, REVIVE, 1, EVENT_ROCK_TUNNEL_B1F_REVIVE
+	strengthboulder_event 10, 25
 
-.Signposts: db 1
-	signpost 18, 3, SIGNPOST_ITEM, RockTunnelB1FHiddenMaxPotion
+GenericTrainerFirebreatherDick:
+	generictrainer FIREBREATHER, DICK, EVENT_BEAT_FIREBREATHER_DICK, FirebreatherDickSeenText, FirebreatherDickBeatenText
 
-.PersonEvents: db 6
-	person_event SPRITE_FISHER, 14, 27, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 3, TrainerFirebreatherDick, -1
-	person_event SPRITE_HEX_MANIAC, 24, 24, SPRITEMOVEDATA_SPINRANDOM_FAST, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_TRAINER, 2, TrainerHexManiacVivian, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 17, 7, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, IRON, 1, EVENT_ROCK_TUNNEL_B1F_IRON
-	person_event SPRITE_BALL_CUT_FRUIT, 4, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, PP_UP, 1, EVENT_ROCK_TUNNEL_B1F_PP_UP
-	person_event SPRITE_BALL_CUT_FRUIT, 2, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, REVIVE, 1, EVENT_ROCK_TUNNEL_B1F_REVIVE
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 25, 10, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, RockTunnelB1FBoulder, -1
+	text "A #mon that"
+	line "knows Flash is"
 
-TrainerFirebreatherDick:
-	trainer EVENT_BEAT_FIREBREATHER_DICK, FIREBREATHER, DICK, FirebreatherDickSeenText, FirebreatherDickBeatenText, 0, FirebreatherDickScript
+	para "helpful in dark"
+	line "caves like this."
+	done
 
-FirebreatherDickScript:
-	end_if_just_battled
-	opentext
-	writetext FirebreatherDickAfterText
-	waitbutton
-	closetext
-	end
+GenericTrainerHexManiacVivian:
+	generictrainer HEX_MANIAC, VIVIAN, EVENT_BEAT_HEX_MANIAC_VIVIAN, HexManiacVivianSeenText, HexManiacVivianBeatenText
 
-TrainerHexManiacVivian:
-	trainer EVENT_BEAT_HEX_MANIAC_VIVIAN, HEX_MANIAC, VIVIAN, HexManiacVivianSeenText, HexManiacVivianBeatenText, 0, HexManiacVivianScript
+	text "This spooky hex"
+	line "maniac persona"
 
-HexManiacVivianScript:
-	end_if_just_battled
-	opentext
-	writetext HexManiacVivianAfterText
-	waitbutton
-	closetext
-	end
-
-RockTunnelB1FHiddenMaxPotion:
-	dwb EVENT_ROCK_TUNNEL_B1F_HIDDEN_MAX_POTION, MAX_POTION
-
-RockTunnelB1FBoulder:
-	jumpstd strengthboulder
+	para "actually takes"
+	line "effort."
+	done
 
 FirebreatherDickSeenText:
 	text "I'm using fire to"
@@ -62,14 +51,6 @@ FirebreatherDickSeenText:
 FirebreatherDickBeatenText:
 	text "Help! The fire"
 	line "went out!"
-	done
-
-FirebreatherDickAfterText:
-	text "A #mon that"
-	line "knows Flash is"
-
-	para "helpful in dark"
-	line "caves like this."
 	done
 
 HexManiacVivianSeenText:
@@ -82,10 +63,3 @@ HexManiacVivianBeatenText:
 	line "echo?!"
 	done
 
-HexManiacVivianAfterText:
-	text "This spooky hex"
-	line "maniac persona"
-
-	para "actually takes"
-	line "effort."
-	done

@@ -1,24 +1,21 @@
 EusinesHouse_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, CELADON_CITY, 14
+	warp_event  3,  7, CELADON_CITY, 14
 
-EusinesHouse_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 14, CELADON_CITY
-	warp_def $7, $3, 14, CELADON_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 2 ; object events
+	object_event  2,  3, SPRITE_EUSINE, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, CeladonEusine, EVENT_SET_WHEN_FOUGHT_HO_OH
+	object_event  5,  3, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, EusinesHouseGrampsScript, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 2
-	person_event SPRITE_SUPER_NERD, 3, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_PURPLE, PERSONTYPE_SCRIPT, 0, CeladonEusine, EVENT_SET_WHEN_FOUGHT_HO_OH
-	person_event SPRITE_GRAMPS, 3, 5, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_BROWN, PERSONTYPE_SCRIPT, 0, EusinesHouseGrampsScript, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const EUSINESHOUSE_EUSINE
 
 CeladonEusine:
@@ -34,10 +31,7 @@ CeladonEusine:
 	writebyte RAIKOU
 	special SpecialMonCheck
 	iftrue .OwnRaikou
-	opentext
-	writetext EusineShowsRaikouText
-	waitbutton
-	closetext
+	showtext EusineShowsRaikouText
 	refreshscreen
 	pokepic RAIKOU
 	cry RAIKOU
@@ -49,10 +43,7 @@ CeladonEusine:
 	writebyte ENTEI
 	special SpecialMonCheck
 	iftrue .OwnEntei
-	opentext
-	writetext EusineShowsEnteiText
-	waitbutton
-	closetext
+	showtext EusineShowsEnteiText
 	refreshscreen
 	pokepic ENTEI
 	cry ENTEI
@@ -64,10 +55,7 @@ CeladonEusine:
 	writebyte SUICUNE
 	special SpecialMonCheck
 	iftrue .OwnSuicune
-	opentext
-	writetext EusineShowsSuicuneText
-	waitbutton
-	closetext
+	showtext EusineShowsSuicuneText
 	refreshscreen
 	pokepic SUICUNE
 	cry SUICUNE
@@ -76,18 +64,14 @@ CeladonEusine:
 	writebyte SUICUNE
 	special SpecialSeenMon
 .OwnSuicune
-	opentext
-	writetext EusineQuestHintText
-	waitbutton
-	closetext
-	end
+	jumptext EusineQuestHintText
 
 .HoOh:
 	writetext EusineLeavesCeladonText
 	waitbutton
 	closetext
 	checkcode VAR_FACING
-	if_not_equal UP, .PathClear
+	ifnotequal UP, .PathClear
 	applymovement PLAYER, .PlayerStepsAsideMovement
 .PathClear:
 	applymovement EUSINESHOUSE_EUSINE, .EusineLeavesMovement
@@ -109,20 +93,9 @@ CeladonEusine:
 	step_end
 
 EusinesHouseGrampsScript:
-	faceplayer
-	opentext
 	checkevent EVENT_SET_WHEN_FOUGHT_HO_OH
-	iftrue .EusineLeft
-	writetext EusinesHouseGrampsText1
-	waitbutton
-	closetext
-	end
-
-.EusineLeft:
-	writetext EusinesHouseGrampsText2
-	waitbutton
-	closetext
-	end
+	iftrue_jumptextfaceplayer EusinesHouseGrampsText2
+	jumptextfaceplayer EusinesHouseGrampsText1
 
 CeladonEusineText1:
 	text "Eusine: Hi!"

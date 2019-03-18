@@ -1,35 +1,20 @@
 FuchsiaMart_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, FUCHSIA_CITY, 1
+	warp_event  3,  7, FUCHSIA_CITY, 1
 
-FuchsiaMart_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 1, FUCHSIA_CITY
-	warp_def $7, $3, 1, FUCHSIA_CITY
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_CLERK, 3, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ClerkScript_0x195ce8, -1
-	person_event SPRITE_FISHER, 2, 3, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, FisherScript_0x195cef, -1
-	person_event SPRITE_COOLTRAINER_F, 6, 7, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_SCRIPT, 0, CooltrainerFScript_0x195cf2, -1
-
-ClerkScript_0x195ce8:
-	opentext
-	pokemart MARTTYPE_STANDARD, MART_FUCHSIA
-	closetext
-	end
-
-FisherScript_0x195cef:
-	jumptextfaceplayer UnknownText_0x195cf5
-
-CooltrainerFScript_0x195cf2:
-	jumptextfaceplayer UnknownText_0x195d36
+	db 3 ; object events
+	mart_clerk_event  1,  3, MARTTYPE_STANDARD, MART_FUCHSIA
+	object_event  3,  2, SPRITE_FISHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x195cf5, -1
+	object_event  7,  6, SPRITE_COOLTRAINER_F, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x195d36, -1
 
 UnknownText_0x195cf5:
 	text "I was hoping to"

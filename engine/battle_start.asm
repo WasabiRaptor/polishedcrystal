@@ -10,23 +10,24 @@ Predef_StartBattle: ; 8c20f
 	ld hl, hVBlank
 	ld a, [hl]
 	push af
-	ld [hl], $1
+	ld [hl], 3
+	jr .handleLoop
 
 .loop
-	ld a, [wJumptableIndex]
-	bit 7, a
-	jr nz, .done
 	call FlashyTransitionToBattle
 	call DelayFrame
-	jr .loop
+.handleLoop
+	ld a, [wJumptableIndex]
+	bit 7, a
+	jr z, .loop
 
 .done
 	ld a, [rSVBK]
 	push af
-	ld a, $5
+	ld a, BANK(wUnknBGPals)
 	ld [rSVBK], a
 
-	ld hl, UnknBGPals
+	ld hl, wUnknBGPals
 if !DEF(MONOCHROME)
 	ld bc, 8 palettes
 	xor a
@@ -55,20 +56,22 @@ endc
 	ld [hLYOverrideEnd], a
 	ld [hSCY], a
 
-	ld a, $1
+	ld a, BANK(wEnemyMon)
 	ld [rSVBK], a
+	ld hl, rIE
+	res LCD_STAT, [hl]
 	pop af
 	ld [hVBlank], a
 	jp DelayFrame
 ; 8c26d
 
 .InitGFX: ; 8c26d
-	ld a, [wLinkMode]
 	farcall ReanchorBGMap_NoOAMUpdate
 	call UpdateSprites
 	call DelayFrame
 	call .LoadPokeballTiles
-	call LoadEDTile
+	ld b, 3
+	call SafeCopyTilemapAtOnce
 	ld a, SCREEN_HEIGHT_PX
 	ld [hWY], a
 	call DelayFrame
@@ -83,61 +86,23 @@ endc
 ; 8c2a0
 
 .LoadPokeballTiles: ; 8c2a0
-	call LoadTrainerBattlePokeballTiles
-	hlbgcoord 0, 0
-	jp ConvertTrainerBattlePokeballTilesTo2bpp
-; 8c2aa
-
-LoadTrainerBattlePokeballTiles:
 ; Load the tiles used in the Pokeball Graphic that fills the screen
 ; at the start of every Trainer battle.
-	ld de, TrainerBattlePokeballTiles
-	ld hl, VTiles1 tile $7e
-	lb bc, BANK(TrainerBattlePokeballTiles), 2
-	call Request2bpp
-
-	ld a, [rVBK]
-	push af
 	ld a, $1
 	ld [rVBK], a
-
-	ld de, TrainerBattlePokeballTiles
-	ld hl, VTiles4 tile $7e
-	lb bc, BANK(TrainerBattlePokeballTiles), 2
+	ld de, .TrainerBattlePokeballTiles
+	ld hl, VTiles3 tile $fe
+	lb bc, BANK(.TrainerBattlePokeballTiles), 2
 	call Request2bpp
-
-	pop af
+	xor a
 	ld [rVBK], a
-	ret
-; 8c2cf
-
-ConvertTrainerBattlePokeballTilesTo2bpp: ; 8c2cf
-	ld a, [rSVBK]
-	push af
-	ld a, $6
-	ld [rSVBK], a
-	push hl
-	ld hl, wDecompressScratch
-	ld bc, $28 tiles
-
-.loop
-	ld [hl], -1
-	inc hl
-	dec bc
-	ld a, c
-	or b
-	jr nz, .loop
-
-	pop hl
-	ld de, wDecompressScratch
-	lb bc, BANK(ConvertTrainerBattlePokeballTilesTo2bpp), $28 ; BANK(@)
-	call Request2bpp
-	pop af
-	ld [rSVBK], a
-	ret
+	ld de, .TrainerBattlePokeballTiles
+	ld hl, VTiles0 tile $fe
+	lb bc, BANK(.TrainerBattlePokeballTiles), 2
+	jp Request2bpp
 ; 8c2f4
 
-TrainerBattlePokeballTiles: ; 8c2f4
+.TrainerBattlePokeballTiles: ; 8c2f4
 INCBIN "gfx/overworld/trainer_battle_pokeball_tiles.2bpp"
 
 
@@ -198,14 +163,14 @@ StartTrainerBattle_DetermineWhichAnimation: ; 8c365 (23:4365)
 ; Pokemon relative to the opponent's.
 	ld de, 0
 
-	ld a, [OtherTrainerClass]
+	ld a, [wOtherTrainerClass]
 	and a
 	jr z, .wild
 	farcall SetTrainerBattleLevel
 .wild
 
 ; Get the first Pokemon in your party that isn't fainted.
-	ld hl, PartyMon1HP
+	ld hl, wPartyMon1HP
 	ld bc, PARTYMON_STRUCT_LENGTH - 1
 .loop
 	ld a, [hli]
@@ -222,7 +187,7 @@ endr
 	add 3
 
 ; Compare with wild encounter level
-	ld hl, CurPartyLevel
+	ld hl, wCurPartyLevel
 	cp [hl]
 	jr nc, .okay
 	set 0, e
@@ -267,56 +232,12 @@ StartTrainerBattle_SetUpBGMap: ; 8c3a1 (23:43a1)
 	ret
 
 StartTrainerBattle_Flash: ; 8c3ab (23:43ab)
-	call .DoFlashAnimation
-	ret nc
+	call StartBattleFlash
 	jp StartTrainerBattle_NextScene
-
-.DoFlashAnimation: ; 8c3b3 (23:43b3)
-	ld a, [wTimeOfDayPalset]
-	cp %11111111 ; dark cave
-	jr z, .done
-	ld hl, wcf64
-	ld a, [hl]
-	inc [hl]
-	srl a
-	ld e, a
-	ld d, 0
-	ld hl, .pals
-	add hl, de
-	ld a, [hl]
-	cp %00000001
-	jr z, .done
-	ld [wBGP], a
-	call DmgToCgbBGPals
-	and a
-	ret
-
-.done
-	xor a
-	ld [wcf64], a
-	scf
-	ret
-; 8c3db (23:43db)
-
-.pals ; 8c3db
-	db %11111001 ; 3321
-	db %11111110 ; 3332
-	db %11111111 ; 3333
-	db %11111110 ; 3332
-	db %11111001 ; 3321
-	db %11100100 ; 3210
-	db %10010000 ; 2100
-	db %01000000 ; 1000
-	db %00000000 ; 0000
-	db %01000000 ; 1000
-	db %10010000 ; 2100
-	db %11100100 ; 3210
-	db %00000001 ; 0001
-; 8c3e8
 
 StartTrainerBattle_SetUpForWavyOutro: ; 8c3e8 (23:43e8)
 	farcall BattleStart_HideAllSpritesExceptBattleParticipants
-	ld a, BANK(LYOverrides)
+	ld a, BANK(wLYOverrides)
 	ld [rSVBK], a
 
 	call StartTrainerBattle_NextScene
@@ -330,6 +251,8 @@ StartTrainerBattle_SetUpForWavyOutro: ; 8c3e8 (23:43e8)
 	xor a
 	ld [wcf64], a
 	ld [wcf65], a
+	ld hl, rIE
+	set LCD_STAT, [hl]
 	ret
 
 StartTrainerBattle_SineWave: ; 8c408 (23:4408)
@@ -351,20 +274,20 @@ StartTrainerBattle_SineWave: ; 8c408 (23:4408)
 	ld d, [hl]
 	add [hl]
 	ld [hl], a
-	ld a, LYOverridesEnd - LYOverrides
-	ld bc, LYOverrides
+	ld a, wLYOverridesEnd - wLYOverrides
+	ld bc, wLYOverrides
 	ld e, $0
 
 .loop
 	push af
 	push de
 	ld a, e
-	call StartTrainerBattle_DrawSineWave
+	call Sine
 	ld [bc], a
 	inc bc
 	pop de
 	ld a, e
-	add $2
+	add 2
 	ld e, a
 	pop af
 	dec a
@@ -373,7 +296,7 @@ StartTrainerBattle_SineWave: ; 8c408 (23:4408)
 
 StartTrainerBattle_SetUpForSpinOutro: ; 8c43d (23:443d)
 	farcall BattleStart_HideAllSpritesExceptBattleParticipants
-	ld a, BANK(LYOverrides)
+	ld a, BANK(wLYOverrides)
 	ld [rSVBK], a
 	call StartTrainerBattle_NextScene
 	xor a
@@ -410,18 +333,18 @@ endr
 	call .load
 	ld a, $1
 	ld [hBGMapMode], a
-	call DelayFrame
-	call DelayFrame
 	ld hl, wcf64
+	ld a, [hl]
 	inc [hl]
-	ret
+.mod_3
+	; Ensure that music lines up with the transistion
+	sub 3
+	jr nc, .mod_3
+	add 3
+	ret z
+	jp DelayFrame
 
 .end
-	ld a, $1
-	ld [hBGMapMode], a
-	call DelayFrame
-	call DelayFrame
-	call DelayFrame
 	xor a
 	ld [hBGMapMode], a
 	ld a, $20
@@ -430,26 +353,46 @@ endr
 ; 8c490 (23:4490)
 
 .spintable ; 8c490
-	spintable_entry UPPER_LEFT,  1,  1,  6
-	spintable_entry UPPER_LEFT,  2,  0,  3
-	spintable_entry UPPER_LEFT,  3,  1,  0
-	spintable_entry UPPER_LEFT,  4,  5,  0
-	spintable_entry UPPER_LEFT,  5,  9,  0
-	spintable_entry UPPER_RIGHT, 5, 10,  0
-	spintable_entry UPPER_RIGHT, 4, 14,  0
-	spintable_entry UPPER_RIGHT, 3, 18,  0
-	spintable_entry UPPER_RIGHT, 2, 19,  3
-	spintable_entry UPPER_RIGHT, 1, 18,  6
-	spintable_entry LOWER_RIGHT, 1, 18, 11
-	spintable_entry LOWER_RIGHT, 2, 19, 14
-	spintable_entry LOWER_RIGHT, 3, 18, 17
-	spintable_entry LOWER_RIGHT, 4, 14, 17
-	spintable_entry LOWER_RIGHT, 5, 10, 17
-	spintable_entry LOWER_LEFT,  5,  9, 17
-	spintable_entry LOWER_LEFT,  4,  5, 17
-	spintable_entry LOWER_LEFT,  3,  1, 17
-	spintable_entry LOWER_LEFT,  2,  0, 14
-	spintable_entry LOWER_LEFT,  1,  1, 11
+	spintable_entry UPPER_LEFT,   1,  9,  8
+	spintable_entry UPPER_LEFT,   2,  1,  6
+	spintable_entry UPPER_LEFT,   3,  0,  4
+	spintable_entry UPPER_LEFT,   4,  0,  2
+	spintable_entry UPPER_LEFT,   5,  0,  0
+	spintable_entry UPPER_LEFT,   6,  1,  0
+	spintable_entry UPPER_LEFT,   7,  3,  0
+	spintable_entry UPPER_LEFT,   8,  5,  0
+	spintable_entry UPPER_LEFT,   9,  7,  0
+	spintable_entry UPPER_LEFT,  10,  9,  0
+	spintable_entry UPPER_RIGHT, 10, 10,  0
+	spintable_entry UPPER_RIGHT,  9, 12,  0
+	spintable_entry UPPER_RIGHT,  8, 14,  0
+	spintable_entry UPPER_RIGHT,  7, 16,  0
+	spintable_entry UPPER_RIGHT,  6, 18,  0
+	spintable_entry UPPER_RIGHT,  5, 19,  0
+	spintable_entry UPPER_RIGHT,  4, 19,  2
+	spintable_entry UPPER_RIGHT,  3, 19,  4
+	spintable_entry UPPER_RIGHT,  2, 18,  6
+	spintable_entry UPPER_RIGHT,  1, 10,  8
+	spintable_entry LOWER_RIGHT,  1, 10,  9
+	spintable_entry LOWER_RIGHT,  2, 18, 11
+	spintable_entry LOWER_RIGHT,  3, 19, 13
+	spintable_entry LOWER_RIGHT,  4, 19, 15
+	spintable_entry LOWER_RIGHT,  5, 19, 17
+	spintable_entry LOWER_RIGHT,  6, 18, 17
+	spintable_entry LOWER_RIGHT,  7, 16, 17
+	spintable_entry LOWER_RIGHT,  8, 14, 17
+	spintable_entry LOWER_RIGHT,  9, 12, 17
+	spintable_entry LOWER_RIGHT, 10, 10, 17
+	spintable_entry LOWER_LEFT,  10,  9, 17
+	spintable_entry LOWER_LEFT,   9,  7, 17
+	spintable_entry LOWER_LEFT,   8,  5, 17
+	spintable_entry LOWER_LEFT,   7,  3, 17
+	spintable_entry LOWER_LEFT,   6,  1, 17
+	spintable_entry LOWER_LEFT,   5,  0, 17
+	spintable_entry LOWER_LEFT,   4,  0, 15
+	spintable_entry LOWER_LEFT,   3,  0, 13
+	spintable_entry LOWER_LEFT,   2,  1, 11
+	spintable_entry LOWER_LEFT,   1,  9,  9
 	db -1
 ; 8c4f5
 
@@ -507,16 +450,22 @@ endr
 	jr .loop
 ; 8c538 (23:4538)
 
-.wedge1 db 2, 3, 5, 4, 9, -1
-.wedge2 db 1, 1, 2, 2, 4, 2, 4, 2, 3, -1
-.wedge3 db 2, 1, 3, 1, 4, 1, 4, 1, 4, 1, 3, 1, 2, 1, 1, 1, 1, -1
-.wedge4 db 4, 1, 4, 0, 3, 1, 3, 0, 2, 1, 2, 0, 1, -1
-.wedge5 db 4, 0, 3, 0, 3, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1, -1
+; wedgeN: db width towards edge, x increment or -1 if done
+.wedge1 db 10, -1
+.wedge2 db 2, 4, 6, -1
+.wedge3 db 1, 2, 3, 2, 3, 3, 2, -1
+.wedge4 db 1, 1, 2, 2, 3, 1, 2, 2, 2, 1, 1, -1
+.wedge5 db 1, 1, 2, 1, 2, 1, 2, 1, 1, 1, 1, 1, 1, 1, 1, -1
+.wedge6 db 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, -1
+.wedge7 db 2, 1, 2, 0, 1, 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, -1
+.wedge8 db 2, 1, 2, 0, 2, 1, 2, 0, 1, 1, 2, 0, 1, 1, 1, -1
+.wedge9 db 2, 0, 1, 0, 1, 1, 1, 0, 1, 0, 1, 1, 1, 0, 1, -1
+.wedge10 db 2, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1, -1
 ; 8c578
 
 StartTrainerBattle_SetUpForRandomScatterOutro: ; 8c578 (23:4578)
 	farcall BattleStart_HideAllSpritesExceptBattleParticipants
-	ld a, BANK(LYOverrides)
+	ld a, BANK(wLYOverrides)
 	ld [rSVBK], a
 	call StartTrainerBattle_NextScene
 	ld a, $10
@@ -584,32 +533,22 @@ StartTrainerBattle_SpeckleToBlack: ; 8c58f (23:458f)
 	ret
 
 StartTrainerBattle_LoadPokeBallGraphics: ; 8c5dc (23:45dc)
-	ld a, [OtherTrainerClass]
+	ld a, [wOtherTrainerClass]
 	and a
 	jp z, .nextscene ; don't need to be here if wild
 
 	xor a
 	ld [hBGMapMode], a
-	hlcoord 0, 0, AttrMap
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	inc b
-	inc c
-	jr .enter_loop_midway
 
-.loop
-; set all pals to 7
-	ld a, [hl]
-	or %00000111
-	ld [hli], a
-.enter_loop_midway
-	dec c
-	jr nz, .loop
-	dec b
-	jr nz, .loop
-
+	ld a, [wOtherTrainerClass]
+	ld de, 1
+	ld hl, .RocketTrainerClasses
+	call IsInArray
+	ld de, RocketTransition
+	jr c, .got_transition
 	ld de, PokeBallTransition
+.got_transition
 	hlcoord 2, 1
-
 	ld b, SCREEN_WIDTH - 4
 .loop2
 	push hl
@@ -625,6 +564,19 @@ StartTrainerBattle_LoadPokeBallGraphics: ; 8c5dc (23:45dc)
 	sla a
 	jr nc, .no_load
 	ld [hl], $fe
+
+	push af
+	push hl
+	push bc
+	ld bc, wAttrMap - wTileMap
+	add hl, bc
+	ld a, [hl]
+	or PAL_BG_TEXT
+	ld [hl], a
+	pop bc
+	pop hl
+	pop af
+
 .no_load
 	inc hl
 	jr .loop4
@@ -647,20 +599,20 @@ StartTrainerBattle_LoadPokeBallGraphics: ; 8c5dc (23:45dc)
 	jr nz, .loop2
 
 	ld hl, .armored_mewtwo_pals
-	ld a, [OtherTrainerClass]
+	ld a, [wOtherTrainerClass]
 	cp GIOVANNI
 	jr nz, .not_armored_mewtwo
-	ld a, [OtherTrainerID]
+	ld a, [wOtherTrainerID]
 	cp GIOVANNI1
 	jr z, .got_palette
 
 .not_armored_mewtwo
 	ld hl, .timepals
-	ld a, [TimeOfDayPal]
+	ld a, [wTimeOfDayPal]
 	and %00000011
-rept 3
 	sla a
-endr
+	sla a
+	sla a
 	push bc
 	ld b, 0
 	ld c, a
@@ -672,44 +624,66 @@ endr
 	ld a, $5 ; WRAM5 = palettes
 	ld [rSVBK], a
 	call .copypals
-	push hl
-	ld de, UnknBGPals + 7 palettes
-	ld bc, 1 palettes
-	call CopyBytes
-	pop hl
-	ld de, BGPals + 7 palettes
-	ld bc, 1 palettes
-	call CopyBytes
 	pop af
 	ld [rSVBK], a
 	ld a, $1
 	ld [hCGBPalUpdate], a
 	call DelayFrame
-	call LoadEDTile
+	call CopyTilemapAtOnce
 
 .nextscene ; 8c673 (23:4673)
 	jp StartTrainerBattle_NextScene
 
 .copypals ; 8c677 (23:4677)
-	ld de, UnknBGPals + 7 palettes
+	ld de, wUnknBGPals palette PAL_BG_GRAY
 	call .copy
-	ld de, BGPals + 7 palettes
+	ld de, wUnknBGPals palette PAL_BG_RED
 	call .copy
-	ld de, UnknOBPals + 6 palettes
+	ld de, wUnknBGPals palette PAL_BG_GREEN
 	call .copy
-	ld de, OBPals + 6 palettes
+	ld de, wUnknBGPals palette PAL_BG_WATER
 	call .copy
-	ld de, UnknOBPals + 7 palettes
+	ld de, wUnknBGPals palette PAL_BG_YELLOW
 	call .copy
-	ld de, OBPals + 7 palettes
+	ld de, wUnknBGPals palette PAL_BG_BROWN
+	call .copy
+	ld de, wUnknBGPals palette PAL_BG_ROOF
+	call .copy
+	ld de, wUnknBGPals palette PAL_BG_TEXT
+	call .copy
+	ld de, wUnknOBPals palette PAL_OW_ROCK
+	call .copy
+	ld de, wUnknOBPals palette PAL_OW_TREE
 
 .copy ; 8c698 (23:4698)
 	push hl
+	push de
 	ld bc, 1 palettes
-	call CopyBytes
+	rst CopyBytes
+	pop de
+	ld hl, wBGPals - wUnknBGPals
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	push hl
+	ld bc, 1 palettes
+	rst CopyBytes
 	pop hl
 	ret
 ; 8c6a1 (23:46a1)
+
+.RocketTrainerClasses
+	db GRUNTM
+	db GRUNTF
+	db ROCKET_SCIENTIST
+	db JESSIE_JAMES
+	db PROTON
+	db PETREL
+	db ARCHER
+	db ARIANA
+	db GIOVANNI
+	db -1
 
 .timepals
 if !DEF(MONOCHROME)
@@ -768,15 +742,33 @@ PokeBallTransition:
 	db %00001111, %11110000
 	db %00000011, %11000000
 
+RocketTransition:
+	db %11111111, %11110000
+	db %11111111, %11111100
+	db %11111111, %11111110
+	db %11111111, %11111110
+	db %11111000, %00111111
+	db %11111000, %00011111
+	db %11111000, %00111111
+	db %11111111, %11111110
+	db %11111111, %11111110
+	db %11111111, %11111100
+	db %11111111, %11111000
+	db %11111000, %01111100
+	db %11111000, %01111100
+	db %11111000, %00111110
+	db %11111000, %00011111
+	db %11111000, %00011111
+
 WipeLYOverrides: ; 8c6d8
 	ld a, [rSVBK]
 	push af
 	ld a, $5
 	ld [rSVBK], a
 
-	ld hl, LYOverrides
+	ld hl, wLYOverrides
 	call .wipe
-	ld hl, LYOverridesBackup
+	ld hl, wLYOverridesBackup
 	call .wipe
 
 	pop af
@@ -794,49 +786,6 @@ WipeLYOverrides: ; 8c6d8
 	ret
 ; 8c6f7
 
-
-StartTrainerBattle_DrawSineWave: ; 8c6f7 (23:46f7)
-	and (1 << 6) - 1
-	cp 1 << 5
-	jr nc, .okay
-	call .DoSineWave
-	ld a, h
-	ret
-
-.okay
-	and (1 << 5) - 1
-	call .DoSineWave
-	ld a, h
-	cpl
-	inc a
-	ret
-
-.DoSineWave: ; 8c70c (23:470c)
-	ld e, a
-	ld a, d
-	ld d, 0
-	ld hl, .sinewave
-	add hl, de
-	add hl, de
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	ld hl, 0
-.loop
-	srl a
-	jr nc, .skip
-	add hl, de
-.skip
-	sla e
-	rl d
-	and a
-	jr nz, .loop
-	ret
-; 8c728 (23:4728)
-
-.sinewave ; 8c728
-	sine_wave $100
-; 8c768
 
 zoombox: macro
 ; width, height, start y, start x
@@ -866,7 +815,7 @@ StartTrainerBattle_ZoomToBlack: ; 8c768 (23:4768)
 	xor a
 	ld [hBGMapMode], a
 	call .Copy
-	call WaitBGMap
+	call ApplyTilemapInVBlank
 	jr .loop
 
 .done

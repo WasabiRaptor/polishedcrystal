@@ -1,66 +1,44 @@
 MystriStage_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  6, 19, SINJOH_RUINS, 1
+	warp_event  7, 19, SINJOH_RUINS, 1
 
-MystriStage_MapEventHeader:
+	db 2 ; coord events
+	coord_event  6, 11, 1, MystriStageTrigger1Script
+	coord_event  7, 11, 1, MystriStageTrigger2Script
 
-.Warps: db 2
-	warp_def $11, $6, 1, SINJOH_RUINS
-	warp_def $11, $7, 1, SINJOH_RUINS
+	db 0 ; bg events
 
-.XYTriggers: db 2
-	xy_trigger 1, $9, $6, MystriStageTrigger1Script
-	xy_trigger 1, $9, $7, MystriStageTrigger2Script
+	db 3 ; object events
+	object_event  6, 10, SPRITE_CYNTHIA, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MystriStageCynthiaSafeguardScript, EVENT_LISTENED_TO_CYNTHIA_INTRO
+	object_event  7,  7, SPRITE_CYNTHIA, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MystriStageCynthiaScript, EVENT_MYSTRI_STAGE_CYNTHIA
+	object_event  6,  8, SPRITE_EGG, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, MystriStageEggScript, EVENT_MYSTRI_STAGE_EGG
 
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_CYNTHIA, 8, 6, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MystriStageCynthiaSafeguardScript, EVENT_LISTENED_TO_CYNTHIA_INTRO
-	person_event SPRITE_CYNTHIA, 5, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MystriStageCynthiaScript, EVENT_MYSTRI_STAGE_CYNTHIA
-	person_event SPRITE_EGG, 6, 6, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MystriStageEggScript, EVENT_MYSTRI_STAGE_EGG
-
-const_value set 2
+	const_def 1 ; object constants
 	const MYSTRISTAGE_CYNTHIA1
 	const MYSTRISTAGE_CYNTHIA2
 	const MYSTRISTAGE_EGG
 
-MystriStageTrigger1Script:
-	spriteface PLAYER, UP
-	pause 10
-	showemote EMOTE_SHOCK, MYSTRISTAGE_CYNTHIA1, 15
-	pause 10
-	spriteface MYSTRISTAGE_CYNTHIA1, DOWN
-	jump MystriStageTriggerScript
-
 MystriStageTrigger2Script:
-	applymovement PLAYER, MystriStageMovementData_PlayerStepsUp
-	spriteface PLAYER, LEFT
+	applyonemovement PLAYER, step_up
+MystriStageTrigger1Script:
+	faceobject PLAYER, MYSTRISTAGE_CYNTHIA1
 	pause 10
 	showemote EMOTE_SHOCK, MYSTRISTAGE_CYNTHIA1, 15
 	pause 10
-	spriteface MYSTRISTAGE_CYNTHIA1, RIGHT
-	jump MystriStageTriggerScript
-
+	faceobject MYSTRISTAGE_CYNTHIA1, PLAYER
 MystriStageCynthiaSafeguardScript:
-	faceplayer
-MystriStageTriggerScript:
-	opentext
-	writetext MystriStageCynthiaIntroText
-	waitbutton
-	closetext
+	showtext MystriStageCynthiaIntroText
 	follow MYSTRISTAGE_CYNTHIA1, PLAYER
 	applymovement MYSTRISTAGE_CYNTHIA1, MystriStageMovementData_CynthiaStepsUp
 	stopfollow
-	spriteface MYSTRISTAGE_CYNTHIA1, LEFT
-	spriteface PLAYER, RIGHT
-	opentext
-	writetext MystriStageCynthiaSpeechText
-	waitbutton
-	writetext MystriStageCynthiaLeadText1
-	waitbutton
-	closetext
+	turnobject MYSTRISTAGE_CYNTHIA1, LEFT
+	turnobject PLAYER, RIGHT
+	showtext MystriStageCynthiaSpeechText
 	showemote EMOTE_SHOCK, MYSTRISTAGE_CYNTHIA1, 15
 	opentext
 	writetext MystriStageCynthiaLeadText2
@@ -68,7 +46,7 @@ MystriStageTriggerScript:
 	appear MYSTRISTAGE_CYNTHIA2
 	disappear MYSTRISTAGE_CYNTHIA1
 	setevent EVENT_LISTENED_TO_CYNTHIA_INTRO
-	dotrigger $0
+	setscene $0
 	jump MystriStageCynthiaContinueScript
 
 MystriStageCynthiaScript:
@@ -80,10 +58,10 @@ MystriStageCynthiaContinueScript:
 	writetext MystriStageCynthiaIdeaText
 	waitbutton
 	checkevent EVENT_BEAT_ELITE_FOUR
-	iffalse .NotYet
+	iffalse_jumpopenedtext MystriStageCynthiaNotNowText
 	writetext MystriStageCynthiaChallengeText
 	yesorno
-	iffalse .Refused
+	iffalse_jumpopenedtext MystriStageCynthiaNoText
 	writetext MystriStageCynthiaYesText
 	waitbutton
 	closetext
@@ -94,27 +72,13 @@ MystriStageCynthiaContinueScript:
 	reloadmapafterbattle
 	setevent EVENT_BEAT_CYNTHIA
 	opentext
-	jump MystriStageBeatCynthiaScript
-
-.NotYet:
-	writetext MystriStageCynthiaNotNowText
-	waitbutton
-	closetext
-	end
-
-.Refused:
-	writetext MystriStageCynthiaNoText
-	waitbutton
-	closetext
-	end
-
 MystriStageBeatCynthiaScript:
 	checkevent EVENT_GOT_WISE_GLASSES_FROM_CYNTHIA
-	iftrue .GotWiseGlasses
+	iftrue_jumpopenedtext MystriStageCynthiaFinalText
 	writetext MystriStageCynthiaItemText
 	waitbutton
 	verbosegiveitem WISE_GLASSES
-	iffalse .Done
+	iffalse_endtext
 	setevent EVENT_GOT_WISE_GLASSES_FROM_CYNTHIA
 	writetext MystriStageCynthiaAfterText
 	waitbutton
@@ -150,34 +114,20 @@ MystriStageBeatCynthiaScript:
 	special RestartMapMusic
 	special Special_FadeInQuickly
 	pause 20
-	spriteface MYSTRISTAGE_CYNTHIA2, DOWN
+	turnobject MYSTRISTAGE_CYNTHIA2, DOWN
 	pause 40
-	faceplayer
-	opentext
-	writetext MystriStageCynthiaEggText
-	waitbutton
-.Done:
-	closetext
-	end
-
-.GotWiseGlasses:
-	writetext MystriStageCynthiaFinalText
-	waitbutton
-	closetext
-	end
+	jumptextfaceplayer MystriStageCynthiaEggText
 
 MystriStageEggScript:
 	checkcode VAR_PARTYCOUNT
-	if_equal PARTY_LENGTH, .PartyFull
+	ifequal PARTY_LENGTH, .PartyFull
 	special GiveMystriEgg
 	disappear MYSTRISTAGE_EGG
 	opentext
 	writetext MystriStageEggText
 	playsound SFX_KEY_ITEM
 	waitsfx
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .PartyFull:
 	jumptext MystriStageNoRoomText
@@ -218,10 +168,8 @@ MystriStageCynthiaSpeechText:
 	para "People once cele-"
 	line "brated here with"
 	cont "music and dance."
-	done
 
-MystriStageCynthiaLeadText1:
-	text "Cynthia: I study"
+	para "Cynthia: I study"
 	line "myths about"
 
 	para "ancient sites like"
@@ -371,10 +319,6 @@ MystriStageNoRoomText:
 	text "You don't have"
 	line "room for this!"
 	done
-
-MystriStageMovementData_PlayerStepsUp:
-	step_up
-	step_end
 
 MystriStageMovementData_CynthiaStepsUp:
 	step_up

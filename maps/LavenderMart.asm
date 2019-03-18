@@ -1,35 +1,20 @@
 LavenderMart_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 2 ; warp events
+	warp_event  2,  7, LAVENDER_TOWN, 5
+	warp_event  3,  7, LAVENDER_TOWN, 5
 
-LavenderMart_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 2
-	warp_def $7, $2, 5, LAVENDER_TOWN
-	warp_def $7, $3, 5, LAVENDER_TOWN
+	db 0 ; bg events
 
-.XYTriggers: db 0
-
-.Signposts: db 0
-
-.PersonEvents: db 3
-	person_event SPRITE_CLERK, 3, 1, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ClerkScript_0x7eb1c, -1
-	person_event SPRITE_POKEFAN_M, 6, 6, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, PokefanMScript_0x7eb23, -1
-	person_event SPRITE_ROCKER, 2, 9, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, RockerScript_0x7eb26, -1
-
-ClerkScript_0x7eb1c:
-	opentext
-	pokemart MARTTYPE_STANDARD, MART_LAVENDER
-	closetext
-	end
-
-PokefanMScript_0x7eb23:
-	jumptextfaceplayer UnknownText_0x7eb29
-
-RockerScript_0x7eb26:
-	jumptextfaceplayer UnknownText_0x7ebac
+	db 3 ; object events
+	mart_clerk_event  1,  3, MARTTYPE_STANDARD, MART_LAVENDER
+	object_event  6,  6, SPRITE_HIKER, SPRITEMOVEDATA_WALK_LEFT_RIGHT, 0, 2, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7eb29, -1
+	object_event  9,  2, SPRITE_ROCKER, SPRITEMOVEDATA_SPINRANDOM_SLOW, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, UnknownText_0x7ebac, -1
 
 UnknownText_0x7eb29:
 	text "Repel is a neces-"

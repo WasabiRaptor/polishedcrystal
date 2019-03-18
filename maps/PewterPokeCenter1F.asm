@@ -1,33 +1,29 @@
 PewterPokeCenter1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  5,  7, PEWTER_CITY, 4
+	warp_event  6,  7, PEWTER_CITY, 4
+	warp_event  0,  7, POKECENTER_2F, 1
 
-PewterPokeCenter1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 3
-	warp_def $7, $5, 4, PEWTER_CITY
-	warp_def $7, $6, 4, PEWTER_CITY
-	warp_def $7, $0, 1, POKECENTER_2F
+	db 1 ; bg events
+	bg_event 10,  1, SIGNPOST_READ, PokemonJournalBrockScript
 
-.XYTriggers: db 0
-
-.Signposts: db 1
-	signpost 1, 10, SIGNPOST_READ, PokemonJournalBrockScript
-
-.PersonEvents: db 5
-	person_event SPRITE_NURSE, 1, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, pokecenternurse, -1
-	person_event SPRITE_TEACHER, 5, 11, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_GREEN, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x1a2f01, -1
-	person_event SPRITE_JIGGLYPUFF, 3, 2, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, PewterJigglypuff, -1
-	person_event SPRITE_CHILD, 3, 3, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_JUMPTEXTFP, 0, UnknownText_0x1a2f75, -1
-	person_event SPRITE_POKEFAN_M, 2, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, NPCTrade4Script, -1
+	db 5 ; object events
+	pc_nurse_event  5, 1
+	object_event  2,  3, SPRITE_JIGGLYPUFF, SPRITEMOVEDATA_POKEMON, 0, 0, -1, -1, 0, PERSONTYPE_POKEMON, JIGGLYPUFF, PewterJigglypuffText, -1
+	object_event  8,  2, SPRITE_POKEFAN_M, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_COMMAND, trade, TRADE_WITH_CHRIS_FOR_HERACROSS, -1
+	object_event 11,  5, SPRITE_TEACHER, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_COMMAND, jumptextfaceplayer, PewterPokeCenter1FTeacherText, -1
+	object_event  3,  3, SPRITE_CHILD, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_COMMAND, jumptextfaceplayer, PewterPokeCenter1FChildText, -1
 
 PokemonJournalBrockScript:
 	setflag ENGINE_READ_BROCK_JOURNAL
-	jumptext .Text
+	thistext
 
-.Text:
 	text "#mon Journal"
 
 	para "Special Feature:"
@@ -41,28 +37,12 @@ PokemonJournalBrockScript:
 	cont "starts."
 	done
 
-PewterJigglypuff:
-	opentext
-	writetext .Text
-	cry JIGGLYPUFF
-	waitbutton
-	closetext
-	end
-
-.Text:
+PewterJigglypuffText:
 	text "Jigglypuff:"
 	line "♪ Puu pupuu. ♪"
 	done
 
-NPCTrade4Script:
-	faceplayer
-	opentext
-	trade $4
-	waitbutton
-	closetext
-	end
-
-UnknownText_0x1a2f01:
+PewterPokeCenter1FTeacherText:
 	text "…Yeah, and the"
 	line "Gym in Cinnabar's"
 
@@ -73,7 +53,7 @@ UnknownText_0x1a2f01:
 	line "phone. Go away!"
 	done
 
-UnknownText_0x1a2f75:
+PewterPokeCenter1FChildText:
 	text "Most #mon get"
 	line "drowsy if they"
 

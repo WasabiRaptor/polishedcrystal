@@ -1,225 +1,76 @@
 KrissHouse1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 3 ; warp events
+	warp_event  8,  7, NEW_BARK_TOWN, 2
+	warp_event  9,  7, NEW_BARK_TOWN, 2
+	warp_event 11,  0, KRISS_HOUSE_2F, 1
 
-KrissHouse1F_MapEventHeader:
+	db 4 ; coord events
+	coord_event 10,  4, 0, MomTrigger1
+	coord_event 11,  4, 0, MomTrigger2
+	coord_event  9,  1, 0, MomTrigger3
+	coord_event  9,  2, 0, MomTrigger4
 
-.Warps: db 3
-	warp_def $7, $6, 2, NEW_BARK_TOWN
-	warp_def $7, $7, 2, NEW_BARK_TOWN
-	warp_def $0, $9, 1, KRISS_HOUSE_2F
+	db 4 ; bg events
+	bg_event  1,  1, SIGNPOST_JUMPTEXT, FridgeText
+	bg_event  2,  1, SIGNPOST_JUMPTEXT, SinkText
+	bg_event  3,  1, SIGNPOST_JUMPTEXT, StoveText
+	bg_event  6,  1, SIGNPOST_UP, TVScript
 
-.XYTriggers: db 3
-	xy_trigger 0, $4, $8, MomTrigger1
-	xy_trigger 0, $4, $9, MomTrigger2
-	xy_trigger 0, $2, $7, MomTrigger3
+	db 5 ; object events
+	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_1
+	object_event  3,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MORN), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << DAY), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	object_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << NITE), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	object_event  6,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
 
-.Signposts: db 4
-	signpost 1, 0, SIGNPOST_READ, FridgeScript
-	signpost 1, 1, SIGNPOST_READ, SinkScript
-	signpost 1, 2, SIGNPOST_READ, StoveScript
-	signpost 1, 7, SIGNPOST_READ, TVScript
-
-.PersonEvents: db 5
-	person_event SPRITE_MOM, 4, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_1
-	person_event SPRITE_POKEFAN_F, 4, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
-	person_event SPRITE_MOM, 2, 2, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MORN), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	person_event SPRITE_MOM, 4, 7, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << DAY), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	person_event SPRITE_MOM, 2, 0, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << NITE), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-
-const_value set 2
+	const_def 1 ; object constants
 	const KRISSHOUSE1F_MOM1
-	const KRISSHOUSE1F_POKEFAN_F
 
 MomTrigger1:
 	playmusic MUSIC_MOM
 	showemote EMOTE_SHOCK, KRISSHOUSE1F_MOM1, 15
-	spriteface KRISSHOUSE1F_MOM1, RIGHT
-	spriteface PLAYER, LEFT
+	turnobject KRISSHOUSE1F_MOM1, RIGHT
+	turnobject PLAYER, LEFT
 	jump MomEventScript
 
 MomTrigger2:
 	playmusic MUSIC_MOM
 	showemote EMOTE_SHOCK, KRISSHOUSE1F_MOM1, 15
-	spriteface KRISSHOUSE1F_MOM1, RIGHT
-	applymovement PLAYER, KrissHouse1FSlowStepLeftMovementData
+	turnobject KRISSHOUSE1F_MOM1, RIGHT
+	applyonemovement PLAYER, slow_step_left
 	jump MomEventScript
 
 MomTrigger3:
 	playmusic MUSIC_MOM
 	showemote EMOTE_SHOCK, KRISSHOUSE1F_MOM1, 15
-	spriteface KRISSHOUSE1F_MOM1, UP
-	applymovement PLAYER, KrissHouse1FSlowStepDownMovementData
+	turnobject KRISSHOUSE1F_MOM1, UP
+	applymovement PLAYER, .two_steps_down
+	jump MomEventScript
+
+.two_steps_down
+	step_down
+	step_down
+	step_end
+
+MomTrigger4:
+	playmusic MUSIC_MOM
+	showemote EMOTE_SHOCK, KRISSHOUSE1F_MOM1, 15
+	turnobject KRISSHOUSE1F_MOM1, UP
+	applyonemovement PLAYER, slow_step_down
 MomEventScript:
 	opentext
 	writetext MomIntroText
 	buttonsound
-
-if DEF(DEBUG)
-
-	; full pokegear
-	setflag ENGINE_POKEGEAR
-	setflag ENGINE_PHONE_CARD
-	setflag ENGINE_MAP_CARD
-	setflag ENGINE_RADIO_CARD
-	setflag ENGINE_EXPN_CARD
-	; pokedex
-	setflag ENGINE_POKEDEX
-	; all hms
-	givetmhm HM_CUT
-	givetmhm HM_FLY
-	givetmhm HM_SURF
-	givetmhm HM_STRENGTH
-	givetmhm HM_WATERFALL
-	givetmhm HM_WHIRLPOOL
-	; tms for party
-	givetmhm TM_ICE_BEAM
-	givetmhm TM_BLIZZARD
-	givetmhm TM_FLAMETHROWER
-	givetmhm TM_FIRE_BLAST
-	givetmhm TM_THUNDERBOLT
-	givetmhm TM_THUNDER
-	givetmhm TM_PSYCHIC
-	givetmhm TM_SHADOW_BALL
-	givetmhm TM_EARTHQUAKE
-	givetmhm TM_SWORDS_DANCE
-	givetmhm TM_CALM_MIND
-	givetmhm TM_BULK_UP
-	givetmhm TM_ROCK_SMASH
-	givetmhm TM_FLASH
-	; max money
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 1000000
-	givemoney $0, 999999
-	giveitem COIN_CASE
-	givecoins 50000
-	; all badges
-	setflag ENGINE_ZEPHYRBADGE
-	setflag ENGINE_HIVEBADGE
-	setflag ENGINE_PLAINBADGE
-	setflag ENGINE_FOGBADGE
-	setflag ENGINE_STORMBADGE
-	setflag ENGINE_MINERALBADGE
-	setflag ENGINE_GLACIERBADGE
-	setflag ENGINE_RISINGBADGE
-	setflag ENGINE_BOULDERBADGE
-	setflag ENGINE_CASCADEBADGE
-	setflag ENGINE_THUNDERBADGE
-	setflag ENGINE_RAINBOWBADGE
-	setflag ENGINE_MARSHBADGE
-	setflag ENGINE_SOULBADGE
-	setflag ENGINE_VOLCANOBADGE
-	setflag ENGINE_EARTHBADGE
-	setevent EVENT_BEAT_FALKNER
-	setevent EVENT_BEAT_BUGSY
-	setevent EVENT_BEAT_WHITNEY
-	setevent EVENT_BEAT_MORTY
-	setevent EVENT_BEAT_CHUCK
-	setevent EVENT_BEAT_JASMINE
-	setevent EVENT_BEAT_PRYCE
-	setevent EVENT_BEAT_CLAIR
-	setevent EVENT_BEAT_BROCK
-	setevent EVENT_BEAT_MISTY
-	setevent EVENT_BEAT_LTSURGE
-	setevent EVENT_BEAT_ERIKA
-	setevent EVENT_BEAT_JANINE
-	setevent EVENT_BEAT_SABRINA
-	setevent EVENT_BEAT_BLAINE
-	setevent EVENT_BEAT_BLUE
-	setevent EVENT_BEAT_ELITE_FOUR
-	setevent EVENT_BEAT_ELITE_FOUR_AGAIN
-	; fly anywhere
-	setflag ENGINE_FLYPOINT_NEW_BARK
-	setflag ENGINE_FLYPOINT_CHERRYGROVE
-	setflag ENGINE_FLYPOINT_VIOLET
-	setflag ENGINE_FLYPOINT_UNION_CAVE
-	setflag ENGINE_FLYPOINT_AZALEA
-	setflag ENGINE_FLYPOINT_GOLDENROD
-	setflag ENGINE_FLYPOINT_ECRUTEAK
-	setflag ENGINE_FLYPOINT_OLIVINE
-	setflag ENGINE_FLYPOINT_CIANWOOD
-	setflag ENGINE_FLYPOINT_MAHOGANY
-	setflag ENGINE_FLYPOINT_LAKE_OF_RAGE
-	setflag ENGINE_FLYPOINT_BLACKTHORN
-	setflag ENGINE_FLYPOINT_SILVER_CAVE
-	setflag ENGINE_FLYPOINT_INDIGO_PLATEAU
-	setflag ENGINE_FLYPOINT_PALLET
-	setflag ENGINE_FLYPOINT_VIRIDIAN
-	setflag ENGINE_FLYPOINT_PEWTER
-	setflag ENGINE_FLYPOINT_MT_MOON
-	setflag ENGINE_FLYPOINT_CERULEAN
-	setflag ENGINE_FLYPOINT_VERMILION
-	setflag ENGINE_FLYPOINT_CELADON
-	setflag ENGINE_FLYPOINT_ROCK_TUNNEL
-	setflag ENGINE_FLYPOINT_LAVENDER
-	setflag ENGINE_FLYPOINT_FUCHSIA
-	setflag ENGINE_FLYPOINT_SAFFRON
-	setflag ENGINE_FLYPOINT_CINNABAR
-	; magnet train works
-	setevent EVENT_RESTORED_POWER_TO_KANTO
-	giveitem PASS
-	; cycling road works
-	giveitem BICYCLE
-	; useful items
-	giveitem ITEMFINDER
-	giveitem SQUIRTBOTTLE
-	giveitem MYSTICTICKET
-	giveitem OLD_SEA_MAP
-	giveitem MAX_REPEL, 99
-	giveitem MAX_REVIVE, 99
-	giveitem FULL_RESTORE, 99
-	giveitem MAX_ELIXER, 99
-	giveitem RARE_CANDY, 99
-	giveitem ESCAPE_ROPE, 99
-	giveitem SILVER_LEAF, 99
-	giveitem GOLD_LEAF, 99
-	giveitem HP_UP, 99
-	giveitem PP_UP, 99
-	giveitem PROTEIN, 99
-	giveitem IRON, 99
-	giveitem CARBOS, 99
-	giveitem CALCIUM, 99
-	giveitem ZINC, 99
-	giveitem MASTER_BALL, 99
-	callasm SetHallOfFameFlag
-	; good party
-	givepoke MEWTWO, 100, LEFTOVERS
-	givepoke LUGIA, 100, WISE_GLASSES
-	givepoke HO_OH, 100, MUSCLE_BAND
-	; hm slaves
-	givepoke MEW, 100, LEFTOVERS
-	givepoke MEW, 100, LEFTOVERS
-	callasm TeachHMSlaveMoves
-	; intro events
-	addcellnum PHONE_MOM
-;	addcellnum PHONE_ELM
-;	setevent EVENT_GOT_CYNDAQUIL_FROM_ELM
-;	setevent EVENT_CYNDAQUIL_POKEBALL_IN_ELMS_LAB
-;	setevent EVENT_CHIKORITA_POKEBALL_IN_ELMS_LAB
-;	setevent EVENT_GOT_A_POKEMON_FROM_ELM
-;	setevent EVENT_RIVAL_CHERRYGROVE_CITY
-;	setevent EVENT_LYRA_IN_ELMS_LAB
-;	domaptrigger ELMS_LAB, $5
-;	domaptrigger NEW_BARK_TOWN, $2
-	dotrigger $1
-
-else
-
 	stringtotext GearName, $1
 	callstd receiveitem
 	setflag ENGINE_POKEGEAR
 	setflag ENGINE_PHONE_CARD
 	addcellnum PHONE_MOM
-	dotrigger $1
+	setscene $1
 	setevent EVENT_KRISS_HOUSE_MOM_1
 	clearevent EVENT_KRISS_HOUSE_MOM_2
 	writetext MomPokegearText
@@ -233,7 +84,6 @@ else
 	yesorno
 	iffalse .InitialSetDSTFlag
 	jump .InitializedDSTFlag
-
 .NotDST:
 	special Special_InitialClearDSTFlag
 	yesorno
@@ -247,172 +97,84 @@ else
 .NoInstructions:
 	writetext MomOutroText
 	waitbutton
-
-endc
-
 	closetext
-	spriteface KRISSHOUSE1F_MOM1, LEFT
+	turnobject KRISSHOUSE1F_MOM1, LEFT
 	special RestartMapMusic
 	end
-
-if DEF(DEBUG)
-
-SetHallOfFameFlag:
-	; Enable the Pokégear map to cycle through all of Kanto
-	ld hl, StatusFlags
-	set 6, [hl] ; hall of fame
-	ret
-
-TeachHMSlaveMoves:
-	ld hl, PartyMon4Moves
-	ld a, FLY
-	ld [hli], a
-	ld a, SURF
-	ld [hli], a
-	ld a, STRENGTH
-	ld [hli], a
-	ld a, CUT
-	ld [hl], a
-	ld hl, PartyMon4PP
-	ld a, 15
-	ld [hli], a
-;	ld a, 15
-	ld [hli], a
-;	ld a, 15
-	ld [hli], a
-	ld a, 30
-	ld [hl], a
-	ld hl, PartyMon5Moves
-	ld a, FLASH
-	ld [hli], a
-	ld a, ROCK_SMASH
-	ld [hli], a
-	ld a, WHIRLPOOL
-	ld [hli], a
-	ld a, WATERFALL
-	ld [hl], a
-	ld hl, PartyMon5PP
-	ld a, 20
-	ld [hli], a
-	ld a, 15
-	ld [hli], a
-;	ld a, 15
-	ld [hli], a
-;	ld a, 15
-	ld [hl], a
-	ret
-
-else
 
 GearName:
 	db "#gear@"
 
-endc
+FridgeText:
+	text "Let's see what's"
+	line "in the fridge…"
+
+	para "Fresh Water and"
+	line "tasty Lemonade!"
+	done
+
+SinkText:
+	text "The sink is spot-"
+	line "less. Mom likes it"
+	cont "clean."
+	done
+
+StoveText:
+	text "Mom's specialty!"
+
+	para "Cinnabar Volcano"
+	line "Burger!"
+	done
+
+TVScript:
+	thistext
+
+	text "There's a movie on"
+	line "TV: Stars dot the"
+
+	para "sky as two boys"
+	line "ride on a train…"
+
+	para "I'd better get"
+	line "rolling too!"
+	done
 
 MomScript:
 	faceplayer
-	checktriggers
+	checkscene
 	iffalse .MomEvent
 	opentext
 	checkevent EVENT_FIRST_TIME_BANKING_WITH_MOM
-	iftrue .DoIt
+	iftrue_jumpopenedtext MomDoItText
 	checkevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
 	iftrue .BankOfMom
 	checkevent EVENT_GAVE_MYSTERY_EGG_TO_ELM
 	iftrue .FirstTimeBanking
 	checkevent EVENT_GOT_A_POKEMON_FROM_ELM
-	iftrue .Errand
-	writetext MomHurryUpText
-	waitbutton
-	closetext
-	end
+	iftrue_jumpopenedtext MomErrandText
+	thisopenedtext
 
-.Errand:
-	writetext MomErrandText
-	waitbutton
-	closetext
-	end
+	text "Prof.Elm is wait-"
+	line "ing for you."
 
-.DoIt:
-	writetext MomDoItText
-	waitbutton
-	closetext
-	end
+	para "Hurry up, baby!"
+	done
 
 .FirstTimeBanking:
 	setevent EVENT_FIRST_TIME_BANKING_WITH_MOM
 .BankOfMom:
 	setevent EVENT_TALKED_TO_MOM_AFTER_MYSTERY_EGG_QUEST
 	special Special_BankOfMom
-	waitbutton
-	closetext
-	end
+	waitendtext
 
 .MomEvent:
 	playmusic MUSIC_MOM
 	jump MomEventScript
 
-NeighborScript:
-	faceplayer
-	opentext
-	checkmorn
-	iftrue .MornScript
-	checkday
-	iftrue .DayScript
-	checknite
-	iftrue .NiteScript
-
-.MornScript:
-	writetext NeighborMornIntroText
-	buttonsound
-	jump .Main
-
-.DayScript:
-	writetext NeighborDayIntroText
-	buttonsound
-	jump .Main
-
-.NiteScript:
-	writetext NeighborNiteIntroText
-	buttonsound
-	jump .Main
-
-.Main:
-	writetext NeighborText
-	waitbutton
-	closetext
-	spriteface KRISSHOUSE1F_POKEFAN_F, RIGHT
-	end
-
-FridgeScript:
-	jumptext FridgeText
-
-SinkScript:
-	jumptext SinkText
-
-StoveScript:
-	jumptext StoveText
-
-TVScript:
-	checkcode VAR_FACING
-	if_not_equal UP, .wrongside
-	jumptext TVText
-.wrongside
-	jumpstd tv
-
-KrissHouse1FSlowStepLeftMovementData:
-	slow_step_left
-	step_end
-
-KrissHouse1FSlowStepDownMovementData:
-	slow_step_down
-	step_end
-
 MomIntroText:
 if DEF(DEBUG)
-	text "Oh, <PLAYER>!"
-	line "Take this debug"
-	cont "cheat stuff!"
+	text "Don't forget to use"
+	line "your debug radio!"
 	done
 else
 	text "Oh, <PLAYER>!"
@@ -489,13 +251,6 @@ MomOutroText:
 	line "convenient?"
 	done
 
-MomHurryUpText:
-	text "Prof.Elm is wait-"
-	line "ing for you."
-
-	para "Hurry up, baby!"
-	done
-
 MomErrandText:
 	text "So, what was Prof."
 	line "Elm's errand?"
@@ -517,26 +272,58 @@ MomDoItText:
 	line "the way!"
 	done
 
-NeighborMornIntroText:
+NeighborScript:
+	faceplayer
+	opentext
+	checktime 1 << MORN
+	iftrue .MornScript
+	checktime 1 << DAY
+	iftrue .DayScript
+	checktime 1 << NITE
+	iftrue .NiteScript
+
+.MornScript:
+	writetext .MornIntroText
+	buttonsound
+	jump .Main
+
+.DayScript:
+	writetext .DayIntroText
+	buttonsound
+	jump .Main
+
+.NiteScript:
+	writetext .NiteIntroText
+	buttonsound
+	jump .Main
+
+.Main:
+	writetext .NeighborText
+	waitbutton
+	closetext
+	turnobject LAST_TALKED, RIGHT
+	end
+
+.MornIntroText:
 	text "Good morning,"
 	line "<PLAYER>!"
 
 	para "I'm visiting!"
 	done
 
-NeighborDayIntroText:
+.DayIntroText:
 	text "Hello, <PLAYER>!"
 	line "I'm visiting!"
 	done
 
-NeighborNiteIntroText:
+.NiteIntroText:
 	text "Good evening,"
 	line "<PLAYER>!"
 
 	para "I'm visiting!"
 	done
 
-NeighborText:
+.NeighborText:
 	text "<PLAYER>, have you"
 	line "heard?"
 
@@ -548,36 +335,4 @@ NeighborText:
 
 	para "She really loves"
 	line "#mon!"
-	done
-
-FridgeText:
-	text "Let's see what's"
-	line "in the fridge…"
-
-	para "Fresh Water and"
-	line "tasty Lemonade!"
-	done
-
-SinkText:
-	text "The sink is spot-"
-	line "less. Mom likes it"
-	cont "clean."
-	done
-
-StoveText:
-	text "Mom's specialty!"
-
-	para "Cinnabar Volcano"
-	line "Burger!"
-	done
-
-TVText:
-	text "There's a movie on"
-	line "TV: Stars dot the"
-
-	para "sky as two boys"
-	line "ride on a train…"
-
-	para "I'd better get"
-	line "rolling too!"
 	done

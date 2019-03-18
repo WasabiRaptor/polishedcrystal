@@ -1,34 +1,31 @@
 BlackthornGym2F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_CMDQUEUE, BlackthornGym2FBoulders
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_CMDQUEUE, BlackthornGym2FBoulders
+	db 5 ; warp events
+	warp_event  1,  7, BLACKTHORN_GYM_1F, 3
+	warp_event  7,  9, BLACKTHORN_GYM_1F, 4
+	warp_event  2,  5, BLACKTHORN_GYM_1F, 5 ; hole
+	warp_event  8,  7, BLACKTHORN_GYM_1F, 6 ; hole
+	warp_event  8,  3, BLACKTHORN_GYM_1F, 7 ; hole
 
-BlackthornGym2F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 5
-	warp_def $7, $1, 3, BLACKTHORN_GYM_1F
-	warp_def $9, $7, 4, BLACKTHORN_GYM_1F
-	warp_def $5, $2, 5, BLACKTHORN_GYM_1F ; hole
-	warp_def $7, $8, 6, BLACKTHORN_GYM_1F ; hole
-	warp_def $3, $8, 7, BLACKTHORN_GYM_1F ; hole
+	db 0 ; bg events
 
-.XYTriggers: db 0
+	db 8 ; object events
+	strengthboulder_event  8,  2, EVENT_BOULDER_IN_BLACKTHORN_GYM_1
+	strengthboulder_event  2,  3, EVENT_BOULDER_IN_BLACKTHORN_GYM_2
+	strengthboulder_event  6, 16, EVENT_BOULDER_IN_BLACKTHORN_GYM_3
+	strengthboulder_event  3, 3
+	strengthboulder_event  6, 1
+	strengthboulder_event  8, 14
+	object_event  4,  1, SPRITE_ACE_TRAINER_M, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerCooltrainermCody, -1
+	object_event  4, 11, SPRITE_ACE_TRAINER_F, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerCooltrainerfFran, -1
 
-.Signposts: db 0
-
-.PersonEvents: db 8
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 2, 8, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, strengthboulder, EVENT_BOULDER_IN_BLACKTHORN_GYM_1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 3, 2, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, strengthboulder, EVENT_BOULDER_IN_BLACKTHORN_GYM_2
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 16, 6, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, strengthboulder, EVENT_BOULDER_IN_BLACKTHORN_GYM_3
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 3, 3, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, strengthboulder, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 1, 6, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, strengthboulder, -1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 14, 8, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_JUMPSTD, 0, strengthboulder, -1
-	person_event SPRITE_COOLTRAINER_M, 1, 4, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerCooltrainermCody, -1
-	person_event SPRITE_COOLTRAINER_F, 11, 4, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_GENERICTRAINER, 1, GenericTrainerCooltrainerfFran, -1
-
-const_value set 2
+	const_def 1 ; object constants
 	const BLACKTHORNGYM2F_BOULDER1
 	const BLACKTHORNGYM2F_BOULDER2
 	const BLACKTHORNGYM2F_BOULDER3
@@ -61,19 +58,14 @@ BlackthornGym2FBoulders:
 	pause 30
 	playsound SFX_STRENGTH
 	earthquake 80
-	opentext
-	writetext .Text
-	waitbutton
-	closetext
-	end
+	thistext
 
-.Text:
 	text "The boulder fell"
 	line "through!"
 	done
 
 GenericTrainerCooltrainermCody:
-	generictrainer EVENT_BEAT_COOLTRAINERM_CODY, COOLTRAINERM, CODY, .SeenText, .BeatenText
+	generictrainer COOLTRAINERM, CODY, EVENT_BEAT_COOLTRAINERM_CODY, .SeenText, .BeatenText
 
 	text "Members of our"
 	line "dragon-user clan"
@@ -97,7 +89,7 @@ GenericTrainerCooltrainermCody:
 	done
 
 GenericTrainerCooltrainerfFran:
-	generictrainer EVENT_BEAT_COOLTRAINERF_FRAN, COOLTRAINERF, FRAN, .SeenText, .BeatenText
+	generictrainer COOLTRAINERF, FRAN, EVENT_BEAT_COOLTRAINERF_FRAN, .SeenText, .BeatenText
 
 	text "Uh-oh… Clair is"
 	line "going to be mad…"

@@ -1,57 +1,55 @@
 Route23_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 0 ; callbacks
 
-.MapCallbacks: db 0
+	db 4 ; warp events
+	warp_event  7, 135, POKEMON_LEAGUE_GATE, 5
+	warp_event  8, 135, POKEMON_LEAGUE_GATE, 6
+	warp_event  4, 31, VICTORY_ROAD_1F, 1
+	warp_event 14, 31, VICTORY_ROAD_2F, 1
 
-Route23_MapEventHeader:
+	db 23 ; coord events
+	coord_event 14, 131, 0, Route23ZephyrBadgeTriggerScript
+	coord_event  9, 123, 1, Route23HiveBadgeTriggerScript
+	coord_event 10, 107, 2, Route23PlainBadgeTriggerScript
+	coord_event 12, 107, 2, Route23PlainBadgeTriggerScript
+	coord_event 13, 107, 2, Route23PlainBadgeTriggerScript
+	coord_event 14, 107, 2, Route23PlainBadgeTriggerScript
+	coord_event 15, 107, 2, Route23PlainBadgeTriggerScript
+	coord_event  8, 98, 3, Route23FogBadgeTriggerScript
+	coord_event  9, 98, 3, Route23FogBadgeTriggerScript
+	coord_event 11, 98, 3, Route23FogBadgeTriggerScript
+	coord_event 12, 98, 3, Route23FogBadgeTriggerScript
+	coord_event 13, 98, 3, Route23FogBadgeTriggerScript
+	coord_event  4, 83, 4, Route23StormBadgeTriggerScript
+	coord_event  6, 83, 4, Route23StormBadgeTriggerScript
+	coord_event  7, 83, 4, Route23StormBadgeTriggerScript
+	coord_event  8, 70, 5, Route23MineralBadgeTriggerScript
+	coord_event  9, 70, 5, Route23MineralBadgeTriggerScript
+	coord_event 10, 70, 5, Route23MineralBadgeTriggerScript
+	coord_event 12, 70, 5, Route23MineralBadgeTriggerScript
+	coord_event 13, 70, 5, Route23MineralBadgeTriggerScript
+	coord_event 12, 55, 6, Route23GlacierBadgeTriggerScript
+	coord_event  6, 47, 7, Route23RisingBadgeTriggerScript
+	coord_event  7, 47, 7, Route23RisingBadgeTriggerScript
 
-.Warps: db 4
-	warp_def $87, $7, 5, POKEMON_LEAGUE_GATE
-	warp_def $87, $8, 6, POKEMON_LEAGUE_GATE
-	warp_def $1f, $4, 1, VICTORY_ROAD_1F
-	warp_def $1f, $e, 1, VICTORY_ROAD_2F
+	db 1 ; bg events
+	bg_event  3, 32, SIGNPOST_JUMPTEXT, VictoryRoadSignText
 
-.XYTriggers: db 23
-	xy_trigger 0, $83, $e, Route23ZephyrBadgeTriggerScript
-	xy_trigger 1, $7b, $9, Route23HiveBadgeTriggerScript
-	xy_trigger 2, $6b, $a, Route23PlainBadgeTriggerScript
-	xy_trigger 2, $6b, $c, Route23PlainBadgeTriggerScript
-	xy_trigger 2, $6b, $d, Route23PlainBadgeTriggerScript
-	xy_trigger 2, $6b, $e, Route23PlainBadgeTriggerScript
-	xy_trigger 2, $6b, $f, Route23PlainBadgeTriggerScript
-	xy_trigger 3, $62, $8, Route23FogBadgeTriggerScript
-	xy_trigger 3, $62, $9, Route23FogBadgeTriggerScript
-	xy_trigger 3, $62, $b, Route23FogBadgeTriggerScript
-	xy_trigger 3, $62, $c, Route23FogBadgeTriggerScript
-	xy_trigger 3, $62, $d, Route23FogBadgeTriggerScript
-	xy_trigger 4, $53, $4, Route23StormBadgeTriggerScript
-	xy_trigger 4, $53, $6, Route23StormBadgeTriggerScript
-	xy_trigger 4, $53, $7, Route23StormBadgeTriggerScript
-	xy_trigger 5, $46, $8, Route23MineralBadgeTriggerScript
-	xy_trigger 5, $46, $9, Route23MineralBadgeTriggerScript
-	xy_trigger 5, $46, $a, Route23MineralBadgeTriggerScript
-	xy_trigger 5, $46, $c, Route23MineralBadgeTriggerScript
-	xy_trigger 5, $46, $d, Route23MineralBadgeTriggerScript
-	xy_trigger 6, $37, $c, Route23GlacierBadgeTriggerScript
-	xy_trigger 7, $2f, $6, Route23RisingBadgeTriggerScript
-	xy_trigger 7, $2f, $7, Route23RisingBadgeTriggerScript
+	db 8 ; object events
+	object_event 15, 131, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23ZephyrBadgeOfficerScript, -1
+	object_event  8, 123, SPRITE_OFFICER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23HiveBadgeOfficerScript, -1
+	object_event 11, 107, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23PlainBadgeOfficerScript, -1
+	object_event 10, 98, SPRITE_SWIMMING_OFFICER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23FogBadgeOfficerScript, -1
+	object_event  5, 83, SPRITE_SWIMMING_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23StormBadgeOfficerScript, -1
+	object_event 11, 70, SPRITE_OFFICER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23MineralBadgeOfficerScript, -1
+	object_event 13, 55, SPRITE_OFFICER_F, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23GlacierBadgeOfficerScript, -1
+	object_event  8, 47, SPRITE_OFFICER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, Route23RisingBadgeOfficerScript, -1
 
-.Signposts: db 1
-	signpost 32, 3, SIGNPOST_READ, VictoryRoadSign
-
-.PersonEvents: db 8
-	person_event SPRITE_SWIMMING_OFFICER, 83, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23StormBadgeOfficerScript, -1
-	person_event SPRITE_OFFICER, 131, 15, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23ZephyrBadgeOfficerScript, -1
-	person_event SPRITE_OFFICER_F, 123, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23HiveBadgeOfficerScript, -1
-	person_event SPRITE_OFFICER, 107, 11, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23PlainBadgeOfficerScript, -1
-	person_event SPRITE_SWIMMING_OFFICER_F, 98, 10, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23FogBadgeOfficerScript, -1
-	person_event SPRITE_OFFICER_F, 70, 11, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23MineralBadgeOfficerScript, -1
-	person_event SPRITE_OFFICER_F, 55, 13, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23GlacierBadgeOfficerScript, -1
-	person_event SPRITE_OFFICER, 47, 8, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT, 0, Route23RisingBadgeOfficerScript, -1
-
-const_value set 2
-	const ROUTE23_SWIMMING_OFFICER
+VictoryRoadSignText:
+	text "Victory Road"
+	done
 
 Route23ZephyrBadgeOfficerScript:
 	faceplayer
@@ -61,14 +59,11 @@ Route23ZephyrBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_ZEPHYRBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $1
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $0, Route23OfficerHaveBadgeScript
+	setscene $1
+	jump Route23OfficerHaveBadgeScript
 
 .ZephyrBadgeText:
 	db "Zephyr Badge@"
@@ -81,14 +76,11 @@ Route23HiveBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_HIVEBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $2
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $1, Route23OfficerHaveBadgeScript
+	setscene $2
+	jump Route23OfficerHaveBadgeScript
 
 .HiveBadgeText:
 	db "Hive Badge@"
@@ -101,14 +93,11 @@ Route23PlainBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_PLAINBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $3
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $2, Route23OfficerHaveBadgeScript
+	setscene $3
+	jump Route23OfficerHaveBadgeScript
 
 .PlainBadgeText:
 	db "Plain Badge@"
@@ -121,14 +110,11 @@ Route23FogBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_FOGBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $4
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $3, Route23OfficerHaveBadgeScript
+	setscene $4
+	jump Route23OfficerHaveBadgeScript
 
 .FogBadgeText:
 	db "Fog Badge@"
@@ -141,14 +127,11 @@ Route23StormBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_STORMBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $5
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $4, Route23OfficerHaveBadgeScript
+	setscene $5
+	jump Route23OfficerHaveBadgeScript
 
 .StormBadgeText:
 	db "Storm Badge@"
@@ -161,14 +144,11 @@ Route23MineralBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_MINERALBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $6
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $5, Route23OfficerHaveBadgeScript
+	setscene $6
+	jump Route23OfficerHaveBadgeScript
 
 .MineralBadgeText:
 	db "Mineral Badge@"
@@ -181,14 +161,11 @@ Route23GlacierBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_GLACIERBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $7
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $6, Route23OfficerHaveBadgeScript
+	setscene $7
+	jump Route23OfficerHaveBadgeScript
 
 .GlacierBadgeText:
 	db "Glacier Badge@"
@@ -201,39 +178,19 @@ Route23RisingBadgeTriggerScript:
 	writetext Route23OfficerNeedBadgeText
 	waitbutton
 	checkflag ENGINE_RISINGBADGE
-	iffalse Route23OfficerNoBadgeScript
-	writetext Route23OfficerHaveBadgeText
-	waitbutton
-	writetext Route23OfficerGoAheadText
-	waitbutton
-	closetext
-	dotrigger $8
-	end
+	iffalse_jumpopenedtext Route23OfficerNoBadgeText
+	checkscene
+	ifgreater $7, Route23OfficerHaveBadgeScript
+	setscene $8
+	jump Route23OfficerHaveBadgeScript
 
 .RisingBadgeText:
 	db "Rising Badge@"
 
-Route23OfficerNoBadgeScript:
-	writetext Route23OfficerNoBadgeText
-	waitbutton
-	closetext
-	end
-
-VictoryRoadSign:
-	jumptext VictoryRoadSignText
-
-Route23OfficerNeedBadgeText:
-	text "You can pass here"
-	line "only if you have"
-	cont "the @"
-	text_from_ram StringBuffer3
-	text "."
-	done
-
 Route23OfficerNoBadgeText:
 	text "You don't have the"
 	line "@"
-	text_from_ram StringBuffer3
+	text_from_ram wStringBuffer3
 	text " yet!"
 
 	para "You have to have"
@@ -241,19 +198,27 @@ Route23OfficerNoBadgeText:
 	cont "#mon League!@"
 	done
 
-Route23OfficerHaveBadgeText:
-	text "Oh! That is the"
-	line "@"
-	text_from_ram StringBuffer3
-	text "!@"
-	sound_dex_fanfare_50_79
-	db "@@"
+Route23OfficerHaveBadgeScript:
+	writetext .SeeBadgeText
+	waitbutton
+	thisopenedtext
 
-Route23OfficerGoAheadText:
 	text "OK then! Please,"
 	line "go right ahead!"
 	done
 
-VictoryRoadSignText:
-	text "Victory Road"
+.SeeBadgeText:
+	text "Oh! That is the"
+	line "@"
+	text_from_ram wStringBuffer3
+	text "!@"
+	sound_dex_fanfare_50_79
+	db "@@"
+
+Route23OfficerNeedBadgeText:
+	text "You can pass here"
+	line "only if you have"
+	cont "the @"
+	text_from_ram wStringBuffer3
+	text "."
 	done

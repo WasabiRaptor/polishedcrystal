@@ -29,7 +29,11 @@ NextCallReceiveDelay: ; 113e9
 ; 113fd
 
 .ReceiveCallDelays:
+if DEF(NO_RTC)
+	db 20 * NO_RTC_SPEEDUP, 10 * NO_RTC_SPEEDUP, 5 * NO_RTC_SPEEDUP, 3 * NO_RTC_SPEEDUP
+else
 	db 20, 10, 5, 3
+endc
 ; 11401
 
 CheckReceiveCallTimer: ; 11401
@@ -106,14 +110,14 @@ CheckDailyResetTimer:: ; 11452
 	call CheckDayDependentEventHL
 	ret nc
 	xor a
-	ld hl, DailyFlags
-	ld [hli], a ; DailyFlags
-	ld [hli], a ; DailyFlags2
-	ld [hli], a ; DailyFlags3
-	ld [hli], a ; DailyFlags4
-	ld [hli], a ; WeeklyFlags
-	ld [hli], a ; WeeklyFlags2
-	ld [hl], a ; SwarmFlags
+	ld hl, wDailyFlags
+	ld [hli], a ; wDailyFlags
+	ld [hli], a ; wDailyFlags2
+	ld [hli], a ; wDailyFlags3
+	ld [hli], a ; wDailyFlags4
+	ld [hli], a ; wWeeklyFlags
+	ld [hli], a ; wWeeklyFlags2
+	ld [hl], a ; wSwarmFlags
 	ld hl, wDailyRematchFlags
 rept 4
 	ld [hli], a
@@ -199,12 +203,12 @@ CheckBugContestTimer:: ; 114a4 (4:54a4)
 
 InitializeStartDay: ; 114dd
 	call UpdateTime
-	ld hl, wStartDay
+	ld hl, wTimerStartDay
 	jp CopyDayToHL
 ; 114e7
 
 CheckPokerusTick:: ; 114e7
-	ld hl, wStartDay
+	ld hl, wTimerStartDay
 	call CalcDaysSince
 	call GetDaysSince
 	and a
@@ -297,17 +301,16 @@ CalcHoursDaysSince: ; 115d2
 ; 115d6
 
 CalcMinsHoursDaysSince: ; 115d6
-rept 2
 	inc hl
-endr
+	inc hl
 	xor a
 	jr _CalcMinsHoursDaysSince
 ; 115db
 
 CalcSecsMinsHoursDaysSince: ; 115db
-rept 3
 	inc hl
-endr
+	inc hl
+	inc hl
 	ld a, [hSeconds]
 	ld c, a
 	sub [hl]
@@ -341,7 +344,7 @@ _CalcHoursDaysSince: ; 115f8
 	ld [wHoursSince], a ; hours since
 
 _CalcDaysSince:
-	ld a, [CurDay]
+	ld a, [wCurDay]
 	ld c, a
 	sbc [hl]
 	jr nc, .skip
@@ -353,7 +356,7 @@ _CalcDaysSince:
 ; 11613
 
 CopyDayHourMinSecToHL: ; 11613
-	ld a, [CurDay]
+	ld a, [wCurDay]
 	ld [hli], a
 	ld a, [hHours]
 	ld [hli], a
@@ -365,13 +368,13 @@ CopyDayHourMinSecToHL: ; 11613
 ; 11621
 
 CopyDayToHL: ; 11621
-	ld a, [CurDay]
+	ld a, [wCurDay]
 	ld [hl], a
 	ret
 ; 11626
 
 CopyDayHourMinToHL: ; 1162e
-	ld a, [CurDay]
+	ld a, [wCurDay]
 	ld [hli], a
 	ld a, [hHours]
 	ld [hli], a

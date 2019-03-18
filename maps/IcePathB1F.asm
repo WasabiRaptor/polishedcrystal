@@ -1,38 +1,35 @@
 IcePathB1F_MapScriptHeader:
+	db 0 ; scene scripts
 
-.MapTriggers: db 0
+	db 1 ; callbacks
+	callback MAPCALLBACK_CMDQUEUE, IcePathB1FSetUpStoneTable
 
-.MapCallbacks: db 1
-	dbw MAPCALLBACK_CMDQUEUE, IcePathB1FSetUpStoneTable
+	db 8 ; warp events
+	warp_event  3, 15, ICE_PATH_1F, 3
+	warp_event 17,  3, ICE_PATH_B2F_MAHOGANY_SIDE, 1
+	warp_event 11,  2, ICE_PATH_B2F_MAHOGANY_SIDE, 3 ; hole
+	warp_event  4,  7, ICE_PATH_B2F_MAHOGANY_SIDE, 4 ; hole
+	warp_event  5, 12, ICE_PATH_B2F_MAHOGANY_SIDE, 5 ; hole
+	warp_event 12, 13, ICE_PATH_B2F_MAHOGANY_SIDE, 6 ; hole
+	warp_event  5, 25, ICE_PATH_1F, 4
+	warp_event 11, 27, ICE_PATH_B2F_BLACKTHORN_SIDE, 1
 
-IcePathB1F_MapEventHeader:
+	db 0 ; coord events
 
-.Warps: db 8
-	warp_def $f, $3, 3, ICE_PATH_1F
-	warp_def $3, $11, 1, ICE_PATH_B2F_MAHOGANY_SIDE
-	warp_def $2, $b, 3, ICE_PATH_B2F_MAHOGANY_SIDE ; hole
-	warp_def $7, $4, 4, ICE_PATH_B2F_MAHOGANY_SIDE ; hole
-	warp_def $c, $5, 5, ICE_PATH_B2F_MAHOGANY_SIDE ; hole
-	warp_def $d, $c, 6, ICE_PATH_B2F_MAHOGANY_SIDE ; hole
-	warp_def $19, $5, 4, ICE_PATH_1F
-	warp_def $1b, $b, 1, ICE_PATH_B2F_BLACKTHORN_SIDE
+	db 1 ; bg events
+	bg_event 17, 30, SIGNPOST_ITEM + MAX_POTION, EVENT_ICE_PATH_B1F_HIDDEN_MAX_POTION
 
-.XYTriggers: db 0
+	db 8 ; object events
+	strengthboulder_event 11,  7, EVENT_BOULDER_IN_ICE_PATH_1
+	strengthboulder_event  7,  8, EVENT_BOULDER_IN_ICE_PATH_2
+	strengthboulder_event  8,  9, EVENT_BOULDER_IN_ICE_PATH_3
+	strengthboulder_event 17,  7, EVENT_BOULDER_IN_ICE_PATH_4
+	object_event  2,  1, SPRITE_SKIER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, IcePathB1FSkierScript, -1
+	object_event  4, 23, SPRITE_BOARDER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 3, GenericTrainerBoarderMax, -1
+	object_event 14, 24, SPRITE_SKIER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_GENERICTRAINER, 2, GenericTrainerSkierBecky, -1
+	itemball_event  5, 35, IRON, 1, EVENT_ICE_PATH_B1F_IRON
 
-.Signposts: db 1
-	signpost 30, 17, SIGNPOST_ITEM, IcePathB1FHiddenMaxPotion
-
-.PersonEvents: db 8
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 7, 11, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, IcePathB1FBoulder, EVENT_BOULDER_IN_ICE_PATH_1
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 8, 7, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, IcePathB1FBoulder, EVENT_BOULDER_IN_ICE_PATH_2
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 9, 8, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, IcePathB1FBoulder, EVENT_BOULDER_IN_ICE_PATH_3
-	person_event SPRITE_ROCK_BOULDER_FOSSIL, 7, 17, SPRITEMOVEDATA_STRENGTH_BOULDER, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, IcePathB1FBoulder, EVENT_BOULDER_IN_ICE_PATH_4
-	person_event SPRITE_SKIER, 1, 2, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_SCRIPT, 0, IcePathB1FSkierScript, -1
-	person_event SPRITE_BOARDER, 23, 4, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_TRAINER, 3, TrainerBoarderMax, -1
-	person_event SPRITE_SKIER, 24, 14, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_TRAINER, 2, TrainerSkierBecky, -1
-	person_event SPRITE_BALL_CUT_FRUIT, 35, 5, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, (1 << 3) | PAL_OW_RED, PERSONTYPE_ITEMBALL, 0, IRON, 1, EVENT_ICE_PATH_B1F_IRON
-
-const_value set 2
+	const_def 1 ; object constants
 	const ICEPATHB1F_BOULDER1
 	const ICEPATHB1F_BOULDER2
 	const ICEPATHB1F_BOULDER3
@@ -76,11 +73,7 @@ IcePathB1FSetUpStoneTable:
 .FinishBoulder:
 	pause 30
 	scall .BoulderFallsThrough
-	opentext
-	writetext IcePathBoulderFellThroughText
-	waitbutton
-	closetext
-	end
+	jumptext IcePathBoulderFellThroughText
 
 .BoulderFallsThrough:
 	playsound SFX_STRENGTH
@@ -106,53 +99,29 @@ IcePathB1FTutorIcyWindScript:
 	writebyte ICY_WIND
 	writetext Text_IcePathB1FTutorClear
 	special Special_MoveTutor
-	if_equal $0, .TeachMove
+	ifequal $0, .TeachMove
 .TutorRefused
-	writetext Text_IcePathB1FTutorRefused
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_IcePathB1FTutorRefused
 
 .NoSilverLeaf
-	writetext Text_IcePathB1FTutorNoSilverLeaf
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_IcePathB1FTutorNoSilverLeaf
 
 .TeachMove
 	takeitem SILVER_LEAF
-	writetext Text_IcePathB1FTutorTaught
-	waitbutton
-	closetext
-	end
+	jumpopenedtext Text_IcePathB1FTutorTaught
 
-TrainerBoarderMax:
-	trainer EVENT_BEAT_BOARDER_MAX, BOARDER, MAX, BoarderMaxSeenText, BoarderMaxBeatenText, 0, BoarderMaxScript
+GenericTrainerBoarderMax:
+	generictrainer BOARDER, MAX, EVENT_BEAT_BOARDER_MAX, BoarderMaxSeenText, BoarderMaxBeatenText
 
-BoarderMaxScript:
-	end_if_just_battled
-	opentext
-	writetext BoarderMaxAfterText
-	waitbutton
-	closetext
-	end
+	text "I'm not giving up!"
+	done
 
-TrainerSkierBecky:
-	trainer EVENT_BEAT_SKIER_BECKY, SKIER, BECKY, SkierBeckySeenText, SkierBeckyBeatenText, 0, SkierBeckyScript
+GenericTrainerSkierBecky:
+	generictrainer SKIER, BECKY, EVENT_BEAT_SKIER_BECKY, SkierBeckySeenText, SkierBeckyBeatenText
 
-SkierBeckyScript:
-	end_if_just_battled
-	opentext
-	writetext SkierBeckyAfterText
-	waitbutton
-	closetext
-	end
-
-IcePathB1FBoulder:
-	jumpstd strengthboulder
-
-IcePathB1FHiddenMaxPotion:
-	dwb EVENT_ICE_PATH_B1F_HIDDEN_MAX_POTION, MAX_POTION
+	text "Don't forget to"
+	line "wear a scarf!"
+	done
 
 IcePathB1FSkierText:
 	text "It's really cold"
@@ -215,10 +184,6 @@ BoarderMaxBeatenText:
 	text "Wiped out!"
 	done
 
-BoarderMaxAfterText:
-	text "I'm not giving up!"
-	done
-
 SkierBeckySeenText:
 	text "I can see my"
 	line "breath freezing!"
@@ -227,12 +192,6 @@ SkierBeckySeenText:
 SkierBeckyBeatenText:
 	text "Achoo!"
 	done
-
-SkierBeckyAfterText:
-	text "Don't forget to"
-	line "wear a scarf!"
-	done
-
 
 IcePathBoulderFellThroughText:
 	text "The boulder fell"
