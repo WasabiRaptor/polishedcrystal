@@ -41,3 +41,6 @@
 
 # swap files for gedit
 *~
+
+# VSCode stuff
+.vscode/*
