@@ -198,10 +198,10 @@ BATTLEEXTRA_GFX_START EQU $5f
 
 	charmap "é",        $c8
 
-	charmap "<PO>",     $c9
-	charmap "<KE>",     $ca
-	charmap "<PK>",     $cb
-	charmap "<MN>",     $cc
+	charmap "<PK>",     $c9
+	charmap "<MN>",     $ca
+	charmap "<PO>",     $cb
+	charmap "<KE>",     $cc
 
 	charmap "&",        $cd
 	charmap "…",        $ce
