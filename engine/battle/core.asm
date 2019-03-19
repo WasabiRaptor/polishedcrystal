@@ -7005,7 +7005,77 @@ endr
 	ld [wEnemyMonHappiness], a
 	; Set level
 	ld a, [wCurPartyLevel]
+
+	cp 101
+	jr c, .DoNotAverageLevels
+
+; ISSOtm optimized party average
+	ld a, [wPartyCount]
+	ld b, a
+
+	ld hl, wPartyMon1Level
+	ld de, PARTYMON_STRUCT_LENGTH
+	xor a
+	ld c, a
+.loop2
+	add a, [hl]
+	jr nc, .noCarry
+	inc c
+.noCarry
+	add hl, de
+	dec b
+	jr nz, .loop2
+
+	ld h, c
+	ld l, a
+
+	; Divide hl by c
+	; http://wikiti.brandonw.net/index.php?title=Z80_Routines:Math:Division#16.2F8_division
+	xor a
+	ld b, 16
+.divide
+	add hl, hl
+	rla
+	jr c, .larger
+	cp c
+	jr c, .tooSmall
+.larger
+	sub c
+	inc l
+.tooSmall
+	dec b
+	jr nz, .divide
+	
+	ld a, [wCurPartyLevel]
+	cp 201
+	jr z, .MatchPlayerLevel
+	sub a, 100
+	cp b
+	jr nc, .RandomLevel
+	ld a, [hl]
+
+.RandomLevel
+	ld c, a
+	ld a, 3
+	call RandomRange
+	inc a
+	inc a
+	inc a
+	ld d, a
+	ld a, c
+	sub a, d
+	cp 1
+	jr nc, .SetLevel
+	inc a
+	jp .SetLevel
+
+.MatchPlayerLevel
+	ld a, [hl]
+.SetLevel
+	ld [wCurPartyLevel], a
+.DoNotAverageLevels
 	ld [wEnemyMonLevel], a
+
 	; Fill stats
 	ld de, wEnemyMonMaxHP
 	ld b, FALSE

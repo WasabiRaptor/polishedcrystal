@@ -1164,7 +1164,7 @@
 	map_id SILVER_CAVE_ROOM_3
 	db 6 percent, 6 percent, 6 percent ; encounter rates: morn/day/nite
 	; morn
-	db 76, CROBAT
+	db 201, CROBAT
 	db 76, ONIX
 	db 74, GOLEM
 	db 78, URSARING
@@ -1172,7 +1172,7 @@
 	db 79, PUPITAR
 	db 80, TYRANITAR
 	; day
-	db 76, CROBAT
+	db 201, CROBAT
 	db 76, ONIX
 	db 74, GOLEM
 	db 78, URSARING
@@ -1180,7 +1180,7 @@
 	db 79, PUPITAR
 	db 80, TYRANITAR
 	; nite
-	db 76, CROBAT
+	db 201, CROBAT
 	db 76, MISDREAVUS
 	db 74, GOLEM
 	db 78, CROBAT
