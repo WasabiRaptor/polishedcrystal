@@ -77,14 +77,7 @@ _LoadStandardMaybeOpaqueFont:
 	ld d, h
 	ld e, l
 	ld hl, VTiles0 tile "A"
-	lb bc, BANK(FontNormal), 111
-	pop af
-	ldh [hRequestOpaque1bpp], a
-	push af
-	call GetMaybeOpaque1bpp
-	ld de, FontCommon
-	ld hl, VTiles0 tile "▷"
-	lb bc, BANK(FontCommon), 11
+	lb bc, BANK(FontNormal), 112
 	pop af
 	ldh [hRequestOpaque1bpp], a
 	jp GetMaybeOpaque1bpp
@@ -122,20 +115,41 @@ _LoadFontsBattleExtra:: ; fb4be
 ; fb4cc
 
 LoadFrame:: ; fb4cc
-	ld a, [wTextBoxFrame]
-	ld bc, TILES_PER_FRAME * LEN_1BPP_TILE
-	ld hl, Frames
-	rst AddNTimes
+	call GetFrame
+	ld d, h
+	ld e, l
+	ld hl, VTiles0 tile "│"
+	lb bc, BANK(Frames), 1
+	call Get1bpp
+	call GetFrame	
+	ld bc, LEN_1BPP_TILE
+	add hl, bc
 	ld d, h
 	ld e, l
 	ld hl, VTiles0 tile "┌"
-	lb bc, BANK(Frames), TILES_PER_FRAME
+	lb bc, BANK(Frames), 3
 	call Get1bpp
+	call GetFrame
+	ld bc, LEN_1BPP_TILE * 4
+	add hl, bc
+	ld d, h
+	ld e, l
+	ld hl, VTiles0 tile "┐"
+	lb bc, BANK(Frames), 6
+	call Get1bpp
+	
 	ld hl, VTiles2 tile " "
 	ld de, TextBoxSpaceGFX
 	lb bc, BANK(TextBoxSpaceGFX), 1
 	jp Get1bpp
 ; fb4f2
+GetFrame:
+	ld a, [wTextBoxFrame]
+	ld bc, TILES_PER_FRAME * LEN_1BPP_TILE
+	ld hl, Frames
+	rst AddNTimes
+	ret
+
 
 LoadBattleFontsHPBar: ; fb4f2
 	call _LoadFontsBattleExtra

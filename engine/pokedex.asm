@@ -1120,7 +1120,7 @@ Pokedex_DrawDexEntryScreenBG: ; 407fd
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
 .HeightImperial: ; 40852
-	db "Ht  ?′??″", $ff ; HT  ?'??"
+	db "Ht  ?'??”", $ff ; HT  ?'??"
 .WeightImperial: ; 4085c
 	db "Wt   ???lb", $ff ; WT   ???lb
 .HeightMetric:

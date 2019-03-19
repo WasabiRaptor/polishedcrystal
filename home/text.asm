@@ -58,15 +58,24 @@ TextBox::
 	pop bc
 	jr TextBoxPalette
 
+NO_RIGHT_MASK 					EQU %11111011
+NO_LEFT_MASK 					EQU %11110111
+NO_TOP_MASK 					EQU %11111101
+NO_BOTTOM_MASK 					EQU %11111110
+
 TextBoxBorder::
 
 	; Top
 	push hl
-	ld a, "┌"
+	ld a, [hl]
+	call CheckBorder
+	or "┌"
 	ld [hli], a
-	inc a ; "─"
+	ld e, NO_BOTTOM_MASK
 	call .PlaceChars
-	inc a ; "┐"
+	ld a, [hl]
+	call CheckBorder
+	or "┐"
 	ld [hl], a
 	pop hl
 
@@ -75,11 +84,18 @@ TextBoxBorder::
 	add hl, de
 .row
 	push hl
-	ld a, "│"
+	ld a, [hl]
+	call CheckBorder
+	or "│"
+	and NO_RIGHT_MASK
 	ld [hli], a
 	ld a, " "
-	call .PlaceChars
-	ld [hl], "│"
+	call .PlaceSpace
+	ld a, [hl]
+	call CheckBorder
+	or "│"
+	and NO_LEFT_MASK
+	ld [hl], a
 	pop hl
 
 	ld de, SCREEN_WIDTH
@@ -88,18 +104,35 @@ TextBoxBorder::
 	jr nz, .row
 
 	; Bottom
-	ld a, "└"
+	ld a, [hl]
+	call CheckBorder
+	or "└"
 	ld [hli], a
-	ld a, "─"
+	ld e, NO_TOP_MASK
 	call .PlaceChars
-	ld [hl], "┘"
+	ld a, [hl]
+	call CheckBorder
+	or "┘"
+	ld [hl], a
+	ret
 
+.PlaceSpace:
+; Place char a c times.
+	ld d, c
+.blankloop
+	ld [hli], a
+	dec d
+	jr nz, .blankloop
 	ret
 
 .PlaceChars:
 ; Place char a c times.
 	ld d, c
 .loop
+	ld a, [hl]
+	call CheckBorder
+	or "─"
+	and e
 	ld [hli], a
 	dec d
 	jr nz, .loop
@@ -127,6 +160,31 @@ TextBoxPalette::
 	pop bc
 	dec b
 	jr nz, .col
+	ret
+
+CheckBorder:
+;checks if a is a border tile and if it isn't xor it
+	cp "│"
+	ret z
+	cp "┌"
+	ret z
+	cp "└"
+	ret z
+	cp "├"
+	ret z
+	cp "┐"
+	ret z
+	cp "┘"
+	ret z
+	cp "┤"
+	ret z
+	cp "─"
+	ret z
+	cp "┬"
+	ret z
+	cp "┴"
+	ret z
+	xor a
 	ret
 
 RadioTerminator::

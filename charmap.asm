@@ -197,36 +197,35 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "'v",       $c7
 
 	charmap "é",        $c8
-	charmap "É",        $c9
-	charmap "á",        $ca
-	charmap "ê",        $cb
-	charmap "í",        $cc
-	charmap "ó",        $cd
 
-	charmap "¿",        $ce
-	charmap "¡",        $cf
+	charmap "<PO>",     $c9
+	charmap "<KE>",     $ca
+	charmap "<PK>",     $cb
+	charmap "<MN>",     $cc
 
-	charmap "<PO>",     $d0
-	charmap "<KE>",     $d1
-	charmap "<PK>",     $d2
-	charmap "<MN>",     $d3
+	charmap "&",        $cd
+	charmap "…",        $ce
+	charmap "/",        $cf
 
-	charmap "<ID>",     $d4
-	charmap "№",        $d5
-	charmap "<LV>",     $d6
-	charmap "<BOLDP>",  $d7
+	charmap "<ID>",     $d0
+	charmap "№",        $d1
+	charmap "<LV>",     $d2
+	charmap "<BOLDP>",  $d3
+	charmap "<PHONE>",  $d4
+	charmap "<BLACK>",  $d5
+	charmap "<NONO>",   $d6
 
-	charmap "&",        $d8
+	charmap "▼",        $d7
+	charmap "▲",        $d8
+	charmap "▷",        $d9
+	charmap "▶",        $da
+	charmap "◀",        $db
+	charmap "<UPDN>",   $dc
+	charmap "↑",        $dd
+	charmap "↓",        $de
 
 	charmap "♪",        $d9
 	charmap "♥",        $da
-
-	charmap "×",        $db
-	charmap "/",        $dc
-	charmap "%",        $dd
-
-	charmap "+",        $de
-	charmap "<SHARP>",  $df
 
 	charmap "0",        $e0
 	charmap "1",        $e1
@@ -240,29 +239,22 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "9",        $e9
 
 	charmap "¥",        $ea
-
-	charmap "▲",        $eb
-	charmap "▼",        $ec
-	charmap "◀",        $ed
-	charmap "▶",        $ee
+	charmap "×",        $eb
+	charmap "★",        $ec
+	charmap "%",        $ed
+	charmap "+",        $ee
+	charmap "<SHARP>",  $ef
 
 ; common font:
-	charmap "▷",        $ef
-	charmap "…",        $f0
-	charmap "<PHONE>",  $f1
-	charmap "<BLACK>",  $f2
-	charmap "<NONO>",   $f3
-	charmap "′",        $f4
-	charmap "″",        $f5
-	charmap "★",        $f6
-	charmap "↑",        $f7
-	charmap "↓",        $f8
-	charmap "<UPDN>",   $f9
 
 ; frame:
-	charmap "┌",        $fa
-	charmap "─",        $fb
-	charmap "┐",        $fc
-	charmap "│",        $fd
-	charmap "└",        $fe
-	charmap "┘",        $ff
+	charmap "│",        $f3
+	charmap "┌",        $f5
+	charmap "└",        $f6
+	charmap "├",   		$f7	
+	charmap "┐",        $f9
+	charmap "┘",        $fa
+	charmap "┤",  		$fb 
+	charmap "─",        $fc
+	charmap "┬",        $fd
+	charmap "┴",        $fe

@@ -4,7 +4,7 @@ NameInputLower:
 	db "a b c d e f g h i"
 	db "j k l m n o p q r"
 	db "s t u v w x y z -"
-	db "/ ( ) ¥ <PK> <MN> ★ ♥ ♪"
+	db "/ ( ) ¥ <PK> <MN> ★ x x"
 	db "U", "p", "p", "e", "r  D", "e", "l   E", "n", "d "
 
 BoxNameInputLower:
@@ -26,7 +26,7 @@ BoxNameInputUpper:
 	db "A B C D E F G H I"
 	db "J K L M N O P Q R"
 	db "S T U V W X Y Z  "
-	db "/ ( ) ¥ <PK> <MN> ★ ♥ ♪"
+	db "/ ( ) ¥ <PK> <MN> ★ x x"
 	db "? ! ♂ ♀ . , : & %"
 	db "L", "o", "w", "e", "r  D", "e", "l   E", "n", "d "
 
@@ -43,5 +43,5 @@ MailEntry_Lowercase:
 	db "k l m n o p q r s t"
 	db "u v w x y z   - . ,"
 	db "'d 'l 'm 'r 's 't 'v ( ) &"
-	db "“ ” ' % ↑ ↓ № ★ ♥ ♪"
+	db "“ ” ' % ↑ ↓ № ★ x x"
 	db "U", "p", "p", "e", "r  D", "e", "l   E", "n", "d   "

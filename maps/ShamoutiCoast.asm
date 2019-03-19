@@ -101,30 +101,10 @@ GenericTrainerFisherDallas:
 	done
 
 GenericTrainerSightseerfPilar:
-	generictrainer SIGHTSEERF, PILAR, EVENT_BEAT_SIGHTSEERF_PILAR, .SeenText, .BeatenText
 
-	text "¡Que fuertes son"
-	line "tus #mon!"
-
-	para "Debes de haber"
-	line "viajado un montón"
-
-	para "para tener tanta"
-	line "experiencia."
 	done
 
 .SeenText:
-	text "¡Hola! He venido"
-	line "hasta acá desde"
-	cont "muy lejos."
-
-	para "¿Que tal si"
-	line "combatimos?"
-	done
-
-.BeatenText:
-	text "Pense que duraría"
-	line "más…"
 	done
 
 GenericTrainerSightseersCyandvi1:

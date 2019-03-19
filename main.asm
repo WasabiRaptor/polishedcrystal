@@ -1157,7 +1157,7 @@ DisplayDexEntry: ; 4424d
 	lb bc, 2, PRINTNUM_MONEY | 4
 	call PrintNum
 	hlcoord 14, 7
-	ld [hl], "′"
+	ld [hl], "'"
 	pop af
 	pop hl
 

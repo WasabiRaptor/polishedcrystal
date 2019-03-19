@@ -160,12 +160,12 @@ PrintMagikarpLength: ; fbbdb
 	ld de, wMagikarpLengthMmHi
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
-	ld [hl], "′"
+	ld [hl], "'"
 	inc hl
 	ld de, wMagikarpLengthMmLo
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
 	call PrintNum
-	ld [hl], "″"
+	ld [hl], "”"
 	inc hl
 	ld [hl], "@"
 	ret
