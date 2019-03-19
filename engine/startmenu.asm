@@ -181,17 +181,17 @@ StartMenu:: ; 125cd
 .SaveString:    	db "Save@"
 .OptionString:  	db "Options@"
 .ExitString:    	db "Exit@"
-.PokegearString:	db "<PO><KE>gear@"
+.PokegearString:	db "#PDA@"
 .QuitString:    	db "Quit@"
 
 ; Menu accounts are removed; this is vestigial
 .PokedexDesc:
 	db   ""
-	next "#MON database@"
+	next "#mon database@"
 
 .PartyDesc:
 	db   ""
-	next "Party <PKMN> status@"
+	next "Party status@"
 
 .PackDesc:
 	db   ""
@@ -199,7 +199,7 @@ StartMenu:: ; 125cd
 
 .PokegearDesc:
 	db   ""
-	next "Trainer's device@"
+	next "Traveler's device@"
 
 .StatusDesc:
 	db   ""
@@ -282,7 +282,7 @@ endr
 .none
 	pop de
 	ret
-	
+
 .GetMenuAccountTextPointer: ; 12819
 	ld e, a
 	ld d, 0
