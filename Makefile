@@ -1,3 +1,12 @@
+NAME := pokebrass
+VERSION := pre-alpha-0.1
+
+TITLE := PKMN_BRASS
+MCODE := PKBR
+ROMVERSION := 0x30
+
+FILLER = 0x00
+
 ifeq (,$(shell which sha1sum))
 SHA1 := shasum
 else
@@ -9,10 +18,12 @@ RGBFIX := rgbfix
 RGBGFX := rgbgfx
 RGBLINK := rgblink
 
+RGBASM_FLAGS =
+RGBLINK_FLAGS = -n $(BUILD_DIR)$(ROM_NAME).sym -m $(BUILD_DIR)$(ROM_NAME).map -l contents/contents.link -p $(FILLER)
+RGBFIX_FLAGS = -csjv -t $(TITLE) -i $(MCODE) -n $(ROMVERSION) -p $(FILLER) -k 01 -l 0x33 -m 0x1B -r 3
+
 PYTHON := python 
 pcm := $(PYTHON) extras/pokemontools/pcm.py pcm
-
-roms := pokebrass.gbc
 
 BUILD_DIR := build/
 
@@ -46,28 +57,29 @@ endif
 .SECONDARY:
 
 all: brass
-brass: $(roms)
+brass: FILLER = 0x00
+brass: ROM_NAME = $(NAME)-$(VERSION)
+brass: $(NAME)-$(VERSION).gbc
 
 clean:
-	rm -f $(BUILD_DIR)$(roms) $(brass_obj) $(roms:.gbc=.map) $(roms:.gbc=.sym)
+	$(RM) $(crystal_obj) $(wildcard $(BUILD_DIR)$(NAME)-*.gbc) $(wildcard $(BUILD_DIR)$(NAME)-*.map) $(wildcard $(BUILD_DIR)$(NAME)-*.sym)
 	rm -r $(BUILD_DIR)
 	$(MAKE) clean -C tools/
 
-compare: $(roms)
+debug: brass
+
+compare: brass
 	@$(SHA1) -c roms.sha1
 
 tools:
 	$(MAKE) -C tools/
-
-
-$(brass_obj):   RGBASMFLAGS = -D _BRASS
 
 # The dep rules have to be explicit or else missing files won't be reported.
 # As a side effect, they're evaluated immediately instead of when the rule is invoked.
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 define DEP
 $1: $2 $$(shell tools/scan_includes $2)
-	$$(RGBASM) $$(RGBASMFLAGS) -L -o $$@ $$<
+	$$(RGBASM) $$(RGBASM_FLAGS) -L -o $$@ $$<
 endef
 
 # Build tools when building the rom.
@@ -81,13 +93,14 @@ $(foreach obj, $(brass_obj), $(eval $(call DEP,$(obj),$(subst $(BUILD_DIR),,$(ob
 endif
 
 
-$(roms): $(BUILD_DIR) $(brass_obj)
-	$(RGBLINK) -n $(BUILD_DIR)pokebrass.sym -m $(BUILD_DIR)pokebrass.map -l contents/contents.link -o $(BUILD_DIR)$@ $(brass_obj)
-	$(RGBFIX) -Cjv -k 01 -l 0x33 -m 0x1B -p 0 -r 3 -t "POKEMON BRASS" $(BUILD_DIR)$@
-	tools/sort_symfile.sh $(BUILD_DIR)pokebrass.sym
+%.gbc: $(BUILD_DIR) $(brass_obj)
+	$(RGBLINK) $(RGBLINK_FLAGS) -o $(BUILD_DIR)$@ $(brass_obj)
+	$(RGBFIX) $(RGBFIX_FLAGS) $(BUILD_DIR)$@
+	tools/sort_symfile.sh $(BUILD_DIR)$(ROM_NAME).sym
 
 
 $(BUILD_DIR):
+	{ echo "Making build directories..." } 2> /dev/null
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(BUILD_DIR)audio
 	mkdir -p $(BUILD_DIR)data
