@@ -117,8 +117,8 @@ TVScript:
 
 MomScript:	
 	opentext
-	buttonsound
 	givepoke SYLVEON, 100
+	closetext
 	end
 
 	faceplayer

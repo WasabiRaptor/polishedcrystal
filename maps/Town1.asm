@@ -19,7 +19,9 @@ Town1_MapScriptHeader:
 	person_event 7, 7, SPRITE_REAL_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
 
 MysteryDungeonEnterScript:
+	opentext
 	givepoke VAPOREON, 10
+	closetext
 	end
 	callasm MysteryDungeonSetup
 	special WarpToSpawnPoint
