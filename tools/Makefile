@@ -1,7 +1,7 @@
 .PHONY: all clean
 
 CC := gcc
-CFLAGS := -O3 -std=c99 -Wall -Wextra -Wno-missing-field-initializers
+CFLAGS := -O3 -std=c99 -Wall -Wextra
 
 tools := \
 	lzcomp \
