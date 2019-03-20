@@ -63,7 +63,6 @@ MomTrigger4:
 	applyonemovement PLAYER, slow_step_down
 MomEventScript:
 	opentext
-	buttonsound
 	givepoke EEVEE, 5
 	stringtotext GearName, $1
 	callstd receiveitem
