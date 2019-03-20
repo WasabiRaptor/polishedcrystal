@@ -4,8 +4,8 @@ KrissHouse1F_MapScriptHeader:
 	db 0 ; callbacks
 
 	db 3 ; warp events
-	warp_event  8,  7, NEW_BARK_TOWN, 2
-	warp_event  9,  7, NEW_BARK_TOWN, 2
+	warp_event  8,  7, TOWN_1, 1
+	warp_event  9,  7, TOWN_1, 1
 	warp_event 11,  0, KRISS_HOUSE_2F, 1
 
 	db 4 ; coord events
@@ -21,11 +21,11 @@ KrissHouse1F_MapScriptHeader:
 	bg_event  6,  1, SIGNPOST_UP, TVScript
 
 	db 5 ; object events
-	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_1
-	object_event  3,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MORN), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << DAY), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	object_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << NITE), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	object_event  6,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
+	person_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_1
+	person_event  3,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MORN), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	person_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << DAY), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	person_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << NITE), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	person_event  6,  4, SPRITE_POKEFAN_F, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
 
 	const_def 1 ; object constants
 	const KRISSHOUSE1F_MOM1
@@ -63,8 +63,8 @@ MomTrigger4:
 	applyonemovement PLAYER, slow_step_down
 MomEventScript:
 	opentext
-	writetext MomIntroText
 	buttonsound
+	givepoke EEVEE, 5
 	stringtotext GearName, $1
 	callstd receiveitem
 	setflag ENGINE_POKEGEAR
@@ -73,30 +73,6 @@ MomEventScript:
 	setscene $1
 	setevent EVENT_KRISS_HOUSE_MOM_1
 	clearevent EVENT_KRISS_HOUSE_MOM_2
-	writetext MomPokegearText
-	buttonsound
-	special Special_SetDayOfWeek
-.InitialSetDSTFlag:
-	writetext MomDSTText
-	yesorno
-	iffalse .NotDST
-	special Special_InitialSetDSTFlag
-	yesorno
-	iffalse .InitialSetDSTFlag
-	jump .InitializedDSTFlag
-.NotDST:
-	special Special_InitialClearDSTFlag
-	yesorno
-	iffalse .InitialSetDSTFlag
-.InitializedDSTFlag:
-	writetext MomRunningShoesText
-	yesorno
-	iftrue .NoInstructions
-	writetext MomInstructionsText
-	buttonsound
-.NoInstructions:
-	writetext MomOutroText
-	waitbutton
 	closetext
 	turnobject KRISSHOUSE1F_MOM1, LEFT
 	special RestartMapMusic
@@ -139,7 +115,12 @@ TVScript:
 	line "rolling too!"
 	done
 
-MomScript:
+MomScript:	
+	opentext
+	buttonsound
+	givepoke SYLVEON, 100
+	end
+
 	faceplayer
 	checkscene
 	iffalse .MomEvent

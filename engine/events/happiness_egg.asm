@@ -180,9 +180,9 @@ StepHappiness:: ; 725a
 	jr nz, .loop
 	ret
 
-DaycareStep:: ; 7282
+DayCareStep:: ; 7282
 
-	ld a, [wDaycareMan]
+	ld a, [wDayCareMan]
 	bit 0, a
 	jr z, .daycare_lady
 
@@ -191,7 +191,7 @@ DaycareStep:: ; 7282
 	call .daycare_exp
 
 .daycare_lady
-	ld a, [wDaycareLady]
+	ld a, [wDayCareLady]
 	bit 0, a
 	jr z, .check_egg
 
@@ -200,7 +200,7 @@ DaycareStep:: ; 7282
 	call .daycare_exp
 
 .check_egg
-	ld hl, wDaycareMan
+	ld hl, wDayCareMan
 	bit 5, [hl] ; egg
 	ret z
 	ld hl, wStepsToEgg
@@ -235,7 +235,7 @@ DaycareStep:: ; 7282
 	call RandomRange
 	cp b
 	ret nc
-	ld hl, wDaycareMan
+	ld hl, wDayCareMan
 	res 5, [hl]
 	set 6, [hl]
 	ret

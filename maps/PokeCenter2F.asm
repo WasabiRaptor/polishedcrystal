@@ -4,8 +4,7 @@ PokeCenter2F_MapScriptHeader:
 	scene_script PokeCenter2FLeftTradeCenterTrigger
 	scene_script PokeCenter2FLeftColosseumTrigger
 
-	db 1 ; callbacks
-	callback MAPCALLBACK_TILES, PokeCenter2FTileCallback
+	db 0 ; callbacks
 
 	db 3 ; warp events
 	warp_event  0,  7, POKECENTER_2F, -1
@@ -17,10 +16,10 @@ PokeCenter2F_MapScriptHeader:
 	db 1 ; bg events
 	bg_event  7,  3, SIGNPOST_READ, PokeCenter2FLinkRecordSign
 
-	db 3 ; object events
-	object_event  5,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Trade, -1
-	object_event  9,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Battle, -1
-	object_event 13,  3, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Text_TimeCapsuleClosed, -1
+	db 2 ; object events
+	person_event  5,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Trade, -1
+	person_event  9,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Battle, -1
+	;person_event 13,  3, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Text_TimeCapsuleClosed, -1
 
 	const_def 1 ; object constants
 	const POKECENTER2F_TRADE_RECEPTIONIST
@@ -34,39 +33,6 @@ PokeCenter2FDummyTrigger:
 PokeCenter2FLeftColosseumTrigger:
 	priorityjump Script_LeftCableColosseum
 	end
-
-PokeCenter2FTileCallback:
-	callasm .CheckPokeCenter2FRegion
-	ifequal $0, .done
-	ifequal $2, .shamouti2f
-	changemap KantoPokeCenter2F_BlockData
-.done
-	return
-
-.shamouti2f
-	changemap KantoPokeCenter2F_BlockData
-	changeblock 0, 6, $3c
-	changeblock 2, 0, $4a
-	return
-
-.CheckPokeCenter2FRegion:
-	call GetBackupLandmark
-	ld hl, wScriptVar
-	cp SHAMOUTI_LANDMARK
-	jr nc, .shamouti
-	cp KANTO_LANDMARK
-	jr nc, .kanto
-.johto
-	ld [hl], JOHTO_REGION
-	ret
-
-.kanto
-	ld [hl], KANTO_REGION
-	ret
-
-.shamouti
-	ld [hl], ORANGE_REGION
-	ret
 
 Script_LeftCableTradeCenter:
 	special WaitForOtherPlayerToExit

@@ -1,15 +1,15 @@
-Daycare_MapScriptHeader:
+DayCare_MapScriptHeader:
 	db 1 ; scene scripts
 	scene_script DayCareTrigger0
 
 	db 1 ; callbacks
 	callback MAPCALLBACK_OBJECTS, DayCareEggCheckCallback
 
-	db 4 ; warp events
-	warp_event  0,  4, ROUTE_34, 3
-	warp_event  0,  5, ROUTE_34, 4
-	warp_event  2,  7, ROUTE_34, 5
-	warp_event  3,  7, ROUTE_34, 5
+	db 0 ; warp events
+	;warp_event  0,  4, ROUTE_34, 3
+	;warp_event  0,  5, ROUTE_34, 4
+	;warp_event  2,  7, ROUTE_34, 5
+	;warp_event  3,  7, ROUTE_34, 5
 
 	db 0 ; coord events
 
@@ -17,9 +17,9 @@ Daycare_MapScriptHeader:
 	bg_event  5,  1, SIGNPOST_JUMPSTD, difficultbookshelf
 
 	db 3 ; object events
-	object_event  5,  3, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, DayCareLadyScript, -1
-	object_event  0,  5, SPRITE_LYRA, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LYRA_DAYCARE
-	object_event  2,  3, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DayCareManScript_Inside, EVENT_DAYCARE_MAN_IN_DAYCARE
+	person_event  5,  3, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, DayCareLadyScript, -1
+	person_event  0,  5, SPRITE_LYRA, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LYRA_DAYCARE
+	person_event  2,  3, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DayCareManScript_Inside, EVENT_DAYCARE_MAN_IN_DAYCARE
 
 	const_def 1 ; object constants
 	const DAYCARE_GRANNY
@@ -31,12 +31,12 @@ DayCareTrigger0:
 
 DayCareEggCheckCallback:
 	checkflag ENGINE_DAYCARE_MAN_HAS_EGG
-	iftrue .PutDaycareManOutside
+	iftrue .PutDayCareManOutside
 	clearevent EVENT_DAYCARE_MAN_IN_DAYCARE
 	setevent EVENT_DAYCARE_MAN_ON_ROUTE_34
 	return
 
-.PutDaycareManOutside:
+.PutDayCareManOutside:
 	setevent EVENT_DAYCARE_MAN_IN_DAYCARE
 	clearevent EVENT_DAYCARE_MAN_ON_ROUTE_34
 	return
@@ -130,15 +130,15 @@ DayCareLadyScript:
 	iftrue .GiveCyndaquilEgg
 	checkevent EVENT_GOT_CHIKORITA_FROM_ELM
 	iftrue .GiveTotodileEgg
-	giveegg CHIKORITA, EGG_LEVEL
+	;giveegg CHIKORITA, EGG_LEVEL
 	jump .GotLyrasEgg
 
 .GiveCyndaquilEgg:
-	giveegg CYNDAQUIL, EGG_LEVEL
+	;giveegg CYNDAQUIL, EGG_LEVEL
 	jump .GotLyrasEgg
 
 .GiveTotodileEgg:
-	giveegg TOTODILE, EGG_LEVEL
+	;giveegg TOTODILE, EGG_LEVEL
 .GotLyrasEgg
 	farwritetext UnknownText_0x1bdfa5
 	playsound SFX_GET_EGG_FROM_DAYCARE_LADY

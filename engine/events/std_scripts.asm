@@ -342,15 +342,6 @@ GoldenrodRocketsScript:
 	end
 
 RadioTowerRocketsScript:
-	setflag ENGINE_ROCKETS_IN_RADIO_TOWER
-	setevent EVENT_GOLDENROD_CITY_CIVILIANS
-	setevent EVENT_RADIO_TOWER_BLACKBELT_BLOCKS_STAIRS
-	clearevent EVENT_GOLDENROD_CITY_ROCKET_SCOUT
-	clearevent EVENT_RADIO_TOWER_ROCKET_TAKEOVER
-	clearevent EVENT_USED_THE_CARD_KEY_IN_THE_RADIO_TOWER
-	setevent EVENT_MAHOGANY_TOWN_POKEFAN_M_BLOCKS_EAST
-	specialphonecall SPECIALCALL_WEIRDBROADCAST
-	setmapscene MAHOGANY_TOWN, $1
 	end
 
 BugContestResultsWarpScript:
@@ -359,7 +350,7 @@ BugContestResultsWarpScript:
 	setevent EVENT_ROUTE_36_NATIONAL_PARK_GATE_OFFICER_CONTEST_DAY
 	clearevent EVENT_ROUTE_36_NATIONAL_PARK_GATE_OFFICER_NOT_CONTEST_DAY
 	setevent EVENT_WARPED_FROM_ROUTE_35_NATIONAL_PARK_GATE
-	warp ROUTE_36_NATIONAL_PARK_GATE, $0, $4
+	;warp ROUTE_36_NATIONAL_PARK_GATE, $0, $4
 	applymovement PLAYER, Movement_ContestResults_WalkAfterWarp
 	; fallthrough
 
@@ -423,7 +414,7 @@ BugContestResultsScript:
 .CleanUp
 	closetext
 	setscene $0
-	setmapscene ROUTE_35_NATIONAL_PARK_GATE, $0
+	;setmapscene ROUTE_35_NATIONAL_PARK_GATE, $0
 	setevent EVENT_BUG_CATCHING_CONTESTANT_1A
 	setevent EVENT_BUG_CATCHING_CONTESTANT_2A
 	setevent EVENT_BUG_CATCHING_CONTESTANT_3A
@@ -493,9 +484,9 @@ BugContestResults_CopyContestantsToResults ; 0xbc380
 	end
 
 InitializeEventsScript:
-	setmapscene GOLDENROD_CITY, $1
-	setmapscene BATTLE_TOWER_OUTSIDE, $1
-	setmapscene BELLCHIME_TRAIL, $1
+	;setmapscene GOLDENROD_CITY, $1
+	;setmapscene BATTLE_TOWER_OUTSIDE, $1
+	;setmapscene BELLCHIME_TRAIL, $1
 	setevent EVENT_EARLS_ACADEMY_EARL
 	setevent EVENT_VIOLET_GYM_FALKNER
 	setevent EVENT_RADIO_TOWER_ROCKET_TAKEOVER

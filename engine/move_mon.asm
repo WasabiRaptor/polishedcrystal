@@ -916,7 +916,7 @@ RestorePPofDepositedPokemon: ; dcb6
 	ret
 ; dd21
 
-RetrievePokemonFromDaycareMan: ; dd21
+RetrievePokemonFromDayCareMan: ; dd21
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld de, SFX_TRANSACTION
@@ -932,7 +932,7 @@ RetrievePokemonFromDaycareMan: ; dd21
 	jr Functiondd64
 ; dd42
 
-RetrievePokemonFromDaycareLady: ; dd42
+RetrievePokemonFromDayCareLady: ; dd42
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
 	ld de, SFX_TRANSACTION
@@ -1056,7 +1056,7 @@ Functionde1a: ; de1a
 	ret
 ; de2a
 
-DepositMonWithDaycareMan: ; de2a
+DepositMonWithDayCareMan: ; de2a
 	ld de, wBreedMon1Nick
 	call DepositBreedmon
 	xor a
@@ -1064,7 +1064,7 @@ DepositMonWithDaycareMan: ; de2a
 	jp RemoveMonFromPartyOrBox
 ; de37
 
-DepositMonWithDaycareLady: ; de37
+DepositMonWithDayCareLady: ; de37
 	ld de, wBreedMon2Nick
 	call DepositBreedmon
 	xor a

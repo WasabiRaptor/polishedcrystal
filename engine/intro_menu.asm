@@ -414,7 +414,7 @@ Continue: ; 5d65
 	jp FinishContinueFunction
 
 .SpawnAfterE4:
-	ld a, SPAWN_NEW_BARK
+	ld a, SPAWN_HOME
 	ld [wDefaultSpawnpoint], a
 	call PostCreditsSpawn
 	jp FinishContinueFunction

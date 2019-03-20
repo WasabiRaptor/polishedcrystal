@@ -321,8 +321,8 @@ wWhichHPBar::
 wPokemonWithdrawDepositParameter::
 ; 0: Take from PC
 ; 1: Put into PC
-; 2: Take from Daycare
-; 3: Put into Daycare
+; 2: Take from DayCare
+; 3: Put into DayCare
 	ds 1
 wIsCurMonInParty::
 wItemQuantityChangeBuffer::
@@ -922,11 +922,13 @@ wFarfetchdPosition:: ds 1
 
 ; map triggers
 wAlways0Trigger:: ds 1
-wAzaleaTownTrigger:: ds 1
-wBattleTower1FTrigger:: ds 1
-wBattleTowerBattleRoomTrigger:: ds 1
-wBattleTowerElevatorTrigger:: ds 1
-wBattleTowerHallwayTrigger:: ds 1
+wPokeCenter2FSceneID:: ds 1
+wTradeCenterSceneID:: ds 1
+wColosseumSceneID:: ds 1
+wPlayersHouse1FSceneID:: ds 1
+wMysteryDungeonNorthSouthEastWestSceneID:: ds 1
+
+;unused
 wBattleTowerOutsideTrigger:: ds 1
 wBellchimeTrailTrigger:: ds 1
 wBrunosRoomTrigger:: ds 1
@@ -969,7 +971,7 @@ wMystriStageTrigger:: ds 1
 wNewBarkTownTrigger:: ds 1
 wOlivineCityTrigger:: ds 1
 wOlivinePortTrigger:: ds 1
-wPokecenter2FTrigger:: ds 1
+wPokeCenter2FTrigger:: ds 1
 wPokemonLeagueGateTrigger:: ds 1
 wPowerPlantTrigger:: ds 1
 wRadioTower5FTrigger:: ds 1
@@ -1220,7 +1222,7 @@ wUnlockedUnowns:: ds 1
 wFirstUnownSeen:: ds 1
 wFirstMagikarpSeen:: ds 1
 
-wDaycareMan::
+wDayCareMan::
 ; bit 7: active
 ; bit 6: monsters are compatible
 ; bit 5: egg ready
@@ -1232,7 +1234,7 @@ wBreedMon1Nick::  ds PKMN_NAME_LENGTH
 wBreedMon1OT:: ds NAME_LENGTH
 wBreedMon1Stats:: box_struct wBreedMon1
 
-wDaycareLady::
+wDayCareLady::
 ; bit 7: active
 ; bit 0: monster 2 in daycare
 	ds 1

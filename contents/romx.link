@@ -66,8 +66,6 @@ ROMX $0F
 ROMX $10
 	org $4000
 	"Code 16"
-	"Special Map Blockdata"
-	"Pokemon Center Scripts 4"
 
 ROMX $11
 	org $4000
@@ -76,7 +74,6 @@ ROMX $11
 ROMX $12
 	org $4000
 	"Code 18"
-	"Special Map Scripts"
 
 ROMX $13
 	org $4000
@@ -203,28 +200,22 @@ ROMX $30
 
 ROMX $31
 	org $4000
-	"Battle Tower Scripts"
 
 ROMX $32
 	org $4000
-	"New Bark Scripts"
 
 ROMX $33
 	org $4000
-	"Pokemon Center Scripts 1"
 
 ROMX $34
 	org $4000
-	"Pokemon Center Scripts 2"
 
 ROMX $35
 	org $4000
-	"Pokemon Center Scripts 3"
 
 ROMX $36
 	org $4000
 	"Diploma"
-	"New Bark Scripts 2"
 
 ROMX $37
 	org $4000

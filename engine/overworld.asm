@@ -299,11 +299,13 @@ _GetSpritePalette:: ; 142c4
 	ret
 
 .not_doll
-	cp GROUP_ROUTE_34
-	jr nz, .not_daycare
-	ld a, [wMapNumber]
-	cp MAP_ROUTE_34
-	jr nz, .not_daycare
+	;cp GROUP_ROUTE_34
+	;jr nz, .not_daycare
+	;ld a, [wMapNumber]
+	;cp MAP_ROUTE_34
+	;jr nz, .not_daycare
+	jr .not_daycare
+
 	farcall GetMonIconPalette
 	cp PAL_OW_GRAY
 	ld c, PAL_OW_ROCK

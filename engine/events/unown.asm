@@ -1,83 +1,16 @@
 SpecialHoOhChamber: ; 0x8addb
-	ld hl, wPartySpecies
-	ld a, [hl]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-	call GetBaseData
-	ld a, [wBaseType1]
-	cp FAIRY
-	jr z, .open
-	ld a, [wBaseType2]
-	cp FAIRY
-	ret nz
-
-.open
-	call GetSecondaryMapHeaderPointer
-	eventflagset EVENT_WALL_OPENED_IN_HO_OH_CHAMBER
 	ret
 ; 0x8adef
 
 SpecialOmanyteChamber: ; 8adef
-	eventflagcheck EVENT_WALL_OPENED_IN_OMANYTE_CHAMBER
-	ret nz
-
-	ld a, WATER_STONE
-	ld [wCurItem], a
-	ld hl, wNumItems
-	call CheckItem
-	jr c, .open
-
-	ld a, [wPartyCount]
-	ld b, a
-	inc b
-.loop
-	dec b
-	ret z
-	ld a, b
-	dec a
-	ld [wCurPartyMon], a
-	push bc
-	ld a, MON_ITEM
-	call GetPartyParamLocation
-	pop bc
-	ld a, [hl]
-	cp WATER_STONE
-	jr nz, .loop
-
-.open
-	call GetSecondaryMapHeaderPointer
-	eventflagset EVENT_WALL_OPENED_IN_OMANYTE_CHAMBER
 	ret
 ; 8ae30
 
 SpecialAerodactylChamber: ; 8ae30
-	call GetSecondaryMapHeaderPointer
-	ld a, h
-	cp RuinsOfAlphAerodactylChamber_SecondMapHeader / $100
-	jr nz, .nope
-	ld a, l
-	cp RuinsOfAlphAerodactylChamber_SecondMapHeader % $100
-	jr nz, .nope
-
-	eventflagset EVENT_WALL_OPENED_IN_AERODACTYL_CHAMBER
-	scf
-	ret
-
-.nope
-	and a
 	ret
 ; 8ae4e
 
 SpecialKabutoChamber: ; 8ae4e
-	call GetSecondaryMapHeaderPointer
-	ld a, h
-	cp RuinsOfAlphKabutoChamber_SecondMapHeader / $100
-	ret nz
-	ld a, l
-	cp RuinsOfAlphKabutoChamber_SecondMapHeader % $100
-	ret nz
-
-	eventflagset EVENT_WALL_OPENED_IN_KABUTO_CHAMBER
 	ret
 ; 8ae68
 

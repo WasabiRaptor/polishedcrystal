@@ -1,14 +1,14 @@
 	const_def 1
-	const TILESET_JOHTO_TRADITIONAL    ; 01
-	const TILESET_JOHTO_MODERN         ; 02
+	const TILESET_INVAR    ; 01
+	const TILESET_INVAR_MODERN         ; 02
 	const TILESET_BATTLE_TOWER_OUTSIDE ; 03
-	const TILESET_JOHTO_OVERCAST       ; 04
+	const TILESET_INVAR_OVERCAST       ; 04
 	const TILESET_KANTO                ; 05
 	const TILESET_INDIGO_PLATEAU       ; 06
 	const TILESET_SHAMOUTI_ISLAND      ; 07
 	const TILESET_VALENCIA_ISLAND      ; 08
 	const TILESET_FARAWAY_ISLAND       ; 09
-	const TILESET_JOHTO_HOUSE          ; 0a
+	const TILESET_INVAR_HOUSE          ; 0a
 	const TILESET_KANTO_HOUSE          ; 0b
 	const TILESET_TRADITIONAL_HOUSE    ; 0c
 	const TILESET_POKECENTER           ; 0d
