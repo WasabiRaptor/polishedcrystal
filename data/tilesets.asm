@@ -5,21 +5,21 @@ tilecoll: MACRO
 	db COLL_\1, COLL_\2, COLL_\3, COLL_\4
 ENDM
 
-SECTION "Tileset Data - johto_traditional", ROMX
+SECTION "Tileset Data - invar", ROMX
 
-TilesetJohto1GFX::
-INCBIN "gfx/tilesets/johto_traditional.2bpp.lz"
+TilesetInvarGFX::
+INCBIN "gfx/tilesets/invar.2bpp.lz"
 
-TilesetJohto1GFX2 EQU 0
+TilesetInvarGFX2 EQU 0
 
-TilesetJohto1Meta::
-INCBIN "data/tilesets/johto_traditional_metatiles.bin.lz"
+TilesetInvarMeta::
+INCBIN "data/tilesets/invar_metatiles.bin.lz"
 
-TilesetJohto1Attr::
-INCBIN "data/tilesets/johto_traditional_attributes.bin.lz"
+TilesetInvarAttr::
+INCBIN "data/tilesets/invar_attributes.bin.lz"
 
-TilesetJohto1Coll::
-INCLUDE "data/tilesets/johto_traditional_collision.asm"
+TilesetInvarColl::
+INCLUDE "data/tilesets/invar_collision.asm"
 
 
 SECTION "Tileset Data - johto_modern", ROMX
@@ -717,7 +717,7 @@ tileset: macro
 endm
 
 Tilesets::
-	tileset TilesetJohto1
+	tileset TilesetInvar
 	tileset TilesetJohto2
 	tileset TilesetJohto3
 	tileset TilesetJohto4

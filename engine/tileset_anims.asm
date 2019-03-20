@@ -35,28 +35,20 @@ _AnimateTileset:: ; fc000
 ; fc01b
 
 
-TilesetJohto1Anim::
-	dw VTiles2 tile $14, AnimateWaterTile
+TilesetInvarAnim::
+	dw FarawayWaterFrames1, AnimateFarawayWaterTile
+	dw FarawayWaterFrames2, AnimateFarawayWaterTile
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation
 	dw NULL,  WaitTileAnimation
 	dw NULL,  AnimateFlowerTile
-	dw WhirlpoolFrames1, AnimateWhirlpoolTile
-	dw WhirlpoolFrames2, AnimateWhirlpoolTile
-	dw WhirlpoolFrames3, AnimateWhirlpoolTile
-	dw WhirlpoolFrames4, AnimateWhirlpoolTile
 	dw NULL,  WaitTileAnimation
 	dw NULL,  StandingTileFrame8
-	dw VTiles2 tile $40, WriteTileToBuffer
 	dw NULL,  WaitTileAnimation
-	dw wTileAnimBuffer, ScrollTileDown
 	dw NULL,  WaitTileAnimation
-	dw wTileAnimBuffer, ScrollTileDown
 	dw NULL,  WaitTileAnimation
-	dw wTileAnimBuffer, ScrollTileDown
 	dw NULL,  WaitTileAnimation
-	dw VTiles2 tile $40, WriteTileFromBuffer
 	dw NULL,  DoneTileAnimation
 
 TilesetJohto2Anim::
@@ -976,7 +968,7 @@ AnimateFlowerTile: ; fc56d
 	add hl, de
 	ld sp, hl
 
-	ld hl, VTiles2 tile $03
+	ld hl, VTiles2 tile $00
 
 	jp WriteTile
 ; fc58c
@@ -1383,8 +1375,8 @@ LCDFrames: dw VTiles2 tile $6d, LCDTiles
 LCDTiles:
 
 
-FarawayWaterFrames1: dw VTiles2 tile $14, FarawayWaterTiles1
-FarawayWaterFrames2: dw VTiles2 tile $15, FarawayWaterTiles2
+FarawayWaterFrames1: dw VTiles2 tile $04, FarawayWaterTiles1
+FarawayWaterFrames2: dw VTiles2 tile $05, FarawayWaterTiles2
 
 FarawayWaterTiles1: INCBIN "gfx/tilesets/water/faraway_water_1.2bpp"
 FarawayWaterTiles2: INCBIN "gfx/tilesets/water/faraway_water_2.2bpp"
