@@ -20,7 +20,7 @@ RGBLINK := rgblink
 
 RGBASM_FLAGS =
 RGBLINK_FLAGS = -n $(BUILD_DIR)$(ROM_NAME).sym -m $(BUILD_DIR)$(ROM_NAME).map -l contents/contents.link -p $(FILLER)
-RGBFIX_FLAGS = -csjv -t $(TITLE) -i $(MCODE) -n $(ROMVERSION) -p $(FILLER) -k 01 -l 0x33 -m 0x1B -r 3
+RGBFIX_FLAGS = -Cjv -t $(TITLE) -i $(MCODE) -n $(ROMVERSION) -p $(FILLER) -k 01 -l 0x33 -m 0x1B -r 3
 
 PYTHON := python 
 pcm := $(PYTHON) extras/pokemontools/pcm.py pcm
@@ -100,7 +100,7 @@ endif
 
 
 $(BUILD_DIR):
-	{ echo "Making build directories..." } 2> /dev/null
+	@echo "Making build directories..."
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(BUILD_DIR)audio
 	mkdir -p $(BUILD_DIR)data
