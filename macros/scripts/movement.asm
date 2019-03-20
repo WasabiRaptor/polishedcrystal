@@ -281,6 +281,13 @@ fast_jump_step_right: macro
 	db movement_fast_jump_step_right ; $37
 	endm
 
+	enum movement_stairs_step
+stairs_step: MACRO
+	db movement_stairs_step | \1
+ENDM
+
+__enum__ = __enum__ + 3
+
 	enum movement_remove_sliding
 remove_sliding: macro
 	db movement_remove_sliding ; $38

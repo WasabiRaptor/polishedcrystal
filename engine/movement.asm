@@ -55,6 +55,10 @@ MovementPointers:
 	dw Movement_fast_jump_step_up     ; 35
 	dw Movement_fast_jump_step_left   ; 36
 	dw Movement_fast_jump_step_right  ; 37
+	dw Movement_stairs_step_down
+	dw Movement_stairs_step_up
+	dw Movement_stairs_step_left
+	dw Movement_stairs_step_right
 	dw Movement_remove_sliding        ; 38
 	dw Movement_set_sliding           ; 39
 	dw Movement_remove_fixed_facing   ; 3a
@@ -879,3 +883,47 @@ JumpStep: ; 548a
 	ld [hl], STEP_TYPE_PLAYER_JUMP
 	ret
 ; 54b8
+
+Movement_stairs_step_down:
+	ld a, STEP_WALK << 2 | DOWN
+	jr DiagonalStairsStep
+
+Movement_stairs_step_up:
+	ld a, STEP_WALK << 2 | UP
+	jr DiagonalStairsStep
+
+Movement_stairs_step_left:
+	ld a, STEP_WALK << 2 | LEFT
+	jr DiagonalStairsStep
+
+Movement_stairs_step_right:
+	ld a, STEP_WALK << 2 | RIGHT
+	jr DiagonalStairsStep
+
+DiagonalStairsStep:
+	call InitStep
+	ld hl, OBJECT_31
+	add hl, bc
+	ld [hl], $0
+
+	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], PERSON_ACTION_STEP
+	xor a
+	ld [wStairHandler], a
+	
+	ld hl, wCenteredObject
+	ldh a, [hMapObjectIndexBuffer]
+	cp [hl]
+	jr z, .player
+
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_NPC_DIAGONAL_STAIRS
+	ret
+
+.player
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_PLAYER_DIAGONAL_STAIRS
+	ret

@@ -54,6 +54,8 @@ DoPlayerMovement:: ; 80000
 	ret c
 	call .TryJump
 	ret c
+	call .TryDiagonalStairs
+	ret c
 	call .CheckWarp
 	ret c
 	jr .NotMoving
@@ -79,6 +81,8 @@ DoPlayerMovement:: ; 80000
 	call .TryStep
 	ret c
 	call .TryJump
+	ret c
+	call .TryDiagonalStairs
 	ret c
 	call .CheckWarp
 	ret c
@@ -356,7 +360,7 @@ DoPlayerMovement:: ; 80000
 	ld e, a
 	and $f0
 	cp $a0 ; ledge
-	jr nz, .DontJump
+	jr nz, .DontJumpOrDiagonalStairs
 
 	ld a, e
 	and 7
@@ -366,7 +370,7 @@ DoPlayerMovement:: ; 80000
 	add hl, de
 	ld a, [wFacingDirection]
 	and [hl]
-	jr z, .DontJump
+	jr z, .DontJumpOrDiagonalStairs
 
 	ld de, SFX_JUMP_OVER_LEDGE
 	call PlaySFX
@@ -376,7 +380,7 @@ DoPlayerMovement:: ; 80000
 	scf
 	ret
 
-.DontJump:
+.DontJumpOrDiagonalStairs:
 	xor a
 	ret
 
@@ -390,6 +394,33 @@ DoPlayerMovement:: ; 80000
 	db FACE_UP | FACE_RIGHT
 	db FACE_UP | FACE_LEFT
 ; 80226
+
+.TryDiagonalStairs:
+	ld a, [wPlayerStandingTile]
+	ld e, a
+	and $f0
+	cp HI_NYBBLE_DIAGONAL_STAIRS
+	jr nz, .DontJumpOrDiagonalStairs
+
+	ld a, e
+	and 7
+	ld e, a
+	ld d, 0
+	ld hl, .FacingStairsTable
+	add hl, de
+	ld a, [wFacingDirection]
+	and [hl]
+	jr z, .DontJumpOrDiagonalStairs
+
+	ld a, STEP_DIAGONAL_STAIRS
+	call .DoStep
+	ld a, 7
+	scf
+	ret
+
+.FacingStairsTable:
+	db FACE_RIGHT
+	db FACE_LEFT
 
 .CheckWarp: ; 80226
 
@@ -473,6 +504,7 @@ DoPlayerMovement:: ; 80000
 	dw .InPlace
 	dw .SpinStep
 	dw .Fast ; x2
+	dw .DiagonalStairsStep
 
 .SlowStep:
 	slow_step_down
@@ -529,6 +561,11 @@ DoPlayerMovement:: ; 80000
 	fast_step_up
 	fast_step_left
 	fast_step_right
+.DiagonalStairsStep:
+	stairs_step DOWN
+	stairs_step UP
+	stairs_step LEFT
+	stairs_step RIGHT
 
 .StandInPlace: ; 802b3
 	ld a, movement_step_sleep_1

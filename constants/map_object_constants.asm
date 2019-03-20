@@ -180,7 +180,9 @@ SPRITEMOVEDATA_FIELDS EQU 6
 	const STEP_TYPE_TRACKING_OBJECT ; 13
 	const STEP_TYPE_14              ; 14
 	const STEP_TYPE_SKYFALL_TOP     ; 15
-
+	const STEP_TYPE_NPC_DIAGONAL_STAIRS
+	const STEP_TYPE_PLAYER_DIAGONAL_STAIRS
+	
 ; see engine/map_object_action.asm:Pointers445f
 	const_def
 	const PERSON_ACTION_00              ; 00

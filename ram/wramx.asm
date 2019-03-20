@@ -373,7 +373,9 @@ wSpinning:: ds 1
 
 wBGMapAnchor:: ds 2
 
-	ds 64 ; unused
+	ds 63 ; unused
+
+wStairHandler:: db 
 
 wOverworldMapAnchor:: ds 2
 wMetatileStandingY:: ds 1
