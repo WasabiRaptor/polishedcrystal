@@ -1709,7 +1709,7 @@ YoungsterGroup:
 	db "Joey@"
 	db TRAINERTYPE_DVS | TRAINERTYPE_PERSONALITY
 	; party
-	db 5, RATTATA, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, MALE
+	db 201, RATTATA, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, MALE
 	db -1 ; end
 
 ; ================

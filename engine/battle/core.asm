@@ -7003,9 +7003,9 @@ endr
 	; Set happiness
 	ld a, BASE_HAPPINESS
 	ld [wEnemyMonHappiness], a
+
 	; Set level
 	ld a, [wCurPartyLevel]
-
 	cp 101
 	jr c, .DoNotAverageLevels
 
@@ -7029,22 +7029,17 @@ endr
 	ld h, c
 	ld l, a
 
-	; Divide hl by c
-	; http://wikiti.brandonw.net/index.php?title=Z80_Routines:Math:Division#16.2F8_division
-	xor a
-	ld b, 16
-.divide
-	add hl, hl
-	rla
-	jr c, .larger
-	cp c
-	jr c, .tooSmall
-.larger
-	sub c
-	inc l
-.tooSmall
-	dec b
-	jr nz, .divide
+	ld a, h
+	ldh [hDividend + 0], a
+	ld a, l
+	ldh [hDividend + 1], a
+	ld a, [wPartyCount]
+	inc a
+	ldh [hDivisor], a
+	ld b, 2
+	call Divide
+	ldh a, [hQuotient + 2]
+	ld b, a
 	
 	ld a, [wCurPartyLevel]
 	cp 201
@@ -7052,7 +7047,7 @@ endr
 	sub a, 100
 	cp b
 	jr nc, .RandomLevel
-	ld a, [hl]
+	ld a, b
 
 .RandomLevel
 	ld c, a
@@ -7070,7 +7065,7 @@ endr
 	jp .SetLevel
 
 .MatchPlayerLevel
-	ld a, [hl]
+	ld a, b
 .SetLevel
 	ld [wCurPartyLevel], a
 .DoNotAverageLevels

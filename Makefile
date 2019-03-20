@@ -100,7 +100,7 @@ endif
 
 
 $(BUILD_DIR):
-	{ echo "Making build directories..." } 2> /dev/null
+	@echo "Making build directories..."
 	mkdir -p $(BUILD_DIR)
 	mkdir -p $(BUILD_DIR)audio
 	mkdir -p $(BUILD_DIR)data
