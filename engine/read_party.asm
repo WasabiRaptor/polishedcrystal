@@ -30,76 +30,12 @@ ReadTrainerParty: ; 39771
 	ret z
 
 	ld [wCurPartyLevel], a
-	cp 101
-	jr c, .SetLevel
 
-	push bc
-	push de
 	push hl
 
-	ld a, [wPartyCount]
-	ld b, a
+	farcall SetLevel
 
-	ld hl, wPartyMon1Level
-	ld de, PARTYMON_STRUCT_LENGTH
-	xor a
-	ld c, a
-.loop3
-	add a, [hl]
-	jr nc, .noCarry
-	inc c
-.noCarry
-	add hl, de
-	dec b
-	jr nz, .loop3
-
-	ld h, c
-	ld l, a
-
-	ld a, h
-	ldh [hDividend + 0], a
-	ld a, l
-	ldh [hDividend + 1], a
-	ld a, [wPartyCount]
-	inc a
-	ldh [hDivisor], a
-	ld b, 2
-	call Divide
-	ldh a, [hQuotient + 2]
-	ld b, a
-	
-	ld a, [wCurPartyLevel]
-	cp 201
-	jr z, .MatchPlayerLevel
-	sub a, 100
-	cp b
-	jr nc, .RandomLevel
-	ld a, b
-
-.RandomLevel
-	ld c, a
-	ld a, 3
-	call RandomRange
-	inc a
-	inc a
-	inc a
-	ld d, a
-	ld a, c
-	sub a, d
-	cp 1
-	jr nc, .SetLevel
-	inc a
-	jp .SetLevel
-
-.MatchPlayerLevel
-	ld a, b
-
-	pop bc
-	pop de
 	pop hl
-
-.SetLevel
-	ld [wCurPartyLevel], a
 
 ; species
 	call GetNextTrainerDataByte
