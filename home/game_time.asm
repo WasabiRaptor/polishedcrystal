@@ -166,7 +166,7 @@ UpdateNoRTC::
 
 	ld hl, hHours
 	ld a, [hl]
-	cp 18
+	cp 6
 	ld b, CYCLE_SOMETHING_IS_STIRRING_EVENT
 	jr z, .updatecycleprogress
 
@@ -174,7 +174,7 @@ UpdateNoRTC::
 	ld b, CYCLE_SOMETHING_IS_APPROACHING_EVENT
 	jr z, .updatecycleprogress
 
-	cp 6
+	cp 18
 	ld b, CYCLE_ITS_GETTING_CLOSER_EVENT
 	jr z, .updatecycleprogress
 	ret
