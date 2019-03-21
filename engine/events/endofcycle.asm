@@ -174,10 +174,3 @@ ItsRightNearScript:
 .TeleportFrom:
 	teleport_from
 	step_end
-ResetTheGame:
-	farcall Reset
-	ret
-Delay5s:
-	ld a, 255
-	call DelayFrames
-	ret

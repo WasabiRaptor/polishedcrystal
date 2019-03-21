@@ -147,10 +147,7 @@ Init:: ; 17d
 	xor a ; VBGMap1 % $100
 	ldh [hBGMapAddress], a
 
-	farcall StartClock
-
 	xor a
-	ld [MBC3LatchClock], a
 	ld [MBC3SRamEnable], a
 
 	ldh a, [hCGB]
