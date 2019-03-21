@@ -24,19 +24,19 @@ EndOfCycleStep::
 	ld hl, wCycleProgress
 	ld a, [hl]
 
-	cp 0 
+	cp CYCLE_NO_EVENT 
 	ret z
-    eoccall 1, ItsRightNearScript
-    eoccall 2, ItsGettingCloserScript
-	eoccall 3, SomethingIsApproachingScript
-	eoccall 4, SomethingIsStirringScript
-	eoccall 5, SeventhDayScript
-	eoccall 6, SixthDayScript
-	eoccall 7, FifthDayScript
-	eoccall 8, FourthDayScript
-	eoccall 9, ThirdDayScript
-	eoccall 10, SecondDayScript
-	eoccall 11, FirstDayScript
+    eoccall CYCLE_ITS_RIGHT_NEAR_EVENT, 			ItsRightNearScript
+    eoccall CYCLE_ITS_GETTING_CLOSER_EVENT, 		ItsGettingCloserScript
+	eoccall CYCLE_SOMETHING_IS_APPROACHING_EVENT, 	SomethingIsApproachingScript
+	eoccall CYCLE_SOMETHING_IS_STIRRING_EVENT, 		SomethingIsStirringScript
+	eoccall CYCLE_24_HOURS_REMAIN_EVENT, 			SeventhDayScript
+	eoccall CYCLE_48_HOURS_REMAIN_EVENT, 			SixthDayScript
+	eoccall CYCLE_72_HOURS_REMAIN_EVENT, 			FifthDayScript
+	eoccall CYCLE_96_HOURS_REMAIN_EVENT, 			FourthDayScript
+	eoccall CYCLE_120_HOURS_REMAIN_EVENT, 			ThirdDayScript
+	eoccall CYCLE_144_HOURS_REMAIN_EVENT, 			SecondDayScript
+	eoccall CYCLE_168_HOURS_REMAIN_EVENT, 			FirstDayScript
 
 .callscript
     call CallScript
