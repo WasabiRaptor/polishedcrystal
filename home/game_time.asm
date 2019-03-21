@@ -140,15 +140,6 @@ UpdateNoRTC::
 	ld hl, hMinutes
 	ld a, [hl]
 	inc a
-	inc a
-	inc a
-	inc a
-	inc a
-	inc a
-	inc a
-	inc a
-	inc a
-	inc a
 	;just add some more 'inc a' here if you need to speed up the clock for testing purposes but make sure its a factor of 60
 
 	cp 60 ;seconds/ingame hour
