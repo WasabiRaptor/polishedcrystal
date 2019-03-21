@@ -10,12 +10,12 @@ ENDM
 eocscript: MACRO
     playmusic MUSIC_NONE
     opentext
-    writetext .\1DayText
+    writetext ._\1DayText
     waitbutton
     closetext
     special RestartMapMusic
     end
-.\1DayText
+._\1DayText
     text_jump \1DayText
     db "@"
 ENDM
