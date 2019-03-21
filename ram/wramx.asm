@@ -1135,7 +1135,14 @@ wYanmaMapNumber:: ds 1
 wVermilionGymTrashCan1:: ds 1
 wVermilionGymTrashCan2:: ds 1
 
-	ds 2 ; unused
+	ds 1 ; unused
+
+wCycleProgress:: db
+; 0 Nothing
+; 1 Something is stirring...
+; 2 Something is approaching...
+; 3 It's getting closer!
+; 4 It's right near!
 
 wBattlePoints:: ds 1
 

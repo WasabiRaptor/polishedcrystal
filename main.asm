@@ -362,6 +362,7 @@ INCLUDE "engine/events/bug_contest.asm"
 INCLUDE "engine/events/safari_game.asm"
 INCLUDE "engine/events/std_tiles.asm"
 
+INCLUDE "engine/events/endofcycle.asm"
 
 SECTION "Roofs", ROMX
 
