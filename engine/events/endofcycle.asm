@@ -7,6 +7,19 @@ eoccall: MACRO
 .Not\2
 ENDM
 
+eocscript: MACRO
+    playmusic MUSIC_NONE
+    opentext
+    writetext .\1DayText
+    waitbutton
+    closetext
+    special RestartMapMusic
+    end
+.\1DayText
+    text_jump \1DayText
+    db "@"
+ENDM
+
 EndOfCycleStep::
 	ld hl, wCycleProgress
 	ld a, [hl]
@@ -33,88 +46,26 @@ EndOfCycleStep::
     ret
 
 FirstDayScript:
-	playmusic MUSIC_NONE
-	opentext
-	writetext .FirstDaytext
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
-.FirstDaytext
-	text_jump FirstDayText
-	db "@"
-	
+	eocscript First
+
 SecondDayScript:
-	playmusic MUSIC_NONE
-	opentext
-	writetext .SecondDaytext
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
-.SecondDaytext
-	text_jump SecondDayText
-	db "@"
+	eocscript Second
 	
 ThirdDayScript:
-	playmusic MUSIC_NONE
-	opentext
-	writetext .ThirdDaytext
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
-.ThirdDaytext
-	text_jump ThirdDayText
-	db "@"
+    eocscript Third
 	
 FourthDayScript:
-	playmusic MUSIC_NONE
-	opentext
-	writetext .FourthDaytext
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
-.FourthDaytext
-	text_jump FourthDayText
-	db "@"
+	eocscript Fourth
 	
 FifthDayScript:
-	playmusic MUSIC_NONE
-	opentext
-	writetext .FifthDaytext
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
-.FifthDaytext
-	text_jump FifthDayText
-	db "@"
+    eocscript Fifth
 	
 SixthDayScript:
-	playmusic MUSIC_NONE
-	opentext
-	writetext .SixthDaytext
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
-.SixthDaytext
-	text_jump SixthDayText
-	db "@"
+    eocscript Sixth
 
 SeventhDayScript:
-	playmusic MUSIC_NONE
-	opentext
-	writetext .SeventhDaytext
-	waitbutton
-	closetext
-	special RestartMapMusic
-	end
-.SeventhDaytext
-	text_jump SeventhDayText
-	db "@"
+    eocscript Seventh
+
 SomethingIsStirringScript:
 	playmusic MUSIC_NONE
 	opentext
