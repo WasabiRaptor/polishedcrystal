@@ -96,10 +96,27 @@ StringOptions2:
 	db "        :<LNBRK>"
 	db "Typeface<LNBRK>"
 	db "        :<LNBRK>"
-	db "<LNBRK>"
+	db "Brass Debug<LNBRK>"
 	db "<LNBRK>"
 	db "Previous<LNBRK>"
 	db "        <LNBRK>"
+	db "Done@"
+
+StringOptionsDebug:
+	db "Time Speed<LNBRK>"
+	db "        :<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "<LNBRK>"
+	db "Back<LNBRK>"
+	db "<LNBRK>"
 	db "Done@"
 
 GetOptionPointer: ; e42d6
@@ -137,8 +154,17 @@ GetOptionPointer: ; e42d6
 	dw Options_TextAutoscroll
 	dw Options_TurningSpeed
 	dw Options_Typeface
-	dw Options_Unused
+	dw Options_Debug
 	dw Options_NextPrevious
+	dw Options_Done
+
+	dw Options_TimeSpeed
+	dw Options_Unused
+	dw Options_Unused
+	dw Options_Unused
+	dw Options_Unused
+	dw Options_Unused
+	dw Options_Debug
 	dw Options_Done
 ; e42f5
 
@@ -613,10 +639,108 @@ Options_Typeface:
 	db "Unown @"
 
 
-Options_Unused:
+Options_Debug:
+	ld hl, wCurrentOptionsPage
+	ldh a, [hJoyPressed]
+	and A_BUTTON | D_LEFT | D_RIGHT
+	jr z, .NonePressed
+	bit 1, [hl]
+	jr z, .PageDebug
+;.Page2:
+	res 1, [hl]
+	ld de, StringOptions2
+	jr .Display
+.PageDebug:
+	set 1, [hl]
+	ld de, StringOptionsDebug
+.Display:
+	push de
+	hlcoord 0, 0
+	lb bc, 16, 18
+	call TextBox
+	pop de
+	hlcoord 2, 2
+	call PlaceString
+	call OptionsMenu_LoadOptions
+	ld a, $6
+	ld [wJumptableIndex], a
+.NonePressed:
 	and a
 	ret
 
+Options_TimeSpeed:
+	ld hl, wDebugOptions
+	ld a, [hl]
+	and TIMESPEED_MASK
+	ld c, a
+	ld b, 0
+	ldh a, [hJoyPressed]
+	bit D_LEFT_F, a
+	jr nz, .LeftPressed
+	bit D_RIGHT_F, a
+	jr z, .NonePressed
+	ld a, c
+	cp DOUBLE_SPEED
+	jr c, .Increase
+	ld c, NO_SPEED +- 1
+
+.Increase:
+	inc c
+	jr .Save
+
+.LeftPressed:
+	ld a, c
+	and a
+	jr nz, .Decrease
+	ld c, DOUBLE_SPEED + 1
+
+.Decrease:
+	dec c
+
+.Save:
+	push hl
+	push bc
+	call .NonePressed
+	pop bc
+	pop hl
+	ld a, [hl]
+	and $ff - TIMESPEED_MASK
+	or c
+	ld [hl], a
+	call .NonePressed
+	
+.NonePressed:
+	ld b, 0
+	ld hl, Strings
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	hlcoord 11, 11
+	call PlaceString
+	and a
+	ret
+
+.Strings:
+	dw .None
+	dw .Half
+	dw .Normal
+	dw .Double
+
+.None:
+	db "None@"
+.Half:
+	db "Half@"
+.Normal:
+	db "Normal@"
+.Double
+	db "Double@"
+	
+
+Options_Unused:
+	and a
+	ret
 
 Options_NextPrevious:
 	ld hl, wCurrentOptionsPage

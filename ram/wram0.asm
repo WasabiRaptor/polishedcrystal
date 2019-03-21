@@ -1058,7 +1058,7 @@ wTextDelayFrames:: ds 1
 wVBlankOccurred:: ds 1
 wGenericDelay:: ds 1
 
-	ds 7 ; unused
+	ds 6 ; unused
 
 wGameTimerPause::
 ; bit 0
@@ -1114,9 +1114,13 @@ wOptions2::
 ; bit 3: running shoes off/on
 ; bit 4: clock format 12/24-hour
 ; bit 5: pokédex units imperial/metric
-; bit 6: battle style set/switch
-; bit 7: battle style set/predict
-; (bits 6 and 7 are never both set)
+; bit 6-7: battle style
+;   set 0; predict 1; switch 2
+	ds 1
+
+wDebugOptions::
+; bit 0-1: time speed
+;   0 none; 1 normal; 2 double; 3 half
 	ds 1
 
 wInitialOptions::
