@@ -909,6 +909,9 @@ CountStep: ; 96b79
 	; Increase the EXP of (both) DayCare Pokemon by 1.
 	farcall DayCareStep
 
+	farcall EndOfCycleStep
+	jr c, .doscript
+
 	; Every four steps, deal damage to all Poisoned Pokemon
 	ld hl, wPoisonStepCount
 	ld a, [hl]

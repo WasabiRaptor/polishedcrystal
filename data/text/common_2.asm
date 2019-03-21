@@ -1328,3 +1328,75 @@ _ElmText5::
 	para "That's why I study"
 	line "#mon every day."
 	prompt
+
+FirstDayText::
+	text "Dawn of the"
+	line "First Day…"
+	para "168 hours remain…"
+	done
+
+SecondDayText::
+	text "Dawn of the"
+	line "Second Day…"
+	para "144 hours remain…"
+	done
+
+ThirdDayText::
+	text "Dawn of the"
+	line "Third Day…"
+	para "120 hours remain…"
+	done
+
+FourthDayText::
+	text "Dawn of the"
+	line "Fourth Day…"
+	para "96 hours remain…"
+	done
+
+FifthDayText::
+	text "Dawn of the"
+	line "Fifth Day…"
+	para "72 hours remain…"
+	done
+
+SixthDayText::
+	text "Dawn of the"
+	line "Sixth Day…"
+	para "48 hours remain…"
+	done
+	
+SeventhDayText::
+	text "Dawn of the"
+	line "Final Day…"
+	para "24 hours remain…"
+	done
+
+SomethingIsStirringText::
+	text "…Something is"
+	line "stirring…"
+	done
+
+SomethingIsApproachingText::
+	text "…Something is"
+	line "approaching…"
+	done
+
+ItsGettingCloserText::
+	text "It's getting"
+	line "closer!"
+	done
+
+ItsRightNearText::
+	text "It's right near!"
+	line "It's gusting hard!"
+	done
+	
+EndOfCycleText::
+	text "You can keep"
+	line "them safe..."
+	para "Even if you have"
+	line "to box your very"
+	cont "last #MON..."
+	para "Play it safe,"
+	line "<PLAYER>..."
+	done
