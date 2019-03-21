@@ -491,7 +491,128 @@ Pokegear_UpdateClock: ; 90f86 (24:4f86)
 	text_jump UnknownText_0x1c5821
 	db "@"
 
+PrintTwoDigitNumberRightAlign: ; 90867 (24:4867)
+	push hl
+	ld a, " "
+	ld [hli], a
+	ld [hl], a
+	pop hl
+	lb bc, PRINTNUM_LEFTALIGN | 1, 2
+	jp PrintNum
+; 90874 (24:4874)
+
 ; 0x90fb4
+PrintHour: ; 90b3e (24:4b3e)
+	ld l, e
+	ld h, d
+	push bc
+	call GetTimeOfDayString
+	call PlaceString
+	ld l, c
+	ld h, b
+	inc hl
+	pop bc
+	call AdjustHourForAMorPM
+	ld [wd265], a
+	ld de, wd265
+	jp PrintTwoDigitNumberRightAlign
+
+GetTimeOfDayString: ; 90b58 (24:4b58)
+	ld a, c
+	cp MORN_HOUR
+	jr c, .nite
+	cp DAY_HOUR
+	jr c, .morn
+	cp NITE_HOUR
+	jr c, .day
+.nite
+	ld de, .NITE
+	ret
+.morn
+	ld de, .MORN
+	ret
+.day
+	ld de, .DAY
+	ret
+; 90b71 (24:4b71)
+
+.NITE: db "Nite@"
+.MORN: db "Morn@"
+.DAY: db "Day@"
+; 90b7f
+
+AdjustHourForAMorPM:
+; Convert the hour stored in c (0-23) to a 1-12 value
+	ld a, [wOptions2]
+	bit CLOCK_FORMAT, a
+	ld a, c
+	ret nz
+	or a
+	jr z, .midnight
+	cp 12
+	ret c
+	ret z
+	sub 12
+	ret
+
+.midnight
+	ld a, 12
+	ret
+
+PrintHoursMins ; 1dd6bb (77:56bb)
+; Hours in b, minutes in c
+	ld a, [wOptions2]
+	bit CLOCK_FORMAT, a
+	ld a, b
+	jr nz, .h24
+	cp 12
+	push af
+	jr c, .AM
+	jr z, .PM
+	sub 12
+	jr .PM
+.AM:
+	or a
+	jr nz, .PM
+	ld a, 12
+.PM:
+	ld b, a
+.h24:
+; Crazy stuff happening with the stack
+	push bc
+	ld hl, sp+$1
+	push de
+	push hl
+	pop de
+	pop hl
+	ld [hl], " "
+	lb bc, 1, 2
+	call PrintNum
+	ld [hl], ":"
+	inc hl
+	ld d, h
+	ld e, l
+	ld hl, sp+$0
+	push de
+	push hl
+	pop de
+	pop hl
+	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
+	call PrintNum
+	pop bc
+	ld a, [wOptions2]
+	bit CLOCK_FORMAT, a
+	ret nz
+	ld de, .String_AM
+	pop af
+	jr c, .place_am_pm
+	ld de, .String_PM
+.place_am_pm
+	inc hl
+	jp PlaceString
+
+.String_AM: db "AM@" ; 1dd6fc
+.String_PM: db "PM@" ; 1dd6ff
 
 PokegearMap_CheckRegion: ; 90fb4 (24:4fb4)
 	ld a, [wPokegearMapPlayerIconLandmark]
