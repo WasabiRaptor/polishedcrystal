@@ -383,11 +383,6 @@ Continue: ; 5d65
 	jp CloseWindow
 
 .Check1Pass:
-	call Continue_CheckRTC_RestartClock
-	jr nc, .Check2Pass
-	jp CloseWindow
-
-.Check2Pass:
 	call Continue_CheckEGO_ResetInitialOptions
 ;	jr nc, .Check3Pass
 ;	jp CloseWindow
@@ -405,7 +400,6 @@ Continue: ; 5d65
 	ld c, 20
 	call DelayFrames
 	farcall JumpRoamMons
-	farcall Function140ae ; time-related
 	ld a, [wSpawnAfterChampion]
 	cp SPAWN_LANCE
 	jr z, .SpawnAfterE4
@@ -446,21 +440,6 @@ ConfirmContinue: ; 5e34
 	ret
 ; 5e48
 
-Continue_CheckRTC_RestartClock: ; 5e48
-	call CheckRTCStatus
-	and %10000000 ; Day count exceeded 16383
-	jr z, .pass
-	farcall RestartClock
-	ld a, c
-	and a
-	jr z, .pass
-	scf
-	ret
-
-.pass
-	xor a
-	ret
-; 5e5d
 
 Continue_CheckEGO_ResetInitialOptions:
 	ld a, [wInitialOptions]
@@ -493,13 +472,6 @@ FinishContinueFunction: ; 5e5d
 ; 5e85
 
 DisplaySaveInfoOnContinue: ; 5e85
-	call CheckRTCStatus
-	and %10000000
-	jr z, .clock_ok
-	lb de, 4, 8
-	jr DisplayContinueDataWithRTCError
-
-.clock_ok
 	lb de, 4, 8
 	jr DisplayNormalContinueData
 ; 5e9a
@@ -517,12 +489,6 @@ DisplayNormalContinueData: ; 5e9f
 	jp UpdateSprites
 ; 5eaf
 
-DisplayContinueDataWithRTCError: ; 5eaf
-	call Continue_LoadMenuHeader
-	call Continue_DisplayBadgesDexPlayerName
-	call Continue_UnknownGameTime
-	call LoadFontsExtra
-	jp UpdateSprites
 ; 5ebf
 
 Continue_LoadMenuHeader: ; 5ebf
@@ -656,7 +622,6 @@ Continue_DisplayGameTime: ; 5f84
 ; 5f99
 
 ProfElmSpeech: ; 0x5f99
-	farcall InitClock
 	ld c, 31
 	call FadeToBlack
 	call ClearTileMap

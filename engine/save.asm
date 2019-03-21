@@ -39,7 +39,6 @@ SaveAfterLinkTrade: ; 14a58
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
 	farcall BackupPartyMonMail
-	farcall SaveRTC
 	jp ClearWRAMStateAfterSave
 ; 14a83
 
@@ -113,7 +112,6 @@ MovePkmnWOMail_InsertMon_SaveGame: ; 14ad5
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
 	farcall BackupPartyMonMail
-	farcall SaveRTC
 	call LoadBox
 	call ClearWRAMStateAfterSave
 	ld de, SFX_SAVE
@@ -138,6 +136,11 @@ StartMovePkmnWOMail_SaveGame: ; 14b34
 	scf
 	ret
 ; 14b54
+
+SaveAndReset:
+	call SetWRAMStateForSave
+	call SavedTheGame
+	jp SoftReset
 
 SetWRAMStateForSave: ; 14b54
 	ld a, $1
@@ -246,7 +249,6 @@ SaveGameData:: ; 14c10
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
 	farcall BackupPartyMonMail
-	farcall SaveRTC
 	ld a, BANK(sBattleTowerChallengeState)
 	call GetSRAMBank
 	ld a, [sBattleTowerChallengeState]
@@ -515,7 +517,7 @@ TryLoadSaveData: ; 14f1c
 	ld de, wOptions1
 	ld bc, wOptionsEnd - wOptions1
 	rst CopyBytes
-	jp PanicResetClock
+	ret
 ; 14f7c
 
 INCLUDE "data/default_options.asm"

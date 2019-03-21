@@ -370,7 +370,6 @@ INCLUDE "engine/mapgroup_roofs.asm"
 
 SECTION "Code 5", ROMX
 
-INCLUDE "engine/rtc.asm"
 INCLUDE "engine/overworld.asm"
 INCLUDE "engine/tile_events.asm"
 INCLUDE "engine/save.asm"
@@ -387,7 +386,6 @@ INCLUDE "engine/breeding.asm"
 
 SECTION "Code 6", ROMX
 
-INCLUDE "engine/clock_reset.asm"
 
 
 SECTION "Effect Command Pointers", ROMX
@@ -4089,7 +4087,6 @@ INCLUDE "data/pokemon/menu_icons.asm"
 SECTION "Code 18", ROMX
 
 INCLUDE "engine/phone.asm"
-INCLUDE "engine/timeset.asm"
 INCLUDE "engine/pokegear.asm"
 INCLUDE "engine/events/fish.asm"
 INCLUDE "engine/slot_machine.asm"

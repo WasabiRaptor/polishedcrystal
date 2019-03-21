@@ -39,7 +39,6 @@ SpecialsPointers::
 	add_special Special_MagnetTrain
 	add_special SpecialNameRival
 	add_special SpecialTrendyPhrase
-	add_special Special_SetDayOfWeek
 	add_special Special_TownMap
 	add_special MapRadio
 	add_special Special_UnownPuzzle
@@ -125,8 +124,6 @@ SpecialsPointers::
 	add_special Special_SetPlayerPalette
 	add_special AskRememberPassword
 	add_special LoadMapPalettes
-	add_special Special_InitialSetDSTFlag
-	add_special Special_InitialClearDSTFlag
 
 ; Battle Tower
 	add_special Special_BattleTower_FindChallengeLevel
