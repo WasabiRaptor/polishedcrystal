@@ -96,8 +96,12 @@ StringOptions2:
 	db "        :<LNBRK>"
 	db "Typeface<LNBRK>"
 	db "        :<LNBRK>"
+if !DEF(DEBUG)
+	db "        <LNBRK>"
+else
 	db "Brass Debug<LNBRK>"
-	db "<LNBRK>"
+endc
+	db "        <LNBRK>"
 	db "Previous<LNBRK>"
 	db "        <LNBRK>"
 	db "Done@"
@@ -105,18 +109,18 @@ StringOptions2:
 StringOptionsDebug:
 	db "Time Speed<LNBRK>"
 	db "        :<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
-	db "<LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
+	db "        <LNBRK>"
 	db "Back<LNBRK>"
-	db "<LNBRK>"
+	db "        <LNBRK>"
 	db "Done@"
 
 GetOptionPointer: ; e42d6
@@ -128,6 +132,15 @@ GetOptionPointer: ; e42d6
 	ld a, $8
 	add e
 	ld e, a
+if DEF(DEBUG)
+	ld a, [wCurrentOptionsPage]
+	cp 1
+	jr z, .page2
+	ld a, $8
+	add e
+	ld e, a
+.page2
+endc
 .page1
 	ld d, 0
 	ld hl, .Pointers
@@ -669,55 +682,35 @@ Options_Debug:
 	ret
 
 Options_TimeSpeed:
-	ld hl, wDebugOptions
-	ld a, [hl]
+	ld a, [wDebugOptions]
 	and TIMESPEED_MASK
 	ld c, a
-	ld b, 0
 	ldh a, [hJoyPressed]
+	dec c
 	bit D_LEFT_F, a
-	jr nz, .LeftPressed
+	jr nz, .ok
+	inc c
 	bit D_RIGHT_F, a
 	jr z, .NonePressed
-	ld a, c
-	cp DOUBLE_SPEED
-	jr c, .Increase
-	ld c, NO_SPEED +- 1
-
-.Increase:
 	inc c
-	jr .Save
-
-.LeftPressed:
+.ok
 	ld a, c
-	and a
-	jr nz, .Decrease
-	ld c, DOUBLE_SPEED + 1
-
-.Decrease:
-	dec c
-
-.Save:
-	push hl
-	push bc
-	call .NonePressed
-	pop bc
-	pop hl
-	ld a, [hl]
-	and $ff - TIMESPEED_MASK
+	and TIMESPEED_MASK
+	ld c, a
+	ld a, [wDebugOptions]
+	and $fc
 	or c
-	ld [hl], a
-	call .NonePressed
-	
+	ld [wDebugOptions], a
+
 .NonePressed:
 	ld b, 0
-	ld hl, Strings
+	ld hl, .Strings
 	add hl, bc
 	add hl, bc
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	hlcoord 11, 11
+	hlcoord 11, 3
 	call PlaceString
 	and a
 	ret
@@ -729,9 +722,9 @@ Options_TimeSpeed:
 	dw .Double
 
 .None:
-	db "None@"
+	db "None  @"
 .Half:
-	db "Half@"
+	db "Half  @"
 .Normal:
 	db "Normal@"
 .Double
@@ -796,11 +789,21 @@ OptionsControl: ; e452a
 .DownPressed:
 	ld a, [hl] ; load the cursor position to a
 
+if !DEF(DEBUG)
 	cp $4
 	jr nz, .DownOK
 	ld a, [wCurrentOptionsPage]
 	and a
 	jr z, .DownOK
+else
+	cp $0
+	jr nz, .DownOK
+	ld a, [wCurrentOptionsPage]
+	and a
+	jr z, .DownOK
+	cp $1
+	jr z, .DownOK
+endc
 	ld [hl], $6 ; skip missing options on page 2
 	scf
 	ret
@@ -823,7 +826,15 @@ OptionsControl: ; e452a
 	and a
 	ld a, [hl]
 	jr z, .UpOK
+if DEF(DEBUG)
+	ld a, [wCurrentOptionsPage]
+	cp 1
+	ld a, [hl]
+	jr z, .UpOK
+	ld [hl], $0 ; skip missing options on debug page
+else
 	ld [hl], $4 ; skip missing options on page 2
+endc
 	scf
 	ret
 .UpOK

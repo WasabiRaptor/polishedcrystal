@@ -1120,7 +1120,7 @@ wOptions2::
 
 wDebugOptions::
 ; bit 0-1: time speed
-;   0 none; 1 normal; 2 double; 3 half
+;   0 none; 1 half; 2 normal; 3 double
 	ds 1
 
 wInitialOptions::
