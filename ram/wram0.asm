@@ -1121,6 +1121,7 @@ wOptions2::
 wDebugOptions::
 ; bit 0-1: time speed
 ;   0 none; 1 half; 2 normal; 3 double
+; bit 2: half speed tick
 	ds 1
 
 wInitialOptions::

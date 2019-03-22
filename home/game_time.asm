@@ -70,8 +70,40 @@ UpdateGameTimer:: ; 20ad
 ; the game timer has increased by 1 second; increase the "fake" RTC by 6 seconds
 ; (24 in-game hours will pass in 4 real-world hours)
 ; this does not affect the rate of the "hours played", which remains real-time
-
+if DEF(DEBUG)
+	ld a, [wDebugOptions]
+	ld b, a
+	and TIMESPEED_MASK
+	cp NO_SPEED
+	jr z, .done					; if NO_SPEED, finish
+	cp HALF_SPEED
+	jr nz, .not_half_speed		; if not HALF_SPEED, move on
+	bit 2, b					; check whether half speed should tick
+	jr z, .half_speed_no_tick	; if not, set it to tick next time
+	res 2, b					; set tick check to 0
+	push af
+	ld a, b
+	ld [wDebugOptions], a
+	pop af
+.not_half_speed
+	push af
+	push bc
 	call UpdateNoRTC
+	pop af
+	pop bc
+	cp DOUBLE_SPEED
+	jr nz, .done				; if not DOUBLE_SPEED, finish
+;.double_speed
+	call UpdateNoRTC			; tick a second time, if DOUBLE_SPEED
+	jr .done
+.half_speed_no_tick
+	set 2, b
+	ld a, b
+	ld [wDebugOptions], a
+.done
+else
+	call UpdateNoRTC
+endc
 
 ; +1 second
 	ld hl, wGameTimeSeconds
