@@ -2,6 +2,8 @@ INCLUDE "engine/vary_colors.asm"
 
 INCLUDE "engine/cgb.asm"
 
+INCLUDE "engine/sgb_border.asm"
+
 CheckShininess:
 ; Check if a mon is shiny by personality at bc.
 ; Return carry if shiny.
@@ -436,184 +438,7 @@ InitPokegearPalettes:
 	ld a, $5
 	jp FarCopyWRAM
 
-GetBattlemonBackpicPalettePointer:
-	push de
-	farcall GetPartyMonPersonality
-	ld c, l
-	ld b, h
-	ld a, [wTempBattleMonSpecies]
-	call GetPlayerOrMonPalettePointer
-	pop de
-	ret
-
-GetEnemyFrontpicPalettePointer:
-	ld a, [wTempEnemyMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wBattleMode]
-	cp 2
-	jr nz, .not_armored_mewtwo
-	ld a, [wOtherTrainerClass]
-	cp GIOVANNI
-	jr nz, .not_armored_mewtwo
-	ld hl, MewtwoArmoredPalette
-	ret
-.not_armored_mewtwo
-	push de
-	farcall GetEnemyMonPersonality
-	ld c, l
-	ld b, h
-	ld a, [wTempEnemyMonSpecies]
-	call GetFrontpicPalettePointer
-	pop de
-	ret
-
-GetPlayerOrMonPalettePointer:
-	and a
-	jr nz, GetMonNormalOrShinyPalettePointer
-	ld a, [wPlayerSpriteSetupFlags]
-	bit 2, a ; transformed to male
-	jr nz, .male
-	ld a, [wPlayerGender]
-	and a
-	jr z, .male
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .lyra
-	ld hl, KrisPalette
-	ret
-
-.male
-	ld hl, wPlayerPalette
-	ret
-
-.lyra
-	ld hl, Lyra1Palette
-	ret
-
-GetFrontpicPalettePointer:
-	and a
-	jr nz, GetMonNormalOrShinyPalettePointer
-	ld a, [wTrainerClass]
-
-GetTrainerPalettePointer:
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	ld bc, TrainerPalettes
-	add hl, bc
-	ret
-
-GetPaintingPalettePointer:
-	ld l, a
-	ld h, 0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld bc, PaintingPalettes
-	add hl, bc
-	ret
-
-GetMonPalettePointer:
-	push af
-	cp GYARADOS
-	jr nz, .continue
-
-	inc bc ; Form is in the byte after Shiny
-	ld a, [bc]
-	dec bc
-	and FORM_MASK
-	cp GYARADOS_RED_FORM
-	jr nz, .continue
-	ld hl, RedGyaradosPalette
-	pop af
-	ret
-
-.continue
-	pop af
-	ld l, a
-	ld h, $0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld bc, PokemonPalettes
-	add hl, bc
-	ret
-
-GetMonNormalOrShinyPalettePointer:
-	push bc
-	call GetMonPalettePointer
-	pop bc
-	push hl
-	call CheckShininess
-	pop hl
-	ret nc
-rept 4
-	inc hl
-endr
-	ret
-
-LoadPokemonPalette:
-	; a = species
-	ld a, [wCurPartySpecies]
-	; hl = palette
-	call GetMonPalettePointer
-	; load palette in BG 7
-	ld a, $5
-	ld de, wUnknBGPals palette 7 + 2
-	ld bc, 4
-	jp FarCopyWRAM
-
-LoadPartyMonPalette:
-	; bc = personality
-	ld hl, wPartyMon1Personality
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	ld c, l
-	ld b, h
-	; a = species
-	ld a, [wCurPartySpecies]
-	; hl = palette
-	call GetMonNormalOrShinyPalettePointer
-	; load palette in BG 7
-	ld a, $5
-	ld de, wUnknBGPals palette PAL_BG_TEXT + 2
-	ld bc, 4
-	call FarCopyWRAM
-	; hl = DVs
-	ld hl, wPartyMon1DVs
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	; b = species
-	ld a, [wCurPartySpecies]
-	ld b, a
-	; vary colors by DVs
-	call CopyDVsToColorVaryDVs
-	ld hl, wUnknBGPals palette PAL_BG_TEXT + 2
-	jp VaryColorsByDVs
-
-LoadTrainerPalette:
-	; a = class
-	ld a, [wTrainerClass]
-	; hl = palette
-	call GetTrainerPalettePointer
-	; load palette in BG 7
-	ld a, $5
-	ld de, wUnknBGPals palette PAL_BG_TEXT + 2
-	ld bc, 4
-	jp FarCopyWRAM
-
-LoadPaintingPalette:
-	; a = class
-	ld a, [wTrainerClass]
-	; hl = palette
-	call GetPaintingPalettePointer
-	; load palette in BG 7
-	ld a, $5
-	ld de, wUnknBGPals palette PAL_BG_TEXT
-	ld bc, 8
-	jp FarCopyWRAM
+INCLUDE "engine/palettes.asm"
 
 InitCGBPals::
 	ld a, $1
@@ -837,48 +662,216 @@ endr
 INCLUDE "data/maps/environment_colors.asm"
 
 TilesetBGPalette:
-if DEF(HGSS)
-INCLUDE "gfx/tilesets/palettes/hgss/bg.pal"
-elif DEF(MONOCHROME)
-INCLUDE "gfx/tilesets/palettes/monochrome/bg.pal"
-else
 INCLUDE "gfx/tilesets/bg_tiles.pal"
-endc
+
 
 MapObjectPals:
-if DEF(HGSS)
-INCLUDE "gfx/tilesets/palettes/hgss/ob.pal"
-elif DEF(MONOCHROME)
-INCLUDE "gfx/tilesets/palettes/monochrome/ob.pal"
-else
 INCLUDE "gfx/overworld/npc_sprites.pal"
-endc
+
 
 RoofPals:
-if DEF(HGSS)
-INCLUDE "gfx/tilesets/palettes/hgss/roof.pal"
-elif DEF(MONOCHROME)
-INCLUDE "gfx/tilesets/palettes/monochrome/roof.pal"
-else
 INCLUDE "gfx/tilesets/roofs.pal"
-endc
+
 
 OvercastRoofPals:
-if DEF(HGSS)
-INCLUDE "gfx/tilesets/palettes/hgss/roof_overcast.pal"
-elif DEF(MONOCHROME)
-INCLUDE "gfx/tilesets/palettes/monochrome/roof_overcast.pal"
-else
 INCLUDE "gfx/tilesets/roofs_overcast.pal"
-endc
 
+GetBattlemonBackpicPalettePointer:
+	push de
+	farcall GetPartyMonPersonality
+	ld c, l
+	ld b, h
+	ld a, [wTempBattleMonSpecies]
+	call GetPlayerOrMonPalettePointer
+	pop de
+	ret
 
-INCLUDE "data/pokemon/palettes.asm"
+GetEnemyFrontpicPalettePointer:
+	ld a, [wTempEnemyMonSpecies]
+	;cp MEWTWO
+	;jr nz, .not_armored_mewtwo
+	;ld a, [wBattleMode]
+	;cp 2
+	;jr nz, .not_armored_mewtwo
+	;ld a, [wOtherTrainerClass]
+	;cp GIOVANNI
+	;jr nz, .not_armored_mewtwo
+	;ld hl, MewtwoArmoredPalette
+	;ret
+.not_armored_mewtwo
+	push de
+	farcall GetEnemyMonPersonality
+	ld c, l
+	ld b, h
+	ld a, [wTempEnemyMonSpecies]
+	call GetFrontpicPalettePointer
+	pop de
+	ret
+
+GetPlayerOrMonPalettePointer:
+	and a
+	jp nz, GetMonNormalOrShinyPalettePointer
+	ld a, [wPlayerSpriteSetupFlags]
+	bit 2, a ; transformed to male
+	jr nz, .male
+	ld a, [wPlayerGender]
+	and a
+	jr z, .male
+	ld a, [wBattleType]
+	cp BATTLETYPE_TUTORIAL
+	jr z, .lyra
+	ld hl, KrisPalette
+	ret
+
+.male
+	ld hl, wPlayerPalette
+	ret
+
+.lyra
+	ld hl, Lyra1Palette
+	ret
+
+GetFrontpicPalettePointer:
+	and a
+	jp nz, GetMonNormalOrShinyPalettePointer
+	ld a, [wTrainerClass]
+
+GetTrainerPalettePointer:
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	ld bc, TrainerPalettes
+	add hl, bc
+	ret
 
 INCLUDE "data/trainers/palettes.asm"
 
+GetPaintingPalettePointer:
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld bc, PaintingPalettes
+	add hl, bc
+	ret
+
 INCLUDE "data/events/paintings/palettes.asm"
 
-INCLUDE "engine/palettes.asm"
+LoadTrainerPalette:
+	; a = class
+	ld a, [wTrainerClass]
+	; hl = palette
+	call GetTrainerPalettePointer
+	; load palette in BG 7
+	ld a, $5
+	ld de, wUnknBGPals palette PAL_BG_TEXT + 2
+	ld bc, 4
+	jp FarCopyWRAM
 
-INCLUDE "engine/sgb_border.asm"
+LoadPaintingPalette:
+	; a = class
+	ld a, [wTrainerClass]
+	; hl = palette
+	call GetPaintingPalettePointer
+	; load palette in BG 7
+	ld a, $5
+	ld de, wUnknBGPals palette PAL_BG_TEXT
+	ld bc, 8
+	jp FarCopyWRAM
+
+GetMonPalettePointer:
+	push de
+	call GetRelevantPallete
+	pop de 
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
+	dec a
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	ld bc, PokemonPalettes
+	add hl, bc
+	ret
+
+GetMonNormalOrShinyPalettePointer:
+	push bc
+	call GetMonPalettePointer
+	pop bc
+	push hl
+	call CheckShininess
+	pop hl
+	ret nc
+rept 4
+	inc hl
+endr
+	ret
+
+
+LoadPokemonPalette:
+	; a = species
+	ld a, [wCurPartySpecies]
+	; hl = palette
+	call GetMonPalettePointer
+	; load palette in BG 7
+	ld a, $5
+	ld de, wUnknBGPals palette 7 + 2
+	ld bc, 4
+	jp FarCopyWRAM
+
+LoadPartyMonPalette:
+	; bc = personality
+	ld hl, wPartyMon1Personality
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	ld c, l
+	ld b, h
+	; a = species
+	ld a, [wCurPartySpecies]
+	; hl = palette
+	call GetMonNormalOrShinyPalettePointer
+	; load palette in BG 7
+	ld a, $5
+	ld de, wUnknBGPals palette PAL_BG_TEXT + 2
+	ld bc, 4
+	call FarCopyWRAM
+	; hl = DVs
+	ld hl, wPartyMon1DVs
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	; b = species
+	ld a, [wCurPartySpecies]
+	ld b, a
+	; vary colors by DVs
+	call CopyDVsToColorVaryDVs
+	ld hl, wUnknBGPals palette PAL_BG_TEXT + 2
+	jp VaryColorsByDVs
+
+GetRelevantPallete:
+; given species in a, return *Palette in bc
+	ld hl, VariantPaletteTable
+	ld de, 4
+	call IsInArray
+	ld d, c
+	inc hl
+	inc hl
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+	ld a, d
+	ret
+
+INCLUDE "data/pokemon/variant_palette_table.asm"
+
+INCLUDE "data/pokemon/variant_palettes.asm"
+
+INCLUDE "data/pokemon/palettes.asm"
+
+
+
+
+

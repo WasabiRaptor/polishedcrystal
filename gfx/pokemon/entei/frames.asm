@@ -16,4 +16,3 @@
 .frame4
 	db $03 ; bitmask
 	db $52, $53
-; 0xd96ff

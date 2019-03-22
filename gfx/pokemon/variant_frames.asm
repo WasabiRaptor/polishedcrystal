@@ -1,4 +1,53 @@
-UnownsFrames:
+LycanrocFrames: INCLUDE "gfx/pokemon/lycanroc_midday/frames.asm"
+Lycanroc_DuskFrames: INCLUDE "gfx/pokemon/lycanroc_dusk/frames.asm"
+Lycanroc_MidnightFrames: INCLUDE "gfx/pokemon/lycanroc_midnight/frames.asm"
+Lycanroc_DawnFrames: INCLUDE "gfx/pokemon/lycanroc_dawn/frames.asm"
+
+MeowthFrames: INCLUDE "gfx/pokemon/meowth/frames.asm"
+Meowth_AlolaFrames: INCLUDE "gfx/pokemon/meowth_alola/frames.asm"
+
+PersianFrames: INCLUDE "gfx/pokemon/persian/frames.asm"
+Persian_AlolaFrames: INCLUDE "gfx/pokemon/persian_alola/frames.asm"
+
+RotomFrames: INCLUDE "gfx/pokemon/rotom/frames.asm"
+Rotom_FanFrames: INCLUDE "gfx/pokemon/rotom_fan/frames.asm"
+Rotom_FrostFrames: INCLUDE "gfx/pokemon/rotom_frost/frames.asm"
+Rotom_HeatFrames: INCLUDE "gfx/pokemon/rotom_heat/frames.asm"
+Rotom_MowFrames: INCLUDE "gfx/pokemon/rotom_mow/frames.asm"
+Rotom_WashFrames: INCLUDE "gfx/pokemon/rotom_wash/frames.asm"
+
+Meowstic_MFrames: INCLUDE "gfx/pokemon/meowstic_m/frames.asm"
+Meowstic_FFrames: INCLUDE "gfx/pokemon/meowstic_f/frames.asm"
+
+GrimerFrames: INCLUDE "gfx/pokemon/grimer/frames.asm"
+Grimer_AlolaFrames: INCLUDE "gfx/pokemon/grimer_alola/frames.asm"
+
+MukFrames: INCLUDE "gfx/pokemon/vulpix/frames.asm"
+Muk_AlolaFrames: INCLUDE "gfx/pokemon/vulpix_alola/frames.asm"
+
+Nidoran_MFrames: INCLUDE "gfx/pokemon/nidoran_m/frames.asm"
+Nidoran_FFrames: INCLUDE "gfx/pokemon/nidoran_f/frames.asm"
+
+SandshrewFrames: INCLUDE "gfx/pokemon/sandshrew/frames.asm"
+Sandshrew_AlolaFrames: INCLUDE "gfx/pokemon/sandshrew_alola/frames.asm"
+
+SandslashFrames: INCLUDE "gfx/pokemon/sandslash/frames.asm"
+Sandslash_AlolaFrames: INCLUDE "gfx/pokemon/sandslash_alola/frames.asm"
+
+SawsbuckFrames: INCLUDE "gfx/pokemon/sawsbuck/frames.asm"
+Sawsbuck_SummerFrames: INCLUDE "gfx/pokemon/sawsbuck_summer/frames.asm"
+Sawsbuck_FallFrames: INCLUDE "gfx/pokemon/sawsbuck_fall/frames.asm"
+Sawsbuck_WinterFrames: INCLUDE "gfx/pokemon/sawsbuck_winter/frames.asm"
+
+GirafarigFrames: INCLUDE "gfx/pokemon/girafarig/frames.asm"
+Girafarig_BetaFrames: INCLUDE "gfx/pokemon/girafarig_beta/frames.asm"
+
+VulpixFrames: INCLUDE "gfx/pokemon/vulpix/frames.asm"
+Vulpix_AlolaFrames: INCLUDE "gfx/pokemon/vulpix_alola/frames.asm"
+
+NinetalesFrames: INCLUDE "gfx/pokemon/ninetales/frames.asm"
+Ninetales_AlolaFrames: INCLUDE "gfx/pokemon/ninetales_alola/frames.asm"
+
 UnownAFrames: INCLUDE "gfx/pokemon/unown_a/frames.asm"
 UnownBFrames: INCLUDE "gfx/pokemon/unown_b/frames.asm"
 UnownCFrames: INCLUDE "gfx/pokemon/unown_c/frames.asm"
@@ -25,47 +74,22 @@ UnownWFrames: INCLUDE "gfx/pokemon/unown_w/frames.asm"
 UnownXFrames: INCLUDE "gfx/pokemon/unown_x/frames.asm"
 UnownYFrames: INCLUDE "gfx/pokemon/unown_y/frames.asm"
 UnownZFrames: INCLUDE "gfx/pokemon/unown_z/frames.asm"
-UnownExclamationFrames: INCLUDE "gfx/pokemon/unown_exclamation/frames.asm"
-UnownQuestionFrames:    INCLUDE "gfx/pokemon/unown_question/frames.asm"
 
-PikachusFrames:
-PikachuPlainFrames:  INCLUDE "gfx/pokemon/pikachu_plain/frames.asm"
-PikachuFlyFrames:    INCLUDE "gfx/pokemon/pikachu_fly/frames.asm"
-PikachuSurfFrames:   INCLUDE "gfx/pokemon/pikachu_surf/frames.asm"
-PikachuPikaFrames:   INCLUDE "gfx/pokemon/pikachu_pika/frames.asm"
-PikachuChuchuFrames: INCLUDE "gfx/pokemon/pikachu_chuchu/frames.asm"
+AegislashFrames: INCLUDE "gfx/pokemon/aegislash/frames.asm"
+Aegislash_BladeFrames: INCLUDE "gfx/pokemon/aegislash_blade/frames.asm"
 
-PichusFrames:
-PichuPlainFrames: INCLUDE "gfx/pokemon/pichu_plain/frames.asm"
-PichuSpikyFrames: INCLUDE "gfx/pokemon/pichu_spiky/frames.asm"
+SuicuneFrames: INCLUDE "gfx/pokemon/suicune/frames.asm"
+Suicune_BetaFrames: INCLUDE "gfx/pokemon/suicune_beta/frames.asm"
 
-ArboksFrames:
-ArbokJohtoFrames:  INCLUDE "gfx/pokemon/arbok_johto/frames.asm"
-ArbokKantoFrames:  INCLUDE "gfx/pokemon/arbok_kanto/frames.asm"
-ArbokKogaFrames:   INCLUDE "gfx/pokemon/arbok_koga/frames.asm"
-ArbokAgathaFrames: INCLUDE "gfx/pokemon/arbok_agatha/frames.asm"
-ArbokArianaFrames: INCLUDE "gfx/pokemon/arbok_ariana/frames.asm"
+RaikouFrames: INCLUDE "gfx/pokemon/raikou/frames.asm"
+Raikou_BetaFrames: INCLUDE "gfx/pokemon/raikou_beta/frames.asm"
 
-MagikarpsFrames:
-MagikarpPlainFrames:    INCLUDE "gfx/pokemon/magikarp_plain/frames.asm"
-MagikarpSkellyFrames:   INCLUDE "gfx/pokemon/magikarp_skelly/frames.asm"
-MagikarpCalico1Frames:  INCLUDE "gfx/pokemon/magikarp_calico1/frames.asm"
-MagikarpCalico2Frames:  INCLUDE "gfx/pokemon/magikarp_calico2/frames.asm"
-MagikarpCalico3Frames:  INCLUDE "gfx/pokemon/magikarp_calico3/frames.asm"
-MagikarpTwoToneFrames:  INCLUDE "gfx/pokemon/magikarp_twotone/frames.asm"
-MagikarpOrcaFrames:     INCLUDE "gfx/pokemon/magikarp_orca/frames.asm"
-MagikarpDapplesFrames:  INCLUDE "gfx/pokemon/magikarp_dapples/frames.asm"
-MagikarpTigerFrames:    INCLUDE "gfx/pokemon/magikarp_tiger/frames.asm"
-MagikarpZebraFrames:    INCLUDE "gfx/pokemon/magikarp_zebra/frames.asm"
-MagikarpStripeFrames:   INCLUDE "gfx/pokemon/magikarp_stripe/frames.asm"
-MagikarpBubblesFrames:  INCLUDE "gfx/pokemon/magikarp_bubbles/frames.asm"
-MagikarpForeheadFrames: INCLUDE "gfx/pokemon/magikarp_forehead/frames.asm"
-MagikarpMaskFrames:     INCLUDE "gfx/pokemon/magikarp_mask/frames.asm"
+EnteiFrames: INCLUDE "gfx/pokemon/entei/frames.asm"
+Entei_BetaFrames: INCLUDE "gfx/pokemon/entei_beta/frames.asm"
 
-GyaradossFrames:
-GyaradosPlainFrames: INCLUDE "gfx/pokemon/gyarados_plain/frames.asm"
-GyaradosRedFrames:   INCLUDE "gfx/pokemon/gyarados_red/frames.asm"
+ShayminFrames: INCLUDE "gfx/pokemon/shaymin/frames.asm"
+Shaymin_SkyFrames: INCLUDE "gfx/pokemon/shaymin_sky/frames.asm"
 
-MewtwosFrames:
-MewtwoPlainFrames:   INCLUDE "gfx/pokemon/mewtwo_plain/frames.asm"
-MewtwoArmoredFrames: INCLUDE "gfx/pokemon/mewtwo_armored/frames.asm"
+Zygarde_Ten_PercentFrames: INCLUDE "gfx/pokemon/zygarde_ten_percent/frames.asm"
+ZygardeFrames: INCLUDE "gfx/pokemon/zygarde_fifty_percent/frames.asm"
+Zygarde_CompleteFrames: INCLUDE "gfx/pokemon/zygarde_complete/frames.asm"

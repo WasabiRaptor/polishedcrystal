@@ -16,4 +16,3 @@
 .frame4
 	db $03 ; bitmask
 	db $35
-; 0xd910b

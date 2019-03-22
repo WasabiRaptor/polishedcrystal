@@ -1,3 +1,67 @@
+LycanrocAnimationPointers:
+	dw LycanrocAnimation
+	dw Lycanroc_DuskAnimation
+	dw Lycanroc_MidnightAnimation
+	dw Lycanroc_DawnAnimation
+
+MeowthAnimationPointers:
+	dw MeowthAnimation
+	dw Meowth_AlolaAnimation
+
+PersianAnimationPointers:
+	dw PersianAnimation
+	dw Persian_AlolaAnimation
+
+RotomAnimationPointers:
+	dw RotomAnimation
+	dw Rotom_FanAnimation
+	dw Rotom_FrostAnimation
+	dw Rotom_HeatAnimation
+	dw Rotom_MowAnimation
+	dw Rotom_WashAnimation
+
+MeowsticAnimationPointers:
+	dw Meowstic_MAnimation
+	dw Meowstic_FAnimation
+
+GrimerAnimationPointers:
+	dw GrimerAnimation
+	dw Grimer_AlolaAnimation
+
+MukAnimationPointers:
+	dw MukAnimation
+	dw Muk_AlolaAnimation
+
+NidoranAnimationPointers:
+	dw Nidoran_MAnimation
+	dw Nidoran_FAnimation
+
+SandshrewAnimationPointers:
+	dw SandshrewAnimation
+	dw Sandshrew_AlolaAnimation
+
+SandslashAnimationPointers:
+	dw SandslashAnimation
+	dw Sandslash_AlolaAnimation
+
+SawsbuckAnimationPointers:
+	dw SawsbuckAnimation
+	dw Sawsbuck_SummerAnimation
+	dw Sawsbuck_FallAnimation
+	dw Sawsbuck_WinterAnimation
+
+GirafarigAnimationPointers:
+	dw GirafarigAnimation
+	dw Girafarig_BetaAnimation
+
+VulpixAnimationPointers:
+	dw VulpixAnimation
+	dw Vulpix_AlolaAnimation
+
+NinetalesAnimationPointers:
+	dw NinetalesAnimation
+	dw Ninetales_AlolaAnimation
+
 UnownAnimationPointers:
 	dw UnownAAnimation
 	dw UnownBAnimation
@@ -25,49 +89,28 @@ UnownAnimationPointers:
 	dw UnownXAnimation
 	dw UnownYAnimation
 	dw UnownZAnimation
-	dw UnownExclamationAnimation
-	dw UnownQuestionAnimation
 
-PikachuAnimationPointers:
-	dw PikachuPlainAnimation
-	dw PikachuFlyAnimation
-	dw PikachuSurfAnimation
-	dw PikachuPikaAnimation
-	dw PikachuChuchuAnimation
+AegislashAnimationPointers
+	dw AegislashAnimation
+	dw Aegislash_BladeAnimation
 
-PichuAnimationPointers:
-	dw PichuPlainAnimation
-	dw PichuSpikyAnimation
+SuicuneAnimationPointers:
+	dw SuicuneAnimation
+	dw Suicune_BetaAnimation
 
-ArbokAnimationPointers:
-	dw ArbokJohtoAnimation
-	dw ArbokKantoAnimation
-	dw ArbokKogaAnimation
-	dw ArbokAgathaAnimation
-	dw ArbokArianaAnimation
+RaikouAnimationPointers:
+	dw RaikouAnimation
+	dw Raikou_BetaAnimation
 
-MagikarpAnimationPointers:
-	dw MagikarpPlainAnimation
-	dw MagikarpSkellyAnimation
-	dw MagikarpCalico1Animation
-	dw MagikarpCalico2Animation
-	dw MagikarpCalico3Animation
-	dw MagikarpTwoToneAnimation
-	dw MagikarpOrcaAnimation
-	dw MagikarpDapplesAnimation
-	dw MagikarpTigerAnimation
-	dw MagikarpZebraAnimation
-	dw MagikarpStripeAnimation
-	dw MagikarpBubblesAnimation
-	dw MagikarpForeheadAnimation
-	dw MagikarpMaskAnimation
+EnteiAnimationPointers:
+	dw EnteiAnimation
+	dw Entei_BetaAnimation
 
-GyaradosAnimationPointers:
-rept NUM_MAGIKARP
-	dw GyaradosPlainAnimation
-endr
-	dw GyaradosRedAnimation
+ShayminAnimationPointers:
+	dw ShayminAnimation
+	dw Shaymin_SkyAnimation
 
-MewtwoAnimationPointers:
-	dw MewtwoPlainAnimation
-	dw MewtwoArmoredAnimation
+ZygardeAnimationPointers:
+	dw Zygarde_Ten_PercentAnimation
+	dw ZygardeAnimation
+	dw Zygarde_CompleteAnimation
