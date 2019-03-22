@@ -1095,26 +1095,15 @@ BattleCommand_critical: ; 34631
 .Item:
 	ld c, 0
 
-	cp CHANSEY
-	jr nz, .Farfetchd
-	ld a, [hl]
-	cp LUCKY_PUNCH
-	jr nz, .FocusEnergy
+	;cp CHANSEY
+	;jr nz, .FocusEnergy
+	;ld a, [hl]
+	;cp LUCKY_PUNCH
+	;jr nz, .FocusEnergy
 
 ; +2 critical level
-	ld c, 2
-	jr .FocusEnergy
-
-.Farfetchd:
-	cp FARFETCH_D
-	jr nz, .FocusEnergy
-	ld a, [hl]
-	cp STICK
-	jr nz, .FocusEnergy
-
-; +2 critical level
-	ld c, 2
-	; fallthrough
+	;ld c, 2
+	;jr .FocusEnergy
 
 .FocusEnergy:
 	ld a, BATTLE_VARS_SUBSTATUS4
@@ -2256,23 +2245,12 @@ BattleCommand_hittargetnosub: ; 34f60
 	jr .fury_attack
 
 .fury_attack_users
-	db BEEDRILL
-	db NIDORAN_M
+	db NIDORAN
 	db NIDORINO
 	db NIDOKING
-	db FARFETCH_D
-	db DODUO
-	db DODRIO
-	db RHYHORN
-	db RHYDON
-	db RHYPERIOR
-	db PINSIR
-	db DUNSPARCE
 	db HERACROSS
 	db PILOSWINE
 	db MAMOSWINE
-	db SKARMORY
-	db DONPHAN
 	db -1
 
 ; 34fd1
@@ -2347,35 +2325,15 @@ StatUpDownAnim: ; 34feb
 	jp PlayFXAnimID
 
 .withdraw_users
-	db SQUIRTLE
-	db WARTORTLE
-	db BLASTOISE
-	db SLOWBRO
-	db SHELLDER
-	db CLOYSTER
-	db OMANYTE
-	db OMASTAR
+	db DWEBBLE
 	db -1
 
 .harden_users
-	db METAPOD
-	db KAKUNA
 	db GRIMER
 	db MUK
-	db ONIX
-	db STEELIX
-	db KRABBY
-	db KINGLER
-	db STARYU
-	db STARMIE
-	db KABUTO
-	db KABUTOPS
 	db HERACROSS
-	db GLIGAR
-	db GLISCOR
 	db SLUGMA
 	db MAGCARGO
-	db CORSOLA
 	db PUPITAR
 	db TYRANITAR
 	db -1
@@ -3600,17 +3558,13 @@ ThickClubOrLightBallBoost: ; 353b5
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
-	jr z, .checkpikachu
+	jr z, .PlayerTurn
 	ld a, [wTempEnemyMonSpecies]
-.checkpikachu:
+.PlayerTurn:
 	pop hl
-	cp PIKACHU
-	lb bc, PIKACHU, PIKACHU
-	ld d, LIGHT_BALL
-	jr z, .ok
-	lb bc, CUBONE, MAROWAK
-	ld d, THICK_CLUB
-.ok
+	cp 0 ;remove later
+	lb bc, 0, 0
+	ld d, 0
 	call SpeciesItemBoost
 	pop de
 	pop bc
@@ -3626,8 +3580,8 @@ LightBallBoost: ; 353c3
 ; holding a Light Ball, double it.
 	push bc
 	push de
-	lb bc, PIKACHU, PIKACHU
-	ld d, LIGHT_BALL
+	lb bc, 0, 0
+	ld d, 0
 	call SpeciesItemBoost
 	pop de
 	pop bc

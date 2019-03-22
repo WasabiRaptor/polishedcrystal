@@ -191,7 +191,11 @@ endc
 	ld bc, wColorVaryDVs
 
 	ld a, [wColorVarySpecies]
-	cp SMEARGLE
+	cp FLABEBE
+	jr z, .Smeargle
+	cp FLOETTE
+	jr z, .Smeargle
+	cp FLORGES
 	jr z, .Smeargle
 
 ;;; LiteRed ~ HPDV, aka, rrrrr ~ hhhh

@@ -1,85 +1,11 @@
 GetVariant: ; 51040
 	ld a, [wCurPartySpecies]
-	cp PIKACHU
-	jr z, .GetPikachuVariant
 	cp MEWTWO
 	jp z, .GetMewtwoVariant
 
 ; Return CurForm based on Form at hl
 	ld a, [hl]
 	and FORM_MASK
-	jr nz, .ok
-	ld a, [wCurPartySpecies]
-	cp ARBOK
-	jr nz, .not_kanto_arbok
-	push bc
-	push de
-	call RegionCheck
-	ld a, e
-	pop de
-	pop bc
-	and a
-	jr z, .not_kanto_arbok
-.kanto_arbok
-	ld a, ARBOK_KANTO_FORM
-	jr .ok
-.not_kanto_arbok
-	ld a, 1 ; safeguard: form 0 becomes variant 1
-.ok
-	ld [wCurForm], a
-	ret
-
-.GetPikachuVariant:
-; Return Pikachu form (1-5) in wCurForm
-; hl-8 is ...MonMove1
-; hl-7 is ...MonMove2
-; hl-6 is ...MonMove3
-; hl-5 is ...MonMove4
-; hl is ...MonForm
-
-	ld a, [hl]
-	and FORM_MASK
-	cp PIKACHU_RED_FORM
-	jr nc, .use_form
-
-	push bc
-	ld bc, wTempMonForm
-	ld a, b
-	cp h
-	jr nz, .nottemp1
-	ld a, c
-	cp l
-	jr nz, .nottemp1
-	; skip wTempMonID through wTempMonSdfEV
-	ld bc, -11
-	add hl, bc
-.nottemp1
-	ld bc, -8
-	add hl, bc
-	pop bc
-
-	ld a, PIKACHU_SURF_FORM
-	ld [wCurForm], a
-rept NUM_MOVES
-	ld a, [hli]
-	cp SURF
-	ret z
-endr
-
-rept NUM_MOVES
-	dec hl
-endr
-	ld a, PIKACHU_FLY_FORM
-	ld [wCurForm], a
-rept NUM_MOVES
-	ld a, [hli]
-	cp FLY
-	ret z
-endr
-
-.plain
-	ld a, PIKACHU_PLAIN_FORM
-.use_form
 	ld [wCurForm], a
 	ret
 

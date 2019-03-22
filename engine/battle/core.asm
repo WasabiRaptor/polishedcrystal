@@ -6894,7 +6894,7 @@ endr
 	; Unown
 	ld a, [wTempEnemyMonSpecies]
 	cp UNOWN
-	jr nz, .EkansArbok
+	jr nz, .Magikarp
 
 .unown_letter
 	ld a, NUM_UNOWN
@@ -6914,27 +6914,6 @@ endr
 	pop de
 	jr c, .unown_letter ; re-roll
 	jp .Happiness
-
-.EkansArbok:
-	ld a, [wTempEnemyMonSpecies]
-	cp EKANS
-	jr z, .yes_ekans
-	cp ARBOK
-	jr nz, .Magikarp
-
-.yes_ekans
-	call RegionCheck
-	ld a, e
-	ld d, ARBOK_JOHTO_FORM
-	and a
-	jr z, .johto_form
-	ld d, ARBOK_KANTO_FORM
-.johto_form
-	ld a, [wEnemyMonForm]
-	and $ff - FORM_MASK
-	add d
-	ld [wEnemyMonForm], a
-	jr .Happiness
 
 .Magikarp:
 	ld a, [wTempEnemyMonSpecies]

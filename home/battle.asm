@@ -390,8 +390,6 @@ UberMons::
 ; banned from Battle Tower
 	db MEWTWO
 	db MEW
-	db LUGIA
-	db HO_OH
 	db CELEBI
 	db -1
 
