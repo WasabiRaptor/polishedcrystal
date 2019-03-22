@@ -26,6 +26,12 @@ PYTHON := python
 pcm := $(PYTHON) extras/pokemontools/pcm.py pcm
 
 BUILD_DIR := build/
+DEBUG_BUILD_DIR := build-debug/
+
+ifeq ($(filter debug,$(MAKECMDGOALS)),debug)
+RGBASM_FLAGS += -DDEBUG
+BUILD_DIR := $(DEBUG_BUILD_DIR)
+endif
 
 brass_obj := \
 $(BUILD_DIR)main.o \
@@ -44,10 +50,6 @@ $(BUILD_DIR)engine/events.o \
 $(BUILD_DIR)gfx/pics.o \
 $(BUILD_DIR)gfx/sprites.o \
 
-ifeq ($(filter debug,$(MAKECMDGOALS)),debug)
-RGBASM_FLAGS += -DDEBUG
-endif
-
 ### Build targets
 
 .SUFFIXES:
@@ -62,7 +64,7 @@ brass: ROM_NAME = $(NAME)-$(VERSION)
 brass: $(NAME)-$(VERSION).gbc
 
 clean:
-	$(RM) $(crystal_obj) $(wildcard $(BUILD_DIR)$(NAME)-*.gbc) $(wildcard $(BUILD_DIR)$(NAME)-*.map) $(wildcard $(BUILD_DIR)$(NAME)-*.sym)
+	$(RM) $(brass_obj) $(wildcard $(BUILD_DIR)$(NAME)-*.gbc) $(wildcard $(BUILD_DIR)$(NAME)-*.map) $(wildcard $(BUILD_DIR)$(NAME)-*.sym) $(wildcard $(DEBUG_BUILD_DIR)$(NAME)-*.gbc) $(wildcard $(DEBUG_BUILD_DIR)$(NAME)-*.map) $(wildcard $(DEBUG_BUILD_DIR)$(NAME)-*.sym)
 	rm -r $(BUILD_DIR)
 	$(MAKE) clean -C tools/
 
