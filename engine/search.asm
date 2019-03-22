@@ -55,19 +55,19 @@ SpecialDuoCheck:
 ; They must exist in either party or PC, and have the player's OT and ID.
 ; Return the result in wScriptVar.
 
-	ld a, LUGIA
-	ld [wScriptVar], a
-	call CheckOwnMonAnywhere
-	jr nc, SpecialMonCheckFailed
+	;ld a, LUGIA
+	;ld [wScriptVar], a
+	;call CheckOwnMonAnywhere
+	;jr nc, SpecialMonCheckFailed
 
-	ld a, HO_OH
-	ld [wScriptVar], a
-	call CheckOwnMonAnywhere
-	jr nc, SpecialMonCheckFailed
+	;ld a, HO_OH
+	;ld [wScriptVar], a
+	;call CheckOwnMonAnywhere
+	;jr nc, SpecialMonCheckFailed
 
 	; they exist
-	ld a, 1
-	ld [wScriptVar], a
+	;ld a, 1
+	;ld [wScriptVar], a
 	ret
 
 

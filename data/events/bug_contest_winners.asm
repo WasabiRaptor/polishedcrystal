@@ -13,60 +13,60 @@ BugContestantPointers:
 
 BugContestant_BugCatcherDon:
 	db BUG_CATCHER, DON
-	dbw KAKUNA,     300
-	dbw METAPOD,    285
-	dbw CATERPIE,   226
+	dbw YANMA,     300
+	dbw YANMA,    285
+	dbw YANMA,   226
 
 BugContestant_BugCatcherEd:
 	db BUG_CATCHER, ED
 	dbw YANMA,      286
-	dbw BUTTERFREE, 251
-	dbw CATERPIE,   237
+	dbw YANMA, 	251
+	dbw YANMA,   237
 
 BugContestant_CooltrainerMNick:
 	db COOLTRAINERM, NICK
 	dbw SCYTHER,    357
-	dbw BUTTERFREE, 349
-	dbw PINSIR,     368
+	dbw YANMA, 349
+	dbw YANMA,     368
 
 BugContestant_PokefanMWilliam:
 	db POKEFANM, WILLIAM
-	dbw VENOMOTH,   332
-	dbw BUTTERFREE, 324
-	dbw VENONAT,    321
+	dbw YANMA,   332
+	dbw YANMA, 324
+	dbw YANMA,    321
 
 BugContestant_BugCatcherBenny:
 	db BUG_CATCHER, BENNY
-	dbw BUTTERFREE, 318
-	dbw WEEDLE,     295
-	dbw CATERPIE,   285
+	dbw YANMA, 318
+	dbw YANMA,     295
+	dbw YANMA,   285
 
 BugContestant_CamperBarry:
 	db CAMPER, BARRY
-	dbw PINSIR,     366
-	dbw VENONAT,    329
-	dbw KAKUNA,     314
+	dbw YANMA,     366
+	dbw YANMA,    329
+	dbw YANMA,     314
 
 BugContestant_PicnickerCindy:
 	db PICNICKER, CINDY
-	dbw BUTTERFREE, 341
-	dbw METAPOD,    301
-	dbw CATERPIE,   264
+	dbw YANMA, 341
+	dbw YANMA,    301
+	dbw YANMA,   264
 
 BugContestant_BugCatcherJosh:
 	db BUG_CATCHER, JOSH
 	dbw SCYTHER,    326
-	dbw BUTTERFREE, 292
-	dbw METAPOD,    282
+	dbw YANMA, 292
+	dbw YANMA,    282
 
 BugContestant_SchoolboyJohnny:
 	db SCHOOLBOY, JOHNNY
-	dbw WEEDLE,     270
-	dbw PINSIR,     282
-	dbw CATERPIE,   251
+	dbw YANMA,     270
+	dbw YANMA,     282
+	dbw YANMA,   251
 
 BugContestant_SchoolboyKipp:
 	db SCHOOLBOY, KIPP
-	dbw VENONAT,    267
-	dbw PARAS,      254
-	dbw KAKUNA,     259
+	dbw YANMA,    267
+	dbw YANMA,      254
+	dbw YANMA,     259

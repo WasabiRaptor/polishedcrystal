@@ -780,22 +780,8 @@ DayCare_InitBreeding: ; 16a3b
 	farcall GetPreEvolution
 	ld a, EGG_LEVEL
 	ld [wCurPartyLevel], a
-
+	
 	ld a, [wCurPartySpecies]
-	cp NIDORAN_F
-	jr z, .NidoranFamilyMother
-	cp NIDORINA
-	jr z, .NidoranFamilyMother
-	cp NIDOQUEEN
-	jr nz, .GotEggSpecies
-.NidoranFamilyMother:
-	call Random
-	cp 1 + 50 percent
-	ld a, NIDORAN_F
-	jr c, .GotEggSpecies
-	ld a, NIDORAN_M
-.GotEggSpecies:
-	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld [wEggMonSpecies], a
 
