@@ -256,6 +256,10 @@ RadioTerminator::
 	ret
 .stop	db "@"
 
+PrintNamedText::
+	ld a, [wTextBoxFlags2]
+	set NAMEPLATE_FLAG, a
+	ld [wTextBoxFlags2], a
 PrintText::
 	call SetUpTextBox
 PrintTextNoBox::
@@ -271,7 +275,11 @@ PrintTextBoxText::
 	jp PlaceWholeStringInBoxAtOnce
 .no_nameplate
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	jp PlaceWholeStringInBoxAtOnce
+	call PlaceWholeStringInBoxAtOnce
+	ld a, [wTextBoxFlags2]
+	res NAMEPLATE_FLAG, a
+	ld [wTextBoxFlags2], a
+	ret
 
 SetUpTextBox::
 	push hl

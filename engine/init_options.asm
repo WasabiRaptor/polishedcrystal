@@ -41,13 +41,7 @@ SetInitialOptions:
 
 	ld hl, .InitialOptionsText
 	ld de, .UnknownSpeakerText
-	ld a, [wTextBoxFlags2]
-	set 0, a
-	ld [wTextBoxFlags2], a
 	call PrintText
-	ld a, [wTextBoxFlags2]
-	res 0, a
-	ld [wTextBoxFlags2], a
 
 	ld hl, hInMenu
 	ld a, [hl]
