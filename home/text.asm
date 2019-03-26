@@ -42,6 +42,13 @@ ClearTileMap::
 
 SpeechTextBox::
 ; Standard textbox.
+	ld a, [wTextBoxFlags2]
+	bit 0, a
+	jr z, .no_nameplate
+	decoord NAMEPLATE_X, NAMEPLATE_Y
+	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
+	jr TextBox
+.no_nameplate
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
 
@@ -56,16 +63,20 @@ TextBox::
 	call TextBoxBorder
 	pop hl
 	pop bc
-	jr TextBoxPalette
+	jp TextBoxPalette
 
 NO_RIGHT_MASK 					EQU %11111011
 NO_LEFT_MASK 					EQU %11110111
 NO_TOP_MASK 					EQU %11111101
 NO_BOTTOM_MASK 					EQU %11111110
 
-TextBoxBorder::
+TextBoxBorder::	
 
-	; Top
+; Nameplate top
+	ld a, [wTextBoxFlags2]
+	bit 0, a
+	jr z, .top
+	
 	push hl
 	ld a, [hl]
 	call CheckBorder
@@ -79,7 +90,60 @@ TextBoxBorder::
 	ld [hl], a
 	pop hl
 
-	; Middle
+; Nameplate middle
+	ld de, SCREEN_WIDTH
+	add hl, de
+
+	push hl
+	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
+	ld a, [hl]
+	call CheckBorder
+	or "│"
+	and NO_RIGHT_MASK
+	ld [hli], a
+	ld a, " "
+	call .PlaceSpace
+	ld a, [hl]
+	call CheckBorder
+	or "│"
+	and NO_LEFT_MASK
+	ld [hl], a
+	pop hl
+
+	ld de, SCREEN_WIDTH
+	add hl, de
+
+; Nameplate bottom
+	ld a, [hl]
+	call CheckBorder
+	or "└"
+	ld [hli], a
+	ld e, NO_TOP_MASK
+	call .PlaceChars
+	ld a, [hl]
+	call CheckBorder
+	or "┘"
+	ld [hl], a
+
+	hlcoord TEXTBOX_X, TEXTBOX_Y
+	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
+
+.top
+; Top
+	push hl
+	ld a, [hl]
+	call CheckBorder
+	or "┌"
+	ld [hli], a
+	ld e, NO_BOTTOM_MASK
+	call .PlaceChars
+	ld a, [hl]
+	call CheckBorder
+	or "┐"
+	ld [hl], a
+	pop hl
+
+; Middle
 	ld de, SCREEN_WIDTH
 	add hl, de
 .row
@@ -103,7 +167,7 @@ TextBoxBorder::
 	dec b
 	jr nz, .row
 
-	; Bottom
+; Bottom
 	ld a, [hl]
 	call CheckBorder
 	or "└"
@@ -200,15 +264,23 @@ PrintTextNoBox::
 	pop hl
 
 PrintTextBoxText::
+	ld a, [wTextBoxFlags2]
+	bit 0, a
+	jr z, .no_nameplate
+	bccoord NAMEPLATE_INNERX, NAMEPLATE_INNERY
+	jp PlaceWholeStringInBoxAtOnce
+.no_nameplate
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	jp PlaceWholeStringInBoxAtOnce
 
 SetUpTextBox::
 	push hl
+	push de
 	call SpeechTextBox
 	call UpdateSprites
 	call ApplyTilemap
 	pop hl
+	pop de
 	ret
 
 PlaceString::
@@ -677,6 +749,13 @@ PlaceWholeStringInBoxAtOnce::
 	ret
 
 DoTextUntilTerminator::
+	ld a, [wTextBoxFlags2]
+	bit 0, a
+	jr z, .not_nameplate
+	ld h, d
+	ld l, e
+
+.not_nameplate
 	ld a, [hli]
 	cp "@"
 	ret z

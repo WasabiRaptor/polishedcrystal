@@ -915,12 +915,14 @@ MapTextbox:: ; 269a
 	rst Bankswitch
 
 	push hl
+	;push de
 	call SpeechTextBox
 	call SafeUpdateSprites
 	ld a, 1
 	ldh [hOAMUpdate], a
 	call ApplyTilemap
 	pop hl
+	;pop de
 	call PrintTextBoxText
 	xor a
 	ldh [hOAMUpdate], a

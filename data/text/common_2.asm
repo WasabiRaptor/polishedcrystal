@@ -1400,3 +1400,7 @@ EndOfCycleText::
 	para "Play it safe,"
 	line "<PLAYER>..."
 	done
+
+_UnknownSpeakerText::
+	text "???"
+	done

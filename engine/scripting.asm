@@ -459,6 +459,28 @@ Script_writetext:
 	ld b, a
 	jp MapTextbox
 
+Script_writenamedtext:
+; parameters:
+;     name_pointer
+;     text_pointer (RawTextPointerLabelParam)
+	call GetScriptByte
+	ld e, a
+	call GetScriptByte
+	ld d, a
+	call GetScriptByte
+	ld l, a
+	call GetScriptByte
+	ld h, a
+	ld a, [wScriptBank]
+	ld b, a
+	ld a, [wTextBoxFlags2]
+	set 0, a
+	ld [wTextBoxFlags2], a
+	jp MapTextbox
+	ld a, [wTextBoxFlags2]
+	res 0, a
+	ld [wTextBoxFlags2], a
+
 Script_farwritetext:
 ; parameters:
 ;     text_pointer (PointerLabelBeforeBank)

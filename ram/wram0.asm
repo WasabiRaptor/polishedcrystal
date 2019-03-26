@@ -1058,7 +1058,7 @@ wTextDelayFrames:: ds 1
 wVBlankOccurred:: ds 1
 wGenericDelay:: ds 1
 
-	ds 6 ; unused
+	ds 5 ; unused
 
 wGameTimerPause::
 ; bit 0
@@ -1107,6 +1107,8 @@ wTextBoxFrame::
 
 wTextBoxFlags:: ds 1
 
+wTextBoxFlags2::
+; bit 0: whether a nameplate is drawn
 	ds 1
 
 wOptions2::
