@@ -45,3 +45,4 @@
 # VSCode stuff
 .vscode/
 build/
+build-debug/
