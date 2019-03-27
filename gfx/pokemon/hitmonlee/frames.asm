@@ -22,4 +22,3 @@
 .frame5
 	db $03 ; bitmask
 	db $58, $59, $5a
-; 0xd5819

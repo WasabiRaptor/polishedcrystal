@@ -22,4 +22,3 @@
 .frame5
 	db $03 ; bitmask
 	db $52
-; 0xd982c

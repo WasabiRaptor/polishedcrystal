@@ -43,4 +43,3 @@
 .frame9
 	db $06 ; bitmask
 	db $5e
-; 0xd97a9

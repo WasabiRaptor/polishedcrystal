@@ -27,12 +27,16 @@ BASEMON_EV_YIELD_2    EQUS "(BaseData + wBaseEVYield2 - wCurBaseData)"
 BASEMON_TMHM          EQUS "(BaseData + wBaseTMHM - wCurBaseData)"
 BASEMON_STRUCT_LENGTH EQUS "(BaseData1 - BaseData0)"
 
-; growth rate
+; GrowthRates indexes (see data/growth_rates.asm)
 	const_def
-	const MEDIUM_FAST
-	const MEDIUM_SLOW
-	const FAST
-	const SLOW
+	const GROWTH_MEDIUM_FAST
+	const GROWTH_SLIGHTLY_FAST
+	const GROWTH_SLIGHTLY_SLOW
+	const GROWTH_MEDIUM_SLOW
+	const GROWTH_FAST
+	const GROWTH_SLOW
+	const GROWTH_ERRATIC
+	const GROWTH_FLUCTUATING
 
 ; gender ratios
 	const_def
@@ -65,6 +69,23 @@ GENDERLESS EQU %1111
 	const LADIES_MAN   ; d
 	const REPTILE      ; e
 	const NO_EGGS      ; f
+
+	const_def 1
+	const EGG_MONSTER       ; 1
+	const EGG_WATER_1       ; 2 (Amphibian)
+	const EGG_BUG           ; 3
+	const EGG_FLYING        ; 4
+	const EGG_FIELD         ; 5
+	const EGG_FAIRY         ; 6
+	const EGG_GRASS         ; 7
+	const EGG_HUMAN_LIKE    ; 8
+	const EGG_WATER_3       ; 9 (Invertebrate)
+	const EGG_MINERAL       ; a
+	const EGG_AMORPHOUS     ; b
+	const EGG_WATER_2       ; c (Fish)
+	const EGG_DITTO         ; d
+	const EGG_DRAGON        ; e
+	const EGG_NONE          ; f (Undiscovered)
 
 
 ; pokemon structure in RAM
