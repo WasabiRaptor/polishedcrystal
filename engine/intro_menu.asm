@@ -644,7 +644,8 @@ ProfElmSpeech: ; 0x5f99
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld hl, ElmText1
-	call PrintText
+	ld de, ElmName
+	call PrintNamedText
 if !DEF(DEBUG)
 	ld c, 15
 	call FadeToWhite
@@ -669,9 +670,9 @@ if !DEF(DEBUG)
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld hl, ElmText2
-	call PrintText
+	call PrintNamedText
 	ld hl, ElmText4
-	call PrintText
+	call PrintNamedText
 	ld c, 15
 	call FadeToWhite
 	call ClearTileMap
@@ -688,7 +689,7 @@ if !DEF(DEBUG)
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld hl, ElmText5
-	call PrintText
+	call PrintNamedText
 endc
 
 	call InitGender
@@ -697,7 +698,7 @@ endc
 	call DelayFrames
 
 	ld hl, ElmText6
-	call PrintText
+	call PrintNamedText
 
 	call NamePlayer
 
@@ -712,7 +713,7 @@ endc
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld hl, ElmText7
-	jp PrintText
+	jp PrintNamedText
 
 ElmText1: ; 0x6045
 	text_jump _ElmText1
@@ -745,6 +746,10 @@ ElmText6: ; 0x606a
 
 ElmText7: ; 0x606f
 	text_jump _ElmText7
+	db "@"
+
+ElmName:
+	text_jump ProfElmName
 	db "@"
 
 InitGender: ; 48dcb (12:4dcb)

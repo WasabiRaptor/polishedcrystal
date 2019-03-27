@@ -259,6 +259,10 @@ PrintNamedText::
 	ld a, [wTextBoxFlags2]
 	set NAMEPLATE_FLAG, a
 	ld [wTextBoxFlags2], a
+	ld a, d
+	ld [wTextBoxNameBuffer], a
+	ld a, e
+	ld [wTextBoxNameBuffer + 1], a
 PrintText::
 	call SetUpTextBox
 PrintTextNoBox::
@@ -270,14 +274,19 @@ PrintTextBoxText::
 	ld a, [wTextBoxFlags2]
 	bit NAMEPLATE_FLAG, a
 	jr z, .no_nameplate
+	push hl
+	ld hl, wOptions1
+	set NO_TEXT_SCROLL, [hl]
 	bccoord NAMEPLATE_INNERX, NAMEPLATE_INNERY
-	call PlaceWholeNameInBoxAtOnce
+	ld a, [wTextBoxNameBuffer]
+	ld h, a
+	ld a, [wTextBoxNameBuffer + 1]
+	ld l, a
+	call PlaceWholeStringInBoxAtOnce
+	pop hl
 .no_nameplate
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceWholeStringInBoxAtOnce
-	ld a, [wTextBoxFlags2]
-	res NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
 	ret
 
 SetUpTextBox::

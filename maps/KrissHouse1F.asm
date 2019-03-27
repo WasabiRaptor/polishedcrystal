@@ -263,17 +263,17 @@ NeighborScript:
 	iftrue .NiteScript
 
 .MornScript:
-	writetext .MornIntroText
+	writenamedtext .NeighborNameText, .MornIntroText
 	buttonsound
 	jump .Main
 
 .DayScript:
-	writetext .DayIntroText
+	writenamedtext .NeighborNameText, .DayIntroText
 	buttonsound
 	jump .Main
 
 .NiteScript:
-	writetext .NiteIntroText
+	writenamedtext .NeighborNameText, .NiteIntroText
 	buttonsound
 	jump .Main
 
@@ -318,5 +318,5 @@ NeighborScript:
 	done
 
 .NeighborNameText:
-	text "Neighbor"
-	done
+	text_jump NeighborName
+	db "@"
