@@ -702,7 +702,7 @@ endc
 	ld de, ElmName
 
 	ld hl, ElmText6
-	call PrintText
+	call PrintNamedText
 
 	call NamePlayer
 
@@ -715,7 +715,6 @@ endc
 	call GetCGBLayout
 	call InitIntroGradient
 	call Intro_RotatePalettesLeftFrontpic
-
 
 	ld hl, ElmText7
 	jp PrintText
