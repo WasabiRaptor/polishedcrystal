@@ -43,11 +43,11 @@ ClearTileMap::
 SpeechTextBox::
 ; Standard textbox.
 	ld a, [wTextBoxFlags2]
-	bit 0, a
+	bit NAMEPLATE_FLAG, a
 	jr z, .no_nameplate
-	decoord NAMEPLATE_X, NAMEPLATE_Y
+	hlcoord NAMEPLATE_X, NAMEPLATE_Y
 	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
-	jr TextBox
+	call TextBox
 .no_nameplate
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
@@ -71,12 +71,11 @@ NO_TOP_MASK 					EQU %11111101
 NO_BOTTOM_MASK 					EQU %11111110
 
 TextBoxBorder::	
+	ld a, [wTextBoxFlags2]
+	bit NAMEPLATE_FLAG, a
+	jr z, .top
 
 ; Nameplate top
-	ld a, [wTextBoxFlags2]
-	bit 0, a
-	jr z, .top
-	
 	push hl
 	ld a, [hl]
 	call CheckBorder
@@ -227,7 +226,7 @@ TextBoxPalette::
 	ret
 
 CheckBorder:
-;checks if a is a border tile and if it isn't xor it
+; checks if a is a border tile and if it isn't xor it
 	cp "│"
 	ret z
 	cp "┌"
@@ -269,10 +268,10 @@ PrintTextNoBox::
 
 PrintTextBoxText::
 	ld a, [wTextBoxFlags2]
-	bit 0, a
+	bit NAMEPLATE_FLAG, a
 	jr z, .no_nameplate
 	bccoord NAMEPLATE_INNERX, NAMEPLATE_INNERY
-	jp PlaceWholeStringInBoxAtOnce
+	call PlaceWholeNameInBoxAtOnce
 .no_nameplate
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceWholeStringInBoxAtOnce
@@ -283,12 +282,14 @@ PrintTextBoxText::
 
 SetUpTextBox::
 	push hl
-	push de
+	ld a, d
+	ld [wTextBoxNameBuffer], a
+	ld a, e
+	ld [wTextBoxNameBuffer + 1], a
 	call SpeechTextBox
 	call UpdateSprites
 	call ApplyTilemap
 	pop hl
-	pop de
 	ret
 
 PlaceString::
@@ -744,6 +745,18 @@ FarString::
 	rst Bankswitch
 	ret
 
+PlaceWholeNameInBoxAtOnce::
+	ld a, [wTextBoxFlags]
+	push af
+	set 1, a
+	ld [wTextBoxFlags], a
+
+	call DoNameUntilTerminator
+
+	pop af
+	ld [wTextBoxFlags], a
+	ret
+
 PlaceWholeStringInBoxAtOnce::
 	ld a, [wTextBoxFlags]
 	push af
@@ -756,14 +769,12 @@ PlaceWholeStringInBoxAtOnce::
 	ld [wTextBoxFlags], a
 	ret
 
+DoNameUntilTerminator::
+	ld a, [wTextBoxNameBuffer]
+	ld h, a
+	ld a, [wTextBoxNameBuffer + 1]
+	ld l, a
 DoTextUntilTerminator::
-	ld a, [wTextBoxFlags2]
-	bit 0, a
-	jr z, .not_nameplate
-	ld h, d
-	ld l, e
-
-.not_nameplate
 	ld a, [hli]
 	cp "@"
 	ret z

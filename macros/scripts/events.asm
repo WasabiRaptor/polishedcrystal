@@ -481,6 +481,13 @@ writetext: macro
 	dw \1 ; text_pointer
 	endm
 
+	enum writenamedtext_command
+writenamedtext: macro
+	db writenamedtext_command
+	dw \1 ; name_pointer
+	dw \2 ; text_pointer
+	endm
+
 	enum repeattext_command
 repeattext: macro
 	db repeattext_command

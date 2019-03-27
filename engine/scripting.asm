@@ -134,6 +134,7 @@ ScriptCommandTable:
 	dw Script_closetext                  ; 47
 	dw Script_farwritetext               ; 48
 	dw Script_writetext                  ; 49
+	dw Script_writenamedtext
 	dw Script_repeattext                 ; 4a
 	dw Script_yesorno                    ; 4b
 	dw Script_loadmenu                   ; 4c
@@ -464,9 +465,9 @@ Script_writenamedtext:
 ;     name_pointer
 ;     text_pointer (RawTextPointerLabelParam)
 	call GetScriptByte
-	ld e, a
+	ld [wTextBoxNameBuffer + 1], a
 	call GetScriptByte
-	ld d, a
+	ld [wTextBoxNameBuffer], a
 	call GetScriptByte
 	ld l, a
 	call GetScriptByte
@@ -474,12 +475,13 @@ Script_writenamedtext:
 	ld a, [wScriptBank]
 	ld b, a
 	ld a, [wTextBoxFlags2]
-	set 0, a
+	set NAMEPLATE_FLAG, a
 	ld [wTextBoxFlags2], a
-	jp MapTextbox
+	call MapTextbox
 	ld a, [wTextBoxFlags2]
-	res 0, a
+	res NAMEPLATE_FLAG, a
 	ld [wTextBoxFlags2], a
+	ret
 
 Script_farwritetext:
 ; parameters:

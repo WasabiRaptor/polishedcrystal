@@ -278,7 +278,7 @@ NeighborScript:
 	jump .Main
 
 .Main:
-	writetext .NeighborText
+	writenamedtext .NeighborNameText, .NeighborText
 	waitbutton
 	closetext
 	turnobject LAST_TALKED, RIGHT
@@ -315,4 +315,8 @@ NeighborScript:
 
 	para "She really loves"
 	line "#mon!"
+	done
+
+.NeighborNameText:
+	text "Neighbor"
 	done

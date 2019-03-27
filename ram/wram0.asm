@@ -1137,6 +1137,8 @@ wInitialOptions::
 ; bit 7: ask to reset at start
 	ds 1
 
+wTextBoxNameBuffer:: ds 2
+
 wOptionsBuffer:: ds 1
 wOptionsEnd::
 

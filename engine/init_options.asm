@@ -40,7 +40,7 @@ SetInitialOptions:
 	call SetPalettes
 
 	ld hl, .InitialOptionsText
-	ld de, .UnknownSpeakerText
+	;ld de, .UnknownSpeakerText
 	call PrintText
 
 	ld hl, hInMenu
