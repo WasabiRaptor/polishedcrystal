@@ -699,8 +699,6 @@ endc
 	ld c, 10
 	call DelayFrames
 
-	ld de, ElmName
-
 	ld hl, ElmText6
 	call PrintText
 
@@ -715,7 +713,6 @@ endc
 	call GetCGBLayout
 	call InitIntroGradient
 	call Intro_RotatePalettesLeftFrontpic
-
 
 	ld hl, ElmText7
 	jp PrintText
