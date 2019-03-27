@@ -24,4 +24,3 @@
 .frame6
 	db $05 ; bitmask
 	db $3d, $3e, $3f, $40
-; 0xd5592

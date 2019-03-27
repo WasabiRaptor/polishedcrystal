@@ -7,4 +7,3 @@
 .frame2
 	db $01 ; bitmask
 	db $33
-; 0xd868a

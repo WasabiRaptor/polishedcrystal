@@ -24,4 +24,3 @@
 .frame5
 	db $04 ; bitmask
 	db $5f, $60
-; 0xd49fc

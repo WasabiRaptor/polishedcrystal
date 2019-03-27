@@ -14,4 +14,3 @@
 .frame3
 	db $01 ; bitmask
 	db $52, $53
-; 0xd4909

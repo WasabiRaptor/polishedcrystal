@@ -7,4 +7,3 @@
 .frame2
 	db $01 ; bitmask
 	db $27
-; 0xd893f

@@ -137,12 +137,16 @@ INCLUDE "engine/events/specials_2.asm"
 INCLUDE "data/items/attributes.asm"
 
 
+SECTION "Effect Command Pointers", ROMX
+
+INCLUDE "data/battle/effect_command_pointers.asm"
+
+
 SECTION "Code 2", ROMX
 
 INCLUDE "engine/player_object.asm"
 INCLUDE "engine/sine.asm"
 INCLUDE "data/predef_pointers.asm"
-INCLUDE "engine/color.asm"
 INCLUDE "engine/trainer_scripts.asm"
 
 
@@ -383,15 +387,6 @@ INCLUDE "data/items/marts.asm"
 INCLUDE "engine/events/mom.asm"
 INCLUDE "engine/events/daycare.asm"
 INCLUDE "engine/breeding.asm"
-
-
-SECTION "Code 6", ROMX
-
-
-
-SECTION "Effect Command Pointers", ROMX
-
-INCLUDE "data/battle/effect_command_pointers.asm"
 
 
 SECTION "Code 7", ROMX
@@ -4497,3 +4492,8 @@ SECTION "Crystal Data", ROMX
 
 INCLUDE "engine/events/battle_tower/load_trainer.asm"
 INCLUDE "data/events/odd_eggs.asm"
+
+
+SECTION "color", ROMX
+
+INCLUDE "engine/color.asm"

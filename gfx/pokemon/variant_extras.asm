@@ -1,64 +1,95 @@
-UnownAAnimationExtra: INCLUDE "gfx/pokemon/unown_a/anim1.asm"
-UnownBAnimationExtra: INCLUDE "gfx/pokemon/unown_b/anim1.asm"
-UnownCAnimationExtra: INCLUDE "gfx/pokemon/unown_c/anim1.asm"
-UnownDAnimationExtra: INCLUDE "gfx/pokemon/unown_d/anim1.asm"
-UnownEAnimationExtra: INCLUDE "gfx/pokemon/unown_e/anim1.asm"
-UnownFAnimationExtra: INCLUDE "gfx/pokemon/unown_f/anim1.asm"
-UnownGAnimationExtra: INCLUDE "gfx/pokemon/unown_g/anim1.asm"
-UnownHAnimationExtra: INCLUDE "gfx/pokemon/unown_h/anim1.asm"
-UnownIAnimationExtra: INCLUDE "gfx/pokemon/unown_i/anim1.asm"
-UnownJAnimationExtra: INCLUDE "gfx/pokemon/unown_j/anim1.asm"
-UnownKAnimationExtra: INCLUDE "gfx/pokemon/unown_k/anim1.asm"
-UnownLAnimationExtra: INCLUDE "gfx/pokemon/unown_l/anim1.asm"
-UnownMAnimationExtra: INCLUDE "gfx/pokemon/unown_m/anim1.asm"
-UnownNAnimationExtra: INCLUDE "gfx/pokemon/unown_n/anim1.asm"
-UnownOAnimationExtra: INCLUDE "gfx/pokemon/unown_o/anim1.asm"
-UnownPAnimationExtra: INCLUDE "gfx/pokemon/unown_p/anim1.asm"
-UnownQAnimationExtra: INCLUDE "gfx/pokemon/unown_q/anim1.asm"
-UnownRAnimationExtra: INCLUDE "gfx/pokemon/unown_r/anim1.asm"
-UnownSAnimationExtra: INCLUDE "gfx/pokemon/unown_s/anim1.asm"
-UnownTAnimationExtra: INCLUDE "gfx/pokemon/unown_t/anim1.asm"
-UnownUAnimationExtra: INCLUDE "gfx/pokemon/unown_u/anim1.asm"
-UnownVAnimationExtra: INCLUDE "gfx/pokemon/unown_v/anim1.asm"
-UnownWAnimationExtra: INCLUDE "gfx/pokemon/unown_w/anim1.asm"
-UnownXAnimationExtra: INCLUDE "gfx/pokemon/unown_x/anim1.asm"
-UnownYAnimationExtra: INCLUDE "gfx/pokemon/unown_y/anim1.asm"
-UnownZAnimationExtra: INCLUDE "gfx/pokemon/unown_z/anim1.asm"
-UnownExclamationAnimationExtra: INCLUDE "gfx/pokemon/unown_exclamation/anim1.asm"
-UnownQuestionAnimationExtra:    INCLUDE "gfx/pokemon/unown_question/anim1.asm"
+LycanrocAnimationIdle: INCLUDE "gfx/pokemon/lycanroc_midday/anim_idle.asm"
+Lycanroc_DuskAnimationIdle: INCLUDE "gfx/pokemon/lycanroc_dusk/anim_idle.asm"
+Lycanroc_MidnightAnimationIdle: INCLUDE "gfx/pokemon/lycanroc_midnight/anim_idle.asm"
+Lycanroc_DawnAnimationIdle: INCLUDE "gfx/pokemon/lycanroc_dawn/anim_idle.asm"
 
-PichuPlainAnimationExtra: INCLUDE "gfx/pokemon/pichu_plain/anim1.asm"
-PichuSpikyAnimationExtra: INCLUDE "gfx/pokemon/pichu_spiky/anim1.asm"
+MeowthAnimationIdle: INCLUDE "gfx/pokemon/meowth/anim_idle.asm"
+Meowth_AlolaAnimationIdle: INCLUDE "gfx/pokemon/meowth_alola/anim_idle.asm"
 
-PikachuPlainAnimationExtra:  INCLUDE "gfx/pokemon/pikachu_plain/anim1.asm"
-PikachuFlyAnimationExtra:    INCLUDE "gfx/pokemon/pikachu_fly/anim1.asm"
-PikachuSurfAnimationExtra:   INCLUDE "gfx/pokemon/pikachu_surf/anim1.asm"
-PikachuPikaAnimationExtra:   INCLUDE "gfx/pokemon/pikachu_pika/anim1.asm"
-PikachuChuchuAnimationExtra: INCLUDE "gfx/pokemon/pikachu_chuchu/anim1.asm"
+PersianAnimationIdle: INCLUDE "gfx/pokemon/persian/anim_idle.asm"
+Persian_AlolaAnimationIdle: INCLUDE "gfx/pokemon/persian_alola/anim_idle.asm"
 
-ArbokJohtoAnimationExtra:  INCLUDE "gfx/pokemon/arbok_johto/anim1.asm"
-ArbokKantoAnimationExtra:  INCLUDE "gfx/pokemon/arbok_kanto/anim1.asm"
-ArbokKogaAnimationExtra:   INCLUDE "gfx/pokemon/arbok_koga/anim1.asm"
-ArbokAgathaAnimationExtra: INCLUDE "gfx/pokemon/arbok_agatha/anim1.asm"
-ArbokArianaAnimationExtra: INCLUDE "gfx/pokemon/arbok_ariana/anim1.asm"
+RotomAnimationIdle: INCLUDE "gfx/pokemon/rotom/anim_idle.asm"
+Rotom_FanAnimationIdle: INCLUDE "gfx/pokemon/rotom_fan/anim_idle.asm"
+Rotom_FrostAnimationIdle: INCLUDE "gfx/pokemon/rotom_frost/anim_idle.asm"
+Rotom_HeatAnimationIdle: INCLUDE "gfx/pokemon/rotom_heat/anim_idle.asm"
+Rotom_MowAnimationIdle: INCLUDE "gfx/pokemon/rotom_mow/anim_idle.asm"
+Rotom_WashAnimationIdle: INCLUDE "gfx/pokemon/rotom_wash/anim_idle.asm"
 
-MagikarpPlainAnimationExtra:
-MagikarpSkellyAnimationExtra:
-MagikarpCalico1AnimationExtra:
-MagikarpCalico2AnimationExtra:
-MagikarpCalico3AnimationExtra:
-MagikarpTwoToneAnimationExtra:
-MagikarpOrcaAnimationExtra:
-MagikarpDapplesAnimationExtra:
-MagikarpTigerAnimationExtra:
-MagikarpZebraAnimationExtra:
-MagikarpStripeAnimationExtra:
-MagikarpBubblesAnimationExtra:
-MagikarpForeheadAnimationExtra:
-MagikarpMaskAnimationExtra:     INCLUDE "gfx/pokemon/magikarp/anim1.asm"
+Meowstic_MAnimationIdle: INCLUDE "gfx/pokemon/meowstic_m/anim_idle.asm"
+Meowstic_FAnimationIdle: INCLUDE "gfx/pokemon/meowstic_f/anim_idle.asm"
 
-GyaradosPlainAnimationExtra: INCLUDE "gfx/pokemon/gyarados_plain/anim1.asm"
-GyaradosRedAnimationExtra:   INCLUDE "gfx/pokemon/gyarados_red/anim1.asm"
+GrimerAnimationIdle: INCLUDE "gfx/pokemon/grimer/anim_idle.asm"
+Grimer_AlolaAnimationIdle: INCLUDE "gfx/pokemon/grimer_alola/anim_idle.asm"
 
-MewtwoPlainAnimationExtra:   INCLUDE "gfx/pokemon/mewtwo_plain/anim1.asm"
-MewtwoArmoredAnimationExtra: INCLUDE "gfx/pokemon/mewtwo_armored/anim1.asm"
+MukAnimationIdle: INCLUDE "gfx/pokemon/vulpix/anim_idle.asm"
+Muk_AlolaAnimationIdle: INCLUDE "gfx/pokemon/vulpix_alola/anim_idle.asm"
+
+Nidoran_MAnimationIdle: INCLUDE "gfx/pokemon/nidoran_m/anim_idle.asm"
+Nidoran_FAnimationIdle: INCLUDE "gfx/pokemon/nidoran_f/anim_idle.asm"
+
+SandshrewAnimationIdle: INCLUDE "gfx/pokemon/sandshrew/anim_idle.asm"
+Sandshrew_AlolaAnimationIdle: INCLUDE "gfx/pokemon/sandshrew_alola/anim_idle.asm"
+
+SandslashAnimationIdle: INCLUDE "gfx/pokemon/sandslash/anim_idle.asm"
+Sandslash_AlolaAnimationIdle: INCLUDE "gfx/pokemon/sandslash_alola/anim_idle.asm"
+
+SawsbuckAnimationIdle: INCLUDE "gfx/pokemon/sawsbuck/anim_idle.asm"
+Sawsbuck_SummerAnimationIdle: INCLUDE "gfx/pokemon/sawsbuck_summer/anim_idle.asm"
+Sawsbuck_FallAnimationIdle: INCLUDE "gfx/pokemon/sawsbuck_fall/anim_idle.asm"
+Sawsbuck_WinterAnimationIdle: INCLUDE "gfx/pokemon/sawsbuck_winter/anim_idle.asm"
+
+GirafarigAnimationIdle: INCLUDE "gfx/pokemon/girafarig/anim_idle.asm"
+Girafarig_BetaAnimationIdle: INCLUDE "gfx/pokemon/girafarig_beta/anim_idle.asm"
+
+VulpixAnimationIdle: INCLUDE "gfx/pokemon/vulpix/anim_idle.asm"
+Vulpix_AlolaAnimationIdle: INCLUDE "gfx/pokemon/vulpix_alola/anim_idle.asm"
+
+NinetalesAnimationIdle: INCLUDE "gfx/pokemon/ninetales/anim_idle.asm"
+Ninetales_AlolaAnimationIdle: INCLUDE "gfx/pokemon/ninetales_alola/anim_idle.asm"
+
+UnownAAnimationIdle: INCLUDE "gfx/pokemon/unown_a/anim_idle.asm"
+UnownBAnimationIdle: INCLUDE "gfx/pokemon/unown_b/anim_idle.asm"
+UnownCAnimationIdle: INCLUDE "gfx/pokemon/unown_c/anim_idle.asm"
+UnownDAnimationIdle: INCLUDE "gfx/pokemon/unown_d/anim_idle.asm"
+UnownEAnimationIdle: INCLUDE "gfx/pokemon/unown_e/anim_idle.asm"
+UnownFAnimationIdle: INCLUDE "gfx/pokemon/unown_f/anim_idle.asm"
+UnownGAnimationIdle: INCLUDE "gfx/pokemon/unown_g/anim_idle.asm"
+UnownHAnimationIdle: INCLUDE "gfx/pokemon/unown_h/anim_idle.asm"
+UnownIAnimationIdle: INCLUDE "gfx/pokemon/unown_i/anim_idle.asm"
+UnownJAnimationIdle: INCLUDE "gfx/pokemon/unown_j/anim_idle.asm"
+UnownKAnimationIdle: INCLUDE "gfx/pokemon/unown_k/anim_idle.asm"
+UnownLAnimationIdle: INCLUDE "gfx/pokemon/unown_l/anim_idle.asm"
+UnownMAnimationIdle: INCLUDE "gfx/pokemon/unown_m/anim_idle.asm"
+UnownNAnimationIdle: INCLUDE "gfx/pokemon/unown_n/anim_idle.asm"
+UnownOAnimationIdle: INCLUDE "gfx/pokemon/unown_o/anim_idle.asm"
+UnownPAnimationIdle: INCLUDE "gfx/pokemon/unown_p/anim_idle.asm"
+UnownQAnimationIdle: INCLUDE "gfx/pokemon/unown_q/anim_idle.asm"
+UnownRAnimationIdle: INCLUDE "gfx/pokemon/unown_r/anim_idle.asm"
+UnownSAnimationIdle: INCLUDE "gfx/pokemon/unown_s/anim_idle.asm"
+UnownTAnimationIdle: INCLUDE "gfx/pokemon/unown_t/anim_idle.asm"
+UnownUAnimationIdle: INCLUDE "gfx/pokemon/unown_u/anim_idle.asm"
+UnownVAnimationIdle: INCLUDE "gfx/pokemon/unown_v/anim_idle.asm"
+UnownWAnimationIdle: INCLUDE "gfx/pokemon/unown_w/anim_idle.asm"
+UnownXAnimationIdle: INCLUDE "gfx/pokemon/unown_x/anim_idle.asm"
+UnownYAnimationIdle: INCLUDE "gfx/pokemon/unown_y/anim_idle.asm"
+UnownZAnimationIdle: INCLUDE "gfx/pokemon/unown_z/anim_idle.asm"
+
+AegislashAnimationIdle: INCLUDE "gfx/pokemon/aegislash/anim_idle.asm"
+Aegislash_BladeAnimationIdle: INCLUDE "gfx/pokemon/aegislash_blade/anim_idle.asm"
+
+SuicuneAnimationIdle: INCLUDE "gfx/pokemon/suicune/anim_idle.asm"
+Suicune_BetaAnimationIdle: INCLUDE "gfx/pokemon/suicune_beta/anim_idle.asm"
+
+RaikouAnimationIdle: INCLUDE "gfx/pokemon/raikou/anim_idle.asm"
+Raikou_BetaAnimationIdle: INCLUDE "gfx/pokemon/raikou_beta/anim_idle.asm"
+
+EnteiAnimationIdle: INCLUDE "gfx/pokemon/entei/anim_idle.asm"
+Entei_BetaAnimationIdle: INCLUDE "gfx/pokemon/entei_beta/anim_idle.asm"
+
+ShayminAnimationIdle: INCLUDE "gfx/pokemon/shaymin/anim_idle.asm"
+Shaymin_SkyAnimationIdle: INCLUDE "gfx/pokemon/shaymin_sky/anim_idle.asm"
+
+Zygarde_Ten_PercentAnimationIdle: INCLUDE "gfx/pokemon/zygarde_ten_percent/anim_idle.asm"
+ZygardeAnimationIdle: INCLUDE "gfx/pokemon/zygarde_fifty_percent/anim_idle.asm"
+Zygarde_CompleteAnimationIdle: INCLUDE "gfx/pokemon/zygarde_complete/anim_idle.asm"

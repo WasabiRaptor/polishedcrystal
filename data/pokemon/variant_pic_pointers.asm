@@ -1,4 +1,105 @@
+LycanrocPicPointers::
+	dba LycanrocFrontpic
+	dba LycanrocBackpic
+	dba Lycanroc_DuskFrontpic
+	dba Lycanroc_DuskBackpic
+	dba Lycanroc_MidnightFrontpic
+	dba Lycanroc_MidnightBackpic
+	dba Lycanroc_DawnFrontpic
+	dba Lycanroc_DawnBackpic
+
+MeowthPicPointers::
+	dba MeowthFrontpic
+	dba MeowthBackpic
+	dba Meowth_AlolaFrontpic
+	dba Meowth_AlolaBackpic
+
+PersianPicPointers::
+	dba PersianFrontpic
+	dba PersianBackpic
+	dba Persian_AlolaFrontpic
+	dba Persian_AlolaBackpic
+
+GrimerPicPointers::
+	dba GrimerFrontpic
+	dba GrimerBackpic
+	dba Grimer_AlolaFrontpic
+	dba Grimer_AlolaBackpic
+
+MukPicPointers::
+	dba MukFrontpic
+	dba MukBackpic
+	dba Muk_AlolaFrontpic
+	dba Muk_AlolaBackpic
+
+RotomPicPointers::
+	dba RotomFrontpic
+	dba RotomBackpic
+	dba Rotom_FanFrontpic
+	dba Rotom_FanBackpic
+	dba Rotom_FrostFrontpic
+	dba Rotom_FrostBackpic
+	dba Rotom_HeatFrontpic
+	dba Rotom_HeatBackpic
+	dba Rotom_MowFrontpic
+	dba Rotom_MowBackpic
+	dba Rotom_WashFrontpic
+	dba Rotom_WashBackpic
+
+MeowsticPicPointers::
+	dba Meowstic_MFrontpic
+	dba Meowstic_MBackpic
+	dba Meowstic_FFrontpic
+	dba Meowstic_FBackpic
+
+NidoranPicPointers::
+	dba Nidoran_MFrontpic
+	dba Nidoran_MBackpic
+	dba Nidoran_FFrontpic
+	dba Nidoran_FBackpic
+
+SandshrewPicPointers::
+	dba SandshrewFrontpic
+	dba SandshrewBackpic
+	dba Sandshrew_AlolaFrontpic
+	dba Sandshrew_AlolaBackpic
+
+SandslashPicPointers::
+	dba SandslashFrontpic
+	dba SandslashBackpic
+	dba Sandslash_AlolaFrontpic
+	dba Sandslash_AlolaBackpic
+
+SawsbuckPicPointers::
+	dba SawsbuckFrontpic
+	dba SawsbuckBackpic
+	dba Sawsbuck_SummerFrontpic
+	dba Sawsbuck_SummerBackpic
+	dba Sawsbuck_FallFrontpic
+	dba Sawsbuck_FallBackpic
+	dba Sawsbuck_WinterFrontpic
+	dba Sawsbuck_WinterBackpic
+
+GirafarigPicPointers::
+	dba GirafarigFrontpic
+	dba GirafarigBackpic
+	dba Girafarig_BetaFrontpic
+	dba Girafarig_BetaBackpic
+
+VulpixPicPointers::
+	dba VulpixFrontpic
+	dba VulpixBackpic
+	dba Vulpix_AlolaFrontpic
+	dba Vulpix_AlolaBackpic
+
+NinetalesPicPointers::
+	dba NinetalesFrontpic
+	dba NinetalesBackpic
+	dba Ninetales_AlolaFrontpic
+	dba Ninetales_AlolaBackpic
+
 UnownPicPointers::
+; entries correspond to Unown letters, two apiece
 	dba UnownAFrontpic
 	dba UnownABackpic
 	dba UnownBFrontpic
@@ -51,81 +152,41 @@ UnownPicPointers::
 	dba UnownYBackpic
 	dba UnownZFrontpic
 	dba UnownZBackpic
-	dba UnownExclamationFrontpic
-	dba UnownExclamationBackpic
-	dba UnownQuestionFrontpic
-	dba UnownQuestionBackpic
 
-PikachuPicPointers::
-	dba PikachuPlainFrontpic
-	dba PikachuPlainBackpic
-	dba PikachuFlyFrontpic
-	dba PikachuFlyBackpic
-	dba PikachuSurfFrontpic
-	dba PikachuSurfBackpic
-	dba PikachuPikaFrontpic
-	dba PikachuPikaBackpic
-	dba PikachuChuchuFrontpic
-	dba PikachuChuchuBackpic
+AegislashPicPointers::
+	dba AegislashFrontpic
+	dba AegislashBackpic
+	dba Aegislash_BladeFrontpic
+	dba Aegislash_BladeBackpic
 
-PichuPicPointers::
-	dba PichuPlainFrontpic
-	dba PichuPlainBackpic
-	dba PichuSpikyFrontpic
-	dba PichuSpikyBackpic
+SuicunePicPointers::
+	dba SuicuneFrontpic
+	dba SuicuneBackpic
+	dba Suicune_BetaFrontpic
+	dba Suicune_BetaBackpic
 
-ArbokPicPointers::
-	dba ArbokJohtoFrontpic
-	dba ArbokJohtoBackpic
-	dba ArbokKantoFrontpic
-	dba ArbokKantoBackpic
-	dba ArbokKogaFrontpic
-	dba ArbokKogaBackpic
-	dba ArbokAgathaFrontpic
-	dba ArbokAgathaBackpic
-	dba ArbokArianaFrontpic
-	dba ArbokArianaBackpic
+RaikouPicPointers::
+	dba RaikouFrontpic
+	dba RaikouBackpic
+	dba Raikou_BetaFrontpic
+	dba Raikou_BetaBackpic
 
-MagikarpPicPointers::
-	dba MagikarpPlainFrontpic
-	dba MagikarpPlainBackpic
-	dba MagikarpSkellyFrontpic
-	dba MagikarpSkellyBackpic
-	dba MagikarpCalico1Frontpic
-	dba MagikarpCalico1Backpic
-	dba MagikarpCalico2Frontpic
-	dba MagikarpCalico2Backpic
-	dba MagikarpCalico3Frontpic
-	dba MagikarpCalico3Backpic
-	dba MagikarpTwoToneFrontpic
-	dba MagikarpTwoToneBackpic
-	dba MagikarpOrcaFrontpic
-	dba MagikarpOrcaBackpic
-	dba MagikarpDapplesFrontpic
-	dba MagikarpDapplesBackpic
-	dba MagikarpTigerFrontpic
-	dba MagikarpTigerBackpic
-	dba MagikarpZebraFrontpic
-	dba MagikarpZebraBackpic
-	dba MagikarpStripeFrontpic
-	dba MagikarpStripeBackpic
-	dba MagikarpBubblesFrontpic
-	dba MagikarpBubblesBackpic
-	dba MagikarpForeheadFrontpic
-	dba MagikarpForeheadBackpic
-	dba MagikarpMaskFrontpic
-	dba MagikarpMaskBackpic
+EnteiPicPointers::
+	dba EnteiFrontpic
+	dba EnteiBackpic
+	dba Entei_BetaFrontpic
+	dba Entei_BetaBackpic
 
-GyaradosPicPointers::
-rept NUM_MAGIKARP
-	dba GyaradosPlainFrontpic
-	dba GyaradosPlainBackpic
-endr
-	dba GyaradosRedFrontpic
-	dba GyaradosRedBackpic
+ShayminPicPointers::
+	dba ShayminFrontpic
+	dba ShayminBackpic
+	dba Shaymin_SkyFrontpic
+	dba Shaymin_SkyBackpic
 
-MewtwoPicPointers::
-	dba MewtwoPlainFrontpic
-	dba MewtwoPlainBackpic
-	dba MewtwoArmoredFrontpic
-	dba MewtwoArmoredBackpic
+ZygardePicPointers::
+	dba Zygarde_Ten_PercentFrontpic
+	dba Zygarde_Ten_PercentBackpic
+	dba ZygardeFrontpic
+	dba ZygardeBackpic
+	dba Zygarde_CompleteFrontpic
+	dba Zygarde_CompleteBackpic

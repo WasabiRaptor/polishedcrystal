@@ -16,8 +16,14 @@ palred   EQUS "(1 << 0) *"
 palgreen EQUS "(1 << 5) *"
 palblue  EQUS "(1 << 10) *"
 
-palettes EQUS "* 8"
-palette  EQUS "+ 8 *"
+palettes EQUS "* PALETTE_SIZE"
+palette  EQUS "+ PALETTE_SIZE *"
+color    EQUS "+ PAL_COLOR_SIZE *"
 
 tiles EQUS "* $10"
 tile  EQUS "+ $10 *"
+
+; extracts the middle two colors from a 2bpp binary palette
+; example usage:
+; INCBIN "foo.gbcpal", middle_colors
+middle_colors EQUS "PAL_COLOR_SIZE, PAL_COLOR_SIZE * 2"
