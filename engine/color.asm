@@ -880,7 +880,6 @@ LoadPortraitPalette:
 
 GetPortraitPalettePointer:
 	ld a, [wCurSpecies]
-	dec a
 	ld l, a
 	ld h, 0
 

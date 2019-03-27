@@ -255,6 +255,7 @@ MomDoItText:
 NeighborScript:
 	faceplayer
 	opentext
+	portrait BEAUTY_PORTRAIT
 	checktime 1 << MORN
 	iftrue .MornScript
 	checktime 1 << DAY

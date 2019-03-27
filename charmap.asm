@@ -207,6 +207,7 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "…",        $ce
 	charmap "/",        $cf
 
+; cannot be used with portraits
 	charmap "<ID>",     $d0
 	charmap "№",        $d1
 	charmap "<LV>",     $d2
@@ -215,15 +216,10 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "<BLACK>",  $d5
 	charmap "<NONO>",   $d6
 
-	charmap "▼",        $d7
-	charmap "▲",        $d8
-	charmap "▷",        $d9
-	charmap "▶",        $da
-	charmap "◀",        $db
-	charmap "<UPDN>",   $dc
 	charmap "↑",        $dd
 	charmap "↓",        $de
 
+;symbols and numbers
 	charmap "♪",        $d9
 	charmap "♥",        $da
 
@@ -245,7 +241,13 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "+",        $ee
 	charmap "<SHARP>",  $ef
 
-; common font:
+; arrows
+	charmap "▼",        $f0
+	charmap "▲",        $f1
+	charmap "▷",        $f2
+	charmap "▶",        $f4
+	charmap "◀",        $f8
+	charmap "<UPDN>",   $ff
 
 ; frame:
 	charmap "│",        $f3
