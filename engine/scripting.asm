@@ -261,6 +261,8 @@ ScriptCommandTable:
 	dw Script_giveapricorn               ; c5
 	dw Script_paintingpic                ; c6
 	dw Script_checkegg                   ; c7
+	dw Script_portrait
+	dw Script_closeportrait
 
 StartScript:
 	ld hl, wScriptFlags
@@ -2981,3 +2983,11 @@ Script_paintingpic:
 .ok
 	ld [wTrainerClass], a
 	farjp Paintingpic
+
+Script_portrait:
+	call GetScriptByte
+	ld [wCurSpecies], a
+	farjp Portrait
+
+Script_closeportrait:
+	farjp ClosePortrait

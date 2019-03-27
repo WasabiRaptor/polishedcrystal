@@ -882,3 +882,5 @@ INCLUDE "data/events/paintings/palettes.asm"
 INCLUDE "engine/palettes.asm"
 
 INCLUDE "engine/sgb_border.asm"
+
+INCLUDE "data/portraits.asm"

@@ -82,6 +82,7 @@ Paintingpic::
 
 ClosePokepic:: ; 24528
 	ld hl, PokepicMenuDataHeader
+CloseTheWindow::
 	call CopyMenuDataHeader
 	call ClearMenuBoxInterior
 	call GetMemCGBLayout

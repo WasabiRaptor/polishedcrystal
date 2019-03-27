@@ -397,6 +397,7 @@ INCLUDE "data/battle/effect_command_pointers.asm"
 SECTION "Code 7", ROMX
 
 INCLUDE "engine/events/pokepic.asm"
+INCLUDE "engine/events/portrait.asm"
 INCLUDE "engine/scrolling_menu.asm"
 INCLUDE "engine/switch_items.asm"
 INCLUDE "engine/menu.asm"

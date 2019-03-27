@@ -1247,3 +1247,14 @@ thisasm: macro
 	end
 .asm\@
 endm
+
+	enum portrait_command ; $ab
+portrait: MACRO
+	db portrait_command
+	db \1 ;portrait
+ENDM
+
+	enum closeportrait_command ; $ac
+closeportrait: MACRO
+	db closeportrait_command
+ENDM
