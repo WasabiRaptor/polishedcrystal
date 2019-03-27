@@ -806,6 +806,10 @@ SECTION "Mewtwo Pics", ROMX
 ;MewtwoArmoredFrontpic:    INCBIN "gfx/pokemon/mewtwo_armored/front.animated.2bpp.lz"
 ;MewtwoArmoredBackpic:     INCBIN "gfx/pokemon/mewtwo_armored/back.2bpp.lz"
 
+SECTION "Portrait Pic Pointers", ROMX
+
+INCLUDE "data/portraits/portrait_pointers.asm"
+
 
 SECTION "Portrait Pics", ROMX
 

@@ -871,4 +871,25 @@ INCLUDE "data/pokemon/variant_palettes.asm"
 
 INCLUDE "data/pokemon/palettes.asm"
 
-INCLUDE "data/portraits.asm"
+LoadPortraitPalette:
+	call GetPortraitPalettePointer
+	ld de, wUnknBGPals palette PAL_BG_TEXT
+	ld bc, 1 palettes
+	ld a, BANK(wUnknBGPals)
+	jp FarCopyWRAM
+
+GetPortraitPalettePointer:
+	ld a, [wCurSpecies]
+	dec a
+	ld l, a
+	ld h, 0
+
+	ld bc, PortraitPalettes ;changed this of course
+
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, bc
+	ret 
+
+INCLUDE "data/portraits/portrait_palettes.asm"

@@ -1,12 +1,9 @@
 Portrait::
 	ld hl, PortraitMenuHeader
-	call CopyMenuHeader
+	call CopyMenuDataHeader
 	call MenuBox
 	call UpdateSprites
-	call ApplyTilemap
 	
-	;this will be a scriptbyte once I know it works
-
 	;this gets overwritten with the pokemon thats needed every time it is pulled, so I'm just using it here to hold the thing for later
 	ld a, [wCurSpecies]
 	farcall LoadPortraitPalette 
@@ -74,8 +71,9 @@ ClosePortrait::
 	jp CloseTheWindow
 
 PortraitMenuHeader:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 7, 5, 12
+	db $40 ; flags
+	db 0, 7 ; start coords
+	db 5, 12 ; end coords
 	dw NULL
 	db 1 ; default option
 
