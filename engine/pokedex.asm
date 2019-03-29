@@ -1535,12 +1535,12 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints the list of Pokémon on the main Pokédex screen.
 
 ; Clear (2 * [wDexListingHeight] + 1) by 11 box starting at 0,1
-	hlcoord 0, 1
+	hlcoord -7, 10
 	ld a, [wDexListingHeight]
 	add a
 	inc a
 	ld b, a
-	ld c, 11
+	ld c, 18
 	ld a, " "
 	call FillBoxWithByte
 
@@ -1552,7 +1552,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	add hl, de
 	ld e, l
 	ld d, h
-	hlcoord 0, 2
+	hlcoord -7, 11
 	ld a, [wDexListingHeight]
 .loop
 	push af
@@ -1585,9 +1585,9 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	jp PlaceString
 
 Pokedex_PrintNumberIfOldMode: ; 40b6a (10:4b6a)
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_OLD
-	ret nz
+	;ld a, [wCurrentDexMode] 
+	;cp DEXMODE_OLD
+	;ret nz ; now will always print the number
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
