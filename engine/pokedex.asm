@@ -125,10 +125,10 @@ Pokedex_InitCursorPosition: ; 400b4
 
 	ld b, a
 	ld a, [wDexListingEnd]
-	cp $8
+	cp $4
 	jr c, .only_one_page
 
-	sub $7
+	sub $3
 	ld c, a
 .loop1
 	ld a, b
@@ -142,7 +142,7 @@ Pokedex_InitCursorPosition: ; 400b4
 	jr nz, .loop1
 
 .only_one_page
-	ld c, $7
+	ld c, $3
 .loop2
 	ld a, b
 	cp [hl]
@@ -201,7 +201,7 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	hlcoord 0, 17
 	ld de, String_START_SEARCH
 	call Pokedex_PlaceString
-	ld a, 7
+	ld a, 4
 	ld [wDexListingHeight], a
 	call Pokedex_PrintListing
 	call Pokedex_SetBGMapMode3
@@ -228,7 +228,7 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	hlcoord 0, 17
 	ld de, String_START_SEARCH
 	call Pokedex_PlaceString
-	ld a, 7
+	ld a, 4
 	ld [wDexListingHeight], a
 	call Pokedex_PrintListing
 	jp Pokedex_IncrementDexPointer
@@ -1018,24 +1018,24 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	hlcoord 0, 9
 	lb bc, 6, 7
 	call Pokedex_PlaceBorder
-	hlcoord 1, 11
+	hlcoord 9, 4
 	ld de, String_SEEN
 	call Pokedex_PlaceString
 	ld hl, wPokedexSeen
 	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
 	ld de, wd265
-	hlcoord 5, 12
+	hlcoord 12, 5
 	lb bc, 1, 3
 	call PrintNum
-	hlcoord 1, 14
+	hlcoord 9, 6
 	ld de, String_OWN
 	call Pokedex_PlaceString
 	ld hl, wPokedexCaught
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	ld de, wd265
-	hlcoord 5, 15
+	hlcoord 12, 7
 	lb bc, 1, 3
 	call PrintNum
 	hlcoord 1, 17
@@ -1045,18 +1045,6 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld b, 7
 	ld a, $5a
 	call Pokedex_FillColumn
-	hlcoord 8, 10
-	ld b, 6
-	ld a, $5a
-	call Pokedex_FillColumn
-	hlcoord 8, 0
-	ld [hl], $59
-	hlcoord 8, 8
-	ld [hl], $53
-	hlcoord 8, 9
-	ld [hl], $54
-	hlcoord 8, 16
-	ld [hl], $5b
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
 String_SEEN: ; 407e1
@@ -1535,7 +1523,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints the list of Pokémon on the main Pokédex screen.
 
 ; Clear (2 * [wDexListingHeight] + 1) by 11 box starting at 0,1
-	hlcoord -7, 10
+	hlcoord 1, 9
 	ld a, [wDexListingHeight]
 	add a
 	inc a
@@ -1552,7 +1540,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	add hl, de
 	ld e, l
 	ld d, h
-	hlcoord -7, 11
+	hlcoord 1, 10
 	ld a, [wDexListingHeight]
 .loop
 	push af
@@ -2029,27 +2017,27 @@ Pokedex_UpdateCursorOAM: ; 41148 (10:5148)
 
 .CursorOAM: ; 41230
 	; y, x, tile, OAM attributes
-	db $10, $47, $31, $7
-	db $10, $4f, $32, $7
-	db $10, $57, $32, $7
-	db $10, $5f, $33, $7
-	db $10, $80, $33, $7 | X_FLIP
-	db $10, $88, $32, $7 | X_FLIP
-	db $10, $90, $32, $7 | X_FLIP
-	db $10, $98, $31, $7 | X_FLIP
+	db $50, $0b, $31, $7
+	db $50, $13, $32, $7
+	db $50, $1b, $32, $7
+	db $50, $23, $33, $7
+	db $50, $80, $33, $7 | X_FLIP
+	db $50, $88, $32, $7 | X_FLIP
+	db $50, $90, $32, $7 | X_FLIP
+	db $50, $98, $31, $7 | X_FLIP
 	db $fe ; tells LoadCursorOAM to set c = 0
-	db $18, $47, $30, $7
-	db $18, $98, $30, $7 | X_FLIP
-	db $20, $47, $30, $7 | Y_FLIP
-	db $28, $47, $31, $7 | Y_FLIP
-	db $28, $4f, $32, $7 | Y_FLIP
-	db $28, $57, $32, $7 | Y_FLIP
-	db $28, $5f, $33, $7 | Y_FLIP
-	db $28, $80, $33, $7 | X_FLIP | Y_FLIP
-	db $28, $88, $32, $7 | X_FLIP | Y_FLIP
-	db $28, $90, $32, $7 | X_FLIP | Y_FLIP
-	db $28, $98, $31, $7 | X_FLIP | Y_FLIP
-	db $20, $98, $30, $7 | X_FLIP | Y_FLIP
+	db $58, $0b, $30, $7
+	db $58, $98, $30, $7 | X_FLIP
+	db $60, $0b, $30, $7 | Y_FLIP
+	db $68, $0b, $31, $7 | Y_FLIP
+	db $68, $13, $32, $7 | Y_FLIP
+	db $68, $1b, $32, $7 | Y_FLIP
+	db $68, $23, $33, $7 | Y_FLIP
+	db $68, $80, $33, $7 | X_FLIP | Y_FLIP
+	db $68, $88, $32, $7 | X_FLIP | Y_FLIP
+	db $68, $90, $32, $7 | X_FLIP | Y_FLIP
+	db $68, $98, $31, $7 | X_FLIP | Y_FLIP
+	db $60, $98, $30, $7 | X_FLIP | Y_FLIP
 	db $ff
 
 Pokedex_UpdateSearchResultsCursorOAM:
