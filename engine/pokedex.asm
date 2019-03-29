@@ -1362,18 +1362,18 @@ UnownModeLetterAndCursorCoords: ; 40a3e
 
 Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	ld a, $32
-	hlcoord 0, DEX_WINDOW_HEIGHT -1
+	hlcoord 0, DEX_WINDOW_HEIGHT +1
 	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
 	hlcoord 0, 1
-	lb bc, DEX_WINDOW_HEIGHT -1, DEX_WINDOW_WIDTH -1
+	lb bc, DEX_WINDOW_HEIGHT, DEX_WINDOW_WIDTH -1
 	call ClearBox
 	ld a, $34
 	hlcoord 0, 0
 	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
 	ld a, $39
-	hlcoord 0, DEX_WINDOW_HEIGHT -1
+	hlcoord 0, DEX_WINDOW_HEIGHT +1
 	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
 ; scroll bar
@@ -1381,7 +1381,7 @@ Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	ld [hl], $50
 	ld a, $51
 	hlcoord DEX_WINDOW_WIDTH -1, 1
-	ld b, DEX_WINDOW_HEIGHT -1
+	ld b, DEX_WINDOW_HEIGHT
 	call Pokedex_FillColumn
 	ld [hl], $52
 	ret
@@ -1519,12 +1519,10 @@ Pokedex_PlaceBorder: ; 40ad5
 
 Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints the list of Pokémon on the main Pokédex screen.
-
-; Clear (2 * [wDexListingHeight] + 1) by 11 box starting at 0,1
+; Clear (2 * [wDexListingHeight]) by 17 box starting at 0,1
 	hlcoord 0, 1
 	ld a, [wDexListingHeight]
 	add a
-	inc a
 	ld b, a
 	ld c, DEX_WINDOW_WIDTH -1
 	ld a, " "
@@ -2019,23 +2017,23 @@ Pokedex_UpdateCursorOAM: ; 41148 (10:5148)
 	db $50, $17, $32, $7
 	db $50, $1f, $32, $7
 	db $50, $27, $33, $7
-	db $50, $80, $33, $7 | X_FLIP
-	db $50, $88, $32, $7 | X_FLIP
-	db $50, $90, $32, $7 | X_FLIP
-	db $50, $98, $31, $7 | X_FLIP
+	db $50, $7c, $33, $7 | X_FLIP
+	db $50, $84, $32, $7 | X_FLIP
+	db $50, $8c, $32, $7 | X_FLIP
+	db $50, $94, $31, $7 | X_FLIP
 	db $fe ; tells LoadCursorOAM to set c = 0
 	db $58, $0f, $30, $7
-	db $58, $98, $30, $7 | X_FLIP
+	db $58, $94, $30, $7 | X_FLIP
 	db $60, $0f, $30, $7 | Y_FLIP
 	db $68, $0f, $31, $7 | Y_FLIP
 	db $68, $17, $32, $7 | Y_FLIP
 	db $68, $1f, $32, $7 | Y_FLIP
 	db $68, $27, $33, $7 | Y_FLIP
-	db $68, $80, $33, $7 | X_FLIP | Y_FLIP
-	db $68, $88, $32, $7 | X_FLIP | Y_FLIP
-	db $68, $90, $32, $7 | X_FLIP | Y_FLIP
-	db $68, $98, $31, $7 | X_FLIP | Y_FLIP
-	db $60, $98, $30, $7 | X_FLIP | Y_FLIP
+	db $68, $7c, $33, $7 | X_FLIP | Y_FLIP
+	db $68, $84, $32, $7 | X_FLIP | Y_FLIP
+	db $68, $8c, $32, $7 | X_FLIP | Y_FLIP
+	db $68, $94, $31, $7 | X_FLIP | Y_FLIP
+	db $60, $94, $30, $7 | X_FLIP | Y_FLIP
 	db $ff
 
 Pokedex_UpdateSearchResultsCursorOAM:
