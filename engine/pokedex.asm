@@ -208,11 +208,10 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	call Pokedex_SetBGMapMode4
 	call Pokedex_ResetBGMapMode
 	call Pokedex_DrawMainScreenBG
-	ld a, $5
-	ldh [hSCX], a
-	ld a, $47
+
+	ld a, $13
 	ldh [hWX], a
-	xor a
+	ld a, $40
 	ldh [hWY], a
 	call ApplyTilemapInVBlank
 
@@ -1003,6 +1002,9 @@ Pokedex_FillColumn: ; 40741
 	pop de
 	ret
 
+DEX_WINDOW_WIDTH 	EQU 18
+DEX_WINDOW_HEIGHT 	EQU 8
+
 Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 ; Draws the left sidebar and the bottom bar on the main screen.
 	hlcoord 0, 17
@@ -1015,8 +1017,8 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	hlcoord 0, 0
 	lb bc, 7, 7
 	call Pokedex_PlaceBorder
-	hlcoord 0, 9
-	lb bc, 6, 7
+	hlcoord 0, 8
+	lb bc, DEX_WINDOW_HEIGHT, DEX_WINDOW_WIDTH
 	call Pokedex_PlaceBorder
 	hlcoord 9, 4
 	ld de, String_SEEN
@@ -1038,9 +1040,9 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	hlcoord 12, 7
 	lb bc, 1, 3
 	call PrintNum
-	hlcoord 1, 17
-	ld de, String_SELECT_OPTION
-	call Pokedex_PlaceString
+	;hlcoord 1, 17
+	;ld de, String_SELECT_OPTION
+	;call Pokedex_PlaceString
 	hlcoord 8, 1
 	ld b, 7
 	ld a, $5a
@@ -1360,30 +1362,26 @@ UnownModeLetterAndCursorCoords: ; 40a3e
 
 Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	ld a, $32
-	hlcoord 0, 17
-	ld bc, 12
+	hlcoord 0, DEX_WINDOW_HEIGHT -1
+	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
 	hlcoord 0, 1
-	lb bc, 15, 11
+	lb bc, DEX_WINDOW_HEIGHT -1, DEX_WINDOW_WIDTH -1
 	call ClearBox
 	ld a, $34
 	hlcoord 0, 0
-	ld bc, 11
+	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
 	ld a, $39
-	hlcoord 0, 16
-	ld bc, 11
+	hlcoord 0, DEX_WINDOW_HEIGHT -1
+	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
-	hlcoord 5, 0
-	ld [hl], $3f
-	hlcoord 5, 16
-	ld [hl], $40
 ; scroll bar
-	hlcoord 11, 0
+	hlcoord DEX_WINDOW_WIDTH -1, 0
 	ld [hl], $50
 	ld a, $51
-	hlcoord 11, 1
-	ld b, SCREEN_HEIGHT - 3
+	hlcoord DEX_WINDOW_WIDTH -1, 1
+	ld b, DEX_WINDOW_HEIGHT -1
 	call Pokedex_FillColumn
 	ld [hl], $52
 	ret
@@ -1523,12 +1521,12 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints the list of Pokémon on the main Pokédex screen.
 
 ; Clear (2 * [wDexListingHeight] + 1) by 11 box starting at 0,1
-	hlcoord 1, 9
+	hlcoord 0, 1
 	ld a, [wDexListingHeight]
 	add a
 	inc a
 	ld b, a
-	ld c, 18
+	ld c, DEX_WINDOW_WIDTH -1
 	ld a, " "
 	call FillBoxWithByte
 
@@ -1540,7 +1538,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	add hl, de
 	ld e, l
 	ld d, h
-	hlcoord 1, 10
+	hlcoord 0, 2
 	ld a, [wDexListingHeight]
 .loop
 	push af
@@ -2017,22 +2015,22 @@ Pokedex_UpdateCursorOAM: ; 41148 (10:5148)
 
 .CursorOAM: ; 41230
 	; y, x, tile, OAM attributes
-	db $50, $0b, $31, $7
-	db $50, $13, $32, $7
-	db $50, $1b, $32, $7
-	db $50, $23, $33, $7
+	db $50, $0f, $31, $7
+	db $50, $17, $32, $7
+	db $50, $1f, $32, $7
+	db $50, $27, $33, $7
 	db $50, $80, $33, $7 | X_FLIP
 	db $50, $88, $32, $7 | X_FLIP
 	db $50, $90, $32, $7 | X_FLIP
 	db $50, $98, $31, $7 | X_FLIP
 	db $fe ; tells LoadCursorOAM to set c = 0
-	db $58, $0b, $30, $7
+	db $58, $0f, $30, $7
 	db $58, $98, $30, $7 | X_FLIP
-	db $60, $0b, $30, $7 | Y_FLIP
-	db $68, $0b, $31, $7 | Y_FLIP
-	db $68, $13, $32, $7 | Y_FLIP
-	db $68, $1b, $32, $7 | Y_FLIP
-	db $68, $23, $33, $7 | Y_FLIP
+	db $60, $0f, $30, $7 | Y_FLIP
+	db $68, $0f, $31, $7 | Y_FLIP
+	db $68, $17, $32, $7 | Y_FLIP
+	db $68, $1f, $32, $7 | Y_FLIP
+	db $68, $27, $33, $7 | Y_FLIP
 	db $68, $80, $33, $7 | X_FLIP | Y_FLIP
 	db $68, $88, $32, $7 | X_FLIP | Y_FLIP
 	db $68, $90, $32, $7 | X_FLIP | Y_FLIP
