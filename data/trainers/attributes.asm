@@ -360,7 +360,31 @@ TrainerClassAttributes: ; 3959c
 	dw AI_BASIC + AI_SETUP + AI_TYPES + AI_CAUTIOUS + AI_STATUS + AI_RISKY
 	dw CONTEXT_USE + SWITCH_SOMETIMES
 
-; Kimono Girl
+; Kimono Girl 1
+	db 0, 0 ; items
+	db 20 ; base reward
+	dw AI_BASIC + AI_SETUP + AI_TYPES + AI_SMART + AI_OPPORTUNIST + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	dw CONTEXT_USE + SWITCH_SOMETIMES
+
+; Kimono Girl 2
+	db 0, 0 ; items
+	db 20 ; base reward
+	dw AI_BASIC + AI_SETUP + AI_TYPES + AI_SMART + AI_OPPORTUNIST + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	dw CONTEXT_USE + SWITCH_SOMETIMES
+
+; Kimono Girl 3
+	db 0, 0 ; items
+	db 20 ; base reward
+	dw AI_BASIC + AI_SETUP + AI_TYPES + AI_SMART + AI_OPPORTUNIST + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	dw CONTEXT_USE + SWITCH_SOMETIMES
+
+; Kimono Girl 4
+	db 0, 0 ; items
+	db 20 ; base reward
+	dw AI_BASIC + AI_SETUP + AI_TYPES + AI_SMART + AI_OPPORTUNIST + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
+	dw CONTEXT_USE + SWITCH_SOMETIMES
+
+; Kimono Girl 5
 	db 0, 0 ; items
 	db 20 ; base reward
 	dw AI_BASIC + AI_SETUP + AI_TYPES + AI_SMART + AI_OPPORTUNIST + AI_AGGRESSIVE + AI_CAUTIOUS + AI_STATUS + AI_RISKY
@@ -543,6 +567,12 @@ TrainerClassAttributes: ; 3959c
 ; Aroma Lady
 	db 0, 0 ; items
 	db 14 ; base reward
+	dw AI_BASIC + AI_OPPORTUNIST + AI_CAUTIOUS + AI_STATUS
+	dw CONTEXT_USE + SWITCH_RARELY
+
+; Waiter
+	db 0, 0 ; items
+	db 12 ; base reward
 	dw AI_BASIC + AI_OPPORTUNIST + AI_CAUTIOUS + AI_STATUS
 	dw CONTEXT_USE + SWITCH_RARELY
 

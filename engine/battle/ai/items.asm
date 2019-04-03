@@ -12,6 +12,13 @@ AI_SwitchOrTryItem: ; 38000
 	farcall CheckEnemyLockedIn
 	ret nz
 
+	; Avoid performing this check twice in a single turn
+	ld hl, wEnemySwitchItemCheck
+	ld a, [hl]
+	ld [hl], 1
+	and a
+	ret nz
+
 	farcall GetEnemyItem
 	ld a, b
 	cp HELD_SHED_SHELL
@@ -20,13 +27,19 @@ AI_SwitchOrTryItem: ; 38000
 	; check if we're trapped by an ability
 	ldh a, [hBattleTurn]
 	push af
-	ld a, 1
-	ldh [hBattleTurn], a
+	call SetEnemyTurn
 	farcall CheckIfTrappedByAbility
 	pop bc
 	ld a, b
 	ldh [hBattleTurn], a
 	jr z, DontSwitch
+	call SetEnemyTurn
+	push bc
+	call CheckIfUserIsGhostType
+	pop bc
+	ld a, b
+	ld [hBattleTurn], a
+	jr z, .can_switch
 
 	ld a, [wPlayerSubStatus2]
 	bit SUBSTATUS_CANT_RUN, a
@@ -243,6 +256,9 @@ AI_TryItem: ; 38105
 
 	xor a
 	ld [wLastPlayerCounterMove], a
+
+	ld a, 1
+	ld [wEnemyUsingItem], a
 
 	scf
 	ret
@@ -664,55 +680,8 @@ AI_TrySwitch: ; 3844b
 	ret
 ; 3846c
 
-AI_Switch: ; 3846c
-	ld a, $1
-	ld [wEnemyIsSwitching], a
-	ld [wEnemyGoesFirst], a
-	ld hl, wEnemySubStatus4
-	res SUBSTATUS_RAGE, [hl]
-	xor a
-	ldh [hBattleTurn], a
-	farcall PursuitSwitch
-
-	push af
-	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1Status
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, wEnemyMonStatus
-	ld bc, MON_MAXHP - MON_STATUS
-	rst CopyBytes
-	pop af
-
-	jr c, .skiptext
-	ld hl, TextJump_EnemyWithdrew
-	call PrintText
-
-.skiptext
-	; Actively switched -- don't prompt the user about the switch
-	ld a, 1
-	ld [wBattleHasJustStarted], a
-	farcall NewEnemyMonStatus
-	farcall ResetEnemyStatLevels
-	ld hl, wPlayerSubStatus1
-	res SUBSTATUS_IN_LOVE, [hl]
-	farcall EnemySwitch
-	farcall ResetBattleParticipants
-	xor a
-	ld [wBattleHasJustStarted], a
-	ld a, [wLinkMode]
-	and a
-	ret nz
-	scf
-	ret
-; 384d0
-
-TextJump_EnemyWithdrew: ; 384d0
-	text_jump Text_EnemyWithdrew
-	db "@"
-; 384d5
+AI_Switch:
+	farjp EnemyMonEntrance
 
 AI_HealStatus: ; 384e0
 	ld a, [wCurOTMon]
