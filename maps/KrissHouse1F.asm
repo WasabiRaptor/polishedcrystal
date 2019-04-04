@@ -255,7 +255,7 @@ MomDoItText:
 NeighborScript:
 	faceplayer
 	opentext
-	portrait BEAUTY_PORTRAIT
+	portrait ZYGARDE_NEUTRAL
 	checktime 1 << MORN
 	iftrue .MornScript
 	checktime 1 << DAY
@@ -305,8 +305,8 @@ NeighborScript:
 	done
 
 .NeighborText:
-	text "<PLAYER>, have you"
-	line "heard?"
+	text "bork!"
+	line ""
 
 	para "My daughter is"
 	line "adamant about"

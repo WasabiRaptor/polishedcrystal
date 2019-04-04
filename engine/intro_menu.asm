@@ -700,7 +700,7 @@ endc
 	call DelayFrames
 
 	ld hl, ElmText6
-	call PrintNamedText
+	call PrintText
 
 	call NamePlayer
 
