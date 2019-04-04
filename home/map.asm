@@ -467,7 +467,7 @@ CopyMapObjectHeaders:: ; 2457
 	push hl
 	ld a, $ff
 	ld [hli], a
-	ld b, MAPOBJECT_FLAG_HI - MAPOBJECT_SPRITE + 1 ; size of person_event
+	ld b, MAPOBJECT_FLAG_HI - MAPOBJECT_SPRITE + 1 ; size of object_event
 .loop2
 	ld a, [de]
 	inc de

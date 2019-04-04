@@ -32,7 +32,7 @@ BattleTowerTrainers:
 	db "R", "a", "j", "a", "n", "@", "@", "@", "@", "@", PICNICKER
 	db "D", "i", "a", "z", "@", "@", "@", "@", "@", "@", PICNICKER
 	db "M", "o", "z", "i", "@", "@", "@", "@", "@", "@", SAGE
-	db "A", "d", "r", "i", "á", "n", "@", "@", "@", "@", WAITER
+	db "A", "d", "r", "i", "a", "n", "@", "@", "@", "@", WAITER
 	db "T", "o", "m", "o", "y", "o", "@", "@", "@", "@", COSPLAYER
 	db "E", "b", "o", "n", "y", "@", "@", "@", "@", "@", COOLTRAINERF
 	db "P", "i", "r", "s", "i", "g", "@", "@", "@", "@", SAGE
@@ -56,7 +56,7 @@ BattleTowerTrainers:
 	db "S", "w", "a", "r", "t", "z", "@", "@", "@", "@", VETERANM
 	db "C", "o", "b", "b", "@", "@", "@", "@", "@", "@", SCHOOLBOY
 	db "Y", "u", "f", "u", "n", "e", "@", "@", "@", "@", BLACKBELT_T
-	db "M", "ó", "n", "i", "c", "a", "@", "@", "@", "@", WAITRESS
+	db "M", "o", "n", "i", "c", "a", "@", "@", "@", "@", WAITRESS
 	db "D", "a", "n", "i", "e", "l", "@", "@", "@", "@", TAMER
 	db "T", "o", "s", "h", "i", "@", "@", "@", "@", "@", BLACKBELT_T
 	db "C", "h", "a", "r", "l", "i", "e", "@", "@", "@", JUGGLER

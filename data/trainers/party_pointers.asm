@@ -55,17 +55,12 @@ TrainerGroups: ; 0x39999
 	dba RuinManiacGroup
 	dba FirebreatherGroup
 	dba JugglerGroup
-	dba SchoolboyGroup
 	dba SchoolgirlGroup
 	dba PsychicGroup
 	dba HexManiacGroup
 	dba SageGroup
 	dba MediumGroup
-	dba KimonoGirl1Group
-	dba KimonoGirl2Group
-	dba KimonoGirl3Group
-	dba KimonoGirl4Group
-	dba KimonoGirl5Group
+	dba KimonoGirlGroup
 	dba ElderGroup
 	dba SrAndJrGroup
 	dba CoupleGroup

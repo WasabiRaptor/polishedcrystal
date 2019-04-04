@@ -15,8 +15,8 @@ Town1_MapScriptHeader:
 	db 0 ; bg events
 
 	db 2 ; object events
-	person_event 7, 6, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, MysteryDungeonEnterScript, -1
-	person_event 7, 7, SPRITE_REAL_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
+	object_event 7, 6, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, MysteryDungeonEnterScript, -1
+	object_event 7, 7, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
 
 MysteryDungeonEnterScript:
 	opentext
