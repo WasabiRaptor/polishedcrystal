@@ -7236,7 +7236,14 @@ SetLevel:
 	jr .SetLevel
 
 .MatchPlayerLevel
+	ld a, [wCurPartyLevel]
+	sub 200
+	ld c, a
 	ld a, b
+	cp c
+	jr nc .SetLevel
+	ld a, c
+	
 .SetLevel
 	ld [wCurPartyLevel], a
 .DoNotAverageLevels
