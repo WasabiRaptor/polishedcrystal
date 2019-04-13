@@ -1391,6 +1391,103 @@ CheckTypeMatchup:
 	pop hl
 	ret
 
+CheckExpTypeMatchup:
+	push hl
+	push bc
+	push de
+	ld a, [wEnemyMonType1]
+	call _CheckMatchup
+	ld a, [wTypeMatchup]
+	ld b, a
+	push bc
+	ld a, [wEnemyMonType2]
+	ld d, a
+	call _CheckMatchup
+	pop bc
+	ld a, [wTypeMatchup]
+	add b
+	ld c, 2
+	call SimpleDivide
+	ld a, b
+	ld [wTypeMatchup], a
+	pop de
+	pop bc
+	pop hl
+	ret
+
+_CheckMatchup:
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	ld a, $10 ; 1.0
+	ld [wTypeMatchup], a
+	ld hl, InverseTypeMatchup
+	ld a, [wBattleType]
+	cp BATTLETYPE_INVERSE
+	jr z, .TypesLoop
+	ld hl, TypeMatchup
+.TypesLoop:
+	ld a, [hli]
+	; terminator
+	cp $ff
+	ret z
+	cp $fe
+	jr nz, .Next
+	; stuff beyond this point is ignored if we have Scrappy
+	ld a, BATTLE_VARS_ABILITY
+	call GetBattleVar
+	cp SCRAPPY
+	ret z
+	jr .TypesLoop
+
+.Next:
+	; attacking type
+	cp d
+	jr nz, .Nope
+	ld a, [hli]
+	; defending types
+	cp b
+	jr z, .Yup
+	cp c
+	jr z, .Yup
+	jr .Nope2
+
+.Nope:
+	inc hl
+.Nope2:
+	inc hl
+	jr .TypesLoop
+
+.Yup:
+	; no need to continue if we encountered a 0x matchup
+	ld a, [hli]
+	and a
+	jr z, .Immune
+	cp SUPER_EFFECTIVE
+	jr z, .se
+	cp NOT_VERY_EFFECTIVE
+	jr z, .nve
+	jr .TypesLoop
+.se
+	ld a, [wTypeMatchup]
+	sla a
+	ld [wTypeMatchup], a
+	jr .TypesLoop
+.nve
+	ld a, [wTypeMatchup]
+	srl a
+	ld [wTypeMatchup], a
+	jr .TypesLoop
+
+.AbilImmune:
+	; most abilities are checked seperately, but Overcoat ends up here (powder)
+	ld a, 3
+	ld [wAttackMissed], a
+.Immune:
+	xor a
+	ld [wTypeMatchup], a
+	ret
+
 _CheckTypeMatchup: ; 347d3
 	push hl
 	ld de, 1 ; IsInArray checks below use single-byte arrays

@@ -7719,8 +7719,11 @@ GiveExperiencePoints: ; 3ee3b
 	ld a, $1
 
 .no_boost
-; Boost experience for a trainer battle
 	ld [wStringBuffer2 + 2], a
+; boost experience for type disadvantage
+	call CheckExpTypeMatchup
+	;call c, BoostExp
+; Boost experience for a trainer battle
 	ld a, [wBattleMode]
 	dec a
 	call nz, BoostExp
