@@ -7243,7 +7243,9 @@ SetLevel:
 	cp c
 	jr nc, .SetLevel
 	ld a, c
-
+	cp 101
+	jr c, .SetLevel
+	ld a, 100
 .SetLevel
 	ld [wCurPartyLevel], a
 .DoNotAverageLevels
