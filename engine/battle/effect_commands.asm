@@ -1395,7 +1395,10 @@ CheckExpTypeMatchup:
 	push hl
 	push bc
 	push de
+
+	ld hl, wBattleMonType
 	ld a, [wEnemyMonType1]
+	ld d, a
 	call _CheckMatchup
 	ld a, [wTypeMatchup]
 	ld b, a
@@ -1410,6 +1413,7 @@ CheckExpTypeMatchup:
 	call SimpleDivide
 	ld a, b
 	ld [wTypeMatchup], a
+	
 	pop de
 	pop bc
 	pop hl
@@ -1478,11 +1482,6 @@ _CheckMatchup:
 	srl a
 	ld [wTypeMatchup], a
 	jr .TypesLoop
-
-.AbilImmune:
-	; most abilities are checked seperately, but Overcoat ends up here (powder)
-	ld a, 3
-	ld [wAttackMissed], a
 .Immune:
 	xor a
 	ld [wTypeMatchup], a
