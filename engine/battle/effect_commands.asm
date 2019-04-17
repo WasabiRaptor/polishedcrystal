@@ -1392,10 +1392,6 @@ CheckTypeMatchup:
 	ret
 
 CheckExpTypeMatchup:
-	push hl
-	push bc
-	push de
-
 	ld hl, wBattleMonType
 	ld a, [wEnemyMonType1]
 	ld d, a
@@ -1413,10 +1409,6 @@ CheckExpTypeMatchup:
 	call SimpleDivide
 	ld a, b
 	ld [wTypeMatchup], a
-	
-	pop de
-	pop bc
-	pop hl
 	ret
 
 _CheckMatchup:

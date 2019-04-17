@@ -7723,6 +7723,7 @@ GiveExperiencePoints: ; 3ee3b
 .no_boost
 	ld [wStringBuffer2 + 2], a
 ; Boost experience for type disadvantage
+	push bc
 	call CheckExpTypeMatchup
 	ld a, [wTypeMatchup]
 	cp $10
@@ -7732,6 +7733,7 @@ GiveExperiencePoints: ; 3ee3b
 	dec a
 	call nz, BoostExp
 ; Boost experience for Lucky Egg
+	pop bc
 	push bc
 	ld hl, MON_ITEM
 	add hl, bc
