@@ -42,8 +42,8 @@ TrainerEncounterMusic: ; e9027
 	db MUSIC_ROCKET_ENCOUNTER		; gruntf
 	db MUSIC_HIKER_ENCOUNTER		; pokefanm
 	db MUSIC_BEAUTY_ENCOUNTER		; pokefanf
-	db MUSIC_HIKER_ENCOUNTER		; officerm
-	db MUSIC_HIKER_ENCOUNTER		; officerf
+	db MUSIC_OFFICER_ENCOUNTER		; officerm
+	db MUSIC_OFFICER_ENCOUNTER		; officerf
 	db MUSIC_BEAUTY_ENCOUNTER		; nurse
 	db MUSIC_POKEMANIAC_ENCOUNTER	; pokemaniac
 	db MUSIC_LASS_ENCOUNTER			; cosplayer
@@ -60,8 +60,12 @@ TrainerEncounterMusic: ; e9027
 	db MUSIC_SAGE_ENCOUNTER			; hex_maniac
 	db MUSIC_SAGE_ENCOUNTER			; sage
 	db MUSIC_SAGE_ENCOUNTER			; medium
-	db MUSIC_KIMONO_ENCOUNTER		; kimono_girl
 	db MUSIC_SAGE_ENCOUNTER			; elder
+	db MUSIC_KIMONO_ENCOUNTER		; kimono_girl_1
+	db MUSIC_KIMONO_ENCOUNTER		; kimono_girl_2
+	db MUSIC_KIMONO_ENCOUNTER		; kimono_girl_3
+	db MUSIC_KIMONO_ENCOUNTER		; kimono_girl_4
+	db MUSIC_KIMONO_ENCOUNTER		; kimono_girl_5
 	db MUSIC_LASS_ENCOUNTER			; sr_and_jr
 	db MUSIC_HIKER_ENCOUNTER		; couple
 	db MUSIC_HIKER_ENCOUNTER		; gentleman
@@ -91,6 +95,7 @@ TrainerEncounterMusic: ; e9027
 	db MUSIC_HIKER_ENCOUNTER		; tamer
 	db MUSIC_BEAUTY_ENCOUNTER		; artist
 	db MUSIC_BEAUTY_ENCOUNTER		; aroma_lady
+	db MUSIC_HIKER_ENCOUNTER		; waiter
 	db MUSIC_BEAUTY_ENCOUNTER		; waitress
 	db MUSIC_HIKER_ENCOUNTER		; sightseerm
 	db MUSIC_BEAUTY_ENCOUNTER		; sightseerf

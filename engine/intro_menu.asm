@@ -669,10 +669,11 @@ if !DEF(DEBUG)
 	call InitIntroGradient
 	call Intro_RotatePalettesLeftFrontpic
 
+	ld de, ElmName
 	ld hl, ElmText2
 	call PrintNamedText
 	ld hl, ElmText4
-	call PrintNamedText
+	call PrintText
 	ld c, 15
 	call FadeToWhite
 	call ClearTileMap
@@ -688,6 +689,7 @@ if !DEF(DEBUG)
 	call InitIntroGradient
 	call Intro_RotatePalettesLeftFrontpic
 
+	ld de, ElmName
 	ld hl, ElmText5
 	call PrintNamedText
 endc
@@ -698,7 +700,7 @@ endc
 	call DelayFrames
 
 	ld hl, ElmText6
-	call PrintNamedText
+	call PrintText
 
 	call NamePlayer
 
@@ -713,7 +715,7 @@ endc
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld hl, ElmText7
-	jp PrintNamedText
+	jp PrintText
 
 ElmText1: ; 0x6045
 	text_jump _ElmText1

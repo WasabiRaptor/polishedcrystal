@@ -3,7 +3,7 @@ MomName::
     db "@@"
 
 NeighborName::
-    text "Neighbor"
+    text "Zygarde"
     db "@@"
 
 ProfElmName::

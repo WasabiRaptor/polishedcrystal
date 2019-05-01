@@ -1391,6 +1391,94 @@ CheckTypeMatchup:
 	pop hl
 	ret
 
+CheckExpTypeMatchup:
+	ld hl, wBattleMonType
+	ld a, [wEnemyMonType1]
+	ld d, a
+	call _CheckMatchup
+	ld a, [wTypeMatchup]
+	ld b, a
+	push bc
+	ld a, [wEnemyMonType2]
+	ld d, a
+	call _CheckMatchup
+	pop bc
+	ld a, [wTypeMatchup]
+	add b
+	ld c, 2
+	call SimpleDivide
+	ld a, b
+	ld [wTypeMatchup], a
+	ret
+
+_CheckMatchup:
+	ld b, [hl]
+	inc hl
+	ld c, [hl]
+	ld a, $10 ; 1.0
+	ld [wTypeMatchup], a
+	ld hl, InverseTypeMatchup
+	ld a, [wBattleType]
+	cp BATTLETYPE_INVERSE
+	jr z, .TypesLoop
+	ld hl, TypeMatchup
+.TypesLoop:
+	ld a, [hli]
+	; terminator
+	cp $ff
+	ret z
+	cp $fe
+	jr nz, .Next
+	; stuff beyond this point is ignored if we have Scrappy
+	ld a, BATTLE_VARS_ABILITY
+	call GetBattleVar
+	cp SCRAPPY
+	ret z
+	jr .TypesLoop
+
+.Next:
+	; attacking type
+	cp d
+	jr nz, .Nope
+	ld a, [hli]
+	; defending types
+	cp b
+	jr z, .Yup
+	cp c
+	jr z, .Yup
+	jr .Nope2
+
+.Nope:
+	inc hl
+.Nope2:
+	inc hl
+	jr .TypesLoop
+
+.Yup:
+	; no need to continue if we encountered a 0x matchup
+	ld a, [hli]
+	and a
+	jr z, .Immune
+	cp SUPER_EFFECTIVE
+	jr z, .se
+	cp NOT_VERY_EFFECTIVE
+	jr z, .nve
+	jr .TypesLoop
+.se
+	ld a, [wTypeMatchup]
+	sla a
+	ld [wTypeMatchup], a
+	jr .TypesLoop
+.nve
+	ld a, [wTypeMatchup]
+	srl a
+	ld [wTypeMatchup], a
+	jr .TypesLoop
+.Immune:
+	xor a
+	ld [wTypeMatchup], a
+	ret
+
 _CheckTypeMatchup: ; 347d3
 	push hl
 	ld de, 1 ; IsInArray checks below use single-byte arrays
@@ -1699,6 +1787,9 @@ BattleCommand_checkhit:
 	ld a, ATKFAIL_GENERIC
 	jp nz, .Miss_skipset
 
+	call .PursuitCheck
+	ret z
+
 	call .PoisonTypeUsingToxic
 	ret z
 
@@ -1849,7 +1940,8 @@ BattleCommand_checkhit:
 	ret nz ; final acc ended up >=100%
 	ldh a, [hMultiplicand + 2]
 	ld b, a
-	call BattleRandom
+	ld a, 100
+	call BattleRandomRange
 	cp b
 	ret c
 
@@ -1944,6 +2036,27 @@ BattleCommand_checkhit:
 	cp TOXIC
 	ret
 
+.PursuitCheck:
+; Pursuit used when a foe is switching always hits
+	ld a, BATTLE_VARS_MOVE_EFFECT
+	call GetBattleVar
+	cp EFFECT_PURSUIT
+	ret nz
+
+	ld a, [hBattleTurn]
+	and a
+	ld hl, wEnemyIsSwitching
+	jr z, .ok
+	ld hl, wPlayerIsSwitching
+.ok
+	ld a, [hl]
+	and a
+	jr nz, .pursuit_hits
+	or 1
+	ret
+.pursuit_hits
+	xor a
+	ret
 
 .FlyDigMoves:
 ; Check for moves that can hit underground/flying opponents.
@@ -2062,10 +2175,8 @@ BattleCommand_effectchance: ; 34ecc
 	jr c, .end ; Carry means the effect byte overflowed, so gurantee it
 
 .skip_serene_grace
-	ld a, b
-	cp 100 percent
-	jr z, .end
-	call BattleRandom
+	ld a, 100
+	call BattleRandomRange
 	cp b
 	jr c, .end
 
@@ -3082,6 +3193,8 @@ BattleCommand_posthiteffects:
 	ret z
 	call CheckSheerForceNegation
 	ret nz
+	farcall CheckFullHP
+	ret z
 
 	ld a, [wCurDamage]
 	ld b, a
@@ -3093,13 +3206,7 @@ BattleCommand_posthiteffects:
 	rr c
 	srl b
 	rr c
-	srl b
-	rr c
-	ld a, b
-	or c
-	jr nz, .damage_ok2
-	inc c
-.damage_ok2
+	call HalveBC
 	farcall ItemRecoveryAnim
 	farcall RestoreHP
 	ld hl, BattleText_UserRecoveredWithItem
@@ -3508,19 +3615,8 @@ TruncateHL_BC: ; 3534d
 	or b
 	jr z, .finish
 
-	srl b
-	rr c
-	srl b
-	rr c
+	call HalveBC
 
-	ld a, c
-	or b
-	jr nz, .done_bc
-	inc c
-
-.done_bc
-	srl h
-	rr l
 	srl h
 	rr l
 
@@ -3530,12 +3626,6 @@ TruncateHL_BC: ; 3534d
 	inc l
 
 .finish
-	ld a, [wLinkMode]
-	cp 3
-	jr z, .done
-; If we go back to the loop point,
-; it's the same as doing this exact
-; same check twice.
 	ld a, h
 	or b
 	jr nz, .loop
@@ -6524,7 +6614,8 @@ BattleCommand_forceswitch: ; 3680f
 	call AnimateCurrentMove
 	ld c, $14
 	call DelayFrames
-	ldh a, [hBattleTurn]
+	farcall RunSwitchAbilities
+	ld a, [hBattleTurn]
 	and a
 	jr nz, .enemy_trainer
 	hlcoord 1, 0
@@ -6582,7 +6673,7 @@ BattleCommand_forceswitch: ; 3680f
 
 .enemy_trainer2
 	ld [wCurPartyMon], a
-	farcall SwitchPlayerMon
+	farcall ForcePlayerSwitch
 
 .done_forceswitch
 	ld hl, DraggedOutText
@@ -6744,12 +6835,11 @@ FlinchTarget: ; 36ab5
 CheckOpponentWentFirst:
 ; Returns a=0, z if user went first
 ; Returns a=1, nz if opponent went first
-	push bc
-	ld a, [wEnemyGoesFirst] ; 0 if player went first
-	ld b, a
-	ldh a, [hBattleTurn] ; 0 if it's the player's turn
-	xor b ; 1 if opponent went first
-	pop bc
+	push hl
+	ld hl, wEnemyGoesFirst
+	ld a, [hBattleTurn]
+	xor [hl]
+	pop hl
 	ret
 
 BattleCommand_checkcharge: ; 36b3a
@@ -7001,16 +7091,10 @@ BattleCommand_recoil: ; 36cb2
 	ld b, a
 	ld a, [wCurDamage + 1]
 	ld c, a
-	srl b
-	rr c
-	srl b
-	rr c
+	call HalveBC
+	call HalveBC
 .recoil_floor
-	ld a, b
-	or c
-	jr nz, .min_damage
-	inc c
-.min_damage
+	call FloorBC
 	ld a, [hli]
 	ld [wBuffer2], a
 	ld a, [hl]
@@ -8750,6 +8834,22 @@ DoCheckAnyOtherAliveMons:
 	jr nz, .loop
 	ret
 
+PursuitSwitchDuringMove:
+; Returns z if Pursuit caused us to faint
+	ld a, [hBattleTurn]
+	push af
+	call SwitchTurn
+	ld a, [wCurBattleMon]
+	ld [wLastPlayerMon], a
+	farcall PursuitSwitchIfFirstAndAlive
+.pursuit_done
+	pop af
+	ld [hBattleTurn], a
+
+	; if Pursuit fainted, abort the switch-out
+	call HasUserFainted
+	ret
+
 BattleCommand_switchout:
 	call CheckAnyOtherAliveMons
 	ret z
@@ -8762,6 +8862,8 @@ ContinueToSwitchOut:
 	ld hl, BattleText_WentBackToEnemy
 .got_text
 	call StdBattleTextBox
+	call PursuitSwitchDuringMove
+	ret z
 	farcall SlideUserPicOut
 	ld c, 20
 	call DelayFrames
@@ -8803,7 +8905,10 @@ BattleCommand_batonpass:
 	call CheckAnyOtherAliveMons
 	jp z, FailedBatonPass
 
-	ldh a, [hBattleTurn]
+	call PursuitSwitchDuringMove
+	ret z
+
+	ld a, [hBattleTurn]
 	and a
 	ld hl, wPlayerMinimized
 	jr z, .got_minimize

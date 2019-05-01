@@ -55,7 +55,6 @@ TrainerGroups: ; 0x39999
 	dba RuinManiacGroup
 	dba FirebreatherGroup
 	dba JugglerGroup
-	dba SchoolboyGroup
 	dba SchoolgirlGroup
 	dba PsychicGroup
 	dba HexManiacGroup
@@ -92,6 +91,7 @@ TrainerGroups: ; 0x39999
 	dba TamerGroup
 	dba ArtistGroup
 	dba AromaLadyGroup
+	dba WaiterGroup
 	dba WaitressGroup
 	dba SightseerMGroup
 	dba SightseerFGroup

@@ -352,7 +352,7 @@ Options_RunningShoes: ; e44c1
 	db "On @"
 ; e44fa
 
-
+NUM_TEXTBOX_FRAMES EQU 13
 Options_Frame: ; e44fa
 	ld hl, wTextBoxFrame
 	ldh a, [hJoyPressed]
@@ -366,7 +366,7 @@ Options_Frame: ; e44fa
 .RightPressed:
 	ld a, [hl]
 	inc a
-	cp $9
+	cp NUM_TEXTBOX_FRAMES
 	jr nz, .Save
 	xor a
 	jr .Save
@@ -376,14 +376,14 @@ Options_Frame: ; e44fa
 	dec a
 	cp $ff
 	jr nz, .Save
-	ld a, $8
+	ld a, NUM_TEXTBOX_FRAMES -1
 
 .Save:
 	ld [hl], a
 UpdateFrame: ; e4512
 	ld a, [wTextBoxFrame]
 	hlcoord 16, 11 ; where on the screen the number is drawn
-	add "1"
+	add "A"
 	ld [hl], a
 	call LoadFontsExtra
 	and a

@@ -173,6 +173,8 @@ BattleTurn: ; 3c12f
 	xor a
 	ld [wPlayerIsSwitching], a
 	ld [wEnemyIsSwitching], a
+	ld [wEnemyUsingItem], a
+	ld [wEnemySwitchItemCheck], a
 	ld [wBattleHasJustStarted], a
 	ld [wCurDamage], a
 	ld [wCurDamage + 1], a
@@ -752,6 +754,8 @@ TryEnemyFlee: ; 3c543
 	jr z, .skip_traps
 
 	call SetEnemyTurn
+	call CheckIfUserIsGhostType
+	jr z, .skip_traps
 	farcall CheckIfTrappedByAbility
 	jr z, .Stay
 
@@ -3827,7 +3831,7 @@ endc
 ; 3db32
 
 
-SwitchPlayerMon: ; 3db32
+ForcePlayerSwitch: ; 3db32
 	call ClearSprites
 	ld a, [wCurBattleMon]
 	ld [wLastPlayerMon], a
@@ -4153,6 +4157,13 @@ HandleAirBalloon:
 	xor a
 	ret
 
+PursuitSwitchIfFirstAndAlive:
+	; Avoids double-usage of Pursuit when Pursuit user goes first
+	; Performed from Pursuit user's POV
+	call CheckOpponentWentFirst
+	jp z, PursuitSwitch_done
+	call HasUserFainted
+	jp z, PursuitSwitch_done
 PursuitSwitch: ; 3dc5b
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
@@ -5386,6 +5397,8 @@ TryPlayerSwitch: ; 3e358
 	ld a, b
 	cp HELD_SHED_SHELL
 	jr z, .try_switch
+	call CheckIfUserIsGhostType
+	jr z, .try_switch
 	farcall CheckIfTrappedByAbility
 	jr nz, .check_other_trapped
 	ld a, BATTLE_VARS_ABILITY_OPP
@@ -5434,19 +5447,7 @@ PlayerSwitch: ; 3e3ad
 	call LoadStandardMenuDataHeader
 	call LinkBattleSendReceiveAction
 	call CloseWindow
-
-.not_linked
 	call ParseEnemyAction
-	ld a, [wLinkMode]
-	and a
-	jr nz, .linked
-
-.switch
-	call BattleMonEntrance
-	and a
-	ret
-
-.linked
 	ld a, [wBattleAction]
 	cp BATTLEACTION_STRUGGLE
 	jp z, .switch
@@ -5455,6 +5456,27 @@ PlayerSwitch: ; 3e3ad
 	cp BATTLEACTION_FORFEIT
 	jr nz, .dont_run
 	jp WildFled_EnemyFled_LinkBattleCanceled
+
+.not_linked
+	; Clear last enemy action to avoid Pursuit oddities
+	call SetEnemyTurn
+	ld a, BATTLE_VARS_MOVE
+	call GetBattleVarAddr
+	ld a, [hl]
+	cp PURSUIT
+	jr nz, .dont_reset_enemy_move
+	xor a
+	ld [hl], a
+
+.dont_reset_enemy_move
+	; Let AI choose to switch or try item *before* the player switches out
+	farcall AI_SwitchOrTryItem
+	call nc, ParseEnemyAction
+
+.switch
+	call BattleMonEntrance
+	and a
+	ret
 
 .dont_run
 	ldh a, [hSerialConnectionStatus]
@@ -5472,12 +5494,55 @@ PlayerSwitch: ; 3e3ad
 	ret
 ; 3e3ff
 
-EnemyMonEntrance: ; 3e3ff
-	farcall AI_Switch
+EnemyMonEntrance:
+	ld a, $1
+	ld [wEnemyIsSwitching], a
+	ld [wEnemyGoesFirst], a
+	ld hl, wEnemySubStatus4
+	res SUBSTATUS_RAGE, [hl]
+	xor a
+	ld [hBattleTurn], a
+	call PursuitSwitch
+
+	push af
+	ld a, [wCurOTMon]
+	ld hl, wOTPartyMon1Status
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld d, h
+	ld e, l
+	ld hl, wEnemyMonStatus
+	ld bc, MON_MAXHP - MON_STATUS
+	rst CopyBytes
+	pop af
+
+	jr c, .skiptext
+	ld hl, TextJump_EnemyWithdrew
+	call PrintText
+
+.skiptext
+	; Actively switched -- don't prompt the user about the switch
+	ld a, 1
+	ld [wBattleHasJustStarted], a
+	call NewEnemyMonStatus
+	call ResetEnemyStatLevels
+	call BreakAttraction
+	call EnemySwitch
+	call ResetBattleParticipants
 	call SetEnemyTurn
 	call SpikesDamage
-	jp RunActivationAbilities
-; 3e40b
+	call RunActivationAbilities
+	xor a
+	ld [wBattleHasJustStarted], a
+	ld a, [wLinkMode]
+	and a
+	ret nz
+	scf
+	ret
+
+TextJump_EnemyWithdrew:
+	text_jump Text_EnemyWithdrew
+	db "@"
 
 BattleMonEntrance: ; 3e40b
 	call WithdrawPkmnText
@@ -5622,6 +5687,15 @@ CheckRunSpeed:
 	jp .can_escape
 
 .no_flee_item
+	push hl
+	push de
+	push bc
+	call CheckIfUserIsGhostType
+	pop bc
+	pop de
+	pop hl
+	jp z, .can_escape
+
 	ld a, [wEnemySubStatus2]
 	bit SUBSTATUS_CANT_RUN, a
 	jp nz, .cant_escape
@@ -6190,8 +6264,6 @@ MoveInfoBox: ; 3e6c8
 	ld hl, Moves + MOVE_ACC
 	ld bc, MOVE_LENGTH
 	rst AddNTimes
-	; convert internal accuracy representation to a number
-	; between 0-100
 	ld a, BANK(Moves)
 	call GetFarByte
 	ldh [hMultiplicand], a
@@ -6391,6 +6463,9 @@ CheckUsableMove:
 
 ParseEnemyAction: ; 3e7c1
 	ld a, [wEnemyIsSwitching]
+	and a
+	ret nz
+	ld a, [wEnemyUsingItem]
 	and a
 	ret nz
 	ld a, [wLinkMode]
@@ -7161,7 +7236,16 @@ SetLevel:
 	jr .SetLevel
 
 .MatchPlayerLevel
+	ld a, [wCurPartyLevel]
+	sub 200
+	ld c, a
 	ld a, b
+	cp c
+	jr nc, .SetLevel
+	ld a, c
+	cp 101
+	jr c, .SetLevel
+	ld a, 100
 .SetLevel
 	ld [wCurPartyLevel], a
 .DoNotAverageLevels
@@ -7637,12 +7721,19 @@ GiveExperiencePoints: ; 3ee3b
 	ld a, $1
 
 .no_boost
-; Boost experience for a trainer battle
 	ld [wStringBuffer2 + 2], a
+; Boost experience for type disadvantage
+	push bc
+	call CheckExpTypeMatchup
+	ld a, [wTypeMatchup]
+	cp $10
+	call c, BoostExp
+; Boost experience for a trainer battle
 	ld a, [wBattleMode]
 	dec a
 	call nz, BoostExp
 ; Boost experience for Lucky Egg
+	pop bc
 	push bc
 	ld hl, MON_ITEM
 	add hl, bc

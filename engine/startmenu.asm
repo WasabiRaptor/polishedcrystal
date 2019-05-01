@@ -2193,8 +2193,6 @@ PlaceMoveData:
 	ld hl, Moves + MOVE_ACC
 	ld bc, MOVE_LENGTH
 	rst AddNTimes
-	; convert internal accuracy representation to a number
-	; between 0-100
 	ld a, BANK(Moves)
 	call GetFarByte
 	ldh [hMultiplicand], a

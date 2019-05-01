@@ -24,6 +24,11 @@ INCBIN "gfx/frames/6.1bpp"
 INCBIN "gfx/frames/7.1bpp"
 INCBIN "gfx/frames/8.1bpp"
 INCBIN "gfx/frames/9.1bpp"
+INCBIN "gfx/frames/10.1bpp"
+INCBIN "gfx/frames/11.1bpp"
+INCBIN "gfx/frames/12.1bpp"
+INCBIN "gfx/frames/13.1bpp"
+
 ; f89b0
 
 ; Various misc graphics here.
@@ -72,15 +77,40 @@ _LoadStandardOpaqueFont::
 _LoadStandardFont::
 	xor a
 _LoadStandardMaybeOpaqueFont:
+	ldh [hRequestOpaque1bpp], a
 	push af
+	ld bc, 0
+	call PutFontPointerInDE
+	ld hl, VTiles0 tile "A"
+	lb bc, BANK(FontNormal), $73
+	call GetMaybeOpaque1bpp
+
+	ld bc, $74 * LEN_1BPP_TILE
+	call PutFontPointerInDE
+	ld hl, VTiles0 tile "▶"
+	lb bc, BANK(FontNormal), 1
+	call GetMaybeOpaque1bpp
+
+	ld bc, $78 * LEN_1BPP_TILE
+	call PutFontPointerInDE
+	ld hl, VTiles0 tile "◀"
+	lb bc, BANK(FontNormal), 1
+	call GetMaybeOpaque1bpp
+
+	ld bc, $7f * LEN_1BPP_TILE
+	call PutFontPointerInDE
+	ld hl, VTiles0 tile "<UPDN>"
+	lb bc, BANK(FontNormal), 1
+	pop af
+	jp GetMaybeOpaque1bpp
+
+
+PutFontPointerInDE:
 	call LoadStandardFontPointer
+	add hl, bc
 	ld d, h
 	ld e, l
-	ld hl, VTiles0 tile "A"
-	lb bc, BANK(FontNormal), 112
-	pop af
-	ldh [hRequestOpaque1bpp], a
-	jp GetMaybeOpaque1bpp
+	ret
 
 LoadStandardFontPointer::
 	ld hl, .FontPointers

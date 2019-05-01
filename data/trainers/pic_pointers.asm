@@ -59,7 +59,11 @@ TrainerPicPointers::
 	dba HexManiacPic
 	dba SagePic
 	dba MediumPic
-	dba KimonoGirlPic
+	dba KimonoGirl1Pic
+	dba KimonoGirl2Pic
+	dba KimonoGirl3Pic
+	dba KimonoGirl4Pic
+	dba KimonoGirl5Pic
 	dba ElderPic
 	dba SrAndJrPic
 	dba CouplePic
@@ -90,6 +94,7 @@ TrainerPicPointers::
 	dba TamerPic
 	dba ArtistPic
 	dba AromaLadyPic
+	dba WaiterPic
 	dba WaitressPic
 	dba SightseermPic
 	dba SightseerfPic

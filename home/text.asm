@@ -285,6 +285,9 @@ PrintTextBoxText::
 	call PlaceWholeStringInBoxAtOnce
 	pop hl
 .no_nameplate
+	ld a, [wTextBoxFlags2]
+	res NAMEPLATE_FLAG, a
+	ld [wTextBoxFlags2], a
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceWholeStringInBoxAtOnce
 	ret

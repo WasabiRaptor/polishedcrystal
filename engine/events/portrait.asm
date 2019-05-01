@@ -1,12 +1,9 @@
 Portrait::
 	ld hl, PortraitMenuHeader
-	call CopyMenuHeader
+	call CopyMenuDataHeader
 	call MenuBox
 	call UpdateSprites
-	call ApplyTilemap
 	
-	;this will be a scriptbyte once I know it works
-
 	;this gets overwritten with the pokemon thats needed every time it is pulled, so I'm just using it here to hold the thing for later
 	ld a, [wCurSpecies]
 	farcall LoadPortraitPalette 
@@ -15,7 +12,7 @@ Portrait::
 	;everything below here loads the pic in a similar way to how pokemon pics are loaded, but doesn't force the grayscale pal and is working as intended
 	xor a
 	ldh [hBGMapMode], a
-	ld de, VTiles0 tile $C0
+	ld de, VTiles0 tile $D0
 	ldh a, [rSVBK]
 	push af
 	push de
@@ -26,7 +23,6 @@ Portrait::
 	ld a, [wCurSpecies]
 	ld hl, PortraitPicPointers
 	ld d, BANK(PortraitPicPointers)	
-	dec a
 	ld bc, 3
 	rst AddNTimes
 	ld a, d
@@ -61,7 +57,7 @@ Portrait::
 	inc a
 	ld c, a
 	call Coord2Tile
-	ld a, $C0
+	ld a, $D0
 	ldh [hGraphicStartTile], a
 	lb bc, 4, 4
 	predef PlaceGraphic
@@ -74,8 +70,9 @@ ClosePortrait::
 	jp CloseTheWindow
 
 PortraitMenuHeader:
-	db MENU_BACKUP_TILES ; flags
-	menu_coords 0, 7, 5, 12
+	db $40 ; flags
+	db 7, 0 ; start coords
+	db 12, 5 ; end coords
 	dw NULL
 	db 1 ; default option
 
