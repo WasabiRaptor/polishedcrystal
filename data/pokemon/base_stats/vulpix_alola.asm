@@ -6,7 +6,7 @@
 	db ICE, ICE ; type
 	db 190 ; catch rate
 	db 63 ; base exp
-	db ICE_BERRY, ICE_BERRY ; items
+	db RAWST_BERRY, RAWST_BERRY ; items
 	dn FEMALE_75, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/vulpix/front.dimensions"
 	db 0, 0	; abilities

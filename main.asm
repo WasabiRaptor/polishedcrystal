@@ -4498,3 +4498,4 @@ INCLUDE "data/events/odd_eggs.asm"
 SECTION "color", ROMX
 
 INCLUDE "engine/color.asm"
+INCLUDE "data/pokemon/variant_base_stats.asm"
