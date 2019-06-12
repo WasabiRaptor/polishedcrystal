@@ -112,8 +112,9 @@ GetFrontpicPointer: ; 510d7
 	ld a, [wCurPartySpecies]
 	jr nc, .notvariant
 	ld a, [wCurForm]
+
 .notvariant
-	dec a
+	dec a	
 	ld bc, 6
 	rst AddNTimes
 	ld a, d
@@ -239,8 +240,9 @@ GetBackpic: ; 5116c
 	ld a, b
 	jr nc, .notvariant
 	ld a, c
+
 .notvariant
-	dec a
+	dec a	
 	ld bc, 6
 	rst AddNTimes
 	ld bc, 3

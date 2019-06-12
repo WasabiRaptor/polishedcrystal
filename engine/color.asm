@@ -787,10 +787,9 @@ GetMonPalettePointer:
 	pop de
 	jr nc, .notvariant
 	ld a, [wCurForm]
-	jr .variant
+
 .notvariant
-	dec a
-.variant
+	dec a	
 	ld l, a
 	ld h, $0
 	add hl, hl

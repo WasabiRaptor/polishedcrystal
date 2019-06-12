@@ -31,9 +31,11 @@ MysteryDungeonEnterScript:
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
 	end
 MakeAlolanScript:
-	ld a, [wPartyMon1Form]
-	or ALOLAN
+	ld a, ALOLAN
 	ld [wPartyMon1Form], a
+	ld a, KANTONIAN
+	ld [wPartyMon2Form], a
+
 	ret
 MysteryDungeonSetup:
 	ld a, 5

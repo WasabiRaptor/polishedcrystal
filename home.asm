@@ -1375,8 +1375,8 @@ GetBaseData:: ; 3856
 	ld a, [wCurForm]
 	jp c, .variant
 	ld a, [wCurSpecies]
-	dec a
 .variant
+	dec a
 	ld b, a
 	ld a, d
 	rst Bankswitch
