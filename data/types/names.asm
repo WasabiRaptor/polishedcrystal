@@ -3,7 +3,11 @@ PrintMonTypes: ; 5090d
 ; on the stats screen at hl.
 
 	push hl
-	call GetBaseData
+	push af
+	ld hl, wTempMonForm
+	predef GetVariant
+	pop af
+	call GetBaseData ;form is known
 	pop hl
 
 if !DEF(FAITHFUL)

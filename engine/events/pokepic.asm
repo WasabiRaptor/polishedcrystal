@@ -22,7 +22,7 @@ Pokepic:: ; 244e3
 	ldh [hBGMapMode], a
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld de, VTiles1
 	predef GetFrontpic
 _Displaypic:

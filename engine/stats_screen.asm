@@ -168,6 +168,8 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	ld a, [wMonType]
 	cp BREEDMON
 	jr nz, .breedmon
+	ld hl, wBufferMonForm
+	predef GetVariant
 	ld a, [wBufferMon]
 	ld [wCurSpecies], a
 	call GetBaseData
