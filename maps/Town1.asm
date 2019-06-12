@@ -20,7 +20,9 @@ Town1_MapScriptHeader:
 
 MysteryDungeonEnterScript:
 	opentext
-	givepoke VAPOREON, 10
+	givepoke NINETALES, 10
+	givepoke NINETALES, 10
+	callasm MakeAlolanScript
 	closetext
 	end
 	callasm MysteryDungeonSetup
@@ -28,6 +30,11 @@ MysteryDungeonEnterScript:
 	newloadmap MAPSETUP_TELEPORT
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
 	end
+MakeAlolanScript:
+	ld a, [wPartyMon1Form]
+	or ALOLAN
+	ld [wPartyMon1Form], a
+	ret
 MysteryDungeonSetup:
 	ld a, 5
 	;ld [wMysteryDungeonX], a

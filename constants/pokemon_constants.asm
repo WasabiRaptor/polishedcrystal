@@ -314,24 +314,24 @@ NUM_POKEMON EQU const_value + -1
 	const UNOWN_QUESTION_MARK
 NUM_UNOWN EQU const_value + -1 ; 26
 
-	const_def 1
+	const_def 
 	const KANTONIAN
 	const ALOLAN
 NUM_REGIONAL EQU const_value + -1 ; 2
 
-	const_def 1
+	const_def 
 	const LYCANROC_MIDDAY
 	const LYCANROC_DUSK
 	const LYCANROC_MIDNIGHT
 	const LYCANROC_DAWN
 NUM_LYCANROC EQU const_value + -1 ; 4
 
-	const_def 1
+	const_def 
 	const DEFAULT_FORM
 	const BETA_FORM
 NUM_BETA EQU const_value + -1 ; 2
 
-	const_def 2
+	const_def 1
 	const FAN_ROTOM
 	const FROST_ROTOM
 	const HEAT_ROTOM
@@ -339,36 +339,36 @@ NUM_BETA EQU const_value + -1 ; 2
 	const WASH_ROTOM
 NUM_ROTOM EQU const_value + -1 ; 6
 
-	const_def 1
+	const_def 
 	const TEN_PERCENT
 	const FIFTY_PERCENT
 	const COMPLETE
 NUM_ZYGARDE EQU const_value + -1 ; 3
 
-	const_def 1
+	const_def 
 	const LAND_SHAYMIN
 	const SKY_SHAYMIN
 NUM_SHAYMIN EQU const_value + -1 ; 2
 
-	const_def 1
+	const_def 
 	const SPRING
 	const SUMMER
 	const FALL
 	const WINTER
 NUM_SAWSBUCK EQU const_value + -1 ;4
 
-	const_def 1
+	const_def 
 	const TYPE_FULL
 	const TYPE_NULL
 NUM_SILVALLY EQU const_value + -1 ;2
 
-	const_def 1
+	const_def 
 	const SHIELD_AEGISLASH
 	const BLADE_AEGISLASH
 NUM_AEGISLASH EQU const_value + -1 ; 2
 
 ; magikarp
-	const_def 1
+	const_def 
 	const MAGIKARP_PLAIN_FORM
 	const MAGIKARP_SKELLY_FORM
 	const MAGIKARP_CALICO1_FORM
@@ -386,11 +386,11 @@ NUM_AEGISLASH EQU const_value + -1 ; 2
 NUM_MAGIKARP EQU const_value +- 1
 
 ; gyarados
-	const_def 1
+	const_def 
 	const GYARADOS_PLAIN_FORM
 GYARADOS_RED_FORM EQU NUM_MAGIKARP + 1
 
-	const_def 1
+	const_def 
 	const MEWTWO_PLAIN_FORM
 	const MEWTWO_ARMORED_FORM
 NUM_MEWTWO EQU const_value + -1 ; 2

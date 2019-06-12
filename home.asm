@@ -1370,19 +1370,21 @@ GetBaseData:: ; 3856
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	push hl
 
 	ld a, [wCurForm]
-	jp nc, .variant
+	jp c, .variant
 	ld a, [wCurSpecies]
 	dec a
 .variant
 	ld b, a
 	ld a, d
 	rst Bankswitch
-
-; Get BaseData
+	
 	ld a, b
+; Get BaseData
 	ld bc, BASEMON_STRUCT_LENGTH
+	pop hl
 	rst AddNTimes
 	ld de, wCurBaseData
 	ld bc, BASEMON_STRUCT_LENGTH

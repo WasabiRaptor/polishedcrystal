@@ -3992,6 +3992,11 @@ INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/names.asm"
 
 
+SECTION "Variant Base Data", ROMX
+
+INCLUDE "data/pokemon/variant_base_stats.asm"
+
+
 SECTION "Code 14", ROMX
 
 INCLUDE "engine/battle/abilities.asm"
@@ -4498,4 +4503,3 @@ INCLUDE "data/events/odd_eggs.asm"
 SECTION "color", ROMX
 
 INCLUDE "engine/color.asm"
-INCLUDE "data/pokemon/variant_base_stats.asm"
