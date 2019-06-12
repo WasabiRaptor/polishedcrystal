@@ -229,10 +229,12 @@ BugContest_SetCaughtContestMon: ; e6ce
 	jp PrintText
 
 .generatestats ; e6fd
+	ld hl, wEnemyMonForm
+	predef GetVariant
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	xor a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wContestMon
@@ -1790,7 +1792,7 @@ GetTrademonFrontpic: ; 4d7fd
 	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	pop de
 	predef FrontpicPredef
 	ret
@@ -2073,12 +2075,14 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 	ret
 
 CheckPartyFullAfterContest: ; 4d9e5
+	ld hl, wContestMonForm
+	predef GetVariant
 	ld a, [wContestMon]
 	and a
 	jp z, .DidntCatchAnything
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp 6

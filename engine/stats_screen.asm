@@ -172,7 +172,7 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	predef GetVariant
 	ld a, [wBufferMon]
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld hl, wBufferMon
 	ld de, wTempMon
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -180,7 +180,7 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	jr .done
 
 .breedmon
-	farcall CopyPkmnToTempMon
+	farcall CopyPkmnToTempMon ;form is known
 	ld a, [wTempMonIsEgg]
 	bit MON_IS_EGG_F, a
 	jr nz, .done
