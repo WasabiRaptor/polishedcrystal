@@ -784,17 +784,18 @@ LoadPaintingPalette:
 GetMonPalettePointer:
 	push de
 	call GetRelevantPallete
-	pop de 
+	pop de
 	jr nc, .notvariant
 	ld a, [wCurForm]
+	jr .variant
 .notvariant
 	dec a
+.variant
 	ld l, a
 	ld h, $0
 	add hl, hl
 	add hl, hl
 	add hl, hl
-	ld bc, PokemonPalettes
 	add hl, bc
 	ret
 
