@@ -3511,9 +3511,9 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld a, OTPARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon ;form is known
@@ -3685,9 +3685,9 @@ InitBattleMon: ; 3da0d
 	ld [wTempBattleMonSpecies], a
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	;ld hl, wBattleMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld hl, wBattleMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a
 	ld a, [wBaseType2]
@@ -3792,9 +3792,9 @@ InitEnemyMon: ; 3dabd
 	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
 	call SkipNames
@@ -4773,10 +4773,10 @@ endr
 	ld a, [hl]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	;ld bc, MON_FORM - MON_SPECIES
-	;add hl, bc
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld bc, MON_FORM - MON_SPECIES
+	add hl, bc
+	predef GetVariant
+	call GetBaseData ;form is known
 
 	pop hl
 	dec hl
@@ -4833,9 +4833,9 @@ DrawEnemyHUD: ; 3e043
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
 	call PlaceString
@@ -6686,11 +6686,11 @@ LoadEnemyMon: ; 3e8eb
 	predef FlagPredef
 
 	;get the temp form for this pokemon?
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
+	ld hl, wEnemyMonForm
+	predef GetVariant
 
 	; Grab the BaseData for this species
-	call GetBaseData ;form is not known
+	call GetBaseData ;form is known
 
 	ld a, [wBaseExp]
 	ld [wEnemyMonBaseExp], a
@@ -7800,11 +7800,11 @@ GiveExperiencePoints: ; 3ee3b
 	add hl, de
 	ld a, [hl]
 	ld [wCurSpecies], a
-	;ld a, [wCurPartyMon]
-	;ld hl, wPartyMon1Form
-	;call GetPartyLocation
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Form
+	call GetPartyLocation
+	predef GetVariant
+	call GetBaseData ;form is known
 	push bc
 	ld d, MAX_LEVEL
 	farcall CalcExpAtLevel
@@ -8035,11 +8035,11 @@ GiveBattleEVs:
 	push bc
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	;push hl
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	;pop hl
-	call GetBaseData ;form is not known
+	push hl
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	pop hl
+	call GetBaseData ;form is known
 	; EV yield format:
 	; Byte 1: xxyyzzmm x: HP, y: Atk, z: Def, m: Spd
 	; Byte 2: aabb0000 a: Sat, b: Sdf, 0: unused
@@ -8539,9 +8539,9 @@ HandleSafariAngerEatingStatus:
 	; reset the catch rate to normal if bait/rock effects have worn off
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
 	pop hl
@@ -8745,9 +8745,9 @@ DropEnemySub: ; 3f486
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld de, VTiles2
 	predef FrontpicPredef
 	pop af
