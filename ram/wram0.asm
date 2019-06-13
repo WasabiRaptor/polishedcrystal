@@ -970,8 +970,11 @@ wPalFadeMode::
 	ds 1
 
 wCurForm:: ds 1
-
-	ds 8 ; unused
+wCurGender:: ds 1
+wCurPersonality:: ds 1
+wGiftPokeTID:: ds 2
+wGiftPokeBall:: ds 1
+	ds 3 ; unused
 
 wWindowStackPointer:: ds 2
 wMenuJoypad:: ds 1

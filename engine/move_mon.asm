@@ -1947,15 +1947,40 @@ GivePoke:: ; e277
 	push bc
 	push de
 	push af
+
+.formAndGender
+	ld a, [wCurGender]
+	and a
+	jr z, .item
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Form
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [wCurGender]
+	ld [hl], a
+
+.item
 	ld a, [wCurItem]
 	and a
-	jr z, .done
+	jr z, .personality
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, [wCurItem]
 	ld [hl], a
+
+.personality
+	ld a, [wCurPersonality]
+	and a
+	jr z, .done
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Personality
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [wCurPersonality]
+	ld [hl], a
+
 	jr .done
 
 .failed
@@ -1975,11 +2000,26 @@ GivePoke:: ; e277
 	push bc
 	push de
 	push af
+
+	ld a, [wCurForm]
+	and a
+	jr z, .boxItem
+	ld a, [wCurForm]
+	ld [sBoxMon1Form], a
+
+.boxItem
 	ld a, [wCurItem]
 	and a
-	jr z, .done
+	jr z, .boxPersonality
 	ld a, [wCurItem]
 	ld [sBoxMon1Item], a
+
+.boxPersonality
+	ld a, [wCurPersonality]
+	and a
+	jr z, .done
+	ld a, [wCurPersonality]
+	ld [sBoxMon1Personality], a
 
 .done
 	ld a, [wCurPartySpecies]
@@ -2038,9 +2078,10 @@ GivePoke:: ; e277
 	ld hl, wPartyMon1ID
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, 01001 / $100 ; ld a, $3
+	ld a, [wGiftPokeTID]
 	ld [hli], a
-	ld [hl], 01001 % $100 ; ld a, $e9
+	ld a, [wGiftPokeTID+1]
+	ld [hl], a
 	pop bc
 	ld a, POKE_BALL
 	ld c, a

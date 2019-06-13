@@ -291,16 +291,26 @@ givepoke: macro
 	if _NARG >= 3
 	db \3 ; item
 	if _NARG >= 4
-	db \4 ; trainer
-	if \4
-	dw \5 ; trainer_name_pointer
-	dw \6 ; pkmn_nickname
-	endc
-	else
-	db 0
+	db \4 ; form and Gender
+	if _NARG >= 5
+	db \5 ; shiny, ability, nature
+	if _NARG >= 6
+	dw \6 ; trainer
+	if \6
+	dw \7 ; trainer_name_pointer
+	dw \8 ; pkmn_nickname
 	endc
 	else
 	db 0, 0
+	endc
+	else
+	db 0, 0, 0
+	endc
+	else
+	db 0, 0, 0, 0
+	endc
+	else
+	db 0, 0, 0, 0, 0
 	endc
 	endm
 

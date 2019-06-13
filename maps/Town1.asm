@@ -20,23 +20,24 @@ Town1_MapScriptHeader:
 
 MysteryDungeonEnterScript:
 	opentext
-	givepoke NINETALES, 10
-	givepoke NINETALES, 10
-	callasm MakeAlolanScript
+	;givepoke NINETALES, 10, NO_ITEM, MALE | ALOLAN
+	;givepoke NINETALES, 10, NO_ITEM, FEMALE | KANTONIAN
+	givepoke ZORUA, 10, NO_ITEM, MALE, %10000000, $2345, IndigoName, IndigoOT
 	closetext
 	end
+
+IndigoName:
+	db "Indigo@"
+IndigoOT:
+	db "Ken@"
+	db 0
+
 	callasm MysteryDungeonSetup
 	special WarpToSpawnPoint
 	newloadmap MAPSETUP_TELEPORT
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
 	end
-MakeAlolanScript:
-	ld a, ALOLAN
-	ld [wPartyMon1Form], a
-	ld a, KANTONIAN
-	ld [wPartyMon2Form], a
 
-	ret
 MysteryDungeonSetup:
 	ld a, 5
 	;ld [wMysteryDungeonX], a
