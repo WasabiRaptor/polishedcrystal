@@ -707,7 +707,7 @@ GetPreEvolution: ; 42581
 
 	ld c, 0
 .loop ; For each Pokemon...
-	ld hl, EvosAttacksPointers
+	ld hl, EvosAttacksPointers ; form differences really don't affect evolutions so I think I can leave this be
 	ld b, 0
 	add hl, bc
 	add hl, bc
@@ -747,3 +747,19 @@ GetPreEvolution: ; 42581
 	scf
 	ret
 ; 425b1
+
+GetRelevantEvosAttacksPointers:
+; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantEvosAttacksPointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+INCLUDE "data/pokemon/variant_evos_attacks_pointer_table.asm"

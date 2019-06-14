@@ -16,7 +16,7 @@ SECTION "Evolutions and Attacks", ROMX
 INCLUDE "data/pokemon/evolution_moves.asm"
 
 INCLUDE "data/pokemon/evos_attacks_pointers.asm"
-;INCLUDE "data/pokemon/variant_evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/variant_evos_attacks_pointers.asm"
 
 EvosAttacks::
 
@@ -1332,21 +1332,71 @@ DelphoxEvosAttacks:
 	db 0 ; no more level-up moves
 
 VulpixEvosAttacks:
+	db EVOLVE_ITEM, FIRE_STONE, NINETALES
 	db 0 ; no more evolutions
-	db 1, TACKLE
+	db 1, EMBER
+	db 4, GROWL ; Tail Whip → new move
+	db 7, ASTONISH ; Roar → new move
+	db 9, CHARM ; Baby-Doll Eyes → similar move
+	db 10, QUICK_ATTACK
+	db 12, CONFUSE_RAY
+	db 15, FIRE_SPIN
+	db 18, NIGHT_SHADE ; Payback → new move
+	db 20, WILL_O_WISP
+	db 23, FEINT_ATTACK
+	db 26, HEX
+	db 28, PAIN_SPLIT ; Flame Burst → HGSS tutor move
+	db 31, EXTRASENSORY
+	db 34, SAFEGUARD
+	db 36, FLAMETHROWER
+	db 39, HYPNOSIS ; Imprison → egg move
+	db 42, FIRE_BLAST
+	db 44, SHADOW_BALL ; Grudge → TM move
+	db 47, DISABLE ; Captivate → egg move
+	db 50, FLARE_BLITZ ; Inferno → egg move
+	db 53, HEALINGLIGHT ; new move
 	db 0 ; no more level-up moves
 Vulpix_AlolaEvosAttacks:
+	db EVOLVE_ITEM, ICE_STONE, NINETALES
 	db 0 ; no more evolutions
-	db 1, TACKLE
+	db 1, ICE_SHARD
+	db 4, GROWL ; Tail Whip → new move
+	db 7, ASTONISH ; Roar → new move
+	db 9, CHARM ; Baby-Doll Eyes → similar move
+	db 10, QUICK_ATTACK
+	db 12, CONFUSE_RAY
+	db 15, FIRE_SPIN
+	db 18, NIGHT_SHADE ; Payback → new move
+	;db 20, WILL_O_WISP
+	db 23, FEINT_ATTACK
+	db 26, HEX
+	db 28, PAIN_SPLIT ; Flame Burst → HGSS tutor move
+	db 31, EXTRASENSORY
+	db 34, SAFEGUARD
+	db 36, ICE_BEAM
+	db 39, HYPNOSIS ; Imprison → egg move
+	db 42, BLIZZARD
+	db 44, SHADOW_BALL ; Grudge → TM move
+	db 47, DISABLE ; Captivate → egg move
+	db 50, AVALANCHE ; Inferno → egg move
+	db 53, HEALINGLIGHT ; new move
 	db 0 ; no more level-up moves
 
 NinetalesEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, TACKLE
+	db 1, NASTY_PLOT
+	db 1, FLAMETHROWER
+	db 1, QUICK_ATTACK
+	db 1, CONFUSE_RAY
+	db 1, SAFEGUARD
 	db 0 ; no more level-up moves
 Ninetales_AlolaEvosAttacks:
 	db 0 ; no more evolutions
-	db 1, TACKLE
+	db 1, NASTY_PLOT
+	db 1, ICE_BEAM
+	db 1, QUICK_ATTACK
+	db 1, CONFUSE_RAY
+	db 1, SAFEGUARD
 	db 0 ; no more level-up moves
 
 SlugmaEvosAttacks:
