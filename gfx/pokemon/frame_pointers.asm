@@ -35,7 +35,7 @@ FramesPointers:
 	dw DittoFrames
 	dw PurrloinFrames
 	dw LiepardFrames
-	dw VulpixFrames
+	dw GrimerFrames
 	dw MukFrames
 	dw Nidoran_MFrames
 	dw NidorinoFrames

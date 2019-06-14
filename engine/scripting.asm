@@ -2322,6 +2322,8 @@ Script_givepoke:
 	and FORM_MASK
 	ld [wCurForm], a
 	call GetScriptByte
+	ld [wGiftPokeBall], a
+	call GetScriptByte
 	ld [wCurPersonality], a
 	call GetScriptByte
 	ld [wGiftPokeTID], a

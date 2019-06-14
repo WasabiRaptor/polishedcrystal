@@ -22,8 +22,8 @@ Meowstic_FFrames: INCLUDE "gfx/pokemon/meowstic_f/frames.asm"
 GrimerFrames: INCLUDE "gfx/pokemon/grimer/frames.asm"
 Grimer_AlolaFrames: INCLUDE "gfx/pokemon/grimer_alola/frames.asm"
 
-MukFrames: INCLUDE "gfx/pokemon/vulpix/frames.asm"
-Muk_AlolaFrames: INCLUDE "gfx/pokemon/vulpix_alola/frames.asm"
+MukFrames: INCLUDE "gfx/pokemon/muk/frames.asm"
+Muk_AlolaFrames: INCLUDE "gfx/pokemon/muk_alola/frames.asm"
 
 Nidoran_MFrames: INCLUDE "gfx/pokemon/nidoran_m/frames.asm"
 Nidoran_FFrames: INCLUDE "gfx/pokemon/nidoran_f/frames.asm"

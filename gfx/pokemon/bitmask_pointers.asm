@@ -35,7 +35,7 @@ BitmasksPointers:
 	dw DittoBitmasks
 	dw PurrloinBitmasks
 	dw LiepardBitmasks
-	dw VulpixBitmasks
+	dw GrimerBitmasks
 	dw MukBitmasks
 	dw Nidoran_MBitmasks
 	dw NidorinoBitmasks

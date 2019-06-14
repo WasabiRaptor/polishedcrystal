@@ -1987,6 +1987,8 @@ GivePoke:: ; e277
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
 	farcall LoadEnemyMon
+	ld a, BANK(sBoxMon1Item)
+	call GetSRAMBank
 	call SentPkmnIntoBox
 	jp nc, .FailedToGiveMon
 	ld a, BOXMON
@@ -2001,6 +2003,7 @@ GivePoke:: ; e277
 	push de
 	push af
 
+
 	ld a, [wCurForm]
 	and a
 	jr z, .boxItem
@@ -2010,7 +2013,7 @@ GivePoke:: ; e277
 .boxItem
 	ld a, [wCurItem]
 	and a
-	jr z, .boxPersonality
+	jr z, .done
 	ld a, [wCurItem]
 	ld [sBoxMon1Item], a
 
@@ -2022,6 +2025,7 @@ GivePoke:: ; e277
 	ld [sBoxMon1Personality], a
 
 .done
+	call CloseSRAM
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	ld [wTempEnemyMonSpecies], a
@@ -2079,11 +2083,24 @@ GivePoke:: ; e277
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, [wGiftPokeTID]
+	and a
+	jr z, .randomTID
 	ld [hli], a
 	ld a, [wGiftPokeTID+1]
 	ld [hl], a
+	jr .doneTID
+.randomTID
+	call Random
+	ld [hli], a
+	call Random
+	ld [hl], a
+.doneTID
 	pop bc
+	ld a, [wGiftPokeBall]
+	and a
+	jr nz, .giftball
 	ld a, POKE_BALL
+.giftball	
 	ld c, a
 	farcall SetGiftPartyMonCaughtData
 	jr .skip_nickname
@@ -2103,13 +2120,26 @@ GivePoke:: ; e277
 	ld a, [wScriptBank]
 	call GetFarByte
 	ld b, a
+	ld a, [wGiftPokeBall]
+	and a
+	jr nz, .boxgiftball
 	ld a, POKE_BALL
+.boxgiftball
 	ld c, a
 	ld hl, sBoxMon1ID
+	ld a, [wGiftPokeTID]
+	and a
+	jr z, .boxRandomID
+	ld [hli], a
+	ld a, [wGiftPokeTID+1]
+	ld [hl], a
+	jr .doneBoxID
+.boxRandomID
 	call Random
 	ld [hli], a
 	call Random
 	ld [hl], a
+.doneBoxID
 	call CloseSRAM
 	farcall SetGiftBoxMonCaughtData
 	jr .skip_nickname
@@ -2126,7 +2156,11 @@ GivePoke:: ; e277
 	jr .set_caught_data
 
 .party
+	ld a, [wGiftPokeBall]
+	and a
+	jr nz, .partygiftball
 	ld a, POKE_BALL
+.partygiftball
 	ld [wCurItem], a
 	farcall SetCaughtData
 .set_caught_data
@@ -2155,6 +2189,7 @@ GivePoke:: ; e277
 ; e3d4
 
 .FailedToGiveMon: ; e3d4
+	call CloseSRAM
 	pop bc
 	pop de
 	ld b, $2

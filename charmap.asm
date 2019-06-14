@@ -184,8 +184,8 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "”",        $bb
 	charmap "-",        $bc
 	charmap ":",        $bd
-	charmap "♂",        $be
-	charmap "♀",        $bf
+	charmap "♀",        $be
+	charmap "♂",        $bf
 
 	charmap "'",        $c0
 	charmap "'d",       $c1

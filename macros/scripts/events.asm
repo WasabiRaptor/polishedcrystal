@@ -293,12 +293,14 @@ givepoke: macro
 	if _NARG >= 4
 	db \4 ; form and Gender
 	if _NARG >= 5
-	db \5 ; shiny, ability, nature
+	db \5 ; pokeball
 	if _NARG >= 6
-	dw \6 ; trainer
-	if \6
-	dw \7 ; trainer_name_pointer
-	dw \8 ; pkmn_nickname
+	db \6 ; shiny, ability, nature
+	if _NARG >= 7
+	dw \7 ; trainer
+	if \7
+	dw \8 ; trainer_name_pointer
+	dw \9 ; pkmn_nickname
 	endc
 	else
 	db 0, 0
@@ -312,6 +314,10 @@ givepoke: macro
 	else
 	db 0, 0, 0, 0, 0
 	endc
+	else
+	db 0, 0, 0, 0, 0, 0
+	endc
+
 	endm
 
 	enum giveegg_command

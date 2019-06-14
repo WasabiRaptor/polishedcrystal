@@ -20,9 +20,9 @@ Town1_MapScriptHeader:
 
 MysteryDungeonEnterScript:
 	opentext
-	;givepoke NINETALES, 10, NO_ITEM, MALE | ALOLAN
-	;givepoke NINETALES, 10, NO_ITEM, FEMALE | KANTONIAN
-	givepoke ZORUA, 10, NO_ITEM, MALE, %10000000, $2345, IndigoName, IndigoOT
+	givepoke VULPIX, 10, FIRE_STONE, MALE | ALOLAN
+	givepoke VULPIX, 10, ICE_STONE, FEMALE | KANTONIAN
+	;givepoke ZORUA, 10, ORAN_BERRY, MALE, LUXURY_BALL, %10000000, $2345, IndigoName, IndigoOT
 	closetext
 	end
 
@@ -30,7 +30,7 @@ IndigoName:
 	db "Indigo@"
 IndigoOT:
 	db "Ken@"
-	db 0
+	db MALE
 
 	callasm MysteryDungeonSetup
 	special WarpToSpawnPoint

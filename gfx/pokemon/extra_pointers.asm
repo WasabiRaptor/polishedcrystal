@@ -35,7 +35,7 @@ AnimationIdlePointers:
 	dw DittoAnimationIdle
 	dw PurrloinAnimationIdle
 	dw LiepardAnimationIdle
-	dw VulpixAnimationIdle
+	dw GrimerAnimationIdle
 	dw MukAnimationIdle
 	dw Nidoran_MAnimationIdle
 	dw NidorinoAnimationIdle

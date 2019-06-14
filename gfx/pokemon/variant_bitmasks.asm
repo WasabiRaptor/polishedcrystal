@@ -22,8 +22,8 @@ Meowstic_FBitmasks: INCLUDE "gfx/pokemon/meowstic_f/bitmask.asm"
 GrimerBitmasks: INCLUDE "gfx/pokemon/grimer/bitmask.asm"
 Grimer_AlolaBitmasks: INCLUDE "gfx/pokemon/grimer_alola/bitmask.asm"
 
-MukBitmasks: INCLUDE "gfx/pokemon/vulpix/bitmask.asm"
-Muk_AlolaBitmasks: INCLUDE "gfx/pokemon/vulpix_alola/bitmask.asm"
+MukBitmasks: INCLUDE "gfx/pokemon/muk/bitmask.asm"
+Muk_AlolaBitmasks: INCLUDE "gfx/pokemon/muk_alola/bitmask.asm"
 
 Nidoran_MBitmasks: INCLUDE "gfx/pokemon/nidoran_m/bitmask.asm"
 Nidoran_FBitmasks: INCLUDE "gfx/pokemon/nidoran_f/bitmask.asm"

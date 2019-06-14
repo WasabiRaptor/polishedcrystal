@@ -6686,8 +6686,8 @@ LoadEnemyMon: ; 3e8eb
 	predef FlagPredef
 
 	;get the temp form for this pokemon?
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	;ld hl, wEnemyMonForm
+	;predef GetVariant
 
 	; Grab the BaseData for this species
 	call GetBaseData ;form is known
