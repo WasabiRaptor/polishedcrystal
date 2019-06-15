@@ -537,13 +537,17 @@ InitEggMoves:
 InheritLevelMove:
 ; If move d is part of the level up moveset, inherit that move
 	ld a, [wEggMonSpecies]
+	call GetRelevantEvosAttacksPointers
+	ld a, [wEggMonSpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
-	ld c, a
 	ld b, 0
-	ld hl, EvosAttacksPointers
+	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, BANK(EvosAttacksPointers)
+	ld a, d
 	call GetFarHalfword
 .loop
 	ld a, BANK(EvosAttacks)

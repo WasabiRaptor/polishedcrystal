@@ -376,10 +376,20 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld hl, wPartyMon1Species
 	rst AddNTimes
 	ld a, [hl]
+	ld [wCurPartySpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc 
+	predef GetVariant
+	ld a, [wCurPartySpecies]
+	call GetRelevantEvosAttacksPointers
+	ld a, [wCurPartySpecies]
+	ld b, d
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
-	ld e, a
 	ld d, 0
-	ld hl, EvosAttacksPointers
+	ld e, a
 	add hl, de
 	add hl, de
 	call .DetermineCompatibility
@@ -398,8 +408,8 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 ; 50268
 
 .DetermineCompatibility: ; 50268
+	ld a, b
 	ld de, wStringBuffer1
-	ld a, BANK(EvosAttacksPointers)
 	ld bc, 2
 	call FarCopyBytes
 	ld hl, wStringBuffer1

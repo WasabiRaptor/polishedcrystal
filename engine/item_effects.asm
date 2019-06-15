@@ -972,13 +972,17 @@ GLOBAL EvosAttacksPointers
 
 	push bc
 	ld a, [wTempEnemyMonSpecies]
+	call GetRelevantEvosAttacksPointers
+	ld a, [wTempEnemyMonSpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
-	ld c, a
 	ld b, 0
-	ld hl, EvosAttacksPointers
+	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, BANK(EvosAttacksPointers)
+	ld a, d
 	call GetFarHalfword
 	pop bc
 

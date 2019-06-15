@@ -40,12 +40,20 @@ EvolveAfterBattle_MasterLoop
 	ld a, c
 	and a
 	jp z, EvolveAfterBattle_MasterLoop
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Form
+	call GetPartyLocation
+	predef GetVariant
 
 	ld a, [wEvolutionOldSpecies]
+	call GetRelevantEvosAttacksPointers
+	ld a, [wEvolutionOldSpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld b, 0
 	ld c, a
-	ld hl, EvosAttacksPointers
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
@@ -505,10 +513,14 @@ LearnEvolutionMove:
 LearnLevelMoves: ; 42487
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
+	call GetRelevantEvosAttacksPointers
+	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld b, 0
 	ld c, a
-	ld hl, EvosAttacksPointers
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
@@ -574,9 +586,15 @@ FillMoves: ; 424e1
 	push hl
 	push de
 	push bc
-	ld hl, EvosAttacksPointers
+	ld a, [wCurPartySpecies]
+	push de
+	call GetRelevantEvosAttacksPointers
+	pop de
 	ld b, 0
 	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	add a
 	rl b

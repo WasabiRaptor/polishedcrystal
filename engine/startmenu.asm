@@ -1836,13 +1836,18 @@ GetForgottenMoves::
 	ld a, MON_SPECIES
 	call GetPartyParamLocation
 	ld a, [hl]
+	ld [wCurPartySpecies], a
+	call GetRelevantEvosAttacksPointers
+	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld b, 0
 	ld c, a
-	ld hl, EvosAttacksPointers
 	add hl, bc
 	add hl, bc
-	ld a, BANK(EvosAttacksPointers)
+	ld a, d
 	call GetFarHalfword
 .skip_evos
 	ld a, BANK(EvosAttacks)

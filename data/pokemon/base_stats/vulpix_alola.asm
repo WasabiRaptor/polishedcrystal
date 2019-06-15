@@ -8,7 +8,7 @@
 	db 63 ; base exp
 	db RAWST_BERRY, RAWST_BERRY ; items
 	dn FEMALE_75, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/vulpix/front.dimensions"
+	INCBIN "gfx/pokemon/vulpix_alola/front.dimensions"
 	db 0, 0	; abilities
 	db 0	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
