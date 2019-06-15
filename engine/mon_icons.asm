@@ -1,4 +1,5 @@
 INCLUDE "data/pokemon/menu_icon_pals.asm"
+INCLUDE "data/pokemon/variant_menu_icon_pals.asm"
 
 LoadOverworldMonIcon: ; 8e82b
 	ld a, e
@@ -508,3 +509,9 @@ HoldSwitchmonIcon: ; 8ea8c
 	dec e
 	jr nz, .loop
 	ret
+
+GetRelevantIconPointersAndBank:
+	ld a, [wCurIcon]
+
+INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"
