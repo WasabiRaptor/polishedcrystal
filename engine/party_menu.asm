@@ -381,12 +381,14 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	add hl, bc 
 	predef GetVariant
 	ld a, [wCurPartySpecies]
-	call GetRelevantEvosAttacksPointers
+	call GetRelevantEvosAttacksPointers ;all inputs and outputs should be the same but it doesn't work?
 	ld a, [wCurPartySpecies]
-	ld b, d
+	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after
 	jr nc, .notvariant
 	ld a, [wCurForm]
 .notvariant
+	;ld hl, VulpixEvosAttacksPointers
+	;ld b, BANK(VulpixEvosAttacksPointers)
 	dec a
 	ld d, 0
 	ld e, a
@@ -408,10 +410,10 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 ; 50268
 
 .DetermineCompatibility: ; 50268
-	ld a, b
+	ld a, b ;this is the bank from GetRelevantEvosAttacksPointers
 	ld de, wStringBuffer1
 	ld bc, 2
-	call FarCopyBytes
+	call FarCopyBytes 
 	ld hl, wStringBuffer1
 	ld a, [hli]
 	ld h, [hl]
@@ -419,7 +421,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld de, wStringBuffer1
 ; Only reads first 4 evolution entries
 ; https://hax.iimarck.us/topic/4567/
-	ld a, BANK(EvosAttacks)
+	ld a, BANK(EvosAttacks) ;not an issue here, all EvosAttacks are in the same bank
 	ld bc, $10
 	call FarCopyBytes
 	ld hl, wStringBuffer1
