@@ -1,4 +1,4 @@
-IconPointers:
+IconPointers::
 	dw NullIcon
 	dw EeveeIcon
 	dw VaporeonIcon

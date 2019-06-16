@@ -245,6 +245,10 @@ Icons2:
 EggIcon:          INCBIN "gfx/icons/egg.2bpp"
 RattataBackIcon:  INCBIN "gfx/icons/rattata_back.2bpp"
 
+SECTION "Mon Icons 3", ROMX
+
+Icons3:
+
 LycanrocIcon:
 Lycanroc_DuskIcon:
 Lycanroc_MidnightIcon:
@@ -291,6 +295,7 @@ GirafarigIcon:    INCBIN "gfx/icons/girafarig.2bpp"
 
 Vulpix_AlolaIcon:
 VulpixIcon:       INCBIN "gfx/icons/vulpix.2bpp"
+
 Ninetales_AlolaIcon:
 NinetalesIcon:    INCBIN "gfx/icons/ninetales.2bpp"
 
