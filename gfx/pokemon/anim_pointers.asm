@@ -35,7 +35,7 @@ AnimationPointers:
 	dw DittoAnimation
 	dw PurrloinAnimation
 	dw LiepardAnimation
-	dw VulpixAnimation
+	dw GrimerAnimation
 	dw MukAnimation
 	dw Nidoran_MAnimation
 	dw NidorinoAnimation

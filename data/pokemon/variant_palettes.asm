@@ -58,41 +58,41 @@ INCLUDE "gfx/pokemon/nidoran_m/shiny.pal"
 INCBIN "gfx/pokemon/nidoran_f/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/nidoran_f/shiny.pal"
 
-FlabebePalettes:
-INCBIN "gfx/pokemon/flabebe/front.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/flabebe/shiny.pal"
-INCLUDE "gfx/pokemon/flabebe/yellow.pal"
-INCLUDE "gfx/pokemon/flabebe/yellow_shiny.pal"
-INCLUDE "gfx/pokemon/flabebe/orange.pal"
-INCLUDE "gfx/pokemon/flabebe/orange_shiny.pal"
-INCLUDE "gfx/pokemon/flabebe/blue.pal"
-INCLUDE "gfx/pokemon/flabebe/blue_shiny.pal"
-INCLUDE "gfx/pokemon/flabebe/white.pal"
-INCLUDE "gfx/pokemon/flabebe/white_shiny.pal"
+;FlabebePalettes:
+;INCBIN "gfx/pokemon/flabebe/front.gbcpal", middle_colors
+;INCLUDE "gfx/pokemon/flabebe/shiny.pal"
+;INCLUDE "gfx/pokemon/flabebe/yellow.pal"
+;INCLUDE "gfx/pokemon/flabebe/yellow_shiny.pal"
+;INCLUDE "gfx/pokemon/flabebe/orange.pal"
+;INCLUDE "gfx/pokemon/flabebe/orange_shiny.pal"
+;INCLUDE "gfx/pokemon/flabebe/blue.pal"
+;INCLUDE "gfx/pokemon/flabebe/blue_shiny.pal"
+;INCLUDE "gfx/pokemon/flabebe/white.pal"
+;INCLUDE "gfx/pokemon/flabebe/white_shiny.pal"
 
-FloettePalettes:
-INCBIN "gfx/pokemon/floette/front.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/floette/shiny.pal"
-INCLUDE "gfx/pokemon/floette/yellow.pal"
-INCLUDE "gfx/pokemon/floette/yellow_shiny.pal"
-INCLUDE "gfx/pokemon/floette/orange.pal"
-INCLUDE "gfx/pokemon/floette/orange_shiny.pal"
-INCLUDE "gfx/pokemon/floette/blue.pal"
-INCLUDE "gfx/pokemon/floette/blue_shiny.pal"
-INCLUDE "gfx/pokemon/floette/white.pal"
-INCLUDE "gfx/pokemon/floette/white_shiny.pal"
+;FloettePalettes:
+;INCBIN "gfx/pokemon/floette/front.gbcpal", middle_colors
+;INCLUDE "gfx/pokemon/floette/shiny.pal"
+;INCLUDE "gfx/pokemon/floette/yellow.pal"
+;INCLUDE "gfx/pokemon/floette/yellow_shiny.pal"
+;INCLUDE "gfx/pokemon/floette/orange.pal"
+;INCLUDE "gfx/pokemon/floette/orange_shiny.pal"
+;INCLUDE "gfx/pokemon/floette/blue.pal"
+;INCLUDE "gfx/pokemon/floette/blue_shiny.pal"
+;INCLUDE "gfx/pokemon/floette/white.pal"
+;INCLUDE "gfx/pokemon/floette/white_shiny.pal"
 
-FlorgesPalettes:
-INCBIN "gfx/pokemon/florges/front.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/florges/shiny.pal"
-INCLUDE "gfx/pokemon/florges/yellow.pal"
-INCLUDE "gfx/pokemon/florges/yellow_shiny.pal"
-INCLUDE "gfx/pokemon/florges/orange.pal"
-INCLUDE "gfx/pokemon/florges/orange_shiny.pal"
-INCLUDE "gfx/pokemon/florges/blue.pal"
-INCLUDE "gfx/pokemon/florges/blue_shiny.pal"
-INCLUDE "gfx/pokemon/florges/white.pal"
-INCLUDE "gfx/pokemon/florges/white_shiny.pal"
+;FlorgesPalettes:
+;INCBIN "gfx/pokemon/florges/front.gbcpal", middle_colors
+;INCLUDE "gfx/pokemon/florges/shiny.pal"
+;INCLUDE "gfx/pokemon/florges/yellow.pal"
+;INCLUDE "gfx/pokemon/florges/yellow_shiny.pal"
+;INCLUDE "gfx/pokemon/florges/orange.pal"
+;INCLUDE "gfx/pokemon/florges/orange_shiny.pal"
+;INCLUDE "gfx/pokemon/florges/blue.pal"
+;INCLUDE "gfx/pokemon/florges/blue_shiny.pal"
+;INCLUDE "gfx/pokemon/florges/white.pal"
+;INCLUDE "gfx/pokemon/florges/white_shiny.pal"
 
 DeerlingPalettes:
 INCBIN "gfx/pokemon/deerling/front.gbcpal", middle_colors

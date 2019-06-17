@@ -3326,15 +3326,22 @@ UnevolvedEviolite:
 	ld a, [wTempEnemyMonSpecies]
 
 .continue:
-	dec a
+	ld [wCurPartySpecies], a
 	push hl
 	push bc
+	push de
+	farcall GetRelevantEvosAttacksPointers ;not sure if form is known
+	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
+	dec a
 	ld c, a
 	ld b, 0
-	ld hl, EvosAttacksPointers
 	add hl, bc
 	add hl, bc
-	ld a, BANK(EvosAttacksPointers)
+	ld a, d
+	pop de
 	call GetFarHalfword
 	ld a, BANK(EvosAttacks)
 	call GetFarByte

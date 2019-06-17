@@ -22,8 +22,8 @@ Meowstic_FAnimationIdle: INCLUDE "gfx/pokemon/meowstic_f/anim_idle.asm"
 GrimerAnimationIdle: INCLUDE "gfx/pokemon/grimer/anim_idle.asm"
 Grimer_AlolaAnimationIdle: INCLUDE "gfx/pokemon/grimer_alola/anim_idle.asm"
 
-MukAnimationIdle: INCLUDE "gfx/pokemon/vulpix/anim_idle.asm"
-Muk_AlolaAnimationIdle: INCLUDE "gfx/pokemon/vulpix_alola/anim_idle.asm"
+MukAnimationIdle: INCLUDE "gfx/pokemon/muk/anim_idle.asm"
+Muk_AlolaAnimationIdle: INCLUDE "gfx/pokemon/muk_alola/anim_idle.asm"
 
 Nidoran_MAnimationIdle: INCLUDE "gfx/pokemon/nidoran_m/anim_idle.asm"
 Nidoran_FAnimationIdle: INCLUDE "gfx/pokemon/nidoran_f/anim_idle.asm"

@@ -308,14 +308,19 @@ BT_SetLevel:
 	push de
 	call GetPartyLocation
 
+	;get form before base data
+	ld bc, wPartyMon1Form - wPartyMon1	
+	add hl, bc
+	predef GetVariant
+
 	; Get base stats and experience group
-	ld bc, wPartyMon1Species - wPartyMon1
+	ld bc, wPartyMon1Species - wPartyMon1Form
 	add hl, bc
 	ld a, [hl]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push hl
-	call GetBaseData
+	call GetBaseData ;form is known
 	pop hl
 
 	ld bc, wPartyMon1Level - wPartyMon1Species

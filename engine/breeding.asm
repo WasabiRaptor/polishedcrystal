@@ -68,16 +68,20 @@ CheckBreedmonCompatibility: ; 16e1d
 .CheckBreedingGroupCompatibility: ; 16ed6
 ; If either mon is in the No Eggs group,
 ; they are not compatible.
+	ld hl, wBreedMon2Form
+	predef GetVariant
 	ld a, [wBreedMon2Species]
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
 	cp NO_EGGS * $11
 	jr z, .Incompatible
 
+	ld hl, wBreedMon1Form
+	predef GetVariant
 	ld a, [wBreedMon1Species]
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
 	cp NO_EGGS * $11
 	jr z, .Incompatible
@@ -88,7 +92,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	cp DITTO
 	jr z, .Compatible
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
 	push af
 	and $f
@@ -103,7 +107,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	jr z, .Compatible
 	ld [wCurSpecies], a
 	push bc
-	call GetBaseData
+	call GetBaseData ;form is known
 	pop bc
 	ld a, [wBaseEggGroups]
 	push af
@@ -266,6 +270,12 @@ HatchEggs: ; 16f70 (5:6f70)
 	and $ff - IS_EGG_MASK
 	ld [hl], a
 
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Form
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	predef GetVariant
+
 	ld a, [wCurPartySpecies]
 	cp TOGEPI
 	jr nz, .nottogepi
@@ -280,7 +290,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld [wd265], a
 	ld [wCurSpecies], a
 	call GetPokemonName
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMons
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -527,13 +537,17 @@ InitEggMoves:
 InheritLevelMove:
 ; If move d is part of the level up moveset, inherit that move
 	ld a, [wEggMonSpecies]
+	farcall GetRelevantEvosAttacksPointers
+	ld a, [wEggMonSpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
-	ld c, a
 	ld b, 0
-	ld hl, EvosAttacksPointers
+	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, BANK(EvosAttacksPointers)
+	ld a, d
 	call GetFarHalfword
 .loop
 	ld a, BANK(EvosAttacks)
@@ -603,12 +617,14 @@ GetEggFrontpic: ; 17224 (5:7224)
 	push de
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call GetBaseData
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Form
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	predef GetVariant
+	ld a, [wCurSpecies]
+	call GetBaseData ;form is known
+
 	pop de
 	predef_jump GetFrontpic
 
@@ -616,12 +632,13 @@ GetHatchlingFrontpic: ; 1723c (5:723c)
 	push de
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call GetBaseData
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Form
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	predef GetVariant
+	ld a, [wCurSpecies]
+	call GetBaseData ;form is known
 	pop de
 	predef_jump FrontpicPredef
 

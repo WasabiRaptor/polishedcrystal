@@ -1345,24 +1345,46 @@ Print8BitNumRightAlign:: ; 3842
 	jp PrintNum
 ; 384d
 
+INCLUDE "data/pokemon/variant_base_data_table.asm"
+
 GetBaseData:: ; 3856
 	push bc
 	push de
 	push hl
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(BaseData)
-	rst Bankswitch
 
 ; Egg doesn't have BaseData
 	ld a, [wCurSpecies]
 	cp EGG
 	jr z, .egg
 
-; Get BaseData
+;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantBaseDataTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+
+	ld a, [wCurForm]
+	jp c, .variant
+	ld a, [wCurSpecies]
+.variant
 	dec a
+	ld b, a
+	ld a, d
+	rst Bankswitch
+	
+	ld a, b
+; Get BaseData
 	ld bc, BASEMON_STRUCT_LENGTH
-	ld hl, BaseData
+	pop hl
 	rst AddNTimes
 	ld de, wCurBaseData
 	ld bc, BASEMON_STRUCT_LENGTH

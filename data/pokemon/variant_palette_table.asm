@@ -9,9 +9,9 @@ VariantPaletteTable:
     dbba NIDORAN,   NidoranPalettes
     dbba SANDSHREW, SandshrewPalettes
     dbba SANDSLASH, SandslashPalettes
-    dbba FLABEBE,   FlabebePalettes
-    dbba FLOETTE,   FloettePalettes
-    dbba FLORGES,   FlorgesPalettes
+    ;dbba FLABEBE,   FlabebePalettes
+    ;dbba FLOETTE,   FloettePalettes
+    ;dbba FLORGES,   FlorgesPalettes
     dbba DEERLING,  DeerlingPalettes
     dbba SAWSBUCK,  SawsbuckPalettes
     dbba VULPIX,    VulpixPalettes

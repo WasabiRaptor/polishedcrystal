@@ -376,10 +376,22 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld hl, wPartyMon1Species
 	rst AddNTimes
 	ld a, [hl]
+	ld [wCurPartySpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc 
+	predef GetVariant
+	ld a, [wCurPartySpecies]
+	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
+	ld a, [wCurPartySpecies]
+	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
+	;ld hl, VulpixEvosAttacksPointers
+	;ld b, BANK(VulpixEvosAttacksPointers)
 	dec a
-	ld e, a
 	ld d, 0
-	ld hl, EvosAttacksPointers
+	ld e, a
 	add hl, de
 	add hl, de
 	call .DetermineCompatibility
@@ -398,10 +410,10 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 ; 50268
 
 .DetermineCompatibility: ; 50268
+	ld a, b ;this is the bank from GetRelevantEvosAttacksPointers
 	ld de, wStringBuffer1
-	ld a, BANK(EvosAttacksPointers)
 	ld bc, 2
-	call FarCopyBytes
+	call FarCopyBytes 
 	ld hl, wStringBuffer1
 	ld a, [hli]
 	ld h, [hl]
@@ -409,7 +421,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld de, wStringBuffer1
 ; Only reads first 4 evolution entries
 ; https://hax.iimarck.us/topic/4567/
-	ld a, BANK(EvosAttacks)
+	ld a, BANK(EvosAttacks) ;not an issue here, all EvosAttacks are in the same bank
 	ld bc, $10
 	call FarCopyBytes
 	ld hl, wStringBuffer1

@@ -331,7 +331,7 @@ NUM_LYCANROC EQU const_value + -1 ; 4
 	const BETA_FORM
 NUM_BETA EQU const_value + -1 ; 2
 
-	const_def 2
+	const_def 1
 	const FAN_ROTOM
 	const FROST_ROTOM
 	const HEAT_ROTOM

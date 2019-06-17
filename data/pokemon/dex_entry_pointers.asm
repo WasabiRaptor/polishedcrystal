@@ -36,7 +36,7 @@
 	dw DittoPokedexEntry
 	dw PurrloinPokedexEntry
 	dw LiepardPokedexEntry
-	dw VulpixPokedexEntry
+	dw GrimerPokedexEntry
 	dw MukPokedexEntry
 	dw Nidoran_MPokedexEntry
 	dw NidorinoPokedexEntry

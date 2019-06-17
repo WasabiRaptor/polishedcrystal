@@ -1,17 +1,11 @@
 INCLUDE "data/pokemon/menu_icon_pals.asm"
+INCLUDE "data/pokemon/variant_menu_icon_pals.asm"
 
 LoadOverworldMonIcon: ; 8e82b
 	ld a, e
 	ld [wCurIcon], a
-	ld l, a
-	ld h, 0
-	add hl, hl
-	ld de, IconPointers
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
-	jp GetMonIconBank
+	jp GetRelevantIconPointersAndBank
+
 ; 8e83f
 
 SetMenuMonIconColor:
@@ -132,20 +126,6 @@ GetMonIconPalette::
 	jr GetMenuMonIconPalette.got_species
 
 GetMenuMonIconPalette::
-	ld a, [wCurPartySpecies]
-	cp GYARADOS
-	jr nz, .not_red_gyarados
-
-	inc hl ; Form is in the byte after Shiny
-	ld a, [hl]
-	dec hl
-	and FORM_MASK
-	cp GYARADOS_RED_FORM
-	jr nz, .not_red_gyarados
-	xor a ; PAL_OW_RED
-	jr .done
-
-.not_red_gyarados
 ; check shininess at hl
 	ld a, [hl]
 	and SHINY_MASK
@@ -156,12 +136,18 @@ GetMenuMonIconPalette::
 	and a
 .got_shininess:
 	push af
+	inc hl ;byte after shiny is form
+	predef GetVariant
 	ld a, [wCurPartySpecies]
 .got_species:
+	call GetRelevantMonIconColors
+	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld c, a
 	ld b, 0
-	ld hl, MenuMonIconColors
 	add hl, bc
 	ld e, [hl]
 	pop af
@@ -392,21 +378,11 @@ endr
 	ld de, VTiles0
 	add hl, de
 	push hl
-
+	push hl
 ; The icons are contiguous, in order and of the same
 ; size, so the pointer table is somewhat redundant.
-	ld a, [wCurIcon]
-	push hl
-	ld l, a
-	ld h, 0
-	add hl, hl
-	ld de, IconPointers
-	add hl, de
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
+	call GetRelevantIconPointersAndBank
 	pop hl
-	call GetMonIconBank
 	call Request2bpp
 	pop hl
 	ret
@@ -414,13 +390,13 @@ endr
 
 ; Extended icon bank routine by com3tiin
 ; http://www.pokecommunity.com/showthread.php?t=338470
-GetMonIconBank:
-	ld a, [wCurIcon]
-	cp AZUMARILL ; first mon in Icons2
-	lb bc, BANK(Icons1), 8
-	ret c
-	lb bc, BANK(Icons2), 8
-	ret
+;GetMonIconBank:
+;	ld a, [wCurIcon]
+;	cp AZUMARILL ; first mon in Icons2
+;	lb bc, BANK(Icons1), 8
+;	ret c
+;	lb bc, BANK(Icons2), 8
+;	ret
 
 FreezeMonIcons: ; 8ea4a
 	ld hl, wSpriteAnimationStructs
@@ -508,3 +484,58 @@ HoldSwitchmonIcon: ; 8ea8c
 	dec e
 	jr nz, .loop
 	ret
+
+GetRelevantIconPointersAndBank:
+; given species in wCurIcon, return *IconPointers in hl
+; returns c for variants, nc for normal species
+	ld a, [wCurIcon]
+	ld hl, VariantIconPointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	inc hl
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+
+	ld a, [wCurIcon]
+	push af
+	jr nc, .notvariant
+	pop af
+	ld a, [wCurForm]
+	push af
+	dec a
+.notvariant
+	ld l, a
+	ld h, 0
+	add hl, hl
+	add hl, de
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+;get the bank
+	ld c, 8
+	pop af
+	ld b, BANK(Icons3)
+	ret c ;variant
+	ld b, BANK(Icons1)
+	cp EGG ; first mon in Icons2
+	ret c
+	ld b, BANK(Icons2)
+	ret
+
+INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"
+
+GetRelevantMonIconColors:
+; given species in a, return *PicPointers in hl 
+; returns c for variants, nc for normal species
+	ld hl, VariantIconPalTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"

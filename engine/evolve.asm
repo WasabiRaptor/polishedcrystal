@@ -40,12 +40,20 @@ EvolveAfterBattle_MasterLoop
 	ld a, c
 	and a
 	jp z, EvolveAfterBattle_MasterLoop
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Form
+	call GetPartyLocation
+	predef GetVariant
 
 	ld a, [wEvolutionOldSpecies]
+	call GetRelevantEvosAttacksPointers
+	ld a, [wEvolutionOldSpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld b, 0
 	ld c, a
-	ld hl, EvosAttacksPointers
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
@@ -505,10 +513,14 @@ LearnEvolutionMove:
 LearnLevelMoves: ; 42487
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
+	call GetRelevantEvosAttacksPointers
+	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld b, 0
 	ld c, a
-	ld hl, EvosAttacksPointers
 	add hl, bc
 	add hl, bc
 	ld a, [hli]
@@ -574,9 +586,15 @@ FillMoves: ; 424e1
 	push hl
 	push de
 	push bc
-	ld hl, EvosAttacksPointers
+	ld a, [wCurPartySpecies]
+	push de
+	call GetRelevantEvosAttacksPointers
+	pop de
 	ld b, 0
 	ld a, [wCurPartySpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	add a
 	rl b
@@ -707,7 +725,7 @@ GetPreEvolution: ; 42581
 
 	ld c, 0
 .loop ; For each Pokemon...
-	ld hl, EvosAttacksPointers
+	ld hl, EvosAttacksPointers ; form differences really don't affect evolutions so I think I can leave this be
 	ld b, 0
 	add hl, bc
 	add hl, bc
@@ -747,3 +765,19 @@ GetPreEvolution: ; 42581
 	scf
 	ret
 ; 425b1
+
+GetRelevantEvosAttacksPointers:
+; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantEvosAttacksPointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+INCLUDE "data/pokemon/variant_evos_attacks_pointer_table.asm"

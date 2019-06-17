@@ -771,11 +771,18 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wBreedMotherOrNonDitto], a
 	and a
 	ld a, [wBreedMon1Species]
-	jr z, .GotMother
-	ld a, [wBreedMon2Species]
-
-.GotMother:
 	ld [wCurPartySpecies], a
+	jr z, .GotMother1
+
+	ld a, [wBreedMon2Species]
+	ld [wCurPartySpecies], a
+	ld hl, wBreedMon2Form
+	jr .GotMother2
+.GotMother1:
+	ld hl, wBreedMon1Form
+.GotMother2:
+	predef GetVariant
+	ld a, [wCurPartySpecies]
 	farcall GetPreEvolution
 	farcall GetPreEvolution
 	ld a, EGG_LEVEL
@@ -785,7 +792,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wCurSpecies], a
 	ld [wEggMonSpecies], a
 
-	call GetBaseData
+	call GetBaseData ;form is known
 
 	; Set name and item
 	ld hl, wEggNick

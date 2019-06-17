@@ -229,10 +229,12 @@ BugContest_SetCaughtContestMon: ; e6ce
 	jp PrintText
 
 .generatestats ; e6fd
+	ld hl, wEnemyMonForm
+	predef GetVariant
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	xor a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wContestMon
@@ -1790,7 +1792,7 @@ GetTrademonFrontpic: ; 4d7fd
 	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	pop de
 	predef FrontpicPredef
 	ret
@@ -2073,12 +2075,14 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 	ret
 
 CheckPartyFullAfterContest: ; 4d9e5
+	ld hl, wContestMonForm
+	predef GetVariant
 	ld a, [wContestMon]
 	and a
 	jp z, .DidntCatchAnything
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld hl, wPartyCount
 	ld a, [hl]
 	cp 6
@@ -3992,6 +3996,11 @@ INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/names.asm"
 
 
+SECTION "Variant Base Data", ROMX
+
+INCLUDE "data/pokemon/variant_base_stats.asm"
+
+
 SECTION "Code 14", ROMX
 
 INCLUDE "engine/battle/abilities.asm"
@@ -4078,6 +4087,7 @@ INCLUDE "engine/mon_icons.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
 INCLUDE "data/pokemon/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/variant_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/menu_icons.asm"
 
 

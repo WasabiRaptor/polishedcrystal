@@ -1068,7 +1068,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	ld [wCurSpecies], a
 	ld hl, wTempMonForm
 	predef GetVariant
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	xor a
@@ -1729,7 +1729,7 @@ StatsScreenDPad: ; e2f95 (38:6f95)
 	ld [wCurSpecies], a
 	ld hl, wTempMonForm
 	predef GetVariant
-	call GetBaseData
+	call GetBaseData ;form is known
 	jp BillsPC_CopyMon
 
 .did_nothing

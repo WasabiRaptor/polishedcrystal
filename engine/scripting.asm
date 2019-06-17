@@ -2306,6 +2306,8 @@ Script_givepoke:
 ;     pokemon (PokemonParam)
 ;     level (DecimalParam)
 ;     item (ItemLabelByte)
+;	  Form and Gender
+;	  Personality
 ;     trainer (DecimalParam)
 ;     trainer_name_pointer (MultiByteParam)
 ;     pkmn_nickname (MultiByteParam)
@@ -2316,6 +2318,17 @@ Script_givepoke:
 	call GetScriptByte
 	ld [wCurItem], a
 	call GetScriptByte
+	ld [wCurGender], a
+	and FORM_MASK
+	ld [wCurForm], a
+	call GetScriptByte
+	ld [wGiftPokeBall], a
+	call GetScriptByte
+	ld [wCurPersonality], a
+	call GetScriptByte
+	ld [wGiftPokeTID], a
+	call GetScriptByte
+	ld [wGiftPokeTID+1], a
 	and a
 	ld b, a
 	jr z, .ok
