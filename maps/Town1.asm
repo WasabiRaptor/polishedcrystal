@@ -20,7 +20,7 @@ Town1_MapScriptHeader:
 
 MysteryDungeonEnterScript:
 	opentext
-	givepoke VULPIX, 5, ICE_STONE, MALE | ALOLAN, LUXURY_BALL, %10000000, $2345, AlolaName, IndigoOT
+	givepoke VULPIX, 5, ICE_STONE, MALE | ALOLAN, LUXURY_BALL;, %10000000, $2345, AlolaName, IndigoOT
 	givepoke VULPIX, 5, FIRE_STONE, FEMALE | KANTONIAN, LUXURY_BALL, %10000000, $2345, KantoName, IndigoOT
 	givepoke ZORUA, 10, ORAN_BERRY, MALE, LUXURY_BALL, %10000000, $2345, IndigoName, IndigoOT
 	givepoke EEVEE, 10

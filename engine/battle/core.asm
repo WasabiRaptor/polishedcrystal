@@ -3511,9 +3511,9 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	call GetBaseData ;form is known
+	;ld hl, wEnemyMonForm
+	;predef GetVariant
+	call GetBaseData ;form is not known ?
 	ld a, OTPARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon ;form is known
@@ -4833,9 +4833,9 @@ DrawEnemyHUD: ; 3e043
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	call GetBaseData ;form is known
+	;ld hl, wEnemyMonForm
+	;predef GetVariant
+	call GetBaseData ;form is not known?
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
 	call PlaceString
