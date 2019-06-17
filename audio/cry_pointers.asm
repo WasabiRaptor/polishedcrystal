@@ -15,7 +15,7 @@ Cries:
 	dba Cry_Drowzee
 	dba Cry_Pidgey
 	dba Cry_Bulbasaur
-	dba Cry_Farfetch_d
+	dba Cry_Spearow
 	dba Cry_Rhydon
 	dba Cry_Golem
 	dba Cry_Blastoise
@@ -23,7 +23,7 @@ Cries:
 	dba Cry_Weedle
 	dba Cry_Caterpie
 	dba Cry_Ekans
-	dba Cry_Shellder
+	dba Cry_Fearow
 	dba Cry_Clefairy
 	dba Cry_Venonat
 	dba Cry_Lapras
@@ -51,7 +51,7 @@ Cries:
 	dba Cry_Chikorita
 	dba Cry_Totodile
 	dba Cry_Gligar
-	dba Cry_Bellossom
+	dba Cry_Cleffa
 	dba Cry_Slugma
 	dba Cry_Ledyba
 	dba Cry_Entei
@@ -60,10 +60,10 @@ Cries:
 	dba Cry_Typhlosion
 	dba Cry_Natu
 	dba Cry_Teddiursa
-	dba Cry_Remoraid
+	dba Cry_Sunflora
 	dba Cry_Ampharos
 	dba Cry_Magcargo
 	dba Cry_Pichu
-	dba Cry_Tyrogue
+	dba Cry_Aipom
 	dba Cry_Dunsparce
 	dba Cry_Donphan
