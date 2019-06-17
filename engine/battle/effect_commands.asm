@@ -3330,7 +3330,7 @@ UnevolvedEviolite:
 	push hl
 	push bc
 	push de
-	call GetRelevantEvosAttacksPointers ;not sure if form is known
+	farcall GetRelevantEvosAttacksPointers ;not sure if form is known
 	ld a, [wCurPartySpecies]
 	jr nc, .notvariant
 	ld a, [wCurForm]

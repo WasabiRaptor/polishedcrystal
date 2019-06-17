@@ -537,7 +537,7 @@ InitEggMoves:
 InheritLevelMove:
 ; If move d is part of the level up moveset, inherit that move
 	ld a, [wEggMonSpecies]
-	call GetRelevantEvosAttacksPointers
+	farcall GetRelevantEvosAttacksPointers
 	ld a, [wEggMonSpecies]
 	jr nc, .notvariant
 	ld a, [wCurForm]

@@ -1837,7 +1837,7 @@ GetForgottenMoves::
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartySpecies], a
-	call GetRelevantEvosAttacksPointers
+	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
 	jr nc, .notvariant
 	ld a, [wCurForm]

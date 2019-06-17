@@ -972,7 +972,7 @@ GLOBAL EvosAttacksPointers
 
 	push bc
 	ld a, [wTempEnemyMonSpecies]
-	call GetRelevantEvosAttacksPointers
+	farcall GetRelevantEvosAttacksPointers
 	ld a, [wTempEnemyMonSpecies]
 	jr nc, .notvariant
 	ld a, [wCurForm]
