@@ -381,7 +381,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	add hl, bc 
 	predef GetVariant
 	ld a, [wCurPartySpecies]
-	call GetRelevantEvosAttacksPointers ;all inputs and outputs should be the same but it doesn't work?
+	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
 	ld a, [wCurPartySpecies]
 	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after
 	jr nc, .notvariant
