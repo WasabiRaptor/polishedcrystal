@@ -1598,6 +1598,23 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	add hl, bc
 	dec d
 	jp nz, .footprintloop
+	;foortprints
+	ld a, [wDexListingScrollOffset]
+	inc a
+	ld hl, VTiles2 tile $6F
+	call Pokedex_LoadAnyFootprintAtTileHL
+	ld a, [wDexListingScrollOffset]
+	add 2
+	ld hl, VTiles2 tile $73
+	call Pokedex_LoadAnyFootprintAtTileHL
+	ld a, [wDexListingScrollOffset]
+	add 3
+	ld hl, VTiles2 tile $77
+	call Pokedex_LoadAnyFootprintAtTileHL
+	ld a, [wDexListingScrollOffset]
+	add 4
+	ld hl, VTiles2 tile $7b
+	call Pokedex_LoadAnyFootprintAtTileHL
 
 ; Load de with wPokedexDataStart + [wDexListingScrollOffset]
 	ld a, [wDexListingScrollOffset]
@@ -1613,27 +1630,9 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	push af
 	ld a, [de]
 	ld [wd265], a
-	push de
+	push de	
 	push hl
 	call .PrintEntry
-
-;foortprints
-	ld a, [wd265]
-	ld hl, VTiles2 tile $6F
-	call Pokedex_LoadAnyFootprintAtTileHL
-	ld a, [wd265]
-	inc a
-	ld hl, VTiles2 tile $73
-	call Pokedex_LoadAnyFootprintAtTileHL
-	ld a, [wd265]
-	add a, 2
-	ld hl, VTiles2 tile $77
-	call Pokedex_LoadAnyFootprintAtTileHL
-	ld a, [wd265]
-	add a, 3
-	ld hl, VTiles2 tile $7b
-	call Pokedex_LoadAnyFootprintAtTileHL
-
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -1726,7 +1725,7 @@ Pokedex_PlaceDefaultStringIfNotSeen: ; 40b8d (10:4b8d)
 
 Pokedex_DrawFootprint: ; 40ba0
 	hlcoord 18, 1
-	ld a, $70
+	ld a, $6f
 Pokedex_DrawFootprint_at_HL
 	;push bc ;not sure if necessary
 	ld [hli], a
@@ -2517,8 +2516,7 @@ Pokedex_LoadAnyFootprint: ; 4147b
 	ld a, [wd265]
 Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
-	sub 4
-
+	dec a
 	ld hl, Footprints
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes
