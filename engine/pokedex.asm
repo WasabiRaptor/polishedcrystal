@@ -226,6 +226,7 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	call Pokedex_SetBGMapMode4
 	call Pokedex_ResetBGMapMode
 	call Pokedex_DrawMainScreenBG
+	call Pokedex_PrintNumSpeciesDefeated
 	ld a, POKEDEX_SCX
 	ldh [hSCX], a
 	ld a, POKEDEX_SCY
@@ -255,6 +256,7 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	jp Pokedex_IncrementDexPointer
 
 Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
+	call Pokedex_PrintNumSpeciesDefeated
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
@@ -313,6 +315,39 @@ Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
 	ld a, DEXSTATE_EXIT
 	ld [wJumptableIndex], a
 	ret
+
+Pokedex_PrintNumSpeciesDefeated:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalDefeatedPokemonSpecies)
+	ldh [rSVBK], a
+
+	ld hl, wTotalDefeatedPokemonSpecies
+	ld a, $FF
+	ld [hl], a
+	hlcoord 9, 4
+	ld de, StringTotalBeaten
+	call Pokedex_PlaceString
+	ld hl, wTotalDefeatedPokemonSpecies
+	ld a, 1
+	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld d, h
+	ld l, e
+	hlcoord 10, 5
+	ld c, 7
+	ld b, 2
+	call PrintNum
+
+	pop af
+	ldh [rSVBK], a
+	ret
+	
+StringTotalBeaten:
+	db "No. Beat","en",$ff
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	call LowVolume
@@ -1105,7 +1140,6 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	call ByteFill
 	ld a, $5f
 	ld [hl], a
-
 	ret
 	;hlcoord 9, 4
 	;ld de, String_HP

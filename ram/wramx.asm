@@ -1454,6 +1454,11 @@ wBattleAnimEnd::
 	ds $e
 wSurfWaveBGEffectEnd::
 
+SECTION "Pokemon Encounters", WRAMX
+
+wTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
+
+
 
 SECTION "WRAM 6", WRAMX
 
