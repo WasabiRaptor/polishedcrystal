@@ -1067,13 +1067,14 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	inc a ; $5a
 	hlcoord 8, 1
 	ld b, 7
-	;call Pokedex_FillColumn
+	call Pokedex_FillColumn
 
-	;hlcoord $13, 0
-	;ld a, $5e
-	;ld [hl], a
-	;dec a ;$5d
-	;hlcoord $13, 1
+	hlcoord $13, 0
+	ld a, $5e
+	ld [hl], a
+	dec a ;$5d
+	ld b, 7
+	hlcoord $13, 1
 	call Pokedex_FillColumn
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
