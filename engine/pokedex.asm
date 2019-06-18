@@ -1588,6 +1588,17 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld a, " "
 	call FillBoxWithByte
 
+	ld a, $6F
+	ld d, 4
+	hlcoord PKMN_NAME_LENGTH + 4, 1
+.footprintloop
+	call Pokedex_DrawFootprint_at_HL
+	inc a
+	ld bc, SCREEN_WIDTH -1
+	add hl, bc
+	dec d
+	jp nz, .footprintloop
+
 ; Load de with wPokedexDataStart + [wDexListingScrollOffset]
 	ld a, [wDexListingScrollOffset]
 	ld e, a
@@ -1605,6 +1616,24 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	push de
 	push hl
 	call .PrintEntry
+
+;foortprints
+	ld a, [wd265]
+	ld hl, VTiles2 tile $6F
+	call Pokedex_LoadAnyFootprintAtTileHL
+	ld a, [wd265]
+	inc a
+	ld hl, VTiles2 tile $73
+	call Pokedex_LoadAnyFootprintAtTileHL
+	ld a, [wd265]
+	add a, 2
+	ld hl, VTiles2 tile $77
+	call Pokedex_LoadAnyFootprintAtTileHL
+	ld a, [wd265]
+	add a, 3
+	ld hl, VTiles2 tile $7b
+	call Pokedex_LoadAnyFootprintAtTileHL
+
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -1619,7 +1648,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints one entry in the list of Pokémon on the main Pokédex screen.
 	and a
 	ret z
-	call Pokexex_PrintNumberTypesAndFootprint
+	call Pokexex_PrintNumberAndTypes
 	call Pokedex_PlaceDefaultStringIfNotSeen
 	ret c
 	call Pokedex_PlaceCaughtSymbolIfCaught
@@ -1629,7 +1658,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	jp PlaceString
 
 
-Pokexex_PrintNumberTypesAndFootprint:
+Pokexex_PrintNumberAndTypes:
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
@@ -1669,7 +1698,6 @@ Pokexex_PrintType:
 	inc a
 	ld [hl], a
 	inc a
-
 	pop hl
 	ret
 
@@ -2485,19 +2513,12 @@ Pokedex_LoadCurrentFootprint: ; 41478 (10:5478)
 	call Pokedex_GetSelectedMon
 
 Pokedex_LoadAnyFootprint: ; 4147b
-	ld hl, VTiles2 tile $70
+	ld hl, VTiles2 tile $6F
+	ld a, [wd265]
 Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
-	ld a, [wd265]
-	dec a
-	and ($ff ^ $07) ; $f8 ; $1f << 3
-	srl a
-	srl a
-	srl a
-	ld e, 0
-	ld d, a
-	ld a, [wd265]
-	dec a
+	sub 4
+
 	ld hl, Footprints
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes
