@@ -195,7 +195,20 @@ Pokedex_Exit: ; 40136 (10:4136)
 	ret
 
 Pokedex_InitMainScreen: ; 4013c (10:413c)
+	;get type icons
+	ld a, $1
+	ldh [rVBK], a
+
+	ld hl, TypeIconGFX
+	ld bc, 4 * LEN_1BPP_TILE * 18
+	ld d, h
+	ld e, l
+	ld hl, VTiles5 tile $00
+	lb bc, BANK(TypeIconGFX), 4*18
+	call Request1bpp
+	
 	xor a
+	ldh [rVBK], a
 	ldh [hBGMapMode], a
 	call ClearSprites
 	xor a
@@ -1398,6 +1411,11 @@ Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	ld a, 0 | BEHIND_BG
 	ld bc, DEX_WINDOW_WIDTH
 	call ByteFill
+	hlcoord PKMN_NAME_LENGTH, 1, wAttrMap
+	ld a, 0 | TILE_BANK
+	ld c, 4
+	ld b, DEX_WINDOW_HEIGHT
+	call FillBoxWithByte
 
 	ld a, $32
 	hlcoord 0, DEX_WINDOW_HEIGHT +1
@@ -1593,7 +1611,6 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	pop de
 	inc de
 	pop af
-	;call PrintListFootprintAndTypes
 	dec a
 	jr nz, .loop
 	jp Pokedex_LoadSelectedMonTiles
@@ -1602,7 +1619,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints one entry in the list of Pokémon on the main Pokédex screen.
 	and a
 	ret z
-	call Pokexex_PrintNumber
+	call Pokexex_PrintNumberTypesAndFootprint
 	call Pokedex_PlaceDefaultStringIfNotSeen
 	ret c
 	call Pokedex_PlaceCaughtSymbolIfCaught
@@ -1611,13 +1628,48 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	pop hl
 	jp PlaceString
 
-Pokexex_PrintNumber:
+
+Pokexex_PrintNumberTypesAndFootprint:
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum	
+	call PrintNum
+	ld bc, PKMN_NAME_LENGTH-3
+	add hl, bc
+;get base data for the current species
+	ld a, [wd265]
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld a, [wBaseType1]
+	call Pokexex_PrintType
+	ld a, [wBaseType1]
+	ld b, a
+	ld a, [wBaseType2]
+	cp b
+	jp z, .done
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	call Pokexex_PrintType
+.done
+	pop hl
+	ret
+
+Pokexex_PrintType:
+	;for type in a print the type icon at hl
+	push hl
+	ld c, 4
+	call SimpleMultiply
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
+	inc a
+
 	pop hl
 	ret
 
@@ -2473,6 +2525,7 @@ Pokedex_LoadGFX2:
 	call Decompress
 	ld a, 6
 	call SkipMusic
+	
 	jp EnableLCD
 
 Pokedex_LoadUnownFont: ; 41a2c
