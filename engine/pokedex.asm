@@ -14,6 +14,11 @@
 	const DEXSTATE_UPDATE_UNOWN_MODE
 	const DEXSTATE_EXIT
 
+POKEDEX_SCY EQU 0
+POKEDEX_SCX EQU 5
+GLOBAL POKEDEX_SCX
+GLOBAL POKEDEX_SCY
+
 Pokedex: ; 40000
 	ldh a, [hWX]
 	ld l, a
@@ -208,8 +213,12 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	call Pokedex_SetBGMapMode4
 	call Pokedex_ResetBGMapMode
 	call Pokedex_DrawMainScreenBG
+	ld a, POKEDEX_SCX
+	ldh [hSCX], a
+	ld a, POKEDEX_SCY
+	ldh [hSCY], a
 
-	ld a, $13
+	ld a, $0f
 	ldh [hWX], a
 	ld a, $40
 	ldh [hWY], a
@@ -1002,7 +1011,7 @@ Pokedex_FillColumn: ; 40741
 	pop de
 	ret
 
-DEX_WINDOW_WIDTH 	EQU 18
+DEX_WINDOW_WIDTH 	EQU 19
 DEX_WINDOW_HEIGHT 	EQU 8
 
 Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
@@ -1020,6 +1029,12 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	hlcoord 0, 8
 	lb bc, DEX_WINDOW_HEIGHT, DEX_WINDOW_WIDTH
 	call Pokedex_PlaceBorder
+	hlcoord 0, 8
+	ld a, $66
+	ld [hl], a
+	inc hl
+	inc a ;$67
+	ld [hl], a
 	hlcoord 9, 4
 	ld de, String_SEEN
 	call Pokedex_PlaceString
@@ -1368,17 +1383,21 @@ Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	hlcoord 0, 1
 	lb bc, DEX_WINDOW_HEIGHT, DEX_WINDOW_WIDTH -1
 	call ClearBox
-	ld a, $34
+	ld a, $67
 	hlcoord 0, 0
 	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
+	hlcoord 6, 0
+	inc a ;$68
+	ld [hl], a
+
 	ld a, $39
 	hlcoord 0, DEX_WINDOW_HEIGHT +1
 	ld bc, DEX_WINDOW_WIDTH -1
 	call ByteFill
 ; scroll bar
 	hlcoord DEX_WINDOW_WIDTH -1, 0
-	ld [hl], $50
+	ld [hl], $5C
 	ld a, $51
 	hlcoord DEX_WINDOW_WIDTH -1, 1
 	ld b, DEX_WINDOW_HEIGHT
@@ -1675,16 +1694,16 @@ Pokedex_OrderMonsByMode: ; 40bdc
 
 
 .NewMode: ; 40bf6 (10:4bf6)
-	ld de, NewPokedexOrder
-	ld hl, wPokedexDataStart
-	ld c, NUM_POKEMON
-.loopnew
-	ld a, [de]
-	inc de
-	ld [hli], a
-	dec c
-	jr nz, .loopnew
-	jr .FindLastSeen
+;	ld de, NewPokedexOrder
+;	ld hl, wPokedexDataStart
+;	ld c, NUM_POKEMON
+;.loopnew
+;	ld a, [de]
+;	inc de
+;	ld [hli], a
+;	dec c
+;	jr nz, .loopnew
+;	jr .FindLastSeen
 
 .OldMode: ; 40c08 (10:4c08)
 	ld hl, wPokedexDataStart
