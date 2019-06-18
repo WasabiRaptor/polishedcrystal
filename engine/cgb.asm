@@ -379,6 +379,11 @@ _CGB_Pokedex: ; 8f70
 	ld a, $1
 	call FillBoxCGB
 
+	hlcoord 0, 8, wAttrMap
+	lb bc, 10, 2
+	ld a, 0 | BEHIND_BG
+	call FillBoxCGB
+
 	ld hl, PokegearOBPals
 	ld de, wUnknOBPals
 	ld bc, 2 palettes

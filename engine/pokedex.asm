@@ -1026,6 +1026,9 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	hlcoord 0, 0
 	lb bc, 7, 7
 	call Pokedex_PlaceBorder
+	hlcoord 8, 0
+	lb bc, 7, 10
+	call Pokedex_PlaceBorder
 	hlcoord 0, 8
 	lb bc, DEX_WINDOW_HEIGHT, DEX_WINDOW_WIDTH
 	call Pokedex_PlaceBorder
@@ -1058,9 +1061,19 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	;hlcoord 1, 17
 	;ld de, String_SELECT_OPTION
 	;call Pokedex_PlaceString
+	hlcoord 8, 0
+	ld a, $59
+	ld [hl], a
+	inc a ; $5a
 	hlcoord 8, 1
 	ld b, 7
-	ld a, $5a
+	call Pokedex_FillColumn
+
+	hlcoord $13, 0
+	ld a, $5e
+	ld [hl], a
+	dec a ;$5d
+	hlcoord $13, 1
 	call Pokedex_FillColumn
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
@@ -1376,6 +1389,15 @@ UnownModeLetterAndCursorCoords: ; 40a3e
 	dwcoord  14,11,  15,11
 
 Pokedex_DrawListWindow: ; 1de171 (77:6171)
+	hlcoord 0, 0, wAttrMap
+	ld a, 0 | BEHIND_BG
+	ld bc, DEX_WINDOW_WIDTH
+	call ByteFill
+	hlcoord 0, DEX_WINDOW_HEIGHT+1, wAttrMap
+	ld a, 0 | BEHIND_BG
+	ld bc, DEX_WINDOW_WIDTH
+	call ByteFill
+
 	ld a, $32
 	hlcoord 0, DEX_WINDOW_HEIGHT +1
 	ld bc, DEX_WINDOW_WIDTH -1
@@ -1570,6 +1592,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	pop de
 	inc de
 	pop af
+	;call PrintListFootprintAndTypes
 	dec a
 	jr nz, .loop
 	jp Pokedex_LoadSelectedMonTiles
@@ -1578,7 +1601,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints one entry in the list of Pokémon on the main Pokédex screen.
 	and a
 	ret z
-	call Pokedex_PrintNumberIfOldMode
+	call Pokexex_PrintNumber
 	call Pokedex_PlaceDefaultStringIfNotSeen
 	ret c
 	call Pokedex_PlaceCaughtSymbolIfCaught
@@ -1587,16 +1610,13 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	pop hl
 	jp PlaceString
 
-Pokedex_PrintNumberIfOldMode: ; 40b6a (10:4b6a)
-	;ld a, [wCurrentDexMode] 
-	;cp DEXMODE_OLD
-	;ret nz ; now will always print the number
+Pokexex_PrintNumber:
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum
+	call PrintNum	
 	pop hl
 	ret
 
@@ -1625,15 +1645,19 @@ Pokedex_PlaceDefaultStringIfNotSeen: ; 40b8d (10:4b8d)
 
 Pokedex_DrawFootprint: ; 40ba0
 	hlcoord 18, 1
-	ld a, $65
+	ld a, $70
+Pokedex_DrawFootprint_at_HL
+	;push bc ;not sure if necessary
 	ld [hli], a
 	inc a
 	ld [hl], a
-	hlcoord 18, 2
-	ld a, $67
+	ld bc, SCREEN_WIDTH-1
+	add hl, bc
+	inc a
 	ld [hli], a
 	inc a
 	ld [hl], a
+	;pop bc ;not sure if necessary
 	ret
 
 
@@ -2030,29 +2054,34 @@ Pokedex_UpdateCursorOAM: ; 41148 (10:5148)
 	call Pokedex_UpdateCursor
 	jp Pokedex_PutScrollbarOAM
 
+CURSOR_Y_TOP_HALF EQU -1
+CURSOR_Y_BOTTOM_HALF EQU -1
+CURSOR_X_RIGHT_HALF EQU 3
+CURSOR_X_LEFT_HALF EQU -4
+
 .CursorOAM: ; 41230
 	; y, x, tile, OAM attributes
-	db $50, $0f, $31, $7
-	db $50, $17, $32, $7
-	db $50, $1f, $32, $7
-	db $50, $27, $33, $7
-	db $50, $7c, $33, $7 | X_FLIP
-	db $50, $84, $32, $7 | X_FLIP
-	db $50, $8c, $32, $7 | X_FLIP
-	db $50, $94, $31, $7 | X_FLIP
+	db $4e + CURSOR_Y_TOP_HALF, $0f + CURSOR_X_LEFT_HALF, $31, $7 
+	db $4e + CURSOR_Y_TOP_HALF, $17 + CURSOR_X_LEFT_HALF, $32, $7 
+	db $4e + CURSOR_Y_TOP_HALF, $1f + CURSOR_X_LEFT_HALF, $32, $7 
+	db $4e + CURSOR_Y_TOP_HALF, $27 + CURSOR_X_LEFT_HALF, $33, $7 
+	db $4e + CURSOR_Y_TOP_HALF, $7c + CURSOR_X_RIGHT_HALF, $33, $7 | X_FLIP 
+	db $4e + CURSOR_Y_TOP_HALF, $84 + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP 
+	db $4e + CURSOR_Y_TOP_HALF, $8c + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP 
+	db $4e + CURSOR_Y_TOP_HALF, $94 + CURSOR_X_RIGHT_HALF, $31, $7 | X_FLIP 
 	db $fe ; tells LoadCursorOAM to set c = 0
-	db $58, $0f, $30, $7
-	db $58, $94, $30, $7 | X_FLIP
-	db $60, $0f, $30, $7 | Y_FLIP
-	db $68, $0f, $31, $7 | Y_FLIP
-	db $68, $17, $32, $7 | Y_FLIP
-	db $68, $1f, $32, $7 | Y_FLIP
-	db $68, $27, $33, $7 | Y_FLIP
-	db $68, $7c, $33, $7 | X_FLIP | Y_FLIP
-	db $68, $84, $32, $7 | X_FLIP | Y_FLIP
-	db $68, $8c, $32, $7 | X_FLIP | Y_FLIP
-	db $68, $94, $31, $7 | X_FLIP | Y_FLIP
-	db $60, $94, $30, $7 | X_FLIP | Y_FLIP
+	db $56 + CURSOR_Y_TOP_HALF, $0f + CURSOR_X_LEFT_HALF, $30, $7
+	db $56 + CURSOR_Y_TOP_HALF, $94 + CURSOR_X_RIGHT_HALF, $30, $7 | X_FLIP 
+	db $5e + CURSOR_Y_BOTTOM_HALF, $0f + CURSOR_X_LEFT_HALF, $30, $7 | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $0f + CURSOR_X_LEFT_HALF, $31, $7 | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $17 + CURSOR_X_LEFT_HALF, $32, $7 | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $1f + CURSOR_X_LEFT_HALF, $32, $7 | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $27 + CURSOR_X_LEFT_HALF, $33, $7 | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $7c + CURSOR_X_RIGHT_HALF, $33, $7 | X_FLIP | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $84 + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $8c + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP | Y_FLIP 
+	db $66 + CURSOR_Y_BOTTOM_HALF, $94 + CURSOR_X_RIGHT_HALF, $31, $7 | X_FLIP | Y_FLIP 
+	db $5e + CURSOR_Y_BOTTOM_HALF, $94 + CURSOR_X_RIGHT_HALF, $30, $7 | X_FLIP | Y_FLIP 
 	db $ff
 
 Pokedex_UpdateSearchResultsCursorOAM:
@@ -2403,6 +2432,9 @@ Pokedex_LoadCurrentFootprint: ; 41478 (10:5478)
 	call Pokedex_GetSelectedMon
 
 Pokedex_LoadAnyFootprint: ; 4147b
+	ld hl, VTiles2 tile $70
+Pokedex_LoadAnyFootprintAtTileHL:
+	push hl
 	ld a, [wd265]
 	dec a
 	and ($ff ^ $07) ; $f8 ; $1f << 3
@@ -2413,31 +2445,14 @@ Pokedex_LoadAnyFootprint: ; 4147b
 	ld d, a
 	ld a, [wd265]
 	dec a
-	and 7
-	swap a ; * $10
-	ld l, a
-	ld h, 0
-	add hl, de
-	ld de, Footprints
-	add hl, de
+	ld hl, Footprints
+	ld bc, LEN_1BPP_TILE * 4
+	rst AddNTimes
 
-	push hl
 	ld e, l
 	ld d, h
-	ld hl, VTiles2 tile $65
-	lb bc, BANK(Footprints), 2
-	call Request1bpp
 	pop hl
-
-	; Whoever was editing footprints forgot to fix their
-	; tile editor. Now each bottom half is 8 tiles off.
-	ld de, 8 tiles
-	add hl, de
-
-	ld e, l
-	ld d, h
-	ld hl, VTiles2 tile $67
-	lb bc, BANK(Footprints), 2
+	lb bc, BANK(Footprints), 4
 	jp Request1bpp
 
 Pokedex_LoadGFX:
@@ -2594,6 +2609,5 @@ INCBIN "gfx/pokedex/slowpoke.2bpp.lz"
 QuestionMarkLZ: ; 1de0e1
 INCBIN "gfx/pokedex/question_mark.2bpp.lz"
 
-Footprints: ; f9434
-INCBIN "gfx/pokedex/footprints.w128.1bpp"
-; fb434
+Footprints:
+INCLUDE "gfx/footprints.asm"
