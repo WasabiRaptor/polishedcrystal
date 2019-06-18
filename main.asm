@@ -4019,6 +4019,7 @@ INCLUDE "engine/copy_tilemap_at_once.asm"
 
 PrintAbility:
 ; Print ability b at hl.
+	push hl
 	ld l, b
 	ld h, 0
 	ld bc, AbilityNames
@@ -4027,7 +4028,8 @@ PrintAbility:
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	hlcoord 3, 13
+	pop hl
+	;hlcoord 3, 13
 	jp PlaceString
 
 BufferAbility:

@@ -396,6 +396,68 @@ _CGB_Pokedex: ; 8f70
 	ld a, $5
 	call FarCopyWRAM
 
+	ld hl, NormalFightingFlyingPal
+	ld de, wUnknBGPals palette 2 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, PoisonGroundRockPal
+	ld de, wUnknBGPals palette 3 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BugGhostSteelPal
+	ld de, wUnknBGPals palette 4 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, FireWateGrassPal
+	ld de, wUnknBGPals palette 5 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, ElectricPsychicIcePal
+	ld de, wUnknBGPals palette 6 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, DragonDarkFairyPal
+	ld de, wUnknBGPals palette 7 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 7
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 6
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 5
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 4
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 3
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 2
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+
+
 	jp _CGB_FinishLayout
 ; 8fba
 

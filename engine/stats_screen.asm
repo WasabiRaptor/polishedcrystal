@@ -777,6 +777,7 @@ OrangePage_:
 	farcall GetAbility
 	; PlaceString as used in PrintAbility doesn't preserve any register, so push it.
 	push bc
+	hlcoord 3, 13
 	predef PrintAbility
 	pop bc
 	predef PrintAbilityDescription

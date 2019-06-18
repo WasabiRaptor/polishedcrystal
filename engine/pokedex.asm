@@ -199,14 +199,14 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	ld a, $1
 	ldh [rVBK], a
 
-	ld hl, TypeIconGFX
+	ld hl, PokedexTypes
 	ld bc, 4 * LEN_1BPP_TILE * 18
 	ld d, h
 	ld e, l
 	ld hl, VTiles5 tile $00
-	lb bc, BANK(TypeIconGFX), 4*18
-	call Request1bpp
-	
+	lb bc, BANK(PokedexTypes), 4*18
+	call Request2bpp
+
 	xor a
 	ldh [rVBK], a
 	ldh [hBGMapMode], a
@@ -275,6 +275,8 @@ Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
 	ldh [hBGMapMode], a
 	call Pokedex_PrintListing
 	call Pokedex_SetBGMapMode3
+	call Pokedex_SetBGMapMode4
+	call Pokedex_ResetBGMapMode
 	jp Pokedex_ResetBGMapMode
 
 .a
@@ -1051,26 +1053,26 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	inc hl
 	inc a ;$67
 	ld [hl], a
-	hlcoord 9, 6
+	hlcoord 9, 1
 	ld de, String_SEEN
 	call Pokedex_PlaceString
 	ld hl, wPokedexSeen
 	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
 	ld de, wd265
-	hlcoord 9, 7
+	hlcoord 9, 2
 	ld a, "/"
 	ld [hli], a
 	lb bc, 1, 3
 	call PrintNum
-	hlcoord 14, 6
+	hlcoord 14, 1
 	ld de, String_OWN
 	call Pokedex_PlaceString
 	ld hl, wPokedexCaught
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	ld de, wd265
-	hlcoord 14, 7
+	hlcoord 14, 2
 	ld a, "/"
 	ld [hli], a
 	lb bc, 1, 3
@@ -1093,7 +1095,65 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld b, 7
 	hlcoord $13, 1
 	call Pokedex_FillColumn
-	jp Pokedex_PlaceFrontpicTopLeftCorner
+	call Pokedex_PlaceFrontpicTopLeftCorner
+	call GetBaseData
+	hlcoord 8, 3
+	ld a, $65
+	ld [hli], a
+	ld a, $67
+	ld bc, 10
+	call ByteFill
+	ld a, $5f
+	ld [hl], a
+
+	ret
+	;hlcoord 9, 4
+	;ld de, String_HP
+	;ld de, String_Abilities
+	;call Pokedex_PlaceString	
+	;hlcoord 9, 5
+	;ld a, [wBaseAbility1]
+	;ld b, a
+	;predef PrintAbility
+	;hlcoord 9, 6
+	;ld a, [wBaseAbility2]
+	;ld b, a
+	;predef PrintAbility
+	;hlcoord 9, 7
+	;ld a, [wBaseHiddenAbility]
+	;ld b, a
+	;predef PrintAbility
+	hlcoord 8, 3
+	ld a, $65
+	ld [hli], a
+	ld a, $67
+	ld bc, 10
+	call ByteFill
+	ld a, $5f
+	ld [hl], a
+
+	;hlcoord 13, 4
+	;ld de, String_ATK
+	;call Pokedex_PlaceString
+	;hlcoord 17, 4
+	;ld de, String_DEF
+	;call Pokedex_PlaceString
+
+; not enough space to put stats in the box 
+;String_HP: 
+;	db "H","P", $ff
+;String_ATK: 
+;	db "A","T","K", $ff
+;String_DEF: 
+;	db "D","E","F", $ff
+;String_SpA: 
+;	db "S","p","A", $ff
+;String_SpD: 
+;	db "S","p","D", $ff
+;String_SPE: 
+;	db "S","P","E", $ff
+String_Abilities: ; 407e1
+	db "A","b","i","l","i","t","i","e","s",":", $ff
 
 String_SEEN: ; 407e1
 	db "S","e","e","n", $ff
@@ -1416,7 +1476,7 @@ Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	ld bc, DEX_WINDOW_WIDTH
 	call ByteFill
 	hlcoord PKMN_NAME_LENGTH, 1, wAttrMap
-	ld a, 0 | TILE_BANK
+	ld a, 2 | TILE_BANK
 	ld c, 4
 	ld b, DEX_WINDOW_HEIGHT
 	call FillBoxWithByte
@@ -1591,6 +1651,12 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld c, DEX_WINDOW_WIDTH -1
 	ld a, " "
 	call FillBoxWithByte
+	hlcoord 1, 1, wAttrMap
+	lb bc, 7, 7
+	ld a, 0
+	call FillBoxWithByte
+
+	call UpdateTypeColors
 
 	ld a, $6F
 	ld d, 4
@@ -1660,6 +1726,51 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	pop hl
 	jp PlaceString
 
+UpdateTypeColors:
+	ld a, [wDexListingScrollOffset]
+	hlcoord PKMN_NAME_LENGTH, 1, wAttrMap
+	ld e, 4
+.typecolorloop
+	inc a
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld a, [wBaseType1]
+	call TypeColors
+	ld bc, SCREEN_WIDTH -3
+	add hl, bc
+	ld a, [wBaseType2]
+	call TypeColors
+	ld bc, SCREEN_WIDTH - 3
+	add hl, bc
+	ld a, [wCurSpecies]
+	dec e
+	jr nz, .typecolorloop
+	ret
+
+TypeColors:
+	ld d, 2 | TILE_BANK
+	cp POISON
+	jr c, .done
+	ld d, 3 | TILE_BANK
+	cp BUG
+	jr c, .done
+	ld d, 4 | TILE_BANK
+	cp FIRE
+	jr c, .done
+	ld d, 5 | TILE_BANK
+	cp ELECTRIC
+	jr c, .done
+	ld d, 6 | TILE_BANK
+	cp DRAGON
+	jr c, .done
+	ld d, 7 | TILE_BANK
+.done
+	ld a, d
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ld [hl], a
+	ret
 
 Pokexex_PrintNumberAndTypes:
 	push hl
@@ -1700,7 +1811,6 @@ Pokexex_PrintType:
 	ld [hli], a
 	inc a
 	ld [hl], a
-	inc a
 	pop hl
 	ret
 
@@ -2688,3 +2798,6 @@ INCBIN "gfx/pokedex/question_mark.2bpp.lz"
 
 Footprints:
 INCLUDE "gfx/footprints.asm"
+
+PokedexTypes:
+INCBIN "gfx/pokedex/types.2bpp"
