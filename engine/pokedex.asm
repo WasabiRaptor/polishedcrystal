@@ -1051,24 +1051,28 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	inc hl
 	inc a ;$67
 	ld [hl], a
-	hlcoord 9, 4
+	hlcoord 9, 6
 	ld de, String_SEEN
 	call Pokedex_PlaceString
 	ld hl, wPokedexSeen
 	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
 	ld de, wd265
-	hlcoord 12, 5
+	hlcoord 9, 7
+	ld a, "/"
+	ld [hli], a
 	lb bc, 1, 3
 	call PrintNum
-	hlcoord 9, 6
+	hlcoord 14, 6
 	ld de, String_OWN
 	call Pokedex_PlaceString
 	ld hl, wPokedexCaught
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	ld de, wd265
-	hlcoord 12, 7
+	hlcoord 14, 7
+	ld a, "/"
+	ld [hli], a
 	lb bc, 1, 3
 	call PrintNum
 	;hlcoord 1, 17
