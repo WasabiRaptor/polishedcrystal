@@ -6685,6 +6685,36 @@ LoadEnemyMon: ; 3e8eb
 	ld hl, wPokedexSeen
 	predef FlagPredef
 
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalEncounters)
+	ldh [rSVBK], a
+
+	ld a, [wCurPartySpecies]
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, wTotalEncounteredPokemonSpecies+1
+	add hl, bc
+	add hl, bc
+	inc [hl]
+	jr nz, .next
+	xor a
+	ld [hl], a
+	dec hl
+	inc [hl]
+.next
+
+	ld hl, wTotalEncounters+1
+	jr nz, .nextagain
+	xor a
+	ld [hl], a
+	dec hl
+	inc [hl]
+.nextagain
+	pop af
+	ldh [rSVBK], a
+
 	;get the temp form for this pokemon?
 	;ld hl, wEnemyMonForm
 	;predef GetVariant

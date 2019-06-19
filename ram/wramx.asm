@@ -1457,7 +1457,9 @@ wSurfWaveBGEffectEnd::
 SECTION "Pokemon Encounters", WRAMX
 
 wTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
-
+wTotalEncounteredPokemonSpecies:: ds NUM_POKEMON * 2
+wTotalEncounters:: ds 2
+wTotalEncountersThisCycle:: ds 2
 
 
 SECTION "WRAM 6", WRAMX

@@ -211,6 +211,7 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	ldh [rVBK], a
 	ldh [hBGMapMode], a
 	call ClearSprites
+
 	xor a
 	hlcoord 0, 0, wAttrMap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
@@ -226,7 +227,7 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	call Pokedex_SetBGMapMode4
 	call Pokedex_ResetBGMapMode
 	call Pokedex_DrawMainScreenBG
-	call Pokedex_PrintNumSpeciesDefeated
+	call Pokedex_PrintTotalEncounters
 	ld a, POKEDEX_SCX
 	ldh [hSCX], a
 	ld a, POKEDEX_SCY
@@ -256,7 +257,6 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	jp Pokedex_IncrementDexPointer
 
 Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
-	call Pokedex_PrintNumSpeciesDefeated
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
@@ -316,38 +316,38 @@ Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
 	ld [wJumptableIndex], a
 	ret
 
-Pokedex_PrintNumSpeciesDefeated:
+Pokedex_PrintTotalEncounters:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalDefeatedPokemonSpecies)
 	ldh [rSVBK], a
 
-	ld hl, wTotalDefeatedPokemonSpecies
-	ld a, $FF
-	ld [hl], a
 	hlcoord 9, 4
-	ld de, StringTotalBeaten
+	ld de, StringEncounters
 	call Pokedex_PlaceString
-	ld hl, wTotalDefeatedPokemonSpecies
-	ld a, 1
-	dec a
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
-	ld d, h
-	ld l, e
+	ld de, wTotalEncounters
 	hlcoord 10, 5
 	ld c, 7
-	ld b, 2
+	ld b, 2 | PRINTNUM_LEFTALIGN
+	call PrintNum
+
+	hlcoord 9, 6
+	ld de, StringThisCycle
+	call Pokedex_PlaceString
+	ld de, wTotalEncountersThisCycle
+	hlcoord 10, 7
+	ld c, 7
+	ld b, 2 | PRINTNUM_LEFTALIGN
 	call PrintNum
 
 	pop af
 	ldh [rSVBK], a
 	ret
 	
-StringTotalBeaten:
-	db "No. Beat","en",$ff
+StringEncounters:
+	db "Enco","unt","e","rs", $ff
+StringThisCycle
+	db "This Cycl","e", $ff
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	call LowVolume
@@ -1095,10 +1095,8 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld b, wEndPokedexSeen - wPokedexSeen
 	call CountSetBits
 	ld de, wd265
-	hlcoord 9, 2
-	ld a, "/"
-	ld [hli], a
-	lb bc, 1, 3
+	hlcoord 10, 2
+	lb bc, 1 | PRINTNUM_LEFTALIGN, 3
 	call PrintNum
 	hlcoord 14, 1
 	ld de, String_OWN
@@ -1107,10 +1105,8 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	ld de, wd265
-	hlcoord 14, 2
-	ld a, "/"
-	ld [hli], a
-	lb bc, 1, 3
+	hlcoord 15, 2
+	lb bc, 1 | PRINTNUM_LEFTALIGN, 3
 	call PrintNum
 	;hlcoord 1, 17
 	;ld de, String_SELECT_OPTION
@@ -1157,14 +1153,14 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	;ld a, [wBaseHiddenAbility]
 	;ld b, a
 	;predef PrintAbility
-	hlcoord 8, 3
-	ld a, $65
-	ld [hli], a
-	ld a, $67
-	ld bc, 10
-	call ByteFill
-	ld a, $5f
-	ld [hl], a
+	;hlcoord 8, 3
+	;ld a, $65
+	;ld [hli], a
+	;ld a, $67
+	;ld bc, 10
+	;call ByteFill
+	;ld a, $5f
+	;ld [hl], a
 
 	;hlcoord 13, 4
 	;ld de, String_ATK
