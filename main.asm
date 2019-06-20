@@ -1321,11 +1321,79 @@ DisplayDexEntry: ; 4424d
 	call .EvYeildCheck
 	hlcoord 15, 9	
 	call .EvYeildCheck
-	
+	xor a
+	push af
+.abilityloop:
+	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 2, 11
+	call ClearBox
+	hlcoord 1, 10
+	;page number
+	ld a, [wPokedexStatus]
+	add "1"
+	ld [hl], a
+
+	ld hl, wBaseAbility1
+	ld b, 0
+	pop af
+	ld c, a
+	push af
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr z, .doneabilities 
+	ld b, a
+	push bc
+	hlcoord 2, 12
+	predef PrintAbility
+	pop bc
+	hlcoord 2, 14
+	predef PrintAbilityDescription
+
+	pop af
+	push af
+	cp 2
+	hlcoord 2, 11
+	jr z, .hiddenability	
+	ld de, .Ability
+	call PlaceString
+	hlcoord 9, 11
+	pop af
+	push af
+	add "1"
+	ld [hl], a
+.printdexability
+	pop af
+	ld e, a
+	ld a,[wDexSearchSlowpokeFrame]
+	inc a
+	ld [wDexSearchSlowpokeFrame], a
+
+	ld a, [wPokedexStatus]
+	ld b, a
+	ld a,[wDexSearchSlowpokeFrame]
+	cp b
+	pop bc
+	ret z
+	push bc
+	ld a, e
+	inc a
+	push af
+	cp 4
+	jr c, .abilityloop
+.doneabilities
+	pop af
+	pop bc
 	ld a, $ff
 	ld [wPokedexStatus], a
-	pop bc
 	ret
+
+.hiddenability
+	pop af
+	push af
+	ld de, .Hidden
+	call PlaceString
+	jr .printdexability
 
 .HeightImperial: ; 40852
 	db "Ht  ?'??”@" ; HT  ?'??"
@@ -1349,6 +1417,10 @@ DisplayDexEntry: ; 4424d
 	db "Spd@"
 .EvYeild
 	db "EV Yeild@"
+.Hidden
+	db "Hidden "
+.Ability
+	db "Ability@"
 
 .EvYeildCheck:
 	ld a, [wBaseEVYield1]
@@ -4273,6 +4345,7 @@ BufferAbility:
 PrintAbilityDescription:
 ; Print ability description for b
 ; we can't use PlaceString, because it would linebreak with an empty line inbetween
+	push hl
 	ld l, b
 	ld h, 0
 	ld bc, AbilityDescriptions
@@ -4281,7 +4354,7 @@ PrintAbilityDescription:
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	hlcoord 1, 15
+	pop hl
 	jp PlaceString
 
 INCLUDE "data/abilities.asm"

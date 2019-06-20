@@ -780,6 +780,7 @@ OrangePage_:
 	hlcoord 3, 13
 	predef PrintAbility
 	pop bc
+	hlcoord 1, 15
 	predef PrintAbilityDescription
 	ret
 
