@@ -1,4 +1,4 @@
-    db "WATER BUBBLE@" ; species name
+    db "SEASON@" ; species name
     dw 511, 1808 ; height, weight
 
     db   "They migrate"

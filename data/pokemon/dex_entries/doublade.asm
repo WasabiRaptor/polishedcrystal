@@ -1,4 +1,4 @@
-    db "WATER BUBBLE@" ; species name
+    db "SWORD@" ; species name
     dw 207, 99 ; height, weight
 
     db   "Honedge divided"

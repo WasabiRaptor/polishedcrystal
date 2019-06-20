@@ -3,8 +3,8 @@
 
 	db   "Eevee's DNA is"
 	next "unstable and"
-	next "adapts easily."
+	next "adapts easily.@"
 
-	page "This allows it to"
-	next "evolve into many"
-	next "different forms.@"
+	;page "This allows it to"
+	;next "evolve into many"
+	;next "different forms.@"

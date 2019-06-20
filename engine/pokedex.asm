@@ -416,7 +416,11 @@ Pokedex_UpdateDexEntryScreen: ; 40258 (10:4258)
 
 Pokedex_Page: ; 40292
 	ld a, [wPokedexStatus]
-	xor $1
+	inc a
+	cp 3
+	jr c, .nextpage
+	xor a
+.nextpage
 	ld [wPokedexStatus], a
 	call Pokedex_GetSelectedMon
 	ld [wLastDexEntry], a
@@ -1757,6 +1761,8 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	jp PlaceString
 
 UpdateTypeColors:
+	ld a, 1
+	ld [wCurForm], a
 	ld a, [wDexListingScrollOffset]
 	hlcoord PKMN_NAME_LENGTH, 1, wAttrMap
 	ld e, 4

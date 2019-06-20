@@ -1195,13 +1195,13 @@ DisplayDexEntry: ; 4424d
 	pop de
 
 .skip_weight
-; Page 1
+; Page 
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
 	hlcoord 1, 10
 	ld bc, SCREEN_WIDTH - 1
-	ld a, $5f ; horizontal divider
+	ld a, $6a ; horizontal divider
 	call ByteFill
 	; page number
 	hlcoord 1, 9
@@ -1211,6 +1211,8 @@ DisplayDexEntry: ; 4424d
 	hlcoord 1, 10
 	ld [hl], $56 ; P.
 	inc hl
+
+	;page 1
 	ld [hl], $57 ; 1
 	pop de
 	inc de
@@ -1220,7 +1222,16 @@ DisplayDexEntry: ; 4424d
 	call FarString
 	pop bc
 	ld a, [wPokedexStatus]
-	or a
+	inc de
+	ld a, [de]
+	cp $7f
+	jp z, .pagetwo
+	ld a, 2
+	ld [wPokedexStatus], a
+	ret
+.pagetwo
+	ld a, [wPokedexStatus]
+	cp 0
 	ret z
 
 ; Page 2
@@ -1229,19 +1240,38 @@ DisplayDexEntry: ; 4424d
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
-	hlcoord 1, 10
-	ld bc, SCREEN_WIDTH - 1
-	ld a, $5f ; horizontal divider
-	call ByteFill
 	; page number
-	hlcoord 1, 9
-	ld [hl], $55
-	inc hl
-	ld [hl], $55
-	hlcoord 1, 10
-	ld [hl], $56 ; P.
-	inc hl
+	hlcoord 2, 10
 	ld [hl], $58 ; 2
+	pop de
+	inc de
+	pop af
+	hlcoord 2, 11
+	push af
+	call FarString
+	pop bc
+	
+	inc de
+	ld a, [de]
+	cp $7f
+	jp z, .pagethree
+	ld a, 2
+	ld [wPokedexStatus], a
+	ret
+.pagethree
+	ld a, [wPokedexStatus]
+	cp 1
+	ret z
+
+;page 3
+	push bc
+	push de
+	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 2, 11
+	call ClearBox
+	; page number
+	hlcoord 2, 10
+	ld [hl], $69 ; 3
 	pop de
 	inc de
 	pop af
