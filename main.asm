@@ -1070,6 +1070,7 @@ DisplayDexEntry: ; 4424d
 	push af
 	hlcoord 9, 5
 	call FarString ; dex species
+	dec de
 	ld h, b
 	ld l, c
 	push de
@@ -1220,12 +1221,11 @@ DisplayDexEntry: ; 4424d
 	hlcoord 2, 11
 	push af
 	call FarString
+	ld a, c
 	pop bc
-	ld a, [wPokedexStatus]
-	inc de
-	ld a, [de]
+
 	cp $7f
-	jp z, .pagetwo
+	jr z, .pagetwo
 	ld a, 2
 	ld [wPokedexStatus], a
 	ret
@@ -1248,13 +1248,13 @@ DisplayDexEntry: ; 4424d
 	pop af
 	hlcoord 2, 11
 	push af
-	call FarString
-	pop bc
 	
-	inc de
-	ld a, [de]
+	call FarString
+	ld a, c
+	pop bc
+
 	cp $7f
-	jp z, .pagethree
+	jr z, .pagethree
 	ld a, 2
 	ld [wPokedexStatus], a
 	ret
