@@ -27,6 +27,14 @@ BASEMON_EV_YIELD_2    EQUS "(BaseData + wBaseEVYield2 - wCurBaseData)"
 BASEMON_TMHM          EQUS "(BaseData + wBaseTMHM - wCurBaseData)"
 BASEMON_STRUCT_LENGTH EQUS "(BaseData1 - BaseData0)"
 
+;EV yeild masks
+HP_EV_YEILD_MASK EQU %11000000
+ATK_EV_YEILD_MASK EQU %00110000
+DEF_EV_YEILD_MASK EQU %00001100
+SPD_EV_YEILD_MASK EQU %00000011
+SAT_EV_YEILD_MASK EQU %11000000
+SDF_EV_YEILD_MASK EQU %00110000
+
 ; GrowthRates indexes (see data/growth_rates.asm)
 	const_def
 	const GROWTH_MEDIUM_FAST

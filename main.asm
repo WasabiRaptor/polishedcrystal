@@ -1060,6 +1060,10 @@ DoDexSearchSlowpokeFrame: ; 44207
 	db -1
 
 DisplayDexEntry: ; 4424d
+	lb bc, 9, 12
+	hlcoord 8, 1
+	call ClearBox
+
 	call GetPokemonName
 	hlcoord 9, 3
 	call PlaceString ; mon species
@@ -1083,6 +1087,26 @@ DisplayDexEntry: ; 4424d
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
+;units
+	ld a, [wOptions2]
+	bit POKEDEX_UNITS, a
+	jr nz, .metric
+	hlcoord 9, 7
+	ld de, .HeightImperial
+	call PlaceString
+	hlcoord 9, 9
+	ld de, .WeightImperial
+	call PlaceString
+	jr .done
+.metric
+	hlcoord 9, 7
+	ld de, .HeightMetric
+	call PlaceString
+	hlcoord 9, 9
+	ld de, .WeightMetric
+	call PlaceString
+.done
+	farcall Pokedex_DrawFootprint
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wd265]
 	dec a
@@ -1215,26 +1239,233 @@ DisplayDexEntry: ; 4424d
 	hlcoord 2, 11
 	push af
 	call FarString
-	ld a, c
 
-	cp $7f
-	jr z, .nextpage
-	ld a, $ff
-	ld [wPokedexStatus], a
-	pop bc
-	ret
-.nextpage	
 	ld a, [wPokedexStatus]
 	ld b, a
 	ld a,[wDexSearchSlowpokeFrame]
 	cp b
+	ld a, c
 	pop bc
 	ret z
+	cp $7f
+	jr nz, .statpage
+	ld a,[wDexSearchSlowpokeFrame]
 	inc a
 	ld [wDexSearchSlowpokeFrame], a
 	push bc
 	push de
 	jr .skip_weight
+
+.statpage
+	push bc
+
+	call GetBaseData
+	lb bc, 9, 12
+	hlcoord 8, 1
+	call ClearBox
+	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 2, 11
+	call ClearBox
+	hlcoord 1, 10
+	ld bc, SCREEN_WIDTH - 1
+	ld a, $6a ; horizontal divider
+	call ByteFill
+	hlcoord 1, 10
+	;page number
+	ld a, [wPokedexStatus]
+	add "1"
+	ld [hl], a
+	hlcoord 9, 2
+	ld de, .Hp
+	call PlaceString
+	hlcoord 13, 2
+	ld de, .Atk
+	call PlaceString
+	hlcoord 17, 2
+	ld de, .Def
+	call PlaceString
+	hlcoord 9, 5
+	ld de, .Spd
+	call PlaceString
+	hlcoord 13, 5
+	ld de, .SAt
+	call PlaceString
+	hlcoord 17, 5
+	ld de, .SDf
+	call PlaceString
+
+	lb bc, 1, 3
+	hlcoord 9, 3
+	ld de, wBaseHP
+	call PrintNum
+	hlcoord 13, 3
+	inc de ;wBaseAttack
+	call PrintNum
+	hlcoord 17, 3
+	inc de ;wBaseDefense
+	call PrintNum
+	hlcoord 9, 6
+	inc de ;wBaseSpeed
+	call PrintNum
+	hlcoord 13, 6
+	inc de ;wBaseSpecialAttack
+	call PrintNum
+	hlcoord 17, 6
+	inc de ;wBaseSpecialDefense
+	call PrintNum
+
+	hlcoord 9, 8
+	ld de, .EvYeild
+	call PlaceString
+	hlcoord 9, 9
+	call .EvYeildCheck
+	hlcoord 15, 9	
+	call .EvYeildCheck
+	
+	ld a, $ff
+	ld [wPokedexStatus], a
+	pop bc
+	ret
+
+.HeightImperial: ; 40852
+	db "Ht  ?'??”@" ; HT  ?'??"
+.WeightImperial: ; 4085c
+	db "Wt   ???lb@" ; WT   ???lb
+.HeightMetric:
+	db "Ht   ???m@" ; HT   ???m"
+.WeightMetric:
+	db "Wt   ???kg@"; WT   ???kg
+.Hp
+	db "Hp@"
+.Atk
+	db "Atk@"
+.Def
+	db "Def@"
+.SAt
+	db "SAt@"
+.SDf
+	db "SDf@"
+.Spd
+	db "Spd@"
+.EvYeild
+	db "EV Yeild@"
+
+.EvYeildCheck:
+	ld a, [wBaseEVYield1]
+	ld b, a
+	and HP_EV_YEILD_MASK
+	jr nz, .Hpev
+	ld a, b
+	and ATK_EV_YEILD_MASK
+	jr nz, .Atkev
+	ld a, b
+	and DEF_EV_YEILD_MASK
+	jr nz, .Defev
+	ld a, b
+	and SPD_EV_YEILD_MASK
+	jr nz, .Spdev
+	ld a, [wBaseEVYield2]
+	ld b, a
+	and SAT_EV_YEILD_MASK
+	jr nz, .Satev
+	ld a, b
+	and SDF_EV_YEILD_MASK
+	jr nz, .Sdfev
+	ret
+
+.Hpev
+	ld a, b
+
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Hp
+	jr .evdone1
+
+.Atkev
+	ld a, b
+
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Atk
+	jr .evdone1
+
+.Defev
+	ld a, b
+
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Def
+	jr .evdone1
+
+.Spdev
+	ld a, b
+
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Spd
+	jr .evdone1
+
+.Satev
+	ld a, b
+
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .SAt
+	jr .evdone2
+
+.Sdfev
+	ld a, b
+
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .SDf
+
+.evdone2
+	ld a, [wBaseEVYield2]
+	xor b
+	ld [wBaseEVYield2], a
+	jr .evreallydone
+.evdone1
+	ld a, [wBaseEVYield1]
+	xor b
+	ld [wBaseEVYield1], a
+.evreallydone
+	call PlaceString
+	ret
 	
 ; Metric conversion code by TPP Anniversary Crystal 251
 ; https://github.com/TwitchPlaysPokemon/tppcrystal251pub/blob/public/main.asm

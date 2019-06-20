@@ -1221,24 +1221,6 @@ Pokedex_DrawDexEntryScreenBG: ; 407fd
 	ld bc, 18
 	ld a, " "
 	call ByteFill
-	ld a, [wOptions2]
-	bit POKEDEX_UNITS, a
-	jr nz, .metric
-	hlcoord 9, 7
-	ld de, .HeightImperial
-	call Pokedex_PlaceString
-	hlcoord 9, 9
-	ld de, .WeightImperial
-	call Pokedex_PlaceString
-	jr .done
-.metric
-	hlcoord 9, 7
-	ld de, .HeightMetric
-	call Pokedex_PlaceString
-	hlcoord 9, 9
-	ld de, .WeightMetric
-	call Pokedex_PlaceString
-.done
 	hlcoord 0, 17
 
 	ld a, [wCelebiEvent]
@@ -1250,14 +1232,6 @@ Pokedex_DrawDexEntryScreenBG: ; 407fd
 	call Pokedex_PlaceString
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
-.HeightImperial: ; 40852
-	db "Ht  ?'??”", $ff ; HT  ?'??"
-.WeightImperial: ; 4085c
-	db "Wt   ???lb", $ff ; WT   ???lb
-.HeightMetric:
-	db "Ht   ???m", $ff ; HT   ???m"
-.WeightMetric:
-	db "Wt   ???kg", $ff ; WT   ???kg
 .MenuItems: ; 40867
 	db $3b, " ","P","a","g","e"," A","r","e","a"," ","C","r","y"," "," "," "," "," ", $ff
 .MenuItemsShinyCharm:
