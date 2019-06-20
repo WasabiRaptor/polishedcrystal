@@ -1204,17 +1204,11 @@ DisplayDexEntry: ; 4424d
 	ld bc, SCREEN_WIDTH - 1
 	ld a, $6a ; horizontal divider
 	call ByteFill
-	; page number
-	hlcoord 1, 9
-	ld [hl], $55
-	inc hl
-	ld [hl], $55
 	hlcoord 1, 10
-	ld [hl], $56 ; P.
-	inc hl
-
-	;page 1
-	ld [hl], $57 ; 1
+	;page number
+	ld a, [wPokedexStatus]
+	add "1"
+	ld [hl], a
 	pop de
 	inc de
 	pop af
@@ -1222,62 +1216,26 @@ DisplayDexEntry: ; 4424d
 	push af
 	call FarString
 	ld a, c
-	pop bc
 
 	cp $7f
-	jr z, .pagetwo
-	ld a, 2
+	jr z, .nextpage
+	ld a, $ff
 	ld [wPokedexStatus], a
+	pop bc
 	ret
-.pagetwo
+.nextpage	
 	ld a, [wPokedexStatus]
-	cp 0
+	ld b, a
+	ld a,[wDexSearchSlowpokeFrame]
+	cp b
+	pop bc
 	ret z
-
-; Page 2
+	inc a
+	ld [wDexSearchSlowpokeFrame], a
 	push bc
 	push de
-	lb bc, 5, SCREEN_WIDTH - 2
-	hlcoord 2, 11
-	call ClearBox
-	; page number
-	hlcoord 2, 10
-	ld [hl], $58 ; 2
-	pop de
-	inc de
-	pop af
-	hlcoord 2, 11
-	push af
+	jr .skip_weight
 	
-	call FarString
-	ld a, c
-	pop bc
-
-	cp $7f
-	jr z, .pagethree
-	ld a, 2
-	ld [wPokedexStatus], a
-	ret
-.pagethree
-	ld a, [wPokedexStatus]
-	cp 1
-	ret z
-
-;page 3
-	push bc
-	push de
-	lb bc, 5, SCREEN_WIDTH - 2
-	hlcoord 2, 11
-	call ClearBox
-	; page number
-	hlcoord 2, 10
-	ld [hl], $69 ; 3
-	pop de
-	inc de
-	pop af
-	hlcoord 2, 11
-	jp FarString
-
 ; Metric conversion code by TPP Anniversary Crystal 251
 ; https://github.com/TwitchPlaysPokemon/tppcrystal251pub/blob/public/main.asm
 Mul16:

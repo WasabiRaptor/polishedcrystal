@@ -353,7 +353,7 @@ Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	call LowVolume
 	xor a
 	ld [wPokedexStatus], a
-	xor a
+	ld [wDexSearchSlowpokeFrame], a
 	ldh [hBGMapMode], a
 	call ClearSprites
 	call Pokedex_LoadCurrentFootprint
@@ -415,10 +415,11 @@ Pokedex_UpdateDexEntryScreen: ; 40258 (10:4258)
 	ret
 
 Pokedex_Page: ; 40292
+	xor a
+	ld [wDexSearchSlowpokeFrame], a
 	ld a, [wPokedexStatus]
 	inc a
-	cp 3
-	jr c, .nextpage
+	jr nz, .nextpage
 	xor a
 .nextpage
 	ld [wPokedexStatus], a
@@ -432,7 +433,7 @@ Pokedex_ReinitDexEntryScreen: ; 402aa (10:42aa)
 	call Pokedex_BlackOutBG
 	xor a
 	ld [wPokedexStatus], a
-	xor a
+	ld [wDexSearchSlowpokeFrame], a
 	ldh [hBGMapMode], a
 	call Pokedex_DrawDexEntryScreenBG
 	call Pokedex_InitArrowCursor
@@ -2743,11 +2744,14 @@ NewPokedexEntry: ; fb877
 	ldh [hSCX], a
 	xor a
 	ld [wPokedexStatus], a
+	ld [wDexSearchSlowpokeFrame], a
 	call .NewPokedexEntry
+.loop
 	call WaitPressAorB_BlinkCursor
-	ld a, $1
-	ld [wPokedexStatus], a
-	farcall DisplayDexEntry
+	call Pokedex_Page
+	ld a, [wPokedexStatus]
+	cp $ff
+	jr .loop
 	call WaitPressAorB_BlinkCursor
 	pop af
 	ld [wPokedexStatus], a
