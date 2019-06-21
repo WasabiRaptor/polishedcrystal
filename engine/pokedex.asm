@@ -350,6 +350,8 @@ StringThisCycle
 	db "This Cycl","e", $ff
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
+	ld a, 1
+	ld [wCurForm], a
 	call LowVolume
 	xor a
 	ld [wPokedexStatus], a
@@ -2781,6 +2783,8 @@ NewPokedexEntry: ; fb877
 	ld [wTempMonPersonality], a
 	ld a, [hl]
 	ld [wTempMonPersonality + 1], a
+	ld a, 1
+	ld [wTempMonForm], a
 	ld b, CGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetCGBLayout
 	jp SetPalettes

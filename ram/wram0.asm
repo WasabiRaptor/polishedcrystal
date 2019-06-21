@@ -784,7 +784,6 @@ wDexArrowCursorDelayCounter:: ds 1
 wDexArrowCursorBlinkCounter:: ds 1
 wDexSearchSlowpokeFrame:: ds 1
 wUnlockedUnownMode:: ds 1
-wDexCurrentUnownIndex:: ds 1
 wDexUnownCount:: ds 1
 wDexConvertedMonType:: ds 1 ; mon type converted from dex search mon type
 wDexListingScrollOffsetBackup:: ds 1
@@ -794,6 +793,9 @@ wBackupDexListingPage:: ds 1
 wDexCurrentLocation:: ds 1
 wPokedexStatus:: ds 1
 wDexMonShiny:: ds 1
+wDexMonForm::
+wDexCurrentUnownIndex:: ds 1
+
 wPokedexDataEnd::
 
 ENDU

@@ -368,6 +368,10 @@ _CGB_Pokedex: ; 8f70
 	jr .got_palette
 .is_pokemon
 	ld bc, wDexMonShiny
+	ld a, 1
+	ld [wDexMonForm], a
+	ld a, [wCurPartySpecies]
+
 	call GetMonNormalOrShinyPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 .got_palette

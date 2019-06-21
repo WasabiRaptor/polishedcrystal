@@ -1255,7 +1255,10 @@ DisplayDexEntry: ; 4424d
 .statpage
 	push bc
 
+	ld a, 1
+	ld [wCurForm], a
 	call GetBaseData
+	
 	lb bc, 9, 12
 	hlcoord 8, 1
 	call ClearBox
@@ -1377,6 +1380,7 @@ DisplayDexEntry: ; 4424d
 	cp 3
 	jr c, .abilityloop
 .lastpage
+
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
