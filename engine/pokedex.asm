@@ -1677,23 +1677,9 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	add hl, bc
 	dec d
 	jp nz, .footprintloop
-	;foortprints
-	ld a, [wDexListingScrollOffset]
-	inc a
-	ld hl, VTiles2 tile $6F
-	call Pokedex_LoadAnyFootprintAtTileHL
-	ld a, [wDexListingScrollOffset]
-	add 2
-	ld hl, VTiles2 tile $73
-	call Pokedex_LoadAnyFootprintAtTileHL
-	ld a, [wDexListingScrollOffset]
-	add 3
-	ld hl, VTiles2 tile $77
-	call Pokedex_LoadAnyFootprintAtTileHL
-	ld a, [wDexListingScrollOffset]
-	add 4
-	ld hl, VTiles2 tile $7b
-	call Pokedex_LoadAnyFootprintAtTileHL
+
+	;foortprint start tile
+	ld bc, VTiles2 tile $6f
 
 ; Load de with wPokedexDataStart + [wDexListingScrollOffset]
 	ld a, [wDexListingScrollOffset]
@@ -1709,13 +1695,29 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	push af
 	ld a, [de]
 	ld [wd265], a
-	push de	
+	push bc
+	push de
+	push af
+	push hl	
+	ld h, b
+	ld l, c
+	call Pokedex_LoadAnyFootprintAtTileHL
+	pop hl
+	pop af
 	push hl
 	call .PrintEntry
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
 	pop de
+	pop bc
+	push hl
+	ld hl, tile $04
+	add hl, bc
+	ld b, h
+	ld c, l
+	pop hl
+
 	inc de
 	pop af
 	dec a
