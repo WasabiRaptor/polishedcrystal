@@ -581,17 +581,17 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 	dwcoord 2, 10
 
 .MenuActionJumptable: ; 40405 (10:4405)
-	dw .MenuAction_NewMode
-	dw .MenuAction_OldMode
+	dw .MenuAction_RegionalMode
+	dw .MenuAction_VariantMode
 	dw .MenuAction_ABCMode
 	dw .MenuAction_UnownMode
 
-.MenuAction_NewMode: ; 4040d (10:440d)
-	ld b, DEXMODE_NEW
+.MenuAction_RegionalMode: ; 4040d (10:440d)
+	ld b, DEXMODE_REGIONAL
 	jr .ChangeMode
 
-.MenuAction_OldMode: ; 40411 (10:4411)
-	ld b, DEXMODE_OLD
+.MenuAction_VariantMode: ; 40411 (10:4411)
+	ld b, DEXMODE_VARIANT
 	jr .ChangeMode
 
 .MenuAction_ABCMode: ; 40415 (10:4415)
@@ -759,19 +759,19 @@ Pokedex_InitSearchResultsScreen: ; 4050a (10:450a)
 	ldh [hWX], a
 	ld a, $40
 	ldh [hWY], a
-	call ApplyTilemapInVBlank
-	call Pokedex_ResetBGMapMode
-	call Pokedex_DrawSearchResultsWindow
-	call Pokedex_PlaceSearchResultsTypeStrings
-	call Pokedex_SetBGMapMode1
-	call Pokedex_SetBGMapMode2
-	call Pokedex_ResetBGMapMode
 	
 	call Pokedex_UpdateCursorOAM
 	ld a, $ff
 	ld [wCurPartySpecies], a
 	ld a, CGB_POKEDEX
 	call Pokedex_GetCGBLayout
+	call Pokedex_PlaceSearchResultsTypeStrings
+	call Pokedex_SetBGMapMode1
+	call Pokedex_SetBGMapMode2
+	call Pokedex_ResetBGMapMode
+	call ApplyTilemapInVBlank
+	call Pokedex_ResetBGMapMode
+
 	call Pokedex_UpdateCursorOAM
 	call Pokedex_DrawListWindow
 	hlcoord 0, 17
@@ -1266,8 +1266,8 @@ Pokedex_DrawOptionScreenBG: ; 4087c (10:487c)
 	db $3b, " ","O","p","t","i","o","n"," ", $3c, $ff
 
 .Modes: ; 408bd
-	db   "Johto Mode"
-	next "National Mode"
+	db   "Regional Mode"
+	next "Variant Mode"
 	next "A to Z Mode"
 	db "@"
 
@@ -1313,19 +1313,26 @@ Pokedex_DrawSearchScreenBG: ; 408f0 (10:48f0)
 
 Pokedex_DrawSearchResultsScreenBG: ; 40962 (10:4962)
 	call Pokedex_DrawBasicMainScreen
-
+	hlcoord 9, 1
+	ld de, .SearchResults
+	call PlaceString
+	ld de, wDexSearchResultCount
+	hlcoord 9, 7
+	lb bc, 1, 3
+	call PrintNum
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
 
 .SearchResults: ; 409ae
-	db   "Search Results@"
-	next "  Type/"
-	next "    found!"
-	db   "@"
+	db   "Search"
+	next "Results"
+	next ""
+	next "    found!@"
 
 Pokedex_PlaceSearchResultsTypeStrings: ; 409cf (10:49cf)
 	ld a, [wDexSearchMonType1]
-	hlcoord 0, 14
+	hlcoord 9, 5
+	dec a
 	call Pokexex_PrintType
 	ld a, [wDexSearchMonType1]
 	ld b, a
@@ -1334,11 +1341,9 @@ Pokedex_PlaceSearchResultsTypeStrings: ; 409cf (10:49cf)
 	ret z
 	cp b
 	ret z
-	hlcoord 1, 15
-	call Pokexex_PrintType
-	hlcoord 0, 15
-	ld [hl], "/"
-	ret
+	hlcoord 14, 5
+	dec a
+	jp Pokexex_PrintType
 
 Pokedex_DrawUnownModeBG: ; 409f1 (10:49f1)
 	call Pokedex_FillBackgroundColor2
@@ -1468,13 +1473,6 @@ Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	ld [hl], $52
 	ret
 
-Pokedex_DrawSearchResultsWindow: ; 1de1d1 (77:61d1)
-	ret
-.esults_D ; 1de23c
-; (SEARCH R)
-	db   "esults<NL>"
-; (### FOUN)
-	next "d!@"
 
 Pokedex_FillBackgroundColor2: ; 40aa6
 	hlcoord 0, 0
@@ -1569,13 +1567,15 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld c, DEX_WINDOW_WIDTH -1
 	ld a, " "
 	call FillBoxWithByte
+
 	hlcoord 1, 1, wAttrMap
-	lb bc, 7, 7
+	lb bc, 7,  DEX_WINDOW_WIDTH- 1
 	ld a, 0
 	call FillBoxWithByte
 
+	ld a, [wDexListingHeight]
+	ld d, a
 	ld a, $6F
-	ld d, 4
 	hlcoord PKMN_NAME_LENGTH + 4, 1
 .footprintloop
 	call Pokedex_DrawFootprint_at_HL
@@ -1906,18 +1906,18 @@ Pokedex_DisplayModeDescription: ; 40e5b
 	ret
 
 .Modes: ; 40e7d
-	dw .NewMode
-	dw .OldMode
+	dw .RegionalMode
+	dw .VariantMode
 	dw .ABCMode
 	dw .UnownMode
 
-.NewMode: ; 40e85
+.RegionalMode: ; 40e85
 	db   "<PK><MN> are listed in"
 	next "regional order.@"
 
-.OldMode: ; 40ea6
-	db   "<PK><MN> are listed in"
-	next "national order.@"
+.VariantMode: ; 40ea6
+	db   "<PK><MN> with variants"
+	next "are listed.@"
 
 .ABCMode: ; 40ec6
 	db   "<PK><MN> are listed"
@@ -2034,8 +2034,7 @@ Pokedex_PlaceSearchScreenTypeStrings: ; 40fa8 (10:4fa8)
 	ld a, [wDexSearchMonType2]
 	dec a
 	hlcoord 9, 6
-	call Pokexex_PrintType
-	ret
+	jp Pokexex_PrintType
 
 Pokedex_SearchForMons: ; 41086
 	ld a, [wDexSearchMonType2]
@@ -2161,15 +2160,7 @@ CURSOR_X_LEFT_HALF EQU -4
 Pokedex_UpdateCursor:
 	push bc
 	lb bc, 3, 0
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_OLD
-	jr nz, .ok
-	ld b, c
-	ld a, [wDexListingCursor]
-	or a
-	jr nz, .ok
-	ld c, 3
-.ok
+
 	call Pokedex_LoadCursorOAM
 	pop bc
 	ret
