@@ -33,7 +33,7 @@ SaveMenu: ; 14a1a
 
 SaveAfterLinkTrade: ; 14a58
 	call SetWRAMStateForSave
-	farcall StageRTCTimeForSave
+	farcall StageTimeForSave
 	call SavePokemonData
 	call SaveChecksum
 	call SaveBackupPokemonData
@@ -100,7 +100,7 @@ MovePkmnWOMail_InsertMon_SaveGame: ; 14ad5
 	ld [wCurBox], a
 	ld a, $1
 	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
+	farcall StageTimeForSave
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -236,7 +236,7 @@ SaveGameData:: ; 14c10
 	ldh [hVBlank], a
 	dec a ; ld a, TRUE
 	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
+	farcall StageTimeForSave
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData

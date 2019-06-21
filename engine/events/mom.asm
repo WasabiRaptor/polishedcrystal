@@ -92,7 +92,6 @@ Special_BankOfMom: ; 16218
 	jr .done_2
 
 .nope
-	call DSTChecks
 	ld a, $7
 
 .done_2
@@ -298,140 +297,7 @@ Special_BankOfMom: ; 16218
 	ret
 ; 16439
 
-DSTChecks: ; 16439
-; check the time; avoid changing DST if doing so would change the current day
-	ld a, [wDST]
-	bit 7, a
-	ldh a, [hHours]
-	jr z, .NotDST
-	and a ; within one hour of 00:00?
-	jr z, .LostBooklet
-	jr .loop
 
-.NotDST:
-	cp 23 ; within one hour of 23:00?
-	jr nz, .loop
-	; fallthrough
-
-.LostBooklet:
-	call .ClearBox
-	bccoord 1, 14
-	ld hl, .Text_AdjustClock
-	call PlaceWholeStringInBoxAtOnce
-	call YesNoBox
-	ret c
-	call .ClearBox
-	bccoord 1, 14
-	ld hl, .Text_LostInstructionBooklet
-	jp PlaceWholeStringInBoxAtOnce
-
-.loop
-	call .ClearBox
-	bccoord 1, 14
-	ld a, [wDST]
-	bit 7, a
-	jr z, .SetDST
-	ld hl, .Text_IsDSTOver
-	call PlaceWholeStringInBoxAtOnce
-	call YesNoBox
-	ret c
-	ld a, [wDST]
-	res 7, a
-	ld [wDST], a
-	call .SetClockBack
-	call .ClearBox
-	bccoord 1, 14
-	ld hl, .Text_SetClockBack
-	jp PlaceWholeStringInBoxAtOnce
-
-.SetDST:
-	ld hl, .Text_SwitchToDST
-	call PlaceWholeStringInBoxAtOnce
-	call YesNoBox
-	ret c
-	ld a, [wDST]
-	set 7, a
-	ld [wDST], a
-	call .SetClockForward
-	call .ClearBox
-	bccoord 1, 14
-	ld hl, .Text_SetClockForward
-	jp PlaceWholeStringInBoxAtOnce
-; 164b9
-
-.SetClockForward: ; 164b9
-	ld a, [wStartHour]
-	add 1
-	sub 24
-	jr nc, .DontLoopHourForward
-	add 24
-.DontLoopHourForward:
-	ld [wStartHour], a
-	ccf
-	ld a, [wStartDay]
-	adc 0
-	ld [wStartDay], a
-	ret
-; 164d1
-
-.SetClockBack: ; 164d1
-	ld a, [wStartHour]
-	sub 1
-	jr nc, .DontLoopHourBack
-	add 24
-.DontLoopHourBack:
-	ld [wStartHour], a
-	ld a, [wStartDay]
-	sbc 0
-	jr nc, .DontLoopDayBack
-	add 7
-.DontLoopDayBack:
-	ld [wStartDay], a
-	ret
-; 164ea
-
-.ClearBox: ; 164ea
-	hlcoord 1, 14
-	lb bc, 3, 18
-	jp ClearBox
-; 164f4
-
-.Text_AdjustClock: ; 0x164f4
-	; Do you want to adjust your clock for Daylight Saving Time?
-	text_jump UnknownText_0x1c6095
-	db "@"
-; 0x164f9
-
-.Text_LostInstructionBooklet: ; 0x164f9
-	; I lost the instruction booklet for the POKéGEAR.
-	; Come back again in a while.
-	text_jump UnknownText_0x1c60d1
-	db "@"
-; 0x164fe
-
-.Text_SwitchToDST: ; 0x164fe
-	; Do you want to switch to Daylight Saving Time?
-	text_jump UnknownText_0x1c6000
-	db "@"
-; 0x16503
-
-.Text_SetClockForward: ; 0x16503
-	; I set the clock forward by one hour.
-	text_jump UnknownText_0x1c6030
-	db "@"
-; 0x16508
-
-.Text_IsDSTOver: ; 0x16508
-	; Is Daylight Saving Time over?
-	text_jump UnknownText_0x1c6056
-	db "@"
-; 0x1650d
-
-.Text_SetClockBack: ; 0x1650d
-	; I put the clock back one hour.
-	text_jump UnknownText_0x1c6075
-	db "@"
-; 0x16512
 
 Mom_SetUpWithdrawMenu: ; 16512
 	ld de, Mom_WithdrawString
