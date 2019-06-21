@@ -195,6 +195,13 @@ Pokedex_Exit: ; 40136 (10:4136)
 	ret
 
 Pokedex_InitMainScreen: ; 4013c (10:413c)
+	ld a, [wCurrentDexMode]
+	cp DEXMODE_VARIANT
+	ld a, 1
+	jr nz, .continue
+	ld a, 2
+.continue
+	ld [wCurForm], a
 	;get type icons
 	ld a, $1
 	ldh [rVBK], a
@@ -345,8 +352,6 @@ StringThisCycle
 	db "This Cycl","e", $ff
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
-	ld a, 1
-	ld [wCurForm], a
 	call LowVolume
 	xor a
 	ld [wPokedexStatus], a
@@ -2429,7 +2434,11 @@ Pokedex_LoadSelectedMonTiles: ; 4143b
 	jr z, .use_first_unown
 	cp MAGIKARP
 	jr z, .use_first_magikarp
+	ld a, [wCurrentDexMode]
+	cp DEXMODE_VARIANT
 	ld a, 1
+	jr nz, .continue
+	ld a, 2
 	jr .continue
 .use_first_unown
 	ld a, [wFirstUnownSeen]
