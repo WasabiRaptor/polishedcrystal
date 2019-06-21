@@ -363,7 +363,7 @@ _CGB_Pokedex: ; 8f70
 	ld a, [wCurPartySpecies]
 	cp $ff
 	jr nz, .is_pokemon
-	ld hl, .GreenPicPalette
+	ld hl, GreenPicPalette
 	call LoadHLPaletteIntoDE
 	jr .got_palette
 .is_pokemon
@@ -388,13 +388,15 @@ _CGB_Pokedex: ; 8f70
 	ld a, 0 | BEHIND_BG
 	call FillBoxCGB
 
+_CGB_PokedexSearchOptionPals: ; 93ba
+
 	ld hl, PokegearOBPals
 	ld de, wUnknOBPals
 	ld bc, 2 palettes
 	ld a, $5
 	call FarCopyWRAM
 
-	ld hl, .CursorPalette
+	ld hl, CursorPalette
 	ld de, wUnknOBPals palette 7
 	ld bc, 1 palettes
 	ld a, $5
@@ -465,7 +467,7 @@ _CGB_Pokedex: ; 8f70
 	jp _CGB_FinishLayout
 ; 8fba
 
-.GreenPicPalette: ; 8fba
+GreenPicPalette: ; 8fba
 if !DEF(MONOCHROME)
 	RGB 11, 23, 00
 	RGB 07, 17, 00
@@ -475,7 +477,7 @@ else
 	MONOCHROME_RGB_FOUR
 endc
 
-.CursorPalette: ; 8fc2
+CursorPalette: ; 8fc2
 if !DEF(MONOCHROME)
 	RGB 00, 00, 00
 	RGB 11, 23, 00
@@ -719,7 +721,7 @@ _CGB_PokedexSearchOption: ; 93ba
 	call LoadHLPaletteIntoDE
 
 	call WipeAttrMap
-	jp _CGB_FinishLayout
+	jp _CGB_PokedexSearchOptionPals
 ; 93d3
 
 
