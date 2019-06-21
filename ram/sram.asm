@@ -226,3 +226,12 @@ SECTION "Boxes 8-14", SRAM
 	box sBox12
 	box sBox13
 	box sBox14
+
+SECTION "Total Pokemon Encountered", SRAM
+
+sTotalEncounteredPokemonSpecies:: ds NUM_POKEMON * 2
+sTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
+sTotalEncounters:: ds 2
+sTotalDefeated:: ds 2
+sTotalEncountersEnd::
+
