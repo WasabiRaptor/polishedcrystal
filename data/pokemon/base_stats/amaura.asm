@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/amaura/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db REFRIGERATE, 0	; abilities
+	db SNOW_WARNING	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_MONSTER, EGG_MONSTER ; egg groups
 

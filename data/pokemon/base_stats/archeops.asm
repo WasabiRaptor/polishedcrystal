@@ -9,7 +9,7 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/archeops/front.dimensions"
-	db 0, 0	; abilities
+	db DEFEATIST, 0	; abilities
 	db 0	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FLYING, EGG_WATER_3 ; egg groups

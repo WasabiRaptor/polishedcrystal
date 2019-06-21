@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_75, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/azurill/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db THICK_FAT, HUGE_POWER	; abilities
+	db SAP_SIPPER	; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

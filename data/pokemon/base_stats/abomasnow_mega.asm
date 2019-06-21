@@ -1,5 +1,5 @@
 
-	db  90,  92,  75,  60,  92,  85
+	db  90, 132, 105,  30, 132, 105
     evs  0,   1,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf
 
@@ -10,7 +10,7 @@
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/abomasnow/front.dimensions"
 	db SNOW_WARNING, 0	; abilities
-	db SOUNDPROOF	; hidden ability
+	db 0	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_GRASS ; egg groups
 
