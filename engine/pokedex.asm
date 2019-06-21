@@ -1891,7 +1891,7 @@ Pokedex_ABCMode: ; 40c30
 	jr .loop2abc
 
 INCLUDE "data/pokemon/dex_order_alpha.asm"
-INCLUDE "data/pokemon/dex_order_new.asm"
+INCLUDE "data/pokemon/dex_order_variants.asm"
 
 Pokedex_DisplayModeDescription: ; 40e5b
 	xor a

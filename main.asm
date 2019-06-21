@@ -1752,7 +1752,7 @@ endr
 
 PokedexDataPointerTable: ; 0x44378
 INCLUDE "data/pokemon/dex_entry_pointers.asm"
-
+INCLUDE "data/pokemon/variant_dex_entry_pointers.asm"
 
 SECTION "Code 11", ROMX
 
