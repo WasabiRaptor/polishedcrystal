@@ -54,8 +54,8 @@
 	const DITTO   		; 22
 	const PURRLOIN   	; 23
 	const LIEPARD   	; 24
-	const GRIMER     	; 25
-	const MUK  			; 26
+	const GRIMER     	; 25 alt forms alt palettes
+	const MUK  			; 26 alt forms alt palettes
 	const NIDORAN 	; 27 alt forms alt palettes
 	const NIDORINO 		; 28
 	const NIDORINA      ; 29

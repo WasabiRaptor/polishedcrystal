@@ -2211,6 +2211,31 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld [wBattleResult], a
 ; fallthrough
 
+	ld a, [wEnemyMonSpecies]
+	ld c, a
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalEncounters)
+	ldh [rSVBK], a
+
+	dec c
+	ld b, 0
+	ld hl, wTotalDefeatedPokemonSpecies+1
+	add hl, bc
+	add hl, bc
+	call Inc16BitNumInHL
+
+	ld hl, wTotalDefeated+1
+	call Inc16BitNumInHL
+
+	ld hl, wTotalDefeatedThisCycle+1
+	call Inc16BitNumInHL
+
+	pop af
+	ldh [rSVBK], a
+	
+
 GiveExperiencePointsAfterCatch:
 	call IsAnyMonHoldingExpShare
 	ld a, [wEnemyMonBaseExp]
@@ -6684,6 +6709,29 @@ LoadEnemyMon: ; 3e8eb
 	ld b, SET_FLAG
 	ld hl, wPokedexSeen
 	predef FlagPredef
+
+	ld a,[wCurPartySpecies]
+	ld c, a
+	
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalEncounters)
+	ldh [rSVBK], a
+	dec c
+	ld b, 0
+	ld hl, wTotalEncounteredPokemonSpecies+1
+	add hl, bc
+	add hl, bc
+	call Inc16BitNumInHL
+
+	ld hl, wTotalEncounters+1
+	call Inc16BitNumInHL
+
+	ld hl, wTotalEncountersThisCycle+1
+	call Inc16BitNumInHL
+
+	pop af
+	ldh [rSVBK], a
 
 	;get the temp form for this pokemon?
 	;ld hl, wEnemyMonForm

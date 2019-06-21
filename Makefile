@@ -148,6 +148,8 @@ gfx/trainers/%.2bpp: rgbgfx += -h
 
 gfx/portraits/%.2bpp: rgbgfx += -h
 
+
+
 gfx/new_game/shrink1.2bpp: rgbgfx += -h
 gfx/new_game/shrink2.2bpp: rgbgfx += -h
 

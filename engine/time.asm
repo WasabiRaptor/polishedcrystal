@@ -399,7 +399,7 @@ TimesOfDay:
 	db 24, NITE
 	db -1, MORN
 
-StageRTCTimeForSave:
+StageTimeForSave:
 	call UpdateTime
 	ld hl, wGameSaveTime
 	ld a, [wCurDay]
