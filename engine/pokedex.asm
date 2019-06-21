@@ -1667,8 +1667,6 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld a, 0
 	call FillBoxWithByte
 
-	call UpdateTypeColors
-
 	ld a, $6F
 	ld d, 4
 	hlcoord PKMN_NAME_LENGTH + 4, 1
@@ -1737,54 +1735,6 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	pop hl
 	jp PlaceString
 
-UpdateTypeColors:
-	ld a, 1
-	ld [wCurForm], a
-	ld a, [wDexListingScrollOffset]
-	hlcoord PKMN_NAME_LENGTH, 1, wAttrMap
-	ld e, 4
-.typecolorloop
-	inc a
-	ld [wCurSpecies], a
-	call GetBaseData
-	ld a, [wBaseType1]
-	call TypeColors
-	ld bc, SCREEN_WIDTH -3
-	add hl, bc
-	ld a, [wBaseType2]
-	call TypeColors
-	ld bc, SCREEN_WIDTH - 3
-	add hl, bc
-	ld a, [wCurSpecies]
-	dec e
-	jr nz, .typecolorloop
-	ret
-
-TypeColors:
-	ld d, 2 | TILE_BANK
-	cp POISON
-	jr c, .done
-	ld d, 3 | TILE_BANK
-	cp BUG
-	jr c, .done
-	ld d, 4 | TILE_BANK
-	cp FIRE
-	jr c, .done
-	ld d, 5 | TILE_BANK
-	cp ELECTRIC
-	jr c, .done
-	ld d, 6 | TILE_BANK
-	cp DRAGON
-	jr c, .done
-	ld d, 7 | TILE_BANK
-.done
-	ld a, d
-	ld [hli], a
-	ld [hli], a
-	ld [hli], a
-	ld [hl], a
-	ret
-
 Pokexex_PrintNumberAndTypes:
 	push hl
 	ld de, -SCREEN_WIDTH
@@ -1815,6 +1765,7 @@ Pokexex_PrintNumberAndTypes:
 Pokexex_PrintType:
 	;for type in a print the type icon at hl
 	push hl
+	push af
 	ld c, 4
 	call SimpleMultiply
 	ld [hli], a
@@ -1823,6 +1774,34 @@ Pokexex_PrintType:
 	inc a
 	ld [hli], a
 	inc a
+	ld [hl], a
+	pop af
+	pop hl
+	push hl
+;colors
+	ld bc, wAttrMap - wTileMap
+	add hl, bc
+	ld d, 2 | TILE_BANK
+	cp POISON
+	jr c, .done
+	ld d, 3 | TILE_BANK
+	cp BUG
+	jr c, .done
+	ld d, 4 | TILE_BANK
+	cp FIRE
+	jr c, .done
+	ld d, 5 | TILE_BANK
+	cp ELECTRIC
+	jr c, .done
+	ld d, 6 | TILE_BANK
+	cp DRAGON
+	jr c, .done
+	ld d, 7 | TILE_BANK
+.done
+	ld a, d
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
 	ld [hl], a
 	pop hl
 	ret
@@ -1919,22 +1898,22 @@ Pokedex_OrderMonsByMode: ; 40bdc
 
 
 .Jumptable: ; 40bf0 (10:4bf0)
-	dw .NewMode
 	dw .OldMode
+	dw .VariantMode
 	dw Pokedex_ABCMode
 
 
-.NewMode: ; 40bf6 (10:4bf6)
-;	ld de, NewPokedexOrder
-;	ld hl, wPokedexDataStart
-;	ld c, NUM_POKEMON
-;.loopnew
-;	ld a, [de]
-;	inc de
-;	ld [hli], a
-;	dec c
-;	jr nz, .loopnew
-;	jr .FindLastSeen
+.VariantMode: ; 40bf6 (10:4bf6)
+	ld de, VariantPokedexOrder
+	ld hl, wPokedexDataStart
+	ld c, VariantPokedexOrderEnd - VariantPokedexOrder
+.loopnew
+	ld a, [de]
+	inc de
+	ld [hli], a
+	dec c
+	jr nz, .loopnew
+	jr .FindLastSeen
 
 .OldMode: ; 40c08 (10:4c08)
 	ld hl, wPokedexDataStart
