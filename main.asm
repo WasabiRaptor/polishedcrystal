@@ -1079,7 +1079,7 @@ DisplayDexEntry: ; 4424d
 	ld l, c
 	push de
 ; Print dex number
-	hlcoord 2, 8
+	hlcoord 9, 1
 	ld a, "№"
 	ld [hli], a
 	ld a, "."
@@ -1228,11 +1228,7 @@ DisplayDexEntry: ; 4424d
 	ld bc, SCREEN_WIDTH - 1
 	ld a, $6a ; horizontal divider
 	call ByteFill
-	hlcoord 1, 10
-	;page number
-	ld a, [wPokedexStatus]
-	add "1"
-	ld [hl], a
+	call .DexPageNo
 	pop de
 	inc de
 	pop af
@@ -1270,11 +1266,7 @@ DisplayDexEntry: ; 4424d
 	ld bc, SCREEN_WIDTH - 1
 	ld a, $6a ; horizontal divider
 	call ByteFill
-	hlcoord 1, 10
-	;page number
-	ld a, [wPokedexStatus]
-	add "1"
-	ld [hl], a
+	call .DexPageNo
 	hlcoord 9, 2
 	ld de, .Hp
 	call PlaceString
@@ -1315,24 +1307,19 @@ DisplayDexEntry: ; 4424d
 	call PrintNum
 
 	hlcoord 9, 8
-	ld de, .EvYeild
+	ld de, .EvYield
 	call PlaceString
 	hlcoord 9, 9
-	call .EvYeildCheck
+	call .EvYieldCheck
 	hlcoord 15, 9	
-	call .EvYeildCheck
+	call .EvYieldCheck
 	xor a
 	push af
 .abilityloop:
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
-	hlcoord 1, 10
-	;page number
-	ld a, [wPokedexStatus]
-	add "1"
-	ld [hl], a
-
+	call .DexPageNo
 	ld hl, wBaseAbility1
 	ld b, 0
 	pop af
@@ -1341,7 +1328,15 @@ DisplayDexEntry: ; 4424d
 	add hl, bc
 	ld a, [hl]
 	and a
-	jr z, .doneabilities 
+	jr nz, .hasAbility
+	pop af
+	inc a
+	push af
+	inc hl
+	ld a, [hl]
+	and a
+	jr z, .lastpage
+.hasAbility
 	ld b, a
 	push bc
 	hlcoord 2, 12
@@ -1357,7 +1352,7 @@ DisplayDexEntry: ; 4424d
 	jr z, .hiddenability	
 	ld de, .Ability
 	call PlaceString
-	hlcoord 9, 11
+	hlcoord 10, 11
 	pop af
 	push af
 	add "1"
@@ -1379,9 +1374,38 @@ DisplayDexEntry: ; 4424d
 	ld a, e
 	inc a
 	push af
-	cp 4
+	cp 3
 	jr c, .abilityloop
-.doneabilities
+.lastpage
+	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 2, 11
+	call ClearBox
+	call .DexPageNo
+	ld de, .EggGroups
+	hlcoord 2, 11
+	call PlaceString
+	ld a, [wBaseEggGroups]
+	and EGG_GROUP_1_MASK
+	rrca
+	rrca
+	rrca
+	rrca
+	ld b, a
+	call GetEggGroupString
+	hlcoord 3, 13
+	push bc
+	call PlaceString
+	pop bc
+
+	ld a, [wBaseEggGroups]
+	and EGG_GROUP_2_MASK
+	cp b
+	jr z, .sameegggroup
+	call GetEggGroupString
+	hlcoord 3, 15
+	call PlaceString
+
+.sameegggroup
 	pop af
 	pop bc
 	ld a, $ff
@@ -1395,6 +1419,19 @@ DisplayDexEntry: ; 4424d
 	call PlaceString
 	jr .printdexability
 
+.DexPageNo:
+	hlcoord 2, 9
+	ld de, .Page
+	call PlaceString
+	hlcoord 5, 9
+	;page number
+	ld a, [wPokedexStatus]
+	add "1"
+	ld [hl], a
+	ret
+
+.Page
+	db "Pg.@"
 .HeightImperial: ; 40852
 	db "Ht  ?'??”@" ; HT  ?'??"
 .WeightImperial: ; 4085c
@@ -1404,7 +1441,7 @@ DisplayDexEntry: ; 4424d
 .WeightMetric:
 	db "Wt   ???kg@"; WT   ???kg
 .Hp
-	db "Hp@"
+	db "HP@"
 .Atk
 	db "Atk@"
 .Def
@@ -1415,33 +1452,36 @@ DisplayDexEntry: ; 4424d
 	db "SDf@"
 .Spd
 	db "Spd@"
-.EvYeild
-	db "EV Yeild@"
+.EvYield
+	db "EV Yield@"
 .Hidden
 	db "Hidden "
 .Ability
 	db "Ability@"
+.EggGroups
+	db "Egg Groups@"
 
-.EvYeildCheck:
+
+.EvYieldCheck:
 	ld a, [wBaseEVYield1]
 	ld b, a
-	and HP_EV_YEILD_MASK
+	and HP_EV_YIELD_MASK
 	jr nz, .Hpev
 	ld a, b
-	and ATK_EV_YEILD_MASK
+	and ATK_EV_YIELD_MASK
 	jr nz, .Atkev
 	ld a, b
-	and DEF_EV_YEILD_MASK
+	and DEF_EV_YIELD_MASK
 	jr nz, .Defev
 	ld a, b
-	and SPD_EV_YEILD_MASK
+	and SPD_EV_YIELD_MASK
 	jr nz, .Spdev
 	ld a, [wBaseEVYield2]
 	ld b, a
-	and SAT_EV_YEILD_MASK
+	and SAT_EV_YIELD_MASK
 	jr nz, .Satev
 	ld a, b
-	and SDF_EV_YEILD_MASK
+	and SDF_EV_YIELD_MASK
 	jr nz, .Sdfev
 	ret
 
@@ -1538,7 +1578,68 @@ DisplayDexEntry: ; 4424d
 .evreallydone
 	call PlaceString
 	ret
-	
+
+GetEggGroupString:
+	push bc
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, EggGroupStringPointers
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	pop bc
+	ret
+
+EggGroupStringPointers:
+	dw MonsterString
+	dw AmphibianString
+	dw InsectString
+	dw AvianString
+	dw FieldString
+	dw FaeString
+	dw PlantString
+	dw HumanShapeString
+	dw InvertebrateString
+	dw InanimateString
+	dw AmorphusString
+	dw FishString
+	dw DittoString
+	dw DragonString
+	dw NoEggsString
+
+MonsterString:
+	db "Monster@"
+AmphibianString:
+	db "Amphibian@"
+InsectString:
+	db "Insect@"
+AvianString:
+	db "Avian@"
+FieldString:
+	db "Yours@"
+FaeString:
+	db "Fae@"
+PlantString:
+	db "Plant@"
+HumanShapeString:
+	db "Humanoid@"
+InvertebrateString:
+	db "Invertebrate@"
+InanimateString:
+	db "Inanimate@"
+AmorphusString:
+	db "Amorphus@"
+FishString:
+	db "Fish@"
+DittoString:
+	db "Any@"
+DragonString:
+	db "Reptile@"
+NoEggsString:
+	db "Undiscovered@"
 ; Metric conversion code by TPP Anniversary Crystal 251
 ; https://github.com/TwitchPlaysPokemon/tppcrystal251pub/blob/public/main.asm
 Mul16:
