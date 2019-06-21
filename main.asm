@@ -1619,7 +1619,7 @@ InsectString:
 AvianString:
 	db "Avian@"
 FieldString:
-	db "Yours@"
+	db "Field@"
 FaeString:
 	db "Fae@"
 PlantString:
