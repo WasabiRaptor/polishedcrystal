@@ -387,13 +387,6 @@ Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	jp Pokedex_IncrementDexPointer
 
 Pokedex_UpdateDexEntryScreen: ; 40258 (10:4258)
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_VARIANT
-	ld a, 1
-	jr nz, .continue
-	ld a, 2
-.continue
-	ld [wCurForm], a
 
 	ld a, [wCelebiEvent]
 	bit 4, a ; ENGINE_HAVE_SHINY_CHARM
