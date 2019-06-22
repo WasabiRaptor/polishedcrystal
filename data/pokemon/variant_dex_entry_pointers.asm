@@ -1,66 +1,61 @@
-;LycanrocDexEntryPointers::
-;	dw LycanrocDexEntry
-;	dw Lycanroc_DuskDexEntry
-;	dw Lycanroc_MidnightDexEntry
-;	dw Lycanroc_DawnDexEntry
+;LycanrocPokedexEntryPointers::
+;	dw LycanrocPokedexEntry
+;	dw Lycanroc_DuskPokedexEntry
+;	dw Lycanroc_MidnightPokedexEntry
+;	dw Lycanroc_DawnPokedexEntry
 
-MeowthDexEntryPointers::
-	dw MeowthDexEntry
-	dw Meowth_AlolaDexEntry
+MeowthPokedexEntryPointers::
+	dw MeowthPokedexEntry
+	dw Meowth_AlolaPokedexEntry
 
-PersianDexEntryPointers::
-	dw PersianDexEntry
-	dw Persian_AlolaDexEntry
+PersianPokedexEntryPointers::
+	dw PersianPokedexEntry
+	dw Persian_AlolaPokedexEntry
 
-GrimerDexEntryPointers::
-	dw GrimerDexEntry
-	dw Grimer_AlolaDexEntry
+GrimerPokedexEntryPointers::
+	dw GrimerPokedexEntry
+	dw Grimer_AlolaPokedexEntry
 
-MukDexEntryPointers::
-	dw MukDexEntry
-	dw Muk_AlolaDexEntry
+MukPokedexEntryPointers::
+	dw MukPokedexEntry
+	dw Muk_AlolaPokedexEntry
 
-MeowsticDexEntryPointers::
-	dw Meowstic_MDexEntry
-	dw Meowstic_FDexEntry
+MeowsticPokedexEntryPointers::
+	dw Meowstic_MPokedexEntry
+	dw Meowstic_FPokedexEntry
 
-NidoranDexEntryPointers::
-	dw Nidoran_MDexEntry
-	dw Nidoran_FDexEntry
+NidoranPokedexEntryPointers::
+	dw Nidoran_MPokedexEntry
+	dw Nidoran_FPokedexEntry
 
-SandshrewDexEntryPointers::
-	dw SandshrewDexEntry
-	dw Sandshrew_AlolaDexEntry
+SandshrewPokedexEntryPointers::
+	dw SandshrewPokedexEntry
+	dw Sandshrew_AlolaPokedexEntry
 
-SandslashDexEntryPointers::
-	dw SandslashDexEntry
-	dw Sandslash_AlolaDexEntry
+SandslashPokedexEntryPointers::
+	dw SandslashPokedexEntry
+	dw Sandslash_AlolaPokedexEntry
 
-GirafarigDexEntryPointers::
-	dw GirafarigDexEntry
-	dw Girafarig_BetaDexEntry
+GirafarigPokedexEntryPointers::
+	dw GirafarigPokedexEntry
+	dw Girafarig_BetaPokedexEntry
 
-VulpixDexEntryPointers::
-	dw VulpixDexEntry
-	dw Vulpix_AlolaDexEntry
+VulpixPokedexEntryPointers::
+	dw VulpixPokedexEntry
+	dw Vulpix_AlolaPokedexEntry
 
-NinetalesDexEntryPointers::
-	dw NinetalesDexEntry
-	dw Ninetales_AlolaDexEntry
+NinetalesPokedexEntryPointers::
+	dw NinetalesPokedexEntry
+	dw Ninetales_AlolaPokedexEntry
 
-SuicuneDexEntryPointers::
-	dw SuicuneDexEntry
-	dw Suicune_BetaDexEntry
+SuicunePokedexEntryPointers::
+	dw SuicunePokedexEntry
+	dw Suicune_BetaPokedexEntry
 
-RaikouDexEntryPointers::
-	dw RaikouDexEntry
-	dw Raikou_BetaDexEntry
+RaikouPokedexEntryPointers::
+	dw RaikouPokedexEntry
+	dw Raikou_BetaPokedexEntry
 
-EnteiDexEntryPointers::
-	dw EnteiDexEntry
-	dw Entei_BetaDexEntry
-
-ZygardeDexEntryPointers::
-	dw Zygarde_Ten_PercentDexEntry
-	dw ZygardeDexEntry
-	dw Zygarde_CompleteDexEntry
+EnteiPokedexEntryPointers::
+	dw EnteiPokedexEntry
+	dw Entei_BetaPokedexEntry

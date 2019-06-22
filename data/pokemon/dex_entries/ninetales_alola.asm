@@ -3,9 +3,9 @@
 
 	db   "The reason it" 
     next "guides people all"
-    next "the way down to the" 
+    next "the way down to a" 
     
-    page "mountain’s base is"
+    page "mountain's base is"
     next "that it wants them" 
     next "to hurry up and" 
     

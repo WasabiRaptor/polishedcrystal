@@ -352,6 +352,14 @@ StringThisCycle
 	db "This Cycl","e", $ff
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
+	ld a, [wCurrentDexMode]
+	cp DEXMODE_VARIANT
+	ld a, 1
+	jr nz, .continue
+	ld a, 2
+.continue
+	ld [wCurForm], a
+
 	call LowVolume
 	xor a
 	ld [wPokedexStatus], a
@@ -379,6 +387,14 @@ Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	jp Pokedex_IncrementDexPointer
 
 Pokedex_UpdateDexEntryScreen: ; 40258 (10:4258)
+	ld a, [wCurrentDexMode]
+	cp DEXMODE_VARIANT
+	ld a, 1
+	jr nz, .continue
+	ld a, 2
+.continue
+	ld [wCurForm], a
+
 	ld a, [wCelebiEvent]
 	bit 4, a ; ENGINE_HAVE_SHINY_CHARM
 	ld de, DexEntryScreen_ArrowCursorData_ShinyCharm
@@ -432,6 +448,14 @@ Pokedex_Page: ; 40292
 
 Pokedex_ReinitDexEntryScreen: ; 402aa (10:42aa)
 ; Reinitialize the Pokédex entry screen after changing the selected mon.
+	ld a, [wCurrentDexMode]
+	cp DEXMODE_VARIANT
+	ld a, 1
+	jr nz, .continue
+	ld a, 2
+.continue
+	ld [wCurForm], a
+
 	call Pokedex_BlackOutBG
 	xor a
 	ld [wPokedexStatus], a
@@ -519,6 +543,14 @@ DexEntryScreen_MenuActionJumptable: ; 402f2
 	jp Pokedex_GetCGBLayout
 
 Pokedex_RedisplayDexEntry: ; 4038d
+	ld a, [wCurrentDexMode]
+	cp DEXMODE_VARIANT
+	ld a, 1
+	jr nz, .continue
+	ld a, 2
+.continue
+	ld [wCurForm], a
+
 	call Pokedex_LoadGFX
 	call Pokedex_LoadAnyFootprint
 	call Pokedex_DrawDexEntryScreenBG
