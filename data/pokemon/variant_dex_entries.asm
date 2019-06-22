@@ -44,4 +44,5 @@ Raikou_BetaPokedexEntry::     ;INCLUDE "data/pokemon/dex_entries/raikou_beta.asm
 
 EnteiPokedexEntry::      INCLUDE "data/pokemon/dex_entries/entei.asm"
 Entei_BetaPokedexEntry::      ;INCLUDE "data/pokemon/dex_entries/entei_beta.asm"
-INCLUDE "data/pokemon/dex_entries/entei.asm"
+
+INCLUDE "data/pokemon/dex_entries/entei.asm" ;delet this after we get an actual entry

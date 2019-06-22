@@ -1254,8 +1254,6 @@ DisplayDexEntry: ; 4424d
 .statpage
 	push bc
 
-	ld a, 1
-	ld [wCurForm], a
 	call GetBaseData
 	
 	lb bc, 9, 12
@@ -1489,8 +1487,7 @@ DisplayDexEntry: ; 4424d
 	ret
 
 .Hpev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
@@ -1505,8 +1502,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Atkev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
@@ -1519,8 +1515,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Defev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	add "0"
@@ -1531,8 +1526,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Spdev
-	ld a, b
-
+	ld b, a
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1541,8 +1535,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Satev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
@@ -1557,8 +1550,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone2
 
 .Sdfev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
