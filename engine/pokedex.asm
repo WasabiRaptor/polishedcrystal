@@ -2502,16 +2502,33 @@ Pokedex_LoadAnyFootprint: ; 4147b
 	ld a, [wd265]
 Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
+	ld b, a
+	push bc
+	ld hl, VariantFootprintTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop bc
+	ld a, b
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
-	ld hl, Footprints
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes
-
+	ld b, d
 	ld e, l
 	ld d, h
 	pop hl
-	lb bc, BANK(Footprints), 4
+	ld c, 4
 	jp Request1bpp
+
+INCLUDE "gfx/variant_footprint_table.asm"
 
 Pokedex_LoadGFX:
 	call DisableLCD
@@ -2680,8 +2697,9 @@ INCBIN "gfx/pokedex/slowpoke.2bpp.lz"
 QuestionMarkLZ: ; 1de0e1
 INCBIN "gfx/pokedex/question_mark.2bpp.lz"
 
-Footprints:
 INCLUDE "gfx/footprints.asm"
+
+INCLUDE "gfx/variant_footprints.asm"
 
 PokedexTypes:
 INCBIN "gfx/pokedex/types.2bpp"
