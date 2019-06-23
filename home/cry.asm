@@ -58,10 +58,19 @@ LoadCryHeader:: ; 37f3
 
 	ldh a, [hROMBank]
 	push af
-	ld a, BANK(CryHeaders)
+	push bc
+	ld a, c
+	inc a
+	farcall GetRelevantCryPointers
+	pop bc
+	ld a, d
 	rst Bankswitch
+	jr nc, .notvariant
+	ld a, [wCurForm]
+	dec a
+	ld c, a
+.notvariant
 
-	ld hl, CryHeaders
 rept 6
 	add hl, bc
 endr
