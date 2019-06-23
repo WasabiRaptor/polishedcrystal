@@ -1,7 +1,7 @@
 GetVariant: ; 51040
 	ld a, [wCurPartySpecies]
-	cp MEWTWO
-	jp z, .GetMewtwoVariant
+	;cp MEWTWO
+	;jp z, .GetMewtwoVariant
 
 ; Return CurForm based on Form at hl
 	ld a, [hl]
