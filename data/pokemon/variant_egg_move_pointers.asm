@@ -6,6 +6,10 @@ GrimerEggMovesPointers::
 	dw GrimerEggMoves
 	dw Grimer_AlolaEggMoves
 
+NidoranEggMovesPointers::
+	dw Nidoran_MEggMoves
+	dw Nidoran_FEggMoves
+
 SandshrewEggMovesPointers::
 	dw SandshrewEggMoves
 	dw Sandshrew_AlolaEggMoves

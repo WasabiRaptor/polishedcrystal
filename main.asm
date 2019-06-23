@@ -1060,21 +1060,25 @@ DoDexSearchSlowpokeFrame: ; 44207
 	db -1
 
 DisplayDexEntry: ; 4424d
+	lb bc, 9, 12
+	hlcoord 8, 1
+	call ClearBox
+
 	call GetPokemonName
 	hlcoord 9, 3
 	call PlaceString ; mon species
 	ld a, [wd265]
-	ld b, a
 	call GetDexEntryPointer
 	ld a, b
 	push af
 	hlcoord 9, 5
 	call FarString ; dex species
+	dec de
 	ld h, b
 	ld l, c
 	push de
 ; Print dex number
-	hlcoord 2, 8
+	hlcoord 9, 1
 	ld a, "№"
 	ld [hli], a
 	ld a, "."
@@ -1082,6 +1086,26 @@ DisplayDexEntry: ; 4424d
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
+;units
+	ld a, [wOptions2]
+	bit POKEDEX_UNITS, a
+	jr nz, .metric
+	hlcoord 9, 7
+	ld de, .HeightImperial
+	call PlaceString
+	hlcoord 9, 9
+	ld de, .WeightImperial
+	call PlaceString
+	jr .done
+.metric
+	hlcoord 9, 7
+	ld de, .HeightMetric
+	call PlaceString
+	hlcoord 9, 9
+	ld de, .WeightMetric
+	call PlaceString
+.done
+	farcall Pokedex_DrawFootprint
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wd265]
 	dec a
@@ -1195,59 +1219,422 @@ DisplayDexEntry: ; 4424d
 	pop de
 
 .skip_weight
-; Page 1
+; Page 
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
 	hlcoord 1, 10
 	ld bc, SCREEN_WIDTH - 1
-	ld a, $5f ; horizontal divider
+	ld a, $6a ; horizontal divider
 	call ByteFill
-	; page number
-	hlcoord 1, 9
-	ld [hl], $55
-	inc hl
-	ld [hl], $55
-	hlcoord 1, 10
-	ld [hl], $56 ; P.
-	inc hl
-	ld [hl], $57 ; 1
+	call .DexPageNo
 	pop de
 	inc de
 	pop af
 	hlcoord 2, 11
 	push af
 	call FarString
-	pop bc
-	ld a, [wPokedexStatus]
-	or a
-	ret z
 
-; Page 2
+	ld a, [wPokedexStatus]
+	ld b, a
+	ld a,[wDexSearchSlowpokeFrame]
+	cp b
+	ld a, c
+	pop bc
+	ret z
+	cp $7f
+	jr nz, .statpage
+	ld a,[wDexSearchSlowpokeFrame]
+	inc a
+	ld [wDexSearchSlowpokeFrame], a
 	push bc
 	push de
+	jr .skip_weight
+
+.statpage
+	push bc
+
+	call GetBaseData ;form is known
+	
+	lb bc, 9, 12
+	hlcoord 8, 1
+	call ClearBox
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
 	hlcoord 1, 10
 	ld bc, SCREEN_WIDTH - 1
-	ld a, $5f ; horizontal divider
+	ld a, $6a ; horizontal divider
 	call ByteFill
-	; page number
-	hlcoord 1, 9
-	ld [hl], $55
-	inc hl
-	ld [hl], $55
-	hlcoord 1, 10
-	ld [hl], $56 ; P.
-	inc hl
-	ld [hl], $58 ; 2
-	pop de
-	inc de
-	pop af
-	hlcoord 2, 11
-	jp FarString
+	call .DexPageNo
+	hlcoord 9, 2
+	ld de, .Hp
+	call PlaceString
+	hlcoord 13, 2
+	ld de, .Atk
+	call PlaceString
+	hlcoord 17, 2
+	ld de, .Def
+	call PlaceString
+	hlcoord 9, 5
+	ld de, .Spd
+	call PlaceString
+	hlcoord 13, 5
+	ld de, .SAt
+	call PlaceString
+	hlcoord 17, 5
+	ld de, .SDf
+	call PlaceString
 
+	lb bc, 1, 3
+	hlcoord 9, 3
+	ld de, wBaseHP
+	call PrintNum
+	hlcoord 13, 3
+	inc de ;wBaseAttack
+	call PrintNum
+	hlcoord 17, 3
+	inc de ;wBaseDefense
+	call PrintNum
+	hlcoord 9, 6
+	inc de ;wBaseSpeed
+	call PrintNum
+	hlcoord 13, 6
+	inc de ;wBaseSpecialAttack
+	call PrintNum
+	hlcoord 17, 6
+	inc de ;wBaseSpecialDefense
+	call PrintNum
+
+	hlcoord 9, 8
+	ld de, .EvYield
+	call PlaceString
+	hlcoord 9, 9
+	call .EvYieldCheck
+	hlcoord 15, 9	
+	call .EvYieldCheck
+	xor a
+	push af
+.abilityloop:
+	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 2, 11
+	call ClearBox
+	call .DexPageNo
+	ld hl, wBaseAbility1
+	ld b, 0
+	pop af
+	ld c, a
+	push af
+	add hl, bc
+	ld a, [hl]
+	and a
+	jr nz, .hasAbility
+	pop af
+	inc a
+	push af
+	inc hl
+	ld a, [hl]
+	and a
+	jr z, .lastpage
+.hasAbility
+	ld b, a
+	push bc
+	hlcoord 2, 12
+	predef PrintAbility
+	pop bc
+	hlcoord 2, 14
+	predef PrintAbilityDescription
+
+	pop af
+	push af
+	cp 2
+	hlcoord 2, 11
+	jr z, .hiddenability	
+	ld de, .Ability
+	call PlaceString
+	hlcoord 10, 11
+	pop af
+	push af
+	add "1"
+	ld [hl], a
+.printdexability
+	pop af
+	ld e, a
+	ld a,[wDexSearchSlowpokeFrame]
+	inc a
+	ld [wDexSearchSlowpokeFrame], a
+
+	ld a, [wPokedexStatus]
+	ld b, a
+	ld a,[wDexSearchSlowpokeFrame]
+	cp b
+	pop bc
+	ret z
+	push bc
+	ld a, e
+	inc a
+	push af
+	cp 3
+	jr c, .abilityloop
+.lastpage
+
+	lb bc, 5, SCREEN_WIDTH - 2
+	hlcoord 2, 11
+	call ClearBox
+	call .DexPageNo
+	ld de, .EggGroups
+	hlcoord 2, 11
+	call PlaceString
+	ld a, [wBaseEggGroups]
+	and EGG_GROUP_1_MASK
+	rrca
+	rrca
+	rrca
+	rrca
+	ld b, a
+	call GetEggGroupString
+	hlcoord 3, 13
+	push bc
+	call PlaceString
+	pop bc
+
+	ld a, [wBaseEggGroups]
+	and EGG_GROUP_2_MASK
+	cp b
+	jr z, .sameegggroup
+	call GetEggGroupString
+	hlcoord 3, 15
+	call PlaceString
+
+.sameegggroup
+	pop af
+	pop bc
+	ld a, $ff
+	ld [wPokedexStatus], a
+	ret
+
+.hiddenability
+	pop af
+	push af
+	ld de, .Hidden
+	call PlaceString
+	jr .printdexability
+
+.DexPageNo:
+	hlcoord 2, 9
+	ld de, .Page
+	call PlaceString
+	hlcoord 5, 9
+	;page number
+	ld a, [wPokedexStatus]
+	add "1"
+	ld [hl], a
+	ret
+
+.Page
+	db "Pg.@"
+.HeightImperial: ; 40852
+	db "Ht  ?'??”@" ; HT  ?'??"
+.WeightImperial: ; 4085c
+	db "Wt   ???lb@" ; WT   ???lb
+.HeightMetric:
+	db "Ht   ???m@" ; HT   ???m"
+.WeightMetric:
+	db "Wt   ???kg@"; WT   ???kg
+.Hp
+	db "HP@"
+.Atk
+	db "Atk@"
+.Def
+	db "Def@"
+.SAt
+	db "SAt@"
+.SDf
+	db "SDf@"
+.Spd
+	db "Spd@"
+.EvYield
+	db "EV Yield@"
+.Hidden
+	db "Hidden "
+.Ability
+	db "Ability@"
+.EggGroups
+	db "Egg Groups@"
+
+
+.EvYieldCheck:
+	ld a, [wBaseEVYield1]
+	ld b, a
+	and HP_EV_YIELD_MASK
+	jr nz, .Hpev
+	ld a, b
+	and ATK_EV_YIELD_MASK
+	jr nz, .Atkev
+	ld a, b
+	and DEF_EV_YIELD_MASK
+	jr nz, .Defev
+	ld a, b
+	and SPD_EV_YIELD_MASK
+	jr nz, .Spdev
+	ld a, [wBaseEVYield2]
+	ld b, a
+	and SAT_EV_YIELD_MASK
+	jr nz, .Satev
+	ld a, b
+	and SDF_EV_YIELD_MASK
+	jr nz, .Sdfev
+	ret
+
+.Hpev
+	ld b, a
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Hp
+	jr .evdone1
+
+.Atkev
+	ld b, a
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Atk
+	jr .evdone1
+
+.Defev
+	ld b, a
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Def
+	jr .evdone1
+
+.Spdev
+	ld b, a
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .Spd
+	jr .evdone1
+
+.Satev
+	ld b, a
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .SAt
+	jr .evdone2
+
+.Sdfev
+	ld b, a
+	rrca
+	rrca
+	rrca
+	rrca
+	add "0"
+	ld [hli], a
+	inc hl
+
+	ld de, .SDf
+
+.evdone2
+	ld a, [wBaseEVYield2]
+	xor b
+	ld [wBaseEVYield2], a
+	jr .evreallydone
+.evdone1
+	ld a, [wBaseEVYield1]
+	xor b
+	ld [wBaseEVYield1], a
+.evreallydone
+	call PlaceString
+	ret
+
+GetEggGroupString:
+	push bc
+	dec a
+	ld c, a
+	ld b, 0
+	ld hl, EggGroupStringPointers
+	add hl, bc
+	add hl, bc
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+	pop bc
+	ret
+
+EggGroupStringPointers:
+	dw MonsterString
+	dw AmphibianString
+	dw InsectString
+	dw AvianString
+	dw FieldString
+	dw FaeString
+	dw PlantString
+	dw HumanShapeString
+	dw InvertebrateString
+	dw InanimateString
+	dw AmorphusString
+	dw FishString
+	dw DittoString
+	dw DragonString
+	dw NoEggsString
+
+MonsterString:
+	db "Monster@"
+AmphibianString:
+	db "Amphibian@"
+InsectString:
+	db "Insect@"
+AvianString:
+	db "Avian@"
+FieldString:
+	db "Field@"
+FaeString:
+	db "Fae@"
+PlantString:
+	db "Plant@"
+HumanShapeString:
+	db "Humanoid@"
+InvertebrateString:
+	db "Invertebrate@"
+InanimateString:
+	db "Inanimate@"
+AmorphusString:
+	db "Amorphus@"
+FishString:
+	db "Fish@"
+DittoString:
+	db "Any@"
+DragonString:
+	db "Reptile@"
+NoEggsString:
+	db "Undiscovered@"
 ; Metric conversion code by TPP Anniversary Crystal 251
 ; https://github.com/TwitchPlaysPokemon/tppcrystal251pub/blob/public/main.asm
 Mul16:
@@ -1287,8 +1674,22 @@ Mul16:
 GetDexEntryPointer: ; 44333
 ; return dex entry pointer b:de
 	push hl
-	ld hl, PokedexDataPointerTable
-	ld a, b
+;get relevant pointers
+	ld hl, VariantPokedexEntryPointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld c, a
+	push af
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [wd265]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld d, 0
 	ld e, a
@@ -1297,66 +1698,27 @@ GetDexEntryPointer: ; 44333
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	push de
-	rlca
-	rlca
-	and $3
-	ld hl, .PokedexEntryBanks
-	ld d, 0
-	ld e, a
-	add hl, de
-	ld b, [hl]
-	pop de
-	pop hl
-	ret
-
-.PokedexEntryBanks: ; 44351
-
-GLOBAL PokedexEntries1
-GLOBAL PokedexEntries2
-GLOBAL PokedexEntries3
-GLOBAL PokedexEntries4
-
-	db BANK(PokedexEntries1)
-	db BANK(PokedexEntries2)
-	db BANK(PokedexEntries3)
-	db BANK(PokedexEntries4)
-
-	call GetDexEntryPointer ; b:de
-	push hl
-	ld h, d
-	ld l, e
-; skip species name
-.loop1
-	ld a, b
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .loop1
-; skip height and weight
-rept 4
-	inc hl
-endr
-; if c != 1: skip entry
-	dec c
-	jr z, .done
-; skip entry
-.loop2
-	ld a, b
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .loop2
-
-.done
-	ld d, h
-	ld e, l
+	pop af
+	jr c, .donebanks
+	ld a, [wd265]
+	cp FLORGES
+	jr c, .donebanks
+	ld c, BANK(PokedexEntries2)
+	cp LAPRAS
+	jr c, .donebanks
+	ld c, BANK(PokedexEntries3)
+	cp TALONFLAME
+	jr c, .donebanks
+	ld c, BANK(PokedexEntries4)
+.donebanks
+	ld b, c	
 	pop hl
 	ret
 
 PokedexDataPointerTable: ; 0x44378
 INCLUDE "data/pokemon/dex_entry_pointers.asm"
-
+INCLUDE "data/pokemon/variant_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/variant_dex_entry_pointer_table.asm"
 
 SECTION "Code 11", ROMX
 
@@ -3543,7 +3905,9 @@ ListMoves: ; 50d6f
 CalcLevel: ; 50e1b
 	ld a, [wTempMonSpecies]
 	ld [wCurSpecies], a
-	call GetBaseData
+	ld hl, wTempMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld d, 1
 .next_level
 	inc d
@@ -3999,7 +4363,7 @@ INCLUDE "data/pokemon/names.asm"
 SECTION "Variant Base Data", ROMX
 
 INCLUDE "data/pokemon/variant_base_stats.asm"
-
+INCLUDE "data/pokemon/variant_names.asm"
 
 SECTION "Code 14", ROMX
 
@@ -4019,6 +4383,7 @@ INCLUDE "engine/copy_tilemap_at_once.asm"
 
 PrintAbility:
 ; Print ability b at hl.
+	push hl
 	ld l, b
 	ld h, 0
 	ld bc, AbilityNames
@@ -4027,7 +4392,8 @@ PrintAbility:
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	hlcoord 3, 13
+	pop hl
+	;hlcoord 3, 13
 	jp PlaceString
 
 BufferAbility:
@@ -4052,6 +4418,7 @@ BufferAbility:
 PrintAbilityDescription:
 ; Print ability description for b
 ; we can't use PlaceString, because it would linebreak with an empty line inbetween
+	push hl
 	ld l, b
 	ld h, 0
 	ld bc, AbilityDescriptions
@@ -4060,7 +4427,7 @@ PrintAbilityDescription:
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	hlcoord 1, 15
+	pop hl
 	jp PlaceString
 
 INCLUDE "data/abilities.asm"

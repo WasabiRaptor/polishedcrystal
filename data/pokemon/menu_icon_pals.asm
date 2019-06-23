@@ -43,7 +43,7 @@ MenuMonIconColors::
 	iconpal PURPLE, GREEN ; MUK
 	iconpal PURPLE, TEAL ; NIDORAN_M
 	iconpal PURPLE, TEAL ; NIDORINO
-	iconpal TEAL, PURPLE ; NIDORINA
+	iconpal PURPLE, TEAL ; NIDOKING
 	iconpal PURPLE, TEAL ; NIDOKING
 	iconpal TEAL, PURPLE ; NIDOQUEEN
 	iconpal GRAY, GRAY ; SEVIPER      	; 2c

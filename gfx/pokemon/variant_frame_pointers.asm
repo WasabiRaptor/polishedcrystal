@@ -36,6 +36,14 @@ NidoranFramesPointers:
 	dw Nidoran_MFrames
 	dw Nidoran_FFrames
 
+NidorinoFramesPointers:
+	dw NidorinoFrames
+	dw NidorinaFrames
+
+NidokingFramesPointers:
+	dw NidokingFrames
+	dw NidoqueenFrames
+
 SandshrewFramesPointers:
 	dw SandshrewFrames
 	dw Sandshrew_AlolaFrames

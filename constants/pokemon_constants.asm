@@ -54,13 +54,13 @@
 	const DITTO   		; 22
 	const PURRLOIN   	; 23
 	const LIEPARD   	; 24
-	const GRIMER     	; 25
-	const MUK  			; 26
-	const NIDORAN 	; 27 alt forms alt palettes
-	const NIDORINO 		; 28
-	const NIDORINA      ; 29
-	const NIDOKING     	; 2a
-	const NIDOQUEEN     ; 2b
+	const GRIMER     	; 25 alt forms alt palettes
+	const MUK  			; 26 alt forms alt palettes
+	const NIDORAN 		; 27 alt forms alt palettes
+	const NIDORINO 		; 28 alt forms alt palettes
+	const NIDOKING      ; 29 alt forms alt palettes
+	const POKEMON_2A     	; 2a
+	const POKEMON_2B     ; 2b
 	const SEVIPER      	; 2c
 	const ZANGOOSE  	; 2d
 	const SENTRET      	; 2e
@@ -325,6 +325,9 @@ NUM_REGIONAL EQU const_value + -1 ; 2
 	const LYCANROC_MIDNIGHT
 	const LYCANROC_DAWN
 NUM_LYCANROC EQU const_value + -1 ; 4
+
+NIDORINA EQU NIDORINO
+NIDOQUEEN EQU NIDOKING
 
 	const_def 1
 	const DEFAULT_FORM

@@ -7,6 +7,8 @@ VariantPaletteTable:
     dbba GRIMER,    GrimerPalettes
     dbba MUK,       MukPalettes
     dbba NIDORAN,   NidoranPalettes
+    dbba NIDORINO,   NidorinoPalettes
+    dbba NIDOKING,   NidokingPalettes
     dbba SANDSHREW, SandshrewPalettes
     dbba SANDSLASH, SandslashPalettes
     ;dbba FLABEBE,   FlabebePalettes

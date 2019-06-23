@@ -147,13 +147,13 @@ EvolutionAnimation: ; 4e5e1
 ; 4e708
 
 .PlaceFrontpic: ; 4e708
-	call GetBaseData
+	call GetBaseData ;form is known
 	hlcoord 7, 2
 	jp PrepMonFrontpic
 ; 4e711
 
 .LoadFrontpic: ; 4e711
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, $1
 	ld [wBoxAlignment], a
 	ld de, VTiles2
