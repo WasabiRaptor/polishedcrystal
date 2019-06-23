@@ -19,8 +19,7 @@ PokemonPicPointers::
 	dba SylveonFrontpic
 	dba SylveonBackpic
 	add_pics Zorua
-	dba ZoroarkFrontpic
-	dba ZoroarkBackpic
+	add_pics Zoroark
 	dba RockruffFrontpic
 	dba RockruffBackpic
 	dba LycanrocFrontpic	;alt forms
