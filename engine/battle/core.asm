@@ -3536,9 +3536,9 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known ?
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known 
 	ld a, OTPARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon ;form is known
@@ -4858,9 +4858,9 @@ DrawEnemyHUD: ; 3e043
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known?
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
 	call PlaceString
@@ -6733,10 +6733,13 @@ LoadEnemyMon: ; 3e8eb
 	pop af
 	ldh [rSVBK], a
 
-	;get the temp form for this pokemon?
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-
+	;check if the map should have a certain pokemon form
+	ld a, [wMapGroup]
+	;cp GROUP_LAKE_OF_RAGE
+	;jr nz, .NoAlolanForms
+	ld a, ALOLAN
+	ld [wCurForm], a
+.NoAlolanForms
 	; Grab the BaseData for this species
 	call GetBaseData ;form is known
 
@@ -7011,9 +7014,14 @@ endc
 	ld a, [wBattleType]
 	cp BATTLETYPE_RED_GYARADOS
 	ld a, GYARADOS_RED_FORM
-	jr z, .red_form
-	ld a, 1 ; default form 1
-.red_form
+	jr z, .special_form
+
+	ld a, [wMapGroup]
+	;cp GROUP_LAKE_OF_RAGE
+	ld a, ALOLAN
+	jr z, .special_form
+	;ld a, 1 ; default form 1
+.special_form
 	add b
 	ld [hl], a
 

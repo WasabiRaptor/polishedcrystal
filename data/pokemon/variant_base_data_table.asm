@@ -4,6 +4,9 @@ VariantBaseDataTable:
     dbba PERSIAN,   PersianBaseData   
     dbba GRIMER,    GrimerBaseData
     dbba MUK,       MukBaseData
+    dbba NIDORAN,   NidoranBaseData
+    dbba NIDORINO,  NidorinoBaseData
+    dbba NIDOKING,  NidokingBaseData
     dbba ROTOM,     RotomBaseData
 	dbba MEOWSTIC,  MeowsticBaseData
     dbba SANDSHREW, SandshrewBaseData

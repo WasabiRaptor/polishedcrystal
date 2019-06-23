@@ -527,7 +527,9 @@ PokeBallEffect: ; e8a2
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	call GetBaseData
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 
 	ld de, wEnemyMonMaxHP
 	ld b, FALSE
@@ -1556,7 +1558,10 @@ RareCandy_StatBooster_GetParameters: ; eef5
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
-	call GetBaseData
+	ld a, MON_FORM
+	call GetPartyParamLocation
+	predef GetVariant
+	call GetBaseData ;frorm is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	jp GetNick
@@ -3281,7 +3286,10 @@ AbilityCap:
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurSpecies], a
-	call GetBaseData
+	ld a, MON_FORM
+	call GetPartyParamLocation
+	predef GetVariant
+	call GetBaseData ;frorm is known
 	ld a, [wBaseAbility1]
 	ld b, a
 	ld a, [wBaseAbility2]

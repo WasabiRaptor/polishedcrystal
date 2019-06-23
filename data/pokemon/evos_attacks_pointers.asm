@@ -41,7 +41,7 @@ EvosAttacksPointers::
 	dw MukEvosAttacks
 	dw Nidoran_MEvosAttacks
 	dw NidorinoEvosAttacks
-	dw NidorinaEvosAttacks
+	dw NidokingEvosAttacks
 	dw NidokingEvosAttacks
 	dw NidoqueenEvosAttacks
 	dw SeviperEvosAttacks

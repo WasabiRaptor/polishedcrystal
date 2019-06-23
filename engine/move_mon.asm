@@ -1579,7 +1579,10 @@ UpdatePkmnStats:
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurSpecies], a
-	call GetBaseData
+	ld a, MON_FORM
+	call GetPartyParamLocation
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld a, MON_LEVEL
 	call GetPartyParamLocation
 	ld a, [hl]

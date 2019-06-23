@@ -39,7 +39,7 @@ AnimationIdlePointers:
 	dw MukAnimationIdle
 	dw Nidoran_MAnimationIdle
 	dw NidorinoAnimationIdle
-	dw NidorinaAnimationIdle
+	dw NidokingAnimationIdle
 	dw NidokingAnimationIdle
 	dw NidoqueenAnimationIdle
 	dw SeviperAnimationIdle

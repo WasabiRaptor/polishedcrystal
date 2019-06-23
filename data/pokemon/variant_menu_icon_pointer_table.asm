@@ -7,6 +7,8 @@ VariantIconPointerTable:
     dbba ROTOM,     RotomIconPointers
 	dbba MEOWSTIC,  MeowsticIconPointers
     dbba NIDORAN,   NidoranIconPointers
+    dbba NIDORINO,   NidorinoIconPointers
+    dbba NIDOKING,   NidokingIconPointers
     dbba SANDSHREW, SandshrewIconPointers
     dbba SANDSLASH, SandslashIconPointers
     dbba SAWSBUCK,  SawsbuckIconPointers

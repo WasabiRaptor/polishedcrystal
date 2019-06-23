@@ -28,6 +28,14 @@ NidoranPokedexEntryPointers::
 	dw Nidoran_MPokedexEntry
 	dw Nidoran_FPokedexEntry
 
+NidorinoPokedexEntryPointers::
+	dw NidorinoPokedexEntry
+	dw NidorinaPokedexEntry
+
+NidokingPokedexEntryPointers::
+	dw NidokingPokedexEntry
+	dw NidoqueenPokedexEntry
+
 SandshrewPokedexEntryPointers::
 	dw SandshrewPokedexEntry
 	dw Sandshrew_AlolaPokedexEntry

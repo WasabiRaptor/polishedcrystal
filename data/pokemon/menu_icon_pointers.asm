@@ -40,7 +40,7 @@ IconPointers::
 	dw MukIcon
 	dw Nidoran_MIcon
 	dw NidorinoIcon
-	dw NidorinaIcon
+	dw NidokingIcon
 	dw NidokingIcon
 	dw NidoqueenIcon
 	dw SeviperIcon

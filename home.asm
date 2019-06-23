@@ -560,22 +560,29 @@ GetPokemonName:: ; 343b
 	ldh a, [hROMBank]
 	push af
 	push hl
-	ld a, BANK(PokemonNames)
-	rst Bankswitch
 
 ; Each name is ten characters
 	ld a, [wNamedObjectIndexBuffer]
-	dec a
-	ld d, 0
-	ld e, a
-	ld h, 0
+
+; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantNamePointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	rst Bankswitch
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	add hl, hl ; hl = hl * 4
-	add hl, hl ; hl = hl * 4
-	add hl, de ; hl = (hl*4) + de
-	add hl, hl ; hl = (5*hl) + (5*hl)
-	ld de, PokemonNames
-	add hl, de
+
+	ld a, [wNamedObjectIndexBuffer]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
+	dec a
+	ld bc, PKMN_NAME_LENGTH - 1
+	rst AddNTimes
 
 ; Terminator
 	ld de, wStringBuffer1
@@ -591,6 +598,8 @@ GetPokemonName:: ; 343b
 	rst Bankswitch
 	ret
 ; 3468
+
+INCLUDE "data/pokemon/variant_name_table.asm"
 
 GetCurItemName::
 ; Get item name from item in CurItem

@@ -92,6 +92,11 @@ dbbba: MACRO
 	dba \3
 ENDM
 
+add_pics: MACRO ; dba Frontpic, Backpic
+	dba \1Frontpic
+	dba \1Backpic
+	ENDM
+
 dbpixel: MACRO
 if _NARG >= 4
 	db \1 * 8 + \3, \2 * 8 + \4

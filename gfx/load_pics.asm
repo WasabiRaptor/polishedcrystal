@@ -74,7 +74,7 @@ _GetFrontpic: ; 510a5
 	ld a, BANK(sScratch)
 	call GetSRAMBank
 	push de
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, [wBasePicSize]
 	and $f
 	ld b, a

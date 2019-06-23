@@ -36,6 +36,14 @@ NidoranIconPointers::
 	dw Nidoran_MIcon
 	dw Nidoran_FIcon
 
+NidorinoIconPointers::
+	dw NidorinoIcon
+	dw NidorinaIcon
+
+NidokingIconPointers::
+	dw NidokingIcon
+	dw NidoqueenIcon
+
 SandshrewIconPointers::
 	dw SandshrewIcon
 	dw Sandshrew_AlolaIcon

@@ -36,6 +36,14 @@ NidoranAnimations:
 Nidoran_MAnimation: INCLUDE "gfx/pokemon/nidoran_m/anim.asm"
 Nidoran_FAnimation: INCLUDE "gfx/pokemon/nidoran_f/anim.asm"
 
+NidorinoAnimations:
+NidorinoAnimation: INCLUDE "gfx/pokemon/nidorino/anim.asm"
+NidorinaAnimation:      INCLUDE "gfx/pokemon/nidorina/anim.asm"
+
+NidokingAnimations:
+NidokingAnimation:     INCLUDE "gfx/pokemon/nidoking/anim.asm"
+NidoqueenAnimation:     INCLUDE "gfx/pokemon/nidoqueen/anim.asm"
+
 SandshrewAnimations:
 SandshrewAnimation: INCLUDE "gfx/pokemon/sandshrew/anim.asm"
 Sandshrew_AlolaAnimation: INCLUDE "gfx/pokemon/sandshrew_alola/anim.asm"

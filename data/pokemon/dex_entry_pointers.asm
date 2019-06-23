@@ -40,7 +40,7 @@
 	dw MukPokedexEntry
 	dw Nidoran_MPokedexEntry
 	dw NidorinoPokedexEntry
-	dw NidorinaPokedexEntry
+	dw NidokingPokedexEntry
 	dw NidokingPokedexEntry
 	dw NidoqueenPokedexEntry
 	dw SeviperPokedexEntry

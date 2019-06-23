@@ -18,6 +18,12 @@ Muk_AlolaPokedexEntry::  ;INCLUDE "data/pokemon/dex_entries/muk_alola.asm"
 Nidoran_MPokedexEntry:: INCLUDE "data/pokemon/dex_entries/nidoran_m.asm"
 Nidoran_FPokedexEntry:: INCLUDE "data/pokemon/dex_entries/nidoran_f.asm"
 
+NidorinoPokedexEntry:: INCLUDE "data/pokemon/dex_entries/nidorino.asm"
+NidorinaPokedexEntry::      INCLUDE "data/pokemon/dex_entries/nidorina.asm"
+
+NidokingPokedexEntry::     INCLUDE "data/pokemon/dex_entries/nidoking.asm"
+NidoqueenPokedexEntry::     INCLUDE "data/pokemon/dex_entries/nidoqueen.asm"
+
 Meowstic_MPokedexEntry::   INCLUDE "data/pokemon/dex_entries/meowstic.asm"
 Meowstic_FPokedexEntry::   ;INCLUDE "data/pokemon/dex_entries/meowstic_f.asm"
 

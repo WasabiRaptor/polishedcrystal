@@ -1254,7 +1254,7 @@ DisplayDexEntry: ; 4424d
 .statpage
 	push bc
 
-	call GetBaseData
+	call GetBaseData ;form is known
 	
 	lb bc, 9, 12
 	hlcoord 8, 1
@@ -3905,7 +3905,9 @@ ListMoves: ; 50d6f
 CalcLevel: ; 50e1b
 	ld a, [wTempMonSpecies]
 	ld [wCurSpecies], a
-	call GetBaseData
+	ld hl, wTempMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld d, 1
 .next_level
 	inc d
@@ -4361,7 +4363,7 @@ INCLUDE "data/pokemon/names.asm"
 SECTION "Variant Base Data", ROMX
 
 INCLUDE "data/pokemon/variant_base_stats.asm"
-
+INCLUDE "data/pokemon/variant_names.asm"
 
 SECTION "Code 14", ROMX
 

@@ -36,6 +36,14 @@ NidoranAnimationIdlePointers:
 	dw Nidoran_MAnimationIdle
 	dw Nidoran_FAnimationIdle
 
+NidorinoAnimationIdlePointers:
+	dw NidorinoAnimationIdle
+	dw NidorinaAnimationIdle
+
+NidokingAnimationIdlePointers:
+	dw NidokingAnimationIdle
+	dw NidoqueenAnimationIdle
+	
 SandshrewAnimationIdlePointers:
 	dw SandshrewAnimationIdle
 	dw Sandshrew_AlolaAnimationIdle

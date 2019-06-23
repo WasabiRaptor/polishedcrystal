@@ -1686,7 +1686,7 @@ Pokexex_PrintNumberAndTypes:
 ;get base data for the current species
 	ld a, [wd265]
 	ld [wCurSpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, [wBaseType1]
 	call Pokexex_PrintType
 	ld a, [wBaseType1]
@@ -2094,7 +2094,7 @@ Pokedex_SearchForMons: ; 41086
 	jr z, .next_mon
 	push hl
 	push de
-	call GetBaseData
+	call GetBaseData ;form is known
 	pop de
 	pop hl
 	ld a, [wDexConvertedMonType]
@@ -2474,7 +2474,7 @@ Pokedex_LoadSelectedMonTiles: ; 4143b
 	ld [wCurForm], a
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld de, VTiles2
 	predef GetFrontpic
 	ret
@@ -2553,7 +2553,7 @@ Pokedex_LoadUnownFrontpicTiles: ; 41a58 (10:5a58)
 	ld [wCurForm], a
 	ld a, UNOWN
 	ld [wCurPartySpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	pop af
@@ -2623,7 +2623,7 @@ NewPokedexEntry: ; fb877
 	farcall DisplayDexEntry
 	call EnableLCD
 	call ApplyTilemapInVBlank
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld de, VTiles2
 	predef GetFrontpic
 	ld a, CGB_POKEDEX

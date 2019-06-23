@@ -36,6 +36,14 @@ NidoranBitmasksPointers:
 	dw Nidoran_MBitmasks
 	dw Nidoran_FBitmasks
 
+NidorinoBitmasksPointers:
+	dw NidorinoBitmasks
+	dw NidorinaBitmasks
+
+NidokingBitmasksPointers:
+	dw NidokingBitmasks
+	dw NidoqueenBitmasks
+	
 SandshrewBitmasksPointers:
 	dw SandshrewBitmasks
 	dw Sandshrew_AlolaBitmasks
