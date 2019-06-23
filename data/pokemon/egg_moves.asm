@@ -6,6 +6,7 @@ SECTION "Egg Moves", ROMX
 
 INCLUDE "data/pokemon/egg_move_pointers.asm"
 
+INCLUDE "data/pokemon/variant_egg_move_pointers.asm"
 
 EggMoves::
 
@@ -83,8 +84,15 @@ SandshrewEggMoves:
 	db COUNTER
 	db NIGHT_SLASH
 	db $ff
+Sandshrew_AlolaEggMoves:
+	db METAL_CLAW
+	db RAPID_SPIN
+	db SAFEGUARD
+	db COUNTER
+	db NIGHT_SLASH
+	db $ff
 
-NidoranFEggMoves:
+Nidoran_FEggMoves:
 	db CHARM
 	db DISABLE
 	db FOCUS_ENERGY
@@ -92,8 +100,7 @@ NidoranFEggMoves:
 	db SUPERSONIC ; requires Lickitung
 	db TAKE_DOWN
 	db $ff
-
-NidoranMEggMoves:
+Nidoran_MEggMoves:
 	db AMNESIA
 	db CONFUSION
 	db DISABLE
@@ -115,6 +122,16 @@ ClefairyEggMoves:
 VulpixEggMoves:
 	db DISABLE
 	db FLARE_BLITZ
+	db HYPNOSIS
+	db FEINT_ATTACK
+	db EXTRASENSORY
+	db CHARM
+	db ENERGY_BALL
+	db ROAR
+	db $ff
+Vulpix_AlolaEggMoves:
+	db DISABLE
+	;db FLARE_BLITZ
 	db HYPNOSIS
 	db FEINT_ATTACK
 	db EXTRASENSORY
@@ -175,6 +192,13 @@ DiglettEggMoves:
 	db $ff
 
 MeowthEggMoves:
+	db CHARM
+	db HYPNOSIS
+	db AMNESIA
+	db LEER
+	db NIGHT_SLASH
+	db $ff
+Meowth_AlolaEggMoves:
 	db CHARM
 	db HYPNOSIS
 	db AMNESIA
@@ -315,6 +339,12 @@ SeelEggMoves:
 	db $ff
 
 GrimerEggMoves:
+	db HAZE
+	db LICK
+	db MEAN_LOOK
+	db SCARY_FACE
+	db $ff
+Grimer_AlolaEggMoves:
 	db HAZE
 	db LICK
 	db MEAN_LOOK
@@ -688,6 +718,16 @@ WobbuffetEggMoves:
 	db $ff
 
 GirafarigEggMoves:
+	db DOUBLE_KICK
+	db FORESIGHT
+	db FUTURE_SIGHT
+	db MEAN_LOOK
+	db MIRROR_COAT
+	db TAKE_DOWN
+	db AMNESIA
+	db CALM_MIND
+	db $ff
+Girafarig_BetaEggMoves:
 	db DOUBLE_KICK
 	db FORESIGHT
 	db FUTURE_SIGHT
