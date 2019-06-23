@@ -753,6 +753,9 @@ FarString::
 	rst Bankswitch
 	call PlaceString
 
+	inc de
+	ld a, [de]
+	ld c, a
 	pop af
 	rst Bankswitch
 	ret

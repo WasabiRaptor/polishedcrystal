@@ -71,8 +71,6 @@ sBackupMapData::     ds wMapDataEnd - wMapData
 sBackupPokemonData:: ds wPokemonDataEnd - wPokemonData
 sBackupGameDataEnd::
 
-	ds 394
-
 sBackupChecksum:: ds 2
 
 sBackupCheckValue2:: ds 1 ; loaded with 127, used to check save corruption
@@ -89,8 +87,6 @@ sPlayerData::  ds wPlayerDataEnd - wPlayerData
 sMapData::     ds wMapDataEnd - wMapData
 sPokemonData:: ds wPokemonDataEnd - wPokemonData
 sGameDataEnd::
-
-	ds 394
 
 sChecksum:: ds 2
 
@@ -226,3 +222,43 @@ SECTION "Boxes 8-14", SRAM
 	box sBox12
 	box sBox13
 	box sBox14
+
+SECTION "Total Pokemon Encountered", SRAM
+
+sTotalEncounteredPokemonSpecies:: ds NUM_POKEMON * 2
+sTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
+sTotalEncounters:: ds 2
+sTotalDefeated:: ds 2
+sTotalEncountersEnd::
+
+SECTION "Quick Save", SRAM
+
+sQuickSaveOptions:: ds wOptionsEnd - wOptions1
+
+sQuickSaveCheckValue1:: ds 1 ; loaded with 99, used to check save corruption
+
+sQuickSaveGameData::
+sQuickSavePlayerData::  ds wPlayerDataEnd - wPlayerData
+sQuickSaveMapData::     ds wMapDataEnd - wMapData
+sQuickSavePokemonData:: ds wPokemonDataEnd - wPokemonData
+sQuickSaveGameDataEnd::
+
+sQuickSaveChecksum:: ds 2
+
+sQuickSaveCheckValue2:: ds 1 ; loaded with 127, used to check save corruption
+
+SECTION "Backup Quick Save", SRAM
+
+sQuickSaveBackupOptions:: ds wOptionsEnd - wOptions1
+
+sQuickSaveBackupCheckValue1:: ds 1 ; loaded with 99, used to check save corruption
+
+sQuickSaveBackupGameData::
+sQuickSaveBackupPlayerData::  ds wPlayerDataEnd - wPlayerData
+sQuickSaveBackupMapData::     ds wMapDataEnd - wMapData
+sQuickSaveBackupPokemonData:: ds wPokemonDataEnd - wPokemonData
+sQuickSaveBackupGameDataEnd::
+
+sQuickSaveBackupChecksum:: ds 2
+
+sQuickSaveBackupCheckValue2:: ds 1 ; loaded with 127, used to check save corruption

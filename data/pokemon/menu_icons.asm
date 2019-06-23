@@ -36,10 +36,6 @@ ConkeldurrIcon:
 DittoIcon:        INCBIN "gfx/icons/ditto.2bpp"
 PurrloinIcon:
 LiepardIcon:
-NidorinoIcon:     INCBIN "gfx/icons/nidorino.2bpp"
-NidorinaIcon:     INCBIN "gfx/icons/nidorina.2bpp"
-NidokingIcon:     INCBIN "gfx/icons/nidoking.2bpp"
-NidoqueenIcon:    INCBIN "gfx/icons/nidoqueen.2bpp"
 SeviperIcon:
 ZangooseIcon:
 SentretIcon:      INCBIN "gfx/icons/sentret.2bpp"
@@ -278,6 +274,12 @@ Meowstic_FIcon:
 
 Nidoran_MIcon:    INCBIN "gfx/icons/nidoran_m.2bpp"
 Nidoran_FIcon:    INCBIN "gfx/icons/nidoran_f.2bpp"
+
+NidorinoIcon:     INCBIN "gfx/icons/nidorino.2bpp"
+NidorinaIcon:     INCBIN "gfx/icons/nidorina.2bpp"
+
+NidokingIcon:     INCBIN "gfx/icons/nidoking.2bpp"
+NidoqueenIcon:    INCBIN "gfx/icons/nidoqueen.2bpp"
 
 Sandshrew_AlolaIcon:
 SandshrewIcon:    INCBIN "gfx/icons/sandshrew.2bpp"

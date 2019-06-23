@@ -78,10 +78,10 @@ PokemonPicPointers::
 	dba MukBackpic			;alt forms
 	dba Nidoran_MFrontpic	;alt forms
 	dba Nidoran_MBackpic	;alt forms
-	dba NidorinoFrontpic
-	dba NidorinoBackpic
-	dba NidorinaFrontpic
-	dba NidorinaBackpic
+	dba NidorinoFrontpic	;alt forms
+	dba NidorinoBackpic		;alt forms
+	dba NidokingFrontpic	;alt forms
+	dba NidokingBackpic		;alt forms
 	dba NidokingFrontpic
 	dba NidokingBackpic
 	dba NidoqueenFrontpic

@@ -163,6 +163,16 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 	ret z
 
 	call UpdateTime
+	ld hl, wGameSaveTime
+	ld a, [hli]
+	ld [wCurDay], a
+	ld a, [hli]
+	ldh [hHours], a
+	ld a, [hli]
+	ldh [hMinutes], a
+	ld a, [hli]
+	ldh [hSeconds], a
+
 	call GetWeekday
 	ld b, a
 	decoord 1, 15

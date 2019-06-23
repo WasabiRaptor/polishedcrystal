@@ -32,6 +32,18 @@ MukBaseData::
 INCLUDE "data/pokemon/base_stats/muk.asm"
 INCLUDE "data/pokemon/base_stats/muk_alola.asm"
 
+NidoranBaseData::
+INCLUDE "data/pokemon/base_stats/nidoran_m.asm"
+INCLUDE "data/pokemon/base_stats/nidoran_f.asm"
+
+NidorinoBaseData::
+INCLUDE "data/pokemon/base_stats/nidorino.asm"
+INCLUDE "data/pokemon/base_stats/nidorina.asm"
+
+NidokingBaseData::
+INCLUDE "data/pokemon/base_stats/nidoking.asm"
+INCLUDE "data/pokemon/base_stats/nidoqueen.asm"
+
 SandshrewBaseData::
 INCLUDE "data/pokemon/base_stats/sandshrew.asm"
 INCLUDE "data/pokemon/base_stats/sandshrew_alola.asm"

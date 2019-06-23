@@ -532,7 +532,6 @@ NidorinoEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-
 NidorinaEvosAttacks:
 	db EVOLVE_LEVEL, 22, NIDOKING
 	db 0 ; no more evolutions
@@ -544,7 +543,6 @@ NidokingEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-
 NidoqueenEvosAttacks:
 	db EVOLVE_LEVEL, 21, SEVIPER
 	db 0 ; no more evolutions

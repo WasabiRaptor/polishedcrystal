@@ -7,6 +7,8 @@ VariantSpeciesTable:
 	db ROTOM
 	db MEOWSTIC
     db NIDORAN
+    db NIDORINO
+    db NIDOKING
     db SANDSHREW
     db SANDSLASH
     db SAWSBUCK
@@ -31,6 +33,8 @@ VariantAnimPointerTable:
     dbbww ROTOM,        BANK(RotomAnimations), RotomAnimationPointers, RotomAnimationIdlePointers
     dbbww MEOWSTIC,     BANK(MeowsticAnimations), MeowsticAnimationPointers, MeowsticAnimationIdlePointers
     dbbww NIDORAN,      BANK(NidoranAnimations), NidoranAnimationPointers, NidoranAnimationIdlePointers
+    dbbww NIDORINO,     BANK(NidorinoAnimations), NidorinoAnimationPointers, NidorinoAnimationIdlePointers
+    dbbww NIDOKING,     BANK(NidokingAnimations), NidokingAnimationPointers, NidokingAnimationIdlePointers
     dbbww SANDSHREW,    BANK(SandshrewAnimations), SandshrewAnimationPointers, SandshrewAnimationIdlePointers
     dbbww SANDSLASH,    BANK(SandslashAnimations), SandslashAnimationPointers, SandslashAnimationIdlePointers
     dbbww SAWSBUCK,     BANK(SawsbuckAnimations), SawsbuckAnimationPointers, SawsbuckAnimationIdlePointers
@@ -55,6 +59,8 @@ VariantFramesPointerTable:
     dbbba ROTOM,        BANK(RotomFrames), RotomFramesPointers
     dbbba MEOWSTIC,     BANK(Meowstic_MFrames), MeowsticFramesPointers
     dbbba NIDORAN,      BANK(Nidoran_MFrames), NidoranFramesPointers
+    dbbba NIDORINO,     BANK(NidorinoFrames), NidorinoFramesPointers
+    dbbba NIDOKING,     BANK(NidokingFrames), NidokingFramesPointers
     dbbba SANDSHREW,    BANK(SandshrewFrames), SandshrewFramesPointers
     dbbba SANDSLASH,    BANK(SandslashFrames), SandslashFramesPointers
     dbbba SAWSBUCK,     BANK(SawsbuckFrames), SawsbuckFramesPointers
@@ -79,6 +85,8 @@ VariantBitmasksPointerTable:
     dbba ROTOM,         RotomBitmasksPointers
     dbba MEOWSTIC,      MeowsticBitmasksPointers
     dbba NIDORAN,       NidoranBitmasksPointers
+    dbba NIDORAN,       NidoranBitmasksPointers
+    dbba NIDORAN,       NidokingBitmasksPointers
     dbba SANDSHREW,     SandshrewBitmasksPointers
     dbba SANDSLASH,     SandslashBitmasksPointers
     dbba SAWSBUCK,      SawsbuckBitmasksPointers
