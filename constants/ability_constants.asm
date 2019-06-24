@@ -135,6 +135,8 @@
 	const REFRIGERATE
 	const SLUSH_RUSH
 	const STANCE_CHANGE
+	const POWER_OF_ALCHEMY
+	const RECIEVER
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
@@ -156,22 +158,18 @@ NUM_ABILITIES EQU const_value
 	const BULLETPROOF
 	const ROUGH_SKIN
 	const IRON_BARBS
-	const TELEPATHY
 	const CONTRARY
-	const PURE_POWER
 	const STORM_DRAIN
 	const WATER_BUBBLE
 	const GOOEY
 	const BERSERK
 	const FLUFFY
-	const RECIEVER
 	const FRIEND_GUARD
 	const SYMBIOSIS
 	const FLOWER_VEIL
 	const SWEET_VEIL
 	const HONEY_GATHER
 	const TOXIC_BOOST
-	const POWER_OF_ALCHEMY
 	const TOUGH_CLAWS
 
 ABILITY_1      EQU %00100000

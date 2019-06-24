@@ -134,6 +134,8 @@ AbilityNames:
 	dw Refrigerate
 	dw SlushRush
 	dw StanceChange
+	dw PowerOfAlchemy
+	dw Reciever
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -270,7 +272,8 @@ TanglingHair:  db "T","a","n","g","l","i","n","g"," ","H","a","i","r","@"
 Refrigerate:   db "R","e","f","r","i","g","e","r","a","t","e","@"
 SlushRush:     db "S","l","u","s","h"," ","R","u","s","h","@"
 StanceChange:  db "S","t","a","n","c","e"," ","C","h","a","n","g","e","@"
-
+PowerOfAlchemy:db "P","o","w","e","r"," ","O","f"," ","A","l","c","h","e","m","y","@"
+Reciever:	   db "R","e","c","i","e","v","e","r","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -408,6 +411,8 @@ AbilityDescriptions:
 	dw RefrigerateDescription
 	dw SlushRushDescription
 	dw StanceChangeDescription
+	dw PowerOfAlchemyDescription
+	dw RecieverDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -939,3 +944,8 @@ SlushRushDescription:
 StanceChangeDescription:
 	db    "Changes stance"
 	next1 "for attacking.@"
+
+RecieverDescription:
+PowerOfAlchemyDescription:
+	db    "Recieves final"
+	next1 "ally's ability.@"

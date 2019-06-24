@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/medicham/front.dimensions"
-	db PURE_POWER, PURE_POWER	; abilities
-	db TELEPATHY	; hidden ability
+	db HUGE_POWER, HUGE_POWER	; abilities
+	db INNER_FOCUS	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups 
 

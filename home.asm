@@ -1354,6 +1354,20 @@ Print8BitNumRightAlign:: ; 3842
 	jp PrintNum
 ; 384d
 
+GetRelevantBaseData::
+;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantBaseDataTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
 INCLUDE "data/pokemon/variant_base_data_table.asm"
 
 GetBaseData:: ; 3856
@@ -1368,17 +1382,7 @@ GetBaseData:: ; 3856
 	cp EGG
 	jr z, .egg
 
-;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
-; returns c for variants, nc for normal species
-	ld hl, VariantBaseDataTable
-	ld de, 4
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetRelevantBaseData
 	push hl
 
 	ld a, [wCurForm]
@@ -1461,20 +1465,26 @@ GetAbility::
 ; 'c' contains the target species
 ; returns ability in b
 ; preserves curspecies and base data
-	anonbankpush BaseData
-
-.Function:
-	ld a, [wInitialOptions]
-	and ABILITIES_OPTMASK
-	jr z, .got_ability
-
+	push de
+	ldh a, [hROMBank]
+	push af
 	push hl
 	push bc
-	ld hl, BASEMON_ABILITIES
-	ld b, 0
-	ld a, BASEMON_STRUCT_LENGTH
-	dec c
+
+	ld a, c
+	call GetRelevantBaseData
+	ld a, c
+	jp nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
+	dec a
+	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
+	ld a, d
+	rst Bankswitch
+
+	ld bc, wBaseAbility1 - wCurBaseData
+	add hl, bc
 	pop bc
 	push bc
 	ld a, b
@@ -1491,6 +1501,9 @@ GetAbility::
 	pop hl
 .got_ability
 	ld b, a
+	pop af
+	rst Bankswitch
+	pop de
 	ret
 
 GetCurNick:: ; 389c

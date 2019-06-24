@@ -30,6 +30,9 @@ BattleEntryAbilities:
 	dbw FOREWARN, ForewarnAbility
 	dbw FRISK, FriskAbility
 	dbw UNNERVE, UnnerveAbility
+	dbw POWER_OF_ALCHEMY, RecieverAbility
+	dbw RECIEVER, RecieverAbility
+
 	; fallthrough
 StatusHealAbilities:
 ; Status immunity abilities that autoproc if the user gets the status or the ability
@@ -477,6 +480,11 @@ SynchronizeAbility:
 .is_brn
 	farcall BattleCommand_burn
 	jp EnableAnimations
+
+RecieverAbility:
+
+	ret
+
 
 RunPreMoveAbilities:
 	ld a, BATTLE_VARS_ABILITY

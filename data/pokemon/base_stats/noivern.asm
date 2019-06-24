@@ -10,7 +10,7 @@
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/noivern/front.dimensions"
 	db FRISK, INFILTRATOR	; abilities
-	db TELEPATHY	; hidden ability
+	db SOUNDPROOF	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FLYING, EGG_FLYING ; egg groups
 
