@@ -7,7 +7,7 @@
 	db 235 ; catch rate
 	db 55 ; base exp
 	db NO_ITEM, NO_ITEM ; items
-	dn ALL_MALE, 3 ; gender, step cycles to hatch
+	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/nidoran_m/front.dimensions"
 	db 0, 0	; abilities
 	db 0	; hidden ability
