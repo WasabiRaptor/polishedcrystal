@@ -9,8 +9,9 @@
 	db NO_ITEM, BERSERK_GENE ; items
 	dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/mewtwo/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db PRESSURE ; ability 1
+	db INSOMNIA ; ability 2
+	db UNNERVE ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

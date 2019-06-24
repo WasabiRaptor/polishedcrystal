@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/carbink/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db CLEAR_BODY, CLEAR_BODY	; abilities
+	db STURDY	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_FAIRY, EGG_MINERAL ; egg groups
 

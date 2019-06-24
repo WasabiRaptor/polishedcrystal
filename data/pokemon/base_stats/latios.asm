@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn ALL_MALE, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/latios/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db LEVITATE, LEVITATE	; abilities
+	db LEVITATE	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

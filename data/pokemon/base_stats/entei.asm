@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/entei/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db PRESSURE, INNER_FOCUS	; abilities
+	db FLASH_FIRE	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

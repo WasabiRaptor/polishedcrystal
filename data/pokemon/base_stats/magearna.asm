@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/magearna/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db SOUL_HEART, SOUL_HEART	; abilities
+	db SOUL_HEART	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

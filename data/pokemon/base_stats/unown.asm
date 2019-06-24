@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 7 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/unown_a/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db LEVITATE ; ability 1
+	db LEVITATE ; ability 2
+	db LEVITATE ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

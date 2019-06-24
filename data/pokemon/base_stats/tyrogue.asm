@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn ALL_MALE, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/tyrogue/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db GUTS ; ability 1
+	db STEADFAST ; ability 2
+	db VITAL_SPIRIT ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

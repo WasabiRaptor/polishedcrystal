@@ -9,8 +9,8 @@
 	db ORAN_BERRY, SITRUS_BERRY ; items
 	dn FEMALE_50, 2 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/furret/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db RUN_AWAY, KEEN_EYE	; abilities
+	db FRISK	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

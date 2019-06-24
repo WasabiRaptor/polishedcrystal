@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/milotic/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db MARVEL_SCALE, COMPETITIVE	; abilities
+	db CUTE_CHARM	; hidden ability
 	db GROWTH_ERRATIC ; growth rate
 	dn EGG_DRAGON, EGG_WATER_1 ; egg groups 
 

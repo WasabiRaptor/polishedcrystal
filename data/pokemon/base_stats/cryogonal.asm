@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/cryogonal/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db LEVITATE, LEVITATE	; abilities
+	db LEVITATE	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
 

@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 2 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/talonflame/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db FLAME_BODY, FLAME_BODY	; abilities
+	db GALE_WINGS	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_FLYING, EGG_FLYING ; egg groups
 

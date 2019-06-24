@@ -9,8 +9,9 @@
 	db NO_ITEM, SPELL_TAG ; items
 	dn FEMALE_50, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/misdreavus/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db LEVITATE ; ability 1
+	db LEVITATE ; ability 2
+	db LEVITATE ; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
 
