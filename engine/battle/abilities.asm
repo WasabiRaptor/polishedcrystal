@@ -482,7 +482,61 @@ SynchronizeAbility:
 	jp EnableAnimations
 
 RecieverAbility:
+	ldh a, [hBattleTurn]
+	and a
+	ld bc, wPartyCount
+	ld hl, wPartyMon1Species
+	jr z, .got_turn
+	ld bc, wOTPartyCount
+	ld hl, wOTPartyMon1Species
+.got_turn
+	ld a, [bc]
+	cp 1 ;make sure theres more than one mon in the party
+	ret z
+	dec a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [wCurForm]
+	push af
+	ld a, [hl] ;species of last mon in party
+	ld c, a
+	push bc
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	predef GetVariant
+	ld bc, wPartyMon1Ability - wPartyMon1Form
+	add hl, bc
+	pop bc
+	ld a, [hl]
+	ld b, a
+	call GetAbility
+	ld a, b
+	push af
+	cp TRACE
+	jr z, .trace_failure
+	cp IMPOSTER
+	jr z, .trace_failure
+	cp STANCE_CHANGE
+	jr z, .trace_failure
+	cp RECIEVER
+	jr z, .trace_failure
+	cp POWER_OF_ALCHEMY
+	jr z, .trace_failure
+	ld b, a
+	farcall BufferAbility
+	ld a, BATTLE_VARS_ABILITY
+	call GetBattleVarAddr
+	pop af
+	ld [hl], a
+	ld hl, RecieverActivationText
+	call StdBattleTextBox
+	pop af
+	ld [wCurForm], a
+	jp RunActivationAbilitiesInner
 
+.trace_failure
+	pop af
+	ld [wCurForm], a
 	ret
 
 

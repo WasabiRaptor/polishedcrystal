@@ -20,6 +20,9 @@ Town1_MapScriptHeader:
 
 MysteryDungeonEnterScript:
 	opentext
+	givepoke VULPIX, 5, NO_ITEM, MALE | ALOLAN, LUXURY_BALL, SHINY_MASK | HIDDEN_ABILITY, $2345, AlolaName, IndigoOT
+	givepoke PORYGON, 5, NO_ITEM, MALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke GRIMER, 5, NO_ITEM, MALE | ALOLAN, LUXURY_BALL, SHINY_MASK | HIDDEN_ABILITY, $2345, AlolaName, IndigoOT
 	givepoke AEGISLASH, 5, NO_ITEM, MALE | SHIELD_AEGISLASH, LUXURY_BALL;, %10000000, $2345, AlolaName, IndigoOT
 	closetext
 	end

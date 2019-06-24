@@ -1467,6 +1467,14 @@ TraceActivationText:
 	text "!"
 	prompt
 
+RecieverActivationText:
+	text "<USER>"
+	line "recieved"
+	cont "@"
+	text_from_ram wStringBuffer1
+	text "!"
+	prompt
+
 TraceFailureText:
 	text "<USER>"
 	line "failed to trace"
