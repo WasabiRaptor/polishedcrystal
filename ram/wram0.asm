@@ -390,8 +390,8 @@ wPlayerSubStatus2::
 ; 5 lock-on
 ; 4 encore
 ; 3 transformed
-; 2
-; 1
+; 2 magic bounce?
+; 1 disguise / illusion broken
 ; 0 toxic
 	ds 1
 wPlayerSubStatus3::
