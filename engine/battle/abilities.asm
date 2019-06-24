@@ -122,6 +122,8 @@ TraceAbility:
 	jr z, .trace_failure
 	cp IMPOSTER
 	jr z, .trace_failure
+	cp STANCE_CHANGE
+	jr z, .trace_failure
 	push af
 	ld b, a
 	farcall BufferAbility
@@ -256,7 +258,7 @@ AnticipationAbility:
 ; Anticipation considers special types (just Hidden Power is applicable here) as
 ; whatever type they are listed as (e.g. HP is Normal). It will also (as of 5gen)
 ; treat Counter/Mirror Coat (and Metal Burst) as attacking moves of their type.
-; It also ignores Pixilate.
+; It also ignores Pixilate, and Refrigerate.
 	ldh a, [hBattleTurn]
 	and a
 	ld hl, wEnemyMonMoves
@@ -475,6 +477,85 @@ SynchronizeAbility:
 .is_brn
 	farcall BattleCommand_burn
 	jp EnableAnimations
+
+RunPreMoveAbilities:
+	ld a, BATTLE_VARS_ABILITY
+	call GetBattleVar
+	cp STANCE_CHANGE
+	ret nz
+StanceChangeAbility:
+	ldh a, [hBattleTurn]
+	and a
+	push af
+	ld hl, wBattleMonForm
+	jr z, .got_form
+	ld hl, wEnemyMonForm
+.got_form
+
+	ld a, BATTLE_VARS_MOVE_CATEGORY
+	call GetBattleVar
+	cp STATUS
+	jr z, .status
+
+	predef GetVariant
+	cp BLADE_AEGISLASH
+	jr z, .popafandret
+	ld a, BLADE_AEGISLASH
+	ld [wCurForm], a
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or BLADE_AEGISLASH
+	ld [hl], a
+	jr .stanceChanged
+
+.popafandret
+	pop af
+	ret
+
+.status
+	predef GetVariant
+	cp SHIELD_AEGISLASH
+	jr z, .popafandret
+	ld a, SHIELD_AEGISLASH
+	ld [wCurForm], a
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or SHIELD_AEGISLASH
+	ld [hl], a
+	;fallthrough
+
+.stanceChanged
+	call GetBaseData
+	pop af
+	push af
+	ld a, [wPlayerMinimized]
+	jr z, .got_byte
+	ld a, [wEnemyMinimized]
+.got_byte
+	and a
+	jr nz, .mimic_anims
+	pop af
+	jr z, .player_backpic
+	farcall GetMonFrontpic
+	jr .after_anim
+
+.player_backpic
+	farcall GetMonBackpic
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+	jr .after_anim
+
+.mimic_anims
+	farcall BattleCommand_movedelay
+	farcall BattleCommand_raisesubnoanim
+.after_anim
+	ld a, BATTLE_VARS_SUBSTATUS4
+	call GetBattleVarAddr
+	bit SUBSTATUS_SUBSTITUTE, [hl]
+	ld a, SUBSTITUTE
+	call nz, LoadAnim
+	ld hl, StanceChangedText
+	jp StdBattleTextBox
 
 RunFaintAbilities:
 ; abilities that run after an attack faints an enemy
@@ -967,6 +1048,8 @@ ApplySpeedAbilities:
 	jr z, .clorophyll
 	cp SAND_RUSH
 	jr z, .sand_rush
+	cp SLUSH_RUSH
+	jr z, .slush_rush
 	cp QUICK_FEET
 	ret nz
 	ld a, BATTLE_VARS_STATUS
@@ -982,6 +1065,9 @@ ApplySpeedAbilities:
 	jr .weather_ability
 .sand_rush
 	ld h, WEATHER_SANDSTORM
+	jr .weather_ability
+.slush_rush
+	ld h, WEATHER_HAIL
 .weather_ability
 	call GetWeatherAfterCloudNine
 	cp h

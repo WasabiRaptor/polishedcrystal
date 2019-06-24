@@ -1164,6 +1164,11 @@ TransformedText: ; 0x81499
 	prompt
 ; 0x814b4
 
+StanceChangedText: ; 0x81499
+	text "<USER>'s"
+	line "stance changed!"
+	prompt
+
 LightScreenEffectText: ; 0x814b4
 	text "<USER>'s"
 	line "Spcl.Def rose!"
@@ -2024,3 +2029,4 @@ LawrenceFinalPkmnText:
 ReiFinalPkmnText:
 	text "I'm not done yet."
 	prompt
+

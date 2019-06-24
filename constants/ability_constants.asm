@@ -132,11 +132,14 @@
 	const COMPETITIVE
 	const PIXILATE
 	const TANGLING_HAIR
+	const REFRIGERATE
+	const SLUSH_RUSH
+	const STANCE_CHANGE
+
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
 	const POWER_CONSTRUCT
 	const AURA_BREAK
-	const STANCE_CHANGE
 	const DISGUISE
 	const ILLUSION
 	const SOUL_HEART
@@ -145,7 +148,6 @@ NUM_ABILITIES EQU const_value
 	const HEAVY_METAL
 	const HEAT_PROOF
 	const KLUTZ	
-	const REFRIGERATE
 	const DEFEATIST
 	const TRUANT
 	const WHITE_SMOKE
@@ -169,7 +171,6 @@ NUM_ABILITIES EQU const_value
 	const SWEET_VEIL
 	const HONEY_GATHER
 	const TOXIC_BOOST
-	const SLUSH_RUSH
 	const POWER_OF_ALCHEMY
 	const TOUGH_CLAWS
 
