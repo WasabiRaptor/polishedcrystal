@@ -694,6 +694,10 @@ RunHitAbilities:
 	jp z, RattledAbility
 	cp WEAK_ARMOR
 	jp z, WeakArmorAbility
+	cp ILLUSION
+	jp z, BreakDisguise
+	cp DISGUISE
+	jp z, BreakDisguise
 	ret
 
 RunContactAbilities:
@@ -731,6 +735,27 @@ RunContactAbilities:
 	jp z, StaticAbility
 	cp CUTE_CHARM
 	jp z, CuteCharmAbility
+	ret
+
+BreakDisguise:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVarAddr
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	ret nz
+	set SUBSTATUS_DISGUISE_BROKEN, [hl]
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .player_backpic
+	farcall GetMonFrontpic
+	jr .disguise_broke
+
+.player_backpic
+	farcall GetMonBackpic
+.disguise_broke
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+	ld hl, DisguiseBrokeText
+	call StdBattleTextBox
 	ret
 
 CursedBodyAbility:

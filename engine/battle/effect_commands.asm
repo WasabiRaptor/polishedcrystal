@@ -2290,10 +2290,6 @@ BattleCommand_hittargetnosub: ; 34f60
 	and a
 	jp nz, BattleCommand_movedelay
 
-	ld a, BATTLE_VARS_SUBSTATUS2_OPP
-	call GetBattleVar
-	set SUBSTATUS_DISGUISE_BROKEN, [hl]
-
 	ldh a, [hBattleTurn]
 	and a
 	ld de, wPlayerRolloutCount

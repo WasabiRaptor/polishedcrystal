@@ -8822,6 +8822,20 @@ GetFrontpic_DoAnim: ; 3f4b4
 	ret
 ; 3f4c1
 
+GetIllusion:
+	dec a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [hl] ;species of last mon in party
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	predef GetVariant
+	dec hl ;get personality into bc for getting the palette
+	ld b, h
+	ld c, l
+	ret
 
 StartBattle: ; 3f4c1
 ; This check prevents you from entering a battle without any Pokemon.

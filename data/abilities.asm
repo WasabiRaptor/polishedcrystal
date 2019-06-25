@@ -136,6 +136,7 @@ AbilityNames:
 	dw StanceChange
 	dw PowerOfAlchemy
 	dw Reciever
+	dw Illusion
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -274,6 +275,7 @@ SlushRush:     db "S","l","u","s","h"," ","R","u","s","h","@"
 StanceChange:  db "S","t","a","n","c","e"," ","C","h","a","n","g","e","@"
 PowerOfAlchemy:db "P","o","w","e","r"," ","O","f"," ","A","l","c","h","e","m","y","@"
 Reciever:	   db "R","e","c","i","e","v","e","r","@"
+Illusion:	   db "I","l","l","u","s","i","o","n","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -413,6 +415,7 @@ AbilityDescriptions:
 	dw StanceChangeDescription
 	dw PowerOfAlchemyDescription
 	dw RecieverDescription
+	dw IllusionDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -948,4 +951,8 @@ StanceChangeDescription:
 RecieverDescription:
 PowerOfAlchemyDescription:
 	db    "Recieves final"
-	next1 "ally's ability.@"
+	next1 "pokemon's ability.@"
+
+IllusionDescription:
+	db    "Disguses self as"
+	next1 "final party mon.@"
