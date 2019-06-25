@@ -145,6 +145,7 @@ AbilityNames:
 	dw RKS_System
 	dw ToughClaws
 	dw PowerConstruct
+	dw Berserk
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -291,7 +292,8 @@ StormDrain:	   db "S","t","o","r","m"," ","d","r","a","i","n","@"
 Mummy:		   db "M","u","m","m","y","@"
 RKS_System:	   db "R","K","S"," ","S","y","s","t","e","m","@"
 ToughClaws:    db "T","o","u","g","h"," ","C","l","a","w","s","@"
-PowerConstruct: db "P","o","w","e","r"," ","C","o","n","s","t","r","u","c","t","@"
+PowerConstruct:db "P","o","w","e","r"," ","C","o","n","s","t","r","u","c","t","@"
+Berserk:	   db "B","e","r","s","e","r","k","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -440,6 +442,7 @@ AbilityDescriptions:
 	dw RKS_SystemDescription
 	dw ToughClawsDescription
 	dw PowerConstructDescription
+	dw BerserkDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -1011,3 +1014,7 @@ ToughClawsDescription:
 PowerConstructDescription:
 	db    "Changes to Complete"
 	next1 "Forme at 50% HP.@"
+
+BerserkDescription:
+	db    "Boosts Sp.Atk."
+	next1 "at half HP.@"

@@ -144,11 +144,12 @@
 	const MUMMY
 	const HEAVY_METAL
 	const RKS_SYSTEM 
-	const TOUGH_CLAWS 
+	const TOUGH_CLAWS
+	const POWER_CONSTRUCT ;thalins 
+	const BERSERK ;raptor
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
-	const POWER_CONSTRUCT ;thalins
 	const DISGUISE ;thalins
 	const TOXIC_BOOST ;thalins ; basically just guts but only for poison
 	const MAGICIAN ;thalins ;similar to pickpocket but its when you attack instead of get hit
@@ -161,7 +162,6 @@ NUM_ABILITIES EQU const_value
 	const IRON_BARBS ;raptor ;clone of rough skin
 	const WATER_BUBBLE ; raptor ;huge power but just for water
 	const GALE_WINGS ;raptor
-	const BERSERK ;raptor
 	const FLUFFY ;raptor
 
 	const FLOWER_VEIL ;fear ;since no doubles it becomes a clone of cear body

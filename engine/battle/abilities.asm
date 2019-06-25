@@ -706,8 +706,31 @@ RunHitAbilities:
 	jp z, BreakDisguise
 	cp DISGUISE
 	jp z, BreakDisguise
+	cp BERSERK
+	jp z, BerserkAbility
 	ret
 
+BerserkAbility:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVarAddr
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .check_if_hp_restored
+
+	farcall GetCurrentHP ; Current HP into de
+	farcall GetHalfMaxHP ; Half HP into bc
+	call CompareTwoBytes ; Check if bc < de
+	ret c
+	set SUBSTATUS_DISGUISE_BROKEN, [hl]
+	jp SpecialAttackUpAbility
+
+.check_if_hp_restored
+	farcall GetCurrentHP ; Current HP into de
+	farcall GetHalfMaxHP ; Half HP into bc
+	call CompareTwoBytes ; Check if bc >= de
+	ret nc
+	res SUBSTATUS_DISGUISE_BROKEN, [hl]
+	ret
+	
 RunContactAbilities:
 ; turn perspective is from the attacker
 ; 30% of the time, activate Poison Touch
@@ -1055,6 +1078,7 @@ SoulHeartAbility:
 	ret z
 StormDrainAbility:
 LightningRodAbility:
+SpecialAttackUpAbility:
 	ld b, SP_ATTACK
 	jr StatUpAbility
 RattledAbility:
