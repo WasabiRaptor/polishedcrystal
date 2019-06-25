@@ -1996,6 +1996,24 @@ GetMaxHP: ; 3ccac
 	ret
 ; 3ccc2
 
+GetCurrentHP:
+; output: de, wBuffer3-4
+
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyMonHP
+.ok
+	ld a, [hli]
+	ld [wBuffer4], a
+	ld d, a
+
+	ld a, [hl]
+	ld [wBuffer3], a
+	ld e, a
+	ret
+
 RestoreOpponentHP:
 	call CallOpponentTurn
 RestoreHP ; 3ccef

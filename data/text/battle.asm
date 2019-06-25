@@ -1169,14 +1169,18 @@ StanceChangedText: ; 0x81499
 	line "stance changed!"
 	prompt
 
+ZygardeFormText:
+	text "<USER>"
+	line "became complete!"
+
 DisguiseBrokeText: ; 0x81499
 	text "<USER>'s"
 	line "disguise broke!"
 	prompt
 
 BecameAMummyText: ; 0x81499
-	text "<USER> became"
-	line "a Mummy!"
+	text "<USER>"
+	line "became a Mummy!"
 	prompt
 
 LightScreenEffectText: ; 0x814b4

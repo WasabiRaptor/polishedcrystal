@@ -1110,6 +1110,70 @@ StatUpAbility:
 	ld [wAttackMissed], a
 	jp EnableAnimations
 
+PowerConstructAbility:
+	ldh a, [hBattleTurn]
+	and a
+	push af
+	ld hl, wBattleMonForm
+	jr z, .got_form
+	ld hl, wEnemyMonForm
+.got_form
+
+	call GetCurrentHP ; Current HP into de
+	call GetHalfMaxHP ; Half HP into bc
+	call CompareTwoBytes ; Check if bc < de
+	ret
+	jr c, .popafandret
+
+	predef GetVariant
+	cp COMPLETE_ZYGARDE
+	jr z, .popafandret
+	ld a, COMPLETE_ZYGARDE
+	ld [wCurForm], a
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or COMPLETE_ZYGARDE
+	ld [hl], a
+	jr .formChanged
+
+.popafandret
+	pop af
+	ret
+
+.formChanged
+	call GetBaseData
+	pop af
+	push af
+	ld a, [wPlayerMinimized]
+	jr z, .got_byte
+	ld a, [wEnemyMinimized]
+.got_byte
+	and a
+	jr nz, .mimic_anims
+	pop af
+	jr z, .player_backpic
+	farcall GetMonFrontpic
+	jr .after_anim
+
+.player_backpic
+	farcall GetMonBackpic
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+	jr .after_anim
+
+.mimic_anims
+	pop af
+	farcall BattleCommand_movedelay
+	farcall BattleCommand_raisesubnoanim
+.after_anim
+	ld a, BATTLE_VARS_SUBSTATUS4
+	call GetBattleVarAddr
+	bit SUBSTATUS_SUBSTITUTE, [hl]
+	ld a, SUBSTITUTE
+	call nz, LoadAnim
+	ld hl, ZygardeFormText
+	jp StdBattleTextBox
+
 WeakArmorAbility:
 	; only physical moves activate this
 	ld a, b
@@ -1340,6 +1404,7 @@ EndTurnAbilities:
 	dbw PICKUP, PickupAbility
 	dbw SHED_SKIN, ShedSkinAbility
 	dbw SPEED_BOOST, SpeedBoostAbility
+	dbw POWER_CONSTRUCT, PowerConstructAbility
 	dbw -1, -1
 
 HarvestAbility:

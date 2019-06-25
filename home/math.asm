@@ -109,14 +109,11 @@ CompareTwoBytes::
 	ld a, c
 	cp e
 	jr c, .less_than
-
-.greater_than
-	ld a, h
-	pop hl
-	ret
+	jr .greater_than
 
 .less_than
 	set 4, l
+.greater_than
 	push hl
 	pop af
 	pop hl
