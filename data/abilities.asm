@@ -131,11 +131,6 @@ AbilityNames:
 	dw Competitive
 	dw Pixilate
 	dw TanglingHair
-	dw StanceChange
-	dw Refrigerate
-	dw Defeatist
-	dw WaterBubble
-	dw Plus
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -269,11 +264,6 @@ FurCoat:       db "F","u","r"," ","C","o","a","t","@"
 Competitive:   db "C","o","m","p","e","t","i","t","i","v","e","@"
 Pixilate:      db "P","i","x","i","l","a","t","e","@"
 TanglingHair:  db "T","a","n","g","l","i","n","g"," ","H","a","i","r","@"
-StanceChange:  db "S","t","a","n","c","e"," ","C","h","a","n","g","e","@"
-Refrigerate:   db "R","e","f","r","i","g","e","r","a","t","e","@"
-Defeatist:     db "D","e","f","e","a","t","i","s","t","@"
-WaterBubble:   db "W","a","t","e","r"," ","B","u","b","b","b","l","e","@"
-Plus:          db "P","l","u","s","@"
 
 
 AbilityDescriptions:
@@ -409,11 +399,6 @@ AbilityDescriptions:
 	dw CompetitiveDescription
 	dw PixilateDescription
 	dw TanglingHairDescription
-	dw StanceChangeDescription
-	dw RefrigerateDescription
-	dw DefeatistDescription
-	dw WaterBubbleDescription
-	dw PlusDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -933,23 +918,3 @@ PixilateDescription:
 TanglingHairDescription:
 	db    "Contact may lower"
 	next1 "the foe's Speed.@"
-
-StanceChangeDescription:
-	db    ""
-	next1 ""
-
-RefrigerateDescription:
-	db    ""
-	next1 ""
-
-DefeatistDescription:
-	db    ""
-	next1 ""
-
-WaterBubbleDescription:
-	db    ""
-	next1 ""
-
-PlusDescription:
-	db    ""
-	next1 ""
