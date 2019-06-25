@@ -139,6 +139,7 @@ AbilityNames:
 	dw Illusion
 	dw ReverseAura
 	dw SoulHeart
+	dw StormDrain
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -280,6 +281,7 @@ Reciever:	   db "R","e","c","i","e","v","e","r","@"
 Illusion:	   db "I","l","l","u","s","i","o","n","@"
 ReverseAura:   db "R","e","v","e","r","s","e"," ","A","u","r","a","@"
 SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
+StormDrain:	   db "S","t","o","r","m"," ","d","r","a","i","n","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -970,3 +972,7 @@ ReverseAuraDescription:
 SoulHeartDescription:
 	db    "Boosts Sp. Atk. when"
 	next1 "knocking out foes.@"
+
+StormDrainDescription:
+	db    "Drains water moves"
+	next1 "and boosts Sp.Atk.@"
