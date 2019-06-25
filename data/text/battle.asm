@@ -1174,6 +1174,11 @@ DisguiseBrokeText: ; 0x81499
 	line "disguise broke!"
 	prompt
 
+BecameAMummyText: ; 0x81499
+	text "<USER> became"
+	line "a Mummy!"
+	prompt
+
 LightScreenEffectText: ; 0x814b4
 	text "<USER>'s"
 	line "Spcl.Def rose!"

@@ -718,14 +718,18 @@ RunContactAbilities:
 ; Abilities always run from the ability user's perspective. This is
 ; consistent. Thus, a switchturn happens here. Feel free to rework
 ; the logic if you feel that this reduces readability.
-	call BattleRandom
-	cp 1 + 30 percent
-	ret nc
+	
 	call GetOpponentAbilityAfterMoldBreaker
 	ld b, a
 
 	call CallOpponentTurn
 .do_enemy_abilities
+	ld a, b
+	cp MUMMY
+	jp z, MummyAbility
+	call BattleRandom ;abilities that only have a chance of activating
+	cp 1 + 30 percent
+	ret nc
 	ld a, b
 	cp EFFECT_SPORE
 	jp z, EffectSporeAbility
@@ -738,6 +742,18 @@ RunContactAbilities:
 	cp CUTE_CHARM
 	jp z, CuteCharmAbility
 	ret
+
+MummyAbility:
+	ld a, BATTLE_VARS_ABILITY_OPP
+	call GetBattleVarAddr
+	cp MUMMY
+	ret z
+	ld a, MUMMY
+	ld [hl], a
+	call CallOpponentTurn
+	ld hl, BecameAMummyText
+	call StdBattleTextBox
+	jp CallOpponentTurn
 
 BreakDisguise:
 	ld a, BATTLE_VARS_SUBSTATUS3
@@ -770,8 +786,7 @@ BreakDisguise:
 	call DelayFrame
 
 	ld hl, DisguiseBrokeText
-	call StdBattleTextBox
-	ret
+	jp StdBattleTextBox
 
 CursedBodyAbility:
 	ld a, 10
@@ -941,6 +956,7 @@ CheckNullificationAbilities:
 	db MOTOR_DRIVE,   ELECTRIC
 	db DRY_SKIN,      WATER
 	db WATER_ABSORB,  WATER
+	db STORM_DRAIN,	  WATER
 	db FLASH_FIRE,    FIRE
 	db SAP_SIPPER,    GRASS
 	db LEVITATE,      GROUND

@@ -140,14 +140,15 @@
 	const ILLUSION
 	const REVERSE_AURA
 	const SOUL_HEART
+	const STORM_DRAIN
+	const MUMMY
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
-	const POWER_CONSTRUCT
-	const DISGUISE
+	const POWER_CONSTRUCT ;thalins
+	const DISGUISE ;thalins
 	const RKS_SYSTEM
-	const MUMMY
-	const HEAVY_METAL
+	const HEAVY_METAL ;thalins
 	const HEAT_PROOF
 	const KLUTZ	
 	const DEFEATIST
@@ -159,7 +160,6 @@ NUM_ABILITIES EQU const_value
 	const ROUGH_SKIN
 	const IRON_BARBS
 	const CONTRARY
-	const STORM_DRAIN
 	const WATER_BUBBLE
 	const GOOEY
 	const BERSERK
