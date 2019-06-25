@@ -138,6 +138,7 @@ AbilityNames:
 	dw Reciever
 	dw Illusion
 	dw ReverseAura
+	dw SoulHeart
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -278,6 +279,7 @@ PowerOfAlchemy:db "P","o","w","e","r"," ","O","f"," ","A","l","c","h","e","m","y
 Reciever:	   db "R","e","c","i","e","v","e","r","@"
 Illusion:	   db "I","l","l","u","s","i","o","n","@"
 ReverseAura:   db "R","e","v","e","r","s","e"," ","A","u","r","a","@"
+SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -419,6 +421,7 @@ AbilityDescriptions:
 	dw RecieverDescription
 	dw IllusionDescription
 	dw ReverseAuraDescription
+	dw SoulHeartDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -963,3 +966,7 @@ IllusionDescription:
 ReverseAuraDescription:
 	db    "All type effects"
 	next1 "become inversed.@"
+
+SoulHeartDescription:
+	db    "Boosts Sp. Atk. when"
+	next1 "knocking out foes.@"

@@ -634,6 +634,8 @@ RunFaintAbilities:
 .user_abilities
 	cp MOXIE
 	jp z, MoxieAbility
+	cp SOUL_HEART
+	jp z, SoulHeartAbility
 	ret
 .opponent_abilities
 	cp AFTERMATH
@@ -1010,6 +1012,17 @@ SapSipperAbility:
 AttackUpAbility:
 	ld b, ATTACK
 	jr StatUpAbility
+SoulHeartAbility:
+	; Don't run if battle is over
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+	ld a, [wBattleMode]
+	dec a
+	ret z
+.enemy
+	farcall CheckAnyOtherAliveOpponentMons
+	ret z
 LightningRodAbility:
 	ld b, SP_ATTACK
 	jr StatUpAbility
