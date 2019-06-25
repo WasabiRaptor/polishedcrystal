@@ -139,6 +139,7 @@ AbilityNames:
 	dw Illusion
 	dw ReverseAura
 	dw SoulHeart
+	dw HeavyMetal
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -280,6 +281,7 @@ Reciever:	   db "R","e","c","i","e","v","e","r","@"
 Illusion:	   db "I","l","l","u","s","i","o","n","@"
 ReverseAura:   db "R","e","v","e","r","s","e"," ","A","u","r","a","@"
 SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
+HeavyMetal:    db "H","e","a","v","y"," ","M","e","t","a","l","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -422,6 +424,7 @@ AbilityDescriptions:
 	dw IllusionDescription
 	dw ReverseAuraDescription
 	dw SoulHeartDescription
+	dw HeavyMetalDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -970,3 +973,7 @@ ReverseAuraDescription:
 SoulHeartDescription:
 	db    "Boosts Sp. Atk. when"
 	next1 "knocking out foes.@"
+
+HeavyMetalDescription:
+	db    "Doubles user's"
+	next1 "weight.@"

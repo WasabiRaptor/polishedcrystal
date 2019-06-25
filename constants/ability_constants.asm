@@ -140,6 +140,7 @@
 	const ILLUSION
 	const REVERSE_AURA
 	const SOUL_HEART
+	const HEAVY_METAL
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
@@ -147,7 +148,6 @@ NUM_ABILITIES EQU const_value
 	const DISGUISE
 	const RKS_SYSTEM
 	const MUMMY
-	const HEAVY_METAL
 	const HEAT_PROOF
 	const KLUTZ	
 	const DEFEATIST
