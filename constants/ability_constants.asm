@@ -138,13 +138,13 @@
 	const POWER_OF_ALCHEMY
 	const RECIEVER
 	const ILLUSION
+	const REVERSE_AURA
+	const SOUL_HEART
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
 	const POWER_CONSTRUCT
-	const AURA_BREAK
 	const DISGUISE
-	const SOUL_HEART
 	const RKS_SYSTEM
 	const MUMMY
 	const HEAVY_METAL
