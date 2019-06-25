@@ -253,7 +253,27 @@
 	const MULCH        ; f3
 	const SWEET_HONEY  ; f4
 
-	;35 items remain
+	;order must reflect type constants for RKS System
+	const NORMALIUM_Z    	; 0
+	const FIGHTINIUM_Z  	; 1
+	const FLYINIUM_Z    	; 2
+	const POISONIUM_Z    	; 3
+	const GROUNDIUM_Z    	; 4
+	const ROCKIUM_Z      	; 5
+	const BUGINIUM_Z       	; 6
+	const GHOSTIUM_Z     	; 7
+	const STEELIUM_Z     	; 8
+	const FIREIUM_Z      	; 9
+	const WATERIUM_Z     	; 10
+	const GRASSIUM_Z     	; 11
+	const ELECTRIUM_Z  		; 12
+	const PSYCHIUM_Z   		; 13
+	const ICIUM_Z       	; 14
+	const DRAGONIUM_Z    	; 15
+	const DARKINIUM_Z      	; 16
+	const FAIRIUM_Z     	; 17
+
+	;17 items remain
 
 	const ITEM_FROM_MEM ; ff
 
