@@ -146,6 +146,7 @@ AbilityNames:
 	dw ToughClaws
 	dw PowerConstruct
 	dw Berserk
+	dw GaleWings
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -294,6 +295,7 @@ RKS_System:	   db "R","K","S"," ","S","y","s","t","e","m","@"
 ToughClaws:    db "T","o","u","g","h"," ","C","l","a","w","s","@"
 PowerConstruct:db "P","o","w","e","r"," ","C","o","n","s","t","r","u","c","t","@"
 Berserk:	   db "B","e","r","s","e","r","k","@"
+GaleWings: 	   db "G","a","l","e"," ","W","i","n","g","s","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -443,6 +445,7 @@ AbilityDescriptions:
 	dw ToughClawsDescription
 	dw PowerConstructDescription
 	dw BerserkDescription
+	dw GaleWingsDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -1018,3 +1021,7 @@ PowerConstructDescription:
 BerserkDescription:
 	db    "Boosts Sp.Atk."
 	next1 "at half HP.@"
+
+GaleWingsDescription:
+	db    "Gives priority to"
+	next1 "flying type moves.@"

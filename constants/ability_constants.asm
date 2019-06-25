@@ -132,21 +132,22 @@
 	const COMPETITIVE
 	const PIXILATE
 	const TANGLING_HAIR
-	const REFRIGERATE
-	const SLUSH_RUSH
-	const STANCE_CHANGE
-	const POWER_OF_ALCHEMY
-	const RECIEVER
-	const ILLUSION
-	const REVERSE_AURA
-	const SOUL_HEART
-	const STORM_DRAIN
-	const MUMMY
-	const HEAVY_METAL
-	const RKS_SYSTEM 
-	const TOUGH_CLAWS
+	const REFRIGERATE ;raptor 
+	const SLUSH_RUSH ;raptor 
+	const STANCE_CHANGE ;raptor 
+	const POWER_OF_ALCHEMY ;raptor 
+	const RECIEVER ;raptor 
+	const ILLUSION ;raptor 
+	const REVERSE_AURA ;thalins 
+	const SOUL_HEART ;thalins 
+	const STORM_DRAIN ;raptor 
+	const MUMMY ;raptor 
+	const HEAVY_METAL ;thalins 
+	const RKS_SYSTEM ;raptor 
+	const TOUGH_CLAWS ;raptor
 	const POWER_CONSTRUCT ;thalins 
 	const BERSERK ;raptor
+	const GALE_WINGS ;raptor
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
@@ -161,7 +162,6 @@ NUM_ABILITIES EQU const_value
 	const ROUGH_SKIN ;raptor
 	const IRON_BARBS ;raptor ;clone of rough skin
 	const WATER_BUBBLE ; raptor ;huge power but just for water
-	const GALE_WINGS ;raptor
 	const FLUFFY ;raptor
 
 	const FLOWER_VEIL ;fear ;since no doubles it becomes a clone of cear body

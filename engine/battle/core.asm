@@ -850,13 +850,23 @@ GetMovePriority: ; 3c5c5
 	ld a, BATTLE_VARS_ABILITY
 	call GetBattleVar
 	cp PRANKSTER
-	jr nz, .no_priority
+	jr nz, .not_prankster
 	ld a, BATTLE_VARS_MOVE_CATEGORY
 	call GetBattleVar
 	cp STATUS
-	jr nz, .no_priority
+	jr nz, .got_priority
 	inc b
-.no_priority
+	jr .got_priority
+
+.not_prankster
+	cp GALE_WINGS
+	jr nz, .got_priority
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp FLYING
+	jr nz, .got_priority
+	inc b
+.got_priority
 	ld a, b
 	pop bc
 	ret
