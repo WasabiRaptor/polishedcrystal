@@ -699,6 +699,10 @@ GetBattlemonBackpicPalettePointer:
 	pop af
 .got_illusion
 	call GetPlayerOrMonPalettePointer
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	pop de
 	ret
 
@@ -737,6 +741,9 @@ GetEnemyFrontpicPalettePointer:
 	pop af
 .got_illusion
 	call GetFrontpicPalettePointer
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	pop de
 	ret
 

@@ -4874,6 +4874,7 @@ SECTION "color", ROMX
 INCLUDE "engine/color.asm"
 
 
-SECTION "relocated stuff", ROMX
+SECTION "wild stuff", ROMX
 
 INCLUDE "data/wild/unlocked_unowns.asm"
+INCLUDE "data/wild/treemons_asleep.asm"

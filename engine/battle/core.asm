@@ -3564,9 +3564,17 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	jr c, .skip_cry
 	farcall CheckBattleEffects
 	jr c, .cry_no_anim
+
+	ld a, [wCurPartySpecies]
+	push af
+
+	call GetEnemyIllusion
+
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_SLOW
 	predef AnimateFrontpic
+	pop af
+	ld [wCurPartySpecies], a
 	jr .skip_cry
 
 .cry_no_anim
@@ -7176,7 +7184,7 @@ endr
 	predef CalcPkmnStats
 
 	; If we're headbutting trees, some monsters enter battle asleep
-	call CheckSleepingTreeMon
+	farcall CheckSleepingTreeMon
 	ld a, SLP & 3 ; Asleep for 3 turns
 	jr c, .UpdateStatus
 	; Otherwise, no status
@@ -7273,27 +7281,7 @@ endr
 	dec b
 	jr nz, .loop
 
-	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
-	ld b, a
 	ld a, [wTempEnemyMonSpecies]
-	push af
-	ld c, a
-	call GetAbility
-	ld b, a
-	cp ILLUSION
-	jr nz, .no_illusion
-	;ld a, [wEnemySubStatus3]
-	;and 1 << SUBSTATUS_DISGUISE_BROKEN
-	;jr nz, .no_illusion
-	pop af
-	ld a, [wOTPartyCount]
-	ld hl, wOTPartyMon1Species
-	call GetIllusion
-	jr .got_illusion
-
-.no_illusion
-	pop af
-.got_illusion
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
@@ -7430,52 +7418,6 @@ ApplyLegendaryDVs:
 	pop bc
 	pop de
 	ret
-
-CheckSleepingTreeMon: ; 3eb38
-; Return carry if species is in the list
-; for the current time of day
-
-; Don't do anything if this isn't a tree encounter
-	ld a, [wBattleType]
-	cp BATTLETYPE_TREE
-	jr nz, .NotSleeping
-
-; Nor if the Pokémon has Insomnia/Vital Spirit
-	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
-	ld b, a
-	ld a, [wTempEnemyMonSpecies]
-	ld c, a
-	call GetAbility
-	ld a, b
-	cp INSOMNIA
-	jr z, .NotSleeping
-	cp VITAL_SPIRIT
-	jr z, .NotSleeping
-
-; Get list for the time of day
-	ld hl, AsleepTreeMonsMorn
-	ld a, [wTimeOfDay]
-	cp DAY
-	jr c, .Check
-	ld hl, AsleepTreeMonsDay
-	jr z, .Check
-	ld hl, AsleepTreeMonsNite
-
-.Check:
-	ld a, [wTempEnemyMonSpecies]
-	ld de, 1 ; length of species id
-	call IsInArray
-; If it's a match, the opponent is asleep
-	ret c
-
-.NotSleeping:
-	and a
-	ret
-
-INCLUDE "data/wild/treemons_asleep.asm"
-
-
-
 
 FinalPkmnSlideInEnemyMonFrontpic:
 	call FinishBattleAnim
@@ -8776,18 +8718,8 @@ DropPlayerSub: ; 3f447
 	ld hl, wBattleMonForm
 	predef GetVariant
 
-	ld a, [wPlayerAbility]
-	cp ILLUSION
-	jr nz, .no_illusion
-	ld a, [wPlayerSubStatus3]
-	and 1 << SUBSTATUS_DISGUISE_BROKEN
-	jr nz, .no_illusion
-	ld a, [wPartyCount]
-	ld hl, wPartyMon1Species
-	call GetIllusion
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-.no_illusion
+	call GetPlayerIllusion
+
 	ld de, VTiles2 tile $31
 	predef GetBackpic
 	pop af
@@ -8835,18 +8767,9 @@ DropEnemySub: ; 3f486
 	ld hl, wEnemyMonForm
 	predef GetVariant
 	ld a, [wEnemyAbility]
-	cp ILLUSION
-	jr nz, .no_illusion
-	ld a, [wEnemySubStatus3]
-	and 1 << SUBSTATUS_DISGUISE_BROKEN
-	jr nz, .no_illusion
-	ld a, [wOTPartyCount]
-	ld hl, wOTPartyMon1Species
-	call GetIllusion
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
 
-.no_illusion
+	call GetEnemyIllusion
+	
 	ld de, VTiles2
 	predef FrontpicPredef
 	pop af
@@ -8873,7 +8796,28 @@ GetFrontpic_DoAnim: ; 3f4b4
 	ret
 ; 3f4c1
 
-GetIllusion:
+GetEnemyIllusion:
+	ld a, [wEnemySubStatus3]
+	ld e, a
+	ld a, [wOTPartyCount]
+	ld d, a
+	ld hl, wOTPartyMon1Species
+	ld a, [wEnemyAbility]
+	jr CheckIllusion
+GetPlayerIllusion:
+	ld a, [wPlayerSubStatus3]
+	ld e, a
+	ld a, [wPartyCount]
+	ld d, a
+	ld hl, wPartyMon1Species
+	ld a, [wPlayerAbility]
+CheckIllusion:
+	cp ILLUSION
+	ret nz
+	bit SUBSTATUS_DISGUISE_BROKEN, e
+	ret nz
+	ld a, d
+GetIllusion::
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
@@ -8886,6 +8830,8 @@ GetIllusion:
 	ld b, h
 	ld c, l
 	pop af
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	ret
 
 StartBattle: ; 3f4c1
@@ -9925,9 +9871,17 @@ BattleStartMessage: ; 3fc8b
 	farcall CheckBattleEffects
 	jr c, .cry_no_anim
 
+	ld a, [wCurPartySpecies]
+	push af
+
+	call GetEnemyIllusion
+
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_NORMAL
 	predef AnimateFrontpic
+	pop af
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	jr .skip_cry ; cry is played during the animation
 
 .cry_no_anim
