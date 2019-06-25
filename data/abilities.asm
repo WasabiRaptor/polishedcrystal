@@ -144,6 +144,7 @@ AbilityNames:
 	dw HeavyMetal
 	dw RKS_System
 	dw ToughClaws
+	dw PowerConstruct
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -290,6 +291,7 @@ StormDrain:	   db "S","t","o","r","m"," ","d","r","a","i","n","@"
 Mummy:		   db "M","u","m","m","y","@"
 RKS_System:	   db "R","K","S"," ","S","y","s","t","e","m","@"
 ToughClaws:    db "T","o","u","g","h"," ","C","l","a","w","s","@"
+PowerConstruct: db "P","o","w","e","r"," ","C","o","n","s","t","r","u","c","t","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -437,6 +439,7 @@ AbilityDescriptions:
 	dw HeavyMetalDescription
 	dw RKS_SystemDescription
 	dw ToughClawsDescription
+	dw PowerConstructDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -1004,3 +1007,7 @@ RKS_SystemDescription:
 ToughClawsDescription:
 	db    "Boosts power to"
 	next1 "contact moves.@"
+
+PowerConstructDescription:
+	db    "Changes to Complete"
+	next1 "Forme at 50% HP.@"
