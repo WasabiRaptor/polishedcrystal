@@ -752,6 +752,12 @@ BreakDisguise:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .player_backpic
+	ld hl, wOTPartyMonNicknames
+	ld a, [wCurPartyMon]
+	call SkipNames
+	ld de, wEnemyMonNick
+	ld bc, PKMN_NAME_LENGTH
+	call CopyBytes
 	farcall GetMonFrontpic
 	jr .disguise_broke
 

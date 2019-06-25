@@ -4875,3 +4875,8 @@ INCLUDE "data/events/odd_eggs.asm"
 SECTION "color", ROMX
 
 INCLUDE "engine/color.asm"
+
+
+SECTION "relocated stuff", ROMX
+
+INCLUDE "data/wild/unlocked_unowns.asm"
