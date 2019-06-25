@@ -608,6 +608,7 @@ StanceChangeAbility:
 	jr .after_anim
 
 .mimic_anims
+	pop af
 	farcall BattleCommand_movedelay
 	farcall BattleCommand_raisesubnoanim
 .after_anim
