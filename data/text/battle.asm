@@ -1172,6 +1172,7 @@ StanceChangedText: ; 0x81499
 ZygardeFormText:
 	text "<USER>"
 	line "became complete!"
+	prompt
 
 DisguiseBrokeText: ; 0x81499
 	text "<USER>'s"
