@@ -139,6 +139,7 @@ AbilityNames:
 	dw Illusion
 	dw ReverseAura
 	dw SoulHeart
+	dw HeavyMetal
 	dw StormDrain
 	dw Mummy
 
@@ -282,6 +283,7 @@ Reciever:	   db "R","e","c","i","e","v","e","r","@"
 Illusion:	   db "I","l","l","u","s","i","o","n","@"
 ReverseAura:   db "R","e","v","e","r","s","e"," ","A","u","r","a","@"
 SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
+HeavyMetal:    db "H","e","a","v","y"," ","M","e","t","a","l","@"
 StormDrain:	   db "S","t","o","r","m"," ","d","r","a","i","n","@"
 Mummy:		   db "M","u","m","m","y","@"
 
@@ -428,6 +430,7 @@ AbilityDescriptions:
 	dw SoulHeartDescription
 	dw StormDrainDescription
 	dw MummyDescription
+	dw HeavyMetalDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -977,6 +980,10 @@ SoulHeartDescription:
 	db    "Boosts Sp. Atk. when"
 	next1 "knocking out foes.@"
 
+HeavyMetalDescription:
+	db    "Doubles user's"
+	next1 "weight.@"
+	
 StormDrainDescription:
 	db    "Drains water moves"
 	next1 "and boosts Sp.Atk.@"

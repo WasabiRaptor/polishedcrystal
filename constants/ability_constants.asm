@@ -142,13 +142,13 @@
 	const SOUL_HEART
 	const STORM_DRAIN
 	const MUMMY
+	const HEAVY_METAL
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
 	const POWER_CONSTRUCT ;thalins
 	const DISGUISE ;thalins
 	const RKS_SYSTEM
-	const HEAVY_METAL ;thalins
 	const HEAT_PROOF
 	const KLUTZ	
 	const DEFEATIST

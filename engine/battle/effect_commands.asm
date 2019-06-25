@@ -8792,9 +8792,16 @@ BattleCommand_lowkick:
 	inc hl
 	inc hl
 	call GetFarHalfword ; now we have weight in hl
+	
+	ld a, BATTLE_VARS_ABILITY_OPP
+    call GetBattleVar
+	cp HEAVY_METAL
+	jr nz, .not_heavy
+	add hl, hl
+.not_heavy
 	ld d, h
 	ld e, l
-
+	
 	ld hl, .WeightTable
 .loop2
 	ld a, [hli]
