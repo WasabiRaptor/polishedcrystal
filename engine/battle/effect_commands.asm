@@ -1432,6 +1432,12 @@ _CheckMatchup:
 	ld a, [wBattleType]
 	cp BATTLETYPE_INVERSE
 	jr z, .TypesLoop
+	ld a, [wPlayerAbility]
+	cp REVERSE_AURA
+	jr z, .TypesLoop
+	ld a, [wEnemyAbility]
+	cp REVERSE_AURA
+	jr z, .TypesLoop
 	ld hl, TypeMatchup
 .TypesLoop:
 	ld a, [hli]
@@ -1545,6 +1551,12 @@ _CheckTypeMatchup: ; 347d3
 	ld hl, InverseTypeMatchup
 	ld a, [wBattleType]
 	cp BATTLETYPE_INVERSE
+	jr z, .TypesLoop
+	ld a, [wPlayerAbility]
+	cp REVERSE_AURA
+	jr z, .TypesLoop
+	ld a, [wEnemyAbility]
+	cp REVERSE_AURA
 	jr z, .TypesLoop
 	ld hl, TypeMatchup
 .TypesLoop:
