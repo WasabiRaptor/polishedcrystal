@@ -8762,11 +8762,33 @@ DropPlayerSub: ; 3f447
 	ld a, [wCurPartySpecies]
 	push af
 	ld a, [wBattleMonSpecies]
+	ld [wCurSpecies], a
+	ld [wCurPartySpecies], a
+	push af
+	ld hl, wBattleMonForm
+	predef GetVariant
+
+	ld a, [wPlayerAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wPlayerSubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	ld a, [wPartyCount]
+	ld hl, wPartyMon1Species
+	call GetIllusion
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+.no_illusion
+	ld de, VTiles2 tile $31
+	predef GetBackpic
+	pop af
+	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	ld hl, wBattleMonForm
 	predef GetVariant
-	ld de, VTiles2 tile $31
-	predef GetBackpic
+	call GetBaseData; form is known
+
 	pop af
 	ld [wCurPartySpecies], a
 	ret
@@ -8801,11 +8823,32 @@ DropEnemySub: ; 3f486
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
+	push af
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	ld a, [wEnemyAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wEnemySubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	ld a, [wOTPartyCount]
+	ld hl, wOTPartyMon1Species
+	call GetIllusion
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
+.no_illusion
+	ld de, VTiles2
+	predef FrontpicPredef
+	pop af
+	ld [wCurSpecies], a
+	ld [wCurPartySpecies], a
+
 	ld hl, wEnemyMonForm
 	predef GetVariant
 	call GetBaseData ;form is known
-	ld de, VTiles2
-	predef FrontpicPredef
+
 	pop af
 	ld [wCurPartySpecies], a
 	ret
@@ -8827,14 +8870,14 @@ GetIllusion:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, [hl] ;species of last mon in party
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	push af
 	ld bc, wPartyMon1Form - wPartyMon1Species
 	add hl, bc
 	predef GetVariant
 	dec hl ;get personality into bc for getting the palette
 	ld b, h
 	ld c, l
+	pop af
 	ret
 
 StartBattle: ; 3f4c1

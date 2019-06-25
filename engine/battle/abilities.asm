@@ -743,6 +743,10 @@ BreakDisguise:
 	and 1 << SUBSTATUS_DISGUISE_BROKEN
 	ret nz
 	set SUBSTATUS_DISGUISE_BROKEN, [hl]
+
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .player_backpic
@@ -752,8 +756,11 @@ BreakDisguise:
 .player_backpic
 	farcall GetMonBackpic
 .disguise_broke
-	ld de, ANIM_SEND_OUT_MON
-	farcall Call_PlayBattleAnim
+	ld b, CGB_BATTLE_COLORS
+	call GetCGBLayout
+	call SetPalettes
+	call DelayFrame
+
 	ld hl, DisguiseBrokeText
 	call StdBattleTextBox
 	ret
