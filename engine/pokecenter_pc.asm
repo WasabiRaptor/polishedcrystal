@@ -244,7 +244,6 @@ KrissPCMenuData: ; 0x15736
 	dw KrisWithdrawItemMenu, .WithdrawItem
 	dw KrisDepositItemMenu,  .DepositItem
 	dw KrisTossItemMenu,     .TossItem
-	dw KrisMailBoxMenu,      .MailBox
 	dw KrisDecorationMenu,   .Decoration
 	dw KrisLogOffMenu,       .LogOff
 	dw KrisLogOffMenu,       .TurnOff
@@ -252,7 +251,6 @@ KrissPCMenuData: ; 0x15736
 .WithdrawItem: db "Withdraw Item@"
 .DepositItem:  db "Deposit Item@"
 .TossItem:     db "Toss Item@"
-.MailBox:      db "Mail Box@"
 .Decoration:   db "Decoration@"
 .TurnOff:      db "Turn Off@"
 .LogOff:       db "Log Off@"
@@ -260,7 +258,6 @@ KrissPCMenuData: ; 0x15736
 WITHDRAW_ITEM EQU 0
 DEPOSIT_ITEM  EQU 1
 TOSS_ITEM     EQU 2
-MAIL_BOX      EQU 3
 DECORATION    EQU 4
 TURN_OFF      EQU 5
 LOG_OFF       EQU 6
@@ -270,7 +267,6 @@ LOG_OFF       EQU 6
 	db WITHDRAW_ITEM
 	db DEPOSIT_ITEM
 	db TOSS_ITEM
-	db MAIL_BOX
 	db TURN_OFF
 	db -1
 ;.KrissPCMenuList2:
@@ -278,7 +274,6 @@ LOG_OFF       EQU 6
 	db WITHDRAW_ITEM
 	db DEPOSIT_ITEM
 	db TOSS_ITEM
-	db MAIL_BOX
 	db DECORATION
 	db LOG_OFF
 	db -1
@@ -543,12 +538,6 @@ KrisDepositItemMenu: ; 0x1588b
 .NoRoomText: ; 0x15978
 	text_jump _KrissPCNoRoomDepositText
 	db "@"
-
-KrisMailBoxMenu: ; 0x1597d
-	farcall _KrisMailBoxMenu
-	xor a
-	ret
-; 0x15985
 
 PCItemsJoypad: ; 0x15985
 	xor a

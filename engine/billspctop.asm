@@ -108,13 +108,7 @@ BillsPC_SeeYa: ; e4cb
 
 BillsPC_MovePKMNMenu: ; e4cd
 	call LoadStandardMenuDataHeader
-	farcall IsAnyMonHoldingMail
-	jr nc, .no_mail
-	ld hl, .Text_MonHoldingMail
-	call PrintText
-	jr .quit
 
-.no_mail
 	farcall StartMovePkmnWOMail_SaveGame
 	jr c, .quit
 	farcall _MovePKMNWithoutMail

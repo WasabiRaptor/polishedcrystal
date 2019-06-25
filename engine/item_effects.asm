@@ -105,29 +105,10 @@ ItemEffects: ; e73c
 	dw CoinCase         ; COIN_CASE
 	dw Itemfinder       ; ITEMFINDER
 	dw NoEffect         ; EXP_SHARE
-	dw NoEffect         ; MYSTERY_EGG
-	dw SquirtBottle     ; SQUIRTBOTTLE
-	dw NoEffect         ; SECRETPOTION
-	dw NoEffect         ; RED_SCALE
-	dw CardKey          ; CARD_KEY
-	dw BasementKey      ; BASEMENT_KEY
-	dw NoEffect         ; S_S_TICKET
-	dw NoEffect         ; PASS
-	dw NoEffect         ; MACHINE_PART
-	dw NoEffect         ; LOST_ITEM
-	dw NoEffect         ; RAINBOW_WING
-	dw NoEffect         ; SILVER_WING
-	dw NoEffect         ; CLEAR_BELL
-	dw NoEffect         ; GS_BALL
-	dw BlueCard         ; BLUE_CARD
-	dw NoEffect         ; ORANGETICKET
-	dw NoEffect         ; MYSTICTICKET
-	dw NoEffect         ; OLD_SEA_MAP
 	dw NoEffect         ; SHINY_CHARM
 	dw NoEffect         ; OVAL_CHARM
 	dw NoEffect         ; SILPHSCOPE2
 	dw ApricornBox      ; APRICORN_BOX
-	dw NoEffect         ; TERU_SAMA
 	dw HealStatusEffect ; CHERI_BERRY
 	dw HealStatusEffect ; CHESTO_BERRY
 	dw HealStatusEffect ; PECHA_BERRY
@@ -231,10 +212,6 @@ ItemEffects: ; e73c
 	dw NoEffect         ; DRAGON_SCALE
 	dw NoEffect         ; UP_GRADE
 	dw NoEffect         ; DUBIOUS_DISC
-	dw NoEffect         ; PROTECTOR
-	dw NoEffect         ; ELECTIRIZER
-	dw NoEffect         ; MAGMARIZER
-	dw NoEffect         ; RAZOR_FANG
 	dw NoEffect         ; RAZOR_CLAW
 	dw NoEffect         ; ODD_SOUVENIR
 	dw NoEffect         ; NUGGET
@@ -258,16 +235,6 @@ ItemEffects: ; e73c
 	dw NoEffect         ; OLD_AMBER
 	dw NoEffect         ; MULCH
 	dw NoEffect         ; SWEET_HONEY
-	dw NoEffect         ; FLOWER_MAIL
-	dw NoEffect         ; SURF_MAIL
-	dw NoEffect         ; LITEBLUEMAIL
-	dw NoEffect         ; PORTRAITMAIL
-	dw NoEffect         ; LOVELY_MAIL
-	dw NoEffect         ; EON_MAIL
-	dw NoEffect         ; MORPH_MAIL
-	dw NoEffect         ; BLUESKY_MAIL
-	dw NoEffect         ; MUSIC_MAIL
-	dw NoEffect         ; MIRAGE_MAIL
 ; e8a2
 
 

@@ -108,30 +108,10 @@
 	const COIN_CASE    ; 59
 	const ITEMFINDER   ; 5a
 	const EXP_SHARE    ; 5b
-	const MYSTERY_EGG  ; 5c
-	const SQUIRTBOTTLE ; 5d
-	const SECRETPOTION ; 5e
-	const RED_SCALE    ; 5f
-	const CARD_KEY     ; 60
-	const BASEMENT_KEY ; 61
-	const S_S_TICKET   ; 62
-	const PASS         ; 63
-	const MACHINE_PART ; 64
-	const LOST_ITEM    ; 65
-	const RAINBOW_WING ; 66
-	const SILVER_WING  ; 67
-	const CLEAR_BELL   ; 68
-	const GS_BALL      ; 69
-	const BLUE_CARD    ; 6a
-	const ORANGETICKET ; 6b
-	const MYSTICTICKET ; 6c
-	const OLD_SEA_MAP  ; 6d
 	const SHINY_CHARM  ; 6e
 	const OVAL_CHARM   ; 6f
 	const SILPHSCOPE2  ; 70
 	const APRICORN_BOX ; 71
-
-	const TERU_SAMA    ; 72
 
 	const CHERI_BERRY  ; 73
 	const CHESTO_BERRY ; 74
@@ -247,12 +227,7 @@
 	const DRAGON_SCALE ; d7
 	const UP_GRADE     ; d8
 	const DUBIOUS_DISC ; d9
-	const PROTECTOR    ; da
-	const ELECTIRIZER  ; db
-	const MAGMARIZER   ; dc
-	const RAZOR_FANG   ; dd
 	const RAZOR_CLAW   ; de
-	const ODD_SOUVENIR ; df
 
 	const NUGGET       ; e0
 	const BIG_NUGGET   ; e1
@@ -271,23 +246,14 @@
 	const SLOWPOKETAIL ; ee
 	const BOTTLE_CAP   ; ef
 
-	const HELIX_FOSSIL ; f0
-	const DOME_FOSSIL  ; f1
-	const OLD_AMBER    ; f2
+	const PLUME_FOSSIL ; f0
+	const SAIL_FOSSIL  ; f1
+	const CLAW_FOSSIL  ; f2
 
 	const MULCH        ; f3
 	const SWEET_HONEY  ; f4
 
-	const FLOWER_MAIL  ; f5
-	const SURF_MAIL    ; f6
-	const LITEBLUEMAIL ; f7
-	const PORTRAITMAIL ; f8
-	const LOVELY_MAIL  ; f9
-	const EON_MAIL     ; fa
-	const MORPH_MAIL   ; fb
-	const BLUESKY_MAIL ; fc
-	const MUSIC_MAIL   ; fd
-	const MIRAGE_MAIL  ; fe
+	;35 items remain
 
 	const ITEM_FROM_MEM ; ff
 

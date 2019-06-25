@@ -977,7 +977,6 @@ PlaceGraphic: ; 2ef6e
 
 SECTION "Code 10", ROMX
 
-INCLUDE "engine/mail.asm"
 INCLUDE "engine/events/fruit_trees.asm"
 INCLUDE "engine/events/hidden_grottoes.asm"
 INCLUDE "engine/battle/ai/move.asm"
@@ -4470,8 +4469,6 @@ SECTION "Code 19", ROMX
 
 INCLUDE "engine/events_2.asm"
 INCLUDE "engine/radio.asm"
-INCLUDE "gfx/mail.asm"
-
 
 SECTION "Code 20", ROMX
 

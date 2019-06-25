@@ -514,9 +514,9 @@ RockItemEncounter:
 	ret
 
 .RockItems:
-	db 1, HELIX_FOSSIL
-	db 1, DOME_FOSSIL
-	db 1, OLD_AMBER
+	db 1, PLUME_FOSSIL
+	db 1, SAIL_FOSSIL
+	db 1, CLAW_FOSSIL
 	db 1, BIG_NUGGET
 	db 2, RARE_BONE
 	db 4, NUGGET

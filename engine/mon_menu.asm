@@ -164,13 +164,9 @@ GetMonSubmenuItems: ; 24dd4
 	ld a, MON_ITEM
 	call GetPartyParamLocation
 	ld d, [hl]
-	call ItemIsMail
 	pop hl
-	ld a, MONMENU_MAIL
-	jr c, .ok
 	ld a, MONMENU_ITEM
 
-.ok
 	call AddMonMenuItem
 
 .skip2
