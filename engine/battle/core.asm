@@ -3614,6 +3614,18 @@ ResetPlayerAbility:
 	call GetAbility
 	ld a, b
 	ld [wPlayerAbility], a
+
+	cp RKS_SYSTEM
+	jp nz, .nope
+	ld a, [wBattleMonItem]
+	cp NORMALIUM_Z
+	jr c, .nope
+	cp FAIRIUM_Z + 1
+	jr nc, .nope
+	sub NORMALIUM_Z
+	ld [wBattleMonType1], a
+	ld [wBattleMonType2], a
+.nope
 	xor a
 	ret
 
@@ -3625,6 +3637,18 @@ ResetEnemyAbility:
 	call GetAbility
 	ld a, b
 	ld [wEnemyAbility], a
+
+	cp RKS_SYSTEM
+	jp nz, .nope
+	ld a, [wEnemyMonItem]
+	cp NORMALIUM_Z
+	jr c, .nope
+	cp FAIRIUM_Z + 1
+	jr nc, .nope
+	sub NORMALIUM_Z
+	ld [wEnemyMonType1], a
+	ld [wEnemyMonType1], a
+.nope
 	xor a
 	ret
 
@@ -3718,7 +3742,6 @@ InitBattleMon: ; 3da0d
 	ld a, [wBaseType2]
 	ld [wBattleMonType2], a
 
-if !DEF(FAITHFUL)
 	; Armored Mewtwo is Psychic/Steel
 	ld a, [wBattleMonSpecies]
 	cp MEWTWO
@@ -3729,7 +3752,6 @@ if !DEF(FAITHFUL)
 	ld a, STEEL
 	ld [wBattleMonType2], a
 .not_armored_mewtwo
-endc
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
