@@ -20,7 +20,7 @@ Town1_MapScriptHeader:
 
 MysteryDungeonEnterScript:
 	opentext
-	givepoke YAMASK, 5, NO_ITEM, MALE | ALOLAN, LUXURY_BALL, SHINY_MASK | HIDDEN_ABILITY, $2345, IndigoName, IndigoOT
+	givepoke PORYGON, 5, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
 	end
 AlolaName:

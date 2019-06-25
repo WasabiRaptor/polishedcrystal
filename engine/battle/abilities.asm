@@ -118,14 +118,27 @@ ObliviousAbility:
 	ld hl, ConfusedNoMoreText
 	jp StdBattleTextBox
 
+UntraceableAbilities:
+	cp TRACE
+	ret z
+	cp IMPOSTER
+	ret z
+	cp STANCE_CHANGE
+	ret z
+	cp RECIEVER
+	ret z
+	cp POWER_OF_ALCHEMY
+	ret z
+	cp POWER_CONSTRUCT
+	ret z
+	cp RKS_SYSTEM
+	ret z
+	ret
+
 TraceAbility:
 	ld a, BATTLE_VARS_ABILITY_OPP
 	call GetBattleVar
-	cp TRACE
-	jr z, .trace_failure
-	cp IMPOSTER
-	jr z, .trace_failure
-	cp STANCE_CHANGE
+	call UntraceableAbilities
 	jr z, .trace_failure
 	push af
 	ld b, a
@@ -512,15 +525,7 @@ RecieverAbility:
 	call GetAbility
 	ld a, b
 	push af
-	cp TRACE
-	jr z, .trace_failure
-	cp IMPOSTER
-	jr z, .trace_failure
-	cp STANCE_CHANGE
-	jr z, .trace_failure
-	cp RECIEVER
-	jr z, .trace_failure
-	cp POWER_OF_ALCHEMY
+	call UntraceableAbilities
 	jr z, .trace_failure
 	ld b, a
 	farcall BufferAbility
