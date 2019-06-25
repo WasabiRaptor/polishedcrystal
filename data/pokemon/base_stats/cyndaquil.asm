@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/cyndaquil/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db BLAZE, FLAME_BODY	; abilities
+	db FLASH_FIRE	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

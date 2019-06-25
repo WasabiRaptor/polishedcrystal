@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 5 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/druddigon/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db ROUGH_SKIN, SHEER_FORCE	; abilities
+	db MOLD_BREAKER	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_DRAGON, EGG_MONSTER ; egg groups
 

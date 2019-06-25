@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 2 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/incineroar/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db BLAZE, BLAZE	; abilities
+	db INTIMIDATE	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

@@ -33,6 +33,8 @@ MeowsticIconPals::
 	iconpal TEAL, GREEN ; Meowstic_F
 
 NidoranIconPals::
+NidorinoIconPals::
+NidokingIconPals::
 	iconpal PURPLE, TEAL ; Nidoran_M
 	iconpal TEAL, PURPLE ; Nidoran_F
 

@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/marill/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db THICK_FAT ; ability 1
+	db HUGE_POWER ; ability 2
+	db SAP_SIPPER ; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_WATER_1, EGG_FAIRY ; egg groups
 

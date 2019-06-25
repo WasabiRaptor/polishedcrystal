@@ -9,7 +9,7 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/abomasnow/front.dimensions"
-	db SNOW_WARNING, 0	; abilities
+	db SNOW_WARNING, SNOW_WARNING	; abilities
 	db SOUNDPROOF	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_GRASS ; egg groups

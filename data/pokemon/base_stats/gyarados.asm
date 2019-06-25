@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 0 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/gyarados/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db INTIMIDATE, MOLD_BREAKER	; abilities
+	db MOXIE	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_WATER_2, EGG_DRAGON ; egg groups
 

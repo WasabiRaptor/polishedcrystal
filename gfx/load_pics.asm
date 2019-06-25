@@ -1,7 +1,7 @@
 GetVariant: ; 51040
 	ld a, [wCurPartySpecies]
-	cp MEWTWO
-	jp z, .GetMewtwoVariant
+	;cp MEWTWO
+	;jp z, .GetMewtwoVariant
 
 ; Return CurForm based on Form at hl
 	ld a, [hl]
@@ -74,7 +74,7 @@ _GetFrontpic: ; 510a5
 	ld a, BANK(sScratch)
 	call GetSRAMBank
 	push de
-	call GetBaseData
+	call GetBaseData ;form is known
 	ld a, [wBasePicSize]
 	and $f
 	ld b, a

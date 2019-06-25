@@ -1,23 +1,25 @@
 VariantIconPointerTable:
-    dbba LYCANROC,  LycanrocIconPointers
-    dbba MEOWTH,    MeowthIconPointers  
-    dbba PERSIAN,   PersianIconPointers   
-    dbba GRIMER,    GrimerIconPointers
-    dbba MUK,       MukIconPointers
-    dbba ROTOM,     RotomIconPointers
-	dbba MEOWSTIC,  MeowsticIconPointers
-    dbba NIDORAN,   NidoranIconPointers
-    dbba SANDSHREW, SandshrewIconPointers
-    dbba SANDSLASH, SandslashIconPointers
-    dbba SAWSBUCK,  SawsbuckIconPointers
-    dbba GIRAFARIG, GirafarigIconPointers
-    dbba VULPIX,    VulpixIconPointers
-    dbba NINETALES, NinetalesIconPointers
-    dbba UNOWN,     UnownIconPointers
-    dbba AEGISLASH, AegislashIconPointers
-    dbba SUICUNE,   SuicuneIconPointers
-    dbba RAIKOU,    RaikouIconPointers
-    dbba ENTEI,     EnteiIconPointers
-    dbba SHAYMIN,   ShayminIconPointers
-    dbba ZYGARDE,   ZygardeIconPointers
-	dbba -1,        IconPointers
+    dbbw LYCANROC,  BANK(LycanrocIcon), LycanrocIconPointers
+    dbbw MEOWTH,    BANK(MeowthIcon), MeowthIconPointers  
+    dbbw PERSIAN,   BANK(PersianIcon), PersianIconPointers   
+    dbbw GRIMER,    BANK(GrimerIcon), GrimerIconPointers
+    dbbw MUK,       BANK(MukIcon), MukIconPointers
+    dbbw ROTOM,     BANK(RotomIcon), RotomIconPointers
+	dbbw MEOWSTIC,  BANK(Meowstic_MIcon), MeowsticIconPointers
+    dbbw NIDORAN,   BANK(Nidoran_MIcon), NidoranIconPointers
+    dbbw NIDORINO,  BANK(NidorinoIcon), NidorinoIconPointers
+    dbbw NIDOKING,  BANK(NidokingIcon), NidokingIconPointers
+    dbbw SANDSHREW, BANK(SandshrewIcon), SandshrewIconPointers
+    dbbw SANDSLASH, BANK(SandslashIcon), SandslashIconPointers
+    dbbw SAWSBUCK,  BANK(SawsbuckIcon), SawsbuckIconPointers
+    dbbw GIRAFARIG, BANK(GirafarigIcon), GirafarigIconPointers
+    dbbw VULPIX,    BANK(VulpixIcon), VulpixIconPointers
+    dbbw NINETALES, BANK(NinetalesIcon), NinetalesIconPointers
+    dbbw UNOWN,     BANK(UnownIcon), UnownIconPointers
+    dbbw AEGISLASH, BANK(AegislashIcon), AegislashIconPointers
+    dbbw SUICUNE,   BANK(SuicuneIcon), SuicuneIconPointers
+    dbbw RAIKOU,    BANK(RaikouIcon), RaikouIconPointers
+    dbbw ENTEI,     BANK(EnteiIcon), EnteiIconPointers
+    dbbw SHAYMIN,   BANK(ShayminIcon), ShayminIconPointers
+    dbbw ZYGARDE,   BANK(ZygardeIcon), ZygardeIconPointers
+	dbbw -1,        BANK(Icons1), IconPointers

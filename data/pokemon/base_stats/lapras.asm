@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 7 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/lapras/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db WATER_ABSORB ; ability 1
+	db SHELL_ARMOR ; ability 2
+	db HYDRATION ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_WATER_1 ; egg groups
 

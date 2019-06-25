@@ -9,7 +9,7 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/altaria/front.dimensions"
-	db NATURAL_CURE, 0	; abilities
+	db NATURAL_CURE, NATURAL_CURE	; abilities
 	db CLOUD_NINE	; hidden ability
 	db GROWTH_ERRATIC ; growth rate
 	dn EGG_FLYING, EGG_DRAGON ; egg groups

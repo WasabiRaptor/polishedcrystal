@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/lampent/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db FLASH_FIRE, FLAME_BODY	; abilities
+	db INFILTRATOR	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
 

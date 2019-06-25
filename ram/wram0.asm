@@ -390,8 +390,8 @@ wPlayerSubStatus2::
 ; 5 lock-on
 ; 4 encore
 ; 3 transformed
-; 2
-; 1
+; 2 magic bounce?
+; 1 
 ; 0 toxic
 	ds 1
 wPlayerSubStatus3::
@@ -403,7 +403,7 @@ wPlayerSubStatus3::
 ; 3 flinch
 ; 2
 ; 1 rollout
-; 0 bide
+; 0 bide? flash fire? disguise / illusion broken?
 	ds 1
 wPlayerSubStatus4::
 ; bit
@@ -411,7 +411,7 @@ wPlayerSubStatus4::
 ; 6 rage
 ; 5 recharge
 ; 4 substitute
-; 3
+; 3	roost
 ; 2 focus energy
 ; 1 mist
 ; 0 curled

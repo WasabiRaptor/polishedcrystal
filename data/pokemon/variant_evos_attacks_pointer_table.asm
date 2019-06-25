@@ -4,6 +4,9 @@ VariantEvosAttacksPointerTable:
     dbba PERSIAN,   PersianEvosAttacksPointers   
     dbba GRIMER,    GrimerEvosAttacksPointers
     dbba MUK,       MukEvosAttacksPointers
+    dbba NIDORAN,   NidoranEvosAttacksPointers
+    dbba NIDORINO,  NidorinoEvosAttacksPointers
+    dbba NIDOKING,  NidokingEvosAttacksPointers
     dbba ROTOM,     RotomEvosAttacksPointers
 	dbba MEOWSTIC,  MeowsticEvosAttacksPointers
     dbba SANDSHREW, SandshrewEvosAttacksPointers

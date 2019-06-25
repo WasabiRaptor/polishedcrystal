@@ -9,8 +9,9 @@
 	db ASPEAR_BERRY, ASPEAR_BERRY ; items
 	dn FEMALE_75, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/ninetales/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db FLASH_FIRE ; ability 1
+	db FOREWARN ; ability 2
+	db DROUGHT ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

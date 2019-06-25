@@ -1068,7 +1068,6 @@ DisplayDexEntry: ; 4424d
 	hlcoord 9, 3
 	call PlaceString ; mon species
 	ld a, [wd265]
-	ld b, a
 	call GetDexEntryPointer
 	ld a, b
 	push af
@@ -1255,9 +1254,7 @@ DisplayDexEntry: ; 4424d
 .statpage
 	push bc
 
-	ld a, 1
-	ld [wCurForm], a
-	call GetBaseData
+	call GetBaseData ;form is known
 	
 	lb bc, 9, 12
 	hlcoord 8, 1
@@ -1490,8 +1487,7 @@ DisplayDexEntry: ; 4424d
 	ret
 
 .Hpev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
@@ -1506,8 +1502,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Atkev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
@@ -1520,8 +1515,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Defev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	add "0"
@@ -1532,8 +1526,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Spdev
-	ld a, b
-
+	ld b, a
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1542,8 +1535,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone1
 
 .Satev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
@@ -1558,8 +1550,7 @@ DisplayDexEntry: ; 4424d
 	jr .evdone2
 
 .Sdfev
-	ld a, b
-
+	ld b, a
 	rrca
 	rrca
 	rrca
@@ -1683,8 +1674,22 @@ Mul16:
 GetDexEntryPointer: ; 44333
 ; return dex entry pointer b:de
 	push hl
-	ld hl, PokedexDataPointerTable
-	ld a, b
+;get relevant pointers
+	ld hl, VariantPokedexEntryPointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld c, a
+	push af
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [wd265]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld d, 0
 	ld e, a
@@ -1693,66 +1698,27 @@ GetDexEntryPointer: ; 44333
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	push de
-	rlca
-	rlca
-	and $3
-	ld hl, .PokedexEntryBanks
-	ld d, 0
-	ld e, a
-	add hl, de
-	ld b, [hl]
-	pop de
-	pop hl
-	ret
-
-.PokedexEntryBanks: ; 44351
-
-GLOBAL PokedexEntries1
-GLOBAL PokedexEntries2
-GLOBAL PokedexEntries3
-GLOBAL PokedexEntries4
-
-	db BANK(PokedexEntries1)
-	db BANK(PokedexEntries2)
-	db BANK(PokedexEntries3)
-	db BANK(PokedexEntries4)
-
-	call GetDexEntryPointer ; b:de
-	push hl
-	ld h, d
-	ld l, e
-; skip species name
-.loop1
-	ld a, b
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .loop1
-; skip height and weight
-rept 4
-	inc hl
-endr
-; if c != 1: skip entry
-	dec c
-	jr z, .done
-; skip entry
-.loop2
-	ld a, b
-	call GetFarByte
-	inc hl
-	cp "@"
-	jr nz, .loop2
-
-.done
-	ld d, h
-	ld e, l
+	pop af
+	jr c, .donebanks
+	ld a, [wd265]
+	cp FLORGES
+	jr c, .donebanks
+	ld c, BANK(PokedexEntries2)
+	cp LAPRAS
+	jr c, .donebanks
+	ld c, BANK(PokedexEntries3)
+	cp TALONFLAME
+	jr c, .donebanks
+	ld c, BANK(PokedexEntries4)
+.donebanks
+	ld b, c	
 	pop hl
 	ret
 
 PokedexDataPointerTable: ; 0x44378
 INCLUDE "data/pokemon/dex_entry_pointers.asm"
 INCLUDE "data/pokemon/variant_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/variant_dex_entry_pointer_table.asm"
 
 SECTION "Code 11", ROMX
 
@@ -3939,7 +3905,9 @@ ListMoves: ; 50d6f
 CalcLevel: ; 50e1b
 	ld a, [wTempMonSpecies]
 	ld [wCurSpecies], a
-	call GetBaseData
+	ld hl, wTempMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld d, 1
 .next_level
 	inc d
@@ -4395,7 +4363,7 @@ INCLUDE "data/pokemon/names.asm"
 SECTION "Variant Base Data", ROMX
 
 INCLUDE "data/pokemon/variant_base_stats.asm"
-
+INCLUDE "data/pokemon/variant_names.asm"
 
 SECTION "Code 14", ROMX
 

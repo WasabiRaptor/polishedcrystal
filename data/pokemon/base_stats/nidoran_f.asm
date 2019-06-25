@@ -7,10 +7,11 @@
 	db 235 ; catch rate
 	db 55 ; base exp
 	db NO_ITEM, NO_ITEM ; items
-	dn ALL_FEMALE, 3 ; gender, step cycles to hatch
+	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/nidoran_f/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db POISON_POINT ; ability 1
+	db RIVALRY ; ability 2
+	db HUSTLE ; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_FIELD ; egg groups
 

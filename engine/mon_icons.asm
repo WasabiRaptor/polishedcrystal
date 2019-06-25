@@ -486,14 +486,15 @@ HoldSwitchmonIcon: ; 8ea8c
 	ret
 
 GetRelevantIconPointersAndBank:
-; given species in wCurIcon, return *IconPointers in hl
+; given species in wCurIcon, return *IconPointers in hl and BANK(*Icon) in b
 ; returns c for variants, nc for normal species
 	ld a, [wCurIcon]
 	ld hl, VariantIconPointerTable
 	ld de, 4
 	call IsInArray
 	inc hl
-	inc hl
+	ld a, [hli]
+	ld b, a
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
@@ -516,9 +517,7 @@ GetRelevantIconPointersAndBank:
 ;get the bank
 	ld c, 8
 	pop af
-	ld b, BANK(Icons3)
 	ret c ;variant
-	ld b, BANK(Icons1)
 	cp EGG ; first mon in Icons2
 	ret c
 	ld b, BANK(Icons2)

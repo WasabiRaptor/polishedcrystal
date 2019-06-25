@@ -9,8 +9,9 @@
 	db NO_ITEM, QUICK_CLAW ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/sneasel/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db INNER_FOCUS ; ability 1
+	db KEEN_EYE ; ability 2
+	db PICKPOCKET ; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

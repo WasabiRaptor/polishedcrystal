@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 6 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/jolteon/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db VOLT_ABSORB ; ability 1
+	db STATIC ; ability 2
+	db QUICK_FEET ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

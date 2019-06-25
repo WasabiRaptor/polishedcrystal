@@ -40,6 +40,7 @@ $(BUILD_DIR)ram.o \
 $(BUILD_DIR)audio.o \
 $(BUILD_DIR)audio/musicplayer.o \
 $(BUILD_DIR)data/pokemon/dex_entries.o \
+$(BUILD_DIR)data/pokemon/variant_dex_entries.o \
 $(BUILD_DIR)data/pokemon/egg_moves.o \
 $(BUILD_DIR)data/pokemon/evos_attacks.o \
 $(BUILD_DIR)data/maps/map_data.o \

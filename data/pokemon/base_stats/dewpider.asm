@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/dewpider/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db WATER_BUBBLE, WATER_BUBBLE	; abilities
+	db WATER_ABSORB	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_WATER_1, EGG_BUG ; egg groups
 

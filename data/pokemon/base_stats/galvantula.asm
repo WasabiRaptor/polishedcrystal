@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/galvantula/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db COMPOUND_EYES, UNNERVE	; abilities
+	db SWARM	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_BUG, EGG_BUG ; egg groups
 

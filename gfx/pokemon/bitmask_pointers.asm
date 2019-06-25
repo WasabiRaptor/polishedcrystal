@@ -39,7 +39,7 @@ BitmasksPointers:
 	dw MukBitmasks
 	dw Nidoran_MBitmasks
 	dw NidorinoBitmasks
-	dw NidorinaBitmasks
+	dw NidokingBitmasks
 	dw NidokingBitmasks
 	dw NidoqueenBitmasks
 	dw SeviperBitmasks

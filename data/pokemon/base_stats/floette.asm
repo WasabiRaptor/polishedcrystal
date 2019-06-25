@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn ALL_FEMALE, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/floette/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db FLOWER_VEIL, FLOWER_VEIL	; abilities
+	db SYMBIOSIS	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 

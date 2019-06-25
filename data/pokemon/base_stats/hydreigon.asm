@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 7 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/hydreigon/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db LEVITATE, LEVITATE	; abilities
+	db LEVITATE	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_DRAGON, EGG_DRAGON ; egg groups
 

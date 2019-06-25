@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/ampharos/front.dimensions"
-	db STATIC, 0	; abilities
-	db PLUS	; hidden ability
+	db STATIC, STATIC	; abilities
+	db MOLD_BREAKER	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_FIELD ; egg groups
 

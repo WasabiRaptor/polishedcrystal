@@ -654,7 +654,7 @@ if !DEF(DEBUG)
 	ld a, SYLVEON
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	call GetBaseData
+	call GetBaseData ;form is known
 
 	hlcoord 6, 4
 	call PrepMonFrontpic

@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/porygon2/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db TRACE ; ability 1
+	db DOWNLOAD ; ability 2
+	db ANALYTIC ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
 

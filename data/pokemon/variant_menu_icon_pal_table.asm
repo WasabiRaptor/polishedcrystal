@@ -7,6 +7,8 @@ VariantIconPalTable:
     dbba GRIMER,    GrimerIconPals
     dbba MUK,       MukIconPals
     dbba NIDORAN,   NidoranIconPals
+    dbba NIDORINO,   NidorinoIconPals
+    dbba NIDOKING,   NidokingIconPals
     dbba SANDSHREW, SandshrewIconPals
     dbba SANDSLASH, SandslashIconPals
     ;dbba FLABEBE,   FlabebeIconPals

@@ -3536,9 +3536,9 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known ?
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known 
 	ld a, OTPARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon ;form is known
@@ -4858,9 +4858,9 @@ DrawEnemyHUD: ; 3e043
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-	call GetBaseData ;form is not known?
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
 	call PlaceString
@@ -6733,10 +6733,13 @@ LoadEnemyMon: ; 3e8eb
 	pop af
 	ldh [rSVBK], a
 
-	;get the temp form for this pokemon?
-	;ld hl, wEnemyMonForm
-	;predef GetVariant
-
+	;check if the map should have a certain pokemon form
+	ld a, [wMapGroup]
+	;cp GROUP_LAKE_OF_RAGE
+	;jr nz, .NoAlolanForms
+	ld a, ALOLAN
+	ld [wCurForm], a
+.NoAlolanForms
 	; Grab the BaseData for this species
 	call GetBaseData ;form is known
 
@@ -7011,9 +7014,14 @@ endc
 	ld a, [wBattleType]
 	cp BATTLETYPE_RED_GYARADOS
 	ld a, GYARADOS_RED_FORM
-	jr z, .red_form
-	ld a, 1 ; default form 1
-.red_form
+	jr z, .special_form
+
+	ld a, [wMapGroup]
+	;cp GROUP_LAKE_OF_RAGE
+	ld a, ALOLAN
+	jr z, .special_form
+	;ld a, 1 ; default form 1
+.special_form
 	add b
 	ld [hl], a
 
@@ -8754,11 +8762,33 @@ DropPlayerSub: ; 3f447
 	ld a, [wCurPartySpecies]
 	push af
 	ld a, [wBattleMonSpecies]
+	ld [wCurSpecies], a
+	ld [wCurPartySpecies], a
+	push af
+	ld hl, wBattleMonForm
+	predef GetVariant
+
+	ld a, [wPlayerAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wPlayerSubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	ld a, [wPartyCount]
+	ld hl, wPartyMon1Species
+	call GetIllusion
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+.no_illusion
+	ld de, VTiles2 tile $31
+	predef GetBackpic
+	pop af
+	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	ld hl, wBattleMonForm
 	predef GetVariant
-	ld de, VTiles2 tile $31
-	predef GetBackpic
+	call GetBaseData; form is known
+
 	pop af
 	ld [wCurPartySpecies], a
 	ret
@@ -8793,11 +8823,32 @@ DropEnemySub: ; 3f486
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
+	push af
+	ld hl, wEnemyMonForm
+	predef GetVariant
+	ld a, [wEnemyAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wEnemySubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	ld a, [wOTPartyCount]
+	ld hl, wOTPartyMon1Species
+	call GetIllusion
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
+.no_illusion
+	ld de, VTiles2
+	predef FrontpicPredef
+	pop af
+	ld [wCurSpecies], a
+	ld [wCurPartySpecies], a
+
 	ld hl, wEnemyMonForm
 	predef GetVariant
 	call GetBaseData ;form is known
-	ld de, VTiles2
-	predef FrontpicPredef
+
 	pop af
 	ld [wCurPartySpecies], a
 	ret
@@ -8814,6 +8865,20 @@ GetFrontpic_DoAnim: ; 3f4b4
 	ret
 ; 3f4c1
 
+GetIllusion:
+	dec a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [hl] ;species of last mon in party
+	push af
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	predef GetVariant
+	dec hl ;get personality into bc for getting the palette
+	ld b, h
+	ld c, l
+	pop af
+	ret
 
 StartBattle: ; 3f4c1
 ; This check prevents you from entering a battle without any Pokemon.

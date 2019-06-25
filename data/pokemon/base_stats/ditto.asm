@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/ditto/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db LIMBER, LIMBER	; abilities
+	db IMPOSTER	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_DITTO, EGG_DITTO ; egg groups
 

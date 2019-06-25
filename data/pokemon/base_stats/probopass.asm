@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/probopass/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db STURDY, MAGNET_PULL	; abilities
+	db SAND_FORCE	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
 

@@ -2,7 +2,7 @@
 ; (32 rows of 8 footprints per row).
 ; That means there's a row of the top two tiles for eight footprints,
 ; then a row of the bottom two tiles for those eight footprints.
-
+PokemonFootprints:
 INCBIN "gfx/footprints/eevee.1bpp"  
 INCBIN "gfx/footprints/vaporeon.1bpp"    
 INCBIN "gfx/footprints/jolteon.1bpp"   
@@ -43,7 +43,7 @@ INCBIN "gfx/footprints/grimer.1bpp"
 INCBIN "gfx/footprints/muk.1bpp"  
 INCBIN "gfx/footprints/nidoran_m.1bpp" 
 INCBIN "gfx/footprints/nidorino.1bpp" 
-INCBIN "gfx/footprints/nidorina.1bpp"      
+INCBIN "gfx/footprints/nidoking.1bpp"     
 INCBIN "gfx/footprints/nidoking.1bpp"     
 INCBIN "gfx/footprints/nidoqueen.1bpp"     
 INCBIN "gfx/footprints/seviper.1bpp"      

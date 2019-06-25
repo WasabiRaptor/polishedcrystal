@@ -9,8 +9,9 @@
 	db NO_ITEM, NUGGET ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/muk/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db STENCH ; ability 1
+	db STICKY_HOLD ; ability 2
+	db POISON_TOUCH ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
 

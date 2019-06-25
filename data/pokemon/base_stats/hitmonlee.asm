@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn ALL_MALE, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/hitmonlee/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db LIMBER ; ability 1
+	db RECKLESS ; ability 2
+	db UNBURDEN ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
 

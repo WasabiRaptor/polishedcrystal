@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/foongus/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db EFFECT_SPORE, EFFECT_SPORE	; abilities
+	db REGENERATOR	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_GRASS, EGG_GRASS ; egg groups
 

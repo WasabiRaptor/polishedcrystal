@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/mienshao/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db INNER_FOCUS, REGENERATOR	; abilities
+	db RECKLESS	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_FIELD, EGG_HUMAN_LIKE ; egg groups
 

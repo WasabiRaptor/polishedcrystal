@@ -36,6 +36,14 @@ NidoranAnimationPointers:
 	dw Nidoran_MAnimation
 	dw Nidoran_FAnimation
 
+NidorinoAnimationPointers:
+	dw NidorinoAnimation
+	dw NidorinaAnimation
+
+NidokingAnimationPointers:
+	dw NidokingAnimation
+	dw NidoqueenAnimation
+	
 SandshrewAnimationPointers:
 	dw SandshrewAnimation
 	dw Sandshrew_AlolaAnimation

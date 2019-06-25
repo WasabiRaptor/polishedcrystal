@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_75, 1 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/jigglypuff/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db CUTE_CHARM ; ability 1
+	db COMPETITIVE ; ability 2
+	db SOUNDPROOF ; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_FAIRY, EGG_FAIRY ; egg groups
 

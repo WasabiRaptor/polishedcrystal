@@ -9,8 +9,9 @@
 	db NO_ITEM, ORAN_BERRY ; items
 	dn FEMALE_50, 2 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/sentret/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db RUN_AWAY ; ability 1
+	db KEEN_EYE ; ability 2
+	db FRISK ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

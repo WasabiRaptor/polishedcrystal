@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 1 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/togepi/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db HUSTLE ; ability 1
+	db SERENE_GRACE ; ability 2
+	db SUPER_LUCK ; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

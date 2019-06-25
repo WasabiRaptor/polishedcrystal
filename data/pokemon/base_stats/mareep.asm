@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/mareep/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db STATIC ; ability 1
+	db STATIC ; ability 2
+	db MOTOR_DRIVE ; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_FIELD ; egg groups
 
