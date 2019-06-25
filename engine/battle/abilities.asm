@@ -1120,8 +1120,8 @@ PowerConstructAbility:
 	ld hl, wEnemyMonForm
 .got_form
 
-	call GetCurrentHP ; Current HP into de
-	call GetHalfMaxHP ; Half HP into bc
+	farcall GetCurrentHP ; Current HP into de
+	farcall GetHalfMaxHP ; Half HP into bc
 	call CompareTwoBytes ; Check if bc < de
 	ret
 	jr c, .popafandret
