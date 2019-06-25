@@ -18,7 +18,6 @@
 	const MONMENU_ITEM       ; 16
 	const MONMENU_CANCEL     ; 17
 	const MONMENU_MOVE       ; 18
-	const MONMENU_MAIL       ; 19
 	const MONMENU_ERROR      ; 20
 
 MONMENU_FIELD_MOVE EQU 0

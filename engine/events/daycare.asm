@@ -125,8 +125,6 @@ DayCareAskDepositPokemon: ; 16798
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 	ld d, [hl]
-	call ItemIsMail
-	jr c, .HoldingMail
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
 	call GetNick
@@ -150,11 +148,6 @@ DayCareAskDepositPokemon: ; 16798
 
 .OutOfUsableMons:
 	ld a, DAYCARETEXT_LAST_ALIVE_MON
-	scf
-	ret
-
-.HoldingMail:
-	ld a, DAYCARETEXT_REMOVE_MAIL
 	scf
 	ret
 ; 167f1

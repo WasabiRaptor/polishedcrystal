@@ -252,8 +252,6 @@ START_ITEM_TRIGGER_BALANCE EQU 2300
 
 	farcall InitDecorations
 
-	farcall DeletePartyMonMail
-
 	jp ResetGameTime
 ; 5ca1
 

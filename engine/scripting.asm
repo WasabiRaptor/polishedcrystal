@@ -2025,14 +2025,7 @@ Script_givepokeitem:
 	ld a, [wScriptBank]
 	call GetFarByte
 	ld b, a
-	push bc
-	inc hl
-	ld bc, MAIL_MSG_LENGTH
-	ld de, wd002
-	ld a, [wScriptBank]
-	call FarCopyBytes
-	pop bc
-	farjp GivePokeItem
+	ret
 
 Script_checkpokeitem:
 ; parameters:
@@ -2043,7 +2036,27 @@ Script_checkpokeitem:
 	ld d, a
 	ld a, [wScriptBank]
 	ld b, a
-	farjp CheckPokeItem
+
+	push bc
+	push de
+	farcall SelectMonFromParty
+	ld a, $2
+	jr c, .pop_return
+
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Item
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld d, [hl]
+	ld a, $3
+
+.pop_return
+	pop de
+	pop bc
+
+.return
+	ld [wScriptVar], a
+	ret
 
 Script_giveitem:
 ; parameters:

@@ -1597,6 +1597,8 @@ OffensiveDamageAbilities:
 	dbw RECKLESS, RecklessAbility
 	dbw GUTS, GutsAbility
 	dbw PIXILATE, PixilateAbility
+	dbw REFRIGERATE, RefrigerateAbility
+	dbw TOUGH_CLAWS, ToughClawsAbility
 	dbw -1, -1
 
 DefensiveDamageAbilities:
@@ -1613,6 +1615,12 @@ TechnicianAbility:
 	ret nc
 	ld a, $32
 	jp ApplyDamageMod
+
+ToughClawsAbility:
+	call CheckContactMove
+	ret c
+	ld a, $43 ;33% increase in power if contact move
+	jp ApplyPhysicalAttackDamageMod
 
 HugePowerAbility:
 ; Doubles physical attack
@@ -1742,6 +1750,7 @@ GutsAbility:
 	ld a, $32
 	jp ApplyPhysicalAttackDamageMod
 
+RefrigerateAbility:
 PixilateAbility:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar

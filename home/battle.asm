@@ -192,8 +192,6 @@ UserCanLoseItem::
 	and a
 	jr z, .pop_and_ret_z
 	ld d, a
-	call ItemIsMail
-	jr c, .pop_and_ret_z
 	ld de, 2
 	ld hl, .StuckItems
 	call IsInArray

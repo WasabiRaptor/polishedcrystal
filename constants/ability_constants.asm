@@ -143,6 +143,8 @@
 	const STORM_DRAIN
 	const MUMMY
 	const HEAVY_METAL
+	const RKS_SYSTEM 
+	const TOUGH_CLAWS 
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
@@ -155,11 +157,9 @@ NUM_ABILITIES EQU const_value
 	const BULLETPROOF ;thalins
 	const CONTRARY ;thalins
 
-	const RKS_SYSTEM ;raptor
 	const ROUGH_SKIN ;raptor
 	const IRON_BARBS ;raptor ;clone of rough skin
 	const WATER_BUBBLE ; raptor ;huge power but just for water
-	const TOUGH_CLAWS ;raptor ;huge power but just for contact
 	const GALE_WINGS ;raptor
 	const BERSERK ;raptor
 	const FLUFFY ;raptor

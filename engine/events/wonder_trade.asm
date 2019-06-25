@@ -23,7 +23,7 @@ WonderTrade::
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 	ld b, [hl]
-	ld a, GS_BALL
+	;ld a, GS_BALL
 	cp b
 	jr nz, .continue
 	ld hl, .Text_WonderTradeCantTradeGSBall
@@ -62,7 +62,7 @@ WonderTrade::
 	call Trade_GetAttributeOfLastPartymon
 	ld a, [de]
 	ld b, a
-	ld a, GS_BALL
+	;ld a, GS_BALL
 	cp b
 	ret nz
 
@@ -515,7 +515,7 @@ GetGSBallPichu:
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call Trade_GetAttributeOfLastPartymon
-	ld a, GS_BALL
+	;ld a, GS_BALL
 	ld [de], a
 
 	ret

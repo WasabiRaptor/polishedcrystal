@@ -75,7 +75,6 @@ VioletMart: ; 160fa
 	db X_ATTACK
 	db X_DEFEND
 	db X_SPEED
-	db FLOWER_MAIL
 	db -1
 ; 16106
 
@@ -90,7 +89,6 @@ AzaleaMart: ; 16106
 	db REPEL
 	db ANTIDOTE
 	db PARALYZEHEAL
-	db FLOWER_MAIL
 	db -1
 ; 16111
 
@@ -118,8 +116,6 @@ Goldenrod2FMart2: ; 16121
 	db ESCAPE_ROPE
 	db REPEL
 	db POKE_DOLL
-	db BLUESKY_MAIL
-	db MORPH_MAIL
 	db -1
 ; 1612b
 
@@ -133,9 +129,6 @@ Goldenrod2FMart2Eevee: ; 16140
 	db ESCAPE_ROPE
 	db REPEL
 	db POKE_DOLL
-	db BLUESKY_MAIL
-	db MORPH_MAIL
-	db EON_MAIL
 	db -1
 ; 16146
 
@@ -187,7 +180,6 @@ GoldenrodHarborMart:
 	db WIDE_LENS
 	db ZOOM_LENS
 	db BRIGHTPOWDER
-	db SURF_MAIL
 	db -1
 
 UndergroundMart: ; 1620e
@@ -226,7 +218,6 @@ OlivineMart: ; 16153
 	db AWAKENING
 	db ICE_HEAL
 	db SUPER_REPEL
-	db SURF_MAIL
 	db -1
 ; 1615e
 
@@ -269,7 +260,6 @@ MahoganyMart2: ; 16170
 	db HYPER_POTION
 	db SUPER_REPEL
 	db REVIVE
-	db FLOWER_MAIL
 	db -1
 ; 1617b
 
@@ -285,7 +275,6 @@ BlackthornMart: ; 1617b
 	db MAX_REPEL
 	db X_DEFEND
 	db X_ATTACK
-	db MUSIC_MAIL
 	db -1
 ; 16186
 
@@ -313,7 +302,6 @@ ViridianMart: ; 16186
 	db FULL_HEAL
 	db MAX_REPEL
 	db REVIVE
-	db FLOWER_MAIL
 	db -1
 ; 16191
 
@@ -338,8 +326,6 @@ MtMoonMart: ; 161fd
 	db LEMONADE
 	db REPEL
 	db SUPER_REPEL
-	db MIRAGE_MAIL
-	db PORTRAITMAIL
 	db -1
 ; 16205
 
@@ -354,7 +340,6 @@ CeruleanMart: ; 1619a
 	db X_DEFEND
 	db X_ATTACK
 	db DIRE_HIT
-	db SURF_MAIL
 	db -1
 ; 161a5
 
@@ -382,7 +367,6 @@ VermilionMart: ; 161af
 	db PARALYZEHEAL
 	db AWAKENING
 	db BURN_HEAL
-	db LITEBLUEMAIL
 	db -1
 ; 161b9
 
@@ -438,8 +422,6 @@ Celadon4FMart: ; 161d5
 	db THUNDERSTONE
 	db LEAF_STONE
 	db EXP_SHARE
-	db LOVELY_MAIL
-	db SURF_MAIL
 	db -1
 ; 161da
 
@@ -453,7 +435,6 @@ SaffronMart: ; 161f3
 	db FULL_HEAL
 	db X_ATTACK
 	db X_DEFEND
-	db FLOWER_MAIL
 	db -1
 ; 161fd
 
@@ -475,7 +456,6 @@ FuchsiaMart: ; 161ea
 	db HYPER_POTION
 	db FULL_HEAL
 	db MAX_REPEL
-	db FLOWER_MAIL
 	db -1
 ; 161f3
 

@@ -139,9 +139,11 @@ AbilityNames:
 	dw Illusion
 	dw ReverseAura
 	dw SoulHeart
-	dw HeavyMetal
 	dw StormDrain
 	dw Mummy
+	dw HeavyMetal
+	dw RKS_System
+	dw ToughClaws
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -286,6 +288,8 @@ SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
 HeavyMetal:    db "H","e","a","v","y"," ","M","e","t","a","l","@"
 StormDrain:	   db "S","t","o","r","m"," ","d","r","a","i","n","@"
 Mummy:		   db "M","u","m","m","y","@"
+RKS_System:	   db "R","K","S"," ","S","y","s","t","e","m","@"
+ToughClaws:    db "T","o","u","g","h"," ","C","l","a","w","s","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -431,6 +435,8 @@ AbilityDescriptions:
 	dw StormDrainDescription
 	dw MummyDescription
 	dw HeavyMetalDescription
+	dw RKS_SystemDescription
+	dw ToughClawsDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -991,3 +997,10 @@ StormDrainDescription:
 MummyDescription:
 	db    "Makes others into"
 	next1 "mummies.@"
+
+RKS_SystemDescription:
+	db    "Can be any type@"
+
+ToughClawsDescription:
+	db    "Boosts power to"
+	next1 "contact moves.@"

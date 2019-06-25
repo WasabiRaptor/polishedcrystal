@@ -183,14 +183,7 @@ LoadPartyMenuMonIcon:
 	and a
 	ret z
 	ld d, a
-	call ItemIsMail
-	jr c, .mail
 	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_ITEM
-	jr .okay
-
-.mail
-	ld a, SPRITE_ANIM_FRAMESET_PARTY_MON_WITH_MAIL
-.okay
 	ld hl, SPRITEANIMSTRUCT_FRAMESET_ID
 	add hl, bc
 	ld [hl], a
