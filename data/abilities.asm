@@ -140,6 +140,7 @@ AbilityNames:
 	dw ReverseAura
 	dw SoulHeart
 	dw HeavyMetal
+	dw StormDrain
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -282,6 +283,7 @@ Illusion:	   db "I","l","l","u","s","i","o","n","@"
 ReverseAura:   db "R","e","v","e","r","s","e"," ","A","u","r","a","@"
 SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
 HeavyMetal:    db "H","e","a","v","y"," ","M","e","t","a","l","@"
+StormDrain:	   db "S","t","o","r","m"," ","d","r","a","i","n","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -977,3 +979,7 @@ SoulHeartDescription:
 HeavyMetalDescription:
 	db    "Doubles user's"
 	next1 "weight.@"
+	
+StormDrainDescription:
+	db    "Drains water moves"
+	next1 "and boosts Sp.Atk.@"

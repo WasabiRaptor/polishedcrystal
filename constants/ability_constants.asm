@@ -141,6 +141,7 @@
 	const REVERSE_AURA
 	const SOUL_HEART
 	const HEAVY_METAL
+	const STORM_DRAIN
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
@@ -159,7 +160,6 @@ NUM_ABILITIES EQU const_value
 	const ROUGH_SKIN
 	const IRON_BARBS
 	const CONTRARY
-	const STORM_DRAIN
 	const WATER_BUBBLE
 	const GOOEY
 	const BERSERK

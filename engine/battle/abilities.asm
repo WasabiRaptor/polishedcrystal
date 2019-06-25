@@ -971,6 +971,7 @@ NullificationAbilities:
 	dbw SAP_SIPPER, SapSipperAbility
 	dbw VOLT_ABSORB, VoltAbsorbAbility
 	dbw WATER_ABSORB, WaterAbsorbAbility
+	dbw STORM_DRAIN, StormDrainAbility
 	dbw DAMP, DampAbility
 	dbw -1, -1
 
@@ -1010,14 +1011,15 @@ MoxieAbility:
 	jr nz, .enemy
 	ld a, [wBattleMode]
 	dec a
-	ret z
+	ret z ;checks if wild battle 
 .enemy
-	farcall CheckAnyOtherAliveOpponentMons
+	farcall CheckAnyOtherAliveOpponentMons ;only boost if there are more pokemon to fight
 	ret z
 SapSipperAbility:
 AttackUpAbility:
 	ld b, ATTACK
 	jr StatUpAbility
+
 SoulHeartAbility:
 	; Don't run if battle is over
 	ldh a, [hBattleTurn]
@@ -1029,6 +1031,7 @@ SoulHeartAbility:
 .enemy
 	farcall CheckAnyOtherAliveOpponentMons
 	ret z
+StormDrainAbility:
 LightningRodAbility:
 	ld b, SP_ATTACK
 	jr StatUpAbility
@@ -1075,6 +1078,8 @@ StatUpAbility:
 	cp LIGHTNING_ROD
 	jr z, .print_immunity
 	cp MOTOR_DRIVE
+	jr z, .print_immunity
+	cp STORM_DRAIN
 	jr z, .print_immunity
 	cp SAP_SIPPER
 	jr nz, .done
