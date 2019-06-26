@@ -1154,6 +1154,15 @@ PowerConstructAbility:
 	call CompareTwoBytes ; Check if bc < de
 	jr c, .popafandret
 
+	farcall GetMaxHP ; Max HP into bc
+	ld a, c
+	sub e
+	ld d, a
+	ld a, b
+	sbc a, d
+	ld e, a
+	push de
+
 	predef GetVariant
 	cp COMPLETE_ZYGARDE
 	jr z, .popafandret
@@ -1171,6 +1180,27 @@ PowerConstructAbility:
 
 .formChanged
 	call GetBaseData
+	pop de
+	farcall GetMaxHP ; Max HP into bc
+	ld a, c
+	sub e
+	ld d, a
+	ld a, b
+	sbc a, d
+	ld e, a
+
+	ldh a, [hBattleTurn]
+	and a
+	ld hl, wBattleMonHP
+	jr z, .got_hp
+	ld hl, wEnemyMonHP
+
+.got_hp
+	ld a, d
+	ld [hli], a
+	ld a, e
+	ld [hl], a
+
 	pop af
 	push af
 	ld a, [wPlayerMinimized]
