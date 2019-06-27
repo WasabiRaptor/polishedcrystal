@@ -214,11 +214,19 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 
 .return_from_jumptable
 	call Pokegear_FinishTilemap
-	call TownMapPals
 	ld a, [wcf64]
 	cp MAP_CARD
 	jr nz, .not_town_map
+	call TownMapPals
+	hlcoord $b, 0, wAttrMap
+	lb bc, 3, 8
+	xor a
+	call FillBoxWithByte
+
+	jr .is_town_map
 .not_town_map
+	farcall WipeAttrMap
+.is_town_map
 	ld a, [wcf65]
 	and a
 	jr nz, .transition
@@ -2224,6 +2232,7 @@ TownMapBubble: ; 91bb5
 	hlcoord SCREEN_WIDTH-13, 0
 	ld de, .FlyToWhere
 	call PlaceString
+
 ; Print the name of the default flypoint
 	call .Name
 ; Up/down arrows
@@ -2326,6 +2335,11 @@ FlyMap: ; 91c90
 	call FillInvarMap
 	call TownMapBubble
 	call TownMapPals
+	hlcoord SCREEN_WIDTH-14, 0, wAttrMap
+	lb bc, 2, 13
+	xor a
+	call FillBoxWithByte
+
 	call .MapHud
 	pop af
 	jp TownMapPlayerIcon
@@ -2361,6 +2375,11 @@ FlyMap: ; 91c90
 	call FillKantoMap
 	call TownMapBubble
 	call TownMapPals
+	hlcoord SCREEN_WIDTH-14, 0, wAttrMap
+	lb bc, 2, 13
+	xor a
+	call FillBoxWithByte
+
 	call .MapHud
 	pop af
 	jp TownMapPlayerIcon
@@ -2380,6 +2399,11 @@ FlyMap: ; 91c90
 	pop af
 	call TownMapBubble
 	call TownMapPals
+	hlcoord SCREEN_WIDTH-14, 0, wAttrMap
+	lb bc, 2, 13
+	xor a
+	call FillBoxWithByte
+
 .MapHud:
 	hlbgcoord 0, 0 ; BG Map 0
 	call TownMapBGUpdate
@@ -2925,7 +2949,7 @@ TownMapPlayerIcon: ; 91fa6
 LoadTownMapGFX: ; 91ff2
 	ld hl, TownMapGFX
 	ld de, VTiles2
-	lb bc, BANK(TownMapGFX), $40
+	lb bc, BANK(TownMapGFX), $7f
 	jp DecompressRequest2bpp
 
 ; 91fff
