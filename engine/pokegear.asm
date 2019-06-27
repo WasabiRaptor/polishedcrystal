@@ -96,11 +96,6 @@ Pokegear_LoadGFX: ; 90c4e
 	ld a, BANK(TownMapGFX)
 	call FarDecompress
 
-	ld hl, PokegearGFX
-	ld de, VTiles2 tile $40
-	ld a, BANK(PokegearGFX)
-	call Decompress
-
 	ld hl, PokegearSpritesGFX
 	ld de, VTiles0
 	ld a, BANK(PokegearSpritesGFX)
@@ -270,9 +265,6 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 .Clock: ; 90e1a
 	ld de, ClockTilemapRLE
 	call Pokegear_LoadTilemapRLE
-	hlcoord 12, 1
-	ld de, .switch
-	call PlaceString
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call TextBox
@@ -280,12 +272,22 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 
 ; 90e36 (24:4e36)
 
-.switch
-	db " Switch▶@"
-; 90e3f
-
 .Map: ; 90e3f
 	farcall PokegearMap
+	hlcoord $b, 0
+	ld a, $17
+	ld [hl], a
+	hlcoord $b, 1
+	ld a, $16
+	ld [hl], a
+	hlcoord $b, 2
+	ld a, $26
+	ld [hli], a
+	ld a, $7
+	ld bc, 7
+	call ByteFill
+	ld a, $17
+	ld [hl], a
 
 	ld a, [wPokegearMapCursorLandmark]
 	jp PokegearMap_UpdateLandmarkName
@@ -313,18 +315,18 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 ; 90e98
 
 .PlacePhoneBars: ; 90e98 (24:4e98)
-	hlcoord 17, 1
+	hlcoord 1, 1
 	ld a, $58
 	ld [hli], a
 	inc a
 	ld [hl], a
-	hlcoord 17, 2
+	hlcoord 1, 2
 	inc a
 	ld [hli], a
 	call GetMapHeaderPhoneServiceNybble
 	and a
 	ret nz
-	hlcoord 18, 2
+	hlcoord 2, 2
 	ld [hl], $5b
 	ret
 
@@ -889,7 +891,7 @@ TownMap_GetOrangeLandmarkLimits:
 
 PokegearRadio_Init: ; 910f9 (24:50f9)
 	call InitPokegearTilemap
-	depixel 4, 10, 4, 4
+	depixel 4, 2, 4, 4
 	ld a, SPRITE_ANIM_INDEX_RADIO_TUNING_KNOB
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
@@ -2944,6 +2946,3 @@ INCBIN "gfx/town_map/orange.bin"
 
 PokedexNestIconGFX: ; 922d1
 INCBIN "gfx/town_map/dexmap_nest_icon.2bpp"
-
-PokegearGFX: ; 1de2e4
-INCBIN "gfx/pokegear/pokegear.2bpp.lz"
