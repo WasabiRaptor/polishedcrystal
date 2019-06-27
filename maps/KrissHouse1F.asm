@@ -4,8 +4,8 @@ KrissHouse1F_MapScriptHeader:
 	db 0 ; callbacks
 
 	db 3 ; warp events
-	warp_event  8,  7, TOWN_1, 1
-	warp_event  9,  7, TOWN_1, 1
+	warp_event  8,  7, DANIELS_TOWN, 1
+	warp_event  9,  7, DANIELS_TOWN, 1
 	warp_event 11,  0, KRISS_HOUSE_2F, 1
 
 	db 4 ; coord events

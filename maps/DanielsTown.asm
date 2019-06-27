@@ -2,7 +2,7 @@
 	const TEMP_MYSTERY_DUNGEON_NPC
 	const TEMP_BUGSY
 
-Town1_MapScriptHeader:
+DanielsTown_MapScriptHeader:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks

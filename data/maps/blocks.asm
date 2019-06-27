@@ -32,12 +32,12 @@ DayCare_BlockData:
 
 SECTION "Overworld Map Blocks", ROMX
 
-Town1_BlockData:
-	INCBIN "maps/Town1.ablk.lz"
+DanielsTown_BlockData:
+	INCBIN "maps/DanielsTown.ablk.lz"
 Bridge_BlockData:
 	INCBIN "maps/Bridge.ablk.lz"
-Town2_BlockData:
-	INCBIN "maps/Town2.ablk.lz"
+AsaokaCity_BlockData:
+	INCBIN "maps/AsaokaCity.ablk.lz"
 
 
 RouteNE1_BlockData:
@@ -48,8 +48,8 @@ RouteNE2_BlockData:
 	INCBIN "maps/RouteNE2.ablk.lz"
 
 
-Town3_BlockData:
-	INCBIN "maps/Town3.ablk.lz"
+KubotaTown_BlockData:
+	INCBIN "maps/KubotaTown.ablk.lz"
 
 
 RouteW1_BlockData:
@@ -64,8 +64,8 @@ AshPlains2_BlockData:
 	INCBIN "maps/AshPlains2.ablk.lz"
 
 
-Town4_BlockData:
-	INCBIN "maps/Town4.ablk.lz"
+BreguetRuins_BlockData:
+	INCBIN "maps/BreguetRuins.ablk.lz"
 
 
 RouteS_BlockData:
@@ -76,8 +76,8 @@ RouteSW_BlockData:
 	INCBIN "maps/RouteSW.ablk.lz"
 
 
-Town5_BlockData:
-	INCBIN "maps/Town5.ablk.lz"
+Hetzeltron_BlockData:
+	INCBIN "maps/Hetzeltron.ablk.lz"
 
 
 RouteSE1_BlockData:
@@ -88,8 +88,8 @@ RouteSE3_BlockData:
 	INCBIN "maps/RouteSE3.ablk.lz"
 
 
-Town6_BlockData:
-	INCBIN "maps/Town6.ablk.lz"
+HattoriVillage_BlockData:
+	INCBIN "maps/HattoriVillage.ablk.lz"
 
 
 Lake1_BlockData:

@@ -59,39 +59,30 @@ endc
 ENDM
 
 
-	map_attributes Town1, TOWN_1, $61, SOUTH | WEST | EAST
-	connection south, RouteS, ROUTE_S, 5, 0, 10
-	connection west, RouteW1, ROUTE_W_1, 9, 0, 9
-	connection east, Bridge, BRIDGE, 9, 0, 9
+	map_attributes DanielsTown, DANIELS_TOWN, $61, WEST 
+	connection west, Bridge, BRIDGE, 10, 0, 10
 
 	map_attributes Bridge, BRIDGE, $61, WEST | EAST
-	connection west, Town1, TOWN_1, -3, 6, 12
-	connection east, Town2, TOWN_2, 0, 0, 12
+	connection east, DanielsTown, DANIELS_TOWN, 10, 0, 10
+	connection west, AsaokaCity, ASAOKA_CITY, 10, 0, 10
 
-	map_attributes Town2, TOWN_2, $61, NORTH | WEST | EAST
-	connection north, RouteNE1, ROUTE_NE_1, 0, 0, 13
-	connection west, Bridge, BRIDGE, 0, 0, 9
-	connection east, Lake2, LAKE_2, 9, 0, 12
+	map_attributes AsaokaCity, ASAOKA_CITY, $61, EAST
+	connection east, Bridge, BRIDGE, 10, 0, 10
 
-	map_attributes RouteNE1, ROUTE_NE_1, $61, SOUTH | EAST
-	connection South, Town2, TOWN_2, 0, 0, 10
-	connection east, Crevasse, CREVASSE, -3, 15, 12
 
 	map_attributes Crevasse, CREVASSE, $61, NORTH | SOUTH | WEST
 	connection north, RouteNE2, ROUTE_NE_2, 10, 0, 10
 	connection south, Lake3, LAKE_3, 0, 0, 30
-	connection west, RouteNE1, ROUTE_NE_1, 18, 0, 9
 
 	map_attributes RouteNE2, ROUTE_NE_2, $61, NORTH | SOUTH
-	connection north, Town3, TOWN_3, -3, 2, 16
+	connection north, KubotaTown, KUBOTA_TOWN, -3, 2, 16
 	connection south, Crevasse, CREVASSE, -3, 7, 16
 
-	map_attributes Town3, TOWN_3, $61, SOUTH
+	map_attributes KubotaTown, KUBOTA_TOWN, $61, SOUTH
 	connection south, RouteNE2, ROUTE_NE_2, 5, 0, 10
 
-	map_attributes RouteW1, ROUTE_W_1, $61, WEST | EAST
+	map_attributes RouteW1, ROUTE_W_1, $61, WEST 
 	connection west, RouteW2, ROUTE_W_2, -3, 6, 12
-	connection east, Town1, TOWN_1, -3, 6, 12
 
 	map_attributes RouteW2, ROUTE_W_2, $61, NORTH | EAST
 	connection north, AshPlains1, ASH_PLAINS_1, -3, 7, 36
@@ -103,13 +94,12 @@ ENDM
 
 	map_attributes AshPlains2, ASH_PLAINS_2, $61, SOUTH | WEST
 	connection south, AshPlains1, ASH_PLAINS_1, 0, 0, 50
-	connection west, Town4, TOWN_4, -3, 6, 12
+	connection west, BreguetRuins, BREGUET_RUINS, -3, 6, 12
 
-	map_attributes Town4, TOWN_4, $61, EAST
+	map_attributes BreguetRuins, BREGUET_RUINS, $61, EAST
 	connection east, AshPlains2, ASH_PLAINS_2, 9, 0, 12
 
-	map_attributes RouteS, ROUTE_S, $61, NORTH | SOUTH
-	connection north, Town1, TOWN_1, -3, 2, 16
+	map_attributes RouteS, ROUTE_S, $61, SOUTH
 	connection south, Swamp, SWAMP, -3, 7, 16
 
 	map_attributes Swamp, SWAMP, $61, NORTH | SOUTH | WEST
@@ -118,10 +108,10 @@ ENDM
 	connection west, RouteSW, ROUTE_SW, 18, 0, 9
 
 	map_attributes RouteSW, ROUTE_SW, $61, SOUTH | EAST
-	connection south, Town5, TOWN_5, -3, 7, 13
+	connection south, Hetzeltron, HETZELTRON, -3, 7, 13
 	connection east, Swamp, SWAMP, -3, 15, 9
 
-	map_attributes Town5, TOWN_5, $61, NORTH
+	map_attributes Hetzeltron, HETZELTRON, $61, NORTH
 	connection north, RouteSW, ROUTE_SW, 10, 0, 13
 
 	map_attributes RouteSE1, ROUTE_SE_1, $61, NORTH | EAST | SOUTH
@@ -135,22 +125,21 @@ ENDM
 	connection east, RouteSE3, ROUTE_SE_3, 0, 0, 9
 
 	map_attributes RouteSE3, ROUTE_SE_3, $61, NORTH | WEST
-	connection north, Town6, TOWN_6, 10, 0, 23
+	connection north, HattoriVillage, HATTORI_VILLAGE, 10, 0, 23
 	connection west, RouteSE2, ROUTE_SE_2, 0, 0, 9
 
-	map_attributes Town6, TOWN_6, $61, SOUTH | WEST
+	map_attributes HattoriVillage, HATTORI_VILLAGE, $61, SOUTH | WEST
 	connection south, RouteSE3, ROUTE_SE_3, -3, 7, 23
 	connection west, Lake1, LAKE_1, -3, 15, 12
 
 	map_attributes Lake1, LAKE_1, $61, NORTH | SOUTH | EAST
 	connection north, Lake2, LAKE_2, 0, 0, 33
 	connection south, RouteSE2, ROUTE_SE_2, -3, 7, 23
-	connection east, Town6, TOWN_6, 18, 0, 9
+	connection east, HattoriVillage, HATTORI_VILLAGE, 18, 0, 9
 
-	map_attributes Lake2, LAKE_2, $61, NORTH | SOUTH | WEST
+	map_attributes Lake2, LAKE_2, $61, NORTH | SOUTH
 	connection north, Lake3, LAKE_3, 10, 0, 30
 	connection south, Lake1, LAKE_1, 0, 0, 30
-	connection west, Town2, TOWN_2, -3, 6, 12
 
 	map_attributes Lake3, LAKE_3, $61, NORTH | SOUTH 
 	connection north, Crevasse, CREVASSE, 0, 0, 30

@@ -1,6 +1,6 @@
 	const_def 2 ; object constants
 
-Town5_MapScriptHeader:
+HattoriVillage_MapScriptHeader:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks
