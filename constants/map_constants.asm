@@ -36,38 +36,40 @@ MAP_NONE   EQU 0
 	newgroup ;3
 
 	map_const DANIELS_TOWN,                             	16,  18 ;  1
-	map_const BRIDGE,                             			9,  9  ;  2
+	map_const BRIDGE,                             			9,   25  ;  2
 	map_const ASAOKA_CITY,                             		20,  18 ;  3
 
-	map_const ROUTE_NE_1,                         	20,  9  ;  4
-	map_const CREVASSE,                           	30,  27 ;  5
-	map_const ROUTE_NE_2,                         	10,  9  ;  6
+	map_const ROUTE_N_E_1,                         	20,  9  ;  4 ;unused
 
-	map_const KUBOTA_TOWN,                             	20,  9  ;  7
+	map_const RAVINE,                           	27,  30 ;  5
+	map_const ROUTE_N_E_2,                         	18,  9  ;  6
 
-	map_const ROUTE_W_1,                           	25,  9  ;  8
-	map_const ROUTE_W_2,                           	30,  18 ;  9
+	map_const KUBOTA_TOWN,                             	18,  12  ;  7
 
-	map_const ASH_PLAINS_1,                         50,  13 ;  10
-	map_const ASH_PLAINS_2,                         50,  14 ;  11
+	map_const ROUTE_W_1,                           	40,  9  ;  8
 
-	map_const BREGUET_RUINS,                             	20,  18 ;  12
+	map_const ASH_PLAINS_1,                         30,  27 ;  9
+	map_const ASH_PLAINS_2,                         10,  23 ;  10
+	map_const ASH_PLAINS_3,                         10,  23 ;  11
 
-	map_const ROUTE_S,                            	10,  18 ;  13
+	map_const BREGUET_RUINS,                        10,  24 ;  12
+
+	map_const ROUTE_S,                            	14,  9 ;  13
 	map_const SWAMP,                            	30,  27 ;  14
-	map_const ROUTE_SW,                         	60,  9  ;  15
+	map_const ROUTE_S_W,                         	30,  9  ;  15
+	map_const ROUTE_S_W_2,                         	29,  9  ;  18
 
-	map_const HETZELTRON,                             	20,  9  ;  16
+	map_const HETZELTRON,                           15,  15  ;  16
 
-	map_const ROUTE_SE_1,                         	20,  9  ;  17
-	map_const ROUTE_SE_2,                         	30,  9  ;  18
-	map_const ROUTE_SE_3,                         	30,  9  ;  18
+	map_const ROUTE_S_E_1,                         	49,  9  ;  17
 
-	map_const HATTORI_VILLAGE,                             	30,  9  ;  19
+	map_const ROUTE_S_E_2,                         	30,  9  ;  18 ; not being used
 
-	map_const LAKE_1,                             	30,  27 ;  20
-	map_const LAKE_2,                             	40,  18 ;  21
-	map_const LAKE_3,                             	30,  9  ;  22
+	map_const HATTORI_VILLAGE,                      30,  9  ;  19
+
+	map_const LAKE_1,                             	40,  15 ;  20
+	map_const LAKE_2,                             	30,  18 ;  21
+	map_const LAKE_3,                             	8,  7  ;  22
 
 	map_const ROUTE_FAKE_EXIT,                    	10,  18 ;  24
 	map_const ROUTE_FAKE_EXIT_LOOP,               	10,  9  ;  25

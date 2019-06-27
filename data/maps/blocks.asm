@@ -42,8 +42,8 @@ AsaokaCity_BlockData:
 
 RouteNE1_BlockData:
 	INCBIN "maps/RouteNE1.ablk.lz"
-Crevasse_BlockData:
-	INCBIN "maps/Crevasse.ablk.lz"
+Ravine_BlockData:
+	INCBIN "maps/Ravine.ablk.lz"
 RouteNE2_BlockData:
 	INCBIN "maps/RouteNE2.ablk.lz"
 
@@ -54,8 +54,8 @@ KubotaTown_BlockData:
 
 RouteW1_BlockData:
 	INCBIN "maps/RouteW1.ablk.lz"
-RouteW2_BlockData:
-	INCBIN "maps/RouteW2.ablk.lz"
+AshPlains3_BlockData:
+	INCBIN "maps/AshPlains3.ablk.lz"
 
 
 AshPlains1_BlockData:
@@ -84,8 +84,8 @@ RouteSE1_BlockData:
 	INCBIN "maps/RouteSE1.ablk.lz"
 RouteSE2_BlockData:
 	INCBIN "maps/RouteSE2.ablk.lz"
-RouteSE3_BlockData:
-	INCBIN "maps/RouteSE3.ablk.lz"
+RouteSW2_BlockData:
+	INCBIN "maps/RouteSW2.ablk.lz"
 
 
 HattoriVillage_BlockData:
