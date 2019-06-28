@@ -4259,7 +4259,7 @@ InsertPokemonIntoBox: ; 51322
 	rst CopyBytes
 	ld a, [wCurPartyMon]
 	ld b, a
-	farcall RestorePPofDepositedPokemon
+	;farcall RestorePPofDepositedPokemon
 	jp CloseSRAM
 
 InsertPokemonIntoParty: ; 5138b

@@ -807,14 +807,6 @@ SentGetPkmnIntoFromBox: ; db3f
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr nz, .CloseSRAM_And_ClearCarryFlag
-	ld hl, MON_STATUS
-	add hl, bc
-	xor a
-	ld [hl], a
-	ld hl, MON_HP
-	add hl, bc
-	ld d, h
-	ld e, l
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .egg
@@ -838,7 +830,7 @@ SentGetPkmnIntoFromBox: ; db3f
 	ld a, [sBoxCount]
 	dec a
 	ld b, a
-	call RestorePPofDepositedPokemon
+	;call RestorePPofDepositedPokemon
 .CloseSRAM_And_ClearCarryFlag:
 	call CloseSRAM
 	and a
@@ -1212,7 +1204,7 @@ SentPkmnIntoBox: ; de6e
 	rst CopyBytes
 
 	ld b, 0
-	call RestorePPofDepositedPokemon
+	;call RestorePPofDepositedPokemon
 
 	call CloseSRAM
 	scf
