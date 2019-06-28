@@ -42,38 +42,38 @@ AsaokaCity_BlockData:
 
 RouteNE1_BlockData:
 	INCBIN "maps/RouteNE1.ablk.lz"
-Ravine_BlockData:
-	INCBIN "maps/Ravine.ablk.lz"
+GelidRavine_BlockData:
+	INCBIN "maps/GelidRavine.ablk.lz"
 RouteNE2_BlockData:
 	INCBIN "maps/RouteNE2.ablk.lz"
 
 
-KubotaTown_BlockData:
-	INCBIN "maps/KubotaTown.ablk.lz"
+KikunoTown_BlockData:
+	INCBIN "maps/KikunoTown.ablk.lz"
 
 
-RouteW1_BlockData:
-	INCBIN "maps/RouteW1.ablk.lz"
-AshPlains3_BlockData:
-	INCBIN "maps/AshPlains3.ablk.lz"
+OuestPathway_BlockData:
+	INCBIN "maps/OuestPathway.ablk.lz"
+CendreLowland3_BlockData:
+	INCBIN "maps/CendreLowland3.ablk.lz"
 
 
-AshPlains1_BlockData:
-	INCBIN "maps/AshPlains1.ablk.lz"
-AshPlains2_BlockData:
-	INCBIN "maps/AshPlains2.ablk.lz"
+CendreLowland1_BlockData:
+	INCBIN "maps/CendreLowland1.ablk.lz"
+CendreLowland2_BlockData:
+	INCBIN "maps/CendreLowland2.ablk.lz"
 
 
 BreguetRuins_BlockData:
 	INCBIN "maps/BreguetRuins.ablk.lz"
 
 
-RouteS_BlockData:
-	INCBIN "maps/RouteS.ablk.lz"
-Swamp_BlockData:
-	INCBIN "maps/Swamp.ablk.lz"
-RouteSW_BlockData:
-	INCBIN "maps/RouteSW.ablk.lz"
+MinamiWetlandsEntrance_BlockData:
+	INCBIN "maps/MinamiWetlandsEntrance.ablk.lz"
+MinamiWetlands_BlockData:
+	INCBIN "maps/MinamiWetlands.ablk.lz"
+SylvanTrail1_BlockData:
+	INCBIN "maps/SylvanTrail1.ablk.lz"
 
 
 Hetzeltron_BlockData:
@@ -84,8 +84,8 @@ RouteSE1_BlockData:
 	INCBIN "maps/RouteSE1.ablk.lz"
 RouteSE2_BlockData:
 	INCBIN "maps/RouteSE2.ablk.lz"
-RouteSW2_BlockData:
-	INCBIN "maps/RouteSW2.ablk.lz"
+SylvanTrail2_BlockData:
+	INCBIN "maps/SylvanTrail2.ablk.lz"
 
 
 HattoriVillage_BlockData:

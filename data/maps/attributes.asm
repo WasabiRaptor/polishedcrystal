@@ -102,66 +102,66 @@ ENDM
 	connection east, DanielsTown, DANIELS_TOWN, 3 
 
 	map_attributes AsaokaCity, ASAOKA_CITY, $61, EAST | WEST
-	connection west, RouteW1, ROUTE_W_1, 9 
+	connection west, OuestPathway, OUEST_PATHWAY, 9 
 	connection east, Bridge, BRIDGE, -11 
 
-	map_attributes Ravine, RAVINE, $61, NORTH | SOUTH | EAST
-	connection north, KubotaTown, KUBOTA_TOWN, -1
+	map_attributes GelidRavine, GELID_RAVINE, $61, NORTH | SOUTH | EAST
+	connection north, KikunoTown, KIKUNO_TOWN, -1
 	connection south, Lake1, LAKE_1, -17
 	connection east, RouteNE2, ROUTE_N_E_2, -3
 
 	map_attributes RouteNE1, ROUTE_N_E_1, $61, 0 ; defined this map for the old arrangement, no longer needed really
 
 	map_attributes RouteNE2, ROUTE_N_E_2, $61, WEST
-	connection west, Ravine, RAVINE, 3
+	connection west, GelidRavine, GELID_RAVINE, 3
 
-	map_attributes KubotaTown, KUBOTA_TOWN, $61, SOUTH
-	connection south, Ravine, RAVINE, 1
+	map_attributes KikunoTown, KIKUNO_TOWN, $61, SOUTH
+	connection south, GelidRavine, GELID_RAVINE, 1
 
-	map_attributes RouteW1, ROUTE_W_1, $61, NORTH | SOUTH | EAST
-	connection north, AshPlains1, ASH_PLAINS_1, -10
-	connection south, RouteS, ROUTE_S, 32
+	map_attributes OuestPathway, OUEST_PATHWAY, $61, NORTH | SOUTH | EAST
+	connection north, CendreLowland1, CENDRE_LOWLAND_1, -10
+	connection south, MinamiWetlandsEntrance, MINAMI_WETLANDS_ENTRANCE, 32
 	connection east, AsaokaCity, ASAOKA_CITY, -9
 
-	map_attributes AshPlains1, ASH_PLAINS_1, $61, SOUTH | EAST | WEST
-	connection south, RouteW1, ROUTE_W_1, 10
-	connection west, AshPlains3, ASH_PLAINS_3, -9
-	connection east, AshPlains2, ASH_PLAINS_2, -9
+	map_attributes CendreLowland1, CENDRE_LOWLAND_1, $61, SOUTH | EAST | WEST
+	connection south, OuestPathway, OUEST_PATHWAY, 10
+	connection west, CendreLowland3, CENDRE_LOWLAND_3, -9
+	connection east, CendreLowland2, CENDRE_LOWLAND_2, -9
 
-	map_attributes AshPlains2, ASH_PLAINS_2, $61, WEST
-	connection west, AshPlains1, ASH_PLAINS_1, 9
+	map_attributes CendreLowland2, CENDRE_LOWLAND_2, $61, WEST
+	connection west, CendreLowland1, CENDRE_LOWLAND_1, 9
 
-	map_attributes AshPlains3, ASH_PLAINS_3, $61, WEST | EAST
+	map_attributes CendreLowland3, CENDRE_LOWLAND_3, $61, WEST | EAST
 	connection west, BreguetRuins, BREGUET_RUINS, -15
-	connection east, AshPlains1, ASH_PLAINS_1, 9
+	connection east, CendreLowland1, CENDRE_LOWLAND_1, 9
 
 	map_attributes BreguetRuins, BREGUET_RUINS, $61, EAST
-	connection east, AshPlains3, ASH_PLAINS_3, 15
+	connection east, CendreLowland3, CENDRE_LOWLAND_3, 15
 
-	map_attributes RouteS, ROUTE_S, $61, NORTH | SOUTH
-	connection north, RouteW1, ROUTE_W_1, -32
-	connection south, Swamp, SWAMP, 8
+	map_attributes MinamiWetlandsEntrance, MINAMI_WETLANDS_ENTRANCE, $61, NORTH | SOUTH
+	connection north, OuestPathway, OUEST_PATHWAY, -32
+	connection south, MinamiWetlands, MINAMI_WETLANDS, 8
 
-	map_attributes Swamp, SWAMP, $61, NORTH | SOUTH | WEST | EAST
-	connection north, RouteS, ROUTE_S, -8
+	map_attributes MinamiWetlands, MINAMI_WETLANDS, $61, NORTH | SOUTH | WEST | EAST
+	connection north, MinamiWetlandsEntrance, MINAMI_WETLANDS_ENTRANCE, -8
 	connection south, RouteFakeExit, ROUTE_FAKE_EXIT, 10
-	connection west, RouteSW, ROUTE_S_W, 9
+	connection west, SylvanTrail1, SYLVAN_TRAIL_1, 9
 	connection east, RouteSE1, ROUTE_S_E_1, 18
 
-	map_attributes RouteSW, ROUTE_S_W, $61, SOUTH | EAST
-	connection south, RouteSW2, ROUTE_S_W_2, -19
-	connection east, Swamp, SWAMP, -9
+	map_attributes SylvanTrail1, SYLVAN_TRAIL_1, $61, SOUTH | EAST
+	connection south, SylvanTrail2, SYLVAN_TRAIL_2, -19
+	connection east, MinamiWetlands, MINAMI_WETLANDS, -9
 
-	map_attributes RouteSW2, ROUTE_S_W_2, $61, NORTH | WEST
-	connection north, RouteSW, ROUTE_S_W, 19
+	map_attributes SylvanTrail2, SYLVAN_TRAIL_2, $61, NORTH | WEST
+	connection north, SylvanTrail1, SYLVAN_TRAIL_1, 19
 	connection west, Hetzeltron, HETZELTRON, -3
 
 	map_attributes Hetzeltron, HETZELTRON, $61, EAST
-	connection east, RouteSW2, ROUTE_S_W_2, 3
+	connection east, SylvanTrail2, SYLVAN_TRAIL_2, 3
 
 	map_attributes RouteSE1, ROUTE_S_E_1, $61, NORTH | EAST | WEST
 	connection north, Lake2, LAKE_2, 10
-	connection west, Swamp, SWAMP, -18
+	connection west, MinamiWetlands, MINAMI_WETLANDS, -18
 	connection east, HattoriVillage, HATTORI_VILLAGE, -2
 
 
@@ -172,7 +172,7 @@ ENDM
 	connection west, RouteSE1, ROUTE_S_E_1, 2
 
 	map_attributes Lake1, LAKE_1, $61, NORTH | SOUTH | WEST
-	connection north, Ravine, RAVINE, 17
+	connection north, GelidRavine, GELID_RAVINE, 17
 	connection south, Lake2, LAKE_2, 10
 	connection west, Lake3, LAKE_3, 2
 
@@ -185,7 +185,7 @@ ENDM
 	connection west, Lake3, LAKE_3, -2
 
 	map_attributes RouteFakeExit, ROUTE_FAKE_EXIT, $61, NORTH | SOUTH 
-	connection north, Swamp, SWAMP, -10
+	connection north, MinamiWetlands, MINAMI_WETLANDS, -10
 	connection south, RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, 0
 
 	map_attributes RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, $61, NORTH | SOUTH

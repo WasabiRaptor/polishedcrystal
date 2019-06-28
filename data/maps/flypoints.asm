@@ -8,7 +8,7 @@ Flypoints:
 	const_def
 	flypoint DANIELS_TOWN,    	DANIELS_TOWN
 	flypoint ASAOKA_CITY,    	ASAOKA_CITY
-	flypoint KUBOTA_TOWN,    	KUBOTA_TOWN
+	flypoint KIKUNO_TOWN,    	KIKUNO_TOWN
 	flypoint BREGUET_RUINS,    	BREGUET_RUINS
 	flypoint HETZELTRON,    	HETZELTRON
 	flypoint HATTORI_VILLAGE, 	HATTORI_VILLAGE

@@ -1,6 +1,6 @@
 	const_def 2 ; object constants
 
-RouteW1_MapScriptHeader:
+CendreLowland1_MapScriptHeader:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks
