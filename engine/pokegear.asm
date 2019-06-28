@@ -106,12 +106,12 @@ Pokegear_LoadGFX: ; 90c4e
 	ld a, [wMapNumber]
 	ld c, a
 	call GetWorldMapLocation
-	cp FAST_SHIP
-	jr z, .ssaqua
-	cp SINJOH_RUINS
-	jr z, .sinjoh
-	cp MYSTRI_STAGE
-	jr z, .sinjoh
+	;cp FAST_SHIP
+	;jr z, .ssaqua
+	;cp SINJOH_RUINS
+	;jr z, .sinjoh
+	;cp MYSTRI_STAGE
+	;jr z, .sinjoh
 	farcall GetPlayerIcon
 	push de
 	ld h, d
@@ -745,9 +745,9 @@ SkipHiddenOrangeIslandsUp:
 	inc [hl]
 .not_after_faraway_island
 	ld a, [hl]
-	cp FARAWAY_ISLAND + 1
-	ret nz
-	ld [hl], SHAMOUTI_ISLAND
+	;cp FARAWAY_ISLAND + 1
+	;ret nz
+	;ld [hl], SHAMOUTI_ISLAND
 	ret
 
 SkipHiddenOrangeIslandsDown:
@@ -762,20 +762,20 @@ SkipHiddenOrangeIslandsDown:
 
 CheckSkipNavelRock:
 	ld a, [hl]
-	cp NAVEL_ROCK
-	ret nz
-	push hl
-	eventflagcheck EVENT_VISITED_NAVEL_ROCK
-	pop hl
+	;cp NAVEL_ROCK
+	;ret nz
+	;push hl
+	;eventflagcheck EVENT_VISITED_NAVEL_ROCK
+	;pop hl
 	ret
 
 CheckSkipFarawayIsland:
 	ld a, [hl]
-	cp FARAWAY_ISLAND
-	ret nz
-	push hl
-	eventflagcheck EVENT_VISITED_FARAWAY_ISLAND
-	pop hl
+	;cp FARAWAY_ISLAND
+	;ret nz
+	;push hl
+	;eventflagcheck EVENT_VISITED_FARAWAY_ISLAND
+	;pop hl
 	ret
 
 PokegearMap_InitPlayerIcon: ; 9106a
@@ -880,19 +880,19 @@ TownMap_ConvertLineBreakCharacters: ; 1de2c5
 	jp PlaceString
 
 TownMap_GetJohtoLandmarkLimits:
-	lb de, SILVER_CAVE, NEW_BARK_TOWN
+	lb de, LANDMARK_LIMIT, DANIELS_TOWN
 	ret
 
 TownMap_GetKantoLandmarkLimits: ; 910e8
-	lb de, ROUTE_28, ROUTE_27
-	ld a, [wStatusFlags]
-	bit 6, a
-	ret z
-	ld e, PALLET_TOWN
+	;lb de, ROUTE_28, ROUTE_27
+	;ld a, [wStatusFlags]
+	;bit 6, a
+	;ret z
+	;ld e, PALLET_TOWN
 	ret
 
 TownMap_GetOrangeLandmarkLimits:
-	lb de, FARAWAY_ISLAND, SHAMOUTI_ISLAND
+	;lb de, FARAWAY_ISLAND, SHAMOUTI_ISLAND
 	ret
 
 ; 910f9
@@ -1663,8 +1663,8 @@ RadioChannels:
 
 .RuinsOfAlphRadio:
 	ld a, [wPokegearMapPlayerIconLandmark]
-	cp RUINS_OF_ALPH
-	jr nz, .NoSignal
+	;cp RUINS_OF_ALPH
+	jr .NoSignal
 	jp LoadStation_UnownRadio
 
 .PlacesAndPeople:
@@ -1697,14 +1697,14 @@ RadioChannels:
 	bit 4, a
 	jr z, .NoSignal
 	ld a, [wPokegearMapPlayerIconLandmark]
-	cp MAHOGANY_TOWN
-	jr z, .ok
-	cp ROUTE_43
-	jr z, .ok
-	cp LAKE_OF_RAGE
-	jr nz, .NoSignal
-.ok
-	jp LoadStation_EvolutionRadio
+	;cp MAHOGANY_TOWN
+	;jr z, .ok
+	;cp ROUTE_43
+	;jr z, .ok
+	;cp LAKE_OF_RAGE
+	;jr nz, .NoSignal
+;.ok
+	;jp LoadStation_EvolutionRadio
 
 .NoSignal:
 	jp NoRadioStation
@@ -2733,12 +2733,12 @@ _Area: ; 91d11
 
 .GetPlayerOrFastShipIcon: ; 91ed0
 	ld a, [wTownMapPlayerIconLandmark]
-	cp FAST_SHIP
-	jr z, .FastShip
-	cp SINJOH_RUINS
-	jr z, .Sinjoh
-	cp MYSTRI_STAGE
-	jr z, .Sinjoh
+	;cp FAST_SHIP
+	;jr z, .FastShip
+	;cp SINJOH_RUINS
+	;jr z, .Sinjoh
+	;cp MYSTRI_STAGE
+	;jr z, .Sinjoh
 	farjp GetPlayerIcon
 
 .FastShip:

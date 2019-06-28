@@ -6,5 +6,5 @@ ENDM
 Flypoints:
 ; landmark, spawn point
 	const_def
-	flypoint HOME,    NEW_BARK_TOWN
+	flypoint HOME,    DANIELS_TOWN
 	db -1
