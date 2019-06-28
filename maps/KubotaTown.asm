@@ -1,6 +1,6 @@
 	const_def 2 ; object constants
 
-Town3_MapScriptHeader:
+KubotaTown_MapScriptHeader:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks

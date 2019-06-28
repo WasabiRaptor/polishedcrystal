@@ -12,157 +12,185 @@ CURRENT_MAP_HEIGHT = \2_HEIGHT
 	db \4
 ENDM
 
+; Connections go in order: north, south, west, east
 connection: MACRO
 ;\1: direction
-;\2: map label
+;\2: map name
 ;\3: map id
-;\4: x (east/west) or y (north/south)
-;\5: offset?
-;\6: strip length
+;\4: offset of the target map relative to the current map
+;    (x offset for east/west, y offset for north/south)
+
+; LEGACY: Support for old connection macro
+if _NARG == 6
+	connection \1, \2, \3, (\4) - (\5)
+else
+
+; Calculate tile offsets for source (current) and target maps
+_src = 0
+_tgt = (\4) + 3
+if _tgt < 0
+_src = -_tgt
+_tgt = 0
+endc
+
 if "\1" == "north"
-	map_id \3
-	dw wDecompressScratch + \3_WIDTH * (\3_HEIGHT - 3) + \5
-	dw wOverworldMap + \4 + 3
-	db \6
-	db \3_WIDTH
-	db \3_HEIGHT * 2 - 1
-	db (\4 - \5) * -2
-	dw wOverworldMap + \3_HEIGHT * (\3_WIDTH + 6) + 1
+_blk = \3_WIDTH * (\3_HEIGHT + -3) + _src
+_map = _tgt
+_win = (\3_WIDTH + 6) * \3_HEIGHT + 1
+_y = \3_HEIGHT * 2 - 1
+_x = (\4) * -2
+_len = CURRENT_MAP_WIDTH + 3 - (\4)
+if _len > \3_WIDTH
+_len = \3_WIDTH
+endc
+
 elif "\1" == "south"
-	map_id \3
-	dw wDecompressScratch + \5
-	dw wOverworldMap + (CURRENT_MAP_HEIGHT + 3) * (CURRENT_MAP_WIDTH + 6) + \4 + 3
-	db \6
-	db \3_WIDTH
-	db 0
-	db (\4 - \5) * -2
-	dw wOverworldMap + \3_WIDTH + 7
+_blk = _src
+_map = (CURRENT_MAP_WIDTH + 6) * (CURRENT_MAP_HEIGHT + 3) + _tgt
+_win = \3_WIDTH + 7
+_y = 0
+_x = (\4) * -2
+_len = CURRENT_MAP_WIDTH + 3 - (\4)
+if _len > \3_WIDTH
+_len = \3_WIDTH
+endc
+
 elif "\1" == "west"
-	map_id \3
-	dw wDecompressScratch + (\3_WIDTH * \5) + \3_WIDTH - 3
-	dw wOverworldMap + (CURRENT_MAP_WIDTH + 6) * (\4 + 3)
-	db \6
-	db \3_WIDTH
-	db (\4 - \5) * -2
-	db \3_WIDTH * 2 - 1
-	dw wOverworldMap + \3_WIDTH * 2 + 6
+_blk = (\3_WIDTH * _src) + \3_WIDTH + -3
+_map = (CURRENT_MAP_WIDTH + 6) * _tgt
+_win = (\3_WIDTH + 6) * 2 + -6
+_y = (\4) * -2
+_x = \3_WIDTH * 2 - 1
+_len = CURRENT_MAP_HEIGHT + 3 - (\4)
+if _len > \3_HEIGHT
+_len = \3_HEIGHT
+endc
+
 elif "\1" == "east"
+_blk = (\3_WIDTH * _src)
+_map = (CURRENT_MAP_WIDTH + 6) * _tgt + CURRENT_MAP_WIDTH + 3
+_win = \3_WIDTH + 7
+_y = (\4) * -2
+_x = 0
+_len = CURRENT_MAP_HEIGHT + 3 - (\4)
+if _len > \3_HEIGHT
+_len = \3_HEIGHT
+endc
+
+else
+fail "Invalid direction for 'connection'."
+endc
+
 	map_id \3
-	dw wDecompressScratch + (\3_WIDTH * \5)
-	dw wOverworldMap + (CURRENT_MAP_WIDTH + 6) * (\4 + 3 + 1) - 3
-	db \6
+	dw wDecompressScratch + _blk
+	dw wOverworldMap + _map
+	db _len - _src
 	db \3_WIDTH
-	db (\4 - \5) * -2
-	db 0
-	dw wOverworldMap + \3_WIDTH + 7
+	db _y, _x
+	dw wOverworldMap + _win
 endc
 ENDM
 
 
-	map_attributes Town1, TOWN_1, $61, SOUTH | WEST | EAST
-	connection south, RouteS, ROUTE_S, 5, 0, 10
-	connection west, RouteW1, ROUTE_W_1, 9, 0, 9
-	connection east, Bridge, BRIDGE, 9, 0, 9
 
-	map_attributes Bridge, BRIDGE, $61, WEST | EAST
-	connection west, Town1, TOWN_1, -3, 6, 12
-	connection east, Town2, TOWN_2, 0, 0, 12
+	map_attributes DanielsTown, DANIELS_TOWN, $61, WEST
+	connection west, Bridge, BRIDGE, -3 
 
-	map_attributes Town2, TOWN_2, $61, NORTH | WEST | EAST
-	connection north, RouteNE1, ROUTE_NE_1, 0, 0, 13
-	connection west, Bridge, BRIDGE, 0, 0, 9
-	connection east, Lake2, LAKE_2, 9, 0, 12
+	map_attributes Bridge, BRIDGE, $61, WEST | EAST | SOUTH
+	connection south, Lake3, LAKE_3, 2 
+	connection west, AsaokaCity, ASAOKA_CITY, 11
+	connection east, DanielsTown, DANIELS_TOWN, 3 
 
-	map_attributes RouteNE1, ROUTE_NE_1, $61, SOUTH | EAST
-	connection South, Town2, TOWN_2, 0, 0, 10
-	connection east, Crevasse, CREVASSE, -3, 15, 12
+	map_attributes AsaokaCity, ASAOKA_CITY, $61, EAST | WEST
+	connection west, RouteW1, ROUTE_W_1, 9 
+	connection east, Bridge, BRIDGE, -11 
 
-	map_attributes Crevasse, CREVASSE, $61, NORTH | SOUTH | WEST
-	connection north, RouteNE2, ROUTE_NE_2, 10, 0, 10
-	connection south, Lake3, LAKE_3, 0, 0, 30
-	connection west, RouteNE1, ROUTE_NE_1, 18, 0, 9
+	map_attributes Ravine, RAVINE, $61, NORTH | SOUTH | EAST
+	connection north, KubotaTown, KUBOTA_TOWN, -1
+	connection south, Lake1, LAKE_1, -17
+	connection east, RouteNE2, ROUTE_N_E_2, -3
 
-	map_attributes RouteNE2, ROUTE_NE_2, $61, NORTH | SOUTH
-	connection north, Town3, TOWN_3, -3, 2, 16
-	connection south, Crevasse, CREVASSE, -3, 7, 16
+	map_attributes RouteNE1, ROUTE_N_E_1, $61, 0 ; defined this map for the old arrangement, no longer needed really
 
-	map_attributes Town3, TOWN_3, $61, SOUTH
-	connection south, RouteNE2, ROUTE_NE_2, 5, 0, 10
+	map_attributes RouteNE2, ROUTE_N_E_2, $61, WEST
+	connection west, Ravine, RAVINE, 3
 
-	map_attributes RouteW1, ROUTE_W_1, $61, WEST | EAST
-	connection west, RouteW2, ROUTE_W_2, -3, 6, 12
-	connection east, Town1, TOWN_1, -3, 6, 12
+	map_attributes KubotaTown, KUBOTA_TOWN, $61, SOUTH
+	connection south, Ravine, RAVINE, 1
 
-	map_attributes RouteW2, ROUTE_W_2, $61, NORTH | EAST
-	connection north, AshPlains1, ASH_PLAINS_1, -3, 7, 36
-	connection east, RouteW1, ROUTE_W_1, 9, 0, 9
-	
-	map_attributes AshPlains1, ASH_PLAINS_1, $61, NORTH | SOUTH
-	connection north, AshPlains2, ASH_PLAINS_2, 0, 0, 50
-	connection south, RouteW2, ROUTE_W_2, 10, 0, 30
+	map_attributes RouteW1, ROUTE_W_1, $61, NORTH | SOUTH | EAST
+	connection north, AshPlains1, ASH_PLAINS_1, -10
+	connection south, RouteS, ROUTE_S, 32
+	connection east, AsaokaCity, ASAOKA_CITY, -9
 
-	map_attributes AshPlains2, ASH_PLAINS_2, $61, SOUTH | WEST
-	connection south, AshPlains1, ASH_PLAINS_1, 0, 0, 50
-	connection west, Town4, TOWN_4, -3, 6, 12
+	map_attributes AshPlains1, ASH_PLAINS_1, $61, SOUTH | EAST | WEST
+	connection south, RouteW1, ROUTE_W_1, 10
+	connection west, AshPlains3, ASH_PLAINS_3, -9
+	connection east, AshPlains2, ASH_PLAINS_2, -9
 
-	map_attributes Town4, TOWN_4, $61, EAST
-	connection east, AshPlains2, ASH_PLAINS_2, 9, 0, 12
+	map_attributes AshPlains2, ASH_PLAINS_2, $61, WEST
+	connection west, AshPlains1, ASH_PLAINS_1, 9
+
+	map_attributes AshPlains3, ASH_PLAINS_3, $61, WEST | EAST
+	connection west, BreguetRuins, BREGUET_RUINS, -15
+	connection east, AshPlains1, ASH_PLAINS_1, 9
+
+	map_attributes BreguetRuins, BREGUET_RUINS, $61, EAST
+	connection east, AshPlains3, ASH_PLAINS_3, 15
 
 	map_attributes RouteS, ROUTE_S, $61, NORTH | SOUTH
-	connection north, Town1, TOWN_1, -3, 2, 16
-	connection south, Swamp, SWAMP, -3, 7, 16
+	connection north, RouteW1, ROUTE_W_1, -32
+	connection south, Swamp, SWAMP, 8
 
-	map_attributes Swamp, SWAMP, $61, NORTH | SOUTH | WEST
-	connection north, RouteS, ROUTE_S, 10, 0, 10
-	connection south, RouteSE1, ROUTE_SE_1, 20, 0, 13
-	connection west, RouteSW, ROUTE_SW, 18, 0, 9
+	map_attributes Swamp, SWAMP, $61, NORTH | SOUTH | WEST | EAST
+	connection north, RouteS, ROUTE_S, -8
+	connection south, RouteFakeExit, ROUTE_FAKE_EXIT, 10
+	connection west, RouteSW, ROUTE_S_W, 9
+	connection east, RouteSE1, ROUTE_S_E_1, 18
 
-	map_attributes RouteSW, ROUTE_SW, $61, SOUTH | EAST
-	connection south, Town5, TOWN_5, -3, 7, 13
-	connection east, Swamp, SWAMP, -3, 15, 9
+	map_attributes RouteSW, ROUTE_S_W, $61, SOUTH | EAST
+	connection south, RouteSW2, ROUTE_S_W_2, -19
+	connection east, Swamp, SWAMP, -9
 
-	map_attributes Town5, TOWN_5, $61, NORTH
-	connection north, RouteSW, ROUTE_SW, 10, 0, 13
+	map_attributes RouteSW2, ROUTE_S_W_2, $61, NORTH | WEST
+	connection north, RouteSW, ROUTE_S_W, 19
+	connection west, Hetzeltron, HETZELTRON, -3
 
-	map_attributes RouteSE1, ROUTE_SE_1, $61, NORTH | EAST | SOUTH
-	connection north, Swamp, SWAMP, -3, 17, 13
-	connection south, RouteFakeExit, ROUTE_FAKE_EXIT, 10, 0, 10
-	connection east, RouteSE2, ROUTE_SE_2, 0, 0, 9
+	map_attributes Hetzeltron, HETZELTRON, $61, EAST
+	connection east, RouteSW2, ROUTE_S_W_2, 3
 
-	map_attributes RouteSE2, ROUTE_SE_2, $61, NORTH | WEST | EAST
-	connection north, Lake1, LAKE_1, 10, 0, 23
-	connection west, RouteSE1, ROUTE_SE_1, 0, 0, 9
-	connection east, RouteSE3, ROUTE_SE_3, 0, 0, 9
+	map_attributes RouteSE1, ROUTE_S_E_1, $61, NORTH | EAST | WEST
+	connection north, Lake2, LAKE_2, 10
+	connection west, Swamp, SWAMP, -18
+	connection east, HattoriVillage, HATTORI_VILLAGE, -2
 
-	map_attributes RouteSE3, ROUTE_SE_3, $61, NORTH | WEST
-	connection north, Town6, TOWN_6, 10, 0, 23
-	connection west, RouteSE2, ROUTE_SE_2, 0, 0, 9
 
-	map_attributes Town6, TOWN_6, $61, SOUTH | WEST
-	connection south, RouteSE3, ROUTE_SE_3, -3, 7, 23
-	connection west, Lake1, LAKE_1, -3, 15, 12
+	map_attributes RouteSE2, ROUTE_S_E_2, $61, 0 ; dont think this one is needed anymore either
 
-	map_attributes Lake1, LAKE_1, $61, NORTH | SOUTH | EAST
-	connection north, Lake2, LAKE_2, 0, 0, 33
-	connection south, RouteSE2, ROUTE_SE_2, -3, 7, 23
-	connection east, Town6, TOWN_6, 18, 0, 9
 
-	map_attributes Lake2, LAKE_2, $61, NORTH | SOUTH | WEST
-	connection north, Lake3, LAKE_3, 10, 0, 30
-	connection south, Lake1, LAKE_1, 0, 0, 30
-	connection west, Town2, TOWN_2, -3, 6, 12
+	map_attributes HattoriVillage, HATTORI_VILLAGE, $61, WEST
+	connection west, RouteSE1, ROUTE_S_E_1, 2
 
-	map_attributes Lake3, LAKE_3, $61, NORTH | SOUTH 
-	connection north, Crevasse, CREVASSE, 0, 0, 30
-	connection south, Lake2, LAKE_2, -3, 7, 33
+	map_attributes Lake1, LAKE_1, $61, NORTH | SOUTH | WEST
+	connection north, Ravine, RAVINE, 17
+	connection south, Lake2, LAKE_2, 10
+	connection west, Lake3, LAKE_3, 2
+
+	map_attributes Lake2, LAKE_2, $61, NORTH | SOUTH
+	connection north, Lake1, LAKE_1, -10
+	connection south, RouteSE1, ROUTE_S_E_1, -10
+
+	map_attributes Lake3, LAKE_3, $61, NORTH | EAST
+	connection north, Bridge, BRIDGE, -2
+	connection west, Lake3, LAKE_3, -2
 
 	map_attributes RouteFakeExit, ROUTE_FAKE_EXIT, $61, NORTH | SOUTH 
-	connection north, RouteSE1, ROUTE_SE_1, -3, 7, 13
-	connection south, RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, 0, 0, 10
+	connection north, Swamp, SWAMP, -10
+	connection south, RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, 0
 
-	map_attributes RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, $61, NORTH | SOUTH 
-	connection north, RouteFakeExit, ROUTE_FAKE_EXIT, 0, 0, 10
-	connection south, RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, 0, 0, 10
+	map_attributes RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, $61, NORTH | SOUTH
+	connection north, RouteFakeExit, ROUTE_FAKE_EXIT, 0
+	connection south, RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, 0
 
 
 	map_attributes DayCare, DAYCARE, $00, 0

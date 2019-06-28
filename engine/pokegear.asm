@@ -90,18 +90,17 @@ PokeGear: ; 90b8d (24:4b8d)
 
 Pokegear_LoadGFX: ; 90c4e
 	call ClearVBank1
+
 	ld hl, TownMapGFX
 	ld de, VTiles2
 	ld a, BANK(TownMapGFX)
 	call FarDecompress
-	ld hl, PokegearGFX
-	ld de, VTiles2 tile $40
-	ld a, BANK(PokegearGFX)
-	call Decompress
+
 	ld hl, PokegearSpritesGFX
 	ld de, VTiles0
 	ld a, BANK(PokegearSpritesGFX)
 	call Decompress
+
 	ld a, [wMapGroup]
 	ld b, a
 	ld a, [wMapNumber]
@@ -177,7 +176,7 @@ AnimatePokegearModeIndicatorArrow: ; 90d41 (24:4d41)
 ; 90d52 (24:4d52)
 
 .XCoords: ; 90d52
-	db $00, $10, $20, $30
+	db $60, $70, $80, $90
 ; 90d56
 
 TownMap_InitCursorAndPlayerIconPositions: ; 90d70 (24:4d70)
@@ -215,20 +214,19 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 
 .return_from_jumptable
 	call Pokegear_FinishTilemap
-	call TownMapPals
 	ld a, [wcf64]
 	cp MAP_CARD
 	jr nz, .not_town_map
-	ld a, [wJumptableIndex]
-	cp 3 ; Johto
-	call z, TownMapJohtoFlips
-	ld a, [wJumptableIndex]
-	cp 5 ; Kanto
-	call z, TownMapKantoFlips
-	ld a, [wJumptableIndex]
-	cp 7 ; Orange
-	call z, TownMapOrangeFlips
+	call TownMapPals
+	hlcoord $b, 0, wAttrMap
+	lb bc, 3, 8
+	xor a
+	call FillBoxWithByte
+
+	jr .is_town_map
 .not_town_map
+	farcall WipeAttrMap
+.is_town_map
 	ld a, [wcf65]
 	and a
 	jr nz, .transition
@@ -275,9 +273,6 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 .Clock: ; 90e1a
 	ld de, ClockTilemapRLE
 	call Pokegear_LoadTilemapRLE
-	hlcoord 12, 1
-	ld de, .switch
-	call PlaceString
 	hlcoord 0, 12
 	lb bc, 4, 18
 	call TextBox
@@ -285,20 +280,23 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 
 ; 90e36 (24:4e36)
 
-.switch
-	db " Switch▶@"
-; 90e3f
-
 .Map: ; 90e3f
 	farcall PokegearMap
+	hlcoord $b, 0
+	ld a, $17
+	ld [hl], a
+	hlcoord $b, 1
+	ld a, $16
+	ld [hl], a
+	hlcoord $b, 2
+	ld a, $26
+	ld [hli], a
 	ld a, $7
-	ld bc, $12
-	hlcoord 1, 2
+	ld bc, 7
 	call ByteFill
-	hlcoord 0, 2
-	ld [hl], $6
-	hlcoord 19, 2
-	ld [hl], $17
+	ld a, $17
+	ld [hl], a
+
 	ld a, [wPokegearMapCursorLandmark]
 	jp PokegearMap_UpdateLandmarkName
 
@@ -325,27 +323,27 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 ; 90e98
 
 .PlacePhoneBars: ; 90e98 (24:4e98)
-	hlcoord 17, 1
+	hlcoord 1, 1
 	ld a, $58
 	ld [hli], a
 	inc a
 	ld [hl], a
-	hlcoord 17, 2
+	hlcoord 1, 2
 	inc a
 	ld [hli], a
 	call GetMapHeaderPhoneServiceNybble
 	and a
 	ret nz
-	hlcoord 18, 2
+	hlcoord 2, 2
 	ld [hl], $5b
 	ret
 
 Pokegear_FinishTilemap: ; 90eb0 (24:4eb0)
-	hlcoord 0, 0
+	hlcoord $c, 0
 	ld bc, $8
 	ld a, $4f
 	call ByteFill
-	hlcoord 0, 1
+	hlcoord $c, 1
 	ld bc, $8
 	ld a, $4f
 	call ByteFill
@@ -359,22 +357,22 @@ Pokegear_FinishTilemap: ; 90eb0 (24:4eb0)
 	ld a, [de]
 	bit 1, a
 	call nz, .PlaceRadioIcon
-	hlcoord 0, 0
+	hlcoord $c, 0
 	ld a, $46
 	jp .PlacePokegearCardIcon
 
 .PlaceMapIcon: ; 90ee4 (24:4ee4)
-	hlcoord 2, 0
+	hlcoord $e, 0
 	ld a, $40
 	jr .PlacePokegearCardIcon
 
 .PlacePhoneIcon: ; 90eeb (24:4eeb)
-	hlcoord 4, 0
+	hlcoord $10, 0
 	ld a, $44
 	jr .PlacePokegearCardIcon
 
 .PlaceRadioIcon: ; 90ef2 (24:4ef2)
-	hlcoord 6, 0
+	hlcoord $12, 0
 	ld a, $42
 .PlacePokegearCardIcon: ; 90ef7 (24:4ef7)
 	ld [hli], a
@@ -405,7 +403,7 @@ PokegearJumptable: ; 90f04 (24:4f04)
 	dw PokegearClock_Joypad
 	dw PokegearMap_CheckRegion
 	dw PokegearMap_Init
-	dw PokegearMap_JohtoMap
+	dw PokegearMap_InvarMap
 	dw PokegearMap_Init
 	dw PokegearMap_KantoMap
 	dw PokegearMap_Init
@@ -645,7 +643,7 @@ PokegearMap_Init: ; 90fcd (24:4fcd)
 	inc [hl]
 	ret
 
-PokegearMap_JohtoMap: ; 90fee (24:4fee)
+PokegearMap_InvarMap: ; 90fee (24:4fee)
 	call TownMap_GetJohtoLandmarkLimits
 	jr PokegearMap_ContinueMap
 
@@ -830,16 +828,17 @@ PokegearMap_InitCursor: ; 91098
 
 PokegearMap_UpdateLandmarkName: ; 910b4
 	push af
-	hlcoord 8, 0
-	lb bc, 2, 12
-	call ClearBox
+	ld a, " "
+	hlcoord 1, $10
+	ld bc, SCREEN_WIDTH -2
+	call ByteFill
 	pop af
 	ld e, a
 	push de
 	farcall GetLandmarkName
 	pop de
 	call TownMap_ConvertLineBreakCharacters
-	hlcoord 8, 0
+	hlcoord 1, $10
 	ld [hl], "<UPDN>"
 	ret
 
@@ -866,18 +865,18 @@ TownMap_ConvertLineBreakCharacters: ; 1de2c5
 	cp "@"
 	jr z, .end
 	cp "<NEXT>"
-	jr z, .line_break
+	jr z, .space
 	cp "¯"
-	jr z, .line_break
+	jr z, .space
 	inc hl
 	jr .loop
 
-.line_break
-	ld [hl], "<LNBRK>"
+.space
+	ld [hl], " "
 
 .end
 	ld de, wStringBuffer1
-	hlcoord 9, 0
+	hlcoord 2, $10
 	jp PlaceString
 
 TownMap_GetJohtoLandmarkLimits:
@@ -900,7 +899,7 @@ TownMap_GetOrangeLandmarkLimits:
 
 PokegearRadio_Init: ; 910f9 (24:50f9)
 	call InitPokegearTilemap
-	depixel 4, 10, 4, 4
+	depixel 4, 2, 4, 4
 	ld a, SPRITE_ANIM_INDEX_RADIO_TUNING_KNOB
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
@@ -1998,34 +1997,9 @@ _TownMap: ; 9191c
 
 .InitTilemap: ; 91a04
 	farcall PokegearMap
-	ld a, $7
-	ld bc, 6
-	hlcoord 1, 0
-	call ByteFill
-	hlcoord 0, 0
-	ld [hl], $6
-	hlcoord 7, 0
-	ld [hl], $17
-	hlcoord 7, 1
-	ld [hl], $16
-	hlcoord 7, 2
-	ld [hl], $26
-	ld a, $7
-	ld bc, NAME_LENGTH
-	hlcoord 8, 2
-	call ByteFill
-	hlcoord 19, 2
-	ld [hl], $17
 	ld a, [wTownMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
-	call TownMapPals
-
-	ld a, [wTownMapPlayerIconLandmark]
-	cp SHAMOUTI_LANDMARK
-	jp nc, TownMapOrangeFlips
-	cp KANTO_LANDMARK
-	jp nc, TownMapKantoFlips
-	jp TownMapJohtoFlips
+	jp TownMapPals
 ; 91a53
 
 PlayRadio: ; 91a53
@@ -2125,7 +2099,7 @@ PokegearMap: ; 91ae1
 	jp nc, FillOrangeMap
 	cp KANTO_LANDMARK
 	jp nc, FillKantoMap
-	jp FillJohtoMap
+	jp FillInvarMap
 ; 91af3
 
 _FlyMap: ; 91af3
@@ -2239,51 +2213,36 @@ FlyMapScroll: ; 91b73
 
 TownMapBubble: ; 91bb5
 ; Draw the bubble containing the location text in the town map HUD
-
-; Top-left corner
-	hlcoord 1, 0
-	ld a, $37
-	ld [hli], a
-; Top row
-	ld bc, 16
-	ld a, " "
-	call ByteFill
-; Top-right corner
-	ld a, $38
+	hlcoord 6,0
+	ld a, $17
 	ld [hl], a
-	hlcoord 1, 1
-
-; Middle row
-	ld bc, 18
-	ld a, " "
-	call ByteFill
-
-; Bottom-left corner
-	hlcoord 1, 2
-	ld a, $39
+	hlcoord 6,1
+	ld a, $26
 	ld [hli], a
-; Bottom row
-	ld bc, 16
+	ld bc, 12
+	ld a, $7
+	call ByteFill
+	ld a, $17
+	ld [hl], a
+	hlcoord 1, $10
+	ld bc, SCREEN_WIDTH -2
 	ld a, " "
 	call ByteFill
-; Bottom-right corner
-	ld a, $3a
-	ld [hl], a
-
 ; Print "Where?"
-	hlcoord 2, 0
-	ld de, .Where
+	hlcoord SCREEN_WIDTH-13, 0
+	ld de, .FlyToWhere
 	call PlaceString
+
 ; Print the name of the default flypoint
 	call .Name
 ; Up/down arrows
-	hlcoord 18, 1
+	hlcoord 1, $10
 	ld [hl], "<UPDN>"
 	ret
 
-.Where:
-	db "Where?@"
-
+.FlyToWhere:
+	db "fly to where?@"
+.FlyToWhereEnd:
 .Name:
 ; We need the map location of the default flypoint
 	ld a, [wTownMapPlayerIconLandmark]
@@ -2294,7 +2253,7 @@ TownMapBubble: ; 91bb5
 	add hl, de
 	ld e, [hl]
 	farcall GetLandmarkName
-	hlcoord 2, 1
+	hlcoord 2, $10
 	ld de, wStringBuffer1
 	jp PlaceString
 
@@ -2373,10 +2332,14 @@ FlyMap: ; 91c90
 	;ld a, FLY_MT_SILVER
 	ld [wEndFlypoint], a
 ; Fill out the map
-	call FillJohtoMap
+	call FillInvarMap
 	call TownMapBubble
 	call TownMapPals
-	call TownMapJohtoFlips
+	hlcoord SCREEN_WIDTH-14, 0, wAttrMap
+	lb bc, 2, 13
+	xor a
+	call FillBoxWithByte
+
 	call .MapHud
 	pop af
 	jp TownMapPlayerIcon
@@ -2412,7 +2375,11 @@ FlyMap: ; 91c90
 	call FillKantoMap
 	call TownMapBubble
 	call TownMapPals
-	call TownMapKantoFlips
+	hlcoord SCREEN_WIDTH-14, 0, wAttrMap
+	lb bc, 2, 13
+	xor a
+	call FillBoxWithByte
+
 	call .MapHud
 	pop af
 	jp TownMapPlayerIcon
@@ -2428,11 +2395,15 @@ FlyMap: ; 91c90
 ; ..and end at Silver Cave
 	;ld a, FLY_MT_SILVER
 	ld [wEndFlypoint], a
-	call FillJohtoMap
+	call FillInvarMap
 	pop af
 	call TownMapBubble
 	call TownMapPals
-	call TownMapJohtoFlips
+	hlcoord SCREEN_WIDTH-14, 0, wAttrMap
+	lb bc, 2, 13
+	xor a
+	call FillBoxWithByte
+
 .MapHud:
 	hlbgcoord 0, 0 ; BG Map 0
 	call TownMapBGUpdate
@@ -2564,10 +2535,9 @@ _Area: ; 91d11
 	jr z, .KantoGFX
 	cp ORANGE_REGION
 	jr z, .OrangeGFX
-	call FillJohtoMap
+	call FillInvarMap
 	call .PlaceString_MonsNest
 	call TownMapPals
-	call TownMapJohtoFlips
 .FinishGFX
 	hlbgcoord 0, 0
 	call TownMapBGUpdate
@@ -2582,14 +2552,12 @@ _Area: ; 91d11
 	call FillKantoMap
 	call .PlaceString_MonsNest
 	call TownMapPals
-	call TownMapKantoFlips
 	jr .FinishGFX
 
 .OrangeGFX:
 	call FillOrangeMap
 	call .PlaceString_MonsNest
 	call TownMapPals
-	call TownMapOrangeFlips
 	jr .FinishGFX
 
 ; 91dcd
@@ -2614,19 +2582,12 @@ _Area: ; 91d11
 ; 91de9
 
 .PlaceString_MonsNest: ; 91de9
-	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH
+	hlcoord 1, $10
+	ld bc, SCREEN_WIDTH -2
 	ld a, " "
 	call ByteFill
-	hlcoord 0, 1
-	ld a, $6
-	ld [hli], a
-	ld bc, SCREEN_WIDTH - 2
-	ld a, $7
-	call ByteFill
-	ld [hl], $17
 	call GetPokemonName
-	hlcoord 2, 0
+	hlcoord 2, $10
 	call PlaceString
 	ld h, b
 	ld l, c
@@ -2816,8 +2777,8 @@ TownMapBGUpdate: ; 91ee4
 
 ; 91eff
 
-FillJohtoMap: ; 91eff
-	ld de, JohtoMap
+FillInvarMap: ; 91eff
+	ld de, InvarMap
 	jr FillTownMap
 
 FillOrangeMap:
@@ -2851,43 +2812,21 @@ FillOrangeMap:
 FillKantoMap: ; 91f04
 	ld de, KantoMap
 FillTownMap: ; 91f07
-	hlcoord 0, 0
-.loop
-	ld a, [de]
-	cp -1
-	ret z
-	; [de] == yxTTTTTT
-	ld a, [de]
-	and %00111111
-	; a == 00TTTTTT
-	ld [hli], a
-	inc de
-	jr .loop
+	ld hl, InvarMap
+	decoord 0, 0
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	rst CopyBytes
+	ret
+
 
 ; 91f13
 
 TownMapPals: ; 91f13
 ; Assign palettes based on tile ids
-	hlcoord 0, 0
+	ld hl, InvarMapPals
 	decoord 0, 0, wAttrMap
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-.loop
-	ld a, [hli]
-	push hl
-	cp $40 ; tiles after TownMapGFX use palette 0
-	jr nc, .pal0
-	call GetNextTownMapTilePalette
-	jr .update
-.pal0
-	xor a
-.update
-	pop hl
-	ld [de], a
-	inc de
-	dec bc
-	ld a, b
-	or c
-	jr nz, .loop
+	rst CopyBytes
 	ret
 ; 91f7b
 
@@ -2930,34 +2869,6 @@ endm
 	townmappals 2, 2, 2, 3, 3, 6, 1, 1, 4, 4, 4, 6, 4, 4, 1, 1
 	townmappals 2, 2, 2, 6, 6, 6, 1, 1, 4, 4, 4, 7, 2, 4, 1, 1
 	townmappals 2, 2, 2, 2, 4, 4, 6, 0, 0, 0, 0, 0, 0, 0, 0, 0
-
-TownMapJohtoFlips:
-	decoord 0, 0, JohtoMap
-	jr TownMapFlips
-
-TownMapKantoFlips:
-	decoord 0, 0, KantoMap
-	jr TownMapFlips
-
-TownMapOrangeFlips:
-	decoord 0, 0, OrangeMap
-TownMapFlips:
-	hlcoord 0, 0, wAttrMap
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-.loop
-	; [de] == YXtttttt
-	ld a, [de]
-	and %11000000
-	srl a
-	; a == 0YX00000
-	or [hl]
-	ld [hli], a
-	inc de
-	dec bc
-	ld a, b
-	or c
-	jr nz, .loop
-	ret
 
 TownMapMon: ; 91f7b
 ; Draw the FlyMon icon at town map location in
@@ -3038,14 +2949,17 @@ TownMapPlayerIcon: ; 91fa6
 LoadTownMapGFX: ; 91ff2
 	ld hl, TownMapGFX
 	ld de, VTiles2
-	lb bc, BANK(TownMapGFX), $40
+	lb bc, BANK(TownMapGFX), $7f
 	jp DecompressRequest2bpp
 
 ; 91fff
 
-JohtoMap: ; 91fff
-INCBIN "gfx/town_map/johto.bin"
+InvarMap: ; 91fff
+INCBIN "gfx/town_map/invar.bin"
 ; 92168
+
+InvarMapPals:
+INCBIN "gfx/town_map/invar_pals.bin"
 
 KantoMap: ; 92168
 INCBIN "gfx/town_map/kanto.bin"
@@ -3056,6 +2970,3 @@ INCBIN "gfx/town_map/orange.bin"
 
 PokedexNestIconGFX: ; 922d1
 INCBIN "gfx/town_map/dexmap_nest_icon.2bpp"
-
-PokegearGFX: ; 1de2e4
-INCBIN "gfx/pokegear/pokegear.2bpp.lz"

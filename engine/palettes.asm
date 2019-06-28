@@ -1228,46 +1228,46 @@ endc
 
 PokegearPals:
 if !DEF(MONOCHROME)
-; male interface and text
+; border
 	RGB 31, 31, 31
-	RGB 31, 15, 00
-	RGB 15, 07, 00
+	RGB 15,15,15
+	RGB 12,12,12
 	RGB 00, 00, 00
-; border and Mt. Silver
-	RGB 29, 17, 10
-	RGB 21, 21, 21
-	RGB 13, 13, 13
-	RGB 00, 00, 00
-; water and shores
-	RGB 20, 13, 08
-	RGB 00, 24, 15
-	RGB 00, 17, 19
-	RGB 00, 20, 22
-; land and mountains
-	RGB 00, 20, 12
-	RGB 00, 24, 15
-	RGB 29, 17, 10
-	RGB 20, 13, 08
-; water routes
-	RGB 17, 27, 30
-	RGB 00, 11, 19
-	RGB 00, 17, 19
-	RGB 00, 20, 22
-; cities
-	RGB 31, 05, 09
-	RGB 00, 24, 15
-	RGB 24, 00, 04
-	RGB 04, 04, 04
-; land routes
-	RGB 31, 31, 31
-	RGB 00, 24, 15
-	RGB 00, 16, 10
-	RGB 04, 04, 04
-; decorations
-	RGB 31, 22, 05
-	RGB 00, 24, 15
-	RGB 29, 17, 10
-	RGB 04, 04, 04
+; lake/earth ash border
+	RGB 17,24,10
+	RGB 8,23,29
+	RGB 0,20,26
+	RGB 17,14,12
+; mountain/ravine
+	RGB 17,24,10
+	RGB 15,15,15
+	RGB 12,12,12
+	RGB 9,9,9
+; forest
+	RGB 17,24,10
+	RGB 12,22,0
+	RGB 10,18,2
+	RGB 7,14,0
+; swamp
+	RGB 17,24,10
+	RGB 18,21,11
+	RGB 0,21,6
+	RGB 7,17,2
+; volcano edge
+	RGB 31,15,0
+	RGB 27,10,0
+	RGB 17,14,12
+	RGB 15,10,7
+; volcano
+	RGB 31,15,0
+	RGB 15,15,15
+	RGB 15,10,7
+	RGB 12,7,3
+;ash/mountain border
+	RGB 17,14,12
+	RGB 15,10,7
+	RGB 15,15,15
+	RGB 12,12,12
 else
 	MONOCHROME_RGB_FOUR
 
