@@ -56,20 +56,20 @@ MAP_NONE   EQU 0
 
 	map_const ROUTE_S,                            	14,  9 ;  13
 	map_const SWAMP,                            	30,  27 ;  14
+	
 	map_const ROUTE_S_W,                         	30,  9  ;  15
-	map_const ROUTE_S_W_2,                         	29,  9  ;  18
+	map_const ROUTE_S_W_2,                         	29,  9  ;  16
+	map_const HETZELTRON,                           15,  15  ;  17
 
-	map_const HETZELTRON,                           15,  15  ;  16
+	map_const ROUTE_S_E_1,                         	49,  9  ;  18
 
-	map_const ROUTE_S_E_1,                         	49,  9  ;  17
+	map_const ROUTE_S_E_2,                         	30,  9  ;  19; not being used
 
-	map_const ROUTE_S_E_2,                         	30,  9  ;  18 ; not being used
+	map_const HATTORI_VILLAGE,                      22,  13  ;  20
 
-	map_const HATTORI_VILLAGE,                      30,  9  ;  19
-
-	map_const LAKE_1,                             	40,  15 ;  20
-	map_const LAKE_2,                             	30,  18 ;  21
-	map_const LAKE_3,                             	8,  7  ;  22
+	map_const LAKE_1,                             	40,  15 ;  21
+	map_const LAKE_2,                             	30,  18 ;  22
+	map_const LAKE_3,                             	8,  7  ;  23
 
 	map_const ROUTE_FAKE_EXIT,                    	10,  18 ;  24
 	map_const ROUTE_FAKE_EXIT_LOOP,               	10,  9  ;  25

@@ -2324,12 +2324,12 @@ FlyMap: ; 91c90
 ; Note that .NoKanto should be modified in tandem with this branch
 	push af
 ; Start from New Bark Town
-	;ld a, FLY_NEW_BARK
+	ld a, FLY_DANIELS_TOWN
 	ld [wTownMapPlayerIconLandmark], a
 ; Flypoints begin at New Bark Town...
 	ld [wStartFlypoint], a
 ; ..and end at Silver Cave
-	;ld a, FLY_MT_SILVER
+	ld a, FLY_HATTORI_VILLAGE
 	ld [wEndFlypoint], a
 ; Fill out the map
 	call FillInvarMap
