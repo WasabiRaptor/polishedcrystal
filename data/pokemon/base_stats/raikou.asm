@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/raikou/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db PRESSURE ; ability 1
+	db INNER_FOCUS ; ability 2
+	db VOLT_ABSORB ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

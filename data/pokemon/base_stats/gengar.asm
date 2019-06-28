@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/gengar/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db CURSED_BODY, LEVITATE	; abilities
+	db SHADOW_TAG	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
 

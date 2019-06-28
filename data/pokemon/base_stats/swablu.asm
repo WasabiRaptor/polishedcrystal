@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/swablu/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db NATURAL_CURE, NATURAL_CURE	; abilities
+	db CLOUD_NINE	; hidden ability
 	db GROWTH_ERRATIC ; growth rate
 	dn EGG_FLYING, EGG_DRAGON ; egg groups
 

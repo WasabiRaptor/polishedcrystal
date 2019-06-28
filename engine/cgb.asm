@@ -321,11 +321,15 @@ _CGB_Pokedex: ; 8f70
 	ld a, [wCurPartySpecies]
 	cp $ff
 	jr nz, .is_pokemon
-	ld hl, .GreenPicPalette
+	ld hl, GreenPicPalette
 	call LoadHLPaletteIntoDE
 	jr .got_palette
 .is_pokemon
 	ld bc, wDexMonShiny
+	ld a, [wCurForm]
+	ld [wDexMonForm], a
+	ld a, [wCurPartySpecies]
+
 	call GetMonNormalOrShinyPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 .got_palette
@@ -337,22 +341,91 @@ _CGB_Pokedex: ; 8f70
 	ld a, $1
 	call FillBoxCGB
 
+	hlcoord 0, 8, wAttrMap
+	lb bc, 10, 2
+	ld a, 0 | BEHIND_BG
+	call FillBoxCGB
+
+_CGB_PokedexSearchOptionPals: ; 93ba
+
 	ld hl, PokegearOBPals
 	ld de, wUnknOBPals
 	ld bc, 2 palettes
 	ld a, $5
 	call FarCopyWRAM
 
-	ld hl, .CursorPalette
+	ld hl, CursorPalette
 	ld de, wUnknOBPals palette 7
 	ld bc, 1 palettes
 	ld a, $5
 	call FarCopyWRAM
 
+	ld hl, NormalFightingFlyingPal
+	ld de, wUnknBGPals palette 2 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, PoisonGroundRockPal
+	ld de, wUnknBGPals palette 3 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BugGhostSteelPal
+	ld de, wUnknBGPals palette 4 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, FireWateGrassPal
+	ld de, wUnknBGPals palette 5 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, ElectricPsychicIcePal
+	ld de, wUnknBGPals palette 6 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, DragonDarkFairyPal
+	ld de, wUnknBGPals palette 7 + 2
+	ld bc, 6
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 7
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 6
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 5
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 4
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 3
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+	ld hl, BlackPalette
+	ld de, wUnknBGPals palette 2
+	ld bc, 2
+	ld a, $5
+	call FarCopyWRAM
+
+
 	jp _CGB_FinishLayout
 ; 8fba
 
-.GreenPicPalette: ; 8fba
+GreenPicPalette: ; 8fba
 if !DEF(MONOCHROME)
 	RGB 11, 23, 00
 	RGB 07, 17, 00
@@ -362,7 +435,7 @@ else
 	MONOCHROME_RGB_FOUR
 endc
 
-.CursorPalette: ; 8fc2
+CursorPalette: ; 8fc2
 if !DEF(MONOCHROME)
 	RGB 00, 00, 00
 	RGB 11, 23, 00
@@ -606,7 +679,7 @@ _CGB_PokedexSearchOption: ; 93ba
 	call LoadHLPaletteIntoDE
 
 	call WipeAttrMap
-	jp _CGB_FinishLayout
+	jp _CGB_PokedexSearchOptionPals
 ; 93d3
 
 

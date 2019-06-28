@@ -606,9 +606,6 @@ Sandslash_AlolaBackpic:     INCBIN "gfx/pokemon/sandslash_alola/back.2bpp.lz"
 Meowth_AlolaFrontpic:       INCBIN "gfx/pokemon/meowth_alola/front.animated.2bpp.lz"
 Meowth_AlolaBackpic:        INCBIN "gfx/pokemon/meowth_alola/back.2bpp.lz"
 
-Persian_AlolaFrontpic:      INCBIN "gfx/pokemon/persian_alola/front.animated.2bpp.lz"
-Persian_AlolaBackpic:       INCBIN "gfx/pokemon/persian_alola/back.2bpp.lz"
-
 
 SECTION "Pokemon Pics 19", ROMX
 
@@ -685,6 +682,9 @@ PersianFrontpic:      INCBIN "gfx/pokemon/persian/front.animated.2bpp.lz"
 UmbreonFrontpic:   INCBIN "gfx/pokemon/umbreon/front.animated.2bpp.lz"
 FerroseedFrontpic:     INCBIN "gfx/pokemon/ferroseed/front.animated.2bpp.lz"
 EggPic:                   INCBIN "gfx/pokemon/egg/front.animated.2bpp.lz"
+
+Persian_AlolaFrontpic:      INCBIN "gfx/pokemon/persian_alola/front.animated.2bpp.lz"
+Persian_AlolaBackpic:       INCBIN "gfx/pokemon/persian_alola/back.2bpp.lz"
 
 
 SECTION "Unown Pics 1", ROMX

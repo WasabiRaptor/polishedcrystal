@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/sandile/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db INTIMIDATE, MOXIE	; abilities
+	db ANGER_POINT	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

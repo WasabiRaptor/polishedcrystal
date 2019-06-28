@@ -217,7 +217,7 @@ ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | (1 << TOX) | 
 	enum SUBSTATUS_LOCK_ON
 	enum SUBSTATUS_ENCORED
 	enum SUBSTATUS_TRANSFORMED
-	enum SUBSTATUS_MAGIC_BOUNCE
+	enum SUBSTATUS_MAGIC_BOUNCE 	;?
 
 	enum_start 7, -1
 	enum SUBSTATUS_CONFUSED
@@ -238,6 +238,10 @@ ALL_STATUS EQU (1 << PSN) | (1 << BRN) | (1 << FRZ) | (1 << PAR) | (1 << TOX) | 
 	enum SUBSTATUS_FOCUS_ENERGY
 	enum SUBSTATUS_MIST
 	enum SUBSTATUS_CURLED ; formely in its own substatus
+
+;substatus for abilities that only activate once
+SUBSTATUS_DISGUISE_BROKEN EQU SUBSTATUS_FLASH_FIRE
+
 
 ; environmental, things that stack are bitmasks
 SCREENS_REFLECT      EQU 0 ; %00000001

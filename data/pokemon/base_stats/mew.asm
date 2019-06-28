@@ -9,8 +9,9 @@
 	db NO_ITEM, LUM_BERRY ; items
 	dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/mew/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db SYNCHRONIZE ; ability 1
+	db SYNCHRONIZE ; ability 2
+	db MAGIC_GUARD ; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
 

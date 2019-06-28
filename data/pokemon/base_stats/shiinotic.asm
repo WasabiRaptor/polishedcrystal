@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/shiinotic/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db ILLUMINATE, EFFECT_SPORE	; abilities
+	db RAIN_DISH	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_GRASS, EGG_GRASS ; egg groups
 

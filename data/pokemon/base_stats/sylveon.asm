@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 6 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/sylveon/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db CUTE_CHARM ; ability 1
+	db SERENE_GRACE ; ability 2
+	db PIXILATE ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

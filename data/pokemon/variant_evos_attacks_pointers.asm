@@ -32,6 +32,18 @@ MukEvosAttacksPointers::
 	dw MukEvosAttacks
 	dw Muk_AlolaEvosAttacks
 
+NidoranEvosAttacksPointers::
+	dw Nidoran_MEvosAttacks
+	dw Nidoran_FEvosAttacks
+
+NidorinoEvosAttacksPointers::
+	dw NidorinoEvosAttacks
+	dw NidorinaEvosAttacks
+
+NidokingEvosAttacksPointers::
+	dw NidokingEvosAttacks
+	dw NidoqueenEvosAttacks
+
 SandshrewEvosAttacksPointers::
 	dw SandshrewEvosAttacks
 	dw Sandshrew_AlolaEvosAttacks

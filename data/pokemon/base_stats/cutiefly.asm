@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/cutiefly/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db HONEY_GATHER, SHIELD_DUST	; abilities
+	db SWEET_VEIL	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_BUG, EGG_FAIRY ; egg groups
 

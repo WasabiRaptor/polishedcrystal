@@ -131,6 +131,12 @@ AbilityNames:
 	dw Competitive
 	dw Pixilate
 	dw TanglingHair
+	dw Refrigerate
+	dw SlushRush
+	dw StanceChange
+	dw PowerOfAlchemy
+	dw Reciever
+	dw Illusion
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -264,7 +270,12 @@ FurCoat:       db "F","u","r"," ","C","o","a","t","@"
 Competitive:   db "C","o","m","p","e","t","i","t","i","v","e","@"
 Pixilate:      db "P","i","x","i","l","a","t","e","@"
 TanglingHair:  db "T","a","n","g","l","i","n","g"," ","H","a","i","r","@"
-
+Refrigerate:   db "R","e","f","r","i","g","e","r","a","t","e","@"
+SlushRush:     db "S","l","u","s","h"," ","R","u","s","h","@"
+StanceChange:  db "S","t","a","n","c","e"," ","C","h","a","n","g","e","@"
+PowerOfAlchemy:db "P","o","w","e","r"," ","O","f"," ","A","l","c","h","e","m","y","@"
+Reciever:	   db "R","e","c","i","e","v","e","r","@"
+Illusion:	   db "I","l","l","u","s","i","o","n","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -399,6 +410,12 @@ AbilityDescriptions:
 	dw CompetitiveDescription
 	dw PixilateDescription
 	dw TanglingHairDescription
+	dw RefrigerateDescription
+	dw SlushRushDescription
+	dw StanceChangeDescription
+	dw PowerOfAlchemyDescription
+	dw RecieverDescription
+	dw IllusionDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -918,3 +935,24 @@ PixilateDescription:
 TanglingHairDescription:
 	db    "Contact may lower"
 	next1 "the foe's Speed.@"
+
+RefrigerateDescription:
+	db    "Normal-type moves"
+	next1 "become Ice-type.@"
+
+SlushRushDescription:
+	db    "Boosts Speed in"
+	next1 "a hailstorm.@"
+
+StanceChangeDescription:
+	db    "Changes stance"
+	next1 "for attacking.@"
+
+RecieverDescription:
+PowerOfAlchemyDescription:
+	db    "Recieves final"
+	next1 "pokemon's ability.@"
+
+IllusionDescription:
+	db    "Disguses self as"
+	next1 "final party mon.@"

@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/lycanroc_dusk/front.dimensions" 
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db TOUGH_CLAWS, TOUGH_CLAWS	; abilities
+	db TOUGH_CLAWS	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

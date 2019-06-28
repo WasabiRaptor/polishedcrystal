@@ -28,6 +28,12 @@ Muk_AlolaAnimationIdle: INCLUDE "gfx/pokemon/muk_alola/anim_idle.asm"
 Nidoran_MAnimationIdle: INCLUDE "gfx/pokemon/nidoran_m/anim_idle.asm"
 Nidoran_FAnimationIdle: INCLUDE "gfx/pokemon/nidoran_f/anim_idle.asm"
 
+NidorinoAnimationIdle: INCLUDE "gfx/pokemon/nidorino/anim_idle.asm"
+NidorinaAnimationIdle:      INCLUDE "gfx/pokemon/nidorina/anim_idle.asm"
+
+NidokingAnimationIdle:     INCLUDE "gfx/pokemon/nidoking/anim_idle.asm"
+NidoqueenAnimationIdle:     INCLUDE "gfx/pokemon/nidoqueen/anim_idle.asm"
+
 SandshrewAnimationIdle: INCLUDE "gfx/pokemon/sandshrew/anim_idle.asm"
 Sandshrew_AlolaAnimationIdle: INCLUDE "gfx/pokemon/sandshrew_alola/anim_idle.asm"
 

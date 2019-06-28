@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 7 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/haxorus/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db RIVALRY, MOLD_BREAKER	; abilities
+	db UNNERVE	; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_DRAGON ; egg groups
 

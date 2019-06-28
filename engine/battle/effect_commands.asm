@@ -934,6 +934,17 @@ IgnoreSleepOnly: ; 3451f
 
 
 BattleCommand_usedmovetext: ; 34541
+;we need to change stance before a move is used
+	push af
+	push hl
+	push bc
+	push de
+	farcall RunPreMoveAbilities
+	pop de
+	pop bc
+	pop hl
+	pop af
+	
 ; usedmovetext
 	farjp DisplayUsedMoveText
 
@@ -1517,7 +1528,15 @@ _CheckTypeMatchup: ; 347d3
 	cp d
 	jr nz, .no_pixilate
 	ld d, FAIRY
+	jr .no_refrigerate
 .no_pixilate
+	cp REFRIGERATE
+	jr nz, .no_refrigerate
+	ld a, NORMAL
+	cp d
+	jr nz, .no_refrigerate
+	ld d, ICE
+.no_refrigerate
 	ld b, [hl]
 	inc hl
 	ld c, [hl]

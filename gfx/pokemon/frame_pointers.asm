@@ -39,7 +39,7 @@ FramesPointers:
 	dw MukFrames
 	dw Nidoran_MFrames
 	dw NidorinoFrames
-	dw NidorinaFrames
+	dw NidokingFrames
 	dw NidokingFrames
 	dw NidoqueenFrames
 	dw SeviperFrames

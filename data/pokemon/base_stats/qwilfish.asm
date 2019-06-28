@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/qwilfish/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db POISON_POINT ; ability 1
+	db SWIFT_SWIM ; ability 2
+	db INTIMIDATE ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_WATER_2, EGG_WATER_2 ; egg groups
 

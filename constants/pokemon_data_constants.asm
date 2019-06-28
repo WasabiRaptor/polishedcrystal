@@ -27,6 +27,14 @@ BASEMON_EV_YIELD_2    EQUS "(BaseData + wBaseEVYield2 - wCurBaseData)"
 BASEMON_TMHM          EQUS "(BaseData + wBaseTMHM - wCurBaseData)"
 BASEMON_STRUCT_LENGTH EQUS "(BaseData1 - BaseData0)"
 
+;EV yield masks
+HP_EV_YIELD_MASK EQU %11000000
+ATK_EV_YIELD_MASK EQU %00110000
+DEF_EV_YIELD_MASK EQU %00001100
+SPD_EV_YIELD_MASK EQU %00000011
+SAT_EV_YIELD_MASK EQU %11000000
+SDF_EV_YIELD_MASK EQU %00110000
+
 ; GrowthRates indexes (see data/growth_rates.asm)
 	const_def
 	const GROWTH_MEDIUM_FAST
@@ -87,6 +95,8 @@ GENDERLESS EQU %1111
 	const EGG_DRAGON        ; e
 	const EGG_NONE          ; f (Undiscovered)
 
+EGG_GROUP_1_MASK EQU %11110000
+EGG_GROUP_2_MASK EQU %00001111
 
 ; pokemon structure in RAM
 MON_SPECIES              EQUS "(wPartyMon1Species - wPartyMon1)"

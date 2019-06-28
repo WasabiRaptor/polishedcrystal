@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_12_5, 6 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/glaceon/front.dimensions" 
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db SNOW_CLOAK, SNOW_WARNING	; abilities
+	db ICE_BODY	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

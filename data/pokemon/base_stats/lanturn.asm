@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/lanturn/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db VOLT_ABSORB ; ability 1
+	db ILLUMINATE ; ability 2
+	db WATER_ABSORB ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_WATER_2, EGG_WATER_2 ; egg groups
 

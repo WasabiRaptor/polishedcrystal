@@ -301,7 +301,7 @@ endr
 
 	call ClearTileMap
 	call UpdateSpeciesNameIfNotNicknamed
-	call GetBaseData
+	call GetBaseData ;form is known
 
 	ld hl, wTempMonEVs - 1
 	ld de, wTempMonMaxHP

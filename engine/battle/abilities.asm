@@ -30,6 +30,9 @@ BattleEntryAbilities:
 	dbw FOREWARN, ForewarnAbility
 	dbw FRISK, FriskAbility
 	dbw UNNERVE, UnnerveAbility
+	dbw POWER_OF_ALCHEMY, RecieverAbility
+	dbw RECIEVER, RecieverAbility
+
 	; fallthrough
 StatusHealAbilities:
 ; Status immunity abilities that autoproc if the user gets the status or the ability
@@ -121,6 +124,8 @@ TraceAbility:
 	cp TRACE
 	jr z, .trace_failure
 	cp IMPOSTER
+	jr z, .trace_failure
+	cp STANCE_CHANGE
 	jr z, .trace_failure
 	push af
 	ld b, a
@@ -256,7 +261,7 @@ AnticipationAbility:
 ; Anticipation considers special types (just Hidden Power is applicable here) as
 ; whatever type they are listed as (e.g. HP is Normal). It will also (as of 5gen)
 ; treat Counter/Mirror Coat (and Metal Burst) as attacking moves of their type.
-; It also ignores Pixilate.
+; It also ignores Pixilate, and Refrigerate.
 	ldh a, [hBattleTurn]
 	and a
 	ld hl, wEnemyMonMoves
@@ -476,6 +481,144 @@ SynchronizeAbility:
 	farcall BattleCommand_burn
 	jp EnableAnimations
 
+RecieverAbility:
+	ldh a, [hBattleTurn]
+	and a
+	ld bc, wPartyCount
+	ld hl, wPartyMon1Species
+	jr z, .got_turn
+	ld bc, wOTPartyCount
+	ld hl, wOTPartyMon1Species
+.got_turn
+	ld a, [bc]
+	cp 1 ;make sure theres more than one mon in the party
+	ret z
+	dec a
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [wCurForm]
+	push af
+	ld a, [hl] ;species of last mon in party
+	ld c, a
+	push bc
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	predef GetVariant
+	ld bc, wPartyMon1Ability - wPartyMon1Form
+	add hl, bc
+	pop bc
+	ld a, [hl]
+	ld b, a
+	call GetAbility
+	ld a, b
+	push af
+	cp TRACE
+	jr z, .trace_failure
+	cp IMPOSTER
+	jr z, .trace_failure
+	cp STANCE_CHANGE
+	jr z, .trace_failure
+	cp RECIEVER
+	jr z, .trace_failure
+	cp POWER_OF_ALCHEMY
+	jr z, .trace_failure
+	ld b, a
+	farcall BufferAbility
+	ld a, BATTLE_VARS_ABILITY
+	call GetBattleVarAddr
+	pop af
+	ld [hl], a
+	ld hl, RecieverActivationText
+	call StdBattleTextBox
+	pop af
+	ld [wCurForm], a
+	jp RunActivationAbilitiesInner
+
+.trace_failure
+	pop af
+	ld [wCurForm], a
+	ret
+
+
+RunPreMoveAbilities:
+	ld a, BATTLE_VARS_ABILITY
+	call GetBattleVar
+	cp STANCE_CHANGE
+	ret nz
+StanceChangeAbility:
+	ldh a, [hBattleTurn]
+	and a
+	push af
+	ld hl, wBattleMonForm
+	jr z, .got_form
+	ld hl, wEnemyMonForm
+.got_form
+
+	ld a, BATTLE_VARS_MOVE_CATEGORY
+	call GetBattleVar
+	cp STATUS
+	jr z, .status
+
+	predef GetVariant
+	cp BLADE_AEGISLASH
+	jr z, .popafandret
+	ld a, BLADE_AEGISLASH
+	ld [wCurForm], a
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or BLADE_AEGISLASH
+	ld [hl], a
+	jr .stanceChanged
+
+.popafandret
+	pop af
+	ret
+
+.status
+	predef GetVariant
+	cp SHIELD_AEGISLASH
+	jr z, .popafandret
+	ld a, SHIELD_AEGISLASH
+	ld [wCurForm], a
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or SHIELD_AEGISLASH
+	ld [hl], a
+	;fallthrough
+
+.stanceChanged
+	call GetBaseData
+	pop af
+	push af
+	ld a, [wPlayerMinimized]
+	jr z, .got_byte
+	ld a, [wEnemyMinimized]
+.got_byte
+	and a
+	jr nz, .mimic_anims
+	pop af
+	jr z, .player_backpic
+	farcall GetMonFrontpic
+	jr .after_anim
+
+.player_backpic
+	farcall GetMonBackpic
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+	jr .after_anim
+
+.mimic_anims
+	farcall BattleCommand_movedelay
+	farcall BattleCommand_raisesubnoanim
+.after_anim
+	ld a, BATTLE_VARS_SUBSTATUS4
+	call GetBattleVarAddr
+	bit SUBSTATUS_SUBSTITUTE, [hl]
+	ld a, SUBSTITUTE
+	call nz, LoadAnim
+	ld hl, StanceChangedText
+	jp StdBattleTextBox
+
 RunFaintAbilities:
 ; abilities that run after an attack faints an enemy
 	ld a, BATTLE_VARS_ABILITY
@@ -551,6 +694,10 @@ RunHitAbilities:
 	jp z, RattledAbility
 	cp WEAK_ARMOR
 	jp z, WeakArmorAbility
+	cp ILLUSION
+	jp z, BreakDisguise
+	cp DISGUISE
+	jp z, BreakDisguise
 	ret
 
 RunContactAbilities:
@@ -588,6 +735,34 @@ RunContactAbilities:
 	jp z, StaticAbility
 	cp CUTE_CHARM
 	jp z, CuteCharmAbility
+	ret
+
+BreakDisguise:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVarAddr
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	ret nz
+	set SUBSTATUS_DISGUISE_BROKEN, [hl]
+
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .player_backpic
+	farcall GetMonFrontpic
+	jr .disguise_broke
+
+.player_backpic
+	farcall GetMonBackpic
+.disguise_broke
+	ld b, CGB_BATTLE_COLORS
+	call GetCGBLayout
+	call SetPalettes
+	call DelayFrame
+
+	ld hl, DisguiseBrokeText
+	call StdBattleTextBox
 	ret
 
 CursedBodyAbility:
@@ -967,6 +1142,8 @@ ApplySpeedAbilities:
 	jr z, .clorophyll
 	cp SAND_RUSH
 	jr z, .sand_rush
+	cp SLUSH_RUSH
+	jr z, .slush_rush
 	cp QUICK_FEET
 	ret nz
 	ld a, BATTLE_VARS_STATUS
@@ -982,6 +1159,9 @@ ApplySpeedAbilities:
 	jr .weather_ability
 .sand_rush
 	ld h, WEATHER_SANDSTORM
+	jr .weather_ability
+.slush_rush
+	ld h, WEATHER_HAIL
 .weather_ability
 	call GetWeatherAfterCloudNine
 	cp h

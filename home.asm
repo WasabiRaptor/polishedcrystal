@@ -560,22 +560,29 @@ GetPokemonName:: ; 343b
 	ldh a, [hROMBank]
 	push af
 	push hl
-	ld a, BANK(PokemonNames)
-	rst Bankswitch
 
 ; Each name is ten characters
 	ld a, [wNamedObjectIndexBuffer]
-	dec a
-	ld d, 0
-	ld e, a
-	ld h, 0
+
+; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantNamePointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	rst Bankswitch
+	ld a, [hli]
+	ld h, [hl]
 	ld l, a
-	add hl, hl ; hl = hl * 4
-	add hl, hl ; hl = hl * 4
-	add hl, de ; hl = (hl*4) + de
-	add hl, hl ; hl = (5*hl) + (5*hl)
-	ld de, PokemonNames
-	add hl, de
+
+	ld a, [wNamedObjectIndexBuffer]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
+	dec a
+	ld bc, PKMN_NAME_LENGTH - 1
+	rst AddNTimes
 
 ; Terminator
 	ld de, wStringBuffer1
@@ -591,6 +598,8 @@ GetPokemonName:: ; 343b
 	rst Bankswitch
 	ret
 ; 3468
+
+INCLUDE "data/pokemon/variant_name_table.asm"
 
 GetCurItemName::
 ; Get item name from item in CurItem
@@ -1345,6 +1354,20 @@ Print8BitNumRightAlign:: ; 3842
 	jp PrintNum
 ; 384d
 
+GetRelevantBaseData::
+;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantBaseDataTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
 INCLUDE "data/pokemon/variant_base_data_table.asm"
 
 GetBaseData:: ; 3856
@@ -1359,17 +1382,7 @@ GetBaseData:: ; 3856
 	cp EGG
 	jr z, .egg
 
-;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
-; returns c for variants, nc for normal species
-	ld hl, VariantBaseDataTable
-	ld de, 4
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call GetRelevantBaseData
 	push hl
 
 	ld a, [wCurForm]
@@ -1452,20 +1465,26 @@ GetAbility::
 ; 'c' contains the target species
 ; returns ability in b
 ; preserves curspecies and base data
-	anonbankpush BaseData
-
-.Function:
-	ld a, [wInitialOptions]
-	and ABILITIES_OPTMASK
-	jr z, .got_ability
-
+	push de
+	ldh a, [hROMBank]
+	push af
 	push hl
 	push bc
-	ld hl, BASEMON_ABILITIES
-	ld b, 0
-	ld a, BASEMON_STRUCT_LENGTH
-	dec c
+
+	ld a, c
+	call GetRelevantBaseData
+	ld a, c
+	jp nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
+	dec a
+	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
+	ld a, d
+	rst Bankswitch
+
+	ld bc, wBaseAbility1 - wCurBaseData
+	add hl, bc
 	pop bc
 	push bc
 	ld a, b
@@ -1482,6 +1501,9 @@ GetAbility::
 	pop hl
 .got_ability
 	ld b, a
+	pop af
+	rst Bankswitch
+	pop de
 	ret
 
 GetCurNick:: ; 389c
@@ -1679,3 +1701,12 @@ ReinitSpriteAnimFrame:: ; 3b3c
 ; 3b4e
 
 INCLUDE "home/audio.asm"
+
+Inc16BitNumInHL::
+	inc [hl]
+	ret nz
+	xor a
+	ld [hl], a
+	dec hl
+	inc [hl]
+	ret

@@ -682,6 +682,22 @@ GetBattlemonBackpicPalettePointer:
 	ld c, l
 	ld b, h
 	ld a, [wTempBattleMonSpecies]
+	push af
+	ld a, [wPlayerAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wPlayerSubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	pop af
+	ld a, [wPartyCount]
+	ld hl, wPartyMon1Species
+	farcall GetIllusion
+	jr .got_illusion
+
+.no_illusion
+	pop af
+.got_illusion
 	call GetPlayerOrMonPalettePointer
 	pop de
 	ret
@@ -704,6 +720,22 @@ GetEnemyFrontpicPalettePointer:
 	ld c, l
 	ld b, h
 	ld a, [wTempEnemyMonSpecies]
+	push af
+	ld a, [wEnemyAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wEnemySubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	pop af
+	ld a, [wOTPartyCount]
+	ld hl, wOTPartyMon1Species
+	farcall GetIllusion
+	jr .got_illusion
+
+.no_illusion
+	pop af
+.got_illusion
 	call GetFrontpicPalettePointer
 	pop de
 	ret

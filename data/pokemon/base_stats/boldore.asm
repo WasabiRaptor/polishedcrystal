@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 2 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/boldore/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db STURDY, WEAK_ARMOR	; abilities
+	db SAND_FORCE	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
 

@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 0 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/magikarp/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db SWIFT_SWIM ; ability 1
+	db SWIFT_SWIM ; ability 2
+	db RATTLED ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_WATER_2, EGG_DRAGON ; egg groups
 

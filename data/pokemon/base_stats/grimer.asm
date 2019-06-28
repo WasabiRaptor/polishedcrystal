@@ -9,8 +9,8 @@
 	db NO_ITEM, NUGGET ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/grimer/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db STENCH, STICKY_HOLD	; abilities
+	db POISON_TOUCH	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
 

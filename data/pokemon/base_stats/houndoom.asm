@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/houndoom/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db EARLY_BIRD ; ability 1
+	db FLASH_FIRE ; ability 2
+	db SOLAR_POWER ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

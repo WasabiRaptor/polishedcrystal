@@ -28,6 +28,12 @@ Muk_AlolaBitmasks: INCLUDE "gfx/pokemon/muk_alola/bitmask.asm"
 Nidoran_MBitmasks: INCLUDE "gfx/pokemon/nidoran_m/bitmask.asm"
 Nidoran_FBitmasks: INCLUDE "gfx/pokemon/nidoran_f/bitmask.asm"
 
+NidorinoBitmasks: INCLUDE "gfx/pokemon/nidorino/bitmask.asm"
+NidorinaBitmasks:      INCLUDE "gfx/pokemon/nidorina/bitmask.asm"
+
+NidokingBitmasks:     INCLUDE "gfx/pokemon/nidoking/bitmask.asm"
+NidoqueenBitmasks:     INCLUDE "gfx/pokemon/nidoqueen/bitmask.asm"
+
 SandshrewBitmasks: INCLUDE "gfx/pokemon/sandshrew/bitmask.asm"
 Sandshrew_AlolaBitmasks: INCLUDE "gfx/pokemon/sandshrew_alola/bitmask.asm"
 

@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_25, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/gurdurr/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db GUTS, SHEER_FORCE	; abilities
+	db IRON_FIST	; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
 

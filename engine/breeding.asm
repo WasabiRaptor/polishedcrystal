@@ -571,13 +571,28 @@ InheritLevelMove:
 InheritEggMove:
 ; If move d is an egg move, inherit that move
 	ld a, [wEggMonSpecies]
+; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantEggMovePointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	
+	ld a, [wEggMonSpecies]
+	jr nc, .notvariant
+	ld a, [wCurForm]
+.notvariant
 	dec a
 	ld c, a
 	ld b, 0
-	ld hl, EggMovePointers
 	add hl, bc
 	add hl, bc
-	ld a, BANK(EggMovePointers)
+	ld a, d; bank
 	call GetFarHalfword
 .loop
 	ld a, BANK(EggMoves)
@@ -589,6 +604,8 @@ InheritEggMove:
 	jr z, InheritMove
 	inc hl
 	jr .loop
+
+INCLUDE	"data/pokemon/variant_egg_move_pointer_table.asm"
 
 InheritMove:
 	ld hl, wEggMonMoves

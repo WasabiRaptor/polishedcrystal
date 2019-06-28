@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 7 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/pupitar/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db SHED_SKIN ; ability 1
+	db SHED_SKIN ; ability 2
+	db BATTLE_ARMOR ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_MONSTER, EGG_MONSTER ; egg groups
 

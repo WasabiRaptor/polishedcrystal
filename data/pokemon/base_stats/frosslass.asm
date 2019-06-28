@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn ALL_FEMALE, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/frosslass/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db SNOW_CLOAK, SNOW_CLOAK	; abilities
+	db CURSED_BODY	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FAIRY, EGG_MINERAL ; egg groups
 

@@ -743,14 +743,14 @@ wSavedAtLeastOnce:: ds 1
 
 wSpawnAfterChampion:: ds 1
 
-; init time set at newgame
+; init time set at newgame ;probably can be used for other things as well
 wStartDay:: ds 1
-wStartHour:: ds 1
-wStartMinute:: ds 1
-wStartSecond:: ds 1
+wStartHour:: ds 1 ;unused
+wStartMinute:: ds 1 ;unused
+wStartSecond:: ds 1 ;unused
 
 wGameSaveTime:: ds 8 ; in-game wall clock time at save
-wDST:: ds 1
+wDST:: ds 1 ;unused
 
 wGameTimeCap:: ds 1 ; flag for timer hitting 999:59:59.00
 wGameTimeHours:: ds 2
@@ -761,17 +761,12 @@ wGameTimeFrames:: ds 1
 wCurDay:: ds 1
 
 ; do not talk to the RTC hardware in the no-RTC patch
-if DEF(NO_RTC)
-wNoRTC::
-wNoRTCDayHi::   ds 1 ; copied to hRTCDayHi
-wNoRTCDayLo::   ds 1 ; copied to hRTCDayLo
-wNoRTCHours::   ds 1 ; copied to hRTCHours
-wNoRTCMinutes:: ds 1 ; copied to hRTCMinutes
-wNoRTCSeconds:: ds 1 ; copied to hRTCSeconds
-else
-; reserve equal space in RTC versions so that saved games remain compatible
-	ds 5
-endc
+wNoRTC:: ;actually unused
+wNoRTCDayHi::   ds 1 ; copied to hRTCDayHi ;unused
+wNoRTCDayLo::   ds 1 ; copied to hRTCDayLo ;unused
+wNoRTCHours::   ds 1 ; copied to hRTCHours ;unused
+wNoRTCMinutes:: ds 1 ; copied to hRTCMinutes ;unused
+wNoRTCSeconds:: ds 1 ; copied to hRTCSeconds ;unused
 
 	ds 1
 
@@ -1453,6 +1448,17 @@ wSurfWaveBGEffect:: ds $32
 wBattleAnimEnd::
 	ds $e
 wSurfWaveBGEffectEnd::
+
+SECTION "Pokemon Encounters", WRAMX
+
+wTotalEncounteredPokemonSpecies:: ds NUM_POKEMON * 2
+wTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
+wTotalEncounters:: ds 2
+wTotalDefeated:: ds 2
+wTotalEncountersEnd::
+
+wTotalEncountersThisCycle:: ds 2
+wTotalDefeatedThisCycle:: ds 2
 
 
 SECTION "WRAM 6", WRAMX

@@ -9,8 +9,8 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 2 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/breloom/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db EFFECT_SPORE, POISON_HEAL	; abilities
+	db TECHNICIAN	; hidden ability
 	db GROWTH_FLUCTUATING ; growth rate
 	dn EGG_FAIRY, EGG_GRASS ; egg groups
 

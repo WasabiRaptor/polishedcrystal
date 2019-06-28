@@ -132,7 +132,45 @@
 	const COMPETITIVE
 	const PIXILATE
 	const TANGLING_HAIR
+	const REFRIGERATE
+	const SLUSH_RUSH
+	const STANCE_CHANGE
+	const POWER_OF_ALCHEMY
+	const RECIEVER
+	const ILLUSION
+
 NUM_ABILITIES EQU const_value
+;abilities we nned to implement or simply replace
+	const POWER_CONSTRUCT
+	const AURA_BREAK
+	const DISGUISE
+	const SOUL_HEART
+	const RKS_SYSTEM
+	const MUMMY
+	const HEAVY_METAL
+	const HEAT_PROOF
+	const KLUTZ	
+	const DEFEATIST
+	const TRUANT
+	const WHITE_SMOKE
+	const GALE_WINGS
+	const MAGICIAN
+	const BULLETPROOF
+	const ROUGH_SKIN
+	const IRON_BARBS
+	const CONTRARY
+	const STORM_DRAIN
+	const WATER_BUBBLE
+	const GOOEY
+	const BERSERK
+	const FLUFFY
+	const FRIEND_GUARD
+	const SYMBIOSIS
+	const FLOWER_VEIL
+	const SWEET_VEIL
+	const HONEY_GATHER
+	const TOXIC_BOOST
+	const TOUGH_CLAWS
 
 ABILITY_1      EQU %00100000
 ABILITY_2      EQU %01000000

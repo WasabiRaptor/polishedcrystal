@@ -58,6 +58,14 @@ NidoranPicPointers::
 	dba Nidoran_FFrontpic
 	dba Nidoran_FBackpic
 
+NidorinoPicPointers::
+	add_pics Nidorino
+	add_pics Nidorina
+
+NidokingPicPointers::
+	add_pics Nidoking
+	add_pics Nidoqueen
+
 SandshrewPicPointers::
 	dba SandshrewFrontpic
 	dba SandshrewBackpic

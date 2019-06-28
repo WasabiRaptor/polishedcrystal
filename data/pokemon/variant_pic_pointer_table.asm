@@ -7,6 +7,8 @@ VariantPicPointerTable:
     dbba ROTOM,     RotomPicPointers
 	dbba MEOWSTIC,  MeowsticPicPointers
     dbba NIDORAN,   NidoranPicPointers
+    dbba NIDORINO,  NidorinoPicPointers
+    dbba NIDOKING,  NidokingPicPointers
     dbba SANDSHREW, SandshrewPicPointers
     dbba SANDSLASH, SandslashPicPointers
     dbba SAWSBUCK,  SawsbuckPicPointers

@@ -199,44 +199,50 @@ endc
 
 TypeIconPals:
 if !DEF(MONOCHROME)
+NormalFightingFlyingPal:
 ; NORMAL
-	RGB 21, 21, 14
+	RGB 20, 20, 15
 ; FIGHTING
-	RGB 27, 04, 02
+	RGB 23, 06, 05
 ; FLYING
-	RGB 22, 17, 30
+	RGB 20, 18, 29
+PoisonGroundRockPal:
 ; POISON
-	RGB 22, 07, 19
+	RGB 19, 08, 19
 ; GROUND
-	RGB 29, 24, 12
+	RGB 27, 23, 13
 ; ROCK
-	RGB 24, 20, 07
+	RGB 22, 19, 07
+BugGhostSteelPal:
 ; BUG
-	RGB 21, 23, 06
+	RGB 20, 22, 04
 ; GHOST
-	RGB 15, 11, 18
+	RGB 14, 11, 18
 ; STEEL
-	RGB 23, 23, 25
+	RGB 22, 22, 25
+FireWateGrassPal:
 ; FIRE
-	RGB 31, 15, 04
+	RGB 29, 16, 06
 ; WATER
-	RGB 11, 18, 30
+	RGB 13, 18, 29
 ; GRASS
-	RGB 11, 25, 11
+	RGB 15, 24, 10
+ElectricPsychicIcePal:
 ; ELECTRIC
-	RGB 31, 24, 06
+	RGB 30, 25, 06
 ; PSYCHIC
-	RGB 31, 09, 15
+	RGB 30, 11, 17
 ; ICE
-	RGB 16, 27, 27
+	RGB 18, 26, 26
+DragonDarkFairyPal:
 ; DRAGON
-	RGB 15, 07, 31
+	RGB 14, 07, 30
 ; DARK
-	RGB 15, 11, 09
+	RGB 14, 11, 09
 ; FAIRY
-	RGB 31, 20, 29
+	RGB 29, 19, 21
 ; UNKNOWN T
-	RGB 13, 19, 19
+	RGB 13, 19, 18
 else
 	RGB_MONOCHROME_LIGHT
 	RGB_MONOCHROME_DARK

@@ -1164,6 +1164,16 @@ TransformedText: ; 0x81499
 	prompt
 ; 0x814b4
 
+StanceChangedText: ; 0x81499
+	text "<USER>'s"
+	line "stance changed!"
+	prompt
+
+DisguiseBrokeText: ; 0x81499
+	text "<USER>'s"
+	line "disguise broke!"
+	prompt
+
 LightScreenEffectText: ; 0x814b4
 	text "<USER>'s"
 	line "Spcl.Def rose!"
@@ -1457,6 +1467,14 @@ NotifyAirBalloonText:
 TraceActivationText:
 	text "<USER>"
 	line "traced"
+	cont "@"
+	text_from_ram wStringBuffer1
+	text "!"
+	prompt
+
+RecieverActivationText:
+	text "<USER>"
+	line "recieved"
 	cont "@"
 	text_from_ram wStringBuffer1
 	text "!"
@@ -2024,3 +2042,4 @@ LawrenceFinalPkmnText:
 ReiFinalPkmnText:
 	text "I'm not done yet."
 	prompt
+

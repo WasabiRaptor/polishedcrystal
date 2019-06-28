@@ -9,8 +9,9 @@
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/mamoswine/front.dimensions"
-	db 0, 0	; abilities
-	db 0	; hidden ability
+	db OBLIVIOUS ; ability 1
+	db SNOW_CLOAK ; ability 2
+	db THICK_FAT ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_FIELD, EGG_FIELD ; egg groups
 

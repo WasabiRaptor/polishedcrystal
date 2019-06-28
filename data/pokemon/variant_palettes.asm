@@ -1,5 +1,6 @@
+
 LycanrocPalettes:
-INCBIN "gfx/pokemon/lycanroc_midday/front.gbcpal", middle_colors
+    INCBIN "gfx/pokemon/lycanroc_midday/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/lycanroc_midday/shiny.pal"
 INCBIN "gfx/pokemon/lycanroc_dusk/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/lycanroc_dusk/shiny.pal"
@@ -57,6 +58,18 @@ INCBIN "gfx/pokemon/nidoran_m/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/nidoran_m/shiny.pal"
 INCBIN "gfx/pokemon/nidoran_f/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/nidoran_f/shiny.pal"
+
+NidorinoPalettes:
+INCBIN "gfx/pokemon/nidorino/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/nidorino/shiny.pal"   
+INCBIN "gfx/pokemon/nidorina/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/nidorina/shiny.pal"
+
+NidokingPalettes:
+INCBIN "gfx/pokemon/nidoking/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/nidoking/shiny.pal"   
+INCBIN "gfx/pokemon/nidoqueen/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/nidoqueen/shiny.pal"
 
 ;FlabebePalettes:
 ;INCBIN "gfx/pokemon/flabebe/front.gbcpal", middle_colors

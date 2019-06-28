@@ -33,7 +33,7 @@ SaveMenu: ; 14a1a
 
 SaveAfterLinkTrade: ; 14a58
 	call SetWRAMStateForSave
-	farcall StageRTCTimeForSave
+	farcall StageTimeForSave
 	call SavePokemonData
 	call SaveChecksum
 	call SaveBackupPokemonData
@@ -100,7 +100,7 @@ MovePkmnWOMail_InsertMon_SaveGame: ; 14ad5
 	ld [wCurBox], a
 	ld a, $1
 	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
+	farcall StageTimeForSave
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -236,12 +236,13 @@ SaveGameData:: ; 14c10
 	ldh [hVBlank], a
 	dec a ; ld a, TRUE
 	ld [wSaveFileExists], a
-	farcall StageRTCTimeForSave
+	farcall StageTimeForSave
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
 	call SavePokemonData
 	call SaveBox
+	call SaveEncounterData
 	call SaveChecksum
 	call ValidateBackupSave
 	call SaveBackupOptions
@@ -355,6 +356,25 @@ SavePokemonData: ; 14df7
 	jp CloseSRAM
 ; 14e0c
 
+SaveEncounterData:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalEncounters)
+	ldh [rSVBK], a
+
+	ld a, BANK(sTotalEncounteredPokemonSpecies)
+	call GetSRAMBank
+
+	ld hl, wTotalEncounteredPokemonSpecies
+	ld de, sTotalEncounteredPokemonSpecies
+	ld bc, wTotalEncountersEnd - wTotalEncounteredPokemonSpecies
+	rst CopyBytes
+
+	pop af
+	ldh [rSVBK], a
+
+	jp CloseSRAM
+
 SaveBox: ; 14e0c
 	call GetBoxAddress
 	jp SaveBoxAddress
@@ -437,6 +457,7 @@ TryLoadSaveFile: ; 14ea5 (5:4ea5)
 	call LoadPlayerData
 	call LoadPokemonData
 	call LoadBox
+	call LoadEncounterData
 	farcall RestorePartyMonMail
 	call ValidateBackupSave
 	call SaveBackupOptions
@@ -599,6 +620,25 @@ LoadPokemonData: ; 1500c
 LoadBox: ; 15021 (5:5021)
 	call GetBoxAddress
 	jp LoadBoxAddress
+
+LoadEncounterData:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalEncounters)
+	ldh [rSVBK], a
+
+	ld a, BANK(sTotalEncounteredPokemonSpecies)
+	call GetSRAMBank
+
+	ld hl, sTotalEncounteredPokemonSpecies
+	ld de, wTotalEncounteredPokemonSpecies
+	ld bc, wTotalEncountersEnd - wTotalEncounteredPokemonSpecies
+	rst CopyBytes
+
+	pop af
+	ldh [rSVBK], a
+
+	jp CloseSRAM
 
 VerifyChecksum: ; 15028 (5:5028)
 	ld hl, sGameData

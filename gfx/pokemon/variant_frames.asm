@@ -28,6 +28,12 @@ Muk_AlolaFrames: INCLUDE "gfx/pokemon/muk_alola/frames.asm"
 Nidoran_MFrames: INCLUDE "gfx/pokemon/nidoran_m/frames.asm"
 Nidoran_FFrames: INCLUDE "gfx/pokemon/nidoran_f/frames.asm"
 
+NidorinoFrames: INCLUDE "gfx/pokemon/nidorino/frames.asm"
+NidorinaFrames:      INCLUDE "gfx/pokemon/nidorina/frames.asm"
+
+NidokingFrames:     INCLUDE "gfx/pokemon/nidoking/frames.asm"
+NidoqueenFrames:     INCLUDE "gfx/pokemon/nidoqueen/frames.asm"
+
 SandshrewFrames: INCLUDE "gfx/pokemon/sandshrew/frames.asm"
 Sandshrew_AlolaFrames: INCLUDE "gfx/pokemon/sandshrew_alola/frames.asm"
 
