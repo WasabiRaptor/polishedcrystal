@@ -592,7 +592,17 @@ StanceChangeAbility:
 	;fallthrough
 
 .stanceChanged
-	call GetBaseData
+	farcall UpdateUserInParty
+
+	farcall UpdatePkmnStats
+	pop af
+	push af
+	jr nz,.enemyturn
+	farcall InitBattleMon
+	jr .donestats
+.enemyturn
+	farcall InitEnemyMon
+.donestats
 	pop af
 	push af
 	ld a, [wPlayerMinimized]
@@ -608,8 +618,6 @@ StanceChangeAbility:
 
 .player_backpic
 	farcall GetMonBackpic
-	ld de, ANIM_SEND_OUT_MON
-	farcall Call_PlayBattleAnim
 	jr .after_anim
 
 .mimic_anims
@@ -617,6 +625,9 @@ StanceChangeAbility:
 	farcall BattleCommand_movedelay
 	farcall BattleCommand_raisesubnoanim
 .after_anim
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
@@ -784,6 +795,8 @@ MummyAbility:
 	call StdBattleTextBox
 	jp CallOpponentTurn
 
+;Illusion
+;Disguise
 BreakDisguise:
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
@@ -1141,6 +1154,12 @@ StatUpAbility:
 	jp EnableAnimations
 
 PowerConstructAbility:
+
+	farcall GetCurrentHP ; Current HP into de
+	farcall GetHalfMaxHP ; Half HP into bc
+	call CompareTwoBytes ; Check if bc < de
+	ret c
+
 	ldh a, [hBattleTurn]
 	and a
 	push af
@@ -1149,58 +1168,53 @@ PowerConstructAbility:
 	ld hl, wEnemyMonForm
 .got_form
 
-	farcall GetCurrentHP ; Current HP into de
-	farcall GetHalfMaxHP ; Half HP into bc
-	call CompareTwoBytes ; Check if bc < de
-	jr c, .popafandret
-
-	farcall GetMaxHP ; Max HP into bc
-	ld a, c
-	sub e
-	ld d, a
-	ld a, b
-	sbc a, d
-	ld e, a
-	push de
-
 	predef GetVariant
 	cp COMPLETE_ZYGARDE
-	jr z, .popafandret
+	jp z, .popafandret
 	ld a, COMPLETE_ZYGARDE
 	ld [wCurForm], a
 	ld a, [hl]
 	and $ff - FORM_MASK
 	or COMPLETE_ZYGARDE
 	ld [hl], a
-	jr .formChanged
 
-.popafandret
+	;call UpdateUserInParty
+
 	pop af
-	ret
+	push af
+	jr nz,.enemyturn
 
-.formChanged
-	call GetBaseData
-	pop de
-	farcall GetMaxHP ; Max HP into bc
-	ld a, c
-	sub e
-	ld d, a
-	ld a, b
-	sbc a, d
-	ld e, a
+	call UpdateBattleMonInParty
 
-	ldh a, [hBattleTurn]
-	and a
-	ld hl, wBattleMonHP
-	jr z, .got_hp
-	ld hl, wEnemyMonHP
+	farcall UpdatePkmnStats 
 
-.got_hp
-	ld a, d
-	ld [hli], a
-	ld a, e
-	ld [hl], a
+;player stats
+	ld a, [wCurPartyMon]
+	push af
+	ld a, [wCurBattleMon]
+	ld [wCurPartyMon], a 
+	farcall InitBattleMon
+	pop af
+	ld [wCurPartyMon], a 
+	jr .donestats
 
+.enemyturn
+	;call UpdateEnemyMonInParty
+
+	ld a, COMPLETE_ZYGARDE
+	ld [wEnemyMonForm], a
+	ld [wOTPartyMon1Form], a
+	farcall UpdatePkmnStats 
+
+	ld a, [wCurPartyMon]
+	push af
+	ld a, [wCurOTMon]
+	ld [wCurPartyMon], a 
+	farcall InitEnemyMon
+	pop af
+	ld [wCurPartyMon], a 
+
+.donestats
 	pop af
 	push af
 	ld a, [wPlayerMinimized]
@@ -1216,8 +1230,6 @@ PowerConstructAbility:
 
 .player_backpic
 	farcall GetMonBackpic
-	ld de, ANIM_SEND_OUT_MON
-	farcall Call_PlayBattleAnim
 	jr .after_anim
 
 .mimic_anims
@@ -1225,6 +1237,9 @@ PowerConstructAbility:
 	farcall BattleCommand_movedelay
 	farcall BattleCommand_raisesubnoanim
 .after_anim
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
@@ -1232,6 +1247,10 @@ PowerConstructAbility:
 	call nz, LoadAnim
 	ld hl, ZygardeFormText
 	jp StdBattleTextBox
+
+.popafandret
+	pop af
+	ret
 
 WeakArmorAbility:
 	; only physical moves activate this

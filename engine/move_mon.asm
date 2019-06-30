@@ -1576,19 +1576,17 @@ ComputeNPCTrademonStats: ; e134
 UpdatePkmnStats:
 ; Recalculates the stats of wCurPartyMon and also updates current HP accordingly
 	ld a, MON_SPECIES
-	call GetPartyParamLocation
-	ld a, [hl]
+	call UserPartyAttr
 	ld [wCurSpecies], a
 	ld a, MON_FORM
-	call GetPartyParamLocation
+	call UserPartyAttr
 	predef GetVariant
 	call GetBaseData ;form is known
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
-	ld a, [hl]
+	call UserPartyAttr
 	ld [wCurPartyLevel], a
 	ld a, MON_MAXHP + 1
-	call GetPartyParamLocation
+	call UserPartyAttr
 	ld a, [hld]
 	ld c, a
 	ld b, [hl]
@@ -1596,11 +1594,11 @@ UpdatePkmnStats:
 	ld d, h
 	ld e, l
 	ld a, MON_EVS - 1
-	call GetPartyParamLocation
+	call UserPartyAttr
 	ld b, TRUE
 	call CalcPkmnStats
 	ld a, MON_HP
-	call GetPartyParamLocation
+	call UserPartyAttr
 	pop bc
 
 	; Don't change the current HP if we're fainted

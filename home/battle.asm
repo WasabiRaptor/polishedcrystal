@@ -73,10 +73,16 @@ UpdateUserInParty::
 	jr nz, UpdateEnemyMonInParty
 	; fallthrough
 UpdateBattleMonInParty::
-; Update level, status, current HP
+; Update level, status, current HP, curretn form
 	ld a, [wCurBattleMon]
 	; fallthrough
 UpdateBattleMon::
+	ld hl, wPartyMon1Form
+	call GetPartyLocation
+	ld a, [wBattleMonForm]
+	ld [hl], a
+
+	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1Level
 	call GetPartyLocation
 
@@ -92,6 +98,13 @@ UpdateEnemyMonInParty::
 	ld a, [wBattleMode]
 	dec a
 	ret z
+
+	ld a, [wCurOTMon]
+	ld hl, wOTPartyMon1Form
+	call GetPartyLocation
+	ld a, [wEnemyMonForm]
+	ld [hl], a
+
 
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Level
