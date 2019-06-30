@@ -303,6 +303,9 @@ givepoke: macro
 	dw \9 ; pkmn_nickname
 	endc
 	else
+	db 0, 0
+	endc
+	else
 	db 0, 0, 0
 	endc
 	else
@@ -313,9 +316,6 @@ givepoke: macro
 	endc
 	else
 	db 0, 0, 0, 0, 0, 0
-	endc
-	else
-	db 0, 0, 0, 0, 0, 0, 0
 	endc
 
 	endm

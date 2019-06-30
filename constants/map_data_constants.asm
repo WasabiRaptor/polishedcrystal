@@ -10,9 +10,9 @@
 
 	const_def
 	const PALETTE_AUTO
+	const PALETTE_MORN
 	const PALETTE_DAY
 	const PALETTE_NITE
-	const PALETTE_MORN
 	const PALETTE_DARK
 
 	const_def

@@ -395,7 +395,8 @@ GetTimeOfDay::
 TimesOfDay:
 	db MORN_HOUR, NITE
 	db DAY_HOUR, MORN
-	db NITE_HOUR, DAY
+	db EVENING_HOUR, DAY
+	db NITE_HOUR, EVENING
 	db 24, NITE
 	db -1, MORN
 

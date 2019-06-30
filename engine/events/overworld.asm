@@ -363,8 +363,11 @@ OWFlash: ; c8ac
 	farcall SpecialAerodactylChamber
 	pop hl
 	jr c, .useflash
-	ld a, [wTimeOfDayPalset]
-	cp %11111111 ; 3, 3, 3, 3
+	ld a, [wMapTimeOfDay]
+	cp PALETTE_DARK
+	jr nz, .notadarkcave
+	ld a, [wTimeOfDayPal]
+	cp DARKNESS
 	jr nz, .notadarkcave
 .useflash
 	call UseFlash
