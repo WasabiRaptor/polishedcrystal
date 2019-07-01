@@ -1274,3 +1274,32 @@ ENDM
 closeportrait: MACRO
 	db closeportrait_command
 ENDM
+
+	enum givekeyitem_command ; $ac
+givekeyitem: MACRO
+	db givekeyitem_command
+	db \1 ; key item
+ENDM
+
+	enum checkkeyitem_command ; $ac
+checkkeyitem: MACRO
+	db checkkeyitem_command
+	db \1 ; key item
+ENDM
+
+	enum takekeyitem_command ; $ac
+takekeyitem: MACRO
+	db takekeyitem_command
+	db \1 ; key item
+ENDM
+
+	enum verbosegivekeyitem_command ; $ac
+verbosegivekeyitem: MACRO
+	db verbosegivekeyitem_command
+	db \1 ; key item
+ENDM
+
+	enum keyitemnotify_command ; $ac
+keyitemnotify: MACRO
+	db keyitemnotify_command
+ENDM

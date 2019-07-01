@@ -101,17 +101,7 @@
 	const ICE_STONE    ; 53
 	const EVERSTONE    ; 54
 
-	const BICYCLE      ; 55
-	const OLD_ROD      ; 56
-	const GOOD_ROD     ; 57
-	const SUPER_ROD    ; 58
-	const COIN_CASE    ; 59
-	const ITEMFINDER   ; 5a
 	const EXP_SHARE    ; 5b
-	const SHINY_CHARM  ; 6e
-	const OVAL_CHARM   ; 6f
-	const SILPHSCOPE2  ; 70
-	const APRICORN_BOX ; 71
 
 	const CHERI_BERRY  ; 73
 	const CHESTO_BERRY ; 74
@@ -252,6 +242,7 @@
 
 	const MULCH        ; f3
 	const SWEET_HONEY  ; f4
+NUM_ITEMS EQU const_value +- 1
 
 	;order must reflect type constants for RKS System
 	const NORMALIUM_Z    	; 0
@@ -285,7 +276,6 @@
 	const NAM_AMULET_COIN  ; 03
 	const NAM_ANTIDOTE     ; 04
 	const NAM_APICOT_BERRY ; 05
-	const NAM_APRICORN_BOX ; 06
 	const NAM_ARMOR_SUIT   ; 07
 	const NAM_ASPEAR_BERRY ; 08
 	const NAM_ASSAULT_VEST ; 09
@@ -457,7 +447,6 @@
 	const NAM_SHINY_CHARM  ; d0
 	const NAM_SHINY_STONE  ; d1
 	const NAM_SILK_SCARF   ; d2
-	const NAM_SILPHSCOPE2  ; d3
 	const NAM_SILVER_LEAF  ; d4
 	const NAM_SILVERPOWDER ; d6
 	const NAM_SITRUS_BERRY ; d7
@@ -508,3 +497,16 @@
 	const BLK_APRICORN ; 6
 	const PNK_APRICORN ; 7
 NUM_APRICORNS EQU const_value +- 1
+
+; Key item constants
+	const_def 0
+	const BICYCLE      ; 55
+	const OLD_ROD      ; 56
+	const GOOD_ROD     ; 57
+	const SUPER_ROD    ; 58
+	const COIN_CASE    ; 59
+	const ITEMFINDER   ; 5a
+	const SHINY_CHARM  ; 6e
+	const OVAL_CHARM   ; 6f
+	const APRICORN_BOX ; 71
+NUM_KEY_ITEMS EQU const_value +- 1

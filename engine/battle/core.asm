@@ -7008,8 +7008,8 @@ endc
 	push hl
 	push bc
 	push de
-	ld hl, wNumKeyItems
-	call CheckItem
+	;ld hl, wNumKeyItems
+	;call CheckItem
 	pop de
 	pop bc
 	pop hl

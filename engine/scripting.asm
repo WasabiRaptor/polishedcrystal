@@ -263,6 +263,12 @@ ScriptCommandTable:
 	dw Script_checkegg                   ; c7
 	dw Script_portrait
 	dw Script_closeportrait
+	
+	dw Script_givekeyitem                   ; a8
+	dw Script_checkkeyitem                  ; a9
+	dw Script_takekeyitem
+	dw Script_verbosegivekeyitem            ; aa
+	dw Script_keyitemnotify                 ; ab
 
 StartScript:
 	ld hl, wScriptFlags
@@ -706,6 +712,16 @@ GetPocketName:
 	jp CopyName2
 
 INCLUDE "data/items/pocket_names.asm"
+
+GetKeyItemPocketName:
+	ld hl, .Key
+	ld d, h
+	ld e, l
+	ld hl, wStringBuffer3
+	jp CopyName2
+
+.Key:
+	db "Key Pocket@"
 
 GetTMHMPocketName:
 	ld hl, .TMHMPocket
@@ -3017,3 +3033,71 @@ Script_portrait:
 
 Script_closeportrait:
 	farjp ClosePortrait
+
+Script_givekeyitem:
+	call GetScriptByte
+	ld [wCurKeyItem], a
+	ld [wItemQuantityChangeBuffer], a
+	call ReceiveKeyItem
+	jr nc, .full
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.full
+	xor a
+	ld [wScriptVar], a
+	ret
+
+Script_checkkeyitem:
+	call GetScriptByte
+	ld [wCurKeyItem], a
+	ld [wItemQuantityChangeBuffer], a
+	call CheckKeyItem
+	jr nc, .full
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.full
+	xor a
+	ld [wScriptVar], a
+	ret
+
+Script_takekeyitem:
+	call GetScriptByte
+	ld [wCurKeyItem], a
+	ld [wItemQuantityChangeBuffer], a
+	call TossKeyItem
+	jr nc, .full
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.full
+	xor a
+	ld [wScriptVar], a
+	ret
+
+Script_verbosegivekeyitem:
+; parameters:
+;     tmhm (TMHMLabelByte)
+	call Script_givekeyitem
+	call GetCurKeyItemName
+	ld de, wStringBuffer1
+	ld a, 1
+	call CopyConvertedText
+	ld b, BANK(GiveKeyItemScript)
+	ld de, GiveKeyItemScript
+	jp ScriptCall
+
+GiveKeyItemScript:
+	writetext ReceivedItemText
+	waitsfx
+	specialsound
+	keyitemnotify
+	end
+
+Script_keyitemnotify:
+	call GetKeyItemPocketName
+	call GetCurKeyItemName
+	ld b, BANK(PutItemInPocketText)
+	ld hl, PutItemInPocketText
+	jp MapTextbox

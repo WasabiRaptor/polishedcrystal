@@ -454,6 +454,7 @@ NamesPointers:: ; 33ab
 	dbw 0, wPartyMonOT
 	dbw 0, wOTPartyMonOT
 	dba TrainerClassNames
+	dba KeyItemNames
 ; 33c0
 
 GetName:: ; 33c3
@@ -529,31 +530,6 @@ GetNthString:: ; 3411
 	ret
 ; 3420
 
-GetBasePokemonName:: ; 3420
-; Discards gender (Nidoran).
-
-	push hl
-	call GetPokemonName
-
-	ld hl, wStringBuffer1
-.loop
-	ld a, [hl]
-	cp "@"
-	jr z, .quit
-	cp "♂"
-	jr z, .end
-	cp "♀"
-	jr z, .end
-	inc hl
-	jr .loop
-.end
-	ld [hl], "@"
-.quit
-	pop hl
-	ret
-
-; 343b
-
 GetPokemonName:: ; 343b
 ; Get Pokemon name wNamedObjectIndexBuffer.
 
@@ -613,13 +589,20 @@ GetItemName:: ; 3468
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, ITEM_NAME
-	ld [wNamedObjectTypeBuffer], a
-	call GetName
-	ld de, wStringBuffer1
-	pop bc
-	pop hl
-	ret
-; 3487
+	jr PutNameInBufferAndGetName
+
+GetCurKeyItemName::
+; Get item name from item in CurItem
+	ld a, [wCurKeyItem]
+	ld [wNamedObjectIndexBuffer], a
+GetKeyItemName:: ; 3468
+; Get key item item name wNamedObjectIndexBuffer.
+	push hl
+	push bc
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurSpecies], a
+	ld a, KEY_ITEM_NAME
+	jr PutNameInBufferAndGetName
 
 GetApricornName::
 ; Get apricorn name wNamedObjectIndexBuffer.
@@ -628,6 +611,7 @@ GetApricornName::
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, APRICORN_NAME
+PutNameInBufferAndGetName::
 	ld [wNamedObjectTypeBuffer], a
 	call GetName
 	ld de, wStringBuffer1
@@ -1443,6 +1427,10 @@ GetLeadAbility::
 	push bc
 	push de
 	push hl
+	ld [wCurSpecies], a
+	ld hl, wPartyMon1Form
+	predef GetVariant
+	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]
 	ld b, a

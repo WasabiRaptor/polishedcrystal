@@ -101,15 +101,7 @@ ItemNameOrder:
 	db NAM_ICE_STONE    ; 5a
 	db NAM_EVERSTONE    ; 3b
 
-	db NAM_BICYCLE      ; 0e
-	db NAM_OLD_ROD      ; 94
-	db NAM_GOOD_ROD     ; 4c
-	db NAM_SUPER_ROD    ; e6
-	db NAM_COIN_CASE    ; 29
-	db NAM_ITEMFINDER   ; 5d
 	db NAM_EXP_SHARE    ; 3d
-	db NAM_SILPHSCOPE2  ; d3
-	db NAM_APRICORN_BOX ; 06
 
 	db NAM_CHERI_BERRY  ; 21
 	db NAM_CHESTO_BERRY ; 23

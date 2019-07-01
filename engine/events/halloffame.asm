@@ -491,7 +491,7 @@ DisplayHOFMon: ; 86748
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
-	call GetBasePokemonName
+	call GetPokemonName
 	hlcoord 7, 13
 	call PlaceString
 	ld a, BREEDMON

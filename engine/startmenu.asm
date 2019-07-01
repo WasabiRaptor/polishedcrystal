@@ -607,8 +607,8 @@ HasNoItems: ; 129d5
 	ld a, [wNumBerries]
 	and a
 	ret nz
-	ld a, [wNumKeyItems]
-	and a
+	;ld a, [wNumKeyItems]
+	;and a
 	ret nz
 	scf
 	ret

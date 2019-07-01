@@ -225,8 +225,8 @@ DayCareStep:: ; 7282
 	ld a, OVAL_CHARM
 	ld [wCurItem], a
 	push bc
-	ld hl, wNumKeyItems
-	call CheckItem
+	;ld hl, wNumKeyItems
+	;call CheckItem
 	pop bc
 	jr nc, .no_oval_charm
 	ld b, c

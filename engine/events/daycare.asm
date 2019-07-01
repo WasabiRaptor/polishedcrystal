@@ -966,8 +966,8 @@ DayCare_InitBreeding: ; 16a3b
 	push hl
 	push bc
 	push de
-	ld hl, wNumKeyItems
-	call CheckItem
+	;ld hl, wNumKeyItems
+	;call CheckItem
 	pop de
 	pop bc
 	pop hl

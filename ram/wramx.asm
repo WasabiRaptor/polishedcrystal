@@ -300,6 +300,7 @@ ENDU
 
 wCurIconMonHasItemOrMail:: ds 1
 
+wCurKeyItem::
 wCurTMHM::
 wCurItem::
 	ds 1
@@ -598,6 +599,7 @@ wBattleHasJustStarted:: ds 1
 
 wd265:: ; TODO: replace with meaningful labels
 wNamedObjectIndexBuffer::
+wCurKeyItemBuffer::
 wCurTMHMBuffer::
 wTypeMatchup::
 wFoundMatchingIDInParty::
@@ -873,6 +875,9 @@ wPokemonJournalsEnd::
 wTMsHMs:: flag_array NUM_TMS + NUM_HMS
 wTMsHMsEnd::
 
+wKeyItems:: flag_array NUM_KEY_ITEMS
+wKeyItemsEnd::
+
 wNumItems:: ds 1
 wItems:: ds MAX_ITEMS * 2 + 1
 wItemsEnd::
@@ -885,9 +890,6 @@ wBallsEnd::
 wNumBerries:: ds 1
 wBerries:: ds MAX_BERRIES * 2 + 1
 wBerriesEnd::
-wNumKeyItems:: ds 1
-wKeyItems:: ds MAX_KEY_ITEMS + 1
-wKeyItemsEnd::
 wNumPCItems:: ds 1
 wPCItems:: ds MAX_PC_ITEMS * 2 + 1
 wPCItemsEnd::

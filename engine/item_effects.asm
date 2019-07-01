@@ -98,17 +98,7 @@ ItemEffects: ; e73c
 	dw EvoStoneEffect   ; SHINY_STONE
 	dw EvoStoneEffect   ; ICE_STONE
 	dw NoEffect         ; EVERSTONE
-	dw Bicycle          ; BICYCLE
-	dw OldRod           ; OLD_ROD
-	dw GoodRod          ; GOOD_ROD
-	dw SuperRod         ; SUPER_ROD
-	dw CoinCase         ; COIN_CASE
-	dw Itemfinder       ; ITEMFINDER
 	dw NoEffect         ; EXP_SHARE
-	dw NoEffect         ; SHINY_CHARM
-	dw NoEffect         ; OVAL_CHARM
-	dw NoEffect         ; SILPHSCOPE2
-	dw ApricornBox      ; APRICORN_BOX
 	dw HealStatusEffect ; CHERI_BERRY
 	dw HealStatusEffect ; CHESTO_BERRY
 	dw HealStatusEffect ; PECHA_BERRY
@@ -236,6 +226,17 @@ ItemEffects: ; e73c
 	dw NoEffect         ; MULCH
 	dw NoEffect         ; SWEET_HONEY
 ; e8a2
+
+;key items
+	dw Bicycle          ; BICYCLE
+	dw OldRod           ; OLD_ROD
+	dw GoodRod          ; GOOD_ROD
+	dw SuperRod         ; SUPER_ROD
+	dw CoinCase         ; COIN_CASE
+	dw Itemfinder       ; ITEMFINDER
+	dw NoEffect         ; SHINY_CHARM
+	dw NoEffect         ; OVAL_CHARM
+	dw ApricornBox      ; APRICORN_BOX
 
 
 PokeBallEffect: ; e8a2

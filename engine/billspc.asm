@@ -1078,7 +1078,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	cp EGG
 	ret z
 
-	call GetBasePokemonName
+	call GetPokemonName
 	hlcoord 1, 14
 	call PlaceString
 

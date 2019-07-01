@@ -224,21 +224,64 @@ Pack: ; 10000
 	jp Pack_JumptableNext
 
 .KeyItemsPocketMenu: ; 100a6 (4:40a6)
-	ld hl, KeyItemsPocketMenuDataHeader
-	call CopyMenuDataHeader
-	ld a, [wKeyItemsPocketCursor]
-	ld [wMenuCursorBuffer], a
-	ld a, [wKeyItemsPocketScrollPosition]
-	ld [wMenuScrollPosition], a
-	call ScrollingMenu
-	ld a, [wMenuScrollPosition]
-	ld [wKeyItemsPocketScrollPosition], a
-	ld a, [wMenuCursorY]
-	ld [wKeyItemsPocketCursor], a
+	farcall KeyItemsPocket
 	lb bc, $9, $1 ; Berries, Items
 	call Pack_InterpretJoypad
 	ret c
-	; fallthrough
+	ld hl, .MenuDataHeader1
+	ld de, .Jumptable1
+	push de
+	call LoadMenuDataHeader
+	call VerticalMenu
+	call ExitMenu
+	pop hl
+	ret c
+	ld a, [wMenuCursorY]
+	dec a
+	call Pack_GetJumptablePointer
+	jp hl
+
+; 10124 (4:4124)
+.KeyItemsMenuDataHeader1: ; 0x10124
+	db $40 ; flags
+	db 07, 13 ; start coords
+	db 11, 19 ; end coords
+	dw .KeyItemsMenuData2_1
+	db 1 ; default option
+; 0x1012c
+
+.KeyItemsMenuData2_1: ; 0x1012c
+	db $c0 ; flags
+	db 2 ; items
+	db "Use@"
+	db "Quit@"
+; 0x10137
+
+.KeyItemsJumptable1: ; 10137
+
+	dw .UseItem
+	dw QuitItemSubmenu
+
+; 1013b
+
+.KeyItemsUseItem: ; 10159
+	;farcall AskTeachTMHM
+	;ret c
+	;farcall ChooseMonToLearnTMHM
+	;jr c, .declined
+	;ld hl, wOptions1
+	;ld a, [hl]
+	;push af
+	;res NO_TEXT_SCROLL, [hl]
+	;farcall TeachTMHM
+	;pop af
+	;ld [wOptions1], a
+.KeyItemsdeclined
+	xor a
+	ldh [hBGMapMode], a
+	call Pack_InitGFX
+	call WaitBGMap_DrawPackGFX
+	jp Pack_InitColors
 
 .ItemBallsKey_LoadSubmenu: ; 101c5 (4:41c5)
 	jr nz, PackSortMenu
@@ -880,30 +923,26 @@ BattlePack: ; 10493
 	ld a, KEY_ITEM - 1
 	ld [wCurrPocket], a
 	call ClearPocketList
+	xor a
+	ldh [hBGMapMode], a
 	call WaitBGMap_DrawPackGFX
+	ld hl, Text_PackEmptyString
+	call Pack_PrintTextNoScroll
 	jp Pack_JumptableNext
 
 .KeyItemsPocketMenu: ; 10539 (4:4539)
-	ld hl, KeyItemsPocketMenuDataHeader
-	call CopyMenuDataHeader
-	ld a, [wKeyItemsPocketCursor]
-	ld [wMenuCursorBuffer], a
-	ld a, [wKeyItemsPocketScrollPosition]
-	ld [wMenuScrollPosition], a
-	call ScrollingMenu
-	ld a, [wMenuScrollPosition]
-	ld [wKeyItemsPocketScrollPosition], a
-	ld a, [wMenuCursorY]
-	ld [wKeyItemsPocketCursor], a
+	farcall KeyItemsPocket
 	lb bc, $9, $1 ; Berries, Items
 	call Pack_InterpretJoypad
 	ret c
-	; fallthrough
+	xor a
+	jp KeyItemSubmenu
 
 ItemSubmenu: ; 105d3 (4:45d3)
 	jp nz, PackSortMenu
 	farcall CheckItemContext
 	ld a, [wItemAttributeParamBuffer]
+KeyItemSubmenu:
 TMHMSubmenu: ; 105dc (4:45dc)
 	and a
 	ld hl, .UsableMenuDataHeader
@@ -1755,7 +1794,7 @@ KeyItemsPocketMenuDataHeader: ; 0x10a7f
 	db $ee ; flags
 	db 5, 8 ; rows, columns
 	db 1 ; horizontal spacing
-	dbw 0, wNumKeyItems
+	;dbw 0, wNumKeyItems
 	dba PlaceMenuItemName
 	dba PlaceMenuItemQuantity
 	dba UpdateItemIconAndDescription
@@ -1773,7 +1812,7 @@ PC_Mart_KeyItemsPocketMenuDataHeader: ; 0x10a97
 	db $2e ; flags
 	db 5, 8 ; rows, columns
 	db 1 ; horizontal spacing
-	dbw 0, wNumKeyItems
+	;dbw 0, wNumKeyItems
 	dba PlaceMartItemName
 	dba PlaceMenuItemQuantity
 	dba UpdateItemIconAndDescription
