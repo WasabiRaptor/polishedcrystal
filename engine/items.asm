@@ -337,6 +337,15 @@ CheckSelectableItem: ; d432
 	and a
 	ret
 
+CheckSelectableKeyItem: ; d432
+; Return 1 in wItemAttributeParamBuffer and carry if wCurItem can't be selected.
+	ld a, KEYITEMATTR_PERMISSIONS
+	call GetKeyItemAttr
+	bit CANT_SELECT_F, a
+	jr nz, ItemAttr_ReturnCarry
+	and a
+	ret
+
 CheckItemPocket:: ; d43d
 ; Return the pocket for wCurItem in wItemAttributeParamBuffer.
 	ld a, ITEMATTR_POCKET
@@ -353,10 +362,27 @@ CheckItemContext: ; d448
 	ld [wItemAttributeParamBuffer], a
 	ret
 
+CheckKeyItemContext: ; d448
+; Return the context for wCurItem in wItemAttributeParamBuffer.
+	ld a, KEYITEMATTR_HELP
+	call GetKeyItemAttr
+	and $f
+	ld [wItemAttributeParamBuffer], a
+	ret
+
 CheckItemMenu: ; d453
 ; Return the menu for wCurItem in wItemAttributeParamBuffer.
 	ld a, ITEMATTR_HELP
 	call GetItemAttr
+	swap a
+	and $f
+	ld [wItemAttributeParamBuffer], a
+	ret
+
+CheckKeyItemMenu: ; d453
+; Return the menu for wCurItem in wItemAttributeParamBuffer.
+	ld a, KEYITEMATTR_HELP
+	call GetKeyItemAttr
 	swap a
 	and $f
 	ld [wItemAttributeParamBuffer], a
@@ -367,6 +393,19 @@ CheckItemParam:
 	ld a, ITEMATTR_PARAM
 	call GetItemAttr
 	ld [wItemAttributeParamBuffer], a
+	ret
+
+CheckKeyItemParam:
+; Return the param for CurItem in wItemAttributeParamBuffer.
+	ld a, KEYITEMATTR_PARAM
+	call GetKeyItemAttr
+	ld [wItemAttributeParamBuffer], a
+	ret
+
+ItemAttr_ReturnCarry: ; d47f
+	ld a, 1
+	ld [wItemAttributeParamBuffer], a
+	scf
 	ret
 
 GetItemAttr: ; d460
@@ -395,10 +434,30 @@ GetItemAttr: ; d460
 	pop hl
 	ret
 
-ItemAttr_ReturnCarry: ; d47f
-	ld a, 1
+GetKeyItemAttr: ; d460
+; Get attribute a of wCurItem.
+
+	push hl
+	push bc
+
+	ld hl, KeyItemAttributes
+	ld c, a
+	ld b, 0
+	add hl, bc
+
+	xor a
 	ld [wItemAttributeParamBuffer], a
-	scf
+
+	ld a, [wCurItem]
+	dec a
+	ld c, a
+	ld a, NUM_KEYITEMATTRS
+	rst AddNTimes
+	ld a, BANK(KeyItemAttributes)
+	call GetFarByte
+
+	pop bc
+	pop hl
 	ret
 
 GetItemPrice: ; d486

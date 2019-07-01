@@ -226,8 +226,21 @@ ItemEffects: ; e73c
 	dw NoEffect         ; MULCH
 	dw NoEffect         ; SWEET_HONEY
 ; e8a2
+DoKeyItemEffect:: ; e722
+	ld a, [wCurKeyItem]
+	ld [wd265], a
+	call GetKeyItemName
+	call CopyName1
+	ld a, 1
+	ld [wItemEffectSucceeded], a
+	ld a, [wCurKeyItem]
+	dec a
+	ld hl, KeyItemEffects
+	rst JumpTable
+	ret
 
 ;key items
+KeyItemEffects:
 	dw Bicycle          ; BICYCLE
 	dw OldRod           ; OLD_ROD
 	dw GoodRod          ; GOOD_ROD

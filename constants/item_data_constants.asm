@@ -9,6 +9,13 @@
 	const ITEMATTR_HELP
 NUM_ITEMATTRS EQU const_value
 
+; key item attributes
+	const_def
+	const KEYITEMATTR_EFFECT
+	const KEYITEMATTR_PARAM
+	const KEYITEMATTR_PERMISSIONS
+	const KEYITEMATTR_HELP
+NUM_KEYITEMATTRS EQU const_value
 
 ; pockets
 	const_def 1

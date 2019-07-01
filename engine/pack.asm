@@ -214,7 +214,7 @@ Pack: ; 10000
 	lb bc, $7, $b ; TM/HM, Key Items
 	call Pack_InterpretJoypad
 	ret c
-	jr .ItemBallsKey_LoadSubmenu
+	jp .ItemBallsKey_LoadSubmenu
 
 .InitKeyItemsPocket: ; 10094 (4:4094)
 	ld a, KEY_ITEM - 1
@@ -259,29 +259,61 @@ Pack: ; 10000
 
 .KeyItemsJumptable1: ; 10137
 
-	dw .UseItem
+	dw .UseKeyItem
 	dw QuitItemSubmenu
 
 ; 1013b
 
-.KeyItemsUseItem: ; 10159
-	;farcall AskTeachTMHM
-	;ret c
-	;farcall ChooseMonToLearnTMHM
-	;jr c, .declined
-	;ld hl, wOptions1
-	;ld a, [hl]
-	;push af
-	;res NO_TEXT_SCROLL, [hl]
-	;farcall TeachTMHM
-	;pop af
-	;ld [wOptions1], a
-.KeyItemsdeclined
+.UseKeyItem: ; 10311
+	farcall CheckKeyItemMenu
+	ld a, [wItemAttributeParamBuffer]
+	ld hl, .dw
+	rst JumpTable
+	ret
+; 1031f
+
+.dw ; 1031f (4:431f)
+
+	dw .Oak
+	dw .Oak
+	dw .Oak
+	dw .Oak
+	dw .Current
+	dw .Party
+	dw .Field
+; 1035c
+
+.Oak: ; 1032d (4:432d)
+	ld hl, Text_ThisIsntTheTime
+	jp Pack_PrintTextNoScroll
+
+.Current: ; 10334 (4:4334)
+	predef_jump DoKeyItemEffect
+
+.Party: ; 10338 (4:4338)
+	ld a, [wPartyCount]
+	and a
+	jr z, .NoPokemon
+	predef DoKeyItemEffect
 	xor a
 	ldh [hBGMapMode], a
 	call Pack_InitGFX
 	call WaitBGMap_DrawPackGFX
 	jp Pack_InitColors
+
+.NoPokemon:
+	ld hl, TextJump_YouDontHaveAPkmn
+	jp Pack_PrintTextNoScroll
+
+.Field: ; 10355 (4:4355)
+	predef DoKeyItemEffect
+	ld a, [wItemEffectSucceeded]
+	and a
+	jr z, .Oak
+	ld a, $e ; QuitRunScript
+	ld [wJumptableIndex], a
+	ret
+; 10364 (4:4364)
 
 .ItemBallsKey_LoadSubmenu: ; 101c5 (4:41c5)
 	jr nz, PackSortMenu
