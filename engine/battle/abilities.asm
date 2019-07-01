@@ -592,16 +592,21 @@ StanceChangeAbility:
 	;fallthrough
 
 .stanceChanged
-	farcall UpdateUserInParty
-
-	farcall UpdatePkmnStats
-	pop af
-	push af
 	jr nz,.enemyturn
+	call UpdateBattleMonInParty
+
+	farcall UpdatePkmnStats 
+
 	farcall InitBattleMon
 	jr .donestats
+
 .enemyturn
+	call UpdateEnemyMonInParty
+
+	farcall UpdateEnemyPkmnStats 
+
 	farcall InitEnemyMon
+
 .donestats
 	pop af
 	push af
@@ -1178,41 +1183,22 @@ PowerConstructAbility:
 	or COMPLETE_ZYGARDE
 	ld [hl], a
 
-	;call UpdateUserInParty
-
 	pop af
 	push af
 	jr nz,.enemyturn
-
 	call UpdateBattleMonInParty
 
 	farcall UpdatePkmnStats 
 
-;player stats
-	ld a, [wCurPartyMon]
-	push af
-	ld a, [wCurBattleMon]
-	ld [wCurPartyMon], a 
 	farcall InitBattleMon
-	pop af
-	ld [wCurPartyMon], a 
 	jr .donestats
 
 .enemyturn
-	;call UpdateEnemyMonInParty
+	call UpdateEnemyMonInParty
 
-	ld a, COMPLETE_ZYGARDE
-	ld [wEnemyMonForm], a
-	ld [wOTPartyMon1Form], a
-	farcall UpdatePkmnStats 
+	farcall UpdateEnemyPkmnStats 
 
-	ld a, [wCurPartyMon]
-	push af
-	ld a, [wCurOTMon]
-	ld [wCurPartyMon], a 
 	farcall InitEnemyMon
-	pop af
-	ld [wCurPartyMon], a 
 
 .donestats
 	pop af

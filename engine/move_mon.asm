@@ -1573,20 +1573,22 @@ ComputeNPCTrademonStats: ; e134
 	ret
 ; e167
 
-UpdatePkmnStats:
-; Recalculates the stats of wCurPartyMon and also updates current HP accordingly
+UpdateEnemyPkmnStats:
+; Recalculates the stats of wOTPartyMon and also updates current HP accordingly
 	ld a, MON_SPECIES
-	call UserPartyAttr
+	call GetEnemyPartyParamLocation
+	ld a, [hl]
 	ld [wCurSpecies], a
 	ld a, MON_FORM
-	call UserPartyAttr
+	call GetEnemyPartyParamLocation
 	predef GetVariant
 	call GetBaseData ;form is known
 	ld a, MON_LEVEL
-	call UserPartyAttr
+	call GetEnemyPartyParamLocation
+	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, MON_MAXHP + 1
-	call UserPartyAttr
+	call GetEnemyPartyParamLocation
 	ld a, [hld]
 	ld c, a
 	ld b, [hl]
@@ -1594,13 +1596,45 @@ UpdatePkmnStats:
 	ld d, h
 	ld e, l
 	ld a, MON_EVS - 1
-	call UserPartyAttr
+	call GetEnemyPartyParamLocation
 	ld b, TRUE
 	call CalcPkmnStats
 	ld a, MON_HP
-	call UserPartyAttr
+	call GetEnemyPartyParamLocation
 	pop bc
+	jp UpdateStats
 
+UpdatePkmnStats:
+; Recalculates the stats of wCurPartyMon and also updates current HP accordingly
+	ld a, MON_SPECIES
+	call GetPartyParamLocation
+	ld a, [hl]
+	ld [wCurSpecies], a
+	ld a, MON_FORM
+	call GetPartyParamLocation
+	predef GetVariant
+	call GetBaseData ;form is known
+	ld a, MON_LEVEL
+	call GetPartyParamLocation
+	ld a, [hl]
+	ld [wCurPartyLevel], a
+	ld a, MON_MAXHP + 1
+	call GetPartyParamLocation
+	ld a, [hld]
+	ld c, a
+	ld b, [hl]
+	push bc
+	ld d, h
+	ld e, l
+	ld a, MON_EVS - 1
+	call GetPartyParamLocation
+	ld b, TRUE
+	call CalcPkmnStats
+	ld a, MON_HP
+	call GetPartyParamLocation
+	pop bc
+	;fallthrough
+UpdateStats:
 	; Don't change the current HP if we're fainted
 	ld a, [hli]
 	or [hl]

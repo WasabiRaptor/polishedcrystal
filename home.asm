@@ -1603,10 +1603,15 @@ PrintBCDDigit:: ; 38f2
 	ret
 ; 0x3917
 
+GetEnemyPartyParamLocation::
+	push bc
+	ld hl, wOTPartyMons
+	jr PkmnParamLocation
 GetPartyParamLocation:: ; 3917
 ; Get the location of parameter a from wCurPartyMon in hl
 	push bc
 	ld hl, wPartyMons
+PkmnParamLocation:
 	ld c, a
 	ld b, 0
 	add hl, bc
