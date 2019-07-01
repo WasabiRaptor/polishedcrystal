@@ -83,36 +83,7 @@ ItemDescriptions:
 	dw ShinyStoneDesc
 	dw IceStoneDesc
 	dw EverstoneDesc
-	dw BicycleDesc
-	dw OldRodDesc
-	dw GoodRodDesc
-	dw SuperRodDesc
-	dw CoinCaseDesc
-	dw ItemfinderDesc
 	dw ExpShareDesc
-	dw MysteryEggDesc
-	dw SquirtBottleDesc
-	dw SecretPotionDesc
-	dw RedScaleDesc
-	dw CardKeyDesc
-	dw BasementKeyDesc
-	dw SSTicketDesc
-	dw PassDesc
-	dw MachinePartDesc
-	dw LostItemDesc
-	dw RainbowWingDesc
-	dw SilverWingDesc
-	dw ClearBellDesc
-	dw GSBallDesc
-	dw BlueCardDesc
-	dw OrangeTicketDesc
-	dw MysticTicketDesc
-	dw OldSeaMapDesc
-	dw ShinyCharmDesc
-	dw OvalCharmDesc
-	dw SilphScope2Desc
-	dw ApricornBoxDesc
-	dw TeruSamaDesc
 	dw CheriBerryDesc
 	dw ChestoBerryDesc
 	dw PechaBerryDesc
@@ -216,12 +187,7 @@ ItemDescriptions:
 	dw DragonScaleDesc
 	dw UpGradeDesc
 	dw DubiousDiscDesc
-	dw ProtectorDesc
-	dw ElectirizerDesc
-	dw MagmarizerDesc
-	dw RazorFangDesc
 	dw RazorClawDesc
-	dw OddSouvenirDesc
 	dw NuggetDesc
 	dw BigNuggetDesc
 	dw TinyMushroomDesc
@@ -243,18 +209,20 @@ ItemDescriptions:
 	dw OldAmberDesc
 	dw MulchDesc
 	dw SweetHoneyDesc
-	dw FlowerMailDesc
-	dw SurfMailDesc
-	dw LiteBlueMailDesc
-	dw PortraitMailDesc
-	dw LovelyMailDesc
-	dw EonMailDesc
-	dw MorphMailDesc
-	dw BlueSkyMailDesc
-	dw MusicMailDesc
-	dw MirageMailDesc
 	dw TeruSamaDesc
 	dw TeruSamaDesc
+
+KeyItemDescriptions:
+	dw BicycleDesc
+	dw OldRodDesc
+	dw GoodRodDesc
+	dw SuperRodDesc
+	dw CoinCaseDesc
+	dw ItemfinderDesc
+	dw ShinyCharmDesc
+	dw OvalCharmDesc
+	dw SilphScope2Desc
+	dw ApricornBoxDesc
 
 PokeBallDesc:
 	db   "An item for catch-"

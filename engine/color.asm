@@ -139,9 +139,15 @@ LoadCategoryAndTypePals:
 	ld a, $5
 	jp FarCopyWRAM
 
+LoadKeyItemIconPalette:
+	ld a, [wCurSpecies]
+	ld bc, KeyItemIconPalettes
+	jr LoadIconPalette
+	
 LoadItemIconPalette:
 	ld a, [wCurSpecies]
 	ld bc, ItemIconPalettes
+LoadIconPalette:
 	ld l, a
 	ld h, 0
 	add hl, hl

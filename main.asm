@@ -469,6 +469,18 @@ OwnedTMString:
 UnownedTMString:
 	db "Unowned@"
 
+UpdateKeyItemDescription:
+	ld a, [wMenuSelection]
+	ld [wCurSpecies], a
+	hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
+	call TextBox
+	ld a, [wMenuSelection]
+	cp -1
+	ret z
+	decoord 1, 14
+	farjp PrintKeyItemDescription
+
 GetQuantityInBag:
 	ld a, [wCurItem]
 	push af
@@ -4815,10 +4827,13 @@ SECTION "Item Text", ROMX
 
 INCLUDE "data/items/names.asm"
 
+PrintKeyItemDescription:
+	ld hl, KeyItemDescriptions
+	jr PrintDescription
 PrintItemDescription: ; 0x1c8955
 ; Print the description for item [wCurSpecies] at de.
-
 	ld hl, ItemDescriptions
+PrintDescription:
 	ld a, [wCurSpecies]
 	dec a
 	ld c, a

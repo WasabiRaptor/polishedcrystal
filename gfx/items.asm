@@ -33,6 +33,24 @@ UpdateItemIcon::
 	farcall LoadItemIconPalette
 	jp SetPalettes
 
+UpdateKeyItemIconAndDescription::
+	farcall UpdateKeyItemDescription
+UpdateKeyItemIcon::
+	ld hl, KeyItemIconPointers
+	ld a, [wCurSpecies]
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld de, VTiles2 tile $1e
+	lb bc, BANK(KeyItemIcons), 9
+	call DecompressRequest2bpp
+	farcall LoadKeyItemIconPalette
+	jp SetPalettes
+
 GetItemIconBank:
 	lb bc, BANK(ItemIcons1), 9
 	ld a, [wCurSpecies]
@@ -57,6 +75,7 @@ LoadTMHMIcon::
 	lb bc, BANK(TMHMIcon), 9
 	jp DecompressRequest2bpp
 
+ClearKeyItemIcon::
 ClearTMHMIcon::
 	ld hl, NoItemIcon
 	ld de, VTiles2 tile $1e
@@ -160,35 +179,7 @@ DuskStoneIcon:    INCBIN "gfx/items/dusk_stone.2bpp.lz"
 ShinyStoneIcon:   INCBIN "gfx/items/shiny_stone.2bpp.lz"
 IceStoneIcon:     INCBIN "gfx/items/ice_stone.2bpp.lz"
 EverstoneIcon:    INCBIN "gfx/items/everstone.2bpp.lz"
-BicycleIcon:      INCBIN "gfx/items/bicycle.2bpp.lz"
-OldRodIcon:       INCBIN "gfx/items/old_rod.2bpp.lz"
-GoodRodIcon:      INCBIN "gfx/items/good_rod.2bpp.lz"
-SuperRodIcon:     INCBIN "gfx/items/super_rod.2bpp.lz"
-CoinCaseIcon:     INCBIN "gfx/items/coin_case.2bpp.lz"
-ItemfinderIcon:   INCBIN "gfx/items/itemfinder.2bpp.lz"
 ExpShareIcon:     INCBIN "gfx/items/exp_share.2bpp.lz"
-MysteryEggIcon:   INCBIN "gfx/items/mystery_egg.2bpp.lz"
-SquirtBottleIcon: INCBIN "gfx/items/squirtbottle.2bpp.lz"
-SecretPotionIcon: INCBIN "gfx/items/secretpotion.2bpp.lz"
-RedScaleIcon:     INCBIN "gfx/items/red_scale.2bpp.lz"
-CardKeyIcon:      INCBIN "gfx/items/card_key.2bpp.lz"
-BasementKeyIcon:  INCBIN "gfx/items/basement_key.2bpp.lz"
-SSTicketIcon:     INCBIN "gfx/items/s_s_ticket.2bpp.lz"
-PassIcon:         INCBIN "gfx/items/pass.2bpp.lz"
-MachinePartIcon:  INCBIN "gfx/items/machine_part.2bpp.lz"
-LostItemIcon:     INCBIN "gfx/items/lost_item.2bpp.lz"
-RainbowWingIcon:  INCBIN "gfx/items/rainbow_wing.2bpp.lz"
-SilverWingIcon:   INCBIN "gfx/items/silver_wing.2bpp.lz"
-ClearBellIcon:    INCBIN "gfx/items/clear_bell.2bpp.lz"
-GSBallIcon:       INCBIN "gfx/items/gs_ball.2bpp.lz"
-BlueCardIcon:     INCBIN "gfx/items/blue_card.2bpp.lz"
-OrangeTicketIcon: INCBIN "gfx/items/orangeticket.2bpp.lz"
-MysticTicketIcon: INCBIN "gfx/items/mysticticket.2bpp.lz"
-OldSeaMapIcon:    INCBIN "gfx/items/old_sea_map.2bpp.lz"
-ShinyCharmIcon:   INCBIN "gfx/items/shiny_charm.2bpp.lz"
-OvalCharmIcon:    INCBIN "gfx/items/oval_charm.2bpp.lz"
-SilphScope2Icon:  INCBIN "gfx/items/silphscope2.2bpp.lz"
-ApricornBoxIcon:  INCBIN "gfx/items/apricorn_box.2bpp.lz"
 CheriBerryIcon:   INCBIN "gfx/items/cheri_berry.2bpp.lz"
 ChestoBerryIcon:  INCBIN "gfx/items/chesto_berry.2bpp.lz"
 PechaBerryIcon:   INCBIN "gfx/items/pecha_berry.2bpp.lz"
@@ -330,3 +321,17 @@ MusicMailIcon:    INCBIN "gfx/items/music_mail.2bpp.lz"
 MirageMailIcon:   INCBIN "gfx/items/mirage_mail.2bpp.lz"
 
 TMHMIcon:         INCBIN "gfx/items/tm_hm.2bpp.lz"
+
+SECTION "Key Item Icons", ROMX
+
+KeyItemIcons::
+BicycleIcon:      INCBIN "gfx/items/bicycle.2bpp.lz"
+OldRodIcon:       INCBIN "gfx/items/old_rod.2bpp.lz"
+GoodRodIcon:      INCBIN "gfx/items/good_rod.2bpp.lz"
+SuperRodIcon:     INCBIN "gfx/items/super_rod.2bpp.lz"
+CoinCaseIcon:     INCBIN "gfx/items/coin_case.2bpp.lz"
+ItemfinderIcon:   INCBIN "gfx/items/itemfinder.2bpp.lz"
+ShinyCharmIcon:   INCBIN "gfx/items/shiny_charm.2bpp.lz"
+OvalCharmIcon:    INCBIN "gfx/items/oval_charm.2bpp.lz"
+SilphScope2Icon:  INCBIN "gfx/items/silphscope2.2bpp.lz"
+ApricornBoxIcon:  INCBIN "gfx/items/apricorn_box.2bpp.lz"

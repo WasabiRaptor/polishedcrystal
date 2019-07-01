@@ -228,8 +228,8 @@ Pack: ; 10000
 	lb bc, $9, $1 ; Berries, Items
 	call Pack_InterpretJoypad
 	ret c
-	ld hl, .MenuDataHeader1
-	ld de, .Jumptable1
+	ld hl, .KeyItemsMenuDataHeader1
+	ld de, .KeyItemsJumptable1
 	push de
 	call LoadMenuDataHeader
 	call VerticalMenu
@@ -244,22 +244,24 @@ Pack: ; 10000
 ; 10124 (4:4124)
 .KeyItemsMenuDataHeader1: ; 0x10124
 	db $40 ; flags
-	db 07, 13 ; start coords
-	db 11, 19 ; end coords
+	db 06, 13 ; start coords
+	db 12, 19 ; end coords
 	dw .KeyItemsMenuData2_1
 	db 1 ; default option
 ; 0x1012c
 
 .KeyItemsMenuData2_1: ; 0x1012c
 	db $c0 ; flags
-	db 2 ; items
+	db 3 ; items
 	db "Use@"
+	db "Sel@"
 	db "Quit@"
 ; 0x10137
 
 .KeyItemsJumptable1: ; 10137
 
 	dw .UseKeyItem
+	dw .SelectKeyItem
 	dw QuitItemSubmenu
 
 ; 1013b
@@ -314,6 +316,8 @@ Pack: ; 10000
 	ld [wJumptableIndex], a
 	ret
 ; 10364 (4:4364)
+.SelectKeyItem
+	ret
 
 .ItemBallsKey_LoadSubmenu: ; 101c5 (4:41c5)
 	jr nz, PackSortMenu
@@ -1218,17 +1222,10 @@ DepositSellPack: ; 106be
 .KeyItemsPocket: ; 106ff (4:46ff)
 	ld a, KEY_ITEM - 1
 	call InitPocket
-	ld hl, PC_Mart_KeyItemsPocketMenuDataHeader
-	call CopyMenuDataHeader
-	ld a, [wKeyItemsPocketCursor]
-	ld [wMenuCursorBuffer], a
-	ld a, [wKeyItemsPocketScrollPosition]
-	ld [wMenuScrollPosition], a
-	call ScrollingMenu
-	ld a, [wMenuScrollPosition]
-	ld [wKeyItemsPocketScrollPosition], a
-	ld a, [wMenuCursorY]
-	ld [wKeyItemsPocketCursor], a
+	call WaitBGMap_DrawPackGFX
+	farcall KeyItemsPocket
+	ld a, [wCurItem]
+	ld [wCurItem], a
 	ret
 
 InitPocket: ; 10762 (4:4762)

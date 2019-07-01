@@ -448,7 +448,7 @@ GetKeyItemAttr: ; d460
 	xor a
 	ld [wItemAttributeParamBuffer], a
 
-	ld a, [wCurItem]
+	ld a, [wCurKeyItem]
 	dec a
 	ld c, a
 	ld a, NUM_KEYITEMATTRS

@@ -903,7 +903,7 @@ if !DEF(MONOCHROME)
 	RGB 31, 23, 09
 	RGB 29, 18, 00
 
-;key items 
+KeyItemIconPalettes: 
 ; BICYCLE
 	RGB 22, 12, 12
 	RGB 12, 12, 12
