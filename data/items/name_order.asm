@@ -244,9 +244,12 @@ ItemNameOrder:
 	db NAM_SLOWPOKETAIL ; d8
 	db NAM_BOTTLE_CAP   ; 19
 
-	db NAM_HELIX_FOSSIL ; 56
-	db NAM_DOME_FOSSIL  ; 2e
-	db NAM_OLD_AMBER    ; 93
+	;db NAM_HELIX_FOSSIL ; 56
+	;db NAM_DOME_FOSSIL  ; 2e
+	;db NAM_OLD_AMBER    ; 93
+	db $fe
+	db $fe
+	db $fe
 
 	db NAM_MULCH        ; 88
 	db NAM_SWEET_HONEY  ; e8

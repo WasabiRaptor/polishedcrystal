@@ -291,7 +291,6 @@
 	const NAM_ASSAULT_VEST ; 09
 	const NAM_AWAKENING    ; 0a
 	const NAM_BALMMUSHROOM ; 0b
-	const NAM_BASEMENT_KEY ; 0c
 	const NAM_BERSERK_GENE ; 0d
 	const NAM_BICYCLE      ; 0e
 	const NAM_BIG_MUSHROOM ; 0f
@@ -302,15 +301,12 @@
 	const NAM_BLACK_BELT   ; 14
 	const NAM_BLACK_SLUDGE ; 15
 	const NAM_BLACKGLASSES ; 16
-	const NAM_BLUE_CARD    ; 17
-	const NAM_BLUESKY_MAIL ; 18
 	const NAM_BOTTLE_CAP   ; 19
 	const NAM_BRICK_PIECE  ; 1a
 	const NAM_BRIGHTPOWDER ; 1b
 	const NAM_BURN_HEAL    ; 1c
 	const NAM_CALCIUM      ; 1d
 	const NAM_CARBOS       ; 1e
-	const NAM_CARD_KEY     ; 1f
 	const NAM_CHARCOAL     ; 20
 	const NAM_CHERI_BERRY  ; 21
 	const NAM_CHERISH_BALL ; 22
@@ -319,23 +315,19 @@
 	const NAM_CHOICE_SCARF ; 25
 	const NAM_CHOICE_SPECS ; 26
 	const NAM_CLEANSE_TAG  ; 27
-	const NAM_CLEAR_BELL   ; 28
 	const NAM_COIN_CASE    ; 29
 	const NAM_DAMP_ROCK    ; 2a
 	const NAM_DESTINY_KNOT ; 2b
 	const NAM_DIRE_HIT     ; 2c
 	const NAM_DIVE_BALL    ; 2d
-	const NAM_DOME_FOSSIL  ; 2e
 	const NAM_DRAGON_FANG  ; 2f
 	const NAM_DRAGON_SCALE ; 30
 	const NAM_DUBIOUS_DISC ; 31
 	const NAM_DUSK_BALL    ; 32
 	const NAM_DUSK_STONE   ; 33
-	const NAM_ELECTIRIZER  ; 34
 	const NAM_ELIXIR       ; 35
 	const NAM_ENERGY_ROOT  ; 36
 	const NAM_ENERGYPOWDER ; 37
-	const NAM_EON_MAIL     ; 38
 	const NAM_ESCAPE_ROPE  ; 39
 	const NAM_ETHER        ; 3a
 	const NAM_EVERSTONE    ; 3b
@@ -346,7 +338,6 @@
 	const NAM_FIGY_BERRY   ; 40
 	const NAM_FIRE_STONE   ; 41
 	const NAM_FLAME_ORB    ; 42
-	const NAM_FLOWER_MAIL  ; 43
 	const NAM_FOCUS_BAND   ; 44
 	const NAM_FOCUS_SASH   ; 45
 	const NAM_FRESH_WATER  ; 46
@@ -358,14 +349,12 @@
 	const NAM_GOOD_ROD     ; 4c
 	const NAM_GREAT_BALL   ; 4d
 	const NAM_GRIP_CLAW    ; 4e
-	const NAM_GS_BALL      ; 4f
 	const NAM_GUARD_SPEC   ; 50
 	const NAM_HARD_STONE   ; 51
 	const NAM_HEAL_BALL    ; 52
 	const NAM_HEAL_POWDER  ; 53
 	const NAM_HEAT_ROCK    ; 54
 	const NAM_HEAVY_BALL   ; 55
-	const NAM_HELIX_FOSSIL ; 56
 	const NAM_HP_UP        ; 57
 	const NAM_HYPER_POTION ; 58
 	const NAM_ICE_HEAL     ; 59
@@ -385,18 +374,13 @@
 	const NAM_LIFE_ORB     ; 67
 	const NAM_LIGHT_BALL   ; 68
 	const NAM_LIGHT_CLAY   ; 69
-	const NAM_LITEBLUEMAIL ; 6a
-	const NAM_LOST_ITEM    ; 6b
 	const NAM_LOVE_BALL    ; 6c
-	const NAM_LOVELY_MAIL  ; 6d
 	const NAM_LUCKY_EGG    ; 6e
 	const NAM_LUCKY_PUNCH  ; 6f
 	const NAM_LUM_BERRY    ; 70
 	const NAM_LURE_BALL    ; 71
 	const NAM_LUXURY_BALL  ; 72
-	const NAM_MACHINE_PART ; 73
 	const NAM_MACHO_BRACE  ; 74
-	const NAM_MAGMARIZER   ; 75
 	const NAM_MAGNET       ; 76
 	const NAM_MARANGABERRY ; 77
 	const NAM_MASTER_BALL  ; 78
@@ -410,31 +394,21 @@
 	const NAM_METAL_POWDER ; 80
 	const NAM_METRONOME_I  ; 81
 	const NAM_MIRACLE_SEED ; 82
-	const NAM_MIRAGE_MAIL  ; 83
 	const NAM_MOOMOO_MILK  ; 84
 	const NAM_MOON_BALL    ; 85
 	const NAM_MOON_STONE   ; 86
-	const NAM_MORPH_MAIL   ; 87
 	const NAM_MULCH        ; 88
 	const NAM_MUSCLE_BAND  ; 89
-	const NAM_MUSIC_MAIL   ; 8a
-	const NAM_MYSTERY_EGG  ; 8b
 	const NAM_MYSTIC_WATER ; 8c
-	const NAM_MYSTICTICKET ; 8d
 	const NAM_NEST_BALL    ; 8e
 	const NAM_NET_BALL     ; 8f
 	const NAM_NEVERMELTICE ; 90
 	const NAM_NUGGET       ; 91
-	const NAM_ODD_SOUVENIR ; 92
-	const NAM_OLD_AMBER    ; 93
 	const NAM_OLD_ROD      ; 94
-	const NAM_OLD_SEA_MAP  ; 95
 	const NAM_ORAN_BERRY   ; 96
-	const NAM_ORANGETICKET ; 97
 	const NAM_OVAL_CHARM   ; 98
 	const NAM_PARALYZEHEAL ; 99
 	const NAM_PARK_BALL    ; 9a
-	const NAM_PASS         ; 9b
 	const NAM_PEARL        ; 9c
 	const NAM_PEARL_STRING ; 9d
 	const NAM_PECHA_BERRY  ; 9e
@@ -445,7 +419,6 @@
 	const NAM_POISON_BARB  ; a3
 	const NAM_POKE_BALL    ; a4
 	const NAM_POKE_DOLL    ; a5
-	const NAM_PORTRAITMAIL ; a6
 	const NAM_POTION       ; a7
 	const NAM_POWER_ANKLET ; a8
 	const NAM_POWER_BAND   ; a9
@@ -458,32 +431,26 @@
 	const NAM_PP_UP        ; b0
 	const NAM_PREMIER_BALL ; b1
 	const NAM_PROTECT_PADS ; b2
-	const NAM_PROTECTOR    ; b3
 	const NAM_PROTEIN      ; b4
 	const NAM_QUICK_BALL   ; b5
 	const NAM_QUICK_CLAW   ; b6
 	const NAM_QUICK_POWDER ; b7
 	const NAM_RAGECANDYBAR ; b8
-	const NAM_RAINBOW_WING ; b9
 	const NAM_RARE_BONE    ; ba
 	const NAM_RARE_CANDY   ; bb
 	const NAM_RAWST_BERRY  ; bc
 	const NAM_RAZOR_CLAW   ; bd
-	const NAM_RAZOR_FANG   ; be
-	const NAM_RED_SCALE    ; bf
 	const NAM_REPEAT_BALL  ; c0
 	const NAM_REPEL        ; c1
 	const NAM_REVIVAL_HERB ; c2
 	const NAM_REVIVE       ; c3
 	const NAM_ROCKY_HELMET ; c4
 	const NAM_ROWAP_BERRY  ; c5
-	const NAM_S_S_TICKET   ; c6
 	const NAM_SACRED_ASH   ; c7
 	const NAM_SAFARI_BALL  ; c8
 	const NAM_SAFE_GOGGLES ; c9
 	const NAM_SALAC_BERRY  ; ca
 	const NAM_SCOPE_LENS   ; cb
-	const NAM_SECRETPOTION ; cc
 	const NAM_SHARP_BEAK   ; cd
 	const NAM_SHED_SHELL   ; ce
 	const NAM_SHELL_BELL   ; cf
@@ -492,7 +459,6 @@
 	const NAM_SILK_SCARF   ; d2
 	const NAM_SILPHSCOPE2  ; d3
 	const NAM_SILVER_LEAF  ; d4
-	const NAM_SILVER_WING  ; d5
 	const NAM_SILVERPOWDER ; d6
 	const NAM_SITRUS_BERRY ; d7
 	const NAM_SLOWPOKETAIL ; d8
@@ -502,7 +468,6 @@
 	const NAM_SOFT_SAND    ; dc
 	const NAM_SOOTHE_BELL  ; dd
 	const NAM_SPELL_TAG    ; de
-	const NAM_SQUIRTBOTTLE ; df
 	const NAM_STAR_PIECE   ; e0
 	const NAM_STARDUST     ; e1
 	const NAM_STICK        ; e2
@@ -510,9 +475,7 @@
 	const NAM_SUPER_POTION ; e4
 	const NAM_SUPER_REPEL  ; e5
 	const NAM_SUPER_ROD    ; e6
-	const NAM_SURF_MAIL    ; e7
 	const NAM_SWEET_HONEY  ; e8
-	const NAM_TERU_SAMA    ; e9
 	const NAM_THICK_CLUB   ; ea
 	const NAM_THUNDERSTONE ; eb
 	const NAM_TIMER_BALL   ; ec
