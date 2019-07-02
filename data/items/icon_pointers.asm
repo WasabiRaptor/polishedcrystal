@@ -231,5 +231,4 @@ KeyItemIconPointers:
 	dw ItemfinderIcon
 	dw ShinyCharmIcon
 	dw OvalCharmIcon
-	dw SilphScope2Icon
 	dw ApricornBoxIcon

@@ -221,7 +221,6 @@ KeyItemDescriptions:
 	dw ItemfinderDesc
 	dw ShinyCharmDesc
 	dw OvalCharmDesc
-	dw SilphScope2Desc
 	dw ApricornBoxDesc
 
 PokeBallDesc:

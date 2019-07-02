@@ -666,15 +666,18 @@ RegisterItem: ; 103c2
 	ld a, [wCurItem]
 	ld e, a
 	ld d, 4
+	ld c, 1
 .already_registered_loop
 	ld a, [hl]
 	cp e
 	jr z, .found_registered_slot
+	rlc c
 	inc hl
 	dec d
 	jr nz, .already_registered_loop
 	ld hl, wRegisteredItems
 	ld d, 4
+	ld c, 1
 .loop
 	ld a, [hl]
 	and a
@@ -695,6 +698,16 @@ RegisterItem: ; 103c2
 	jr .print
 
 .found_registered_slot
+	ld a, [wRegisteredItemFlags]
+	ld b, a
+	and c
+	jr z, .clear_registered_slot
+	rlc c
+	dec d
+	inc hl
+	jr .already_registered_loop
+
+.clear_registered_slot
 	ld [hl], 0
 	ld a, [wCurItem]
 	call Pack_GetItemName
@@ -744,7 +757,7 @@ RegisterKeyItem: ; 103c2
 
 .found_empty_slot
 	ld a, [wRegisteredItemFlags]
-	xor c
+	or c
 	ld [wRegisteredItemFlags], a
 	ld a, [wCurKeyItem]
 	ld [hl], a

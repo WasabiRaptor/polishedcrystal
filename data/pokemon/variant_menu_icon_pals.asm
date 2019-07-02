@@ -86,3 +86,5 @@ ZygardeIconPals::
 	iconpal TEAL, GREEN ; Zygarde_Ten_Percent
 	iconpal TEAL, GREEN ; Zygarde
 	iconpal TEAL, GREEN ; Zygarde_Complete
+	iconpal TEAL, GREEN ; Zygarde_Complete
+	iconpal TEAL, GREEN ; Zygarde_Complete

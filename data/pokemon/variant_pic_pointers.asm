@@ -196,5 +196,6 @@ ZygardePicPointers::
 	dba Zygarde_Ten_PercentBackpic
 	dba ZygardeFrontpic
 	dba ZygardeBackpic
-	dba Zygarde_CompleteFrontpic
-	dba Zygarde_CompleteBackpic
+	add_pics Zygarde_Complete
+	add_pics Zygarde_Complete
+	add_pics Zygarde_Complete

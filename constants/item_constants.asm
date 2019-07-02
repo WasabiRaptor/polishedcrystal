@@ -509,4 +509,4 @@ NUM_APRICORNS EQU const_value +- 1
 	const SHINY_CHARM  ; 6e
 	const OVAL_CHARM   ; 6f
 	const APRICORN_BOX ; 71
-NUM_KEY_ITEMS EQU const_value +- 1
+NUM_KEY_ITEMS EQU const_value

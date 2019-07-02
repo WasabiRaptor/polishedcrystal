@@ -500,39 +500,48 @@ PlaceMenuItemName:
 	ld [de], a
 	ld a, [wMenuSelection]
 	push bc
+	push de
 	and a
 	jr z, .not_registered
+	ld d, 1
 	ld b, a
 	ld hl, wRegisteredItems
 	ld a, [hli]
 	cp b
 	ld c, "▲"
 	jr z, .registered
+	rlc d
 	ld a, [hli]
 	cp b
 	ld c, "◀"
 	jr z, .registered
+	rlc d
 	ld a, [hli]
 	cp b
 	ld c, "▶"
 	jr z, .registered
+	rlc d
 	ld a, [hli]
 	cp b
 	ld c, "▼"
 	jr nz, .not_registered
 .registered
+	ld a, [wRegisteredItemFlags]
+	and d
+	jr nz, .not_registered
 	push bc
-	push de
 	farcall CheckRegisteredItem
-	pop de
 	pop bc
 	dec a
 	jr nz, .not_unique
 	ld c, "★"
 .not_unique
+	pop de
+	push de
 	ld a, c
 	ld [de], a
 .not_registered
+	pop de
 	pop bc
 	pop de
 	pop hl

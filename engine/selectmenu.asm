@@ -32,7 +32,7 @@ CheckRegisteredItem:: ; 13345
 	push bc
 	push af
 	call CheckKeyItem
-	jr nz, .NormalItem
+	jr nc, .NormalItem
 
 	ld a, [wRegisteredItemFlags]
 	and d
@@ -43,8 +43,10 @@ CheckRegisteredItem:: ; 13345
 	pop af
 	push af
 	ld hl, wItems
+	push de
 	ld de, 2
 	call IsInArray
+	pop de
 	jr c, .registration_ok
 	pop af
 	pop bc
@@ -62,6 +64,7 @@ CheckRegisteredItem:: ; 13345
 	ld [wCurItem], a
 	inc c
 .next
+	rlc d
 	inc hl
 	dec b
 	jr nz, .loop
@@ -77,9 +80,20 @@ UseRegisteredItem:
 	; Otherwise, show an item selection window
 	call GetRegisteredItem
 	ret z
+	push af
+	ld a, [wRegisteredItemFlags]
+	and c
+	jp nz, .RegisteredKeyItem
+	pop af
+	jr .DoRegisteredItem
 
 .single_registered_item
-
+	push af
+	ld a, [wRegisteredItemFlags]
+	and 1
+	jr nz, .RegisteredKeyItem
+	pop af
+.DoRegisteredItem
 	push de
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
@@ -148,6 +162,61 @@ UseRegisteredItem:
 	and a
 	ret
 
+.RegisteredKeyItem
+	pop af
+
+	push de
+	ld de, SFX_READ_TEXT_2
+	call PlaySFX
+	ld c, 3
+	call SFXDelayFrames
+	pop de
+	farcall CheckKeyItemMenu
+	ld a, [wItemAttributeParamBuffer]
+	ld hl, .KeyItemSwitchTo
+	rst JumpTable
+	ret
+
+.KeyItemSwitchTo:
+	dw .CantUse
+	dw .NoFunction
+	dw .NoFunction
+	dw .NoFunction
+	dw .KeyItemCurrent
+	dw .KeyItemParty
+	dw .KeyItemOverworld
+
+.KeyItemCurrent:
+	call OpenText
+	call DoKeyItemEffect
+	call CloseText
+	and a
+	ret
+
+.KeyItemParty:
+	call RefreshScreen
+	call FadeToMenu
+	call DoKeyItemEffect
+	call CloseSubmenu
+	call CloseText
+	and a
+	ret
+
+.KeyItemOverworld:
+	call RefreshScreen
+	ld a, 1
+	ld [wUsingItemWithSelect], a
+	call DoKeyItemEffect
+	xor a
+	ld [wUsingItemWithSelect], a
+	ld a, [wItemEffectSucceeded]
+	cp 1
+	jr nz, ._cantuse
+	scf
+	ld a, HMENURETURN_SCRIPT
+	ldh [hMenuReturn], a
+	ret
+
 GetRegisteredItem:
 ; Shows a list of registered items, allowing you to select one with directions
 	ld de, SFX_MENU
@@ -191,11 +260,16 @@ GetRegisteredItem:
 	ld [wNamedObjectIndexBuffer], a
 	push de
 	push hl
+	push af
 	ld a, [wRegisteredItemFlags]
 	and c
 	jr nz, .KeyItemName
 	call GetItemName
+	jr .got_name
+.KeyItemName
+	call GetKeyItemName	
 .got_name
+	pop af
 	pop hl
 	push hl
 	ld de, wStringBuffer1
@@ -207,8 +281,8 @@ GetRegisteredItem:
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
-	dec b
 	rlc c
+	dec b
 	jr nz, .loop
 
 	call SetPalettes
@@ -228,25 +302,25 @@ GetRegisteredItem:
 	call DelayFrame
 	jr .joy_loop
 
-.KeyItemName
-	call GetKeyItemName
-	jr .got_name
-
 .got_input
 	bit A_BUTTON_F, a
 	jr nz, .first
 	and B_BUTTON | SELECT | START
 	jr nz, .cancel
 	ld de, wRegisteredItems
+	ld c, 1
 	ld a, [hl]
 	bit D_UP_F, a
 	jr nz, .got_item
+	rlc c
 	inc de
 	bit D_LEFT_F, a
 	jr nz, .got_item
+	rlc c
 	inc de
 	bit D_RIGHT_F, a
 	jr nz, .got_item
+	rlc c
 	inc de
 .got_item
 	ld a, [de]
@@ -269,10 +343,12 @@ GetRegisteredItem:
 
 .first
 	ld hl, wRegisteredItems
+	ld c, 1
 rept 3
 	ld a, [hli]
 	and a
 	jr nz, .got_item_a
+	rlc c
 endr
 	ld a, [hl]
 	and a
