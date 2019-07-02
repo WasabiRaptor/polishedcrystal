@@ -291,7 +291,7 @@ Trade_GetAttributeOfLastPartymon: ; fcdde
 GetTradeMonName: ; fcde8
 	push de
 	ld [wd265], a
-	call GetBasePokemonName
+	call GetPokemonName
 	ld hl, wStringBuffer1
 	pop de
 	ret

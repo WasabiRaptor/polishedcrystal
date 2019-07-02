@@ -137,6 +137,16 @@ AbilityNames:
 	dw PowerOfAlchemy
 	dw Reciever
 	dw Illusion
+	dw ReverseAura
+	dw SoulHeart
+	dw StormDrain
+	dw Mummy
+	dw HeavyMetal
+	dw RKS_System
+	dw ToughClaws
+	dw PowerConstruct
+	dw Berserk
+	dw GaleWings
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -276,6 +286,16 @@ StanceChange:  db "S","t","a","n","c","e"," ","C","h","a","n","g","e","@"
 PowerOfAlchemy:db "P","o","w","e","r"," ","O","f"," ","A","l","c","h","e","m","y","@"
 Reciever:	   db "R","e","c","i","e","v","e","r","@"
 Illusion:	   db "I","l","l","u","s","i","o","n","@"
+ReverseAura:   db "R","e","v","e","r","s","e"," ","A","u","r","a","@"
+SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
+HeavyMetal:    db "H","e","a","v","y"," ","M","e","t","a","l","@"
+StormDrain:	   db "S","t","o","r","m"," ","d","r","a","i","n","@"
+Mummy:		   db "M","u","m","m","y","@"
+RKS_System:	   db "R","K","S"," ","S","y","s","t","e","m","@"
+ToughClaws:    db "T","o","u","g","h"," ","C","l","a","w","s","@"
+PowerConstruct:db "P","o","w","e","r"," ","C","o","n","s","t","r","u","c","t","@"
+Berserk:	   db "B","e","r","s","e","r","k","@"
+GaleWings: 	   db "G","a","l","e"," ","W","i","n","g","s","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -416,6 +436,16 @@ AbilityDescriptions:
 	dw PowerOfAlchemyDescription
 	dw RecieverDescription
 	dw IllusionDescription
+	dw ReverseAuraDescription
+	dw SoulHeartDescription
+	dw StormDrainDescription
+	dw MummyDescription
+	dw HeavyMetalDescription
+	dw RKS_SystemDescription
+	dw ToughClawsDescription
+	dw PowerConstructDescription
+	dw BerserkDescription
+	dw GaleWingsDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -956,3 +986,42 @@ PowerOfAlchemyDescription:
 IllusionDescription:
 	db    "Disguses self as"
 	next1 "final party mon.@"
+
+ReverseAuraDescription:
+	db    "All type effects"
+	next1 "become inversed.@"
+
+SoulHeartDescription:
+	db    "Boosts Sp. Atk. when"
+	next1 "knocking out foes.@"
+
+HeavyMetalDescription:
+	db    "Doubles user's"
+	next1 "weight.@"
+	
+StormDrainDescription:
+	db    "Drains water moves"
+	next1 "and boosts Sp.Atk.@"
+
+MummyDescription:
+	db    "Makes others into"
+	next1 "mummies.@"
+
+RKS_SystemDescription:
+	db    "Can be any type@"
+
+ToughClawsDescription:
+	db    "Boosts power to"
+	next1 "contact moves.@"
+
+PowerConstructDescription:
+	db    "Changes to Complete"
+	next1 "Forme at 50% HP.@"
+
+BerserkDescription:
+	db    "Boosts Sp.Atk."
+	next1 "at half HP.@"
+
+GaleWingsDescription:
+	db    "Gives priority to"
+	next1 "flying type moves.@"

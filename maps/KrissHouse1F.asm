@@ -116,7 +116,8 @@ TVScript:
 
 MomScript:	
 	opentext
-	givepoke SYLVEON, 100
+	givekeyitem BICYCLE 
+	;givepoke ZYGARDE, 5, SWEET_HONEY, TEN_PERCENT_ZYGARDE, CHERISH_BALL, HIDDEN_ABILITY
 	closetext
 	end
 

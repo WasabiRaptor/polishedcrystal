@@ -469,6 +469,18 @@ OwnedTMString:
 UnownedTMString:
 	db "Unowned@"
 
+UpdateKeyItemDescription:
+	;ld a, [wMenuSelection]
+	;ld [wCurKeyItem], a
+	hlcoord 0, 12
+	lb bc, 4, SCREEN_WIDTH - 2
+	call TextBox
+	ld a, [wMenuSelection]
+	cp -1
+	ret z
+	decoord 1, 14
+	farjp PrintKeyItemDescription
+
 GetQuantityInBag:
 	ld a, [wCurItem]
 	push af
@@ -477,6 +489,9 @@ GetQuantityInBag:
 	call CountItem
 	pop af
 	ret
+
+;stuff for registered items I might need later
+
 
 PlaceMenuItemName:
 ; places a star near the name if registered
@@ -487,41 +502,6 @@ PlaceMenuItemName:
 	ld a, " "
 	ld [de], a
 	ld a, [wMenuSelection]
-	push bc
-	and a
-	jr z, .not_registered
-	ld b, a
-	ld hl, wRegisteredItems
-	ld a, [hli]
-	cp b
-	ld c, "▲"
-	jr z, .registered
-	ld a, [hli]
-	cp b
-	ld c, "◀"
-	jr z, .registered
-	ld a, [hli]
-	cp b
-	ld c, "▶"
-	jr z, .registered
-	ld a, [hli]
-	cp b
-	ld c, "▼"
-	jr nz, .not_registered
-.registered
-	push bc
-	push de
-	farcall CheckRegisteredItem
-	pop de
-	pop bc
-	dec a
-	jr nz, .not_unique
-	ld c, "★"
-.not_unique
-	ld a, c
-	ld [de], a
-.not_registered
-	pop bc
 	pop de
 	pop hl
 PlaceMartItemName:
@@ -797,6 +777,7 @@ INCLUDE "engine/battle/trainer_huds.asm"
 INCLUDE "engine/battle/ai/redundant.asm"
 INCLUDE "engine/events/move_deleter.asm"
 INCLUDE "engine/tmhm2.asm"
+INCLUDE "engine/key_items.asm"
 INCLUDE "engine/events/pokerus.asm"
 INCLUDE "data/trainers/class_names.asm"
 INCLUDE "data/moves/descriptions.asm"
@@ -977,7 +958,6 @@ PlaceGraphic: ; 2ef6e
 
 SECTION "Code 10", ROMX
 
-INCLUDE "engine/mail.asm"
 INCLUDE "engine/events/fruit_trees.asm"
 INCLUDE "engine/events/hidden_grottoes.asm"
 INCLUDE "engine/battle/ai/move.asm"
@@ -2516,7 +2496,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	dec a
 	ld hl, wPartyMon1CaughtLocation
 	call GetPartyLocation
-	ld a, NATIONAL_PARK
+	;ld a, NATIONAL_PARK
 	ld [hl], a
 	xor a
 	ld [wContestMon], a
@@ -2573,7 +2553,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, BANK(sBoxMon1CaughtLocation)
 	call GetSRAMBank
 	ld hl, sBoxMon1CaughtLocation
-	ld a, NATIONAL_PARK
+	;ld a, NATIONAL_PARK
 	ld [hl], a
 	call CloseSRAM
 	xor a
@@ -3104,7 +3084,6 @@ _TempMonStatsCalculation: ; 50893
 	ld [hli], a
 	ld [hl], a
 	ret
-
 GetPkmnSpecies: ; 508d5
 ; [wMonType] has the type of the Pkmn
 ; e = Nr. of Pkmn (i.e. [wCurPartyMon])
@@ -4259,7 +4238,7 @@ InsertPokemonIntoBox: ; 51322
 	rst CopyBytes
 	ld a, [wCurPartyMon]
 	ld b, a
-	farcall RestorePPofDepositedPokemon
+	;farcall RestorePPofDepositedPokemon
 	jp CloseSRAM
 
 InsertPokemonIntoParty: ; 5138b
@@ -4470,8 +4449,6 @@ SECTION "Code 19", ROMX
 
 INCLUDE "engine/events_2.asm"
 INCLUDE "engine/radio.asm"
-INCLUDE "gfx/mail.asm"
-
 
 SECTION "Code 20", ROMX
 
@@ -4817,11 +4794,15 @@ SECTION "Item Text", ROMX
 
 INCLUDE "data/items/names.asm"
 
+PrintKeyItemDescription:
+	ld hl, KeyItemDescriptions
+	ld a, [wCurKeyItem]
+	jr PrintDescription
 PrintItemDescription: ; 0x1c8955
 ; Print the description for item [wCurSpecies] at de.
-
 	ld hl, ItemDescriptions
 	ld a, [wCurSpecies]
+PrintDescription:
 	dec a
 	ld c, a
 	ld b, 0
@@ -4875,3 +4856,9 @@ INCLUDE "data/events/odd_eggs.asm"
 SECTION "color", ROMX
 
 INCLUDE "engine/color.asm"
+
+
+SECTION "wild stuff", ROMX
+
+INCLUDE "data/wild/unlocked_unowns.asm"
+INCLUDE "data/wild/treemons_asleep.asm"

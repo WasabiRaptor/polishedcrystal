@@ -132,45 +132,49 @@
 	const COMPETITIVE
 	const PIXILATE
 	const TANGLING_HAIR
-	const REFRIGERATE
-	const SLUSH_RUSH
-	const STANCE_CHANGE
-	const POWER_OF_ALCHEMY
-	const RECIEVER
-	const ILLUSION
+	const REFRIGERATE ;raptor 
+	const SLUSH_RUSH ;raptor 
+	const STANCE_CHANGE ;raptor 
+	const POWER_OF_ALCHEMY ;raptor 
+	const RECIEVER ;raptor 
+	const ILLUSION ;raptor 
+	const REVERSE_AURA ;thalins 
+	const SOUL_HEART ;thalins 
+	const STORM_DRAIN ;raptor 
+	const MUMMY ;raptor 
+	const HEAVY_METAL ;thalins 
+	const RKS_SYSTEM ;raptor 
+	const TOUGH_CLAWS ;raptor
+	const POWER_CONSTRUCT ;thalins 
+	const BERSERK ;raptor
+	const GALE_WINGS ;raptor
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
-	const POWER_CONSTRUCT
-	const AURA_BREAK
-	const DISGUISE
-	const SOUL_HEART
-	const RKS_SYSTEM
-	const MUMMY
-	const HEAVY_METAL
-	const HEAT_PROOF
-	const KLUTZ	
-	const DEFEATIST
-	const TRUANT
-	const WHITE_SMOKE
-	const GALE_WINGS
-	const MAGICIAN
-	const BULLETPROOF
-	const ROUGH_SKIN
-	const IRON_BARBS
-	const CONTRARY
-	const STORM_DRAIN
-	const WATER_BUBBLE
-	const GOOEY
-	const BERSERK
-	const FLUFFY
-	const FRIEND_GUARD
-	const SYMBIOSIS
-	const FLOWER_VEIL
-	const SWEET_VEIL
-	const HONEY_GATHER
-	const TOXIC_BOOST
-	const TOUGH_CLAWS
+	const DISGUISE ;thalins
+	const TOXIC_BOOST ;thalins ; basically just guts but only for poison
+	const MAGICIAN ;thalins ;similar to pickpocket but its when you attack instead of get hit
+	const DEFEATIST ;thalins
+	const TRUANT ;thalins
+	const BULLETPROOF ;thalins
+	const CONTRARY ;thalins
+
+	const ROUGH_SKIN ;raptor
+	const IRON_BARBS ;raptor ;clone of rough skin
+	const WATER_BUBBLE ; raptor ;huge power but just for water
+	const FLUFFY ;raptor
+
+	const FLOWER_VEIL ;fear ;since no doubles it becomes a clone of cear body
+	const SWEET_VEIL ;fear ;with no doubles it becomes a clone of insomnia
+	const HONEY_GATHER ;fear ;can probably copy some code from pickup
+	const WHITE_SMOKE ;fear ;clone of clear body
+	const GOOEY	;fear
+	const KLUTZ ;fear
+	const HEAT_PROOF ;fear
+
+	const FRIEND_GUARD ;for doubles and should be removed or replaced
+	const SYMBIOSIS ;for doubles and should be removed or replaced
+
 
 ABILITY_1      EQU %00100000
 ABILITY_2      EQU %01000000

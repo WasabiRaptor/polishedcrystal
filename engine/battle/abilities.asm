@@ -118,14 +118,27 @@ ObliviousAbility:
 	ld hl, ConfusedNoMoreText
 	jp StdBattleTextBox
 
+UntraceableAbilities:
+	cp TRACE
+	ret z
+	cp IMPOSTER
+	ret z
+	cp STANCE_CHANGE
+	ret z
+	cp RECIEVER
+	ret z
+	cp POWER_OF_ALCHEMY
+	ret z
+	cp POWER_CONSTRUCT
+	ret z
+	cp RKS_SYSTEM
+	ret z
+	ret
+
 TraceAbility:
 	ld a, BATTLE_VARS_ABILITY_OPP
 	call GetBattleVar
-	cp TRACE
-	jr z, .trace_failure
-	cp IMPOSTER
-	jr z, .trace_failure
-	cp STANCE_CHANGE
+	call UntraceableAbilities
 	jr z, .trace_failure
 	push af
 	ld b, a
@@ -512,15 +525,7 @@ RecieverAbility:
 	call GetAbility
 	ld a, b
 	push af
-	cp TRACE
-	jr z, .trace_failure
-	cp IMPOSTER
-	jr z, .trace_failure
-	cp STANCE_CHANGE
-	jr z, .trace_failure
-	cp RECIEVER
-	jr z, .trace_failure
-	cp POWER_OF_ALCHEMY
+	call UntraceableAbilities
 	jr z, .trace_failure
 	ld b, a
 	farcall BufferAbility
@@ -587,7 +592,22 @@ StanceChangeAbility:
 	;fallthrough
 
 .stanceChanged
-	call GetBaseData
+	jr nz,.enemyturn
+	call UpdateBattleMonInParty
+
+	farcall UpdatePkmnStats 
+
+	farcall InitBattleMon
+	jr .donestats
+
+.enemyturn
+	call UpdateEnemyMonInParty
+
+	farcall UpdateEnemyPkmnStats 
+
+	farcall InitEnemyMon
+
+.donestats
 	pop af
 	push af
 	ld a, [wPlayerMinimized]
@@ -603,14 +623,16 @@ StanceChangeAbility:
 
 .player_backpic
 	farcall GetMonBackpic
-	ld de, ANIM_SEND_OUT_MON
-	farcall Call_PlayBattleAnim
 	jr .after_anim
 
 .mimic_anims
+	pop af
 	farcall BattleCommand_movedelay
 	farcall BattleCommand_raisesubnoanim
 .after_anim
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
@@ -634,6 +656,8 @@ RunFaintAbilities:
 .user_abilities
 	cp MOXIE
 	jp z, MoxieAbility
+	cp SOUL_HEART
+	jp z, SoulHeartAbility
 	ret
 .opponent_abilities
 	cp AFTERMATH
@@ -698,8 +722,31 @@ RunHitAbilities:
 	jp z, BreakDisguise
 	cp DISGUISE
 	jp z, BreakDisguise
+	cp BERSERK
+	jp z, BerserkAbility
 	ret
 
+BerserkAbility:
+	ld a, BATTLE_VARS_SUBSTATUS3
+	call GetBattleVarAddr
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .check_if_hp_restored
+
+	farcall GetCurrentHP ; Current HP into de
+	farcall GetHalfMaxHP ; Half HP into bc
+	call CompareTwoBytes ; Check if bc < de
+	ret c
+	set SUBSTATUS_DISGUISE_BROKEN, [hl]
+	jp SpecialAttackUpAbility
+
+.check_if_hp_restored
+	farcall GetCurrentHP ; Current HP into de
+	farcall GetHalfMaxHP ; Half HP into bc
+	call CompareTwoBytes ; Check if bc >= de
+	ret nc
+	res SUBSTATUS_DISGUISE_BROKEN, [hl]
+	ret
+	
 RunContactAbilities:
 ; turn perspective is from the attacker
 ; 30% of the time, activate Poison Touch
@@ -716,14 +763,18 @@ RunContactAbilities:
 ; Abilities always run from the ability user's perspective. This is
 ; consistent. Thus, a switchturn happens here. Feel free to rework
 ; the logic if you feel that this reduces readability.
-	call BattleRandom
-	cp 1 + 30 percent
-	ret nc
+	
 	call GetOpponentAbilityAfterMoldBreaker
 	ld b, a
 
 	call CallOpponentTurn
 .do_enemy_abilities
+	ld a, b
+	cp MUMMY
+	jp z, MummyAbility
+	call BattleRandom ;abilities that only have a chance of activating
+	cp 1 + 30 percent
+	ret nc
 	ld a, b
 	cp EFFECT_SPORE
 	jp z, EffectSporeAbility
@@ -737,6 +788,20 @@ RunContactAbilities:
 	jp z, CuteCharmAbility
 	ret
 
+MummyAbility:
+	ld a, BATTLE_VARS_ABILITY_OPP
+	call GetBattleVarAddr
+	cp MUMMY
+	ret z
+	ld a, MUMMY
+	ld [hl], a
+	call CallOpponentTurn
+	ld hl, BecameAMummyText
+	call StdBattleTextBox
+	jp CallOpponentTurn
+
+;Illusion
+;Disguise
 BreakDisguise:
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
@@ -750,6 +815,12 @@ BreakDisguise:
 	ldh a, [hBattleTurn]
 	and a
 	jr z, .player_backpic
+	ld hl, wOTPartyMonNicknames
+	ld a, [wCurPartyMon]
+	call SkipNames
+	ld de, wEnemyMonNick
+	ld bc, PKMN_NAME_LENGTH
+	call CopyBytes
 	farcall GetMonFrontpic
 	jr .disguise_broke
 
@@ -762,8 +833,7 @@ BreakDisguise:
 	call DelayFrame
 
 	ld hl, DisguiseBrokeText
-	call StdBattleTextBox
-	ret
+	jp StdBattleTextBox
 
 CursedBodyAbility:
 	ld a, 10
@@ -933,6 +1003,7 @@ CheckNullificationAbilities:
 	db MOTOR_DRIVE,   ELECTRIC
 	db DRY_SKIN,      WATER
 	db WATER_ABSORB,  WATER
+	db STORM_DRAIN,	  WATER
 	db FLASH_FIRE,    FIRE
 	db SAP_SIPPER,    GRASS
 	db LEVITATE,      GROUND
@@ -963,6 +1034,7 @@ NullificationAbilities:
 	dbw SAP_SIPPER, SapSipperAbility
 	dbw VOLT_ABSORB, VoltAbsorbAbility
 	dbw WATER_ABSORB, WaterAbsorbAbility
+	dbw STORM_DRAIN, StormDrainAbility
 	dbw DAMP, DampAbility
 	dbw -1, -1
 
@@ -1002,15 +1074,29 @@ MoxieAbility:
 	jr nz, .enemy
 	ld a, [wBattleMode]
 	dec a
-	ret z
+	ret z ;checks if wild battle 
 .enemy
-	farcall CheckAnyOtherAliveOpponentMons
+	farcall CheckAnyOtherAliveOpponentMons ;only boost if there are more pokemon to fight
 	ret z
 SapSipperAbility:
 AttackUpAbility:
 	ld b, ATTACK
 	jr StatUpAbility
+
+SoulHeartAbility:
+	; Don't run if battle is over
+	ldh a, [hBattleTurn]
+	and a
+	jr nz, .enemy
+	ld a, [wBattleMode]
+	dec a
+	ret z
+.enemy
+	farcall CheckAnyOtherAliveOpponentMons
+	ret z
+StormDrainAbility:
 LightningRodAbility:
+SpecialAttackUpAbility:
 	ld b, SP_ATTACK
 	jr StatUpAbility
 RattledAbility:
@@ -1057,6 +1143,8 @@ StatUpAbility:
 	jr z, .print_immunity
 	cp MOTOR_DRIVE
 	jr z, .print_immunity
+	cp STORM_DRAIN
+	jr z, .print_immunity
 	cp SAP_SIPPER
 	jr nz, .done
 .print_immunity
@@ -1069,6 +1157,91 @@ StatUpAbility:
 	pop af
 	ld [wAttackMissed], a
 	jp EnableAnimations
+
+PowerConstructAbility:
+
+	farcall GetCurrentHP ; Current HP into de
+	farcall GetHalfMaxHP ; Half HP into bc
+	call CompareTwoBytes ; Check if bc < de
+	ret c
+
+	ldh a, [hBattleTurn]
+	and a
+	push af
+	ld hl, wBattleMonForm
+	jr z, .got_form
+	ld hl, wEnemyMonForm
+.got_form
+	predef GetVariant
+	cp TEN_PERCENT_ZYGARDE
+	jr z, .ten
+	cp FIFTY_PERCENT_ZYGARDE
+	jr z, .fifty
+	jr .popafandret
+
+.ten
+	ld b, TEN_PERCENT_ZYGARDE_COMPLETE
+	jr .form_change
+.fifty
+	ld b, FIFTY_PERCENT_ZYGARDE_COMPLETE
+.form_change
+	ld a, b
+	ld [wCurForm], a
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or b
+	ld [hl], a
+
+	pop af
+	push af
+	jr nz,.enemyturn
+	call UpdateBattleMonInParty
+	farcall UpdatePkmnStats 
+	farcall InitBattleMon
+	jr .donestats
+
+.enemyturn
+	call UpdateEnemyMonInParty
+	farcall UpdateEnemyPkmnStats 
+	farcall InitEnemyMon
+
+.donestats
+	pop af
+	push af
+	ld a, [wPlayerMinimized]
+	jr z, .got_byte
+	ld a, [wEnemyMinimized]
+.got_byte
+	and a
+	jr nz, .mimic_anims
+	pop af
+	jr z, .player_backpic
+	farcall GetMonFrontpic
+	jr .after_anim
+
+.player_backpic
+	farcall GetMonBackpic
+	jr .after_anim
+
+.mimic_anims
+	pop af
+	farcall BattleCommand_movedelay
+	farcall BattleCommand_raisesubnoanim
+.after_anim
+	ld de, ANIM_SEND_OUT_MON
+	farcall Call_PlayBattleAnim
+
+	ld a, BATTLE_VARS_SUBSTATUS4
+	call GetBattleVarAddr
+	bit SUBSTATUS_SUBSTITUTE, [hl]
+	ld a, SUBSTITUTE
+	call nz, LoadAnim
+	ld hl, ZygardeFormText
+	jp StdBattleTextBox
+
+.popafandret
+	pop af
+	ret
 
 WeakArmorAbility:
 	; only physical moves activate this
@@ -1300,6 +1473,7 @@ EndTurnAbilities:
 	dbw PICKUP, PickupAbility
 	dbw SHED_SKIN, ShedSkinAbility
 	dbw SPEED_BOOST, SpeedBoostAbility
+	dbw POWER_CONSTRUCT, PowerConstructAbility
 	dbw -1, -1
 
 HarvestAbility:
@@ -1557,6 +1731,8 @@ OffensiveDamageAbilities:
 	dbw RECKLESS, RecklessAbility
 	dbw GUTS, GutsAbility
 	dbw PIXILATE, PixilateAbility
+	dbw REFRIGERATE, RefrigerateAbility
+	dbw TOUGH_CLAWS, ToughClawsAbility
 	dbw -1, -1
 
 DefensiveDamageAbilities:
@@ -1573,6 +1749,12 @@ TechnicianAbility:
 	ret nc
 	ld a, $32
 	jp ApplyDamageMod
+
+ToughClawsAbility:
+	call CheckContactMove
+	ret c
+	ld a, $43 ;33% increase in power if contact move
+	jp ApplyPhysicalAttackDamageMod
 
 HugePowerAbility:
 ; Doubles physical attack
@@ -1702,6 +1884,7 @@ GutsAbility:
 	ld a, $32
 	jp ApplyPhysicalAttackDamageMod
 
+RefrigerateAbility:
 PixilateAbility:
 	ld a, BATTLE_VARS_MOVE_TYPE
 	call GetBattleVar
@@ -1875,21 +2058,30 @@ RunPostBattleAbilities::
 	call GetPartyParamLocation
 	ld c, [hl]
 	farcall GetAbility
+	ld a, d
+	and $3f
+	cp $1
 	ld a, b
 	pop bc
+	jr z, .skip_pickup
 	cp NATURAL_CURE
-	jr z, .natural_cure
+	call z, .natural_cure
 	cp PICKUP
 	call z, .Pickup
+.skip_pickup
+	cp POWER_CONSTRUCT
+	call z, .form_revert
+	cp STANCE_CHANGE
+	call z, .form_revert
 	jr .loop
 
-.natural_cure
+.natural_cure:
 	; Heal status
 	ld a, MON_STATUS
 	call GetPartyParamLocation
 	xor a
 	ld [hl], a
-	jr .loop
+	ret
 
 .Pickup:
 	ld a, MON_ITEM
@@ -1931,6 +2123,36 @@ RunPostBattleAbilities::
 	ld hl, BattleText_PickedUpItem
 	call StdBattleTextBox
 	pop de
+	pop bc
+	ret
+
+.form_revert:
+	push bc
+	ld a, MON_FORM
+	call GetPartyParamLocation
+	predef GetVariant
+	cp BLADE_AEGISLASH
+	jr z, .aegislash
+	cp TEN_PERCENT_ZYGARDE_COMPLETE
+	jr z, .ten
+	cp FIFTY_PERCENT_ZYGARDE_COMPLETE
+	jr z, .fifty
+	ret
+
+.aegislash
+	ld b, SHIELD_AEGISLASH
+	jr .revert
+.ten
+	ld b, TEN_PERCENT_ZYGARDE
+	jr .revert
+.fifty
+	ld b, FIFTY_PERCENT_ZYGARDE
+.revert
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or b
+	ld [hl], a
+	farcall UpdatePkmnStats
 	pop bc
 	ret
 

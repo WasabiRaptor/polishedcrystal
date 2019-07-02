@@ -181,7 +181,7 @@ AI_Types: ; 38635
 	push de
 	ld a, 1
 	ldh [hBattleTurn], a
-	farcall BattleCheckTypeMatchup
+	call AI_CheckTypeMatchupAndBeFooledByIllusion
 	pop de
 	pop bc
 	pop hl
@@ -413,7 +413,7 @@ AI_Smart_LeechHit: ; 387f7
 	push hl
 	ld a, 1
 	ldh [hBattleTurn], a
-	farcall BattleCheckTypeMatchup
+	call AI_CheckTypeMatchupAndBeFooledByIllusion
 	pop hl
 
 ; 60% chance to discourage this move if not very effective.
@@ -1961,7 +1961,7 @@ AI_Smart_HiddenPower: ; 3909e
 
 ; Calculate Hidden Power's type and base power based on enemy's DVs.
 	farcall HiddenPowerDamageStats
-	farcall BattleCheckTypeMatchup
+	call AI_CheckTypeMatchupAndBeFooledByIllusion
 	pop hl
 
 ; Discourage Hidden Power if not very effective.
@@ -2903,7 +2903,7 @@ AI_Status: ; 39453
 	; has 2 abilities, check one of them here
 	call GetOpponentAbilityAfterMoldBreaker
 	cp VITAL_SPIRIT
-	jr z, .pop_and_discourage
+	jp z, .pop_and_discourage
 
 	lb bc, INSOMNIA, HELD_PREVENT_SLEEP
 	ld e, 1
@@ -2921,6 +2921,19 @@ AI_Status: ; 39453
 	; Check opponent typings (fire types can't be burned and similar)
 	push bc
 	push de
+	;make sure AI is fooled by illusion
+	ld a, [wPlayerAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wPlayerSubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	ld a, [wPartyCount]
+	ld hl, wPartyMon1Species
+	call GetIllusion
+	call PutBattleMonTypesIn
+.no_illusion
+
 	ld a, d
 	call CheckIfTargetIsSomeType
 	pop de
@@ -2935,7 +2948,7 @@ AI_Status: ; 39453
 	push hl
 	push de
 	push bc
-	farcall BattleCheckTypeMatchup
+	call AI_CheckTypeMatchupAndBeFooledByIllusion
 	pop bc
 	pop de
 	pop hl
@@ -3103,3 +3116,32 @@ AI_50_50: ; 39527
 	cp $80 ; 1/2
 	ret
 ; 3952d
+
+AI_CheckTypeMatchupAndBeFooledByIllusion:
+	;make sure AI is fooled by illusion
+	ld a, [wPlayerAbility]
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wPlayerSubStatus3]
+	and 1 << SUBSTATUS_DISGUISE_BROKEN
+	jr nz, .no_illusion
+	ld a, [wPartyCount]
+	ld hl, wPartyMon1Species
+	farcall GetIllusion
+	call PutBattleMonTypesIn
+.no_illusion
+	farcall BattleCheckTypeMatchup
+
+	ld a, [wBattleMonSpecies]
+	call PutBattleMonTypesIn
+	ret
+
+PutBattleMonTypesIn:
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld a, [wBaseType1]
+	ld [wBattleMonType1], a
+	ld a, [wBaseType2]
+	ld [wBattleMonType2], a
+	ret

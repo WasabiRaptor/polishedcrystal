@@ -22,28 +22,28 @@ INCLUDE "maps/Bridge.asm"
 INCLUDE "maps/AsaokaCity.asm"
 
 INCLUDE "maps/RouteNE1.asm"
-INCLUDE "maps/Ravine.asm"
+INCLUDE "maps/GelidRavine.asm"
 INCLUDE "maps/RouteNE2.asm"
 
-INCLUDE "maps/KubotaTown.asm"
+INCLUDE "maps/KikunoTown.asm"
 
-INCLUDE "maps/RouteW1.asm"
-INCLUDE "maps/AshPlains3.asm"
+INCLUDE "maps/OuestPathway.asm"
+INCLUDE "maps/CendreLowland3.asm"
 
-INCLUDE "maps/AshPlains1.asm"
-INCLUDE "maps/AshPlains2.asm"
+INCLUDE "maps/CendreLowland1.asm"
+INCLUDE "maps/CendreLowland2.asm"
 
 INCLUDE "maps/BreguetRuins.asm"
 
-INCLUDE "maps/RouteS.asm"
-INCLUDE "maps/Swamp.asm"
-INCLUDE "maps/RouteSW.asm"
+INCLUDE "maps/MinamiWetlandsEntrance.asm"
+INCLUDE "maps/MinamiWetlands.asm"
+INCLUDE "maps/SylvanTrail1.asm"
 
 INCLUDE "maps/Hetzeltron.asm"
 
 INCLUDE "maps/RouteSE1.asm"
 INCLUDE "maps/RouteSE2.asm"
-INCLUDE "maps/RouteSW2.asm"
+INCLUDE "maps/SylvanTrail2.asm"
 
 INCLUDE "maps/HattoriVillage.asm"
 

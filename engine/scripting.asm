@@ -263,6 +263,12 @@ ScriptCommandTable:
 	dw Script_checkegg                   ; c7
 	dw Script_portrait
 	dw Script_closeportrait
+	
+	dw Script_givekeyitem                   ; a8
+	dw Script_checkkeyitem                  ; a9
+	dw Script_takekeyitem
+	dw Script_verbosegivekeyitem            ; aa
+	dw Script_keyitemnotify                 ; ab
 
 StartScript:
 	ld hl, wScriptFlags
@@ -706,6 +712,16 @@ GetPocketName:
 	jp CopyName2
 
 INCLUDE "data/items/pocket_names.asm"
+
+GetKeyItemPocketName:
+	ld hl, .Key
+	ld d, h
+	ld e, l
+	ld hl, wStringBuffer3
+	jp CopyName2
+
+.Key:
+	db "Key Pocket@"
 
 GetTMHMPocketName:
 	ld hl, .TMHMPocket
@@ -1411,6 +1427,10 @@ Script_reloadmapafterbattle:
 	ld hl, wWildBattlePanic
 	ld [hl], d
 	ld a, [wBattleResult]
+	ld d, a
+	push af
+	farcall RunPostBattleAbilities
+	pop af
 	and $3f
 	cp $1
 	jr nz, .notblackedout
@@ -1422,15 +1442,9 @@ Script_reloadmapafterbattle:
 	bit 0, d
 	jr z, .was_wild
 	farcall MomTriesToBuySomething
-	farcall RunPostBattleAbilities
 	jr .done
 
 .was_wild
-	ld a, [wBattleResult]
-	bit 1, a ; set on fleeing
-	jr nz, .skip_pickup
-	farcall RunPostBattleAbilities
-.skip_pickup
 	ld a, [wBattleResult]
 	bit 7, a
 	jr z, .done
@@ -2025,14 +2039,7 @@ Script_givepokeitem:
 	ld a, [wScriptBank]
 	call GetFarByte
 	ld b, a
-	push bc
-	inc hl
-	ld bc, MAIL_MSG_LENGTH
-	ld de, wd002
-	ld a, [wScriptBank]
-	call FarCopyBytes
-	pop bc
-	farjp GivePokeItem
+	ret
 
 Script_checkpokeitem:
 ; parameters:
@@ -2043,7 +2050,27 @@ Script_checkpokeitem:
 	ld d, a
 	ld a, [wScriptBank]
 	ld b, a
-	farjp CheckPokeItem
+
+	push bc
+	push de
+	farcall SelectMonFromParty
+	ld a, $2
+	jr c, .pop_return
+
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Item
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld d, [hl]
+	ld a, $3
+
+.pop_return
+	pop de
+	pop bc
+
+.return
+	ld [wScriptVar], a
+	ret
 
 Script_giveitem:
 ; parameters:
@@ -3004,3 +3031,71 @@ Script_portrait:
 
 Script_closeportrait:
 	farjp ClosePortrait
+
+Script_givekeyitem:
+	call GetScriptByte
+	ld [wCurKeyItem], a
+	ld [wItemQuantityChangeBuffer], a
+	call ReceiveKeyItem
+	jr nc, .full
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.full
+	xor a
+	ld [wScriptVar], a
+	ret
+
+Script_checkkeyitem:
+	call GetScriptByte
+	ld [wCurKeyItem], a
+	ld [wItemQuantityChangeBuffer], a
+	call CheckKeyItem
+	jr nc, .full
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.full
+	xor a
+	ld [wScriptVar], a
+	ret
+
+Script_takekeyitem:
+	call GetScriptByte
+	ld [wCurKeyItem], a
+	ld [wItemQuantityChangeBuffer], a
+	call TossKeyItem
+	jr nc, .full
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
+.full
+	xor a
+	ld [wScriptVar], a
+	ret
+
+Script_verbosegivekeyitem:
+; parameters:
+;     tmhm (TMHMLabelByte)
+	call Script_givekeyitem
+	call GetCurKeyItemName
+	ld de, wStringBuffer1
+	ld a, 1
+	call CopyConvertedText
+	ld b, BANK(GiveKeyItemScript)
+	ld de, GiveKeyItemScript
+	jp ScriptCall
+
+GiveKeyItemScript:
+	writetext ReceivedItemText
+	waitsfx
+	specialsound
+	keyitemnotify
+	end
+
+Script_keyitemnotify:
+	call GetKeyItemPocketName
+	call GetCurKeyItemName
+	ld b, BANK(PutItemInPocketText)
+	ld hl, PutItemInPocketText
+	jp MapTextbox

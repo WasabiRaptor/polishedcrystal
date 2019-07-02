@@ -182,7 +182,7 @@ class Attributes(object):
 		'maps/MountMortar1FOutside.blk': lambda: load_palette('gfx/tilesets/dark_cave.pal'),
 		'maps/MountMortar2FInside.blk': lambda: load_palette('gfx/tilesets/dark_cave.pal'),
 		'maps/MountMortarB1F.blk': lambda: load_palette('gfx/tilesets/dark_cave.pal'),
-		'maps/MurkySwamp.blk': lambda: load_palette('maps/MurkySwamp.pal'),
+		'maps/MurkyMinamiWetlands.blk': lambda: load_palette('maps/MurkyMinamiWetlands.pal'),
 		'maps/MystriStage.blk': lambda: load_palette('maps/MystriStage.pal'),
 		'maps/NavelRockInside.blk': lambda: load_palette('gfx/tilesets/navel_rock.pal')[8:16],
 		'maps/NavelRockRoof.blk': lambda: load_palette('gfx/tilesets/navel_rock.pal')[8:16],

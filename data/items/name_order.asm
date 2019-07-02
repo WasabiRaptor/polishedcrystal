@@ -101,37 +101,7 @@ ItemNameOrder:
 	db NAM_ICE_STONE    ; 5a
 	db NAM_EVERSTONE    ; 3b
 
-	db NAM_BICYCLE      ; 0e
-	db NAM_OLD_ROD      ; 94
-	db NAM_GOOD_ROD     ; 4c
-	db NAM_SUPER_ROD    ; e6
-	db NAM_COIN_CASE    ; 29
-	db NAM_ITEMFINDER   ; 5d
 	db NAM_EXP_SHARE    ; 3d
-	db NAM_MYSTERY_EGG  ; 8b
-	db NAM_SQUIRTBOTTLE ; df
-	db NAM_SECRETPOTION ; cc
-	db NAM_RED_SCALE    ; bf
-	db NAM_CARD_KEY     ; 1f
-	db NAM_BASEMENT_KEY ; 0c
-	db NAM_S_S_TICKET   ; c6
-	db NAM_PASS         ; 9b
-	db NAM_MACHINE_PART ; 73
-	db NAM_LOST_ITEM    ; 6b
-	db NAM_RAINBOW_WING ; b9
-	db NAM_SILVER_WING  ; d5
-	db NAM_CLEAR_BELL   ; 28
-	db NAM_GS_BALL      ; 4f
-	db NAM_BLUE_CARD    ; 17
-	db NAM_ORANGETICKET ; 97
-	db NAM_MYSTICTICKET ; 8d
-	db NAM_OLD_SEA_MAP  ; 95
-	db NAM_SHINY_CHARM  ; d0
-	db NAM_OVAL_CHARM   ; 98
-	db NAM_SILPHSCOPE2  ; d3
-	db NAM_APRICORN_BOX ; 06
-
-	db NAM_TERU_SAMA    ; e9
 
 	db NAM_CHERI_BERRY  ; 21
 	db NAM_CHESTO_BERRY ; 23
@@ -247,12 +217,7 @@ ItemNameOrder:
 	db NAM_DRAGON_SCALE ; 30
 	db NAM_UP_GRADE     ; f1
 	db NAM_DUBIOUS_DISC ; 31
-	db NAM_PROTECTOR    ; b3
-	db NAM_ELECTIRIZER  ; 34
-	db NAM_MAGMARIZER   ; 75
-	db NAM_RAZOR_FANG   ; be
 	db NAM_RAZOR_CLAW   ; bd
-	db NAM_ODD_SOUVENIR ; 92
 
 	db NAM_NUGGET       ; 91
 	db NAM_BIG_NUGGET   ; 10
@@ -271,22 +236,14 @@ ItemNameOrder:
 	db NAM_SLOWPOKETAIL ; d8
 	db NAM_BOTTLE_CAP   ; 19
 
-	db NAM_HELIX_FOSSIL ; 56
-	db NAM_DOME_FOSSIL  ; 2e
-	db NAM_OLD_AMBER    ; 93
+	;db NAM_HELIX_FOSSIL ; 56
+	;db NAM_DOME_FOSSIL  ; 2e
+	;db NAM_OLD_AMBER    ; 93
+	db $fe
+	db $fe
+	db $fe
 
 	db NAM_MULCH        ; 88
 	db NAM_SWEET_HONEY  ; e8
-
-	db NAM_FLOWER_MAIL  ; 43
-	db NAM_SURF_MAIL    ; e7
-	db NAM_LITEBLUEMAIL ; 6a
-	db NAM_PORTRAITMAIL ; a6
-	db NAM_LOVELY_MAIL  ; 6d
-	db NAM_EON_MAIL     ; 38
-	db NAM_MORPH_MAIL   ; 87
-	db NAM_BLUESKY_MAIL ; 18
-	db NAM_MUSIC_MAIL   ; 8a
-	db NAM_MIRAGE_MAIL  ; 83
 
 	db -1 ; end

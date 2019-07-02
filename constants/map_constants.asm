@@ -41,35 +41,35 @@ MAP_NONE   EQU 0
 
 	map_const ROUTE_N_E_1,                         	20,  9  ;  4 ;unused
 
-	map_const RAVINE,                           	27,  30 ;  5
+	map_const GELID_RAVINE,                           	27,  30 ;  5
 	map_const ROUTE_N_E_2,                         	18,  9  ;  6
 
-	map_const KUBOTA_TOWN,                             	18,  12  ;  7
+	map_const KIKUNO_TOWN,                             	18,  12  ;  7
 
-	map_const ROUTE_W_1,                           	40,  9  ;  8
+	map_const OUEST_PATHWAY,                           	40,  9  ;  8
 
-	map_const ASH_PLAINS_1,                         30,  27 ;  9
-	map_const ASH_PLAINS_2,                         10,  23 ;  10
-	map_const ASH_PLAINS_3,                         10,  23 ;  11
+	map_const CENDRE_LOWLAND_1,                         30,  27 ;  9
+	map_const CENDRE_LOWLAND_2,                         10,  23 ;  10
+	map_const CENDRE_LOWLAND_3,                         10,  23 ;  11
 
 	map_const BREGUET_RUINS,                        10,  24 ;  12
 
-	map_const ROUTE_S,                            	14,  9 ;  13
-	map_const SWAMP,                            	30,  27 ;  14
-	map_const ROUTE_S_W,                         	30,  9  ;  15
-	map_const ROUTE_S_W_2,                         	29,  9  ;  18
+	map_const MINAMI_WETLANDS_ENTRANCE,                            	14,  9 ;  13
+	map_const MINAMI_WETLANDS,                            	30,  27 ;  14
 
-	map_const HETZELTRON,                           15,  15  ;  16
+	map_const SYLVAN_TRAIL_1,                         	30,  9  ;  15
+	map_const SYLVAN_TRAIL_2,                         	29,  9  ;  16
+	map_const HETZELTRON,                           15,  15  ;  17
 
-	map_const ROUTE_S_E_1,                         	49,  9  ;  17
+	map_const ROUTE_S_E_1,                         	49,  9  ;  18
 
-	map_const ROUTE_S_E_2,                         	30,  9  ;  18 ; not being used
+	map_const ROUTE_S_E_2,                         	30,  9  ;  19; not being used
 
-	map_const HATTORI_VILLAGE,                      30,  9  ;  19
+	map_const HATTORI_VILLAGE,                      22,  13  ;  20
 
-	map_const LAKE_1,                             	40,  15 ;  20
-	map_const LAKE_2,                             	30,  18 ;  21
-	map_const LAKE_3,                             	8,  7  ;  22
+	map_const LAKE_1,                             	40,  15 ;  21
+	map_const LAKE_2,                             	30,  18 ;  22
+	map_const LAKE_3,                             	8,  7  ;  23
 
 	map_const ROUTE_FAKE_EXIT,                    	10,  18 ;  24
 	map_const ROUTE_FAKE_EXIT_LOOP,               	10,  9  ;  25

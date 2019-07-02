@@ -6,5 +6,10 @@ ENDM
 Flypoints:
 ; landmark, spawn point
 	const_def
-	flypoint HOME,    NEW_BARK_TOWN
+	flypoint DANIELS_TOWN,    	DANIELS_TOWN
+	flypoint ASAOKA_CITY,    	ASAOKA_CITY
+	flypoint KIKUNO_TOWN,    	KIKUNO_TOWN
+	flypoint BREGUET_RUINS,    	BREGUET_RUINS
+	flypoint HETZELTRON,    	HETZELTRON
+	flypoint HATTORI_VILLAGE, 	HATTORI_VILLAGE
 	db -1

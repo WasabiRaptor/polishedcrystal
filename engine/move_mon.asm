@@ -807,14 +807,6 @@ SentGetPkmnIntoFromBox: ; db3f
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
 	jr nz, .CloseSRAM_And_ClearCarryFlag
-	ld hl, MON_STATUS
-	add hl, bc
-	xor a
-	ld [hl], a
-	ld hl, MON_HP
-	add hl, bc
-	ld d, h
-	ld e, l
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .egg
@@ -838,7 +830,7 @@ SentGetPkmnIntoFromBox: ; db3f
 	ld a, [sBoxCount]
 	dec a
 	ld b, a
-	call RestorePPofDepositedPokemon
+	;call RestorePPofDepositedPokemon
 .CloseSRAM_And_ClearCarryFlag:
 	call CloseSRAM
 	and a
@@ -1212,7 +1204,7 @@ SentPkmnIntoBox: ; de6e
 	rst CopyBytes
 
 	ld b, 0
-	call RestorePPofDepositedPokemon
+	;call RestorePPofDepositedPokemon
 
 	call CloseSRAM
 	scf
@@ -1573,6 +1565,37 @@ ComputeNPCTrademonStats: ; e134
 	ret
 ; e167
 
+UpdateEnemyPkmnStats:
+; Recalculates the stats of wOTPartyMon and also updates current HP accordingly
+	ld a, MON_SPECIES
+	call GetEnemyPartyParamLocation
+	ld a, [hl]
+	ld [wCurSpecies], a
+	ld a, MON_FORM
+	call GetEnemyPartyParamLocation
+	predef GetVariant
+	call GetBaseData ;form is known
+	ld a, MON_LEVEL
+	call GetEnemyPartyParamLocation
+	ld a, [hl]
+	ld [wCurPartyLevel], a
+	ld a, MON_MAXHP + 1
+	call GetEnemyPartyParamLocation
+	ld a, [hld]
+	ld c, a
+	ld b, [hl]
+	push bc
+	ld d, h
+	ld e, l
+	ld a, MON_EVS - 1
+	call GetEnemyPartyParamLocation
+	ld b, TRUE
+	call CalcPkmnStats
+	ld a, MON_HP
+	call GetEnemyPartyParamLocation
+	pop bc
+	jp UpdateStats
+
 UpdatePkmnStats:
 ; Recalculates the stats of wCurPartyMon and also updates current HP accordingly
 	ld a, MON_SPECIES
@@ -1602,7 +1625,8 @@ UpdatePkmnStats:
 	ld a, MON_HP
 	call GetPartyParamLocation
 	pop bc
-
+	;fallthrough
+UpdateStats:
 	; Don't change the current HP if we're fainted
 	ld a, [hli]
 	or [hl]

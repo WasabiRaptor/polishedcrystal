@@ -607,8 +607,8 @@ HasNoItems: ; 129d5
 	ld a, [wNumBerries]
 	and a
 	ret nz
-	ld a, [wNumKeyItems]
-	and a
+	;ld a, [wNumKeyItems]
+	;and a
 	ret nz
 	scf
 	ret
@@ -745,7 +745,6 @@ PokemonActionSubmenu: ; 12a88
 	dbw MONMENU_ITEM,       GiveTakePartyMonItem
 	dbw MONMENU_CANCEL,     CancelPokemonAction
 	dbw MONMENU_MOVE,       ManagePokemonMoves ; move
-	dbw MONMENU_MAIL,       MonMailAction ; mail
 ; 12aec
 
 
@@ -898,8 +897,6 @@ TryGiveItemToPartymon: ; 12bd9
 	jr z, .give_item_to_mon
 
 	ld d, a
-	call ItemIsMail
-	jr c, .please_remove_mail
 	ld a, [hl]
 	jr .already_holding_item
 
@@ -908,10 +905,6 @@ TryGiveItemToPartymon: ; 12bd9
 	ld hl, MadeHoldText
 	call MenuTextBoxBackup
 	jp GivePartyItem
-
-.please_remove_mail
-	ld hl, PleaseRemoveMailText
-	jp MenuTextBoxBackup
 
 .already_holding_item
 	ld [wd265], a
@@ -951,9 +944,7 @@ GivePartyItem: ; 12c4c
 	ld a, [wCurItem]
 	ld [hl], a
 	ld d, a
-	call ItemIsMail
-	ret nc
-	jp ComposeMailMessage
+	ret
 ; 12c60
 
 
@@ -969,7 +960,6 @@ TakePartyItem: ; 12c60
 	call ReceiveItemFromPokemon
 	jr nc, .asm_12c94
 
-	call ItemIsMail
 	call GetPartyItemLocation
 	ld a, [hl]
 	ld [wd265], a
@@ -1101,130 +1091,6 @@ ComposeMailMessage: ; 12cfe (4:6cfe)
 	call GetSRAMBank
 	rst CopyBytes
 	jp CloseSRAM
-
-MonMailAction: ; 12d45
-; If in the trade center, selecting the mail only allows you to read the mail.
-	ld a, [wLinkMode]
-	cp LINK_TRADECENTER
-	jr z, .read
-
-; Show the READ/TAKE/QUIT menu.
-	ld hl, .MenuDataHeader
-	call LoadMenuDataHeader
-	call VerticalMenu
-	call ExitMenu
-
-; Interpret the menu.
-	jp c, .done
-	ld a, [wMenuCursorY]
-	cp $1
-	jr z, .read
-	cp $2
-	jr z, .take
-	jp .done
-
-.read
-	farcall ReadPartyMonMail
-	xor a
-	ret
-
-.take
-	ld hl, .sendmailtopctext
-	call StartMenuYesNo
-	jr c, .RemoveMailToBag
-	ld a, [wCurPartyMon]
-	ld b, a
-	farcall SendMailToPC
-	jr c, .MailboxFull
-	ld hl, .sentmailtopctext
-	call MenuTextBoxBackup
-	jr .done
-
-.MailboxFull:
-	ld hl, .mailboxfulltext
-	call MenuTextBoxBackup
-	jr .done
-
-.RemoveMailToBag:
-	ld hl, .mailwilllosemessagetext
-	call StartMenuYesNo
-	jr c, .done
-	call GetPartyItemLocation
-	ld a, [hl]
-	ld [wCurItem], a
-	call ReceiveItemFromPokemon
-	jr nc, .BagIsFull
-	call GetPartyItemLocation
-	ld [hl], $0
-	call GetCurNick
-	ld hl, .tookmailfrommontext
-	call MenuTextBoxBackup
-	jr .done
-
-.BagIsFull:
-	ld hl, .bagfulltext
-	call MenuTextBoxBackup
-	; fallthrough
-
-.done
-	ld a, $3
-	ret
-; 12dc9
-
-
-.MenuDataHeader:
-	db $40 ; flags
-	db 10, 12 ; start coords
-	db 17, 19 ; end coords
-	dw .MenuData2
-	db 1 ; default option
-; 0x12dd1
-
-.MenuData2:
-	db $80 ; flags
-	db 3 ; items
-	db "Read@"
-	db "Take@"
-	db "Quit@"
-; 0x12de2
-
-
-.mailwilllosemessagetext
-; The MAIL will lose its message. OK?
-	text_jump UnknownText_0x1c1c22
-	db "@"
-; 0x12de7
-
-.tookmailfrommontext
-; MAIL detached from <POKEMON>.
-	text_jump UnknownText_0x1c1c47
-	db "@"
-; 0x12dec
-
-.bagfulltext
-; There's no space for removing MAIL.
-	text_jump UnknownText_0x1c1c62
-	db "@"
-; 0x12df1
-
-.sendmailtopctext
-; Send the removed MAIL to your PC?
-	text_jump UnknownText_0x1c1c86
-	db "@"
-; 0x12df6
-
-.mailboxfulltext
-; Your PC's MAILBOX is full.
-	text_jump UnknownText_0x1c1ca9
-	db "@"
-; 0x12dfb
-
-.sentmailtopctext
-; The MAIL was sent to your PC.
-	text_jump UnknownText_0x1c1cc4
-	db "@"
-; 0x12e00
-
 
 OpenPartyStats: ; 12e00
 	call LoadStandardMenuDataHeader

@@ -1078,7 +1078,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	cp EGG
 	ret z
 
-	call GetBasePokemonName
+	call GetPokemonName
 	hlcoord 1, 14
 	call PlaceString
 
@@ -1111,15 +1111,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	ld de, wStringBuffer1
 	call BillsPC_PlaceString
 	pop de
-	call ItemIsMail
-	jr c, .mail
 	ld a, $5d ; item icon
-	jr .printitem
-.mail
-	ld a, $1
-	ld [wBillsPC_MonHasMail], a
-	ld a, $5c ; mail icon
-.printitem
 	hlcoord 7, 12
 	ld [hl], a
 	ret

@@ -850,13 +850,23 @@ GetMovePriority: ; 3c5c5
 	ld a, BATTLE_VARS_ABILITY
 	call GetBattleVar
 	cp PRANKSTER
-	jr nz, .no_priority
+	jr nz, .not_prankster
 	ld a, BATTLE_VARS_MOVE_CATEGORY
 	call GetBattleVar
 	cp STATUS
-	jr nz, .no_priority
+	jr nz, .got_priority
 	inc b
-.no_priority
+	jr .got_priority
+
+.not_prankster
+	cp GALE_WINGS
+	jr nz, .got_priority
+	ld a, BATTLE_VARS_MOVE_TYPE
+	call GetBattleVar
+	cp FLYING
+	jr nz, .got_priority
+	inc b
+.got_priority
 	ld a, b
 	pop bc
 	ret
@@ -1995,6 +2005,24 @@ GetMaxHP: ; 3ccac
 	ld c, a
 	ret
 ; 3ccc2
+
+GetCurrentHP:
+; output: de, wBuffer3-4
+
+	ld hl, wBattleMonHP
+	ldh a, [hBattleTurn]
+	and a
+	jr z, .ok
+	ld hl, wEnemyMonHP
+.ok
+	ld a, [hli]
+	ld [wBuffer4], a
+	ld d, a
+
+	ld a, [hl]
+	ld [wBuffer3], a
+	ld e, a
+	ret
 
 RestoreOpponentHP:
 	call CallOpponentTurn
@@ -3564,9 +3592,17 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	jr c, .skip_cry
 	farcall CheckBattleEffects
 	jr c, .cry_no_anim
+
+	ld a, [wCurPartySpecies]
+	push af
+
+	call GetEnemyIllusion
+
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_SLOW
 	predef AnimateFrontpic
+	pop af
+	ld [wCurPartySpecies], a
 	jr .skip_cry
 
 .cry_no_anim
@@ -3614,6 +3650,18 @@ ResetPlayerAbility:
 	call GetAbility
 	ld a, b
 	ld [wPlayerAbility], a
+
+	cp RKS_SYSTEM
+	jp nz, .nope
+	ld a, [wBattleMonItem]
+	cp NORMALIUM_Z
+	jr c, .nope
+	cp FAIRIUM_Z + 1
+	jr nc, .nope
+	sub NORMALIUM_Z
+	ld [wBattleMonType1], a
+	ld [wBattleMonType2], a
+.nope
 	xor a
 	ret
 
@@ -3625,6 +3673,18 @@ ResetEnemyAbility:
 	call GetAbility
 	ld a, b
 	ld [wEnemyAbility], a
+
+	cp RKS_SYSTEM
+	jp nz, .nope
+	ld a, [wEnemyMonItem]
+	cp NORMALIUM_Z
+	jr c, .nope
+	cp FAIRIUM_Z + 1
+	jr nc, .nope
+	sub NORMALIUM_Z
+	ld [wEnemyMonType1], a
+	ld [wEnemyMonType1], a
+.nope
 	xor a
 	ret
 
@@ -3718,7 +3778,6 @@ InitBattleMon: ; 3da0d
 	ld a, [wBaseType2]
 	ld [wBattleMonType2], a
 
-if !DEF(FAITHFUL)
 	; Armored Mewtwo is Psychic/Steel
 	ld a, [wBattleMonSpecies]
 	cp MEWTWO
@@ -3729,7 +3788,6 @@ if !DEF(FAITHFUL)
 	ld a, STEEL
 	ld [wBattleMonType2], a
 .not_armored_mewtwo
-endc
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
@@ -3823,8 +3881,22 @@ InitEnemyMon: ; 3dabd
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
 	call SkipNames
-	ld de, wEnemyMonNick
+
+	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
+	ld b, a
+	ld a, [wEnemyMonSpecies]
+	ld c, a
+	call GetAbility
+	ld a, b
 	ld bc, PKMN_NAME_LENGTH
+	cp ILLUSION
+	jr nz, .no_illusion
+	ld a, [wOTPartyCount]
+	dec a
+	ld hl, wOTPartyMonNicknames
+	rst AddNTimes
+.no_illusion
+	ld de, wEnemyMonNick
 	rst CopyBytes
 	ld hl, wBaseType1
 	ld de, wEnemyMonType1
@@ -6936,8 +7008,8 @@ endc
 	push hl
 	push bc
 	push de
-	ld hl, wNumKeyItems
-	call CheckItem
+	;ld hl, wNumKeyItems
+	;call CheckItem
 	pop de
 	pop bc
 	pop hl
@@ -7056,7 +7128,7 @@ endr
 	predef GetVariant
 	; Can't use any letters that haven't been unlocked
 	push de
-	call CheckUnownLetter
+	farcall CheckUnownLetter ;relocated
 	pop de
 	jr c, .unown_letter ; re-roll
 	jp .Happiness
@@ -7140,7 +7212,7 @@ endr
 	predef CalcPkmnStats
 
 	; If we're headbutting trees, some monsters enter battle asleep
-	call CheckSleepingTreeMon
+	farcall CheckSleepingTreeMon
 	ld a, SLP & 3 ; Asleep for 3 turns
 	jr c, .UpdateStatus
 	; Otherwise, no status
@@ -7374,100 +7446,6 @@ ApplyLegendaryDVs:
 	pop bc
 	pop de
 	ret
-
-CheckSleepingTreeMon: ; 3eb38
-; Return carry if species is in the list
-; for the current time of day
-
-; Don't do anything if this isn't a tree encounter
-	ld a, [wBattleType]
-	cp BATTLETYPE_TREE
-	jr nz, .NotSleeping
-
-; Nor if the Pokémon has Insomnia/Vital Spirit
-	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
-	ld b, a
-	ld a, [wTempEnemyMonSpecies]
-	ld c, a
-	call GetAbility
-	ld a, b
-	cp INSOMNIA
-	jr z, .NotSleeping
-	cp VITAL_SPIRIT
-	jr z, .NotSleeping
-
-; Get list for the time of day
-	ld hl, AsleepTreeMonsMorn
-	ld a, [wTimeOfDay]
-	cp DAY
-	jr c, .Check
-	ld hl, AsleepTreeMonsDay
-	jr z, .Check
-	ld hl, AsleepTreeMonsNite
-
-.Check:
-	ld a, [wTempEnemyMonSpecies]
-	ld de, 1 ; length of species id
-	call IsInArray
-; If it's a match, the opponent is asleep
-	ret c
-
-.NotSleeping:
-	and a
-	ret
-
-INCLUDE "data/wild/treemons_asleep.asm"
-
-
-CheckUnownLetter: ; 3eb75
-; Return carry if the Unown letter hasn't been unlocked yet
-
-	ld a, [wUnlockedUnowns]
-	ld c, a
-	ld de, 0
-
-.loop
-
-; Don't check this set unless it's been unlocked
-	srl c
-	jr nc, .next
-
-; Is our letter in the set?
-	ld hl, UnlockedUnownLetterSets
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
-	push de
-	ld a, [wCurForm]
-	ld de, 1
-	push bc
-	call IsInArray
-	pop bc
-	pop de
-
-	jr c, .match
-
-.next
-; Make sure we haven't gone past the end of the table
-	inc e
-	inc e
-	ld a, e
-	cp UnlockedUnownLetterSets.End - UnlockedUnownLetterSets
-	jr c, .loop
-
-; Hasn't been unlocked, or the letter is invalid
-	scf
-	ret
-
-.match
-; Valid letter
-	and a
-	ret
-
-INCLUDE "data/wild/unlocked_unowns.asm"
-
 
 FinalPkmnSlideInEnemyMonFrontpic:
 	call FinishBattleAnim
@@ -8768,18 +8746,8 @@ DropPlayerSub: ; 3f447
 	ld hl, wBattleMonForm
 	predef GetVariant
 
-	ld a, [wPlayerAbility]
-	cp ILLUSION
-	jr nz, .no_illusion
-	ld a, [wPlayerSubStatus3]
-	and 1 << SUBSTATUS_DISGUISE_BROKEN
-	jr nz, .no_illusion
-	ld a, [wPartyCount]
-	ld hl, wPartyMon1Species
-	call GetIllusion
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-.no_illusion
+	call GetPlayerIllusion
+
 	ld de, VTiles2 tile $31
 	predef GetBackpic
 	pop af
@@ -8827,18 +8795,9 @@ DropEnemySub: ; 3f486
 	ld hl, wEnemyMonForm
 	predef GetVariant
 	ld a, [wEnemyAbility]
-	cp ILLUSION
-	jr nz, .no_illusion
-	ld a, [wEnemySubStatus3]
-	and 1 << SUBSTATUS_DISGUISE_BROKEN
-	jr nz, .no_illusion
-	ld a, [wOTPartyCount]
-	ld hl, wOTPartyMon1Species
-	call GetIllusion
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
 
-.no_illusion
+	call GetEnemyIllusion
+	
 	ld de, VTiles2
 	predef FrontpicPredef
 	pop af
@@ -8865,7 +8824,28 @@ GetFrontpic_DoAnim: ; 3f4b4
 	ret
 ; 3f4c1
 
-GetIllusion:
+GetEnemyIllusion:
+	ld a, [wEnemySubStatus3]
+	ld e, a
+	ld a, [wOTPartyCount]
+	ld d, a
+	ld hl, wOTPartyMon1Species
+	ld a, [wEnemyAbility]
+	jr CheckIllusion
+GetPlayerIllusion:
+	ld a, [wPlayerSubStatus3]
+	ld e, a
+	ld a, [wPartyCount]
+	ld d, a
+	ld hl, wPartyMon1Species
+	ld a, [wPlayerAbility]
+CheckIllusion:
+	cp ILLUSION
+	ret nz
+	bit SUBSTATUS_DISGUISE_BROKEN, e
+	ret nz
+	ld a, d
+GetIllusion::
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
@@ -8878,6 +8858,8 @@ GetIllusion:
 	ld b, h
 	ld c, l
 	pop af
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	ret
 
 StartBattle: ; 3f4c1
@@ -9917,9 +9899,17 @@ BattleStartMessage: ; 3fc8b
 	farcall CheckBattleEffects
 	jr c, .cry_no_anim
 
+	ld a, [wCurPartySpecies]
+	push af
+
+	call GetEnemyIllusion
+
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_NORMAL
 	predef AnimateFrontpic
+	pop af
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	jr .skip_cry ; cry is played during the animation
 
 .cry_no_anim

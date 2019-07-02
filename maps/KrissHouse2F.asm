@@ -75,10 +75,17 @@ x = x + 1
 endr
 	; all items
 x = 1
-rept $fe
+rept NUM_ITEMS
 	giveitem x, 99
 x = x + 1
 endr
+
+x = 0
+rept NUM_KEY_ITEMS
+	givekeyitem x
+x = x + 1
+endr
+
 	; all decorations
 x = EVENT_DECO_BED_1
 rept EVENT_DECO_BIG_LAPRAS_DOLL - EVENT_DECO_BED_1 + 1

@@ -343,9 +343,11 @@ NUM_BETA EQU const_value + -1 ; 2
 NUM_ROTOM EQU const_value + -1 ; 6
 
 	const_def 1
-	const TEN_PERCENT
-	const FIFTY_PERCENT
-	const COMPLETE
+	const TEN_PERCENT_ZYGARDE
+	const FIFTY_PERCENT_ZYGARDE
+	const COMPLETE_ZYGARDE
+	const TEN_PERCENT_ZYGARDE_COMPLETE
+	const FIFTY_PERCENT_ZYGARDE_COMPLETE
 NUM_ZYGARDE EQU const_value + -1 ; 3
 
 	const_def 1

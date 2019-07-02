@@ -4,7 +4,6 @@ MonMenuOptionStrings: ; 24caf
 	db "Item@"
 	db "Cancel@"
 	db "Moves@"
-	db "Mail@"
 	db "Error!@"
 ; 24cd9
 
@@ -29,7 +28,6 @@ MonMenuOptions: ; 24cd9
 	db MONMENU_MENUOPTION, MONMENU_ITEM,       3 ; ITEM
 	db MONMENU_MENUOPTION, MONMENU_CANCEL,     4 ; CANCEL
 	db MONMENU_MENUOPTION, MONMENU_MOVE,       5 ; MOVE
-	db MONMENU_MENUOPTION, MONMENU_MAIL,       6 ; MAIL
 	db MONMENU_MENUOPTION, MONMENU_ERROR,      7 ; ERROR!
 	db -1
 ; 24d19

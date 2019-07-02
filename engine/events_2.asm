@@ -31,10 +31,10 @@ ReturnFromMapSetupScript:: ; b8000
 	jr z, .dont_do_map_sign
 
 	ld a, [wCurrentLandmark]
-	cp LUCKY_ISLAND
-	jr nz, .not_lucky_island
-	eventflagcheck EVENT_LUCKY_ISLAND_CIVILIANS
-	jr nz, .dont_do_map_sign
+	;cp LUCKY_ISLAND
+	;jr nz, .not_lucky_island
+	;eventflagcheck EVENT_LUCKY_ISLAND_CIVILIANS
+	;jr nz, .dont_do_map_sign
 .not_lucky_island
 
 ; Landmark sign timer:
@@ -99,18 +99,18 @@ ReturnFromMapSetupScript:: ; b8000
 	ret z
 	and a ; cp SPECIAL_MAP
 	ret z
-	cp RADIO_TOWER
-	ret z
-	cp LAV_RADIO_TOWER
-	ret z
-	cp UNDERGROUND
-	ret z
-	cp POWER_PLANT
-	ret z
-	cp POKEMON_MANSION
-	ret z
-	cp CINNABAR_LAB
-	ret z
+	;cp RADIO_TOWER
+	;ret z
+	;cp LAV_RADIO_TOWER
+	;ret z
+	;cp UNDERGROUND
+	;ret z
+	;cp POWER_PLANT
+	;ret z
+	;cp POKEMON_MANSION
+	;ret z
+	;cp CINNABAR_LAB
+	;ret z
 	ld a, $1
 	and a
 	ret
@@ -514,9 +514,9 @@ RockItemEncounter:
 	ret
 
 .RockItems:
-	db 1, HELIX_FOSSIL
-	db 1, DOME_FOSSIL
-	db 1, OLD_AMBER
+	db 1, PLUME_FOSSIL
+	db 1, SAIL_FOSSIL
+	db 1, CLAW_FOSSIL
 	db 1, BIG_NUGGET
 	db 2, RARE_BONE
 	db 4, NUGGET

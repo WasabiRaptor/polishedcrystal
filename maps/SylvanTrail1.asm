@@ -1,6 +1,6 @@
 	const_def 2 ; object constants
 
-Ravine_MapScriptHeader:
+SylvanTrail1_MapScriptHeader:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks

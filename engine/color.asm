@@ -139,9 +139,16 @@ LoadCategoryAndTypePals:
 	ld a, $5
 	jp FarCopyWRAM
 
+LoadKeyItemIconPalette:
+	ld a, [wCurKeyItem]
+	dec a
+	ld bc, KeyItemIconPalettes
+	jr LoadIconPalette
+
 LoadItemIconPalette:
 	ld a, [wCurSpecies]
 	ld bc, ItemIconPalettes
+LoadIconPalette:
 	ld l, a
 	ld h, 0
 	add hl, hl
@@ -699,6 +706,10 @@ GetBattlemonBackpicPalettePointer:
 	pop af
 .got_illusion
 	call GetPlayerOrMonPalettePointer
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	pop de
 	ret
 
@@ -737,6 +748,9 @@ GetEnemyFrontpicPalettePointer:
 	pop af
 .got_illusion
 	call GetFrontpicPalettePointer
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	pop de
 	ret
 

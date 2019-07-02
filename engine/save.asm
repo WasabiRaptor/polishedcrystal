@@ -38,7 +38,6 @@ SaveAfterLinkTrade: ; 14a58
 	call SaveChecksum
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
-	farcall BackupPartyMonMail
 	jp ClearWRAMStateAfterSave
 ; 14a83
 
@@ -111,7 +110,6 @@ MovePkmnWOMail_InsertMon_SaveGame: ; 14ad5
 	call SaveBackupPlayerData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
-	farcall BackupPartyMonMail
 	call LoadBox
 	call ClearWRAMStateAfterSave
 	ld de, SFX_SAVE
@@ -249,7 +247,6 @@ SaveGameData:: ; 14c10
 	call SaveBackupPlayerData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
-	farcall BackupPartyMonMail
 	ld a, BANK(sBattleTowerChallengeState)
 	call GetSRAMBank
 	ld a, [sBattleTowerChallengeState]
@@ -458,7 +455,6 @@ TryLoadSaveFile: ; 14ea5 (5:4ea5)
 	call LoadPokemonData
 	call LoadBox
 	call LoadEncounterData
-	farcall RestorePartyMonMail
 	call ValidateBackupSave
 	call SaveBackupOptions
 	call SaveBackupPlayerData
@@ -473,7 +469,6 @@ TryLoadSaveFile: ; 14ea5 (5:4ea5)
 	call LoadBackupPlayerData
 	call LoadBackupPokemonData
 	call LoadBox
-	farcall RestorePartyMonMail
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData

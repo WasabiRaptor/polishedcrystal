@@ -1,6 +1,6 @@
 	const_def 2 ; object constants
 
-AshPlains2_MapScriptHeader:
+CendreLowland2_MapScriptHeader:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks

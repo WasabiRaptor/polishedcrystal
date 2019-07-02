@@ -1432,6 +1432,12 @@ _CheckMatchup:
 	ld a, [wBattleType]
 	cp BATTLETYPE_INVERSE
 	jr z, .TypesLoop
+	ld a, [wPlayerAbility]
+	cp REVERSE_AURA
+	jr z, .TypesLoop
+	ld a, [wEnemyAbility]
+	cp REVERSE_AURA
+	jr z, .TypesLoop
 	ld hl, TypeMatchup
 .TypesLoop:
 	ld a, [hli]
@@ -1545,6 +1551,12 @@ _CheckTypeMatchup: ; 347d3
 	ld hl, InverseTypeMatchup
 	ld a, [wBattleType]
 	cp BATTLETYPE_INVERSE
+	jr z, .TypesLoop
+	ld a, [wPlayerAbility]
+	cp REVERSE_AURA
+	jr z, .TypesLoop
+	ld a, [wEnemyAbility]
+	cp REVERSE_AURA
 	jr z, .TypesLoop
 	ld hl, TypeMatchup
 .TypesLoop:
@@ -8780,9 +8792,16 @@ BattleCommand_lowkick:
 	inc hl
 	inc hl
 	call GetFarHalfword ; now we have weight in hl
+	
+	ld a, BATTLE_VARS_ABILITY_OPP
+    call GetBattleVar
+	cp HEAVY_METAL
+	jr nz, .not_heavy
+	add hl, hl
+.not_heavy
 	ld d, h
 	ld e, l
-
+	
 	ld hl, .WeightTable
 .loop2
 	ld a, [hli]

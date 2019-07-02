@@ -1,4 +1,4 @@
-SelectMonFromParty: ; 50000
+SelectMonFromParty:: ; 50000
 	call DisableSpriteUpdates
 	xor a
 	ld [wPartyMenuActionText], a
