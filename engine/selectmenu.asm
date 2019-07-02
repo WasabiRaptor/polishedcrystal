@@ -23,7 +23,6 @@ CheckRegisteredItem:: ; 13345
 	ld hl, wRegisteredItems
 	ld b, 4
 	ld c, 0
-	ld d, 1
 .loop
 	ld a, [hl]
 	and a
@@ -32,28 +31,7 @@ CheckRegisteredItem:: ; 13345
 	push bc
 	push af
 	call CheckKeyItem
-	jr nc, .NormalItem
-
-	ld a, [wRegisteredItemFlags]
-	and d
-	jr nz, .registration_ok
-
-.NormalItem
-	; We can register regular items too (e.g. Repel)
-	pop af
-	push af
-	ld hl, wItems
-	push de
-	ld de, 2
-	call IsInArray
-	pop de
-	jr c, .registration_ok
-	pop af
-	pop bc
-	pop hl
-	xor a
-	ld [hl], a
-	jr .next
+	jr nc, .registration_ok
 
 .registration_ok
 	pop af
@@ -61,10 +39,9 @@ CheckRegisteredItem:: ; 13345
 	pop hl
 
 	; Useful if we only have a single registered item
-	ld [wCurItem], a
+	ld [wCurKeyItem], a
 	inc c
 .next
-	rlc d
 	inc hl
 	dec b
 	jr nz, .loop
@@ -80,27 +57,15 @@ UseRegisteredItem:
 	; Otherwise, show an item selection window
 	call GetRegisteredItem
 	ret z
-	push af
-	ld a, [wRegisteredItemFlags]
-	and c
-	jp nz, .RegisteredKeyItem
-	pop af
-	jr .DoRegisteredItem
 
 .single_registered_item
-	push af
-	ld a, [wRegisteredItemFlags]
-	and 1
-	jr nz, .RegisteredKeyItem
-	pop af
-.DoRegisteredItem
 	push de
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
 	ld c, 3
 	call SFXDelayFrames
 	pop de
-	farcall CheckItemMenu
+	farcall CheckKeyItemMenu
 	ld a, [wItemAttributeParamBuffer]
 	ld hl, .SwitchTo
 	rst JumpTable
@@ -124,7 +89,7 @@ UseRegisteredItem:
 
 .Current:
 	call OpenText
-	call DoItemEffect
+	predef DoKeyItemEffect
 	call CloseText
 	and a
 	ret
@@ -132,7 +97,7 @@ UseRegisteredItem:
 .Party:
 	call RefreshScreen
 	call FadeToMenu
-	call DoItemEffect
+	predef DoKeyItemEffect
 	call CloseSubmenu
 	call CloseText
 	and a
@@ -142,7 +107,7 @@ UseRegisteredItem:
 	call RefreshScreen
 	ld a, 1
 	ld [wUsingItemWithSelect], a
-	call DoItemEffect
+	predef DoKeyItemEffect
 	xor a
 	ld [wUsingItemWithSelect], a
 	ld a, [wItemEffectSucceeded]
@@ -160,61 +125,6 @@ UseRegisteredItem:
 	call CantUseItem
 	call CloseText
 	and a
-	ret
-
-.RegisteredKeyItem
-	pop af
-
-	push de
-	ld de, SFX_READ_TEXT_2
-	call PlaySFX
-	ld c, 3
-	call SFXDelayFrames
-	pop de
-	farcall CheckKeyItemMenu
-	ld a, [wItemAttributeParamBuffer]
-	ld hl, .KeyItemSwitchTo
-	rst JumpTable
-	ret
-
-.KeyItemSwitchTo:
-	dw .CantUse
-	dw .NoFunction
-	dw .NoFunction
-	dw .NoFunction
-	dw .KeyItemCurrent
-	dw .KeyItemParty
-	dw .KeyItemOverworld
-
-.KeyItemCurrent:
-	call OpenText
-	call DoKeyItemEffect
-	call CloseText
-	and a
-	ret
-
-.KeyItemParty:
-	call RefreshScreen
-	call FadeToMenu
-	call DoKeyItemEffect
-	call CloseSubmenu
-	call CloseText
-	and a
-	ret
-
-.KeyItemOverworld:
-	call RefreshScreen
-	ld a, 1
-	ld [wUsingItemWithSelect], a
-	call DoKeyItemEffect
-	xor a
-	ld [wUsingItemWithSelect], a
-	ld a, [wItemEffectSucceeded]
-	cp 1
-	jr nz, ._cantuse
-	scf
-	ld a, HMENURETURN_SCRIPT
-	ldh [hMenuReturn], a
 	ret
 
 GetRegisteredItem:
@@ -251,7 +161,6 @@ GetRegisteredItem:
 	hlcoord 2, 0
 	ld de, wRegisteredItems
 	ld b, 4
-	ld c, 1
 .loop
 	push bc
 	ld a, [de]
@@ -261,14 +170,7 @@ GetRegisteredItem:
 	push de
 	push hl
 	push af
-	ld a, [wRegisteredItemFlags]
-	and c
-	jr nz, .KeyItemName
-	call GetItemName
-	jr .got_name
-.KeyItemName
 	call GetKeyItemName	
-.got_name
 	pop af
 	pop hl
 	push hl
@@ -281,7 +183,6 @@ GetRegisteredItem:
 	ld bc, SCREEN_WIDTH
 	add hl, bc
 	pop bc
-	rlc c
 	dec b
 	jr nz, .loop
 
@@ -308,24 +209,20 @@ GetRegisteredItem:
 	and B_BUTTON | SELECT | START
 	jr nz, .cancel
 	ld de, wRegisteredItems
-	ld c, 1
 	ld a, [hl]
 	bit D_UP_F, a
 	jr nz, .got_item
-	rlc c
 	inc de
 	bit D_LEFT_F, a
 	jr nz, .got_item
-	rlc c
 	inc de
 	bit D_RIGHT_F, a
 	jr nz, .got_item
-	rlc c
 	inc de
 .got_item
 	ld a, [de]
 .got_item_a
-	ld [wCurItem], a
+	ld [wCurKeyItem], a
 	and a
 	jr z, .joy_loop
 	jr .ret
@@ -343,12 +240,10 @@ GetRegisteredItem:
 
 .first
 	ld hl, wRegisteredItems
-	ld c, 1
 rept 3
 	ld a, [hli]
 	and a
 	jr nz, .got_item_a
-	rlc c
 endr
 	ld a, [hl]
 	and a

@@ -58,7 +58,7 @@ ReceiveTMHM:: ; d3c4
 	call FlagAction
 	scf
 	ret
-	
+
 ReceiveKeyItem:: ; d3c4
 	ld a, [wCurKeyItem]
 	ld e, a
@@ -86,6 +86,7 @@ CheckKeyItem:: ; d3c4
 	ld b, CHECK_FLAG
 	ld hl, wKeyItems
 	call FlagAction
+	ret z
 	scf
 	ret
 

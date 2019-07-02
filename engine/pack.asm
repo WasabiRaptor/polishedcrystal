@@ -261,8 +261,8 @@ Pack: ; 10000
 	jr .tossable_unselectable
 
 .usable
-	ld hl, MenuDataHeader_UseGiveTossSel
-	ld de, Jumptable_UseGiveTossRegisterQuit
+	ld hl, MenuDataHeader_UseGiveToss
+	ld de, Jumptable_UseGiveTossQuit
 	jr PackBuildMenu
 
 .selectable_usable
@@ -276,13 +276,13 @@ Pack: ; 10000
 	jr PackBuildMenu
 
 .tossable_unselectable
-	ld hl, MenuDataHeader_UseSel
-	ld de, Jumptable_UseRegisterQuit
+	ld hl, MenuDataHeader_Use
+	ld de, Jumptable_UseQuit
 	jr PackBuildMenu
 
 .unusable
-	ld hl, MenuDataHeader_GiveTossSel
-	ld de, Jumptable_GiveTossRegisterQuit
+	ld hl, MenuDataHeader_GiveToss
+	ld de, Jumptable_GiveTossQuit
 	jr PackBuildMenu
 
 .selectable_unusable
@@ -423,33 +423,6 @@ SortItemsType:
 SortItemsName:
 	farjp SortItemsInBag
 
-MenuDataHeader_UseGiveTossSel: ; 0x10249
-	db $40 ; flags
-	db 01, 13 ; start coords
-	db 11, 19 ; end coords
-	dw .MenuData2
-	db 1 ; default option
-; 0x10251
-
-.MenuData2: ; 0x10251
-	db $c0 ; flags
-	db 5 ; items
-	db "Use@"
-	db "Give@"
-	db "Toss@"
-	db "Sel@"
-	db "Quit@"
-; 0x1026a
-
-Jumptable_UseGiveTossRegisterQuit: ; 1026a
-
-	dw UseItem
-	dw GiveItem
-	dw TossMenu
-	dw RegisterItem
-	dw QuitItemSubmenu
-; 10274
-
 MenuDataHeader_UseGiveToss: ; 0x10274
 	db $40 ; flags
 	db 03, 13 ; start coords
@@ -517,12 +490,6 @@ MenuDataHeader_UseSel: ; 0x102b0
 	db "Sel@"
 	db "Quit@"
 ; 0x102c7
-
-Jumptable_UseRegisterQuit: ; 102c7
-
-	dw UseItem
-	dw RegisterItem
-	dw QuitItemSubmenu
 ; 102cd
 Jumptable_KeyItem_UseRegisterQuit: ; 102c7
 
@@ -530,30 +497,6 @@ Jumptable_KeyItem_UseRegisterQuit: ; 102c7
 	dw RegisterKeyItem
 	dw QuitItemSubmenu
 ; 102cd
-
-MenuDataHeader_GiveTossSel: ; 0x102cd
-	db $40 ; flags
-	db 03, 13 ; start coords
-	db 11, 19 ; end coords
-	dw .MenuData2
-	db 1 ; default option
-; 0x102d5
-
-.MenuData2: ; 0x102d5
-	db $c0 ; flags
-	db 4 ; items
-	db "Give@"
-	db "Toss@"
-	db "Sel@"
-	db "Quit@"
-; 0x102ea
-
-Jumptable_GiveTossRegisterQuit: ; 102ea
-
-	dw GiveItem
-	dw TossMenu
-	dw RegisterItem
-	dw QuitItemSubmenu
 ; 102f2
 
 MenuDataHeader_GiveToss: ; 0x102f2
@@ -655,70 +598,6 @@ TossMenu: ; 10364
 	jp Pack_PrintTextNoScroll
 ; 1039d
 
-RegisterItem: ; 103c2
-	farcall CheckSelectableItem
-	ld a, [wItemAttributeParamBuffer]
-	and a
-	jr nz, .cant_register
-
-	; Check if the item is registered
-	ld hl, wRegisteredItems
-	ld a, [wCurItem]
-	ld e, a
-	ld d, 4
-	ld c, 1
-.already_registered_loop
-	ld a, [hl]
-	cp e
-	jr z, .found_registered_slot
-	rlc c
-	inc hl
-	dec d
-	jr nz, .already_registered_loop
-	ld hl, wRegisteredItems
-	ld d, 4
-	ld c, 1
-.loop
-	ld a, [hl]
-	and a
-	jr z, .found_empty_slot
-	inc hl
-	dec d
-	jr nz, .loop
-	ld hl, Text_NoEmptySlot
-	jr .print
-
-.found_empty_slot
-	ld a, [wCurItem]
-	ld [hl], a
-	call Pack_GetItemName
-	ld de, SFX_FULL_HEAL
-	call WaitPlaySFX
-	ld hl, Text_RegisteredItem
-	jr .print
-
-.found_registered_slot
-	ld a, [wRegisteredItemFlags]
-	ld b, a
-	and c
-	jr z, .clear_registered_slot
-	rlc c
-	dec d
-	inc hl
-	jr .already_registered_loop
-
-.clear_registered_slot
-	ld [hl], 0
-	ld a, [wCurItem]
-	call Pack_GetItemName
-	ld hl, Text_UnregisteredItem
-	jr .print
-
-.cant_register
-	ld hl, Text_CantRegister
-.print
-	jp Pack_PrintTextNoScroll
-
 RegisterKeyItem: ; 103c2
 	farcall CheckSelectableKeyItem
 	ld a, [wItemAttributeParamBuffer]
@@ -730,25 +609,21 @@ RegisterKeyItem: ; 103c2
 	ld a, [wCurKeyItem]
 	ld e, a
 	ld d, 4
-	ld c, 1
 
 .already_registered_loop
 	ld a, [hl]
 	cp e
 	jr z, .found_registered_slot
-	rlc c
 	inc hl
 	dec d
 	jr nz, .already_registered_loop
 
 	ld hl, wRegisteredItems
 	ld d, 4
-	ld c, 1
 .loop
 	ld a, [hl]
 	and a
 	jr z, .found_empty_slot
-	rlc c
 	inc hl
 	dec d
 	jr nz, .loop
@@ -756,9 +631,6 @@ RegisterKeyItem: ; 103c2
 	jr .print
 
 .found_empty_slot
-	ld a, [wRegisteredItemFlags]
-	or c
-	ld [wRegisteredItemFlags], a
 	ld a, [wCurKeyItem]
 	ld [hl], a
 	call Pack_GetKeyItemName
@@ -768,18 +640,6 @@ RegisterKeyItem: ; 103c2
 	jr .print
 
 .found_registered_slot
-	ld a, [wRegisteredItemFlags]
-	ld b, a
-	and c
-	jr nz, .clear_registered_slot
-	rlc c
-	dec d
-	inc hl
-	jr .already_registered_loop
-
-.clear_registered_slot
-	xor b
-	ld [wRegisteredItemFlags], a
 	ld [hl], 0
 	ld a, [wCurKeyItem]
 	call Pack_GetKeyItemName
