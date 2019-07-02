@@ -177,7 +177,45 @@ KeyItems_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	push bc
 	call KeyItemsPocket_GetCurrentLineCoord
 	push hl
-    
+    push hl
+    pop de
+    push hl
+	ld a, [wd265]
+    and a
+	jr z, .not_registered
+	ld b, a
+	ld hl, wRegisteredItems
+	ld a, [hli]
+	cp b
+	ld c, "▲"
+	jr z, .registered
+	ld a, [hli]
+	cp b
+	ld c, "◀"
+	jr z, .registered
+	ld a, [hli]
+	cp b
+	ld c, "▶"
+	jr z, .registered
+	ld a, [hli]
+	cp b
+	ld c, "▼"
+	jr nz, .not_registered
+.registered
+	push bc
+	farcall CheckRegisteredItem
+	pop bc
+	dec a
+	jr nz, .not_unique
+	ld c, "★"
+.not_unique
+	pop de
+	push de
+    inc de
+	ld a, c
+	ld [de], a
+.not_registered
+    pop hl
 	ld a, [wd265]
 	call GetKeyItemName
 	pop hl

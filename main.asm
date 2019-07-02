@@ -491,39 +491,7 @@ GetQuantityInBag:
 	ret
 
 ;stuff for registered items I might need later
-	and a
-	jr z, .not_registered
-	ld b, a
-	ld hl, wRegisteredItems
-	ld a, [hli]
-	cp b
-	ld c, "▲"
-	jr z, .registered
-	ld a, [hli]
-	cp b
-	ld c, "◀"
-	jr z, .registered
-	ld a, [hli]
-	cp b
-	ld c, "▶"
-	jr z, .registered
-	ld a, [hli]
-	cp b
-	ld c, "▼"
-	jr nz, .not_registered
-.registered
-	push bc
-	farcall CheckRegisteredItem
-	pop bc
-	dec a
-	jr nz, .not_unique
-	ld c, "★"
-.not_unique
-	pop de
-	push de
-	ld a, c
-	ld [de], a
-.not_registered
+
 
 PlaceMenuItemName:
 ; places a star near the name if registered
