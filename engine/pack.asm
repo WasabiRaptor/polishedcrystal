@@ -527,7 +527,7 @@ Jumptable_UseRegisterQuit: ; 102c7
 Jumptable_KeyItem_UseRegisterQuit: ; 102c7
 
 	dw UseKeyItem
-	dw RegisterItem
+	dw RegisterKeyItem
 	dw QuitItemSubmenu
 ; 102cd
 
@@ -698,6 +698,78 @@ RegisterItem: ; 103c2
 	ld [hl], 0
 	ld a, [wCurItem]
 	call Pack_GetItemName
+	ld hl, Text_UnregisteredItem
+	jr .print
+
+.cant_register
+	ld hl, Text_CantRegister
+.print
+	jp Pack_PrintTextNoScroll
+
+RegisterKeyItem: ; 103c2
+	farcall CheckSelectableKeyItem
+	ld a, [wItemAttributeParamBuffer]
+	and a
+	jr nz, .cant_register
+
+	; Check if the item is registered
+	ld hl, wRegisteredItems
+	ld a, [wCurKeyItem]
+	ld e, a
+	ld d, 4
+	ld c, 1
+
+.already_registered_loop
+	ld a, [hl]
+	cp e
+	jr z, .found_registered_slot
+	rlc c
+	inc hl
+	dec d
+	jr nz, .already_registered_loop
+
+	ld hl, wRegisteredItems
+	ld d, 4
+	ld c, 1
+.loop
+	ld a, [hl]
+	and a
+	jr z, .found_empty_slot
+	rlc c
+	inc hl
+	dec d
+	jr nz, .loop
+	ld hl, Text_NoEmptySlot
+	jr .print
+
+.found_empty_slot
+	ld a, [wRegisteredItemFlags]
+	xor c
+	ld [wRegisteredItemFlags], a
+	ld a, [wCurKeyItem]
+	ld [hl], a
+	call Pack_GetKeyItemName
+	ld de, SFX_FULL_HEAL
+	call WaitPlaySFX
+	ld hl, Text_RegisteredItem
+	jr .print
+
+.found_registered_slot
+	ld a, [wRegisteredItemFlags]
+	ld b, a
+	and c
+	jr nz, .clear_registered_slot
+	rlc c
+	dec d
+	inc hl
+	jr .already_registered_loop
+
+.clear_registered_slot
+	xor b
+	ld [wRegisteredItemFlags], a
+	ld [hl], 0
+	ld a, [wCurKeyItem]
+	call Pack_GetKeyItemName
 	ld hl, Text_UnregisteredItem
 	jr .print
 
@@ -1652,6 +1724,11 @@ Pack_GetItemName: ; 10a1d
 	call GetItemName
 	jp CopyName1
 ; 10a2a
+Pack_GetKeyItemName: ; 10a1d
+	ld a, [wCurKeyItem]
+	ld [wNamedObjectIndexBuffer], a
+	call GetKeyItemName
+	jp CopyName1
 
 ClearPocketList: ; 10a36 (4:4a36)
 	hlcoord 5, 2

@@ -23,6 +23,7 @@ CheckRegisteredItem:: ; 13345
 	ld hl, wRegisteredItems
 	ld b, 4
 	ld c, 0
+	ld d, 1
 .loop
 	ld a, [hl]
 	and a
@@ -30,11 +31,14 @@ CheckRegisteredItem:: ; 13345
 	push hl
 	push bc
 	push af
-	ld hl, wKeyItems
-	ld de, 1
-	call IsInArray
-	jr c, .registration_ok
+	call CheckKeyItem
+	jr nz, .NormalItem
 
+	ld a, [wRegisteredItemFlags]
+	and d
+	jr nz, .registration_ok
+
+.NormalItem
 	; We can register regular items too (e.g. Repel)
 	pop af
 	push af
@@ -48,6 +52,7 @@ CheckRegisteredItem:: ; 13345
 	xor a
 	ld [hl], a
 	jr .next
+
 .registration_ok
 	pop af
 	pop bc
@@ -74,6 +79,7 @@ UseRegisteredItem:
 	ret z
 
 .single_registered_item
+
 	push de
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
@@ -176,6 +182,7 @@ GetRegisteredItem:
 	hlcoord 2, 0
 	ld de, wRegisteredItems
 	ld b, 4
+	ld c, 1
 .loop
 	push bc
 	ld a, [de]
@@ -184,7 +191,11 @@ GetRegisteredItem:
 	ld [wNamedObjectIndexBuffer], a
 	push de
 	push hl
+	ld a, [wRegisteredItemFlags]
+	and c
+	jr nz, .KeyItemName
 	call GetItemName
+.got_name
 	pop hl
 	push hl
 	ld de, wStringBuffer1
@@ -197,6 +208,7 @@ GetRegisteredItem:
 	add hl, bc
 	pop bc
 	dec b
+	rlc c
 	jr nz, .loop
 
 	call SetPalettes
@@ -215,6 +227,11 @@ GetRegisteredItem:
 	jr nz, .got_input
 	call DelayFrame
 	jr .joy_loop
+
+.KeyItemName
+	call GetKeyItemName
+	jr .got_name
+
 .got_input
 	bit A_BUTTON_F, a
 	jr nz, .first

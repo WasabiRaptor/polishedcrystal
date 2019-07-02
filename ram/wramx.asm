@@ -1278,6 +1278,18 @@ wBestMagikarpLengthMmHi:: ds 1
 wBestMagikarpLengthMmLo:: ds 1
 wMagikarpRecordHoldersName:: ds NAME_LENGTH
 
+wRegisteredItemFlags:: 
+	; 0 - wRegisteredItems key item flag 
+	; 1 - wRegisteredItems + 1 key item flag
+	; 2 - wRegisteredItems + 2 key item flag
+	; 3 - wRegisteredItems + 3 key item flag
+
+	; 4 - wRegisteredItems second item list flag
+	; 5 - wRegisteredItems + 1 second item list flag
+	; 6 - wRegisteredItems + 2 second item list flag
+	; 7 - wRegisteredItems + 3 second item list flag
+	ds 1
+
 wRegisteredItems::
 ; You can map 4 items, to select + directions
 	ds 4
