@@ -2496,7 +2496,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	dec a
 	ld hl, wPartyMon1CaughtLocation
 	call GetPartyLocation
-	ld a, NATIONAL_PARK
+	;ld a, NATIONAL_PARK
 	ld [hl], a
 	xor a
 	ld [wContestMon], a
@@ -2553,7 +2553,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, BANK(sBoxMon1CaughtLocation)
 	call GetSRAMBank
 	ld hl, sBoxMon1CaughtLocation
-	ld a, NATIONAL_PARK
+	;ld a, NATIONAL_PARK
 	ld [hl], a
 	call CloseSRAM
 	xor a
@@ -3084,7 +3084,6 @@ _TempMonStatsCalculation: ; 50893
 	ld [hli], a
 	ld [hl], a
 	ret
-
 GetPkmnSpecies: ; 508d5
 ; [wMonType] has the type of the Pkmn
 ; e = Nr. of Pkmn (i.e. [wCurPartyMon])
@@ -4239,7 +4238,7 @@ InsertPokemonIntoBox: ; 51322
 	rst CopyBytes
 	ld a, [wCurPartyMon]
 	ld b, a
-	farcall RestorePPofDepositedPokemon
+	;farcall RestorePPofDepositedPokemon
 	jp CloseSRAM
 
 InsertPokemonIntoParty: ; 5138b

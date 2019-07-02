@@ -831,7 +831,7 @@ wEnteredMapFromContinue:: ds 1
 wTimeOfDayPal:: ds 1
 	ds 4
 wTimeOfDayPalFlags:: ds 1
-wTimeOfDayPalset:: ds 1
+wTimeOfDayPalset:: ds 1 ;UNUSED NOW THANK GOD
 wCurTimeOfDay:: ds 1
 
 wSecretID:: ds 2

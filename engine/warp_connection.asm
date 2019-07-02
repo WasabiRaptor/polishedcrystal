@@ -249,7 +249,6 @@ LoadMapTimeOfDay: ; 104750
 	res 6, [hl]
 	ld a, $1
 	ld [wSpriteUpdatesEnabled], a
-	farcall ReplaceTimeOfDayPals
 	farcall UpdateTimeOfDayPal
 	call LoadMapPart
 	call .ClearBGMap

@@ -37,14 +37,14 @@ box_struct: MACRO
 \1CaughtLevel::    db
 \1CaughtLocation:: db
 \1Level::          db
+\1Status::         db
+\1Unused::         db
+\1HP::             dw
 \1End::
 ENDM
 
 party_struct: MACRO
 	box_struct \1
-\1Status::         db
-\1Unused::         db
-\1HP::             dw
 \1MaxHP::          dw
 \1Stats:: ; big endian
 \1Attack::         dw

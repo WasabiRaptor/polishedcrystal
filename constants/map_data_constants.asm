@@ -10,9 +10,9 @@
 
 	const_def
 	const PALETTE_AUTO
+	const PALETTE_MORN
 	const PALETTE_DAY
 	const PALETTE_NITE
-	const PALETTE_MORN
 	const PALETTE_DARK
 
 	const_def
@@ -58,6 +58,12 @@ const_value = -1
 	const SPAWN_N_A
 
 	const SPAWN_HOME
+	const SPAWN_DANIELS_TOWN
+	const SPAWN_ASAOKA_CITY
+	const SPAWN_KIKUNO_TOWN
+	const SPAWN_BREGUET_RUINS
+	const SPAWN_HETZELTRON
+	const SPAWN_HATTORI_VILLAGE
 
 	const SPAWN_MYSTERY_DUNGEON
 NUM_SPAWNS EQU const_value

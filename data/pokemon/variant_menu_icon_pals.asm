@@ -64,11 +64,11 @@ GirafarigIconPals::
 
 VulpixIconPals::
 	iconpal RED, BROWN ; Vulpix
-	iconpal TEAL, GREEN ; Vulpix_Alola
+	iconpal TEAL, PURPLE ; Vulpix_Alola
 
 NinetalesIconPals::
 	iconpal RED, GRAY ; Ninetales
-	iconpal TEAL, GREEN ; Ninetales_Alola
+	iconpal TEAL, PURPLE ; Ninetales_Alola
 
 SuicuneIconPals::
 	iconpal BLUE, BLUE ; Suicune

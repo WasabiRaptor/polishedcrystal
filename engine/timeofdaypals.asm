@@ -188,92 +188,26 @@ brightlevel: MACRO
 	db (\1 << 6) | (\2 << 4) | (\3 << 2) | \4
 ENDM
 
-ReplaceTimeOfDayPals: ; 8c0e5
-	ld hl, .BrightnessLevels
-	ld a, [wMapTimeOfDay]
-	cp PALETTE_DARK ; needs Flash
-	jr z, .DarkCave
-	and $7
-	add l
-	ld l, a
-	ld a, 0 ; not xor a; preserve carry flag?
-	adc h
-	ld h, a
-	ld a, [hl]
-	ld [wTimeOfDayPalset], a
-	ret
-
-.DarkCave:
-	ld a, [wStatusFlags]
-	bit 2, a ; Flash
-	jr nz, .UsedFlash
-	ld a, %11111111 ; 3, 3, 3, 3
-	ld [wTimeOfDayPalset], a
-	ret
-
-.UsedFlash:
-	ld a, %10101010 ; 2, 2, 2, 2
-	ld [wTimeOfDayPalset], a
-	ret
-; 8c10f (23:410f)
-
-.BrightnessLevels: ; 8c10f
-	brightlevel 3, 2, 1, 0 ; PALETTE_AUTO
-	brightlevel 1, 1, 1, 1 ; PALETTE_DAY
-	brightlevel 2, 2, 2, 2 ; PALETTE_NITE
-	brightlevel 0, 0, 0, 0 ; PALETTE_MORN
-	brightlevel 3, 3, 3, 3 ; PALETTE_DARK
-	brightlevel 3, 2, 1, 0
-	brightlevel 3, 2, 1, 0
-	brightlevel 3, 2, 1, 0
-; 8c117
-
 GetTimePalette: ; 8c117
+	ld a, [wMapTimeOfDay]
+	cp PALETTE_DARK
+	jp z, .staydarkorflash
+	and a
+	jp nz, .decandret
 	ld a, [wTimeOfDay]
-	ld e, a
-	ld d, 0
-	ld hl, .TimePalettes
-	add hl, de
-	add hl, de
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-; 8c126
-
-.TimePalettes:
-	dw .MorningPalette
-	dw .DayPalette
-	dw .NitePalette
-	dw .DarknessPalette
-
-.MorningPalette:
-	ld a, [wTimeOfDayPalset]
-	and %00000011 ; 0
 	ret
 
-.DayPalette:
-	ld a, [wTimeOfDayPalset]
-	and %00001100 ; 1
-	srl a
-	srl a
+.decandret
+	dec a
 	ret
 
-.NitePalette:
-	ld a, [wTimeOfDayPalset]
-	and %00110000 ; 2
-	swap a
+.staydarkorflash
+	ld a, [wStatusFlags]
+	and 1 << 2 ;flash
+	ld a, DARKNESS
+	ret nz
+	ld a, DAY
 	ret
-
-.DarknessPalette:
-	ld a, [wTimeOfDayPalset]
-	and %11000000 ; 3
-	rlca
-	rlca
-	ret
-; 8c14e
-
-
 DmgToCgbTimePals: ; 8c14e
 	push hl
 	push de

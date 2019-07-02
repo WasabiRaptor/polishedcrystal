@@ -222,7 +222,7 @@ _CGB_FinishBattleScreenLayout: ; 8e23
 	jp ApplyAttrMap
 ; 8e85
 
-
+_CGB_PokedexAreaPals:
 _CGB_PokegearPals: ; 8eb9
 	ld hl, PokegearPals
 	ld de, wUnknBGPals
@@ -230,53 +230,11 @@ _CGB_PokegearPals: ; 8eb9
 	ld a, $5
 	call FarCopyWRAM
 
-	ld a, [wPlayerGender]
-	bit 0, a
-	jr z, .male
-	ld hl, FemalePokegearInterfacePalette
-	ld de, wUnknBGPals palette 0
-	ld bc, 1 palettes
-	ld a, $5
-	call FarCopyWRAM
-.male
-
 	call ApplyPals
 	ld a, $1
 	ldh [hCGBPalUpdate], a
 	ret
 ; 8edb
-
-
-_CGB_PokedexAreaPals:
-	ld hl, PokegearPals
-	ld de, wUnknBGPals
-	ld bc, 8 palettes
-	ld a, $5
-	call FarCopyWRAM
-
-	ld hl, .InvertedGrayPalette
-	ld de, wUnknBGPals palette 0
-	ld bc, 1 palettes
-	ld a, $5
-	call FarCopyWRAM
-
-	call ApplyPals
-	ld a, $1
-	ldh [hCGBPalUpdate], a
-	ret
-
-.InvertedGrayPalette:
-if !DEF(MONOCHROME)
-	RGB 00, 00, 00
-	RGB 21, 00, 21
-	RGB 13, 00, 13
-	RGB 31, 31, 31
-else
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_WHITE
-endc
 
 
 _CGB_StatsScreenHPPals: ; 8edb

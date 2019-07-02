@@ -202,7 +202,7 @@ sBTPkmnPrevPrevTrainer2:: ds 1
 sBTPkmnPrevPrevTrainer3:: ds 1
 
 
-SECTION "Boxes 1-7",  SRAM
+SECTION "Boxes 1-6",  SRAM
 
 	box sBox1
 	box sBox2
@@ -210,16 +210,18 @@ SECTION "Boxes 1-7",  SRAM
 	box sBox4
 	box sBox5
 	box sBox6
+
+
+SECTION "Boxes 7-12", SRAM
+
 	box sBox7
-
-
-SECTION "Boxes 8-14", SRAM
-
 	box sBox8
 	box sBox9
 	box sBox10
 	box sBox11
 	box sBox12
+
+SECTION "Boxes 13-4", SRAM
 	box sBox13
 	box sBox14
 

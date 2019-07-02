@@ -17,35 +17,35 @@ INCLUDE "maps/HiddenCaveGrotto.asm" ; shares text with HiddenTreeGrotto.asm
 
 SECTION "Overworld Map Scripts", ROMX
 
-INCLUDE "maps/Town1.asm"
+INCLUDE "maps/DanielsTown.asm"
 INCLUDE "maps/Bridge.asm"
-INCLUDE "maps/Town2.asm"
+INCLUDE "maps/AsaokaCity.asm"
 
 INCLUDE "maps/RouteNE1.asm"
-INCLUDE "maps/Crevasse.asm"
+INCLUDE "maps/GelidRavine.asm"
 INCLUDE "maps/RouteNE2.asm"
 
-INCLUDE "maps/Town3.asm"
+INCLUDE "maps/KikunoTown.asm"
 
-INCLUDE "maps/RouteW1.asm"
-INCLUDE "maps/RouteW2.asm"
+INCLUDE "maps/OuestPathway.asm"
+INCLUDE "maps/CendreLowland3.asm"
 
-INCLUDE "maps/AshPlains1.asm"
-INCLUDE "maps/AshPlains2.asm"
+INCLUDE "maps/CendreLowland1.asm"
+INCLUDE "maps/CendreLowland2.asm"
 
-INCLUDE "maps/Town4.asm"
+INCLUDE "maps/BreguetRuins.asm"
 
-INCLUDE "maps/RouteS.asm"
-INCLUDE "maps/Swamp.asm"
-INCLUDE "maps/RouteSW.asm"
+INCLUDE "maps/MinamiWetlandsEntrance.asm"
+INCLUDE "maps/MinamiWetlands.asm"
+INCLUDE "maps/SylvanTrail1.asm"
 
-INCLUDE "maps/Town5.asm"
+INCLUDE "maps/Hetzeltron.asm"
 
 INCLUDE "maps/RouteSE1.asm"
 INCLUDE "maps/RouteSE2.asm"
-INCLUDE "maps/RouteSE3.asm"
+INCLUDE "maps/SylvanTrail2.asm"
 
-INCLUDE "maps/Town6.asm"
+INCLUDE "maps/HattoriVillage.asm"
 
 INCLUDE "maps/Lake1.asm"
 INCLUDE "maps/Lake2.asm"

@@ -32,64 +32,64 @@ DayCare_BlockData:
 
 SECTION "Overworld Map Blocks", ROMX
 
-Town1_BlockData:
-	INCBIN "maps/Town1.ablk.lz"
+DanielsTown_BlockData:
+	INCBIN "maps/DanielsTown.ablk.lz"
 Bridge_BlockData:
 	INCBIN "maps/Bridge.ablk.lz"
-Town2_BlockData:
-	INCBIN "maps/Town2.ablk.lz"
+AsaokaCity_BlockData:
+	INCBIN "maps/AsaokaCity.ablk.lz"
 
 
 RouteNE1_BlockData:
 	INCBIN "maps/RouteNE1.ablk.lz"
-Crevasse_BlockData:
-	INCBIN "maps/Crevasse.ablk.lz"
+GelidRavine_BlockData:
+	INCBIN "maps/GelidRavine.ablk.lz"
 RouteNE2_BlockData:
 	INCBIN "maps/RouteNE2.ablk.lz"
 
 
-Town3_BlockData:
-	INCBIN "maps/Town3.ablk.lz"
+KikunoTown_BlockData:
+	INCBIN "maps/KikunoTown.ablk.lz"
 
 
-RouteW1_BlockData:
-	INCBIN "maps/RouteW1.ablk.lz"
-RouteW2_BlockData:
-	INCBIN "maps/RouteW2.ablk.lz"
+OuestPathway_BlockData:
+	INCBIN "maps/OuestPathway.ablk.lz"
+CendreLowland3_BlockData:
+	INCBIN "maps/CendreLowland3.ablk.lz"
 
 
-AshPlains1_BlockData:
-	INCBIN "maps/AshPlains1.ablk.lz"
-AshPlains2_BlockData:
-	INCBIN "maps/AshPlains2.ablk.lz"
+CendreLowland1_BlockData:
+	INCBIN "maps/CendreLowland1.ablk.lz"
+CendreLowland2_BlockData:
+	INCBIN "maps/CendreLowland2.ablk.lz"
 
 
-Town4_BlockData:
-	INCBIN "maps/Town4.ablk.lz"
+BreguetRuins_BlockData:
+	INCBIN "maps/BreguetRuins.ablk.lz"
 
 
-RouteS_BlockData:
-	INCBIN "maps/RouteS.ablk.lz"
-Swamp_BlockData:
-	INCBIN "maps/Swamp.ablk.lz"
-RouteSW_BlockData:
-	INCBIN "maps/RouteSW.ablk.lz"
+MinamiWetlandsEntrance_BlockData:
+	INCBIN "maps/MinamiWetlandsEntrance.ablk.lz"
+MinamiWetlands_BlockData:
+	INCBIN "maps/MinamiWetlands.ablk.lz"
+SylvanTrail1_BlockData:
+	INCBIN "maps/SylvanTrail1.ablk.lz"
 
 
-Town5_BlockData:
-	INCBIN "maps/Town5.ablk.lz"
+Hetzeltron_BlockData:
+	INCBIN "maps/Hetzeltron.ablk.lz"
 
 
 RouteSE1_BlockData:
 	INCBIN "maps/RouteSE1.ablk.lz"
 RouteSE2_BlockData:
 	INCBIN "maps/RouteSE2.ablk.lz"
-RouteSE3_BlockData:
-	INCBIN "maps/RouteSE3.ablk.lz"
+SylvanTrail2_BlockData:
+	INCBIN "maps/SylvanTrail2.ablk.lz"
 
 
-Town6_BlockData:
-	INCBIN "maps/Town6.ablk.lz"
+HattoriVillage_BlockData:
+	INCBIN "maps/HattoriVillage.ablk.lz"
 
 
 Lake1_BlockData:
