@@ -140,10 +140,11 @@ LoadCategoryAndTypePals:
 	jp FarCopyWRAM
 
 LoadKeyItemIconPalette:
-	ld a, [wCurSpecies]
+	ld a, [wCurKeyItem]
+	dec a
 	ld bc, KeyItemIconPalettes
 	jr LoadIconPalette
-	
+
 LoadItemIconPalette:
 	ld a, [wCurSpecies]
 	ld bc, ItemIconPalettes

@@ -74,7 +74,7 @@ KeyItems_ShowDescription: ; 2c946 (b:4946)
 	cp NUM_KEY_ITEMS + 1
 	jr nc, .Cancel
 	ld [wd265], a
-	ld [wCurSpecies], a
+	;ld [wCurSpecies], a
 	;farcall PrintKeyItemDescription
     farcall UpdateKeyItemIconAndDescription
 	jp KeyItems_JoypadLoop
@@ -95,7 +95,7 @@ KeyItems_ChooseKeyItem: ; 2c974 (b:4974)
 	ld a, [wd265]
 	cp b
 	jr z, _KeyItems_ExitPack ; our cursor was hovering over CANCEL
-    
+
 KeyItems_GetCurrentKeyItem: ; 2c98a (b:498a)
 	call KeyItems_GetCurrentPocketPosition
 	ld a, [wMenuCursorY]

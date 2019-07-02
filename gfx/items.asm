@@ -37,7 +37,8 @@ UpdateKeyItemIconAndDescription::
 	farcall UpdateKeyItemDescription
 UpdateKeyItemIcon::
 	ld hl, KeyItemIconPointers
-	ld a, [wCurSpecies]
+	ld a, [wCurKeyItem]
+	dec a
 	ld e, a
 	ld d, 0
 	add hl, de

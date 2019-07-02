@@ -11,7 +11,6 @@ NUM_ITEMATTRS EQU const_value
 
 ; key item attributes
 	const_def
-	const KEYITEMATTR_EFFECT
 	const KEYITEMATTR_PARAM
 	const KEYITEMATTR_PERMISSIONS
 	const KEYITEMATTR_HELP

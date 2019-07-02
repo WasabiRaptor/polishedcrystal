@@ -971,7 +971,8 @@ BattlePack: ; 10493
 	lb bc, $9, $1 ; Berries, Items
 	call Pack_InterpretJoypad
 	ret c
-	xor a
+	farcall CheckKeyItemContext
+	ld a, [wItemAttributeParamBuffer]
 	jp KeyItemSubmenu
 
 ItemSubmenu: ; 105d3 (4:45d3)

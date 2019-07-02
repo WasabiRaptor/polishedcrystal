@@ -470,8 +470,8 @@ UnownedTMString:
 	db "Unowned@"
 
 UpdateKeyItemDescription:
-	ld a, [wMenuSelection]
-	ld [wCurSpecies], a
+	;ld a, [wMenuSelection]
+	;ld [wCurKeyItem], a
 	hlcoord 0, 12
 	lb bc, 4, SCREEN_WIDTH - 2
 	call TextBox
@@ -4829,12 +4829,13 @@ INCLUDE "data/items/names.asm"
 
 PrintKeyItemDescription:
 	ld hl, KeyItemDescriptions
+	ld a, [wCurKeyItem]
 	jr PrintDescription
 PrintItemDescription: ; 0x1c8955
 ; Print the description for item [wCurSpecies] at de.
 	ld hl, ItemDescriptions
-PrintDescription:
 	ld a, [wCurSpecies]
+PrintDescription:
 	dec a
 	ld c, a
 	ld b, 0
