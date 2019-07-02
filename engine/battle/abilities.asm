@@ -1172,32 +1172,37 @@ PowerConstructAbility:
 	jr z, .got_form
 	ld hl, wEnemyMonForm
 .got_form
-
 	predef GetVariant
-	cp COMPLETE_ZYGARDE
-	jp z, .popafandret
-	ld a, COMPLETE_ZYGARDE
+	cp TEN_PERCENT_ZYGARDE
+	jr z, .ten
+	cp FIFTY_PERCENT_ZYGARDE
+	jr z, .fifty
+	jr .popafandret
+
+.ten
+	ld b, TEN_PERCENT_ZYGARDE_COMPLETE
+	jr .form_change
+.fifty
+	ld b, FIFTY_PERCENT_ZYGARDE_COMPLETE
+.form_change
+	ld a, b
 	ld [wCurForm], a
 	ld a, [hl]
 	and $ff - FORM_MASK
-	or COMPLETE_ZYGARDE
+	or b
 	ld [hl], a
 
 	pop af
 	push af
 	jr nz,.enemyturn
 	call UpdateBattleMonInParty
-
 	farcall UpdatePkmnStats 
-
 	farcall InitBattleMon
 	jr .donestats
 
 .enemyturn
 	call UpdateEnemyMonInParty
-
 	farcall UpdateEnemyPkmnStats 
-
 	farcall InitEnemyMon
 
 .donestats
@@ -2053,21 +2058,30 @@ RunPostBattleAbilities::
 	call GetPartyParamLocation
 	ld c, [hl]
 	farcall GetAbility
+	ld a, d
+	and $3f
+	cp $1
 	ld a, b
 	pop bc
+	jr z, .skip_pickup
 	cp NATURAL_CURE
-	jr z, .natural_cure
+	call z, .natural_cure
 	cp PICKUP
 	call z, .Pickup
+.skip_pickup
+	cp POWER_CONSTRUCT
+	call z, .form_revert
+	cp STANCE_CHANGE
+	call z, .form_revert
 	jr .loop
 
-.natural_cure
+.natural_cure:
 	; Heal status
 	ld a, MON_STATUS
 	call GetPartyParamLocation
 	xor a
 	ld [hl], a
-	jr .loop
+	ret
 
 .Pickup:
 	ld a, MON_ITEM
@@ -2109,6 +2123,36 @@ RunPostBattleAbilities::
 	ld hl, BattleText_PickedUpItem
 	call StdBattleTextBox
 	pop de
+	pop bc
+	ret
+
+.form_revert:
+	push bc
+	ld a, MON_FORM
+	call GetPartyParamLocation
+	predef GetVariant
+	cp BLADE_AEGISLASH
+	jr z, .aegislash
+	cp TEN_PERCENT_ZYGARDE_COMPLETE
+	jr z, .ten
+	cp FIFTY_PERCENT_ZYGARDE_COMPLETE
+	jr z, .fifty
+	ret
+
+.aegislash
+	ld b, SHIELD_AEGISLASH
+	jr .revert
+.ten
+	ld b, TEN_PERCENT_ZYGARDE
+	jr .revert
+.fifty
+	ld b, FIFTY_PERCENT_ZYGARDE
+.revert
+	ld a, [hl]
+	and $ff - FORM_MASK
+	or b
+	ld [hl], a
+	farcall UpdatePkmnStats
 	pop bc
 	ret
 

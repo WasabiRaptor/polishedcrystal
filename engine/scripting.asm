@@ -1427,6 +1427,10 @@ Script_reloadmapafterbattle:
 	ld hl, wWildBattlePanic
 	ld [hl], d
 	ld a, [wBattleResult]
+	ld d, a
+	push af
+	farcall RunPostBattleAbilities
+	pop af
 	and $3f
 	cp $1
 	jr nz, .notblackedout
@@ -1438,15 +1442,9 @@ Script_reloadmapafterbattle:
 	bit 0, d
 	jr z, .was_wild
 	farcall MomTriesToBuySomething
-	farcall RunPostBattleAbilities
 	jr .done
 
 .was_wild
-	ld a, [wBattleResult]
-	bit 1, a ; set on fleeing
-	jr nz, .skip_pickup
-	farcall RunPostBattleAbilities
-.skip_pickup
 	ld a, [wBattleResult]
 	bit 7, a
 	jr z, .done
