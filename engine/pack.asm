@@ -338,7 +338,7 @@ KeyItems_LoadSubmenu: ; 101c5 (4:41c5)
 	farcall CheckSelectableKeyItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
-	jr nz, .selectable_usable
+	jr z, .selectable_usable
 .usable
 	ld hl, MenuDataHeader_Use
 	ld de, Jumptable_KeyItem_UseQuit
