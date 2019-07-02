@@ -442,7 +442,7 @@ GetKeyItemAttr: ; d460
 	ld [wItemAttributeParamBuffer], a
 
 	ld a, [wCurKeyItem]
-	;dec a
+	dec a
 	ld c, a
 	ld a, NUM_KEYITEMATTRS
 	rst AddNTimes
