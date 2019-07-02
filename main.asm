@@ -490,45 +490,28 @@ GetQuantityInBag:
 	pop af
 	ret
 
-PlaceMenuItemName:
-; places a star near the name if registered
-	push hl
-	push de
-	dec de
-	dec de
-	ld a, " "
-	ld [de], a
-	ld a, [wMenuSelection]
-	push bc
-	push de
+;stuff for registered items I might need later
 	and a
 	jr z, .not_registered
-	ld d, 1
 	ld b, a
 	ld hl, wRegisteredItems
 	ld a, [hli]
 	cp b
 	ld c, "▲"
 	jr z, .registered
-	rlc d
 	ld a, [hli]
 	cp b
 	ld c, "◀"
 	jr z, .registered
-	rlc d
 	ld a, [hli]
 	cp b
 	ld c, "▶"
 	jr z, .registered
-	rlc d
 	ld a, [hli]
 	cp b
 	ld c, "▼"
 	jr nz, .not_registered
 .registered
-	ld a, [wRegisteredItemFlags]
-	and d
-	jr nz, .not_registered
 	push bc
 	farcall CheckRegisteredItem
 	pop bc
@@ -541,8 +524,16 @@ PlaceMenuItemName:
 	ld a, c
 	ld [de], a
 .not_registered
-	pop de
-	pop bc
+
+PlaceMenuItemName:
+; places a star near the name if registered
+	push hl
+	push de
+	dec de
+	dec de
+	ld a, " "
+	ld [de], a
+	ld a, [wMenuSelection]
 	pop de
 	pop hl
 PlaceMartItemName:
