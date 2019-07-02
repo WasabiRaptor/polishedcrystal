@@ -228,45 +228,128 @@ Pack: ; 10000
 	lb bc, $9, $1 ; Berries, Items
 	call Pack_InterpretJoypad
 	ret c
-	ld hl, .KeyItemsMenuDataHeader1
-	ld de, .KeyItemsJumptable1
+	jp KeyItems_LoadSubmenu
+
+.ItemBallsKey_LoadSubmenu: ; 101c5 (4:41c5)
+	jr nz, PackSortMenu
+	farcall _CheckTossableItem
+	ld a, [wItemAttributeParamBuffer]
+	and a
+	jr nz, .tossable
+	farcall CheckSelectableItem
+	ld a, [wItemAttributeParamBuffer]
+	and a
+	jr nz, .selectable
+	farcall CheckItemMenu
+	ld a, [wItemAttributeParamBuffer]
+	and a
+	jr nz, .usable
+	jr .unusable
+
+.selectable
+	farcall CheckItemMenu
+	ld a, [wItemAttributeParamBuffer]
+	and a
+	jr nz, .selectable_usable
+	jr .selectable_unusable
+
+.tossable
+	farcall CheckSelectableItem
+	ld a, [wItemAttributeParamBuffer]
+	and a
+	jr nz, .tossable_selectable
+	jr .tossable_unselectable
+
+.usable
+	ld hl, MenuDataHeader_UseGiveTossSel
+	ld de, Jumptable_UseGiveTossRegisterQuit
+	jr PackBuildMenu
+
+.selectable_usable
+	ld hl, MenuDataHeader_UseGiveToss
+	ld de, Jumptable_UseGiveTossQuit
+	jr PackBuildMenu
+
+.tossable_selectable
+	ld hl, MenuDataHeader_Use
+	ld de, Jumptable_UseQuit
+	jr PackBuildMenu
+
+.tossable_unselectable
+	ld hl, MenuDataHeader_UseSel
+	ld de, Jumptable_UseRegisterQuit
+	jr PackBuildMenu
+
+.unusable
+	ld hl, MenuDataHeader_GiveTossSel
+	ld de, Jumptable_GiveTossRegisterQuit
+	jr PackBuildMenu
+
+.selectable_unusable
+	ld hl, MenuDataHeader_GiveToss
+	ld de, Jumptable_GiveTossQuit
+
+PackBuildMenu:
 	push de
 	call LoadMenuDataHeader
 	call VerticalMenu
 	call ExitMenu
 	pop hl
 	ret c
+PackMenuJump:
 	ld a, [wMenuCursorY]
 	dec a
 	call Pack_GetJumptablePointer
 	jp hl
 
-; 10124 (4:4124)
-.KeyItemsMenuDataHeader1: ; 0x10124
-	db $40 ; flags
-	db 06, 13 ; start coords
-	db 12, 19 ; end coords
-	dw .KeyItemsMenuData2_1
-	db 1 ; default option
-; 0x1012c
+PackSortMenu:
+	ld hl, Text_SortItemsHow
+	call Pack_PrintTextNoScroll
+	ld hl, wMenuData2_ItemsPointerAddr
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	push hl
+	ld a, [wMenuData2_ScrollingMenuSpacing]
+	push af
+	ld hl, MenuDataHeader_SortItems
+	ld de, Jumptable_SortItems
+	push de
+	call LoadMenuDataHeader
+	call VerticalMenu
+	call ExitMenu
+	jr nc, .no_quit
+	ld a, 3
+	ld [wMenuCursorY], a
+.no_quit
+	pop de
+	pop af
+	ld [wMenuData2_ScrollingMenuSpacing], a
+	pop bc
+	ld hl, wMenuData2_ItemsPointerAddr
+	ld a, c
+	ld [hli], a
+	ld [hl], b
+	ld h, d
+	ld l, e
+	jr PackMenuJump
 
-.KeyItemsMenuData2_1: ; 0x1012c
-	db $c0 ; flags
-	db 3 ; items
-	db "Use@"
-	db "Sel@"
-	db "Quit@"
-; 0x10137
+KeyItems_LoadSubmenu: ; 101c5 (4:41c5)
+	farcall CheckSelectableKeyItem
+	ld a, [wItemAttributeParamBuffer]
+	and a
+	jr nz, .selectable_usable
+.usable
+	ld hl, MenuDataHeader_Use
+	ld de, Jumptable_KeyItem_UseQuit
+	jr PackBuildMenu
 
-.KeyItemsJumptable1: ; 10137
+.selectable_usable
+	ld hl, MenuDataHeader_UseSel
+	ld de, Jumptable_KeyItem_UseRegisterQuit
+	jr PackBuildMenu
 
-	dw .UseKeyItem
-	dw .SelectKeyItem
-	dw QuitItemSubmenu
-
-; 1013b
-
-.UseKeyItem: ; 10311
+UseKeyItem: ; 10311
 	farcall CheckKeyItemMenu
 	ld a, [wItemAttributeParamBuffer]
 	ld hl, .dw
@@ -316,112 +399,6 @@ Pack: ; 10000
 	ld [wJumptableIndex], a
 	ret
 ; 10364 (4:4364)
-.SelectKeyItem
-	ret
-
-.ItemBallsKey_LoadSubmenu: ; 101c5 (4:41c5)
-	jr nz, PackSortMenu
-	farcall _CheckTossableItem
-	ld a, [wItemAttributeParamBuffer]
-	and a
-	jr nz, .tossable
-	farcall CheckSelectableItem
-	ld a, [wItemAttributeParamBuffer]
-	and a
-	jr nz, .selectable
-	farcall CheckItemMenu
-	ld a, [wItemAttributeParamBuffer]
-	and a
-	jr nz, .usable
-	jr .unusable
-
-.selectable
-	farcall CheckItemMenu
-	ld a, [wItemAttributeParamBuffer]
-	and a
-	jr nz, .selectable_usable
-	jr .selectable_unusable
-
-.tossable
-	farcall CheckSelectableItem
-	ld a, [wItemAttributeParamBuffer]
-	and a
-	jr nz, .tossable_selectable
-	jr .tossable_unselectable
-
-.usable
-	ld hl, MenuDataHeader_UsableKeyItem
-	ld de, Jumptable_UseGiveTossRegisterQuit
-	jr PackBuildMenu
-
-.selectable_usable
-	ld hl, MenuDataHeader_UsableItem
-	ld de, Jumptable_UseGiveTossQuit
-	jr PackBuildMenu
-
-.tossable_selectable
-	ld hl, MenuDataHeader_UnusableItem
-	ld de, Jumptable_UseQuit
-	jr PackBuildMenu
-
-.tossable_unselectable
-	ld hl, MenuDataHeader_UnusableKeyItem
-	ld de, Jumptable_UseRegisterQuit
-	jr PackBuildMenu
-
-.unusable
-	ld hl, MenuDataHeader_HoldableKeyItem
-	ld de, Jumptable_GiveTossRegisterQuit
-	jr PackBuildMenu
-
-.selectable_unusable
-	ld hl, MenuDataHeader_HoldableItem
-	ld de, Jumptable_GiveTossQuit
-
-PackBuildMenu:
-	push de
-	call LoadMenuDataHeader
-	call VerticalMenu
-	call ExitMenu
-	pop hl
-	ret c
-PackMenuJump:
-	ld a, [wMenuCursorY]
-	dec a
-	call Pack_GetJumptablePointer
-	jp hl
-
-PackSortMenu:
-	ld hl, Text_SortItemsHow
-	call Pack_PrintTextNoScroll
-	ld hl, wMenuData2_ItemsPointerAddr
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	push hl
-	ld a, [wMenuData2_ScrollingMenuSpacing]
-	push af
-	ld hl, MenuDataHeader_SortItems
-	ld de, Jumptable_SortItems
-	push de
-	call LoadMenuDataHeader
-	call VerticalMenu
-	call ExitMenu
-	jr nc, .no_quit
-	ld a, 3
-	ld [wMenuCursorY], a
-.no_quit
-	pop de
-	pop af
-	ld [wMenuData2_ScrollingMenuSpacing], a
-	pop bc
-	ld hl, wMenuData2_ItemsPointerAddr
-	ld a, c
-	ld [hli], a
-	ld [hl], b
-	ld h, d
-	ld l, e
-	jr PackMenuJump
 
 MenuDataHeader_SortItems:
 	db $40 ; flags
@@ -446,7 +423,7 @@ SortItemsType:
 SortItemsName:
 	farjp SortItemsInBag
 
-MenuDataHeader_UsableKeyItem: ; 0x10249
+MenuDataHeader_UseGiveTossSel: ; 0x10249
 	db $40 ; flags
 	db 01, 13 ; start coords
 	db 11, 19 ; end coords
@@ -473,7 +450,7 @@ Jumptable_UseGiveTossRegisterQuit: ; 1026a
 	dw QuitItemSubmenu
 ; 10274
 
-MenuDataHeader_UsableItem: ; 0x10274
+MenuDataHeader_UseGiveToss: ; 0x10274
 	db $40 ; flags
 	db 03, 13 ; start coords
 	db 11, 19 ; end coords
@@ -498,7 +475,7 @@ Jumptable_UseGiveTossQuit: ; 10291
 	dw QuitItemSubmenu
 ; 10299
 
-MenuDataHeader_UnusableItem: ; 0x10299
+MenuDataHeader_Use: ; 0x10299
 	db %01000000 ; flags
 	db 07, 13 ; start coords
 	db 11, 19 ; end coords
@@ -519,7 +496,13 @@ Jumptable_UseQuit: ; 102ac
 	dw QuitItemSubmenu
 ; 102b0
 
-MenuDataHeader_UnusableKeyItem: ; 0x102b0
+Jumptable_KeyItem_UseQuit: ; 102ac
+
+	dw UseKeyItem
+	dw QuitItemSubmenu
+; 102b0
+
+MenuDataHeader_UseSel: ; 0x102b0
 	db %01000000 ; flags
 	db 05, 13 ; start coords
 	db 11, 19 ; end coords
@@ -541,8 +524,14 @@ Jumptable_UseRegisterQuit: ; 102c7
 	dw RegisterItem
 	dw QuitItemSubmenu
 ; 102cd
+Jumptable_KeyItem_UseRegisterQuit: ; 102c7
 
-MenuDataHeader_HoldableKeyItem: ; 0x102cd
+	dw UseKeyItem
+	dw RegisterItem
+	dw QuitItemSubmenu
+; 102cd
+
+MenuDataHeader_GiveTossSel: ; 0x102cd
 	db $40 ; flags
 	db 03, 13 ; start coords
 	db 11, 19 ; end coords
@@ -567,7 +556,7 @@ Jumptable_GiveTossRegisterQuit: ; 102ea
 	dw QuitItemSubmenu
 ; 102f2
 
-MenuDataHeader_HoldableItem: ; 0x102f2
+MenuDataHeader_GiveToss: ; 0x102f2
 	db $40 ; flags
 	db 05, 13 ; start coords
 	db 11, 19 ; end coords

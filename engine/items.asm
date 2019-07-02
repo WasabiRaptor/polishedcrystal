@@ -395,13 +395,6 @@ CheckItemParam:
 	ld [wItemAttributeParamBuffer], a
 	ret
 
-CheckKeyItemParam:
-; Return the param for CurItem in wItemAttributeParamBuffer.
-	ld a, KEYITEMATTR_PARAM
-	call GetKeyItemAttr
-	ld [wItemAttributeParamBuffer], a
-	ret
-
 ItemAttr_ReturnCarry: ; d47f
 	ld a, 1
 	ld [wItemAttributeParamBuffer], a
@@ -449,7 +442,7 @@ GetKeyItemAttr: ; d460
 	ld [wItemAttributeParamBuffer], a
 
 	ld a, [wCurKeyItem]
-	dec a
+	;dec a
 	ld c, a
 	ld a, NUM_KEYITEMATTRS
 	rst AddNTimes
