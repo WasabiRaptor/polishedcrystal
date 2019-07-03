@@ -7,7 +7,7 @@
     const REGION_UNOVA
     const REGION_KALOS
     const REGION_ALOLA
-    const REGION_GALAR
+    const REGION_GALAR ;ironic
 
 ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... RIGHT!?
 
@@ -76,6 +76,7 @@ ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... R
 	nat_dexmon POLIWAG    ; 3c
 	nat_dexmon POLIWHIRL  ; 3d
 	nat_dexmon POLIWRATH  ; 3e
+	nat_dexmon POLITOED   ; ba
 	nat_dexmon ABRA       ; 3f
 	nat_dexmon KADABRA    ; 40
 	nat_dexmon ALAKAZAM   ; 41
@@ -94,6 +95,7 @@ ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... R
 	nat_dexmon RAPIDASH   ; 4e
 	nat_dexmon SLOWPOKE   ; 4f
 	nat_dexmon SLOWBRO    ; 50
+	nat_dexmon SLOWKING   ; c7
 	nat_dexmon MAGNEMITE  ; 51
 	nat_dexmon MAGNETON   ; 52
     nat_dexmon MAGNEZONE
@@ -110,6 +112,7 @@ ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... R
 	nat_dexmon HAUNTER    ; 5d
 	nat_dexmon GENGAR     ; 5e
 	nat_dexmon ONIX       ; 5f
+	nat_dexmon STEELIX    ; d0
 	nat_dexmon DROWZEE    ; 60
 	nat_dexmon HYPNO      ; 61
 	nat_dexmon KRABBY     ; 62
@@ -146,6 +149,7 @@ ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... R
     nat_dexmon MIME_JR
 	nat_dexmon MR__MIME   ; 7a
 	nat_dexmon SCYTHER    ; 7b
+	nat_dexmon SCIZOR     ; d4
 	nat_dexmon SMOOCHUM   ; ee
 	nat_dexmon JYNX       ; 7c
 	nat_dexmon ELEKID     ; ef
@@ -225,11 +229,11 @@ NUM_KANTO_MONS EQU const_value +-1
 	nat_dexmon AZUMARILL  ; b8
     nat_dexmon BONSLY
 	nat_dexmon SUDOWOODO  ; b9
-	nat_dexmon POLITOED   ; ba
 	nat_dexmon HOPPIP     ; bb
 	nat_dexmon SKIPLOOM   ; bc
 	nat_dexmon JUMPLUFF   ; bd
 	nat_dexmon AIPOM      ; be
+    nat_dexmon AMBIPOM
 	nat_dexmon SUNKERN    ; bf
 	nat_dexmon SUNFLORA   ; c0
 	nat_dexmon YANMA      ; c1
@@ -238,7 +242,6 @@ NUM_KANTO_MONS EQU const_value +-1
 	nat_dexmon QUAGSIRE   ; c3
 	nat_dexmon MURKROW    ; c6
     nat_dexmon HONCHCROW
-	nat_dexmon SLOWKING   ; c7
 	nat_dexmon MISDREAVUS ; c8
     nat_dexmon MISMAGIUS
 	nat_dexmon UNOWN      ; c9
@@ -249,11 +252,9 @@ NUM_KANTO_MONS EQU const_value +-1
 	nat_dexmon DUNSPARCE  ; ce
 	nat_dexmon GLIGAR     ; cf
     nat_dexmon GLISCOR
-	nat_dexmon STEELIX    ; d0
 	nat_dexmon SNUBBULL   ; d1
 	nat_dexmon GRANBULL   ; d2
 	nat_dexmon QWILFISH   ; d3
-	nat_dexmon SCIZOR     ; d4
 	nat_dexmon SHUCKLE    ; d5
 	nat_dexmon HERACROSS  ; d6
 	nat_dexmon SNEASEL    ; d7
@@ -477,7 +478,6 @@ NUM_HOENN_MONS EQU const_value +-1
     nat_dexmon CHERRIM
     nat_dexmon SHELLOS
     nat_dexmon GASTRODON
-    nat_dexmon AMBIPOM
     nat_dexmon DRIFLOON
     nat_dexmon DRIFBLIM
     nat_dexmon BUNEARY
