@@ -9,6 +9,8 @@
     const REGION_ALOLA
     const REGION_GALAR
 
+ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... RIGHT!?
+
 ;national dex constants if that ever becomes a thing
     nat_dexmon_group 1, REGION_KANTO
 	nat_dexmon BULBASAUR  ; 01
@@ -40,10 +42,7 @@
 	nat_dexmon RAICHU     ; 1a
 	nat_dexmon SANDSHREW  ; 1b
 	nat_dexmon SANDSLASH  ; 1c
-	nat_dexmon NIDORAN_F  ; 1d
-	nat_dexmon NIDORINA   ; 1e
-	nat_dexmon NIDOQUEEN  ; 1f
-	nat_dexmon NIDORAN_M  ; 20
+	nat_dexmon NIDORAN
 	nat_dexmon NIDORINO   ; 21
 	nat_dexmon NIDOKING   ; 22
 	nat_dexmon CLEFFA     ; ad
@@ -188,7 +187,8 @@
 	nat_dexmon DRAGONITE  ; 95
 	nat_dexmon MEWTWO     ; 96
 	nat_dexmon MEW        ; 97
-;baby and evolutions to kanto mons from later gens are included in the gen of their basic form's appearance
+NUM_KANTO_MONS EQU const_value +-1
+    nat_dexmon_variant NIDORAN, MALE
 
 ;johto mons
     nat_dexmon_group 1, REGION_JOHTO
@@ -289,6 +289,7 @@
 	nat_dexmon LUGIA      ; f9
 	nat_dexmon HO_OH      ; fa
 	nat_dexmon CELEBI     ; fb
+NUM_JOHTO_MONS EQU const_value +-1
 
 
 
@@ -436,6 +437,7 @@
     nat_dexmon RAYQUAZA
     nat_dexmon JIRACHI
     nat_dexmon DEOXYS
+NUM_HOENN_MONS EQU const_value +-1
 
 
 ; gen 4 sinnoh mons
@@ -519,6 +521,9 @@
     nat_dexmon DARKRAI
     nat_dexmon SHAYMIN
     nat_dexmon ARCEUS
+NUM_SINNOH_MONS EQU const_value +-1
+
+    nat_dexmon_variant SHAYMIN, LAND
 
 ; gen 5 unova mons
     nat_dexmon_group 1, REGION_UNOVA
@@ -677,6 +682,7 @@
     nat_dexmon KELDEO
     nat_dexmon MELLOETTA
     nat_dexmon GENESECT
+NUM_UNOVA_MONS EQU const_value +-1
 
 ;Ggen 6 pokemon
     nat_dexmon_group 1, REGION_KALOS
@@ -751,6 +757,10 @@
     nat_dexmon DIANCIE
     nat_dexmon HOOPA 
     nat_dexmon VOLCANION
+NUM_KALOS_MONS EQU const_value +-1
+
+    nat_dexmon_variant MEOWSTIC, MALE
+    nat_dexmon_variant AEGISLASH, SHIELD
 
 ;Gen 7 mons
     nat_dexmon_group 1, REGION_ALOLA
@@ -842,9 +852,51 @@
     nat_dexmon ZERAORA
     nat_dexmon MELTAN
     nat_dexmon MELMETAL
+NUM_ALOLA_MONS EQU const_value +-1
 
    
 
     nat_dexmon_group 1, REGION_GALAR
+NUM_GALAR_MONS EQU const_value +-1
 
-    nat_dexmon_group 1, 20
+
+;first variant form
+    nat_dexmon_group 1, ALTERNATE_FORM
+    nat_dexmon_variant NIDORAN, FEMALE
+    nat_dexmon_variant NIDORINO, FEMALE
+    nat_dexmon_variant NIDOKING, FEMALE
+
+    nat_dexmon_variant SANDSHREW, ALOLA
+    nat_dexmon_variant SANDSLASH, ALOLA
+    nat_dexmon_variant VULPIX, ALOLA
+    nat_dexmon_variant NINETALES, ALOLA
+    nat_dexmon_variant MEOWTH, ALOLA
+    nat_dexmon_variant PERSIAN, ALOLA
+    nat_dexmon_variant GRIMER, ALOLA
+    nat_dexmon_variant MUK, ALOLA
+
+    nat_dexmon_variant MEOWSTIC, FEMALE
+    nat_dexmon_variant GIRAFARIG, BETA
+
+    nat_dexmon_variant RAIKOU, BETA
+    nat_dexmon_variant ENTEI, BETA
+    nat_dexmon_variant SUICUNE, BETA
+
+    nat_dexmon_variant AEGISLASH, BLADE
+
+    nat_dexmon_variant SHAYMIN, SKY
+; second varaint form
+    nat_dexmon_group 1, ALTERNATE_FORM+1
+    
+
+; other stuff
+NIDORINA EQU NIDORINO_FEMALE
+NIDOQUEEN EQU NIDOKING_FEMALE
+
+;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
+
+SNOWSHREW EQU SANDSHREW_ALOLA
+SNOWSLASH EQU SANDSLASH_ALOLA
+
+SNOWSHREW_GROUP EQU SANDSHREW_ALOLA_GROUP
+SNOWSLASH_GROUP EQU SANDSLASH_ALOLA_GROUP
