@@ -227,8 +227,8 @@ SECTION "Boxes 13-4", SRAM
 
 SECTION "Total Pokemon Encountered", SRAM
 
-sTotalEncounteredPokemonSpecies:: ds NUM_POKEMON * 2
-sTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
+sTotalEncounteredPokemonSpecies:: ds NUM_KANTO_POKEMON * 2
+sTotalDefeatedPokemonSpecies:: ds NUM_KANTO_POKEMON * 2
 sTotalEncounters:: ds 2
 sTotalDefeated:: ds 2
 sTotalEncountersEnd::

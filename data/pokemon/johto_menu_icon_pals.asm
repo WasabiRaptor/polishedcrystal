@@ -16,7 +16,6 @@ JohtoMenuMonIconColors::
 	iconpal RED, PINK ; LEDIAN
 	iconpal GREEN, PURPLE ; SPINARAK
 	iconpal PURPLE, BLUE ; ARIADOS
-	iconpal PURPLE, RED ; CROBAT
 	iconpal BLUE, TEAL ; CHINCHOU
 	iconpal BLUE, TEAL ; LANTURN
 	iconpal RED, BLUE ; TOGEPI
@@ -48,6 +47,7 @@ JohtoMenuMonIconColors::
 	iconpal PURPLE, BROWN ; MISDREAVUS
 	iconpal PURPLE, BROWN ; MISMAGIUS
 	iconpal GRAY, BLUE ; UNOWN
+	iconpal BLUE, PURPLE ; WYNAUT
 	iconpal BLUE, PURPLE ; WOBBUFFET
 	iconpal BROWN, BLUE ; GIRAFARIG
 	iconpal GRAY, RED ; PINECO

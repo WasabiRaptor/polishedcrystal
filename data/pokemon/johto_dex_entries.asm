@@ -16,7 +16,6 @@ LedybaDexEntry::
 LedianDexEntry::
 SpinarakDexEntry::
 AriadosDexEntry::
-CrobatDexEntry::
 ChinchouDexEntry::
 LanturnDexEntry::
 TogepiDexEntry::
@@ -48,6 +47,7 @@ HonchcrowDexEntry::
 MisdreavusDexEntry::
 MismagiusDexEntry::
 UnownDexEntry::
+WynautDexEntry::
 WobbuffetDexEntry::
 GirafarigDexEntry::
 PinecoDexEntry::

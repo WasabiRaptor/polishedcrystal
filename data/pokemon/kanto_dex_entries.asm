@@ -41,6 +41,7 @@ JigglypuffDexEntry::
 WigglytuffDexEntry::
 ZubatDexEntry::
 GolbatDexEntry::
+CrobatDexEntry::
 OddishDexEntry::
 GloomDexEntry::
 VileplumeDexEntry::

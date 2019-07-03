@@ -604,10 +604,10 @@ Continue_DisplayPokedexNumCaught: ; 5f6b
 	ret z
 	push hl
 	ld hl, wPokedexCaught
-IF NUM_POKEMON % 8
-	ld b, NUM_POKEMON / 8 + 1
+IF NUM_KANTO_POKEMON % 8
+	ld b, NUM_KANTO_POKEMON / 8 + 1
 ELSE
-	ld b, NUM_POKEMON / 8
+	ld b, NUM_KANTO_POKEMON / 8
 ENDC
 	call CountSetBits
 	pop hl

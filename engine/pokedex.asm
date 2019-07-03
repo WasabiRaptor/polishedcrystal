@@ -125,7 +125,7 @@ Pokedex_InitCursorPosition: ; 400b4
 	ld a, [wLastDexEntry]
 	and a
 	ret z
-	cp NUM_POKEMON + 1
+	cp NUM_KANTO_POKEMON + 1
 	ret nc
 
 	ld b, a
@@ -1863,7 +1863,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 .OldMode: ; 40c08 (10:4c08)
 	ld hl, wPokedexDataStart
 	ld a, $1
-	ld c, NUM_POKEMON
+	ld c, NUM_KANTO_POKEMON
 .loopold
 	ld [hli], a
 	inc a
@@ -1872,8 +1872,8 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	; fallthrough
 
 .FindLastSeen: ; 40c18 (10:4c18)
-	ld hl, wPokedexDataStart + NUM_POKEMON - 1
-	ld d, NUM_POKEMON
+	ld hl, wPokedexDataStart + NUM_KANTO_POKEMON - 1
+	ld d, NUM_KANTO_POKEMON
 	ld e, d
 .loopfindend
 	ld a, [hld]
@@ -1893,7 +1893,7 @@ Pokedex_ABCMode: ; 40c30
 	ld [wDexListingEnd], a
 	ld hl, wPokedexDataStart
 	ld de, AlphabeticalPokedexOrder
-	ld c, NUM_POKEMON
+	ld c, NUM_KANTO_POKEMON
 .loop1abc
 	push bc
 	ld a, [de]
@@ -1914,7 +1914,7 @@ Pokedex_ABCMode: ; 40c30
 	ld a, [wDexListingEnd]
 	ld c, 0
 .loop2abc
-	cp NUM_POKEMON
+	cp NUM_KANTO_POKEMON
 	ret z
 	ld [hl], c
 	inc hl
@@ -2086,7 +2086,7 @@ Pokedex_SearchForMons: ; 41086
 	ld [wDexConvertedMonType], a
 	ld hl, wPokedexDataStart
 	ld de, wPokedexDataStart
-	ld c, NUM_POKEMON
+	ld c, NUM_KANTO_POKEMON
 	xor a
 	ld [wDexSearchResultCount], a
 .loop
@@ -2132,7 +2132,7 @@ Pokedex_SearchForMons: ; 41086
 	ld c, 0
 
 .zero_remaining_mons
-	cp NUM_POKEMON
+	cp NUM_KANTO_POKEMON
 	ret z
 	ld [hl], c
 	inc hl

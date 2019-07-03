@@ -171,7 +171,7 @@ _GetVarAction:: ; 80648 (20:4648)
 	ld b, wEndPokedexCaught - wPokedexCaught
 	call CountSetBits
 	pop bc
-	cp NUM_POKEMON
+	cp NUM_KANTO_POKEMON
 	jr c, .nostar3
 	inc b
 .nostar3

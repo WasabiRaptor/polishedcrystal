@@ -1,5 +1,5 @@
 
-    const def 1
+    const_def 1
     const REGION_KANTO
     const REGION_JOHTO
     const REGION_HOENN
@@ -10,6 +10,8 @@
     const REGION_GALAR ;ironic
 
 ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... RIGHT!?
+
+EGG EQU $fe
 
 ;national dex constants if that ever becomes a thing
     nat_dexmon_group 1, REGION_KANTO
@@ -37,71 +39,72 @@ ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... R
 	nat_dexmon FEAROW     ; 16
 	nat_dexmon EKANS      ; 17
 	nat_dexmon ARBOK      ; 18
-	nat_dexmon PICHU      ; ac
-	nat_dexmon PIKACHU    ; 19
-	nat_dexmon RAICHU     ; 1a
-	nat_dexmon SANDSHREW  ; 1b
-	nat_dexmon SANDSLASH  ; 1c
-	nat_dexmon NIDORAN
-	nat_dexmon NIDORINO   ; 21
-	nat_dexmon NIDOKING   ; 22
-	nat_dexmon CLEFFA     ; ad
-	nat_dexmon CLEFAIRY   ; 23
-	nat_dexmon CLEFABLE   ; 24
-	nat_dexmon VULPIX     ; 25
-	nat_dexmon NINETALES  ; 26
-	nat_dexmon IGGLYBUFF  ; ae
+	nat_dexmon PICHU      ; 19
+	nat_dexmon PIKACHU    ; 1a
+	nat_dexmon RAICHU     ; 1b
+	nat_dexmon SANDSHREW  ; 1c
+	nat_dexmon SANDSLASH  ; 1d
+	nat_dexmon NIDORAN    ; 1e
+	nat_dexmon NIDORINO   ; 1f
+	nat_dexmon NIDOKING   ; 20
+	nat_dexmon CLEFFA     ; 21
+	nat_dexmon CLEFAIRY   ; 22
+	nat_dexmon CLEFABLE   ; 23
+	nat_dexmon VULPIX     ; 24
+	nat_dexmon NINETALES  ; 25
+	nat_dexmon IGGLYBUFF  ; 26
 	nat_dexmon JIGGLYPUFF ; 27
 	nat_dexmon WIGGLYTUFF ; 28
 	nat_dexmon ZUBAT      ; 29
 	nat_dexmon GOLBAT     ; 2a
-	nat_dexmon ODDISH     ; 2b
-	nat_dexmon GLOOM      ; 2c
-	nat_dexmon VILEPLUME  ; 2d
-	nat_dexmon BELLOSSOM  ; b6
-	nat_dexmon PARAS      ; 2e
-	nat_dexmon PARASECT   ; 2f
-	nat_dexmon VENONAT    ; 30
-	nat_dexmon VENOMOTH   ; 31
-	nat_dexmon DIGLETT    ; 32
-	nat_dexmon DUGTRIO    ; 33
-	nat_dexmon MEOWTH     ; 34
-	nat_dexmon PERSIAN    ; 35
-	nat_dexmon PSYDUCK    ; 36
-	nat_dexmon GOLDUCK    ; 37
-	nat_dexmon MANKEY     ; 38
-	nat_dexmon PRIMEAPE   ; 39
-	nat_dexmon GROWLITHE  ; 3a
-	nat_dexmon ARCANINE   ; 3b
-	nat_dexmon POLIWAG    ; 3c
-	nat_dexmon POLIWHIRL  ; 3d
-	nat_dexmon POLIWRATH  ; 3e
-	nat_dexmon POLITOED   ; ba
-	nat_dexmon ABRA       ; 3f
-	nat_dexmon KADABRA    ; 40
-	nat_dexmon ALAKAZAM   ; 41
-	nat_dexmon MACHOP     ; 42
-	nat_dexmon MACHOKE    ; 43
-	nat_dexmon MACHAMP    ; 44
-	nat_dexmon BELLSPROUT ; 45
-	nat_dexmon WEEPINBELL ; 46
-	nat_dexmon VICTREEBEL ; 47
-	nat_dexmon TENTACOOL  ; 48
-	nat_dexmon TENTACRUEL ; 49
-	nat_dexmon GEODUDE    ; 4a
-	nat_dexmon GRAVELER   ; 4b
-	nat_dexmon GOLEM      ; 4c
-	nat_dexmon PONYTA     ; 4d
-	nat_dexmon RAPIDASH   ; 4e
-	nat_dexmon SLOWPOKE   ; 4f
-	nat_dexmon SLOWBRO    ; 50
-	nat_dexmon SLOWKING   ; c7
-	nat_dexmon MAGNEMITE  ; 51
-	nat_dexmon MAGNETON   ; 52
-    nat_dexmon MAGNEZONE
-	nat_dexmon FARFETCH_D ; 53
-	nat_dexmon DODUO      ; 54
-	nat_dexmon DODRIO     ; 55
+	nat_dexmon CROBAT     ; 2b
+	nat_dexmon ODDISH     ; 2c
+	nat_dexmon GLOOM      ; 2d
+	nat_dexmon VILEPLUME  ; 2e
+	nat_dexmon BELLOSSOM  ; 2f
+	nat_dexmon PARAS      ; 30
+	nat_dexmon PARASECT   ; 31
+	nat_dexmon VENONAT    ; 32
+	nat_dexmon VENOMOTH   ; 33
+	nat_dexmon DIGLETT    ; 34
+	nat_dexmon DUGTRIO    ; 35
+	nat_dexmon MEOWTH     ; 36
+	nat_dexmon PERSIAN    ; 37
+	nat_dexmon PSYDUCK    ; 38
+	nat_dexmon GOLDUCK    ; 39
+	nat_dexmon MANKEY     ; 3a
+	nat_dexmon PRIMEAPE   ; 3b
+	nat_dexmon GROWLITHE  ; 3c
+	nat_dexmon ARCANINE   ; 3d
+	nat_dexmon POLIWAG    ; 3e
+	nat_dexmon POLIWHIRL  ; 3f
+	nat_dexmon POLIWRATH  ; 40
+	nat_dexmon POLITOED   ; 41
+	nat_dexmon ABRA       ; 42
+	nat_dexmon KADABRA    ; 43
+	nat_dexmon ALAKAZAM   ; 44
+	nat_dexmon MACHOP     ; 45
+	nat_dexmon MACHOKE    ; 46
+	nat_dexmon MACHAMP    ; 47
+	nat_dexmon BELLSPROUT ; 48
+	nat_dexmon WEEPINBELL ; 49
+	nat_dexmon VICTREEBEL ; 4a
+	nat_dexmon TENTACOOL  ; 4b
+	nat_dexmon TENTACRUEL ; 4c
+	nat_dexmon GEODUDE    ; 4d
+	nat_dexmon GRAVELER   ; 4e
+	nat_dexmon GOLEM      ; 4f
+	nat_dexmon PONYTA     ; 50
+	nat_dexmon RAPIDASH   ; 51
+	nat_dexmon SLOWPOKE   ; 52
+	nat_dexmon SLOWBRO    ; 53
+	nat_dexmon SLOWKING   ; 54
+	nat_dexmon MAGNEMITE  ; 55
+	nat_dexmon MAGNETON   ; 56
+    nat_dexmon MAGNEZONE  ; 57
+	nat_dexmon FARFETCH_D ; 58
+	nat_dexmon DODUO      ; 59
+	nat_dexmon DODRIO     ; 5a
 	nat_dexmon SEEL       ; 56
 	nat_dexmon DEWGONG    ; 57
 	nat_dexmon GRIMER     ; 58
@@ -191,8 +194,11 @@ ALTERNATE_FORM EQU 10 ; it'll be several years before we hit a gen 10 right... R
 	nat_dexmon DRAGONITE  ; 95
 	nat_dexmon MEWTWO     ; 96
 	nat_dexmon MEW        ; 97
-NUM_KANTO_MONS EQU const_value +-1
+NUM_KANTO_POKEMON EQU const_value +-1
     nat_dexmon_variant NIDORAN, MALE
+
+    const_def 222
+    nat_dexmon UNOWN_A_PLACEHOLDER ;read the note in Unown's proper slot below
 
 ;johto mons
     nat_dexmon_group 1, REGION_JOHTO
@@ -213,7 +219,6 @@ NUM_KANTO_MONS EQU const_value +-1
 	nat_dexmon LEDIAN     ; a6
 	nat_dexmon SPINARAK   ; a7
 	nat_dexmon ARIADOS    ; a8
-	nat_dexmon CROBAT     ; a9
 	nat_dexmon CHINCHOU   ; aa
 	nat_dexmon LANTURN    ; ab
 	nat_dexmon TOGEPI     ; af
@@ -244,7 +249,10 @@ NUM_KANTO_MONS EQU const_value +-1
     nat_dexmon HONCHCROW
 	nat_dexmon MISDREAVUS ; c8
     nat_dexmon MISMAGIUS
-	nat_dexmon UNOWN      ; c9
+	;nat_dexmon UNOWN Would go here but it has an obsecne amount of forms, 
+    ;so we put it after all the others to not take any risks, 
+    ;and since we can arbitrarily place pokemon in the dex order, we can put it here there
+    nat_dexmon WYNAUT
 	nat_dexmon WOBBUFFET  ; ca
 	nat_dexmon GIRAFARIG  ; cb
 	nat_dexmon PINECO     ; cc
@@ -290,10 +298,10 @@ NUM_KANTO_MONS EQU const_value +-1
 	nat_dexmon LUGIA      ; f9
 	nat_dexmon HO_OH      ; fa
 	nat_dexmon CELEBI     ; fb
-NUM_JOHTO_MONS EQU const_value +-1
+NUM_JOHTO_POKEMON EQU const_value +-1
 
-
-
+    const_def 222
+    nat_dexmon UNOWN
 
 ;generation 3 hoenn
     nat_dexmon_group 1, REGION_HOENN
@@ -410,7 +418,6 @@ NUM_JOHTO_MONS EQU const_value +-1
     nat_dexmon CHINGLING
     nat_dexmon CHIMECHO
     nat_dexmon ABSOL
-    nat_dexmon WYNAUT
     nat_dexmon SNORUNT
     nat_dexmon GlALIE
     nat_dexmon FROSSLASS
@@ -438,7 +445,10 @@ NUM_JOHTO_MONS EQU const_value +-1
     nat_dexmon RAYQUAZA
     nat_dexmon JIRACHI
     nat_dexmon DEOXYS
-NUM_HOENN_MONS EQU const_value +-1
+NUM_HOENN_POKEMON EQU const_value +-1
+
+    const_def 222
+    nat_dexmon UNOWN_C_PLACEHOLDER
 
 
 ; gen 4 sinnoh mons
@@ -521,9 +531,11 @@ NUM_HOENN_MONS EQU const_value +-1
     nat_dexmon DARKRAI
     nat_dexmon SHAYMIN
     nat_dexmon ARCEUS
-NUM_SINNOH_MONS EQU const_value +-1
-
+NUM_SINNOH_POKEMON EQU const_value +-1
     nat_dexmon_variant SHAYMIN, LAND
+
+    const_def 222
+    nat_dexmon UNOWN_D_PLACEHOLDER
 
 ; gen 5 unova mons
     nat_dexmon_group 1, REGION_UNOVA
@@ -682,7 +694,10 @@ NUM_SINNOH_MONS EQU const_value +-1
     nat_dexmon KELDEO
     nat_dexmon MELLOETTA
     nat_dexmon GENESECT
-NUM_UNOVA_MONS EQU const_value +-1
+NUM_UNOVA_POKEMON EQU const_value +-1
+
+    const_def 222
+    nat_dexmon UNOWN_E_PLACEHOLDER
 
 ;Ggen 6 pokemon
     nat_dexmon_group 1, REGION_KALOS
@@ -757,10 +772,12 @@ NUM_UNOVA_MONS EQU const_value +-1
     nat_dexmon DIANCIE
     nat_dexmon HOOPA 
     nat_dexmon VOLCANION
-NUM_KALOS_MONS EQU const_value +-1
-
+NUM_KALOS_POKEMON EQU const_value +-1
     nat_dexmon_variant MEOWSTIC, MALE
     nat_dexmon_variant AEGISLASH, SHIELD
+
+    const_def 222
+    nat_dexmon UNOWN_F_PLACEHOLDER
 
 ;Gen 7 mons
     nat_dexmon_group 1, REGION_ALOLA
@@ -852,13 +869,26 @@ NUM_KALOS_MONS EQU const_value +-1
     nat_dexmon ZERAORA
     nat_dexmon MELTAN
     nat_dexmon MELMETAL
-NUM_ALOLA_MONS EQU const_value +-1
+NUM_ALOLA_POKEMON EQU const_value +-1
 
-   
+    const_def 222
+    nat_dexmon UNOWN_G_PLACEHOLDER
+  
 
     nat_dexmon_group 1, REGION_GALAR
-NUM_GALAR_MONS EQU const_value +-1
+NUM_GALAR_POKEMON EQU const_value +-1
 
+    const_def 222
+    nat_dexmon UNOWN_H_PLACEHOLDER
+
+;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
+
+SNOWSHREW EQU SANDSHREW
+SNOWSLASH EQU SANDSLASH
+
+; other stuff
+NIDORINA EQU NIDORINO
+NIDOQUEEN EQU NIDOKING
 
 ;first variant form
     nat_dexmon_group 1, ALTERNATE_FORM
@@ -888,15 +918,35 @@ NUM_GALAR_MONS EQU const_value +-1
 ; second varaint form
     nat_dexmon_group 1, ALTERNATE_FORM+1
     
+; hoo boy Unown you've got a lot of forms
+	const_def 1
+	const UNOWN_A ;  1
+	const UNOWN_B ;  2
+	const UNOWN_C ;  3
+	const UNOWN_D ;  4
+	const UNOWN_E ;  5
+	const UNOWN_F ;  6
+	const UNOWN_G ;  7
+	const UNOWN_H ;  8
+	const UNOWN_I ;  9
+	const UNOWN_J ; 10
+	const UNOWN_K ; 11
+	const UNOWN_L ; 12
+	const UNOWN_M ; 13
+	const UNOWN_N ; 14
+	const UNOWN_O ; 15
+	const UNOWN_P ; 16
+	const UNOWN_Q ; 17
+	const UNOWN_R ; 18
+	const UNOWN_S ; 19
+	const UNOWN_T ; 20
+	const UNOWN_U ; 21
+	const UNOWN_V ; 22
+	const UNOWN_W ; 23
+	const UNOWN_X ; 24
+	const UNOWN_Y ; 25
+	const UNOWN_Z ; 26
+	const UNOWN_EXCLAMATION_MARK
+	const UNOWN_QUESTION_MARK
+NUM_UNOWN EQU const_value + -1 ; 26
 
-; other stuff
-NIDORINA EQU NIDORINO_FEMALE
-NIDOQUEEN EQU NIDOKING_FEMALE
-
-;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
-
-SNOWSHREW EQU SANDSHREW_ALOLA
-SNOWSLASH EQU SANDSLASH_ALOLA
-
-SNOWSHREW_GROUP EQU SANDSHREW_ALOLA_GROUP
-SNOWSLASH_GROUP EQU SANDSLASH_ALOLA_GROUP

@@ -41,6 +41,7 @@ KantoDexEntryPointers::
 	add_pokedexentry Wigglytuff
 	add_pokedexentry Zubat
 	add_pokedexentry Golbat
+	add_pokedexentry Crobat
 	add_pokedexentry Oddish
 	add_pokedexentry Gloom
 	add_pokedexentry Vileplume
