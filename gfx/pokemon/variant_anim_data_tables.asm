@@ -24,80 +24,92 @@ VariantSpeciesTable:
     db ZYGARDE
 	db -1
 
+variant_animdata: macro
+    dbbww \1, BANK(\2Animations), \2AnimationPointers, \2AnimationIdlePointers
+endm
+
 VariantAnimPointerTable:
-    dbbww LYCANROC,     BANK(LycanrocAnimations), LycanrocAnimationPointers, LycanrocAnimationIdlePointers
-    dbbww MEOWTH,       BANK(MeowthAnimations), MeowthAnimationPointers, MeowthAnimationIdlePointers
-	dbbww PERSIAN,      BANK(PersianAnimations), PersianAnimationPointers, PersianAnimationIdlePointers
-    dbbww GRIMER,       BANK(GrimerAnimations), GrimerAnimationPointers, GrimerAnimationIdlePointers
-    dbbww MUK,          BANK(MukAnimations), MukAnimationPointers, MukAnimationIdlePointers
-    dbbww ROTOM,        BANK(RotomAnimations), RotomAnimationPointers, RotomAnimationIdlePointers
-    dbbww MEOWSTIC,     BANK(MeowsticAnimations), MeowsticAnimationPointers, MeowsticAnimationIdlePointers
-    dbbww NIDORAN,      BANK(NidoranAnimations), NidoranAnimationPointers, NidoranAnimationIdlePointers
-    dbbww NIDORINO,     BANK(NidorinoAnimations), NidorinoAnimationPointers, NidorinoAnimationIdlePointers
-    dbbww NIDOKING,     BANK(NidokingAnimations), NidokingAnimationPointers, NidokingAnimationIdlePointers
-    dbbww SANDSHREW,    BANK(SandshrewAnimations), SandshrewAnimationPointers, SandshrewAnimationIdlePointers
-    dbbww SANDSLASH,    BANK(SandslashAnimations), SandslashAnimationPointers, SandslashAnimationIdlePointers
-    dbbww SAWSBUCK,     BANK(SawsbuckAnimations), SawsbuckAnimationPointers, SawsbuckAnimationIdlePointers
-    dbbww GIRAFARIG,    BANK(GirafarigAnimations), GirafarigAnimationPointers, GirafarigAnimationIdlePointers
-    dbbww VULPIX,       BANK(VulpixAnimations), VulpixAnimationPointers, VulpixAnimationIdlePointers
-    dbbww NINETALES,    BANK(NinetalesAnimations), NinetalesAnimationPointers, NinetalesAnimationIdlePointers
-    dbbww UNOWN,        BANK(UnownAnimations), UnownAnimationPointers, UnownAnimationIdlePointers
-    dbbww AEGISLASH,    BANK(AegislashAnimations), AegislashAnimationPointers, AegislashAnimationIdlePointers
-    dbbww SUICUNE,      BANK(SuicuneAnimations), SuicuneAnimationPointers, SuicuneAnimationIdlePointers
-    dbbww RAIKOU,       BANK(RaikouAnimations), RaikouAnimationPointers, RaikouAnimationIdlePointers
-    dbbww ENTEI,        BANK(EnteiAnimations), EnteiAnimationPointers, EnteiAnimationIdlePointers
-    dbbww SHAYMIN,      BANK(ShayminAnimations), ShayminAnimationPointers, ShayminAnimationIdlePointers
-    dbbww ZYGARDE,      BANK(ZygardeAnimations), ZygardeAnimationPointers, ZygardeAnimationIdlePointers
+    variant_animdata LYCANROC,  Lycanroc  
+    variant_animdata MEOWTH,    Meowth  
+	variant_animdata PERSIAN,   Persian  
+    variant_animdata GRIMER,    Grimer  
+    variant_animdata MUK,       Muk  
+    variant_animdata ROTOM,     Rotom  
+    variant_animdata MEOWSTIC,  Meowstic  
+    variant_animdata NIDORAN,   Nidoran   
+    variant_animdata NIDORINO,  Nidorino   
+    variant_animdata NIDOKING,  Nidoking   
+    variant_animdata SANDSHREW, Sandshrew   
+    variant_animdata SANDSLASH, Sandslash   
+    variant_animdata SAWSBUCK,  Sawsbuck  
+    variant_animdata GIRAFARIG, Girafarig  
+    variant_animdata VULPIX,    Vulpix  
+    variant_animdata NINETALES, Ninetales  
+    variant_animdata UNOWN,     Unown   
+    variant_animdata AEGISLASH, Aegislash   
+    variant_animdata SUICUNE,   Suicune  
+    variant_animdata RAIKOU,    Raikou  
+    variant_animdata ENTEI,     Entei   
+    variant_animdata SHAYMIN,   Shaymin  
+    variant_animdata ZYGARDE,   Zygarde   
 	dbbww -1,           BANK(PicAnimations), AnimationPointers, AnimationIdlePointers
 
+variant_frames: macro
+    dbbba \1, BANK(\2Frames), \2FramesPointers
+endm
+
 VariantFramesPointerTable:
-	dbbba LYCANROC,     BANK(LycanrocFrames), LycanrocFramesPointers
-    dbbba MEOWTH,       BANK(MeowthFrames), MeowthFramesPointers
-    dbbba PERSIAN,      BANK(PersianFrames), PersianFramesPointers
-    dbbba GRIMER,       BANK(GrimerFrames), GrimerFramesPointers
-    dbbba MUK,          BANK(MukFrames), MukFramesPointers
-    dbbba ROTOM,        BANK(RotomFrames), RotomFramesPointers
-    dbbba MEOWSTIC,     BANK(Meowstic_MFrames), MeowsticFramesPointers
-    dbbba NIDORAN,      BANK(Nidoran_MFrames), NidoranFramesPointers
-    dbbba NIDORINO,     BANK(NidorinoFrames), NidorinoFramesPointers
-    dbbba NIDOKING,     BANK(NidokingFrames), NidokingFramesPointers
-    dbbba SANDSHREW,    BANK(SandshrewFrames), SandshrewFramesPointers
-    dbbba SANDSLASH,    BANK(SandslashFrames), SandslashFramesPointers
-    dbbba SAWSBUCK,     BANK(SawsbuckFrames), SawsbuckFramesPointers
-    dbbba GIRAFARIG,    BANK(GirafarigFrames), GirafarigFramesPointers
-    dbbba VULPIX,       BANK(VulpixFrames), VulpixFramesPointers
-    dbbba NINETALES,    BANK(NinetalesFrames), NinetalesFramesPointers
-    dbbba UNOWN,        BANK(UnownAFrames), UnownFramesPointers
-    dbbba AEGISLASH,    BANK(AegislashFrames), AegislashFramesPointers
-    dbbba SUICUNE,      BANK(SuicuneFrames), SuicuneFramesPointers
-    dbbba RAIKOU,       BANK(RaikouFrames), RaikouFramesPointers
-    dbbba ENTEI,        BANK(EnteiFrames), EnteiFramesPointers
-    dbbba SHAYMIN,      BANK(ShayminFrames), ShayminFramesPointers
-    dbbba ZYGARDE,      BANK(ZygardeFrames), ZygardeFramesPointers
+    variant_frames LYCANROC,  Lycanroc  
+    variant_frames MEOWTH,    Meowth  
+	variant_frames PERSIAN,   Persian  
+    variant_frames GRIMER,    Grimer  
+    variant_frames MUK,       Muk  
+    variant_frames ROTOM,     Rotom  
+    variant_frames MEOWSTIC,  Meowstic  
+    variant_frames NIDORAN,   Nidoran   
+    variant_frames NIDORINO,  Nidorino   
+    variant_frames NIDOKING,  Nidoking   
+    variant_frames SANDSHREW, Sandshrew   
+    variant_frames SANDSLASH, Sandslash   
+    variant_frames SAWSBUCK,  Sawsbuck  
+    variant_frames GIRAFARIG, Girafarig  
+    variant_frames VULPIX,    Vulpix  
+    variant_frames NINETALES, Ninetales  
+    variant_frames UNOWN,     Unown   
+    variant_frames AEGISLASH, Aegislash   
+    variant_frames SUICUNE,   Suicune  
+    variant_frames RAIKOU,    Raikou  
+    variant_frames ENTEI,     Entei   
+    variant_frames SHAYMIN,   Shaymin  
+    variant_frames ZYGARDE,   Zygarde   
 	dbbba -1,           BANK(KantoFrames), FramesPointers
 
+variant_bitmasks: macro
+    dbba \1, \2BitmasksPointers
+endm
+
 VariantBitmasksPointerTable:
-	dbba LYCANROC,      LycanrocBitmasksPointers
-    dbba MEOWTH,        MeowthBitmasksPointers
-    dbba PERSIAN,       PersianBitmasksPointers
-    dbba GRIMER,        GrimerBitmasksPointers
-    dbba MUK,           MukBitmasksPointers
-    dbba ROTOM,         RotomBitmasksPointers
-    dbba MEOWSTIC,      MeowsticBitmasksPointers
-    dbba NIDORAN,       NidoranBitmasksPointers
-    dbba NIDORAN,       NidoranBitmasksPointers
-    dbba NIDORAN,       NidokingBitmasksPointers
-    dbba SANDSHREW,     SandshrewBitmasksPointers
-    dbba SANDSLASH,     SandslashBitmasksPointers
-    dbba SAWSBUCK,      SawsbuckBitmasksPointers
-    dbba GIRAFARIG,     GirafarigBitmasksPointers
-    dbba VULPIX,        VulpixBitmasksPointers
-    dbba NINETALES,     NinetalesBitmasksPointers
-    dbba UNOWN,         UnownBitmasksPointers
-    dbba AEGISLASH,     AegislashBitmasksPointers
-    dbba SUICUNE,       SuicuneBitmasksPointers
-    dbba RAIKOU,        RaikouBitmasksPointers
-    dbba ENTEI,         EnteiBitmasksPointers
-    dbba SHAYMIN,       ShayminBitmasksPointers
-    dbba ZYGARDE,       ZygardeBitmasksPointers
+    variant_bitmasks LYCANROC,  Lycanroc  
+    variant_bitmasks MEOWTH,    Meowth  
+	variant_bitmasks PERSIAN,   Persian  
+    variant_bitmasks GRIMER,    Grimer  
+    variant_bitmasks MUK,       Muk  
+    variant_bitmasks ROTOM,     Rotom  
+    variant_bitmasks MEOWSTIC,  Meowstic  
+    variant_bitmasks NIDORAN,   Nidoran   
+    variant_bitmasks NIDORINO,  Nidorino   
+    variant_bitmasks NIDOKING,  Nidoking   
+    variant_bitmasks SANDSHREW, Sandshrew   
+    variant_bitmasks SANDSLASH, Sandslash   
+    variant_bitmasks SAWSBUCK,  Sawsbuck  
+    variant_bitmasks GIRAFARIG, Girafarig  
+    variant_bitmasks VULPIX,    Vulpix  
+    variant_bitmasks NINETALES, Ninetales  
+    variant_bitmasks UNOWN,     Unown   
+    variant_bitmasks AEGISLASH, Aegislash   
+    variant_bitmasks SUICUNE,   Suicune  
+    variant_bitmasks RAIKOU,    Raikou  
+    variant_bitmasks ENTEI,     Entei   
+    variant_bitmasks SHAYMIN,   Shaymin  
+    variant_bitmasks ZYGARDE,   Zygarde   
 	dbba -1,            BitmasksPointers

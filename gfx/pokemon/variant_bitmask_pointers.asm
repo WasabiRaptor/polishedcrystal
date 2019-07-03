@@ -1,3 +1,4 @@
+
 LycanrocBitmasksPointers:
 	dw LycanrocBitmasks
 	dw Lycanroc_DuskBitmasks
@@ -121,4 +122,6 @@ ShayminBitmasksPointers:
 ZygardeBitmasksPointers:
 	dw Zygarde_Ten_PercentBitmasks
 	dw ZygardeBitmasks
-	dw Zygarde_CompleteBitmasks
+	add_bitmasks Zygarde_Complete
+	add_bitmasks Zygarde_Complete
+	add_bitmasks Zygarde_Complete

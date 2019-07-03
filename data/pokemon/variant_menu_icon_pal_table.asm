@@ -1,24 +1,26 @@
+variant_iconpals: macro
+    dbba \1, \2IconPals
+endm
+
+
 VariantIconPalTable:  
-    dbba LYCANROC,  LycanrocIconPals
-    dbba MEOWTH,    MeowthIconPals  
-    dbba PERSIAN,   PersianIconPals 
-    dbba ROTOM,     RotomIconPals
-	dbba MEOWSTIC,  MeowsticIconPals  
-    dbba GRIMER,    GrimerIconPals
-    dbba MUK,       MukIconPals
-    dbba NIDORAN,   NidoranIconPals
-    dbba NIDORINO,   NidorinoIconPals
-    dbba NIDOKING,   NidokingIconPals
-    dbba SANDSHREW, SandshrewIconPals
-    dbba SANDSLASH, SandslashIconPals
-    ;dbba FLABEBE,   FlabebeIconPals
-    ;dbba FLOETTE,   FloetteIconPals
-    ;dbba FLORGES,   FlorgesIconPals
-    dbba DEERLING,  DeerlingIconPals
-    dbba SAWSBUCK,  SawsbuckIconPals
-    dbba VULPIX,    VulpixIconPals
-    dbba NINETALES, NinetalesIconPals
-    dbba SUICUNE,   SuicuneIconPals
-    dbba RAIKOU,    RaikouIconPals
-    dbba ENTEI,     EnteiIconPals
+    variant_iconpals LYCANROC,  Lycanroc
+    variant_iconpals MEOWTH,    Meowth  
+    variant_iconpals PERSIAN,   Persian 
+    variant_iconpals ROTOM,     Rotom
+	variant_iconpals MEOWSTIC,  Meowstic  
+    variant_iconpals GRIMER,    Grimer
+    variant_iconpals MUK,       Muk
+    variant_iconpals NIDORAN,   Nidoran
+    variant_iconpals NIDORINO,  Nidorino
+    variant_iconpals NIDOKING,  Nidoking
+    variant_iconpals SANDSHREW, Sandshrew
+    variant_iconpals SANDSLASH, Sandslash
+    variant_iconpals DEERLING,  Deerling
+    variant_iconpals SAWSBUCK,  Sawsbuck
+    variant_iconpals VULPIX,    Vulpix
+    variant_iconpals NINETALES, Ninetales
+    variant_iconpals SUICUNE,   Suicune
+    variant_iconpals RAIKOU,    Raikou
+    variant_iconpals ENTEI,     Entei
 	dbba -1,        MenuMonIconColors

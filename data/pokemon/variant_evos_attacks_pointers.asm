@@ -65,5 +65,5 @@ NinetalesEvosAttacksPointers::
 	dw Ninetales_AlolaEvosAttacks
 
 ShayminEvosAttacksPointers::
-	dw ShayminEvosAttacks
-	dw Shaymin_SkyEvosAttacks
+	add_evosattacks Shaymin
+	add_evosattacks Shaymin_Sky

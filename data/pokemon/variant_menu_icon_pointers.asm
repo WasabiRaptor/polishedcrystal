@@ -1,3 +1,4 @@
+
 LycanrocIconPointers::
 	dw LycanrocIcon
 	dw Lycanroc_DuskIcon
@@ -122,6 +123,6 @@ ShayminIconPointers::
 ZygardeIconPointers::
 	dw Zygarde_Ten_PercentIcon
 	dw ZygardeIcon
-	dw Zygarde_CompleteIcon
-	dw Zygarde_CompleteIcon
-	dw Zygarde_CompleteIcon
+	add_icon Zygarde_Complete
+	add_icon Zygarde_Complete
+	add_icon Zygarde_Complete

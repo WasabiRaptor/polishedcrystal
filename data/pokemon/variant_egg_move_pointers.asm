@@ -19,8 +19,8 @@ GirafarigEggMovePointers::
 	dw Girafarig_BetaEggMoves
 
 VulpixEggMovePointers::
-	dw VulpixEggMoves
-	dw Vulpix_AlolaEggMoves
+	add_eggmoves Vulpix
+	add_eggmoves Vulpix_Alola
 
 ;ShayminEggMovePointers::
 	;dw ShayminEggMoves

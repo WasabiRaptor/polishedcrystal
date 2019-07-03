@@ -269,9 +269,11 @@ Rotom_HeatIcon:
 Rotom_MowIcon:
 Rotom_WashIcon:
 
+MeowsticIcon:
 Meowstic_MIcon:
 Meowstic_FIcon:
 
+NidoranIcon:
 Nidoran_MIcon:    INCBIN "gfx/icons/nidoran_m.2bpp"
 Nidoran_FIcon:    INCBIN "gfx/icons/nidoran_f.2bpp"
 

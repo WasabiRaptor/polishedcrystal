@@ -1,5 +1,10 @@
+variant_cries: macro
+    dbba \1, \2Cries
+endm
+
+
 VariantCryTable:
-    dbba NIDORAN,   NidoranCries
-    dbba NIDORINO,  NidorinoCries
-    dbba NIDOKING,  NidokingCries
+    variant_cries NIDORAN, Nidoran
+    variant_cries NIDORINO,  Nidorino
+    variant_cries NIDOKING,  Nidoking
     dbba -1,        CryHeaders

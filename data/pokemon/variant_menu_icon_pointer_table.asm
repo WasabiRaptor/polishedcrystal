@@ -1,25 +1,30 @@
+variant_icons: macro
+    dbbw \1, BANK(\2Icon), \2IconPointers
+endm
+
+
 VariantIconPointerTable:
-    dbbw LYCANROC,  BANK(LycanrocIcon), LycanrocIconPointers
-    dbbw MEOWTH,    BANK(MeowthIcon), MeowthIconPointers  
-    dbbw PERSIAN,   BANK(PersianIcon), PersianIconPointers   
-    dbbw GRIMER,    BANK(GrimerIcon), GrimerIconPointers
-    dbbw MUK,       BANK(MukIcon), MukIconPointers
-    dbbw ROTOM,     BANK(RotomIcon), RotomIconPointers
-	dbbw MEOWSTIC,  BANK(Meowstic_MIcon), MeowsticIconPointers
-    dbbw NIDORAN,   BANK(Nidoran_MIcon), NidoranIconPointers
-    dbbw NIDORINO,  BANK(NidorinoIcon), NidorinoIconPointers
-    dbbw NIDOKING,  BANK(NidokingIcon), NidokingIconPointers
-    dbbw SANDSHREW, BANK(SandshrewIcon), SandshrewIconPointers
-    dbbw SANDSLASH, BANK(SandslashIcon), SandslashIconPointers
-    dbbw SAWSBUCK,  BANK(SawsbuckIcon), SawsbuckIconPointers
-    dbbw GIRAFARIG, BANK(GirafarigIcon), GirafarigIconPointers
-    dbbw VULPIX,    BANK(VulpixIcon), VulpixIconPointers
-    dbbw NINETALES, BANK(NinetalesIcon), NinetalesIconPointers
-    dbbw UNOWN,     BANK(UnownIcon), UnownIconPointers
-    dbbw AEGISLASH, BANK(AegislashIcon), AegislashIconPointers
-    dbbw SUICUNE,   BANK(SuicuneIcon), SuicuneIconPointers
-    dbbw RAIKOU,    BANK(RaikouIcon), RaikouIconPointers
-    dbbw ENTEI,     BANK(EnteiIcon), EnteiIconPointers
-    dbbw SHAYMIN,   BANK(ShayminIcon), ShayminIconPointers
-    dbbw ZYGARDE,   BANK(ZygardeIcon), ZygardeIconPointers
-	dbbw -1,        BANK(Icons1), IconPointers
+    variant_icons LYCANROC,  Lycanroc
+    variant_icons MEOWTH,    Meowth  
+    variant_icons PERSIAN,   Persian   
+    variant_icons GRIMER,    Grimer
+    variant_icons MUK,       Muk
+    variant_icons ROTOM,     Rotom
+	variant_icons MEOWSTIC,  Meowstic
+    variant_icons NIDORAN,   Nidoran
+    variant_icons NIDORINO,  Nidorino
+    variant_icons NIDOKING,  Nidoking
+    variant_icons SANDSHREW, Sandshrew
+    variant_icons SANDSLASH, Sandslash
+    variant_icons SAWSBUCK,  Sawsbuck
+    variant_icons GIRAFARIG, Girafarig
+    variant_icons VULPIX,    Vulpix
+    variant_icons NINETALES, Ninetales
+    variant_icons UNOWN,     Unown
+    variant_icons AEGISLASH, Aegislash
+    variant_icons SUICUNE,   Suicune
+    variant_icons RAIKOU,    Raikou
+    variant_icons ENTEI,     Entei
+    variant_icons SHAYMIN,   Shaymin
+    variant_icons ZYGARDE,   Zygarde
+	dbbw -1,      BANK(Icons1), IconPointers

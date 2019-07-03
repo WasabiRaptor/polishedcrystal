@@ -1,18 +1,23 @@
+variant_dexentry: macro
+    dbbw \1, BANK(\2PokedexEntry), \2PokedexEntryPointers
+endm
+
+
 VariantPokedexEntryPointerTable:
-    dbbw MEOWTH,    BANK(MeowthPokedexEntry), MeowthPokedexEntryPointers  
-    dbbw PERSIAN,   BANK(PersianPokedexEntry), PersianPokedexEntryPointers   
-    dbbw GRIMER,    BANK(GrimerPokedexEntry), GrimerPokedexEntryPointers
-    dbbw MUK,       BANK(MukPokedexEntry), MukPokedexEntryPointers
-    dbbw NIDORAN,   BANK(Nidoran_MPokedexEntry), NidoranPokedexEntryPointers
-    dbbw NIDORINO,  BANK(NidorinoPokedexEntry), NidorinoPokedexEntryPointers
-    dbbw NIDOKING,  BANK(NidokingPokedexEntry), NidokingPokedexEntryPointers
-	dbbw MEOWSTIC,  BANK(Meowstic_MPokedexEntry), MeowsticPokedexEntryPointers
-    dbbw SANDSHREW, BANK(SandshrewPokedexEntry), SandshrewPokedexEntryPointers
-    dbbw SANDSLASH, BANK(SandslashPokedexEntry), SandslashPokedexEntryPointers
-    dbbw GIRAFARIG, BANK(GirafarigPokedexEntry), GirafarigPokedexEntryPointers
-    dbbw VULPIX,    BANK(VulpixPokedexEntry), VulpixPokedexEntryPointers
-    dbbw NINETALES, BANK(NinetalesPokedexEntry), NinetalesPokedexEntryPointers
-    dbbw SUICUNE,   BANK(SuicunePokedexEntry), SuicunePokedexEntryPointers
-    dbbw RAIKOU,    BANK(RaikouPokedexEntry), RaikouPokedexEntryPointers
-    dbbw ENTEI,     BANK(EnteiPokedexEntry), EnteiPokedexEntryPointers
+    variant_dexentry MEOWTH, Meowth 
+    variant_dexentry PERSIAN, Persian 
+    variant_dexentry GRIMER, Grimer
+    variant_dexentry MUK, Muk
+    variant_dexentry NIDORAN, Nidoran
+    variant_dexentry NIDORINO, Nidorino
+    variant_dexentry NIDOKING, Nidoking
+	variant_dexentry MEOWSTIC, Meowstic
+    variant_dexentry SANDSHREW, Sandshrew
+    variant_dexentry SANDSLASH, Sandslash
+    variant_dexentry GIRAFARIG, Girafarig
+    variant_dexentry VULPIX, Vulpix
+    variant_dexentry NINETALES, Ninetales
+    variant_dexentry SUICUNE, Suicune
+    variant_dexentry RAIKOU, Raikou
+    variant_dexentry ENTEI, Entei
 	dbbw -1,        BANK(PokedexEntries1), PokedexDataPointerTable

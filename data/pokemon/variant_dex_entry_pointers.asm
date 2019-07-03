@@ -65,5 +65,5 @@ RaikouPokedexEntryPointers::
 	dw Raikou_BetaPokedexEntry
 
 EnteiPokedexEntryPointers::
-	dw EnteiPokedexEntry
-	dw Entei_BetaPokedexEntry
+	add_pokedexentry Entei
+	add_pokedexentry Entei_Beta

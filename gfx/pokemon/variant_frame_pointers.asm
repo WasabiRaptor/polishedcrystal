@@ -1,3 +1,4 @@
+
 LycanrocFramesPointers:
 	dw LycanrocFrames
 	dw Lycanroc_DuskFrames
@@ -119,6 +120,8 @@ ShayminFramesPointers:
 	dw Shaymin_SkyFrames
 
 ZygardeFramesPointers:
-	dw Zygarde_Ten_PercentFrames
-	dw ZygardeFrames
-	dw Zygarde_CompleteFrames
+	add_frames Zygarde_Ten_Percent
+	add_frames Zygarde
+	add_frames Zygarde_Complete
+	add_frames Zygarde_Complete
+	add_frames Zygarde_Complete

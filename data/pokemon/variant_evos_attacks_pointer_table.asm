@@ -1,18 +1,23 @@
+variant_evosattacks: macro
+    dbba \1, \2EvosAttacksPointers
+endm
+
+
 VariantEvosAttacksPointerTable:
-    dbba LYCANROC,  LycanrocEvosAttacksPointers
-    dbba MEOWTH,    MeowthEvosAttacksPointers  
-    dbba PERSIAN,   PersianEvosAttacksPointers   
-    dbba GRIMER,    GrimerEvosAttacksPointers
-    dbba MUK,       MukEvosAttacksPointers
-    dbba NIDORAN,   NidoranEvosAttacksPointers
-    dbba NIDORINO,  NidorinoEvosAttacksPointers
-    dbba NIDOKING,  NidokingEvosAttacksPointers
-    dbba ROTOM,     RotomEvosAttacksPointers
-	dbba MEOWSTIC,  MeowsticEvosAttacksPointers
-    dbba SANDSHREW, SandshrewEvosAttacksPointers
-    dbba SANDSLASH, SandslashEvosAttacksPointers
-    dbba GIRAFARIG, GirafarigEvosAttacksPointers
-    dbba VULPIX,    VulpixEvosAttacksPointers
-    dbba NINETALES, NinetalesEvosAttacksPointers
-    dbba SHAYMIN,   ShayminEvosAttacksPointers
+    variant_evosattacks LYCANROC,  Lycanroc
+    variant_evosattacks MEOWTH,    Meowth  
+    variant_evosattacks PERSIAN,   Persian   
+    variant_evosattacks GRIMER,    Grimer
+    variant_evosattacks MUK,       Muk
+    variant_evosattacks NIDORAN,   Nidoran
+    variant_evosattacks NIDORINO,  Nidorino
+    variant_evosattacks NIDOKING,  Nidoking
+    variant_evosattacks ROTOM,     Rotom
+	variant_evosattacks MEOWSTIC,  Meowstic
+    variant_evosattacks SANDSHREW, Sandshrew
+    variant_evosattacks SANDSLASH, Sandslash
+    variant_evosattacks GIRAFARIG, Girafarig
+    variant_evosattacks VULPIX,    Vulpix
+    variant_evosattacks NINETALES, Ninetales
+    variant_evosattacks SHAYMIN,   Shaymin
 	dbba -1,        EvosAttacksPointers

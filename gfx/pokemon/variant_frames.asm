@@ -16,6 +16,7 @@ Rotom_HeatFrames: INCLUDE "gfx/pokemon/rotom_heat/frames.asm"
 Rotom_MowFrames: INCLUDE "gfx/pokemon/rotom_mow/frames.asm"
 Rotom_WashFrames: INCLUDE "gfx/pokemon/rotom_wash/frames.asm"
 
+MeowsticFrames:
 Meowstic_MFrames: INCLUDE "gfx/pokemon/meowstic_m/frames.asm"
 Meowstic_FFrames: INCLUDE "gfx/pokemon/meowstic_f/frames.asm"
 
@@ -25,6 +26,7 @@ Grimer_AlolaFrames: INCLUDE "gfx/pokemon/grimer_alola/frames.asm"
 MukFrames: INCLUDE "gfx/pokemon/muk/frames.asm"
 Muk_AlolaFrames: INCLUDE "gfx/pokemon/muk_alola/frames.asm"
 
+NidoranFrames:
 Nidoran_MFrames: INCLUDE "gfx/pokemon/nidoran_m/frames.asm"
 Nidoran_FFrames: INCLUDE "gfx/pokemon/nidoran_f/frames.asm"
 
@@ -54,6 +56,7 @@ Vulpix_AlolaFrames: INCLUDE "gfx/pokemon/vulpix_alola/frames.asm"
 NinetalesFrames: INCLUDE "gfx/pokemon/ninetales/frames.asm"
 Ninetales_AlolaFrames: INCLUDE "gfx/pokemon/ninetales_alola/frames.asm"
 
+UnownFrames:
 UnownAFrames: INCLUDE "gfx/pokemon/unown_a/frames.asm"
 UnownBFrames: INCLUDE "gfx/pokemon/unown_b/frames.asm"
 UnownCFrames: INCLUDE "gfx/pokemon/unown_c/frames.asm"

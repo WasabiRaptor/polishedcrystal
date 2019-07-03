@@ -97,6 +97,38 @@ add_pics: MACRO ; dba Frontpic, Backpic
 	dba \1Backpic
 	ENDM
 
+add_pokedexentry: macro
+	dw \1PokedexEntry
+endm
+
+add_evosattacks: macro
+	dw \1EvosAttacks
+endm
+
+add_eggmoves: macro
+	dw \1EggMoves
+endm
+
+add_icon: macro
+	dw \1Icon
+endm
+
+add_bitmasks: macro
+	dw \1Bitmasks
+endm
+
+add_anim: macro
+	dw \1Animation
+endm
+
+add_idleanim: macro
+	dw \1AnimationIdle
+endm
+
+add_frames: macro
+	dw \1Frames
+ENDM
+
 dbpixel: MACRO
 if _NARG >= 4
 	db \1 * 8 + \3, \2 * 8 + \4

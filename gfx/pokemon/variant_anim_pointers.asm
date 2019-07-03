@@ -1,3 +1,5 @@
+
+
 LycanrocAnimationPointers:
 	dw LycanrocAnimation
 	dw Lycanroc_DuskAnimation
@@ -122,3 +124,5 @@ ZygardeAnimationPointers:
 	dw Zygarde_Ten_PercentAnimation
 	dw ZygardeAnimation
 	dw Zygarde_CompleteAnimation
+	add_anim Zygarde_Complete
+	add_anim Zygarde_Complete

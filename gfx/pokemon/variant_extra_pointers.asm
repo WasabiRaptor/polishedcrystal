@@ -1,3 +1,5 @@
+
+
 LycanrocAnimationIdlePointers:
 	dw LycanrocAnimationIdle
 	dw Lycanroc_DuskAnimationIdle
@@ -122,3 +124,5 @@ ZygardeAnimationIdlePointers:
 	dw Zygarde_Ten_PercentAnimationIdle
 	dw ZygardeAnimationIdle
 	dw Zygarde_CompleteAnimationIdle
+	add_idleanim Zygarde_Complete
+	add_idleanim Zygarde_Complete

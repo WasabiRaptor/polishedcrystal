@@ -1,9 +1,12 @@
+variant_eggmoves: macro
+    dbba \1, \2EggMovePointers
+endm
+
 VariantEggMovePointerTable:
-    dbba MEOWTH,    MeowthEggMovePointers  
-    dbba GRIMER,    GrimerEggMovePointers
-    dbba NIDORAN,   NidoranEggMovePointers
-    dbba SANDSHREW, SandshrewEggMovePointers
-    dbba GIRAFARIG, GirafarigEggMovePointers
-    dbba VULPIX,    VulpixEggMovePointers
-    ;dbba SHAYMIN,   ShayminEggMovePointers ;shaymin is a legendary why would it ever be able to breed
+    variant_eggmoves MEOWTH, Meowth  
+    variant_eggmoves GRIMER,    Grimer
+    variant_eggmoves NIDORAN,   Nidoran
+    variant_eggmoves SANDSHREW, Sandshrew
+    variant_eggmoves GIRAFARIG, Girafarig
+    variant_eggmoves VULPIX,    Vulpix
 	dbba -1,        EggMovePointers
