@@ -43,6 +43,15 @@ shift_const: MACRO
 const_value = const_value + 1
 ENDM
 
+nat_dexmon_group: macro
+const_value = \1
+dexmon_group = \2
+endm
+
+nat_dexmon: macro
+	const \1
+GROUP_\1 EQU dexmon_group
+endm
 
 ; Enumerate strings
 

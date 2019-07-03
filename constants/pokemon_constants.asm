@@ -400,30 +400,3 @@ GYARADOS_RED_FORM EQU NUM_MAGIKARP + 1
 	const MEWTWO_ARMORED_FORM
 NUM_MEWTWO EQU const_value + -1 ; 2
 
-;idea for using the variant forms for extended nat dex
-
-nat_dexmon_group: macro
-const_value = \1
-dexmon_group = \2
-endm
-
-nat_dexmon: macro
-	const \1
-GROUP_\1 EQU dexmon_group
-endm
-
-;national dex constants if that ever becomes a thing
-	nat_dexmon_group MAGNEMITE, 2
-	nat_dexmon BULBASAUR
-	nat_dexmon IVYSAUR
-	nat_dexmon VENUSAUR
-
-	nat_dexmon_group MAGNEMITE, 3
-	nat_dexmon SQUIRTLE
-	nat_dexmon WARTORTLE
-	nat_dexmon BLASTOISE
-
-	nat_dexmon_group MAGNEMITE, 4
-	nat_dexmon CHARMANDER
-	nat_dexmon CHARMELEON
-	nat_dexmon CHARIZARD
