@@ -1,4 +1,4 @@
-
+	dw 00201
 	db  48,  72,  48,  48,  72,  48
     evs  0,   1,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf

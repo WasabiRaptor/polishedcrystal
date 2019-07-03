@@ -1,4 +1,4 @@
-
+	dw 00662
 	db  62,  73,  55,  84,  56,  52
     evs  0,   0,   0,   2,   0,   0
 	;   hp  atk  def  spd  sat  sdf

@@ -1681,12 +1681,18 @@ Pokexex_PrintNumberAndTypes:
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
-	ld bc, PKMN_NAME_LENGTH-3
-	add hl, bc
+	ld a, "/"
+	ld [hli], a
 ;get base data for the current species
 	ld a, [wd265]
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
+	ld de, wNatDexNo
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	call PrintNum
+
+	ld bc, PKMN_NAME_LENGTH-7
+	add hl, bc
 	ld a, [wBaseType1]
 	call Pokexex_PrintType
 	ld a, [wBaseType1]

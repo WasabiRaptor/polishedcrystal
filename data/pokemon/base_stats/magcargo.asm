@@ -1,4 +1,4 @@
-
+	dw 00219
 	db  60,  50, 120,  30,  90,  80
     evs  0,   0,   2,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf

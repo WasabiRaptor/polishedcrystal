@@ -1,4 +1,4 @@
-
+	dw 00236
 	db  35,  35,  35,  35,  35,  35
     evs  0,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf

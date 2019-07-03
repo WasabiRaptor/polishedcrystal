@@ -328,8 +328,8 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	ld [hl], "."
 	inc hl
 	hlcoord 10, 0
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	ld de, wd265
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	ld de, wNatDexNo
 	call PrintNum
 	hlcoord 14, 0
 	call PrintLevel

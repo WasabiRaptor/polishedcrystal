@@ -1,4 +1,4 @@
-
+	dw 00530
 	db 110, 135,  60,  88,  50,  65
     evs  0,   2,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf

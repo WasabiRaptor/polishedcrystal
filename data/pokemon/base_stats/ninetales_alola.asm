@@ -1,4 +1,4 @@
-
+	dw 00038
 	db  73,  67,  75, 109,  81, 100
     evs  0,   0,   0,   2,   0,   0
 	;   hp  atk  def  spd  sat  sdf

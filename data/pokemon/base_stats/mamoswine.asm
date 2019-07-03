@@ -1,4 +1,4 @@
-
+	dw 00473
 	db 110, 130,  80,  80,  70,  60
     evs  0,   3,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf

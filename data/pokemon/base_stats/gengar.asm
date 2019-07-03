@@ -1,4 +1,4 @@
-
+	dw 00094
 	db  60,  65,  60, 110, 130,  75
     evs  0,   0,   0,   0,   3,   0
 	;   hp  atk  def  spd  sat  sdf

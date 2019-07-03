@@ -4335,14 +4335,7 @@ InsertDataIntoBoxOrParty: ; 513e0
 	rst CopyBytes
 	ret
 
-INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/names.asm"
-
-
-SECTION "Variant Base Data", ROMX
-
-INCLUDE "data/pokemon/variant_base_stats.asm"
-INCLUDE "data/pokemon/variant_names.asm"
 
 SECTION "Code 14", ROMX
 
@@ -4862,3 +4855,10 @@ SECTION "wild stuff", ROMX
 
 INCLUDE "data/wild/unlocked_unowns.asm"
 INCLUDE "data/wild/treemons_asleep.asm"
+
+
+SECTION "Base Data", ROMX
+
+INCLUDE "data/pokemon/base_stats.asm"
+INCLUDE "data/pokemon/variant_base_stats.asm"
+INCLUDE "data/pokemon/variant_names.asm"

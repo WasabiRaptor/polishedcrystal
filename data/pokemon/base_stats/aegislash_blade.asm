@@ -1,4 +1,4 @@
-
+	dw 00681
 	db  60, 150,  50,  60, 150,  50
     evs  0,   2,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf

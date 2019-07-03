@@ -1,4 +1,4 @@
-
+	dw 00471
 	db  65,  60, 110,  65,  95,  65
     evs  0,   0,   0,   0,   2,   0
 	;   hp  atk  def  spd  sat  sdf

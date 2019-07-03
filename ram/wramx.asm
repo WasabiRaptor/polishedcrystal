@@ -558,6 +558,7 @@ wMoveSelectionMenuType:: ds 1
 
 wCurBaseData::
 wBaseStats::
+wNatDexNo:: ds 2
 wBaseHP:: ds 1
 wBaseAttack:: ds 1
 wBaseDefense:: ds 1

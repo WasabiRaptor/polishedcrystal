@@ -1,4 +1,4 @@
-
+	dw 00123
 	db  70, 110,  80, 105,  55,  80
     evs  0,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf

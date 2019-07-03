@@ -1,4 +1,5 @@
-
+	dw 00460
+	
 	db  90, 132, 105,  30, 132, 105
     evs  0,   1,   0,   0,   1,   0
 	;   hp  atk  def  spd  sat  sdf

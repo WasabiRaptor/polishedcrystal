@@ -1,4 +1,4 @@
-
+	dw 00447
 	db  45, 100, 135,  45,  65, 135
     evs  0,   0,   1,   0,   0,   2
 	;   hp  atk  def  spd  sat  sdf

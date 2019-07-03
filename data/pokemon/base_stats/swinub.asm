@@ -1,4 +1,4 @@
-
+	dw 00220
 	db  50,  50,  40,  50,  30,  30
     evs  0,   1,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf

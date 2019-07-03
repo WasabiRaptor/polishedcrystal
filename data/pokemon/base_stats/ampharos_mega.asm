@@ -1,4 +1,4 @@
-
+	dw 00181
 	db  90,  95, 105,  45, 165, 110
     evs  0,   0,   0,   0,   3,   0
 	;   hp  atk  def  spd  sat  sdf

@@ -1,4 +1,4 @@
-
+	dw 00308
 	db  60,  60,  75,  80,  60,  75
     evs  0,   0,   0,   2,   0,   0
 	;   hp  atk  def  spd  sat  sdf

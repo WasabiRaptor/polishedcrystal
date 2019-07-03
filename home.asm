@@ -1379,6 +1379,14 @@ GetBaseData:: ; 3856
 	ld de, wCurBaseData
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst CopyBytes
+
+;turns out the nat dex no is backwards
+	ld a, [wNatDexNo]
+	ld d, a
+	ld a, [wNatDexNo + 1]
+	ld [wNatDexNo], a
+	ld a, d
+	ld [wNatDexNo + 1], a
 	jr .end
 
 .egg

@@ -1,4 +1,4 @@
-
+	dw 00348
 	db  40,  40,  55,  55,  40,  70
     evs  0,   0,   0,   0,   0,   1
 	;   hp  atk  def  spd  sat  sdf

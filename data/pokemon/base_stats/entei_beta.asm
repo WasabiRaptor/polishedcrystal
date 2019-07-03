@@ -1,4 +1,4 @@
-
+	dw 00244
 	db 115,  90,  75, 100, 115,  85
     evs  1,   0,   0,   0,   2,   0
 	;   hp  atk  def  spd  sat  sdf
