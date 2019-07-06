@@ -78,13 +78,9 @@ _GetFrontpic: ; 510a5
 	ret
 
 GetFrontpicPointer: ; 510d7
-	ld a, [wCurPartySpecies]
+	ld a, [wCurForm]
 	call GetRelevantPicPointers
 	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-
-.notvariant
 	dec a	
 	ld bc, 6
 	rst AddNTimes
@@ -204,15 +200,11 @@ GetBackpic: ; 5116c
 	ld a, $6
 	ldh [rSVBK], a
 	push de
-	ld a, b
+	ld a, c
 	push bc
 	call GetRelevantPicPointers
 	pop bc
 	ld a, b
-	jr nc, .notvariant
-	ld a, c
-
-.notvariant
 	dec a	
 	ld bc, 6
 	rst AddNTimes

@@ -4667,41 +4667,40 @@ INCLUDE "engine/pic_animation.asm"
 ;	following bytes are tile ids mapped to each bit in the mask
 
 ; Main animations (played everywhere)
-INCLUDE "gfx/pokemon/anim_pointers.asm"
-INCLUDE "gfx/pokemon/anims.asm"
+INCLUDE "gfx/pokemon/kanto_anim_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_anims.asm"
 
 ; Extra animations, appended to the main animation
 ; Used in the status screen (blinking, tail wags etc.)
-INCLUDE "gfx/pokemon/extra_pointers.asm"
-INCLUDE "gfx/pokemon/extras.asm"
+INCLUDE "gfx/pokemon/kanto_idle_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_idles.asm"
 
 ; Variants have their own animation data despite having entries in the main tables
-INCLUDE "gfx/pokemon/variant_anim_pointers.asm"
-INCLUDE "gfx/pokemon/variant_anims.asm"
-INCLUDE "gfx/pokemon/variant_extra_pointers.asm"
-INCLUDE "gfx/pokemon/variant_extras.asm"
+INCLUDE "gfx/pokemon/johto_anim_pointers.asm"
+INCLUDE "gfx/pokemon/johto_anims.asm"
+INCLUDE "gfx/pokemon/johto_idle_pointers.asm"
+INCLUDE "gfx/pokemon/johto_idles.asm"
 
 
 SECTION "Pic Animations Frames 1", ROMX
 
-INCLUDE "gfx/pokemon/frame_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_frame_pointers.asm"
 INCLUDE "gfx/pokemon/kanto_frames.asm"
 
 
 SECTION "Pic Animations Frames 2", ROMX
 
 INCLUDE "gfx/pokemon/johto_frames.asm"
-INCLUDE "gfx/pokemon/variant_frame_pointers.asm"
-INCLUDE "gfx/pokemon/variant_frames.asm"
+INCLUDE "gfx/pokemon/johto_frame_pointers.asm"
 
 
 SECTION "Pic Animations Bitmasks", ROMX
 
 ; Bitmasks
-INCLUDE "gfx/pokemon/bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/bitmasks.asm"
-INCLUDE "gfx/pokemon/variant_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/variant_bitmasks.asm"
+INCLUDE "gfx/pokemon/kanto_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_bitmasks.asm"
+INCLUDE "gfx/pokemon/johto_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/johto_bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX

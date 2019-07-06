@@ -92,20 +92,15 @@ LoadMonAnimation: ; d00a3
 	ld a, d
 	ld [wPokeAnimGraphicStartTile], a
 
-	ld a, $1
+	ld a, BANK(wCurPartySpecies)
 	ld hl, wCurPartySpecies
 	call GetFarWRAMByte
-	ld [wPokeAnimSpecies], a
+	ld [wPokeAnimSpeciesOrVariant], a
 
-	ld a, $1
+	ld a, BANK(wCurForm)
 	ld hl, wCurForm
 	call GetFarWRAMByte
-	ld [wPokeAnimVariant], a
-
-	push de
-	call PokeAnim_GetSpeciesOrVariant
-	ld [wPokeAnimSpeciesOrVariant], a
-	pop de
+	ld [wPokeAnimGroup], a
 
 	call PokeAnim_GetFrontpicDims
 	ld a, c
@@ -247,7 +242,7 @@ PokeAnim_Finish: ; d0171
 ; d017a
 
 PokeAnim_Cry: ; d017a
-	ld a, [wPokeAnimSpecies]
+	ld a, [wPokeAnimSpeciesOrVariant]
 	call _PlayCry
 	ld a, [wPokeAnimSceneIndex]
 	inc a
@@ -256,7 +251,7 @@ PokeAnim_Cry: ; d017a
 ; d0188
 
 PokeAnim_CryNoWait: ; d0188
-	ld a, [wPokeAnimSpecies]
+	ld a, [wPokeAnimSpeciesOrVariant]
 	call PlayCry2
 	ld a, [wPokeAnimSceneIndex]
 	inc a
@@ -267,7 +262,7 @@ PokeAnim_CryNoWait: ; d0188
 PokeAnim_StereoCry: ; d0196
 	ld a, $f
 	ld [wCryTracks], a
-	ld a, [wPokeAnimSpecies]
+	ld a, [wPokeAnimSpeciesOrVariant]
 	call PlayStereoCry2
 	ld a, [wPokeAnimSceneIndex]
 	inc a
@@ -866,7 +861,7 @@ PokeAnim_GetAttrMapCoord: ; d0551
 ; d055c
 
 GetMonAnimPointer: ; d055c
-	ld a, [wPokeAnimSpecies]
+	ld a, [wPokeAnimGroup]
 	ld hl, VariantAnimPointerTable
 	ld de, 6
 	call IsInArray
@@ -918,7 +913,7 @@ PokeAnim_GetFrontpicDims: ; d05b4
 ; d05ce
 
 GetMonFramesPointer: ; d05ce
-	ld a, [wPokeAnimSpecies]
+	ld a, [wPokeAnimGroup]
 	ld hl, VariantFramesPointerTable
 	ld de, 5
 	call IsInArray
@@ -930,12 +925,6 @@ GetMonFramesPointer: ; d05ce
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	jr c, .got_frames
-	ld a, [wPokeAnimSpecies]
-	cp MEDITITE
-	jr c, .got_frames
-	ld c, BANK(JohtoFrames)
-.got_frames
 	ld a, c
 	ld [wPokeAnimFramesBank], a
 
@@ -955,7 +944,7 @@ GetMonFramesPointer: ; d05ce
 ; d061b
 
 GetMonBitmaskPointer: ; d061b
-	ld a, [wPokeAnimSpecies]
+	ld a, [wPokeAnimGroup]
 	ld hl, VariantBitmasksPointerTable
 	ld de, 4
 	call IsInArray
@@ -980,17 +969,6 @@ GetMonBitmaskPointer: ; d061b
 	ld [wPokeAnimBitmaskAddr + 1], a
 	ret
 ; d065c
-
-PokeAnim_GetSpeciesOrVariant: ; d065c
-	ld a, [wPokeAnimSpecies]
-	ld hl, VariantSpeciesTable
-	ld de, 1
-	call IsInArray
-	ld a, [wPokeAnimSpecies]
-	ret nc
-	ld a, [wPokeAnimVariant]
-	ret
-; d0669
 
 HOF_AnimateFrontpic: ; d066e
 	call AnimateMon_CheckIfPokemon
