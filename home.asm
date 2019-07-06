@@ -1458,12 +1458,12 @@ GetAbility::
 	push hl
 	push bc
 
-	ld a, c
-	call GetRelevantBaseData
-	ld a, c
-	jp nc, .notvariant
 	ld a, [wCurForm]
-.notvariant
+	call GetRelevantBaseData
+	pop bc
+	push bc
+	ld a, c
+
 	dec a
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes

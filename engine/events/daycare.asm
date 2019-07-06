@@ -1005,16 +1005,21 @@ DayCare_InitBreeding: ; 16a3b
 	ld a, 8
 	call RandomRange
 	ld b, a
+	push bc
+	push de
+	ld a, [wCurForm]
+	call GetRelevantBaseData
 	ld a, [wEggMonSpecies]
 	dec a
-	push bc
-	ld hl, BASEMON_GENDER
+	ld bc, BASEMON_GENDER
+	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, BANK(BaseData)
+	ld a, d ; bank
 	call GetFarByte
 	swap a
 	and $f
+	pop de
 	pop bc
 	ld c, a
 	ld a, b

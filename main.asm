@@ -3599,14 +3599,16 @@ GetGender: ; 50bdd
 
 ; We need the gender ratio to do anything with this.
 	push bc
+	ld a, [wCurForm]
+	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
 	dec a
-	ld hl, BASEMON_GENDER
+	ld bc, BASEMON_GENDER
+	add hl, bc 
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
+	ld a, d ;bank
 	pop bc
-
-	ld a, BANK(BaseData)
 	call GetFarByte
 	swap a
 	and $f
