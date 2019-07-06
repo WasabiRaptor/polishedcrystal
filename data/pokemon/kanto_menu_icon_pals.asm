@@ -1,3 +1,7 @@
+iconpal: MACRO
+	dn PAL_OW_\1, PAL_OW_\2
+endm
+
 KantoMenuMonIconColors::
 	iconpal TEAL, GREEN ; BULBASAUR
 	iconpal TEAL, GREEN ; IVYSAUR

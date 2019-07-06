@@ -1,5 +1,5 @@
-INCLUDE "data/pokemon/menu_icon_pals.asm"
-INCLUDE "data/pokemon/variant_menu_icon_pals.asm"
+INCLUDE "data/pokemon/kanto_menu_icon_pals.asm"
+INCLUDE "data/pokemon/johto_menu_icon_pals.asm"
 
 LoadOverworldMonIcon: ; 8e82b
 	ld a, e
@@ -138,13 +138,9 @@ GetMenuMonIconPalette::
 	push af
 	inc hl ;byte after shiny is form
 	predef GetVariant
-	ld a, [wCurPartySpecies]
 .got_species:
 	call GetRelevantMonIconColors
 	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld c, a
 	ld b, 0
@@ -509,6 +505,7 @@ GetRelevantIconPointersAndBank:
 INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"
 
 GetRelevantMonIconColors:
+	ld a, [wCurForm]
 ; given species in a, return *PicPointers in hl 
 ; returns c for variants, nc for normal species
 	ld hl, VariantIconPalTable
