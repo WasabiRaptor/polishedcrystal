@@ -326,7 +326,9 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	ld [hl], "№"
 	inc hl
 	ld [hl], "."
-	inc hl
+	ld hl, wTempMonForm
+	predef GetVariant
+	call GetBaseData	
 	hlcoord 10, 0
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	ld de, wNatDexNo
