@@ -110,7 +110,7 @@ add_eggmoves: macro
 endm
 
 add_icon: macro
-	dw \1Icon
+	dba \1Icon
 endm
 
 add_bitmasks: macro

@@ -481,39 +481,29 @@ HoldSwitchmonIcon: ; 8ea8c
 GetRelevantIconPointersAndBank:
 ; given species in wCurIcon, return *IconPointers in hl and BANK(*Icon) in b
 ; returns c for variants, nc for normal species
-	ld a, [wCurIcon]
+	ld a, [wCurForm]
 	ld hl, VariantIconPointerTable
-	ld de, 4
+	ld de, 3
 	call IsInArray
 	inc hl
 	ld a, [hli]
-	ld b, a
-	ld a, [hli]
-	ld d, [hl]
-	ld e, a
+	ld h, [hl]
+	ld l, a
 
 	ld a, [wCurIcon]
-	push af
-	jr nc, .notvariant
-	pop af
-	ld a, [wCurForm]
-	push af
 	dec a
-.notvariant
-	ld l, a
-	ld h, 0
-	add hl, hl
+	ld e, a
+	ld d, 0
 	add hl, de
+	add hl, de
+	add hl, de
+	ld b, [hl]
+	inc hl
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
 ;get the bank
 	ld c, 8
-	pop af
-	ret c ;variant
-	cp EGG ; first mon in Icons2
-	ret c
-	ld b, BANK(Icons2)
 	ret
 
 INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"

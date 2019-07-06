@@ -4412,8 +4412,8 @@ INCLUDE "engine/sprites.asm"
 INCLUDE "engine/mon_icons.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
-INCLUDE "data/pokemon/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/variant_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/menu_icons.asm"
 
 
@@ -4849,6 +4849,7 @@ SECTION "Base Data", ROMX
 INCLUDE "data/pokemon/base_stats.asm"
 INCLUDE "data/pokemon/variant_base_stats.asm"
 INCLUDE "data/pokemon/variant_names.asm"
+
 
 SECTION "Kanto Base Data", ROMX
 
