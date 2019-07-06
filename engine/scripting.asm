@@ -2341,13 +2341,14 @@ Script_givepoke:
 	call GetScriptByte
 	ld [wCurPartySpecies], a
 	call GetScriptByte
+	ld [wCurForm], a
+	ld [wCurGender], a
+	call GetScriptByte
 	ld [wCurPartyLevel], a
 	call GetScriptByte
 	ld [wCurItem], a
 	call GetScriptByte
-	ld [wCurGender], a
-	and FORM_MASK
-	ld [wCurForm], a
+	;gender stuff will go here
 	call GetScriptByte
 	ld [wGiftPokeBall], a
 	call GetScriptByte

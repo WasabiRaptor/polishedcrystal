@@ -43,6 +43,8 @@ $(BUILD_DIR)data/pokemon/dex_entries.o \
 $(BUILD_DIR)data/pokemon/variant_dex_entries.o \
 $(BUILD_DIR)data/pokemon/egg_moves.o \
 $(BUILD_DIR)data/pokemon/evos_attacks.o \
+$(BUILD_DIR)data/pokemon/kanto_evos_attacks.o \
+$(BUILD_DIR)data/pokemon/johto_evos_attacks.o \
 $(BUILD_DIR)data/maps/map_data.o \
 $(BUILD_DIR)data/text/common.o \
 $(BUILD_DIR)data/tilesets.o \

@@ -18,7 +18,7 @@ EvolveAfterBattle: ; 421e6
 
 	push hl
 
-EvolveAfterBattle_MasterLoop
+EvolveAfterBattle_MasterLoop:
 	ld hl, wCurPartyMon
 	inc [hl]
 
@@ -45,20 +45,16 @@ EvolveAfterBattle_MasterLoop
 	call GetPartyLocation
 	predef GetVariant
 
-	ld a, [wEvolutionOldSpecies]
+	ld a, [wCurForm]
 	call GetRelevantEvosAttacksPointers
 	ld a, [wEvolutionOldSpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld a, d ;bank
+	call GetFarHalfword
 
 	push hl
 	xor a
@@ -67,7 +63,9 @@ EvolveAfterBattle_MasterLoop
 	pop hl
 
 .loop
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl
 	and a
 	jr z, EvolveAfterBattle_MasterLoop
 
@@ -100,14 +98,18 @@ EvolveAfterBattle_MasterLoop
 	jp z, .happiness
 
 ; EVOLVE_STAT
+	ld a, d ; bank
+	call GetFarByte
+	ld c, a
 	ld a, [wTempMonLevel]
-	cp [hl]
+	cp c
 	jp c, .dont_evolve_1
 
 	call IsMonHoldingEverstone
 	jp z, .dont_evolve_1
 
 	push hl
+	push de
 	ld de, wTempMonAttack
 	ld hl, wTempMonDefense
 	ld c, 2
@@ -117,11 +119,17 @@ EvolveAfterBattle_MasterLoop
 	ld a, ATK_LT_DEF
 	jr c, .got_tyrogue_evo
 	ld a, ATK_GT_DEF
+	pop de
 .got_tyrogue_evo
 	pop hl
 
 	inc hl
-	cp [hl]
+	push af
+	ld a, d ; bank
+	call GetFarByte
+	ld c, a
+	pop af
+	cp c
 	jp nz, .dont_evolve_2
 
 	inc hl
@@ -136,7 +144,9 @@ EvolveAfterBattle_MasterLoop
 	call IsMonHoldingEverstone
 	jp z, .dont_evolve_2
 
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl 
 	cp TR_ANYTIME
 	jp z, .proceed
 	cp TR_MORNDAY
@@ -155,7 +165,9 @@ EvolveAfterBattle_MasterLoop
 	jp .proceed
 
 .item
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl 
 	ld b, a
 	ld a, [wCurItem]
 	cp b
@@ -170,7 +182,9 @@ EvolveAfterBattle_MasterLoop
 	jp .proceed
 
 .holding
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl 
 	ld b, a
 	ld a, [wTempMonItem]
 	cp b
@@ -188,13 +202,17 @@ EvolveAfterBattle_MasterLoop
 	call GetWorldMapLocation
 	pop hl
 	ld b, a
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl 
 	cp b
 	jp nz, .dont_evolve_3
 	jp .proceed
 
 .move
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl 
 	push hl
 	push bc
 	ld b, a
@@ -214,7 +232,9 @@ endr
 	jp .proceed
 
 .evs
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl 
 	push hl
 	push bc
 	ld hl, wTempMonSpecies
@@ -229,7 +249,9 @@ endr
 	jp .proceed
 
 .level
-	ld a, [hli]
+	ld a, d ; bank
+	call GetFarByte
+	inc hl
 	ld b, a
 	ld a, [wTempMonLevel]
 	cp b
@@ -243,9 +265,10 @@ endr
 	ld a, $1
 	ld [wMonTriedToEvolve], a
 
-	push hl
+	push hl ; 1
 
-	ld a, [hl]
+	ld a, d ; bank
+	call GetFarByte
 	ld [wBuffer2], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
@@ -269,24 +292,25 @@ endr
 
 	farcall EvolutionAnimation
 
-	push af
+	push af ; 2
 	call ClearSprites
-	pop af
+	pop af ; 1
 	jp c, CancelEvolution
 
 	ld hl, Text_CongratulationsYourPokemon
 	call PrintText
 
-	pop hl
+	pop hl ; 0
 
-	ld a, [hl]
+	ld a, d ; bank
+	call GetFarByte
 	ld [wCurSpecies], a
 	ld [wTempMonSpecies], a
 	ld [wBuffer2], a
 	ld [wd265], a
 	call GetPokemonName
 
-	push hl
+	push hl ; 1
 	ld hl, Text_EvolvedIntoPKMN
 	call PrintTextBoxText
 
@@ -343,10 +367,10 @@ endr
 	xor a
 	ld [wMonType], a
 	ld a, [wd265]
-	push af
+	push af ; 2
 	call LearnEvolutionMove
 	call LearnLevelMoves
-	pop af
+	pop af ; 1
 	ld [wd265], a
 	dec a
 	call SetSeenAndCaughtMon
@@ -360,13 +384,13 @@ endr
 	farcall UpdateUnownDex
 
 .skip_unown
-	pop de
-	pop hl
+	pop de ; 0
+	pop hl ; -1 ; I was really confused tracking the pushes and pops for a moment
 	ld a, [wTempMonSpecies]
 	ld [hl], a
-	push hl
-	ld l, e
-	ld h, d
+	push hl ; 0
+	ld l, e ; oh so its going there now is it? but why? HL is immediately overwritten upon jumping
+	ld h, d ; and DE is ovwewritten as well this is just so strange on why this is even here
 	jp EvolveAfterBattle_MasterLoop
 ; 423f8
 
@@ -472,12 +496,15 @@ Text_WhatEvolving: ; 0x42482
 LearnEvolutionMove:
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
+	ld a, [wCurForm]
+	call GetRelevantEvolutionMoves
+	ld a, [wCurPartySpecies]
 	dec a
 	ld b, 0
 	ld c, a
-	ld hl, EvolutionMoves
 	add hl, bc
-	ld a, [hl]
+	ld a, d ;bank
+	call GetFarByte
 	and a
 	ret z
 
@@ -513,35 +540,38 @@ LearnEvolutionMove:
 LearnLevelMoves: ; 42487
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
+	ld a, [wCurForm]
 	call GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld a, d ;bank
+	call GetFarHalfword
 
 .skip_evos
-	ld a, [hli]
+	ld a, d ;bank
+	call GetFarByte
+	inc hl
 	and a
 	jr nz, .skip_evos
 
 .find_move
-	ld a, [hli]
-	and a
+	ld a, d ;bank
+	call GetFarByte
+	inc hl
 	jr z, .done
 
 	ld b, a
 	ld a, [wCurPartyLevel]
 	cp b
-	ld a, [hli]
+	ld a, d ;bank
+	call GetFarByte
+	inc hl
 	jr nz, .find_move
+	ld c, d ; bank
 
 	push hl
 	ld d, a
@@ -552,7 +582,9 @@ LearnLevelMoves: ; 42487
 
 	ld b, NUM_MOVES
 .check_move
-	ld a, [hli]
+	ld a, c ;bank
+	call GetFarByte
+	inc hl
 	cp d
 	jr z, .has_move
 	dec b
@@ -586,35 +618,37 @@ FillMoves: ; 424e1
 	push hl
 	push de
 	push bc
-	ld a, [wCurPartySpecies]
+	ld a, [wCurForm]
 	push de
 	call GetRelevantEvosAttacksPointers
-	pop de
 	ld b, 0
 	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	add a
 	rl b
 	ld c, a
 	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld c, d ;bank
+	ld a, d ;bank
+	pop de
+	call GetFarHalfword
 .GoToAttacks:
-	ld a, [hli]
+	ld a, c ;bank
+	call GetFarByte
+	inc hl
 	and a
 	jr nz, .GoToAttacks
 	jr .GetLevel
 
 .NextMove:
 	pop de
+	ld c, b
 .GetMove:
 	inc hl
 .GetLevel:
-	ld a, [hli]
+	ld a, c ;bank
+	call GetFarByte
+	inc hl
 	and a
 	jp z, .done
 	ld b, a
@@ -630,11 +664,17 @@ FillMoves: ; 424e1
 
 .CheckMove:
 	push de
+	ld b, c ; bank
 	ld c, NUM_MOVES
 .CheckRepeat:
+	ld a, b ;bank
+	call GetFarByte
+	push bc
+	ld b, a
 	ld a, [de]
 	inc de
-	cp [hl]
+	cp b
+	pop bc
 	jr z, .NextMove
 	dec c
 	jr nz, .CheckRepeat
@@ -658,24 +698,29 @@ FillMoves: ; 424e1
 	and a
 	jr z, .ShiftedMove
 	push de
+	push bc
 	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES - 1)
 	add hl, bc
 	ld d, h
 	ld e, l
 	call ShiftMoves
+	pop bc
 	pop de
 
 .ShiftedMove:
 	pop hl
 
 .LearnMove:
-	ld a, [hl]
+	ld a, b ;bank
+	call GetFarByte
 	ld [de], a
 	ld a, [wEvolutionOldSpecies]
 	and a
 	jr z, .NextMove
 	push hl
-	ld a, [hl]
+	push bc
+	ld a, b ;bank
+	call GetFarByte
 	ld hl, MON_PP - MON_MOVES
 	add hl, de
 	push hl
@@ -687,8 +732,9 @@ FillMoves: ; 424e1
 	call GetFarByte
 	pop hl
 	ld [hl], a
+	pop bc
 	pop hl
-	jr .NextMove
+	jp .NextMove
 
 .done
 	pop bc
@@ -722,18 +768,24 @@ GetPreEvolution: ; 42581
 
 ; Return carry and the new species in wCurPartySpecies
 ; if a pre-evolution is found.
-
-	ld c, 0
+	xor a
+	ld c, a
+	ld [wCurPartySpecies], a
 .loop ; For each Pokemon...
-	ld hl, EvosAttacksPointers ; form differences really don't affect evolutions so I think I can leave this be
+	ld a, [wCurForm]
+	push bc
+	call GetRelevantEvosAttacksPointers
+	pop bc
+
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld a, d
+	call GetFarHalfword
 .loop2 ; For each evolution...
-	ld a, [hli]
+	ld a, d
+	call GetFarByte
+	inc hl
 	and a
 	jr z, .no_evolve ; If we jump, this Pokemon does not evolve into wCurPartySpecies.
 	cp EVOLVE_STAT ; This evolution type has the extra parameter of stat comparison.
@@ -770,6 +822,20 @@ GetRelevantEvosAttacksPointers:
 ; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
 	ld hl, VariantEvosAttacksPointerTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+GetRelevantEvolutionMoves:
+; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
+; returns c for variants, nc for normal species
+	ld hl, VariantEvolutionMovesPointerTable
 	ld de, 4
 	call IsInArray
 	inc hl

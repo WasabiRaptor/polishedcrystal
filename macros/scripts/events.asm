@@ -287,6 +287,7 @@ checkpoke: macro
 givepoke: macro
 	db givepoke_command
 	db \1 ; pokemon
+	db GROUP_\1
 	db \2 ; level
 	if _NARG >= 3
 	db \3 ; item
