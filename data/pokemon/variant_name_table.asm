@@ -3,8 +3,6 @@ variant_names: macro
 endm
 
 VariantNamePointerTable:
-    variant_names NIDORINO,  Nidorino
-    variant_names NIDOKING,  Nidoking
-    variant_names SANDSHREW, Sandshrew
-    variant_names SANDSLASH, Sandslash
+    variant_names REGION_KANTO,  Kanto
+    variant_names REGION_JOHTO,  Johto
     dbba -1,        PokemonNames

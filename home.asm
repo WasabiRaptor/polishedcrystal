@@ -542,6 +542,8 @@ GetPokemonName:: ; 343b
 
 ; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
 ; returns c for variants, nc for normal species
+	ld a, [wCurForm]
+
 	ld hl, VariantNamePointerTable
 	ld de, 4
 	call IsInArray
@@ -553,9 +555,6 @@ GetPokemonName:: ; 343b
 	ld l, a
 
 	ld a, [wNamedObjectIndexBuffer]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld bc, PKMN_NAME_LENGTH - 1
 	rst AddNTimes

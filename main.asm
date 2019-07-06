@@ -4854,8 +4854,10 @@ INCLUDE "data/pokemon/variant_names.asm"
 SECTION "Kanto Base Data", ROMX
 
 INCLUDE "data/pokemon/kanto_base_stats.asm"
+INCLUDE "data/pokemon/kanto_names.asm"
 
 
 SECTION "Johto Base Data", ROMX
 
 INCLUDE "data/pokemon/johto_base_stats.asm"
+INCLUDE "data/pokemon/johto_names.asm"
