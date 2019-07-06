@@ -8769,24 +8769,20 @@ BattleCommand_lowkick:
 	ld hl, wEnemyMonSpecies
 .got_species
 	ld a, [hl]
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, BANK(PokedexDataPointerTable)
-	call GetFarHalfword
+	ld [wd265], a
+	farcall GetDexEntryPointer
+	ld a, b
 
 	; skip the pokémon "type" (seed for bulbasaur, genetic for mewtwo, etc)
 .loop
-	farcall GetPokedexEntryBank
+	ld a, b
 	call GetFarByte
 	inc hl
 	cp "@"
 	jr nz, .loop
 
 	; skip height by inc hl twice
-	farcall GetPokedexEntryBank
+	ld a, b
 	inc hl
 	inc hl
 	call GetFarHalfword ; now we have weight in hl

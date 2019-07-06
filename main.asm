@@ -1651,54 +1651,39 @@ Mul16:
 	jr nz, .loop
 	ret
 
-GetDexEntryPointer: ; 44333
+GetDexEntryPointer:: ; 44333
 ; return dex entry pointer b:de
 	push hl
 ;get relevant pointers
+	ld a, [wCurForm]
 	ld hl, VariantPokedexEntryPointerTable
-	ld de, 4
+	ld de, 3
 	call IsInArray
 	inc hl
-	ld a, [hli]
-	ld c, a
-	push af
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
 	ld a, [wd265]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld d, 0
 	ld e, a
 	add hl, de
 	add hl, de
+	add hl, de
+	ld b, [hl]
+	inc hl
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	pop af
-	jr c, .donebanks
-	ld a, [wd265]
-	cp FLORGES
-	jr c, .donebanks
-	ld c, BANK(PokedexEntries2)
-	cp LAPRAS
-	jr c, .donebanks
-	ld c, BANK(PokedexEntries3)
-	cp TALONFLAME
-	jr c, .donebanks
-	ld c, BANK(PokedexEntries4)
-.donebanks
-	ld b, c	
 	pop hl
 	ret
 
-PokedexDataPointerTable: ; 0x44378
-INCLUDE "data/pokemon/dex_entry_pointers.asm"
-INCLUDE "data/pokemon/variant_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/variant_dex_entry_pointer_table.asm"
+
+PokedexDataPointerTable: ; 0x44378
+INCLUDE "data/pokemon/kanto_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
 
 SECTION "Code 11", ROMX
 

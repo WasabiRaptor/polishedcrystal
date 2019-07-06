@@ -98,7 +98,7 @@ add_pics: MACRO ; dba Frontpic, Backpic
 	ENDM
 
 add_pokedexentry: macro
-	dw \1PokedexEntry
+	dba \1PokedexEntry
 endm
 
 add_evosattacks: macro

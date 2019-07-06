@@ -802,33 +802,6 @@ ParkBallMultiplier:
 	ld b, $ff
 	ret
 
-GetPokedexEntryBank:
-	push hl
-	push de
-	ld a, [wEnemyMonSpecies]
-	rlca
-	rlca
-	and 3
-	ld hl, .PokedexEntryBanks
-	ld d, 0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	pop de
-	pop hl
-	ret
-
-.PokedexEntryBanks:
-
-GLOBAL PokedexEntries1
-GLOBAL PokedexEntries2
-GLOBAL PokedexEntries3
-GLOBAL PokedexEntries4
-
-	db BANK(PokedexEntries1)
-	db BANK(PokedexEntries2)
-	db BANK(PokedexEntries3)
-	db BANK(PokedexEntries4)
 
 HeavyBallMultiplier:
 ; subtract 20 from catch rate if weight < 102.4 kg
@@ -836,25 +809,21 @@ HeavyBallMultiplier:
 ; else add 20 to catch rate if weight < 307.2 kg
 ; else add 30 to catch rate if weight < 409.6 kg
 ; else add 40 to catch rate (never happens)
+	push bc
 	ld a, [wEnemyMonSpecies]
-	ld hl, PokedexDataPointerTable
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, BANK(PokedexDataPointerTable)
+	ld [wd265], a
+	farcall GetDexEntryPointer
+	ld a, b
 	call GetFarHalfword
 
 .SkipText:
-	call GetPokedexEntryBank
+	ld a, b
 	call GetFarByte
 	inc hl
 	cp "@"
 	jr nz, .SkipText
 
-	call GetPokedexEntryBank
-	push bc
+	ld a, b
 	inc hl
 	inc hl
 	call GetFarHalfword

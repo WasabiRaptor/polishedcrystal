@@ -659,29 +659,6 @@ ClearBottomLine:
 	ld a, " "
 	jp ByteFill
 
-PokedexShow_GetDexEntryBank:
-	push hl
-	push de
-	ld a, [wCurPartySpecies]
-	dec a
-	rlca
-	rlca
-	and 3
-	ld hl, .pokedexbanks
-	ld d, 0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	pop de
-	pop hl
-	ret
-
-.pokedexbanks
-	db BANK(PokedexEntries1)
-	db BANK(PokedexEntries2)
-	db BANK(PokedexEntries3)
-	db BANK(PokedexEntries4)
-
 PokedexShow1:
 	call StartRadioStation
 .loop
@@ -705,15 +682,11 @@ PokedexShow1:
 
 PokedexShow2:
 	ld a, [wCurPartySpecies]
-	dec a
-	ld hl, PokedexDataPointerTable
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld a, BANK(PokedexDataPointerTable)
+	ld [wd265], a
+	farcall GetDexEntryPointer
+	ld a, b
 	call GetFarHalfword
-	call PokedexShow_GetDexEntryBank
+	ld a, b
 	push af
 	push hl
 	call CopyDexEntryPart1
