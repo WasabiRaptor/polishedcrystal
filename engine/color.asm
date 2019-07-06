@@ -818,12 +818,10 @@ LoadPaintingPalette:
 
 GetMonPalettePointer:
 	push de
+	push af
 	call GetRelevantPallete
+	pop af
 	pop de
-	jr nc, .notvariant
-	ld a, [wCurForm]
-
-.notvariant
 	dec a	
 	ld l, a
 	ld h, $0
@@ -894,23 +892,22 @@ LoadPartyMonPalette:
 
 GetRelevantPallete:
 ; given species in a, return *Palette in bc
+	ld a, [wCurForm]
 	ld hl, VariantPaletteTable
 	ld de, 4
 	call IsInArray
-	ld d, c
 	inc hl
 	inc hl
 	ld a, [hli]
 	ld c, a
 	ld b, [hl]
-	ld a, d
 	ret
 
 INCLUDE "data/pokemon/variant_palette_table.asm"
 
-INCLUDE "data/pokemon/variant_palettes.asm"
+INCLUDE "data/pokemon/kanto_palettes.asm"
 
-INCLUDE "data/pokemon/palettes.asm"
+INCLUDE "data/pokemon/johto_palettes.asm"
 
 LoadPortraitPalette:
 	call GetPortraitPalettePointer
