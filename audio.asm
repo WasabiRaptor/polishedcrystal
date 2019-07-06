@@ -363,8 +363,9 @@ INCLUDE "audio/sfx_crystal.asm"
 
 SECTION "Cries", ROMX
 
-INCLUDE "data/pokemon/cries.asm"
 
 INCLUDE "audio/cries.asm"
 
-INCLUDE "data/pokemon/variant_cries.asm"
+INCLUDE "data/pokemon/kanto_cries.asm"
+
+INCLUDE "data/pokemon/johto_cries.asm"

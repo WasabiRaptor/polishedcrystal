@@ -160,19 +160,12 @@ PlayCryHeader:: ; 3be3
 	ldh a, [hROMBank]
 	push af
 	push de
-	ld a, e
-	inc a
 	call GetRelevantCryPointers
 	ld a, d
 	; Cry headers are stuck in one bank.
 	ldh [hROMBank], a
 	ld [MBC3RomBank], a
 	pop de
-	jr nc, .notvariant
-	ld a, [wCurForm]
-	dec a
-	ld e, a
-.notvariant
 rept 6
 	add hl, de
 endr
@@ -208,6 +201,7 @@ endr
 	ret
 ; 3c23
 GetRelevantCryPointers:
+	ld a, [wCurForm]
 ; given species in a, return *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
 	ld hl, VariantCryTable

@@ -4,7 +4,6 @@ endm
 
 
 VariantCryTable:
-    variant_cries NIDORAN_F, Nidoran
-    variant_cries NIDORINO,  Nidorino
-    variant_cries NIDOKING,  Nidoking
-    dbba -1,        CryHeaders
+    variant_cries REGION_KANTO, Kanto
+    variant_cries REGION_JOHTO, Johto
+    dbba -1,        KantoCries
