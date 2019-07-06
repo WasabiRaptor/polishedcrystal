@@ -3778,17 +3778,6 @@ InitBattleMon: ; 3da0d
 	ld a, [wBaseType2]
 	ld [wBattleMonType2], a
 
-	; Armored Mewtwo is Psychic/Steel
-	ld a, [wBattleMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wBattleMonItem]
-	cp ARMOR_SUIT
-	jr nz, .not_armored_mewtwo
-	ld a, STEEL
-	ld [wBattleMonType2], a
-.not_armored_mewtwo
-
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
 	call SkipNames
@@ -3906,18 +3895,6 @@ InitEnemyMon: ; 3dabd
 	ld a, [hl]
 	ld [de], a
 
-if !DEF(FAITHFUL)
-	; Armored Mewtwo is Psychic/Steel
-	ld a, [wEnemyMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wEnemyMonItem]
-	cp ARMOR_SUIT
-	jr nz, .not_armored_mewtwo
-	ld a, STEEL
-	ld [wEnemyMonType2], a
-.not_armored_mewtwo
-endc
 
 	ld hl, wBaseStats
 	ld de, wEnemyMonBaseStats
@@ -6806,11 +6783,11 @@ LoadEnemyMon: ; 3e8eb
 	ldh [rSVBK], a
 
 	;check if the map should have a certain pokemon form
-	ld a, [wMapGroup]
+	;ld a, [wMapGroup]
 	;cp GROUP_LAKE_OF_RAGE
 	;jr nz, .NoAlolanForms
-	ld a, ALOLAN
-	ld [wCurForm], a
+	;ld a, ALOLAN
+	;ld [wCurForm], a
 .NoAlolanForms
 	; Grab the BaseData for this species
 	call GetBaseData ;form is known
@@ -7083,16 +7060,16 @@ endc
 	ld b, a
 
 	; Form
-	ld a, [wBattleType]
-	cp BATTLETYPE_RED_GYARADOS
-	ld a, GYARADOS_RED_FORM
-	jr z, .special_form
+	;ld a, [wBattleType]
+	;cp BATTLETYPE_RED_GYARADOS
+	;ld a, GYARADOS_RED_FORM
+	;jr z, .special_form
 
-	ld a, [wMapGroup]
+	;ld a, [wMapGroup]
 	;cp GROUP_LAKE_OF_RAGE
-	ld a, ALOLAN
-	jr z, .special_form
-	;ld a, 1 ; default form 1
+	;ld a, ALOLAN
+	;jr z, .special_form
+	ld a, 1 ; default form 1
 .special_form
 	add b
 	ld [hl], a
@@ -7139,14 +7116,14 @@ endr
 	jr nz, .Happiness
 
 	; Random Magikarp pattern
-	ld a, NUM_MAGIKARP
-	call BattleRandomRange
-	inc a
-	ld b, a
-	ld a, [wEnemyMonForm]
-	and $ff - FORM_MASK
-	add b
-	ld [wEnemyMonForm], a
+	;ld a, NUM_MAGIKARP
+	;call BattleRandomRange
+	;inc a
+	;ld b, a
+	;ld a, [wEnemyMonForm]
+	;and $ff - FORM_MASK
+	;add b
+	;ld [wEnemyMonForm], a
 
 	; Get Magikarp's length
 	ld de, wEnemyMonDVs
@@ -7263,18 +7240,6 @@ endr
 	ld a, [hl]
 	ld [de], a
 
-if !DEF(FAITHFUL)
-	; Armored Mewtwo is Psychic/Steel
-	ld a, [wEnemyMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wEnemyMonItem]
-	cp ARMOR_SUIT
-	jr nz, .not_armored_mewtwo
-	ld a, STEEL
-	ld [wEnemyMonType2], a
-.not_armored_mewtwo
-endc
 
 	; Get moves
 	ld de, wEnemyMonMoves

@@ -24,7 +24,7 @@ CryHeaders::
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; MAGNEZONE
 	mon_cry CRY_WEEPINBELL,  $0aa,  $17f ; PORYGON
 	mon_cry CRY_GIRAFARIG,   $073,  $240 ; PORYGON2
-	mon_cry CRY_VENONAT,     $088,  $0e0 ; PORYGONZ
+	mon_cry CRY_VENONAT,     $088,  $0e0 ; PORYGON_Z
 	mon_cry CRY_CLEFAIRY,    $077,  $090 ; MEOWTH
 	mon_cry CRY_CLEFAIRY,    $099,  $17f ; PERSIAN
 	mon_cry CRY_TOGEPI,      $010,  $100 ; TOGEPI
@@ -34,7 +34,7 @@ CryHeaders::
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; CHINGLING
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; CHIMECHO
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; ESPURR
-	mon_cry CRY_VENONAT,     $088,  $0e0 ; MEOWSTIC
+	mon_cry CRY_VENONAT,     $088,  $0e0 ; MEOWSTIC_M
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; TIMBURR
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; GURDURR
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; CONKELDURR
@@ -255,7 +255,7 @@ CryHeaders::
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; MAGEARNA
 	mon_cry CRY_VENONAT,     $088,  $0e0 ; SHAYMIN
 	mon_cry CRY_ENTEI,       $14a,  $111 ; CELEBI
-	mon_cry CRY_VENONAT,     $088,  $0e0 ; ZYGARDE
+	mon_cry CRY_VENONAT,     $088,  $0e0 ; ZYGARDE_10
 	mon_cry CRY_PARAS,       $0ee,  $17f ; MEW
 	mon_cry CRY_PARAS,       $099,  $17f ; MEWTWO
 	mon_cry CRY_NIDORAN_M,      0,     0 ; 254

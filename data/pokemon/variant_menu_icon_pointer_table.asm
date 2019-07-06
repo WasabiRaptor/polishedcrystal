@@ -10,8 +10,8 @@ VariantIconPointerTable:
     variant_icons GRIMER,    Grimer
     variant_icons MUK,       Muk
     variant_icons ROTOM,     Rotom
-	variant_icons MEOWSTIC,  Meowstic
-    variant_icons NIDORAN,   Nidoran
+	variant_icons MEOWSTIC_M,  Meowstic
+    variant_icons NIDORAN_F,   Nidoran
     variant_icons NIDORINO,  Nidorino
     variant_icons NIDOKING,  Nidoking
     variant_icons SANDSHREW, Sandshrew
@@ -26,5 +26,5 @@ VariantIconPointerTable:
     variant_icons RAIKOU,    Raikou
     variant_icons ENTEI,     Entei
     variant_icons SHAYMIN,   Shaymin
-    variant_icons ZYGARDE,   Zygarde
+    variant_icons ZYGARDE_10,   Zygarde
 	dbbw -1,      BANK(Icons1), IconPointers

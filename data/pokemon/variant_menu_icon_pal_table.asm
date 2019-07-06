@@ -8,10 +8,10 @@ VariantIconPalTable:
     variant_iconpals MEOWTH,    Meowth  
     variant_iconpals PERSIAN,   Persian 
     variant_iconpals ROTOM,     Rotom
-	variant_iconpals MEOWSTIC,  Meowstic  
+	variant_iconpals MEOWSTIC_M,  Meowstic  
     variant_iconpals GRIMER,    Grimer
     variant_iconpals MUK,       Muk
-    variant_iconpals NIDORAN,   Nidoran
+    variant_iconpals NIDORAN_F,   Nidoran
     variant_iconpals NIDORINO,  Nidorino
     variant_iconpals NIDOKING,  Nidoking
     variant_iconpals SANDSHREW, Sandshrew

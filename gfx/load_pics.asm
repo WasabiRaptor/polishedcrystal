@@ -9,35 +9,6 @@ GetVariant: ; 51040
 	ld [wCurForm], a
 	ret
 
-.GetMewtwoVariant:
-; Return Mewtwo form (1-2) in wCurForm
-; hl-9 is ...MonItem
-; hl is ...MonForm
-
-	push bc
-	ld bc, wTempMonForm
-	ld a, b
-	cp h
-	jr nz, .nottemp2
-	ld a, c
-	cp l
-	jr nz, .nottemp2
-	; skip wTempMonID through wTempMonSdfEV
-	ld bc, -11
-	add hl, bc
-.nottemp2
-	ld bc, -9
-	add hl, bc
-	pop bc
-
-	ld a, [hl]
-	cp ARMOR_SUIT
-	ld a, MEWTWO_ARMORED_FORM
-	jr z, .armored_mewtwo
-	dec a ; MEWTWO_PLAIN_FORM
-.armored_mewtwo
-	ld [wCurForm], a
-	ret
 
 GetFrontpic: ; 51077
 	ld a, [wCurPartySpecies]

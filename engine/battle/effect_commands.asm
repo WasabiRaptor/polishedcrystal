@@ -2387,7 +2387,7 @@ BattleCommand_hittargetnosub: ; 34f60
 	jr .fury_attack
 
 .fury_attack_users
-	db NIDORAN
+	db NIDORAN_F
 	db NIDORINO
 	db NIDOKING
 	db HERACROSS

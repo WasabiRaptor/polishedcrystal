@@ -336,7 +336,7 @@ PorygonEvosAttacks:
 	db 0 ; no more level-up moves
 
 Porygon2EvosAttacks:
-	db EVOLVE_HOLDING, DUBIOUS_DISC, PORYGONZ
+	db EVOLVE_HOLDING, DUBIOUS_DISC, PORYGON_Z
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, CONVERSION
@@ -510,7 +510,7 @@ ChimechoEvosAttacks:
 	db 0 ; no more level-up moves
 
 EspurrEvosAttacks:
-	db EVOLVE_LEVEL, 16, MEOWSTIC
+	db EVOLVE_LEVEL, 16, MEOWSTIC_M
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
@@ -1998,7 +1998,7 @@ DeinoEvosAttacks:
 	db 0 ; no more level-up moves
 
 ZweilousEvosAttacks:
-	db EVOLVE_HAPPINESS, TR_ANYTIME, NIDORAN
+	db EVOLVE_HAPPINESS, TR_ANYTIME, NIDORAN_F
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves

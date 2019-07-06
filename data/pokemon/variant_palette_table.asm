@@ -7,10 +7,10 @@ VariantPaletteTable:
     variant_palettes MEOWTH,    Meowth  
     variant_palettes PERSIAN,   Persian 
     variant_palettes ROTOM,     Rotom
-	variant_palettes MEOWSTIC,  Meowstic  
+	variant_palettes MEOWSTIC_M,  Meowstic  
     variant_palettes GRIMER,    Grimer
     variant_palettes MUK,       Muk
-    variant_palettes NIDORAN,   Nidoran
+    variant_palettes NIDORAN_F,   Nidoran
     variant_palettes NIDORINO,  Nidorino
     variant_palettes NIDOKING,  Nidoking
     variant_palettes SANDSHREW, Sandshrew

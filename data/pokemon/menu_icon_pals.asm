@@ -22,7 +22,7 @@ MenuMonIconColors::
 	iconpal GRAY, BROWN ; MAGNEZONE
 	iconpal BLUE, PURPLE ; PORYGON
 	iconpal BLUE, PURPLE ; PORYGON2
-	iconpal BLUE, PURPLE ; PORYGONZ   	
+	iconpal BLUE, PURPLE ; PORYGON_Z   	
 	iconpal BROWN, RED ; MEOWTH   	
 	iconpal BROWN, RED ; PERSIAN     	
 	iconpal RED, BLUE ; TOGEPI
@@ -32,7 +32,7 @@ MenuMonIconColors::
 	iconpal GRAY, GRAY ; CHINGLING  	
 	iconpal GRAY, GRAY ; CHIMECHO  
 	iconpal GRAY, GRAY ; ESPURR  		
-	iconpal GRAY, GRAY ; MEOWSTIC   	
+	iconpal GRAY, GRAY ; MEOWSTIC_M   	
 	iconpal GRAY, GRAY ; TIMBURR  		
 	iconpal GRAY, GRAY ; GURDURR  		
 	iconpal GRAY, GRAY ; CONKELDURR   	
@@ -253,7 +253,7 @@ MenuMonIconColors::
 	iconpal GRAY, GRAY ; MAGEARNA   	; f8
 	iconpal GRAY, GRAY ; SHAYMIN    	; f9 alt forms
 	iconpal GREEN, RED ; CELEBI
-	iconpal GRAY, GRAY ; ZYGARDE    	; fb alt forms
+	iconpal GRAY, GRAY ; ZYGARDE_10    	; fb alt forms
 	iconpal PINK, BLUE ; MEW
 	iconpal PURPLE, GRAY ; MEWTWO
 	iconpal RED, BLUE ; EGG

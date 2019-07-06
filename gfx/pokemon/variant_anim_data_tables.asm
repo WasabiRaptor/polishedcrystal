@@ -5,8 +5,8 @@ VariantSpeciesTable:
 	db GRIMER
 	db MUK
 	db ROTOM
-	db MEOWSTIC
-    db NIDORAN
+	db MEOWSTIC_M
+    db NIDORAN_F
     db NIDORINO
     db NIDOKING
     db SANDSHREW
@@ -21,7 +21,7 @@ VariantSpeciesTable:
     db RAIKOU
     db ENTEI
     db SHAYMIN
-    db ZYGARDE
+    db ZYGARDE_10
 	db -1
 
 variant_animdata: macro
@@ -35,8 +35,8 @@ VariantAnimPointerTable:
     variant_animdata GRIMER,    Grimer  
     variant_animdata MUK,       Muk  
     variant_animdata ROTOM,     Rotom  
-    variant_animdata MEOWSTIC,  Meowstic  
-    variant_animdata NIDORAN,   Nidoran   
+    variant_animdata MEOWSTIC_M,  Meowstic  
+    variant_animdata NIDORAN_F,   Nidoran   
     variant_animdata NIDORINO,  Nidorino   
     variant_animdata NIDOKING,  Nidoking   
     variant_animdata SANDSHREW, Sandshrew   
@@ -51,7 +51,7 @@ VariantAnimPointerTable:
     variant_animdata RAIKOU,    Raikou  
     variant_animdata ENTEI,     Entei   
     variant_animdata SHAYMIN,   Shaymin  
-    variant_animdata ZYGARDE,   Zygarde   
+    variant_animdata ZYGARDE_10,   Zygarde   
 	dbbww -1,           BANK(PicAnimations), AnimationPointers, AnimationIdlePointers
 
 variant_frames: macro
@@ -65,8 +65,8 @@ VariantFramesPointerTable:
     variant_frames GRIMER,    Grimer  
     variant_frames MUK,       Muk  
     variant_frames ROTOM,     Rotom  
-    variant_frames MEOWSTIC,  Meowstic  
-    variant_frames NIDORAN,   Nidoran   
+    variant_frames MEOWSTIC_M,  Meowstic  
+    variant_frames NIDORAN_F,   Nidoran   
     variant_frames NIDORINO,  Nidorino   
     variant_frames NIDOKING,  Nidoking   
     variant_frames SANDSHREW, Sandshrew   
@@ -81,7 +81,7 @@ VariantFramesPointerTable:
     variant_frames RAIKOU,    Raikou  
     variant_frames ENTEI,     Entei   
     variant_frames SHAYMIN,   Shaymin  
-    variant_frames ZYGARDE,   Zygarde   
+    variant_frames ZYGARDE_10,   Zygarde   
 	dbbba -1,           BANK(KantoFrames), FramesPointers
 
 variant_bitmasks: macro
@@ -95,8 +95,8 @@ VariantBitmasksPointerTable:
     variant_bitmasks GRIMER,    Grimer  
     variant_bitmasks MUK,       Muk  
     variant_bitmasks ROTOM,     Rotom  
-    variant_bitmasks MEOWSTIC,  Meowstic  
-    variant_bitmasks NIDORAN,   Nidoran   
+    variant_bitmasks MEOWSTIC_M,  Meowstic  
+    variant_bitmasks NIDORAN_F,   Nidoran   
     variant_bitmasks NIDORINO,  Nidorino   
     variant_bitmasks NIDOKING,  Nidoking   
     variant_bitmasks SANDSHREW, Sandshrew   
@@ -111,5 +111,5 @@ VariantBitmasksPointerTable:
     variant_bitmasks RAIKOU,    Raikou  
     variant_bitmasks ENTEI,     Entei   
     variant_bitmasks SHAYMIN,   Shaymin  
-    variant_bitmasks ZYGARDE,   Zygarde   
+    variant_bitmasks ZYGARDE_10,   Zygarde   
 	dbba -1,            BitmasksPointers

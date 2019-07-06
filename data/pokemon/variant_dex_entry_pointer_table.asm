@@ -8,10 +8,10 @@ VariantPokedexEntryPointerTable:
     variant_dexentry PERSIAN, Persian 
     variant_dexentry GRIMER, Grimer
     variant_dexentry MUK, Muk
-    variant_dexentry NIDORAN, Nidoran
+    variant_dexentry NIDORAN_F, Nidoran
     variant_dexentry NIDORINO, Nidorino
     variant_dexentry NIDOKING, Nidoking
-	variant_dexentry MEOWSTIC, Meowstic
+	variant_dexentry MEOWSTIC_M, Meowstic
     variant_dexentry SANDSHREW, Sandshrew
     variant_dexentry SANDSLASH, Sandslash
     variant_dexentry GIRAFARIG, Girafarig

@@ -554,25 +554,19 @@ StanceChangeAbility:
 	ldh a, [hBattleTurn]
 	and a
 	push af
-	ld hl, wBattleMonForm
+	ld hl, wBattleMonSpecies
 	jr z, .got_form
-	ld hl, wEnemyMonForm
+	ld hl, wEnemyMonSpecies
 .got_form
-
 	ld a, BATTLE_VARS_MOVE_CATEGORY
 	call GetBattleVar
 	cp STATUS
+	ld a, [hl]
 	jr z, .status
 
-	predef GetVariant
-	cp BLADE_AEGISLASH
+	cp AEGISLASH_BLADE
 	jr z, .popafandret
-	ld a, BLADE_AEGISLASH
-	ld [wCurForm], a
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or BLADE_AEGISLASH
-	ld [hl], a
+	ld a, AEGISLASH_BLADE
 	jr .stanceChanged
 
 .popafandret
@@ -580,18 +574,16 @@ StanceChangeAbility:
 	ret
 
 .status
-	predef GetVariant
-	cp SHIELD_AEGISLASH
+	;predef GetVariant
+	cp AEGISLASH_SHIELD
 	jr z, .popafandret
-	ld a, SHIELD_AEGISLASH
-	ld [wCurForm], a
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or SHIELD_AEGISLASH
-	ld [hl], a
+	ld a, AEGISLASH_SHIELD
 	;fallthrough
 
 .stanceChanged
+	ld [hl], a
+	pop af
+	push af
 	jr nz,.enemyturn
 	call UpdateBattleMonInParty
 
@@ -1168,28 +1160,23 @@ PowerConstructAbility:
 	ldh a, [hBattleTurn]
 	and a
 	push af
-	ld hl, wBattleMonForm
+	ld hl, wBattleMonSpecies
 	jr z, .got_form
-	ld hl, wEnemyMonForm
+	ld hl, wEnemyMonSpecies
 .got_form
-	predef GetVariant
-	cp TEN_PERCENT_ZYGARDE
+	;predef GetVariant
+	cp ZYGARDE_10
 	jr z, .ten
-	cp FIFTY_PERCENT_ZYGARDE
+	cp ZYGARDE_50
 	jr z, .fifty
 	jr .popafandret
 
 .ten
-	ld b, TEN_PERCENT_ZYGARDE_COMPLETE
+	ld a, ZYGARDE_10_COMPLETE
 	jr .form_change
 .fifty
-	ld b, FIFTY_PERCENT_ZYGARDE_COMPLETE
+	ld a, ZYGARDE_50_COMPLETE
 .form_change
-	ld a, b
-	ld [wCurForm], a
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or b
 	ld [hl], a
 
 	pop af
@@ -2128,29 +2115,26 @@ RunPostBattleAbilities::
 
 .form_revert:
 	push bc
-	ld a, MON_FORM
+	ld a, MON_SPECIES
 	call GetPartyParamLocation
-	predef GetVariant
-	cp BLADE_AEGISLASH
+	;predef GetVariant
+	cp AEGISLASH_BLADE
 	jr z, .aegislash
-	cp TEN_PERCENT_ZYGARDE_COMPLETE
+	cp ZYGARDE_10_COMPLETE
 	jr z, .ten
-	cp FIFTY_PERCENT_ZYGARDE_COMPLETE
+	cp ZYGARDE_50_COMPLETE
 	jr z, .fifty
 	ret
 
 .aegislash
-	ld b, SHIELD_AEGISLASH
+	ld b, AEGISLASH_SHIELD
 	jr .revert
 .ten
-	ld b, TEN_PERCENT_ZYGARDE
+	ld b, ZYGARDE_10
 	jr .revert
 .fifty
-	ld b, FIFTY_PERCENT_ZYGARDE
+	ld b, ZYGARDE_50
 .revert
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or b
 	ld [hl], a
 	farcall UpdatePkmnStats
 	pop bc

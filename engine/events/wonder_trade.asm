@@ -320,12 +320,12 @@ endr
 	ld b, a
 	; Form
 	ld a, [wOTTrademonSpecies]
-	cp MAGIKARP
-	jr z, .magikarp
+	;cp MAGIKARP
+	;jr z, .magikarp
 	ld a, 1
 	jr .got_form_count
 .magikarp
-	ld a, NUM_MAGIKARP
+	;ld a, NUM_MAGIKARP
 .got_form_count
 	push bc
 	call RandomRange

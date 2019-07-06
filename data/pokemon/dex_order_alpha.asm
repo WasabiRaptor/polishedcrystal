@@ -159,7 +159,7 @@ AlphabeticalPokedexOrder:
 	db MARILL
 	db MEDICHAM
 	db MEDITITE
-	db MEOWSTIC
+	db MEOWSTIC_M
 	db MEOWTH
 	db MEW
 	db MEWTWO
@@ -176,7 +176,7 @@ AlphabeticalPokedexOrder:
 	db NATU
 	db NIDOKING
 	db NIDOQUEEN
-	db NIDORAN
+	db NIDORAN_F
 	db NIDORINA
 	db NIDORINO
 	db NINETALES
@@ -194,7 +194,7 @@ AlphabeticalPokedexOrder:
 	db PILOSWINE
 	db PINECO
 	db PORYGON
-	db PORYGONZ
+	db PORYGON_Z
 	db PORYGON2
 	db PROBOPASS
 	db PUPITAR
@@ -279,4 +279,4 @@ AlphabeticalPokedexOrder:
 	db ZOROARK
 	db ZORUA
 	db ZWEILOUS
-	db ZYGARDE
+	db ZYGARDE_10

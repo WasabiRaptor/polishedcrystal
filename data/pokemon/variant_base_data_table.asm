@@ -8,11 +8,11 @@ VariantBaseDataTable:
     variant_basedata PERSIAN, Persian 
     variant_basedata GRIMER, Grimer
     variant_basedata MUK, Muk
-    variant_basedata NIDORAN, Nidoran
+    variant_basedata NIDORAN_F, Nidoran
     variant_basedata NIDORINO, Nidorino
     variant_basedata NIDOKING, Nidoking
     variant_basedata ROTOM, Rotom
-	variant_basedata MEOWSTIC, Meowstic
+	variant_basedata MEOWSTIC_M, Meowstic
     variant_basedata SANDSHREW, Sandshrew
     variant_basedata SANDSLASH, Sandslash
     variant_basedata GIRAFARIG, Girafarig
@@ -23,6 +23,6 @@ VariantBaseDataTable:
     variant_basedata RAIKOU, Raikou
     variant_basedata ENTEI, Entei
     variant_basedata SHAYMIN, Shaymin
-    variant_basedata ZYGARDE, Zygarde
+    variant_basedata ZYGARDE_10, Zygarde
 	dbba -1,        BaseData
 

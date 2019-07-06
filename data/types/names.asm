@@ -10,21 +10,6 @@ PrintMonTypes: ; 5090d
 	call GetBaseData ;form is known
 	pop hl
 
-if !DEF(FAITHFUL)
-	; PrintMonTypes is only called for the stats screen,
-	; so assume that the full data is in wTempMon
-	; Armored Mewtwo is Psychic/Steel
-	ld a, [wTempMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wTempMonItem]
-	cp ARMOR_SUIT
-	jr nz, .not_armored_mewtwo
-	ld a, STEEL
-	ld [wBaseType2], a
-.not_armored_mewtwo
-endc
-
 	push hl
 	ld a, [wBaseType1]
 	call .Print

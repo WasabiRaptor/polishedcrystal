@@ -20,7 +20,7 @@ DanielsTown_MapScriptHeader:
 
 MysteryDungeonEnterScript:
 	opentext
-	givepoke DRAMPA, 5, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke CYNDAQUIL, 5;, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
 	end
 AlolaName:

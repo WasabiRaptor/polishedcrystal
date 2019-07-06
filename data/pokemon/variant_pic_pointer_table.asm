@@ -9,8 +9,8 @@ VariantPicPointerTable:
     variant_picpointers GRIMER,    Grimer
     variant_picpointers MUK,       Muk
     variant_picpointers ROTOM,     Rotom
-	variant_picpointers MEOWSTIC,  Meowstic
-    variant_picpointers NIDORAN,   Nidoran
+	variant_picpointers MEOWSTIC_M,  Meowstic
+    variant_picpointers NIDORAN_F,   Nidoran
     variant_picpointers NIDORINO,  Nidorino
     variant_picpointers NIDOKING,  Nidoking
     variant_picpointers SANDSHREW, Sandshrew
@@ -25,5 +25,5 @@ VariantPicPointerTable:
     variant_picpointers RAIKOU,    Raikou
     variant_picpointers ENTEI,     Entei
     variant_picpointers SHAYMIN,   Shaymin
-    variant_picpointers ZYGARDE,   Zygarde
+    variant_picpointers ZYGARDE_10,   Zygarde
 	dbba -1,        PokemonPicPointers

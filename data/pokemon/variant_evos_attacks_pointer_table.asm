@@ -9,11 +9,11 @@ VariantEvosAttacksPointerTable:
     variant_evosattacks PERSIAN,   Persian   
     variant_evosattacks GRIMER,    Grimer
     variant_evosattacks MUK,       Muk
-    variant_evosattacks NIDORAN,   Nidoran
+    variant_evosattacks NIDORAN_F,   Nidoran
     variant_evosattacks NIDORINO,  Nidorino
     variant_evosattacks NIDOKING,  Nidoking
     variant_evosattacks ROTOM,     Rotom
-	variant_evosattacks MEOWSTIC,  Meowstic
+	variant_evosattacks MEOWSTIC_M,  Meowstic
     variant_evosattacks SANDSHREW, Sandshrew
     variant_evosattacks SANDSLASH, Sandslash
     variant_evosattacks GIRAFARIG, Girafarig

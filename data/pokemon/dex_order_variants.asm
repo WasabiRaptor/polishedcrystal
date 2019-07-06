@@ -4,10 +4,10 @@ VariantPokedexOrder:
 	db MEOWTH
 	db PERSIAN
 	db ESPURR
-	db MEOWSTIC   	; 1e alt forms alt palettes
+	db MEOWSTIC_M   	; 1e alt forms alt palettes
 	db GRIMER
 	db MUK
-	db NIDORAN 		; 27 alt forms alt palettes
+	db NIDORAN_F 		; 27 alt forms alt palettes
 	db NIDORINA
 	db NIDOQUEEN
 	db SANDSHREW   	; 3b alt forms alt palettes
