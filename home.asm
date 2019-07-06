@@ -1359,13 +1359,11 @@ GetBaseData:: ; 3856
 	cp EGG
 	jr z, .egg
 
+	ld a, [wCurForm]
 	call GetRelevantBaseData
 	push hl
 
-	ld a, [wCurForm]
-	jp c, .variant
 	ld a, [wCurSpecies]
-.variant
 	dec a
 	ld b, a
 	ld a, d
