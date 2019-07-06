@@ -954,23 +954,20 @@ GLOBAL EvosAttacks
 GLOBAL EvosAttacksPointers
 
 	push bc
-	ld a, [wTempEnemyMonSpecies]
+	ld a, [wCurForm]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wTempEnemyMonSpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, d
+	ld a, d ;bank
 	call GetFarHalfword
 	pop bc
 
 	push bc
-	ld a, BANK(EvosAttacks)
+	ld a, d ;bank
 	call GetFarByte
 	cp EVOLVE_ITEM
 	pop bc
@@ -981,7 +978,7 @@ GLOBAL EvosAttacksPointers
 	inc hl
 
 	push bc
-	ld a, BANK(EvosAttacks)
+	ld a, d ;bank
 	call GetFarByte
 	cp MOON_STONE
 	pop bc

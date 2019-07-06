@@ -536,32 +536,32 @@ InitEggMoves:
 
 InheritLevelMove:
 ; If move d is part of the level up moveset, inherit that move
-	ld a, [wEggMonSpecies]
-	farcall GetRelevantEvosAttacksPointers
-	ld a, [wEggMonSpecies]
-	jr nc, .notvariant
+	push de
 	ld a, [wCurForm]
-.notvariant
+	farcall GetRelevantEvosAttacksPointers
+	ld b, d
+	ld a, [wEggMonSpecies]
 	dec a
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
 	ld a, d
 	call GetFarHalfword
+	pop de
 .loop
-	ld a, BANK(EvosAttacks)
+	ld a, b; bank
 	call GetFarByte
 	inc hl
 	and a
 	jr nz, .loop
 .loop2
-	ld a, BANK(EvosAttacks)
+	ld a, b; bank
 	call GetFarByte
 	and a
 	ret z
 	inc hl
-	ld a, BANK(EvosAttacks)
+	ld a, b; bank
 	call GetFarByte
 	cp d
 	jr z, InheritMove
@@ -570,32 +570,31 @@ InheritLevelMove:
 
 InheritEggMove:
 ; If move d is an egg move, inherit that move
-	ld a, [wEggMonSpecies]
+	ld a, [wCurForm]
 ; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
 ; returns c for variants, nc for normal species
+	push de
 	ld hl, VariantEggMovePointerTable
 	ld de, 4
 	call IsInArray
 	inc hl
 	ld a, [hli]
-	ld d, a
+	ld b, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	
 	ld a, [wEggMonSpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld a, d; bank
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	ld a, b; bank
 	call GetFarHalfword
+	pop de
 .loop
-	ld a, BANK(EggMoves)
+	ld a, b ;bank
 	call GetFarByte
 	inc a
 	ret z

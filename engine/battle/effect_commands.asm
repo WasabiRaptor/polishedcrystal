@@ -3361,21 +3361,19 @@ UnevolvedEviolite:
 	push hl
 	push bc
 	push de
+	ld a, [wCurForm]
 	farcall GetRelevantEvosAttacksPointers ;not sure if form is known
 	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld c, a
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld a, d
-	pop de
+	ld a, d ;bank
 	call GetFarHalfword
-	ld a, BANK(EvosAttacks)
+	ld a, d; bank
 	call GetFarByte
+	pop de
 	and a
 	pop bc
 	pop hl

@@ -411,6 +411,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 
 .DetermineCompatibility: ; 50268
 	ld a, b ;this is the bank from GetRelevantEvosAttacksPointers
+	push bc
 	ld de, wStringBuffer1
 	ld bc, 2
 	call FarCopyBytes 
@@ -421,7 +422,8 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld de, wStringBuffer1
 ; Only reads first 4 evolution entries
 ; https://hax.iimarck.us/topic/4567/
-	ld a, BANK(EvosAttacks) ;not an issue here, all EvosAttacks are in the same bank
+	pop bc
+	ld a, b ; bank
 	ld bc, $10
 	call FarCopyBytes
 	ld hl, wStringBuffer1
