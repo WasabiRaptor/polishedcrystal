@@ -1576,7 +1576,7 @@ UpdateEnemyPkmnStats:
 	call GetEnemyPartyParamLocation
 	ld a, [hl]
 	ld [wCurSpecies], a
-	ld a, MON_FORM
+	ld a, MON_GROUP
 	call GetEnemyPartyParamLocation
 	predef GetPokeGroup
 	call GetBaseData ;form is known
@@ -1607,7 +1607,7 @@ UpdatePkmnStats:
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurSpecies], a
-	ld a, MON_FORM
+	ld a, MON_GROUP
 	call GetPartyParamLocation
 	predef GetPokeGroup
 	call GetBaseData ;form is known

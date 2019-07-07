@@ -1703,7 +1703,7 @@ GetForgottenMoves::
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartySpecies], a
-	ld a, MON_FORM
+	ld a, MON_GROUP
 	call GetPartyParamLocation
 	predef GetPokeGroup
 	ld a, [wCurPokeGroup]

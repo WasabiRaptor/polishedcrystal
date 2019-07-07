@@ -4847,7 +4847,7 @@ endr
 	ld a, [hl]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld bc, MON_FORM - MON_SPECIES
+	ld bc, MON_GROUP - MON_SPECIES
 	add hl, bc
 	predef GetPokeGroup
 	call GetBaseData ;form is known

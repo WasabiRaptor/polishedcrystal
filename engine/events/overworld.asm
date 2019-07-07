@@ -82,7 +82,7 @@ CheckPartyMove: ; c742
 	rst AddNTimes
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .next
-	ld bc, MON_MOVES - MON_FORM
+	ld bc, MON_MOVES - MON_GROUP
 	add hl, bc
 	ld b, NUM_MOVES
 .check

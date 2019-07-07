@@ -119,7 +119,7 @@ MON_NATURE               EQUS "(wPartyMon1Nature - wPartyMon1)"
 MON_GENDER               EQUS "(wPartyMon1Gender - wPartyMon1)"
 MON_IS_EGG               EQUS "(wPartyMon1IsEgg - wPartyMon1)"
 MON_IS_DEAD              EQUS "(wPartyMon1IsDead - wPartyMon1)"
-MON_FORM                 EQUS "(wPartyMon1Group - wPartyMon1)"
+MON_GROUP                EQUS "(wPartyMon1Group - wPartyMon1)"
 MON_PP                   EQUS "(wPartyMon1PP - wPartyMon1)"
 MON_HAPPINESS            EQUS "(wPartyMon1Happiness - wPartyMon1)"
 MON_PKRUS                EQUS "(wPartyMon1PokerusStatus - wPartyMon1)"
@@ -142,7 +142,11 @@ MON_SDF                  EQUS "(wPartyMon1SpclDef - wPartyMon1)"
 BOXMON_STRUCT_LENGTH     EQUS "(wPartyMon1End - wPartyMon1)"
 PARTYMON_STRUCT_LENGTH   EQUS "(wPartyMon1StatsEnd - wPartyMon1)"
 
-; apply to MON_FORM
+;PP masks
+PP_UPS_USED_MASK %11000000
+
+
+; apply to MON_GROUP
 SHINY_MASK   EQU %10000000
 ABILITY_MASK EQU %01100000
 NATURE_MASK  EQU %00011111

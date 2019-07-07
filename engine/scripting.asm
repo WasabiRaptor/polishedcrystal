@@ -2254,7 +2254,7 @@ Script_checkegg:
 	dec a
 	push af
 	ld [wCurPartyMon], a
-	ld a, MON_FORM
+	ld a, MON_GROUP
 	call GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr z, .next
