@@ -68,8 +68,8 @@ CheckBreedmonCompatibility: ; 16e1d
 .CheckBreedingGroupCompatibility: ; 16ed6
 ; If either mon is in the No Eggs group,
 ; they are not compatible.
-	ld hl, wBreedMon2Form
-	predef GetVariant
+	ld hl, wBreedMon2Group
+	predef GetPokeGroup
 	ld a, [wBreedMon2Species]
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
@@ -77,8 +77,8 @@ CheckBreedmonCompatibility: ; 16e1d
 	cp NO_EGGS * $11
 	jr z, .Incompatible
 
-	ld hl, wBreedMon1Form
-	predef GetVariant
+	ld hl, wBreedMon1Group
+	predef GetPokeGroup
 	ld a, [wBreedMon1Species]
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
@@ -271,10 +271,10 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld [hl], a
 
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetVariant
+	predef GetPokeGroup
 
 	ld a, [wCurPartySpecies]
 	cp TOGEPI
@@ -537,7 +537,7 @@ InitEggMoves:
 InheritLevelMove:
 ; If move d is part of the level up moveset, inherit that move
 	push de
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld b, d
 	ld a, [wEggMonSpecies]
@@ -570,7 +570,7 @@ InheritLevelMove:
 
 InheritEggMove:
 ; If move d is an egg move, inherit that move
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 ; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
 ; returns c for variants, nc for normal species
 	push de
@@ -634,10 +634,10 @@ GetEggFrontpic: ; 17224 (5:7224)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetVariant
+	predef GetPokeGroup
 	ld a, [wCurSpecies]
 	call GetBaseData ;form is known
 
@@ -649,10 +649,10 @@ GetHatchlingFrontpic: ; 1723c (5:723c)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetVariant
+	predef GetPokeGroup
 	ld a, [wCurSpecies]
 	call GetBaseData ;form is known
 	pop de

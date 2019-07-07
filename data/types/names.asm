@@ -4,8 +4,8 @@ PrintMonTypes: ; 5090d
 
 	push hl
 	push af
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPokeGroup
 	pop af
 	call GetBaseData ;form is known
 	pop hl

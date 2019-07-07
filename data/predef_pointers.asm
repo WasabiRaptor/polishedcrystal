@@ -33,7 +33,7 @@ PredefPointers::
 	add_predef DrawPlayerHP
 	add_predef PrintTempMonStats
 	add_predef PrintMonTypes
-	add_predef GetVariant
+	add_predef GetPokeGroup
 	add_predef Predef_LoadCGBLayout
 	add_predef _Area
 	add_predef Predef_StartBattle

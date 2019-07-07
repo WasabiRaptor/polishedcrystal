@@ -20,7 +20,7 @@ CheckUnownLetter: ; 3eb75
 	ld l, a
 
 	push de
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld de, 1
 	push bc
 	call IsInArray

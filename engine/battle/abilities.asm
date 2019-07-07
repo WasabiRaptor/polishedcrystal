@@ -509,15 +509,15 @@ RecieverAbility:
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	push af
 	ld a, [hl] ;species of last mon in party
 	ld c, a
 	push bc
-	ld bc, wPartyMon1Form - wPartyMon1Species
+	ld bc, wPartyMon1Group - wPartyMon1Species
 	add hl, bc
-	predef GetVariant
-	ld bc, wPartyMon1Ability - wPartyMon1Form
+	predef GetPokeGroup
+	ld bc, wPartyMon1Ability - wPartyMon1Group
 	add hl, bc
 	pop bc
 	ld a, [hl]
@@ -536,12 +536,12 @@ RecieverAbility:
 	ld hl, RecieverActivationText
 	call StdBattleTextBox
 	pop af
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 	jp RunActivationAbilitiesInner
 
 .trace_failure
 	pop af
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 	ret
 
 
@@ -574,7 +574,7 @@ StanceChangeAbility:
 	ret
 
 .status
-	;predef GetVariant
+	;predef GetPokeGroup
 	cp AEGISLASH_SHIELD
 	jr z, .popafandret
 	ld a, AEGISLASH_SHIELD
@@ -1164,7 +1164,7 @@ PowerConstructAbility:
 	jr z, .got_form
 	ld hl, wEnemyMonSpecies
 .got_form
-	;predef GetVariant
+	;predef GetPokeGroup
 	cp ZYGARDE_10
 	jr z, .ten
 	cp ZYGARDE_50
@@ -2117,7 +2117,7 @@ RunPostBattleAbilities::
 	push bc
 	ld a, MON_SPECIES
 	call GetPartyParamLocation
-	;predef GetVariant
+	;predef GetPokeGroup
 	cp AEGISLASH_BLADE
 	jr z, .aegislash
 	cp ZYGARDE_10_COMPLETE

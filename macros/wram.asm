@@ -26,7 +26,7 @@ box_struct: MACRO
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Form::           db
+\1Group::           db
 \1PP::             ds NUM_MOVES
 \1Happiness::      db
 \1PokerusStatus::  db
@@ -71,7 +71,7 @@ battle_struct: MACRO
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Form::           db
+\1Group::           db
 \1PP::             ds NUM_MOVES
 \1Happiness::      db
 \1Level::          db
@@ -235,7 +235,7 @@ trademon: MACRO
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Form:: ds 1
+\1Group:: ds 1
 \1ID:: ds 2 ; wc6ff | wc731
 \1CaughtData:: ds 1 ; wc701 | wc733
 \1End::

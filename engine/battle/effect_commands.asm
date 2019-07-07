@@ -3361,7 +3361,7 @@ UnevolvedEviolite:
 	push hl
 	push bc
 	push de
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	farcall GetRelevantEvosAttacksPointers ;not sure if form is known
 	ld a, [wCurPartySpecies]
 	dec a

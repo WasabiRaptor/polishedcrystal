@@ -326,8 +326,8 @@ _CGB_Pokedex: ; 8f70
 	jr .got_palette
 .is_pokemon
 	ld bc, wDexMonShiny
-	ld a, [wCurForm]
-	ld [wDexMonForm], a
+	ld a, [wCurPokeGroup]
+	ld [wDexMonGroup], a
 	ld a, [wCurPartySpecies]
 
 	call GetMonNormalOrShinyPalettePointer

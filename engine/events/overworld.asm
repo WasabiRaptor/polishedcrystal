@@ -77,7 +77,7 @@ CheckPartyMove: ; c742
 	jr c, .no
 
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld a, e
 	rst AddNTimes
 	bit MON_IS_EGG_F, [hl]

@@ -309,7 +309,7 @@ endr
 	push hl
 	push bc
 	push de
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
 	dec a
@@ -479,12 +479,12 @@ endr
 	ld a, [wCurPartySpecies]
 	cp UNOWN
 	jr nz, .done
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetVariant
+	predef GetPokeGroup
 	farcall UpdateUnownDex
 
 .done
@@ -590,33 +590,33 @@ AddTempmonToParty: ; da96
 	ld a, [wCurPartySpecies]
 	cp UNOWN
 	jr nz, .not_unown
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetVariant
+	predef GetPokeGroup
 	farcall UpdateUnownDex
 	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .done
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld [wFirstUnownSeen], a
 .not_unown
 
 	ld a, [wCurPartySpecies]
 	cp MAGIKARP
 	jr nz, .done
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetVariant
+	predef GetPokeGroup
 	ld a, [wFirstMagikarpSeen]
 	and a
 	jr nz, .done
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld [wFirstMagikarpSeen], a
 
 .done
@@ -1193,8 +1193,8 @@ SentPkmnIntoBox: ; de6e
 	ld a, [wCurPartySpecies]
 	cp UNOWN
 	jr nz, .not_unown
-	ld hl, sBoxMon1Form
-	predef GetVariant
+	ld hl, sBoxMon1Group
+	predef GetPokeGroup
 	farcall UpdateUnownDex
 
 .not_unown
@@ -1578,7 +1578,7 @@ UpdateEnemyPkmnStats:
 	ld [wCurSpecies], a
 	ld a, MON_FORM
 	call GetEnemyPartyParamLocation
-	predef GetVariant
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld a, MON_LEVEL
 	call GetEnemyPartyParamLocation
@@ -1609,7 +1609,7 @@ UpdatePkmnStats:
 	ld [wCurSpecies], a
 	ld a, MON_FORM
 	call GetPartyParamLocation
-	predef GetVariant
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld a, MON_LEVEL
 	call GetPartyParamLocation
@@ -1985,7 +1985,7 @@ GivePoke:: ; e277
 	and a
 	jr z, .item
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, [wCurGender]
@@ -2036,11 +2036,11 @@ GivePoke:: ; e277
 	push af
 
 
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	and a
 	jr z, .boxItem
-	ld a, [wCurForm]
-	ld [sBoxMon1Form], a
+	ld a, [wCurPokeGroup]
+	ld [sBoxMon1Group], a
 
 .boxItem
 	ld a, [wCurItem]

@@ -229,8 +229,8 @@ BugContest_SetCaughtContestMon: ; e6ce
 	jp PrintText
 
 .generatestats ; e6fd
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
@@ -1655,7 +1655,7 @@ GetDexEntryPointer:: ; 44333
 ; return dex entry pointer b:de
 	push hl
 ;get relevant pointers
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld hl, VariantPokedexEntryPointerTable
 	ld de, 3
 	call IsInArray
@@ -2111,11 +2111,11 @@ FlagPredef: ; 4d7c1
 
 GetTrademonFrontpic: ; 4d7fd
 	ld a, [wOTTrademonSpecies]
-	ld hl, wOTTrademonForm
+	ld hl, wOTTrademonGroup
 	ld de, VTiles2
 	push de
 	push af
-	predef GetVariant
+	predef GetPokeGroup
 	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -2402,8 +2402,8 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 	ret
 
 CheckPartyFullAfterContest: ; 4d9e5
-	ld hl, wContestMonForm
-	predef GetVariant
+	ld hl, wContestMonGroup
+	predef GetPokeGroup
 	ld a, [wContestMon]
 	and a
 	jp z, .DidntCatchAnything
@@ -3584,7 +3584,7 @@ GetGender: ; 50bdd
 
 ; We need the gender ratio to do anything with this.
 	push bc
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
 	dec a
@@ -3871,8 +3871,8 @@ ListMoves: ; 50d6f
 CalcLevel: ; 50e1b
 	ld a, [wTempMonSpecies]
 	ld [wCurSpecies], a
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld d, 1
 .next_level

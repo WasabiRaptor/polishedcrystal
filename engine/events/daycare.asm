@@ -769,12 +769,12 @@ DayCare_InitBreeding: ; 16a3b
 
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
-	ld hl, wBreedMon2Form
+	ld hl, wBreedMon2Group
 	jr .GotMother2
 .GotMother1:
-	ld hl, wBreedMon1Form
+	ld hl, wBreedMon1Group
 .GotMother2:
-	predef GetVariant
+	predef GetPokeGroup
 	ld a, [wCurPartySpecies]
 	farcall GetPreEvolution
 	farcall GetPreEvolution
@@ -1007,7 +1007,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld b, a
 	push bc
 	push de
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	ld a, [wEggMonSpecies]
 	dec a
@@ -1041,11 +1041,11 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wEggMonCaughtBall], a
 
 	; Form works the same as Ball
-	ld hl, wBreedMon1Form
+	ld hl, wBreedMon1Group
 	call .inherit_mother_unless_samespecies
 	ld a, [hl]
 	and FORM_MASK
-	ld hl, wEggMonForm
+	ld hl, wEggMonGroup
 	or [hl]
 	ld [hl], a
 

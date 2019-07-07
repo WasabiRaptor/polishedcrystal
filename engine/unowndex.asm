@@ -1,5 +1,5 @@
 UpdateUnownDex: ; fba18
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld c, a
 	ld b, NUM_UNOWN
 	ld hl, wUnownDex

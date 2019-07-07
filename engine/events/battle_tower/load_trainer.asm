@@ -309,12 +309,12 @@ BT_SetLevel:
 	call GetPartyLocation
 
 	;get form before base data
-	ld bc, wPartyMon1Form - wPartyMon1	
+	ld bc, wPartyMon1Group - wPartyMon1	
 	add hl, bc
-	predef GetVariant
+	predef GetPokeGroup
 
 	; Get base stats and experience group
-	ld bc, wPartyMon1Species - wPartyMon1Form
+	ld bc, wPartyMon1Species - wPartyMon1Group
 	add hl, bc
 	ld a, [hl]
 	ld [wCurSpecies], a

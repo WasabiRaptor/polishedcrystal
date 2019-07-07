@@ -837,7 +837,7 @@ GetMonNormalOrShinyPalettePointer:
 	ld l, c
 	push af
 	inc hl
-	predef GetVariant
+	predef GetPokeGroup
 	pop af
 	call GetMonPalettePointer
 	pop bc
@@ -892,7 +892,7 @@ LoadPartyMonPalette:
 
 GetRelevantPallete:
 ; given species in a, return *Palette in bc
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld hl, VariantPaletteTable
 	ld de, 4
 	call IsInArray

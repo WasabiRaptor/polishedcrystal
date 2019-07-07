@@ -1705,8 +1705,8 @@ GetForgottenMoves::
 	ld [wCurPartySpecies], a
 	ld a, MON_FORM
 	call GetPartyParamLocation
-	predef GetVariant
-	ld a, [wCurForm]
+	predef GetPokeGroup
+	ld a, [wCurPokeGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
 	dec a

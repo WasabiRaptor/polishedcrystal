@@ -201,7 +201,7 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	jr nz, .continue
 	ld a, 2
 .continue
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 	;get type icons
 	ld a, $1
 	ldh [rVBK], a
@@ -358,7 +358,7 @@ Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	jr nz, .continue
 	ld a, 2
 .continue
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 
 	call LowVolume
 	xor a
@@ -447,7 +447,7 @@ Pokedex_ReinitDexEntryScreen: ; 402aa (10:42aa)
 	jr nz, .continue
 	ld a, 2
 .continue
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 
 	call Pokedex_BlackOutBG
 	xor a
@@ -542,7 +542,7 @@ Pokedex_RedisplayDexEntry: ; 4038d
 	jr nz, .continue
 	ld a, 2
 .continue
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 
 	call Pokedex_LoadGFX
 	call Pokedex_LoadAnyFootprint
@@ -2477,7 +2477,7 @@ Pokedex_LoadSelectedMonTiles: ; 4143b
 .use_first_magikarp
 	ld a, [wFirstMagikarpSeen]
 .continue
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
 	call GetBaseData ;form is known
@@ -2522,7 +2522,7 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	pop bc
 	ld a, b
 	jr nc, .notvariant
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 .notvariant
 	dec a
 	ld bc, LEN_1BPP_TILE * 4
@@ -2565,7 +2565,7 @@ Pokedex_LoadUnownFont: ; 41a2c
 	jp LoadStandardFont
 
 Pokedex_LoadUnownFrontpicTiles: ; 41a58 (10:5a58)
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	push af
 	ld a, [wDexCurrentUnownIndex]
 	ld e, a
@@ -2573,14 +2573,14 @@ Pokedex_LoadUnownFrontpicTiles: ; 41a58 (10:5a58)
 	ld hl, wUnownDex
 	add hl, de
 	ld a, [hl]
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 	ld a, UNOWN
 	ld [wCurPartySpecies], a
 	call GetBaseData ;form is known
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	pop af
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 	ret
 
 NewPokedexEntry: ; fb877
@@ -2666,7 +2666,7 @@ NewPokedexEntry: ; fb877
 	ld a, [hl]
 	ld [wTempMonPersonality + 1], a
 	ld a, 1
-	ld [wTempMonForm], a
+	ld [wTempMonGroup], a
 	ld b, CGB_TRAINER_OR_MON_FRONTPIC_PALS
 	call GetCGBLayout
 	jp SetPalettes

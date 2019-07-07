@@ -793,7 +793,7 @@ wBackupDexListingPage:: ds 1
 wDexCurrentLocation:: ds 1
 wPokedexStatus:: ds 1
 wDexMonShiny:: ds 1
-wDexMonForm::
+wDexMonGroup::
 wDexCurrentUnownIndex:: ds 1
 
 wPokedexDataEnd::
@@ -971,7 +971,7 @@ wPalFadeMode::
 ; bit 4: skip the last palette
 	ds 1
 
-wCurForm:: ds 1
+wCurPokeGroup:: ds 1
 wCurGender:: ds 1
 wCurPersonality:: ds 1
 wGiftPokeTID:: ds 2

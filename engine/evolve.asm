@@ -41,11 +41,11 @@ EvolveAfterBattle_MasterLoop:
 	and a
 	jp z, EvolveAfterBattle_MasterLoop
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	predef GetVariant
+	predef GetPokeGroup
 
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantEvosAttacksPointers
 	ld a, [wEvolutionOldSpecies]
 	dec a
@@ -379,8 +379,8 @@ endr
 	cp UNOWN
 	jr nz, .skip_unown
 
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPokeGroup
 	farcall UpdateUnownDex
 
 .skip_unown
@@ -496,7 +496,7 @@ Text_WhatEvolving: ; 0x42482
 LearnEvolutionMove:
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantEvolutionMoves
 	ld a, [wCurPartySpecies]
 	dec a
@@ -540,7 +540,7 @@ LearnEvolutionMove:
 LearnLevelMoves: ; 42487
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
 	dec a
@@ -618,7 +618,7 @@ FillMoves: ; 424e1
 	push hl
 	push de
 	push bc
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	push de
 	call GetRelevantEvosAttacksPointers
 	ld b, 0
@@ -772,7 +772,7 @@ GetPreEvolution: ; 42581
 	ld c, a
 	ld [wCurPartySpecies], a
 .loop ; For each Pokemon...
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	push bc
 	call GetRelevantEvosAttacksPointers
 	pop bc

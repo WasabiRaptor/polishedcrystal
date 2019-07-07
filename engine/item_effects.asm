@@ -508,8 +508,8 @@ PokeBallEffect: ; e8a2
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 
 	ld de, wEnemyMonMaxHP
@@ -923,7 +923,7 @@ GLOBAL EvosAttacks
 GLOBAL EvosAttacksPointers
 
 	push bc
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wTempEnemyMonSpecies]
 	dec a
@@ -1507,7 +1507,7 @@ RareCandy_StatBooster_GetParameters: ; eef5
 	ld [wCurPartyLevel], a
 	ld a, MON_FORM
 	call GetPartyParamLocation
-	predef GetVariant
+	predef GetPokeGroup
 	call GetBaseData ;frorm is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
@@ -3235,7 +3235,7 @@ AbilityCap:
 	ld [wCurSpecies], a
 	ld a, MON_FORM
 	call GetPartyParamLocation
-	predef GetVariant
+	predef GetPokeGroup
 	call GetBaseData ;frorm is known
 	ld a, [wBaseAbility1]
 	ld b, a

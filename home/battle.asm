@@ -77,9 +77,9 @@ UpdateBattleMonInParty::
 	ld a, [wCurBattleMon]
 	; fallthrough
 UpdateBattleMon::
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	ld a, [wBattleMonForm]
+	ld a, [wBattleMonGroup]
 	ld [hl], a
 
 	ld a, [wCurBattleMon]
@@ -100,9 +100,9 @@ UpdateEnemyMonInParty::
 	ret z
 
 	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1Form
+	ld hl, wOTPartyMon1Group
 	call GetPartyLocation
-	ld a, [wEnemyMonForm]
+	ld a, [wEnemyMonGroup]
 	ld [hl], a
 
 

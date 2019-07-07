@@ -1,4 +1,4 @@
-GetVariant: ; 51040
+GetPokeGroup: ; 51040
 	ld a, [wCurPartySpecies]
 	;cp MEWTWO
 	;jp z, .GetMewtwoVariant
@@ -6,7 +6,7 @@ GetVariant: ; 51040
 ; Return CurForm based on Form at hl
 	ld a, [hl]
 	and FORM_MASK
-	ld [wCurForm], a
+	ld [wCurPokeGroup], a
 	ret
 
 
@@ -78,7 +78,7 @@ _GetFrontpic: ; 510a5
 	ret
 
 GetFrontpicPointer: ; 510d7
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantPicPointers
 	ld a, [wCurPartySpecies]
 	dec a	
@@ -193,7 +193,7 @@ GetBackpic: ; 5116c
 
 	ld a, [wCurPartySpecies]
 	ld b, a
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld c, a
 	ldh a, [rSVBK]
 	push af

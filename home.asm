@@ -542,7 +542,7 @@ GetPokemonName:: ; 343b
 
 ; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
 ; returns c for variants, nc for normal species
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 
 	ld hl, VariantNamePointerTable
 	ld de, 4
@@ -1358,7 +1358,7 @@ GetBaseData:: ; 3856
 	cp EGG
 	jr z, .egg
 
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	push hl
 
@@ -1433,8 +1433,8 @@ GetLeadAbility::
 	push de
 	push hl
 	ld [wCurSpecies], a
-	ld hl, wPartyMon1Form
-	predef GetVariant
+	ld hl, wPartyMon1Group
+	predef GetPokeGroup
 	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]
@@ -1457,7 +1457,7 @@ GetAbility::
 	push hl
 	push bc
 
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	pop bc
 	push bc

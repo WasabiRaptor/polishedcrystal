@@ -137,7 +137,7 @@ GetMenuMonIconPalette::
 .got_shininess:
 	push af
 	inc hl ;byte after shiny is form
-	predef GetVariant
+	predef GetPokeGroup
 .got_species:
 	call GetRelevantMonIconColors
 	ld a, [wCurPartySpecies]
@@ -477,7 +477,7 @@ HoldSwitchmonIcon: ; 8ea8c
 GetRelevantIconPointersAndBank:
 ; given species in wCurIcon, return *IconPointers in hl and BANK(*Icon) in b
 ; returns c for variants, nc for normal species
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld hl, VariantIconPointerTable
 	ld de, 3
 	call IsInArray
@@ -505,7 +505,7 @@ GetRelevantIconPointersAndBank:
 INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"
 
 GetRelevantMonIconColors:
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 ; given species in a, return *PicPointers in hl 
 ; returns c for variants, nc for normal species
 	ld hl, VariantIconPalTable

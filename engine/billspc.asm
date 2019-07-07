@@ -1066,8 +1066,8 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
@@ -1719,8 +1719,8 @@ StatsScreenDPad: ; e2f95 (38:6f95)
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	jp BillsPC_CopyMon
 

@@ -3388,9 +3388,9 @@ LoadEnemyPkmnToSwitchTo:
 	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .skip_unown
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	ld a, [wCurForm]
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
+	ld a, [wCurPokeGroup]
 	ld [wFirstUnownSeen], a
 .skip_unown
 
@@ -3400,9 +3400,9 @@ LoadEnemyPkmnToSwitchTo:
 	ld a, [wFirstMagikarpSeen]
 	and a
 	jr nz, .skip_magikarp
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	ld a, [wCurForm]
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
+	ld a, [wCurPokeGroup]
 	ld [wFirstMagikarpSeen], a
 .skip_magikarp
 
@@ -3564,8 +3564,8 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known 
 	ld a, OTPARTYMON
 	ld [wMonType], a
@@ -3770,8 +3770,8 @@ InitBattleMon: ; 3da0d
 	ld [wTempBattleMonSpecies], a
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld hl, wBattleMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a
@@ -3864,8 +3864,8 @@ InitEnemyMon: ; 3dabd
 	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
@@ -3933,8 +3933,8 @@ ForcePlayerSwitch: ; 3db32
 
 
 SendOutPlayerMon: ; 3db5f
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld hl, wBattleMonGroup
+	predef GetPokeGroup
 	hlcoord 1, 5
 	lb bc, 7, 8
 	call ClearBox
@@ -4849,7 +4849,7 @@ endr
 	ld [wCurSpecies], a
 	ld bc, MON_FORM - MON_SPECIES
 	add hl, bc
-	predef GetVariant
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 
 	pop hl
@@ -4907,8 +4907,8 @@ DrawEnemyHUD: ; 3e043
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
@@ -6787,7 +6787,7 @@ LoadEnemyMon: ; 3e8eb
 	;cp GROUP_LAKE_OF_RAGE
 	;jr nz, .NoAlolanForms
 	;ld a, ALOLAN
-	;ld [wCurForm], a
+	;ld [wCurPokeGroup], a
 .NoAlolanForms
 	; Grab the BaseData for this species
 	call GetBaseData ;form is known
@@ -7039,7 +7039,7 @@ endc
 	push hl
 	push bc
 	push de
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
 	dec a
@@ -7101,13 +7101,13 @@ endr
 	call BattleRandomRange
 	inc a
 	ld b, a
-	ld a, [wEnemyMonForm]
+	ld a, [wEnemyMonGroup]
 	and $ff - FORM_MASK
 	add b
-	ld [wEnemyMonForm], a
+	ld [wEnemyMonGroup], a
 	; Get letter based on form
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	; Can't use any letters that haven't been unlocked
 	push de
 	farcall CheckUnownLetter ;relocated
@@ -7125,10 +7125,10 @@ endr
 	;call BattleRandomRange
 	;inc a
 	;ld b, a
-	;ld a, [wEnemyMonForm]
+	;ld a, [wEnemyMonGroup]
 	;and $ff - FORM_MASK
 	;add b
-	;ld [wEnemyMonForm], a
+	;ld [wEnemyMonGroup], a
 
 	; Get Magikarp's length
 	ld de, wEnemyMonDVs
@@ -7805,9 +7805,9 @@ GiveExperiencePoints: ; 3ee3b
 	ld a, [hl]
 	ld [wCurSpecies], a
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	predef GetVariant
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	push bc
 	ld d, MAX_LEVEL
@@ -8040,8 +8040,8 @@ GiveBattleEVs:
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	push hl
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	pop hl
 	call GetBaseData ;form is known
 	; EV yield format:
@@ -8543,8 +8543,8 @@ HandleSafariAngerEatingStatus:
 	; reset the catch rate to normal if bait/rock effects have worn off
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
@@ -8713,8 +8713,8 @@ DropPlayerSub: ; 3f447
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld hl, wBattleMonGroup
+	predef GetPokeGroup
 
 	call GetPlayerIllusion
 
@@ -8723,8 +8723,8 @@ DropPlayerSub: ; 3f447
 	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld hl, wBattleMonGroup
+	predef GetPokeGroup
 	call GetBaseData; form is known
 
 	pop af
@@ -8762,8 +8762,8 @@ DropEnemySub: ; 3f486
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	ld a, [wEnemyAbility]
 
 	call GetEnemyIllusion
@@ -8774,8 +8774,8 @@ DropEnemySub: ; 3f486
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 	call GetBaseData ;form is known
 
 	pop af
@@ -8821,9 +8821,9 @@ GetIllusion::
 	rst AddNTimes
 	ld a, [hl] ;species of last mon in party
 	push af
-	ld bc, wPartyMon1Form - wPartyMon1Species
+	ld bc, wPartyMon1Group - wPartyMon1Species
 	add hl, bc
-	predef GetVariant
+	predef GetPokeGroup
 	dec hl ;get personality into bc for getting the palette
 	ld b, h
 	ld c, l
@@ -9000,8 +9000,8 @@ InitEnemyWildmon: ; 3f607
 	ld de, wEnemyBackupDVs
 	ld bc, 5
 	rst CopyBytes
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPokeGroup
 
 	ld a, [wCurPartySpecies]
 	cp UNOWN
@@ -9009,7 +9009,7 @@ InitEnemyWildmon: ; 3f607
 	ld a, [wFirstUnownSeen]
 	and a
 	jr nz, .skip_unown
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld [wFirstUnownSeen], a
 .skip_unown
 
@@ -9019,7 +9019,7 @@ InitEnemyWildmon: ; 3f607
 	ld a, [wFirstMagikarpSeen]
 	and a
 	jr nz, .skip_magikarp
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	ld [wFirstMagikarpSeen], a
 .skip_magikarp
 

@@ -66,7 +66,7 @@ LoadCryHeader:: ; 37f3
 	ld a, d
 	rst Bankswitch
 	jr nc, .notvariant
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 	dec a
 	ld c, a
 .notvariant

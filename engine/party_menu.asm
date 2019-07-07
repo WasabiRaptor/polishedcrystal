@@ -377,15 +377,15 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	rst AddNTimes
 	ld a, [hl]
 	ld [wCurPartySpecies], a
-	ld bc, wPartyMon1Form - wPartyMon1Species
+	ld bc, wPartyMon1Group - wPartyMon1Species
 	add hl, bc 
-	predef GetVariant
+	predef GetPokeGroup
 	ld a, [wCurPartySpecies]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
 	ld a, [wCurPartySpecies]
 	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after
 	jr nc, .notvariant
-	ld a, [wCurForm]
+	ld a, [wCurPokeGroup]
 .notvariant
 	;ld hl, VulpixEvosAttacksPointers
 	;ld b, BANK(VulpixEvosAttacksPointers)
