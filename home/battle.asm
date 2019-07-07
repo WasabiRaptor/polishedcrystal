@@ -73,16 +73,32 @@ UpdateUserInParty::
 	jr nz, UpdateEnemyMonInParty
 	; fallthrough
 UpdateBattleMonInParty::
-; Update level, status, current HP, curretn form
+; Update level, status, current HP, current species or group (if it isn't transformed)
 	ld a, [wCurBattleMon]
 	; fallthrough
 UpdateBattleMon::
+	push af
+	ld a, BATTLE_VARS_SUBSTATUS2
+	call GetBattleVar
+	bit SUBSTATUS_TRANSFORMED, a
+	jp nz, .just_HP_andlevel
+	
+	pop af
+	push af
+	ld hl, wPartyMon1Species
+	call GetPartyLocation
+	ld a, [wBattleMonSpecies]
+	ld [hl], a
+
+	pop af
+	push af
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
 	ld a, [wBattleMonGroup]
 	ld [hl], a
 
-	ld a, [wCurBattleMon]
+.just_HP_andlevel
+	pop af
 	ld hl, wPartyMon1Level
 	call GetPartyLocation
 
@@ -99,13 +115,18 @@ UpdateEnemyMonInParty::
 	dec a
 	ret z
 
+	ld a, BATTLE_VARS_SUBSTATUS2
+	call GetBattleVar
+	bit SUBSTATUS_TRANSFORMED, a
+	jp nz, .just_HP_andlevel
+
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Group
 	call GetPartyLocation
 	ld a, [wEnemyMonGroup]
 	ld [hl], a
 
-
+.just_HP_andlevel
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Level
 	call GetPartyLocation
