@@ -1,3 +1,6 @@
+# hey heads up I am very very very victim to feature creep, so while I intend this to be its own game, all of the readmes and such are still the exact same as polished's haha
+
+
 # Pokémon Polished Crystal
 
 This is a custom Pokémon game based on [the Pokémon Crystal disassembly](https://github.com/pret/pokecrystal).
