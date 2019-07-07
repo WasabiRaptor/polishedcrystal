@@ -16,6 +16,7 @@ JohtoDexEntryPointers::
 	add_pokedexentry Ledian
 	add_pokedexentry Spinarak
 	add_pokedexentry Ariados
+	add_pokedexentry Crobat
 	add_pokedexentry Chinchou
 	add_pokedexentry Lanturn
 	add_pokedexentry Togepi
@@ -47,7 +48,6 @@ JohtoDexEntryPointers::
 	add_pokedexentry Misdreavus
 	add_pokedexentry Mismagius
 	add_pokedexentry Unown
-    add_pokedexentry Wynaut
 	add_pokedexentry Wobbuffet
 	add_pokedexentry Girafarig
 	add_pokedexentry Pineco

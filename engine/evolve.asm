@@ -753,7 +753,7 @@ GetPreEvolution: ; 42581
 .no_evolve
 	inc c
 	ld a, c
-	cp NUM_KANTO_POKEMON
+	cp NUM_POKEMON
 	jr c, .loop
 	and a
 	ret

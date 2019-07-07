@@ -98,7 +98,7 @@ endr
 GetCryIndex:: ; 381e
 	and a
 	jr z, .no
-	cp NUM_KANTO_POKEMON + 1
+	cp NUM_POKEMON + 1
 	jr nc, .no
 
 	dec a

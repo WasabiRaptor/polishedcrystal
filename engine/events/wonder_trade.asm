@@ -133,7 +133,7 @@ DoWonderTrade:
 	jp .compute_trademon_stats
 
 .random_trademon
-	ld a, NUM_KANTO_POKEMON
+	ld a, NUM_POKEMON
 	call RandomRange
 	inc a
 	ld [wOTTrademonSpecies], a

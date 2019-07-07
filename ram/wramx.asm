@@ -1217,10 +1217,10 @@ wPartyMonNicknamesEnd::
 
 	ds 12 ; unused
 
-wPokedexCaught:: flag_array NUM_KANTO_POKEMON
+wPokedexCaught:: flag_array NUM_POKEMON
 wEndPokedexCaught::
 
-wPokedexSeen:: flag_array NUM_KANTO_POKEMON
+wPokedexSeen:: flag_array NUM_POKEMON
 wEndPokedexSeen::
 
 wUnownDex:: ds NUM_UNOWN
@@ -1466,8 +1466,8 @@ wSurfWaveBGEffectEnd::
 
 SECTION "Pokemon Encounters", WRAMX
 
-wTotalEncounteredPokemonSpecies:: ds NUM_KANTO_POKEMON * 2
-wTotalDefeatedPokemonSpecies:: ds NUM_KANTO_POKEMON * 2
+wTotalEncounteredPokemonSpecies:: ds NUM_POKEMON * 2
+wTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
 wTotalEncounters:: ds 2
 wTotalDefeated:: ds 2
 wTotalEncountersEnd::

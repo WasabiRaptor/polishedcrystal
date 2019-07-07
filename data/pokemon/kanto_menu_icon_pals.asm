@@ -41,7 +41,6 @@ KantoMenuMonIconColors::
 	iconpal PINK, RED ; WIGGLYTUFF
 	iconpal BLUE, GREEN ; ZUBAT
 	iconpal BLUE, GREEN ; GOLBAT
-	iconpal PURPLE, GREEN ; GOLBAT
 	iconpal GREEN, TEAL ; ODDISH
 	iconpal RED, PINK ; GLOOM
 	iconpal RED, GREEN ; VILEPLUME

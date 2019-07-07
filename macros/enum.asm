@@ -54,6 +54,8 @@ GROUP_\1 EQU dexmon_group
 endm
 
 nat_dexmon_variant: macro
+    const_def \1
+	const \1_\2
 GROUP_\1_\2 EQU dexmon_group
 endm
 
