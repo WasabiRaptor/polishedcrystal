@@ -13,6 +13,15 @@ UNOWN EQU 20
 NUM_POKEMON EQU $fd
 EGG EQU $fe
 
+; pokemon are organized by species and group, a pokemon must evolve into a pokemon within the same group
+; there are 30 potential groups of 253 pokemon, more than 30 if the nuzloke death flag is removed, but I should like to keep it
+; pokemon with different forms are treated as different "species" within the same group this is why unown and probably spinda will get a group all to themselves when implemented because they have an obscene amount of forms
+; pokemon that have alternate forms that are not completely stand alone should not be listed as a speerate species here, I would much rather devise another method
+; mega form or alternate form pokemon (when imlemented) that are based on a hold item should not be treated as seperate "species" because the very item they hold is the byte needed to know if they should be an alternate form
+; whereas a pokemon who's form is completely independent of what it is holding and cour exist independantly of it, shoulc very much be treated as its own "species" as I don't believe any region would ever go over the 200 mark
+; and the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
+; even if the order isn't "faithful" by the hand of putting later gen pokemon in earlier groups, I believe it will be much cleaner, as evolution groups will all be contagious to eachother rather than spread across several regions
+
 	nat_dexmon_group 1, REGION_KANTO
 	nat_dexmon BULBASAUR
 	nat_dexmon IVYSAUR	
@@ -311,7 +320,7 @@ GROUP_SNOWSLASH EQU GROUP_SANDSLASH_ALOLA
 	nat_dexmon STANTLER
 	nat_dexmon SMEARGLE
 	nat_dexmon MILTANK
-	nat_dexmon RAIKOU	
+	nat_dexmon RAIKOU
 	nat_dexmon ENTEI
 	nat_dexmon SUICUNE
 	nat_dexmon LARVITAR
@@ -459,6 +468,9 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon FEEBAS
 	nat_dexmon MILOTIC
 	nat_dexmon CASTFORM
+	nat_dexmon CASTFORM_SUN
+	nat_dexmon CASTFORM_RAIN
+	nat_dexmon CASTFORM_HAIL
 	nat_dexmon KECLEON
 	nat_dexmon SHUPPET
 	nat_dexmon BANETTE
@@ -495,7 +507,10 @@ NUM_UNOWN EQU const_value + -1 ; 26
  	nat_dexmon GROUDON
 	nat_dexmon RAYQUAZA
 	nat_dexmon JIRACHI
-	nat_dexmon DEOXYS
+	nat_dexmon DEOXYS_DEFENSE
+	nat_dexmon DEOXYS_NORMAL
+	nat_dexmon DEOXYS_ATTACK
+	nat_dexmon DEOXYS_SPEED
 NUM_HOENN_POKEMON EQU const_value +-1
 
 
@@ -524,8 +539,12 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon RAMPARDOS
 	nat_dexmon SHEILDON
 	nat_dexmon BASTIODON
-	nat_dexmon BURMY
-	nat_dexmon WORMADAM
+	nat_dexmon BURMY_GRASS
+	nat_dexmon BURMY_SAND
+	nat_dexmon BURMY_TRASH
+	nat_dexmon WORMADAM_GRASS
+	nat_dexmon WORMADAM_SAND
+	nat_dexmon WORMADAM_TRASH
 	nat_dexmon MOTHIM
 	nat_dexmon COMBEE
 	nat_dexmon VESPIQUEN
@@ -533,9 +552,12 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon BUIZEL
 	nat_dexmon FLOATZEL
 	nat_dexmon CHERUBI
-	nat_dexmon CHERRIM
-	nat_dexmon SHELLOS
-	nat_dexmon GASTRODON
+	nat_dexmon CHERRIM_OVERCAST
+	nat_dexmon CHERRIM_SUNSHINE
+	nat_dexmon SHELLOS_WEST
+	nat_dexmon GASTRODON_WEST
+	nat_dexmon SHELLOS_EAST
+	nat_dexmon GASTRODON_EAST
 	nat_dexmon DRIFLOON
 	nat_dexmon DRIFBLIM
 	nat_dexmon BUNEARY
@@ -565,6 +587,11 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon SNOVER
 	nat_dexmon ABOMASNOW
 	nat_dexmon ROTOM
+	nat_dexmon ROTOM_FAN
+	nat_dexmon ROTOM_FROST
+	nat_dexmon ROTOM_HEAT
+	nat_dexmon ROTOM_MOW
+	nat_dexmon ROTOM_WASH
 	nat_dexmon UXIE
 	nat_dexmon MESPRIT
 	nat_dexmon AZELF
@@ -578,9 +605,9 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon MANAPHY
 	nat_dexmon DARKRAI
 	nat_dexmon SHAYMIN
-	nat_dexmon ARCEUS
-NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon SHAYMIN_SKY
+	nat_dexmon ARCEUS ; types can be handled by the multitype ability via the item it holds and palette can be done in much the same way
+NUM_SINNOH_POKEMON EQU const_value +-1
 
 SHAYMIN_LAND EQU SHAYMIN
 
@@ -642,12 +669,14 @@ SHAYMIN_LAND EQU SHAYMIN
 	nat_dexmon WHIMSICOTT
 	nat_dexmon PETILIL
 	nat_dexmon LILLIGANT
-	nat_dexmon BASCULIN
+	nat_dexmon BASCULIN_RED
+	nat_dexmon BASCULIN_BLUE
 	nat_dexmon SANDILE
 	nat_dexmon KROKOROK
 	nat_dexmon KROOKODILE
 	nat_dexmon DARUMAKA
 	nat_dexmon DARMANITAN
+	nat_dexmon DARMANITAN_ZEN
 	nat_dexmon MARACTUS
 	nat_dexmon DWEBBLE
 	nat_dexmon CRUSTLE
@@ -675,15 +704,23 @@ SHAYMIN_LAND EQU SHAYMIN
 	nat_dexmon DUCKLETT
 	nat_dexmon SWANNA
 	nat_dexmon VANILITE
-	nat_dexmon DEERLING
-	nat_dexmon SAWSBUCK
+	nat_dexmon DEERLING_SPRING
+	nat_dexmon DEERLING_SUMMER
+	nat_dexmon DEERLING_FALL
+	nat_dexmon DEERLING_WINTER
+	nat_dexmon SAWSBUCK_SPRING
+	nat_dexmon SAWSBUCK_SUMMER
+	nat_dexmon SAWSBUCK_FALL
+	nat_dexmon SAWSBUCK_WINTER
 	nat_dexmon EMOLGA
 	nat_dexmon KARRABLAST
 	nat_dexmon ESCAVALIER
 	nat_dexmon FOONGUS
 	nat_dexmon AMOONGUSS
-	nat_dexmon FRILLISH
-	nat_dexmon JELLICENT 
+	nat_dexmon FRILLISH_M
+	nat_dexmon JELLICENT_M
+	nat_dexmon FRILLISH_F
+	nat_dexmon JELLICENT_F
 	nat_dexmon ALOMOMOLA
 	nat_dexmon JOLTIK
 	nat_dexmon GALVANTULA
@@ -732,15 +769,24 @@ SHAYMIN_LAND EQU SHAYMIN
 	nat_dexmon TERRACKION
 	nat_dexmon VIRIZION
 	nat_dexmon TORNADUS
+	nat_dexmon TORNADUS_THERIAN
 	nat_dexmon THUNDURUS
+	nat_dexmon THUNDURUS_THERIAN
 	nat_dexmon RESHIRAM
 	nat_dexmon ZEKROM
 	nat_dexmon LANDORUS
+	nat_dexmon LANDORUS_THERIAN
 	nat_dexmon KYRUEM
+	nat_dexmon KYRUEM_BLACK
+	nat_dexmon KYRUEM_WHITE
 	nat_dexmon KELDEO
+	nat_dexmon KELDEO_RESOLUTE
 	nat_dexmon MELLOETTA
+	nat_dexmon MELLOETTA_PIROUETTE
 	nat_dexmon GENESECT
 NUM_UNOVA_POKEMON EQU const_value +-1
+
+MELLOETTA_ARIA EQU MELLOETTA
 
 ;Ggen pokemon
 	nat_dexmon_group 1, REGION_KALOS
@@ -760,23 +806,25 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon TALONFLAME
 	nat_dexmon SCATTERBUG
 	nat_dexmon SPEWPA
-	nat_dexmon VIVVILON
+	nat_dexmon VIVVILON ; oh boy you seem like a bag of worms when we get to you
 	nat_dexmon LITLEO
 	nat_dexmon PYROAR
-	nat_dexmon FLABEBE
+	nat_dexmon FLABEBE ; the color variance can be handled by vary colors by DVs
 	nat_dexmon FLOETTE
+	nat_dexmon FLOETTE_ETERNAL_FLOWER ; not sure but it basically is its own pokemon since it can't evolve and such
 	nat_dexmon FLORGES
 	nat_dexmon SKIDDO
 	nat_dexmon GOGOAT
 	nat_dexmon PANCHAM
 	nat_dexmon PANGORO
-	nat_dexmon FURFROU
+	nat_dexmon FURFROU ; you're in the same boat as vivvilon as yours is just cosmetic, not sure if it should be granted more slots really
 	nat_dexmon ESPURR
 	nat_dexmon MEOWSTIC_M
 	nat_dexmon MEOWSTIC_F
 	nat_dexmon HONEDGE
 	nat_dexmon DOUBLADE
 	nat_dexmon AEGISLASH
+	nat_dexmon AEGISLASH_BLADE
 	nat_dexmon SPRITZEE
 	nat_dexmon AROMATISSE
 	nat_dexmon SWIRLIX
@@ -810,18 +858,18 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon AVALUGG
 	nat_dexmon NOIBAT
 	nat_dexmon NOIVERN
-	nat_dexmon XERNEAS
+	nat_dexmon XERNEAS ; neutral mode and active mode do absoluely nothing
 	nat_dexmon YVELTAL
 	nat_dexmon ZYGARDE_10
 	nat_dexmon ZYGARDE_50
 	nat_dexmon ZYGARDE_COMPLETE
-	nat_dexmon ZYGARDE_10_COMPLETE
+	nat_dexmon ZYGARDE_10_COMPLETE ; these are just so power construct knows what form to revert to
 	nat_dexmon ZYGARDE_50_COMPLETE
 	nat_dexmon DIANCIE
 	nat_dexmon HOOPA 
+	nat_dexmon HOOPA_UNBOUND
 	nat_dexmon VOLCANION
 NUM_KALOS_POKEMON EQU const_value +-1
-	nat_dexmon AEGISLASH_BLADE
 
 AEGISLASH_SHIELD EQU AEGISLASH
 
@@ -846,12 +894,19 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon VIKAVOLT
 	nat_dexmon CRABRAWLER
 	nat_dexmon CRABOMINABLE
-	nat_dexmon ORICORIO
+	nat_dexmon ORICORIO_BAILLE
+	nat_dexmon ORICORIO_POMPOM
+	nat_dexmon ORICORIO_PAU
+	nat_dexmon ORICORIO_SENSU
 	nat_dexmon CUTIEFLY
 	nat_dexmon RIBOMBEE
 	nat_dexmon ROCKRUFF
-	nat_dexmon LYCANROC
+	nat_dexmon LYCANROC_MIDDAY
+	nat_dexmon LYCANROC_MIDNIGHT
+	nat_dexmon LYCANROC_DUSK
+	nat_dexmon LYCANROC_DAWN ; I don't care if its technically a fakemon I'm making it because why the fuck not have one for all four time periods
 	nat_dexmon WISHIWASHI
+	nat_dexmon WISHIWASHI_SCHOOL
 	nat_dexmon MAREANIE
 	nat_dexmon TOXAPEX
 	nat_dexmon MUDBRAY
@@ -878,12 +933,13 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon PALLOSSAND
 	nat_dexmon PYUKUMUKU
 	nat_dexmon TYPE_NULL
-	nat_dexmon SILVALLY
+	nat_dexmon SILVALLY ; types are handled by the RKS system ability via the item it holds and palette can be done in much the same way
 	nat_dexmon MINIOR
+	nat_dexmon MINIOR_SHIELDS_DOWN ; colors can be handled by vary colors by DVs
 	nat_dexmon KOMALA
 	nat_dexmon TURTONATOR
 	nat_dexmon TOGEDEMARU
-	nat_dexmon MIMIKYU
+	nat_dexmon MIMIKYU ; some people may argue its disguise breaking is a form change but tha ability can be handled without it I think
 	nat_dexmon BRUXISH
 	nat_dexmon DRAMPA
 	nat_dexmon DHELMISE
@@ -896,8 +952,8 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon TAPU_FINI
 	nat_dexmon COSMOG
 	nat_dexmon COSMOEM
-	nat_dexmon SOLGALEO
-	nat_dexmon LUNALA
+	nat_dexmon SOLGALEO ; radiant sun phase does nothing
+	nat_dexmon LUNALA ; full moon phase does nothing
 	nat_dexmon NIHILEGO
 	nat_dexmon BUZZSWOLE
 	nat_dexmon PHEROMOSA
@@ -906,8 +962,11 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon KARTANA
 	nat_dexmon GUZZLORD
 	nat_dexmon NECROZMA
+	nat_dexmon NECROZMA_DUSK_MANE
+	nat_dexmon NECROZMA_DAWN_WINGS
+	nat_dexmon NECROZMA_ULTRA
 	nat_dexmon MAGEARNA
-	nat_dexmon MARSHADOW
+	nat_dexmon MARSHADOW ;zenith does absolutely nothing, didn't even know it changed
 	nat_dexmon POIPOLE
 	nat_dexmon NAGANADEL
 	nat_dexmon STAKATAKA
@@ -917,15 +976,8 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon MELMETAL
 NUM_ALOLA_POKEMON EQU const_value +-1
 
-    const_def 222
-    nat_dexmon UNOWN_G_PLACEHOLDER
-  
-
 	nat_dexmon_group 1, REGION_GALAR
 NUM_GALAR_POKEMON EQU const_value +-1
-
-    const_def 222
-    nat_dexmon UNOWN_H_PLACEHOLDER
 
 
 

@@ -1215,12 +1215,18 @@ wPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknames:: ds PKMN_NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknamesEnd::
 
-	ds 12 ; unused
-
-wPokedexCaught:: flag_array NUM_POKEMON
+wPokedexCaught::
+wKantoPokedexCaught:: flag_array NUM_KANTO_POKEMON
+wEndKantoPokedexCaught::
+wJohtoPokedexCaught:: flag_array NUM_JOHTO_POKEMON
+wEndJohtoPokedexCaught::
 wEndPokedexCaught::
 
-wPokedexSeen:: flag_array NUM_POKEMON
+wPokedexSeen:: 
+wKantoPokedexSeen:: flag_array NUM_KANTO_POKEMON
+wEndKantoPokedexSeen::
+wJohtoPokedexSeen:: flag_array NUM_JOHTO_POKEMON
+wEndJohtoPokedexSeen::
 wEndPokedexSeen::
 
 wUnownDex:: ds NUM_UNOWN
