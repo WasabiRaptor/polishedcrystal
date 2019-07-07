@@ -200,5 +200,3 @@ DragonairFrames:  INCLUDE "gfx/pokemon/dragonair/frames.asm"
 DragoniteFrames:  INCLUDE "gfx/pokemon/dragonite/frames.asm"
 MewtwoFrames:     INCLUDE "gfx/pokemon/mewtwo/frames.asm"
 MewFrames:        INCLUDE "gfx/pokemon/mew/frames.asm"
-
-INCLUDE "gfx/pokemon/aa_dummy/frames.asm"

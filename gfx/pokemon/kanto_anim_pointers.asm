@@ -150,6 +150,7 @@ KantoAnimationPointers::
     add_anim Kangaskhan
     add_anim Horsea
     add_anim Seadra
+    add_anim Kingdra
     add_anim Goldeen
     add_anim Seaking
     add_anim Staryu

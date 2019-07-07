@@ -200,5 +200,3 @@ DragonairBitmasks:  INCLUDE "gfx/pokemon/dragonair/bitmask.asm"
 DragoniteBitmasks:  INCLUDE "gfx/pokemon/dragonite/bitmask.asm"
 MewtwoBitmasks:     INCLUDE "gfx/pokemon/mewtwo/bitmask.asm"
 MewBitmasks:        INCLUDE "gfx/pokemon/mew/bitmask.asm"
-
-INCLUDE "gfx/pokemon/aa_dummy/bitmask.asm"

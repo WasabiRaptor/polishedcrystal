@@ -200,5 +200,3 @@ DragonairAnimationIdle:  INCLUDE "gfx/pokemon/dragonair/anim_idle.asm"
 DragoniteAnimationIdle:  INCLUDE "gfx/pokemon/dragonite/anim_idle.asm"
 MewtwoAnimationIdle:     INCLUDE "gfx/pokemon/mewtwo/anim_idle.asm"
 MewAnimationIdle:        INCLUDE "gfx/pokemon/mew/anim_idle.asm"
-
-INCLUDE "gfx/pokemon/aa_dummy/anim_idle.asm"
