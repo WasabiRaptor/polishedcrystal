@@ -233,7 +233,7 @@ UserCanLoseItem::
 	ret
 
 .StuckItems
-	db ARMOR_SUIT, MEWTWO
+	;db ARMOR_SUIT, MEWTWO
 	db -1
 
 GetOpponentUsedItemAddr::

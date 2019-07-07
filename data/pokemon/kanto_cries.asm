@@ -107,7 +107,7 @@ KantoCries::
 	mon_cry CRY_SLOWKING,    $104,  $200 ; SLOWKING
 	mon_cry CRY_METAPOD,     $080,  $0e0 ; MAGNEMITE
 	mon_cry CRY_METAPOD,     $020,  $140 ; MAGNETON
-	mon_cry CRY_METAPOD,     $020,  $140 ; MAGNETON
+	mon_cry CRY_METAPOD,     $020,  $140 ; MAGNEZONE
 	mon_cry CRY_SPEAROW,     $0dd,  $081 ; FARFETCH_D
 	mon_cry CRY_DIGLETT,     $0bb,  $081 ; DODUO
 	mon_cry CRY_DIGLETT,     $099,  $0a0 ; DODRIO
@@ -141,16 +141,17 @@ KantoCries::
 	mon_cry CRY_SEEL,        $0ee,  $140 ; HITMONCHAN
 	mon_cry CRY_SLUGMA,      $000,  $100 ; HITMONTOP
 	mon_cry CRY_SEEL,        $000,  $100 ; LICKITUNG
-	mon_cry CRY_SEEL,        $000,  $100 ; LICKITUNG
+	mon_cry CRY_SEEL,        $000,  $100 ; LICKILICKY
 	mon_cry CRY_GOLEM,       $0e6,  $15d ; KOFFING
 	mon_cry CRY_GOLEM,       $0ff,  $17f ; WEEZING
 	mon_cry CRY_CHARMANDER,  $000,  $100 ; RHYHORN
 	mon_cry CRY_RHYDON,      $000,  $100 ; RHYDON
-	mon_cry CRY_PIDGEOTTO,   $00a,  $140 ; CHANSEY
+	mon_cry CRY_RHYDON,      $000,  $100 ; RHYPERIOR
+	mon_cry CRY_PIDGEOTTO,   $00a,  $140 ; HAPPINY
 	mon_cry CRY_PIDGEOTTO,   $00a,  $140 ; CHANSEY
 	mon_cry CRY_SLOWKING,    $293,  $140 ; BLISSEY
 	mon_cry CRY_GOLEM,       $000,  $100 ; TANGELA
-	mon_cry CRY_GOLEM,       $000,  $100 ; TANGELA
+	mon_cry CRY_GOLEM,       $000,  $100 ; TANGROWTH
 	mon_cry CRY_KANGASKHAN,  $000,  $100 ; KANGASKHAN
 	mon_cry CRY_CLEFAIRY,    $099,  $090 ; HORSEA
 	mon_cry CRY_CLEFAIRY,    $03c,  $081 ; SEADRA
@@ -159,7 +160,7 @@ KantoCries::
 	mon_cry CRY_CATERPIE,    $010,  $17f ; SEAKING
 	mon_cry CRY_PARAS,       $002,  $0a0 ; STARYU
 	mon_cry CRY_PARAS,       $000,  $100 ; STARMIE
-	mon_cry CRY_KRABBY,      $008,  $0c0 ; MR__MIME
+	mon_cry CRY_KRABBY,      $008,  $0c0 ; MIME_JR
 	mon_cry CRY_KRABBY,      $008,  $0c0 ; MR__MIME
 	mon_cry CRY_CATERPIE,    $000,  $100 ; SCYTHER
 	mon_cry CRY_AMPHAROS,    $000,  $160 ; SCIZOR
@@ -167,10 +168,10 @@ KantoCries::
 	mon_cry CRY_DROWZEE,     $0ff,  $17f ; JYNX
 	mon_cry CRY_SUNFLORA,   -$2d8,  $0b4 ; ELEKID
 	mon_cry CRY_VOLTORB,     $08f,  $17f ; ELECTABUZZ
-	mon_cry CRY_VOLTORB,     $08f,  $17f ; ELECTABUZZ
+	mon_cry CRY_VOLTORB,     $08f,  $17f ; ELECTIVIRE
 	mon_cry CRY_TEDDIURSA,   $176,  $03a ; MAGBY
 	mon_cry CRY_CHARMANDER,  $0ff,  $0b0 ; MAGMAR
-	mon_cry CRY_CHARMANDER,  $0ff,  $0b0 ; MAGMAR
+	mon_cry CRY_CHARMANDER,  $0ff,  $0b0 ; MAGMORTAR
 	mon_cry CRY_PIDGEOTTO,   $000,  $100 ; PINSIR
 	mon_cry CRY_SQUIRTLE,    $011,  $0c0 ; TAUROS
 	mon_cry CRY_EKANS,       $080,  $080 ; MAGIKARP
@@ -194,6 +195,7 @@ KantoCries::
 	mon_cry CRY_CATERPIE,    $0bb,  $0c0 ; KABUTO
 	mon_cry CRY_FEAROW,      $0ee,  $081 ; KABUTOPS
 	mon_cry CRY_VILEPLUME,   $020,  $170 ; AERODACTYL
+	mon_cry CRY_GRIMER,      $055,  $081 ; MUNCHLAX
 	mon_cry CRY_GRIMER,      $055,  $081 ; SNORLAX
 	mon_cry CRY_RAICHU,      $080,  $0c0 ; ARTICUNO
 	mon_cry CRY_FEAROW,      $0ff,  $100 ; ZAPDOS
