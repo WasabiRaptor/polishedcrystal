@@ -998,7 +998,7 @@ ChesnaughtEvosAttacks:
 	db 0 ; no more level-up moves
 
 DeerlingEvosAttacks:
-	db EVOLVE_LEVEL, 30, SAWSBUCK
+	db EVOLVE_LEVEL, 30, SAWSBUCK_SPRING
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves

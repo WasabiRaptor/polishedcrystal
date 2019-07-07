@@ -48,7 +48,7 @@ AlphabeticalPokedexOrder:
 	db CUTIEFLY
 	db CYNDAQUIL
 	;D
-	db DEERLING
+	db DEERLING_SPRING
 	db DEINO
 	db DELPHOX
 	db DEWOTT
@@ -146,7 +146,7 @@ AlphabeticalPokedexOrder:
 	db LUMINEON
 	db LUXIO
 	db LUXRAY
-	db LYCANROC
+	db LYCANROC_MIDDAY
 	;M
 	db MAGCARGO
 	db MAGEARNA
@@ -215,7 +215,7 @@ AlphabeticalPokedexOrder:
 	db SANDILE
 	db SANDSHREW
 	db SANDSLASH
-	db SAWSBUCK
+	db SAWSBUCK_SPRING
 	db SCIZOR
 	db SCOLIPEDE
 	db SCYTHER
