@@ -18,11 +18,10 @@ EGG EQU $fe
 ; pokemon with different forms are treated as different "species" within the same group this is why unown and probably spinda will get a group all to themselves when implemented because they have an obscene amount of forms
 ; pokemon that have alternate forms that are not completely stand alone should not be listed as a speerate species here, I would much rather devise another method
 ; mega form or alternate form pokemon (when imlemented) that are based on a hold item should not be treated as seperate "species" because the very item they hold is the byte needed to know if they should be an alternate form
-; whereas a pokemon who's form is completely independent of what it is holding and cour exist independantly of it, shoulc very much be treated as its own "species" as I don't believe any region would ever go over the 200 mark
-; and the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
+; whereas a pokemon who's form is completely independent of what it is holding and can exist independantly of it, shoulc very much be treated as its own "species" as I don't believe any region would ever go over the 200 mark
+; the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
 ; even if the order isn't "faithful" by the hand of putting later gen pokemon in earlier groups, I believe it will be much cleaner, as evolution groups will all be contagious to eachother rather than spread across several regions
 ; it is very much possible to code an evolution method to make a pokemon evolve into one of a different group, but it is unnecessary at the moment
-; 
 	nat_dexmon_group 1, REGION_KANTO
 	nat_dexmon BULBASAUR
 	nat_dexmon IVYSAUR	
@@ -468,7 +467,7 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon ARMALDO
 	nat_dexmon FEEBAS
 	nat_dexmon MILOTIC
-	nat_dexmon CASTFORM ; castform's forms are controlled by the weather, and cannot exist independent of it outside battle, therefore only one entry
+	nat_dexmon CASTFORM ; castform's forms are controlled by the weather, and cannot exist independent of it outside battle, and merely change the pic and type, but not the stats therefore only one entry
 	nat_dexmon KECLEON
 	nat_dexmon SHUPPET
 	nat_dexmon BANETTE
@@ -672,7 +671,7 @@ SHAYMIN_LAND EQU SHAYMIN
 	nat_dexmon KROKOROK
 	nat_dexmon KROOKODILE
 	nat_dexmon DARUMAKA
-	nat_dexmon DARMANITAN ; zen mode cannot exist outside of battle, and is handled by the ability, therefore only one entry
+	nat_dexmon DARMANITAN
 	nat_dexmon MARACTUS
 	nat_dexmon DWEBBLE
 	nat_dexmon CRUSTLE
@@ -781,6 +780,7 @@ SHAYMIN_LAND EQU SHAYMIN
 	nat_dexmon MELLOETTA_PIROUETTE
 	nat_dexmon GENESECT
 NUM_UNOVA_POKEMON EQU const_value +-1
+	nat_dexmon DARMANITAN_ZEN_MODE ; zen mode cannot exist outside of battle, but as both the types and stats change, it han an entry here
 
 MELLOETTA_ARIA EQU MELLOETTA
 
@@ -807,7 +807,7 @@ MELLOETTA_ARIA EQU MELLOETTA
 	nat_dexmon PYROAR
 	nat_dexmon FLABEBE ; the color variance can be handled by vary colors by DVs
 	nat_dexmon FLOETTE
-	nat_dexmon FLOETTE_ETERNAL_FLOWER ; not sure but it basically is its own pokemon since it can't evolve and such
+	nat_dexmon FLOETTE_ETERNAL_FLOWER ; not sure but it basically is its own pokemon since it can't evolve and has a special learnset and such
 	nat_dexmon FLORGES
 	nat_dexmon SKIDDO
 	nat_dexmon GOGOAT
@@ -863,8 +863,8 @@ MELLOETTA_ARIA EQU MELLOETTA
 	nat_dexmon HOOPA_UNBOUND
 	nat_dexmon VOLCANION
 NUM_KALOS_POKEMON EQU const_value +-1
-	nat_dexmon AEGISLASH_BLADE ; only exists in battle but its easier to count as a seperate species for now, and it won't count towards dex total
-	nat_dexmon ZYGARDE_10_COMPLETE ; these are just so power construct knows what form to revert to, and don't count towards dex total
+	nat_dexmon AEGISLASH_BLADE ; only exists in battle but its easier to count as a seperate species for the ease of recalculating its stats, and it won't count towards dex total
+	nat_dexmon ZYGARDE_10_COMPLETE ; these are just so power construct knows what form to revert to, and are here for the same reason as aegislash, and don't count towards dex total
 	nat_dexmon ZYGARDE_50_COMPLETE
 
 
@@ -935,7 +935,7 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon KOMALA
 	nat_dexmon TURTONATOR
 	nat_dexmon TOGEDEMARU
-	nat_dexmon MIMIKYU ; some people may argue its disguise breaking is a form change but tha ability can be handled without it I think
+	nat_dexmon MIMIKYU ; some people may argue its disguise breaking is a form change but it does not change type or stats and can be handled without another entry
 	nat_dexmon BRUXISH
 	nat_dexmon DRAMPA
 	nat_dexmon DHELMISE

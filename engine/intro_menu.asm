@@ -197,9 +197,6 @@ ResetWRAM: ; 5ba7
 	ld hl, wNumBerries
 	call _ResetWRAM_InitList
 
-	;ld hl, wNumKeyItems
-	;call _ResetWRAM_InitList
-
 	ld hl, wNumPCItems
 	call _ResetWRAM_InitList
 

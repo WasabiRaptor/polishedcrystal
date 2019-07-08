@@ -1124,16 +1124,17 @@ PokedexCountSeenCaught::
 	ld [wPokedexSeenCaughtCount +1 ], a
 
 .next
-	ld a, [hli]
+	ld e, 1
 	ld d, 8
-
 .count
-	and a
+	ld a, [hl]
+	and e
 	call nz, .inc_PokedexSeenCaughtCount
-	rrca
+	rrc e
 	dec d
 	jr nz, .count
 
+	inc hl
 	dec bc
 	ld a, c
 	and a
@@ -1167,7 +1168,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld de, String_OWN
 	call Pokedex_PlaceString
 	ld hl, wPokedexCaught
-	ld b, wPokedexCaughtEnd - wPokedexCaught
+	ld bc, wPokedexCaughtEnd - wPokedexCaught
 	call PokedexCountSeenCaught
 	ld de, wPokedexSeenCaughtCount
 	hlcoord 15, 2
