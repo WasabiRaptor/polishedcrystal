@@ -1,3 +1,9 @@
+INCLUDE "constants.asm"
+
+
+SECTION "Unova Dex Order", ROMX
+
+
 UnovaDexOrder::
 	db VICTINI
 	db SNIVY

@@ -223,7 +223,7 @@ EGG EQU $fe
 	nat_dexmon DRAGONAIR
 	nat_dexmon DRAGONITE
 	nat_dexmon MEWTWO	
-	nat_dexmon MEW	
+	nat_dexmon MEW
 NUM_KANTO_POKEMON EQU const_value +-1
 
 ;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense

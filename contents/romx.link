@@ -22,7 +22,6 @@ ROMX $05
 
 ROMX $06
 	org $4000
-	"Egg Moves"
 
 ROMX $07
 	org $4000

@@ -1,3 +1,8 @@
+INCLUDE "constants.asm"
+
+
+SECTION "Hoenn Dex Order", ROMX
+
 HoennDexOrder::
 	db TREECKO
 	db GROVYLE

@@ -60,6 +60,8 @@ $(BUILD_DIR)engine/credits.o \
 $(BUILD_DIR)engine/events.o \
 $(BUILD_DIR)gfx/pics.o \
 $(BUILD_DIR)gfx/sprites.o \
+$(BUILD_DIR)gfx/kanto_footprints.o\
+$(BUILD_DIR)gfx/johto_footprints.o\
 
 ### Build targets
 

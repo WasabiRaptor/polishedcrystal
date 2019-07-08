@@ -1,5 +1,8 @@
+variant_footprints: macro
+    dbba \1, \2Footprints
+endm
+
 VariantFootprintTable:
-    dbba NIDORAN_F,    NidoranFootprints
-    dbba NIDORINO,   NidorinoFootprints
-    dbba NIDOKING,   NidokingFootprints
-    dbba -1,         PokemonFootprints
+    variant_footprints REGION_KANTO, Kanto
+    variant_footprints REGION_JOHTO, Johto
+    dbba -1,           KantoFootprints

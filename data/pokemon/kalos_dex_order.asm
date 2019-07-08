@@ -1,3 +1,8 @@
+INCLUDE "constants.asm"
+
+SECTION "Kalos Dex Order", ROMX
+
+
 KalosDexOrder::
 	db CHESPIN
 	db QUILLADIN
@@ -33,7 +38,6 @@ KalosDexOrder::
 	db HONEDGE
 	db DOUBLADE
 	db AEGISLASH
-	db AEGISLASH_BLADE
 	db SPRITZEE
 	db AROMATISSE
 	db SWIRLIX
@@ -72,8 +76,6 @@ KalosDexOrder::
 	db ZYGARDE_10
 	db ZYGARDE_50
 	db ZYGARDE_COMPLETE
-	db ZYGARDE_10_COMPLETE 
-	db ZYGARDE_50_COMPLETE
 	db DIANCIE
 	db HOOPA 
 	db HOOPA_UNBOUND

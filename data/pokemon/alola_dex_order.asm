@@ -1,3 +1,9 @@
+INCLUDE "constants.asm"
+
+
+SECTION "Alola Dex Order", ROMX
+
+
 AlolaDexOrder::
 	db ROWLET
 	db DARTRIX

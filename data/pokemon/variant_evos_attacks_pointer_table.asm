@@ -10,7 +10,7 @@ endm
 VariantEvosAttacksPointerTable:
     variant_evosattacks REGION_KANTO,  Kanto
     variant_evosattacks REGION_JOHTO,  Johto
-	dbba -1,        EvosAttacksPointers
+	dbba -1,        KantoEvosAttacksPointers
 
 VariantEvolutionMovesPointerTable:
     variant_evomoves REGION_KANTO, Kanto  

@@ -1,3 +1,8 @@
+INCLUDE "constants.asm"
+
+SECTION "Kanto Dex Order", ROMX
+
+
 KantoDexOrder::
 	db BULBASAUR
 	db IVYSAUR	

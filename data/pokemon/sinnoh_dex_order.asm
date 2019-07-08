@@ -1,3 +1,9 @@
+INCLUDE "constants.asm"
+
+
+SECTION "Sinnoh Dex Order", ROMX
+
+
 SinnohDexOrder::
 	db TURTWIG
 	db GROTLE

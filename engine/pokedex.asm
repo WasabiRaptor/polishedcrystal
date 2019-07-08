@@ -1931,7 +1931,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 .Jumptable: ; 40bf0 (10:4bf0)
 	dw .OldMode
 	dw .VariantMode
-	dw Pokedex_ABCMode
+	dw .Pokedex_ABCMode
 
 .OldMode: ; 40c08 (10:4c08)
 	ld de, InvarDexOrder
@@ -1991,7 +1991,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld [wDexListingEnd], a
 	ret
 
-Pokedex_ABCMode: ; 40c30
+.Pokedex_ABCMode: ; 40c30
 	xor a
 	ld [wDexListingEnd], a
 	ld hl, wPokedexOrder
@@ -2662,8 +2662,8 @@ Pokedex_LoadAnyFootprint: ; 4147b
 	ld a, [wPokedexCurrentMon]
 Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
-	ld b, a
-	push bc
+	push af
+	ld a, [wCurPokeGroup]
 	ld hl, VariantFootprintTable
 	ld de, 4
 	call IsInArray
@@ -2673,11 +2673,7 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	pop bc
-	ld a, b
-	jr nc, .notvariant
-	ld a, [wCurPokeGroup]
-.notvariant
+	pop af
 	dec a
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes
@@ -2856,8 +2852,6 @@ INCBIN "gfx/pokedex/slowpoke.2bpp.lz"
 
 QuestionMarkLZ: ; 1de0e1
 INCBIN "gfx/pokedex/question_mark.2bpp.lz"
-
-INCLUDE "gfx/footprints.asm"
 
 PokedexTypes:
 INCBIN "gfx/pokedex/types.2bpp"

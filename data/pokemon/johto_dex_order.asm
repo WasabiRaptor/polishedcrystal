@@ -1,3 +1,9 @@
+INCLUDE "constants.asm"
+
+
+SECTION "Johto Dex Order", ROMX
+
+
 JohtoDexOrder::
 	db CHIKORITA
 	db BAYLEEF

@@ -16,14 +16,14 @@ InvarDexOrder::
 	grouped_dex_order_mon ZORUA			; 0a
 	grouped_dex_order_mon ZOROARK		; 0b
 	grouped_dex_order_mon ROCKRUFF		; 0c
-	grouped_dex_order_mon LYCANROC		; 0d alt forms alt palettes
+	grouped_dex_order_mon LYCANROC_MIDDAY		; 0d alt forms alt palettes
 	grouped_dex_order_mon MIMIKYU     	; 0e
 	grouped_dex_order_mon MAGNEMITE   	; 0f
 	grouped_dex_order_mon MAGNETON     	; 10
 	grouped_dex_order_mon MAGNEZONE  	; 11
 	grouped_dex_order_mon PORYGON    	; 12
 	grouped_dex_order_mon PORYGON2    	; 13
-	grouped_dex_order_mon PORYGONZ   	; 14
+	grouped_dex_order_mon PORYGON_Z   	; 14
 	grouped_dex_order_mon MEOWTH    	; 15 alt forms alt palettes
 	grouped_dex_order_mon PERSIAN     	; 16 alt forms alt palettes
 	grouped_dex_order_mon TOGEPI      	; 17
@@ -33,7 +33,7 @@ InvarDexOrder::
 	grouped_dex_order_mon CHINGLING  	; 1b
 	grouped_dex_order_mon CHIMECHO  	; 1c
 	grouped_dex_order_mon ESPURR  		; 1d
-	grouped_dex_order_mon MEOWSTIC   	; 1e alt forms alt palettes
+	grouped_dex_order_mon MEOWSTIC_M   	; 1e alt forms alt palettes
 	grouped_dex_order_mon TIMBURR  		; 1f
 	grouped_dex_order_mon GURDURR  		; 20
 	grouped_dex_order_mon CONKELDURR   	; 21
@@ -42,11 +42,11 @@ InvarDexOrder::
 	grouped_dex_order_mon LIEPARD   	; 24
 	grouped_dex_order_mon GRIMER     	; 25 alt forms alt palettes
 	grouped_dex_order_mon MUK  			; 26 alt forms alt palettes
-	grouped_dex_order_mon NIDORAN 		; 27 alt forms alt palettes
+	grouped_dex_order_mon NIDORAN_M 		; 27 alt forms alt palettes
 	grouped_dex_order_mon NIDORINO 		; 28 alt forms alt palettes
 	grouped_dex_order_mon NIDOKING      ; 29 alt forms alt palettes
-	grouped_dex_order_mon POKEMON_2A     	; 2a
-	grouped_dex_order_mon POKEMON_2B     ; 2b
+	grouped_dex_order_mon NIDORINA     	; 2a
+	grouped_dex_order_mon NIDOQUEEN     ; 2b
 	grouped_dex_order_mon SEVIPER      	; 2c
 	grouped_dex_order_mon ZANGOOSE  	; 2d
 	grouped_dex_order_mon SENTRET      	; 2e
@@ -75,8 +75,8 @@ InvarDexOrder::
 	grouped_dex_order_mon CHESPIN 		; 45
 	grouped_dex_order_mon QUILLADIN 	; 46
 	grouped_dex_order_mon CHESNAUGHT 	; 47
-	grouped_dex_order_mon DEERLING  	; 48 alt palettes
-	grouped_dex_order_mon SAWSBUCK 		; 49 alt forms alt palettes
+	grouped_dex_order_mon DEERLING_SPRING  	; 48 alt palettes
+	grouped_dex_order_mon SAWSBUCK_SPRING 		; 49 alt forms alt palettes
 	grouped_dex_order_mon COTTONEE    	; 4a
 	grouped_dex_order_mon WHIMSICOTT   	; 4b
 	grouped_dex_order_mon FOONGUS      	; 4c
@@ -216,7 +216,7 @@ InvarDexOrder::
 	grouped_dex_order_mon SWINUB        ; d2
 	grouped_dex_order_mon PILOSWINE     ; d3
 	grouped_dex_order_mon MAMOSWINE     ; d4
-	grouped_dex_order_mon UNOWN    		; d5 alt forms
+	grouped_dex_order_mon DUMMY_UNOWN    		; d5 alt forms
 	grouped_dex_order_mon NATU          ; d6
 	grouped_dex_order_mon XATU          ; d7
 	grouped_dex_order_mon SIGILYPH      ; d8
@@ -254,7 +254,7 @@ InvarDexOrder::
 	grouped_dex_order_mon MAGEARNA   	; f8
 	grouped_dex_order_mon SHAYMIN    	; f9 alt forms
 	grouped_dex_order_mon CELEBI     	; fa
-	grouped_dex_order_mon ZYGARDE    	; fb alt forms
+	grouped_dex_order_mon ZYGARDE_10    	; fb alt forms
 	grouped_dex_order_mon MEW        	; fc
 	grouped_dex_order_mon MEWTWO     	; fd
 InvarDexOrderEnd::
