@@ -21,7 +21,8 @@ EGG EQU $fe
 ; whereas a pokemon who's form is completely independent of what it is holding and cour exist independantly of it, shoulc very much be treated as its own "species" as I don't believe any region would ever go over the 200 mark
 ; and the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
 ; even if the order isn't "faithful" by the hand of putting later gen pokemon in earlier groups, I believe it will be much cleaner, as evolution groups will all be contagious to eachother rather than spread across several regions
-
+; it is very much possible to code an evolution method to make a pokemon evolve into one of a different group, but it is unnecessary at the moment
+; 
 	nat_dexmon_group 1, REGION_KANTO
 	nat_dexmon BULBASAUR
 	nat_dexmon IVYSAUR	
@@ -467,10 +468,7 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon ARMALDO
 	nat_dexmon FEEBAS
 	nat_dexmon MILOTIC
-	nat_dexmon CASTFORM
-	nat_dexmon CASTFORM_SUN
-	nat_dexmon CASTFORM_RAIN
-	nat_dexmon CASTFORM_HAIL
+	nat_dexmon CASTFORM ; castform's forms are controlled by the weather, and cannot exist independent of it outside battle, therefore only one entry
 	nat_dexmon KECLEON
 	nat_dexmon SHUPPET
 	nat_dexmon BANETTE
@@ -552,8 +550,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon BUIZEL
 	nat_dexmon FLOATZEL
 	nat_dexmon CHERUBI
-	nat_dexmon CHERRIM_OVERCAST
-	nat_dexmon CHERRIM_SUNSHINE
+	nat_dexmon CHERRIM ; same reasons as castform
 	nat_dexmon SHELLOS_WEST
 	nat_dexmon GASTRODON_WEST
 	nat_dexmon SHELLOS_EAST
@@ -675,8 +672,7 @@ SHAYMIN_LAND EQU SHAYMIN
 	nat_dexmon KROKOROK
 	nat_dexmon KROOKODILE
 	nat_dexmon DARUMAKA
-	nat_dexmon DARMANITAN
-	nat_dexmon DARMANITAN_ZEN
+	nat_dexmon DARMANITAN ; zen mode cannot exist outside of battle, and is handled by the ability, therefore only one entry
 	nat_dexmon MARACTUS
 	nat_dexmon DWEBBLE
 	nat_dexmon CRUSTLE
@@ -824,7 +820,6 @@ MELLOETTA_ARIA EQU MELLOETTA
 	nat_dexmon HONEDGE
 	nat_dexmon DOUBLADE
 	nat_dexmon AEGISLASH
-	nat_dexmon AEGISLASH_BLADE
 	nat_dexmon SPRITZEE
 	nat_dexmon AROMATISSE
 	nat_dexmon SWIRLIX
@@ -863,13 +858,15 @@ MELLOETTA_ARIA EQU MELLOETTA
 	nat_dexmon ZYGARDE_10
 	nat_dexmon ZYGARDE_50
 	nat_dexmon ZYGARDE_COMPLETE
-	nat_dexmon ZYGARDE_10_COMPLETE ; these are just so power construct knows what form to revert to
-	nat_dexmon ZYGARDE_50_COMPLETE
 	nat_dexmon DIANCIE
 	nat_dexmon HOOPA 
 	nat_dexmon HOOPA_UNBOUND
 	nat_dexmon VOLCANION
 NUM_KALOS_POKEMON EQU const_value +-1
+	nat_dexmon AEGISLASH_BLADE ; only exists in battle but its easier to count as a seperate species for now, and it won't count towards dex total
+	nat_dexmon ZYGARDE_10_COMPLETE ; these are just so power construct knows what form to revert to, and don't count towards dex total
+	nat_dexmon ZYGARDE_50_COMPLETE
+
 
 AEGISLASH_SHIELD EQU AEGISLASH
 
@@ -935,7 +932,6 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon TYPE_NULL
 	nat_dexmon SILVALLY ; types are handled by the RKS system ability via the item it holds and palette can be done in much the same way
 	nat_dexmon MINIOR
-	nat_dexmon MINIOR_SHIELDS_DOWN ; colors can be handled by vary colors by DVs
 	nat_dexmon KOMALA
 	nat_dexmon TURTONATOR
 	nat_dexmon TOGEDEMARU
@@ -975,6 +971,8 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon MELTAN
 	nat_dexmon MELMETAL
 NUM_ALOLA_POKEMON EQU const_value +-1
+	nat_dexmon MINIOR_SHIELDS_DOWN ; colors can be handled by vary colors by DVs, but exists here for much the same reason as aegislash
+
 
 	nat_dexmon_group 1, REGION_GALAR
 NUM_GALAR_POKEMON EQU const_value +-1

@@ -1919,13 +1919,13 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld bc, wPokedexOrderEnd - wPokedexOrder
 	xor a
 	call ByteFill
+	pop af
+	ldh [rSVBK], a
+
 	ld a, [wCurrentDexMode]
 	ld hl, .Jumptable
 	call Pokedex_LoadPointer
-	call _hl_
-	pop af
-	ldh [rSVBK], a
-	ret
+	jp hl
 
 
 .Jumptable: ; 40bf0 (10:4bf0)
@@ -1934,12 +1934,22 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	dw .Pokedex_ABCMode
 
 .OldMode: ; 40c08 (10:4c08)
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokedexOrder)
+	ldh [rSVBK], a
+
 	ld de, InvarDexOrder
 	ld hl, wPokedexOrder
 	ld bc, InvarDexOrderEnd - InvarDexOrder
 	jr .loop1abc
 
 .VariantMode: ; 40bf6 (10:4bf6)
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokedexOrder)
+	ldh [rSVBK], a
+
 	ld a, [wDexMonGroup]
 	ld hl, RegionDexOrderTable
 	ld de, 4
@@ -1971,6 +1981,9 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	jr nz, .loopnew
 ; fallthrough
 	pop af
+	pop af
+	ldh [rSVBK], a
+
 .FindLastSeen: ; 40c18 (10:4c18)
 	ld a, [wDexMonGroup]
 	ld [wCurPokeGroup], a
@@ -1992,6 +2005,11 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ret
 
 .Pokedex_ABCMode: ; 40c30
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokedexOrder)
+	ldh [rSVBK], a
+
 	xor a
 	ld [wDexListingEnd], a
 	ld hl, wPokedexOrder
@@ -2007,9 +2025,6 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld [wDexMonGroup], a
 	ld [wCurPokeGroup], a
 	pop af
-	call Pokedex_CheckSeen
-	jr z, .skipabc
-
 	ld a, [wPokedexCurrentMon]
 	ld [hli], a
 	ld a, [wDexMonGroup]
@@ -2018,7 +2033,6 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	inc a
 	ld [wDexListingEnd], a
 
-.skipabc
 	inc de
 	pop bc
 	dec bc
@@ -2028,6 +2042,9 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld a, c
 	and a
 	jr nz, .loop1abc
+	pop af
+	ldh [rSVBK], a
+
 
 	ld a, [wDexListingEnd]
 	ld c, 0
