@@ -1047,7 +1047,7 @@ DisplayDexEntry: ; 4424d
 	call GetPokemonName
 	hlcoord 9, 3
 	call PlaceString ; mon species
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	call GetDexEntryPointer
 	ld a, b
 	push af
@@ -1063,7 +1063,10 @@ DisplayDexEntry: ; 4424d
 	ld [hli], a
 	ld a, "."
 	ld [hli], a
-	ld de, wd265
+	ld a, [wPokedexCurrentMon]
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld de, wNatDexNo
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
 	call PrintNum
 ;units
@@ -1087,7 +1090,7 @@ DisplayDexEntry: ; 4424d
 .done
 	farcall Pokedex_DrawFootprint
 ; Check to see if we caught it.  Get out of here if we haven't.
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	dec a
 	call CheckCaughtMon
 	pop hl
@@ -1217,24 +1220,22 @@ DisplayDexEntry: ; 4424d
 
 	ld a, [wPokedexStatus]
 	ld b, a
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	cp b
 	ld a, c
 	pop bc
 	ret z
 	cp $7f
 	jr nz, .statpage
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	inc a
-	ld [wDexSearchSlowpokeFrame], a
+	ld [wPokedexEntryBufferValue], a
 	push bc
 	push de
 	jr .skip_weight
 
 .statpage
 	push bc
-
-	call GetBaseData ;form is known
 	
 	lb bc, 9, 12
 	hlcoord 8, 1
@@ -1340,13 +1341,13 @@ DisplayDexEntry: ; 4424d
 .printdexability
 	pop af
 	ld e, a
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	inc a
-	ld [wDexSearchSlowpokeFrame], a
+	ld [wPokedexEntryBufferValue], a
 
 	ld a, [wPokedexStatus]
 	ld b, a
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	cp b
 	pop bc
 	ret z
@@ -1367,10 +1368,7 @@ DisplayDexEntry: ; 4424d
 	call PlaceString
 	ld a, [wBaseEggGroups]
 	and EGG_GROUP_1_MASK
-	rrca
-	rrca
-	rrca
-	rrca
+	swap a
 	ld b, a
 	call GetEggGroupString
 	hlcoord 3, 13
@@ -1468,12 +1466,8 @@ DisplayDexEntry: ; 4424d
 
 .Hpev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
+	rla
+	rla
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1483,10 +1477,8 @@ DisplayDexEntry: ; 4424d
 
 .Atkev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
+	swap a
+
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1516,12 +1508,8 @@ DisplayDexEntry: ; 4424d
 
 .Satev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
+	rla
+	rla
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1531,10 +1519,7 @@ DisplayDexEntry: ; 4424d
 
 .Sdfev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
+	swap a
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1655,6 +1640,7 @@ GetDexEntryPointer:: ; 44333
 ; return dex entry pointer b:de
 	push hl
 ;get relevant pointers
+	push af
 	ld a, [wCurPokeGroup]
 	ld hl, VariantPokedexEntryPointerTable
 	ld de, 3
@@ -1664,7 +1650,7 @@ GetDexEntryPointer:: ; 44333
 	ld h, [hl]
 	ld l, a
 
-	ld a, [wd265]
+	pop af
 	dec a
 	ld d, 0
 	ld e, a
@@ -2797,83 +2783,6 @@ RetroactivelyIgnoreEggs: ; 4dc67
 	jr .loop
 
 INCLUDE "engine/stats_screen.asm"
-
-CatchTutorial:: ; 4e554
-	ld a, [wBattleType]
-	dec a
-	ld c, a
-	ld hl, .dw
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.dw ; 4e564 (13:6564)
-	dw .DudeTutorial
-	dw .DudeTutorial
-	dw .DudeTutorial
-
-.DudeTutorial: ; 4e56a (13:656a)
-; Back up your name
-	ld hl, wPlayerName
-	ld de, wBackupName
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-; Copy Dude's name to your name
-	ld hl, .Dude
-	ld de, wPlayerName
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-
-	call .LoadDudeData
-
-	xor a
-	ldh [hJoyDown], a
-	ldh [hJoyPressed], a
-
-	ld hl, .AutoInput
-	ld a, BANK(.AutoInput)
-	call StartAutoInput
-	farcall StartBattle
-	call StopAutoInput
-
-	ld hl, wBackupName
-	ld de, wPlayerName
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-	ret
-
-.LoadDudeData: ; 4e5b7 (13:65b7)
-	ld hl, wDudeNumItems
-	ld de, .DudeItems
-	call .CopyDudeData
-	ld hl, wDudeNumMedicine
-	ld de, .DudeMedicine
-	call .CopyDudeData
-	ld hl, wDudeNumBalls
-	ld de, .DudeBalls
-.CopyDudeData:
-	ld a, [de]
-	inc de
-	ld [hli], a
-	cp -1
-	jr nz, .CopyDudeData
-	ret
-
-.Dude: ; 4e5da
-	db "Lyra@"
-.DudeItems:
-	db 2, REPEL, 1, GOLD_LEAF, 1, -1
-.DudeMedicine:
-	db 3, POTION, 2, ANTIDOTE, 1, FRESH_WATER, 1, -1
-.DudeBalls:
-	db 2, POKE_BALL, 10, PREMIER_BALL, 1, -1
-
-.AutoInput: ; 4e5df
-	db NO_INPUT, $ff ; end
 
 INCLUDE "engine/evolution_animation.asm"
 

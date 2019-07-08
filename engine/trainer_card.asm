@@ -363,7 +363,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	call PlaceString
 
 	ld hl, wPokedexCaught
-	ld b, wEndPokedexCaught - wPokedexCaught
+	ld b, wPokedexCaughtEnd - wPokedexCaught
 	call CountSetBits
 	ld de, wd265
 	hlcoord 15, 10

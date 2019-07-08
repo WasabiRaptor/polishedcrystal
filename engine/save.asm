@@ -356,15 +356,15 @@ SavePokemonData: ; 14df7
 SaveEncounterData:
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK(wTotalEncounters)
+	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
 
-	ld a, BANK(sTotalEncounteredPokemonSpecies)
+	ld a, BANK(sTotalSavedEncounters)
 	call GetSRAMBank
 
-	ld hl, wTotalEncounteredPokemonSpecies
-	ld de, sTotalEncounteredPokemonSpecies
-	ld bc, wTotalEncountersEnd - wTotalEncounteredPokemonSpecies
+	ld hl, wTotalSavedEncounters
+	ld de, sTotalSavedEncounters
+	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
 	rst CopyBytes
 
 	pop af
@@ -619,15 +619,15 @@ LoadBox: ; 15021 (5:5021)
 LoadEncounterData:
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK(wTotalEncounters)
+	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
 
-	ld a, BANK(sTotalEncounteredPokemonSpecies)
+	ld a, BANK(sTotalSavedEncounters)
 	call GetSRAMBank
 
-	ld hl, sTotalEncounteredPokemonSpecies
-	ld de, wTotalEncounteredPokemonSpecies
-	ld bc, wTotalEncountersEnd - wTotalEncounteredPokemonSpecies
+	ld hl, sTotalSavedEncounters
+	ld de, wTotalSavedEncounters
+	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
 	rst CopyBytes
 
 	pop af

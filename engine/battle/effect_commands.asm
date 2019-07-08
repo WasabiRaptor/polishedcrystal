@@ -8769,7 +8769,6 @@ BattleCommand_lowkick:
 	ld hl, wEnemyMonSpecies
 .got_species
 	ld a, [hl]
-	ld [wd265], a
 	farcall GetDexEntryPointer
 	ld a, b
 

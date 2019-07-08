@@ -616,12 +616,6 @@ reloadmapafterbattle: macro
 	db reloadmapafterbattle_command
 	endm
 
-	enum catchtutorial_command
-catchtutorial: macro
-	db catchtutorial_command
-	db \1 ; byte
-	endm
-
 	enum trainertext_command
 trainertext: macro
 	db trainertext_command

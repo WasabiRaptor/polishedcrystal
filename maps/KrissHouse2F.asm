@@ -236,25 +236,25 @@ endr
 	end
 
 FillPokedex:
-	ld a, 1
-	ld [wUnlockedUnownMode], a
-	ld [wFirstUnownSeen], a
-	ld [wFirstMagikarpSeen], a
-	ld hl, wUnownDex
-	ld a, 1
-rept NUM_UNOWN
-	ld [hli], a
-	inc a
-endr
-	ld hl, wPokedexSeen
-	call .Fill
-	ld hl, wPokedexCaught
-.Fill:
-	ld a, %11111111
-	ld bc, 31 ; 001-248
-	call ByteFill
-	ld a, %00011111
-	ld [hl], a ; 249-253
+	;ld a, 1
+	;ld [wUnlockedUnownMode], a
+	;ld [wFirstUnownSeen], a
+	;ld [wFirstMagikarpSeen], a
+	;ld hl, wUnownDex
+	;ld a, 1
+;rept NUM_UNOWN
+	;ld [hli], a
+	;inc a
+;endr
+	;ld hl, wPokedexSeen
+	;call .Fill
+	;ld hl, wPokedexCaught
+;.Fill:
+	;ld a, %11111111
+	;ld bc, 31 ; 001-248
+	;call ByteFill
+	;ld a, %00011111
+	;ld [hl], a ; 249-253
 	ret
 
 else

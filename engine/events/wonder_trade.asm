@@ -334,11 +334,11 @@ endr
 	ld a, [wOTTrademonSpecies]
 	cp MAGIKARP
 	jr nz, .not_first_magikarp
-	ld a, [wFirstMagikarpSeen]
+	;ld a, [wFirstMagikarpSeen]
 	and a
 	jr nz, .not_first_magikarp
 	ld a, b
-	ld [wFirstMagikarpSeen], a
+	;ld [wFirstMagikarpSeen], a
 .not_first_magikarp
 	ld a, b
 	pop bc

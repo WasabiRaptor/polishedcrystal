@@ -154,7 +154,6 @@ ScriptCommandTable:
 	dw Script_loadtrainer                ; 5a
 	dw Script_startbattle                ; 5b
 	dw Script_reloadmapafterbattle       ; 5c
-	dw Script_catchtutorial              ; 5d
 	dw Script_trainertext                ; 5e
 	dw Script_trainerflagaction          ; 5f
 	dw Script_winlosstext                ; 60
@@ -1408,17 +1407,6 @@ Script_startbattle:
 	ld [wScriptVar], a
 	ret
 
-Script_catchtutorial:
-; parameters:
-;     byte (SingleByteParam)
-	call GetScriptByte
-	ld [wBattleType], a
-	call BufferScreen
-	farcall CatchTutorial
-	ld a, 1
-	ld [wDontPlayMapMusicOnReload], a
-	jp Script_reloadmap
-
 Script_reloadmapafterbattle:
 	farcall PostBattleTasks
 	ld hl, wBattleScriptFlags
@@ -2342,7 +2330,7 @@ Script_givepoke:
 	ld [wCurPartySpecies], a
 	call GetScriptByte
 	ld [wCurPokeGroup], a
-	ld [wCurGender], a
+	ld [wCurGenderOrGroupBuffer], a
 	call GetScriptByte
 	ld [wCurPartyLevel], a
 	call GetScriptByte
@@ -2805,11 +2793,11 @@ Script_check_save:
 
 Script_count_seen_caught:
 	ld hl, wPokedexSeen
-	ld b, wEndPokedexSeen - wPokedexSeen
+	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld [wd002], a
 	ld hl, wPokedexCaught
-	ld b, wEndPokedexCaught - wPokedexCaught
+	ld b, wPokedexCaughtEnd - wPokedexCaught
 	call CountSetBits
 	ld [wd003], a
 	ret

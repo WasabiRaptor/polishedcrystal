@@ -25,8 +25,6 @@ wChannel6:: channel_struct wChannel6
 wChannel7:: channel_struct wChannel7
 wChannel8:: channel_struct wChannel8
 
-	ds 1 ; unused
-
 wCurTrackDuty:: ds 1
 wCurTrackIntensity:: ds 1
 wCurTrackFrequency:: ds 2
@@ -223,43 +221,6 @@ wCurrAnimYOffset:: ds 1
 wGlobalAnimYOffset:: ds 1
 wGlobalAnimXOffset:: ds 1
 wSpriteAnimsEnd::
-
-
-SECTION "Music Player RAM", WRAM0
-
-wMusicPlayerWRAM::
-wSongSelection:: ds 2
-wNumNoteLines:: ds 1
-wTmpCh:: ds 1
-wChLastNotes:: ds 3
-wVolTimer:: ds 1
-wC1Vol:: ds 1
-wC1VolSub:: ds 1
-wC2Vol:: ds 1
-wC2VolSub:: ds 1
-wC3Vol:: ds 1
-wC3VolSub:: ds 1
-wC4Vol:: ds 1
-wC4VolSub:: ds 1
-wNoteEnded:: ds 3
-wSongInfoSwitch:: ds 1
-;wRenderedWaveform:: ds 1
-wPitchesTmp:: ds 4
-;wWaveformTmp:: ds 16
-wTmpValue:: ds 1
-; song list
-wSelectorTop:: ds 1
-wSelectorCur:: ds 1
-; song editor
-wChannelSelector:: ds 1
-wAdjustingTempo:: ds 1
-; audio engine input
-wChannelSelectorSwitches:: ds 4
-wPitchTransposition:: ds 1
-wTempoAdjustment:: ds 1
-; audio engine output
-wNoiseHit:: ds 1
-wMusicPlayerWRAMEnd::
 
 
 SECTION "Sprites", WRAM0
@@ -485,13 +446,9 @@ wEnemyMetronomeCount:: ds 1
 wAITempAbility:: ds 1
 wAITempItem:: ds 1
 
-	ds 16
-
 wBattleScriptBufferLoc:: ds 2
 
 wTurnEnded:: ds 1
-
-	ds 13
 
 wPlayerStatLevels::
 ; 07 neutral
@@ -639,7 +596,6 @@ wLastEnemyMove:: ds 1
 wEnemyUsingItem:: ds 1
 wEnemySwitchItemCheck:: ds 1
 
-	ds 7
 
 wPlayerFutureSightCount:: ds 1
 wEnemyFutureSightCount:: ds 1
@@ -768,13 +724,10 @@ wUnownPuzzleEnd::
 NEXTU
 ; Pokedex
 wPokedexDataStart::
-wPokedexOrder:: ds NUM_POKEMON +- 1
-wPokedexOrderEnd:: ds 6
 wPokedexMetadata::
 wDexListingScrollOffset:: ds 1 ; offset of the first displayed entry from the start
 wDexListingCursor:: ds 1 ; Dex cursor
 wDexListingEnd:: ds 1 ; Last mon to display
-wDexListingHeight:: ds 1 ; number of entries displayed at once in the dex listing
 wCurrentDexMode:: ds 1 ; Pokedex Mode
 wDexSearchMonType1:: ds 1 ; first type to search
 wDexSearchMonType2:: ds 1 ; second type to search
@@ -782,6 +735,7 @@ wDexSearchResultCount:: ds 1
 wDexArrowCursorPosIndex:: ds 1
 wDexArrowCursorDelayCounter:: ds 1
 wDexArrowCursorBlinkCounter:: ds 1
+wPokedexEntryBufferValue::
 wDexSearchSlowpokeFrame:: ds 1
 wUnlockedUnownMode:: ds 1
 wDexUnownCount:: ds 1
@@ -792,11 +746,47 @@ wBackupDexListingCursor:: ds 1
 wBackupDexListingPage:: ds 1
 wDexCurrentLocation:: ds 1
 wPokedexStatus:: ds 1
+wPokedexSeenCaughtCount::
+wPokedexCurrentMon:: ds 2
 wDexMonShiny:: ds 1
-wDexMonGroup::
-wDexCurrentUnownIndex:: ds 1
-
+wDexCurrentUnownIndex::
+wDexMonGroup:: ds 1
 wPokedexDataEnd::
+
+NEXTU
+wMusicPlayerWRAM::
+wSongSelection:: ds 2
+wNumNoteLines:: ds 1
+wTmpCh:: ds 1
+wChLastNotes:: ds 3
+wVolTimer:: ds 1
+wC1Vol:: ds 1
+wC1VolSub:: ds 1
+wC2Vol:: ds 1
+wC2VolSub:: ds 1
+wC3Vol:: ds 1
+wC3VolSub:: ds 1
+wC4Vol:: ds 1
+wC4VolSub:: ds 1
+wNoteEnded:: ds 3
+wSongInfoSwitch:: ds 1
+;wRenderedWaveform:: ds 1
+wPitchesTmp:: ds 4
+;wWaveformTmp:: ds 16
+wTmpValue:: ds 1
+; song list
+wSelectorTop:: ds 1
+wSelectorCur:: ds 1
+; song editor
+wChannelSelector:: ds 1
+wAdjustingTempo:: ds 1
+; audio engine input
+wChannelSelectorSwitches:: ds 4
+wPitchTransposition:: ds 1
+wTempoAdjustment:: ds 1
+; audio engine output
+wNoiseHit:: ds 1
+wMusicPlayerWRAMEnd::
 
 ENDU
 
@@ -972,7 +962,7 @@ wPalFadeMode::
 	ds 1
 
 wCurPokeGroup:: ds 1
-wCurGender:: ds 1
+wCurGenderOrGroupBuffer:: ds 1
 wCurPersonality:: ds 1
 wGiftPokeTID:: ds 2
 wGiftPokeBall:: ds 1

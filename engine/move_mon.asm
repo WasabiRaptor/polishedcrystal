@@ -1981,14 +1981,14 @@ GivePoke:: ; e277
 	push af
 
 .formAndGender
-	ld a, [wCurGender]
+	ld a, [wCurGenderOrGroupBuffer]
 	and a
 	jr z, .item
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, [wCurGender]
+	ld a, [wCurGenderOrGroupBuffer]
 	ld [hl], a
 
 .item

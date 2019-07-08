@@ -1,30 +1,29 @@
 SetSeenAndCaughtMon:: ; 3380
 	push af
 	ld c, a
-	ld hl, wPokedexCaught
+	farcall GetRelevantCaughtPointers
 	ld b, SET_FLAG
 	call PokedexFlagAction
 	pop af
 	; fallthrough
 ; 338b
-
 SetSeenMon:: ; 338b
 	ld c, a
-	ld hl, wPokedexSeen
+	farcall GetRelevantSeenPointers
 	ld b, SET_FLAG
 	jr PokedexFlagAction
 ; 3393
 
 CheckCaughtMon:: ; 3393
 	ld c, a
-	ld hl, wPokedexCaught
+	farcall GetRelevantCaughtPointers
 	ld b, CHECK_FLAG
 	jr PokedexFlagAction
 ; 339b
 
 CheckSeenMon:: ; 339b
 	ld c, a
-	ld hl, wPokedexSeen
+	farcall GetRelevantSeenPointers
 	ld b, CHECK_FLAG
 	; fallthrough
 ; 33a1

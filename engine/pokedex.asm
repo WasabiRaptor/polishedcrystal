@@ -224,8 +224,6 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	call ByteFill
 	call Pokedex_DrawListWindow
-	ld a, 4
-	ld [wDexListingHeight], a
 	call Pokedex_PrintListing
 	call Pokedex_SetBGMapMode3
 	call Pokedex_SetBGMapMode4
@@ -253,8 +251,6 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	call Pokedex_UpdateCursorOAM
 	call Pokedex_DrawListWindow
 	hlcoord 0, 17
-	ld a, 4
-	ld [wDexListingHeight], a
 	call Pokedex_PrintListing
 	jp Pokedex_IncrementDexPointer
 
@@ -321,7 +317,7 @@ Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
 Pokedex_PrintTotalEncounters:
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK(wTotalDefeatedPokemonSpecies)
+	ld a, BANK(wTotalEncounters)
 	ldh [rSVBK], a
 
 	hlcoord 9, 4
@@ -776,8 +772,6 @@ Pokedex_InitSearchResultsScreen: ; 4050a (10:450a)
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	call ByteFill
 	call Pokedex_DrawListWindow
-	ld a, 4
-	ld [wDexListingHeight], a
 	call Pokedex_PrintListing
 	call Pokedex_SetBGMapMode3
 	call Pokedex_SetBGMapMode4
@@ -805,8 +799,6 @@ Pokedex_InitSearchResultsScreen: ; 4050a (10:450a)
 	call Pokedex_UpdateCursorOAM
 	call Pokedex_DrawListWindow
 	hlcoord 0, 17
-	ld a, 4
-	ld [wDexListingHeight], a
 	call Pokedex_PrintListing
 
 	jp Pokedex_IncrementDexPointer
@@ -971,7 +963,7 @@ Pokedex_NextOrPreviousDexEntry: ; 4066c (10:466c)
 	ret
 
 .up
-	ld a, [wDexListingHeight]
+	ld a, 4
 	ld d, a
 	ld a, [wDexListingEnd]
 	ld e, a
@@ -983,7 +975,7 @@ Pokedex_NextOrPreviousDexEntry: ; 4066c (10:466c)
 	jr .up
 
 .down
-	ld a, [wDexListingHeight]
+	ld a, 4
 	ld d, a
 	ld a, [wDexListingEnd]
 	ld e, a
@@ -1008,7 +1000,7 @@ Pokedex_NextOrPreviousDexEntry: ; 4066c (10:466c)
 
 Pokedex_ListingHandleDPadInput: ; 406c5 (10:46c5)
 ; Handles D-pad input for a list of Pokémon.
-	ld a, [wDexListingHeight]
+	ld a, 4
 	ld d, a
 	ld a, [wDexListingEnd]
 	ld e, a
@@ -1123,6 +1115,34 @@ Pokedex_FillColumn: ; 40741
 DEX_WINDOW_WIDTH 	EQU 19
 DEX_WINDOW_HEIGHT 	EQU 8
 
+PokedexCountSeenCaught::
+.next
+	ld a, [hli]
+	ld d, 8
+
+.count
+	and a
+	call nz, .inc_PokedexSeenCaughtCount
+	rrca
+	dec d
+	jr nz, .count
+
+	dec bc
+	ld a, c
+	and a
+	jr nz, .next
+	ld a, b
+	and a
+	jr nz, .next
+	ret
+
+.inc_PokedexSeenCaughtCount
+	push hl
+	ld hl, wPokedexSeenCaughtCount + 1
+	call Inc16BitNumInHL
+	pop hl
+	ret
+
 Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 ; Draws the left sidebar and the bottom bar on the main screen.
 	call Pokedex_DrawBasicMainScreen
@@ -1130,21 +1150,21 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld de, String_SEEN
 	call Pokedex_PlaceString
 	ld hl, wPokedexSeen
-	ld b, wEndPokedexSeen - wPokedexSeen
-	call CountSetBits
-	ld de, wd265
+	ld bc, wPokedexSeenEnd - wPokedexSeen
+	call PokedexCountSeenCaught
+	ld de, wPokedexSeenCaughtCount
 	hlcoord 10, 2
-	lb bc, 1 | PRINTNUM_LEFTALIGN, 3
+	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
 	call PrintNum
 	hlcoord 14, 1
 	ld de, String_OWN
 	call Pokedex_PlaceString
 	ld hl, wPokedexCaught
-	ld b, wEndPokedexCaught - wPokedexCaught
-	call CountSetBits
-	ld de, wd265
+	ld b, wPokedexCaughtEnd - wPokedexCaught
+	call PokedexCountSeenCaught
+	ld de, wPokedexSeenCaughtCount
 	hlcoord 15, 2
-	lb bc, 1 | PRINTNUM_LEFTALIGN, 3
+	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
 	call PrintNum
 
 	hlcoord 8, 3
@@ -1591,7 +1611,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints the list of Pokémon on the main Pokédex screen.
 ; Clear (2 * [wDexListingHeight]) by 17 box starting at 0,1
 	hlcoord 0, 1
-	ld a, [wDexListingHeight]
+	ld a, 4
 	add a
 	ld b, a
 	ld c, DEX_WINDOW_WIDTH -1
@@ -1603,7 +1623,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld a, 0
 	call FillBoxWithByte
 
-	ld a, [wDexListingHeight]
+	ld a, 4
 	ld d, a
 	ld a, $6F
 	hlcoord PKMN_NAME_LENGTH + 4, 1
@@ -1627,11 +1647,11 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld e, l
 	ld d, h
 	hlcoord 0, 2
-	ld a, [wDexListingHeight]
+	ld a, 4
 .loop
 	push af
 	ld a, [de]
-	ld [wd265], a
+	ld [wPokedexCurrentMon], a
 	push bc
 	push de
 	push af
@@ -1678,20 +1698,15 @@ Pokexex_PrintNumberAndTypes:
 	push hl
 	ld de, -SCREEN_WIDTH
 	add hl, de
-	ld de, wd265
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum
-	ld a, "/"
-	ld [hli], a
 ;get base data for the current species
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
 	ld de, wNatDexNo
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
 
-	ld bc, PKMN_NAME_LENGTH-7
+	ld bc, PKMN_NAME_LENGTH - 3
 	add hl, bc
 	ld a, [wBaseType1]
 	call Pokexex_PrintType
@@ -1804,14 +1819,14 @@ Pokedex_GetSelectedMon: ; 40bb1
 	ld hl, wPokedexDataStart
 	add hl, de
 	ld a, [hl]
-	ld [wd265], a
+	ld [wPokedexCurrentMon], a
 	ret
 
 
 Pokedex_CheckCaught: ; 40bc4 (10:4bc4)
 	push de
 	push hl
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	dec a
 	call CheckCaughtMon
 	pop hl
@@ -1822,13 +1837,48 @@ Pokedex_CheckCaught: ; 40bc4 (10:4bc4)
 Pokedex_CheckSeen: ; 40bd0
 	push de
 	push hl
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	dec a
 	call CheckSeenMon
 	pop hl
 	pop de
 	ret
 
+GetRelevantSeenPointers::
+	push de
+	push bc
+	push af
+	ld a, [wCurPokeGroup]
+	ld hl, RegionalSeenTable
+	ld de, 3
+	call IsInArray
+	inc hl 
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop af
+	pop bc
+	pop de
+	ret
+
+GetRelevantCaughtPointers::
+	push de
+	push bc
+	push af
+	ld a, [wCurPokeGroup]
+	ld hl, RegionalCaughtTable
+	ld de, 3
+	call IsInArray
+	inc hl 
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop af
+	pop bc
+	pop de
+	ret
+
+INCLUDE "data/pokemon/regional_seen_caught_tables.asm"
 
 
 Pokedex_OrderMonsByMode: ; 40bdc
@@ -1877,7 +1927,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld e, d
 .loopfindend
 	ld a, [hld]
-	ld [wd265], a
+	ld [wPokedexCurrentMon], a
 	call Pokedex_CheckSeen
 	jr nz, .foundend
 	dec d
@@ -1897,10 +1947,10 @@ Pokedex_ABCMode: ; 40c30
 .loop1abc
 	push bc
 	ld a, [de]
-	ld [wd265], a
+	ld [wPokedexCurrentMon], a
 	call Pokedex_CheckSeen
 	jr z, .skipabc
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	ld [hli], a
 	ld a, [wDexListingEnd]
 	inc a
@@ -2094,7 +2144,7 @@ Pokedex_SearchForMons: ; 41086
 	ld a, [hl]
 	and a
 	jr z, .next_mon
-	ld [wd265], a
+	ld [wPokedexCurrentMon], a
 	ld [wCurSpecies], a
 	call Pokedex_CheckCaught
 	jr z, .next_mon
@@ -2113,7 +2163,7 @@ Pokedex_SearchForMons: ; 41086
 	jr nz, .next_mon
 
 .match_found
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	ld [de], a
 	inc de
 	ld a, [wDexSearchResultCount]
@@ -2472,13 +2522,13 @@ Pokedex_LoadSelectedMonTiles: ; 4143b
 	ld a, 2
 	jr .continue
 .use_first_unown
-	ld a, [wFirstUnownSeen]
+	;ld a, [wFirstUnownSeen]
 	jr .continue
 .use_first_magikarp
-	ld a, [wFirstMagikarpSeen]
+	;ld a, [wFirstMagikarpSeen]
 .continue
 	ld [wCurPokeGroup], a
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	ld [wCurPartySpecies], a
 	call GetBaseData ;form is known
 	ld de, VTiles2
@@ -2505,7 +2555,7 @@ Pokedex_LoadCurrentFootprint: ; 41478 (10:5478)
 
 Pokedex_LoadAnyFootprint: ; 4147b
 	ld hl, VTiles2 tile $6F
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
 	ld b, a
@@ -2633,7 +2683,7 @@ NewPokedexEntry: ; fb877
 	call LoadFontsExtra
 	call Pokedex_LoadGFX2
 	call Pokedex_LoadAnyFootprint
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	ld [wCurPartySpecies], a
 	call Pokedex_DrawDexEntryScreenBG
 	call Pokedex_DrawFootprint

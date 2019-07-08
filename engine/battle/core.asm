@@ -2247,12 +2247,11 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld a, BANK(wTotalEncounters)
 	ldh [rSVBK], a
 
-	dec c
-	ld b, 0
-	ld hl, wTotalDefeatedPokemonSpecies+1
-	add hl, bc
-	add hl, bc
-	call Inc16BitNumInHL
+	;dec c
+	;ld b, 0
+	;ld hl, wTotalDefeatedPokemonSpecies
+	;add hl, bc
+	;call Inc16BitNumInHL
 
 	ld hl, wTotalDefeated+1
 	call Inc16BitNumInHL
@@ -5231,8 +5230,6 @@ BattleMenu_SafariBall:
 	call LoadStandardMenuDataHeader
 
 	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial
 	cp BATTLETYPE_CONTEST
 	jr z, .contest
 	cp BATTLETYPE_SAFARI
@@ -5242,13 +5239,6 @@ BattleMenu_SafariBall:
 	ld a, [wBattlePlayerAction]
 	and a
 	jr z, .didnt_use_item
-	jr .got_item
-
-.tutorial
-	farcall TutorialPack
-	ld a, POKE_BALL
-	ld [wCurItem], a
-	call DoItemEffect
 	jr .got_item
 
 .safari
@@ -6766,12 +6756,11 @@ LoadEnemyMon: ; 3e8eb
 	push af
 	ld a, BANK(wTotalEncounters)
 	ldh [rSVBK], a
-	dec c
-	ld b, 0
-	ld hl, wTotalEncounteredPokemonSpecies+1
-	add hl, bc
-	add hl, bc
-	call Inc16BitNumInHL
+	;dec c
+	;ld b, 0
+	;ld hl, wTotalEncounteredPokemonSpecies
+	;add hl, bc
+	;call Inc16BitNumInHL
 
 	ld hl, wTotalEncounters+1
 	call Inc16BitNumInHL
