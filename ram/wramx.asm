@@ -1400,8 +1400,9 @@ wSurfWaveBGEffectEnd::
 
 SECTION "Pokemon Encounters and Pokedex List", WRAMX
 
-wPokedexOrder:: ds (NUM_POKEMON * 2) +- 1 ; the 230 here would be NUM_POKEMON if we had more wram
-wPokedexOrderEnd:: ds 6
+wPokedexOrder:: ds (NUM_POKEMON * 2) +- 2 ; the 230 here would be NUM_POKEMON if we had more wram
+wPokedexOrderTailEnd:: ds 12
+wPokedexOrderEnd::
 
 wTotalSavedEncounters::
 
