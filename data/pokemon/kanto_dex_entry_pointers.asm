@@ -200,3 +200,7 @@ KantoPokedexEntryPointers::
     add_pokedexentry Dragonite
     add_pokedexentry Mewtwo
     add_pokedexentry Mew
+    add_pokedexentry Vaporeon
+    add_pokedexentry Leafeon
+    add_pokedexentry Tangrowth
+    add_pokedexentry Madaamu

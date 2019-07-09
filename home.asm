@@ -447,7 +447,7 @@ GetWeekday:: ; 3376
 INCLUDE "home/pokedex_flags.asm"
 
 NamesPointers:: ; 33ab
-	dba PokemonNames
+	dba KantoNames
 	dba MoveNames
 	dba ApricornNames
 	dba ItemNames

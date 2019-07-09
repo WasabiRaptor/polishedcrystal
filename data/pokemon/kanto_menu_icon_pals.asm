@@ -204,5 +204,9 @@ KantoMenuMonIconColors::
 	iconpal RED, BLUE ; DRAGONITE
 	iconpal PURPLE, GRAY ; MEWTWO
 	iconpal PINK, BLUE ; MEW
+	iconpal BLUE, PURPLE ; VAPOREON_RG
+	iconpal GREEN, BROWN ; LEAFEON_BETA
+    iconpal BLUE, GREEN ; TANGROWTH_BETA
+	iconpal BROWN, GREEN ; MADAAMU
 
 

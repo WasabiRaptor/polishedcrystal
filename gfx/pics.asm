@@ -712,8 +712,13 @@ AipomFrontpic:      	    INCBIN "gfx/pokemon/aipom/front.animated.2bpp.lz"
 AipomBackpic:       	    INCBIN "gfx/pokemon/aipom/back.2bpp.lz"
 AzurillFrontpic:      	    INCBIN "gfx/pokemon/azurill/front.animated.2bpp.lz"
 AzurillBackpic:       	    INCBIN "gfx/pokemon/azurill/back.2bpp.lz"
+BonslyFrontpic:             INCBIN "gfx/pokemon/bonsly/front.animated.2bpp.lz"
+BonslyBackpic:              INCBIN "gfx/pokemon/bonsly/back.2bpp.lz"
 
-BonslyFrontpic:
+Vaporeon_RGFrontpic:
+Leafeon_BetaFrontpic:
+Tangrowth_BetaFrontpic:
+MadaamuFrontpic:
 AmbipomFrontpic:
 WynautFrontpic:
 MantykeFrontpic:
@@ -729,7 +734,10 @@ LickilickyFrontpic:
 HappinyFrontpic:
 Mime_JrFrontpic:          INCBIN "gfx/pokemon/aa_dummy/front.animated.2bpp.lz"
 
-BonslyBackpic:
+Vaporeon_RGBackpic:
+Leafeon_BetaBackpic:
+Tangrowth_BetaBackpic:
+MadaamuBackpic:
 AmbipomBackpic:
 WynautBackpic:
 MantykeBackpic:

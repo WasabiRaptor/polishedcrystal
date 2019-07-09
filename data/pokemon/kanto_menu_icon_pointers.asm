@@ -200,3 +200,7 @@ KantoIconPointers::
     add_icon Dragonite
     add_icon Mewtwo
     add_icon Mew
+    add_icon Vaporeon
+    add_icon Leafeon
+    add_icon Tangrowth
+    add_icon Madaamu

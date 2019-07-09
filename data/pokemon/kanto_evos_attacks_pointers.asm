@@ -200,3 +200,7 @@ KantoEvosAttacksPointers::
     add_evosattacks Dragonite
     add_evosattacks Mewtwo
     add_evosattacks Mew
+    add_evosattacks Vaporeon
+    add_evosattacks Leafeon
+    add_evosattacks Tangrowth
+    add_evosattacks Madaamu

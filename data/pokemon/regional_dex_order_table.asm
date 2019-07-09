@@ -11,4 +11,4 @@ RegionDexOrderTable:
     regional_dex_order REGION_KALOS, Kalos
     regional_dex_order REGION_ALOLA, Alola
     regional_dex_order REGION_GALAR, Galar 
-    dbww -1, 0, KantoDexOrder
+    dbbba -1, 1, KantoDexOrder

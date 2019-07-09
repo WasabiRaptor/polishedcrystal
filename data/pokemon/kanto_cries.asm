@@ -205,3 +205,8 @@ KantoCries::
 	mon_cry CRY_BULBASAUR,   $03c,  $140 ; DRAGONITE
 	mon_cry CRY_PARAS,       $099,  $17f ; MEWTWO
 	mon_cry CRY_PARAS,       $0ee,  $17f ; MEW
+;beta mons
+	mon_cry CRY_VENONAT,     $0aa,  $17f ; VAPOREON_RG
+	mon_cry CRY_AIPOM,       $0a2,  $140 ; LEAFEON_BETA
+	mon_cry CRY_GOLEM,       $000,  $100 ; TANGROWTH_BETA
+	mon_cry CRY_SPEAROW,     $0dd,  $081 ; MADAAMU

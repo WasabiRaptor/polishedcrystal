@@ -467,5 +467,21 @@ INCLUDE "gfx/pokemon/mewtwo/shiny.pal"
 INCBIN "gfx/pokemon/mew/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/mew/shiny.pal" 
 
+
+
+;INCBIN "gfx/pokemon/vaporeon_rg/front.gbcpal", middle_colors
+;INCLUDE "gfx/pokemon/vaporeon_rg/shiny.pal" 
+;INCBIN "gfx/pokemon/leafeon_beta/front.gbcpal", middle_colors
+;INCLUDE "gfx/pokemon/leafeon_beta/shiny.pal" 
+;INCBIN "gfx/pokemon/tangrowth_beta/front.gbcpal", middle_colors
+;INCLUDE "gfx/pokemon/tangrowth_beta/shiny.pal" 
+;INCBIN "gfx/pokemon/madaamu/front.gbcpal", middle_colors
+;INCLUDE "gfx/pokemon/madaamu/shiny.pal" 
+INCBIN "gfx/pokemon/aa_dummy/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/aa_dummy/shiny.pal" 
+INCBIN "gfx/pokemon/aa_dummy/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/aa_dummy/shiny.pal" 
+INCBIN "gfx/pokemon/aa_dummy/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/aa_dummy/shiny.pal" 
 INCBIN "gfx/pokemon/aa_dummy/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/aa_dummy/shiny.pal" 

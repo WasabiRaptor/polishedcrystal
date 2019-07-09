@@ -414,5 +414,13 @@ INCLUDE "data/pokemon/base_stats/aa_dummy_base_stats.asm"
 INCLUDE "data/pokemon/base_stats/aa_dummy_base_stats.asm"
 
 INCLUDE "data/pokemon/base_stats/mewtwo.asm"
-
 INCLUDE "data/pokemon/base_stats/mew.asm"
+
+;INCLUDE "data/pokemon/base_stats/vaporeon_rg.asm"
+;INCLUDE "data/pokemon/base_stats/leafeon_beta.asm"
+;INCLUDE "data/pokemon/base_stats/tangrowth_beta.asm"
+;INCLUDE "data/pokemon/base_stats/madaamu.asm"
+INCLUDE "data/pokemon/base_stats/aa_dummy_base_stats.asm"
+INCLUDE "data/pokemon/base_stats/aa_dummy_base_stats.asm"
+INCLUDE "data/pokemon/base_stats/aa_dummy_base_stats.asm"
+INCLUDE "data/pokemon/base_stats/aa_dummy_base_stats.asm"

@@ -199,3 +199,7 @@ KantoEggMovePointers::
     add_eggmoves NoKanto
     add_eggmoves NoKanto
     add_eggmoves NoKanto
+    add_eggmoves NoKanto
+    add_eggmoves NoKanto
+    add_eggmoves NoKanto
+    add_eggmoves NoKanto

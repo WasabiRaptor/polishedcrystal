@@ -1706,6 +1706,11 @@ FarfetchDEvosAttacks:
 	db 55, BRAVE_BIRD
 	db 0 ; no more level-up moves
 
+MadaamuEvosAttacks:
+	db 0 ; no more evolutions
+    db TACKLE
+	db 0 ; no more level-up moves
+    
 DoduoEvosAttacks:
 	db EVOLVE_LEVEL, 31, DODRIO
 	db 0 ; no more evolutions

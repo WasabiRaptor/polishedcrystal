@@ -224,6 +224,12 @@ EGG EQU $fe
 	nat_dexmon DRAGONITE
 	nat_dexmon MEWTWO	
 	nat_dexmon MEW
+	; the normal list of kanto pokemon would end here, but, why not have some GSC beta pokemon or some of th RG designs to have some variants? 
+	; well the ones with good enough designs to keep at least, and baby pokemon are meh
+	nat_dexmon VAPOREON_RG
+	nat_dexmon LEAFEON_BETA
+	nat_dexmon TANGROWTH_BETA
+	nat_dexmon MADAAMU ; the farfetch'd evo
 NUM_KANTO_POKEMON EQU const_value +-1
 
 ;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
@@ -329,6 +335,28 @@ GROUP_SNOWSLASH EQU GROUP_SANDSLASH_ALOLA
 	nat_dexmon LUGIA
 	nat_dexmon HO_OH
 	nat_dexmon CELEBI	
+	; lets stick some more beta mons here, the ones unrelated to gen 1
+	nat_dexmon HONOOGUMA ;the fire bear
+	nat_dexmon BORUBEAA
+	nat_dexmon DAINABEA
+	nat_dexmon KRUSU ; the plesiosaur water type line
+	nat_dexmon AKUA
+	nat_dexmon AKUERIA
+	nat_dexmon SHEIBIREFUGU; the qwilfish evo
+	nat_dexmon MANBOO ; the fish who evoles into an anchor shark
+	nat_dexmon IKARI ;mmm the last evo doesn't have in interesting design and looses the interesting parts of this one, so not going to have it
+	nat_dexmon GIRAFARIG_BETA ; instead of dark normal like in the beta, we're going to have it dark psychic
+	nat_dexmon RINRIN ; the cute bell cat and its evo
+	nat_dexmon BERUNRUN
+	nat_dexmon OCTILLERY_BETA ; remoraid's design doesn't change much, but having a water/steel octillery for the one where its clearly a tank varant would be good, maybe a metal coat evo?
+	nat_dexmon BOMUSHIKAA ; the fire sea lion, not sure about this one, but its good I guess
+	nat_dexmon KOTORA ; the cute chonky electric tiger
+	nat_dexmon RAITORA
+	nat_dexmon URUFUMAN ; the floofy wolfman guy
+	nat_dexmon WAARUFU
+	nat_dexmon RAIKOU_BETA ; beta beasts
+	nat_dexmon ENTEI_BETA
+	nat_dexmon SUICUNE_BETA
 NUM_JOHTO_POKEMON EQU const_value +-1
 
 ; hoo boy Unown you've got a lot of forms, so he gets his own "region" which would only be used for pics really, 

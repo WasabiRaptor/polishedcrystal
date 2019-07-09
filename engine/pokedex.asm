@@ -198,14 +198,6 @@ Pokedex_Exit: ; 40136 (10:4136)
 	ret
 
 Pokedex_InitMainScreen: ; 4013c (10:413c)
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_VARIANT
-	ld a, 1
-	jr nz, .continue
-	ld a, 2
-.continue
-	ld [wCurPokeGroup], a
-	;get type icons
 	ld a, $1
 	ldh [rVBK], a
 
@@ -351,14 +343,6 @@ StringThisCycle
 	db "This Cycl","e", $ff
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_VARIANT
-	ld a, 1
-	jr nz, .continue
-	ld a, 2
-.continue
-	ld [wCurPokeGroup], a
-
 	call LowVolume
 	xor a
 	ld [wPokedexStatus], a
@@ -440,14 +424,6 @@ Pokedex_Page: ; 40292
 
 Pokedex_ReinitDexEntryScreen: ; 402aa (10:42aa)
 ; Reinitialize the Pokédex entry screen after changing the selected mon.
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_VARIANT
-	ld a, 1
-	jr nz, .continue
-	ld a, 2
-.continue
-	ld [wCurPokeGroup], a
-
 	call Pokedex_BlackOutBG
 	xor a
 	ld [wPokedexStatus], a
@@ -535,14 +511,6 @@ DexEntryScreen_MenuActionJumptable: ; 402f2
 	jp Pokedex_GetCGBLayout
 
 Pokedex_RedisplayDexEntry: ; 4038d
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_VARIANT
-	ld a, 1
-	jr nz, .continue
-	ld a, 2
-.continue
-	ld [wCurPokeGroup], a
-
 	call Pokedex_LoadGFX
 	call Pokedex_LoadAnyFootprint
 	call Pokedex_DrawDexEntryScreenBG
@@ -620,8 +588,17 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 	jr .ChangeMode
 
 .MenuAction_VariantMode: ; 40411 (10:4411)
+	ld a, [wPokedexRegion]
+	inc a
+	cp REGION_JOHTO + 1 ; the max dex group
+	jr c, .next_group
+	ld a, REGION_KANTO
+.next_group
+	ld [wPokedexRegion], a
+	ld [wDexMonGroup], a
+	ld [wCurPokeGroup], a
 	ld b, DEXMODE_VARIANT
-	jr .ChangeMode
+	jr .force_change_mode
 
 .MenuAction_ABCMode: ; 40415 (10:4415)
 	ld b, DEXMODE_ABC
@@ -630,7 +607,7 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 	ld a, [wCurrentDexMode]
 	cp b
 	jr z, .skip_changing_mode ; Skip if new mode is same as current.
-
+.force_change_mode
 	ld a, b
 	ld [wCurrentDexMode], a
 	call Pokedex_OrderMonsByMode
@@ -1678,6 +1655,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	push hl	
 	ld h, b
 	ld l, c
+	ld a, [wPokedexCurrentMon]
 	call Pokedex_LoadAnyFootprintAtTileHL
 	pop hl
 	pop af
@@ -1848,6 +1826,12 @@ Pokedex_GetSelectedMon: ; 40bb1
 	ld a, BANK(wPokedexOrder)
 	call GetFarWRAMByte
 	ld [wPokedexCurrentMon], a
+	inc hl
+	ld a, BANK(wPokedexOrder)
+	call GetFarWRAMByte
+	ld [wDexMonGroup], a
+	ld [wCurPokeGroup], a
+	ld a, [wPokedexCurrentMon]
 	ret
 
 
@@ -1951,9 +1935,9 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld a, BANK(wPokedexOrder)
 	ldh [rSVBK], a
 
-	ld a, [wDexMonGroup]
+	ld a, [wPokedexRegion]
 	ld hl, RegionDexOrderTable
-	ld de, 4
+	ld de, 5
 	call IsInArray
 	inc hl
 	ld a, [hli]
@@ -1971,7 +1955,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	call GetFarByte
 	ld [de], a
 	inc de
-	ld a, [wDexMonGroup]
+	ld a, [wPokedexRegion]
 	ld [de], a
 	inc de
 	ld a, [wDexListingEnd]
@@ -1984,26 +1968,9 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	pop af
 	pop af
 	ldh [rSVBK], a
-
-.FindLastSeen: ; 40c18 (10:4c18)
-	ld a, [wDexMonGroup]
-	ld [wCurPokeGroup], a
-	ld hl, wPokedexOrder + (NUM_POKEMON * 2) - 2
-	ld d, NUM_POKEMON
-	ld e, d
-.loopfindend
-	ld a, [hld]
-	dec hl
-	ld [wPokedexCurrentMon], a
-	call Pokedex_CheckSeen
-	jr nz, .foundend
-	dec d
-	dec e
-	jr nz, .loopfindend
-.foundend
-	ld a, d
-	ld [wDexListingEnd], a
-	ret
+	ld h, d
+	ld l, e
+	jp .fill_remaining_dex
 
 .Pokedex_ABCMode: ; 40c30
 	ldh a, [rSVBK]
@@ -2023,12 +1990,11 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	push af
 	inc de
 	ld a, [de]
-	ld [wDexMonGroup], a
 	ld [wCurPokeGroup], a
 	pop af
 	ld a, [wPokedexCurrentMon]
 	ld [hli], a
-	ld a, [wDexMonGroup]
+	ld a, [wCurPokeGroup]
 	ld [hli], a
 	ld a, [wDexListingEnd]
 	inc a
@@ -2046,17 +2012,25 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	pop af
 	ldh [rSVBK], a
 
-
+.fill_remaining_dex
 	ld a, [wDexListingEnd]
 	ld c, 0
 .loop2abc
 	cp NUM_POKEMON
 	ret z
-	ld [hl], c
-	inc hl
-	ld [hl], c
-	inc hl
+	push af
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokedexOrder)
+	ldh [rSVBK], a
 
+	ld [hl], c
+	inc hl
+	ld [hl], c
+	inc hl
+	pop af
+	ldh [rSVBK], a
+	pop af
 	inc a
 	jr .loop2abc
 
@@ -2113,12 +2087,8 @@ Pokedex_DisplayChangingModesMessage: ; 40f08 (10:4f08)
 	call PlaceString
 	ld a, $1
 	ldh [hBGMapMode], a
-	ld c, 64
-	call DelayFrames
 	ld de, SFX_CHANGE_DEX_MODE
-	call PlaySFX
-	ld c, 64
-	jp DelayFrames
+	jp PlaySFX
 
 String_ChangingModesPleaseWait: ; 40f32
 	db   "Changing modes."
@@ -2633,23 +2603,22 @@ Pokedex_LoadSelectedMonTiles: ; 4143b
 	call Pokedex_CheckSeen
 	jr z, .QuestionMark
 	call Pokedex_GetSelectedMon
-	cp UNOWN
-	jr z, .use_first_unown
-	cp MAGIKARP
-	jr z, .use_first_magikarp
-	ld a, [wCurrentDexMode]
-	cp DEXMODE_VARIANT
-	ld a, 1
-	jr nz, .continue
-	ld a, 2
-	jr .continue
-.use_first_unown
+	;cp UNOWN
+	;jr z, .use_first_unown
+	;cp MAGIKARP
+	;jr z, .use_first_magikarp
+	;ld a, [wCurrentDexMode]
+	;cp DEXMODE_VARIANT
+	;ld a, 1
+	;jr nz, .continue
+	;ld a, 2
+	;jr .continue
+;.use_first_unown
 	;ld a, [wFirstUnownSeen]
-	jr .continue
-.use_first_magikarp
+	;jr .continue
+;.use_first_magikarp
 	;ld a, [wFirstMagikarpSeen]
 .continue
-	ld [wCurPokeGroup], a
 	ld a, [wPokedexCurrentMon]
 	ld [wCurPartySpecies], a
 	call GetBaseData ;form is known

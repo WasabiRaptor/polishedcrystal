@@ -577,6 +577,7 @@ wBaseHiddenAbility:: ds 1
 wBaseGrowthRate:: ds 1
 wBaseEggGroups:: ds 1
 wBaseTMHM:: flag_array NUM_TMHMS
+wCurBaseDataEnd::
 
 wCurDamage:: ds 2
 

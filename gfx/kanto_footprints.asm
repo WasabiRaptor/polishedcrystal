@@ -220,3 +220,11 @@ INCBIN "gfx/footprints/dragonair.1bpp"
 INCBIN "gfx/footprints/dragonite.1bpp" 
 INCBIN "gfx/footprints/mewtwo.1bpp" 
 INCBIN "gfx/footprints/mew.1bpp" 
+
+INCBIN "gfx/footprints/vaporeon.1bpp" ;beta mons
+INCBIN "gfx/footprints/leafeon.1bpp" 
+
+;INCBIN "gfx/footprints/tangrowth.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+;INCBIN "gfx/footprints/madaamu.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;dummy

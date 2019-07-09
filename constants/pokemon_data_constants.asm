@@ -25,7 +25,7 @@ BASEMON_EGG_GROUPS    EQUS "(wBaseEggGroups - wCurBaseData)"
 BASEMON_EV_YIELD_1    EQUS "(wBaseEVYield1 - wCurBaseData)"
 BASEMON_EV_YIELD_2    EQUS "(wBaseEVYield2 - wCurBaseData)"
 BASEMON_TMHM          EQUS "(wBaseTMHM - wCurBaseData)"
-BASEMON_STRUCT_LENGTH EQUS "(BaseData1 - BaseData0)"
+BASEMON_STRUCT_LENGTH EQUS "(wCurBaseDataEnd - wCurBaseData)"
 
 ;EV yield masks
 HP_EV_YIELD_MASK EQU %11000000

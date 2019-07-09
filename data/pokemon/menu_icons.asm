@@ -263,6 +263,8 @@ CelebiIcon::       INCBIN "gfx/icons/celebi.2bpp"
 SylveonIcon::      INCBIN "gfx/icons/sylveon.2bpp"
 PorygonZIcon::     INCBIN "gfx/icons/porygon_z.2bpp"
 EggIcon::          INCBIN "gfx/icons/egg.2bpp"
+
+MadaamuIcon::
 StantlerIcon::
 ShuckleIcon::
 MantykeIcon::

@@ -5,4 +5,4 @@ endm
 VariantNamePointerTable:
     variant_names REGION_KANTO,  Kanto
     variant_names REGION_JOHTO,  Johto
-    dbba -1,        PokemonNames
+    dbba -1,        KantoNames

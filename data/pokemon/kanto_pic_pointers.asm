@@ -200,3 +200,7 @@ KantoPicPointers::
     add_pics Dragonite
     add_pics Mewtwo
     add_pics Mew
+    add_pics Vaporeon_RG
+    add_pics Leafeon_Beta
+    add_pics Tangrowth_Beta
+    add_pics Madaamu

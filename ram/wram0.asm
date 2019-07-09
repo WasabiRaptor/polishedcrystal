@@ -725,6 +725,7 @@ NEXTU
 ; Pokedex
 wPokedexDataStart::
 wPokedexMetadata::
+wPokedexRegion:: ds 1
 wDexListingScrollOffset:: ds 1 ; offset of the first displayed entry from the start
 wDexListingCursor:: ds 1 ; Dex cursor
 wDexListingEnd:: ds 1 ; Last mon to display

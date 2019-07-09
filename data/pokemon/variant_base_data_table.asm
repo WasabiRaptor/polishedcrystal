@@ -5,5 +5,5 @@ endm
 VariantBaseDataTable:
     variant_basedata REGION_KANTO, Kanto
     variant_basedata REGION_JOHTO, Johto
-	dbba -1,        BaseData
+	dbba -1,         KantoBaseData
 
