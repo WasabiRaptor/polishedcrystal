@@ -1301,8 +1301,8 @@ Pokedex_DrawOptionScreenBG: ; 4087c (10:487c)
 	db $3b, " ","O","p","t","i","o","n"," ", $3c, $ff
 
 .Modes: ; 408bd
-	db   "Regional Mode"
-	next "Variant Mode"
+	db   "Invar Mode"
+	next "National Mode"
 	next "A to Z Mode"
 	db "@"
 
@@ -2061,12 +2061,12 @@ Pokedex_DisplayModeDescription: ; 40e5b
 	dw .UnownMode
 
 .RegionalMode: ; 40e85
-	db   "<PK><MN> are listed in"
-	next "regional order.@"
+	db   "<PK><MN> native to"
+	next "the Invar region.@"
 
 .VariantMode: ; 40ea6
-	db   "<PK><MN> with variants"
-	next "are listed.@"
+	db   "<PK><MN> native"
+	next "to other lands.@"
 
 .ABCMode: ; 40ec6
 	db   "<PK><MN> are listed"
