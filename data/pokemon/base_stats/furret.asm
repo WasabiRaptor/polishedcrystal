@@ -1,20 +1,19 @@
-	dw 00undefined ;national dex no
-        
-        db  85,  76,  64,  90,  45,  55
-        evs  0,   0,   0,   2,   0,   0
-        ;   hp  atk  def  spd  sat  sdf
-        
-        db NORMAL, NORMAL ; type
-        db 90 ; catch rate
-        db 145 ; base exp
-        db NO_ITEM, NO_ITEM ; items
-        dn FEMALE_50, 3 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/furret/front.dimensions"  
-        db RUN_AWAY, KEEN_EYE     ; abilities
-        db FRISK    ; hidden ability
-        db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
-        
-        ; tm/hm learnset
-        tmhm                                            
-        ; end
+	dw 00162
+	db  85,  76,  64,  90,  45,  55
+    evs  0,   0,   0,   2,   0,   0
+	;   hp  atk  def  spd  sat  sdf
+
+	db NORMAL, NORMAL ; type
+	db 90 ; catch rate
+	db 145 ; base exp
+	db ORAN_BERRY, SITRUS_BERRY ; items
+	dn FEMALE_50, 2 ; gender, step cycles to hatch
+	INCBIN "gfx/pokemon/furret/front.dimensions"
+	db RUN_AWAY, KEEN_EYE	; abilities
+	db FRISK	; hidden ability
+	db GROWTH_MEDIUM_FAST ; growth rate
+	dn EGG_FIELD, EGG_FIELD ; egg groups
+
+	; tmhm
+	tmhm DYNAMICPUNCH, CURSE, TOXIC, BULK_UP, HIDDEN_POWER, SUNNY_DAY, HONE_CLAWS, ICE_BEAM, BLIZZARD, HYPER_BEAM, PROTECT, RAIN_DANCE, SOLAR_BEAM, IRON_TAIL, THUNDERBOLT, THUNDER, RETURN, DIG, SHADOW_BALL, DOUBLE_TEAM, FLAMETHROWER, SWIFT, SUBSTITUTE, FACADE, REST, ATTRACT, THIEF, ROCK_SMASH, FOCUS_BLAST, ENDURE, WATER_PULSE, SHADOW_CLAW, GIGA_IMPACT, U_TURN, CUT, SURF, STRENGTH, WHIRLPOOL, AQUA_TAIL, BODY_SLAM, DEFENSE_CURL, DOUBLE_EDGE, FIRE_PUNCH, HEADBUTT, HYPER_VOICE, ICE_PUNCH, KNOCK_OFF, ROLLOUT, SLEEP_TALK, SUCKER_PUNCH, SWAGGER, THUNDERPUNCH, TRICK
+	; end
