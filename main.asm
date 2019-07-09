@@ -1043,7 +1043,8 @@ DisplayDexEntry: ; 4424d
 	lb bc, 9, 12
 	hlcoord 8, 1
 	call ClearBox
-
+	ld a, [wPokedexCurrentMon]
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	hlcoord 9, 3
 	call PlaceString ; mon species
@@ -1067,7 +1068,7 @@ DisplayDexEntry: ; 4424d
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld de, wNatDexNo
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
 ;units
 	ld a, [wOptions2]
