@@ -227,7 +227,9 @@ SECTION "Boxes 13-4", SRAM
 
 SECTION "Total Pokemon Encountered", SRAM
 
+sEncounterSaveData::
 sTotalSavedEncounters:: ds wTotalSavedEncountersEnd - wTotalSavedEncounters
+sEncounterSaveDataEnd::
 
 SECTION "Quick Save", SRAM
 

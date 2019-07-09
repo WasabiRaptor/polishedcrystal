@@ -354,13 +354,13 @@ SavePokemonData: ; 14df7
 ; 14e0c
 
 SaveEncounterData:
+	ld a, BANK(sTotalSavedEncounters)
+	call GetSRAMBank
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
-
-	ld a, BANK(sTotalSavedEncounters)
-	call GetSRAMBank
 
 	ld hl, wTotalSavedEncounters
 	ld de, sTotalSavedEncounters
@@ -617,13 +617,13 @@ LoadBox: ; 15021 (5:5021)
 	jp LoadBoxAddress
 
 LoadEncounterData:
+	ld a, BANK(sTotalSavedEncounters)
+	call GetSRAMBank
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
-
-	ld a, BANK(sTotalSavedEncounters)
-	call GetSRAMBank
 
 	ld hl, sTotalSavedEncounters
 	ld de, wTotalSavedEncounters
