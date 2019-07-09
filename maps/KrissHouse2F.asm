@@ -246,15 +246,13 @@ FillPokedex:
 	;ld [hli], a
 	;inc a
 ;endr
-	;ld hl, wPokedexSeen
-	;call .Fill
-	;ld hl, wPokedexCaught
-;.Fill:
-	;ld a, %11111111
-	;ld bc, 31 ; 001-248
-	;call ByteFill
-	;ld a, %00011111
-	;ld [hl], a ; 249-253
+	ld hl, wPokedexSeen
+	call .Fill
+	ld hl, wPokedexCaught
+.Fill:
+	ld a, %11111111
+	ld bc, wPokedexCaughtEnd - wPokedexCaught
+	call ByteFill
 	ret
 
 else

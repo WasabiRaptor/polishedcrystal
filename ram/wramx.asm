@@ -1402,8 +1402,7 @@ wSurfWaveBGEffectEnd::
 SECTION "Pokemon Encounters and Pokedex List", WRAMX
 
 wPokedexOrder:: ds (NUM_POKEMON * 2)
-wPokedexOrderTailEnd:: ds 12
-wPokedexOrderEnd::
+wPokedexOrderEnd:: ds 12
 
 wTotalSavedEncounters::
 

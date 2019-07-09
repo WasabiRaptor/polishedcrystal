@@ -121,6 +121,13 @@ Pokedex_CheckUnlockedUnownMode: ; 400a2
 	ret
 
 Pokedex_InitCursorPosition: ; 400b4
+	ld a, [wCurrentDexMode]
+	cp DEXMODE_VARIANT
+
+	jp nz, .skip_overflow_check ; make sure we don't display blank entries that should be past where one can scroll
+	ld a, 1
+	ld [wLastDexEntry], a
+.skip_overflow_check
 	ld hl, wPokedexOrder
 	ld a, [wLastDexEntry]
 	and a
@@ -1651,15 +1658,14 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	pop hl
 	push bc
 	push de
-	push af
 	push hl	
 	ld h, b
 	ld l, c
 	ld a, [wPokedexCurrentMon]
 	call Pokedex_LoadAnyFootprintAtTileHL
 	pop hl
-	pop af
 	push hl
+	ld a, [wPokedexCurrentMon]
 	call .PrintEntry
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
@@ -1694,6 +1700,8 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ret c
 	call Pokedex_PlaceCaughtSymbolIfCaught
 	push hl
+	ld a, [wPokedexCurrentMon]
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	pop hl
 	jp PlaceString
@@ -1892,6 +1900,21 @@ GetRelevantCaughtPointers::
 
 INCLUDE "data/pokemon/regional_seen_caught_tables.asm"
 
+GetRelevantPokedexRegionOrderPointers:
+	ld a, [wPokedexRegion]
+	ld hl, RegionDexOrderTable
+	ld de, 5
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
 INCLUDE "data/pokemon/regional_dex_order_table.asm"
 
 Pokedex_OrderMonsByMode: ; 40bdc
@@ -1899,6 +1922,8 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	push af
 	ld a, BANK(wPokedexOrder)
 	ldh [rSVBK], a
+	xor a
+	ld [wDexListingEnd], a
 
 	ld hl, wPokedexOrder
 	ld bc, wPokedexOrderEnd - wPokedexOrder
@@ -1926,7 +1951,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 
 	ld de, InvarDexOrder
 	ld hl, wPokedexOrder
-	ld bc, InvarDexOrderEnd - InvarDexOrder
+	ld c, (InvarDexOrderEnd - InvarDexOrder) / 2
 	jr .loop1abc
 
 .VariantMode: ; 40bf6 (10:4bf6)
@@ -1935,19 +1960,9 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld a, BANK(wPokedexOrder)
 	ldh [rSVBK], a
 
-	ld a, [wPokedexRegion]
-	ld hl, RegionDexOrderTable
-	ld de, 5
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
+	call GetRelevantPokedexRegionOrderPointers
+	ld a, d
 	push af
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
 	ld de, wPokedexOrder
 .loopnew
 	pop af
@@ -1978,11 +1993,9 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld a, BANK(wPokedexOrder)
 	ldh [rSVBK], a
 
-	xor a
-	ld [wDexListingEnd], a
 	ld hl, wPokedexOrder
 	ld de, AlphabeticalPokedexOrder
-	ld bc, AlphabeticalPokedexOrderEnd - AlphabeticalPokedexOrder
+	ld c, (AlphabeticalPokedexOrderEnd - AlphabeticalPokedexOrder) / 2
 .loop1abc
 	push bc
 	ld a, [de]
@@ -2002,13 +2015,9 @@ Pokedex_OrderMonsByMode: ; 40bdc
 
 	inc de
 	pop bc
-	dec bc
-	ld a, c
-	and a
+	dec c
 	jr nz, .loop1abc
-	ld a, b
-	and a
-	jr nz, .loop1abc
+
 	pop af
 	ldh [rSVBK], a
 
