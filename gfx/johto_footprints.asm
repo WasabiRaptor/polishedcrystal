@@ -2,6 +2,7 @@
 SECTION "Johto Footprints", ROMX
 
 JohtoFootprints::
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/chikorita.1bpp" 
 INCBIN "gfx/footprints/bayleef.1bpp" 
 INCBIN "gfx/footprints/meganium.1bpp" 

@@ -3,6 +3,7 @@
 SECTION "Kanto Footprints", ROMX
 
 KantoFootprints::
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/bulbasaur.1bpp" 
 INCBIN "gfx/footprints/ivysaur.1bpp" 
 INCBIN "gfx/footprints/venusaur.1bpp" 

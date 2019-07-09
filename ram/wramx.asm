@@ -1399,10 +1399,12 @@ wBattleAnimEnd::
 	ds $e
 wSurfWaveBGEffectEnd::
 
-SECTION "Pokemon Encounters and Pokedex List", WRAMX
+SECTION "Pokedex List", WRAMX
 
 wPokedexOrder:: ds (NUM_POKEMON * 2)
 wPokedexOrderEnd:: ds 12
+
+SECTION "Encounter counters", WRAMX
 
 wTotalSavedEncounters::
 

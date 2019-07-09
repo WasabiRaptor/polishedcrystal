@@ -2247,12 +2247,15 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld a, BANK(wTotalEncounters)
 	ldh [rSVBK], a
 
-	;dec c
-	;ld b, 0
-	;ld hl, wTotalDefeatedPokemonSpecies
-	;add hl, bc
-	;call Inc16BitNumInHL
-
+	dec c
+	ld b, 0
+	call GetRelevantTotalDefeatedPokemonSpeciesPointer
+	add hl, bc
+	ld a, [hl]
+	inc a
+	jr z, .overflow
+	ld [hl], a
+.overflow
 	ld hl, wTotalDefeated+1
 	call Inc16BitNumInHL
 
@@ -6713,6 +6716,37 @@ LinkBattleSendReceiveAction: ; 3e8e4
 	and $0f
 	ret
 ; 3e8eb
+GetRelevantTotalEncounterdPokemonSpeciesPointer:
+	push bc
+	push de
+	ld a, [wCurPokeGroup]
+	ld hl, EncounterCounterPointerTable
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop de
+	pop bc
+	ret
+
+GetRelevantTotalDefeatedPokemonSpeciesPointer:
+	push bc
+	push de
+	ld a, [wCurPokeGroup]
+	ld hl, DefeatedCounterPointerTable
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop de
+	pop bc
+	ret
+
+INCLUDE "data/pokemon/regional_encounter_counter_pointer_table.asm"
 
 LoadEnemyMon: ; 3e8eb
 ; Initialize enemy monster parameters
@@ -6756,11 +6790,16 @@ LoadEnemyMon: ; 3e8eb
 	push af
 	ld a, BANK(wTotalEncounters)
 	ldh [rSVBK], a
-	;dec c
-	;ld b, 0
-	;ld hl, wTotalEncounteredPokemonSpecies
-	;add hl, bc
-	;call Inc16BitNumInHL
+
+	dec c
+	ld b, 0
+	call GetRelevantTotalEncounterdPokemonSpeciesPointer
+	add hl, bc
+	ld a, [hl]
+	inc a
+	jr z, .overflow
+	ld [hl], a
+.overflow
 
 	ld hl, wTotalEncounters+1
 	call Inc16BitNumInHL

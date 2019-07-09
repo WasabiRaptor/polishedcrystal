@@ -128,6 +128,20 @@ START_MONEY EQU 3000
 	ld [hl], START_MONEY / $100 % $100
 	inc hl
 	ld [hl], START_MONEY % $100
+
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalEncounters)
+	ldh [rSVBK], a
+
+	ld hl, wTotalSavedEncounters
+	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
+	xor a
+	call ByteFill
+
+	pop af
+	ldh [rSVBK], a
 	ret
 
 ResetWRAM: ; 5ba7

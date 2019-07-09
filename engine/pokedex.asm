@@ -1656,14 +1656,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld [wDexMonGroup], a
 	ld [wCurPokeGroup], a
 	pop hl
-	push bc
 	push de
-	push hl	
-	ld h, b
-	ld l, c
-	ld a, [wPokedexCurrentMon]
-	call Pokedex_LoadAnyFootprintAtTileHL
-	pop hl
 	push hl
 	ld a, [wPokedexCurrentMon]
 	call .PrintEntry
@@ -1671,7 +1664,6 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
 	pop de
-	pop bc
 	push hl
 	ld hl, tile $04
 	add hl, bc
@@ -1695,16 +1687,36 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints one entry in the list of Pokémon on the main Pokédex screen.
 	and a
 	ret z
-	call Pokexex_PrintNumberAndTypes
+	push bc
 	call Pokedex_PlaceDefaultStringIfNotSeen
-	ret c
+	pop bc
+	jp c, .emptyfootprint
+	push bc
+	ld a, [wPokedexCurrentMon]
+	call Pokedex_LoadListFootprint
+	call Pokexex_PrintNumberAndTypes 
 	call Pokedex_PlaceCaughtSymbolIfCaught
 	push hl
 	ld a, [wPokedexCurrentMon]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	pop hl
-	jp PlaceString
+	call PlaceString
+	pop bc
+	ret
+
+.emptyfootprint
+	ld a, 0
+	;fallthrough
+Pokedex_LoadListFootprint:
+	push bc
+	push hl	
+	ld h, b
+	ld l, c
+	call Pokedex_LoadAnyFootprintAtTileHL
+	pop hl
+	pop bc
+	ret
 
 Pokexex_PrintNumberAndTypes:
 	push hl
@@ -2672,7 +2684,6 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	ld h, [hl]
 	ld l, a
 	pop af
-	dec a
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes
 	ld b, d
