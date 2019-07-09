@@ -2003,10 +2003,10 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	inc de
 	pop bc
 	dec bc
-	ld a, b
+	ld a, c
 	and a
 	jr nz, .loop1abc
-	ld a, c
+	ld a, b
 	and a
 	jr nz, .loop1abc
 	pop af
@@ -2018,6 +2018,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 .loop2abc
 	cp NUM_POKEMON
 	ret z
+
 	push af
 	ldh a, [rSVBK]
 	push af
@@ -2028,6 +2029,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	inc hl
 	ld [hl], c
 	inc hl
+
 	pop af
 	ldh [rSVBK], a
 	pop af

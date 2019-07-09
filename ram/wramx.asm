@@ -1401,7 +1401,7 @@ wSurfWaveBGEffectEnd::
 
 SECTION "Pokemon Encounters and Pokedex List", WRAMX
 
-wPokedexOrder:: ds (NUM_POKEMON * 2) +- 2 ; the 230 here would be NUM_POKEMON if we had more wram
+wPokedexOrder:: ds (NUM_POKEMON * 2)
 wPokedexOrderTailEnd:: ds 12
 wPokedexOrderEnd::
 
