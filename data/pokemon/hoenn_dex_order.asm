@@ -63,7 +63,7 @@ HoennDexOrder::
 	db MEDITITE
 	db MEDICHAM
 	db ELECTRIKE
-	db MENECTRIC
+	db MANECTRIC
 	db PLUSLE
 	db MINUN
 	db VOLBEAT

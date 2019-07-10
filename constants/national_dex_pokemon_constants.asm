@@ -454,7 +454,7 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon MEDITITE
 	nat_dexmon MEDICHAM
 	nat_dexmon ELECTRIKE
-	nat_dexmon MENECTRIC
+	nat_dexmon MANECTRIC
 	nat_dexmon PLUSLE
 	nat_dexmon MINUN
 	nat_dexmon VOLBEAT
