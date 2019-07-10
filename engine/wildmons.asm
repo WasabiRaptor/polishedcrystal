@@ -346,7 +346,7 @@ _ChooseWildEncounter:
 	rst AddNTimes
 	pop bc
 	ld de, GrassMonProbTable
-	ld b, (NUM_GRASSMON -1) * 3
+	ld b, (NUM_GRASSMON-1) *3
 
 .got_table
 	; Check if we want to force a type
@@ -397,7 +397,6 @@ _ChooseWildEncounter:
 	ld a, [hli]
 	cp b
 	jr nc, .got_it
-	inc hl
 	inc hl
 	jr .prob_bracket_loop
 
