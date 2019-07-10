@@ -1660,6 +1660,7 @@ PkmnParamLocation:
 .species_and_group
 	ld bc, MON_SPECIES
 	add hl, bc
+	ld a, [wCurPartyMon]
 	call GetPartyLocation
 	push hl
 	ld bc, MON_GROUP - MON_SPECIES
