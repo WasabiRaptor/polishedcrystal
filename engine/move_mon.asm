@@ -1545,7 +1545,7 @@ ComputeNPCTrademonStats: ; e134
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [MON_LEVEL], a ; wow
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurSpecies], a
@@ -1603,7 +1603,7 @@ UpdateEnemyPkmnStats:
 
 UpdatePkmnStats:
 ; Recalculates the stats of wCurPartyMon and also updates current HP accordingly
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurSpecies], a

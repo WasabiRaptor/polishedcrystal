@@ -2041,7 +2041,7 @@ RunPostBattleAbilities::
 	ld a, MON_ABILITY
 	call GetPartyParamLocation
 	ld b, [hl]
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld c, [hl]
 	farcall GetAbility
@@ -2102,7 +2102,7 @@ RunPostBattleAbilities::
 	pop bc
 	push bc
 	push de
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wNamedObjectIndexBuffer], a
@@ -2115,9 +2115,9 @@ RunPostBattleAbilities::
 
 .form_revert:
 	push bc
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
-	;predef GetPokeGroup
+	
 	cp AEGISLASH_BLADE
 	jr z, .aegislash
 	cp ZYGARDE_10_COMPLETE

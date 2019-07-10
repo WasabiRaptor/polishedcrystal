@@ -3229,7 +3229,7 @@ AbilityCap:
 	ld e, l
 	pop hl
 	push hl
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurSpecies], a

@@ -80,7 +80,7 @@ DoPoisonStep:: ; 505da
 	ld a, MON_ABILITY
 	call GetPartyParamLocation
 	ld b, [hl]
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld c, [hl]
 	call GetAbility

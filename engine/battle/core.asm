@@ -3757,7 +3757,7 @@ CheckIfCurPartyMonIsFitToFight: ; 3d887
 
 
 InitBattleMon: ; 3da0d
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld de, wBattleMonSpecies
 	ld bc, MON_ID - MON_SPECIES
@@ -3976,7 +3976,7 @@ SendOutPlayerMon: ; 3db5f
 	call Call_PlayBattleAnim
 
 .not_shiny
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld b, h
 	ld c, l
@@ -7998,7 +7998,7 @@ GiveExperiencePoints: ; 3ee3b
 	cp b
 	jp z, ResetBattleParticipants
 	ld [wCurPartyMon], a
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld b, h
 	ld c, l

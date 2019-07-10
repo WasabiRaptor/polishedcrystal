@@ -1646,6 +1646,9 @@ GetPartyParamLocation:: ; 3917
 	push bc
 	ld hl, wPartyMons
 PkmnParamLocation:
+	cp MON_SPECIES_AND_GROUP
+	jp z, .species_and_group
+
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -1653,6 +1656,19 @@ PkmnParamLocation:
 	call GetPartyLocation
 	pop bc
 	ret
+
+.species_and_group
+	ld bc, MON_SPECIES
+	add hl, bc
+	call GetPartyLocation
+	push hl
+	ld bc, MON_GROUP - MON_SPECIES
+	add hl, bc
+	predef GetPokeGroup
+	pop hl
+	pop bc
+	ret
+
 ; 3927
 
 GetPartyLocation::

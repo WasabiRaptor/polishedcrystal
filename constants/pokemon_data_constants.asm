@@ -142,6 +142,8 @@ MON_SDF                  EQUS "(wPartyMon1SpclDef - wPartyMon1)"
 BOXMON_STRUCT_LENGTH     EQUS "(wPartyMon1End - wPartyMon1)"
 PARTYMON_STRUCT_LENGTH   EQUS "(wPartyMon1StatsEnd - wPartyMon1)"
 
+MON_SPECIES_AND_GROUP EQU $ff
+
 ;PP masks
 PP_UPS_USED_MASK EQU %11000000
 

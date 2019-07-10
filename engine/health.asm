@@ -48,7 +48,7 @@ HealParty: ; c658
 	jr .loop
 
 HealPartyMon: ; c677
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld d, h
 	ld e, l
