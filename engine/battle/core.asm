@@ -6812,15 +6812,8 @@ LoadEnemyMon: ; 3e8eb
 	pop af
 	ldh [rSVBK], a
 
-	;check if the map should have a certain pokemon form
-	;ld a, [wMapGroup]
-	;cp GROUP_LAKE_OF_RAGE
-	;jr nz, .NoAlolanForms
-	;ld a, ALOLAN
-	;ld [wCurPokeGroup], a
-.NoAlolanForms
 	; Grab the BaseData for this species
-	call GetBaseData ;form is known
+	call GetBaseData ;form is known for trainer pokemon
 
 	ld a, [wBaseExp]
 	ld [wEnemyMonBaseExp], a
@@ -6829,6 +6822,11 @@ LoadEnemyMon: ; 3e8eb
 	dec a
 .initenemymon
 	jp nz, InitEnemyMon
+
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPokeGroup], a
+	; Grab the BaseData for this species again, as wildmons need the correct held items
+	call GetBaseData ;form is known 
 
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
@@ -7011,16 +7009,16 @@ endc
 	ld a, [wCurItem]
 	push af
 	ld a, SHINY_CHARM
-	ld [wCurItem], a
+	ld [wCurKeyItem], a
 	push hl
 	push bc
 	push de
-	;ld hl, wNumKeyItems
-	;call CheckItem
+	call CheckKeyItem
 	pop de
 	pop bc
 	pop hl
 	jr c, .shiny_charm
+
 	pop af
 	ld [wCurItem], a
 	call BattleRandom
@@ -7094,17 +7092,7 @@ endc
 .Female
 	ld b, a
 
-	; Form
-	;ld a, [wBattleType]
-	;cp BATTLETYPE_RED_GYARADOS
-	;ld a, GYARADOS_RED_FORM
-	;jr z, .special_form
-
-	;ld a, [wMapGroup]
-	;cp GROUP_LAKE_OF_RAGE
-	;ld a, ALOLAN
-	;jr z, .special_form
-	ld a, 1 ; default form 1
+	ld a, [wTempEnemyMonGroup] ; make sure the pokemon has the correct group
 .special_form
 	add b
 	ld [hl], a
@@ -7122,30 +7110,30 @@ endr
 	ld [hl], a
 
 	; Unown
-	ld a, [wTempEnemyMonSpecies]
-	cp UNOWN
-	jr nz, .Magikarp
+	;ld a, [wTempEnemyMonSpecies]
+	;cp UNOWN
+	;jr nz, .Magikarp
 
-.unown_letter
-	ld a, NUM_UNOWN
-	call BattleRandomRange
-	inc a
-	ld b, a
-	ld a, [wEnemyMonGroup]
-	and $ff - FORM_MASK
-	add b
-	ld [wEnemyMonGroup], a
+;.unown_letter
+	;ld a, NUM_UNOWN
+	;call BattleRandomRange
+	;inc a
+	;ld b, a
+	;ld a, [wEnemyMonGroup]
+	;and $ff - FORM_MASK
+	;add b
+	;ld [wEnemyMonGroup], a
 	; Get letter based on form
-	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	;ld hl, wEnemyMonGroup
+	;predef GetPokeGroup
 	; Can't use any letters that haven't been unlocked
-	push de
-	farcall CheckUnownLetter ;relocated
-	pop de
-	jr c, .unown_letter ; re-roll
-	jp .Happiness
+	;push de
+	;farcall CheckUnownLetter ;relocated
+	;pop de
+	;jr c, .unown_letter ; re-roll
+	;jp .Happiness
 
-.Magikarp:
+;.Magikarp:
 	ld a, [wTempEnemyMonSpecies]
 	cp MAGIKARP
 	jr nz, .Happiness
@@ -7308,7 +7296,9 @@ endr
 	inc de
 	dec b
 	jr nz, .loop
-	
+
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPokeGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
@@ -8930,6 +8920,9 @@ LoadTrainerOrWildMonPic: ; 3f54e
 	ld a, [wOtherTrainerClass]
 	and a
 	jr nz, .Trainer
+	ld a, [wTempWildMonGroup]
+	ld [wCurPokeGroup], a
+	ld [wTempEnemyMonGroup], a
 	ld a, [wTempWildMonSpecies]
 	ld [wCurPartySpecies], a
 
@@ -9031,9 +9024,6 @@ InitEnemyWildmon: ; 3f607
 	ld de, wEnemyBackupDVs
 	ld bc, 5
 	rst CopyBytes
-	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
-
 	;ld a, [wCurPartySpecies]
 	;cp UNOWN
 	;jr nz, .skip_unown

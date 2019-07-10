@@ -522,6 +522,7 @@ wBattleMode::
 	ds 1
 
 wTempWildMonSpecies:: ds 1
+wTempWildMonGroup:: ds 1
 
 wOtherTrainerClass::
 ; class (Youngster, Bug Catcher, etc.) of opposing trainer
@@ -584,8 +585,10 @@ wCurBaseDataEnd::
 
 wCurDamage:: ds 2
 
+wEncounterRates::
 wMornEncounterRate:: ds 1
 wDayEncounterRate:: ds 1
+wEveningEncounterRate:: ds 1
 wNiteEncounterRate:: ds 1
 wWaterEncounterRate:: ds 1
 
