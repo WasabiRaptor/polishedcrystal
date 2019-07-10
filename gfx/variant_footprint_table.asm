@@ -5,4 +5,6 @@ endm
 VariantFootprintTable:
     variant_footprints REGION_KANTO, Kanto
     variant_footprints REGION_JOHTO, Johto
+    variant_footprints REGION_HOENN, Hoenn
+
     dbba -1,           KantoFootprints

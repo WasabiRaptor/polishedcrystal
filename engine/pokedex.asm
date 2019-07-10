@@ -598,7 +598,7 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 .MenuAction_VariantMode: ; 40411 (10:4411)
 	ld a, [wPokedexRegion]
 	inc a
-	cp REGION_JOHTO + 1 ; the max dex group
+	cp REGION_HOENN + 1 ; the max dex group
 	jr c, .next_group
 	ld a, REGION_KANTO
 .next_group

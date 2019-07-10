@@ -5,4 +5,6 @@ endm
 VariantNamePointerTable:
     variant_names REGION_KANTO,  Kanto
     variant_names REGION_JOHTO,  Johto
+    variant_names REGION_HOENN, Hoenn
+
     dbba -1,        KantoNames

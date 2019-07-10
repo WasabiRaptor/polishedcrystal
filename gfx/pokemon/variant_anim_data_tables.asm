@@ -6,6 +6,8 @@ endm
 VariantAnimPointerTable:
     variant_animdata REGION_KANTO,  Kanto  
     variant_animdata REGION_JOHTO,  Johto
+    variant_animdata REGION_HOENN,  Hoenn
+
 	dbbww -1,           BANK(KantoAnimations), KantoAnimationPointers, KantoAnimationIdlePointers
 
 variant_frames: macro
@@ -15,6 +17,8 @@ endm
 VariantFramesPointerTable:
     variant_frames REGION_KANTO,  Kanto
     variant_frames REGION_JOHTO,  Johto
+    variant_frames REGION_HOENN,  Hoenn
+
 	dbbba -1,           BANK(KantoFrames), KantoFramesPointers
 
 variant_bitmasks: macro
@@ -24,4 +28,6 @@ endm
 VariantBitmasksPointerTable:
     variant_bitmasks REGION_KANTO,  Kanto
     variant_bitmasks REGION_JOHTO,  Johto
+    variant_bitmasks REGION_HOENN,  Hoenn
+
 	dbba -1,            KantoBitmasksPointers
