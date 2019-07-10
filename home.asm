@@ -1376,6 +1376,7 @@ Print8BitNumRightAlign:: ; 3842
 ; 384d
 
 GetRelevantBaseData::
+	ld a, [wCurPokeGroup]
 ;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
 ; returns c for variants, nc for normal species
 	ld hl, VariantBaseDataTable
@@ -1403,7 +1404,6 @@ GetBaseData:: ; 3856
 	cp EGG
 	jr z, .egg
 
-	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	push hl
 
@@ -1502,7 +1502,6 @@ GetAbility::
 	push hl
 	push bc
 
-	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	pop bc
 	push bc

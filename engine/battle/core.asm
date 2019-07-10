@@ -3978,6 +3978,8 @@ SendOutPlayerMon: ; 3db5f
 .not_shiny
 	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
+	ld a, [hl]
+	ld [wCurPartySpecies], a
 	ld b, h
 	ld c, l
 	farcall CheckFaintedFrzSlp
@@ -7067,7 +7069,6 @@ endc
 	push hl
 	push bc
 	push de
-	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
 	dec a

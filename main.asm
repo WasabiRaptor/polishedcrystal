@@ -3496,7 +3496,6 @@ GetGender: ; 50bdd
 
 ; We need the gender ratio to do anything with this.
 	push bc
-	ld a, [wCurPokeGroup]
 	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
 	dec a

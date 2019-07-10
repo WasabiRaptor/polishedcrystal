@@ -65,11 +65,6 @@ LoadCryHeader:: ; 37f3
 	pop bc
 	ld a, d
 	rst Bankswitch
-	jr nc, .notvariant
-	ld a, [wCurPokeGroup]
-	dec a
-	ld c, a
-.notvariant
 
 rept 6
 	add hl, bc
