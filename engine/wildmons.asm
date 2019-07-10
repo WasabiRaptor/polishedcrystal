@@ -444,12 +444,12 @@ _ChooseWildEncounter:
 	call ValidateTempWildMonSpecies
 	jr c, .nowildbattle
 
-	cp UNOWN
-	jr nz, .unown_check_done
+	;cp UNOWN
+	;jr nz, .unown_check_done
 
-	ld a, [wUnlockedUnowns]
-	and a
-	jr z, .nowildbattle
+	;ld a, [wUnlockedUnowns]
+	;and a
+	;jr z, .nowildbattle
 
 .unown_check_done
 	; Check if we're forcing type
