@@ -502,7 +502,9 @@ NEXTU
 wCurEnemyItem:: ds 1
 	ds 15
 wTempEnemyMonSpecies:: ds 1
+wTempEnemyMonGroup:: ds 1
 wTempBattleMonSpecies:: ds 1
+wTempBattleMonGroup:: ds 1
 
 ENDU
 

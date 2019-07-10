@@ -3382,6 +3382,10 @@ LoadEnemyPkmnToSwitchTo:
 	ld a, [hl]
 	ld [wTempEnemyMonSpecies], a
 	ld [wCurPartySpecies], a
+	ld bc, MON_GROUP - MON_SPECIES
+	add hl, bc
+	predef GetPokeGroup
+	ld [wTempEnemyMonGroup], a
 	call LoadEnemyMon
 
 	ld a, [wCurPartySpecies]
@@ -8971,6 +8975,7 @@ InitEnemyTrainer: ; 3f594
 	ld [wTrainerClass], a
 	xor a
 	ld [wTempEnemyMonSpecies], a
+	ld [wTempEnemyMonGroup], a
 	farcall GetTrainerAttributes
 	farcall ReadTrainerParty
 	farcall ComputeTrainerReward

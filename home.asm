@@ -47,6 +47,47 @@ INCLUDE "home/window.asm"
 INCLUDE "home/flag.asm"
 INCLUDE "home/restore_music.asm"
 
+IsAPokemon::
+; Return carry if species a is not a Pokemon.
+; Since every ID other than $0 and $ff is valid, we can simplify this function.
+	and a
+	jp z, .not_a_pokemon
+	push bc
+	push de
+	push af
+	ld a, [wCurPokeGroup]
+	ld hl, RegionalMaxPokemonTable
+	ld de, 2
+	call IsInArray
+	inc hl
+	ld a, [hl]
+	pop de
+	jr nc, .not_a_pokemon_2
+	cp d
+	jr c, .not_a_pokemon_2
+	ld a, d
+	pop de
+	pop bc
+	ret
+
+.not_a_pokemon_2
+	pop de
+	pop bc
+.not_a_pokemon
+	scf
+	ret
+
+RegionalMaxPokemonTable:
+	db REGION_KANTO, NUM_KANTO_SPECIES_AND_FORMS
+	db REGION_JOHTO, NUM_JOHTO_SPECIES_AND_FORMS
+	db REGION_HOENN, NUM_HOENN_SPECIES_AND_FORMS
+	db REGION_SINNOH, NUM_SINNOH_SPECIES_AND_FORMS
+	db REGION_UNOVA, NUM_UNOVA_SPECIES_AND_FORMS
+	db REGION_KALOS, NUM_KALOS_SPECIES_AND_FORMS
+	db REGION_ALOLA, NUM_ALOLA_SPECIES_AND_FORMS
+	db REGION_GALAR, NUM_GALAR_SPECIES_AND_FORMS
+	db -1, 0
+
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a

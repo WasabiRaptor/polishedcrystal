@@ -2018,6 +2018,8 @@ GivePoke:: ; e277
 .failed
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
+	ld a, [wCurPokeGroup]
+	ld [wTempEnemyMonGroup], a
 	farcall LoadEnemyMon
 	ld a, BANK(sBoxMon1Item)
 	call GetSRAMBank
@@ -2059,8 +2061,11 @@ GivePoke:: ; e277
 .done
 	call CloseSRAM
 	ld a, [wCurPartySpecies]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	ld [wTempEnemyMonSpecies], a
+	ld a, [wCurGenderOrGroupBuffer]
+	ld [wCurPokeGroup], a
+	ld [wTempEnemyMonGroup], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer

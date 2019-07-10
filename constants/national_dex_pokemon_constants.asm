@@ -231,6 +231,7 @@ EGG EQU $fe
 	nat_dexmon TANGROWTH_BETA
 	nat_dexmon MADAAMU ; the farfetch'd evo
 NUM_KANTO_POKEMON EQU const_value +-1
+NUM_KANTO_SPECIES_AND_FORMS EQU const_value +-1
 
 ;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
 
@@ -358,6 +359,7 @@ GROUP_SNOWSLASH EQU GROUP_SANDSLASH_ALOLA
 	nat_dexmon ENTEI_BETA
 	nat_dexmon SUICUNE_BETA
 NUM_JOHTO_POKEMON EQU const_value +-1
+NUM_JOHTO_SPECIES_AND_FORMS EQU const_value +-1
 
 ; hoo boy Unown you've got a lot of forms, so he gets his own "region" which would only be used for pics really, 
 	nat_dexmon_group 1, UNOWN
@@ -537,6 +539,7 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon DEOXYS_ATTACK
 	nat_dexmon DEOXYS_SPEED
 NUM_HOENN_POKEMON EQU const_value +-1
+NUM_HOENN_SPECIES_AND_FORMS EQU const_value +-1
 
 
 ; gen sinnoh mons
@@ -632,6 +635,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon SHAYMIN_SKY
 	nat_dexmon ARCEUS ; types can be handled by the multitype ability via the item it holds and palette can be done in much the same way
 NUM_SINNOH_POKEMON EQU const_value +-1
+NUM_SINNOH_SPECIES_AND_FORMS EQU const_value +-1
 
 SHAYMIN_LAND EQU SHAYMIN
 
@@ -809,6 +813,7 @@ SHAYMIN_LAND EQU SHAYMIN
 	nat_dexmon GENESECT
 NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon DARMANITAN_ZEN_MODE ; zen mode cannot exist outside of battle, but as both the types and stats change, it han an entry here
+NUM_UNOVA_SPECIES_AND_FORMS EQU const_value +-1
 
 MELLOETTA_ARIA EQU MELLOETTA
 
@@ -894,6 +899,7 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon AEGISLASH_BLADE ; only exists in battle but its easier to count as a seperate species for the ease of recalculating its stats, and it won't count towards dex total
 	nat_dexmon ZYGARDE_10_COMPLETE ; these are just so power construct knows what form to revert to, and are here for the same reason as aegislash, and don't count towards dex total
 	nat_dexmon ZYGARDE_50_COMPLETE
+NUM_KALOS_SPECIES_AND_FORMS EQU const_value +-1
 
 
 AEGISLASH_SHIELD EQU AEGISLASH
@@ -1000,10 +1006,12 @@ AEGISLASH_SHIELD EQU AEGISLASH
 	nat_dexmon MELMETAL
 NUM_ALOLA_POKEMON EQU const_value +-1
 	nat_dexmon MINIOR_SHIELDS_DOWN ; colors can be handled by vary colors by DVs, but exists here for much the same reason as aegislash
+NUM_ALOLA_SPECIES_AND_FORMS EQU const_value +-1
 
 
 	nat_dexmon_group 1, REGION_GALAR
 NUM_GALAR_POKEMON EQU const_value +-1
+NUM_GALAR_SPECIES_AND_FORMS EQU const_value +-1
 
 
 
