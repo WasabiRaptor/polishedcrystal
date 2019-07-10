@@ -13,7 +13,7 @@
         db THICK_FAT, OWN_TEMPO     ; abilities
         db GLUTTONY    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

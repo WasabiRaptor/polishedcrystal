@@ -13,7 +13,7 @@
         db TRUANT, TRUANT     ; abilities
         db TRUANT    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

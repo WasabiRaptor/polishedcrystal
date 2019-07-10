@@ -13,7 +13,7 @@
         db KEEN_EYE, KEEN_EYE     ; abilities
         db SNIPER    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FLYING ; egg groups
+        dn EGG_FLYING, EGG_FLYING ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

@@ -13,7 +13,7 @@
         db MAGMA_ARMOR, SOLID_ROCK     ; abilities
         db ANGER_POINT    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

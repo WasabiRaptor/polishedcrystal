@@ -13,7 +13,7 @@
         db ILLUMINATE, EFFECT_SPORE     ; abilities
         db RAIN_DISH    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_GRASS ; egg groups
+        dn EGG_GRASS, EGG_GRASS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

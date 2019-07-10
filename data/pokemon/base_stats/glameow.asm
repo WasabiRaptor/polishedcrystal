@@ -13,7 +13,7 @@
         db LIMBER, OWN_TEMPO     ; abilities
         db KEEN_EYE    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

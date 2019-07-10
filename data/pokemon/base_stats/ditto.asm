@@ -13,7 +13,7 @@
         db LIMBER, LIMBER     ; abilities
         db IMPOSTER    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_DITTO ; egg groups
+        dn EGG_DITTO, EGG_DITTO ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

@@ -13,7 +13,7 @@
         db SWARM, EARLY_BIRD     ; abilities
         db IRON_FIST    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

@@ -13,7 +13,7 @@
         db WATER_ABSORB, DAMP     ; abilities
         db SWIFT_SWIM    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_WATER_1 ; egg groups
+        dn EGG_WATER_1, EGG_WATER_1 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

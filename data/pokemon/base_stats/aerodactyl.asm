@@ -13,7 +13,7 @@
         db ROCK_HEAD, PRESSURE     ; abilities
         db UNNERVE    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_FLYING ; egg groups
+        dn EGG_FLYING, EGG_FLYING ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

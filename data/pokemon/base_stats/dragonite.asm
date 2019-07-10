@@ -6,7 +6,7 @@
         
         db DRAGON, FLYING ; type
         db 45 ; catch rate
-        db 270 ; base exp
+        db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 8 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/dragonite/front.dimensions"  

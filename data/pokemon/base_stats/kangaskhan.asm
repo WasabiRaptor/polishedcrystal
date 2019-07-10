@@ -13,7 +13,7 @@
         db EARLY_BIRD, SCRAPPY     ; abilities
         db INNER_FOCUS    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_MONSTER ; egg groups
+        dn EGG_MONSTER,  EGG_MONSTER ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

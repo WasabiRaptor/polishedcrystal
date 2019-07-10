@@ -13,7 +13,7 @@
         db STEADFAST, STEADFAST     ; abilities
         db JUSTIFIED    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_AMORPHOUS ; egg groups
+        dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

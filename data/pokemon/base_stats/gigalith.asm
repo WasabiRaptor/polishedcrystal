@@ -13,7 +13,7 @@
         db STURDY, SAND_STREAM     ; abilities
         db SAND_FORCE    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_MINERAL ; egg groups
+        dn EGG_MINERAL, EGG_MINERAL ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

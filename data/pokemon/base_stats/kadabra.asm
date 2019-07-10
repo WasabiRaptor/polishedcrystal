@@ -13,7 +13,7 @@
         db SYNCHRONIZE, INNER_FOCUS     ; abilities
         db MAGIC_GUARD    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_HUMAN_LIKE ; egg groups
+        dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

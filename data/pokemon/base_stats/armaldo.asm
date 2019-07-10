@@ -13,7 +13,7 @@
         db BATTLE_ARMOR, BATTLE_ARMOR     ; abilities
         db SWIFT_SWIM    ; hidden ability
         db GROWTH_ERRATIC ; growth rate
-        dn EGG_WATER_3 ; egg groups
+        dn EGG_WATER_3, EGG_WATER_3 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

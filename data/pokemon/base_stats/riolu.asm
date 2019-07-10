@@ -13,7 +13,7 @@
         db STEADFAST, INNER_FOCUS     ; abilities
         db PRANKSTER    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

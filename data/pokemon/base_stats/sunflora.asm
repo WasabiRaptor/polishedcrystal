@@ -13,7 +13,7 @@
         db CHLOROPHYLL, SOLAR_POWER     ; abilities
         db EARLY_BIRD    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_GRASS ; egg groups
+        dn EGG_GRASS, EGG_GRASS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

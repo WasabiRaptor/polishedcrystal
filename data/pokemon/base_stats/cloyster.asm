@@ -13,7 +13,7 @@
         db SHELL_ARMOR, SKILL_LINK     ; abilities
         db OVERCOAT    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_WATER_3 ; egg groups
+        dn EGG_WATER_3, EGG_WATER_3 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

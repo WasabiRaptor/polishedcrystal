@@ -13,7 +13,7 @@
         db ROCK_HEAD, LIGHTNING_ROD     ; abilities
         db BATTLE_ARMOR    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_MONSTER ; egg groups
+        dn EGG_MONSTER,  EGG_MONSTER ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

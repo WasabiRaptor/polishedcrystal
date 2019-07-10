@@ -13,7 +13,7 @@
         db STEELWORKER, STEELWORKER     ; abilities
         db STEELWORKER    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_MINERAL ; egg groups
+        dn EGG_MINERAL, EGG_MINERAL ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

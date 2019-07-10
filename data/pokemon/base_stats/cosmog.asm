@@ -8,12 +8,12 @@
         db 45 ; catch rate
         db 40 ; base exp
         db NO_ITEM, NO_ITEM ; items
-        dn GENDERLESS, 24 ; gender, step cycles to hatch
+        dn GENDERLESS, 15 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/cosmog/front.dimensions"  
         db UNAWARE, UNAWARE     ; abilities
         db UNAWARE    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

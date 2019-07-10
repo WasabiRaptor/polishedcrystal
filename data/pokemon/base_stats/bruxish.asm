@@ -13,7 +13,7 @@
         db DAZZLING, STRONG_JAW     ; abilities
         db WONDER_SKIN    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_WATER_2 ; egg groups
+        dn EGG_WATER_2, EGG_WATER_2 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

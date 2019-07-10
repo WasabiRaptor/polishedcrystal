@@ -6,14 +6,14 @@
         
         db PSYCHIC, PSYCHIC ; type
         db 3 ; catch rate
-        db 306 ; base exp
+        db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
-        dn GENDERLESS, 24 ; gender, step cycles to hatch
+        dn GENDERLESS, 15 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/mewtwo/front.dimensions"  
         db PRESSURE, PRESSURE     ; abilities
         db UNNERVE    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

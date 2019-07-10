@@ -13,7 +13,7 @@
         db KEEN_EYE, IRON_FIST     ; abilities
         db INNER_FOCUS    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_HUMAN_LIKE ; egg groups
+        dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

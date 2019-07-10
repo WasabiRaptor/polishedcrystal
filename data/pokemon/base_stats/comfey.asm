@@ -13,7 +13,7 @@
         db FLOWER_VEIL, TRIAGE     ; abilities
         db NATURAL_CURE    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_GRASS ; egg groups
+        dn EGG_GRASS, EGG_GRASS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

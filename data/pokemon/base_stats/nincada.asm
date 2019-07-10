@@ -13,7 +13,7 @@
         db COMPOUND_EYES, COMPOUND_EYES     ; abilities
         db RUN_AWAY    ; hidden ability
         db GROWTH_ERRATIC ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

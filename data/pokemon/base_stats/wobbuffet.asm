@@ -13,7 +13,7 @@
         db SHADOW_TAG, SHADOW_TAG     ; abilities
         db TELEPATHY    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_AMORPHOUS ; egg groups
+        dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

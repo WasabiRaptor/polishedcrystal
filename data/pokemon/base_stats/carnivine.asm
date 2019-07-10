@@ -13,7 +13,7 @@
         db LEVITATE, LEVITATE     ; abilities
         db LEVITATE    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_GRASS ; egg groups
+        dn EGG_GRASS, EGG_GRASS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

@@ -13,7 +13,7 @@
         db FLAME_BODY, FLAME_BODY     ; abilities
         db GALE_WINGS    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_FLYING ; egg groups
+        dn EGG_FLYING, EGG_FLYING ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

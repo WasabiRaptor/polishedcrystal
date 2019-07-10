@@ -13,7 +13,7 @@
         db SOUNDPROOF, FILTER     ; abilities
         db TECHNICIAN    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

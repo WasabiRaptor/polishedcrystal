@@ -13,7 +13,7 @@
         db STURDY, GLUTTONY     ; abilities
         db CONTRARY    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

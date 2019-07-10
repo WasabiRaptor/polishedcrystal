@@ -13,7 +13,7 @@
         db STURDY, ROCK_HEAD     ; abilities
         db HEAVY_METAL    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_MONSTER ; egg groups
+        dn EGG_MONSTER,  EGG_MONSTER ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

@@ -13,7 +13,7 @@
         db VITAL_SPIRIT, VITAL_SPIRIT     ; abilities
         db VITAL_SPIRIT    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

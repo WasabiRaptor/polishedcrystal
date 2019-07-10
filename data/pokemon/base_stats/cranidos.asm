@@ -13,7 +13,7 @@
         db MOLD_BREAKER, MOLD_BREAKER     ; abilities
         db SHEER_FORCE    ; hidden ability
         db GROWTH_ERRATIC ; growth rate
-        dn EGG_MONSTER ; egg groups
+        dn EGG_MONSTER,  EGG_MONSTER ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

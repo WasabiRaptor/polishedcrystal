@@ -13,7 +13,7 @@
         db FLAME_BODY, FLAME_BODY     ; abilities
         db SWARM    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

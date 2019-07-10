@@ -13,7 +13,7 @@
         db SWARM, INSOMNIA     ; abilities
         db SNIPER    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

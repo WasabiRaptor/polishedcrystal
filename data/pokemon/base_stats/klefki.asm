@@ -13,7 +13,7 @@
         db PRANKSTER, PRANKSTER     ; abilities
         db MAGICIAN    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_MINERAL ; egg groups
+        dn EGG_MINERAL, EGG_MINERAL ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

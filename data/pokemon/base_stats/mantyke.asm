@@ -13,7 +13,7 @@
         db SWIFT_SWIM, WATER_ABSORB     ; abilities
         db WATER_VEIL    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

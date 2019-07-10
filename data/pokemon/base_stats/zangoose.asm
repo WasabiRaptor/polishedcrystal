@@ -13,7 +13,7 @@
         db IMMUNITY, IMMUNITY     ; abilities
         db TOXIC_BOOST    ; hidden ability
         db GROWTH_ERRATIC ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

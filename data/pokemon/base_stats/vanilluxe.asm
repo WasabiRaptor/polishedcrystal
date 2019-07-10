@@ -13,7 +13,7 @@
         db ICE_BODY, SNOW_WARNING     ; abilities
         db WEAK_ARMOR    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_MINERAL ; egg groups
+        dn EGG_MINERAL, EGG_MINERAL ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

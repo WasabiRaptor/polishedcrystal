@@ -13,7 +13,7 @@
         db CUTE_CHARM, MAGIC_GUARD     ; abilities
         db FRIEND_GUARD    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

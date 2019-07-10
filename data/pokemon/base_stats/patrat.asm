@@ -13,7 +13,7 @@
         db RUN_AWAY, KEEN_EYE     ; abilities
         db ANALYTIC    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

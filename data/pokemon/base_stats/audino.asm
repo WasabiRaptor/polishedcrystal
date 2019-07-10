@@ -13,7 +13,7 @@
         db HEALER, REGENERATOR     ; abilities
         db KLUTZ    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_FAIRY ; egg groups
+        dn EGG_FAIRY, EGG_FAIRY ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

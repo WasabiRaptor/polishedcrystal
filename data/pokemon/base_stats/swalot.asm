@@ -13,7 +13,7 @@
         db LIQUID_OOZE, STICKY_HOLD     ; abilities
         db GLUTTONY    ; hidden ability
         db GROWTH_FLUCTUATING ; growth rate
-        dn EGG_AMORPHOUS ; egg groups
+        dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

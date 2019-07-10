@@ -13,7 +13,7 @@
         db INNER_FOCUS, KEEN_EYE     ; abilities
         db PICKPOCKET    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

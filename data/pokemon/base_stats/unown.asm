@@ -9,11 +9,11 @@
         db 118 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn GENDERLESS, 8 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/unown/front.dimensions"  
+        INCBIN "gfx/pokemon/unown_a/front.dimensions"  
         db LEVITATE, LEVITATE     ; abilities
         db LEVITATE    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

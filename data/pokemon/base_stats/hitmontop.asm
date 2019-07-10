@@ -13,7 +13,7 @@
         db INTIMIDATE, TECHNICIAN     ; abilities
         db STEADFAST    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_HUMAN_LIKE ; egg groups
+        dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

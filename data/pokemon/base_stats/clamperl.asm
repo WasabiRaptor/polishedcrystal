@@ -13,7 +13,7 @@
         db SHELL_ARMOR, SHELL_ARMOR     ; abilities
         db RATTLED    ; hidden ability
         db GROWTH_ERRATIC ; growth rate
-        dn EGG_WATER_1 ; egg groups
+        dn EGG_WATER_1, EGG_WATER_1 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

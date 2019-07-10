@@ -13,7 +13,7 @@
         db INNARDS_OUT, INNARDS_OUT     ; abilities
         db UNAWARE    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_WATER_1 ; egg groups
+        dn EGG_WATER_1, EGG_WATER_1 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

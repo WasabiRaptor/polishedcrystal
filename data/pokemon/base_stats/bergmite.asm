@@ -13,7 +13,7 @@
         db OWN_TEMPO, ICE_BODY     ; abilities
         db STURDY    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_MONSTER ; egg groups
+        dn EGG_MONSTER,  EGG_MONSTER ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

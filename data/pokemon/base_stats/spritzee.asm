@@ -13,7 +13,7 @@
         db HEALER, HEALER     ; abilities
         db AROMA_VEIL    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FAIRY ; egg groups
+        dn EGG_FAIRY, EGG_FAIRY ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

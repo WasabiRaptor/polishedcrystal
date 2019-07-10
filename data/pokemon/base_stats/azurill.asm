@@ -13,7 +13,7 @@
         db THICK_FAT, HUGE_POWER     ; abilities
         db SAP_SIPPER    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

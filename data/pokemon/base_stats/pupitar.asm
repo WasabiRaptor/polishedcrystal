@@ -13,7 +13,7 @@
         db SHED_SKIN, SHED_SKIN     ; abilities
         db SHED_SKIN    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_MONSTER ; egg groups
+        dn EGG_MONSTER,  EGG_MONSTER ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

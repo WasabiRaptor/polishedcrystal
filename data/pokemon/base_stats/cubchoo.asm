@@ -13,7 +13,7 @@
         db SNOW_CLOAK, SLUSH_RUSH     ; abilities
         db RATTLED    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

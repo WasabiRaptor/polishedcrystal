@@ -13,7 +13,7 @@
         db ROCK_HEAD, ROCK_HEAD     ; abilities
         db OVERCOAT    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_DRAGON ; egg groups
+        dn EGG_DRAGON, EGG_DRAGON ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

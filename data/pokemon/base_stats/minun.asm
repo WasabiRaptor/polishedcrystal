@@ -13,7 +13,7 @@
         db MINUS, MINUS     ; abilities
         db VOLT_ABSORB    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FAIRY ; egg groups
+        dn EGG_FAIRY, EGG_FAIRY ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

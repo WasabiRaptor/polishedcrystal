@@ -13,7 +13,7 @@
         db THICK_FAT, GUTS     ; abilities
         db SHEER_FORCE    ; hidden ability
         db GROWTH_FLUCTUATING ; growth rate
-        dn EGG_HUMAN_LIKE ; egg groups
+        dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

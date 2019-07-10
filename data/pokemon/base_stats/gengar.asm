@@ -13,7 +13,7 @@
         db CURSED_BODY, CURSED_BODY     ; abilities
         db CURSED_BODY    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_AMORPHOUS ; egg groups
+        dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

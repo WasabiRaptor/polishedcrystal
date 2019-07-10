@@ -13,7 +13,7 @@
         db HYPER_CUTTER, IRON_FIST     ; abilities
         db ANGER_POINT    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_WATER_3 ; egg groups
+        dn EGG_WATER_3, EGG_WATER_3 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

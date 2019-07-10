@@ -13,7 +13,7 @@
         db PICKUP, THICK_FAT     ; abilities
         db GLUTTONY    ; hidden ability
         db GROWTH_SLOW ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

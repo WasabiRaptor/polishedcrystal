@@ -13,7 +13,7 @@
         db PRESSURE, PRESSURE     ; abilities
         db FRISK    ; hidden ability
         db GROWTH_FAST ; growth rate
-        dn EGG_AMORPHOUS ; egg groups
+        dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

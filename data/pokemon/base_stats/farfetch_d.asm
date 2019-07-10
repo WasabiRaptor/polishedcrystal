@@ -9,7 +9,7 @@
         db 132 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 4 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/farfetchd/front.dimensions"  
+        INCBIN "gfx/pokemon/farfetch_d/front.dimensions"  
         db KEEN_EYE, INNER_FOCUS     ; abilities
         db DEFIANT    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate

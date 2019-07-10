@@ -13,7 +13,7 @@
         db VITAL_SPIRIT, ANGER_POINT     ; abilities
         db DEFIANT    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

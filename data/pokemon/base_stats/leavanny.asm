@@ -13,7 +13,7 @@
         db SWARM, CHLOROPHYLL     ; abilities
         db OVERCOAT    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

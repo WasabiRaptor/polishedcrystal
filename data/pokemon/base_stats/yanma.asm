@@ -13,7 +13,7 @@
         db SPEED_BOOST, COMPOUND_EYES     ; abilities
         db FRISK    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

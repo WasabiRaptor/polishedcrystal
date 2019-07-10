@@ -13,7 +13,7 @@
         db STATIC, STATIC     ; abilities
         db LIGHTNING_ROD    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

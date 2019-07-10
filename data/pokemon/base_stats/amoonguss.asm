@@ -13,7 +13,7 @@
         db EFFECT_SPORE, EFFECT_SPORE     ; abilities
         db REGENERATOR    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_GRASS ; egg groups
+        dn EGG_GRASS, EGG_GRASS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

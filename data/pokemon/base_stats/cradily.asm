@@ -13,7 +13,7 @@
         db SUCTION_CUPS, SUCTION_CUPS     ; abilities
         db STORM_DRAIN    ; hidden ability
         db GROWTH_ERRATIC ; growth rate
-        dn EGG_WATER_3 ; egg groups
+        dn EGG_WATER_3, EGG_WATER_3 ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

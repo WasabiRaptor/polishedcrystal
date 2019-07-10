@@ -13,7 +13,7 @@
         db ANTICIPATION, DRY_SKIN     ; abilities
         db POISON_TOUCH    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_HUMAN_LIKE ; egg groups
+        dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

@@ -13,7 +13,7 @@
         db SPEED_BOOST, SPEED_BOOST     ; abilities
         db INFILTRATOR    ; hidden ability
         db GROWTH_ERRATIC ; growth rate
-        dn EGG_BUG ; egg groups
+        dn EGG_BUG, EGG_BUG ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

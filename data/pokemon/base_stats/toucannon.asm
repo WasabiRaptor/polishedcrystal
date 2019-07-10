@@ -13,7 +13,7 @@
         db KEEN_EYE, SKILL_LINK     ; abilities
         db SHEER_FORCE    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FLYING ; egg groups
+        dn EGG_FLYING, EGG_FLYING ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

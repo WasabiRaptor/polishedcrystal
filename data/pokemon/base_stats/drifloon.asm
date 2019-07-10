@@ -13,7 +13,7 @@
         db AFTERMATH, UNBURDEN     ; abilities
         db FLARE_BOOST    ; hidden ability
         db GROWTH_FLUCTUATING ; growth rate
-        dn EGG_AMORPHOUS ; egg groups
+        dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

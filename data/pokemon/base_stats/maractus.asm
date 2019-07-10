@@ -13,7 +13,7 @@
         db WATER_ABSORB, CHLOROPHYLL     ; abilities
         db STORM_DRAIN    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_GRASS ; egg groups
+        dn EGG_GRASS, EGG_GRASS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

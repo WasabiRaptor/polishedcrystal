@@ -13,7 +13,7 @@
         db PICKUP, FRISK     ; abilities
         db INSOMNIA    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_AMORPHOUS ; egg groups
+        dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

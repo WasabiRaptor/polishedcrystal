@@ -13,7 +13,7 @@
         db INSOMNIA, SUPER_LUCK     ; abilities
         db MOXIE    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_FLYING ; egg groups
+        dn EGG_FLYING, EGG_FLYING ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

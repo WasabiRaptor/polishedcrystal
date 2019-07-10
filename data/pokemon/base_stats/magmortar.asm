@@ -13,7 +13,7 @@
         db FLAME_BODY, FLAME_BODY     ; abilities
         db VITAL_SPIRIT    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_HUMAN_LIKE ; egg groups
+        dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

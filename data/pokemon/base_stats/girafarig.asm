@@ -13,7 +13,7 @@
         db INNER_FOCUS, EARLY_BIRD     ; abilities
         db SAP_SIPPER    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FIELD ; egg groups
+        dn EGG_FIELD, EGG_FIELD ; egg groups
         
         ; tm/hm learnset
         tmhm                                            

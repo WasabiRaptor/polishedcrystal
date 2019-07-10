@@ -13,7 +13,7 @@
         db POISON_POINT, RIVALRY     ; abilities
         db SHEER_FORCE    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_NONE ; egg groups
+        dn EGG_NONE, EGG_NONE ; egg groups
         
         ; tm/hm learnset
         tmhm                                            
