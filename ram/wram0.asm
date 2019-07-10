@@ -222,6 +222,42 @@ wGlobalAnimYOffset:: ds 1
 wGlobalAnimXOffset:: ds 1
 wSpriteAnimsEnd::
 
+SECTION "Music Player RAM", WRAM0
+
+wMusicPlayerWRAM::
+wSongSelection:: ds 2
+wNumNoteLines:: ds 1
+wTmpCh:: ds 1
+wChLastNotes:: ds 3
+wVolTimer:: ds 1
+wC1Vol:: ds 1
+wC1VolSub:: ds 1
+wC2Vol:: ds 1
+wC2VolSub:: ds 1
+wC3Vol:: ds 1
+wC3VolSub:: ds 1
+wC4Vol:: ds 1
+wC4VolSub:: ds 1
+wNoteEnded:: ds 3
+wSongInfoSwitch:: ds 1
+;wRenderedWaveform:: ds 1
+wPitchesTmp:: ds 4
+;wWaveformTmp:: ds 16
+wTmpValue:: ds 1
+; song list
+wSelectorTop:: ds 1
+wSelectorCur:: ds 1
+; song editor
+wChannelSelector:: ds 1
+wAdjustingTempo:: ds 1
+; audio engine input
+wChannelSelectorSwitches:: ds 4
+wPitchTransposition:: ds 1
+wTempoAdjustment:: ds 1
+; audio engine output
+wNoiseHit:: ds 1
+wMusicPlayerWRAMEnd::
+
 
 SECTION "Sprites", WRAM0
 
@@ -753,41 +789,6 @@ wDexMonShiny:: ds 1
 wDexCurrentUnownIndex::
 wDexMonGroup:: ds 1
 wPokedexDataEnd::
-
-NEXTU
-wMusicPlayerWRAM::
-wSongSelection:: ds 2
-wNumNoteLines:: ds 1
-wTmpCh:: ds 1
-wChLastNotes:: ds 3
-wVolTimer:: ds 1
-wC1Vol:: ds 1
-wC1VolSub:: ds 1
-wC2Vol:: ds 1
-wC2VolSub:: ds 1
-wC3Vol:: ds 1
-wC3VolSub:: ds 1
-wC4Vol:: ds 1
-wC4VolSub:: ds 1
-wNoteEnded:: ds 3
-wSongInfoSwitch:: ds 1
-;wRenderedWaveform:: ds 1
-wPitchesTmp:: ds 4
-;wWaveformTmp:: ds 16
-wTmpValue:: ds 1
-; song list
-wSelectorTop:: ds 1
-wSelectorCur:: ds 1
-; song editor
-wChannelSelector:: ds 1
-wAdjustingTempo:: ds 1
-; audio engine input
-wChannelSelectorSwitches:: ds 4
-wPitchTransposition:: ds 1
-wTempoAdjustment:: ds 1
-; audio engine output
-wNoiseHit:: ds 1
-wMusicPlayerWRAMEnd::
 
 ENDU
 
