@@ -10,6 +10,10 @@ SECTION "Johto Pic Pointers", ROMX
 
 INCLUDE "data/pokemon/johto_pic_pointers.asm"
 
+SECTION "Hoenn Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/hoenn_pic_pointers.asm"
+
 
 SECTION "Trainer Pic Pointers", ROMX
 

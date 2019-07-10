@@ -59,8 +59,8 @@ Pokedex: ; 40000
 	call PlaySFX
 	call WaitSFX
 	call ClearSprites
-	ld a, [wCurrentDexMode]
-	ld [wLastDexMode], a
+	;ld a, [wCurrentDexMode]
+	;ld [wLastDexMode], a
 
 	pop af
 	ldh [hInMenu], a
@@ -96,7 +96,8 @@ InitPokedex: ; 40063
 
 	call Pokedex_CheckUnlockedUnownMode
 
-	ld a, [wLastDexMode]
+	xor a
+	;ld a, [wLastDexMode]
 	ld [wCurrentDexMode], a
 
 	call Pokedex_OrderMonsByMode

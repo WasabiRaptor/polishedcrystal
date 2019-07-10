@@ -1673,6 +1673,7 @@ INCLUDE "data/pokemon/variant_dex_entry_pointer_table.asm"
 PokedexDataPointerTable: ; 0x44378
 INCLUDE "data/pokemon/kanto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/hoenn_dex_entry_pointers.asm"
 
 SECTION "Code 11", ROMX
 
@@ -4323,6 +4324,7 @@ INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
 INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/menu_icons.asm"
 
 
@@ -4590,6 +4592,10 @@ INCLUDE "gfx/pokemon/johto_anims.asm"
 INCLUDE "gfx/pokemon/johto_idle_pointers.asm"
 INCLUDE "gfx/pokemon/johto_idles.asm"
 
+INCLUDE "gfx/pokemon/hoenn_anim_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_anims.asm"
+INCLUDE "gfx/pokemon/hoenn_idle_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_idles.asm"
 
 SECTION "Pic Animations Frames 1", ROMX
 
@@ -4603,6 +4609,12 @@ INCLUDE "gfx/pokemon/johto_frames.asm"
 INCLUDE "gfx/pokemon/johto_frame_pointers.asm"
 
 
+SECTION "Pic Animations Frames 3", ROMX
+
+INCLUDE "gfx/pokemon/hoenn_frames.asm"
+INCLUDE "gfx/pokemon/hoenn_frame_pointers.asm"
+
+
 SECTION "Pic Animations Bitmasks", ROMX
 
 ; Bitmasks
@@ -4610,6 +4622,8 @@ INCLUDE "gfx/pokemon/kanto_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/kanto_bitmasks.asm"
 INCLUDE "gfx/pokemon/johto_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/johto_bitmasks.asm"
+INCLUDE "gfx/pokemon/hoenn_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX
@@ -4816,3 +4830,8 @@ SECTION "Johto Base Data", ROMX
 
 INCLUDE "data/pokemon/johto_base_stats.asm"
 INCLUDE "data/pokemon/johto_names.asm"
+
+SECTION "Hoenn Base Data", ROMX
+
+INCLUDE "data/pokemon/hoenn_base_stats.asm"
+INCLUDE "data/pokemon/hoenn_names.asm"

@@ -41,8 +41,10 @@ $(BUILD_DIR)audio.o \
 $(BUILD_DIR)audio/musicplayer.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_entries.o \
 $(BUILD_DIR)data/pokemon/johto_dex_entries.o \
+$(BUILD_DIR)data/pokemon/hoenn_dex_entries.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_order.o \
 $(BUILD_DIR)data/pokemon/johto_dex_order.o \
+$(BUILD_DIR)data/pokemon/hoenn_dex_order.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_order.o \
 $(BUILD_DIR)data/pokemon/sinnoh_dex_order.o \
 $(BUILD_DIR)data/pokemon/unova_dex_order.o \
@@ -53,6 +55,8 @@ $(BUILD_DIR)data/pokemon/kanto_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/kanto_egg_moves.o \
 $(BUILD_DIR)data/pokemon/johto_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/johto_egg_moves.o \
+$(BUILD_DIR)data/pokemon/hoenn_evos_attacks.o \
+$(BUILD_DIR)data/pokemon/hoenn_egg_moves.o \
 $(BUILD_DIR)data/maps/map_data.o \
 $(BUILD_DIR)data/text/common.o \
 $(BUILD_DIR)data/tilesets.o \
@@ -62,6 +66,7 @@ $(BUILD_DIR)gfx/pics.o \
 $(BUILD_DIR)gfx/sprites.o \
 $(BUILD_DIR)gfx/kanto_footprints.o\
 $(BUILD_DIR)gfx/johto_footprints.o\
+$(BUILD_DIR)gfx/hoenn_footprints.o\
 
 ### Build targets
 

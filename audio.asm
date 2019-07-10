@@ -367,5 +367,5 @@ SECTION "Cries", ROMX
 INCLUDE "audio/cries.asm"
 
 INCLUDE "data/pokemon/kanto_cries.asm"
-
 INCLUDE "data/pokemon/johto_cries.asm"
+INCLUDE "data/pokemon/hoenn_cries.asm"
