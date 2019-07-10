@@ -1,10 +1,10 @@
 	db "BUBBLE JET@" ; species name
 	dw 303, 640 ; height, weight
 
-	db   "An evolution of"
-	next "Eevee that has"
-	next "evolved to live"
+	db   "As it uses the"
+	next "fins on the tip"
+	next "of its tail to"
 
-	page "in, control, and"
-	next "even become"
-	next "water.@"
+	page "swim, it blends"
+	next "with the water"
+	next "perfectly.@"

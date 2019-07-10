@@ -1,10 +1,10 @@
 	db "FLAME@" ; species name
 	dw 211, 550 ; height, weight
 
-	db   "An evolution of"
-	next "Eevee capable of"
-	next "creating intense"
+	db   "Once it has stored"
+	next "up enough heat,"
+	next "this #MON's"
 
-	page "flames. Its"
-	next "fluffy fur expels"
-	next "excess body heat.@"
+	page "body temperature"
+	next "can reach up to"
+	next "1700 degrees.@"

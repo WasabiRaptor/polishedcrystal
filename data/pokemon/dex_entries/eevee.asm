@@ -1,10 +1,10 @@
 	db "EVOLUTION@" ; species name
 	dw 100, 140 ; height, weight
 
-	db   "Eevee's DNA is"
-	next "unstable and"
-	next "adapts easily."
-
-	page "This allows it to"
+	db   "Its ability to"
 	next "evolve into many"
-	next "different forms.@"
+	next "forms allows it to"
+
+	page "adapt smoothly"
+	next "and perfectly to"
+	next "any environment.@"

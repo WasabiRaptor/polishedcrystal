@@ -1,10 +1,10 @@
-    db "MUSHROOM@" ; species name
-    dw 104, 99 ; height, weight
+	db "MUSHROOM@" ; species name
+	dw 104, 99 ; height, weight
 
-    db   "If it senses"
-    next "danger, it"
-    next "scatters spores"
+	db   "It spouts poison"
+	next "spores from the"
+	next "top of its head."
 
-    page "from the top of"
-    next "its head to"
-    next "protect itself.@" 
+	page "These spores cause"
+	next "pain all over if"
+	next "inhaled.@"
