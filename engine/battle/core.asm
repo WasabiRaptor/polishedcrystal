@@ -3375,17 +3375,14 @@ LoadEnemyPkmnToSwitchTo:
 	ld [wCurPartyLevel], a
 	ld a, [wCurPartyMon]
 	inc a
-	ld hl, wOTPartyCount
-	ld c, a
-	ld b, 0
-	add hl, bc
+	ld [wCurPartyMon], a
+	ld a, MON_SPECIES_AND_GROUP
+	call GetEnemyPartyParamLocation
+	ld a, [wCurPokeGroup]
+	ld [wTempEnemyMonGroup], a
 	ld a, [hl]
 	ld [wTempEnemyMonSpecies], a
 	ld [wCurPartySpecies], a
-	ld bc, MON_GROUP - MON_SPECIES
-	add hl, bc
-	predef GetPokeGroup
-	ld [wTempEnemyMonGroup], a
 	call LoadEnemyMon
 
 	ld a, [wCurPartySpecies]

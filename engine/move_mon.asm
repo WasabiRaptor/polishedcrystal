@@ -2016,10 +2016,10 @@ GivePoke:: ; e277
 	jr .done
 
 .failed
-	ld a, [wCurPartySpecies]
-	ld [wTempEnemyMonSpecies], a
 	ld a, [wCurPokeGroup]
 	ld [wTempEnemyMonGroup], a
+	ld a, [wCurPartySpecies]
+	ld [wTempEnemyMonSpecies], a
 	farcall LoadEnemyMon
 	ld a, BANK(sBoxMon1Item)
 	call GetSRAMBank
