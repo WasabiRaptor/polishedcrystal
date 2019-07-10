@@ -3388,29 +3388,29 @@ LoadEnemyPkmnToSwitchTo:
 	ld [wCurPartySpecies], a
 	call LoadEnemyMon
 
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .skip_unown
-	ld a, [wFirstUnownSeen]
-	and a
-	jr nz, .skip_unown
-	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
-	ld a, [wCurPokeGroup]
-	ld [wFirstUnownSeen], a
-.skip_unown
+	;ld a, [wCurPartySpecies]
+	;cp UNOWN
+	;jr nz, .skip_unown
+	;ld a, [wFirstUnownSeen]
+	;and a
+	;jr nz, .skip_unown
+	;ld hl, wEnemyMonGroup
+	;predef GetPokeGroup
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstUnownSeen], a
+;.skip_unown
 
-	ld a, [wCurPartySpecies]
-	cp MAGIKARP
-	jr nz, .skip_magikarp
-	ld a, [wFirstMagikarpSeen]
-	and a
-	jr nz, .skip_magikarp
-	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
-	ld a, [wCurPokeGroup]
-	ld [wFirstMagikarpSeen], a
-.skip_magikarp
+	;ld a, [wCurPartySpecies]
+	;cp MAGIKARP
+	;jr nz, .skip_magikarp
+	;ld a, [wFirstMagikarpSeen]
+	;and a
+	;jr nz, .skip_magikarp
+	;ld hl, wEnemyMonGroup
+	;predef GetPokeGroup
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstMagikarpSeen], a
+;.skip_magikarp
 
 	ld hl, wEnemyMonHP
 	ld a, [hli]

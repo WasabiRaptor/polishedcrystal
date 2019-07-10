@@ -587,37 +587,37 @@ AddTempmonToParty: ; da96
 	ld [hl], BASE_HAPPINESS
 .egg
 
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .not_unown
-	ld hl, wPartyMon1Group
-	ld a, [wPartyCount]
-	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	predef GetPokeGroup
-	farcall UpdateUnownDex
-	ld a, [wFirstUnownSeen]
-	and a
-	jr nz, .done
-	ld a, [wCurPokeGroup]
-	ld [wFirstUnownSeen], a
-.not_unown
+	;ld a, [wCurPartySpecies]
+	;cp UNOWN
+	;jr nz, .not_unown
+	;ld hl, wPartyMon1Group
+	;ld a, [wPartyCount]
+	;dec a
+	;ld bc, PARTYMON_STRUCT_LENGTH
+	;rst AddNTimes
+	;predef GetPokeGroup
+	;farcall UpdateUnownDex
+	;ld a, [wFirstUnownSeen]
+	;and a
+	;jr nz, .done
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstUnownSeen], a
+;.not_unown
 
-	ld a, [wCurPartySpecies]
-	cp MAGIKARP
-	jr nz, .done
-	ld hl, wPartyMon1Group
-	ld a, [wPartyCount]
-	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	predef GetPokeGroup
-	ld a, [wFirstMagikarpSeen]
-	and a
-	jr nz, .done
-	ld a, [wCurPokeGroup]
-	ld [wFirstMagikarpSeen], a
+	;ld a, [wCurPartySpecies]
+	;cp MAGIKARP
+	;jr nz, .done
+	;ld hl, wPartyMon1Group
+	;ld a, [wPartyCount]
+	;dec a
+	;ld bc, PARTYMON_STRUCT_LENGTH
+	;rst AddNTimes
+	;predef GetPokeGroup
+	;ld a, [wFirstMagikarpSeen]
+	;and a
+	;jr nz, .done
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstMagikarpSeen], a
 
 .done
 	and a
