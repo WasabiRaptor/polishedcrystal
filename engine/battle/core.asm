@@ -3571,7 +3571,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData ;form is known 
 	ld a, OTPARTYMON
 	ld [wMonType], a
@@ -3777,7 +3777,7 @@ InitBattleMon: ; 3da0d
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld hl, wBattleMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData ;form is known
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a
@@ -3871,7 +3871,7 @@ InitEnemyMon: ; 3dabd
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
@@ -3940,7 +3940,7 @@ ForcePlayerSwitch: ; 3db32
 
 SendOutPlayerMon: ; 3db5f
 	ld hl, wBattleMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	hlcoord 1, 5
 	lb bc, 7, 8
 	call ClearBox
@@ -4914,7 +4914,7 @@ DrawEnemyHUD: ; 3e043
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
@@ -7121,7 +7121,7 @@ endr
 	;inc a
 	;ld b, a
 	;ld a, [wEnemyMonGroup]
-	;and $ff - FORM_MASK
+	;and $ff - GROUP_MASK
 	;add b
 	;ld [wEnemyMonGroup], a
 	; Get letter based on form
@@ -7145,7 +7145,7 @@ endr
 	;inc a
 	;ld b, a
 	;ld a, [wEnemyMonGroup]
-	;and $ff - FORM_MASK
+	;and $ff - GROUP_MASK
 	;add b
 	;ld [wEnemyMonGroup], a
 
@@ -7819,16 +7819,10 @@ GiveExperiencePoints: ; 3ee3b
 
 .skip2
 	ld a, [wCurPartyMon]
-	ld e, a
-	ld d, $0
-	ld hl, wPartySpecies
-	add hl, de
-	ld a, [hl]
-	ld [wCurSpecies], a
-	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	predef GetPokeGroup
+	call GetGroupAndSpecies
+	ld [wCurSpecies], a
 	call GetBaseData ;form is known
 	push bc
 	ld d, MAX_LEVEL
@@ -8058,11 +8052,11 @@ GiveBattleEVs:
 	ld hl, MON_EVS
 	add hl, bc
 	push bc
-	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	push hl
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
+	ld [wCurSpecies], a
 	pop hl
 	call GetBaseData ;form is known
 	; EV yield format:
@@ -8562,10 +8556,9 @@ HandleSafariAngerEatingStatus:
 	jr nz, .finish
 	push hl
 	; reset the catch rate to normal if bait/rock effects have worn off
-	ld a, [wEnemyMonSpecies]
-	ld [wCurSpecies], a
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
+	ld [wCurSpecies], a
 	call GetBaseData ;form is known
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
@@ -8735,7 +8728,7 @@ DropPlayerSub: ; 3f447
 	ld [wCurPartySpecies], a
 	push af
 	ld hl, wBattleMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 
 	call GetPlayerIllusion
 
@@ -8745,7 +8738,7 @@ DropPlayerSub: ; 3f447
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	ld hl, wBattleMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData; form is known
 
 	pop af
@@ -8784,7 +8777,7 @@ DropEnemySub: ; 3f486
 	ld [wCurPartySpecies], a
 	push af
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wEnemyAbility]
 
 	call GetEnemyIllusion
@@ -8796,7 +8789,7 @@ DropEnemySub: ; 3f486
 	ld [wCurPartySpecies], a
 
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData ;form is known
 
 	pop af
@@ -8820,7 +8813,7 @@ GetEnemyIllusion:
 	ld e, a
 	ld a, [wOTPartyCount]
 	ld d, a
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1Group
 	ld a, [wEnemyAbility]
 	jr CheckIllusion
 GetPlayerIllusion:
@@ -8828,7 +8821,7 @@ GetPlayerIllusion:
 	ld e, a
 	ld a, [wPartyCount]
 	ld d, a
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	ld a, [wPlayerAbility]
 CheckIllusion:
 	cp ILLUSION
@@ -8840,15 +8833,10 @@ GetIllusion::
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, [hl] ;species of last mon in party
-	push af
-	ld bc, wPartyMon1Group - wPartyMon1Species
-	add hl, bc
-	predef GetPokeGroup
-	dec hl ;get personality into bc for getting the palette
+	call GetGroupAndSpecies
+	ld bc, MON_PERSONALITY - MON_SPECIES;get personality into bc for getting the palette
 	ld b, h
 	ld c, l
-	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ret

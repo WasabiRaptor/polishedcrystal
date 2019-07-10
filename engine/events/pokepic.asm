@@ -15,7 +15,7 @@ Pokepic:: ; 244e3
 	ld hl, wPartyMon1Group
 	ld a, [wCurPartyMon]
 	farcall GetPartyLocation
-	farcall GetPokeGroup
+	call GetGroupAndSpecies
 .got_palette
 	call UpdateTimePals
 	xor a

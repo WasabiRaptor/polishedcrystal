@@ -225,14 +225,14 @@ BugContest_SetCaughtContestMon: ; e6ce
 	ld a, [wTempEnemyMonSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	ld hl, wTempEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetPokemonName
 	ld hl, .caughttext
 	jp PrintText
 
 .generatestats ; e6fd
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
@@ -2104,7 +2104,7 @@ GetTrademonFrontpic: ; 4d7fd
 	ld de, VTiles2
 	push de
 	push af
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -2392,7 +2392,7 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 
 CheckPartyFullAfterContest: ; 4d9e5
 	ld hl, wContestMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wContestMon]
 	and a
 	jp z, .DidntCatchAnything
@@ -3783,7 +3783,7 @@ CalcLevel: ; 50e1b
 	ld a, [wTempMonSpecies]
 	ld [wCurSpecies], a
 	ld hl, wTempMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData ;form is known
 	ld d, 1
 .next_level

@@ -803,7 +803,7 @@ TradeAnim_AnimateFrontpic: ; 29487
 TradeAnim_GetFrontpic: ; 29491
 	push de
 	push af
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a

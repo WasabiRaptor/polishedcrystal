@@ -169,7 +169,7 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	cp BREEDMON
 	jr nz, .breedmon
 	ld hl, wBufferMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wBufferMon]
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
@@ -327,7 +327,7 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	inc hl
 	ld [hl], "."
 	ld hl, wTempMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetBaseData	
 	hlcoord 10, 0
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
@@ -969,7 +969,7 @@ INCLUDE "data/characteristics.asm"
 
 StatsScreen_PlaceFrontpic: ; 4e226 (13:6226)
 	ld hl, wTempMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call StatsScreen_GetAnimationParam
 	jr c, .egg
 	and a

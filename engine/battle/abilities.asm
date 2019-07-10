@@ -498,10 +498,10 @@ RecieverAbility:
 	ldh a, [hBattleTurn]
 	and a
 	ld bc, wPartyCount
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	jr z, .got_turn
 	ld bc, wOTPartyCount
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1Group
 .got_turn
 	ld a, [bc]
 	cp 1 ;make sure theres more than one mon in the party
@@ -511,13 +511,11 @@ RecieverAbility:
 	rst AddNTimes
 	ld a, [wCurPokeGroup]
 	push af
-	ld a, [hl] ;species of last mon in party
+	call GetGroupAndSpecies
+	;species of last mon in party
 	ld c, a
 	push bc
-	ld bc, wPartyMon1Group - wPartyMon1Species
-	add hl, bc
-	predef GetPokeGroup
-	ld bc, wPartyMon1Ability - wPartyMon1Group
+	ld bc, MON_ABILITY - MON_SPECIES
 	add hl, bc
 	pop bc
 	ld a, [hl]

@@ -92,6 +92,15 @@ RegionalMaxPokemonTable:
 	db REGION_GALAR, NUM_GALAR_SPECIES_AND_FORMS
 	db -1, 0
 
+GetGroupAndSpecies::
+	ld a, [hl]
+	and GROUP_MASK
+	ld [wCurPokeGroup], a
+	ld bc, MON_SPECIES - MON_GROUP
+	add hl, bc
+	ld a, [hl]
+	ret
+
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a
@@ -1479,7 +1488,7 @@ GetLeadAbility::
 	push hl
 	ld [wCurSpecies], a
 	ld hl, wPartyMon1Group
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]
@@ -1661,15 +1670,11 @@ PkmnParamLocation:
 	ret
 
 .species_and_group
-	ld bc, MON_SPECIES
-	add hl, bc
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	push hl
-	ld bc, MON_GROUP - MON_SPECIES
+	ld bc, MON_GROUP
 	add hl, bc
-	predef GetPokeGroup
-	pop hl
+	call GetPartyLocation
+	call GetGroupAndSpecies
 	pop bc
 	ret
 

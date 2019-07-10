@@ -379,7 +379,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld [wCurPartySpecies], a
 	ld bc, wPartyMon1Group - wPartyMon1Species
 	add hl, bc 
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wCurPartySpecies]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
 	ld a, [wCurPartySpecies]

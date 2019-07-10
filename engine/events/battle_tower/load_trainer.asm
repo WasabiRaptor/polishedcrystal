@@ -312,7 +312,7 @@ BT_SetLevel:
 	;get form before base data
 	ld bc, wPartyMon1Group - wPartyMon1	
 	add hl, bc
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 
 	; Get base stats and experience group
 	ld bc, wPartyMon1Species - wPartyMon1Group

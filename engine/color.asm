@@ -698,7 +698,7 @@ GetBattlemonBackpicPalettePointer:
 	jr nz, .no_illusion
 	pop af
 	ld a, [wPartyCount]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	farcall GetIllusion
 	jr .got_illusion
 
@@ -729,7 +729,7 @@ GetEnemyFrontpicPalettePointer:
 	jr nz, .no_illusion
 	pop af
 	ld a, [wOTPartyCount]
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1Group
 	farcall GetIllusion
 	jr .got_illusion
 
@@ -837,7 +837,7 @@ GetMonNormalOrShinyPalettePointer:
 	ld l, c
 	push af
 	inc hl
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	pop af
 	call GetMonPalettePointer
 	pop bc

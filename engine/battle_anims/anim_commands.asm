@@ -870,7 +870,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ld a, [wTempBattleMonSpecies] ; TempBattleMonSpecies
 	ld [wCurPartySpecies], a ; CurPartySpecies
 	ld hl, wBattleMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
+
 	ld de, VTiles0 tile $00
 	predef GetFrontpic
 	jr .done
@@ -879,7 +880,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ld a, [wTempEnemyMonSpecies] ; TempEnemyMonSpecies
 	ld [wCurPartySpecies], a ; CurPartySpecies
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
+
 	ld de, VTiles0 tile $00
 	predef GetBackpic
 
@@ -1137,14 +1139,14 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	jr z, .player
 
 	ld hl, wBattleMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	jr .done
 
 .player
 	ld hl, wEnemyMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld de, VTiles2 tile $31
 	predef GetBackpic
 

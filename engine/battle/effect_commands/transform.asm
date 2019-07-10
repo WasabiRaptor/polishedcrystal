@@ -122,7 +122,7 @@ BattleCommand_transform:
 	ld [wNamedObjectIndexBuffer], a
 	ld bc, wBattleMonGroup - wBattleMonSpecies
 	add hl, bc
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	call GetPokemonName
 	ld hl, wEnemyStatLevels
 	ld de, wPlayerStatLevels

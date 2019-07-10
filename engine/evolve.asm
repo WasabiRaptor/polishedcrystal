@@ -43,7 +43,7 @@ EvolveAfterBattle_MasterLoop:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 
 	ld a, [wCurPokeGroup]
 	call GetRelevantEvosAttacksPointers
@@ -380,7 +380,7 @@ endr
 	jr nz, .skip_unown
 
 	ld hl, wTempMonGroup
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	farcall UpdateUnownDex
 
 .skip_unown

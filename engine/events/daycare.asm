@@ -774,7 +774,7 @@ DayCare_InitBreeding: ; 16a3b
 .GotMother1:
 	ld hl, wBreedMon1Group
 .GotMother2:
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wCurPartySpecies]
 	farcall GetPreEvolution
 	farcall GetPreEvolution
@@ -1044,7 +1044,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld hl, wBreedMon1Group
 	call .inherit_mother_unless_samespecies
 	ld a, [hl]
-	and FORM_MASK
+	and GROUP_MASK
 	ld hl, wEggMonGroup
 	or [hl]
 	ld [hl], a

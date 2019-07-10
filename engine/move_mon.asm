@@ -484,7 +484,7 @@ endr
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	farcall UpdateUnownDex
 
 .done
@@ -1194,7 +1194,7 @@ SentPkmnIntoBox: ; de6e
 	cp UNOWN
 	jr nz, .not_unown
 	ld hl, sBoxMon1Group
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	farcall UpdateUnownDex
 
 .not_unown

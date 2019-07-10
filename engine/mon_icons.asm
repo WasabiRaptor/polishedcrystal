@@ -137,7 +137,7 @@ GetMenuMonIconPalette::
 .got_shininess:
 	push af
 	inc hl ;byte after shiny is form
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 .got_species:
 	call GetRelevantMonIconColors
 	ld a, [wCurPartySpecies]

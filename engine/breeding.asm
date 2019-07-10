@@ -69,8 +69,7 @@ CheckBreedmonCompatibility: ; 16e1d
 ; If either mon is in the No Eggs group,
 ; they are not compatible.
 	ld hl, wBreedMon2Group
-	predef GetPokeGroup
-	ld a, [wBreedMon2Species]
+	call GetGroupAndSpecies
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
@@ -78,8 +77,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	jr z, .Incompatible
 
 	ld hl, wBreedMon1Group
-	predef GetPokeGroup
-	ld a, [wBreedMon1Species]
+	call GetGroupAndSpecies
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
@@ -274,7 +272,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 
 	ld a, [wCurPartySpecies]
 	cp TOGEPI
@@ -637,7 +635,7 @@ GetEggFrontpic: ; 17224 (5:7224)
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wCurSpecies]
 	call GetBaseData ;form is known
 
@@ -652,7 +650,7 @@ GetHatchlingFrontpic: ; 1723c (5:723c)
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	predef GetPokeGroup
+	call GetGroupAndSpecies
 	ld a, [wCurSpecies]
 	call GetBaseData ;form is known
 	pop de
