@@ -1,20 +1,20 @@
-	dw 00150
-	db 106, 110,  90, 130, 154,  90
-    evs  0,   0,   0,   0,   3,   0
-	;   hp  atk  def  spd  sat  sdf
-
-	db PSYCHIC, PSYCHIC ; type
-	db 3 ; catch rate
-	db 255 ; base exp
-	db NO_ITEM, BERSERK_GENE ; items
-	dn GENDERLESS, 15 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/mewtwo/front.dimensions"
-	db PRESSURE ; ability 1
-	db INSOMNIA ; ability 2
-	db UNNERVE ; hidden ability
-	db GROWTH_SLOW ; growth rate
-	dn EGG_NONE, EGG_NONE ; egg groups
-
-	; tmhm
-	tmhm DYNAMICPUNCH, CURSE, CALM_MIND, TOXIC, HAIL, BULK_UP, HIDDEN_POWER, SUNNY_DAY, ICE_BEAM, BLIZZARD, HYPER_BEAM, LIGHT_SCREEN, PROTECT, RAIN_DANCE, SAFEGUARD, BULLDOZE, SOLAR_BEAM, IRON_TAIL, THUNDERBOLT, THUNDER, EARTHQUAKE, RETURN, PSYCHIC, SHADOW_BALL, DOUBLE_TEAM, REFLECT, FLAMETHROWER, SANDSTORM, FIRE_BLAST, SWIFT, AERIAL_ACE, SUBSTITUTE, FACADE, REST, ROCK_SLIDE, ROCK_SMASH, FOCUS_BLAST, ENERGY_BALL, ENDURE, DRAIN_PUNCH, WILL_O_WISP, WATER_PULSE, POISON_JAB, AVALANCHE, GIGA_IMPACT, FLASH, STONE_EDGE, THUNDER_WAVE, STRENGTH, AQUA_TAIL, BODY_SLAM, COUNTER, DOUBLE_EDGE, DREAM_EATER, FIRE_PUNCH, HEADBUTT, ICE_PUNCH, ICY_WIND, PAY_DAY, SEISMIC_TOSS, SKILL_SWAP, SLEEP_TALK, SWAGGER, THUNDERPUNCH, TRICK, ZAP_CANNON, ZEN_HEADBUTT
-	; end
+	dw 00150 ;national dex no
+        
+        db 106, 110,  90, 130, 154,  90
+        evs  0,   0,   0,   0,   3,   0
+        ;   hp  atk  def  spd  sat  sdf
+        
+        db PSYCHIC, PSYCHIC ; type
+        db 3 ; catch rate
+        db 306 ; base exp
+        db NO_ITEM, NO_ITEM ; items
+        dn GENDERLESS, 24 ; gender, step cycles to hatch
+        INCBIN "gfx/pokemon/mewtwo/front.dimensions"  
+        db PRESSURE, PRESSURE     ; abilities
+        db UNNERVE    ; hidden ability
+        db GROWTH_SLOW ; growth rate
+        dn EGG_NONE ; egg groups
+        
+        ; tm/hm learnset
+        tmhm                                            
+        ; end

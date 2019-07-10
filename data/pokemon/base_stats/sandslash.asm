@@ -1,20 +1,20 @@
-	dw 00028
-	db  75, 100, 110,  65,  45,  55
-    evs  0,   0,   2,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
-
-	db GROUND, GROUND ; type
-	db 90 ; catch rate
-	db 158 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	dn FEMALE_50, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/sandslash/front.dimensions"
-	db SAND_VEIL ; ability 1
-	db SAND_VEIL ; ability 2
-	db SAND_RUSH ; hidden ability
-	db GROWTH_MEDIUM_FAST ; growth rate
-	dn EGG_FIELD, EGG_FIELD ; egg groups
-
-	; tmhm
-	tmhm DYNAMICPUNCH, CURSE, TOXIC, HIDDEN_POWER, SUNNY_DAY, HONE_CLAWS, HYPER_BEAM, PROTECT, SAFEGUARD, BULLDOZE, IRON_TAIL, EARTHQUAKE, RETURN, DIG, DOUBLE_TEAM, SANDSTORM, SWIFT, AERIAL_ACE, SUBSTITUTE, FACADE, REST, ATTRACT, THIEF, ROCK_SLIDE, ROCK_SMASH, FOCUS_BLAST, X_SCISSOR, ENDURE, SHADOW_CLAW, POISON_JAB, GIGA_IMPACT, STONE_EDGE, GYRO_BALL, SWORDS_DANCE, CUT, STRENGTH, BODY_SLAM, COUNTER, DEFENSE_CURL, DOUBLE_EDGE, EARTH_POWER, HEADBUTT, KNOCK_OFF, ROLLOUT, SEISMIC_TOSS, SLEEP_TALK, SWAGGER
-	; end
+	dw 00028 ;national dex no
+        
+        db  75, 100, 110,  65,  45,  55
+        evs  0,   0,   2,   0,   0,   0
+        ;   hp  atk  def  spd  sat  sdf
+        
+        db GROUND, GROUND ; type
+        db 90 ; catch rate
+        db 158 ; base exp
+        db NO_ITEM, NO_ITEM ; items
+        dn FEMALE_50, 4 ; gender, step cycles to hatch
+        INCBIN "gfx/pokemon/sandslash/front.dimensions"  
+        db SAND_VEIL, SAND_VEIL     ; abilities
+        db SAND_RUSH    ; hidden ability
+        db GROWTH_MEDIUM_FAST ; growth rate
+        dn EGG_FIELD ; egg groups
+        
+        ; tm/hm learnset
+        tmhm                                            
+        ; end

@@ -1,20 +1,20 @@
-	dw 00185
-	db  70, 100, 115,  30,  30,  65
-    evs  0,   0,   2,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
-
-	db ROCK, ROCK ; type
-	db 65 ; catch rate
-	db 144 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	dn FEMALE_50, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/sudowoodo/front.dimensions"
-	db STURDY ; ability 1
-	db ROCK_HEAD ; ability 2
-	db RATTLED ; hidden ability
-	db GROWTH_MEDIUM_FAST ; growth rate
-	dn EGG_MINERAL, EGG_MINERAL ; egg groups
-
-	; tmhm
-	tmhm DYNAMICPUNCH, CURSE, CALM_MIND, TOXIC, HIDDEN_POWER, SUNNY_DAY, PROTECT, BULLDOZE, EARTHQUAKE, RETURN, DIG, DOUBLE_TEAM, SANDSTORM, SUBSTITUTE, FACADE, REST, ATTRACT, THIEF, ROCK_SLIDE, ROCK_SMASH, ENDURE, EXPLOSION, STONE_EDGE, STRENGTH, BODY_SLAM, COUNTER, DEFENSE_CURL, DOUBLE_EDGE, EARTH_POWER, FIRE_PUNCH, HEADBUTT, ICE_PUNCH, IRON_HEAD, ROLLOUT, SEISMIC_TOSS, SLEEP_TALK, SUCKER_PUNCH, SWAGGER, THUNDERPUNCH
-	; end
+	dw 00185 ;national dex no
+        
+        db  70, 100, 115,  30,  30,  65
+        evs  0,   0,   2,   0,   0,   0
+        ;   hp  atk  def  spd  sat  sdf
+        
+        db ROCK, ROCK ; type
+        db 65 ; catch rate
+        db 144 ; base exp
+        db NO_ITEM, NO_ITEM ; items
+        dn FEMALE_50, 4 ; gender, step cycles to hatch
+        INCBIN "gfx/pokemon/sudowoodo/front.dimensions"  
+        db STURDY, ROCK_HEAD     ; abilities
+        db RATTLED    ; hidden ability
+        db GROWTH_MEDIUM_FAST ; growth rate
+        dn EGG_MINERAL ; egg groups
+        
+        ; tm/hm learnset
+        tmhm                                            
+        ; end

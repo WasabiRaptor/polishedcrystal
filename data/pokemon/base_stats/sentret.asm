@@ -1,20 +1,20 @@
-	dw 00161
-	db  35,  46,  34,  20,  35,  45
-    evs  0,   1,   0,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
-
-	db NORMAL, NORMAL ; type
-	db 255 ; catch rate
-	db 43 ; base exp
-	db NO_ITEM, ORAN_BERRY ; items
-	dn FEMALE_50, 2 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/sentret/front.dimensions"
-	db RUN_AWAY ; ability 1
-	db KEEN_EYE ; ability 2
-	db FRISK ; hidden ability
-	db GROWTH_MEDIUM_FAST ; growth rate
-	dn EGG_FIELD, EGG_FIELD ; egg groups
-
-	; tmhm
-	tmhm DYNAMICPUNCH, CURSE, TOXIC, BULK_UP, HIDDEN_POWER, SUNNY_DAY, HONE_CLAWS, ICE_BEAM, PROTECT, RAIN_DANCE, SOLAR_BEAM, IRON_TAIL, THUNDERBOLT, RETURN, DIG, SHADOW_BALL, DOUBLE_TEAM, FLAMETHROWER, SWIFT, SUBSTITUTE, FACADE, REST, ATTRACT, THIEF, ROCK_SMASH, ENDURE, WATER_PULSE, SHADOW_CLAW, U_TURN, CUT, SURF, WHIRLPOOL, AQUA_TAIL, BODY_SLAM, DEFENSE_CURL, DOUBLE_EDGE, FIRE_PUNCH, HEADBUTT, HYPER_VOICE, ICE_PUNCH, KNOCK_OFF, ROLLOUT, SLEEP_TALK, SUCKER_PUNCH, SWAGGER, THUNDERPUNCH, TRICK
-	; end
+	dw 00161 ;national dex no
+        
+        db  35,  46,  34,  20,  35,  45
+        evs  0,   1,   0,   0,   0,   0
+        ;   hp  atk  def  spd  sat  sdf
+        
+        db NORMAL, NORMAL ; type
+        db 255 ; catch rate
+        db 43 ; base exp
+        db NO_ITEM, NO_ITEM ; items
+        dn FEMALE_50, 3 ; gender, step cycles to hatch
+        INCBIN "gfx/pokemon/sentret/front.dimensions"  
+        db RUN_AWAY, KEEN_EYE     ; abilities
+        db FRISK    ; hidden ability
+        db GROWTH_MEDIUM_FAST ; growth rate
+        dn EGG_FIELD ; egg groups
+        
+        ; tm/hm learnset
+        tmhm                                            
+        ; end
