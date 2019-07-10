@@ -42,6 +42,18 @@
 # swap files for gedit
 *~
 
+# graphics stuff
+*.dimensions
+*.gbcpal
+*.2bpp
+*.1bpp
+*.lz
+*.animated.tilemap
+gfx/pokemon/*/bitmask.asm
+gfx/pokemon/*/frames.asm
+!gfx/pokemon/unown/bitmask.asm
+!gfx/pokemon/unown/frames.asm
+
 # VSCode stuff
 .vscode/
 build/
