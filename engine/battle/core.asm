@@ -3374,10 +3374,13 @@ LoadEnemyPkmnToSwitchTo:
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, [wCurPartyMon]
+	push af
 	inc a
 	ld [wCurPartyMon], a
 	ld a, MON_SPECIES_AND_GROUP
 	call GetEnemyPartyParamLocation
+	pop af
+	ld [wCurPartyMon], a
 	ld a, [wCurPokeGroup]
 	ld [wTempEnemyMonGroup], a
 	ld a, [hl]

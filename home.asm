@@ -52,6 +52,7 @@ IsAPokemon::
 ; Since every ID other than $0 and $ff is valid, we can simplify this function.
 	and a
 	jp z, .not_a_pokemon
+	push hl
 	push bc
 	push de
 	push af
@@ -66,13 +67,16 @@ IsAPokemon::
 	cp d
 	jr c, .not_a_pokemon_2
 	ld a, d
+	and a
 	pop de
 	pop bc
+	pop hl
 	ret
 
 .not_a_pokemon_2
 	pop de
 	pop bc
+	pop hl
 .not_a_pokemon
 	scf
 	ret
