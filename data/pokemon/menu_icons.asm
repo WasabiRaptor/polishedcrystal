@@ -318,7 +318,7 @@ MarshtompIcon::
 SwampertIcon::
 PoochyenaIcon::
 MightyenaIcon::
-ZizagoonIcon::
+ZigzagoonIcon::
 LinooneIcon::
 WurmpleIcon::
 SilcoonIcon::
@@ -331,7 +331,7 @@ LudicoloIcon::
 SeedotIcon::
 NuzleafIcon::
 ShiftryIcon::
-TailowIcon::
+TaillowIcon::
 SwellowIcon::
 WingullIcon::
 PelipperIcon::
@@ -343,9 +343,9 @@ SurskitIcon::
 MasquerainIcon::
 ShroomishIcon::
 BreloomIcon::
-SlackothIcon::
+SlakothIcon::
 VigorothIcon::
-SlackingIcon::
+SlakingIcon::
 NincadaIcon::
 NinjaskIcon::
 ShedinjaIcon::

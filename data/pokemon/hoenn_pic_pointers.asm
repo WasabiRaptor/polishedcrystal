@@ -10,7 +10,7 @@ HoennPicPointers::
 	add_pics Swampert
 	add_pics Poochyena
 	add_pics Mightyena
-	add_pics Zizagoon
+	add_pics Zigzagoon
 	add_pics Linoone
 	add_pics Wurmple
 	add_pics Silcoon
@@ -23,7 +23,7 @@ HoennPicPointers::
 	add_pics Seedot
 	add_pics Nuzleaf
 	add_pics Shiftry
-	add_pics Tailow
+	add_pics Taillow
 	add_pics Swellow
 	add_pics Wingull
 	add_pics Pelipper
@@ -35,9 +35,9 @@ HoennPicPointers::
 	add_pics Masquerain
 	add_pics Shroomish
 	add_pics Breloom
-	add_pics Slackoth
+	add_pics Slakoth
 	add_pics Vigoroth
-	add_pics Slacking
+	add_pics Slaking
 	add_pics Nincada
 	add_pics Ninjask
 	add_pics Shedinja 

@@ -25,7 +25,7 @@ MudkipEggMoves::
 PoochyenaEggMoves::
     db $ff
 
-ZizagoonEggMoves::
+ZigzagoonEggMoves::
     db $ff
 
 WurmpleEggMoves::
@@ -42,7 +42,7 @@ SeedotEggMoves::
     db $ff
 
 
-TailowEggMoves::
+TaillowEggMoves::
     db $ff
 
 WingullEggMoves::
@@ -59,7 +59,7 @@ SurskitEggMoves::
 ShroomishEggMoves::
     db $ff
 
-SlackothEggMoves::
+SlakothEggMoves::
     db $ff
 
 

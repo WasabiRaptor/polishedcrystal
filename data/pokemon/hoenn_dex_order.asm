@@ -15,7 +15,7 @@ HoennDexOrder::
 	db SWAMPERT
 	db POOCHYENA
 	db MIGHTYENA
-	db ZIZAGOON
+	db ZIGZAGOON
 	db LINOONE
 	db WURMPLE
 	db SILCOON
@@ -28,7 +28,7 @@ HoennDexOrder::
 	db SEEDOT
 	db NUZLEAF
 	db SHIFTRY
-	db TAILOW
+	db TAILLOW
 	db SWELLOW
 	db WINGULL
 	db PELIPPER
@@ -40,9 +40,9 @@ HoennDexOrder::
 	db MASQUERAIN
 	db SHROOMISH
 	db BRELOOM
-	db SLACKOTH
+	db SLAKOTH
 	db VIGOROTH
-	db SLACKING
+	db SLAKING
 	db NINCADA
 	db NINJASK
 	db SHEDINJA 

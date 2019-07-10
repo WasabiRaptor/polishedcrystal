@@ -10,7 +10,7 @@ HoennEggMovePointers::
 	add_eggmoves NoHoenn
 	add_eggmoves Poochyena
 	add_eggmoves NoHoenn
-	add_eggmoves Zizagoon
+	add_eggmoves Zigzagoon
 	add_eggmoves NoHoenn
 	add_eggmoves Wurmple
 	add_eggmoves NoHoenn
@@ -23,7 +23,7 @@ HoennEggMovePointers::
 	add_eggmoves Seedot
 	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn
-	add_eggmoves Tailow
+	add_eggmoves Taillow
 	add_eggmoves NoHoenn
 	add_eggmoves Wingull
 	add_eggmoves NoHoenn
@@ -35,7 +35,7 @@ HoennEggMovePointers::
 	add_eggmoves NoHoenn
 	add_eggmoves Shroomish
 	add_eggmoves NoHoenn
-	add_eggmoves Slackoth
+	add_eggmoves Slakoth
 	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn
 	add_eggmoves Nincada

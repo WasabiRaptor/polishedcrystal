@@ -45,7 +45,6 @@ $(BUILD_DIR)data/pokemon/hoenn_dex_entries.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_order.o \
 $(BUILD_DIR)data/pokemon/johto_dex_order.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_order.o \
-$(BUILD_DIR)data/pokemon/hoenn_dex_order.o \
 $(BUILD_DIR)data/pokemon/sinnoh_dex_order.o \
 $(BUILD_DIR)data/pokemon/unova_dex_order.o \
 $(BUILD_DIR)data/pokemon/kalos_dex_order.o \

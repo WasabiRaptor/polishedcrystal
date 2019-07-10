@@ -406,7 +406,7 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon SWAMPERT
 	nat_dexmon POOCHYENA
 	nat_dexmon MIGHTYENA
-	nat_dexmon ZIZAGOON
+	nat_dexmon ZIGZAGOON
 	nat_dexmon LINOONE
 	nat_dexmon WURMPLE
 	nat_dexmon SILCOON
@@ -419,7 +419,7 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon SEEDOT
 	nat_dexmon NUZLEAF
 	nat_dexmon SHIFTRY
-	nat_dexmon TAILOW
+	nat_dexmon TAILLOW
 	nat_dexmon SWELLOW
 	nat_dexmon WINGULL
 	nat_dexmon PELIPPER
@@ -431,9 +431,9 @@ NUM_UNOWN EQU const_value + -1 ; 26
 	nat_dexmon MASQUERAIN
 	nat_dexmon SHROOMISH
 	nat_dexmon BRELOOM
-	nat_dexmon SLACKOTH
+	nat_dexmon SLAKOTH
 	nat_dexmon VIGOROTH
-	nat_dexmon SLACKING
+	nat_dexmon SLAKING
 	nat_dexmon NINCADA
 	nat_dexmon NINJASK
 	nat_dexmon SHEDINJA 

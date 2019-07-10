@@ -10,7 +10,7 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Swampert
 	add_pokedexentry Poochyena
 	add_pokedexentry Mightyena
-	add_pokedexentry Zizagoon
+	add_pokedexentry Zigzagoon
 	add_pokedexentry Linoone
 	add_pokedexentry Wurmple
 	add_pokedexentry Silcoon
@@ -23,7 +23,7 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Seedot
 	add_pokedexentry Nuzleaf
 	add_pokedexentry Shiftry
-	add_pokedexentry Tailow
+	add_pokedexentry Taillow
 	add_pokedexentry Swellow
 	add_pokedexentry Wingull
 	add_pokedexentry Pelipper
@@ -35,9 +35,9 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Masquerain
 	add_pokedexentry Shroomish
 	add_pokedexentry Breloom
-	add_pokedexentry Slackoth
+	add_pokedexentry Slakoth
 	add_pokedexentry Vigoroth
-	add_pokedexentry Slacking
+	add_pokedexentry Slaking
 	add_pokedexentry Nincada
 	add_pokedexentry Ninjask
 	add_pokedexentry Shedinja 

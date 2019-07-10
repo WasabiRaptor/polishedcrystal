@@ -10,7 +10,7 @@ HoennIconPointers::
 	add_evosattacks Swampert
 	add_evosattacks Poochyena
 	add_evosattacks Mightyena
-	add_evosattacks Zizagoon
+	add_evosattacks Zigzagoon
 	add_evosattacks Linoone
 	add_evosattacks Wurmple
 	add_evosattacks Silcoon
@@ -23,7 +23,7 @@ HoennIconPointers::
 	add_evosattacks Seedot
 	add_evosattacks Nuzleaf
 	add_evosattacks Shiftry
-	add_evosattacks Tailow
+	add_evosattacks Taillow
 	add_evosattacks Swellow
 	add_evosattacks Wingull
 	add_evosattacks Pelipper
@@ -35,9 +35,9 @@ HoennIconPointers::
 	add_evosattacks Masquerain
 	add_evosattacks Shroomish
 	add_evosattacks Breloom
-	add_evosattacks Slackoth
+	add_evosattacks Slakoth
 	add_evosattacks Vigoroth
-	add_evosattacks Slacking
+	add_evosattacks Slaking
 	add_evosattacks Nincada
 	add_evosattacks Ninjask
 	add_evosattacks Shedinja 

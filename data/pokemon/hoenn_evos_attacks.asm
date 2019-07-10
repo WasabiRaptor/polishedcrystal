@@ -51,7 +51,7 @@ MightyenaEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-ZizagoonEvosAttacks:
+ZigzagoonEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
@@ -103,7 +103,7 @@ ShiftryEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-TailowEvosAttacks:
+TaillowEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
@@ -151,7 +151,7 @@ BreloomEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-SlackothEvosAttacks:
+SlakothEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
@@ -159,7 +159,7 @@ VigorothEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-SlackingEvosAttacks:
+SlakingEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
@@ -415,7 +415,7 @@ MiloticEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-Castform EvosAttacks:
+CastformEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves

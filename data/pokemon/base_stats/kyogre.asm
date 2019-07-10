@@ -6,7 +6,7 @@
         
         db WATER, WATER ; type
         db 3 ; catch rate
-        db 302 ; base exp
+        db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn GENDERLESS, 15 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/kyogre/front.dimensions"  
