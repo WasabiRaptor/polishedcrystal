@@ -219,8 +219,9 @@ PopulateBattleTowerTeam:
 	dec d
 	push de
 	ld a, d
-	ld hl, wOTPartyMon1Species
-	call GetPartyLocation
+	ld [wCurPartyMon], a
+	ld a, MON_SPECIES_AND_GROUP
+	call GetEnemyPartyParamLocation
 	ld a, [hl]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName

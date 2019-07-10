@@ -48,7 +48,7 @@ TryAddMonToParty: ; d88c
 	ld bc, NAME_LENGTH
 	rst CopyBytes
 	ld a, [wCurPartySpecies]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld a, [wMonType]
 	and $f
@@ -1572,13 +1572,9 @@ ComputeNPCTrademonStats: ; e134
 
 UpdateEnemyPkmnStats:
 ; Recalculates the stats of wOTPartyMon and also updates current HP accordingly
-	ld a, MON_SPECIES
+	ld a, MON_SPECIES_AND_GROUP
 	call GetEnemyPartyParamLocation
 	ld a, [hl]
-	ld [wCurSpecies], a
-	ld a, MON_GROUP
-	call GetEnemyPartyParamLocation
-	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld a, MON_LEVEL
 	call GetEnemyPartyParamLocation
@@ -1606,10 +1602,6 @@ UpdatePkmnStats:
 	ld a, MON_SPECIES_AND_GROUP
 	call GetPartyParamLocation
 	ld a, [hl]
-	ld [wCurSpecies], a
-	ld a, MON_GROUP
-	call GetPartyParamLocation
-	predef GetPokeGroup
 	call GetBaseData ;form is known
 	ld a, MON_LEVEL
 	call GetPartyParamLocation

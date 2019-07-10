@@ -21,6 +21,31 @@
 ; TODO: boss trainers need better movesets, held items, natures, and abilities
 ; TODO: swap ABILITY_1 and ABILITY_2 in base data as need so that ABILITY_1 is the better one for default NPCs (e.g. NPCs should have Sturdy when possible)
 
+trainer_mon: macro
+	db \1, \2, GROUP_\2
+	if _NARG >=3
+	db \3
+	if _NARG >=4
+	db \4
+	if _NARG >=5
+	db \5
+	if _NARG >=6
+	db \6
+	if _NARG >=7
+	db \7
+	if _NARG >=8
+	db \8
+	if _NARG >=9
+	db \9
+	endc
+	endc
+	endc
+	endc
+	endc
+	endc
+	endc
+endm
+
 
 SECTION "Enemy Trainer Parties 1", ROMX
 
@@ -454,9 +479,9 @@ YoungsterGroup:
 	db "Joey@"
 	db TRAINERTYPE_DVS | TRAINERTYPE_PERSONALITY 
 	; party
-	db 5, SENTRET, PERFECT_DVS, HIDDEN_ABILITY | ADAMANT, GROUP_SENTRET
-	db 5, SENTRET, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, GROUP_SENTRET
-	db 5, SENTRET, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, GROUP_SENTRET
+	trainer_mon 5, SENTRET, PERFECT_DVS, HIDDEN_ABILITY | ADAMANT, MALE 
+	trainer_mon 5, SENTRET, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, MALE 
+	trainer_mon 5, SENTRET, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, MALE
 	db -1 ; end
 
 ; ================

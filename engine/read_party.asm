@@ -41,6 +41,10 @@ ReadTrainerParty: ; 39771
 	call GetNextTrainerDataByte
 	ld [wCurPartySpecies], a
 
+	call GetNextTrainerDataByte
+	ld [wCurPokeGroup], a
+	ld [wCurGenderOrGroupBuffer], a
+
 	ld a, OTPARTYMON
 	ld [wMonType], a
 
@@ -144,10 +148,14 @@ endr
 	ld e, l
 	pop hl
 
+	ld a, [wCurGenderOrGroupBuffer]
+	ld b, a
+
 	call GetNextTrainerDataByte
 	ld [de], a
 	inc de
 	call GetNextTrainerDataByte
+	or b
 	ld [de], a
 
 .not_personality

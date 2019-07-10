@@ -4848,14 +4848,12 @@ endr
 	ld bc, $0011
 	rst CopyBytes
 	ld a, [wCurBattleMon]
-	ld hl, wPartyMon1Species
-	call GetPartyLocation
+	ld [wCurPartyMon], a
+	ld a, MON_SPECIES_AND_GROUP
+	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld bc, MON_GROUP - MON_SPECIES
-	add hl, bc
-	predef GetPokeGroup
 	call GetBaseData ;form is known
 
 	pop hl
@@ -7310,7 +7308,7 @@ endr
 	inc de
 	dec b
 	jr nz, .loop
-
+	
 	ld a, [wTempEnemyMonSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
@@ -9036,25 +9034,25 @@ InitEnemyWildmon: ; 3f607
 	ld hl, wEnemyMonGroup
 	predef GetPokeGroup
 
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .skip_unown
-	ld a, [wFirstUnownSeen]
-	and a
-	jr nz, .skip_unown
-	ld a, [wCurPokeGroup]
-	ld [wFirstUnownSeen], a
-.skip_unown
+	;ld a, [wCurPartySpecies]
+	;cp UNOWN
+	;jr nz, .skip_unown
+	;ld a, [wFirstUnownSeen]
+	;and a
+	;jr nz, .skip_unown
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstUnownSeen], a
+;.skip_unown
 
-	ld a, [wCurPartySpecies]
-	cp MAGIKARP
-	jr nz, .skip_magikarp
-	ld a, [wFirstMagikarpSeen]
-	and a
-	jr nz, .skip_magikarp
-	ld a, [wCurPokeGroup]
-	ld [wFirstMagikarpSeen], a
-.skip_magikarp
+	;ld a, [wCurPartySpecies]
+	;cp MAGIKARP
+	;jr nz, .skip_magikarp
+	;ld a, [wFirstMagikarpSeen]
+	;and a
+	;jr nz, .skip_magikarp
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstMagikarpSeen], a
+;.skip_magikarp
 
 	ld de, VTiles2
 	predef FrontpicPredef
