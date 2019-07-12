@@ -860,6 +860,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	push af
 	ld a, 1
 	ldh [rSVBK], a
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 
@@ -867,20 +869,16 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	and a
 	jr z, .player
 
-	ld a, [wTempBattleMonSpecies] ; TempBattleMonSpecies
-	ld [wCurPartySpecies], a ; CurPartySpecies
-	ld hl, wBattleMonGroup
-	call GetGroupAndSpecies
+	ld hl, wTempBattleyMon
+	call TempToCurPartyGroupAndSpecies
 
 	ld de, VTiles0 tile $00
 	predef GetFrontpic
 	jr .done
 
 .player
-	ld a, [wTempEnemyMonSpecies] ; TempEnemyMonSpecies
-	ld [wCurPartySpecies], a ; CurPartySpecies
-	ld hl, wEnemyMonGroup
-	call GetGroupAndSpecies
+	ld hl, wTempEnemyMon
+	call TempToCurPartyGroupAndSpecies
 
 	ld de, VTiles0 tile $00
 	predef GetBackpic
@@ -888,6 +886,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 .done
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
+	pop af
+	ld [wCurPartyGroup], a
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1104,6 +1104,8 @@ BattleAnimCmd_DropSub: ; cc750 (33:4750)
 	ld a, $1
 	ldh [rSVBK], a
 
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 	ldh a, [hBattleTurn]
@@ -1120,6 +1122,8 @@ BattleAnimCmd_DropSub: ; cc750 (33:4750)
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
 	pop af
+	ld [wCurPartyGroup], a
+	pop af
 	ldh [rSVBK], a
 	ret
 
@@ -1128,6 +1132,8 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	push af
 	ld a, $1
 	ldh [rSVBK], a
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 
@@ -1139,20 +1145,22 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	jr z, .player
 
 	ld hl, wBattleMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	jr .done
 
 .player
 	ld hl, wEnemyMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	ld de, VTiles2 tile $31
 	predef GetBackpic
 
 .done
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
+	pop af
+	ld [wCurPartyGroup], a
 	ld b, CGB_BATTLE_COLORS
 	call GetCGBLayout
 	pop af

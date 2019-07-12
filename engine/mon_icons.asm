@@ -137,8 +137,8 @@ GetMenuMonIconPalette::
 	and a
 .got_shininess:
 	push af
-	inc hl ;byte after shiny is form
-	call GetGroupAndSpecies
+	;inc hl ;byte after shiny is form
+	;call GetPartyMonGroupSpeciesAndForm
 .got_species:
 	call GetRelevantMonIconColors
 	ld a, [wCurPartySpecies]

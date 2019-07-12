@@ -169,9 +169,7 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	cp BREEDMON
 	jr nz, .breedmon
 	ld hl, wBufferMonGroup
-	call GetGroupAndSpecies
-	ld a, [wBufferMon]
-	ld [wCurSpecies], a
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld hl, wBufferMon
 	ld de, wTempMon
@@ -327,7 +325,7 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	inc hl
 	ld [hl], "."
 	ld hl, wTempMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData	
 	hlcoord 10, 0
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
@@ -969,7 +967,7 @@ INCLUDE "data/characteristics.asm"
 
 StatsScreen_PlaceFrontpic: ; 4e226 (13:6226)
 	ld hl, wTempMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	call StatsScreen_GetAnimationParam
 	jr c, .egg
 	and a
@@ -1048,7 +1046,7 @@ StatsScreen_GetAnimationParam: ; 4e2ad (13:62ad)
 
 .PartyMon: ; 4e2bf (13:62bf)
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld b, h

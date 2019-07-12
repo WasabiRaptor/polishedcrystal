@@ -181,11 +181,9 @@ RunTradeAnimSequence: ; 28fa1
 	farcall GetTrademonFrontpic
 	call EnableLCD
 	call LoadTradeBallAndCableGFX
-	ld a, [wPlayerTrademonSpecies]
 	ld hl, wPlayerTrademonGroup
 	ld de, VTiles0
 	call TradeAnim_GetFrontpic
-	ld a, [wOTTrademonSpecies]
 	ld hl, wOTTrademonGroup
 	ld de, VTiles0 tile $31
 	call TradeAnim_GetFrontpic
@@ -802,11 +800,7 @@ TradeAnim_AnimateFrontpic: ; 29487
 
 TradeAnim_GetFrontpic: ; 29491
 	push de
-	push af
-	call GetGroupAndSpecies
-	pop af
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData
 	pop de
 	predef GetFrontpic

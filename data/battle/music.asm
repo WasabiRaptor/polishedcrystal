@@ -16,7 +16,8 @@ PlayBattleMusic: ; 2ee6c
 	and a
 	jr nz, .trainermusic
 
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurGroupAndSpecies
 	ld hl, .legendaries
 	call .loadfromarray
 	jr c, .done

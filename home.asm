@@ -92,13 +92,42 @@ RegionalMaxPokemonTable:
 	db REGION_GALAR, NUM_GALAR_SPECIES_AND_FORMS
 	db -1, 0
 
-GetGroupAndSpecies::
-	ld a, [hl]
-	and GROUP_MASK
-	ld [wCurPokeGroup], a
-	ld bc, MON_SPECIES - MON_GROUP
+GetPartyMonGroupSpeciesAndForm::
+	push bc
+	ld a, [hli]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [hl] ;Species
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
 	add hl, bc
-	ld a, [hl]
+	ld a, [hl]	;form
+	and FORM_MASK
+	ld [wCurForm], a
+	ret
+
+CurPartyGroupAndSpeciesToTemp::
+	ld a, [wCurPartyGroup]
+	ld [hli], a
+	ld a, [wCurPartySpecies]
+	ld [hl], a
+	ret
+
+TempToCurGroupAndSpecies::
+	ld a, [hli]
+	ld [wCurGroup], a
+	ld a [hl]
+	ld [wCurSpecies], a
+	ret
+
+TempToCurPartyGroupAndSpecies::
+	ld a, [hli]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a [hl]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	ret
 
 DisableSpriteUpdates:: ; 0x2ed3
@@ -1478,7 +1507,7 @@ GetLeadAbility::
 	and IS_EGG_MASK
 	xor IS_EGG_MASK
 	ret z
-	ld a, [wPartyMon1Species]
+	ld a, [wPartyMon1Species] ;merely making sure that party mon 1 is a pokemon I guess
 	inc a
 	ret z
 	dec a
@@ -1486,9 +1515,8 @@ GetLeadAbility::
 	push bc
 	push de
 	push hl
-	ld [wCurSpecies], a
-	ld hl, wPartyMon1Group
-	call GetGroupAndSpecies
+	ld hl, wPartyMon1
+	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]
@@ -1658,7 +1686,7 @@ GetPartyParamLocation:: ; 3917
 	push bc
 	ld hl, wPartyMons
 PkmnParamLocation:
-	cp MON_SPECIES_AND_GROUP
+	cp MON_GROUP_SPECIES_AND_FORM
 	jp z, .species_and_group
 
 	ld c, a
@@ -1671,10 +1699,8 @@ PkmnParamLocation:
 
 .species_and_group
 	ld a, [wCurPartyMon]
-	ld bc, MON_GROUP
-	add hl, bc
 	call GetPartyLocation
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	pop bc
 	ret
 

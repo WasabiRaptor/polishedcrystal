@@ -305,8 +305,12 @@ wCurItem::
 wMartItemID::
 wCurItemQuantity::
 	ds 1
+
+wCurPartyGroup::
+	ds 1
 wCurPartySpecies::
 	ds 1
+
 wCurPartyMon::
 ; contains which monster in a party
 ; is being dealt with at the moment
@@ -501,11 +505,16 @@ NEXTU
 	ds 7
 wCurEnemyItem:: ds 1
 	ds 15
-wTempEnemyMonSpecies:: ds 1
-wTempBattleMonSpecies:: ds 1
 
+wTempEnemyMon::
 wTempEnemyMonGroup:: ds 1
+wTempEnemyMonSpecies:: ds 1
+wTempEnemyMonForm:: ds 1
+
+wTempBattleMon::
 wTempBattleMonGroup:: ds 1
+wTempBattleMonSpecies:: ds 1
+wTempBattleMonForm:: ds 1
 
 ENDU
 

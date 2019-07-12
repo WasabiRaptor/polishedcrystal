@@ -1067,7 +1067,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld hl, wTempMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
@@ -1720,7 +1720,7 @@ StatsScreenDPad: ; e2f95 (38:6f95)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld hl, wTempMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	jp BillsPC_CopyMon
 
@@ -2112,7 +2112,7 @@ MovePKMNWitoutMail_InsertMon: ; e31e7
 	call CopyNicknameToTemp
 	ld hl, wPartyMonOT
 	call CopyOTNameToTemp
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyMonToTemp
 	xor a

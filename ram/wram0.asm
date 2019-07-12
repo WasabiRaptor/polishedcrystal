@@ -904,10 +904,13 @@ wcf5d:: ds 2 ; TODO: replace with meaningful label
 
 wMonType:: ds 1
 
+wCurGroup:: 
+	ds 1
 wCurSpecies::
 wCurMove::
 wCreditsSpawn::
 	ds 1
+wCurForm:: ds 1
 
 wNamedObjectTypeBuffer:: ds 1
 wCurrentOptionsPage:: ds 1
@@ -963,7 +966,6 @@ wPalFadeMode::
 ; bit 4: skip the last palette
 	ds 1
 
-wCurPokeGroup:: ds 1
 wCurGenderOrGroupBuffer:: ds 1
 wCurPersonality:: ds 1
 wGiftPokeTID:: ds 2

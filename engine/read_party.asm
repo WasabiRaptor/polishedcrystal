@@ -259,7 +259,7 @@ endr
 
 	ld a, [wOTPartyCount]
 	dec a
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld d, h

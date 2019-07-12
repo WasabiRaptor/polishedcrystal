@@ -741,20 +741,28 @@ DayCare_InitBreeding: ; 16a3b
 	ld hl, wEggOT
 	ld bc, NAME_LENGTH
 	call ByteFill
-	ld a, [wBreedMon1Species]
-	ld [wCurPartySpecies], a
+	ld hl, wBreedMon1
+	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wBreedMon1Gender]
 	ld [wTempMonGender], a
 	ld a, $3
 	ld [wMonType], a
+	ld a, [wBreedmon1Group]
+	cp REGION_KANTO
 	ld a, [wBreedMon1Species]
+	jr nz, .not_ditto_1
 	cp DITTO
 	ld a, $1
 	jr z, .LoadWhichBreedmonIsTheMother
+.not_ditto_1
+	ld a, [wBreedmon2Group]
+	cp REGION_KANTO
 	ld a, [wBreedMon2Species]
+	jr nz, .not_ditto_2
 	cp DITTO
 	ld a, 0 ; not xor a; preserve carry flag
 	jr z, .LoadWhichBreedmonIsTheMother
+.not_ditto_2
 	farcall GetGender
 	ld a, 0 ; not xor a; preserve carry flag
 	jr z, .LoadWhichBreedmonIsTheMother
@@ -769,12 +777,12 @@ DayCare_InitBreeding: ; 16a3b
 
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
-	ld hl, wBreedMon2Group
+	ld hl, wBreedMon2
 	jr .GotMother2
 .GotMother1:
-	ld hl, wBreedMon1Group
+	ld hl, wBreedMon1
 .GotMother2:
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
 	farcall GetPreEvolution
 	farcall GetPreEvolution
@@ -1083,6 +1091,13 @@ DayCare_InitBreeding: ; 16a3b
 	ret
 
 .inherit_mother_unless_samespecies
+	ld a, [wBreedMon1Group]
+	ld b, a
+	ld a, [wBreedMon2Group]
+	cp b
+	ld a, [wBreedMotherOrNonDitto]
+	jr nz, .use_mother
+
 	ld a, [wBreedMon1Species]
 	ld b, a
 	ld a, [wBreedMon2Species]

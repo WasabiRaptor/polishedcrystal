@@ -3315,7 +3315,8 @@ DittoMetalPowder: ; 352b1
 	and a
 	ld a, [hl]
 	jr nz, .continue
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurGroupAndSpecies
 
 .continue:
 	cp DITTO
@@ -3348,22 +3349,22 @@ DittoMetalPowder: ; 352b1
 
 
 UnevolvedEviolite:
-	ld a, MON_SPECIES
-	call UserPartyAttr
+	ld hl, wTempBattleMon
+	call TempToCurGroupAndSpecies
+
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [hl]
 	jr nz, .continue
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurGroupAndSpecies
 
 .continue:
-	ld [wCurPartySpecies], a
 	push hl
 	push bc
 	push de
 	ld a, [wCurPokeGroup]
-	farcall GetRelevantEvosAttacksPointers ;not sure if form is known
-	ld a, [wCurPartySpecies]
+	farcall GetRelevantEvosAttacksPointers
+	ld a, [wCurPartySpecies] ;group is definetly known
 	dec a
 	ld c, a
 	ld b, 0
@@ -3685,7 +3686,8 @@ ThickClubOrLightBallBoost: ; 353b5
 	and a
 	ld a, [hl]
 	jr z, .PlayerTurn
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurGroupAndSpecies
 .PlayerTurn:
 	pop hl
 	cp 0 ;remove later
@@ -3733,7 +3735,8 @@ SpeciesItemBoost: ; 353d1
 	and a
 	ld a, [hl]
 	jr z, .CompareSpecies
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurGroupAndSpecies
 .CompareSpecies:
 	pop hl
 
