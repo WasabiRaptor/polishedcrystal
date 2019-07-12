@@ -77,12 +77,12 @@ CheckPartyMove: ; c742
 	jr c, .no
 
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld hl, wPartyMon1Group
+	ld hl, wPartyMon1Form
 	ld a, e
 	rst AddNTimes
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .next
-	ld bc, MON_MOVES - MON_GROUP
+	ld bc, MON_MOVES - MON_FORM
 	add hl, bc
 	ld b, NUM_MOVES
 .check

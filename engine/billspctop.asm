@@ -201,7 +201,7 @@ CopyBoxmonToTempMon: ; e5bb
 	ld hl, sBoxMon1
 	ld bc, BOXMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld de, wTempMonSpecies
+	ld de, wTempMon
 	ld bc, BOXMON_STRUCT_LENGTH
 	ld a, BANK(sBoxMon1)
 	call GetSRAMBank

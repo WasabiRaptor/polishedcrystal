@@ -25,11 +25,11 @@ box_struct: MACRO
 \1Personality::
 \1Shiny::
 \1Ability::
-\1Nature::         db ; often as soon as one gets the species we get the ability or the personality or the shiny so that would be useful to have next to it for optimization as well
+\1Nature::         db 
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Form::           db ; same optimization potential for having form next to items and personality
+\1Form::           db 
 \1PP::             ds NUM_MOVES ; once curPP is moved to the party struct, the box struct can use these bytes for a move's group, they're already using two bits for PP up so even with curpp they would still be needed
 \1Happiness::      db
 \1PokerusStatus::  db
