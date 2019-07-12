@@ -183,7 +183,16 @@ endm
 	placeholder_zero TELEPATHY
 	placeholder_zero PLUS
 	placeholder_zero MINUS
-	
+	placeholder_zero AIR_LOCK
+	placeholder_zero PROTEAN
+	placeholder_zero COLOR_CHANGE
+	placeholder_zero FORECAST
+	placeholder_zero SIMPLE
+	placeholder_zero PURE_POWER
+	placeholder_zero STALL
+	placeholder_zero NORMALIZE
+	placeholder_zero WONDER_GUARD
+
 ABILITY_1      EQU %00100000
 ABILITY_2      EQU %01000000
 HIDDEN_ABILITY EQU %01100000
