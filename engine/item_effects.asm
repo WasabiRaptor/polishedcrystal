@@ -456,6 +456,8 @@ PokeBallEffect: ; e8a2
 	jp z, .shake_and_break_free
 
 .caught
+	ld a, [wTempEnemyMonGroup]
+	ld [wEnemyMonGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wEnemyMonSpecies], a
 
@@ -506,9 +508,7 @@ PokeBallEffect: ; e8a2
 	ld [wCurPartyLevel], a
 
 	ld hl, wEnemyMonGroup
-	call GetGroupAndSpecies
-	ld [wCurSpecies], a
-	ld [wCurPartySpecies], a
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 
 	ld de, wEnemyMonMaxHP
@@ -922,7 +922,7 @@ GLOBAL EvosAttacks
 GLOBAL EvosAttacksPointers
 
 	push bc
-	ld a, [wCurPokeGroup]
+	ld a, [wTempEnemyMonGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wTempEnemyMonSpecies]
 	dec a
@@ -963,7 +963,13 @@ GLOBAL EvosAttacksPointers
 LoveBallMultiplier:
 ; multiply catch rate by 8 if mons are of same species, different sex
 
-	; does species match?
+	; does group match?
+	ld a, [wTempEnemyMonGroup]
+	ld c, a
+	ld a, [wTempBattleMonGroup]
+	cp c
+	ret nz
+	;does species match
 	ld a, [wTempEnemyMonSpecies]
 	ld c, a
 	ld a, [wTempBattleMonSpecies]
@@ -972,8 +978,8 @@ LoveBallMultiplier:
 
 	; check player mon species
 	push bc
-	ld a, [wTempBattleMonSpecies]
-	ld [wCurPartySpecies], a
+	ld hl, wTempBattleMon
+	call TempToCurPartyGroupAndSpecies
 	xor a ; PARTYMON
 	ld [wMonType], a
 	ld a, [wCurBattleMon]
@@ -988,8 +994,8 @@ LoveBallMultiplier:
 
 	; check wild mon species
 	push de
-	ld a, [wTempEnemyMonSpecies]
-	ld [wCurPartySpecies], a
+	ld hl, wTempEnemyMon
+	call TempToCurPartyGroupAndSpecies
 	ld a, WILDMON
 	ld [wMonType], a
 	farcall GetGender
@@ -1026,7 +1032,8 @@ LoveBallMultiplier:
 FastBallMultiplier:
 ; multiply catch rate by 4 if enemy mon is in one of the three
 ; FleeMons tables.
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurGroupAndSpecies
 	ld c, a
 	ld hl, FleeMons
 	ld d, 3
@@ -1085,7 +1092,8 @@ LevelBallMultiplier:
 
 RepeatBallMultiplier:
 ; multiply catch rate by 3 if enemy mon is already in Pokédex
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurPartyGroupAndSpecies
 	dec a
 	push bc
 	call CheckCaughtMon
@@ -1506,7 +1514,7 @@ RareCandy_StatBooster_GetParameters: ; eef5
 	ld [wCurPartyLevel], a
 	ld a, MON_GROUP
 	call GetPartyParamLocation
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;frorm is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
@@ -3228,13 +3236,9 @@ AbilityCap:
 	ld e, l
 	pop hl
 	push hl
-	ld a, MON_SPECIES_AND_GROUP
-	call GetPartyParamLocation
-	ld a, [hl]
-	ld [wCurSpecies], a
 	ld a, MON_GROUP
 	call GetPartyParamLocation
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;frorm is known
 	ld a, [wBaseAbility1]
 	ld b, a

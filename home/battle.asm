@@ -31,18 +31,27 @@ OpponentPartyAttr::
 	and a
 	jr nz, BattlePartyAttrPre
 OTPartyAttrPre:
+	ld a, [wBattleMode]
+	dec a
+	jp z, .popafandret
 	pop af
 OTPartyAttr::
 ; Return z if wildmon
-	ld a, [wBattleMode]
-	dec a
-	ret z
-
 	ld hl, wOTPartyMons
 	push bc
 	ld c, a
 	ld a, [wCurOTMon]
 	jr DoBattlePartyAttr
+
+.popafandret
+	pop af
+	ret
+
+
+	or 1
+	ld a, [hl]
+	pop bc
+	ret
 
 ResetDamage::
 	xor a
@@ -77,28 +86,12 @@ UpdateBattleMonInParty::
 	ld a, [wCurBattleMon]
 	; fallthrough
 UpdateBattleMon::
-	push af
-	ld a, BATTLE_VARS_SUBSTATUS2
-	call GetBattleVar
-	bit SUBSTATUS_TRANSFORMED, a
-	jp nz, .just_HP_andlevel
-	
-	pop af
-	push af
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Form
 	call GetPartyLocation
-	ld a, [wBattleMonSpecies]
+	ld a, [wBattleMonForm]
 	ld [hl], a
 
-	pop af
-	push af
-	ld hl, wPartyMon1Group
-	call GetPartyLocation
-	ld a, [wBattleMonGroup]
-	ld [hl], a
-
-.just_HP_andlevel
-	pop af
+	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1Level
 	call GetPartyLocation
 
@@ -115,18 +108,12 @@ UpdateEnemyMonInParty::
 	dec a
 	ret z
 
-	ld a, BATTLE_VARS_SUBSTATUS2
-	call GetBattleVar
-	bit SUBSTATUS_TRANSFORMED, a
-	jp nz, .just_HP_andlevel
-
 	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1Group
+	ld hl, wOTPartyMon1Form
 	call GetPartyLocation
-	ld a, [wEnemyMonGroup]
+	ld a, [wEnemyMonForm]
 	ld [hl], a
 
-.just_HP_andlevel
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Level
 	call GetPartyLocation

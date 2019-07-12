@@ -688,10 +688,13 @@ GetBattlemonBackpicPalettePointer:
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
+	ld a, [wTempBattleMonGroup]
+	push af
 	ld a, [wTempBattleMonSpecies]
 	push af
 	ld a, [wPlayerAbility]
 	cp ILLUSION
+	ld a, [wTempBattleMonSpecies]
 	jr nz, .no_illusion
 	ld a, [wPlayerSubStatus3]
 	and 1 << SUBSTATUS_DISGUISE_BROKEN
@@ -700,29 +703,30 @@ GetBattlemonBackpicPalettePointer:
 	ld a, [wPartyCount]
 	ld hl, wPartyMon1Group
 	farcall GetIllusion
-	jr .got_illusion
 
 .no_illusion
-	pop af
-.got_illusion
 	call GetPlayerOrMonPalettePointer
-	ld a, [wTempBattleMonSpecies]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-
+	pop af
+	ld [wTempBattleMonSpecies], a
+	pop af 
+	ld [wTempBattleMonGroup], a
+	ld hl, wTempBattleMon
+	call CurPartyGroupAndSpeciesToTemp
 	pop de
 	ret
 
 GetEnemyFrontpicPalettePointer:
-	ld a, [wTempEnemyMonSpecies]
 	push de
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h
+	ld a, [wTempEnemyMonGroup]
+	push af
 	ld a, [wTempEnemyMonSpecies]
 	push af
 	ld a, [wEnemyAbility]
 	cp ILLUSION
+	ld a, [wTempEnemyMonSpecies]
 	jr nz, .no_illusion
 	ld a, [wEnemySubStatus3]
 	and 1 << SUBSTATUS_DISGUISE_BROKEN
@@ -731,15 +735,15 @@ GetEnemyFrontpicPalettePointer:
 	ld a, [wOTPartyCount]
 	ld hl, wOTPartyMon1Group
 	farcall GetIllusion
-	jr .got_illusion
 
 .no_illusion
-	pop af
-.got_illusion
 	call GetFrontpicPalettePointer
-	ld a, [wTempEnemyMonSpecies]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	pop af
+	ld [wTempEnemyMonSpecies], a
+	pop af
+	ld [wTempEnemyMonGroup], a
+	ld hl, wTempEnemyMon
+	call TempToCurPartyGroupAndSpecies
 	pop de
 	ret
 
@@ -833,11 +837,11 @@ GetMonPalettePointer:
 
 GetMonNormalOrShinyPalettePointer:
 	push bc
-	ld h, b
-	ld l, c
+	;ld h, b
+	;ld l, c
 	push af
-	inc hl
-	call GetGroupAndSpecies
+	;inc hl
+	;call GetPartyMonGroupSpeciesAndForm
 	pop af
 	call GetMonPalettePointer
 	pop bc

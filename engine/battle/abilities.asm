@@ -498,10 +498,10 @@ RecieverAbility:
 	ldh a, [hBattleTurn]
 	and a
 	ld bc, wPartyCount
-	ld hl, wPartyMon1Group
+	ld hl, wPartyMon1
 	jr z, .got_turn
 	ld bc, wOTPartyCount
-	ld hl, wOTPartyMon1Group
+	ld hl, wOTPartyMon1
 .got_turn
 	ld a, [bc]
 	cp 1 ;make sure theres more than one mon in the party
@@ -509,13 +509,13 @@ RecieverAbility:
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, [wCurPokeGroup]
-	push af
-	call GetGroupAndSpecies
+	push hl
+	call GetPartyMonGroupSpeciesAndForm
+	pop hl
 	;species of last mon in party
 	ld c, a
 	push bc
-	ld bc, MON_ABILITY - MON_SPECIES
+	ld bc, MON_ABILITY
 	add hl, bc
 	pop bc
 	ld a, [hl]
@@ -533,8 +533,15 @@ RecieverAbility:
 	ld [hl], a
 	ld hl, RecieverActivationText
 	call StdBattleTextBox
-	pop af
-	ld [wCurPokeGroup], a
+	ld a, [wCurBattleMon]
+	ld hl, wPartyMon1
+	jr z, .got_turn2
+	ld a, [wCurOTMon]
+	ld hl, wOTPartyMon1
+.got_turn2
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	call GetPartyMonGroupSpeciesAndForm
 	jp RunActivationAbilitiesInner
 
 .trace_failure

@@ -3,7 +3,10 @@ flag_array: MACRO
 ENDM
 
 box_struct: MACRO
+\1Group::          db ; one next to the other so we can just inc hl to the next
 \1Species::        db
+;\1ItemGroup::
+;\1AbilityGroup::   db ; either just 1 bit to ability and all the others to items, or four for each, whatever, should give all the data storage needed
 \1Item::           db
 \1Moves::          ds NUM_MOVES
 \1ID::             dw
@@ -22,12 +25,12 @@ box_struct: MACRO
 \1Personality::
 \1Shiny::
 \1Ability::
-\1Nature::         db
+\1Nature::         db ; often as soon as one gets the species we get the ability or the personality or the shiny so that would be useful to have next to it for optimization as well
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Group::           db
-\1PP::             ds NUM_MOVES
+\1Form::           db ; same optimization potential for having form next to items and personality
+\1PP::             ds NUM_MOVES ; once curPP is moved to the party struct, the box struct can use these bytes for a move's group, they're already using two bits for PP up so even with curpp they would still be needed
 \1Happiness::      db
 \1PokerusStatus::  db
 \1CaughtData::
@@ -56,6 +59,7 @@ party_struct: MACRO
 ENDM
 
 battle_struct: MACRO
+\1Group::          db
 \1Species::        db
 \1Item::           db
 \1Moves::          ds NUM_MOVES
@@ -71,7 +75,7 @@ battle_struct: MACRO
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Group::           db
+\1Form::           db
 \1PP::             ds NUM_MOVES
 \1Happiness::      db
 \1Level::          db

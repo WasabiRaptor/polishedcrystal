@@ -66,11 +66,11 @@ TryAddMonToParty: ; d88c
 	rst CopyBytes
 
 .skipnickname
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld a, [wMonType]
 	and $f
 	jr z, .initializeStats
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1
 
 .initializeStats
 	ldh a, [hMoveMon]
@@ -81,7 +81,12 @@ GeneratePartyMonStats: ; d906
 	ld e, l
 	ld d, h
 	push hl
-	ld a, [wCurPartySpecies]
+	ld a, [wCurPartyGroup]; pokemon group
+	ld [wCurGroup], a
+	ld [de], a
+	inc de
+
+	ld a, [wCurPartySpecies]; pokemon species
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld a, [wCurSpecies]
@@ -197,16 +202,22 @@ endr
 
 ; Random nature from 0 to 24
 ; This overwrites the base data struct, so reload it afterwards
+	ld a, [wCurGroup]
+	push af
 	ld a, [wCurSpecies]
 	push af
 	ld a, [wPartyMon1Ability]
 	ld b, a
+	ld a, [wPartyMon1Group]
+	ld [wCurGroup], a
 	ld a, [wPartyMon1Species]
 	ld c, a
 	call GetAbility
 	pop af
-	push bc
 	ld [wCurSpecies], a
+	pop af 
+	ld [wCurGroup], a
+	push bc
 	call GetBaseData
 	pop bc
 	ld a, b
@@ -484,7 +495,7 @@ endr
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	farcall UpdateUnownDex
 
 .done
@@ -539,14 +550,14 @@ AddTempmonToParty: ; da96
 	ld [hli], a
 	ld [hl], $ff
 
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld e, l
 	ld d, h
-	ld hl, wTempMonSpecies
+	ld hl, wTempMon
 	rst CopyBytes
 
 	ld hl, wPartyMonOT
@@ -573,6 +584,8 @@ AddTempmonToParty: ; da96
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
 
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndexBuffer], a
 	cp EGG
@@ -672,11 +685,11 @@ SentGetPkmnIntoFromBox: ; db3f
 	ld [hl], $ff
 	ld a, [wPokemonWithdrawDepositParameter]
 	dec a
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wPartyCount]
 	jr nz, .okay2
-	ld hl, sBoxMon1Species
+	ld hl, sBoxMon1
 	ld bc, BOXMON_STRUCT_LENGTH
 	ld a, [sBoxCount]
 
@@ -690,13 +703,13 @@ SentGetPkmnIntoFromBox: ; db3f
 	ld d, h
 	ld a, [wPokemonWithdrawDepositParameter]
 	and a
-	ld hl, sBoxMon1Species
+	ld hl, sBoxMon1
 	ld bc, BOXMON_STRUCT_LENGTH
 	jr z, .okay3
 	cp DAYCARE_WITHDRAW
-	ld hl, wBreedMon1Species
+	ld hl, wBreedMon1
 	jr z, .okay4
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 
 .okay3
@@ -914,8 +927,8 @@ RestorePPofDepositedPokemon: ; dcb6
 ; dd21
 
 RetrievePokemonFromDayCareMan: ; dd21
-	ld a, [wBreedMon1Species]
-	ld [wCurPartySpecies], a
+	ld hl, wBreedMon1
+	call GetPartyMonGroupSpeciesAndForm
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
@@ -930,8 +943,8 @@ RetrievePokemonFromDayCareMan: ; dd21
 ; dd42
 
 RetrievePokemonFromDayCareLady: ; dd42
-	ld a, [wBreedMon2Species]
-	ld [wCurPartySpecies], a
+	ld hl, wBreedMon2
+	call GetPartyMonGroupSpeciesAndForm
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
@@ -991,12 +1004,12 @@ Functiondd64: ; dd64
 	pop hl
 	rst CopyBytes
 	push hl
-	call Functionde1a
+	call GetPartySlotForBreedmon
 	pop hl
 	ld bc, BOXMON_STRUCT_LENGTH
 	rst CopyBytes
 	call GetBaseData
-	call Functionde1a
+	call GetPartySlotForBreedmon
 	ld b, d
 	ld c, e
 	ld hl, MON_LEVEL
@@ -1042,10 +1055,10 @@ Functiondd64: ; dd64
 	ret
 ; de1a
 
-Functionde1a: ; de1a
+GetPartySlotForBreedmon: ; de1a
 	ld a, [wPartyCount]
 	dec a
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld d, h
@@ -1079,7 +1092,7 @@ DepositBreedmon: ; de44
 	call SkipNames
 	rst CopyBytes
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -1098,6 +1111,8 @@ SentPkmnIntoBox: ; de6e
 	inc a
 	ld [de], a
 
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	ld c, a
@@ -1194,7 +1209,7 @@ SentPkmnIntoBox: ; de6e
 	cp UNOWN
 	jr nz, .not_unown
 	ld hl, sBoxMon1Group
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	farcall UpdateUnownDex
 
 .not_unown
@@ -1335,10 +1350,9 @@ GiveEgg:: ; df8c
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	rst AddNTimes
-	ld a, [wCurPartySpecies]
-	ld [hl], a
+	call GetPartyMonGroupSpeciesAndForm
 	ld hl, wPartyCount
 	ld a, [hl]
 	ld b, 0

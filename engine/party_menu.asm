@@ -373,14 +373,9 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	push hl
 	ld a, b
 	ld bc, PARTYMON_STRUCT_LENGTH
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	rst AddNTimes
-	ld a, [hl]
-	ld [wCurPartySpecies], a
-	ld bc, wPartyMon1Group - wPartyMon1Species
-	add hl, bc 
-	call GetGroupAndSpecies
-	ld a, [wCurPartySpecies]
+	call GetPartyMonGroupSpeciesAndForm
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
 	ld a, [wCurPartySpecies]
 	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after

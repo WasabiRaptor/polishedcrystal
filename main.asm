@@ -222,20 +222,16 @@ BugContest_SetCaughtContestMon: ; e6ce
 
 .firstcatch
 	call .generatestats
-	ld a, [wTempEnemyMonSpecies]
+	ld hl, wTempEnemyMon
+	call TempToCurPartyGroupAndSpecies
 	ld [wNamedObjectIndexBuffer], a
-	ld hl, wTempEnemyMonGroup
-	call GetGroupAndSpecies
 	call GetPokemonName
 	ld hl, .caughttext
 	jp PrintText
 
 .generatestats ; e6fd
-	ld hl, wEnemyMonGroup
-	call GetGroupAndSpecies
-	ld a, [wTempEnemyMonSpecies]
-	ld [wCurSpecies], a
-	ld [wCurPartySpecies], a
+	ld hl, wTempEnemyMon
+	call TempToCurPartyGroupAndSpecies
 	call GetBaseData ;form is known
 	xor a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -2100,15 +2096,10 @@ FlagPredef: ; 4d7c1
 	ret
 
 GetTrademonFrontpic: ; 4d7fd
-	ld a, [wOTTrademonSpecies]
 	ld hl, wOTTrademonGroup
 	ld de, VTiles2
 	push de
-	push af
-	call GetGroupAndSpecies
-	pop af
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	pop de
 	predef FrontpicPredef
@@ -2393,7 +2384,7 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 
 CheckPartyFullAfterContest: ; 4d9e5
 	ld hl, wContestMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wContestMon]
 	and a
 	jp z, .DidntCatchAnything
@@ -2414,7 +2405,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld [wCurSpecies], a
 	ld a, $ff
 	ld [hl], a
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -3781,10 +3772,8 @@ ListMoves: ; 50d6f
 	ret
 
 CalcLevel: ; 50e1b
-	ld a, [wTempMonSpecies]
-	ld [wCurSpecies], a
 	ld hl, wTempMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld d, 1
 .next_level

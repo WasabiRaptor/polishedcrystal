@@ -1699,13 +1699,9 @@ MoveScreenLoop:
 GetForgottenMoves::
 ; retrieve a list of a mon's forgotten moves, excluding ones beyond level
 ; and moves the mon already knows
-	ld a, MON_SPECIES_AND_GROUP
-	call GetPartyParamLocation
-	ld a, [hl]
-	ld [wCurPartySpecies], a
 	ld a, MON_GROUP
 	call GetPartyParamLocation
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPokeGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]

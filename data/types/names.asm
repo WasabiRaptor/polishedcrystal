@@ -5,7 +5,7 @@ PrintMonTypes: ; 5090d
 	push hl
 	push af
 	ld hl, wTempMonGroup
-	call GetGroupAndSpecies
+	call GetPartyMonGroupSpeciesAndForm
 	pop af
 	call GetBaseData ;form is known
 	pop hl
