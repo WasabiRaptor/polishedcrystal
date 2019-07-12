@@ -1,4 +1,4 @@
-HoennPokedexEntryPointers::
+HoennEvosAttacksPointers::
 	add_evosattacks Treecko
 	add_evosattacks Grovyle
 	add_evosattacks Sceptile

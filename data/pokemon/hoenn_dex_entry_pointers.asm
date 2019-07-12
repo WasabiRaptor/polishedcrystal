@@ -138,7 +138,4 @@ HoennPokedexEntryPointers::
  	add_pokedexentry Groudon
 	add_pokedexentry Rayquaza
 	add_pokedexentry Jirachi
-	add_pokedexentry Deoxys_Defense
-	add_pokedexentry Deoxys_Normal
-	add_pokedexentry Deoxys_Attack
-	add_pokedexentry Deoxys_Speed
+	add_pokedexentry Deoxys
