@@ -19,8 +19,6 @@ KantoEvosAttacksPointers::
     add_evosattacks Pidgeot
     add_evosattacks Rattata
     add_evosattacks Raticate
-    add_evosattacks Rattata_Alola
-    add_evosattacks Raticate_Alola
     add_evosattacks Spearow
     add_evosattacks Fearow
     add_evosattacks Ekans
@@ -28,11 +26,8 @@ KantoEvosAttacksPointers::
     add_evosattacks Pichu
     add_evosattacks Pikachu
     add_evosattacks Raichu
-    add_evosattacks Raichu_Alola
     add_evosattacks Sandshrew
     add_evosattacks Sandslash
-    add_evosattacks Sandshrew_Alola
-    add_evosattacks Sandslash_Alola
     add_evosattacks Nidoran_F
     add_evosattacks Nidorina
     add_evosattacks Nidoqueen
@@ -44,8 +39,6 @@ KantoEvosAttacksPointers::
     add_evosattacks Clefable
     add_evosattacks Vulpix
     add_evosattacks Ninetales
-    add_evosattacks Vulpix_Alola
-    add_evosattacks Ninetales_Alola
     add_evosattacks Igglybuff
     add_evosattacks Jigglypuff
     add_evosattacks Wigglytuff
@@ -62,12 +55,8 @@ KantoEvosAttacksPointers::
     add_evosattacks Venomoth
     add_evosattacks Diglett
     add_evosattacks Dugtrio
-    add_evosattacks Diglett_Alola
-    add_evosattacks Dugtrio_Alola
     add_evosattacks Meowth
     add_evosattacks Persian
-    add_evosattacks Meowth_Alola
-    add_evosattacks Persian_Alola
     add_evosattacks Psyduck
     add_evosattacks Golduck
     add_evosattacks Mankey
@@ -92,9 +81,6 @@ KantoEvosAttacksPointers::
     add_evosattacks Geodude
     add_evosattacks Graveler
     add_evosattacks Golem
-    add_evosattacks Geodude_Alola
-    add_evosattacks Graveler_Alola
-    add_evosattacks Golem_Alola
     add_evosattacks Ponyta
     add_evosattacks Rapidash
     add_evosattacks Slowpoke
@@ -110,8 +96,6 @@ KantoEvosAttacksPointers::
     add_evosattacks Dewgong
     add_evosattacks Grimer
     add_evosattacks Muk
-    add_evosattacks Grimer_Alola
-    add_evosattacks Muk_Alola
     add_evosattacks Shellder
     add_evosattacks Cloyster
     add_evosattacks Gastly
@@ -127,10 +111,8 @@ KantoEvosAttacksPointers::
     add_evosattacks Electrode
     add_evosattacks Exeggcute
     add_evosattacks Exeggutor
-    add_evosattacks Exeggutor_Alola
     add_evosattacks Cubone
     add_evosattacks Marowak
-    add_evosattacks Marowak_Alola
     add_evosattacks Tyrogue
     add_evosattacks Hitmonlee
     add_evosattacks Hitmonchan
@@ -200,7 +182,4 @@ KantoEvosAttacksPointers::
     add_evosattacks Dragonite
     add_evosattacks Mewtwo
     add_evosattacks Mew
-    add_evosattacks Vaporeon
-    add_evosattacks Leafeon
-    add_evosattacks Tangrowth
     add_evosattacks Madaamu

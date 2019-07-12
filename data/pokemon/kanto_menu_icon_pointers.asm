@@ -19,8 +19,6 @@ KantoIconPointers::
     add_icon Pidgeot
     add_icon Rattata
     add_icon Raticate
-    add_icon Rattata_Alola
-    add_icon Raticate_Alola
     add_icon Spearow
     add_icon Fearow
     add_icon Ekans
@@ -28,11 +26,8 @@ KantoIconPointers::
     add_icon Pichu
     add_icon Pikachu
     add_icon Raichu
-    add_icon Raichu_Alola
     add_icon Sandshrew
     add_icon Sandslash
-    add_icon Sandshrew_Alola
-    add_icon Sandslash_Alola
     add_icon Nidoran_F
     add_icon Nidorina
     add_icon Nidoqueen
@@ -44,8 +39,6 @@ KantoIconPointers::
     add_icon Clefable
     add_icon Vulpix
     add_icon Ninetales
-    add_icon Vulpix_Alola
-    add_icon Ninetales_Alola
     add_icon Igglybuff
     add_icon Jigglypuff
     add_icon Wigglytuff
@@ -62,12 +55,8 @@ KantoIconPointers::
     add_icon Venomoth
     add_icon Diglett
     add_icon Dugtrio
-    add_icon Diglett_Alola
-    add_icon Dugtrio_Alola
     add_icon Meowth
     add_icon Persian
-    add_icon Meowth_Alola
-    add_icon Persian_Alola
     add_icon Psyduck
     add_icon Golduck
     add_icon Mankey
@@ -92,9 +81,6 @@ KantoIconPointers::
     add_icon Geodude
     add_icon Graveler
     add_icon Golem
-    add_icon Geodude_Alola
-    add_icon Graveler_Alola
-    add_icon Golem_Alola
     add_icon Ponyta
     add_icon Rapidash
     add_icon Slowpoke
@@ -110,8 +96,6 @@ KantoIconPointers::
     add_icon Dewgong
     add_icon Grimer
     add_icon Muk
-    add_icon Grimer_Alola
-    add_icon Muk_Alola
     add_icon Shellder
     add_icon Cloyster
     add_icon Gastly
@@ -127,10 +111,8 @@ KantoIconPointers::
     add_icon Electrode
     add_icon Exeggcute
     add_icon Exeggutor
-    add_icon Exeggutor_Alola
     add_icon Cubone
     add_icon Marowak
-    add_icon Marowak_Alola
     add_icon Tyrogue
     add_icon Hitmonlee
     add_icon Hitmonchan
@@ -200,7 +182,4 @@ KantoIconPointers::
     add_icon Dragonite
     add_icon Mewtwo
     add_icon Mew
-    add_icon Vaporeon
-    add_icon Leafeon
-    add_icon Tangrowth
     add_icon Madaamu

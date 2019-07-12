@@ -19,8 +19,6 @@ KantoPokedexEntryPointers::
     add_pokedexentry Pidgeot
     add_pokedexentry Rattata
     add_pokedexentry Raticate
-    add_pokedexentry Rattata_Alola
-    add_pokedexentry Raticate_Alola
     add_pokedexentry Spearow
     add_pokedexentry Fearow
     add_pokedexentry Ekans
@@ -28,11 +26,8 @@ KantoPokedexEntryPointers::
     add_pokedexentry Pichu
     add_pokedexentry Pikachu
     add_pokedexentry Raichu
-    add_pokedexentry Raichu_Alola
     add_pokedexentry Sandshrew
     add_pokedexentry Sandslash
-    add_pokedexentry Sandshrew_Alola
-    add_pokedexentry Sandslash_Alola
     add_pokedexentry Nidoran_F
     add_pokedexentry Nidorina
     add_pokedexentry Nidoqueen
@@ -44,8 +39,6 @@ KantoPokedexEntryPointers::
     add_pokedexentry Clefable
     add_pokedexentry Vulpix
     add_pokedexentry Ninetales
-    add_pokedexentry Vulpix_Alola
-    add_pokedexentry Ninetales_Alola
     add_pokedexentry Igglybuff
     add_pokedexentry Jigglypuff
     add_pokedexentry Wigglytuff
@@ -62,12 +55,8 @@ KantoPokedexEntryPointers::
     add_pokedexentry Venomoth
     add_pokedexentry Diglett
     add_pokedexentry Dugtrio
-    add_pokedexentry Diglett_Alola
-    add_pokedexentry Dugtrio_Alola
     add_pokedexentry Meowth
     add_pokedexentry Persian
-    add_pokedexentry Meowth_Alola
-    add_pokedexentry Persian_Alola
     add_pokedexentry Psyduck
     add_pokedexentry Golduck
     add_pokedexentry Mankey
@@ -92,9 +81,6 @@ KantoPokedexEntryPointers::
     add_pokedexentry Geodude
     add_pokedexentry Graveler
     add_pokedexentry Golem
-    add_pokedexentry Geodude_Alola
-    add_pokedexentry Graveler_Alola
-    add_pokedexentry Golem_Alola
     add_pokedexentry Ponyta
     add_pokedexentry Rapidash
     add_pokedexentry Slowpoke
@@ -110,8 +96,6 @@ KantoPokedexEntryPointers::
     add_pokedexentry Dewgong
     add_pokedexentry Grimer
     add_pokedexentry Muk
-    add_pokedexentry Grimer_Alola
-    add_pokedexentry Muk_Alola
     add_pokedexentry Shellder
     add_pokedexentry Cloyster
     add_pokedexentry Gastly
@@ -127,10 +111,8 @@ KantoPokedexEntryPointers::
     add_pokedexentry Electrode
     add_pokedexentry Exeggcute
     add_pokedexentry Exeggutor
-    add_pokedexentry Exeggutor_Alola
     add_pokedexentry Cubone
     add_pokedexentry Marowak
-    add_pokedexentry Marowak_Alola
     add_pokedexentry Tyrogue
     add_pokedexentry Hitmonlee
     add_pokedexentry Hitmonchan
@@ -200,7 +182,4 @@ KantoPokedexEntryPointers::
     add_pokedexentry Dragonite
     add_pokedexentry Mewtwo
     add_pokedexentry Mew
-    add_pokedexentry Vaporeon
-    add_pokedexentry Leafeon
-    add_pokedexentry Tangrowth
     add_pokedexentry Madaamu

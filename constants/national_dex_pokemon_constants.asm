@@ -43,8 +43,6 @@ EGG EQU $fe
 	nat_dexmon PIDGEOT	
 	nat_dexmon RATTATA	
 	nat_dexmon RATICATE 
-	nat_dexmon RATTATA_ALOLA	
-	nat_dexmon RATICATE_ALOLA 
 	nat_dexmon SPEAROW	
 	nat_dexmon FEAROW	 
 	nat_dexmon EKANS	
@@ -52,11 +50,8 @@ EGG EQU $fe
 	nat_dexmon PICHU	
 	nat_dexmon PIKACHU	
 	nat_dexmon RAICHU	 
-	nat_dexmon RAICHU_ALOLA	 
 	nat_dexmon SANDSHREW
 	nat_dexmon SANDSLASH
-	nat_dexmon SANDSHREW_ALOLA
-	nat_dexmon SANDSLASH_ALOLA
 	nat_dexmon NIDORAN_F
 	nat_dexmon NIDORINA
 	nat_dexmon NIDOQUEEN
@@ -68,8 +63,6 @@ EGG EQU $fe
 	nat_dexmon CLEFABLE 
 	nat_dexmon VULPIX	 
 	nat_dexmon NINETALES
-	nat_dexmon VULPIX_ALOLA
-	nat_dexmon NINETALES_ALOLA
 	nat_dexmon IGGLYBUFF
 	nat_dexmon JIGGLYPUFF
 	nat_dexmon WIGGLYTUFF
@@ -86,12 +79,8 @@ EGG EQU $fe
 	nat_dexmon VENOMOTH
 	nat_dexmon DIGLETT
 	nat_dexmon DUGTRIO
- 	nat_dexmon DIGLETT_ALOLA
-	nat_dexmon DUGTRIO_ALOLA
 	nat_dexmon MEOWTH	
 	nat_dexmon PERSIAN
-	nat_dexmon MEOWTH_ALOLA	
-	nat_dexmon PERSIAN_ALOLA
 	nat_dexmon PSYDUCK
 	nat_dexmon GOLDUCK
 	nat_dexmon MANKEY	
@@ -116,9 +105,6 @@ EGG EQU $fe
 	nat_dexmon GEODUDE
 	nat_dexmon GRAVELER
 	nat_dexmon GOLEM
-	nat_dexmon GEODUDE_ALOLA
-	nat_dexmon GRAVELER_ALOLA
-	nat_dexmon GOLEM_ALOLA
 	nat_dexmon PONYTA
 	nat_dexmon RAPIDASH
 	nat_dexmon SLOWPOKE
@@ -134,8 +120,6 @@ EGG EQU $fe
 	nat_dexmon DEWGONG
 	nat_dexmon GRIMER	
 	nat_dexmon MUK	
-	nat_dexmon GRIMER_ALOLA	
-	nat_dexmon MUK_ALOLA	
 	nat_dexmon SHELLDER
 	nat_dexmon CLOYSTER
 	nat_dexmon GASTLY	
@@ -151,10 +135,8 @@ EGG EQU $fe
 	nat_dexmon ELECTRODE
 	nat_dexmon EXEGGCUTE
 	nat_dexmon EXEGGUTOR
-	nat_dexmon EXEGGUTOR_ALOLA
 	nat_dexmon CUBONE	
 	nat_dexmon MAROWAK
-	nat_dexmon MAROWAK_ALOLA
 	nat_dexmon TYROGUE
 	nat_dexmon HITMONLEE
 	nat_dexmon HITMONCHAN
@@ -226,20 +208,17 @@ EGG EQU $fe
 	nat_dexmon MEW
 	; the normal list of kanto pokemon would end here, but, why not have some GSC beta pokemon or some of th RG designs to have some variants? 
 	; well the ones with good enough designs to keep at least, and baby pokemon are meh
-	nat_dexmon VAPOREON_RG
-	nat_dexmon LEAFEON_BETA
-	nat_dexmon TANGROWTH_BETA
 	nat_dexmon MADAAMU ; the farfetch'd evo
 NUM_KANTO_POKEMON EQU const_value +-1
 NUM_KANTO_SPECIES_AND_FORMS EQU const_value +-1
 
 ;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
 
-SNOWSHREW EQU SANDSHREW_ALOLA
-SNOWSLASH EQU SANDSLASH_ALOLA
+;SNOWSHREW EQU SANDSHREW_ALOLA
+;SNOWSLASH EQU SANDSLASH_ALOLA
 
-GROUP_SNOWSHREW EQU GROUP_SANDSHREW_ALOLA
-GROUP_SNOWSLASH EQU GROUP_SANDSLASH_ALOLA
+;GROUP_SNOWSHREW EQU GROUP_SANDSHREW_ALOLA
+;GROUP_SNOWSLASH EQU GROUP_SANDSLASH_ALOLA
 
 ;johto mons
 	nat_dexmon_group 1, REGION_JOHTO

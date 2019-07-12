@@ -19,8 +19,6 @@ KantoEggMovePointers::
     add_eggmoves NoKanto
     add_eggmoves Rattata
     add_eggmoves NoKanto
-    add_eggmoves Rattata_Alola
-    add_eggmoves NoKanto
     add_eggmoves Spearow
     add_eggmoves NoKanto
     add_eggmoves Ekans
@@ -28,10 +26,7 @@ KantoEggMovePointers::
     add_eggmoves Pichu
     add_eggmoves NoKanto
     add_eggmoves NoKanto
-    add_eggmoves NoKanto
     add_eggmoves Sandshrew
-    add_eggmoves NoKanto
-    add_eggmoves Sandshrew_Alola
     add_eggmoves NoKanto
     add_eggmoves Nidoran_F
     add_eggmoves NoKanto
@@ -43,8 +38,6 @@ KantoEggMovePointers::
     add_eggmoves NoKanto
     add_eggmoves NoKanto
     add_eggmoves Vulpix
-    add_eggmoves NoKanto
-    add_eggmoves Vulpix_Alola
     add_eggmoves NoKanto
     add_eggmoves Igglybuff
     add_eggmoves NoKanto
@@ -62,11 +55,7 @@ KantoEggMovePointers::
     add_eggmoves NoKanto
     add_eggmoves Diglett
     add_eggmoves NoKanto
-    add_eggmoves Diglett_Alola
-    add_eggmoves NoKanto
     add_eggmoves Meowth
-    add_eggmoves NoKanto
-    add_eggmoves Meowth_Alola
     add_eggmoves NoKanto
     add_eggmoves Psyduck
     add_eggmoves NoKanto
@@ -92,9 +81,6 @@ KantoEggMovePointers::
     add_eggmoves Geodude
     add_eggmoves NoKanto
     add_eggmoves NoKanto
-    add_eggmoves Geodude_Alola
-    add_eggmoves NoKanto
-    add_eggmoves NoKanto
     add_eggmoves Ponyta
     add_eggmoves NoKanto
     add_eggmoves Slowpoke
@@ -109,8 +95,6 @@ KantoEggMovePointers::
     add_eggmoves Seel
     add_eggmoves NoKanto
     add_eggmoves Grimer
-    add_eggmoves NoKanto
-    add_eggmoves Grimer_Alola
     add_eggmoves NoKanto
     add_eggmoves Shellder
     add_eggmoves NoKanto
@@ -127,9 +111,7 @@ KantoEggMovePointers::
     add_eggmoves NoKanto
     add_eggmoves Exeggcute
     add_eggmoves NoKanto
-    add_eggmoves NoKanto
     add_eggmoves Cubone
-    add_eggmoves NoKanto
     add_eggmoves NoKanto
     add_eggmoves Tyrogue
     add_eggmoves NoKanto
@@ -149,6 +131,7 @@ KantoEggMovePointers::
     add_eggmoves NoKanto
     add_eggmoves Kangaskhan
     add_eggmoves Horsea
+    add_eggmoves NoKanto
     add_eggmoves NoKanto
     add_eggmoves Goldeen
     add_eggmoves NoKanto
@@ -195,9 +178,6 @@ KantoEggMovePointers::
     add_eggmoves NoKanto
     add_eggmoves NoKanto
     add_eggmoves Dratini
-    add_eggmoves NoKanto
-    add_eggmoves NoKanto
-    add_eggmoves NoKanto
     add_eggmoves NoKanto
     add_eggmoves NoKanto
     add_eggmoves NoKanto

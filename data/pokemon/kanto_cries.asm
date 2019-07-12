@@ -24,8 +24,6 @@ KantoCries::
 	mon_cry CRY_PIDGEOTTO,   $011,  $17f ; PIDGEOT
 	mon_cry CRY_RATTATA,     $000,  $100 ; RATTATA
 	mon_cry CRY_RATTATA,     $020,  $17f ; RATICATE
-	mon_cry CRY_RATTATA,     $000,  $100 ; RATTATA_ALOLA
-	mon_cry CRY_RATTATA,     $020,  $17f ; RATICATE_ALOLA
 	mon_cry CRY_SPEAROW,     $000,  $100 ; SPEAROW
 	mon_cry CRY_FEAROW,      $040,  $120 ; FEAROW
 	mon_cry CRY_EKANS,       $012,  $0c0 ; EKANS
@@ -33,11 +31,8 @@ KantoCries::
 	mon_cry CRY_PICHU,       $000,  $140 ; PICHU
 	mon_cry CRY_BULBASAUR,   $0ee,  $081 ; PIKACHU
 	mon_cry CRY_RAICHU,      $0ee,  $088 ; RAICHU
-	mon_cry CRY_RAICHU,      $0ee,  $088 ; RAICHU_ALOLA
 	mon_cry CRY_NIDORAN_M,   $020,  $0c0 ; SANDSHREW
 	mon_cry CRY_NIDORAN_M,   $0ff,  $17f ; SANDSLASH
-	mon_cry CRY_NIDORAN_M,   $020,  $0c0 ; SANDSHREW_ALOLA
-	mon_cry CRY_NIDORAN_M,   $0ff,  $17f ; SANDSLASH_ALOLA
 	mon_cry CRY_NIDORAN_F,   $000,  $100 ; NIDORAN_F
 	mon_cry CRY_NIDORAN_F,   $02c,  $160 ; NIDORINA
 	mon_cry CRY_NIDOQUEEN,   $000,  $100 ; NIDOQUEEN
@@ -49,8 +44,6 @@ KantoCries::
 	mon_cry CRY_CLEFAIRY,    $0aa,  $0a0 ; CLEFABLE
 	mon_cry CRY_VULPIX,      $04f,  $090 ; VULPIX
 	mon_cry CRY_VULPIX,      $088,  $0e0 ; NINETALES
-	mon_cry CRY_VULPIX,      $04f,  $090 ; VULPIX_ALOLA
-	mon_cry CRY_VULPIX,      $088,  $0e0 ; NINETALES_ALOLA
 	mon_cry CRY_CHIKORITA,   $0e8,  $0e8 ; IGGLYBUFF
 	mon_cry CRY_PIDGEY,      $0ff,  $0b5 ; JIGGLYPUFF
 	mon_cry CRY_PIDGEY,      $068,  $0e0 ; WIGGLYTUFF
@@ -67,12 +60,8 @@ KantoCries::
 	mon_cry CRY_VENONAT,     $029,  $100 ; VENOMOTH
 	mon_cry CRY_DIGLETT,     $0aa,  $081 ; DIGLETT
 	mon_cry CRY_DIGLETT,     $02a,  $090 ; DUGTRIO
-	mon_cry CRY_DIGLETT,     $0aa,  $081 ; DIGLETT_ALOLA
-	mon_cry CRY_DIGLETT,     $02a,  $090 ; DUGTRIO_ALOLA
 	mon_cry CRY_CLEFAIRY,    $077,  $090 ; MEOWTH
 	mon_cry CRY_CLEFAIRY,    $099,  $17f ; PERSIAN
-	mon_cry CRY_CLEFAIRY,    $077,  $090 ; MEOWTH_ALOLA
-	mon_cry CRY_CLEFAIRY,    $099,  $17f ; PERSIAN_ALOLA
 	mon_cry CRY_PSYDUCK,     $020,  $0e0 ; PSYDUCK
 	mon_cry CRY_PSYDUCK,     $0ff,  $0c0 ; GOLDUCK
 	mon_cry CRY_NIDOQUEEN,   $0dd,  $0e0 ; MANKEY
@@ -97,9 +86,6 @@ KantoCries::
 	mon_cry CRY_VULPIX,      $0f0,  $090 ; GEODUDE
 	mon_cry CRY_VULPIX,      $000,  $100 ; GRAVELER
 	mon_cry CRY_GOLEM,       $0e0,  $0c0 ; GOLEM
-	mon_cry CRY_VULPIX,      $0f0,  $090 ; GEODUDE_ALOLA
-	mon_cry CRY_VULPIX,      $000,  $100 ; GRAVELER_ALOLA
-	mon_cry CRY_GOLEM,       $0e0,  $0c0 ; GOLEM_ALOLA
 	mon_cry CRY_WEEPINBELL,  $000,  $100 ; PONYTA
 	mon_cry CRY_WEEPINBELL,  $020,  $140 ; RAPIDASH
 	mon_cry CRY_SLOWPOKE,    $000,  $100 ; SLOWPOKE
@@ -115,8 +101,6 @@ KantoCries::
 	mon_cry CRY_SEEL,        $023,  $17f ; DEWGONG
 	mon_cry CRY_GRIMER,      $000,  $100 ; GRIMER
 	mon_cry CRY_MUK,         $0ef,  $17f ; MUK
-	mon_cry CRY_GRIMER,      $000,  $100 ; GRIMER_ALOLA
-	mon_cry CRY_MUK,         $0ef,  $17f ; MUK_ALOLA
 	mon_cry CRY_FEAROW,      $000,  $100 ; SHELLDER
 	mon_cry CRY_FEAROW,      $06f,  $160 ; CLOYSTER
 	mon_cry CRY_METAPOD,     $000,  $100 ; GASTLY
@@ -132,10 +116,8 @@ KantoCries::
 	mon_cry CRY_VOLTORB,     $0a8,  $110 ; ELECTRODE
 	mon_cry CRY_DIGLETT,     $000,  $100 ; EXEGGCUTE
 	mon_cry CRY_DROWZEE,     $000,  $100 ; EXEGGUTOR
-	mon_cry CRY_DROWZEE,     $000,  $100 ; EXEGGUTOR_ALOLA
 	mon_cry CRY_CLEFAIRY,    $000,  $100 ; CUBONE
 	mon_cry CRY_ODDISH,      $04f,  $0e0 ; MAROWAK
-	mon_cry CRY_ODDISH,      $04f,  $0e0 ; MAROWAK_ALOLA
 	mon_cry CRY_AIPOM,       $02c,  $108 ; TYROGUE
 	mon_cry CRY_GOLEM,       $080,  $140 ; HITMONLEE
 	mon_cry CRY_SEEL,        $0ee,  $140 ; HITMONCHAN
@@ -206,7 +188,4 @@ KantoCries::
 	mon_cry CRY_PARAS,       $099,  $17f ; MEWTWO
 	mon_cry CRY_PARAS,       $0ee,  $17f ; MEW
 ;beta mons
-	mon_cry CRY_VENONAT,     $0aa,  $17f ; VAPOREON_RG
-	mon_cry CRY_AIPOM,       $0a2,  $140 ; LEAFEON_BETA
-	mon_cry CRY_GOLEM,       $000,  $100 ; TANGROWTH_BETA
 	mon_cry CRY_SPEAROW,     $0dd,  $081 ; MADAAMU

@@ -99,6 +99,7 @@ EGG_GROUP_1_MASK EQU %11110000
 EGG_GROUP_2_MASK EQU %00001111
 
 ; pokemon structure in RAM
+MON_GROUP                EQUS "(wPartyMon1Group - wPartyMon1)"
 MON_SPECIES              EQUS "(wPartyMon1Species - wPartyMon1)"
 MON_ITEM                 EQUS "(wPartyMon1Item - wPartyMon1)"
 MON_MOVES                EQUS "(wPartyMon1Moves - wPartyMon1)"
@@ -119,7 +120,7 @@ MON_NATURE               EQUS "(wPartyMon1Nature - wPartyMon1)"
 MON_GENDER               EQUS "(wPartyMon1Gender - wPartyMon1)"
 MON_IS_EGG               EQUS "(wPartyMon1IsEgg - wPartyMon1)"
 MON_IS_DEAD              EQUS "(wPartyMon1IsDead - wPartyMon1)"
-MON_GROUP                EQUS "(wPartyMon1Group - wPartyMon1)"
+MON_FORM				 EQUS "(wPartyMon1Form - wPartyMon1)"
 MON_PP                   EQUS "(wPartyMon1PP - wPartyMon1)"
 MON_HAPPINESS            EQUS "(wPartyMon1Happiness - wPartyMon1)"
 MON_PKRUS                EQUS "(wPartyMon1PokerusStatus - wPartyMon1)"
@@ -142,7 +143,7 @@ MON_SDF                  EQUS "(wPartyMon1SpclDef - wPartyMon1)"
 BOXMON_STRUCT_LENGTH     EQUS "(wPartyMon1End - wPartyMon1)"
 PARTYMON_STRUCT_LENGTH   EQUS "(wPartyMon1StatsEnd - wPartyMon1)"
 
-MON_SPECIES_AND_GROUP EQU $ff
+MON_GROUP_SPECIES_AND_FORM EQU $ff
 
 ;PP masks
 PP_UPS_USED_MASK EQU %11000000
@@ -155,7 +156,7 @@ NATURE_MASK  EQU %00011111
 GENDER_MASK  EQU %10000000
 IS_EGG_MASK  EQU %01000000
 IS_DEAD_MASK EQU %00100000
-GROUP_MASK    EQU %00011111
+FORM_MASK    EQU %00011111
 
 MON_SHINY_F  EQU 7
 MON_GENDER_F EQU 7

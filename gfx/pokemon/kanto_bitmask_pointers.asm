@@ -19,8 +19,6 @@ KantoBitmasksPointers::
     add_bitmasks Pidgeot
     add_bitmasks Rattata
     add_bitmasks Raticate
-    add_bitmasks Rattata_Alola
-    add_bitmasks Raticate_Alola
     add_bitmasks Spearow
     add_bitmasks Fearow
     add_bitmasks Ekans
@@ -28,11 +26,8 @@ KantoBitmasksPointers::
     add_bitmasks Pichu
     add_bitmasks Pikachu
     add_bitmasks Raichu
-    add_bitmasks Raichu_Alola
     add_bitmasks Sandshrew
     add_bitmasks Sandslash
-    add_bitmasks Sandshrew_Alola
-    add_bitmasks Sandslash_Alola
     add_bitmasks Nidoran_F
     add_bitmasks Nidorina
     add_bitmasks Nidoqueen
@@ -44,8 +39,6 @@ KantoBitmasksPointers::
     add_bitmasks Clefable
     add_bitmasks Vulpix
     add_bitmasks Ninetales
-    add_bitmasks Vulpix_Alola
-    add_bitmasks Ninetales_Alola
     add_bitmasks Igglybuff
     add_bitmasks Jigglypuff
     add_bitmasks Wigglytuff
@@ -62,12 +55,8 @@ KantoBitmasksPointers::
     add_bitmasks Venomoth
     add_bitmasks Diglett
     add_bitmasks Dugtrio
-    add_bitmasks Diglett_Alola
-    add_bitmasks Dugtrio_Alola
     add_bitmasks Meowth
     add_bitmasks Persian
-    add_bitmasks Meowth_Alola
-    add_bitmasks Persian_Alola
     add_bitmasks Psyduck
     add_bitmasks Golduck
     add_bitmasks Mankey
@@ -92,9 +81,6 @@ KantoBitmasksPointers::
     add_bitmasks Geodude
     add_bitmasks Graveler
     add_bitmasks Golem
-    add_bitmasks Geodude_Alola
-    add_bitmasks Graveler_Alola
-    add_bitmasks Golem_Alola
     add_bitmasks Ponyta
     add_bitmasks Rapidash
     add_bitmasks Slowpoke
@@ -110,8 +96,6 @@ KantoBitmasksPointers::
     add_bitmasks Dewgong
     add_bitmasks Grimer
     add_bitmasks Muk
-    add_bitmasks Grimer_Alola
-    add_bitmasks Muk_Alola
     add_bitmasks Shellder
     add_bitmasks Cloyster
     add_bitmasks Gastly
@@ -127,10 +111,8 @@ KantoBitmasksPointers::
     add_bitmasks Electrode
     add_bitmasks Exeggcute
     add_bitmasks Exeggutor
-    add_bitmasks Exeggutor_Alola
     add_bitmasks Cubone
     add_bitmasks Marowak
-    add_bitmasks Marowak_Alola
     add_bitmasks Tyrogue
     add_bitmasks Hitmonlee
     add_bitmasks Hitmonchan
@@ -200,3 +182,4 @@ KantoBitmasksPointers::
     add_bitmasks Dragonite
     add_bitmasks Mewtwo
     add_bitmasks Mew
+    add_bitmasks Madaamu

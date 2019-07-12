@@ -23,8 +23,6 @@ KantoMenuMonIconColors::
 	iconpal RED, BROWN ; PIDGEOT
 	iconpal PURPLE, GRAY ; RATTATA
 	iconpal BROWN, RED ; RATICATE
-    iconpal GRAY, GRAY ; RATTATA_ALOLA
-	iconpal GRAY, RED ; RATICATE_ALOLA
 	iconpal BROWN, RED ; SPEAROW
 	iconpal BROWN, RED ; FEAROW
 	iconpal PURPLE, BROWN ; EKANS
@@ -32,11 +30,8 @@ KantoMenuMonIconColors::
 	iconpal RED, BLUE ; PICHU
 	iconpal RED, BLUE ; PIKACHU
 	iconpal RED, BLUE ; RAICHU
-    iconpal RED, BLUE ; RAICHU_ALOLA
 	iconpal BROWN, TEAL ; SANDSHREW
 	iconpal BROWN, RED ; SANDSLASH
-	iconpal TEAL, TEAL ; SANDSHREW_ALOLA
-    iconpal TEAL, TEAL ; SANDSLASH_ALOLA
 	iconpal TEAL, PURPLE ; NIDORAN_F
 	iconpal TEAL, PURPLE ; NIDORINA
 	iconpal TEAL, PURPLE ; NIDOQUEEN
@@ -48,8 +43,6 @@ KantoMenuMonIconColors::
 	iconpal PINK, RED ; CLEFABLE
 	iconpal RED, BROWN ; VULPIX
 	iconpal RED, GRAY ; NINETALES
-	iconpal TEAL, PURPLE ; VULPIX_ALOLA
-	iconpal TEAL, PURPLE ; NINETALES_ALOLA
 	iconpal PINK, RED ; IGGLYBUFF
 	iconpal PINK, RED ; JIGGLYPUFF
 	iconpal PINK, RED ; WIGGLYTUFF
@@ -66,12 +59,8 @@ KantoMenuMonIconColors::
 	iconpal PURPLE, BLUE ; VENOMOTH
 	iconpal BROWN, GRAY ; DIGLETT
 	iconpal BROWN, GRAY ; DUGTRIO
-	iconpal BROWN, GRAY ; DIGLETT_ALOLA
-	iconpal BROWN, GRAY ; DUGTRIO_ALOLA
 	iconpal BROWN, RED ; MEOWTH
 	iconpal BROWN, RED ; PERSIAN
-	iconpal BROWN, RED ; MEOWTH_ALOLA
-	iconpal BROWN, RED ; PERSIAN_ALOLA
 	iconpal BROWN, BLUE ; PSYDUCK
 	iconpal BLUE, BLUE ; GOLDUCK
 	iconpal BROWN, GREEN ; MANKEY
@@ -96,9 +85,6 @@ KantoMenuMonIconColors::
 	iconpal BROWN, RED ; GEODUDE
 	iconpal BROWN, RED ; GRAVELER
 	iconpal BROWN, RED ; GOLEM
-	iconpal BROWN, RED ; GEODUDE_ALOLA
-	iconpal BROWN, RED ; GRAVELER_ALOLA
-	iconpal BROWN, RED ; GOLEM_ALOLA
 	iconpal RED, BLUE ; PONYTA
 	iconpal RED, BLUE ; RAPIDASH
 	iconpal PINK, PURPLE ; SLOWPOKE
@@ -114,8 +100,6 @@ KantoMenuMonIconColors::
 	iconpal BLUE, PINK ; DEWGONG
 	iconpal PURPLE, GREEN ; GRIMER
 	iconpal PURPLE, GREEN ; MUK
-	iconpal PURPLE, GREEN ; GRIMER_ALOLA
-	iconpal PURPLE, GREEN ; MUK_ALOLA
 	iconpal PURPLE, RED ; SHELLDER
 	iconpal PURPLE, BLUE ; CLOYSTER
 	iconpal PURPLE, BLUE ; GASTLY
@@ -131,10 +115,8 @@ KantoMenuMonIconColors::
 	iconpal RED, BLUE ; ELECTRODE
 	iconpal PINK, TEAL ; EXEGGCUTE
 	iconpal BROWN, TEAL ; EXEGGUTOR
-	iconpal BROWN, TEAL ; EXEGGUTOR_ALOLA
 	iconpal BROWN, TEAL ; CUBONE
 	iconpal BROWN, TEAL ; MAROWAK
-	iconpal BROWN, TEAL ; MAROWAK_ALOLA
 	iconpal BROWN, BLUE ; TYROGUE
 	iconpal BROWN, GREEN ; HITMONLEE
 	iconpal BROWN, BLUE ; HITMONCHAN
@@ -204,9 +186,6 @@ KantoMenuMonIconColors::
 	iconpal RED, BLUE ; DRAGONITE
 	iconpal PURPLE, GRAY ; MEWTWO
 	iconpal PINK, BLUE ; MEW
-	iconpal BLUE, PURPLE ; VAPOREON_RG
-	iconpal GREEN, BROWN ; LEAFEON_BETA
-    iconpal BLUE, GREEN ; TANGROWTH_BETA
 	iconpal BROWN, GREEN ; MADAAMU
 
 

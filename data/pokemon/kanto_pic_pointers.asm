@@ -19,8 +19,6 @@ KantoPicPointers::
     add_pics Pidgeot
     add_pics Rattata
     add_pics Raticate
-    add_pics Rattata_Alola
-    add_pics Raticate_Alola
     add_pics Spearow
     add_pics Fearow
     add_pics Ekans
@@ -28,11 +26,8 @@ KantoPicPointers::
     add_pics Pichu
     add_pics Pikachu
     add_pics Raichu
-    add_pics Raichu_Alola
     add_pics Sandshrew
     add_pics Sandslash
-    add_pics Sandshrew_Alola
-    add_pics Sandslash_Alola
     add_pics Nidoran_F
     add_pics Nidorina
     add_pics Nidoqueen
@@ -44,8 +39,6 @@ KantoPicPointers::
     add_pics Clefable
     add_pics Vulpix
     add_pics Ninetales
-    add_pics Vulpix_Alola
-    add_pics Ninetales_Alola
     add_pics Igglybuff
     add_pics Jigglypuff
     add_pics Wigglytuff
@@ -62,12 +55,8 @@ KantoPicPointers::
     add_pics Venomoth
     add_pics Diglett
     add_pics Dugtrio
-    add_pics Diglett_Alola
-    add_pics Dugtrio_Alola
     add_pics Meowth
     add_pics Persian
-    add_pics Meowth_Alola
-    add_pics Persian_Alola
     add_pics Psyduck
     add_pics Golduck
     add_pics Mankey
@@ -92,9 +81,6 @@ KantoPicPointers::
     add_pics Geodude
     add_pics Graveler
     add_pics Golem
-    add_pics Geodude_Alola
-    add_pics Graveler_Alola
-    add_pics Golem_Alola
     add_pics Ponyta
     add_pics Rapidash
     add_pics Slowpoke
@@ -110,8 +96,6 @@ KantoPicPointers::
     add_pics Dewgong
     add_pics Grimer
     add_pics Muk
-    add_pics Grimer_Alola
-    add_pics Muk_Alola
     add_pics Shellder
     add_pics Cloyster
     add_pics Gastly
@@ -127,10 +111,8 @@ KantoPicPointers::
     add_pics Electrode
     add_pics Exeggcute
     add_pics Exeggutor
-    add_pics Exeggutor_Alola
     add_pics Cubone
     add_pics Marowak
-    add_pics Marowak_Alola
     add_pics Tyrogue
     add_pics Hitmonlee
     add_pics Hitmonchan
@@ -200,7 +182,4 @@ KantoPicPointers::
     add_pics Dragonite
     add_pics Mewtwo
     add_pics Mew
-    add_pics Vaporeon_RG
-    add_pics Leafeon_Beta
-    add_pics Tangrowth_Beta
     add_pics Madaamu

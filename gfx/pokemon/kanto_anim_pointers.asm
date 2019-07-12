@@ -19,8 +19,6 @@ KantoAnimationPointers::
     add_anim Pidgeot
     add_anim Rattata
     add_anim Raticate
-    add_anim Rattata_Alola
-    add_anim Raticate_Alola
     add_anim Spearow
     add_anim Fearow
     add_anim Ekans
@@ -28,11 +26,8 @@ KantoAnimationPointers::
     add_anim Pichu
     add_anim Pikachu
     add_anim Raichu
-    add_anim Raichu_Alola
     add_anim Sandshrew
     add_anim Sandslash
-    add_anim Sandshrew_Alola
-    add_anim Sandslash_Alola
     add_anim Nidoran_F
     add_anim Nidorina
     add_anim Nidoqueen
@@ -44,8 +39,6 @@ KantoAnimationPointers::
     add_anim Clefable
     add_anim Vulpix
     add_anim Ninetales
-    add_anim Vulpix_Alola
-    add_anim Ninetales_Alola
     add_anim Igglybuff
     add_anim Jigglypuff
     add_anim Wigglytuff
@@ -62,12 +55,8 @@ KantoAnimationPointers::
     add_anim Venomoth
     add_anim Diglett
     add_anim Dugtrio
-    add_anim Diglett_Alola
-    add_anim Dugtrio_Alola
     add_anim Meowth
     add_anim Persian
-    add_anim Meowth_Alola
-    add_anim Persian_Alola
     add_anim Psyduck
     add_anim Golduck
     add_anim Mankey
@@ -92,9 +81,6 @@ KantoAnimationPointers::
     add_anim Geodude
     add_anim Graveler
     add_anim Golem
-    add_anim Geodude_Alola
-    add_anim Graveler_Alola
-    add_anim Golem_Alola
     add_anim Ponyta
     add_anim Rapidash
     add_anim Slowpoke
@@ -110,8 +96,6 @@ KantoAnimationPointers::
     add_anim Dewgong
     add_anim Grimer
     add_anim Muk
-    add_anim Grimer_Alola
-    add_anim Muk_Alola
     add_anim Shellder
     add_anim Cloyster
     add_anim Gastly
@@ -127,10 +111,8 @@ KantoAnimationPointers::
     add_anim Electrode
     add_anim Exeggcute
     add_anim Exeggutor
-    add_anim Exeggutor_Alola
     add_anim Cubone
     add_anim Marowak
-    add_anim Marowak_Alola
     add_anim Tyrogue
     add_anim Hitmonlee
     add_anim Hitmonchan
@@ -200,3 +182,4 @@ KantoAnimationPointers::
     add_anim Dragonite
     add_anim Mewtwo
     add_anim Mew
+    add_anim Madaamu

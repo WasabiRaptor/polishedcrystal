@@ -19,8 +19,6 @@ KantoFramesPointers::
     add_frames Pidgeot
     add_frames Rattata
     add_frames Raticate
-    add_frames Rattata_Alola
-    add_frames Raticate_Alola
     add_frames Spearow
     add_frames Fearow
     add_frames Ekans
@@ -28,11 +26,8 @@ KantoFramesPointers::
     add_frames Pichu
     add_frames Pikachu
     add_frames Raichu
-    add_frames Raichu_Alola
     add_frames Sandshrew
     add_frames Sandslash
-    add_frames Sandshrew_Alola
-    add_frames Sandslash_Alola
     add_frames Nidoran_F
     add_frames Nidorina
     add_frames Nidoqueen
@@ -44,8 +39,6 @@ KantoFramesPointers::
     add_frames Clefable
     add_frames Vulpix
     add_frames Ninetales
-    add_frames Vulpix_Alola
-    add_frames Ninetales_Alola
     add_frames Igglybuff
     add_frames Jigglypuff
     add_frames Wigglytuff
@@ -62,12 +55,8 @@ KantoFramesPointers::
     add_frames Venomoth
     add_frames Diglett
     add_frames Dugtrio
-    add_frames Diglett_Alola
-    add_frames Dugtrio_Alola
     add_frames Meowth
     add_frames Persian
-    add_frames Meowth_Alola
-    add_frames Persian_Alola
     add_frames Psyduck
     add_frames Golduck
     add_frames Mankey
@@ -92,9 +81,6 @@ KantoFramesPointers::
     add_frames Geodude
     add_frames Graveler
     add_frames Golem
-    add_frames Geodude_Alola
-    add_frames Graveler_Alola
-    add_frames Golem_Alola
     add_frames Ponyta
     add_frames Rapidash
     add_frames Slowpoke
@@ -110,8 +96,6 @@ KantoFramesPointers::
     add_frames Dewgong
     add_frames Grimer
     add_frames Muk
-    add_frames Grimer_Alola
-    add_frames Muk_Alola
     add_frames Shellder
     add_frames Cloyster
     add_frames Gastly
@@ -127,10 +111,8 @@ KantoFramesPointers::
     add_frames Electrode
     add_frames Exeggcute
     add_frames Exeggutor
-    add_frames Exeggutor_Alola
     add_frames Cubone
     add_frames Marowak
-    add_frames Marowak_Alola
     add_frames Tyrogue
     add_frames Hitmonlee
     add_frames Hitmonchan
@@ -200,3 +182,4 @@ KantoFramesPointers::
     add_frames Dragonite
     add_frames Mewtwo
     add_frames Mew
+    add_frames Madaamu

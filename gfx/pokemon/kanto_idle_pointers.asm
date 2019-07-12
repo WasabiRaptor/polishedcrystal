@@ -19,8 +19,6 @@ KantoAnimationIdlePointers::
     add_idleanim Pidgeot
     add_idleanim Rattata
     add_idleanim Raticate
-    add_idleanim Rattata_Alola
-    add_idleanim Raticate_Alola
     add_idleanim Spearow
     add_idleanim Fearow
     add_idleanim Ekans
@@ -28,11 +26,8 @@ KantoAnimationIdlePointers::
     add_idleanim Pichu
     add_idleanim Pikachu
     add_idleanim Raichu
-    add_idleanim Raichu_Alola
     add_idleanim Sandshrew
     add_idleanim Sandslash
-    add_idleanim Sandshrew_Alola
-    add_idleanim Sandslash_Alola
     add_idleanim Nidoran_F
     add_idleanim Nidorina
     add_idleanim Nidoqueen
@@ -44,8 +39,6 @@ KantoAnimationIdlePointers::
     add_idleanim Clefable
     add_idleanim Vulpix
     add_idleanim Ninetales
-    add_idleanim Vulpix_Alola
-    add_idleanim Ninetales_Alola
     add_idleanim Igglybuff
     add_idleanim Jigglypuff
     add_idleanim Wigglytuff
@@ -62,12 +55,8 @@ KantoAnimationIdlePointers::
     add_idleanim Venomoth
     add_idleanim Diglett
     add_idleanim Dugtrio
-    add_idleanim Diglett_Alola
-    add_idleanim Dugtrio_Alola
     add_idleanim Meowth
     add_idleanim Persian
-    add_idleanim Meowth_Alola
-    add_idleanim Persian_Alola
     add_idleanim Psyduck
     add_idleanim Golduck
     add_idleanim Mankey
@@ -92,9 +81,6 @@ KantoAnimationIdlePointers::
     add_idleanim Geodude
     add_idleanim Graveler
     add_idleanim Golem
-    add_idleanim Geodude_Alola
-    add_idleanim Graveler_Alola
-    add_idleanim Golem_Alola
     add_idleanim Ponyta
     add_idleanim Rapidash
     add_idleanim Slowpoke
@@ -110,8 +96,6 @@ KantoAnimationIdlePointers::
     add_idleanim Dewgong
     add_idleanim Grimer
     add_idleanim Muk
-    add_idleanim Grimer_Alola
-    add_idleanim Muk_Alola
     add_idleanim Shellder
     add_idleanim Cloyster
     add_idleanim Gastly
@@ -127,10 +111,8 @@ KantoAnimationIdlePointers::
     add_idleanim Electrode
     add_idleanim Exeggcute
     add_idleanim Exeggutor
-    add_idleanim Exeggutor_Alola
     add_idleanim Cubone
     add_idleanim Marowak
-    add_idleanim Marowak_Alola
     add_idleanim Tyrogue
     add_idleanim Hitmonlee
     add_idleanim Hitmonchan
@@ -200,3 +182,4 @@ KantoAnimationIdlePointers::
     add_idleanim Dragonite
     add_idleanim Mewtwo
     add_idleanim Mew
+    add_idleanim Madaamu
