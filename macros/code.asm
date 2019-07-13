@@ -67,7 +67,7 @@ ENDM
 ; \2 = false
 ; a = group
 ; b = species
-comparepokemon: MACRO
+cppoke: MACRO
 	cp GROUP_\1
 	jr nz, \2
 	ld a, b
@@ -79,7 +79,7 @@ ENDM
 ; \1 = species
 ; \2 = false
 ; hl = Pokemon
-comparepokemonhl: MACRO
+cppokehl: MACRO
 	ld a, [hli]
 	cp GROUP_\1
 	jr nz, \2
