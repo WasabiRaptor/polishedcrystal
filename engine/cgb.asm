@@ -1071,11 +1071,6 @@ _CGB_BillsPC: ; 8fca
 	jr .Resume
 
 .GetMonPalette:
-	push hl
-	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
-	pop hl
-
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
@@ -1286,6 +1281,7 @@ _CGB_PlayerOrMonFrontpicPals: ; 9529
 	ld hl, wTempMonGroup
 	call GetPartyMonGroupSpeciesAndForm
 	pop hl
+
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
@@ -1299,6 +1295,11 @@ _CGB_PlayerOrMonFrontpicPals: ; 9529
 
 
 _CGB_TrainerOrMonFrontpicPals: ; 9578
+	push hl
+	ld hl, wTempMonGroup
+	call GetPartyMonGroupSpeciesAndForm
+	pop hl
+
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality

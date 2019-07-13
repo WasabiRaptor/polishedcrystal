@@ -1135,6 +1135,21 @@ BillsPC_LoadMonStats: ; e2b6d (38:6b6d)
 	call GetBoxPointer
 	ld a, b
 	call GetSRAMBank
+	; group, species, and item
+	push hl
+	ld bc, sBoxMon1Group - sBox
+	add hl, bc
+	ld bc, BOXMON_STRUCT_LENGTH
+	ld a, e
+	rst AddNTimes
+	ld a, [hli]
+	ld [wTempMonGroup], a
+	ld a, [hli]
+	ld [wTempMonSpecies], a
+	ld a, [hl]
+	ld [wTempMonItem], a
+	pop hl
+
 	; level
 	push hl
 	ld bc, sBoxMon1Level - sBox
@@ -1144,16 +1159,6 @@ BillsPC_LoadMonStats: ; e2b6d (38:6b6d)
 	rst AddNTimes
 	ld a, [hl]
 	ld [wTempMonLevel], a
-	pop hl
-	; item
-	push hl
-	ld bc, sBoxMon1Item - sBox
-	add hl, bc
-	ld bc, BOXMON_STRUCT_LENGTH
-	ld a, e
-	rst AddNTimes
-	ld a, [hl]
-	ld [wTempMonItem], a
 	pop hl
 	; DVs and personality (DVs for color variation)
 	push hl
