@@ -6769,7 +6769,7 @@ LoadEnemyMon: ; 3e8eb
 
 	; Clear the whole wEnemyMon struct
 	xor a
-	ld hl, wEnemyMonSpecies
+	ld hl, wEnemyMon
 	ld bc, wEnemyMonEnd - wEnemyMon
 	call ByteFill
 
@@ -7094,7 +7094,7 @@ endc
 .Female
 	ld b, a
 
-	ld a, [wTempEnemyMonGroup] ; make sure the pokemon has the correct group
+	ld a, 1 ; enemy mon form
 .special_form
 	add b
 	ld [hl], a

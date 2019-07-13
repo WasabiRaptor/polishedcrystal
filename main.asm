@@ -2569,7 +2569,6 @@ SetBoxmonOrEggmonCaughtData: ; 4db53
 	ld b, a
 	; CaughtTime
 	ld a, [wTimeOfDay]
-	inc a
 	rrca
 	rrca
 	rrca

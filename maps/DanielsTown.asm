@@ -21,7 +21,7 @@ DanielsTown_MapScriptHeader:
 	object_event  9,  10, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, setjohtoscript, -1
 
 setjohtoscript:
-	loadvar wPartyMon1Group, REGION_JOHTO
+	loadvar wPartyMon1Group, REGION_HOENN
 	end
 
 checkpokegroupscript:

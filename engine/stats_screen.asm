@@ -762,8 +762,8 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 ; Ported by FredrIQ
 OrangePage_:
 	call TN_PrintToD
-	call TN_PrintLocation
 	call TN_PrintLV
+	call TN_PrintLocation
 	hlcoord 0, 11
 	ld de, .horizontal_divider
 	call PlaceString
@@ -797,32 +797,40 @@ TN_PrintToD
 	call PlaceString
 	ld a, [wTempMonCaughtTime]
 	and CAUGHTTIME_MASK
-	ld de, .unknown
-	jr z, .print
+	;ld de, .unknown
+	;jr z, .print
 	rlca
 	rlca
 	rlca
-	cp 2
 	ld de, .morn
-	jr c, .print
+	jr z, .print
+	cp 2
 	ld de, .day
+	jr c, .print
+	ld de, .dusk
 	jr z, .print
 	ld de, .nite
 .print
 	hlcoord 3, 9
-	jp PlaceString
+	call PlaceString
+	ld h, b
+	ld l, c
+	ret
 
 .caughtat
 	db "Met/@"
 
 .morn
-	db "Morn@"
+	db "Dawn@"
 
 .day
 	db "Day@"
 
+.dusk
+	db "Dusk@"
+
 .nite
-	db "Nite@"
+	db "Night@"
 
 .unknown
 	db "???@"
@@ -846,7 +854,7 @@ TN_PrintLocation:
 
 TN_PrintLV:
 	ld a, [wTempMonCaughtLevel]
-	hlcoord 8, 9
+	inc hl
 	and a
 	jr z, .unknown
 	cp 1
@@ -856,7 +864,9 @@ TN_PrintLV:
 	call PlaceString
 	ld de, wBuffer2
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-	hlcoord 12, 9
+rept 4
+	inc hl
+endr
 	jp PrintNum
 .hatched
 	ld de, .str_hatched

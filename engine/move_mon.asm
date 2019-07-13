@@ -79,13 +79,23 @@ TryAddMonToParty: ; d88c
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 GeneratePartyMonStats: ; d906
-	ld e, l
+	ld e, l ; group is loaded form hl to de
 	ld d, h
 	push hl ; 1 ; group is pushed
 
+	;push hl
+	;push de
+	;push bc
+	;hlcoord 1, 1
+	;ld de, wCurPartyGroup
+	;lb bc, 1, 3
+	;call PrintNum
+	;pop bc
+	;pop de
+	;pop hl
 	ld a, [wCurPartyGroup]; pokemon group
 	ld [wCurGroup], a
-	ld [de], a ; group should be loaded into de? but it must be getting overwritten somehwere down the line but I can't find where
+	ld [hl], a ; group should be loaded into de? but it must be getting overwritten somehwere down the line but I can't find where
 	inc de ; species is now in de
 
 	ld a, [wCurPartySpecies]; pokemon species
@@ -529,6 +539,13 @@ endr
 	;farcall UpdateUnownDex
 
 .done
+	; this is only here to be 100% sure that the group byte is written, it gets written first thing up above, but I can't find where it is overwritten
+	; but I do know that wCurPartyGroup is preserved the entire time, so we're going to write to the group byte again here
+	ld a, REGION_JOHTO
+	ld [wPartyMon1Group], a
+	; group is in HL at the moment so just writing to it again for now
+
+
 	scf ; When this function returns, the carry flag indicates success vs failure.
 	ret
 ; da6d
@@ -2022,7 +2039,6 @@ GivePoke:: ; e277
 ;	rst AddNTimes
 ;	ld a, [wCurGenderOrGroupBuffer]
 ;	ld [hl], a
-
 .item
 	ld a, [wCurItem]
 	and a
@@ -2044,7 +2060,6 @@ GivePoke:: ; e277
 	rst AddNTimes
 	ld a, [wCurPersonality]
 	ld [hl], a
-
 	jr .done
 
 .failed
@@ -2127,7 +2142,6 @@ GivePoke:: ; e277
 	push de
 	push bc
 	jr nz, .send_to_box
-
 	push hl
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
