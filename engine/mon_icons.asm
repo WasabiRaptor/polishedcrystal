@@ -62,10 +62,9 @@ LoadPartyMenuMonIconColors:
 	ld a, [hl]
 	ld [wCurIconMonHasItemOrMail], a
 
-	ld hl, wPartySpecies
-	add hl, de
-	ld a, [hl]
-	ld [wCurPartySpecies], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	call GetPartyParamLocation
+	
 	ld a, MON_SHINY
 	call GetPartyParamLocation
 	call GetMenuMonIconPalette

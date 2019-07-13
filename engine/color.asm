@@ -872,6 +872,11 @@ LoadPokemonPalette:
 
 LoadPartyMonPalette:
 	; bc = personality
+	ld hl, wPartyMon1Group
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	call GetPartyMonGroupSpeciesAndForm
+	
 	ld hl, wPartyMon1Personality
 	ld a, [wCurPartyMon]
 	call GetPartyLocation

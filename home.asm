@@ -1533,7 +1533,7 @@ GetLeadAbility::
 	push de
 	push hl
 	ld hl, wPartyMon1Group
-	call TempToCurGroupAndSpecies
+	call PokemonToGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]

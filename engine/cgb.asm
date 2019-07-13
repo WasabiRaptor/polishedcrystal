@@ -250,6 +250,11 @@ _CGB_StatsScreenHPPals: ; 8edb
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black
 
+	push hl
+	ld hl, wTempMonGroup
+	call GetPartyMonGroupSpeciesAndForm
+	pop hl
+
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalettePointer
@@ -591,10 +596,13 @@ _CGB_Evolution: ; 91e4
 	jr .got_palette
 
 .pokemon
-	ld hl, wPartyMon1Personality
+	ld hl, wTempMonGroup
+	call GetPartyMonGroupSpeciesAndForm
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
+	ld bc, MON_PERSONALITY
+	add hl, bc
 	ld c, l
 	ld b, h
 	ld a, [wPlayerHPPal]
@@ -1063,6 +1071,11 @@ _CGB_BillsPC: ; 8fca
 	jr .Resume
 
 .GetMonPalette:
+	push hl
+	ld hl, wTempMonGroup
+	call GetPartyMonGroupSpeciesAndForm
+	pop hl
+
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
@@ -1269,6 +1282,10 @@ endc
 
 
 _CGB_PlayerOrMonFrontpicPals: ; 9529
+	push hl
+	ld hl, wTempMonGroup
+	call GetPartyMonGroupSpeciesAndForm
+	pop hl
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
