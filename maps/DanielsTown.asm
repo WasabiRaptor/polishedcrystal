@@ -14,10 +14,15 @@ DanielsTown_MapScriptHeader:
 
 	db 0 ; bg events
 
-	db 3 ; object events
+	db 4 ; object events
 	object_event  9,  8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, MysteryDungeonEnterScript, -1
 	object_event  7, 27, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
-	object_event  9,  9, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, checkpokegroupscript, -1
+	object_event  9,  9, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, checkpokegroupscript, -1
+	object_event  9,  10, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, setjohtoscript, -1
+
+setjohtoscript:
+	loadvar wPartyMon1Group, REGION_JOHTO
+	end
 
 checkpokegroupscript:
 	opentext
