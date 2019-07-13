@@ -3309,16 +3309,20 @@ BattleCommand_ragedamage:
 
 
 DittoMetalPowder: ; 352b1
-	ld a, MON_SPECIES
+	ld a, MON_GROUP
 	call UserPartyAttr
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
 	jr nz, .continue
+	push hl
 	ld hl, wTempEnemyMon
 	call TempToCurGroupAndSpecies
-
+	pop hl
 .continue:
+	cp REGION_KANTO
+	ret nz
+	ld a, [wCurSpecies]
 	cp DITTO
 	ret nz
 
@@ -3362,7 +3366,7 @@ UnevolvedEviolite:
 	push hl
 	push bc
 	push de
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies] ;group is definetly known
 	dec a

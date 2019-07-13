@@ -1512,9 +1512,8 @@ RareCandy_StatBooster_GetParameters: ; eef5
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
-	ld a, MON_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;frorm is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
@@ -3236,9 +3235,8 @@ AbilityCap:
 	ld e, l
 	pop hl
 	push hl
-	ld a, MON_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;frorm is known
 	ld a, [wBaseAbility1]
 	ld b, a

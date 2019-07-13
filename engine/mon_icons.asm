@@ -37,10 +37,8 @@ LoadFlyMonColor:
 	push de
 	push bc
 	push af
-	ld a, MON_SPECIES_AND_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	ld a, [hl]
-	ld [wCurPartySpecies], a
 	ld a, MON_SHINY
 	call GetPartyParamLocation
 	call GetMenuMonIconPalette
@@ -478,7 +476,7 @@ HoldSwitchmonIcon: ; 8ea8c
 GetRelevantIconPointersAndBank:
 ; given species in wCurIcon, return *IconPointers in hl and BANK(*Icon) in b
 ; returns c for variants, nc for normal species
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, VariantIconPointerTable
 	ld de, 3
 	call IsInArray
@@ -506,7 +504,7 @@ GetRelevantIconPointersAndBank:
 INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"
 
 GetRelevantMonIconColors:
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 ; given species in a, return *PicPointers in hl 
 ; returns c for variants, nc for normal species
 	ld hl, VariantIconPalTable

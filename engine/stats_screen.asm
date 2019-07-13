@@ -73,7 +73,7 @@ StatsScreen_WaitAnim: ; 4dd3a (13:5d3a)
 .try_anim
 	farcall SetUpPokeAnim
 	jr nc, .finish
-	ld hl, wcf64
+	ld hl, wcf64 ; something with the pokeanim it seems
 	res 6, [hl]
 .finish
 	ld hl, wcf64
@@ -93,7 +93,7 @@ StatsScreen_Exit: ; 4dd6c (13:5d6c)
 	ret
 
 MonStatsInit: ; 4dd72 (13:5d72)
-	ld hl, wcf64
+	ld hl, wcf64 ; what is this for hm?
 	res 6, [hl]
 	call ClearBGPalettes
 	call ClearTileMap
@@ -171,8 +171,8 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	ld hl, wBufferMonGroup
 	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
-	ld hl, wBufferMon
-	ld de, wTempMon
+	ld hl, wBufferMonGroup ; hm but where is buffer mon set?
+	ld de, wTempMonGroup
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst CopyBytes
 	jr .done
@@ -770,6 +770,8 @@ OrangePage_:
 	hlcoord 1, 12
 	ld de, .ability
 	call PlaceString
+	ld hl, wTempMonGroup
+	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wTempMonAbility]
 	ld b, a
 	ld a, [wTempMonSpecies]
@@ -1046,7 +1048,7 @@ StatsScreen_GetAnimationParam: ; 4e2ad (13:62ad)
 
 .PartyMon: ; 4e2bf (13:62bf)
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld b, h

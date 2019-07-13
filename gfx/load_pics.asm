@@ -68,7 +68,7 @@ _GetFrontpic: ; 510a5
 	ret
 
 GetFrontpicPointer: ; 510d7
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	call GetRelevantPicPointers
 	ld a, [wCurPartySpecies]
 	dec a	
@@ -177,13 +177,15 @@ LoadFrontpicTiles: ; 5114f
 	ret
 
 GetBackpic: ; 5116c
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ret c
 
 	ld a, [wCurPartySpecies]
 	ld b, a
-	ld a, [wCurPokeGroup]
+	ld a, [wCurPartyGroup]
 	ld c, a
 	ldh a, [rSVBK]
 	push af

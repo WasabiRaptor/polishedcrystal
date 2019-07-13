@@ -83,7 +83,7 @@ DoBattle: ; 3c000
 	ld a, [wCurPartyMon]
 	ld [wCurBattleMon], a
 
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	call GetPartyLocation
 	call GetPartyMonGroupSpeciesAndForm
 
@@ -517,9 +517,10 @@ GetSpeed::
 	ld hl, wEnemyMonGroup
 .got_species
 	call GetPartyMonGroupSpeciesAndForm
-	ld a, [wCurSpecies]
+	ld a, [wCurGroup]
 	cp REGION_KANTO
 	jr nz, .done
+	ld a, [wCurSpecies]
 	cp DITTO
 	jr nz, .done
 	ld a, $21
@@ -2245,7 +2246,8 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	and $c0
 	ld [wBattleResult], a
 ; fallthrough
-
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld c, a
 
@@ -2309,23 +2311,23 @@ IsAnyMonHoldingExpShare: ; 3ceaa
 	ld c, 1
 	ld d, 0
 .loop
-	push hl
-	push bc
+	push hl ; 1 push group
+	push bc ; 2
 	ld bc, MON_HP
 	add hl, bc
 	ld a, [hli]
 	or [hl]
-	pop bc
-	pop hl
+	pop bc ; 1
+	pop hl ; 0 pop group
 	jr z, .next
 
-	push hl
-	push bc
+	push hl ; 1 push group
+	push bc ; 2
 	ld bc, MON_ITEM
 	add hl, bc
-	pop bc
-	ld a, [hl]
-	pop hl
+	pop bc ; 1
+	ld a, [hl] ; loading the item from hl
+	pop hl ; 0
 
 	cp EXP_SHARE
 	jr nz, .next
@@ -2371,6 +2373,8 @@ FaintYourPokemon: ; 3cef1
 	call WaitSFX
 	ld a, $f0
 	ld [wCryTracks], a
+	ld a, [wBattleMonGroup]
+	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -2388,6 +2392,8 @@ FaintEnemyPokemon: ; 3cf14
 	call WaitSFX
 	ld a, $f
 	ld [wCryTracks], a
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -3384,7 +3390,7 @@ LoadEnemyPkmnToSwitchTo:
 	push af
 	inc a
 	ld [wCurPartyMon], a
-	ld hl, wOTPartyMon1
+	ld hl, wOTPartyMon1Group
 	call GetPartyLocation
 	call GetPartyMonGroupSpeciesAndForm
 	pop af
@@ -3401,7 +3407,7 @@ LoadEnemyPkmnToSwitchTo:
 	;jr nz, .skip_unown
 	;ld hl, wEnemyMonGroup
 	;predef GetPokeGroup
-	;ld a, [wCurPokeGroup]
+	;ld a, [wCurGroup]
 	;ld [wFirstUnownSeen], a
 ;.skip_unown
 
@@ -3413,7 +3419,7 @@ LoadEnemyPkmnToSwitchTo:
 	;jr nz, .skip_magikarp
 	;ld hl, wEnemyMonGroup
 	;predef GetPokeGroup
-	;ld a, [wCurPokeGroup]
+	;ld a, [wCurGroup]
 	;ld [wFirstMagikarpSeen], a
 ;.skip_magikarp
 
@@ -3599,7 +3605,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	call Call_PlayBattleAnim
 .not_shiny
 
-	ld bc, wTempMonSpecies
+	ld bc, wTempMon
 	farcall CheckFaintedFrzSlp
 	jr c, .skip_cry
 	farcall CheckBattleEffects
@@ -3655,6 +3661,8 @@ NewEnemyMonStatus: ; 3d834
 ; 3d867
 
 ResetPlayerAbility:
+	ld a, [wBattleMonGroup]
+	ld [wCurGroup], a
 	ld a, [wBattleMonAbility]
 	ld b, a
 	ld a, [wBattleMonSpecies]
@@ -3678,6 +3686,8 @@ ResetPlayerAbility:
 	ret
 
 ResetEnemyAbility:
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonAbility]
 	ld b, a
 	ld a, [wEnemyMonSpecies]
@@ -3978,7 +3988,7 @@ SendOutPlayerMon: ; 3db5f
 	call Call_PlayBattleAnim
 
 .not_shiny
-	ld a, MON_GROUP_SPECIES_AND_FORM
+	ld a, MON_GROUP
 	call GetPartyParamLocation
 	ld b, h
 	ld c, l
@@ -4295,6 +4305,8 @@ PursuitSwitch: ; 3dc5b
 
 	ld a, $f0
 	ld [wCryTracks], a
+	ld a, [wBattleMonGroup]
+	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -4313,6 +4325,8 @@ PursuitSwitch: ; 3dc5b
 
 	ld a, $f
 	ld [wCryTracks], a
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -6717,7 +6731,7 @@ LinkBattleSendReceiveAction: ; 3e8e4
 GetRelevantTotalEncounterdPokemonSpeciesPointer:
 	push bc
 	push de
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, EncounterCounterPointerTable
 	ld de, 3
 	call IsInArray
@@ -6732,7 +6746,7 @@ GetRelevantTotalEncounterdPokemonSpeciesPointer:
 GetRelevantTotalDefeatedPokemonSpeciesPointer:
 	push bc
 	push de
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, DefeatedCounterPointerTable
 	ld de, 3
 	call IsInArray
@@ -7108,7 +7122,7 @@ endr
 	;inc a
 	;ld b, a
 	;ld a, [wEnemyMonGroup]
-	;and $ff - GROUP_MASK
+	;and $ff - FORM_MASK
 	;add b
 	;ld [wEnemyMonGroup], a
 	; Get letter based on form
@@ -7135,7 +7149,7 @@ endr
 	;inc a
 	;ld b, a
 	;ld a, [wEnemyMonGroup]
-	;and $ff - GROUP_MASK
+	;and $ff - FORM_MASK
 	;add b
 	;ld [wEnemyMonGroup], a
 
@@ -7491,7 +7505,7 @@ FinalPkmnSlideInEnemyMonFrontpic:
 BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 	xor a
 	ld [wTempEnemyMonSpecies], a
-	ld [wTemoEnemyMonGroup], a
+	ld [wTempEnemyMonGroup], a
 	call FinishBattleAnim
 	ld a, [wOtherTrainerClass]
 	ld [wTrainerClass], a
@@ -7812,7 +7826,7 @@ GiveExperiencePoints: ; 3ee3b
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
 	call GetPartyMonGroupSpeciesAndForm
-	ld [wCurSpecies], a
+	ld a, [wCurSpecies]
 	call GetBaseData ;form is known
 	push bc
 	ld d, MAX_LEVEL
@@ -7971,7 +7985,7 @@ GiveExperiencePoints: ; 3ee3b
 	cp b
 	jp z, ResetBattleParticipants
 	ld [wCurPartyMon], a
-	ld a, MON_SPECIES_AND_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
 	ld b, h
 	ld c, l
@@ -8800,7 +8814,7 @@ GetEnemyIllusion:
 	ld e, a
 	ld a, [wOTPartyCount]
 	ld d, a
-	ld hl, wOTPartyMon1
+	ld hl, wOTPartyMon1Group
 	ld a, [wEnemyAbility]
 	jr CheckIllusion
 GetPlayerIllusion:
@@ -8808,7 +8822,7 @@ GetPlayerIllusion:
 	ld e, a
 	ld a, [wPartyCount]
 	ld d, a
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld a, [wPlayerAbility]
 CheckIllusion:
 	cp ILLUSION
@@ -9000,7 +9014,7 @@ InitEnemyWildmon: ; 3f607
 	;ld a, [wFirstUnownSeen]
 	;and a
 	;jr nz, .skip_unown
-	;ld a, [wCurPokeGroup]
+	;ld a, [wCurGroup]
 	;ld [wFirstUnownSeen], a
 ;.skip_unown
 
@@ -9010,7 +9024,7 @@ InitEnemyWildmon: ; 3f607
 	;ld a, [wFirstMagikarpSeen]
 	;and a
 	;jr nz, .skip_magikarp
-	;ld a, [wCurPokeGroup]
+	;ld a, [wCurGroup]
 	;ld [wFirstMagikarpSeen], a
 ;.skip_magikarp
 
@@ -9386,6 +9400,7 @@ BattleEnd_HandleRoamMons: ; 3f998
 	farjp UpdateRoamMons
 ; 3f9d1
 
+; TODO re implement to account for second byte
 GetRoamMonMapGroup: ; 3f9d1
 	ld hl, wTempEnemyMon
 	call TempToCurGroupAndSpecies

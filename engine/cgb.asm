@@ -74,7 +74,7 @@ _CGB_BattleColors: ; 8ddb
 	ld de, wUnknBGPals
 	call GetBattlemonBackpicPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
-	ld hl, wTempBattleyMon
+	ld hl, wTempBattleMon
 	call TempToCurGroupAndSpecies
 	and a
 	jr z, .player_backsprite
@@ -328,7 +328,7 @@ _CGB_Pokedex: ; 8f70
 	jr .got_palette
 .is_pokemon
 	ld bc, wDexMonShiny
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld [wDexMonGroup], a
 	ld a, [wCurPartySpecies]
 

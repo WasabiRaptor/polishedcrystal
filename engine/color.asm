@@ -688,6 +688,7 @@ GetBattlemonBackpicPalettePointer:
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
+	push hl
 	ld a, [wTempBattleMonGroup]
 	push af
 	ld a, [wTempBattleMonSpecies]
@@ -711,7 +712,8 @@ GetBattlemonBackpicPalettePointer:
 	pop af 
 	ld [wTempBattleMonGroup], a
 	ld hl, wTempBattleMon
-	call CurPartyGroupAndSpeciesToTemp
+	call TempToCurPartyGroupAndSpecies
+	pop hl
 	pop de
 	ret
 
@@ -720,6 +722,7 @@ GetEnemyFrontpicPalettePointer:
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h
+	push hl
 	ld a, [wTempEnemyMonGroup]
 	push af
 	ld a, [wTempEnemyMonSpecies]
@@ -744,6 +747,7 @@ GetEnemyFrontpicPalettePointer:
 	ld [wTempEnemyMonGroup], a
 	ld hl, wTempEnemyMon
 	call TempToCurPartyGroupAndSpecies
+	pop hl
 	pop de
 	ret
 
@@ -896,7 +900,7 @@ LoadPartyMonPalette:
 
 GetRelevantPallete:
 ; given species in a, return *Palette in bc
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, VariantPaletteTable
 	ld de, 4
 	call IsInArray

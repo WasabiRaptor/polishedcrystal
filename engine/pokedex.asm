@@ -604,7 +604,7 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 .next_group
 	ld [wPokedexRegion], a
 	ld [wDexMonGroup], a
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ld b, DEXMODE_VARIANT
 	jr .force_change_mode
 
@@ -1655,7 +1655,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	inc de
 	call .getPokedexOrderByte
 	ld [wDexMonGroup], a
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	pop hl
 	push de
 	push hl
@@ -1851,7 +1851,7 @@ Pokedex_GetSelectedMon: ; 40bb1
 	ld a, BANK(wPokedexOrder)
 	call GetFarWRAMByte
 	ld [wDexMonGroup], a
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ld a, [wPokedexCurrentMon]
 	ret
 
@@ -1881,7 +1881,7 @@ GetRelevantSeenPointers::
 	push de
 	push bc
 	push af
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, RegionalSeenTable
 	ld de, 3
 	call IsInArray
@@ -1898,7 +1898,7 @@ GetRelevantCaughtPointers::
 	push de
 	push bc
 	push af
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, RegionalCaughtTable
 	ld de, 3
 	call IsInArray
@@ -2016,11 +2016,11 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	push af
 	inc de
 	ld a, [de]
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	pop af
 	ld a, [wPokedexCurrentMon]
 	ld [hli], a
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld [hli], a
 	ld a, [wDexListingEnd]
 	inc a
@@ -2220,7 +2220,7 @@ Pokedex_SearchForMons: ; 41086
 	ld de, wPokedexOrder
 	ld c, NUM_KANTO_POKEMON
 	ld a, REGION_KANTO ; $1
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ld [wCurSpecies], a ;the first species in each group aight
 	xor a
 	ld [wDexSearchResultCount], a
@@ -2251,7 +2251,7 @@ Pokedex_SearchForMons: ; 41086
 	ld a, [wPokedexCurrentMon]
 	ld [de], a
 	inc de
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld [de], a
 	inc de
 	ld a, [wDexSearchResultCount]
@@ -2268,12 +2268,12 @@ Pokedex_SearchForMons: ; 41086
 	pop bc
 	dec c
 	jr nz, .loop
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	cp REGION_JOHTO
 	ld a, 1
 	ld [wCurSpecies], a
 	ld a, REGION_JOHTO
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ld c, NUM_JOHTO_POKEMON
 	jr c, .loop
 
@@ -2674,7 +2674,7 @@ Pokedex_LoadAnyFootprint: ; 4147b
 Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
 	push af
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, VariantFootprintTable
 	ld de, 4
 	call IsInArray
@@ -2725,7 +2725,7 @@ Pokedex_LoadUnownFont: ; 41a2c
 	jp LoadStandardFont
 
 Pokedex_LoadUnownFrontpicTiles: ; 41a58 (10:5a58)
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	push af
 	ld a, [wDexCurrentUnownIndex]
 	ld e, a
@@ -2733,14 +2733,14 @@ Pokedex_LoadUnownFrontpicTiles: ; 41a58 (10:5a58)
 	ld hl, wUnownDex
 	add hl, de
 	ld a, [hl]
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ld a, UNOWN
 	ld [wCurPartySpecies], a
 	call GetBaseData ;form is known
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	pop af
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ret
 
 NewPokedexEntry: ; fb877

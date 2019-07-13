@@ -97,8 +97,8 @@ LoadMonAnimation: ; d00a3
 	call GetFarWRAMByte
 	ld [wPokeAnimSpeciesOrVariant], a
 
-	ld a, BANK(wCurPokeGroup)
-	ld hl, wCurPokeGroup
+	ld a, BANK(wCurGroup)
+	ld hl, wCurGroup
 	call GetFarWRAMByte
 	ld [wPokeAnimGroup], a
 

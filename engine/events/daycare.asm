@@ -741,13 +741,13 @@ DayCare_InitBreeding: ; 16a3b
 	ld hl, wEggOT
 	ld bc, NAME_LENGTH
 	call ByteFill
-	ld hl, wBreedMon1
+	ld hl, wBreedMon1Group
 	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wBreedMon1Gender]
 	ld [wTempMonGender], a
 	ld a, $3
 	ld [wMonType], a
-	ld a, [wBreedmon1Group]
+	ld a, [wBreedMon1Group]
 	cp REGION_KANTO
 	ld a, [wBreedMon1Species]
 	jr nz, .not_ditto_1
@@ -755,7 +755,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld a, $1
 	jr z, .LoadWhichBreedmonIsTheMother
 .not_ditto_1
-	ld a, [wBreedmon2Group]
+	ld a, [wBreedMon2Group]
 	cp REGION_KANTO
 	ld a, [wBreedMon2Species]
 	jr nz, .not_ditto_2
@@ -777,10 +777,10 @@ DayCare_InitBreeding: ; 16a3b
 
 	ld a, [wBreedMon2Species]
 	ld [wCurPartySpecies], a
-	ld hl, wBreedMon2
+	ld hl, wBreedMon2Group
 	jr .GotMother2
 .GotMother1:
-	ld hl, wBreedMon1
+	ld hl, wBreedMon1Group
 .GotMother2:
 	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
@@ -789,6 +789,9 @@ DayCare_InitBreeding: ; 16a3b
 	ld a, EGG_LEVEL
 	ld [wCurPartyLevel], a
 	
+	ld a, [wCurPartyGroup]
+	ld [wEggMonGroup], a
+
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	ld [wEggMonSpecies], a
@@ -1015,7 +1018,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld b, a
 	push bc
 	push de
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	call GetRelevantBaseData
 	ld a, [wEggMonSpecies]
 	dec a
@@ -1049,11 +1052,11 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wEggMonCaughtBall], a
 
 	; Form works the same as Ball
-	ld hl, wBreedMon1Group
+	ld hl, wBreedMon1Form
 	call .inherit_mother_unless_samespecies
 	ld a, [hl]
-	and GROUP_MASK
-	ld hl, wEggMonGroup
+	and FORM_MASK
+	ld hl, wEggMonForm
 	or [hl]
 	ld [hl], a
 

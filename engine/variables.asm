@@ -62,6 +62,7 @@ _GetVarAction:: ; 80648 (20:4648)
 	dwb wBattlePoints,                  RETVAR_ADDR_DE
 	dwb .CountPokemonJournals,          RETVAR_EXECUTE
 	dwb .CountTrainerStars,             RETVAR_EXECUTE
+	dwb wPartyMon1Group, 				RETVAR_STRBUF2
 	dwb NULL,                           RETVAR_STRBUF2
 ; 806c5
 

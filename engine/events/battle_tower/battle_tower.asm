@@ -139,7 +139,7 @@ ReadBTTrainerParty: ; 1702b7
 	ld [wBGMapBuffer + 1], a
 
 	; Copy Pkmn into Memory from the address in hl
-	ld de, wOTPartyMon1
+	ld de, wOTPartyMon1Group
 	ld bc, wOTPartyCount
 	ld a, BATTLETOWER_NROFPKMNS ; Number of Pkmn the BattleTower-Trainer has
 	ld [bc], a

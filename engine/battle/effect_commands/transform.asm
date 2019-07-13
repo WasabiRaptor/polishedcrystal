@@ -47,17 +47,20 @@ BattleCommand_transform:
 	call GetBattleVarAddr
 	set SUBSTATUS_TRANSFORMED, [hl]
 	call ResetActorDisable
-	ld hl, wBattleMonSpecies
-	ld de, wEnemyMonSpecies
+	ld hl, wBattleMonGroup
+	ld de, wEnemyMonGroup
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .got_mon_species
-	ld hl, wEnemyMonSpecies
-	ld de, wBattleMonSpecies
+	ld hl, wEnemyMonGroup
+	ld de, wBattleMonGroup
 	xor a
 	ld [wCurMoveNum], a
 .got_mon_species
 	push hl
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc hl
@@ -118,11 +121,9 @@ BattleCommand_transform:
 	dec b
 	jr nz, .pp_loop
 	pop hl
-	ld a, [hl]
+	call PokemonToGroupSpeciesAndForm
+	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
-	ld bc, wBattleMonGroup - wBattleMonSpecies
-	add hl, bc
-	call GetPartyMonGroupSpeciesAndForm
 	call GetPokemonName
 	ld hl, wEnemyStatLevels
 	ld de, wPlayerStatLevels

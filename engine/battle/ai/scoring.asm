@@ -3132,7 +3132,7 @@ AI_CheckTypeMatchupAndBeFooledByIllusion:
 .no_illusion
 	farcall BattleCheckTypeMatchup
 
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld a, [wCurBattleMon]
 	call GetPartyLocation
 	call PutBattleMonTypesIn

@@ -174,6 +174,8 @@ endr
 	; post-e4
 	setflag ENGINE_CREDITS_SKIP
 	setflag ENGINE_HAVE_SHINY_CHARM
+
+	jump .skipmons
 	; good party
 	givepoke MEWTWO, 100
 	loadvar wPartyMon1EVs+0, 252
@@ -215,6 +217,7 @@ endr
 	loadvar wPartyMon3PP+1, 15
 	loadvar wPartyMon3PP+2, 15
 	loadvar wPartyMon3PP+3, 15
+.skipmons
 	; fill pokedex
 	callasm FillPokedex
 	; intro events

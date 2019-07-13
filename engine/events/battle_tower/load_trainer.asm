@@ -220,9 +220,9 @@ PopulateBattleTowerTeam:
 	push de
 	ld a, d
 	ld [wCurPartyMon], a
-	ld a, MON_SPECIES_AND_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetEnemyPartyParamLocation
-	ld a, [hl]
+	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, wOTPartyMonNicknames
@@ -296,10 +296,10 @@ BT_SetLevel:
 ; Set level of all pokémon in your and opponent's party to a and set HP to max HP
 	ld d, a
 	ld a, [wPartyCount]
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	call .set_level
 	ld a, [wOTPartyCount]
-	ld hl, wOTPartyMon1
+	ld hl, wOTPartyMon1Group
 .set_level
 	dec a
 	ld e, a

@@ -132,7 +132,7 @@ FindNest: ; 2a01f
 	ret
 
 .found
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	cp [hl]
 	jp nz, .notfound
 	pop af
@@ -362,7 +362,7 @@ _ChooseWildEncounter:
 	ld a, [hli]
 	ld [wCurSpecies], a
 	ld a, [hli]
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	push bc
 	push hl
 	call GetBaseData
@@ -436,7 +436,7 @@ _ChooseWildEncounter:
 	ld a, [hli]
 	ld b, a
 	ld a, [hl]
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ld [wTempWildMonGroup], a
 	ld a, b
 	pop hl

@@ -1640,7 +1640,7 @@ GetDexEntryPointer:: ; 44333
 	push hl
 ;get relevant pointers
 	push af
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, VariantPokedexEntryPointerTable
 	ld de, 3
 	call IsInArray
@@ -2405,7 +2405,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld [wCurSpecies], a
 	ld a, $ff
 	ld [hl], a
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -2490,7 +2490,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	rst CopyBytes
 	farcall InsertPokemonIntoBox
 	ld a, [wCurPartySpecies]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	call GiveANickname_YesNo
 	ld hl, wStringBuffer1
@@ -2659,11 +2659,11 @@ _FindAtLeastThatHappy: ; 4dbd9
 	jp FindAtLeastThatHappy
 
 _FindThatSpecies: ; 4dbe0
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	jp FindThatSpecies
 
 _FindThatSpeciesYourTrainerID: ; 4dbe6
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	call FindThatSpecies
 	ret z
 	ld a, c
@@ -2905,11 +2905,11 @@ CopyPkmnToTempMon: ; 5084a
 	call GetBaseData
 
 	ld a, [wMonType]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	and a
 	jr z, .copywholestruct
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	cp OTPARTYMON
 	jr z, .copywholestruct
@@ -2929,25 +2929,25 @@ CalcwBufferMonStats: ; 5088b
 	jr _TempMonStatsCalculation
 
 CalcTempmonStats: ; 50890
-	ld bc, wTempMon
+	ld bc, wTempMon ; the mon is in bc
 _TempMonStatsCalculation: ; 50893
 	ld hl, MON_LEVEL
-	add hl, bc
+	add hl, bc ; level in hl now
 	ld a, [hl]
 	ld [wCurPartyLevel], a
-	ld hl, MON_MAXHP
+	ld hl, MON_MAXHP ; max hp in hl
 	add hl, bc
-	ld d, h
+	ld d, h ; max hp in de now
 	ld e, l
 	ld hl, MON_EVS - 1
-	add hl, bc
-	push bc
+	add hl, bc ; last byte of exp here, which is just one before the evs
+	push bc ; mon's group is pushed
 	ld b, TRUE
 	predef CalcPkmnStats
-	pop bc
+	pop bc ; group is popped
 	ld hl, MON_HP
-	add hl, bc
-	ld d, h
+	add hl, bc ; hp in hl now
+	ld d, h ; hp in de now
 	ld e, l
 	ld a, [wCurPartySpecies]
 	cp EGG
@@ -2959,11 +2959,11 @@ _TempMonStatsCalculation: ; 50893
 	jr .zero_status
 
 .not_egg
-	push bc
+	push bc ; group is pushed
 	ld hl, MON_MAXHP
 	add hl, bc
 	ld bc, 2
-	rst CopyBytes
+	rst CopyBytes ; hp is copied from max to current
 	pop bc
 
 .zero_status

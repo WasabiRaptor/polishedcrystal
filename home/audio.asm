@@ -201,7 +201,7 @@ endr
 	ret
 ; 3c23
 GetRelevantCryPointers:
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 ; given species in a, return *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
 	ld hl, VariantCryTable

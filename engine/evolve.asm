@@ -45,7 +45,7 @@ EvolveAfterBattle_MasterLoop:
 	call GetPartyLocation
 	call GetPartyMonGroupSpeciesAndForm
 
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	call GetRelevantEvosAttacksPointers
 	ld a, [wEvolutionOldSpecies]
 	dec a
@@ -496,7 +496,7 @@ Text_WhatEvolving: ; 0x42482
 LearnEvolutionMove:
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	call GetRelevantEvolutionMoves
 	ld a, [wCurPartySpecies]
 	dec a
@@ -540,7 +540,7 @@ LearnEvolutionMove:
 LearnLevelMoves: ; 42487
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	call GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
 	dec a
@@ -618,7 +618,7 @@ FillMoves: ; 424e1
 	push hl
 	push de
 	push bc
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	push de
 	call GetRelevantEvosAttacksPointers
 	ld b, 0
@@ -772,7 +772,7 @@ GetPreEvolution: ; 42581
 	ld c, a
 	ld [wCurPartySpecies], a
 .loop ; For each Pokemon...
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	push bc
 	call GetRelevantEvosAttacksPointers
 	pop bc

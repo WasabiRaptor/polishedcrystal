@@ -250,10 +250,6 @@ EvolutionAnimation: ; 4e5e1
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1
 	call GetPartyMonGroupSpeciesAndForm
-
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Species
-	call GetPartyLocation
 	ld b, h
 	ld c, l
 	farjp CheckFaintedFrzSlp

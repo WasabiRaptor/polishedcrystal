@@ -14,16 +14,52 @@ DanielsTown_MapScriptHeader:
 
 	db 0 ; bg events
 
-	db 2 ; object events
+	db 3 ; object events
 	object_event  9,  8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, MysteryDungeonEnterScript, -1
 	object_event  7, 27, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
+	object_event  9,  9, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, checkpokegroupscript, -1
+
+checkpokegroupscript:
+	opentext
+	checkcode VAR_PARTYMON1_GROUP
+	ifequal REGION_KANTO, .kanto
+	ifequal REGION_JOHTO, .johto
+	ifequal REGION_HOENN, .hoenn
+	closetext
+	end
+.kanto
+	writetext kantotext
+	waitbutton
+	closetext
+	end 
+.johto
+	writetext johtotext
+	waitbutton
+	closetext
+	end 
+.hoenn
+	writetext hoenntext
+	waitbutton
+	closetext
+	end 
 
 MysteryDungeonEnterScript:
 	opentext
-	;givepoke CYNDAQUIL, 5;, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke CYNDAQUIL, 5;, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	givepoke CHARMANDER, 5;, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
 	end
+
+kantotext:
+	text "kanto"
+	done
+johtotext:
+	text "johto"
+	done
+hoenntext
+	text "hoenn"
+	done
+
 AlolaName:
 	db "Alola@"
 KantoName:
@@ -34,11 +70,12 @@ IndigoOT:
 	db "Ken@"
 	db MALE
 
-	callasm MysteryDungeonSetup
-	special WarpToSpawnPoint
-	newloadmap MAPSETUP_TELEPORT
-	writecode VAR_MOVEMENT, PLAYER_NORMAL
-	end
+
+	;callasm MysteryDungeonSetup
+	;special WarpToSpawnPoint
+	;newloadmap MAPSETUP_TELEPORT
+	;writecode VAR_MOVEMENT, PLAYER_NORMAL
+	;end
 
 MysteryDungeonSetup:
 	ld a, 5

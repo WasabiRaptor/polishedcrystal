@@ -49,14 +49,13 @@ INCLUDE "home/restore_music.asm"
 
 IsAPokemon::
 ; Return carry if species a is not a Pokemon.
-; Since every ID other than $0 and $ff is valid, we can simplify this function.
 	and a
 	jp z, .not_a_pokemon
 	push hl
 	push bc
 	push de
 	push af
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	ld hl, RegionalMaxPokemonTable
 	ld de, 2
 	call IsInArray
@@ -93,6 +92,7 @@ RegionalMaxPokemonTable:
 	db -1, 0
 
 GetPartyMonGroupSpeciesAndForm::
+	push hl
 	push bc
 	ld a, [hli]
 	ld [wCurPartyGroup], a
@@ -105,7 +105,24 @@ GetPartyMonGroupSpeciesAndForm::
 	ld a, [hl]	;form
 	and FORM_MASK
 	ld [wCurForm], a
+	pop bc
+	pop hl
 	ret
+
+PokemonToGroupSpeciesAndForm::
+	push hl
+	push bc
+	ld a, [hli]
+	ld [wCurGroup], a
+	ld a, [hl] ;Species
+	ld [wCurSpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	ld a, [hl]	;form
+	and FORM_MASK
+	ld [wCurForm], a
+	pop bc
+	pop hl
 
 CurPartyGroupAndSpeciesToTemp::
 	ld a, [wCurPartyGroup]
@@ -117,7 +134,7 @@ CurPartyGroupAndSpeciesToTemp::
 TempToCurGroupAndSpecies::
 	ld a, [hli]
 	ld [wCurGroup], a
-	ld a [hl]
+	ld a, [hl]
 	ld [wCurSpecies], a
 	ret
 
@@ -125,7 +142,7 @@ TempToCurPartyGroupAndSpecies::
 	ld a, [hli]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
-	ld a [hl]
+	ld a, [hl]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ret
@@ -625,7 +642,7 @@ GetPokemonName:: ; 343b
 
 ; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
 ; returns c for variants, nc for normal species
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 
 	ld hl, VariantNamePointerTable
 	ld de, 4
@@ -1414,7 +1431,7 @@ Print8BitNumRightAlign:: ; 3842
 ; 384d
 
 GetRelevantBaseData::
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 ;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
 ; returns c for variants, nc for normal species
 	ld hl, VariantBaseDataTable
@@ -1515,8 +1532,8 @@ GetLeadAbility::
 	push bc
 	push de
 	push hl
-	ld hl, wPartyMon1
-	call GetPartyMonGroupSpeciesAndForm
+	ld hl, wPartyMon1Group
+	call TempToCurGroupAndSpecies
 	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]

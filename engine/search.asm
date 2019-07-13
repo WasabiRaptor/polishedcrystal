@@ -237,9 +237,7 @@ CheckOwnMon: ; 0x4a7ba
 	ld d, b
 	ld e, c
 
-	ld b [hl] ; the pokemon's group which can be checked against
-
-
+	ld b, [hl] ; the pokemon's group which can be checked against
 	inc hl
 ; check species
 	ld a, [wScriptVar] ; species we're looking for

@@ -14,13 +14,13 @@ CheckBreedmonCompatibility: ; 16e1d
 	call .CheckBreedingGroupCompatibility
 	ld c, INCOMPATIBLE
 	jp nc, .done
-	ld a, wBreedMon1
+	ld hl, wBreedMon1Group
 	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wBreedMon1Gender]
 	ld [wTempMonGender], a
 	call .SetGenderData
 	ld b, a
-	ld a, wBreedMon2
+	ld hl, wBreedMon2Group
 	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wBreedMon2Gender]
 	ld [wTempMonGender], a
@@ -75,14 +75,14 @@ CheckBreedmonCompatibility: ; 16e1d
 .CheckBreedingGroupCompatibility: ; 16ed6
 ; If either mon is in the No Eggs group,
 ; they are not compatible.
-	ld hl, wBreedMon2
+	ld hl, wBreedMon2Group
 	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
 	cp NO_EGGS * $11
 	jr z, .Incompatible
 
-	ld hl, wBreedMon1
+	ld hl, wBreedMon1Group
 	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
@@ -257,10 +257,11 @@ HatchEggs: ; 16f70 (5:6f70)
 
 	farcall SetEggMonCaughtData
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	call GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurSpecies]
 	dec a
 	call SetSeenAndCaughtMon
 
@@ -273,23 +274,23 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld [hl], a
 
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	call GetPartyMonGroupSpeciesAndForm
 
-	ld a, [wCurPartySpecies]
-	cp TOGEPI
-	jr nz, .nottogepi
-	eventflagset EVENT_TOGEPI_HATCHED
-.nottogepi
+	;ld a, [wCurPartySpecies]
+	;cp TOGEPI
+	;jr nz, .nottogepi
+	;eventflagset EVENT_TOGEPI_HATCHED
+;.nottogepi
 
 	pop de
 
 	ld a, [wCurPartySpecies]
 	dec de
 	ld [de], a
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	ld [wCurSpecies], a
 	call GetPokemonName
 	call GetBaseData ;form is known
@@ -539,7 +540,7 @@ InitEggMoves:
 InheritLevelMove:
 ; If move d is part of the level up moveset, inherit that move
 	push de
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld b, d
 	ld a, [wEggMonSpecies]
@@ -572,7 +573,7 @@ InheritLevelMove:
 
 InheritEggMove:
 ; If move d is an egg move, inherit that move
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 ; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
 ; returns c for variants, nc for normal species
 	push de
@@ -636,7 +637,7 @@ GetEggFrontpic: ; 17224 (5:7224)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	call GetPartyMonGroupSpeciesAndForm
@@ -651,7 +652,7 @@ GetHatchlingFrontpic: ; 1723c (5:723c)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	call GetPartyMonGroupSpeciesAndForm
@@ -879,7 +880,7 @@ Hatch_ShellFragmentLoop: ; 17418 (5:7418)
 Special_DayCareMon1: ; 17421
 	ld hl, DayCareMon1Text
 	call PrintText
-	ld hl, wBreedMon1
+	ld hl, wBreedMon1Group
 	call GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	call PlayCry

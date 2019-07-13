@@ -42,7 +42,7 @@ ReadTrainerParty: ; 39771
 	ld [wCurPartySpecies], a
 
 	call GetNextTrainerDataByte
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ld [wCurGenderOrGroupBuffer], a
 
 	ld a, OTPARTYMON

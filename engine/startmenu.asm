@@ -1533,9 +1533,10 @@ MoveScreenLoop:
 	and IS_EGG_MASK
 	ld a, d
 	jr nz, .loop_right_invalid
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	rst AddNTimes
-	ld a, [hl]
+	call GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ld a, d
 	jr c, .loop_right_invalid
@@ -1571,9 +1572,10 @@ MoveScreenLoop:
 	and IS_EGG_MASK
 	ld a, d
 	jr nz, .loop_left_invalid
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	rst AddNTimes
-	ld a, [hl]
+	call GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ld a, d
 	jr c, .loop_left_invalid
@@ -1699,10 +1701,9 @@ MoveScreenLoop:
 GetForgottenMoves::
 ; retrieve a list of a mon's forgotten moves, excluding ones beyond level
 ; and moves the mon already knows
-	ld a, MON_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	call GetPartyMonGroupSpeciesAndForm
-	ld a, [wCurPokeGroup]
+	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
 	dec a

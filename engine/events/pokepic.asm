@@ -8,7 +8,7 @@ Pokepic:: ; 244e3
 	jr nz, .partymon
 	farcall LoadPokemonPalette
 	ld a, 1
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	jr .got_palette
 .partymon
 	farcall LoadPartyMonPalette

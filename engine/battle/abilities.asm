@@ -498,19 +498,18 @@ RecieverAbility:
 	ldh a, [hBattleTurn]
 	and a
 	ld bc, wPartyCount
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	jr z, .got_turn
 	ld bc, wOTPartyCount
-	ld hl, wOTPartyMon1
+	ld hl, wOTPartyMon1Group
 .got_turn
 	ld a, [bc]
-	cp 1 ;make sure theres more than one mon in the party
+	dec a ;make sure theres more than one mon in the party
 	ret z
-	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	push hl
-	call GetPartyMonGroupSpeciesAndForm
+	call PokemonToGroupSpeciesAndForm
 	pop hl
 	;species of last mon in party
 	ld c, a
@@ -534,21 +533,21 @@ RecieverAbility:
 	ld hl, RecieverActivationText
 	call StdBattleTextBox
 	ld a, [wCurBattleMon]
-	ld hl, wPartyMon1
+	ld hl, wPartyMon1Group
 	jr z, .got_turn2
 	ld a, [wCurOTMon]
-	ld hl, wOTPartyMon1
+	ld hl, wOTPartyMon1Group
 .got_turn2
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	call GetPartyMonGroupSpeciesAndForm
+	call PokemonToGroupSpeciesAndForm
 	jp RunActivationAbilitiesInner
 
 .trace_failure
 	pop af
-	ld [wCurPokeGroup], a
+	ld [wCurGroup], a
 	ret
-
+; TODO, return this to the state it was with forms
 
 RunPreMoveAbilities:
 	ld a, BATTLE_VARS_ABILITY
@@ -559,9 +558,9 @@ StanceChangeAbility:
 	ldh a, [hBattleTurn]
 	and a
 	push af
-	ld hl, wBattleMonSpecies
+	ld hl, wBattleMonForm
 	jr z, .got_form
-	ld hl, wEnemyMonSpecies
+	ld hl, wEnemyMonForm
 .got_form
 	ld a, BATTLE_VARS_MOVE_CATEGORY
 	call GetBattleVar
@@ -1162,12 +1161,13 @@ PowerConstructAbility:
 	call CompareTwoBytes ; Check if bc < de
 	ret c
 
+;TODO return this to using forms
 	ldh a, [hBattleTurn]
 	and a
 	push af
-	ld hl, wBattleMonSpecies
+	ld hl, wBattleMonForm
 	jr z, .got_form
-	ld hl, wEnemyMonSpecies
+	ld hl, wEnemyMonForm
 .got_form
 	;predef GetPokeGroup
 	cp ZYGARDE_10
@@ -2046,9 +2046,10 @@ RunPostBattleAbilities::
 	ld a, MON_ABILITY
 	call GetPartyParamLocation
 	ld b, [hl]
-	ld a, MON_SPECIES_AND_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	ld c, [hl]
+	ld a, [wCurSpecies]
+	ld c, a
 	farcall GetAbility
 	ld a, d
 	and $3f
@@ -2107,9 +2108,9 @@ RunPostBattleAbilities::
 	pop bc
 	push bc
 	push de
-	ld a, MON_SPECIES_AND_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	ld a, [hl]
+	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, BattleText_PickedUpItem
@@ -2120,9 +2121,7 @@ RunPostBattleAbilities::
 
 .form_revert:
 	push bc
-	ld a, MON_SPECIES_AND_GROUP
-	call GetPartyParamLocation
-	
+	ld a, [wCurForm]
 	cp AEGISLASH_BLADE
 	jr z, .aegislash
 	cp ZYGARDE_10_COMPLETE

@@ -869,7 +869,7 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	and a
 	jr z, .player
 
-	ld hl, wTempBattleyMon
+	ld hl, wTempBattleMon
 	call TempToCurPartyGroupAndSpecies
 
 	ld de, VTiles0 tile $00

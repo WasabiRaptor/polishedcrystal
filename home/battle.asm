@@ -33,7 +33,7 @@ OpponentPartyAttr::
 OTPartyAttrPre:
 	ld a, [wBattleMode]
 	dec a
-	jp z, .popafandret
+	jp z, PartyAttrPopafandret
 	pop af
 OTPartyAttr::
 ; Return z if wildmon
@@ -43,8 +43,9 @@ OTPartyAttr::
 	ld a, [wCurOTMon]
 	jr DoBattlePartyAttr
 
-.popafandret
+PartyAttrPopafandret
 	pop af
+	xor a
 	ret
 
 
