@@ -18,7 +18,7 @@ TryAddMonToParty: ; d88c
 	ldh [hMoveMon], a ; HRAM backup
 	add e
 	ld e, a
-	jr nc, .loadspecies
+	jr nc, .loadspecies ; this adds a to de to get the address in the relevant wPartySpecies?
 	inc d
 
 .loadspecies
@@ -85,8 +85,7 @@ GeneratePartyMonStats: ; d906
 
 	ld a, [wCurPartyGroup]; pokemon group
 	ld [wCurGroup], a
-	ld [de], a ; right here I have no idea, hainvg de here makes it so that it doesn't get the group, having hl here it does
-	; at this moment they should be the exact same values so how the fuck could they behave differently
+	ld [de], a 
 	inc de ; species is now in de
 
 	ld a, [wCurPartySpecies]; pokemon species
@@ -212,13 +211,13 @@ endr
 	ld a, [wCurForm]
 	push af ; 4 form is pushed
 	push hl ; 5
-	;ld a, [wPartyMon1Ability]
-	;ld b, a
-	;ld hl, wPartyMon1Group
-	;call PokemonToGroupSpeciesAndForm
-	;ld a, [wPartyMon1Species]
-	;ld c, a
-	;call GetAbility
+	ld a, [wPartyMon1Ability]
+	ld b, a
+	ld hl, wPartyMon1Group
+	call PokemonToGroupSpeciesAndForm
+	ld a, [wPartyMon1Species]
+	ld c, a
+	call GetAbility
 	pop hl ; 4
 	pop af ; 3 form is popped
 	ld [wCurForm], a
@@ -305,24 +304,24 @@ endr
 	; Gender. If lead has Cute Charm, force opposite gender 2/3
 	; of the time
 
-	;ld a, [wCurPartyGroup]
-	;push af ;2 curgroup is pushed
-	;ld a, [wCurPartySpecies]
-	;push af ; 3 species is pushed
-	;ld a, [wCurForm]
-	;push af ; 4 form is pushed
-;
-	;call GetLeadAbility
-	;ld b, a
+	ld a, [wCurPartyGroup]
+	push af ;2 curgroup is pushed
+	ld a, [wCurPartySpecies]
+	push af ; 3 species is pushed
+	ld a, [wCurForm]
+	push af ; 4 form is pushed
 
-	;pop af ; 3 form is popped
-	;ld [wCurForm], a
-	;pop af ; 2 curspecies is popped
-	;ld [wCurPartySpecies], a
-	;ld [wCurSpecies], a
-	;pop af ; 1 curgroup is popped
-	;ld [wCurPartyGroup], a
-	;ld [wCurGroup], a
+	call GetLeadAbility
+	ld b, a
+
+	pop af ; 3 form is popped
+	ld [wCurForm], a
+	pop af ; 2 curspecies is popped
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	pop af ; 1 curgroup is popped
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 
 	ld a, b
 	cp CUTE_CHARM

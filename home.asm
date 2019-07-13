@@ -123,6 +123,7 @@ PokemonToGroupSpeciesAndForm::
 	ld [wCurForm], a
 	pop bc
 	pop hl
+	ret
 
 CurPartyGroupAndSpeciesToTemp::
 	ld a, [wCurPartyGroup]
