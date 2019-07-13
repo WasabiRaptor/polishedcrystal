@@ -2095,7 +2095,7 @@ GivePoke:: ; e277
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndexBuffer], a
 	ld [wTempEnemyMonSpecies], a
-	ld a, [wCurGenderOrGroupBuffer]
+	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld [wTempEnemyMonGroup], a
 	call GetPokemonName
