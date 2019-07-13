@@ -1034,6 +1034,7 @@ FastBallMultiplier:
 ; FleeMons tables.
 	ld hl, wTempEnemyMon
 	call TempToCurGroupAndSpecies
+	ld a, [wCurSpecies]
 	ld c, a
 	ld hl, FleeMons
 	ld d, 3

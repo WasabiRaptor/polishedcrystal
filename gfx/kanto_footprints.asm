@@ -15,11 +15,11 @@ INCBIN "gfx/footprints/wartortle.1bpp"
 INCBIN "gfx/footprints/blastoise.1bpp" 
 INCBIN "gfx/footprints/caterpie.1bpp" 
 ;INCBIN "gfx/footprints/metapod.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/butterfree.1bpp" 
 INCBIN "gfx/footprints/weedle.1bpp" 
 ;INCBIN "gfx/footprints/kakuna.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/beedrill.1bpp" 
 INCBIN "gfx/footprints/pidgey.1bpp" 
 INCBIN "gfx/footprints/pidgeotto.1bpp" 
@@ -30,8 +30,8 @@ INCBIN "gfx/footprints/spearow.1bpp"
 INCBIN "gfx/footprints/fearow.1bpp" 
 ;INCBIN "gfx/footprints/ekans.1bpp" 
 ;INCBIN "gfx/footprints/arbok.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/pichu.1bpp" 
 INCBIN "gfx/footprints/pikachu.1bpp" 
 INCBIN "gfx/footprints/raichu.1bpp" 
@@ -52,21 +52,23 @@ INCBIN "gfx/footprints/igglybuff.1bpp"
 INCBIN "gfx/footprints/jigglypuff.1bpp" 
 INCBIN "gfx/footprints/wigglytuff.1bpp" 
 ;INCBIN "gfx/footprints/zubat.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/golbat.1bpp" 
-INCBIN "gfx/footprints/crobat.1bpp" 
+;INCBIN "gfx/footprints/crobat.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/oddish.1bpp" 
 INCBIN "gfx/footprints/gloom.1bpp" 
 INCBIN "gfx/footprints/vileplume.1bpp" 
-INCBIN "gfx/footprints/bellossom.1bpp" 
+;INCBIN "gfx/footprints/bellossom.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/paras.1bpp" 
 INCBIN "gfx/footprints/parasect.1bpp" 
 INCBIN "gfx/footprints/venonat.1bpp" 
 INCBIN "gfx/footprints/venomoth.1bpp" 
 ;INCBIN "gfx/footprints/diglett.1bpp" 
 ;INCBIN "gfx/footprints/dugtrio.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/meowth.1bpp" 
 INCBIN "gfx/footprints/persian.1bpp" 
 INCBIN "gfx/footprints/psyduck.1bpp" 
@@ -87,14 +89,15 @@ INCBIN "gfx/footprints/machoke.1bpp"
 INCBIN "gfx/footprints/machamp.1bpp" 
 INCBIN "gfx/footprints/bellsprout.1bpp" 
 ;INCBIN "gfx/footprints/weepinbell.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/victreebel.1bpp" 
-INCBIN "gfx/footprints/tentacool.1bpp" 
-INCBIN "gfx/footprints/tentacruel.1bpp" 
-INCBIN "gfx/footprints/geodude.1bpp" 
-INCBIN "gfx/footprints/graveler.1bpp" 
-INCBIN "gfx/footprints/golem.1bpp" 
-INCBIN "gfx/footprints/geodude.1bpp" ;alola
+;INCBIN "gfx/footprints/victreebel.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+;INCBIN "gfx/footprints/tentacool.1bpp" 
+;INCBIN "gfx/footprints/tentacruel.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+;INCBIN "gfx/footprints/geodude.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/graveler.1bpp" 
 INCBIN "gfx/footprints/golem.1bpp" 
 INCBIN "gfx/footprints/ponyta.1bpp" 
@@ -114,14 +117,17 @@ INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/grimer.1bpp" 
 INCBIN "gfx/footprints/muk.1bpp" 
-INCBIN "gfx/footprints/shellder.1bpp" 
-INCBIN "gfx/footprints/cloyster.1bpp" 
+;INCBIN "gfx/footprints/shellder.1bpp" 
+;INCBIN "gfx/footprints/cloyster.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/gastly.1bpp" 
 INCBIN "gfx/footprints/haunter.1bpp" 
 INCBIN "gfx/footprints/gengar.1bpp" 
 ;INCBIN "gfx/footprints/onix.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/steelix.1bpp"
+;INCBIN "gfx/footprints/steelix.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/drowzee.1bpp" 
 INCBIN "gfx/footprints/hypno.1bpp" 
 INCBIN "gfx/footprints/krabby.1bpp" 
@@ -132,17 +138,14 @@ INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/exeggcute.1bpp" 
 INCBIN "gfx/footprints/exeggutor.1bpp" 
-INCBIN "gfx/footprints/exeggutor.1bpp" ;alola
 INCBIN "gfx/footprints/cubone.1bpp" 
 INCBIN "gfx/footprints/marowak.1bpp" 
-INCBIN "gfx/footprints/marowak.1bpp" ;alola
 INCBIN "gfx/footprints/tyrogue.1bpp" 
 INCBIN "gfx/footprints/hitmonlee.1bpp" 
 INCBIN "gfx/footprints/hitmonchan.1bpp" 
 INCBIN "gfx/footprints/hitmontop.1bpp" 
 INCBIN "gfx/footprints/lickitung.1bpp" 
 INCBIN "gfx/footprints/lickilicky.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
 ;INCBIN "gfx/footprints/koffing.1bpp" 
 ;INCBIN "gfx/footprints/weezing.1bpp" 
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
@@ -216,9 +219,5 @@ INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/dragonite.1bpp" 
 INCBIN "gfx/footprints/mewtwo.1bpp" 
 INCBIN "gfx/footprints/mew.1bpp" 
-
-INCBIN "gfx/footprints/vaporeon.1bpp" ;beta mons
-INCBIN "gfx/footprints/leafeon.1bpp" 
-INCBIN "gfx/footprints/tangrowth.1bpp" 
 ;INCBIN "gfx/footprints/madaamu.1bpp" 
 INCBIN "gfx/footprints/256.1bpp"  ;dummy

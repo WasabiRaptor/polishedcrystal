@@ -39,34 +39,28 @@ INCBIN "gfx/footprints/hoppip.1bpp"
 INCBIN "gfx/footprints/skiploom.1bpp" 
 INCBIN "gfx/footprints/jumpluff.1bpp" 
 INCBIN "gfx/footprints/aipom.1bpp" 
-;INCBIN "gfx/footprints/ambipom.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-
-INCBIN "gfx/footprints/sunkern.1bpp" 
+INCBIN "gfx/footprints/ambipom.1bpp" 
+;INCBIN "gfx/footprints/sunkern.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/sunflora.1bpp" 
 INCBIN "gfx/footprints/yanma.1bpp" 
 INCBIN "gfx/footprints/yanmega.1bpp" 
 INCBIN "gfx/footprints/wooper.1bpp" 
 INCBIN "gfx/footprints/quagsire.1bpp" 
 INCBIN "gfx/footprints/murkrow.1bpp" 
-;INCBIN "gfx/footprints/honchkrow.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-
+INCBIN "gfx/footprints/honchkrow.1bpp"
 INCBIN "gfx/footprints/misdreavus.1bpp" 
 INCBIN "gfx/footprints/mismagius.1bpp" 
 INCBIN "gfx/footprints/unown.1bpp" 
-;INCBIN "gfx/footprints/wynaut.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-
+INCBIN "gfx/footprints/wynaut.1bpp" 
 INCBIN "gfx/footprints/wobbuffet.1bpp" 
 INCBIN "gfx/footprints/girafarig.1bpp" 
 INCBIN "gfx/footprints/pineco.1bpp" 
 INCBIN "gfx/footprints/forretress.1bpp" 
-INCBIN "gfx/footprints/dunsparce.1bpp" 
+;INCBIN "gfx/footprints/dunsparce.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/gligar.1bpp" 
-;INCBIN "gfx/footprints/gliscor.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-
+INCBIN "gfx/footprints/gliscor.1bpp" 
 INCBIN "gfx/footprints/snubbull.1bpp" 
 INCBIN "gfx/footprints/granbull.1bpp" 
 INCBIN "gfx/footprints/qwilfish.1bpp" 
@@ -82,13 +76,14 @@ INCBIN "gfx/footprints/swinub.1bpp"
 INCBIN "gfx/footprints/piloswine.1bpp" 
 INCBIN "gfx/footprints/mamoswine.1bpp" 
 INCBIN "gfx/footprints/corsola.1bpp" 
-INCBIN "gfx/footprints/remoraid.1bpp" 
+;INCBIN "gfx/footprints/remoraid.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/octillery.1bpp" 
 INCBIN "gfx/footprints/delibird.1bpp" 
 ;INCBIN "gfx/footprints/mantyke.1bpp" 
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-
-INCBIN "gfx/footprints/mantine.1bpp" 
+;INCBIN "gfx/footprints/mantine.1bpp" 
+INCBIN "gfx/footprints/256.1bpp"  ;blank
+INCBIN "gfx/footprints/256.1bpp"  ;blank
 INCBIN "gfx/footprints/skarmory.1bpp" 
 INCBIN "gfx/footprints/houndour.1bpp" 
 INCBIN "gfx/footprints/houndoom.1bpp" 

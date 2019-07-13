@@ -175,7 +175,7 @@ endr
 	setflag ENGINE_CREDITS_SKIP
 	setflag ENGINE_HAVE_SHINY_CHARM
 
-	jump .skipmons
+	;jump .skipmons
 	; good party
 	givepoke MEWTWO, 100
 	loadvar wPartyMon1EVs+0, 252

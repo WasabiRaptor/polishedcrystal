@@ -224,6 +224,7 @@ BugContest_SetCaughtContestMon: ; e6ce
 	call .generatestats
 	ld hl, wTempEnemyMon
 	call TempToCurPartyGroupAndSpecies
+	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, .caughttext
