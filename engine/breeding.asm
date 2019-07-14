@@ -92,8 +92,12 @@ CheckBreedmonCompatibility: ; 16e1d
 ; Ditto is automatically compatible with everything.
 ; If not Ditto, load the breeding groups into b/c and d/e.
 	ld a, [wBreedMon2Species]
-	cp DITTO
-	jr z, .Compatible
+	ld b, a 
+	ld a, [wBreedMon2Group]
+	cppoke DITTO, .check_compatibility
+	jr .Compatible
+
+.check_compatibility
 	ld [wCurSpecies], a
 	call GetBaseData ;form is known
 	ld a, [wBaseEggGroups]
@@ -105,9 +109,16 @@ CheckBreedmonCompatibility: ; 16e1d
 	swap a
 	ld c, a
 
+	push bc
 	ld a, [wBreedMon1Species]
-	cp DITTO
-	jr z, .Compatible
+	ld b, a
+	ld a, [wBreedMon1Group]
+	cppoke DITTO, .check_compatibility2
+	pop bc
+	jr .Compatible
+
+.check_compatibility2
+	pop bc
 	ld [wCurSpecies], a
 	push bc
 	call GetBaseData ;form is known
@@ -142,10 +153,16 @@ CheckBreedmonCompatibility: ; 16e1d
 	ret
 
 .SetGenderData:
+	push bc
 	ld a, [wCurPartySpecies]
-	cp DITTO
+	ld b, a
+	ld a, [wCurPartyGroup]
+	cppoke DITTO, .not_ditto
+	pop bc
 	ld a, 1 << BREEDGEN_DITTO
-	ret z
+	ret
+.not_ditto
+	pop bc
 	ld a, BREEDMON
 	ld [wMonType], a
 	push bc

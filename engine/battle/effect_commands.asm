@@ -3309,24 +3309,27 @@ BattleCommand_ragedamage:
 
 
 DittoMetalPowder: ; 352b1
-	ld a, MON_GROUP
-	call UserPartyAttr
+	push bc
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
+	ld b, a
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
+
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
 	jr nz, .continue
-	ld a, [wTempEnemyMonGroup]
-	ld [wCurGroup], a
+	
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
+	ld b, a
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 
 .continue:
-	ld a, [wCurGroup]
-	cp REGION_KANTO
-	ret nz
-	ld a, [wCurSpecies]
-	cp DITTO
-	ret nz
+	cppoke DITTO, .not_ditto
+	pop bc
 
 	push bc
 	call GetOpponentItem
@@ -3351,6 +3354,9 @@ DittoMetalPowder: ; 352b1
 	rr c
 	ret
 
+.not_ditto
+	pop bc
+	ret
 ; 352dc
 
 

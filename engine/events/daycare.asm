@@ -747,21 +747,18 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wTempMonGender], a
 	ld a, $3
 	ld [wMonType], a
-	ld a, [wBreedMon1Group]
-	cp REGION_KANTO
-	ld a, [wBreedMon1Species]
-	jr nz, .not_ditto_1
-	cp DITTO
+
+	ld hl, wBreedMon1Group
+	cppokehl DITTO, .not_ditto_1
 	ld a, $1
 	jr z, .LoadWhichBreedmonIsTheMother
+
 .not_ditto_1
-	ld a, [wBreedMon2Group]
-	cp REGION_KANTO
-	ld a, [wBreedMon2Species]
-	jr nz, .not_ditto_2
-	cp DITTO
+	ld hl, wBreedMon2Group
+	cppokehl DITTO, .not_ditto_2
 	ld a, 0 ; not xor a; preserve carry flag
 	jr z, .LoadWhichBreedmonIsTheMother
+
 .not_ditto_2
 	farcall GetGender
 	ld a, 0 ; not xor a; preserve carry flag

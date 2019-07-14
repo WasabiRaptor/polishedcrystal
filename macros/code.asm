@@ -87,3 +87,20 @@ cppokehl: MACRO
 	cp \1
 	jr nz, \2
 ENDM
+
+retpokehl: MACRO
+	ld a, [hli]
+ 	cp GROUP_\1
+	ret nz
+	ld a, [hl]
+	cp \1
+	ret nz
+ENDM
+
+retpoke: MACRO
+ 	cp GROUP_\1
+	ret nz
+	ld a, b
+	cp \1
+	ret nz
+ENDM
