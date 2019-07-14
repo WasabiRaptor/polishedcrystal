@@ -72,10 +72,11 @@ endr
 _CGB_BattleColors: ; 8ddb
 	push bc
 	ld de, wUnknBGPals
-	call GetBattlemonBackpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempBattleMonGroup]
 	ld [wCurGroup], a
+
+	call GetBattlemonBackpicPalettePointer
+	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurSpecies], a
 
@@ -93,11 +94,10 @@ _CGB_BattleColors: ; 8ddb
 	call VaryColorsByDVs
 	pop de
 .player_backsprite
-
-	call GetEnemyFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
+	call GetEnemyFrontpicPalettePointer
+	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 
