@@ -3315,11 +3315,13 @@ DittoMetalPowder: ; 352b1
 	and a
 	ld a, [hl]
 	jr nz, .continue
-	push hl
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
-	pop hl
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 .continue:
+	ld a, [wCurGroup]
 	cp REGION_KANTO
 	ret nz
 	ld a, [wCurSpecies]
@@ -3353,14 +3355,20 @@ DittoMetalPowder: ; 352b1
 
 
 UnevolvedEviolite:
-	ld hl, wTempBattleMon
-	call TempToCurGroupAndSpecies
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
+
 
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .continue
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 
 .continue:
 	push hl
@@ -3690,8 +3698,11 @@ ThickClubOrLightBallBoost: ; 353b5
 	and a
 	ld a, [hl]
 	jr z, .PlayerTurn
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 .PlayerTurn:
 	pop hl
 	cp 0 ;remove later
@@ -3732,18 +3743,22 @@ SpeciesItemBoost: ; 353d1
 	ld l, [hl]
 	ld h, a
 
-	push hl
-	ld a, MON_SPECIES
-	call UserPartyAttr
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
+
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
 	jr z, .CompareSpecies
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
-.CompareSpecies:
-	pop hl
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
 
+.CompareSpecies:
+	ld a, [wCurSpecies]
 	cp b
 	jr z, .GetItemHeldEffect
 	cp c

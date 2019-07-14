@@ -222,8 +222,13 @@ BugContest_SetCaughtContestMon: ; e6ce
 
 .firstcatch
 	call .generatestats
-	ld hl, wTempEnemyMon
-	call TempToCurPartyGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
@@ -231,8 +236,13 @@ BugContest_SetCaughtContestMon: ; e6ce
 	jp PrintText
 
 .generatestats ; e6fd
-	ld hl, wTempEnemyMon
-	call TempToCurPartyGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	call GetBaseData ;form is known
 	xor a
 	ld bc, PARTYMON_STRUCT_LENGTH

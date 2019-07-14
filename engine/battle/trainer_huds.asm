@@ -151,8 +151,12 @@ DrawEnemyHUDBorder: ; 2c0c5
 	ret nz
 	call DoesNuzlockeModePreventCapture
 	jr c, .nuzlocke
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
+
 	dec a
 	call CheckCaughtMon
 	ret z

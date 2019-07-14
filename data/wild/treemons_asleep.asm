@@ -21,8 +21,12 @@ CheckSleepingTreeMon:: ; 3eb38
 ; Nor if the Pokémon has Insomnia/Vital Spirit
 	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
 	ld b, a
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
+	ld a, [wCurSpecies]
 	ld c, a
 	call GetAbility
 	ld a, b
@@ -41,8 +45,11 @@ CheckSleepingTreeMon:: ; 3eb38
 	ld hl, AsleepTreeMonsNite
 
 .Check:
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 	ld de, 1 ; length of species id
 	call IsInArray
 ; If it's a match, the opponent is asleep

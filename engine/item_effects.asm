@@ -978,8 +978,13 @@ LoveBallMultiplier:
 
 	; check player mon species
 	push bc
-	ld hl, wTempBattleMon
-	call TempToCurPartyGroupAndSpecies
+	ld a, [wTempBattleMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	xor a ; PARTYMON
 	ld [wMonType], a
 	ld a, [wCurBattleMon]
@@ -994,8 +999,13 @@ LoveBallMultiplier:
 
 	; check wild mon species
 	push de
-	ld hl, wTempEnemyMon
-	call TempToCurPartyGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	ld a, WILDMON
 	ld [wMonType], a
 	farcall GetGender
@@ -1032,9 +1042,11 @@ LoveBallMultiplier:
 FastBallMultiplier:
 ; multiply catch rate by 4 if enemy mon is in one of the three
 ; FleeMons tables.
-	ld hl, wTempEnemyMon
-	call TempToCurGroupAndSpecies
-	ld a, [wCurSpecies]
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 	ld c, a
 	ld hl, FleeMons
 	ld d, 3
@@ -1093,8 +1105,13 @@ LevelBallMultiplier:
 
 RepeatBallMultiplier:
 ; multiply catch rate by 3 if enemy mon is already in Pokédex
-	ld hl, wTempEnemyMon
-	call TempToCurPartyGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	dec a
 	push bc
 	call CheckCaughtMon

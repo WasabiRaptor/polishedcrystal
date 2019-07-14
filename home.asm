@@ -125,29 +125,6 @@ PokemonToGroupSpeciesAndForm::
 	pop hl
 	ret
 
-CurPartyGroupAndSpeciesToTemp::
-	ld a, [wCurPartyGroup]
-	ld [hli], a
-	ld a, [wCurPartySpecies]
-	ld [hl], a
-	ret
-
-TempToCurGroupAndSpecies::
-	ld a, [hli]
-	ld [wCurGroup], a
-	ld a, [hl]
-	ld [wCurSpecies], a
-	ret
-
-TempToCurPartyGroupAndSpecies::
-	ld a, [hli]
-	ld [wCurPartyGroup], a
-	ld [wCurGroup], a
-	ld a, [hl]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-	ret
-
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a

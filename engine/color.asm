@@ -688,7 +688,6 @@ GetBattlemonBackpicPalettePointer:
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
-	push hl
 	ld a, [wTempBattleMonGroup]
 	push af
 	ld a, [wTempBattleMonSpecies]
@@ -711,9 +710,13 @@ GetBattlemonBackpicPalettePointer:
 	ld [wTempBattleMonSpecies], a
 	pop af 
 	ld [wTempBattleMonGroup], a
-	ld hl, wTempBattleMon
-	call TempToCurPartyGroupAndSpecies
-	pop hl
+	ld a, [wTempBattleMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	pop de
 	ret
 
@@ -722,7 +725,6 @@ GetEnemyFrontpicPalettePointer:
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h
-	push hl
 	ld a, [wTempEnemyMonGroup]
 	push af
 	ld a, [wTempEnemyMonSpecies]
@@ -745,9 +747,13 @@ GetEnemyFrontpicPalettePointer:
 	ld [wTempEnemyMonSpecies], a
 	pop af
 	ld [wTempEnemyMonGroup], a
-	ld hl, wTempEnemyMon
-	call TempToCurPartyGroupAndSpecies
-	pop hl
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	pop de
 	ret
 

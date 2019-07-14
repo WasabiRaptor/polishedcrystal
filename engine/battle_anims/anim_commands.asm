@@ -869,16 +869,25 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	and a
 	jr z, .player
 
-	ld hl, wTempBattleMon
-	call TempToCurPartyGroupAndSpecies
+	ld a, [wTempBattleMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 
 	ld de, VTiles0 tile $00
 	predef GetFrontpic
 	jr .done
 
 .player
-	ld hl, wTempEnemyMon
-	call TempToCurPartyGroupAndSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 
 	ld de, VTiles0 tile $00
 	predef GetBackpic
