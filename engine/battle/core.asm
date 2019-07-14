@@ -4003,7 +4003,7 @@ SendOutPlayerMon: ; 3db5f
 	call Call_PlayBattleAnim
 
 .not_shiny
-	ld a, MON_GROUP
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
 	ld b, h
 	ld c, l
@@ -8815,7 +8815,7 @@ DropEnemySub: ; 3f486
 	push af
 	ld a, [wCurPartySpecies]
 	push af
-	ld a, [wBattleMonGroup]
+	ld a, [wEnemyMonGroup]
 	ld [wCurGroup], a
 	push af
 	ld a, [wEnemyMonSpecies]
