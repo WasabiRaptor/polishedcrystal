@@ -7010,6 +7010,8 @@ endc
 	push hl
 	push bc
 	ld b, a ; still the ability index, 1/2/hidden
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld c, a
 	call GetAbility
@@ -7098,6 +7100,8 @@ endc
 	push bc
 	push de
 	call GetRelevantBaseData
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	dec a
 	ld bc, BASEMON_GENDER
@@ -7138,6 +7142,7 @@ endr
 	ld a, [bc]
 	ld [hl], a
 
+; all this stuff handling the form shouldn't be run as the form is not re-implemented, and will probably be obsolete
 	; Unown
 	;ld a, [wTempEnemyMonSpecies]
 	;cp UNOWN
@@ -7163,10 +7168,10 @@ endr
 	;jp .Happiness
 
 ;.Magikarp:
-	ld a, [wTempEnemyMonSpecies]
-	ld b, a
-	ld a, [wTempEnemyMonGroup]
-	cppoke MAGIKARP, .Happiness
+	;ld a, [wTempEnemyMonSpecies]
+	;ld b, a
+	;ld a, [wTempEnemyMonGroup]
+	;cppoke MAGIKARP, .Happiness
 
 	; Random Magikarp pattern
 	;ld a, NUM_MAGIKARP
@@ -7179,50 +7184,50 @@ endr
 	;ld [wEnemyMonGroup], a
 
 	; Get Magikarp's length
-	ld de, wEnemyMonDVs
-	ld bc, wPlayerID
-	farcall CalcMagikarpLength
+	;ld de, wEnemyMonDVs
+	;ld bc, wPlayerID
+	;farcall CalcMagikarpLength
 
 	; We're clear if the length is < 5'
-	ld a, [wMagikarpLengthMmHi]
-	cp 5
-	jr nz, .CheckMagikarpArea
+	;ld a, [wMagikarpLengthMmHi]
+	;cp 5
+	;jr nz, .CheckMagikarpArea
 
 	; 5% chance of skipping size checks
-	call Random
-	cp 5 percent
-	jr c, .CheckMagikarpArea
+	;call Random
+	;cp 5 percent
+	;jr c, .CheckMagikarpArea
 	; Try again if > 3"
-	ld a, [wMagikarpLengthMmLo]
-	cp 3
-	jp nc, .GenerateDVs
+	;ld a, [wMagikarpLengthMmLo]
+	;cp 3
+	;jp nc, .GenerateDVs
 
 	; 20% chance of skipping this check
-	call Random
-	cp 20 percent - 1
-	jr c, .CheckMagikarpArea
+	;call Random
+	;cp 20 percent - 1
+	;jr c, .CheckMagikarpArea
 	; Try again if > 2"
-	ld a, [wMagikarpLengthMmLo]
-	cp 2
-	jp nc, .GenerateDVs
+	;ld a, [wMagikarpLengthMmLo]
+	;cp 2
+	;jp nc, .GenerateDVs
 
-.CheckMagikarpArea:
-	ld a, [wMapGroup]
+;.CheckMagikarpArea:
+	;ld a, [wMapGroup]
 	;cp GROUP_LAKE_OF_RAGE
 	;jr nz, .Happiness
 	;ld a, [wMapNumber]
 	;cp MAP_LAKE_OF_RAGE
 	;jr nz, .Happiness
-	jr .Happiness
-.LakeOfRageMagikarp
+	;jr .Happiness
+;.LakeOfRageMagikarp
 	; 40% chance of not flooring
-	call Random
-	cp $64 ; / $100
-	jr c, .Happiness
+	;call Random
+	;cp $64 ; / $100
+	;jr c, .Happiness
 	; Floor at length 1024
-	ld a, [wMagikarpLengthMmHi]
-	cp 1024 >> 8
-	jp c, .GenerateDVs ; try again
+	;ld a, [wMagikarpLengthMmHi]
+	;cp 1024 >> 8
+	;jp c, .GenerateDVs ; try again
 
 
 	; Finally done with DVs
@@ -7293,6 +7298,8 @@ endr
 	ld a, [hl]
 	ld [de], a
 
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 
 	; Get moves
 	ld de, wEnemyMonMoves
