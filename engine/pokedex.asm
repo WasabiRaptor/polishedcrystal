@@ -603,7 +603,7 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 	ld a, REGION_KANTO
 .next_group
 	ld [wPokedexRegion], a
-	ld [wDexMonGroup], a
+	;ld [wDexMonGroup], a
 	ld [wCurGroup], a
 	ld b, DEXMODE_VARIANT
 	jr .force_change_mode
@@ -1654,7 +1654,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld [wPokedexCurrentMon], a
 	inc de
 	call .getPokedexOrderByte
-	ld [wDexMonGroup], a
+	;ld [wDexMonGroup], a
 	ld [wCurGroup], a
 	pop hl
 	push de
@@ -1850,7 +1850,7 @@ Pokedex_GetSelectedMon: ; 40bb1
 	inc hl
 	ld a, BANK(wPokedexOrder)
 	call GetFarWRAMByte
-	ld [wDexMonGroup], a
+	;ld [wDexMonGroup], a
 	ld [wCurGroup], a
 	ld a, [wPokedexCurrentMon]
 	ret

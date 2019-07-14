@@ -1063,9 +1063,6 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	jr nz, .row
 
 	call BillsPC_LoadMonStats
-	ld a, [wd265]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
 	ld hl, wTempMonGroup
 	call GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
@@ -1074,7 +1071,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	xor a
 	ld [wBillsPC_MonHasMail], a
 	ld a, [wCurPartySpecies]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	cp EGG
 	ret z
 
@@ -1193,6 +1190,18 @@ endr
 	jp CloseSRAM
 
 .party
+	; group, species, and item
+	ld hl, wPartyMon1Group
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld a, e
+	rst AddNTimes
+	ld a, [hli]
+	ld [wTempMonGroup], a
+	ld a, [hli]
+	ld [wTempMonSpecies], a
+	ld a, [hl]
+	ld [wTempMonItem], a
+
 	; level
 	ld hl, wPartyMon1Level
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -1200,13 +1209,6 @@ endr
 	rst AddNTimes
 	ld a, [hl]
 	ld [wTempMonLevel], a
-	; item
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, e
-	rst AddNTimes
-	ld a, [hl]
-	ld [wTempMonItem], a
 	; DVs and personality (DVs for color variation)
 	ld hl, wPartyMon1DVs
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -1238,6 +1240,18 @@ endr
 .sBox
 	ld a, BANK(sBox)
 	call GetSRAMBank
+
+	ld hl, sBoxMon1Group
+	ld bc, BOXMON_STRUCT_LENGTH
+	ld a, e
+	rst AddNTimes
+	ld a, [hli]
+	ld [wTempMonGroup], a
+	ld a, [hli]
+	ld [wTempMonSpecies], a
+	ld a, [hl]
+	ld [wTempMonItem], a
+
 	; level
 	ld hl, sBoxMon1Level
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -1245,13 +1259,6 @@ endr
 	rst AddNTimes
 	ld a, [hl]
 	ld [wTempMonLevel], a
-	; item
-	ld hl, sBoxMon1Item
-	ld bc, BOXMON_STRUCT_LENGTH
-	ld a, e
-	rst AddNTimes
-	ld a, [hl]
-	ld [wTempMonItem], a
 	; DVs and personality (DVs for color variation)
 	ld hl, sBoxMon1DVs
 	ld bc, BOXMON_STRUCT_LENGTH

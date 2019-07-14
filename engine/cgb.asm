@@ -74,7 +74,6 @@ _CGB_BattleColors: ; 8ddb
 	ld de, wUnknBGPals
 	ld a, [wTempBattleMonGroup]
 	ld [wCurGroup], a
-
 	call GetBattlemonBackpicPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempBattleMonSpecies]
@@ -339,8 +338,7 @@ _CGB_Pokedex: ; 8f70
 	jr .got_palette
 .is_pokemon
 	ld bc, wDexMonShiny
-	ld a, [wCurGroup]
-	ld [wDexMonGroup], a
+	ld [wDexMonForm], a
 	ld a, [wCurPartySpecies]
 
 	call GetMonNormalOrShinyPalettePointer
@@ -1046,6 +1044,8 @@ _CGB_PokedexUnownMode: ; 903e
 	ld de, wUnknBGPals
 	ld hl, PokedexRedPalette
 	call LoadHLPaletteIntoDE
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 
 	ld a, [wCurPartySpecies]
 	call GetMonPalettePointer
@@ -1068,6 +1068,8 @@ _CGB_BillsPC: ; 8fca
 	ld de, wUnknBGPals
 	ld hl, .MenuPalette
 	call LoadHLPaletteIntoDE
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 
 	ld a, [wCurPartySpecies]
 	cp $ff

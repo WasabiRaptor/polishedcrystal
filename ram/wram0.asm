@@ -787,7 +787,7 @@ wPokedexSeenCaughtCount::
 wPokedexCurrentMon:: ds 2
 wDexMonShiny:: ds 1
 wDexCurrentUnownIndex::
-wDexMonGroup:: ds 1
+wDexMonForm:: ds 1
 wPokedexDataEnd::
 
 ENDU
