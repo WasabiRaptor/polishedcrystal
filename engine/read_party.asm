@@ -39,11 +39,10 @@ ReadTrainerParty: ; 39771
 
 ; species
 	call GetNextTrainerDataByte
-	ld [wCurPartySpecies], a
+	ld [wCurPartyGroup], a
 
 	call GetNextTrainerDataByte
-	ld [wCurPartyGroup], a
-	ld [wCurGroup], a
+	ld [wCurPartySpecies], a
 
 	ld a, OTPARTYMON
 	ld [wMonType], a

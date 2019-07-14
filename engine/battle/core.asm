@@ -3881,7 +3881,7 @@ InitEnemyMon: ; 3dabd
 	ld a, [wCurPartyMon]
 	ld hl, wOTPartyMon1Group
 	call GetPartyLocation
-	ld de, wEnemyMonSpecies
+	ld de, wEnemyMonGroup
 	ld bc, MON_ID - MON_GROUP
 	rst CopyBytes ; copy Species, Item, Moves
 	ld bc, MON_DVS - MON_ID

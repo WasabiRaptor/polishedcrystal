@@ -22,7 +22,7 @@
 ; TODO: swap ABILITY_1 and ABILITY_2 in base data as need so that ABILITY_1 is the better one for default NPCs (e.g. NPCs should have Sturdy when possible)
 
 trainer_mon: macro
-	db \1, \2, GROUP_\2
+	db \1, GROUP_\2, \2
 	if _NARG >=3
 	db \3
 	if _NARG >=4
@@ -480,7 +480,6 @@ YoungsterGroup:
 	db TRAINERTYPE_DVS | TRAINERTYPE_PERSONALITY 
 	; party
 	trainer_mon 5, SENTRET, FAKE_PERFECT_DVS, HIDDEN_ABILITY | ADAMANT, MALE 
-
 	trainer_mon 5, SENTRET, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, MALE
 	db -1 ; end
 
