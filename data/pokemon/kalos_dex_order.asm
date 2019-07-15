@@ -25,7 +25,6 @@ KalosDexOrder::
 	db PYROAR
 	db FLABEBE ; the color variance can be handled by vary colors by DVs
 	db FLOETTE
-	db FLOETTE_ETERNAL_FLOWER ; not sure but it basically is its own pokemon since it can't evolve and such
 	db FLORGES
 	db SKIDDO
 	db GOGOAT
@@ -33,8 +32,7 @@ KalosDexOrder::
 	db PANGORO
 	db FURFROU ; you're in the same boat as vivvilon as yours is just cosmetic, not sure if it should be granted more slots really
 	db ESPURR
-	db MEOWSTIC_M
-	db MEOWSTIC_F
+	db MEOWSTIC
 	db HONEDGE
 	db DOUBLADE
 	db AEGISLASH
@@ -73,11 +71,8 @@ KalosDexOrder::
 	db NOIVERN
 	db XERNEAS 
 	db YVELTAL
-	db ZYGARDE_10
-	db ZYGARDE_50
-	db ZYGARDE_COMPLETE
+	db ZYGARDE
 	db DIANCIE
 	db HOOPA 
-	db HOOPA_UNBOUND
 	db VOLCANION
 KalosDexOrderEnd::

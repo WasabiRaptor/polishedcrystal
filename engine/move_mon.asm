@@ -2012,16 +2012,17 @@ GivePoke:: ; e277
 	push de
 	push af
 
-;.formAndGender
-;	ld a, [wCurGenderOrGroupBuffer]
-;	and a
-;	jr z, .item
-;	ld a, [wCurPartyMon]
-;	ld hl, wPartyMon1Form
-;	ld bc, PARTYMON_STRUCT_LENGTH
-;	rst AddNTimes
-;	ld a, [wCurGenderOrGroupBuffer]
-;	ld [hl], a
+.formAndGender
+	ld a, [wCurForm]
+	and a
+	jr z, .item
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMon1Form
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	ld a, [wCurForm]
+	ld [hl], a
+
 .item
 	ld a, [wCurItem]
 	and a

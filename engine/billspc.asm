@@ -1292,11 +1292,6 @@ BillsPC_RefreshTextboxes: ; e2c2c (38:6c2c)
 	lb bc, 10, 10
 	call TextBox
 
-	hlcoord 8, 2
-	ld [hl], "└"
-	hlcoord 19, 2
-	ld [hl], "┘"
-
 	ld a, [wBillsPC_ScrollPosition]
 	ld e, a
 	ld d, 0

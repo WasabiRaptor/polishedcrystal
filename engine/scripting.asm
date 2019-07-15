@@ -2336,7 +2336,7 @@ Script_givepoke:
 	call GetScriptByte
 	ld [wCurItem], a
 	call GetScriptByte
-	;gender stuff will go here
+	ld [wCurForm], a
 	call GetScriptByte
 	ld [wGiftPokeBall], a
 	call GetScriptByte

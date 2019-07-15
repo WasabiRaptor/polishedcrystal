@@ -904,13 +904,15 @@ wcf5d:: ds 2 ; TODO: replace with meaningful label
 
 wMonType:: ds 1
 
-wCurGroup:: 
-	ds 1
+wCurGroup::	ds 1
 wCurSpecies::
 wCurMove::
-wCreditsSpawn::
-	ds 1
+wCreditsSpawn::	ds 1
+wCurGender::
 wCurForm:: ds 1
+wCurPersonality:: ds 1
+wGiftPokeTID:: ds 2
+wGiftPokeBall:: ds 1
 
 wNamedObjectTypeBuffer:: ds 1
 wCurrentOptionsPage:: ds 1
@@ -965,12 +967,6 @@ wPalFadeMode::
 ; bit 3: partial fade (fade b of c frames)
 ; bit 4: skip the last palette
 	ds 1
-
-wCurGenderOrGroupBuffer:: ds 1
-wCurPersonality:: ds 1
-wGiftPokeTID:: ds 2
-wGiftPokeBall:: ds 1
-	ds 3 ; unused
 
 wWindowStackPointer:: ds 2
 wMenuJoypad:: ds 1

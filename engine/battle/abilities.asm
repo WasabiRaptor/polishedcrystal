@@ -568,9 +568,9 @@ StanceChangeAbility:
 	ld a, [hl]
 	jr z, .status
 
-	cp AEGISLASH_BLADE
+	;cp AEGISLASH_BLADE
 	jr z, .popafandret
-	ld a, AEGISLASH_BLADE
+	;ld a, AEGISLASH_BLADE
 	jr .stanceChanged
 
 .popafandret
@@ -579,9 +579,9 @@ StanceChangeAbility:
 
 .status
 	;predef GetPokeGroup
-	cp AEGISLASH_SHIELD
-	jr z, .popafandret
-	ld a, AEGISLASH_SHIELD
+	;cp AEGISLASH_SHIELD
+	;jr z, .popafandret
+	;ld a, AEGISLASH_SHIELD
 	;fallthrough
 
 .stanceChanged
@@ -1170,17 +1170,17 @@ PowerConstructAbility:
 	ld hl, wEnemyMonForm
 .got_form
 	;predef GetPokeGroup
-	cp ZYGARDE_10
-	jr z, .ten
-	cp ZYGARDE_50
-	jr z, .fifty
-	jr .popafandret
+	;cp ZYGARDE_10
+	;jr z, .ten
+	;cp ZYGARDE_50
+	;jr z, .fifty
+	;jr .popafandret
 
 .ten
-	ld a, ZYGARDE_10_COMPLETE
+	;ld a, ZYGARDE_10_COMPLETE
 	jr .form_change
 .fifty
-	ld a, ZYGARDE_50_COMPLETE
+	;ld a, ZYGARDE_50_COMPLETE
 .form_change
 	ld [hl], a
 
@@ -2122,22 +2122,22 @@ RunPostBattleAbilities::
 .form_revert:
 	push bc
 	ld a, [wCurForm]
-	cp AEGISLASH_BLADE
+	;cp AEGISLASH_BLADE
 	jr z, .aegislash
-	cp ZYGARDE_10_COMPLETE
+	;cp ZYGARDE_10_COMPLETE
 	jr z, .ten
-	cp ZYGARDE_50_COMPLETE
+	;cp ZYGARDE_50_COMPLETE
 	jr z, .fifty
 	ret
 
 .aegislash
-	ld b, AEGISLASH_SHIELD
+	;ld b, AEGISLASH_SHIELD
 	jr .revert
 .ten
-	ld b, ZYGARDE_10
+	;ld b, ZYGARDE_10
 	jr .revert
 .fifty
-	ld b, ZYGARDE_50
+	;ld b, ZYGARDE_50
 .revert
 	ld [hl], a
 	farcall UpdatePkmnStats

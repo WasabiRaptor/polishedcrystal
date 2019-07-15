@@ -143,8 +143,5 @@ HoennDexOrder::
  	db GROUDON
 	db RAYQUAZA
 	db JIRACHI
-	db DEOXYS_DEFENSE
-	db DEOXYS_NORMAL
-	db DEOXYS_ATTACK
-	db DEOXYS_SPEED
+	db DEOXYS
 HoennDexOrderEnd::

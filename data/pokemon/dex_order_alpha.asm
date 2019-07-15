@@ -48,7 +48,7 @@ AlphabeticalPokedexOrder:
 	grouped_dex_order_mon CUTIEFLY
 	grouped_dex_order_mon CYNDAQUIL
 	;D
-	grouped_dex_order_mon DEERLING_SPRING
+	grouped_dex_order_mon DEERLING
 	grouped_dex_order_mon DEINO
 	grouped_dex_order_mon DELPHOX
 	grouped_dex_order_mon DEWOTT
@@ -146,7 +146,7 @@ AlphabeticalPokedexOrder:
 	grouped_dex_order_mon LUMINEON
 	grouped_dex_order_mon LUXIO
 	grouped_dex_order_mon LUXRAY
-	grouped_dex_order_mon LYCANROC_MIDDAY
+	grouped_dex_order_mon LYCANROC
 	;M
 	grouped_dex_order_mon MAGCARGO
 	grouped_dex_order_mon MAGEARNA
@@ -159,7 +159,7 @@ AlphabeticalPokedexOrder:
 	grouped_dex_order_mon MARILL
 	grouped_dex_order_mon MEDICHAM
 	grouped_dex_order_mon MEDITITE
-	grouped_dex_order_mon MEOWSTIC_M
+	grouped_dex_order_mon MEOWSTIC
 	grouped_dex_order_mon MEOWTH
 	grouped_dex_order_mon MEW
 	grouped_dex_order_mon MEWTWO
@@ -213,7 +213,7 @@ AlphabeticalPokedexOrder:
 	grouped_dex_order_mon SANDILE
 	grouped_dex_order_mon SANDSHREW
 	grouped_dex_order_mon SANDSLASH
-	grouped_dex_order_mon SAWSBUCK_SPRING
+	grouped_dex_order_mon SAWSBUCK
 	grouped_dex_order_mon SCIZOR
 	grouped_dex_order_mon SCOLIPEDE
 	grouped_dex_order_mon SCYTHER
@@ -276,5 +276,5 @@ AlphabeticalPokedexOrder:
 	grouped_dex_order_mon ZOROARK
 	grouped_dex_order_mon ZORUA
 	grouped_dex_order_mon ZWEILOUS
-	grouped_dex_order_mon ZYGARDE_10
+	grouped_dex_order_mon ZYGARDE
 AlphabeticalPokedexOrderEnd::

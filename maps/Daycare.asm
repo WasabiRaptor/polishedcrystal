@@ -5,20 +5,20 @@ DayCare_MapScriptHeader:
 	db 1 ; callbacks
 	callback MAPCALLBACK_OBJECTS, DayCareEggCheckCallback
 
-	db 0 ; warp events
+	db 2 ; warp events
 	;warp_event  0,  4, ROUTE_34, 3
 	;warp_event  0,  5, ROUTE_34, 4
-	;warp_event  2,  7, ROUTE_34, 5
-	;warp_event  3,  7, ROUTE_34, 5
+	warp_event  2,  7, DANIELS_TOWN, 2
+	warp_event  3,  7, DANIELS_TOWN, 2
 
 	db 0 ; coord events
 
 	db 1 ; bg events
 	bg_event  5,  1, SIGNPOST_JUMPSTD, difficultbookshelf
 
-	db 3 ; object events
+	db 2 ; object events
 	object_event  5,  3, SPRITE_GRANNY, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, DayCareLadyScript, -1
-	object_event  0,  5, SPRITE_LYRA, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LYRA_DAYCARE
+	;object_event  0,  5, SPRITE_LYRA, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, ObjectEvent, EVENT_LYRA_DAYCARE
 	object_event  2,  3, SPRITE_GRAMPS, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, DayCareManScript_Inside, EVENT_DAYCARE_MAN_IN_DAYCARE
 
 	const_def 1 ; object constants
@@ -31,14 +31,14 @@ DayCareTrigger0:
 
 DayCareEggCheckCallback:
 	checkflag ENGINE_DAYCARE_MAN_HAS_EGG
-	iftrue .PutDayCareManOutside
-	clearevent EVENT_DAYCARE_MAN_IN_DAYCARE
-	setevent EVENT_DAYCARE_MAN_ON_ROUTE_34
+	;iftrue .PutDayCareManOutside
+	;clearevent EVENT_DAYCARE_MAN_IN_DAYCARE
+	;setevent EVENT_DAYCARE_MAN_ON_ROUTE_34
 	return
 
-.PutDayCareManOutside:
-	setevent EVENT_DAYCARE_MAN_IN_DAYCARE
-	clearevent EVENT_DAYCARE_MAN_ON_ROUTE_34
+;.PutDayCareManOutside:
+	;setevent EVENT_DAYCARE_MAN_IN_DAYCARE
+	;clearevent EVENT_DAYCARE_MAN_ON_ROUTE_34
 	return
 
 DayCare_MeetGrandma:
@@ -92,30 +92,44 @@ DayCare_MeetGrandma:
 DayCareManScript_Inside:
 	faceplayer
 	opentext
-	checkevent EVENT_GOT_ODD_EGG
-	iftrue .AlreadyHaveOddEgg
-	writetext DayCareManText_GiveOddEgg
-	buttonsound
-	checkcode VAR_PARTYCOUNT
-	ifequal PARTY_LENGTH, .PartyFull
-	special GiveOddEgg
-	writetext DayCareText_GotOddEgg
-	playsound SFX_GET_EGG_FROM_DAYCARE_LADY
-	waitsfx
-	writetext DayCareText_DescribeOddEgg
-	setevent EVENT_GOT_ODD_EGG
-	waitendtext
-
-.PartyFull:
-	jumpopenedtext DayCareText_PartyFull
-
-.AlreadyHaveOddEgg:
+	checkflag ENGINE_DAYCARE_MAN_HAS_EGG
+	iffalse .daycareman
+	special Special_DayCareManOutside
+	waitbutton
+	closetext
+	ifequal $1, .end_fail
+	clearflag ENGINE_DAYCARE_MAN_HAS_EGG
+.end_fail
+	end
+.daycareman
 	special Special_DayCareMan
 	waitendtext
+;nope
+	;checkevent EVENT_GOT_ODD_EGG
+	;iftrue .AlreadyHaveOddEgg
+	;writetext DayCareManText_GiveOddEgg
+	;buttonsound
+	;checkcode VAR_PARTYCOUNT
+	;ifequal PARTY_LENGTH, .PartyFull
+	;special GiveOddEgg
+	;writetext DayCareText_GotOddEgg
+	;playsound SFX_GET_EGG_FROM_DAYCARE_LADY
+	;waitsfx
+	;writetext DayCareText_DescribeOddEgg
+	;setevent EVENT_GOT_ODD_EGG
+	;waitendtext
+
+;.PartyFull:
+	;jumpopenedtext DayCareText_PartyFull
+
 
 DayCareLadyScript:
 	faceplayer
 	opentext
+	special Special_DayCareLady
+	waitendtext
+
+;nope
 	checkflag ENGINE_DAYCARE_MAN_HAS_EGG
 	iftrue_jumpopenedtext Text_GrampsLookingForYou
 	checkevent EVENT_LYRA_GAVE_AWAY_EGG
