@@ -769,10 +769,18 @@ GetPreEvolution: ; 42581
 ; Return carry and the new species in wCurPartySpecies
 ; if a pre-evolution is found.
 	xor a
-	ld c, a
 	ld [wCurPartySpecies], a
-.loop ; For each Pokemon...
+
 	ld a, [wCurGroup]
+	ld hl, RegionalMaxPokemonTable
+	ld de, 2
+	call IsInArray
+	inc hl
+	ld a, [hl]
+	ld c, a
+.loop ; For each Pokemon...
+	dec c
+	ld [wCurGroup], a
 	push bc
 	call GetRelevantEvosAttacksPointers
 	pop bc
@@ -803,16 +811,14 @@ GetPreEvolution: ; 42581
 	jr nz, .loop2
 
 .no_evolve
-	inc c
 	ld a, c
-	cp NUM_POKEMON
-	jr c, .loop
 	and a
+	jr nz, .loop
 	ret
 
 .found_preevo
-	inc c
 	ld a, c
+	inc a
 	ld [wCurPartySpecies], a
 	scf
 	ret

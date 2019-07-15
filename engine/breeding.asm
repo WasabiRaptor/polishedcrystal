@@ -12,19 +12,26 @@
 
 CheckBreedmonCompatibility: ; 16e1d
 	call .CheckBreedingGroupCompatibility
+
 	ld c, INCOMPATIBLE
 	jp nc, .done
-	ld hl, wBreedMon1Group
-	call GetPartyMonGroupSpeciesAndForm
+	ld a, [wBreedMon1Group]
+	ld [wCurPartyGroup], a
+	ld a, [wBreedMon1Species]
+	ld [wCurPartySpecies], a
 	ld a, [wBreedMon1Gender]
 	ld [wTempMonGender], a
 	call .SetGenderData
+
 	ld b, a
-	ld hl, wBreedMon2Group
-	call GetPartyMonGroupSpeciesAndForm
+	ld a, [wBreedMon2Group]
+	ld [wCurPartyGroup], a
+	ld a, [wBreedMon2Species]
+	ld [wCurPartySpecies], a
 	ld a, [wBreedMon2Gender]
 	ld [wTempMonGender], a
 	call .SetGenderData
+
 	cp b
 	ld c, INCOMPATIBLE
 	jr z, .done ; both are same gender, both are dittos or both are genderless
@@ -75,16 +82,20 @@ CheckBreedmonCompatibility: ; 16e1d
 .CheckBreedingGroupCompatibility: ; 16ed6
 ; If either mon is in the No Eggs group,
 ; they are not compatible.
-	ld hl, wBreedMon2Group
-	call GetPartyMonGroupSpeciesAndForm
-	call GetBaseData ;form is known
+	ld a, [wBreedMon2Group]
+	ld [wCurGroup], a
+	ld a, [wBreedMon2Species]
+	ld [wCurSpecies], a
+	call GetBaseData
 	ld a, [wBaseEggGroups]
 	cp NO_EGGS * $11
 	jr z, .Incompatible
 
-	ld hl, wBreedMon1Group
-	call GetPartyMonGroupSpeciesAndForm
-	call GetBaseData ;form is known
+	ld a, [wBreedMon1Group]
+	ld [wCurGroup], a
+	ld a, [wBreedMon1Species]
+	ld [wCurSpecies], a
+	call GetBaseData
 	ld a, [wBaseEggGroups]
 	cp NO_EGGS * $11
 	jr z, .Incompatible
@@ -94,6 +105,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	ld a, [wBreedMon2Species]
 	ld b, a 
 	ld a, [wBreedMon2Group]
+	ld [wCurGroup], a
 	cppoke DITTO, .check_compatibility
 	jr .Compatible
 
@@ -113,6 +125,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	ld a, [wBreedMon1Species]
 	ld b, a
 	ld a, [wBreedMon1Group]
+	ld [wCurGroup], a
 	cppoke DITTO, .check_compatibility2
 	pop bc
 	jr .Compatible
@@ -205,7 +218,7 @@ DoEggStep:: ; 16f3e
 	call .nextpartymon
 	jr .ability_loop
 .no_ability_bonus
-	ld c, 0
+	ld c, 2 ;just so I can hatch eggs fast
 .ability_ok
 	ld de, wPartySpecies
 	ld hl, wPartyMon1Happiness ; Egg cycles when not hatched
@@ -651,23 +664,17 @@ InheritMove:
 
 GetEggFrontpic: ; 17224 (5:7224)
 	push de
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	call GetPartyMonGroupSpeciesAndForm
-	ld a, [wCurSpecies]
 	call GetBaseData ;form is known
-
 	pop de
 	predef_jump GetFrontpic
 
 GetHatchlingFrontpic: ; 1723c (5:723c)
 	push de
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -897,9 +904,9 @@ Hatch_ShellFragmentLoop: ; 17418 (5:7418)
 Special_DayCareMon1: ; 17421
 	ld hl, DayCareMon1Text
 	call PrintText
-	ld hl, wBreedMon1Group
-	call GetPartyMonGroupSpeciesAndForm
-	ld a, [wCurSpecies]
+	ld a, [wBreedMon1Group]
+	ld [wCurGroup], a
+	ld a, [wBreedMon1Species]
 	call PlayCry
 	ld a, [wDayCareLady]
 	bit 0, a
@@ -912,9 +919,9 @@ Special_DayCareMon1: ; 17421
 Special_DayCareMon2: ; 17440
 	ld hl, DayCareMon2Text
 	call PrintText
-	ld hl, wBreedMon2
-	call GetPartyMonGroupSpeciesAndForm
-	ld a, [wCurSpecies]
+	ld a, [wBreedMon2Group]
+	ld [wCurGroup], a
+	ld a, [wBreedMon2Species]
 	call PlayCry
 	ld a, [wDayCareMan]
 	bit 0, a
