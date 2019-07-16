@@ -773,12 +773,7 @@ GetPreEvolution: ; 42581
 ; if a pre-evolution is found.
 	xor a
 
-	ld a, [wCurGroup]
-	ld hl, RegionalMaxPokemonTable
-	ld de, 2
-	call IsInArray
-	inc hl
-	ld a, [hl]
+	call GetMaxNumPokemonForGroup
 	ld c, a
 .loop ; For each Pokemon...
 	dec c

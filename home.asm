@@ -55,12 +55,7 @@ IsAPokemon::
 	push bc
 	push de
 	push af
-	ld a, [wCurGroup]
-	ld hl, RegionalMaxPokemonTable
-	ld de, 2
-	call IsInArray
-	inc hl
-	ld a, [hl]
+	call GetMaxNumPokemonForGroup
 	pop de
 	jr nc, .not_a_pokemon_2
 	cp d
@@ -80,7 +75,16 @@ IsAPokemon::
 	scf
 	ret
 
-RegionalMaxPokemonTable::
+GetMaxNumPokemonForGroup::
+	ld a, [wCurGroup]
+	ld hl, RegionalMaxPokemonTable
+	ld de, 2
+	call IsInArray
+	inc hl
+	ld a, [hl]
+	ret
+
+RegionalMaxPokemonTable:
 	db REGION_KANTO, NUM_KANTO_POKEMON
 	db REGION_JOHTO, NUM_JOHTO_POKEMON
 	db REGION_HOENN, NUM_HOENN_POKEMON
