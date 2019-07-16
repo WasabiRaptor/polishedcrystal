@@ -1523,8 +1523,9 @@ GetEVRelativePointer: ; eed9
 
 
 RareCandy_StatBooster_GetParameters: ; eef5
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	call GetPartyParamLocation
 	ld a, [wCurPartySpecies]
-	ld [wCurSpecies], a
 	ld [wd265], a
 	ld a, MON_LEVEL
 	call GetPartyParamLocation
@@ -2015,6 +2016,8 @@ ItemActionText: ; f24a (3:724a)
 	ld [wPartyMenuActionText], a
 	ld a, [wCurPartySpecies]
 	push af
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartyMon]
 	push af
 	push hl
@@ -2030,6 +2033,8 @@ ItemActionText: ; f24a (3:724a)
 	pop hl
 	pop af
 	ld [wCurPartyMon], a
+	pop af
+	ld [wCurPartyGroup], a
 	pop af
 	ld [wCurPartySpecies], a
 	ret

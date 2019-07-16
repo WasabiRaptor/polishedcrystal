@@ -119,8 +119,8 @@ EvolveAfterBattle_MasterLoop:
 	ld a, ATK_LT_DEF
 	jr c, .got_tyrogue_evo
 	ld a, ATK_GT_DEF
-	pop de
 .got_tyrogue_evo
+	pop de
 	pop hl
 
 	inc hl
@@ -568,14 +568,17 @@ LearnLevelMoves: ; 42487
 	ld b, a
 	ld a, [wCurPartyLevel]
 	cp b
+	jr z, .found_move
+	inc hl
+	jr .find_move
+.found_move
 	ld a, d ;bank
 	call GetFarByte
 	inc hl
-	jr nz, .find_move
 	ld c, d ; bank
 
-	push bc
 	push hl
+	push bc
 	ld d, a
 	ld hl, wPartyMon1Moves
 	ld a, [wCurPartyMon]
@@ -585,9 +588,7 @@ LearnLevelMoves: ; 42487
 
 	ld b, NUM_MOVES
 .check_move
-	ld a, c ;bank
-	call GetFarByte
-	inc hl
+	ld a, [hli]
 	cp d
 	jr z, .has_move
 	dec b
@@ -596,6 +597,7 @@ LearnLevelMoves: ; 42487
 .has_move
 
 	pop hl
+	ld d, c; bank
 	jr .find_move
 
 .learn
