@@ -581,7 +581,7 @@ InheritLevelMove:
 	ld d, 0
 	add hl, de
 	add hl, de
-	ld a, d
+	ld a, b ; bank
 	call GetFarHalfword
 	pop de
 .loop
