@@ -29,7 +29,6 @@ EvolveAfterBattle_MasterLoop:
 	cp $ff
 	jp z, .ReturnToMap
 
-	ld [wEvolutionOldSpecies], a
 
 	push hl
 	ld a, [wCurPartyMon]
@@ -44,6 +43,13 @@ EvolveAfterBattle_MasterLoop:
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
 	call GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurPartyGroup]
+	ld [wEvolutionOldGroup], a
+	ld [wEvolutionNewGroup], a ; this is merely set if so that if the evolution doesn't change group, it doesn't
+	; and so that in the future if it becomes neceseary to change a group with evolution, the byte and functionality should be there
+	; merely just having to be uncommented to have a byte read from the evo struct and set along with wEvolutionNewSpecies down below
+	ld a, [wCurPartySpecies]
+	ld [wEvolutionOldSpecies], a
 
 	ld a, [wCurGroup]
 	call GetRelevantEvosAttacksPointers
@@ -271,7 +277,10 @@ endr
 	ld a, d ; bank
 	push de ; 2
 	call GetFarByte
-	ld [wBuffer2], a
+	ld [wEvolutionNewSpecies], a
+	;inc hl ; if one were to implement the group byte into evolution
+	;ld a, d ; bank
+	;ld [wEvolutionNewGroup], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	call GetNick
@@ -297,7 +306,10 @@ endr
 	push af ; 3
 	call ClearSprites
 	pop af ; 2
+	
+	pop de ; 1
 	jp c, CancelEvolution
+	push de ; 2
 
 	ld hl, Text_CongratulationsYourPokemon
 	call PrintText
@@ -310,8 +322,13 @@ endr
 	call GetFarByte
 	ld [wCurSpecies], a
 	ld [wTempMonSpecies], a
-	ld [wBuffer2], a
+	ld [wEvolutionNewSpecies], a
 	ld [wd265], a
+	;inc hl ; if one were to implement the group byte into evolution
+	;ld a, d ; bank
+	;ld [wCurGroup], a
+	;ld [wTempMonGroup], a
+	;ld [wEvolutionNewGroup], a
 	call GetPokemonName
 
 	push hl ; 1
@@ -423,8 +440,10 @@ endr
 ; 42414
 
 UpdateSpeciesNameIfNotNicknamed: ; 42414
+	ld a, [wEvolutionOldGroup]
+	ld [wCurGroup], a
 	ld a, [wEvolutionOldSpecies]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer2

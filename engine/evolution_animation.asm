@@ -46,11 +46,17 @@ EvolutionAnimation: ; 4e5e1
 	call ApplyTilemapInVBlank
 	xor a
 	ldh [hBGMapMode], a
+	ld a, [wEvolutionOldGroup]
+	ld [wHatchOrEvolutionResultGroup], a 
+
 	ld a, [wEvolutionOldSpecies]
-	ld [wPlayerHPPal], a
+	ld [wHatchOrEvolutionResultSpecies], a 
 
 	ld c, $0
 	call .GetCGBLayout
+	ld a, [wEvolutionOldGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wEvolutionOldSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -64,10 +70,18 @@ EvolutionAnimation: ; 4e5e1
 	ld a, 7 * 7
 	ld [wEvolutionPicOffset], a
 	call .ReplaceFrontpic
+	ld a, [wEvolutionNewGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wEvolutionNewSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+
 	call .LoadFrontpic
+
+	ld a, [wEvolutionOldGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wEvolutionOldSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -77,6 +91,8 @@ EvolutionAnimation: ; 4e5e1
 	call .check_statused
 	jr c, .skip_cry
 
+	ld a, [wEvolutionOldGroup]
+	ld [wCurGroup], a
 	ld a, [wEvolutionOldSpecies]
 	call PlayCry
 
@@ -98,8 +114,11 @@ EvolutionAnimation: ; 4e5e1
 	xor a
 	ld [wEvolutionCanceled], a
 
+	ld a, [wEvolutionNewGroup]
+	ld [wHatchOrEvolutionResultGroup], a
+
 	ld a, [wEvolutionNewSpecies]
-	ld [wPlayerHPPal], a
+	ld [wHatchOrEvolutionResultSpecies], a
 
 	ld c, $0
 	call .GetCGBLayout
@@ -108,19 +127,28 @@ EvolutionAnimation: ; 4e5e1
 	call .check_statused
 	ret c
 
-	ld a, [wBoxAlignment]
+	ld a, [wBoxAlignment] 
 	push af
 	ld a, $1
 	ld [wBoxAlignment], a
 	ld a, [wCurPartySpecies]
+	push af 
+	ld a, [wCurPartyGroup]
 	push af
 
-	ld a, [wPlayerHPPal]
+	ld a, [wHatchOrEvolutionResultGroup] 
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+
+	ld a, [wHatchOrEvolutionResultSpecies] 
 	ld [wCurPartySpecies], a
 	hlcoord 7, 2
 	lb de, $0, ANIM_MON_EVOLVE
 	predef AnimateFrontpic
 
+	pop af 
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	pop af
 	ld [wCurPartySpecies], a
 	pop af
@@ -131,8 +159,10 @@ EvolutionAnimation: ; 4e5e1
 	ld a, $1
 	ld [wEvolutionCanceled], a
 
+	ld a, [wEvolutionOldGroup]
+	ld [wHatchOrEvolutionResultGroup], a 
 	ld a, [wEvolutionOldSpecies]
-	ld [wPlayerHPPal], a
+	ld [wHatchOrEvolutionResultSpecies], a 
 
 	ld c, $0
 	call .GetCGBLayout
@@ -141,7 +171,9 @@ EvolutionAnimation: ; 4e5e1
 	call .check_statused
 	ret c
 
-	ld a, [wPlayerHPPal]
+	ld a, [wHatchOrEvolutionResultGroup]
+	ld [wCurGroup], a
+	ld a, [wHatchOrEvolutionResultSpecies]
 	jp PlayCry
 ; 4e703
 

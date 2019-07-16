@@ -870,8 +870,14 @@ wCreditsTimer:: ds 1
 
 wMemCGBLayout:: ds 1
 
-wPlayerHPPal:: ds 1
-wEnemyHPPal:: ds 1
+wHatchOrEvolutionResultSpecies::
+wPlayerHPPal:: 
+	ds 1
+
+wHatchOrEvolutionResultGroup::
+wEnemyHPPal:: 
+	ds 1
+
 wHPPals:: ds PARTY_LENGTH
 wCurHPPal:: ds 1
 wHPPalIndex:: ds 1

@@ -807,7 +807,7 @@ EggHatch_AnimationSequence: ; 1728f (5:728f)
 	ret
 
 Hatch_LoadFrontpicPal: ; 17363 (5:7363)
-	ld [wPlayerHPPal], a
+	ld [wHatchOrEvolutionResultSpecies], a
 	lb bc, CGB_EVOLUTION, $0
 	jp GetCGBLayout
 

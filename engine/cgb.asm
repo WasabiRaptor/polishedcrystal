@@ -609,7 +609,7 @@ _CGB_Evolution: ; 91e4
 	add hl, bc
 	ld c, l
 	ld b, h
-	ld a, [wPlayerHPPal]
+	ld a, [wHatchOrEvolutionResultSpecies]
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	; hl = DVs
