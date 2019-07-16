@@ -56,12 +56,13 @@ EvolveAfterBattle_MasterLoop:
 	ld a, d ;bank
 	call GetFarHalfword
 
+	push de
 	push hl
 	xor a
 	ld [wMonType], a
 	predef CopyPkmnToTempMon
 	pop hl
-
+	pop de
 .loop
 	ld a, d ; bank
 	call GetFarByte
@@ -268,6 +269,7 @@ endr
 	push hl ; 1
 
 	ld a, d ; bank
+	push de ; 2
 	call GetFarByte
 	ld [wBuffer2], a
 	ld a, [wCurPartyMon]
@@ -292,13 +294,15 @@ endr
 
 	farcall EvolutionAnimation
 
-	push af ; 2
+	push af ; 3
 	call ClearSprites
-	pop af ; 1
+	pop af ; 2
 	jp c, CancelEvolution
 
 	ld hl, Text_CongratulationsYourPokemon
 	call PrintText
+
+	pop de ; 1
 
 	pop hl ; 0
 

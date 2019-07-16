@@ -4,11 +4,15 @@ EvolutionAnimation: ; 4e5e1
 	push bc
 	ld a, [wCurSpecies]
 	push af
+	ld a, [wCurGroup]
+	push af
 	ldh a, [rOBP0]
 	push af
 	call .EvolutionAnimation
 	pop af
 	ldh [rOBP0], a
+	pop af
+	ld [wCurGroup], a
 	pop af
 	ld [wCurSpecies], a
 	pop bc

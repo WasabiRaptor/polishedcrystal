@@ -481,7 +481,9 @@ wCurHPAnimHighHP:: ds 1
 
 NEXTU
 ; evolution data
+wEvolutionOldGroup:: ds 1
 wEvolutionOldSpecies:: ds 1
+wEvolutionNewGroup:: ds 1
 wEvolutionNewSpecies:: ds 1
 wEvolutionPicOffset:: ds 1
 wEvolutionCanceled:: ds 1
