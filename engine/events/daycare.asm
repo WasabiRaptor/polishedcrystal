@@ -800,16 +800,8 @@ DayCare_InitBreeding: ; 16a3b
 	jr nz, .checkIllumiseVolbeat
 	ld a, [wCurPartySpecies]
 	cp NIDORAN_F
-	jr z, .NidoranFamilyMother
-	cp NIDORINA
-	jr z, .NidoranFamilyMother
-	cp NIDOQUEEN
-	jr z, .NidoranFamilyMother
+	jr z, .NidoranFamilyMother ; the egg species is the input here, so we should only ever check for pokemon that even can be eggs
 	cp NIDORAN_M
-	jr z, .NidoranFamilyMother
-	cp NIDORINO
-	jr z, .NidoranFamilyMother
-	cp NIDOKING
 	jr nz, .GotEggSpecies
 .NidoranFamilyMother:
 	call Random
@@ -860,7 +852,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wEggMonItem], a
 
 	; Set moves for the egg
-	farcall InitEggMoves
+	;farcall InitEggMoves
 
 	; Set OTID to the player
 	ld hl, wEggMonID
