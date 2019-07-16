@@ -500,7 +500,6 @@ InitEggMoves:
 	xor a
 	ld [wEggMonInheritMoves], a
 	predef FillMoves
- 	ret
 	; Inherited level up moves
 	ld de, wBreedMon1Moves
 	ld b, NUM_MOVES
@@ -534,7 +533,6 @@ InitEggMoves:
 	call InheritLevelMove
 	pop bc
 	pop hl
-	pop de
 	jr .level_up_done_inner
 
 .level_up_done
@@ -605,10 +603,10 @@ InheritLevelMove:
 
 InheritEggMove:
 ; If move d is an egg move, inherit that move
-	ld a, [wCurGroup]
 ; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
 ; returns c for variants, nc for normal species
 	push de
+	ld a, [wCurGroup]
 	ld hl, VariantEggMovePointerTable
 	ld de, 4
 	call IsInArray
