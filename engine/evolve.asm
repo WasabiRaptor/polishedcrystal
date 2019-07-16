@@ -771,8 +771,6 @@ GetPreEvolution: ; 42581
 
 ; Return carry and the new species in wCurPartySpecies
 ; if a pre-evolution is found.
-	xor a
-
 	call GetMaxNumPokemonForGroup
 	ld c, a
 .loop ; For each Pokemon...
@@ -801,6 +799,7 @@ GetPreEvolution: ; 42581
 	inc hl
 	ld a, [wCurPartySpecies]
 	ld b, a
+	ld a, d
 	call GetFarByte
 	cp b
 	jr z, .found_preevo

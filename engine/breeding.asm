@@ -175,6 +175,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	pop bc
 	ld a, 1 << BREEDGEN_DITTO
 	ret
+
 .not_ditto
 	pop bc
 	ld a, BREEDMON
