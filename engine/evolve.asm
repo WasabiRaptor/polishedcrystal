@@ -562,6 +562,7 @@ LearnLevelMoves: ; 42487
 	ld a, d ;bank
 	call GetFarByte
 	inc hl
+	and a
 	jr z, .done
 
 	ld b, a
@@ -573,12 +574,14 @@ LearnLevelMoves: ; 42487
 	jr nz, .find_move
 	ld c, d ; bank
 
+	push bc
 	push hl
 	ld d, a
 	ld hl, wPartyMon1Moves
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
+	pop bc
 
 	ld b, NUM_MOVES
 .check_move
@@ -769,7 +772,6 @@ GetPreEvolution: ; 42581
 ; Return carry and the new species in wCurPartySpecies
 ; if a pre-evolution is found.
 	xor a
-	ld [wCurPartySpecies], a
 
 	ld a, [wCurGroup]
 	ld hl, RegionalMaxPokemonTable
@@ -780,7 +782,7 @@ GetPreEvolution: ; 42581
 	ld c, a
 .loop ; For each Pokemon...
 	dec c
-	ld [wCurGroup], a
+	ld a, [wCurGroup]
 	push bc
 	call GetRelevantEvosAttacksPointers
 	pop bc
@@ -803,10 +805,12 @@ GetPreEvolution: ; 42581
 .not_tyrogue
 	inc hl
 	ld a, [wCurPartySpecies]
-	cp [hl]
+	ld b, a
+	call GetFarByte
+	cp b
 	jr z, .found_preevo
 	inc hl
-	ld a, [hl]
+	call GetFarByte
 	and a
 	jr nz, .loop2
 
