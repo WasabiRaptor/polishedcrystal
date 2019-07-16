@@ -170,6 +170,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	ld a, [wCurPartySpecies]
 	ld b, a
 	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	cppoke DITTO, .not_ditto
 	pop bc
 	ld a, 1 << BREEDGEN_DITTO

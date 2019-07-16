@@ -743,31 +743,28 @@ DayCare_InitBreeding: ; 16a3b
 	ld hl, wEggOT
 	ld bc, NAME_LENGTH
 	call ByteFill
+	
 	ld a, [wBreedMon1Group]
 	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld a, [wBreedMon1Gender]
 	ld [wTempMonGender], a
 	ld a, $3
 	ld [wMonType], a
+
 	ld a, [wBreedMon1Species]
-	ld [wCurPartySpecies], a
 	ld b, a
 	ld a, [wBreedMon1Group]
-	ld [wCurGroup], a
-	ld [wCurPartyGroup], a
 	cppoke DITTO, .not_ditto_1
 	ld a, $1
 	jr .LoadWhichBreedmonIsTheMother
 
 .not_ditto_1
 	ld a, [wBreedMon2Species]
-	ld [wCurPartySpecies], a
 	ld b, a
 	ld a, [wBreedMon2Group]
-	ld [wCurGroup], a
-	ld [wCurPartyGroup], a
 	cppoke DITTO, .not_ditto_2
 	ld a, 0 ; not xor a; preserve carry flag
 	jr .LoadWhichBreedmonIsTheMother
