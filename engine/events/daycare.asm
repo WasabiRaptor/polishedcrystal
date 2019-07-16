@@ -852,7 +852,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wEggMonItem], a
 
 	; Set moves for the egg
-	;farcall InitEggMoves
+	farcall InitEggMoves
 
 	; Set OTID to the player
 	ld hl, wEggMonID

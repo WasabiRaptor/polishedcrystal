@@ -7312,7 +7312,7 @@ rept NUM_MOVES + -1
 endr
 	ld [hl], a
 	; Make sure the predef knows this isn't a partymon
-	ld [wEvolutionOldSpecies], a
+	ld [wEggMonInheritMoves], a
 	; Fill moves based on level
 	predef FillMoves
 

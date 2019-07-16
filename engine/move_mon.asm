@@ -128,7 +128,7 @@ rept NUM_MOVES + -1
 	ld [hli], a ; fist three moves made 0
 endr
 	ld [hl], a ; last move made 0
-	ld [wBuffer1], a
+	ld [wEggMonInheritMoves], a
 	predef FillMoves ; moves are filled
 
 .next
@@ -1063,7 +1063,7 @@ Functiondd64: ; dd64
 	ld d, h
 	ld e, l
 	ld a, $1
-	ld [wBuffer1], a
+	ld [wEggMonInheritMoves], a
 	predef FillMoves
 	ld a, [wPartyCount]
 	dec a

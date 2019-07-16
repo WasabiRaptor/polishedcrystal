@@ -498,9 +498,9 @@ InitEggMoves:
 	; Default level 1 moves
 	ld de, wEggMonMoves
 	xor a
-	ld [wBuffer1], a
+	ld [wEggMonInheritMoves], a
 	predef FillMoves
-
+ 	ret
 	; Inherited level up moves
 	ld de, wBreedMon1Moves
 	ld b, NUM_MOVES

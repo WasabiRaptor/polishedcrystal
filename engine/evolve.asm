@@ -306,7 +306,7 @@ endr
 	push af ; 3
 	call ClearSprites
 	pop af ; 2
-	
+
 	pop de ; 1
 	jp c, CancelEvolution
 	push de ; 2
@@ -647,7 +647,7 @@ FillMoves: ; 424e1
 	push de
 	push bc
 	ld a, [wCurGroup]
-	push de
+	push de ; 1
 	call GetRelevantEvosAttacksPointers
 	ld b, 0
 	ld a, [wCurPartySpecies]
@@ -658,7 +658,7 @@ FillMoves: ; 424e1
 	add hl, bc
 	ld c, d ;bank
 	ld a, d ;bank
-	pop de
+	pop de ; 0
 	call GetFarHalfword
 .GoToAttacks:
 	ld a, c ;bank
@@ -669,7 +669,7 @@ FillMoves: ; 424e1
 	jr .GetLevel
 
 .NextMove:
-	pop de
+	pop de ; 0
 	ld c, b
 .GetMove:
 	inc hl
@@ -683,7 +683,7 @@ FillMoves: ; 424e1
 	ld a, [wCurPartyLevel]
 	cp b
 	jp c, .done
-	ld a, [wEvolutionOldSpecies]
+	ld a, [wEggMonInheritMoves]
 	and a
 	jr z, .CheckMove
 	ld a, [wd002]
@@ -691,7 +691,7 @@ FillMoves: ; 424e1
 	jr nc, .GetMove
 
 .CheckMove:
-	push de
+	push de ; 1
 	ld b, c ; bank
 	ld c, NUM_MOVES
 .CheckRepeat:
@@ -706,8 +706,8 @@ FillMoves: ; 424e1
 	jr z, .NextMove
 	dec c
 	jr nz, .CheckRepeat
-	pop de
-	push de
+	pop de ; 0
+	push de ; 1
 	ld c, NUM_MOVES
 .CheckSlot:
 	ld a, [de]
@@ -716,52 +716,52 @@ FillMoves: ; 424e1
 	inc de
 	dec c
 	jr nz, .CheckSlot
-	pop de
-	push de
-	push hl
+	pop de ; 0
+	push de ; 1
+	push hl ; 2
 	ld h, d
 	ld l, e
 	call ShiftMoves
-	ld a, [wEvolutionOldSpecies]
+	ld a, [wEggMonInheritMoves]
 	and a
 	jr z, .ShiftedMove
-	push de
-	push bc
+	push de ; 3
+	push bc ; 4
 	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES - 1)
 	add hl, bc
 	ld d, h
 	ld e, l
 	call ShiftMoves
-	pop bc
-	pop de
+	pop bc ; 3
+	pop de ; 2
 
 .ShiftedMove:
-	pop hl
+	pop hl ; 1
 
 .LearnMove:
 	ld a, b ;bank
 	call GetFarByte
 	ld [de], a
-	ld a, [wEvolutionOldSpecies]
+	ld a, [wEggMonInheritMoves]
 	and a
 	jr z, .NextMove
-	push hl
-	push bc
+	push hl ; 2
+	push bc ; 3
 	ld a, b ;bank
 	call GetFarByte
 	ld hl, MON_PP - MON_MOVES
 	add hl, de
-	push hl
+	push hl ; 4
 	dec a
 	ld hl, Moves + MOVE_PP
 	ld bc, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	pop hl
+	pop hl ; 3
 	ld [hl], a
-	pop bc
-	pop hl
+	pop bc ; 2
+	pop hl ; 1
 	jp .NextMove
 
 .done
