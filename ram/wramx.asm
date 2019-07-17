@@ -301,7 +301,7 @@ wCurIconMonHasItemOrMail:: ds 1
 wCurKeyItem::
 wCurTMHM::
 wCurItem::
-	ds 1
+	ds 2
 wMartItemID::
 wCurItemQuantity::
 	ds 1

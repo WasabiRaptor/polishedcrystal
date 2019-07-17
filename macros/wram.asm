@@ -5,9 +5,7 @@ ENDM
 box_struct: MACRO
 \1Group::          db ; one next to the other so we can just inc hl to the next
 \1Species::        db
-;\1ItemGroup::
-;\1AbilityGroup::   db ; either just 1 bit to ability and all the others to items, or four for each, whatever, should give all the data storage needed
-\1Item::           db
+\1Item::           dw
 \1Moves::          ds NUM_MOVES
 \1ID::             dw
 \1Exp::            ds 3
@@ -61,7 +59,7 @@ ENDM
 battle_struct: MACRO
 \1Group::          db
 \1Species::        db
-\1Item::           db
+\1Item::           dw
 \1Moves::          ds NUM_MOVES
 ; Mon capture assumes personality comes after DVs
 \1DVs::
@@ -223,6 +221,7 @@ hall_of_fame: MACRO
 ENDM
 
 trademon: MACRO
+\1Group:: ds 1
 \1Species:: ds 1 ; wc6d0 | wc702
 \1SpeciesName:: ds PKMN_NAME_LENGTH ; wc6d1 | wc703
 \1Nickname:: ds PKMN_NAME_LENGTH ; wc6dc | wc70e
@@ -239,7 +238,7 @@ trademon: MACRO
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Group:: ds 1
+\1Form:: ds 1
 \1ID:: ds 2 ; wc6ff | wc731
 \1CaughtData:: ds 1 ; wc701 | wc733
 \1End::

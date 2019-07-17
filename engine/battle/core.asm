@@ -3623,6 +3623,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_SLOW
 	predef AnimateFrontpic
+
 	pop af
 	ld [wCurPartyGroup], a
 	pop af
@@ -8767,23 +8768,23 @@ DropPlayerSub: ; 3f447
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
-	ld a, [wBattleMonGroup]
-	ld [wCurGroup], a
 
 	call GetPlayerIllusion
 
 	ld de, VTiles2 tile $31
 	predef GetBackpic
 	pop af
-	ld [wCurGroup], a
-	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
+	ld [wBattleMonSpecies], a
+	pop af
+	ld [wCurGroup], a
+	ld [wBattleMonGroup], a
 	call GetBaseData; form is known
 	pop af
-	ld [wCurPartyGroup], a
-	pop af
 	ld [wCurPartySpecies], a
+	pop af
+	ld [wCurPartyGroup], a
 	ret
 ; 3f46f
 
@@ -8822,23 +8823,23 @@ DropEnemySub: ; 3f486
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
-	ld a, [wEnemyMonGroup]
-	ld [wCurGroup], a
 
 	call GetEnemyIllusion
 	
 	ld de, VTiles2
 	predef FrontpicPredef
 	pop af
-	ld [wCurGroup], a
-	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
+	ld [wEnemyMonSpecies], a
+	pop af
+	ld [wEnemyMonGroup], a
+	ld [wCurGroup], a
 	call GetBaseData; form is known
 	pop af
-	ld [wCurPartyGroup], a
-	pop af
 	ld [wCurPartySpecies], a
+	pop af
+	ld [wCurPartyGroup], a
 	ret
 ; 3f4b4
 
@@ -9930,6 +9931,7 @@ BattleStartMessage: ; 3fc8b
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_NORMAL
 	predef AnimateFrontpic
+
 	pop af
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a

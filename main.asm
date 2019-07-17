@@ -2959,9 +2959,12 @@ _TempMonStatsCalculation: ; 50893
 	add hl, bc ; hp in hl now
 	ld d, h ; hp in de now
 	ld e, l
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr nz, .not_egg
+	push hl
+	ld hl, MON_IS_EGG
+	add hl, bc
+	bit MON_IS_EGG_F, [hl]
+	pop hl
+	jr z, .not_egg
 	xor a
 	ld [de], a
 	inc de

@@ -1223,7 +1223,7 @@ endr
 	ld a, [hl]
 	ld [bc], a
 	; moves (for Pikachu forms)
-	ld hl, wPartyMon1Item
+	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, e
 	rst AddNTimes

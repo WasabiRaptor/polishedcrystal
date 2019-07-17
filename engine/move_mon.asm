@@ -102,6 +102,7 @@ GeneratePartyMonStats: ; d906
 
 .skipitem
 	ld [de], a
+	inc de ; item is two bytes
 	inc de ; moves are now in de
 	push de ; 2 ; moves are pushed
 	ld h, d ;moves now in hl
@@ -390,6 +391,7 @@ endr
 	push de ;3 ; PP is pushed
 	inc hl ; inc group to species
 	inc hl ; inc species to item
+	inc hl ; items are two bytes
 	inc hl ; inc item to moves
 	predef FillPP
 	pop de ;2 ; pop pp
