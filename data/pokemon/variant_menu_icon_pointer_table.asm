@@ -8,4 +8,4 @@ VariantIconPointerTable:
     variant_icons REGION_JOHTO,  Johto  
     variant_icons REGION_HOENN, Hoenn
 
-	dbw -1,       KantoIconPointers
+	dbw -1,       OtherIconPointers

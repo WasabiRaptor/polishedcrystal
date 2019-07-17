@@ -12,6 +12,29 @@ GetFrontpic: ; 51077
 	ldh [rSVBK], a
 	jp CloseSRAM
 
+GetOtherFrontpic:
+	ldh a, [rSVBK]
+	push af
+	call _GetFrontpic
+	pop af
+	ldh [rSVBK], a
+	jp CloseSRAM
+
+GetOtherFrontpicAnimated:
+	ldh a, [rSVBK]
+	push af
+	xor a
+	ldh [hBGMapMode], a
+	call _GetFrontpic
+	ld a, BANK(VTiles3)
+	ldh [rVBK], a
+	call GetAnimatedFrontpic
+	xor a
+	ldh [rVBK], a
+	pop af
+	ldh [rSVBK], a
+	jp CloseSRAM
+
 FrontpicPredef: ; 5108b
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a

@@ -439,9 +439,14 @@ HatchEggs: ; 16f70 (5:6f70)
 	push bc
 	ld a, [wCurPartySpecies]
 	push af
+	ld a, [wCurPartyGroup]
+	ld [wHatchlingGroup], a
+	push af
 	call EggHatch_AnimationSequence
 	ld hl, .ClearTextbox
 	call PrintText
+	pop af
+	ld [wCurPartyGroup], a
 	pop af
 	ld [wCurPartySpecies], a
 	pop bc
@@ -664,14 +669,15 @@ InheritMove:
 
 GetEggFrontpic: ; 17224 (5:7224)
 	push de
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Group
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	call GetPartyMonGroupSpeciesAndForm
-	call GetBaseData ;form is known
+	ld a, $1
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	xor a
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	call GetBaseData
 	pop de
-	predef_jump GetFrontpic
+	farjp GetOtherFrontpic
 
 GetHatchlingFrontpic: ; 1723c (5:723c)
 	push de
@@ -685,7 +691,6 @@ GetHatchlingFrontpic: ; 1723c (5:723c)
 	predef_jump FrontpicPredef
 
 Hatch_UpdateFrontpicBGMapCenter: ; 17254 (5:7254)
-	push af
 	call WaitTop
 	push hl
 	push bc
@@ -701,7 +706,6 @@ Hatch_UpdateFrontpicBGMapCenter: ; 17254 (5:7254)
 	ldh [hGraphicStartTile], a
 	lb bc, 7, 7
 	predef PlaceGraphic
-	pop af
 	call Hatch_LoadFrontpicPal
 	call SetPalettes
 	jp ApplyAttrAndTilemapInVBlank
@@ -718,8 +722,12 @@ EggHatch_DoAnimFrame: ; 1727f (5:727f)
 	ret
 
 EggHatch_AnimationSequence: ; 1728f (5:728f)
+	ld a, [wHatchlingGroup]
+	ld [wCurGroup], a
+	ld [wHatchOrEvolutionResultGroup], a
 	ld a, [wd265]
-	ld [wJumptableIndex], a
+	ld [wHatchlingSpecies], a
+	ld [wHatchOrEvolutionResultSpecies], a
 	ld a, [wCurSpecies]
 	push af
 	ld de, MUSIC_NONE
@@ -733,18 +741,26 @@ EggHatch_AnimationSequence: ; 1728f (5:728f)
 	call FarCopyBytes
 	farcall ClearSpriteAnims
 	ld de, VTiles2 tile $00
-	ld a, [wJumptableIndex]
+	ld a, [wHatchlingSpecies]
 	call GetHatchlingFrontpic
 	ld de, VTiles2 tile $31
-	ld a, EGG
 	call GetEggFrontpic
 	ld de, MUSIC_EVOLUTION
 	call PlayMusic
 	call EnableLCD
 	hlcoord 7, 4
 	lb bc, VBGMap0 / $100, $31 ; Egg tiles start at c
-	ld a, EGG
+
+	; making sure the egg is always the default palette by temporatily wiping it
+	ld a, [wTempMonPersonality]
+	push af
+	xor a
+	ld [wTempMonPersonality], a
 	call Hatch_UpdateFrontpicBGMapCenter
+	pop af
+	ld [wTempMonPersonality], a
+
+
 	ld c, 80
 	call DelayFrames
 	xor a
@@ -791,11 +807,10 @@ EggHatch_AnimationSequence: ; 1728f (5:728f)
 	call Hatch_InitShellFragments
 	hlcoord 6, 3
 	lb bc, VBGMap0 / $100, $00 ; Hatchling tiles start at c
-	ld a, [wJumptableIndex]
 	call Hatch_UpdateFrontpicBGMapCenter
 	call Hatch_ShellFragmentLoop
 	call WaitSFX
-	ld a, [wJumptableIndex]
+	ld a, [wHatchlingSpecies]
 	ld [wCurPartySpecies], a
 	hlcoord 6, 3
 	lb de, $0, ANIM_MON_HATCH
@@ -805,7 +820,6 @@ EggHatch_AnimationSequence: ; 1728f (5:728f)
 	ret
 
 Hatch_LoadFrontpicPal: ; 17363 (5:7363)
-	ld [wHatchOrEvolutionResultSpecies], a
 	lb bc, CGB_EVOLUTION, $0
 	jp GetCGBLayout
 

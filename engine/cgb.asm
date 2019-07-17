@@ -255,11 +255,15 @@ _CGB_StatsScreenHPPals: ; 8edb
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black
 
-	push hl
 	ld hl, wTempMonGroup
 	call GetPartyMonGroupSpeciesAndForm
-	pop hl
 
+	ld hl, wTempMonIsEgg ; prevent an egg from revealing if the mon inside is shiny until hatched
+	bit MON_IS_EGG_F, [hl]
+	jr z, .not_egg
+	xor a
+	ld [wTempMonPersonality], a
+.not_egg
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalettePointer
@@ -609,6 +613,8 @@ _CGB_Evolution: ; 91e4
 	add hl, bc
 	ld c, l
 	ld b, h
+	ld a, [wHatchOrEvolutionResultGroup]
+	ld [wCurGroup], a
 	ld a, [wHatchOrEvolutionResultSpecies]
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black

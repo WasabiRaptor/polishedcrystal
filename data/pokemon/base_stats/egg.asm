@@ -9,7 +9,7 @@
 	db 200 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/aa_dummy/front.dimensions"
+	INCBIN "gfx/pokemon/egg/front.dimensions"
 	db 0, 0	; abilities
 	db 0	; hidden ability
 	db GROWTH_SLOW ; growth rate

@@ -918,14 +918,17 @@ wCurGender::
 wCurForm:: ds 1
 wCurPersonality:: ds 1
 wGiftPokeTID:: ds 2
+
+wHatchlingGroup::
 wGiftPokeBall:: ds 1
 
-wNamedObjectTypeBuffer:: ds 1
-wCurrentOptionsPage:: ds 1
-
+wHatchlingSpecies::
 wJumptableIndex::
 wBattleTowerBattleEnded::
 	ds 1
+
+wNamedObjectTypeBuffer:: ds 1
+wCurrentOptionsPage:: ds 1
 
 UNION
 ; intro and title data

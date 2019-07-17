@@ -4321,6 +4321,7 @@ INCLUDE "engine/sprites.asm"
 INCLUDE "engine/mon_icons.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
+INCLUDE "data/pokemon/other_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
@@ -4577,11 +4578,17 @@ INCLUDE "engine/pic_animation.asm"
 ;	following bytes are tile ids mapped to each bit in the mask
 
 ; Main animations (played everywhere)
+INCLUDE "gfx/pokemon/other_anim_pointers.asm"
+INCLUDE "gfx/pokemon/other_anims.asm"
+
 INCLUDE "gfx/pokemon/kanto_anim_pointers.asm"
 INCLUDE "gfx/pokemon/kanto_anims.asm"
 
 ; Extra animations, appended to the main animation
 ; Used in the status screen (blinking, tail wags etc.)
+INCLUDE "gfx/pokemon/other_idle_pointers.asm"
+INCLUDE "gfx/pokemon/other_idles.asm"
+
 INCLUDE "gfx/pokemon/kanto_idle_pointers.asm"
 INCLUDE "gfx/pokemon/kanto_idles.asm"
 
@@ -4595,6 +4602,11 @@ INCLUDE "gfx/pokemon/hoenn_anim_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_anims.asm"
 INCLUDE "gfx/pokemon/hoenn_idle_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_idles.asm"
+
+SECTION "Pic Animations Frames 0", ROMX
+
+INCLUDE "gfx/pokemon/other_frame_pointers.asm"
+INCLUDE "gfx/pokemon/other_frames.asm"
 
 SECTION "Pic Animations Frames 1", ROMX
 
@@ -4617,6 +4629,8 @@ INCLUDE "gfx/pokemon/hoenn_frame_pointers.asm"
 SECTION "Pic Animations Bitmasks", ROMX
 
 ; Bitmasks
+INCLUDE "gfx/pokemon/other_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/other_bitmasks.asm"
 INCLUDE "gfx/pokemon/kanto_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/kanto_bitmasks.asm"
 INCLUDE "gfx/pokemon/johto_bitmask_pointers.asm"
@@ -4834,3 +4848,6 @@ SECTION "Hoenn Base Data", ROMX
 
 INCLUDE "data/pokemon/hoenn_base_stats.asm"
 INCLUDE "data/pokemon/hoenn_names.asm"
+
+SECTION "Other Base Data", ROMX
+INCLUDE "data/pokemon/other_base_stats.asm"

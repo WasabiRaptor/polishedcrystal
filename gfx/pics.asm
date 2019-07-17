@@ -1,5 +1,9 @@
 INCLUDE "constants.asm"
 
+SECTION "Other Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/other_pic_pointers.asm"
+
 
 SECTION "Kanto Pic Pointers", ROMX
 

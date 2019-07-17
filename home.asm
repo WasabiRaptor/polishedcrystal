@@ -1436,11 +1436,6 @@ GetBaseData:: ; 3856
 	ldh a, [hROMBank]
 	push af
 
-; Egg doesn't have BaseData
-	ld a, [wCurSpecies]
-	cp EGG
-	jr z, .egg
-
 	call GetRelevantBaseData
 	push hl
 
@@ -1466,14 +1461,6 @@ GetBaseData:: ; 3856
 	ld [wNatDexNo], a
 	ld a, d
 	ld [wNatDexNo + 1], a
-	jr .end
-
-.egg
-;; Sprite dimensions
-	ld a, $55 ; 5x5
-	ld [wBasePicSize], a
-
-.end
 	pop af
 	rst Bankswitch
 	pop hl

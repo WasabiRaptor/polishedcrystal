@@ -6,5 +6,6 @@ VariantPicPointerTable:
     variant_picpointers REGION_KANTO,  Kanto
     variant_picpointers REGION_JOHTO,  Johto  
     variant_picpointers REGION_HOENN, Hoenn
+	dbba -1,            OtherPicPointers
 
-	dbba -1,            KantoPicPointers
+    

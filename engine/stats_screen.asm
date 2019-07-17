@@ -1159,7 +1159,7 @@ EggStatsScreen: ; 4e33a
 	call SetPalettes ; pals
 	call DelayFrame
 	hlcoord 0, 0
-	call PrepMonFrontpic
+	call PrepEggFrontpic
 	farcall HDMATransferTileMapToWRAMBank3
 	call StatsScreen_AnimateEgg
 
@@ -1169,6 +1169,30 @@ EggStatsScreen: ; 4e33a
 	ld de, SFX_2_BOOPS
 	jp PlaySFX
 ; 0x4e3c0
+
+PrepEggFrontpic:
+	ld a, $1
+	ld [wBoxAlignment], a
+	push hl
+	ld de, VTiles2
+
+	;get the egg frontpic
+	ld a, $1
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	xor a
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	call GetBaseData
+	farcall GetOtherFrontpic
+	pop hl
+	xor a
+	ldh [hGraphicStartTile], a
+	lb bc, 7, 7
+	predef PlaceGraphic
+	xor a
+	ld [wBoxAlignment], a
+	ret
 
 EggString: ; 4e3c0
 	db   "Egg"
@@ -1216,7 +1240,7 @@ StatsScreen_AnimateEgg: ; 4e497 (13:6497)
 	ld [wBoxAlignment], a
 	call StatsScreen_LoadTextBoxSpaceGFX
 	ld de, VTiles2 tile $00
-	predef FrontpicPredef
+	farcall GetOtherFrontpicAnimated
 	pop de
 	hlcoord 0, 0
 	ld d, $0

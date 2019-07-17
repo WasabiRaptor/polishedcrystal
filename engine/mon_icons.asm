@@ -128,14 +128,15 @@ GetMenuMonIconPalette::
 	ld a, [hl]
 	and SHINY_MASK
 	jr z, .not_shiny
+	inc hl ; mon is egg is in the byte after personality
+	bit MON_IS_EGG_F, [hl]
+	jr nz, .not_shiny ; don't reveal shininess until the egg is hatched
 	scf
 	jr .got_shininess
 .not_shiny
 	and a
 .got_shininess:
 	push af
-	;inc hl ;byte after shiny is form
-	;call GetPartyMonGroupSpeciesAndForm
 .got_species:
 	call GetRelevantMonIconColors
 	ld a, [wCurPartySpecies]
@@ -254,12 +255,20 @@ InitPartyMenuIcon: ; 8e908 (23:6908)
 	ld a, [wCurIconTile]
 	push af
 	ldh a, [hObjectStructIndexBuffer]
-	ld hl, wPartySpecies
-	ld e, a
-	ld d, $0
-	add hl, de
-	ld a, [hl]
+	ld hl, wPartyMon1Group
+	call GetPartyLocation
+	call GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurPartySpecies]
 	ld [wCurIcon], a
+	ld de, MON_IS_EGG
+	add hl, de
+	bit MON_IS_EGG_F, [hl]
+	jr z, .not_egg
+	xor a
+	ld [wCurGroup], a
+	inc a
+	ld [wCurIcon], a
+.not_egg
 	call GetMemIconGFX
 	ldh a, [hObjectStructIndexBuffer]
 ; y coord

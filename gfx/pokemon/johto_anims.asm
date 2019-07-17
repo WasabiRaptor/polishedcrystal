@@ -92,7 +92,3 @@ TyranitarAnimation:  INCLUDE "gfx/pokemon/tyranitar/anim.asm"
 LugiaAnimation:      INCLUDE "gfx/pokemon/lugia/anim.asm"
 HoOhAnimation:       INCLUDE "gfx/pokemon/ho_oh/anim.asm"
 CelebiAnimation:     INCLUDE "gfx/pokemon/celebi/anim.asm"
-
-INCLUDE "gfx/pokemon/aa_dummy/anim.asm"
-
-EggAnimation:        INCLUDE "gfx/pokemon/egg/anim.asm"
