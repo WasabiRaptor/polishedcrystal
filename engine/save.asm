@@ -240,7 +240,7 @@ SaveGameData:: ; 14c10
 	call SavePlayerData
 	call SavePokemonData
 	call SaveBox
-	call SaveEncounterData
+	call SavePokedexCaughtSeenEncounterData
 	call SaveChecksum
 	call ValidateBackupSave
 	call SaveBackupOptions
@@ -353,18 +353,29 @@ SavePokemonData: ; 14df7
 	jp CloseSRAM
 ; 14e0c
 
-SaveEncounterData:
-	ld a, BANK(sTotalSavedEncounters)
-	call GetSRAMBank
-
+SavePokedexCaughtSeenEncounterData:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
 
+	ld a, BANK(sTotalSavedEncounters)
+	call GetSRAMBank
+
 	ld hl, wTotalSavedEncounters
 	ld de, sTotalSavedEncounters
 	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
+	rst CopyBytes
+
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
+	ld a, BANK(sPokedexCaughtSeen)
+	call GetSRAMBank
+
+	ld hl, wPokedexCaughtSeen
+	ld de, sPokedexCaughtSeen
+	ld bc, wPokedexCaughtSeenEnd - wPokedexCaughtSeen
 	rst CopyBytes
 
 	pop af
@@ -454,7 +465,7 @@ TryLoadSaveFile: ; 14ea5 (5:4ea5)
 	call LoadPlayerData
 	call LoadPokemonData
 	call LoadBox
-	call LoadEncounterData
+	call LoadPokedexCaughtSeenEncounterData
 	call ValidateBackupSave
 	call SaveBackupOptions
 	call SaveBackupPlayerData
@@ -469,6 +480,7 @@ TryLoadSaveFile: ; 14ea5 (5:4ea5)
 	call LoadBackupPlayerData
 	call LoadBackupPokemonData
 	call LoadBox
+	call LoadPokedexCaughtSeenEncounterData
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
@@ -616,18 +628,29 @@ LoadBox: ; 15021 (5:5021)
 	call GetBoxAddress
 	jp LoadBoxAddress
 
-LoadEncounterData:
-	ld a, BANK(sTotalSavedEncounters)
-	call GetSRAMBank
-
+LoadPokedexCaughtSeenEncounterData:
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
 
+	ld a, BANK(sTotalSavedEncounters)
+	call GetSRAMBank
+
 	ld hl, sTotalSavedEncounters
 	ld de, wTotalSavedEncounters
 	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
+	rst CopyBytes
+
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
+	ld a, BANK(sPokedexCaughtSeen)
+	call GetSRAMBank
+
+	ld hl, sPokedexCaughtSeen
+	ld de, wPokedexCaughtSeen
+	ld bc, wPokedexCaughtSeenEnd - wPokedexCaughtSeen
 	rst CopyBytes
 
 	pop af

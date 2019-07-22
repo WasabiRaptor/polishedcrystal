@@ -140,6 +140,14 @@ START_MONEY EQU 3000
 	xor a
 	call ByteFill
 
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
+	ld hl, wPokedexCaughtSeen
+	ld bc, wPokedexCaughtSeenEnd - wPokedexCaughtSeen
+	xor a
+	call ByteFill
+
 	pop af
 	ldh [rSVBK], a
 	ret

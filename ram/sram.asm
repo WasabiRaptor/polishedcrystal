@@ -225,11 +225,15 @@ SECTION "Boxes 13-4", SRAM
 	box sBox13
 	box sBox14
 
+SECTION "Pokedex Caught Seen", SRAM
+
+sPokedexCaughtSeen:: ds wPokedexCaughtSeenEnd - wPokedexCaughtSeen
+
+
 SECTION "Total Pokemon Encountered", SRAM
 
-sEncounterSaveData::
 sTotalSavedEncounters:: ds wTotalSavedEncountersEnd - wTotalSavedEncounters
-sEncounterSaveDataEnd::
+
 
 SECTION "Quick Save", SRAM
 
@@ -246,6 +250,7 @@ sQuickSaveGameDataEnd::
 sQuickSaveChecksum:: ds 2
 
 sQuickSaveCheckValue2:: ds 1 ; loaded with 127, used to check save corruption
+
 
 SECTION "Backup Quick Save", SRAM
 
