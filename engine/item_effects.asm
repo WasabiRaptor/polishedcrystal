@@ -508,7 +508,7 @@ PokeBallEffect: ; e8a2
 	ld [wCurPartyLevel], a
 
 	ld hl, wEnemyMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 
 	ld de, wEnemyMonMaxHP
@@ -1592,8 +1592,10 @@ RareCandy: ; ef14
 	xor a ; PARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon
-
 	farcall PrintStatDifferences
+	
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 
 	xor a ; PARTYMON
 	ld [wMonType], a

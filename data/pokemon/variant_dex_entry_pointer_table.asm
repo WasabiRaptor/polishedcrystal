@@ -4,8 +4,8 @@ endm
 
 
 VariantPokedexEntryPointerTable:
-    variant_dexentry REGION_KANTO, Kanto 
-    variant_dexentry REGION_JOHTO, Johto 
-    variant_dexentry REGION_HOENN, Hoenn
+    variant_dexentry GROUP_GENERATION_ONE, Kanto 
+    variant_dexentry GROUP_GENERATION_TWO, Johto 
+    variant_dexentry GROUP_GENERATION_THREE, Hoenn
 
 	dbw -1,         PokedexDataPointerTable

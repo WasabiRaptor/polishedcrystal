@@ -8,7 +8,7 @@ Special_CheckMagikarpLength: ; fbb32
 	farcall SelectMonFromParty
 	jr c, .declined
 	ld a, [wCurPartyGroup]
-	cp REGION_KANTO
+	cp GROUP_GENERATION_ONE
 	jr nz, .not_magikarp
 	ld a, [wCurPartySpecies]
 	cp MAGIKARP

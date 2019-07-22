@@ -53,6 +53,13 @@ GROUP_\1 EQU __enum__
 	const \1
 ENDM
 
+evolution: macro
+if _NARG < 4
+	db \1, \2, GROUP_\3, \3
+else 
+	db \1, \2, \3, GROUP_\4, \4
+endc
+endm
 ; Enumerate strings
 
 define: MACRO

@@ -851,7 +851,7 @@ GetMonNormalOrShinyPalettePointer:
 	;ld l, c
 	push af
 	;inc hl
-	;call GetPartyMonGroupSpeciesAndForm
+	;predef GetPartyMonGroupSpeciesAndForm
 	pop af
 	call GetMonPalettePointer
 	pop bc
@@ -881,7 +881,7 @@ LoadPartyMonPalette:
 	ld hl, wPartyMon1Group
 	ld a, [wCurPartyMon]
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	
 	ld hl, wPartyMon1Personality
 	ld a, [wCurPartyMon]

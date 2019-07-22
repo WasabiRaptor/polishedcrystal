@@ -4,9 +4,9 @@ variant_animdata: macro
 endm
 
 VariantAnimPointerTable:
-    variant_animdata REGION_KANTO,  Kanto  
-    variant_animdata REGION_JOHTO,  Johto
-    variant_animdata REGION_HOENN,  Hoenn
+    variant_animdata GROUP_GENERATION_ONE,  Kanto  
+    variant_animdata GROUP_GENERATION_TWO,  Johto
+    variant_animdata GROUP_GENERATION_THREE,  Hoenn
     variant_animdata -1, Other
 
 variant_frames: macro
@@ -14,9 +14,9 @@ variant_frames: macro
 endm
 
 VariantFramesPointerTable:
-    variant_frames REGION_KANTO,  Kanto
-    variant_frames REGION_JOHTO,  Johto
-    variant_frames REGION_HOENN,  Hoenn
+    variant_frames GROUP_GENERATION_ONE,  Kanto
+    variant_frames GROUP_GENERATION_TWO,  Johto
+    variant_frames GROUP_GENERATION_THREE,  Hoenn
     variant_frames -1, Other
 
 variant_bitmasks: macro
@@ -24,7 +24,7 @@ variant_bitmasks: macro
 endm
 
 VariantBitmasksPointerTable:
-    variant_bitmasks REGION_KANTO,  Kanto
-    variant_bitmasks REGION_JOHTO,  Johto
-    variant_bitmasks REGION_HOENN,  Hoenn
+    variant_bitmasks GROUP_GENERATION_ONE,  Kanto
+    variant_bitmasks GROUP_GENERATION_TWO,  Johto
+    variant_bitmasks GROUP_GENERATION_THREE,  Hoenn
     variant_bitmasks -1, Other

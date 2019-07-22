@@ -3139,7 +3139,7 @@ AI_CheckTypeMatchupAndBeFooledByIllusion:
 	ret
 
 PutBattleMonTypesIn:
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a

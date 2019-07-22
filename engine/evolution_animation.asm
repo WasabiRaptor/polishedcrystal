@@ -285,7 +285,7 @@ EvolutionAnimation: ; 4e5e1
 .check_statused ; 4e794
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld b, h
 	ld c, l
 	farjp CheckFaintedFrzSlp

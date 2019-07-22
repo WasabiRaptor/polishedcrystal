@@ -121,7 +121,7 @@ BattleCommand_transform:
 	dec b
 	jr nz, .pp_loop
 	pop hl
-	call PokemonToGroupSpeciesAndForm
+	predef PokemonToGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName

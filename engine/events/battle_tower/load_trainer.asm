@@ -310,7 +310,7 @@ BT_SetLevel:
 	call GetPartyLocation
 
 	push hl
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 
 	call GetBaseData ;form is known
 	pop hl

@@ -250,8 +250,6 @@ endr
 	ld [wCoins], a
 	ld [wCoins + 1], a
 
-	ld [wRegisteredItemFlags], a
-
 	ld [wRegisteredItems], a
 	ld [wRegisteredItems + 1], a
 	ld [wRegisteredItems + 2], a

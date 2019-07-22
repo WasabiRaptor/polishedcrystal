@@ -85,49 +85,15 @@ GetMaxNumPokemonForGroup::
 	ret
 
 RegionalMaxPokemonTable:
-	db REGION_KANTO, NUM_KANTO_POKEMON
-	db REGION_JOHTO, NUM_JOHTO_POKEMON
-	db REGION_HOENN, NUM_HOENN_POKEMON
-	db REGION_SINNOH, NUM_SINNOH_POKEMON
-	db REGION_UNOVA, NUM_UNOVA_POKEMON
-	db REGION_KALOS, NUM_KALOS_POKEMON
-	db REGION_ALOLA, NUM_ALOLA_POKEMON
-	db REGION_GALAR, NUM_GALAR_POKEMON
+	db GROUP_GENERATION_ONE, NUM_KANTO_POKEMON
+	db GROUP_GENERATION_TWO, NUM_JOHTO_POKEMON
+	db GROUP_GENERATION_THREE, NUM_HOENN_POKEMON
+	db GROUP_GENERATION_FOUR, NUM_SINNOH_POKEMON
+	db GROUP_GENERATION_FIVE, NUM_UNOVA_POKEMON
+	db GROUP_GENERATION_SIX, NUM_KALOS_POKEMON
+	db GROUP_GENERATION_SEVEN, NUM_ALOLA_POKEMON
+	db GROUP_GENERATION_EIGHT, NUM_GALAR_POKEMON
 	db -1, 0
-
-GetPartyMonGroupSpeciesAndForm::
-	push hl
-	push bc
-	ld a, [hli]
-	ld [wCurPartyGroup], a
-	ld [wCurGroup], a
-	ld a, [hl] ;Species
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-	ld bc, wPartyMon1Form - wPartyMon1Species
-	add hl, bc
-	ld a, [hl]	;form
-	and FORM_MASK
-	ld [wCurForm], a
-	pop bc
-	pop hl
-	ret
-
-PokemonToGroupSpeciesAndForm::
-	push hl
-	push bc
-	ld a, [hli]
-	ld [wCurGroup], a
-	ld a, [hl] ;Species
-	ld [wCurSpecies], a
-	ld bc, wPartyMon1Form - wPartyMon1Species
-	add hl, bc
-	ld a, [hl]	;form
-	and FORM_MASK
-	ld [wCurForm], a
-	pop bc
-	pop hl
-	ret
 
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
@@ -1502,7 +1468,7 @@ GetLeadAbility::
 	push de
 	push hl
 	ld hl, wPartyMon1Group
-	call PokemonToGroupSpeciesAndForm
+	predef PokemonToGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]
@@ -1686,7 +1652,7 @@ PkmnParamLocation:
 .species_and_group
 	ld a, [wCurPartyMon]
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	pop bc
 	ret
 

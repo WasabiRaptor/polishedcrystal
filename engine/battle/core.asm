@@ -85,7 +85,7 @@ DoBattle: ; 3c000
 
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartyGroup]
 	ld [wTempBattleMonGroup], a
 	ld a, [wCurPartySpecies]
@@ -7859,7 +7859,7 @@ GiveExperiencePoints: ; 3ee3b
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	push bc
 	ld d, MAX_LEVEL
@@ -8878,7 +8878,7 @@ CheckIllusion:
 GetIllusion::
 	dec a
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ret
 
 StartBattle: ; 3f4c1

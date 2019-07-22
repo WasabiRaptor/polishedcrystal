@@ -1,28 +1,21 @@
 
     const_def 1
-    const REGION_KANTO
-    const REGION_JOHTO
-    const REGION_HOENN
-    const REGION_SINNOH
-    const REGION_UNOVA
-    const REGION_KALOS
-    const REGION_ALOLA
-    const REGION_GALAR ;ironic
+    const GROUP_GENERATION_ONE
+    const GROUP_GENERATION_TWO
+    const GROUP_GENERATION_THREE
+    const GROUP_GENERATION_FOUR
+    const GROUP_GENERATION_FIVE
+    const GROUP_GENERATION_SIX
+    const GROUP_GENERATION_SEVEN
+    const GROUP_GENERATION_EIGHT ;ironic
+NUM_POKEMON_GROUPS EQU const_value +-1
 
 UNOWN EQU 20
 NUM_POKEMON EQU $fd
 EGG EQU $fe
 
-; pokemon are organized by species and group, a pokemon must evolve into a pokemon within the same group
-; there are 30 potential groups of 253 pokemon, more than 30 if the nuzloke death flag is removed, but I should like to keep it
-; pokemon with different forms are treated as different "species" within the same group this is why unown and probably spinda will get a group all to themselves when implemented because they have an obscene amount of forms
-; pokemon that have alternate forms that are not completely stand alone should not be listed as a speerate species here, I would much rather devise another method
-; mega form or alternate form pokemon (when imlemented) that are based on a hold item should not be treated as seperate "species" because the very item they hold is the byte needed to know if they should be an alternate form
-; whereas a pokemon who's form is completely independent of what it is holding and can exist independantly of it, shoulc very much be treated as its own "species" as I don't believe any region would ever go over the 200 mark
-; the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
-; even if the order isn't "faithful" by the hand of putting later gen pokemon in earlier groups, I believe it will be much cleaner, as evolution groups will all be contagious to eachother rather than spread across several regions
-; it is very much possible to code an evolution method to make a pokemon evolve into one of a different group, but it is unnecessary at the moment
-	nat_dexmon_group 1, REGION_KANTO
+; the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is, bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
+	nat_dexmon_group 1, GROUP_GENERATION_ONE
 	nat_dexmon BULBASAUR
 	nat_dexmon IVYSAUR	
 	nat_dexmon VENUSAUR 
@@ -206,22 +199,18 @@ EGG EQU $fe
 	nat_dexmon DRAGONITE
 	nat_dexmon MEWTWO	
 	nat_dexmon MEW
-	; the normal list of kanto pokemon would end here, but, why not have some GSC beta pokemon or some of th RG designs to have some variants? 
-	; well the ones with good enough designs to keep at least, and baby pokemon are meh
-
-	nat_dexmon MADAAMU ; the farfetch'd evo
 NUM_KANTO_POKEMON EQU const_value +-1
 
 ;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
 
-;SNOWSHREW EQU SANDSHREW_ALOLA
-;SNOWSLASH EQU SANDSLASH_ALOLA
+;SNOWSHREW EQU SANDSHREW
+;SNOWSLASH EQU SANDSLASH
 
-;GROUP_SNOWSHREW EQU GROUP_SANDSHREW_ALOLA
-;GROUP_SNOWSLASH EQU GROUP_SANDSLASH_ALOLA
+;GROUP_SNOWSHREW EQU GROUP_SANDSHREW
+;GROUP_SNOWSLASH EQU GROUP_SANDSLASH
 
 ;johto mons
-	nat_dexmon_group 1, REGION_JOHTO
+	nat_dexmon_group 1, GROUP_GENERATION_TWO
 	nat_dexmon CHIKORITA
 	nat_dexmon BAYLEEF
 	nat_dexmon MEGANIUM
@@ -315,59 +304,42 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon LUGIA
 	nat_dexmon HO_OH
 	nat_dexmon CELEBI	
-	; lets stick some more beta mons here, the ones unrelated to gen 1
-	nat_dexmon HONOOGUMA ;the fire bear
-	nat_dexmon BORUBEAA
-	nat_dexmon DAINABEA
-	nat_dexmon KRUSU ; the plesiosaur water type line
-	nat_dexmon AKUA
-	nat_dexmon AKUERIA
-	nat_dexmon SHEIBIREFUGU; the qwilfish evo
-	nat_dexmon MANBOO ; the fish who evoles into an anchor shark
-	nat_dexmon IKARI ;mmm the last evo doesn't have in interesting design and looses the interesting parts of this one, so not going to have it
-	nat_dexmon RINRIN ; the cute bell cat and its evo
-	nat_dexmon BERUNRUN
-	nat_dexmon BOMUSHIKAA ; the fire sea lion, not sure about this one, but its good I guess
-	nat_dexmon KOTORA ; the cute chonky electric tiger
-	nat_dexmon RAITORA
-	nat_dexmon URUFUMAN ; the floofy wolfman guy
-	nat_dexmon WAARUFU
 NUM_JOHTO_POKEMON EQU const_value +-1
 
-; hoo boy Unown you've got a lot of forms, so he gets his own "region" which would only be used for pics really, 
-	nat_dexmon_group 1, UNOWN
-	nat_dexmon UNOWN_A ;  1
-	nat_dexmon UNOWN_B ;  2
-	nat_dexmon UNOWN_C ;  3
-	nat_dexmon UNOWN_D ;  4
-	nat_dexmon UNOWN_E ;  5
-	nat_dexmon UNOWN_F ;  6
-	nat_dexmon UNOWN_G ;  7
-	nat_dexmon UNOWN_H ;  8
-	nat_dexmon UNOWN_I ;  9
-	nat_dexmon UNOWN_J ; 10
-	nat_dexmon UNOWN_K ; 11
-	nat_dexmon UNOWN_L ; 12
-	nat_dexmon UNOWN_M ; 13
-	nat_dexmon UNOWN_N ; 14
-	nat_dexmon UNOWN_O ; 15
-	nat_dexmon UNOWN_P ; 16
-	nat_dexmon UNOWN_Q ; 17
-	nat_dexmon UNOWN_R ; 18
-	nat_dexmon UNOWN_S ; 19
-	nat_dexmon UNOWN_T ; 20
-	nat_dexmon UNOWN_U ; 21
-	nat_dexmon UNOWN_V ; 22
-	nat_dexmon UNOWN_W ; 23
-	nat_dexmon UNOWN_X ; 24
-	nat_dexmon UNOWN_Y ; 25
-	nat_dexmon UNOWN_Z ; 26
-	nat_dexmon UNOWN_EXCLAMATION_MARK
-	nat_dexmon UNOWN_QUESTION_MARK
-NUM_UNOWN EQU const_value + -1 ; 26
+; hoo boy Unown you've got a lot of forms
+	const_def 1
+	const UNOWN_A ;  1
+	const UNOWN_B ;  2
+	const UNOWN_C ;  3
+	const UNOWN_D ;  4
+	const UNOWN_E ;  5
+	const UNOWN_F ;  6
+	const UNOWN_G ;  7
+	const UNOWN_H ;  8
+	const UNOWN_I ;  9
+	const UNOWN_J ; 10
+	const UNOWN_K ; 11
+	const UNOWN_L ; 12
+	const UNOWN_M ; 13
+	const UNOWN_N ; 14
+	const UNOWN_O ; 15
+	const UNOWN_P ; 16
+	const UNOWN_Q ; 17
+	const UNOWN_R ; 18
+	const UNOWN_S ; 19
+	const UNOWN_T ; 20
+	const UNOWN_U ; 21
+	const UNOWN_V ; 22
+	const UNOWN_W ; 23
+	const UNOWN_X ; 24
+	const UNOWN_Y ; 25
+	const UNOWN_Z ; 26
+	const UNOWN_EXCLAMATION_MARK 	; 27
+	const UNOWN_QUESTION_MARK 		; 28
+NUM_UNOWN EQU const_value + -1 ; 28
 
 ;generation hoenn
-	nat_dexmon_group 1, REGION_HOENN
+	nat_dexmon_group 1, GROUP_GENERATION_THREE
 	nat_dexmon TREECKO
 	nat_dexmon GROVYLE
 	nat_dexmon SCEPTILE
@@ -511,7 +483,7 @@ NUM_UNOWN EQU const_value + -1 ; 26
 NUM_HOENN_POKEMON EQU const_value +-1
 
 ; gen sinnoh mons
-	nat_dexmon_group 1, REGION_SINNOH
+	nat_dexmon_group 1, GROUP_GENERATION_FOUR
 	nat_dexmon TURTWIG
 	nat_dexmon GROTLE
 	nat_dexmon TORTERRA
@@ -593,7 +565,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 NUM_SINNOH_POKEMON EQU const_value +-1
 
 ; gen unova mons
-	nat_dexmon_group 1, REGION_UNOVA
+	nat_dexmon_group 1, GROUP_GENERATION_FIVE
 	nat_dexmon VICTINI
 	nat_dexmon SNIVY
 	nat_dexmon SERVINE
@@ -751,7 +723,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 NUM_UNOVA_POKEMON EQU const_value +-1
 
 ;Ggen pokemon
-	nat_dexmon_group 1, REGION_KALOS
+	nat_dexmon_group 1, GROUP_GENERATION_SIX
 	nat_dexmon CHESPIN
 	nat_dexmon QUILLADIN
 	nat_dexmon CHESNAUGHT
@@ -827,7 +799,7 @@ NUM_KALOS_POKEMON EQU const_value +-1
 
 
 ;Gen mons
-	nat_dexmon_group 1, REGION_ALOLA
+	nat_dexmon_group 1, GROUP_GENERATION_SEVEN
 	nat_dexmon ROWLET
 	nat_dexmon DARTRIX
 	nat_dexmon DECIDUEYE
@@ -919,9 +891,8 @@ NUM_KALOS_POKEMON EQU const_value +-1
 NUM_ALOLA_POKEMON EQU const_value +-1
 
 
-	nat_dexmon_group 1, REGION_GALAR
+	nat_dexmon_group 1, GROUP_GENERATION_EIGHT
 NUM_GALAR_POKEMON EQU const_value +-1
-NUM_GALAR_SPECIES_AND_FORMS EQU const_value +-1
 
 
 

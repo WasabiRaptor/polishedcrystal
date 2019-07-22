@@ -1,3 +1,37 @@
+	
+GetPartyMonGroupSpeciesAndForm::
+	push hl
+	push bc
+	ld a, [hli]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [hl] ;Species
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	ld a, [hl]	;form
+	and FORM_MASK
+	ld [wCurForm], a
+	pop bc
+	pop hl
+	ret
+
+PokemonToGroupSpeciesAndForm::
+	push hl
+	push bc
+	ld a, [hli]
+	ld [wCurGroup], a
+	ld a, [hl] ;Species
+	ld [wCurSpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	ld a, [hl]	;form
+	and FORM_MASK
+	ld [wCurForm], a
+	pop bc
+	pop hl
+	ret
 
 
 GetFrontpic: ; 51077

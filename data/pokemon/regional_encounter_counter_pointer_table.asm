@@ -7,23 +7,23 @@ variant_defeatedcounter: macro
 endm
 
 EncounterCounterPointerTable:
-    variant_encountercounter REGION_KANTO, Kanto
-    variant_encountercounter REGION_JOHTO, Johto
-    variant_encountercounter REGION_HOENN, Hoenn 
-    variant_encountercounter REGION_SINNOH, Sinnoh 
-    variant_encountercounter REGION_UNOVA, Unova 
-    variant_encountercounter REGION_KALOS, Kalos 
-    variant_encountercounter REGION_ALOLA, Alola 
-    variant_encountercounter REGION_GALAR, Galar 
+    variant_encountercounter GROUP_GENERATION_ONE, Kanto
+    variant_encountercounter GROUP_GENERATION_TWO, Johto
+    variant_encountercounter GROUP_GENERATION_THREE, Hoenn 
+    variant_encountercounter GROUP_GENERATION_FOUR, Sinnoh 
+    variant_encountercounter GROUP_GENERATION_FIVE, Unova 
+    variant_encountercounter GROUP_GENERATION_SIX, Kalos 
+    variant_encountercounter GROUP_GENERATION_SEVEN, Alola 
+    variant_encountercounter GROUP_GENERATION_EIGHT, Galar 
     dbw -1, wTotalEncounteredKantoPokemonSpecies
 
 DefeatedCounterPointerTable:
-    variant_defeatedcounter REGION_KANTO, Kanto
-    variant_defeatedcounter REGION_JOHTO, Johto
-    variant_defeatedcounter REGION_HOENN, Hoenn 
-    variant_defeatedcounter REGION_SINNOH, Sinnoh 
-    variant_defeatedcounter REGION_UNOVA, Unova 
-    variant_defeatedcounter REGION_KALOS, Kalos 
-    variant_defeatedcounter REGION_ALOLA, Alola 
-    variant_defeatedcounter REGION_GALAR, Galar 
+    variant_defeatedcounter GROUP_GENERATION_ONE, Kanto
+    variant_defeatedcounter GROUP_GENERATION_TWO, Johto
+    variant_defeatedcounter GROUP_GENERATION_THREE, Hoenn 
+    variant_defeatedcounter GROUP_GENERATION_FOUR, Sinnoh 
+    variant_defeatedcounter GROUP_GENERATION_FIVE, Unova 
+    variant_defeatedcounter GROUP_GENERATION_SIX, Kalos 
+    variant_defeatedcounter GROUP_GENERATION_SEVEN, Alola 
+    variant_defeatedcounter GROUP_GENERATION_EIGHT, Galar 
     dbw -1, wTotalDefeatedKantoPokemonSpecies

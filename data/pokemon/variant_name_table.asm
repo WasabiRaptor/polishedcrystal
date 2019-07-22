@@ -3,8 +3,8 @@ variant_names: macro
 endm
 
 VariantNamePointerTable:
-    variant_names REGION_KANTO,  Kanto
-    variant_names REGION_JOHTO,  Johto
-    variant_names REGION_HOENN, Hoenn
+    variant_names GROUP_GENERATION_ONE,  Kanto
+    variant_names GROUP_GENERATION_TWO,  Johto
+    variant_names GROUP_GENERATION_THREE, Hoenn
 
     dbba -1,        KantoNames

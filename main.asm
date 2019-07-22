@@ -2097,7 +2097,7 @@ FlagPredef: ; 4d7c1
 	jr .done
 
 .farcheck
-	call GetFarByte
+	call GetFarWRAMByte
 	and c
 
 .done
@@ -2110,7 +2110,7 @@ GetTrademonFrontpic: ; 4d7fd
 	ld hl, wOTTrademonGroup
 	ld de, VTiles2
 	push de
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	pop de
 	predef FrontpicPredef
@@ -2395,7 +2395,7 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 
 CheckPartyFullAfterContest: ; 4d9e5
 	ld hl, wContestMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wContestMon]
 	and a
 	jp z, .DidntCatchAnything
@@ -3786,7 +3786,7 @@ ListMoves: ; 50d6f
 
 CalcLevel: ; 50e1b
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld d, 1
 .next_level

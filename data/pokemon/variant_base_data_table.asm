@@ -3,8 +3,8 @@ variant_basedata: macro
 endm
 
 VariantBaseDataTable:
-    variant_basedata REGION_KANTO, Kanto
-    variant_basedata REGION_JOHTO, Johto
-    variant_basedata REGION_HOENN, Hoenn
+    variant_basedata GROUP_GENERATION_ONE, Kanto
+    variant_basedata GROUP_GENERATION_TWO, Johto
+    variant_basedata GROUP_GENERATION_THREE, Hoenn
 	dbba -1,         OtherBaseData
 

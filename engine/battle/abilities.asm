@@ -509,7 +509,7 @@ RecieverAbility:
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	push hl
-	call PokemonToGroupSpeciesAndForm
+	predef PokemonToGroupSpeciesAndForm
 	pop hl
 	;species of last mon in party
 	ld c, a
@@ -540,7 +540,7 @@ RecieverAbility:
 .got_turn2
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	call PokemonToGroupSpeciesAndForm
+	predef PokemonToGroupSpeciesAndForm
 	jp RunActivationAbilitiesInner
 
 .trace_failure

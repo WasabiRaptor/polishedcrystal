@@ -598,9 +598,9 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 .MenuAction_VariantMode: ; 40411 (10:4411)
 	ld a, [wPokedexRegion]
 	inc a
-	cp REGION_HOENN + 1 ; the max dex group
+	cp GROUP_GENERATION_THREE + 1 ; the max dex group
 	jr c, .next_group
-	ld a, REGION_KANTO
+	ld a, GROUP_GENERATION_ONE
 .next_group
 	ld [wPokedexRegion], a
 	;ld [wDexMonGroup], a
@@ -1140,6 +1140,12 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 ; Draws the left sidebar and the bottom bar on the main screen.
 	call Pokedex_DrawBasicMainScreen
 	hlcoord 9, 1
+
+	ldh a, [rSVBK]
+	push af ; 1
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
 	ld de, String_SEEN
 	call Pokedex_PlaceString
 	ld hl, wPokedexSeen
@@ -1159,6 +1165,9 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	hlcoord 15, 2
 	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
 	call PrintNum
+
+	pop af ; 0
+	ldh [rSVBK], a
 
 	hlcoord 8, 3
 	ld a, $65
@@ -1877,41 +1886,6 @@ Pokedex_CheckSeen: ; 40bd0
 	pop de
 	ret
 
-GetRelevantSeenPointers::
-	push de
-	push bc
-	push af
-	ld a, [wCurGroup]
-	ld hl, RegionalSeenTable
-	ld de, 3
-	call IsInArray
-	inc hl 
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	pop af
-	pop bc
-	pop de
-	ret
-
-GetRelevantCaughtPointers::
-	push de
-	push bc
-	push af
-	ld a, [wCurGroup]
-	ld hl, RegionalCaughtTable
-	ld de, 3
-	call IsInArray
-	inc hl 
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	pop af
-	pop bc
-	pop de
-	ret
-
-INCLUDE "data/pokemon/regional_seen_caught_tables.asm"
 
 GetRelevantPokedexRegionOrderPointers:
 	ld a, [wPokedexRegion]
@@ -2219,7 +2193,7 @@ Pokedex_SearchForMons: ; 41086
 	ld [wDexConvertedMonType], a
 	ld de, wPokedexOrder
 	ld c, NUM_KANTO_POKEMON
-	ld a, REGION_KANTO ; $1
+	ld a, GROUP_GENERATION_ONE ; $1
 	ld [wCurGroup], a
 	ld [wCurSpecies], a ;the first species in each group aight
 	xor a
@@ -2269,10 +2243,10 @@ Pokedex_SearchForMons: ; 41086
 	dec c
 	jr nz, .loop
 	ld a, [wCurGroup]
-	cp REGION_JOHTO
+	cp GROUP_GENERATION_TWO
 	ld a, 1
 	ld [wCurSpecies], a
-	ld a, REGION_JOHTO
+	ld a, GROUP_GENERATION_TWO
 	ld [wCurGroup], a
 	ld c, NUM_JOHTO_POKEMON
 	jr c, .loop

@@ -1154,3 +1154,14 @@ wSecondsSince:: ds 1
 wMinutesSince:: ds 1
 wHoursSince:: ds 1
 wDaysSince:: ds 1
+
+; this is used so often I'm moving it here just incase I break anything 
+
+wd265:: ; TODO: replace with meaningful labels
+wNamedObjectIndexBuffer::
+wCurKeyItemBuffer::
+wCurTMHMBuffer::
+wTypeMatchup::
+wFoundMatchingIDInParty::
+; usually 1 byte, may be up to 3 in some cases for wNamedObjectIndexBuffer
+	ds 3

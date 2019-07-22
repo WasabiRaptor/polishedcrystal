@@ -42,12 +42,9 @@ EvolveAfterBattle_MasterLoop:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartyGroup]
 	ld [wEvolutionOldGroup], a
-	ld [wEvolutionNewGroup], a ; this is merely set if so that if the evolution doesn't change group, it doesn't
-	; and so that in the future if it becomes neceseary to change a group with evolution, the byte and functionality should be there
-	; merely just having to be uncommented to have a byte read from the evo struct and set along with wEvolutionNewSpecies down below
 	ld a, [wCurPartySpecies]
 	ld [wEvolutionOldSpecies], a
 
@@ -277,10 +274,11 @@ endr
 	ld a, d ; bank
 	push de ; 2
 	call GetFarByte
+	ld [wEvolutionNewGroup], a
+	inc hl ; if one were to implement the group byte into evolution
+	ld a, d ; bank
+	call GetFarByte
 	ld [wEvolutionNewSpecies], a
-	;inc hl ; if one were to implement the group byte into evolution
-	;ld a, d ; bank
-	;ld [wEvolutionNewGroup], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	call GetNick
@@ -320,15 +318,17 @@ endr
 
 	ld a, d ; bank
 	call GetFarByte
+	ld [wCurGroup], a
+	ld [wTempMonGroup], a
+	ld [wEvolutionNewGroup], a
+	inc hl ; if one were to implement the group byte into evolution
+	ld a, d ; bank
+	call GetFarByte
 	ld [wCurSpecies], a
 	ld [wTempMonSpecies], a
 	ld [wEvolutionNewSpecies], a
 	ld [wd265], a
-	;inc hl ; if one were to implement the group byte into evolution
-	;ld a, d ; bank
-	;ld [wCurGroup], a
-	;ld [wTempMonGroup], a
-	;ld [wEvolutionNewGroup], a
+
 	call GetPokemonName
 
 	push hl ; 1
@@ -401,7 +401,7 @@ endr
 	jr nz, .skip_unown
 
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	farcall UpdateUnownDex
 
 .skip_unown
@@ -420,6 +420,7 @@ endr
 .dont_evolve_2
 	inc hl
 .dont_evolve_3
+	inc hl
 	inc hl
 	jp .loop
 
@@ -796,6 +797,10 @@ GetPreEvolution: ; 42581
 
 ; Return carry and the new species in wCurPartySpecies
 ; if a pre-evolution is found.
+	ld a, NUM_POKEMON_GROUPS
+	ld [wCurGroup], a
+
+.grouploop
 	call GetMaxNumPokemonForGroup
 	ld c, a
 .loop ; For each Pokemon...
@@ -808,10 +813,10 @@ GetPreEvolution: ; 42581
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld a, d
+	ld a, d ; bank
 	call GetFarHalfword
 .loop2 ; For each evolution...
-	ld a, d
+	ld a, d ; bank
 	call GetFarByte
 	inc hl
 	and a
@@ -822,13 +827,16 @@ GetPreEvolution: ; 42581
 
 .not_tyrogue
 	inc hl
-	ld a, [wCurPartySpecies]
+	ld a, [wCurPartyGroup]
 	ld b, a
-	ld a, d
+	ld a, d ; bank
 	call GetFarByte
 	cp b
-	jr z, .found_preevo
 	inc hl
+	jr z, .maybe_found_preevo
+.didnt_find_preevo
+	inc hl
+	ld a, d ; bank
 	call GetFarByte
 	and a
 	jr nz, .loop2
@@ -837,9 +845,23 @@ GetPreEvolution: ; 42581
 	ld a, c
 	and a
 	jr nz, .loop
-	ret
+	ld a, [wCurGroup]
+	dec a
+	ret z
+	ld [wCurGroup], a
+	jr .grouploop
 
-.found_preevo
+.maybe_found_preevo
+	ld a, [wCurPartySpecies]
+	ld b, a
+	ld a, d ; bank
+	call GetFarByte
+	cp b
+	jr nz, .didnt_find_preevo
+
+	ld a, [wCurGroup]
+	ld [wCurPartyGroup], a
+
 	ld a, c
 	inc a
 	ld [wCurPartySpecies], a

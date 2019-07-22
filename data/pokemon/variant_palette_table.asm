@@ -3,8 +3,8 @@ variant_palettes: macro
 endm
 
 VariantPaletteTable:  
-    variant_palettes REGION_KANTO,  Kanto
-    variant_palettes REGION_JOHTO,  Johto
-    variant_palettes REGION_HOENN, Hoenn
+    variant_palettes GROUP_GENERATION_ONE,  Kanto
+    variant_palettes GROUP_GENERATION_TWO,  Johto
+    variant_palettes GROUP_GENERATION_THREE, Hoenn
 
 	dbba -1,         KantoPalettes

@@ -1535,7 +1535,7 @@ MoveScreenLoop:
 	jr nz, .loop_right_invalid
 	ld hl, wPartyMon1Group
 	rst AddNTimes
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ld a, d
@@ -1574,7 +1574,7 @@ MoveScreenLoop:
 	jr nz, .loop_left_invalid
 	ld hl, wPartyMon1Group
 	rst AddNTimes
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ld a, d

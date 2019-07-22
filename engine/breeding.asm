@@ -292,7 +292,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	dec a
 	call SetSeenAndCaughtMon
@@ -309,7 +309,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 
 	;ld a, [wCurPartySpecies]
 	;cp TOGEPI
@@ -685,7 +685,7 @@ GetHatchlingFrontpic: ; 1723c (5:723c)
 	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	pop de
 	predef_jump FrontpicPredef

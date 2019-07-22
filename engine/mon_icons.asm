@@ -257,7 +257,7 @@ InitPartyMenuIcon: ; 8e908 (23:6908)
 	ldh a, [hObjectStructIndexBuffer]
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
 	ld [wCurIcon], a
 	ld de, MON_IS_EGG

@@ -3,8 +3,8 @@ variant_eggmoves: macro
 endm
 
 VariantEggMovePointerTable:
-    variant_eggmoves REGION_KANTO, Kanto  
-    variant_eggmoves REGION_JOHTO, Johto
-    variant_eggmoves REGION_HOENN, Hoenn
+    variant_eggmoves GROUP_GENERATION_ONE, Kanto  
+    variant_eggmoves GROUP_GENERATION_TWO, Johto
+    variant_eggmoves GROUP_GENERATION_THREE, Hoenn
 
 	dbba -1,        KantoEggMovePointers

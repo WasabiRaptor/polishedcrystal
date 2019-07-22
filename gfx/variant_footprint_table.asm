@@ -3,8 +3,8 @@ variant_footprints: macro
 endm
 
 VariantFootprintTable:
-    variant_footprints REGION_KANTO, Kanto
-    variant_footprints REGION_JOHTO, Johto
-    variant_footprints REGION_HOENN, Hoenn
+    variant_footprints GROUP_GENERATION_ONE, Kanto
+    variant_footprints GROUP_GENERATION_TWO, Johto
+    variant_footprints GROUP_GENERATION_THREE, Hoenn
 
     dbba -1,           KantoFootprints

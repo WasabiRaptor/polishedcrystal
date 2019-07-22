@@ -318,7 +318,7 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 	ld a, b
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	predef CanLearnTMHMMove
 	pop hl
 	call .PlaceAbleNotAble
@@ -372,7 +372,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld a, b
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
 	ld a, [wCurPartySpecies]
@@ -468,7 +468,7 @@ PlacePartyMonGender: ; 502b1
 	push hl
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 
 	pop hl
 	push hl
@@ -517,7 +517,7 @@ PlacePartyMonRemindable: ; 501e0
 	ld a, b
 	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 
 	farcall GetForgottenMoves
 	pop hl

@@ -215,7 +215,7 @@ endr
 	ld a, [wPartyMon1Ability]
 	ld b, a
 	ld hl, wPartyMon1Group
-	call PokemonToGroupSpeciesAndForm
+	predef PokemonToGroupSpeciesAndForm
 	ld a, [wPartyMon1Species]
 	ld c, a
 	call GetAbility
@@ -527,7 +527,7 @@ endr
 	;dec a
 	;ld bc, PARTYMON_STRUCT_LENGTH
 	;rst AddNTimes
-	;call GetPartyMonGroupSpeciesAndForm
+	;predef GetPartyMonGroupSpeciesAndForm
 	;farcall UpdateUnownDex
 
 .done
@@ -960,7 +960,7 @@ RestorePPofDepositedPokemon: ; dcb6
 
 RetrievePokemonFromDayCareMan: ; dd21
 	ld hl, wBreedMon1Group
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
@@ -976,7 +976,7 @@ RetrievePokemonFromDayCareMan: ; dd21
 
 RetrievePokemonFromDayCareLady: ; dd42
 	ld hl, wBreedMon2
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld de, SFX_TRANSACTION
 	call PlaySFX
 	call WaitSFX
@@ -1241,7 +1241,7 @@ SentPkmnIntoBox: ; de6e
 	cp UNOWN
 	jr nz, .not_unown
 	ld hl, sBoxMon1Group
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	farcall UpdateUnownDex
 
 .not_unown
@@ -1384,7 +1384,7 @@ GiveEgg:: ; df8c
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld hl, wPartyMon1Group
 	rst AddNTimes
-	call PokemonToGroupSpeciesAndForm
+	predef PokemonToGroupSpeciesAndForm
 	ld hl, wPartyCount
 	ld a, [hl]
 	ld b, 0

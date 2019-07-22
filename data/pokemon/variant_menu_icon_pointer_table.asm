@@ -4,8 +4,8 @@ endm
 
 
 VariantIconPointerTable:
-    variant_icons REGION_KANTO,  Kanto
-    variant_icons REGION_JOHTO,  Johto  
-    variant_icons REGION_HOENN, Hoenn
+    variant_icons GROUP_GENERATION_ONE,  Kanto
+    variant_icons GROUP_GENERATION_TWO,  Johto  
+    variant_icons GROUP_GENERATION_THREE, Hoenn
 
 	dbw -1,       OtherIconPointers

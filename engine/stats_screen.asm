@@ -169,7 +169,7 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	cp BREEDMON
 	jr nz, .breedmon
 	ld hl, wBufferMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld hl, wBufferMonGroup ; hm but where is buffer mon set?
 	ld de, wTempMonGroup
@@ -325,7 +325,7 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	inc hl
 	ld [hl], "."
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData	
 	hlcoord 10, 0
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
@@ -771,7 +771,7 @@ OrangePage_:
 	ld de, .ability
 	call PlaceString
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wTempMonAbility]
 	ld b, a
 	ld a, [wTempMonSpecies]
@@ -979,7 +979,7 @@ INCLUDE "data/characteristics.asm"
 
 StatsScreen_PlaceFrontpic: ; 4e226 (13:6226)
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call StatsScreen_GetAnimationParam
 	jr c, .egg
 	and a

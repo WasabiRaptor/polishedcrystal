@@ -4,8 +4,8 @@ endm
 
 
 VariantCryTable:
-    variant_cries REGION_KANTO, Kanto
-    variant_cries REGION_JOHTO, Johto
-    variant_cries REGION_HOENN, Hoenn
+    variant_cries GROUP_GENERATION_ONE, Kanto
+    variant_cries GROUP_GENERATION_TWO, Johto
+    variant_cries GROUP_GENERATION_THREE, Hoenn
 
     dbba -1,        KantoCries

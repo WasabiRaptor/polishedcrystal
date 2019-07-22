@@ -800,7 +800,7 @@ TradeAnim_AnimateFrontpic: ; 29487
 
 TradeAnim_GetFrontpic: ; 29491
 	push de
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData
 	pop de
 	predef GetFrontpic

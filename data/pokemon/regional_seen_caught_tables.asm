@@ -7,23 +7,23 @@ variant_caught: macro
 endm
 
 RegionalSeenTable:
-    variant_seen REGION_KANTO, Kanto
-    variant_seen REGION_JOHTO, Johto
-    variant_seen REGION_HOENN, Hoenn 
-    variant_seen REGION_SINNOH, Sinnoh 
-    variant_seen REGION_UNOVA, Unova 
-    variant_seen REGION_KALOS, Kalos 
-    variant_seen REGION_ALOLA, Alola 
-    variant_seen REGION_GALAR, Galar 
+    variant_seen GROUP_GENERATION_ONE, Kanto
+    variant_seen GROUP_GENERATION_TWO, Johto
+    variant_seen GROUP_GENERATION_THREE, Hoenn 
+    variant_seen GROUP_GENERATION_FOUR, Sinnoh 
+    variant_seen GROUP_GENERATION_FIVE, Unova 
+    variant_seen GROUP_GENERATION_SIX, Kalos 
+    variant_seen GROUP_GENERATION_SEVEN, Alola 
+    variant_seen GROUP_GENERATION_EIGHT, Galar 
     dbw -1, wKantoPokedexSeen
 
 RegionalCaughtTable:
-    variant_caught REGION_KANTO, Kanto
-    variant_caught REGION_JOHTO, Johto
-    variant_caught REGION_HOENN, Hoenn 
-    variant_caught REGION_SINNOH, Sinnoh 
-    variant_caught REGION_UNOVA, Unova 
-    variant_caught REGION_KALOS, Kalos 
-    variant_caught REGION_ALOLA, Alola 
-    variant_caught REGION_GALAR, Galar 
+    variant_caught GROUP_GENERATION_ONE, Kanto
+    variant_caught GROUP_GENERATION_TWO, Johto
+    variant_caught GROUP_GENERATION_THREE, Hoenn 
+    variant_caught GROUP_GENERATION_FOUR, Sinnoh 
+    variant_caught GROUP_GENERATION_FIVE, Unova 
+    variant_caught GROUP_GENERATION_SIX, Kalos 
+    variant_caught GROUP_GENERATION_SEVEN, Alola 
+    variant_caught GROUP_GENERATION_EIGHT, Galar 
     dbw -1, wKantoPokedexCaught

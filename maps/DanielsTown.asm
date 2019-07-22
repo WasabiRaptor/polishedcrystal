@@ -22,15 +22,15 @@ DanielsTown_MapScriptHeader:
 	object_event 11,  8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, setjohtoscript, -1
 
 setjohtoscript:
-	loadvar wPartyMon1Group, REGION_HOENN
+	loadvar wPartyMon1Group, GROUP_GENERATION_THREE
 	end
 
 checkpokegroupscript:
 	opentext
 	checkcode VAR_PARTYMON1_GROUP
-	ifequal REGION_KANTO, .kanto
-	ifequal REGION_JOHTO, .johto
-	ifequal REGION_HOENN, .hoenn
+	ifequal GROUP_GENERATION_ONE, .kanto
+	ifequal GROUP_GENERATION_TWO, .johto
+	ifequal GROUP_GENERATION_THREE, .hoenn
 	closetext
 	end
 .kanto

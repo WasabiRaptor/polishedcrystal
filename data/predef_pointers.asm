@@ -52,3 +52,5 @@ PredefPointers::
 	add_predef PrintAbility
 	add_predef PrintAbilityDescription
 	add_predef DoKeyItemEffect
+	add_predef GetPartyMonGroupSpeciesAndForm
+	add_predef PokemonToGroupSpeciesAndForm

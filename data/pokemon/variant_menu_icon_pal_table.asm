@@ -4,8 +4,8 @@ endm
 
 
 VariantIconPalTable:  
-    variant_iconpals REGION_KANTO, Kanto
-    variant_iconpals REGION_JOHTO, Johto
-    variant_iconpals REGION_HOENN, Hoenn
+    variant_iconpals GROUP_GENERATION_ONE, Kanto
+    variant_iconpals GROUP_GENERATION_TWO, Johto
+    variant_iconpals GROUP_GENERATION_THREE, Hoenn
 
 	dbba -1,         KantoMenuMonIconColors

@@ -249,9 +249,20 @@ FillPokedex:
 	;ld [hli], a
 	;inc a
 ;endr
+	ldh a, [rSVBK]
+	push af ; 1
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
 	ld hl, wPokedexSeen
 	call .Fill
 	ld hl, wPokedexCaught
+	call .Fill
+
+	pop af ; 0
+	ldh [rSVBK], a
+	ret
+
 .Fill:
 	ld a, %11111111
 	ld bc, wPokedexCaughtEnd - wPokedexCaught

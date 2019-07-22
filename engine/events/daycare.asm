@@ -796,7 +796,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wCurPartyLevel], a
 
 	ld a, [wCurPartyGroup]
-	cp REGION_KANTO
+	cp GROUP_GENERATION_ONE
 	jr nz, .checkIllumiseVolbeat
 	ld a, [wCurPartySpecies]
 	cp NIDORAN_F
@@ -813,7 +813,7 @@ DayCare_InitBreeding: ; 16a3b
 
 .checkIllumiseVolbeat
 	ld a, [wCurPartyGroup]
-	cp REGION_HOENN
+	cp GROUP_GENERATION_THREE
 	jr nz, .GotEggSpecies
 	ld a, [wCurPartySpecies]
 	cp ILLUMISE

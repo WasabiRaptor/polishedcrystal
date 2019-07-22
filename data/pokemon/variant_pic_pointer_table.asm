@@ -3,9 +3,9 @@ variant_picpointers: macro
 endm
 
 VariantPicPointerTable:
-    variant_picpointers REGION_KANTO,  Kanto
-    variant_picpointers REGION_JOHTO,  Johto  
-    variant_picpointers REGION_HOENN, Hoenn
+    variant_picpointers GROUP_GENERATION_ONE,  Kanto
+    variant_picpointers GROUP_GENERATION_TWO,  Johto  
+    variant_picpointers GROUP_GENERATION_THREE, Hoenn
 	dbba -1,            OtherPicPointers
 
     

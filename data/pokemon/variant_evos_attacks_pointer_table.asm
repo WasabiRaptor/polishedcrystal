@@ -8,14 +8,14 @@ endm
 
 
 VariantEvosAttacksPointerTable:
-    variant_evosattacks REGION_KANTO,  Kanto
-    variant_evosattacks REGION_JOHTO,  Johto
-    variant_evosattacks REGION_HOENN, Hoenn
+    variant_evosattacks GROUP_GENERATION_ONE,  Kanto
+    variant_evosattacks GROUP_GENERATION_TWO,  Johto
+    variant_evosattacks GROUP_GENERATION_THREE, Hoenn
 
 	dbba -1,        KantoEvosAttacksPointers
 
 VariantEvolutionMovesPointerTable:
-    variant_evomoves REGION_KANTO, Kanto  
-    variant_evomoves REGION_JOHTO, Johto
-    variant_evomoves REGION_HOENN, Hoenn
+    variant_evomoves GROUP_GENERATION_ONE, Kanto  
+    variant_evomoves GROUP_GENERATION_TWO, Johto
+    variant_evomoves GROUP_GENERATION_THREE, Hoenn
 	dbba -1,        KantoEvolutionMoves

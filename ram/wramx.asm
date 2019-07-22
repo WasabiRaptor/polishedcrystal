@@ -615,15 +615,6 @@ wForgettingMove:: ds 1
 
 wBattleHasJustStarted:: ds 1
 
-wd265:: ; TODO: replace with meaningful labels
-wNamedObjectIndexBuffer::
-wCurKeyItemBuffer::
-wCurTMHMBuffer::
-wTypeMatchup::
-wFoundMatchingIDInParty::
-; usually 1 byte, may be up to 3 in some cases for wNamedObjectIndexBuffer
-	ds 3
-
 wMonTriedToEvolve:: ds 1
 
 wTimeOfDay:: ds 1
@@ -878,19 +869,19 @@ wKeyItems:: flag_array NUM_KEY_ITEMS
 wKeyItemsEnd::
 
 wNumItems:: ds 1
-wItems:: ds MAX_ITEMS * 2 + 1
+wItems:: ds MAX_ITEMS * 3 + 1
 wItemsEnd::
 wNumMedicine:: ds 1
-wMedicine:: ds MAX_MEDICINE * 2 + 1
+wMedicine:: ds MAX_MEDICINE * 3 + 1
 wMedicineEnd::
 wNumBalls:: ds 1
-wBalls:: ds MAX_BALLS * 2 + 1
+wBalls:: ds MAX_BALLS * 3 + 1
 wBallsEnd::
 wNumBerries:: ds 1
-wBerries:: ds MAX_BERRIES * 2 + 1
+wBerries:: ds MAX_BERRIES * 3 + 1
 wBerriesEnd::
 wNumPCItems:: ds 1
-wPCItems:: ds MAX_PC_ITEMS * 2 + 1
+wPCItems:: ds MAX_PC_ITEMS * 3 + 1
 wPCItemsEnd::
 
 wApricorns:: ds NUM_APRICORNS
@@ -927,35 +918,6 @@ wMysteryDungeonNorthSouthEastWestSceneID:: ds 1
 ;unused
 	ds 10 ; placeholder for later
 
-; fight counts
-wJackFightCount::    ds 1
-wBeverlyFightCount:: ds 1 ; unused
-wHueyFightCount::    ds 1
-wGavenFightCount::   ds 1
-wBethFightCount::    ds 1
-wJoseFightCount::    ds 1
-wReenaFightCount::   ds 1
-wJoeyFightCount::    ds 1
-wWadeFightCount::    ds 1
-wRalphFightCount::   ds 1
-wLizFightCount::     ds 1
-wAnthonyFightCount:: ds 1
-wToddFightCount::    ds 1
-wGinaFightCount::    ds 1
-wIrwinFightCount::   ds 1 ; unused
-wArnieFightCount::   ds 1
-wAlanFightCount::    ds 1
-wDanaFightCount::    ds 1
-wChadFightCount::    ds 1
-wDerekFightCount::   ds 1 ; unused
-wTullyFightCount::   ds 1
-wBrentFightCount::   ds 1
-wTiffanyFightCount:: ds 1
-wVanceFightCount::   ds 1
-wWiltonFightCount::  ds 1
-wKenjiFightCount::   ds 1 ; unused
-wParryFightCount::   ds 1
-wErinFightCount::    ds 1
 
 wEventFlags:: flag_array NUM_EVENTS
 
@@ -1122,63 +1084,6 @@ wPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknames:: ds PKMN_NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknamesEnd::
 
-wPokedexCaught::
-
-wKantoPokedexCaught:: flag_array NUM_KANTO_POKEMON
-wKantoPokedexCaughtEnd::
-
-wJohtoPokedexCaught:: flag_array NUM_JOHTO_POKEMON
-wJohtoPokedexCaughtEnd::
-
-wHoennPokedexCaught:: flag_array NUM_HOENN_POKEMON
-wHoennPokedexCaughtEnd::
-
-wSinnohPokedexCaught:: flag_array NUM_SINNOH_POKEMON
-wSinnohPokedexCaughtEnd::
-
-wUnovaPokedexCaught:: flag_array NUM_UNOVA_POKEMON
-wUnovaPokedexCaughtEnd::
-
-wKalosPokedexCaught:: flag_array NUM_KALOS_POKEMON
-wKalosPokedexCaughtEnd::
-
-wAlolaPokedexCaught:: flag_array NUM_ALOLA_POKEMON
-wAlolaPokedexCaughtEnd::
-
-wGalarPokedexCaught:: flag_array NUM_GALAR_POKEMON
-wGalarPokedexCaughtEnd::
-
-wPokedexCaughtEnd::
-
-
-wPokedexSeen:: 
-
-wKantoPokedexSeen:: flag_array NUM_KANTO_POKEMON
-wKantoPokedexSeenEnd::
-
-wJohtoPokedexSeen:: flag_array NUM_JOHTO_POKEMON
-wJohtoPokedexSeenEnd::
-
-wHoennPokedexSeen:: flag_array NUM_HOENN_POKEMON
-wHoennPokedexSeenEnd::
-
-wSinnohPokedexSeen:: flag_array NUM_SINNOH_POKEMON
-wSinnohPokedexSeenEnd::
-
-wUnovaPokedexSeen:: flag_array NUM_UNOVA_POKEMON
-wUnovaPokedexSeenEnd::
-
-wKalosPokedexSeen:: flag_array NUM_KALOS_POKEMON
-wKalosPokedexSeenEnd::
-
-wAlolaPokedexSeen:: flag_array NUM_ALOLA_POKEMON
-wAlolaPokedexSeenEnd::
-
-wGalarPokedexSeen:: flag_array NUM_GALAR_POKEMON
-wGalarPokedexSeenEnd::
-
-wPokedexSeenEnd::
-
 wUnownDex:: ds NUM_UNOWN
 wUnlockedUnowns:: ds 1
 
@@ -1234,18 +1139,6 @@ wBestMagikarpLengthMm::
 wBestMagikarpLengthMmHi:: ds 1
 wBestMagikarpLengthMmLo:: ds 1
 wMagikarpRecordHoldersName:: ds NAME_LENGTH
-
-wRegisteredItemFlags:: 
-	; 0 - wRegisteredItems key item flag 
-	; 1 - wRegisteredItems + 1 key item flag
-	; 2 - wRegisteredItems + 2 key item flag
-	; 3 - wRegisteredItems + 3 key item flag
-
-	; 4 - wRegisteredItems second item list flag
-	; 5 - wRegisteredItems + 1 second item list flag
-	; 6 - wRegisteredItems + 2 second item list flag
-	; 7 - wRegisteredItems + 3 second item list flag
-	ds 1
 
 wRegisteredItems::
 ; You can map 4 items, to select + directions
@@ -1424,6 +1317,68 @@ SECTION "Pokedex List", WRAMX
 
 wPokedexOrder:: ds (NUM_POKEMON * 2)
 wPokedexOrderEnd:: ds 12
+
+SECTION "Pokedex Caught And Seen", WRAMX
+
+wPokedexCaughtSeen::
+wPokedexCaught::
+
+wKantoPokedexCaught:: flag_array NUM_KANTO_POKEMON
+wKantoPokedexCaughtEnd::
+
+wJohtoPokedexCaught:: flag_array NUM_JOHTO_POKEMON
+wJohtoPokedexCaughtEnd::
+
+wHoennPokedexCaught:: flag_array NUM_HOENN_POKEMON
+wHoennPokedexCaughtEnd::
+
+wSinnohPokedexCaught:: flag_array NUM_SINNOH_POKEMON
+wSinnohPokedexCaughtEnd::
+
+wUnovaPokedexCaught:: flag_array NUM_UNOVA_POKEMON
+wUnovaPokedexCaughtEnd::
+
+wKalosPokedexCaught:: flag_array NUM_KALOS_POKEMON
+wKalosPokedexCaughtEnd::
+
+wAlolaPokedexCaught:: flag_array NUM_ALOLA_POKEMON
+wAlolaPokedexCaughtEnd::
+
+wGalarPokedexCaught:: flag_array NUM_GALAR_POKEMON
+wGalarPokedexCaughtEnd::
+
+wPokedexCaughtEnd::
+
+
+wPokedexSeen:: 
+
+wKantoPokedexSeen:: flag_array NUM_KANTO_POKEMON
+wKantoPokedexSeenEnd::
+
+wJohtoPokedexSeen:: flag_array NUM_JOHTO_POKEMON
+wJohtoPokedexSeenEnd::
+
+wHoennPokedexSeen:: flag_array NUM_HOENN_POKEMON
+wHoennPokedexSeenEnd::
+
+wSinnohPokedexSeen:: flag_array NUM_SINNOH_POKEMON
+wSinnohPokedexSeenEnd::
+
+wUnovaPokedexSeen:: flag_array NUM_UNOVA_POKEMON
+wUnovaPokedexSeenEnd::
+
+wKalosPokedexSeen:: flag_array NUM_KALOS_POKEMON
+wKalosPokedexSeenEnd::
+
+wAlolaPokedexSeen:: flag_array NUM_ALOLA_POKEMON
+wAlolaPokedexSeenEnd::
+
+wGalarPokedexSeen:: flag_array NUM_GALAR_POKEMON
+wGalarPokedexSeenEnd::
+
+wPokedexSeenEnd::
+wPokedexCaughtSeenEnd::
+
 
 SECTION "Encounter counters", WRAMX
 

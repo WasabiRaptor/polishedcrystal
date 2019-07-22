@@ -256,7 +256,7 @@ _CGB_StatsScreenHPPals: ; 8edb
 	call LoadPalette_White_Col1_Col2_Black
 
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 
 	ld hl, wTempMonIsEgg ; prevent an egg from revealing if the mon inside is shiny until hatched
 	bit MON_IS_EGG_F, [hl]
@@ -605,7 +605,7 @@ _CGB_Evolution: ; 91e4
 
 .pokemon
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
@@ -1293,7 +1293,7 @@ endc
 _CGB_PlayerOrMonFrontpicPals: ; 9529
 	push hl
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	pop hl
 
 	ld de, wUnknBGPals
@@ -1311,7 +1311,7 @@ _CGB_PlayerOrMonFrontpicPals: ; 9529
 _CGB_TrainerOrMonFrontpicPals: ; 9578
 	push hl
 	ld hl, wTempMonGroup
-	call GetPartyMonGroupSpeciesAndForm
+	predef GetPartyMonGroupSpeciesAndForm
 	pop hl
 
 	ld de, wUnknBGPals
