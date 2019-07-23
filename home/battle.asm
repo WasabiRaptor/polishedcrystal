@@ -154,9 +154,14 @@ SetBackupItem::
 	ret nz
 
 	call GetBackupItemAddr
+	ld a, [hli]
+	and a
+	ret nz
 	ld a, [hl]
 	and a
 	ret nz
+	ld a, c
+	ld [hld], a
 	ld [hl], b
 	ret
 
@@ -262,6 +267,7 @@ GetUsedItemAddr::
 	ret z
 	ld a, [wCurOTMon]
 .got_target
+	add a 
 	add l
 	ld l, a
 	ret nc

@@ -408,13 +408,13 @@ BattleAnimFunction_PokeBallBlocked: ; cd212 (33:5212)
 .done
 	jp DeinitBattleAnimation
 
-GetBallAnimPal: ; cd249 (33:5249)
+GetBallAnimPal: ; cd249 (33:5249) ; balls should all have the same high byte
 	ld hl, BallColors
 	ldh a, [rSVBK]
 	push af
-	ld a, $1
+	ld a, BANK(wCurItem)
 	ldh [rSVBK], a
-	ld a, [wCurItem] ; CurItem
+	ld a, [wCurItem+1] ; CurItem ; therefore only check the low byte
 	ld e, a
 	pop af
 	ldh [rSVBK], a

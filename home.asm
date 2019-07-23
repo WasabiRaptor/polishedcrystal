@@ -515,6 +515,8 @@ GetName:: ; 33c3
 	push de
 
 	ld a, [wNamedObjectTypeBuffer]
+	cp ITEM_NAME
+	jp z, .ItemName
 	cp PKMN_NAME
 	jr nz, .NotPokeName
 
@@ -558,6 +560,28 @@ GetName:: ; 33c3
 	rst Bankswitch
 	ret
 ; 3411
+
+.ItemName
+	ld hl, ItemNames
+	ld a, BANK(ItemNames)
+	rst Bankswitch
+
+	ld a, [wNamedObjectIndexBuffer]
+	ld b, a
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld c, a
+	dec bc
+.readChar
+	ld a, [hli]
+	cp "@"
+	dec bc
+	ld a, c
+	and a
+	jr nz, .readChar
+	ld a, b
+	and a
+	jr nz, .readChar
+	jr .done
 
 GetNthString:: ; 3411
 ; Return the address of the
@@ -626,17 +650,19 @@ INCLUDE "data/pokemon/variant_name_table.asm"
 
 GetCurItemName::
 ; Get item name from item in CurItem
+
 	ld a, [wCurItem]
 	ld [wNamedObjectIndexBuffer], a
+	ld a, [wCurItem+1]
+	ld [wNamedObjectIndexBuffer+1], a
 GetItemName:: ; 3468
 ; Get item name wNamedObjectIndexBuffer.
-
 	push hl
 	push bc
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, ITEM_NAME
-	jr PutNameInBufferAndGetName
+	jr PutNameTypeInBufferAndGetName
 
 GetCurKeyItemName::
 ; Get item name from item in CurItem
@@ -649,7 +675,7 @@ GetKeyItemName:: ; 3468
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, KEY_ITEM_NAME
-	jr PutNameInBufferAndGetName
+	jr PutNameTypeInBufferAndGetName
 
 GetApricornName::
 ; Get apricorn name wNamedObjectIndexBuffer.
@@ -658,7 +684,7 @@ GetApricornName::
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, APRICORN_NAME
-PutNameInBufferAndGetName::
+PutNameTypeInBufferAndGetName::
 	ld [wNamedObjectTypeBuffer], a
 	call GetName
 	ld de, wStringBuffer1
@@ -1262,66 +1288,6 @@ PrintWinLossText:: ; 3718
 	call ApplyTilemapInVBlank
 	jp WaitPressAorB_BlinkCursor
 ; 3741
-
-DrawBattleHPBar:: ; 3750
-; Draw an HP bar d tiles long at hl
-; Fill it up to e pixels
-
-	push hl
-	push de
-	push bc
-
-; Place 'HP:'
-	ld a, "<HP1>"
-	ld [hli], a
-	inc a ; ld a, "<HP2>"
-	ld [hli], a
-
-; Draw a template
-	push hl
-	inc a ; ld a, "<NOHP>" ; empty bar
-.template
-	ld [hli], a
-	dec d
-	jr nz, .template
-	ld a, "<HPEND>" ; bar end cap
-	ld [hl], a
-	pop hl
-
-; Safety check # pixels
-	ld a, e
-	and a
-	jr nz, .fill
-	ld a, c
-	and a
-	jr z, .done
-	ld e, 1
-
-.fill
-; Keep drawing tiles until pixel length is reached
-	ld a, e
-	sub TILE_WIDTH
-	jr c, .lastbar
-
-	ld e, a
-	ld a, "<FULLHP>"
-	ld [hli], a
-	ld a, e
-	and a
-	jr z, .done
-	jr .fill
-
-.lastbar
-	ld a, "<NOHP>"
-	add e
-	ld [hl], a
-
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-; 3786
 
 PrepMonFrontpic:: ; 3786
 	ld a, $1

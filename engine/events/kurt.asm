@@ -37,7 +37,7 @@ Special_SelectApricornForKurt: ; 88018
 	ld [wScriptVar], a
 	and a
 	jr z, .done
-	ld [wCurItem], a
+	ld [wCurApricorn], a
 	ld a, [wMenuCursorY]
 	ld c, a
 	push bc
@@ -112,7 +112,7 @@ Kurt_SelectApricorn: ; 88055
 
 .Quantity: ; 880ab
 	ld a, [wMenuSelection]
-	ld [wCurItem], a
+	ld [wCurApricorn], a
 	call Kurt_GetQuantityOfApricorn
 	ret z
 	ld a, [wItemQuantityChangeBuffer]
@@ -121,7 +121,7 @@ Kurt_SelectApricorn: ; 88055
 ; 880c2
 
 Kurt_SelectQuantity: ; 880c2
-	ld a, [wCurItem]
+	ld a, [wCurApricorn]
 	ld [wMenuSelection], a
 	call Kurt_GetQuantityOfApricorn
 	jr z, .done
@@ -164,7 +164,7 @@ Kurt_SelectQuantity: ; 880c2
 	call MenuBoxCoord2Tile
 	ld de, SCREEN_WIDTH + 1
 	add hl, de
-	ld a, [wCurItem]
+	ld a, [wCurApricorn]
 	ld [wNamedObjectIndexBuffer], a
 	call GetApricornName
 	jp PlaceString
@@ -184,7 +184,7 @@ PlaceApricornQuantity: ; 88126
 Kurt_GetQuantityOfApricorn: ; 88139
 	push bc
 	ld hl, wApricorns
-	ld a, [wCurItem]
+	ld a, [wCurApricorn]
 	dec a
 	ld c, a
 	ld b, 0
@@ -198,7 +198,7 @@ Kurt_GetQuantityOfApricorn: ; 88139
 
 Kurt_GiveUpSelectedQuantityOfSelectedApricorn: ; 88161
 	ld hl, wApricorns
-	ld a, [wCurItem]
+	ld a, [wCurApricorn]
 	dec a
 	ld c, a
 	ld b, 0

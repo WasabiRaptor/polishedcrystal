@@ -31,11 +31,15 @@ FindItemInBallScript:: ; 0x122ce
 	ld [wScriptVar], a
 	ld a, [wCurItemBallContents]
 	ld [wNamedObjectIndexBuffer], a
+	ld a, [wCurItemBallContents+1]
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetItemName
 	ld hl, wStringBuffer3
 	call CopyName2
 	ld a, [wCurItemBallContents]
 	ld [wCurItem], a
+	ld a, [wCurItemBallContents+1]
+	ld [wCurItem+1], a
 	ld a, [wCurItemBallQuantity]
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
@@ -65,7 +69,7 @@ FindTMHMInBallScript::
 .ReceiveTMHM:
 	xor a
 	ld [wScriptVar], a
-	ld a, [wCurItemBallContents]
+	ld a, [wCurItemBallContents] ; tmhm
 	ld [wNamedObjectIndexBuffer], a
 	call GetTMHMName
 	ld hl, wStringBuffer3
@@ -86,7 +90,7 @@ FindTMHMInBallScript::
 	ld [hli], a
 	call CopyName2
 
-	ld a, [wCurItemBallContents]
+	ld a, [wCurItemBallContents] ; tmhm
 	ld [wCurTMHM], a
 	call ReceiveTMHM
 	ld a, $1

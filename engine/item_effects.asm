@@ -1,15 +1,20 @@
 _DoItemEffect:: ; e722
 	ld a, [wCurItem]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
+	ld a, [wCurItem+1]
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetItemName
 	call CopyName1
 	ld a, 1
 	ld [wItemEffectSucceeded], a
 	ld a, [wCurItem]
-	dec a
+	dec b
+	ld a, [wCurItem+1]
+	dec c
 	ld hl, ItemEffects
-	rst JumpTable
-	ret
+	add hl, bc
+	add hl, bc
+	jp hl
 ; e73c
 
 
@@ -316,14 +321,14 @@ PokeBallEffect: ; e8a2
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jp z, .catch_without_fail
-	ld a, [wCurItem]
-	cp MASTER_BALL
+	ld a, [wCurItem+1] ; pokeballs should all have the same high byte
+	cp LOW_MASTER_BALL
 	jp z, .catch_without_fail
-	ld a, [wCurItem]
+	ld a, [wCurItem+1] ; pokeballs should all have the same high byte
 	ld hl, BallMultiplierFunctionTable
 	call BattleJumptable
 
-	ld a, [wCurItem]
+	ld a, [wCurItem+1] ; pokeballs should all have the same high byte
 	cp LEVEL_BALL
 	ld a, b
 	jp z, .skip_hp_calc
@@ -424,7 +429,7 @@ PokeBallEffect: ; e8a2
 	ld c, 20
 	call DelayFrames
 
-	ld a, [wCurItem]
+	ld a, [wCurItem+1] ; pokeballs should all have the same high byte
 	ld [wBattleAnimParam], a
 
 	ld de, ANIM_THROW_POKE_BALL
@@ -567,7 +572,7 @@ PokeBallEffect: ; e8a2
 
 	farcall SetCaughtData
 
-	ld a, [wCurItem]
+	ld a, [wCurItem+1]; pokeballs should all have the same high byte
 	cp FRIEND_BALL
 	jr nz, .SkipPartyMonFriendBall
 
@@ -581,7 +586,7 @@ PokeBallEffect: ; e8a2
 	ld [hl], a
 .SkipPartyMonFriendBall:
 
-	ld a, [wCurItem]
+	ld a, [wCurItem+1]; pokeballs should all have the same high byte
 	cp HEAL_BALL
 	jr nz, .SkipPartyMonHealBall
 
@@ -648,7 +653,7 @@ PokeBallEffect: ; e8a2
 	ld hl, wBattleResult
 	set 7, [hl]
 .BoxNotFullYet:
-	ld a, [wCurItem]
+	ld a, [wCurItem+1]; pokeballs should all have the same high byte
 	cp FRIEND_BALL
 	jr nz, .SkipBoxMonFriendBall
 	; Bug: overwrites the happiness of the first mon in the box!
@@ -763,23 +768,23 @@ PokeBallEffect: ; e8a2
 BallMultiplierFunctionTable:
 ; table of routines that increase or decrease the catch rate based on
 ; which ball is used in a certain situation.
-	dbw GREAT_BALL,  GreatBallMultiplier
-	dbw ULTRA_BALL,  UltraBallMultiplier
-	dbw SAFARI_BALL, SafariBallMultiplier
-	dbw LEVEL_BALL,  LevelBallMultiplier
-	dbw LURE_BALL,   LureBallMultiplier
-	dbw MOON_BALL,   MoonBallMultiplier
-	dbw FAST_BALL,   FastBallMultiplier
-	dbw HEAVY_BALL,  HeavyBallMultiplier
-	dbw LOVE_BALL,   LoveBallMultiplier
-	dbw PARK_BALL,   ParkBallMultiplier
-	dbw REPEAT_BALL, RepeatBallMultiplier
-	dbw TIMER_BALL,  TimerBallMultiplier
-	dbw NEST_BALL,   NestBallMultiplier
-	dbw NET_BALL,    NetBallMultiplier
-	dbw DIVE_BALL,   DiveBallMultiplier
-	dbw QUICK_BALL,  QuickBallMultiplier
-	dbw DUSK_BALL,   DuskBallMultiplier
+	dbw LOW_GREAT_BALL,  GreatBallMultiplier
+	dbw LOW_ULTRA_BALL,  UltraBallMultiplier
+	dbw LOW_SAFARI_BALL, SafariBallMultiplier
+	dbw LOW_LEVEL_BALL,  LevelBallMultiplier
+	dbw LOW_LURE_BALL,   LureBallMultiplier
+	dbw LOW_MOON_BALL,   MoonBallMultiplier
+	dbw LOW_FAST_BALL,   FastBallMultiplier
+	dbw LOW_HEAVY_BALL,  HeavyBallMultiplier
+	dbw LOW_LOVE_BALL,   LoveBallMultiplier
+	dbw LOW_PARK_BALL,   ParkBallMultiplier
+	dbw LOW_REPEAT_BALL, RepeatBallMultiplier
+	dbw LOW_TIMER_BALL,  TimerBallMultiplier
+	dbw LOW_NEST_BALL,   NestBallMultiplier
+	dbw LOW_NET_BALL,    NetBallMultiplier
+	dbw LOW_DIVE_BALL,   DiveBallMultiplier
+	dbw LOW_QUICK_BALL,  QuickBallMultiplier
+	dbw LOW_DUSK_BALL,   DuskBallMultiplier
 	db $ff
 
 UltraBallMultiplier:
@@ -1514,7 +1519,7 @@ StatStrings: ; eeab
 
 
 GetEVRelativePointer: ; eed9
-	ld a, [wCurItem]
+	;ld a, [wCurItem] Checkitem Param doesn't even take this as an input
 	farcall CheckItemParam
 	ld c, a
 	ld b, 0
@@ -1712,7 +1717,7 @@ HealStatus: ; f030 (3:7030)
 
 GetItemHealingAction: ; f058 (3:7058)
 	push hl
-	ld a, [wCurItem]
+	;ld a, [wCurItem] Checkitem Param doesn't even take this as an input
 	farcall CheckItemParam
 	ld c, a
 	ld hl, .StatusHealingActionTexts
@@ -1814,15 +1819,14 @@ RevivePokemon: ; f0d6
 .skip_to_revive
 	xor a
 	ld [wLowHealthAlarm], a
-	ld a, [wCurItem]
-	cp REVIVE
-	jr z, .revive_half_hp
 
-	call ReviveFullHP
+	cpcuritem REVIVE, .revive_full_hp
+
+	call ReviveHalfHP
 	jr .finish_revive
 
-.revive_half_hp
-	call ReviveHalfHP
+.revive_full_hp
+	call ReviveFullHP
 
 .finish_revive
 	call HealHP_SFX_GFX
@@ -2227,26 +2231,7 @@ GetOneFifthMaxHP: ; f378 (3:7378)
 	ret
 
 GetHealingItemAmount: ; f395 (3:7395)
-	ld a, [wCurItem]
-	cp SITRUS_BERRY
-	jr z, .sitrus_berry
-	cp FIGY_BERRY
-	jr z, .figy_berry
-
-	farcall CheckItemParam
-	ld e, a
-	ld d, 0
-	cp -1
-	ret nz
-	ld de, 999
-	ret
-; f3af (3:73af)
-
-.figy_berry
-	call .set_de_to_hp
-	jr .half_hp
-
-.sitrus_berry
+	cpcuritem SITRUS_BERRY, .not_sitrus_berry
 	call .set_de_to_hp
 	srl d
 	rr e
@@ -2258,6 +2243,21 @@ GetHealingItemAmount: ; f395 (3:7395)
 	ret nz
 	ld e, 1
 	ret
+
+.not_sitrus_berry	
+	cpcuritem FIGY_BERRY, .not_figy_berry
+	call .set_de_to_hp
+	jr .half_hp
+
+.not_figy_berry
+	farcall CheckItemParam
+	ld e, a
+	ld d, 0
+	cp -1
+	ret nz
+	ld de, 999
+	ret
+; f3af (3:73af)
 
 .set_de_to_hp
 	ld a, MON_MAXHP
@@ -2362,6 +2362,8 @@ RepelEffect: ; f46c
 
 	ld a, [wCurItem]
 	ld [wRepelType], a
+	ld a, [wCurItem+1]
+	ld [wRepelType+1], a
 
 	jp UseItemText
 
@@ -2534,7 +2536,7 @@ Itemfinder: ; f5b8
 
 
 RestorePPEffect: ; f5bf
-	ld a, [wCurItem]
+	ld a, [wCurItem+1]
 	ld [wd002], a
 
 .loop
@@ -2545,16 +2547,16 @@ RestorePPEffect: ; f5bf
 
 .loop2
 	ld a, [wd002]
-	cp MAX_ELIXIR
+	cp LOW_MAX_ELIXIR
 	jp z, Elixir_RestorePPofAllMoves
-	cp ELIXIR
+	cp LOW_ELIXIR
 	jp z, Elixir_RestorePPofAllMoves
 
 	ld hl, TextJump_RaiseThePPOfWhichMove
 	ld a, [wd002]
-	cp PP_UP
+	cp LOW_PP_UP
 	jr z, .ppup
-	cp PP_MAX
+	cp LOW_PP_MAX
 	jr z, .ppup
 	ld hl, TextJump_RestoreThePPOfWhichMove
 
@@ -2585,9 +2587,9 @@ RestorePPEffect: ; f5bf
 	pop hl
 
 	ld a, [wd002]
-	cp PP_UP
+	cp LOW_PP_UP
 	jr z, .ppup2
-	cp PP_MAX
+	cp LOW_PP_MAX
 	jp nz, Not_PP_Up
 
 .ppup2
@@ -2928,10 +2930,10 @@ Ball_NuzlockeFailureMessage:
 	ld hl, Ball_NuzlockeFailureText
 	call PrintText
 
-	ld a, [wCurItem]
-	cp PARK_BALL
+	ld a, [wCurItem+1]
+	cp LOW_PARK_BALL
 	ret z
-	cp SAFARI_BALL
+	cp LOW_SAFARI_BALL
 	ret z
 
 	; Item wasn't used.

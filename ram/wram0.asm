@@ -459,15 +459,15 @@ wKickCounter:: ds 1
 wPartyBackupItems::
 ; Back up of party items before a battle. Modified in-battle for consumed/harvested.
 ; Berries and items stolen from wild Pokémon since those changes are retained.
-	ds PARTY_LENGTH
+	ds PARTY_LENGTH * 2
 
 wPartyUsedItems::
 ; For the benefit of Pickup/Harvest
-	ds PARTY_LENGTH
+	ds PARTY_LENGTH * 2
 
 wOTPartyUsedItems::
 ; See PartyUsedItems
-	ds PARTY_LENGTH
+	ds PARTY_LENGTH * 2
 
 ; What move was selected last.
 ; Used for Choice locking and the Metronome item
@@ -979,7 +979,7 @@ wPalFadeMode::
 
 wWindowStackPointer:: ds 2
 wMenuJoypad:: ds 1
-wMenuSelection:: ds 1
+wMenuSelection:: ds 2
 wMenuSelectionQuantity:: ds 1
 wWhichIndexSet:: ds 1
 wScrollingMenuCursorPosition:: ds 1

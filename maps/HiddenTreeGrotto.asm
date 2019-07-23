@@ -56,7 +56,7 @@ HiddenGrottoHiddenItemScript:
 	dw EVENT_TEMPORARY_UNTIL_MAP_RELOAD_3
 HiddenGrottoItemScript:
 	special GetHiddenGrottoContents
-	itemtotext $0, $1
+	;itemtotext $0, $1
 	giveitem ITEM_FROM_MEM
 	iffalse .PackFull
 	disappear HIDDENTREEGROTTO_ITEM

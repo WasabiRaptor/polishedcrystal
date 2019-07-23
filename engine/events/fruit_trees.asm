@@ -21,7 +21,7 @@ FruitTreeScript:: ; 44000
 PickBerryScript:
 	copybytetovar wCurFruit
 	ifless NUM_APRICORNS+1, PickApricornScript
-	itemtotext $0, $0
+	;itemtotext $0, $0
 	writetext HeyItsFruitText
 	callasm GetFruitTreeCount
 	ifequal $1, .try_one
@@ -58,7 +58,7 @@ PickBerryScript:
 ; 44041
 
 PickApricornScript:
-	checkitem APRICORN_BOX
+	checkkeyitem APRICORN_BOX
 	iffalse_jumpopenedtext NoApricornBoxText
 	copybytetovar wCurFruit
 	callasm .get_name

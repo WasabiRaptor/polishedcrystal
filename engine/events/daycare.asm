@@ -1015,7 +1015,7 @@ DayCare_InitBreeding: ; 16a3b
 
 	; Check Shiny Charm
 	ld a, SHINY_CHARM
-	ld [wCurItem], a
+	ld [wCurKeyItem], a
 	push hl
 	push bc
 	push de

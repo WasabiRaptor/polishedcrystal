@@ -651,6 +651,8 @@ Script_verbosegiveitem2:
 .ok
 	ld [wCurItem], a
 	call GetScriptByte
+	ld [wCurItem+1], a
+	call GetScriptByte
 	call GetVarAction
 	ld a, [de]
 	ld [wItemQuantityChangeBuffer], a
@@ -734,7 +736,9 @@ GetTMHMPocketName:
 
 CurItemName:
 	ld a, [wCurItem]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
+	ld a, [wCurItem+1]
+	ld [wNamedObjectIndexBuffer+1], a
 	jp GetItemName
 
 CurTMHMName:
@@ -1901,7 +1905,9 @@ Script_itemtotext:
 	jr nz, .ok
 	ld a, [wScriptVar]
 .ok
-	ld [wd265], a
+	ld [wNamedObjectTypeBuffer], a
+	call GetScriptByte
+	ld [wNamedObjectTypeBuffer+1], a
 	call GetItemName
 	ld de, wStringBuffer1
 	jr ConvertMemToText
@@ -2071,6 +2077,8 @@ Script_giveitem:
 .ok
 	ld [wCurItem], a
 	call GetScriptByte
+	ld [wCurItem+1], a
+	call GetScriptByte
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumItems
 	call ReceiveItem
@@ -2094,6 +2102,8 @@ Script_takeitem:
 .ok
 	ld [wCurItem], a
 	call GetScriptByte
+	ld [wCurItem+1], a
+	call GetScriptByte
 	ld [wItemQuantityChangeBuffer], a
 	ld a, -1
 	ld [wCurItemQuantity], a
@@ -2111,6 +2121,8 @@ Script_checkitem:
 	ld [wScriptVar], a
 	call GetScriptByte
 	ld [wCurItem], a
+	call GetScriptByte
+	ld [wCurItem+1], a
 	ld hl, wNumItems
 	call CheckItem
 	ret nc
@@ -2335,6 +2347,8 @@ Script_givepoke:
 	ld [wCurPartyLevel], a
 	call GetScriptByte
 	ld [wCurItem], a
+	call GetScriptByte
+	ld [wCurItem+1], a
 	call GetScriptByte
 	ld [wCurForm], a
 	call GetScriptByte
@@ -2978,12 +2992,12 @@ Script_giveapricorn:
 	jr nz, .ok
 	ld a, [wScriptVar]
 .ok
-	ld [wCurItem], a
+	ld [wCurApricorn], a
 	call GetScriptByte
 	ld [wItemQuantityChangeBuffer], a
 
 	ld hl, wApricorns
-	ld a, [wCurItem]
+	ld a, [wCurApricorn]
 	dec a
 	ld c, a
 	ld b, 0

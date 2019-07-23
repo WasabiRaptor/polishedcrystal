@@ -1628,7 +1628,7 @@ FishFunction: ; cf8e
 	jr z, .nonibble
 .gotanitem
 	ld a, e
-	ld [wCurItem], a
+	ld [wCurItem], a ; TODO make account for 16 bit?
 	ld a, $5
 	ret
 
@@ -1790,7 +1790,7 @@ PutTheRodAway: ; d095
 	jp ReplaceKrisSprite
 
 CurItemToScriptVar:
-	ld a, [wCurItem]
+	ld a, [wCurItem] ; TODO make account for 16 bit? 
 	ld [wScriptVar], a
 	ret
 

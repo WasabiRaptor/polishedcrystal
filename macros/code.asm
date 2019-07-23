@@ -62,6 +62,27 @@ changebridgeblock: macro
 	ld [hl], \3
 ENDM
 
+; \1 = item
+; \2 = false
+cpcuritem: macro
+	ld a, [wCurItem]
+	cp HIGH_\1
+	jr nz, \2
+	ld a, [wCurItem+1]
+	cp LOW_\1
+	jr nz, \2
+endm
+
+; \1 = item
+retcuritem: macro
+	ld a, [wCurItem]
+	cp HIGH_\1
+	ret nz
+	ld a, [wCurItem+1]
+	cp LOW_\1
+	ret nz
+endm
+
 ; INPUT
 ; \1 = species
 ; \2 = false

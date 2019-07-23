@@ -300,6 +300,10 @@ FarReadMart: ; 15bbb
 	inc de
 	cp -1
 	ret z
+	ld [wCurItem], a
+	ld a, [de]
+	ld [wCurItem+1], a
+	inc de
 	push de
 	call GetMartItemPrice
 	pop de
@@ -404,9 +408,8 @@ ReadBlueCardMart:
 	ret
 
 GetMartItemPrice: ; 15be5
-; Return the price of item a in BCD at hl and in tiles at wStringBuffer1.
+; Return the price of wCurItem in BCD at hl and in tiles at wStringBuffer1.
 	push hl
-	ld [wCurItem], a
 	farcall GetItemPrice
 	pop hl
 
@@ -570,7 +573,7 @@ LoadBuyMenuText: ; 15c7d
 ; 15c91
 
 MartAskPurchaseQuantity: ; 15c91
-	ld a, [wCurItem]
+	; ld a, [wCurItem] ; not even an input to the function
 	call GetMartDialogGroup ; gets a pointer from GetMartDialogGroup.MartTextFunctionPointers
 	inc hl
 	inc hl
@@ -739,8 +742,10 @@ BuyMenuLoop: ; 15cef
 	ld a, [wItemQuantityChangeBuffer]
 	cp 10
 	jr c, .cancel
-	ld a, PREMIER_BALL
+	ld a, HIGH_PREMIER_BALL
 	ld [wCurItem], a
+	ld a, LOW_PREMIER_BALL
+	ld [wCurItem+1], a
 	ld a, [wItemQuantityChangeBuffer]
 	ld c, 10
 	call SimpleDivide

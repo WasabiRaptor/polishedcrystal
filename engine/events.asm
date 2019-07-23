@@ -525,6 +525,8 @@ TryObjectEvent: ; 969b5
 	push af
 	ld a, [hli]
 	ld [wCurItemBallContents], a
+	ld a, [hli]
+	ld [wCurItemBallContents+1], a
 	ld a, [hl]
 	ld [wCurItemBallQuantity], a
 	pop af
@@ -721,7 +723,7 @@ CheckSignFlag: ; 96ad8
 HiddenItemScript: ; 0x13625
 	opentext
 	copybytetovar wEngineBuffer3
-	itemtotext $0, $0
+	;itemtotext $0, $0
 	writetext .found_text
 	giveitem ITEM_FROM_MEM
 	iffalse .bag_full
@@ -951,6 +953,8 @@ DoRepelStep: ; 96bd7
 
 	ld a, [wRepelType]
 	ld [wCurItem], a
+	ld a, [wRepelType+1]
+	ld [wCurItem+1], a
 	ld hl, wNumItems
 	call CheckItem
 

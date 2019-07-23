@@ -11,7 +11,7 @@ GetFossilManiacPrice:
 GetItemManiacPrice:
 	xor a ; ld a, FALSE
 	ld [wScriptVar], a
-	ld a, [wCurItem]
+	ld a, [wCurItem] ; TODO account for 16 bit items
 	ld b, a
 .loop
 	ld a, [hli]

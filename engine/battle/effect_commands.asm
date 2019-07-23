@@ -2973,10 +2973,13 @@ ConsumeUserItem::
 	jr z, .apply_unburden
 
 .has_party_struct
-	ld a, [hl]
+	ld a, [hli]
 	ld d, a
+	ld a, [hld]
+	ld e, a
 	xor a
-	ld [hl], a
+	ld [hli], a
+	ld [hld], a
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .apply_unburden
@@ -2984,6 +2987,8 @@ ConsumeUserItem::
 	; For players, maybe remove the backup item too if we're dealing with a berry
 	ld a, d
 	ld [wCurItem], a
+	ld a, e
+	ld [wCurItem+1], a
 	push de
 	push bc
 	farcall CheckItemPocket
@@ -2996,11 +3001,15 @@ ConsumeUserItem::
 
 	; If the backup is different, don't touch it. This prevents consuming i.e. Focus Sash
 	; under the following scenario: Sash procs, steal an Oran Berry, use the Oran Berry
-	ld a, [hl]
+	ld a, [hli]
 	cp d
 	jr nz, .apply_unburden
+	ld a, [hld]
+	cp e
+	jr nz, .apply_unburden
 	xor a
-	ld [hl], a
+	ld [hli], a
+	ld [hld], a
 
 .apply_unburden
 	; Unburden doubles Speed when an item is consumed
@@ -7645,8 +7654,10 @@ BattleCommand_bugbite:
 	; does the opponent even have a berry? DON'T check EdibleBerries,
 	; there are non-edible ones which we'll still eat (with no effect)
 	call GetOpponentItem
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurItem], a
+	ld a, [hld]
+	ld [wCurItem+1], a
 	push bc
 	push hl
 	farcall CheckItemPocket
@@ -9473,12 +9484,18 @@ CheckHiddenOpponent: ; 37daa
 
 GetPlayerItem:
 	ld hl, wBattleMonItem
-	ld b, [hl]
+	ld a, [hli]
+	ld b, a
+	ld a, [hld]
+	ld c, a
 	jr GetItemHeldEffect
 
 GetEnemyItem:
 	ld hl, wEnemyMonItem
-	ld b, [hl]
+	ld a, [hli]
+	ld b, a
+	ld a, [hld]
+	ld c, a
 	jr GetItemHeldEffect
 
 GetOpponentItem:
@@ -9493,9 +9510,12 @@ GetUserItem::
 	jr z, .go
 	ld hl, wEnemyMonItem
 .go
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurItem], a
 	ld b, a
+	ld a, [hld]
+	ld [wCurItem+1], a
+	ld c, a
 	jp GetItemHeldEffect
 
 GetOpponentItemAfterUnnerve:
@@ -9522,24 +9542,24 @@ GetUserItemAfterUnnerve::
 	ret
 
 EdibleBerries:
-	db ORAN_BERRY
-	db SITRUS_BERRY
-	db PECHA_BERRY
-	db RAWST_BERRY
-	db CHERI_BERRY
-	db CHESTO_BERRY
-	db ASPEAR_BERRY
-	db PERSIM_BERRY
-	db LUM_BERRY
-	db LEPPA_BERRY
-	db FIGY_BERRY
-	db LIECHI_BERRY
-	db GANLON_BERRY
-	db SALAC_BERRY
-	db PETAYA_BERRY
-	db APICOT_BERRY
-	db KEE_BERRY
-	db MARANGABERRY
+	;db ORAN_BERRY
+	;db SITRUS_BERRY
+	;db PECHA_BERRY
+	;db RAWST_BERRY
+	;db CHERI_BERRY
+	;db CHESTO_BERRY
+	;db ASPEAR_BERRY
+	;db PERSIM_BERRY
+	;db LUM_BERRY
+	;db LEPPA_BERRY
+	;db FIGY_BERRY
+	;db LIECHI_BERRY
+	;db GANLON_BERRY
+	;db SALAC_BERRY
+	;db PETAYA_BERRY
+	;db APICOT_BERRY
+	;db KEE_BERRY
+	;db MARANGABERRY
 	; not eaten, so unaffected: jaboca, rowap
 	db -1
 NoItem:
@@ -9547,16 +9567,17 @@ NoItem:
 
 
 GetItemHeldEffect: ; 37dd0
-; Return the effect of item b in b and the param in c.
+; Return the effect of item bc in b and the param in c.
 	ld a, b
 	and a
+	jp nz, .IsItem
+	ld a, c
+	and a
 	ret z
-
+.IsItem
 	push hl
 	ld hl, ItemAttributes + ITEMATTR_EFFECT
-	dec a
-	ld c, a
-	ld b, 0
+	dec bc
 	ld a, NUM_ITEMATTRS
 	rst AddNTimes
 	ld a, BANK(ItemAttributes)
