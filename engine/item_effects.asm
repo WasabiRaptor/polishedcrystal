@@ -8,9 +8,10 @@ _DoItemEffect:: ; e722
 	ld a, 1
 	ld [wItemEffectSucceeded], a
 	ld a, [wCurItem]
-	dec b
+	ld b, a
 	ld a, [wCurItem+1]
-	dec c
+	ld c, a
+	dec bc
 	ld hl, ItemEffects
 	add hl, bc
 	add hl, bc
