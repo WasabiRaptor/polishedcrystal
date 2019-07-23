@@ -1134,6 +1134,8 @@ DepositSellPack: ; 106be
 	call InitPocket
 	call WaitBGMap_DrawPackGFX
 	farcall TMHMPocket
+	ld a, [wCurItem]
+	ld [wCurItem], a
 	ret
 
 .BerriesPocket:
@@ -1157,6 +1159,8 @@ DepositSellPack: ; 106be
 	call InitPocket
 	call WaitBGMap_DrawPackGFX
 	farcall KeyItemsPocket
+	ld a, [wCurItem]
+	ld [wCurItem], a
 	ret
 
 InitPocket: ; 10762 (4:4762)
@@ -1471,8 +1475,6 @@ Pack_InitGFX: ; 10955
 Pack_GetItemName: ; 10a1d
 	ld a, [wCurItem]
 	ld [wNamedObjectIndexBuffer], a
-	ld a, [wCurItem+1]
-	ld [wNamedObjectIndexBuffer+1], a
 	call GetItemName
 	jp CopyName1
 ; 10a2a

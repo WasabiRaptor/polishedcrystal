@@ -425,6 +425,7 @@ UpdateItemDescriptionAndBagQuantity:
 	hlcoord 1, 1
 	ld de, BagXString
 	call PlaceString
+	ld a, [wMenuSelection]
 	call GetQuantityInBag
 	hlcoord 6, 1
 	ld de, wBuffer1
@@ -433,8 +434,6 @@ UpdateItemDescriptionAndBagQuantity:
 UpdateItemDescription: ; 0x244c3
 	ld a, [wMenuSelection]
 	ld [wCurSpecies], a
-	ld a, [wMenuSelection+1]
-	ld [wCurGroup], a
 	hlcoord 0, 12
 	lb bc, 4, SCREEN_WIDTH - 2
 	call TextBox
@@ -492,11 +491,12 @@ UpdateKeyItemDescription:
 	farjp PrintKeyItemDescription
 
 GetQuantityInBag:
+	ld a, [wCurItem]
+	push af
 	ld a, [wMenuSelection]
 	ld [wCurItem], a
-	ld a, [wMenuSelection+1]
-	ld [wCurItem+1], a
 	call CountItem
+	pop af
 	ret
 
 ;stuff for registered items I might need later
@@ -3106,7 +3106,7 @@ DrawPlayerHP: ; 50b0a
 	push de
 	push hl
 	push hl
-	predef DrawBattleHPBar
+	call DrawBattleHPBar
 	pop hl
 
 ; Print HP
@@ -4715,19 +4715,15 @@ INCLUDE "data/items/names.asm"
 PrintKeyItemDescription:
 	ld hl, KeyItemDescriptions
 	ld a, [wCurKeyItem]
-	dec a
-	ld c, a
-	ld b, 0
 	jr PrintDescription
 PrintItemDescription: ; 0x1c8955
 ; Print the description for item [wCurSpecies] at de.
 	ld hl, ItemDescriptions
 	ld a, [wCurSpecies]
-	ld b, a
-	ld a, [wCurGroup]
-	ld c, a
 PrintDescription:
-	dec bc
+	dec a
+	ld c, a
+	ld b, 0
 	add hl, bc
 	add hl, bc
 	push de

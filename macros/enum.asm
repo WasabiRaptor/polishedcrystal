@@ -38,22 +38,6 @@ const: MACRO
 const_value = const_value + 1
 ENDM
 
-const_def_16: MACRO
-if _NARG >= 1
-const_value_16 = \1
-else
-const_value_16 = 0
-endc
-ENDM
-
-const_16: MACRO
-HIGH_\1 EQU HIGH(const_value_16)
-LOW_\1 EQU LOW(const_value_16)
-\1 EQU const_value_16
-const_value_16 = const_value_16 + 1
-ENDM
-
-
 shift_const: MACRO
 \1 EQU (1 << const_value)
 const_value = const_value + 1
@@ -70,14 +54,10 @@ GROUP_\1 EQU __enum__
 ENDM
 
 evolution: macro
-if \1 == EVOLVE_STAT
-	db \1, \2, \3, GROUP_\4, \4
-elseif \1 == EVOLVE_ITEM
-	db \1, HIGH_\2, LOW_\2, GROUP_\3, \3
-elseif \1 == EVOLVE_HOLDING
-	db \1, HIGH_\2, LOW_\2, GROUP_\3, \3
-else
+if _NARG < 4
 	db \1, \2, GROUP_\3, \3
+else 
+	db \1, \2, \3, GROUP_\4, \4
 endc
 endm
 ; Enumerate strings

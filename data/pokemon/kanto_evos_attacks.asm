@@ -2201,9 +2201,9 @@ Marowak_AlolaEvosAttacks:
     
 
 TyrogueEvosAttacks:
-	;evolution EVOLVE_STAT, 20, ATK_LT_DEF, HITMONCHAN
-	;evolution EVOLVE_STAT, 20, ATK_GT_DEF, HITMONLEE
-	;evolution EVOLVE_STAT, 20, ATK_EQ_DEF, HITMONTOP
+	evolution EVOLVE_STAT, 20, ATK_LT_DEF, HITMONCHAN
+	evolution EVOLVE_STAT, 20, ATK_GT_DEF, HITMONLEE
+	evolution EVOLVE_STAT, 20, ATK_EQ_DEF, HITMONTOP
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 1, RAGE ; Fake Out → event move

@@ -223,9 +223,10 @@ DayCareStep:: ; 7282
 	lb bc, 70, 88
 .got_odds
 	ld a, OVAL_CHARM
-	ld [wCurKeyItem], a
+	ld [wCurItem], a
 	push bc
-	call CheckKeyItem
+	;ld hl, wNumKeyItems
+	;call CheckItem
 	pop bc
 	jr nc, .no_oval_charm
 	ld b, c

@@ -134,7 +134,7 @@ wJumpStdScriptBuffer:: ds 15
 
 NEXTU
 ; item ball data
-wCurItemBallContents:: ds 2
+wCurItemBallContents:: ds 1
 wCurItemBallQuantity:: ds 1
 
 NEXTU
@@ -300,7 +300,6 @@ wCurIconMonHasItemOrMail:: ds 1
 
 wCurKeyItem::
 wCurTMHM::
-wCurApricorn::
 wCurItem::
 	ds 2
 wMartItemID::
@@ -1029,7 +1028,7 @@ wLuckyNumberShowFlag:: ds 2
 wLuckyIDNumber:: ds 2
 
 wRepelEffect:: ds 1 ; If a Repel is in use, it contains the nr of steps it's still active
-wRepelType:: ds 2
+wRepelType:: ds 1
 
 wBikeStep:: ds 2
 

@@ -165,20 +165,17 @@ PutItemInPocket: ; d29c
 	ld e, l
 	inc hl
 	ld a, [wCurItem]
-	ld b, a
-	ld a, [wCurItem+1]
 	ld c, a
+	ld b, 0
 .loop
 	ld a, [hli]
 	cp -1
 	jr z, .terminator
-	cp b
-	jr nz, .next
-	ld a, [hli]
 	cp c
-	jr nz, .next1
+	jr nz, .next
 	ld a, 99
 	sub [hl]
+	add b
 	ld b, a
 	ld a, [wItemQuantityChangeBuffer]
 	cp b
@@ -186,8 +183,6 @@ PutItemInPocket: ; d29c
 	jr c, .ok
 
 .next
-	inc hl
-.next1
 	inc hl
 	jr .loop
 
@@ -203,23 +198,16 @@ PutItemInPocket: ; d29c
 	ld h, d
 	ld l, e
 	ld a, [wCurItem]
-	ld b, a
-	ld a, [wCurItem+1]
 	ld c, a
 	ld a, [wItemQuantityChangeBuffer]
 	ld [wItemQuantityBuffer], a
 .loop2
 	inc hl
-.loop3
-	inc hl
 	ld a, [hli]
 	cp -1
 	jr z, .terminator2
-	cp b
-	jr nz, .loop2
-	ld a, [hli]
 	cp c
-	jr nz, .loop3
+	jr nz, .loop2
 	ld a, [wItemQuantityBuffer]
 	add [hl]
 	cp 100
@@ -237,8 +225,6 @@ PutItemInPocket: ; d29c
 	dec hl
 	ld a, [wCurItem]
 	ld [hli], a
-	ld a, [wCurItem+1]
-	ld [hli], a
 	ld a, [wItemQuantityBuffer]
 	ld [hli], a
 	ld [hl], -1
@@ -251,27 +237,21 @@ PutItemInPocket: ; d29c
 	ret
 
 RemoveItemFromPocket: ; d2ff
-	ld d, h ; nummber of items in pocket in de and hl
+	ld d, h
 	ld e, l
-	ld a, [hli] 
-	ld c, a ; number of items in pocket in c
-	ld a, [wCurItemQuantity] 
-	cp c 
+	ld a, [hli]
+	ld c, a
+	ld a, [wCurItemQuantity]
+	cp c
 	jr nc, .ok ; memory
-	ld c, a 
+	ld c, a
 	ld b, $0
-	add hl, bc ; not sure whats happening here but putting three because bag items are three bytes now
 	add hl, bc
-	add hl, bc ; I think its just checking if the item being removed is the last item in the pocket?
+	add hl, bc
 	ld a, [wCurItem]
-	cp [hl]
-	jr nz, .no_skip
-	inc hl
-	ld a, [wCurItem+1]
 	cp [hl]
 	inc hl
 	jr z, .skip
-.no_skip
 	ld h, d
 	ld l, e
 	inc hl
@@ -279,20 +259,12 @@ RemoveItemFromPocket: ; d2ff
 .ok
 	ld a, [wCurItem]
 	ld b, a
-	ld a, [wCurItem+1]
-	ld c, a
 .loop
 	ld a, [hli]
+	cp b
+	jr z, .skip
 	cp -1
 	jr z, .nope
-	cp b
-	jr nz, .no_skip1
-	ld a, [hli]
-	cp c
-	jr z, .skip
-	dec hl
-.no_skip1
-	inc hl
 	inc hl
 	jr .loop
 
@@ -331,21 +303,14 @@ RemoveItemFromPocket: ; d2ff
 
 CheckTheItem: ; d349
 	ld a, [wCurItem]
-	ld b, a
-	ld a, [wCurItem+1]
 	ld c, a
 .loop
 	inc hl
 	ld a, [hli]
 	cp -1
 	jr z, .done
-	cp b
-	inc hl
-	jr nz, .loop
-	ld a, [hl]
 	cp c
 	jr nz, .loop
-	dec hl
 	scf
 	ret
 
@@ -451,10 +416,8 @@ GetItemAttr: ; d460
 	ld [wItemAttributeParamBuffer], a
 
 	ld a, [wCurItem]
-	ld a, b
-	ld a, [wCurItem+1]
+	dec a
 	ld c, a
-	dec bc
 	ld a, NUM_ITEMATTRS
 	rst AddNTimes
 	ld a, BANK(ItemAttributes)
@@ -542,8 +505,6 @@ CountItemInPocket:
 	inc hl
 	ld a, [wCurItem]
 	ld d, a
-	ld a, [wCurItem+1]
-	ld e, a
 	lb bc, 0, 0
 .loop
 	ld a, [hli]
@@ -551,16 +512,11 @@ CountItemInPocket:
 	ret z
 	cp d
 	jr nz, .next
-	ld a, [hli]
-	cp e
-	jr nz, .next1
 	ld a, [hl]
 	add c
 	ld c, a
 	jr nc, .next
 	inc b
 .next
-	inc hl
-.next1
 	inc hl
 	jr .loop

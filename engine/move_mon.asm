@@ -270,7 +270,7 @@ endr
 	call Random
 	and a
 	jr nz, .not_shiny ; 255/256 not shiny
-	ld a, [wCurItem] ; for preservation
+	ld a, [wCurItem]
 	push af ; 2 ; cur item is pushed
 	ld a, SHINY_CHARM
 	ld [wCurKeyItem], a
@@ -283,7 +283,7 @@ endr
 	pop hl ;2 ; group popped
 	jr c, .shiny_charm
 	pop af ;1 cur item is popped
-	ld [wCurItem], a ; for preservation
+	ld [wCurItem], a
 	call Random
 	cp SHINY_NUMERATOR
 	jr nc, .not_shiny ; 240/256 still not shiny
@@ -292,7 +292,7 @@ endr
 	jr .got_shininess
 .shiny_charm
 	pop af ;1 ; item is popped, it can be this case or the other one, either way they are at the same value
-	ld [wCurItem], a ; for preservation
+	ld [wCurItem], a
 	call Random
 	cp CHARMED_SHINY_NUMERATOR
 	jr c, .shiny ; 208/256 still not shiny
@@ -2029,16 +2029,11 @@ GivePoke:: ; e277
 	ld a, [wCurItem]
 	and a
 	jr z, .personality
-	ld a, [wCurItem+1]
-	and a
-	jr z, .personality
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Item
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, [wCurItem]
-	ld [hli], a
-	ld a, [wCurItem+1]
 	ld [hl], a
 
 .personality
@@ -2086,13 +2081,8 @@ GivePoke:: ; e277
 	ld a, [wCurItem]
 	and a
 	jr z, .done
-	ld a, [wCurItem+1]
-	and a
-	jr z, .done
 	ld a, [wCurItem]
 	ld [sBoxMon1Item], a
-	ld a, [wCurItem+1]
-	ld [sBoxMon1Item+1], a
 
 .boxPersonality
 	ld a, [wCurPersonality]
@@ -2238,13 +2228,9 @@ GivePoke:: ; e277
 	ld a, [wGiftPokeBall]
 	and a
 	jr nz, .partygiftball
-	ld a, LOW_POKE_BALL
-	ld [wGiftPokeBall], a
+	ld a, POKE_BALL
 .partygiftball
-	ld a, HIGH_POKE_BALL ; poke balls should all have the same high bit
 	ld [wCurItem], a
-	ld a, [wGiftPokeBall]
-	ld [wCurItem+1], a
 	farcall SetCaughtData
 .set_caught_data
 	farcall GiveANickname_YesNo

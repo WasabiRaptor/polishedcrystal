@@ -367,7 +367,7 @@ BugContestResultsScript:
 	ifequal 2, .SecondPlace
 	ifequal 3, .ThirdPlace
 	copybytetovar wBugContestOfficerPrize
-	;itemtotext $0, $1
+	itemtotext $0, $1
 	farwritetext ContestResults_ConsolationPrizeText
 	buttonsound
 	waitsfx
@@ -387,7 +387,7 @@ BugContestResultsScript:
 .SecondPlace
 .ThirdPlace
 	copybytetovar wBugContestOfficerPrize
-	;itemtotext $0, $1
+	itemtotext $0, $1
 	farwritetext ContestResults_PlayerWonAPrizeText
 	waitbutton
 	copybytetovar wBugContestOfficerPrize
@@ -1723,7 +1723,7 @@ GameCornerCoinVendorScript: ; 0xbcdcd
 	opentext
 	farwritetext CoinVendor_WelcomeText
 	buttonsound
-	checkkeyitem COIN_CASE
+	checkitem COIN_CASE
 	iftrue CoinVendor_IntroScript
 	farwritetext CoinVendor_NoCoinCaseText
 	waitendtext

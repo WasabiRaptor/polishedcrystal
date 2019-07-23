@@ -5050,7 +5050,7 @@ endr
 	xor a
 	ld [wWhichHPBar], a
 	hlcoord 1, 2
-	predef DrawBattleHPBar
+	call DrawBattleHPBar
 
 	farcall LoadEnemyStatusIcon
 	hlcoord 2, 1
@@ -5277,18 +5277,14 @@ BattleMenu_SafariBall:
 	jr .got_item
 
 .safari
-	ld a, HIGH_SAFARI_BALL
+	ld a, SAFARI_BALL
 	ld [wCurItem], a
-	ld a, LOW_SAFARI_BALL
-	ld [wCurItem+1], a
 	call DoItemEffect
 	jr .got_item
 
 .contest
-	ld a, HIGH_PARK_BALL
+	ld a, PARK_BALL
 	ld [wCurItem], a
-	ld a, LOW_PARK_BALL
-	ld [wCurItem+1], a
 	call DoItemEffect
 
 .got_item
@@ -5785,11 +5781,8 @@ CheckRunSpeed:
 	push hl
 	push de
 	ld a, [wBattleMonItem]
-	ld [wNamedObjectIndexBuffer], a
+	ld [wd265], a
 	ld b, a
-	ld a, [wBattleMonItem+1]
-	ld [wNamedObjectIndexBuffer+1], a
-	ld c, a
 	farcall GetItemHeldEffect
 	ld a, b
 	cp HELD_ESCAPE
@@ -7046,7 +7039,7 @@ endc
 	call BattleRandom
 	and a
 	jr nz, .not_shiny ; 255/256 not shiny
-	ld a, [wCurItem] ; just preserving this
+	ld a, [wCurItem]
 	push af
 	ld a, SHINY_CHARM
 	ld [wCurKeyItem], a
@@ -7060,7 +7053,7 @@ endc
 	jr c, .shiny_charm
 
 	pop af
-	ld [wCurItem], a ; for presevation
+	ld [wCurItem], a
 	call BattleRandom
 	cp SHINY_NUMERATOR
 	jr nc, .not_shiny ; 240/256 still not shiny
@@ -7069,7 +7062,7 @@ endc
 	jr .got_shininess
 .shiny_charm
 	pop af
-	ld [wCurItem], a; for preservation 
+	ld [wCurItem], a
 	call BattleRandom
 	cp CHARMED_SHINY_NUMERATOR
 	jr c, .shiny ; 208/256 still not shiny
@@ -8075,10 +8068,7 @@ GiveBattleEVs:
 	; check held item
 	push bc
 	ld hl, wBattleMonItem
-	ld a, [hli]
-	ld b, a
-	ld a, [hld]
-	ld c, a
+	ld b, [hl]
 	farcall GetItemHeldEffect
 	ld a, b
 	cp HELD_EV_DOUBLE

@@ -54,4 +54,3 @@ PredefPointers::
 	add_predef DoKeyItemEffect
 	add_predef GetPartyMonGroupSpeciesAndForm
 	add_predef PokemonToGroupSpeciesAndForm
-	add_predef DrawBattleHPBar

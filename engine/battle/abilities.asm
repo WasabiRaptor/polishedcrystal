@@ -1480,30 +1480,19 @@ HarvestAbility:
 .ok
 	; Don't do anything if we have an item already
 	farcall GetUserItem
-	ld a, [hli]
+	ld a, [hl]
 	and a
 	ret nz
-	ld a, [hld]
-	and a
-	ret nz	
+
 	; Only Berries are picked
 	push hl
 	call GetUsedItemAddr
 	pop de
 	ld a, [hl]
 	and a
-	jr nz, .HasItem
-	inc hl
-	ld a, [hld]
-	and a
 	ret z
-.HasItem
-	ld a, [hli]
 	ld [wCurItem], a
 	ld b, a
-	ld a, [hld]
-	ld [wCurItem+1], a
-	ld c, a
 	push bc
 	push de
 	push hl
@@ -1517,14 +1506,10 @@ HarvestAbility:
 
 	; Kill the used item
 	xor a
-	ld [hli], a
 	ld [hl], a
 
 	; Pick up the item
 	ld a, b
-	ld [de], a
-	inc de
-	ld a, c
 	ld [de], a
 
 	ld hl, HarvestedItemText
@@ -1540,12 +1525,9 @@ PickupAbility:
 ; At end of turn, pickup consumed opponent items if we don't have any
 	; Don't do anything if we have an item already
 	farcall GetUserItem
-	ld a, [hli]
+	ld a, [hl]
 	and a
 	ret nz
-	ld a, [hld]
-	and a
-	ret nz	
 
 	; Does the opponent have a consumed item?
 	push hl
@@ -1553,38 +1535,25 @@ PickupAbility:
 	pop de
 	ld a, [hl]
 	and a
-	jr nz, .HasItem
-	inc hl
-	ld a, [hld]
-	and a
 	ret z
-.HasItem
-	ld a, [hli]
-	ld [wCurItem], a
-	ld b, a
-	ld a, [hld]
-	ld [wCurItem+1], a
-	ld c, a
 
 	; Pick up the item
-	ld a, b
-	ld [de], a
-	inc de
-	ld a, c
 	ld [de], a
 
 	; Kill the used item
+	ld b, a
 	xor a
-	ld [hli], a
 	ld [hl], a
+	ld a, b
 
 	ld hl, PickedItemText
 	; fallthrough
 RegainItemByAbility:
 	; Update party struct if applicable
-	push bc
+	ld [wNamedObjectIndexBuffer], a
+	push af
 	push hl
-	call GetCurItemName
+	call GetItemName
 	pop hl
 	call StdBattleTextBox
 	pop bc
@@ -1600,9 +1569,7 @@ RegainItemByAbility:
 	ld hl, wOTPartyMon1Item
 .got_item_addr
 	call GetPartyLocation
-	ld a, b
-	ld [hli], a
-	ld [hl], c
+	ld [hl], b
 	ret
 
 MoodyAbility:

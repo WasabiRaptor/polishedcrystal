@@ -189,7 +189,7 @@ writecode: macro
 	enum giveitem_command
 giveitem: macro
 	db giveitem_command
-	dw \1; item
+	db \1 ; item
 if _NARG == 2
 	db \2 ; quantity
 else
@@ -200,7 +200,7 @@ endc
 	enum takeitem_command
 takeitem: macro
 	db takeitem_command
-	dw \1; item
+	db \1 ; item
 if _NARG == 2
 	db \2 ; quantity
 else
@@ -211,7 +211,7 @@ endc
 	enum checkitem_command
 checkitem: macro
 	db checkitem_command
-	dw \1; item
+	db \1 ; item
 	endm
 
 	enum givemoney_command
@@ -290,7 +290,7 @@ givepoke: macro
 	db GROUP_\1
 	db \2 ; level
 	if _NARG >= 3
-	db HIGH_\3, LOW_\3; item
+	db \3 ; item
 	if _NARG >= 4
 	db \4 ; form and Gender
 	if _NARG >= 5
@@ -304,6 +304,9 @@ givepoke: macro
 	dw \9 ; pkmn_nickname
 	endc
 	else
+	db 0, 0
+	endc
+	else
 	db 0, 0, 0
 	endc
 	else
@@ -314,9 +317,6 @@ givepoke: macro
 	endc
 	else
 	db 0, 0, 0, 0, 0, 0
-	endc
-	else
-	db 0, 0, 0, 0, 0, 0, 0
 	endc
 
 	endm
@@ -436,7 +436,7 @@ pokenamemem: macro
 	enum itemtotext_command
 itemtotext: macro
 	db itemtotext_command
-	dw \1; item
+	db \1 ; item
 	db \2 ; memory
 	endm
 
@@ -976,7 +976,7 @@ checkphonecall: macro
 	enum verbosegiveitem_command
 verbosegiveitem: macro
 	db verbosegiveitem_command
-	dw \1; item
+	db \1 ; item
 if _NARG == 2
 	db \2 ; quantity
 else
@@ -987,7 +987,7 @@ endc
 	enum verbosegiveitem2_command
 verbosegiveitem2: macro
 	db verbosegiveitem2_command
-	dw \1; item
+	db \1 ; item
 	db \2 ; var
 	endm
 

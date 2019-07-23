@@ -135,7 +135,7 @@ PlacePartyHPBar: ; 500cf
 	call PlacePartymonHPBar
 	pop hl
 	ld d, $6
-	predef DrawBattleHPBar
+	call DrawBattleHPBar
 	ld hl, wHPPals
 	ld a, [wHPPalIndex]
 	ld c, a
@@ -415,36 +415,26 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 ; https://hax.iimarck.us/topic/4567/
 	pop bc
 	ld a, b ; bank
-	ld bc, $24 ; might as well just do as much as wStringBuffer1 can handle
+	ld bc, $10
 	call FarCopyBytes
 	ld hl, wStringBuffer1
 .loop2
 	ld a, [hli]
 	and a
 	jr z, .nope
-	cp EVOLVE_HOLDING
-	jr z, .loop3
-	cp EVOLVE_STAT
-	jr z, .loop3
+	inc hl
+	inc hl
 	cp EVOLVE_ITEM
-	jr nz, .loop3
+	jr nz, .loop2
+	dec hl
+	dec hl
 	ld a, [wCurItem]
 	cp [hl]
-	jr nz, .loop3
-	ld a, [wCurItem+1]
 	inc hl
-	cp [hl]
-	jr nz, .loop4
+	inc hl
+	jr nz, .loop2
 	ld de, .string_able
 	ret
-
-.loop3
-	inc hl
-.loop4
-	inc hl
-	inc hl
-	inc hl
-	jr .loop2
 
 .nope
 	ld de, .string_not_able

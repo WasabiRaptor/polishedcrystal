@@ -175,15 +175,7 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, [wCurItem]
 	cp b
-	jp nz, .dont_evolve_2
-
-	ld a, d ; bank
-	call GetFarByte
-	inc hl 
-	ld b, a
-	ld a, [wCurItem+1]
-	cp b
-	jp z, .dont_evolve_3
+	jp nz, .dont_evolve_3
 
 	ld a, [wForceEvolution]
 	and a
@@ -829,15 +821,11 @@ GetPreEvolution: ; 42581
 	inc hl
 	and a
 	jr z, .no_evolve ; If we jump, this Pokemon does not evolve into wCurPartySpecies.
-	cp EVOLVE_HOLDING
-	jr z, .five_byte_evo
-	cp EVOLVE_STAT
-	jr z, .five_byte_evo
-	cp EVOLVE_ITEM
-	jr nz, .four_byte_evo
-.five_byte_evo
+	cp EVOLVE_STAT ; This evolution type has the extra parameter of stat comparison.
+	jr nz, .not_tyrogue
 	inc hl
-.four_byte_evo
+
+.not_tyrogue
 	inc hl
 	ld a, [wCurPartyGroup]
 	ld b, a

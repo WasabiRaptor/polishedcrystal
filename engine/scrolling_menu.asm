@@ -82,8 +82,6 @@ ScrollingMenuJoyAction:
 	call PlaceHollowCursor
 	ld a, [wMenuSelection]
 	ld [wCurItem], a
-	ld a, [wMenuSelection+1]
-	ld [wCurItem+1], a
 	ld a, [wMenuSelectionQuantity]
 	ld [wItemQuantityBuffer], a
 	call ScrollingMenu_GetCursorPosition
@@ -531,11 +529,6 @@ ScrollingMenu_GetListItemCoordAndFunctionArgs:
 	inc hl
 	ld [wMenuSelection], a
 	ld [wCurItem], a
-	ld a, [wMenuData2_ItemsPointerBank]
-	call GetFarByte
-	inc hl
-	ld [wMenuSelection+1], a
-	ld [wCurItem+1], a
 	ld a, [wMenuData2_ItemsPointerBank]
 	call GetFarByte
 	ld [wMenuSelectionQuantity], a

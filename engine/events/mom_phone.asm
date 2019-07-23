@@ -141,7 +141,7 @@ Mom_GiveItemOrDoll: ; fd0c3
 
 .not_doll
 	ld a, [hl]
-	ld [wCurItem], a ; TODO make mom account for 16 bit items
+	ld [wCurItem], a
 	ld a, 1
 	ld [wItemQuantityChangeBuffer], a
 	ld hl, wNumPCItems
