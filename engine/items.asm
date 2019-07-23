@@ -184,7 +184,7 @@ PutItemInPocket: ; d29c
 	cp b
 	jr z, .ok
 	jr c, .ok
-
+	jr .next1
 .next
 	inc hl
 .next1
@@ -210,16 +210,16 @@ PutItemInPocket: ; d29c
 	ld [wItemQuantityBuffer], a
 .loop2
 	inc hl
-.loop3
-	inc hl
 	ld a, [hli]
 	cp -1
 	jr z, .terminator2
 	cp b
+	inc hl
 	jr nz, .loop2
+	dec hl
 	ld a, [hli]
 	cp c
-	jr nz, .loop3
+	jr nz, .loop2
 	ld a, [wItemQuantityBuffer]
 	add [hl]
 	cp 100
