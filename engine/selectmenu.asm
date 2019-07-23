@@ -18,7 +18,7 @@ ItemMayBeRegisteredText:
 
 
 CheckRegisteredItem:: ; 13345
-; Returns amount of registered items and z if none is. Populates wCurKeyItem
+; Returns amount of registered items and z if none is. Populates wCurItem
 ; with a valid registered item, useful if there's only a single one.
 	ld hl, wRegisteredItems
 	ld b, 4

@@ -531,7 +531,7 @@ PlaceMenuTMHMName:
 
 PlaceMenuApricornQuantity:
 	ld a, [wMenuSelection]
-	ld [wCurApricorn], a
+	ld [wCurItem], a
 	and a
 	ret nz
 	ld l, e
@@ -542,8 +542,6 @@ PlaceMenuItemQuantity: ; 0x24ac3
 	push de
 	ld a, [wMenuSelection]
 	ld [wCurItem], a
-	ld a, [wMenuSelection+1]
-	ld [wCurItem+1], a
 	farcall _CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	pop hl
@@ -2468,10 +2466,8 @@ CheckPartyFullAfterContest: ; 4d9e5
 	call GetPartyLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
-	ld a, HIGH_PARK_BALL
+	ld a, PARK_BALL
 	ld [wCurItem], a
-	ld a, LOW_PARK_BALL
-	ld [wCurItem+1], a
 	call SetCaughtData
 	ld a, [wPartyCount]
 	dec a
@@ -2590,7 +2586,7 @@ SetBoxmonOrEggmonCaughtData: ; 4db53
 	or b
 	ld b, a
 	; CaughtBall
-	ld a, [wCurItem+1]
+	ld a, [wCurItem]
 	and CAUGHTBALL_MASK
 	or b
 	ld [hli], a
@@ -2657,8 +2653,8 @@ SetEggMonCaughtData: ; 4dbb8 (13:5bb8)
 	push af
 	ld a, EGG_LEVEL
 	ld [wCurPartyLevel], a
-	ld a, LOW_POKE_BALL
-	ld [wCurItem+1], a
+	ld a, POKE_BALL
+	ld [wCurItem], a
 	call SetBoxmonOrEggmonCaughtData
 	pop af
 	ld [wCurPartyLevel], a
