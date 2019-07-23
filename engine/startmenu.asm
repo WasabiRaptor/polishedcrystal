@@ -690,7 +690,9 @@ CantUseItemText: ; 12a67
 
 PartyMonItemName: ; 12a6c
 	ld a, [wCurItem]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
+	ld a, [wCurItem+1]
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetItemName
 	jp CopyName1
 ; 12a79
@@ -894,30 +896,38 @@ TryGiveItemToPartymon: ; 12bd9
 	call GetPartyItemLocation
 	ld a, [hl]
 	and a
-	jr z, .give_item_to_mon
+	jr nz, .already_holding_item
+	inc hl
+	ld a, [hld]
+	and a
+	jr nz, .already_holding_item
 
-	ld d, a
-	ld a, [hl]
-	jr .already_holding_item
-
-.give_item_to_mon
 	call GiveItemToPokemon
 	ld hl, MadeHoldText
 	call MenuTextBoxBackup
 	jp GivePartyItem
 
 .already_holding_item
-	ld [wd265], a
+	ld a, [hli]
+	ld [wNamedObjectIndexBuffer], a
+	ld a, [hl]
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetItemName
 	ld hl, SwitchAlreadyHoldingText
 	call StartMenuYesNo
 	ret c
 
 	call GiveItemToPokemon
-	ld a, [wd265]
+	ld a, [wNamedObjectIndexBuffer]
+	push af
+	ld a, [wNamedObjectIndexBuffer+1]
 	push af
 	ld a, [wCurItem]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
+	ld a, [wCurItem+1]
+	ld [wNamedObjectIndexBuffer+1], a
+	pop af
+	ld [wCurItem+1], a
 	pop af
 	ld [wCurItem], a
 	call ReceiveItemFromPokemon
@@ -925,13 +935,17 @@ TryGiveItemToPartymon: ; 12bd9
 
 	ld hl, TookAndMadeHoldText
 	call MenuTextBoxBackup
-	ld a, [wd265]
+	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurItem], a
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wCurItem+1], a
 	jp GivePartyItem
 
 .bag_full
-	ld a, [wd265]
+	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurItem], a
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wCurItem+1], a
 	call ReceiveItemFromPokemon
 	ld hl, ItemStorageIsFullText
 	jp MenuTextBoxBackup
@@ -942,8 +956,9 @@ GivePartyItem: ; 12c4c
 
 	call GetPartyItemLocation
 	ld a, [wCurItem]
-	ld [hl], a
-	ld d, a
+	ld [hli], a
+	ld [wCurItem+1], a
+	ld [hld], a
 	ret
 ; 12c60
 
@@ -954,21 +969,32 @@ TakePartyItem: ; 12c60
 	call GetPartyItemLocation
 	ld a, [hl]
 	and a
-	jr z, .asm_12c8c
-
+	jr nz, .isHoldingItem
+	inc hl
+	ld a, [hld]
+	and a
+	jr z, .IsntHoldingAnything
+.isHoldingItem
+	ld a, [hli]
 	ld [wCurItem], a
+	ld a, [hld]
+	ld [wCurItem+1], a
 	call ReceiveItemFromPokemon
 	jr nc, .asm_12c94
 
 	call GetPartyItemLocation
-	ld a, [hl]
-	ld [wd265], a
-	ld [hl], NO_ITEM
+	ld a, [hli]
+	ld [wNamedObjectIndexBuffer], a
+	ld a, [hld]
+	ld [wNamedObjectIndexBuffer+1], a
+	xor a
+	ld [hli], a
+	ld [hl], a
 	call GetItemName
 	ld hl, TookFromText
 	jp MenuTextBoxBackup
 
-.asm_12c8c
+.IsntHoldingAnything
 	ld hl, IsntHoldingAnythingText
 	jp MenuTextBoxBackup
 
@@ -1077,7 +1103,7 @@ ComposeMailMessage: ; 12cfe (4:6cfe)
 	ld a, [wCurPartySpecies]
 	ld [de], a
 	inc de
-	ld a, [wCurItem]
+	ld a, [wCurItem] ; mail I have larely already removed I think
 	ld [de], a
 	ld a, [wCurPartyMon]
 	ld hl, sPartyMail
