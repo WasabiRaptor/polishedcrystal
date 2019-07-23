@@ -574,7 +574,7 @@ PokeBallEffect: ; e8a2
 	farcall SetCaughtData
 
 	ld a, [wCurItem+1]; pokeballs should all have the same high byte
-	cp FRIEND_BALL
+	cp LOW_FRIEND_BALL
 	jr nz, .SkipPartyMonFriendBall
 
 	ld a, [wPartyCount]
@@ -655,7 +655,7 @@ PokeBallEffect: ; e8a2
 	set 7, [hl]
 .BoxNotFullYet:
 	ld a, [wCurItem+1]; pokeballs should all have the same high byte
-	cp FRIEND_BALL
+	cp LOW_FRIEND_BALL
 	jr nz, .SkipBoxMonFriendBall
 	; Bug: overwrites the happiness of the first mon in the box!
 	ld a, FRIEND_BALL_HAPPINESS
