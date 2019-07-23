@@ -557,9 +557,8 @@ CountItemInPocket:
 	ld a, [hl]
 	add c
 	ld c, a
-	jr nc, .next1
+	jr nc, .next
 	inc b
-	dec hl
 .next
 	inc hl
 .next1
