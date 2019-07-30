@@ -148,6 +148,7 @@ INCLUDE "engine/player_object.asm"
 INCLUDE "engine/sine.asm"
 INCLUDE "data/predef_pointers.asm"
 INCLUDE "engine/trainer_scripts.asm"
+INCLUDE "engine/imported_sounds_pcm.asm"
 
 
 SECTION "Code 3", ROMX

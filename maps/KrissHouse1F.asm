@@ -116,6 +116,9 @@ TVScript:
 
 MomScript:	
 	opentext
+	playmusic MUSIC_NONE
+	callasm PlayWind1
+	special RestartMapMusic
 	givekeyitem BICYCLE 
 	;givepoke ZYGARDE_10, 5, SWEET_HONEY, TEN_PERCENT_ZYGARDE, CHERISH_BALL, HIDDEN_ABILITY
 	closetext

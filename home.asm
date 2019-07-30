@@ -1745,3 +1745,5 @@ Inc16BitNumInHL::
 	dec hl
 	inc [hl]
 	ret
+
+INCLUDE "home/imported_sounds.asm"

@@ -168,7 +168,7 @@ pkmndata.forEach((curpkmn, index) => {
         
         ; tm/hm learnset
         tmhm                                            
-        ; end`;
+        ; end\n`;
     fs.writeFileSync(outDir+curpkmn.identifier.replace(/-/g,"_")+".asm", baseStatData);
     console.log("Wrote " + curpkmn.identifier.replace(/-/g,"_")+".asm");
 });
