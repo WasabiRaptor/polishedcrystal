@@ -498,26 +498,23 @@ RecieverAbility:
 	ldh a, [hBattleTurn]
 	and a
 	ld bc, wPartyCount
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	jr z, .got_turn
 	ld bc, wOTPartyCount
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1Group
 .got_turn
 	ld a, [bc]
-	cp 1 ;make sure theres more than one mon in the party
+	dec a ;make sure theres more than one mon in the party
 	ret z
-	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, [wCurForm]
-	push af
-	ld a, [hl] ;species of last mon in party
+	push hl
+	predef PokemonToGroupSpeciesAndForm
+	pop hl
+	;species of last mon in party
 	ld c, a
 	push bc
-	ld bc, wPartyMon1Form - wPartyMon1Species
-	add hl, bc
-	predef GetVariant
-	ld bc, wPartyMon1Ability - wPartyMon1Form
+	ld bc, MON_ABILITY
 	add hl, bc
 	pop bc
 	ld a, [hl]
@@ -535,15 +532,22 @@ RecieverAbility:
 	ld [hl], a
 	ld hl, RecieverActivationText
 	call StdBattleTextBox
-	pop af
-	ld [wCurForm], a
+	ld a, [wCurBattleMon]
+	ld hl, wPartyMon1Group
+	jr z, .got_turn2
+	ld a, [wCurOTMon]
+	ld hl, wOTPartyMon1Group
+.got_turn2
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	predef PokemonToGroupSpeciesAndForm
 	jp RunActivationAbilitiesInner
 
 .trace_failure
 	pop af
-	ld [wCurForm], a
+	ld [wCurGroup], a
 	ret
-
+; TODO, return this to the state it was with forms
 
 RunPreMoveAbilities:
 	ld a, BATTLE_VARS_ABILITY
@@ -558,21 +562,15 @@ StanceChangeAbility:
 	jr z, .got_form
 	ld hl, wEnemyMonForm
 .got_form
-
 	ld a, BATTLE_VARS_MOVE_CATEGORY
 	call GetBattleVar
 	cp STATUS
+	ld a, [hl]
 	jr z, .status
 
-	predef GetVariant
-	cp BLADE_AEGISLASH
+	;cp AEGISLASH_BLADE
 	jr z, .popafandret
-	ld a, BLADE_AEGISLASH
-	ld [wCurForm], a
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or BLADE_AEGISLASH
-	ld [hl], a
+	;ld a, AEGISLASH_BLADE
 	jr .stanceChanged
 
 .popafandret
@@ -580,18 +578,16 @@ StanceChangeAbility:
 	ret
 
 .status
-	predef GetVariant
-	cp SHIELD_AEGISLASH
-	jr z, .popafandret
-	ld a, SHIELD_AEGISLASH
-	ld [wCurForm], a
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or SHIELD_AEGISLASH
-	ld [hl], a
+	;predef GetPokeGroup
+	;cp AEGISLASH_SHIELD
+	;jr z, .popafandret
+	;ld a, AEGISLASH_SHIELD
 	;fallthrough
 
 .stanceChanged
+	ld [hl], a
+	pop af
+	push af
 	jr nz,.enemyturn
 	call UpdateBattleMonInParty
 
@@ -1165,6 +1161,7 @@ PowerConstructAbility:
 	call CompareTwoBytes ; Check if bc < de
 	ret c
 
+;TODO return this to using forms
 	ldh a, [hBattleTurn]
 	and a
 	push af
@@ -1172,24 +1169,19 @@ PowerConstructAbility:
 	jr z, .got_form
 	ld hl, wEnemyMonForm
 .got_form
-	predef GetVariant
-	cp TEN_PERCENT_ZYGARDE
-	jr z, .ten
-	cp FIFTY_PERCENT_ZYGARDE
-	jr z, .fifty
-	jr .popafandret
+	;predef GetPokeGroup
+	;cp ZYGARDE_10
+	;jr z, .ten
+	;cp ZYGARDE_50
+	;jr z, .fifty
+	;jr .popafandret
 
 .ten
-	ld b, TEN_PERCENT_ZYGARDE_COMPLETE
+	;ld a, ZYGARDE_10_COMPLETE
 	jr .form_change
 .fifty
-	ld b, FIFTY_PERCENT_ZYGARDE_COMPLETE
+	;ld a, ZYGARDE_50_COMPLETE
 .form_change
-	ld a, b
-	ld [wCurForm], a
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or b
 	ld [hl], a
 
 	pop af
@@ -2054,9 +2046,10 @@ RunPostBattleAbilities::
 	ld a, MON_ABILITY
 	call GetPartyParamLocation
 	ld b, [hl]
-	ld a, MON_SPECIES
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	ld c, [hl]
+	ld a, [wCurSpecies]
+	ld c, a
 	farcall GetAbility
 	ld a, d
 	and $3f
@@ -2115,9 +2108,9 @@ RunPostBattleAbilities::
 	pop bc
 	push bc
 	push de
-	ld a, MON_SPECIES
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	ld a, [hl]
+	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, BattleText_PickedUpItem
@@ -2128,29 +2121,24 @@ RunPostBattleAbilities::
 
 .form_revert:
 	push bc
-	ld a, MON_FORM
-	call GetPartyParamLocation
-	predef GetVariant
-	cp BLADE_AEGISLASH
+	ld a, [wCurForm]
+	;cp AEGISLASH_BLADE
 	jr z, .aegislash
-	cp TEN_PERCENT_ZYGARDE_COMPLETE
+	;cp ZYGARDE_10_COMPLETE
 	jr z, .ten
-	cp FIFTY_PERCENT_ZYGARDE_COMPLETE
+	;cp ZYGARDE_50_COMPLETE
 	jr z, .fifty
 	ret
 
 .aegislash
-	ld b, SHIELD_AEGISLASH
+	;ld b, AEGISLASH_SHIELD
 	jr .revert
 .ten
-	ld b, TEN_PERCENT_ZYGARDE
+	;ld b, ZYGARDE_10
 	jr .revert
 .fifty
-	ld b, FIFTY_PERCENT_ZYGARDE
+	;ld b, ZYGARDE_50
 .revert
-	ld a, [hl]
-	and $ff - FORM_MASK
-	or b
 	ld [hl], a
 	farcall UpdatePkmnStats
 	pop bc

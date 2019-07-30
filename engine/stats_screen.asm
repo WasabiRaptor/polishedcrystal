@@ -73,7 +73,7 @@ StatsScreen_WaitAnim: ; 4dd3a (13:5d3a)
 .try_anim
 	farcall SetUpPokeAnim
 	jr nc, .finish
-	ld hl, wcf64
+	ld hl, wcf64 ; something with the pokeanim it seems
 	res 6, [hl]
 .finish
 	ld hl, wcf64
@@ -93,7 +93,7 @@ StatsScreen_Exit: ; 4dd6c (13:5d6c)
 	ret
 
 MonStatsInit: ; 4dd72 (13:5d72)
-	ld hl, wcf64
+	ld hl, wcf64 ; what is this for hm?
 	res 6, [hl]
 	call ClearBGPalettes
 	call ClearTileMap
@@ -168,13 +168,11 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	ld a, [wMonType]
 	cp BREEDMON
 	jr nz, .breedmon
-	ld hl, wBufferMonForm
-	predef GetVariant
-	ld a, [wBufferMon]
-	ld [wCurSpecies], a
+	ld hl, wBufferMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
-	ld hl, wBufferMon
-	ld de, wTempMon
+	ld hl, wBufferMonGroup ; hm but where is buffer mon set?
+	ld de, wTempMonGroup
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst CopyBytes
 	jr .done
@@ -326,7 +324,9 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	ld [hl], "№"
 	inc hl
 	ld [hl], "."
-	inc hl
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
+	call GetBaseData	
 	hlcoord 10, 0
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	ld de, wNatDexNo
@@ -762,14 +762,16 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 ; Ported by FredrIQ
 OrangePage_:
 	call TN_PrintToD
-	call TN_PrintLocation
 	call TN_PrintLV
+	call TN_PrintLocation
 	hlcoord 0, 11
 	ld de, .horizontal_divider
 	call PlaceString
 	hlcoord 1, 12
 	ld de, .ability
 	call PlaceString
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wTempMonAbility]
 	ld b, a
 	ld a, [wTempMonSpecies]
@@ -795,32 +797,40 @@ TN_PrintToD
 	call PlaceString
 	ld a, [wTempMonCaughtTime]
 	and CAUGHTTIME_MASK
-	ld de, .unknown
-	jr z, .print
+	;ld de, .unknown
+	;jr z, .print
 	rlca
 	rlca
 	rlca
-	cp 2
 	ld de, .morn
-	jr c, .print
+	jr z, .print
+	cp 2
 	ld de, .day
+	jr c, .print
+	ld de, .dusk
 	jr z, .print
 	ld de, .nite
 .print
 	hlcoord 3, 9
-	jp PlaceString
+	call PlaceString
+	ld h, b
+	ld l, c
+	ret
 
 .caughtat
 	db "Met/@"
 
 .morn
-	db "Morn@"
+	db "Dawn@"
 
 .day
 	db "Day@"
 
+.dusk
+	db "Dusk@"
+
 .nite
-	db "Nite@"
+	db "Night@"
 
 .unknown
 	db "???@"
@@ -844,7 +854,7 @@ TN_PrintLocation:
 
 TN_PrintLV:
 	ld a, [wTempMonCaughtLevel]
-	hlcoord 8, 9
+	inc hl
 	and a
 	jr z, .unknown
 	cp 1
@@ -854,7 +864,9 @@ TN_PrintLV:
 	call PlaceString
 	ld de, wBuffer2
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-	hlcoord 12, 9
+rept 4
+	inc hl
+endr
 	jp PrintNum
 .hatched
 	ld de, .str_hatched
@@ -966,8 +978,8 @@ INCLUDE "data/characteristics.asm"
 
 
 StatsScreen_PlaceFrontpic: ; 4e226 (13:6226)
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	call StatsScreen_GetAnimationParam
 	jr c, .egg
 	and a
@@ -1046,7 +1058,7 @@ StatsScreen_GetAnimationParam: ; 4e2ad (13:62ad)
 
 .PartyMon: ; 4e2bf (13:62bf)
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld b, h
@@ -1147,7 +1159,7 @@ EggStatsScreen: ; 4e33a
 	call SetPalettes ; pals
 	call DelayFrame
 	hlcoord 0, 0
-	call PrepMonFrontpic
+	call PrepEggFrontpic
 	farcall HDMATransferTileMapToWRAMBank3
 	call StatsScreen_AnimateEgg
 
@@ -1157,6 +1169,30 @@ EggStatsScreen: ; 4e33a
 	ld de, SFX_2_BOOPS
 	jp PlaySFX
 ; 0x4e3c0
+
+PrepEggFrontpic:
+	ld a, $1
+	ld [wBoxAlignment], a
+	push hl
+	ld de, VTiles2
+
+	;get the egg frontpic
+	ld a, $1
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	xor a
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	call GetBaseData
+	farcall GetOtherFrontpic
+	pop hl
+	xor a
+	ldh [hGraphicStartTile], a
+	lb bc, 7, 7
+	predef PlaceGraphic
+	xor a
+	ld [wBoxAlignment], a
+	ret
 
 EggString: ; 4e3c0
 	db   "Egg"
@@ -1204,7 +1240,7 @@ StatsScreen_AnimateEgg: ; 4e497 (13:6497)
 	ld [wBoxAlignment], a
 	call StatsScreen_LoadTextBoxSpaceGFX
 	ld de, VTiles2 tile $00
-	predef FrontpicPredef
+	farcall GetOtherFrontpicAnimated
 	pop de
 	hlcoord 0, 0
 	ld d, $0

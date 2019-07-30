@@ -1,16 +1,14 @@
 ; Graciously aped from http://nocash.emubase.de/pandocs.htm .
 
-; MBC3
-MBC3SRamEnable EQU $0000
-MBC3RomBank    EQU $2000
-MBC3SRamBank   EQU $4000
-MBC3LatchClock EQU $6000
-MBC3RTC        EQU $a000
+; MBC5
+MBC5SRamEnable EQU $0000
+MBC5RomBank    EQU $2000
+MBC5SRamBank   EQU $4000
 
 SRAM_DISABLE EQU $00
 SRAM_ENABLE  EQU $0a
 
-NUM_SRAM_BANKS EQU 4
+NUM_SRAM_BANKS EQU 16
 
 RTC_S  EQU $08 ; Seconds   0-59 (0-3Bh)
 RTC_M  EQU $09 ; Minutes   0-59 (0-3Bh)

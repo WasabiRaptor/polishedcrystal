@@ -218,7 +218,6 @@ ENDU
 
 ENDU
 
-	ds 12 ; unused
 
 wTMHMMoveNameBackup:: ds MOVE_NAME_LENGTH
 
@@ -296,19 +295,22 @@ wMailboxItems:: ds MAILBOX_CAPACITY
 wMailboxEnd:: ds 1
 ENDU
 
-	ds 5 ; unused
 
 wCurIconMonHasItemOrMail:: ds 1
 
 wCurKeyItem::
 wCurTMHM::
 wCurItem::
-	ds 1
+	ds 2
 wMartItemID::
 wCurItemQuantity::
 	ds 1
+
+wCurPartyGroup::
+	ds 1
 wCurPartySpecies::
 	ds 1
+
 wCurPartyMon::
 ; contains which monster in a party
 ; is being dealt with at the moment
@@ -374,9 +376,7 @@ wSpinning:: ds 1
 
 wBGMapAnchor:: ds 2
 
-	ds 63 ; unused
-
-wStairHandler:: db 
+wStairHandler:: ds 1 
 
 wOverworldMapAnchor:: ds 2
 wMetatileStandingY:: ds 1
@@ -482,9 +482,15 @@ wCurHPAnimHighHP:: ds 1
 NEXTU
 ; evolution data
 wEvolutionOldSpecies:: ds 1
+wEvolutionOldGroup:: ds 1
 wEvolutionNewSpecies:: ds 1
+wEvolutionNewGroup:: ds 1
 wEvolutionPicOffset:: ds 1
 wEvolutionCanceled:: ds 1
+
+NEXTU
+
+wEggMonInheritMoves:: ds 1
 
 NEXTU
 ; Magikarp length
@@ -505,8 +511,16 @@ NEXTU
 	ds 7
 wCurEnemyItem:: ds 1
 	ds 15
+
+wTempEnemyMon::
+wTempEnemyMonGroup:: ds 1
 wTempEnemyMonSpecies:: ds 1
+wTempEnemyMonForm:: ds 1
+
+wTempBattleMon::
+wTempBattleMonGroup:: ds 1
 wTempBattleMonSpecies:: ds 1
+wTempBattleMonForm:: ds 1
 
 ENDU
 
@@ -523,6 +537,7 @@ wBattleMode::
 	ds 1
 
 wTempWildMonSpecies:: ds 1
+wTempWildMonGroup:: ds 1
 
 wOtherTrainerClass::
 ; class (Youngster, Bug Catcher, etc.) of opposing trainer
@@ -549,7 +564,6 @@ wOtherTrainerID:: ds 1
 
 wTrainerClass:: ds 1
 
-	ds 1 ; unused
 
 wMoveSelectionMenuType:: ds 1
 ; 0: battle move selection
@@ -582,11 +596,14 @@ wBaseHiddenAbility:: ds 1
 wBaseGrowthRate:: ds 1
 wBaseEggGroups:: ds 1
 wBaseTMHM:: flag_array NUM_TMHMS
+wCurBaseDataEnd::
 
 wCurDamage:: ds 2
 
+wEncounterRates::
 wMornEncounterRate:: ds 1
 wDayEncounterRate:: ds 1
+wEveningEncounterRate:: ds 1
 wNiteEncounterRate:: ds 1
 wWaterEncounterRate:: ds 1
 
@@ -597,15 +614,6 @@ wPutativeTMHMMove:: ds 1
 wForgettingMove:: ds 1
 
 wBattleHasJustStarted:: ds 1
-
-wd265:: ; TODO: replace with meaningful labels
-wNamedObjectIndexBuffer::
-wCurKeyItemBuffer::
-wCurTMHMBuffer::
-wTypeMatchup::
-wFoundMatchingIDInParty::
-; usually 1 byte, may be up to 3 in some cases for wNamedObjectIndexBuffer
-	ds 3
 
 wMonTriedToEvolve:: ds 1
 
@@ -629,21 +637,6 @@ wOTPlayerID:: ds 2
 wOTPartyCount:: ds 1
 wOTPartySpecies:: ds PARTY_LENGTH + 1 ; legacy scripts don't check PartyCount
 
-UNION
-; catch tutorial dude bag
-wDudeBag::
-wDudeNumItems:: ds 1
-wDudeItems: ds 2 * 2
-wDudeItemsEnd:: ds 1
-wDudeNumMedicine:: ds 1
-wDudeMedicine:: ds 3 * 2
-wDudeMedicineEnd:: ds 1
-wDudeNumBalls:: ds 1
-wDudeBalls:: ds 2 * 2
-wDudeBallsEnd:: ds 1
-wDudeBagEnd::
-
-NEXTU
 ; OT party data
 wOTPartyMons::
 wOTPartyMon1:: party_struct wOTPartyMon1
@@ -656,7 +649,6 @@ wOTPartyMonsEnd::
 wOTPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH
 wOTPartyMonNicknames:: ds PKMN_NAME_LENGTH * PARTY_LENGTH
 wOTPartyDataEnd::
-ENDU
 
 wBattleAction:: ds 1
 wLinkBattleSentAction:: ds 1
@@ -716,8 +708,6 @@ wReceiveCallDelay_StartTime:: ds 3
 
 wBugContestMinsRemaining:: ds 1
 wBugContestSecsRemaining:: ds 1
-
-	ds 2 ; unused
 
 wMapStatusEnd::
 
@@ -832,7 +822,6 @@ wEnteredMapFromContinue:: ds 1
 wTimeOfDayPal:: ds 1
 	ds 4
 wTimeOfDayPalFlags:: ds 1
-wTimeOfDayPalset:: ds 1 ;UNUSED NOW THANK GOD
 wCurTimeOfDay:: ds 1
 
 wSecretID:: ds 2
@@ -880,19 +869,19 @@ wKeyItems:: flag_array NUM_KEY_ITEMS
 wKeyItemsEnd::
 
 wNumItems:: ds 1
-wItems:: ds MAX_ITEMS * 2 + 1
+wItems:: ds MAX_ITEMS * 3 + 1
 wItemsEnd::
 wNumMedicine:: ds 1
-wMedicine:: ds MAX_MEDICINE * 2 + 1
+wMedicine:: ds MAX_MEDICINE * 3 + 1
 wMedicineEnd::
 wNumBalls:: ds 1
-wBalls:: ds MAX_BALLS * 2 + 1
+wBalls:: ds MAX_BALLS * 3 + 1
 wBallsEnd::
 wNumBerries:: ds 1
-wBerries:: ds MAX_BERRIES * 2 + 1
+wBerries:: ds MAX_BERRIES * 3 + 1
 wBerriesEnd::
 wNumPCItems:: ds 1
-wPCItems:: ds MAX_PC_ITEMS * 2 + 1
+wPCItems:: ds MAX_PC_ITEMS * 3 + 1
 wPCItemsEnd::
 
 wApricorns:: ds NUM_APRICORNS
@@ -907,14 +896,12 @@ wPokegearFlags::
 wRadioTuningKnob:: ds 1
 wLastDexMode:: ds 1
 
-	ds 2 ; unused
 
 wPlayerState:: ds 1
 
 wHallOfFameCount:: ds 2
 wTradeFlags:: flag_array PARTY_LENGTH
 
-	ds 1 ; unused
 
 wMooMooBerries:: ds 1
 wUndergroundSwitchPositions:: ds 1
@@ -929,120 +916,8 @@ wPlayersHouse1FSceneID:: ds 1
 wMysteryDungeonNorthSouthEastWestSceneID:: ds 1
 
 ;unused
-wBattleTowerOutsideTrigger:: ds 1
-wBellchimeTrailTrigger:: ds 1
-wBrunosRoomTrigger:: ds 1
-wBurnedTower1FTrigger:: ds 1
-wBurnedTowerB1FTrigger:: ds 1
-wCeruleanCapeTrigger:: ds 1
-wCeruleanCave1FTrigger:: ds 1
-wCeruleanGymTrigger:: ds 1
-wCherrygroveCityTrigger:: ds 1
-wCianwoodCityTrigger:: ds 1
-wCinnabarLabTrigger:: ds 1
-wColosseumTrigger:: ds 1
-wDarkCaveVioletEntranceTrigger:: ds 1
-wDayCareTrigger:: ds 1
-wDragonsDenB1FTrigger:: ds 1
-wDragonShrineTrigger:: ds 1
-wEcruteakGymTrigger:: ds 1
-wEcruteakHouseTrigger:: ds 1
-wEcruteakPokecenter1FTrigger:: ds 1
-wElmsLabTrigger:: ds 1
-wFarawayIslandTrigger:: ds 1
-wFastShip1FTrigger:: ds 1
-wFastShipB1FTrigger:: ds 1
-wGiovannisCaveTrigger:: ds 1
-wGoldenrodCityTrigger:: ds 1
-wGoldenrodGymTrigger:: ds 1
-wGoldenrodMuseum1FTrigger:: ds 1
-wHallOfFameTrigger:: ds 1
-wIlexForestTrigger:: ds 1
-wKarensRoomTrigger:: ds 1
-wKogasRoomTrigger:: ds 1
-wKrissHouse1FTrigger:: ds 1
-wLancesRoomTrigger:: ds 1
-wLavenderTownTrigger:: ds 1
-wMahoganyMart1FTrigger:: ds 1
-wMahoganyTownTrigger:: ds 1
-wMountMoon1FTrigger:: ds 1
-wMrPokemonsHouseTrigger:: ds 1
-wMystriStageTrigger:: ds 1
-wNewBarkTownTrigger:: ds 1
-wOlivineCityTrigger:: ds 1
-wOlivinePortTrigger:: ds 1
-wPokeCenter2FTrigger:: ds 1
-wPokemonLeagueGateTrigger:: ds 1
-wPowerPlantTrigger:: ds 1
-wRadioTower5FTrigger:: ds 1
-wRoute10NorthTrigger:: ds 1
-wRoute23Trigger:: ds 1
-wRoute24Trigger:: ds 1
-wRoute27Trigger:: ds 1
-wRoute29Trigger:: ds 1
-wRoute32Trigger:: ds 1
-wRoute34Trigger:: ds 1
-wRoute35NationalParkGateTrigger:: ds 1
-wRoute36NationalParkGateTrigger:: ds 1
-wRoute36Trigger:: ds 1
-wRoute42Trigger:: ds 1
-wRoute43GateTrigger:: ds 1
-wRoute47Trigger:: ds 1
-wRoute48Trigger:: ds 1
-wRuinsOfAlphAerodactylChamberTrigger:: ds 1
-wRuinsOfAlphHoOhChamberTrigger:: ds 1
-wRuinsOfAlphInnerChamberTrigger:: ds 1
-wRuinsOfAlphKabutoChamberTrigger:: ds 1
-wRuinsOfAlphOmanyteChamberTrigger:: ds 1
-wRuinsOfAlphOutsideTrigger:: ds 1
-wRuinsOfAlphResearchCenterTrigger:: ds 1
-wSeagallopFerryNavelGateTrigger:: ds 1
-wSeagallopFerryShamoutiGateTrigger:: ds 1
-wSeagallopFerryVermilionGateTrigger:: ds 1
-wShamoutiHotelRestaurantTrigger:: ds 1
-wSproutTower3FTrigger:: ds 1
-wTeamRocketBaseB2FTrigger:: ds 1
-wTeamRocketBaseB3FTrigger:: ds 1
-wTinTower1FTrigger:: ds 1
-wTradeCenterTrigger:: ds 1
-wUndergroundPathSwitchRoomEntrancesTrigger:: ds 1
-wVermilionCityTrigger:: ds 1
-wVermilionPortTrigger:: ds 1
-wVictoryRoad2FTrigger:: ds 1
-wVioletGymTrigger:: ds 1
-wWillsRoomTrigger:: ds 1
-wWiseTriosRoomTrigger:: ds 1
-wYellowForestTrigger:: ds 1
+	ds 10 ; placeholder for later
 
-; fight counts
-wJackFightCount::    ds 1
-wBeverlyFightCount:: ds 1 ; unused
-wHueyFightCount::    ds 1
-wGavenFightCount::   ds 1
-wBethFightCount::    ds 1
-wJoseFightCount::    ds 1
-wReenaFightCount::   ds 1
-wJoeyFightCount::    ds 1
-wWadeFightCount::    ds 1
-wRalphFightCount::   ds 1
-wLizFightCount::     ds 1
-wAnthonyFightCount:: ds 1
-wToddFightCount::    ds 1
-wGinaFightCount::    ds 1
-wIrwinFightCount::   ds 1 ; unused
-wArnieFightCount::   ds 1
-wAlanFightCount::    ds 1
-wDanaFightCount::    ds 1
-wChadFightCount::    ds 1
-wDerekFightCount::   ds 1 ; unused
-wTullyFightCount::   ds 1
-wBrentFightCount::   ds 1
-wTiffanyFightCount:: ds 1
-wVanceFightCount::   ds 1
-wWiltonFightCount::  ds 1
-wKenjiFightCount::   ds 1 ; unused
-wParryFightCount::   ds 1
-wErinFightCount::    ds 1
 
 wEventFlags:: flag_array NUM_EVENTS
 
@@ -1051,8 +926,6 @@ wBoxNames:: ds BOX_NAME_LENGTH * NUM_BOXES
 wBoxNamesEnd::
 
 wCelebiEvent:: ds 1
-
-	ds 1 ; unused
 
 wOWState:: ds 2
 
@@ -1070,8 +943,6 @@ wCurrMapTriggerCount:: ds 1
 wCurrMapTriggerHeaderPointer:: ds 2
 wCurrMapCallbackCount:: ds 1
 wCurrMapCallbackHeaderPointer:: ds 2
-
-	ds 2 ; unused
 
 ; Sprite id of each decoration
 wBed:: ds 1
@@ -1133,9 +1004,7 @@ wYanmaMapNumber:: ds 1
 wVermilionGymTrashCan1:: ds 1
 wVermilionGymTrashCan2:: ds 1
 
-	ds 1 ; unused
-
-wCycleProgress:: db
+wCycleProgress:: ds 1
 ; 0 Nothing
 ; 1 Something is stirring...
 ; 2 Something is approaching...
@@ -1215,14 +1084,6 @@ wPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknames:: ds PKMN_NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknamesEnd::
 
-	ds 12 ; unused
-
-wPokedexCaught:: flag_array NUM_POKEMON
-wEndPokedexCaught::
-
-wPokedexSeen:: flag_array NUM_POKEMON
-wEndPokedexSeen::
-
 wUnownDex:: ds NUM_UNOWN
 wUnlockedUnowns:: ds 1
 
@@ -1279,18 +1140,6 @@ wBestMagikarpLengthMmHi:: ds 1
 wBestMagikarpLengthMmLo:: ds 1
 wMagikarpRecordHoldersName:: ds NAME_LENGTH
 
-wRegisteredItemFlags:: 
-	; 0 - wRegisteredItems key item flag 
-	; 1 - wRegisteredItems + 1 key item flag
-	; 2 - wRegisteredItems + 2 key item flag
-	; 3 - wRegisteredItems + 3 key item flag
-
-	; 4 - wRegisteredItems second item list flag
-	; 5 - wRegisteredItems + 1 second item list flag
-	; 6 - wRegisteredItems + 2 second item list flag
-	; 7 - wRegisteredItems + 3 second item list flag
-	ds 1
-
 wRegisteredItems::
 ; You can map 4 items, to select + directions
 	ds 4
@@ -1306,7 +1155,7 @@ wTempTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT ; 20x18 grid of 8x8 tiles
 ; PokeAnim Header
 wPokeAnimSceneIndex:: ds 1
 wPokeAnimPointer:: ds 2
-wPokeAnimSpecies:: ds 1
+wPokeAnimGroup:: ds 1
 wPokeAnimVariant:: ds 1
 wPokeAnimSpeciesOrVariant:: ds 1
 wPokeAnimGraphicStartTile:: ds 1
@@ -1464,13 +1313,105 @@ wBattleAnimEnd::
 	ds $e
 wSurfWaveBGEffectEnd::
 
-SECTION "Pokemon Encounters", WRAMX
+SECTION "Pokedex List", WRAMX
 
-wTotalEncounteredPokemonSpecies:: ds NUM_POKEMON * 2
-wTotalDefeatedPokemonSpecies:: ds NUM_POKEMON * 2
+wPokedexOrder:: ds (NUM_POKEMON * 2)
+wPokedexOrderEnd:: ds 12
+
+SECTION "Pokedex Caught And Seen", WRAMX
+
+wPokedexCaughtSeen::
+wPokedexCaught::
+
+wKantoPokedexCaught:: flag_array NUM_KANTO_POKEMON
+wKantoPokedexCaughtEnd::
+
+wJohtoPokedexCaught:: flag_array NUM_JOHTO_POKEMON
+wJohtoPokedexCaughtEnd::
+
+wHoennPokedexCaught:: flag_array NUM_HOENN_POKEMON
+wHoennPokedexCaughtEnd::
+
+wSinnohPokedexCaught:: flag_array NUM_SINNOH_POKEMON
+wSinnohPokedexCaughtEnd::
+
+wUnovaPokedexCaught:: flag_array NUM_UNOVA_POKEMON
+wUnovaPokedexCaughtEnd::
+
+wKalosPokedexCaught:: flag_array NUM_KALOS_POKEMON
+wKalosPokedexCaughtEnd::
+
+wAlolaPokedexCaught:: flag_array NUM_ALOLA_POKEMON
+wAlolaPokedexCaughtEnd::
+
+wGalarPokedexCaught:: flag_array NUM_GALAR_POKEMON
+wGalarPokedexCaughtEnd::
+
+wPokedexCaughtEnd::
+
+
+wPokedexSeen:: 
+
+wKantoPokedexSeen:: flag_array NUM_KANTO_POKEMON
+wKantoPokedexSeenEnd::
+
+wJohtoPokedexSeen:: flag_array NUM_JOHTO_POKEMON
+wJohtoPokedexSeenEnd::
+
+wHoennPokedexSeen:: flag_array NUM_HOENN_POKEMON
+wHoennPokedexSeenEnd::
+
+wSinnohPokedexSeen:: flag_array NUM_SINNOH_POKEMON
+wSinnohPokedexSeenEnd::
+
+wUnovaPokedexSeen:: flag_array NUM_UNOVA_POKEMON
+wUnovaPokedexSeenEnd::
+
+wKalosPokedexSeen:: flag_array NUM_KALOS_POKEMON
+wKalosPokedexSeenEnd::
+
+wAlolaPokedexSeen:: flag_array NUM_ALOLA_POKEMON
+wAlolaPokedexSeenEnd::
+
+wGalarPokedexSeen:: flag_array NUM_GALAR_POKEMON
+wGalarPokedexSeenEnd::
+
+wPokedexSeenEnd::
+wPokedexCaughtSeenEnd::
+
+
+SECTION "Encounter counters", WRAMX
+
+wTotalSavedEncounters::
+
+wTotalEncounteredKantoPokemonSpecies:: ds NUM_KANTO_POKEMON
+wTotalDefeatedKantoPokemonSpecies:: ds NUM_KANTO_POKEMON
+
+wTotalEncounteredJohtoPokemonSpecies:: ds NUM_JOHTO_POKEMON
+wTotalDefeatedJohtoPokemonSpecies:: ds NUM_JOHTO_POKEMON
+
+wTotalEncounteredHoennPokemonSpecies:: ds NUM_HOENN_POKEMON
+wTotalDefeatedHoennPokemonSpecies:: ds NUM_HOENN_POKEMON
+
+wTotalEncounteredSinnohPokemonSpecies:: ds NUM_SINNOH_POKEMON
+wTotalDefeatedSinnohPokemonSpecies:: ds NUM_SINNOH_POKEMON
+
+wTotalEncounteredUnovaPokemonSpecies:: ds NUM_UNOVA_POKEMON
+wTotalDefeatedUnovaPokemonSpecies:: ds NUM_UNOVA_POKEMON
+
+wTotalEncounteredKalosPokemonSpecies:: ds NUM_KALOS_POKEMON
+wTotalDefeatedKalosPokemonSpecies:: ds NUM_KALOS_POKEMON
+
+wTotalEncounteredAlolaPokemonSpecies:: ds NUM_ALOLA_POKEMON
+wTotalDefeatedAlolaPokemonSpecies:: ds NUM_ALOLA_POKEMON
+
+wTotalEncounteredGalarPokemonSpecies:: ds NUM_GALAR_POKEMON
+wTotalDefeatedGalarPokemonSpecies:: ds NUM_GALAR_POKEMON
+
 wTotalEncounters:: ds 2
 wTotalDefeated:: ds 2
-wTotalEncountersEnd::
+
+wTotalSavedEncountersEnd::
 
 wTotalEncountersThisCycle:: ds 2
 wTotalDefeatedThisCycle:: ds 2

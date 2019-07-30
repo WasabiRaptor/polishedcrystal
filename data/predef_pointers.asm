@@ -33,7 +33,6 @@ PredefPointers::
 	add_predef DrawPlayerHP
 	add_predef PrintTempMonStats
 	add_predef PrintMonTypes
-	add_predef GetVariant
 	add_predef Predef_LoadCGBLayout
 	add_predef _Area
 	add_predef Predef_StartBattle
@@ -53,3 +52,5 @@ PredefPointers::
 	add_predef PrintAbility
 	add_predef PrintAbilityDescription
 	add_predef DoKeyItemEffect
+	add_predef GetPartyMonGroupSpeciesAndForm
+	add_predef PokemonToGroupSpeciesAndForm

@@ -128,6 +128,28 @@ START_MONEY EQU 3000
 	ld [hl], START_MONEY / $100 % $100
 	inc hl
 	ld [hl], START_MONEY % $100
+
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wTotalEncounters)
+	ldh [rSVBK], a
+
+	ld hl, wTotalSavedEncounters
+	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
+	xor a
+	call ByteFill
+
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
+	ld hl, wPokedexCaughtSeen
+	ld bc, wPokedexCaughtSeenEnd - wPokedexCaughtSeen
+	xor a
+	call ByteFill
+
+	pop af
+	ldh [rSVBK], a
 	ret
 
 ResetWRAM: ; 5ba7
@@ -197,9 +219,6 @@ ResetWRAM: ; 5ba7
 	ld hl, wNumBerries
 	call _ResetWRAM_InitList
 
-	;ld hl, wNumKeyItems
-	;call _ResetWRAM_InitList
-
 	ld hl, wNumPCItems
 	call _ResetWRAM_InitList
 
@@ -238,8 +257,6 @@ endr
 
 	ld [wCoins], a
 	ld [wCoins + 1], a
-
-	ld [wRegisteredItemFlags], a
 
 	ld [wRegisteredItems], a
 	ld [wRegisteredItems + 1], a

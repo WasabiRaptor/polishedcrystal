@@ -198,17 +198,17 @@ UpdateNoRTC::
 
 	ld hl, hHours
 	ld a, [hl]
-	cp 6
-	ld b, CYCLE_SOMETHING_IS_STIRRING_EVENT
-	jr z, .updatecycleprogress
+	;cp 6
+	;ld b, CYCLE_SOMETHING_IS_STIRRING_EVENT
+	;jr z, .updatecycleprogress
 
-	cp 12
-	ld b, CYCLE_SOMETHING_IS_APPROACHING_EVENT
-	jr z, .updatecycleprogress
+	;cp 12
+	;ld b, CYCLE_SOMETHING_IS_APPROACHING_EVENT
+	;jr z, .updatecycleprogress
 
-	cp 18
-	ld b, CYCLE_ITS_GETTING_CLOSER_EVENT
-	jr z, .updatecycleprogress
+	;cp 18
+	;ld b, CYCLE_ITS_GETTING_CLOSER_EVENT
+	;jr z, .updatecycleprogress
 	ret
 
 .ingameDay
@@ -218,31 +218,33 @@ UpdateNoRTC::
 	ld a, [wCurDay]
 	inc a
 	ld [wCurDay], a
-	cp 7 ;use weekdays in allcaps or 0-6 here to test for actual days, if its 7 that means time is up
-	ld b, CYCLE_ITS_RIGHT_NEAR_EVENT
-	jr nc, .updatecycleprogress
-	cp SUNDAY
-	ld b, CYCLE_168_HOURS_REMAIN_EVENT
-	jr z, .updatecycleprogress
-	cp MONDAY
-	ld b, CYCLE_144_HOURS_REMAIN_EVENT
-	jr z, .updatecycleprogress
-	cp TUESDAY
-	ld b, CYCLE_120_HOURS_REMAIN_EVENT
-	jr z, .updatecycleprogress
-	cp WEDNESDAY
-	ld b, CYCLE_96_HOURS_REMAIN_EVENT
-	jr z, .updatecycleprogress
-	cp THURSDAY
-	ld b, CYCLE_72_HOURS_REMAIN_EVENT
-	jr z, .updatecycleprogress
-	cp FRIDAY
-	ld b, CYCLE_48_HOURS_REMAIN_EVENT
-	jr z, .updatecycleprogress
-	cp SATURDAY
-	ld b, CYCLE_24_HOURS_REMAIN_EVENT
-	ret nz
-.updatecycleprogress
-	ld a, b
-	ld [wCycleProgress], a
+	;cp 7 ;use weekdays in allcaps or 0-6 here to test for actual days, if its 7 that means time is up
+	;ld b, CYCLE_ITS_RIGHT_NEAR_EVENT
+	;jr nc, .updatecycleprogress
+	;cp SUNDAY
+	;ld b, CYCLE_168_HOURS_REMAIN_EVENT
+	;jr z, .updatecycleprogress
+	;cp MONDAY
+	;ld b, CYCLE_144_HOURS_REMAIN_EVENT
+	;jr z, .updatecycleprogress
+	;cp TUESDAY
+	;ld b, CYCLE_120_HOURS_REMAIN_EVENT
+	;jr z, .updatecycleprogress
+	;cp WEDNESDAY
+	;ld b, CYCLE_96_HOURS_REMAIN_EVENT
+	;jr z, .updatecycleprogress
+	;cp THURSDAY
+	;ld b, CYCLE_72_HOURS_REMAIN_EVENT
+	;jr z, .updatecycleprogress
+	;cp FRIDAY
+	;ld b, CYCLE_48_HOURS_REMAIN_EVENT
+	;jr z, .updatecycleprogress
+	;cp SATURDAY
+	;ld b, CYCLE_24_HOURS_REMAIN_EVENT
+	;ret nz
+;.updatecycleprogress
+	;ld a, b
+	;ld [wCycleProgress], a
 	ret
+
+; I'm going to overhaul how cycleprogress is handled

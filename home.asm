@@ -47,6 +47,54 @@ INCLUDE "home/window.asm"
 INCLUDE "home/flag.asm"
 INCLUDE "home/restore_music.asm"
 
+IsAPokemon::
+; Return carry if species a is not a Pokemon.
+	and a
+	jp z, .not_a_pokemon
+	push hl
+	push bc
+	push de
+	push af
+	call GetMaxNumPokemonForGroup
+	pop de
+	jr nc, .not_a_pokemon_2
+	cp d
+	jr c, .not_a_pokemon_2
+	ld a, d
+	and a
+	pop de
+	pop bc
+	pop hl
+	ret
+
+.not_a_pokemon_2
+	pop de
+	pop bc
+	pop hl
+.not_a_pokemon
+	scf
+	ret
+
+GetMaxNumPokemonForGroup::
+	ld a, [wCurGroup]
+	ld hl, RegionalMaxPokemonTable
+	ld de, 2
+	call IsInArray
+	inc hl
+	ld a, [hl]
+	ret
+
+RegionalMaxPokemonTable:
+	db GROUP_GENERATION_ONE, NUM_KANTO_POKEMON
+	db GROUP_GENERATION_TWO, NUM_JOHTO_POKEMON
+	db GROUP_GENERATION_THREE, NUM_HOENN_POKEMON
+	db GROUP_GENERATION_FOUR, NUM_SINNOH_POKEMON
+	db GROUP_GENERATION_FIVE, NUM_UNOVA_POKEMON
+	db GROUP_GENERATION_SIX, NUM_KALOS_POKEMON
+	db GROUP_GENERATION_SEVEN, NUM_ALOLA_POKEMON
+	db GROUP_GENERATION_EIGHT, NUM_GALAR_POKEMON
+	db -1, 0
+
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a
@@ -447,7 +495,7 @@ GetWeekday:: ; 3376
 INCLUDE "home/pokedex_flags.asm"
 
 NamesPointers:: ; 33ab
-	dba PokemonNames
+	dba KantoNames
 	dba MoveNames
 	dba ApricornNames
 	dba ItemNames
@@ -542,6 +590,8 @@ GetPokemonName:: ; 343b
 
 ; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
 ; returns c for variants, nc for normal species
+	ld a, [wCurGroup]
+
 	ld hl, VariantNamePointerTable
 	ld de, 4
 	call IsInArray
@@ -553,9 +603,6 @@ GetPokemonName:: ; 343b
 	ld l, a
 
 	ld a, [wNamedObjectIndexBuffer]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld bc, PKMN_NAME_LENGTH - 1
 	rst AddNTimes
@@ -1332,6 +1379,7 @@ Print8BitNumRightAlign:: ; 3842
 ; 384d
 
 GetRelevantBaseData::
+	ld a, [wCurGroup]
 ;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
 ; returns c for variants, nc for normal species
 	ld hl, VariantBaseDataTable
@@ -1354,18 +1402,10 @@ GetBaseData:: ; 3856
 	ldh a, [hROMBank]
 	push af
 
-; Egg doesn't have BaseData
-	ld a, [wCurSpecies]
-	cp EGG
-	jr z, .egg
-
 	call GetRelevantBaseData
 	push hl
 
-	ld a, [wCurForm]
-	jp c, .variant
 	ld a, [wCurSpecies]
-.variant
 	dec a
 	ld b, a
 	ld a, d
@@ -1387,14 +1427,6 @@ GetBaseData:: ; 3856
 	ld [wNatDexNo], a
 	ld a, d
 	ld [wNatDexNo + 1], a
-	jr .end
-
-.egg
-;; Sprite dimensions
-	ld a, $55 ; 5x5
-	ld [wBasePicSize], a
-
-.end
 	pop af
 	rst Bankswitch
 	pop hl
@@ -1427,7 +1459,7 @@ GetLeadAbility::
 	and IS_EGG_MASK
 	xor IS_EGG_MASK
 	ret z
-	ld a, [wPartyMon1Species]
+	ld a, [wPartyMon1Species] ;merely making sure that party mon 1 is a pokemon I guess
 	inc a
 	ret z
 	dec a
@@ -1435,9 +1467,8 @@ GetLeadAbility::
 	push bc
 	push de
 	push hl
-	ld [wCurSpecies], a
-	ld hl, wPartyMon1Form
-	predef GetVariant
+	ld hl, wPartyMon1Group
+	predef PokemonToGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	ld c, a
 	ld a, [wPartyMon1Ability]
@@ -1460,12 +1491,11 @@ GetAbility::
 	push hl
 	push bc
 
-	ld a, c
 	call GetRelevantBaseData
+	pop bc
+	push bc
 	ld a, c
-	jp nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
+
 	dec a
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
@@ -1608,6 +1638,9 @@ GetPartyParamLocation:: ; 3917
 	push bc
 	ld hl, wPartyMons
 PkmnParamLocation:
+	cp MON_GROUP_SPECIES_AND_FORM
+	jp z, .species_and_group
+
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -1615,6 +1648,14 @@ PkmnParamLocation:
 	call GetPartyLocation
 	pop bc
 	ret
+
+.species_and_group
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+	pop bc
+	ret
+
 ; 3927
 
 GetPartyLocation::

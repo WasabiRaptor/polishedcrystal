@@ -2387,7 +2387,7 @@ BattleCommand_hittargetnosub: ; 34f60
 	jr .fury_attack
 
 .fury_attack_users
-	db NIDORAN
+	db NIDORAN_F
 	db NIDORINO
 	db NIDOKING
 	db HERACROSS
@@ -3309,17 +3309,27 @@ BattleCommand_ragedamage:
 
 
 DittoMetalPowder: ; 352b1
-	ld a, MON_SPECIES
-	call UserPartyAttr
+	push bc
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
+	ld b, a
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
+
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
 	jr nz, .continue
+	
 	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+	ld b, a
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 
 .continue:
-	cp DITTO
-	ret nz
+	cppoke DITTO, .not_ditto
+	pop bc
 
 	push bc
 	call GetOpponentItem
@@ -3344,38 +3354,45 @@ DittoMetalPowder: ; 352b1
 	rr c
 	ret
 
+.not_ditto
+	pop bc
+	ret
 ; 352dc
 
 
 UnevolvedEviolite:
-	ld a, MON_SPECIES
-	call UserPartyAttr
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
+
+
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [hl]
 	jr nz, .continue
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 
 .continue:
-	ld [wCurPartySpecies], a
 	push hl
 	push bc
 	push de
-	farcall GetRelevantEvosAttacksPointers ;not sure if form is known
-	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
+	ld a, [wCurGroup]
+	farcall GetRelevantEvosAttacksPointers
+	ld a, [wCurPartySpecies] ;group is definetly known
 	dec a
 	ld c, a
 	ld b, 0
 	add hl, bc
 	add hl, bc
-	ld a, d
-	pop de
+	ld a, d ;bank
 	call GetFarHalfword
-	ld a, BANK(EvosAttacks)
+	ld a, d; bank
 	call GetFarByte
+	pop de
 	and a
 	pop bc
 	pop hl
@@ -3687,7 +3704,11 @@ ThickClubOrLightBallBoost: ; 353b5
 	and a
 	ld a, [hl]
 	jr z, .PlayerTurn
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 .PlayerTurn:
 	pop hl
 	cp 0 ;remove later
@@ -3728,17 +3749,22 @@ SpeciesItemBoost: ; 353d1
 	ld l, [hl]
 	ld h, a
 
-	push hl
-	ld a, MON_SPECIES
-	call UserPartyAttr
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
+
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [hl]
 	jr z, .CompareSpecies
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
-.CompareSpecies:
-	pop hl
+	ld [wCurSpecies], a
 
+.CompareSpecies:
+	ld a, [wCurSpecies]
 	cp b
 	jr z, .GetItemHeldEffect
 	cp c
@@ -8771,24 +8797,19 @@ BattleCommand_lowkick:
 	ld hl, wEnemyMonSpecies
 .got_species
 	ld a, [hl]
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, BANK(PokedexDataPointerTable)
-	call GetFarHalfword
+	farcall GetDexEntryPointer
+	ld a, b
 
 	; skip the pokémon "type" (seed for bulbasaur, genetic for mewtwo, etc)
 .loop
-	farcall GetPokedexEntryBank
+	ld a, b
 	call GetFarByte
 	inc hl
 	cp "@"
 	jr nz, .loop
 
 	; skip height by inc hl twice
-	farcall GetPokedexEntryBank
+	ld a, b
 	inc hl
 	inc hl
 	call GetFarHalfword ; now we have weight in hl

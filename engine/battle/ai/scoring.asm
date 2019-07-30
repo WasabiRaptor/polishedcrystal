@@ -2929,7 +2929,7 @@ AI_Status: ; 39453
 	and 1 << SUBSTATUS_DISGUISE_BROKEN
 	jr nz, .no_illusion
 	ld a, [wPartyCount]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	call GetIllusion
 	call PutBattleMonTypesIn
 .no_illusion
@@ -3126,19 +3126,20 @@ AI_CheckTypeMatchupAndBeFooledByIllusion:
 	and 1 << SUBSTATUS_DISGUISE_BROKEN
 	jr nz, .no_illusion
 	ld a, [wPartyCount]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	farcall GetIllusion
 	call PutBattleMonTypesIn
 .no_illusion
 	farcall BattleCheckTypeMatchup
 
-	ld a, [wBattleMonSpecies]
+	ld hl, wPartyMon1Group
+	ld a, [wCurBattleMon]
+	call GetPartyLocation
 	call PutBattleMonTypesIn
 	ret
 
 PutBattleMonTypesIn:
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a

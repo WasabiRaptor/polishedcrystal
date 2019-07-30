@@ -61,3 +61,46 @@ changebridgeblock: macro
 	; hard-coding the above calculation for efficiency
 	ld [hl], \3
 ENDM
+
+; INPUT
+; \1 = species
+; \2 = false
+; a = group
+; b = species
+cppoke: MACRO
+	cp GROUP_\1
+	jr nz, \2
+	ld a, b
+	cp \1
+	jr nz, \2
+ENDM
+
+; INPUT
+; \1 = species
+; \2 = false
+; hl = Pokemon
+cppokehl: MACRO
+	ld a, [hli]
+	cp GROUP_\1
+	jr nz, \2
+	ld a, [hl]
+	cp \1
+	jr nz, \2
+ENDM
+
+retpokehl: MACRO
+	ld a, [hli]
+ 	cp GROUP_\1
+	ret nz
+	ld a, [hl]
+	cp \1
+	ret nz
+ENDM
+
+retpoke: MACRO
+ 	cp GROUP_\1
+	ret nz
+	ld a, b
+	cp \1
+	ret nz
+ENDM

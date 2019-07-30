@@ -1063,18 +1063,15 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	jr nz, .row
 
 	call BillsPC_LoadMonStats
-	ld a, [wd265]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	xor a
 	ld [wBillsPC_MonHasMail], a
 	ld a, [wCurPartySpecies]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	cp EGG
 	ret z
 
@@ -1135,6 +1132,21 @@ BillsPC_LoadMonStats: ; e2b6d (38:6b6d)
 	call GetBoxPointer
 	ld a, b
 	call GetSRAMBank
+	; group, species, and item
+	push hl
+	ld bc, sBoxMon1Group - sBox
+	add hl, bc
+	ld bc, BOXMON_STRUCT_LENGTH
+	ld a, e
+	rst AddNTimes
+	ld a, [hli]
+	ld [wTempMonGroup], a
+	ld a, [hli]
+	ld [wTempMonSpecies], a
+	ld a, [hl]
+	ld [wTempMonItem], a
+	pop hl
+
 	; level
 	push hl
 	ld bc, sBoxMon1Level - sBox
@@ -1144,16 +1156,6 @@ BillsPC_LoadMonStats: ; e2b6d (38:6b6d)
 	rst AddNTimes
 	ld a, [hl]
 	ld [wTempMonLevel], a
-	pop hl
-	; item
-	push hl
-	ld bc, sBoxMon1Item - sBox
-	add hl, bc
-	ld bc, BOXMON_STRUCT_LENGTH
-	ld a, e
-	rst AddNTimes
-	ld a, [hl]
-	ld [wTempMonItem], a
 	pop hl
 	; DVs and personality (DVs for color variation)
 	push hl
@@ -1188,6 +1190,18 @@ endr
 	jp CloseSRAM
 
 .party
+	; group, species, and item
+	ld hl, wPartyMon1Group
+	ld bc, PARTYMON_STRUCT_LENGTH
+	ld a, e
+	rst AddNTimes
+	ld a, [hli]
+	ld [wTempMonGroup], a
+	ld a, [hli]
+	ld [wTempMonSpecies], a
+	ld a, [hl]
+	ld [wTempMonItem], a
+
 	; level
 	ld hl, wPartyMon1Level
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -1195,13 +1209,6 @@ endr
 	rst AddNTimes
 	ld a, [hl]
 	ld [wTempMonLevel], a
-	; item
-	ld hl, wPartyMon1Item
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld a, e
-	rst AddNTimes
-	ld a, [hl]
-	ld [wTempMonItem], a
 	; DVs and personality (DVs for color variation)
 	ld hl, wPartyMon1DVs
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -1216,7 +1223,7 @@ endr
 	ld a, [hl]
 	ld [bc], a
 	; moves (for Pikachu forms)
-	ld hl, wPartyMon1Item
+	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, e
 	rst AddNTimes
@@ -1233,6 +1240,18 @@ endr
 .sBox
 	ld a, BANK(sBox)
 	call GetSRAMBank
+
+	ld hl, sBoxMon1Group
+	ld bc, BOXMON_STRUCT_LENGTH
+	ld a, e
+	rst AddNTimes
+	ld a, [hli]
+	ld [wTempMonGroup], a
+	ld a, [hli]
+	ld [wTempMonSpecies], a
+	ld a, [hl]
+	ld [wTempMonItem], a
+
 	; level
 	ld hl, sBoxMon1Level
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -1240,13 +1259,6 @@ endr
 	rst AddNTimes
 	ld a, [hl]
 	ld [wTempMonLevel], a
-	; item
-	ld hl, sBoxMon1Item
-	ld bc, BOXMON_STRUCT_LENGTH
-	ld a, e
-	rst AddNTimes
-	ld a, [hl]
-	ld [wTempMonItem], a
 	; DVs and personality (DVs for color variation)
 	ld hl, sBoxMon1DVs
 	ld bc, BOXMON_STRUCT_LENGTH
@@ -1279,11 +1291,6 @@ BillsPC_RefreshTextboxes: ; e2c2c (38:6c2c)
 	hlcoord 8, 2
 	lb bc, 10, 10
 	call TextBox
-
-	hlcoord 8, 2
-	ld [hl], "└"
-	hlcoord 19, 2
-	ld [hl], "┘"
 
 	ld a, [wBillsPC_ScrollPosition]
 	ld e, a
@@ -1719,8 +1726,8 @@ StatsScreenDPad: ; e2f95 (38:6f95)
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	jp BillsPC_CopyMon
 
@@ -2112,7 +2119,7 @@ MovePKMNWitoutMail_InsertMon: ; e31e7
 	call CopyNicknameToTemp
 	ld hl, wPartyMonOT
 	call CopyOTNameToTemp
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call CopyMonToTemp
 	xor a

@@ -5,6 +5,7 @@ LoadWildMonData: ; 29ff8
 	xor a
 	ld [hli], a
 	ld [hli], a
+	ld [hli], a
 	ld [hl], a
 	jr .done_copy
 
@@ -12,7 +13,7 @@ LoadWildMonData: ; 29ff8
 	inc hl
 	inc hl
 	ld de, wMornEncounterRate
-	ld bc, 3
+	ld bc, 4
 	rst CopyBytes
 .done_copy
 	call _WaterWildmonLookup
@@ -76,7 +77,8 @@ FindNest: ; 2a01f
 	inc hl
 	inc hl
 	inc hl
-	ld a, NUM_GRASSMON * 3
+	inc hl
+	ld a, NUM_GRASSMON * 4
 	call .SearchMapForMon
 	jr nc, .next_grass
 	ld [de], a
@@ -118,7 +120,9 @@ FindNest: ; 2a01f
 	push af
 	ld a, [wNamedObjectIndexBuffer]
 	cp [hl]
+	inc hl
 	jr z, .found
+.notfound
 	inc hl
 	inc hl
 	pop af
@@ -128,6 +132,9 @@ FindNest: ; 2a01f
 	ret
 
 .found
+	ld a, [wCurGroup]
+	cp [hl]
+	jp nz, .notfound
 	pop af
 	; fallthrough
 
@@ -221,6 +228,7 @@ TryWildEncounter::
 .no_battle
 	xor a ; BATTLETYPE_NORMAL
 	ld [wTempWildMonSpecies], a
+	ld [wTempWildMonGroup], a
 	ld [wBattleType], a
 	ld a, 1
 	and a
@@ -315,10 +323,10 @@ _ChooseWildEncounter:
 	call LoadWildMonDataPointer
 	pop bc
 	jp nc, .nowildbattle
-	push bc
-	call CheckEncounterRoamMon
-	pop bc
-	jp c, .startwildbattle
+	;push bc
+	;call CheckEncounterRoamMon ; just gonna not worry about that for now
+	;pop bc
+	;jp c, .startwildbattle
 
 	inc hl
 	inc hl
@@ -331,13 +339,14 @@ _ChooseWildEncounter:
 	jr z, .got_table
 	inc hl
 	inc hl
+	inc hl
 	ld a, [wTimeOfDay]
 	push bc
-	ld bc, $e
+	ld bc, NUM_GRASSMON * 3
 	rst AddNTimes
 	pop bc
 	ld de, GrassMonProbTable
-	ld b, $c
+	ld b, (NUM_GRASSMON-1) *3
 
 .got_table
 	; Check if we want to force a type
@@ -352,6 +361,8 @@ _ChooseWildEncounter:
 	inc hl ; We don't care about level
 	ld a, [hli]
 	ld [wCurSpecies], a
+	ld a, [hli]
+	ld [wCurGroup], a
 	push bc
 	push hl
 	call GetBaseData
@@ -363,6 +374,7 @@ _ChooseWildEncounter:
 	ld a, [wBaseType2]
 	cp c
 	jr z, .can_force_type
+	dec b
 	dec b
 	dec b
 	jr nz, .force_loop
@@ -421,18 +433,22 @@ _ChooseWildEncounter:
 .ok
 	ld a, b
 	ld [wCurPartyLevel], a
-	ld b, [hl]
+	ld a, [hli]
+	ld b, a
+	ld a, [hl]
+	ld [wCurGroup], a
+	ld [wTempWildMonGroup], a
 	ld a, b
 	pop hl
 	call ValidateTempWildMonSpecies
 	jr c, .nowildbattle
 
-	cp UNOWN
-	jr nz, .unown_check_done
+	;cp UNOWN
+	;jr nz, .unown_check_done
 
-	ld a, [wUnlockedUnowns]
-	and a
-	jr z, .nowildbattle
+	;ld a, [wUnlockedUnowns]
+	;and a
+	;jr z, .nowildbattle
 
 .unown_check_done
 	; Check if we're forcing type
@@ -1035,11 +1051,12 @@ RandomPhoneRareWildMon: ; 2a4ab
 	ld b, $0
 	add hl, bc
 	add hl, bc
+	add hl, bc
 ; We now have the pointer to one of the last (rarest) three wild Pokemon found in that area.
 	inc hl
 	ld c, [hl] ; Contains the species index of this rare Pokemon
 	pop hl
-	ld de, 5 + 0 * 2
+	ld de, 5 + 0 * 3
 	add hl, de
 	inc hl ; Species index of the most common Pokemon on that route
 	ld b, 4

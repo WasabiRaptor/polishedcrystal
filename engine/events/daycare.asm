@@ -214,6 +214,8 @@ DayCare_TakeMoney_PlayCry: ; 16850
 	farcall TakeMoney
 	ld a, DAYCARETEXT_WITHDRAW
 	call PrintDayCareText
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a 
 	ld a, [wCurPartySpecies]
 	call PlayCry
 	ld a, DAYCARETEXT_TOO_SOON
@@ -741,20 +743,33 @@ DayCare_InitBreeding: ; 16a3b
 	ld hl, wEggOT
 	ld bc, NAME_LENGTH
 	call ByteFill
+	
+	ld a, [wBreedMon1Group]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld a, [wBreedMon1Gender]
 	ld [wTempMonGender], a
 	ld a, $3
 	ld [wMonType], a
+
 	ld a, [wBreedMon1Species]
-	cp DITTO
+	ld b, a
+	ld a, [wBreedMon1Group]
+	cppoke DITTO, .not_ditto_1
 	ld a, $1
-	jr z, .LoadWhichBreedmonIsTheMother
+	jr .LoadWhichBreedmonIsTheMother
+
+.not_ditto_1
 	ld a, [wBreedMon2Species]
-	cp DITTO
+	ld b, a
+	ld a, [wBreedMon2Group]
+	cppoke DITTO, .not_ditto_2
 	ld a, 0 ; not xor a; preserve carry flag
-	jr z, .LoadWhichBreedmonIsTheMother
+	jr .LoadWhichBreedmonIsTheMother
+
+.not_ditto_2
 	farcall GetGender
 	ld a, 0 ; not xor a; preserve carry flag
 	jr z, .LoadWhichBreedmonIsTheMother
@@ -763,27 +778,65 @@ DayCare_InitBreeding: ; 16a3b
 .LoadWhichBreedmonIsTheMother:
 	ld [wBreedMotherOrNonDitto], a
 	and a
+	ld a, [wBreedMon1Group]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wBreedMon1Species]
-	ld [wCurPartySpecies], a
-	jr z, .GotMother1
+	jr z, .GotMother
 
+	ld a, [wBreedMon2Group]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wBreedMon2Species]
+.GotMother:
 	ld [wCurPartySpecies], a
-	ld hl, wBreedMon2Form
-	jr .GotMother2
-.GotMother1:
-	ld hl, wBreedMon1Form
-.GotMother2:
-	predef GetVariant
-	ld a, [wCurPartySpecies]
 	farcall GetPreEvolution
 	farcall GetPreEvolution
 	ld a, EGG_LEVEL
 	ld [wCurPartyLevel], a
-	
+
+	ld a, [wCurPartyGroup]
+	cp GROUP_GENERATION_ONE
+	jr nz, .checkIllumiseVolbeat
+	ld a, [wCurPartySpecies]
+	cp NIDORAN_F
+	jr z, .NidoranFamilyMother ; the egg species is the input here, so we should only ever check for pokemon that even can be eggs
+	cp NIDORAN_M
+	jr nz, .GotEggSpecies
+.NidoranFamilyMother:
+	call Random
+	cp 1 + 50 percent
+	ld a, NIDORAN_F
+	jr c, .ChangeEggSpecies
+	ld a, NIDORAN_M
+	jr .ChangeEggSpecies
+
+.checkIllumiseVolbeat
+	ld a, [wCurPartyGroup]
+	cp GROUP_GENERATION_THREE
+	jr nz, .GotEggSpecies
+	ld a, [wCurPartySpecies]
+	cp ILLUMISE
+	jp z, .IllumiseVolbeatMother
+	cp VOLBEAT
+	jp nz, .GotEggSpecies
+.IllumiseVolbeatMother:
+	call Random
+	cp 1 + 50 percent
+	ld a, ILLUMISE
+	jr c, .ChangeEggSpecies
+	ld a, VOLBEAT
+	;fallthrough
+.ChangeEggSpecies:
+	ld [wCurPartySpecies], a
+.GotEggSpecies:
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	ld [wEggMonSpecies], a
+
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
+	ld [wEggMonGroup], a
 
 	call GetBaseData ;form is known
 
@@ -966,8 +1019,7 @@ DayCare_InitBreeding: ; 16a3b
 	push hl
 	push bc
 	push de
-	;ld hl, wNumKeyItems
-	;call CheckItem
+	call CheckKeyItem
 	pop de
 	pop bc
 	pop hl
@@ -1005,16 +1057,23 @@ DayCare_InitBreeding: ; 16a3b
 	ld a, 8
 	call RandomRange
 	ld b, a
+	push bc
+	push de
+	ld a, [wEggMonGroup]
+	ld [wCurGroup], a
+
+	call GetRelevantBaseData
 	ld a, [wEggMonSpecies]
 	dec a
-	push bc
-	ld hl, BASEMON_GENDER
+	ld bc, BASEMON_GENDER
+	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, BANK(BaseData)
+	ld a, d ; bank
 	call GetFarByte
 	swap a
 	and $f
+	pop de
 	pop bc
 	ld c, a
 	ld a, b
@@ -1078,6 +1137,13 @@ DayCare_InitBreeding: ; 16a3b
 	ret
 
 .inherit_mother_unless_samespecies
+	ld a, [wBreedMon1Group]
+	ld b, a
+	ld a, [wBreedMon2Group]
+	cp b
+	ld a, [wBreedMotherOrNonDitto]
+	jr nz, .use_mother
+
 	ld a, [wBreedMon1Species]
 	ld b, a
 	ld a, [wBreedMon2Species]

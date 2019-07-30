@@ -1,7 +1,5 @@
 ; Footprints are 2x2 tiles each but are stored as a 16x64-tile image
 ; (32 rows of 8 footprints per row).
-; That means there's a row of the top two tiles for eight footprints,
-; then a row of the bottom two tiles for those eight footprints.
 PokemonFootprints:
 INCBIN "gfx/footprints/eevee.1bpp"  
 INCBIN "gfx/footprints/vaporeon.1bpp"    

@@ -1,43 +1,38 @@
-GetVariant: ; 51040
-	ld a, [wCurPartySpecies]
-	;cp MEWTWO
-	;jp z, .GetMewtwoVariant
-
-; Return CurForm based on Form at hl
-	ld a, [hl]
+	
+GetPartyMonGroupSpeciesAndForm::
+	push hl
+	push bc
+	ld a, [hli]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [hl] ;Species
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	ld a, [hl]	;form
 	and FORM_MASK
 	ld [wCurForm], a
-	ret
-
-.GetMewtwoVariant:
-; Return Mewtwo form (1-2) in wCurForm
-; hl-9 is ...MonItem
-; hl is ...MonForm
-
-	push bc
-	ld bc, wTempMonForm
-	ld a, b
-	cp h
-	jr nz, .nottemp2
-	ld a, c
-	cp l
-	jr nz, .nottemp2
-	; skip wTempMonID through wTempMonSdfEV
-	ld bc, -11
-	add hl, bc
-.nottemp2
-	ld bc, -9
-	add hl, bc
 	pop bc
-
-	ld a, [hl]
-	cp ARMOR_SUIT
-	ld a, MEWTWO_ARMORED_FORM
-	jr z, .armored_mewtwo
-	dec a ; MEWTWO_PLAIN_FORM
-.armored_mewtwo
-	ld [wCurForm], a
+	pop hl
 	ret
+
+PokemonToGroupSpeciesAndForm::
+	push hl
+	push bc
+	ld a, [hli]
+	ld [wCurGroup], a
+	ld a, [hl] ;Species
+	ld [wCurSpecies], a
+	ld bc, wPartyMon1Form - wPartyMon1Species
+	add hl, bc
+	ld a, [hl]	;form
+	and FORM_MASK
+	ld [wCurForm], a
+	pop bc
+	pop hl
+	ret
+
 
 GetFrontpic: ; 51077
 	ld a, [wCurPartySpecies]
@@ -47,6 +42,29 @@ GetFrontpic: ; 51077
 	ldh a, [rSVBK]
 	push af
 	call _GetFrontpic
+	pop af
+	ldh [rSVBK], a
+	jp CloseSRAM
+
+GetOtherFrontpic:
+	ldh a, [rSVBK]
+	push af
+	call _GetFrontpic
+	pop af
+	ldh [rSVBK], a
+	jp CloseSRAM
+
+GetOtherFrontpicAnimated:
+	ldh a, [rSVBK]
+	push af
+	xor a
+	ldh [hBGMapMode], a
+	call _GetFrontpic
+	ld a, BANK(VTiles3)
+	ldh [rVBK], a
+	call GetAnimatedFrontpic
+	xor a
+	ldh [rVBK], a
 	pop af
 	ldh [rSVBK], a
 	jp CloseSRAM
@@ -107,13 +125,9 @@ _GetFrontpic: ; 510a5
 	ret
 
 GetFrontpicPointer: ; 510d7
-	ld a, [wCurPartySpecies]
+	ld a, [wCurGroup]
 	call GetRelevantPicPointers
 	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-
-.notvariant
 	dec a	
 	ld bc, 6
 	rst AddNTimes
@@ -220,28 +234,26 @@ LoadFrontpicTiles: ; 5114f
 	ret
 
 GetBackpic: ; 5116c
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ret c
 
 	ld a, [wCurPartySpecies]
 	ld b, a
-	ld a, [wCurForm]
+	ld a, [wCurPartyGroup]
 	ld c, a
 	ldh a, [rSVBK]
 	push af
 	ld a, $6
 	ldh [rSVBK], a
 	push de
-	ld a, b
+	ld a, c
 	push bc
 	call GetRelevantPicPointers
 	pop bc
 	ld a, b
-	jr nc, .notvariant
-	ld a, c
-
-.notvariant
 	dec a	
 	ld bc, 6
 	rst AddNTimes

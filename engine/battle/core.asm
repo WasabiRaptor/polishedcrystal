@@ -82,14 +82,15 @@ DoBattle: ; 3c000
 	ld [wLastPlayerMon], a
 	ld a, [wCurPartyMon]
 	ld [wCurBattleMon], a
-	inc a
-	ld hl, wPartySpecies - 1
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
-	ld [wCurPartySpecies], a
+
+	ld hl, wPartyMon1Group
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurPartyGroup]
+	ld [wTempBattleMonGroup], a
+	ld a, [wCurPartySpecies]
 	ld [wTempBattleMonSpecies], a
+	
 	call SlidePlayerPicOut
 	call LoadTileMapToTempTileMap
 	call ResetBattleParticipants
@@ -512,12 +513,15 @@ GetSpeed::
 	; Double speed, but only for Ditto
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wBattleMonSpecies
-	jr z, .got_species
-	ld hl, wEnemyMonSpecies
-.got_species
-	cp DITTO
-	jr nz, .done
+	ld a, [wBattleMonSpecies]
+	ld b, a
+	ld a, [wBattleMonGroup]
+	jr z, .got_species_and_group
+	ld a, [wEnemyMonSpecies]
+	ld b, a
+	ld a, [wEnemyMonGroup]
+.got_species_and_group
+	cppoke DITTO, .done
 	ld a, $21
 .apply_item_mod
 	call ApplyDamageMod
@@ -2239,6 +2243,8 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld [wBattleResult], a
 ; fallthrough
 
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld c, a
 
@@ -2249,11 +2255,13 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 
 	dec c
 	ld b, 0
-	ld hl, wTotalDefeatedPokemonSpecies+1
+	call GetRelevantTotalDefeatedPokemonSpeciesPointer
 	add hl, bc
-	add hl, bc
-	call Inc16BitNumInHL
-
+	ld a, [hl]
+	inc a
+	jr z, .overflow
+	ld [hl], a
+.overflow
 	ld hl, wTotalDefeated+1
 	call Inc16BitNumInHL
 
@@ -2362,6 +2370,8 @@ FaintYourPokemon: ; 3cef1
 	call WaitSFX
 	ld a, $f0
 	ld [wCryTracks], a
+	ld a, [wBattleMonGroup]
+	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -2379,6 +2389,8 @@ FaintEnemyPokemon: ; 3cf14
 	call WaitSFX
 	ld a, $f
 	ld [wCryTracks], a
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -3372,39 +3384,42 @@ LoadEnemyPkmnToSwitchTo:
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, [wCurPartyMon]
+	push af
 	inc a
-	ld hl, wOTPartyCount
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [hl]
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	call GetEnemyPartyParamLocation
+	pop af
+	ld [wCurPartyMon], a
+	ld a, [wCurPartyGroup]
+	ld [wTempEnemyMonGroup], a
+	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
-	ld [wCurPartySpecies], a
 	call LoadEnemyMon
 
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .skip_unown
-	ld a, [wFirstUnownSeen]
-	and a
-	jr nz, .skip_unown
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	ld a, [wCurForm]
-	ld [wFirstUnownSeen], a
-.skip_unown
+	;ld a, [wCurPartySpecies]
+	;cp UNOWN
+	;jr nz, .skip_unown
+	;ld a, [wFirstUnownSeen]
+	;and a
+	;jr nz, .skip_unown
+	;ld hl, wEnemyMonGroup
+	;predef GetPokeGroup
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstUnownSeen], a
+;.skip_unown
 
-	ld a, [wCurPartySpecies]
-	cp MAGIKARP
-	jr nz, .skip_magikarp
-	ld a, [wFirstMagikarpSeen]
-	and a
-	jr nz, .skip_magikarp
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	ld a, [wCurForm]
-	ld [wFirstMagikarpSeen], a
-.skip_magikarp
+	;ld a, [wCurPartySpecies]
+	;cp MAGIKARP
+	;jr nz, .skip_magikarp
+	;ld a, [wFirstMagikarpSeen]
+	;and a
+	;jr nz, .skip_magikarp
+	;ld hl, wEnemyMonGroup
+	;predef GetPokeGroup
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstMagikarpSeen], a
+;.skip_magikarp
 
 	ld hl, wEnemyMonHP
 	ld a, [hli]
@@ -3441,6 +3456,8 @@ FinalPkmnMusicAndAnimation:
 	pop de
 .no_music
 	; ...show their sprite and final dialog...
+	ld a, [wTempEnemyMonGroup]
+	push af
 	ld a, [wTempEnemyMonSpecies]
 	push af
 	call BattleWinSlideInEnemyTrainerFrontpic
@@ -3448,6 +3465,8 @@ FinalPkmnMusicAndAnimation:
 	call StdBattleTextBox
 	pop af
 	ld [wTempEnemyMonSpecies], a
+	pop af
+	ld [wTempEnemyMonGroup], a
 	; ...and return the Pokémon
 	call EmptyBattleTextBox
 	call ApplyTilemapInVBlank
@@ -3564,8 +3583,9 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	call GetBaseData ;form is known 
 	ld a, OTPARTYMON
 	ld [wMonType], a
@@ -3587,7 +3607,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	call Call_PlayBattleAnim
 .not_shiny
 
-	ld bc, wTempMonSpecies
+	ld bc, wTempMonGroup
 	farcall CheckFaintedFrzSlp
 	jr c, .skip_cry
 	farcall CheckBattleEffects
@@ -3595,12 +3615,17 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 
 	ld a, [wCurPartySpecies]
 	push af
+	ld a, [wCurPartyGroup]
+	push af
 
 	call GetEnemyIllusion
 
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_SLOW
 	predef AnimateFrontpic
+
+	pop af
+	ld [wCurPartyGroup], a
 	pop af
 	ld [wCurPartySpecies], a
 	jr .skip_cry
@@ -3608,6 +3633,8 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 .cry_no_anim
 	ld a, $f
 	ld [wCryTracks], a
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	call PlayStereoCry
 
@@ -3643,6 +3670,8 @@ NewEnemyMonStatus: ; 3d834
 ; 3d867
 
 ResetPlayerAbility:
+	ld a, [wBattleMonGroup]
+	ld [wCurGroup], a
 	ld a, [wBattleMonAbility]
 	ld b, a
 	ld a, [wBattleMonSpecies]
@@ -3666,6 +3695,8 @@ ResetPlayerAbility:
 	ret
 
 ResetEnemyAbility:
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonAbility]
 	ld b, a
 	ld a, [wEnemyMonSpecies]
@@ -3751,10 +3782,10 @@ CheckIfCurPartyMonIsFitToFight: ; 3d887
 
 
 InitBattleMon: ; 3da0d
-	ld a, MON_SPECIES
+	ld a, MON_GROUP
 	call GetPartyParamLocation
-	ld de, wBattleMonSpecies
-	ld bc, MON_ID - MON_SPECIES
+	ld de, wBattleMonGroup
+	ld bc, MON_ID - MON_GROUP
 	rst CopyBytes ; copy Species, Item, Moves
 	ld bc, MON_DVS - MON_ID
 	add hl, bc ; skip ID, Exp, EVs
@@ -3766,28 +3797,19 @@ InitBattleMon: ; 3da0d
 	ld de, wBattleMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
 	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
+	ld a, [wBattleMonGroup]
+	ld [wTempBattleMonGroup], a
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld [wTempBattleMonSpecies], a
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-	ld hl, wBattleMonForm
-	predef GetVariant
 	call GetBaseData ;form is known
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a
 	ld a, [wBaseType2]
 	ld [wBattleMonType2], a
-
-	; Armored Mewtwo is Psychic/Steel
-	ld a, [wBattleMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wBattleMonItem]
-	cp ARMOR_SUIT
-	jr nz, .not_armored_mewtwo
-	ld a, STEEL
-	ld [wBattleMonType2], a
-.not_armored_mewtwo
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
@@ -3858,10 +3880,10 @@ ResetPlayerStatLevels: ; 3dab1
 
 InitEnemyMon: ; 3dabd
 	ld a, [wCurPartyMon]
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1Group
 	call GetPartyLocation
-	ld de, wEnemyMonSpecies
-	ld bc, MON_ID - MON_SPECIES
+	ld de, wEnemyMonGroup
+	ld bc, MON_ID - MON_GROUP
 	rst CopyBytes ; copy Species, Item, Moves
 	ld bc, MON_DVS - MON_ID
 	add hl, bc ; skip ID, Exp, EVs
@@ -3873,10 +3895,10 @@ InitEnemyMon: ; 3dabd
 	ld de, wEnemyMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
 	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
@@ -3906,18 +3928,6 @@ InitEnemyMon: ; 3dabd
 	ld a, [hl]
 	ld [de], a
 
-if !DEF(FAITHFUL)
-	; Armored Mewtwo is Psychic/Steel
-	ld a, [wEnemyMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wEnemyMonItem]
-	cp ARMOR_SUIT
-	jr nz, .not_armored_mewtwo
-	ld a, STEEL
-	ld [wEnemyMonType2], a
-.not_armored_mewtwo
-endc
 
 	ld hl, wBaseStats
 	ld de, wEnemyMonBaseStats
@@ -3956,8 +3966,9 @@ ForcePlayerSwitch: ; 3db32
 
 
 SendOutPlayerMon: ; 3db5f
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	call GetPartyParamLocation
+
 	hlcoord 1, 5
 	lb bc, 7, 8
 	call ClearBox
@@ -3993,7 +4004,7 @@ SendOutPlayerMon: ; 3db5f
 	call Call_PlayBattleAnim
 
 .not_shiny
-	ld a, MON_SPECIES
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
 	ld b, h
 	ld c, l
@@ -4310,6 +4321,8 @@ PursuitSwitch: ; 3dc5b
 
 	ld a, $f0
 	ld [wCryTracks], a
+	ld a, [wBattleMonGroup]
+	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -4328,6 +4341,8 @@ PursuitSwitch: ; 3dc5b
 
 	ld a, $f
 	ld [wCryTracks], a
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld b, a
 	farcall PlayFaintingCry
@@ -4865,14 +4880,9 @@ endr
 	ld bc, $0011
 	rst CopyBytes
 	ld a, [wCurBattleMon]
-	ld hl, wPartyMon1Species
-	call GetPartyLocation
-	ld a, [hl]
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
-	ld bc, MON_FORM - MON_SPECIES
-	add hl, bc
-	predef GetVariant
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	call GetPartyParamLocation
 	call GetBaseData ;form is known
 
 	pop hl
@@ -4927,11 +4937,12 @@ DrawEnemyHUD: ; 3e043
 
 	farcall DrawEnemyHUDBorder
 
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
+	ld [wCurPartyGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
 	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
@@ -5254,8 +5265,6 @@ BattleMenu_SafariBall:
 	call LoadStandardMenuDataHeader
 
 	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .tutorial
 	cp BATTLETYPE_CONTEST
 	jr z, .contest
 	cp BATTLETYPE_SAFARI
@@ -5265,13 +5274,6 @@ BattleMenu_SafariBall:
 	ld a, [wBattlePlayerAction]
 	and a
 	jr z, .didnt_use_item
-	jr .got_item
-
-.tutorial
-	farcall TutorialPack
-	ld a, POKE_BALL
-	ld [wCurItem], a
-	call DoItemEffect
 	jr .got_item
 
 .safari
@@ -6746,6 +6748,37 @@ LinkBattleSendReceiveAction: ; 3e8e4
 	and $0f
 	ret
 ; 3e8eb
+GetRelevantTotalEncounterdPokemonSpeciesPointer:
+	push bc
+	push de
+	ld a, [wCurGroup]
+	ld hl, EncounterCounterPointerTable
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop de
+	pop bc
+	ret
+
+GetRelevantTotalDefeatedPokemonSpeciesPointer:
+	push bc
+	push de
+	ld a, [wCurGroup]
+	ld hl, DefeatedCounterPointerTable
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop de
+	pop bc
+	ret
+
+INCLUDE "data/pokemon/regional_encounter_counter_pointer_table.asm"
 
 LoadEnemyMon: ; 3e8eb
 ; Initialize enemy monster parameters
@@ -6756,7 +6789,7 @@ LoadEnemyMon: ; 3e8eb
 
 	; Clear the whole wEnemyMon struct
 	xor a
-	ld hl, wEnemyMonSpecies
+	ld hl, wEnemyMonGroup
 	ld bc, wEnemyMonEnd - wEnemyMon
 	call ByteFill
 
@@ -6770,6 +6803,10 @@ LoadEnemyMon: ; 3e8eb
 	jr nz, .initenemymon
 
 	; Make sure everything knows what species we're working with
+	ld a, [wTempEnemyMonGroup]
+	ld [wEnemyMonGroup], a
+	ld [wCurGroup], a
+	ld [wCurPartySpecies], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wEnemyMonSpecies], a
 	ld [wCurSpecies], a
@@ -6789,12 +6826,16 @@ LoadEnemyMon: ; 3e8eb
 	push af
 	ld a, BANK(wTotalEncounters)
 	ldh [rSVBK], a
+
 	dec c
 	ld b, 0
-	ld hl, wTotalEncounteredPokemonSpecies+1
+	call GetRelevantTotalEncounterdPokemonSpeciesPointer
 	add hl, bc
-	add hl, bc
-	call Inc16BitNumInHL
+	ld a, [hl]
+	inc a
+	jr z, .overflow
+	ld [hl], a
+.overflow
 
 	ld hl, wTotalEncounters+1
 	call Inc16BitNumInHL
@@ -6805,15 +6846,8 @@ LoadEnemyMon: ; 3e8eb
 	pop af
 	ldh [rSVBK], a
 
-	;check if the map should have a certain pokemon form
-	ld a, [wMapGroup]
-	;cp GROUP_LAKE_OF_RAGE
-	;jr nz, .NoAlolanForms
-	ld a, ALOLAN
-	ld [wCurForm], a
-.NoAlolanForms
 	; Grab the BaseData for this species
-	call GetBaseData ;form is known
+	call GetBaseData ;form is known for trainer pokemon
 
 	ld a, [wBaseExp]
 	ld [wEnemyMonBaseExp], a
@@ -6822,6 +6856,8 @@ LoadEnemyMon: ; 3e8eb
 	dec a
 .initenemymon
 	jp nz, InitEnemyMon
+
+	call GetBaseData ;form is known 
 
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
@@ -6975,6 +7011,8 @@ endc
 	push hl
 	push bc
 	ld b, a ; still the ability index, 1/2/hidden
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld c, a
 	call GetAbility
@@ -7004,16 +7042,16 @@ endc
 	ld a, [wCurItem]
 	push af
 	ld a, SHINY_CHARM
-	ld [wCurItem], a
+	ld [wCurKeyItem], a
 	push hl
 	push bc
 	push de
-	;ld hl, wNumKeyItems
-	;call CheckItem
+	call CheckKeyItem
 	pop de
 	pop bc
 	pop hl
 	jr c, .shiny_charm
+
 	pop af
 	ld [wCurItem], a
 	call BattleRandom
@@ -7061,15 +7099,21 @@ endc
 	; We need the gender ratio to do anything with this.
 	push hl
 	push bc
+	push de
+	call GetRelevantBaseData
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	dec a
-	ld hl, BASEMON_GENDER
+	ld bc, BASEMON_GENDER
+	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld a, BANK(BaseData)
+	ld a, d ; bank
 	call GetFarByte
 	swap a
 	and $f
+	pop de
 	pop bc
 	pop hl
 	ld c, a
@@ -7082,17 +7126,7 @@ endc
 .Female
 	ld b, a
 
-	; Form
-	ld a, [wBattleType]
-	cp BATTLETYPE_RED_GYARADOS
-	ld a, GYARADOS_RED_FORM
-	jr z, .special_form
-
-	ld a, [wMapGroup]
-	;cp GROUP_LAKE_OF_RAGE
-	ld a, ALOLAN
-	jr z, .special_form
-	;ld a, 1 ; default form 1
+	ld a, 1 ; default form for now
 .special_form
 	add b
 	ld [hl], a
@@ -7109,90 +7143,92 @@ endr
 	ld a, [bc]
 	ld [hl], a
 
+; all this stuff handling the form shouldn't be run as the form is not re-implemented, and will probably be obsolete
 	; Unown
-	ld a, [wTempEnemyMonSpecies]
-	cp UNOWN
-	jr nz, .Magikarp
+	;ld a, [wTempEnemyMonSpecies]
+	;cp UNOWN
+	;jr nz, .Magikarp
 
-.unown_letter
-	ld a, NUM_UNOWN
-	call BattleRandomRange
-	inc a
-	ld b, a
-	ld a, [wEnemyMonForm]
-	and $ff - FORM_MASK
-	add b
-	ld [wEnemyMonForm], a
+;.unown_letter
+	;ld a, NUM_UNOWN
+	;call BattleRandomRange
+	;inc a
+	;ld b, a
+	;ld a, [wEnemyMonGroup]
+	;and $ff - FORM_MASK
+	;add b
+	;ld [wEnemyMonGroup], a
 	; Get letter based on form
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	;ld hl, wEnemyMonGroup
+	;predef GetPokeGroup
 	; Can't use any letters that haven't been unlocked
-	push de
-	farcall CheckUnownLetter ;relocated
-	pop de
-	jr c, .unown_letter ; re-roll
-	jp .Happiness
+	;push de
+	;farcall CheckUnownLetter ;relocated
+	;pop de
+	;jr c, .unown_letter ; re-roll
+	;jp .Happiness
 
-.Magikarp:
-	ld a, [wTempEnemyMonSpecies]
-	cp MAGIKARP
-	jr nz, .Happiness
+;.Magikarp:
+	;ld a, [wTempEnemyMonSpecies]
+	;ld b, a
+	;ld a, [wTempEnemyMonGroup]
+	;cppoke MAGIKARP, .Happiness
 
 	; Random Magikarp pattern
-	ld a, NUM_MAGIKARP
-	call BattleRandomRange
-	inc a
-	ld b, a
-	ld a, [wEnemyMonForm]
-	and $ff - FORM_MASK
-	add b
-	ld [wEnemyMonForm], a
+	;ld a, NUM_MAGIKARP
+	;call BattleRandomRange
+	;inc a
+	;ld b, a
+	;ld a, [wEnemyMonGroup]
+	;and $ff - FORM_MASK
+	;add b
+	;ld [wEnemyMonGroup], a
 
 	; Get Magikarp's length
-	ld de, wEnemyMonDVs
-	ld bc, wPlayerID
-	farcall CalcMagikarpLength
+	;ld de, wEnemyMonDVs
+	;ld bc, wPlayerID
+	;farcall CalcMagikarpLength
 
 	; We're clear if the length is < 5'
-	ld a, [wMagikarpLengthMmHi]
-	cp 5
-	jr nz, .CheckMagikarpArea
+	;ld a, [wMagikarpLengthMmHi]
+	;cp 5
+	;jr nz, .CheckMagikarpArea
 
 	; 5% chance of skipping size checks
-	call Random
-	cp 5 percent
-	jr c, .CheckMagikarpArea
+	;call Random
+	;cp 5 percent
+	;jr c, .CheckMagikarpArea
 	; Try again if > 3"
-	ld a, [wMagikarpLengthMmLo]
-	cp 3
-	jp nc, .GenerateDVs
+	;ld a, [wMagikarpLengthMmLo]
+	;cp 3
+	;jp nc, .GenerateDVs
 
 	; 20% chance of skipping this check
-	call Random
-	cp 20 percent - 1
-	jr c, .CheckMagikarpArea
+	;call Random
+	;cp 20 percent - 1
+	;jr c, .CheckMagikarpArea
 	; Try again if > 2"
-	ld a, [wMagikarpLengthMmLo]
-	cp 2
-	jp nc, .GenerateDVs
+	;ld a, [wMagikarpLengthMmLo]
+	;cp 2
+	;jp nc, .GenerateDVs
 
-.CheckMagikarpArea:
-	ld a, [wMapGroup]
+;.CheckMagikarpArea:
+	;ld a, [wMapGroup]
 	;cp GROUP_LAKE_OF_RAGE
 	;jr nz, .Happiness
 	;ld a, [wMapNumber]
 	;cp MAP_LAKE_OF_RAGE
 	;jr nz, .Happiness
-	jr .Happiness
-.LakeOfRageMagikarp
+	;jr .Happiness
+;.LakeOfRageMagikarp
 	; 40% chance of not flooring
-	call Random
-	cp $64 ; / $100
-	jr c, .Happiness
+	;call Random
+	;cp $64 ; / $100
+	;jr c, .Happiness
 	; Floor at length 1024
-	ld a, [wMagikarpLengthMmHi]
-	cp 1024 >> 8
-	jp c, .GenerateDVs ; try again
+	;ld a, [wMagikarpLengthMmHi]
+	;cp 1024 >> 8
+	;jp c, .GenerateDVs ; try again
 
 
 	; Finally done with DVs
@@ -7263,18 +7299,8 @@ endr
 	ld a, [hl]
 	ld [de], a
 
-if !DEF(FAITHFUL)
-	; Armored Mewtwo is Psychic/Steel
-	ld a, [wEnemyMonSpecies]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [wEnemyMonItem]
-	cp ARMOR_SUIT
-	jr nz, .not_armored_mewtwo
-	ld a, STEEL
-	ld [wEnemyMonType2], a
-.not_armored_mewtwo
-endc
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 
 	; Get moves
 	ld de, wEnemyMonMoves
@@ -7287,7 +7313,7 @@ rept NUM_MOVES + -1
 endr
 	ld [hl], a
 	; Make sure the predef knows this isn't a partymon
-	ld [wEvolutionOldSpecies], a
+	ld [wEggMonInheritMoves], a
 	; Fill moves based on level
 	predef FillMoves
 
@@ -7309,6 +7335,8 @@ endr
 	dec b
 	jr nz, .loop
 
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
@@ -7511,6 +7539,7 @@ FinalPkmnSlideInEnemyMonFrontpic:
 BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 	xor a
 	ld [wTempEnemyMonSpecies], a
+	ld [wTempEnemyMonGroup], a
 	call FinishBattleAnim
 	ld a, [wOtherTrainerClass]
 	ld [wTrainerClass], a
@@ -7705,7 +7734,7 @@ GiveExperiencePoints: ; 3ee3b
 	call .EvenlyDivideExpAmongParticipants
 	xor a
 	ld [wCurPartyMon], a
-	ld bc, wPartyMon1Species
+	ld bc, wPartyMon1Group
 
 .loop
 	ld hl, MON_HP
@@ -7828,16 +7857,9 @@ GiveExperiencePoints: ; 3ee3b
 
 .skip2
 	ld a, [wCurPartyMon]
-	ld e, a
-	ld d, $0
-	ld hl, wPartySpecies
-	add hl, de
-	ld a, [hl]
-	ld [wCurSpecies], a
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
+	ld hl, wPartyMon1Group
 	call GetPartyLocation
-	predef GetVariant
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	push bc
 	ld d, MAX_LEVEL
@@ -7996,7 +8018,7 @@ GiveExperiencePoints: ; 3ee3b
 	cp b
 	jp z, ResetBattleParticipants
 	ld [wCurPartyMon], a
-	ld a, MON_SPECIES
+	ld a, MON_GROUP
 	call GetPartyParamLocation
 	ld b, h
 	ld c, l
@@ -8067,12 +8089,10 @@ GiveBattleEVs:
 	ld hl, MON_EVS
 	add hl, bc
 	push bc
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	push hl
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	pop hl
 	call GetBaseData ;form is known
 	; EV yield format:
 	; Byte 1: xxyyzzmm x: HP, y: Atk, z: Def, m: Spd
@@ -8571,10 +8591,10 @@ HandleSafariAngerEatingStatus:
 	jr nz, .finish
 	push hl
 	; reset the catch rate to normal if bait/rock effects have worn off
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
 	call GetBaseData ;form is known
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
@@ -8737,14 +8757,17 @@ DropPlayerSub: ; 3f447
 	and a
 	ld hl, BattleAnimCmd_MinimizeOpp
 	jr nz, GetBackpic_DoAnim
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies]
+	push af
+	ld a, [wBattleMonGroup]
+	ld [wCurGroup], a
 	push af
 	ld a, [wBattleMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
-	ld hl, wBattleMonForm
-	predef GetVariant
 
 	call GetPlayerIllusion
 
@@ -8753,12 +8776,15 @@ DropPlayerSub: ; 3f447
 	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld [wBattleMonSpecies], a
+	pop af
+	ld [wCurGroup], a
+	ld [wBattleMonGroup], a
 	call GetBaseData; form is known
-
 	pop af
 	ld [wCurPartySpecies], a
+	pop af
+	ld [wCurPartyGroup], a
 	ret
 ; 3f46f
 
@@ -8786,15 +8812,17 @@ DropEnemySub: ; 3f486
 	ld hl, BattleAnimCmd_MinimizeOpp
 	jr nz, GetFrontpic_DoAnim
 
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies]
+	push af
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	push af
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	ld a, [wEnemyAbility]
 
 	call GetEnemyIllusion
 	
@@ -8803,13 +8831,15 @@ DropEnemySub: ; 3f486
 	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-
-	ld hl, wEnemyMonForm
-	predef GetVariant
-	call GetBaseData ;form is known
-
+	ld [wEnemyMonSpecies], a
+	pop af
+	ld [wEnemyMonGroup], a
+	ld [wCurGroup], a
+	call GetBaseData; form is known
 	pop af
 	ld [wCurPartySpecies], a
+	pop af
+	ld [wCurPartyGroup], a
 	ret
 ; 3f4b4
 
@@ -8829,7 +8859,7 @@ GetEnemyIllusion:
 	ld e, a
 	ld a, [wOTPartyCount]
 	ld d, a
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1Group
 	ld a, [wEnemyAbility]
 	jr CheckIllusion
 GetPlayerIllusion:
@@ -8837,7 +8867,7 @@ GetPlayerIllusion:
 	ld e, a
 	ld a, [wPartyCount]
 	ld d, a
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	ld a, [wPlayerAbility]
 CheckIllusion:
 	cp ILLUSION
@@ -8847,19 +8877,8 @@ CheckIllusion:
 	ld a, d
 GetIllusion::
 	dec a
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	ld a, [hl] ;species of last mon in party
-	push af
-	ld bc, wPartyMon1Form - wPartyMon1Species
-	add hl, bc
-	predef GetVariant
-	dec hl ;get personality into bc for getting the palette
-	ld b, h
-	ld c, l
-	pop af
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
 	ret
 
 StartBattle: ; 3f4c1
@@ -8930,6 +8949,9 @@ LoadTrainerOrWildMonPic: ; 3f54e
 	ld a, [wOtherTrainerClass]
 	and a
 	jr nz, .Trainer
+	ld a, [wTempWildMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wTempEnemyMonGroup], a
 	ld a, [wTempWildMonSpecies]
 	ld [wCurPartySpecies], a
 
@@ -8973,6 +8995,7 @@ InitEnemyTrainer: ; 3f594
 	ld [wTrainerClass], a
 	xor a
 	ld [wTempEnemyMonSpecies], a
+	ld [wTempEnemyMonGroup], a
 	farcall GetTrainerAttributes
 	farcall ReadTrainerParty
 	farcall ComputeTrainerReward
@@ -9030,28 +9053,25 @@ InitEnemyWildmon: ; 3f607
 	ld de, wEnemyBackupDVs
 	ld bc, 5
 	rst CopyBytes
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	;ld a, [wCurPartySpecies]
+	;cp UNOWN
+	;jr nz, .skip_unown
+	;ld a, [wFirstUnownSeen]
+	;and a
+	;jr nz, .skip_unown
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstUnownSeen], a
+;.skip_unown
 
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr nz, .skip_unown
-	ld a, [wFirstUnownSeen]
-	and a
-	jr nz, .skip_unown
-	ld a, [wCurForm]
-	ld [wFirstUnownSeen], a
-.skip_unown
-
-	ld a, [wCurPartySpecies]
-	cp MAGIKARP
-	jr nz, .skip_magikarp
-	ld a, [wFirstMagikarpSeen]
-	and a
-	jr nz, .skip_magikarp
-	ld a, [wCurForm]
-	ld [wFirstMagikarpSeen], a
-.skip_magikarp
+	;ld a, [wCurPartySpecies]
+	;cp MAGIKARP
+	;jr nz, .skip_magikarp
+	;ld a, [wFirstMagikarpSeen]
+	;and a
+	;jr nz, .skip_magikarp
+	;ld a, [wCurPokeGroup]
+	;ld [wFirstMagikarpSeen], a
+;.skip_magikarp
 
 	ld de, VTiles2
 	predef FrontpicPredef
@@ -9096,6 +9116,8 @@ HandleNuzlockeFlags:
 	ret nz
 
 	; Dupes clause: don't count duplicate encounters
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	dec a
 	call CheckCaughtMon
@@ -9901,12 +9923,18 @@ BattleStartMessage: ; 3fc8b
 
 	ld a, [wCurPartySpecies]
 	push af
+	ld a, [wCurPartyGroup]
+	push af
 
 	call GetEnemyIllusion
 
 	hlcoord 12, 0
 	lb de, $0, ANIM_MON_NORMAL
 	predef AnimateFrontpic
+
+	pop af
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	pop af
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -9915,6 +9943,8 @@ BattleStartMessage: ; 3fc8b
 .cry_no_anim
 	ld a, $f
 	ld [wCryTracks], a
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	call PlayStereoCry
 
@@ -9991,7 +10021,7 @@ BoostGiovannisArmoredMewtwo:
 	call Call_PlayBattleAnim
 	farjp BattleCommand_allstatsup
 
-CheckUniqueWildMove:
+CheckUniqueWildMove: ; this will have to be updated to account for form as well as moves when that happens
 	ld a, [wMapGroup]
 	ld b, a
 	ld a, [wMapNumber]

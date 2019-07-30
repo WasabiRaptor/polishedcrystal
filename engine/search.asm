@@ -102,7 +102,7 @@ CheckOwnMonAnywhere: ; 0x4a721
 
 	ld d, a
 	ld e, 0
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, wPartyMonOT
 
 	; Run CheckOwnMon on each Pokémon in the party.
@@ -126,7 +126,7 @@ CheckOwnMonAnywhere: ; 0x4a721
 	jr z, .boxes
 
 	ld d, a
-	ld hl, sBoxMon1Species
+	ld hl, sBoxMon1
 	ld bc, sBoxMonOT
 .openboxmon
 	call CheckOwnMon
@@ -237,6 +237,8 @@ CheckOwnMon: ; 0x4a7ba
 	ld d, b
 	ld e, c
 
+	ld b, [hl] ; the pokemon's group which can be checked against
+	inc hl
 ; check species
 	ld a, [wScriptVar] ; species we're looking for
 	ld b, [hl] ; species we have

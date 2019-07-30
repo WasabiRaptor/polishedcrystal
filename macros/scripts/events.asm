@@ -287,6 +287,7 @@ checkpoke: macro
 givepoke: macro
 	db givepoke_command
 	db \1 ; pokemon
+	db GROUP_\1
 	db \2 ; level
 	if _NARG >= 3
 	db \3 ; item
@@ -613,12 +614,6 @@ startbattle: macro
 	enum reloadmapafterbattle_command
 reloadmapafterbattle: macro
 	db reloadmapafterbattle_command
-	endm
-
-	enum catchtutorial_command
-catchtutorial: macro
-	db catchtutorial_command
-	db \1 ; byte
 	endm
 
 	enum trainertext_command

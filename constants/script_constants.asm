@@ -34,6 +34,7 @@ LAST_TALKED EQU -2
 	const VAR_BATTLEPOINTS     ; 1b
 	const VAR_PKMN_JOURNALS    ; 1c
 	const VAR_TRAINER_STARS    ; 1d
+	const VAR_PARTYMON1_GROUP
 NUM_VARS EQU const_value       ; 1e
 
 RETVAR_STRBUF2 EQU (0 << 6)

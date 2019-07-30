@@ -860,6 +860,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	push af
 	ld a, 1
 	ldh [rSVBK], a
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 
@@ -867,25 +869,34 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	and a
 	jr z, .player
 
-	ld a, [wTempBattleMonSpecies] ; TempBattleMonSpecies
-	ld [wCurPartySpecies], a ; CurPartySpecies
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld a, [wTempBattleMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	ld de, VTiles0 tile $00
 	predef GetFrontpic
 	jr .done
 
 .player
-	ld a, [wTempEnemyMonSpecies] ; TempEnemyMonSpecies
-	ld [wCurPartySpecies], a ; CurPartySpecies
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
+
 	ld de, VTiles0 tile $00
 	predef GetBackpic
 
 .done
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
+	pop af
+	ld [wCurPartyGroup], a
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -1102,6 +1113,8 @@ BattleAnimCmd_DropSub: ; cc750 (33:4750)
 	ld a, $1
 	ldh [rSVBK], a
 
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 	ldh a, [hBattleTurn]
@@ -1118,6 +1131,8 @@ BattleAnimCmd_DropSub: ; cc750 (33:4750)
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
 	pop af
+	ld [wCurPartyGroup], a
+	pop af
 	ldh [rSVBK], a
 	ret
 
@@ -1126,6 +1141,8 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	push af
 	ld a, $1
 	ldh [rSVBK], a
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 
@@ -1136,21 +1153,23 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	and a
 	jr z, .player
 
-	ld hl, wBattleMonForm
-	predef GetVariant
+	ld hl, wBattleMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	jr .done
 
 .player
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	ld de, VTiles2 tile $31
 	predef GetBackpic
 
 .done
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
+	pop af
+	ld [wCurPartyGroup], a
 	ld b, CGB_BATTLE_COLORS
 	call GetCGBLayout
 	pop af

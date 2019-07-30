@@ -62,13 +62,14 @@ _GetVarAction:: ; 80648 (20:4648)
 	dwb wBattlePoints,                  RETVAR_ADDR_DE
 	dwb .CountPokemonJournals,          RETVAR_EXECUTE
 	dwb .CountTrainerStars,             RETVAR_EXECUTE
+	dwb wPartyMon1Group, 				RETVAR_STRBUF2
 	dwb NULL,                           RETVAR_STRBUF2
 ; 806c5
 
 .CountCaughtMons: ; 806c5
 ; Caught mons.
 	ld hl, wPokedexCaught
-	ld b, wEndPokedexCaught - wPokedexCaught
+	ld b, wPokedexCaughtEnd - wPokedexCaught
 	call CountSetBits
 	ld a, [wd265]
 	jp .loadstringbuffer2
@@ -77,7 +78,7 @@ _GetVarAction:: ; 80648 (20:4648)
 .CountSeenMons: ; 806d3
 ; Seen mons.
 	ld hl, wPokedexSeen
-	ld b, wEndPokedexSeen - wPokedexSeen
+	ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld a, [wd265]
 	jp .loadstringbuffer2
@@ -168,7 +169,7 @@ _GetVarAction:: ; 80648 (20:4648)
 	; star for completing the Pokédex
 	push bc
 	ld hl, wPokedexCaught
-	ld b, wEndPokedexCaught - wPokedexCaught
+	ld b, wPokedexCaughtEnd - wPokedexCaught
 	call CountSetBits
 	pop bc
 	cp NUM_POKEMON

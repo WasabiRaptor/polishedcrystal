@@ -1,38 +1,76 @@
 SetSeenAndCaughtMon:: ; 3380
-	push af
 	ld c, a
-	ld hl, wPokedexCaught
+	push af ;1
+	call GetRelevantCaughtPointers
+
+	ldh a, [rSVBK]
+	push af ; 2
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+	
 	ld b, SET_FLAG
 	call PokedexFlagAction
-	pop af
-	; fallthrough
-; 338b
 
+	pop af ; 1
+	ldh [rSVBK], a
+	pop af ;0
+; 338b
 SetSeenMon:: ; 338b
 	ld c, a
-	ld hl, wPokedexSeen
+	call GetRelevantSeenPointers
+
+	ldh a, [rSVBK]
+	push af ; 1
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
 	ld b, SET_FLAG
-	jr PokedexFlagAction
+	call PokedexFlagAction
+
+	pop af ; 0
+	ldh [rSVBK], a
+	ret
 ; 3393
 
 CheckCaughtMon:: ; 3393
 	ld c, a
-	ld hl, wPokedexCaught
+	call GetRelevantCaughtPointers
 	ld b, CHECK_FLAG
 	jr PokedexFlagAction
 ; 339b
 
 CheckSeenMon:: ; 339b
 	ld c, a
-	ld hl, wPokedexSeen
+	call GetRelevantSeenPointers
 	ld b, CHECK_FLAG
 	; fallthrough
 ; 33a1
 
 PokedexFlagAction:: ; 33a1
-	ld d, 0
+	ld d, BANK(wPokedexCaughtSeen)
 	predef FlagPredef
 	ld a, c
 	and a
 	ret
 ; 33ab
+
+GetRelevantSeenPointers::
+	ld hl, RegionalSeenTable
+	jr GetRelevantSeenCaughtPointers
+	
+GetRelevantCaughtPointers::
+	ld hl, RegionalCaughtTable
+
+GetRelevantSeenCaughtPointers::
+	push bc
+	ld a, [wCurGroup]
+	ld de, 3
+	call IsInArray
+	inc hl 
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop bc
+	ret
+
+INCLUDE "data/pokemon/regional_seen_caught_tables.asm"

@@ -1,19 +1,20 @@
-	dw 00184
-	db 100,  50,  80,  50,  60,  80
-    evs  3,   0,   0,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
-
-	db WATER, FAIRY ; type
-	db 75 ; catch rate
-	db 189 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	dn FEMALE_50, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/azumarill/front.dimensions"
-	db THICK_FAT, HUGE_POWER	; abilities
-	db SAP_SIPPER	; hidden ability
-	db GROWTH_FAST ; growth rate
-	dn EGG_WATER_1, EGG_FAIRY ; egg groups
-
-	; tmhm
-	tmhm DYNAMICPUNCH, CURSE, TOXIC, HAIL, HIDDEN_POWER, ICE_BEAM, BLIZZARD, HYPER_BEAM, LIGHT_SCREEN, PROTECT, RAIN_DANCE, BULLDOZE, IRON_TAIL, RETURN, DIG, DOUBLE_TEAM, SWIFT, SUBSTITUTE, FACADE, REST, ATTRACT, ROCK_SMASH, FOCUS_BLAST, SCALD, ENDURE, WATER_PULSE, GIGA_IMPACT, SURF, STRENGTH, WHIRLPOOL, WATERFALL, AQUA_TAIL, BODY_SLAM, DEFENSE_CURL, DOUBLE_EDGE, HEADBUTT, HYPER_VOICE, ICE_PUNCH, ICY_WIND, KNOCK_OFF, ROLLOUT, SEISMIC_TOSS, SLEEP_TALK, SWAGGER
-	; end
+	dw 00184 ;national dex no
+        
+        db 100,  50,  80,  50,  60,  80
+        evs  3,   0,   0,   0,   0,   0
+        ;   hp  atk  def  spd  sat  sdf
+        
+        db WATER, FAIRY ; type
+        db 75 ; catch rate
+        db 189 ; base exp
+        db NO_ITEM, NO_ITEM ; items
+        dn FEMALE_50, 2 ; gender, step cycles to hatch
+        INCBIN "gfx/pokemon/azumarill/front.dimensions"  
+        db THICK_FAT, HUGE_POWER     ; abilities
+        db SAP_SIPPER    ; hidden ability
+        db GROWTH_FAST ; growth rate
+        dn EGG_WATER_1, EGG_FAIRY ; egg groups
+        
+        ; tm/hm learnset
+        tmhm                                            
+        ; end

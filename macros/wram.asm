@@ -3,8 +3,9 @@ flag_array: MACRO
 ENDM
 
 box_struct: MACRO
+\1Group::          db ; one next to the other so we can just inc hl to the next
 \1Species::        db
-\1Item::           db
+\1Item::           dw
 \1Moves::          ds NUM_MOVES
 \1ID::             dw
 \1Exp::            ds 3
@@ -22,12 +23,12 @@ box_struct: MACRO
 \1Personality::
 \1Shiny::
 \1Ability::
-\1Nature::         db
+\1Nature::         db 
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Form::           db
-\1PP::             ds NUM_MOVES
+\1Form::           db 
+\1PP::             ds NUM_MOVES ; once curPP is moved to the party struct, the box struct can use these bytes for a move's group, they're already using two bits for PP up so even with curpp they would still be needed
 \1Happiness::      db
 \1PokerusStatus::  db
 \1CaughtData::
@@ -56,8 +57,9 @@ party_struct: MACRO
 ENDM
 
 battle_struct: MACRO
+\1Group::          db
 \1Species::        db
-\1Item::           db
+\1Item::           dw
 \1Moves::          ds NUM_MOVES
 ; Mon capture assumes personality comes after DVs
 \1DVs::
@@ -219,6 +221,7 @@ hall_of_fame: MACRO
 ENDM
 
 trademon: MACRO
+\1Group:: ds 1
 \1Species:: ds 1 ; wc6d0 | wc702
 \1SpeciesName:: ds PKMN_NAME_LENGTH ; wc6d1 | wc703
 \1Nickname:: ds PKMN_NAME_LENGTH ; wc6dc | wc70e

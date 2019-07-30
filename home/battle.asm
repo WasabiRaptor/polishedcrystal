@@ -31,18 +31,28 @@ OpponentPartyAttr::
 	and a
 	jr nz, BattlePartyAttrPre
 OTPartyAttrPre:
+	ld a, [wBattleMode]
+	dec a
+	jp z, PartyAttrPopafandret
 	pop af
 OTPartyAttr::
 ; Return z if wildmon
-	ld a, [wBattleMode]
-	dec a
-	ret z
-
 	ld hl, wOTPartyMons
 	push bc
 	ld c, a
 	ld a, [wCurOTMon]
 	jr DoBattlePartyAttr
+
+PartyAttrPopafandret
+	pop af
+	xor a
+	ret
+
+
+	or 1
+	ld a, [hl]
+	pop bc
+	ret
 
 ResetDamage::
 	xor a
@@ -73,7 +83,7 @@ UpdateUserInParty::
 	jr nz, UpdateEnemyMonInParty
 	; fallthrough
 UpdateBattleMonInParty::
-; Update level, status, current HP, curretn form
+; Update level, status, current HP, current species or group (if it isn't transformed)
 	ld a, [wCurBattleMon]
 	; fallthrough
 UpdateBattleMon::
@@ -104,7 +114,6 @@ UpdateEnemyMonInParty::
 	call GetPartyLocation
 	ld a, [wEnemyMonForm]
 	ld [hl], a
-
 
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Level
@@ -233,7 +242,7 @@ UserCanLoseItem::
 	ret
 
 .StuckItems
-	db ARMOR_SUIT, MEWTWO
+	;db ARMOR_SUIT, MEWTWO
 	db -1
 
 GetOpponentUsedItemAddr::
@@ -945,7 +954,7 @@ FarCopyRadioText:: ; 3a90
 	ld d, a
 	ld a, [hli]
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 	ld a, e
 	ld l, a
 	ld a, d
@@ -955,7 +964,7 @@ FarCopyRadioText:: ; 3a90
 	rst CopyBytes
 	pop af
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 	ret
 ; 3ab2
 

@@ -7,13 +7,16 @@ Special_CheckMagikarpLength: ; fbb32
 	; Let's start by selecting a Magikarp.
 	farcall SelectMonFromParty
 	jr c, .declined
+	ld a, [wCurPartyGroup]
+	cp GROUP_GENERATION_ONE
+	jr nz, .not_magikarp
 	ld a, [wCurPartySpecies]
 	cp MAGIKARP
 	jr nz, .not_magikarp
 
 	; Now let's compute its length based on its DVs and ID.
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	push hl

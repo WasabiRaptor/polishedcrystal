@@ -1,31 +1,31 @@
-BASEMON_BASE_STATS    EQUS "(BaseData + wBaseStats - wCurBaseData)"
-BASEMON_BASE_HP       EQUS "(BaseData + wBaseHP - wCurBaseData)"
-BASEMON_BASE_ATK      EQUS "(BaseData + wBaseAttack - wCurBaseData)"
-BASEMON_BASE_DEF      EQUS "(BaseData + wBaseDefense - wCurBaseData)"
-BASEMON_BASE_SPD      EQUS "(BaseData + wBaseSpeed - wCurBaseData)"
-BASEMON_BASE_SAT      EQUS "(BaseData + wBaseSpecialAttack - wCurBaseData)"
-BASEMON_BASE_SDF      EQUS "(BaseData + wBaseSpecialDefense - wCurBaseData)"
-BASEMON_TYPES         EQUS "(BaseData + wBaseType - wCurBaseData)"
-BASEMON_TYPE_1        EQUS "(BaseData + wBaseType1 - wCurBaseData)"
-BASEMON_TYPE_2        EQUS "(BaseData + wBaseType2 - wCurBaseData)"
-BASEMON_CATCH_RATE    EQUS "(BaseData + wBaseCatchRate - wCurBaseData)"
-BASEMON_BASE_EXP      EQUS "(BaseData + wBaseExp - wCurBaseData)"
-BASEMON_ITEMS         EQUS "(BaseData + wBaseItems - wCurBaseData)"
-BASEMON_ITEM_1        EQUS "(BaseData + wBaseItems - wCurBaseData)"
-BASEMON_ITEM_2        EQUS "(BaseData + wBaseItems + 1 - wCurBaseData)"
-BASEMON_GENDER        EQUS "(BaseData + wBaseGender - wCurBaseData)"
-BASEMON_EGG_STEPS     EQUS "(BaseData + wBaseEggSteps - wCurBaseData)"
-BASEMON_PIC_SIZE      EQUS "(BaseData + wBasePicSize - wCurBaseData)"
-BASEMON_ABILITIES     EQUS "(BaseData + wBaseAbility1 - wCurBaseData)"
-BASEMON_ABILITY_1     EQUS "(BaseData + wBaseAbility1 - wCurBaseData)"
-BASEMON_ABILITY_2     EQUS "(BaseData + wBaseAbility2 - wCurBaseData)"
-BASEMON_ABILITY_3     EQUS "(BaseData + wBaseHiddenAbility - wCurBaseData)"
-BASEMON_GROWTH_RATE   EQUS "(BaseData + wBaseGrowthRate - wCurBaseData)"
-BASEMON_EGG_GROUPS    EQUS "(BaseData + wBaseEggGroups - wCurBaseData)"
-BASEMON_EV_YIELD_1    EQUS "(BaseData + wBaseEVYield1 - wCurBaseData)"
-BASEMON_EV_YIELD_2    EQUS "(BaseData + wBaseEVYield2 - wCurBaseData)"
-BASEMON_TMHM          EQUS "(BaseData + wBaseTMHM - wCurBaseData)"
-BASEMON_STRUCT_LENGTH EQUS "(BaseData1 - BaseData0)"
+BASEMON_BASE_STATS    EQUS "(wBaseStats - wCurBaseData)"
+BASEMON_BASE_HP       EQUS "(wBaseHP - wCurBaseData)"
+BASEMON_BASE_ATK      EQUS "(wBaseAttack - wCurBaseData)"
+BASEMON_BASE_DEF      EQUS "(wBaseDefense - wCurBaseData)"
+BASEMON_BASE_SPD      EQUS "(wBaseSpeed - wCurBaseData)"
+BASEMON_BASE_SAT      EQUS "(wBaseSpecialAttack - wCurBaseData)"
+BASEMON_BASE_SDF      EQUS "(wBaseSpecialDefense - wCurBaseData)"
+BASEMON_TYPES         EQUS "(wBaseType - wCurBaseData)"
+BASEMON_TYPE_1        EQUS "(wBaseType1 - wCurBaseData)"
+BASEMON_TYPE_2        EQUS "(wBaseType2 - wCurBaseData)"
+BASEMON_CATCH_RATE    EQUS "(wBaseCatchRate - wCurBaseData)"
+BASEMON_BASE_EXP      EQUS "(wBaseExp - wCurBaseData)"
+BASEMON_ITEMS         EQUS "(wBaseItems - wCurBaseData)"
+BASEMON_ITEM_1        EQUS "(wBaseItems - wCurBaseData)"
+BASEMON_ITEM_2        EQUS "(wBaseItems + 1 - wCurBaseData)"
+BASEMON_GENDER        EQUS "(wBaseGender - wCurBaseData)"
+BASEMON_EGG_STEPS     EQUS "(wBaseEggSteps - wCurBaseData)"
+BASEMON_PIC_SIZE      EQUS "(wBasePicSize - wCurBaseData)"
+BASEMON_ABILITIES     EQUS "(wBaseAbility1 - wCurBaseData)"
+BASEMON_ABILITY_1     EQUS "(wBaseAbility1 - wCurBaseData)"
+BASEMON_ABILITY_2     EQUS "(wBaseAbility2 - wCurBaseData)"
+BASEMON_ABILITY_3     EQUS "(wBaseHiddenAbility - wCurBaseData)"
+BASEMON_GROWTH_RATE   EQUS "(wBaseGrowthRate - wCurBaseData)"
+BASEMON_EGG_GROUPS    EQUS "(wBaseEggGroups - wCurBaseData)"
+BASEMON_EV_YIELD_1    EQUS "(wBaseEVYield1 - wCurBaseData)"
+BASEMON_EV_YIELD_2    EQUS "(wBaseEVYield2 - wCurBaseData)"
+BASEMON_TMHM          EQUS "(wBaseTMHM - wCurBaseData)"
+BASEMON_STRUCT_LENGTH EQUS "(wCurBaseDataEnd - wCurBaseData)"
 
 ;EV yield masks
 HP_EV_YIELD_MASK EQU %11000000
@@ -99,6 +99,7 @@ EGG_GROUP_1_MASK EQU %11110000
 EGG_GROUP_2_MASK EQU %00001111
 
 ; pokemon structure in RAM
+MON_GROUP                EQUS "(wPartyMon1Group - wPartyMon1)"
 MON_SPECIES              EQUS "(wPartyMon1Species - wPartyMon1)"
 MON_ITEM                 EQUS "(wPartyMon1Item - wPartyMon1)"
 MON_MOVES                EQUS "(wPartyMon1Moves - wPartyMon1)"
@@ -119,7 +120,7 @@ MON_NATURE               EQUS "(wPartyMon1Nature - wPartyMon1)"
 MON_GENDER               EQUS "(wPartyMon1Gender - wPartyMon1)"
 MON_IS_EGG               EQUS "(wPartyMon1IsEgg - wPartyMon1)"
 MON_IS_DEAD              EQUS "(wPartyMon1IsDead - wPartyMon1)"
-MON_FORM                 EQUS "(wPartyMon1Form - wPartyMon1)"
+MON_FORM				 EQUS "(wPartyMon1Form - wPartyMon1)"
 MON_PP                   EQUS "(wPartyMon1PP - wPartyMon1)"
 MON_HAPPINESS            EQUS "(wPartyMon1Happiness - wPartyMon1)"
 MON_PKRUS                EQUS "(wPartyMon1PokerusStatus - wPartyMon1)"
@@ -142,7 +143,13 @@ MON_SDF                  EQUS "(wPartyMon1SpclDef - wPartyMon1)"
 BOXMON_STRUCT_LENGTH     EQUS "(wPartyMon1End - wPartyMon1)"
 PARTYMON_STRUCT_LENGTH   EQUS "(wPartyMon1StatsEnd - wPartyMon1)"
 
-; apply to MON_FORM
+MON_GROUP_SPECIES_AND_FORM EQU $ff
+
+;PP masks
+PP_UPS_USED_MASK EQU %11000000
+
+
+; apply to MON_GROUP
 SHINY_MASK   EQU %10000000
 ABILITY_MASK EQU %01100000
 NATURE_MASK  EQU %00011111
@@ -209,8 +216,8 @@ NUM_HOF_TEAMS = 30
 NUM_GRASSMON EQU 7
 NUM_WATERMON EQU 3
 
-GRASS_WILDDATA_LENGTH EQU (NUM_GRASSMON * 2 + 1) * 3 + 2
-WATER_WILDDATA_LENGTH EQU (NUM_WATERMON * 2 + 1) * 1 + 2
+GRASS_WILDDATA_LENGTH EQU (NUM_GRASSMON * 3 + 1) * 4 + 2
+WATER_WILDDATA_LENGTH EQU (NUM_WATERMON * 3 + 1) * 1 + 2
 
 
 BASE_HAPPINESS        EQU 70

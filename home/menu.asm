@@ -81,7 +81,7 @@ GetMenu2::
 YesNoBox::
 	ld a, [wInPokegear]
 	and a
-	lb bc, SCREEN_WIDTH - 6, 7
+	lb bc, SCREEN_WIDTH - 6, 8
 	jr z, .got_position
 	dec b
 .got_position
@@ -129,8 +129,8 @@ InterpretTwoOptionMenu_AfterCloseWindow::
 
 YesNoMenuDataHeader::
 	db $40 ; tile backup
-	db 5, 10 ; start coords
-	db 9, 15 ; end coords
+	db 6, 10 ; start coords
+	db 10, 15 ; end coords
 	dw .MenuData2
 	db 1 ; default option
 

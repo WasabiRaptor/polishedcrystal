@@ -11,13 +11,13 @@ MapSetup_Sound_Off:: ; 3b4e
 	push af
 	ld a, BANK(_MapSetup_Sound_Off)
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	call _MapSetup_Sound_Off
 
 	pop af
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	pop af
 	pop bc
@@ -38,13 +38,13 @@ UpdateSound:: ; 3b6a
 	push af
 	ld a, BANK(_UpdateSound)
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	call _UpdateSound
 
 	pop af
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	pop af
 	pop bc
@@ -59,14 +59,14 @@ _LoadMusicByte:: ; 3b86
 GLOBAL LoadMusicByte
 
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	ld a, [de]
 	ld [wCurMusicByte], a
 	ld a, BANK(LoadMusicByte)
 
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 	ret
 ; 3b97
 
@@ -91,7 +91,7 @@ PlayMusic:: ; 3b97
 	push af
 	ld a, BANK(_PlayMusic) ; and BANK(_MapSetup_Sound_Off)
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	ld a, e
 	and a
@@ -106,7 +106,7 @@ PlayMusic:: ; 3b97
 .end
 	pop af
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 	pop af
 	pop bc
 	pop de
@@ -127,7 +127,7 @@ PlayMusic2:: ; 3bbc
 	push af
 	ld a, BANK(_PlayMusic)
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	push de
 	ld de, MUSIC_NONE
@@ -138,7 +138,7 @@ PlayMusic2:: ; 3bbc
 
 	pop af
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	pop af
 	pop bc
@@ -160,19 +160,12 @@ PlayCryHeader:: ; 3be3
 	ldh a, [hROMBank]
 	push af
 	push de
-	ld a, e
-	inc a
 	call GetRelevantCryPointers
 	ld a, d
 	; Cry headers are stuck in one bank.
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 	pop de
-	jr nc, .notvariant
-	ld a, [wCurForm]
-	dec a
-	ld e, a
-.notvariant
 rept 6
 	add hl, de
 endr
@@ -193,13 +186,13 @@ endr
 
 	ld a, BANK(_PlayCryHeader)
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	call _PlayCryHeader
 
 	pop af
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	pop af
 	pop bc
@@ -208,6 +201,7 @@ endr
 	ret
 ; 3c23
 GetRelevantCryPointers:
+	ld a, [wCurGroup]
 ; given species in a, return *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
 	ld hl, VariantCryTable
@@ -249,7 +243,7 @@ PlaySFX:: ; 3c23
 	push af
 	ld a, BANK(_PlaySFX)
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 	ld a, e
 	ld [wCurSFX], a
@@ -257,7 +251,7 @@ PlaySFX:: ; 3c23
 
 	pop af
 	ldh [hROMBank], a
-	ld [MBC3RomBank], a
+	ld [MBC5RomBank], a
 
 .done
 	pop af

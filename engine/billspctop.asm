@@ -198,12 +198,12 @@ ClearPCItemScreen: ; e58b
 
 CopyBoxmonToTempMon: ; e5bb
 	ld a, [wCurPartyMon]
-	ld hl, sBoxMon1Species
+	ld hl, sBoxMon1
 	ld bc, BOXMON_STRUCT_LENGTH
 	rst AddNTimes
-	ld de, wTempMonSpecies
+	ld de, wTempMon
 	ld bc, BOXMON_STRUCT_LENGTH
-	ld a, BANK(sBoxMon1Species)
+	ld a, BANK(sBoxMon1)
 	call GetSRAMBank
 	rst CopyBytes
 	jp CloseSRAM

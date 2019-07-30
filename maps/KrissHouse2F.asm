@@ -174,8 +174,10 @@ endr
 	; post-e4
 	setflag ENGINE_CREDITS_SKIP
 	setflag ENGINE_HAVE_SHINY_CHARM
+
+	;jump .skipmons
 	; good party
-	givepoke MEWTWO, 100, ARMOR_SUIT
+	givepoke MEWTWO, 100
 	loadvar wPartyMon1EVs+0, 252
 	loadvar wPartyMon1EVs+1, 252
 	loadvar wPartyMon1EVs+2, 252
@@ -215,6 +217,7 @@ endr
 	loadvar wPartyMon3PP+1, 15
 	loadvar wPartyMon3PP+2, 15
 	loadvar wPartyMon3PP+3, 15
+.skipmons
 	; fill pokedex
 	callasm FillPokedex
 	; intro events
@@ -236,25 +239,34 @@ endr
 	end
 
 FillPokedex:
-	ld a, 1
-	ld [wUnlockedUnownMode], a
-	ld [wFirstUnownSeen], a
-	ld [wFirstMagikarpSeen], a
-	ld hl, wUnownDex
-	ld a, 1
-rept NUM_UNOWN
-	ld [hli], a
-	inc a
-endr
+	;ld a, 1
+	;ld [wUnlockedUnownMode], a
+	;ld [wFirstUnownSeen], a
+	;ld [wFirstMagikarpSeen], a
+	;ld hl, wUnownDex
+	;ld a, 1
+;rept NUM_UNOWN
+	;ld [hli], a
+	;inc a
+;endr
+	ldh a, [rSVBK]
+	push af ; 1
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
 	ld hl, wPokedexSeen
 	call .Fill
 	ld hl, wPokedexCaught
+	call .Fill
+
+	pop af ; 0
+	ldh [rSVBK], a
+	ret
+
 .Fill:
 	ld a, %11111111
-	ld bc, 31 ; 001-248
+	ld bc, wPokedexCaughtEnd - wPokedexCaught
 	call ByteFill
-	ld a, %00011111
-	ld [hl], a ; 249-253
 	ret
 
 else

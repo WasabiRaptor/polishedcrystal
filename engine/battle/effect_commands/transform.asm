@@ -15,12 +15,6 @@ BattleCommand_transform:
 	ld de, wBattleMonItem
 .got_mon_item
 	ld a, [hl]
-	cp MEWTWO
-	jr nz, .not_armored_mewtwo
-	ld a, [de]
-	cp ARMOR_SUIT
-	jp z, BattleEffect_ButItFailed
-.not_armored_mewtwo
 
 	ld a, BATTLE_VARS_ABILITY
 	call GetBattleVar
@@ -53,17 +47,20 @@ BattleCommand_transform:
 	call GetBattleVarAddr
 	set SUBSTATUS_TRANSFORMED, [hl]
 	call ResetActorDisable
-	ld hl, wBattleMonSpecies
-	ld de, wEnemyMonSpecies
+	ld hl, wBattleMonGroup
+	ld de, wEnemyMonGroup
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .got_mon_species
-	ld hl, wEnemyMonSpecies
-	ld de, wBattleMonSpecies
+	ld hl, wEnemyMonGroup
+	ld de, wBattleMonGroup
 	xor a
 	ld [wCurMoveNum], a
 .got_mon_species
 	push hl
+	ld a, [hli]
+	ld [de], a
+	inc de
 	ld a, [hli]
 	ld [de], a
 	inc hl
@@ -124,7 +121,8 @@ BattleCommand_transform:
 	dec b
 	jr nz, .pp_loop
 	pop hl
-	ld a, [hl]
+	predef PokemonToGroupSpeciesAndForm
+	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, wEnemyStatLevels

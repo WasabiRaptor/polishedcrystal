@@ -456,6 +456,8 @@ PokeBallEffect: ; e8a2
 	jp z, .shake_and_break_free
 
 .caught
+	ld a, [wTempEnemyMonGroup]
+	ld [wEnemyMonGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wEnemyMonSpecies], a
 
@@ -505,11 +507,8 @@ PokeBallEffect: ; e8a2
 	ld a, [wEnemyMonLevel]
 	ld [wCurPartyLevel], a
 
-	ld a, [wEnemyMonSpecies]
-	ld [wCurSpecies], a
-	ld [wCurPartySpecies], a
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld hl, wEnemyMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 
 	ld de, wEnemyMonMaxHP
@@ -802,33 +801,6 @@ ParkBallMultiplier:
 	ld b, $ff
 	ret
 
-GetPokedexEntryBank:
-	push hl
-	push de
-	ld a, [wEnemyMonSpecies]
-	rlca
-	rlca
-	and 3
-	ld hl, .PokedexEntryBanks
-	ld d, 0
-	ld e, a
-	add hl, de
-	ld a, [hl]
-	pop de
-	pop hl
-	ret
-
-.PokedexEntryBanks:
-
-GLOBAL PokedexEntries1
-GLOBAL PokedexEntries2
-GLOBAL PokedexEntries3
-GLOBAL PokedexEntries4
-
-	db BANK(PokedexEntries1)
-	db BANK(PokedexEntries2)
-	db BANK(PokedexEntries3)
-	db BANK(PokedexEntries4)
 
 HeavyBallMultiplier:
 ; subtract 20 from catch rate if weight < 102.4 kg
@@ -836,25 +808,21 @@ HeavyBallMultiplier:
 ; else add 20 to catch rate if weight < 307.2 kg
 ; else add 30 to catch rate if weight < 409.6 kg
 ; else add 40 to catch rate (never happens)
+	push bc
 	ld a, [wEnemyMonSpecies]
-	ld hl, PokedexDataPointerTable
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, BANK(PokedexDataPointerTable)
+	ld [wd265], a
+	farcall GetDexEntryPointer
+	ld a, b
 	call GetFarHalfword
 
 .SkipText:
-	call GetPokedexEntryBank
+	ld a, b
 	call GetFarByte
 	inc hl
 	cp "@"
 	jr nz, .SkipText
 
-	call GetPokedexEntryBank
-	push bc
+	ld a, b
 	inc hl
 	inc hl
 	call GetFarHalfword
@@ -954,23 +922,20 @@ GLOBAL EvosAttacks
 GLOBAL EvosAttacksPointers
 
 	push bc
-	ld a, [wTempEnemyMonSpecies]
+	ld a, [wTempEnemyMonGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wTempEnemyMonSpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, d
+	ld a, d ;bank
 	call GetFarHalfword
 	pop bc
 
 	push bc
-	ld a, BANK(EvosAttacks)
+	ld a, d ;bank
 	call GetFarByte
 	cp EVOLVE_ITEM
 	pop bc
@@ -981,7 +946,7 @@ GLOBAL EvosAttacksPointers
 	inc hl
 
 	push bc
-	ld a, BANK(EvosAttacks)
+	ld a, d ;bank
 	call GetFarByte
 	cp MOON_STONE
 	pop bc
@@ -998,7 +963,13 @@ GLOBAL EvosAttacksPointers
 LoveBallMultiplier:
 ; multiply catch rate by 8 if mons are of same species, different sex
 
-	; does species match?
+	; does group match?
+	ld a, [wTempEnemyMonGroup]
+	ld c, a
+	ld a, [wTempBattleMonGroup]
+	cp c
+	ret nz
+	;does species match
 	ld a, [wTempEnemyMonSpecies]
 	ld c, a
 	ld a, [wTempBattleMonSpecies]
@@ -1007,8 +978,13 @@ LoveBallMultiplier:
 
 	; check player mon species
 	push bc
+	ld a, [wTempBattleMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	xor a ; PARTYMON
 	ld [wMonType], a
 	ld a, [wCurBattleMon]
@@ -1023,8 +999,13 @@ LoveBallMultiplier:
 
 	; check wild mon species
 	push de
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	ld a, WILDMON
 	ld [wMonType], a
 	farcall GetGender
@@ -1061,7 +1042,11 @@ LoveBallMultiplier:
 FastBallMultiplier:
 ; multiply catch rate by 4 if enemy mon is in one of the three
 ; FleeMons tables.
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 	ld c, a
 	ld hl, FleeMons
 	ld d, 3
@@ -1120,7 +1105,13 @@ LevelBallMultiplier:
 
 RepeatBallMultiplier:
 ; multiply catch rate by 3 if enemy mon is already in Pokédex
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	dec a
 	push bc
 	call CheckCaughtMon
@@ -1532,16 +1523,16 @@ GetEVRelativePointer: ; eed9
 
 
 RareCandy_StatBooster_GetParameters: ; eef5
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	call GetPartyParamLocation
 	ld a, [wCurPartySpecies]
-	ld [wCurSpecies], a
 	ld [wd265], a
 	ld a, MON_LEVEL
 	call GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
-	ld a, MON_FORM
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	predef GetVariant
 	call GetBaseData ;frorm is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
@@ -1601,8 +1592,10 @@ RareCandy: ; ef14
 	xor a ; PARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon
-
 	farcall PrintStatDifferences
+	
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 
 	xor a ; PARTYMON
 	ld [wMonType], a
@@ -2025,6 +2018,8 @@ ItemActionText: ; f24a (3:724a)
 	ld [wPartyMenuActionText], a
 	ld a, [wCurPartySpecies]
 	push af
+	ld a, [wCurPartyGroup]
+	push af
 	ld a, [wCurPartyMon]
 	push af
 	push hl
@@ -2040,6 +2035,8 @@ ItemActionText: ; f24a (3:724a)
 	pop hl
 	pop af
 	ld [wCurPartyMon], a
+	pop af
+	ld [wCurPartyGroup], a
 	pop af
 	ld [wCurPartySpecies], a
 	ret
@@ -3263,13 +3260,8 @@ AbilityCap:
 	ld e, l
 	pop hl
 	push hl
-	ld a, MON_SPECIES
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	ld a, [hl]
-	ld [wCurSpecies], a
-	ld a, MON_FORM
-	call GetPartyParamLocation
-	predef GetVariant
 	call GetBaseData ;frorm is known
 	ld a, [wBaseAbility1]
 	ld b, a

@@ -173,10 +173,13 @@ CheckMentalHerb:
 CheckOppositeGender: ; 377f5
 ; Returns c (either mon is genderless), nc|z (same gender), nc|nz (opposite gender).
 ; Don't remove the possibility to check for same gender, Rivalry needs this.
-	ld a, MON_SPECIES
-	call BattlePartyAttr
-	ld a, [hl]
+	ld a, [wTempBattleMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
@@ -192,8 +195,13 @@ CheckOppositeGender: ; 377f5
 
 .got_gender
 	push bc
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	ld hl, wEnemyMonGender
 	ld a, [wEnemySubStatus2]
 	bit SUBSTATUS_TRANSFORMED, a

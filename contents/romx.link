@@ -15,7 +15,6 @@ ROMX $03
 ROMX $04
 	org $4000
 	"Code 4"
-	"Variant Pic Pointers"
 
 ROMX $05
 	org $4000
@@ -23,7 +22,6 @@ ROMX $05
 
 ROMX $06
 	org $4000
-	"Egg Moves"
 
 ROMX $07
 	org $4000
@@ -145,7 +143,8 @@ ROMX $23
 
 ROMX $24
 	org $4000
-	"Pic Pointers"
+	"Kanto Pic Pointers"
+	"Johto Pic Pointers"
 
 ROMX $25
 	org $4000
@@ -174,7 +173,6 @@ ROMX $2A
 ROMX $2B
 	org $4000
 	"Evolution"
-	"Evolutions and Attacks"
 
 ROMX $2C
 	org $4000

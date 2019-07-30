@@ -1533,9 +1533,10 @@ MoveScreenLoop:
 	and IS_EGG_MASK
 	ld a, d
 	jr nz, .loop_right_invalid
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	rst AddNTimes
-	ld a, [hl]
+	predef GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ld a, d
 	jr c, .loop_right_invalid
@@ -1571,9 +1572,10 @@ MoveScreenLoop:
 	and IS_EGG_MASK
 	ld a, d
 	jr nz, .loop_left_invalid
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	rst AddNTimes
-	ld a, [hl]
+	predef GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurPartySpecies]
 	call IsAPokemon
 	ld a, d
 	jr c, .loop_left_invalid
@@ -1699,48 +1701,49 @@ MoveScreenLoop:
 GetForgottenMoves::
 ; retrieve a list of a mon's forgotten moves, excluding ones beyond level
 ; and moves the mon already knows
-	ld a, MON_SPECIES
+	ld a, MON_GROUP_SPECIES_AND_FORM
 	call GetPartyParamLocation
-	ld a, [hl]
-	ld [wCurPartySpecies], a
+	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
 	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, d
+	ld a, d ;bank
 	call GetFarHalfword
 .skip_evos
-	ld a, BANK(EvosAttacks)
+	ld a, d ;bank
 	call GetFarByte
 	inc hl
 	and a
 	jr nz, .skip_evos
 
+	push de ;1
 	ld de, wMoveScreenMoves
 	ld c, a
 	ld b, 100 ; Gen VII behaviour
 	inc b ; so that we can use jr nc
 .loop
-	ld a, BANK(EvosAttacks)
+	pop af ;0 
+	push af;1
 	call GetFarByte
 	inc hl
+	dec sp ;0
 	and a
 	ret z
+	inc sp ;1
 	cp b
 	ret nc
-	ld a, BANK(EvosAttacks)
+	pop af ; 0
+	push af; 1
 	call GetFarByte
 	inc hl
 
 	; exclude moves the user already knows
-	push hl
-	push bc
+	push hl ;2
+	push bc ;3
 	ld b, a
 	ld a, MON_MOVES
 	call GetPartyParamLocation
@@ -1748,23 +1751,23 @@ GetForgottenMoves::
 	ld a, b
 	call .move_exists
 	jr z, .already_knows_move
-	pop bc
-	push bc
+	pop bc ;2
+	push bc;3
 	jr .move_ok
 	ld b, 0
 	ld hl, wMoveScreenMoves
 	call .move_exists
 	jr z, .already_knows_move
 .move_ok
-	pop bc
-	pop hl
+	pop bc ;2
+	pop hl ;1
 	ld [de], a
 	inc de
 	inc c
 	jr .loop
 .already_knows_move
-	pop bc
-	pop hl
+	pop bc ;2
+	pop hl ;1
 	jr .loop
 
 .move_exists
@@ -1775,6 +1778,7 @@ GetForgottenMoves::
 	ret z
 	dec c
 	jr nz, .move_exists_loop
+	pop af;0
 	inc c ; ret nz
 	ld a, b
 	ret

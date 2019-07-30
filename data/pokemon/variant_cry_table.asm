@@ -4,7 +4,8 @@ endm
 
 
 VariantCryTable:
-    variant_cries NIDORAN, Nidoran
-    variant_cries NIDORINO,  Nidorino
-    variant_cries NIDOKING,  Nidoking
-    dbba -1,        CryHeaders
+    variant_cries GROUP_GENERATION_ONE, Kanto
+    variant_cries GROUP_GENERATION_TWO, Johto
+    variant_cries GROUP_GENERATION_THREE, Hoenn
+
+    dbba -1,        KantoCries

@@ -320,12 +320,12 @@ endr
 	ld b, a
 	; Form
 	ld a, [wOTTrademonSpecies]
-	cp MAGIKARP
-	jr z, .magikarp
+	;cp MAGIKARP
+	;jr z, .magikarp
 	ld a, 1
 	jr .got_form_count
 .magikarp
-	ld a, NUM_MAGIKARP
+	;ld a, NUM_MAGIKARP
 .got_form_count
 	push bc
 	call RandomRange
@@ -334,11 +334,11 @@ endr
 	ld a, [wOTTrademonSpecies]
 	cp MAGIKARP
 	jr nz, .not_first_magikarp
-	ld a, [wFirstMagikarpSeen]
+	;ld a, [wFirstMagikarpSeen]
 	and a
 	jr nz, .not_first_magikarp
 	ld a, b
-	ld [wFirstMagikarpSeen], a
+	;ld [wFirstMagikarpSeen], a
 .not_first_magikarp
 	ld a, b
 	pop bc

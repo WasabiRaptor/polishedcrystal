@@ -222,18 +222,27 @@ BugContest_SetCaughtContestMon: ; e6ce
 
 .firstcatch
 	call .generatestats
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
-	ld [wd265], a
+	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
+	ld a, [wCurSpecies]
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	ld hl, .caughttext
 	jp PrintText
 
 .generatestats ; e6fd
-	ld hl, wEnemyMonForm
-	predef GetVariant
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
-	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
+
 	call GetBaseData ;form is known
 	xor a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -1043,11 +1052,12 @@ DisplayDexEntry: ; 4424d
 	lb bc, 9, 12
 	hlcoord 8, 1
 	call ClearBox
-
+	ld a, [wPokedexCurrentMon]
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	hlcoord 9, 3
 	call PlaceString ; mon species
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	call GetDexEntryPointer
 	ld a, b
 	push af
@@ -1063,8 +1073,11 @@ DisplayDexEntry: ; 4424d
 	ld [hli], a
 	ld a, "."
 	ld [hli], a
-	ld de, wd265
-	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
+	ld a, [wPokedexCurrentMon]
+	ld [wCurSpecies], a
+	call GetBaseData
+	ld de, wNatDexNo
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
 ;units
 	ld a, [wOptions2]
@@ -1087,7 +1100,7 @@ DisplayDexEntry: ; 4424d
 .done
 	farcall Pokedex_DrawFootprint
 ; Check to see if we caught it.  Get out of here if we haven't.
-	ld a, [wd265]
+	ld a, [wPokedexCurrentMon]
 	dec a
 	call CheckCaughtMon
 	pop hl
@@ -1217,24 +1230,22 @@ DisplayDexEntry: ; 4424d
 
 	ld a, [wPokedexStatus]
 	ld b, a
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	cp b
 	ld a, c
 	pop bc
 	ret z
 	cp $7f
 	jr nz, .statpage
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	inc a
-	ld [wDexSearchSlowpokeFrame], a
+	ld [wPokedexEntryBufferValue], a
 	push bc
 	push de
 	jr .skip_weight
 
 .statpage
 	push bc
-
-	call GetBaseData ;form is known
 	
 	lb bc, 9, 12
 	hlcoord 8, 1
@@ -1340,13 +1351,13 @@ DisplayDexEntry: ; 4424d
 .printdexability
 	pop af
 	ld e, a
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	inc a
-	ld [wDexSearchSlowpokeFrame], a
+	ld [wPokedexEntryBufferValue], a
 
 	ld a, [wPokedexStatus]
 	ld b, a
-	ld a,[wDexSearchSlowpokeFrame]
+	ld a,[wPokedexEntryBufferValue]
 	cp b
 	pop bc
 	ret z
@@ -1367,10 +1378,7 @@ DisplayDexEntry: ; 4424d
 	call PlaceString
 	ld a, [wBaseEggGroups]
 	and EGG_GROUP_1_MASK
-	rrca
-	rrca
-	rrca
-	rrca
+	swap a
 	ld b, a
 	call GetEggGroupString
 	hlcoord 3, 13
@@ -1468,12 +1476,8 @@ DisplayDexEntry: ; 4424d
 
 .Hpev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
+	rla
+	rla
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1483,10 +1487,8 @@ DisplayDexEntry: ; 4424d
 
 .Atkev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
+	swap a
+
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1516,12 +1518,8 @@ DisplayDexEntry: ; 4424d
 
 .Satev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
-	rrca
+	rla
+	rla
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1531,10 +1529,7 @@ DisplayDexEntry: ; 4424d
 
 .Sdfev
 	ld b, a
-	rrca
-	rrca
-	rrca
-	rrca
+	swap a
 	add "0"
 	ld [hli], a
 	inc hl
@@ -1651,54 +1646,41 @@ Mul16:
 	jr nz, .loop
 	ret
 
-GetDexEntryPointer: ; 44333
+GetDexEntryPointer:: ; 44333
 ; return dex entry pointer b:de
 	push hl
 ;get relevant pointers
+	push af
+	ld a, [wCurGroup]
 	ld hl, VariantPokedexEntryPointerTable
-	ld de, 4
+	ld de, 3
 	call IsInArray
 	inc hl
-	ld a, [hli]
-	ld c, a
-	push af
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
-	ld a, [wd265]
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
+	pop af
 	dec a
 	ld d, 0
 	ld e, a
 	add hl, de
 	add hl, de
+	add hl, de
+	ld b, [hl]
+	inc hl
 	ld e, [hl]
 	inc hl
 	ld d, [hl]
-	pop af
-	jr c, .donebanks
-	ld a, [wd265]
-	cp FLORGES
-	jr c, .donebanks
-	ld c, BANK(PokedexEntries2)
-	cp LAPRAS
-	jr c, .donebanks
-	ld c, BANK(PokedexEntries3)
-	cp TALONFLAME
-	jr c, .donebanks
-	ld c, BANK(PokedexEntries4)
-.donebanks
-	ld b, c	
 	pop hl
 	ret
 
-PokedexDataPointerTable: ; 0x44378
-INCLUDE "data/pokemon/dex_entry_pointers.asm"
-INCLUDE "data/pokemon/variant_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/variant_dex_entry_pointer_table.asm"
+
+PokedexDataPointerTable: ; 0x44378
+INCLUDE "data/pokemon/kanto_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/hoenn_dex_entry_pointers.asm"
 
 SECTION "Code 11", ROMX
 
@@ -2115,7 +2097,7 @@ FlagPredef: ; 4d7c1
 	jr .done
 
 .farcheck
-	call GetFarByte
+	call GetFarWRAMByte
 	and c
 
 .done
@@ -2125,15 +2107,10 @@ FlagPredef: ; 4d7c1
 	ret
 
 GetTrademonFrontpic: ; 4d7fd
-	ld a, [wOTTrademonSpecies]
-	ld hl, wOTTrademonForm
+	ld hl, wOTTrademonGroup
 	ld de, VTiles2
 	push de
-	push af
-	predef GetVariant
-	pop af
-	ld [wCurPartySpecies], a
-	ld [wCurSpecies], a
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	pop de
 	predef FrontpicPredef
@@ -2417,8 +2394,8 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 	ret
 
 CheckPartyFullAfterContest: ; 4d9e5
-	ld hl, wContestMonForm
-	predef GetVariant
+	ld hl, wContestMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wContestMon]
 	and a
 	jp z, .DidntCatchAnything
@@ -2439,7 +2416,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld [wCurSpecies], a
 	ld a, $ff
 	ld [hl], a
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	ld a, [wPartyCount]
 	dec a
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -2524,7 +2501,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	rst CopyBytes
 	farcall InsertPokemonIntoBox
 	ld a, [wCurPartySpecies]
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
 	call GiveANickname_YesNo
 	ld hl, wStringBuffer1
@@ -2603,7 +2580,6 @@ SetBoxmonOrEggmonCaughtData: ; 4db53
 	ld b, a
 	; CaughtTime
 	ld a, [wTimeOfDay]
-	inc a
 	rrca
 	rrca
 	rrca
@@ -2693,11 +2669,11 @@ _FindAtLeastThatHappy: ; 4dbd9
 	jp FindAtLeastThatHappy
 
 _FindThatSpecies: ; 4dbe0
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	jp FindThatSpecies
 
 _FindThatSpeciesYourTrainerID: ; 4dbe6
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	call FindThatSpecies
 	ret z
 	ld a, c
@@ -2812,83 +2788,6 @@ RetroactivelyIgnoreEggs: ; 4dc67
 	jr .loop
 
 INCLUDE "engine/stats_screen.asm"
-
-CatchTutorial:: ; 4e554
-	ld a, [wBattleType]
-	dec a
-	ld c, a
-	ld hl, .dw
-	ld b, 0
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	jp hl
-
-.dw ; 4e564 (13:6564)
-	dw .DudeTutorial
-	dw .DudeTutorial
-	dw .DudeTutorial
-
-.DudeTutorial: ; 4e56a (13:656a)
-; Back up your name
-	ld hl, wPlayerName
-	ld de, wBackupName
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-; Copy Dude's name to your name
-	ld hl, .Dude
-	ld de, wPlayerName
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-
-	call .LoadDudeData
-
-	xor a
-	ldh [hJoyDown], a
-	ldh [hJoyPressed], a
-
-	ld hl, .AutoInput
-	ld a, BANK(.AutoInput)
-	call StartAutoInput
-	farcall StartBattle
-	call StopAutoInput
-
-	ld hl, wBackupName
-	ld de, wPlayerName
-	ld bc, NAME_LENGTH
-	rst CopyBytes
-	ret
-
-.LoadDudeData: ; 4e5b7 (13:65b7)
-	ld hl, wDudeNumItems
-	ld de, .DudeItems
-	call .CopyDudeData
-	ld hl, wDudeNumMedicine
-	ld de, .DudeMedicine
-	call .CopyDudeData
-	ld hl, wDudeNumBalls
-	ld de, .DudeBalls
-.CopyDudeData:
-	ld a, [de]
-	inc de
-	ld [hli], a
-	cp -1
-	jr nz, .CopyDudeData
-	ret
-
-.Dude: ; 4e5da
-	db "Lyra@"
-.DudeItems:
-	db 2, REPEL, 1, GOLD_LEAF, 1, -1
-.DudeMedicine:
-	db 3, POTION, 2, ANTIDOTE, 1, FRESH_WATER, 1, -1
-.DudeBalls:
-	db 2, POKE_BALL, 10, PREMIER_BALL, 1, -1
-
-.AutoInput: ; 4e5df
-	db NO_INPUT, $ff ; end
 
 INCLUDE "engine/evolution_animation.asm"
 
@@ -3016,11 +2915,11 @@ CopyPkmnToTempMon: ; 5084a
 	call GetBaseData
 
 	ld a, [wMonType]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	and a
 	jr z, .copywholestruct
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	cp OTPARTYMON
 	jr z, .copywholestruct
@@ -3040,29 +2939,32 @@ CalcwBufferMonStats: ; 5088b
 	jr _TempMonStatsCalculation
 
 CalcTempmonStats: ; 50890
-	ld bc, wTempMon
+	ld bc, wTempMon ; the mon is in bc
 _TempMonStatsCalculation: ; 50893
 	ld hl, MON_LEVEL
-	add hl, bc
+	add hl, bc ; level in hl now
 	ld a, [hl]
 	ld [wCurPartyLevel], a
-	ld hl, MON_MAXHP
+	ld hl, MON_MAXHP ; max hp in hl
 	add hl, bc
-	ld d, h
+	ld d, h ; max hp in de now
 	ld e, l
 	ld hl, MON_EVS - 1
-	add hl, bc
-	push bc
+	add hl, bc ; last byte of exp here, which is just one before the evs
+	push bc ; mon's group is pushed
 	ld b, TRUE
 	predef CalcPkmnStats
-	pop bc
+	pop bc ; group is popped
 	ld hl, MON_HP
-	add hl, bc
-	ld d, h
+	add hl, bc ; hp in hl now
+	ld d, h ; hp in de now
 	ld e, l
-	ld a, [wCurPartySpecies]
-	cp EGG
-	jr nz, .not_egg
+	push hl
+	ld hl, MON_IS_EGG
+	add hl, bc
+	bit MON_IS_EGG_F, [hl]
+	pop hl
+	jr z, .not_egg
 	xor a
 	ld [de], a
 	inc de
@@ -3070,11 +2972,11 @@ _TempMonStatsCalculation: ; 50893
 	jr .zero_status
 
 .not_egg
-	push bc
+	push bc ; group is pushed
 	ld hl, MON_MAXHP
 	add hl, bc
 	ld bc, 2
-	rst CopyBytes
+	rst CopyBytes ; hp is copied from max to current
 	pop bc
 
 .zero_status
@@ -3599,14 +3501,15 @@ GetGender: ; 50bdd
 
 ; We need the gender ratio to do anything with this.
 	push bc
+	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
 	dec a
-	ld hl, BASEMON_GENDER
+	ld bc, BASEMON_GENDER
+	add hl, bc 
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
+	ld a, d ;bank
 	pop bc
-
-	ld a, BANK(BaseData)
 	call GetFarByte
 	swap a
 	and $f
@@ -3882,10 +3785,8 @@ ListMoves: ; 50d6f
 	ret
 
 CalcLevel: ; 50e1b
-	ld a, [wTempMonSpecies]
-	ld [wCurSpecies], a
-	ld hl, wTempMonForm
-	predef GetVariant
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	ld d, 1
 .next_level
@@ -4335,8 +4236,6 @@ InsertDataIntoBoxOrParty: ; 513e0
 	rst CopyBytes
 	ret
 
-INCLUDE "data/pokemon/names.asm"
-
 SECTION "Code 14", ROMX
 
 INCLUDE "engine/battle/abilities.asm"
@@ -4425,8 +4324,10 @@ INCLUDE "engine/sprites.asm"
 INCLUDE "engine/mon_icons.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
-INCLUDE "data/pokemon/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/variant_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/other_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/menu_icons.asm"
 
 
@@ -4680,41 +4581,65 @@ INCLUDE "engine/pic_animation.asm"
 ;	following bytes are tile ids mapped to each bit in the mask
 
 ; Main animations (played everywhere)
-INCLUDE "gfx/pokemon/anim_pointers.asm"
-INCLUDE "gfx/pokemon/anims.asm"
+INCLUDE "gfx/pokemon/other_anim_pointers.asm"
+INCLUDE "gfx/pokemon/other_anims.asm"
+
+INCLUDE "gfx/pokemon/kanto_anim_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_anims.asm"
 
 ; Extra animations, appended to the main animation
 ; Used in the status screen (blinking, tail wags etc.)
-INCLUDE "gfx/pokemon/extra_pointers.asm"
-INCLUDE "gfx/pokemon/extras.asm"
+INCLUDE "gfx/pokemon/other_idle_pointers.asm"
+INCLUDE "gfx/pokemon/other_idles.asm"
+
+INCLUDE "gfx/pokemon/kanto_idle_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_idles.asm"
 
 ; Variants have their own animation data despite having entries in the main tables
-INCLUDE "gfx/pokemon/variant_anim_pointers.asm"
-INCLUDE "gfx/pokemon/variant_anims.asm"
-INCLUDE "gfx/pokemon/variant_extra_pointers.asm"
-INCLUDE "gfx/pokemon/variant_extras.asm"
+INCLUDE "gfx/pokemon/johto_anim_pointers.asm"
+INCLUDE "gfx/pokemon/johto_anims.asm"
+INCLUDE "gfx/pokemon/johto_idle_pointers.asm"
+INCLUDE "gfx/pokemon/johto_idles.asm"
 
+INCLUDE "gfx/pokemon/hoenn_anim_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_anims.asm"
+INCLUDE "gfx/pokemon/hoenn_idle_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_idles.asm"
+
+SECTION "Pic Animations Frames 0", ROMX
+
+INCLUDE "gfx/pokemon/other_frame_pointers.asm"
+INCLUDE "gfx/pokemon/other_frames.asm"
 
 SECTION "Pic Animations Frames 1", ROMX
 
-INCLUDE "gfx/pokemon/frame_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_frame_pointers.asm"
 INCLUDE "gfx/pokemon/kanto_frames.asm"
 
 
 SECTION "Pic Animations Frames 2", ROMX
 
 INCLUDE "gfx/pokemon/johto_frames.asm"
-INCLUDE "gfx/pokemon/variant_frame_pointers.asm"
-INCLUDE "gfx/pokemon/variant_frames.asm"
+INCLUDE "gfx/pokemon/johto_frame_pointers.asm"
+
+
+SECTION "Pic Animations Frames 3", ROMX
+
+INCLUDE "gfx/pokemon/hoenn_frames.asm"
+INCLUDE "gfx/pokemon/hoenn_frame_pointers.asm"
 
 
 SECTION "Pic Animations Bitmasks", ROMX
 
 ; Bitmasks
-INCLUDE "gfx/pokemon/bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/bitmasks.asm"
-INCLUDE "gfx/pokemon/variant_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/variant_bitmasks.asm"
+INCLUDE "gfx/pokemon/other_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/other_bitmasks.asm"
+INCLUDE "gfx/pokemon/kanto_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_bitmasks.asm"
+INCLUDE "gfx/pokemon/johto_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/johto_bitmasks.asm"
+INCLUDE "gfx/pokemon/hoenn_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX
@@ -4857,8 +4782,75 @@ INCLUDE "data/wild/unlocked_unowns.asm"
 INCLUDE "data/wild/treemons_asleep.asm"
 
 
-SECTION "Base Data", ROMX
+SECTION "Kanto Base Data", ROMX
 
-INCLUDE "data/pokemon/base_stats.asm"
-INCLUDE "data/pokemon/variant_base_stats.asm"
-INCLUDE "data/pokemon/variant_names.asm"
+evs: MACRO
+	db (\1 << 6) | (\2 << 4) | (\3 << 2) | \4
+	db (\5 << 6) | (\6 << 4)
+ENDM
+
+tmhm: MACRO
+tms1_24 = 0
+tms25_48 = 0
+tms49_72 = 0
+tms73_96 = 0
+tms97_112 = 0
+rept _NARG
+if def(\1_TMNUM)
+	if \1_TMNUM < 25
+tms1_24 = tms1_24 | (1 << ((\1_TMNUM) - 1))
+	elif \1_TMNUM < 49
+tms25_48 = tms25_48 | (1 << ((\1_TMNUM) - 1 - 24))
+	elif \1_TMNUM < 73
+tms49_72 = tms49_72 | (1 << ((\1_TMNUM) - 1 - 48))
+	elif \1_TMNUM < 97
+tms73_96 = tms73_96 | (1 << ((\1_TMNUM) - 1 - 72))
+	elif \1_TMNUM < 113
+tms97_112 = tms97_112 | (1 << ((\1_TMNUM) - 1 - 96))
+	else
+		fail "\1 overflows base data"
+	endc
+else
+	fail "\1 is not a TM, HM, or move tutor move"
+endc
+	shift
+endr
+
+rept 3
+	db tms1_24 & $ff
+tms1_24 = tms1_24 >> 8
+endr
+rept 3
+	db tms25_48 & $ff
+tms25_48 = tms25_48 >> 8
+endr
+rept 3
+	db tms49_72 & $ff
+tms49_72 = tms49_72 >> 8
+endr
+rept 3
+	db tms73_96 & $ff
+tms73_96 = tms73_96 >> 8
+endr
+rept 2
+	db tms97_112 & $ff
+tms97_112 = tms97_112 >> 8
+endr
+ENDM
+
+INCLUDE "data/pokemon/kanto_base_stats.asm"
+INCLUDE "data/pokemon/kanto_names.asm"
+
+
+SECTION "Johto Base Data", ROMX
+
+INCLUDE "data/pokemon/johto_base_stats.asm"
+INCLUDE "data/pokemon/johto_names.asm"
+
+SECTION "Hoenn Base Data", ROMX
+
+INCLUDE "data/pokemon/hoenn_base_stats.asm"
+INCLUDE "data/pokemon/hoenn_names.asm"
+
+SECTION "Other Base Data", ROMX
+INCLUDE "data/pokemon/other_base_stats.asm"

@@ -315,12 +315,10 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 	call PartyMenuCheckEgg
 	jr z, .next
 	push hl
-	ld hl, wPartySpecies
-	ld e, b
-	ld d, 0
-	add hl, de
-	ld a, [hl]
-	ld [wCurPartySpecies], a
+	ld a, b
+	ld hl, wPartyMon1Group
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
 	predef CanLearnTMHMMove
 	pop hl
 	call .PlaceAbleNotAble
@@ -372,23 +370,16 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	jr z, .next
 	push hl
 	ld a, b
-	ld bc, PARTYMON_STRUCT_LENGTH
-	ld hl, wPartyMon1Species
-	rst AddNTimes
-	ld a, [hl]
-	ld [wCurPartySpecies], a
-	ld bc, wPartyMon1Form - wPartyMon1Species
-	add hl, bc 
-	predef GetVariant
-	ld a, [wCurPartySpecies]
+	ld hl, wPartyMon1Group
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
 	ld a, [wCurPartySpecies]
 	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after
-	jr nc, .notvariant
-	ld a, [wCurForm]
-.notvariant
-	;ld hl, VulpixEvosAttacksPointers
-	;ld b, BANK(VulpixEvosAttacksPointers)
+	;jr nc, .notvariant
+	;ld a, [wCurGroup]
+;.notvariant
 	dec a
 	ld d, 0
 	ld e, a
@@ -411,6 +402,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 
 .DetermineCompatibility: ; 50268
 	ld a, b ;this is the bank from GetRelevantEvosAttacksPointers
+	push bc
 	ld de, wStringBuffer1
 	ld bc, 2
 	call FarCopyBytes 
@@ -421,7 +413,8 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld de, wStringBuffer1
 ; Only reads first 4 evolution entries
 ; https://hax.iimarck.us/topic/4567/
-	ld a, BANK(EvosAttacks) ;not an issue here, all EvosAttacks are in the same bank
+	pop bc
+	ld a, b ; bank
 	ld bc, $10
 	call FarCopyBytes
 	ld hl, wStringBuffer1
@@ -468,11 +461,16 @@ PlacePartyMonGender: ; 502b1
 	push hl
 	call PartyMenuCheckEgg
 	jr z, .next
-	ld [wCurPartySpecies], a
 	ld a, [wCurPartyMon]
 	push af
 	ld a, b
 	ld [wCurPartyMon], a
+	push hl
+	ld hl, wPartyMon1Group
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+
+	pop hl
 	push hl
 	xor a
 	ld [wMonType], a
@@ -516,12 +514,11 @@ PlacePartyMonRemindable: ; 501e0
 	call PartyMenuCheckEgg
 	jr z, .next
 	push hl
-	ld hl, wPartySpecies
-	ld e, b
-	ld d, 0
-	add hl, de
-	ld a, [hl]
-	ld [wCurPartySpecies], a
+	ld a, b
+	ld hl, wPartyMon1Group
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+
 	farcall GetForgottenMoves
 	pop hl
 	call .PlaceAbleNotAble

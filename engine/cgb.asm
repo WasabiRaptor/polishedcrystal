@@ -72,9 +72,13 @@ endr
 _CGB_BattleColors: ; 8ddb
 	push bc
 	ld de, wUnknBGPals
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
 	call GetBattlemonBackpicPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
+
 	and a
 	jr z, .player_backsprite
 	push de
@@ -89,10 +93,13 @@ _CGB_BattleColors: ; 8ddb
 	call VaryColorsByDVs
 	pop de
 .player_backsprite
-
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurGroup], a
 	call GetEnemyFrontpicPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+
 	and a
 	jr z, .trainer_sprite
 	push de
@@ -248,6 +255,15 @@ _CGB_StatsScreenHPPals: ; 8edb
 	add hl, bc
 	call LoadPalette_White_Col1_Col2_Black
 
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
+
+	ld hl, wTempMonIsEgg ; prevent an egg from revealing if the mon inside is shiny until hatched
+	bit MON_IS_EGG_F, [hl]
+	jr z, .not_egg
+	xor a
+	ld [wTempMonPersonality], a
+.not_egg
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalettePointer
@@ -326,7 +342,6 @@ _CGB_Pokedex: ; 8f70
 	jr .got_palette
 .is_pokemon
 	ld bc, wDexMonShiny
-	ld a, [wCurForm]
 	ld [wDexMonForm], a
 	ld a, [wCurPartySpecies]
 
@@ -589,13 +604,18 @@ _CGB_Evolution: ; 91e4
 	jr .got_palette
 
 .pokemon
-	ld hl, wPartyMon1Personality
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
 	ld bc, PARTYMON_STRUCT_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
+	ld bc, MON_PERSONALITY
+	add hl, bc
 	ld c, l
 	ld b, h
-	ld a, [wPlayerHPPal]
+	ld a, [wHatchOrEvolutionResultGroup]
+	ld [wCurGroup], a
+	ld a, [wHatchOrEvolutionResultSpecies]
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
 	; hl = DVs
@@ -1030,6 +1050,8 @@ _CGB_PokedexUnownMode: ; 903e
 	ld de, wUnknBGPals
 	ld hl, PokedexRedPalette
 	call LoadHLPaletteIntoDE
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 
 	ld a, [wCurPartySpecies]
 	call GetMonPalettePointer
@@ -1052,6 +1074,8 @@ _CGB_BillsPC: ; 8fca
 	ld de, wUnknBGPals
 	ld hl, .MenuPalette
 	call LoadHLPaletteIntoDE
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
 
 	ld a, [wCurPartySpecies]
 	cp $ff
@@ -1267,6 +1291,11 @@ endc
 
 
 _CGB_PlayerOrMonFrontpicPals: ; 9529
+	push hl
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
+	pop hl
+
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
@@ -1280,6 +1309,11 @@ _CGB_PlayerOrMonFrontpicPals: ; 9529
 
 
 _CGB_TrainerOrMonFrontpicPals: ; 9578
+	push hl
+	ld hl, wTempMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
+	pop hl
+
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality

@@ -1,20 +1,20 @@
-	dw 00040
-	db 140,  70,  45,  45,  75,  50
-	evs  3,   0,   0,   0,   0,   0
-	;   hp  atk  def  spd  sat  sdf
-
-	db NORMAL, FAIRY ; type
-	db 50 ; catch rate
-	db 196 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	dn FEMALE_75, 1 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/wigglytuff/front.dimensions"
-	db CUTE_CHARM ; ability 1
-	db COMPETITIVE ; ability 2
-	db SOUNDPROOF ; hidden ability
-	db GROWTH_FAST ; growth rate
-	dn EGG_FAIRY, EGG_FAIRY ; egg groups
-
-	; tmhm
-	tmhm DYNAMICPUNCH, CURSE, TOXIC, HIDDEN_POWER, SUNNY_DAY, ICE_BEAM, BLIZZARD, HYPER_BEAM, LIGHT_SCREEN, PROTECT, RAIN_DANCE, SAFEGUARD, SOLAR_BEAM, THUNDERBOLT, THUNDER, RETURN, DIG, PSYCHIC, SHADOW_BALL, DOUBLE_TEAM, REFLECT, FLAMETHROWER, FIRE_BLAST, SUBSTITUTE, FACADE, WILD_CHARGE, REST, ATTRACT, DAZZLINGLEAM, ROCK_SMASH, FOCUS_BLAST, ENDURE, DRAIN_PUNCH, WATER_PULSE, GIGA_IMPACT, FLASH, THUNDER_WAVE, GYRO_BALL, STRENGTH, BODY_SLAM, COUNTER, DEFENSE_CURL, DOUBLE_EDGE, DREAM_EATER, FIRE_PUNCH, HEADBUTT, HYPER_VOICE, ICE_PUNCH, ICY_WIND, KNOCK_OFF, ROLLOUT, SEISMIC_TOSS, SLEEP_TALK, SWAGGER, THUNDERPUNCH, ZAP_CANNON
-	; end
+	dw 00040 ;national dex no
+        
+        db 140,  70,  45,  45,  85,  50
+        evs  3,   0,   0,   0,   0,   0
+        ;   hp  atk  def  spd  sat  sdf
+        
+        db NORMAL, FAIRY ; type
+        db 50 ; catch rate
+        db 196 ; base exp
+        db NO_ITEM, NO_ITEM ; items
+        dn FEMALE_75, 2 ; gender, step cycles to hatch
+        INCBIN "gfx/pokemon/wigglytuff/front.dimensions"  
+        db CUTE_CHARM, COMPETITIVE     ; abilities
+        db FRISK    ; hidden ability
+        db GROWTH_FAST ; growth rate
+        dn EGG_FAIRY, EGG_FAIRY ; egg groups
+        
+        ; tm/hm learnset
+        tmhm                                            
+        ; end

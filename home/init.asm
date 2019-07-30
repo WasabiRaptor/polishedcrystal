@@ -148,7 +148,7 @@ Init:: ; 17d
 	ldh [hBGMapAddress], a
 
 	xor a
-	ld [MBC3SRamEnable], a
+	ld [MBC5SRamEnable], a
 
 	ldh a, [hCGB]
 	and a

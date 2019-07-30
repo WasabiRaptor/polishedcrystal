@@ -139,7 +139,7 @@ ReadBTTrainerParty: ; 1702b7
 	ld [wBGMapBuffer + 1], a
 
 	; Copy Pkmn into Memory from the address in hl
-	ld de, wOTPartyMon1Species
+	ld de, wOTPartyMon1Group
 	ld bc, wOTPartyCount
 	ld a, BATTLETOWER_NROFPKMNS ; Number of Pkmn the BattleTower-Trainer has
 	ld [bc], a
@@ -572,6 +572,8 @@ Function_PartyCountEq3: ; 8b2da
 	scf
 	ret
 ; 8b2e2
+
+;TODO make account for the group
 
 Function_PartySpeciesAreUnique: ; 8b2e2
 	ld hl, wPartyMon1Species

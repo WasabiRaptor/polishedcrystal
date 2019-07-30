@@ -25,8 +25,6 @@ wChannel6:: channel_struct wChannel6
 wChannel7:: channel_struct wChannel7
 wChannel8:: channel_struct wChannel8
 
-	ds 1 ; unused
-
 wCurTrackDuty:: ds 1
 wCurTrackIntensity:: ds 1
 wCurTrackFrequency:: ds 2
@@ -223,7 +221,6 @@ wCurrAnimYOffset:: ds 1
 wGlobalAnimYOffset:: ds 1
 wGlobalAnimXOffset:: ds 1
 wSpriteAnimsEnd::
-
 
 SECTION "Music Player RAM", WRAM0
 
@@ -485,13 +482,9 @@ wEnemyMetronomeCount:: ds 1
 wAITempAbility:: ds 1
 wAITempItem:: ds 1
 
-	ds 16
-
 wBattleScriptBufferLoc:: ds 2
 
 wTurnEnded:: ds 1
-
-	ds 13
 
 wPlayerStatLevels::
 ; 07 neutral
@@ -639,7 +632,6 @@ wLastEnemyMove:: ds 1
 wEnemyUsingItem:: ds 1
 wEnemySwitchItemCheck:: ds 1
 
-	ds 7
 
 wPlayerFutureSightCount:: ds 1
 wEnemyFutureSightCount:: ds 1
@@ -768,13 +760,11 @@ wUnownPuzzleEnd::
 NEXTU
 ; Pokedex
 wPokedexDataStart::
-wPokedexOrder:: ds NUM_POKEMON +- 1
-wPokedexOrderEnd:: ds 6
 wPokedexMetadata::
+wPokedexRegion:: ds 1
 wDexListingScrollOffset:: ds 1 ; offset of the first displayed entry from the start
 wDexListingCursor:: ds 1 ; Dex cursor
 wDexListingEnd:: ds 1 ; Last mon to display
-wDexListingHeight:: ds 1 ; number of entries displayed at once in the dex listing
 wCurrentDexMode:: ds 1 ; Pokedex Mode
 wDexSearchMonType1:: ds 1 ; first type to search
 wDexSearchMonType2:: ds 1 ; second type to search
@@ -782,6 +772,7 @@ wDexSearchResultCount:: ds 1
 wDexArrowCursorPosIndex:: ds 1
 wDexArrowCursorDelayCounter:: ds 1
 wDexArrowCursorBlinkCounter:: ds 1
+wPokedexEntryBufferValue::
 wDexSearchSlowpokeFrame:: ds 1
 wUnlockedUnownMode:: ds 1
 wDexUnownCount:: ds 1
@@ -792,10 +783,11 @@ wBackupDexListingCursor:: ds 1
 wBackupDexListingPage:: ds 1
 wDexCurrentLocation:: ds 1
 wPokedexStatus:: ds 1
+wPokedexSeenCaughtCount::
+wPokedexCurrentMon:: ds 2
 wDexMonShiny:: ds 1
-wDexMonForm::
-wDexCurrentUnownIndex:: ds 1
-
+wDexCurrentUnownIndex::
+wDexMonForm:: ds 1
 wPokedexDataEnd::
 
 ENDU
@@ -878,8 +870,14 @@ wCreditsTimer:: ds 1
 
 wMemCGBLayout:: ds 1
 
-wPlayerHPPal:: ds 1
-wEnemyHPPal:: ds 1
+wHatchOrEvolutionResultSpecies::
+wPlayerHPPal:: 
+	ds 1
+
+wHatchOrEvolutionResultGroup::
+wEnemyHPPal:: 
+	ds 1
+
 wHPPals:: ds PARTY_LENGTH
 wCurHPPal:: ds 1
 wHPPalIndex:: ds 1
@@ -912,17 +910,25 @@ wcf5d:: ds 2 ; TODO: replace with meaningful label
 
 wMonType:: ds 1
 
+wCurGroup::	ds 1
 wCurSpecies::
 wCurMove::
-wCreditsSpawn::
+wCreditsSpawn::	ds 1
+wCurGender::
+wCurForm:: ds 1
+wCurPersonality:: ds 1
+wGiftPokeTID:: ds 2
+
+wHatchlingGroup::
+wGiftPokeBall:: ds 1
+
+wHatchlingSpecies::
+wJumptableIndex::
+wBattleTowerBattleEnded::
 	ds 1
 
 wNamedObjectTypeBuffer:: ds 1
 wCurrentOptionsPage:: ds 1
-
-wJumptableIndex::
-wBattleTowerBattleEnded::
-	ds 1
 
 UNION
 ; intro and title data
@@ -970,13 +976,6 @@ wPalFadeMode::
 ; bit 3: partial fade (fade b of c frames)
 ; bit 4: skip the last palette
 	ds 1
-
-wCurForm:: ds 1
-wCurGender:: ds 1
-wCurPersonality:: ds 1
-wGiftPokeTID:: ds 2
-wGiftPokeBall:: ds 1
-	ds 3 ; unused
 
 wWindowStackPointer:: ds 2
 wMenuJoypad:: ds 1
@@ -1155,3 +1154,14 @@ wSecondsSince:: ds 1
 wMinutesSince:: ds 1
 wHoursSince:: ds 1
 wDaysSince:: ds 1
+
+; this is used so often I'm moving it here just incase I break anything 
+
+wd265:: ; TODO: replace with meaningful labels
+wNamedObjectIndexBuffer::
+wCurKeyItemBuffer::
+wCurTMHMBuffer::
+wTypeMatchup::
+wFoundMatchingIDInParty::
+; usually 1 byte, may be up to 3 in some cases for wNamedObjectIndexBuffer
+	ds 3

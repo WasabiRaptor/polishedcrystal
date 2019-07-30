@@ -43,7 +43,23 @@ shift_const: MACRO
 const_value = const_value + 1
 ENDM
 
+nat_dexmon_group: macro
+	const_def \1
+	enum_start \2
+endm
 
+nat_dexmon: MACRO
+GROUP_\1 EQU __enum__
+	const \1
+ENDM
+
+evolution: macro
+if _NARG < 4
+	db \1, \2, GROUP_\3, \3
+else 
+	db \1, \2, \3, GROUP_\4, \4
+endc
+endm
 ; Enumerate strings
 
 define: MACRO

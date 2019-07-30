@@ -39,6 +39,9 @@ ReadTrainerParty: ; 39771
 
 ; species
 	call GetNextTrainerDataByte
+	ld [wCurPartyGroup], a
+
+	call GetNextTrainerDataByte
 	ld [wCurPartySpecies], a
 
 	ld a, OTPARTYMON
@@ -251,7 +254,7 @@ endr
 
 	ld a, [wOTPartyCount]
 	dec a
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld d, h

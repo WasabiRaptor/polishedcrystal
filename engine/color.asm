@@ -688,24 +688,31 @@ GetBattlemonBackpicPalettePointer:
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
+	ld a, [wTempBattleMonGroup]
+	push af
 	ld a, [wTempBattleMonSpecies]
 	push af
 	ld a, [wPlayerAbility]
 	cp ILLUSION
+	ld a, [wTempBattleMonSpecies]
 	jr nz, .no_illusion
 	ld a, [wPlayerSubStatus3]
 	and 1 << SUBSTATUS_DISGUISE_BROKEN
 	jr nz, .no_illusion
 	pop af
 	ld a, [wPartyCount]
-	ld hl, wPartyMon1Species
+	ld hl, wPartyMon1Group
 	farcall GetIllusion
-	jr .got_illusion
 
 .no_illusion
-	pop af
-.got_illusion
 	call GetPlayerOrMonPalettePointer
+	pop af
+	ld [wTempBattleMonSpecies], a
+	pop af 
+	ld [wTempBattleMonGroup], a
+	ld a, [wTempBattleMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
@@ -714,43 +721,39 @@ GetBattlemonBackpicPalettePointer:
 	ret
 
 GetEnemyFrontpicPalettePointer:
-	ld a, [wTempEnemyMonSpecies]
-	;cp MEWTWO
-	;jr nz, .not_armored_mewtwo
-	;ld a, [wBattleMode]
-	;cp 2
-	;jr nz, .not_armored_mewtwo
-	;ld a, [wOtherTrainerClass]
-	;cp GIOVANNI
-	;jr nz, .not_armored_mewtwo
-	;ld hl, MewtwoArmoredPalette
-	;ret
-.not_armored_mewtwo
 	push de
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h
+	ld a, [wTempEnemyMonGroup]
+	push af
 	ld a, [wTempEnemyMonSpecies]
 	push af
 	ld a, [wEnemyAbility]
 	cp ILLUSION
+	ld a, [wTempEnemyMonSpecies]
 	jr nz, .no_illusion
 	ld a, [wEnemySubStatus3]
 	and 1 << SUBSTATUS_DISGUISE_BROKEN
 	jr nz, .no_illusion
 	pop af
 	ld a, [wOTPartyCount]
-	ld hl, wOTPartyMon1Species
+	ld hl, wOTPartyMon1Group
 	farcall GetIllusion
-	jr .got_illusion
 
 .no_illusion
-	pop af
-.got_illusion
 	call GetFrontpicPalettePointer
+	pop af
+	ld [wTempEnemyMonSpecies], a
+	pop af
+	ld [wTempEnemyMonGroup], a
+	ld a, [wTempEnemyMonGroup]
+	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+
 	pop de
 	ret
 
@@ -829,12 +832,10 @@ LoadPaintingPalette:
 
 GetMonPalettePointer:
 	push de
+	push af
 	call GetRelevantPallete
+	pop af
 	pop de
-	jr nc, .notvariant
-	ld a, [wCurForm]
-
-.notvariant
 	dec a	
 	ld l, a
 	ld h, $0
@@ -846,11 +847,11 @@ GetMonPalettePointer:
 
 GetMonNormalOrShinyPalettePointer:
 	push bc
-	ld h, b
-	ld l, c
+	;ld h, b
+	;ld l, c
 	push af
-	inc hl
-	predef GetVariant
+	;inc hl
+	;predef GetPartyMonGroupSpeciesAndForm
 	pop af
 	call GetMonPalettePointer
 	pop bc
@@ -877,6 +878,11 @@ LoadPokemonPalette:
 
 LoadPartyMonPalette:
 	; bc = personality
+	ld hl, wPartyMon1Group
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+	
 	ld hl, wPartyMon1Personality
 	ld a, [wCurPartyMon]
 	call GetPartyLocation
@@ -905,23 +911,24 @@ LoadPartyMonPalette:
 
 GetRelevantPallete:
 ; given species in a, return *Palette in bc
+	ld a, [wCurGroup]
 	ld hl, VariantPaletteTable
 	ld de, 4
 	call IsInArray
-	ld d, c
 	inc hl
 	inc hl
 	ld a, [hli]
 	ld c, a
 	ld b, [hl]
-	ld a, d
 	ret
 
 INCLUDE "data/pokemon/variant_palette_table.asm"
 
-INCLUDE "data/pokemon/variant_palettes.asm"
+INCLUDE "data/pokemon/kanto_palettes.asm"
 
-INCLUDE "data/pokemon/palettes.asm"
+INCLUDE "data/pokemon/johto_palettes.asm"
+
+INCLUDE "data/pokemon/hoenn_palettes.asm"
 
 LoadPortraitPalette:
 	call GetPortraitPalettePointer
