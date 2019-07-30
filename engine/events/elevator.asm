@@ -119,7 +119,7 @@ Elevator_AskWhichFloor: ; 134dd
 	call Elevator_GetCurrentFloorText
 	ld hl, Elevator_MenuDataHeader
 	call CopyMenuDataHeader
-	call InitScrollingMenu
+	farcall InitScrollingMenu
 	call UpdateSprites
 	xor a
 	ld [wMenuScrollPosition], a

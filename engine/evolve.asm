@@ -801,7 +801,7 @@ GetPreEvolution: ; 42581
 	ld [wCurGroup], a
 
 .grouploop
-	call GetMaxNumPokemonForGroup
+	farcall GetMaxNumPokemonForGroup
 	ld c, a
 .loop ; For each Pokemon...
 	dec c
