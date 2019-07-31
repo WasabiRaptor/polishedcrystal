@@ -1,22 +1,3 @@
-WaitForSoundToFinish::
-	ld a, [wLowHealthAlarm]
-	and $80
-	ret nz
-	push hl
-.waitLoop
-	ld hl, wChannel5
-	xor a
-	or [hl]
-	inc hl
-	or [hl]
-	inc hl
-	inc hl
-	or [hl]
-	and a
-	jr nz, .waitLoop
-	pop hl
-	ret
-
 PlayImportedSoundPCM::
 	ld a, [hROMBank]
 	push af
@@ -26,40 +7,43 @@ PlayImportedSoundPCM::
 	ld c, a
 	ld a, [hli]
 	ld b, a
+	dec bc
 .loop
 	ld a, [hli]
 	ld d, a
-	ld a, $3
-.playSingleSample
-	dec a
-	jr nz, .playSingleSample
-
-	rept 7
-	call LoadNextSoundClipSample
-	call PlaySoundClipSample
-	endr
-
-	call LoadNextSoundClipSample
-	dec bc
-	ld a, c
-	or b
-	jr nz, .loop
-	pop af
-	rst Bankswitch
-	ret
-
-LoadNextSoundClipSample::
-	ld a, d
-	and $80
-	srl a
+	
+	and $c0
 	srl a
 	ld [rNR32], a
 	sla d
-	ret
+	sla d
+	nop
+	nop
+	ld a, d
+	and $c0
+	srl a
+	ld [rNR32], a
+	sla d
+	sla d
 
-PlaySoundClipSample::
-	ld a, $3
-.loop
-	dec a
-	jr nz, .loop
+	dec bc
+
+	ld a, d
+	and $c0
+	srl a
+	ld [rNR32], a
+	sla d
+	sla d
+	nop
+	nop
+	ld a, d
+	and $c0
+	srl a
+	ld [rNR32], a
+
+	add b
+	jr nc, .loop
+
+	pop af
+	rst Bankswitch
 	ret

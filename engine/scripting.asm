@@ -268,6 +268,8 @@ ScriptCommandTable:
 	dw Script_takekeyitem
 	dw Script_verbosegivekeyitem            ; aa
 	dw Script_keyitemnotify                 ; ab
+	
+	dw Script_playimport				; ac
 
 StartScript:
 	ld hl, wScriptFlags
@@ -3088,3 +3090,10 @@ Script_keyitemnotify:
 	ld b, BANK(PutItemInPocketText)
 	ld hl, PutItemInPocketText
 	jp MapTextbox
+
+Script_playimport:
+; parameters:
+;     import_pointer (SingleByteParam)
+	call GetScriptByte
+	jp PlayImportedSoundClip
+

@@ -1,22 +1,6 @@
-PlayHMSLaugh::
-    ldimportsound e, HMSLaugh
-    call PlayImportedSoundClip
-    ret
-
-PlayWind1::
-    ldimportsound e, Wind1
-    call PlayImportedSoundClip
-    ret
-
-PlayWind2::
-    ldimportsound e, Wind2
-    call PlayImportedSoundClip
-    ret
-
 PlayImportedSoundClip::
-    ld a, e
-    ld a, a
     ld d, $0
+    ld e, a
     ld hl, ImportedSoundsPointerTable
     add hl, de
     add hl, de
@@ -100,7 +84,7 @@ PlayImportedSoundClip::
 	ei
 	ret
 
-ImportedSoundsPointerTable:
+ImportedSoundsPointerTable::
 ; format:
 ; db bank
 ; dw pointer to cry
