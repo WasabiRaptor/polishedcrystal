@@ -6877,7 +6877,7 @@ LoadEnemyMon: ; 3e8eb
 
 	; Failing that, it's all up to chance
 
-	call GetLeadAbility
+	farcall GetLeadAbility
 if DEF(FAITHFUL)
 	cp COMPOUND_EYES
 	jr nz, .no_compound_eyes_or_amulet_coin
@@ -6970,7 +6970,7 @@ endc
 
 	; Random nature from 0 to 24
 	; 50% chance of same nature with Synchronize ability
-	call GetLeadAbility
+	farcall GetLeadAbility
 	cp SYNCHRONIZE
 	jr nz, .no_synchronize
 	call BattleRandom
@@ -7074,7 +7074,7 @@ endc
 
 	; Gender. If lead has Cute Charm, force opposite gender 2/3
 	; of the time
-	call GetLeadAbility
+	farcall GetLeadAbility
 	cp CUTE_CHARM
 	jr nz, .not_cute_charm
 	ld a, 3

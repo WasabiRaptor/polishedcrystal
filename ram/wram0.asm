@@ -517,6 +517,9 @@ wPlayerTurnsTaken:: ds 1
 wPlayerSubstituteHP:: ds 2
 wEnemySubstituteHP:: ds 2
 
+wc0f3:: ds 1
+wc0f4:: ds 1
+
 wBackupEnemyMonBaseExp:: ds 1
 
 wCurPlayerMove:: ds 1
@@ -804,6 +807,10 @@ wOverworldMapEnd::
 NEXTU
 ; credits image
 wCreditsFaux2bpp:: ds 8 * 8 * 2
+
+wRedrawRowOrColumnSrcTiles:: ; cbfc
+; the tiles of the row or column to be redrawn by RedrawRowOrColumn
+	ds SCREEN_WIDTH * 2
 
 NEXTU
 ; Bill's PC

@@ -48,52 +48,7 @@ INCLUDE "home/flag.asm"
 INCLUDE "home/restore_music.asm"
 
 IsAPokemon::
-; Return carry if species a is not a Pokemon.
-	and a
-	jp z, .not_a_pokemon
-	push hl
-	push bc
-	push de
-	push af
-	call GetMaxNumPokemonForGroup
-	pop de
-	jr nc, .not_a_pokemon_2
-	cp d
-	jr c, .not_a_pokemon_2
-	ld a, d
-	and a
-	pop de
-	pop bc
-	pop hl
-	ret
-
-.not_a_pokemon_2
-	pop de
-	pop bc
-	pop hl
-.not_a_pokemon
-	scf
-	ret
-
-GetMaxNumPokemonForGroup::
-	ld a, [wCurGroup]
-	ld hl, RegionalMaxPokemonTable
-	ld de, 2
-	call IsInArray
-	inc hl
-	ld a, [hl]
-	ret
-
-RegionalMaxPokemonTable:
-	db GROUP_GENERATION_ONE, NUM_KANTO_POKEMON
-	db GROUP_GENERATION_TWO, NUM_JOHTO_POKEMON
-	db GROUP_GENERATION_THREE, NUM_HOENN_POKEMON
-	db GROUP_GENERATION_FOUR, NUM_SINNOH_POKEMON
-	db GROUP_GENERATION_FIVE, NUM_UNOVA_POKEMON
-	db GROUP_GENERATION_SIX, NUM_KALOS_POKEMON
-	db GROUP_GENERATION_SEVEN, NUM_ALOLA_POKEMON
-	db GROUP_GENERATION_EIGHT, NUM_GALAR_POKEMON
-	db -1, 0
+	farjp _IsAPokemon
 
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
@@ -815,23 +770,6 @@ ScrollingMenu:: ; 350c
 	jp SetPalettes
 ; 352f
 
-InitScrollingMenu:: ; 352f
-	ld a, [wMenuBorderTopCoord]
-	dec a
-	ld b, a
-	ld a, [wMenuBorderBottomCoord]
-	sub b
-	ld d, a
-	ld a, [wMenuBorderLeftCoord]
-	dec a
-	ld c, a
-	ld a, [wMenuBorderRightCoord]
-	sub c
-	ld e, a
-	push de
-	call Coord2Tile
-	pop bc
-	jp TextBox
 ; 354b
 
 JoyTextDelay_ForcehJoyDown:: ; 354b joypad
@@ -1452,33 +1390,6 @@ GetNature::
 	ld b, NO_NATURE
 	ret
 
-GetLeadAbility::
-; Returns ability of lead mon unless it's an Egg. Used for field
-; abilities
-	ld a, [wPartyMon1IsEgg]
-	and IS_EGG_MASK
-	xor IS_EGG_MASK
-	ret z
-	ld a, [wPartyMon1Species] ;merely making sure that party mon 1 is a pokemon I guess
-	inc a
-	ret z
-	dec a
-	ret z
-	push bc
-	push de
-	push hl
-	ld hl, wPartyMon1Group
-	predef PokemonToGroupSpeciesAndForm
-	ld a, [wCurSpecies]
-	ld c, a
-	ld a, [wPartyMon1Ability]
-	ld b, a
-	call GetAbility
-	ld a, b
-	pop hl
-	pop de
-	pop bc
-	ret
 
 GetAbility::
 ; 'b' contains the target ability to check
@@ -1745,3 +1656,5 @@ Inc16BitNumInHL::
 	dec hl
 	inc [hl]
 	ret
+
+INCLUDE "home/imported_sounds.asm"

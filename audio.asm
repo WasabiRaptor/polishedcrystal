@@ -355,6 +355,8 @@ SECTION "Sound Effects", ROMX
 
 INCLUDE "audio/sfx.asm"
 
+INCLUDE "audio/imported_sounds.asm"
+
 
 SECTION "Crystal Sound Effects", ROMX
 

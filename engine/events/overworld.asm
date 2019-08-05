@@ -1606,7 +1606,7 @@ FishFunction: ; cf8e
 	; Suction Cups and Sticky Hold boost bite rate. This is done
 	; by having these abilities result in 2 attempts being made
 	; for getting an encounter.
-	call GetLeadAbility
+	farcall GetLeadAbility
 	cp SUCTION_CUPS
 	jr z, .fish_attempt1
 	cp STICKY_HOLD
