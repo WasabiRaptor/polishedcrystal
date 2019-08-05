@@ -81,7 +81,7 @@ _LoadStandardMaybeOpaqueFont:
 	push af
 	ld bc, 0
 	call PutFontPointerInDE
-	ld hl, VTiles0 tile "A"
+	ld hl, VTiles0 tile $80
 	lb bc, BANK(FontNormal), $73
 	call GetMaybeOpaque1bpp
 

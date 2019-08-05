@@ -689,7 +689,7 @@ PokedexShow2:
 	push hl
 	call CopyDexEntryPart1
 	dec hl
-	ld [hl], "<DONE>"
+	ld [hl], "@"
 	ld hl, wPokedexShowPointerAddr
 	call CopyRadioTextToRAM
 	pop hl
@@ -759,7 +759,7 @@ CopyDexEntry:
 	push hl
 	call CopyDexEntryPart1
 	dec hl
-	ld [hl], "<DONE>"
+	ld [hl], "@"
 	ld hl, wPokedexShowPointerAddr
 	call CopyRadioTextToRAM
 	pop hl

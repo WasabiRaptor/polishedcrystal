@@ -864,8 +864,6 @@ TownMap_ConvertLineBreakCharacters: ; 1de2c5
 	ld a, [hl]
 	cp "@"
 	jr z, .end
-	cp "<NEXT>"
-	jr z, .space
 	cp "¯"
 	jr z, .space
 	inc hl

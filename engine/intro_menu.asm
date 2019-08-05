@@ -91,7 +91,7 @@ NewGame: ; 5b6b
 _NewGame_FinishSetup:
 	call ResetWRAM
 	call NewGame_ClearTileMapEtc
-	call SetInitialOptions
+	;call SetInitialOptions
 	call ProfElmSpeech
 	call InitializeWorld
 	ld a, 1
@@ -668,7 +668,7 @@ ProfElmSpeech: ; 0x5f99
 
 	ld hl, ElmText1
 	ld de, ElmName
-	call PrintNamedText
+	call PrintText
 if !DEF(DEBUG)
 	ld c, 15
 	call FadeToWhite

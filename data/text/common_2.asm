@@ -1280,10 +1280,10 @@ _InitialOptionsText::
 	prompt
 
 _ElmText1::
-	text "Hello! Sorry to"
-	line "keep you waiting!"
+	text "Variable width text? smells"
+	line "like feature creep to me."
 
-if !DEF(DEBUG)
+;if !DEF(DEBUG)
 	para "Welcome to the"
 	line "world of #mon!"
 
@@ -1291,7 +1291,7 @@ if !DEF(DEBUG)
 
 	para "People call me the"
 	line "#mon Prof."
-endc
+;endc
 	prompt
 
 _ElmText2::

@@ -314,7 +314,6 @@ PlaceString::
 	ld bc, VTiles0 tile "A"
 	ld a, "A"
 	ld [wVariableWidthTextTile], a
-
 	xor a
 	ld [wVariableWidthTextCurTileColsFilled], a
 	push bc
@@ -341,7 +340,7 @@ NextChar::
 
 CheckDict::
 	cp $60
-	jp nc, .notDict
+	jp nc, PlaceCharacter
 dict: macro
 if \1 == 0
 	and a
@@ -359,20 +358,20 @@ dict2: macro
 endm
 
 	dict "<START>",  NullChar
-	;dict "<FAR>",    TextFar
-	;dict "<LNBRK>",  LineBreak
-	;dict "<NEXT>",   NextChar
-	;dict "<_CONT>",  LinkButtonSound
-	;dict "<SCRL2>",  ScrollText
-	;dict "<NL>",     NextLineChar
-	;dict "<LINE>",   LineChar
-	;dict "<PARA>",   Paragraph
+	dict "<FAR>",    TextFar
+	dict "<LNBRK>",  LineBreak
+	dict "<NEXT>",   NextChar
+	dict "<_CONT>",  LinkButtonSound
+	dict "<SCRL2>",  ScrollText
+	dict "<NL>",     NextLineChar
+	dict "<LINE>",   LineChar
+	dict "<PARA>",   Paragraph
 	;dict "<PLAYER>", PrintPlayerName
 	;dict "<RIVAL>",  PrintRivalName
-	;dict "<CONT>",   ContText
+	dict "<CONT>",   ContText
 	;dict "<TRENDY>", PrintTrendyPhrase
-	;dict "<DONE>",   DoneText
-	;dict "<PROMPT>", PromptText
+	dict "<DONE>",   DoneText
+	dict "<PROMPT>", PromptText
 	;dict "<TARGET>", PlaceMoveTargetsName
 	;dict "<USER>",   PlaceMoveUsersName
 	;dict "<ENEMY>",  PlaceEnemysName
@@ -401,24 +400,27 @@ endm
 	;dict "ing",      PlaceIng
 	;dict2 "¯", " "
 
-.notDict
-	ld a, "a"
+PlaceCharacter::
 	push de
 	push af
 	push hl;1
 	push bc;2
-	ld a, "a" - "A"
-	ld hl, FontNormal
 	ld bc, LEN_1BPP_TILE
+
+	cp " "
+	jr nz, .notspace
+	xor a
+	ld hl, wPerliminaryVariableWidthTile
+	call ByteFill
+	jr .donespace
+.notspace
+	sub "A"
+	ld hl, FontNormal
+	ld de, wPerliminaryVariableWidthTile
 	rst AddNTimes
 	ld a, BANK(FontNormal)
-	ld de, wPerliminaryVariableWidthTile
 	call FarCopyBytes
-
-	ld bc, LEN_1BPP_TILE
-	ld de, wCombinedVaribleWidthTiles
-	ld hl, wCombinedVaribleWidthTiles + LEN_1BPP_TILE
-	rst CopyBytes
+.donespace
 
 	ld hl, wCombinedVaribleWidthTiles
 	ld de, wPerliminaryVariableWidthTile
@@ -426,43 +428,55 @@ endm
 	call CombineRows
 
 	pop bc;1
-	push bc;2
-	ld h, b
-	ld l, c
-
-	ld de, wCombinedVaribleWidthTiles
-	ld c, 2
-	call GetMaybeOpaque1bpp
-	
-	pop bc;1
 	pop hl;0
 	ld a, [wVariableWidthTextTile]
 	ld [hl], a
 	pop af
-	ld a, "a"
 
-	;farcall GetCharacterWidth
-	ld e, 5
+	farcall GetCharacterWidth
+	;ld e, 9
 	ld a, [wVariableWidthTextCurTileColsFilled]
 	add e
-	;ld [wVariableWidthTextCurTileColsFilled], a
+	ld [wVariableWidthTextCurTileColsFilled], a
 	cp 8
 	jr c, .sametile
 	sub 8
-	;ld [wVariableWidthTextCurTileColsFilled], a
+	ld [wVariableWidthTextCurTileColsFilled], a
 	inc hl
 	ld a, [wVariableWidthTextTile]
 	inc a
 	ld [wVariableWidthTextTile], a
 	ld [hl], a
 	push hl
+	push bc
+	ld h, b
+	ld l, c
+	ld de, wCombinedVaribleWidthTiles
+	lb bc, BANK(FontNormal), 2
+	call GetMaybeOpaque1bpp
+	ld bc, LEN_1BPP_TILE
+	ld de, wCombinedVaribleWidthTiles
+	ld hl, wCombinedVaribleWidthTiles + LEN_1BPP_TILE
+	rst CopyBytes
+	pop bc
 	ld hl, 1 tiles
 	add hl, bc
 	ld b, h
 	ld c, l
 	pop hl
+	jr .letterdelay
 .sametile
-	
+	push hl
+	push bc
+	ld h, b
+	ld l, c
+
+	ld de, wCombinedVaribleWidthTiles
+	lb bc, BANK(FontNormal), 1
+	call GetMaybeOpaque1bpp
+	pop bc
+	pop hl
+.letterdelay
 	pop de	
 	farcall PrintLetterDelay
 	jp NextChar
@@ -477,19 +491,21 @@ CombineRows::
 	push de
 	push hl
 	ld d, a
-	ld d, %10000001
-	;ld c, 2
+	and a
 	ld e, 0
+	jr z, .done ; no point wasting time copying an empty line
+	;ld d, %10000001
+	;ld c, 2
 .loop
 	dec c
 	jr z, .done
-	rrc d
-	rr e
+	rr d
+	rr e	
 	jr .loop
 .done
 	ld a, [hl]
-	;or d
-	ld [hl], d
+	or d
+	ld [hl], a
 	ld bc, LEN_1BPP_TILE
 	add hl, bc
 	ld [hl], e
@@ -581,6 +597,28 @@ PlaceAn: print_name .AnText
 PlaceIng: print_name .IngText
 .IngText: db "i", "n", "g", "@"
 
+NextVariableWidthTextTile::
+	push hl
+
+	push bc
+	xor a
+	ld [wVariableWidthTextCurTileColsFilled], a
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+	pop bc
+
+	ld a, [wVariableWidthTextTile]
+	inc a
+	ld [wVariableWidthTextTile], a
+	ld hl, 1 tiles
+	add hl, bc
+	ld b, h
+	ld c, l
+
+	pop hl
+	ret
+
 PlaceMoveTargetsName::
 	ldh a, [hBattleTurn]
 	xor 1
@@ -642,24 +680,30 @@ PlaceCommandCharacter::
 	jp NextChar
 
 NextLineChar::
+	call NextVariableWidthTextTile
 	ld a, [wTextBoxFlags]
 	bit NO_LINE_SPACING, a
 	jr nz, LineBreak
 	pop hl
+	push bc
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
+	pop bc
 	push hl
 	jp NextChar
 
 LineBreak::
 	pop hl
+	push bc
 	ld bc, SCREEN_WIDTH
 	add hl, bc
+	pop bc
 	push hl
 	jp NextChar
 
 TextFar::
 	pop hl
+	push bc
 	push de
 	ld bc, -wTileMap + $10000
 	add hl, bc
@@ -696,10 +740,12 @@ TextFar::
 	ld c, a
 	ld b, 0
 	add hl, bc
+	pop bc
 	push hl
 	jp NextChar
 
 LineChar::
+	call NextVariableWidthTextTile
 	pop hl
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	push hl
@@ -735,11 +781,23 @@ Paragraph::
 	jr .loop
 .got_delay
 	call DelayFrames
+
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+	xor a
+	ld [wVariableWidthTextCurTileColsFilled], a
+	ld [wVariableWidthTextCurTileColsFilled], a
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+	ld bc, VTiles0 tile "A"
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
 	jp NextChar
 
 LinkButtonSound::
+	call NextVariableWidthTextTile
+	push bc
 	ld a, [wLinkMode]
 	or a
 	jr nz, .communication
@@ -755,16 +813,20 @@ LinkButtonSound::
 	ld a, [wLinkMode]
 	or a
 	call z, UnloadBlinkingCursor
+	pop bc
 
 ScrollText::
+	push bc
 	push de
 	call TextScroll
 	call TextScroll
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	pop de
+	pop bc
 	jp NextChar
 
 ContText::
+	push bc
 	push de
 	ld de, .cont
 	ld b, h
@@ -773,6 +835,7 @@ ContText::
 	ld h, b
 	ld l, c
 	pop de
+	pop bc
 	jp NextChar
 
 .cont	db "<_CONT>@"
@@ -792,6 +855,8 @@ PromptText::
 	call UnloadBlinkingCursor
 
 DoneText::
+	pop af
+	ldh [rSVBK], a
 	pop hl
 	ld de, .stop
 	dec de

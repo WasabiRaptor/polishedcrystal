@@ -4991,6 +4991,7 @@ CharacterWidths:
 	db "8", 5 +1
 	db "9", 5 +1
 	db "/", 4 +1
+	db " ", 3
 	db -1, 8
 
 PrintLetterDelay:: ; 313d
