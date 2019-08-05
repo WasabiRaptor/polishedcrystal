@@ -312,7 +312,7 @@ endr
 	ld a, [wCurForm]
 	push af ; 4 form is pushed
 
-	call GetLeadAbility
+	farcall GetLeadAbility
 	ld b, a
 
 	pop af ; 3 form is popped

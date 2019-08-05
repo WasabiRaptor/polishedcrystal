@@ -400,7 +400,7 @@ PopulateDecoCategoryMenu: ; 2695b
 	call CopyMenuDataHeader
 	xor a
 	ldh [hBGMapMode], a
-	call InitScrollingMenu
+	farcall InitScrollingMenu
 	xor a
 	ld [wMenuScrollPosition], a
 	call ScrollingMenu
