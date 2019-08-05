@@ -305,8 +305,13 @@ SetUpTextBox::
 	ret
 
 PlaceString::
+	ld bc, VTiles0 tile "A"
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+PlaceStringAtBC::
 	push hl
-
+	xor a
+	ld [wVariableWidthTextCurTileColsFilled], a
 PlaceNextChar::
 	ld a, [de]
 	cp "@"
@@ -383,7 +388,53 @@ endm
 	dict2 "¯", " "
 
 .notDict
-	ld [hli], a
+	push de
+	push bc
+	push hl
+
+	push af
+	ld hl, CharacterWidths
+	call IsInArray
+	inc hl
+	ld d, [hl]
+	ld a, [wVariableWidthTextCurTileColsFilled]
+	add d
+	ld [wVariableWidthTextCurTileColsFilled],a
+	cp 8
+	jr nc, .sametile
+	sub 8
+	ld [wVariableWidthTextCurTileColsFilled],a
+	pop de
+	pop hl
+	inc hl
+	ld a, [wVariableWidthTextTile]
+	inc a
+	ld [wVariableWidthTextTile], a
+	push hl
+	push de
+.sametile
+
+	pop af
+	sub $80 ; this is only here until I change the charmap
+	ld hl, FontNormal
+	ld e, a
+	ld d, 0
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	pop bc
+	push hl
+	ld h, b
+	ld l, c
+
+	lb bc, BANK(FontTiles), 1
+	call GetMaybeOpaque1bpp
+
+	pop hl
+	ld a, [wVariableWidthTextTile]
+	ld [hl], a
+	pop de
 	call PrintLetterDelay
 	jp NextChar
 
@@ -392,6 +443,85 @@ print_name: macro
 	ld de, \1
 	jp PlaceCommandCharacter
 endm
+
+CharacterWidths:
+	db "a", 4
+	db "b", 4
+	db "c", 4
+	db "d", 4
+	db "e", 4
+	db "f", 4
+	db "g", 4
+	db "h", 4
+	db "i", 2
+	db "j", 2
+	db "k", 4
+	db "l", 2
+	db "m", 7
+	db "n", 4
+	db "o", 4
+	db "p", 4
+	db "q", 4
+	db "r", 4
+	db "s", 4
+	db "t", 3
+	db "u", 4
+	db "v", 5
+	db "w", 7
+	db "x", 4
+	db "y", 4
+	db "z", 4
+	db "A", 5
+	db "B", 5
+	db "C", 5
+	db "D", 5
+	db "E", 5
+	db "F", 5
+	db "G", 5
+	db "H", 5
+	db "I", 3
+	db "J", 5
+	db "K", 5
+	db "L", 4
+	db "M", 7
+	db "N", 5
+	db "O", 5
+	db "P", 5
+	db "Q", 6
+	db "R", 5
+	db "S", 5
+	db "T", 5
+	db "U", 5
+	db "V", 5
+	db "W", 7
+	db "X", 5
+	db "Y", 5
+	db "Z", 5
+	db "(", 3
+	db ")", 3
+	db ".", 1
+	db ",", 2
+	db "?", 5
+	db "!", 3
+	db "-", 4
+	db ":", 1
+	db "é", 5
+	db "♀", 5
+	db "♂", 7
+	db "“", 2
+	db "”", 2
+	db "0", 5
+	db "1", 2
+	db "2", 5
+	db "3", 5
+	db "4", 5
+	db "5", 5
+	db "6", 5
+	db "7", 5
+	db "8", 5
+	db "9", 5
+	db "/", 4
+	db -1, 8
 
 PrintPlayerName:   print_name wPlayerName
 PrintRivalName:    print_name wRivalName

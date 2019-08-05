@@ -1165,3 +1165,6 @@ wTypeMatchup::
 wFoundMatchingIDInParty::
 ; usually 1 byte, may be up to 3 in some cases for wNamedObjectIndexBuffer
 	ds 3
+
+wVariableWidthTextTile:: ds 1
+wVariableWidthTextCurTileColsFilled:: ds 1
