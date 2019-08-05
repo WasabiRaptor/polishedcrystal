@@ -1,5 +1,5 @@
 FontTiles::
-FontNormal:
+FontNormal::
 INCBIN "gfx/font/normal.1bpp"
 FontNarrow:
 INCBIN "gfx/font/narrow.1bpp"

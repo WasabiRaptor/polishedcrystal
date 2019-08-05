@@ -72,23 +72,6 @@ EnableSpriteUpdates:: ; 2ee4
 ; 2ef6
 
 INCLUDE "home/string.asm"
-
-IsInJohto:: ; 2f17
-; Return z if the player is in Johto, and nz in Kanto or Shamouti Island.
-	call GetCurrentLandmark
-	cp KANTO_LANDMARK
-	jr nc, .kanto_or_orange
-.johto
-	xor a ; JOHTO_REGION
-	and a
-	ret
-
-.kanto_or_orange
-	ld a, KANTO_REGION
-	and a
-	ret
-; 2f3e
-
 INCLUDE "home/item.asm"
 INCLUDE "home/random.asm"
 INCLUDE "home/sram.asm"
@@ -200,63 +183,6 @@ SkipNames:: ; 0x30f4
 ; 0x30fe
 
 INCLUDE "home/math.asm"
-
-PrintLetterDelay:: ; 313d
-; Wait before printing the next letter.
-
-; The text speed setting in wOptions1 is actually a frame count:
-; 	fast: 1 frame
-; 	mid:  3 frames
-; 	slow: 5 frames
-
-; wTextBoxFlags[!0] and A or B override text speed with a one-frame delay.
-; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
-
-	ld a, [wTextBoxFlags]
-	bit 1, a
-	ret z
-	bit 0, a
-	jr z, .forceFastScroll
-
-	ld a, [wOptions1]
-	bit NO_TEXT_SCROLL, a
-	ret nz
-	and %11
-	ret z
-	ld a, $1
-	ldh [hBGMapHalf], a
-.forceFastScroll
-	push hl
-	push de
-	push bc
-; force fast scroll?
-	ld a, [wTextBoxFlags]
-	bit 0, a
-	ld a, 2
-	jr z, .updateDelay
-; text speed
-	ld a, [wOptions1]
-	and %11
-	rlca
-.updateDelay
-	dec a
-	ld [wTextDelayFrames], a
-.textDelayLoop
-	ld a, [wTextDelayFrames]
-	and a
-	jr z, .done
-	call DelayFrame
-	call GetJoypad
-; Finish execution if A or B is pressed
-	ldh a, [hJoyDown]
-	and A_BUTTON | B_BUTTON
-	jr z, .textDelayLoop
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-; 318c
 
 CopyDataUntil:: ; 318c
 ; Copy [hl .. bc) to de.
@@ -1201,66 +1127,6 @@ PrintWinLossText:: ; 3718
 	jp WaitPressAorB_BlinkCursor
 ; 3741
 
-DrawBattleHPBar:: ; 3750
-; Draw an HP bar d tiles long at hl
-; Fill it up to e pixels
-
-	push hl
-	push de
-	push bc
-
-; Place 'HP:'
-	ld a, "<HP1>"
-	ld [hli], a
-	inc a ; ld a, "<HP2>"
-	ld [hli], a
-
-; Draw a template
-	push hl
-	inc a ; ld a, "<NOHP>" ; empty bar
-.template
-	ld [hli], a
-	dec d
-	jr nz, .template
-	ld a, "<HPEND>" ; bar end cap
-	ld [hl], a
-	pop hl
-
-; Safety check # pixels
-	ld a, e
-	and a
-	jr nz, .fill
-	ld a, c
-	and a
-	jr z, .done
-	ld e, 1
-
-.fill
-; Keep drawing tiles until pixel length is reached
-	ld a, e
-	sub TILE_WIDTH
-	jr c, .lastbar
-
-	ld e, a
-	ld a, "<FULLHP>"
-	ld [hli], a
-	ld a, e
-	and a
-	jr z, .done
-	jr .fill
-
-.lastbar
-	ld a, "<NOHP>"
-	add e
-	ld [hl], a
-
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-; 3786
-
 PrepMonFrontpic:: ; 3786
 	ld a, $1
 	ld [wBoxAlignment], a
@@ -1292,28 +1158,6 @@ _PrepMonFrontpic:: ; 378b
 
 INCLUDE "home/cry.asm"
 
-PrintLevel:: ; 382d
-; Print wTempMonLevel at hl
-
-	ld a, [wTempMonLevel]
-	ld [hl], "<LV>"
-	inc hl
-
-; How many digits?
-	ld c, 2
-	cp 100
-	jr c, Print8BitNumRightAlign
-
-; 3-digit numbers overwrite the :L.
-	dec hl
-	inc c
-	; fallthrough
-
-Print8BitNumRightAlign:: ; 3842
-	ld [wd265], a
-	ld de, wd265
-	ld b, PRINTNUM_LEFTALIGN | 1
-	jp PrintNum
 ; 384d
 
 GetRelevantBaseData::
@@ -1505,7 +1349,7 @@ PrintBCDNumber:: ; 38bb
 	inc hl
 .skipCurrencySymbol
 	ld [hl], "0"
-	call PrintLetterDelay
+	farcall PrintLetterDelay
 	inc hl
 	ret
 ; 0x38f2
@@ -1528,7 +1372,7 @@ PrintBCDDigit:: ; 38f2
 .outputDigit
 	add a, "0"
 	ld [hli], a
-	jp PrintLetterDelay
+	farjp PrintLetterDelay
 
 .zeroDigit
 	bit 7, b ; either printing leading zeroes or already reached a nonzero digit?
@@ -1651,8 +1495,6 @@ INCLUDE "home/audio.asm"
 Inc16BitNumInHL::
 	inc [hl]
 	ret nz
-	xor a
-	ld [hl], a
 	dec hl
 	inc [hl]
 	ret

@@ -305,19 +305,33 @@ SetUpTextBox::
 	ret
 
 PlaceString::
+	push hl
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wDecompressScratch)
+	ldh [rSVBK], a
+
 	ld bc, VTiles0 tile "A"
 	ld a, "A"
 	ld [wVariableWidthTextTile], a
-PlaceStringAtBC::
-	push hl
+
 	xor a
 	ld [wVariableWidthTextCurTileColsFilled], a
+	push bc
+	push hl
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+	pop hl
+	pop bc
 PlaceNextChar::
 	ld a, [de]
 	cp "@"
 	jr nz, CheckDict
 	ld b, h
 	ld c, l
+	pop af
+	ldh [rSVBK], a
 	pop hl
 	ret
 
@@ -345,183 +359,154 @@ dict2: macro
 endm
 
 	dict "<START>",  NullChar
-	dict "<FAR>",    TextFar
-	dict "<LNBRK>",  LineBreak
-	dict "<NEXT>",   NextChar
-	dict "<_CONT>",  LinkButtonSound
-	dict "<SCRL2>",  ScrollText
-	dict "<NL>",     NextLineChar
-	dict "<LINE>",   LineChar
-	dict "<PARA>",   Paragraph
-	dict "<PLAYER>", PrintPlayerName
-	dict "<RIVAL>",  PrintRivalName
-	dict "<CONT>",   ContText
-	dict "<TRENDY>", PrintTrendyPhrase
-	dict "<DONE>",   DoneText
-	dict "<PROMPT>", PromptText
-	dict "<TARGET>", PlaceMoveTargetsName
-	dict "<USER>",   PlaceMoveUsersName
-	dict "<ENEMY>",  PlaceEnemysName
-	dict "#",        PlacePoke
-	dict "le",       PlaceLe
-	dict "ng",       PlaceNg
-	dict "te",       PlaceTe
-	dict "as",       PlaceAs
-	dict "or",       PlaceOr
-	dict "ou",       PlaceOu
-	dict "re",       PlaceRe
-	dict "in",       PlaceIn
-	dict "er",       PlaceEr
-	dict "on",       PlaceOn
-	dict "th",       PlaceTh
-	dict "and",      PlaceAnd
-	dict "the",      PlaceThe
-	dict "you",      PlaceYou
-	dict "#mon",     PlacePokemon
-	dict "to",       PlaceTo
-	dict "have",     PlaceHave
-	dict "that",     PlaceThat
-	dict "for",      PlaceFor
-	dict "with",     PlaceWith
-	dict "an",       PlaceAn
-	dict "ing",      PlaceIng
-	dict2 "¯", " "
+	;dict "<FAR>",    TextFar
+	;dict "<LNBRK>",  LineBreak
+	;dict "<NEXT>",   NextChar
+	;dict "<_CONT>",  LinkButtonSound
+	;dict "<SCRL2>",  ScrollText
+	;dict "<NL>",     NextLineChar
+	;dict "<LINE>",   LineChar
+	;dict "<PARA>",   Paragraph
+	;dict "<PLAYER>", PrintPlayerName
+	;dict "<RIVAL>",  PrintRivalName
+	;dict "<CONT>",   ContText
+	;dict "<TRENDY>", PrintTrendyPhrase
+	;dict "<DONE>",   DoneText
+	;dict "<PROMPT>", PromptText
+	;dict "<TARGET>", PlaceMoveTargetsName
+	;dict "<USER>",   PlaceMoveUsersName
+	;dict "<ENEMY>",  PlaceEnemysName
+	;dict "#",        PlacePoke
+	;dict "le",       PlaceLe
+	;dict "ng",       PlaceNg
+	;dict "te",       PlaceTe
+	;dict "as",       PlaceAs
+	;dict "or",       PlaceOr
+	;dict "ou",       PlaceOu
+	;dict "re",       PlaceRe
+	;dict "in",       PlaceIn
+	;dict "er",       PlaceEr
+	;dict "on",       PlaceOn
+	;dict "th",       PlaceTh
+	;dict "and",      PlaceAnd
+	;dict "the",      PlaceThe
+	;dict "you",      PlaceYou
+	;dict "#mon",     PlacePokemon
+	;dict "to",       PlaceTo
+	;dict "have",     PlaceHave
+	;dict "that",     PlaceThat
+	;dict "for",      PlaceFor
+	;dict "with",     PlaceWith
+	;dict "an",       PlaceAn
+	;dict "ing",      PlaceIng
+	;dict2 "¯", " "
 
 .notDict
+	ld a, "a"
 	push de
-	push bc
-	push hl
-
 	push af
-	ld hl, CharacterWidths
-	call IsInArray
-	inc hl
-	ld d, [hl]
+	push hl;1
+	push bc;2
+	ld a, "a" - "A"
+	ld hl, FontNormal
+	ld bc, LEN_1BPP_TILE
+	rst AddNTimes
+	ld a, BANK(FontNormal)
+	ld de, wPerliminaryVariableWidthTile
+	call FarCopyBytes
+
+	ld bc, LEN_1BPP_TILE
+	ld de, wCombinedVaribleWidthTiles
+	ld hl, wCombinedVaribleWidthTiles + LEN_1BPP_TILE
+	rst CopyBytes
+
+	ld hl, wCombinedVaribleWidthTiles
+	ld de, wPerliminaryVariableWidthTile
+	ld b, 8
+	call CombineRows
+
+	pop bc;1
+	push bc;2
+	ld h, b
+	ld l, c
+
+	ld de, wCombinedVaribleWidthTiles
+	ld c, 2
+	call GetMaybeOpaque1bpp
+	
+	pop bc;1
+	pop hl;0
+	ld a, [wVariableWidthTextTile]
+	ld [hl], a
+	pop af
+	ld a, "a"
+
+	;farcall GetCharacterWidth
+	ld e, 5
 	ld a, [wVariableWidthTextCurTileColsFilled]
-	add d
-	ld [wVariableWidthTextCurTileColsFilled],a
+	add e
+	;ld [wVariableWidthTextCurTileColsFilled], a
 	cp 8
-	jr nc, .sametile
+	jr c, .sametile
 	sub 8
-	ld [wVariableWidthTextCurTileColsFilled],a
-	pop de
-	pop hl
+	;ld [wVariableWidthTextCurTileColsFilled], a
 	inc hl
 	ld a, [wVariableWidthTextTile]
 	inc a
 	ld [wVariableWidthTextTile], a
-	push hl
-	push de
-.sametile
-
-	pop af
-	sub $80 ; this is only here until I change the charmap
-	ld hl, FontNormal
-	ld e, a
-	ld d, 0
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
-	pop bc
-	push hl
-	ld h, b
-	ld l, c
-
-	lb bc, BANK(FontTiles), 1
-	call GetMaybeOpaque1bpp
-
-	pop hl
-	ld a, [wVariableWidthTextTile]
 	ld [hl], a
-	pop de
-	call PrintLetterDelay
+	push hl
+	ld hl, 1 tiles
+	add hl, bc
+	ld b, h
+	ld c, l
+	pop hl
+.sametile
+	
+	pop de	
+	farcall PrintLetterDelay
 	jp NextChar
+
+CombineRows::
+	ld a, [wVariableWidthTextCurTileColsFilled]
+	ld c, a
+	inc c
+.loop1
+	ld a, [de]
+	push bc
+	push de
+	push hl
+	ld d, a
+	ld d, %10000001
+	;ld c, 2
+	ld e, 0
+.loop
+	dec c
+	jr z, .done
+	rrc d
+	rr e
+	jr .loop
+.done
+	ld a, [hl]
+	;or d
+	ld [hl], d
+	ld bc, LEN_1BPP_TILE
+	add hl, bc
+	ld [hl], e
+	pop hl
+	pop de
+	inc hl
+	inc de
+	pop bc
+	dec b
+	jr nz, .loop1
+	ret
 
 print_name: macro
 	push de
 	ld de, \1
 	jp PlaceCommandCharacter
 endm
-
-CharacterWidths:
-	db "a", 4
-	db "b", 4
-	db "c", 4
-	db "d", 4
-	db "e", 4
-	db "f", 4
-	db "g", 4
-	db "h", 4
-	db "i", 2
-	db "j", 2
-	db "k", 4
-	db "l", 2
-	db "m", 7
-	db "n", 4
-	db "o", 4
-	db "p", 4
-	db "q", 4
-	db "r", 4
-	db "s", 4
-	db "t", 3
-	db "u", 4
-	db "v", 5
-	db "w", 7
-	db "x", 4
-	db "y", 4
-	db "z", 4
-	db "A", 5
-	db "B", 5
-	db "C", 5
-	db "D", 5
-	db "E", 5
-	db "F", 5
-	db "G", 5
-	db "H", 5
-	db "I", 3
-	db "J", 5
-	db "K", 5
-	db "L", 4
-	db "M", 7
-	db "N", 5
-	db "O", 5
-	db "P", 5
-	db "Q", 6
-	db "R", 5
-	db "S", 5
-	db "T", 5
-	db "U", 5
-	db "V", 5
-	db "W", 7
-	db "X", 5
-	db "Y", 5
-	db "Z", 5
-	db "(", 3
-	db ")", 3
-	db ".", 1
-	db ",", 2
-	db "?", 5
-	db "!", 3
-	db "-", 4
-	db ":", 1
-	db "é", 5
-	db "♀", 5
-	db "♂", 7
-	db "“", 2
-	db "”", 2
-	db "0", 5
-	db "1", 2
-	db "2", 5
-	db "3", 5
-	db "4", 5
-	db "5", 5
-	db "6", 5
-	db "7", 5
-	db "8", 5
-	db "9", 5
-	db "/", 4
-	db -1, 8
 
 PrintPlayerName:   print_name wPlayerName
 PrintRivalName:    print_name wRivalName
@@ -816,7 +801,7 @@ DoneText::
 NullChar::
 	ld a, "?"
 	ld [hli], a
-	call PrintLetterDelay
+	farcall PrintLetterDelay
 	jp NextChar
 
 TextScroll::

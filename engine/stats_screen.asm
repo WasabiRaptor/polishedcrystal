@@ -332,7 +332,7 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	ld de, wNatDexNo
 	call PrintNum
 	hlcoord 14, 0
-	call PrintLevel
+	farcall PrintLevel
 	ld hl, .NicknamePointers
 	call GetNicknamePointer
 	call CopyNickname
@@ -577,7 +577,7 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 	inc a
 	ld [wTempMonLevel], a
 .AtMaxLevel:
-	call PrintLevel
+	farcall PrintLevel
 	pop af
 	ld [wTempMonLevel], a
 	ret

@@ -4912,7 +4912,7 @@ endr
 	hlcoord 15, 8
 	ld a, [wBattleMonLevel]
 	ld [wTempMonLevel], a
-	jp PrintLevel
+	farjp PrintLevel
 ; 3e036
 
 UpdateEnemyHUD:: ; 3e036
@@ -4986,7 +4986,7 @@ endr
 	hlcoord 5, 1
 	ld a, [wEnemyMonLevel]
 	ld [wTempMonLevel], a
-	call PrintLevel
+	farcall PrintLevel
 
 	ld hl, wEnemyMonHP
 	ld a, [hli]
@@ -5050,7 +5050,7 @@ endr
 	xor a
 	ld [wWhichHPBar], a
 	hlcoord 1, 2
-	call DrawBattleHPBar
+	farcall DrawBattleHPBar
 
 	farcall LoadEnemyStatusIcon
 	hlcoord 2, 1

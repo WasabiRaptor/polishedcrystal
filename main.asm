@@ -315,7 +315,7 @@ DisplayCaughtContestMonStats: ; cc000
 	ld l, c
 	ld a, [wContestMonLevel]
 	ld [wTempMonLevel], a
-	call PrintLevel
+	farcall PrintLevel
 
 	ld de, wEnemyMonNick
 	hlcoord 1, 8
@@ -325,7 +325,7 @@ DisplayCaughtContestMonStats: ; cc000
 	ld l, c
 	ld a, [wEnemyMonLevel]
 	ld [wTempMonLevel], a
-	call PrintLevel
+	farcall PrintLevel
 
 	hlcoord 11, 4
 	ld de, wContestMonMaxHP
@@ -3107,7 +3107,7 @@ DrawPlayerHP: ; 50b0a
 	push de
 	push hl
 	push hl
-	call DrawBattleHPBar
+	farcall DrawBattleHPBar
 	pop hl
 
 ; Print HP
@@ -4878,6 +4878,177 @@ GetLeadAbility::
 	pop de
 	pop bc
 	ret
+
+PrintLevel:: ; 382d
+; Print wTempMonLevel at hl
+
+	ld a, [wTempMonLevel]
+	ld [hl], "<LV>"
+	inc hl
+
+; How many digits?
+	ld c, 2
+	cp 100
+	jp c, Print8BitNumRightAlign
+
+; 3-digit numbers overwrite the :L.
+	dec hl
+	inc c
+	; fallthrough
+
+Print8BitNumRightAlign:: ; 3842
+	ld [wd265], a
+	ld de, wd265
+	ld b, PRINTNUM_LEFTALIGN | 1
+	jp PrintNum
+
+GetCharacterWidth::
+	push hl
+	push bc
+	ld hl, CharacterWidths
+	ld de, 2
+	call IsInArray
+	inc hl
+	ld e, [hl]
+	pop bc
+	pop hl
+	ret
+
+CharacterWidths:
+	db "a", 4 +1
+	db "b", 4 +1
+	db "c", 4 +1
+	db "d", 4 +1
+	db "e", 4 +1
+	db "f", 4 +1
+	db "g", 4 +1
+	db "h", 4 +1
+	db "i", 2 +1
+	db "j", 2 +1
+	db "k", 4 +1
+	db "l", 2 +1
+	db "m", 7 +1
+	db "n", 4 +1
+	db "o", 4 +1
+	db "p", 4 +1
+	db "q", 4 +1
+	db "r", 4 +1
+	db "s", 4 +1
+	db "t", 3 +1
+	db "u", 4 +1
+	db "v", 5 +1
+	db "w", 7 +1
+	db "x", 4 +1
+	db "y", 4 +1
+	db "z", 4 +1
+	db "A", 5 +1
+	db "B", 5 +1
+	db "C", 5 +1
+	db "D", 5 +1
+	db "E", 5 +1
+	db "F", 5 +1
+	db "G", 5 +1
+	db "H", 5 +1
+	db "I", 3 +1
+	db "J", 5 +1
+	db "K", 5 +1
+	db "L", 4 +1
+	db "M", 7 +1
+	db "N", 5 +1
+	db "O", 5 +1
+	db "P", 5 +1
+	db "Q", 6 +1
+	db "R", 5 +1
+	db "S", 5 +1
+	db "T", 5 +1
+	db "U", 5 +1
+	db "V", 5 +1
+	db "W", 7 +1
+	db "X", 5 +1
+	db "Y", 5 +1
+	db "Z", 5 +1
+	db "(", 3 +1
+	db ")", 3 +1
+	db ".", 1 +1
+	db ",", 2 +1
+	db "?", 5 +1
+	db "!", 3 +1
+	db "-", 4 +1
+	db ":", 1 +1
+	db "é", 5 +1
+	db "♀", 5 +1
+	db "♂", 7 +1
+	db "“", 2 +1
+	db "”", 2 +1
+	db "0", 5 +1
+	db "1", 2 +1
+	db "2", 5 +1
+	db "3", 5 +1
+	db "4", 5 +1
+	db "5", 5 +1
+	db "6", 5 +1
+	db "7", 5 +1
+	db "8", 5 +1
+	db "9", 5 +1
+	db "/", 4 +1
+	db -1, 8
+
+PrintLetterDelay:: ; 313d
+; Wait before printing the next letter.
+
+; The text speed setting in wOptions1 is actually a frame count:
+; 	fast: 1 frame
+; 	mid:  3 frames
+; 	slow: 5 frames
+
+; wTextBoxFlags[!0] and A or B override text speed with a one-frame delay.
+; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
+
+	ld a, [wTextBoxFlags]
+	bit 1, a
+	ret z
+	bit 0, a
+	jr z, .forceFastScroll
+
+	ld a, [wOptions1]
+	bit NO_TEXT_SCROLL, a
+	ret nz
+	and %11
+	ret z
+	ld a, $1
+	ldh [hBGMapHalf], a
+.forceFastScroll
+	push hl
+	push de
+	push bc
+; force fast scroll?
+	ld a, [wTextBoxFlags]
+	bit 0, a
+	ld a, 2
+	jr z, .updateDelay
+; text speed
+	ld a, [wOptions1]
+	and %11
+	rlca
+.updateDelay
+	dec a
+	ld [wTextDelayFrames], a
+.textDelayLoop
+	ld a, [wTextDelayFrames]
+	and a
+	jr z, .done
+	call DelayFrame
+	call GetJoypad
+; Finish execution if A or B is pressed
+	ldh a, [hJoyDown]
+	and A_BUTTON | B_BUTTON
+	jr z, .textDelayLoop
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+; 318c
 
 SECTION "Kanto Base Data", ROMX
 

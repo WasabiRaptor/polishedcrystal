@@ -1730,10 +1730,10 @@ GetForgottenMoves::
 	push af;1
 	call GetFarByte
 	inc hl
-	dec sp ;0
+	inc sp ;0
 	and a
 	ret z
-	inc sp ;1
+	dec sp ;1
 	cp b
 	ret nc
 	pop af ; 0
@@ -1824,7 +1824,7 @@ SetUpMoveScreenBG: ; 13172
 	push bc
 	farcall CopyPkmnToTempMon
 	pop hl
-	call PrintLevel
+	farcall PrintLevel
 	ld hl, wPlayerHPPal
 	call SetHPPal
 	call SetPalettes

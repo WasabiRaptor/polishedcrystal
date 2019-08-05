@@ -1080,7 +1080,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	call PlaceString
 
 	hlcoord 1, 12
-	call PrintLevel
+	farcall PrintLevel
 
 	ld a, $3
 	ld [wMonType], a

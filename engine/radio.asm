@@ -8,8 +8,6 @@ PlayRadioShow:
 	bit 0, a ; ENGINE_ROCKETS_IN_RADIO_TOWER
 	jr z, .ok
 ; If we're in Kanto, we don't need to be here.
-	call IsInJohto
-	jr nz, .ok
 ; Team Rocket broadcasts on all stations.
 	ld a, ROCKET_RADIO
 	ld [wCurrentRadioLine], a

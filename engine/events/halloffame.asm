@@ -512,7 +512,7 @@ DisplayHOFMon: ; 86748
 	ld de, wStringBuffer2
 	call PlaceString
 	hlcoord 1, 16
-	call PrintLevel
+	farcall PrintLevel
 
 .print_id_no
 	hlcoord 7, 16
