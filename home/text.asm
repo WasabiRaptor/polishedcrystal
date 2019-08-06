@@ -304,6 +304,14 @@ SetUpTextBox::
 	pop hl
 	ret
 
+PlaceBCString::
+	push hl
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wDecompressScratch)
+	ldh [rSVBK], a
+	jr _PlaceBCString
+	
 PlaceString::
 	push hl
 	ldh a, [rSVBK]
@@ -314,6 +322,7 @@ PlaceString::
 	ld bc, VTiles0 tile "A"
 	ld a, "A"
 	ld [wVariableWidthTextTile], a
+_PlaceBCString:
 	xor a
 	ld [wVariableWidthTextCurTileColsFilled], a
 	push bc
@@ -372,6 +381,7 @@ endm
 	;dict "<TRENDY>", PrintTrendyPhrase
 	dict "<DONE>",   DoneText
 	dict "<PROMPT>", PromptText
+	dict "<_NEXT>",  NextTextTile
 	;dict "<TARGET>", PlaceMoveTargetsName
 	;dict "<USER>",   PlaceMoveUsersName
 	;dict "<ENEMY>",  PlaceEnemysName
@@ -596,6 +606,10 @@ PlaceAn: print_name .AnText
 
 PlaceIng: print_name .IngText
 .IngText: db "i", "n", "g", "@"
+
+NextTextTile::
+	call NextVariableWidthTextTile
+	jp NextChar
 
 NextVariableWidthTextTile::
 	push hl

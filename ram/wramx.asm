@@ -1425,7 +1425,6 @@ NEXTU
 wScratchTileMap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 wScratchAttrMap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 NEXTU
-wVariableWidthTextTile:: ds 1
 wVariableWidthTextCurTileColsFilled:: ds 1
 
 wPerliminaryVariableWidthTile:: ds 1 * LEN_1BPP_TILE

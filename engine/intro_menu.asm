@@ -833,6 +833,7 @@ InitGender: ; 48dcb (12:4dcb)
 	db 7, 13 ; start coords
 	db 11, 19 ; end coords
 	dw .MenuData2
+	dw .MenuData3
 	db 1 ; default option
 ; 0x48e04
 
@@ -842,6 +843,11 @@ InitGender: ; 48dcb (12:4dcb)
 	db "Boy@"
 	db "Girl@"
 ; 0x48e0f
+.MenuData3:
+	db $c1
+	db 2
+	dbw $c0, VTiles0 tile $c0
+	dbw $c2, VTiles0 tile $c2
 
 AreYouABoyOrAreYouAGirlText: ; 0x48e0f
 	; Are you a boy? Or are you a girl?
