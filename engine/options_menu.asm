@@ -1,4 +1,5 @@
 _OptionsMenu: ; e41d0
+	FullWidthText
 	ld hl, hInMenu
 	ld a, [hl]
 	push af

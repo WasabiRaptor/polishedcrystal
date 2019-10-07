@@ -24,6 +24,7 @@ InitIntroGradient::
 INCBIN "gfx/new_game/intro_gradient.2bpp"
 
 _MainMenu: ; 5ae8
+	call InitVariableWidthText
 	ld de, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame
@@ -1396,13 +1397,7 @@ GameInit:: ; 642e
 	ldh [hWY], a
 	call ApplyTilemapInVBlank
 
-	;initialize the variable width text
-	ld a, "A"
+	ld a, $ff
 	ld [wVariableWidthTextTile], a
-	ld a, LOW(VTiles0 tile "A")
-	ld [wVariableWidthTextVRAM], a
-	ld a, HIGH(VTiles0 tile "A")
-	ld [wVariableWidthTextVRAM+1], a
-
 	jp CrystalIntroSequence
 ; 6454

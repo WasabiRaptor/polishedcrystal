@@ -18,6 +18,9 @@ NamingScreen: ; 116c1
 	ld [hl], d
 	ld hl, wNamingScreenType
 	ld [hl], b
+	ld a, [wVariableWidthTextTile]
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
 	ld hl, wOptions1
 	ld a, [hl]
 	push af

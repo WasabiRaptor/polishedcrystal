@@ -303,15 +303,25 @@ SetUpTextBox::
 	call ApplyTilemap
 	pop hl
 	ret
-	
+
+InitVariableWidthText::
+	;initialize the variable width text values
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM+1], a
+	ret
+
+
+
 PlaceString::
-	push hl
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wDecompressScratch)
 	ldh [rSVBK], a
 	push hl
-
 	xor a
 	ld [wVariableWidthTextCurTileColsFilled], a
 
@@ -319,7 +329,7 @@ PlaceString::
 	ld hl, wCombinedVaribleWidthTiles
 	call ByteFill
 	pop hl
-
+	push hl
 PlaceNextChar::
 	ld a, [de]
 	cp "@"
@@ -327,9 +337,9 @@ PlaceNextChar::
 	ld b, h
 	ld c, l
 	call NextVRAMVariableWidthTextTile
+	pop hl
 	pop af
 	ldh [rSVBK], a
-	pop hl
 	ret
 
 NextChar::
@@ -402,6 +412,19 @@ endm
 PlaceCharacter::
 	push de
 	push af
+	ld a, [wVariableWidthTextTile]
+	inc a
+	jr nz, .VWtext
+
+	pop af
+	pop de
+	ld [hli], a
+	farcall PrintLetterDelay
+	jp NextChar
+
+.VWtext
+	pop af
+	push af
 	push hl;1
 	ld bc, LEN_1BPP_TILE
 
@@ -413,10 +436,10 @@ PlaceCharacter::
 	jr .donespace
 .notspace
 	sub "A"
-	ld hl, FontNormal
+	ld hl, FontWondermail
 	ld de, wPerliminaryVariableWidthTile
 	rst AddNTimes
-	ld a, BANK(FontNormal)
+	ld a, BANK(FontWondermail)
 	call FarCopyBytes
 .donespace
 
@@ -453,7 +476,7 @@ PlaceCharacter::
 	ld h, a
 
 	ld de, wCombinedVaribleWidthTiles
-	lb bc, BANK(FontNormal), 2
+	lb bc, BANK(FontWondermail), 2
 	call GetMaybeOpaque1bpp
 	ld bc, LEN_1BPP_TILE
 	ld de, wCombinedVaribleWidthTiles
@@ -472,7 +495,7 @@ PlaceCharacter::
 	ld h, a
 
 	ld de, wCombinedVaribleWidthTiles
-	lb bc, BANK(FontNormal), 1
+	lb bc, BANK(FontWondermail), 1
 	call GetMaybeOpaque1bpp
 	pop hl
 .letterdelay
@@ -483,6 +506,7 @@ PlaceCharacter::
 NextVRAMVariableWidthTextTile:
 	ld a, [wVariableWidthTextTile]
 	inc a
+	ret z
 	cp $ee
 	jr c, .notlasttile
 	ld a, "A"
@@ -708,25 +732,20 @@ NextLineChar::
 	bit NO_LINE_SPACING, a
 	jr nz, LineBreak
 	pop hl
-	push bc
 	ld bc, SCREEN_WIDTH * 2
 	add hl, bc
-	pop bc
 	push hl
 	jp NextChar
 
 LineBreak::
 	pop hl
-	push bc
 	ld bc, SCREEN_WIDTH
 	add hl, bc
-	pop bc
 	push hl
 	jp NextChar
 
 TextFar::
 	pop hl
-	push bc
 	push de
 	ld bc, -wTileMap + $10000
 	add hl, bc
@@ -763,7 +782,6 @@ TextFar::
 	ld c, a
 	ld b, 0
 	add hl, bc
-	pop bc
 	push hl
 	jp NextChar
 
@@ -817,7 +835,6 @@ Paragraph::
 
 LinkButtonSound::
 	call NextVariableWidthTextTile
-	push bc
 	ld a, [wLinkMode]
 	or a
 	jr nz, .communication
@@ -833,20 +850,16 @@ LinkButtonSound::
 	ld a, [wLinkMode]
 	or a
 	call z, UnloadBlinkingCursor
-	pop bc
 
 ScrollText::
-	push bc
 	push de
 	call TextScroll
 	call TextScroll
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	pop de
-	pop bc
 	jp NextChar
 
 ContText::
-	push bc
 	push de
 	ld de, .cont
 	ld b, h
@@ -855,7 +868,6 @@ ContText::
 	ld h, b
 	ld l, c
 	pop de
-	pop bc
 	jp NextChar
 
 .cont	db "<_CONT>@"

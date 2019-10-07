@@ -110,6 +110,7 @@ else
 endc
 
 MusicPlayer::
+	FullWidthText
 	call ClearTileMap
 
 ; Load palette

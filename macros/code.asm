@@ -62,6 +62,12 @@ changebridgeblock: macro
 	ld [hl], \3
 ENDM
 
+FullWidthText: macro
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
+	call LoadStandardFont
+endm
+
 ; INPUT
 ; \1 = species
 ; \2 = false

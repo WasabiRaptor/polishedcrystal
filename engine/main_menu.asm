@@ -1,4 +1,5 @@
 MainMenu: ; 49cdc
+	call InitVariableWidthText
 	call DeleteSavedMusic
 	call Function49ed0
 	ld b, CGB_DIPLOMA

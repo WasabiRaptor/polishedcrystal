@@ -13,6 +13,8 @@ FontUnown:
 INCBIN "gfx/font/unown.1bpp"
 FontCommon:
 INCBIN "gfx/font/common.1bpp"
+FontWondermail::
+INCBIN "gfx/font/Wondermail.1bpp"
 
 Frames: ; f8800
 INCBIN "gfx/frames/1.1bpp"
