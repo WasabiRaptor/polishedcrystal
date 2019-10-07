@@ -440,11 +440,13 @@ PlaceCharacter::
 	sub 8
 	ld [wVariableWidthTextCurTileColsFilled], a
 	inc hl
-	;ld a, [wVariableWidthTextTile]
-	;inc a
-	;ld [hl], a
 	push hl
-
+	and a
+	jr z, .nocarryover
+	ld a, [wVariableWidthTextTile]
+	inc a
+	ld [hl], a
+.nocarryover	
 	ld a, [wVariableWidthTextVRAM]
 	ld l, a
 	ld a, [wVariableWidthTextVRAM+1]
@@ -873,6 +875,7 @@ PromptText::
 	call UnloadBlinkingCursor
 
 DoneText::
+	call NextVRAMVariableWidthTextTile
 	pop af
 	ldh [rSVBK], a
 	pop hl
