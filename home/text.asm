@@ -264,6 +264,7 @@ PrintNamedText::
 	ld a, e
 	ld [wTextBoxNameBuffer + 1], a
 PrintText::
+	call InitVariableWidthText
 	call SetUpTextBox
 PrintTextNoBox::
 	push hl
@@ -501,7 +502,7 @@ NextVRAMVariableWidthTextTile:
 	ld a, [wVariableWidthTextTile]
 	inc a
 	ret z
-	cp $ee
+	cp $cf
 	jr c, .notlasttile
 	ld a, "A"
 	ld [wVariableWidthTextTile], a

@@ -290,8 +290,8 @@ NeighborScript:
 	end
 
 .MornIntroText:
-	text "Good morning,"
-	line "<PLAYER>!"
+	text "This just feels really really"
+	line "unnatural, but its very real."
 
 	para "I'm visiting!"
 	done
@@ -302,8 +302,8 @@ NeighborScript:
 	done
 
 .NiteIntroText:
-	text "Good evening,"
-	line "<PLAYER>!"
+	text "This text just feels really really"
+	line "unnatural, but its very real."
 
 	para "I'm visiting!"
 	done
