@@ -303,14 +303,6 @@ SetUpTextBox::
 	call ApplyTilemap
 	pop hl
 	ret
-
-PlaceBCString::
-	push hl
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
-	jr _PlaceBCString
 	
 PlaceString::
 	push hl
@@ -318,26 +310,23 @@ PlaceString::
 	push af
 	ld a, BANK(wDecompressScratch)
 	ldh [rSVBK], a
+	push hl
 
-	ld bc, VTiles0 tile "A"
-	ld a, "A"
-	ld [wVariableWidthTextTile], a
-_PlaceBCString:
 	xor a
 	ld [wVariableWidthTextCurTileColsFilled], a
-	push bc
-	push hl
+
 	ld bc, 2 * LEN_1BPP_TILE
 	ld hl, wCombinedVaribleWidthTiles
 	call ByteFill
 	pop hl
-	pop bc
+
 PlaceNextChar::
 	ld a, [de]
 	cp "@"
 	jr nz, CheckDict
 	ld b, h
 	ld c, l
+	call NextVRAMVariableWidthTextTile
 	pop af
 	ldh [rSVBK], a
 	pop hl
@@ -414,7 +403,6 @@ PlaceCharacter::
 	push de
 	push af
 	push hl;1
-	push bc;2
 	ld bc, LEN_1BPP_TILE
 
 	cp " "
@@ -437,7 +425,6 @@ PlaceCharacter::
 	ld b, 8
 	call CombineRows
 
-	pop bc;1
 	pop hl;0
 	ld a, [wVariableWidthTextTile]
 	ld [hl], a
@@ -453,14 +440,16 @@ PlaceCharacter::
 	sub 8
 	ld [wVariableWidthTextCurTileColsFilled], a
 	inc hl
-	ld a, [wVariableWidthTextTile]
-	inc a
-	ld [wVariableWidthTextTile], a
-	ld [hl], a
+	;ld a, [wVariableWidthTextTile]
+	;inc a
+	;ld [hl], a
 	push hl
-	push bc
-	ld h, b
-	ld l, c
+
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+
 	ld de, wCombinedVaribleWidthTiles
 	lb bc, BANK(FontNormal), 2
 	call GetMaybeOpaque1bpp
@@ -468,28 +457,54 @@ PlaceCharacter::
 	ld de, wCombinedVaribleWidthTiles
 	ld hl, wCombinedVaribleWidthTiles + LEN_1BPP_TILE
 	rst CopyBytes
-	pop bc
-	ld hl, 1 tiles
-	add hl, bc
-	ld b, h
-	ld c, l
+
+	call NextVRAMVariableWidthTextTile
+
 	pop hl
 	jr .letterdelay
 .sametile
 	push hl
-	push bc
-	ld h, b
-	ld l, c
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
 
 	ld de, wCombinedVaribleWidthTiles
 	lb bc, BANK(FontNormal), 1
 	call GetMaybeOpaque1bpp
-	pop bc
 	pop hl
 .letterdelay
 	pop de	
 	farcall PrintLetterDelay
 	jp NextChar
+
+NextVRAMVariableWidthTextTile:
+	ld a, [wVariableWidthTextTile]
+	inc a
+	cp $ee
+	jr c, .notlasttile
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM+1], a
+	ret
+
+.notlasttile
+	ld [wVariableWidthTextTile], a
+
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+	ld bc, 1 tiles
+	add hl, bc
+	ld a, l
+	ld [wVariableWidthTextVRAM], a
+	ld a, h
+	ld [wVariableWidthTextVRAM+1], a
+	ret
 
 CombineRows::
 	ld a, [wVariableWidthTextCurTileColsFilled]
@@ -614,21 +629,13 @@ NextTextTile::
 NextVariableWidthTextTile::
 	push hl
 
-	push bc
 	xor a
 	ld [wVariableWidthTextCurTileColsFilled], a
 	ld bc, 2 * LEN_1BPP_TILE
 	ld hl, wCombinedVaribleWidthTiles
 	call ByteFill
-	pop bc
 
-	ld a, [wVariableWidthTextTile]
-	inc a
-	ld [wVariableWidthTextTile], a
-	ld hl, 1 tiles
-	add hl, bc
-	ld b, h
-	ld c, l
+	call NextVRAMVariableWidthTextTile
 
 	pop hl
 	ret
@@ -796,15 +803,12 @@ Paragraph::
 .got_delay
 	call DelayFrames
 
-	ld a, "A"
-	ld [wVariableWidthTextTile], a
+	call NextVRAMVariableWidthTextTile
 	xor a
-	ld [wVariableWidthTextCurTileColsFilled], a
 	ld [wVariableWidthTextCurTileColsFilled], a
 	ld bc, 2 * LEN_1BPP_TILE
 	ld hl, wCombinedVaribleWidthTiles
 	call ByteFill
-	ld bc, VTiles0 tile "A"
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
 	jp NextChar

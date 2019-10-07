@@ -1174,3 +1174,4 @@ wFoundMatchingIDInParty::
 	ds 3
 
 wVariableWidthTextTile:: ds 1
+wVariableWidthTextVRAM:: ds 2

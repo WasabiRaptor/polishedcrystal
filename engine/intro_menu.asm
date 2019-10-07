@@ -1395,5 +1395,14 @@ GameInit:: ; 642e
 	ld a, $90
 	ldh [hWY], a
 	call ApplyTilemapInVBlank
+
+	;initialize the variable width text
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM+1], a
+
 	jp CrystalIntroSequence
 ; 6454

@@ -365,11 +365,7 @@ PlaceMenuStrings::
 	ld d, h
 	ld e, l
 	pop hl
-	ld bc, VTiles0 tile $c0
-	ld a, $c0
-	ld [wVariableWidthTextTile], a
-
-	jp PlaceBCString
+	jp PlaceString
 
 PlaceNthMenuStrings::
 	push de
@@ -381,11 +377,7 @@ PlaceNthMenuStrings::
 	ld d, [hl]
 	ld e, a
 	pop hl
-	ld bc, VTiles0 tile $c0
-	ld a, $c0
-	ld [wVariableWidthTextTile], a
-
-	jp PlaceBCString
+	jp PlaceString
 
 
 MenuJumptable::
@@ -474,11 +466,7 @@ Place2DMenuItemName::
 	ldh a, [hBuffer]
 	rst Bankswitch
 	
-	ld bc, VTiles0 tile $c0
-	ld a, $c0
-	ld [wVariableWidthTextTile], a
-
-	call PlaceBCString
+	call PlaceString
 	pop af
 	rst Bankswitch
 
