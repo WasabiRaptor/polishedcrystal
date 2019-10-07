@@ -1425,11 +1425,6 @@ NEXTU
 wScratchTileMap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 wScratchAttrMap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 
-NEXTU
-wVariableWidthTextCurTileColsFilled:: ds 1
-wPerliminaryVariableWidthTile:: ds 1 * LEN_1BPP_TILE
-wCombinedVaribleWidthTiles:: ds 2 * LEN_1BPP_TILE
-
 ENDU
 
 SECTION "Window Stack", WRAMX

@@ -18,9 +18,6 @@ NamingScreen: ; 116c1
 	ld [hl], d
 	ld hl, wNamingScreenType
 	ld [hl], b
-	ld a, [wVariableWidthTextTile]
-	ld a, $ff
-	ld [wVariableWidthTextTile], a
 	ld hl, wOptions1
 	ld a, [hl]
 	push af
@@ -54,6 +51,7 @@ NamingScreen: ; 116c1
 	call GetCGBLayout
 	call DisableLCD
 	call LoadNamingScreenGFX
+	FullWidthText
 	call NamingScreen_InitText
 	ld a, %11100011
 	ldh [rLCDC], a

@@ -317,10 +317,6 @@ InitVariableWidthText::
 
 
 PlaceString::
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wDecompressScratch)
-	ldh [rSVBK], a
 	push hl
 	xor a
 	ld [wVariableWidthTextCurTileColsFilled], a
@@ -338,8 +334,6 @@ PlaceNextChar::
 	ld c, l
 	call NextVRAMVariableWidthTextTile
 	pop hl
-	pop af
-	ldh [rSVBK], a
 	ret
 
 NextChar::
@@ -374,16 +368,16 @@ endm
 	dict "<NL>",     NextLineChar
 	dict "<LINE>",   LineChar
 	dict "<PARA>",   Paragraph
-	;dict "<PLAYER>", PrintPlayerName
-	;dict "<RIVAL>",  PrintRivalName
+	dict "<PLAYER>", PrintPlayerName
+	dict "<RIVAL>",  PrintRivalName
 	dict "<CONT>",   ContText
 	;dict "<TRENDY>", PrintTrendyPhrase
 	dict "<DONE>",   DoneText
 	dict "<PROMPT>", PromptText
 	dict "<_NEXT>",  NextTextTile
-	;dict "<TARGET>", PlaceMoveTargetsName
-	;dict "<USER>",   PlaceMoveUsersName
-	;dict "<ENEMY>",  PlaceEnemysName
+	dict "<TARGET>", PlaceMoveTargetsName
+	dict "<USER>",   PlaceMoveUsersName
+	dict "<ENEMY>",  PlaceEnemysName
 	;dict "#",        PlacePoke
 	;dict "le",       PlaceLe
 	;dict "ng",       PlaceNg
@@ -888,8 +882,6 @@ PromptText::
 
 DoneText::
 	call NextVRAMVariableWidthTextTile
-	pop af
-	ldh [rSVBK], a
 	pop hl
 	ld de, .stop
 	dec de

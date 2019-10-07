@@ -24,7 +24,6 @@ InitIntroGradient::
 INCBIN "gfx/new_game/intro_gradient.2bpp"
 
 _MainMenu: ; 5ae8
-	call InitVariableWidthText
 	ld de, MUSIC_NONE
 	call PlayMusic
 	call DelayFrame

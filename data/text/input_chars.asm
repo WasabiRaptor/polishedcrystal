@@ -11,7 +11,7 @@ BoxNameInputLower:
 	db "a b c d e f g h i"
 	db "j k l m n o p q r"
 	db "s t u v w x y z -"
-	db "é 'd 'l 'm 'r 's 't 'v 0"
+	db "é d l m r s t v 0"
 	db "1 2 3 4 5 6 7 8 9"
 	db "U", "p", "p", "e", "r  D", "e", "l   E", "n", "d "
 
@@ -42,6 +42,6 @@ MailEntry_Lowercase:
 	db "a b c d e f g h i j"
 	db "k l m n o p q r s t"
 	db "u v w x y z   - . ,"
-	db "'d 'l 'm 'r 's 't 'v ( ) &"
+	db "d l m r s t v ( ) &"
 	db "“ ” ' % ↑ ↓ № ★ x x"
 	db "U", "p", "p", "e", "r  D", "e", "l   E", "n", "d   "

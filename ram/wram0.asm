@@ -1175,3 +1175,6 @@ wFoundMatchingIDInParty::
 
 wVariableWidthTextTile:: ds 1
 wVariableWidthTextVRAM:: ds 2
+wVariableWidthTextCurTileColsFilled:: ds 1
+wPerliminaryVariableWidthTile:: ds 1 * LEN_1BPP_TILE
+wCombinedVaribleWidthTiles:: ds 2 * LEN_1BPP_TILE
