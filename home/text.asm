@@ -326,6 +326,7 @@ PlaceString::
 	ld hl, wCombinedVaribleWidthTiles
 	call ByteFill
 	pop hl
+PlaceSpecialString::
 	push hl
 PlaceNextChar::
 	ld a, [de]
@@ -715,7 +716,7 @@ PlaceEnemysName::
 	db " @"
 
 PlaceCommandCharacter::
-	call PlaceString
+	call PlaceSpecialString
 	ld h, b
 	ld l, c
 	pop de

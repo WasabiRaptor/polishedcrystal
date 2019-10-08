@@ -283,6 +283,7 @@ NeighborScript:
 	jump .Main
 
 .Main:
+	portrait ZYGARDE_ANGRY
 	writenamedtext .NeighborNameText, .NeighborText
 	waitbutton
 	closetext
@@ -302,15 +303,13 @@ NeighborScript:
 	done
 
 .NiteIntroText:
-	text "This text just feels really really"
-	line "unnatural, but its very real."
-
-	para "I'm visiting!"
+	text "The quick brown fox jumped"
+	line "over the lazy dog. 0123456789"
 	done
 
 .NeighborText:
-	text "bork!"
-	line ""
+	text "THE QUICK BROWN FOX JUMPED"
+	line "OVER THE LAZY DOG!?"
 
 	para "My daughter is"
 	line "adamant about"

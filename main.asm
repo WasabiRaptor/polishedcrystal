@@ -4927,7 +4927,7 @@ CharacterWidths:
 	db "j", 2 +1
 	db "k", 4 +1
 	db "l", 2 +1
-	db "m", 7 +1
+	db "m", 5 +1
 	db "n", 4 +1
 	db "o", 4 +1
 	db "p", 4 +1
@@ -4937,33 +4937,33 @@ CharacterWidths:
 	db "t", 3 +1
 	db "u", 4 +1
 	db "v", 5 +1
-	db "w", 7 +1
+	db "w", 5 +1
 	db "x", 4 +1
 	db "y", 4 +1
-	db "z", 4 +1
+	db "z", 3 +1
 	db "A", 5 +1
 	db "B", 5 +1
 	db "C", 5 +1
 	db "D", 5 +1
-	db "E", 5 +1
-	db "F", 5 +1
+	db "E", 4 +1
+	db "F", 4 +1
 	db "G", 5 +1
 	db "H", 5 +1
 	db "I", 3 +1
 	db "J", 5 +1
 	db "K", 5 +1
 	db "L", 4 +1
-	db "M", 7 +1
+	db "M", 5 +1
 	db "N", 5 +1
 	db "O", 5 +1
 	db "P", 5 +1
-	db "Q", 6 +1
+	db "Q", 5 +1
 	db "R", 5 +1
 	db "S", 5 +1
 	db "T", 5 +1
 	db "U", 5 +1
 	db "V", 5 +1
-	db "W", 7 +1
+	db "W", 5 +1
 	db "X", 5 +1
 	db "Y", 5 +1
 	db "Z", 5 +1
@@ -4977,12 +4977,12 @@ CharacterWidths:
 	db ":", 1 +1
 	db "é", 5 +1
 	db "♀", 5 +1
-	db "♂", 7 +1
+	db "♂", 5 +1
 	db "“", 5 +1
 	db "”", 5 +1
 	db "'", 2 +1
 	db "0", 5 +1
-	db "1", 2 +1
+	db "1", 5 +1
 	db "2", 5 +1
 	db "3", 5 +1
 	db "4", 5 +1
