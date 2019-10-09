@@ -293,15 +293,6 @@ PrintTextBoxText::
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceWholeStringInBoxAtOnce
 	ret 
-
-OtherVariableWidthText::
-	ld a, $a4
-	ld [wVariableWidthTextTile], a
-	ld a, LOW(VTiles0 tile $a4)
-	ld [wVariableWidthTextVRAM], a
-	ld a, HIGH(VTiles0 tile $a4)
-	ld [wVariableWidthTextVRAM+1], a
-	ret
 	
 SetUpTextBox::
 	push hl
@@ -316,14 +307,7 @@ SetUpTextBox::
 	ret
 
 PlaceString::
-	push hl
-	xor a
-	ld [wVariableWidthTextCurTileColsFilled], a
-
-	ld bc, 2 * LEN_1BPP_TILE
-	ld hl, wCombinedVaribleWidthTiles
-	call ByteFill
-	pop hl
+	call InitVariableWidthTiles
 PlaceSpecialString::
 	push hl
 PlaceNextChar::
@@ -498,6 +482,15 @@ PlaceCharacter::
 	farcall PrintLetterDelay
 	jp NextChar
 
+OtherVariableWidthText::
+	ld a, $a4
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile $a4)
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile $a4)
+	ld [wVariableWidthTextVRAM+1], a
+	jr InitVariableWidthTiles
+	
 NextVRAMVariableWidthTextTile:
 	ld a, [wVariableWidthTextTile]
 	inc a
@@ -512,6 +505,14 @@ InitVariableWidthText::
 	ld [wVariableWidthTextVRAM], a
 	ld a, HIGH(VTiles0 tile "A")
 	ld [wVariableWidthTextVRAM+1], a
+InitVariableWidthTiles::
+	push hl
+	xor a
+	ld [wVariableWidthTextCurTileColsFilled], a
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+	pop hl
 	ret
 
 notlasttile:
