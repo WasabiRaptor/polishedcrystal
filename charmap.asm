@@ -81,7 +81,7 @@
 
 	;charmap "the",      $5c
 	;charmap "you",      $5d
-	;charmap "#mon",     $5e
+	;charmap "Pokémon",     $5e
 
 ; Battle characters
 
@@ -218,6 +218,8 @@ BATTLEEXTRA_GFX_START EQU $5f
 
 	charmap "↑",        $dd
 	charmap "↓",        $de
+	charmap "<SHARP>",  $df
+
 
 ;symbols and numbers
 	charmap "♪",        $d9
@@ -239,7 +241,7 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "★",        $ec
 	charmap "%",        $ed
 	charmap "+",        $ee
-	charmap "<SHARP>",  $ef
+	charmap "<COLON>", 	$ef
 
 ; arrows
 	charmap "▼",        $f0

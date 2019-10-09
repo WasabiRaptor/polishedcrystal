@@ -35,7 +35,7 @@ UnknownText_0x1a03cc:
 
 UnknownText_0x55b7c:
 	text "We intend to sell"
-	line "items for #mon"
+	line "items for Pokémon"
 	cont "to hold."
 
 	para "This is a free"
@@ -44,7 +44,7 @@ UnknownText_0x55b7c:
 	done
 
 UnknownText_0x55bd3:
-	text "By giving #mon"
+	text "By giving Pokémon"
 	line "items to hold, I"
 
 	para "bet trainers will"
@@ -59,7 +59,7 @@ UnknownText_0x58ac8:
 
 
 ; not used
-	text "#mon Radio!"
+	text "Pokémon Radio!"
 
 	para "Call in with your"
 	line "requests now!"
@@ -67,7 +67,7 @@ UnknownText_0x58ac8:
 
 
 HomepageText:
-	text "#mon Journal"
+	text "Pokémon Journal"
 	line "Home Page…"
 
 	para "It hasn't been"

@@ -182,7 +182,7 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 	ldh a, [hHours]
 	ld c, a
 	farcall PrintHour
-	ld [hl], ":"
+	ld [hl], "<COLON>"
 	inc hl
 	ld de, hMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2

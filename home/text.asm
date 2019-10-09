@@ -272,6 +272,7 @@ PrintTextNoBox::
 	pop hl
 
 PrintTextBoxText::
+	call InitVariableWidthText
 	ld a, [wTextBoxFlags2]
 	bit NAMEPLATE_FLAG, a
 	jr z, .no_nameplate
@@ -291,8 +292,17 @@ PrintTextBoxText::
 	ld [wTextBoxFlags2], a
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	call PlaceWholeStringInBoxAtOnce
-	ret
+	ret 
 
+OtherVariableWidthText::
+	ld a, $a4
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile $a4)
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile $a4)
+	ld [wVariableWidthTextVRAM+1], a
+	ret
+	
 SetUpTextBox::
 	push hl
 	ld a, d
@@ -304,18 +314,6 @@ SetUpTextBox::
 	call ApplyTilemap
 	pop hl
 	ret
-
-InitVariableWidthText::
-	;initialize the variable width text values
-	ld a, "A"
-	ld [wVariableWidthTextTile], a
-	ld a, LOW(VTiles0 tile "A")
-	ld [wVariableWidthTextVRAM], a
-	ld a, HIGH(VTiles0 tile "A")
-	ld [wVariableWidthTextVRAM+1], a
-	ret
-
-
 
 PlaceString::
 	push hl
@@ -395,7 +393,7 @@ endm
 	;dict "and",      PlaceAnd
 	;dict "the",      PlaceThe
 	;dict "you",      PlaceYou
-	;dict "#mon",     PlacePokemon
+	;dict "Pokémon",  PlacePokemon
 	;dict "to",       PlaceTo
 	;dict "have",     PlaceHave
 	;dict "that",     PlaceThat
@@ -454,18 +452,19 @@ PlaceCharacter::
 	ld a, [wVariableWidthTextCurTileColsFilled]
 	add e
 	ld [wVariableWidthTextCurTileColsFilled], a
-	cp 8
+; characters all have one collumn of white pixels included in their width to pad them for spacing
+; meaning that if 8 collums are filled, only 7 are in actuality, so knowing this if that extra collumn
+; overflows into the next tile, we don't have to care unless another letter is printed after
+; therefore we only need to move onto the next tile in vram if 10+ collumns are filled
+	cp 10 
 	jr c, .sametile
 	sub 8
 	ld [wVariableWidthTextCurTileColsFilled], a
 	inc hl
 	push hl
-	and a
-	jr z, .nocarryover
 	ld a, [wVariableWidthTextTile]
 	inc a
 	ld [hl], a
-.nocarryover	
 	ld a, [wVariableWidthTextVRAM]
 	ld l, a
 	ld a, [wVariableWidthTextVRAM+1]
@@ -503,8 +502,10 @@ NextVRAMVariableWidthTextTile:
 	ld a, [wVariableWidthTextTile]
 	inc a
 	ret z
-	cp $cf
-	jr c, .notlasttile
+	cp $df
+	jr c, notlasttile
+InitVariableWidthText::
+	;initialize the variable width text values
 	ld a, "A"
 	ld [wVariableWidthTextTile], a
 	ld a, LOW(VTiles0 tile "A")
@@ -513,7 +514,7 @@ NextVRAMVariableWidthTextTile:
 	ld [wVariableWidthTextVRAM+1], a
 	ret
 
-.notlasttile
+notlasttile:
 	ld [wVariableWidthTextTile], a
 
 	ld a, [wVariableWidthTextVRAM]
@@ -790,7 +791,7 @@ LineChar::
 
 Paragraph::
 	push de
-
+	call InitVariableWidthText
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
 	jr z, .linkbattle
@@ -819,12 +820,6 @@ Paragraph::
 .got_delay
 	call DelayFrames
 
-	call NextVRAMVariableWidthTextTile
-	xor a
-	ld [wVariableWidthTextCurTileColsFilled], a
-	ld bc, 2 * LEN_1BPP_TILE
-	ld hl, wCombinedVaribleWidthTiles
-	call ByteFill
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
 	jp NextChar
@@ -1379,8 +1374,6 @@ Text_WeekDay::
 	call PlaceString
 	ld h, b
 	ld l, c
-	ld de, .Day
-	call PlaceString
 	pop hl
 	ret
 
@@ -1393,11 +1386,10 @@ Text_WeekDay::
 	dw .Fri
 	dw .Satur
 
-.Sun:    db "Sun@"
-.Mon:    db "Mon@"
-.Tues:   db "Tues@"
-.Wednes: db "Wednes@"
-.Thurs:  db "Thurs@"
-.Fri:    db "Fri@"
-.Satur:  db "Satur@"
-.Day:    db "day@"
+.Sun:    db "Sunday@"
+.Mon:    db "Monday@"
+.Tues:   db "Tuesday@"
+.Wednes: db "Wednesday@"
+.Thurs:  db "Thursday@"
+.Fri:    db "Friday@"
+.Satur:  db "Saturday@"

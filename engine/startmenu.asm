@@ -1,7 +1,7 @@
 StartMenu:: ; 125cd
 
 	call ClearWindowData
-
+	call OtherVariableWidthText
 	ld de, SFX_MENU
 	call PlaySFX
 
@@ -30,6 +30,7 @@ StartMenu:: ; 125cd
 	jr .Select
 
 .Reopen:
+	call OtherVariableWidthText
 	call UpdateSprites
 	call UpdateTimePals
 	call .SetUpMenuItems
@@ -91,13 +92,14 @@ StartMenu:: ; 125cd
 	ld [wMenuSelection], a
 .loop
 	call .PrintMenuClock
-	call .PrintMenuAccount
 	call ReadMenuJoypad
-	ld a, [wMenuJoypad]
+	ld a, [hJoyPressed]
 	cp B_BUTTON
 	jr z, .b
 	cp A_BUTTON
 	jr z, .a
+	and D_PAD
+	jr nz, .dpad
 	jr .loop
 .a
 	call PlayClickSFX
@@ -106,6 +108,9 @@ StartMenu:: ; 125cd
 .b
 	scf
 	ret
+.dpad
+	call .PrintMenuAccount
+	jr .loop
 ; 12691
 
 .ExitMenuRunScript: ; 12691
@@ -144,14 +149,14 @@ StartMenu:: ; 125cd
 
 .MenuDataHeader:
 	db $40 ; tile backup
-	db 0, 10 ; start coords
+	db 0, 12 ; start coords
 	db 17, 19 ; end coords
 	dw .MenuData
 	db 1 ; default selection
 
 .ContestMenuDataHeader:
 	db $40 ; tile backup
-	db 2, 10 ; start coords
+	db 2, 12 ; start coords
 	db 17, 19 ; end coords
 	dw .MenuData
 	db 1 ; default selection
@@ -174,20 +179,20 @@ StartMenu:: ; 125cd
 	dw StartMenu_Pokegear, .PokegearString, .PokegearDesc
 	dw StartMenu_Quit,     .QuitString,     .QuitDesc
 
-.PokedexString: 	db "#dex@"
-.PartyString:   	db "#mon@"
+.PokedexString: 	db "Pokédex@"
+.PartyString:   	db "Pokémon@"
 .PackString:    	db "Bag@"
-.StatusString:  	db "<PLAYER>@"
+.StatusString:  	db "Status@"
 .SaveString:    	db "Save@"
 .OptionString:  	db "Options@"
 .ExitString:    	db "Exit@"
-.PokegearString:	db "#PDA@"
+.PokegearString:	db "PokéPDA@"
 .QuitString:    	db "Quit@"
 
 ; Menu accounts are removed; this is vestigial
 .PokedexDesc:
 	db   ""
-	next "#mon database@"
+	next "Pokémon database@"
 
 .PartyDesc:
 	db   ""
@@ -244,10 +249,17 @@ StartMenu:: ; 125cd
 ; 12800
 
 .MenuClock:
+	ld a, $c0
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile $c0)
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile $c0)
+	ld [wVariableWidthTextVRAM+1], a
+
 	ld hl, wOptions1
 	set NO_TEXT_SCROLL, [hl]
 	hlcoord 1, 1
-	lb bc, 2, 9
+	lb bc, 2, 7
 	call ClearBox
 	ldh a, [hHours]
 	ld b, a
@@ -266,6 +278,7 @@ StartMenu:: ; 125cd
 
 .MenuDesc:
 	push de
+	call InitVariableWidthText
 	ld a, [wMenuSelection]
 	cp $ff
 	jr z, .none
@@ -387,10 +400,10 @@ endr
 
 ._DrawMenuClock:
 	hlcoord 0, 0
-	lb bc, 2, 9
+	lb bc, 2, 7
 	call TextBox
 	hlcoord 0, 0
-	lb bc, 2, 9
+	lb bc, 2, 7
 	jp TextBoxPalette
 	ret
 

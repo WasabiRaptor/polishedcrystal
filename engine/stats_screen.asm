@@ -850,7 +850,7 @@ TN_PrintLocation:
 	jp PlaceString
 
 .event
-	db "Event #mon@"
+	db "Event Pokémon@"
 
 TN_PrintLV:
 	ld a, [wTempMonCaughtLevel]

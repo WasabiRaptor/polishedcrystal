@@ -355,7 +355,7 @@ DisplayCaughtContestMonStats: ; cc000
 	db " This <PK><MN>  @"
 
 SwitchMonText: ; cc0c2
-	; Switch #MON?
+	; Switch Pokémon?
 	text_jump UnknownText_0x1c10cf
 	db "@"
 
@@ -4974,8 +4974,8 @@ CharacterWidths:
 	db "?", 5 +1
 	db "!", 3 +1
 	db "-", 4 +1
-	db ":", 1 +1
-	db "é", 5 +1
+	db "<COLON>", 1 +1
+	db "é", 4 +1
 	db "♀", 5 +1
 	db "♂", 5 +1
 	db "“", 5 +1

@@ -442,19 +442,19 @@ BattleTower_PleaseReturnWhenReady: ; 8b231
 ; 0x8b23d
 
 JumpText_OnlyThreePkmnMayBeEntered: ; 0x8b247
-	; Three #MON must be entered.
+	; Three Pokémon must be entered.
 	text_jump Text_OnlyThreePkmnMayBeEntered
 	db "@"
 ; 0x8b24c
 
 JumpText_ThePkmnMustAllBeDifferentKinds: ; 0x8b24c
-	; The @  #MON must all be different kinds.
+	; The @  Pokémon must all be different kinds.
 	text_jump Text_ThePkmnMustAllBeDifferentKinds
 	db "@"
 ; 0x8b251
 
 JumpText_ThePkmnMustNotHoldTheSameItems: ; 0x8b251
-	; The @  #MON must not hold the same items.
+	; The @  Pokémon must not hold the same items.
 	text_jump Text_ThePkmnMustNotHoldTheSameItems
 	db "@"
 ; 0x8b256

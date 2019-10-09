@@ -52,7 +52,7 @@ MoveReminderIntroText::
 	line "Move Maniac."
 
 	para "I'll make your"
-	line "#mon remember"
+	line "Pokémon remember"
 
 	para "a move if you'll"
 	line "trade me a"
@@ -62,11 +62,11 @@ MoveReminderIntroText::
 MoveReminderPromptText::
 	text "Do you want me to"
 	line "teach one of your"
-	cont "#mon a move?"
+	cont "Pokémon a move?"
 	done
 
 MoveReminderWhichMonText::
-	text "Which #mon"
+	text "Which Pokémon"
 	line "needs tutoring?"
 	done
 
@@ -84,12 +84,12 @@ MoveReminderNoMovesText::
 	text "Sorry… There isn't"
 	line "any move I can"
 
-	para "make that #mon"
+	para "make that Pokémon"
 	line "remember."
 	done
 
 MoveReminderCancelText::
-	text "If your #mon"
+	text "If your Pokémon"
 	line "needs to learn a"
 
 	para "move, come back"

@@ -292,7 +292,7 @@ Text_TradeReceptionistIntro:
 	line "Trade Center."
 
 	para "You may trade your"
-	line "#mon here with"
+	line "Pokémon here with"
 	cont "a friend."
 
 	para "Would you like to"

@@ -81,7 +81,7 @@ GetMenu2::
 YesNoBox::
 	ld a, [wInPokegear]
 	and a
-	lb bc, SCREEN_WIDTH - 6, 8
+	lb bc, SCREEN_WIDTH - 5, 8
 	jr z, .got_position
 	dec b
 .got_position
@@ -97,7 +97,7 @@ PlaceYesNoBox::
 .okay
 	ld a, b
 	ld [wMenuBorderLeftCoord], a
-	add 5
+	add 4
 	ld [wMenuBorderRightCoord], a
 	ld a, c
 	ld [wMenuBorderTopCoord], a

@@ -770,7 +770,7 @@ PartyMenuStrings: ; 0x504d2
 	dw TutorWhichPKMNString
 
 ChooseAMonString: ; 0x504e4
-	db "Choose a #mon.@"
+	db "Choose a Pokémon.@"
 UseOnWhichPKMNString: ; 0x504f3
 	db "Use on which <PK><MN>?@"
 WhichPKMNString: ; 0x50504

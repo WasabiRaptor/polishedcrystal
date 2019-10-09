@@ -89,7 +89,7 @@ StringOptions1: ; e4241
 StringOptions2:
 	db "Clock Format<LNBRK>"
 	db "        :<LNBRK>"
-	db "#dex Units<LNBRK>"
+	db "Pokédex Units<LNBRK>"
 	db "        :<LNBRK>"
 	db "Text Autoscroll<LNBRK>"
 	db "        :<LNBRK>"

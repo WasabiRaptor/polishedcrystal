@@ -287,7 +287,7 @@ OPT_IntroText1:
 	db "@"
 
 OPT_IntroText2:
-	; #MON TALK!
+	; Pokémon TALK!
 	text_jump _OPT_IntroText2
 	db "@"
 
@@ -570,7 +570,7 @@ OaksPkmnTalk10:
 	ret
 
 OPT_PokemonChannelText:
-	; #MON
+	; Pokémon
 	text_jump _OPT_PokemonChannelText
 	db "@"
 
@@ -587,7 +587,7 @@ OaksPkmnTalk11:
 	jp PlaceRadioString
 
 .pokemon_string
-	db "#mon@"
+	db "Pokémon@"
 
 OaksPkmnTalk12:
 	ld hl, wRadioTextDelay
@@ -599,7 +599,7 @@ OaksPkmnTalk12:
 	jp PlaceRadioString
 
 .pokemon_channel_string
-	db "#mon Channel@"
+	db "Pokémon Channel@"
 
 OaksPkmnTalk13:
 	ld hl, wRadioTextDelay
@@ -874,7 +874,7 @@ StartPokemonMusicChannel:
 	farjp RadioMusicRestartDE
 
 BenIntroText1:
-	; BEN: #MON MUSIC
+	; BEN: Pokémon MUSIC
 	text_jump _BenIntroText1
 	db "@"
 
@@ -914,12 +914,12 @@ BenFernText2B:
 	db "@"
 
 BenFernText3A:
-	; #MON March!
+	; Pokémon March!
 	text_jump _BenFernText3A
 	db "@"
 
 BenFernText3B:
-	; #MON Lullaby!
+	; Pokémon Lullaby!
 	text_jump _BenFernText3B
 	db "@"
 

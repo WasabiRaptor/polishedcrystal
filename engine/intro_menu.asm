@@ -542,7 +542,7 @@ Continue_LoadMenuHeader: ; 5ebf
 	db 4 ; items
 	db "Player@"
 	db "Badges@"
-	db "#dex@"
+	db "Pokédex@"
 	db "Time@"
 ; 5efb
 
@@ -579,13 +579,13 @@ Continue_DisplayBadgesDexPlayerName: ; 5f1c
 	push hl
 	decoord 8, 2, 0
 	add hl, de
-	ld de, .Player
-	call PlaceString
+	;ld de, .Player
+	;call PlaceString
 	pop hl
 	ret
 
-.Player:
-	db "<PLAYER>@"
+;.Player:
+;	db "<PLAYER>@"
 ; 5f40
 
 Continue_PrintGameTime: ; 5f40
@@ -637,7 +637,7 @@ Continue_DisplayGameTime: ; 5f84
 	ld de, wGameTimeHours
 	lb bc, 2, 3
 	call PrintNum
-	ld [hl], ":"
+	ld [hl], "<COLON>"
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2

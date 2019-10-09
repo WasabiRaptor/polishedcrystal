@@ -1227,7 +1227,7 @@ GetCursorItemPointCost:
 	ret
 
 Text_HerbShop_Intro: ; 0x15e4a
-	; Hello, dear. I sell inexpensive herbal medicine. They're good, but a trifle bitter. Your #MON may not like them. Hehehehe…
+	; Hello, dear. I sell inexpensive herbal medicine. They're good, but a trifle bitter. Your Pokémon may not like them. Hehehehe…
 	text_jump UnknownText_0x1c4c28
 	db "@"
 ; 0x15e4f

@@ -174,7 +174,7 @@ else
 	line "for you."
 
 	para "Oh! I almost for-"
-	line "got! Your #mon"
+	line "got! Your Pokémon"
 
 	para "Gear is back from"
 	line "the repair shop."
@@ -184,7 +184,7 @@ else
 endc
 
 MomPokegearText:
-	text "#mon Gear, or"
+	text "Pokémon Gear, or"
 	line "just #gear."
 
 	para "It's essential if"
@@ -318,7 +318,7 @@ NeighborScript:
 	line "Elm's assistant."
 
 	para "She really loves"
-	line "#mon!"
+	line "Pokémon!"
 	done
 
 .NeighborNameText:

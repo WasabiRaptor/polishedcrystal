@@ -1130,7 +1130,7 @@ AskStrengthScript:
 	endtext
 
 UnknownText_0xcd69: ; 0xcd69
-	; A #MON may be able to move this. Want to use STRENGTH?
+	; A Pokémon may be able to move this. Want to use STRENGTH?
 	text_jump UnknownText_0x1c07a0
 	db "@"
 
@@ -1140,7 +1140,7 @@ UnknownText_0xcd6e: ; 0xcd6e
 	db "@"
 
 UnknownText_0xcd73: ; 0xcd73
-	; A #MON may be able to move this.
+	; A Pokémon may be able to move this.
 	text_jump UnknownText_0x1c07f4
 	db "@"
 
@@ -1430,7 +1430,7 @@ AskHeadbuttScript: ; 0xcedc
 	endtext
 
 UnknownText_0xcee6: ; 0xcee6
-	; A #MON could be in this tree. Want to HEADBUTT it?
+	; A Pokémon could be in this tree. Want to HEADBUTT it?
 	text_jump UnknownText_0x1c08bc
 	db "@"
 
@@ -1536,7 +1536,7 @@ AskRockSmashScript: ; 0xcf5d
 	jumptext UnknownText_0xcf72
 
 UnknownText_0xcf72: ; 0xcf72
-	; Maybe a #MON can break this.
+	; Maybe a Pokémon can break this.
 	text_jump UnknownText_0x1c0906
 	db "@"
 

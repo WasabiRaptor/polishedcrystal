@@ -586,7 +586,7 @@ PrintHoursMins ; 1dd6bb (77:56bb)
 	ld [hl], " "
 	lb bc, 1, 2
 	call PrintNum
-	ld [hl], ":"
+	ld [hl], "<COLON>"
 	inc hl
 	ld d, h
 	ld e, l
@@ -606,8 +606,15 @@ PrintHoursMins ; 1dd6bb (77:56bb)
 	jr c, .place_am_pm
 	ld de, .String_PM
 .place_am_pm
-	inc hl
-	jp PlaceString
+	push hl
+	xor a
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+	pop hl
+	ld a, 5
+	ld [wVariableWidthTextCurTileColsFilled], a
+	jp PlaceSpecialString
 
 .String_AM: db "AM@" ; 1dd6fc
 .String_PM: db "PM@" ; 1dd6ff
@@ -1848,8 +1855,8 @@ NoRadioName: ; 918a9 (24:58a9)
 ; 918bf
 
 OaksPkmnTalkName:     db "Oak's <PK><MN> Talk@"
-PokedexShowName:      db "#dex Show@"
-PokemonMusicName:     db "#mon Music@"
+PokedexShowName:      db "Pokédex Show@"
+PokemonMusicName:     db "Pokémon Music@"
 LuckyChannelName:     db "Lucky Channel@"
 UnknownStationName:   db "?????@"
 

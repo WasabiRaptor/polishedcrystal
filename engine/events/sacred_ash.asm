@@ -64,7 +64,7 @@ endr
 ; 0x50845
 
 UnknownText_0x50845: ; 0x50845
-	; 's #MON were all healed!
+	; 's Pokémon were all healed!
 	text_jump UnknownText_0x1c0b65
 	db "@"
 ; 0x5084a

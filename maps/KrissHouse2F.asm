@@ -305,10 +305,10 @@ PokemonJournalProfElmScript:
 	setflag ENGINE_READ_PROF_ELM_JOURNAL
 	thistext
 
-	text "#mon Journal"
+	text "Pokémon Journal"
 
 	para "Special Feature:"
-	line "#mon Prof.Elm!"
+	line "Pokémon Prof.Elm!"
 
 	para "Prof.Elm was the"
 	line "top student of"
@@ -329,13 +329,13 @@ KrissHousePC:
 	end
 
 KrisRadioText1:
-	text "Prof.Oak's #mon"
+	text "Prof.Oak's Pokémon"
 	line "Talk! Please tune"
 	cont "in next time!"
 	done
 
 KrisRadioText2:
-	text "#mon Channel!"
+	text "Pokémon Channel!"
 	done
 
 KrisRadioText3:
@@ -344,6 +344,6 @@ KrisRadioText3:
 	done
 
 KrisRadioText4:
-	text "#mon!"
-	line "#mon Channel…"
+	text "Pokémon!"
+	line "Pokémon Channel…"
 	done

@@ -24,7 +24,7 @@ PokemonJournalBugsyScript:
 	setflag ENGINE_READ_BUGSY_JOURNAL
 	thistext
 
-	text "#mon Journal"
+	text "Pokémon Journal"
 
 	para "Special Feature:"
 	line "Leader Bugsy!"
@@ -51,7 +51,7 @@ AzaleaPokeCenter1FCooltrainermScript:
 	line "a trainer."
 
 	para "He does have a"
-	line "#mon, but he"
+	line "Pokémon, but he"
 
 	para "doesn't use it"
 	line "much."
@@ -69,13 +69,13 @@ AzaleaPokeCenter1FCooltrainermScript:
 	done
 
 AzaleaPokeCenter1FGentlemanText:
-	text "Do your #mon"
+	text "Do your Pokémon"
 	line "know HM moves?"
 
 	para "Those moves can"
 	line "be used even if"
 
-	para "your #mon has"
+	para "your Pokémon has"
 	line "fainted."
 	done
 
@@ -84,11 +84,11 @@ AzaleaPokeCenter1FSightseermText:
 	line "created the system"
 
 	para "for storing"
-	line "#mon in a PC."
+	line "Pokémon in a PC."
 
 	para "Bill's PC can"
 	line "store up to 20"
-	cont "#mon per Box."
+	cont "Pokémon per Box."
 	done
 
 AzaleaPokeCenter1FPokefanfText:
@@ -102,7 +102,7 @@ AzaleaPokeCenter1FPokefanfText:
 	line "special device."
 
 	para "Then you can catch"
-	line "#mon with it."
+	line "Pokémon with it."
 
 	para "Before # Balls"
 	line "were invented,"

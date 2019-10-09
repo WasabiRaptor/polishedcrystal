@@ -406,7 +406,7 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	jr .star_loop
 
 .Dex_PlayTime_BP:
-	db   "#dex"
+	db   "Pokédex"
 	next "Play Time"
 	next "Battle Pts"
 	next "          Badges▶@"
@@ -425,9 +425,9 @@ TrainerCard_Page1_PrintGameTime: ; 25415 (9:5415)
 	ret nz
 	hlcoord 15, 12
 	ld a, [hl]
-	cp ":"
+	cp "<COLON>"
 	jr z, .space
-	ld a, ":"
+	ld a, "<COLON>"
 	jr .ok
 .space
 	ld a, " "

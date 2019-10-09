@@ -105,7 +105,7 @@ TrainerYoungsterJoey:
 YoungsterJoey1SeenText:
 	text "I just lost, so"
 	line "I'm trying to find"
-	cont "more #mon."
+	cont "more Pokémon."
 
 	para "Wait! You look"
 	line "weak! Come on,"
@@ -119,7 +119,7 @@ YoungsterJoey1BeatenText:
 
 YoungsterJoey1AfterText:
 	text "Do I have to have"
-	line "more #mon in"
+	line "more Pokémon in"
 
 	para "order to battle"
 	line "better?"

@@ -1704,7 +1704,7 @@ Text_ThisIsntTheTime: ; 0x10af3
 ; 0x10af8
 
 TextJump_YouDontHaveAPkmn: ; 0x10af8
-	; You don't have a #MON!
+	; You don't have a Pokémon!
 	text_jump Text_YouDontHaveAPkmn
 	db "@"
 ; 0x10afd
