@@ -40,15 +40,13 @@ ClearTileMap::
 	ret z
 	jp ApplyTilemapInVBlank
 
+NO_RIGHT_MASK 					EQU %11111011
+NO_LEFT_MASK 					EQU %11110111
+NO_TOP_MASK 					EQU %11111101
+NO_BOTTOM_MASK 					EQU %11111110
+
 SpeechTextBox::
 ; Standard textbox.
-	ld a, [wTextBoxFlags2]
-	bit NAMEPLATE_FLAG, a
-	jr z, .no_nameplate
-	hlcoord NAMEPLATE_X, NAMEPLATE_Y
-	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
-	call TextBox
-.no_nameplate
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
 
@@ -60,74 +58,6 @@ TextBox::
 ; text black-and-white scheme.
 	push bc
 	push hl
-	call TextBoxBorder
-	pop hl
-	pop bc
-	jp TextBoxPalette
-
-NO_RIGHT_MASK 					EQU %11111011
-NO_LEFT_MASK 					EQU %11110111
-NO_TOP_MASK 					EQU %11111101
-NO_BOTTOM_MASK 					EQU %11111110
-
-TextBoxBorder::	
-	ld a, [wTextBoxFlags2]
-	bit NAMEPLATE_FLAG, a
-	jr z, .top
-
-; Nameplate top
-	push hl
-	ld a, [hl]
-	call CheckBorder
-	or "┌"
-	ld [hli], a
-	ld e, NO_BOTTOM_MASK
-	call .PlaceChars
-	ld a, [hl]
-	call CheckBorder
-	or "┐"
-	ld [hl], a
-	pop hl
-
-; Nameplate middle
-	ld de, SCREEN_WIDTH
-	add hl, de
-
-	push hl
-	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
-	ld a, [hl]
-	call CheckBorder
-	or "│"
-	and NO_RIGHT_MASK
-	ld [hli], a
-	ld a, " "
-	call .PlaceSpace
-	ld a, [hl]
-	call CheckBorder
-	or "│"
-	and NO_LEFT_MASK
-	ld [hl], a
-	pop hl
-
-	ld de, SCREEN_WIDTH
-	add hl, de
-
-; Nameplate bottom
-	ld a, [hl]
-	call CheckBorder
-	or "└"
-	ld [hli], a
-	ld e, NO_TOP_MASK
-	call .PlaceChars
-	ld a, [hl]
-	call CheckBorder
-	or "┘"
-	ld [hl], a
-
-	hlcoord TEXTBOX_X, TEXTBOX_Y
-	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
-
-.top
 ; Top
 	push hl
 	ld a, [hl]
@@ -177,9 +107,11 @@ TextBoxBorder::
 	call CheckBorder
 	or "┘"
 	ld [hl], a
-	ret
-
-.PlaceSpace:
+	pop hl
+	pop bc
+	jr TextBoxPalette
+	
+.PlaceSpace
 ; Place char a c times.
 	ld d, c
 .blankloop
@@ -188,7 +120,7 @@ TextBoxBorder::
 	jr nz, .blankloop
 	ret
 
-.PlaceChars:
+.PlaceChars
 ; Place char a c times.
 	ld d, c
 .loop
@@ -255,14 +187,6 @@ RadioTerminator::
 	ret
 .stop	db "@"
 
-PrintNamedText::
-	ld a, [wTextBoxFlags2]
-	set NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
-	ld a, d
-	ld [wTextBoxNameBuffer], a
-	ld a, e
-	ld [wTextBoxNameBuffer + 1], a
 PrintText::
 	call InitVariableWidthText
 	call SetUpTextBox
@@ -273,33 +197,11 @@ PrintTextNoBox::
 
 PrintTextBoxText::
 	call InitVariableWidthText
-	ld a, [wTextBoxFlags2]
-	bit NAMEPLATE_FLAG, a
-	jr z, .no_nameplate
-	push hl
-	ld hl, wOptions1
-	set NO_TEXT_SCROLL, [hl]
-	bccoord NAMEPLATE_INNERX, NAMEPLATE_INNERY
-	ld a, [wTextBoxNameBuffer]
-	ld h, a
-	ld a, [wTextBoxNameBuffer + 1]
-	ld l, a
-	call PlaceWholeStringInBoxAtOnce
-	pop hl
-.no_nameplate
-	ld a, [wTextBoxFlags2]
-	res NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	call PlaceWholeStringInBoxAtOnce
-	ret 
+	jp PlaceWholeStringInBoxAtOnce
 	
 SetUpTextBox::
 	push hl
-	ld a, d
-	ld [wTextBoxNameBuffer], a
-	ld a, e
-	ld [wTextBoxNameBuffer + 1], a
 	call SpeechTextBox
 	call UpdateSprites
 	call ApplyTilemap
@@ -490,7 +392,7 @@ OtherVariableWidthText::
 	ld a, HIGH(VTiles0 tile $a4)
 	ld [wVariableWidthTextVRAM+1], a
 	jr InitVariableWidthTiles
-	
+
 NextVRAMVariableWidthTextTile:
 	ld a, [wVariableWidthTextTile]
 	inc a
@@ -963,22 +865,11 @@ FarString::
 	rst Bankswitch
 	ret
 
-PlaceWholeNameInBoxAtOnce::
-	ld a, [wTextBoxFlags]
-	push af
-	set 1, a
-	ld [wTextBoxFlags], a
-
-	call DoNameUntilTerminator
-
-	pop af
-	ld [wTextBoxFlags], a
-	ret
 
 PlaceWholeStringInBoxAtOnce::
 	ld a, [wTextBoxFlags]
 	push af
-	set 1, a
+	set TEXT_DELAY, a
 	ld [wTextBoxFlags], a
 
 	call DoTextUntilTerminator
@@ -987,11 +878,6 @@ PlaceWholeStringInBoxAtOnce::
 	ld [wTextBoxFlags], a
 	ret
 
-DoNameUntilTerminator::
-	ld a, [wTextBoxNameBuffer]
-	ld h, a
-	ld a, [wTextBoxNameBuffer + 1]
-	ld l, a
 DoTextUntilTerminator::
 	ld a, [hli]
 	cp "@"

@@ -5007,9 +5007,9 @@ PrintLetterDelay:: ; 313d
 ; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
 
 	ld a, [wTextBoxFlags]
-	bit 1, a
+	bit TEXT_DELAY, a
 	ret z
-	bit 0, a
+	bit NO_FORCED_FAST_SCROLL, a
 	jr z, .forceFastScroll
 
 	ld a, [wOptions1]
@@ -5025,7 +5025,7 @@ PrintLetterDelay:: ; 313d
 	push bc
 ; force fast scroll?
 	ld a, [wTextBoxFlags]
-	bit 0, a
+	bit NO_FORCED_FAST_SCROLL, a
 	ld a, 2
 	jr z, .updateDelay
 ; text speed

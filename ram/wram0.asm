@@ -1121,9 +1121,6 @@ wTextBoxFrame::
 
 wTextBoxFlags:: ds 1
 
-wTextBoxFlags2::
-; bit 0: whether a nameplate is drawn
-	ds 1
 
 wOptions2::
 ; bit 0-2: typeface
@@ -1150,8 +1147,6 @@ wInitialOptions::
 ; bit 6: unused
 ; bit 7: ask to reset at start
 	ds 1
-
-wTextBoxNameBuffer:: ds 2
 
 wOptionsBuffer:: ds 1
 wOptionsEnd::

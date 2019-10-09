@@ -322,5 +322,5 @@ NeighborScript:
 	done
 
 .NeighborNameText:
-	text_jump NeighborName
-	db "@"
+	db "Zygarde@"
+

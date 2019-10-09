@@ -458,6 +458,29 @@ Script_jumpstashedtext:
 	ld hl, JumpTextScript
 	jp ScriptJump
 
+Script_writenamedtext:
+; parameters:
+;     name_pointer
+;     text_pointer (RawTextPointerLabelParam)
+	ld a, $c7
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile $c7)
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile $c7)
+	ld [wVariableWidthTextVRAM+1], a
+	call InitVariableWidthTiles
+	hlcoord NAMEPLATE_X, NAMEPLATE_Y
+	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
+	call TextBox
+	call GetScriptByte
+	ld e, a
+	call GetScriptByte
+	ld d, a
+	hlcoord $6, $b
+	ld a, [wScriptBank]
+	call FarString
+;fallthrough
+
 Script_writetext:
 ; parameters:
 ;     text_pointer (RawTextPointerLabelParam)
@@ -468,29 +491,6 @@ Script_writetext:
 	ld a, [wScriptBank]
 	ld b, a
 	jp MapTextbox
-
-Script_writenamedtext:
-; parameters:
-;     name_pointer
-;     text_pointer (RawTextPointerLabelParam)
-	call GetScriptByte
-	ld [wTextBoxNameBuffer + 1], a
-	call GetScriptByte
-	ld [wTextBoxNameBuffer], a
-	call GetScriptByte
-	ld l, a
-	call GetScriptByte
-	ld h, a
-	ld a, [wScriptBank]
-	ld b, a
-	ld a, [wTextBoxFlags2]
-	set NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
-	call MapTextbox
-	ld a, [wTextBoxFlags2]
-	res NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
-	ret
 
 Script_farwritetext:
 ; parameters:
