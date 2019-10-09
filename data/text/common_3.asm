@@ -9,7 +9,7 @@ _ElmText7::
 
 if !DEF(DEBUG)
 	para "Your very own"
-	line "#mon story is"
+	line "Pokémon story is"
 	cont "about to unfold."
 
 	para "You'll face fun"
@@ -19,7 +19,7 @@ if !DEF(DEBUG)
 	para "A world of dreams"
 	line "and adventures"
 
-	para "with #mon"
+	para "with Pokémon"
 	line "awaits! Let's go!"
 endc
 
@@ -60,7 +60,7 @@ UnknownText_0x1c4183::
 
 UnknownText_0x1c41b1::
 	text "If you trade that"
-	line "#mon, you won't"
+	line "Pokémon, you won't"
 	cont "be able to battle."
 	prompt
 
@@ -113,13 +113,13 @@ UnknownText_0x1c460d::
 
 UnknownText_0x1c462a::
 	text "When you change a"
-	line "#mon Box, data"
+	line "Pokémon Box, data"
 	cont "will be saved. OK?"
 	done
 
 UnknownText_0x1c465f::
 	text "Each time you move"
-	line "a #mon, data"
+	line "a Pokémon, data"
 	cont "will be saved. OK?"
 	done
 
@@ -207,7 +207,7 @@ UnknownText_0x1c4c28::
 	para "They're good, but"
 	line "a trifle bitter."
 
-	para "Your #mon may"
+	para "Your Pokémon may"
 	line "not like them."
 
 	para "Hehehehe…"
@@ -688,20 +688,20 @@ UnknownText_0x1c5962::
 	done
 
 Text_OnlyThreePkmnMayBeEntered::
-	text "Three #mon"
+	text "Three Pokémon"
 	line "must be entered."
 	para ""
 	done
 
 Text_ThePkmnMustAllBeDifferentKinds::
-	text "The three #mon"
+	text "The three Pokémon"
 	line "must all be"
 	cont "different kinds."
 	para ""
 	done
 
 Text_ThePkmnMustNotHoldTheSameItems::
-	text "The three #mon"
+	text "The three Pokémon"
 	line "must not hold the"
 	cont "same items."
 	para ""
@@ -721,7 +721,7 @@ Text_UberRestriction::
 	done
 
 UnknownText_0x1c5aa6::
-	text "Oh no! The #mon"
+	text "Oh no! The Pokémon"
 	line "broke free!"
 	prompt
 
@@ -762,7 +762,7 @@ UnknownText_0x1c5b53::
 	text_from_ram wEnemyMonNick
 	text "'s data"
 	line "was newly added to"
-	cont "the #dex.@"
+	cont "the Pokédex.@"
 	sound_slot_machine_start
 	text_waitbutton
 	db "@@"
@@ -784,7 +784,7 @@ UnknownText_0x1c5b9a::
 
 UnknownText_0x1c5bac::
 	text "That can't be used"
-	line "on this #mon."
+	line "on this Pokémon."
 	prompt
 
 Text_RepelUsedEarlierIsStillInEffect::
@@ -868,30 +868,30 @@ UnknownText_0x1c5def::
 	prompt
 
 UnknownText_0x1c5e3a::
-	text "The #mon Box"
+	text "The Pokémon Box"
 	line "is full. That"
 	cont "can't be used now."
 	prompt
 
 Text_MonIsHiddenFromBall::
-	text "The #mon can't"
+	text "The Pokémon can't"
 	line "be seen!"
 	prompt
 
 Text_MonCantBeCaught::
-	text "The #mon can't"
+	text "The Pokémon can't"
 	line "be caught!"
 	prompt
 
 Text_NuzlockeBallFailure::
 	text "You already"
 	line "encountered a"
-	cont "#mon here."
+	cont "Pokémon here."
 	prompt
 
 Text_NuzlockeReviveFailure::
 	text "You can't revive"
-	line "#mon in"
+	line "Pokémon in"
 	cont "Nuzlocke mode!"
 	prompt
 
@@ -911,7 +911,7 @@ UnknownText_0x1c5ea8::
 	prompt
 
 UnknownText_0x1c5eba::
-	text "That #mon knows"
+	text "That Pokémon knows"
 	line "only one move."
 	done
 
@@ -923,7 +923,7 @@ UnknownText_0x1c5eda::
 	done
 
 UnknownText_0x1c5ef5::
-	text "Done! Your #mon"
+	text "Done! Your Pokémon"
 	line "forgot the move."
 	done
 
@@ -946,15 +946,15 @@ UnknownText_0x1c5f74::
 	text "Um… Oh, yes, I'm"
 	line "the Move Deleter."
 
-	para "I can make #mon"
+	para "I can make Pokémon"
 	line "forget moves."
 
 	para "Shall I make a"
-	line "#mon forget?"
+	line "Pokémon forget?"
 	done
 
 UnknownText_0x1c5fd1::
-	text "Which #mon?"
+	text "Which Pokémon?"
 	prompt
 
 Text_DSTIsThatOK::
@@ -1012,7 +1012,7 @@ WonderTradeQuestionText::
 	done
 
 WonderTradePromptText::
-	text "Which #mon do"
+	text "Which Pokémon do"
 	line "you want to trade?"
 	prompt
 
@@ -1023,7 +1023,7 @@ WonderTradePromptText::
 
 ;UnknownText_0x613c8::
 ;	text "Sorry, but your"
-;	line "#mon appears to"
+;	line "Pokémon appears to"
 ;
 ;	para "be abnormal. We"
 ;	line "can't accept it."
@@ -1031,7 +1031,7 @@ WonderTradePromptText::
 
 WonderTradeCantTradeGSBallText::
 	text "Sorry, but your"
-	line "#mon is holding"
+	line "Pokémon is holding"
 
 	para "a strange item. We"
 	line "can't accept it."
@@ -1077,7 +1077,7 @@ WonderTradeForGSBallPichuText::
 	para "It seems like you"
 	line "just traded a"
 
-	para "#mon with"
+	para "Pokémon with"
 	line "yourself."
 
 	para "But that can't be"
@@ -1100,8 +1100,8 @@ WonderTradeForGSBallPichuText::
 
 	para "…………"
 
-	para "Well, a #mon"
-	line "is a #mon."
+	para "Well, a Pokémon"
+	line "is a Pokémon."
 
 	para "Please look after"
 	line "it carefully."

@@ -1,7 +1,7 @@
 	db "SCISSORS@" ; species name
 	dw 511, 2600 ; height, weight
 
-	db   "This #MON's"
+	db   "This Pokémon's"
 	next "pincers, which"
 	next "contain steel, can"
 

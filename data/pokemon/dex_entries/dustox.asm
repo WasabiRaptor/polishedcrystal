@@ -7,4 +7,4 @@
 
 	page "attacked."
 	next "It is a nocturnal"
-	next "#MON.@"
+	next "Pokémon.@"

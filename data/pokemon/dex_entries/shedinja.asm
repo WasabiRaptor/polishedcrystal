@@ -1,7 +1,7 @@
 	db "SHED@" ; species name
 	dw 207, 26 ; height, weight
 
-	db   "A peculiar #MON"
+	db   "A peculiar Pokémon"
 	next "that floats in air"
 	next "even though its"
 

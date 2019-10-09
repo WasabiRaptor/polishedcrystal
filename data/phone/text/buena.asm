@@ -368,13 +368,13 @@ UnknownText_0xa1717: ; 0xa1717
 
 UnknownText_0xa183d: ; 0xa183d
 	text "<PLAYER>, what was"
-	line "the first #mon"
+	line "the first Pokémon"
 	cont "you ever caught?"
 
 	para "…Oh, really?"
 
 	para "I've seen lots of"
-	line "#mon around,"
+	line "Pokémon around,"
 
 	para "but I've never"
 	line "caught one."
@@ -383,7 +383,7 @@ UnknownText_0xa183d: ; 0xa183d
 	line "try sometime."
 
 	para "Did you know that"
-	line "the first #mon"
+	line "the first Pokémon"
 
 	para "Mary caught was a"
 	line "Drowzee?"
@@ -401,7 +401,7 @@ UnknownText_0xa183d: ; 0xa183d
 	line "Meowth."
 
 	para "Let's chat about"
-	line "#mon again!"
+	line "Pokémon again!"
 
 	para "Bye-bye!"
 	done
@@ -443,7 +443,7 @@ UnknownText_0xa1ac0: ; 0xa1ac0
 	line "on the phone for"
 
 	para "hours about what"
-	line "#mon music they"
+	line "Pokémon music they"
 
 	para "should play on"
 	line "different days of"

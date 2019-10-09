@@ -1,4 +1,4 @@
-	db "Rushing #MON@" ; species name
+	db "Rushing Pokémon@" ; species name
 	dw 108, 716 ; height, weight
 
 	db   "It charges prey"

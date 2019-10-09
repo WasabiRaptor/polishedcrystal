@@ -5,6 +5,6 @@
 	next "metal particles"
 	next "that cover this"
 
-	page "#MON's body"
+	page "Pokémon's body"
 	next "reflect bright"
 	next "light well.@"

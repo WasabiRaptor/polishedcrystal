@@ -237,14 +237,14 @@ BattleText_SafeguardFaded: ; 0x808d2
 
 BattleText_PkmnLightScreenFell: ; 0x808e7
 	text_from_ram wStringBuffer1
-	text " #mon's"
+	text " Pokémon's"
 	line "Light Screen fell!"
 	prompt
 ; 0x80905
 
 BattleText_PkmnReflectFaded: ; 0x80905
 	text_from_ram wStringBuffer1
-	text " #mon's"
+	text " Pokémon's"
 	line "Reflect faded!"
 	prompt
 ; 0x8091f
@@ -349,7 +349,7 @@ BattleText_PkmnFainted: ; 0x80a75
 ; 0x80a83
 
 BattleText_UseNextMon: ; 0x80a83
-	text "Use next #mon?"
+	text "Use next Pokémon?"
 	done
 ; 0x80a93
 
@@ -367,7 +367,7 @@ BattleText_EnemyIsAboutToUseWillPlayerSwitchPkmn: ; 0x80aca
 	text "."
 
 	para "Will you switch"
-	line "your #mon?"
+	line "your Pokémon?"
 	done
 ; 0x80af8
 
@@ -379,26 +379,26 @@ BattleText_EnemyAreAboutToUseWillPlayerSwitchPkmn:
 	text "."
 
 	para "Will you switch"
-	line "your #mon?"
+	line "your Pokémon?"
 	done
 
 BattleText_EnemyIsAboutToSwitchWillPlayerSwitchPkmn:
 	text "<ENEMY>"
 	line "is about to switch"
-	cont "#mon."
+	cont "Pokémon."
 
 	para "Will you switch"
-	line "your #mon?"
+	line "your Pokémon?"
 	done
 ; 0x80af8
 
 BattleText_EnemyAreAboutToSwitchWillPlayerSwitchPkmn:
 	text "<ENEMY>"
 	line "are about to"
-	cont "switch #mon."
+	cont "switch Pokémon."
 
 	para "Will you switch"
-	line "your #mon?"
+	line "your Pokémon?"
 	done
 
 BattleText_EnemySentOut: ; 0x80af8
@@ -1358,7 +1358,7 @@ IdentifiedText: ; 0x816b1
 ; 0x816c2
 
 StartPerishText: ; 0x816c2
-	text "Both #mon will"
+	text "Both Pokémon will"
 	line "faint in 3 turns!"
 	prompt
 ; 0x816e4
@@ -1606,7 +1606,7 @@ GetOutText:
 CarrieFinalPkmnText:
 CalFinalPkmnText:
 	text "I still have one"
-	line "#mon!"
+	line "Pokémon!"
 	prompt
 
 FalknerFinalPkmnText:
@@ -1616,9 +1616,9 @@ FalknerFinalPkmnText:
 
 BugsyFinalPkmnText:
 	text "Even though it's"
-	line "my last #mon,"
+	line "my last Pokémon,"
 
-	para "Bug #mon are"
+	para "Bug Pokémon are"
 	line "tough!"
 	prompt
 
@@ -1652,7 +1652,7 @@ PryceFinalPkmnText:
 	prompt
 
 ClairFinalPkmnText:
-	text "One last #mon?"
+	text "One last Pokémon?"
 	line "This is where the"
 	cont "real fight begins!"
 	prompt
@@ -1787,7 +1787,7 @@ Rival2_2FinalPkmnText:
 
 Lyra1_1FinalPkmnText:
 	text "You've never had a"
-	line "#mon battle"
+	line "Pokémon battle"
 	cont "before, have you?"
 
 	para "I could explain,"
@@ -1807,7 +1807,7 @@ Lyra1_2FinalPkmnText:
 
 Lyra1_3FinalPkmnText:
 	text "OK! Time for my"
-	line "last #mon!"
+	line "last Pokémon!"
 	prompt
 
 Lyra1_4FinalPkmnText:
@@ -1819,7 +1819,7 @@ Lyra1_4FinalPkmnText:
 Lyra2_1FinalPkmnText:
 	text "You've brought me"
 	line "down to my last"
-	cont "#mon…"
+	cont "Pokémon…"
 	prompt
 
 Proton1FinalPkmnText:
@@ -1868,7 +1868,7 @@ Ariana2FinalPkmnText:
 	prompt
 
 Giovanni1FinalPkmnText:
-	text "My #mon is"
+	text "My Pokémon is"
 	line "invincible!"
 	prompt
 
@@ -2010,7 +2010,7 @@ MayleneFinalPkmnText:
 
 SkylaFinalPkmnText:
 	text "This is my last"
-	line "#mon…"
+	line "Pokémon…"
 
 	para "But I'll never"
 	line "give up hope!"
@@ -2031,7 +2031,7 @@ BillFinalPkmnText:
 	prompt
 
 YellowFinalPkmnText:
-	text "My last #mon…"
+	text "My last Pokémon…"
 	line "Lend me your"
 	cont "power!"
 	prompt

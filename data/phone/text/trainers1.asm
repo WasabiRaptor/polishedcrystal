@@ -59,7 +59,7 @@ UnknownText_0x1b4e9e: ; 0x1b4e9e
 
 UnknownText_0x1b4ecd: ; 0x1b4ecd
 	text "How are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 
 	para "My @"
 	text_from_ram wStringBuffer4
@@ -130,7 +130,7 @@ UnknownText_0x1b5004: ; 0x1b5004
 
 UnknownText_0x1b502b: ; 0x1b502b
 	text "Keeping your"
-	line "#mon happy?"
+	line "Pokémon happy?"
 
 	para "My @"
 	text_from_ram wStringBuffer4
@@ -201,9 +201,9 @@ UnknownText_0x1b5154: ; 0x1b5154
 
 UnknownText_0x1b518b: ; 0x1b518b
 	text "How are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 
-	para "My #mon are a"
+	para "My Pokémon are a"
 	line "bit too energetic."
 
 	para "@"
@@ -290,7 +290,7 @@ UnknownText_0x1b535f: ; 0x1b535f
 
 UnknownText_0x1b5393: ; 0x1b5393
 	text "How are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 
 	para "My @"
 	text_from_ram wStringBuffer4
@@ -299,7 +299,7 @@ UnknownText_0x1b5393: ; 0x1b5393
 	cont "ever."
 
 	para "Let's keep at it"
-	line "and become #mon"
+	line "and become Pokémon"
 	cont "Champs!"
 	done
 
@@ -368,17 +368,17 @@ UnknownText_0x1b5510: ; 0x1b5510
 	text "Are you the kind"
 	line "of person who goes"
 
-	para "to #mon Centers"
+	para "to Pokémon Centers"
 	line "often?"
 
 	para "I go every day."
 	line "Watching out for"
 
 	para "the health of your"
-	line "#mon is a basic"
+	line "Pokémon is a basic"
 
 	para "part of being a"
-	line "#mon trainer."
+	line "Pokémon trainer."
 	done
 
 UnknownText_0x1b55ae: ; 0x1b55ae
@@ -438,7 +438,7 @@ UnknownText_0x1b5670: ; 0x1b5670
 	done
 
 UnknownText_0x1b5694: ; 0x1b5694
-	text "Are your #mon"
+	text "Are your Pokémon"
 	line "still cooking?"
 
 	para "My @"
@@ -510,12 +510,12 @@ UnknownText_0x1b57e8: ; 0x1b57e8
 
 UnknownText_0x1b5819: ; 0x1b5819
 	text "Hey, how are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 
 	para "What? Great?"
 	line "I see…"
 
-	para "What? My #mon?"
+	para "What? My Pokémon?"
 
 	para "Of course they're"
 	line "doing great! What"
@@ -583,7 +583,7 @@ UnknownText_0x1b597c: ; 0x1b597c
 
 UnknownText_0x1b59b2: ; 0x1b59b2
 	text "How are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 
 	para "My @"
 	text_from_ram wStringBuffer4
@@ -658,15 +658,15 @@ UnknownText_0x1b5b37: ; 0x1b5b37
 
 UnknownText_0x1b5b68: ; 0x1b5b68
 	text "How are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 
-	para "My #mon have"
+	para "My Pokémon have"
 	line "too much energy to"
 
 	para "burn. It gets to"
 	line "be a problem."
 
-	para "Of all my #mon,"
+	para "Of all my Pokémon,"
 	line "@"
 	text_from_ram wStringBuffer4
 	text " is the"
@@ -731,7 +731,7 @@ UnknownText_0x1b5d51: ; 0x1b5d51
 	text "Are you taking"
 	line "good care of your"
 
-	para "#mon? You have"
+	para "Pokémon? You have"
 	line "to be good to your"
 	cont "partners!"
 	done
@@ -801,14 +801,14 @@ UnknownText_0x1b5ebe: ; 0x1b5ebe
 	line "so I called you."
 
 	para "So anyway, how are"
-	line "your #mon?"
+	line "your Pokémon?"
 
 	para "Me, I take my"
 	line "@"
 	text_from_ram wStringBuffer4
 	text " to the"
 
-	para "#mon Center in"
+	para "Pokémon Center in"
 	line "Violet every day,"
 
 	para "so it's doing just"
@@ -877,7 +877,7 @@ UnknownText_0x1b6041: ; 0x1b6041
 	done
 
 UnknownText_0x1b606f: ; 0x1b606f
-	text "Are your #mon"
+	text "Are your Pokémon"
 	line "as feisty as ever?"
 
 	para "My @"
@@ -951,7 +951,7 @@ UnknownText_0x1b61bd: ; 0x1b61bd
 
 UnknownText_0x1b61f2: ; 0x1b61f2
 	text "How do you raise"
-	line "your #mon?"
+	line "your Pokémon?"
 
 	para "I do all sorts"
 	line "of things, like"
@@ -1021,7 +1021,7 @@ UnknownText_0x1b6331: ; 0x1b6331
 	done
 
 UnknownText_0x1b6352: ; 0x1b6352
-	text "Are your #mon"
+	text "Are your Pokémon"
 	line "still tough?"
 
 	para "I train every day"
@@ -1145,7 +1145,7 @@ UnknownText_0x1b6539: ; 0x1b6539
 	done
 
 UnknownText_0x1b656c: ; 0x1b656c
-	text "I bet your #mon"
+	text "I bet your Pokémon"
 	line "are a lot stronger"
 	cont "than before."
 	done
@@ -1200,12 +1200,12 @@ UnknownText_0x1b663b: ; 0x1b663b
 UnknownText_0x1b6652: ; 0x1b6652
 	text "<PLAYER>, are you"
 	line "raising your"
-	cont "#mon properly?"
+	cont "Pokémon properly?"
 
 	para "I read in a book"
 	line "that you should"
 
-	para "raise any #mon"
+	para "raise any Pokémon"
 	line "you catch with"
 	cont "love and care."
 	done
@@ -1276,7 +1276,7 @@ UnknownText_0x1b6795: ; 0x1b6795
 	line "scary."
 
 	para "How are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 	done
 
 UnknownText_0x1b67e2: ; 0x1b67e2
@@ -1341,19 +1341,19 @@ UnknownText_0x1b68ba: ; 0x1b68ba
 
 UnknownText_0x1b68e8: ; 0x1b68e8
 	text "How are your"
-	line "#mon doing?"
+	line "Pokémon doing?"
 
 	para "You know Prof.Oak,"
 	line "so of course your"
-	cont "#mon are fine!"
+	cont "Pokémon are fine!"
 
-	para "My #mon are"
+	para "My Pokémon are"
 	line "doing well too."
 
 	para "But then, I am"
 	line "trying to become a"
 
-	para "#mon professor,"
+	para "Pokémon professor,"
 	line "so that shouldn't"
 	cont "be a big surprise."
 	done
@@ -1552,11 +1552,11 @@ UnknownText_0x1b6db9: ; 0x1b6db9
 	text "Oh yeah, I saw you"
 	line "coming out of a"
 
-	para "#mon Center the"
+	para "Pokémon Center the"
 	line "other day."
 
 	para "You heal your"
-	line "#mon regularly,"
+	line "Pokémon regularly,"
 
 	para "don't you?"
 	line "I'm impressed."
@@ -1567,7 +1567,7 @@ UnknownText_0x1b6db9: ; 0x1b6db9
 	line "is so tough, it"
 
 	para "doesn't need to go"
-	line "to #mon Centers"
+	line "to Pokémon Centers"
 	cont "often. Heheh!"
 	done
 
@@ -1628,11 +1628,11 @@ UnknownText_0x1b6f37: ; 0x1b6f37
 	done
 
 UnknownText_0x1b6f60: ; 0x1b6f60
-	text "Are your #mon"
+	text "Are your Pokémon"
 	line "doing well?"
 
 	para "I hope you take"
-	line "them to a #mon"
+	line "them to a Pokémon"
 	cont "Center every day."
 
 	para "Don't push them"
@@ -1646,7 +1646,7 @@ UnknownText_0x1b6f60: ; 0x1b6f60
 	para "precisely because"
 	line "I take it to a"
 
-	para "#mon Center"
+	para "Pokémon Center"
 	line "every day."
 	done
 
@@ -1659,7 +1659,7 @@ UnknownText_0x1b7019: ; 0x1b7019
 	para "Morning, <PLAYER>!"
 
 	para "Are you using bird"
-	line "#mon?"
+	line "Pokémon?"
 	done
 
 UnknownText_0x1b7057: ; 0x1b7057
@@ -1671,7 +1671,7 @@ UnknownText_0x1b7057: ; 0x1b7057
 	para "Hi, <PLAYER>!"
 
 	para "Are your bird"
-	line "#mon flying?"
+	line "Pokémon flying?"
 	done
 
 UnknownText_0x1b7092: ; 0x1b7092
@@ -1683,7 +1683,7 @@ UnknownText_0x1b7092: ; 0x1b7092
 	para "Evening, <PLAYER>!"
 	line "Are you letting"
 
-	para "your bird #mon"
+	para "your bird Pokémon"
 	line "see some action?"
 	done
 
@@ -1718,7 +1718,7 @@ UnknownText_0x1b7132: ; 0x1b7132
 
 UnknownText_0x1b7161: ; 0x1b7161
 	text "Are you and your"
-	line "#mon fine?"
+	line "Pokémon fine?"
 
 	para "My @"
 	text_from_ram wStringBuffer4
@@ -1729,7 +1729,7 @@ UnknownText_0x1b7161: ; 0x1b7161
 	line "to face and beat"
 
 	para "the legendary bird"
-	line "#mon!"
+	line "Pokémon!"
 	done
 
 UnknownText_0x1b71d5: ; 0x1b71d5
@@ -1788,7 +1788,7 @@ UnknownText_0x1b72a5: ; 0x1b72a5
 	done
 
 UnknownText_0x1b72d0: ; 0x1b72d0
-	text "Have your #mon"
+	text "Have your Pokémon"
 	line "grown any?"
 
 	para "My @"
@@ -1903,7 +1903,7 @@ UnknownText_0x1b749b: ; 0x1b749b
 	done
 
 UnknownText_0x1b74c8: ; 0x1b74c8
-	text "Are your #mon"
+	text "Are your Pokémon"
 	line "looking good?"
 
 	para "My @"
@@ -1973,7 +1973,7 @@ UnknownText_0x1b75c9: ; 0x1b75c9
 
 UnknownText_0x1b75e5: ; 0x1b75e5
 	text "Are you raising"
-	line "your #mon?"
+	line "your Pokémon?"
 
 	para "Hey, @"
 	text_from_ram wStringBuffer3

@@ -58,5 +58,5 @@ BrentRematchText:
 	text "I've been waiting."
 
 	para "Look, check out my"
-	line "#mon!"
+	line "Pokémon!"
 	done

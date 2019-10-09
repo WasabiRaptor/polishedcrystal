@@ -2,7 +2,7 @@
 	dw 607, 4370 ; height, weight
 
 	db   "This brawny"
-	next "#MON courses"
+	next "Pokémon courses"
 	next "around the earth,"
 
 	page "spouting flames"

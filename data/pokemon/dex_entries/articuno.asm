@@ -2,7 +2,7 @@
 	dw 507, 1220 ; height, weight
 
 	db   "Legendary bird"
-	next "#MON. As it"
+	next "Pokémon. As it"
 	next "flies through the"
 
 	page "sky, it cools the"

@@ -1,7 +1,7 @@
 	db "NINJA@" ; species name
 	dw 207, 265 ; height, weight
 
-	db   "This #MON is so"
+	db   "This Pokémon is so"
 	next "quick, it is said"
 	next "to be able to"
 

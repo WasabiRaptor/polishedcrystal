@@ -3,7 +3,7 @@
 
 	db   "In prehistoric"
 	next "times, this"
-	next "#MON flew"
+	next "Pokémon flew"
 
 	page "freely and"
 	next "fearlessly through"

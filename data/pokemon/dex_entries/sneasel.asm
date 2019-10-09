@@ -2,7 +2,7 @@
 	dw 211, 620 ; height, weight
 
 	db   "This cunning"
-	next "#MON hides"
+	next "Pokémon hides"
 	next "under the cover"
 
 	page "of darkness,"

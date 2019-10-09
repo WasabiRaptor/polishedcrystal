@@ -2,7 +2,7 @@
 	dw 607, 1320 ; height, weight
 
 	db   "Legendary bird"
-	next "#MON. It is"
+	next "Pokémon. It is"
 	next "said to migrate"
 
 	page "from the south"

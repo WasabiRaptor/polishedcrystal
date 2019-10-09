@@ -1,13 +1,13 @@
 NurseMornText:
 	text "Good morning!"
 	line "Welcome to our"
-	cont "#mon Center."
+	cont "Pokémon Center."
 	done
 
 NurseDayText:
 	text "Hello!"
 	line "Welcome to our"
-	cont "#mon Center."
+	cont "Pokémon Center."
 	done
 
 NurseNiteText:
@@ -15,7 +15,7 @@ NurseNiteText:
 	line "You're out late."
 
 	para "Welcome to our"
-	line "#mon Center."
+	line "Pokémon Center."
 	done
 
 PokeComNurseMornText:
@@ -51,16 +51,16 @@ PokeComNurseNiteText:
 
 NurseAskHealText:
 	text "We can heal your"
-	line "#mon to perfect"
+	line "Pokémon to perfect"
 	cont "health."
 
 	para "Shall we heal your"
-	line "#mon?"
+	line "Pokémon?"
 	done
 
 NurseFourTrainerStarsText:
 	text "We can heal your"
-	line "#mon to perfect"
+	line "Pokémon to perfect"
 	cont "health."
 
 	para "Shall we…"
@@ -84,7 +84,7 @@ NurseFourTrainerStarsText:
 
 	para "Please, <PLAYER>,"
 	line "may I heal your"
-	cont "#mon?"
+	cont "Pokémon?"
 	done
 
 NurseTheUsualText:
@@ -97,14 +97,14 @@ NurseTheUsualText:
 
 NurseTakePokemonText:
 	text "OK, may I see your"
-	line "#mon?"
+	line "Pokémon?"
 	done
 
 NurseReturnPokemonText:
 	text "Thank you for"
 	line "waiting."
 
-	para "Your #mon are"
+	para "Your Pokémon are"
 	line "fully healed."
 	done
 
@@ -114,31 +114,31 @@ NurseGoodbyeText:
 	done
 
 NursePokerusText:
-	text "Your #mon"
+	text "Your Pokémon"
 	line "appear to be"
 
 	para "infected by tiny"
 	line "life forms."
 
-	para "Your #mon are"
+	para "Your Pokémon are"
 	line "healthy and seem"
 	cont "to be fine."
 
 	para "But we can't tell"
 	line "you anything more"
 
-	para "at a #mon"
+	para "at a Pokémon"
 	line "Center."
 	done
 
 PokeComNursePokerusText:
-	text "Your #mon"
+	text "Your Pokémon"
 	line "appear to be"
 
 	para "infected by tiny"
 	line "life forms."
 
-	para "Your #mon are"
+	para "Your Pokémon are"
 	line "healthy and seem"
 	cont "to be fine."
 
@@ -153,28 +153,28 @@ DifficultBookshelfText:
 
 PictureBookshelfText:
 	text "A whole collection"
-	line "of #mon picture"
+	line "of Pokémon picture"
 	cont "books!"
 	done
 
 MagazineBookshelfText:
-	text "#mon magazines…"
-	line "#mon Pal,"
+	text "Pokémon magazines…"
+	line "Pokémon Pal,"
 
-	para "#mon Handbook,"
-	line "#mon Graph…"
+	para "Pokémon Handbook,"
+	line "Pokémon Graph…"
 	done
 
 TeamRocketOathText:
 	text "Team Rocket Oath"
 
-	para "Steal #mon for"
+	para "Steal Pokémon for"
 	line "profit!"
 
-	para "Exploit #mon"
+	para "Exploit Pokémon"
 	line "for profit!"
 
-	para "All #mon exist"
+	para "All Pokémon exist"
 	line "for the glory of"
 	cont "Team Rocket!"
 	done
@@ -185,7 +185,7 @@ IncenseBurnerText:
 	done
 
 MerchandiseShelfText:
-	text "Lots of #mon"
+	text "Lots of Pokémon"
 	line "merchandise!"
 	done
 
@@ -229,20 +229,20 @@ TrashCanText:
 	done
 
 PokeCenterSignText:
-	text "Heal Your #mon!"
-	line "#mon Center"
+	text "Heal Your Pokémon!"
+	line "Pokémon Center"
 	done
 
 MartSignText:
 	text "For All Your"
-	line "#mon Needs"
+	line "Pokémon Needs"
 
-	para "#mon Mart"
+	para "Pokémon Mart"
 	done
 
 ContestResults_ReadyToJudgeText:
 	text "We will now judge"
-	line "the #mon you've"
+	line "the Pokémon you've"
 	cont "caught."
 
 	para "……"
@@ -292,7 +292,7 @@ ContestResults_DidNotWinText:
 
 ContestResults_ReturnPartyText:
 	text "We'll return the"
-	line "#mon we kept"
+	line "Pokémon we kept"
 
 	para "for you."
 	line "Here you go!"
@@ -300,7 +300,7 @@ ContestResults_ReturnPartyText:
 
 ContestResults_PartyFullText:
 	text "Your party's full,"
-	line "so the #mon was"
+	line "so the Pokémon was"
 
 	para "sent to your BOX"
 	line "in Bill's PC."
@@ -309,7 +309,7 @@ ContestResults_PartyFullText:
 GymStatue_CityGymText:
 	text_from_ram wStringBuffer3
 	text ""
-	line "#mon Gym"
+	line "Pokémon Gym"
 
 	para "Leader: @"
 	text_from_ram wStringBuffer4
@@ -395,12 +395,12 @@ BugContestPrizeNoRoomText:
 
 HappinessText3:
 	text "Wow! You and your"
-	line "#mon are really"
+	line "Pokémon are really"
 	cont "close!"
 	done
 
 HappinessText2:
-	text "#mon get more"
+	text "Pokémon get more"
 	line "friendly if you"
 
 	para "spend time with"
@@ -409,7 +409,7 @@ HappinessText2:
 
 HappinessText1:
 	text "You haven't tamed"
-	line "your #mon."
+	line "your Pokémon."
 
 	para "If you aren't"
 	line "nice, it'll pout."

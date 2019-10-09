@@ -6,5 +6,5 @@
 	next "very intelligent."
 	
 	page "It is a tender"
-	next "#MON that dis-"
+	next "Pokémon that dis-"
 	next "likes fighting.@"
