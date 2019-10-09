@@ -353,7 +353,7 @@ Options_RunningShoes: ; e44c1
 	db "On @"
 ; e44fa
 
-NUM_TEXTBOX_FRAMES EQU 13
+NUM_TEXTBOX_FRAMES EQU 14
 Options_Frame: ; e44fa
 	ld hl, wTextBoxFrame
 	ldh a, [hJoyPressed]

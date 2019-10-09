@@ -30,6 +30,7 @@ INCBIN "gfx/frames/10.1bpp"
 INCBIN "gfx/frames/11.1bpp"
 INCBIN "gfx/frames/12.1bpp"
 INCBIN "gfx/frames/13.1bpp"
+INCBIN "gfx/frames/14.1bpp"
 
 ; f89b0
 
@@ -80,39 +81,14 @@ _LoadStandardFont::
 	xor a
 _LoadStandardMaybeOpaqueFont:
 	ldh [hRequestOpaque1bpp], a
-	push af
 	ld bc, 0
-	call PutFontPointerInDE
-	ld hl, VTiles0 tile $80
-	lb bc, BANK(FontNormal), $73
-	call GetMaybeOpaque1bpp
-
-	ld bc, $74 * LEN_1BPP_TILE
-	call PutFontPointerInDE
-	ld hl, VTiles0 tile "▶"
-	lb bc, BANK(FontNormal), 1
-	call GetMaybeOpaque1bpp
-
-	ld bc, $78 * LEN_1BPP_TILE
-	call PutFontPointerInDE
-	ld hl, VTiles0 tile "◀"
-	lb bc, BANK(FontNormal), 1
-	call GetMaybeOpaque1bpp
-
-	ld bc, $7f * LEN_1BPP_TILE
-	call PutFontPointerInDE
-	ld hl, VTiles0 tile "<UPDN>"
-	lb bc, BANK(FontNormal), 1
-	pop af
-	jp GetMaybeOpaque1bpp
-
-
-PutFontPointerInDE:
 	call LoadStandardFontPointer
 	add hl, bc
 	ld d, h
 	ld e, l
-	ret
+	ld hl, VTiles0 tile $80
+	lb bc, BANK(FontNormal), 112
+	jp GetMaybeOpaque1bpp
 
 LoadStandardFontPointer::
 	ld hl, .FontPointers
@@ -150,29 +126,8 @@ LoadFrame:: ; fb4cc
 	call GetFrame
 	ld d, h
 	ld e, l
-	ld hl, VTiles0 tile "│"
-	lb bc, BANK(Frames), 1
-	call Get1bpp
-	call GetFrame	
-	ld bc, LEN_1BPP_TILE
-	add hl, bc
-	ld d, h
-	ld e, l
-	ld hl, VTiles0 tile "┌"
-	lb bc, BANK(Frames), 3
-	call Get1bpp
-	call GetFrame
-	ld bc, LEN_1BPP_TILE * 4
-	add hl, bc
-	ld d, h
-	ld e, l
-	ld hl, VTiles0 tile "┐"
-	lb bc, BANK(Frames), 6
-	call Get1bpp
-	
-	ld hl, VTiles2 tile " "
-	ld de, TextBoxSpaceGFX
-	lb bc, BANK(TextBoxSpaceGFX), 1
+	ld hl, VTiles0 tile "▼"
+	lb bc, BANK(Frames), 16
 	jp Get1bpp
 ; fb4f2
 GetFrame:
