@@ -4938,7 +4938,7 @@ CharacterWidths:
 	db "u", 4 +1
 	db "v", 5 +1
 	db "w", 5 +1
-	db "x", 4 +1
+	db "x", 5 +1
 	db "y", 4 +1
 	db "z", 3 +1
 	db "A", 5 +1
