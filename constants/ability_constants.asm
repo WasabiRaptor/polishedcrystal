@@ -148,6 +148,7 @@
 	const POWER_CONSTRUCT ;thalins 
 	const BERSERK ;raptor
 	const GALE_WINGS ;raptor
+	const TOXIC_BOOST ;thalins
 
 NUM_ABILITIES EQU const_value
 ;abilities we nned to implement or simply replace
@@ -155,7 +156,7 @@ placeholder_zero: macro
 \1 EQU 0
 endm
 	placeholder_zero DISGUISE ;thalins
-	placeholder_zero TOXIC_BOOST ;thalins ; basically just guts but only for poison
+	;placeholder_zero TOXIC_BOOST ;thalins ; basically just guts but only for poison
 	placeholder_zero MAGICIAN ;thalins ;similar to pickpocket but its when you attack instead of get hit
 	placeholder_zero DEFEATIST ;thalins
 	placeholder_zero TRUANT ;thalins

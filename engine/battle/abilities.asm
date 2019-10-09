@@ -2002,6 +2002,15 @@ RegeneratorAbility:
 	jp z, UpdateBattleMonInParty
 	jp UpdateEnemyMonInParty
 
+ToxicBoostAbility:
+; 150% physical attack if user is poisoned
+	ld a, BATTLE_VARS_STATUS
+	call GetBattleVar
+	and a
+	ret z
+	ld a, $32
+	jp ApplyPhysicalAttackDamageMod
+
 DisableAnimations:
 	ld a, 1
 	ld [wAnimationsDisabled], a

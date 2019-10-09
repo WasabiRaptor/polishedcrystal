@@ -147,6 +147,7 @@ AbilityNames:
 	dw PowerConstruct
 	dw Berserk
 	dw GaleWings
+	dw ToxicBoost
 
 NoAbility:     db "-","-","-","@"
 Stench:        db "S","t","e","n","c","h","@"
@@ -296,6 +297,7 @@ ToughClaws:    db "T","o","u","g","h"," ","C","l","a","w","s","@"
 PowerConstruct:db "P","o","w","e","r"," ","C","o","n","s","t","r","u","c","t","@"
 Berserk:	   db "B","e","r","s","e","r","k","@"
 GaleWings: 	   db "G","a","l","e"," ","W","i","n","g","s","@"
+ToxicBoost:	   db "T","o","x","i","c","B","o","o","s","t","@"
 
 AbilityDescriptions:
 	dw NoAbilityDescription
@@ -446,6 +448,7 @@ AbilityDescriptions:
 	dw PowerConstructDescription
 	dw BerserkDescription
 	dw GaleWingsDescription
+	dw ToxicBoostDescription
 
 NoAbilityDescription:
 	db    "Abilities are"
@@ -984,7 +987,7 @@ PowerOfAlchemyDescription:
 	next1 "pokemon's ability.@"
 
 IllusionDescription:
-	db    "Disguses self as"
+	db    "Disguises self as"
 	next1 "final party mon.@"
 
 ReverseAuraDescription:
@@ -1025,3 +1028,7 @@ BerserkDescription:
 GaleWingsDescription:
 	db    "Gives priority to"
 	next1 "flying type moves.@"
+
+ToxicBoostDescription:
+	db    "Boosts Attack"
+	next1 "when poisoned.@"
