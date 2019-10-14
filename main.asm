@@ -4975,7 +4975,7 @@ CharacterWidths:
 	db "?", 5 +1
 	db "!", 3 +1
 	db "-", 4 +1
-	db "<COLON>", 1 +1
+	db ":", 1 +1
 	db "é", 4 +1
 	db "♀", 5 +1
 	db "♂", 5 +1
@@ -4993,6 +4993,10 @@ CharacterWidths:
 	db "8", 5 +1
 	db "9", 5 +1
 	db "/", 4 +1
+	db "¥", 5 +1
+	db "+", 5 +1
+	db "<COLON>", 2 +1
+	db "<SHARP>", 6 +1
 	db " ", 3
 	db -1, 8
 

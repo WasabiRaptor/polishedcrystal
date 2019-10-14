@@ -205,7 +205,7 @@ BATTLEEXTRA_GFX_START EQU $5f
 
 	charmap "&",        $cd
 	charmap "…",        $ce
-	charmap "/",        $cf
+	;charmap "/",        $cf
 
 ; cannot be used with portraits
 	charmap "<ID>",     $d0
@@ -215,6 +215,8 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "<PHONE>",  $d4
 	charmap "<BLACK>",  $d5
 	charmap "<NONO>",   $d6
+
+	charmap "%",        $dc
 
 	charmap "↑",        $dd
 	charmap "↓",        $de
@@ -239,7 +241,7 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "¥",        $ea
 	charmap "×",        $eb
 	charmap "★",        $ec
-	charmap "%",        $ed
+	charmap "/",        $ed
 	charmap "+",        $ee
 	charmap "<COLON>", 	$ef
 

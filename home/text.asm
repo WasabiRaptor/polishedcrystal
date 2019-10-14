@@ -401,6 +401,14 @@ NextVRAMVariableWidthTextTile:
 	ret z
 	cp $df
 	jr c, notlastVWtile
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM+1], a
+	ret
+	
 InitVariableWidthText::
 	;initialize the variable width text values
 	ld a, "A"
