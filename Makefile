@@ -50,6 +50,8 @@ $(BUILD_DIR)data/pokemon/unova_dex_order.o \
 $(BUILD_DIR)data/pokemon/kalos_dex_order.o \
 $(BUILD_DIR)data/pokemon/alola_dex_order.o \
 $(BUILD_DIR)data/pokemon/galar_dex_order.o \
+$(BUILD_DIR)data/pokemon/invar_dex_order.o \
+$(BUILD_DIR)data/pokemon/dex_order_alpha.o \
 $(BUILD_DIR)data/pokemon/kanto_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/kanto_egg_moves.o \
 $(BUILD_DIR)data/pokemon/johto_evos_attacks.o \

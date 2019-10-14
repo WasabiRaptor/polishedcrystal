@@ -1224,6 +1224,7 @@ DisplayDexEntry: ; 4424d
 	call .DexPageNo
 	pop de
 	inc de
+	call InitVariableWidthText
 	pop af
 	hlcoord 2, 11
 	push af

@@ -466,9 +466,6 @@ GetPokemonName:: ; 343b
 	push af
 	push hl
 
-; Each name is ten characters
-	ld a, [wNamedObjectIndexBuffer]
-
 ; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
@@ -485,9 +482,8 @@ GetPokemonName:: ; 343b
 
 	ld a, [wNamedObjectIndexBuffer]
 	dec a
-	ld bc, PKMN_NAME_LENGTH - 1
-	rst AddNTimes
-
+	call GetNthString
+	
 ; Terminator
 	ld de, wStringBuffer1
 	push de

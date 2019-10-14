@@ -894,5 +894,6 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	nat_dexmon_group 1, GROUP_GENERATION_EIGHT
 NUM_GALAR_POKEMON EQU const_value +-1
 
-
-
+grouped_dex_order_mon: macro
+	db \1, GROUP_\1
+endm

@@ -1,7 +1,6 @@
+INCLUDE "constants.asm"
 
-grouped_dex_order_mon: macro
-	db \1, GROUP_\1
-endm
+SECTION "Invar Dex Order", ROMX
 
 InvarDexOrder::
 	grouped_dex_order_mon EEVEE			; 01

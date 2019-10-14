@@ -786,8 +786,9 @@ wBackupDexListingCursor:: ds 1
 wBackupDexListingPage:: ds 1
 wDexCurrentLocation:: ds 1
 wPokedexStatus:: ds 1
-wPokedexSeenCaughtCount::
-wPokedexCurrentMon:: ds 2
+wPokedexSeenCaughtCount:: ;two bytes
+wPokedexCurMonGroup:: ds 1
+wPokedexCurrentMon:: ds 1
 wDexMonShiny:: ds 1
 wDexCurrentUnownIndex::
 wDexMonForm:: ds 1

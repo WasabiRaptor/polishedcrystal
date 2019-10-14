@@ -1,5 +1,5 @@
 regional_dex_order: macro
-    dbbba \1, ((\2DexOrderEnd - \2DexOrder)), \2DexOrder
+    dbbba \1, ((\2DexOrderEnd - \2DexOrder)/2), \2DexOrder
 endm
 
 RegionDexOrderTable:

@@ -9894,7 +9894,6 @@ BattleStartMessage: ; 3fc8b
 	call DelayFrames
 
 	farcall Battle_GetTrainerName
-
 	ld hl, WantToBattleText
 	call CheckPluralTrainer
 	jr nz, .PlaceBattleStartText

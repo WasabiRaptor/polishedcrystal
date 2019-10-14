@@ -325,7 +325,7 @@ Pokedex_PrintTotalEncounters:
 
 	hlcoord 9, 4
 	ld de, StringEncounters
-	call Pokedex_PlaceString
+	call PlaceString
 	ld de, wTotalEncounters
 	hlcoord 10, 5
 	ld c, 7
@@ -334,7 +334,7 @@ Pokedex_PrintTotalEncounters:
 
 	hlcoord 9, 6
 	ld de, StringThisCycle
-	call Pokedex_PlaceString
+	call PlaceString
 	ld de, wTotalEncountersThisCycle
 	hlcoord 10, 7
 	ld c, 7
@@ -346,9 +346,9 @@ Pokedex_PrintTotalEncounters:
 	ret
 	
 StringEncounters:
-	db "Enco","unt","e","rs", $ff
+	db "Total Encounters@"
 StringThisCycle
-	db "This Cycl","e", $ff
+	db "On This Cycle@"
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	call LowVolume
@@ -1612,6 +1612,7 @@ Pokedex_PlaceBorder: ; 40ad5
 Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints the list of Pokémon on the main Pokédex screen.
 ; Clear (2 * [wDexListingHeight]) by 17 box starting at 0,1
+	call InitVariableWidthText
 	hlcoord 0, 1
 	ld a, 4
 	add a
@@ -1887,21 +1888,6 @@ Pokedex_CheckSeen: ; 40bd0
 	ret
 
 
-GetRelevantPokedexRegionOrderPointers:
-	ld a, [wPokedexRegion]
-	ld hl, RegionDexOrderTable
-	ld de, 5
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
-
 INCLUDE "data/pokemon/regional_dex_order_table.asm"
 
 Pokedex_OrderMonsByMode: ; 40bdc
@@ -1911,129 +1897,76 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ldh [rSVBK], a
 	xor a
 	ld [wDexListingEnd], a
-
+	ld a, 1
+	ld [wPokedexRegion], a
 	ld hl, wPokedexOrder
 	ld bc, wPokedexOrderEnd - wPokedexOrder
 	xor a
 	call ByteFill
-	pop af
-	ldh [rSVBK], a
+
 
 	ld a, [wCurrentDexMode]
 	ld hl, .Jumptable
 	call Pokedex_LoadPointer
-	jp hl
+	call _hl_
 
+	pop af
+	ldh [rSVBK], a
+	ret
 
 .Jumptable: ; 40bf0 (10:4bf0)
-	dw .OldMode
 	dw .VariantMode
+	dw .OldMode
 	dw .Pokedex_ABCMode
 
 .OldMode: ; 40c08 (10:4c08)
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPokedexOrder)
-	ldh [rSVBK], a
-
-	ld de, InvarDexOrder
-	ld hl, wPokedexOrder
+	ld hl, InvarDexOrder
+	ld de, wPokedexOrder
 	ld c, (InvarDexOrderEnd - InvarDexOrder) / 2
+	ld b, BANK(InvarDexOrder)
 	jr .loop1abc
 
 .VariantMode: ; 40bf6 (10:4bf6)
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPokedexOrder)
-	ldh [rSVBK], a
-
-	call GetRelevantPokedexRegionOrderPointers
-	ld a, d
-	push af
-	ld de, wPokedexOrder
-.loopnew
-	pop af
-	push af 
-	call GetFarByte
-	ld [de], a
-	inc de
+;Get Relevant Pokedex Region Order Pointers
 	ld a, [wPokedexRegion]
-	ld [de], a
-	inc de
-	ld a, [wDexListingEnd]
-	inc a
-	ld [wDexListingEnd], a
+	ld hl, RegionDexOrderTable
+	ld de, 5
+	call IsInArray
 	inc hl
-	dec c
-	jr nz, .loopnew
-; fallthrough
-	pop af
-	pop af
-	ldh [rSVBK], a
-	ld h, d
-	ld l, e
-	jp .fill_remaining_dex
+	ld a, [hli]
+	ld c, a
+	ld a, [hli]
+	ld b, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld de, wPokedexOrder
+	jr .loop1abc
 
 .Pokedex_ABCMode: ; 40c30
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPokedexOrder)
-	ldh [rSVBK], a
-
-	ld hl, wPokedexOrder
-	ld de, AlphabeticalPokedexOrder
+	ld de, wPokedexOrder
+	ld hl, AlphabeticalPokedexOrder
 	ld c, (AlphabeticalPokedexOrderEnd - AlphabeticalPokedexOrder) / 2
+	ld b, BANK(AlphabeticalPokedexOrder)
 .loop1abc
-	push bc
-	ld a, [de]
-	ld [wPokedexCurrentMon], a
-	push af
+	ld a, b
+	call GetFarByte
+	ld [de], a
+	inc hl
 	inc de
-	ld a, [de]
-	ld [wCurGroup], a
-	pop af
-	ld a, [wPokedexCurrentMon]
-	ld [hli], a
-	ld a, [wCurGroup]
-	ld [hli], a
+	ld a, b
+	call GetFarByte
+	ld [de], a
+	inc hl
+	inc de
 	ld a, [wDexListingEnd]
 	inc a
 	ld [wDexListingEnd], a
 
-	inc de
-	pop bc
 	dec c
 	jr nz, .loop1abc
-
-	pop af
-	ldh [rSVBK], a
-
-.fill_remaining_dex
-	ld a, [wDexListingEnd]
-	ld c, 0
-.loop2abc
-	cp NUM_POKEMON
-	ret z
-
-	push af
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wPokedexOrder)
-	ldh [rSVBK], a
-
-	ld [hl], c
-	inc hl
-	ld [hl], c
-	inc hl
-
-	pop af
-	ldh [rSVBK], a
-	pop af
-	inc a
-	jr .loop2abc
-
-INCLUDE "data/pokemon/invar_dex_order.asm"
-INCLUDE "data/pokemon/dex_order_alpha.asm"
+	ret
 
 Pokedex_DisplayModeDescription: ; 40e5b
 	xor a

@@ -216,9 +216,11 @@ PlaceNextChar::
 	ld a, [de]
 	cp "@"
 	jr nz, CheckDict
+	push hl
+	call NextVRAMVariableWidthTextTile
+	pop hl
 	ld b, h
 	ld c, l
-	call NextVRAMVariableWidthTextTile
 	pop hl
 	ret
 
@@ -257,7 +259,7 @@ endm
 	dict "<PLAYER>", PrintPlayerName
 	dict "<RIVAL>",  PrintRivalName
 	dict "<CONT>",   ContText
-	;dict "<TRENDY>", PrintTrendyPhrase
+	dict "<TRENDY>", PrintTrendyPhrase
 	dict "<DONE>",   DoneText
 	dict "<PROMPT>", PromptText
 	dict "<_NEXT>",  NextTextTile
@@ -398,7 +400,7 @@ NextVRAMVariableWidthTextTile:
 	inc a
 	ret z
 	cp $df
-	jr c, notlasttile
+	jr c, notlastVWtile
 InitVariableWidthText::
 	;initialize the variable width text values
 	ld a, "A"
@@ -417,7 +419,7 @@ InitVariableWidthTiles::
 	pop hl
 	ret
 
-notlasttile:
+notlastVWtile:
 	ld [wVariableWidthTextTile], a
 
 	ld a, [wVariableWidthTextVRAM]
@@ -936,7 +938,7 @@ Text_Start::
 	ld e, l
 	ld h, b
 	ld l, c
-	call PlaceString
+	call PlaceSpecialString
 	ld h, d
 	ld l, e
 	inc hl
@@ -955,7 +957,7 @@ Text_FromRAM::
 	push hl
 	ld h, b
 	ld l, c
-	call PlaceString
+	call PlaceSpecialString
 	pop hl
 	ret
 
