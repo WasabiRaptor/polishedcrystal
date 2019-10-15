@@ -125,7 +125,7 @@ ReadBTTrainerParty: ; 1702b7
 
 	ld hl, wBT_OTTempName ; 0xc608
 	ld de, wOTPlayerName
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ld a, "@"
 	ld [de], a

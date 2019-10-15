@@ -2001,7 +2001,7 @@ Script_RAM2MEM:
 
 ResetStringBuffer1:
 	ld hl, wStringBuffer1
-	ld bc, NAME_LENGTH
+	ld bc, PKMN_NAME_LENGTH
 	ld a, "@"
 	jp ByteFill
 

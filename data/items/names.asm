@@ -29,7 +29,7 @@ ItemNames::
 	db "Max Potion@"
 	db "Antidote@"
 	db "Burn Heal@"
-	db "ParalyzeHeal@"
+	db "Paralyze Heal@"
 	db "Awakening@"
 	db "Ice Heal@"
 	db "Full Heal@"
@@ -59,7 +59,7 @@ else
 	db "Cake of Rage@"
 endc
 	db "Sacred Ash@"
-	db "EnergyPowder@"
+	db "Energy Powder@"
 	db "Energy Root@"
 	db "Heal Powder@"
 	db "Revival Herb@"

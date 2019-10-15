@@ -228,7 +228,7 @@ GetPriceToRetrieveBreedmon: ; 1686d
 	ld a, d
 	ld [wStringBuffer2 + 1], a
 	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld hl, 0
 	ld bc, 100
@@ -509,7 +509,7 @@ DayCare_GiveEgg: ; 169ac
 	rst CopyBytes
 
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	call DayCare_GetCurrentPartyMember
 	ld hl, wEggOT
 	rst CopyBytes
@@ -741,7 +741,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld bc, PKMN_NAME_LENGTH
 	call ByteFill
 	ld hl, wEggOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	call ByteFill
 	
 	ld a, [wBreedMon1Group]
@@ -846,7 +846,7 @@ DayCare_InitBreeding: ; 16a3b
 	call CopyName2
 	ld hl, wPlayerName
 	ld de, wEggOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	xor a
 	ld [wEggMonItem], a
@@ -1110,14 +1110,14 @@ DayCare_InitBreeding: ; 16a3b
 	; PP, egg cycles, level
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld hl, wEggMonMoves
 	ld de, wEggMonPP
 	predef FillPP
 	ld hl, wMonOrItemNameBuffer
 	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld a, [wBaseEggSteps]
 	and $f

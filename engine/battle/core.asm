@@ -3813,7 +3813,7 @@ InitBattleMon: ; 3da0d
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
-	call SkipNames
+	call SkipPokemonNames
 	ld de, wBattleMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
@@ -3902,7 +3902,7 @@ InitEnemyMon: ; 3dabd
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipNames
+	call SkipPokemonNames
 
 	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
 	ld b, a
@@ -9304,7 +9304,7 @@ ReadAndPrintLinkBattleRecord: ; 3f85f
 	ld h, d
 	ld l, e
 	ld de, wd002
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ld a, "@"
 	ld [de], a
@@ -9527,7 +9527,7 @@ AddLastBattleToLinkRecord: ; 3fa42
 	ld bc, 2
 	rst CopyBytes
 	ld hl, wOTPlayerName
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ld hl, sLinkBattleResults
 	call .StoreResult

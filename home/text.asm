@@ -362,13 +362,11 @@ PlaceCharacter::
 
 
 	pop hl
-	inc hl
-	push hl
 	ld a, [wVariableWidthTextTile]
+	ld [hli], a
 	inc a
 	ld [hl], a
 	call NextVRAMVariableWidthTextTile
-	pop hl
 	jr .letterdelay
 .sametile
 	push hl
@@ -430,6 +428,7 @@ InitVariableWidthTiles::
 	ret
 
 notlastVWtile:
+	push hl
 	ld [wVariableWidthTextTile], a
 
 	ld a, [wVariableWidthTextVRAM]
@@ -442,6 +441,7 @@ notlastVWtile:
 	ld [wVariableWidthTextVRAM], a
 	ld a, h
 	ld [wVariableWidthTextVRAM+1], a
+	pop hl
 	ret
 
 CombineRows::

@@ -110,7 +110,7 @@ AddEggMonToParty:
 	rst CopyBytes
 
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld a, [wd002]
 .loop3
 	add hl, bc

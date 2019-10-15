@@ -320,7 +320,7 @@ InitializeNPCNames: ; 5ce9
 	ld de, wTrendyPhrase
 
 .Copy:
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 

@@ -83,7 +83,7 @@ WritePartyMenuTilemap: ; 0x5005f
 
 PlacePartyNicknames: ; 5009b
 	call InitVariableWidthTiles
-	VWTextStart $b0, -4
+	VWTextStart $a0
 	hlcoord 3, 1
 	ld a, [wPartyCount]
 	and a
@@ -351,17 +351,17 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 ; 50221
 
 string_able: ; 50221
-	db $a9, $aa, $ab, "@"
+	db $a4, $a5, $a6, "@"
 	;  A    bl   e
 
 string_not_able: ; 50226
-	db $a5, $a6, $a7, $a8, "@"
+	db $a0, $a1, $a2, $a3, "@"
 	;  U    na   bl   e
 
 SetupAbleUnableStrings:
 	hlcoord $1, $10
 	ld de, .unable
-	VWTextStart $a5
+	VWTextStart $9e
 	call InitVariableWidthTiles
 	call PlaceString
 	ld de, .able

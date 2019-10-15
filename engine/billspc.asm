@@ -2154,11 +2154,11 @@ CopyNicknameToTemp: ; e3363 (38:7363)
 	ret
 
 CopyOTNameToTemp: ; e3376 (38:7376)
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 	ld de, wBufferMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 

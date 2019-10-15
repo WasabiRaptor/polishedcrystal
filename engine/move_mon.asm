@@ -40,11 +40,11 @@ TryAddMonToParty: ; d88c
 .loadOTname
 	ldh a, [hMoveMon] ; Restore index from backup
 	dec a
-	call SkipNames
+	call SkipPlayerNames
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
@@ -59,7 +59,7 @@ TryAddMonToParty: ; d88c
 .got_target_nick
 	ldh a, [hMoveMon]
 	dec a
-	call SkipNames
+	call SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wStringBuffer1
@@ -595,24 +595,24 @@ AddTempmonToParty: ; da96
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	dec a
-	call SkipNames
+	call SkipPlayerNames
 	ld d, h
 	ld e, l
 	ld hl, wOTPartyMonOT
 	ld a, [wCurPartyMon]
-	call SkipNames
-	ld bc, NAME_LENGTH
+	call SkipPlayerNames
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 
 	ld hl, wPartyMonNicknames
 	ld a, [wPartyCount]
 	dec a
-	call SkipNames
+	call SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipNames
+	call SkipPokemonNames
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
 
@@ -764,7 +764,7 @@ SentGetPkmnIntoFromBox: ; db3f
 
 .okay6
 	dec a
-	call SkipNames
+	call SkipPlayerNames
 	ld d, h
 	ld e, l
 
@@ -780,10 +780,10 @@ SentGetPkmnIntoFromBox: ; db3f
 
 .okay7
 	ld a, [wCurPartyMon]
-	call SkipNames
+	call SkipPlayerNames
 
 .okay8
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld a, [wPokemonWithdrawDepositParameter]
 	cp DAYCARE_DEPOSIT
@@ -798,7 +798,7 @@ SentGetPkmnIntoFromBox: ; db3f
 
 .okay10
 	dec a
-	call SkipNames
+	call SkipPokemonNames
 	ld d, h
 	ld e, l
 
@@ -814,7 +814,7 @@ SentGetPkmnIntoFromBox: ; db3f
 
 .okay11
 	ld a, [wCurPartyMon]
-	call SkipNames
+	call SkipPokemonNames
 
 .okay12
 	ld bc, PKMN_NAME_LENGTH
@@ -1020,7 +1020,7 @@ Functiondd64: ; dd64
 	ld hl, wPartyMonNicknames
 	ld a, [wPartyCount]
 	dec a
-	call SkipNames
+	call SkipPokemonNames
 	push hl
 	ld h, d
 	ld l, e
@@ -1030,7 +1030,7 @@ Functiondd64: ; dd64
 	ld hl, wPartyMonOT
 	ld a, [wPartyCount]
 	dec a
-	call SkipNames
+	call SkipPlayerNames
 	ld d, h
 	ld e, l
 	pop hl
@@ -1117,11 +1117,11 @@ DepositMonWithDayCareLady: ; de37
 DepositBreedmon: ; de44
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call SkipNames
+	call SkipPokemonNames
 	rst CopyBytes
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	rst CopyBytes
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1
@@ -1163,7 +1163,7 @@ SentPkmnIntoBox: ; de6e
 
 	ld hl, wPlayerName
 	ld de, sBoxMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 
 	ld a, [wCurPartySpecies]
@@ -1271,7 +1271,7 @@ SentPkmnIntoBox: ; de6e
 
 ShiftBoxMon: ; df47
 	ld hl, sBoxMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	call .shift
 
 	ld hl, sBoxMonNicknames
@@ -1395,7 +1395,7 @@ GiveEgg:: ; df8c
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
-	call SkipNames
+	call SkipPokemonNames
 	ld de, String_Egg
 	call CopyName2
 	ld a, [wPartyCount]
@@ -1473,7 +1473,7 @@ RemoveMonFromPartyOrBox: ; e039
 	; If this is the last mon in our party (box),
 	; shift all the other mons up to close the gap.
 	ld a, [wCurPartyMon]
-	call SkipNames
+	call SkipPlayerNames
 	ld a, [wCurPartyMon]
 	cp d
 	jr nz, .delete_inside
@@ -2004,7 +2004,7 @@ GivePoke:: ; e277
 	ld a, [wPartyCount]
 	dec a
 	ld [wCurPartyMon], a
-	call SkipNames
+	call SkipPokemonNames
 	ld d, h
 	ld e, l
 	pop bc
@@ -2131,7 +2131,7 @@ GivePoke:: ; e277
 	push hl
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	ld d, h
 	ld e, l
 	pop hl

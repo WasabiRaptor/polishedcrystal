@@ -374,7 +374,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld [hl], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst AddNTimes
 	ld d, h
 	ld e, l
@@ -964,7 +964,7 @@ DayCareMon1Text: ; 0x17467
 DayCareMonCompatibilityText: ; 1746c
 	push bc
 	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	call CheckBreedmonCompatibility
 	pop bc

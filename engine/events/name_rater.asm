@@ -86,11 +86,11 @@ NameRater: ; fb6ed
 CheckIfMonIsYourOT: ; fb78a
 ; Checks to see if the partymon loaded in [wCurPartyMon] has the different OT as you.  Returns carry if not.
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 	ld de, wPlayerName
-	ld c, NAME_LENGTH
+	ld c, PLAYER_NAME_LENGTH
 	call .loop
 	jr c, .nope
 

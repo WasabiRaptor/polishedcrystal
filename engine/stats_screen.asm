@@ -1322,7 +1322,7 @@ GetNicknamePointer: ; 4e528 (13:6528)
 	cp BREEDMON
 	ret z
 	ld a, [wCurPartyMon]
-	jp SkipNames
+	jp SkipPokemonNames
 
 
 CheckFaintedFrzSlp: ; 4e53f

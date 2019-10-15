@@ -67,9 +67,9 @@ endc
 ; Copy name (10 bytes) and class (1 byte) of trainer
 	ld hl, BattleTowerTrainers
 	ld de, wBT_OTName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst AddNTimes
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 
 	call CloseSRAM
@@ -229,7 +229,7 @@ PopulateBattleTowerTeam:
 	pop de
 	push de
 	ld a, d
-	call SkipNames
+	call SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wStringBuffer1

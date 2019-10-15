@@ -1280,7 +1280,7 @@ _InitialOptionsText::
 	prompt
 
 _ElmText1::
-	text "Variable width text? smells"
+	text "Fletchinder"
 	line "like feature creep to me."
 
 ;if !DEF(DEBUG)

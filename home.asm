@@ -170,9 +170,9 @@ CopyName2:: ; 30d9
 	ret
 ; 30e1
 
-SkipNames:: ; 0x30f4
+SkipPokemonNames:: ; 0x30f4
 ; Skip a names.
-	ld bc, NAME_LENGTH
+	ld bc, PKMN_NAME_LENGTH
 	and a
 	ret z
 .loop
@@ -180,6 +180,18 @@ SkipNames:: ; 0x30f4
 	dec a
 	jr nz, .loop
 	ret
+
+SkipPlayerNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PLAYER_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
 ; 0x30fe
 
 INCLUDE "home/math.asm"
@@ -1286,7 +1298,7 @@ GetNick:: ; 38a2
 	push hl
 	push bc
 
-	call SkipNames
+	call SkipPokemonNames
 	ld de, wStringBuffer1
 
 	push de

@@ -327,7 +327,7 @@ UnknownText_0x1bc6c7::
 	done
 
 UnknownText_0x1bc6e9::
-	text_from_ram wPlayerTrademonSpeciesName
+	text_from_ram wPlayerTrademonNickname
 	text " was"
 	line "sent to @"
 	text_from_ram wOTTrademonSenderName
@@ -345,14 +345,14 @@ UnknownText_0x1bc703::
 	done
 
 UnknownText_0x1bc719::
-	text_from_ram wOTTrademonSpeciesName
+	text_from_ram wOTTrademonNickname
 	text "."
 	done
 
 UnknownText_0x1bc71f::
 	text "Take good care of"
 	line "@"
-	text_from_ram wOTTrademonSpeciesName
+	text_from_ram wOTTrademonNickname
 	text "."
 	done
 
@@ -361,7 +361,7 @@ UnknownText_0x1bc739::
 	text_from_ram wPlayerTrademonSenderName
 	text "'s"
 	line "@"
-	text_from_ram wPlayerTrademonSpeciesName
+	text_from_ram wPlayerTrademonNickname
 	text ","
 	done
 
@@ -369,7 +369,7 @@ UnknownText_0x1bc74c::
 	text_from_ram wOTTrademonSenderName
 	text " sends"
 	line "@"
-	text_from_ram wOTTrademonSpeciesName
+	text_from_ram wOTTrademonNickname
 	text "."
 	done
 
@@ -377,7 +377,7 @@ UnknownText_0x1bc75e::
 	text_from_ram wOTTrademonSenderName
 	text " will"
 	line "trade @"
-	text_from_ram wOTTrademonSpeciesName
+	text_from_ram wOTTrademonNickname
 	db "@@"
 
 UnknownText_0x1bc774::
@@ -385,7 +385,7 @@ UnknownText_0x1bc774::
 	text_from_ram wPlayerTrademonSenderName
 	text "'s"
 	line "@"
-	text_from_ram wPlayerTrademonSpeciesName
+	text_from_ram wPlayerTrademonNickname
 	text "."
 	done
 

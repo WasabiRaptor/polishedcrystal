@@ -1071,7 +1071,7 @@ ComposeMailMessage: ; 12cfe (4:6cfe)
 	farcall _ComposeMailMessage
 	ld hl, wPlayerName
 	ld de, wTempMailAuthor
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ld hl, wPlayerID
 	ld bc, 2

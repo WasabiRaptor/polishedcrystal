@@ -15,7 +15,6 @@ WRAM0
 	"Battle"
 	org $c800
 	"Overworld Map"
-	org $cd20
 	"Video"
 
 WRAMX $1

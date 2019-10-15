@@ -228,7 +228,7 @@ Gen2ToGen2LinkComms: ; 28177
 .skip_mail
 	ld hl, wLinkData
 	ld de, wOTPlayerName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld de, wOTPartyCount
 	ld bc, 8
@@ -259,7 +259,7 @@ Gen2ToGen2LinkComms: ; 28177
 	ld [hl], a
 	ld hl, wOTPlayerName
 	ld de, wOTClassName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	call ReturnToMapFromSubmenu
 	ldh a, [rIE]
@@ -458,7 +458,7 @@ Link_PrepPartyData_Gen2: ; 28595
 	jr nz, .loop1
 	; de = $c806
 	ld hl, wPlayerName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	; de = $c811
 	ld hl, wPartyCount
@@ -474,7 +474,7 @@ Link_PrepPartyData_Gen2: ; 28595
 	rst CopyBytes
 	; de = $c93b
 	ld hl, wPartyMonOT
-	ld bc, PARTY_LENGTH * NAME_LENGTH
+	ld bc, PARTY_LENGTH * PLAYER_NAME_LENGTH
 	rst CopyBytes
 	; de = $c97d
 	ld hl, wPartyMonNicknames
@@ -768,7 +768,7 @@ LinkTradeOTPartymonMenuLoop: ; 28835
 	call HideCursor
 	push hl
 	push bc
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	add hl, bc
 	ld [hl], " "
 	pop bc
@@ -848,7 +848,7 @@ LinkTradePartymonMenuLoop: ; 288c5
 	call HideCursor
 	push hl
 	push bc
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	add hl, bc
 	ld [hl], " "
 	pop bc
@@ -868,7 +868,7 @@ LinkTradePartymonMenuLoop: ; 288c5
 	call HideCursor
 	push hl
 	push bc
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	add hl, bc
 	ld [hl], " "
 	pop bc
@@ -1292,7 +1292,7 @@ Function28ac9: ; 28ac9
 	call HideCursor
 	push hl
 	push bc
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	add hl, bc
 	ld [hl], " "
 	pop bc
@@ -1506,7 +1506,7 @@ LinkTrade: ; 28b87
 	call CloseSRAM
 	ld hl, wPlayerName
 	ld de, wPlayerTrademonSenderName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld a, [wd002]
 	ld hl, wPartySpecies
@@ -1518,9 +1518,9 @@ LinkTrade: ; 28b87
 	push af
 	ld a, [wd002]
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	ld de, wPlayerTrademonOTName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld hl, wPartyMon1ID
 	ld a, [wd002]
@@ -1548,7 +1548,7 @@ LinkTrade: ; 28b87
 	ld [wPlayerTrademonCaughtData], a
 	ld hl, wOTPlayerName
 	ld de, wOTTrademonSenderName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld a, [wd003]
 	ld hl, wOTPartySpecies
@@ -1559,9 +1559,9 @@ LinkTrade: ; 28b87
 	ld [wOTTrademonSpecies], a
 	ld a, [wd003]
 	ld hl, wOTPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	ld de, wOTTrademonOTName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld hl, wOTPartyMon1ID
 	ld a, [wd003]

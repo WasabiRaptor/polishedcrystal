@@ -2431,7 +2431,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
@@ -2457,7 +2457,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
-	call SkipNames
+	call SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wMonOrItemNameBuffer
@@ -2499,7 +2499,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	rst CopyBytes
 	ld hl, wPlayerName
 	ld de, wBufferMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	farcall InsertPokemonIntoBox
 	ld a, [wCurPartySpecies]
@@ -4041,12 +4041,12 @@ _SwitchPartyMons:
 	rst CopyBytes
 	ld a, [wBuffer2]
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	push hl
 	call .CopyNameTowd002
 	ld a, [wBuffer3]
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	pop de
 	push hl
 	call .CopyName
@@ -4055,12 +4055,12 @@ _SwitchPartyMons:
 	call .CopyName
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer2]
-	call SkipNames
+	call SkipPokemonNames
 	push hl
 	call .CopyNameTowd002
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer3]
-	call SkipNames
+	call SkipPokemonNames
 	pop de
 	push hl
 	call .CopyName
@@ -4099,7 +4099,7 @@ _SwitchPartyMons:
 	ld de, wd002
 
 .CopyName: ; 51039 (14:5039)
-	ld bc, NAME_LENGTH
+	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
 	ret
 
@@ -4121,7 +4121,7 @@ InsertPokemonIntoBox: ; 51322
 	dec a
 	ld [wd265], a
 	ld hl, sBoxMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld de, wBufferMonOT
 	call InsertDataIntoBoxOrParty
 	ld a, [sBoxCount]
@@ -4158,7 +4158,7 @@ InsertPokemonIntoParty: ; 5138b
 	dec a
 	ld [wd265], a
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld de, wBufferMonOT
 	call InsertDataIntoBoxOrParty
 	ld a, [wPartyCount]
