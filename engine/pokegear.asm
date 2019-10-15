@@ -517,26 +517,25 @@ PrintHour: ; 90b3e (24:4b3e)
 
 GetTimeOfDayString: ; 90b58 (24:4b58)
 	ld a, c
-	cp MORN_HOUR
-	jr c, .nite
-	cp DAY_HOUR
-	jr c, .morn
-	cp NITE_HOUR
-	jr c, .day
-.nite
+	cp DAWN_HOUR
 	ld de, .NITE
-	ret
-.morn
+	ret c
+	cp MIDDAY_HOUR
 	ld de, .MORN
-	ret
-.day
+	ret c
+	cp DUSK_HOUR
 	ld de, .DAY
+	ret c
+	cp MIDNIGHT_HOUR
+	ld de, .DUSK
 	ret
+
 ; 90b71 (24:4b71)
 
-.NITE: db "Nite@"
-.MORN: db "Morn@"
-.DAY: db "Day@"
+.NITE: db "Midnight@"
+.MORN: db "Dawn@"
+.DAY: db "Midday@"
+.DUSK: db "Dusk@"
 ; 90b7f
 
 AdjustHourForAMorPM:

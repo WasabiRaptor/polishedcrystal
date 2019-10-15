@@ -191,32 +191,25 @@ StartMenu:: ; 125cd
 
 ; Menu accounts are removed; this is vestigial
 .PokedexDesc:
-	db   ""
-	next "Pokémon database@"
+	db "Pokémon database@"
 
 .PartyDesc:
-	db   ""
-	next "Party status@"
+	db "Party status@"
 
 .PackDesc:
-	db   ""
-	next "Contains items@"
+	db "Contains items@"
 
 .PokegearDesc:
-	db   ""
-	next "Traveler's device@"
+	db "Traveler's device@"
 
 .StatusDesc:
-	db   ""
-	next "Your own status@"
+	db "Your own status@"
 
 .SaveDesc:
-	db   ""
-	next "Save and reset@"
+	db "Save and reset@"
 
 .OptionDesc:
-	db   ""
-	next "Change settings@"
+	db "Change settings@"
 
 .ExitDesc:	; unused
 	db   "Close this"
@@ -249,13 +242,7 @@ StartMenu:: ; 125cd
 ; 12800
 
 .MenuClock:
-	ld a, $c0
-	ld [wVariableWidthTextTile], a
-	ld a, LOW(VTiles0 tile $c0)
-	ld [wVariableWidthTextVRAM], a
-	ld a, HIGH(VTiles0 tile $c0)
-	ld [wVariableWidthTextVRAM+1], a
-
+	VWTextStart $c0
 	ld hl, wOptions1
 	set NO_TEXT_SCROLL, [hl]
 	hlcoord 1, 1
@@ -267,6 +254,7 @@ StartMenu:: ; 125cd
 	ld c, a
 	decoord 1, 2
 	farcall PrintHoursMins
+	call InitVariableWidthTiles
 	ld hl, .DayText
 	bccoord 1, 1
 	call PlaceWholeStringInBoxAtOnce
@@ -412,7 +400,7 @@ endr
 
 .PrintMenuAccount:
 	call ._DrawMenuAccount
-	decoord 1, 14
+	decoord 1, 16
 	jp .MenuDesc
 
 ._DrawMenuAccount:
@@ -718,10 +706,12 @@ CancelPokemonAction: ; 12a79
 
 
 PokemonActionSubmenu: ; 12a88
+	call InitVariableWidthText
 	hlcoord 1, 15
 	lb bc, 2, 18
 	call ClearBox
 	farcall MonSubmenu
+	call InitVariableWidthText
 	call GetCurNick
 	ld a, [wMenuSelection]
 	ld hl, .Actions
@@ -814,7 +804,6 @@ SwitchPartyMons: ; 12aec
 
 
 GiveTakePartyMonItem: ; 12b60
-
 ; Eggs can't hold items!
 	ld a, MON_IS_EGG
 	call GetPartyParamLocation

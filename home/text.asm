@@ -399,7 +399,7 @@ NextVRAMVariableWidthTextTile:
 	ld a, [wVariableWidthTextTile]
 	inc a
 	ret z
-	cp $df
+	cp $e0
 	jr c, notlastVWtile
 	ld a, "A"
 	ld [wVariableWidthTextTile], a
@@ -408,7 +408,7 @@ NextVRAMVariableWidthTextTile:
 	ld a, HIGH(VTiles0 tile "A")
 	ld [wVariableWidthTextVRAM+1], a
 	ret
-	
+
 InitVariableWidthText::
 	;initialize the variable width text values
 	ld a, "A"
@@ -696,7 +696,14 @@ TextFar::
 	jp NextChar
 
 LineChar::
-	call NextVariableWidthTextTile
+	ld a, ("A" + 18)
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile ("A" + 18))
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile ("A" + 18))
+	ld [wVariableWidthTextVRAM+1], a
+	call InitVariableWidthTiles
+
 	pop hl
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	push hl
@@ -738,7 +745,6 @@ Paragraph::
 	jp NextChar
 
 LinkButtonSound::
-	call NextVariableWidthTextTile
 	ld a, [wLinkMode]
 	or a
 	jr nz, .communication
@@ -765,6 +771,7 @@ ScrollText::
 
 ContText::
 	push de
+	call InitVariableWidthText
 	ld de, .cont
 	ld b, h
 	ld c, l
@@ -1254,39 +1261,37 @@ Text_StringBuffer::
 	dw wBattleMonNick
 
 Text_WeekDay::
-	call GetWeekday
 	push hl
 	push bc
-	ld c, a
-	ld b, 0
-	ld hl, .Days
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld d, h
-	ld e, l
+	call GetWeekday
+	ld b, a
 	pop hl
-	call PlaceString
-	ld h, b
-	ld l, c
+	call PrintDayOfWeek
 	pop hl
 	ret
 
-.Days:
-	dw .Sun
-	dw .Mon
-	dw .Tues
-	dw .Wednes
-	dw .Thurs
-	dw .Fri
-	dw .Satur
+PrintDayOfWeek::
+	push hl
+	ld hl, .Days
+	ld a, b
+	call GetNthString
+	ld d, h
+	ld e, l
+	pop hl
+	call PlaceSpecialString
+	ld h, b
+	ld l, c
+	ld de, .Day
+	jp PlaceSpecialString
 
-.Sun:    db "Sunday@"
-.Mon:    db "Monday@"
-.Tues:   db "Tuesday@"
-.Wednes: db "Wednesday@"
-.Thurs:  db "Thursday@"
-.Fri:    db "Friday@"
-.Satur:  db "Saturday@"
+.Days: 
+	db "Sun@"
+	db "Mon@"
+	db "Tues@"
+	db "Wednes@"
+	db "Thurs@"
+	db "Fri@"
+	db "Satur@"
+
+.Day: 
+	db "day@"

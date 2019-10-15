@@ -109,8 +109,8 @@ MainMenu_GetWhichMenu: ; 49da4
 
 MainMenuJoypadLoop: ; 49de4
 	call SetUpMenu
-.loop
 	call MainMenu_PrintCurrentTimeAndDay
+.loop
 	ld a, [w2DMenuFlags1]
 	set 5, a
 	ld [w2DMenuFlags1], a
@@ -174,10 +174,12 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 	ld a, [hli]
 	ldh [hSeconds], a
 
+	VWTextStart $b0
+	call InitVariableWidthTiles
 	call GetWeekday
 	ld b, a
-	decoord 1, 15
-	call .PlaceCurrentDay
+	hlcoord 1, 15
+	call PrintDayOfWeek
 	decoord 4, 16
 	ldh a, [hHours]
 	ld c, a
@@ -199,31 +201,6 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 	db "Time not set@"
 ; 49e8c
 
-.PlaceCurrentDay: ; 49e91
-	push de
-	ld hl, .Days
-	ld a, b
-	call GetNthString
-	ld d, h
-	ld e, l
-	pop hl
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, .Day
-	jp PlaceString
-; 49ea8
-
-.Days:
-	db "Sun@"
-	db "Mon@"
-	db "Tues@"
-	db "Wednes@"
-	db "Thurs@"
-	db "Fri@"
-	db "Satur@"
-.Day:
-	db "day@"
 ; 49ed0
 
 Function49ed0: ; 49ed0
