@@ -331,8 +331,6 @@ PlaceCharacter::
 	call CombineRows
 
 	pop hl;0
-	ld a, [wVariableWidthTextTile]
-	ld [hl], a
 	pop af
 
 	farcall GetCharacterWidth
@@ -348,16 +346,12 @@ PlaceCharacter::
 	jr c, .sametile
 	sub 8
 	ld [wVariableWidthTextCurTileColsFilled], a
-	inc hl
 	push hl
-	ld a, [wVariableWidthTextTile]
-	inc a
-	ld [hl], a
+
 	ld a, [wVariableWidthTextVRAM]
 	ld l, a
 	ld a, [wVariableWidthTextVRAM+1]
 	ld h, a
-
 	ld de, wCombinedVaribleWidthTiles
 	lb bc, BANK(FontWondermail), 2
 	call GetMaybeOpaque1bpp
@@ -366,8 +360,14 @@ PlaceCharacter::
 	ld hl, wCombinedVaribleWidthTiles + LEN_1BPP_TILE
 	rst CopyBytes
 
-	call NextVRAMVariableWidthTextTile
 
+	pop hl
+	inc hl
+	push hl
+	ld a, [wVariableWidthTextTile]
+	inc a
+	ld [hl], a
+	call NextVRAMVariableWidthTextTile
 	pop hl
 	jr .letterdelay
 .sametile
@@ -381,6 +381,8 @@ PlaceCharacter::
 	lb bc, BANK(FontWondermail), 1
 	call GetMaybeOpaque1bpp
 	pop hl
+	ld a, [wVariableWidthTextTile]
+	ld [hl], a
 .letterdelay
 	pop de	
 	farcall PrintLetterDelay

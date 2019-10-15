@@ -1,5 +1,5 @@
 ItemNames::
-	db "# Ball@"
+	db "Poké Ball@"
 	db "Great Ball@"
 	db "Ultra Ball@"
 	db "Master Ball@"

@@ -4733,6 +4733,7 @@ PrintDescription:
 	inc hl
 	ld d, [hl]
 	pop hl
+	call InitVariableWidthText
 	jp PlaceString
 ; 0x1c8987
 

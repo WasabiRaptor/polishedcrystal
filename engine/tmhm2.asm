@@ -160,6 +160,8 @@ TMHM_ScrollPocket: ; 2c9b1 (b:49b1)
 	jp TMHM_ShowTMMoveDescription
 
 TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
+	VWTextStart $b0
+	call InitVariableWidthTiles
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jp z, Tutorial_TMHMPocket
@@ -317,6 +319,7 @@ PrintMoveDesc: ; 2cb3e
 	ld e, a
 	ld d, [hl]
 	pop hl
+	call InitVariableWidthText
 	jp PlaceString
 ; 2cb52
 
