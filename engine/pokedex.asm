@@ -527,6 +527,7 @@ Pokedex_RedisplayDexEntry: ; 4038d
 	jp Pokedex_DrawFootprint
 
 Pokedex_InitOptionScreen: ; 4039d (10:439d)
+	call OtherVariableWidthText
 	xor a
 	ldh [hBGMapMode], a
 	call ClearSprites
@@ -1145,9 +1146,11 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	push af ; 1
 	ld a, BANK(wPokedexCaughtSeen)
 	ldh [rSVBK], a
+	VWTextStart $a0
+	call InitVariableWidthTiles
 
 	ld de, String_SEEN
-	call Pokedex_PlaceString
+	call PlaceString
 	ld hl, wPokedexSeen
 	ld bc, wPokedexSeenEnd - wPokedexSeen
 	call PokedexCountSeenCaught
@@ -1157,7 +1160,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	call PrintNum
 	hlcoord 14, 1
 	ld de, String_OWN
-	call Pokedex_PlaceString
+	call PlaceString
 	ld hl, wPokedexCaught
 	ld bc, wPokedexCaughtEnd - wPokedexCaught
 	call PokedexCountSeenCaught
@@ -1215,9 +1218,9 @@ Pokedex_DrawBasicMainScreen:
 	jp Pokedex_FillColumn
 
 String_SEEN: ; 407e1
-	db "S","e","e","n", $ff
+	db "Seen@"
 String_OWN: ; 407e6
-	db "O","w","n", $ff
+	db "Caught@"
 String_SELECT_OPTION: ; 407ea
 ;	db $3b, $48, $49, $4a, $44, $45, $46, $47 ; SELECT > OPTION
 	db $3b, $41, $42, $43, $44, $45, $46, $47
@@ -1302,8 +1305,15 @@ Pokedex_DrawOptionScreenBG: ; 4087c (10:487c)
 	lb bc, 4, 18
 	call Pokedex_PlaceBorder
 	hlcoord 0, 1
+	ld a, $3b
+	ld [hli], a
 	ld de, .Title
-	call Pokedex_PlaceString
+	call PlaceString
+	ld h, b
+	ld l, c
+	inc hl
+	ld a, $3c
+	ld [hl], a
 	hlcoord 3, 4
 	ld de, .Modes
 	call PlaceString
@@ -1315,12 +1325,12 @@ Pokedex_DrawOptionScreenBG: ; 4087c (10:487c)
 	jp PlaceString
 
 .Title: ; 408b2
-	db $3b, " ","O","p","t","i","o","n"," ", $3c, $ff
+	db "Pokédex Options@"
 
 .Modes: ; 408bd
-	db   "Invar Mode"
-	next "National Mode"
-	next "A to Z Mode"
+	db   "Invar Regional Dex"
+	next "National Pokedex"
+	next "Alphabetical Order"
 	db "@"
 
 .UnownMode: ; 408e5
@@ -1332,8 +1342,15 @@ Pokedex_DrawSearchScreenBG: ; 408f0 (10:48f0)
 	lb bc, 14, 18
 	call Pokedex_PlaceBorder
 	hlcoord 0, 1
+	ld a, $3b
+	ld [hli], a
 	ld de, .Title
-	call Pokedex_PlaceString
+	call PlaceString
+	ld h, b
+	ld l, c
+	inc hl
+	ld a, $3c
+	ld [hl], a
 	hlcoord 8, 4
 	ld de, .TypeLeftRightArrows
 	call Pokedex_PlaceString
@@ -1348,7 +1365,7 @@ Pokedex_DrawSearchScreenBG: ; 408f0 (10:48f0)
 	jp PlaceString
 
 .Title: ; 4092a
-	db $3b, " ","S","e","a","r","c","h"," ", $3c, $ff
+	db "Pokédex Search@"
 
 .TypeLeftRightArrows: ; 40935
 	db $3d, " "," "," "," "," "," "," "," ","▷", $ff
@@ -1490,7 +1507,7 @@ Pokedex_DrawListWindow: ; 1de171 (77:6171)
 	ld a, 0 | BEHIND_BG
 	ld bc, DEX_WINDOW_WIDTH
 	call ByteFill
-	hlcoord PKMN_NAME_LENGTH, 1, wAttrMap
+	hlcoord PKMN_TILE_NAME_LENGTH + 1, 1, wAttrMap
 	ld a, 2 | TILE_BANK
 	ld c, 4
 	ld b, DEX_WINDOW_HEIGHT
@@ -1634,7 +1651,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld a, 4
 	ld d, a
 	ld a, $6F
-	hlcoord PKMN_NAME_LENGTH + 4, 1
+	hlcoord PKMN_TILE_NAME_LENGTH + 5, 1
 .footprintloop
 	call Pokedex_DrawFootprint_at_HL
 	inc a
@@ -1741,7 +1758,7 @@ Pokexex_PrintNumberAndTypes:
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
 
-	ld bc, PKMN_NAME_LENGTH - 3
+	ld bc, PKMN_TILE_NAME_LENGTH - 2
 	add hl, bc
 	ld a, [wBaseType1]
 	call Pokexex_PrintType
@@ -1979,6 +1996,7 @@ Pokedex_DisplayModeDescription: ; 40e5b
 	call Pokedex_LoadPointer
 	ld e, l
 	ld d, h
+	call InitVariableWidthText
 	hlcoord 1, 14
 	call PlaceString
 	ld a, $1
