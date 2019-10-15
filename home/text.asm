@@ -208,6 +208,16 @@ SetUpTextBox::
 	pop hl
 	ret
 
+SetupNameplate::
+	VWTextStart $c7
+	hlcoord NAMEPLATE_X, NAMEPLATE_Y
+	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
+	jr TextBox
+
+PrintNamePlate::
+	call SetupNameplate
+	hlcoord $6, $b
+	;fallthrough
 PlaceString::
 	call InitVariableWidthTiles
 PlaceSpecialString::

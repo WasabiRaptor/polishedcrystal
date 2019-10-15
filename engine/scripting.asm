@@ -462,16 +462,7 @@ Script_writenamedtext:
 ; parameters:
 ;     name_pointer
 ;     text_pointer (RawTextPointerLabelParam)
-	ld a, $c7
-	ld [wVariableWidthTextTile], a
-	ld a, LOW(VTiles0 tile $c7)
-	ld [wVariableWidthTextVRAM], a
-	ld a, HIGH(VTiles0 tile $c7)
-	ld [wVariableWidthTextVRAM+1], a
-	call InitVariableWidthTiles
-	hlcoord NAMEPLATE_X, NAMEPLATE_Y
-	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
-	call TextBox
+	call SetupNameplate
 	call GetScriptByte
 	ld e, a
 	call GetScriptByte

@@ -664,8 +664,9 @@ if !DEF(DEBUG)
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld de, ElmName
+	call PrintNamePlate
 	ld hl, ElmText2
-	call PrintNamedText
+	call PrintText
 	ld hl, ElmText4
 	call PrintText
 	ld c, 15
@@ -684,8 +685,9 @@ if !DEF(DEBUG)
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld de, ElmName
+	call PrintNamePlate
 	ld hl, ElmText5
-	call PrintNamedText
+	call PrintText
 endc
 
 	call InitGender
@@ -745,8 +747,7 @@ ElmText7: ; 0x606f
 	db "@"
 
 ElmName:
-	text_jump ProfElmName
-	db "@"
+	db "Professor Elm@"
 
 InitGender: ; 48dcb (12:4dcb)
 	ld hl, WhitePal
