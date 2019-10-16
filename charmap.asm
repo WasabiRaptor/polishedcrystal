@@ -36,25 +36,25 @@
 
 	; unused: $26 - $2b
 
-	;charmap "le",       $2c
-	;charmap "ng",       $2d
-	;charmap "te",       $2e
-	;charmap "as",       $2f
-	;charmap "or",       $30
-	;charmap "ou",       $31
-	;charmap "re",       $32
-	;charmap "in",       $33
-	;charmap "er",       $34
-	;charmap "on",       $35
-	;charmap "th",       $36
-	;charmap "and",      $37
-	;charmap "have",     $38
-	;charmap "that",     $39
-	;charmap "for",      $3a
-	;charmap "with",     $3b
-	;charmap "an",       $3c
-	;charmap "ing",      $3d
-	;charmap "to",       $3e
+	charmap "le",       $2c
+	charmap "ng",       $2d
+	charmap "te",       $2e
+	charmap "as",       $2f
+	charmap "or",       $30
+	charmap "ou",       $31
+	charmap "re",       $32
+	charmap "in",       $33
+	charmap "er",       $34
+	charmap "on",       $35
+	charmap "th",       $36
+	charmap "and",      $37
+	charmap "have",     $38
+	charmap "that",     $39
+	charmap "for",      $3a
+	charmap "with",     $3b
+	charmap "an",       $3c
+	charmap "ing",      $3d
+	charmap "to",       $3e
 
 	; unused: $3f - $4a
 
@@ -70,7 +70,7 @@
 	charmap "<PARA>",   $51
 	charmap "<PLAYER>", $52
 	charmap "<RIVAL>",  $53
-	;charmap "#",        $54
+	charmap "Poké",     $54
 	charmap "<CONT>",   $55
 	charmap "<TRENDY>", $56
 	charmap "<DONE>",   $57
@@ -79,9 +79,9 @@
 	charmap "<USER>",   $5a
 	charmap "<ENEMY>",  $5b
 
-	;charmap "the",      $5c
-	;charmap "you",      $5d
-	;charmap "Pokémon",     $5e
+	charmap "the",      $5c
+	charmap "you",      $5d
+	charmap "Pokémon",  $5e
 
 ; Battle characters
 
@@ -205,7 +205,6 @@ BATTLEEXTRA_GFX_START EQU $5f
 
 	charmap "&",        $cd
 	charmap "…",        $ce
-	;charmap "/",        $cf
 
 ; cannot be used with portraits
 	charmap "<ID>",     $d0

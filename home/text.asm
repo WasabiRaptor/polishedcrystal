@@ -279,30 +279,30 @@ endm
 	dict "<TARGET>", PlaceMoveTargetsName
 	dict "<USER>",   PlaceMoveUsersName
 	dict "<ENEMY>",  PlaceEnemysName
-	;dict "#",        PlacePoke
-	;dict "le",       PlaceLe
-	;dict "ng",       PlaceNg
-	;dict "te",       PlaceTe
-	;dict "as",       PlaceAs
-	;dict "or",       PlaceOr
-	;dict "ou",       PlaceOu
-	;dict "re",       PlaceRe
-	;dict "in",       PlaceIn
-	;dict "er",       PlaceEr
-	;dict "on",       PlaceOn
-	;dict "th",       PlaceTh
-	;dict "and",      PlaceAnd
-	;dict "the",      PlaceThe
-	;dict "you",      PlaceYou
-	;dict "Pokémon",  PlacePokemon
-	;dict "to",       PlaceTo
-	;dict "have",     PlaceHave
-	;dict "that",     PlaceThat
-	;dict "for",      PlaceFor
-	;dict "with",     PlaceWith
-	;dict "an",       PlaceAn
-	;dict "ing",      PlaceIng
-	;dict2 "¯", " "
+	dict "Poké",     PlacePoke
+	dict "le",       PlaceLe
+	dict "ng",       PlaceNg
+	dict "te",       PlaceTe
+	dict "as",       PlaceAs
+	dict "or",       PlaceOr
+	dict "ou",       PlaceOu
+	dict "re",       PlaceRe
+	dict "in",       PlaceIn
+	dict "er",       PlaceEr
+	dict "on",       PlaceOn
+	dict "th",       PlaceTh
+	dict "and",      PlaceAnd
+	dict "the",      PlaceThe
+	dict "you",      PlaceYou
+	dict "Pokémon",  PlacePokemon
+	dict "to",       PlaceTo
+	dict "have",     PlaceHave
+	dict "that",     PlaceThat
+	dict "for",      PlaceFor
+	dict "with",     PlaceWith
+	dict "an",       PlaceAn
+	dict "ing",      PlaceIng
+	dict2 "¯", " "
 
 PlaceCharacter::
 	push de
@@ -541,7 +541,7 @@ PlaceAnd: print_name .AndText
 .AndText: db "a", "n", "d", "@"
 
 PlacePoke: print_name .PokeText
-.PokeText: db "Poké@"
+.PokeText: db "P", "o", "k", "é", "@"
 
 PlaceThe: print_name .TheText
 .TheText: db "t", "h", "e", "@"
@@ -550,7 +550,7 @@ PlaceYou: print_name .YouText
 .YouText: db "y", "o", "u", "@"
 
 PlacePokemon: print_name .PokemonText
-.PokemonText: db "Pokémon@"
+.PokemonText: db "Poké", "mon@"
 
 PlaceTo: print_name .ToText
 .ToText: db "t", "o", "@"
