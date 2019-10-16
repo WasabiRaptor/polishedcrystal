@@ -52,7 +52,7 @@ JohtoDexOrder::
 	db HONCHKROW
 	db MISDREAVUS
 	db MISMAGIUS
-	db DUMMY_UNOWN 
+	db UNOWN 
 	db WYNAUT
 	db WOBBUFFET
 	db GIRAFARIG

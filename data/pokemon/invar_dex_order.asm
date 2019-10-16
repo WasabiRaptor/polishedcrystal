@@ -215,7 +215,7 @@ InvarDexOrder::
 	grouped_dex_order_mon SWINUB        ; d2
 	grouped_dex_order_mon PILOSWINE     ; d3
 	grouped_dex_order_mon MAMOSWINE     ; d4
-	grouped_dex_order_mon DUMMY_UNOWN    		; d5 alt forms
+	grouped_dex_order_mon UNOWN    		; d5 alt forms
 	grouped_dex_order_mon NATU          ; d6
 	grouped_dex_order_mon XATU          ; d7
 	grouped_dex_order_mon SIGILYPH      ; d8

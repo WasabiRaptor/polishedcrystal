@@ -422,6 +422,7 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon TROPIUS
 	nat_dexmon CHIMECHO
 	nat_dexmon ABSOL
+	nat_dexmon WYNAUT
 	nat_dexmon SNORUNT
 	nat_dexmon GLALIE
 	nat_dexmon SPHEAL
@@ -892,7 +893,7 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 ; No work is to be put forwards to implement any Galar pokemon or Galarian form pokemon until *after* the game is released and we have the data
 ; these constants are only here as placeholders for pokemon we know exist or will exist so that whenwe finally do have the data, it probably won't break save files
 ; *probably*
-	nat_dexmon_group, GROUP_GENERATION_EIGHT
+	nat_dexmon_group 1, GROUP_GENERATION_EIGHT
 	;nat_dexmon GROOKEY
 	;nat_dexmon GROOKEY_STAGE_1
 	;nat_dexmon GROOKEY_STAGE_2

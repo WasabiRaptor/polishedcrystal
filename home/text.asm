@@ -45,11 +45,18 @@ NO_LEFT_MASK 					EQU %11110111
 NO_TOP_MASK 					EQU %11111101
 NO_BOTTOM_MASK 					EQU %11111110
 
+SetupNameplate::
+	VWTextStart $c7
+	hlcoord NAMEPLATE_X, NAMEPLATE_Y
+	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
+	jr TextBox
+
 SpeechTextBox::
 ; Standard textbox.
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
-
+	;fallthrough
+	
 TextBox::
 ; Draw a text box at hl with room for
 ; b lines of c characters each.
@@ -208,14 +215,10 @@ SetUpTextBox::
 	pop hl
 	ret
 
-SetupNameplate::
-	VWTextStart $c7
-	hlcoord NAMEPLATE_X, NAMEPLATE_Y
-	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
-	jr TextBox
-
 PrintNamePlate::
+	push de
 	call SetupNameplate
+	pop de
 	hlcoord $6, $b
 	;fallthrough
 PlaceString::
