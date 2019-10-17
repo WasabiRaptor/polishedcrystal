@@ -18,43 +18,47 @@ SinnohEvosAttacksPointers::
 	add_evosattacks Shinx
 	add_evosattacks Luxio
 	add_evosattacks Luxray
+	add_evosattacks Budew
+	add_evosattacks Roserade
 	add_evosattacks Crainidos
 	add_evosattacks Rampardos
 	add_evosattacks Sheildon
 	add_evosattacks Bastiodon
 	add_evosattacks Burmy
-	add_evosattacks Burmy
-	add_evosattacks Burmy
-	add_evosattacks Wormadam
-	add_evosattacks Wormadam
 	add_evosattacks Wormadam
 	add_evosattacks Mothim
 	add_evosattacks Combee
 	add_evosattacks Vespiquen
-	add_evosattacks Pachirisu 
+	add_evosattacks Pachirisu
 	add_evosattacks Buizel
 	add_evosattacks Floatzel
 	add_evosattacks Cherubi
-	add_evosattacks Cherrim 
+	add_evosattacks Cherrim
 	add_evosattacks Shellos
 	add_evosattacks Gastrodon
-	add_evosattacks Shellos
-	add_evosattacks Gastrodon
+	add_evosattacks Ambipom
 	add_evosattacks Drifloon
 	add_evosattacks Drifblim
 	add_evosattacks Buneary
 	add_evosattacks Lopunny
+	add_evosattacks Mismagius
+	add_evosattacks Honchkrow
 	add_evosattacks Glameow
 	add_evosattacks Purugly
+	add_evosattacks Chingling
 	add_evosattacks Stunky
 	add_evosattacks Skunktank
 	add_evosattacks Bronzor
 	add_evosattacks Bronzong
+	add_evosattacks Bonsly
+	add_evosattacks Mime_jr
+	add_evosattacks Happiny
 	add_evosattacks Chatot
 	add_evosattacks Spiritomb
 	add_evosattacks Gible
 	add_evosattacks Gabite
 	add_evosattacks Garchomp
+	add_evosattacks Munchlax
 	add_evosattacks Riolu
 	add_evosattacks Lucario
 	add_evosattacks Hippopotas
@@ -66,14 +70,28 @@ SinnohEvosAttacksPointers::
 	add_evosattacks Carnivine
 	add_evosattacks Finneon
 	add_evosattacks Lumineon
+	add_evosattacks Mantyke
 	add_evosattacks Snover
 	add_evosattacks Abomasnow
+	add_evosattacks Weavile
+	add_evosattacks Magnezone
+	add_evosattacks Lickilicky
+	add_evosattacks Rhyperior
+	add_evosattacks Tangrowth
+	add_evosattacks Electivire
+	add_evosattacks Magmortar
+	add_evosattacks Togekiss
+	add_evosattacks Yanmega
+	add_evosattacks Leafeon
+	add_evosattacks Glaceon
+	add_evosattacks Gliscor
+	add_evosattacks Mamoswine
+	add_evosattacks Porygon_z
+	add_evosattacks Gallade
+	add_evosattacks Probopass
+	add_evosattacks Dusknoir
+	add_evosattacks Frosslass
 	add_evosattacks Rotom
-	add_evosattacks Rotom_Fan
-	add_evosattacks Rotom_Frost
-	add_evosattacks Rotom_Heat
-	add_evosattacks Rotom_Mow
-	add_evosattacks Rotom_Wash
 	add_evosattacks Uxie
 	add_evosattacks Mesprit
 	add_evosattacks Azelf
@@ -87,5 +105,4 @@ SinnohEvosAttacksPointers::
 	add_evosattacks Manaphy
 	add_evosattacks Darkrai
 	add_evosattacks Shaymin
-	add_evosattacks Shaymin_Sky
 	add_evosattacks Arceus

@@ -30,7 +30,6 @@ HoennFramesPointers::
 	add_frames Ralts
 	add_frames Kirlia
 	add_frames Gardevoir
-	add_frames Gallade
 	add_frames Surskit
 	add_frames Masquerain
 	add_frames Shroomish
@@ -40,20 +39,20 @@ HoennFramesPointers::
 	add_frames Slaking
 	add_frames Nincada
 	add_frames Ninjask
-	add_frames Shedinja 
- 	add_frames Whismur
+	add_frames Shedinja
+	add_frames Whismur
 	add_frames Loudred
 	add_frames Exploud
 	add_frames Makuhita
 	add_frames Hariyama
+	add_frames Azurill
 	add_frames Nosepass
-	add_frames Probopass
 	add_frames Skitty
 	add_frames Delcatty
 	add_frames Sableye
 	add_frames Mawile
-	add_frames Aron 
- 	add_frames Lairon
+	add_frames Aron
+	add_frames Lairon
 	add_frames Aggron
 	add_frames Meditite
 	add_frames Medicham
@@ -63,9 +62,7 @@ HoennFramesPointers::
 	add_frames Minun
 	add_frames Volbeat
 	add_frames Illumise
-	add_frames Budew
 	add_frames Roselia
-	add_frames Roserade
 	add_frames Gulpin
 	add_frames Swalot
 	add_frames Carvanha
@@ -82,8 +79,8 @@ HoennFramesPointers::
 	add_frames Vibrava
 	add_frames Flygon
 	add_frames Cacnea
-	add_frames Cacturne 
- 	add_frames Swablu
+	add_frames Cacturne
+	add_frames Swablu
 	add_frames Altaria
 	add_frames Zangoose
 	add_frames Seviper
@@ -101,20 +98,17 @@ HoennFramesPointers::
 	add_frames Armaldo
 	add_frames Feebas
 	add_frames Milotic
-	add_frames Castform 
+	add_frames Castform
 	add_frames Kecleon
 	add_frames Shuppet
 	add_frames Banette
 	add_frames Duskull
 	add_frames Dusclops
-	add_frames Dusknoir
 	add_frames Tropius
-	add_frames Chingling
 	add_frames Chimecho
 	add_frames Absol
 	add_frames Snorunt
 	add_frames Glalie
-	add_frames Frosslass
 	add_frames Spheal
 	add_frames Sealeo
 	add_frames Walrein
@@ -134,11 +128,8 @@ HoennFramesPointers::
 	add_frames Registeel
 	add_frames Latias
 	add_frames Latios
-	add_frames Kyogre 
- 	add_frames Groudon
+	add_frames Kyogre
+	add_frames Groudon
 	add_frames Rayquaza
 	add_frames Jirachi
-	add_frames Deoxys_Defense
-	add_frames Deoxys_Normal
-	add_frames Deoxys_Attack
-	add_frames Deoxys_Speed
+	add_frames Deoxys

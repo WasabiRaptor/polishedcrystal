@@ -16,73 +16,80 @@ JohtoAnimationIdlePointers::
 	add_idleanim Ledian
 	add_idleanim Spinarak
 	add_idleanim Ariados
+	add_idleanim Crobat
 	add_idleanim Chinchou
 	add_idleanim Lanturn
+	add_idleanim Pichu
+	add_idleanim Cleffa
+	add_idleanim Igglybuff
 	add_idleanim Togepi
 	add_idleanim Togetic
-	add_idleanim Togekiss
 	add_idleanim Natu
 	add_idleanim Xatu
 	add_idleanim Mareep
 	add_idleanim Flaaffy
 	add_idleanim Ampharos
-	add_idleanim Azurill
+	add_idleanim Bellossom
 	add_idleanim Marill
 	add_idleanim Azumarill
-	add_idleanim Bonsly
 	add_idleanim Sudowoodo
+	add_idleanim Politoed
 	add_idleanim Hoppip
 	add_idleanim Skiploom
 	add_idleanim Jumpluff
 	add_idleanim Aipom
-    add_idleanim Ambipom
 	add_idleanim Sunkern
 	add_idleanim Sunflora
 	add_idleanim Yanma
-	add_idleanim Yanmega
 	add_idleanim Wooper
 	add_idleanim Quagsire
+	add_idleanim Espeon
+	add_idleanim Umbreon
 	add_idleanim Murkrow
-	add_idleanim Honchkrow
+	add_idleanim Slowking
 	add_idleanim Misdreavus
-	add_idleanim Mismagius
 	add_idleanim Unown
-    add_idleanim Wynaut
 	add_idleanim Wobbuffet
 	add_idleanim Girafarig
 	add_idleanim Pineco
 	add_idleanim Forretress
 	add_idleanim Dunsparce
 	add_idleanim Gligar
-	add_idleanim Gliscor
+	add_idleanim Steelix
 	add_idleanim Snubbull
 	add_idleanim Granbull
 	add_idleanim Qwilfish
+	add_idleanim Scizor
 	add_idleanim Shuckle
 	add_idleanim Heracross
 	add_idleanim Sneasel
-	add_idleanim Weavile
 	add_idleanim Teddiursa
 	add_idleanim Ursaring
 	add_idleanim Slugma
 	add_idleanim Magcargo
 	add_idleanim Swinub
 	add_idleanim Piloswine
-	add_idleanim Mamoswine
 	add_idleanim Corsola
 	add_idleanim Remoraid
 	add_idleanim Octillery
 	add_idleanim Delibird
-	add_idleanim Mantyke
 	add_idleanim Mantine
 	add_idleanim Skarmory
 	add_idleanim Houndour
 	add_idleanim Houndoom
+	add_idleanim Kingdra
 	add_idleanim Phanpy
 	add_idleanim Donphan
+	add_idleanim Porygon2
 	add_idleanim Stantler
 	add_idleanim Smeargle
+	add_idleanim Tyrogue
+	add_idleanim Hitmontop
+	add_idleanim Smoochum
+	add_idleanim Elekid
+	add_idleanim Magby
 	add_idleanim Miltank
+	add_idleanim Blissey
 	add_idleanim Raikou
 	add_idleanim Entei
 	add_idleanim Suicune
@@ -90,5 +97,5 @@ JohtoAnimationIdlePointers::
 	add_idleanim Pupitar
 	add_idleanim Tyranitar
 	add_idleanim Lugia
-	add_idleanim HoOh
+	add_idleanim Ho_oh
 	add_idleanim Celebi

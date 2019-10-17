@@ -30,7 +30,6 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Ralts
 	add_pokedexentry Kirlia
 	add_pokedexentry Gardevoir
-	add_pokedexentry Gallade
 	add_pokedexentry Surskit
 	add_pokedexentry Masquerain
 	add_pokedexentry Shroomish
@@ -40,20 +39,20 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Slaking
 	add_pokedexentry Nincada
 	add_pokedexentry Ninjask
-	add_pokedexentry Shedinja 
- 	add_pokedexentry Whismur
+	add_pokedexentry Shedinja
+	add_pokedexentry Whismur
 	add_pokedexentry Loudred
 	add_pokedexentry Exploud
 	add_pokedexentry Makuhita
 	add_pokedexentry Hariyama
+	add_pokedexentry Azurill
 	add_pokedexentry Nosepass
-	add_pokedexentry Probopass
 	add_pokedexentry Skitty
 	add_pokedexentry Delcatty
 	add_pokedexentry Sableye
 	add_pokedexentry Mawile
-	add_pokedexentry Aron 
- 	add_pokedexentry Lairon
+	add_pokedexentry Aron
+	add_pokedexentry Lairon
 	add_pokedexentry Aggron
 	add_pokedexentry Meditite
 	add_pokedexentry Medicham
@@ -63,9 +62,7 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Minun
 	add_pokedexentry Volbeat
 	add_pokedexentry Illumise
-	add_pokedexentry Budew
 	add_pokedexentry Roselia
-	add_pokedexentry Roserade
 	add_pokedexentry Gulpin
 	add_pokedexentry Swalot
 	add_pokedexentry Carvanha
@@ -82,8 +79,8 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Vibrava
 	add_pokedexentry Flygon
 	add_pokedexentry Cacnea
-	add_pokedexentry Cacturne 
- 	add_pokedexentry Swablu
+	add_pokedexentry Cacturne
+	add_pokedexentry Swablu
 	add_pokedexentry Altaria
 	add_pokedexentry Zangoose
 	add_pokedexentry Seviper
@@ -101,20 +98,17 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Armaldo
 	add_pokedexentry Feebas
 	add_pokedexentry Milotic
-	add_pokedexentry Castform 
+	add_pokedexentry Castform
 	add_pokedexentry Kecleon
 	add_pokedexentry Shuppet
 	add_pokedexentry Banette
 	add_pokedexentry Duskull
 	add_pokedexentry Dusclops
-	add_pokedexentry Dusknoir
 	add_pokedexentry Tropius
-	add_pokedexentry Chingling
 	add_pokedexentry Chimecho
 	add_pokedexentry Absol
 	add_pokedexentry Snorunt
 	add_pokedexentry Glalie
-	add_pokedexentry Frosslass
 	add_pokedexentry Spheal
 	add_pokedexentry Sealeo
 	add_pokedexentry Walrein
@@ -134,8 +128,8 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Registeel
 	add_pokedexentry Latias
 	add_pokedexentry Latios
-	add_pokedexentry Kyogre 
- 	add_pokedexentry Groudon
+	add_pokedexentry Kyogre
+	add_pokedexentry Groudon
 	add_pokedexentry Rayquaza
 	add_pokedexentry Jirachi
 	add_pokedexentry Deoxys

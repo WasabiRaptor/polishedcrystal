@@ -355,7 +355,7 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon NINCADA
 	nat_dexmon NINJASK
 	nat_dexmon SHEDINJA
- 	nat_dexmon WHISMUR
+	nat_dexmon WHISMUR
 	nat_dexmon LOUDRED
 	nat_dexmon EXPLOUD
 	nat_dexmon MAKUHITA
@@ -367,7 +367,7 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon SABLEYE
 	nat_dexmon MAWILE
 	nat_dexmon ARON
- 	nat_dexmon LAIRON
+	nat_dexmon LAIRON
 	nat_dexmon AGGRON
 	nat_dexmon MEDITITE
 	nat_dexmon MEDICHAM
@@ -395,7 +395,7 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon FLYGON
 	nat_dexmon CACNEA
 	nat_dexmon CACTURNE
- 	nat_dexmon SWABLU
+	nat_dexmon SWABLU
 	nat_dexmon ALTARIA
 	nat_dexmon ZANGOOSE
 	nat_dexmon SEVIPER
@@ -445,7 +445,7 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon LATIAS
 	nat_dexmon LATIOS
 	nat_dexmon KYOGRE
- 	nat_dexmon GROUDON
+	nat_dexmon GROUDON
 	nat_dexmon RAYQUAZA
 	nat_dexmon JIRACHI
 	nat_dexmon DEOXYS

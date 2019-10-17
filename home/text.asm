@@ -215,6 +215,12 @@ SetUpTextBox::
 	pop hl
 	ret
 
+SetupNameplate::
+	VWTextStart $c7
+	hlcoord NAMEPLATE_X, NAMEPLATE_Y
+	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
+	jp TextBox
+
 PrintNamePlate::
 	push de
 	call SetupNameplate

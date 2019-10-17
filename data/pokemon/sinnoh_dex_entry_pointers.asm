@@ -18,43 +18,47 @@ SinnohPokedexEntryPointers::
 	add_pokedexentry Shinx
 	add_pokedexentry Luxio
 	add_pokedexentry Luxray
+	add_pokedexentry Budew
+	add_pokedexentry Roserade
 	add_pokedexentry Crainidos
 	add_pokedexentry Rampardos
 	add_pokedexentry Sheildon
 	add_pokedexentry Bastiodon
 	add_pokedexentry Burmy
-	add_pokedexentry Burmy
-	add_pokedexentry Burmy
-	add_pokedexentry Wormadam
-	add_pokedexentry Wormadam
 	add_pokedexentry Wormadam
 	add_pokedexentry Mothim
 	add_pokedexentry Combee
 	add_pokedexentry Vespiquen
-	add_pokedexentry Pachirisu 
+	add_pokedexentry Pachirisu
 	add_pokedexentry Buizel
 	add_pokedexentry Floatzel
 	add_pokedexentry Cherubi
-	add_pokedexentry Cherrim 
+	add_pokedexentry Cherrim
 	add_pokedexentry Shellos
 	add_pokedexentry Gastrodon
-	add_pokedexentry Shellos
-	add_pokedexentry Gastrodon
+	add_pokedexentry Ambipom
 	add_pokedexentry Drifloon
 	add_pokedexentry Drifblim
 	add_pokedexentry Buneary
 	add_pokedexentry Lopunny
+	add_pokedexentry Mismagius
+	add_pokedexentry Honchkrow
 	add_pokedexentry Glameow
 	add_pokedexentry Purugly
+	add_pokedexentry Chingling
 	add_pokedexentry Stunky
 	add_pokedexentry Skunktank
 	add_pokedexentry Bronzor
 	add_pokedexentry Bronzong
+	add_pokedexentry Bonsly
+	add_pokedexentry Mime_jr
+	add_pokedexentry Happiny
 	add_pokedexentry Chatot
 	add_pokedexentry Spiritomb
 	add_pokedexentry Gible
 	add_pokedexentry Gabite
 	add_pokedexentry Garchomp
+	add_pokedexentry Munchlax
 	add_pokedexentry Riolu
 	add_pokedexentry Lucario
 	add_pokedexentry Hippopotas
@@ -66,13 +70,27 @@ SinnohPokedexEntryPointers::
 	add_pokedexentry Carnivine
 	add_pokedexentry Finneon
 	add_pokedexentry Lumineon
+	add_pokedexentry Mantyke
 	add_pokedexentry Snover
 	add_pokedexentry Abomasnow
-	add_pokedexentry Rotom
-	add_pokedexentry Rotom
-	add_pokedexentry Rotom
-	add_pokedexentry Rotom
-	add_pokedexentry Rotom
+	add_pokedexentry Weavile
+	add_pokedexentry Magnezone
+	add_pokedexentry Lickilicky
+	add_pokedexentry Rhyperior
+	add_pokedexentry Tangrowth
+	add_pokedexentry Electivire
+	add_pokedexentry Magmortar
+	add_pokedexentry Togekiss
+	add_pokedexentry Yanmega
+	add_pokedexentry Leafeon
+	add_pokedexentry Glaceon
+	add_pokedexentry Gliscor
+	add_pokedexentry Mamoswine
+	add_pokedexentry Porygon_z
+	add_pokedexentry Gallade
+	add_pokedexentry Probopass
+	add_pokedexentry Dusknoir
+	add_pokedexentry Frosslass
 	add_pokedexentry Rotom
 	add_pokedexentry Uxie
 	add_pokedexentry Mesprit
@@ -86,6 +104,5 @@ SinnohPokedexEntryPointers::
 	add_pokedexentry Phione
 	add_pokedexentry Manaphy
 	add_pokedexentry Darkrai
-	add_pokedexentry Shaymin
 	add_pokedexentry Shaymin
 	add_pokedexentry Arceus
