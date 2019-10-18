@@ -27,10 +27,10 @@ KantoFramesPointers::
 	add_frames Raichu
 	add_frames Sandshrew
 	add_frames Sandslash
-	add_frames Nidoran_f
+	add_frames Nidoran_F
 	add_frames Nidorina
 	add_frames Nidoqueen
-	add_frames Nidoran_m
+	add_frames Nidoran_M
 	add_frames Nidorino
 	add_frames Nidoking
 	add_frames Clefairy
@@ -120,7 +120,7 @@ KantoFramesPointers::
 	add_frames Seaking
 	add_frames Staryu
 	add_frames Starmie
-	add_frames Mr__mime
+	add_frames Mr_Mime
 	add_frames Scyther
 	add_frames Jynx
 	add_frames Electabuzz

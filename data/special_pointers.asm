@@ -110,7 +110,7 @@ SpecialsPointers::
 	add_special Special_MoveTutor
 	add_special SpecialOmanyteChamber
 	add_special Special_DisplayUnownWords
-	add_special SpecialHoOhChamber
+	add_special SpecialHo_OhChamber
 	add_special Special_CelebiShrineEvent
 	add_special CheckCaughtCelebi
 	add_special SpecialStatsJudge

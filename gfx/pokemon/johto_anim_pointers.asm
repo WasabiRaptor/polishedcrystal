@@ -97,5 +97,5 @@ JohtoAnimationPointers::
 	add_anim Pupitar
 	add_anim Tyranitar
 	add_anim Lugia
-	add_anim Ho_oh
+	add_anim Ho_Oh
 	add_anim Celebi

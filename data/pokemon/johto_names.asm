@@ -97,5 +97,5 @@ JohtoNames::
 	db "Pupitar@"
 	db "Tyranitar@"
 	db "Lugia@"
-	db "Ho_oh@"
+	db "Ho_Oh@"
 	db "Celebi@"

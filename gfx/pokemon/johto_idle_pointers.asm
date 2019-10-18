@@ -97,5 +97,5 @@ JohtoAnimationIdlePointers::
 	add_idleanim Pupitar
 	add_idleanim Tyranitar
 	add_idleanim Lugia
-	add_idleanim Ho_oh
+	add_idleanim Ho_Oh
 	add_idleanim Celebi

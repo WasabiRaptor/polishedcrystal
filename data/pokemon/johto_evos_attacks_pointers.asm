@@ -97,5 +97,5 @@ JohtoEvosAttacksPointers::
 	add_evosattacks Pupitar
 	add_evosattacks Tyranitar
 	add_evosattacks Lugia
-	add_evosattacks Ho_oh
+	add_evosattacks Ho_Oh
 	add_evosattacks Celebi

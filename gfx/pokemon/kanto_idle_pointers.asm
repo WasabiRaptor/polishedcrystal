@@ -27,10 +27,10 @@ KantoAnimationIdlePointers::
 	add_idleanim Raichu
 	add_idleanim Sandshrew
 	add_idleanim Sandslash
-	add_idleanim Nidoran_f
+	add_idleanim Nidoran_F
 	add_idleanim Nidorina
 	add_idleanim Nidoqueen
-	add_idleanim Nidoran_m
+	add_idleanim Nidoran_M
 	add_idleanim Nidorino
 	add_idleanim Nidoking
 	add_idleanim Clefairy
@@ -120,7 +120,7 @@ KantoAnimationIdlePointers::
 	add_idleanim Seaking
 	add_idleanim Staryu
 	add_idleanim Starmie
-	add_idleanim Mr__mime
+	add_idleanim Mr_Mime
 	add_idleanim Scyther
 	add_idleanim Jynx
 	add_idleanim Electabuzz

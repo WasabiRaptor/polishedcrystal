@@ -284,7 +284,7 @@ SlowpokeEggMoves:
 	db ZEN_HEADBUTT
 	db $ff
 
-FarfetchDEggMoves:
+Farfetch_dEggMoves:
 	db FORESIGHT
 	db GUST
 	db QUICK_ATTACK

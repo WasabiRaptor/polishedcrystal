@@ -30,13 +30,13 @@ PikachuPokedexEntry::  INCLUDE "data/pokemon/dex_entries/pikachu.asm"
 RaichuPokedexEntry::  INCLUDE "data/pokemon/dex_entries/raichu.asm"
 SandshrewPokedexEntry::  INCLUDE "data/pokemon/dex_entries/sandshrew.asm"
 SandslashPokedexEntry::  INCLUDE "data/pokemon/dex_entries/sandslash.asm"
-Nidoran_fPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidoran_f.asm"
+Nidoran_FPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidoran_f.asm"
 NidorinaPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidorina.asm"
 
 SECTION "Kanto Pokedex Entries 2", ROMX
 
 NidoqueenPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidoqueen.asm"
-Nidoran_mPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidoran_m.asm"
+Nidoran_MPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidoran_m.asm"
 NidorinoPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidorino.asm"
 NidokingPokedexEntry::  INCLUDE "data/pokemon/dex_entries/nidoking.asm"
 ClefairyPokedexEntry::  INCLUDE "data/pokemon/dex_entries/clefairy.asm"
@@ -135,7 +135,7 @@ StaryuPokedexEntry::  INCLUDE "data/pokemon/dex_entries/staryu.asm"
 SECTION "Kanto Pokedex Entries 5", ROMX
 
 StarmiePokedexEntry::  INCLUDE "data/pokemon/dex_entries/starmie.asm"
-Mr__mimePokedexEntry::  INCLUDE "data/pokemon/dex_entries/mr__mime.asm"
+Mr_MimePokedexEntry::  INCLUDE "data/pokemon/dex_entries/mr__mime.asm"
 ScytherPokedexEntry::  INCLUDE "data/pokemon/dex_entries/scyther.asm"
 JynxPokedexEntry::  INCLUDE "data/pokemon/dex_entries/jynx.asm"
 ElectabuzzPokedexEntry::  INCLUDE "data/pokemon/dex_entries/electabuzz.asm"

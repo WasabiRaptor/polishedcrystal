@@ -27,10 +27,10 @@ KantoEvosAttacksPointers::
 	add_evosattacks Raichu
 	add_evosattacks Sandshrew
 	add_evosattacks Sandslash
-	add_evosattacks Nidoran_f
+	add_evosattacks Nidoran_F
 	add_evosattacks Nidorina
 	add_evosattacks Nidoqueen
-	add_evosattacks Nidoran_m
+	add_evosattacks Nidoran_M
 	add_evosattacks Nidorino
 	add_evosattacks Nidoking
 	add_evosattacks Clefairy
@@ -120,7 +120,7 @@ KantoEvosAttacksPointers::
 	add_evosattacks Seaking
 	add_evosattacks Staryu
 	add_evosattacks Starmie
-	add_evosattacks Mr__mime
+	add_evosattacks Mr_Mime
 	add_evosattacks Scyther
 	add_evosattacks Jynx
 	add_evosattacks Electabuzz

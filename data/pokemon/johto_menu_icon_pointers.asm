@@ -97,5 +97,5 @@ JohtoIconPointers::
 	add_icon Pupitar
 	add_icon Tyranitar
 	add_icon Lugia
-	add_icon Ho_oh
+	add_icon Ho_Oh
 	add_icon Celebi

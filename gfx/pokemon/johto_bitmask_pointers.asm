@@ -97,5 +97,5 @@ JohtoBitmasksPointers::
 	add_bitmasks Pupitar
 	add_bitmasks Tyranitar
 	add_bitmasks Lugia
-	add_bitmasks Ho_oh
+	add_bitmasks Ho_Oh
 	add_bitmasks Celebi

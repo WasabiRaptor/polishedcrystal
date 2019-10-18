@@ -564,13 +564,6 @@ AmpharosEvosAttacks:
 	db 71, OUTRAGE ; HGSS tutor move
 	db 0 ; no more level-up moves
 
-AzurillEvosAttacks:
-	db 0 ; no more evolutions
-	db 1, TACKLE
-	db 0 ; no more level-up moves
-
-
-
 MarillEvosAttacks:
 	evolution EVOLVE_LEVEL, 18, AZUMARILL
 	db 0 ; no more evolutions
@@ -1651,7 +1644,7 @@ LugiaEvosAttacks:
 	db 99, HURRICANE ; Sky Attack → new move
 	db 0 ; no more level-up moves
 
-HoOhEvosAttacks:
+Ho_OhEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, ROAR ; Whirlwind → similar move
 	db 9, GUST

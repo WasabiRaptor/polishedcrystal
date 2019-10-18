@@ -27,10 +27,10 @@ KantoBitmasksPointers::
 	add_bitmasks Raichu
 	add_bitmasks Sandshrew
 	add_bitmasks Sandslash
-	add_bitmasks Nidoran_f
+	add_bitmasks Nidoran_F
 	add_bitmasks Nidorina
 	add_bitmasks Nidoqueen
-	add_bitmasks Nidoran_m
+	add_bitmasks Nidoran_M
 	add_bitmasks Nidorino
 	add_bitmasks Nidoking
 	add_bitmasks Clefairy
@@ -120,7 +120,7 @@ KantoBitmasksPointers::
 	add_bitmasks Seaking
 	add_bitmasks Staryu
 	add_bitmasks Starmie
-	add_bitmasks Mr__mime
+	add_bitmasks Mr_Mime
 	add_bitmasks Scyther
 	add_bitmasks Jynx
 	add_bitmasks Electabuzz

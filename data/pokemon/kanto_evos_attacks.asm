@@ -1595,7 +1595,7 @@ MagnezoneEvosAttacks:
 	db 63, ZAP_CANNON
 	db 0 ; no more level-up moves
 
-FarfetchDEvosAttacks:
+Farfetch_dEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, POISON_JAB
 	db 1, BATON_PASS ; Brave Bird → event move

@@ -27,10 +27,10 @@ KantoIconPointers::
 	add_icon Raichu
 	add_icon Sandshrew
 	add_icon Sandslash
-	add_icon Nidoran_f
+	add_icon Nidoran_F
 	add_icon Nidorina
 	add_icon Nidoqueen
-	add_icon Nidoran_m
+	add_icon Nidoran_M
 	add_icon Nidorino
 	add_icon Nidoking
 	add_icon Clefairy
@@ -120,7 +120,7 @@ KantoIconPointers::
 	add_icon Seaking
 	add_icon Staryu
 	add_icon Starmie
-	add_icon Mr__mime
+	add_icon Mr_Mime
 	add_icon Scyther
 	add_icon Jynx
 	add_icon Electabuzz

@@ -27,10 +27,10 @@ KantoPokedexEntryPointers::
 	add_pokedexentry Raichu
 	add_pokedexentry Sandshrew
 	add_pokedexentry Sandslash
-	add_pokedexentry Nidoran_f
+	add_pokedexentry Nidoran_F
 	add_pokedexentry Nidorina
 	add_pokedexentry Nidoqueen
-	add_pokedexentry Nidoran_m
+	add_pokedexentry Nidoran_M
 	add_pokedexentry Nidorino
 	add_pokedexentry Nidoking
 	add_pokedexentry Clefairy
@@ -120,7 +120,7 @@ KantoPokedexEntryPointers::
 	add_pokedexentry Seaking
 	add_pokedexentry Staryu
 	add_pokedexentry Starmie
-	add_pokedexentry Mr__mime
+	add_pokedexentry Mr_Mime
 	add_pokedexentry Scyther
 	add_pokedexentry Jynx
 	add_pokedexentry Electabuzz
