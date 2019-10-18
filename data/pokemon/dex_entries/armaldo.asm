@@ -1,11 +1,8 @@
-    db "PLATE@" ; species name
-    dw 411, 1504 ; height, weight
+	db "PLATE@" ; species name
+	dw 15, 682 ; height, weight
 
-    db   "Protected by a"
-    next "hard shell, its"
-    next "body is very"
-
-    page "sturdy. It skewers"
-    next "prey with its"
-    next "claws to feed.@" 
-    
+	db "It lived on land and went out"
+	next "into the sea to hunt for prey."
+	next "Its sharp claws were its"
+	
+	page "greatest weapon."

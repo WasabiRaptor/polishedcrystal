@@ -1,10 +1,10 @@
 	db "WOOD GECKO@" ; species name
-	dw 211, 476 ; height, width
+	dw 9, 216 ; height, weight
 
-	db   "It leaps from"
-	next "tree branch to"
-	next "tree branch quite"
+	db "This Pokémon adeptly flies"
+	next "from branch to branch in trees."
+	next "In a forest, no Pokémon can"
 	
-	page "swiftly. It"
-	next "shows astounding"
-	next "agility.@"
+	page "ever hope to catch a fleeing"
+	next "Grovyle however fast they may"
+	next "be."

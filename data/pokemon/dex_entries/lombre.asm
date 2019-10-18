@@ -1,10 +1,12 @@
 	db "JOLLY@" ; species name
-	dw 311, 716 ; height, weight
+	dw 12, 325 ; height, weight
 
-	db   "It is nocturnal"
-	next "and becomes active"
-	next "at nightfall. It"
-
-	page "feeds on aquatic"
-	next "mosses that grow"
-	next "in the riverbed.@"
+	db "Lombre’s entire body is"
+	next "covered by a slippery, slimy"
+	next "film. It feels horribly"
+	
+	page "unpleasant to be touched by this"
+	next "Pokémon’s hands. Lombre is"
+	next "often mistaken for a human"
+	
+	page "child."

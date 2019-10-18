@@ -1,10 +1,12 @@
 	db "DRAGON@" ; species name
-	dw 311, 550 ; height, weight
+	dw 12, 250 ; height, weight
 
-	db   "The male raises"
-	next "the young. If it"
-	next "is approached, it"
-
-	page "uses its toxic"
-	next "spikes to fend off"
-	next "the intruder.@"
+	db "Seadra generates whirlpools by"
+	next "spinning its body. The"
+	next "whirlpools are strong enough to"
+	
+	page "swallow even fishing boats."
+	next "This Pokémon weakens prey"
+	next "with these currents, then"
+	
+	page "swallows it whole."

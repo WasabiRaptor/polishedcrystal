@@ -1,10 +1,8 @@
 	db "CORAL@" ; species name
-	dw 200, 110 ; height, weight
+	dw 6, 50 ; height, weight
 
-	db   "The points on its"
-	next "head absorb"
-	next "nutrients from"
-
-	page "clean water. They"
-	next "cannot survive in"
-	next "polluted water.@"
+	db "The pink of Corsola that live in"
+	next "Alola is deep and vibrant,"
+	next "thanks to seas filled with"
+	
+	page "nutrition."

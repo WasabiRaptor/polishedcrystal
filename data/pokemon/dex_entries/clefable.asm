@@ -1,10 +1,9 @@
 	db "FAIRY@" ; species name
-	dw 403, 880 ; height, weight
+	dw 13, 400 ; height, weight
 
-	db   "Said to live in"
-	next "quiet, remote"
-	next "mountains, this"
-
-	page "type of fairy has"
-	next "a strong aversion"
-	next "to being seen.@"
+	db "It can’t help but hear a pin"
+	next "drop from over half a mile"
+	next "away, so it lives deep in the"
+	
+	page "mountains where there aren’t"
+	next "many people or Pokémon."

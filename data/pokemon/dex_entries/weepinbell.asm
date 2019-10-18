@@ -1,10 +1,12 @@
 	db "FLYCATCHER@" ; species name
-	dw 303, 140 ; height, weight
+	dw 10, 64 ; height, weight
 
-	db   "When it's hungry,"
-	next "it swings its"
-	next "razor-sharp"
-
-	page "leaves, slicing up"
-	next "any unlucky object"
-	next "nearby for food.@"
+	db "Weepinbell has a large hook on"
+	next "its rear end. At night, the"
+	next "Pokémon hooks on to a tree"
+	
+	page "branch and goes to sleep. If it"
+	next "moves around in its sleep, it"
+	next "may wake up to find itself on"
+	
+	page "the ground."

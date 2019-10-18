@@ -1,10 +1,9 @@
 	db "JET@" ; species name
-	dw 211, 630 ; height, weight
+	dw 9, 285 ; height, weight
 
-	db   "Its instinct is to"
-	next "bury itself in"
-	next "holes. It often"
-
-	page "steals the nesting"
-	next "holes of others to"
-	next "sleep in them.@"
+	db "The ink it spits when escaping"
+	next "is special. It contains a"
+	next "substance that dulls the sense"
+	
+	page "of smell, so Pokémon with keen"
+	next "noses get lost."

@@ -1,9 +1,6 @@
-    db "COMPRESSED@" ; species name
-    dw 507, 5732 ; height, weight
+	db "COMPRESSED@" ; species name
+	dw 17, 2600 ; height, weight
 
-    db   "The solar energy"
-    next "absorbed by its"
-    next "body's crystals is"
-
-    page "magnified and"
-    next "blasted back out.@"
+	db "When it fires off energy with"
+	next "all its might, the power creates"
+	next "countless fissures on its body."

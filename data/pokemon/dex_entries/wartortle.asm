@@ -1,10 +1,12 @@
 	db "TURTLE@" ; species name
-	dw 303, 500 ; height, weight
+	dw 10, 225 ; height, weight
 
-	db   "Its long, furry"
-	next "tail is a symbol"
-	next "of longevity,"
-
-	page "making it quite"
-	next "popular among"
-	next "older people.@"
+	db "Its tail is large and covered"
+	next "with a rich, thick fur. The tail"
+	next "becomes increasingly deeper in"
+	
+	page "color as Wartortle ages. The"
+	next "scratches on its shell are"
+	next "evidence of this Pokémon’s"
+	
+	page "toughness as a battler."

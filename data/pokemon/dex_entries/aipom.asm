@@ -1,10 +1,8 @@
 	db "LONG TAIL@" ; species name
-	dw 207, 250 ; height, weight
+	dw 8, 115 ; height, weight
 
-	db   "It uses its tail"
-	next "to hang on to tree"
-	next "branches. It uses"
-
-	page "its momentum to"
-	next "swing from one"
-	next "branch to another.@"
+	db "As it did more and more with"
+	next "its tail, its hands became"
+	next "clumsy. It makes its nest high in"
+	
+	page "the treetops."

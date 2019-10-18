@@ -1,10 +1,9 @@
 	db "MYSTIC@" ; species name
-	dw 411, 330 ; height, weight
+	dw 15, 150 ; height, weight
 
-	db   "Once it begins to"
-	next "meditate at sun-"
-	next "rise, the entire"
-
-	page "day will pass"
-	next "before it will"
-	next "move again.@"
+	db "It’s said that while this"
+	next "Pokémon has the power to"
+	next "predict the future, it’s not"
+	
+	page "powerful enough to change the"
+	next "future it sees."

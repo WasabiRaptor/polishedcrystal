@@ -1,10 +1,9 @@
 	db "SUPERPOWER@" ; species name
-	dw 411, 1550 ; height, weight
+	dw 15, 705 ; height, weight
 
-	db   "This tough Pokémon"
-	next "always stays in"
-	next "the zone. Its"
-
-	page "muscles become"
-	next "thicker after"
-	next "every battle.@"
+	db "When it encounters an enemy"
+	next "that’s truly mighty, this"
+	next "Pokémon removes the"
+	
+	page "power-save belt from its waist"
+	next "and unleashes its full power."

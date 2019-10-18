@@ -1,10 +1,9 @@
 	db "SCREECH@" ; species name
-	dw 204, 20 ; height, weight
+	dw 7, 10 ; height, weight
 
-	db   "It loves to watch"
-	next "people it's scar-"
-	next "ed. It frightens"
-
-	page "them by screaming"
-	next "loudly or appear-"
-	next "ing suddenly.@"
+	db "What gives meaning to its life"
+	next "is surprising others. If you set"
+	next "your ear against the red orbs"
+	
+	page "around its neck, you can hear"
+	next "shrieking."

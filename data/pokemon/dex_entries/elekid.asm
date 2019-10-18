@@ -1,10 +1,9 @@
 	db "ELECTRIC@" ; species name
-	dw 200, 520 ; height, weight
+	dw 6, 235 ; height, weight
 
-	db   "It loves violent"
-	next "thunder. The space"
-	next "between its horns"
-
-	page "flickers bluish-"
-	next "white when it is"
-	next "charging energy.@"
+	db "When it hears the crash of"
+	next "thunder, Elekid’s mood"
+	next "improves. It can be useful to"
+	
+	page "record that sound and play it"
+	next "when Elekid’s feeling down."

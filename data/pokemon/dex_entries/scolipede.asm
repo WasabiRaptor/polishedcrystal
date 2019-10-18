@@ -1,10 +1,8 @@
-    db "MEGAPEDE@" ; species name
-    dw 802, 4420 ; height, weight
+	db "MEGAPEDE@" ; species name
+	dw 25, 2005 ; height, weight
 
-    db   "Highly aggressive,"
-    next "it uses the claws"
-    next "near its neck to"
-
-    page "dig into its"
-    next "opponents and"
-    next "poison them.@" 
+	db "With quick movements, it"
+	next "chases down its foes, attacking"
+	next "relentlessly with its horns until"
+	
+	page "it prevails."

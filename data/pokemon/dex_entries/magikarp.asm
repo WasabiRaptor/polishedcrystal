@@ -1,10 +1,8 @@
 	db "FISH@" ; species name
-	dw 211, 220 ; height, weight
+	dw 9, 100 ; height, weight
 
-	db   "This weak and"
-	next "pathetic Pokémon"
-	next "gets easily pushed"
-
-	page "along rivers when"
-	next "there are strong"
-	next "currents.@"
+	db "In the distant past, they were"
+	next "fairly strong, but they have"
+	next "become gradually weaker over"
+	
+	page "time."

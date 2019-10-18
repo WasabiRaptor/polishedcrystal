@@ -1,10 +1,6 @@
 	db "EVOLUTION@" ; species name
-	dw 100, 140 ; height, weight
+	dw 3, 65 ; height, weight
 
-	db   "Eevee's DNA is"
-	next "unstable and"
-	next "adapts easily."
-
-	page "This allows it to"
-	next "evolve into many"
-	next "different forms.@"
+	db "The question of why only Eevee"
+	next "has such unstable genes has"
+	next "still not been solved."

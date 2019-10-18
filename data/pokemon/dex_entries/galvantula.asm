@@ -1,11 +1,8 @@
-    db "ELESPIDER@" ; species name
-    dw 207, 315 ; height, weight
+	db "ELESPIDER@" ; species name
+	dw 8, 143 ; height, weight
 
-    db   "It creates webs of"
-    next "electrified silk"
-    next "to stun foes. This"
-
-    page "works as a weapon"
-    next "as well as a"
-    next "defense." 
-    
+	db "When attacked, they create an"
+	next "electric barrier by spitting out"
+	next "many electrically charged"
+	
+	page "threads."

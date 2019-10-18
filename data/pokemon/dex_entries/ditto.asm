@@ -1,10 +1,9 @@
 	db "TRANSFORM@" ; species name
-	dw 100, 90 ; height, weight
+	dw 3, 40 ; height, weight
 
-	db   "When it encount-"
-	next "ers another DITTO,"
-	next "it will move"
-
-	page "faster than normal"
-	next "to duplicate that"
-	next "opponent exactly.@"
+	db "While it can transform into"
+	next "anything, each Ditto apparently"
+	next "has its own strengths and"
+	
+	page "weaknesses when it comes to"
+	next "transformations."

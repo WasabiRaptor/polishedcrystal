@@ -1,10 +1,10 @@
 	db "SEED@" ; species name
-	dw 607, 2210 ; height, weight
+	dw 20, 1000 ; height, weight
 
-	db   "As it warms it-"
-	next "self and absorbs"
-	next "the sunlight, its"
-
-	page "flower petals"
-	next "release a pleasant"
-	next "fragrance.@"
+	db "There is a large flower on"
+	next "Venusaur’s back. The flower is"
+	next "said to take on vivid colors if it"
+	
+	page "gets plenty of nutrition and"
+	next "sunlight. The flower’s aroma"
+	next "soothes the emotions of people."

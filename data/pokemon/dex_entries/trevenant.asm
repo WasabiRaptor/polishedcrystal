@@ -1,10 +1,9 @@
-    db "ELDER TREE@" ; species name
-    dw 411, 1565 ; height, weight
+	db "ELDER TREE@" ; species name
+	dw 15, 710 ; height, weight
 
-    db   "It can control"
-    next "trees at will. It"
-    next "will trap people"
-
-    page "who damage the"
-    next "forest, so they"
-    next "can never leave.@" 
+	db "It’s feared as a ghost of the"
+	next "forest. Lumberjacks bring along"
+	next "Fire types, which Trevenant"
+	
+	page "hates, when they enter the"
+	next "forest."

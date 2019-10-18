@@ -1,10 +1,9 @@
 	db "FOSSIL@" ; species name
-	dw 511, 1300 ; height, weight
+	dw 18, 590 ; height, weight
 
-	db   "In prehistoric"
-	next "times, this"
-	next "Pokémon flew"
-
-	page "freely and"
-	next "fearlessly through"
-	next "the skies.@"
+	db "Restored from DNA found in"
+	next "amber, this Pokémon exhibited"
+	next "ferocity that was greater than"
+	
+	page "expected. Some casualties"
+	next "resulted."

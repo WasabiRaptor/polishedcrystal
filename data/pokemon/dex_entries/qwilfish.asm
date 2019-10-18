@@ -1,10 +1,12 @@
 	db "BALLOON@" ; species name
-	dw 108, 90 ; height, weight
+	dw 5, 39 ; height, weight
 
-	db   "When faced with a"
-	next "larger opponent,"
-	next "it swallows as"
-
-	page "much water as it"
-	next "can to match the"
-	next "opponent's size.@"
+	db "Qwilfish sucks in water,"
+	next "inflating itself. This Pokémon"
+	next "uses the pressure of the water"
+	
+	page "it swallowed to shoot toxic"
+	next "quills all at once from all over"
+	next "its body. It finds swimming"
+	
+	page "somewhat challenging."

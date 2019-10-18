@@ -1,10 +1,13 @@
 	db "IRON SNAKE@" ; species name
-	dw 3002, 8820 ; height, weight
+	dw 92, 4000 ; height, weight
 
-	db   "The many small"
-	next "metal particles"
-	next "that cover this"
-
-	page "Pokémon's body"
-	next "reflect bright"
-	next "light well.@"
+	db "Steelix lives even further"
+	next "underground than Onix. This"
+	next "Pokémon is known to dig"
+	
+	page "toward the earth’s core. There"
+	next "are records of this Pokémon"
+	next "reaching a depth of over"
+	
+	page "six-tenths of a mile"
+	next "underground."

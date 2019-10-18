@@ -1,10 +1,8 @@
-    db "FIRST BIRD@" ; species name
-    dw 108, 209 ; height, weight
+	db "FIRST BIRD@" ; species name
+	dw 5, 95 ; height, weight
 
-    db   "To all appearances"
-    next "flightless, it was"
-    next "able to glide down"
-
-    page "from tall treetops"
-    next "to snag its prey.@"
-   
+	db "Once thought to be the ancestor"
+	next "of all bird Pokémon, some of"
+	next "the latest research suggests"
+	
+	page "that may not be the case."

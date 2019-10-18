@@ -1,10 +1,9 @@
 	db "WATER FISH@" ; species name
-	dw 104, 190 ; height, weight
+	dw 4, 85 ; height, weight
 
-	db   "A mucous"
-	next "membrane covers"
-	next "its body. Touching"
-
-	page "it barehanded will"
-	next "cause a shooting"
-	next "pain.@"
+	db "Wooper usually lives in water."
+	next "However, it occasionally comes"
+	next "out onto land in search of food."
+	
+	page "On land, it coats its body with a"
+	next "gooey, toxic film."

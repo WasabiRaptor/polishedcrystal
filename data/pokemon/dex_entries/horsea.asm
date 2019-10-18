@@ -1,10 +1,10 @@
 	db "DRAGON@" ; species name
-	dw 104, 180 ; height, weight
+	dw 4, 80 ; height, weight
 
-	db   "When they're in a"
-	next "safe location,"
-	next "they can be seen"
-
-	page "playfully tangling"
-	next "their tails"
-	next "together.@"
+	db "If Horsea senses danger, it will"
+	next "reflexively spray a dense black"
+	next "ink from its mouth and try to"
+	
+	page "escape. This Pokémon swims by"
+	next "cleverly flapping the fin on its"
+	next "back."

@@ -1,10 +1,9 @@
 	db "FIRE HORSE@" ; species name
-	dw 303, 660 ; height, weight
+	dw 10, 300 ; height, weight
 
-	db   "Training by"
-	next "jumping over grass"
-	next "that grows longer"
-
-	page "every day has made"
-	next "it a world-class"
-	next "jumper.@"
+	db "Ponyta is very weak at birth. It"
+	next "can barely stand up. This"
+	next "Pokémon becomes stronger by"
+	
+	page "stumbling and falling to keep up"
+	next "with its parent."

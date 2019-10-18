@@ -1,10 +1,9 @@
 	db "EGG@" ; species name
-	dw 307, 760 ; height, weight
+	dw 11, 346 ; height, weight
 
-	db   "People try to"
-	next "catch it for its"
-	next "extremely"
-
-	page "nutritious eggs,"
-	next "but it rarely can"
-	next "be found.@"
+	db "It seems that other Pokémon’s"
+	next "efforts to take its delicious,"
+	next "nutritious egg away from it"
+	
+	page "caused Chansey to get faster at"
+	next "fleeing."

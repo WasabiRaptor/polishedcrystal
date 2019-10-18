@@ -1,10 +1,10 @@
 	db "AURORA@" ; species name
-	dw 607, 4120 ; height, weight
+	dw 20, 1870 ; height, weight
 
-	db   "This divine"
-	next "Pokémon blows"
-	next "around the world,"
-
-	page "always in search"
-	next "of a pure"
-	next "reservoir.@"
+	db "Suicune embodies the"
+	next "compassion of a pure spring of"
+	next "water. It runs across the land"
+	
+	page "with gracefulness. This"
+	next "Pokémon has the power to"
+	next "purify dirty water."

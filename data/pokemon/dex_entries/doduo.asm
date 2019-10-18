@@ -1,10 +1,12 @@
 	db "TWIN BIRD@" ; species name
-	dw 407, 860 ; height, weight
+	dw 14, 392 ; height, weight
 
-	db   "It lives on a"
-	next "grassy plain where"
-	next "it can see a long"
-
-	page "way. If it sees an"
-	next "enemy, it runs"
-	next "away at 60 mph.@"
+	db "Doduo’s two heads contain"
+	next "completely identical brains. A"
+	next "scientific study reported that"
+	
+	page "on rare occasions, there will be"
+	next "examples of this Pokémon"
+	next "possessing different sets of"
+	
+	page "brains."

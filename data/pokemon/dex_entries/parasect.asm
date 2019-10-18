@@ -1,10 +1,9 @@
 	db "MUSHROOM@" ; species name
-	dw 303, 650 ; height, weight
+	dw 10, 295 ; height, weight
 
-	db   "When nothing's"
-	next "left to extract"
-	next "from the bug, the"
-
-	page "mushrooms on its"
-	next "back leave spores"
-	next "on the bug's egg.@"
+	db "The bug is mostly dead, with the"
+	next "mushroom on its back having"
+	next "become the main body. If the"
+	
+	page "mushroom comes off, the bug"
+	next "stops moving."

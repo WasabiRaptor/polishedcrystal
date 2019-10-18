@@ -1,10 +1,12 @@
 	db "MUD FISH@" ; species name
-	dw 140, 168 ; height, width
+	dw 4, 76 ; height, weight
 
-	db   "Its power can"
-	next "crush boulders."
-	next "It rests by"
+	db "In water, Mudkip breathes using"
+	next "the gills on its cheeks. If it is"
+	next "faced with a tight situation in"
 	
-	page "covering itself"
-	next "with mud at the"
-	next "bottom of a river.@"
+	page "battle, this Pokémon will"
+	next "unleash its amazing power—it"
+	next "can crush rocks bigger than"
+	
+	page "itself."

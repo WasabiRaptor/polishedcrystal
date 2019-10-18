@@ -1,10 +1,12 @@
 	db "WEED@" ; species name
-	dw 108, 120 ; height, weight
+	dw 5, 54 ; height, weight
 
-	db   "During the day, it"
-	next "stays in the cold"
-	next "underground to"
-
-	page "avoid the sun."
-	next "It grows by bath-"
-	next "ing in moonlight.@"
+	db "Oddish searches for fertile,"
+	next "nutrient-rich soil, then plants"
+	next "itself. During the daytime, while"
+	
+	page "it is planted, this Pokémon’s"
+	next "feet are thought to change"
+	next "shape and become similar to the"
+	
+	page "roots of trees."

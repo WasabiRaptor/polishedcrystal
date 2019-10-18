@@ -1,10 +1,9 @@
 	db "PIG MONKEY@" ; species name
-	dw 108, 620 ; height, weight
+	dw 5, 280 ; height, weight
 
-	db   "It lives in groups"
-	next "in the treetops."
-	next "If it loses sight"
-
-	page "of its group, it"
-	next "becomes infuriated"
-	next "by its loneliness.@"
+	db "The smallest of things could"
+	next "cause it to lose its temper."
+	next "Because it doesn’t hold in its"
+	
+	page "stress, this Pokémon can live a"
+	next "long time."

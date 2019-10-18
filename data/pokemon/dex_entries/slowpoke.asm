@@ -1,10 +1,9 @@
 	db "DOPEY@" ; species name
-	dw 311, 790 ; height, weight
+	dw 12, 360 ; height, weight
 
-	db   "It is always so"
-	next "absent-minded that"
-	next "it won't react,"
-
-	page "even if its"
-	next "flavorful tail is"
-	next "bitten.@"
+	db "There are some places where"
+	next "Slowpoke is worshiped because"
+	next "of a long-standing belief that"
+	
+	page "whenever Slowpoke yawns, it"
+	next "rains."

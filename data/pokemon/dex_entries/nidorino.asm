@@ -1,10 +1,10 @@
 	db "POISON PIN@" ; species name
-	dw 211, 430 ; height, weight
+	dw 9, 195 ; height, weight
 
-	db   "It is easily"
-	next "agitated and uses"
-	next "its horn for"
-
-	page "offense as soon as"
-	next "it notices an"
-	next "attacker.@"
+	db "Nidorino has a horn that is"
+	next "harder than a diamond. If it"
+	next "senses a hostile presence, all"
+	
+	page "the barbs on its back bristle up"
+	next "at once, and it challenges the"
+	next "foe with all its might."

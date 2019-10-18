@@ -1,10 +1,10 @@
 	db "TINY BIRD@" ; species name
-	dw 100, 40 ; height, weight
+	dw 3, 18 ; height, weight
 
-	db   "It rapidly flaps"
-	next "its wings in the"
-	next "grass, stirring up"
-
-	page "a dust cloud that"
-	next "drives insect prey"
-	next "out into the open.@"
+	db "Pidgey has an extremely sharp"
+	next "sense of direction. It is capable"
+	next "of unerringly returning home to"
+	
+	page "its nest, however far it may be"
+	next "removed from its familiar"
+	next "surroundings."

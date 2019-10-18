@@ -1,10 +1,9 @@
-    db "ILLUMINATING@" ; species name
-    dw 8, 33 ; height, weight
+	db "ILLUMINATING@" ; species name
+	dw 2, 15 ; height, weight
 
-    db   "It scatters spores"
-    next "that flicker and"
-    next "glow. Anyone who"
-
-    page "sees these lights"
-    next "falls into a deep"
-    next "slumber.@" 
+	db "It scatters its shining spores"
+	next "around itself. Even though"
+	next "they’re dangerous, nighttime"
+	
+	page "tours of forests where"
+	next "Morelull live are popular."

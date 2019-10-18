@@ -1,10 +1,8 @@
 	db "LIGHT@" ; species name
-	dw 311, 500 ; height, weight
+	dw 12, 225 ; height, weight
 
-	db   "This Pokémon uses"
-	next "the bright part of"
-	next "its body, which"
-
-	page "changed from a"
-	next "dorsal fin, to"
-	next "lure prey.@"
+	db "When the bacteria living inside"
+	next "its antennae absorb Lanturn’s"
+	next "bodily fluids, a strong"
+	
+	page "luminescent effect is produced."

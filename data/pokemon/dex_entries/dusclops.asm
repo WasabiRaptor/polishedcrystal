@@ -1,11 +1,13 @@
-    db "BECKON@" ; species name
-    dw 503, 675 ; height, weight
+	db "BECKON@" ; species name
+	dw 16, 306 ; height, weight
 
-    db   "Anyone who dares"
-    next "peer into its body"
-    next "to see a spectral"
-
-    page "ball of fire will"
-    next "have their spirit"
-    next "stolen away.@" 
-  
+	db "Dusclops absorbs anything,"
+	next "however large the object may"
+	next "be. This Pokémon hypnotizes its"
+	
+	page "foe by waving its hands in a"
+	next "macabre manner and by bringing"
+	next "its single eye to bear. The"
+	
+	page "hypnotized foe is made to do"
+	next "Dusclops’s bidding."

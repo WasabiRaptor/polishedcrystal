@@ -1,11 +1,6 @@
-    db "CENTIPEDE@" ; species name
-    dw 104, 117 ; height, weight
+	db "CENTIPEDE@" ; species name
+	dw 4, 53 ; height, weight
 
-    db   "Its bite injects a"
-    next "potent poison,"
-    next "enough to paralyze"
-
-    page "large bird Pokémon"
-    next "that try to prey"
-    next "on it.@" 
-    
+	db "Its bite injects a potent poison,"
+	next "enough to paralyze large bird"
+	next "Pokémon that try to prey on it."

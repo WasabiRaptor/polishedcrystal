@@ -1,10 +1,10 @@
-	db "AQUARABBIT@" ; species name
-	dw 207, 630 ; height, weight
+	db "AQUA RABBIT@" ; species name
+	dw 8, 285 ; height, weight
 
-	db   "The bubble-like"
-	next "pattern on its"
-	next "stomach helps it"
-
-	page "camouflage itself"
-	next "when it's in the"
-	next "water.@"
+	db "Azumarill can make balloons out"
+	next "of air. It makes these air"
+	next "balloons if it spots a drowning"
+	
+	page "Pokémon. The air balloons"
+	next "enable the Pokémon in trouble"
+	next "to breathe."

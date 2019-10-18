@@ -1,13 +1,9 @@
-    db "STUMP@" ; species name
-    dw 104, 154 ; height, weight
+	db "STUMP@" ; species name
+	dw 4, 70 ; height, weight
 
-    db   "According to old"
-    next "tales, these"
-    next "Pokémon are stumps"
-
-    page "possessed by the"
-    next "souls of children"
-    next "who died while" 
-         
-    page "lost in the woods.@"
-     
+	db "By imitating the voice of a"
+	next "child, it causes people to get"
+	next "hopelessly lost deep in the"
+	
+	page "forest. It’s trying to make"
+	next "friends with them."

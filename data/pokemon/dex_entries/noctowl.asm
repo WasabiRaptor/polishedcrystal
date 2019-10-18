@@ -1,10 +1,8 @@
 	db "OWL@" ; species name
-	dw 503, 900 ; height, weight
+	dw 16, 408 ; height, weight
 
-	db   "Its extremely soft"
-	next "feathers make no"
-	next "sound in flight."
-
-	page "It silently sneaks"
-	next "up on prey without"
-	next "being detected.@"
+	db "With eyes that can see in"
+	next "pitch-darkness, it never lets its"
+	next "prey escape. Some even call it"
+	
+	page "“the emperor of dark nights.”"

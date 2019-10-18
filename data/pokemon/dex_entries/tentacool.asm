@@ -1,10 +1,9 @@
 	db "JELLYFISH@" ; species name
-	dw 211, 1000 ; height, weight
+	dw 9, 455 ; height, weight
 
-	db   "As it floats along"
-	next "on the waves, it"
-	next "uses its toxic"
-
-	page "feelers to stab"
-	next "anything it"
-	next "touches.@"
+	db "It drifts through the sea"
+	next "searching for prey. Its"
+	next "poisonous tentacles break off"
+	
+	page "sometimes, but after a while,"
+	next "they grow back."

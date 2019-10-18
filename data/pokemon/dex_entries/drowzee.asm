@@ -1,10 +1,9 @@
 	db "HYPNOSIS@" ; species name
-	dw 303, 710 ; height, weight
+	dw 10, 324 ; height, weight
 
-	db   "When it twitches"
-	next "its nose, it can"
-	next "tell where someone"
-
-	page "is sleeping and"
-	next "what that person"
-	next "is dreaming about.@"
+	db "It can be spotted near"
+	next "recreational facilities,"
+	next "intending to eat the pleasant"
+	
+	page "dreams of children who enjoyed"
+	next "themselves there that day."

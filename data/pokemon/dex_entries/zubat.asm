@@ -1,10 +1,8 @@
 	db "BAT@" ; species name
-	dw 207, 170 ; height, weight
+	dw 8, 75 ; height, weight
 
-	db   "During the day, it"
-	next "gathers with"
-	next "others and hangs"
-
-	page "from the ceilings"
-	next "of old buildings"
-	next "and caves.@"
+	db "It has no eyeballs, so it can’t"
+	next "see. It checks its surroundings"
+	next "via the ultrasonic waves it"
+	
+	page "emits from its mouth."

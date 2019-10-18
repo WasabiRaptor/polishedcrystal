@@ -1,10 +1,8 @@
 	db "SNAKE@" ; species name
-	dw 607, 150 ; height, weight
+	dw 20, 69 ; height, weight
 
-	db   "It flutters the"
-	next "tip of its tongue"
-	next "to seek out the"
-
-	page "scent of prey,"
-	next "then swallows the"
-	next "prey whole.@"
+	db "By dislocating its jaw, it can"
+	next "swallow prey larger than itself."
+	next "After a meal, it curls up and"
+	
+	page "rests."

@@ -1,10 +1,10 @@
 	db "SCUFFLE@" ; species name
-	dw 204, 460 ; height, weight
+	dw 7, 210 ; height, weight
 
-	db   "To brush up on its"
-	next "fighting skills,"
-	next "it will challenge"
-
-	page "anyone. It has a"
-	next "very strong com-"
-	next "petitive spirit.@"
+	db "Tyrogue becomes stressed out"
+	next "if it does not get to train every"
+	next "day. When raising this Pokémon,"
+	
+	page "the Trainer must establish and"
+	next "uphold various training"
+	next "methods."

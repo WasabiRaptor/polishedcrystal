@@ -1,10 +1,13 @@
 	db "COTTONWEED@" ; species name
-	dw 200, 20 ; height, weight
+	dw 6, 10 ; height, weight
 
-	db   "As soon as it"
-	next "rains, it closes"
-	next "its flower and"
-
-	page "hides in the shade"
-	next "of a tree to avoid"
-	next "getting wet.@"
+	db "Skiploom’s flower blossoms"
+	next "when the temperature rises"
+	next "above 64 degrees Fahrenheit."
+	
+	page "How much the flower opens"
+	next "depends on the temperature. For"
+	next "that reason, this Pokémon is"
+	
+	page "sometimes used as a"
+	next "thermometer."

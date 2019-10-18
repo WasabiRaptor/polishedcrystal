@@ -1,10 +1,12 @@
 	db "NINJA@" ; species name
-	dw 207, 265 ; height, weight
+	dw 8, 120 ; height, weight
 
-	db   "This Pokémon is so"
-	next "quick, it is said"
-	next "to be able to"
-
-	page "avoid any attack."
-	next "It loves to feed"
-	next "on tree sap.@"
+	db "If Ninjask is not trained"
+	next "properly, it will refuse to obey"
+	next "the Trainer and cry loudly"
+	
+	page "continuously. Because of this"
+	next "quality, this Pokémon is said to"
+	next "be one that puts the Trainer’s"
+	
+	page "abilities to the test."

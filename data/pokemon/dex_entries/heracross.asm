@@ -1,10 +1,8 @@
-	db "SINGLEHORN@" ; species name
-	dw 411, 1190 ; height, weight
+	db "SINGLE HORN@" ; species name
+	dw 15, 540 ; height, weight
 
-	db   "With its Herculean"
-	next "powers, it can"
-	next "easily throw arou-"
-
-	page "nd an object that"
-	next "is 100 times its"
-	next "own weight.@"
+	db "It’s proud of its thick horn. In"
+	next "Alola, its biggest rival is"
+	next "Vikavolt, which it’s always"
+	
+	page "fighting with."

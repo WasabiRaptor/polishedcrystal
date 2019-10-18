@@ -1,10 +1,10 @@
 	db "WATER FISH@" ; species name
-	dw 407, 1650 ; height, weight
+	dw 14, 750 ; height, weight
 
-	db   "Its body is always"
-	next "slimy. It often"
-	next "bangs its head on"
-
-	page "the river bottom"
-	next "as it swims but"
-	next "seems not to care.@"
+	db "Quagsire hunts for food by"
+	next "leaving its mouth wide open in"
+	next "water and waiting for its prey"
+	
+	page "to blunder in unaware. Because"
+	next "the Pokémon does not move, it"
+	next "does not get very hungry."

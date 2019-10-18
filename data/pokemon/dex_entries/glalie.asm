@@ -1,11 +1,9 @@
-    db "FACE@" ; species name
-    dw 411, 5655 ; height, weight
+	db "FACE@" ; species name
+	dw 15, 2565 ; height, weight
 
-    db   "It has a body of"
-    next "ice that won't melt"
-    next "even in fire. It"
-
-    page "can instantly"
-    next "freeze moisture in"
-    next "the atmosphere.@" 
- 
+	db "It freezes its prey and chews"
+	next "them whole. However, it"
+	next "prefers to eat Pokémon like"
+	
+	page "Vanillite that are already"
+	next "frozen."

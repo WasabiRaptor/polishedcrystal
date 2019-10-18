@@ -1,12 +1,8 @@
-    db "TRAP@" ; species name
-    dw 511, 1808 ; height, weight
+	db "TRAP@" ; species name
+	dw 7, 110 ; height, weight
 
-    db   "It conceals itself"
-    next "in the mud of the"
-    next "seashore. Then it"
-
-    page "waits. When prey"
-    next "touch it, it"
-    next "delivers a jolt of" 
-         
-    page "electricity.@"
+	db "It conceals itself in the mud of"
+	next "the seashore. Then it waits."
+	next "When prey touch it, it delivers a"
+	
+	page "jolt of electricity."

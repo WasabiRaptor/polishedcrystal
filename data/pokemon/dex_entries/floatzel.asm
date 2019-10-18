@@ -1,11 +1,6 @@
-    db "SEA WEASEL@" ; species name
-    dw 307, 739 ; height, weight
+	db "SEA WEASEL@" ; species name
+	dw 11, 335 ; height, weight
 
-    db   "It is a common"
-    next "sight around"
-    next "fishing ports. It"
-
-    page "is known to rescue"
-    next "people and carry"
-    next "off prey.@" 
-    
+	db "Its flotation sac developed as a"
+	next "result of pursuing aquatic prey."
+	next "It can double as a rubber raft."

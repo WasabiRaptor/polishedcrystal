@@ -1,10 +1,10 @@
 	db "PUPPY@" ; species name
-	dw 204, 420 ; height, weight
+	dw 7, 190 ; height, weight
 
-	db   "It controls a big"
-	next "territory. If it"
-	next "detects an unknown"
-
-	page "smell, it roars"
-	next "loudly to force"
-	next "out the intruder.@"
+	db "While it’s quite friendly"
+	next "toward humans once it’s"
+	next "grown used to them, in the wild"
+	
+	page "it must be quite fierce to"
+	next "defend its territory from"
+	next "Rockruff."

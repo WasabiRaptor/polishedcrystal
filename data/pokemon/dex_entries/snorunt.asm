@@ -1,10 +1,8 @@
-    db "SNOW HAT@" ; species name
-    dw 204, 370 ; height, weight
+	db "SNOW HAT@" ; species name
+	dw 7, 168 ; height, weight
 
-    db   "It's said that if"
-    next "they are seen at"
-    next "midnight, they'll"
-
-    page "cause heavy snow."
-    next "They eat snow and"
-    next "ice to survive.@" 
+	db "It feeds mainly on ice and snow."
+	next "It’s only able to survive in a"
+	next "limited number of places in the"
+	
+	page "warm Alola region."

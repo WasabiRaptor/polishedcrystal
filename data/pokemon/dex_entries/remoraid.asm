@@ -1,10 +1,9 @@
 	db "JET@" ; species name
-	dw 200, 260 ; height, weight
+	dw 6, 120 ; height, weight
 
-	db   "To escape from an"
-	next "attacker, it may"
-	next "shoot water out of"
-
-	page "its mouth, then"
-	next "use that force to"
-	next "swim backward.@"
+	db "This Pokémon clings to Mantine"
+	next "and shares in its prosperity."
+	next "When its Mantine is attacked,"
+	
+	page "Remoraid will fight alongside"
+	next "it!"

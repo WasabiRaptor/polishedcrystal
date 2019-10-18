@@ -1,10 +1,9 @@
 	db "ROCK@" ; species name
-	dw 104, 440 ; height, weight
+	dw 4, 200 ; height, weight
 
-	db   "Proud of their"
-	next "sturdy bodies,"
-	next "they bash against"
-
-	page "each other in a"
-	next "contest to prove"
-	next "whose is harder.@"
+	db "Geodude that have lived a long"
+	next "life have had all their edges"
+	next "smoothed out until they’re"
+	
+	page "totally round. They also have a"
+	next "calm, quiet disposition."

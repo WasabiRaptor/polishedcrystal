@@ -1,10 +1,9 @@
 	db "KISS@" ; species name
-	dw 104, 130 ; height, weight
+	dw 4, 60 ; height, weight
 
-	db   "The sensitivity of"
-	next "its lips develops"
-	next "most quickly."
-
-	page "It uses them to"
-	next "try to identify"
-	next "unknown objects.@"
+	db "When it examines things, before"
+	next "touching them with its hands, it"
+	next "makes lip contact and then"
+	
+	page "diligently licks all the dirt off"
+	next "its lips."

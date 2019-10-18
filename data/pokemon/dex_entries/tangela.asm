@@ -1,10 +1,12 @@
 	db "VINE@" ; species name
-	dw 303, 770 ; height, weight
+	dw 10, 350 ; height, weight
 
-	db   "During battle, it"
-	next "constantly moves"
-	next "the vines that"
-
-	page "cover its body in"
-	next "order to annoy its"
-	next "opponent.@"
+	db "Tangela’s vines snap off easily"
+	next "if they are grabbed. This"
+	next "happens without pain, allowing"
+	
+	page "it to make a quick getaway. The"
+	next "lost vines are replaced by"
+	next "newly grown vines the very"
+	
+	page "next day."

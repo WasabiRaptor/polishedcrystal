@@ -1,10 +1,12 @@
 	db "FIRE MOUSE@" ; species name
-	dw 108, 170 ; height, weight
+	dw 5, 79 ; height, weight
 
-	db   "The fire that"
-	next "spouts from its"
-	next "back burns hottest"
-
-	page "when it is angry."
-	next "The flaring flames"
-	next "intimidate foes.@"
+	db "Cyndaquil protects itself by"
+	next "flaring up the flames on its"
+	next "back. The flames are vigorous"
+	
+	page "if the Pokémon is angry."
+	next "However, if it is tired, the"
+	next "flames splutter fitfully with"
+	
+	page "incomplete combustion."

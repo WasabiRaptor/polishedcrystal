@@ -1,10 +1,12 @@
 	db "BIG JAW@" ; species name
-	dw 307, 550 ; height, weight
+	dw 11, 250 ; height, weight
 
-	db   "The tips of its"
-	next "fangs are slanted"
-	next "backward. Once"
-
-	page "those fangs clamp"
-	next "down, the prey has"
-	next "no hope of escape.@"
+	db "Once Croconaw has clamped its"
+	next "jaws on its foe, it will"
+	next "absolutely not let go. Because"
+	
+	page "the tips of its fangs are forked"
+	next "back like barbed fishhooks, they"
+	next "become impossible to remove"
+	
+	page "when they have sunk in."

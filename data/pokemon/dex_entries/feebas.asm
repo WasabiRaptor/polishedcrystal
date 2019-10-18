@@ -1,11 +1,9 @@
-    db "FISH@" ; species name
-    dw 200, 163 ; height, weight
+	db "FISH@" ; species name
+	dw 6, 74 ; height, weight
 
-    db   "It is a shabby"
-    next "and ugly Pokémon."
-    next "However, it is"
-
-    page "very hardy and can"
-    next "survive on little"
-    next "water.@" 
-    
+	db "They look ragged, so no one"
+	next "catches them. They look like"
+	next "they’d taste bad, so predators"
+	
+	page "won’t eat them. And their"
+	next "numbers continue to grow."

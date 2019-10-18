@@ -1,10 +1,10 @@
 	db "ELECTRIC@" ; species name
-	dw 503, 1160 ; height, weight
+	dw 16, 526 ; height, weight
 
-	db   "Legendary bird"
-	next "Pokémon. They say"
-	next "lightning caused"
-
-	page "by the flapping of"
-	next "its wings causes"
-	next "summer storms.@"
+	db "Zapdos is a legendary bird"
+	next "Pokémon that has the ability to"
+	next "control electricity. It usually"
+	
+	page "lives in thunderclouds. The"
+	next "Pokémon gains power if it is"
+	next "stricken by lightning bolts."
