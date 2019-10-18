@@ -1,10 +1,13 @@
 	db "SEED@" ; species name
-	dw 303, 290 ; height, weight
+	dw 10, 130 ; height, weight
 
-	db   "The bulb on its"
-	next "back grows as it"
-	next "absorbs nutrients."
-
-	page "The bulb gives off"
-	next "a pleasant aroma"
-	next "when it blooms.@"
+	db "There is a bud on this"
+	next "Pokémon’s back. To support its"
+	next "weight, Ivysaur’s legs and"
+	
+	page "trunk grow thick and strong. If"
+	next "it starts spending more time"
+	next "lying in the sunlight, it’s a sign"
+	
+	page "that the bud will bloom into a"
+	next "large flower soon."

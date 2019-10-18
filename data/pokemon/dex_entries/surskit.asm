@@ -1,10 +1,9 @@
 	db "POND SKATER@" ; species name
-	dw 108, 37 ; height, weight
+	dw 5, 17 ; height, weight
 
-	db   "They usually live"
-	next "on ponds, but"
-	next "after an evening"
-
-	page "shower, they may"
-	next "appear on puddles"
-	next "in towns.@"
+	db "If it’s in a pinch, it will"
+	next "secrete a sweet liquid from the"
+	next "tip of its head. Syrup made"
+	
+	page "from gathering that liquid is"
+	next "tasty on bread."

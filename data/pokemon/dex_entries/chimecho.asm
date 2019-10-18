@@ -1,10 +1,10 @@
 	db "WIND CHIME@" ; species name
-	dw 200, 22 ; height, weight
+	dw 6, 10 ; height, weight
 
-	db   "It uses the sucker"
-	next "on its head to"
-	next "hang from a tree"
+	db "In high winds, Chimecho cries"
+	next "as it hangs from a tree branch"
+	next "or the eaves of a building using"
 	
-	page "or from eaves. It"
-	next "can produce seven"
-	next "different tones.@"
+	page "a suction cup on its head. This"
+	next "Pokémon plucks berries with"
+	next "its long tail and eats them."

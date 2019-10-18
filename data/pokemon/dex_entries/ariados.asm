@@ -1,10 +1,9 @@
 	db "LONG LEG@" ; species name
-	dw 307, 740 ; height, weight
+	dw 11, 335 ; height, weight
 
-	db   "Rather than mak-"
-	next "ing a nest in one"
-	next "specific spot, it"
-
-	page "wanders in search"
-	next "of food after"
-	next "darkness falls.@"
+	db "Every night, it wanders around"
+	next "in search of prey, whose"
+	next "movements it restrains by"
+	
+	page "spewing threads before it bites"
+	next "into them with its fangs."

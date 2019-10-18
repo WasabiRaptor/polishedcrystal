@@ -1,11 +1,6 @@
-    db "BRONZE@" ; species name
-    dw 108, 1334 ; height, weight
+	db "BRONZE@" ; species name
+	dw 5, 605 ; height, weight
 
-    db   "They are found in"
-    next "ancient tombs. The"
-    next "patterns on their"
-
-    page "backs are said to"
-    next "be imbued with"
-    next "mysterious power.@" 
-    
+	db "Implements shaped like it were"
+	next "discovered in ancient tombs. It"
+	next "is unknown if they are related."

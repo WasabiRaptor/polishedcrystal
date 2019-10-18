@@ -1,10 +1,9 @@
-	db "STARSHAPE@" ; species name
-	dw 100, 70 ; height, weight
+	db "STAR SHAPE@" ; species name
+	dw 3, 30 ; height, weight
 
-	db   "If the impact site"
-	next "of a meteorite is"
-	next "found, this"
-
-	page "Pokémon is certain"
-	next "to be within the"
-	next "immediate area.@"
+	db "On nights with many shooting"
+	next "stars, they gather in packs and"
+	next "dance in circles. If you should"
+	
+	page "see them, something good will"
+	next "happen!"

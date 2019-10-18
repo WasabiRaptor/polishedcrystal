@@ -1,9 +1,8 @@
-    db "MUSCULAR@" ; species name
-    dw 407, 1918 ; height, weight
+	db "MUSCULAR@" ; species name
+	dw 14, 870 ; height, weight
 
-    db   "It is thought that"
-    next "Conkeldurr taught"
-    next "humans how to make"
-
-    page "concrete more than"
-    next "2,000 years ago.@"
+	db "Rather than rely on force, they"
+	next "master moves that utilize the"
+	next "centrifugal force of spinning"
+	
+	page "concrete."

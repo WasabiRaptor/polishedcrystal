@@ -1,10 +1,13 @@
-	db "FLYSCORPIO@" ; species name
-	dw 307, 1430 ; height, weight
+	db "FLY SCORPION@" ; species name
+	dw 11, 648 ; height, weight
 
-	db   "It builds its nest"
-	next "on a steep cliff."
-	next "When it is done"
-
-	page "gliding, it hops"
-	next "along the ground"
-	next "back to its nest.@"
+	db "Gligar glides through the air"
+	next "without a sound as if it were"
+	next "sliding. This Pokémon hangs on"
+	
+	page "to the face of its foe using its"
+	next "clawed hind legs and the large"
+	next "pincers on its forelegs, then"
+	
+	page "injects the prey with its poison"
+	next "barb."

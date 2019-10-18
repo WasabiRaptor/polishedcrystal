@@ -1,14 +1,9 @@
-    db "SCALY@" ; species name
-    dw 200, 655 ; height, weight
+	db "SCALY@" ; species name
+	dw 6, 297 ; height, weight
 
-    db   "It expresses its"
-    next "feelings by"
-    next "smacking its"
-
-    page "scales. Metallic"
-    next "sounds echo"
-    next "through the tall" 
-         
-    page "mountains where"
-    next "Jangmo-o lives.@" 
-    
+	db "It smacks the scales on its head"
+	next "against rocks or against the"
+	next "ground to frighten its"
+	
+	page "opponents. It can also contact"
+	next "its friends with these noises."

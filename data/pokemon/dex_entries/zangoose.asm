@@ -1,12 +1,12 @@
-    db "CAT FERRET@" ; species name
-    dw 403, 888 ; height, weight
+	db "CAT FERRET@" ; species name
+	dw 13, 403 ; height, weight
 
-    db   "If it comes across"
-    next "a Seviper, its fur"
-    next "bristles and it"
-
-    page "assumes its battle"
-    next "pose. Its sharp"
-    next "claws are its best" 
-         
-    page "weapon.@"
+	db "Zangoose usually stays on all"
+	next "fours, but when angered, it gets"
+	next "up on its hind legs and extends"
+	
+	page "its claws. This Pokémon shares"
+	next "a bitter rivalry with Seviper"
+	next "that dates back over"
+	
+	page "generations."

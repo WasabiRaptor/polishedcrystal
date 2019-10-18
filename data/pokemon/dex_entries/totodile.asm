@@ -1,10 +1,10 @@
 	db "BIG JAW@" ; species name
-	dw 200, 210 ; height, weight
+	dw 6, 95 ; height, weight
 
-	db   "This rough critter"
-	next "chomps at any"
-	next "moving object it"
-
-	page "sees. Turning your"
-	next "back on it is not"
-	next "recommended.@"
+	db "Despite the smallness of its"
+	next "body, Totodile’s jaws are very"
+	next "powerful. While the Pokémon"
+	
+	page "may think it is just playfully"
+	next "nipping, its bite has enough"
+	next "power to cause serious injury."

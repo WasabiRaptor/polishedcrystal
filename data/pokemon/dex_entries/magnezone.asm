@@ -1,11 +1,6 @@
-    db "MAGNET AREA@" ; species name
-    dw 311, 3968 ; height, weight
+	db "MAGNET AREA@" ; species name
+	dw 12, 1800 ; height, weight
 
-    db   "It evolved from"
-    next "exposure to a"
-    next "special magnetic"
-
-    page "field. Three units"
-    next "generate strong"
-    next "magnetism.@" 
-  
+	db "It uses radar to monitor its"
+	next "territory. Intruders are quickly"
+	next "disposed of with a hyper beam."

@@ -1,10 +1,9 @@
 	db "DRAGON@" ; species name
-	dw 511, 3350 ; height, weight
+	dw 18, 1520 ; height, weight
 
-	db   "It stores energy"
-	next "by sleeping at"
-	next "underwater depths"
-
-	page "at which no other"
-	next "life forms can"
-	next "survive.@"
+	db "Kingdra sleeps on the seafloor"
+	next "where it is otherwise devoid of"
+	next "life. When a storm arrives, the"
+	
+	page "Pokémon is said to awaken and"
+	next "wander about in search of prey."

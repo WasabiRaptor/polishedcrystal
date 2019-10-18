@@ -1,10 +1,8 @@
 	db "DUCK@" ; species name
-	dw 507, 1690 ; height, weight
+	dw 17, 766 ; height, weight
 
-	db   "It swims grace-"
-	next "fully along on the"
-	next "quiet, slow-moving"
-
-	page "rivers and lakes"
-	next "of which it is so"
-	next "fond.@"
+	db "Even fast-swimming fish"
+	next "Pokémon can be disabled by"
+	next "Golduck. It brings them to a"
+	
+	page "standstill and seizes them."

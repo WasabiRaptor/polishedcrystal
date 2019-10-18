@@ -1,10 +1,9 @@
 	db "PIG MONKEY@" ; species name
-	dw 303, 710 ; height, weight
+	dw 10, 320 ; height, weight
 
-	db   "It will beat up"
-	next "anyone who makes"
-	next "it mad, even if it"
-
-	page "has to chase them"
-	next "until the end of"
-	next "the world.@"
+	db "It will never forgive opponents"
+	next "who have angered it. Even after"
+	next "it has beaten them down until"
+	
+	page "they can’t move, it never ever"
+	next "forgives."

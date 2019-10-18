@@ -1,14 +1,9 @@
-    db "WRESTLING@" ; species name
-    dw 207, 474 ; height, weight
+	db "WRESTLING@" ; species name
+	dw 8, 215 ; height, weight
 
-    db   "With its wings, it"
-    next "controls its"
-    next "position in the"
-
-    page "air. It likes to"
-    next "attack from above,"
-    next "a maneuver that is" 
-         
-    page "difficult to"
-    next "defend against.@" 
-      
+	db "It overwhelms opponents with"
+	next "quick moves, but sometimes it"
+	next "showboats for too long when"
+	
+	page "it’s using a special move and"
+	next "gets itself into a pinch."

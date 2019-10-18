@@ -1,10 +1,9 @@
-    db "SHARP CLAW@" ; species name
-    dw 307, 750 ; height, weight
+	db "SHARP CLAW@" ; species name
+	dw 11, 340 ; height, weight
 
-    db   "Evolution made it"
-    next "even more devious."
-    next "It communicates by"
-
-    page "clawing signs in"
-    next "boulders.@"
-    
+	db "One Weavile will trip a"
+	next "Sandshrew and flip it over, and"
+	next "then another Weavile will deal"
+	
+	page "the finishing blow with its"
+	next "sharp claws."

@@ -1,10 +1,12 @@
 	db "BIRD@" ; species name
-	dw 307, 660 ; height, weight
+	dw 11, 300 ; height, weight
 
-	db   "It slowly flies in"
-	next "a circular pat-"
-	next "tern, all the"
-
-	page "while keeping a"
-	next "sharp lookout for"
-	next "prey.@"
+	db "Pidgeotto claims a large area as"
+	next "its own territory. This Pokémon"
+	next "flies around, patrolling its"
+	
+	page "living space. If its territory is"
+	next "violated, it shows no mercy in"
+	next "thoroughly punishing the foe"
+	
+	page "with its sharp claws."

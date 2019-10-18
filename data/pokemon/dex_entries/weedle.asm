@@ -1,10 +1,10 @@
 	db "HAIRY BUG@" ; species name
-	dw 100, 70 ; height, weight
+	dw 3, 32 ; height, weight
 
-	db   "The barb on top of"
-	next "its head secretes"
-	next "a strong poison."
-
-	page "It uses this toxic"
-	next "barb to protect"
-	next "itself.@"
+	db "Weedle has an extremely acute"
+	next "sense of smell. It is capable of"
+	next "distinguishing its favorite kinds"
+	
+	page "of leaves from those it dislikes"
+	next "just by sniffing with its big red"
+	next "proboscis (nose)."

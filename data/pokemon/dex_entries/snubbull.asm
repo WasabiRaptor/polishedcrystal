@@ -1,10 +1,9 @@
 	db "FAIRY@" ; species name
-	dw 200, 170 ; height, weight
+	dw 6, 78 ; height, weight
 
-	db   "In truth, it is a"
-	next "cowardly Pokémon."
-	next "It growls eagerly"
-
-	page "in order to hide"
-	next "its fear from its"
-	next "opponent.@"
+	db "It grows close to others easily"
+	next "and is also easily spoiled. The"
+	next "disparity between its face and"
+	
+	page "its actions makes many young"
+	next "people wild about it."

@@ -1,10 +1,12 @@
 	db "VOLCANO@" ; species name
-	dw 211, 420 ; height, weight
+	dw 9, 190 ; height, weight
 
-	db   "Before battle, it"
-	next "turns its back on"
-	next "its opponent to"
-
-	page "demonstrate how"
-	next "ferociously its"
-	next "fire blazes.@"
+	db "Quilava keeps its foes at bay"
+	next "with the intensity of its flames"
+	next "and gusts of superheated air."
+	
+	page "This Pokémon applies its"
+	next "outstanding nimbleness to dodge"
+	next "attacks even while scorching"
+	
+	page "the foe with flames."

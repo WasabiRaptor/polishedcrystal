@@ -1,9 +1,8 @@
-    db "VIBRATION@" ; species name
-    dw 207, 375 ; height, weight
+	db "VIBRATION@" ; species name
+	dw 8, 170 ; height, weight
 
-    db   "It lives in the"
-    next "water and on land."
-    next "It uses its long,"
-
-    page "sticky tongue to"
-    next "capture prey.@"
+	db "It lives in the water and on"
+	next "land. It uses its long, sticky"
+	next "tongue to immobilize its"
+	
+	page "opponents."

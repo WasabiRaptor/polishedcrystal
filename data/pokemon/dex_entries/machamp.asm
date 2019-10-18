@@ -1,10 +1,8 @@
 	db "SUPERPOWER@" ; species name
-	dw 503, 2870 ; height, weight
+	dw 16, 1300 ; height, weight
 
-	db   "With four arms"
-	next "that react more"
-	next "quickly than it"
-
-	page "can think, it can"
-	next "execute many"
-	next "punches at once.@"
+	db "It grasps its opponents with its"
+	next "four arms and twists them up"
+	next "in an intricate hold. People call"
+	
+	page "it “the Machamp special.”"

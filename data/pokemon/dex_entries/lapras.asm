@@ -1,10 +1,9 @@
 	db "TRANSPORT@" ; species name
-	dw 802, 4850 ; height, weight
+	dw 25, 2200 ; height, weight
 
-	db   "This gentle"
-	next "Pokémon loves to"
-	next "give people rides"
-
-	page "and provides a ve-"
-	next "ry comfortable way"
-	next "to get around.@"
+	db "It likes swimming around with"
+	next "people on its back. In the Alola"
+	next "region, it’s an important"
+	
+	page "means of transportation over"
+	next "water."

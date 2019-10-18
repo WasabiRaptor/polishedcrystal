@@ -1,10 +1,10 @@
 	db "COTTONWEED@" ; species name
-	dw 207, 70 ; height, weight
+	dw 8, 30 ; height, weight
 
-	db   "Even in the fierc-"
-	next "est wind, it can"
-	next "control its fluff"
-
-	page "to make its way to"
-	next "any place in the"
-	next "world it wants.@"
+	db "Jumpluff rides warm southern"
+	next "winds to cross the sea and fly"
+	next "to foreign lands. The Pokémon"
+	
+	page "descends to the ground when it"
+	next "encounters cold air while it is"
+	next "floating."

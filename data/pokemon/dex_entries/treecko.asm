@@ -1,10 +1,12 @@
 	db "WOOD GECKO@" ; species name
-	dw 180, 111 ; height, width
+	dw 5, 50 ; height, weight
 
-	db   "Small hooks on the"
-	next "bottom of its feet"
-	next "catch on walls and"
+	db "Treecko is cool, calm, and"
+	next "collected—it never panics under"
+	next "any situation. If a bigger foe"
 	
-	page "ceilings. That is"
-	next "how it can hang"
-	next "from above.@"
+	page "were to glare at this Pokémon,"
+	next "it would glare right back"
+	next "without conceding an inch of"
+	
+	page "ground."

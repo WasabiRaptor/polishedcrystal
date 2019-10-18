@@ -1,9 +1,8 @@
-    db "STRONG ARM@" ; species name
-    dw 611, 2976 ; height, weight
+	db "STRONG ARM@" ; species name
+	dw 21, 1350 ; height, weight
 
-    db   "Many Trainers have"
-    next "left this world"
-    next "after their spines"
-
-    page "were squashed by"
-    next "its hug.@"
+	db "It waves its hands wildly in"
+	next "intimidation and warning. Life is"
+	next "over for anyone who doesn’t"
+	
+	page "run away as fast as possible."

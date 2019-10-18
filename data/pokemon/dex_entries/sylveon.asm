@@ -1,11 +1,8 @@
 	db "INTERTWINING@" ; species name
-	dw 303, 518 ; height, weight
+	dw 10, 235 ; height, weight
 
-    db   "An evolution of"
-    next "Eevee. Its ribbon-"
-    next "like feelers have"
-
-    page "a soothing aura,"
-    next "allowing it to"
-    next "calm conflicts.@" 
- 
+	db "Once a fight breaks out, it will"
+	next "unflinchingly charge at dragon"
+	next "Pokémon that are many times"
+	
+	page "larger than itself."

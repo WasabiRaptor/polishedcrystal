@@ -1,10 +1,8 @@
-    db "FROST TREE@" ; species name
-    dw 703, 2987 ; height, weight
+	db "FROST TREE@" ; species name
+	dw 22, 1355 ; height, weight
 
-    db   "It blankets wide"
-    next "areas in snow by"
-    next "whipping up"
-    
-    page "blizzards. "
-    next "It's also known as"
-    next "'The Ice Monster.'@"
+	db "It lives a quiet life on"
+	next "mountains that are perpetually"
+	next "covered in snow. It hides itself"
+	
+	page "by whipping up blizzards."

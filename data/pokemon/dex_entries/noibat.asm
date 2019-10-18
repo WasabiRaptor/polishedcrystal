@@ -1,10 +1,8 @@
-    db "SOUND WAVE@" ; species name
-    dw 108, 176 ; height, weight
+	db "SOUND WAVE@" ; species name
+	dw 5, 80 ; height, weight
 
-    db   "It flies around in"
-    next "search of fruit to"
-    next "eat. It uses"
-
-    page "ultrasonic waves"
-    next "to detect which"
-    next "fruits are ripe.@" 
+	db "Fruits are its favorite foods."
+	next "This gourmet carefully picks"
+	next "out just the ripe ones using its"
+	
+	page "sonar."

@@ -1,14 +1,9 @@
-    db "CRYSTALIZING@" ; species name
-    dw 307, 3263 ; height, weight
+	db "CRYSTALLIZING@" ; species name
+	dw 11, 1480 ; height, weight
 
-    db   "When its body"
-    next "temperature goes"
-    next "up, it turns into"
-
-    page "steam and vanishes"
-    next "until its"
-    next "temperature lowers" 
-         
-    page "then it returns to"
-    next "being ice.@" 
-   
+	db "They are composed of ice"
+	next "crystals. They capture prey"
+	next "with chains of ice, freezing the"
+	
+	page "prey at -148 degrees"
+	next "Fahrenheit."

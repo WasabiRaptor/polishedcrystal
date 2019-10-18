@@ -1,10 +1,6 @@
 	db "HYPNOSIS@" ; species name
-	dw 503, 1670 ; height, weight
+	dw 16, 756 ; height, weight
 
-	db   "The longer it"
-	next "swings its"
-	next "pendulum, the"
-
-	page "longer the effects"
-	next "of its hypnosis"
-	next "last.@"
+	db "In Alola, Komala is Hypno’s"
+	next "main target. It rarely harms"
+	next "people."

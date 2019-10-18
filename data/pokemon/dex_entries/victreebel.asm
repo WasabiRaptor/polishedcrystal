@@ -1,10 +1,12 @@
 	db "FLYCATCHER@" ; species name
-	dw 507, 340 ; height, weight
+	dw 17, 155 ; height, weight
 
-	db   "Once ingested into"
-	next "this Pokémon's"
-	next "body, even the"
-
-	page "hardest object"
-	next "will melt into"
-	next "nothing.@"
+	db "Victreebel has a long vine that"
+	next "extends from its head. This vine"
+	next "is waved and flicked about as if"
+	
+	page "it were an animal to attract"
+	next "prey. When an unsuspecting prey"
+	next "draws near, this Pokémon"
+	
+	page "swallows it whole."

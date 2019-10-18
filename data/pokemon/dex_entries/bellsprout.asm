@@ -1,10 +1,12 @@
 	db "FLOWER@" ; species name
-	dw 204, 90 ; height, weight
+	dw 7, 40 ; height, weight
 
-	db   "If it notices"
-	next "anything that"
-	next "moves, it"
-
-	page "immediately flings"
-	next "its vine at the"
-	next "object.@"
+	db "Bellsprout’s thin and flexible"
+	next "body lets it bend and sway to"
+	next "avoid any attack, however"
+	
+	page "strong it may be. From its"
+	next "mouth, this Pokémon spits a"
+	next "corrosive fluid that melts even"
+	
+	page "iron."

@@ -1,13 +1,9 @@
-    db "DRAGON@" ; species name
-    dw 607, 3318 ; height, weight
+	db "DRAGON@" ; species name
+	dw 20, 1505 ; height, weight
 
-    db   "It's very friendly"
-    next "toward people. If"
-    next "you grow close to"
-
-    page "it, Goodra will"
-    next "hug you with its"
-    next "goop-covered body." 
-         
-    page "Don't get mad.@"
- 
+	db "It’s very friendly toward"
+	next "people. If you grow close to it,"
+	next "Goodra will hug you with its"
+	
+	page "sticky, slime-covered body."
+	next "Don’t get mad."

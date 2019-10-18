@@ -1,11 +1,9 @@
-    db "FIRST BIRD@" ; species name
-    dw 407, 705 ; height, weight
+	db "FIRST BIRD@" ; species name
+	dw 14, 320 ; height, weight
 
-    db   "It runs better"
-    next "than it flies. It"
-    next "catches prey by"
-
-    page "running at speeds"
-    next "comparable to that"
-    next "of an automobile.@" 
-   
+	db "This ancient Pokémon’s"
+	next "plumage is delicate, so if"
+	next "anyone other than an"
+	
+	page "experienced professional tries"
+	next "to restore it, they will fail."

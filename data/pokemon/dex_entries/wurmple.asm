@@ -1,10 +1,12 @@
 	db "WORM@" ; species name
-	dw 100, 79 ; height, weight
+	dw 3, 36 ; height, weight
 
-	db   "It lives among the"
-	next "tall grass and in"
-	next "forests. It repels"
-
-	page "attacks by raising"
-	next "up the spikes"
-	next "on its rear.@"
+	db "Wurmple is targeted by"
+	next "Swellow as prey. This Pokémon"
+	next "will try to resist by pointing the"
+	
+	page "spikes on its rear at the"
+	next "attacking predator. It will"
+	next "weaken the foe by leaking"
+	
+	page "poison from the spikes."

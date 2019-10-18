@@ -1,10 +1,6 @@
 	db "SEAGULL@" ; species name
-	dw 200, 209 ; height, weight
+	dw 6, 95 ; height, weight
 
-	db   "It rides upon"
-	next "ocean winds as if"
-	next "it were a glider."
-
-	page "In the winter, it"
-	next "hides food around"
-	next "its nest.@"
+	db "With its long, thin wings, it"
+	next "catches updrafts and flies like"
+	next "a glider high up into the sky."

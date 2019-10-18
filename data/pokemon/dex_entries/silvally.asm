@@ -1,13 +1,8 @@
-    db "SYNTHETIC@" ; species name
-    dw 707, 2216 ; height, weight
+	db "SYNTHETIC@" ; species name
+	dw 23, 1005 ; height, weight
 
-    db   "An attempt at"
-    next "re-creating the"
-    next "power of Arceus."
-
-    page "Once the helmet"
-    next "is removed it can"
-    next "change type with" 
-         
-    page "a silver energy"
-    next "that bursts forth.@" 
+	db "This is its form once it has"
+	next "awakened and evolved. Freed"
+	next "from its heavy mask, its speed"
+	
+	page "is greatly increased."

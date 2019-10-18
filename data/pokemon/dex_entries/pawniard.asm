@@ -1,13 +1,9 @@
-    db "SHARP BLADE@" ; species name
-    dw 108, 225 ; height, weight
+	db "SHARP BLADE@" ; species name
+	dw 5, 102 ; height, weight
 
-    db   "They fight at"
-    next "Bisharp's command."
-    next "They cling to"
-
-    page "their prey and"
-    next "inflict damage by"
-    next "sinking their" 
-         
-    page "blades into it.@"
-     
+	db "After shredding its prey, it"
+	next "sharpens its blades on a stone"
+	next "by the river. Each Pawniard has"
+	
+	page "its own favorite sharpening"
+	next "stone."

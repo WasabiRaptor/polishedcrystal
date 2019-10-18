@@ -1,10 +1,8 @@
-    db "CANDLE@" ; species name
-    dw 100, 68 ; height, weight
+	db "CANDLE@" ; species name
+	dw 3, 31 ; height, weight
 
-    db   "While shining a"
-    next "light and"
-    next "pretending to be a"
-
-    page "guide, it leeches"
-    next "off the life force"
-    next "of any who follow.@" 
+	db "Litwick shines a light that"
+	next "absorbs the life energy of"
+	next "people and Pokémon, which"
+	
+	page "becomes the fuel that it burns."

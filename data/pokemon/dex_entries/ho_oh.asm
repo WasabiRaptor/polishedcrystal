@@ -1,10 +1,12 @@
 	db "RAINBOW@" ; species name
-	dw 1206, 4390 ; height, weight
+	dw 38, 1990 ; height, weight
 
-	db   "It will reveal"
-	next "itself before a"
-	next "pure-hearted"
-
-	page "trainer by shining"
-	next "its bright rain-"
-	next "bow-colored wings.@"
+	db "Ho-Oh’s feathers glow in"
+	next "seven colors depending on the"
+	next "angle at which they are struck"
+	
+	page "by light. These feathers are"
+	next "said to bring happiness to the"
+	next "bearers. This Pokémon is said"
+	
+	page "to live at the foot of a rainbow."

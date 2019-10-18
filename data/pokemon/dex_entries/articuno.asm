@@ -1,10 +1,10 @@
 	db "FREEZE@" ; species name
-	dw 507, 1220 ; height, weight
+	dw 17, 554 ; height, weight
 
-	db   "Legendary bird"
-	next "Pokémon. As it"
-	next "flies through the"
-
-	page "sky, it cools the"
-	next "air, causing snow"
-	next "to fall.@"
+	db "Articuno is a legendary bird"
+	next "Pokémon that can control ice."
+	next "The flapping of its wings chills"
+	
+	page "the air. As a result, it is said"
+	next "that when this Pokémon flies,"
+	next "snow will fall."

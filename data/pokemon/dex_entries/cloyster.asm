@@ -1,10 +1,8 @@
 	db "BIVALVE@" ; species name
-	dw 411, 2920 ; height, weight
+	dw 15, 1325 ; height, weight
 
-	db   "Even a missile"
-	next "can't break the"
-	next "spikes it uses to"
-
-	page "stab opponents."
-	next "They're even hard-"
-	next "er than its shell.@"
+	db "If areas of Cloyster’s very"
+	next "hard shell get damaged, those"
+	next "areas swell, gradually growing"
+	
+	page "into large sharp spikes."

@@ -1,10 +1,10 @@
 	db "SUN@" ; species name
-	dw 207, 190 ; height, weight
+	dw 8, 85 ; height, weight
 
-	db   "As the hot season"
-	next "approaches, the"
-	next "petals on this"
-
-	page "Pokémon's face"
-	next "become more vivid"
-	next "and lively.@"
+	db "Sunflora converts solar energy"
+	next "into nutrition. It moves around"
+	next "actively in the daytime when it"
+	
+	page "is warm. It stops moving as"
+	next "soon as the sun goes down for"
+	next "the night."

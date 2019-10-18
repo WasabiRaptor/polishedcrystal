@@ -1,10 +1,8 @@
 	db "WOOL@" ; species name
-	dw 200, 170 ; height, weight
+	dw 6, 78 ; height, weight
 
-	db   "It stores lots of"
-	next "air in its soft"
-	next "fur, allowing it"
-
-	page "to stay cool in"
-	next "summer and warm"
-	next "in winter.@"
+	db "Clothing made from Mareep’s"
+	next "fleece is easily charged with"
+	next "static electricity, so a special"
+	
+	page "process is used on it."

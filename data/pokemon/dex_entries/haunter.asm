@@ -1,10 +1,8 @@
 	db "GAS@" ; species name
-	dw 503, 2 ; height, weight
+	dw 16, 1 ; height, weight
 
-	db   "It hides in the"
-	next "dark, planning to"
-	next "take the life of"
-
-	page "the next living"
-	next "thing that wanders"
-	next "close by.@"
+	db "On moonless nights, Haunter"
+	next "searches for someone to curse,"
+	next "so it’s best not to go out"
+	
+	page "walking around."

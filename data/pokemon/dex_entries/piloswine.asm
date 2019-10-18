@@ -1,10 +1,10 @@
 	db "SWINE@" ; species name
-	dw 307, 1230 ; height, weight
+	dw 11, 558 ; height, weight
 
-	db   "Although its legs"
-	next "are short, its"
-	next "rugged hooves"
-
-	page "prevent it from"
-	next "slipping, even on"
-	next "icy ground.@"
+	db "Piloswine is covered by a thick"
+	next "coat of long hair that enables it"
+	next "to endure the freezing cold."
+	
+	page "This Pokémon uses its tusks to"
+	next "dig up food that has been buried"
+	next "under ice."

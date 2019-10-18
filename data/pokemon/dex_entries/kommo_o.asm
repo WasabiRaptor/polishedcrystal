@@ -1,12 +1,9 @@
-    db "SCALY@" ; species name
-    dw 503, 1724 ; height, weight
+	db "SCALY@" ; species name
+	dw 16, 782 ; height, weight
 
-    db   "When it spots"
-    next "enemies, it"
-    next "threatens them by"
-
-    page "jingling scales on"
-    next "its tail. Weak"
-    next "opponents will" 
-         
-    page "flee in panic.@"
+	db "When it howls after finishing"
+	next "off its prey, the metallic"
+	next "sounds of its celebrating"
+	
+	page "comrades can be heard from all"
+	next "around."

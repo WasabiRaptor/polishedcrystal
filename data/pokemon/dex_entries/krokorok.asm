@@ -1,10 +1,8 @@
-    db "DESERT CROC@" ; species name
-    dw 303, 736 ; height, weight
+	db "DESERT CROC@" ; species name
+	dw 10, 334 ; height, weight
 
-    db   "They live in"
-    next "groups of a few"
-    next "individuals."
-
-    page "Special membranes"
-    next "shield their eyes"
-    next "from sandstorms.@" 
+	db "Krokorok really hates it when"
+	next "its body gets cold. On nights"
+	next "when the temperature drops, it"
+	
+	page "digs deep into the desert sands."

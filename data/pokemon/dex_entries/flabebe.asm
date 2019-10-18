@@ -1,14 +1,9 @@
-    db "SINGLE BLOOM@" ; species name
-    dw 4, 2 ; height, weight
+	db "SINGLE BLOOM@" ; species name
+	dw 1, 1 ; height, weight
 
-    db   "When it finds a"
-    next "flower it likes,"
-    next "it dwells on that"
-
-    page "flower its whole"
-    next "life long. It"
-    next "follows the wind's" 
-         
-    page "embrace with an"
-    next "untroubled heart.@" 
-    
+	db "It’s not safe without the"
+	next "power of a flower, but it will"
+	next "keep traveling around until it"
+	
+	page "finds one with the color and"
+	next "shape it wants."

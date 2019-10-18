@@ -1,14 +1,8 @@
-    db "SOFT TISSUE@" ; species name
-    dw 207, 386 ; height, weight
+	db "SOFT TISSUE@" ; species name
+	dw 8, 175 ; height, weight
 
-    db   "It has trouble"
-    next "drawing a line"
-    next "between friends"
-
-    page "and food. It will"
-    next "calmly try to melt"
-    next "and eat even those" 
-         
-    page "it gets along well"
-    next "with.@" 
-     
+	db "It crawls along sluggishly. The"
+	next "swirly protrusion on its back is"
+	next "filled with its brain and other"
+	
+	page "organs."

@@ -1,10 +1,8 @@
-	db "SCISSORS@" ; species name
-	dw 511, 2600 ; height, weight
+	db "PINCER@" ; species name
+	dw 18, 1180 ; height, weight
 
-	db   "This Pokémon's"
-	next "pincers, which"
-	next "contain steel, can"
-
-	page "crush any hard"
-	next "object it gets a"
-	next "hold of into bits.@"
+	db "Its body is like steel. Its tough,"
+	next "heavy pincers are more suited"
+	next "to smashing enemies than"
+	
+	page "grabbing them."

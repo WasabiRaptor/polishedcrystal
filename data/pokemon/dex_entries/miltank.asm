@@ -1,10 +1,9 @@
 	db "MILK COW@" ; species name
-	dw 311, 1660 ; height, weight
+	dw 12, 755 ; height, weight
 
-	db   "In order to milk a"
-	next "MILTANK, one must"
-	next "have a knack for"
-
-	page "rhythmically pull-"
-	next "ing up and down"
-	next "on its udders.@"
+	db "It produces over five gallons of"
+	next "milk a day. The higher the"
+	next "quality of the pastures it lives"
+	
+	page "in, the richer and tastier its"
+	next "milk becomes."

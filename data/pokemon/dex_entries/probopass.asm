@@ -1,10 +1,8 @@
-    db "COMPASS@" ; species name
-    dw 407, 7896 ; height, weight
+	db "COMPASS@" ; species name
+	dw 14, 3400 ; height, weight
 
-    db   "It freely controls"
-    next "three small units"
-    next "called Mini-Noses"
-
-    page "using magnetic"
-    next "force.@"
- 
+	db "Although it can control its units"
+	next "known as Mini-Noses, they"
+	next "sometimes get lost and don’t"
+	
+	page "come back."

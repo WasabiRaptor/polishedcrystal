@@ -1,10 +1,8 @@
 	db "LONELY@" ; species name
-	dw 104, 140 ; height, weight
+	dw 4, 65 ; height, weight
 
-	db   "It lost its mother"
-	next "after its birth."
-	next "It wears its"
-
-	page "mother's skull,"
-	next "never revealing"
-	next "its true face.@"
+	db "At night, it weeps loudly for its"
+	next "dead mother, but those cries"
+	next "only attract its natural"
+	
+	page "enemy—Mandibuzz."

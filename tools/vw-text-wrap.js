@@ -13,7 +13,7 @@ const widths = {
 	"6": 5 +1, "7": 5 +1, "8": 5 +1, "9": 5 +1, "/": 4 +1, " ": 3
 };
 
-function wrapString(first, input, maxWidth = 18*8) {
+function wrapString(first, input, maxWidth = 18*8, nextline = "line", para = "para", cont = "cont", paralines = 2) {
     let lines = [];
     let lineWidth = 0;
     let currentLine = "";
@@ -43,12 +43,13 @@ function wrapString(first, input, maxWidth = 18*8) {
     return lines.map((line, i)=>{
         let start;
         if (i == 0) start = first;
-        else if (i % 2) start = "line";
-        else if (i == lines.length - 1) start = "cont";
-        else start = "para";
+        else if (i % paralines) start = nextline;
+        else if (i == lines.length - 1) start = cont;
+        else start = para;
         return `\t${start} "${line.substr(1)}"`;
         }).join("\n");
 }
+if (process.argv[2])
 fs.open(process.argv[2], "r+", (err, fd) => {
     if (err) {
         console.error(err);
@@ -76,3 +77,4 @@ fs.open(process.argv[2], "r+", (err, fd) => {
         });
     });
 });
+else module.exports = {wrapString};

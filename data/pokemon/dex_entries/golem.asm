@@ -1,10 +1,8 @@
 	db "MEGATON@" ; species name
-	dw 407, 6620 ; height, weight
+	dw 14, 3000 ; height, weight
 
-	db   "Its rock-like body"
-	next "is so durable,"
-	next "even high-powered"
-
-	page "dynamite blasts"
-	next "fail to scratch"
-	next "its rugged hide.@"
+	db "When Golem grow old, they stop"
+	next "shedding their shells. Those that"
+	next "have lived a long, long time"
+	
+	page "have shells green with moss."

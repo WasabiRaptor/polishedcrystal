@@ -1,10 +1,10 @@
 	db "LONG NECK@" ; species name
-	dw 411, 910 ; height, weight
+	dw 15, 415 ; height, weight
 
-	db   "When it is in"
-	next "danger, its tail"
-	next "uses some sort of"
-
-	page "mysterious powers"
-	next "to drive away the"
-	next "enemy.@"
+	db "Girafarig’s rear head contains"
+	next "a tiny brain that is too small"
+	next "for thinking. However, the rear"
+	
+	page "head doesn’t need to sleep, so"
+	next "it can keep watch over its"
+	next "surroundings 24 hours a day."

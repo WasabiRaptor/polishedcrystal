@@ -1,14 +1,9 @@
-    db "TEAMWORK@" ; species name
-    dw 607, 1825 ; height, weight
+	db "TEAMWORK@" ; species name
+	dw 20, 828 ; height, weight
 
-    db   "They use their"
-    next "saliva to stick"
-    next "leaves to their"
-
-    page "shoulders. You can"
-    next "tell what troop"
-    next "they belong to" 
-         
-    page "from the position"
-    next "of the leaves.@" 
-      
+	db "They use their saliva to stick"
+	next "leaves to their shoulders. You"
+	next "can tell what troop they belong"
+	
+	page "to from the position of the"
+	next "leaves."

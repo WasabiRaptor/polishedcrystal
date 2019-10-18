@@ -1,11 +1,10 @@
-    db "HUMMING@" ; species name
-    dw 307, 454 ; height, weight
+	db "HUMMING@" ; species name
+	dw 11, 206 ; height, weight
 
-    db   "If you hear a"
-    next "beautiful melody"
-    next "trilling among"
-
-    page "mountains far from"
-    next "people, then it is"
-    next "Altaria's humming.@"
-   
+	db "Altaria sings in a gorgeous"
+	next "soprano. Its wings are like"
+	next "cotton clouds. This Pokémon"
+	
+	page "catches updrafts with its"
+	next "buoyant wings and soars way up"
+	next "into the wild blue yonder."

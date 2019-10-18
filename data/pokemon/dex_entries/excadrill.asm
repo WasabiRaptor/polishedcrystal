@@ -1,10 +1,8 @@
-    db "SUBTERRENE@" ; species name
-    dw 204, 891 ; height, weight
+	db "SUBTERRENE@" ; species name
+	dw 7, 404 ; height, weight
 
-    db   "It can help in"
-    next "tunneling. Its"
-    next "drill has evolved"
-
-    page "enough to bore"
-    next "through iron"
-    next "plates.@" 
+	db "More than 300 feet below the"
+	next "surface, they build mazelike"
+	next "nests. Their activity can be"
+	
+	page "destructive to subway tunnels."

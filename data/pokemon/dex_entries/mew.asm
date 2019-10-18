@@ -1,10 +1,10 @@
-	db "NEW SPECIE@" ; species name
-	dw 104, 90 ; height, weight
+	db "NEW SPECIES@" ; species name
+	dw 4, 40 ; height, weight
 
-	db   "Because it can"
-	next "learn any move,"
-	next "some people began"
-
-	page "research to see if"
-	next "it is the ancestor"
-	next "of all Pokémon.@"
+	db "Mew is said to possess the"
+	next "genetic composition of all"
+	next "Pokémon. It is capable of"
+	
+	page "making itself invisible at will,"
+	next "so it entirely avoids notice even"
+	next "if it approaches people."

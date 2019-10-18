@@ -1,14 +1,12 @@
-    db "FANG SNAKE@" ; species name
-    dw 810, 1157 ; height, weight
+	db "FANG SNAKE@" ; species name
+	dw 27, 525 ; height, weight
 
-    db   "Seviper and"
-    next "Zangoose are"
-    next "eternal rivals. It"
-
-    page "counters a their"
-    next "agility with its"
-    next "swordlike tail," 
-         
-    page "which oozes a"
-    next "horrible poison.@" 
-      
+	db "Seviper’s swordlike tail"
+	next "serves two purposes—it"
+	next "slashes foes and douses them"
+	
+	page "with secreted poison. This"
+	next "Pokémon will not give up its"
+	next "long-running blood feud with"
+	
+	page "Zangoose."

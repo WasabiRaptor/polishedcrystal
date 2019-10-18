@@ -1,10 +1,10 @@
-	db "SCOUT@" ; species name
-	dw 207, 130 ; height, weight
+	db "TINY RACCOON@" ; species name
+	dw 4, 175 ; height, weight
 
-	db   "When acting as a"
-	next "lookout, it warns"
-	next "others of danger"
-
-	page "by screeching and"
-	next "hitting the ground"
-	next "with its tail.@"
+	db "The hair on Zigzagoon’s back is"
+	next "bristly. It rubs the hard back"
+	next "hair against trees to leave its"
+	
+	page "territorial markings. This"
+	next "Pokémon may play dead to fool"
+	next "foes in battle."

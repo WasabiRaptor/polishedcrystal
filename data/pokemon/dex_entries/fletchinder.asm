@@ -1,11 +1,9 @@
-    db "EMBER@" ; species name
-    dw 204, 353 ; height, weight
+	db "EMBER@" ; species name
+	dw 7, 160 ; height, weight
 
-    db   "It doesn't tolerate"
-    next "other Fletchinder"
-    next "entering its"
-
-    page "territory, which"
-    next "has a radius of"
-    next "several miles.@" 
-    
+	db "It scatters embers in the tall"
+	next "grass. Then bug Pokémon,"
+	next "frightened by the flames, come"
+	
+	page "flying out, and Fletchinder"
+	next "gobbles them up."
