@@ -5,5 +5,5 @@
 	next "way through dirt to the"
 	next "surface, where its parents are."
 	
-	page "It doesn’t deal well with the"
+	page "It doesn't deal well with the"
 	next "bright light it finds there."

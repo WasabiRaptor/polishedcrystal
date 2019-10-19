@@ -3,7 +3,7 @@
 
 	db "Upon hearing an upbeat and"
 	next "cheerful rhythm, the cells in"
-	next "Ludicolo’s body become very"
+	next "Ludicolo's body become very"
 	
 	page "energetic and active. Even in"
 	next "battle, this Pokémon will"

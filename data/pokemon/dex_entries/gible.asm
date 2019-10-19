@@ -5,5 +5,5 @@
 	next "moves—flies right at it and"
 	next "bites it. Sometimes it injures"
 	
-	page "itself, but it doesn’t care too"
+	page "itself, but it doesn't care too"
 	next "much."

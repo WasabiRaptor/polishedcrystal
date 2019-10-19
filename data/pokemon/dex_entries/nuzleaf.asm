@@ -3,7 +3,7 @@
 
 	db "This Pokémon pulls out the leaf"
 	next "on its head and makes a flute"
-	next "with it. The sound of Nuzleaf’s"
+	next "with it. The sound of Nuzleaf's"
 	
 	page "flute strikes fear and"
 	next "uncertainty in the hearts of"

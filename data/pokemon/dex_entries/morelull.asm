@@ -3,7 +3,7 @@
 
 	db "It scatters its shining spores"
 	next "around itself. Even though"
-	next "they’re dangerous, nighttime"
+	next "they're dangerous, nighttime"
 	
 	page "tours of forests where"
 	next "Morelull live are popular."

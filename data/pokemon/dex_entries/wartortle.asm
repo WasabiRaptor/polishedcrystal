@@ -7,6 +7,6 @@
 	
 	page "color as Wartortle ages. The"
 	next "scratches on its shell are"
-	next "evidence of this Pokémon’s"
+	next "evidence of this Pokémon's"
 	
 	page "toughness as a battler."

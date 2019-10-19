@@ -5,6 +5,6 @@
 	next "shakes its body and scatters"
 	next "spores from the top of its head."
 	
-	page "This Pokémon’s spores are so"
+	page "This Pokémon's spores are so"
 	next "toxic, they make trees and"
 	next "weeds wilt."

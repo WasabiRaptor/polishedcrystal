@@ -1050,6 +1050,7 @@ DoDexSearchSlowpokeFrame: ; 44207
 	db -1
 
 DisplayDexEntry: ; 4424d
+	VWTextStart $b6
 	lb bc, 9, 12
 	hlcoord 8, 1
 	call ClearBox

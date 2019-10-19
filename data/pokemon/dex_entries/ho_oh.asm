@@ -1,7 +1,7 @@
 	db "RAINBOW@" ; species name
 	dw 38, 1990 ; height, weight
 
-	db "Ho-Oh’s feathers glow in"
+	db "Ho-Oh's feathers glow in"
 	next "seven colors depending on the"
 	next "angle at which they are struck"
 	

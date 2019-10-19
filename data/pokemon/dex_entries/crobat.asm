@@ -3,7 +3,7 @@
 
 	db "Its fangs are so sharp, if it"
 	next "bites you in the dark and sucks"
-	next "your blood, you won’t notice"
+	next "your blood, you won't notice"
 	
-	page "any pain or realize you’ve been"
+	page "any pain or realize you've been"
 	next "bitten."

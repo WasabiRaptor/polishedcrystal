@@ -3,6 +3,6 @@
 
 	db "The turning of the seasons"
 	next "changes the color and scent of"
-	next "this Pokémon’s fur. People use"
+	next "this Pokémon's fur. People use"
 	
 	page "it to mark the seasons."

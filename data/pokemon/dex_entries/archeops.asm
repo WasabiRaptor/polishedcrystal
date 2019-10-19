@@ -1,7 +1,7 @@
 	db "FIRST BIRD@" ; species name
 	dw 14, 320 ; height, weight
 
-	db "This ancient Pokémon’s"
+	db "This ancient Pokémon's"
 	next "plumage is delicate, so if"
 	next "anyone other than an"
 	

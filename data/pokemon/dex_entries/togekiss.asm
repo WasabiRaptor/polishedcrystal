@@ -3,6 +3,6 @@
 
 	db "It shares many blessings with"
 	next "people who respect one"
-	next "another’s rights and avoid"
+	next "another's rights and avoid"
 	
 	page "needless strife."

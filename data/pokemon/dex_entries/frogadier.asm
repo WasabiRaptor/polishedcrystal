@@ -3,4 +3,4 @@
 
 	db "Its swiftness is unparalleled. It"
 	next "can scale a tower of more than"
-	next "2,000 feet in a minute’s time."
+	next "2,000 feet in a minute's time."

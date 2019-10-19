@@ -6,5 +6,5 @@
 	next "survives on just one berry a"
 	
 	page "day. Minimal eating is another"
-	next "aspect of this Pokémon’s"
+	next "aspect of this Pokémon's"
 	next "training."

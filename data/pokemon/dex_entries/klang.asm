@@ -5,4 +5,4 @@
 	next "comprise its body. If the"
 	next "minigear it launches at a foe"
 	
-	page "doesn’t return, it will die."
+	page "doesn't return, it will die."

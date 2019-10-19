@@ -1,7 +1,7 @@
 	db "HEEL@" ; species name
 	dw 18, 830 ; height, weight
 
-	db "Although it’s rough mannered"
+	db "Although it's rough mannered"
 	next "and egotistical, it finds beating"
 	next "down unworthy opponents"
 	

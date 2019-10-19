@@ -61,9 +61,9 @@ win battle - “Hmph. Get lost.”
 post-battle - “My pa owns the ship that brings people here.”
 
 Swimmer(F) (Bolla):
-pre-battle - “When I swim out here it’s like I’m in my own little bubble.”
+pre-battle - “When I swim out here it's like I'm in my own little bubble.”
 win battle - “You burst my bubble!”
-post-battle - “We all live in our own bubbles. It’s not until they pop that we see what life is like for others.”
+post-battle - “We all live in our own bubbles. It's not until they pop that we see what life is like for others.”
 party - Something with Bubblebeam
 
 1: “Is this your first visit to Shamouti Island? It's a tropical paradise rich in natural history. You may also see some interesting Pokemon here.”

@@ -3,6 +3,6 @@
 
 	db "It travels by digging through"
 	next "the ground. Diglett and"
-	next "Dunsparce share one another’s"
+	next "Dunsparce share one another's"
 	
 	page "tunnels happily."

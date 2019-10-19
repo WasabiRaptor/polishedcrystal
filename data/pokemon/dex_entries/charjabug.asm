@@ -5,5 +5,5 @@
 	next "and barely moves, munching"
 	next "away on humus. If you"
 	
-	page "accidentally step on one, you’ll"
+	page "accidentally step on one, you'll"
 	next "get a shock!"

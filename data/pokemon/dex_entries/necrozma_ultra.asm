@@ -5,5 +5,5 @@
 	next "rages around in search of light,"
 	next "which serves as its energy."
 	
-	page "It’s apparently from another"
+	page "It's apparently from another"
 	next "world."

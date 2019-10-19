@@ -5,5 +5,5 @@
 	next "who have angered it. Even after"
 	next "it has beaten them down until"
 	
-	page "they can’t move, it never ever"
+	page "they can't move, it never ever"
 	next "forgives."

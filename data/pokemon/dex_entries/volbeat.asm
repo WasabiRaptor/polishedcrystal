@@ -1,7 +1,7 @@
 	db "FIREFLY@" ; species name
 	dw 7, 177 ; height, weight
 
-	db "Volbeat’s tail glows like a"
+	db "Volbeat's tail glows like a"
 	next "lightbulb. With other Volbeat, it"
 	next "uses its tail to draw geometric"
 	

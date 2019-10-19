@@ -1,7 +1,7 @@
 	db "KICKING@" ; species name
 	dw 15, 498 ; height, weight
 
-	db "Hitmonlee’s legs freely"
+	db "Hitmonlee's legs freely"
 	next "contract and stretch. Using"
 	next "these springlike legs, it bowls"
 	

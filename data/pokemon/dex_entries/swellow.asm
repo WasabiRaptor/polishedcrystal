@@ -6,5 +6,5 @@
 	next "wings. Once two Swellow are"
 	
 	page "gathered, they diligently take"
-	next "care of cleaning each other’s"
+	next "care of cleaning each other's"
 	next "wings."

@@ -6,7 +6,7 @@
 	next "However, even though the"
 	
 	page "scientific power of humans"
-	next "created this Pokémon’s body,"
+	next "created this Pokémon's body,"
 	next "they failed to endow Mewtwo"
 	
 	page "with a compassionate heart."

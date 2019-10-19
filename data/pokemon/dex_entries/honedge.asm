@@ -3,7 +3,7 @@
 
 	db "If anyone dares to grab its hilt,"
 	next "it wraps a blue cloth around"
-	next "that person’s arm and drains"
+	next "that person's arm and drains"
 	
-	page "that person’s life energy"
+	page "that person's life energy"
 	next "completely."

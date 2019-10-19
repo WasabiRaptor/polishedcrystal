@@ -5,5 +5,5 @@
 	next "quick moves, but sometimes it"
 	next "showboats for too long when"
 	
-	page "it’s using a special move and"
+	page "it's using a special move and"
 	next "gets itself into a pinch."

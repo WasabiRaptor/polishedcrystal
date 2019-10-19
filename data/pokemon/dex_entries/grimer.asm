@@ -5,5 +5,5 @@
 	next "ocean floor. In a sterile"
 	next "environment, the germs within"
 	
-	page "its body can’t multiply, and it"
+	page "its body can't multiply, and it"
 	next "dies."

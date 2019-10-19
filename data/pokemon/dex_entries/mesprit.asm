@@ -3,6 +3,6 @@
 
 	db "It sleeps at the bottom of a"
 	next "lake. Its spirit is said to leave"
-	next "its body to fly on the lake’s"
+	next "its body to fly on the lake's"
 	
 	page "surface."

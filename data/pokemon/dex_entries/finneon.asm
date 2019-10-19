@@ -3,7 +3,7 @@
 
 	db "When night falls, their pink"
 	next "patterns begin to shine."
-	next "They’re popular with divers,"
+	next "They're popular with divers,"
 	
 	page "so there are resorts that feed"
 	next "them to keep them close."

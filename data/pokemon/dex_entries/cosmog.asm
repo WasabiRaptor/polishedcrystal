@@ -5,4 +5,4 @@
 	next "gaseous body can be blown away"
 	next "by the slightest breeze, it"
 	
-	page "doesn’t seem to care."
+	page "doesn't seem to care."

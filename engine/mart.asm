@@ -1450,7 +1450,7 @@ Text_BTMart_CostsThisMuch:
 	db "@"
 
 Text_BTMart_InsufficientFunds:
-	; I'm sorry, but you don’t have enough BP.
+	; I'm sorry, but you don't have enough BP.
 	text_jump BTMartInsufficientFundsText
 	db "@"
 

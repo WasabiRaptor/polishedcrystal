@@ -7,6 +7,6 @@
 	
 	page "continuously. Because of this"
 	next "quality, this Pokémon is said to"
-	next "be one that puts the Trainer’s"
+	next "be one that puts the Trainer's"
 	
 	page "abilities to the test."

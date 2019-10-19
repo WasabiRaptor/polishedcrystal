@@ -6,4 +6,4 @@
 	next "females most of their food. Due"
 	
 	page "to malnutrition, the males"
-	next "can’t evolve."
+	next "can't evolve."

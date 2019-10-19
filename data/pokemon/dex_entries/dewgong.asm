@@ -5,5 +5,5 @@
 	next "speed of eight knots, searching"
 	next "for Pokémon that will become"
 	
-	page "its prey. It’s especially fond of"
+	page "its prey. It's especially fond of"
 	next "Wishiwashi."

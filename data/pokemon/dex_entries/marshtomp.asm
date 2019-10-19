@@ -3,7 +3,7 @@
 
 	db "Marshtomp is much faster at"
 	next "traveling through mud than it is"
-	next "at swimming. This Pokémon’s"
+	next "at swimming. This Pokémon's"
 	
 	page "hindquarters exhibit obvious"
 	next "development, giving it the"

@@ -6,7 +6,7 @@
 	next "Instead of walking, it moves by"
 	
 	page "floating in midair. The"
-	next "Pokémon’s intimidating red"
+	next "Pokémon's intimidating red"
 	next "eyes cause all those who see it"
 	
 	page "to become transfixed with fear."

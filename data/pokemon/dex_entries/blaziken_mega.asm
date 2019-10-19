@@ -5,6 +5,6 @@
 	next "legs—it can easily clear a"
 	next "30-story building in one leap."
 	
-	page "This Pokémon’s blazing"
+	page "This Pokémon's blazing"
 	next "punches leave its foes scorched"
 	next "and blackened."

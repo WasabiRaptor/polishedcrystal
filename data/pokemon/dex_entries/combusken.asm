@@ -6,5 +6,5 @@
 	next "from its beak and with"
 	
 	page "outstandingly destructive kicks."
-	next "This Pokémon’s cry is very"
+	next "This Pokémon's cry is very"
 	next "loud and distracting."

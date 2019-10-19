@@ -3,6 +3,6 @@
 
 	db "On moonless nights, Haunter"
 	next "searches for someone to curse,"
-	next "so it’s best not to go out"
+	next "so it's best not to go out"
 	
 	page "walking around."

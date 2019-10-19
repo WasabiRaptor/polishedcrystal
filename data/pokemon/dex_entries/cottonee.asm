@@ -6,4 +6,4 @@
 	next "gets wet in the rain, its cotton"
 	
 	page "grows moist and heavy, and it"
-	next "can’t move as well."
+	next "can't move as well."

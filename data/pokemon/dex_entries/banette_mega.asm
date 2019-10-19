@@ -1,7 +1,7 @@
 	db "MARIONETTE@" ; species name
 	dw 12, 130 ; height, weight
 
-	db "It’s a stuffed toy that was"
+	db "It's a stuffed toy that was"
 	next "thrown away and became"
 	next "possessed, ever searching for"
 	

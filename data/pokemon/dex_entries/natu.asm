@@ -1,7 +1,7 @@
 	db "TINY BIRD@" ; species name
 	dw 2, 20 ; height, weight
 
-	db "Although it still can’t fly, its"
+	db "Although it still can't fly, its"
 	next "jumping power is outstanding. It"
 	next "jumps way up into trees and"
 	

@@ -3,6 +3,6 @@
 
 	db "The longer its black fur grows,"
 	next "the harder and more impervious"
-	next "it gets. Claws and fangs can’t"
+	next "it gets. Claws and fangs can't"
 	
 	page "easily penetrate it."

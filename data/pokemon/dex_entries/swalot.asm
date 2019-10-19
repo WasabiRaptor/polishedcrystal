@@ -7,4 +7,4 @@
 	
 	page "mouth yawns widely. An"
 	next "automobile tire could easily fit"
-	next "inside this Pokémon’s mouth."
+	next "inside this Pokémon's mouth."

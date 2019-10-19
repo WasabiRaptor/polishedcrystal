@@ -1,7 +1,7 @@
 	db "COTTONWEED@" ; species name
 	dw 6, 10 ; height, weight
 
-	db "Skiploom’s flower blossoms"
+	db "Skiploom's flower blossoms"
 	next "when the temperature rises"
 	next "above 64 degrees Fahrenheit."
 	

@@ -3,6 +3,6 @@
 
 	db "When Burmy evolved, its cloak"
 	next "became a part of this"
-	next "Pokémon’s body. The cloak is"
+	next "Pokémon's body. The cloak is"
 	
 	page "never shed."

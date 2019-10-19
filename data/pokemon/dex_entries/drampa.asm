@@ -3,6 +3,6 @@
 
 	db "If a child it has made friends"
 	next "with is bullied, Drampa will find"
-	next "the bully’s house and burn it to"
+	next "the bully's house and burn it to"
 	
 	page "the ground."

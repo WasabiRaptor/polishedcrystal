@@ -5,5 +5,5 @@
 	next "aristocrats would compete to"
 	next "see who could trim their"
 	
-	page "Furfrou’s fur into the most"
+	page "Furfrou's fur into the most"
 	next "exquisite style."

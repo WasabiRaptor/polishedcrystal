@@ -5,7 +5,7 @@
 	next "in its body. Instead, intensely"
 	next "hot magma circulates"
 	
-	page "throughout this Pokémon’s"
+	page "throughout this Pokémon's"
 	next "body, carrying essential"
 	next "nutrients and oxygen to its"
 	

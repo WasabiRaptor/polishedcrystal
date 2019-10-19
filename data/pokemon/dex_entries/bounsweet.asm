@@ -3,6 +3,6 @@
 
 	db "Because of its sweet, delicious"
 	next "aroma, bird Pokémon are"
-	next "always after it, but it’s not"
+	next "always after it, but it's not"
 	
 	page "intelligent enough to care."

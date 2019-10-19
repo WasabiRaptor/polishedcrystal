@@ -7,6 +7,6 @@
 	
 	page "freely moved in any direction."
 	next "Even the slightest sound does"
-	next "not escape this Pokémon’s"
+	next "not escape this Pokémon's"
 	
 	page "notice."

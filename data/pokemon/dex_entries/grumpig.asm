@@ -6,5 +6,5 @@
 	next "fantastic powers. When it is"
 	
 	page "doing so, it dances bizarrely."
-	next "This Pokémon’s black pearls"
+	next "This Pokémon's black pearls"
 	next "are valuable as works of art."

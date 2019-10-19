@@ -5,5 +5,5 @@
 	next "from its head and picks flowers"
 	next "to adorn itself with. When it"
 	
-	page "doesn’t have any flowers, it"
+	page "doesn't have any flowers, it"
 	next "feels uneasy."

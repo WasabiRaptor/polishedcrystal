@@ -6,7 +6,7 @@
 	next "within its body. If it gets wet,"
 	
 	page "the magma cools and hardens. In"
-	next "that event, the Pokémon’s"
+	next "that event, the Pokémon's"
 	next "body grows heavy and its"
 	
 	page "movements become sluggish."

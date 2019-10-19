@@ -1,7 +1,7 @@
 	db "LEAF@" ; species name
 	dw 12, 158 ; height, weight
 
-	db "Bayleef’s neck is ringed by"
+	db "Bayleef's neck is ringed by"
 	next "curled-up leaves. Inside each"
 	next "tubular leaf is a small shoot of"
 	

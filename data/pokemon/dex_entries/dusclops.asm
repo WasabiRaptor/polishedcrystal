@@ -10,4 +10,4 @@
 	next "its single eye to bear. The"
 	
 	page "hypnotized foe is made to do"
-	next "Dusclops’s bidding."
+	next "Dusclops's bidding."

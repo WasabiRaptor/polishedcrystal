@@ -1,7 +1,7 @@
 	db "ERUPTION@" ; species name
 	dw 25, 3205 ; height, weight
 
-	db "The humps on Camerupt’s back"
+	db "The humps on Camerupt's back"
 	next "are formed by a transformation"
 	next "of its bones. They sometimes"
 	

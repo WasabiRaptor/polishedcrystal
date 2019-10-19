@@ -1,7 +1,7 @@
 	db "BIG HORN@" ; species name
 	dw 14, 712 ; height, weight
 
-	db "Stantler’s magnificent antlers"
+	db "Stantler's magnificent antlers"
 	next "were traded at high prices as"
 	next "works of art. As a result, this"
 	

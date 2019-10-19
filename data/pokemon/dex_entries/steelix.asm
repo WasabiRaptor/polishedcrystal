@@ -5,7 +5,7 @@
 	next "underground than Onix. This"
 	next "Pokémon is known to dig"
 	
-	page "toward the earth’s core. There"
+	page "toward the earth's core. There"
 	next "are records of this Pokémon"
 	next "reaching a depth of over"
 	

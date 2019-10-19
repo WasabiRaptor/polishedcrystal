@@ -3,7 +3,7 @@
 
 	db "When restored Anorith are"
 	next "released into the ocean, they"
-	next "don’t thrive, because the"
+	next "don't thrive, because the"
 	
 	page "water composition has changed"
 	next "since their era."

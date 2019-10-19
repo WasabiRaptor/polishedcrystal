@@ -5,5 +5,5 @@
 	next "tears its opponents apart with"
 	next "them. Even if they dodge its"
 	
-	page "attack, they’ll be electrocuted"
+	page "attack, they'll be electrocuted"
 	next "by the flying sparks."

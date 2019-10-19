@@ -6,5 +6,5 @@
 	next "a Poké Ball after a Nincada"
 	
 	page "evolves. This bizarre Pokémon"
-	next "is entirely immobile—it doesn’t"
+	next "is entirely immobile—it doesn't"
 	next "even breathe."

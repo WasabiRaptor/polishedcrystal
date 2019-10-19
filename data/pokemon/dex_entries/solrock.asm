@@ -2,7 +2,7 @@
 	dw 12, 1540 ; height, weight
 
 	db "Sunlight is the source of"
-	next "Solrock’s power. It is said to"
+	next "Solrock's power. It is said to"
 	next "possess the ability to read the"
 	
 	page "emotions of others. This"

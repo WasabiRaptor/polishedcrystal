@@ -6,5 +6,5 @@
 	next "the roots of trees and absorb"
 	
 	page "moisture and nutrients. This"
-	next "Pokémon can’t withstand"
+	next "Pokémon can't withstand"
 	next "bright sunlight so avoids it."
