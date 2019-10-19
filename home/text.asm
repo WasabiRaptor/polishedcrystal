@@ -648,6 +648,21 @@ PlaceCommandCharacter::
 	call PlaceSpecialString
 	ld h, b
 	ld l, c
+	push hl
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+	ld bc, -1 tiles
+	add hl, bc
+	ld a, l
+	ld [wVariableWidthTextVRAM], a
+	ld a, h
+	ld [wVariableWidthTextVRAM+1], a
+	ld a, [wVariableWidthTextTile]
+	dec a
+	ld [wVariableWidthTextTile], a
+	pop hl
 	pop de
 	jp NextChar
 
@@ -663,6 +678,7 @@ NextLineChar::
 	jp NextChar
 
 LineBreak::
+	call NextVariableWidthTextTile
 	pop hl
 	ld bc, SCREEN_WIDTH
 	add hl, bc

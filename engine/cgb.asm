@@ -210,15 +210,15 @@ _CGB_FinishBattleScreenLayout: ; 8e23
 	ld a, $5
 	call FillBoxCGB
 
-	hlcoord 1, 9, wAttrMap
-	lb bc, 1, 6
-	ld a, $6
-	call FillBoxCGB
-
 	hlcoord 0, 12, wAttrMap
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, $7
 	call ByteFill
+
+	hlcoord $d, $d, wAttrMap
+	lb bc, 1, 6
+	ld a, $6
+	call FillBoxCGB
 
 	ld hl, BattleObjectPals
 	ld de, wUnknOBPals palette PAL_BATTLE_OB_GRAY

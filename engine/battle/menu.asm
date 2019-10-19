@@ -12,6 +12,7 @@ SafariBattleMenu:
 	ld hl, SafariBattleMenuDataHeader
 _BattleMenuCommon:
 	call LoadMenuDataHeader
+	call InitVariableWidthText
 	ld a, [wBattleMenuCursorBuffer]
 	ld [wMenuCursorBuffer], a
 	ld a, 1
@@ -25,7 +26,7 @@ _BattleMenuCommon:
 
 BattleMenuDataHeader: ; 24f2c
 	db $40 ; flags
-	db 12, 08 ; start coords
+	db 12, $0b ; start coords
 	db 17, 19 ; end coords
 	dw .MenuData2
 	db 1 ; default option
@@ -34,15 +35,15 @@ BattleMenuDataHeader: ; 24f2c
 .MenuData2: ; 0x24f34
 	db $81 ; flags
 	dn 2, 2 ; rows, columns
-	db 6 ; spacing
+	db 4 ; spacing
 	dba .Strings
 	dbw BANK(.MenuData2), 0
 ; 0x24f3d
 
 .Strings: ; 0x24f3d
 	db "Fight@"
-	db "<PK><MN>@"
 	db "Bag@"
+	db "Party@"
 	db "Run@"
 ; 24f4e
 
@@ -64,7 +65,7 @@ ContestBattleMenuDataHeader: ; 24f89
 
 .Strings: ; 24f9a
 	db "Fight@"
-	db "<PK><MN>@"
+	db "Pokémon@"
 	db "ParkBall×  @"
 	db "Run@"
 ; 24fb2
