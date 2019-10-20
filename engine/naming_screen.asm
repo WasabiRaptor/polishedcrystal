@@ -229,12 +229,12 @@ NamingScreen: ; 116c1
 
 .StoreMonIconParams: ; 1187b (4:587b)
 	ld a, PKMN_NAME_LENGTH - 1
-	hlcoord 5, 6
+	hlcoord 5, 5
 	jr .StoreParams
 
 .StoreSpriteIconParams: ; 11882 (4:5882)
 	ld a, PLAYER_NAME_LENGTH - 1
-	hlcoord 5, 6
+	hlcoord 5, 5
 	jr .StoreParams
 
 .StoreBoxIconParams: ; 11889 (4:5889)

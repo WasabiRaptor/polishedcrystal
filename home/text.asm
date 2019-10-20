@@ -648,6 +648,9 @@ PlaceCommandCharacter::
 	call PlaceSpecialString
 	ld h, b
 	ld l, c
+	ld a, [wVariableWidthTextTile]
+	inc a
+	jr z, .noVWtomfoolery
 	push hl
 	ld a, [wVariableWidthTextVRAM]
 	ld l, a
@@ -663,6 +666,7 @@ PlaceCommandCharacter::
 	dec a
 	ld [wVariableWidthTextTile], a
 	pop hl
+.noVWtomfoolery
 	pop de
 	jp NextChar
 
