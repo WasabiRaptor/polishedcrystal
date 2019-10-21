@@ -1914,8 +1914,6 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ldh [rSVBK], a
 	xor a
 	ld [wDexListingEnd], a
-	ld a, 1
-	ld [wPokedexRegion], a
 	ld hl, wPokedexOrder
 	ld bc, wPokedexOrderEnd - wPokedexOrder
 	xor a
@@ -1932,8 +1930,8 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ret
 
 .Jumptable: ; 40bf0 (10:4bf0)
-	dw .VariantMode
 	dw .OldMode
+	dw .VariantMode
 	dw .Pokedex_ABCMode
 
 .OldMode: ; 40c08 (10:4c08)

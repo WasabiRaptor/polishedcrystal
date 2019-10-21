@@ -861,15 +861,16 @@ SwabluFrontpic: INCBIN "gfx/pokemon/swablu/front.animated.2bpp.lz"
 AltariaFrontpic: INCBIN "gfx/pokemon/altaria/front.animated.2bpp.lz"
 ZangooseFrontpic: INCBIN "gfx/pokemon/zangoose/front.animated.2bpp.lz"
 SeviperFrontpic: INCBIN "gfx/pokemon/seviper/front.animated.2bpp.lz"
+
+
+SECTION "Pokemon Pics 39", ROMX
+
 LunatoneFrontpic: INCBIN "gfx/pokemon/lunatone/front.animated.2bpp.lz"
 SolrockFrontpic: INCBIN "gfx/pokemon/solrock/front.animated.2bpp.lz"
 BarboachFrontpic: INCBIN "gfx/pokemon/barboach/front.animated.2bpp.lz"
 WhiscashFrontpic: INCBIN "gfx/pokemon/whiscash/front.animated.2bpp.lz"
 CorphishFrontpic: INCBIN "gfx/pokemon/corphish/front.animated.2bpp.lz"
 CrawdauntFrontpic: INCBIN "gfx/pokemon/crawdaunt/front.animated.2bpp.lz"
-
-SECTION "Pokemon Pics 39", ROMX
-
 BaltoyFrontpic: INCBIN "gfx/pokemon/baltoy/front.animated.2bpp.lz"
 ClaydolFrontpic: INCBIN "gfx/pokemon/claydol/front.animated.2bpp.lz"
 LileepFrontpic: INCBIN "gfx/pokemon/lileep/front.animated.2bpp.lz"
