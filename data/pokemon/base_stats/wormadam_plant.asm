@@ -9,7 +9,7 @@
         db 148 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn ALL_FEMALE, 3 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/wormadam_plant/front.dimensions"  
+        INCBIN "gfx/pokemon/wormadam_grass/front.dimensions"  
         db ANTICIPATION, ANTICIPATION     ; abilities
         db OVERCOAT    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate

@@ -1684,6 +1684,7 @@ PokedexDataPointerTable: ; 0x44378
 INCLUDE "data/pokemon/kanto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/hoenn_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/sinnoh_dex_entry_pointers.asm"
 
 SECTION "Code 11", ROMX
 
@@ -4331,6 +4332,8 @@ INCLUDE "data/pokemon/other_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/sinnoh_menu_icon_pointers.asm"
+
 INCLUDE "data/pokemon/menu_icons.asm"
 
 
@@ -4609,6 +4612,11 @@ INCLUDE "gfx/pokemon/hoenn_anims.asm"
 INCLUDE "gfx/pokemon/hoenn_idle_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_idles.asm"
 
+INCLUDE "gfx/pokemon/sinnoh_anim_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_anims.asm"
+INCLUDE "gfx/pokemon/sinnoh_idle_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_idles.asm"
+
 SECTION "Pic Animations Frames 0", ROMX
 
 INCLUDE "gfx/pokemon/other_frame_pointers.asm"
@@ -4631,6 +4639,11 @@ SECTION "Pic Animations Frames 3", ROMX
 INCLUDE "gfx/pokemon/hoenn_frames.asm"
 INCLUDE "gfx/pokemon/hoenn_frame_pointers.asm"
 
+SECTION "Pic Animations Frames 4", ROMX
+
+INCLUDE "gfx/pokemon/sinnoh_frames.asm"
+INCLUDE "gfx/pokemon/sinnoh_frame_pointers.asm"
+
 
 SECTION "Pic Animations Bitmasks", ROMX
 
@@ -4643,6 +4656,8 @@ INCLUDE "gfx/pokemon/johto_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/johto_bitmasks.asm"
 INCLUDE "gfx/pokemon/hoenn_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_bitmasks.asm"
+INCLUDE "gfx/pokemon/sinnoh_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX
@@ -5128,6 +5143,16 @@ SECTION "Hoenn Base Data", ROMX
 
 INCLUDE "data/pokemon/hoenn_base_stats.asm"
 INCLUDE "data/pokemon/hoenn_names.asm"
+
+SECTION "Sinnoh Base Data", ROMX
+
+INCLUDE "data/pokemon/sinnoh_base_stats.asm"
+INCLUDE "data/pokemon/sinnoh_names.asm"
+
+SECTION "Unova Base Data", ROMX
+
+INCLUDE "data/pokemon/unova_base_stats.asm"
+INCLUDE "data/pokemon/unova_names.asm"
 
 SECTION "Other Base Data", ROMX
 INCLUDE "data/pokemon/other_base_stats.asm"

@@ -13,7 +13,7 @@ SinnohDexOrder::
 	grouped_dex_order_mon INFERNAPE
 	grouped_dex_order_mon PIPLUP
 	grouped_dex_order_mon PRINPLUP
-	grouped_dex_order_mon EMPLOEON
+	grouped_dex_order_mon EMPOLEON
 	grouped_dex_order_mon STARLY
 	grouped_dex_order_mon STARAVIA
 	grouped_dex_order_mon STARAPTOR
@@ -24,9 +24,9 @@ SinnohDexOrder::
 	grouped_dex_order_mon SHINX
 	grouped_dex_order_mon LUXIO
 	grouped_dex_order_mon LUXRAY
-	grouped_dex_order_mon CRAINIDOS
+	grouped_dex_order_mon CRANIDOS
 	grouped_dex_order_mon RAMPARDOS
-	grouped_dex_order_mon SHEILDON
+	grouped_dex_order_mon SHIELDON
 	grouped_dex_order_mon BASTIODON
 	grouped_dex_order_mon BURMY
 	grouped_dex_order_mon WORMADAM

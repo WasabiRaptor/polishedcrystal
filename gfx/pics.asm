@@ -18,6 +18,13 @@ SECTION "Hoenn Pic Pointers", ROMX
 
 INCLUDE "data/pokemon/hoenn_pic_pointers.asm"
 
+SECTION "Sinnoh Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/sinnoh_pic_pointers.asm"
+
+SECTION "Unova Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/unova_pic_pointers.asm"
 
 SECTION "Trainer Pic Pointers", ROMX
 

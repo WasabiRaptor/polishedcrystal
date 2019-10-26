@@ -461,7 +461,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon INFERNAPE
 	nat_dexmon PIPLUP
 	nat_dexmon PRINPLUP
-	nat_dexmon EMPLOEON
+	nat_dexmon EMPOLEON
 	nat_dexmon STARLY
 	nat_dexmon STARAVIA
 	nat_dexmon STARAPTOR
@@ -474,9 +474,9 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon LUXRAY
 	nat_dexmon BUDEW
 	nat_dexmon ROSERADE
-	nat_dexmon CRAINIDOS
+	nat_dexmon CRANIDOS
 	nat_dexmon RAMPARDOS
-	nat_dexmon SHEILDON
+	nat_dexmon SHIELDON
 	nat_dexmon BASTIODON
 	nat_dexmon BURMY
 	nat_dexmon WORMADAM

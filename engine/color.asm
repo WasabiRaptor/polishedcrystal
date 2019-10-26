@@ -930,6 +930,10 @@ INCLUDE "data/pokemon/johto_palettes.asm"
 
 INCLUDE "data/pokemon/hoenn_palettes.asm"
 
+INCLUDE "data/pokemon/sinnoh_palettes.asm"
+
+INCLUDE "data/pokemon/unova_palettes.asm"
+
 LoadPortraitPalette:
 	call GetPortraitPalettePointer
 	ld de, wUnknBGPals palette PAL_BG_TEXT

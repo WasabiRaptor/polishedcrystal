@@ -9,7 +9,7 @@
         db 65 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 4 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/shellos/front.dimensions"  
+        INCBIN "gfx/pokemon/shellos_east/front.dimensions"  
         db STICKY_HOLD, STORM_DRAIN     ; abilities
         db SAND_FORCE    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate
