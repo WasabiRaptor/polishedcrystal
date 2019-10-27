@@ -4,8 +4,17 @@ wild_mon: macro
 	db \1, \2, GROUP_\2
 endm
 
+; Encounter area definition
+; 1 - Map ID
+wild_map: MACRO
+	db \1
+ENDM
+
+; new_wild_mon()
+;
 ; Wild Pokemon encounter definition
 ; Constants in constants/wild_constants.asm
+;
 ; 1 - Time of day [4] | Encounter chance [4]
 ; 2 - Species
 ; 3 - Level offset/override flag [1] | Level offset/override [7]
