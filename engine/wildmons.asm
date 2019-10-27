@@ -10,25 +10,83 @@ LoadWildMonData: ; 29ff8
 	jr .done_copy
 
 .copy
+	break
 	inc hl
 	inc hl;move past the two bytes of the map ID
-	ld de, wMornEncounterRate
-	ld bc, 4 ;four times of day so copy the four encounter rates
+	; Copy level minimum and maximum into WRAM
+	ld de, wMinimumLevel
+	ld bc, 2
 	rst CopyBytes
+	ld a, [hl]
+	and MORN_ENCOUNTER_MASK
+	ld b, 6
+	call .shiftLoop
+	call .checkEncounterRate
+	ld [wMornEncounterRate], a
+	ld a, [hl]
+	and DAY_ENCOUNTER_MASK
+	ld b, 4
+	call .shiftLoop
+	call .checkEncounterRate
+	ld [wDayEncounterRate], a
+	ld a, [hl]
+	and DUSK_ENCOUNTER_MASK
+	ld b, 2
+	call .shiftLoop
+	call .checkEncounterRate
+	ld [wDuskEncounterRate], a
+	ld a, [hl]
+	and NIGHT_ENCOUNTER_MASK
+	call .checkEncounterRate
+	ld [wNightEncounterRate], a
 .done_copy
 	call _WaterWildmonLookup
 	ld a, 0 ; not xor a; preserve carry flag
 	jr nc, .no_copy
 	inc hl
 	inc hl
+	; Copy level minimum and maximum into WRAM
+	ld de, wMinimumLevel
+	ld bc, 2
+	rst CopyBytes
 	ld a, [hl]
 .no_copy
 	ld [wWaterEncounterRate], a
 	ret
 
+.shiftLoop
+	sla a
+	dec b
+	jr nz, .shiftLoop
+	ret
+
+.checkEncounterRate
+	cp COMMON
+	jr nz, .not_common
+	ld a, COMMON_RATE
+	ret
+.not_common
+	cp UNCOMMON
+	jr nz, .not_uncommon
+	ld a, UNCOMMON_RATE
+	ret
+.not_uncommon
+	cp RARE
+	jr nz, .not_rare
+	ld a, RARE_RATE
+	ret
+.not_rare
+	cp VERY_RARE
+	jr nz, .error_rate
+	ld a, VERY_RARE_RATE
+	ret
+.error_rate
+	ld a, $ff
+	ret
+
 FindNest: ; 2a01f
 ; Parameters:
-; e: 0 = Johto, 1 = Kanto, 2 = Orange
+; e: 0 = Invar, 1 = Kanto, 2 = Orange
 ; wNamedObjectIndexBuffer: species
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
@@ -42,10 +100,10 @@ FindNest: ; 2a01f
 	decoord 0, 0
 
 ;here it is getting the region table to load not *very* important, but just mainly which data table it is loading into hl and ending up looking at, easily swapped out
-	ld hl, JohtoGrassWildMons
+	ld hl, InvarGrassWildMons
 	call .FindGrass
 ; it calls find grass or find water because they are indeed structured differently, as I don't believe water mons take time of day into account in the current form 
-	ld hl, JohtoWaterWildMons
+	ld hl, InvarWaterWildMons
 	call .FindWater
 	call .RoamMon1
 	call .RoamMon2
@@ -642,8 +700,8 @@ _WaterWildmonLookup: ; 2a21d
 _GetGrassWildmonPointer:
 	call RegionCheck
 	ld a, e
-	ld hl, JohtoGrassWildMons
-	and a ; cp JOHTO_REGION
+	ld hl, InvarGrassWildMons
+	and a ; cp INVAR_REGION
 	ret z
 	ld hl, KantoGrassWildMons
 	dec a ; cp KANTO_REGION
@@ -654,8 +712,8 @@ _GetGrassWildmonPointer:
 _GetWaterWildmonPointer:
 	call RegionCheck
 	ld a, e
-	ld hl, JohtoWaterWildMons
-	and a ; cp JOHTO_REGION
+	ld hl, InvarWaterWildMons
+	and a ; cp INVAR_REGION
 	ret z
 	ld hl, KantoWaterWildMons
 	dec a ; cp KANTO_REGION
@@ -720,26 +778,34 @@ LookUpWildmonsForMapDE: ; 2a288
 	push hl
 	ld a, [hl]
 	inc a ;checking for $ff for the end list
-	jr z, .nope ; if its the end of the list no wilds
+	jr z, .end ; if its the end of the list no wilds
 	ld a, d ;check if the the list its at matches the map id in de
 	cp [hl]
 	jr nz, .next
 	inc hl
 	ld a, e
 	cp [hl]
-	jr z, .yup
-
-.next ;lists of wildmons are a fixed length and that length is in BC right now so it adds it to move onto the next
+	jr z, .match
+.next
 	pop hl
+	ld b, 0
+	ld c, WILD_MAP_SIZE
 	add hl, bc
+	ld c, WILD_POKE_SIZE
+.poke_loop
+	add hl, bc
+	ld a, [hl]
+	inc a
+	jr nz, .poke_loop
+	inc hl
 	jr .loop
 
-.nope
+.end
 	pop hl
 	and a
 	ret
 
-.yup ;carry flag is set when it finds the right list
+.match ;carry flag is set when it finds the right list
 	pop hl
 	scf
 	ret
@@ -1040,7 +1106,7 @@ RandomPhoneRareWildMon: ; 2a4ab
 	farcall GetCallerLocation
 	ld d, b
 	ld e, c
-	ld hl, JohtoGrassWildMons
+	ld hl, InvarGrassWildMons
 	ld bc, GRASS_WILDDATA_LENGTH
 	call LookUpWildmonsForMapDE
 	jr c, .GetGrassmon
@@ -1114,7 +1180,7 @@ RandomPhoneWildMon: ; 2a51f
 	farcall GetCallerLocation
 	ld d, b
 	ld e, c
-	ld hl, JohtoGrassWildMons
+	ld hl, InvarGrassWildMons
 	ld bc, GRASS_WILDDATA_LENGTH
 	call LookUpWildmonsForMapDE
 	jr c, .ok
@@ -1272,11 +1338,11 @@ RandomPhoneMon: ; 2a567
 ; 2a5e9
 
 
-JohtoGrassWildMons: ; 0x2a5e9
-INCLUDE "data/wild/johto_grass.asm"
+InvarGrassWildMons: ; 0x2a5e9
+INCLUDE "data/wild/invar_grass.asm"
 
-JohtoWaterWildMons: ; 0x2b11d
-INCLUDE "data/wild/johto_water.asm"
+InvarWaterWildMons: ; 0x2b11d
+INCLUDE "data/wild/invar_water.asm"
 
 KantoGrassWildMons: ; 0x2b274
 INCLUDE "data/wild/kanto_grass.asm"

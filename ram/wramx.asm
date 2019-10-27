@@ -603,9 +603,16 @@ wCurDamage:: ds 2
 wEncounterRates::
 wMornEncounterRate:: ds 1
 wDayEncounterRate:: ds 1
-wEveningEncounterRate:: ds 1
-wNiteEncounterRate:: ds 1
+wDuskEncounterRate:: ds 1
+wNightEncounterRate:: ds 1
 wWaterEncounterRate:: ds 1
+
+wBaseLevels::
+wMinimumLevel:: ds 1
+wMaximumLevel:: ds 1
+wBaseWaterLevels::
+wMinWaterLevel:: ds 1
+wMaxWaterLevel:: ds 1
 
 wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
 
