@@ -104,3 +104,7 @@ retpoke: MACRO
 	cp \1
 	ret nz
 ENDM
+
+break: MACRO
+	ld b, b
+ENDM
