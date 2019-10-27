@@ -3086,5 +3086,6 @@ Script_playimport:
 ; parameters:
 ;     import_pointer (SingleByteParam)
 	call GetScriptByte
-	jp PlayImportedSoundClip
+	;jp PlayImportedSoundClip
+	ret
 

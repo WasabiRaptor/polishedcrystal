@@ -74,8 +74,7 @@ _CGB_BattleColors: ; 8ddb
 	ld de, wUnknBGPals
 	ld a, [wTempBattleMonGroup]
 	ld [wCurGroup], a
-	call GetBattlemonBackpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetBattlemonBackpicPalette
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurSpecies], a
 
@@ -95,8 +94,7 @@ _CGB_BattleColors: ; 8ddb
 .player_backsprite
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
-	call GetEnemyFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetEnemyFrontpicPalette
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 
@@ -266,8 +264,7 @@ _CGB_StatsScreenHPPals: ; 8edb
 .not_egg
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	push de
 	call VaryBGPal1ByTempMonDVs
 	pop de
@@ -345,8 +342,8 @@ _CGB_Pokedex: ; 8f70
 	ld [wDexMonForm], a
 	ld a, [wCurPartySpecies]
 
-	call GetMonNormalOrShinyPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetMonPalette
+
 .got_palette
 
 	call WipeAttrMap
@@ -616,8 +613,7 @@ _CGB_Evolution: ; 91e4
 	ld a, [wHatchOrEvolutionResultGroup]
 	ld [wCurGroup], a
 	ld a, [wHatchOrEvolutionResultSpecies]
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	; hl = DVs
 	ld hl, wPartyMon1DVs
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -1054,9 +1050,8 @@ _CGB_PokedexUnownMode: ; 903e
 	ld [wCurGroup], a
 
 	ld a, [wCurPartySpecies]
-	call GetMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
-
+	call GetMonPalette
+	
 	call WipeAttrMap
 
 	hlcoord 7, 5, wAttrMap
@@ -1086,8 +1081,7 @@ _CGB_BillsPC: ; 8fca
 
 .GetMonPalette:
 	ld bc, wTempMonPersonality
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	call VaryBGPal1ByTempMonDVs
 
 .Resume:
@@ -1257,8 +1251,7 @@ _CGB_IntroPals: ; 9591
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetFrontpicPalette
 	push de
 	call VaryBGPal0ByTempMonDVs
 	pop de
@@ -1299,8 +1292,7 @@ _CGB_PlayerOrMonFrontpicPals: ; 9529
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	call VaryBGPal0ByTempMonDVs
 	call WipeAttrMap
 	call ApplyAttrMap
@@ -1317,8 +1309,7 @@ _CGB_TrainerOrMonFrontpicPals: ; 9578
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetFrontpicPalette
 	call VaryBGPal0ByTempMonDVs
 	call WipeAttrMap
 	call ApplyAttrMap

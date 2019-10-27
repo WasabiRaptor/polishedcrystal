@@ -4,18 +4,6 @@ INCLUDE "engine/cgb.asm"
 
 INCLUDE "engine/sgb_border.asm"
 
-CheckShininess:
-; Check if a mon is shiny by personality at bc.
-; Return carry if shiny.
-	ld a, [bc]
-	and SHINY_MASK
-	jr z, .NotShiny
-	scf
-	ret
-
-.NotShiny:
-	and a
-	ret
 
 InitPartyMenuPalettes:
 	ld de, wUnknBGPals
@@ -239,54 +227,6 @@ LoadHLPaletteIntoDE:
 	ldh [rSVBK], a
 	ret
 
-LoadPalette_White_Col1_Col2_Black:
-	ldh a, [rSVBK]
-	push af
-	ld a, $5
-	ldh [rSVBK], a
-
-if !DEF(MONOCHROME)
-	ld a, (palred 31 + palgreen 31 + palblue 31) % $100
-	ld [de], a
-	inc de
-	ld a, (palred 31 + palgreen 31 + palblue 31) / $100
-	ld [de], a
-	inc de
-else
-	ld a, PAL_MONOCHROME_WHITE % $100
-	ld [de], a
-	inc de
-	ld a, PAL_MONOCHROME_WHITE / $100
-	ld [de], a
-	inc de
-endc
-
-	ld c, 2 * 2
-.loop
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec c
-	jr nz, .loop
-
-if !DEF(MONOCHROME)
-	xor a ; RGB 00, 00, 00
-rept 2
-	ld [de], a
-	inc de
-endr
-else
-	ld a, PAL_MONOCHROME_BLACK % $100
-	ld [de], a
-	inc de
-	ld a, PAL_MONOCHROME_BLACK / $100
-	ld [de], a
-	inc de
-endc
-
-	pop af
-	ldh [rSVBK], a
-	ret
 
 FillBoxCGB:
 .row
@@ -683,7 +623,7 @@ INCLUDE "gfx/tilesets/roofs.pal"
 OvercastRoofPals:
 INCLUDE "gfx/tilesets/roofs_overcast.pal"
 
-GetBattlemonBackpicPalettePointer:
+GetBattlemonBackpicPalette:
 	push de
 	farcall GetPartyMonPersonality
 	ld c, l
@@ -705,7 +645,7 @@ GetBattlemonBackpicPalettePointer:
 	farcall GetIllusion
 
 .no_illusion
-	call GetPlayerOrMonPalettePointer
+	call GetPlayerOrMonPalette
 	pop af
 	ld [wTempBattleMonSpecies], a
 	pop af 
@@ -720,7 +660,7 @@ GetBattlemonBackpicPalettePointer:
 	pop de
 	ret
 
-GetEnemyFrontpicPalettePointer:
+GetEnemyFrontpicPalette:
 	push de
 	farcall GetEnemyMonPersonality
 	ld c, l
@@ -742,7 +682,7 @@ GetEnemyFrontpicPalettePointer:
 	farcall GetIllusion
 
 .no_illusion
-	call GetFrontpicPalettePointer
+	call GetFrontpicPalette
 	pop af
 	ld [wTempEnemyMonSpecies], a
 	pop af
@@ -757,9 +697,9 @@ GetEnemyFrontpicPalettePointer:
 	pop de
 	ret
 
-GetPlayerOrMonPalettePointer:
+GetPlayerOrMonPalette:
 	and a
-	jp nz, GetMonNormalOrShinyPalettePointer
+	jp nz, GetMonPalette
 	ld a, [wPlayerSpriteSetupFlags]
 	bit 2, a ; transformed to male
 	jr nz, .male
@@ -774,25 +714,26 @@ GetPlayerOrMonPalettePointer:
 
 .male
 	ld hl, wPlayerPalette
-	ret
+	jr .gotPal
 
 .lyra
 	ld hl, Lyra1Palette
-	ret
+.gotPal
+	jp LoadPalette_White_Col1_Col2_Black
 
-GetFrontpicPalettePointer:
+GetFrontpicPalette:
 	and a
-	jp nz, GetMonNormalOrShinyPalettePointer
+	jp nz, GetMonPalette
 	ld a, [wTrainerClass]
 
-GetTrainerPalettePointer:
+GetTrainerPalette:
 	ld l, a
 	ld h, 0
 	add hl, hl
 	add hl, hl
 	ld bc, TrainerPalettes
 	add hl, bc
-	ret
+	jp LoadPalette_White_Col1_Col2_Black
 
 INCLUDE "data/trainers/palettes.asm"
 
@@ -830,52 +771,6 @@ LoadPaintingPalette:
 	ld bc, 8
 	jp FarCopyWRAM
 
-GetMonPalettePointer:
-	push de
-	push af
-	call GetRelevantPallete
-	pop af
-	pop de
-	dec a	
-	ld l, a
-	ld h, $0
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, bc
-	ret
-
-GetMonNormalOrShinyPalettePointer:
-	push bc
-	;ld h, b
-	;ld l, c
-	push af
-	;inc hl
-	;predef GetPartyMonGroupSpeciesAndForm
-	pop af
-	call GetMonPalettePointer
-	pop bc
-	push hl
-	call CheckShininess
-	pop hl
-	ret nc
-rept 4
-	inc hl
-endr
-	ret
-
-
-LoadPokemonPalette:
-	; a = species
-	ld a, [wCurPartySpecies]
-	; hl = palette
-	call GetMonPalettePointer
-	; load palette in BG 7
-	ld a, $5
-	ld de, wUnknBGPals palette 7 + 2
-	ld bc, 4
-	jp FarCopyWRAM
-
 LoadPartyMonPalette:
 	; bc = personality
 	ld hl, wPartyMon1Group
@@ -891,12 +786,9 @@ LoadPartyMonPalette:
 	; a = species
 	ld a, [wCurPartySpecies]
 	; hl = palette
-	call GetMonNormalOrShinyPalettePointer
+	ld de, wUnknBGPals palette PAL_BG_TEXT
+	call GetMonPalette
 	; load palette in BG 7
-	ld a, $5
-	ld de, wUnknBGPals palette PAL_BG_TEXT + 2
-	ld bc, 4
-	call FarCopyWRAM
 	; hl = DVs
 	ld hl, wPartyMon1DVs
 	ld a, [wCurPartyMon]
@@ -908,31 +800,6 @@ LoadPartyMonPalette:
 	call CopyDVsToColorVaryDVs
 	ld hl, wUnknBGPals palette PAL_BG_TEXT + 2
 	jp VaryColorsByDVs
-
-GetRelevantPallete:
-; given species in a, return *Palette in bc
-	ld a, [wCurGroup]
-	ld hl, VariantPaletteTable
-	ld de, 4
-	call IsInArray
-	inc hl
-	inc hl
-	ld a, [hli]
-	ld c, a
-	ld b, [hl]
-	ret
-
-INCLUDE "data/pokemon/variant_palette_table.asm"
-
-INCLUDE "data/pokemon/kanto_palettes.asm"
-
-INCLUDE "data/pokemon/johto_palettes.asm"
-
-INCLUDE "data/pokemon/hoenn_palettes.asm"
-
-INCLUDE "data/pokemon/sinnoh_palettes.asm"
-
-INCLUDE "data/pokemon/unova_palettes.asm"
 
 LoadPortraitPalette:
 	call GetPortraitPalettePointer

@@ -1507,4 +1507,91 @@ Inc16BitNumInHL::
 	inc [hl]
 	ret
 
-INCLUDE "home/imported_sounds.asm"
+;INCLUDE "home/imported_sounds.asm"
+
+LoadPalette_White_Col1_Col2_Black::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals)
+	ldh [rSVBK], a
+
+	ld a, (palred 31 + palgreen 31 + palblue 31) % $100
+	ld [de], a
+	inc de
+	ld a, (palred 31 + palgreen 31 + palblue 31) / $100
+	ld [de], a
+	inc de
+
+	ld c, 2 * 2
+.loop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop
+
+	xor a ; RGB 00, 00, 00
+rept 2
+	ld [de], a
+	inc de
+endr
+
+	pop af
+	ldh [rSVBK], a
+	ret
+	
+GetMonPalette::
+	ldh a, [hROMBank]
+	push af
+; given species in wCurPartySpecies, return *Palette in bc
+	push de
+	push bc
+	ld a, [wCurGroup]
+	ld hl, VariantPaletteTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	rst Bankswitch
+
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+
+	ld a, [wCurPartySpecies]
+	dec a	
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, bc
+	pop bc
+	call CheckShininess
+	jp nc, .not_shiny
+rept 4
+	inc hl
+endr
+.not_shiny
+	pop de
+
+	call LoadPalette_White_Col1_Col2_Black
+
+	pop af
+	rst Bankswitch
+	ret
+
+INCLUDE "data/pokemon/variant_palette_table.asm"
+
+CheckShininess::
+; Check if a mon is shiny by personality at bc.
+; Return carry if shiny.
+	ld a, [bc]
+	and SHINY_MASK
+	jr z, .NotShiny
+	scf
+	ret
+
+.NotShiny:
+	and a
+	ret

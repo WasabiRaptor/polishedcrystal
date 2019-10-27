@@ -148,7 +148,7 @@ INCLUDE "engine/player_object.asm"
 INCLUDE "engine/sine.asm"
 INCLUDE "data/predef_pointers.asm"
 INCLUDE "engine/trainer_scripts.asm"
-INCLUDE "engine/imported_sounds_pcm.asm"
+;INCLUDE "engine/imported_sounds_pcm.asm"
 
 
 SECTION "Code 3", ROMX
@@ -5132,27 +5132,32 @@ ENDM
 
 INCLUDE "data/pokemon/kanto_base_stats.asm"
 INCLUDE "data/pokemon/kanto_names.asm"
+INCLUDE "data/pokemon/kanto_palettes.asm"
 
 
 SECTION "Johto Base Data", ROMX
 
 INCLUDE "data/pokemon/johto_base_stats.asm"
 INCLUDE "data/pokemon/johto_names.asm"
+INCLUDE "data/pokemon/johto_palettes.asm"
 
 SECTION "Hoenn Base Data", ROMX
 
 INCLUDE "data/pokemon/hoenn_base_stats.asm"
 INCLUDE "data/pokemon/hoenn_names.asm"
+INCLUDE "data/pokemon/hoenn_palettes.asm"
 
 SECTION "Sinnoh Base Data", ROMX
 
 INCLUDE "data/pokemon/sinnoh_base_stats.asm"
 INCLUDE "data/pokemon/sinnoh_names.asm"
+INCLUDE "data/pokemon/sinnoh_palettes.asm"
 
 SECTION "Unova Base Data", ROMX
 
 INCLUDE "data/pokemon/unova_base_stats.asm"
 INCLUDE "data/pokemon/unova_names.asm"
+INCLUDE "data/pokemon/unova_palettes.asm"
 
 SECTION "Other Base Data", ROMX
 INCLUDE "data/pokemon/other_base_stats.asm"
