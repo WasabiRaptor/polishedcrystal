@@ -1,6 +1,6 @@
 LoadWildMonData: ; 29ff8
 	call _GrassWildmonLookup
-	jr c, .copy
+	jr c, .copy ;if it found a map with a wild table it will copy the encounter rates for the time of day
 	ld hl, wMornEncounterRate
 	xor a
 	ld [hli], a
@@ -11,9 +11,9 @@ LoadWildMonData: ; 29ff8
 
 .copy
 	inc hl
-	inc hl
+	inc hl;move past the two bytes of the map ID
 	ld de, wMornEncounterRate
-	ld bc, 4
+	ld bc, 4 ;four times of day so copy the four encounter rates
 	rst CopyBytes
 .done_copy
 	call _WaterWildmonLookup
@@ -40,8 +40,11 @@ FindNest: ; 2a01f
 	cp ORANGE_REGION
 	jr z, .orange
 	decoord 0, 0
+
+;here it is getting the region table to load not *very* important, but just mainly which data table it is loading into hl and ending up looking at, easily swapped out
 	ld hl, JohtoGrassWildMons
 	call .FindGrass
+; it calls find grass or find water because they are indeed structured differently, as I don't believe water mons take time of day into account in the current form 
 	ld hl, JohtoWaterWildMons
 	call .FindWater
 	call .RoamMon1
@@ -70,36 +73,41 @@ FindNest: ; 2a01f
 	push hl
 
 	; assume that navel rock is the first off-screen map, and end the search early
+	;first two bytes are the map ID
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
 	ld c, a
+; next for bytes are the percentages for the time of day, skip them for now
 	inc hl
 	inc hl
 	inc hl
 	inc hl
+	;7 grass mons per time of day, and 4 times of day
 	ld a, NUM_GRASSMON * 4
 	call .SearchMapForMon
 	jr nc, .next_grass
 	ld [de], a
 	inc de
 
-.next_grass
+.next_grass ;on to the next map I believe this might actually be broken because I don't think I truly verified that GRASS_WILDDATA_LENGTH matched right since it was always getting the first group available
 	pop hl
 	ld bc, GRASS_WILDDATA_LENGTH
 	add hl, bc
 	jr .FindGrass
 ; 2a06e
-
+; never tested water
 .FindWater: ; 2a06e
 	ld a, [hl]
 	cp -1
 	ret z
 	push hl
+	;check mapgroup
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
 	ld c, a
+	;only one percentage due to water not caring about time of day
 	inc hl
 	ld a, 3
 	call .SearchMapForMon
@@ -320,7 +328,7 @@ ChooseWildEncounter: ; 2a14f
 	ld c, $ff
 _ChooseWildEncounter:
 	push bc
-	call LoadWildMonDataPointer
+	call LoadWildMonDataPointer ;get the pointer for the list of pokemon on this map again
 	pop bc
 	jp nc, .nowildbattle
 	;push bc
@@ -330,23 +338,23 @@ _ChooseWildEncounter:
 
 	inc hl
 	inc hl
-	inc hl
+	inc hl ;move past the map ID and one of the percentages
 	push bc
 	call CheckOnWater
 	pop bc
-	ld de, WaterMonProbTable
+	ld de, WaterMonProbTable 
 	ld b, $4
-	jr z, .got_table
+	jr z, .got_table ;water only has one percentage so if so we're done
 	inc hl
 	inc hl
-	inc hl
+	inc hl ;move past the other three percentages for the times of day if we're not on water
 	ld a, [wTimeOfDay]
 	push bc
-	ld bc, NUM_GRASSMON * 3
+	ld bc, NUM_GRASSMON * 3 ; each grassmon is three bytes so you add it times the time of day to get the right list
 	rst AddNTimes
 	pop bc
-	ld de, GrassMonProbTable
-	ld b, (NUM_GRASSMON-1) *3
+	ld de, GrassMonProbTable ; this defines the probalities for the number slot the pokemon is in from 1-7 in each list antiquated and probably won't be used anymore
+	ld b, (NUM_GRASSMON-1) *3 ; b here is now which index of grassmon in the list is being checked atm 0-6 for the 7 differen't mons
 
 .got_table
 	; Check if we want to force a type
@@ -374,6 +382,7 @@ _ChooseWildEncounter:
 	ld a, [wBaseType2]
 	cp c
 	jr z, .can_force_type
+	;each grassmon is three bytes so lets make sure to dec b three times to make sure everything still lines up
 	dec b
 	dec b
 	dec b
@@ -409,6 +418,7 @@ _ChooseWildEncounter:
 	add hl, bc ; this selects our mon
 	ld c, a
 	ld a, [hli]
+	;theres our mons level
 	ld b, a
 ; If the Pokemon is encountered by surfing, we need to give the levels some variety.
 	push bc
@@ -432,10 +442,13 @@ _ChooseWildEncounter:
 ; Store the level
 .ok
 	ld a, b
+	;this puts the level into the level
 	ld [wCurPartyLevel], a
 	ld a, [hli]
 	ld b, a
+	;this gets the species
 	ld a, [hl]
+	;anc now we have the group
 	ld [wCurGroup], a
 	ld [wTempWildMonGroup], a
 	ld a, b
@@ -706,9 +719,9 @@ LookUpWildmonsForMapDE: ; 2a288
 .loop
 	push hl
 	ld a, [hl]
-	inc a
-	jr z, .nope
-	ld a, d
+	inc a ;checking for $ff for the end list
+	jr z, .nope ; if its the end of the list no wilds
+	ld a, d ;check if the the list its at matches the map id in de
 	cp [hl]
 	jr nz, .next
 	inc hl
@@ -716,7 +729,7 @@ LookUpWildmonsForMapDE: ; 2a288
 	cp [hl]
 	jr z, .yup
 
-.next
+.next ;lists of wildmons are a fixed length and that length is in BC right now so it adds it to move onto the next
 	pop hl
 	add hl, bc
 	jr .loop
@@ -726,7 +739,7 @@ LookUpWildmonsForMapDE: ; 2a288
 	and a
 	ret
 
-.yup
+.yup ;carry flag is set when it finds the right list
 	pop hl
 	scf
 	ret
