@@ -217,6 +217,7 @@ NUM_GRASSMON EQU 7
 NUM_WATERMON EQU 3
 
 GRASS_WILDDATA_LENGTH EQU (NUM_GRASSMON * 3 + 1) * 4 + 2
+; each set of wild data has a fixed length, the number of grassmon per time of day is 7, each one takes three bytes (level, species, group), there are then 4 times of day then +2 for I'm not sure, but I didn't mess with that part, maybe the map ID? hm, I never tested more than one map so it might even be broken
 WATER_WILDDATA_LENGTH EQU (NUM_WATERMON * 3 + 1) * 1 + 2
 
 
