@@ -7,7 +7,7 @@ VariantPaletteTable:
     variant_palettes GROUP_GENERATION_TWO,  Johto
     variant_palettes GROUP_GENERATION_THREE, Hoenn
     variant_palettes GROUP_GENERATION_FOUR, Sinnoh
-    variant_palettes GROUP_GENERATION_THREE, Unova
+    variant_palettes GROUP_GENERATION_FIVE, Unova
 
 
 	dbba -1,         KantoPalettes
