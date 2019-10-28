@@ -20,7 +20,7 @@ UnovaIconPointers::
 	add_icon Simisage
 	add_icon Pansear
 	add_icon Simisear
-	add_icon Panmpour
+	add_icon Panpour
 	add_icon Simipour
 	add_icon Munna
 	add_icon Musharna
@@ -45,7 +45,7 @@ UnovaIconPointers::
 	add_icon Seismitoad
 	add_icon Throh
 	add_icon Sawk
-	add_icon Sweaddle
+	add_icon Sewaddle
 	add_icon Swadloon
 	add_icon Leavanny
 	add_icon Venipede
@@ -70,11 +70,11 @@ UnovaIconPointers::
 	add_icon Yamask
 	add_icon Cofagrigus
 	add_icon Tirtouga
-	add_icon Caracosta
+	add_icon Carracosta
 	add_icon Archen
 	add_icon Archeops
 	add_icon Trubbish
-	add_icon Grabodor
+	add_icon Garbodor
 	add_icon Zorua
 	add_icon Zoroark
 	add_icon Minccino
@@ -87,7 +87,7 @@ UnovaIconPointers::
 	add_icon Reuniclus
 	add_icon Ducklett
 	add_icon Swanna
-	add_icon Vanilite
+	add_icon Vanillite
 	add_icon Deerling
 	add_icon Sawsbuck
 	add_icon Emolga
@@ -104,10 +104,10 @@ UnovaIconPointers::
 	add_icon Ferrothorn
 	add_icon Klink
 	add_icon Klang
-	add_icon Klingklang
+	add_icon Klinklang
 	add_icon Tynamo
-	add_icon Eelectrik
-	add_icon Eelecktross
+	add_icon Eelektrik
+	add_icon Eelektross
 	add_icon Elgyem
 	add_icon Beheeyem
 	add_icon Litwick
@@ -129,7 +129,7 @@ UnovaIconPointers::
 	add_icon Golurk
 	add_icon Pawniard
 	add_icon Bisharp
-	add_icon Boufallant
+	add_icon Bouffalant
 	add_icon Rufflet
 	add_icon Braviary
 	add_icon Vullaby
@@ -142,14 +142,14 @@ UnovaIconPointers::
 	add_icon Larvesta
 	add_icon Volcarona
 	add_icon Cobalion
-	add_icon Terrackion
+	add_icon Terrakion
 	add_icon Virizion
 	add_icon Tornadus
 	add_icon Thundurus
 	add_icon Reshiram
 	add_icon Zekrom
 	add_icon Landorus
-	add_icon Kyruem
+	add_icon Kyurem
 	add_icon Keldeo
-	add_icon Melloetta
+	add_icon Meloetta
 	add_icon Genesect

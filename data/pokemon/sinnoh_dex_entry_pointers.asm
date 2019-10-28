@@ -47,7 +47,7 @@ SinnohPokedexEntryPointers::
 	add_pokedexentry Purugly
 	add_pokedexentry Chingling
 	add_pokedexentry Stunky
-	add_pokedexentry Skunktank
+	add_pokedexentry Skuntank
 	add_pokedexentry Bronzor
 	add_pokedexentry Bronzong
 	add_pokedexentry Bonsly

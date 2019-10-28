@@ -20,7 +20,7 @@ UnovaAnimationPointers::
 	add_anim Simisage
 	add_anim Pansear
 	add_anim Simisear
-	add_anim Panmpour
+	add_anim Panpour
 	add_anim Simipour
 	add_anim Munna
 	add_anim Musharna
@@ -45,7 +45,7 @@ UnovaAnimationPointers::
 	add_anim Seismitoad
 	add_anim Throh
 	add_anim Sawk
-	add_anim Sweaddle
+	add_anim Sewaddle
 	add_anim Swadloon
 	add_anim Leavanny
 	add_anim Venipede
@@ -70,11 +70,11 @@ UnovaAnimationPointers::
 	add_anim Yamask
 	add_anim Cofagrigus
 	add_anim Tirtouga
-	add_anim Caracosta
+	add_anim Carracosta
 	add_anim Archen
 	add_anim Archeops
 	add_anim Trubbish
-	add_anim Grabodor
+	add_anim Garbodor
 	add_anim Zorua
 	add_anim Zoroark
 	add_anim Minccino
@@ -87,7 +87,7 @@ UnovaAnimationPointers::
 	add_anim Reuniclus
 	add_anim Ducklett
 	add_anim Swanna
-	add_anim Vanilite
+	add_anim Vanillite
 	add_anim Deerling
 	add_anim Sawsbuck
 	add_anim Emolga
@@ -104,10 +104,10 @@ UnovaAnimationPointers::
 	add_anim Ferrothorn
 	add_anim Klink
 	add_anim Klang
-	add_anim Klingklang
+	add_anim Klinklang
 	add_anim Tynamo
-	add_anim Eelectrik
-	add_anim Eelecktross
+	add_anim Eelektrik
+	add_anim Eelektross
 	add_anim Elgyem
 	add_anim Beheeyem
 	add_anim Litwick
@@ -129,7 +129,7 @@ UnovaAnimationPointers::
 	add_anim Golurk
 	add_anim Pawniard
 	add_anim Bisharp
-	add_anim Boufallant
+	add_anim Bouffalant
 	add_anim Rufflet
 	add_anim Braviary
 	add_anim Vullaby
@@ -142,14 +142,14 @@ UnovaAnimationPointers::
 	add_anim Larvesta
 	add_anim Volcarona
 	add_anim Cobalion
-	add_anim Terrackion
+	add_anim Terrakion
 	add_anim Virizion
 	add_anim Tornadus
 	add_anim Thundurus
 	add_anim Reshiram
 	add_anim Zekrom
 	add_anim Landorus
-	add_anim Kyruem
+	add_anim Kyurem
 	add_anim Keldeo
-	add_anim Melloetta
+	add_anim Meloetta
 	add_anim Genesect

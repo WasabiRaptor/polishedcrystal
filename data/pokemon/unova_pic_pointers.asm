@@ -20,7 +20,7 @@ UnovaPicPointers::
 	add_pics Simisage
 	add_pics Pansear
 	add_pics Simisear
-	add_pics Panmpour
+	add_pics Panpour
 	add_pics Simipour
 	add_pics Munna
 	add_pics Musharna
@@ -45,7 +45,7 @@ UnovaPicPointers::
 	add_pics Seismitoad
 	add_pics Throh
 	add_pics Sawk
-	add_pics Sweaddle
+	add_pics Sewaddle
 	add_pics Swadloon
 	add_pics Leavanny
 	add_pics Venipede
@@ -70,11 +70,11 @@ UnovaPicPointers::
 	add_pics Yamask
 	add_pics Cofagrigus
 	add_pics Tirtouga
-	add_pics Caracosta
+	add_pics Carracosta
 	add_pics Archen
 	add_pics Archeops
 	add_pics Trubbish
-	add_pics Grabodor
+	add_pics Garbodor
 	add_pics Zorua
 	add_pics Zoroark
 	add_pics Minccino
@@ -87,7 +87,7 @@ UnovaPicPointers::
 	add_pics Reuniclus
 	add_pics Ducklett
 	add_pics Swanna
-	add_pics Vanilite
+	add_pics Vanillite
 	add_pics Deerling
 	add_pics Sawsbuck
 	add_pics Emolga
@@ -104,10 +104,10 @@ UnovaPicPointers::
 	add_pics Ferrothorn
 	add_pics Klink
 	add_pics Klang
-	add_pics Klingklang
+	add_pics Klinklang
 	add_pics Tynamo
-	add_pics Eelectrik
-	add_pics Eelecktross
+	add_pics Eelektrik
+	add_pics Eelektross
 	add_pics Elgyem
 	add_pics Beheeyem
 	add_pics Litwick
@@ -129,7 +129,7 @@ UnovaPicPointers::
 	add_pics Golurk
 	add_pics Pawniard
 	add_pics Bisharp
-	add_pics Boufallant
+	add_pics Bouffalant
 	add_pics Rufflet
 	add_pics Braviary
 	add_pics Vullaby
@@ -142,14 +142,14 @@ UnovaPicPointers::
 	add_pics Larvesta
 	add_pics Volcarona
 	add_pics Cobalion
-	add_pics Terrackion
+	add_pics Terrakion
 	add_pics Virizion
 	add_pics Tornadus
 	add_pics Thundurus
 	add_pics Reshiram
 	add_pics Zekrom
 	add_pics Landorus
-	add_pics Kyruem
+	add_pics Kyurem
 	add_pics Keldeo
-	add_pics Melloetta
+	add_pics Meloetta
 	add_pics Genesect

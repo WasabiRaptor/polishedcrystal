@@ -20,7 +20,7 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Simisage
 	add_evosattacks Pansear
 	add_evosattacks Simisear
-	add_evosattacks Panmpour
+	add_evosattacks Panpour
 	add_evosattacks Simipour
 	add_evosattacks Munna
 	add_evosattacks Musharna
@@ -45,7 +45,7 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Seismitoad
 	add_evosattacks Throh
 	add_evosattacks Sawk
-	add_evosattacks Sweaddle
+	add_evosattacks Sewaddle
 	add_evosattacks Swadloon
 	add_evosattacks Leavanny
 	add_evosattacks Venipede
@@ -70,11 +70,11 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Yamask
 	add_evosattacks Cofagrigus
 	add_evosattacks Tirtouga
-	add_evosattacks Caracosta
+	add_evosattacks Carracosta
 	add_evosattacks Archen
 	add_evosattacks Archeops
 	add_evosattacks Trubbish
-	add_evosattacks Grabodor
+	add_evosattacks Garbodor
 	add_evosattacks Zorua
 	add_evosattacks Zoroark
 	add_evosattacks Minccino
@@ -87,7 +87,7 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Reuniclus
 	add_evosattacks Ducklett
 	add_evosattacks Swanna
-	add_evosattacks Vanilite
+	add_evosattacks Vanillite
 	add_evosattacks Deerling
 	add_evosattacks Sawsbuck
 	add_evosattacks Emolga
@@ -104,10 +104,10 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Ferrothorn
 	add_evosattacks Klink
 	add_evosattacks Klang
-	add_evosattacks Klingklang
+	add_evosattacks Klinklang
 	add_evosattacks Tynamo
-	add_evosattacks Eelectrik
-	add_evosattacks Eelecktross
+	add_evosattacks Eelektrik
+	add_evosattacks Eelektross
 	add_evosattacks Elgyem
 	add_evosattacks Beheeyem
 	add_evosattacks Litwick
@@ -129,7 +129,7 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Golurk
 	add_evosattacks Pawniard
 	add_evosattacks Bisharp
-	add_evosattacks Boufallant
+	add_evosattacks Bouffalant
 	add_evosattacks Rufflet
 	add_evosattacks Braviary
 	add_evosattacks Vullaby
@@ -142,14 +142,14 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Larvesta
 	add_evosattacks Volcarona
 	add_evosattacks Cobalion
-	add_evosattacks Terrackion
+	add_evosattacks Terrakion
 	add_evosattacks Virizion
 	add_evosattacks Tornadus
 	add_evosattacks Thundurus
 	add_evosattacks Reshiram
 	add_evosattacks Zekrom
 	add_evosattacks Landorus
-	add_evosattacks Kyruem
+	add_evosattacks Kyurem
 	add_evosattacks Keldeo
-	add_evosattacks Melloetta
+	add_evosattacks Meloetta
 	add_evosattacks Genesect

@@ -47,7 +47,7 @@ SinnohFramesPointers::
 	add_frames Purugly
 	add_frames Chingling
 	add_frames Stunky
-	add_frames Skunktank
+	add_frames Skuntank
 	add_frames Bronzor
 	add_frames Bronzong
 	add_frames Bonsly

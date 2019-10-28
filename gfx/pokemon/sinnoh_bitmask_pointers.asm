@@ -47,7 +47,7 @@ SinnohBitmasksPointers::
 	add_bitmasks Purugly
 	add_bitmasks Chingling
 	add_bitmasks Stunky
-	add_bitmasks Skunktank
+	add_bitmasks Skuntank
 	add_bitmasks Bronzor
 	add_bitmasks Bronzong
 	add_bitmasks Bonsly

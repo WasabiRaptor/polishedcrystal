@@ -47,7 +47,7 @@ SinnohAnimationPointers::
 	add_anim Purugly
 	add_anim Chingling
 	add_anim Stunky
-	add_anim Skunktank
+	add_anim Skuntank
 	add_anim Bronzor
 	add_anim Bronzong
 	add_anim Bonsly

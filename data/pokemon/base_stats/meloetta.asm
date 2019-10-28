@@ -9,7 +9,7 @@
         db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn GENDERLESS, 15 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/meloetta_aria/front.dimensions"  
+        INCBIN "gfx/pokemon/meloetta/front.dimensions"  
         db SERENE_GRACE, SERENE_GRACE     ; abilities
         db SERENE_GRACE    ; hidden ability
         db GROWTH_SLOW ; growth rate

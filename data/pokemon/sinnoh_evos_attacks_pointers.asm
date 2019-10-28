@@ -47,7 +47,7 @@ SinnohEvosAttacksPointers::
 	add_evosattacks Purugly
 	add_evosattacks Chingling
 	add_evosattacks Stunky
-	add_evosattacks Skunktank
+	add_evosattacks Skuntank
 	add_evosattacks Bronzor
 	add_evosattacks Bronzong
 	add_evosattacks Bonsly

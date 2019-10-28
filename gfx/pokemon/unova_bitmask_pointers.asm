@@ -20,7 +20,7 @@ UnovaBitmasksPointers::
 	add_bitmasks Simisage
 	add_bitmasks Pansear
 	add_bitmasks Simisear
-	add_bitmasks Panmpour
+	add_bitmasks Panpour
 	add_bitmasks Simipour
 	add_bitmasks Munna
 	add_bitmasks Musharna
@@ -45,7 +45,7 @@ UnovaBitmasksPointers::
 	add_bitmasks Seismitoad
 	add_bitmasks Throh
 	add_bitmasks Sawk
-	add_bitmasks Sweaddle
+	add_bitmasks Sewaddle
 	add_bitmasks Swadloon
 	add_bitmasks Leavanny
 	add_bitmasks Venipede
@@ -70,11 +70,11 @@ UnovaBitmasksPointers::
 	add_bitmasks Yamask
 	add_bitmasks Cofagrigus
 	add_bitmasks Tirtouga
-	add_bitmasks Caracosta
+	add_bitmasks Carracosta
 	add_bitmasks Archen
 	add_bitmasks Archeops
 	add_bitmasks Trubbish
-	add_bitmasks Grabodor
+	add_bitmasks Garbodor
 	add_bitmasks Zorua
 	add_bitmasks Zoroark
 	add_bitmasks Minccino
@@ -87,7 +87,7 @@ UnovaBitmasksPointers::
 	add_bitmasks Reuniclus
 	add_bitmasks Ducklett
 	add_bitmasks Swanna
-	add_bitmasks Vanilite
+	add_bitmasks Vanillite
 	add_bitmasks Deerling
 	add_bitmasks Sawsbuck
 	add_bitmasks Emolga
@@ -104,10 +104,10 @@ UnovaBitmasksPointers::
 	add_bitmasks Ferrothorn
 	add_bitmasks Klink
 	add_bitmasks Klang
-	add_bitmasks Klingklang
+	add_bitmasks Klinklang
 	add_bitmasks Tynamo
-	add_bitmasks Eelectrik
-	add_bitmasks Eelecktross
+	add_bitmasks Eelektrik
+	add_bitmasks Eelektross
 	add_bitmasks Elgyem
 	add_bitmasks Beheeyem
 	add_bitmasks Litwick
@@ -129,7 +129,7 @@ UnovaBitmasksPointers::
 	add_bitmasks Golurk
 	add_bitmasks Pawniard
 	add_bitmasks Bisharp
-	add_bitmasks Boufallant
+	add_bitmasks Bouffalant
 	add_bitmasks Rufflet
 	add_bitmasks Braviary
 	add_bitmasks Vullaby
@@ -142,14 +142,14 @@ UnovaBitmasksPointers::
 	add_bitmasks Larvesta
 	add_bitmasks Volcarona
 	add_bitmasks Cobalion
-	add_bitmasks Terrackion
+	add_bitmasks Terrakion
 	add_bitmasks Virizion
 	add_bitmasks Tornadus
 	add_bitmasks Thundurus
 	add_bitmasks Reshiram
 	add_bitmasks Zekrom
 	add_bitmasks Landorus
-	add_bitmasks Kyruem
+	add_bitmasks Kyurem
 	add_bitmasks Keldeo
-	add_bitmasks Melloetta
+	add_bitmasks Meloetta
 	add_bitmasks Genesect

@@ -20,7 +20,7 @@ UnovaAnimationIdlePointers::
 	add_idleanim Simisage
 	add_idleanim Pansear
 	add_idleanim Simisear
-	add_idleanim Panmpour
+	add_idleanim Panpour
 	add_idleanim Simipour
 	add_idleanim Munna
 	add_idleanim Musharna
@@ -45,7 +45,7 @@ UnovaAnimationIdlePointers::
 	add_idleanim Seismitoad
 	add_idleanim Throh
 	add_idleanim Sawk
-	add_idleanim Sweaddle
+	add_idleanim Sewaddle
 	add_idleanim Swadloon
 	add_idleanim Leavanny
 	add_idleanim Venipede
@@ -70,11 +70,11 @@ UnovaAnimationIdlePointers::
 	add_idleanim Yamask
 	add_idleanim Cofagrigus
 	add_idleanim Tirtouga
-	add_idleanim Caracosta
+	add_idleanim Carracosta
 	add_idleanim Archen
 	add_idleanim Archeops
 	add_idleanim Trubbish
-	add_idleanim Grabodor
+	add_idleanim Garbodor
 	add_idleanim Zorua
 	add_idleanim Zoroark
 	add_idleanim Minccino
@@ -87,7 +87,7 @@ UnovaAnimationIdlePointers::
 	add_idleanim Reuniclus
 	add_idleanim Ducklett
 	add_idleanim Swanna
-	add_idleanim Vanilite
+	add_idleanim Vanillite
 	add_idleanim Deerling
 	add_idleanim Sawsbuck
 	add_idleanim Emolga
@@ -104,10 +104,10 @@ UnovaAnimationIdlePointers::
 	add_idleanim Ferrothorn
 	add_idleanim Klink
 	add_idleanim Klang
-	add_idleanim Klingklang
+	add_idleanim Klinklang
 	add_idleanim Tynamo
-	add_idleanim Eelectrik
-	add_idleanim Eelecktross
+	add_idleanim Eelektrik
+	add_idleanim Eelektross
 	add_idleanim Elgyem
 	add_idleanim Beheeyem
 	add_idleanim Litwick
@@ -129,7 +129,7 @@ UnovaAnimationIdlePointers::
 	add_idleanim Golurk
 	add_idleanim Pawniard
 	add_idleanim Bisharp
-	add_idleanim Boufallant
+	add_idleanim Bouffalant
 	add_idleanim Rufflet
 	add_idleanim Braviary
 	add_idleanim Vullaby
@@ -142,14 +142,14 @@ UnovaAnimationIdlePointers::
 	add_idleanim Larvesta
 	add_idleanim Volcarona
 	add_idleanim Cobalion
-	add_idleanim Terrackion
+	add_idleanim Terrakion
 	add_idleanim Virizion
 	add_idleanim Tornadus
 	add_idleanim Thundurus
 	add_idleanim Reshiram
 	add_idleanim Zekrom
 	add_idleanim Landorus
-	add_idleanim Kyruem
+	add_idleanim Kyurem
 	add_idleanim Keldeo
-	add_idleanim Melloetta
+	add_idleanim Meloetta
 	add_idleanim Genesect

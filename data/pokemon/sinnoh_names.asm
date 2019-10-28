@@ -47,7 +47,7 @@ SinnohNames::
 	db "Purugly@"
 	db "Chingling@"
 	db "Stunky@"
-	db "Skunktank@"
+	db "Skuntank@"
 	db "Bronzor@"
 	db "Bronzong@"
 	db "Bonsly@"

@@ -47,7 +47,7 @@ SinnohPicPointers::
 	add_pics Purugly
 	add_pics Chingling
 	add_pics Stunky
-	add_pics Skunktank
+	add_pics Skuntank
 	add_pics Bronzor
 	add_pics Bronzong
 	add_pics Bonsly

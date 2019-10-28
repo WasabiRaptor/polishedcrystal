@@ -20,7 +20,7 @@ UnovaFramesPointers::
 	add_frames Simisage
 	add_frames Pansear
 	add_frames Simisear
-	add_frames Panmpour
+	add_frames Panpour
 	add_frames Simipour
 	add_frames Munna
 	add_frames Musharna
@@ -45,7 +45,7 @@ UnovaFramesPointers::
 	add_frames Seismitoad
 	add_frames Throh
 	add_frames Sawk
-	add_frames Sweaddle
+	add_frames Sewaddle
 	add_frames Swadloon
 	add_frames Leavanny
 	add_frames Venipede
@@ -70,11 +70,11 @@ UnovaFramesPointers::
 	add_frames Yamask
 	add_frames Cofagrigus
 	add_frames Tirtouga
-	add_frames Caracosta
+	add_frames Carracosta
 	add_frames Archen
 	add_frames Archeops
 	add_frames Trubbish
-	add_frames Grabodor
+	add_frames Garbodor
 	add_frames Zorua
 	add_frames Zoroark
 	add_frames Minccino
@@ -87,7 +87,7 @@ UnovaFramesPointers::
 	add_frames Reuniclus
 	add_frames Ducklett
 	add_frames Swanna
-	add_frames Vanilite
+	add_frames Vanillite
 	add_frames Deerling
 	add_frames Sawsbuck
 	add_frames Emolga
@@ -104,10 +104,10 @@ UnovaFramesPointers::
 	add_frames Ferrothorn
 	add_frames Klink
 	add_frames Klang
-	add_frames Klingklang
+	add_frames Klinklang
 	add_frames Tynamo
-	add_frames Eelectrik
-	add_frames Eelecktross
+	add_frames Eelektrik
+	add_frames Eelektross
 	add_frames Elgyem
 	add_frames Beheeyem
 	add_frames Litwick
@@ -129,7 +129,7 @@ UnovaFramesPointers::
 	add_frames Golurk
 	add_frames Pawniard
 	add_frames Bisharp
-	add_frames Boufallant
+	add_frames Bouffalant
 	add_frames Rufflet
 	add_frames Braviary
 	add_frames Vullaby
@@ -142,14 +142,14 @@ UnovaFramesPointers::
 	add_frames Larvesta
 	add_frames Volcarona
 	add_frames Cobalion
-	add_frames Terrackion
+	add_frames Terrakion
 	add_frames Virizion
 	add_frames Tornadus
 	add_frames Thundurus
 	add_frames Reshiram
 	add_frames Zekrom
 	add_frames Landorus
-	add_frames Kyruem
+	add_frames Kyurem
 	add_frames Keldeo
-	add_frames Melloetta
+	add_frames Meloetta
 	add_frames Genesect

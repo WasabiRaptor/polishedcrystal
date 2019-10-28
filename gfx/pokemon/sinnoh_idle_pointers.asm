@@ -47,7 +47,7 @@ SinnohAnimationIdlePointers::
 	add_idleanim Purugly
 	add_idleanim Chingling
 	add_idleanim Stunky
-	add_idleanim Skunktank
+	add_idleanim Skuntank
 	add_idleanim Bronzor
 	add_idleanim Bronzong
 	add_idleanim Bonsly

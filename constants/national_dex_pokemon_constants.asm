@@ -501,7 +501,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon PURUGLY
 	nat_dexmon CHINGLING
 	nat_dexmon STUNKY
-	nat_dexmon SKUNKTANK
+	nat_dexmon SKUNTANK
 	nat_dexmon BRONZOR
 	nat_dexmon BRONZONG
 	nat_dexmon BONSLY
@@ -585,7 +585,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon SIMISAGE
 	nat_dexmon PANSEAR
 	nat_dexmon SIMISEAR
-	nat_dexmon PANMPOUR
+	nat_dexmon PANPOUR
 	nat_dexmon SIMIPOUR
 	nat_dexmon MUNNA
 	nat_dexmon MUSHARNA
@@ -610,7 +610,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon SEISMITOAD
 	nat_dexmon THROH
 	nat_dexmon SAWK
-	nat_dexmon SWEADDLE
+	nat_dexmon SEWADDLE
 	nat_dexmon SWADLOON
 	nat_dexmon LEAVANNY
 	nat_dexmon VENIPEDE
@@ -635,11 +635,11 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon YAMASK
 	nat_dexmon COFAGRIGUS
 	nat_dexmon TIRTOUGA
-	nat_dexmon CARACOSTA
+	nat_dexmon CARRACOSTA
 	nat_dexmon ARCHEN
 	nat_dexmon ARCHEOPS
 	nat_dexmon TRUBBISH
-	nat_dexmon GRABODOR
+	nat_dexmon GARBODOR
 	nat_dexmon ZORUA
 	nat_dexmon ZOROARK
 	nat_dexmon MINCCINO
@@ -652,7 +652,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon REUNICLUS
 	nat_dexmon DUCKLETT
 	nat_dexmon SWANNA
-	nat_dexmon VANILITE
+	nat_dexmon VANILLITE
 	nat_dexmon DEERLING
 	nat_dexmon SAWSBUCK
 	nat_dexmon EMOLGA
@@ -669,10 +669,10 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon FERROTHORN
 	nat_dexmon KLINK
 	nat_dexmon KLANG
-	nat_dexmon KLINGKLANG
+	nat_dexmon KLINKLANG
 	nat_dexmon TYNAMO
-	nat_dexmon EELECTRIK
-	nat_dexmon EELECKTROSS
+	nat_dexmon EELEKTRIK
+	nat_dexmon EELEKTROSS
 	nat_dexmon ELGYEM
 	nat_dexmon BEHEEYEM
 	nat_dexmon LITWICK
@@ -694,7 +694,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon GOLURK
 	nat_dexmon PAWNIARD
 	nat_dexmon BISHARP
-	nat_dexmon BOUFALLANT
+	nat_dexmon BOUFFALANT
 	nat_dexmon RUFFLET
 	nat_dexmon BRAVIARY
 	nat_dexmon VULLABY
@@ -707,16 +707,16 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon LARVESTA
 	nat_dexmon VOLCARONA
 	nat_dexmon COBALION
-	nat_dexmon TERRACKION
+	nat_dexmon TERRAKION
 	nat_dexmon VIRIZION
 	nat_dexmon TORNADUS
 	nat_dexmon THUNDURUS
 	nat_dexmon RESHIRAM
 	nat_dexmon ZEKROM
 	nat_dexmon LANDORUS
-	nat_dexmon KYRUEM
+	nat_dexmon KYUREM
 	nat_dexmon KELDEO
-	nat_dexmon MELLOETTA
+	nat_dexmon MELOETTA
 	nat_dexmon GENESECT
 NUM_UNOVA_POKEMON EQU const_value +-1
 

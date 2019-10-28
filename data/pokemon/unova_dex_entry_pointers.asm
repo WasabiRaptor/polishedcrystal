@@ -20,7 +20,7 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Simisage
 	add_pokedexentry Pansear
 	add_pokedexentry Simisear
-	add_pokedexentry Panmpour
+	add_pokedexentry Panpour
 	add_pokedexentry Simipour
 	add_pokedexentry Munna
 	add_pokedexentry Musharna
@@ -45,7 +45,7 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Seismitoad
 	add_pokedexentry Throh
 	add_pokedexentry Sawk
-	add_pokedexentry Sweaddle
+	add_pokedexentry Sewaddle
 	add_pokedexentry Swadloon
 	add_pokedexentry Leavanny
 	add_pokedexentry Venipede
@@ -70,11 +70,11 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Yamask
 	add_pokedexentry Cofagrigus
 	add_pokedexentry Tirtouga
-	add_pokedexentry Caracosta
+	add_pokedexentry Carracosta
 	add_pokedexentry Archen
 	add_pokedexentry Archeops
 	add_pokedexentry Trubbish
-	add_pokedexentry Grabodor
+	add_pokedexentry Garbodor
 	add_pokedexentry Zorua
 	add_pokedexentry Zoroark
 	add_pokedexentry Minccino
@@ -87,7 +87,7 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Reuniclus
 	add_pokedexentry Ducklett
 	add_pokedexentry Swanna
-	add_pokedexentry Vanilite
+	add_pokedexentry Vanillite
 	add_pokedexentry Deerling
 	add_pokedexentry Sawsbuck
 	add_pokedexentry Emolga
@@ -104,10 +104,10 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Ferrothorn
 	add_pokedexentry Klink
 	add_pokedexentry Klang
-	add_pokedexentry Klingklang
+	add_pokedexentry Klinklang
 	add_pokedexentry Tynamo
-	add_pokedexentry Eelectrik
-	add_pokedexentry Eelecktross
+	add_pokedexentry Eelektrik
+	add_pokedexentry Eelektross
 	add_pokedexentry Elgyem
 	add_pokedexentry Beheeyem
 	add_pokedexentry Litwick
@@ -129,7 +129,7 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Golurk
 	add_pokedexentry Pawniard
 	add_pokedexentry Bisharp
-	add_pokedexentry Boufallant
+	add_pokedexentry Bouffalant
 	add_pokedexentry Rufflet
 	add_pokedexentry Braviary
 	add_pokedexentry Vullaby
@@ -142,14 +142,14 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Larvesta
 	add_pokedexentry Volcarona
 	add_pokedexentry Cobalion
-	add_pokedexentry Terrackion
+	add_pokedexentry Terrakion
 	add_pokedexentry Virizion
 	add_pokedexentry Tornadus
 	add_pokedexentry Thundurus
 	add_pokedexentry Reshiram
 	add_pokedexentry Zekrom
 	add_pokedexentry Landorus
-	add_pokedexentry Kyruem
+	add_pokedexentry Kyurem
 	add_pokedexentry Keldeo
-	add_pokedexentry Melloetta
+	add_pokedexentry Meloetta
 	add_pokedexentry Genesect

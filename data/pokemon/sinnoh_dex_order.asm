@@ -47,7 +47,7 @@ SinnohDexOrder::
 	grouped_dex_order_mon GLAMEOW
 	grouped_dex_order_mon PURUGLY
 	grouped_dex_order_mon STUNKY
-	grouped_dex_order_mon SKUNKTANK
+	grouped_dex_order_mon SKUNTANK
 	grouped_dex_order_mon BRONZOR
 	grouped_dex_order_mon BRONZONG
 	grouped_dex_order_mon CHATOT
