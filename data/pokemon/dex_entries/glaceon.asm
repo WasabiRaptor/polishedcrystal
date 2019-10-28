@@ -5,4 +5,4 @@
 	next "its fur into sharp needles. It"
 	next "can drop its body temperature"
 	
-	page "below –75 degrees Fahrenheit."
+	page "below -75 degrees Fahrenheit."
