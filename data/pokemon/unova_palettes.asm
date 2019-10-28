@@ -177,6 +177,10 @@ INCBIN "gfx/pokemon/swanna/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/swanna/shiny.pal"
 INCBIN "gfx/pokemon/vanillite/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/vanillite/shiny.pal"
+INCBIN "gfx/pokemon/vanillish/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/vanillish/shiny.pal"
+INCBIN "gfx/pokemon/vanilluxe/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/vanilluxe/shiny.pal"
 INCBIN "gfx/pokemon/deerling/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/deerling/shiny.pal"
 INCBIN "gfx/pokemon/sawsbuck/front.gbcpal", middle_colors
