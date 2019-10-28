@@ -4619,6 +4619,11 @@ INCLUDE "gfx/pokemon/sinnoh_anims.asm"
 INCLUDE "gfx/pokemon/sinnoh_idle_pointers.asm"
 INCLUDE "gfx/pokemon/sinnoh_idles.asm"
 
+INCLUDE "gfx/pokemon/unova_anim_pointers.asm"
+INCLUDE "gfx/pokemon/unova_anims.asm"
+INCLUDE "gfx/pokemon/unova_idle_pointers.asm"
+INCLUDE "gfx/pokemon/unova_idles.asm"
+
 SECTION "Pic Animations Frames 0", ROMX
 
 INCLUDE "gfx/pokemon/other_frame_pointers.asm"
@@ -4646,6 +4651,11 @@ SECTION "Pic Animations Frames 4", ROMX
 INCLUDE "gfx/pokemon/sinnoh_frames.asm"
 INCLUDE "gfx/pokemon/sinnoh_frame_pointers.asm"
 
+SECTION "Pic Animations Frames 5", ROMX
+
+INCLUDE "gfx/pokemon/unova_frames.asm"
+INCLUDE "gfx/pokemon/unova_frame_pointers.asm"
+
 
 SECTION "Pic Animations Bitmasks", ROMX
 
@@ -4660,6 +4670,8 @@ INCLUDE "gfx/pokemon/hoenn_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_bitmasks.asm"
 INCLUDE "gfx/pokemon/sinnoh_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/sinnoh_bitmasks.asm"
+INCLUDE "gfx/pokemon/unova_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/unova_bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX

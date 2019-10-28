@@ -74,6 +74,8 @@ $(BUILD_DIR)gfx/sprites.o \
 $(BUILD_DIR)gfx/kanto_footprints.o\
 $(BUILD_DIR)gfx/johto_footprints.o\
 $(BUILD_DIR)gfx/hoenn_footprints.o\
+$(BUILD_DIR)gfx/sinnoh_footprints.o\
+$(BUILD_DIR)gfx/unova_footprints.o\
 
 ### Build targets
 
