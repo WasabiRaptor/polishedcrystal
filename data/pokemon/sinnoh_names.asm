@@ -90,7 +90,7 @@ SinnohNames::
 	db "Gallade@"
 	db "Probopass@"
 	db "Dusknoir@"
-	db "Frosslass@"
+	db "Froslass@"
 	db "Rotom@"
 	db "Uxie@"
 	db "Mesprit@"

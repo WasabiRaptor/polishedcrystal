@@ -97,6 +97,8 @@ ReuniclusPokedexEntry::  INCLUDE "data/pokemon/dex_entries/reuniclus.asm"
 DucklettPokedexEntry::  INCLUDE "data/pokemon/dex_entries/ducklett.asm"
 SwannaPokedexEntry::  INCLUDE "data/pokemon/dex_entries/swanna.asm"
 VanillitePokedexEntry::  INCLUDE "data/pokemon/dex_entries/vanillite.asm"
+VanillishPokedexEntry::  INCLUDE "data/pokemon/dex_entries/vanillish.asm"
+VanilluxePokedexEntry::  INCLUDE "data/pokemon/dex_entries/vanilluxe.asm"
 DeerlingPokedexEntry::  INCLUDE "data/pokemon/dex_entries/deerling.asm"
 
 SECTION "Unova Pokedex Entries 4", ROMX

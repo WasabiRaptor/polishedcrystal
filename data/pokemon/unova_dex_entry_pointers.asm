@@ -88,6 +88,8 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Ducklett
 	add_pokedexentry Swanna
 	add_pokedexentry Vanillite
+    add_pokedexentry Vanillish
+    add_pokedexentry Vanilluxe
 	add_pokedexentry Deerling
 	add_pokedexentry Sawsbuck
 	add_pokedexentry Emolga

@@ -1,4 +1,4 @@
-UnovaPalettes:
+UnovaPalettes::
 INCBIN "gfx/pokemon/victini/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/victini/shiny.pal"
 INCBIN "gfx/pokemon/snivy/front.gbcpal", middle_colors

@@ -90,7 +90,7 @@ SinnohAnimationPointers::
 	add_anim Gallade
 	add_anim Probopass
 	add_anim Dusknoir
-	add_anim Frosslass
+	add_anim Froslass
 	add_anim Rotom
 	add_anim Uxie
 	add_anim Mesprit

@@ -211,7 +211,7 @@ InvarDexOrder::
 	grouped_dex_order_mon CRYOGONAL     ; ce
 	grouped_dex_order_mon SNORUNT      ; cf
 	grouped_dex_order_mon GLALIE        ; d0
-	grouped_dex_order_mon FROSSLASS     ; d1
+	grouped_dex_order_mon FROSLASS     ; d1
 	grouped_dex_order_mon SWINUB        ; d2
 	grouped_dex_order_mon PILOSWINE     ; d3
 	grouped_dex_order_mon MAMOSWINE     ; d4

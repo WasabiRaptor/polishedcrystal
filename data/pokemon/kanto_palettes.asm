@@ -1,4 +1,4 @@
-KantoPalettes:
+KantoPalettes::
 INCBIN "gfx/pokemon/bulbasaur/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/bulbasaur/shiny.pal"
 INCBIN "gfx/pokemon/ivysaur/front.gbcpal", middle_colors

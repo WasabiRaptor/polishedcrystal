@@ -90,7 +90,7 @@ SinnohAnimationIdlePointers::
 	add_idleanim Gallade
 	add_idleanim Probopass
 	add_idleanim Dusknoir
-	add_idleanim Frosslass
+	add_idleanim Froslass
 	add_idleanim Rotom
 	add_idleanim Uxie
 	add_idleanim Mesprit

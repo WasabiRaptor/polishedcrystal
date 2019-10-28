@@ -88,6 +88,8 @@ UnovaIconPointers::
 	add_icon Ducklett
 	add_icon Swanna
 	add_icon Vanillite
+	add_icon Vanillish
+	add_icon Vanilluxe
 	add_icon Deerling
 	add_icon Sawsbuck
 	add_icon Emolga

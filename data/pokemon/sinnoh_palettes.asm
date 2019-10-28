@@ -1,4 +1,4 @@
-SinnohPalettes:
+SinnohPalettes::
 INCBIN "gfx/pokemon/turtwig/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/turtwig/shiny.pal"
 INCBIN "gfx/pokemon/grotle/front.gbcpal", middle_colors
@@ -181,8 +181,8 @@ INCBIN "gfx/pokemon/probopass/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/probopass/shiny.pal"
 INCBIN "gfx/pokemon/dusknoir/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/dusknoir/shiny.pal"
-INCBIN "gfx/pokemon/frosslass/front.gbcpal", middle_colors
-INCLUDE "gfx/pokemon/frosslass/shiny.pal"
+INCBIN "gfx/pokemon/froslass/front.gbcpal", middle_colors
+INCLUDE "gfx/pokemon/froslass/shiny.pal"
 INCBIN "gfx/pokemon/rotom/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/rotom/shiny.pal"
 INCBIN "gfx/pokemon/uxie/front.gbcpal", middle_colors

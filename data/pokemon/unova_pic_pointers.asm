@@ -88,6 +88,8 @@ UnovaPicPointers::
 	add_pics Ducklett
 	add_pics Swanna
 	add_pics Vanillite
+	add_pics Vanillish
+	add_pics Vanilluxe
 	add_pics Deerling
 	add_pics Sawsbuck
 	add_pics Emolga

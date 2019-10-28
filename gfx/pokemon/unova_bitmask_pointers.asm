@@ -88,6 +88,8 @@ UnovaBitmasksPointers::
 	add_bitmasks Ducklett
 	add_bitmasks Swanna
 	add_bitmasks Vanillite
+	add_bitmasks Vanillish
+	add_bitmasks Vanilluxe
 	add_bitmasks Deerling
 	add_bitmasks Sawsbuck
 	add_bitmasks Emolga

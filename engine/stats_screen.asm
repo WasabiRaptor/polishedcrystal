@@ -406,7 +406,7 @@ StatsScreen_PlacePageSwitchArrows: ; 4df9b (13:5f9b)
 
 StatsScreen_PlaceShinyIcon: ; 4dfa6 (13:5fa6)
 	ld bc, wTempMonShiny
-	call CheckShininess
+	farcall CheckShininess
 	ret nc
 	hlcoord 19, 0
 	ld [hl], "★"

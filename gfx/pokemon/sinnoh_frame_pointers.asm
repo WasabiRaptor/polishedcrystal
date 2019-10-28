@@ -90,7 +90,7 @@ SinnohFramesPointers::
 	add_frames Gallade
 	add_frames Probopass
 	add_frames Dusknoir
-	add_frames Frosslass
+	add_frames Froslass
 	add_frames Rotom
 	add_frames Uxie
 	add_frames Mesprit

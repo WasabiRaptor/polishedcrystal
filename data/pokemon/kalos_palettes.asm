@@ -1,4 +1,4 @@
-KalosPalettes:
+KalosPalettes::
 INCBIN "gfx/pokemon/chespin/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/chespin/shiny.pal"
 INCBIN "gfx/pokemon/quilladin/front.gbcpal", middle_colors

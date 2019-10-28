@@ -1685,6 +1685,7 @@ INCLUDE "data/pokemon/kanto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/hoenn_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/sinnoh_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/unova_dex_entry_pointers.asm"
 
 SECTION "Code 11", ROMX
 
@@ -4333,6 +4334,7 @@ INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/sinnoh_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/unova_menu_icon_pointers.asm"
 
 INCLUDE "data/pokemon/menu_icons.asm"
 

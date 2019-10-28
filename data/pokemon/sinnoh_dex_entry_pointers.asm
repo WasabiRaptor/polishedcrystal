@@ -90,7 +90,7 @@ SinnohPokedexEntryPointers::
 	add_pokedexentry Gallade
 	add_pokedexentry Probopass
 	add_pokedexentry Dusknoir
-	add_pokedexentry Frosslass
+	add_pokedexentry Froslass
 	add_pokedexentry Rotom
 	add_pokedexentry Uxie
 	add_pokedexentry Mesprit

@@ -834,28 +834,22 @@ _CGB_TrainerCard2: ; 9289
 	call LoadFirstTwoTrainerCardPals
 
 	ld a, FALKNER
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, BUGSY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, WHITNEY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, MORTY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, JASMINE ; CHUCK
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, CLAIR ; PRYCE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	; Badges
 	ld hl, JohtoBadgePalettes
@@ -920,28 +914,22 @@ _CGB_TrainerCard3:
 	call LoadFirstTwoTrainerCardPals
 
 	ld a, BROCK
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, SABRINA ; BLAINE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, ERIKA ; LT_SURGE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, MISTY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, JANINE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, BLUE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	; Badges
 	ld hl, KantoBadgePalettes
@@ -1022,8 +1010,7 @@ LoadFirstTwoTrainerCardPals:
 	jr z, .got_gender
 	ld a, KRIS
 .got_gender
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	push de
 	; border

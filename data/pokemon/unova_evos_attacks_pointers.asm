@@ -88,6 +88,8 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Ducklett
 	add_evosattacks Swanna
 	add_evosattacks Vanillite
+	add_evosattacks Vanillish
+	add_evosattacks Vanilluxe
 	add_evosattacks Deerling
 	add_evosattacks Sawsbuck
 	add_evosattacks Emolga

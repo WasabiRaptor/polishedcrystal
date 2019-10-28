@@ -90,7 +90,7 @@ SinnohBitmasksPointers::
 	add_bitmasks Gallade
 	add_bitmasks Probopass
 	add_bitmasks Dusknoir
-	add_bitmasks Frosslass
+	add_bitmasks Froslass
 	add_bitmasks Rotom
 	add_bitmasks Uxie
 	add_bitmasks Mesprit

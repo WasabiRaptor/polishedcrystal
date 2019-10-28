@@ -88,6 +88,8 @@ UnovaNames::
 	db "Ducklett@"
 	db "Swanna@"
 	db "Vanillite@"
+	db "Vanillish@"
+	db "Vanilluxe@"
 	db "Deerling@"
 	db "Sawsbuck@"
 	db "Emolga@"

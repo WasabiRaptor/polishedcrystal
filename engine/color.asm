@@ -4,6 +4,18 @@ INCLUDE "engine/cgb.asm"
 
 INCLUDE "engine/sgb_border.asm"
 
+CheckShininess::
+; Check if a mon is shiny by personality at bc.
+; Return carry if shiny.
+	ld a, [bc]
+	and SHINY_MASK
+	jr z, .NotShiny
+	scf
+	ret
+
+.NotShiny:
+	and a
+	ret
 
 InitPartyMenuPalettes:
 	ld de, wUnknBGPals
@@ -748,17 +760,6 @@ GetPaintingPalettePointer:
 	ret
 
 INCLUDE "data/events/paintings/palettes.asm"
-
-LoadTrainerPalette:
-	; a = class
-	ld a, [wTrainerClass]
-	; hl = palette
-	call GetTrainerPalettePointer
-	; load palette in BG 7
-	ld a, $5
-	ld de, wUnknBGPals palette PAL_BG_TEXT + 2
-	ld bc, 4
-	jp FarCopyWRAM
 
 LoadPaintingPalette:
 	; a = class

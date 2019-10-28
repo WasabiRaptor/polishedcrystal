@@ -90,7 +90,7 @@ SinnohIconPointers::
 	add_icon Gallade
 	add_icon Probopass
 	add_icon Dusknoir
-	add_icon Frosslass
+	add_icon Froslass
 	add_icon Rotom
 	add_icon Uxie
 	add_icon Mesprit

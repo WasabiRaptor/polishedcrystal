@@ -1,4 +1,4 @@
-AlolaPalettes:
+AlolaPalettes::
 INCBIN "gfx/pokemon/rowlet/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/rowlet/shiny.pal"
 INCBIN "gfx/pokemon/dartrix/front.gbcpal", middle_colors

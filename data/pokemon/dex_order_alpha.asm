@@ -88,7 +88,7 @@ AlphabeticalPokedexOrder::
 	grouped_dex_order_mon FOONGUS
 	grouped_dex_order_mon FORRETRESS
 	grouped_dex_order_mon FRAXURE
-	grouped_dex_order_mon FROSSLASS
+	grouped_dex_order_mon FROSLASS
 	grouped_dex_order_mon FURRET
 	;G
 	grouped_dex_order_mon GALVANTULA

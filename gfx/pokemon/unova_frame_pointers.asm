@@ -88,6 +88,8 @@ UnovaFramesPointers::
 	add_frames Ducklett
 	add_frames Swanna
 	add_frames Vanillite
+	add_frames Vanillish
+	add_frames Vanilluxe
 	add_frames Deerling
 	add_frames Sawsbuck
 	add_frames Emolga

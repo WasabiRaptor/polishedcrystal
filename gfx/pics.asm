@@ -685,6 +685,11 @@ JumpluffBackpic:       	    INCBIN "gfx/pokemon/jumpluff/back.2bpp.lz"
 
 SECTION "Pokemon Pics 34", ROMX
 
+AipomFrontpic: INCBIN "gfx/pokemon/aipom/front.animated.2bpp.lz"
+AipomBackpic: INCBIN "gfx/pokemon/aipom/back.2bpp.lz"
+AzurillFrontpic: INCBIN "gfx/pokemon/azurill/front.animated.2bpp.lz"
+AzurillBackpic: INCBIN "gfx/pokemon/azurill/back.2bpp.lz"
+
 Vaporeon_RGFrontpic:
 Leafeon_BetaFrontpic:
 Tangrowth_BetaFrontpic:
@@ -1115,7 +1120,7 @@ Porygon_zFrontpic:  INCBIN "gfx/pokemon/porygon_z/front.animated.2bpp.lz"
 GalladeFrontpic:  INCBIN "gfx/pokemon/gallade/front.animated.2bpp.lz"
 ProbopassFrontpic:  INCBIN "gfx/pokemon/probopass/front.animated.2bpp.lz"
 DusknoirFrontpic:  INCBIN "gfx/pokemon/dusknoir/front.animated.2bpp.lz"
-FrosslassFrontpic:  INCBIN "gfx/pokemon/frosslass/front.animated.2bpp.lz"
+FroslassFrontpic:  INCBIN "gfx/pokemon/froslass/front.animated.2bpp.lz"
 RotomFrontpic:  INCBIN "gfx/pokemon/rotom/front.animated.2bpp.lz"
 UxieFrontpic:  INCBIN "gfx/pokemon/uxie/front.animated.2bpp.lz"
 MespritFrontpic:  INCBIN "gfx/pokemon/mesprit/front.animated.2bpp.lz"
@@ -1242,7 +1247,7 @@ Porygon_zBackpic:  INCBIN "gfx/pokemon/porygon_z/back.2bpp.lz"
 GalladeBackpic:  INCBIN "gfx/pokemon/gallade/back.2bpp.lz"
 ProbopassBackpic:  INCBIN "gfx/pokemon/probopass/back.2bpp.lz"
 DusknoirBackpic:  INCBIN "gfx/pokemon/dusknoir/back.2bpp.lz"
-FrosslassBackpic:  INCBIN "gfx/pokemon/frosslass/back.2bpp.lz"
+FroslassBackpic:  INCBIN "gfx/pokemon/froslass/back.2bpp.lz"
 
 SECTION "Pokemon Pics 58", ROMX
 
@@ -1365,6 +1370,8 @@ ReuniclusFrontpic:  INCBIN "gfx/pokemon/reuniclus/front.animated.2bpp.lz"
 DucklettFrontpic:  INCBIN "gfx/pokemon/ducklett/front.animated.2bpp.lz"
 SwannaFrontpic:  INCBIN "gfx/pokemon/swanna/front.animated.2bpp.lz"
 VanilliteFrontpic:  INCBIN "gfx/pokemon/vanillite/front.animated.2bpp.lz"
+VanillishFrontpic:  INCBIN "gfx/pokemon/vanillish/front.animated.2bpp.lz"
+VanilluxeFrontpic:  INCBIN "gfx/pokemon/vanilluxe/front.animated.2bpp.lz"
 DeerlingFrontpic:  INCBIN "gfx/pokemon/deerling/front.animated.2bpp.lz"
 SawsbuckFrontpic:  INCBIN "gfx/pokemon/sawsbuck/front.animated.2bpp.lz"
 EmolgaFrontpic:  INCBIN "gfx/pokemon/emolga/front.animated.2bpp.lz"
@@ -1546,6 +1553,8 @@ ReuniclusBackpic:  INCBIN "gfx/pokemon/reuniclus/back.2bpp.lz"
 DucklettBackpic:  INCBIN "gfx/pokemon/ducklett/back.2bpp.lz"
 SwannaBackpic:  INCBIN "gfx/pokemon/swanna/back.2bpp.lz"
 VanilliteBackpic:  INCBIN "gfx/pokemon/vanillite/back.2bpp.lz"
+VanillishBackpic:  INCBIN "gfx/pokemon/vanillish/back.2bpp.lz"
+VanilluxeBackpic:  INCBIN "gfx/pokemon/vanilluxe/back.2bpp.lz"
 DeerlingBackpic:  INCBIN "gfx/pokemon/deerling/back.2bpp.lz"
 SawsbuckBackpic:  INCBIN "gfx/pokemon/sawsbuck/back.2bpp.lz"
 EmolgaBackpic:  INCBIN "gfx/pokemon/emolga/back.2bpp.lz"

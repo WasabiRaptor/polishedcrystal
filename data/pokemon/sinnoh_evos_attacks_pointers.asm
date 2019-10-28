@@ -90,7 +90,7 @@ SinnohEvosAttacksPointers::
 	add_evosattacks Gallade
 	add_evosattacks Probopass
 	add_evosattacks Dusknoir
-	add_evosattacks Frosslass
+	add_evosattacks Froslass
 	add_evosattacks Rotom
 	add_evosattacks Uxie
 	add_evosattacks Mesprit

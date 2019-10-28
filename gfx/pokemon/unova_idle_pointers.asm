@@ -88,6 +88,8 @@ UnovaAnimationIdlePointers::
 	add_idleanim Ducklett
 	add_idleanim Swanna
 	add_idleanim Vanillite
+	add_idleanim Vanillish
+	add_idleanim Vanilluxe
 	add_idleanim Deerling
 	add_idleanim Sawsbuck
 	add_idleanim Emolga

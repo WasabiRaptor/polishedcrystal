@@ -88,6 +88,8 @@ UnovaAnimationPointers::
 	add_anim Ducklett
 	add_anim Swanna
 	add_anim Vanillite
+	add_anim Vanillish
+	add_anim Vanilluxe
 	add_anim Deerling
 	add_anim Sawsbuck
 	add_anim Emolga

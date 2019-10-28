@@ -1052,7 +1052,7 @@ Text_BCD::
 	ld h, b
 	ld l, c
 	ld c, a
-	call PrintBCDNumber
+	;call PrintBCDNumber
 	ld b, h
 	ld c, l
 	pop hl

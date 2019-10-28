@@ -3830,7 +3830,7 @@ BattleCheckEnemyShininess: ; 3da79
 BattleCheckShininess: ; 3da7c
 	ld b, h
 	ld c, l
-	jp CheckShininess
+	farjp CheckShininess
 ; 3da85
 
 GetPartyMonDVs: ; 3da85
@@ -4889,7 +4889,7 @@ endr
 	dec hl
 
 	ld bc, wBattleMonShiny
-	call CheckShininess
+	farcall CheckShininess
 	jr nc, .not_own_shiny
 	ld a, "<STAR>"
 	hlcoord 19, 8
@@ -4963,7 +4963,7 @@ endr
 	ld [de], a
 
 	ld bc, wEnemyMonShiny
-	call CheckShininess
+	farcall CheckShininess
 	jr nc, .not_shiny
 	ld a, "<STAR>"
 	hlcoord 9, 1

@@ -90,7 +90,7 @@ SinnohPicPointers::
 	add_pics Gallade
 	add_pics Probopass
 	add_pics Dusknoir
-	add_pics Frosslass
+	add_pics Froslass
 	add_pics Rotom
 	add_pics Uxie
 	add_pics Mesprit

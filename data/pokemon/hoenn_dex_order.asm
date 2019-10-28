@@ -119,7 +119,7 @@ HoennDexOrder::
 	grouped_dex_order_mon ABSOL
 	grouped_dex_order_mon SNORUNT
 	grouped_dex_order_mon GLALIE
-	grouped_dex_order_mon FROSSLASS
+	grouped_dex_order_mon FROSLASS
 	grouped_dex_order_mon SPHEAL
 	grouped_dex_order_mon SEALEO
 	grouped_dex_order_mon WALREIN

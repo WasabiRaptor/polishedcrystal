@@ -544,7 +544,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon GALLADE
 	nat_dexmon PROBOPASS
 	nat_dexmon DUSKNOIR
-	nat_dexmon FROSSLASS
+	nat_dexmon FROSLASS
 	nat_dexmon ROTOM
 	nat_dexmon UXIE
 	nat_dexmon MESPRIT
@@ -653,6 +653,8 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon DUCKLETT
 	nat_dexmon SWANNA
 	nat_dexmon VANILLITE
+	nat_dexmon VANILLISH
+	nat_dexmon VANILLUXE
 	nat_dexmon DEERLING
 	nat_dexmon SAWSBUCK
 	nat_dexmon EMOLGA

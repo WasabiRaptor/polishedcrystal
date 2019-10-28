@@ -1,4 +1,4 @@
-JohtoEvolutionMoves::
+UnovaEvolutionMoves::
 	db NO_MOVE
 	db NO_MOVE
 	db NO_MOVE

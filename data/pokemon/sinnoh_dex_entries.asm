@@ -102,7 +102,7 @@ ProbopassPokedexEntry::  INCLUDE "data/pokemon/dex_entries/probopass.asm"
 SECTION "Sinnoh Pokedex Entries 4", ROMX
 
 DusknoirPokedexEntry::  INCLUDE "data/pokemon/dex_entries/dusknoir.asm"
-FrosslassPokedexEntry::  INCLUDE "data/pokemon/dex_entries/frosslass.asm"
+FroslassPokedexEntry::  INCLUDE "data/pokemon/dex_entries/froslass.asm"
 RotomPokedexEntry::  INCLUDE "data/pokemon/dex_entries/rotom.asm"
 UxiePokedexEntry::  INCLUDE "data/pokemon/dex_entries/uxie.asm"
 MespritPokedexEntry::  INCLUDE "data/pokemon/dex_entries/mesprit.asm"

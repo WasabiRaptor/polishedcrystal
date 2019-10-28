@@ -1,4 +1,4 @@
-HoennPalettes:
+HoennPalettes::
 INCBIN "gfx/pokemon/treecko/front.gbcpal", middle_colors
 INCLUDE "gfx/pokemon/treecko/shiny.pal"
 INCBIN "gfx/pokemon/grovyle/front.gbcpal", middle_colors

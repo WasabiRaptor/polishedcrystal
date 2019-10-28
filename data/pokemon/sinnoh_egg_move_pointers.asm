@@ -1,4 +1,4 @@
-SinnohEggMovesPointers::
+SinnohEggMovePointers::
 	add_eggmoves Turtwig
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
@@ -18,43 +18,47 @@ SinnohEggMovesPointers::
 	add_eggmoves Shinx
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
+	add_eggmoves Budew
+	add_eggmoves NoSinnoh
 	add_eggmoves Crainidos
 	add_eggmoves NoSinnoh
 	add_eggmoves Sheildon
 	add_eggmoves NoSinnoh
 	add_eggmoves Burmy
-	add_eggmoves Burmy
-	add_eggmoves Burmy
-	add_eggmoves NoSinnoh
-	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
 	add_eggmoves Combee
 	add_eggmoves NoSinnoh
-	add_eggmoves Pachirisu 
+	add_eggmoves Pachirisu
 	add_eggmoves Buizel
 	add_eggmoves NoSinnoh
 	add_eggmoves Cherubi
-	add_eggmoves NoSinnoh 
-	add_eggmoves Shellos
 	add_eggmoves NoSinnoh
 	add_eggmoves Shellos
+	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
 	add_eggmoves Drifloon
 	add_eggmoves NoSinnoh
 	add_eggmoves Buneary
 	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
 	add_eggmoves Glameow
 	add_eggmoves NoSinnoh
+	add_eggmoves Chingling
 	add_eggmoves Stunky
 	add_eggmoves NoSinnoh
-	add_eggmoves Bronzor
 	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves Bonsly
+	add_eggmoves Mime_jr
+	add_eggmoves Happiny
 	add_eggmoves Chatot
-	add_eggmoves NoSinnoh
+	add_eggmoves Spiritomb
 	add_eggmoves Gible
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
+	add_eggmoves Munchlax
 	add_eggmoves Riolu
 	add_eggmoves NoSinnoh
 	add_eggmoves Hippopotas
@@ -66,6 +70,7 @@ SinnohEggMovesPointers::
 	add_eggmoves Carnivine
 	add_eggmoves Finneon
 	add_eggmoves NoSinnoh
+	add_eggmoves Mantyke
 	add_eggmoves Snover
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
@@ -83,7 +88,19 @@ SinnohEggMovesPointers::
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
-	add_eggmoves Phione
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
+	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
 	add_eggmoves NoSinnoh
