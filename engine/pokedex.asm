@@ -599,7 +599,7 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 .MenuAction_VariantMode: ; 40411 (10:4411)
 	ld a, [wPokedexRegion]
 	inc a
-	cp GROUP_GENERATION_THREE + 1 ; the max dex group
+	cp GROUP_GENERATION_FIVE + 1 ; the max dex group
 	jr c, .next_group
 	ld a, GROUP_GENERATION_ONE
 .next_group
