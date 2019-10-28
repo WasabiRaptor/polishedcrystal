@@ -1425,7 +1425,6 @@ Inc16BitNumInHL::
 	inc [hl]
 	ret
 
-;INCLUDE "home/imported_sounds.asm"
 
 LoadPalette_White_Col1_Col2_Black::
 	ldh a, [rSVBK]
