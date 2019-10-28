@@ -31,7 +31,7 @@ UnovaDexOrder::
 	db MUNNA
 	db MUSHARNA 
 	db PIDOVE
-	db TRANQUIL
+	db TRANQUILL
 	db UNFEZANT
 	db BLITZLE
 	db ZEBSTRIKA

@@ -9,7 +9,7 @@
         db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn ALL_MALE, 15 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/thundurus_incarnate/front.dimensions"  
+        INCBIN "gfx/pokemon/thundurus/front.dimensions"  
         db PRANKSTER, PRANKSTER     ; abilities
         db DEFIANT    ; hidden ability
         db GROWTH_SLOW ; growth rate

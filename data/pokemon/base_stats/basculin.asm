@@ -9,7 +9,7 @@
         db 161 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 8 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/basculin_red_striped/front.dimensions"  
+        INCBIN "gfx/pokemon/basculin/front.dimensions"  
         db RECKLESS, ADAPTABILITY     ; abilities
         db MOLD_BREAKER    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate

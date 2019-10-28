@@ -25,7 +25,7 @@ UnovaPicPointers::
 	add_pics Munna
 	add_pics Musharna
 	add_pics Pidove
-	add_pics Tranquil
+	add_pics Tranquill
 	add_pics Unfezant
 	add_pics Blitzle
 	add_pics Zebstrika

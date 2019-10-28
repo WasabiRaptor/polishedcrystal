@@ -25,7 +25,7 @@ UnovaIconPointers::
 	add_icon Munna
 	add_icon Musharna
 	add_icon Pidove
-	add_icon Tranquil
+	add_icon Tranquill
 	add_icon Unfezant
 	add_icon Blitzle
 	add_icon Zebstrika

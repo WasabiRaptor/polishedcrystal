@@ -25,7 +25,7 @@ UnovaEvosAttacksPointers::
 	add_evosattacks Munna
 	add_evosattacks Musharna
 	add_evosattacks Pidove
-	add_evosattacks Tranquil
+	add_evosattacks Tranquill
 	add_evosattacks Unfezant
 	add_evosattacks Blitzle
 	add_evosattacks Zebstrika

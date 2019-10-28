@@ -25,7 +25,7 @@ UnovaAnimationPointers::
 	add_anim Munna
 	add_anim Musharna
 	add_anim Pidove
-	add_anim Tranquil
+	add_anim Tranquill
 	add_anim Unfezant
 	add_anim Blitzle
 	add_anim Zebstrika

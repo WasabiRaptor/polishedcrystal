@@ -9,7 +9,7 @@
         db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn GENDERLESS, 15 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/giratina_altered/front.dimensions"  
+        INCBIN "gfx/pokemon/giratina/front.dimensions"  
         db PRESSURE, PRESSURE     ; abilities
         db TELEPATHY    ; hidden ability
         db GROWTH_SLOW ; growth rate

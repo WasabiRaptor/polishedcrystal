@@ -9,7 +9,7 @@
         db 168 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 4 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/darmanitan_standard/front.dimensions"  
+        INCBIN "gfx/pokemon/darmanitan/front.dimensions"  
         db SHEER_FORCE, SHEER_FORCE     ; abilities
         db ZEN_MODE    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate

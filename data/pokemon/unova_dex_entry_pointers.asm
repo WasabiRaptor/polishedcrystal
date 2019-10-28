@@ -25,7 +25,7 @@ UnovaPokedexEntryPointers::
 	add_pokedexentry Munna
 	add_pokedexentry Musharna
 	add_pokedexentry Pidove
-	add_pokedexentry Tranquil
+	add_pokedexentry Tranquill
 	add_pokedexentry Unfezant
 	add_pokedexentry Blitzle
 	add_pokedexentry Zebstrika

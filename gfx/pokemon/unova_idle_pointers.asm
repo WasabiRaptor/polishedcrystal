@@ -25,7 +25,7 @@ UnovaAnimationIdlePointers::
 	add_idleanim Munna
 	add_idleanim Musharna
 	add_idleanim Pidove
-	add_idleanim Tranquil
+	add_idleanim Tranquill
 	add_idleanim Unfezant
 	add_idleanim Blitzle
 	add_idleanim Zebstrika

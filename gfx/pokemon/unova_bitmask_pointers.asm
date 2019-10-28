@@ -25,7 +25,7 @@ UnovaBitmasksPointers::
 	add_bitmasks Munna
 	add_bitmasks Musharna
 	add_bitmasks Pidove
-	add_bitmasks Tranquil
+	add_bitmasks Tranquill
 	add_bitmasks Unfezant
 	add_bitmasks Blitzle
 	add_bitmasks Zebstrika

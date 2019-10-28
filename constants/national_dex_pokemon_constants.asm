@@ -590,7 +590,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon MUNNA
 	nat_dexmon MUSHARNA
 	nat_dexmon PIDOVE
-	nat_dexmon TRANQUIL
+	nat_dexmon TRANQUILL
 	nat_dexmon UNFEZANT
 	nat_dexmon BLITZLE
 	nat_dexmon ZEBSTRIKA

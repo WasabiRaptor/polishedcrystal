@@ -9,7 +9,7 @@
         db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn GENDERLESS, 15 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/keldeo_ordinary/front.dimensions"  
+        INCBIN "gfx/pokemon/keldeo/front.dimensions"  
         db JUSTIFIED, JUSTIFIED     ; abilities
         db JUSTIFIED    ; hidden ability
         db GROWTH_SLOW ; growth rate

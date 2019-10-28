@@ -25,7 +25,7 @@ UnovaFramesPointers::
 	add_frames Munna
 	add_frames Musharna
 	add_frames Pidove
-	add_frames Tranquil
+	add_frames Tranquill
 	add_frames Unfezant
 	add_frames Blitzle
 	add_frames Zebstrika

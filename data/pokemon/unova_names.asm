@@ -25,7 +25,7 @@ UnovaNames::
 	db "Munna@"
 	db "Musharna@"
 	db "Pidove@"
-	db "Tranquil@"
+	db "Tranquill@"
 	db "Unfezant@"
 	db "Blitzle@"
 	db "Zebstrika@"
