@@ -8,7 +8,7 @@
 	db 241 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	dn GENDERLESS, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/porygonz/front.dimensions"
+	INCBIN "gfx/pokemon/porygon_z/front.dimensions"
 	db ADAPTABILITY ; ability 1
 	db DOWNLOAD ; ability 2
 	db ANALYTIC ; hidden ability
