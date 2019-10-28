@@ -10,7 +10,6 @@ LoadWildMonData: ; 29ff8
 	jr .done_copy
 
 .copy
-	break
 	inc hl
 	inc hl;move past the two bytes of the map ID
 	; Copy level minimum and maximum into WRAM
@@ -136,11 +135,11 @@ FindNest: ; 2a01f
 	ld b, a
 	ld a, [hli]
 	ld c, a
+	push bc
 ; next for bytes are the percentages for the time of day, skip them for now
-	inc hl
-	inc hl
-	inc hl
-	inc hl
+	ld bc, WILD_MAP_SIZE - 1
+	add hl, bc
+	pop bc
 	;7 grass mons per time of day, and 4 times of day
 	ld a, NUM_GRASSMON * 4
 	call .SearchMapForMon
@@ -189,8 +188,8 @@ FindNest: ; 2a01f
 	inc hl
 	jr z, .found
 .notfound
-	inc hl
-	inc hl
+	ld bc, WILD_POKE_SIZE
+	add hl, bc
 	pop af
 	dec a
 	jr nz, .ScanMapLoop
