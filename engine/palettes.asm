@@ -1787,7 +1787,7 @@ endc
 
 PokedexRedPalette:
 if !DEF(MONOCHROME)
-	RGB 00, 00, 00
+	RGB 6, 6, 7
 	RGB 31, 20, 10
 	RGB 26, 10, 06
 	RGB 31, 31, 31

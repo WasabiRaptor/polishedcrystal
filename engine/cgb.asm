@@ -395,32 +395,32 @@ _CGB_PokedexSearchOptionPals: ; 93ba
 	ld bc, 6
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 7
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 6
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 5
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 4
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 3
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 2
 	ld bc, 2
 	ld a, $5
