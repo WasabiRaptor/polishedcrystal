@@ -3,4 +3,4 @@
 
 	db "By spinning its body, it can dig"
 	next "straight through the ground at a"
-	next "speed of 30 mph."
+	next "speed of 30 mph.@"

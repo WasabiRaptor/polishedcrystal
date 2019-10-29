@@ -5,4 +5,4 @@
 	next "headache, so it normally passes"
 	next "the time spacing out and doing"
 	
-	page "as little as possible."
+	page "as little as possible.@"

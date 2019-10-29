@@ -9,4 +9,4 @@
 	next "attacking predator. It will"
 	next "weaken the foe by leaking"
 	
-	page "poison from the spikes."
+	page "poison from the spikes.@"

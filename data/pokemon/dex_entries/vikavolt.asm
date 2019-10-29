@@ -6,4 +6,4 @@
 	next "concentrates energy in its"
 	
 	page "strong jaws and fires off"
-	next "powerful jolts of electricity."
+	next "powerful jolts of electricity.@"

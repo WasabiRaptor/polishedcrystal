@@ -5,4 +5,4 @@
 	next "network forms between their"
 	next "brains, increasing their psychic"
 	
-	page "power."
+	page "power.@"

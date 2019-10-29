@@ -7,4 +7,4 @@
 	
 	page "with gracefulness. This"
 	next "Pokémon has the power to"
-	next "purify dirty water."
+	next "purify dirty water.@"

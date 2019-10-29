@@ -6,4 +6,4 @@
 	next "a Carbink, Gabite becomes"
 	
 	page "furiously angry and attacks the"
-	next "Sableye."
+	next "Sableye.@"

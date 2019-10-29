@@ -6,4 +6,4 @@
 	next "see who could trim their"
 	
 	page "Furfrou's fur into the most"
-	next "exquisite style."
+	next "exquisite style.@"

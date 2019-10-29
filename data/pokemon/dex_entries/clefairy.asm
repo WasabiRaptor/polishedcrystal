@@ -5,4 +5,4 @@
 	next "rare. Trainers who show them"
 	next "off recklessly may be targeted"
 	
-	page "by thieves."
+	page "by thieves.@"

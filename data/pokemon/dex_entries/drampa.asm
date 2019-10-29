@@ -5,4 +5,4 @@
 	next "with is bullied, Drampa will find"
 	next "the bully's house and burn it to"
 	
-	page "the ground."
+	page "the ground.@"

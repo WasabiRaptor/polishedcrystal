@@ -9,4 +9,4 @@
 	next "as well, so it is capable of"
 	next "running long distances without"
 	
-	page "rest."
+	page "rest.@"

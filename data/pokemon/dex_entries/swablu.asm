@@ -9,4 +9,4 @@
 	next "wings become dirty, this"
 	next "Pokémon finds a stream and"
 	
-	page "showers itself."
+	page "showers itself.@"

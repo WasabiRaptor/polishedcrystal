@@ -6,4 +6,4 @@
 	next "of a long-standing belief that"
 	
 	page "whenever Slowpoke yawns, it"
-	next "rains."
+	next "rains.@"

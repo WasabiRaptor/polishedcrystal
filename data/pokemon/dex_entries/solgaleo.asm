@@ -6,4 +6,4 @@
 	next "that energy and life-forms"
 	
 	page "from other worlds are called"
-	next "here to this world."
+	next "here to this world.@"

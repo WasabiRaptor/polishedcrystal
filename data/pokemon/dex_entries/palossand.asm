@@ -6,4 +6,4 @@
 	next "small Pokémon and siphons"
 	
 	page "away their vital essence while"
-	next "they're still alive."
+	next "they're still alive.@"

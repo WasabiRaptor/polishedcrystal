@@ -5,4 +5,4 @@
 	next "large-bodied Pokémon and"
 	next "absorb static electricity, which"
 	
-	page "they store in an electric pouch."
+	page "they store in an electric pouch.@"

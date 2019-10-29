@@ -9,4 +9,4 @@
 	next "cover of dead grass. This"
 	next "Pokémon occasionally roots out"
 	
-	page "hot springs."
+	page "hot springs.@"

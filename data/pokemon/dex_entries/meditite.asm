@@ -7,4 +7,4 @@
 	
 	page "day. Minimal eating is another"
 	next "aspect of this Pokémon's"
-	next "training."
+	next "training.@"

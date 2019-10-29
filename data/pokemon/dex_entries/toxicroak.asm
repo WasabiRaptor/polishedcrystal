@@ -3,4 +3,4 @@
 
 	db "Its knuckle claws secrete a"
 	next "toxin so vile that even a"
-	next "scratch could prove fatal."
+	next "scratch could prove fatal.@"

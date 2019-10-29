@@ -5,4 +5,4 @@
 	next "unnatural thunderclouds. People"
 	next "say it can run at the same speed"
 	
-	page "as lightning striking."
+	page "as lightning striking.@"

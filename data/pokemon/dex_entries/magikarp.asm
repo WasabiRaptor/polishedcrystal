@@ -5,4 +5,4 @@
 	next "fairly strong, but they have"
 	next "become gradually weaker over"
 	
-	page "time."
+	page "time.@"

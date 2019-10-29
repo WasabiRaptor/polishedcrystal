@@ -6,4 +6,4 @@
 	next "assured of joyful dreams. It is"
 	
 	page "said to represent the crescent"
-	next "moon."
+	next "moon.@"

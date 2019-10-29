@@ -6,4 +6,4 @@
 	next "by the river. Each Pawniard has"
 	
 	page "its own favorite sharpening"
-	next "stone."
+	next "stone.@"

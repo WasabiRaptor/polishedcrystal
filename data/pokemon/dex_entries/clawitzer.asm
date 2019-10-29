@@ -6,4 +6,4 @@
 	next "with enough power to punch a"
 	
 	page "hole right through a thick sheet"
-	next "of iron."
+	next "of iron.@"

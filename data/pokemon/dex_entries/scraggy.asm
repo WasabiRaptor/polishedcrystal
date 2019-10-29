@@ -5,4 +5,4 @@
 	next "walking around lazily. Anyone"
 	next "who makes eye contact gets"
 	
-	page "smacked with a headbutt."
+	page "smacked with a headbutt.@"

@@ -5,4 +5,4 @@
 	next "regions. The leader of the herd"
 	next "is decided by a battle of"
 	
-	page "clashing horns."
+	page "clashing horns.@"

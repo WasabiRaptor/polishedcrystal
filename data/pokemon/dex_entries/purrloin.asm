@@ -5,4 +5,4 @@
 	next "but their victims can't help but"
 	next "forgive them. Their deceptively"
 	
-	page "cute act is perfect."
+	page "cute act is perfect.@"

@@ -5,4 +5,4 @@
 	next "knock it down. It's thought that"
 	next "Marowak is trying to avenge its"
 	
-	page "parent."
+	page "parent.@"

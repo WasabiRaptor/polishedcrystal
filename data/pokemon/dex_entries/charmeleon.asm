@@ -5,8 +5,8 @@
 	next "destroys its foes using its"
 	next "sharp claws. If it encounters a"
 	
-	page "strong foe, it turns aggressive."
+	page "strong foe, it turns aggressive.@"
 	next "In this excited state, the flame"
 	next "at the tip of its tail flares with"
 	
-	page "a bluish white color."
+	page "a bluish white color.@"

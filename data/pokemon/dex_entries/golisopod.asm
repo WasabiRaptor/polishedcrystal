@@ -3,4 +3,4 @@
 
 	db "The shell covering its body is as"
 	next "hard as diamond. This Pokémon"
-	next "will do anything it takes to win."
+	next "will do anything it takes to win.@"

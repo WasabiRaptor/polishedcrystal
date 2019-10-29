@@ -3,4 +3,4 @@
 
 	db "Small Pokémon occasionally"
 	next "gather on its unmoving back to"
-	next "begin building their nests."
+	next "begin building their nests.@"

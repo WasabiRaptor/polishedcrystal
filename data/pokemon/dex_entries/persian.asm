@@ -6,4 +6,4 @@
 	next "different color than those of"
 	
 	page "Alolan Persian, it's mostly"
-	next "made of the same material."
+	next "made of the same material.@"

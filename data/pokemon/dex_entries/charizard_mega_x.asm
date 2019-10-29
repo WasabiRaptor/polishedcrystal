@@ -9,4 +9,4 @@
 	next "anything. However, it never"
 	next "turns its fiery breath on any"
 	
-	page "opponent weaker than itself."
+	page "opponent weaker than itself.@"

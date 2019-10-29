@@ -3,4 +3,4 @@
 
 	db "Because it eats nothing but"
 	next "sweets, its fur is as sticky"
-	next "sweet as cotton candy."
+	next "sweet as cotton candy.@"

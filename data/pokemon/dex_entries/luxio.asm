@@ -5,4 +5,4 @@
 	next "through the tips of its sharp"
 	next "claws. A light scratch causes"
 	
-	page "fainting in foes."
+	page "fainting in foes.@"

@@ -6,4 +6,4 @@
 	next "its pincers break off, it turns"
 	
 	page "cowardly. It stays timid until"
-	next "they grow back."
+	next "they grow back.@"

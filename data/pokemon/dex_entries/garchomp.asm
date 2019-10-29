@@ -6,4 +6,4 @@
 	next "has midair battles with"
 	
 	page "Salamence as the two compete"
-	next "for food."
+	next "for food.@"

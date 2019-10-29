@@ -7,4 +7,4 @@
 	
 	page "shuddering through the air and"
 	next "shake the ground as if lightning"
-	next "bolts had come crashing down."
+	next "bolts had come crashing down.@"

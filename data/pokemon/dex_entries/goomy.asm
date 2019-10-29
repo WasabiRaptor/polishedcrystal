@@ -6,4 +6,4 @@
 	next "sensitive, so if you grab them,"
 	
 	page "it will feel a strong shock and"
-	next "be unable to move."
+	next "be unable to move.@"

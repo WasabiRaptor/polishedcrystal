@@ -6,4 +6,4 @@
 	next "Pokémon died out. It's"
 	
 	page "apparently a distant ancestor of"
-	next "Octillery."
+	next "Octillery.@"

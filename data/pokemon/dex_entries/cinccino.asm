@@ -6,4 +6,4 @@
 	next "its body, so this Pokémon can"
 	
 	page "slide right away from its"
-	next "enemies' attacks."
+	next "enemies' attacks.@"

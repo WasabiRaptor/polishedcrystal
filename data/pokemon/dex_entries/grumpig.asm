@@ -5,6 +5,6 @@
 	next "on its body to wield its"
 	next "fantastic powers. When it is"
 	
-	page "doing so, it dances bizarrely."
+	page "doing so, it dances bizarrely.@"
 	next "This Pokémon's black pearls"
-	next "are valuable as works of art."
+	next "are valuable as works of art.@"

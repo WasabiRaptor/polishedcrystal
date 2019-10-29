@@ -6,4 +6,4 @@
 	next "and use its skull, which is"
 	
 	page "harder than steel, to make"
-	next "helmets."
+	next "helmets.@"

@@ -5,4 +5,4 @@
 	next "with the longest, thickest, and"
 	next "most-scarred horns is the boss"
 	
-	page "of the herd."
+	page "of the herd.@"

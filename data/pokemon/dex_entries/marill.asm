@@ -7,4 +7,4 @@
 	
 	page "trunk of a tree. This"
 	next "Pokémon's tail is flexible and"
-	next "configured to stretch."
+	next "configured to stretch.@"

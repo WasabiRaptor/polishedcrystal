@@ -5,4 +5,4 @@
 	next "sea shoals. When the tide went"
 	next "out, this Pokémon came up on"
 	
-	page "land to search for prey."
+	page "land to search for prey.@"

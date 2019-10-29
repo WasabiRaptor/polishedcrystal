@@ -6,4 +6,4 @@
 	next "devoted to this Pokémon. Fans"
 	
 	page "obsess over the particular"
-	next "length and angle of its arms."
+	next "length and angle of its arms.@"

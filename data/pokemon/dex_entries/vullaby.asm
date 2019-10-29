@@ -6,4 +6,4 @@
 	next "short, so it can't fly yet, but it"
 	
 	page "jumps around, dreaming of wide"
-	next "open skies."
+	next "open skies.@"

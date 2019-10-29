@@ -9,4 +9,4 @@
 	next "created when a Poké Ball was"
 	next "exposed to a powerful pulse of"
 	
-	page "energy."
+	page "energy.@"

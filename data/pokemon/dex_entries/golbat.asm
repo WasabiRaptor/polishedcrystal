@@ -6,4 +6,4 @@
 	next "some fangs. This happens when"
 	
 	page "hunger drives it to try biting a"
-	next "Steel-type Pokémon."
+	next "Steel-type Pokémon.@"

@@ -3,4 +3,4 @@
 
 	db "It knows where pure water"
 	next "wells up. It carries fellow"
-	next "Pokémon there on its back."
+	next "Pokémon there on its back.@"

@@ -6,4 +6,4 @@
 	next "down gems with its thick pointy"
 	
 	page "teeth. Carbink is its favorite"
-	next "food."
+	next "food.@"

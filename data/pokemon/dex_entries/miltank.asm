@@ -6,4 +6,4 @@
 	next "quality of the pastures it lives"
 	
 	page "in, the richer and tastier its"
-	next "milk becomes."
+	next "milk becomes.@"

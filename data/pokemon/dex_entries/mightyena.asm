@@ -7,4 +7,4 @@
 	
 	page "Pokémon to obey only those"
 	next "Trainers that it recognizes to"
-	next "possess superior skill."
+	next "possess superior skill.@"

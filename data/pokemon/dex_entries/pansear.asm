@@ -5,4 +5,4 @@
 	next "volcanoes. The fire within the"
 	next "tuft on its head can reach 600"
 	
-	page "degrees Fahrenheit."
+	page "degrees Fahrenheit.@"

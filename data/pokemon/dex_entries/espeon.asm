@@ -6,4 +6,4 @@
 	next "precognitive faculties were"
 	
 	page "awakened by its need to protect"
-	next "itself."
+	next "itself.@"

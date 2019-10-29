@@ -7,4 +7,4 @@
 	
 	page "making itself invisible at will,"
 	next "so it entirely avoids notice even"
-	next "if it approaches people."
+	next "if it approaches people.@"

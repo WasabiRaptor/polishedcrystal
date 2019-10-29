@@ -3,4 +3,4 @@
 
 	db "It is thought that Uxie, Mesprit,"
 	next "and Azelf all came from the"
-	next "same egg."
+	next "same egg.@"

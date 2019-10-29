@@ -7,4 +7,4 @@
 	
 	page "incapable of hearing anything"
 	next "for a while. This is considered"
-	next "to be a weak point."
+	next "to be a weak point.@"

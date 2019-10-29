@@ -6,4 +6,4 @@
 	next "leaf on its tail into a blade and"
 	
 	page "fight if it has to protect its"
-	next "friends."
+	next "friends.@"

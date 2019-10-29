@@ -6,4 +6,4 @@
 	next "keep traveling around until it"
 	
 	page "finds one with the color and"
-	next "shape it wants."
+	next "shape it wants.@"

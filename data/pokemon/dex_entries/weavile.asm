@@ -6,4 +6,4 @@
 	next "then another Weavile will deal"
 	
 	page "the finishing blow with its"
-	next "sharp claws."
+	next "sharp claws.@"

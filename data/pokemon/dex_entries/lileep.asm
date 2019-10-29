@@ -6,4 +6,4 @@
 	next "as seaweed to ambush its prey"
 	
 	page "and devoured them whole when"
-	next "they got close."
+	next "they got close.@"

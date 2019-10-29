@@ -6,4 +6,4 @@
 	next "emitted by a courting male"
 	
 	page "experiences a positive mood"
-	next "shift."
+	next "shift.@"

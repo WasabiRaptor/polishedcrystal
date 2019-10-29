@@ -5,4 +5,4 @@
 	next "from its beak attest to its"
 	next "power. The leader has the"
 	
-	page "biggest horns."
+	page "biggest horns.@"

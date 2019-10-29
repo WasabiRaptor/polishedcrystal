@@ -5,4 +5,4 @@
 	next "learns various things all on its"
 	next "own, but it even remembers"
 	
-	page "things it doesn't need to know."
+	page "things it doesn't need to know.@"

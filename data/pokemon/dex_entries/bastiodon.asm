@@ -6,4 +6,4 @@
 	next "mistaken for its spine until"
 	
 	page "after this Pokémon was"
-	next "successfully restored."
+	next "successfully restored.@"

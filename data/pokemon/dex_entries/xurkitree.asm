@@ -6,4 +6,4 @@
 	next "apparently a common organism"
 	
 	page "in the world where it normally"
-	next "lives."
+	next "lives.@"

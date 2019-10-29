@@ -5,4 +5,4 @@
 	next "violence. It silently gazed upon"
 	next "the old world from the"
 	
-	page "Distortion World."
+	page "Distortion World.@"

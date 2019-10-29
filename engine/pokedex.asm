@@ -459,15 +459,15 @@ Pokedex_ReinitDexEntryScreen: ; 402aa (10:42aa)
 DexEntryScreen_ArrowCursorData: ; 402e8
 	db D_RIGHT | D_LEFT, 3
 	dwcoord 1, 17
-	dwcoord 6, 17
-	dwcoord 11, 17
+	dwcoord 5, 17
+	dwcoord 9, 17
 
 DexEntryScreen_ArrowCursorData_ShinyCharm:
 	db D_RIGHT | D_LEFT, 4
 	dwcoord 1, 17
-	dwcoord 6, 17
-	dwcoord 11, 17
-	dwcoord 15, 17
+	dwcoord 5, 17
+	dwcoord 9, 17
+	dwcoord 12, 17
 
 DexEntryScreen_MenuActionJumptable: ; 402f2
 	dw Pokedex_Page
@@ -1229,6 +1229,7 @@ String_START_SEARCH: ; 407f2
 	db $48, $3b, $49, $4a, $4b, $4c, $4d, $4e, $5d, $5e, $ff
 
 Pokedex_DrawDexEntryScreenBG: ; 407fd
+	VWTextStart $d0
 	call Pokedex_FillBackgroundColor2
 	hlcoord 0, 0
 	lb bc, 15, 18
@@ -1245,24 +1246,38 @@ Pokedex_DrawDexEntryScreenBG: ; 407fd
 	ld a, $5f ; horizontal divider
 	call ByteFill
 	hlcoord 1, 17
-	ld bc, 18
+	ld bc, 19
 	ld a, " "
 	call ByteFill
 	hlcoord 0, 17
-
+	ld a, $3b
+	ld [hli], a
+	inc hl
+	ld de, .Page
+	call PlaceString
+	hlcoord 6, 17
+	ld de, .Area
+	call PlaceString
+	hlcoord 10, 17
+	ld de, .Cry
+	call PlaceString
 	ld a, [wCelebiEvent]
 	bit 4, a ; ENGINE_HAVE_SHINY_CHARM
-	ld de, .MenuItemsShinyCharm
-	jr nz, .ok
-	ld de, .MenuItems
+	jr z, .ok
+	hlcoord 13, 17
+	ld de, .Shiny
+	call PlaceString
 .ok
-	call Pokedex_PlaceString
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
-.MenuItems: ; 40867
-	db $3b, " ","P","a","g","e"," A","r","e","a"," ","C","r","y"," "," "," "," "," ", $ff
-.MenuItemsShinyCharm:
-	db $3b, " ","P","a","g","e"," A","r","e","a"," ","C","r","y"," ","S","h","n","y", $ff
+.Page:
+	db "Page@"
+.Area:
+	db "Area@"
+.Cry:
+	db "Cry@"
+.Shiny:
+	db "Shiny@"
 
 Pokedex_DrawDexEntryScreenRightEdge: ; 1de247
 	ldh a, [hBGMapAddress]

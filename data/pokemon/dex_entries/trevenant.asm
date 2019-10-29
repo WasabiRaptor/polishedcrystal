@@ -6,4 +6,4 @@
 	next "Fire types, which Trevenant"
 	
 	page "hates, when they enter the"
-	next "forest."
+	next "forest.@"

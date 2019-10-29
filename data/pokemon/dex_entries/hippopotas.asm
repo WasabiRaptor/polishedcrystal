@@ -3,4 +3,4 @@
 
 	db "It enshrouds itself with sand to"
 	next "protect itself from germs. It"
-	next "does not enjoy getting wet."
+	next "does not enjoy getting wet.@"

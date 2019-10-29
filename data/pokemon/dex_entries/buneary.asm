@@ -6,4 +6,4 @@
 	next "and then unleashes them with"
 	
 	page "its full force, it can smash"
-	next "boulders to dust."
+	next "boulders to dust.@"

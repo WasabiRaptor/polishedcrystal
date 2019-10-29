@@ -6,4 +6,4 @@
 	next "flight upon it. Feelings of"
 	
 	page "gratitude are the message it"
-	next "delivers."
+	next "delivers.@"

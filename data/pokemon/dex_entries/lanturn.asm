@@ -5,4 +5,4 @@
 	next "its antennae absorb Lanturn's"
 	next "bodily fluids, a strong"
 	
-	page "luminescent effect is produced."
+	page "luminescent effect is produced.@"

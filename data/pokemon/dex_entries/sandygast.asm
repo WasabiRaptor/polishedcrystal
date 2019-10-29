@@ -5,4 +5,4 @@
 	next "so Sandygast will get serious"
 	next "and fight any children who come"
 	
-	page "to take it back."
+	page "to take it back.@"

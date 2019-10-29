@@ -6,4 +6,4 @@
 	next "people, because they believe"
 	
 	page "this Pokémon is able to control"
-	next "the weather."
+	next "the weather.@"

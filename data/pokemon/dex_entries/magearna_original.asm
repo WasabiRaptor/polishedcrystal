@@ -6,4 +6,4 @@
 	next "understand their feelings. This"
 	
 	page "faculty makes it useful for"
-	next "taking care of people."
+	next "taking care of people.@"

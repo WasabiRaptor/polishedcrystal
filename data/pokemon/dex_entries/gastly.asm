@@ -6,4 +6,4 @@
 	next "possessed by the grievances of"
 	
 	page "the deceased and thus became a"
-	next "Pokémon."
+	next "Pokémon.@"

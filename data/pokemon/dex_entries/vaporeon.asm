@@ -6,4 +6,4 @@
 	next "to be attacked by an invading"
 	
 	page "enemy, it dives into the water"
-	next "to hide."
+	next "to hide.@"

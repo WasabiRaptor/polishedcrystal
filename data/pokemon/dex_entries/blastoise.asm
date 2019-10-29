@@ -9,4 +9,4 @@
 	next "of water with enough accuracy"
 	next "to strike empty cans from a"
 	
-	page "distance of over 160 feet."
+	page "distance of over 160 feet.@"

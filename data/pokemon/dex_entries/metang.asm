@@ -3,4 +3,4 @@
 
 	db "With its two brains, it fires"
 	next "powerful psychic energy to stop"
-	next "its prey in their tracks."
+	next "its prey in their tracks.@"

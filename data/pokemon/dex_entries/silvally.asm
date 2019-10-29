@@ -5,4 +5,4 @@
 	next "awakened and evolved. Freed"
 	next "from its heavy mask, its speed"
 	
-	page "is greatly increased."
+	page "is greatly increased.@"

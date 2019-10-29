@@ -5,4 +5,4 @@
 	next "of all bird Pokémon, some of"
 	next "the latest research suggests"
 	
-	page "that may not be the case."
+	page "that may not be the case.@"

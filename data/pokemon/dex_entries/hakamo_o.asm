@@ -5,4 +5,4 @@
 	next "scales together. When the"
 	next "rhythm has reached its peak,"
 	
-	page "Hakamo-o attacks."
+	page "Hakamo-o attacks.@"

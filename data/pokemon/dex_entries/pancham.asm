@@ -5,4 +5,4 @@
 	next "henchman. When Pancham makes"
 	next "a big mistake, its leaf gets"
 	
-	page "taken away."
+	page "taken away.@"

@@ -6,4 +6,4 @@
 	next "predict the future, it's not"
 	
 	page "powerful enough to change the"
-	next "future it sees."
+	next "future it sees.@"

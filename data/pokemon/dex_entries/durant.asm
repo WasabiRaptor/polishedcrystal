@@ -5,4 +5,4 @@
 	next "themselves in steel armor to"
 	next "protect themselves from"
 	
-	page "Heatmor."
+	page "Heatmor.@"

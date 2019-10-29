@@ -9,4 +9,4 @@
 	next "it would glare right back"
 	next "without conceding an inch of"
 	
-	page "ground."
+	page "ground.@"

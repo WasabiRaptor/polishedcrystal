@@ -6,4 +6,4 @@
 	next "opponents. It swallows its prey"
 	
 	page "whole—along with mud from the"
-	next "swamp floor."
+	next "swamp floor.@"

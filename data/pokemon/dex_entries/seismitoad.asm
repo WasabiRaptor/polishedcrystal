@@ -5,4 +5,4 @@
 	next "from their head bumps. They"
 	next "use vibration to hurt their"
 	
-	page "opponents."
+	page "opponents.@"

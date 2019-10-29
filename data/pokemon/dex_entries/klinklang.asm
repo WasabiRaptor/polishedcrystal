@@ -5,4 +5,4 @@
 	next "energy tank. It fires the"
 	next "charged energy through its"
 	
-	page "spikes into an area."
+	page "spikes into an area.@"

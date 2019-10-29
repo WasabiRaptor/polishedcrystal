@@ -2,7 +2,7 @@
 	dw 3, 210 ; height, weight
 
 	db "The two minigears that mesh"
-	next "together are predetermined."
+	next "together are predetermined.@"
 	next "Each will rebound from other"
 	
-	page "minigears without meshing."
+	page "minigears without meshing.@"

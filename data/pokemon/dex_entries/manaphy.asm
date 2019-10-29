@@ -5,4 +5,4 @@
 	next "wondrous power that permits it"
 	next "to bond with any kind of"
 	
-	page "Pokémon."
+	page "Pokémon.@"

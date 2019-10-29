@@ -6,4 +6,4 @@
 	next "crying—apparently an effective"
 	
 	page "way of getting enemies to let"
-	next "down their guard."
+	next "down their guard.@"

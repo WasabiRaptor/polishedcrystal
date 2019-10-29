@@ -6,4 +6,4 @@
 	next "from the custom of throwing"
 	
 	page "Pyukumuku back into the sea"
-	next "after they wash onshore."
+	next "after they wash onshore.@"

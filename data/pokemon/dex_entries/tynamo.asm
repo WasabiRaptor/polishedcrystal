@@ -6,4 +6,4 @@
 	next "group of them gathers to"
 	
 	page "unleash a powerful electric"
-	next "shock."
+	next "shock.@"

@@ -6,4 +6,4 @@
 	next "down unworthy opponents"
 	
 	page "boring. It gets motivated for"
-	next "stronger opponents."
+	next "stronger opponents.@"

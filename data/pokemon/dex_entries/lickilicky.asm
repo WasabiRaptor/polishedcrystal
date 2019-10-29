@@ -6,4 +6,4 @@
 	next "its tongue out the farthest. The"
 	
 	page "current record is...more than 82"
-	next "feet."
+	next "feet.@"

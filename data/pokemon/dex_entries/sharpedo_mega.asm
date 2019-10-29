@@ -6,4 +6,4 @@
 	next "prevent mishaps at sea, so the"
 	
 	page "fangs are made into"
-	next "accessories."
+	next "accessories.@"

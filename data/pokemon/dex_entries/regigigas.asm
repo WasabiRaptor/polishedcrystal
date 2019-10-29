@@ -3,4 +3,4 @@
 
 	db "There is an enduring legend that"
 	next "states this Pokémon towed"
-	next "continents with ropes."
+	next "continents with ropes.@"

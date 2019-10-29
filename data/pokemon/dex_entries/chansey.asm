@@ -6,4 +6,4 @@
 	next "nutritious egg away from it"
 	
 	page "caused Chansey to get faster at"
-	next "fleeing."
+	next "fleeing.@"

@@ -5,4 +5,4 @@
 	next "intimidation and warning. Life is"
 	next "over for anyone who doesn't"
 	
-	page "run away as fast as possible."
+	page "run away as fast as possible.@"

@@ -7,4 +7,4 @@
 	
 	page "lives in thunderclouds. The"
 	next "Pokémon gains power if it is"
-	next "stricken by lightning bolts."
+	next "stricken by lightning bolts.@"

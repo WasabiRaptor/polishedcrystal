@@ -7,4 +7,4 @@
 	
 	page "stalks and bad stalks. This"
 	next "Pokémon has been known to"
-	next "fight with others over stalks."
+	next "fight with others over stalks.@"

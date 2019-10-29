@@ -7,4 +7,4 @@
 	
 	page "massive strength, the Pokémon"
 	next "helps clear rock and mud slides"
-	next "that block mountain trails."
+	next "that block mountain trails.@"

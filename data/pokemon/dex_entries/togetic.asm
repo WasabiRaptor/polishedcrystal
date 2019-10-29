@@ -7,4 +7,4 @@
 	
 	page "who is pure of heart, it is said"
 	next "to appear and share its"
-	next "happiness with that person."
+	next "happiness with that person.@"

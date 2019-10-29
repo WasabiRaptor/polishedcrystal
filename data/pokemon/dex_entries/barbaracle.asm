@@ -3,7 +3,7 @@
 
 	db "Barbaracle's legs and hands"
 	next "have minds of their own, and"
-	next "they will move independently."
+	next "they will move independently.@"
 	
 	page "But they usually follow the"
-	next "head's orders."
+	next "head's orders.@"

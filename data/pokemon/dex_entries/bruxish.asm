@@ -6,4 +6,4 @@
 	next "the protuberance on its head. It"
 	
 	page "waits for prey as it surveys"
-	next "the area."
+	next "the area.@"

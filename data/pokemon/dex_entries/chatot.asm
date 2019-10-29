@@ -3,4 +3,4 @@
 
 	db "It can learn and speak human"
 	next "words. If they gather, they all"
-	next "learn the same saying."
+	next "learn the same saying.@"

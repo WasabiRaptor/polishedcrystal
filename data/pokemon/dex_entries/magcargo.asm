@@ -10,4 +10,4 @@
 	next "the raindrops instantly turn into"
 	
 	page "steam, cloaking the area in a"
-	next "thick fog."
+	next "thick fog.@"

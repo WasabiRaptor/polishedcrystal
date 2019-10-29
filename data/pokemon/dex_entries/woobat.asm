@@ -5,4 +5,4 @@
 	next "a body after a Woobat has been"
 	next "attached to it is said to bring"
 	
-	page "good fortune."
+	page "good fortune.@"

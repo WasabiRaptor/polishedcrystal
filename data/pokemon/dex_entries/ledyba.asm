@@ -3,4 +3,4 @@
 
 	db "This Pokémon is very sensitive"
 	next "to cold. In the warmth of Alola,"
-	next "it appears quite lively."
+	next "it appears quite lively.@"

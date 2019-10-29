@@ -6,4 +6,4 @@
 	next "best to waddle along, but when"
 	
 	page "an enemy finds it, it rushes"
-	next "back to the water."
+	next "back to the water.@"

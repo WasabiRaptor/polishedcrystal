@@ -5,4 +5,4 @@
 	next "absorbs the life energy of"
 	next "every living thing and turns into"
 	
-	page "a cocoon once more."
+	page "a cocoon once more.@"

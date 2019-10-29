@@ -5,4 +5,4 @@
 	next "pattern that looks just like a"
 	next "Poké Ball, then releases poison"
 	
-	page "spores."
+	page "spores.@"

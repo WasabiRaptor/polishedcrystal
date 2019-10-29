@@ -10,4 +10,4 @@
 	next "pincers on its forelegs, then"
 	
 	page "injects the prey with its poison"
-	next "barb."
+	next "barb.@"

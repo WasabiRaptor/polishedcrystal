@@ -5,4 +5,4 @@
 	next "new ideas that would change the"
 	next "world, but as soon as it hits"
 	
-	page "upon a new idea, it forgets it."
+	page "upon a new idea, it forgets it.@"

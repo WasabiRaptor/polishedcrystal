@@ -7,4 +7,4 @@
 	
 	page "winds with its fins. If a storm"
 	next "is approaching, it piles up"
-	next "boulders to protect itself."
+	next "boulders to protect itself.@"

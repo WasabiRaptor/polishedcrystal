@@ -7,4 +7,4 @@
 	
 	page "Pokémon gives off more of its"
 	next "becalming scent to blunt the"
-	next "foe's fighting spirit."
+	next "foe's fighting spirit.@"

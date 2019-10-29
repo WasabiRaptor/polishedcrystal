@@ -3,4 +3,4 @@
 
 	db "It signals its emotions with its"
 	next "melodies. Scientists are"
-	next "studying these melodic patterns."
+	next "studying these melodic patterns.@"

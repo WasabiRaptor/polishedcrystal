@@ -3,4 +3,4 @@
 
 	db "In the spring, it grows berries"
 	next "with the texture of frozen"
-	next "treats around its belly."
+	next "treats around its belly.@"

@@ -6,4 +6,4 @@
 	next "relieves its stress by wildly"
 	
 	page "propelling itself around using"
-	next "compressed gas."
+	next "compressed gas.@"

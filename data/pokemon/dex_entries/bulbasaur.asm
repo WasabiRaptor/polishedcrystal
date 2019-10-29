@@ -6,4 +6,4 @@
 	next "seed on its back. By soaking up"
 	
 	page "the sun's rays, the seed grows"
-	next "progressively larger."
+	next "progressively larger.@"

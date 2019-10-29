@@ -3,4 +3,4 @@
 
 	db "The balloons it inflates with its"
 	next "nose grow larger and larger as"
-	next "it practices day by day."
+	next "it practices day by day.@"

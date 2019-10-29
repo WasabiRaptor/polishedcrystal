@@ -6,4 +6,4 @@
 	next "throughout its body are being"
 	
 	page "rebuilt in preparation for"
-	next "evolution."
+	next "evolution.@"

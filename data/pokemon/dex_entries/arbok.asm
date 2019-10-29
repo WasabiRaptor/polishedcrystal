@@ -5,4 +5,4 @@
 	next "determined that there are over"
 	next "20 possible arrangements of"
 	
-	page "the patterns on its stomach."
+	page "the patterns on its stomach.@"

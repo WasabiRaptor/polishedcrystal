@@ -5,4 +5,4 @@
 	next "swinging its barbed tail around"
 	next "wildly. The leaf growing on its"
 	
-	page "head is very bitter."
+	page "head is very bitter.@"

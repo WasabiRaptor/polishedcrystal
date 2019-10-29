@@ -5,4 +5,4 @@
 	next "times of antiquity called it the"
 	next "“cocoon of the stars” and built"
 	
-	page "an altar to worship it."
+	page "an altar to worship it.@"

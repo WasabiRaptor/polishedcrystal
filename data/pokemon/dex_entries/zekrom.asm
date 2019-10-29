@@ -5,4 +5,4 @@
 	next "clouds, it flies throughout the"
 	next "Unova region. It creates"
 	
-	page "electricity in its tail."
+	page "electricity in its tail.@"

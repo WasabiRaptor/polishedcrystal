@@ -6,4 +6,4 @@
 	next "environment, the germs within"
 	
 	page "its body can't multiply, and it"
-	next "dies."
+	next "dies.@"

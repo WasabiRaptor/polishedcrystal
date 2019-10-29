@@ -3,4 +3,4 @@
 
 	db "Lopunny regrows its coat twice"
 	next "a year. Mufflers and hats made"
-	next "from its fur are really warm."
+	next "from its fur are really warm.@"

@@ -7,4 +7,4 @@
 	
 	page "of leaves from those it dislikes"
 	next "just by sniffing with its big red"
-	next "proboscis (nose)."
+	next "proboscis (nose).@"

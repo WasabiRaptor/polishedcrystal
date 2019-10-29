@@ -7,4 +7,4 @@
 	
 	page "blast out molten magma. This"
 	next "Pokémon apparently erupts"
-	next "often when it is enraged."
+	next "often when it is enraged.@"

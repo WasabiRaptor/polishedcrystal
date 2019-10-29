@@ -5,4 +5,4 @@
 	next "the ground. Diglett and"
 	next "Dunsparce share one another's"
 	
-	page "tunnels happily."
+	page "tunnels happily.@"

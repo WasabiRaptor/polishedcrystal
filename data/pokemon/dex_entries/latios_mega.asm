@@ -7,4 +7,4 @@
 	
 	page "Pokémon can fly faster than a"
 	next "jet plane by folding its forelegs"
-	next "to minimize air resistance."
+	next "to minimize air resistance.@"

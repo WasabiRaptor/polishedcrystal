@@ -5,4 +5,4 @@
 	next "that when Wailord become too"
 	next "numerous, fishermen have to"
 	
-	page "chase them off."
+	page "chase them off.@"

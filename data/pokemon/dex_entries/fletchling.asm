@@ -5,4 +5,4 @@
 	next "if you touch it unexpectedly, it"
 	next "will heat up its body in an"
 	
-	page "instant, and you'll be burned."
+	page "instant, and you'll be burned.@"

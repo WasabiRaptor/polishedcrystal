@@ -7,4 +7,4 @@
 	
 	page "clashes against Groudon, as"
 	next "each sought to gain the power"
-	next "of nature."
+	next "of nature.@"

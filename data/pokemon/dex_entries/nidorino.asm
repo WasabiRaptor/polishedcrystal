@@ -7,4 +7,4 @@
 	
 	page "the barbs on its back bristle up"
 	next "at once, and it challenges the"
-	next "foe with all its might."
+	next "foe with all its might.@"

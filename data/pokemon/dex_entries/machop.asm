@@ -6,4 +6,4 @@
 	next "from training with its friends,"
 	
 	page "it challenges Makuhita to a"
-	next "battle."
+	next "battle.@"

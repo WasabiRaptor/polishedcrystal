@@ -7,4 +7,4 @@
 	
 	page "head doesn't need to sleep, so"
 	next "it can keep watch over its"
-	next "surroundings 24 hours a day."
+	next "surroundings 24 hours a day.@"

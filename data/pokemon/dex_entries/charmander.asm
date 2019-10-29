@@ -9,4 +9,4 @@
 	next "itself. If the Pokémon becomes"
 	next "enraged, the flame burns"
 	
-	page "fiercely."
+	page "fiercely.@"

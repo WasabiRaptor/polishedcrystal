@@ -5,4 +5,4 @@
 	next "its movements grow sharper"
 	next "and faster. When in trouble, it"
 	
-	page "emits smoke."
+	page "emits smoke.@"

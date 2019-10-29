@@ -5,4 +5,4 @@
 	next "back. There's now a vestigial"
 	next "plate on its back that's hard"
 	
-	page "but thin."
+	page "but thin.@"

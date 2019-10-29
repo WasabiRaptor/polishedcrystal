@@ -6,4 +6,4 @@
 	next "is thought that so long as Celebi"
 	
 	page "appears, a bright and shining"
-	next "future awaits us."
+	next "future awaits us.@"

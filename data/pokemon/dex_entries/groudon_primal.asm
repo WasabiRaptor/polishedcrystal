@@ -7,4 +7,4 @@
 	
 	page "can cause magma to erupt and"
 	next "expand the landmass of the"
-	next "world."
+	next "world.@"

@@ -6,4 +6,4 @@
 	next "was brought over a long time"
 	
 	page "ago when there was a huge"
-	next "Rattata outbreak."
+	next "Rattata outbreak.@"

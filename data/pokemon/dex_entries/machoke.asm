@@ -6,4 +6,4 @@
 	next "Pokémon removes the"
 	
 	page "power-save belt from its waist"
-	next "and unleashes its full power."
+	next "and unleashes its full power.@"

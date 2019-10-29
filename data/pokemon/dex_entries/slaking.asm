@@ -7,4 +7,4 @@
 	
 	page "by the Pokémon as it eats all"
 	next "the grass within reach while"
-	next "lying prone on the ground."
+	next "lying prone on the ground.@"

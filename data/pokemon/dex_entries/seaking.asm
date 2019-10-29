@@ -5,4 +5,4 @@
 	next "steadily hollow out rocks—even"
 	next "harder ones. The coloration of"
 	
-	page "the male is more vivid."
+	page "the male is more vivid.@"

@@ -6,4 +6,4 @@
 	next "the result of a chemical"
 	
 	page "reaction and not the result of"
-	next "its own free will."
+	next "its own free will.@"

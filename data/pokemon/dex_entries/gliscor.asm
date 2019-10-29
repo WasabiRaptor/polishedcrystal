@@ -5,4 +5,4 @@
 	next "its lengthy tail to carry off its"
 	next "prey... Then its elongated fangs"
 	
-	page "do the rest."
+	page "do the rest.@"

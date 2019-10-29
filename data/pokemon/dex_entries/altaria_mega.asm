@@ -7,4 +7,4 @@
 	
 	page "catches updrafts with its"
 	next "buoyant wings and soars way up"
-	next "into the wild blue yonder."
+	next "into the wild blue yonder.@"

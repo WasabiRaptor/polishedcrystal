@@ -5,4 +5,4 @@
 	next "Alola, its biggest rival is"
 	next "Vikavolt, which it's always"
 	
-	page "fighting with."
+	page "fighting with.@"

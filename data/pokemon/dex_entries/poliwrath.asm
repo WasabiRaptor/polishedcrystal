@@ -5,4 +5,4 @@
 	next "even among Water-type"
 	next "Pokémon, but it normally"
 	
-	page "spends its time on land."
+	page "spends its time on land.@"

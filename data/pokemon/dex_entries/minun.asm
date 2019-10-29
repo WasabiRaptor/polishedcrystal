@@ -7,4 +7,4 @@
 	
 	page "doing so. If its partner is in"
 	next "trouble, this Pokémon gives off"
-	next "increasing amounts of sparks."
+	next "increasing amounts of sparks.@"

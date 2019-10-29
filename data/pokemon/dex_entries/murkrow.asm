@@ -6,4 +6,4 @@
 	next "sneak into the nests of"
 	
 	page "Gabite—noted collectors of"
-	next "jewels—in search of treasure."
+	next "jewels—in search of treasure.@"

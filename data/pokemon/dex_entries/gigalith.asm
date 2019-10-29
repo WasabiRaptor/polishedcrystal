@@ -3,4 +3,4 @@
 
 	db "When it fires off energy with"
 	next "all its might, the power creates"
-	next "countless fissures on its body."
+	next "countless fissures on its body.@"

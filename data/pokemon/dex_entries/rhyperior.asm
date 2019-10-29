@@ -5,4 +5,4 @@
 	next "palms and uses its muscles to"
 	next "shoot them. Geodude are shot at"
 	
-	page "rare times."
+	page "rare times.@"

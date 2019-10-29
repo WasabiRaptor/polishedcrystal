@@ -9,4 +9,4 @@
 	next "sleeps, this Pokémon will never"
 	next "fight—it will just move away"
 	
-	page "somewhere else."
+	page "somewhere else.@"

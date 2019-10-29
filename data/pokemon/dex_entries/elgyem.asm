@@ -6,4 +6,4 @@
 	next "sightings are actually just"
 	
 	page "people mistaking Elgyem for an"
-	next "alien."
+	next "alien.@"

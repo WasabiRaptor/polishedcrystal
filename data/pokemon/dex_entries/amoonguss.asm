@@ -5,4 +5,4 @@
 	next "and waving its arm caps, which"
 	next "resemble Poké Balls, in a"
 	
-	page "swaying motion."
+	page "swaying motion.@"

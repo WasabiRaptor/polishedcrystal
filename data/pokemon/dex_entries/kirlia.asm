@@ -7,4 +7,4 @@
 	
 	page "its power, the air around it"
 	next "becomes distorted, creating"
-	next "mirages of nonexistent scenery."
+	next "mirages of nonexistent scenery.@"

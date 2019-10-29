@@ -6,4 +6,4 @@
 	next "takes notice of it for too long,"
 	
 	page "it will pout and never reveal"
-	next "itself."
+	next "itself.@"

@@ -6,4 +6,4 @@
 	next "sees ominous clouds, it finds a"
 	
 	page "hollow in a tree, where it waits"
-	next "stock-still."
+	next "stock-still.@"

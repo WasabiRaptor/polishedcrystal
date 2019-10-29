@@ -7,4 +7,4 @@
 	
 	page "Pokémon turns serious, its"
 	next "fiery manes flare and blaze as"
-	next "it gallops its way up to 150 mph."
+	next "it gallops its way up to 150 mph.@"

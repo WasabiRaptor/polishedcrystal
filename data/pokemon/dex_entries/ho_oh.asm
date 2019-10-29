@@ -9,4 +9,4 @@
 	next "said to bring happiness to the"
 	next "bearers. This Pokémon is said"
 	
-	page "to live at the foot of a rainbow."
+	page "to live at the foot of a rainbow.@"

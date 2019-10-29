@@ -7,4 +7,4 @@
 	
 	page "ancient writings or the various"
 	next "Unown. Research into this topic"
-	next "is ongoing but nothing is known."
+	next "is ongoing but nothing is known.@"

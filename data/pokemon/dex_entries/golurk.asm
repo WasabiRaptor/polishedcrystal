@@ -5,4 +5,4 @@
 	next "invented Golurk to serve as a"
 	next "laborer. It follows its"
 	
-	page "master's orders faithfully."
+	page "master's orders faithfully.@"

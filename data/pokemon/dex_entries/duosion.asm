@@ -3,4 +3,4 @@
 
 	db "When their two divided brains"
 	next "think the same thoughts, their"
-	next "psychic power is maximized."
+	next "psychic power is maximized.@"

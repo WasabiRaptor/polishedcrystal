@@ -5,4 +5,4 @@
 	next "fleece is easily charged with"
 	next "static electricity, so a special"
 	
-	page "process is used on it."
+	page "process is used on it.@"

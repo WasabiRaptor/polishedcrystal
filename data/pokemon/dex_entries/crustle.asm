@@ -5,4 +5,4 @@
 	next "Crustle fight viciously. The one"
 	next "whose boulder is broken is the"
 	
-	page "loser of the battle."
+	page "loser of the battle.@"

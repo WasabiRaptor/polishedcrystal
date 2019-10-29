@@ -5,4 +5,4 @@
 	next "unleashing psychic power. They"
 	next "can use telepathy to talk with"
 	
-	page "others."
+	page "others.@"

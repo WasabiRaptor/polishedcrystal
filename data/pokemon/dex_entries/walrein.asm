@@ -7,4 +7,4 @@
 	
 	page "imposing tusks. Its thick layer"
 	next "of blubber makes enemy attacks"
-	next "bounce off harmlessly."
+	next "bounce off harmlessly.@"

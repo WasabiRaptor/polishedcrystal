@@ -6,4 +6,4 @@
 	next "become the main body. If the"
 	
 	page "mushroom comes off, the bug"
-	next "stops moving."
+	next "stops moving.@"

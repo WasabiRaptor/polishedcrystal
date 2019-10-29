@@ -3,4 +3,4 @@
 
 	db "Implements shaped like it were"
 	next "discovered in ancient tombs. It"
-	next "is unknown if they are related."
+	next "is unknown if they are related.@"

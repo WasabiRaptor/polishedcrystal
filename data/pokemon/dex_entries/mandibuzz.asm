@@ -5,4 +5,4 @@
 	next "of its prey to construct its"
 	next "nest. Most of the bones are"
 	
-	page "Cubone."
+	page "Cubone.@"

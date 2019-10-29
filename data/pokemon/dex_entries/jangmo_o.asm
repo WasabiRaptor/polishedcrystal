@@ -6,4 +6,4 @@
 	next "ground to frighten its"
 	
 	page "opponents. It can also contact"
-	next "its friends with these noises."
+	next "its friends with these noises.@"

@@ -3,4 +3,4 @@
 
 	db "Its round body is stuffed with"
 	next "souls and expands each time it"
-	next "leads someone away."
+	next "leads someone away.@"

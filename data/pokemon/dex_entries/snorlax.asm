@@ -6,4 +6,4 @@
 	next "prompted to make a serious"
 	
 	page "effort, though, it apparently"
-	next "displays awesome power."
+	next "displays awesome power.@"

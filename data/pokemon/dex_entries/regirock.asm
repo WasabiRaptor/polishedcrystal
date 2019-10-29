@@ -7,4 +7,4 @@
 	
 	page "discovery that the rocks were"
 	next "all unearthed from different"
-	next "locations."
+	next "locations.@"

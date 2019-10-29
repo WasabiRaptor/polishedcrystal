@@ -6,4 +6,4 @@
 	next "with chains of ice, freezing the"
 	
 	page "prey at -148 degrees"
-	next "Fahrenheit."
+	next "Fahrenheit.@"

@@ -5,4 +5,4 @@
 	next "Staraptor, they leave the flock"
 	next "to live alone. They have sturdy"
 	
-	page "wings."
+	page "wings.@"

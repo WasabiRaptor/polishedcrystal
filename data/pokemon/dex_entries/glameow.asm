@@ -5,4 +5,4 @@
 	next "demonstrates beautiful"
 	next "movements of its tail, like a"
 	
-	page "dancing ribbon."
+	page "dancing ribbon.@"

@@ -6,4 +6,4 @@
 	next "that having one of its"
 	
 	page "heart-shaped scales would"
-	next "enable you to find a sweetheart."
+	next "enable you to find a sweetheart.@"

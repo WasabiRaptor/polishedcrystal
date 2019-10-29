@@ -9,4 +9,4 @@
 	next "an indomitable spirit and will"
 	next "never give up in the face of"
 	
-	page "adversity."
+	page "adversity.@"

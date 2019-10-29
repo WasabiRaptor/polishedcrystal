@@ -6,4 +6,4 @@
 	next "partner, it's very loyal to you"
 	
 	page "as its Trainer and will obey"
-	next "your orders."
+	next "your orders.@"

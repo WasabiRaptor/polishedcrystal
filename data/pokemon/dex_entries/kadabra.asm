@@ -5,4 +5,4 @@
 	next "amplify its psychic powers"
 	next "before it lets loose. Apparently,"
 	
-	page "gold spoons are no good."
+	page "gold spoons are no good.@"

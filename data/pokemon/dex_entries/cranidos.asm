@@ -5,4 +5,4 @@
 	next "possesses a hard and sturdy"
 	next "skull, lacking any intelligence"
 	
-	page "within."
+	page "within.@"

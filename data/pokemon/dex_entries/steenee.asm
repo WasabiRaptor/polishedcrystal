@@ -6,4 +6,4 @@
 	next "Pokémon without worry. They"
 	
 	page "peck it relentlessly, but it"
-	next "doesn't care."
+	next "doesn't care.@"

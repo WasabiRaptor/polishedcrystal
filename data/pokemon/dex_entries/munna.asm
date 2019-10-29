@@ -5,4 +5,4 @@
 	next "and Pokémon. When it eats a"
 	next "pleasant dream, it expels"
 	
-	page "pink-colored mist."
+	page "pink-colored mist.@"

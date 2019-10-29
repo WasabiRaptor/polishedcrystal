@@ -5,8 +5,8 @@
 	next "oversized claw. It waves this"
 	next "huge claw in the air to"
 	
-	page "communicate with others."
+	page "communicate with others.@"
 	next "However, because the claw is"
 	next "so heavy, the Pokémon quickly"
 	
-	page "tires."
+	page "tires.@"

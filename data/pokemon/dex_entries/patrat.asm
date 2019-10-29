@@ -5,4 +5,4 @@
 	next "will always be on the lookout,"
 	next "but it won't notice a foe"
 	
-	page "coming from behind."
+	page "coming from behind.@"

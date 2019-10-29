@@ -6,4 +6,4 @@
 	next "daily basis, it gets stressed out"
 	
 	page "and stops listening to its"
-	next "Trainer."
+	next "Trainer.@"

@@ -9,4 +9,4 @@
 	next "better. At night, this Pokémon"
 	next "closes its petals and goes to"
 	
-	page "sleep."
+	page "sleep.@"

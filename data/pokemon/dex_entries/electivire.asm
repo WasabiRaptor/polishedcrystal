@@ -5,4 +5,4 @@
 	next "electricity, and then beats down"
 	next "opponents with the power of its"
 	
-	page "electrified fist."
+	page "electrified fist.@"

@@ -5,4 +5,4 @@
 	next "its own. The precise movements"
 	next "of Jynx living in Alola are truly"
 	
-	page "wonderful."
+	page "wonderful.@"

@@ -6,4 +6,4 @@
 	next "swims through the desert as if"
 	
 	page "it were water, then jumps out"
-	next "and chomps them."
+	next "and chomps them.@"

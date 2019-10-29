@@ -9,4 +9,4 @@
 	next "the prey are immobilized, this"
 	next "Pokémon catches and devours"
 	
-	page "them."
+	page "them.@"

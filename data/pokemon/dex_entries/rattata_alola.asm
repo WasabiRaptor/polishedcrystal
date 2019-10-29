@@ -6,4 +6,4 @@
 	next "incisors get too long, this"
 	
 	page "Pokémon becomes unable to eat,"
-	next "and it starves to death."
+	next "and it starves to death.@"

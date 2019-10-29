@@ -7,4 +7,4 @@
 	
 	page "injured, it is said to dip its body"
 	next "in the molten magma of a"
-	next "volcano to burn and heal itself."
+	next "volcano to burn and heal itself.@"

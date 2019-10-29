@@ -5,4 +5,4 @@
 	next "hard shell get damaged, those"
 	next "areas swell, gradually growing"
 	
-	page "into large sharp spikes."
+	page "into large sharp spikes.@"

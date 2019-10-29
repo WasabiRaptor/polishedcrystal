@@ -9,4 +9,4 @@
 	next "more powerful the toxins"
 	next "become. The Pokémon also"
 	
-	page "becomes more putrid."
+	page "becomes more putrid.@"

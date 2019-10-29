@@ -6,4 +6,4 @@
 	next "on rare occasions a huge fight"
 	
 	page "will break out over which head"
-	next "gets to eat first."
+	next "gets to eat first.@"

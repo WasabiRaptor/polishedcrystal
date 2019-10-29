@@ -6,4 +6,4 @@
 	next "opponents solid. They live in"
 	
 	page "herds above the snow line on"
-	next "mountains."
+	next "mountains.@"

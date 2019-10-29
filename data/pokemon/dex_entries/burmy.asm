@@ -3,4 +3,4 @@
 
 	db "If its cloak is broken in battle,"
 	next "it quickly remakes the cloak"
-	next "with materials nearby."
+	next "with materials nearby.@"

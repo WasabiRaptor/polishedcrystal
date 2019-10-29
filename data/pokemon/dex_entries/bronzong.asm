@@ -5,4 +5,4 @@
 	next "petitioning Bronzong for rain"
 	next "was the way to make crops"
 	
-	page "grow."
+	page "grow.@"

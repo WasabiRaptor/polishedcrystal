@@ -3,4 +3,4 @@
 
 	db "Legends tell of its fighting"
 	next "alongside a general and"
-	next "conquering a whole country."
+	next "conquering a whole country.@"

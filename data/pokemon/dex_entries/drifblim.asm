@@ -5,4 +5,4 @@
 	next "catch a Drifblim floating on the"
 	next "wind at dusk, you'll be carried"
 	
-	page "away to the afterlife."
+	page "away to the afterlife.@"

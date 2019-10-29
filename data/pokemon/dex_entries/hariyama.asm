@@ -5,4 +5,4 @@
 	next "their strength, they're also"
 	next "kind. They value etiquette,"
 	
-	page "praising opponents they battle."
+	page "praising opponents they battle.@"

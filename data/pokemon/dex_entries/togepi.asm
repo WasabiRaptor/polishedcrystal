@@ -9,4 +9,4 @@
 	next "Pokémon stores up feelings of"
 	next "happiness inside its shell, then"
 	
-	page "shares them with others."
+	page "shares them with others.@"

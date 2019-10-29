@@ -5,4 +5,4 @@
 	next "it could function on land. But it"
 	next "didn't adapt in time and went"
 	
-	page "extinct."
+	page "extinct.@"

@@ -6,4 +6,4 @@
 	next "Pokémon, its sharp claws can"
 	
 	page "leave its Trainer's whole body"
-	next "covered in scratches."
+	next "covered in scratches.@"

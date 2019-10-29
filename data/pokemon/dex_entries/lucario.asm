@@ -6,4 +6,4 @@
 	next "mysterious waves called auras,"
 	
 	page "which can crush boulders of"
-	next "large size to dust."
+	next "large size to dust.@"

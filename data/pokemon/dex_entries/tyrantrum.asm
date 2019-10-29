@@ -6,4 +6,4 @@
 	next "theories that its entire body"
 	
 	page "was once covered in a"
-	next "feather-like coat."
+	next "feather-like coat.@"

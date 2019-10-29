@@ -10,4 +10,4 @@
 	next "lying in the sunlight, it's a sign"
 	
 	page "that the bud will bloom into a"
-	next "large flower soon."
+	next "large flower soon.@"

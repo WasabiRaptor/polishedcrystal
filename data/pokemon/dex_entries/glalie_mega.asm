@@ -6,4 +6,4 @@
 	next "prefers to eat Pokémon like"
 	
 	page "Vanillite that are already"
-	next "frozen."
+	next "frozen.@"

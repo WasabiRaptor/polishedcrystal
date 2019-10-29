@@ -6,4 +6,4 @@
 	next "fell an opponent. A simple glare"
 	
 	page "from one of them quiets"
-	next "everybody."
+	next "everybody.@"

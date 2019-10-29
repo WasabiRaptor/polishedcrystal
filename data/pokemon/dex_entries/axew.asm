@@ -5,4 +5,4 @@
 	next "leaving gashes in trees with"
 	next "their tusks. If a tusk breaks, a"
 	
-	page "new one grows in quickly."
+	page "new one grows in quickly.@"

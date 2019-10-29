@@ -5,4 +5,4 @@
 	next "the world about how Gengar"
 	next "will pay a visit to children who"
 	
-	page "are naughty."
+	page "are naughty.@"

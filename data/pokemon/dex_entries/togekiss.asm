@@ -5,4 +5,4 @@
 	next "people who respect one"
 	next "another's rights and avoid"
 	
-	page "needless strife."
+	page "needless strife.@"

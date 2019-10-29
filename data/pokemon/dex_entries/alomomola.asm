@@ -6,4 +6,4 @@
 	next "have an Alomomola with you,"
 	
 	page "there'll be no need for a"
-	next "doctor or medicine."
+	next "doctor or medicine.@"

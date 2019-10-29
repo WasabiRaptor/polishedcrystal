@@ -6,4 +6,4 @@
 	next "apparently compete among"
 	
 	page "themselves to see whose horn"
-	next "is thickest and sharpest."
+	next "is thickest and sharpest.@"

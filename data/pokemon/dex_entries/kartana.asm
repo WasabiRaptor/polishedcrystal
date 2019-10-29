@@ -3,4 +3,4 @@
 
 	db "This Ultra Beast's body, which"
 	next "is as thin as paper, is like a"
-	next "sharpened sword."
+	next "sharpened sword.@"

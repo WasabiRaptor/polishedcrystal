@@ -5,4 +5,4 @@
 	next "does. It turns back into"
 	next "Slowpoke if its tail, along with"
 	
-	page "Shellder, breaks off."
+	page "Shellder, breaks off.@"

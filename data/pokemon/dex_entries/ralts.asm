@@ -6,4 +6,4 @@
 	next "Trainer is in a cheerful mood,"
 	
 	page "this Pokémon grows cheerful"
-	next "and joyous in the same way."
+	next "and joyous in the same way.@"

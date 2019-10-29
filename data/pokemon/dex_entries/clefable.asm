@@ -6,4 +6,4 @@
 	next "away, so it lives deep in the"
 	
 	page "mountains where there aren't"
-	next "many people or Pokémon."
+	next "many people or Pokémon.@"

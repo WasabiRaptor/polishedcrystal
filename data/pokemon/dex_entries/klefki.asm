@@ -3,7 +3,7 @@
 
 	db "Although it's unclear why it"
 	next "collects keys, giving it a key"
-	next "makes Klefki very happy."
+	next "makes Klefki very happy.@"
 	
 	page "However, it apparently only"
-	next "likes master keys."
+	next "likes master keys.@"

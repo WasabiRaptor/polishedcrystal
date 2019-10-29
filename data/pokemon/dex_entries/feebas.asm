@@ -6,4 +6,4 @@
 	next "they'd taste bad, so predators"
 	
 	page "won't eat them. And their"
-	next "numbers continue to grow."
+	next "numbers continue to grow.@"

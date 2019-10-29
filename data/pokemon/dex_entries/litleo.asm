@@ -6,4 +6,4 @@
 	next "to hunt prey on their own,"
 	
 	page "they're kicked out and have to"
-	next "make their own way."
+	next "make their own way.@"

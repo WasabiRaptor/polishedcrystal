@@ -5,4 +5,4 @@
 	next "sharp even if used to cut steel"
 	next "beams. These Pokémon are"
 	
-	page "covered in hard armor."
+	page "covered in hard armor.@"

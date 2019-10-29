@@ -7,4 +7,4 @@
 	
 	page "revitalize trees. This Pokémon"
 	next "raises the trees in a forest"
-	next "with loving care."
+	next "with loving care.@"

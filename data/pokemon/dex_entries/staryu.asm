@@ -5,4 +5,4 @@
 	next "folktales of stardust falling"
 	next "into the ocean and becoming"
 	
-	page "Staryu."
+	page "Staryu.@"

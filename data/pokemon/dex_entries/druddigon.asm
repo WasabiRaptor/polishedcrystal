@@ -6,4 +6,4 @@
 	next "caves, it squares off against"
 	
 	page "its enemies and charges"
-	next "face-first right into them."
+	next "face-first right into them.@"

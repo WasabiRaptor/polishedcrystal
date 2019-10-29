@@ -5,4 +5,4 @@
 	next "energy it creates, that being's"
 	next "entire body will be overflowing"
 	
-	page "with power."
+	page "with power.@"

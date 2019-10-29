@@ -7,4 +7,4 @@
 	
 	page "little in the way of food, these"
 	next "Pokémon can be seen squabbling"
-	next "with each other over territory."
+	next "with each other over territory.@"

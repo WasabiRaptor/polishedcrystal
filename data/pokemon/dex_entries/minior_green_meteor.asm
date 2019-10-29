@@ -6,4 +6,4 @@
 	next "stronger Pokémon. When it"
 	
 	page "tries to run away, it falls to the"
-	next "ground."
+	next "ground.@"

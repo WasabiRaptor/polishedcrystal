@@ -5,4 +5,4 @@
 	next "disposition, if you give it a nice"
 	next "ripe fruit that it loves, Noivern"
 	
-	page "will suddenly become tame."
+	page "will suddenly become tame.@"

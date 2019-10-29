@@ -5,4 +5,4 @@
 	next "its stomach. In response to an"
 	next "attack, it retaliates"
 	
-	page "immediately by slashing."
+	page "immediately by slashing.@"

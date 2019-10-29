@@ -9,4 +9,4 @@
 	next "minimize resistance in water,"
 	next "enabling this Pokémon to swim"
 	
-	page "at high speeds."
+	page "at high speeds.@"

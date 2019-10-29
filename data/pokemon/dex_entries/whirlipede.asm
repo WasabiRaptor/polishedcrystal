@@ -5,4 +5,4 @@
 	next "when attacked, it rotates at"
 	next "high speed and then crashes into"
 	
-	page "its opponent."
+	page "its opponent.@"

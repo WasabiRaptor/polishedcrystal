@@ -9,4 +9,4 @@
 	next "its body. This Pokémon tries to"
 	next "intimidate its foes by making"
 	
-	page "the hair on its tail bristle out."
+	page "the hair on its tail bristle out.@"

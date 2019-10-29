@@ -5,4 +5,4 @@
 	next "from the placement and"
 	next "movement of the stars. They"
 	
-	page "can see Trainers' life spans."
+	page "can see Trainers' life spans.@"

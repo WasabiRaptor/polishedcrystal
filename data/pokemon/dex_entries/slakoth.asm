@@ -6,4 +6,4 @@
 	next "is content to loaf around"
 	
 	page "motionless. It is rare to see"
-	next "this Pokémon in motion."
+	next "this Pokémon in motion.@"

@@ -5,4 +5,4 @@
 	next "deity, it's violent enough to"
 	next "crush anyone it sees as an"
 	
-	page "enemy."
+	page "enemy.@"

@@ -9,4 +9,4 @@
 	next "destroyed dump truck then"
 	next "becomes a handy meal for the"
 	
-	page "Pokémon."
+	page "Pokémon.@"

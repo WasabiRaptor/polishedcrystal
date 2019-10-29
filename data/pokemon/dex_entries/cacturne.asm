@@ -9,4 +9,4 @@
 	next "their time, waiting for the"
 	next "traveler to tire and become"
 	
-	page "incapable of moving."
+	page "incapable of moving.@"

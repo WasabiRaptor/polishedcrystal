@@ -6,4 +6,4 @@
 	next "don't thrive, because the"
 	
 	page "water composition has changed"
-	next "since their era."
+	next "since their era.@"

@@ -6,4 +6,4 @@
 	next "going after Caterpie,"
 	
 	page "Butterfree sprinkles its scales"
-	next "on them to drive them off."
+	next "on them to drive them off.@"

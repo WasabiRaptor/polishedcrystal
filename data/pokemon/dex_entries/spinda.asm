@@ -3,4 +3,4 @@
 
 	db "Its steps are shaky and"
 	next "stumbling. Walking for a long"
-	next "time makes it feel sick."
+	next "time makes it feel sick.@"

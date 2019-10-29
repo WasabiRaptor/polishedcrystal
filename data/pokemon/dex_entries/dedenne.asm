@@ -6,4 +6,4 @@
 	next "their outlets. When your"
 	
 	page "electric bill seems off, it's the"
-	next "handiwork of this rascal."
+	next "handiwork of this rascal.@"

@@ -6,4 +6,4 @@
 	next "them in bold hops. They eat"
 	
 	page "seaweed that washes up on the"
-	next "shoreline."
+	next "shoreline.@"

@@ -5,4 +5,4 @@
 	next "heads. They will never let"
 	next "themselves feel close to anyone"
 	
-	page "other than their Trainers."
+	page "other than their Trainers.@"

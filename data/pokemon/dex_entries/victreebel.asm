@@ -9,4 +9,4 @@
 	next "prey. When an unsuspecting prey"
 	next "draws near, this Pokémon"
 	
-	page "swallows it whole."
+	page "swallows it whole.@"

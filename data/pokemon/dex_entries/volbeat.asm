@@ -7,4 +7,4 @@
 	
 	page "shapes in the night sky. This"
 	next "Pokémon loves the sweet"
-	next "aroma given off by Illumise."
+	next "aroma given off by Illumise.@"

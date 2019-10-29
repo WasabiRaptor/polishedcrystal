@@ -5,4 +5,4 @@
 	next "on the ground. Sometimes it"
 	next "finds coins, so Murkrow and"
 	
-	page "Meowth will go after it."
+	page "Meowth will go after it.@"

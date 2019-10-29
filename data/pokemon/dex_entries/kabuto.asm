@@ -6,4 +6,4 @@
 	next "living specimens can still be"
 	
 	page "seen in a certain region—a rare"
-	next "sight."
+	next "sight.@"

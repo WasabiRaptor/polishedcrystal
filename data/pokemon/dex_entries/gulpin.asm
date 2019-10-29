@@ -7,4 +7,4 @@
 	
 	page "comparison. This Pokémon's"
 	next "stomach contains special"
-	next "enzymes that dissolve anything."
+	next "enzymes that dissolve anything.@"

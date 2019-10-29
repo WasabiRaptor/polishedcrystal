@@ -5,4 +5,4 @@
 	next "secretions changes in the"
 	next "intensity of its hue as the"
 	
-	page "Pokémon's emotions change."
+	page "Pokémon's emotions change.@"

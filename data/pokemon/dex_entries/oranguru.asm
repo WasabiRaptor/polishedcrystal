@@ -6,4 +6,4 @@
 	next "throws Poké Balls and gives"
 	
 	page "other Pokémon orders as it"
-	next "pleases."
+	next "pleases.@"

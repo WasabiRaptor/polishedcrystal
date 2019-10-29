@@ -9,4 +9,4 @@
 	next "Pokémon appears to become"
 	next "nervous if separated from the"
 	
-	page "others."
+	page "others.@"

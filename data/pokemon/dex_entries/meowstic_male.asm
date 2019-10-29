@@ -7,4 +7,4 @@
 	
 	page "patterns tightly covered"
 	next "because that power is too"
-	next "immense."
+	next "immense.@"

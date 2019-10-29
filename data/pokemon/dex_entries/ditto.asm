@@ -6,4 +6,4 @@
 	next "has its own strengths and"
 	
 	page "weaknesses when it comes to"
-	next "transformations."
+	next "transformations.@"

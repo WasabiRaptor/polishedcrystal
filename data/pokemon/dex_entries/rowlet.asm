@@ -5,4 +5,4 @@
 	next "as sharp as blades, flying in"
 	next "attack. Its legs are strong, so"
 	
-	page "its kicks are also formidable."
+	page "its kicks are also formidable.@"

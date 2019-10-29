@@ -7,4 +7,4 @@
 	
 	page "grow. Azurill can be seen"
 	next "bouncing and playing on its big,"
-	next "rubbery tail."
+	next "rubbery tail.@"

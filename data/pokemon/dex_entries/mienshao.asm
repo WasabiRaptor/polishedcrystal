@@ -6,4 +6,4 @@
 	next "then slowly stores up power"
 	
 	page "before delivering the finishing"
-	next "blow."
+	next "blow.@"

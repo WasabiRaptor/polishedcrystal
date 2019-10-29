@@ -6,4 +6,4 @@
 	next "anyone other than an"
 	
 	page "experienced professional tries"
-	next "to restore it, they will fail."
+	next "to restore it, they will fail.@"

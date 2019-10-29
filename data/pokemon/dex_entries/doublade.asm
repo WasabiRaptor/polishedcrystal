@@ -5,4 +5,4 @@
 	next "its two swords are unstoppable,"
 	next "even for an opponent greatly"
 	
-	page "accomplished at swordplay."
+	page "accomplished at swordplay.@"

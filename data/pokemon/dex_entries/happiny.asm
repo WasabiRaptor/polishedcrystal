@@ -6,4 +6,4 @@
 	next "round rock away, it will cry and"
 	
 	page "fuss and throw a big old"
-	next "tantrum."
+	next "tantrum.@"

@@ -5,4 +5,4 @@
 	next "in the morning, slowly moving"
 	next "their bodies through a series of"
 	
-	page "poses."
+	page "poses.@"

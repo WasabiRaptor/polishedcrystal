@@ -6,4 +6,4 @@
 	next "smoothed out until they're"
 	
 	page "totally round. They also have a"
-	next "calm, quiet disposition."
+	next "calm, quiet disposition.@"

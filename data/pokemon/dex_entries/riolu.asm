@@ -5,4 +5,4 @@
 	next "Pokémon feel by looking at"
 	next "their auras. It doesn't"
 	
-	page "approach dangerous opponents."
+	page "approach dangerous opponents.@"

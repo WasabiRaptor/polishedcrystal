@@ -6,4 +6,4 @@
 	next "substance that dulls the sense"
 	
 	page "of smell, so Pokémon with keen"
-	next "noses get lost."
+	next "noses get lost.@"

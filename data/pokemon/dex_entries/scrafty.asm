@@ -3,4 +3,4 @@
 
 	db "This Pokémon may be rude, but"
 	next "it takes very good care of its"
-	next "family, its friends, and its turf."
+	next "family, its friends, and its turf.@"

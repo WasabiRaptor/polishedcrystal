@@ -6,4 +6,4 @@
 	next "that person's arm and drains"
 	
 	page "that person's life energy"
-	next "completely."
+	next "completely.@"

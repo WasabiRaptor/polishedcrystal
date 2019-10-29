@@ -6,4 +6,4 @@
 	next "Trainers who like Feebas and"
 	
 	page "have raised it are seemingly"
-	next "disappointed by Milotic."
+	next "disappointed by Milotic.@"

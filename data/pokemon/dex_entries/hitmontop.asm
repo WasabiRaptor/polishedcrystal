@@ -10,4 +10,4 @@
 	next "same time. The Pokémon"
 	
 	page "travels faster spinning than it"
-	next "does walking."
+	next "does walking.@"

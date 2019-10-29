@@ -5,4 +5,4 @@
 	next "another world, its body is thin"
 	next "and supple, but it also"
 	
-	page "possesses great power."
+	page "possesses great power.@"

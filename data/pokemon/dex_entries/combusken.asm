@@ -5,6 +5,6 @@
 	next "intensely hot flames it spews"
 	next "from its beak and with"
 	
-	page "outstandingly destructive kicks."
+	page "outstandingly destructive kicks.@"
 	next "This Pokémon's cry is very"
-	next "loud and distracting."
+	next "loud and distracting.@"

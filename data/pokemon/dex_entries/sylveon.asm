@@ -5,4 +5,4 @@
 	next "unflinchingly charge at dragon"
 	next "Pokémon that are many times"
 	
-	page "larger than itself."
+	page "larger than itself.@"

@@ -3,4 +3,4 @@
 
 	db "Legends say this Pokémon"
 	next "confounded opponents with its"
-	next "swift movements."
+	next "swift movements.@"

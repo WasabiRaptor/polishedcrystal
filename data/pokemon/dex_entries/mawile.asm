@@ -6,4 +6,4 @@
 	next "opponents let down their"
 	
 	page "guard—and then it swallows"
-	next "them whole with its huge jaws."
+	next "them whole with its huge jaws.@"

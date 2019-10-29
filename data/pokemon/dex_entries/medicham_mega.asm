@@ -9,4 +9,4 @@
 	next "powers. This Pokémon is known"
 	next "to meditate for a whole month"
 	
-	page "without eating."
+	page "without eating.@"

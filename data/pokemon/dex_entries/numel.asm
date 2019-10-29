@@ -9,4 +9,4 @@
 	next "that event, the Pokémon's"
 	next "body grows heavy and its"
 	
-	page "movements become sluggish."
+	page "movements become sluggish.@"

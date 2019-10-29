@@ -6,4 +6,4 @@
 	next "steel shell in attack. This is not"
 	
 	page "a conscious action but a"
-	next "conditioned reflex."
+	next "conditioned reflex.@"

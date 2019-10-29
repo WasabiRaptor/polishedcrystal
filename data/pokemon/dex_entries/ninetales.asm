@@ -6,4 +6,4 @@
 	next "even once will be cursed for a"
 	
 	page "thousand years, along with their"
-	next "descendants."
+	next "descendants.@"

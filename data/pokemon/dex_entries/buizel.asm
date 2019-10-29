@@ -5,4 +5,4 @@
 	next "around its neck and pokes its"
 	next "head out of the water to see"
 	
-	page "what is going on."
+	page "what is going on.@"

@@ -6,4 +6,4 @@
 	next "it simply can't afford to miss,"
 	
 	page "it tugs the vine on its head to"
-	next "improve its focus."
+	next "improve its focus.@"

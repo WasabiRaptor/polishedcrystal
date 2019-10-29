@@ -9,4 +9,4 @@
 	next "Pokémon shoots lasers from"
 	next "the crystalline organ on its"
 	
-	page "chest."
+	page "chest.@"

@@ -5,4 +5,4 @@
 	next "freezing energy inside itself,"
 	next "but its body became frozen"
 	
-	page "when the energy leaked out."
+	page "when the energy leaked out.@"

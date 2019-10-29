@@ -6,4 +6,4 @@
 	next "longer raise them have become"
 	
 	page "common, and they can now be"
-	next "found in Alola."
+	next "found in Alola.@"

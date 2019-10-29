@@ -6,4 +6,4 @@
 	next "aggressive. One theory is that"
 	
 	page "the electricity buildup is"
-	next "actually causing stress."
+	next "actually causing stress.@"

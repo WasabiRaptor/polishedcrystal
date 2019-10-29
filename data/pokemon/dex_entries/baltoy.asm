@@ -5,4 +5,4 @@
 	next "to Baltoy have been found on"
 	next "the walls of caves where"
 	
-	page "primitive humans lived."
+	page "primitive humans lived.@"

@@ -3,7 +3,7 @@
 
 	db "Its jaws are strong enough to"
 	next "crush rocks but so heavy that it"
-	next "can't get up if it flips over."
+	next "can't get up if it flips over.@"
 	
 	page "Sandile seize those moments as"
-	next "their chance."
+	next "their chance.@"

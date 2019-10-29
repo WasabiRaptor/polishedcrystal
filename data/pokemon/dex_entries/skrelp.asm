@@ -3,7 +3,7 @@
 
 	db "It vanishes into seaweed and"
 	next "remains perfectly still to avoid"
-	next "attacks from large Pokémon."
+	next "attacks from large Pokémon.@"
 	
 	page "Rotten seaweed is its main food"
-	next "source."
+	next "source.@"

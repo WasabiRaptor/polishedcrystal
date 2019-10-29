@@ -7,4 +7,4 @@
 	
 	page "from the tubes on its body. This"
 	next "Pokémon only raises its voice"
-	next "when it is in battle."
+	next "when it is in battle.@"

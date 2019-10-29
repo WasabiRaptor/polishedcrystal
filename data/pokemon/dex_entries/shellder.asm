@@ -6,4 +6,4 @@
 	next "becomes a pearl. But the pearl"
 	
 	page "gets in the way, so it spits it"
-	next "out and discards it."
+	next "out and discards it.@"

@@ -6,4 +6,4 @@
 	next "that come near. For whatever"
 	
 	page "reason, it gets along really well"
-	next "with Dhelmise."
+	next "with Dhelmise.@"

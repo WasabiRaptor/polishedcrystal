@@ -6,4 +6,4 @@
 	next "life. When a storm arrives, the"
 	
 	page "Pokémon is said to awaken and"
-	next "wander about in search of prey."
+	next "wander about in search of prey.@"

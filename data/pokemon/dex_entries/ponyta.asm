@@ -6,4 +6,4 @@
 	next "Pokémon becomes stronger by"
 	
 	page "stumbling and falling to keep up"
-	next "with its parent."
+	next "with its parent.@"

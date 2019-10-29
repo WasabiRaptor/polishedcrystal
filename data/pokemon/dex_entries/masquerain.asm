@@ -6,4 +6,4 @@
 	next "eyespots. If that doesn't work,"
 	
 	page "it deftly makes its escape on its"
-	next "set of four wings."
+	next "set of four wings.@"

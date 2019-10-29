@@ -9,4 +9,4 @@
 	next "tail. When that happens, the"
 	next "Pokémon will try to take the"
 	
-	page "foe with it using Destiny Bond."
+	page "foe with it using Destiny Bond.@"

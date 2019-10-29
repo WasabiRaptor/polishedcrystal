@@ -7,4 +7,4 @@
 	
 	page "many meteoroids in its body"
 	next "provide the energy it needs to"
-	next "Mega Evolve."
+	next "Mega Evolve.@"

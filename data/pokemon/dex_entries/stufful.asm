@@ -6,4 +6,4 @@
 	next "its rear releases an odor that it"
 	
 	page "uses to communicate with"
-	next "others of its kind."
+	next "others of its kind.@"

@@ -6,4 +6,4 @@
 	next "it has beaten them down until"
 	
 	page "they can't move, it never ever"
-	next "forgives."
+	next "forgives.@"

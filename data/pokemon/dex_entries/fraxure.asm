@@ -5,4 +5,4 @@
 	next "back, so it diligently sharpens"
 	next "its tusks on river rocks after"
 	
-	page "the end of a battle."
+	page "the end of a battle.@"

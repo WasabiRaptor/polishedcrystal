@@ -7,4 +7,4 @@
 	
 	page "ore is buried. As a result, the"
 	next "Pokémon often clashes with"
-	next "humans mining the iron ore."
+	next "humans mining the iron ore.@"

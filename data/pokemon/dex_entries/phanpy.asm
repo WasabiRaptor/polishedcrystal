@@ -5,8 +5,8 @@
 	next "shower itself. When others"
 	next "gather around, they thoroughly"
 	
-	page "douse each other with water."
+	page "douse each other with water.@"
 	next "These Pokémon can be seen"
 	next "drying their soaking-wet bodies"
 	
-	page "at the edge of water."
+	page "at the edge of water.@"

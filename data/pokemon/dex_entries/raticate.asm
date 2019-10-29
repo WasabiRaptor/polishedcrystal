@@ -5,4 +5,4 @@
 	next "enemies by using its small"
 	next "webbed hind feet to swim from"
 	
-	page "island to island in Alola."
+	page "island to island in Alola.@"

@@ -6,4 +6,4 @@
 	next "a male will protect its friends"
 	
 	page "with no regard for its own"
-	next "safety."
+	next "safety.@"

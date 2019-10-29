@@ -7,4 +7,4 @@
 	
 	page "a suction cup on its head. This"
 	next "Pokémon plucks berries with"
-	next "its long tail and eats them."
+	next "its long tail and eats them.@"

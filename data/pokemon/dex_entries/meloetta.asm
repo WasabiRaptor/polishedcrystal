@@ -5,4 +5,4 @@
 	next "special vocalization method that"
 	next "can control the feelings of"
 	
-	page "those who hear it."
+	page "those who hear it.@"

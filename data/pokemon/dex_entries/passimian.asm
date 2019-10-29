@@ -6,4 +6,4 @@
 	next "can tell what troop they belong"
 	
 	page "to from the position of the"
-	next "leaves."
+	next "leaves.@"

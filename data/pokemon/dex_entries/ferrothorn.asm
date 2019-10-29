@@ -3,4 +3,4 @@
 
 	db "They attach themselves to cave"
 	next "ceilings, firing steel spikes at"
-	next "targets passing beneath them."
+	next "targets passing beneath them.@"

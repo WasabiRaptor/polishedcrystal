@@ -3,4 +3,4 @@
 
 	db "It constantly gnaws on logs and"
 	next "rocks to whittle down its front"
-	next "teeth. It nests alongside water."
+	next "teeth. It nests alongside water.@"

@@ -9,4 +9,4 @@
 	next "battle, this Pokémon will"
 	next "exhibit an amazing amount of"
 	
-	page "power."
+	page "power.@"

@@ -5,4 +5,4 @@
 	next "aroma, bird Pokémon are"
 	next "always after it, but it's not"
 	
-	page "intelligent enough to care."
+	page "intelligent enough to care.@"

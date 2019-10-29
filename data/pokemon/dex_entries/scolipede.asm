@@ -5,4 +5,4 @@
 	next "chases down its foes, attacking"
 	next "relentlessly with its horns until"
 	
-	page "it prevails."
+	page "it prevails.@"

@@ -3,7 +3,7 @@
 
 	db "Tying their belts gets them"
 	next "pumped and makes their"
-	next "punches more destructive."
+	next "punches more destructive.@"
 	
 	page "Disturbing their training angers"
-	next "them."
+	next "them.@"

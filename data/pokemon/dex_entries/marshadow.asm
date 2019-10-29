@@ -6,4 +6,4 @@
 	next "and movements. As it improves,"
 	
 	page "it becomes stronger than those"
-	next "it's imitating."
+	next "it's imitating.@"

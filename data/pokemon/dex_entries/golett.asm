@@ -6,4 +6,4 @@
 	next "continued to move since ancient"
 	
 	page "times, so its power may soon"
-	next "run out."
+	next "run out.@"

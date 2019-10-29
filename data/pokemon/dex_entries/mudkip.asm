@@ -9,4 +9,4 @@
 	next "unleash its amazing power—it"
 	next "can crush rocks bigger than"
 	
-	page "itself."
+	page "itself.@"

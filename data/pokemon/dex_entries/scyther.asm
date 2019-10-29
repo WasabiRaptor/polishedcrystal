@@ -5,4 +5,4 @@
 	next "than just weapons. It uses them"
 	next "with dexterity to dress its prey"
 	
-	page "before eating."
+	page "before eating.@"

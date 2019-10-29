@@ -6,4 +6,4 @@
 	next "considered to be. Those with"
 	
 	page "many scars on their back are"
-	next "mocked by the flock."
+	next "mocked by the flock.@"

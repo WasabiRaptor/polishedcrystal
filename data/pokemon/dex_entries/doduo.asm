@@ -9,4 +9,4 @@
 	next "examples of this Pokémon"
 	next "possessing different sets of"
 	
-	page "brains."
+	page "brains.@"

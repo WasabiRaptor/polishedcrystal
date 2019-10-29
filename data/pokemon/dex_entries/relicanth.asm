@@ -5,4 +5,4 @@
 	next "Relicanth was given a name that"
 	next "is a variation of the name of"
 	
-	page "the person who discovered it."
+	page "the person who discovered it.@"

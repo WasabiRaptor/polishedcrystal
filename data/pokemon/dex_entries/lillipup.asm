@@ -6,4 +6,4 @@
 	next "defeat an opponent, it"
 	
 	page "immediately turns tail and"
-	next "vamooses."
+	next "vamooses.@"

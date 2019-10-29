@@ -6,4 +6,4 @@
 	next "explosion of its own head. It's"
 	
 	page "apparently one kind of Ultra"
-	next "Beast."
+	next "Beast.@"

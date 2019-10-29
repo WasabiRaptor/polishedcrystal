@@ -6,4 +6,4 @@
 	next "its prey with both sides of its"
 	
 	page "shell and doesn't let go until"
-	next "they stop moving."
+	next "they stop moving.@"

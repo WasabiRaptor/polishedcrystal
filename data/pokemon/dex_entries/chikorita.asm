@@ -9,4 +9,4 @@
 	next "leaf, becalming the battling"
 	next "Pokémon and creating a cozy,"
 	
-	page "friendly atmosphere all around."
+	page "friendly atmosphere all around.@"

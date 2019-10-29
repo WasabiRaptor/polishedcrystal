@@ -3,4 +3,4 @@
 
 	db "Its bite injects a potent poison,"
 	next "enough to paralyze large bird"
-	next "Pokémon that try to prey on it."
+	next "Pokémon that try to prey on it.@"

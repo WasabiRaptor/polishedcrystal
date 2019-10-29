@@ -5,4 +5,4 @@
 	next "rainfall. When danger"
 	next "approaches, it curls up into a"
 	
-	page "ball to protect its soft stomach."
+	page "ball to protect its soft stomach.@"

@@ -6,4 +6,4 @@
 	next "improves. It can be useful to"
 	
 	page "record that sound and play it"
-	next "when Elekid's feeling down."
+	next "when Elekid's feeling down.@"

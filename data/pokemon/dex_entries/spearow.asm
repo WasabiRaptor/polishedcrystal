@@ -5,4 +5,4 @@
 	next "stand up to others—even large"
 	next "Pokémon—if it has to protect"
 	
-	page "its territory."
+	page "its territory.@"

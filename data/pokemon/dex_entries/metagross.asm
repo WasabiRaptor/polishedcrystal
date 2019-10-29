@@ -6,4 +6,4 @@
 	next "strength. It grabs its prey with"
 	
 	page "its four legs and holds them in"
-	next "place with its claws."
+	next "place with its claws.@"

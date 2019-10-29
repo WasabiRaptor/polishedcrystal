@@ -5,4 +5,4 @@
 	next "trees, waiting for its bug"
 	next "Pokémon prey to come to it. Its"
 	
-	page "favorite in Alola is Cutiefly."
+	page "favorite in Alola is Cutiefly.@"

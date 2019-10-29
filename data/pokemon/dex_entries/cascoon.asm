@@ -10,4 +10,4 @@
 	next "evolution. This Pokémon will"
 	
 	page "also not forget the pain it"
-	next "endured."
+	next "endured.@"

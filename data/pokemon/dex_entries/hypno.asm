@@ -3,4 +3,4 @@
 
 	db "In Alola, Komala is Hypno's"
 	next "main target. It rarely harms"
-	next "people."
+	next "people.@"

@@ -3,4 +3,4 @@
 
 	db "When its antennae hit each"
 	next "other, it sounds like the music"
-	next "of a xylophone."
+	next "of a xylophone.@"

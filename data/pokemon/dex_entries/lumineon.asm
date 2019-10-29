@@ -5,4 +5,4 @@
 	next "ocean, prey is scarce. Lumineon"
 	next "get into fierce disputes with"
 	
-	page "Lanturn over food."
+	page "Lanturn over food.@"

@@ -3,4 +3,4 @@
 
 	db "Luxray's ability to see through"
 	next "objects comes in handy when"
-	next "it's scouting for danger."
+	next "it's scouting for danger.@"

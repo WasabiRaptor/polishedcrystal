@@ -6,4 +6,4 @@
 	next "your blood, you won't notice"
 	
 	page "any pain or realize you've been"
-	next "bitten."
+	next "bitten.@"

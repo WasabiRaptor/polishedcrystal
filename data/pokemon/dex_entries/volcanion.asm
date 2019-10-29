@@ -5,4 +5,4 @@
 	next "from the arms on its back. It"
 	next "has enough power to blow away"
 	
-	page "a mountain."
+	page "a mountain.@"

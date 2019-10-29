@@ -7,4 +7,4 @@
 	
 	page "seeds. Just taking a bite of this"
 	next "Pokémon's seed will cause"
-	next "your stomach to rumble."
+	next "your stomach to rumble.@"

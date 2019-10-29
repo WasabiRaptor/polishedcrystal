@@ -3,4 +3,4 @@
 
 	db "This Ultra Beast is well enough"
 	next "liked to be chosen as a first"
-	next "partner in its own world."
+	next "partner in its own world.@"

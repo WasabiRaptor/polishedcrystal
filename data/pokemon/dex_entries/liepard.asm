@@ -5,4 +5,4 @@
 	next "target, striking from behind"
 	next "before its victim has a chance"
 	
-	page "to react."
+	page "to react.@"

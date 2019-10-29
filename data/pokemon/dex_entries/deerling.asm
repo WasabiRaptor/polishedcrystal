@@ -5,4 +5,4 @@
 	next "changes the color and scent of"
 	next "this Pokémon's fur. People use"
 	
-	page "it to mark the seasons."
+	page "it to mark the seasons.@"

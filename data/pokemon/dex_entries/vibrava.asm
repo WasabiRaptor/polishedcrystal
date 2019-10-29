@@ -6,4 +6,4 @@
 	next "causing its prey to faint. Then it"
 	
 	page "buries the prey alive in the sand"
-	next "to preserve it."
+	next "to preserve it.@"

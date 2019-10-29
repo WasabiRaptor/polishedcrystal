@@ -7,4 +7,4 @@
 	
 	page "emotions of others. This"
 	next "Pokémon gives off intense heat"
-	next "while rotating its body."
+	next "while rotating its body.@"

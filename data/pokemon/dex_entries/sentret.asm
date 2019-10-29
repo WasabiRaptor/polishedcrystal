@@ -9,4 +9,4 @@
 	next "Pokémon becomes separated"
 	next "from its pack, it becomes"
 	
-	page "incapable of sleep due to fear."
+	page "incapable of sleep due to fear.@"

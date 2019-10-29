@@ -6,4 +6,4 @@
 	next "dancing and then uses the"
 	
 	page "opening it creates to burn them"
-	next "up with blazing flames."
+	next "up with blazing flames.@"

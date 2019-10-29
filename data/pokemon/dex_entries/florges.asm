@@ -6,4 +6,4 @@
 	next "Florges triggers are"
 	
 	page "overwhelming in their beauty"
-	next "and power."
+	next "and power.@"

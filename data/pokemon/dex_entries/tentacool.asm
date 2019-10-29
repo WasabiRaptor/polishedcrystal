@@ -6,4 +6,4 @@
 	next "poisonous tentacles break off"
 	
 	page "sometimes, but after a while,"
-	next "they grow back."
+	next "they grow back.@"

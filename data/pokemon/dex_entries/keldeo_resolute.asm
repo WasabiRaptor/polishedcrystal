@@ -5,4 +5,4 @@
 	next "fills with power and it becomes"
 	next "swifter. Its jumps are then too"
 	
-	page "fast to follow."
+	page "fast to follow.@"

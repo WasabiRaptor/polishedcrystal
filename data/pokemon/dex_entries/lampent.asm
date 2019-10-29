@@ -3,4 +3,4 @@
 
 	db "It arrives near the moment of"
 	next "death and steals spirit from the"
-	next "body."
+	next "body.@"

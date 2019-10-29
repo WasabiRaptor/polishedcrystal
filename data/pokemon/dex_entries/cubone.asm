@@ -5,4 +5,4 @@
 	next "dead mother, but those cries"
 	next "only attract its natural"
 	
-	page "enemy—Mandibuzz."
+	page "enemy—Mandibuzz.@"

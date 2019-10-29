@@ -6,4 +6,4 @@
 	next "and carries them back to its"
 	
 	page "home. It only goes after men it"
-	next "thinks are handsome."
+	next "thinks are handsome.@"

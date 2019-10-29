@@ -6,4 +6,4 @@
 	next "goons. It has no choice in this if"
 	
 	page "it wants to maintain the order"
-	next "of the flock."
+	next "of the flock.@"

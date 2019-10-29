@@ -6,4 +6,4 @@
 	next "makes lip contact and then"
 	
 	page "diligently licks all the dirt off"
-	next "its lips."
+	next "its lips.@"

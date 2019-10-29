@@ -5,4 +5,4 @@
 	next "from its red orbs to weaken its"
 	next "prey, and then it wraps them up"
 	
-	page "in its 80 tentacles."
+	page "in its 80 tentacles.@"

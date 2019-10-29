@@ -5,4 +5,4 @@
 	next "jealousy, and resentment, so"
 	next "some people are grateful for"
 	
-	page "its presence."
+	page "its presence.@"

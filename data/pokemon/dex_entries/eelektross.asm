@@ -6,4 +6,4 @@
 	next "attack prey on shore and"
 	
 	page "immediately drag it into the"
-	next "ocean."
+	next "ocean.@"

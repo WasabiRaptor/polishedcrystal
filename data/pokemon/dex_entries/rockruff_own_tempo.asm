@@ -6,4 +6,4 @@
 	next "and aggressive. Many Trainers"
 	
 	page "find them too much to handle"
-	next "and abandon them."
+	next "and abandon them.@"

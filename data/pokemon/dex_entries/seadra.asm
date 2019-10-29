@@ -5,8 +5,8 @@
 	next "spinning its body. The"
 	next "whirlpools are strong enough to"
 	
-	page "swallow even fishing boats."
+	page "swallow even fishing boats.@"
 	next "This Pokémon weakens prey"
 	next "with these currents, then"
 	
-	page "swallows it whole."
+	page "swallows it whole.@"

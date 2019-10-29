@@ -5,4 +5,4 @@
 	next "beak. You can get some idea of"
 	next "its mood or condition from the"
 	
-	page "rhythm of its pecking."
+	page "rhythm of its pecking.@"

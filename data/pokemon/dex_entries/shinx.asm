@@ -3,4 +3,4 @@
 
 	db "All of its fur dazzles if danger"
 	next "is sensed. It flees while the foe"
-	next "is momentarily blinded."
+	next "is momentarily blinded.@"

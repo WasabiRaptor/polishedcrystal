@@ -5,4 +5,4 @@
 	next "kicks, it can knock out even"
 	next "kickboxing champions with a"
 	
-	page "single blow."
+	page "single blow.@"

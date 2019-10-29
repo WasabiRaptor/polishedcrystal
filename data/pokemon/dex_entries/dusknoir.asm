@@ -5,4 +5,4 @@
 	next "captures radio waves from the"
 	next "world of spirits that command"
 	
-	page "it to take people there."
+	page "it to take people there.@"

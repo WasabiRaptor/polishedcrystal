@@ -6,4 +6,4 @@
 	next "for Pokémon that will become"
 	
 	page "its prey. It's especially fond of"
-	next "Wishiwashi."
+	next "Wishiwashi.@"

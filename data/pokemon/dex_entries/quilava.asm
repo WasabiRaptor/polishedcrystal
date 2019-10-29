@@ -3,10 +3,10 @@
 
 	db "Quilava keeps its foes at bay"
 	next "with the intensity of its flames"
-	next "and gusts of superheated air."
+	next "and gusts of superheated air.@"
 	
 	page "This Pokémon applies its"
 	next "outstanding nimbleness to dodge"
 	next "attacks even while scorching"
 	
-	page "the foe with flames."
+	page "the foe with flames.@"

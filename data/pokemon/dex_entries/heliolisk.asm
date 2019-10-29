@@ -6,4 +6,4 @@
 	next "strength in its legs and enabling"
 	
 	page "it to run 100 yards in five"
-	next "seconds."
+	next "seconds.@"

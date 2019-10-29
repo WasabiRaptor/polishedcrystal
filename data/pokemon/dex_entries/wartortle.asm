@@ -9,4 +9,4 @@
 	next "scratches on its shell are"
 	next "evidence of this Pokémon's"
 	
-	page "toughness as a battler."
+	page "toughness as a battler.@"

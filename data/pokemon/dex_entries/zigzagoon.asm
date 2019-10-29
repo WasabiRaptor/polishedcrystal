@@ -7,4 +7,4 @@
 	
 	page "territorial markings. This"
 	next "Pokémon may play dead to fool"
-	next "foes in battle."
+	next "foes in battle.@"

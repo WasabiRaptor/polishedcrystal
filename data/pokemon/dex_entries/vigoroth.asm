@@ -9,4 +9,4 @@
 	next "compelling this Pokémon to run"
 	next "wild throughout the jungle"
 	
-	page "before it can settle down."
+	page "before it can settle down.@"

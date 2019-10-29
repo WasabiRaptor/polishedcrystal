@@ -7,4 +7,4 @@
 	
 	page "is warm. It stops moving as"
 	next "soon as the sun goes down for"
-	next "the night."
+	next "the night.@"

@@ -7,4 +7,4 @@
 	
 	page "this Pokémon gains endurance"
 	next "and is trained to dole out"
-	next "powerful counterattacks."
+	next "powerful counterattacks.@"

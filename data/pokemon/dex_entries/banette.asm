@@ -6,4 +6,4 @@
 	next "possessed, ever searching for"
 	
 	page "the one who threw it away so it"
-	next "can exact its revenge."
+	next "can exact its revenge.@"

@@ -5,4 +5,4 @@
 	next "sturdy claws, it can crack even"
 	next "the hard shells of Shellder and"
 	
-	page "pluck out their insides."
+	page "pluck out their insides.@"

@@ -5,4 +5,4 @@
 	next "cut like knives. Lycanroc wears"
 	next "its prey down by degrees"
 	
-	page "before finishing them off."
+	page "before finishing them off.@"

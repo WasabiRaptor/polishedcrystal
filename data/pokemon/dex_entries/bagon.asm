@@ -6,4 +6,4 @@
 	next "becomes envious and smashes"
 	
 	page "its surroundings to bits with"
-	next "headbutts."
+	next "headbutts.@"

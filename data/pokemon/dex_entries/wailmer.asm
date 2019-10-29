@@ -6,4 +6,4 @@
 	next "seawater along with its food. It"
 	
 	page "sprays excess water out of its"
-	next "nostrils."
+	next "nostrils.@"

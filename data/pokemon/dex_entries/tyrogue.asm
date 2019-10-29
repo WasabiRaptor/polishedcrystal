@@ -7,4 +7,4 @@
 	
 	page "the Trainer must establish and"
 	next "uphold various training"
-	next "methods."
+	next "methods.@"

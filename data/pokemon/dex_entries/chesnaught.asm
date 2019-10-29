@@ -5,4 +5,4 @@
 	next "posture with its fists guarding"
 	next "its face, it could withstand a"
 	
-	page "bomb blast."
+	page "bomb blast.@"

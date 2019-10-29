@@ -7,4 +7,4 @@
 	
 	page "movements, while slicing them"
 	next "with throwing stars of"
-	next "sharpest water."
+	next "sharpest water.@"

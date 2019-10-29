@@ -3,4 +3,4 @@
 
 	db "It can lull people to sleep and"
 	next "make them dream. It is active"
-	next "during nights of the new moon."
+	next "during nights of the new moon.@"

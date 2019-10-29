@@ -5,4 +5,4 @@
 	next "featuring Mantine leaping"
 	next "elegantly above the waves are"
 	
-	page "popular souvenirs of Alola."
+	page "popular souvenirs of Alola.@"

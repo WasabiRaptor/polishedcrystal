@@ -7,4 +7,4 @@
 	
 	page "psychokinetic powers. It is"
 	next "therefore on a constant search"
-	next "for a bigger pearl."
+	next "for a bigger pearl.@"

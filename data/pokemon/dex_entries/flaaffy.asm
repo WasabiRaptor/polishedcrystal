@@ -6,4 +6,4 @@
 	next "rubbery and doesn't conduct"
 	
 	page "electricity. Those spots are"
-	next "safe to touch."
+	next "safe to touch.@"

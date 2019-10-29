@@ -5,4 +5,4 @@
 	next "curses it spreads, this Pokémon"
 	next "will also, on a whim, cast spells"
 	
-	page "that help people."
+	page "that help people.@"

@@ -6,4 +6,4 @@
 	next "disputes with groups of"
 	
 	page "Passimian. They win about half"
-	next "the time."
+	next "the time.@"

@@ -6,4 +6,4 @@
 	next "bring you happiness. These eggs"
 	
 	page "fetch the highest prices on the"
-	next "market."
+	next "market.@"

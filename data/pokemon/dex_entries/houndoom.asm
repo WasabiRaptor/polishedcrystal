@@ -6,4 +6,4 @@
 	next "opponents. They divvy up their"
 	
 	page "prey evenly among the members"
-	next "of their pack."
+	next "of their pack.@"

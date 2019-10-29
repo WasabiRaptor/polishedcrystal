@@ -6,4 +6,4 @@
 	next "puts it in a bad mood, it will"
 	
 	page "become a malevolent deity and"
-	next "attack."
+	next "attack.@"

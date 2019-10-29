@@ -7,4 +7,4 @@
 	
 	page "to blunder in unaware. Because"
 	next "the Pokémon does not move, it"
-	next "does not get very hungry."
+	next "does not get very hungry.@"

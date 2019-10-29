@@ -5,4 +5,4 @@
 	next "land. It uses its long, sticky"
 	next "tongue to immobilize its"
 	
-	page "opponents."
+	page "opponents.@"

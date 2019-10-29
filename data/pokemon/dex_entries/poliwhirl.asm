@@ -6,4 +6,4 @@
 	next "time in the water, where its"
 	
 	page "prey, fish Pokémon, are"
-	next "plentiful."
+	next "plentiful.@"

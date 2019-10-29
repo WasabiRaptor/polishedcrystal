@@ -3,4 +3,4 @@
 
 	db "It has mastered fast and"
 	next "powerful fighting moves. It"
-	next "grows a beard of fire."
+	next "grows a beard of fire.@"

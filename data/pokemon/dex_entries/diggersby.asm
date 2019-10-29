@@ -6,4 +6,4 @@
 	next "bedrock to rubble. When it's"
 	
 	page "finished digging, it lounges"
-	next "lazily."
+	next "lazily.@"

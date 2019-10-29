@@ -6,4 +6,4 @@
 	next "anywhere, so it gets a lot of"
 	
 	page "love from skiers and"
-	next "snowboarders."
+	next "snowboarders.@"

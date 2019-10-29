@@ -6,4 +6,4 @@
 	next "sounds of its celebrating"
 	
 	page "comrades can be heard from all"
-	next "around."
+	next "around.@"

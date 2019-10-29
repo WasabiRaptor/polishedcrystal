@@ -6,4 +6,4 @@
 	next "severe storms. Its power is"
 	
 	page "great enough to blow houses"
-	next "away."
+	next "away.@"

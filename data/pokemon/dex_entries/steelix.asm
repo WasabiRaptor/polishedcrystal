@@ -10,4 +10,4 @@
 	next "reaching a depth of over"
 	
 	page "six-tenths of a mile"
-	next "underground."
+	next "underground.@"

@@ -10,4 +10,4 @@
 	next "gas. The higher the"
 	
 	page "temperature, the more gas is"
-	next "concocted by this Pokémon."
+	next "concocted by this Pokémon.@"

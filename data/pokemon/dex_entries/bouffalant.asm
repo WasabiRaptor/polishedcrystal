@@ -3,4 +3,4 @@
 
 	db "Their fluffy fur absorbs"
 	next "damage, even if they strike"
-	next "foes with a fierce headbutt."
+	next "foes with a fierce headbutt.@"

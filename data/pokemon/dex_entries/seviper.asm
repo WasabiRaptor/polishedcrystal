@@ -9,4 +9,4 @@
 	next "Pokémon will not give up its"
 	next "long-running blood feud with"
 	
-	page "Zangoose."
+	page "Zangoose.@"

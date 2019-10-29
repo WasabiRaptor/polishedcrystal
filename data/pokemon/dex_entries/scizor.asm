@@ -5,4 +5,4 @@
 	next "heavy pincers are more suited"
 	next "to smashing enemies than"
 	
-	page "grabbing them."
+	page "grabbing them.@"

@@ -6,4 +6,4 @@
 	next "blade on its head is chipped, it"
 	
 	page "will retire from its position as"
-	next "the boss."
+	next "the boss.@"

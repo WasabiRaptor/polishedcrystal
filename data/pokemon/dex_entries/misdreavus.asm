@@ -6,4 +6,4 @@
 	next "your ear against the red orbs"
 	
 	page "around its neck, you can hear"
-	next "shrieking."
+	next "shrieking.@"

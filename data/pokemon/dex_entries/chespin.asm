@@ -5,4 +5,4 @@
 	next "covers its head and back that"
 	next "even a direct hit from a truck"
 	
-	page "wouldn't faze it."
+	page "wouldn't faze it.@"

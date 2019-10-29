@@ -917,6 +917,23 @@ FarString::
 	rst Bankswitch
 	ret
 
+FarReadString::
+	ld b, a
+	ldh a, [hROMBank]
+	push af
+
+	ld a, b
+	rst Bankswitch
+.loop
+	ld a, [de]
+	cp "@"
+	inc de
+	jr nz, .loop
+	ld a, [de]
+	ld c, a
+	pop af
+	rst Bankswitch
+	ret
 
 PlaceWholeStringInBoxAtOnce::
 	ld a, [wTextBoxFlags]

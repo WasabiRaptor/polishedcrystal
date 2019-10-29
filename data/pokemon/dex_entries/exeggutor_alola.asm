@@ -6,4 +6,4 @@
 	next "three heads fires off"
 	
 	page "psychokinetic energy, tripling"
-	next "its power."
+	next "its power.@"

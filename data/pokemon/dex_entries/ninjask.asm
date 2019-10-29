@@ -9,4 +9,4 @@
 	next "quality, this Pokémon is said to"
 	next "be one that puts the Trainer's"
 	
-	page "abilities to the test."
+	page "abilities to the test.@"

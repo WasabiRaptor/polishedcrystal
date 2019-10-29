@@ -7,4 +7,4 @@
 	
 	page "hard with its thick and"
 	next "powerful hind legs to charge at"
-	next "the foe at an incredible speed."
+	next "the foe at an incredible speed.@"

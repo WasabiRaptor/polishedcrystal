@@ -5,6 +5,6 @@
 	next "times better than a human's,"
 	next "so even the faintest scent tells"
 	
-	page "it about everything in the area."
+	page "it about everything in the area.@"
 	next "It's like it can see with its"
 	next "nose!"

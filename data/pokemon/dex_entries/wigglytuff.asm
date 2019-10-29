@@ -6,4 +6,4 @@
 	next "sought after. Holding one in"
 	
 	page "your arms while you sleep feels"
-	next "great."
+	next "great.@"

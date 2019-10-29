@@ -5,4 +5,4 @@
 	next "as weapons. The more gorgeous"
 	next "the blossom, the more power it"
 	
-	page "contains."
+	page "contains.@"

@@ -7,4 +7,4 @@
 	
 	page "thought to be a curious"
 	next "substance that is not of this"
-	next "earth."
+	next "earth.@"

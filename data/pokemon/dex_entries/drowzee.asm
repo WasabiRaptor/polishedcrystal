@@ -6,4 +6,4 @@
 	next "intending to eat the pleasant"
 	
 	page "dreams of children who enjoyed"
-	next "themselves there that day."
+	next "themselves there that day.@"

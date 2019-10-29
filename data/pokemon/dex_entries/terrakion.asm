@@ -5,4 +5,4 @@
 	next "Pokémon used its phenomenal"
 	next "power to destroy a castle in its"
 	
-	page "effort to protect Pokémon."
+	page "effort to protect Pokémon.@"

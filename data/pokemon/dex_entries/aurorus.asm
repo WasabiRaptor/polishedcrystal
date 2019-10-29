@@ -6,4 +6,4 @@
 	next "appeared long ago, which"
 	
 	page "became quite a big event in the"
-	next "news."
+	next "news.@"

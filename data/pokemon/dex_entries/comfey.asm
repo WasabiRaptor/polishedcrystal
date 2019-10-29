@@ -6,4 +6,4 @@
 	next "to adorn itself with. When it"
 	
 	page "doesn't have any flowers, it"
-	next "feels uneasy."
+	next "feels uneasy.@"

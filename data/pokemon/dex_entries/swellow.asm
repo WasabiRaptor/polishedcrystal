@@ -7,4 +7,4 @@
 	
 	page "gathered, they diligently take"
 	next "care of cleaning each other's"
-	next "wings."
+	next "wings.@"

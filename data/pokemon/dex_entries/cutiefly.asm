@@ -5,4 +5,4 @@
 	next "favorite fare. In fields of"
 	next "flowers, it gets into skirmishes"
 	
-	page "with Butterfree over food."
+	page "with Butterfree over food.@"

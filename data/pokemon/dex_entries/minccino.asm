@@ -6,4 +6,4 @@
 	next "it uses its tail like a mop to"
 	
 	page "thoroughly clean any and all"
-	next "filth."
+	next "filth.@"

@@ -7,4 +7,4 @@
 	
 	page "from flowers. This Pokémon"
 	next "rides the spring winds as it"
-	next "flits around gathering pollen."
+	next "flits around gathering pollen.@"

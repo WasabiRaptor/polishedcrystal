@@ -6,4 +6,4 @@
 	next "be made up of many life-forms"
 	
 	page "stacked one on top of each"
-	next "other."
+	next "other.@"

@@ -5,4 +5,4 @@
 	next "Pokémon can be disabled by"
 	next "Golduck. It brings them to a"
 	
-	page "standstill and seizes them."
+	page "standstill and seizes them.@"

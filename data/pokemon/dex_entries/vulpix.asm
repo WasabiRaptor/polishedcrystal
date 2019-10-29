@@ -6,4 +6,4 @@
 	next "not brushed diligently, it will be"
 	
 	page "a mass of tangles before you"
-	next "know it."
+	next "know it.@"

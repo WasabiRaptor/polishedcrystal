@@ -5,4 +5,4 @@
 	next "times. It's said that when"
 	next "Amaura whinnies, auroras"
 	
-	page "appear in the night sky."
+	page "appear in the night sky.@"

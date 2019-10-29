@@ -6,4 +6,4 @@
 	next "Pokémon, but fights break out"
 	
 	page "to determine which one gets to"
-	next "eat the eggs."
+	next "eat the eggs.@"

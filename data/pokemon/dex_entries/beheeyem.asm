@@ -6,4 +6,4 @@
 	next "memories. You, too, may have"
 	
 	page "already had your memories"
-	next "rewritten."
+	next "rewritten.@"

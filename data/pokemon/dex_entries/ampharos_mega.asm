@@ -6,4 +6,4 @@
 	next "you can always tell exactly"
 	
 	page "where it is, which is why it"
-	next "usually keeps the light off."
+	next "usually keeps the light off.@"

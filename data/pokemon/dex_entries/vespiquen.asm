@@ -3,4 +3,4 @@
 
 	db "Its abdomen is a honeycomb for"
 	next "grubs. It raises its grubs on"
-	next "honey collected by Combee."
+	next "honey collected by Combee.@"

@@ -6,4 +6,4 @@
 	next "hopelessly lost deep in the"
 	
 	page "forest. It's trying to make"
-	next "friends with them."
+	next "friends with them.@"

@@ -3,7 +3,7 @@
 
 	db "Born underground, it eats its"
 	next "way through dirt to the"
-	next "surface, where its parents are."
+	next "surface, where its parents are.@"
 	
 	page "It doesn't deal well with the"
-	next "bright light it finds there."
+	next "bright light it finds there.@"

@@ -9,4 +9,4 @@
 	next "violated, it shows no mercy in"
 	next "thoroughly punishing the foe"
 	
-	page "with its sharp claws."
+	page "with its sharp claws.@"

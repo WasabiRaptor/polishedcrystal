@@ -6,4 +6,4 @@
 	next "bites it. Sometimes it injures"
 	
 	page "itself, but it doesn't care too"
-	next "much."
+	next "much.@"

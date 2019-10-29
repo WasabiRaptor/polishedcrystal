@@ -5,4 +5,4 @@
 	next "schools. However, they can also"
 	next "often be seen all alone, having"
 	
-	page "strayed from the school."
+	page "strayed from the school.@"

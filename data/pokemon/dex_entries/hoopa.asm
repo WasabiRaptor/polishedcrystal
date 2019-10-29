@@ -7,4 +7,4 @@
 	
 	page "its power sealed, it is"
 	next "transformed into a much"
-	next "smaller form."
+	next "smaller form.@"

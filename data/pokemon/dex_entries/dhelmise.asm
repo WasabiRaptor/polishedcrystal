@@ -5,4 +5,4 @@
 	next "seaweed and sucks away their"
 	next "vitality. It only likes to go after"
 	
-	page "big prey like Wailord."
+	page "big prey like Wailord.@"

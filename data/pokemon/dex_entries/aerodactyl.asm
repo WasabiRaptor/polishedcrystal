@@ -6,4 +6,4 @@
 	next "ferocity that was greater than"
 	
 	page "expected. Some casualties"
-	next "resulted."
+	next "resulted.@"

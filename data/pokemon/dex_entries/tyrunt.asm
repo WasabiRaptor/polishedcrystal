@@ -6,4 +6,4 @@
 	next "theories suggest that its"
 	
 	page "restored form is different"
-	next "from its form of long ago."
+	next "from its form of long ago.@"

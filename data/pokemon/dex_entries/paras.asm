@@ -6,4 +6,4 @@
 	next "in Alola the mushrooms on"
 	
 	page "Paras don't grow up quite"
-	next "right."
+	next "right.@"

@@ -5,4 +5,4 @@
 	next "the area with an odd sound and"
 	next "hits flinching opponents with a"
 	
-	page "poison jab."
+	page "poison jab.@"

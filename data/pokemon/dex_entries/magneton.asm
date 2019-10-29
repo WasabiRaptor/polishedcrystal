@@ -5,4 +5,4 @@
 	next "malfunction in areas inhabited"
 	next "by Magneton, which send out"
 	
-	page "mysterious electrical signals."
+	page "mysterious electrical signals.@"

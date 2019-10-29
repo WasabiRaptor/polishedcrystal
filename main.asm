@@ -1071,35 +1071,15 @@ DisplayDexEntry: ; 4424d
 	push de
 ; Print dex number
 	hlcoord 9, 1
-	ld a, "№"
-	ld [hli], a
-	ld a, "."
-	ld [hli], a
+	ld de, .No
+	call PlaceString
+	hlcoord 11, 1
 	ld a, [wPokedexCurrentMon]
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld de, wNatDexNo
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
-;units
-	ld a, [wOptions2]
-	bit POKEDEX_UNITS, a
-	jr nz, .metric
-	hlcoord 9, 7
-	ld de, .HeightImperial
-	call PlaceString
-	hlcoord 9, 9
-	ld de, .WeightImperial
-	call PlaceString
-	jr .done
-.metric
-	hlcoord 9, 7
-	ld de, .HeightMetric
-	call PlaceString
-	hlcoord 9, 9
-	ld de, .WeightMetric
-	call PlaceString
-.done
 	farcall Pokedex_DrawFootprint
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wPokedexCurrentMon]
@@ -1124,59 +1104,17 @@ DisplayDexEntry: ; 4424d
 	ld a, d
 	or e
 	jr z, .skip_height
-	ld a, [wOptions2]
-	bit POKEDEX_UNITS, a
-	jr z, .imperial_height
-
-	push hl
-	ld l, d
-	ld h, e
-	ld bc, -100
-	ld e, 0
-.inchloop
-	ld a, h
-	and a
-	jr nz, .inchloop2
-	ld a, l
-	cp 100
-	jr c, .inchdone
-.inchloop2
-	add hl, bc
-	inc e
-	jr .inchloop
-.inchdone
-	ld a, e
-	ld e, l
-	ld d, 0
-	ld hl, 0
-	ld bc, 12
-	rst AddNTimes
-	add hl, de
-	ld b, h
-	ld c, l
-	ld de, 16646 ; 0.254 << 16
-	call Mul16
-	ld de, hTmpd
-	hlcoord 11, 7
-	lb bc, 2, PRINTNUM_LEFTALIGN | 5
-	call PrintNum
-	pop hl
-	jr .skip_height
-
-.imperial_height
 	push hl
 	push de
-	ld hl, sp+$0
-	ld d, h
-	ld e, l
-	hlcoord 12, 7
-	lb bc, 2, PRINTNUM_MONEY | 4
-	call PrintNum
-	hlcoord 14, 7
-	ld [hl], "'"
-	pop af
+	ld de, .Height
+	call .MakeHeightWeight
+	pop de
+	call .MakeNumDecimal
+	hlcoord 9, 7
+	ld de, wStringBuffer1
+	VWTextStart $c4
+	call PlaceString
 	pop hl
-
 .skip_height
 	pop af
 	push af
@@ -1189,30 +1127,15 @@ DisplayDexEntry: ; 4424d
 	ld a, e
 	or d
 	jr z, .skip_weight
-	ld a, [wOptions2]
-	bit POKEDEX_UNITS, a
-	jr z, .imperial_weight
-
-	ld c, d
-	ld b, e
-	ld de, 29726 ; 0.45359237 << 16
-	call Mul16
-	ld de, hTmpd
-	hlcoord 11, 9
-	lb bc, 2, PRINTNUM_LEFTALIGN | 5
-	call PrintNum
-	jr .skip_weight
-
-.imperial_weight
 	push de
-	ld hl, sp+$0
-	ld d, h
-	ld e, l
-	hlcoord 11, 9
-	lb bc, 2, PRINTNUM_LEFTALIGN | 5
-	call PrintNum
+	ld de, .Weight
+	call .MakeHeightWeight
 	pop de
-
+	call .MakeNumDecimal
+	hlcoord 9, 9
+	ld de, wStringBuffer1
+	VWTextStart $ca
+	call PlaceString
 .skip_weight
 ; Page 
 	lb bc, 5, SCREEN_WIDTH - 2
@@ -1223,21 +1146,24 @@ DisplayDexEntry: ; 4424d
 	ld a, $6a ; horizontal divider
 	call ByteFill
 	call .DexPageNo
+	call InitVariableWidthText
+.string_loop
 	pop de
 	inc de
-	call InitVariableWidthText
 	pop af
-	hlcoord 2, 11
 	push af
-	call FarString
-
-	ld a, [wPokedexStatus]
-	ld b, a
+	push de
+	call FarReadString
+	pop de
 	ld a,[wPokedexEntryBufferValue]
+	ld b, a
+	ld a, [wPokedexStatus]
 	cp b
-	ld a, c
 	pop bc
-	ret z
+	jr z, .printentry
+	ld a, b
+	call FarReadString
+	ld a, c
 	cp $7f
 	jr nz, .statpage
 	ld a,[wPokedexEntryBufferValue]
@@ -1245,10 +1171,16 @@ DisplayDexEntry: ; 4424d
 	ld [wPokedexEntryBufferValue], a
 	push bc
 	push de
-	jr .skip_weight
+	jr .string_loop
+
+.printentry
+	ld a, b
+	hlcoord 2, 11
+	jp FarString
 
 .statpage
 	push bc
+	VWTextStart $b6
 	
 	lb bc, 9, 12
 	hlcoord 8, 1
@@ -1310,6 +1242,7 @@ DisplayDexEntry: ; 4424d
 	xor a
 	push af
 .abilityloop:
+	call InitVariableWidthText
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
@@ -1413,8 +1346,12 @@ DisplayDexEntry: ; 4424d
 
 .DexPageNo:
 	hlcoord 2, 9
-	ld de, .Page
-	call PlaceString
+	ld a, $d0
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
 	hlcoord 5, 9
 	;page number
 	ld a, [wPokedexStatus]
@@ -1422,16 +1359,41 @@ DisplayDexEntry: ; 4424d
 	ld [hl], a
 	ret
 
-.Page
-	db "Pg.@"
-.HeightImperial: ; 40852
-	db "Ht  ?'??”@" ; HT  ?'??"
-.WeightImperial: ; 4085c
-	db "Wt   ???lb@" ; WT   ???lb
-.HeightMetric:
-	db "Ht   ???m@" ; HT   ???m"
-.WeightMetric:
-	db "Wt   ???kg@"; WT   ???kg
+.MakeHeightWeight:
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
+	ld hl, wStringBuffer1
+	call PlaceString
+	ld h, b
+	ld l, c
+	ld [hl], "@"
+	ret
+
+.MakeNumDecimal:
+	ld a, e
+	ld [wStringBuffer2], a
+	ld a, d
+	ld [wStringBuffer2+1], a
+	ld hl, wStringBuffer1 + 3
+	ld de, wStringBuffer2
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	call PrintNum
+	dec hl
+	ld a, [hl]
+	ld [hl], "."
+	inc hl
+	ld [hl], a
+	ret
+.No
+	db"No.@"
+.Height:
+	db "Ht ??.?m@"
+.Weight:
+	db "Wt ??.?kg@"
+.meters:
+	db "m@" ; HT   ???m"
+.kilograms:
+	db "kg@"; WT   ???kg
 .Hp
 	db "HP@"
 .Atk

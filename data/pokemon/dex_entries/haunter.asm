@@ -5,4 +5,4 @@
 	next "searches for someone to curse,"
 	next "so it's best not to go out"
 	
-	page "walking around."
+	page "walking around.@"

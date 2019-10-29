@@ -6,4 +6,4 @@
 	next "hard worker practices"
 	
 	page "diligently until it can learn that"
-	next "dance."
+	next "dance.@"

@@ -6,4 +6,4 @@
 	next "what's under its rag, it will"
 	
 	page "become agitated and resist"
-	next "violently."
+	next "violently.@"

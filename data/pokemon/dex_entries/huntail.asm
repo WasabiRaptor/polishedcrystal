@@ -6,4 +6,4 @@
 	next "lure in its prey and then gulps"
 	
 	page "them down as soon as they get"
-	next "close."
+	next "close.@"

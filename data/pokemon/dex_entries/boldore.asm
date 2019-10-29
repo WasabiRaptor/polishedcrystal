@@ -5,4 +5,4 @@
 	next "its body has turned into orange"
 	next "crystals that are hard enough to"
 	
-	page "smash diamonds."
+	page "smash diamonds.@"

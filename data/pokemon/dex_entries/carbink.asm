@@ -5,4 +5,4 @@
 	next "surface of the world, a pack of"
 	next "Carbink live with their queen in"
 	
-	page "a kingdom of jewels."
+	page "a kingdom of jewels.@"

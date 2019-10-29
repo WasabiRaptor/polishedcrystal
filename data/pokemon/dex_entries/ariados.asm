@@ -6,4 +6,4 @@
 	next "movements it restrains by"
 	
 	page "spewing threads before it bites"
-	next "into them with its fangs."
+	next "into them with its fangs.@"

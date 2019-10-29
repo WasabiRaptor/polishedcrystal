@@ -6,4 +6,4 @@
 	next "of Pikachu live are dangerous,"
 	
 	page "since the trees are so often"
-	next "struck by lightning."
+	next "struck by lightning.@"

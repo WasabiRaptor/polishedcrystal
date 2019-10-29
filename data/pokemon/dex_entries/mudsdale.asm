@@ -6,4 +6,4 @@
 	next "mixes dirt with the saliva in its"
 	
 	page "mouth to make a special kind of"
-	next "mud."
+	next "mud.@"

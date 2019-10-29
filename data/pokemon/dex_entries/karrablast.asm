@@ -5,4 +5,4 @@
 	next "when they receive electrical"
 	next "energy while they are attacking"
 	
-	page "Shelmet."
+	page "Shelmet.@"

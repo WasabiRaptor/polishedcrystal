@@ -3,4 +3,4 @@
 
 	db "It has the ability to distort"
 	next "space. It is described as a deity"
-	next "in Sinnoh-region mythology."
+	next "in Sinnoh-region mythology.@"

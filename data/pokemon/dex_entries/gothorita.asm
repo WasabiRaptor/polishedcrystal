@@ -5,4 +5,4 @@
 	next "creates friends for itself by"
 	next "controlling sleeping children on"
 	
-	page "starry nights."
+	page "starry nights.@"

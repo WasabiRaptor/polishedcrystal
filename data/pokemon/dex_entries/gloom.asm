@@ -7,4 +7,4 @@
 	
 	page "the horrid stench. It sniffs the"
 	next "noxious fumes and then drools"
-	next "even more of its honey."
+	next "even more of its honey.@"

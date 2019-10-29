@@ -6,4 +6,4 @@
 	next "purchased from department"
 	
 	page "stores. These CDs can be found"
-	next "near the bedding area."
+	next "near the bedding area.@"

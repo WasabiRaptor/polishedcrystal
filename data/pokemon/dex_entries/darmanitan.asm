@@ -6,4 +6,4 @@
 	next "enough power that it can"
 	
 	page "destroy a dump truck with one"
-	next "punch."
+	next "punch.@"

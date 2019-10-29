@@ -6,4 +6,4 @@
 	next "sing to it in a voice of purity. It"
 	
 	page "is said to make true any wish"
-	next "that people desire."
+	next "that people desire.@"

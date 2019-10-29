@@ -5,4 +5,4 @@
 	next "and fields, chasing after bug"
 	next "Pokémon. Their singing is noisy"
 	
-	page "and annoying."
+	page "and annoying.@"

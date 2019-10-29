@@ -6,4 +6,4 @@
 	next "found bearing bite marks from"
 	
 	page "Archeops, so apparently"
-	next "Archeops preyed on it."
+	next "Archeops preyed on it.@"

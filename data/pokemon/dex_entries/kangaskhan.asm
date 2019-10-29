@@ -6,4 +6,4 @@
 	next "zero forgiveness for those who"
 	
 	page "harm its child and will beat"
-	next "them down."
+	next "them down.@"

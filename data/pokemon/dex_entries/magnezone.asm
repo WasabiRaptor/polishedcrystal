@@ -3,4 +3,4 @@
 
 	db "It uses radar to monitor its"
 	next "territory. Intruders are quickly"
-	next "disposed of with a hyper beam."
+	next "disposed of with a hyper beam.@"

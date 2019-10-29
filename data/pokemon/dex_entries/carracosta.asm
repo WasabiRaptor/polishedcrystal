@@ -6,4 +6,4 @@
 	next "and Omanyte whole and not be"
 	
 	page "bothered in the slightest by"
-	next "their shells."
+	next "their shells.@"

@@ -5,4 +5,4 @@
 	next "time. It appears in"
 	next "Sinnoh-region myths as an"
 	
-	page "ancient deity."
+	page "ancient deity.@"

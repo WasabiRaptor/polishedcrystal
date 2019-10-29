@@ -5,4 +5,4 @@
 	next "factories that rely on the"
 	next "flames provided by Magmortar"
 	
-	page "to process metals."
+	page "to process metals.@"

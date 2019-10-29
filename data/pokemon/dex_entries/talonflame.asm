@@ -6,4 +6,4 @@
 	next "long time ago, firefighters'"
 	
 	page "outfits were made from"
-	next "Talonflame wings."
+	next "Talonflame wings.@"

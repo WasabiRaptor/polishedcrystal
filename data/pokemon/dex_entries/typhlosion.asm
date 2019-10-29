@@ -9,4 +9,4 @@
 	next "Pokémon creates blazing"
 	next "explosive blasts that burn"
 	
-	page "everything to cinders."
+	page "everything to cinders.@"

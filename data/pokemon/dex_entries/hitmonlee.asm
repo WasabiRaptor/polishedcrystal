@@ -9,4 +9,4 @@
 	next "kicks. After battle, it rubs down"
 	next "its legs and loosens the muscles"
 	
-	page "to overcome fatigue."
+	page "to overcome fatigue.@"

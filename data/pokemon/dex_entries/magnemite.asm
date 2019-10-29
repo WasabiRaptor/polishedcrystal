@@ -6,4 +6,4 @@
 	next "some power plants send out"
 	
 	page "electrical signals that it can't"
-	next "stand."
+	next "stand.@"

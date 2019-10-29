@@ -5,4 +5,4 @@
 	next "blast everything within 300"
 	next "feet of itself, but it has no"
 	
-	page "control over its power."
+	page "control over its power.@"

@@ -6,4 +6,4 @@
 	next "Alola are especially sweet"
 	
 	page "compared to those in other"
-	next "regions."
+	next "regions.@"

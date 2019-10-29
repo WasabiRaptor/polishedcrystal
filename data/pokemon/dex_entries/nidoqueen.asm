@@ -7,4 +7,4 @@
 	
 	page "with harsh tackles. This"
 	next "Pokémon is at its strongest"
-	next "when it is defending its young."
+	next "when it is defending its young.@"

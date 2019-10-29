@@ -9,4 +9,4 @@
 	next "beauty of the feathers on its"
 	next "head, compelling them to choose"
 	
-	page "Pidgeot as their Pokémon."
+	page "Pidgeot as their Pokémon.@"

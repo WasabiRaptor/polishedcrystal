@@ -7,4 +7,4 @@
 	
 	page "descends to the ground when it"
 	next "encounters cold air while it is"
-	next "floating."
+	next "floating.@"

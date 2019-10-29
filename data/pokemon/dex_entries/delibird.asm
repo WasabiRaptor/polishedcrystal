@@ -6,4 +6,4 @@
 	next "Delibird is omnivorous,"
 	
 	page "sometimes it gives those people"
-	next "bug Pokémon."
+	next "bug Pokémon.@"

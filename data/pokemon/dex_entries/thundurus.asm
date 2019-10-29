@@ -5,4 +5,4 @@
 	next "lightning all over the place and"
 	next "causes forest fires. It is"
 	
-	page "therefore disliked."
+	page "therefore disliked.@"

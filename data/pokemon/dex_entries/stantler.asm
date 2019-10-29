@@ -7,4 +7,4 @@
 	
 	page "Pokémon was hunted close to"
 	next "extinction by those who were"
-	next "after the priceless antlers."
+	next "after the priceless antlers.@"

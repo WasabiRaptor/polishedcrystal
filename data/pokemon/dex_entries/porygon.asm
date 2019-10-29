@@ -6,4 +6,4 @@
 	next "of 20 years ago, so many parts"
 	
 	page "of it have since become"
-	next "obsolete."
+	next "obsolete.@"

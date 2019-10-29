@@ -3,4 +3,4 @@
 
 	db "It flutters around at night and"
 	next "steals honey from the Combee"
-	next "hive."
+	next "hive.@"

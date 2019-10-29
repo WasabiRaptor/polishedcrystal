@@ -6,4 +6,4 @@
 	next "5,400 degrees Fahrenheit,"
 	
 	page "incinerating foes swept into"
-	next "this whirl of flame."
+	next "this whirl of flame.@"

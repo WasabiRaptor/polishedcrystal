@@ -10,4 +10,4 @@
 	next "electrical power plants to feed"
 	
 	page "on electricity that has just been"
-	next "generated."
+	next "generated.@"

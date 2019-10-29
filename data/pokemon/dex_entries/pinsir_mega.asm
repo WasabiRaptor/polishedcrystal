@@ -5,4 +5,4 @@
 	next "with Vikavolt. For some reason,"
 	next "it apparently gets along well"
 	
-	page "with Heracross in Alola."
+	page "with Heracross in Alola.@"

@@ -7,4 +7,4 @@
 	
 	page "may think it is just playfully"
 	next "nipping, its bite has enough"
-	next "power to cause serious injury."
+	next "power to cause serious injury.@"

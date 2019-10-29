@@ -6,4 +6,4 @@
 	next "frightened by the flames, come"
 	
 	page "flying out, and Fletchinder"
-	next "gobbles them up."
+	next "gobbles them up.@"

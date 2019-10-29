@@ -6,4 +6,4 @@
 	next "through the tip of its arms. If"
 	
 	page "one of its kind is weakened, it"
-	next "helps by sending it vitality."
+	next "helps by sending it vitality.@"

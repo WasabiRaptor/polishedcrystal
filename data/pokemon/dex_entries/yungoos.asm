@@ -6,4 +6,4 @@
 	next "so the amount Trainers have to"
 	
 	page "spend on its food is no laughing"
-	next "matter."
+	next "matter.@"

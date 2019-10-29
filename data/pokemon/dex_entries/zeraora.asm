@@ -6,4 +6,4 @@
 	next "them. Even if they dodge its"
 	
 	page "attack, they'll be electrocuted"
-	next "by the flying sparks."
+	next "by the flying sparks.@"

@@ -10,4 +10,4 @@
 	next "Pokémon uses its flying ability"
 	
 	page "to quickly chase down targeted"
-	next "prey."
+	next "prey.@"

@@ -3,4 +3,4 @@
 
 	db "It was bound to a fissure in an"
 	next "odd keystone as punishment for"
-	next "misdeeds 500 years ago."
+	next "misdeeds 500 years ago.@"

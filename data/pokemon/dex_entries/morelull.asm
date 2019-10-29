@@ -6,4 +6,4 @@
 	next "they're dangerous, nighttime"
 	
 	page "tours of forests where"
-	next "Morelull live are popular."
+	next "Morelull live are popular.@"

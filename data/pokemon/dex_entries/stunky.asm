@@ -3,4 +3,4 @@
 
 	db "It protects itself by spraying a"
 	next "noxious fluid from its rear. The"
-	next "stench lingers for 24 hours."
+	next "stench lingers for 24 hours.@"

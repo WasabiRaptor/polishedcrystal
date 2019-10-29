@@ -5,4 +5,4 @@
 	next "the same rhythm. A long time"
 	next "ago, people raised these"
 	
-	page "Pokémon to serve as clocks."
+	page "Pokémon to serve as clocks.@"

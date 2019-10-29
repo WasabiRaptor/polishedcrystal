@@ -3,4 +3,4 @@
 
 	db "It is said that its emergence"
 	next "gave humans the intelligence to"
-	next "improve their quality of life."
+	next "improve their quality of life.@"

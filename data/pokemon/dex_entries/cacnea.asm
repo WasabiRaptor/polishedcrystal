@@ -6,4 +6,4 @@
 	next "and fragrant a flower Cacnea"
 	
 	page "grows. This Pokémon battles by"
-	next "wildly swinging its thorny arms."
+	next "wildly swinging its thorny arms.@"

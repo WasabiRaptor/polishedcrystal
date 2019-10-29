@@ -6,4 +6,4 @@
 	next "carries. Each spoon is an"
 	
 	page "original that there's only one"
-	next "of in the whole world."
+	next "of in the whole world.@"

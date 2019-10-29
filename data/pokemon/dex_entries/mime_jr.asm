@@ -6,4 +6,4 @@
 	next "expressions of its opponents,"
 	
 	page "but it's still not very good at"
-	next "it."
+	next "it.@"

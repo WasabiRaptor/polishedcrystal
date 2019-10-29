@@ -6,4 +6,4 @@
 	next "in the night sky, but the details"
 	
 	page "of that relationship remain"
-	next "unclear."
+	next "unclear.@"

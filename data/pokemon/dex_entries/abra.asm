@@ -5,4 +5,4 @@
 	next "even while it's sleeping, so you"
 	next "can't tell whether or not it's"
 	
-	page "awake."
+	page "awake.@"

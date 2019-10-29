@@ -7,4 +7,4 @@
 	
 	page "concocts its own honey by"
 	next "blending fruits and pollen"
-	next "collected by Beedrill."
+	next "collected by Beedrill.@"

@@ -3,4 +3,4 @@
 
 	db "As a result of strict training,"
 	next "each Dewott learns different"
-	next "forms for using the scalchops."
+	next "forms for using the scalchops.@"

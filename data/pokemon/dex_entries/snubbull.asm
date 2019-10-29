@@ -6,4 +6,4 @@
 	next "disparity between its face and"
 	
 	page "its actions makes many young"
-	next "people wild about it."
+	next "people wild about it.@"

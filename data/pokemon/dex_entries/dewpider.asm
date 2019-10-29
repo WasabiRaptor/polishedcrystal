@@ -6,4 +6,4 @@
 	next "each other. Then the one with"
 	
 	page "the smaller bubble gets out of"
-	next "the other's way."
+	next "the other's way.@"
