@@ -331,13 +331,6 @@ _CGB_Pokedex: ; 8f70
 	ld hl, PokedexRedPalette
 	call LoadHLPaletteIntoDE
 
-	ld a, [wCurPartySpecies]
-	cp $ff
-	jr nz, .is_pokemon
-	ld hl, GreenPicPalette
-	call LoadHLPaletteIntoDE
-	jr .got_palette
-.is_pokemon
 	ld bc, wDexMonShiny
 	ld [wDexMonForm], a
 	ld a, [wCurPartySpecies]
@@ -1059,14 +1052,6 @@ _CGB_BillsPC: ; 8fca
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 
-	ld a, [wCurPartySpecies]
-	cp $ff
-	jr nz, .GetMonPalette
-	ld hl, .OrangePalette
-	call LoadHLPaletteIntoDE
-	jr .Resume
-
-.GetMonPalette:
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalette
 	call VaryBGPal1ByTempMonDVs

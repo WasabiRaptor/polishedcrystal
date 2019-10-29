@@ -249,13 +249,16 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	ld [wCurPartySpecies], a
 	xor a
 	ld [wDexMonShiny], a
-	ld a, CGB_POKEDEX
-	call Pokedex_GetCGBLayout
 	call Pokedex_UpdateCursorOAM
 	call Pokedex_DrawListWindow
 	hlcoord 0, 17
 	call Pokedex_PrintListing
-	jp Pokedex_IncrementDexPointer
+	call Pokedex_IncrementDexPointer
+	ld a, CGB_POKEDEX
+	call Pokedex_GetCGBLayout
+	jp Pokedex_DrawListWindow
+
+
 
 Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
 	ld hl, hJoyPressed
@@ -280,7 +283,11 @@ Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
 	call Pokedex_SetBGMapMode3
 	call Pokedex_SetBGMapMode4
 	call Pokedex_ResetBGMapMode
-	jp Pokedex_ResetBGMapMode
+	call Pokedex_ResetBGMapMode
+	ld a, CGB_POKEDEX
+	call Pokedex_GetCGBLayout
+	jp Pokedex_DrawListWindow
+
 
 .a
 	call Pokedex_GetSelectedMon
@@ -774,10 +781,6 @@ Pokedex_InitSearchResultsScreen: ; 4050a (10:450a)
 	ldh [hWY], a
 	
 	call Pokedex_UpdateCursorOAM
-	ld a, $ff
-	ld [wCurPartySpecies], a
-	ld a, CGB_POKEDEX
-	call Pokedex_GetCGBLayout
 	call Pokedex_PlaceSearchResultsTypeStrings
 	call Pokedex_SetBGMapMode1
 	call Pokedex_SetBGMapMode2
@@ -786,10 +789,11 @@ Pokedex_InitSearchResultsScreen: ; 4050a (10:450a)
 	call Pokedex_ResetBGMapMode
 
 	call Pokedex_UpdateCursorOAM
-	call Pokedex_DrawListWindow
 	hlcoord 0, 17
 	call Pokedex_PrintListing
-
+	ld a, CGB_POKEDEX
+	call Pokedex_GetCGBLayout
+	call Pokedex_DrawListWindow
 	jp Pokedex_IncrementDexPointer
 
 Pokedex_UpdateSearchResultsScreen: ; 40562 (10:4562)
