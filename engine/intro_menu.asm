@@ -63,7 +63,16 @@ _NewGame_FinishSetup:
 	call ResetWRAM
 	call NewGame_ClearTileMapEtc
 	;call SetInitialOptions
-	call ProfElmSpeech
+	;call ProfElmSpeech
+	ld c, 31
+	call FadeToBlack
+	ld c, 31
+	call FadeToWhite
+	ld b, CGB_INTRO_PALS
+	call GetCGBLayout
+	call ClearTileMap
+	call InitGender
+	call NamePlayer
 	call InitializeWorld
 	ld a, 1
 	ld [wPreviousLandmark], a
@@ -330,7 +339,7 @@ InitializeNPCNames: ; 5ce9
 ; 5d23
 
 InitializeWorld: ; 5d23
-	call ShrinkPlayer
+	;call ShrinkPlayer
 	farcall SpawnPlayer
 	farjp _InitializeStartDay
 ; 5d33
@@ -614,140 +623,6 @@ Continue_DisplayGameTime: ; 5f84
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
 	jp PrintNum
 ; 5f99
-
-ProfElmSpeech: ; 0x5f99
-	ld c, 31
-	call FadeToBlack
-	call ClearTileMap
-
-	ld de, MUSIC_ROUTE_30
-	call PlayMusic
-
-	ld c, 31
-	call FadeToWhite
-
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, PROF_ELM
-	ld [wTrainerClass], a
-	call Intro_PrepTrainerPic
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld hl, ElmText1
-	ld de, ElmName
-	call PrintText
-if !DEF(DEBUG)
-	ld c, 15
-	call FadeToWhite
-	call ClearTileMap
-
-	ld a, SYLVEON
-	ld [wCurSpecies], a
-	ld [wCurPartySpecies], a
-	call GetBaseData ;form is known
-
-	hlcoord 6, 4
-	call PrepMonFrontpic
-
-	xor a
-	ld [wTempMonDVs], a
-	ld [wTempMonDVs + 1], a
-	ld [wTempMonDVs + 2], a
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld de, ElmName
-	call PrintNamePlate
-	ld hl, ElmText2
-	call PrintText
-	ld hl, ElmText4
-	call PrintText
-	ld c, 15
-	call FadeToWhite
-	call ClearTileMap
-
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, PROF_ELM
-	ld [wTrainerClass], a
-	call Intro_PrepTrainerPic
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld de, ElmName
-	call PrintNamePlate
-	ld hl, ElmText5
-	call PrintText
-endc
-
-	call InitGender
-
-	ld c, 10
-	call DelayFrames
-
-	ld hl, ElmText6
-	call PrintText
-
-	call NamePlayer
-
-	call ClearTileMap
-	call LoadFontsExtra
-	call ApplyTilemapInVBlank
-	call DrawIntroPlayerPic
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld hl, ElmText7
-	jp PrintText
-
-ElmText1: ; 0x6045
-	text_jump _ElmText1
-	db "@"
-
-ElmText2: ; 0x604a
-	text_jump _ElmText2
-	start_asm
-	ld a, SYLVEON
-	call PlayCry
-	call WaitSFX
-	ld hl, ElmText3
-	ret
-
-ElmText3: ; 0x605b
-	text_jump _ElmText3
-	db "@"
-
-ElmText4: ; 0x6060
-	text_jump _ElmText4
-	db "@"
-
-ElmText5: ; 0x6065
-	text_jump _ElmText5
-	db "@"
-
-ElmText6: ; 0x606a
-	text_jump _ElmText6
-	db "@"
-
-ElmText7: ; 0x606f
-	text_jump _ElmText7
-	db "@"
-
-ElmName:
-	db "Professor Elm@"
 
 InitGender: ; 48dcb (12:4dcb)
 	ld hl, WhitePal
