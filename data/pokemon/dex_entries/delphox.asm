@@ -1,12 +1,9 @@
-    db "FOX@" ; species name
-    dw 411, 860 ; height, weight
+	db "FOX@" ; species name
+	dw 15, 390 ; height, weight
 
-    db   "It gazes into the"
-    next "flame at the tip"
-    next "of its branch to"
-
-    page "achieve a focused"
-    next "state, which"
-    next "allows it to see" 
-         
-    page "into the future.@"
+	db "Using psychic power, it"
+	next "generates a fiery vortex of"
+	next "5,400 degrees Fahrenheit,"
+	
+	page "incinerating foes swept into"
+	next "this whirl of flame.@"

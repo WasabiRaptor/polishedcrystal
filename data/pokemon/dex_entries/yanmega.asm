@@ -1,11 +1,8 @@
-    db "OGRE DARNER@" ; species name
-    dw 603, 1135 ; height, weight
+	db "OGRE DARNER@" ; species name
+	dw 19, 515 ; height, weight
 
-    db   "Its jaw power is"
-    next "incredible. It is"
-    next "adept at biting"
-
-    page "apart foes while"
-    next "flying by at high"
-    next "speed.@" 
-    
+	db "This six-legged Pokémon is"
+	next "easily capable of transporting"
+	next "an adult in flight. The wings on"
+	
+	page "its tail help it stay balanced.@"

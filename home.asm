@@ -48,52 +48,7 @@ INCLUDE "home/flag.asm"
 INCLUDE "home/restore_music.asm"
 
 IsAPokemon::
-; Return carry if species a is not a Pokemon.
-	and a
-	jp z, .not_a_pokemon
-	push hl
-	push bc
-	push de
-	push af
-	call GetMaxNumPokemonForGroup
-	pop de
-	jr nc, .not_a_pokemon_2
-	cp d
-	jr c, .not_a_pokemon_2
-	ld a, d
-	and a
-	pop de
-	pop bc
-	pop hl
-	ret
-
-.not_a_pokemon_2
-	pop de
-	pop bc
-	pop hl
-.not_a_pokemon
-	scf
-	ret
-
-GetMaxNumPokemonForGroup::
-	ld a, [wCurGroup]
-	ld hl, RegionalMaxPokemonTable
-	ld de, 2
-	call IsInArray
-	inc hl
-	ld a, [hl]
-	ret
-
-RegionalMaxPokemonTable:
-	db GROUP_GENERATION_ONE, NUM_KANTO_POKEMON
-	db GROUP_GENERATION_TWO, NUM_JOHTO_POKEMON
-	db GROUP_GENERATION_THREE, NUM_HOENN_POKEMON
-	db GROUP_GENERATION_FOUR, NUM_SINNOH_POKEMON
-	db GROUP_GENERATION_FIVE, NUM_UNOVA_POKEMON
-	db GROUP_GENERATION_SIX, NUM_KALOS_POKEMON
-	db GROUP_GENERATION_SEVEN, NUM_ALOLA_POKEMON
-	db GROUP_GENERATION_EIGHT, NUM_GALAR_POKEMON
-	db -1, 0
+	farjp _IsAPokemon
 
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
@@ -117,23 +72,6 @@ EnableSpriteUpdates:: ; 2ee4
 ; 2ef6
 
 INCLUDE "home/string.asm"
-
-IsInJohto:: ; 2f17
-; Return z if the player is in Johto, and nz in Kanto or Shamouti Island.
-	call GetCurrentLandmark
-	cp KANTO_LANDMARK
-	jr nc, .kanto_or_orange
-.johto
-	xor a ; JOHTO_REGION
-	and a
-	ret
-
-.kanto_or_orange
-	ld a, KANTO_REGION
-	and a
-	ret
-; 2f3e
-
 INCLUDE "home/item.asm"
 INCLUDE "home/random.asm"
 INCLUDE "home/sram.asm"
@@ -232,9 +170,9 @@ CopyName2:: ; 30d9
 	ret
 ; 30e1
 
-SkipNames:: ; 0x30f4
+SkipPokemonNames:: ; 0x30f4
 ; Skip a names.
-	ld bc, NAME_LENGTH
+	ld bc, PKMN_NAME_LENGTH
 	and a
 	ret z
 .loop
@@ -242,66 +180,21 @@ SkipNames:: ; 0x30f4
 	dec a
 	jr nz, .loop
 	ret
+
+SkipPlayerNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PLAYER_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
 ; 0x30fe
 
 INCLUDE "home/math.asm"
-
-PrintLetterDelay:: ; 313d
-; Wait before printing the next letter.
-
-; The text speed setting in wOptions1 is actually a frame count:
-; 	fast: 1 frame
-; 	mid:  3 frames
-; 	slow: 5 frames
-
-; wTextBoxFlags[!0] and A or B override text speed with a one-frame delay.
-; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
-
-	ld a, [wTextBoxFlags]
-	bit 1, a
-	ret z
-	bit 0, a
-	jr z, .forceFastScroll
-
-	ld a, [wOptions1]
-	bit NO_TEXT_SCROLL, a
-	ret nz
-	and %11
-	ret z
-	ld a, $1
-	ldh [hBGMapHalf], a
-.forceFastScroll
-	push hl
-	push de
-	push bc
-; force fast scroll?
-	ld a, [wTextBoxFlags]
-	bit 0, a
-	ld a, 2
-	jr z, .updateDelay
-; text speed
-	ld a, [wOptions1]
-	and %11
-	rlca
-.updateDelay
-	dec a
-	ld [wTextDelayFrames], a
-.textDelayLoop
-	ld a, [wTextDelayFrames]
-	and a
-	jr z, .done
-	call DelayFrame
-	call GetJoypad
-; Finish execution if A or B is pressed
-	ldh a, [hJoyDown]
-	and A_BUTTON | B_BUTTON
-	jr z, .textDelayLoop
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-; 318c
 
 CopyDataUntil:: ; 318c
 ; Copy [hl .. bc) to de.
@@ -585,9 +478,6 @@ GetPokemonName:: ; 343b
 	push af
 	push hl
 
-; Each name is ten characters
-	ld a, [wNamedObjectIndexBuffer]
-
 ; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
@@ -604,9 +494,8 @@ GetPokemonName:: ; 343b
 
 	ld a, [wNamedObjectIndexBuffer]
 	dec a
-	ld bc, PKMN_NAME_LENGTH - 1
-	rst AddNTimes
-
+	call GetNthString
+	
 ; Terminator
 	ld de, wStringBuffer1
 	push de
@@ -815,23 +704,6 @@ ScrollingMenu:: ; 350c
 	jp SetPalettes
 ; 352f
 
-InitScrollingMenu:: ; 352f
-	ld a, [wMenuBorderTopCoord]
-	dec a
-	ld b, a
-	ld a, [wMenuBorderBottomCoord]
-	sub b
-	ld d, a
-	ld a, [wMenuBorderLeftCoord]
-	dec a
-	ld c, a
-	ld a, [wMenuBorderRightCoord]
-	sub c
-	ld e, a
-	push de
-	call Coord2Tile
-	pop bc
-	jp TextBox
 ; 354b
 
 JoyTextDelay_ForcehJoyDown:: ; 354b joypad
@@ -1263,66 +1135,6 @@ PrintWinLossText:: ; 3718
 	jp WaitPressAorB_BlinkCursor
 ; 3741
 
-DrawBattleHPBar:: ; 3750
-; Draw an HP bar d tiles long at hl
-; Fill it up to e pixels
-
-	push hl
-	push de
-	push bc
-
-; Place 'HP:'
-	ld a, "<HP1>"
-	ld [hli], a
-	inc a ; ld a, "<HP2>"
-	ld [hli], a
-
-; Draw a template
-	push hl
-	inc a ; ld a, "<NOHP>" ; empty bar
-.template
-	ld [hli], a
-	dec d
-	jr nz, .template
-	ld a, "<HPEND>" ; bar end cap
-	ld [hl], a
-	pop hl
-
-; Safety check # pixels
-	ld a, e
-	and a
-	jr nz, .fill
-	ld a, c
-	and a
-	jr z, .done
-	ld e, 1
-
-.fill
-; Keep drawing tiles until pixel length is reached
-	ld a, e
-	sub TILE_WIDTH
-	jr c, .lastbar
-
-	ld e, a
-	ld a, "<FULLHP>"
-	ld [hli], a
-	ld a, e
-	and a
-	jr z, .done
-	jr .fill
-
-.lastbar
-	ld a, "<NOHP>"
-	add e
-	ld [hl], a
-
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-; 3786
-
 PrepMonFrontpic:: ; 3786
 	ld a, $1
 	ld [wBoxAlignment], a
@@ -1354,28 +1166,6 @@ _PrepMonFrontpic:: ; 378b
 
 INCLUDE "home/cry.asm"
 
-PrintLevel:: ; 382d
-; Print wTempMonLevel at hl
-
-	ld a, [wTempMonLevel]
-	ld [hl], "<LV>"
-	inc hl
-
-; How many digits?
-	ld c, 2
-	cp 100
-	jr c, Print8BitNumRightAlign
-
-; 3-digit numbers overwrite the :L.
-	dec hl
-	inc c
-	; fallthrough
-
-Print8BitNumRightAlign:: ; 3842
-	ld [wd265], a
-	ld de, wd265
-	ld b, PRINTNUM_LEFTALIGN | 1
-	jp PrintNum
 ; 384d
 
 GetRelevantBaseData::
@@ -1452,33 +1242,6 @@ GetNature::
 	ld b, NO_NATURE
 	ret
 
-GetLeadAbility::
-; Returns ability of lead mon unless it's an Egg. Used for field
-; abilities
-	ld a, [wPartyMon1IsEgg]
-	and IS_EGG_MASK
-	xor IS_EGG_MASK
-	ret z
-	ld a, [wPartyMon1Species] ;merely making sure that party mon 1 is a pokemon I guess
-	inc a
-	ret z
-	dec a
-	ret z
-	push bc
-	push de
-	push hl
-	ld hl, wPartyMon1Group
-	predef PokemonToGroupSpeciesAndForm
-	ld a, [wCurSpecies]
-	ld c, a
-	ld a, [wPartyMon1Ability]
-	ld b, a
-	call GetAbility
-	ld a, b
-	pop hl
-	pop de
-	pop bc
-	ret
 
 GetAbility::
 ; 'b' contains the target ability to check
@@ -1535,7 +1298,7 @@ GetNick:: ; 38a2
 	push hl
 	push bc
 
-	call SkipNames
+	call SkipPokemonNames
 	ld de, wStringBuffer1
 
 	push de
@@ -1547,87 +1310,6 @@ GetNick:: ; 38a2
 	pop hl
 	ret
 ; 38bb
-
-PrintBCDNumber:: ; 38bb
-; function to print a BCD (Binary-coded decimal) number
-; de = address of BCD number
-; hl = destination address
-; c = flags and length
-; bit 7: if set, do not print leading zeroes
-;        if unset, print leading zeroes
-; bit 6: if set, left-align the string (do not pad empty digits with spaces)
-;        if unset, right-align the string
-; bit 5: if set, print currency symbol at the beginning of the string
-;        if unset, do not print the currency symbol
-; bits 0-4: length of BCD number in bytes
-; Note that bits 5 and 7 are modified during execution. The above reflects
-; their meaning at the beginning of the functions's execution.
-	ld b, c ; save flags in b
-	res 7, c
-	res 6, c
-	res 5, c ; c now holds the length
-	bit 5, b
-	jr z, .loop
-	bit 7, b
-	jr nz, .loop ; skip currency symbol
-	ld [hl], "¥"
-	inc hl
-.loop
-	ld a, [de]
-	swap a
-	call PrintBCDDigit ; print upper digit
-	ld a, [de]
-	call PrintBCDDigit ; print lower digit
-	inc de
-	dec c
-	jr nz, .loop
-	bit 7, b ; were any non-zero digits printed?
-	ret z ; if so, we are done
-.numberEqualsZero ; if every digit of the BCD number is zero
-	bit 6, b ; left or right alignment?
-	jr nz, .skipRightAlignmentAdjustment
-	dec hl ; if the string is right-aligned, it needs to be moved back one space
-.skipRightAlignmentAdjustment
-	bit 5, b
-	jr z, .skipCurrencySymbol
-	ld [hl], "¥" ; currency symbol
-	inc hl
-.skipCurrencySymbol
-	ld [hl], "0"
-	call PrintLetterDelay
-	inc hl
-	ret
-; 0x38f2
-
-PrintBCDDigit:: ; 38f2
-	and a, %00001111
-	and a
-	jr z, .zeroDigit
-.nonzeroDigit
-	bit 7, b ; have any non-space characters been printed?
-	jr z, .outputDigit
-; if bit 7 is set, then no numbers have been printed yet
-	bit 5, b ; print the currency symbol?
-	jr z, .skipCurrencySymbol
-	ld [hl], "¥"
-	inc hl
-	res 5, b
-.skipCurrencySymbol
-	res 7, b ; unset 7 to indicate that a nonzero digit has been reached
-.outputDigit
-	add a, "0"
-	ld [hli], a
-	jp PrintLetterDelay
-
-.zeroDigit
-	bit 7, b ; either printing leading zeroes or already reached a nonzero digit?
-	jr z, .outputDigit ; if so, print a zero digit
-	bit 6, b ; left or right alignment?
-	ret nz
-	ld a, " "
-	ld [hli], a ; if right-aligned, "print" a space by advancing the pointer
-	ret
-; 0x3917
 
 GetEnemyPartyParamLocation::
 	push bc
@@ -1655,7 +1337,6 @@ PkmnParamLocation:
 	predef GetPartyMonGroupSpeciesAndForm
 	pop bc
 	ret
-
 ; 3927
 
 GetPartyLocation::
@@ -1740,8 +1421,81 @@ INCLUDE "home/audio.asm"
 Inc16BitNumInHL::
 	inc [hl]
 	ret nz
-	xor a
-	ld [hl], a
 	dec hl
 	inc [hl]
 	ret
+
+
+LoadPalette_White_Col1_Col2_Black::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals)
+	ldh [rSVBK], a
+
+	ld a, (palred 31 + palgreen 31 + palblue 31) % $100
+	ld [de], a
+	inc de
+	ld a, (palred 31 + palgreen 31 + palblue 31) / $100
+	ld [de], a
+	inc de
+
+	ld c, 2 * 2
+.loop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop
+
+	xor a ; RGB 00, 00, 00
+rept 2
+	ld [de], a
+	inc de
+endr
+
+	pop af
+	ldh [rSVBK], a
+	ret
+	
+GetMonPalette::
+	ldh a, [hROMBank]
+	push af
+; given species in wCurPartySpecies, return *Palette in bc
+	push de
+	push bc
+	ld a, [wCurGroup]
+	ld hl, VariantPaletteTable
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	rst Bankswitch
+
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+
+	ld a, [wCurPartySpecies]
+	dec a	
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, bc
+	pop bc
+	homecall CheckShininess
+	jp nc, .not_shiny
+rept 4
+	inc hl
+endr
+.not_shiny
+	pop de
+
+	call LoadPalette_White_Col1_Col2_Black
+
+	pop af
+	rst Bankswitch
+	ret
+
+INCLUDE "data/pokemon/variant_palette_table.asm"

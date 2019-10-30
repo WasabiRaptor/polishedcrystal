@@ -1,10 +1,8 @@
-    db "EMMANATION@" ; species name
-    dw 204, 445 ; height, weight
+	db "EMANATION@" ; species name
+	dw 7, 202 ; height, weight
 
-    db   "The aura that"
-    next "emanates from its"
-    next "body intensifies"
-
-    page "to alert others if"
-    next "it's afraid or sad.@"
- 
+	db "It knows how people and"
+	next "Pokémon feel by looking at"
+	next "their auras. It doesn't"
+	
+	page "approach dangerous opponents.@"

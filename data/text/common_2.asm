@@ -3,14 +3,14 @@ UnknownText_0x1c0043::
 	line "the Name Rater."
 
 	para "I rate the names"
-	line "of #mon."
+	line "of Pokémon."
 
 	para "Would you like me"
 	line "to rate names?"
 	done
 
 UnknownText_0x1c00a0::
-	text "Which #mon's"
+	text "Which Pokémon's"
 	line "nickname should I"
 	cont "rate for you?"
 	prompt
@@ -78,7 +78,7 @@ UnknownText_0x1c0222::
 
 UnknownText_0x1c0272::
 	text "All right. This"
-	line "#mon is now"
+	line "Pokémon is now"
 	cont "named @"
 	text_from_ram wStringBuffer1
 	text "."
@@ -160,7 +160,7 @@ UnknownText_0x1c0396::
 	para "Teach @"
 	text_from_ram wStringBuffer2
 	text ""
-	line "to a #mon?"
+	line "to a Pokémon?"
 	done
 
 UnknownText_0x1c03c2::
@@ -277,7 +277,7 @@ UnknownText_0x1c0788::
 	prompt
 
 UnknownText_0x1c07a0::
-	text "A #mon may be"
+	text "A Pokémon may be"
 	line "able to move this."
 
 	para "Want to use"
@@ -290,7 +290,7 @@ UnknownText_0x1c07d8::
 	done
 
 UnknownText_0x1c07f4::
-	text "A #mon may be"
+	text "A Pokémon may be"
 	line "able to move this."
 	done
 
@@ -304,7 +304,7 @@ UnknownText_0x1c082b::
 	text "It's a vicious"
 	line "whirlpool!"
 
-	para "A #mon may be"
+	para "A Pokémon may be"
 	line "able to pass it."
 	done
 
@@ -327,7 +327,7 @@ UnknownText_0x1c08ac::
 	done
 
 UnknownText_0x1c08bc::
-	text "A #mon could be"
+	text "A Pokémon could be"
 	line "in this tree."
 
 	para "Want to Headbutt"
@@ -345,7 +345,7 @@ endc
 	prompt
 
 UnknownText_0x1c0906::
-	text "Maybe a #mon"
+	text "Maybe a Pokémon"
 	line "can break this."
 	done
 
@@ -411,7 +411,7 @@ UnknownText_0x1c0a1c::
 
 WhiteoutText::
 	text "<PLAYER> is out of"
-	line "useable #mon!"
+	line "useable Pokémon!"
 
 	para "<PLAYER> blacked"
 	line "out!"
@@ -419,7 +419,7 @@ WhiteoutText::
 
 WhiteoutToWildText::
 	text "<PLAYER> is out of"
-	line "useable #mon!"
+	line "useable Pokémon!"
 
 	para "<PLAYER> panicked"
 	line "and dropped"
@@ -436,7 +436,7 @@ WhiteoutToWildText::
 
 WhiteoutToTrainerText::
 	text "<PLAYER> is out of"
-	line "useable #mon!"
+	line "useable Pokémon!"
 
 	para "<PLAYER> paid"
 	line "¥@"
@@ -478,7 +478,7 @@ UnknownText_0x1c0b3b::
 	done
 
 UnknownText_0x1c0b65::
-	text "<PLAYER>'s #mon"
+	text "<PLAYER>'s Pokémon"
 	line "were all healed!"
 	done
 
@@ -516,7 +516,7 @@ UnknownText_0x1c0bee::
 
 Text_YouDontHaveAPkmn::
 	text "You don't have a"
-	line "#mon!"
+	line "Pokémon!"
 	prompt
 
 UnknownText_0x1c0c2e::
@@ -710,7 +710,7 @@ Text_WasSentToBillsPC::
 
 UnknownText_0x1c1006::
 	text "You gotta have"
-	line "#mon to call!"
+	line "Pokémon to call!"
 	prompt
 
 UnknownText_0x1c1024::
@@ -718,7 +718,7 @@ UnknownText_0x1c1024::
 	done
 
 UnknownText_0x1c102b::
-	text "There is a #mon"
+	text "There is a Pokémon"
 	line "holding Mail."
 
 	para "Please remove the"
@@ -732,7 +732,7 @@ UnknownText_0x1c10c0::
 	prompt
 
 UnknownText_0x1c10cf::
-	text "Switch #mon?"
+	text "Switch Pokémon?"
 	done
 
 UnknownText_0x1c10dd::
@@ -855,7 +855,7 @@ UnknownText_0x1c12fc::
 
 UnknownText_0x1c1328::
 	text "Bzzzzt! You must"
-	line "have a #mon to"
+	line "have a Pokémon to"
 	cont "use this!"
 	prompt
 
@@ -929,7 +929,7 @@ UnknownText_0x1c1474::
 	text "Bill's PC"
 	line "accessed."
 
-	para "#mon Storage"
+	para "Pokémon Storage"
 	line "System opened."
 	prompt
 
@@ -944,7 +944,7 @@ UnknownText_0x1c14d2::
 	text "Prof.Oak's PC"
 	line "accessed."
 
-	para "#dex Rating"
+	para "Pokédex Rating"
 	line "System opened."
 	prompt
 
@@ -955,27 +955,27 @@ UnknownText_0x1c1505::
 
 _OakPCText1::
 	text "Want to get your"
-	line "#dex rated?"
+	line "Pokédex rated?"
 	done
 
 _OakPCText2::
-	text "Current #dex"
+	text "Current Pokédex"
 	line "completion level:"
 	prompt
 
 _OakPCText3::
 	text_from_ram wStringBuffer3
-	text " #mon seen"
+	text " Pokémon seen"
 	line "@"
 	text_from_ram wStringBuffer4
-	text " #mon owned"
+	text " Pokémon owned"
 
 	para "Prof.Oak's"
 	line "Rating:"
 	done
 
 _OakRating01::
-	text "Look for #mon"
+	text "Look for Pokémon"
 	line "in grassy areas!"
 	done
 
@@ -995,23 +995,23 @@ _OakRating03::
 
 _OakRating04::
 	text "You need to fill"
-	line "up the #dex."
+	line "up the Pokédex."
 
 	para "Catch different"
-	line "kinds of #mon!"
+	line "kinds of Pokémon!"
 	done
 
 _OakRating05::
 	text "You're trying--I"
 	line "can see that."
 
-	para "Your #dex is"
+	para "Your Pokédex is"
 	line "coming together."
 	done
 
 _OakRating06::
 	text "To evolve, some"
-	line "#mon grow,"
+	line "Pokémon grow,"
 
 	para "others use the"
 	line "effects of Stones."
@@ -1021,7 +1021,7 @@ _OakRating07::
 	text "Have you gotten a"
 	line "fishing Rod? You"
 
-	para "can catch #mon"
+	para "can catch Pokémon"
 	line "by fishing."
 	done
 
@@ -1032,7 +1032,7 @@ _OakRating08::
 	done
 
 _OakRating09::
-	text "Some #mon only"
+	text "Some Pokémon only"
 	line "appear during"
 
 	para "certain times of"
@@ -1040,7 +1040,7 @@ _OakRating09::
 	done
 
 _OakRating10::
-	text "Your #dex is"
+	text "Your Pokédex is"
 	line "filling up. Keep"
 	cont "up the good work!"
 	done
@@ -1049,7 +1049,7 @@ _OakRating11::
 	text "I'm impressed."
 	line "You're evolving"
 
-	para "#mon, not just"
+	para "Pokémon, not just"
 	line "catching them."
 	done
 
@@ -1061,15 +1061,15 @@ _OakRating12::
 
 _OakRating13::
 	text "Wow. You've found"
-	line "more #mon than"
+	line "more Pokémon than"
 
-	para "the last #dex"
+	para "the last Pokédex"
 	line "research project."
 	done
 
 _OakRating14::
 	text "Are you trading"
-	line "your #mon?"
+	line "your Pokémon?"
 
 	para "It's tough to do"
 	line "this alone!"
@@ -1077,13 +1077,13 @@ _OakRating14::
 
 _OakRating15::
 	text "Wow! You've hit"
-	line "200! Your #dex"
+	line "200! Your Pokédex"
 	cont "is looking great!"
 	done
 
 _OakRating16::
 	text "You've found so"
-	line "many #mon!"
+	line "many Pokémon!"
 
 	para "You've really"
 	line "helped my studies!"
@@ -1093,12 +1093,12 @@ _OakRating17::
 	text "Magnificent! You"
 	line "could become a"
 
-	para "#mon professor"
+	para "Pokémon professor"
 	line "right now!"
 	done
 
 _OakRating18::
-	text "Your #dex is"
+	text "Your Pokédex is"
 	line "amazing! You're"
 
 	para "ready to turn"
@@ -1107,7 +1107,7 @@ _OakRating18::
 
 _OakRating19::
 	text "Whoa! A perfect"
-	line "#dex! I've"
+	line "Pokédex! I've"
 
 	para "dreamt about this!"
 	line "Congratulations!"
@@ -1280,53 +1280,53 @@ _InitialOptionsText::
 	prompt
 
 _ElmText1::
-	text "Hello! Sorry to"
-	line "keep you waiting!"
+	text "Fletchinder"
+	line "like feature creep to me."
 
-if !DEF(DEBUG)
+;if !DEF(DEBUG)
 	para "Welcome to the"
-	line "world of #mon!"
+	line "world of Pokémon!"
 
 	para "My name is Elm."
 
 	para "People call me the"
-	line "#mon Prof."
-endc
+	line "Pokémon Prof."
+;endc
 	prompt
 
 _ElmText2::
 	text "This world is in-"
 	line "habited by crea-"
 	cont "tures that we call"
-	cont "#mon.@@"
+	cont "Pokémon.@@"
 
 _ElmText3::
 	text_waitbutton
 	db "@@"
 
 _ElmText4::
-	text "People and #mon"
+	text "People and Pokémon"
 	line "live together by"
 
 	para "supporting each"
 	line "other."
 
 	para "Some people play"
-	line "with #mon, some"
+	line "with Pokémon, some"
 	cont "battle with them."
 	prompt
 
 _ElmText5::
 	text "But we don't know"
 	line "everything about"
-	cont "#mon yet."
+	cont "Pokémon yet."
 
 	para "There are still"
 	line "many mysteries to"
 	cont "solve."
 
 	para "That's why I study"
-	line "#mon every day."
+	line "Pokémon every day."
 	prompt
 
 FirstDayText::
@@ -1396,7 +1396,7 @@ EndOfCycleText::
 	line "them safe..."
 	para "Even if you have"
 	line "to box your very"
-	cont "last #MON..."
+	cont "last Pokémon..."
 	para "Play it safe,"
 	line "<PLAYER>..."
 	done

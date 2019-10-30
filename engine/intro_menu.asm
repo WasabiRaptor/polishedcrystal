@@ -35,35 +35,6 @@ _MainMenu: ; 5ae8
 	jp StartTitleScreen
 ; 5b04
 
-PrintDayOfWeek: ; 5b05
-	push de
-	ld hl, .Days
-	ld a, b
-	call GetNthString
-	ld d, h
-	ld e, l
-	pop hl
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, .Day
-	jp PlaceString
-; 5b1c
-
-.Days: ; 5b1c
-	db "Sun@"
-	db "Mon@"
-	db "Tues@"
-	db "Wednes@"
-	db "Thurs@"
-	db "Fri@"
-	db "Satur@"
-; 5b40
-
-.Day: ; 5b40
-	db "day@"
-; 5b44
-
 NewGame_ClearTileMapEtc: ; 5b44
 	xor a
 	ldh [hMapAnims], a
@@ -91,7 +62,7 @@ NewGame: ; 5b6b
 _NewGame_FinishSetup:
 	call ResetWRAM
 	call NewGame_ClearTileMapEtc
-	call SetInitialOptions
+	;call SetInitialOptions
 	call ProfElmSpeech
 	call InitializeWorld
 	ld a, 1
@@ -349,7 +320,7 @@ InitializeNPCNames: ; 5ce9
 	ld de, wTrendyPhrase
 
 .Copy:
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 
@@ -542,7 +513,7 @@ Continue_LoadMenuHeader: ; 5ebf
 	db 4 ; items
 	db "Player@"
 	db "Badges@"
-	db "#dex@"
+	db "Pokédex@"
 	db "Time@"
 ; 5efb
 
@@ -579,13 +550,13 @@ Continue_DisplayBadgesDexPlayerName: ; 5f1c
 	push hl
 	decoord 8, 2, 0
 	add hl, de
-	ld de, .Player
-	call PlaceString
+	;ld de, .Player
+	;call PlaceString
 	pop hl
 	ret
 
-.Player:
-	db "<PLAYER>@"
+;.Player:
+;	db "<PLAYER>@"
 ; 5f40
 
 Continue_PrintGameTime: ; 5f40
@@ -637,7 +608,7 @@ Continue_DisplayGameTime: ; 5f84
 	ld de, wGameTimeHours
 	lb bc, 2, 3
 	call PrintNum
-	ld [hl], ":"
+	ld [hl], "<COLON>"
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
@@ -668,7 +639,7 @@ ProfElmSpeech: ; 0x5f99
 
 	ld hl, ElmText1
 	ld de, ElmName
-	call PrintNamedText
+	call PrintText
 if !DEF(DEBUG)
 	ld c, 15
 	call FadeToWhite
@@ -693,8 +664,9 @@ if !DEF(DEBUG)
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld de, ElmName
+	call PrintNamePlate
 	ld hl, ElmText2
-	call PrintNamedText
+	call PrintText
 	ld hl, ElmText4
 	call PrintText
 	ld c, 15
@@ -713,8 +685,9 @@ if !DEF(DEBUG)
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld de, ElmName
+	call PrintNamePlate
 	ld hl, ElmText5
-	call PrintNamedText
+	call PrintText
 endc
 
 	call InitGender
@@ -774,8 +747,7 @@ ElmText7: ; 0x606f
 	db "@"
 
 ElmName:
-	text_jump ProfElmName
-	db "@"
+	db "Professor Elm@"
 
 InitGender: ; 48dcb (12:4dcb)
 	ld hl, WhitePal
@@ -833,6 +805,7 @@ InitGender: ; 48dcb (12:4dcb)
 	db 7, 13 ; start coords
 	db 11, 19 ; end coords
 	dw .MenuData2
+	dw .MenuData3
 	db 1 ; default option
 ; 0x48e04
 
@@ -842,6 +815,11 @@ InitGender: ; 48dcb (12:4dcb)
 	db "Boy@"
 	db "Girl@"
 ; 0x48e0f
+.MenuData3:
+	db $c1
+	db 2
+	dbw $c0, VTiles0 tile $c0
+	dbw $c2, VTiles0 tile $c2
 
 AreYouABoyOrAreYouAGirlText: ; 0x48e0f
 	; Are you a boy? Or are you a girl?
@@ -1389,5 +1367,8 @@ GameInit:: ; 642e
 	ld a, $90
 	ldh [hWY], a
 	call ApplyTilemapInVBlank
+
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
 	jp CrystalIntroSequence
 ; 6454

@@ -156,6 +156,8 @@ KeyItems_ScrollPocket: ; 2c9b1 (b:49b1)
 	jp KeyItems_ShowDescription
 
 KeyItems_DisplayPocketItems: ; 2c9e2 (b:49e2)
+	VWTextStart $b0
+	call InitVariableWidthTiles
 	hlcoord 5, 2
 	lb bc, 10, 15
 	ld a, " "

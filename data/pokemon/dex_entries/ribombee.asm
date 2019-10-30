@@ -1,10 +1,9 @@
 	db "BEE FLY@" ; species name
-	dw 8, 11 ; height, weight
+	dw 2, 5 ; height, weight
 
-	db   "Some of Ribombee's"
-	next "pollen puffs are"
-	next "highly nutritious."
-
-	page "They are sometimes"
-	next "sold as supple-"
-	next "ments.@"
+	db "Rain makes pollen damp, so"
+	next "Ribombee hates rain. When it"
+	next "sees ominous clouds, it finds a"
+	
+	page "hollow in a tree, where it waits"
+	next "stock-still.@"

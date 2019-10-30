@@ -1,10 +1,8 @@
-    db "ROCK INN@" ; species name
-    dw 100, 320 ; height, weight
+	db "ROCK INN@" ; species name
+	dw 3, 145 ; height, weight
 
-    db   "This Pokémon can"
-    next "easily melt holes"
-    next "in hard rocks with"
-
-    page "a liquid secreted"
-    next "from its mouth.@"
- 
+	db "When it finds a stone of a"
+	next "suitable size, it secretes a"
+	next "liquid from its mouth to open up"
+	
+	page "a hole to crawl into.@"

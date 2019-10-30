@@ -1,10 +1,12 @@
 	db "FLAME@" ; species name
-	dw 307, 420 ; height, weight
+	dw 11, 190 ; height, weight
 
-	db   "If it becomes"
-	next "agitated during"
-	next "battle, it spouts"
-
-	page "intense flames,"
-	next "incinerating its"
-	next "surroundings.@"
+	db "Charmeleon mercilessly"
+	next "destroys its foes using its"
+	next "sharp claws. If it encounters a"
+	
+	page "strong foe, it turns aggressive.@"
+	next "In this excited state, the flame"
+	next "at the tip of its tail flares with"
+	
+	page "a bluish white color.@"

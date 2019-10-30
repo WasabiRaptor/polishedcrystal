@@ -1,10 +1,9 @@
 	db "GAS@" ; species name
-	dw 403, 2 ; height, weight
+	dw 13, 1 ; height, weight
 
-	db   "It wraps its op-"
-	next "ponent in its gas-"
-	next "like body, slowly"
-
-	page "weakening its prey"
-	next "by poisoning it"
-	next "through the skin.@"
+	db "It's said that gas emanating"
+	next "from a graveyard was"
+	next "possessed by the grievances of"
+	
+	page "the deceased and thus became a"
+	next "Pokémon.@"

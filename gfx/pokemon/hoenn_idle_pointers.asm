@@ -30,7 +30,6 @@ HoennAnimationIdlePointers::
 	add_idleanim Ralts
 	add_idleanim Kirlia
 	add_idleanim Gardevoir
-	add_idleanim Gallade
 	add_idleanim Surskit
 	add_idleanim Masquerain
 	add_idleanim Shroomish
@@ -40,20 +39,20 @@ HoennAnimationIdlePointers::
 	add_idleanim Slaking
 	add_idleanim Nincada
 	add_idleanim Ninjask
-	add_idleanim Shedinja 
- 	add_idleanim Whismur
+	add_idleanim Shedinja
+	add_idleanim Whismur
 	add_idleanim Loudred
 	add_idleanim Exploud
 	add_idleanim Makuhita
 	add_idleanim Hariyama
+	add_idleanim Azurill
 	add_idleanim Nosepass
-	add_idleanim Probopass
 	add_idleanim Skitty
 	add_idleanim Delcatty
 	add_idleanim Sableye
 	add_idleanim Mawile
-	add_idleanim Aron 
- 	add_idleanim Lairon
+	add_idleanim Aron
+	add_idleanim Lairon
 	add_idleanim Aggron
 	add_idleanim Meditite
 	add_idleanim Medicham
@@ -63,9 +62,7 @@ HoennAnimationIdlePointers::
 	add_idleanim Minun
 	add_idleanim Volbeat
 	add_idleanim Illumise
-	add_idleanim Budew
 	add_idleanim Roselia
-	add_idleanim Roserade
 	add_idleanim Gulpin
 	add_idleanim Swalot
 	add_idleanim Carvanha
@@ -82,8 +79,8 @@ HoennAnimationIdlePointers::
 	add_idleanim Vibrava
 	add_idleanim Flygon
 	add_idleanim Cacnea
-	add_idleanim Cacturne 
- 	add_idleanim Swablu
+	add_idleanim Cacturne
+	add_idleanim Swablu
 	add_idleanim Altaria
 	add_idleanim Zangoose
 	add_idleanim Seviper
@@ -101,20 +98,17 @@ HoennAnimationIdlePointers::
 	add_idleanim Armaldo
 	add_idleanim Feebas
 	add_idleanim Milotic
-	add_idleanim Castform 
+	add_idleanim Castform
 	add_idleanim Kecleon
 	add_idleanim Shuppet
 	add_idleanim Banette
 	add_idleanim Duskull
 	add_idleanim Dusclops
-	add_idleanim Dusknoir
 	add_idleanim Tropius
-	add_idleanim Chingling
 	add_idleanim Chimecho
 	add_idleanim Absol
 	add_idleanim Snorunt
 	add_idleanim Glalie
-	add_idleanim Frosslass
 	add_idleanim Spheal
 	add_idleanim Sealeo
 	add_idleanim Walrein
@@ -134,11 +128,8 @@ HoennAnimationIdlePointers::
 	add_idleanim Registeel
 	add_idleanim Latias
 	add_idleanim Latios
-	add_idleanim Kyogre 
- 	add_idleanim Groudon
+	add_idleanim Kyogre
+	add_idleanim Groudon
 	add_idleanim Rayquaza
 	add_idleanim Jirachi
-	add_idleanim Deoxys_Defense
-	add_idleanim Deoxys_Normal
-	add_idleanim Deoxys_Attack
-	add_idleanim Deoxys_Speed
+	add_idleanim Deoxys

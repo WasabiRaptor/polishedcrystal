@@ -3813,7 +3813,7 @@ InitBattleMon: ; 3da0d
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
-	call SkipNames
+	call SkipPokemonNames
 	ld de, wBattleMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
@@ -3902,7 +3902,7 @@ InitEnemyMon: ; 3dabd
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipNames
+	call SkipPokemonNames
 
 	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
 	ld b, a
@@ -4852,7 +4852,7 @@ CheckDanger: ; 3df9e
 ; 3dfbf
 
 PrintPlayerHUD: ; 3dfbf
-
+	VWTextStart $bc
 	ld de, wBattleMonNick
 	hlcoord 11, 7
 	ld a, [wBattleMonNick + PKMN_NAME_LENGTH - 2]
@@ -4912,7 +4912,7 @@ endr
 	hlcoord 15, 8
 	ld a, [wBattleMonLevel]
 	ld [wTempMonLevel], a
-	jp PrintLevel
+	farjp PrintLevel
 ; 3e036
 
 UpdateEnemyHUD:: ; 3e036
@@ -4930,7 +4930,7 @@ UpdateEnemyHUD:: ; 3e036
 DrawEnemyHUD: ; 3e043
 	xor a
 	ldh [hBGMapMode], a
-
+	VWTextStart $c6
 	hlcoord 0, 0
 	lb bc, 4, 12
 	call ClearBox
@@ -4986,7 +4986,7 @@ endr
 	hlcoord 5, 1
 	ld a, [wEnemyMonLevel]
 	ld [wTempMonLevel], a
-	call PrintLevel
+	farcall PrintLevel
 
 	ld hl, wEnemyMonHP
 	ld a, [hli]
@@ -5050,7 +5050,7 @@ endr
 	xor a
 	ld [wWhichHPBar], a
 	hlcoord 1, 2
-	call DrawBattleHPBar
+	farcall DrawBattleHPBar
 
 	farcall LoadEnemyStatusIcon
 	hlcoord 2, 1
@@ -5136,9 +5136,9 @@ BattleMenu: ; 3e139
 	dec a
 	jp z, BattleMenu_Fight ; $1
 	dec a
-	jp z, BattleMenu_PKMN ; $2
-	dec a
 	jp z, BattleMenu_Pack ; $3
+	dec a
+	jp z, BattleMenu_PKMN ; $2
 	dec a
 	jp z, BattleMenu_Run ; $4
 	jr .loop
@@ -5966,6 +5966,7 @@ CheckAmuletCoin:
 	ret
 
 MoveSelectionScreen:
+	call InitVariableWidthText
 	; Maybe reset wPlayerSelectedMove if the move has disappeared
 	; (possible if we learned a new move and replaced the old)
 	ld a, [wMoveSelectionMenuType]
@@ -6013,20 +6014,20 @@ MoveSelectionScreen:
 	xor a
 	ldh [hBGMapMode], a
 
-	hlcoord 4, 17 - NUM_MOVES - 1
+	hlcoord 0, 17 - NUM_MOVES - 1
 	ld a, [wMoveSelectionMenuType]
 	dec a
 	jr nz, .got_dims
-	hlcoord 4, 17 - NUM_MOVES - 1 - 4
+	hlcoord 0, 17 - NUM_MOVES - 1 - 4
 .got_dims
 	lb bc, 4, 14
 	call TextBox
 
-	hlcoord 6, 17 - NUM_MOVES
+	hlcoord 1, 17 - NUM_MOVES
 	ld a, [wMoveSelectionMenuType]
 	dec a
 	jr nz, .got_start_coord
-	hlcoord 6, 17 - NUM_MOVES - 4
+	hlcoord 1, 17 - NUM_MOVES - 4
 .got_start_coord
 	ld a, SCREEN_WIDTH
 	ld [wBuffer1], a
@@ -6040,7 +6041,7 @@ MoveSelectionScreen:
 
 .got_default_coord
 	ld [w2DMenuCursorInitY], a
-	ld a, 5
+	ld a, 0
 	ld [w2DMenuCursorInitX], a
 	ld a, [wCurMoveNum]
 	inc a
@@ -6087,7 +6088,7 @@ MoveSelectionScreen:
 	ld a, [wMoveSwapBuffer]
 	and a
 	jr z, .interpret_joypad
-	hlcoord 5, 13
+	hlcoord 0, 13
 	ld bc, SCREEN_WIDTH
 	dec a
 	rst AddNTimes
@@ -6305,12 +6306,13 @@ SwapBattleMoves:
 MoveInfoBox: ; 3e6c8
 	xor a
 	ldh [hBGMapMode], a
+	VWTextStart $a7
 
-	hlcoord 0, 8
+	hlcoord $c, $c
 	ld a, [hl]
-	cp "┌"
+	cp "┬"
 	push af
-	lb bc, 3, 9
+	lb bc, 4, 6
 	call TextBox
 
 	ld hl, wMenuCursorY
@@ -6343,8 +6345,8 @@ MoveInfoBox: ; 3e6c8
 
 	farcall UpdateMoveData
 
-	hlcoord 1, 10
-	ld de, .PowAcc
+	hlcoord $d, $e
+	ld de, .AccPwrPP
 	call PlaceString
 
 ; Power and accuracy display code copied from engine/startmenu.asm
@@ -6356,7 +6358,7 @@ MoveInfoBox: ; 3e6c8
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	hlcoord 1, 10
+	hlcoord $10, $f
 	cp 2
 	jr c, .no_power
 	ld [wd265], a
@@ -6376,17 +6378,18 @@ MoveInfoBox: ; 3e6c8
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	ldh [hMultiplicand], a
-	ld a, 100
-	ldh [hMultiplier], a
-	call Multiply
-	ldh a, [hProduct]
+	;I have no idea what this is doing but its clearly not what its supposed to
+	;ldh [hMultiplicand], a
+	;ld a, 100
+	;ldh [hMultiplier], a
+	;call Multiply
+	;ldh a, [hProduct]
 	; don't increase a for 0% moves
-	and a
-	jr z, .no_inc
-	inc a
-.no_inc
-	hlcoord 6, 10
+	;and a
+	;jr z, .no_inc
+	;inc a
+;.no_inc
+	hlcoord $10, $e
 	cp 2
 	jr c, .no_acc
 	ld [wd265], a
@@ -6419,7 +6422,7 @@ MoveInfoBox: ; 3e6c8
 	ld hl, VTiles2 tile $5b
 	lb bc, BANK(TypeIconGFX), 4
 	call Request1bpp
-	hlcoord 1, 9
+	hlcoord $d, $d
 	ld b, 6
 	ld a, $59
 .loop
@@ -6431,32 +6434,33 @@ MoveInfoBox: ; 3e6c8
 	call nz, ApplyTilemap
 	ret
 
-.PowAcc:
-	db "   <BOLDP>/   %@"
+.AccPwrPP:
+	db "Acc"
+	next1 "Pwr"
+	next1 "PP@"
 .NA:
-	db "---@"
+	db "  ---@"
 ; 3e75f
 
 
 .PrintPP: ; 3e75f
-	hlcoord 2, 11
-rept 2
-	ld [hl], "<BOLDP>"
-	inc hl
-endr
-	inc hl
-	push hl
+	call InitVariableWidthTiles
+	ld a, 3
+	ld [wVariableWidthTextCurTileColsFilled], a
+	ld hl, wStringBuffer2
 	ld de, wStringBuffer1
-	lb bc, 1, 2
+	lb bc, 1 | PRINTNUM_LEADINGZEROS, 2
 	call PrintNum
-	pop hl
-	inc hl
-	inc hl
 	ld [hl], "/"
 	inc hl
 	ld de, wNamedObjectIndexBuffer
 	lb bc, 1, 2
-	jp PrintNum
+	call PrintNum
+	ld [hl], "@"
+	ld de, wStringBuffer2
+	hlcoord $f, $10
+	jp PlaceSpecialString
+
 ; 3e786
 
 CheckUsableMoves:
@@ -6877,7 +6881,7 @@ LoadEnemyMon: ; 3e8eb
 
 	; Failing that, it's all up to chance
 
-	call GetLeadAbility
+	farcall GetLeadAbility
 if DEF(FAITHFUL)
 	cp COMPOUND_EYES
 	jr nz, .no_compound_eyes_or_amulet_coin
@@ -6970,7 +6974,7 @@ endc
 
 	; Random nature from 0 to 24
 	; 50% chance of same nature with Synchronize ability
-	call GetLeadAbility
+	farcall GetLeadAbility
 	cp SYNCHRONIZE
 	jr nz, .no_synchronize
 	call BattleRandom
@@ -7074,7 +7078,7 @@ endc
 
 	; Gender. If lead has Cute Charm, force opposite gender 2/3
 	; of the time
-	call GetLeadAbility
+	farcall GetLeadAbility
 	cp CUTE_CHARM
 	jr nz, .not_cute_charm
 	ld a, 3
@@ -9304,7 +9308,7 @@ ReadAndPrintLinkBattleRecord: ; 3f85f
 	ld h, d
 	ld l, e
 	ld de, wd002
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ld a, "@"
 	ld [de], a
@@ -9527,7 +9531,7 @@ AddLastBattleToLinkRecord: ; 3fa42
 	ld bc, 2
 	rst CopyBytes
 	ld hl, wOTPlayerName
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ld hl, sLinkBattleResults
 	call .StoreResult
@@ -9894,7 +9898,6 @@ BattleStartMessage: ; 3fc8b
 	call DelayFrames
 
 	farcall Battle_GetTrainerName
-
 	ld hl, WantToBattleText
 	call CheckPluralTrainer
 	jr nz, .PlaceBattleStartText

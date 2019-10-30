@@ -1,10 +1,9 @@
 	db "EYEBALL@" ; species name
-	dw 207, 79 ; height, weight
+	dw 8, 36 ; height, weight
 
-	db   "Its antennae have"
-	next "eye patterns on"
-	next "them. Its four"
-
-	page "wings enable it to"
-	next "hover and fly in"
-	next "any direction.@"
+	db "Masquerain intimidates enemies"
+	next "with the eyelike patterns of its"
+	next "eyespots. If that doesn't work,"
+	
+	page "it deftly makes its escape on its"
+	next "set of four wings.@"

@@ -138,6 +138,7 @@ EggStatsJoypad: ; 4ddac (13:5dac)
 	jp StatsScreen_SetJumptableIndex
 
 StatsScreen_LoadPage: ; 4ddc6 (13:5dc6)
+	call InitVariableWidthText
 	call StatsScreen_LoadGFX
 	ld hl, wcf64
 	res 4, [hl]
@@ -316,14 +317,13 @@ StatsScreen_JoypadAction: ; 4de54 (13:5e54)
 StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	call .PlaceHPBar
 	xor a
+	VWTextStart $C0
 	ldh [hBGMapMode], a
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	ld [wCurSpecies], a
 	hlcoord 8, 0
 	ld [hl], "№"
-	inc hl
-	ld [hl], "."
 	ld hl, wTempMonGroup
 	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData	
@@ -332,7 +332,7 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	ld de, wNatDexNo
 	call PrintNum
 	hlcoord 14, 0
-	call PrintLevel
+	farcall PrintLevel
 	ld hl, .NicknamePointers
 	call GetNicknamePointer
 	call CopyNickname
@@ -577,7 +577,7 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 	inc a
 	ld [wTempMonLevel], a
 .AtMaxLevel:
-	call PrintLevel
+	farcall PrintLevel
 	pop af
 	ld [wTempMonLevel], a
 	ret
@@ -624,7 +624,7 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 	ld hl, .OTNamePointers
 	call GetNicknamePointer
 	call CopyNickname
-	hlcoord 1, 15
+	hlcoord 0, 15
 	call PlaceString
 	ld a, [wTempMonCaughtGender]
 	and FEMALE
@@ -764,9 +764,9 @@ OrangePage_:
 	call TN_PrintToD
 	call TN_PrintLV
 	call TN_PrintLocation
-	hlcoord 0, 11
-	ld de, .horizontal_divider
-	call PlaceString
+	;hlcoord 0, 11
+	;ld de, .horizontal_divider
+	;call PlaceString
 	hlcoord 1, 12
 	ld de, .ability
 	call PlaceString
@@ -824,13 +824,13 @@ TN_PrintToD
 	db "Dawn@"
 
 .day
-	db "Day@"
+	db "Midday@"
 
 .dusk
 	db "Dusk@"
 
 .nite
-	db "Night@"
+	db "Midnight@"
 
 .unknown
 	db "???@"
@@ -850,23 +850,23 @@ TN_PrintLocation:
 	jp PlaceString
 
 .event
-	db "Event #mon@"
+	db "Event Pokémon@"
 
 TN_PrintLV:
 	ld a, [wTempMonCaughtLevel]
-	inc hl
 	and a
 	jr z, .unknown
 	cp 1
 	jr z, .hatched
 	ld [wBuffer2], a
 	ld de, .str_atlv
-	call PlaceString
+	call PlaceSpecialString
+	ld h, b
+	ld l, c
+	inc hl
 	ld de, wBuffer2
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-rept 4
-	inc hl
-endr
+
 	jp PrintNum
 .hatched
 	ld de, .str_hatched
@@ -876,13 +876,13 @@ endr
 	jp PlaceString
 
 .str_atlv
-	db "at <LV>@"
+	db " at <LV>@"
 
 .str_hatched
-	db "from Egg@"
+	db " from Egg@"
 
 .str_unknown
-	db "by trade@"
+	db " by trade@"
 
 TN_PrintCharacteristics:
 	; b = value of best DV, c = index of best DV
@@ -1322,7 +1322,7 @@ GetNicknamePointer: ; 4e528 (13:6528)
 	cp BREEDMON
 	ret z
 	ld a, [wCurPartyMon]
-	jp SkipNames
+	jp SkipPokemonNames
 
 
 CheckFaintedFrzSlp: ; 4e53f

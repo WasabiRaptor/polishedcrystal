@@ -1,10 +1,12 @@
 	db "MOLD@" ; species name
-	dw 200, 450 ; height, weight
+	dw 6, 205 ; height, weight
 
-	db   "The fluid secreted"
-	next "by its toes carves"
-	next "holes in rocks for"
-
-	page "nesting and can be"
-	next "mixed with BERRIES"
-	next "to make a drink.@"
+	db "Shuckle quietly hides itself"
+	next "under rocks, keeping its body"
+	next "concealed inside its hard shell"
+	
+	page "while eating berries it has"
+	next "stored away. The berries mix"
+	next "with its body fluids to become a"
+	
+	page "juice.@"

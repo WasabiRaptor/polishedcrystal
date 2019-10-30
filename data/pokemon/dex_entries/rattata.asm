@@ -1,10 +1,9 @@
-	db "RAT@" ; species name
-	dw 100, 80 ; height, weight
+	db "MOUSE@" ; species name
+	dw 3, 35 ; height, weight
 
-	db   "This #MON's"
-	next "impressive vital-"
-	next "ity allows it to"
-
-	page "live anywhere. It"
-	next "also multiplies"
-	next "very quickly.@"
+	db "Its incisors grow continuously"
+	next "throughout its life. If its"
+	next "incisors get too long, this"
+	
+	page "Pokémon becomes unable to eat,"
+	next "and it starves to death.@"

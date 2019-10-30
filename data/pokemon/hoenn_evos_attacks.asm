@@ -467,7 +467,7 @@ GlalieEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
-FrosslassEvosAttacks:
+FroslassEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves
@@ -565,6 +565,11 @@ JirachiEvosAttacks:
 	db 0 ; no more level-up moves
 	
 DeoxysEvosAttacks:
+	db 0 ; no more evolutions
+	db 1, TACKLE
+	db 0 ; no more level-up moves
+
+AzurillEvosAttacks:
 	db 0 ; no more evolutions
 	db 1, TACKLE
 	db 0 ; no more level-up moves

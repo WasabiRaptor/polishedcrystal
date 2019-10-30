@@ -116,6 +116,8 @@ TVScript:
 
 MomScript:	
 	opentext
+	playmusic MUSIC_NONE
+	special RestartMapMusic
 	givekeyitem BICYCLE 
 	;givepoke ZYGARDE_10, 5, SWEET_HONEY, TEN_PERCENT_ZYGARDE, CHERISH_BALL, HIDDEN_ABILITY
 	closetext
@@ -171,7 +173,7 @@ else
 	line "for you."
 
 	para "Oh! I almost for-"
-	line "got! Your #mon"
+	line "got! Your Pokémon"
 
 	para "Gear is back from"
 	line "the repair shop."
@@ -181,7 +183,7 @@ else
 endc
 
 MomPokegearText:
-	text "#mon Gear, or"
+	text "Pokémon Gear, or"
 	line "just #gear."
 
 	para "It's essential if"
@@ -280,6 +282,7 @@ NeighborScript:
 	jump .Main
 
 .Main:
+	portrait ZYGARDE_ANGRY
 	writenamedtext .NeighborNameText, .NeighborText
 	waitbutton
 	closetext
@@ -287,8 +290,8 @@ NeighborScript:
 	end
 
 .MornIntroText:
-	text "Good morning,"
-	line "<PLAYER>!"
+	text "This just feels really really"
+	line "unnatural, but its very real."
 
 	para "I'm visiting!"
 	done
@@ -299,15 +302,13 @@ NeighborScript:
 	done
 
 .NiteIntroText:
-	text "Good evening,"
-	line "<PLAYER>!"
-
-	para "I'm visiting!"
+	text "The quick brown fox jumped"
+	line "over the lazy dog. 0123456789"
 	done
 
 .NeighborText:
-	text "bork!"
-	line ""
+	text "THE QUICK BROWN FOX JUMPED"
+	line "OVER THE LAZY DOG!?"
 
 	para "My daughter is"
 	line "adamant about"
@@ -316,9 +317,9 @@ NeighborScript:
 	line "Elm's assistant."
 
 	para "She really loves"
-	line "#mon!"
+	line "Pokémon!"
 	done
 
 .NeighborNameText:
-	text_jump NeighborName
-	db "@"
+	db "Zygarde@"
+

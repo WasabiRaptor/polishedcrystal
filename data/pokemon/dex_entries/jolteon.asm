@@ -1,10 +1,8 @@
 	db "LIGHTNING@" ; species name
-	dw 207, 540 ; height, weight
+	dw 8, 245 ; height, weight
 
-	db   "An evolution of"
-	next "Eevee capable of"
-	next "generating"
-
-	page "immensely powerful"
-	next "bolts of"
-	next "electricity.@"
+	db "Its lungs contain an organ that"
+	next "creates electricity. The"
+	next "crackling sound of electricity"
+	
+	page "can be heard when it exhales.@"

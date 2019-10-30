@@ -1080,7 +1080,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	call PlaceString
 
 	hlcoord 1, 12
-	call PrintLevel
+	farcall PrintLevel
 
 	ld a, $3
 	ld [wMonType], a
@@ -2154,11 +2154,11 @@ CopyNicknameToTemp: ; e3363 (38:7363)
 	ret
 
 CopyOTNameToTemp: ; e3376 (38:7376)
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 	ld de, wBufferMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 
@@ -2365,7 +2365,7 @@ BillsPC_PrintBoxCountAndCapacity: ; e3632
 ; e3663
 
 .Pokemon: ; e3663
-	db "#mon@"
+	db "Pokémon@"
 ; e3668
 
 .out_of_20 ; e3668

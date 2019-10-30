@@ -1,10 +1,9 @@
 	db "DARK@" ; species name
-	dw 407, 770 ; height, weight
+	dw 14, 350 ; height, weight
 
-	db   "The pungent-"
-	next "smelling flame"
-	next "that shoots from"
-
-	page "its mouth results"
-	next "from toxins burn-"
-	next "ing in its body.@"
+	db "They spew flames mixed with"
+	next "poison to finish off their"
+	next "opponents. They divvy up their"
+	
+	page "prey evenly among the members"
+	next "of their pack.@"

@@ -1,10 +1,12 @@
 	db "PATIENT@" ; species name
-	dw 403, 630 ; height, weight
+	dw 13, 285 ; height, weight
 
-	db   "In order to con-"
-	next "ceal its black"
-	next "tail, it lives in"
-
-	page "a dark cave and"
-	next "only moves about"
-	next "at night.@"
+	db "Wobbuffet does nothing but"
+	next "endure attacks—it won't"
+	next "attack on its own. However, it"
+	
+	page "won't endure an attack on its"
+	next "tail. When that happens, the"
+	next "Pokémon will try to take the"
+	
+	page "foe with it using Destiny Bond.@"

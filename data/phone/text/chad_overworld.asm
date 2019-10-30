@@ -1,13 +1,13 @@
 ChadAskNumber1Text:
 	text "Huh? Is that thing"
-	line "a #dex? Have"
+	line "a Pokédex? Have"
 	cont "you met Prof.Oak?"
 
 	para "Huh? You have?"
 	line "That's way cool!"
 
 	para "I have a dream of"
-	line "becoming a #mon"
+	line "becoming a Pokémon"
 
 	para "researcher like"
 	line "Prof.Oak."
@@ -35,7 +35,7 @@ ChadAskNumber2Text:
 
 ChadNumberAcceptedText:
 	text "You must listen to"
-	line "Prof.Oak's #mon"
+	line "Prof.Oak's Pokémon"
 	cont "Talk, right?"
 	done
 

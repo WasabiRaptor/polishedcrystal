@@ -1,11 +1,8 @@
 	db "WATER BIRD@" ; species name
-	dw 311, 617 ; height, weight
+	dw 12, 280 ; height, weight
 
-	db   "It dips its large"
-	next "bill in the sea,"
-	next "then scoops up"
-
-	page "numerous prey"
-	next "along with water."
-	next "@"
-    
+	db "It places small Pokémon into its"
+	next "spacious beak and carries them"
+	next "around. No one knows where"
+	
+	page "it's taking them.@"

@@ -1,10 +1,12 @@
 	db "PUNCHING@" ; species name
-	dw 407, 1110 ; height, weight
+	dw 14, 502 ; height, weight
 
-	db   "To increase the"
-	next "strength of all"
-	next "its punch moves,"
-
-	page "it spins its arms"
-	next "just before making"
-	next "contact.@"
+	db "Hitmonchan is said to possess"
+	next "the spirit of a boxer who had"
+	next "been working toward a world"
+	
+	page "championship. This Pokémon has"
+	next "an indomitable spirit and will"
+	next "never give up in the face of"
+	
+	page "adversity.@"

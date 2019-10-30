@@ -1,10 +1,9 @@
-    db "AUTOMATON@" ; species name
-    dw 303, 2028 ; height, weight
+	db "AUTOMATON@" ; species name
+	dw 10, 920 ; height, weight
 
-    db   "Ancient science"
-    next "fashioned this"
-    next "Pokémon from clay."
-
-    page "It's been active"
-    next "for thousands of"
-    next "years.@" 
+	db "Its movements are powered by"
+	next "a mysterious energy. It has"
+	next "continued to move since ancient"
+	
+	page "times, so its power may soon"
+	next "run out.@"

@@ -95,7 +95,7 @@ PC_CheckPartyForPokemon: ; 15650
 	ret
 
 .MustHavePokemonToUse:
-	; Bzzzzt! You must have a #MON to use this!
+	; Bzzzzt! You must have a Pokémon to use this!
 	text_jump UnknownText_0x1c1328
 	db "@"
 ; 0x15668
@@ -641,7 +641,7 @@ PokeCenterPCText_AccessWhosePC: ; 0x15a2c
 ; 0x15a31
 
 PokeCenterPCText_AccessedBillsPC: ; 0x15a31
-	; BILL's PC accessed. #MON Storage System opened.
+	; BILL's PC accessed. Pokémon Storage System opened.
 	text_jump UnknownText_0x1c1474
 	db "@"
 ; 0x15a36
@@ -653,7 +653,7 @@ PokeCenterPCText_AccessedOwnPC: ; 0x15a36
 ; 0x15a3b
 
 PokeCenterPCText_AccessedOaksPC: ; 0x15a3b
-	; PROF.OAK's PC accessed. #DEX Rating System opened.
+	; PROF.OAK's PC accessed. Pokédex Rating System opened.
 	text_jump UnknownText_0x1c14d2
 	db "@"
 ; 0x15a40

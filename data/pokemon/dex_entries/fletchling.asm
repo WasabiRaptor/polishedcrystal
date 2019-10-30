@@ -1,12 +1,8 @@
-    db "TINY ROBIN@" ; species name
-    dw 100, 37 ; height, weight
+	db "TINY ROBIN@" ; species name
+	dw 3, 17 ; height, weight
 
-    db   "Despite the beauty"
-    next "of its lilting"
-    next "voice, it's"
-
-    page "merciless to"
-    next "intruders that"
-    next "enter its" 
-         
-    page "territory.@"
+	db "While it's an amiable Pokémon,"
+	next "if you touch it unexpectedly, it"
+	next "will heat up its body in an"
+	
+	page "instant, and you'll be burned.@"

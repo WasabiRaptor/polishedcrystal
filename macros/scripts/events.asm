@@ -1298,3 +1298,9 @@ ENDM
 keyitemnotify: MACRO
 	db keyitemnotify_command
 ENDM
+
+	enum playimport_command ; $ad
+playimport: MACRO
+	db playimport_command
+	db (\1_id - ImportedSoundsPointerTable) / 3 ; sound to play
+ENDM

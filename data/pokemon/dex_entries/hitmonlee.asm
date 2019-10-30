@@ -1,10 +1,12 @@
 	db "KICKING@" ; species name
-	dw 411, 1100 ; height, weight
+	dw 15, 498 ; height, weight
 
-	db   "It is also called"
-	next "the Kick Master."
-	next "It uses its"
-
-	page "elastic legs to"
-	next "execute every"
-	next "known kick.@"
+	db "Hitmonlee's legs freely"
+	next "contract and stretch. Using"
+	next "these springlike legs, it bowls"
+	
+	page "over foes with devastating"
+	next "kicks. After battle, it rubs down"
+	next "its legs and loosens the muscles"
+	
+	page "to overcome fatigue.@"

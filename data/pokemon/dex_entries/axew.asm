@@ -1,10 +1,8 @@
-    db "TUSK@" ; species name
-    dw 200, 397 ; height, weight
+	db "TUSK@" ; species name
+	dw 6, 180 ; height, weight
 
-    db   "They use their"
-    next "tusks to crush the"
-    next "berries they eat."
-
-    page "Repeated regrowth"
-    next "makes their tusks"
-    next "strong and sharp.@" 
+	db "They mark their territory by"
+	next "leaving gashes in trees with"
+	next "their tusks. If a tusk breaks, a"
+	
+	page "new one grows in quickly.@"

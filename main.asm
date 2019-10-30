@@ -148,6 +148,7 @@ INCLUDE "engine/player_object.asm"
 INCLUDE "engine/sine.asm"
 INCLUDE "data/predef_pointers.asm"
 INCLUDE "engine/trainer_scripts.asm"
+;INCLUDE "engine/imported_sounds_pcm.asm"
 
 
 SECTION "Code 3", ROMX
@@ -314,7 +315,7 @@ DisplayCaughtContestMonStats: ; cc000
 	ld l, c
 	ld a, [wContestMonLevel]
 	ld [wTempMonLevel], a
-	call PrintLevel
+	farcall PrintLevel
 
 	ld de, wEnemyMonNick
 	hlcoord 1, 8
@@ -324,7 +325,7 @@ DisplayCaughtContestMonStats: ; cc000
 	ld l, c
 	ld a, [wEnemyMonLevel]
 	ld [wTempMonLevel], a
-	call PrintLevel
+	farcall PrintLevel
 
 	hlcoord 11, 4
 	ld de, wContestMonMaxHP
@@ -354,7 +355,7 @@ DisplayCaughtContestMonStats: ; cc000
 	db " This <PK><MN>  @"
 
 SwitchMonText: ; cc0c2
-	; Switch #MON?
+	; Switch Pokémon?
 	text_jump UnknownText_0x1c10cf
 	db "@"
 
@@ -1049,6 +1050,7 @@ DoDexSearchSlowpokeFrame: ; 44207
 	db -1
 
 DisplayDexEntry: ; 4424d
+	VWTextStart $b6
 	lb bc, 9, 12
 	hlcoord 8, 1
 	call ClearBox
@@ -1069,35 +1071,15 @@ DisplayDexEntry: ; 4424d
 	push de
 ; Print dex number
 	hlcoord 9, 1
-	ld a, "№"
-	ld [hli], a
-	ld a, "."
-	ld [hli], a
+	ld de, .No
+	call PlaceString
+	hlcoord 11, 1
 	ld a, [wPokedexCurrentMon]
 	ld [wCurSpecies], a
 	call GetBaseData
 	ld de, wNatDexNo
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
-;units
-	ld a, [wOptions2]
-	bit POKEDEX_UNITS, a
-	jr nz, .metric
-	hlcoord 9, 7
-	ld de, .HeightImperial
-	call PlaceString
-	hlcoord 9, 9
-	ld de, .WeightImperial
-	call PlaceString
-	jr .done
-.metric
-	hlcoord 9, 7
-	ld de, .HeightMetric
-	call PlaceString
-	hlcoord 9, 9
-	ld de, .WeightMetric
-	call PlaceString
-.done
 	farcall Pokedex_DrawFootprint
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wPokedexCurrentMon]
@@ -1122,59 +1104,17 @@ DisplayDexEntry: ; 4424d
 	ld a, d
 	or e
 	jr z, .skip_height
-	ld a, [wOptions2]
-	bit POKEDEX_UNITS, a
-	jr z, .imperial_height
-
-	push hl
-	ld l, d
-	ld h, e
-	ld bc, -100
-	ld e, 0
-.inchloop
-	ld a, h
-	and a
-	jr nz, .inchloop2
-	ld a, l
-	cp 100
-	jr c, .inchdone
-.inchloop2
-	add hl, bc
-	inc e
-	jr .inchloop
-.inchdone
-	ld a, e
-	ld e, l
-	ld d, 0
-	ld hl, 0
-	ld bc, 12
-	rst AddNTimes
-	add hl, de
-	ld b, h
-	ld c, l
-	ld de, 16646 ; 0.254 << 16
-	call Mul16
-	ld de, hTmpd
-	hlcoord 11, 7
-	lb bc, 2, PRINTNUM_LEFTALIGN | 5
-	call PrintNum
-	pop hl
-	jr .skip_height
-
-.imperial_height
 	push hl
 	push de
-	ld hl, sp+$0
-	ld d, h
-	ld e, l
-	hlcoord 12, 7
-	lb bc, 2, PRINTNUM_MONEY | 4
-	call PrintNum
-	hlcoord 14, 7
-	ld [hl], "'"
-	pop af
+	ld de, .Height
+	call .MakeHeightWeight
+	pop de
+	call .MakeNumDecimal
+	hlcoord 9, 7
+	ld de, wStringBuffer1
+	VWTextStart $c4
+	call PlaceString
 	pop hl
-
 .skip_height
 	pop af
 	push af
@@ -1187,30 +1127,15 @@ DisplayDexEntry: ; 4424d
 	ld a, e
 	or d
 	jr z, .skip_weight
-	ld a, [wOptions2]
-	bit POKEDEX_UNITS, a
-	jr z, .imperial_weight
-
-	ld c, d
-	ld b, e
-	ld de, 29726 ; 0.45359237 << 16
-	call Mul16
-	ld de, hTmpd
-	hlcoord 11, 9
-	lb bc, 2, PRINTNUM_LEFTALIGN | 5
-	call PrintNum
-	jr .skip_weight
-
-.imperial_weight
 	push de
-	ld hl, sp+$0
-	ld d, h
-	ld e, l
-	hlcoord 11, 9
-	lb bc, 2, PRINTNUM_LEFTALIGN | 5
-	call PrintNum
+	ld de, .Weight
+	call .MakeHeightWeight
 	pop de
-
+	call .MakeNumDecimal
+	hlcoord 9, 9
+	ld de, wStringBuffer1
+	VWTextStart $ca
+	call PlaceString
 .skip_weight
 ; Page 
 	lb bc, 5, SCREEN_WIDTH - 2
@@ -1221,20 +1146,24 @@ DisplayDexEntry: ; 4424d
 	ld a, $6a ; horizontal divider
 	call ByteFill
 	call .DexPageNo
+	call InitVariableWidthText
+.string_loop
 	pop de
 	inc de
 	pop af
-	hlcoord 2, 11
 	push af
-	call FarString
-
-	ld a, [wPokedexStatus]
-	ld b, a
+	push de
+	call FarReadString
+	pop de
 	ld a,[wPokedexEntryBufferValue]
+	ld b, a
+	ld a, [wPokedexStatus]
 	cp b
-	ld a, c
 	pop bc
-	ret z
+	jr z, .printentry
+	ld a, b
+	call FarReadString
+	ld a, c
 	cp $7f
 	jr nz, .statpage
 	ld a,[wPokedexEntryBufferValue]
@@ -1242,10 +1171,16 @@ DisplayDexEntry: ; 4424d
 	ld [wPokedexEntryBufferValue], a
 	push bc
 	push de
-	jr .skip_weight
+	jr .string_loop
+
+.printentry
+	ld a, b
+	hlcoord 2, 11
+	jp FarString
 
 .statpage
 	push bc
+	VWTextStart $b6
 	
 	lb bc, 9, 12
 	hlcoord 8, 1
@@ -1307,6 +1242,7 @@ DisplayDexEntry: ; 4424d
 	xor a
 	push af
 .abilityloop:
+	call InitVariableWidthText
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
@@ -1410,8 +1346,12 @@ DisplayDexEntry: ; 4424d
 
 .DexPageNo:
 	hlcoord 2, 9
-	ld de, .Page
-	call PlaceString
+	ld a, $d0
+	ld [hli], a
+	inc a
+	ld [hli], a
+	inc a
+	ld [hl], a
 	hlcoord 5, 9
 	;page number
 	ld a, [wPokedexStatus]
@@ -1419,16 +1359,41 @@ DisplayDexEntry: ; 4424d
 	ld [hl], a
 	ret
 
-.Page
-	db "Pg.@"
-.HeightImperial: ; 40852
-	db "Ht  ?'??”@" ; HT  ?'??"
-.WeightImperial: ; 4085c
-	db "Wt   ???lb@" ; WT   ???lb
-.HeightMetric:
-	db "Ht   ???m@" ; HT   ???m"
-.WeightMetric:
-	db "Wt   ???kg@"; WT   ???kg
+.MakeHeightWeight:
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
+	ld hl, wStringBuffer1
+	call PlaceString
+	ld h, b
+	ld l, c
+	ld [hl], "@"
+	ret
+
+.MakeNumDecimal:
+	ld a, e
+	ld [wStringBuffer2], a
+	ld a, d
+	ld [wStringBuffer2+1], a
+	ld hl, wStringBuffer1 + 3
+	ld de, wStringBuffer2
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
+	call PrintNum
+	dec hl
+	ld a, [hl]
+	ld [hl], "."
+	inc hl
+	ld [hl], a
+	ret
+.No
+	db"No.@"
+.Height:
+	db "Ht ??.?m@"
+.Weight:
+	db "Wt ??.?kg@"
+.meters:
+	db "m@" ; HT   ???m"
+.kilograms:
+	db "kg@"; WT   ???kg
 .Hp
 	db "HP@"
 .Atk
@@ -1681,6 +1646,8 @@ PokedexDataPointerTable: ; 0x44378
 INCLUDE "data/pokemon/kanto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/hoenn_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/sinnoh_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/unova_dex_entry_pointers.asm"
 
 SECTION "Code 11", ROMX
 
@@ -2429,7 +2396,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
@@ -2455,7 +2422,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
-	call SkipNames
+	call SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wMonOrItemNameBuffer
@@ -2497,7 +2464,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	rst CopyBytes
 	ld hl, wPlayerName
 	ld de, wBufferMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	farcall InsertPokemonIntoBox
 	ld a, [wCurPartySpecies]
@@ -3106,7 +3073,7 @@ DrawPlayerHP: ; 50b0a
 	push de
 	push hl
 	push hl
-	call DrawBattleHPBar
+	farcall DrawBattleHPBar
 	pop hl
 
 ; Print HP
@@ -4039,12 +4006,12 @@ _SwitchPartyMons:
 	rst CopyBytes
 	ld a, [wBuffer2]
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	push hl
 	call .CopyNameTowd002
 	ld a, [wBuffer3]
 	ld hl, wPartyMonOT
-	call SkipNames
+	call SkipPlayerNames
 	pop de
 	push hl
 	call .CopyName
@@ -4053,12 +4020,12 @@ _SwitchPartyMons:
 	call .CopyName
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer2]
-	call SkipNames
+	call SkipPokemonNames
 	push hl
 	call .CopyNameTowd002
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer3]
-	call SkipNames
+	call SkipPokemonNames
 	pop de
 	push hl
 	call .CopyName
@@ -4097,7 +4064,7 @@ _SwitchPartyMons:
 	ld de, wd002
 
 .CopyName: ; 51039 (14:5039)
-	ld bc, NAME_LENGTH
+	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
 	ret
 
@@ -4119,7 +4086,7 @@ InsertPokemonIntoBox: ; 51322
 	dec a
 	ld [wd265], a
 	ld hl, sBoxMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld de, wBufferMonOT
 	call InsertDataIntoBoxOrParty
 	ld a, [sBoxCount]
@@ -4156,7 +4123,7 @@ InsertPokemonIntoParty: ; 5138b
 	dec a
 	ld [wd265], a
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld de, wBufferMonOT
 	call InsertDataIntoBoxOrParty
 	ld a, [wPartyCount]
@@ -4328,6 +4295,9 @@ INCLUDE "data/pokemon/other_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/sinnoh_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/unova_menu_icon_pointers.asm"
+
 INCLUDE "data/pokemon/menu_icons.asm"
 
 
@@ -4606,6 +4576,16 @@ INCLUDE "gfx/pokemon/hoenn_anims.asm"
 INCLUDE "gfx/pokemon/hoenn_idle_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_idles.asm"
 
+INCLUDE "gfx/pokemon/sinnoh_anim_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_anims.asm"
+INCLUDE "gfx/pokemon/sinnoh_idle_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_idles.asm"
+
+INCLUDE "gfx/pokemon/unova_anim_pointers.asm"
+INCLUDE "gfx/pokemon/unova_anims.asm"
+INCLUDE "gfx/pokemon/unova_idle_pointers.asm"
+INCLUDE "gfx/pokemon/unova_idles.asm"
+
 SECTION "Pic Animations Frames 0", ROMX
 
 INCLUDE "gfx/pokemon/other_frame_pointers.asm"
@@ -4628,6 +4608,16 @@ SECTION "Pic Animations Frames 3", ROMX
 INCLUDE "gfx/pokemon/hoenn_frames.asm"
 INCLUDE "gfx/pokemon/hoenn_frame_pointers.asm"
 
+SECTION "Pic Animations Frames 4", ROMX
+
+INCLUDE "gfx/pokemon/sinnoh_frames.asm"
+INCLUDE "gfx/pokemon/sinnoh_frame_pointers.asm"
+
+SECTION "Pic Animations Frames 5", ROMX
+
+INCLUDE "gfx/pokemon/unova_frames.asm"
+INCLUDE "gfx/pokemon/unova_frame_pointers.asm"
+
 
 SECTION "Pic Animations Bitmasks", ROMX
 
@@ -4640,6 +4630,10 @@ INCLUDE "gfx/pokemon/johto_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/johto_bitmasks.asm"
 INCLUDE "gfx/pokemon/hoenn_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_bitmasks.asm"
+INCLUDE "gfx/pokemon/sinnoh_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_bitmasks.asm"
+INCLUDE "gfx/pokemon/unova_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/unova_bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX
@@ -4731,6 +4725,7 @@ PrintDescription:
 	inc hl
 	ld d, [hl]
 	pop hl
+	call InitVariableWidthText
 	jp PlaceString
 ; 0x1c8987
 
@@ -4781,6 +4776,326 @@ SECTION "wild stuff", ROMX
 INCLUDE "data/wild/unlocked_unowns.asm"
 INCLUDE "data/wild/treemons_asleep.asm"
 
+
+SECTION "Code 26", ROMX
+
+_IsAPokemon::
+; Return carry if species a is not a Pokemon.
+	and a
+	jp z, .not_a_pokemon
+	push hl
+	push bc
+	push de
+	push af
+	call GetMaxNumPokemonForGroup
+	pop de
+	jr nc, .not_a_pokemon_2
+	cp d
+	jr c, .not_a_pokemon_2
+	ld a, d
+	and a
+	pop de
+	pop bc
+	pop hl
+	ret
+
+.not_a_pokemon_2
+	pop de
+	pop bc
+	pop hl
+.not_a_pokemon
+	scf
+	ret
+
+GetMaxNumPokemonForGroup::
+	ld a, [wCurGroup]
+	ld hl, RegionalMaxPokemonTable
+	ld de, 2
+	call IsInArray
+	inc hl
+	ld a, [hl]
+	ret
+
+RegionalMaxPokemonTable:
+	db GROUP_GENERATION_ONE, NUM_KANTO_POKEMON
+	db GROUP_GENERATION_TWO, NUM_JOHTO_POKEMON
+	db GROUP_GENERATION_THREE, NUM_HOENN_POKEMON
+	db GROUP_GENERATION_FOUR, NUM_SINNOH_POKEMON
+	db GROUP_GENERATION_FIVE, NUM_UNOVA_POKEMON
+	db GROUP_GENERATION_SIX, NUM_KALOS_POKEMON
+	db GROUP_GENERATION_SEVEN, NUM_ALOLA_POKEMON
+	db GROUP_GENERATION_EIGHT, NUM_GALAR_POKEMON
+	db -1, 0
+
+InitScrollingMenu:: ; 352f
+	ld a, [wMenuBorderTopCoord]
+	dec a
+	ld b, a
+	ld a, [wMenuBorderBottomCoord]
+	sub b
+	ld d, a
+	ld a, [wMenuBorderLeftCoord]
+	dec a
+	ld c, a
+	ld a, [wMenuBorderRightCoord]
+	sub c
+	ld e, a
+	push de
+	call Coord2Tile
+	pop bc
+	jp TextBox
+
+GetLeadAbility::
+; Returns ability of lead mon unless it's an Egg. Used for field
+; abilities
+	ld a, [wPartyMon1IsEgg]
+	and IS_EGG_MASK
+	xor IS_EGG_MASK
+	ret z
+	ld a, [wPartyMon1Species] ;merely making sure that party mon 1 is a pokemon I guess
+	inc a
+	ret z
+	dec a
+	ret z
+	push bc
+	push de
+	push hl
+	ld hl, wPartyMon1Group
+	predef PokemonToGroupSpeciesAndForm
+	ld a, [wCurSpecies]
+	ld c, a
+	ld a, [wPartyMon1Ability]
+	ld b, a
+	call GetAbility
+	ld a, b
+	pop hl
+	pop de
+	pop bc
+	ret
+
+PrintLevel:: ; 382d
+; Print wTempMonLevel at hl
+
+	ld a, [wTempMonLevel]
+	ld [hl], "<LV>"
+	inc hl
+
+; How many digits?
+	ld c, 2
+	cp 100
+	jp c, Print8BitNumRightAlign
+
+; 3-digit numbers overwrite the :L.
+	dec hl
+	inc c
+	; fallthrough
+
+Print8BitNumRightAlign:: ; 3842
+	ld [wd265], a
+	ld de, wd265
+	ld b, PRINTNUM_LEFTALIGN | 1
+	jp PrintNum
+
+GetCharacterWidth::
+	push hl
+	push bc
+	cp "<COLON>" +1
+	jr nc, .other
+	sub "A"
+	jr c, .space
+	ld b, 0
+	ld c, a
+	ld hl, CharacterWidths
+	add hl, bc
+	ld e, [hl]
+	pop bc
+	pop hl
+	ret
+
+.space
+	ld e, 3 ;shortcut
+	pop bc
+	pop hl
+	ret
+
+.other
+	ld e, 8 ;shortcut
+	pop bc
+	pop hl
+	ret
+
+CharacterWidths:
+	db 6 ;A
+	db 6 ;B
+	db 6 ;C
+	db 6 ;D
+	db 5 ;E
+	db 5 ;F
+	db 6 ;G
+	db 6 ;H
+	db 4 ;I
+	db 6 ;J
+	db 6 ;K
+	db 5 ;L
+	db 6 ;M
+	db 6 ;N
+	db 6 ;O
+	db 6 ;P
+	db 6 ;Q
+	db 6 ;R
+	db 6 ;S
+	db 6 ;T
+	db 6 ;U
+	db 6 ;V
+	db 6 ;W
+	db 6 ;X
+	db 6 ;Y
+	db 6 ;Z
+	db 4 ;(
+	db 4 ;)
+	db 2 ;.
+	db 3 ;,
+	db 6 ;?
+	db 4 ;!
+	db 5 ;a
+	db 5 ;b
+	db 5 ;c
+	db 5 ;d
+	db 5 ;e
+	db 5 ;f
+	db 5 ;g
+	db 5 ;h
+	db 3 ;i
+	db 3 ;j
+	db 5 ;k
+	db 3 ;l
+	db 6 ;m
+	db 5 ;n
+	db 5 ;o
+	db 5 ;p
+	db 5 ;q
+	db 5 ;r
+	db 5 ;s
+	db 4 ;t
+	db 5 ;u
+	db 6 ;v
+	db 6 ;w
+	db 6 ;x
+	db 5 ;y
+	db 4 ;z
+	db 6 ;""
+	db 6
+	db 5 ;-
+	db 2 ;:
+	db 0
+	db 0
+	db 3 ;
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 5 ;é
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 0
+	db 0
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 0
+	db 0
+	db 0
+	db 6
+	db 6
+	db 8
+	db 6
+	db 6
+	db 7
+	db 6 ;0
+	db 6 ;1
+	db 6 ;2
+	db 6 ;3
+	db 6 ;4
+	db 6 ;5
+	db 6 ;6
+	db 6 ;7
+	db 6 ;8
+	db 6 ;9
+	db 6 ;$
+	db 6 ;x
+	db 8
+	db 5 ;/
+	db 6 ;+
+	db 3 ;:
+
+
+
+PrintLetterDelay:: ; 313d
+; Wait before printing the next letter.
+
+; The text speed setting in wOptions1 is actually a frame count:
+; 	fast: 1 frame
+; 	mid:  3 frames
+; 	slow: 5 frames
+
+; wTextBoxFlags[!0] and A or B override text speed with a one-frame delay.
+; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
+
+	ld a, [wTextBoxFlags]
+	bit TEXT_DELAY, a
+	ret z
+	bit NO_FORCED_FAST_SCROLL, a
+	jr z, .forceFastScroll
+
+	ld a, [wOptions1]
+	bit NO_TEXT_SCROLL, a
+	ret nz
+	and %11
+	ret z
+	ld a, $1
+	ldh [hBGMapHalf], a
+.forceFastScroll
+	push hl
+	push de
+	push bc
+; force fast scroll?
+	ld a, [wTextBoxFlags]
+	bit NO_FORCED_FAST_SCROLL, a
+	ld a, 2
+	jr z, .updateDelay
+; text speed
+	ld a, [wOptions1]
+	and %11
+	rlca
+.updateDelay
+	dec a
+	ld [wTextDelayFrames], a
+.textDelayLoop
+	ld a, [wTextDelayFrames]
+	and a
+	jr z, .done
+	call DelayFrame
+	call GetJoypad
+; Finish execution if A or B is pressed
+	ldh a, [hJoyDown]
+	and A_BUTTON | B_BUTTON
+	jr z, .textDelayLoop
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+; 318c
 
 SECTION "Kanto Base Data", ROMX
 
@@ -4840,17 +5155,32 @@ ENDM
 
 INCLUDE "data/pokemon/kanto_base_stats.asm"
 INCLUDE "data/pokemon/kanto_names.asm"
+INCLUDE "data/pokemon/kanto_palettes.asm"
 
 
 SECTION "Johto Base Data", ROMX
 
 INCLUDE "data/pokemon/johto_base_stats.asm"
 INCLUDE "data/pokemon/johto_names.asm"
+INCLUDE "data/pokemon/johto_palettes.asm"
 
 SECTION "Hoenn Base Data", ROMX
 
 INCLUDE "data/pokemon/hoenn_base_stats.asm"
 INCLUDE "data/pokemon/hoenn_names.asm"
+INCLUDE "data/pokemon/hoenn_palettes.asm"
+
+SECTION "Sinnoh Base Data", ROMX
+
+INCLUDE "data/pokemon/sinnoh_base_stats.asm"
+INCLUDE "data/pokemon/sinnoh_names.asm"
+INCLUDE "data/pokemon/sinnoh_palettes.asm"
+
+SECTION "Unova Base Data", ROMX
+
+INCLUDE "data/pokemon/unova_base_stats.asm"
+INCLUDE "data/pokemon/unova_names.asm"
+INCLUDE "data/pokemon/unova_palettes.asm"
 
 SECTION "Other Base Data", ROMX
 INCLUDE "data/pokemon/other_base_stats.asm"

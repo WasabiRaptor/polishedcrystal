@@ -225,7 +225,7 @@ KeyItemDescriptions:
 
 PokeBallDesc:
 	db   "An item for catch-"
-	next "ing #mon.@"
+	next "ing Pokémon.@"
 
 GreatBallDesc:
 	db   "A Ball with a de-"
@@ -245,10 +245,10 @@ SafariBallDesc:
 
 LevelBallDesc:
 	db   "A Ball for lower-"
-	next "level #mon.@"
+	next "level Pokémon.@"
 
 LureBallDesc:
-	db   "A Ball for #mon"
+	db   "A Ball for Pokémon"
 	next "hooked by a Rod.@"
 
 MoonBallDesc:
@@ -257,15 +257,15 @@ MoonBallDesc:
 
 FriendBallDesc:
 	db   "A Ball that makes"
-	next "#mon friendly.@"
+	next "Pokémon friendly.@"
 
 FastBallDesc:
 	db   "A Ball for catch-"
-	next "ing fast #mon.@"
+	next "ing fast Pokémon.@"
 
 HeavyBallDesc:
 	db   "A Ball for catch-"
-	next "ing heavy #mon.@"
+	next "ing heavy Pokémon.@"
 
 LoveBallDesc:
 	db   "A Ball for the"
@@ -276,7 +276,7 @@ ParkBallDesc:
 	next "Contest Ball.@"
 
 RepeatBallDesc:
-	db   "A Ball for #mon"
+	db   "A Ball for Pokémon"
 	next "caught before.@"
 
 TimerBallDesc:
@@ -285,23 +285,23 @@ TimerBallDesc:
 
 NestBallDesc:
 	db   "A Ball for weaker"
-	next "#mon.@"
+	next "Pokémon.@"
 
 NetBallDesc:
 	db   "A Ball for Water"
-	next "or Bug #mon.@"
+	next "or Bug Pokémon.@"
 
 DiveBallDesc:
 	db   "A Ball for under-"
-	next "water #mon.@"
+	next "water Pokémon.@"
 
 LuxuryBallDesc:
 	db   "A cozy Ball to"
-	next "befriend #mon.@"
+	next "befriend Pokémon.@"
 
 HealBallDesc:
 	db   "A remedial Ball to"
-	next "heal #mon.@"
+	next "heal Pokémon.@"
 
 QuickBallDesc:
 	db   "A Ball for early"
@@ -320,40 +320,40 @@ CherishBallDesc:
 	next "memorative Ball.@"
 
 PotionDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 20.@"
 
 SuperPotionDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 60.@"
 
 HyperPotionDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 120.@"
 
 MaxPotionDesc:
 	db   "Fully restores"
-	next "#mon HP.@"
+	next "Pokémon HP.@"
 
 AntidoteDesc:
 	db   "Cures poisoned"
-	next "#mon.@"
+	next "Pokémon.@"
 
 BurnHealDesc:
 	db   "Heals burned"
-	next "#mon.@"
+	next "Pokémon.@"
 
 ParlyzHealDesc:
 	db   "Heals paralyzed"
-	next "#mon.@"
+	next "Pokémon.@"
 
 AwakeningDesc:
 	db   "Awakens sleeping"
-	next "#mon.@"
+	next "Pokémon.@"
 
 IceHealDesc:
 	db   "Defrosts frozen"
-	next "#mon.@"
+	next "Pokémon.@"
 
 FullHealDesc:
 RageCandyBarDesc:
@@ -367,11 +367,11 @@ FullRestoreDesc:
 
 ReviveDesc:
 	db   "Restores a fainted"
-	next "#mon to 1/2 HP.@"
+	next "Pokémon to 1/2 HP.@"
 
 MaxReviveDesc:
 	db   "Fully restores a"
-	next "fainted #mon.@"
+	next "fainted Pokémon.@"
 
 EtherDesc:
 	db   "Restores PP of one"
@@ -387,35 +387,35 @@ ElixirDesc:
 
 MaxElixirDesc:
 	db   "Fully restores the"
-	next "PP of one #mon.@"
+	next "PP of one Pokémon.@"
 
 HPUpDesc:
 	db   "Raises the HP of"
-	next "one #mon.@"
+	next "one Pokémon.@"
 
 ProteinDesc:
 	db   "Raises Attack of"
-	next "one #mon.@"
+	next "one Pokémon.@"
 
 IronDesc:
 	db   "Raises Defense of"
-	next "one #mon.@"
+	next "one Pokémon.@"
 
 CarbosDesc:
 	db   "Raises Speed of"
-	next "one #mon.@"
+	next "one Pokémon.@"
 
 CalciumDesc:
 	db   "Raises Spcl.Atk"
-	next "of one #mon.@"
+	next "of one Pokémon.@"
 
 ZincDesc:
 	db   "Raises Spcl.Def"
-	next "of one #mon.@"
+	next "of one Pokémon.@"
 
 RareCandyDesc:
 	db   "Raises level of a"
-	next "#mon by one.@"
+	next "Pokémon by one.@"
 
 PPUpDesc:
 	db   "Raises max PP of"
@@ -426,31 +426,31 @@ PPMaxDesc:
 	next "a selected move.@"
 
 FreshWaterDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 30.@"
 
 SodaPopDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 50.@"
 
 LemonadeDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 70.@"
 
 MoomooMilkDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 100.@"
 
 SacredAshDesc:
 	db   "Fully revives all"
-	next "fainted #mon.@"
+	next "fainted Pokémon.@"
 
 EnergyPowderDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 60. Bitter.@"
 
 EnergyRootDesc:
-	db   "Restores #mon"
+	db   "Restores Pokémon"
 	next "HP by 120. Bitter.@"
 
 HealPowderDesc:
@@ -459,7 +459,7 @@ HealPowderDesc:
 
 RevivalHerbDesc:
 	db   "Revives fainted"
-	next "#mon. Bitter.@"
+	next "Pokémon. Bitter.@"
 
 XAttackDesc:
 	db   "Raises Attack."
@@ -511,7 +511,7 @@ EscapeRopeDesc:
 
 PokeDollDesc:
 	db   "Use to escape from"
-	next "a wild #mon.@"
+	next "a wild Pokémon.@"
 
 AbilityCapDesc:
 	db   "Switches a #-"
@@ -527,7 +527,7 @@ DuskStoneDesc:
 ShinyStoneDesc:
 IceStoneDesc:
 	db   "Evolves certain"
-	next "kinds of #mon.@"
+	next "kinds of Pokémon.@"
 
 EverstoneDesc:
 	db   "Stops evolution."
@@ -539,15 +539,15 @@ BicycleDesc:
 
 OldRodDesc:
 	db   "Use by water to"
-	next "fish for #mon.@"
+	next "fish for Pokémon.@"
 
 GoodRodDesc:
 	db   "A good Rod for"
-	next "catching #mon.@"
+	next "catching Pokémon.@"
 
 SuperRodDesc:
 	db   "The best Rod for"
-	next "catching #mon.@"
+	next "catching Pokémon.@"
 
 CoinCaseDesc:
 	db   "Holds up to 50K"
@@ -563,7 +563,7 @@ ExpShareDesc:
 
 MysteryEggDesc:
 	db   "An Egg obtained"
-	next "from Mr.#mon.@"
+	next "from Mr.Pokémon.@"
 
 SquirtBottleDesc:
 	db   "A bottle used for"
@@ -571,7 +571,7 @@ SquirtBottleDesc:
 
 SecretPotionDesc:
 	db   "Fully heals any"
-	next "#mon.@"
+	next "Pokémon.@"
 
 RedScaleDesc:
 	db   "A scale from the"
@@ -631,7 +631,7 @@ OldSeaMapDesc:
 
 ShinyCharmDesc:
 	db   "A charm for find-"
-	next "ing shiny #mon.@"
+	next "ing shiny Pokémon.@"
 
 OvalCharmDesc:
 	db   "A charm for find-"
@@ -639,7 +639,7 @@ OvalCharmDesc:
 
 SilphScope2Desc:
 	db   "A scope to see in-"
-	next "visible #mon.@"
+	next "visible Pokémon.@"
 
 ApricornBoxDesc:
 	db   "Holds up to 99 of"
@@ -837,11 +837,11 @@ AmuletCoinDesc:
 
 CleanseTagDesc:
 	db   "Helps repel wild"
-	next "#mon. (Hold)@"
+	next "Pokémon. (Hold)@"
 
 SmokeBallDesc:
 	db   "Escape from wild"
-	next "#mon. (Hold)@"
+	next "Pokémon. (Hold)@"
 
 BerserkGeneDesc:
 	db   "Boosts Attack but"
@@ -873,7 +873,7 @@ QuickPowderDesc:
 
 ArmorSuitDesc:
 	db   "A suit of armor"
-	next "for some #mon.@"
+	next "for some Pokémon.@"
 
 AirBalloonDesc:
 	db   "Avoids one Ground"
@@ -1005,7 +1005,7 @@ ToxicOrbDesc:
 
 BlackSludgeDesc:
 	db   "Restores HP for"
-	next "Poison #mon.@"
+	next "Poison Pokémon.@"
 
 MachoBraceDesc:
 	db   "Boosts stat gain,"
@@ -1041,7 +1041,7 @@ MulchDesc:
 
 SweetHoneyDesc:
 	db   "The aroma attracts"
-	next "wild #mon.@"
+	next "wild Pokémon.@"
 
 EvioliteDesc:
 	db   "Ups Def and Spcl."
@@ -1150,7 +1150,7 @@ BottleCapDesc:
 HelixFossilDesc:
 DomeFossilDesc:
 	db   "A fossilized"
-	next "#mon shell.@"
+	next "Pokémon shell.@"
 
 OldAmberDesc:
 	db   "Fossilized resin"

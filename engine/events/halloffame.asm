@@ -512,7 +512,7 @@ DisplayHOFMon: ; 86748
 	ld de, wStringBuffer2
 	call PlaceString
 	hlcoord 1, 16
-	call PrintLevel
+	farcall PrintLevel
 
 .print_id_no
 	hlcoord 7, 16
@@ -598,7 +598,7 @@ HOF_AnimatePlayerPic: ; 86810
 	ld de, wGameTimeHours
 	lb bc, 2, 3
 	call PrintNum
-	ld [hl], ":"
+	ld [hl], "<COLON>"
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2

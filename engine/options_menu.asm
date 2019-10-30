@@ -1,4 +1,5 @@
 _OptionsMenu: ; e41d0
+	FullWidthText
 	ld hl, hInMenu
 	ld a, [hl]
 	push af
@@ -88,7 +89,7 @@ StringOptions1: ; e4241
 StringOptions2:
 	db "Clock Format<LNBRK>"
 	db "        :<LNBRK>"
-	db "#dex Units<LNBRK>"
+	db "Pokédex Units<LNBRK>"
 	db "        :<LNBRK>"
 	db "Text Autoscroll<LNBRK>"
 	db "        :<LNBRK>"
@@ -352,7 +353,7 @@ Options_RunningShoes: ; e44c1
 	db "On @"
 ; e44fa
 
-NUM_TEXTBOX_FRAMES EQU 13
+NUM_TEXTBOX_FRAMES EQU 14
 Options_Frame: ; e44fa
 	ld hl, wTextBoxFrame
 	ldh a, [hJoyPressed]

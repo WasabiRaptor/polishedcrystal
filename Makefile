@@ -23,7 +23,7 @@ RGBLINK_FLAGS = -n $(BUILD_DIR)$(ROM_NAME).sym -m $(BUILD_DIR)$(ROM_NAME).map -l
 RGBFIX_FLAGS = -Cjv -t $(TITLE) -i $(MCODE) -n $(ROMVERSION) -p $(FILLER) -k 01 -l 0x33 -m 0x1B -r 3
 
 PYTHON := python 
-pcm := $(PYTHON) extras/pokemontools/pcm.py pcm
+pcm := $(PYTHON) utils/pcm.py pcm
 
 BUILD_DIR := build/
 DEBUG_BUILD_DIR := build-debug/
@@ -42,6 +42,8 @@ $(BUILD_DIR)audio/musicplayer.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_entries.o \
 $(BUILD_DIR)data/pokemon/johto_dex_entries.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_entries.o \
+$(BUILD_DIR)data/pokemon/sinnoh_dex_entries.o \
+$(BUILD_DIR)data/pokemon/unova_dex_entries.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_order.o \
 $(BUILD_DIR)data/pokemon/johto_dex_order.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_order.o \
@@ -50,12 +52,18 @@ $(BUILD_DIR)data/pokemon/unova_dex_order.o \
 $(BUILD_DIR)data/pokemon/kalos_dex_order.o \
 $(BUILD_DIR)data/pokemon/alola_dex_order.o \
 $(BUILD_DIR)data/pokemon/galar_dex_order.o \
+$(BUILD_DIR)data/pokemon/invar_dex_order.o \
+$(BUILD_DIR)data/pokemon/dex_order_alpha.o \
 $(BUILD_DIR)data/pokemon/kanto_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/kanto_egg_moves.o \
 $(BUILD_DIR)data/pokemon/johto_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/johto_egg_moves.o \
 $(BUILD_DIR)data/pokemon/hoenn_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/hoenn_egg_moves.o \
+$(BUILD_DIR)data/pokemon/sinnoh_evos_attacks.o \
+$(BUILD_DIR)data/pokemon/sinnoh_egg_moves.o \
+$(BUILD_DIR)data/pokemon/unova_evos_attacks.o \
+$(BUILD_DIR)data/pokemon/unova_egg_moves.o \
 $(BUILD_DIR)data/maps/map_data.o \
 $(BUILD_DIR)data/text/common.o \
 $(BUILD_DIR)data/tilesets.o \
@@ -66,6 +74,8 @@ $(BUILD_DIR)gfx/sprites.o \
 $(BUILD_DIR)gfx/kanto_footprints.o\
 $(BUILD_DIR)gfx/johto_footprints.o\
 $(BUILD_DIR)gfx/hoenn_footprints.o\
+$(BUILD_DIR)gfx/sinnoh_footprints.o\
+$(BUILD_DIR)gfx/unova_footprints.o\
 
 ### Build targets
 

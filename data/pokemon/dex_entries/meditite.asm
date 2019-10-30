@@ -1,11 +1,10 @@
-    db "MEDITATE@" ; species name
-    dw 200, 247 ; height, weight
+	db "MEDITATE@" ; species name
+	dw 6, 112 ; height, weight
 
-    db   "It eats just one"
-    next "berry a day. By"
-    next "enduring hunger,"
-
-    page "its spirit is"
-    next "tempered and made"
-    next "sharper.@" 
- 
+	db "Meditite heightens its inner"
+	next "energy through meditation. It"
+	next "survives on just one berry a"
+	
+	page "day. Minimal eating is another"
+	next "aspect of this Pokémon's"
+	next "training.@"

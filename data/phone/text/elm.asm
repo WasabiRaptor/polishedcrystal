@@ -5,7 +5,7 @@ ElmPhoneStartText: ; 0x1b46fc
 	line "it."
 
 	para "Be sure to heal"
-	line "your #mon if"
+	line "your Pokémon if"
 	cont "they are hurt."
 	done
 
@@ -13,7 +13,7 @@ ElmPhoneSawMrPokemonText: ; 0x1b4749
 	text "Hello, <PLAYER>?"
 
 	para "Did you meet Mr."
-	line "#mon? Great!"
+	line "Pokémon? Great!"
 	cont "Come back safely!"
 	done
 
@@ -21,7 +21,7 @@ ElmPhonePokemonStolenText: ; 0x1b4784
 	text "<PLAYER>? I'm very"
 	line "upset now."
 
-	para "We had a #mon"
+	para "We had a Pokémon"
 	line "stolen from here."
 
 	para "How could anyone"
@@ -35,7 +35,7 @@ ElmPhoneCheckingEggText: ; 0x1b47d5
 	line "Egg now. It does"
 
 	para "appear to be a"
-	line "#mon Egg."
+	line "Pokémon Egg."
 	done
 
 ElmPhoneAssistantText: ; 0x1b481c
@@ -44,7 +44,7 @@ ElmPhoneAssistantText: ; 0x1b481c
 	para "Did you see my"
 	line "assistant? He's at"
 
-	para "the #mon Center"
+	para "the Pokémon Center"
 	line "in Violet City."
 	done
 
@@ -64,7 +64,7 @@ ElmPhoneEggHatchedText: ; 0x1b48bb
 
 	para "What? It hatched?"
 	line "Wow! What kind of"
-	cont "#mon is it?"
+	cont "Pokémon is it?"
 
 	para "Please come show"
 	line "me now!"
@@ -80,7 +80,7 @@ ElmPhoneDiscovery1Text: ; 0x1b491f
 	line "for an Egg to"
 
 	para "hatch depends on"
-	line "the #mon."
+	line "the Pokémon."
 	done
 
 ElmPhoneDiscovery2Text: ; 0x1b4982
@@ -90,7 +90,7 @@ ElmPhoneDiscovery2Text: ; 0x1b4982
 	line "mystery what kinds"
 
 	para "of moves hatched"
-	line "#mon have."
+	line "Pokémon have."
 
 	para "We're investigat-"
 	line "ing that now."
@@ -106,7 +106,7 @@ ElmPhonePokerusText: ; 0x1b49e7
 	line "something called"
 
 	para "#rus that in-"
-	line "fects #mon."
+	line "fects Pokémon."
 
 	para "Yes, it's like a"
 	line "virus, so it's"
@@ -115,7 +115,7 @@ ElmPhonePokerusText: ; 0x1b49e7
 	para "It multiplies fast"
 	line "and infects other"
 
-	para "#mon too. But"
+	para "Pokémon too. But"
 	line "that's all."
 
 	para "It doesn't seem to"
@@ -151,7 +151,7 @@ ElmPhoneEggAssistantText: ; 0x1b4b87
 	line "Egg!"
 
 	para "My assistant is at"
-	line "the #mon Center"
+	line "the Pokémon Center"
 
 	para "in Violet City."
 	line "Could you talk to"

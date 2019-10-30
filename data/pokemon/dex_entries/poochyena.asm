@@ -1,10 +1,12 @@
 	db "BITE@" ; species name
-	dw 108, 30 ; height, width
+	dw 5, 136 ; height, weight
 
-	db   "It chases its prey"
-	next "until the victim"
-	next "becomes exhausted."
+	db "Poochyena is an omnivore—it"
+	next "will eat anything. A"
+	next "distinguishing feature is how"
 	
-	page "However, it turns"
-	next "tail if the prey"
-	next "strikes back.@"
+	page "large its fangs are compared to"
+	next "its body. This Pokémon tries to"
+	next "intimidate its foes by making"
+	
+	page "the hair on its tail bristle out.@"

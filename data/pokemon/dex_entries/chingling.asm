@@ -1,10 +1,8 @@
 	db "BELL@" ; species name
-	dw 8, 13 ; height, weight
+	dw 2, 6 ; height, weight
 
-	db   "It emits high-"
-	next "frequency cries"
-	next "people can't hear"
+	db "There is an orb inside its mouth.@"
+	next "When it hops, the orb bounces"
+	next "all over and makes a ringing"
 	
-	page "Once it starts, it"
-	next "can cry for an aw-"
-	next "fully long time.@"
+	page "sound.@"

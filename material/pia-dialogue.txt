@@ -84,7 +84,7 @@ AromaGirl1AfterText:
 
 	para "to strengthen the-"
 	line "ir bonds with"
-	cont "their #mon."
+	cont "their Pokémon."
 	done
 
 Gentleman1SeenText:
@@ -100,14 +100,14 @@ Gentleman1DefeatText:
 
 Gentleman1AfterText:
 	text "Arcanine is one of"
-	line "the few #mon"
+	line "the few Pokémon"
 	cont "that can use Extr-"
 
 	para "emespeed."
 	done
 
 Tamer1SeenText:
-	text "My #mon are"
+	text "My Pokémon are"
 	line "mean, lean fighti-"
 	cont "ng machines!"
 	done
@@ -149,7 +149,7 @@ LadySeenText:
 
 	para "My Persian is sim-"
 	line "ply dying to Slash"
-	cont "your #mon!"
+	cont "your Pokémon!"
 	done
 
 LadyDefeatText:

@@ -1,10 +1,8 @@
 	db "ARMOR BIRD@" ; species name
-	dw 507, 1110 ; height, weight
+	dw 17, 505 ; height, weight
 
-	db   "The feathers that"
-	next "it sheds are very"
-	next "sharp. It is said"
-
-	page "that people once"
-	next "used the feathers"
-	next "as swords.@"
+	db "The wing feathers it sheds can"
+	next "be processed and made into"
+	next "knives whose sharpness is"
+	
+	page "recognized by the finest chefs.@"

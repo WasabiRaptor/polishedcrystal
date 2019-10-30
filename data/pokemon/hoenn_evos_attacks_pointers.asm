@@ -30,7 +30,6 @@ HoennEvosAttacksPointers::
 	add_evosattacks Ralts
 	add_evosattacks Kirlia
 	add_evosattacks Gardevoir
-	add_evosattacks Gallade
 	add_evosattacks Surskit
 	add_evosattacks Masquerain
 	add_evosattacks Shroomish
@@ -40,20 +39,20 @@ HoennEvosAttacksPointers::
 	add_evosattacks Slaking
 	add_evosattacks Nincada
 	add_evosattacks Ninjask
-	add_evosattacks Shedinja 
- 	add_evosattacks Whismur
+	add_evosattacks Shedinja
+	add_evosattacks Whismur
 	add_evosattacks Loudred
 	add_evosattacks Exploud
 	add_evosattacks Makuhita
 	add_evosattacks Hariyama
+	add_evosattacks Azurill
 	add_evosattacks Nosepass
-	add_evosattacks Probopass
 	add_evosattacks Skitty
 	add_evosattacks Delcatty
 	add_evosattacks Sableye
 	add_evosattacks Mawile
-	add_evosattacks Aron 
- 	add_evosattacks Lairon
+	add_evosattacks Aron
+	add_evosattacks Lairon
 	add_evosattacks Aggron
 	add_evosattacks Meditite
 	add_evosattacks Medicham
@@ -63,9 +62,7 @@ HoennEvosAttacksPointers::
 	add_evosattacks Minun
 	add_evosattacks Volbeat
 	add_evosattacks Illumise
-	add_evosattacks Budew
 	add_evosattacks Roselia
-	add_evosattacks Roserade
 	add_evosattacks Gulpin
 	add_evosattacks Swalot
 	add_evosattacks Carvanha
@@ -82,8 +79,8 @@ HoennEvosAttacksPointers::
 	add_evosattacks Vibrava
 	add_evosattacks Flygon
 	add_evosattacks Cacnea
-	add_evosattacks Cacturne 
- 	add_evosattacks Swablu
+	add_evosattacks Cacturne
+	add_evosattacks Swablu
 	add_evosattacks Altaria
 	add_evosattacks Zangoose
 	add_evosattacks Seviper
@@ -101,20 +98,17 @@ HoennEvosAttacksPointers::
 	add_evosattacks Armaldo
 	add_evosattacks Feebas
 	add_evosattacks Milotic
-	add_evosattacks Castform 
+	add_evosattacks Castform
 	add_evosattacks Kecleon
 	add_evosattacks Shuppet
 	add_evosattacks Banette
 	add_evosattacks Duskull
 	add_evosattacks Dusclops
-	add_evosattacks Dusknoir
 	add_evosattacks Tropius
-	add_evosattacks Chingling
 	add_evosattacks Chimecho
 	add_evosattacks Absol
 	add_evosattacks Snorunt
 	add_evosattacks Glalie
-	add_evosattacks Frosslass
 	add_evosattacks Spheal
 	add_evosattacks Sealeo
 	add_evosattacks Walrein
@@ -134,11 +128,8 @@ HoennEvosAttacksPointers::
 	add_evosattacks Registeel
 	add_evosattacks Latias
 	add_evosattacks Latios
-	add_evosattacks Kyogre 
- 	add_evosattacks Groudon
+	add_evosattacks Kyogre
+	add_evosattacks Groudon
 	add_evosattacks Rayquaza
 	add_evosattacks Jirachi
-	add_evosattacks Deoxys
-	add_evosattacks Deoxys
-	add_evosattacks Deoxys
 	add_evosattacks Deoxys

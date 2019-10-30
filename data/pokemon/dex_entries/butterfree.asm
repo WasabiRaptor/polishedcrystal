@@ -1,10 +1,9 @@
 	db "BUTTERFLY@" ; species name
-	dw 307, 710 ; height, weight
+	dw 11, 320 ; height, weight
 
-	db   "It flits from"
-	next "flower to flower,"
-	next "collecting honey."
-
-	page "It can even"
-	next "identify distant"
-	next "flowers in bloom.@"
+	db "Its wings are covered in toxic"
+	next "scales. If it finds bird Pokémon"
+	next "going after Caterpie,"
+	
+	page "Butterfree sprinkles its scales"
+	next "on them to drive them off.@"

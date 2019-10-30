@@ -1,10 +1,10 @@
 	db "BIG JAW@" ; species name
-	dw 707, 1960 ; height, weight
+	dw 23, 888 ; height, weight
 
-	db   "Although it has a"
-	next "massive body, its"
-	next "powerful hind legs"
-
-	page "enable it to move"
-	next "quickly, even on"
-	next "the ground.@"
+	db "Feraligatr intimidates its foes"
+	next "by opening its huge mouth. In"
+	next "battle, it will kick the ground"
+	
+	page "hard with its thick and"
+	next "powerful hind legs to charge at"
+	next "the foe at an incredible speed.@"

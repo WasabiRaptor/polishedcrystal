@@ -1,10 +1,12 @@
-	db "TRIPLEBIRD@" ; species name
-	dw 511, 1880 ; height, weight
+	db "TRIPLE BIRD@" ; species name
+	dw 18, 852 ; height, weight
 
-	db   "An enemy that"
-	next "takes its eyes off"
-	next "any of the three"
-
-	page "heads--even for a"
-	next "second--will get"
-	next "pecked severely.@"
+	db "Apparently, the heads aren't"
+	next "the only parts of the body that"
+	next "Dodrio has three of. It has"
+	
+	page "three sets of hearts and lungs"
+	next "as well, so it is capable of"
+	next "running long distances without"
+	
+	page "rest.@"

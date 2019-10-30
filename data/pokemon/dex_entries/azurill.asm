@@ -1,13 +1,10 @@
-    db "POLKA DOT@" ; species name
-    dw 8, 44 ; height, weight
+	db "POLKA DOT@" ; species name
+	dw 2, 20 ; height, weight
 
-    db   "It battles by"
-    next "flinging around"
-    next "values in its"
-
-    page "its tail, which is"
-    next "bigger than its"
-    next "body. The tail is" 
-         
-    page "a floatation"
-    next "device in water.@" 
+	db "Azurill's tail is large and"
+	next "bouncy. It is packed full of the"
+	next "nutrients this Pokémon needs to"
+	
+	page "grow. Azurill can be seen"
+	next "bouncing and playing on its big,"
+	next "rubbery tail.@"

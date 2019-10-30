@@ -1,10 +1,8 @@
 	db "VIRTUAL@" ; species name
-	dw 200, 720 ; height, weight
+	dw 6, 325 ; height, weight
 
-	db   "This manmade"
-	next "#MON evolved"
-	next "from the latest"
-
-	page "technology. It"
-	next "may have unprog-"
-	next "rammed reactions.@"
+	db "AI has been installed in it. It"
+	next "learns various things all on its"
+	next "own, but it even remembers"
+	
+	page "things it doesn't need to know.@"

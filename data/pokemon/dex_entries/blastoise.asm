@@ -1,10 +1,12 @@
 	db "SHELLFISH@" ; species name
-	dw 503, 1890 ; height, weight
+	dw 16, 855 ; height, weight
 
-	db   "It firmly plants"
-	next "its feet on the"
-	next "ground before"
-
-	page "shooting water"
-	next "from the jets on"
-	next "its back.@"
+	db "Blastoise has water spouts that"
+	next "protrude from its shell. The"
+	next "water spouts are very"
+	
+	page "accurate. They can shoot bullets"
+	next "of water with enough accuracy"
+	next "to strike empty cans from a"
+	
+	page "distance of over 160 feet.@"

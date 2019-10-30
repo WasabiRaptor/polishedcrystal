@@ -134,7 +134,7 @@ INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/absol.1bpp"
 INCBIN "gfx/footprints/snorunt.1bpp"
 INCBIN "gfx/footprints/glalie.1bpp"
-INCBIN "gfx/footprints/frosslass.1bpp"
+INCBIN "gfx/footprints/froslass.1bpp"
 ;INCBIN "gfx/footprints/spheal.1bpp"
 ;INCBIN "gfx/footprints/sealeo.1bpp"
 ;INCBIN "gfx/footprints/walrein.1bpp"

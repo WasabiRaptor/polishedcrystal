@@ -1,10 +1,10 @@
 	db "SHED@" ; species name
-	dw 207, 26 ; height, weight
+	dw 8, 12 ; height, weight
 
-	db   "A peculiar #MON"
-	next "that floats in air"
-	next "even though its"
-
-	page "wings remain"
-	next "completely still."
-	next "@"
+	db "Shedinja is a peculiar Pokémon.@"
+	next "It seems to appear unsought in"
+	next "a Poké Ball after a Nincada"
+	
+	page "evolves. This bizarre Pokémon"
+	next "is entirely immobile—it doesn't"
+	next "even breathe.@"

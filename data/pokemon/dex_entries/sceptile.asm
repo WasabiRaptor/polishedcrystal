@@ -1,10 +1,10 @@
 	db "FOREST@" ; species name
-	dw 570, 1151 ; height, width
+	dw 17, 522 ; height, weight
 
-	db   "The leaves that"
-	next "grow on its arms"
-	next "can slice down"
+	db "Sceptile has seeds growing on"
+	next "its back. They are said to be"
+	next "bursting with nutrients that"
 	
-	page "thick trees."
-	next "It is without peer"
-	next "in jungle combat.@"
+	page "revitalize trees. This Pokémon"
+	next "raises the trees in a forest"
+	next "with loving care.@"

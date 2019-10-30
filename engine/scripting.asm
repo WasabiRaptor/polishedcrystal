@@ -268,6 +268,8 @@ ScriptCommandTable:
 	dw Script_takekeyitem
 	dw Script_verbosegivekeyitem            ; aa
 	dw Script_keyitemnotify                 ; ab
+	
+	dw Script_playimport				; ac
 
 StartScript:
 	ld hl, wScriptFlags
@@ -456,6 +458,20 @@ Script_jumpstashedtext:
 	ld hl, JumpTextScript
 	jp ScriptJump
 
+Script_writenamedtext:
+; parameters:
+;     name_pointer
+;     text_pointer (RawTextPointerLabelParam)
+	call SetupNameplate
+	call GetScriptByte
+	ld e, a
+	call GetScriptByte
+	ld d, a
+	hlcoord $6, $b
+	ld a, [wScriptBank]
+	call FarString
+;fallthrough
+
 Script_writetext:
 ; parameters:
 ;     text_pointer (RawTextPointerLabelParam)
@@ -466,29 +482,6 @@ Script_writetext:
 	ld a, [wScriptBank]
 	ld b, a
 	jp MapTextbox
-
-Script_writenamedtext:
-; parameters:
-;     name_pointer
-;     text_pointer (RawTextPointerLabelParam)
-	call GetScriptByte
-	ld [wTextBoxNameBuffer + 1], a
-	call GetScriptByte
-	ld [wTextBoxNameBuffer], a
-	call GetScriptByte
-	ld l, a
-	call GetScriptByte
-	ld h, a
-	ld a, [wScriptBank]
-	ld b, a
-	ld a, [wTextBoxFlags2]
-	set NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
-	call MapTextbox
-	ld a, [wTextBoxFlags2]
-	res NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
-	ret
 
 Script_farwritetext:
 ; parameters:
@@ -1999,7 +1992,7 @@ Script_RAM2MEM:
 
 ResetStringBuffer1:
 	ld hl, wStringBuffer1
-	ld bc, NAME_LENGTH
+	ld bc, PKMN_NAME_LENGTH
 	ld a, "@"
 	jp ByteFill
 
@@ -3088,3 +3081,11 @@ Script_keyitemnotify:
 	ld b, BANK(PutItemInPocketText)
 	ld hl, PutItemInPocketText
 	jp MapTextbox
+
+Script_playimport:
+; parameters:
+;     import_pointer (SingleByteParam)
+	call GetScriptByte
+	;jp PlayImportedSoundClip
+	ret
+

@@ -1,10 +1,8 @@
-    db "COMPASS@" ; species name
-    dw 303, 2318 ; height, weight
+	db "COMPASS@" ; species name
+	dw 10, 970 ; height, weight
 
-    db   "If two of these"
-    next "meet, they cannot"
-    next "get too close"
-
-    page "because their"
-    next "noses repel each"
-    next "other.@" 
+	db "It moves less than an inch a"
+	next "year, but when it's in a jam, it"
+	next "will spin and drill down into the"
+	
+	page "ground in a split second.@"

@@ -356,6 +356,7 @@ SECTION "Sound Effects", ROMX
 INCLUDE "audio/sfx.asm"
 
 
+
 SECTION "Crystal Sound Effects", ROMX
 
 INCLUDE "audio/sfx_crystal.asm"
@@ -365,7 +366,17 @@ SECTION "Cries", ROMX
 
 
 INCLUDE "audio/cries.asm"
-
 INCLUDE "data/pokemon/kanto_cries.asm"
 INCLUDE "data/pokemon/johto_cries.asm"
+
+SECTION "Hoenn Cries", ROMX
+
 INCLUDE "data/pokemon/hoenn_cries.asm"
+
+SECTION "Sinnoh Cries", ROMX
+
+INCLUDE "data/pokemon/sinnoh_cries.asm"
+
+SECTION "Unova Cries", ROMX
+
+INCLUDE "data/pokemon/unova_cries.asm"

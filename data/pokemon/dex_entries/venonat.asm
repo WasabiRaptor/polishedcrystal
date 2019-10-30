@@ -1,10 +1,10 @@
 	db "INSECT@" ; species name
-	dw 303, 660 ; height, weight
+	dw 10, 300 ; height, weight
 
-	db   "The small bugs it"
-	next "eats appear only"
-	next "at night, so it"
-
-	page "sleeps in a hole"
-	next "in a tree until"
-	next "night falls.@"
+	db "Venonat is said to have evolved"
+	next "with a coat of thin, stiff hair"
+	next "that covers its entire body for"
+	
+	page "protection. It possesses large"
+	next "eyes that never fail to spot"
+	next "even minuscule prey.@"

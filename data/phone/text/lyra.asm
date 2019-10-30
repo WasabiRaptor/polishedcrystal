@@ -124,7 +124,7 @@ LyraPhoneLyrasEggEndText:
 	para "Isn't that neat?"
 
 	para "I'm raising a full"
-	line "party of #mon,"
+	line "party of Pokémon,"
 
 	para "so, um, if you'd"
 	line "like to have it…"

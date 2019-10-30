@@ -1,10 +1,10 @@
 	db "BIG HORN@" ; species name
-	dw 407, 1570 ; height, weight
+	dw 14, 712 ; height, weight
 
-	db   "The round balls"
-	next "found on the"
-	next "fallen antlers can"
-
-	page "be ground into a"
-	next "powder that aids"
-	next "in sleeping.@"
+	db "Stantler's magnificent antlers"
+	next "were traded at high prices as"
+	next "works of art. As a result, this"
+	
+	page "Pokémon was hunted close to"
+	next "extinction by those who were"
+	next "after the priceless antlers.@"

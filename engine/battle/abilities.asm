@@ -813,10 +813,10 @@ BreakDisguise:
 	jr z, .player_backpic
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipNames
+	call SkipPokemonNames
 	ld de, wEnemyMonNick
 	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	farcall GetMonFrontpic
 	jr .disguise_broke
 

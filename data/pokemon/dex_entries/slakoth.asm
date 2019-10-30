@@ -1,10 +1,9 @@
 	db "SLACKER@" ; species name
-	dw 207, 529 ; height, weight
+	dw 8, 240 ; height, weight
 
-	db   "It sleeps for 20"
-	next "hours every day."
-	next "Making drowsy"
-
-	page "those that see it"
-	next "is one of its"
-	next "abilities.@"
+	db "Slakoth's heart beats just once"
+	next "a minute. Whatever happens, it"
+	next "is content to loaf around"
+	
+	page "motionless. It is rare to see"
+	next "this Pokémon in motion.@"

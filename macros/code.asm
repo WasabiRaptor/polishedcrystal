@@ -62,6 +62,12 @@ changebridgeblock: macro
 	ld [hl], \3
 ENDM
 
+FullWidthText: macro
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
+	call LoadStandardFont
+endm
+
 ; INPUT
 ; \1 = species
 ; \2 = false
@@ -104,3 +110,21 @@ retpoke: MACRO
 	cp \1
 	ret nz
 ENDM
+
+VWTextStart: macro
+IF _NARG == 2
+	ld a, (\1 + \2)
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile (\1 + \2))
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile (\1 + \2))
+	ld [wVariableWidthTextVRAM+1], a
+else
+	ld a, (\1)
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile (\1))
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile (\1))
+	ld [wVariableWidthTextVRAM+1], a
+endc
+endm

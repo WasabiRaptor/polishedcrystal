@@ -1,10 +1,8 @@
 	db "BAGWORM@" ; species name
-	dw 200, 160 ; height, weight
+	dw 6, 72 ; height, weight
 
-	db   "It spits out a"
-	next "fluid that it uses"
-	next "to glue tree bark"
-
-	page "to its body. The"
-	next "fluid hardens when"
-	next "it touches air.@"
+	db "Motionless, it hangs from"
+	next "trees, waiting for its bug"
+	next "Pokémon prey to come to it. Its"
+	
+	page "favorite in Alola is Cutiefly.@"

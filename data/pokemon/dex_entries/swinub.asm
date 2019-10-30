@@ -1,10 +1,12 @@
 	db "PIG@" ; species name
-	dw 104, 140 ; height, weight
+	dw 4, 65 ; height, weight
 
-	db   "It uses the tip of"
-	next "its nose to dig"
-	next "for food. Its nose"
-
-	page "is so tough that"
-	next "even frozen ground"
-	next "poses no problem.@"
+	db "Swinub roots for food by"
+	next "rubbing its snout against the"
+	next "ground. Its favorite food is a"
+	
+	page "mushroom that grows under the"
+	next "cover of dead grass. This"
+	next "Pokémon occasionally roots out"
+	
+	page "hot springs.@"

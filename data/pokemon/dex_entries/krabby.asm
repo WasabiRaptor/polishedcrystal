@@ -1,10 +1,10 @@
 	db "RIVER CRAB@" ; species name
-	dw 104, 140 ; height, weight
+	dw 4, 65 ; height, weight
 
-	db   "If it is unable"
-	next "to find food, it"
-	next "will absorb"
-
-	page "nutrients by"
-	next "swallowing a"
-	next "mouthful of sand.@"
+	db "Krabby live on beaches,"
+	next "burrowed inside holes dug into"
+	next "the sand. On sandy beaches with"
+	
+	page "little in the way of food, these"
+	next "Pokémon can be seen squabbling"
+	next "with each other over territory.@"

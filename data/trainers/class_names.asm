@@ -109,9 +109,9 @@ TrainerClassNames::
 	db "Executive@"        ; ARCHER
 	db "Executive@"        ; ARIANA
 	db "Boss@"             ; GIOVANNI
-	db "#mon Prof.@"       ; PROF_OAK
-	db "#mon Prof.@"       ; PROF_ELM
-	db "#mon Prof.@"       ; PROF_IVY
+	db "Pokémon Prof.@"       ; PROF_OAK
+	db "Pokémon Prof.@"       ; PROF_ELM
+	db "Pokémon Prof.@"       ; PROF_IVY
 	db "Mystery Man@"      ; MYSTICALMAN
 	db "Karate King@"      ; KARATE_KING
 	db "TowerTycoon@"      ; TOWERTYCOON

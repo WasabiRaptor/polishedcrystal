@@ -1,10 +1,8 @@
-    db "MAGICAL@" ; species name
-    dw 211, 97 ; height, weight
+	db "MAGICAL@" ; species name
+	dw 9, 44 ; height, weight
 
-    db   "It chants"
-    next "incantations."
-    next "While they usually"
-
-    page "torment targets,"
-    next "some chants bring"
-    next "happiness.@" 
+	db "Feared for its wrath and the"
+	next "curses it spreads, this Pokémon"
+	next "will also, on a whim, cast spells"
+	
+	page "that help people.@"

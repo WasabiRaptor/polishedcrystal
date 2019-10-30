@@ -1318,7 +1318,7 @@ endr
 	ret
 
 Text_NoShake: ; 0xedb5
-	; Oh no! The #MON broke free!
+	; Oh no! The Pokémon broke free!
 	text_jump UnknownText_0x1c5aa6
 	db "@"
 ; 0xedba
@@ -1370,7 +1370,7 @@ Text_SentToBillsPC: ; 0xedeb
 ; 0xedf0
 
 Text_AddedToPokedex: ; 0xedf0
-	; 's data was newly added to the #DEX.@ @
+	; 's data was newly added to the Pokédex.@ @
 	text_jump UnknownText_0x1c5b53
 	db "@"
 ; 0xedf5
@@ -2333,7 +2333,7 @@ Softboiled_MilkDrinkFunction: ; f3df (3:73df)
 ; f44a (3:744a)
 
 .Text_CantBeUsed: ; 0xf44a
-	; That can't be used on this #MON.
+	; That can't be used on this Pokémon.
 	text_jump UnknownText_0x1c5bac
 	db "@"
 ; 0xf44f
@@ -2995,28 +2995,28 @@ DontBeAThiefText: ; 0xf829
 ; 0xf82e
 
 Ball_BoxIsFullText: ; 0xf838
-	; The #MON BOX is full. That can't be used now.
+	; The Pokémon BOX is full. That can't be used now.
 	text_jump UnknownText_0x1c5e3a
 	db "@"
 ; 0xf83d
 
 Ball_MonIsHiddenText:
-	; The #MON can't be seen!
+	; The Pokémon can't be seen!
 	text_jump Text_MonIsHiddenFromBall
 	db "@"
 
 Ball_MonCantBeCaughtText:
-	; The #MON can't be caught!
+	; The Pokémon can't be caught!
 	text_jump Text_MonCantBeCaught
 	db "@"
 
 Ball_NuzlockeFailureText:
-	; You already encountered a #MON here.
+	; You already encountered a Pokémon here.
 	text_jump Text_NuzlockeBallFailure
 	db "@"
 
 Revive_NuzlockeFailureText:
-	; You can't revive #MON in NUZLOCKE mode!
+	; You can't revive Pokémon in NUZLOCKE mode!
 	text_jump Text_NuzlockeReviveFailure
 	db "@"
 

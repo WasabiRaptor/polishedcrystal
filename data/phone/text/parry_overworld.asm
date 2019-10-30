@@ -62,7 +62,7 @@ ParryRematchGiftText:
 	line "special all right."
 
 	para "If only I'd begun"
-	line "#mon when I was"
+	line "Pokémon when I was"
 	cont "a tad younger…"
 
 	para "I want you to work"

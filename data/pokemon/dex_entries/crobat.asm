@@ -1,10 +1,9 @@
 	db "BAT@" ; species name
-	dw 511, 1650 ; height, weight
+	dw 18, 750 ; height, weight
 
-	db   "As a result of its"
-	next "pursuit of faster,"
-	next "yet more silent"
-
-	page "flight, a new set"
-	next "of wings grew on"
-	next "its hind legs.@"
+	db "Its fangs are so sharp, if it"
+	next "bites you in the dark and sucks"
+	next "your blood, you won't notice"
+	
+	page "any pain or realize you've been"
+	next "bitten.@"

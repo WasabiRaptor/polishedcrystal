@@ -1,10 +1,10 @@
 	db "TINY SWALLOW@" ; species name
-	dw 100, 51 ; height, weight
+	dw 3, 23 ; height, weight
 
-	db   "When it gets cold,"
-	next "they migrate,"
-	next "flying over 180"
-
-	page "miles a day."
-	next "It hunts for"
-	next "tasty prey.@"
+	db "Taillow is young—it has only"
+	next "just left its nest. As a result, it"
+	next "sometimes becomes lonesome"
+	
+	page "and cries at night. This"
+	next "Pokémon feeds on Wurmple that"
+	next "live in forests.@"

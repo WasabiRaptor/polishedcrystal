@@ -1,11 +1,8 @@
-    db "BRUTAL@" ; species name
-    dw 511, 3527 ; height, weight
+	db "BRUTAL@" ; species name
+	dw 18, 1600 ; height, weight
 
-    db   "The heads on their"
-    next "arms do not have"
-    next "brains. They use"
-
-    page "all three heads to"
-    next "eat and destroy"
-    next "everything.@" 
-    
+	db "It responds to movement by"
+	next "attacking. This scary,"
+	next "three-headed Pokémon devours"
+	
+	page "everything in its path!"

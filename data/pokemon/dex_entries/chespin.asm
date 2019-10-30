@@ -1,10 +1,8 @@
-    db "SPINY NUT@" ; species name
-    dw 104, 198 ; height, weight
+	db "SPINY NUT@" ; species name
+	dw 4, 90 ; height, weight
 
-    db   "Such a thick shell"
-    next "of wood covers its"
-    next "even a direct hit"
-
-    page "from a truck"
-    next "wouldn't faze it.@"
-   
+	db "Such a thick shell of wood"
+	next "covers its head and back that"
+	next "even a direct hit from a truck"
+	
+	page "wouldn't faze it.@"

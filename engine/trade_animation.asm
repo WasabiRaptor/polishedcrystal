@@ -188,10 +188,10 @@ RunTradeAnimSequence: ; 28fa1
 	ld de, VTiles0 tile $31
 	call TradeAnim_GetFrontpic
 	ld a, [wPlayerTrademonSpecies]
-	ld de, wPlayerTrademonSpeciesName
+	ld de, wPlayerTrademonNickname
 	call TradeAnim_GetNickname
 	ld a, [wOTTrademonSpecies]
-	ld de, wOTTrademonSpeciesName
+	ld de, wOTTrademonNickname
 	call TradeAnim_GetNickname
 	jp TradeAnim_NormalPals
 ; 29082
@@ -813,7 +813,7 @@ TradeAnim_GetNickname: ; 294a9
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	pop de
-	ld bc, NAME_LENGTH
+	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
 	ret
 ; 294bb
@@ -885,7 +885,7 @@ ShowPlayerTrademonStats: ; 2951f
 	call TrademonStats_MonTemplate
 	ld de, wPlayerTrademonSpecies
 	call TrademonStats_PrintSpeciesNumber
-	ld de, wPlayerTrademonSpeciesName
+	ld de, wPlayerTrademonNickname
 	call TrademonStats_PrintSpeciesName
 	ld a, [wPlayerTrademonCaughtData]
 	ld de, wPlayerTrademonOTName
@@ -903,7 +903,7 @@ ShowOTTrademonStats: ; 29549
 	call TrademonStats_MonTemplate
 	ld de, wOTTrademonSpecies
 	call TrademonStats_PrintSpeciesNumber
-	ld de, wOTTrademonSpeciesName
+	ld de, wOTTrademonNickname
 	call TrademonStats_PrintSpeciesName
 	ld a, [wOTTrademonCaughtData]
 	ld de, wOTTrademonOTName
@@ -1317,11 +1317,11 @@ TradeAnim_NormalPals: ; 297ed
 LinkTradeAnim_LoadTradePlayerNames: ; 297ff
 	push de
 	ld de, wLinkPlayer1Name
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	pop hl
 	ld de, wLinkPlayer2Name
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 ; 29814

@@ -1,11 +1,9 @@
-    db "SCORCHING@" ; species name
-    dw 311, 540 ; height, weight
+	db "SCORCHING@" ; species name
+	dw 12, 245 ; height, weight
 
-    db   "In the fever of an"
-    next "exciting battle,"
-    next "it showers embers"
-
-    page "from between its"
-    next "feathers and takes"
-    next "to the air.@" 
-    
+	db "Its tough wings don't allow"
+	next "fire to pass through them. A"
+	next "long time ago, firefighters'"
+	
+	page "outfits were made from"
+	next "Talonflame wings.@"

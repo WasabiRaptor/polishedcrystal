@@ -54,5 +54,5 @@ ToddRematchText:
 	line "I even cut back my"
 
 	para "shopping to raise"
-	line "my #mon better!"
+	line "my Pokémon better!"
 	done

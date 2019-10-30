@@ -953,8 +953,7 @@ FarCopyRadioText:: ; 3a90
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 	ld a, e
 	ld l, a
 	ld a, d
@@ -963,8 +962,7 @@ FarCopyRadioText:: ; 3a90
 	ld bc, 2 * SCREEN_WIDTH
 	rst CopyBytes
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 	ret
 ; 3ab2
 

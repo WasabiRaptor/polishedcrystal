@@ -7,6 +7,8 @@ VariantAnimPointerTable:
     variant_animdata GROUP_GENERATION_ONE,  Kanto  
     variant_animdata GROUP_GENERATION_TWO,  Johto
     variant_animdata GROUP_GENERATION_THREE,  Hoenn
+    variant_animdata GROUP_GENERATION_FOUR,  Sinnoh
+    variant_animdata GROUP_GENERATION_FIVE,  Unova
     variant_animdata -1, Other
 
 variant_frames: macro
@@ -17,6 +19,8 @@ VariantFramesPointerTable:
     variant_frames GROUP_GENERATION_ONE,  Kanto
     variant_frames GROUP_GENERATION_TWO,  Johto
     variant_frames GROUP_GENERATION_THREE,  Hoenn
+    variant_frames GROUP_GENERATION_FOUR,  Sinnoh
+    variant_frames GROUP_GENERATION_FIVE,  Unova
     variant_frames -1, Other
 
 variant_bitmasks: macro
@@ -27,4 +31,6 @@ VariantBitmasksPointerTable:
     variant_bitmasks GROUP_GENERATION_ONE,  Kanto
     variant_bitmasks GROUP_GENERATION_TWO,  Johto
     variant_bitmasks GROUP_GENERATION_THREE,  Hoenn
+    variant_bitmasks GROUP_GENERATION_FOUR,  Sinnoh
+    variant_bitmasks GROUP_GENERATION_FIVE,  Unova
     variant_bitmasks -1, Other

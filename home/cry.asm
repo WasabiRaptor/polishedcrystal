@@ -61,7 +61,7 @@ LoadCryHeader:: ; 37f3
 	push bc
 	ld a, c
 	inc a
-	farcall GetRelevantCryPointers
+	call GetRelevantCryPointers
 	pop bc
 	ld a, d
 	rst Bankswitch

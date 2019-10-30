@@ -1,10 +1,8 @@
 	db "JUBILEE@" ; species name
-	dw 411, 838 ; height, weight
+	dw 15, 380 ; height, weight
 
-	db   "It shares many"
-	next "blessings with"
-	next "people who respect"
+	db "It shares many blessings with"
+	next "people who respect one"
+	next "another's rights and avoid"
 	
-	page "one another's "
-	next "rights and avoid "
-	next "needless strife.@"
+	page "needless strife.@"

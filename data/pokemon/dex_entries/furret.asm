@@ -1,10 +1,10 @@
 	db "LONG BODY@" ; species name
-	dw 511, 720 ; height, weight
+	dw 18, 325 ; height, weight
 
-	db   "It lives in narrow"
-	next "burrows that fit"
-	next "its slim body. The"
-
-	page "deeper the nests"
-	next "go, the more maze-"
-	next "like they become.@"
+	db "Furret has a very slim build.@"
+	next "When under attack, it can"
+	next "slickly squirm through narrow"
+	
+	page "spaces and get away. In spite of"
+	next "its short limbs, this Pokémon is"
+	next "very nimble and fleet.@"

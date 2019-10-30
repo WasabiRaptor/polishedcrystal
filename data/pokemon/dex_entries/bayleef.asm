@@ -1,10 +1,9 @@
 	db "LEAF@" ; species name
-	dw 311, 350 ; height, weight
+	dw 12, 158 ; height, weight
 
-	db   "The scent that"
-	next "wafts from the"
-	next "leaves on its neck"
-
-	page "causes anyone who"
-	next "smells it to"
-	next "become energetic.@"
+	db "Bayleef's neck is ringed by"
+	next "curled-up leaves. Inside each"
+	next "tubular leaf is a small shoot of"
+	
+	page "a tree. The fragrance of this"
+	next "shoot makes people peppy.@"

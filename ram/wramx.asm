@@ -8,10 +8,10 @@ wDefaultSpawnpoint:: ds 1
 UNION
 ; mon buffer
 wBufferMonNick:: ds PKMN_NAME_LENGTH
-wBufferMonOT:: ds NAME_LENGTH
+wBufferMonOT:: ds PLAYER_NAME_LENGTH
 wBufferMon:: party_struct wBufferMon
 	ds 8
-wMonOrItemNameBuffer:: ds NAME_LENGTH
+wMonOrItemNameBuffer:: ds PLAYER_NAME_LENGTH
 
 NEXTU
 ; mail temp storage
@@ -26,7 +26,7 @@ wBugContestResults::
 wBugContestWinnersEnd::
 	bugcontestwinner wBugContestTemp
 	ds 4
-wBugContestWinnerName:: ds NAME_LENGTH
+wBugContestWinnerName:: ds PLAYER_NAME_LENGTH
 
 NEXTU
 ; mart items
@@ -632,7 +632,7 @@ wPokedexShowPointerBank:: ds 1
 wFailedToFlee:: ds 1
 wNumFleeAttempts:: ds 1
 
-wOTPlayerName:: ds NAME_LENGTH
+wOTPlayerName:: ds PLAYER_NAME_LENGTH
 wOTPlayerID:: ds 2
 wOTPartyCount:: ds 1
 wOTPartySpecies:: ds PARTY_LENGTH + 1 ; legacy scripts don't check PartyCount
@@ -646,7 +646,7 @@ wOTPartyMon4:: party_struct wOTPartyMon4
 wOTPartyMon5:: party_struct wOTPartyMon5
 wOTPartyMon6:: party_struct wOTPartyMon6
 wOTPartyMonsEnd::
-wOTPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH
+wOTPartyMonOT:: ds PLAYER_NAME_LENGTH * PARTY_LENGTH
 wOTPartyMonNicknames:: ds PKMN_NAME_LENGTH * PARTY_LENGTH
 wOTPartyDataEnd::
 
@@ -726,11 +726,11 @@ wPlayerGender::
 ;	1 female
 	ds 1
 
-wPlayerName:: ds NAME_LENGTH
-wRivalName:: ds NAME_LENGTH
-wBackupName:: ds NAME_LENGTH
+wPlayerName:: ds PLAYER_NAME_LENGTH
+wRivalName:: ds PLAYER_NAME_LENGTH
+wBackupName:: ds PLAYER_NAME_LENGTH
 
-wTrendyPhrase:: ds NAME_LENGTH
+wTrendyPhrase:: ds PLAYER_NAME_LENGTH
 
 wSavedAtLeastOnce:: ds 1
 
@@ -1079,7 +1079,7 @@ wPartyMon4:: party_struct wPartyMon4
 wPartyMon5:: party_struct wPartyMon5
 wPartyMon6:: party_struct wPartyMon6
 
-wPartyMonOT:: ds NAME_LENGTH * PARTY_LENGTH
+wPartyMonOT:: ds PLAYER_NAME_LENGTH * PARTY_LENGTH
 
 wPartyMonNicknames:: ds PKMN_NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknamesEnd::
@@ -1099,7 +1099,7 @@ wDayCareMan::
 
 wBreedMon1::
 wBreedMon1Nick::  ds PKMN_NAME_LENGTH
-wBreedMon1OT:: ds NAME_LENGTH
+wBreedMon1OT:: ds PLAYER_NAME_LENGTH
 wBreedMon1Stats:: box_struct wBreedMon1
 
 wDayCareLady::
@@ -1112,11 +1112,11 @@ wBreedMotherOrNonDitto:: ds 1
 
 wBreedMon2::
 wBreedMon2Nick:: ds PKMN_NAME_LENGTH
-wBreedMon2OT:: ds NAME_LENGTH
+wBreedMon2OT:: ds PLAYER_NAME_LENGTH
 wBreedMon2Stats:: box_struct wBreedMon2
 
 wEggNick:: ds PKMN_NAME_LENGTH
-wEggOT:: ds NAME_LENGTH
+wEggOT:: ds PLAYER_NAME_LENGTH
 wEggMon:: box_struct wEggMon
 
 wBugContestSecondPartySpecies:: ds 1
@@ -1138,7 +1138,7 @@ wRoamMons_LastMapGroup:: ds 1
 wBestMagikarpLengthMm::
 wBestMagikarpLengthMmHi:: ds 1
 wBestMagikarpLengthMmLo:: ds 1
-wMagikarpRecordHoldersName:: ds NAME_LENGTH
+wMagikarpRecordHoldersName:: ds PLAYER_NAME_LENGTH
 
 wRegisteredItems::
 ; You can map 4 items, to select + directions
@@ -1424,6 +1424,7 @@ wDecompressScratch:: ds $80 tiles
 NEXTU
 wScratchTileMap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
 wScratchAttrMap:: ds BG_MAP_WIDTH * BG_MAP_HEIGHT
+
 ENDU
 
 SECTION "Window Stack", WRAMX

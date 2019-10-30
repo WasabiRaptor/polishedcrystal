@@ -1,11 +1,10 @@
-    db "MUSHROOM@" ; species name
-    dw 311, 864 ; height, weight
+	db "MUSHROOM@" ; species name
+	dw 12, 392 ; height, weight
 
-    db   "Its short arms"
-    next "stretch when it"
-    next "throws punches."
-
-    page "Its technique is"
-    next "equal to that of"
-    next "pro boxers.@" 
-    
+	db "The seeds ringing Breloom's"
+	next "tail are made of hardened toxic"
+	next "spores. It is horrible to eat the"
+	
+	page "seeds. Just taking a bite of this"
+	next "Pokémon's seed will cause"
+	next "your stomach to rumble.@"

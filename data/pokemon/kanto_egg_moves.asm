@@ -103,15 +103,6 @@ Nidoran_MEggMoves:
 	db COUNTER
 	db $ff
 
-CleffaEggMoves:
-	db CALM_MIND
-	db BELLY_DRUM
-	db METRONOME
-	db AMNESIA
-	db SPLASH ; requires Hoppip
-	db SOFTBOILED
-	db $ff
-
 VulpixEggMoves:
 	db DISABLE
 	db FLARE_BLITZ
@@ -124,12 +115,6 @@ VulpixEggMoves:
 	db $ff
 
 Vulpix_AlolaEggMoves:
-	db $ff
-
-IgglybuffEggMoves:
-	db FEINT_ATTACK
-	db PERISH_SONG
-	db MOONBLAST
 	db $ff
 
 ZubatEggMoves:
@@ -299,7 +284,7 @@ SlowpokeEggMoves:
 	db ZEN_HEADBUTT
 	db $ff
 
-FarfetchDEggMoves:
+Farfetch_dEggMoves:
 	db FORESIGHT
 	db GUST
 	db QUICK_ATTACK
@@ -420,13 +405,6 @@ HappinyEggMoves:
 	db HEAL_BELL
 	db $ff
 
-PichuEggMoves:
-	db DISARM_VOICE
-	db DOUBLE_SLAP
-	db ENCORE
-	db REVERSAL
-	db $ff
-
 GoldeenEggMoves:
 	db $ff
 
@@ -486,37 +464,6 @@ ScytherEggMoves:
 	db SAFEGUARD
 	db LIGHT_SCREEN
 	db NIGHT_SLASH
-	db $ff
-
-SmoochumEggMoves:
-	db BULK_UP
-	db NASTY_PLOT
-	db $ff
-
-ElekidEggMoves:
-	db BARRIER
-	db CROSS_CHOP
-	db KARATE_CHOP
-	db BULK_UP
-	db $ff
-
-MagbyEggMoves:
-	db BARRIER
-	db BELLY_DRUM
-	db CROSS_CHOP
-	db FLARE_BLITZ
-	db FOCUS_ENERGY
-	db KARATE_CHOP
-	db MACH_PUNCH
-	db SCREECH
-	db $ff
-
-TyrogueEggMoves:
-	db BULLET_PUNCH
-	db HI_JUMP_KICK
-	db MACH_PUNCH
-	db PURSUIT
-	db RAPID_SPIN
 	db $ff
 
 PinsirEggMoves:

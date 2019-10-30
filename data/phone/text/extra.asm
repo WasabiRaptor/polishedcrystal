@@ -38,7 +38,7 @@ UnknownText_0x640e6: ; 0x640e6
 	line "you!"
 
 	para "You saved that"
-	line "#mon at the"
+	line "Pokémon at the"
 
 	para "Lighthouse, didn't"
 	line "you?"
@@ -294,7 +294,7 @@ UnknownText_0x648dc: ; 0x648dc
 	para "How's your mom?"
 
 	para "Have you got lots"
-	line "of #mon?"
+	line "of Pokémon?"
 
 	para "Is it going to be"
 	line "sunny tomorrow?"
@@ -349,7 +349,7 @@ UnknownText_0x64a71: ; 0x64a71
 
 UnknownText_0x64ada: ; 0x64ada
 	text "Hey, let's battle"
-	line "our #mon!"
+	line "our Pokémon!"
 
 	para "I won't lose to"
 	line "you battling or in"
@@ -392,7 +392,7 @@ UnknownText_0x64b5f: ; 0x64b5f
 UnknownText_0x64bc6: ; 0x64bc6
 	text "I haven't had any"
 	line "luck seeing rare"
-	cont "#mon lately…"
+	cont "Pokémon lately…"
 
 	para "But I know they're"
 	line "out there!"
@@ -665,7 +665,7 @@ UnknownText_0x65271: ; 0x65271
 	line "observations."
 
 	para "I wish I could"
-	line "become a #mon"
+	line "become a Pokémon"
 
 	para "researcher like"
 	line "Prof.Oak soon."
@@ -733,11 +733,11 @@ UnknownText_0x65481: ; 0x65481
 	para "He's Prof.Oak's"
 	line "grandson and a"
 
-	para "former #mon"
+	para "former Pokémon"
 	line "League Champion!"
 
 	para "He's one super"
-	line "#mon trainer!"
+	line "Pokémon trainer!"
 	done
 ; 0x654ea
 
@@ -749,7 +749,7 @@ UnknownText_0x654ea: ; 0x654ea
 	para "When she's around,"
 	line "even the most"
 
-	para "ferocious #mon"
+	para "ferocious Pokémon"
 	line "calm right down."
 	done
 ; 0x65555
@@ -772,7 +772,7 @@ UnknownText_0x655c7: ; 0x655c7
 	line "is to compile a"
 
 	para "comprehensive"
-	line "#dex."
+	line "Pokédex."
 
 	para "I envy you for"
 	line "taking part in"
@@ -794,7 +794,7 @@ UnknownText_0x65628: ; 0x65628
 ; 0x6569b
 
 UnknownText_0x6569b: ; 0x6569b
-	text "#mon League is"
+	text "Pokémon League is"
 	line "the great gather-"
 	cont "ing place for all"
 
@@ -804,7 +804,7 @@ UnknownText_0x6569b: ; 0x6569b
 	para "Prof.Oak acts as"
 	line "an advisor to the"
 
-	para "#mon League's"
+	para "Pokémon League's"
 	line "headquarters."
 
 	para "He really is a"
@@ -813,7 +813,7 @@ UnknownText_0x6569b: ; 0x6569b
 ; 0x6574a
 
 UnknownText_0x6574a: ; 0x6574a
-	text "Prof.Oak's #mon"
+	text "Prof.Oak's Pokémon"
 	line "Talk is a popular"
 	cont "radio show, right?"
 
@@ -840,7 +840,7 @@ UnknownText_0x65810: ; 0x65810
 	para "But rather than"
 	line "battling, he found"
 
-	para "#mon themselves"
+	para "Pokémon themselves"
 	line "to be interesting."
 
 	para "So he abandoned"
@@ -880,7 +880,7 @@ UnknownText_0x65969: ; 0x65969
 	para "While traveling,"
 	line "he must've learned"
 
-	para "about #mon"
+	para "about Pokémon"
 	line "naturally."
 
 	para "I envy him…"
@@ -963,7 +963,7 @@ UnknownText_0x65bc8: ; 0x65bc8
 	line "cute, so I left"
 
 	para "it…"
-	line "#mon have to be"
+	line "Pokémon have to be"
 
 	para "cute. They're no"
 	line "good otherwise."
@@ -1146,7 +1146,7 @@ UnknownText_0x660be: ; 0x660be
 	text "Oh yeah, I got an"
 	line "extremely rare"
 
-	para "#mon in a trade"
+	para "Pokémon in a trade"
 	line "a while back."
 
 	para "Do you want to"
@@ -1173,7 +1173,7 @@ UnknownText_0x6613c: ; 0x6613c
 
 UnknownText_0x6618c: ; 0x6618c
 	text "Oh yeah, I saw a"
-	line "rare #mon about"
+	line "rare Pokémon about"
 	cont "an hour ago."
 
 	para "It was my first"
@@ -1197,7 +1197,7 @@ UnknownText_0x66214: ; 0x66214
 	para "It'll be a chance"
 	line "to see my rare"
 
-	para "#mon. It'll be"
+	para "Pokémon. It'll be"
 	line "worth your time!"
 
 	para "You know where--"
@@ -1250,7 +1250,7 @@ UnknownText_0x663a1: ; 0x663a1
 	text "Did you know…?"
 	line "Abra was the first"
 
-	para "#mon that Bill"
+	para "Pokémon that Bill"
 	line "ostensibly caught."
 	done
 ; 0x663e6
@@ -1314,7 +1314,7 @@ UnknownText_0x6651e: ; 0x6651e
 
 UnknownText_0x66579: ; 0x66579
 	text "You want to see my"
-	line "rare #mon."
+	line "rare Pokémon."
 
 	para "Hurry over to"
 	line "@"
@@ -1564,7 +1564,7 @@ UnknownText_0x66b3e: ; 0x66b3e
 	line "more fun fishing"
 
 	para "than beating wild"
-	line "#mon."
+	line "Pokémon."
 	done
 ; 0x66b8f
 
@@ -1822,7 +1822,7 @@ UnknownText_0x671a4: ; 0x671a4
 	text "!"
 
 	para "I've raised my"
-	line "#mon properly!"
+	line "Pokémon properly!"
 	done
 ; 0x671eb
 
@@ -1861,7 +1861,7 @@ UnknownText_0x67281: ; 0x67281
 UnknownText_0x67294: ; 0x67294
 	text "I'm working hard"
 	line "to raise my"
-	cont "#mon!"
+	cont "Pokémon!"
 
 	para "Come back for"
 	line "another battle!"

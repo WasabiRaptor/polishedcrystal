@@ -6,7 +6,8 @@ Pokepic:: ; 244e3
 	ld a, [wIsCurMonInParty]
 	and a
 	jr nz, .partymon
-	farcall LoadPokemonPalette
+	ld de, wUnknBGPals palette PAL_BG_TEXT
+	call GetMonPalette
 	ld a, 1
 	ld [wCurGroup], a
 	jr .got_palette
@@ -46,7 +47,8 @@ Trainerpic::
 	call MenuBox
 	call UpdateSprites
 	call SafeCopyTilemapAtOnce
-	farcall LoadTrainerPalette
+	ld de, wUnknBGPals palette PAL_BG_TEXT
+	farcall GetTrainerPalette
 	call UpdateTimePals
 	xor a
 	ldh [hBGMapMode], a

@@ -517,26 +517,25 @@ PrintHour: ; 90b3e (24:4b3e)
 
 GetTimeOfDayString: ; 90b58 (24:4b58)
 	ld a, c
-	cp MORN_HOUR
-	jr c, .nite
-	cp DAY_HOUR
-	jr c, .morn
-	cp NITE_HOUR
-	jr c, .day
-.nite
+	cp DAWN_HOUR
 	ld de, .NITE
-	ret
-.morn
+	ret c
+	cp MIDDAY_HOUR
 	ld de, .MORN
-	ret
-.day
+	ret c
+	cp DUSK_HOUR
 	ld de, .DAY
+	ret c
+	cp MIDNIGHT_HOUR
+	ld de, .DUSK
 	ret
+
 ; 90b71 (24:4b71)
 
-.NITE: db "Nite@"
-.MORN: db "Morn@"
-.DAY: db "Day@"
+.NITE: db "Midnight@"
+.MORN: db "Dawn@"
+.DAY: db "Midday@"
+.DUSK: db "Dusk@"
 ; 90b7f
 
 AdjustHourForAMorPM:
@@ -586,7 +585,7 @@ PrintHoursMins ; 1dd6bb (77:56bb)
 	ld [hl], " "
 	lb bc, 1, 2
 	call PrintNum
-	ld [hl], ":"
+	ld [hl], "<COLON>"
 	inc hl
 	ld d, h
 	ld e, l
@@ -606,8 +605,15 @@ PrintHoursMins ; 1dd6bb (77:56bb)
 	jr c, .place_am_pm
 	ld de, .String_PM
 .place_am_pm
-	inc hl
-	jp PlaceString
+	push hl
+	xor a
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+	pop hl
+	ld a, 5
+	ld [wVariableWidthTextCurTileColsFilled], a
+	jp PlaceSpecialString
 
 .String_AM: db "AM@" ; 1dd6fc
 .String_PM: db "PM@" ; 1dd6ff
@@ -864,8 +870,6 @@ TownMap_ConvertLineBreakCharacters: ; 1de2c5
 	ld a, [hl]
 	cp "@"
 	jr z, .end
-	cp "<NEXT>"
-	jr z, .space
 	cp "¯"
 	jr z, .space
 	inc hl
@@ -1850,8 +1854,8 @@ NoRadioName: ; 918a9 (24:58a9)
 ; 918bf
 
 OaksPkmnTalkName:     db "Oak's <PK><MN> Talk@"
-PokedexShowName:      db "#dex Show@"
-PokemonMusicName:     db "#mon Music@"
+PokedexShowName:      db "Pokédex Show@"
+PokemonMusicName:     db "Pokémon Music@"
 LuckyChannelName:     db "Lucky Channel@"
 UnknownStationName:   db "?????@"
 
@@ -2079,8 +2083,6 @@ PlayRadio: ; 91a53
 ; 91acb
 
 .OakOrPnP: ; 91acb
-	call IsInJohto
-	jr nz, .kanto_or_orange
 	call UpdateTime
 	ld a, [wTimeOfDay]
 	and a

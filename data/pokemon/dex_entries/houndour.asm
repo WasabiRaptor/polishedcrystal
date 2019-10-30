@@ -1,10 +1,9 @@
 	db "DARK@" ; species name
-	dw 200, 240 ; height, weight
+	dw 6, 108 ; height, weight
 
-	db   "Around dawn, its"
-	next "ominous howl"
-	next "echoes through the"
-
-	page "area to announce"
-	next "that this is its"
-	next "territory.@"
+	db "It cooperates with others"
+	next "skillfully. When it becomes your"
+	next "partner, it's very loyal to you"
+	
+	page "as its Trainer and will obey"
+	next "your orders.@"

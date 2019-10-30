@@ -1,10 +1,10 @@
 	db "POISON BEE@" ; species name
-	dw 303, 650 ; height, weight
+	dw 10, 295 ; height, weight
 
-	db   "It uses sharp,"
-	next "poisonous stings"
-	next "to defeat prey,"
-
-	page "then takes the"
-	next "victim back to its"
-	next "nest for food.@"
+	db "Beedrill is extremely"
+	next "territorial. No one should ever"
+	next "approach its nest—this is for"
+	
+	page "their own safety. If angered,"
+	next "they will attack in a furious"
+	next "swarm.@"

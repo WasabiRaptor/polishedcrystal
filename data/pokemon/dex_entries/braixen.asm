@@ -1,13 +1,8 @@
-    db "FOX@" ; species name
-    dw 303, 320 ; height, weight
+	db "FOX@" ; species name
+	dw 10, 145 ; height, weight
 
-    db   "It has a twig"
-    next "stuck in its tail."
-    next "With friction from"
-
-    page "its tail fur, it"
-    next "sets the twig on"
-    next "fire and launches" 
-         
-    page "into battle.@"
-   
+	db "When the twig is plucked from"
+	next "its tail, friction sets the twig"
+	next "alight. The flame is used to send"
+	
+	page "signals to its allies.@"

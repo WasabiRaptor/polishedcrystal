@@ -1,6 +1,8 @@
 INCLUDE "data/pokemon/kanto_menu_icon_pals.asm"
 INCLUDE "data/pokemon/johto_menu_icon_pals.asm"
 INCLUDE "data/pokemon/hoenn_menu_icon_pals.asm"
+INCLUDE "data/pokemon/sinnoh_menu_icon_pals.asm"
+INCLUDE "data/pokemon/unova_menu_icon_pals.asm"
 
 LoadOverworldMonIcon: ; 8e82b
 	ld a, e
@@ -184,7 +186,7 @@ LoadPartyMenuMonIcon:
 	ld [hl], a
 	ret
 
-LoadNamingScreenMonIcon:
+LoadNamingScreenMonIcon::
 	push hl
 	push de
 	push bc
@@ -208,7 +210,7 @@ LoadNamingScreenMonIcon:
 	pop hl
 	ret
 
-LoadMoveMenuMonIcon:
+LoadMoveMenuMonIcon::
 	push hl
 	push de
 	push bc
@@ -339,7 +341,7 @@ FlyFunction_GetMonIcon: ; 8e9bc (23:69bc)
 	jp GetIcon_a
 ; 8e9cc (23:69cc)
 
-GetMemIconGFX: ; 8e9db (23:69db)
+GetMemIconGFX:: ; 8e9db (23:69db)
 	ld a, [wCurIconTile]
 GetIconGFX: ; 8e9de
 	call GetIcon_a

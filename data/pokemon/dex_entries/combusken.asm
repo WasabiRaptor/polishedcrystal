@@ -1,10 +1,10 @@
 	db "YOUNG FOWL@" ; species name
-	dw 211, 430 ; height, width
+	dw 9, 195 ; height, weight
 
-	db   "It boosts its"
-	next "concentration by"
-	next "emitting harsh"
+	db "Combusken battles with the"
+	next "intensely hot flames it spews"
+	next "from its beak and with"
 	
-	page "cries. Its kicks"
-	next "have outstanding"
-	next "destructive power.@"
+	page "outstandingly destructive kicks.@"
+	next "This Pokémon's cry is very"
+	next "loud and distracting.@"

@@ -1,10 +1,9 @@
 	db "WING FISH@" ; species name
-	dw 104, 154 ; height, weight
+	dw 4, 70 ; height, weight
 
-	db   "It absorbs sun-"
-	next "light with the"
-	next "pink areas of its"
-
-	page "skin, which shine."
-	next "This appears to be"
-	next "its camouflage.@"
+	db "When night falls, their pink"
+	next "patterns begin to shine.@"
+	next "They're popular with divers,"
+	
+	page "so there are resorts that feed"
+	next "them to keep them close.@"

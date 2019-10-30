@@ -6,7 +6,7 @@
         
         db NORMAL, NORMAL ; type
         db 255 ; catch rate
-        db 390 ; base exp
+        db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 4 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/audino/front.dimensions"  

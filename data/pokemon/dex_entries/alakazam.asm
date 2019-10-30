@@ -1,10 +1,9 @@
 	db "PSI@" ; species name
-	dw 411, 1060 ; height, weight
+	dw 15, 480 ; height, weight
 
-	db   "It has an IQ of"
-	next "5000. It calcu-"
-	next "lates many things"
-
-	page "in order to gain"
-	next "the edge in every"
-	next "battle.@"
+	db "Alakazam uses its psychic"
+	next "powers to make the spoons it"
+	next "carries. Each spoon is an"
+	
+	page "original that there's only one"
+	next "of in the whole world.@"

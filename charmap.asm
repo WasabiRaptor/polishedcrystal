@@ -61,7 +61,7 @@
 	charmap "<_CONT>",  $4b
 	charmap "<SCRL2>",  $4c
 
-	; unused: $4d
+	charmap "<_NEXT>", $4d
 
 	charmap "<NL>",     $4e
 	charmap "<LINE>",   $4f
@@ -70,7 +70,7 @@
 	charmap "<PARA>",   $51
 	charmap "<PLAYER>", $52
 	charmap "<RIVAL>",  $53
-	charmap "#",        $54
+	charmap "Poké",     $54
 	charmap "<CONT>",   $55
 	charmap "<TRENDY>", $56
 	charmap "<DONE>",   $57
@@ -81,7 +81,7 @@
 
 	charmap "the",      $5c
 	charmap "you",      $5d
-	charmap "#mon",     $5e
+	charmap "Pokémon",  $5e
 
 ; Battle characters
 
@@ -184,17 +184,15 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "”",        $bb
 	charmap "-",        $bc
 	charmap ":",        $bd
-	charmap "♀",        $be
-	charmap "♂",        $bf
 
 	charmap "'",        $c0
-	charmap "'d",       $c1
-	charmap "'l",       $c2
-	charmap "'m",       $c3
-	charmap "'r",       $c4
-	charmap "'s",       $c5
-	charmap "'t",       $c6
-	charmap "'v",       $c7
+	;charmap "'d",       $c1
+	;charmap "'l",       $c2
+	;charmap "'m",       $c3
+	;charmap "'r",       $c4
+	;charmap "'s",       $c5
+	;charmap "'t",       $c6
+	;charmap "'v",       $c7
 
 	charmap "é",        $c8
 
@@ -205,7 +203,6 @@ BATTLEEXTRA_GFX_START EQU $5f
 
 	charmap "&",        $cd
 	charmap "…",        $ce
-	charmap "/",        $cf
 
 ; cannot be used with portraits
 	charmap "<ID>",     $d0
@@ -216,8 +213,14 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "<BLACK>",  $d5
 	charmap "<NONO>",   $d6
 
+	charmap "♀",        $da
+	charmap "♂",        $db
+	charmap "%",        $dc
+
 	charmap "↑",        $dd
 	charmap "↓",        $de
+	charmap "<SHARP>",  $df
+
 
 ;symbols and numbers
 	charmap "♪",        $d9
@@ -237,9 +240,9 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "¥",        $ea
 	charmap "×",        $eb
 	charmap "★",        $ec
-	charmap "%",        $ed
+	charmap "/",        $ed
 	charmap "+",        $ee
-	charmap "<SHARP>",  $ef
+	charmap "<COLON>", 	$ef
 
 ; arrows
 	charmap "▼",        $f0

@@ -22,4 +22,4 @@ BuenasPasswordTable:
 ;.Types:         db BUENA_STRING,  6, "Flying@", "Bug@", "Grass@"
 ;.Moves:         db BUENA_MOVE,   12, TACKLE, GROWL, MUD_SLAP
 ;.XItems:        db BUENA_ITEM,   12, X_ATTACK, X_DEFEND, X_SPEED
-;.RadioStations: db BUENA_STRING, 13, "#mon Talk@", "#mon Music@", "Lucky Channel@"
+;.RadioStations: db BUENA_STRING, 13, "Pokémon Talk@", "Pokémon Music@", "Lucky Channel@"

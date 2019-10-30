@@ -992,13 +992,13 @@ UnknownText_0x1529c: ; 0x1529c
 ; 0x152a1
 
 UnknownText_0x152a1: ; 0x152a1
-	; When you change a #MON BOX, data will be saved. OK?
+	; When you change a Pokémon BOX, data will be saved. OK?
 	text_jump UnknownText_0x1c462a
 	db "@"
 ; 0x152a6
 
 UnknownText_0x152a6: ; 0x152a6
-	; Each time you move a #MON, data will be saved. OK?
+	; Each time you move a Pokémon, data will be saved. OK?
 	text_jump UnknownText_0x1c465f
 	db "@"
 ; 0x152ab

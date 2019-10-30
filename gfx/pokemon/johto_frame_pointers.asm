@@ -16,73 +16,80 @@ JohtoFramesPointers::
 	add_frames Ledian
 	add_frames Spinarak
 	add_frames Ariados
+	add_frames Crobat
 	add_frames Chinchou
 	add_frames Lanturn
+	add_frames Pichu
+	add_frames Cleffa
+	add_frames Igglybuff
 	add_frames Togepi
 	add_frames Togetic
-	add_frames Togekiss
 	add_frames Natu
 	add_frames Xatu
 	add_frames Mareep
 	add_frames Flaaffy
 	add_frames Ampharos
-	add_frames Azurill
+	add_frames Bellossom
 	add_frames Marill
 	add_frames Azumarill
-	add_frames Bonsly
 	add_frames Sudowoodo
+	add_frames Politoed
 	add_frames Hoppip
 	add_frames Skiploom
 	add_frames Jumpluff
 	add_frames Aipom
-    add_frames Ambipom
 	add_frames Sunkern
 	add_frames Sunflora
 	add_frames Yanma
-	add_frames Yanmega
 	add_frames Wooper
 	add_frames Quagsire
+	add_frames Espeon
+	add_frames Umbreon
 	add_frames Murkrow
-	add_frames Honchkrow
+	add_frames Slowking
 	add_frames Misdreavus
-	add_frames Mismagius
 	add_frames Unown
-    add_frames Wynaut
 	add_frames Wobbuffet
 	add_frames Girafarig
 	add_frames Pineco
 	add_frames Forretress
 	add_frames Dunsparce
 	add_frames Gligar
-	add_frames Gliscor
+	add_frames Steelix
 	add_frames Snubbull
 	add_frames Granbull
 	add_frames Qwilfish
+	add_frames Scizor
 	add_frames Shuckle
 	add_frames Heracross
 	add_frames Sneasel
-	add_frames Weavile
 	add_frames Teddiursa
 	add_frames Ursaring
 	add_frames Slugma
 	add_frames Magcargo
 	add_frames Swinub
 	add_frames Piloswine
-	add_frames Mamoswine
 	add_frames Corsola
 	add_frames Remoraid
 	add_frames Octillery
 	add_frames Delibird
-	add_frames Mantyke
 	add_frames Mantine
 	add_frames Skarmory
 	add_frames Houndour
 	add_frames Houndoom
+	add_frames Kingdra
 	add_frames Phanpy
 	add_frames Donphan
+	add_frames Porygon2
 	add_frames Stantler
 	add_frames Smeargle
+	add_frames Tyrogue
+	add_frames Hitmontop
+	add_frames Smoochum
+	add_frames Elekid
+	add_frames Magby
 	add_frames Miltank
+	add_frames Blissey
 	add_frames Raikou
 	add_frames Entei
 	add_frames Suicune
@@ -90,5 +97,5 @@ JohtoFramesPointers::
 	add_frames Pupitar
 	add_frames Tyranitar
 	add_frames Lugia
-	add_frames HoOh
+	add_frames Ho_Oh
 	add_frames Celebi

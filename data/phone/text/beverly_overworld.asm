@@ -2,7 +2,7 @@ BeverlyAskNumber1Text:
 	text "Your Marill is so"
 	line "cute and adorable!"
 
-	para "You love #mon"
+	para "You love Pokémon"
 	line "just like I do!"
 
 	para "Want to trade"

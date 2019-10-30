@@ -1,9 +1,8 @@
-    db "GRIPPER@" ; species name
-    dw 703, 2350 ; height, weight
+	db "GRIPPER@" ; species name
+	dw 22, 1066 ; height, weight
 
-    db   "It is said to take"
-    next "lost spirits into"
-    next "its pliant body"
-
-    page "and guide them"
-    next "home.@"
+	db "The antenna on its head"
+	next "captures radio waves from the"
+	next "world of spirits that command"
+	
+	page "it to take people there.@"

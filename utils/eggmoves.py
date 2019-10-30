@@ -78,7 +78,7 @@ def get_level_up_moves():
 			line = line.rstrip()
 			# Assume that evo/attack data is labeled consistently
 			if line.endswith('EvosAttacks:'):
-				# 'MrMimeEvosAttacks:' => 'mrmime'
+				# 'Mr_MimeEvosAttacks:' => 'mrmime'
 				simple_name = line[:-12].lower()
 				if simple_name not in underscore_names:
 					raise RuntimeError('bad EvosAttacks name: %s' % simple_name)
@@ -125,7 +125,7 @@ def get_egg_moves():
 				continue
 			# Assume that egg move data is labeled consistently
 			if line.endswith('EggMoves:'):
-				# 'MrMimeEggMoves:' => 'mrmime'
+				# 'Mr_MimeEggMoves:' => 'mrmime'
 				simple_name = line[:-9].lower()
 				if simple_name not in underscore_names:
 					raise RuntimeError('bad EggMoves name: %s' % simple_name)

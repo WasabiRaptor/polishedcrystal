@@ -1,11 +1,8 @@
-    db "CRUEL@" ; species name
-    dw 307, 827 ; height, weight
+	db "CRUEL@" ; species name
+	dw 11, 375 ; height, weight
 
-    db   "Stealthily, it"
-    next "sneaks up on its"
-    next "target, striking"
-
-    page "from behind before"
-    next "its victim has a"
-    next "chance to react.@" 
- 
+	db "Stealthily, it sneaks up on its"
+	next "target, striking from behind"
+	next "before its victim has a chance"
+	
+	page "to react.@"

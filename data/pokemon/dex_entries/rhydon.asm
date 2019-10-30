@@ -1,10 +1,13 @@
 	db "DRILL@" ; species name
-	dw 603, 2650 ; height, weight
+	dw 19, 1200 ; height, weight
 
-	db   "By lightly spin-"
-	next "ning its drill-"
-	next "like horn, it can"
-
-	page "easily shatter"
-	next "even a diamond in"
-	next "the rough.@"
+	db "Rhydon has a horn that serves"
+	next "as a drill. It is used for"
+	next "destroying rocks and boulders.@"
+	
+	page "This Pokémon occasionally"
+	next "rams into streams of magma,"
+	next "but the armor-like hide"
+	
+	page "prevents it from feeling the"
+	next "heat.@"

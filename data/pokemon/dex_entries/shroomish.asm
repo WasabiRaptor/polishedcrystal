@@ -1,10 +1,10 @@
-    db "MUSHROOM@" ; species name
-    dw 104, 99 ; height, weight
+	db "MUSHROOM@" ; species name
+	dw 4, 45 ; height, weight
 
-    db   "If it senses"
-    next "danger, it"
-    next "scatters spores"
-
-    page "from the top of"
-    next "its head to"
-    next "protect itself.@" 
+	db "If Shroomish senses danger, it"
+	next "shakes its body and scatters"
+	next "spores from the top of its head.@"
+	
+	page "This Pokémon's spores are so"
+	next "toxic, they make trees and"
+	next "weeds wilt.@"

@@ -1,10 +1,6 @@
-    db "GlEAM EYES@" ; species name
-    dw 407, 926 ; height, weight
+	db "GLEAM EYES@" ; species name
+	dw 14, 420 ; height, weight
 
-    db   "It can see clearly"
-    next "through walls to"
-    next "track down its"
-
-    page "prey and seek its"
-    next "lost young.@"
-  
+	db "Luxray's ability to see through"
+	next "objects comes in handy when"
+	next "it's scouting for danger.@"

@@ -194,6 +194,18 @@ endm
 	placeholder_zero NORMALIZE
 	placeholder_zero WONDER_GUARD
 
+	placeholder_zero MULTITYPE
+	placeholder_zero BAD_DREAMS
+	placeholder_zero SLOW_START
+	placeholder_zero HEATPROOF
+
+	placeholder_zero FLARE_BOOST
+	placeholder_zero FLOWER_GIFT
+	placeholder_zero TERAVOLT
+	placeholder_zero TURBOBLAZE
+	placeholder_zero ZEN_MODE
+	placeholder_zero VICTORY_STAR
+
 ABILITY_1      EQU %00100000
 ABILITY_2      EQU %01000000
 HIDDEN_ABILITY EQU %01100000

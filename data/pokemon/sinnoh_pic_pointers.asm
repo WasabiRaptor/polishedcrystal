@@ -18,43 +18,47 @@ SinnohPicPointers::
 	add_pics Shinx
 	add_pics Luxio
 	add_pics Luxray
+	add_pics Budew
+	add_pics Roserade
 	add_pics Crainidos
 	add_pics Rampardos
 	add_pics Sheildon
 	add_pics Bastiodon
-	add_pics Burmy_Grass
-	add_pics Burmy_Sand
-	add_pics Burmy_Trash
-	add_pics Wormadam_Grass
-	add_pics Wormadam_Sand
-	add_pics Wormadam_Trash
+	add_pics Burmy
+	add_pics Wormadam
 	add_pics Mothim
 	add_pics Combee
 	add_pics Vespiquen
-	add_pics Pachirisu 
+	add_pics Pachirisu
 	add_pics Buizel
 	add_pics Floatzel
 	add_pics Cherubi
-	add_pics Cherrim 
-	add_pics Shellos_West
-	add_pics Gastrodon_West
-	add_pics Shellos_East
-	add_pics Gastrodon_East
+	add_pics Cherrim
+	add_pics Shellos
+	add_pics Gastrodon
+	add_pics Ambipom
 	add_pics Drifloon
 	add_pics Drifblim
 	add_pics Buneary
 	add_pics Lopunny
+	add_pics Mismagius
+	add_pics Honchkrow
 	add_pics Glameow
 	add_pics Purugly
+	add_pics Chingling
 	add_pics Stunky
-	add_pics Skunktank
+	add_pics Skuntank
 	add_pics Bronzor
 	add_pics Bronzong
+	add_pics Bonsly
+	add_pics Mime_jr
+	add_pics Happiny
 	add_pics Chatot
 	add_pics Spiritomb
 	add_pics Gible
 	add_pics Gabite
 	add_pics Garchomp
+	add_pics Munchlax
 	add_pics Riolu
 	add_pics Lucario
 	add_pics Hippopotas
@@ -66,14 +70,28 @@ SinnohPicPointers::
 	add_pics Carnivine
 	add_pics Finneon
 	add_pics Lumineon
+	add_pics Mantyke
 	add_pics Snover
 	add_pics Abomasnow
+	add_pics Weavile
+	add_pics Magnezone
+	add_pics Lickilicky
+	add_pics Rhyperior
+	add_pics Tangrowth
+	add_pics Electivire
+	add_pics Magmortar
+	add_pics Togekiss
+	add_pics Yanmega
+	add_pics Leafeon
+	add_pics Glaceon
+	add_pics Gliscor
+	add_pics Mamoswine
+	add_pics Porygon_z
+	add_pics Gallade
+	add_pics Probopass
+	add_pics Dusknoir
+	add_pics Froslass
 	add_pics Rotom
-	add_pics Rotom_Fan
-	add_pics Rotom_Frost
-	add_pics Rotom_Heat
-	add_pics Rotom_Mow
-	add_pics Rotom_Wash
 	add_pics Uxie
 	add_pics Mesprit
 	add_pics Azelf
@@ -87,5 +105,4 @@ SinnohPicPointers::
 	add_pics Manaphy
 	add_pics Darkrai
 	add_pics Shaymin
-	add_pics Shaymin_Sky
 	add_pics Arceus

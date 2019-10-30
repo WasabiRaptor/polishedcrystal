@@ -36,7 +36,7 @@ _Diploma: ; 1dd702
 	db   "This certifies"
 	next "that you have"
 	next "completed the"
-	next "new #dex."
+	next "new Pokédex."
 	next "Congratulations!"
 	db   "@"
 ; 1dd7ae

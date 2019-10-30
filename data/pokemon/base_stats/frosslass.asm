@@ -8,7 +8,7 @@
 	db 168 ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	dn ALL_FEMALE, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/frosslass/front.dimensions"
+	INCBIN "gfx/pokemon/froslass/front.dimensions"
 	db SNOW_CLOAK, SNOW_CLOAK	; abilities
 	db CURSED_BODY	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate

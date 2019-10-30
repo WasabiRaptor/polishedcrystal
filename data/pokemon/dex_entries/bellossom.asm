@@ -1,10 +1,12 @@
 	db "FLOWER@" ; species name
-	dw 104, 130 ; height, weight
+	dw 4, 58 ; height, weight
 
-	db   "When these dance"
-	next "together, their"
-	next "petals rub against"
-
-	page "each other,"
-	next "making pretty,"
-	next "relaxing sounds.@"
+	db "A Bellossom grows flowers"
+	next "more beautifully if it has"
+	next "evolved from a smelly"
+	
+	page "Gloom—the more stinky the"
+	next "better. At night, this Pokémon"
+	next "closes its petals and goes to"
+	
+	page "sleep.@"

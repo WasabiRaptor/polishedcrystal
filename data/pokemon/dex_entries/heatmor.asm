@@ -1,11 +1,8 @@
-    db "ANTEATER@" ; species name
-    dw 407, 1279 ; height, weight
+	db "ANTEATER@" ; species name
+	dw 14, 580 ; height, weight
 
-    db   "It breathes"
-    next "through a hole in"
-    next "its tail while it"
-
-    page "burns with an"
-    next "internal fire."
-    next "it eats Durant.@" 
-     
+	db "It draws in air through its tail,"
+	next "transforms it into fire, and"
+	next "uses it like a tongue. It melts"
+	
+	page "Durant and eats them.@"

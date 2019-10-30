@@ -331,10 +331,8 @@ wBattleMonNick:: ds PKMN_NAME_LENGTH
 
 wBattleMon:: battle_struct wBattleMon
 
-	ds 2
-
 wWildMon:: ds 1
-	ds 1
+
 wEnemyTrainerItem1:: ds 1
 wEnemyTrainerItem2:: ds 1
 wEnemyTrainerBaseReward:: ds 1
@@ -436,7 +434,6 @@ wPlayerDisableCount:: ds 1
 wPlayerEncoreCount:: ds 1
 wPlayerPerishCount:: ds 1
 wPlayerProtectCount:: ds 1
-	ds 1
 
 wEnemyAbility:: ds 1
 wEnemyRolloutCount:: ds 1
@@ -446,7 +443,7 @@ wEnemyDisableCount:: ds 1
 wEnemyEncoreCount:: ds 1
 wEnemyPerishCount:: ds 1
 wEnemyProtectCount:: ds 1
-	ds 1
+
 wBattleSubStatusWRAMEnd::
 
 wPlayerDamageTaken:: ds 2
@@ -498,7 +495,6 @@ UNION
 wPlayerSDefLevel:: ds 1
 wPlayerAccLevel:: ds 1
 wPlayerEvaLevel:: ds 1
-	ds 1
 
 wEnemyStatLevels::
 ; 07 neutral
@@ -509,7 +505,6 @@ wEnemySAtkLevel:: ds 1
 wEnemySDefLevel:: ds 1
 wEnemyAccLevel:: ds 1
 wEnemyEvaLevel:: ds 1
-	ds 1
 
 wEnemyTurnsTaken:: ds 1
 wPlayerTurnsTaken:: ds 1
@@ -526,8 +521,6 @@ wLinkBattleRNCount:: ds 1 ; how far through the prng stream
 
 wEnemyItemState:: ds 1
 
-	ds 2
-
 wCurEnemyMoveNum:: ds 1
 
 wEnemyHPAtTimeOfPlayerSwitch:: ds 2
@@ -535,8 +528,6 @@ wPayDayMoney:: ds 3
 
 wSafariMonAngerCount:: ds 1
 wSafariMonEating:: ds 1
-
-	ds 1
 
 ; used when enemy is transformed
 wEnemyBackupDVs:: ds 3
@@ -670,8 +661,8 @@ wPlayerTrademon:: trademon wPlayerTrademon
 wOTTrademon:: trademon wOTTrademon
 wTrademonsEnd::
 wTradeAnimPointer:: ds 2
-wLinkPlayer1Name:: ds NAME_LENGTH
-wLinkPlayer2Name:: ds NAME_LENGTH
+wLinkPlayer1Name:: ds PLAYER_NAME_LENGTH
+wLinkPlayer2Name:: ds PLAYER_NAME_LENGTH
 wLinkTradeSendmonSpecies:: ds 1
 wLinkTradeGetmonSpecies:: ds 1
 
@@ -783,8 +774,9 @@ wBackupDexListingCursor:: ds 1
 wBackupDexListingPage:: ds 1
 wDexCurrentLocation:: ds 1
 wPokedexStatus:: ds 1
-wPokedexSeenCaughtCount::
-wPokedexCurrentMon:: ds 2
+wPokedexSeenCaughtCount:: ;two bytes
+wPokedexCurMonGroup:: ds 1
+wPokedexCurrentMon:: ds 1
 wDexMonShiny:: ds 1
 wDexCurrentUnownIndex::
 wDexMonForm:: ds 1
@@ -805,6 +797,10 @@ NEXTU
 ; credits image
 wCreditsFaux2bpp:: ds 8 * 8 * 2
 
+wRedrawRowOrColumnSrcTiles:: ; cbfc
+; the tiles of the row or column to be redrawn by RedrawRowOrColumn
+	ds SCREEN_WIDTH * 2
+
 NEXTU
 ; Bill's PC
 wBillsPCPokemonList::
@@ -823,7 +819,7 @@ wBillsPC_MonHasMail:: ds 1
 NEXTU
 ; link data
 wLinkData::
-wLinkPlayerName:: ds NAME_LENGTH
+wLinkPlayerName:: ds PLAYER_NAME_LENGTH
 wLinkPartyCount:: ds 1
 wLinkPartySpecies:: ds PARTY_LENGTH + 1 ; legacy scripts don't check PartyCount
 
@@ -834,7 +830,7 @@ wLinkPlayerPartyMon3:: party_struct wLinkPlayerPartyMon3
 wLinkPlayerPartyMon4:: party_struct wLinkPlayerPartyMon4
 wLinkPlayerPartyMon5:: party_struct wLinkPlayerPartyMon5
 wLinkPlayerPartyMon6:: party_struct wLinkPlayerPartyMon6
-wLinkPlayerPartyMonOTNames:: ds PARTY_LENGTH * NAME_LENGTH
+wLinkPlayerPartyMonOTNames:: ds PARTY_LENGTH * PLAYER_NAME_LENGTH
 wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * PKMN_NAME_LENGTH
 wLinkPlayerDataEnd::
 	ds 861
@@ -884,7 +880,7 @@ wHPPalIndex:: ds 1
 
 wCopyingSGBTileData:: ds 1
 
-	ds 50
+	;ds 50
 
 wAttrMap::
 ; 20x18 grid of palettes for 8x8 tiles
@@ -996,7 +992,7 @@ wMenuData2Pointer:: ds 2
 wMenuCursorBuffer:: ds 2
 ; end menu data header
 wMenuDataBank:: ds 1 ; menu data bank?
-	ds 6
+	;ds 6
 wMenuDataHeaderEnd::
 
 wMenuData2::
@@ -1065,8 +1061,6 @@ wTextDelayFrames:: ds 1
 wVBlankOccurred:: ds 1
 wGenericDelay:: ds 1
 
-	ds 5 ; unused
-
 wGameTimerPause::
 ; bit 0
 	ds 1
@@ -1114,10 +1108,6 @@ wTextBoxFrame::
 
 wTextBoxFlags:: ds 1
 
-wTextBoxFlags2::
-; bit 0: whether a nameplate is drawn
-	ds 1
-
 wOptions2::
 ; bit 0-2: typeface
 ; bit 3: running shoes off/on
@@ -1144,8 +1134,6 @@ wInitialOptions::
 ; bit 7: ask to reset at start
 	ds 1
 
-wTextBoxNameBuffer:: ds 2
-
 wOptionsBuffer:: ds 1
 wOptionsEnd::
 
@@ -1165,3 +1153,12 @@ wTypeMatchup::
 wFoundMatchingIDInParty::
 ; usually 1 byte, may be up to 3 in some cases for wNamedObjectIndexBuffer
 	ds 3
+
+wVariableWidthTextTile:: ds 1
+wVariableWidthTextVRAM:: ds 2
+wVariableWidthTextCurTileColsFilled:: ds 1
+wPerliminaryVariableWidthTile:: ds 1 * LEN_1BPP_TILE
+wCombinedVaribleWidthTiles:: ds 2 * LEN_1BPP_TILE
+
+wc0f3:: ds 1
+wc0f4:: ds 1

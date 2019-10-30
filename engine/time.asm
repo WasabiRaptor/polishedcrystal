@@ -85,7 +85,7 @@ CheckReceiveCallDelay:
 	; Double effective time if lead mon has Lightning Rod, which boosts call rate
 	push bc
 	ld b, a
-	call GetLeadAbility
+	farcall GetLeadAbility
 	cp LIGHTNING_ROD
 	ld a, b
 	pop bc
@@ -393,10 +393,10 @@ GetTimeOfDay::
 
 ; hours for the time of day
 TimesOfDay:
-	db MORN_HOUR, NITE
-	db DAY_HOUR, MORN
-	db EVENING_HOUR, DAY
-	db NITE_HOUR, EVENING
+	db DAWN_HOUR, NITE
+	db MIDDAY_HOUR, MORN
+	db DUSK_HOUR, DAY
+	db MIDNIGHT_HOUR, EVENING
 	db 24, NITE
 	db -1, MORN
 

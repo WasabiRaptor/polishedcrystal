@@ -1,10 +1,8 @@
 	db "WILD BULL@" ; species name
-	dw 407, 1950 ; height, weight
+	dw 14, 884 ; height, weight
 
-	db   "These violent"
-	next "#MON fight"
-	next "with other mem-"
-
-	page "bers of their herd"
-	next "in order to prove"
-	next "their strength.@"
+	db "They live in groups. The one"
+	next "with the longest, thickest, and"
+	next "most-scarred horns is the boss"
+	
+	page "of the herd.@"

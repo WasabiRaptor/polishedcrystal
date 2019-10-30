@@ -1,10 +1,8 @@
-    db "IRATE@" ; species name
-    dw 207, 381 ; height, weight
+	db "IRATE@" ; species name
+	dw 8, 173 ; height, weight
 
-    db   "Lacking sight, it's"
-    next "unaware of its"
-    next "surroundings, so"
-
-    page "it bumps into"
-    next "things and eats"
-    next "anything it fimds.@" 
+	db "Lacking sight, it's unaware of"
+	next "its surroundings, so it bumps"
+	next "into things and eats anything"
+	
+	page "that moves.@"

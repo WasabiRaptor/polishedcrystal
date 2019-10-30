@@ -1,10 +1,13 @@
 	db "LAVA@" ; species name
-	dw 207, 1210 ; height, weight
+	dw 8, 550 ; height, weight
 
-	db   "Its body is as hot"
-	next "as lava and is"
-	next "always billowing."
-
-	page "Flames will"
-	next "occasionally burst"
-	next "from its shell.@"
+	db "Magcargo's body temperature"
+	next "is approximately 18,000"
+	next "degrees Fahrenheit. Water is"
+	
+	page "vaporized on contact. If this"
+	next "Pokémon is caught in the rain,"
+	next "the raindrops instantly turn into"
+	
+	page "steam, cloaking the area in a"
+	next "thick fog.@"

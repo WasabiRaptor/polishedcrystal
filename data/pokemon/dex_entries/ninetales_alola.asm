@@ -1,12 +1,9 @@
 	db "FOX@" ; species name
-	dw 307, 440 ; height, weight
+	dw 11, 199 ; height, weight
 
-	db   "The reason it" 
-    next "guides people all"
-    next "the way down to a" 
-    
-    page "mountain's base is"
-    next "that it wants them" 
-    next "to hurry up and" 
-    
-    page "leave it alone.@"
+	db "It is vindictive and relentless"
+	next "by nature. Those who cross it"
+	next "even once will be cursed for a"
+	
+	page "thousand years, along with their"
+	next "descendants.@"
