@@ -4899,99 +4899,146 @@ Print8BitNumRightAlign:: ; 3842
 GetCharacterWidth::
 	push hl
 	push bc
+	cp "<COLON>" +1
+	jr nc, .other
+	sub "A"
+	jr c, .space
+	ld b, 0
+	ld c, a
 	ld hl, CharacterWidths
-	ld de, 2
-	call IsInArray
-	inc hl
+	add hl, bc
 	ld e, [hl]
 	pop bc
 	pop hl
 	ret
 
+.space
+	ld e, 3 ;shortcut
+	pop bc
+	pop hl
+	ret
+
+.other
+	ld e, 8 ;shortcut
+	pop bc
+	pop hl
+	ret
+
 CharacterWidths:
-	db "a", 4 +1
-	db "b", 4 +1
-	db "c", 4 +1
-	db "d", 4 +1
-	db "e", 4 +1
-	db "f", 4 +1
-	db "g", 4 +1
-	db "h", 4 +1
-	db "i", 2 +1
-	db "j", 2 +1
-	db "k", 4 +1
-	db "l", 2 +1
-	db "m", 5 +1
-	db "n", 4 +1
-	db "o", 4 +1
-	db "p", 4 +1
-	db "q", 4 +1
-	db "r", 4 +1
-	db "s", 4 +1
-	db "t", 3 +1
-	db "u", 4 +1
-	db "v", 5 +1
-	db "w", 5 +1
-	db "x", 5 +1
-	db "y", 4 +1
-	db "z", 3 +1
-	db "A", 5 +1
-	db "B", 5 +1
-	db "C", 5 +1
-	db "D", 5 +1
-	db "E", 4 +1
-	db "F", 4 +1
-	db "G", 5 +1
-	db "H", 5 +1
-	db "I", 3 +1
-	db "J", 5 +1
-	db "K", 5 +1
-	db "L", 4 +1
-	db "M", 5 +1
-	db "N", 5 +1
-	db "O", 5 +1
-	db "P", 5 +1
-	db "Q", 5 +1
-	db "R", 5 +1
-	db "S", 5 +1
-	db "T", 5 +1
-	db "U", 5 +1
-	db "V", 5 +1
-	db "W", 5 +1
-	db "X", 5 +1
-	db "Y", 5 +1
-	db "Z", 5 +1
-	db "(", 3 +1
-	db ")", 3 +1
-	db ".", 1 +1
-	db ",", 2 +1
-	db "?", 5 +1
-	db "!", 3 +1
-	db "-", 4 +1
-	db ":", 1 +1
-	db "é", 4 +1
-	db "♀", 5 +1
-	db "♂", 5 +1
-	db "“", 5 +1
-	db "”", 5 +1
-	db "'", 2 +1
-	db "0", 5 +1
-	db "1", 5 +1
-	db "2", 5 +1
-	db "3", 5 +1
-	db "4", 5 +1
-	db "5", 5 +1
-	db "6", 5 +1
-	db "7", 5 +1
-	db "8", 5 +1
-	db "9", 5 +1
-	db "/", 4 +1
-	db "¥", 5 +1
-	db "+", 5 +1
-	db "<COLON>", 2 +1
-	db "<SHARP>", 6 +1
-	db " ", 3
-	db -1, 8
+	db 6 ;A
+	db 6 ;B
+	db 6 ;C
+	db 6 ;D
+	db 5 ;E
+	db 5 ;F
+	db 6 ;G
+	db 6 ;H
+	db 4 ;I
+	db 6 ;J
+	db 6 ;K
+	db 5 ;L
+	db 6 ;M
+	db 6 ;N
+	db 6 ;O
+	db 6 ;P
+	db 6 ;Q
+	db 6 ;R
+	db 6 ;S
+	db 6 ;T
+	db 6 ;U
+	db 6 ;V
+	db 6 ;W
+	db 6 ;X
+	db 6 ;Y
+	db 6 ;Z
+	db 4 ;(
+	db 4 ;)
+	db 2 ;.
+	db 3 ;,
+	db 6 ;?
+	db 4 ;!
+	db 5 ;a
+	db 5 ;b
+	db 5 ;c
+	db 5 ;d
+	db 5 ;e
+	db 5 ;f
+	db 5 ;g
+	db 5 ;h
+	db 3 ;i
+	db 3 ;j
+	db 5 ;k
+	db 3 ;l
+	db 6 ;m
+	db 5 ;n
+	db 5 ;o
+	db 5 ;p
+	db 5 ;q
+	db 5 ;r
+	db 5 ;s
+	db 4 ;t
+	db 5 ;u
+	db 6 ;v
+	db 6 ;w
+	db 6 ;x
+	db 5 ;y
+	db 4 ;z
+	db 6 ;""
+	db 6
+	db 5 ;-
+	db 2 ;:
+	db 0
+	db 0
+	db 3 ;
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 0
+	db 5 ;é
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 0
+	db 0
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 8
+	db 0
+	db 0
+	db 0
+	db 6
+	db 6
+	db 8
+	db 6
+	db 6
+	db 7
+	db 6 ;0
+	db 6 ;1
+	db 6 ;2
+	db 6 ;3
+	db 6 ;4
+	db 6 ;5
+	db 6 ;6
+	db 6 ;7
+	db 6 ;8
+	db 6 ;9
+	db 6 ;$
+	db 6 ;x
+	db 8
+	db 5 ;/
+	db 6 ;+
+	db 3 ;:
+
+
 
 PrintLetterDelay:: ; 313d
 ; Wait before printing the next letter.
