@@ -324,7 +324,51 @@ _CGB_StatsScreenHPPals: ; 8edb
 
 	jp _CGB_FinishLayout
 ; 8f52
+LoadPokedexIconPals::
+	dec a
+	push hl
+	push bc
+	push de
+	ld hl, PokedexOBPalTable
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	push de
+	farcall GetMenuMonIconPalette.got_shininess
+	pop de
+	ld b, 0
+	ld c, a
+	ld hl, OWPalsTable
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call LoadHLPaletteIntoDE
+	pop de
+	pop bc
+	pop hl
+	ret
 
+OWPalsTable:
+	dw OWRedPal
+	dw OWBluePal
+	dw OWGreenPal
+	dw OWBrownPal
+	dw OWPurplePal
+	dw OWGrayPal
+	dw OWPinkPal
+	dw OWTealPal
+
+PokedexOBPalTable:
+	dw wUnknOBPals palette 5
+	dw wUnknOBPals palette 4
+	dw wUnknOBPals palette 3
+	dw wUnknOBPals palette 2
 
 _CGB_Pokedex: ; 8f70
 	ld de, wUnknBGPals

@@ -221,7 +221,10 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	ldh [rVBK], a
 	ldh [hBGMapMode], a
 	call ClearSprites
-
+	ld de, wSprites+(17*4)
+	ld hl, PokedexPokemonIconSprites
+	ld bc, PokedexPokemonIconSpritesEnd - PokedexPokemonIconSprites
+	rst CopyBytes
 	xor a
 	hlcoord 0, 0, wAttrMap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
@@ -258,7 +261,30 @@ Pokedex_InitMainScreen: ; 4013c (10:413c)
 	call Pokedex_GetCGBLayout
 	jp Pokedex_DrawListWindow
 
+POKEDEX_ICONS_X EQU $0f
+POKEDEX_ICONS_Y EQU $58
 
+PokedexPokemonIconSprites:
+	db POKEDEX_ICONS_Y, POKEDEX_ICONS_X, $40, 2
+	db POKEDEX_ICONS_Y, POKEDEX_ICONS_X+(1*8), $41, 2
+	db POKEDEX_ICONS_Y+(1*8), POKEDEX_ICONS_X, $42, 2
+	db POKEDEX_ICONS_Y+(1*8), POKEDEX_ICONS_X+(1*8), $43, 2
+
+	db POKEDEX_ICONS_Y+(2*8), POKEDEX_ICONS_X, $4a, 3
+	db POKEDEX_ICONS_Y+(2*8), POKEDEX_ICONS_X+(1*8), $4b, 3
+	db POKEDEX_ICONS_Y+(2*8)+(1*8), POKEDEX_ICONS_X, $4c, 3
+	db POKEDEX_ICONS_Y+(2*8)+(1*8), POKEDEX_ICONS_X+(1*8), $4d, 3
+
+	db POKEDEX_ICONS_Y+(4*8), POKEDEX_ICONS_X, $54, 4
+	db POKEDEX_ICONS_Y+(4*8), POKEDEX_ICONS_X+(1*8), $55, 4
+	db POKEDEX_ICONS_Y+(4*8)+(1*8), POKEDEX_ICONS_X, $56, 4
+	db POKEDEX_ICONS_Y+(4*8)+(1*8), POKEDEX_ICONS_X+(1*8), $57, 4
+
+	db POKEDEX_ICONS_Y+(6*8), POKEDEX_ICONS_X, $5e, 5
+	db POKEDEX_ICONS_Y+(6*8), POKEDEX_ICONS_X+(1*8), $5f, 5
+	db POKEDEX_ICONS_Y+(6*8)+(1*8), POKEDEX_ICONS_X, $60, 5
+	db POKEDEX_ICONS_Y+(6*8)+(1*8), POKEDEX_ICONS_X+(1*8), $61, 5
+PokedexPokemonIconSpritesEnd:
 
 Pokedex_UpdateMainScreen: ; 401ae (10:41ae)
 	ld hl, hJoyPressed
@@ -1648,6 +1674,9 @@ Pokedex_PlaceBorder: ; 40ad5
 Pokedex_PrintListing: ; 40b0f (10:4b0f)
 ; Prints the list of Pokémon on the main Pokédex screen.
 ; Clear (2 * [wDexListingHeight]) by 17 box starting at 0,1
+	ld a, $40
+	ld [wCurIconTile], a
+
 	call InitVariableWidthText
 	hlcoord 0, 1
 	ld a, 4
@@ -1698,11 +1727,14 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	push hl
 	call .getPokedexOrderByte
 	ld [wPokedexCurrentMon], a
+	ld [wCurPartySpecies], a
 	inc de
 	call .getPokedexOrderByte
-	;ld [wDexMonGroup], a
 	ld [wCurGroup], a
 	pop hl
+	pop af
+	push af
+	farcall LoadPokedexIconPals
 	push de
 	push hl
 	ld a, [wPokedexCurrentMon]
@@ -1741,11 +1773,17 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	push bc
 	ld a, [wPokedexCurrentMon]
 	call Pokedex_LoadListFootprint
+	inc hl
+	inc hl
 	call Pokexex_PrintNumberAndTypes 
 	call Pokedex_PlaceCaughtSymbolIfCaught
 	push hl
 	ld a, [wPokedexCurrentMon]
 	ld [wNamedObjectIndexBuffer], a
+	ld [wCurPartyMon], a
+	ld [wCurIcon], a
+	farcall GetMemIconGFX
+
 	call GetPokemonName
 	pop hl
 	call PlaceString
@@ -1777,7 +1815,7 @@ Pokexex_PrintNumberAndTypes:
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	call PrintNum
 
-	ld bc, PKMN_TILE_NAME_LENGTH - 2
+	ld bc, PKMN_TILE_NAME_LENGTH - 4
 	add hl, bc
 	ld a, [wBaseType1]
 	call Pokexex_PrintType
@@ -2271,34 +2309,30 @@ Pokedex_UpdateCursorOAM: ; 41148 (10:5148)
 	call Pokedex_UpdateCursor
 	jp Pokedex_PutScrollbarOAM
 
-CURSOR_Y_TOP_HALF EQU -1
-CURSOR_Y_BOTTOM_HALF EQU -1
-CURSOR_X_RIGHT_HALF EQU 3
-CURSOR_X_LEFT_HALF EQU -4
+CURSOR_Y_TOP_HALF EQU $4d
+CURSOR_Y_BOTTOM_HALF EQU $65
+CURSOR_X_RIGHT_HALF EQU $98
+CURSOR_X_LEFT_HALF EQU $0a
 
 .CursorOAM: ; 41230
 	; y, x, tile, OAM attributes
-	db $4e + CURSOR_Y_TOP_HALF, $0f + CURSOR_X_LEFT_HALF, $31, $7 
-	db $4e + CURSOR_Y_TOP_HALF, $17 + CURSOR_X_LEFT_HALF, $32, $7 
-	db $4e + CURSOR_Y_TOP_HALF, $1f + CURSOR_X_LEFT_HALF, $32, $7 
-	db $4e + CURSOR_Y_TOP_HALF, $27 + CURSOR_X_LEFT_HALF, $33, $7 
-	db $4e + CURSOR_Y_TOP_HALF, $7c + CURSOR_X_RIGHT_HALF, $33, $7 | X_FLIP 
-	db $4e + CURSOR_Y_TOP_HALF, $84 + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP 
-	db $4e + CURSOR_Y_TOP_HALF, $8c + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP 
-	db $4e + CURSOR_Y_TOP_HALF, $94 + CURSOR_X_RIGHT_HALF, $31, $7 | X_FLIP 
-	db $fe ; tells LoadCursorOAM to set c = 0
-	db $56 + CURSOR_Y_TOP_HALF, $0f + CURSOR_X_LEFT_HALF, $30, $7
-	db $56 + CURSOR_Y_TOP_HALF, $94 + CURSOR_X_RIGHT_HALF, $30, $7 | X_FLIP 
-	db $5e + CURSOR_Y_BOTTOM_HALF, $0f + CURSOR_X_LEFT_HALF, $30, $7 | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $0f + CURSOR_X_LEFT_HALF, $31, $7 | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $17 + CURSOR_X_LEFT_HALF, $32, $7 | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $1f + CURSOR_X_LEFT_HALF, $32, $7 | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $27 + CURSOR_X_LEFT_HALF, $33, $7 | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $7c + CURSOR_X_RIGHT_HALF, $33, $7 | X_FLIP | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $84 + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $8c + CURSOR_X_RIGHT_HALF, $32, $7 | X_FLIP | Y_FLIP 
-	db $66 + CURSOR_Y_BOTTOM_HALF, $94 + CURSOR_X_RIGHT_HALF, $31, $7 | X_FLIP | Y_FLIP 
-	db $5e + CURSOR_Y_BOTTOM_HALF, $94 + CURSOR_X_RIGHT_HALF, $30, $7 | X_FLIP | Y_FLIP 
+	db CURSOR_Y_TOP_HALF, CURSOR_X_LEFT_HALF, $31, $7 
+	db CURSOR_Y_TOP_HALF, CURSOR_X_LEFT_HALF+(1*8), $32, $7 
+	db CURSOR_Y_TOP_HALF, CURSOR_X_LEFT_HALF+(2*8), $33, $7
+	db CURSOR_Y_TOP_HALF, CURSOR_X_RIGHT_HALF-(2*8), $33, $7 | X_FLIP 
+	db CURSOR_Y_TOP_HALF, CURSOR_X_RIGHT_HALF-(1*8), $32, $7 | X_FLIP 
+	db CURSOR_Y_TOP_HALF, CURSOR_X_RIGHT_HALF, $31, $7 | X_FLIP 
+	db CURSOR_Y_TOP_HALF+(1*8), CURSOR_X_LEFT_HALF, $30, $7
+	db CURSOR_Y_TOP_HALF+(1*8), CURSOR_X_RIGHT_HALF, $30, $7 | X_FLIP
+
+	db CURSOR_Y_BOTTOM_HALF-(1*8), CURSOR_X_LEFT_HALF, $30, $7 | Y_FLIP
+	db CURSOR_Y_BOTTOM_HALF-(1*8), CURSOR_X_RIGHT_HALF, $30, $7 | X_FLIP | Y_FLIP 
+	db CURSOR_Y_BOTTOM_HALF, CURSOR_X_LEFT_HALF, $31, $7 | Y_FLIP 
+	db CURSOR_Y_BOTTOM_HALF, CURSOR_X_LEFT_HALF+(1*8), $32, $7 | Y_FLIP 
+	db CURSOR_Y_BOTTOM_HALF, CURSOR_X_LEFT_HALF+(2*8), $33, $7 | Y_FLIP 
+	db CURSOR_Y_BOTTOM_HALF, CURSOR_X_RIGHT_HALF-(2*8), $33, $7 | X_FLIP | Y_FLIP 
+	db CURSOR_Y_BOTTOM_HALF, CURSOR_X_RIGHT_HALF-(1*8), $32, $7 | X_FLIP | Y_FLIP 
+	db CURSOR_Y_BOTTOM_HALF, CURSOR_X_RIGHT_HALF, $31, $7 | X_FLIP | Y_FLIP 
 	db $ff
 
 Pokedex_UpdateCursor:
@@ -2326,7 +2360,6 @@ Pokedex_LoadCursorOAM: ; 412f1 (10:52f1)
 	ld [de], a
 	inc de
 	ld a, [hli]
-	add c
 	ld [de], a
 	inc de
 	ld a, [hli]

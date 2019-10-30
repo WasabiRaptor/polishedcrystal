@@ -1484,41 +1484,49 @@ endc
 PartyMenuOBPals:
 PokegearOBPals:
 if !DEF(MONOCHROME)
+OWRedPal:
 ; red
 	RGB 27, 31, 27
 	RGB 31, 19, 10
 	RGB 31, 07, 01
 	RGB 00, 00, 00
+OWBluePal:
 ; blue
 	RGB 27, 31, 27
 	RGB 31, 19, 10
 	RGB 10, 09, 31
 	RGB 00, 00, 00
+OWGreenPal:
 ; green
 	RGB 27, 31, 27
 	RGB 31, 19, 10
 	RGB 07, 23, 03
 	RGB 00, 00, 00
+OWBrownPal:
 ; brown
 	RGB 27, 31, 27
 	RGB 31, 19, 10
 	RGB 15, 10, 03
 	RGB 00, 00, 00
+OWPurplePal:
 ; purple
 	RGB 27, 31, 27
 	RGB 31, 19, 10
 	RGB 18, 04, 18
 	RGB 00, 00, 00
+OWGrayPal:
 ; gray
 	RGB 27, 31, 27
 	RGB 31, 19, 10
 	RGB 13, 13, 13
 	RGB 00, 00, 00
+OWPinkPal:
 ; pink
 	RGB 27, 31, 27
 	RGB 31, 19, 10
 	RGB 31, 10, 11
 	RGB 00, 00, 00
+OWTealPal:
 ; teal
 	RGB 27, 31, 27
 	RGB 31, 19, 10

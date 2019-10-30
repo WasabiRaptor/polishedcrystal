@@ -816,7 +816,7 @@ BreakDisguise:
 	call SkipPokemonNames
 	ld de, wEnemyMonNick
 	ld bc, PKMN_NAME_LENGTH
-	call CopyBytes
+	rst CopyBytes
 	farcall GetMonFrontpic
 	jr .disguise_broke
 
