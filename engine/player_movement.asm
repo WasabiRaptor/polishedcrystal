@@ -479,9 +479,13 @@ DoPlayerMovement:: ; 80000
 	ld e, a
 	cp STANDING
 	jp z, .StandInPlace
+
+	ld a, [hl]
+	cp movement_turn_step_down
+	jr z, .turn_step
 	ld a, 1
 	ld [wHasPlayerMoved], a
-
+.turn_step
 	add hl, de
 	ld a, [hl]
 	ld [wMovementAnimation], a
@@ -937,7 +941,7 @@ SetTallGrassAttributes:
 	ld [wHasPlayerMoved], a
 	ld a, [wGrassTileAddress]
 	ld [wPrevGrassTileAddress], a
-	ld a, [wPrevGrassTileAddress+1]
+	ld a, [wGrassTileAddress+1]
 	ld [wPrevGrassTileAddress+1], a
 
 	call GetBGMapPlayerOffset

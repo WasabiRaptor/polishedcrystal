@@ -67,6 +67,7 @@ SetGrassTiles::
 	add hl, bc
 	ld [hli], a
 	ld [hl], a
+	
 	xor a
 	ldh [rVBK], a
 	ret
