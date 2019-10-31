@@ -785,6 +785,9 @@ wPokedexDataEnd::
 ENDU
 
 ENDU
+wHasPlayerMoved:: ds 1
+wGrassTileAddress:: ds 2
+wPrevGrassTileAddress:: ds 2
 
 SECTION "Overworld Map", WRAM0
 

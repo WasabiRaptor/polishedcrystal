@@ -479,6 +479,8 @@ DoPlayerMovement:: ; 80000
 	ld e, a
 	cp STANDING
 	jp z, .StandInPlace
+	ld a, 1
+	ld [wHasPlayerMoved], a
 
 	add hl, de
 	ld a, [hl]
@@ -488,9 +490,6 @@ DoPlayerMovement:: ; 80000
 	add hl, de
 	ld a, [hl]
 	ld [wPlayerTurningDirection], a
-	ld a, [wPlayerStandingTile]
-	cp COLL_TALL_GRASS
-	call z, ClearTallGrassAttributes
 	ld a, 4
 	ret
 
@@ -585,6 +584,7 @@ DoPlayerMovement:: ; 80000
 	ld [wMovementAnimation], a
 	xor a
 	ld [wPlayerTurningDirection], a
+	ld [wHasPlayerMoved], a
 	ret
 ; 802cb
 
@@ -930,34 +930,37 @@ StopPlayerForEvent:: ; 80422
 ; 80430
 
 SetTallGrassAttributes:
-	call GetBGMapPlayerOffset
-	ld a, 1
-	ldh [rVBK], a
-	ld a, 2
-	ld [hli], a
-	ld [hl], a
-	ld bc, BG_MAP_WIDTH -1
-	add hl, bc
-	ld a, 2 | BEHIND_BG
-	ld [hli], a
-	ld [hl], a
-
+	ld a, [wHasPlayerMoved]
+	and a
+	ret z
 	xor a
-	ldh [rVBK], a
+	ld [wHasPlayerMoved], a
+	ld a, [wGrassTileAddress]
+	ld [wPrevGrassTileAddress], a
+	ld a, [wPrevGrassTileAddress+1]
+	ld [wPrevGrassTileAddress+1], a
+
+	call GetBGMapPlayerOffset
+	ld a, h
+	ld [wGrassTileAddress], a
+	ld a, l
+	ld [wGrassTileAddress+1], a
 	ret
 
-ClearTallGrassAttributes:
-	call GetBGMapPlayerOffset
-	ld a, 1
-	ldh [rVBK], a
-	ld a, 2
-	ld [hli], a
-	ld [hl], a
-	ld bc, BG_MAP_WIDTH -1
-	add hl, bc
-	ld [hli], a
-	ld [hl], a
-
-	xor a
-	ldh [rVBK], a
+GetBGMapPlayerOffset::
+; hl = {wBGMapAnchor} + BG_MAP_WIDTH * 8 + 8 (player's top-left tile)
+; de = wUnusedMapBuffer
+	ld hl, wBGMapAnchor + 1
+	ld a, [hld] ; a = HIGH({wBGMapAnchor})
+	inc a ; move down 8 rows
+	and HIGH(VBGMap0 + BG_MAP_WIDTH * BG_MAP_HEIGHT - 1) ; wrap vertically
+	ld l, [hl]
+	ld h, a
+	ld a, l
+	add a, 8 ; move right 8 rows
+	; restore "row" bits (upper 3)
+	xor l
+	and BG_MAP_WIDTH - 1
+	xor l
+	ld l, a
 	ret

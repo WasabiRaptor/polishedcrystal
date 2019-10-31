@@ -1,7 +1,7 @@
 _AnimateTileset:: ; fc000
 ; Iterate over a given pointer array of
 ; animation functions (one per frame).
-
+	call SetGrassTiles
 ; Typically in wra1, vra0
 
 	ld a, [wTilesetAnim]
@@ -33,6 +33,43 @@ _AnimateTileset:: ; fc000
 
 	jp hl
 ; fc01b
+SetGrassTiles::
+	ld a, [wHasPlayerMoved]
+	and a
+	ld a, [wGrassTileAddress]
+	ld h, a
+	ld a, [wGrassTileAddress+1]
+	ld l, a
+
+	ld a, 1
+	ldh [rVBK], a
+
+	jr nz, .PlayerIsMoving
+
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	ld bc, BG_MAP_WIDTH -1
+	add hl, bc
+	ld a, 2 | BEHIND_BG
+	ld [hli], a
+	ld [hl], a
+
+	ld a, [wPrevGrassTileAddress]
+	ld h, a
+	ld a, [wPrevGrassTileAddress+1]
+	ld l, a
+.PlayerIsMoving
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	ld bc, BG_MAP_WIDTH -1
+	add hl, bc
+	ld [hli], a
+	ld [hl], a
+	xor a
+	ldh [rVBK], a
+	ret
 
 
 TilesetInvarAnim::
