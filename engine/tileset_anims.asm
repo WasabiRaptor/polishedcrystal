@@ -34,6 +34,10 @@ _AnimateTileset:: ; fc000
 	jp hl
 ; fc01b
 SetGrassTiles::
+	ld a, [wPlayerStandingTile]
+	cp COLL_TALL_GRASS
+	ret nz
+
 	ld a, [wHasPlayerMoved]
 	and a
 	ld a, [wGrassTileAddress]
@@ -54,11 +58,7 @@ SetGrassTiles::
 	ld a, 2 | BEHIND_BG
 	ld [hli], a
 	ld [hl], a
-
-	ld a, [wPrevGrassTileAddress]
-	ld h, a
-	ld a, [wPrevGrassTileAddress+1]
-	ld l, a
+	jr .done
 .PlayerIsMoving
 	ld a, 2
 	ld [hli], a
@@ -67,7 +67,7 @@ SetGrassTiles::
 	add hl, bc
 	ld [hli], a
 	ld [hl], a
-	
+.done	
 	xor a
 	ldh [rVBK], a
 	ret

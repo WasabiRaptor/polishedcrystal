@@ -573,9 +573,7 @@ DoPlayerMovement:: ; 80000
 	stairs_step RIGHT
 
 .StandInPlace: ; 802b3
-	ld a, [wPlayerStandingTile]
-	cp COLL_TALL_GRASS
-	call z, SetTallGrassAttributes
+	call SetTallGrassAttributes
 	ld a, movement_step_sleep_1
 	ld [wMovementAnimation], a
 	xor a
@@ -933,7 +931,10 @@ StopPlayerForEvent:: ; 80422
 	ret
 ; 80430
 
-SetTallGrassAttributes:
+SetTallGrassAttributes::
+	ld a, [wPlayerStandingTile]
+	cp COLL_TALL_GRASS
+	ret nz
 	ld a, [wHasPlayerMoved]
 	and a
 	ret z
