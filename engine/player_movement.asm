@@ -488,7 +488,9 @@ DoPlayerMovement:: ; 80000
 	add hl, de
 	ld a, [hl]
 	ld [wPlayerTurningDirection], a
-
+	ld a, [wPlayerStandingTile]
+	cp COLL_TALL_GRASS
+	call z, ClearTallGrassAttributes
 	ld a, 4
 	ret
 
@@ -568,6 +570,9 @@ DoPlayerMovement:: ; 80000
 	stairs_step RIGHT
 
 .StandInPlace: ; 802b3
+	ld a, [wPlayerStandingTile]
+	cp COLL_TALL_GRASS
+	call z, SetTallGrassAttributes
 	ld a, movement_step_sleep_1
 	ld [wMovementAnimation], a
 	xor a
@@ -923,3 +928,36 @@ StopPlayerForEvent:: ; 80422
 	ld [wPlayerTurningDirection], a
 	ret
 ; 80430
+
+SetTallGrassAttributes:
+	call GetBGMapPlayerOffset
+	ld a, 1
+	ldh [rVBK], a
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	ld bc, BG_MAP_WIDTH -1
+	add hl, bc
+	ld a, 2 | BEHIND_BG
+	ld [hli], a
+	ld [hl], a
+
+	xor a
+	ldh [rVBK], a
+	ret
+
+ClearTallGrassAttributes:
+	call GetBGMapPlayerOffset
+	ld a, 1
+	ldh [rVBK], a
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	ld bc, BG_MAP_WIDTH -1
+	add hl, bc
+	ld [hli], a
+	ld [hl], a
+
+	xor a
+	ldh [rVBK], a
+	ret

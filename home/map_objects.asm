@@ -505,6 +505,23 @@ _GetMovementByte:: ; 1aae
 	ld a, h
 	ret
 ; 1ac6
+GetBGMapPlayerOffset::
+; hl = {wBGMapAnchor} + BG_MAP_WIDTH * 8 + 8 (player's top-left tile)
+; de = wUnusedMapBuffer
+	ld hl, wBGMapAnchor + 1
+	ld a, [hld] ; a = HIGH({wBGMapAnchor})
+	inc a ; move down 8 rows
+	and HIGH(VBGMap0 + BG_MAP_WIDTH * BG_MAP_HEIGHT - 1) ; wrap vertically
+	ld l, [hl]
+	ld h, a
+	ld a, l
+	add a, 8 ; move right 8 rows
+	; restore "row" bits (upper 3)
+	xor l
+	and BG_MAP_WIDTH - 1
+	xor l
+	ld l, a
+	ret
 
 UpdateSprites:: ; 1ad2
 	ld a, [wVramState]
