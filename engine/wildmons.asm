@@ -458,6 +458,13 @@ _ChooseWildEncounter:
 ; This next loop chooses which mon to load up.
 .prob_bracket_loop
 	ld a, [hl]
+	inc a
+	jp nz, .continue
+	pop bc
+	jp .nowildbattle
+
+.continue
+	dec a
 	push af	; 3
 	and ENCOUNTER_TIME_MASK
 	ld b, a
