@@ -137,7 +137,7 @@ FindNest: ; 2a01f
 	ld c, a
 	push bc
 ; next for bytes are the percentages for the time of day, skip them for now
-	ld bc, WILD_MAP_SIZE - 1
+	ld bc, WILD_GRASS_SIZE - 1
 	add hl, bc
 	pop bc
 	;7 grass mons per time of day, and 4 times of day
@@ -395,44 +395,41 @@ _ChooseWildEncounter:
 
 	inc hl
 	inc hl
-	inc hl ;move past the map ID and one of the percentages
+	inc hl
 	push bc
 	call CheckOnWater
+	jr nz, .notWater
+	ld bc, WILD_WATER_SIZE - 3
+	add hl, bc
 	pop bc
-	ld de, WaterMonProbTable 
-	ld b, $4
-	jr z, .got_table ;water only has one percentage so if so we're done
-	inc hl
-	inc hl
-	inc hl ;move past the other three percentages for the times of day if we're not on water
-	ld a, [wTimeOfDay]
-	push bc
-	ld bc, NUM_GRASSMON * 3 ; each grassmon is three bytes so you add it times the time of day to get the right list
-	rst AddNTimes
+	jr .got_table ;water only has one percentage so if so we're done
+	
+.notWater
+	ld bc, WILD_GRASS_SIZE - 3
+	add hl, bc
 	pop bc
-	ld de, GrassMonProbTable ; this defines the probalities for the number slot the pokemon is in from 1-7 in each list antiquated and probably won't be used anymore
-	ld b, (NUM_GRASSMON-1) *3 ; b here is now which index of grassmon in the list is being checked atm 0-6 for the 7 differen't mons
 
 .got_table
 	; Check if we want to force a type
 	inc c
 	jr z, .get_random_mon
-	dec c
 
+; TODO - NEEDS TO BE UPDATED
+	dec c
 	; Check if we can actually encounter a valid species of the given type
-	push de
-	push hl
-.force_loop
+	push de	; Probability Table 1
+	push hl	; Address? 2
+.force_loop	
 	inc hl ; We don't care about level
 	ld a, [hli]
 	ld [wCurSpecies], a
 	ld a, [hli]
 	ld [wCurGroup], a
-	push bc
-	push hl
+	push bc	; inA 3
+	push hl	; 4
 	call GetBaseData
-	pop hl
-	pop bc
+	pop hl	; 4
+	pop bc	; 3
 	ld a, [wBaseType1]
 	cp c
 	jr z, .can_force_type
@@ -447,41 +444,103 @@ _ChooseWildEncounter:
 	ld c, $ff
 .can_force_type
 	inc c
-	pop hl
-	pop de
+	pop hl	; 2
+	pop de	; 1
+; END TODO
+
 .get_random_mon
 	dec c
-	push hl ; wild mon data pointer
+	push bc	; Pokemon area size
 	ld a, 100
 	call RandomRange
-	inc a ; 1 <= a <= 100
-	ld b, a
-	ld h, d
-	ld l, e
+	ld c, a
+	ld de, WILD_POKE_SIZE
 ; This next loop chooses which mon to load up.
 .prob_bracket_loop
-	ld a, [hli]
-	cp b
-	jr nc, .got_it
-	inc hl
-	jr .prob_bracket_loop
+	ld a, [hl]
+	push af	; 3
+	and ENCOUNTER_TIME_MASK
+	ld b, a
+	ld a, [wTimeOfDay]
+	cp MORN
+	jr nz, .notMorn
+	bit 7, b
+	jr nz, .rightTime
+	pop af	; 3
+	jp .nextMon
+
+.notMorn
+	cp DAY
+	jr nz, .notDay
+	bit 6, b
+	jr nz, .rightTime
+	pop af	; 3
+	jp .nextMon
+
+.notDay
+	cp EVENING
+	jr nz, .notDusk
+	bit 5, b
+	jr nz, .rightTime
+	pop af
+	jp .nextMon
+
+.notDusk
+	bit 4, b
+	jr nz, .rightTime
+	pop af	; 3
+	jp .nextMon
+
+.rightTime
+	pop af	; 3
+	
+checkpercent: MACRO
+	cp WILD_\1P
+	jr nz, .not\1
+	ld a, c
+	sub \1
+	jr .doneSubtracting
+.not\1
+ENDM
+
+	and WILD_PERCENT_MASK
+	checkpercent 75
+	checkpercent 60
+	checkpercent 50
+	checkpercent 45
+	checkpercent 40
+	checkpercent 35
+	checkpercent 30
+	checkpercent 25
+	checkpercent 20
+	checkpercent 15
+	checkpercent 10
+	checkpercent 9
+	checkpercent 5
+	checkpercent 4
+	checkpercent 1
+	ld a, c
+.doneSubtracting
+	ld c, a
+	jr nc, .nextMon
+	jr .got_it
+
+.nextMon
+	add hl, de
+	jp .prob_bracket_loop
 
 .got_it
-	ld a, c
-	ld c, [hl]
-	ld b, 0
-	pop hl
-	push hl
-	add hl, bc ; this selects our mon
-	ld c, a
-	ld a, [hli]
-	;theres our mons level
+	pop bc ; 2
+	inc hl 
+	ld a, [hli] ; Gets species
 	ld b, a
 ; If the Pokemon is encountered by surfing, we need to give the levels some variety.
-	push bc
+	push bc	; 2
 	call CheckOnWater
-	pop bc
+	pop bc	; 2
 	jr nz, .ok
+
+; TODO - CHECK IF THIS NEEDS UPDATES
 ; Check if we buff the wild mon, and by how much.
 	call Random
 	cp 35 percent
@@ -496,33 +555,19 @@ _ChooseWildEncounter:
 	cp 95 percent
 	jr c, .ok
 	inc b
-; Store the level
+; END TODO
+
 .ok
-	ld a, b
-	;this puts the level into the level
-	ld [wCurPartyLevel], a
-	ld a, [hli]
-	ld b, a
-	;this gets the species
-	ld a, [hl]
-	;anc now we have the group
+	ld a, [hli]	; Gets group
 	ld [wCurGroup], a
 	ld [wTempWildMonGroup], a
-	ld a, b
-	pop hl
+	ld a, b	; Species
 	call ValidateTempWildMonSpecies
 	jr c, .nowildbattle
-
-	;cp UNOWN
-	;jr nz, .unown_check_done
-
-	;ld a, [wUnlockedUnowns]
-	;and a
-	;jr z, .nowildbattle
-
-.unown_check_done
-	; Check if we're forcing type
 	ld [wCurSpecies], a
+	; Check if we're forcing type
+	inc c
+	jp z, .loadwildmon
 	push bc
 	push hl
 	call GetBaseData
@@ -530,46 +575,52 @@ _ChooseWildEncounter:
 	pop bc
 	ld a, [wBaseType1]
 	cp c
-	jr z, .type_ok
+	jr z, .loadwildmon
 	ld a, [wBaseType2]
 	cp c
-	jr z, .type_ok
-	inc c
-	jr nz, .get_random_mon
+	jr z, .loadwildmon
+	jp .get_random_mon
 
-.type_ok
-	jr .loadwildmon
+.loadwildmon
+	ld a, b	; Make sure Species is in a
+	ld [wTempWildMonSpecies], a
+	ld a, [hli]	; Gets Level info
+	bit 7, a	; Check if Level is offset or override
+	jr nz, .levelOverride
+	ld b, a
+	farcall CalculatePartyAverage
+	add b
+	ld c, a
+	ld a, [wMinimumLevel]
+	cp c	; min(avg, minLevel)
+	jr nc, .gotLevel
+	ld a, [wMaximumLevel]
+	cp c	; max(avg, maxLevel)
+	jr c, .gotLevel
+	ld a, c
+	jr .gotLevel
+
+.levelOverride
+	and WILD_LVL_MASK
+.gotLevel
+	ld [wCurPartyLevel], a
+	ld a, [hli]	; Get Shiny/Ability/Form
+	ld [wTempWildMonForm], a
+	ld a, [hli]	; Get AI
+	ld [wTempWildMonAI], a
+	ld a, [hli]	; Get Item
+	ld [wTempWildMonItem], a
+.startwildbattle
+	xor a
+	ret
 
 .nowildbattle
 	ld a, 1
 	and a
 	ret
-
-.loadwildmon
-	ld a, b
-	ld [wTempWildMonSpecies], a
-
-	;ld a, [wMapGroup]
-	;cp GROUP_SOUL_HOUSE_B1F ; Soul House or Lavender Radio Tower
-	;jr nz, .not_ghost
-	;ld a, [wMapNumber]
-	;cp MAP_SOUL_HOUSE_B1F ; first Ghost map in its group
-	;jr c, .not_ghost
-	;ld a, SILPHSCOPE2
-	;ld [wCurItem], a
-	;ld hl, wNumKeyItems
-	;call CheckItem
-	;jr c, .not_ghost
-	;ld a, BATTLETYPE_GHOST
-	;ld [wBattleType], a
-.not_ghost
-
-.startwildbattle
-	xor a
-	ret
 ; 2a1cb
 
-INCLUDE "data/wild/probabilities.asm"
+;INCLUDE "data/wild/probabilities.asm"
 
 CheckRepelEffect::
 ; If there is no active Repel, there's no need to be here.
@@ -788,7 +839,7 @@ LookUpWildmonsForMapDE: ; 2a288
 .next
 	pop hl
 	ld b, 0
-	ld c, WILD_MAP_SIZE
+	ld c, WILD_GRASS_SIZE
 	add hl, bc
 	ld c, WILD_POKE_SIZE
 .poke_loop
