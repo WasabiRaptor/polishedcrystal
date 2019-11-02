@@ -106,5 +106,7 @@ retpoke: MACRO
 ENDM
 
 break: MACRO
+if DEF(DEBUG)
 	ld b, b
+endc
 ENDM
