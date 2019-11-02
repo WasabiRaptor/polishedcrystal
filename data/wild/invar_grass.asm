@@ -54,17 +54,14 @@ end_map: MACRO
 	db -1
 ENDM
 
+OUEST_PATHWAY_GRASS::	; 478C
 	wild_map OUEST_PATHWAY, 2, 10, COMMON_ALL
-	new_wild_mon MORN_ENC | DAY_ENC | WILD_35P, EEVEE
-	new_wild_mon MORN_ENC | DAY_ENC | WILD_20P, CYNDAQUIL, 1
-	new_wild_mon DUSK_ENC | NIGHT_ENC | WILD_30P, CYNDAQUIL
-	new_wild_mon DUSK_ENC | NIGHT_ENC | WILD_10P, CYNDAQUIL, 1
-	new_wild_mon DUSK_ENC | NIGHT_ENC | WILD_4P, CYNDAQUIL, 1
-	new_wild_mon MORN_ENC | DAY_ENC | WILD_30P, MEOWTH
-	new_wild_mon MORN_ENC | DAY_ENC | WILD_10P, MEOWTH, 1
-	new_wild_mon MORN_ENC | DAY_ENC | WILD_4P, MEOWTH, 1
-	new_wild_mon DUSK_ENC | NIGHT_ENC | WILD_35P, MEOWTH
-	new_wild_mon DUSK_ENC | NIGHT_ENC | WILD_20P, MEOWTH
+.eevee::
+	new_wild_mon ALL_TIMES | WILD_25P, EEVEE			; 4791
+.cyndaquil::
+	new_wild_mon ALL_TIMES | WILD_25P, CYNDAQUIL, 1	; 4798
+.vulpix::
+	new_wild_mon ALL_TIMES | WILD_50P, VULPIX, WILD_LVL_OVER | 50
 	end_map
 
 
