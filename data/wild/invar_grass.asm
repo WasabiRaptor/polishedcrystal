@@ -57,9 +57,9 @@ ENDM
 OUEST_PATHWAY_GRASS::	; 478C
 	wild_map OUEST_PATHWAY, 2, 10, COMMON_ALL
 .eevee::
-	new_wild_mon ALL_TIMES | WILD_25P, EEVEE			; 4791
+	new_wild_mon DAY_ENC | WILD_25P, EEVEE			; 4791
 .cyndaquil::
-	new_wild_mon ALL_TIMES | WILD_25P, CYNDAQUIL, 1	; 4798
+	new_wild_mon DAY_ENC | WILD_25P, CYNDAQUIL, 1	; 4798
 .vulpix::
 	new_wild_mon ALL_TIMES | WILD_50P, VULPIX, WILD_LVL_OVER | 50
 	end_map
