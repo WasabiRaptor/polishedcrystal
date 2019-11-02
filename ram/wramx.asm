@@ -538,6 +538,9 @@ wBattleMode::
 
 wTempWildMonSpecies:: ds 1
 wTempWildMonGroup:: ds 1
+wTempWildMonForm:: ds 1
+wTempWildMonAI:: ds 1
+wTempWildMonItem:: ds 1
 
 wOtherTrainerClass::
 ; class (Youngster, Bug Catcher, etc.) of opposing trainer
