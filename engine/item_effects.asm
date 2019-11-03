@@ -2495,7 +2495,7 @@ PrintAprValues:
 	lb bc, 1, 2
 	hlcoord 10, 4
 	ld de, wApricorns
-	call PrintNum
+	predef PrintNum
 	hlcoord 16, 4
 	call .print
 	hlcoord 10, 6
@@ -2509,7 +2509,7 @@ PrintAprValues:
 	hlcoord 10, 10
 .print
 	inc de
-	jp PrintNum
+	predef_jump PrintNum
 
 
 OldRod: ; f5a5

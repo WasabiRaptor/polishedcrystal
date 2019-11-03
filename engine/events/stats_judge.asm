@@ -17,7 +17,7 @@ SpecialStatsJudge: ; 4f0bc
 	cp EGG
 	jr z, .egg
 
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 
 	jp JudgePokemon

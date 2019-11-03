@@ -73,7 +73,7 @@ CheckPartyMove: ; c742
 	ld hl, wPartySpecies
 	add hl, bc
 	ld a, [hl]
-	call IsAPokemon
+	farcall IsAPokemon
 	jr c, .no
 
 	ld bc, PARTYMON_STRUCT_LENGTH

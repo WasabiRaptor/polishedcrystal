@@ -188,7 +188,7 @@ MainMenu_PrintCurrentTimeAndDay: ; 49e09
 	inc hl
 	ld de, hMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 49e75
 
 .PrintTimeNotSet: ; 49e75

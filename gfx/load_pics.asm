@@ -37,7 +37,7 @@ PokemonToGroupSpeciesAndForm::
 GetFrontpic: ; 51077
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 	ldh a, [rSVBK]
 	push af
@@ -72,7 +72,7 @@ GetOtherFrontpicAnimated:
 FrontpicPredef: ; 5108b
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 	ldh a, [rSVBK]
 	push af
@@ -236,7 +236,7 @@ GetBackpic: ; 5116c
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 
 	ldh a, [rSVBK]

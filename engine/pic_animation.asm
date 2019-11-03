@@ -290,7 +290,7 @@ AnimateMon_CheckIfPokemon: ; d01c6
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .fail
-	call IsAPokemon
+	farcall IsAPokemon
 	jr c, .fail
 	and a
 	ret

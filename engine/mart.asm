@@ -420,7 +420,7 @@ GetMartPrice: ; 15bf0
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 6 ; 6 digits
-	call PrintNum
+	predef PrintNum
 	pop hl
 
 	ld de, wStringBuffer1
@@ -900,7 +900,7 @@ BTMartConfirmPurchase:
 TMMartConfirmPurchase:
 	ld a, [wCurTMHM]
 	ld [wd265], a
-	call GetTMHMName
+	farcall GetTMHMName
 	call CopyName1
 
 	; off by one error?
@@ -1260,7 +1260,7 @@ BlueCardMenuDataHeader_Buy:
 	ld bc, SCREEN_WIDTH - 4
 	add hl, bc
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .PointsString
 	jp PlaceString
 
@@ -1289,7 +1289,7 @@ BTMenuDataHeader_Buy:
 	ld bc, SCREEN_WIDTH - 3
 	add hl, bc
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .PointsString
 	jp PlaceString
 

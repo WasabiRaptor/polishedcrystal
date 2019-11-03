@@ -156,18 +156,18 @@ channel_struct: MACRO
 ENDM
 
 battle_tower_struct: MACRO
-\1Name:: ds PLAYER_NAME_LENGTH +- 1
-\1TrainerClass:: ds 1
-\1Pkmn1:: party_struct \1Pkmn1
-\1Pkmn1Name:: ds PKMN_NAME_LENGTH
+\1Name:: ;ds PLAYER_NAME_LENGTH +- 1
+\1TrainerClass:: ;ds 1
+\1Pkmn1:: ;party_struct \1Pkmn1
+\1Pkmn1Name:: ;ds PKMN_NAME_LENGTH
 \1Pkmn1NameEnd::
-\1Pkmn2:: party_struct \1Pkmn2
-\1Pkmn2Name:: ds PKMN_NAME_LENGTH
+\1Pkmn2:: ;party_struct \1Pkmn2
+\1Pkmn2Name:: ;ds PKMN_NAME_LENGTH
 \1Pkmn2NameEnd::
-\1Pkmn3:: party_struct \1Pkmn3
-\1Pkmn3Name:: ds PKMN_NAME_LENGTH
+\1Pkmn3:: ;party_struct \1Pkmn3
+\1Pkmn3Name:: ;ds PKMN_NAME_LENGTH
 \1Pkmn3NameEnd::
-\1Padding: ds BATTLETOWER_PADDING_SIZE
+\1Padding: ;ds BATTLETOWER_PADDING_SIZE
 \1TrainerEnd::
 endm
 

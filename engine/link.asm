@@ -1518,7 +1518,7 @@ LinkTrade: ; 28b87
 	push af
 	ld a, [wd002]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld de, wPlayerTrademonOTName
 	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
@@ -1559,7 +1559,7 @@ LinkTrade: ; 28b87
 	ld [wOTTrademonSpecies], a
 	ld a, [wd003]
 	ld hl, wOTPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld de, wOTTrademonOTName
 	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes

@@ -57,3 +57,4 @@ PredefPointers::
 	add_predef GetNick
 	add_predef GetPartyParamLocation
 	add_predef GetPartyLocation
+	add_predef PrintNum

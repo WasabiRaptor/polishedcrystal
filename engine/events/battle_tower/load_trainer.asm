@@ -229,7 +229,7 @@ PopulateBattleTowerTeam:
 	pop de
 	push de
 	ld a, d
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wStringBuffer1

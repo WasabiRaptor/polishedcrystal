@@ -1171,7 +1171,7 @@ Text_PrintNum::
 	swap a
 	set PRINTNUM_LEFTALIGN_F, a
 	ld b, a
-	call PrintNum
+	predef PrintNum
 	ld b, h
 	ld c, l
 	pop hl

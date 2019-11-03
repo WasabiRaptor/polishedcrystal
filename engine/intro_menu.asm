@@ -592,7 +592,7 @@ Continue_DisplayBadgeCount: ; 5f58
 	pop hl
 	ld de, wd265
 	lb bc, 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 5f6b
 
 Continue_DisplayPokedexNumCaught: ; 5f6b
@@ -610,18 +610,18 @@ ENDC
 	pop hl
 	ld de, wd265
 	lb bc, 1, 3
-	jp PrintNum
+	predef_jump PrintNum
 ; 5f84
 
 Continue_DisplayGameTime: ; 5f84
 	ld de, wGameTimeHours
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 	ld [hl], "<COLON>"
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 5f99
 
 InitGender: ; 48dcb (12:4dcb)

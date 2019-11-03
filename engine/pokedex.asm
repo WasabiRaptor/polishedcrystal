@@ -363,7 +363,7 @@ Pokedex_PrintTotalEncounters:
 	hlcoord 10, 5
 	ld c, 7
 	ld b, 2 | PRINTNUM_LEFTALIGN
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 9, 6
 	ld de, StringThisCycle
@@ -372,7 +372,7 @@ Pokedex_PrintTotalEncounters:
 	hlcoord 10, 7
 	ld c, 7
 	ld b, 2 | PRINTNUM_LEFTALIGN
-	call PrintNum
+	predef PrintNum
 
 	pop af
 	ldh [rSVBK], a
@@ -1191,7 +1191,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld de, wPokedexSeenCaughtCount
 	hlcoord 10, 2
 	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
-	call PrintNum
+	predef PrintNum
 	hlcoord 14, 1
 	ld de, String_OWN
 	call PlaceString
@@ -1201,7 +1201,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld de, wPokedexSeenCaughtCount
 	hlcoord 15, 2
 	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
-	call PrintNum
+	predef PrintNum
 
 	pop af ; 0
 	ldh [rSVBK], a
@@ -1437,7 +1437,7 @@ Pokedex_DrawSearchResultsScreenBG: ; 40962 (10:4962)
 	ld de, wDexSearchResultCount
 	hlcoord 9, 7
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
 
@@ -1817,7 +1817,7 @@ Pokexex_PrintNumberAndTypes:
 	call GetBaseData ;form is known
 	ld de, wNatDexNo
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
-	call PrintNum
+	predef PrintNum
 
 	ld bc, PKMN_TILE_NAME_LENGTH - 4
 	add hl, bc

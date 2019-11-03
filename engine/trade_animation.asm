@@ -964,7 +964,7 @@ TrademonStats_WaitBGMap: ; 295d8
 TrademonStats_PrintSpeciesNumber: ; 295e3
 	hlcoord 10, 0
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum
+	predef PrintNum
 	ld [hl], " "
 	ret
 ; 295ef
@@ -1000,7 +1000,7 @@ TrademonStats_PrintOTName: ; 295f6
 TrademonStats_PrintTrademonID: ; 29611
 	hlcoord 7, 6
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	jp PrintNum
+	predef_jump PrintNum
 ; 2961b
 
 TradeAnim_RockingBall: ; 2961b

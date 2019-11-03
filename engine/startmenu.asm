@@ -1539,7 +1539,7 @@ MoveScreenLoop:
 	rst AddNTimes
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
-	call IsAPokemon
+	farcall IsAPokemon
 	ld a, d
 	jr c, .loop_right_invalid
 	ld [wCurPartyMon], a
@@ -1578,7 +1578,7 @@ MoveScreenLoop:
 	rst AddNTimes
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
-	call IsAPokemon
+	farcall IsAPokemon
 	ld a, d
 	jr c, .loop_left_invalid
 	ld [wCurPartyMon], a
@@ -1699,6 +1699,20 @@ MoveScreenLoop:
 	ld a, b
 	ld [de], a
 	ret
+
+IsHMMove:: ; 34e7
+	ld hl, .HMMoves
+	ld de, 1
+	jp IsInArray
+
+.HMMoves:
+	db CUT
+	db FLY
+	db SURF
+	db STRENGTH
+	db WATERFALL
+	db WHIRLPOOL
+	db -1
 
 GetForgottenMoves::
 ; retrieve a list of a mon's forgotten moves, excluding ones beyond level
@@ -2058,7 +2072,7 @@ PlaceMoveData:
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .place_accuracy
 .no_power
 	ld de, String_na
@@ -2088,7 +2102,7 @@ PlaceMoveData:
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .description
 .no_acc
 	ld de, String_na

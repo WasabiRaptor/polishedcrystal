@@ -330,11 +330,11 @@ DisplayCaughtContestMonStats: ; cc000
 	hlcoord 11, 4
 	ld de, wContestMonMaxHP
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 11, 10
 	ld de, wEnemyMonMaxHP
-	call PrintNum
+	predef PrintNum
 
 	ld hl, SwitchMonText
 	call PrintText
@@ -431,7 +431,7 @@ UpdateItemDescriptionAndBagQuantity:
 	hlcoord 6, 1
 	ld de, wBuffer1
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 UpdateItemDescription: ; 0x244c3
 	ld a, [wMenuSelection]
 	ld [wCurSpecies], a
@@ -526,7 +526,7 @@ PlaceMenuTMHMName:
 	push de
 	ld a, [wMenuSelection]
 	ld [wNamedObjectIndexBuffer], a
-	call GetTMHMName
+	farcall GetTMHMName
 	pop hl
 	jp PlaceString
 
@@ -555,7 +555,7 @@ _PlaceMenuQuantity:
 	inc hl
 	ld de, wMenuSelectionQuantity
 	lb bc, 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 
 PlaceMoneyTopRight: ; 24ae8
 	ld hl, MenuDataHeader_0x24b15
@@ -579,7 +579,7 @@ PlaceMoneyDataHeader: ; 24b01
 	add hl, de
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 7
-	jp PrintNum
+	predef_jump PrintNum
 
 MenuDataHeader_0x24b15: ; 0x24b15
 	db $40 ; flags
@@ -602,7 +602,7 @@ PlaceBlueCardPointsTopRight:
 	hlcoord 12, 1
 	ld de, wBlueCardBalance
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .PointsString
 	jp PlaceString
 
@@ -616,7 +616,7 @@ PlaceBattlePointsTopRight:
 	hlcoord 13, 1
 	ld de, wBattlePoints
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .BPString
 	jp PlaceString
 
@@ -634,7 +634,7 @@ Special_DisplayCoinCaseBalance: ; 24b25
 	ld de, wCoins
 	lb bc, 2, 5
 	hlcoord 13, 1
-	jp PrintNum
+	predef_jump PrintNum
 
 Special_DisplayMoneyAndCoinBalance: ; 24b4e
 	hlcoord 5, 0
@@ -646,14 +646,14 @@ Special_DisplayMoneyAndCoinBalance: ; 24b4e
 	hlcoord 11, 1
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 7
-	call PrintNum
+	predef PrintNum
 	hlcoord 6, 3
 	ld de, CoinString
 	call PlaceString
 	hlcoord 14, 3
 	ld de, wCoins
 	lb bc, 2, 5
-	jp PrintNum
+	predef_jump PrintNum
 
 MoneyString: ; 24b83
 	db "Money@"
@@ -677,7 +677,7 @@ StartMenu_PrintBugContestStatus: ; 24be7
 	hlcoord 8, 5
 	ld de, wParkBallsRemaining
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	hlcoord 1, 1
 	ld de, .Caught
 	call PlaceString
@@ -1079,7 +1079,7 @@ DisplayDexEntry: ; 4424d
 	call GetBaseData
 	ld de, wNatDexNo
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
-	call PrintNum
+	predef PrintNum
 	farcall Pokedex_DrawFootprint
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wPokedexCurrentMon]
@@ -1215,22 +1215,22 @@ DisplayDexEntry: ; 4424d
 	lb bc, 1, 3
 	hlcoord 9, 3
 	ld de, wBaseHP
-	call PrintNum
+	predef PrintNum
 	hlcoord 13, 3
 	inc de ;wBaseAttack
-	call PrintNum
+	predef PrintNum
 	hlcoord 17, 3
 	inc de ;wBaseDefense
-	call PrintNum
+	predef PrintNum
 	hlcoord 9, 6
 	inc de ;wBaseSpeed
-	call PrintNum
+	predef PrintNum
 	hlcoord 13, 6
 	inc de ;wBaseSpecialAttack
-	call PrintNum
+	predef PrintNum
 	hlcoord 17, 6
 	inc de ;wBaseSpecialDefense
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 9, 8
 	ld de, .EvYield
@@ -1377,7 +1377,7 @@ DisplayDexEntry: ; 4424d
 	ld hl, wStringBuffer1 + 3
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
-	call PrintNum
+	predef PrintNum
 	dec hl
 	ld a, [hl]
 	ld [hl], "."
@@ -2083,7 +2083,7 @@ GetTrademonFrontpic: ; 4d7fd
 
 AnimateTrademonFrontpic: ; 4d81e
 	ld a, [wOTTrademonSpecies]
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 	farcall ShowOTTrademonStats
 	ld a, [wOTTrademonSpecies]
@@ -2257,11 +2257,11 @@ Special_CheckForLuckyNumberWinners: ; 4d87a
 	ld e, l
 	ld hl, wBuffer1
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	ld hl, wLuckyNumberDigitsBuffer
 	ld de, wLuckyIDNumber
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	lb bc, 5, 0
 	ld hl, wLuckyNumberDigitsBuffer + 4
 	ld de, wBuffer1 + 4
@@ -2353,7 +2353,7 @@ Special_PrintTodaysLuckyNumber: ; 4d9d3
 	ld hl, wStringBuffer3
 	ld de, wLuckyIDNumber
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	ld a, "@"
 	ld [wStringBuffer3 + 5], a
 	ret
@@ -2394,7 +2394,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
@@ -2420,7 +2420,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wMonOrItemNameBuffer
@@ -3084,7 +3084,7 @@ DrawPlayerHP: ; 50b0a
 	ld de, wTempMonMaxHP
 .not_boxmon_2
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 
 	ld a, "/"
 	ld [hli], a
@@ -3092,7 +3092,7 @@ DrawPlayerHP: ; 50b0a
 ; Print max HP
 	ld de, wTempMonMaxHP
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 	pop hl
 	pop de
 	ret
@@ -3133,11 +3133,11 @@ endr
 	ld de, wTempMonSpclDef
 	call .PrintStat
 	ld de, wTempMonSpeed
-	jp PrintNum
+	predef_jump PrintNum
 
 .PrintStat: ; 50bab
 	push hl
-	call PrintNum
+	predef PrintNum
 	pop hl
 	ld de, SCREEN_WIDTH * 2
 	add hl, de
@@ -3302,7 +3302,7 @@ PrintStatDifferences: ; 50b7b
 	ld a, b
 	lb bc, 2, 3
 	push af
-	call PrintNum
+	predef PrintNum
 	pop af
 	and a
 	jr z, .mod_done
@@ -3324,7 +3324,7 @@ PrintStatDifferences: ; 50b7b
 	dec c
 	push de
 	ld de, wStringBuffer3 + 12
-	call PrintNum
+	predef PrintNum
 .mod_done
 	pop de
 	pop hl
@@ -3570,12 +3570,12 @@ ListMovePP: ; 50c50
 	push hl
 	ld de, wStringBuffer1 + 4
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld a, "/"
 	ld [hli], a
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	pop hl
 	ld a, [wBuffer1]
 	ld e, a
@@ -4005,12 +4005,12 @@ _SwitchPartyMons:
 	rst CopyBytes
 	ld a, [wBuffer2]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	push hl
 	call .CopyNameTowd002
 	ld a, [wBuffer3]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	pop de
 	push hl
 	call .CopyName
@@ -4019,12 +4019,12 @@ _SwitchPartyMons:
 	call .CopyName
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer2]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	push hl
 	call .CopyNameTowd002
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer3]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	pop de
 	push hl
 	call .CopyName
@@ -4778,6 +4778,84 @@ INCLUDE "data/wild/treemons_asleep.asm"
 
 SECTION "Code 26", ROMX
 
+FacingPlayerDistance_bc:: ; 36a5
+	push de
+	call FacingPlayerDistance
+	ld b, d
+	ld c, e
+	pop de
+	ret
+; 36ad
+
+FacingPlayerDistance:: ; 36ad
+; Return carry if the sprite at bc is facing the player,
+; and its distance in d.
+
+	ld hl, OBJECT_NEXT_MAP_X ; x
+	add hl, bc
+	ld d, [hl]
+
+	ld hl, OBJECT_NEXT_MAP_Y ; y
+	add hl, bc
+	ld e, [hl]
+
+	ld a, [wPlayerStandingMapX]
+	cp d
+	jr z, .CheckY
+
+	ld a, [wPlayerStandingMapY]
+	cp e
+	jr z, .CheckX
+
+	and a
+	ret
+
+.CheckY:
+	ld a, [wPlayerStandingMapY]
+	sub e
+	jr z, .NotFacing
+	jr nc, .Above
+
+; Below
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_UP
+	jr .CheckFacing
+
+.Above:
+	ld d, a
+	ld e, OW_DOWN
+	jr .CheckFacing
+
+.CheckX:
+	ld a, [wPlayerStandingMapX]
+	sub d
+	jr z, .NotFacing
+	jr nc, .Left
+
+; Right
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_LEFT
+	jr .CheckFacing
+
+.Left:
+	ld d, a
+	ld e, OW_RIGHT
+
+.CheckFacing:
+	call GetSpriteDirection
+	cp e
+	jr nz, .NotFacing
+	scf
+	ret
+
+.NotFacing:
+	and a
+	ret
+
 GetRelevantBaseData::
 ;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
 ; returns c for variants, nc for normal species
@@ -4801,7 +4879,88 @@ GetRelevantBaseData::
 
 INCLUDE "data/pokemon/variant_base_data_table.asm"
 
-_IsAPokemon::
+GetTMHMName:: ; 3487
+; Get TM/HM name by item id wNamedObjectIndexBuffer.
+
+	push hl
+	push de
+	push bc
+	ld a, [wNamedObjectIndexBuffer]
+	push af
+
+; TM/HM prefix
+	cp HM01
+	push af
+	jr c, .TM
+
+	ld hl, .HMText
+	ld bc, .HMTextEnd - .HMText
+	jr .asm_34a1
+
+.TM:
+	ld hl, .TMText
+	ld bc, .TMTextEnd - .TMText
+
+.asm_34a1
+	ld de, wStringBuffer1
+	rst CopyBytes
+
+; TM/HM number
+	ld a, [wNamedObjectIndexBuffer]
+	ld c, a
+
+; HM numbers start from 51, not 1
+	pop af
+	ld a, c
+	jr c, .asm_34b9
+	sub NUM_TMS
+.asm_34b9
+	inc a
+
+; Divide and mod by 10 to get the top and bottom digits respectively
+	ld b, "0"
+.mod10
+	sub 10
+	jr c, .asm_34c2
+	inc b
+	jr .mod10
+.asm_34c2
+	add 10
+
+	push af
+	ld a, b
+	ld [de], a
+	inc de
+	pop af
+
+	ld b, "0"
+	add b
+	ld [de], a
+
+; End the string
+	inc de
+	ld a, "@"
+	ld [de], a
+
+	pop af
+	ld [wNamedObjectIndexBuffer], a
+	pop bc
+	pop de
+	pop hl
+	ld de, wStringBuffer1
+	ret
+
+.TMText:
+	db "TM"
+.TMTextEnd:
+	db "@"
+
+.HMText:
+	db "HM"
+.HMTextEnd:
+	db "@"
+
+IsAPokemon::
 ; Return carry if species a is not a Pokemon.
 	and a
 	jp z, .not_a_pokemon
@@ -4916,7 +5075,7 @@ Print8BitNumRightAlign:: ; 3842
 	ld [wd265], a
 	ld de, wd265
 	ld b, PRINTNUM_LEFTALIGN | 1
-	jp PrintNum
+	predef_jump PrintNum
 
 GetCharacterWidth::
 	push hl

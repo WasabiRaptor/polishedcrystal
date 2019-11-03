@@ -192,7 +192,7 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	jr nc, .HM
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
+	predef PrintNum
 	jr .okay
 
 .HM:
@@ -203,7 +203,7 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	inc hl
 	ld de, wd265
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	pop af
 	ld [wd265], a
 .okay
@@ -460,6 +460,15 @@ TeachTMHM: ; 2c867
 	scf
 	ret
 ; 2c8bf (b:48bf)
+
+IsHM:: ; 34df
+	cp HM01
+	jr c, .NotHM
+	scf
+	ret
+.NotHM:
+	and a
+	ret
 
 KnowsMove: ; f9ea
 	ld a, MON_MOVES

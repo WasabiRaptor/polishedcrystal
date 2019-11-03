@@ -2359,7 +2359,7 @@ BillsPC_PrintBoxCountAndCapacity: ; e3632
 	hlcoord 13, 11
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_20
 	jp PlaceString
 ; e3663
@@ -2389,7 +2389,7 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	hlcoord 1, 1
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_20
 	jp PlaceString
 
@@ -2399,7 +2399,7 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	hlcoord 1, 1
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_6
 	jp PlaceString
 

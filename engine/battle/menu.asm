@@ -74,7 +74,7 @@ ShowParkBallsRemaining: ; 24fb2
 	hlcoord 13, 16
 	ld de, wParkBallsRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 24fbf
 
 SafariBattleMenuDataHeader:
@@ -101,4 +101,4 @@ ShowSafariBallsRemaining:
 	hlcoord 7, 14
 	ld de, wSafariBallsRemaining
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	predef_jump PrintNum

@@ -3114,7 +3114,21 @@ LostBattle: ; 3d38e
 	scf
 	ret
 ; 3d432
+PrintWinLossText:: ; 3718
+	ld a, [wBattleResult]
+	ld hl, wWinTextPointer
+	and $f
+	jr z, .ok
+	ld hl, wLossTextPointer
 
+.ok
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wMapScriptHeaderBank]
+	call FarPrintText
+	call ApplyTilemapInVBlank
+	jp WaitPressAorB_BlinkCursor
 
 EnemyMonFaintedAnimation: ; 3d432
 	hlcoord 12, 5
@@ -3813,7 +3827,7 @@ InitBattleMon: ; 3da0d
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld de, wBattleMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
@@ -3902,7 +3916,7 @@ InitEnemyMon: ; 3dabd
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 
 	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
 	ld b, a
@@ -6364,7 +6378,7 @@ MoveInfoBox: ; 3e6c8
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .place_accuracy
 .no_power
 	ld de, .NA
@@ -6395,7 +6409,7 @@ MoveInfoBox: ; 3e6c8
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .icons
 .no_acc
 	ld de, .NA
@@ -6450,12 +6464,12 @@ MoveInfoBox: ; 3e6c8
 	ld hl, wStringBuffer2
 	ld de, wStringBuffer1
 	lb bc, 1 | PRINTNUM_LEADINGZEROS, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "/"
 	inc hl
 	ld de, wNamedObjectIndexBuffer
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "@"
 	ld de, wStringBuffer2
 	hlcoord $f, $10
@@ -9322,20 +9336,20 @@ ReadAndPrintLinkBattleRecord: ; 3f85f
 	push hl
 	ld de, wd002 + 11 ; win
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 	pop hl
 	ld de, 5
 	add hl, de
 	push hl
 	ld de, wd002 + 13 ; lose
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 	pop hl
 	ld de, 5
 	add hl, de
 	ld de, wd002 + 15 ; draw
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 	jr .next
 
 .PrintFormatString:
@@ -9374,21 +9388,21 @@ ReadAndPrintLinkBattleRecord: ; 3f85f
 	ret c
 
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 11, 4
 	ld de, sLinkBattleLosses
 	call .PrintZerosIfNoSaveFileExists
 
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 16, 4
 	ld de, sLinkBattleDraws
 	call .PrintZerosIfNoSaveFileExists
 
 	lb bc, 2, 4
-	jp PrintNum
+	predef_jump PrintNum
 
 .PrintZerosIfNoSaveFileExists:
 	ld a, [wSavedAtLeastOnce]
@@ -9729,6 +9743,29 @@ AddLastBattleToLinkRecord: ; 3fa42
 	inc e
 	ret
 ; 3fb6c
+
+CompareLong:: ; 31e4
+; Compare bc bytes at de and hl.
+; Return carry if they all match.
+
+	ld a, [de]
+	cp [hl]
+	jr nz, .Diff
+
+	inc de
+	inc hl
+	dec bc
+
+	ld a, b
+	or c
+	jr nz, CompareLong
+
+	scf
+	ret
+
+.Diff:
+	and a
+	ret
 
 InitBattleDisplay: ; 3fb6c
 	call .InitBackPic

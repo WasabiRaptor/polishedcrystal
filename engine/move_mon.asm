@@ -565,6 +565,28 @@ FillPP: ; da6d
 	ret
 ; da96
 
+SkipPokemonNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PKMN_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
+SkipPlayerNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PLAYER_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
 AddTempmonToParty: ; da96
 	ld hl, wPartyCount
 	ld a, [hl]
@@ -1584,6 +1606,23 @@ RemoveMonFromPartyOrBox: ; e039
 	jp CloseSRAM
 ; e134
 
+CopyDataUntil:: ; 318c
+; Copy [hl .. bc) to de.
+
+; In other words, the source data is
+; from hl up to but not including bc,
+; and the destination is de.
+
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, h
+	cp b
+	jr nz, CopyDataUntil
+	ld a, l
+	cp c
+	jr nz, CopyDataUntil
+	ret
 
 ComputeNPCTrademonStats: ; e134
 	ld a, MON_LEVEL
