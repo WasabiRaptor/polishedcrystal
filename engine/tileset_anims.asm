@@ -37,7 +37,7 @@ SetGrassTiles::
 
 	ld a, [wHasPlayerMoved]
 	cp 2
-	ret nz
+	ret nc
 	and a
 	ld a, [wGrassTileAddress]
 	ld h, a

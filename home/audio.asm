@@ -207,7 +207,7 @@ GetRelevantCryPointers:
 ; eturn *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
 	ld hl, RegionalCryTable
-	farcall dbwArray
+	call dbwArray
 
 	ld a, [wCurSpecies]
 	ld de, 4

@@ -488,10 +488,10 @@ GetRelevantIconPointersAndBank:
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalIconPointerTable
-	farcall dbwArray
+	call dbwArray
 
 	ld a, [wCurIcon]
-	farcall dbwArray
+	call dbwArray
 	ld a, [wCurForm]
 	jr c, .variant
 	ld a, [wCurIcon]
@@ -518,7 +518,7 @@ GetRelevantMonIconColors:
 ; given species in a, return *PicPointers in hl 
 ; returns c for variants, nc for normal species
 	ld hl, RegionalIconPalTable
-	farcall dbwArray
+	call dbwArray
 
 	ld de, 4
 	call IsInArray
