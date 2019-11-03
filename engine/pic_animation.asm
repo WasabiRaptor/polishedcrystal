@@ -865,7 +865,7 @@ PokeAnim_GetAttrMapCoord: ; d0551
 GetMonAnimPointer: ; d055c
 	ld a, [wPokeAnimGroup]
 	ld hl, RegionalAnimPointerTable
-	call dbwArray
+	farcall dbwArray
 
 	ld a, [wPokeAnimSpecies]
 	ld de, 6
@@ -920,7 +920,7 @@ PokeAnim_GetFrontpicDims: ; d05b4
 GetMonFramesPointer: ; d05ce
 	ld a, [wPokeAnimGroup]
 	ld hl, RegionalFramesPointerTable
-	call dbwArray
+	farcall dbwArray
 
 	ld a, [wPokeAnimSpecies]
 	ld de, 5
@@ -954,7 +954,7 @@ GetMonFramesPointer: ; d05ce
 GetMonBitmaskPointer: ; d061b
 	ld a, [wPokeAnimGroup]
 	ld hl, RegionalBitmasksPointerTable
-	call dbwArray
+	farcall dbwArray
 
 	ld a, [wPokeAnimSpecies]
 	ld de, 4

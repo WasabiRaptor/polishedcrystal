@@ -60,7 +60,7 @@ endr
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld de, .Nickname
 	call CopyName2
 
@@ -68,7 +68,7 @@ endr
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld de, .OT
 	call CopyName2
 
@@ -123,7 +123,7 @@ SpecialGiveWobbuffet: ; 7305
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld de, SpecialWobbuffetNick
 	call CopyName2
 
@@ -131,7 +131,7 @@ SpecialGiveWobbuffet: ; 7305
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld de, SpecialWobbuffetOT
 	call CopyName2
 
@@ -178,7 +178,7 @@ SpecialReturnWobbuffet: ; 737e
 ; OT
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld de, SpecialWobbuffetOT
 .CheckOT:
 	ld a, [de]

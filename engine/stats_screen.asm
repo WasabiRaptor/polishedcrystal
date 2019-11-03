@@ -1042,6 +1042,34 @@ StatsScreen_PlaceFrontpic: ; 4e226 (13:6226)
 	set 6, [hl]
 	ret
 
+PrepMonFrontpic:: ; 3786
+	ld a, $1
+	ld [wBoxAlignment], a
+
+_PrepMonFrontpic:: ; 378b
+	ld a, [wCurPartySpecies]
+	call IsAPokemon
+	jr c, .not_pokemon
+
+	push hl
+	ld de, VTiles2
+	predef GetFrontpic
+	pop hl
+	xor a
+	ldh [hGraphicStartTile], a
+	lb bc, 7, 7
+	predef PlaceGraphic
+	xor a
+	ld [wBoxAlignment], a
+	ret
+
+.not_pokemon
+	xor a
+	ld [wBoxAlignment], a
+	inc a
+	ld [wCurPartySpecies], a
+	ret
+
 StatsScreen_GetAnimationParam: ; 4e2ad (13:62ad)
 	ld a, [wMonType]
 	ld hl, .Jumptable
@@ -1322,7 +1350,7 @@ GetNicknamePointer: ; 4e528 (13:6528)
 	cp BREEDMON
 	ret z
 	ld a, [wCurPartyMon]
-	jp SkipPokemonNames
+	farjp SkipPokemonNames
 
 
 CheckFaintedFrzSlp: ; 4e53f

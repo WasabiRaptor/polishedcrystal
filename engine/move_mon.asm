@@ -565,6 +565,28 @@ FillPP: ; da6d
 	ret
 ; da96
 
+SkipPokemonNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PKMN_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
+SkipPlayerNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PLAYER_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
 AddTempmonToParty: ; da96
 	ld hl, wPartyCount
 	ld a, [hl]

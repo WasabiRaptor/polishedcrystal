@@ -272,7 +272,7 @@ AnimateHOFMonEntrance: ; 865b5
 	ld a, " "
 	call ByteFill
 	hlcoord 6, 5
-	call _PrepMonFrontpic
+	farcall _PrepMonFrontpic
 	call ApplyTilemapInVBlank
 	xor a
 	ldh [hBGMapMode], a
@@ -479,7 +479,7 @@ DisplayHOFMon: ; 86748
 	xor a
 	ld [wBoxAlignment], a
 	hlcoord 6, 5
-	call _PrepMonFrontpic
+	farcall _PrepMonFrontpic
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .print_id_no

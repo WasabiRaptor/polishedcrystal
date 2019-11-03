@@ -1,13 +1,13 @@
 Function_LoadOpponentTrainer: ; 1f8000
 	ldh a, [rSVBK]
 	push af
-	ld a, BANK(wBT_OTTrainer)
+	;ld a, BANK(wBT_OTTrainer)
 	ldh [rSVBK], a
 
 	; Fill BT_OTTrainer with zeros
 	xor a
-	ld hl, wBT_OTTrainer
-	ld bc, wBT_OTTrainerEnd - wBT_OTTrainer
+	;ld hl, wBT_OTTrainer
+	;ld bc, wBT_OTTrainerEnd - wBT_OTTrainer
 	call ByteFill
 
 	ld a, BANK(sBTTrainers)
@@ -66,7 +66,7 @@ endc
 
 ; Copy name (10 bytes) and class (1 byte) of trainer
 	ld hl, BattleTowerTrainers
-	ld de, wBT_OTName
+	;ld de, wBT_OTName
 	ld bc, PLAYER_NAME_LENGTH
 	rst AddNTimes
 	ld bc, PLAYER_NAME_LENGTH
@@ -229,7 +229,7 @@ PopulateBattleTowerTeam:
 	pop de
 	push de
 	ld a, d
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wStringBuffer1

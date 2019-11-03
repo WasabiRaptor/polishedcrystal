@@ -2532,7 +2532,7 @@ WinTrainerBattle: ; 3cfa4
 	call DelayFrames
 	call EmptyBattleTextBox
 	ld c, $3
-	farcall BattleTowerText
+	;farcall BattleTowerText
 	call WaitPressAorB_BlinkCursor
 	ld hl, wPayDayMoney
 	ld a, [hli]
@@ -3025,6 +3025,22 @@ ForcePickSwitchMonInBattle: ; 3d380
 	ret
 ; 3d38e
 
+PrintWinLossText:: ; 3718
+	ld a, [wBattleResult]
+	ld hl, wWinTextPointer
+	and $f
+	jr z, .ok
+	ld hl, wLossTextPointer
+
+.ok
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wMapScriptHeaderBank]
+	call FarPrintText
+	call ApplyTilemapInVBlank
+	jp WaitPressAorB_BlinkCursor
+
 
 LostBattle: ; 3d38e
 	ld a, 1
@@ -3077,7 +3093,7 @@ LostBattle: ; 3d38e
 
 	call EmptyBattleTextBox
 	ld c, 2
-	farcall BattleTowerText
+	;farcall BattleTowerText
 	call WaitPressAorB_BlinkCursor
 	call ClearTileMap
 	jp ClearBGPalettes
@@ -3813,7 +3829,7 @@ InitBattleMon: ; 3da0d
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld de, wBattleMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
@@ -3902,7 +3918,7 @@ InitEnemyMon: ; 3dabd
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 
 	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
 	ld b, a
@@ -6757,7 +6773,7 @@ GetRelevantTotalEncounterdPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, EncounterCounterPointerTable
-	call dbwArray
+	farcall dbwArray
 	pop de
 	pop bc
 	ret
@@ -6767,7 +6783,7 @@ GetRelevantTotalDefeatedPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, DefeatedCounterPointerTable
-	call dbwArray
+	farcall dbwArray
 	pop de
 	pop bc
 	ret
@@ -9522,6 +9538,28 @@ GetRoamMonSpecies: ; 3fa31
 	ret
 ; 3fa42
 
+CompareLong:: ; 31e4
+; Compare bc bytes at de and hl.
+; Return carry if they all match.
+
+	ld a, [de]
+	cp [hl]
+	jr nz, .Diff
+
+	inc de
+	inc hl
+	dec bc
+
+	ld a, b
+	or c
+	jr nz, CompareLong
+
+	scf
+	ret
+
+.Diff:
+	and a
+	ret
 
 AddLastBattleToLinkRecord: ; 3fa42
 	ld hl, wOTPlayerID

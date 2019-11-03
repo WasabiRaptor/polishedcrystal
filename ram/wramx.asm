@@ -1185,26 +1185,9 @@ wPokeAnimBitmaskBuffer:: ds 1
 	ds 8
 wPokeAnimStructEnd::
 
+wDEDTempSamp:: ds 16
 
-SECTION "Battle Tower", WRAMX
-
-; BattleTower OpponentTrainer-Data (length = 0xe0 = $a + $1 + 3*$3b + $24)
-wBT_OTTrainer:: battle_tower_struct wBT_OT
-
-	ds $20
-
-wBT_TrainerTextIndex:: ds 2
-
-wBT_OTTrainer1:: battle_tower_struct wBT_OTTrainer1
-wBT_OTTrainer2:: battle_tower_struct wBT_OTTrainer2
-wBT_OTTrainer3:: battle_tower_struct wBT_OTTrainer3
-wBT_OTTrainer4:: battle_tower_struct wBT_OTTrainer4
-wBT_OTTrainer5:: battle_tower_struct wBT_OTTrainer5
-wBT_OTTrainer6:: battle_tower_struct wBT_OTTrainer6
-wBT_OTTrainer7:: battle_tower_struct wBT_OTTrainer7
-
-wBTChoiceOfLvlGroup:: ds 1
-
+wGetDEDByte:: ds $100
 
 SECTION "Sound Stack", WRAMX
 

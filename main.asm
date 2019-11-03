@@ -1617,9 +1617,9 @@ GetDexEntryPointer:: ; 44333
 ;get relevant pointers
 	ld a, [wCurGroup]
 	ld hl, RegionalPokedexEntryPointerTable
-	call dbwArray
+	farcall dbwArray
 	ld a, [wCurSpecies]
-	call dbwArray
+	farcall dbwArray
 	ld a, [wCurForm]
 	jp c, .variant
 	ld a, [wCurSpecies]
@@ -2394,7 +2394,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld d, h
 	ld e, l
 	ld hl, wPlayerName
@@ -2420,7 +2420,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMonNicknames
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wMonOrItemNameBuffer
@@ -4005,12 +4005,12 @@ _SwitchPartyMons:
 	rst CopyBytes
 	ld a, [wBuffer2]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	push hl
 	call .CopyNameTowd002
 	ld a, [wBuffer3]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	pop de
 	push hl
 	call .CopyName
@@ -4019,12 +4019,12 @@ _SwitchPartyMons:
 	call .CopyName
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer2]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	push hl
 	call .CopyNameTowd002
 	ld hl, wPartyMonNicknames
 	ld a, [wBuffer3]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	pop de
 	push hl
 	call .CopyName
@@ -4277,8 +4277,8 @@ INCLUDE "engine/events/kurt.asm"
 INCLUDE "engine/events/unown.asm"
 INCLUDE "engine/events/buena.asm"
 INCLUDE "engine/events/movesets.asm"
-INCLUDE "engine/events/battle_tower/battle_tower.asm"
-INCLUDE "engine/events/battle_tower/trainer_text.asm"
+;INCLUDE "engine/events/battle_tower/battle_tower.asm"
+;INCLUDE "engine/events/battle_tower/trainer_text.asm"
 INCLUDE "engine/events/item_maniacs.asm"
 
 
@@ -4783,7 +4783,7 @@ GetRelevantBaseData::
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalBaseDataTable
-	call dbwArray
+	farcall dbwArray
 	;getting the variant base data table for said region and now checking it
 	ld a, [wCurSpecies]
 	ld de, 4
@@ -4800,6 +4800,173 @@ GetRelevantBaseData::
 	ret
 
 INCLUDE "data/pokemon/variant_base_data_table.asm"
+_GetTMHMName:: ; 3487
+; Get TM/HM name by item id wNamedObjectIndexBuffer.
+
+	push hl
+	push de
+	push bc
+	ld a, [wNamedObjectIndexBuffer]
+	push af
+
+; TM/HM prefix
+	cp HM01
+	push af
+	jr c, .TM
+
+	ld hl, .HMText
+	ld bc, .HMTextEnd - .HMText
+	jr .asm_34a1
+
+.TM:
+	ld hl, .TMText
+	ld bc, .TMTextEnd - .TMText
+
+.asm_34a1
+	ld de, wStringBuffer1
+	rst CopyBytes
+
+; TM/HM number
+	ld a, [wNamedObjectIndexBuffer]
+	ld c, a
+
+; HM numbers start from 51, not 1
+	pop af
+	ld a, c
+	jr c, .asm_34b9
+	sub NUM_TMS
+.asm_34b9
+	inc a
+
+; Divide and mod by 10 to get the top and bottom digits respectively
+	ld b, "0"
+.mod10
+	sub 10
+	jr c, .asm_34c2
+	inc b
+	jr .mod10
+.asm_34c2
+	add 10
+
+	push af
+	ld a, b
+	ld [de], a
+	inc de
+	pop af
+
+	ld b, "0"
+	add b
+	ld [de], a
+
+; End the string
+	inc de
+	ld a, "@"
+	ld [de], a
+
+	pop af
+	ld [wNamedObjectIndexBuffer], a
+	pop bc
+	pop de
+	pop hl
+	ld de, wStringBuffer1
+	ret
+
+.TMText:
+	db "TM"
+.TMTextEnd:
+	db "@"
+
+.HMText:
+	db "HM"
+.HMTextEnd:
+	db "@"
+
+FacingPlayerDistance_bc:: ; 36a5
+	push de
+	call FacingPlayerDistance
+	ld b, d
+	ld c, e
+	pop de
+	ret
+; 36ad
+
+FacingPlayerDistance:: ; 36ad
+; Return carry if the sprite at bc is facing the player,
+; and its distance in d.
+
+	ld hl, OBJECT_NEXT_MAP_X ; x
+	add hl, bc
+	ld d, [hl]
+
+	ld hl, OBJECT_NEXT_MAP_Y ; y
+	add hl, bc
+	ld e, [hl]
+
+	ld a, [wPlayerStandingMapX]
+	cp d
+	jr z, .CheckY
+
+	ld a, [wPlayerStandingMapY]
+	cp e
+	jr z, .CheckX
+
+	and a
+	ret
+
+.CheckY:
+	ld a, [wPlayerStandingMapY]
+	sub e
+	jr z, .NotFacing
+	jr nc, .Above
+
+; Below
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_UP
+	jr .CheckFacing
+
+.Above:
+	ld d, a
+	ld e, OW_DOWN
+	jr .CheckFacing
+
+.CheckX:
+	ld a, [wPlayerStandingMapX]
+	sub d
+	jr z, .NotFacing
+	jr nc, .Left
+
+; Right
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_LEFT
+	jr .CheckFacing
+
+.Left:
+	ld d, a
+	ld e, OW_RIGHT
+
+.CheckFacing:
+	call GetSpriteDirection
+	cp e
+	jr nz, .NotFacing
+	scf
+	ret
+
+.NotFacing:
+	and a
+	ret
+
+dbwArray::
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
 
 _IsAPokemon::
 ; Return carry if species a is not a Pokemon.

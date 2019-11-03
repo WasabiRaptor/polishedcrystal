@@ -88,7 +88,26 @@ Toss_Sell_Loop: ; 24ff9
 	and a
 	ret
 ; 2500e
+JoyTextDelay_ForcehJoyDown:: ; 354b joypad
+	call DelayFrame
 
+	ldh a, [hInMenu]
+	push af
+	ld a, $1
+	ldh [hInMenu], a
+	call JoyTextDelay
+	pop af
+	ldh [hInMenu], a
+
+	ldh a, [hJoyLast]
+	and D_RIGHT + D_LEFT + D_UP + D_DOWN
+	ld c, a
+	ldh a, [hJoyPressed]
+	and A_BUTTON + B_BUTTON + SELECT + START
+	or c
+	ld c, a
+	ret
+	
 BuySellToss_InterpretJoypad: ; 2500e
 	call JoyTextDelay_ForcehJoyDown ; get joypad
 	bit B_BUTTON_F, c

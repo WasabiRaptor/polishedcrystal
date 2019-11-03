@@ -364,7 +364,6 @@ INCLUDE "audio/sfx_crystal.asm"
 
 SECTION "Cries", ROMX
 
-
 INCLUDE "audio/cries.asm"
 INCLUDE "data/pokemon/kanto_cries.asm"
 INCLUDE "data/pokemon/johto_cries.asm"
@@ -380,3 +379,8 @@ INCLUDE "data/pokemon/sinnoh_cries.asm"
 SECTION "Unova Cries", ROMX
 
 INCLUDE "data/pokemon/unova_cries.asm"
+
+
+SECTION "DED", ROMX
+
+INCLUDE "audio/ded.asm"
