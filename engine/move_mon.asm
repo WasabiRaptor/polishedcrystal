@@ -131,7 +131,6 @@ endr
 	ld [hl], a ; last move made 0
 	ld [wEggMonInheritMoves], a
 	predef FillMoves ; moves are filled
-
 .next
 	pop de ; 1 ; moves are popped
 rept NUM_MOVES
@@ -350,7 +349,7 @@ endr
 	push hl ;3 ; group is pushed
 	push bc ;4 ; cute charm results pushed
 	push de ;5 ; dvs are pushed
-	call GetRelevantBaseData
+	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc 

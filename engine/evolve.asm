@@ -520,9 +520,7 @@ Text_WhatEvolving: ; 0x42482
 LearnEvolutionMove:
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	ld a, [wCurGroup]
 	call GetRelevantEvolutionMoves
-	ld a, [wCurPartySpecies]
 	dec a
 	ld b, 0
 	ld c, a
@@ -870,11 +868,10 @@ GetPreEvolution: ; 42581
 GetRelevantEvosAttacksPointers:
 ; return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
-	ld a, [wCurGroup]
 	ld hl, RegionalEvosAttacksPointerTable
 	call dbwArray
 
-	ld a, [wCurSpecies]
+	ld a, [wCurPartySpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -885,16 +882,17 @@ GetRelevantEvosAttacksPointers:
 	ld l, a
 	ld a, [wCurForm]
 	ret c
-	ld a, [wCurSpecies]
+	ld a, [wCurPartySpecies]
 	ret
 
 GetRelevantEvolutionMoves:
 ; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
+	ld a, [wCurGroup]
 	ld hl, RegionalEvolutionMovesPointerTable
 	call dbwArray
 
-	ld a, [wCurSpecies]
+	ld a, [wCurPartySpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -905,7 +903,7 @@ GetRelevantEvolutionMoves:
 	ld l, a
 	ld a, [wCurForm]
 	ret c
-	ld a, [wCurSpecies]
+	ld a, [wCurPartySpecies]
 	ret
 
 INCLUDE "data/pokemon/variant_evos_attacks_pointer_table.asm"
