@@ -159,13 +159,15 @@ PlayCryHeader:: ; 3be3
 
 	ldh a, [hROMBank]
 	push af
-	push de
 	call GetRelevantCryPointers
+	dec a
+	ld e, a
+
 	ld a, d
+	ld d, 0
 	; Cry headers are stuck in one bank.
 	ldh [hROMBank], a
 	ld [MBC5RomBank], a
-	pop de
 rept 6
 	add hl, de
 endr
@@ -202,9 +204,12 @@ endr
 ; 3c23
 GetRelevantCryPointers:
 	ld a, [wCurGroup]
-; given species in a, return *Cries in hl and BANK(*Cries) in d
+; eturn *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
-	ld hl, VariantCryTable
+	ld hl, RegionalCryTable
+	call dbwArray
+
+	ld a, [wCurSpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -213,6 +218,9 @@ GetRelevantCryPointers:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	ld a, [wCurForm]
+	ret c
+	ld a, [wCurSpecies]
 	ret
 
 INCLUDE "data/pokemon/variant_cry_table.asm"

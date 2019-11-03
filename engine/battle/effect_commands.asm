@@ -1045,7 +1045,7 @@ BattleConsumePP:
 	jr z, .pp_vars_ok
 	ld hl, wOTPartyMon1PP
 .set_party_pp
-	call GetPartyLocation
+	predef GetPartyLocation
 .pp_vars_ok
 	ld a, [bc]
 	ld c, a
@@ -2946,7 +2946,7 @@ ConsumeUserItem::
 	ld de, wEnemyMonItem
 	ld hl, wOTPartyMon1Item
 .got_item_pointers
-	call GetPartyLocation
+	predef GetPartyLocation
 
 	; Air Balloons are consumed permanently, so don't write it to UsedItems
 	ld a, [de]
@@ -3380,9 +3380,7 @@ UnevolvedEviolite:
 	push hl
 	push bc
 	push de
-	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
-	ld a, [wCurPartySpecies] ;group is definetly known
 	dec a
 	ld c, a
 	ld b, 0
@@ -5541,7 +5539,7 @@ Defrost:
 	ld a, [wCurBattleMon]
 .ok
 
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hl], a
 	call UpdateOpponentInParty
@@ -6718,7 +6716,7 @@ BattleCommand_forceswitch: ; 3680f
 	pop hl
 	push hl
 	push af
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	or [hl]
 	pop de
@@ -8792,11 +8790,11 @@ BattleCommand_lowkick:
 	push de
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wBattleMonSpecies
+	ld hl, wBattleMonGroup
 	jr z, .got_species
-	ld hl, wEnemyMonSpecies
+	ld hl, wEnemyMonGroup
 .got_species
-	ld a, [hl]
+	predef GetPartyMonGroupSpeciesAndForm
 	farcall GetDexEntryPointer
 	ld a, b
 

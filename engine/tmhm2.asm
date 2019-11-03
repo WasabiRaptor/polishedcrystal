@@ -388,7 +388,7 @@ ChooseMonToLearnTMHM_NoRefresh: ; 2c80a
 	ret c
 	push af
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	pop bc ; now contains the former contents of af
 	jr nz, .egg
@@ -421,7 +421,7 @@ TeachTMHM: ; 2c867
 	push bc
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	pop bc
 
 	ld a, c
@@ -463,7 +463,7 @@ TeachTMHM: ; 2c867
 
 KnowsMove: ; f9ea
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wPutativeTMHMMove]
 	ld b, a
 	ld c, NUM_MOVES

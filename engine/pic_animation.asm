@@ -95,12 +95,14 @@ LoadMonAnimation: ; d00a3
 	ld a, BANK(wCurPartySpecies)
 	ld hl, wCurPartySpecies
 	call GetFarWRAMByte
-	ld [wPokeAnimSpeciesOrVariant], a
+	ld [wPokeAnimSpecies], a
+	ld [wCurSpecies], a
 
-	ld a, BANK(wCurGroup)
-	ld hl, wCurGroup
-	call GetFarWRAMByte
+	ld a, [wCurGroup]
 	ld [wPokeAnimGroup], a
+
+	farcall GetRelevantPicPointers
+	ld [wPokeAnimSpeciesOrVariant], a
 
 	call PokeAnim_GetFrontpicDims
 	ld a, c
@@ -862,7 +864,10 @@ PokeAnim_GetAttrMapCoord: ; d0551
 
 GetMonAnimPointer: ; d055c
 	ld a, [wPokeAnimGroup]
-	ld hl, VariantAnimPointerTable
+	ld hl, RegionalAnimPointerTable
+	call dbwArray
+
+	ld a, [wPokeAnimSpecies]
 	ld de, 6
 	call IsInArray
 	inc hl
@@ -914,7 +919,10 @@ PokeAnim_GetFrontpicDims: ; d05b4
 
 GetMonFramesPointer: ; d05ce
 	ld a, [wPokeAnimGroup]
-	ld hl, VariantFramesPointerTable
+	ld hl, RegionalFramesPointerTable
+	call dbwArray
+
+	ld a, [wPokeAnimSpecies]
 	ld de, 5
 	call IsInArray
 	inc hl
@@ -945,7 +953,10 @@ GetMonFramesPointer: ; d05ce
 
 GetMonBitmaskPointer: ; d061b
 	ld a, [wPokeAnimGroup]
-	ld hl, VariantBitmasksPointerTable
+	ld hl, RegionalBitmasksPointerTable
+	call dbwArray
+
+	ld a, [wPokeAnimSpecies]
 	ld de, 4
 	call IsInArray
 	inc hl

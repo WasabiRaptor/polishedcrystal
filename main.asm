@@ -730,7 +730,7 @@ PadCoords_de: ; 27092
 LevelUpHappinessMod: ; 2709e
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1CaughtLocation
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hl]
 	and $7f
 	ld d, a
@@ -1615,17 +1615,15 @@ GetDexEntryPointer:: ; 44333
 ; return dex entry pointer b:de
 	push hl
 ;get relevant pointers
-	push af
 	ld a, [wCurGroup]
-	ld hl, VariantPokedexEntryPointerTable
-	ld de, 3
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
-	pop af
+	ld hl, RegionalPokedexEntryPointerTable
+	call dbwArray
+	ld a, [wCurSpecies]
+	call dbwArray
+	ld a, [wCurForm]
+	jp c, .variant
+	ld a, [wCurSpecies]
+.variant
 	dec a
 	ld d, 0
 	ld e, a
@@ -1701,7 +1699,7 @@ CheckCanLearnMoveTutorMove: ; 492b9
 	push bc
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	pop bc
 
 	ld a, c
@@ -2430,7 +2428,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMon1Level
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, PARK_BALL
@@ -2439,7 +2437,7 @@ CheckPartyFullAfterContest: ; 4d9e5
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMon1CaughtLocation
-	call GetPartyLocation
+	predef GetPartyLocation
 	;ld a, NATIONAL_PARK
 	ld [hl], a
 	xor a
@@ -2533,7 +2531,7 @@ SetCaughtData: ; 4db49
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMon1CaughtData
-	call GetPartyLocation
+	predef GetPartyLocation
 SetBoxmonOrEggmonCaughtData: ; 4db53
 	; CaughtGender
 	ld a, [wPlayerGender]
@@ -2585,7 +2583,7 @@ SetGiftPartyMonCaughtData: ; 4dba3
 	ld a, [wPartyCount]
 	dec a
 	ld hl, wPartyMon1CaughtData
-	call GetPartyLocation
+	predef GetPartyLocation
 SetGiftMonCaughtData: ; 4dbaf
 	; CaughtGender
 	; b contains it
@@ -2615,7 +2613,7 @@ SetGiftMonCaughtData: ; 4dbaf
 SetEggMonCaughtData: ; 4dbb8 (13:5bb8)
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1CaughtData
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [wCurPartyLevel]
 	push af
 	ld a, EGG_LEVEL
@@ -2672,7 +2670,7 @@ FindAtLeastThatHappy: ; 4dc0a
 	ld a, d
 	dec a
 	push hl
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, b
 	cp [hl]
 	pop hl
@@ -2701,7 +2699,7 @@ FindGreaterThanThatLevel: ; 4dc31
 	ld a, d
 	dec a
 	push hl
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, b
 	cp [hl]
 	pop hl
@@ -3468,8 +3466,9 @@ GetGender: ; 50bdd
 
 ; We need the gender ratio to do anything with this.
 	push bc
-	call GetRelevantBaseData
 	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
+	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc 
@@ -4779,6 +4778,29 @@ INCLUDE "data/wild/treemons_asleep.asm"
 
 SECTION "Code 26", ROMX
 
+GetRelevantBaseData::
+;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
+; returns c for variants, nc for normal species
+	ld a, [wCurGroup]
+	ld hl, RegionalBaseDataTable
+	call dbwArray
+	;getting the variant base data table for said region and now checking it
+	ld a, [wCurSpecies]
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wCurForm]
+	ret c
+	ld a, [wCurSpecies]
+	ret
+
+INCLUDE "data/pokemon/variant_base_data_table.asm"
+
 _IsAPokemon::
 ; Return carry if species a is not a Pokemon.
 	and a
@@ -4862,8 +4884,8 @@ GetLeadAbility::
 	push hl
 	ld hl, wPartyMon1Group
 	predef PokemonToGroupSpeciesAndForm
-	ld a, [wCurSpecies]
-	ld c, a
+	;ld a, [wCurSpecies]
+	;ld c, a
 	ld a, [wPartyMon1Ability]
 	ld b, a
 	call GetAbility

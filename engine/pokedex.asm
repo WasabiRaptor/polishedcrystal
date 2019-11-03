@@ -1163,7 +1163,11 @@ PokedexCountSeenCaught::
 .inc_PokedexSeenCaughtCount
 	push hl
 	ld hl, wPokedexSeenCaughtCount + 1
-	call Inc16BitNumInHL
+	inc [hl]
+	jr nz, .doneinc
+	dec hl
+	inc [hl]
+.doneinc
 	pop hl
 	ret
 
@@ -2650,7 +2654,10 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
 	push af
 	ld a, [wCurGroup]
-	ld hl, VariantFootprintTable
+	ld hl, RegionalFootprintTable
+	call dbwArray
+	pop af
+	push af
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -2659,7 +2666,14 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	jr c, .variant
 	pop af
+	jr .notvariant
+.variant
+	pop af
+	ld a, [wCurForm]
+	dec a
+.notvariant
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes
 	ld b, d

@@ -483,7 +483,9 @@ DoPlayerMovement:: ; 80000
 	ld a, [hl]
 	cp movement_turn_step_down
 	jr z, .turn_step
-	ld a, 1
+	ld a, [wHasPlayerMoved]
+	inc a
+	jr z, .turn_step
 	ld [wHasPlayerMoved], a
 .turn_step
 	add hl, de

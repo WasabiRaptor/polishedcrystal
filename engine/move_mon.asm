@@ -217,7 +217,7 @@ endr
 	ld hl, wPartyMon1Group
 	predef PokemonToGroupSpeciesAndForm
 	ld a, [wPartyMon1Species]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	pop hl ; 4
 	pop af ; 3 form is popped
@@ -351,7 +351,6 @@ endr
 	push bc ;4 ; cute charm results pushed
 	push de ;5 ; dvs are pushed
 	call GetRelevantBaseData
-	ld a, [wCurPartySpecies]
 	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc 
@@ -1946,7 +1945,58 @@ CalcPkmnStatC: ; e17b
 	pop de ; 1
 	pop hl ; 0
 	ret
-; e277
+	
+GetEnemyPartyParamLocation::
+	push bc
+	ld hl, wOTPartyMons
+	jr PkmnParamLocation
+GetPartyParamLocation:: ; 3917
+; Get the location of parameter a from wCurPartyMon in hl
+	push bc
+	ld hl, wPartyMons
+PkmnParamLocation:
+	cp MON_GROUP_SPECIES_AND_FORM
+	jp z, .species_and_group
+
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	pop bc
+	ret
+
+.species_and_group
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+	pop bc
+	ret
+; 3927
+
+GetPartyLocation::
+; Add the length of a PartyMon struct to hl a times.
+	push bc
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	pop bc
+	ret
+
+GetNature::
+; 'b' contains the target Nature to check
+; returns nature in b
+	ld a, [wInitialOptions]
+	bit NATURES_OPT, a
+	jr z, .no_nature
+	ld a, b
+	and NATURE_MASK
+	; assume nature is 0-24
+	ld b, a
+	ret
+
+.no_nature:
+	ld b, NO_NATURE
+	ret
 
 GetNatureStatMultiplier::
 ; a points to Nature

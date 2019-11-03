@@ -36,7 +36,7 @@ GivePokerus: ; 2ed44
 	jr nc, .randomMonSelectLoop
 ContinueGivingPokerus:
 	ld hl, wPartyMon1PokerusStatus
-	call GetPartyLocation  ; get pokerus byte of random mon
+	predef GetPartyLocation  ; get pokerus byte of random mon
 	ld a, [hl]
 	and $f0
 	ret nz                 ; if it already has pokerus, do nothing

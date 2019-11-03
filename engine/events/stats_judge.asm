@@ -61,7 +61,7 @@ SpecialStatsJudge: ; 4f0bc
 
 JudgePokemon:
 	ld a, MON_DVS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	push hl
 	ld hl, .i_see
 	call PrintText

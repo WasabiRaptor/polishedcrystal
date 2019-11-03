@@ -775,7 +775,7 @@ OrangePage_:
 	ld a, [wTempMonAbility]
 	ld b, a
 	ld a, [wTempMonSpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	farcall GetAbility
 	; PlaceString as used in PrintAbility doesn't preserve any register, so push it.
 	push bc

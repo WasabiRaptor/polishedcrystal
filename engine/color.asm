@@ -774,12 +774,12 @@ LoadPartyMonPalette:
 	; bc = personality
 	ld hl, wPartyMon1Group
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	
 	ld hl, wPartyMon1Personality
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld c, l
 	ld b, h
 	; a = species
@@ -791,7 +791,7 @@ LoadPartyMonPalette:
 	; hl = DVs
 	ld hl, wPartyMon1DVs
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	; b = species
 	ld a, [wCurPartySpecies]
 	ld b, a

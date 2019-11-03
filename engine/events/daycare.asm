@@ -127,7 +127,7 @@ DayCareAskDepositPokemon: ; 16798
 	ld d, [hl]
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	and a
 	ret
 
@@ -1061,9 +1061,10 @@ DayCare_InitBreeding: ; 16a3b
 	push de
 	ld a, [wEggMonGroup]
 	ld [wCurGroup], a
-
-	call GetRelevantBaseData
 	ld a, [wEggMonSpecies]
+	ld [wCurSpecies], a
+
+	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc

@@ -512,7 +512,7 @@ RecieverAbility:
 	predef PokemonToGroupSpeciesAndForm
 	pop hl
 	;species of last mon in party
-	ld c, a
+	;ld c, a
 	push bc
 	ld bc, MON_ABILITY
 	add hl, bc
@@ -1568,7 +1568,7 @@ RegainItemByAbility:
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Item
 .got_item_addr
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld [hl], b
 	ret
 
@@ -2053,12 +2053,12 @@ RunPostBattleAbilities::
 
 	push bc
 	ld a, MON_ABILITY
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, [hl]
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurSpecies]
-	ld c, a
+	;ld c, a
 	farcall GetAbility
 	ld a, d
 	and $3f
@@ -2080,14 +2080,14 @@ RunPostBattleAbilities::
 .natural_cure:
 	; Heal status
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	xor a
 	ld [hl], a
 	ret
 
 .Pickup:
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and a
 	ret nz
@@ -2097,12 +2097,12 @@ RunPostBattleAbilities::
 	ret nc
 
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	call GetRandomPickupItem
 	ld b, a
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, b
 	ld [hl], a
 	push bc
@@ -2118,7 +2118,7 @@ RunPostBattleAbilities::
 	push bc
 	push de
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName

@@ -34,9 +34,6 @@ _AnimateTileset:: ; fc000
 	jp hl
 ; fc01b
 SetGrassTiles::
-	ld a, [wPlayerStandingTile]
-	cp COLL_TALL_GRASS
-	ret nz
 
 	ld a, [wHasPlayerMoved]
 	and a

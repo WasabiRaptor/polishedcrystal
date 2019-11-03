@@ -96,7 +96,7 @@ PlacePartyNicknames: ; 5009b
 	push hl
 	ld hl, wPartyMonNicknames
 	ld a, b
-	call GetNick
+	predef GetNick
 	pop hl
 	call PlaceString
 	pop hl
@@ -320,7 +320,7 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	predef CanLearnTMHMMove
 	pop hl
@@ -351,11 +351,11 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 ; 50221
 
 string_able: ; 50221
-	db $a4, $a5, $a6, "@"
+	db $a2, $a3, $a4, "@"
 	;  A    bl   e
 
 string_not_able: ; 50226
-	db $a0, $a1, $a2, $a3, "@"
+	db $9e, $9f, $a0, $a1, "@"
 	;  U    na   bl   e
 
 SetupAbleUnableStrings:
@@ -391,7 +391,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
@@ -477,7 +477,7 @@ PlacePartyMonGender: ; 502b1
 	ld [wCurPartyMon], a
 	push hl
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 
 	pop hl
@@ -527,7 +527,7 @@ PlacePartyMonRemindable: ; 501e0
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 
 	farcall GetForgottenMoves
@@ -790,7 +790,7 @@ YouHaveNoPKMNString: ; 0x50556
 PrintPartyMenuActionText: ; 50566
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	ld a, [wPartyMenuActionText]
 	and $f
 	ld hl, .MenuActionTexts

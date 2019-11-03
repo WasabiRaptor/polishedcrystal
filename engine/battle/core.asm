@@ -84,7 +84,7 @@ DoBattle: ; 3c000
 	ld [wCurBattleMon], a
 
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartyGroup]
 	ld [wTempBattleMonGroup], a
@@ -372,7 +372,7 @@ HandleBerserkGene: ; 3c27c
 	ld h, d
 	ld l, e
 	ld a, b
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hl], a
 	ld a, BATTLE_VARS_SUBSTATUS3
@@ -1232,7 +1232,7 @@ HandlePerishSong: ; 3c801
 	ld [hl], a
 	ld hl, wPartyMon1HP
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -1248,7 +1248,7 @@ HandlePerishSong: ; 3c801
 	ret z
 	ld hl, wOTPartyMon1HP
 	ld a, [wCurOTMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -1551,7 +1551,7 @@ LeppaRestorePP:
 .set_party_pp
 	push bc
 	push de
-	call GetPartyLocation
+	predef GetPartyLocation
 	pop de
 	pop bc
 .pp_vars_ok
@@ -2194,7 +2194,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	jr z, .wild
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1HP
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -3380,7 +3380,7 @@ LoadEnemyPkmnToSwitchTo:
 	ld a, b
 	ld [wCurPartyMon], a
 	ld hl, wOTPartyMon1Level
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, [wCurPartyMon]
@@ -3388,7 +3388,7 @@ LoadEnemyPkmnToSwitchTo:
 	inc a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetEnemyPartyParamLocation
+	farcall GetEnemyPartyParamLocation
 	pop af
 	ld [wCurPartyMon], a
 	ld a, [wCurPartyGroup]
@@ -3675,7 +3675,7 @@ ResetPlayerAbility:
 	ld a, [wBattleMonAbility]
 	ld b, a
 	ld a, [wBattleMonSpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	ld [wPlayerAbility], a
@@ -3700,7 +3700,7 @@ ResetEnemyAbility:
 	ld a, [wEnemyMonAbility]
 	ld b, a
 	ld a, [wEnemyMonSpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	ld [wEnemyAbility], a
@@ -3752,7 +3752,7 @@ CheckPlayerPartyForFitPkmn: ; 3d873
 CheckIfCurPartyMonIsFitToFight: ; 3d887
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1HP
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	or [hl]
 	ret nz
@@ -3783,7 +3783,7 @@ CheckIfCurPartyMonIsFitToFight: ; 3d887
 
 InitBattleMon: ; 3da0d
 	ld a, MON_GROUP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld de, wBattleMonGroup
 	ld bc, MON_ID - MON_GROUP
 	rst CopyBytes ; copy Species, Item, Moves
@@ -3836,7 +3836,7 @@ BattleCheckShininess: ; 3da7c
 GetPartyMonDVs: ; 3da85
 	ld hl, wPartyMon1DVs
 	ld a, [wCurBattleMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 ; 3da97
 
 GetEnemyMonDVs: ; 3da97
@@ -3846,7 +3846,7 @@ GetEnemyMonDVs: ; 3da97
 	ret z
 	ld hl, wOTPartyMon1DVs
 	ld a, [wCurOTMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 ; 3dab1
 
 GetPartyMonPersonality:
@@ -3856,7 +3856,7 @@ GetPartyMonPersonality:
 	ret z
 	ld hl, wPartyMon1Personality
 	ld a, [wCurBattleMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 
 GetEnemyMonPersonality:
 	ld hl, wEnemyBackupPersonality
@@ -3865,7 +3865,7 @@ GetEnemyMonPersonality:
 	ret z
 	ld hl, wOTPartyMon1Personality
 	ld a, [wCurOTMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 
 ResetPlayerStatLevels: ; 3dab1
 	ld a, BASE_STAT_LEVEL
@@ -3881,7 +3881,7 @@ ResetPlayerStatLevels: ; 3dab1
 InitEnemyMon: ; 3dabd
 	ld a, [wCurPartyMon]
 	ld hl, wOTPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld de, wEnemyMonGroup
 	ld bc, MON_ID - MON_GROUP
 	rst CopyBytes ; copy Species, Item, Moves
@@ -3907,7 +3907,7 @@ InitEnemyMon: ; 3dabd
 	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
 	ld b, a
 	ld a, [wEnemyMonSpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	ld bc, PKMN_NAME_LENGTH
@@ -3967,7 +3967,7 @@ ForcePlayerSwitch: ; 3db32
 
 SendOutPlayerMon: ; 3db5f
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	hlcoord 1, 5
 	lb bc, 7, 8
@@ -4005,7 +4005,7 @@ SendOutPlayerMon: ; 3db5f
 
 .not_shiny
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, h
 	ld c, l
 	farcall CheckFaintedFrzSlp
@@ -4083,7 +4083,7 @@ PostBattleTasks::
 	ld [wCurPartyMon], a
 	farcall UpdatePkmnStats
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	res TOX, [hl]
 	pop af
 	jr nz, .loop
@@ -4741,7 +4741,7 @@ UseConfusionHealingItem: ; 3de51
 GetPartymonItem: ; 3df12
 	ld hl, wPartyMon1Item
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld bc, wBattleMonItem
 	ret
 ; 3df1f
@@ -4749,7 +4749,7 @@ GetPartymonItem: ; 3df12
 GetOTPartymonItem: ; 3df1f
 	ld hl, wOTPartyMon1Item
 	ld a, [wCurOTMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld bc, wEnemyMonItem
 	ret
 ; 3df2c
@@ -4809,7 +4809,7 @@ DrawPlayerHUD: ; 3df58
 	push de
 	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1Exp + 2
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld d, h
 	ld e, l
 
@@ -4866,7 +4866,7 @@ PrintPlayerHUD: ; 3dfbf
 
 	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1DVs
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld de, wTempMonDVs
 rept 4
 	ld a, [hli]
@@ -4882,7 +4882,7 @@ endr
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call GetBaseData ;form is known
 
 	pop hl
@@ -6005,7 +6005,7 @@ MoveSelectionScreen:
 
 .ether_elixer_menu
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 .got_menu_type
 	ld de, wListMoves_MoveIndicesBuffer
@@ -6274,7 +6274,7 @@ SwapBattleMoves:
 	ret nz
 	ld hl, wPartyMon1Moves
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	push hl
 	call .swap_bytes
 	pop hl
@@ -6757,12 +6757,7 @@ GetRelevantTotalEncounterdPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, EncounterCounterPointerTable
-	ld de, 3
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call dbwArray
 	pop de
 	pop bc
 	ret
@@ -6772,17 +6767,19 @@ GetRelevantTotalDefeatedPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, DefeatedCounterPointerTable
-	ld de, 3
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call dbwArray
 	pop de
 	pop bc
 	ret
 
 INCLUDE "data/pokemon/regional_encounter_counter_pointer_table.asm"
+
+Inc16BitNumInHL::
+	inc [hl]
+	ret nz
+	dec hl
+	inc [hl]
+	ret
 
 LoadEnemyMon: ; 3e8eb
 ; Initialize enemy monster parameters
@@ -7018,7 +7015,7 @@ endc
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	cp PICKUP
@@ -7104,10 +7101,11 @@ endc
 	push hl
 	push bc
 	push de
-	call GetRelevantBaseData
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
+	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc
@@ -7828,7 +7826,7 @@ GiveExperiencePoints: ; 3ee3b
 	ld [wStringBuffer2], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	ld hl, Text_PkmnGainedExpPoint
 	call BattleTextBox
 	ld a, [wStringBuffer2 + 1]
@@ -7862,7 +7860,7 @@ GiveExperiencePoints: ; 3ee3b
 .skip2
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	push bc
@@ -8023,7 +8021,7 @@ GiveExperiencePoints: ; 3ee3b
 	jp z, ResetBattleParticipants
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, h
 	ld c, l
 	jp .loop
@@ -8881,7 +8879,7 @@ CheckIllusion:
 	ld a, d
 GetIllusion::
 	dec a
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ret
 
@@ -9026,7 +9024,7 @@ InitEnemyTrainer: ; 3f594
 .partyloop
 	push bc
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	or [hl]
 	jr z, .skipfaintedmon
@@ -9212,7 +9210,7 @@ CheckPayDay: ; 3f71d
 ShowLinkBattleParticipantsAfterEnd: ; 3f759
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Status
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [wEnemyMonStatus]
 	ld [hl], a
 	call ClearTileMap

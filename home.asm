@@ -482,7 +482,10 @@ GetPokemonName:: ; 343b
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 
-	ld hl, VariantNamePointerTable
+	ld hl, RegionalNamePointerTable
+	call dbwArray
+
+	ld a, [wNamedObjectIndexBuffer]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -491,8 +494,10 @@ GetPokemonName:: ; 343b
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-
+	ld a, [wCurForm]
+	jr c, .variant
 	ld a, [wNamedObjectIndexBuffer]
+.variant
 	dec a
 	call GetNthString
 	
@@ -1168,23 +1173,6 @@ INCLUDE "home/cry.asm"
 
 ; 384d
 
-GetRelevantBaseData::
-	ld a, [wCurGroup]
-;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
-; returns c for variants, nc for normal species
-	ld hl, VariantBaseDataTable
-	ld de, 4
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
-
-INCLUDE "data/pokemon/variant_base_data_table.asm"
-
 GetBaseData:: ; 3856
 	push bc
 	push de
@@ -1192,7 +1180,7 @@ GetBaseData:: ; 3856
 	ldh a, [hROMBank]
 	push af
 
-	call GetRelevantBaseData
+	homecall GetRelevantBaseData
 	push hl
 
 	ld a, [wCurSpecies]
@@ -1225,40 +1213,17 @@ GetBaseData:: ; 3856
 	ret
 ; 389c
 
-
-GetNature::
-; 'b' contains the target Nature to check
-; returns nature in b
-	ld a, [wInitialOptions]
-	bit NATURES_OPT, a
-	jr z, .no_nature
-	ld a, b
-	and NATURE_MASK
-	; assume nature is 0-24
-	ld b, a
-	ret
-
-.no_nature:
-	ld b, NO_NATURE
-	ret
-
-
 GetAbility::
 ; 'b' contains the target ability to check
-; 'c' contains the target species
 ; returns ability in b
-; preserves curspecies and base data
+; preserves base data
 	push de
 	ldh a, [hROMBank]
 	push af
 	push hl
 	push bc
 
-	call GetRelevantBaseData
-	pop bc
-	push bc
-	ld a, c
-
+	homecall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
@@ -1286,65 +1251,6 @@ GetAbility::
 	pop af
 	rst Bankswitch
 	pop de
-	ret
-
-GetCurNick:: ; 389c
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMonNicknames
-
-GetNick:: ; 38a2
-; Get nickname a from list hl.
-
-	push hl
-	push bc
-
-	call SkipPokemonNames
-	ld de, wStringBuffer1
-
-	push de
-	ld bc, PKMN_NAME_LENGTH
-	rst CopyBytes
-	pop de
-
-	pop bc
-	pop hl
-	ret
-; 38bb
-
-GetEnemyPartyParamLocation::
-	push bc
-	ld hl, wOTPartyMons
-	jr PkmnParamLocation
-GetPartyParamLocation:: ; 3917
-; Get the location of parameter a from wCurPartyMon in hl
-	push bc
-	ld hl, wPartyMons
-PkmnParamLocation:
-	cp MON_GROUP_SPECIES_AND_FORM
-	jp z, .species_and_group
-
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	pop bc
-	ret
-
-.species_and_group
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	predef GetPartyMonGroupSpeciesAndForm
-	pop bc
-	ret
-; 3927
-
-GetPartyLocation::
-; Add the length of a PartyMon struct to hl a times.
-	push bc
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	pop bc
 	ret
 
 INCLUDE "home/battle.asm"
@@ -1418,14 +1324,6 @@ ReinitSpriteAnimFrame:: ; 3b3c
 
 INCLUDE "home/audio.asm"
 
-Inc16BitNumInHL::
-	inc [hl]
-	ret nz
-	dec hl
-	inc [hl]
-	ret
-
-
 LoadPalette_White_Col1_Col2_Black::
 	ldh a, [rSVBK]
 	push af
@@ -1464,7 +1362,9 @@ GetMonPalette::
 	push de
 	push bc
 	ld a, [wCurGroup]
-	ld hl, VariantPaletteTable
+	ld hl, RegionalPaletteTable
+	call dbwArray
+	ld a, [wCurPartySpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -1474,8 +1374,10 @@ GetMonPalette::
 	ld a, [hli]
 	ld c, a
 	ld b, [hl]
-
+	ld a, [wCurForm]
+	jr c, .variant
 	ld a, [wCurPartySpecies]
+.variant
 	dec a	
 	ld l, a
 	ld h, $0
@@ -1499,3 +1401,12 @@ endr
 	ret
 
 INCLUDE "data/pokemon/variant_palette_table.asm"
+
+dbwArray::
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret

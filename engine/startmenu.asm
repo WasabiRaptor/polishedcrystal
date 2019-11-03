@@ -712,7 +712,7 @@ PokemonActionSubmenu: ; 12a88
 	call ClearBox
 	farcall MonSubmenu
 	call InitVariableWidthText
-	call GetCurNick
+	farcall GetCurNick
 	ld a, [wMenuSelection]
 	ld hl, .Actions
 	ld de, 3
@@ -806,7 +806,7 @@ SwitchPartyMons: ; 12aec
 GiveTakePartyMonItem: ; 12b60
 ; Eggs can't hold items!
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .cancel
 
@@ -827,7 +827,7 @@ GiveTakePartyMonItem: ; 12b60
 	call ExitMenu
 	jr c, .cancel
 
-	call GetCurNick
+	farcall GetCurNick
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, PKMN_NAME_LENGTH
@@ -1039,7 +1039,7 @@ CantBeHeldText: ; 12cd2
 GetPartyItemLocation: ; 12cd7
 	push af
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	pop af
 	ret
 ; 12cdf
@@ -1213,7 +1213,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 .CheckMonHasEnoughHP:
 ; Need to have at least (MaxHP / 5) HP left.
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ldh [hDividend + 0], a
 	ld a, [hl]
@@ -1223,7 +1223,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 	ld b, 2
 	call Divide
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ldh a, [hQuotient + 2]
 	sub [hl]
 	dec hl
@@ -1380,7 +1380,7 @@ MoveScreenLoop:
 	; Copy over moves from the party struct
 	ld bc, NUM_MOVES
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld de, wMoveScreenMoves
 .movecopy_loop
 	ld a, [hli]
@@ -1660,10 +1660,10 @@ MoveScreenLoop:
 
 .regular_swap_move
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call .swap_location
 	ld a, MON_PP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call .swap_location
 
 .finish_swap
@@ -1704,7 +1704,7 @@ GetForgottenMoves::
 ; retrieve a list of a mon's forgotten moves, excluding ones beyond level
 ; and moves the mon already knows
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
@@ -1748,7 +1748,7 @@ GetForgottenMoves::
 	push bc ;3
 	ld b, a
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld c, NUM_MOVES
 	ld a, b
 	call .move_exists
@@ -1820,7 +1820,7 @@ SetUpMoveScreenBG: ; 13172
 	ld [wMonType], a
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	hlcoord 5, 1
 	call PlaceString
 	push bc
@@ -1888,7 +1888,7 @@ MoveScreen_ListMoves:
 	cp MOVESCREEN_REMINDER
 	jr z, .got_pp
 	ld a, MON_PP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld c, NUM_MOVES
 	ld de, wTempMonPP
 	ld a, [wMoveScreenOffset]

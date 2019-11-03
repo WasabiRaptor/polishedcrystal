@@ -1813,7 +1813,7 @@ DepositPokemon: ; e307c (38:707c)
 	ld [wCurPartyMon], a
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
 	predef SentGetPkmnIntoFromBox
@@ -1863,7 +1863,7 @@ TryWithdrawPokemon: ; e30fa (38:70fa)
 	call GetSRAMBank
 	ld a, [wCurPartyMon]
 	ld hl, sBoxMonNicknames
-	call GetNick
+	predef GetNick
 	call CloseSRAM
 	xor a
 	ld [wPokemonWithdrawDepositParameter], a

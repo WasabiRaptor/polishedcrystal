@@ -58,11 +58,10 @@ LoadCryHeader:: ; 37f3
 
 	ldh a, [hROMBank]
 	push af
-	push bc
-	ld a, c
-	inc a
+	
 	call GetRelevantCryPointers
-	pop bc
+	dec a
+	ld c, a
 	ld a, d
 	rst Bankswitch
 

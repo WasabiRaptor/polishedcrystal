@@ -674,7 +674,7 @@ GiveItem: ; 103fd
 	farcall PartyMenuSelect
 	jr c, .finish
 	ld a, MON_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr z, .give
 	ld hl, .Egg
@@ -686,7 +686,7 @@ GiveItem: ; 103fd
 	push af
 	ld a, [wcf64]
 	push af
-	call GetCurNick
+	farcall GetCurNick
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, PKMN_NAME_LENGTH

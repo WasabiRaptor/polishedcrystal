@@ -1156,7 +1156,7 @@ wTempTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT ; 20x18 grid of 8x8 tiles
 wPokeAnimSceneIndex:: ds 1
 wPokeAnimPointer:: ds 2
 wPokeAnimGroup:: ds 1
-wPokeAnimVariant:: ds 1
+wPokeAnimSpecies:: ds 1
 wPokeAnimSpeciesOrVariant:: ds 1
 wPokeAnimGraphicStartTile:: ds 1
 wPokeAnimCoord:: ds 2
