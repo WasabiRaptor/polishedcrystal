@@ -2655,7 +2655,7 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	push af
 	ld a, [wCurGroup]
 	ld hl, RegionalFootprintTable
-	farcall dbwArray
+	call dbwArray
 	pop af
 	push af
 	ld de, 4

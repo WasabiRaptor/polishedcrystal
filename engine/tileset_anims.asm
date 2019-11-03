@@ -36,8 +36,6 @@ _AnimateTileset:: ; fc000
 SetGrassTiles::
 
 	ld a, [wHasPlayerMoved]
-	cp 2
-	ret nz
 	and a
 	ld a, [wGrassTileAddress]
 	ld h, a

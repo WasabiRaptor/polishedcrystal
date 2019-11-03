@@ -461,15 +461,6 @@ TeachTMHM: ; 2c867
 	ret
 ; 2c8bf (b:48bf)
 
-IsHM:: ; 34df
-	cp HM01
-	jr c, .NotHM
-	scf
-	ret
-.NotHM:
-	and a
-	ret
-
 KnowsMove: ; f9ea
 	ld a, MON_MOVES
 	predef GetPartyParamLocation

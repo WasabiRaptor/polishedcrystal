@@ -52,7 +52,7 @@ Special_CheckMagikarpLength: ; fbb32
 	inc de
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	farcall SkipPlayerNames
+	call SkipPlayerNames
 	rst CopyBytes
 	ld a, 3
 	ld [wScriptVar], a

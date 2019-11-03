@@ -196,7 +196,7 @@ GetNick:: ; 38a2
 	push hl
 	push bc
 
-	farcall SkipPokemonNames
+	call SkipPokemonNames
 	ld de, wStringBuffer1
 
 	push de

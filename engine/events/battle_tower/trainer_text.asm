@@ -5,9 +5,9 @@ BattleTowerText:: ; 11c000
 ; 3: Player won
 	ldh a, [rSVBK]
 	push af
-	;ld a, BANK(wBT_OTTrainerClass)
+	ld a, BANK(wBT_OTTrainerClass)
 	ldh [rSVBK], a
-	;ld hl, wBT_OTTrainerClass
+	ld hl, wBT_OTTrainerClass
 	ld a, [hl]
 
 	cp TOWERTYCOON
@@ -54,11 +54,11 @@ BattleTowerText:: ; 11c000
 	ld b, 0
 	dec c
 	jr nz, .restore
-	;ld [wBT_TrainerTextIndex], a
+	ld [wBT_TrainerTextIndex], a
 	jr .okay2
 
 .restore
-	;ld a, [wBT_TrainerTextIndex]
+	ld a, [wBT_TrainerTextIndex]
 
 .okay2
 	push af

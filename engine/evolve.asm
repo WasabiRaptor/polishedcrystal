@@ -872,7 +872,7 @@ GetRelevantEvosAttacksPointers:
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalEvosAttacksPointerTable
-	farcall dbwArray
+	call dbwArray
 
 	ld a, [wCurSpecies]
 	ld de, 4
@@ -892,7 +892,7 @@ GetRelevantEvolutionMoves:
 ; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
 	ld hl, RegionalEvolutionMovesPointerTable
-	farcall dbwArray
+	call dbwArray
 
 	ld a, [wCurSpecies]
 	ld de, 4

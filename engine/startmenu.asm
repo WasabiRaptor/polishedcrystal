@@ -1354,20 +1354,6 @@ ManagePokemonMoves: ; 12fba
 	ret
 ; 12fd5
 
-IsHMMove:: ; 34e7
-	ld hl, .HMMoves
-	ld de, 1
-	jp IsInArray
-
-.HMMoves:
-	db CUT
-	db FLY
-	db SURF
-	db STRENGTH
-	db WATERFALL
-	db WHIRLPOOL
-	db -1
-
 MoveScreenLoop:
 ; Returns:
 ; a = >0: f = nc|nz; selected move (index in wMoveScreenSelectedMove)

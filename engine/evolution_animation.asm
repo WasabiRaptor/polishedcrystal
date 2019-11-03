@@ -185,7 +185,7 @@ EvolutionAnimation: ; 4e5e1
 .PlaceFrontpic: ; 4e708
 	call GetBaseData ;form is known
 	hlcoord 7, 2
-	farjp PrepMonFrontpic
+	jp PrepMonFrontpic
 ; 4e711
 
 .LoadFrontpic: ; 4e711

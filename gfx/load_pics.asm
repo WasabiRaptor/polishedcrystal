@@ -479,7 +479,7 @@ GetRelevantPicPointers:
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalPicPointerTable
-	farcall dbwArray
+	call dbwArray
 	ld a, [wCurSpecies]
 	ld de, 4
 	call IsInArray

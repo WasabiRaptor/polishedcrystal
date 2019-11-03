@@ -600,8 +600,7 @@ Script_battletowertext:
 	call SetUpTextBox
 	call GetScriptByte
 	ld c, a
-	;farjp BattleTowerText
-	ret
+	farjp BattleTowerText
 
 Script_verbosegiveitem:
 ; parameters:
