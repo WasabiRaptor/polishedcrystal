@@ -611,7 +611,7 @@ InheritEggMove:
 	push de
 	ld a, [wCurGroup]
 	ld hl, RegionalEggMovePointerTable
-	call dbwArray
+	farcall dbwArray
 
 	ld a, [wEggMonSpecies]
 	ld de, 4

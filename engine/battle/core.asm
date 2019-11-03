@@ -6773,7 +6773,7 @@ GetRelevantTotalEncounterdPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, EncounterCounterPointerTable
-	call dbwArray
+	farcall dbwArray
 	pop de
 	pop bc
 	ret
@@ -6783,7 +6783,7 @@ GetRelevantTotalDefeatedPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, DefeatedCounterPointerTable
-	call dbwArray
+	farcall dbwArray
 	pop de
 	pop bc
 	ret

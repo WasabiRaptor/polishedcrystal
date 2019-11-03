@@ -437,7 +437,7 @@ GetPokemonName:: ; 343b
 	ld a, [wCurGroup]
 
 	ld hl, RegionalNamePointerTable
-	call dbwArray
+	homecall dbwArray
 
 	ld a, [wNamedObjectIndexBuffer]
 	ld de, 4
@@ -1066,7 +1066,7 @@ GetMonPalette::
 	push bc
 	ld a, [wCurGroup]
 	ld hl, RegionalPaletteTable
-	call dbwArray
+	homecall dbwArray
 	ld a, [wCurPartySpecies]
 	ld de, 4
 	call IsInArray
@@ -1101,15 +1101,6 @@ endr
 
 	pop af
 	rst Bankswitch
-	ret
-
-dbwArray::
-	ld de, 3
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
 	ret
 
 INCLUDE "data/pokemon/variant_palette_table.asm"

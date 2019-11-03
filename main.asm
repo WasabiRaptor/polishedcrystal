@@ -1617,9 +1617,9 @@ GetDexEntryPointer:: ; 44333
 ;get relevant pointers
 	ld a, [wCurGroup]
 	ld hl, RegionalPokedexEntryPointerTable
-	call dbwArray
+	farcall dbwArray
 	ld a, [wCurSpecies]
-	call dbwArray
+	farcall dbwArray
 	ld a, [wCurForm]
 	jp c, .variant
 	ld a, [wCurSpecies]
@@ -4783,7 +4783,7 @@ GetRelevantBaseData::
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalBaseDataTable
-	call dbwArray
+	farcall dbwArray
 	;getting the variant base data table for said region and now checking it
 	ld a, [wCurSpecies]
 	ld de, 4
@@ -4959,6 +4959,14 @@ FacingPlayerDistance:: ; 36ad
 	and a
 	ret
 
+dbwArray::
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
 
 _IsAPokemon::
 ; Return carry if species a is not a Pokemon.
