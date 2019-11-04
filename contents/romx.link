@@ -2,150 +2,197 @@ ROMX $01
 	org $4000
 	"Code 1"
 	"Effect Command Pointers"
+	"Pic Animations Frames 0"
 
 ROMX $02
 	org $4000
 	"Code 2"
 	"Trainer Pic Pointers"
+	"Portrait Pic Pointers"
+	"Pokemon Pics 49"
 
 ROMX $03
 	org $4000
 	"Code 3"
+	"ORAS Music 1"
 
 ROMX $04
 	org $4000
 	"Code 4"
+	"Other Pic Pointers"
+	"Unown Pics 2"
 
 ROMX $05
 	org $4000
 	"Code 5"
+	"Other Base Data"
+	"Unova Pokedex Entries 5"
 
 ROMX $06
 	org $4000
 	"color"
+	"Kanto Pokedex Entries 1"
+	"Nameplates"
+	"Painting Pic Pointers"
 
 ROMX $07
 	org $4000
 	"Code 7"
+	"Johto Dex Order"
 
 ROMX $08
 	org $4000
 	"Code 8"
+	"Mon Icons 3"
 
 ROMX $09
 	org $4000
 	"Code 9"
+	"Trainer Pics 9"
 
 ROMX $0A
 	org $4000
 	"Code 10"
+	"Typefaces"
 
 ROMX $0B
 	org $4000
 	"Code 11"
+	"Pokemon Pics 8"
 
 ROMX $0C
 	org $4000
 	"Code 12"
 	"Tileset Headers"
+	"Overworld Sprites 4"
 
 ROMX $0D
 	org $4000
 	"Code 13"
+	"Unova Cries"
+	"Pokemon Pics 37"
 
 ROMX $0E
 	org $4000
 	"Code 14"
+	"Mon Icons 9"
 
 ROMX $0F
 	org $4000
 	"Code 15"
+	"Music 2"
 
 ROMX $10
 	org $4000
 	"Code 16"
+	"Pokemon Pics 52"
 
 ROMX $11
 	org $4000
 	"Code 17"
+	"Text 3"
 
 ROMX $12
 	org $4000
 	"Code 18"
+	"Sinnoh Pokedex Entries 2"
 
 ROMX $13
 	org $4000
 	"Code 19"
+	"Phone Text 5"
 
 ROMX $14
 	org $4000
 	"Code 20"
+	"Tileset Data - cave"
 
 ROMX $15
 	org $4000
 	"Code 21"
+	"Enemy Trainer Parties 2"
 
 ROMX $16
 	org $4000
 	"Code 22"
+	"Music 7"
 
 ROMX $17
 	org $4000
 	"Code 23"
+	"DPPt Music 2"
+	"Hoenn Dex Order"
 
 ROMX $18
 	org $4000
 	"Code 24"
+	"Johto Pokedex Entries 2"
 
 ROMX $19
 	org $4000
 	"Code 25"
+	"Pokemon Pics 33"
 
 ROMX $1A
 	org $4000
 	"Introduction"
+	"Hoenn Pic Pointers"
 
 ROMX $1B
 	org $4000
 	"Title Screen"
+	"Phone Text 3"
+	"Mystery Dungeon Map Blocks"
 
 ROMX $1C
 	org $4000
 	"Credits"
+	"Johto Pokedex Entries 1"
 
 ROMX $1D
 	org $4000
 	"Audio"
+	"Pokemon Pics 19"
 
 ROMX $1E
 	org $4000
 	"Sound Effects"
 	"Cries"
+	"Standard Text"
 
 ROMX $1F
 	org $4000
 	"Crystal Sound Effects"
+	"Unova Pic Pointers"
+	"Pokemon Pics 39"
 
 ROMX $20
 	org $4000
 	"Pic Animations"
+	"SM Music 1"
 
 ROMX $21
 	org $4000
 	"Pic Animations Frames 1"
+	"Pokemon Pics 44"
 
 ROMX $22
 	org $4000
 	"Pic Animations Frames 2"
+	"Item Text"
+	"Hoenn Egg Moves"
 
 ROMX $23
 	org $4000
 	"Pic Animations Bitmasks"
+	"Text 2"
 
 ROMX $24
 	org $4000
 	"Kanto Pic Pointers"
 	"Johto Pic Pointers"
+	"Mon Icons 2"
+	"Collision Permissions"
 
 ROMX $25
 	org $4000
@@ -154,10 +201,13 @@ ROMX $25
 ROMX $26
 	org $4000
 	"Battle Animations"
+	"Key Item Icons"
 
 ROMX $27
 	org $4000
 	"Moves"
+	"Alola Dex Order"
+	"Pokemon Pics 50"
 
 ROMX $28
 	org $4000
@@ -166,35 +216,49 @@ ROMX $28
 ROMX $29
 	org $4000
 	"Enemy Trainers"
+	"Pokemon Pics 16"
 
 ROMX $2A
 	org $4000
 	"Enemy Trainer Pointers"
+	"Kalos Dex Order"
+	"Tileset Data - alph_word_room"
+	"Pokemon Pics 38"
 
 ROMX $2B
 	org $4000
 	"Evolution"
+	"Phone Text 4"
+	"RBY Music 2"
 
 ROMX $2C
 	org $4000
 	"Wild Data"
+	"DPPt Music 1"
+	"Tileset Data - hotel"
 
 ROMX $2D
 	org $4000
 	"Pokedex"
+	"Pokemon Pics 10"
 
 ROMX $2E
 	org $4000
 	"Map Headers"
 	"Events"
+	"Sinnoh Egg Moves"
+	"Pokemon Pics 4"
 
 ROMX $2F
 	org $4000
 	"Second Map Headers"
+	"Tileset Data - pokemon_mansion"
+	"Pokemon Pics 36"
 
 ROMX $30
 	org $4000
 	"Phone Scripts"
+	"Pokemon Pics 32"
 
 ROMX $31
 	org $4000
@@ -456,366 +520,488 @@ ROMX $85
 
 ROMX $86
 	org $4000
+	"Hoenn DED 1"
 
 ROMX $87
 	org $4000
+	"Hoenn DED 2"
 
 ROMX $88
 	org $4000
+	"Hoenn DED 3"
 
 ROMX $89
 	org $4000
+	"Hoenn DED 4"
 
 ROMX $8a
 	org $4000
+	"Hoenn DED 5"
 
 ROMX $8b
 	org $4000
+	"Hoenn DED 6"
 
 ROMX $8c
 	org $4000
+	"Hoenn DED 7"
 
 ROMX $8d
 	org $4000
+	"Hoenn DED 8"
 
 ROMX $8e
 	org $4000
+	"Hoenn DED 9"
 
 ROMX $8f
 	org $4000
+	"Hoenn DED 10"
 
 ROMX $90
 	org $4000
+	"Hoenn DED 11"
 
 ROMX $91
 	org $4000
+	"Hoenn DED 14"
 
 ROMX $92
 	org $4000
+	"Hoenn DED 15"
 
 ROMX $93
 	org $4000
+	"Hoenn DED 16"
 
 ROMX $94
 	org $4000
+	"Hoenn DED 17"
 
 ROMX $95
 	org $4000
+	"Hoenn DED 18"
 
 ROMX $96
 	org $4000
+	"Hoenn DED 19"
 
 ROMX $97
 	org $4000
+	"Hoenn DED 20"
 
 ROMX $98
 	org $4000
+	"Hoenn DED 21"
 
 ROMX $99
 	org $4000
+	"Hoenn DED 22"
 
 ROMX $9a
 	org $4000
+	"Hoenn DED 23"
 
 ROMX $9b
 	org $4000
+	"Hoenn DED 24"
 
 ROMX $9c
 	org $4000
+	"Hoenn DED 25"
 
 ROMX $9d
 	org $4000
+	"Hoenn DED 26"
 
 ROMX $9e
 	org $4000
+	"Hoenn DED 27"
 
 ROMX $9f
 	org $4000
+	"Hoenn DED 28"
 
 ROMX $a0
 	org $4000
+	"Hoenn DED 29"
 
 ROMX $a1
 	org $4000
+	"Hoenn DED 30"
 
 ROMX $a2
 	org $4000
+	"Hoenn DED 31"
 
 ROMX $a3
 	org $4000
+	"Hoenn DED 32"
 
 ROMX $a4
 	org $4000
+	"Hoenn DED 33"
 
 ROMX $a5
 	org $4000
+	"Sinnoh DED 1"
 
 ROMX $a6
 	org $4000
+	"Sinnoh DED 2"
 
 ROMX $a7
 	org $4000
+	"Sinnoh DED 3"
 
 ROMX $a8
 	org $4000
+	"Sinnoh DED 4"
 
 ROMX $a9
 	org $4000
+	"Sinnoh DED 5"
 
 ROMX $aa
 	org $4000
+	"Sinnoh DED 6"
 
 ROMX $ab
 	org $4000
+	"Sinnoh DED 7"
 
 ROMX $ac
 	org $4000
+	"Sinnoh DED 8"
 
 ROMX $ad
 	org $4000
+	"Sinnoh DED 9"
 
 ROMX $ae
 	org $4000
+	"Sinnoh DED 10"
 
 ROMX $af
 	org $4000
+	"Sinnoh DED 11"
 
 ROMX $b0
 	org $4000
+	"Sinnoh DED 12"
 
 ROMX $b1
 	org $4000
+	"Sinnoh DED 13"
 
 ROMX $b2
 	org $4000
+	"Sinnoh DED 14"
 
 ROMX $b3
 	org $4000
+	"Sinnoh DED 15"
 
 ROMX $b4
 	org $4000
+	"Sinnoh DED 16"
 
 ROMX $b5
 	org $4000
+	"Sinnoh DED 17"
 
 ROMX $b6
 	org $4000
+	"Sinnoh DED 18"
 
 ROMX $b7
 	org $4000
+	"Sinnoh DED 19"
 
 ROMX $b8
 	org $4000
+	"Sinnoh DED 20"
 
 ROMX $b9
 	org $4000
+	"Sinnoh DED 21"
 
 ROMX $ba
 	org $4000
+	"Sinnoh DED 22"
 
 ROMX $bb
 	org $4000
+	"Sinnoh DED 23"
 
 ROMX $bc
 	org $4000
+	"Sinnoh DED 24"
 
 ROMX $bd
 	org $4000
+	"Sinnoh DED 25"
 
 ROMX $be
 	org $4000
+	"Sinnoh DED 26"
 
 ROMX $bf
 	org $4000
+	"Sinnoh DED 27"
 
 ROMX $c0
 	org $4000
+	"Sinnoh DED 28"
 
 ROMX $c1
 	org $4000
+	"Sinnoh DED 29"
 
 ROMX $c2
 	org $4000
+	"Sinnoh DED 30"
 
 ROMX $c3
 	org $4000
+	"Sinnoh DED 31"
 
 ROMX $c4
 	org $4000
+	"Sinnoh DED 32"
 
 ROMX $c5
 	org $4000
+	"Sinnoh DED 33"
 
 ROMX $c6
 	org $4000
+	"Sinnoh DED 34"
 
 ROMX $c7
 	org $4000
+	"Sinnoh DED 35"
 
 ROMX $c8
 	org $4000
+	"Sinnoh DED 36"
 
 ROMX $c9
 	org $4000
+	"Sinnoh DED 37"
 
 ROMX $ca
 	org $4000
+	"Sinnoh DED 38"
 
 ROMX $cb
 	org $4000
+	"Sinnoh DED 39"
 
 ROMX $cc
 	org $4000
+	"Sinnoh DED 40"
 
 ROMX $cd
 	org $4000
+	"Sinnoh DED 41"
 
 ROMX $ce
 	org $4000
+	"Sinnoh DED 42"
 
 ROMX $cf
 	org $4000
+	"Unova DED 1"
 
 ROMX $d0
 	org $4000
+	"Unova DED 2"
 
 ROMX $d1
 	org $4000
+	"Unova DED 3"
 
 ROMX $d2
 	org $4000
+	"Unova DED 4"
 
 ROMX $d3
 	org $4000
+	"Unova DED 5"
 
 ROMX $d4
 	org $4000
+	"Unova DED 6"
 
 ROMX $d5
 	org $4000
+	"Unova DED 7"
 
 ROMX $d6
 	org $4000
+	"Unova DED 8"
 
 ROMX $d7
 	org $4000
+	"Unova DED 9"
 
 ROMX $d8
 	org $4000
+	"Unova DED 10"
 
 ROMX $d9
 	org $4000
+	"Unova DED 11"
 
 ROMX $da
 	org $4000
+	"Unova DED 12"
 
 ROMX $db
 	org $4000
+	"Unova DED 13"
 
 ROMX $dc
 	org $4000
+	"Unova DED 14"
 
 ROMX $dd
 	org $4000
+	"Unova DED 15"
 
 ROMX $de
 	org $4000
+	"Unova DED 16"
 
 ROMX $df
 	org $4000
+	"Unova DED 17"
 
 ROMX $e0
 	org $4000
+	"Unova DED 18"
 
 ROMX $e1
 	org $4000
+	"Unova DED 19"
 
 ROMX $e2
 	org $4000
+	"Unova DED 20"
 
 ROMX $e3
 	org $4000
+	"Unova DED 21"
 
 ROMX $e4
 	org $4000
+	"Unova DED 22"
 
 ROMX $e5
 	org $4000
+	"Unova DED 23"
 
 ROMX $e6
 	org $4000
+	"Unova DED 24"
 
 ROMX $e7
 	org $4000
+	"Unova DED 25"
 
 ROMX $e8
 	org $4000
+	"Unova DED 26"
 
 ROMX $e9
 	org $4000
+	"Unova DED 27"
 
 ROMX $ea
 	org $4000
+	"Unova DED 28"
 
 ROMX $eb
 	org $4000
+	"Unova DED 29"
 
 ROMX $ec
 	org $4000
+	"Unova DED 30"
 
 ROMX $ed
 	org $4000
+	"Unova DED 31"
 
 ROMX $ee
 	org $4000
+	"Unova DED 32"
 
 ROMX $ef
 	org $4000
+	"Unova DED 33"
 
 ROMX $f0
 	org $4000
+	"Unova DED 34"
 
 ROMX $f1
 	org $4000
+	"Unova DED 35"
 
 ROMX $f2
 	org $4000
+	"Unova DED 36"
 
 ROMX $f3
 	org $4000
+	"Unova DED 37"
 
 ROMX $f4
 	org $4000
+	"Unova DED 38"
 
 ROMX $f5
 	org $4000
+	"Unova DED 39"
 
 ROMX $f6
 	org $4000
+	"Unova DED 40"
 
 ROMX $f7
 	org $4000
+	"Unova DED 41"
 
 ROMX $f8
 	org $4000
+	"Unova DED 42"
 
 ROMX $f9
 	org $4000
+	"Unova DED 43"
 
 ROMX $fa
 	org $4000
+	"Unova DED 44"
 
 ROMX $fb
 	org $4000
+	"Unova DED 45"
 
 ROMX $fc
 	org $4000
+	"Unova DED 46"
 
 ROMX $fd
 	org $4000
+	"Unova DED 47"
 
 ROMX $fe
 	org $4000
+	"Unova DED 48"
 
 ROMX $ff
 	org $4000
+	"Unova DED 49"

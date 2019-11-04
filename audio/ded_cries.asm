@@ -856,19 +856,19 @@ SECTION "Unova DED 45", ROMX
 
 TerrakionDEDData::;  INCBIN "audio/ded/pokemon/terrakion.ded"
 VirizionDEDData::;  INCBIN "audio/ded/pokemon/virizion.ded"
-TornadusDEDData::;  INCBIN "audio/ded/pokemon/tornadus.ded"
+TornadusDEDData::;  ;INCBIN "audio/ded/pokemon/tornadus.ded"
 
 SECTION "Unova DED 46", ROMX
 
 
-ThundurusDEDData::;  INCBIN "audio/ded/pokemon/thundurus.ded"
+ThundurusDEDData::;  ;INCBIN "audio/ded/pokemon/thundurus.ded"
 ReshiramDEDData::;  INCBIN "audio/ded/pokemon/reshiram.ded"
 
 SECTION "Unova DED 47", ROMX
 
 
 ZekromDEDData::;  INCBIN "audio/ded/pokemon/zekrom.ded"
-LandorusDEDData::;  INCBIN "audio/ded/pokemon/landorus.ded"
+LandorusDEDData::;  ;INCBIN "audio/ded/pokemon/landorus.ded"
 
 SECTION "Unova DED 48", ROMX
 
