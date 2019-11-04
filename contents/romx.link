@@ -221,3 +221,216 @@ ROMX $37
 ROMX $38
 	org $4000
 	"Crystal Data"
+
+ROMX $39
+	org $4000
+
+ROMX $3a
+	org $4000
+
+ROMX $3b
+	org $4000
+
+ROMX $3c
+	org $4000
+
+ROMX $3d
+	org $4000
+
+ROMX $3e
+	org $4000
+
+ROMX $3f
+	org $4000
+
+ROMX $40
+	org $4000
+
+ROMX $41
+	org $4000
+
+ROMX $42
+	org $4000
+
+ROMX $43
+	org $4000
+
+ROMX $44
+	org $4000
+
+ROMX $45
+	org $4000
+
+ROMX $46
+	org $4000
+
+ROMX $47
+	org $4000
+
+ROMX $48
+	org $4000
+
+ROMX $49
+	org $4000
+
+ROMX $4a
+	org $4000
+
+ROMX $4b
+	org $4000
+
+ROMX $4c
+	org $4000
+
+ROMX $4d
+	org $4000
+
+ROMX $4e
+	org $4000
+
+ROMX $4f
+	org $4000
+
+ROMX $50
+	org $4000
+
+ROMX $51
+	org $4000
+
+ROMX $52
+	org $4000
+
+ROMX $53
+	org $4000
+
+ROMX $54
+	org $4000
+
+ROMX $55
+	org $4000
+
+ROMX $56
+	org $4000
+
+ROMX $57
+	org $4000
+
+ROMX $58
+	org $4000
+
+ROMX $59
+	org $4000
+
+ROMX $5a
+	org $4000
+
+ROMX $5b
+	org $4000
+
+ROMX $5c
+	org $4000
+
+ROMX $5d
+	org $4000
+
+ROMX $5e
+	org $4000
+
+ROMX $5f
+	org $4000
+
+ROMX $60
+	org $4000
+
+ROMX $61
+	org $4000
+
+ROMX $62
+	org $4000
+
+ROMX $63
+	org $4000
+
+ROMX $64
+	org $4000
+
+ROMX $65
+	org $4000
+
+ROMX $66
+	org $4000
+
+ROMX $67
+	org $4000
+
+ROMX $68
+	org $4000
+
+ROMX $69
+	org $4000
+
+ROMX $6a
+	org $4000
+
+ROMX $6b
+	org $4000
+
+ROMX $6c
+	org $4000
+
+ROMX $6d
+	org $4000
+
+ROMX $6e
+	org $4000
+
+ROMX $6f
+	org $4000
+
+ROMX $70
+	org $4000
+
+ROMX $71
+	org $4000
+
+ROMX $72
+	org $4000
+
+ROMX $73
+	org $4000
+
+ROMX $74
+	org $4000
+
+ROMX $75
+	org $4000
+
+ROMX $76
+	org $4000
+
+ROMX $77
+	org $4000
+
+ROMX $78
+	org $4000
+
+ROMX $79
+	org $4000
+
+ROMX $7a
+	org $4000
+
+ROMX $7b
+	org $4000
+
+ROMX $7c
+	org $4000
+
+ROMX $7d
+	org $4000
+
+ROMX $7e
+	org $4000
+
+ROMX $7f
+	org $4000

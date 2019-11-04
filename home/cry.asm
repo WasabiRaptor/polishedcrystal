@@ -31,7 +31,7 @@ PlayCry2:: ; 37d5
 	pop af
 	; fallthrough
 
-_PlayCry:: ; 37e2
+_PlayCry::
 	push hl
 	push de
 	push bc
@@ -65,14 +65,15 @@ LoadCryHeader:: ; 37f3
 	ld a, d
 	rst Bankswitch
 
-rept 6
+rept 5
 	add hl, bc
 endr
+	ld a, [hli]
+	cp $ff
+	jr z, .ded
 
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld e, a
+	ld d, 0
 
 	ld a, [hli]
 	ld [wCryPitch], a
@@ -88,6 +89,12 @@ endr
 	and a
 	ret
 ; 381e
+.ded
+	call LoadDEDCryHeader
+	pop af
+	rst Bankswitch
+	scf
+	ret
 
 GetCryIndex:: ; 381e
 	and a

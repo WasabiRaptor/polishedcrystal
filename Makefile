@@ -39,6 +39,7 @@ $(BUILD_DIR)home.o \
 $(BUILD_DIR)ram.o \
 $(BUILD_DIR)audio.o \
 $(BUILD_DIR)audio/musicplayer.o \
+$(BUILD_DIR)audio/ded_cries.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_entries.o \
 $(BUILD_DIR)data/pokemon/johto_dex_entries.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_entries.o \

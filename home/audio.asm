@@ -10,14 +10,12 @@ MapSetup_Sound_Off:: ; 3b4e
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_MapSetup_Sound_Off)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	call _MapSetup_Sound_Off
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	pop af
 	pop bc
@@ -37,14 +35,12 @@ UpdateSound:: ; 3b6a
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_UpdateSound)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	call _UpdateSound
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	pop af
 	pop bc
@@ -58,15 +54,13 @@ _LoadMusicByte:: ; 3b86
 ; wCurMusicByte = [a:de]
 GLOBAL LoadMusicByte
 
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	ld a, [de]
 	ld [wCurMusicByte], a
 	ld a, BANK(LoadMusicByte)
 
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 	ret
 ; 3b97
 
@@ -90,8 +84,7 @@ PlayMusic:: ; 3b97
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlayMusic) ; and BANK(_MapSetup_Sound_Off)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	ld a, e
 	and a
@@ -105,8 +98,7 @@ PlayMusic:: ; 3b97
 
 .end
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 	pop af
 	pop bc
 	pop de
@@ -126,8 +118,7 @@ PlayMusic2:: ; 3bbc
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlayMusic)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	push de
 	ld de, MUSIC_NONE
@@ -137,8 +128,7 @@ PlayMusic2:: ; 3bbc
 	call _PlayMusic
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	pop af
 	pop bc
@@ -166,16 +156,16 @@ PlayCryHeader:: ; 3be3
 	ld a, d
 	ld d, 0
 	; Cry headers are stuck in one bank.
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
-rept 6
+	rst Bankswitch
+rept 5
 	add hl, de
 endr
+	ld a, [hli]
+	cp $ff
+	jr z, .ded
 
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld e, a
+	ld d, 0
 
 	ld a, [hli]
 	ld [wCryPitch], a
@@ -187,14 +177,18 @@ endr
 	ld [wCryLength + 1], a
 
 	ld a, BANK(_PlayCryHeader)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	call _PlayCryHeader
+	jr .done
+.ded
+	ld e, 0
+	call LoadDEDCryHeader
+	call PlayDEDCry
 
+.done
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	pop af
 	pop bc
@@ -250,16 +244,14 @@ PlaySFX:: ; 3c23
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlaySFX)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	ld a, e
 	ld [wCurSFX], a
 	call _PlaySFX
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 .done
 	pop af

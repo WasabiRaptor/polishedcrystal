@@ -32,7 +32,7 @@ PlaySlowCry: ; fb841
 PlayFaintingCry:
 	ld a, b
 	call LoadCryHeader
-	ret c
+	jr c, .ded
 	ld hl, wCryPitch
 	ld a, [hli]
 	ld h, [hl]
@@ -60,3 +60,7 @@ PlayFaintingCry:
 	ld [wStereoPanningMask], a
 	farcall _PlayCryHeader
 	jp WaitSFX
+
+.ded
+	ld e, 1
+	jp PlayDEDCry
