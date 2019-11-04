@@ -22,6 +22,7 @@ ROMX $05
 
 ROMX $06
 	org $4000
+	"color"
 
 ROMX $07
 	org $4000
@@ -433,4 +434,388 @@ ROMX $7e
 	org $4000
 
 ROMX $7f
+	org $4000
+
+ROMX $80
+	org $4000
+
+ROMX $81
+	org $4000
+
+ROMX $82
+	org $4000
+
+ROMX $83
+	org $4000
+
+ROMX $84
+	org $4000
+
+ROMX $85
+	org $4000
+
+ROMX $86
+	org $4000
+
+ROMX $87
+	org $4000
+
+ROMX $88
+	org $4000
+
+ROMX $89
+	org $4000
+
+ROMX $8a
+	org $4000
+
+ROMX $8b
+	org $4000
+
+ROMX $8c
+	org $4000
+
+ROMX $8d
+	org $4000
+
+ROMX $8e
+	org $4000
+
+ROMX $8f
+	org $4000
+
+ROMX $90
+	org $4000
+
+ROMX $91
+	org $4000
+
+ROMX $92
+	org $4000
+
+ROMX $93
+	org $4000
+
+ROMX $94
+	org $4000
+
+ROMX $95
+	org $4000
+
+ROMX $96
+	org $4000
+
+ROMX $97
+	org $4000
+
+ROMX $98
+	org $4000
+
+ROMX $99
+	org $4000
+
+ROMX $9a
+	org $4000
+
+ROMX $9b
+	org $4000
+
+ROMX $9c
+	org $4000
+
+ROMX $9d
+	org $4000
+
+ROMX $9e
+	org $4000
+
+ROMX $9f
+	org $4000
+
+ROMX $a0
+	org $4000
+
+ROMX $a1
+	org $4000
+
+ROMX $a2
+	org $4000
+
+ROMX $a3
+	org $4000
+
+ROMX $a4
+	org $4000
+
+ROMX $a5
+	org $4000
+
+ROMX $a6
+	org $4000
+
+ROMX $a7
+	org $4000
+
+ROMX $a8
+	org $4000
+
+ROMX $a9
+	org $4000
+
+ROMX $aa
+	org $4000
+
+ROMX $ab
+	org $4000
+
+ROMX $ac
+	org $4000
+
+ROMX $ad
+	org $4000
+
+ROMX $ae
+	org $4000
+
+ROMX $af
+	org $4000
+
+ROMX $b0
+	org $4000
+
+ROMX $b1
+	org $4000
+
+ROMX $b2
+	org $4000
+
+ROMX $b3
+	org $4000
+
+ROMX $b4
+	org $4000
+
+ROMX $b5
+	org $4000
+
+ROMX $b6
+	org $4000
+
+ROMX $b7
+	org $4000
+
+ROMX $b8
+	org $4000
+
+ROMX $b9
+	org $4000
+
+ROMX $ba
+	org $4000
+
+ROMX $bb
+	org $4000
+
+ROMX $bc
+	org $4000
+
+ROMX $bd
+	org $4000
+
+ROMX $be
+	org $4000
+
+ROMX $bf
+	org $4000
+
+ROMX $c0
+	org $4000
+
+ROMX $c1
+	org $4000
+
+ROMX $c2
+	org $4000
+
+ROMX $c3
+	org $4000
+
+ROMX $c4
+	org $4000
+
+ROMX $c5
+	org $4000
+
+ROMX $c6
+	org $4000
+
+ROMX $c7
+	org $4000
+
+ROMX $c8
+	org $4000
+
+ROMX $c9
+	org $4000
+
+ROMX $ca
+	org $4000
+
+ROMX $cb
+	org $4000
+
+ROMX $cc
+	org $4000
+
+ROMX $cd
+	org $4000
+
+ROMX $ce
+	org $4000
+
+ROMX $cf
+	org $4000
+
+ROMX $d0
+	org $4000
+
+ROMX $d1
+	org $4000
+
+ROMX $d2
+	org $4000
+
+ROMX $d3
+	org $4000
+
+ROMX $d4
+	org $4000
+
+ROMX $d5
+	org $4000
+
+ROMX $d6
+	org $4000
+
+ROMX $d7
+	org $4000
+
+ROMX $d8
+	org $4000
+
+ROMX $d9
+	org $4000
+
+ROMX $da
+	org $4000
+
+ROMX $db
+	org $4000
+
+ROMX $dc
+	org $4000
+
+ROMX $dd
+	org $4000
+
+ROMX $de
+	org $4000
+
+ROMX $df
+	org $4000
+
+ROMX $e0
+	org $4000
+
+ROMX $e1
+	org $4000
+
+ROMX $e2
+	org $4000
+
+ROMX $e3
+	org $4000
+
+ROMX $e4
+	org $4000
+
+ROMX $e5
+	org $4000
+
+ROMX $e6
+	org $4000
+
+ROMX $e7
+	org $4000
+
+ROMX $e8
+	org $4000
+
+ROMX $e9
+	org $4000
+
+ROMX $ea
+	org $4000
+
+ROMX $eb
+	org $4000
+
+ROMX $ec
+	org $4000
+
+ROMX $ed
+	org $4000
+
+ROMX $ee
+	org $4000
+
+ROMX $ef
+	org $4000
+
+ROMX $f0
+	org $4000
+
+ROMX $f1
+	org $4000
+
+ROMX $f2
+	org $4000
+
+ROMX $f3
+	org $4000
+
+ROMX $f4
+	org $4000
+
+ROMX $f5
+	org $4000
+
+ROMX $f6
+	org $4000
+
+ROMX $f7
+	org $4000
+
+ROMX $f8
+	org $4000
+
+ROMX $f9
+	org $4000
+
+ROMX $fa
+	org $4000
+
+ROMX $fb
+	org $4000
+
+ROMX $fc
+	org $4000
+
+ROMX $fd
+	org $4000
+
+ROMX $fe
+	org $4000
+
+ROMX $ff
 	org $4000
