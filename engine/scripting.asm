@@ -2812,7 +2812,7 @@ Script_givetmhm:
 	call GetScriptByte
 	ld [wCurTMHM], a
 	ld [wItemQuantityChangeBuffer], a
-	call ReceiveTMHM
+	farcall ReceiveTMHM
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -2829,7 +2829,7 @@ Script_checktmhm:
 	ld [wScriptVar], a
 	call GetScriptByte
 	ld [wCurTMHM], a
-	call CheckTMHM
+	farcall CheckTMHM
 	ret nc
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -3018,7 +3018,7 @@ Script_givekeyitem:
 	call GetScriptByte
 	ld [wCurKeyItem], a
 	ld [wItemQuantityChangeBuffer], a
-	call ReceiveKeyItem
+	farcall ReceiveKeyItem
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -3032,7 +3032,7 @@ Script_checkkeyitem:
 	call GetScriptByte
 	ld [wCurKeyItem], a
 	ld [wItemQuantityChangeBuffer], a
-	call CheckKeyItem
+	farcall CheckKeyItem
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -3046,7 +3046,7 @@ Script_takekeyitem:
 	call GetScriptByte
 	ld [wCurKeyItem], a
 	ld [wItemQuantityChangeBuffer], a
-	call TossKeyItem
+	farcall TossKeyItem
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a

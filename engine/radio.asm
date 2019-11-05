@@ -666,7 +666,7 @@ PokedexShow1:
 	ld c, a
 	push bc
 	ld a, c
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop bc
 	jr z, .loop
 	inc c

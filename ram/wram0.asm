@@ -1163,5 +1163,8 @@ wVariableWidthTextCurTileColsFilled:: ds 1
 wPerliminaryVariableWidthTile:: ds 1 * LEN_1BPP_TILE
 wCombinedVaribleWidthTiles:: ds 2 * LEN_1BPP_TILE
 
+wPokeAnimCoord:: ds 2
+wPokeAnimDestination:: ds 2
+
 wc0f3:: ds 1
 wc0f4:: ds 1

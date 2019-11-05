@@ -14,13 +14,11 @@ ROMX $02
 ROMX $03
 	org $4000
 	"Code 3"
-	"ORAS Music 1"
 
 ROMX $04
 	org $4000
 	"Code 4"
 	"Other Pic Pointers"
-	"Unown Pics 2"
 
 ROMX $05
 	org $4000
@@ -235,7 +233,6 @@ ROMX $2C
 	org $4000
 	"Wild Data"
 	"DPPt Music 1"
-	"Tileset Data - hotel"
 
 ROMX $2D
 	org $4000

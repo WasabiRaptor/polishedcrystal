@@ -1,14 +1,3 @@
-CheckTossableItem:: ; 2f46
-	push hl
-	push de
-	push bc
-	farcall _CheckTossableItem
-	pop bc
-	pop de
-	pop hl
-	ret
-; 2f53
-
 TossItem:: ; 2f53
 	push hl
 	push de
@@ -49,47 +38,6 @@ ReceiveItem:: ; 2f66
 	ret
 ; 2f79
 
-ReceiveTMHM:: ; d3c4
-	ld a, [wCurTMHM]
-	ld e, a
-	ld d, 0
-	ld b, SET_FLAG
-	ld hl, wTMsHMs
-	call FlagAction
-	scf
-	ret
-
-ReceiveKeyItem:: ; d3c4
-	ld a, [wCurKeyItem]
-	ld e, a
-	ld d, 0
-	ld b, SET_FLAG
-	ld hl, wKeyItems
-	call FlagAction
-	scf
-	ret
-
-TossKeyItem:: ; d3c4
-	ld a, [wCurKeyItem]
-	ld e, a
-	ld d, 0
-	ld b, RESET_FLAG
-	ld hl, wKeyItems
-	call FlagAction
-	scf
-	ret
-
-CheckKeyItem:: ; d3c4
-	ld a, [wCurKeyItem]
-	ld e, a
-	ld d, 0
-	ld b, CHECK_FLAG
-	ld hl, wKeyItems
-	call FlagAction
-	ret z
-	scf
-	ret
-
 CheckItem:: ; 2f79
 	push hl
 	push de
@@ -109,17 +57,6 @@ CheckItem:: ; 2f79
 	pop hl
 	ret
 ; 2f8c
-
-CheckTMHM:: ; d3fb
-	ld a, [wCurTMHM]
-	ld e, a
-	ld d, 0
-	ld b, CHECK_FLAG
-	ld hl, wTMsHMs
-	call FlagAction
-	ret z
-	scf
-	ret
 
 CountItem::
 	push bc

@@ -136,7 +136,7 @@ IF _NARG == 3
 ELSE
 	db $ff
 	dba \1DEDData ; bank/address
-	db 0
+	db 0 ;padding
 ENDC
 ENDM
 

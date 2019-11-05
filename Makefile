@@ -265,6 +265,5 @@ gfx/unknown/unknown_egg.2bpp: rgbgfx += -h
 %.dimensions: %.png
 	tools/png_dimensions $< $@
 
-%.wav:;
-%.pcm: %.wav
-	@$(pcm) $<
+%.wav: ;
+%.ded: %.wav dedenc.py ; $(PYTHON) dedenc.py $< $@

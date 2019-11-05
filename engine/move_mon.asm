@@ -178,10 +178,10 @@ endr
 	ld [wd265], a
 	dec a
 	push de ; 2 ; dvs pushed
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	ld a, [wd265]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	pop de ; 1 ; dvs popped
 	pop hl ; 0 ; group is popped
 	push hl ; 1 ; group is pushed
@@ -276,7 +276,7 @@ endr
 	push hl ;3 ; group is pushed
 	push bc ;4 ; ability results pushed
 	push de ;5 ; dvs are pushed
-	call CheckKeyItem
+	farcall CheckKeyItem
 	pop de ;4 ; dvs popped
 	pop bc ;3 ; ability popped
 	pop hl ;2 ; group popped
@@ -643,7 +643,7 @@ AddTempmonToParty: ; da96
 	cp EGG
 	jr z, .egg
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	ld hl, wPartyMon1Happiness
 	ld a, [wPartyCount]
 	dec a
@@ -1256,7 +1256,7 @@ SentPkmnIntoBox: ; de6e
 	ld [de], a
 	ld a, [wCurPartySpecies]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	ld a, [wCurPartySpecies]
 	cp UNOWN
 	jr nz, .not_unown
@@ -1349,10 +1349,10 @@ GiveEgg:: ; df8c
 ; when it is successful.  This routine will make
 ; sure that we aren't newly setting flags.
 	push af
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop af
 	push bc
-	call CheckSeenMon
+	farcall CheckSeenMon
 	push bc
 
 	call TryAddMonToParty

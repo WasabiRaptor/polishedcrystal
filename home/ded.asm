@@ -46,39 +46,39 @@ PlayDEDSamples::
 	ld a, [hli]
 	ld d, a
 	ld a, 8
-	ld [hCurSampVal], a
+	ldh [hCurSampVal], a
 	ld c, 1
 	ld a, (1 << rTAC_ON) | rTAC_16384_HZ
-	ld [rTAC], a
+	ldh [rTAC], a
 	inc d
 	inc e
-	jp .handleLoop
+	jr .handleLoop
 .loop
 	push de
 	ld de, wDEDTempSamp
 	ld a, 16
 .loop2
-	ld [hLoopCounter], a
+	ldh [hLoopCounter], a
 	push de
 	call wGetDEDByte
-	ld [hCurBitStream], a
-	ld a, [hCurSampVal]
+	ldh [hCurBitStream], a
+	ldh a, [hCurSampVal]
 	add b
 	and $f
-	ld [hCurSampVal], a
+	ldh [hCurSampVal], a
 	swap a
 	ld d, a
 	call wGetDEDByte
-	ld [hCurBitStream], a
-	ld a, [hCurSampVal]
+	ldh [hCurBitStream], a
+	ldh a, [hCurSampVal]
 	add b
 	and $f
-	ld [hCurSampVal], a
+	ldh [hCurSampVal], a
 	or d
 	pop de
 	ld [de], a
 	inc de
-	ld a, [hLoopCounter]
+	ldh a, [hLoopCounter]
 	dec a
 	jr nz, .loop2
 	ei
@@ -87,30 +87,30 @@ PlayDEDSamples::
 	halt ; wait until timer interrupt hits
 	jr nc, .haltLoop
 	di
-	ld [rNR51], a
-	ld [rNR30], a
+	ldh [rNR51], a
+	ldh [rNR30], a
 	push hl
 	ld hl, wDEDTempSamp
 CUR_WAVE = rWAVE
 rept 16
 	ld a, [hli]
-	ld [CUR_WAVE], a
+	ldh [CUR_WAVE], a
 CUR_WAVE = CUR_WAVE + 1
 endr
 	ld a, $80
-	ld [rNR30], a
+	ldh [rNR30], a
 	ld a, $87
-	ld [rNR34], a
-	ld a, [hDEDNR51Mask]
-	ld [rNR51], a
+	ldh [rNR34], a
+	ldh a, [hDEDNR51Mask]
+	ldh [rNR51], a
 
 	pop hl
 	pop de
 .handleLoop
 	dec e
-	jp nz, .loop
+	jr nz, .loop
 	dec d
-	jp nz, .loop
+	jr nz, .loop
 	ret
 
 WriteDEDTreeToWRAM:

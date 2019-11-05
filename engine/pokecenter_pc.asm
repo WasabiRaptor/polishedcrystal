@@ -311,7 +311,7 @@ KrisWithdrawItemMenu: ; 0x157d1
 
 .Submenu:
 	; check if the item has a quantity
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr z, .askquantity
@@ -479,7 +479,7 @@ KrisDepositItemMenu: ; 0x1588b
 	ret
 
 .DepositItem_:
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr z, .AskQuantity

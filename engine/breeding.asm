@@ -295,7 +295,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1IsEgg

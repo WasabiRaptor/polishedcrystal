@@ -2374,7 +2374,7 @@ FaintYourPokemon: ; 3cef1
 	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX
 	call PlayerMonFaintedAnimation
@@ -2393,7 +2393,7 @@ FaintEnemyPokemon: ; 3cf14
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX
 	call EnemyMonFaintedAnimation
@@ -4339,7 +4339,7 @@ PursuitSwitch: ; 3dc5b
 	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld a, [wLastPlayerMon]
 	ld c, a
 	ld hl, wBattleParticipantsNotFainted
@@ -4359,7 +4359,7 @@ PursuitSwitch: ; 3dc5b
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX
 	call WaitSFX
@@ -7061,7 +7061,7 @@ endc
 	push hl
 	push bc
 	push de
-	call CheckKeyItem
+	farcall CheckKeyItem
 	pop de
 	pop bc
 	pop hl
@@ -9136,7 +9136,7 @@ HandleNuzlockeFlags:
 	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	ret nz
 
 	; Only flag landmarks for Nuzlocke runs after getting Poké Balls
@@ -9802,7 +9802,9 @@ InitBattleDisplay: ; 3fb6c
 	call SetPalettes
 	xor a
 	ldh [hSCX], a
-	ret
+	inc a
+	ld [hCGBPalUpdate], a
+	jp DelayFrame
 ; 3fbd6
 
 .BlankBGMap: ; 3fbd6

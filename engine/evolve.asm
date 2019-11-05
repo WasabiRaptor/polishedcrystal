@@ -394,7 +394,7 @@ endr
 	pop af ; 1
 	ld [wd265], a
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 
 	ld a, [wd265]
 	cp UNOWN

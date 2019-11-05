@@ -1019,7 +1019,7 @@ DayCare_InitBreeding: ; 16a3b
 	push hl
 	push bc
 	push de
-	call CheckKeyItem
+	farcall CheckKeyItem
 	pop de
 	pop bc
 	pop hl

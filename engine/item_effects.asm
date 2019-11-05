@@ -522,13 +522,13 @@ PokeBallEffect: ; e8a2
 	ld [wd265], a
 
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 
 	ld a, c
 	push af
 	ld a, [wd265]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	pop af
 	and a
 	jr nz, .skip_pokedex
@@ -1117,7 +1117,7 @@ RepeatBallMultiplier:
 
 	dec a
 	push bc
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop bc
 	ret z
 

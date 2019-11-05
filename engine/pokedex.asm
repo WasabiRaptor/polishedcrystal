@@ -406,6 +406,9 @@ Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	ld [wDexMonShiny], a
 	ld a, CGB_POKEDEX
 	call Pokedex_GetCGBLayout
+	ld a, 1
+	ld [hCGBPalUpdate], a
+	call DelayFrame
 	ld a, [wCurPartySpecies]
 	call PlayCry
 	jp Pokedex_IncrementDexPointer
@@ -1949,7 +1952,7 @@ Pokedex_CheckCaught: ; 40bc4 (10:4bc4)
 	push hl
 	ld a, [wPokedexCurrentMon]
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop hl
 	pop de
 	ret
@@ -1960,7 +1963,7 @@ Pokedex_CheckSeen: ; 40bd0
 	push hl
 	ld a, [wPokedexCurrentMon]
 	dec a
-	call CheckSeenMon
+	farcall CheckSeenMon
 	pop hl
 	pop de
 	ret
@@ -2800,6 +2803,7 @@ NewPokedexEntry: ; fb877
 	predef GetFrontpic
 	ld a, CGB_POKEDEX
 	call Pokedex_GetCGBLayout
+	call DelayFrame
 	ld a, [wCurPartySpecies]
 	jp PlayCry
 

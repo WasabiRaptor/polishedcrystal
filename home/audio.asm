@@ -140,30 +140,17 @@ PlayMusic2:: ; 3bbc
 
 
 PlayCryHeader:: ; 3be3
-; Play cry header de.
+; Play cry header at d:hl.
 
-	push hl
-	push de
-	push bc
+	ld a, [hROMBank]
 	push af
-
-	ldh a, [hROMBank]
-	push af
-	call GetRelevantCryPointers
-	dec a
-	ld e, a
 
 	ld a, d
-	ld d, 0
-	; Cry headers are stuck in one bank.
 	rst Bankswitch
-rept 5
-	add hl, de
-endr
+	
 	ld a, [hli]
 	cp $ff
 	jr z, .ded
-
 	ld e, a
 	ld d, 0
 
@@ -178,7 +165,6 @@ endr
 
 	ld a, BANK(_PlayCryHeader)
 	rst Bankswitch
-
 	call _PlayCryHeader
 	jr .done
 .ded
@@ -189,16 +175,12 @@ endr
 .done
 	pop af
 	rst Bankswitch
-
-	pop af
-	pop bc
-	pop de
-	pop hl
 	ret
 ; 3c23
-GetRelevantCryPointers:
+
+GetRelevantCryPointers::
 	ld a, [wCurGroup]
-; eturn *Cries in hl and BANK(*Cries) in d
+; return *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
 	ld hl, RegionalCryTable
 	call dbwArray

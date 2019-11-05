@@ -2387,8 +2387,8 @@ _PlayCryHeader:: ; e8b79
 
 ; Overload the music id with the cry id
 	ld hl, wMusicID
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 ; 3-byte pointers (bank, address)
@@ -2472,7 +2472,6 @@ _PlayCryHeader:: ; e8b79
 	pop af
 	dec a
 	jr nz, .loop
-
 
 ; Cries play at max volume, so we save the current volume for later.
 	ld a, [wLastVolume]

@@ -779,7 +779,7 @@ BuyTMMenuLoop:
 	ld bc, hMoneyTemp
 	call CompareMoney
 	jp c, MartMenuLoop_InsufficientFunds
-	call ReceiveTMHM
+	farcall ReceiveTMHM
 	call PlayTransactionSound
 	ld de, wMoney
 	ld bc, hMoneyTemp
@@ -987,7 +987,7 @@ RooftopSaleAskPurchaseQuantity:
 
 TMMartAskPurchaseQuantity:
 	ld a, [wCurTMHM]
-	call CheckTMHM
+	farcall CheckTMHM
 	jr c, .AlreadyHaveTM
 
 	ld a, 1
@@ -1586,7 +1586,7 @@ SellMenu: ; 15eb3
 ; 15efc
 
 .try_sell ; 15efd
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr z, .okay_to_sell

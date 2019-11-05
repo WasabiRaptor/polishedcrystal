@@ -617,7 +617,7 @@ HasNoItems: ; 129d5
 TossItemFromPC: ; 129f4
 	push de
 	call PartyMonItemName
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .key_item
@@ -875,7 +875,7 @@ GiveTakePartyMonItem: ; 12b60
 	cp TM_HM - 1
 	jr z, .next
 
-	call CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .next

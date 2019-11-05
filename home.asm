@@ -313,8 +313,6 @@ GetWeekday:: ; 3376
 	ret
 ; 3380
 
-INCLUDE "home/pokedex_flags.asm"
-
 NamesPointers:: ; 33ab
 	dba KantoNames
 	dba MoveNames

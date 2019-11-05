@@ -455,7 +455,7 @@ UpdateTMHMDescriptionAndOwnership:
 	cp -1
 	jr z, UpdateTMHMDescription
 	ld a, [wCurTMHM]
-	call CheckTMHM
+	farcall CheckTMHM
 	ld de, OwnedTMString
 	jr c, .GotString
 	ld de, UnownedTMString
@@ -543,7 +543,7 @@ PlaceMenuItemQuantity: ; 0x24ac3
 	push de
 	ld a, [wMenuSelection]
 	ld [wCurItem], a
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	pop hl
 	and a
@@ -1084,7 +1084,7 @@ DisplayDexEntry: ; 4424d
 ; Check to see if we caught it.  Get out of here if we haven't.
 	ld a, [wPokedexCurrentMon]
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop hl
 	pop bc
 	ret z
@@ -4341,7 +4341,7 @@ INCLUDE "engine/battle/misc.asm"
 INCLUDE "engine/unowndex.asm"
 INCLUDE "engine/events/magikarp.asm"
 INCLUDE "engine/events/name_rater.asm"
-INCLUDE "audio/distorted_cries.asm"
+;INCLUDE "audio/distorted_cries.asm"
 
 
 SECTION "Code 24", ROMX
@@ -4363,6 +4363,7 @@ SECTION "Load Map Part", ROMX
 ; linked, do not separate
 INCLUDE "engine/player_step.asm"
 INCLUDE "engine/load_map_part.asm"
+INCLUDE "engine/growl_roar_ded_vblank_hook.asm"
 ; end linked section
 
 
@@ -4777,6 +4778,83 @@ INCLUDE "data/wild/treemons_asleep.asm"
 
 
 SECTION "Code 26", ROMX
+
+SetSeenAndCaughtMon:: ; 3380
+	ld c, a
+	push af ;1
+	call GetRelevantCaughtPointers
+
+	ldh a, [rSVBK]
+	push af ; 2
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+	
+	ld b, SET_FLAG
+	call PokedexFlagAction
+
+	pop af ; 1
+	ldh [rSVBK], a
+	pop af ;0
+; 338b
+SetSeenMon:: ; 338b
+	ld c, a
+	call GetRelevantSeenPointers
+
+	ldh a, [rSVBK]
+	push af ; 1
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
+	ld b, SET_FLAG
+	call PokedexFlagAction
+
+	pop af ; 0
+	ldh [rSVBK], a
+	ret
+; 3393
+
+CheckCaughtMon:: ; 3393
+	ld c, a
+	call GetRelevantCaughtPointers
+	ld b, CHECK_FLAG
+	jr PokedexFlagAction
+; 339b
+
+CheckSeenMon:: ; 339b
+	ld c, a
+	call GetRelevantSeenPointers
+	ld b, CHECK_FLAG
+	; fallthrough
+; 33a1
+
+PokedexFlagAction:: ; 33a1
+	ld d, BANK(wPokedexCaughtSeen)
+	predef FlagPredef
+	ld a, c
+	and a
+	ret
+; 33ab
+
+GetRelevantSeenPointers::
+	ld hl, RegionalSeenTable
+	jr GetRelevantSeenCaughtPointers
+	
+GetRelevantCaughtPointers::
+	ld hl, RegionalCaughtTable
+
+GetRelevantSeenCaughtPointers::
+	push bc
+	ld a, [wCurGroup]
+	ld de, 3
+	call IsInArray
+	inc hl 
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop bc
+	ret
+
+INCLUDE "data/pokemon/regional_seen_caught_tables.asm"
 
 FacingPlayerDistance_bc:: ; 36a5
 	push de

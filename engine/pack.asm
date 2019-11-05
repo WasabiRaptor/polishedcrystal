@@ -232,7 +232,7 @@ Pack: ; 10000
 
 .ItemBallsKey_LoadSubmenu: ; 101c5 (4:41c5)
 	jr nz, PackSortMenu
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .tossable
@@ -1769,7 +1769,7 @@ Special_ChooseItem::
 	cp TM_HM - 1
 	jr z, .next
 
-	call CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .next

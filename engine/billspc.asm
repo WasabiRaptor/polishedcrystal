@@ -1919,12 +1919,7 @@ ReleasePKMN_ByePKMN: ; e3180 (38:7180)
 
 	call ApplyTilemapInVBlank
 	ld a, [wCurPartySpecies]
-	call GetCryIndex
-	jr c, .skip_cry
-	ld e, c
-	ld d, b
-	call PlayCryHeader
-.skip_cry
+	call _PlayCry
 
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
