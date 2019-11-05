@@ -1843,6 +1843,7 @@ SetUpMoveScreenBG: ; 13172
 	call ClearBox
 	xor a
 	ld [wMonType], a
+	VWTextStart $c6
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
 	predef GetNick
@@ -1851,6 +1852,7 @@ SetUpMoveScreenBG: ; 13172
 	push bc
 	farcall CopyPkmnToTempMon
 	pop hl
+	inc hl
 	farcall PrintLevel
 	ld hl, wPlayerHPPal
 	call SetHPPal
@@ -1878,6 +1880,7 @@ MoveScreen_ListMoves:
 	rst CopyBytes
 	ld a, SCREEN_WIDTH * 2 ; move list spacing
 	ld [wBuffer1], a
+	call OtherVariableWidthText
 	hlcoord 2, 3
 	predef ListMoves
 
