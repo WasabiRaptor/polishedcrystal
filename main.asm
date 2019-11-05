@@ -5356,6 +5356,11 @@ PrintLetterDelay:: ; 313d
 	ret
 ; 318c
 
+
+if DEF(DEBUG)
+INCLUDE "engine/mon_editor.asm"
+endc
+
 SECTION "Kanto Base Data", ROMX
 
 evs: MACRO
