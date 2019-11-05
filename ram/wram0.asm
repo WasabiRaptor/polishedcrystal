@@ -782,6 +782,12 @@ wDexCurrentUnownIndex::
 wDexMonForm:: ds 1
 wPokedexDataEnd::
 
+NEXTU
+; Party Editor
+wEditorDexNumber:: ds 2
+wEditorFormNumber:: ds 1
+wEditorCursorPosition:: ds 2
+
 ENDU
 
 ENDU

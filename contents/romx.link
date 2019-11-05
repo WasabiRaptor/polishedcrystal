@@ -20,7 +20,6 @@ ROMX $04
 	org $4000
 	"Code 4"
 	"Other Pic Pointers"
-	"Unown Pics 2"
 
 ROMX $05
 	org $4000

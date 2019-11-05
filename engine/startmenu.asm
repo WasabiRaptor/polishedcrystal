@@ -569,6 +569,12 @@ StartMenu_Pokemon: ; 12976
 	farcall PartyMenuSelect
 	jr c, .return ; if cancelled or pressed B
 
+if DEF(DEBUG)
+	ldh a, [hJoyDown]
+	bit 3, a
+	jr nz, .editor
+endc
+
 	call PokemonActionSubmenu
 	push af
 	call SFXDelay2
@@ -586,6 +592,11 @@ StartMenu_Pokemon: ; 12976
 	call CloseSubmenu
 	xor a
 	ret
+
+if DEF(DEBUG)
+.editor
+	farcall EditPartyMon
+endc
 
 .quit
 	ld a, b
