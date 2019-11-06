@@ -39,9 +39,8 @@ MAP_NONE   EQU 0
 	map_const BRIDGE,                             			9,   25  ;  2
 	map_const ASAOKA_CITY,                             		20,  18 ;  3
 
-	map_const ROUTE_N_E_1,                         	20,  9  ;  4 ;unused
-
-	map_const GELID_RAVINE,                           	27,  30 ;  5
+	map_const GELID_RAVINE_2,                       27,  12 ;  4 
+	map_const GELID_RAVINE,                         27,  18 ;  5
 	map_const ROUTE_N_E_2,                         	18,  9  ;  6
 
 	map_const KIKUNO_TOWN,                             	18,  12  ;  7
@@ -54,11 +53,11 @@ MAP_NONE   EQU 0
 
 	map_const BREGUET_RUINS,                        10,  24 ;  12
 
-	map_const MINAMI_WETLANDS_ENTRANCE,                            	14,  9 ;  13
-	map_const MINAMI_WETLANDS,                            	30,  27 ;  14
+	map_const MINAMI_WETLANDS_ENTRANCE,             14,  9 ;  13
+	map_const MINAMI_WETLANDS,                      30,  27 ;  14
 
-	map_const SYLVAN_TRAIL_1,                         	30,  9  ;  15
-	map_const SYLVAN_TRAIL_2,                         	29,  9  ;  16
+	map_const SYLVAN_TRAIL_1,                       30,  9  ;  15
+	map_const SYLVAN_TRAIL_2,                       29,  9  ;  16
 	map_const HETZELTRON,                           15,  15  ;  17
 
 	map_const ROUTE_S_E_1,                         	49,  9  ;  18
@@ -67,9 +66,9 @@ MAP_NONE   EQU 0
 
 	map_const HATTORI_VILLAGE,                      22,  13  ;  20
 
-	map_const LAKE_1,                             	40,  15 ;  21
+	map_const LAKE_1,                             	37,  15 ;  21
 	map_const LAKE_2,                             	30,  18 ;  22
-	map_const LAKE_3,                             	8,  7  ;  23
+	map_const LAKE_3,                             	11,  7  ;  23
 
 	map_const ROUTE_FAKE_EXIT,                    	10,  18 ;  24
 	map_const ROUTE_FAKE_EXIT_LOOP,               	10,  9  ;  25

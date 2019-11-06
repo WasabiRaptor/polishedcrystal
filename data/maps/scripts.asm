@@ -21,7 +21,7 @@ INCLUDE "maps/DanielsTown.asm"
 INCLUDE "maps/Bridge.asm"
 INCLUDE "maps/AsaokaCity.asm"
 
-INCLUDE "maps/RouteNE1.asm"
+INCLUDE "maps/GelidRavine2.asm"
 INCLUDE "maps/GelidRavine.asm"
 INCLUDE "maps/RouteNE2.asm"
 

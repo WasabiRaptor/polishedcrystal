@@ -1,6 +1,6 @@
 	const_def 2 ; object constants
 
-RouteNE1_MapScriptHeader:
+GelidRavine2_MapScriptHeader:
 	db 0 ; scene scripts
 
 	db 0 ; callbacks

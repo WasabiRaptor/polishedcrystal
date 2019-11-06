@@ -107,10 +107,12 @@ ENDM
 
 	map_attributes GelidRavine, GELID_RAVINE, $61, NORTH | SOUTH | EAST
 	connection north, KikunoTown, KIKUNO_TOWN, -1
-	connection south, Lake1, LAKE_1, -17
+	connection south, GelidRavine2, GELID_RAVINE_2, 0
 	connection east, RouteNE2, ROUTE_N_E_2, -3
 
-	map_attributes RouteNE1, ROUTE_N_E_1, $61, 0 ; defined this map for the old arrangement, no longer needed really
+	map_attributes GelidRavine2, GELID_RAVINE_2, $61, NORTH | SOUTH
+	connection north, GelidRavine, GELID_RAVINE, 0
+	connection south, Lake1, LAKE_1, -14
 
 	map_attributes RouteNE2, ROUTE_N_E_2, $61, WEST
 	connection west, GelidRavine, GELID_RAVINE, 3
@@ -172,7 +174,7 @@ ENDM
 	connection west, RouteSE1, ROUTE_S_E_1, 2
 
 	map_attributes Lake1, LAKE_1, $61, NORTH | SOUTH | WEST
-	connection north, GelidRavine, GELID_RAVINE, 17
+	connection north, GelidRavine2, GELID_RAVINE_2, 14
 	connection south, Lake2, LAKE_2, 10
 	connection west, Lake3, LAKE_3, 2
 
