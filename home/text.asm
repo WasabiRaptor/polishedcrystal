@@ -1176,9 +1176,23 @@ Text_PrintNum::
 	swap a
 	set PRINTNUM_LEFTALIGN_F, a
 	ld b, a
+	push hl
+	push de
+	push bc
+	farcall ResetStringBuffer1
+	pop bc
+	pop de
+	ld hl, wStringBuffer1
 	predef PrintNum
-	ld b, h
-	ld c, l
+	pop hl
+	inc hl
+	push de
+	ld de, wStringBuffer1
+	call PlaceSpecialString
+	pop de
+	push hl
+	call GoBackVWTile
+	pop bc
 	pop hl
 	ret
 

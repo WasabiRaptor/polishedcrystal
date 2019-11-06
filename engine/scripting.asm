@@ -1990,7 +1990,7 @@ Script_RAM2MEM:
 	ld de, wStringBuffer1
 	jp ConvertMemToText
 
-ResetStringBuffer1:
+ResetStringBuffer1::
 	ld hl, wStringBuffer1
 	ld bc, PKMN_NAME_LENGTH
 	ld a, "@"
