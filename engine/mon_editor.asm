@@ -37,7 +37,7 @@ Page1:
 	hlcoord 1, 1
 	ld [hl], "№"
 	hlcoord 5, 1
-	ld [hl], ":"
+	ld [hl], "<COLON>" ; bolder than the normal : tile
 	hlcoord 1, 3
 	ld [hl], "<LV>"
 	hlcoord 6, 3
@@ -75,6 +75,8 @@ Page1:
 	ld [hl], "▼"
 	; initialize numbers etc
 	call .CalcDex ; calls DrawSpecies
+	call .DrawLevel
+	call .DrawExp
 .mainloop:
 	call DelayFrame
 	call GetJoypad
@@ -229,6 +231,21 @@ endm ; length = 8
 	; form
 	numInput 6, 0, wEditorFormNumber, 10, 31, .UpdateForm
 	numInput 7, 0, wEditorFormNumber,  1, 31, .UpdateForm
+	; gender
+	numInput 9, 0, wEditorDummyByte, 1, 1, .UpdateGender
+	; shiny
+	numInput 10, 0, wEditorDummyByte, 1, 1, .UpdateShiny
+	; level
+	numInput 2, 2, wTempMonLevel, 100, 100, .UpdateLevel
+	numInput 3, 2, wTempMonLevel,  10, 100, .UpdateLevel
+	numInput 4, 2, wTempMonLevel,   1, 100, .UpdateLevel
+	; exp
+	numInput  7, 2, wTempMonExp+1, -24, 0, .UpdateExp1k ; 1000 - 1024, then we can just increase the high byte by 4
+	numInput  8, 2, wTempMonExp+1, 100, 0, .UpdateExp
+	numInput  9, 2, wTempMonExp+1,  10, 0, .UpdateExp
+	numInput 10, 2, wTempMonExp+1,   1, 0, .UpdateExp
+	; status
+	; numInput 3, 8, wTempMonStatus,  1, 31, .DrawStatus
 
 .UpdateSpecies:
 	; update group byte
@@ -313,7 +330,6 @@ endm ; length = 8
 	; group size can be < 100, so we need to be able to skip past an entire group and into the next
 	jr nc, .decspecies2 ; if addition (add a, b) overflowed, go on? this math is confusing, I'm not sure if this is correct
 .CalcDex:
-	ld b, b
 	; calculate dex number from group+species
 	ld b, 0
 	ld a, [wTempMonSpecies]
@@ -351,23 +367,47 @@ endm ; length = 8
 	ld a, [wTempMonSpecies]
 	ld [hl], a
 	jr .DrawSpecies
+	
 .UpdateForm:
 	; reflect changes
 	ld a, MON_FORM
 	farcall GetPartyParamLocation
 	ld a, [wTempMonForm]
 	ld [hl], a
+	jr .DrawSpecies
+	
+.UpdateGender:
+	ld a, [wTempMonGender]
+	xor GENDER_MASK
+	ld [wTempMonGender], a
+	ld b, a
+	ld a, MON_GENDER
+	farcall GetPartyParamLocation
+	ld a, b
+	ld [hl], a
+	jr .DrawSpecies
+
+.UpdateShiny:
+	ld a, [wTempMonShiny]
+	xor SHINY_MASK
+	ld [wTempMonShiny], a
+	ld b, a
+	ld a, MON_SHINY
+	farcall GetPartyParamLocation
+	ld a, b
+	ld [hl], a
+	;jr .DrawSpecies
 .DrawSpecies:
 	; print dex number to screen
 	ld bc, $C203 ; right aligned with leading 0s, 2 byte value, 3 digits
 	ld de, wEditorDexNumber
 	hlcoord 2, 1
-	farcall PrintNum
+	predef PrintNum
 	; print form number to screen
 	ld bc, $C102 ; right aligned with leading 0s, 1 byte value, 2 digits
 	ld de, wEditorFormNumber
 	hlcoord 6, 1
-	farcall PrintNum
+	predef PrintNum
 	; print gender symbol
 	ld a, [wTempMonForm]
 	and GENDER_MASK
@@ -391,7 +431,81 @@ endm ; length = 8
 	farcall _CGB_FinishLayout
 	ret
 
+.UpdateLevel:
+	ld a, [wTempMonLevel]
+	dec a
+	inc a
+	jp nz, .DrawLevel
+	inc a
+	ld [wTempMonLevel], a
+.DrawLevel:
+	ld bc, $C103 ; right aligned with leading 0s, 1 byte value, 3 digits
+	ld de, wTempMonLevel
+	hlcoord 2, 3
+	predef PrintNum
+	ret
+
+.UpdateExp1k: ; only using inc/dec, cy isn't touched
+	ld a, [wTempMonExp]
+	dec d
+	inc d
+;expup
+	jp z, .expdown
+	inc a
+	inc a
+	inc a
+	; byte 1 was changed the opposite direction
+	; byte 1 sets cy, which means it could cancel part of the 1000
+	; you might only need to increment it 3 times instead of 4
+	jp nc, .saveexp
+	inc a
+	jp .saveexp
+.expdown
+	dec a
+	dec a
+	dec a
+	jp nc, .saveexp ; byte 1 was changed the opposite direction, see above
+	dec a
+	jp .saveexp
+.UpdateExp:
+	jp nc, .DrawExp ; if cy isn't set, nothing needs to update
+	ld a, [wTempMonExp]
+	dec d
+	inc d
+	jp nz, .upexp
+;downexp
+	dec a
+	dec a ; this is smaller and probably faster than saving it and jumping past the increment
+.upexp
+	inc a
+.saveexp
+	ld [wTempMonExp], a
+.DrawExp:
+	ld bc, $C204 ; right aligned with leading 0s, 2 byte value, 4 digits
+	ld de, wTempMonExp
+	hlcoord 7, 3
+	predef PrintNum
+	ret
+
+.DrawStatus:
+	ld bc, $C101 ; right aligned with leading 0s, 2 byte value, 3 digits
+	ld de, wTempMonStatus
+	hlcoord 7, 9
+	predef PrintNum
+	ret
+
 CloseEditor:
-	; CopyTempMonToPkmn??? but that's not a thing, how do you do this
-	; eh whatever I don't need it yet, I'll figure it out later
+	; copy tempmon to party
+	ld a, 0 ; start of struct
+	farcall GetPartyParamLocation
+	ld bc, wTempMon
+	ld d, PARTYMON_STRUCT_LENGTH
+.copy
+	ld a, [bc]
+	ld [hli], a
+	inc bc
+	dec d
+	jr nz, .copy
+	; close menu
+	ld b, 0
 	ret ; return from the *entire* EditPartyMon script, back to the party menu, which falls through into .quit

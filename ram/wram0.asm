@@ -784,6 +784,7 @@ wPokedexDataEnd::
 
 NEXTU
 ; Party Editor
+wEditorDummyByte:: ds 1
 wEditorDexNumber:: ds 2
 wEditorFormNumber:: ds 1
 wEditorCursorPosition:: ds 2
