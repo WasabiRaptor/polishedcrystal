@@ -1,13 +1,8 @@
-PlayStereoCry:: ; 37b6
-	push af
-	ld a, 1
-	ld [wStereoPanningMask], a
-	pop af
-	call _PlayCry
+PlayStereoCry::
+	call PlayStereoCry2
 	jp WaitSFX
-; 37c4
 
-PlayStereoCry2:: ; 37c4
+PlayStereoCry2::
 ; Don't wait for the cry to end.
 ; Used during pic animations.
 	push af
@@ -15,13 +10,12 @@ PlayStereoCry2:: ; 37c4
 	ld [wStereoPanningMask], a
 	pop af
 	jp _PlayCry
-; 37ce
 
 PlayFaintingCry::
 	call PlayFaintingCry2
 	jp WaitSFX
 
-PlayFaintingCry2:: ; 37e2
+PlayFaintingCry2::
 	push hl
 	push de
 	push bc
@@ -31,17 +25,17 @@ PlayFaintingCry2:: ; 37e2
 	ld hl, wCryPitch
 	ld a, 90 percent
 	call .Multiply
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	ld [hli], a
-	ld a, [hProduct + 1]
+	ldh a, [hProduct + 1]
 	ld [hli], a
 
 	ld a, 11 percent
 	call .Multiply
-	ld a, [hProduct + 2]
+	ldh a, [hProduct + 2]
 	add [hl]
 	ld [hli], a
-	ld a, [hProduct + 1]
+	ldh a, [hProduct + 1]
 	adc [hl]
 	ld [hl], a
 
@@ -54,33 +48,29 @@ PlayFaintingCry2:: ; 37e2
 	jr PlayCry_PopBCDEHLOff
 
 .Multiply
-	ld [hMultiplier], a
+	ldh [hMultiplier], a
 	ld a, [hli]
-	ld [hMultiplicand + 2], a
+	ldh [hMultiplicand + 2], a
 	ld a, [hld]
-	ld [hMultiplicand + 1], a
+	ldh [hMultiplicand + 1], a
 	xor a
-	ld [hMultiplicand], a
-	ld [hProduct], a
+	ldh [hMultiplicand], a
+	ldh [hProduct], a
 	jp Multiply
 
-PlayCry:: ; 37ce
+PlayCry::
 	call PlayCry2
 	jp WaitSFX
-; 37d5
 
-PlayCry2:: ; 37d5
+PlayCry2::
 ; Don't wait for the cry to end.
 	push af
 	xor a
 	ld [wStereoPanningMask], a
 	ld [wCryTracks], a
 	pop af
-	jp _PlayCry
-; 37e2
 
 _PlayCry::
-	ld [wCurSpecies], a
 	push hl
 	push de
 	push bc
@@ -93,8 +83,7 @@ PlayCry_PopBCDEHLOff:
 	pop hl
 	ret
 	
-LoadCryHeader:: ; 37f3
-; Load cry header bc.
+LoadCryHeader::
 
 	call GetCryIndex
 	ret c
@@ -104,10 +93,10 @@ LoadCryHeader:: ; 37f3
 	ld a, d
 	rst Bankswitch
 
+.Function:
 	ld a, [hli]
 	cp $ff
 	jr z, .ded
-	
 	ld d, 0
 	ld e, a
 
@@ -127,11 +116,9 @@ LoadCryHeader:: ; 37f3
 
 .ded
 	call LoadDEDCryHeader
-	pop af
-	rst Bankswitch
 	scf
 	ret
-; 381e
+
 
 GetCryIndex::
 	ld [wCurSpecies], a

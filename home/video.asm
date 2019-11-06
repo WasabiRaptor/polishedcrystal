@@ -454,6 +454,11 @@ AnimateTileset::
 	ret
 
 TransferAnimatingPicDuringHBlank::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokeAnimCoord)
+	ldh [rSVBK], a
+
 	ld hl, wPokeAnimDestination
 	ld a, [hli]
 	ld d, [hl]
@@ -462,18 +467,20 @@ TransferAnimatingPicDuringHBlank::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	pop af
+	ldh [rSVBK], a
 
-	lb bc, 7, rSTAT & $ff
+	lb bc, 7, LOW(rSTAT)
 .loop
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp $90
 	jr nc, .inVBlank
 .waitNoHBlank
-	ld a, [$ff00+c]
+	ldh a, [c]
 	and 3
 	jr z, .waitNoHBlank
 .waitHBlank
-	ld a, [$ff00+c]
+	ldh a, [c]
 	and 3
 	jr nz, .waitHBlank
 .inVBlank
@@ -499,5 +506,4 @@ TransferAnimatingPicDuringHBlank::
 .noCarry2
 	dec b
 	jr nz, .loop
-	ret 
-	
+	ret

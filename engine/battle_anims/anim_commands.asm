@@ -157,19 +157,23 @@ RunBattleAnimScript: ; cc163
 	jp BattleAnim_ClearCGB_OAMFlags
 
 .playDED
-	ld [hBuffer], a
-	ld a, $1
-	ld [hDEDVBlankMode], a
+	ld a, 2
+	ldh [hRunPicAnim], a
 	ld a, [wFXAnimIDLo]
 	cp ROAR
 	jr nz, .playCry
-	ld a, [hBattleTurn]
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokeAnimCoord)
+	ldh [rSVBK], a
+
+	ldh a, [hBattleTurn]
 	and a
 	coord de, 12, 0
 	ld bc, VBGMap0 + 12
 	jr z, .gotRoarCoords
 	coord de, 0, 5
-	ld bc, VBGMap0 + 5 * BG_MAP_WIDTH
+	ld c, 5 * BG_MAP_WIDTH ;vBGMap = $xx00, so this sets bc to vBGMap + 5 * BG_MAP_WIDTH
 .gotRoarCoords
 	ld hl, wPokeAnimCoord
 	ld a, e
@@ -179,11 +183,13 @@ RunBattleAnimScript: ; cc163
 	ld a, c
 	ld [hli], a
 	ld [hl], b
+	pop af
+	ldh [rSVBK], a
 .playCry
-	ld a, [hBuffer]
+	ldh a, [hDEDCryFlag]
 	call _PlayCry
 	xor a
-	ld [hDEDVBlankMode], a
+	ldh [hRunPicAnim], a
 	jr .done
 
 RunOneFrameOfGrowlOrRoarAnim::
@@ -195,9 +201,9 @@ RunOneFrameOfGrowlOrRoarAnim::
 	bit 0, a
 	ret z
 	xor a
-	ld [hDEDVBlankMode], a
-	jp BattleAnim_ClearCGB_OAMFlags
+	ldh [hRunPicAnim], a
 
+; fallthrough
 BattleAnimClearHud: ; cc1a1
 
 	call DelayFrame
@@ -1293,51 +1299,50 @@ BattleAnimCmd_Cry: ; cc807 (33:4807)
 	ld c, a
 	ldh a, [rSVBK]
 	push af
-	ld a, 1
+	ld a, BANK(wBattleMonGroup)
 	ldh [rSVBK], a
+
 
 	ldh a, [hBattleTurn]
 	and a
-	jr nz, .enemy
-
+	ld hl, wBattleMonGroup
 	ld a, $f0
-	ld [wCryTracks], a ; CryTracks
-	ld a, [wBattleMonSpecies] ; BattleMonSpecies
-	jr .done_cry_tracks
+	jr z, .done_cry_tracks
 
-.enemy
+	ld hl, wEnemyMonGroup
 	ld a, $f
-	ld [wCryTracks], a ; CryTracks
-	ld a, [wEnemyMonSpecies] ; wEnemyMon
 
 .done_cry_tracks
+	ld [wCryTracks], a
+	ld a, [hli]
+	ld [wCurGroup], a
+	ld a, [hl]
 	ld b, a
 	push bc
 	call LoadCryHeader
 	pop bc
 	jr c, .ded
 	ld hl, wCryLength
-	dec c
-	ld a, $c0
-	jr nz, .gotLengthOffset
-	ld a, $40
-.gotLengthOffset
+	ld a, c
 	add [hl]
 	ld [hli], a
 	jr nc, .noCarry
 	inc [hl]
 .noCarry
+
 	ld a, 1
 	ld [wStereoPanningMask], a
+
+	farcall _PlayCryHeader
+
 .done
 	pop af
 	ldh [rSVBK], a
 	ret
-; cc871 (33:4871)
 
 .ded
 	ld a, b
-	ld [hDEDCryFlag], a
+	ldh [hDEDCryFlag], a
 	jr .done
 
 PlayHitSound: ; cc881

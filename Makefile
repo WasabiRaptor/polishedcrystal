@@ -110,7 +110,7 @@ tools:
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 define DEP
 $1: $2 $$(shell tools/scan_includes $2)
-	$$(RGBASM) $$(RGBASM_FLAGS) -L -o $$@ $$<
+	$$(RGBASM) $$(RGBASM_FLAGS) -o $$@ $$<
 endef
 
 # Build tools when building the rom.

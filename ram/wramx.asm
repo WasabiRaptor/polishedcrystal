@@ -1159,6 +1159,7 @@ wPokeAnimGroup:: ds 1
 wPokeAnimSpecies:: ds 1
 wPokeAnimSpeciesOrVariant:: ds 1
 wPokeAnimGraphicStartTile:: ds 1
+wPokeAnimCoord:: ds 2
 wPokeAnimFrontpicHeight:: ds 1
 ; PokeAnim Data
 wPokeAnimExtraFlag:: ds 1
@@ -1180,6 +1181,7 @@ wPokeAnimBitmaskCurCol:: ds 1
 wPokeAnimBitmaskCurRow:: ds 1
 wPokeAnimBitmaskCurBit:: ds 1
 wPokeAnimBitmaskBuffer:: ds 1
+wPokeAnimDestination:: ds 2
 wPokeAnimStructEnd::
 
 wDEDTempSamp:: ds 16

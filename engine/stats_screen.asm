@@ -67,18 +67,31 @@ StatsScreen_WaitAnim: ; 4dd3a (13:5d3a)
 	bit 6, [hl]
 	jr nz, .try_anim
 	bit 5, [hl]
-	jr nz, .finish
+	jr nz, .finishFrame
 	jp DelayFrame
 
 .try_anim
 	farcall SetUpPokeAnim
-	jr nc, .finish
-	ld hl, wcf64 ; something with the pokeanim it seems
+	ldh a, [hDEDCryFlag]
+	and a
+	jr nz, .playDEDCry
+.checkForPicAnim
+	ldh a, [hRunPicAnim]
+	and a
+	jr nz, .finishFrame
+	ld hl, wcf64
 	res 6, [hl]
-.finish
+.finishFrame
 	ld hl, wcf64
 	res 5, [hl]
 	farjp HDMATransferTileMapToWRAMBank3
+.playDEDCry
+	push af
+	farcall HDMATransferTileMapToWRAMBank3
+	pop af
+	call _PlayCry
+	jr .checkForPicAnim
+
 
 StatsScreen_SetJumptableIndex: ; 4dd62 (13:5d62)
 	ld a, [wJumptableIndex]
@@ -90,9 +103,18 @@ StatsScreen_SetJumptableIndex: ; 4dd62 (13:5d62)
 StatsScreen_Exit: ; 4dd6c (13:5d6c)
 	ld hl, wJumptableIndex
 	set 7, [hl]
+	xor a
+	ldh [hRunPicAnim], a
+	ret
+
+InitStatsScreenAnimCounter:
+	ld a, 90 ; 1.5 seconds
+	ld [wcf65], a
 	ret
 
 MonStatsInit: ; 4dd72 (13:5d72)
+	xor a
+	ldh [hRunPicAnim], a
 	ld hl, wcf64 ; what is this for hm?
 	res 6, [hl]
 	call ClearBGPalettes
@@ -155,7 +177,22 @@ MonStatsJoypad: ; 4ddd6 (13:5dd6)
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
-	jp StatsScreen_JoypadAction
+	call StatsScreen_JoypadAction
+	ldh a, [hRunPicAnim]
+	and a
+	ret nz
+	call StatsScreen_GetAnimationParam
+	ret nc
+	ld hl, wcf65
+	dec [hl]
+	ret nz
+	ld a, [wJumptableIndex]
+	and a
+	ret z
+	cp 7
+	ret z
+	call InitStatsScreenAnimCounter
+	jp ReAnimateStatsScreenMon
 
 StatsScreenWaitCry: ; 4dde6 (13:5de6)
 	call IsSFXPlaying
@@ -1008,66 +1045,49 @@ StatsScreen_PlaceFrontpic: ; 4e226 (13:6226)
 	ld hl, wTempMonGroup
 	predef GetPartyMonGroupSpeciesAndForm
 	call StatsScreen_GetAnimationParam
-	jr c, .egg
-	and a
-	jr z, .no_cry
-	jr .cry
-
-.egg
-	call .AnimateEgg
-	jp SetPalettes
-
-.no_cry
-	call .AnimateMon
-	jp SetPalettes
-
-.cry
+	jr c, .notFainted
+	jr z, .fainted
+; wild mon
 	call SetPalettes
 	call .AnimateMon
 	ld a, [wCurPartySpecies]
 	jp PlayCry2
+.fainted
+	call .AnimateEgg
+	jr .SetPalettes
+.notFainted
+	call .AnimateMon
+.SetPalettes
+	jp SetPalettes
 
-.AnimateMon: ; 4e253 (13:6253)
+.AnimateEgg
 	ld hl, wcf64
 	set 5, [hl]
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unown
 	hlcoord 0, 0
 	jp PrepMonFrontpic
 
-.unown
-	xor a
-	ld [wBoxAlignment], a
-	hlcoord 0, 0
-	jp _PrepMonFrontpic
-
-.AnimateEgg: ; 4e271 (13:6271)
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unownegg
+.AnimateMon
 	ld a, TRUE
 	ld [wBoxAlignment], a
-	jr .get_animation
-
-.unownegg
-	xor a
-	ld [wBoxAlignment], a
-	; fallthrough
-
-.get_animation ; 4e289 (13:6289)
 	ld a, [wCurPartySpecies]
-	farcall IsAPokemon
+	call IsAPokemon
 	ret c
 	call StatsScreen_LoadTextBoxSpaceGFX
 	ld de, VTiles2 tile $00
-	predef FrontpicPredef
+	farcall GetAnimatedFrontpic
+	lb de, 0, ANIM_MON_MENU
+StatsScreen_PlaceFrontpic_common:
 	hlcoord 0, 0
-	lb de, $0, $2
 	predef LoadMonAnimation
 	ld hl, wcf64
 	set 6, [hl]
+	ld a, 1
+	ldh [hRunPicAnim], a
 	ret
+
+ReAnimateStatsScreenMon:
+	lb de, 0, ANIM_MON_MENU
+	jr StatsScreen_PlaceFrontpic_common
 
 StatsScreen_GetAnimationParam: ; 4e2ad (13:62ad)
 	ld a, [wMonType]

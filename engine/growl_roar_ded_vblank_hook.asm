@@ -4,24 +4,24 @@ CopyGrowlOrRoarPals::
 	cp ROAR
 	jr nz, .growl
 	call .roar
-	ld a, [hBGMapMode]
+	ldh a, [hBGMapMode]
 	and a
 	jp nz, TransferAnimatingPicDuringHBlank
 	ret
 ; growl copies 1 BGP pal (dependent on turn) and 1 OBP pal
 .growl
-	ld c, rBGPI & $ff
-	ld a, [hBattleTurn]
+	ld c, LOW(rBGPI)
+	ldh a, [hBattleTurn]
 	and a
 	ld a, 1 << 7 | 8
 	jr z, .player
 	ld a, 1 << 7
 .player
-	ld [$ff00+c], a
+	ldh [c], a
 	inc c
 	ld l, a ; the strats
-	ld h, wBGPals >> 8
-	ld a, [rLY]
+	ld h, HIGH(wBGPals)
+	ldh a, [rLY]
 	cp $90
 	jr z, .inVBlank1
 .waitNoHBlankLoop
@@ -35,16 +35,16 @@ CopyGrowlOrRoarPals::
 .inVBlank1
 rept 1 palettes
 	ld a, [hli]
-	ld [$ff00+c], a
+	ldh [c], a
 endr
 
 .roar
-	ld c, rOBPI & $ff
+	ld c, LOW(rOBPI)
 	ld a, 1 << 7 | 16
-	ld [$ff00+c], a
+	ldh [c], a
 	inc c
 	ld hl, wOBPals + 16
-	ld a, [rLY]
+	ldh a, [rLY]
 	cp $90
 	jr nc, .inVBlank2
 .waitNoHBlankLoop2
@@ -58,6 +58,6 @@ endr
 .inVBlank2
 rept 1 palettes
 	ld a, [hli]
-	ld [$ff00+c], a
+	ldh [c], a
 endr
 	ret

@@ -41,12 +41,17 @@ AnimateFrontpic: ; d008e
 	call AnimateMon_CheckIfPokemon
 	ret c
 	call LoadMonAnimation
+	ld a, 1
+	ldh [hRunPicAnim], a
 .loop
 	call SetUpPokeAnim
-	push af
 	farcall HDMATransferTileMapToWRAMBank3
-	pop af
-	jr nc, .loop
+	ldh a, [hDEDCryFlag]
+	and a
+	call nz, _PlayCry
+	ldh a, [hRunPicAnim]
+	and a
+	jr nz, .loop
 	ret
 ; d00a3
 
@@ -113,7 +118,7 @@ LoadMonAnimation: ; d00a3
 	ret
 ; d0228
 
-SetUpPokeAnim: ; d00b4
+SetUpPokeAnim:: ; d00b4
 	ldh a, [rSVBK]
 	push af
 	ld a, $2
@@ -169,41 +174,29 @@ PokeAnim_Wait: ; d00fe
 	ld hl, wPokeAnimWaitCounter
 	dec [hl]
 	ret nz
+PokeAnim_IncrementSceneIndex:
 	ld a, [wPokeAnimSceneIndex]
 	inc a
 	ld [wPokeAnimSceneIndex], a
 	ret
 ; d010b
 
-PokeAnim_Setup: ; d010b
+PokeAnim_Setup:
 	lb bc, 0, FALSE
+	; fallthrough
+
+PokeAnim_Setup_End:
 	call PokeAnim_InitAnim
 	call PokeAnim_SetVBank1
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d011d
+	jr PokeAnim_IncrementSceneIndex
 
-PokeAnim_Setup2: ; d011d
+PokeAnim_Setup2:
 	lb bc, 4, FALSE
-	call PokeAnim_InitAnim
-	call PokeAnim_SetVBank1
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d012f
+	jr PokeAnim_Setup_End
 
-PokeAnim_Extra: ; d012f
+PokeAnim_Extra:
 	lb bc, 0, TRUE
-	call PokeAnim_InitAnim
-	call PokeAnim_SetVBank1
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d0141
+	jr PokeAnim_Setup_End
 
 PokeAnim_Play: ; d0141
 	call PokeAnim_DoAnimScript
@@ -211,10 +204,7 @@ PokeAnim_Play: ; d0141
 	bit 7, a
 	ret z
 	call PokeAnim_PlaceGraphic
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d0155
 
 PokeAnim_Play2: ; d0155
@@ -222,55 +212,52 @@ PokeAnim_Play2: ; d0155
 	ld a, [wPokeAnimJumptableIndex]
 	bit 7, a
 	ret z
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d0166
 
 PokeAnim_BasePic: ; d0166
 	call PokeAnim_DeinitFrames
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d0171
 
 PokeAnim_Finish: ; d0171
 	call PokeAnim_DeinitFrames
 	ld hl, wPokeAnimSceneIndex
 	set 7, [hl]
+	xor a
+	ldh [hRunPicAnim], a
 	ret
 ; d017a
 
-PokeAnim_Cry: ; d017a
+PokeAnim_Cry:
 	ld a, [wPokeAnimSpecies]
+	call LoadCryHeader
+	ld a, [wPokeAnimSpecies]
+	jr c, PokeAnim_DedCry
 	call _PlayCry
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d0188
+	jr PokeAnim_IncrementSceneIndex
 
-PokeAnim_CryNoWait: ; d0188
+PokeAnim_CryNoWait:
 	ld a, [wPokeAnimSpecies]
+	call LoadCryHeader
+	ld a, [wPokeAnimSpecies]
+	jr c, PokeAnim_DedCry
 	call PlayCry2
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d0196
+	jr PokeAnim_IncrementSceneIndex
 
-PokeAnim_StereoCry: ; d0196
+PokeAnim_StereoCry:
 	ld a, $f
 	ld [wCryTracks], a
 	ld a, [wPokeAnimSpecies]
+	call LoadCryHeader
+	ld a, [wPokeAnimSpecies]
+	jr c, PokeAnim_DedCry
 	call PlayStereoCry2
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d01a9
+PokeAnim_DedCry:
+	ldh [hDEDCryFlag], a
+	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_DeinitFrames: ; d01a9
 	ldh a, [rSVBK]

@@ -1,15 +1,15 @@
 LD_A_FFXX_OP EQU $f0
-JR_C_OP	  EQU $38
-JP_C_OP	  EQU $da
+JR_C_OP      EQU $38
+JP_C_OP      EQU $da
 LD_B_XX_OP   EQU $06
-RET_OP	   EQU $c9
-RET_C_OP	 EQU $d8
+RET_OP       EQU $c9
+RET_C_OP     EQU $d8
 
-DEC_C_OP	 EQU $0d
-JR_NZ_OP	 EQU $20
+DEC_C_OP     EQU $0d
+JR_NZ_OP     EQU $20
 LD_A_HLI_OP  EQU $2a
 LD_C_XX_OP   EQU $0e
-ADD_A_OP	 EQU $87
+ADD_A_OP     EQU $87
 
 LoadDEDCryHeader::
 	ld a, [hli]
