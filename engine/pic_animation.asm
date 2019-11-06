@@ -96,6 +96,11 @@ LoadMonAnimation: ; d00a3
 ; d = start tile
 	ld a, d
 	ld [wPokeAnimGraphicStartTile], a
+	call ConvertTileMapAddrToBGMap
+	ld a, l
+	ld [wPokeAnimDestination], a
+	ld a, h
+	ld [wPokeAnimDestination + 1], a
 
 	ld a, BANK(wCurPartySpecies)
 	ld hl, wCurPartySpecies
@@ -287,10 +292,40 @@ AnimateMon_CheckIfPokemon: ; d01c6
 	ret
 ; d01d6
 
+ConvertTileMapAddrToBGMap:
+	ld a, l
+	sub LOW(wTileMap)
+	ld l, a
+	ld a, h
+	sbc HIGH(wTileMap)
+	ld h, a
+	ld bc, -SCREEN_WIDTH
+	ld d, 0
+	jr .handleLoop
+.subtractLoop
+	inc d
+.handleLoop
+	add hl, bc
+	jr c, .subtractLoop
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	ld e, l
+	ldh a, [hBGMapAddress]
+	ld l, a
+	ldh a, [hBGMapAddress + 1]
+	ld h, a
+	ld bc, BG_MAP_WIDTH
+	ld a, d
+	rst AddNTimes
+	ld c, e
+	ld b, 0
+	add hl, bc
+	ret
+
 PokeAnim_InitAnim: ; d0228
 	ldh a, [rSVBK]
 	push af
-	ld a, $2
+	ld a, BANK(wPokeAnimSceneIndex)
 	ldh [rSVBK], a
 	push bc
 	ld hl, wPokeAnimExtraFlag

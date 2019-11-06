@@ -3175,8 +3175,10 @@ MonFaintedAnimation: ; 3d444
 
 	ld bc, 20
 	add hl, bc
-	ld de, .Spaces
-	call PlaceString
+	ld a, " "
+rept 7
+	ld [hli], a
+endr	
 	call ApplyTilemapInVBlank
 	pop hl
 	pop de
@@ -3188,10 +3190,6 @@ MonFaintedAnimation: ; 3d444
 	ld [wInputFlags], a
 	ret
 ; 3d488
-
-.Spaces:
-	db "       @"
-; 3d490
 
 SlideUserPicOut:
 	ldh a, [hBattleTurn]
@@ -3221,8 +3219,7 @@ SlideBattlePicOut: ; 3d490
 	add hl, de
 	dec b
 	jr nz, .loop2
-	ld c, 2
-	call DelayFrames
+	call DelayFrame
 	pop hl
 	pop bc
 	dec c
@@ -7518,7 +7515,7 @@ FinalPkmnSlideInEnemyMonFrontpic:
 
 	ld a, $1
 	ldh [hBGMapMode], a
-	ld c, 4
+	ld c, 2
 	call DelayFrames
 	pop hl
 	pop bc
@@ -7585,7 +7582,7 @@ BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 
 	ld a, $1
 	ldh [hBGMapMode], a
-	ld c, 4
+	ld c, 2
 	call DelayFrames
 	pop hl
 	pop bc
@@ -9100,6 +9097,7 @@ InitEnemyWildmon: ; 3f607
 
 ExitBattle: ; 3f69e
 	call .HandleEndOfBattle
+	call ResetGrassTileCenter
 	call HandleNuzlockeFlags
 	jp CleanUpBattleRAM
 ; 3f6a5

@@ -167,7 +167,6 @@ ROMX $1F
 ROMX $20
 	org $4000
 	"Pic Animations"
-	"SM Music 1"
 
 ROMX $21
 	org $4000

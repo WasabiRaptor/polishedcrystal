@@ -155,16 +155,13 @@ _UpdateSound:: ; e805c
 	jr nc, .next
 	; are any sfx channels active?
 	; if so, mute
-	ld hl, wChannel5Flags
-	bit SOUND_CHANNEL_ON, [hl]
-	jr nz, .restnote
+	ld a, [wChannel5Flags]
 	ld hl, wChannel6Flags
-	bit SOUND_CHANNEL_ON, [hl]
-	jr nz, .restnote
+	or [hl]
 	ld hl, wChannel7Flags
-	bit SOUND_CHANNEL_ON, [hl]
-	jr nz, .restnote
+	or [hl]
 	ld hl, wChannel8Flags
+	or [hl]
 	bit SOUND_CHANNEL_ON, [hl]
 	jr z, .next
 .restnote
