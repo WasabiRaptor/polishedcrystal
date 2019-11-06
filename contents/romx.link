@@ -199,7 +199,6 @@ ROMX $25
 ROMX $26
 	org $4000
 	"Battle Animations"
-	"Key Item Icons"
 
 ROMX $27
 	org $4000

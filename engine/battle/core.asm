@@ -2373,7 +2373,6 @@ FaintYourPokemon: ; 3cef1
 	ld a, [wBattleMonGroup]
 	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
-	ld b, a
 	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX
@@ -2392,7 +2391,6 @@ FaintEnemyPokemon: ; 3cf14
 	ld a, [wEnemyMonGroup]
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
-	ld b, a
 	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX

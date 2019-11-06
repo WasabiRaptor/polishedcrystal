@@ -134,7 +134,7 @@ LoadCryHeader:: ; 37f3
 ; 381e
 
 GetCryIndex::
-	ld a, [wCurSpecies]
+	ld [wCurSpecies], a
 	and a
 	jr z, .no
 	cp EGG
