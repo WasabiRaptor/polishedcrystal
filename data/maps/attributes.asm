@@ -182,7 +182,7 @@ ENDM
 
 	map_attributes Lake3, LAKE_3, $61, NORTH | EAST
 	connection north, Bridge, BRIDGE, -2
-	connection west, Lake3, LAKE_3, -2
+	connection east, Lake1, LAKE_1, -2
 
 	map_attributes RouteFakeExit, ROUTE_FAKE_EXIT, $61, NORTH | SOUTH 
 	connection north, MinamiWetlands, MINAMI_WETLANDS, -10
