@@ -123,7 +123,7 @@ RunBattleAnimScript: ; cc163
 	call PushLYOverrides
 	call BattleAnimRequestPals
 
-	ld a, [hDEDCryFlag]
+	ldh a, [hDEDCryFlag]
 	and a
 	jr nz, .playDED
 ; Speed up Rollout's animation.
@@ -328,7 +328,7 @@ RunBattleAnimCommand: ; cc25f
 .do_anim
 	call .DoCommand
 
-	ld a, [hDEDCryFlag]
+	ldh a, [hDEDCryFlag]
 	and a
 	jr z, .loop
 	ret

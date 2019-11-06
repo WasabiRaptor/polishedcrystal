@@ -1,5 +1,4 @@
 StatsScreenInit: ; 4dc8a
-	ld hl, StatsScreenMain
 	ldh a, [hMapAnims]
 	push af
 	xor a
@@ -12,13 +11,11 @@ StatsScreenInit: ; 4dc8a
 	ld c, a
 
 	push bc
-	push hl
 	call ClearBGPalettes
 	call ClearTileMap
 	call UpdateSprites
 	farcall LoadStatsScreenGFX
-	pop hl
-	call _hl_
+	call StatsScreenMain
 	call ClearBGPalettes
 	call ClearTileMap
 	pop bc
