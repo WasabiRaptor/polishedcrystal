@@ -132,6 +132,7 @@ INCBIN "gfx/footprints/chingling.1bpp"
 ;INCBIN "gfx/footprints/chimecho.1bpp"
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/absol.1bpp"
+INCBIN "gfx/footprints/wynaut.1bpp"
 INCBIN "gfx/footprints/snorunt.1bpp"
 INCBIN "gfx/footprints/glalie.1bpp"
 INCBIN "gfx/footprints/froslass.1bpp"

@@ -107,6 +107,7 @@ HoennCries:: ; placeholders for now until we have imported sounds
 	mon_cry Tropius
 	mon_cry Chimecho
 	mon_cry Absol
+	mon_cry Wynaut
 	mon_cry Snorunt
 	mon_cry Glalie
 	mon_cry Spheal

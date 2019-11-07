@@ -35,7 +35,6 @@ HoennDexOrder::
 	grouped_dex_order_mon RALTS
 	grouped_dex_order_mon KIRLIA
 	grouped_dex_order_mon GARDEVOIR
-	grouped_dex_order_mon GALLADE
 	grouped_dex_order_mon SURSKIT
 	grouped_dex_order_mon MASQUERAIN
 	grouped_dex_order_mon SHROOMISH
@@ -45,20 +44,20 @@ HoennDexOrder::
 	grouped_dex_order_mon SLAKING
 	grouped_dex_order_mon NINCADA
 	grouped_dex_order_mon NINJASK
-	grouped_dex_order_mon SHEDINJA 
- 	grouped_dex_order_mon WHISMUR
+	grouped_dex_order_mon SHEDINJA
+	grouped_dex_order_mon WHISMUR
 	grouped_dex_order_mon LOUDRED
 	grouped_dex_order_mon EXPLOUD
 	grouped_dex_order_mon MAKUHITA
 	grouped_dex_order_mon HARIYAMA
+	grouped_dex_order_mon AZURILL
 	grouped_dex_order_mon NOSEPASS
-	grouped_dex_order_mon PROBOPASS
 	grouped_dex_order_mon SKITTY
 	grouped_dex_order_mon DELCATTY
 	grouped_dex_order_mon SABLEYE
 	grouped_dex_order_mon MAWILE
-	grouped_dex_order_mon ARON 
- 	grouped_dex_order_mon LAIRON
+	grouped_dex_order_mon ARON
+	grouped_dex_order_mon LAIRON
 	grouped_dex_order_mon AGGRON
 	grouped_dex_order_mon MEDITITE
 	grouped_dex_order_mon MEDICHAM
@@ -68,9 +67,7 @@ HoennDexOrder::
 	grouped_dex_order_mon MINUN
 	grouped_dex_order_mon VOLBEAT
 	grouped_dex_order_mon ILLUMISE
-	grouped_dex_order_mon BUDEW
 	grouped_dex_order_mon ROSELIA
-	grouped_dex_order_mon ROSERADE
 	grouped_dex_order_mon GULPIN
 	grouped_dex_order_mon SWALOT
 	grouped_dex_order_mon CARVANHA
@@ -87,8 +84,8 @@ HoennDexOrder::
 	grouped_dex_order_mon VIBRAVA
 	grouped_dex_order_mon FLYGON
 	grouped_dex_order_mon CACNEA
-	grouped_dex_order_mon CACTURNE 
- 	grouped_dex_order_mon SWABLU
+	grouped_dex_order_mon CACTURNE
+	grouped_dex_order_mon SWABLU
 	grouped_dex_order_mon ALTARIA
 	grouped_dex_order_mon ZANGOOSE
 	grouped_dex_order_mon SEVIPER
@@ -106,20 +103,18 @@ HoennDexOrder::
 	grouped_dex_order_mon ARMALDO
 	grouped_dex_order_mon FEEBAS
 	grouped_dex_order_mon MILOTIC
-	grouped_dex_order_mon CASTFORM
+	grouped_dex_order_mon CASTFORM ;  castform's forms are controlled by the weather, and cannot exist independent of it outside battle, and merely change the pic and type, but not the stats therefore only one entry
 	grouped_dex_order_mon KECLEON
 	grouped_dex_order_mon SHUPPET
 	grouped_dex_order_mon BANETTE
 	grouped_dex_order_mon DUSKULL
 	grouped_dex_order_mon DUSCLOPS
-	grouped_dex_order_mon DUSKNOIR
 	grouped_dex_order_mon TROPIUS
-	grouped_dex_order_mon CHINGLING
 	grouped_dex_order_mon CHIMECHO
 	grouped_dex_order_mon ABSOL
+	grouped_dex_order_mon WYNAUT
 	grouped_dex_order_mon SNORUNT
 	grouped_dex_order_mon GLALIE
-	grouped_dex_order_mon FROSLASS
 	grouped_dex_order_mon SPHEAL
 	grouped_dex_order_mon SEALEO
 	grouped_dex_order_mon WALREIN
@@ -139,9 +134,9 @@ HoennDexOrder::
 	grouped_dex_order_mon REGISTEEL
 	grouped_dex_order_mon LATIAS
 	grouped_dex_order_mon LATIOS
-	grouped_dex_order_mon KYOGRE 
- 	grouped_dex_order_mon GROUDON
+	grouped_dex_order_mon KYOGRE
+	grouped_dex_order_mon GROUDON
 	grouped_dex_order_mon RAYQUAZA
 	grouped_dex_order_mon JIRACHI
 	grouped_dex_order_mon DEOXYS
-HoennDexOrderEnd::
+HoennDexOrderEnd::	

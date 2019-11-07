@@ -107,6 +107,7 @@ HoennIconPointers::
 	add_icon Tropius
 	add_icon Chimecho
 	add_icon Absol
+	add_icon Wynaut
 	add_icon Snorunt
 	add_icon Glalie
 	add_icon Spheal

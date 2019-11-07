@@ -197,6 +197,7 @@ SECTION "Hoenn DED 25", ROMX
 TropiusDEDData::;  INCBIN "audio/ded/pokemon/tropius.ded"
 ChimechoDEDData::;  INCBIN "audio/ded/pokemon/chimecho.ded"
 AbsolDEDData::;  INCBIN "audio/ded/pokemon/absol.ded"
+WynautDEDData::;  INCBIN "audio/ded/pokemon/wynaut.ded"
 SnoruntDEDData::;  INCBIN "audio/ded/pokemon/snorunt.ded"
 
 SECTION "Hoenn DED 26", ROMX

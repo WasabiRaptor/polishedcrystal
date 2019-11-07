@@ -177,7 +177,7 @@ ROMX $22
 	org $4000
 	"Pic Animations Frames 2"
 	"Item Text"
-	"Hoenn Egg Moves"
+	
 
 ROMX $23
 	org $4000
