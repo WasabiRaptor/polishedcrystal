@@ -512,6 +512,7 @@ ROMX $84
 
 ROMX $85
 	org $4000
+	"Hoenn DED 34"
 
 ROMX $86
 	org $4000
