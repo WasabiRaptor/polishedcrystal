@@ -1,7 +1,7 @@
 	db "POISON MOTH@" ; species name
 	dw 15, 125 ; height, weight
 
-	db "Venomoth is nocturnal—it is a"
+	db "Venomoth is nocturnal-it is a"
 	next "Pokémon that only becomes"
 	next "active at night. Its favorite"
 	

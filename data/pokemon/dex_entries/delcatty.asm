@@ -7,6 +7,6 @@
 	
 	page "Pokémon approach it as it"
 	next "sleeps, this Pokémon will never"
-	next "fight—it will just move away"
+	next "fight-it will just move away"
 	
 	page "somewhere else.@"
