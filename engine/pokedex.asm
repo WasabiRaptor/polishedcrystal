@@ -1822,7 +1822,7 @@ Pokexex_PrintNumberAndTypes:
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	predef PrintNum
 
-	ld bc, PKMN_TILE_NAME_LENGTH - 4
+	ld bc, PKMN_TILE_NAME_LENGTH - 5
 	add hl, bc
 	ld a, [wBaseType1]
 	call Pokexex_PrintType
@@ -1831,7 +1831,7 @@ Pokexex_PrintNumberAndTypes:
 	ld a, [wBaseType2]
 	cp b
 	jp z, .done
-	ld bc, SCREEN_WIDTH
+	ld bc, SCREEN_WIDTH + 1
 	add hl, bc
 	call Pokexex_PrintType
 .done
