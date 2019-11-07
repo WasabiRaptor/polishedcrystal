@@ -14,7 +14,9 @@ INCBIN "gfx/footprints/squirtle.1bpp"
 INCBIN "gfx/footprints/wartortle.1bpp"
 INCBIN "gfx/footprints/blastoise.1bpp"
 INCBIN "gfx/footprints/caterpie.1bpp"
-INCBIN "gfx/footprints/metapod.1bpp"
+;INCBIN "gfx/footprints/metapod.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/butterfree.1bpp"
 INCBIN "gfx/footprints/weedle.1bpp"
 INCBIN "gfx/footprints/kakuna.1bpp"
@@ -27,7 +29,9 @@ INCBIN "gfx/footprints/raticate.1bpp"
 INCBIN "gfx/footprints/spearow.1bpp"
 INCBIN "gfx/footprints/fearow.1bpp"
 INCBIN "gfx/footprints/ekans.1bpp"
-INCBIN "gfx/footprints/arbok.1bpp"
+;INCBIN "gfx/footprints/arbok.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/pikachu.1bpp"
 INCBIN "gfx/footprints/raichu.1bpp"
 INCBIN "gfx/footprints/sandshrew.1bpp"
@@ -54,7 +58,9 @@ INCBIN "gfx/footprints/parasect.1bpp"
 INCBIN "gfx/footprints/venonat.1bpp"
 INCBIN "gfx/footprints/venomoth.1bpp"
 INCBIN "gfx/footprints/diglett.1bpp"
-INCBIN "gfx/footprints/dugtrio.1bpp"
+;INCBIN "gfx/footprints/dugtrio.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/meowth.1bpp"
 INCBIN "gfx/footprints/persian.1bpp"
 INCBIN "gfx/footprints/psyduck.1bpp"
@@ -74,10 +80,15 @@ INCBIN "gfx/footprints/machoke.1bpp"
 INCBIN "gfx/footprints/machamp.1bpp"
 INCBIN "gfx/footprints/bellsprout.1bpp"
 INCBIN "gfx/footprints/weepinbell.1bpp"
-INCBIN "gfx/footprints/victreebel.1bpp"
-INCBIN "gfx/footprints/tentacool.1bpp"
-INCBIN "gfx/footprints/tentacruel.1bpp"
-INCBIN "gfx/footprints/geodude.1bpp"
+;INCBIN "gfx/footprints/victreebel.1bpp"
+;INCBIN "gfx/footprints/tentacool.1bpp"
+;INCBIN "gfx/footprints/tentacruel.1bpp"
+;INCBIN "gfx/footprints/geodude.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/graveler.1bpp"
 INCBIN "gfx/footprints/golem.1bpp"
 INCBIN "gfx/footprints/ponyta.1bpp"
@@ -90,11 +101,16 @@ INCBIN "gfx/footprints/farfetch_d.1bpp"
 INCBIN "gfx/footprints/doduo.1bpp"
 INCBIN "gfx/footprints/dodrio.1bpp"
 INCBIN "gfx/footprints/seel.1bpp"
-INCBIN "gfx/footprints/dewgong.1bpp"
+;INCBIN "gfx/footprints/dewgong.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/grimer.1bpp"
 INCBIN "gfx/footprints/muk.1bpp"
-INCBIN "gfx/footprints/shellder.1bpp"
-INCBIN "gfx/footprints/cloyster.1bpp"
+;INCBIN "gfx/footprints/shellder.1bpp"
+;INCBIN "gfx/footprints/cloyster.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/gastly.1bpp"
 INCBIN "gfx/footprints/haunter.1bpp"
 INCBIN "gfx/footprints/gengar.1bpp"
@@ -104,7 +120,9 @@ INCBIN "gfx/footprints/hypno.1bpp"
 INCBIN "gfx/footprints/krabby.1bpp"
 INCBIN "gfx/footprints/kingler.1bpp"
 INCBIN "gfx/footprints/voltorb.1bpp"
-INCBIN "gfx/footprints/electrode.1bpp"
+;INCBIN "gfx/footprints/electrode.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/exeggcute.1bpp"
 INCBIN "gfx/footprints/exeggutor.1bpp"
 INCBIN "gfx/footprints/cubone.1bpp"
@@ -113,16 +131,22 @@ INCBIN "gfx/footprints/hitmonlee.1bpp"
 INCBIN "gfx/footprints/hitmonchan.1bpp"
 INCBIN "gfx/footprints/lickitung.1bpp"
 INCBIN "gfx/footprints/koffing.1bpp"
-INCBIN "gfx/footprints/weezing.1bpp"
+;INCBIN "gfx/footprints/weezing.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/rhyhorn.1bpp"
 INCBIN "gfx/footprints/rhydon.1bpp"
 INCBIN "gfx/footprints/chansey.1bpp"
 INCBIN "gfx/footprints/tangela.1bpp"
 INCBIN "gfx/footprints/kangaskhan.1bpp"
 INCBIN "gfx/footprints/horsea.1bpp"
-INCBIN "gfx/footprints/seadra.1bpp"
-INCBIN "gfx/footprints/goldeen.1bpp"
-INCBIN "gfx/footprints/seaking.1bpp"
+;INCBIN "gfx/footprints/seadra.1bpp"
+;INCBIN "gfx/footprints/goldeen.1bpp"
+;INCBIN "gfx/footprints/seaking.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
 INCBIN "gfx/footprints/staryu.1bpp"
 INCBIN "gfx/footprints/starmie.1bpp"
 INCBIN "gfx/footprints/mr__mime.1bpp"
