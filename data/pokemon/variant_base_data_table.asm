@@ -12,6 +12,7 @@ RegionalBaseDataTable:
     regional_basedata GROUP_GENERATION_THREE, Hoenn
     regional_basedata GROUP_GENERATION_FOUR, Sinnoh
     regional_basedata GROUP_GENERATION_FIVE, Unova
+    regional_basedata GROUP_GENERATION_SIX, Kalos
 	regional_basedata -1, Other
 
 OtherVariantBaseDataTable:
@@ -31,3 +32,6 @@ SinnohVariantBaseDataTable:
 
 UnovaVariantBaseDataTable:
     variant_basedata -1, Unova
+
+KalosVariantBaseDataTable:
+    variant_basedata -1, Kalos

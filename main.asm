@@ -1646,6 +1646,8 @@ INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/hoenn_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/sinnoh_dex_entry_pointers.asm"
 INCLUDE "data/pokemon/unova_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/kalos_dex_entry_pointers.asm"
+
 
 SECTION "Code 11", ROMX
 
@@ -4296,6 +4298,7 @@ INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/sinnoh_menu_icon_pointers.asm"
 INCLUDE "data/pokemon/unova_menu_icon_pointers.asm"
+INCLUDE "data/pokemon/kalos_menu_icon_pointers.asm"
 
 INCLUDE "data/pokemon/menu_icons.asm"
 
@@ -4586,6 +4589,11 @@ INCLUDE "gfx/pokemon/unova_anims.asm"
 INCLUDE "gfx/pokemon/unova_idle_pointers.asm"
 INCLUDE "gfx/pokemon/unova_idles.asm"
 
+INCLUDE "gfx/pokemon/kalos_anim_pointers.asm"
+INCLUDE "gfx/pokemon/kalos_anims.asm"
+INCLUDE "gfx/pokemon/kalos_idle_pointers.asm"
+INCLUDE "gfx/pokemon/kalos_idles.asm"
+
 SECTION "Pic Animations Frames 0", ROMX
 
 INCLUDE "gfx/pokemon/other_frame_pointers.asm"
@@ -4618,6 +4626,10 @@ SECTION "Pic Animations Frames 5", ROMX
 INCLUDE "gfx/pokemon/unova_frames.asm"
 INCLUDE "gfx/pokemon/unova_frame_pointers.asm"
 
+SECTION "Pic Animations Frames 6", ROMX
+
+INCLUDE "gfx/pokemon/kalos_frames.asm"
+INCLUDE "gfx/pokemon/kalos_frame_pointers.asm"
 
 SECTION "Pic Animations Bitmasks", ROMX
 
@@ -4634,6 +4646,8 @@ INCLUDE "gfx/pokemon/sinnoh_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/sinnoh_bitmasks.asm"
 INCLUDE "gfx/pokemon/unova_bitmask_pointers.asm"
 INCLUDE "gfx/pokemon/unova_bitmasks.asm"
+INCLUDE "gfx/pokemon/kalos_bitmask_pointers.asm"
+INCLUDE "gfx/pokemon/kalos_bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX
@@ -5445,6 +5459,12 @@ SECTION "Unova Base Data", ROMX
 INCLUDE "data/pokemon/unova_base_stats.asm"
 INCLUDE "data/pokemon/unova_names.asm"
 INCLUDE "data/pokemon/unova_palettes.asm"
+
+SECTION "Kalos Base Data", ROMX
+
+INCLUDE "data/pokemon/kalos_base_stats.asm"
+INCLUDE "data/pokemon/kalos_names.asm"
+INCLUDE "data/pokemon/kalos_palettes.asm"
 
 SECTION "Other Base Data", ROMX
 INCLUDE "data/pokemon/other_base_stats.asm"

@@ -15,7 +15,7 @@ KalosPicPointers::
 	add_pics Talonflame
 	add_pics Scatterbug
 	add_pics Spewpa
-	add_pics Vivvilon
+	add_pics Vivillon
 	add_pics Litleo
 	add_pics Pyroar
 	add_pics Flabebe
@@ -38,11 +38,11 @@ KalosPicPointers::
 	add_pics Inkay
 	add_pics Malamar
 	add_pics Binacle
-	add_pics Barbracle
+	add_pics Barbaracle
 	add_pics Skrelp
 	add_pics Dragalge
 	add_pics Clauncher
-	add_pics Clawlitzer
+	add_pics Clawitzer
 	add_pics Helioptile
 	add_pics Heliolisk
 	add_pics Tyrunt

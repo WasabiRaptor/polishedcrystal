@@ -24,7 +24,6 @@ ROMX $05
 	org $4000
 	"Code 5"
 	"Other Base Data"
-	"Unova Pokedex Entries 5"
 
 ROMX $06
 	org $4000
@@ -51,7 +50,6 @@ ROMX $09
 ROMX $0A
 	org $4000
 	"Code 10"
-	"Typefaces"
 
 ROMX $0B
 	org $4000
@@ -88,7 +86,6 @@ ROMX $10
 ROMX $11
 	org $4000
 	"Code 17"
-	"Text 3"
 
 ROMX $12
 	org $4000
@@ -182,7 +179,6 @@ ROMX $22
 ROMX $23
 	org $4000
 	"Pic Animations Bitmasks"
-	"Text 2"
 
 ROMX $24
 	org $4000
@@ -423,581 +419,610 @@ ROMX $66
 ROMX $67
 	org $4000
 
-ROMX $68
+ROMX $168
 	org $4000
+	"Kalos DED 1"
 
-ROMX $69
+ROMX $169
 	org $4000
+	"Kalos DED 2"
 
-ROMX $6a
+ROMX $16a
 	org $4000
+	"Kalos DED 3"
 
-ROMX $6b
+ROMX $16b
 	org $4000
+	"Kalos DED 4"
 
-ROMX $6c
+ROMX $16c
 	org $4000
+	"Kalos DED 5"
 
-ROMX $6d
+ROMX $16d
 	org $4000
+	"Kalos DED 6"
 
-ROMX $6e
+ROMX $16e
 	org $4000
+	"Kalos DED 7"
 
-ROMX $6f
+ROMX $16f
 	org $4000
+	"Kalos DED 8"
 
-ROMX $70
+ROMX $170
 	org $4000
+	"Kalos DED 9"
 
-ROMX $71
+ROMX $171
 	org $4000
+	"Kalos DED 10"
 
-ROMX $72
+ROMX $172
 	org $4000
+	"Kalos DED 11"
 
-ROMX $73
+ROMX $173
 	org $4000
+	"Kalos DED 12"
 
-ROMX $74
+ROMX $174
 	org $4000
+	"Kalos DED 13"
 
-ROMX $75
+ROMX $175
 	org $4000
+	"Kalos DED 14"
 
-ROMX $76
+ROMX $176
 	org $4000
+	"Kalos DED 15"
 
-ROMX $77
+ROMX $177
 	org $4000
+	"Kalos DED 16"
 
-ROMX $78
+ROMX $178
 	org $4000
+	"Kalos DED 18"
 
-ROMX $79
+ROMX $179
 	org $4000
+	"Kalos DED 19"
 
-ROMX $7a
+ROMX $17a
 	org $4000
+	"Kalos DED 20"
 
-ROMX $7b
+ROMX $17b
 	org $4000
+	"Kalos DED 21"
 
-ROMX $7c
+ROMX $17c
 	org $4000
+	"Kalos DED 22"
 
-ROMX $7d
+ROMX $17d
 	org $4000
+	"Kalos DED 23"
 
-ROMX $7e
+ROMX $17e
 	org $4000
+	"Kalos DED 24"
 
-ROMX $7f
+ROMX $17f
 	org $4000
+	"Kalos DED 25"
 
-ROMX $80
+ROMX $180
 	org $4000
+	"Kalos DED 26"
 
-ROMX $81
+ROMX $181
 	org $4000
+	"Kalos DED 27"
 
-ROMX $82
+ROMX $182
 	org $4000
+	"Kalos DED 28"
 
-ROMX $83
+ROMX $183
 	org $4000
+	"Kalos DED 29"
 
-ROMX $84
+ROMX $184
 	org $4000
+	"Kalos DED 30"
 
-ROMX $85
+ROMX $185
 	org $4000
 	"Hoenn DED 34"
 
-ROMX $86
+ROMX $186
 	org $4000
 	"Hoenn DED 1"
 
-ROMX $87
+ROMX $187
 	org $4000
 	"Hoenn DED 2"
 
-ROMX $88
+ROMX $188
 	org $4000
 	"Hoenn DED 3"
 
-ROMX $89
+ROMX $189
 	org $4000
 	"Hoenn DED 4"
 
-ROMX $8a
+ROMX $18a
 	org $4000
 	"Hoenn DED 5"
 
-ROMX $8b
+ROMX $18b
 	org $4000
 	"Hoenn DED 6"
 
-ROMX $8c
+ROMX $18c
 	org $4000
 	"Hoenn DED 7"
 
-ROMX $8d
+ROMX $18d
 	org $4000
 	"Hoenn DED 8"
 
-ROMX $8e
+ROMX $18e
 	org $4000
 	"Hoenn DED 9"
 
-ROMX $8f
+ROMX $18f
 	org $4000
 	"Hoenn DED 10"
 
-ROMX $90
+ROMX $190
 	org $4000
 	"Hoenn DED 11"
 
-ROMX $91
+ROMX $191
 	org $4000
 	"Hoenn DED 14"
 
-ROMX $92
+ROMX $192
 	org $4000
 	"Hoenn DED 15"
 
-ROMX $93
+ROMX $193
 	org $4000
 	"Hoenn DED 16"
 
-ROMX $94
+ROMX $194
 	org $4000
 	"Hoenn DED 17"
 
-ROMX $95
+ROMX $195
 	org $4000
 	"Hoenn DED 18"
 
-ROMX $96
+ROMX $196
 	org $4000
 	"Hoenn DED 19"
 
-ROMX $97
+ROMX $197
 	org $4000
 	"Hoenn DED 20"
 
-ROMX $98
+ROMX $198
 	org $4000
 	"Hoenn DED 21"
 
-ROMX $99
+ROMX $199
 	org $4000
 	"Hoenn DED 22"
 
-ROMX $9a
+ROMX $19a
 	org $4000
 	"Hoenn DED 23"
 
-ROMX $9b
+ROMX $19b
 	org $4000
 	"Hoenn DED 24"
 
-ROMX $9c
+ROMX $19c
 	org $4000
 	"Hoenn DED 25"
 
-ROMX $9d
+ROMX $19d
 	org $4000
 	"Hoenn DED 26"
 
-ROMX $9e
+ROMX $19e
 	org $4000
 	"Hoenn DED 27"
 
-ROMX $9f
+ROMX $19f
 	org $4000
 	"Hoenn DED 28"
 
-ROMX $a0
+ROMX $1a0
 	org $4000
 	"Hoenn DED 29"
 
-ROMX $a1
+ROMX $1a1
 	org $4000
 	"Hoenn DED 30"
 
-ROMX $a2
+ROMX $1a2
 	org $4000
 	"Hoenn DED 31"
 
-ROMX $a3
+ROMX $1a3
 	org $4000
 	"Hoenn DED 32"
 
-ROMX $a4
+ROMX $1a4
 	org $4000
 	"Hoenn DED 33"
 
-ROMX $a5
+ROMX $1a5
 	org $4000
 	"Sinnoh DED 1"
 
-ROMX $a6
+ROMX $1a6
 	org $4000
 	"Sinnoh DED 2"
 
-ROMX $a7
+ROMX $1a7
 	org $4000
 	"Sinnoh DED 3"
 
-ROMX $a8
+ROMX $1a8
 	org $4000
 	"Sinnoh DED 4"
 
-ROMX $a9
+ROMX $1a9
 	org $4000
 	"Sinnoh DED 5"
 
-ROMX $aa
+ROMX $1aa
 	org $4000
 	"Sinnoh DED 6"
 
-ROMX $ab
+ROMX $1ab
 	org $4000
 	"Sinnoh DED 7"
 
-ROMX $ac
+ROMX $1ac
 	org $4000
 	"Sinnoh DED 8"
 
-ROMX $ad
+ROMX $1ad
 	org $4000
 	"Sinnoh DED 9"
 
-ROMX $ae
+ROMX $1ae
 	org $4000
 	"Sinnoh DED 10"
 
-ROMX $af
+ROMX $1af
 	org $4000
 	"Sinnoh DED 11"
 
-ROMX $b0
+ROMX $1b0
 	org $4000
 	"Sinnoh DED 12"
 
-ROMX $b1
+ROMX $1b1
 	org $4000
 	"Sinnoh DED 13"
 
-ROMX $b2
+ROMX $1b2
 	org $4000
 	"Sinnoh DED 14"
 
-ROMX $b3
+ROMX $1b3
 	org $4000
 	"Sinnoh DED 15"
 
-ROMX $b4
+ROMX $1b4
 	org $4000
 	"Sinnoh DED 16"
 
-ROMX $b5
+ROMX $1b5
 	org $4000
 	"Sinnoh DED 17"
 
-ROMX $b6
+ROMX $1b6
 	org $4000
 	"Sinnoh DED 18"
 
-ROMX $b7
+ROMX $1b7
 	org $4000
 	"Sinnoh DED 19"
 
-ROMX $b8
+ROMX $1b8
 	org $4000
 	"Sinnoh DED 20"
 
-ROMX $b9
+ROMX $1b9
 	org $4000
 	"Sinnoh DED 21"
 
-ROMX $ba
+ROMX $1ba
 	org $4000
 	"Sinnoh DED 22"
 
-ROMX $bb
+ROMX $1bb
 	org $4000
 	"Sinnoh DED 23"
 
-ROMX $bc
+ROMX $1bc
 	org $4000
 	"Sinnoh DED 24"
 
-ROMX $bd
+ROMX $1bd
 	org $4000
 	"Sinnoh DED 25"
 
-ROMX $be
+ROMX $1be
 	org $4000
 	"Sinnoh DED 26"
 
-ROMX $bf
+ROMX $1bf
 	org $4000
 	"Sinnoh DED 27"
 
-ROMX $c0
+ROMX $1c0
 	org $4000
 	"Sinnoh DED 28"
 
-ROMX $c1
+ROMX $1c1
 	org $4000
 	"Sinnoh DED 29"
 
-ROMX $c2
+ROMX $1c2
 	org $4000
 	"Sinnoh DED 30"
 
-ROMX $c3
+ROMX $1c3
 	org $4000
 	"Sinnoh DED 31"
 
-ROMX $c4
+ROMX $1c4
 	org $4000
 	"Sinnoh DED 32"
 
-ROMX $c5
+ROMX $1c5
 	org $4000
 	"Sinnoh DED 33"
 
-ROMX $c6
+ROMX $1c6
 	org $4000
 	"Sinnoh DED 34"
 
-ROMX $c7
+ROMX $1c7
 	org $4000
 	"Sinnoh DED 35"
 
-ROMX $c8
+ROMX $1c8
 	org $4000
 	"Sinnoh DED 36"
 
-ROMX $c9
+ROMX $1c9
 	org $4000
 	"Sinnoh DED 37"
 
-ROMX $ca
+ROMX $1ca
 	org $4000
 	"Sinnoh DED 38"
 
-ROMX $cb
+ROMX $1cb
 	org $4000
 	"Sinnoh DED 39"
 
-ROMX $cc
+ROMX $1cc
 	org $4000
 	"Sinnoh DED 40"
 
-ROMX $cd
+ROMX $1cd
 	org $4000
 	"Sinnoh DED 41"
 
-ROMX $ce
+ROMX $1ce
 	org $4000
 	"Sinnoh DED 42"
 
-ROMX $cf
+ROMX $1cf
 	org $4000
 	"Unova DED 1"
 
-ROMX $d0
+ROMX $1d0
 	org $4000
 	"Unova DED 2"
 
-ROMX $d1
+ROMX $1d1
 	org $4000
 	"Unova DED 3"
 
-ROMX $d2
+ROMX $1d2
 	org $4000
 	"Unova DED 4"
 
-ROMX $d3
+ROMX $1d3
 	org $4000
 	"Unova DED 5"
 
-ROMX $d4
+ROMX $1d4
 	org $4000
 	"Unova DED 6"
 
-ROMX $d5
+ROMX $1d5
 	org $4000
 	"Unova DED 7"
 
-ROMX $d6
+ROMX $1d6
 	org $4000
 	"Unova DED 8"
 
-ROMX $d7
+ROMX $1d7
 	org $4000
 	"Unova DED 9"
 
-ROMX $d8
+ROMX $1d8
 	org $4000
 	"Unova DED 10"
 
-ROMX $d9
+ROMX $1d9
 	org $4000
 	"Unova DED 11"
 
-ROMX $da
+ROMX $1da
 	org $4000
 	"Unova DED 12"
 
-ROMX $db
+ROMX $1db
 	org $4000
 	"Unova DED 13"
 
-ROMX $dc
+ROMX $1dc
 	org $4000
 	"Unova DED 14"
 
-ROMX $dd
+ROMX $1dd
 	org $4000
 	"Unova DED 15"
 
-ROMX $de
+ROMX $1de
 	org $4000
 	"Unova DED 16"
 
-ROMX $df
+ROMX $1df
 	org $4000
 	"Unova DED 17"
 
-ROMX $e0
+ROMX $1e0
 	org $4000
 	"Unova DED 18"
 
-ROMX $e1
+ROMX $1e1
 	org $4000
 	"Unova DED 19"
 
-ROMX $e2
+ROMX $1e2
 	org $4000
 	"Unova DED 20"
 
-ROMX $e3
+ROMX $1e3
 	org $4000
 	"Unova DED 21"
 
-ROMX $e4
+ROMX $1e4
 	org $4000
 	"Unova DED 22"
 
-ROMX $e5
+ROMX $1e5
 	org $4000
 	"Unova DED 23"
 
-ROMX $e6
+ROMX $1e6
 	org $4000
 	"Unova DED 24"
 
-ROMX $e7
+ROMX $1e7
 	org $4000
 	"Unova DED 25"
 
-ROMX $e8
+ROMX $1e8
 	org $4000
 	"Unova DED 26"
 
-ROMX $e9
+ROMX $1e9
 	org $4000
 	"Unova DED 27"
 
-ROMX $ea
+ROMX $1ea
 	org $4000
 	"Unova DED 28"
 
-ROMX $eb
+ROMX $1eb
 	org $4000
 	"Unova DED 29"
 
-ROMX $ec
+ROMX $1ec
 	org $4000
 	"Unova DED 30"
 
-ROMX $ed
+ROMX $1ed
 	org $4000
 	"Unova DED 31"
 
-ROMX $ee
+ROMX $1ee
 	org $4000
 	"Unova DED 32"
 
-ROMX $ef
+ROMX $1ef
 	org $4000
 	"Unova DED 33"
 
-ROMX $f0
+ROMX $1f0
 	org $4000
 	"Unova DED 34"
 
-ROMX $f1
+ROMX $1f1
 	org $4000
 	"Unova DED 35"
 
-ROMX $f2
+ROMX $1f2
 	org $4000
 	"Unova DED 36"
 
-ROMX $f3
+ROMX $1f3
 	org $4000
 	"Unova DED 37"
 
-ROMX $f4
+ROMX $1f4
 	org $4000
 	"Unova DED 38"
 
-ROMX $f5
+ROMX $1f5
 	org $4000
 	"Unova DED 39"
 
-ROMX $f6
+ROMX $1f6
 	org $4000
 	"Unova DED 40"
 
-ROMX $f7
+ROMX $1f7
 	org $4000
 	"Unova DED 41"
 
-ROMX $f8
+ROMX $1f8
 	org $4000
 	"Unova DED 42"
 
-ROMX $f9
+ROMX $1f9
 	org $4000
 	"Unova DED 43"
 
-ROMX $fa
+ROMX $1fa
 	org $4000
 	"Unova DED 44"
 
-ROMX $fb
+ROMX $1fb
 	org $4000
 	"Unova DED 45"
 
-ROMX $fc
+ROMX $1fc
 	org $4000
 	"Unova DED 46"
 
-ROMX $fd
+ROMX $1fd
 	org $4000
 	"Unova DED 47"
 
-ROMX $fe
+ROMX $1fe
 	org $4000
 	"Unova DED 48"
 
-ROMX $ff
+ROMX $1ff
 	org $4000
 	"Unova DED 49"

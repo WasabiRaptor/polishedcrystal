@@ -12,6 +12,7 @@ RegionalIconPalTable:
     regional_iconpals GROUP_GENERATION_THREE, Hoenn
     regional_iconpals GROUP_GENERATION_FOUR, Sinnoh
     regional_iconpals GROUP_GENERATION_FIVE, Unova
+    regional_iconpals GROUP_GENERATION_SIX, Kalos
 	regional_iconpals -1, Kanto
 
 ;OtherVariantIconPalTable:
@@ -31,3 +32,6 @@ SinnohVariantIconPalTable:
 
 UnovaVariantIconPalTable:
     variant_iconpals -1, Unova
+
+KalosVariantIconPalTable:
+    variant_iconpals -1, Kalos

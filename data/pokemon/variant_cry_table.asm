@@ -13,6 +13,7 @@ RegionalCryTable:
     regional_cries GROUP_GENERATION_THREE, Hoenn
     regional_cries GROUP_GENERATION_FOUR, Sinnoh
     regional_cries GROUP_GENERATION_FIVE, Unova
+    regional_cries GROUP_GENERATION_SIX, Kalos
     regional_cries -1, Kanto
 
 ;OtherVariantCryTable:
@@ -32,3 +33,6 @@ SinnohVariantCryTable:
 
 UnovaVariantCryTable:
     variant_cries -1, Unova
+
+KalosVariantCryTable:
+    variant_cries -1, Kalos

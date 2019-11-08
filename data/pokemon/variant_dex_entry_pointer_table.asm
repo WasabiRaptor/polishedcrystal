@@ -13,6 +13,7 @@ RegionalPokedexEntryPointerTable:
     regional_dexentry GROUP_GENERATION_THREE, Hoenn
     regional_dexentry GROUP_GENERATION_FOUR, Sinnoh
     regional_dexentry GROUP_GENERATION_FIVE, Unova
+    regional_dexentry GROUP_GENERATION_SIX, Kalos
 	regional_dexentry -1, Kanto
 
 ;OtherVariantPokedexEntryPointerTable:
@@ -32,3 +33,6 @@ SinnohVariantPokedexEntryPointerTable:
 
 UnovaVariantPokedexEntryPointerTable:
     variant_dexentry -1, Unova
+
+KalosVariantPokedexEntryPointerTable:
+    variant_dexentry -1, Kalos

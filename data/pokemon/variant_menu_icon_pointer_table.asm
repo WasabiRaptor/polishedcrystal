@@ -12,6 +12,7 @@ RegionalIconPointerTable:
     regional_icons GROUP_GENERATION_THREE, Hoenn
     regional_icons GROUP_GENERATION_FOUR, Sinnoh
     regional_icons GROUP_GENERATION_FIVE, Unova
+    regional_icons GROUP_GENERATION_SIX, Kalos
 	regional_icons -1, Kanto
 
 ;OtherVariantIconPointerTable:
@@ -31,3 +32,6 @@ SinnohVariantIconPointerTable:
 
 UnovaVariantIconPointerTable:
     variant_icons -1, Unova
+    
+KalosVariantIconPointerTable:
+    variant_icons -1, Kalos

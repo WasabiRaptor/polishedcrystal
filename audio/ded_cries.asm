@@ -861,19 +861,19 @@ SECTION "Unova DED 45", ROMX
 
 TerrakionDEDData::  INCBIN "audio/ded/pokemon/terrakion.ded"
 VirizionDEDData::  INCBIN "audio/ded/pokemon/virizion.ded"
-TornadusDEDData::  ;INCBIN "audio/ded/pokemon/tornadus.ded"
+TornadusDEDData::  INCBIN "audio/ded/pokemon/tornadus.ded"
 
 SECTION "Unova DED 46", ROMX
 
 
-ThundurusDEDData::  ;INCBIN "audio/ded/pokemon/thundurus.ded"
+ThundurusDEDData::  INCBIN "audio/ded/pokemon/thundurus.ded"
 ReshiramDEDData::  INCBIN "audio/ded/pokemon/reshiram.ded"
 
 SECTION "Unova DED 47", ROMX
 
 
 ZekromDEDData::  INCBIN "audio/ded/pokemon/zekrom.ded"
-LandorusDEDData::  ;INCBIN "audio/ded/pokemon/landorus.ded"
+LandorusDEDData::  INCBIN "audio/ded/pokemon/landorus.ded"
 
 SECTION "Unova DED 48", ROMX
 
@@ -886,3 +886,195 @@ SECTION "Unova DED 49", ROMX
 
 MeloettaDEDData::  INCBIN "audio/ded/pokemon/meloetta.ded"
 GenesectDEDData::  INCBIN "audio/ded/pokemon/genesect.ded"
+
+SECTION "Kalos DED 1", ROMX
+
+
+ChespinDEDData::  INCBIN "audio/ded/pokemon/chespin.ded"
+QuilladinDEDData::  INCBIN "audio/ded/pokemon/quilladin.ded"
+ChesnaughtDEDData::  INCBIN "audio/ded/pokemon/chesnaught.ded"
+
+SECTION "Kalos DED 2", ROMX
+
+
+FennekinDEDData::  INCBIN "audio/ded/pokemon/fennekin.ded"
+BraixenDEDData::  INCBIN "audio/ded/pokemon/braixen.ded"
+DelphoxDEDData::  INCBIN "audio/ded/pokemon/delphox.ded"
+
+SECTION "Kalos DED 3", ROMX
+
+
+FroakieDEDData::  INCBIN "audio/ded/pokemon/froakie.ded"
+FrogadierDEDData::  INCBIN "audio/ded/pokemon/frogadier.ded"
+GreninjaDEDData::  INCBIN "audio/ded/pokemon/greninja.ded"
+BunnelbyDEDData::  INCBIN "audio/ded/pokemon/bunnelby.ded"
+
+SECTION "Kalos DED 4", ROMX
+
+
+DiggersbyDEDData::  INCBIN "audio/ded/pokemon/diggersby.ded"
+FletchlingDEDData::  INCBIN "audio/ded/pokemon/fletchling.ded"
+FletchinderDEDData::  INCBIN "audio/ded/pokemon/fletchinder.ded"
+
+SECTION "Kalos DED 5", ROMX
+
+
+TalonflameDEDData::  INCBIN "audio/ded/pokemon/talonflame.ded"
+ScatterbugDEDData::  INCBIN "audio/ded/pokemon/scatterbug.ded"
+SpewpaDEDData::  INCBIN "audio/ded/pokemon/spewpa.ded"
+
+SECTION "Kalos DED 6", ROMX
+
+
+VivillonDEDData::  INCBIN "audio/ded/pokemon/vivillon.ded"
+LitleoDEDData::  INCBIN "audio/ded/pokemon/litleo.ded"
+
+SECTION "Kalos DED 7", ROMX
+
+
+PyroarDEDData::  INCBIN "audio/ded/pokemon/pyroar.ded"
+FlabebeDEDData::  INCBIN "audio/ded/pokemon/flabebe.ded"
+
+SECTION "Kalos DED 8", ROMX
+
+
+FloetteDEDData::  INCBIN "audio/ded/pokemon/floette.ded"
+FlorgesDEDData::  INCBIN "audio/ded/pokemon/florges.ded"
+
+SECTION "Kalos DED 9", ROMX
+
+
+SkiddoDEDData::  INCBIN "audio/ded/pokemon/skiddo.ded"
+GogoatDEDData::  INCBIN "audio/ded/pokemon/gogoat.ded"
+PanchamDEDData::  INCBIN "audio/ded/pokemon/pancham.ded"
+
+SECTION "Kalos DED 10", ROMX
+
+
+PangoroDEDData::  INCBIN "audio/ded/pokemon/pangoro.ded"
+FurfrouDEDData::  INCBIN "audio/ded/pokemon/furfrou.ded"
+EspurrDEDData::  INCBIN "audio/ded/pokemon/espurr.ded"
+MeowsticDEDData::  INCBIN "audio/ded/pokemon/meowstic.ded"
+HonedgeDEDData::  INCBIN "audio/ded/pokemon/honedge.ded"
+
+SECTION "Kalos DED 11", ROMX
+
+
+DoubladeDEDData::  INCBIN "audio/ded/pokemon/doublade.ded"
+AegislashDEDData::  INCBIN "audio/ded/pokemon/aegislash.ded"
+SpritzeeDEDData::  INCBIN "audio/ded/pokemon/spritzee.ded"
+
+SECTION "Kalos DED 12", ROMX
+
+
+AromatisseDEDData::  INCBIN "audio/ded/pokemon/aromatisse.ded"
+SwirlixDEDData::  INCBIN "audio/ded/pokemon/swirlix.ded"
+
+SECTION "Kalos DED 13", ROMX
+
+
+SlurpuffDEDData::  INCBIN "audio/ded/pokemon/slurpuff.ded"
+InkayDEDData::  INCBIN "audio/ded/pokemon/inkay.ded"
+MalamarDEDData::  INCBIN "audio/ded/pokemon/malamar.ded"
+
+SECTION "Kalos DED 14", ROMX
+
+
+BinacleDEDData::  INCBIN "audio/ded/pokemon/binacle.ded"
+BarbaracleDEDData::  INCBIN "audio/ded/pokemon/barbaracle.ded"
+SkrelpDEDData::  INCBIN "audio/ded/pokemon/skrelp.ded"
+
+SECTION "Kalos DED 15", ROMX
+
+
+DragalgeDEDData::  INCBIN "audio/ded/pokemon/dragalge.ded"
+ClauncherDEDData::  INCBIN "audio/ded/pokemon/clauncher.ded"
+ClawitzerDEDData::  INCBIN "audio/ded/pokemon/clawitzer.ded"
+
+SECTION "Kalos DED 16", ROMX
+
+
+HelioptileDEDData::  INCBIN "audio/ded/pokemon/helioptile.ded"
+HelioliskDEDData::  INCBIN "audio/ded/pokemon/heliolisk.ded"
+TyruntDEDData::  INCBIN "audio/ded/pokemon/tyrunt.ded"
+
+SECTION "Kalos DED 17", ROMX
+
+
+TyrantrumDEDData::  INCBIN "audio/ded/pokemon/tyrantrum.ded"
+AmauraDEDData::  INCBIN "audio/ded/pokemon/amaura.ded"
+
+SECTION "Kalos DED 18", ROMX
+
+
+AurorusDEDData::  INCBIN "audio/ded/pokemon/aurorus.ded"
+
+SECTION "Kalos DED 19", ROMX
+
+
+SylveonDEDData::  INCBIN "audio/ded/pokemon/sylveon.ded"
+HawluchaDEDData::  INCBIN "audio/ded/pokemon/hawlucha.ded"
+DedenneDEDData::  INCBIN "audio/ded/pokemon/dedenne.ded"
+
+SECTION "Kalos DED 20", ROMX
+
+
+CarbinkDEDData::  INCBIN "audio/ded/pokemon/carbink.ded"
+GoomyDEDData::  INCBIN "audio/ded/pokemon/goomy.ded"
+
+SECTION "Kalos DED 21", ROMX
+
+
+SliggooDEDData::  INCBIN "audio/ded/pokemon/sliggoo.ded"
+GoodraDEDData::  INCBIN "audio/ded/pokemon/goodra.ded"
+
+SECTION "Kalos DED 22", ROMX
+
+
+KlefkiDEDData::  INCBIN "audio/ded/pokemon/klefki.ded"
+PhantumpDEDData::  INCBIN "audio/ded/pokemon/phantump.ded"
+
+SECTION "Kalos DED 23", ROMX
+
+
+TrevenantDEDData::  INCBIN "audio/ded/pokemon/trevenant.ded"
+PumpkabooDEDData::  INCBIN "audio/ded/pokemon/pumpkaboo.ded"
+GourgeistDEDData::  INCBIN "audio/ded/pokemon/gourgeist.ded"
+
+SECTION "Kalos DED 24", ROMX
+
+
+BergmiteDEDData::  INCBIN "audio/ded/pokemon/bergmite.ded"
+AvaluggDEDData::  INCBIN "audio/ded/pokemon/avalugg.ded"
+
+SECTION "Kalos DED 25", ROMX
+
+
+NoibatDEDData::  INCBIN "audio/ded/pokemon/noibat.ded"
+NoivernDEDData::  INCBIN "audio/ded/pokemon/noivern.ded"
+
+SECTION "Kalos DED 26", ROMX
+
+
+XerneasDEDData::  INCBIN "audio/ded/pokemon/xerneas.ded"
+
+SECTION "Kalos DED 27", ROMX
+
+
+YveltalDEDData::  INCBIN "audio/ded/pokemon/yveltal.ded"
+
+SECTION "Kalos DED 28", ROMX
+
+
+ZygardeDEDData::  INCBIN "audio/ded/pokemon/zygarde.ded"
+
+SECTION "Kalos DED 29", ROMX
+
+
+DiancieDEDData::  INCBIN "audio/ded/pokemon/diancie.ded"
+HoopaDEDData::  INCBIN "audio/ded/pokemon/hoopa.ded"
+
+SECTION "Kalos DED 30", ROMX
+
+
+VolcanionDEDData::  INCBIN "audio/ded/pokemon/volcanion.ded"

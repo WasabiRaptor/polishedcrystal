@@ -12,6 +12,7 @@ RegionalPicPointerTable:
     regional_picpointers GROUP_GENERATION_THREE, Hoenn
     regional_picpointers GROUP_GENERATION_FOUR, Sinnoh
     regional_picpointers GROUP_GENERATION_FIVE, Unova
+    regional_picpointers GROUP_GENERATION_SIX, Kalos
 	regional_picpointers -1, Kanto
 
 ;OtherVariantPicPointerTable:
@@ -31,3 +32,6 @@ SinnohVariantPicPointerTable:
 
 UnovaVariantPicPointerTable:
     variant_picpointers -1, Unova
+
+KalosVariantPicPointerTable:
+    variant_picpointers -1, Kalos

@@ -13,6 +13,7 @@ RegionalAnimPointerTable:
     regional_animdata GROUP_GENERATION_THREE,  Hoenn
     regional_animdata GROUP_GENERATION_FOUR,  Sinnoh
     regional_animdata GROUP_GENERATION_FIVE,  Unova
+    regional_animdata GROUP_GENERATION_SIX,  Kalos
     regional_animdata -1, Other
 
 OtherVariantAnimPointerTable:
@@ -32,6 +33,9 @@ SinnohVariantAnimPointerTable:
 
 UnovaVariantAnimPointerTable:
     variant_animdata -1, Unova
+
+KalosVariantAnimPointerTable:
+    variant_animdata -1, Kalos
     
 variant_frames: macro
     dbbba \1, BANK(\2Frames), \2FramesPointers
@@ -47,6 +51,7 @@ RegionalFramesPointerTable:
     regional_frames GROUP_GENERATION_THREE,  Hoenn
     regional_frames GROUP_GENERATION_FOUR,  Sinnoh
     regional_frames GROUP_GENERATION_FIVE,  Unova
+    regional_frames GROUP_GENERATION_SIX,  Kalos
     regional_frames -1, Other
 
 OtherVariantFramesPointerTable:
@@ -66,6 +71,9 @@ SinnohVariantFramesPointerTable:
 
 UnovaVariantFramesPointerTable:
     variant_frames -1, Unova
+
+KalosVariantFramesPointerTable:
+    variant_frames -1, Kalos
     
 variant_bitmasks: macro
     dbba \1, \2BitmasksPointers
@@ -81,6 +89,7 @@ RegionalBitmasksPointerTable:
     regional_bitmasks GROUP_GENERATION_THREE,  Hoenn
     regional_bitmasks GROUP_GENERATION_FOUR,  Sinnoh
     regional_bitmasks GROUP_GENERATION_FIVE,  Unova
+    regional_bitmasks GROUP_GENERATION_SIX,  Kalos
     regional_bitmasks -1, Other
 
 OtherVariantBitmasksPointerTable:
@@ -100,3 +109,6 @@ SinnohVariantBitmasksPointerTable:
 
 UnovaVariantBitmasksPointerTable:
     variant_bitmasks -1, Unova
+
+KalosVariantBitmasksPointerTable:
+    variant_bitmasks -1, Kalos

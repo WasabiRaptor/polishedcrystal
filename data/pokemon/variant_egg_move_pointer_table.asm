@@ -12,6 +12,7 @@ RegionalEggMovePointerTable:
     regional_eggmoves GROUP_GENERATION_THREE, Hoenn
     regional_eggmoves GROUP_GENERATION_FOUR, Sinnoh
     regional_eggmoves GROUP_GENERATION_FIVE, Unova
+    regional_eggmoves GROUP_GENERATION_SIX, Kalos
 	regional_eggmoves -1, Kanto
 
 ;OtherVariantEggMovePointerTable:
@@ -31,3 +32,6 @@ SinnohVariantEggMovePointerTable:
 
 UnovaVariantEggMovePointerTable:
     variant_eggmoves -1, Unova
+
+KalosVariantEggMovePointerTable:
+    variant_eggmoves -1, Kalos

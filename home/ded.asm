@@ -34,7 +34,11 @@ PlayDEDSamples::
 	push af
 	ld a, b
 	rst Bankswitch
+	ld a, 1 ; currently the only things in the high rom are the DED cried explicitly placed there
+	ld [HighMBC5RomBank], a
 	call .Function
+	ld a, 0
+	ld [HighMBC5RomBank], a
 	pop af
 	rst Bankswitch
 	ret

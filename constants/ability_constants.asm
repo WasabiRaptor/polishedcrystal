@@ -206,6 +206,13 @@ endm
 	placeholder_zero ZEN_MODE
 	placeholder_zero VICTORY_STAR
 
+	placeholder_zero DARK_AURA
+	placeholder_zero FAIRY_AURA
+	placeholder_zero CHEEK_POUCH
+	placeholder_zero STRONG_JAW
+	placeholder_zero MEGA_LAUNCHER
+	placeholder_zero AROMA_VEIL
+	placeholder_zero GRASS_PELT
 ABILITY_1      EQU %00100000
 ABILITY_2      EQU %01000000
 HIDDEN_ABILITY EQU %01100000

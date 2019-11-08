@@ -12,6 +12,7 @@ RegionalFootprintTable:
     regional_footprints GROUP_GENERATION_THREE, Hoenn
     regional_footprints GROUP_GENERATION_FOUR, Sinnoh
     regional_footprints GROUP_GENERATION_FIVE, Unova
+    regional_footprints GROUP_GENERATION_SIX, Kalos
 	regional_footprints -1, Kanto
 
 ;OtherVariantFootprintTable:
@@ -31,3 +32,6 @@ SinnohVariantFootprintTable:
 
 UnovaVariantFootprintTable:
     variant_footprints -1, Unova
+
+KalosVariantFootprintTable:
+    variant_footprints -1, Kalos

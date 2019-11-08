@@ -380,3 +380,7 @@ INCLUDE "data/pokemon/sinnoh_cries.asm"
 SECTION "Unova Cries", ROMX
 
 INCLUDE "data/pokemon/unova_cries.asm"
+
+SECTION "Kalos Cries", ROMX
+
+INCLUDE "data/pokemon/kalos_cries.asm"

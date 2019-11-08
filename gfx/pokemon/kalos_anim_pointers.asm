@@ -15,7 +15,7 @@ KalosAnimationPointers::
 	add_anim Talonflame
 	add_anim Scatterbug
 	add_anim Spewpa
-	add_anim Vivvilon
+	add_anim Vivillon
 	add_anim Litleo
 	add_anim Pyroar
 	add_anim Flabebe
@@ -38,11 +38,11 @@ KalosAnimationPointers::
 	add_anim Inkay
 	add_anim Malamar
 	add_anim Binacle
-	add_anim Barbracle
+	add_anim Barbaracle
 	add_anim Skrelp
 	add_anim Dragalge
 	add_anim Clauncher
-	add_anim Clawlitzer
+	add_anim Clawitzer
 	add_anim Helioptile
 	add_anim Heliolisk
 	add_anim Tyrunt

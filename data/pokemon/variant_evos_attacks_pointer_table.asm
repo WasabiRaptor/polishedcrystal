@@ -21,6 +21,7 @@ RegionalEvosAttacksPointerTable:
     regional_evosattacks GROUP_GENERATION_THREE, Hoenn
     regional_evosattacks GROUP_GENERATION_FOUR, Sinnoh
     regional_evosattacks GROUP_GENERATION_FIVE, Unova
+    regional_evosattacks GROUP_GENERATION_SIX, Kalos
 	regional_evosattacks -1, Kanto
 
 ;OtherVariantEvosAttacksPointerTable:
@@ -41,12 +42,16 @@ SinnohVariantEvosAttacksPointerTable:
 UnovaVariantEvosAttacksPointerTable:
     variant_evosattacks -1, Unova
 
+KalosVariantEvosAttacksPointerTable:
+    variant_evosattacks -1, Kalos
+
 RegionalEvolutionMovesPointerTable:
     regional_evomoves GROUP_GENERATION_ONE, Kanto  
     regional_evomoves GROUP_GENERATION_TWO, Johto
     regional_evomoves GROUP_GENERATION_THREE, Hoenn
     regional_evomoves GROUP_GENERATION_FOUR, Sinnoh
     regional_evomoves GROUP_GENERATION_FIVE, Unova
+    regional_evomoves GROUP_GENERATION_SIX, Kalos
 	regional_evomoves -1, Kanto
 
 ;OtherVariantEvolutionMovesPointerTable:
@@ -66,3 +71,6 @@ SinnohVariantEvolutionMovesPointerTable:
 
 UnovaVariantEvolutionMovesPointerTable:
     variant_evomoves -1, Unova
+
+KalosVariantEvolutionMovesPointerTable:
+    variant_evomoves -1, Kalos

@@ -15,7 +15,7 @@ KalosBitmasksPointers::
 	add_bitmasks Talonflame
 	add_bitmasks Scatterbug
 	add_bitmasks Spewpa
-	add_bitmasks Vivvilon
+	add_bitmasks Vivillon
 	add_bitmasks Litleo
 	add_bitmasks Pyroar
 	add_bitmasks Flabebe
@@ -38,11 +38,11 @@ KalosBitmasksPointers::
 	add_bitmasks Inkay
 	add_bitmasks Malamar
 	add_bitmasks Binacle
-	add_bitmasks Barbracle
+	add_bitmasks Barbaracle
 	add_bitmasks Skrelp
 	add_bitmasks Dragalge
 	add_bitmasks Clauncher
-	add_bitmasks Clawlitzer
+	add_bitmasks Clawitzer
 	add_bitmasks Helioptile
 	add_bitmasks Heliolisk
 	add_bitmasks Tyrunt

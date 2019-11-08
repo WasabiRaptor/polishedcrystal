@@ -3,6 +3,7 @@ INCLUDE "data/pokemon/johto_menu_icon_pals.asm"
 INCLUDE "data/pokemon/hoenn_menu_icon_pals.asm"
 INCLUDE "data/pokemon/sinnoh_menu_icon_pals.asm"
 INCLUDE "data/pokemon/unova_menu_icon_pals.asm"
+INCLUDE "data/pokemon/kalos_menu_icon_pals.asm"
 
 LoadOverworldMonIcon: ; 8e82b
 	ld a, e

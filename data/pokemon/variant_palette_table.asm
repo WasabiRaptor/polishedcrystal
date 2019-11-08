@@ -12,6 +12,7 @@ RegionalPaletteTable:
     regional_palettes GROUP_GENERATION_THREE, Hoenn
     regional_palettes GROUP_GENERATION_FOUR, Sinnoh
     regional_palettes GROUP_GENERATION_FIVE, Unova
+    regional_palettes GROUP_GENERATION_SIX, Kalos
 	regional_palettes -1, Kanto
 
 ;OtherVariantPaletteTable:
@@ -31,3 +32,6 @@ SinnohVariantPaletteTable:
 
 UnovaVariantPaletteTable:
     variant_palettes -1, Unova
+
+KalosVariantPaletteTable:
+    variant_palettes -1, Kalos
