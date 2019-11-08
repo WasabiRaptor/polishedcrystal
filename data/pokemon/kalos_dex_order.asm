@@ -54,6 +54,7 @@ KalosDexOrder::
 	grouped_dex_order_mon TYRANTRUM
 	grouped_dex_order_mon AMAURA
 	grouped_dex_order_mon AURORUS
+	grouped_dex_order_mon SYLVEON
 	grouped_dex_order_mon HAWLUCHA
 	grouped_dex_order_mon DEDENNE
 	grouped_dex_order_mon CARBINK

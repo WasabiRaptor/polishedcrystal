@@ -29,6 +29,7 @@ INCBIN "gfx/footprints/talonflame.1bpp"
 ;INCBIN "gfx/footprints/vivillon.1bpp"
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
 ;INCBIN "gfx/footprints/litleo.1bpp"
 ;INCBIN "gfx/footprints/pyroar.1bpp"
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
@@ -88,13 +89,14 @@ INCBIN "gfx/footprints/aurorus.1bpp"
 INCBIN "gfx/footprints/sylveon.1bpp"
 ;INCBIN "gfx/footprints/hawlucha.1bpp"
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
 ;INCBIN "gfx/footprints/dedenne.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/carbink.1bpp"
 INCBIN "gfx/footprints/goomy.1bpp"
 INCBIN "gfx/footprints/sliggoo.1bpp"
 INCBIN "gfx/footprints/goodra.1bpp"
 ;INCBIN "gfx/footprints/klefki.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
 INCBIN "gfx/footprints/phantump.1bpp"
 INCBIN "gfx/footprints/trevenant.1bpp"
 ;INCBIN "gfx/footprints/pumpkaboo.1bpp"
