@@ -33,11 +33,11 @@ Special_SetCopycatPalette:
 Special_GameCornerPrizeMonCheckDex: ; c230
 	ld a, [wScriptVar]
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	ret nz
 	ld a, [wScriptVar]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	call FadeToMenu
 	ld a, [wScriptVar]
 	ld [wd265], a
@@ -48,7 +48,7 @@ Special_GameCornerPrizeMonCheckDex: ; c230
 SpecialSeenMon: ; c252
 	ld a, [wScriptVar]
 	dec a
-	jp SetSeenMon
+	farjp SetSeenMon
 ; c25a
 
 Special_FindGreaterThanThatLevel: ; c25a

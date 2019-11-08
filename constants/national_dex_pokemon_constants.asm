@@ -740,7 +740,7 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon TALONFLAME
 	nat_dexmon SCATTERBUG
 	nat_dexmon SPEWPA
-	nat_dexmon VIVVILON ; oh boy you seem like a bag of worms when we get to you
+	nat_dexmon VIVILLON ; oh boy you seem like a bag of worms when we get to you
 	nat_dexmon LITLEO
 	nat_dexmon PYROAR
 	nat_dexmon FLABEBE ; the color variance can be handled by vary colors by DVs
@@ -750,7 +750,7 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon GOGOAT
 	nat_dexmon PANCHAM
 	nat_dexmon PANGORO
-	nat_dexmon FURFROU ; you're in the same boat as vivvilon as yours is just cosmetic, not sure if it should be granted more slots really
+	nat_dexmon FURFROU ; you're in the same boat as vivillon as yours is just cosmetic, not sure if it should be granted more slots really
 	nat_dexmon ESPURR
 	nat_dexmon MEOWSTIC
 	nat_dexmon HONEDGE
@@ -763,11 +763,11 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon INKAY
 	nat_dexmon MALAMAR
 	nat_dexmon BINACLE
-	nat_dexmon BARBRACLE
+	nat_dexmon BARBARACLE
 	nat_dexmon SKRELP
 	nat_dexmon DRAGALGE
 	nat_dexmon CLAUNCHER
-	nat_dexmon CLAWLITZER
+	nat_dexmon CLAWITZER
 	nat_dexmon HELIOPTILE
 	nat_dexmon HELIOLISK
 	nat_dexmon TYRUNT

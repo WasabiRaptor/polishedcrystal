@@ -59,7 +59,42 @@ VBlank::
 	reti
 
 .skipToGameTime
+	ldh a, [hROMBank]
+	ldh [hROMBankBackup], a
+	ldh a, [hRunPicAnim]
+	and a
+	jr z, .tryDoMapAnims
+	dec a
+	jr z, .doPokeAnim
+	dec a
+	jr z, .doGrowlOrRoarAnim
+.tryDoMapAnims
 	call AnimateTileset
+	jr .doGameTime
+.doGrowlOrRoarAnim
+	ldh a, [rSVBK]
+	push af
+	ld a, $5 ;GBC video 
+	ldh [rSVBK], a
+
+	call ForcePushOAM
+
+	ld a, BANK(CopyGrowlOrRoarPals)
+	call Bankswitch
+
+	ldh a, [hCGBPalUpdate]
+	and a
+	call nz, CopyGrowlOrRoarPals
+	call RunOneFrameOfGrowlOrRoarAnim
+	pop af
+	ldh [rSVBK], a
+	jr .doGameTime
+
+.doPokeAnim
+	call TransferAnimatingPicDuringHBlank
+	ld a, BANK(SetUpPokeAnim)
+	call Bankswitch
+	call SetUpPokeAnim
 	jr .doGameTime
 
 .VBlanks:

@@ -15,7 +15,7 @@ KalosEvosAttacksPointers::
 	add_evosattacks Talonflame
 	add_evosattacks Scatterbug
 	add_evosattacks Spewpa
-	add_evosattacks Vivvilon
+	add_evosattacks Vivillon
 	add_evosattacks Litleo
 	add_evosattacks Pyroar
 	add_evosattacks Flabebe
@@ -38,11 +38,11 @@ KalosEvosAttacksPointers::
 	add_evosattacks Inkay
 	add_evosattacks Malamar
 	add_evosattacks Binacle
-	add_evosattacks Barbracle
+	add_evosattacks Barbaracle
 	add_evosattacks Skrelp
 	add_evosattacks Dragalge
 	add_evosattacks Clauncher
-	add_evosattacks Clawlitzer
+	add_evosattacks Clawitzer
 	add_evosattacks Helioptile
 	add_evosattacks Heliolisk
 	add_evosattacks Tyrunt

@@ -107,6 +107,7 @@ HoennAnimationIdlePointers::
 	add_idleanim Tropius
 	add_idleanim Chimecho
 	add_idleanim Absol
+	add_idleanim Wynaut
 	add_idleanim Snorunt
 	add_idleanim Glalie
 	add_idleanim Spheal

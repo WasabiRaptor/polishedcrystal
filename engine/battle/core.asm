@@ -84,7 +84,7 @@ DoBattle: ; 3c000
 	ld [wCurBattleMon], a
 
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartyGroup]
 	ld [wTempBattleMonGroup], a
@@ -372,7 +372,7 @@ HandleBerserkGene: ; 3c27c
 	ld h, d
 	ld l, e
 	ld a, b
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hl], a
 	ld a, BATTLE_VARS_SUBSTATUS3
@@ -1232,7 +1232,7 @@ HandlePerishSong: ; 3c801
 	ld [hl], a
 	ld hl, wPartyMon1HP
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -1248,7 +1248,7 @@ HandlePerishSong: ; 3c801
 	ret z
 	ld hl, wOTPartyMon1HP
 	ld a, [wCurOTMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -1551,7 +1551,7 @@ LeppaRestorePP:
 .set_party_pp
 	push bc
 	push de
-	call GetPartyLocation
+	predef GetPartyLocation
 	pop de
 	pop bc
 .pp_vars_ok
@@ -2194,7 +2194,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	jr z, .wild
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1HP
-	call GetPartyLocation
+	predef GetPartyLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -2373,8 +2373,7 @@ FaintYourPokemon: ; 3cef1
 	ld a, [wBattleMonGroup]
 	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
-	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX
 	call PlayerMonFaintedAnimation
@@ -2392,8 +2391,7 @@ FaintEnemyPokemon: ; 3cf14
 	ld a, [wEnemyMonGroup]
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
-	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX
 	call EnemyMonFaintedAnimation
@@ -3114,7 +3112,21 @@ LostBattle: ; 3d38e
 	scf
 	ret
 ; 3d432
+PrintWinLossText:: ; 3718
+	ld a, [wBattleResult]
+	ld hl, wWinTextPointer
+	and $f
+	jr z, .ok
+	ld hl, wLossTextPointer
 
+.ok
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wMapScriptHeaderBank]
+	call FarPrintText
+	call ApplyTilemapInVBlank
+	jp WaitPressAorB_BlinkCursor
 
 EnemyMonFaintedAnimation: ; 3d432
 	hlcoord 12, 5
@@ -3163,8 +3175,10 @@ MonFaintedAnimation: ; 3d444
 
 	ld bc, 20
 	add hl, bc
-	ld de, .Spaces
-	call PlaceString
+	ld a, " "
+rept 7
+	ld [hli], a
+endr	
 	call ApplyTilemapInVBlank
 	pop hl
 	pop de
@@ -3176,10 +3190,6 @@ MonFaintedAnimation: ; 3d444
 	ld [wInputFlags], a
 	ret
 ; 3d488
-
-.Spaces:
-	db "       @"
-; 3d490
 
 SlideUserPicOut:
 	ldh a, [hBattleTurn]
@@ -3209,8 +3219,7 @@ SlideBattlePicOut: ; 3d490
 	add hl, de
 	dec b
 	jr nz, .loop2
-	ld c, 2
-	call DelayFrames
+	call DelayFrame
 	pop hl
 	pop bc
 	dec c
@@ -3380,7 +3389,7 @@ LoadEnemyPkmnToSwitchTo:
 	ld a, b
 	ld [wCurPartyMon], a
 	ld hl, wOTPartyMon1Level
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, [wCurPartyMon]
@@ -3388,7 +3397,7 @@ LoadEnemyPkmnToSwitchTo:
 	inc a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetEnemyPartyParamLocation
+	farcall GetEnemyPartyParamLocation
 	pop af
 	ld [wCurPartyMon], a
 	ld a, [wCurPartyGroup]
@@ -3675,7 +3684,7 @@ ResetPlayerAbility:
 	ld a, [wBattleMonAbility]
 	ld b, a
 	ld a, [wBattleMonSpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	ld [wPlayerAbility], a
@@ -3700,7 +3709,7 @@ ResetEnemyAbility:
 	ld a, [wEnemyMonAbility]
 	ld b, a
 	ld a, [wEnemyMonSpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	ld [wEnemyAbility], a
@@ -3752,7 +3761,7 @@ CheckPlayerPartyForFitPkmn: ; 3d873
 CheckIfCurPartyMonIsFitToFight: ; 3d887
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1HP
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	or [hl]
 	ret nz
@@ -3783,7 +3792,7 @@ CheckIfCurPartyMonIsFitToFight: ; 3d887
 
 InitBattleMon: ; 3da0d
 	ld a, MON_GROUP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld de, wBattleMonGroup
 	ld bc, MON_ID - MON_GROUP
 	rst CopyBytes ; copy Species, Item, Moves
@@ -3813,7 +3822,7 @@ InitBattleMon: ; 3da0d
 
 	ld hl, wPartyMonNicknames
 	ld a, [wCurBattleMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld de, wBattleMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
@@ -3836,7 +3845,7 @@ BattleCheckShininess: ; 3da7c
 GetPartyMonDVs: ; 3da85
 	ld hl, wPartyMon1DVs
 	ld a, [wCurBattleMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 ; 3da97
 
 GetEnemyMonDVs: ; 3da97
@@ -3846,7 +3855,7 @@ GetEnemyMonDVs: ; 3da97
 	ret z
 	ld hl, wOTPartyMon1DVs
 	ld a, [wCurOTMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 ; 3dab1
 
 GetPartyMonPersonality:
@@ -3856,7 +3865,7 @@ GetPartyMonPersonality:
 	ret z
 	ld hl, wPartyMon1Personality
 	ld a, [wCurBattleMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 
 GetEnemyMonPersonality:
 	ld hl, wEnemyBackupPersonality
@@ -3865,7 +3874,7 @@ GetEnemyMonPersonality:
 	ret z
 	ld hl, wOTPartyMon1Personality
 	ld a, [wCurOTMon]
-	jp GetPartyLocation
+	predef_jump GetPartyLocation
 
 ResetPlayerStatLevels: ; 3dab1
 	ld a, BASE_STAT_LEVEL
@@ -3881,7 +3890,7 @@ ResetPlayerStatLevels: ; 3dab1
 InitEnemyMon: ; 3dabd
 	ld a, [wCurPartyMon]
 	ld hl, wOTPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld de, wEnemyMonGroup
 	ld bc, MON_ID - MON_GROUP
 	rst CopyBytes ; copy Species, Item, Moves
@@ -3902,12 +3911,12 @@ InitEnemyMon: ; 3dabd
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 
 	ld a, [wEnemyMonAbility] ; is properly updated at this point, so OK to check
 	ld b, a
 	ld a, [wEnemyMonSpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	ld bc, PKMN_NAME_LENGTH
@@ -3967,7 +3976,7 @@ ForcePlayerSwitch: ; 3db32
 
 SendOutPlayerMon: ; 3db5f
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	hlcoord 1, 5
 	lb bc, 7, 8
@@ -4005,7 +4014,7 @@ SendOutPlayerMon: ; 3db5f
 
 .not_shiny
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, h
 	ld c, l
 	farcall CheckFaintedFrzSlp
@@ -4083,7 +4092,7 @@ PostBattleTasks::
 	ld [wCurPartyMon], a
 	farcall UpdatePkmnStats
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	res TOX, [hl]
 	pop af
 	jr nz, .loop
@@ -4325,7 +4334,7 @@ PursuitSwitch: ; 3dc5b
 	ld [wCurGroup], a
 	ld a, [wBattleMonSpecies]
 	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld a, [wLastPlayerMon]
 	ld c, a
 	ld hl, wBattleParticipantsNotFainted
@@ -4345,7 +4354,7 @@ PursuitSwitch: ; 3dc5b
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld b, a
-	farcall PlayFaintingCry
+	call PlayFaintingCry
 	ld de, SFX_KINESIS
 	call PlaySFX
 	call WaitSFX
@@ -4741,7 +4750,7 @@ UseConfusionHealingItem: ; 3de51
 GetPartymonItem: ; 3df12
 	ld hl, wPartyMon1Item
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld bc, wBattleMonItem
 	ret
 ; 3df1f
@@ -4749,7 +4758,7 @@ GetPartymonItem: ; 3df12
 GetOTPartymonItem: ; 3df1f
 	ld hl, wOTPartyMon1Item
 	ld a, [wCurOTMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld bc, wEnemyMonItem
 	ret
 ; 3df2c
@@ -4809,7 +4818,7 @@ DrawPlayerHUD: ; 3df58
 	push de
 	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1Exp + 2
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld d, h
 	ld e, l
 
@@ -4866,7 +4875,7 @@ PrintPlayerHUD: ; 3dfbf
 
 	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1DVs
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld de, wTempMonDVs
 rept 4
 	ld a, [hli]
@@ -4882,7 +4891,7 @@ endr
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call GetBaseData ;form is known
 
 	pop hl
@@ -6005,7 +6014,7 @@ MoveSelectionScreen:
 
 .ether_elixer_menu
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 .got_menu_type
 	ld de, wListMoves_MoveIndicesBuffer
@@ -6274,7 +6283,7 @@ SwapBattleMoves:
 	ret nz
 	ld hl, wPartyMon1Moves
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	push hl
 	call .swap_bytes
 	pop hl
@@ -6364,7 +6373,7 @@ MoveInfoBox: ; 3e6c8
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .place_accuracy
 .no_power
 	ld de, .NA
@@ -6395,7 +6404,7 @@ MoveInfoBox: ; 3e6c8
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .icons
 .no_acc
 	ld de, .NA
@@ -6450,12 +6459,12 @@ MoveInfoBox: ; 3e6c8
 	ld hl, wStringBuffer2
 	ld de, wStringBuffer1
 	lb bc, 1 | PRINTNUM_LEADINGZEROS, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "/"
 	inc hl
 	ld de, wNamedObjectIndexBuffer
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "@"
 	ld de, wStringBuffer2
 	hlcoord $f, $10
@@ -6757,12 +6766,7 @@ GetRelevantTotalEncounterdPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, EncounterCounterPointerTable
-	ld de, 3
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call dbwArray
 	pop de
 	pop bc
 	ret
@@ -6772,17 +6776,19 @@ GetRelevantTotalDefeatedPokemonSpeciesPointer:
 	push de
 	ld a, [wCurGroup]
 	ld hl, DefeatedCounterPointerTable
-	ld de, 3
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call dbwArray
 	pop de
 	pop bc
 	ret
 
 INCLUDE "data/pokemon/regional_encounter_counter_pointer_table.asm"
+
+Inc16BitNumInHL::
+	inc [hl]
+	ret nz
+	dec hl
+	inc [hl]
+	ret
 
 LoadEnemyMon: ; 3e8eb
 ; Initialize enemy monster parameters
@@ -7018,7 +7024,7 @@ endc
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	ld a, b
 	cp PICKUP
@@ -7050,7 +7056,7 @@ endc
 	push hl
 	push bc
 	push de
-	call CheckKeyItem
+	farcall CheckKeyItem
 	pop de
 	pop bc
 	pop hl
@@ -7104,10 +7110,11 @@ endc
 	push hl
 	push bc
 	push de
-	call GetRelevantBaseData
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
+	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc
@@ -7508,7 +7515,7 @@ FinalPkmnSlideInEnemyMonFrontpic:
 
 	ld a, $1
 	ldh [hBGMapMode], a
-	ld c, 4
+	ld c, 2
 	call DelayFrames
 	pop hl
 	pop bc
@@ -7575,7 +7582,7 @@ BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 
 	ld a, $1
 	ldh [hBGMapMode], a
-	ld c, 4
+	ld c, 2
 	call DelayFrames
 	pop hl
 	pop bc
@@ -7828,7 +7835,7 @@ GiveExperiencePoints: ; 3ee3b
 	ld [wStringBuffer2], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	ld hl, Text_PkmnGainedExpPoint
 	call BattleTextBox
 	ld a, [wStringBuffer2 + 1]
@@ -7862,7 +7869,7 @@ GiveExperiencePoints: ; 3ee3b
 .skip2
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 	push bc
@@ -8023,7 +8030,7 @@ GiveExperiencePoints: ; 3ee3b
 	jp z, ResetBattleParticipants
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, h
 	ld c, l
 	jp .loop
@@ -8881,7 +8888,7 @@ CheckIllusion:
 	ld a, d
 GetIllusion::
 	dec a
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ret
 
@@ -9026,7 +9033,7 @@ InitEnemyTrainer: ; 3f594
 .partyloop
 	push bc
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	or [hl]
 	jr z, .skipfaintedmon
@@ -9090,6 +9097,7 @@ InitEnemyWildmon: ; 3f607
 
 ExitBattle: ; 3f69e
 	call .HandleEndOfBattle
+	call ResetGrassTileCenter
 	call HandleNuzlockeFlags
 	jp CleanUpBattleRAM
 ; 3f6a5
@@ -9124,7 +9132,7 @@ HandleNuzlockeFlags:
 	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	ret nz
 
 	; Only flag landmarks for Nuzlocke runs after getting Poké Balls
@@ -9212,7 +9220,7 @@ CheckPayDay: ; 3f71d
 ShowLinkBattleParticipantsAfterEnd: ; 3f759
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Status
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [wEnemyMonStatus]
 	ld [hl], a
 	call ClearTileMap
@@ -9324,20 +9332,20 @@ ReadAndPrintLinkBattleRecord: ; 3f85f
 	push hl
 	ld de, wd002 + 11 ; win
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 	pop hl
 	ld de, 5
 	add hl, de
 	push hl
 	ld de, wd002 + 13 ; lose
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 	pop hl
 	ld de, 5
 	add hl, de
 	ld de, wd002 + 15 ; draw
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 	jr .next
 
 .PrintFormatString:
@@ -9376,21 +9384,21 @@ ReadAndPrintLinkBattleRecord: ; 3f85f
 	ret c
 
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 11, 4
 	ld de, sLinkBattleLosses
 	call .PrintZerosIfNoSaveFileExists
 
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 16, 4
 	ld de, sLinkBattleDraws
 	call .PrintZerosIfNoSaveFileExists
 
 	lb bc, 2, 4
-	jp PrintNum
+	predef_jump PrintNum
 
 .PrintZerosIfNoSaveFileExists:
 	ld a, [wSavedAtLeastOnce]
@@ -9732,6 +9740,29 @@ AddLastBattleToLinkRecord: ; 3fa42
 	ret
 ; 3fb6c
 
+CompareLong:: ; 31e4
+; Compare bc bytes at de and hl.
+; Return carry if they all match.
+
+	ld a, [de]
+	cp [hl]
+	jr nz, .Diff
+
+	inc de
+	inc hl
+	dec bc
+
+	ld a, b
+	or c
+	jr nz, CompareLong
+
+	scf
+	ret
+
+.Diff:
+	and a
+	ret
+
 InitBattleDisplay: ; 3fb6c
 	call .InitBackPic
 	hlcoord 0, 12
@@ -9767,7 +9798,9 @@ InitBattleDisplay: ; 3fb6c
 	call SetPalettes
 	xor a
 	ldh [hSCX], a
-	ret
+	inc a
+	ld [hCGBPalUpdate], a
+	jp DelayFrame
 ; 3fbd6
 
 .BlankBGMap: ; 3fbd6

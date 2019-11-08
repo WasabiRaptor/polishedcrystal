@@ -158,7 +158,7 @@ DrawEnemyHUDBorder: ; 2c0c5
 
 
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	ret z
 	hlcoord 1, 1
 	ld [hl], "<BALL>"

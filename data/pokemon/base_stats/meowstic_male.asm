@@ -9,7 +9,7 @@
         db 163 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 4 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/meowstic_male/front.dimensions"  
+        INCBIN "gfx/pokemon/meowstic_m/front.dimensions"  
         db KEEN_EYE, INFILTRATOR     ; abilities
         db PRANKSTER    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate

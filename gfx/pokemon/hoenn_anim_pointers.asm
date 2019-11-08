@@ -107,6 +107,7 @@ HoennAnimationPointers::
 	add_anim Tropius
 	add_anim Chimecho
 	add_anim Absol
+	add_anim Wynaut
 	add_anim Snorunt
 	add_anim Glalie
 	add_anim Spheal

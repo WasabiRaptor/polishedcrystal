@@ -155,16 +155,13 @@ _UpdateSound:: ; e805c
 	jr nc, .next
 	; are any sfx channels active?
 	; if so, mute
-	ld hl, wChannel5Flags
-	bit SOUND_CHANNEL_ON, [hl]
-	jr nz, .restnote
+	ld a, [wChannel5Flags]
 	ld hl, wChannel6Flags
-	bit SOUND_CHANNEL_ON, [hl]
-	jr nz, .restnote
+	or [hl]
 	ld hl, wChannel7Flags
-	bit SOUND_CHANNEL_ON, [hl]
-	jr nz, .restnote
+	or [hl]
 	ld hl, wChannel8Flags
+	or [hl]
 	bit SOUND_CHANNEL_ON, [hl]
 	jr z, .next
 .restnote
@@ -2387,8 +2384,8 @@ _PlayCryHeader:: ; e8b79
 
 ; Overload the music id with the cry id
 	ld hl, wMusicID
-	ld [hl], e
-	inc hl
+	ld a, e
+	ld [hli], a
 	ld [hl], d
 
 ; 3-byte pointers (bank, address)
@@ -2472,7 +2469,6 @@ _PlayCryHeader:: ; e8b79
 	pop af
 	dec a
 	jr nz, .loop
-
 
 ; Cries play at max volume, so we save the current volume for later.
 	ld a, [wLastVolume]

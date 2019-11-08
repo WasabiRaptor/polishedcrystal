@@ -27,7 +27,7 @@ CheckSleepingTreeMon:: ; 3eb38
 	ld [wCurSpecies], a
 
 	ld a, [wCurSpecies]
-	ld c, a
+	;ld c, a
 	call GetAbility
 	ld a, b
 	cp INSOMNIA

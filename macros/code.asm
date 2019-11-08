@@ -128,3 +128,15 @@ else
 	ld [wVariableWidthTextVRAM+1], a
 endc
 endm
+
+mon_cry: MACRO
+IF _NARG == 3
+	db \1 ;index
+	dw \2, \3 ;pitch, length
+ELSE
+	db $ff
+	dba \1DEDData ; bank/address
+	db 0 ;padding
+ENDC
+ENDM
+

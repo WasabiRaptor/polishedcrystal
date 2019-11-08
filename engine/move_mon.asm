@@ -131,7 +131,6 @@ endr
 	ld [hl], a ; last move made 0
 	ld [wEggMonInheritMoves], a
 	predef FillMoves ; moves are filled
-
 .next
 	pop de ; 1 ; moves are popped
 rept NUM_MOVES
@@ -179,10 +178,10 @@ endr
 	ld [wd265], a
 	dec a
 	push de ; 2 ; dvs pushed
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	ld a, [wd265]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	pop de ; 1 ; dvs popped
 	pop hl ; 0 ; group is popped
 	push hl ; 1 ; group is pushed
@@ -217,7 +216,7 @@ endr
 	ld hl, wPartyMon1Group
 	predef PokemonToGroupSpeciesAndForm
 	ld a, [wPartyMon1Species]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	pop hl ; 4
 	pop af ; 3 form is popped
@@ -277,7 +276,7 @@ endr
 	push hl ;3 ; group is pushed
 	push bc ;4 ; ability results pushed
 	push de ;5 ; dvs are pushed
-	call CheckKeyItem
+	farcall CheckKeyItem
 	pop de ;4 ; dvs popped
 	pop bc ;3 ; ability popped
 	pop hl ;2 ; group popped
@@ -350,8 +349,7 @@ endr
 	push hl ;3 ; group is pushed
 	push bc ;4 ; cute charm results pushed
 	push de ;5 ; dvs are pushed
-	call GetRelevantBaseData
-	ld a, [wCurPartySpecies]
+	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc 
@@ -566,6 +564,28 @@ FillPP: ; da6d
 	ret
 ; da96
 
+SkipPokemonNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PKMN_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
+SkipPlayerNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PLAYER_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
 AddTempmonToParty: ; da96
 	ld hl, wPartyCount
 	ld a, [hl]
@@ -623,7 +643,7 @@ AddTempmonToParty: ; da96
 	cp EGG
 	jr z, .egg
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	ld hl, wPartyMon1Happiness
 	ld a, [wPartyCount]
 	dec a
@@ -1236,7 +1256,7 @@ SentPkmnIntoBox: ; de6e
 	ld [de], a
 	ld a, [wCurPartySpecies]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	ld a, [wCurPartySpecies]
 	cp UNOWN
 	jr nz, .not_unown
@@ -1329,10 +1349,10 @@ GiveEgg:: ; df8c
 ; when it is successful.  This routine will make
 ; sure that we aren't newly setting flags.
 	push af
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop af
 	push bc
-	call CheckSeenMon
+	farcall CheckSeenMon
 	push bc
 
 	call TryAddMonToParty
@@ -1585,6 +1605,23 @@ RemoveMonFromPartyOrBox: ; e039
 	jp CloseSRAM
 ; e134
 
+CopyDataUntil:: ; 318c
+; Copy [hl .. bc) to de.
+
+; In other words, the source data is
+; from hl up to but not including bc,
+; and the destination is de.
+
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, h
+	cp b
+	jr nz, CopyDataUntil
+	ld a, l
+	cp c
+	jr nz, CopyDataUntil
+	ret
 
 ComputeNPCTrademonStats: ; e134
 	ld a, MON_LEVEL
@@ -1946,7 +1983,58 @@ CalcPkmnStatC: ; e17b
 	pop de ; 1
 	pop hl ; 0
 	ret
-; e277
+	
+GetEnemyPartyParamLocation::
+	push bc
+	ld hl, wOTPartyMons
+	jr PkmnParamLocation
+GetPartyParamLocation:: ; 3917
+; Get the location of parameter a from wCurPartyMon in hl
+	push bc
+	ld hl, wPartyMons
+PkmnParamLocation:
+	cp MON_GROUP_SPECIES_AND_FORM
+	jp z, .species_and_group
+
+	ld c, a
+	ld b, 0
+	add hl, bc
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	pop bc
+	ret
+
+.species_and_group
+	ld a, [wCurPartyMon]
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+	pop bc
+	ret
+; 3927
+
+GetPartyLocation::
+; Add the length of a PartyMon struct to hl a times.
+	push bc
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	pop bc
+	ret
+
+GetNature::
+; 'b' contains the target Nature to check
+; returns nature in b
+	ld a, [wInitialOptions]
+	bit NATURES_OPT, a
+	jr z, .no_nature
+	ld a, b
+	and NATURE_MASK
+	; assume nature is 0-24
+	ld b, a
+	ret
+
+.no_nature:
+	ld b, NO_NATURE
+	ret
 
 GetNatureStatMultiplier::
 ; a points to Nature

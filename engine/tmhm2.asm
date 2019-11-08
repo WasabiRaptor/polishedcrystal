@@ -192,7 +192,7 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	jr nc, .HM
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
+	predef PrintNum
 	jr .okay
 
 .HM:
@@ -203,7 +203,7 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	inc hl
 	ld de, wd265
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	pop af
 	ld [wd265], a
 .okay
@@ -388,7 +388,7 @@ ChooseMonToLearnTMHM_NoRefresh: ; 2c80a
 	ret c
 	push af
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	pop bc ; now contains the former contents of af
 	jr nz, .egg
@@ -421,7 +421,7 @@ TeachTMHM: ; 2c867
 	push bc
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	pop bc
 
 	ld a, c
@@ -461,9 +461,18 @@ TeachTMHM: ; 2c867
 	ret
 ; 2c8bf (b:48bf)
 
+IsHM:: ; 34df
+	cp HM01
+	jr c, .NotHM
+	scf
+	ret
+.NotHM:
+	and a
+	ret
+
 KnowsMove: ; f9ea
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wPutativeTMHMMove]
 	ld b, a
 	ld c, NUM_MOVES

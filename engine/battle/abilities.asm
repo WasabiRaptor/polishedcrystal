@@ -512,7 +512,7 @@ RecieverAbility:
 	predef PokemonToGroupSpeciesAndForm
 	pop hl
 	;species of last mon in party
-	ld c, a
+	;ld c, a
 	push bc
 	ld bc, MON_ABILITY
 	add hl, bc
@@ -722,6 +722,41 @@ RunHitAbilities:
 	jp z, BerserkAbility
 	ret
 
+CompareTwoBytes::
+; Returns f
+;  z - bc == de
+; nz = bc != de
+;  c - bc <  de
+; nc - bc >= de
+	push hl
+	xor a
+	ld l, a
+	ld a, b
+	cp d
+	jr nz, .not_equal
+	ld a, c
+	cp e
+	jr nz, .not_equal
+	set 7, l
+
+.not_equal
+	ld a, b
+	cp d
+	jr c, .less_than
+	jr nz, .greater_than
+	ld a, c
+	cp e
+	jr c, .less_than
+	jr .greater_than
+
+.less_than
+	set 4, l
+.greater_than
+	push hl
+	pop af
+	pop hl
+	ret
+
 BerserkAbility:
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
@@ -813,7 +848,7 @@ BreakDisguise:
 	jr z, .player_backpic
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld de, wEnemyMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
@@ -1568,7 +1603,7 @@ RegainItemByAbility:
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Item
 .got_item_addr
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld [hl], b
 	ret
 
@@ -2053,12 +2088,12 @@ RunPostBattleAbilities::
 
 	push bc
 	ld a, MON_ABILITY
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, [hl]
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurSpecies]
-	ld c, a
+	;ld c, a
 	farcall GetAbility
 	ld a, d
 	and $3f
@@ -2080,14 +2115,14 @@ RunPostBattleAbilities::
 .natural_cure:
 	; Heal status
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	xor a
 	ld [hl], a
 	ret
 
 .Pickup:
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and a
 	ret nz
@@ -2097,12 +2132,12 @@ RunPostBattleAbilities::
 	ret nc
 
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	call GetRandomPickupItem
 	ld b, a
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, b
 	ld [hl], a
 	push bc
@@ -2118,7 +2153,7 @@ RunPostBattleAbilities::
 	push bc
 	push de
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName

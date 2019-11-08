@@ -1219,7 +1219,7 @@ Function28926: ; 28926
 ValidateOTTrademon: ; fb57e
 	ld a, [wd003]
 	ld hl, wOTPartyMon1Species
-	call GetPartyLocation
+	predef GetPartyLocation
 	push hl
 	ld a, [wd003]
 	inc a
@@ -1262,7 +1262,7 @@ Functionfb5dd: ; fb5dd
 	jr z, .next
 	ld a, c
 	ld hl, wPartyMon1HP
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	or [hl]
 	jr nz, .done
@@ -1273,7 +1273,7 @@ Functionfb5dd: ; fb5dd
 	jr nz, .loop
 	ld a, [wd003]
 	ld hl, wOTPartyMon1HP
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	or [hl]
 	jr nz, .done
@@ -1518,20 +1518,20 @@ LinkTrade: ; 28b87
 	push af
 	ld a, [wd002]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld de, wPlayerTrademonOTName
 	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld hl, wPartyMon1ID
 	ld a, [wd002]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	ld [wPlayerTrademonID], a
 	ld a, [hl]
 	ld [wPlayerTrademonID + 1], a
 	ld hl, wPartyMon1DVs
 	ld a, [wd002]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	ld [wPlayerTrademonDVs], a
 	ld a, [hli]
@@ -1540,7 +1540,7 @@ LinkTrade: ; 28b87
 	ld [wPlayerTrademonDVs + 2], a
 	ld hl, wPartyMon1Species
 	ld a, [wd002]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld b, h
 	ld c, l
 	farcall GetCaughtGender
@@ -1559,20 +1559,20 @@ LinkTrade: ; 28b87
 	ld [wOTTrademonSpecies], a
 	ld a, [wd003]
 	ld hl, wOTPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	ld de, wOTTrademonOTName
 	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld hl, wOTPartyMon1ID
 	ld a, [wd003]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	ld [wOTTrademonID], a
 	ld a, [hl]
 	ld [wOTTrademonID + 1], a
 	ld hl, wOTPartyMon1DVs
 	ld a, [wd003]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hli]
 	ld [wOTTrademonDVs], a
 	ld a, [hli]
@@ -1581,7 +1581,7 @@ LinkTrade: ; 28b87
 	ld [wOTTrademonDVs + 2], a
 	ld hl, wOTPartyMon1Species
 	ld a, [wd003]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld b, h
 	ld c, l
 	farcall GetCaughtGender
@@ -1636,7 +1636,7 @@ LinkTrade: ; 28b87
 	ld [wCurPartySpecies], a
 	ld hl, wOTPartyMon1Species
 	ld a, c
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld de, wTempMonSpecies
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst CopyBytes

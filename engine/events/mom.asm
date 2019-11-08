@@ -319,21 +319,21 @@ Mom_ContinueMenuSetup: ; 1651a
 	hlcoord 11, 2
 	ld de, wMomsMoney
 	lb bc, PRINTNUM_MONEY | 3, 7
-	call PrintNum
+	predef PrintNum
 	hlcoord 1, 4
 	ld de, Mom_HeldString
 	call PlaceString
 	hlcoord 11, 4
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 7
-	call PrintNum
+	predef PrintNum
 	hlcoord 1, 6
 	pop de
 	call PlaceString
 	hlcoord 11, 6
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 7
-	call PrintNum
+	predef PrintNum
 	call UpdateSprites
 	jp CopyTilemapAtOnce
 ; 1656b
@@ -363,7 +363,7 @@ Mom_WithdrawDepositMenuJoypad: ; 16571
 	hlcoord 11, 6
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 7
-	call PrintNum
+	predef PrintNum
 	ldh a, [hVBlankCounter]
 	and $10
 	jr nz, .skip

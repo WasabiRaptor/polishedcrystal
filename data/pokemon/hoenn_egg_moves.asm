@@ -170,6 +170,9 @@ TropiusEggMoves::
 AbsolEggMoves::
     db $ff
 
+WynautEggMoves::
+    db $ff
+
 SnoruntEggMoves::
     db $ff
 

@@ -636,7 +636,6 @@ OvercastRoofPals:
 INCLUDE "gfx/tilesets/roofs_overcast.pal"
 
 GetBattlemonBackpicPalette:
-	push de
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
@@ -644,6 +643,7 @@ GetBattlemonBackpicPalette:
 	push af
 	ld a, [wTempBattleMonSpecies]
 	push af
+	push de
 	ld a, [wPlayerAbility]
 	cp ILLUSION
 	ld a, [wTempBattleMonSpecies]
@@ -657,6 +657,7 @@ GetBattlemonBackpicPalette:
 	farcall GetIllusion
 
 .no_illusion
+	pop de
 	call GetPlayerOrMonPalette
 	pop af
 	ld [wTempBattleMonSpecies], a
@@ -668,12 +669,9 @@ GetBattlemonBackpicPalette:
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-
-	pop de
 	ret
 
 GetEnemyFrontpicPalette:
-	push de
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h
@@ -681,6 +679,7 @@ GetEnemyFrontpicPalette:
 	push af
 	ld a, [wTempEnemyMonSpecies]
 	push af
+	push de
 	ld a, [wEnemyAbility]
 	cp ILLUSION
 	ld a, [wTempEnemyMonSpecies]
@@ -694,6 +693,7 @@ GetEnemyFrontpicPalette:
 	farcall GetIllusion
 
 .no_illusion
+	pop de
 	call GetFrontpicPalette
 	pop af
 	ld [wTempEnemyMonSpecies], a
@@ -705,8 +705,6 @@ GetEnemyFrontpicPalette:
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-
-	pop de
 	ret
 
 GetPlayerOrMonPalette:
@@ -776,12 +774,12 @@ LoadPartyMonPalette:
 	; bc = personality
 	ld hl, wPartyMon1Group
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	
 	ld hl, wPartyMon1Personality
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld c, l
 	ld b, h
 	; a = species
@@ -793,7 +791,7 @@ LoadPartyMonPalette:
 	; hl = DVs
 	ld hl, wPartyMon1DVs
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	; b = species
 	ld a, [wCurPartySpecies]
 	ld b, a
