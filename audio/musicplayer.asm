@@ -774,7 +774,7 @@ _PrintSignedNum:
 	ld a, "-"
 .printnum
 	ld [hli], a
-	jp PrintNum
+	predef_jump PrintNum
 
 _EmptyPitchOrTempo: db "     @"
 
@@ -1575,7 +1575,7 @@ DrawSongID:
 	lb bc, 1, 3
 .print_id
 	ld de, wSongSelection
-	jp PrintNum
+	predef_jump PrintNum
 
 .print_digit
 	add "0"
@@ -1789,7 +1789,7 @@ MPLPlaceString:
 	push de
 	ld de, wSelectorCur
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	pop de
 	ld [hl], " "
 	inc hl

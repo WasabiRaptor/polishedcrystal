@@ -40,8 +40,8 @@ AsaokaCity_BlockData:
 	INCBIN "maps/AsaokaCity.ablk.lz"
 
 
-RouteNE1_BlockData:
-	INCBIN "maps/RouteNE1.ablk.lz"
+GelidRavine2_BlockData:
+	INCBIN "maps/GelidRavine2.ablk.lz"
 GelidRavine_BlockData:
 	INCBIN "maps/GelidRavine.ablk.lz"
 RouteNE2_BlockData:

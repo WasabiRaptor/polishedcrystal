@@ -630,8 +630,11 @@ PlaceEnemysName::
 	ld h, b
 	ld l, c
 	ld de, .SpaceText
-	call PlaceString
+	call PlaceSpecialString
 	push bc
+	ld a, [wVariableWidthTextTile]
+	inc a
+	call nz, GoBackVWTile
 	farcall Battle_GetTrainerName
 	pop hl
 	ld de, wStringBuffer1
@@ -650,7 +653,11 @@ PlaceCommandCharacter::
 	ld l, c
 	ld a, [wVariableWidthTextTile]
 	inc a
-	jr z, .noVWtomfoolery
+	call nz, GoBackVWTile
+	pop de
+	jp NextChar
+
+GoBackVWTile:
 	push hl
 	ld a, [wVariableWidthTextVRAM]
 	ld l, a
@@ -666,9 +673,7 @@ PlaceCommandCharacter::
 	dec a
 	ld [wVariableWidthTextTile], a
 	pop hl
-.noVWtomfoolery
-	pop de
-	jp NextChar
+	ret
 
 NextLineChar::
 	call NextVariableWidthTextTile
@@ -1171,9 +1176,23 @@ Text_PrintNum::
 	swap a
 	set PRINTNUM_LEFTALIGN_F, a
 	ld b, a
-	call PrintNum
-	ld b, h
-	ld c, l
+	push hl
+	push de
+	push bc
+	farcall ResetStringBuffer1
+	pop bc
+	pop de
+	ld hl, wStringBuffer1
+	predef PrintNum
+	pop hl
+	inc hl
+	push de
+	ld de, wStringBuffer1
+	call PlaceSpecialString
+	pop de
+	push hl
+	call GoBackVWTile
+	pop bc
 	pop hl
 	ret
 

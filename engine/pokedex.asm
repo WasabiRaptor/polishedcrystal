@@ -363,7 +363,7 @@ Pokedex_PrintTotalEncounters:
 	hlcoord 10, 5
 	ld c, 7
 	ld b, 2 | PRINTNUM_LEFTALIGN
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 9, 6
 	ld de, StringThisCycle
@@ -372,7 +372,7 @@ Pokedex_PrintTotalEncounters:
 	hlcoord 10, 7
 	ld c, 7
 	ld b, 2 | PRINTNUM_LEFTALIGN
-	call PrintNum
+	predef PrintNum
 
 	pop af
 	ldh [rSVBK], a
@@ -406,6 +406,9 @@ Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
 	ld [wDexMonShiny], a
 	ld a, CGB_POKEDEX
 	call Pokedex_GetCGBLayout
+	ld a, 1
+	ld [hCGBPalUpdate], a
+	call DelayFrame
 	ld a, [wCurPartySpecies]
 	call PlayCry
 	jp Pokedex_IncrementDexPointer
@@ -632,7 +635,7 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 .MenuAction_VariantMode: ; 40411 (10:4411)
 	ld a, [wPokedexRegion]
 	inc a
-	cp GROUP_GENERATION_FIVE + 1 ; the max dex group
+	cp GROUP_GENERATION_SIX + 1 ; the max dex group
 	jr c, .next_group
 	ld a, GROUP_GENERATION_ONE
 .next_group
@@ -1163,7 +1166,11 @@ PokedexCountSeenCaught::
 .inc_PokedexSeenCaughtCount
 	push hl
 	ld hl, wPokedexSeenCaughtCount + 1
-	call Inc16BitNumInHL
+	inc [hl]
+	jr nz, .doneinc
+	dec hl
+	inc [hl]
+.doneinc
 	pop hl
 	ret
 
@@ -1187,7 +1194,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld de, wPokedexSeenCaughtCount
 	hlcoord 10, 2
 	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
-	call PrintNum
+	predef PrintNum
 	hlcoord 14, 1
 	ld de, String_OWN
 	call PlaceString
@@ -1197,7 +1204,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	ld de, wPokedexSeenCaughtCount
 	hlcoord 15, 2
 	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
-	call PrintNum
+	predef PrintNum
 
 	pop af ; 0
 	ldh [rSVBK], a
@@ -1433,7 +1440,7 @@ Pokedex_DrawSearchResultsScreenBG: ; 40962 (10:4962)
 	ld de, wDexSearchResultCount
 	hlcoord 9, 7
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jp Pokedex_PlaceFrontpicTopLeftCorner
 
 
@@ -1813,9 +1820,9 @@ Pokexex_PrintNumberAndTypes:
 	call GetBaseData ;form is known
 	ld de, wNatDexNo
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
-	call PrintNum
+	predef PrintNum
 
-	ld bc, PKMN_TILE_NAME_LENGTH - 4
+	ld bc, PKMN_TILE_NAME_LENGTH - 5
 	add hl, bc
 	ld a, [wBaseType1]
 	call Pokexex_PrintType
@@ -1824,7 +1831,7 @@ Pokexex_PrintNumberAndTypes:
 	ld a, [wBaseType2]
 	cp b
 	jp z, .done
-	ld bc, SCREEN_WIDTH
+	ld bc, SCREEN_WIDTH + 1
 	add hl, bc
 	call Pokexex_PrintType
 .done
@@ -1945,7 +1952,7 @@ Pokedex_CheckCaught: ; 40bc4 (10:4bc4)
 	push hl
 	ld a, [wPokedexCurrentMon]
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop hl
 	pop de
 	ret
@@ -1956,7 +1963,7 @@ Pokedex_CheckSeen: ; 40bd0
 	push hl
 	ld a, [wPokedexCurrentMon]
 	dec a
-	call CheckSeenMon
+	farcall CheckSeenMon
 	pop hl
 	pop de
 	ret
@@ -2650,7 +2657,10 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	push hl
 	push af
 	ld a, [wCurGroup]
-	ld hl, VariantFootprintTable
+	ld hl, RegionalFootprintTable
+	call dbwArray
+	pop af
+	push af
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -2659,7 +2669,14 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	jr c, .variant
 	pop af
+	jr .notvariant
+.variant
+	pop af
+	ld a, [wCurForm]
+	dec a
+.notvariant
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes
 	ld b, d
@@ -2786,6 +2803,7 @@ NewPokedexEntry: ; fb877
 	predef GetFrontpic
 	ld a, CGB_POKEDEX
 	call Pokedex_GetCGBLayout
+	call DelayFrame
 	ld a, [wCurPartySpecies]
 	jp PlayCry
 

@@ -49,7 +49,7 @@ GetSwitchScores:
 	ld [wCurSpecies], a
 	ld bc, wPartyMon1Ability - wPartyMon1
 	add hl, bc
-	ld c, a
+	;ld c, a
 	ld b, [hl]
 	farcall GetAbility
 	ld a, b

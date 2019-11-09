@@ -666,7 +666,7 @@ PokedexShow1:
 	ld c, a
 	push bc
 	ld a, c
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop bc
 	jr z, .loop
 	inc c
@@ -967,7 +967,7 @@ LuckyNumberShow8:
 	ld hl, wStringBuffer1
 	ld de, wLuckyIDNumber
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	ld a, "@"
 	ld [wStringBuffer1 + 5], a
 	ld hl, LC_Text8

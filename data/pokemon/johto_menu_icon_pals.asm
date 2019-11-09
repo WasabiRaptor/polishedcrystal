@@ -30,7 +30,6 @@ JohtoMenuMonIconColors::
 	iconpal PINK, RED ; FLAAFFY
 	iconpal BROWN, RED ; AMPHAROS
 	iconpal GREEN, PURPLE; BELLOSSOM
-	iconpal BLUE, GREEN ; AZURILL
 	iconpal BLUE, GREEN ; MARILL
 	iconpal BLUE, BROWN ; AZUMARILL
 	iconpal GREEN, RED ; SUDOWOODO
@@ -63,7 +62,7 @@ JohtoMenuMonIconColors::
 	iconpal RED, GREEN ; SCIZOR
     iconpal RED, BLUE ; SHUCKLE
 	iconpal BLUE, PURPLE ; HERACROSS
-	iconpal BLUE, RED ; SNEASEL
+	iconpal RED, BLUE ; SNEASEL
 	iconpal BROWN, GREEN ; TEDDIURSA
 	iconpal BROWN, GREEN ; URSARING
 	iconpal RED, GRAY ; SLUGMA
@@ -73,6 +72,7 @@ JohtoMenuMonIconColors::
 	iconpal PINK, BLUE ; CORSOLA
 	iconpal BLUE, GRAY ; REMORAID
 	iconpal RED, TEAL ; OCTILLERY
+	iconpal RED, BLUE ; DELIBIRD
 	iconpal BLUE, BLUE ; MANTINE
 	iconpal GRAY, GREEN ; SKARMORY
 	iconpal RED, GRAY ; HOUNDOUR

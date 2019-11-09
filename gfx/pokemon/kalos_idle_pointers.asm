@@ -15,7 +15,7 @@ KalosAnimationIdlePointers::
 	add_idleanim Talonflame
 	add_idleanim Scatterbug
 	add_idleanim Spewpa
-	add_idleanim Vivvilon
+	add_idleanim Vivillon
 	add_idleanim Litleo
 	add_idleanim Pyroar
 	add_idleanim Flabebe
@@ -38,11 +38,11 @@ KalosAnimationIdlePointers::
 	add_idleanim Inkay
 	add_idleanim Malamar
 	add_idleanim Binacle
-	add_idleanim Barbracle
+	add_idleanim Barbaracle
 	add_idleanim Skrelp
 	add_idleanim Dragalge
 	add_idleanim Clauncher
-	add_idleanim Clawlitzer
+	add_idleanim Clawitzer
 	add_idleanim Helioptile
 	add_idleanim Heliolisk
 	add_idleanim Tyrunt

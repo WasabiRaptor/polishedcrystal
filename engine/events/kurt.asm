@@ -178,7 +178,7 @@ PlaceApricornQuantity: ; 88126
 	inc hl
 	ld de, wItemQuantityChangeBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 88139
 
 Kurt_GetQuantityOfApricorn: ; 88139

@@ -70,7 +70,7 @@ ENDM
 
 dba: MACRO ; dbw bank, address
 	rept _NARG
-	dbw BANK(\1), \1
+	dbw LOW(BANK(\1)), \1
 	shift
 	endr
 ENDM

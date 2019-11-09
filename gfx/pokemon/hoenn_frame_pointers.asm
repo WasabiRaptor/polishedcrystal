@@ -107,6 +107,7 @@ HoennFramesPointers::
 	add_frames Tropius
 	add_frames Chimecho
 	add_frames Absol
+	add_frames Wynaut
 	add_frames Snorunt
 	add_frames Glalie
 	add_frames Spheal

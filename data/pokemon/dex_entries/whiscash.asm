@@ -5,5 +5,5 @@
 	next "high intensities to intimidate its"
 	next "opponents. It swallows its prey"
 	
-	page "whole—along with mud from the"
+	page "whole-along with mud from the"
 	next "swamp floor.@"

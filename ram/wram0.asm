@@ -782,6 +782,13 @@ wDexCurrentUnownIndex::
 wDexMonForm:: ds 1
 wPokedexDataEnd::
 
+NEXTU
+; Party Editor
+wEditorDummyByte:: ds 1
+wEditorDexNumber:: ds 2
+wEditorFormNumber:: ds 1
+wEditorCursorPosition:: ds 2
+
 ENDU
 
 ENDU
@@ -853,6 +860,9 @@ wcc4a:: ds 84
 wcc9e:: ds 130
 
 ENDU
+wHasPlayerMoved:: ds 1
+wGrassTileAddress:: ds 2
+wPrevGrassTileAddress:: ds 2
 
 
 SECTION "Video", WRAM0

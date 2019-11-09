@@ -1071,7 +1071,7 @@ RandomPhoneRareWildMon: ; 2a4ab
 	push bc
 	dec c
 	ld a, c
-	call CheckSeenMon
+	farcall CheckSeenMon
 	pop bc
 	jr nz, .done
 ; Since we haven't seen it, have the caller tell us about it.

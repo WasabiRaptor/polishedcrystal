@@ -107,6 +107,7 @@ HoennPokedexEntryPointers::
 	add_pokedexentry Tropius
 	add_pokedexentry Chimecho
 	add_pokedexentry Absol
+	add_pokedexentry Wynaut
 	add_pokedexentry Snorunt
 	add_pokedexentry Glalie
 	add_pokedexentry Spheal

@@ -112,6 +112,7 @@ HoennEggMovePointers::
 	add_eggmoves Chingling
 	add_eggmoves NoHoenn
 	add_eggmoves Absol
+	add_eggmoves Wynaut
 	add_eggmoves Snorunt
 	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn

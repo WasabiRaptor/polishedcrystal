@@ -5,5 +5,5 @@
 	next "million years ago. It's said that"
 	next "living specimens can still be"
 	
-	page "seen in a certain region—a rare"
+	page "seen in a certain region-a rare"
 	next "sight.@"

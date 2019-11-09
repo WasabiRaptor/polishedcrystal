@@ -18,7 +18,7 @@ BattlePartyAttr::
 DoBattlePartyAttr:
 	ld b, 0
 	add hl, bc
-	call GetPartyLocation
+	predef GetPartyLocation
 	or 1
 	ld a, [hl]
 	pop bc
@@ -88,13 +88,13 @@ UpdateBattleMonInParty::
 	; fallthrough
 UpdateBattleMon::
 	ld hl, wPartyMon1Form
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [wBattleMonForm]
 	ld [hl], a
 
 	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1Level
-	call GetPartyLocation
+	predef GetPartyLocation
 
 	ld d, h
 	ld e, l
@@ -111,13 +111,13 @@ UpdateEnemyMonInParty::
 
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Form
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [wEnemyMonForm]
 	ld [hl], a
 
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Level
-	call GetPartyLocation
+	predef GetPartyLocation
 
 	ld d, h
 	ld e, l

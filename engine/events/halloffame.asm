@@ -272,7 +272,7 @@ AnimateHOFMonEntrance: ; 865b5
 	ld a, " "
 	call ByteFill
 	hlcoord 6, 5
-	call _PrepMonFrontpic
+	farcall _PrepMonFrontpic
 	call ApplyTilemapInVBlank
 	xor a
 	ldh [hBGMapMode], a
@@ -388,7 +388,7 @@ _HallOfFamePC: ; 86650
 	hlcoord 2, 2
 	ld de, wHallOfFameTempWinCount
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	hlcoord 11, 2
 
 .finish
@@ -479,7 +479,7 @@ DisplayHOFMon: ; 86748
 	xor a
 	ld [wBoxAlignment], a
 	hlcoord 6, 5
-	call _PrepMonFrontpic
+	farcall _PrepMonFrontpic
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .print_id_no
@@ -490,7 +490,7 @@ DisplayHOFMon: ; 86748
 	hlcoord 3, 13
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 3
-	call PrintNum
+	predef PrintNum
 	call GetPokemonName
 	hlcoord 7, 13
 	call PlaceString
@@ -524,7 +524,7 @@ DisplayHOFMon: ; 86748
 	hlcoord 10, 16
 	ld de, wTempMonID
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	jp PrintNum
+	predef_jump PrintNum
 ; 86810
 
 HOF_AnimatePlayerPic: ; 86810
@@ -590,19 +590,19 @@ HOF_AnimatePlayerPic: ; 86810
 	hlcoord 4, 6
 	ld de, wPlayerID
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	hlcoord 1, 8
 	ld de, .PlayTime
 	call PlaceString
 	hlcoord 3, 9
 	ld de, wGameTimeHours
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 	ld [hl], "<COLON>"
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
+	predef PrintNum
 	call ApplyTilemapInVBlank
 	farjp ProfOaksPCRating
 ; 868ed

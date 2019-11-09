@@ -134,11 +134,11 @@ SlotsLoop: ; 927af (24:67af)
 	hlcoord 4, 1
 	ld de, wCoins
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	hlcoord 11, 1
 	ld de, wPayout
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 4
-	jp PrintNum
+	predef_jump PrintNum
 
 ; 92811 (24:6811)
 

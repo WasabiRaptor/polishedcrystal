@@ -2,7 +2,7 @@
 	dw 5, 104 ; height, weight
 
 	db "Voltorb is extremely"
-	next "sensitive—it explodes at the"
+	next "sensitive-it explodes at the"
 	next "slightest of shocks. It is"
 	
 	page "rumored that it was first"

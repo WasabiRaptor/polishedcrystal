@@ -3,7 +3,7 @@
 
 	db "Beedrill is extremely"
 	next "territorial. No one should ever"
-	next "approach its nest—this is for"
+	next "approach its nest-this is for"
 	
 	page "their own safety. If angered,"
 	next "they will attack in a furious"

@@ -45,7 +45,7 @@ ChangeHappiness: ; 71c2
 
 	ld hl, wPartyMon1Happiness
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 
 	ld d, h
 	ld e, l
@@ -116,7 +116,7 @@ GetExtraHappiness:
 
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Item
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hl]
 	cp SOOTHE_BELL
 	jr nz, .no_soothe_bell
@@ -131,7 +131,7 @@ GetExtraHappiness:
 
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1CaughtBall
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hl]
 	and CAUGHTBALL_MASK
 	cp LUXURY_BALL

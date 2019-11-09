@@ -2,7 +2,7 @@
 	dw 19, 520 ; height, weight
 
 	db "Blaziken has incredibly strong"
-	next "legs—it can easily clear a"
+	next "legs-it can easily clear a"
 	next "30-story building in one leap.@"
 	
 	page "This Pokémon's blazing"
