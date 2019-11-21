@@ -1753,7 +1753,7 @@ GetForgottenMoves::
 	ld b, 100 ; Gen VII behaviour
 	inc b ; so that we can use jr nc
 .loop
-	pop af ;0 
+	pop af ;0
 	push af;1
 	call GetFarByte
 	inc hl
@@ -1893,7 +1893,7 @@ MoveScreen_ListMoves:
 	; Get default PP for moves
 	ld c, NUM_MOVES
 	ld hl, wTempMonMoves
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 .defaultpp_loop
 	ld a, [hli]
 	push hl
@@ -1918,7 +1918,7 @@ MoveScreen_ListMoves:
 	ld a, MON_PP
 	predef GetPartyParamLocation
 	ld c, NUM_MOVES
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 	ld a, [wMoveScreenOffset]
 .currentpp_loop
 	and a

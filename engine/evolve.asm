@@ -150,7 +150,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	cp TR_ANYTIME
 	jp z, .proceed
 	cp TR_MORNDAY
@@ -171,7 +171,7 @@ EvolveAfterBattle_MasterLoop:
 .item
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	ld b, a
 	ld a, [wCurItem]
 	cp b
@@ -188,7 +188,7 @@ EvolveAfterBattle_MasterLoop:
 .holding
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	ld b, a
 	ld a, [wTempMonItem]
 	cp b
@@ -208,7 +208,7 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	cp b
 	jp nz, .dont_evolve_3
 	jp .proceed
@@ -216,7 +216,7 @@ EvolveAfterBattle_MasterLoop:
 .move
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	push hl
 	push bc
 	ld b, a
@@ -238,7 +238,7 @@ endr
 .evs
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	push hl
 	push bc
 	ld hl, wTempMonSpecies
@@ -668,11 +668,12 @@ FillMoves: ; 424e1
 	pop de ; 0
 	ld c, b
 .GetMove:
-	inc hl
+	inc hl ; inc from move byte one to move byte two
+	inc hl ; inc from move byte two to level
 .GetLevel:
 	ld a, c ;bank
 	call GetFarByte
-	inc hl
+	inc hl ; inc from level to move byte 1
 	and a
 	jp z, .done
 	ld b, a
@@ -692,14 +693,31 @@ FillMoves: ; 424e1
 	ld c, NUM_MOVES
 .CheckRepeat:
 	ld a, b ;bank
-	call GetFarByte
-	push bc
+	call GetFarByte ; get move byte 1
+	push bc ; 2
 	ld b, a
 	ld a, [de]
-	inc de
 	cp b
-	pop bc
+	pop bc ; 1
+	jr nz, .Next
+	ld a, b ;bank
+	inc hl ; inc to move byte 2
+	call GetFarByte ; get move byte 2
+	push bc ; 2
+	ld b, a
+	push de
+	inc de ; inc to move byte 2
+	inc de
+	inc de
+	inc de
+	ld a, [de] ; get byte 2 of move slot
+	pop de
+	cp b
+	pop bc ; 1
+	dec hl ; dec to move byte 1
 	jr z, .NextMove
+.Next
+	inc de ; inc to byte 1 of next move slot
 	dec c
 	jr nz, .CheckRepeat
 	pop de ; 0
@@ -710,20 +728,23 @@ FillMoves: ; 424e1
 	and a
 	jr z, .LearnMove
 	inc de
-	dec c
+	dec c ; needs to be preserved as it knows what slot the move is
 	jr nz, .CheckSlot
 	pop de ; 0
 	push de ; 1
 	push hl ; 2
 	ld h, d
 	ld l, e
+	push bc ; 3
 	call ShiftMoves
+	call ShiftMoves
+	pop bc ; 2
 	ld a, [wEggMonInheritMoves]
 	and a
 	jr z, .ShiftedMove
 	push de ; 3
 	push bc ; 4
-	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES - 1)
+	ld bc, MON_CUR_PP - MON_MOVES_HIGH
 	add hl, bc
 	ld d, h
 	ld e, l
@@ -736,21 +757,38 @@ FillMoves: ; 424e1
 
 .LearnMove:
 	ld a, b ;bank
-	call GetFarByte
+	call GetFarByte ; get move byte 1
+	ld [de], a
+	inc hl ; inc to move byte 2
+	inc de ; inc to move slot byte 2
+	inc de
+	inc de
+	inc de
+	ld a, b ;bank
+	call GetFarByte ; get move byte 2
+	dec hl ; dec back to move byte 1
 	ld [de], a
 	ld a, [wEggMonInheritMoves]
 	and a
-	jr z, .NextMove
+	jp z, .NextMove
 	push hl ; 2
 	push bc ; 3
 	ld a, b ;bank
-	call GetFarByte
-	ld hl, MON_PP - MON_MOVES
+	call GetFarByte ; get move byte 1, again
+	ld c, a
+	inc hl
+	ld a, b ;bank
+	call GetFarByte ; get move byte 2, again
+	ld b, a ; we overwrite the bank here, but we don't use it again and its popped back later so no issue
+
+	ld hl, MON_CUR_PP - MON_MOVES_HIGH
+
+	pop de
 	add hl, de
 	push hl ; 4
-	dec a
+	dec bc ; the move is in bc here
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -776,8 +814,6 @@ ShiftMoves: ; 4256e
 	dec c
 	jr nz, .loop
 	ret
-; 42577
-
 
 EvoFlagAction: ; 42577
 	push de
@@ -868,6 +904,7 @@ GetPreEvolution: ; 42581
 GetRelevantEvosAttacksPointers:
 ; return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
+	ld a, [wCurGroup]
 	ld hl, RegionalEvosAttacksPointerTable
 	call dbwArray
 

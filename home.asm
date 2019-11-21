@@ -361,10 +361,24 @@ GetName:: ; 33c3
 	ld h, [hl]
 	ld l, a
 
+	ld a, [wNamedObjectTypeBuffer]
+	cp MOVE_NAME
+	jr z, .twobytename
+
 	ld a, [wCurSpecies]
 	dec a
 	call GetNthString
+	jr .got_string
 
+.twobytename
+	ld a, [wCurSpecies]
+	ld c, a
+	ld a, [wCurGroup]
+	ld b, a
+	dec bc
+	call GetBCthString
+
+.got_string
 	ld de, wStringBuffer1
 	ld bc, ITEM_NAME_LENGTH
 	rst CopyBytes
@@ -386,15 +400,23 @@ GetNthString:: ; 3411
 	ret z
 
 	push bc
-	ld b, a
+	ld c, a
+	ld b, 0
+	call GetBCthString
+	pop bc
+	ret
+
+GetBCthString::
 .readChar
 	ld a, [hli]
 	cp "@"
 	jr nz, .readChar
-	dec b
+	dec c
 	jr nz, .readChar
-	pop bc
-	ret
+	and b
+	ret z
+	dec b
+	jr .readChar
 ; 3420
 
 GetPokemonName:: ; 343b
@@ -426,7 +448,7 @@ GetPokemonName:: ; 343b
 .variant
 	dec a
 	call GetNthString
-	
+
 ; Terminator
 	ld de, wStringBuffer1
 	push de
@@ -444,14 +466,18 @@ GetPokemonName:: ; 343b
 
 INCLUDE "data/pokemon/variant_name_table.asm"
 
+GetMoveName:: ; 34f8
+	ld a, [wNamedObjectIndexBuffer +1]
+	ld [wCurGroup], a
+	ld a, MOVE_NAME
+	jr PutNameInBufferAndGetName
+
 GetCurItemName::
 ; Get item name from item in CurItem
 	ld a, [wCurItem]
 	ld [wNamedObjectIndexBuffer], a
 GetItemName:: ; 3468
 ; Get item name wNamedObjectIndexBuffer.
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, ITEM_NAME
 	jr PutNameInBufferAndGetName
 
@@ -461,41 +487,24 @@ GetCurKeyItemName::
 	ld [wNamedObjectIndexBuffer], a
 GetKeyItemName:: ; 3468
 ; Get key item item name wNamedObjectIndexBuffer.
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, KEY_ITEM_NAME
 	jr PutNameInBufferAndGetName
 
 GetApricornName::
 ; Get apricorn name wNamedObjectIndexBuffer.
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, APRICORN_NAME
 PutNameInBufferAndGetName::
 	push hl
 	push bc
 	ld [wNamedObjectTypeBuffer], a
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurSpecies], a
 	call GetName
 	ld de, wStringBuffer1
 	pop bc
 	pop hl
 	ret
 
-	
-GetMoveName:: ; 34f8
-	push hl
-
-	ld a, MOVE_NAME
-	ld [wNamedObjectTypeBuffer], a
-
-	ld a, [wNamedObjectIndexBuffer] ; move id
-	ld [wCurSpecies], a
-
-	call GetName
-	ld de, wStringBuffer1
-
-	pop hl
-	ret
 ; 350c
 
 ScrollingMenu:: ; 350c
@@ -855,7 +864,7 @@ GetBaseData:: ; 3856
 	ld b, a
 	ld a, d
 	rst Bankswitch
-	
+
 	ld a, b
 ; Get BaseData
 	ld bc, BASEMON_STRUCT_LENGTH
@@ -1021,7 +1030,7 @@ endr
 	pop af
 	ldh [rSVBK], a
 	ret
-	
+
 GetMonPalette::
 	ldh a, [hROMBank]
 	push af
@@ -1045,7 +1054,7 @@ GetMonPalette::
 	jr c, .variant
 	ld a, [wCurPartySpecies]
 .variant
-	dec a	
+	dec a
 	ld l, a
 	ld h, $0
 	add hl, hl

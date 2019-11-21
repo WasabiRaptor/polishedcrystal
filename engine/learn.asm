@@ -111,9 +111,9 @@ LearnMove: ; 6508
 	ld de, wBattleMonMoves
 	ld bc, NUM_MOVES
 	rst CopyBytes
-	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES)
+	ld bc, wPartyMon1CurPP - (wPartyMon1Moves + NUM_MOVES)
 	add hl, bc
-	ld de, wBattleMonPP
+	ld de, wBattleMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	jp .learned

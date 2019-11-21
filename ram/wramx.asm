@@ -376,7 +376,7 @@ wSpinning:: ds 1
 
 wBGMapAnchor:: ds 2
 
-wStairHandler:: ds 1 
+wStairHandler:: ds 1
 
 wOverworldMapAnchor:: ds 2
 wMetatileStandingY:: ds 1
@@ -1090,6 +1090,8 @@ wUnlockedUnowns:: ds 1
 wFirstUnownSeen:: ds 1
 wFirstMagikarpSeen:: ds 1
 
+wCurMoveAddress:: ds 2
+
 wDayCareMan::
 ; bit 7: active
 ; bit 6: monsters are compatible
@@ -1351,7 +1353,7 @@ wGalarPokedexCaughtEnd::
 wPokedexCaughtEnd::
 
 
-wPokedexSeen:: 
+wPokedexSeen::
 
 wKantoPokedexSeen:: flag_array NUM_KANTO_POKEMON
 wKantoPokedexSeenEnd::

@@ -468,11 +468,11 @@ PokeBallEffect: ; e8a2
 
 	ld hl, wWildMonMoves
 	ld de, wEnemyMonMoves
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES * 2
 	rst CopyBytes
 
-	ld hl, wWildMonPP
-	ld de, wEnemyMonPP
+	ld hl, wWildMonCurPP
+	ld de, wEnemyMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 
@@ -926,8 +926,10 @@ GLOBAL EvosAttacksPointers
 
 	push bc
 	ld a, [wTempEnemyMonGroup]
-	farcall GetRelevantEvosAttacksPointers
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
+	ld [wCurSpecies], a
+	farcall GetRelevantEvosAttacksPointers
 	dec a
 	ld b, 0
 	ld c, a
@@ -1596,7 +1598,7 @@ RareCandy: ; ef14
 	ld [wMonType], a
 	predef CopyPkmnToTempMon
 	farcall PrintStatDifferences
-	
+
 	ld hl, wTempMonGroup
 	predef GetPartyMonGroupSpeciesAndForm
 
@@ -2652,7 +2654,7 @@ BattleRestorePP: ; f652
 	ld a, [wPlayerSubStatus2]
 	bit SUBSTATUS_TRANSFORMED, a
 	jr nz, .not_in_battle
-	call .UpdateBattleMonPP
+	call .UpdateBattleMonCurPP
 
 .not_in_battle
 	call Play_SFX_FULL_HEAL
@@ -2660,7 +2662,7 @@ BattleRestorePP: ; f652
 	call PrintText
 	jr FinishPPRestore
 
-.UpdateBattleMonPP:
+.UpdateBattleMonCurPP:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -2676,7 +2678,7 @@ BattleRestorePP: ; f652
 	push hl
 	push de
 	push bc
-rept NUM_MOVES + 5 ; wBattleMonPP - wBattleMonMoves
+rept NUM_MOVES + 5 ; wBattleMonCurPP - wBattleMonMoves
 	inc de
 endr
 	ld bc, MON_PP - MON_MOVES
@@ -2745,13 +2747,12 @@ RestorePP: ; f6e8
 	xor a ; PARTYMON
 	ld [wMonType], a
 	call GetMaxPPOfMove
-	ld hl, wPartyMon1PP
+	ld hl, wPartyMon1CurPP
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call GetMthMoveOfNthPartymon
 	ld a, [wd265]
 	ld b, a
 	ld a, [hl]
-	and (1 << 6) - 1
 	cp b
 	jr nc, .dont_restore
 
@@ -2769,16 +2770,13 @@ RestorePP: ; f6e8
 
 .restore_some
 	ld a, [hl]
-	and (1 << 6) - 1
 	add c
 	cp b
 	jr nc, .restore_all
 	ld b, a
 
 .restore_all
-	ld a, [hl]
-	and 3 << 6
-	or b
+	ld a, b
 	ld [hl], a
 	ret
 
@@ -3037,7 +3035,7 @@ ApplyPPUp: ; f84c
 	ld de, wBuffer1
 	predef FillPP
 	pop hl
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_MOVES_HIGH - MON_MOVES
 	add hl, bc
 	ld de, wBuffer1
 	ld b, 0
@@ -3056,9 +3054,14 @@ ApplyPPUp: ; f84c
 
 .use
 	ld a, [hl]
-	and 3 << 6
+	and PP_UP_USED_MASK
+	push hl
+	ld bc, MON_CUR_PP - MON_MOVES_HIGH
+	add hl, bc
+	ld a, [hl]
+	ld b, a
+	pop hl
 	call nz, ComputeMaxPP
-
 .skip
 	inc hl
 	inc de
@@ -3068,6 +3071,8 @@ ApplyPPUp: ; f84c
 
 
 ComputeMaxPP: ; f881
+	push bc
+	push af ; preserve the PP up input
 	push bc
 	; Divide the base PP by 5.
 	ld a, [de]
@@ -3080,9 +3085,10 @@ ComputeMaxPP: ; f881
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
-	; Get the number of PP, which are bits 6 and 7 of the PP value stored in RAM.
-	ld a, [hl]
-	ld b, a
+	pop bc ; the current PP is in b
+	; Get the number of PP Ups used, which should be inputted
+	pop af
+	; PP up should not be in the PP byte, therefore it won't be loaded into b, and therefore won't be added
 	swap a
 	and $f
 	srl a
@@ -3093,16 +3099,18 @@ ComputeMaxPP: ; f881
 	jr z, .NoPPUp
 
 .loop
+	; because the current PP is in its own byte now, this should not be an issue
+
 	; Normally, a move with 40 PP would have 64 PP with three PP Ups.
 	; Since this would overflow into bit 6, we prevent that from happening
 	; by decreasing the extra amount of PP each PP Up provides, resulting
 	; in a maximum of 61.
 	ldh a, [hQuotient + 2]
-	cp $8
-	jr c, .okay
-	ld a, $7
+	;cp $8
+	;jr c, .okay
+	;ld a, $7
 
-.okay
+;.okay
 	add b
 	ld b, a
 	ld a, [wd265]
@@ -3118,7 +3126,7 @@ ComputeMaxPP: ; f881
 ; f8b9
 
 RestoreAllPP: ; f8b9
-	ld a, MON_PP
+	ld a, MON_CUR_PP
 	predef GetPartyParamLocation
 	push hl
 	ld a, MON_MOVES
@@ -3138,11 +3146,11 @@ RestoreAllPP: ; f8b9
 	call GetMaxPPOfMove
 	pop bc
 	pop de
-	ld a, [de]
-	and 3 << 6
-	ld b, a
+	;ld a, [de]
+	;and 3 << 6
+	;ld b, a
 	ld a, [wd265]
-	add b
+	;add b
 	ld [de], a
 	inc de
 	ld hl, wMenuCursorY
@@ -3187,12 +3195,18 @@ GetMaxPPOfMove: ; f8ec
 	call GetMthMoveOfNthPartymon
 
 .gotdatmove
+	ld a, [hli]
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
 	ld a, [hl]
-	dec a
-
 	push hl
+	and MOVE_HIGH_MASK
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -3202,22 +3216,25 @@ GetMaxPPOfMove: ; f8ec
 	pop hl
 
 	push bc
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_MOVES_HIGH - MON_MOVES
 	ld a, [wMonType]
 	cp WILDMON
 	jr nz, .notwild
-	ld bc, wEnemyMonPP - wEnemyMonMoves
+	ld bc, wEnemyMonCurPP - wEnemyMonMovesHigh
 .notwild
 	add hl, bc
 	ld a, [hl]
-	and 3 << 6
+	and PP_UP_USED_MASK
 	pop bc
+	push af
 
-	or b
+	ld a, b
+
 	ld hl, wStringBuffer1 + 1
 	ld [hl], a
 	xor a
 	ld [wd265], a
+	pop af
 	call ComputeMaxPP
 	ld a, [hl]
 	and (1 << 6) - 1

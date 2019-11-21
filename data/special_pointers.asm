@@ -115,7 +115,6 @@ SpecialsPointers::
 	add_special CheckCaughtCelebi
 	add_special SpecialStatsJudge
 	add_special SpecialBuenasPassword
-	add_special TeachDratiniExtremeSpeed
 	add_special Special_SampleKenjiBreakCountdown
 	add_special SpecialBeastsCheck
 	add_special SpecialBirdsCheck
@@ -157,13 +156,11 @@ SpecialsPointers::
 	add_special RestoreMusic
 	add_special DeleteSavedMusic
 	add_special CheckIfTrendyPhraseIsLucky
-	add_special TeachMagikarpDragonRage
 	add_special Special_ChooseItem
 	add_special GetGourmetManiacPrice
 	add_special GetOreManiacPrice
 	add_special GetFossilManiacPrice
 	add_special Give_hMoneyTemp
-	add_special SetLastPartyMonBall
 	add_special CheckForSurfingPikachu
 	add_special InitializeHiddenGrotto
 	add_special GetHiddenGrottoContents

@@ -90,7 +90,7 @@ DoBattle: ; 3c000
 	ld [wTempBattleMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempBattleMonSpecies], a
-	
+
 	call SlidePlayerPicOut
 	call LoadTileMapToTempTileMap
 	call ResetBattleParticipants
@@ -706,13 +706,13 @@ HandleEncore: ; 3c4df
 	dec a
 	ld [wPlayerEncoreCount], a
 	jr z, .end_player_encore
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld a, [wCurMoveNum]
 	ld c, a
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ret nz
 
 .end_player_encore
@@ -730,13 +730,13 @@ HandleEncore: ; 3c4df
 	dec a
 	ld [wEnemyEncoreCount], a
 	jr z, .end_enemy_encore
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 	ld a, [wCurEnemyMoveNum]
 	ld c, a
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ret nz
 
 .end_enemy_encore
@@ -1389,15 +1389,15 @@ PreparePPRestore:
 	jr nz, .enemy
 	ld hl, wBattleMonMoves
 	push hl
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	jr .copy
 
 .enemy
 	ld hl, wEnemyMonMoves
 	push hl
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 .copy
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	pop hl
@@ -1410,10 +1410,10 @@ GetZeroPPMove:
 ; Returns z if we didn't find a valid move
 	ld bc, 0
 	ld d, NUM_MOVES
-	ld hl, wTempMonPP
+	ld hl, wTempMonCurPP
 .loop
 	ld a, [hli]
-	and $3f ; mask out PP ups
+	and a
 	jr z, .got_zero_pp
 	inc bc
 	dec d
@@ -1442,7 +1442,7 @@ GetNonfullPPMove:
 	ld a, [hl]
 	and a
 	jr z, .all_moves_full
-	ld hl, wTempMonPP
+	ld hl, wTempMonCurPP
 	add hl, bc
 	ld e, [hl]
 	push bc
@@ -1473,7 +1473,7 @@ GetNonfullPPMove:
 
 LeppaRestorePP:
 	; Restore up to 10PP of move bc (0-3)
-	ld hl, wTempMonPP
+	ld hl, wTempMonCurPP
 	add hl, bc
 	ld a, [hl]
 	add 10
@@ -1524,9 +1524,9 @@ LeppaRestorePP:
 	; restore PP of active battle struct
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	jr z, .got_battle_pp
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 .got_battle_pp
 	add hl, bc
 	ld [hl], d
@@ -1540,14 +1540,14 @@ LeppaRestorePP:
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1PP
+	ld hl, wPartyMon1CurPP
 	jr z, .set_party_pp
 	ld a, [wBattleMode]
 	dec a
 	ld a, [wCurOTMon]
-	ld hl, wWildMonPP
+	ld hl, wWildMonCurPP
 	jr z, .pp_vars_ok
-	ld hl, wOTPartyMon1PP
+	ld hl, wOTPartyMon1CurPP
 .set_party_pp
 	push bc
 	push de
@@ -2270,7 +2270,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 
 	pop af
 	ldh [rSVBK], a
-	
+
 
 GiveExperiencePointsAfterCatch:
 	call IsAnyMonHoldingExpShare
@@ -3178,7 +3178,7 @@ MonFaintedAnimation: ; 3d444
 	ld a, " "
 rept 7
 	ld [hli], a
-endr	
+endr
 	call ApplyTilemapInVBlank
 	pop hl
 	pop de
@@ -3595,7 +3595,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
-	call GetBaseData ;form is known 
+	call GetBaseData ;form is known
 	ld a, OTPARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon ;form is known
@@ -6245,7 +6245,7 @@ MoveSelectionScreen:
 SwapBattleMoves:
 	ld hl, wBattleMonMoves
 	call .swap_bytes
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	call .swap_bytes
 	ld hl, wPlayerDisableCount
 	ld a, [hl]
@@ -6345,10 +6345,9 @@ MoveInfoBox: ; 3e6c8
 	ld c, [hl]
 	inc [hl]
 	ld b, 0
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	add hl, bc
 	ld a, [hl]
-	and $3f
 	ld [wStringBuffer1], a
 	call .PrintPP
 
@@ -6507,13 +6506,13 @@ CheckUsableMove:
 	ld b, 0
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	jr z, .got_pp
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 .got_pp
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ld a, 1
 	jr z, .end
 
@@ -6831,7 +6830,7 @@ LoadEnemyMon: ; 3e8eb
 
 	ld a,[wCurPartySpecies]
 	ld c, a
-	
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalEncounters)
@@ -6867,7 +6866,7 @@ LoadEnemyMon: ; 3e8eb
 .initenemymon
 	jp nz, InitEnemyMon
 
-	call GetBaseData ;form is known 
+	call GetBaseData ;form is known
 
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
@@ -7332,7 +7331,7 @@ endr
 
 	; Fill wild PP
 	ld hl, wEnemyMonMoves
-	ld de, wEnemyMonPP
+	ld de, wEnemyMonCurPP
 	predef FillPP
 
 	; Only the first five base stats are copied..
@@ -7393,7 +7392,7 @@ SetLevel:
 	call Divide
 	ldh a, [hQuotient + 2]
 	ld b, a
-	
+
 	ld a, [wCurPartyLevel]
 	cp 201
 	jr z, .MatchPlayerLevel
@@ -8836,7 +8835,7 @@ DropEnemySub: ; 3f486
 	push af
 
 	call GetEnemyIllusion
-	
+
 	ld de, VTiles2
 	predef FrontpicPredef
 	pop af
@@ -9056,8 +9055,8 @@ InitEnemyWildmon: ; 3f607
 	ld de, wWildMonMoves
 	ld bc, NUM_MOVES
 	rst CopyBytes
-	ld hl, wEnemyMonPP
-	ld de, wWildMonPP
+	ld hl, wEnemyMonCurPP
+	ld de, wWildMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	ld hl, wEnemyMonDVs

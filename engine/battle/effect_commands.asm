@@ -801,13 +801,13 @@ BattleCommand_checkobedience: ; 343db
 	jr nz, .DoNothing
 
 
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld de, wBattleMonMoves
 	lb bc, 0, NUM_MOVES
 
 .GetTotalPP:
 	ld a, [hli]
-	and $3f ; exclude pp up
+	;and $3f ; exclude pp up
 	add b
 	ld b, a
 
@@ -822,7 +822,7 @@ BattleCommand_checkobedience: ; 343db
 
 
 .CheckMovePP:
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld a, [wCurMoveNum]
 	ld e, a
 	ld d, 0
@@ -830,7 +830,6 @@ BattleCommand_checkobedience: ; 343db
 
 ; Can't use another move if only one move has PP.
 	ld a, [hl]
-	and $3f
 	cp b
 	jr z, .DoNothing
 
@@ -861,12 +860,12 @@ BattleCommand_checkobedience: ; 343db
 
 ; Make sure it has PP.
 	ld [wCurMoveNum], a
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld e, a
 	ld d, 0
 	add hl, de
 	ld a, [hl]
-	and $3f
+	and a
 	jr z, .RandomMove
 
 
@@ -944,7 +943,7 @@ BattleCommand_usedmovetext: ; 34541
 	pop bc
 	pop hl
 	pop af
-	
+
 ; usedmovetext
 	farjp DisplayUsedMoveText
 
@@ -1033,17 +1032,17 @@ BattleConsumePP:
 	and a
 	ld a, [wCurPartyMon]
 	ld bc, wCurMoveNum
-	ld de, wBattleMonPP
-	ld hl, wPartyMon1PP
+	ld de, wBattleMonCurPP
+	ld hl, wPartyMon1CurPP
 	jr z, .set_party_pp
 	ld a, [wBattleMode]
 	dec a
 	ld a, [wCurOTMon]
 	ld bc, wCurEnemyMoveNum
-	ld de, wEnemyMonPP
-	ld hl, wWildMonPP
+	ld de, wEnemyMonCurPP
+	ld hl, wWildMonCurPP
 	jr z, .pp_vars_ok
-	ld hl, wOTPartyMon1PP
+	ld hl, wOTPartyMon1CurPP
 .set_party_pp
 	predef GetPartyLocation
 .pp_vars_ok
@@ -1060,7 +1059,7 @@ BattleConsumePP:
 
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ret z
 	dec [hl]
 	ld a, BATTLE_VARS_SUBSTATUS2
@@ -3320,7 +3319,7 @@ DittoMetalPowder: ; 352b1
 	and a
 	ld a, [hl]
 	jr nz, .continue
-	
+
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld b, a
@@ -4460,10 +4459,10 @@ BattleCommand_encore: ; 35864
 	cp b
 	jr nz, .got_move
 
-	ld bc, wBattleMonPP - wBattleMonMoves - 1
+	ld bc, wBattleMonCurPP - wBattleMonMoves - 1
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	jp z, .failed
 	ld a, [wAttackMissed]
 	and a
@@ -4704,7 +4703,7 @@ BattleCommand_sketch: ; 35a74
 	ld hl, Moves + MOVE_PP
 	call GetMoveAttr
 	pop hl
-	ld bc, wBattleMonPP - wBattleMonMoves
+	ld bc, wBattleMonCurPP - wBattleMonMoves
 	add hl, bc
 	ld [hl], a
 	pop bc
@@ -4718,7 +4717,7 @@ BattleCommand_sketch: ; 35a74
 ; wildmon
 	ld a, [hl]
 	push bc
-	ld hl, wWildMonPP
+	ld hl, wWildMonCurPP
 	ld b, 0
 	add hl, bc
 	ld [hl], a
@@ -7559,9 +7558,9 @@ BattleCommand_disable: ; 36fed
 
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 	jr z, .got_pp
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 .got_pp
 	ld b, 0
 	add hl, bc
@@ -8811,7 +8810,7 @@ BattleCommand_lowkick:
 	inc hl
 	inc hl
 	call GetFarHalfword ; now we have weight in hl
-	
+
 	ld a, BATTLE_VARS_ABILITY_OPP
     call GetBattleVar
 	cp HEAVY_METAL
@@ -8820,7 +8819,7 @@ BattleCommand_lowkick:
 .not_heavy
 	ld d, h
 	ld e, l
-	
+
 	ld hl, .WeightTable
 .loop2
 	ld a, [hli]

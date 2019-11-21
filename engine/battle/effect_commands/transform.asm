@@ -86,7 +86,7 @@ BattleCommand_transform:
 	ld [de], a
 	inc de
 ; move pointer to stats
-	ld bc, wBattleMonStats - wBattleMonPP
+	ld bc, wBattleMonStats - wBattleMonCurPP
 	add hl, bc
 	push hl
 	ld h, d
@@ -104,7 +104,7 @@ BattleCommand_transform:
 	ld d, h
 	ld e, l
 	pop hl
-	ld bc, wBattleMonPP - wBattleMonStructEnd
+	ld bc, wBattleMonCurPP - wBattleMonStructEnd
 	add hl, bc
 	ld b, NUM_MOVES
 .pp_loop

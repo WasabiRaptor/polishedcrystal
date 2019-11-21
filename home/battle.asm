@@ -83,7 +83,7 @@ UpdateUserInParty::
 	jr nz, UpdateEnemyMonInParty
 	; fallthrough
 UpdateBattleMonInParty::
-; Update level, status, current HP, current species or group (if it isn't transformed)
+; Update level, status, current HP, current PP, and current Form
 	ld a, [wCurBattleMon]
 	; fallthrough
 UpdateBattleMon::
@@ -99,7 +99,7 @@ UpdateBattleMon::
 	ld d, h
 	ld e, l
 	ld hl, wBattleMonLevel
-	ld bc, wBattleMonMaxHP - wBattleMonLevel
+	ld bc, wBattleMonMaxHP - wBattleMonLevel ; level, status, cur PP and cur HP are copied
 	rst CopyBytes
 	ret
 
@@ -293,13 +293,11 @@ BattleJumptable::
 	ret
 
 GetMoveAttr::
-; Assuming hl = Moves + x, return attribute x of move a.
-	push bc
-	ld bc, MOVE_LENGTH
+; Assuming hl = Moves + x, and move is in bc return attribute x of move bc.
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	pop bc
 	ret
 
 ; Damage modifiers. a contains $xy where damage is multiplied by x, then divided by y
@@ -877,6 +875,8 @@ GetBattleVarAddr:: ; 39e7
 ; var id
 	ld a, [hl]
 	ld c, a
+	jr .checkiftwobyte
+.nottwobyte
 	ld b, 0
 
 	ld hl, .vars
@@ -891,6 +891,45 @@ GetBattleVarAddr:: ; 39e7
 
 	pop bc
 	ret
+
+.checkiftwobyte
+	ld hl, .twobytevars
+	ld b, .twobytevarsend - .twobytevars
+.loop
+	cp [hl]
+	jr z, .twobyte
+	inc hl
+	dec b
+	jr z, .nottwobyte
+	jr .loop
+
+.twobyte
+	ld b, 0
+
+	ld hl, .vars
+	add hl, bc
+	add hl, bc
+	pop bc
+
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [hli]
+	ld c, a
+	ld a, [hld]
+	ld b, a
+	ret
+
+.twobytevars:
+	db PLAYER_MOVE_ANIMATION, ENEMY_MOVE_ANIMATION
+	db PLAYER_CUR_MOVE,       ENEMY_CUR_MOVE
+	db ENEMY_CUR_MOVE,        PLAYER_CUR_MOVE
+	db PLAYER_COUNTER_MOVE,   ENEMY_COUNTER_MOVE
+	db ENEMY_COUNTER_MOVE,    PLAYER_COUNTER_MOVE
+	db PLAYER_LAST_MOVE,      ENEMY_LAST_MOVE
+	db ENEMY_LAST_MOVE,       PLAYER_LAST_MOVE
+.twobytevarsend:
 
 .battlevarpairs
 	dw .substatus1, .substatus2, .substatus3, .substatus4

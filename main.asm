@@ -1137,7 +1137,7 @@ DisplayDexEntry: ; 4424d
 	VWTextStart $ca
 	call PlaceString
 .skip_weight
-; Page 
+; Page
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
@@ -1181,7 +1181,7 @@ DisplayDexEntry: ; 4424d
 .statpage
 	push bc
 	VWTextStart $b6
-	
+
 	lb bc, 9, 12
 	hlcoord 8, 1
 	call ClearBox
@@ -1237,7 +1237,7 @@ DisplayDexEntry: ; 4424d
 	call PlaceString
 	hlcoord 9, 9
 	call .EvYieldCheck
-	hlcoord 15, 9	
+	hlcoord 15, 9
 	call .EvYieldCheck
 	xor a
 	push af
@@ -1276,7 +1276,7 @@ DisplayDexEntry: ; 4424d
 	push af
 	cp 2
 	hlcoord 2, 11
-	jr z, .hiddenability	
+	jr z, .hiddenability
 	ld de, .Ability
 	call PlaceString
 	hlcoord 10, 11
@@ -3473,7 +3473,7 @@ GetGender: ; 50bdd
 	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
-	add hl, bc 
+	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, d ;bank
@@ -3562,10 +3562,9 @@ ListMovePP: ; 50c50
 	pop de
 	pop hl
 	push hl
-	ld bc, wTempMonPP - (wTempMonMoves + 1)
+	ld bc, wTempMonCurPP - (wTempMonMoves + 1)
 	add hl, bc
 	ld a, [hl]
-	and $3f
 	ld [wStringBuffer1 + 4], a
 	ld h, d
 	ld l, e
@@ -4101,8 +4100,8 @@ InsertPokemonIntoBox: ; 51322
 	ld de, wTempMonMoves
 	ld bc, NUM_MOVES
 	rst CopyBytes
-	ld hl, wBufferMonPP
-	ld de, wTempMonPP
+	ld hl, wBufferMonCurPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	ld a, [wCurPartyMon]
@@ -4802,7 +4801,7 @@ SetSeenAndCaughtMon:: ; 3380
 	push af ; 2
 	ld a, BANK(wPokedexCaughtSeen)
 	ldh [rSVBK], a
-	
+
 	ld b, SET_FLAG
 	call PokedexFlagAction
 
@@ -4852,7 +4851,7 @@ PokedexFlagAction:: ; 33a1
 GetRelevantSeenPointers::
 	ld hl, RegionalSeenTable
 	jr GetRelevantSeenCaughtPointers
-	
+
 GetRelevantCaughtPointers::
 	ld hl, RegionalCaughtTable
 
@@ -4861,7 +4860,7 @@ GetRelevantSeenCaughtPointers::
 	ld a, [wCurGroup]
 	ld de, 3
 	call IsInArray
-	inc hl 
+	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

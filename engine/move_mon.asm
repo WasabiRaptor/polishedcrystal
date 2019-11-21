@@ -85,7 +85,7 @@ GeneratePartyMonStats: ; d906
 
 	ld a, [wCurPartyGroup]; pokemon group
 	ld [wCurGroup], a
-	ld [de], a 
+	ld [de], a
 	inc de ; species is now in de
 
 	ld a, [wCurPartySpecies]; pokemon species
@@ -114,27 +114,27 @@ GeneratePartyMonStats: ; d906
 	and $f
 	jr nz, .randomlygeneratemoves
 	ld de, wEnemyMonMoves
-rept NUM_MOVES + -1
+rept (NUM_MOVES *2) + -1
 	ld a, [de] ; ememy mon moves loaded into the first three moves
 	inc de
 	ld [hli], a
 endr
-	ld a, [de] ; last enemy move is loaded
+	ld a, [de] ; last byte of enemy move is loaded
 	ld [hl], a
 	jr .next
 
 .randomlygeneratemoves
 	xor a
-rept NUM_MOVES + -1
+rept (NUM_MOVES *2) + -1
 	ld [hli], a ; fist three moves made 0
 endr
-	ld [hl], a ; last move made 0
+	ld [hl], a ; last byte of last move made 0
 	ld [wEggMonInheritMoves], a
 	predef FillMoves ; moves are filled
 .next
 	pop de ; 1 ; moves are popped
-rept NUM_MOVES
-	inc de ; done four times, now mon id is in de
+rept (NUM_MOVES *2)
+	inc de ; done eight times, now mon id is in de
 endr
 	ld a, [wPlayerID]
 	ld [de], a
@@ -352,7 +352,7 @@ endr
 	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
-	add hl, bc 
+	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, d ;bank
@@ -380,22 +380,10 @@ endr
 .initializetrainermonstats
 	ld bc, wDVAndPersonalityBuffer
 rept 5 ; DVs + Personality
-	ld a, [bc] 
+	ld a, [bc]
 	ld [de], a
 	inc bc ; this is done 5 times, loading each DV and then the form into de
-	inc de ; this then leaves PP in de
-endr
-	push hl ;2 ; group is pushed again
-	push de ;3 ; PP is pushed
-	inc hl ; inc group to species
-	inc hl ; inc species to item
-	inc hl ; items are two bytes
-	inc hl ; inc item to moves
-	predef FillPP
-	pop de ;2 ; pop pp
-	pop hl ;1 ; pop group
-rept NUM_MOVES
-	inc de ; inc past pp to happiness
+	inc de ; this then leaves happiness in de
 endr
 	ld a, [wMonType]
 	and $f
@@ -414,18 +402,29 @@ endr
 	ld [de], a
 	inc de ; level is loaded and then inc to status
 	xor a
-rept 2 ; Status
+; status
 	ld [de], a ; status is set to 0
-	inc de ; inc to unused then to HP
+	inc de ; status to cur PP
+	push hl ;2 ; group is pushed again
+	push de ;3 ; cur PP is pushed
+	inc hl ; inc group to species
+	inc hl ; inc species to item
+	inc hl ; items are two bytes
+	inc hl ; inc item to moves
+	predef FillPP
+	pop de ;2 ; pop cur PP
+	pop hl ;1 ; pop group
+rept NUM_MOVES
+	inc de ; inc from CurPP to HP
 endr
 	pop hl ;0 ; pop group
 	push hl ;1 ; push group
-	ld bc, MON_EVS - 1 ; evs -1 would be the last byte of EXP I believe? 
+	ld bc, MON_EVS - 1 ; evs -1 would be the last byte of EXP I believe?
 	add hl, bc ; and then it adds that to hl putting the last byte of exp in there
 	lb bc, FALSE, STAT_HP ; and then calc the HP?
 	call CalcPkmnStatC
 	ldh a, [hProduct + 2]
-	ld [de], a 
+	ld [de], a
 	inc de
 	ldh a, [hProduct + 3]
 	ld [de], a
@@ -439,21 +438,8 @@ rept 5
 	ld a, [hli]
 	ld [de], a
 	inc de ; dvs are in de, and the enemy mon's ain in hl, and this is repeated 5 times
-	; dvs only take three bytes, so this must be copying the personality and form byte as well, ending on PP
+	; dvs only take three bytes, so this must be copying the personality and form byte as well, ending on happiness
 endr
-	pop hl ;1 group is popped
-
-	push hl ;2 and pushed again, without being used at all
-	ld hl, wEnemyMonPP
-	ld b, NUM_MOVES
-.wildmonpploop ; looped four times, with pp in de and in hl, so it does indeed copy the pp over
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .wildmonpploop; ending with happiness in de
-	pop hl  ;1 and once more the group is popped, they still don't do anything with it
-
 	ld a, BASE_HAPPINESS
 	ld [de], a ; base happiness is loaded, what a surprise
 	inc de ; pokerus and caught data is here now
@@ -469,12 +455,19 @@ endr
 	; Copy wEnemyMonStatus
 	ld a, [hli]
 	ld [de], a
-	inc de ; next is unused, huh still crashed when I removed it
-	; Copy wEnemyMonUnused
+	inc de ; next after status is the current PP
+
+	;ld hl, wEnemyMonCurPP
+	ld b, NUM_MOVES
+
+.wildmonpploop ; looped four times, with pp in de and in hl, so it does indeed copy the pp over
 	ld a, [hli]
 	ld [de], a
-	inc de ; 
-	; Copy wEnemyMonHP
+	inc de
+	dec b
+	jr nz, .wildmonpploop; ending with cur HP in de
+
+; Copy wEnemyMonHP
 	ld a, [hli]
 	ld [de], a
 	inc de ; and finally the two bytes for current HP
@@ -501,7 +494,7 @@ endr
 	push de ; 2 ; max hp is pushed
 	call CalcPkmnStats
 	pop hl ; 1 ; and max hp is popped into hl
-	push bc ; 2 ; and then bc is pushed, 
+	push bc ; 2 ; and then bc is pushed,
 	inc hl ; and then we inc the max HP, to get its second byte
 	ld c, [hl] ; and we put the second hp byte in c
 	dec hl ; then we dec back to the first max hp byte
@@ -540,21 +533,24 @@ FillPP: ; da6d
 	ld a, [hli]
 	and a
 	jr z, .next
-	dec a
 	push hl
 	push de
 	push bc
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
+	dec bc
+	ld hl, Moves + MOVE_PP
+	ld a, MOVE_LENGTH
 	rst AddNTimes
-	ld de, wStringBuffer1
 	ld a, BANK(Moves)
-	call FarCopyBytes
+	call GetFarByte
 	pop bc
 	pop de
 	pop hl
-	ld a, [wStringBuffer1 + MOVE_PP]
-
 .next
 	ld [de], a
 	inc de
@@ -924,7 +920,7 @@ RestorePPofDepositedPokemon: ; dcb6
 	add hl, bc
 	push hl
 	push bc
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	pop bc
@@ -1270,8 +1266,8 @@ SentPkmnIntoBox: ; de6e
 	ld bc, NUM_MOVES
 	rst CopyBytes
 
-	ld hl, sBoxMon1PP
-	ld de, wTempMonPP
+	ld hl, sBoxMon1CurPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 
@@ -1983,7 +1979,7 @@ CalcPkmnStatC: ; e17b
 	pop de ; 1
 	pop hl ; 0
 	ret
-	
+
 GetEnemyPartyParamLocation::
 	push bc
 	ld hl, wOTPartyMons
@@ -1994,18 +1990,17 @@ GetPartyParamLocation:: ; 3917
 	ld hl, wPartyMons
 PkmnParamLocation:
 	cp MON_GROUP_SPECIES_AND_FORM
+	ld c, a
+	ld a, [wCurPartyMon]
 	jp z, .species_and_group
 
-	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [wCurPartyMon]
 	call GetPartyLocation
 	pop bc
 	ret
 
 .species_and_group
-	ld a, [wCurPartyMon]
 	call GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	pop bc
@@ -2257,7 +2252,7 @@ GivePoke:: ; e277
 	and a
 	jr nz, .giftball
 	ld a, POKE_BALL
-.giftball	
+.giftball
 	ld c, a
 	farcall SetGiftPartyMonCaughtData
 	jr .skip_nickname

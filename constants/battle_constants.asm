@@ -26,6 +26,7 @@ NUM_LEVEL_STATS EQU const_value
 ; move struct
 	const_def
 	const MOVE_ANIM
+	const MOVE_ANIM_HIGH
 	const MOVE_EFFECT
 	const MOVE_POWER
 	const MOVE_TYPE

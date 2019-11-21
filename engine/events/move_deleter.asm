@@ -137,7 +137,7 @@ MoveDeletion:
 	dec a
 	ld c, a
 	ld b, 0
-	ld hl, wPartyMon1PP
+	ld hl, wPartyMon1CurPP
 	add hl, bc
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
