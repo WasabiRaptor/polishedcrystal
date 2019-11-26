@@ -259,7 +259,7 @@ endr
 	rst AddNTimes
 	ld d, h
 	ld e, l
-	ld hl, MON_PP
+	ld hl, MON_CUR_PP
 	add hl, de
 
 	push hl

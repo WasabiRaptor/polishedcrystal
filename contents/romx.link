@@ -174,7 +174,7 @@ ROMX $22
 	org $4000
 	"Pic Animations Frames 2"
 	"Item Text"
-	
+
 
 ROMX $23
 	org $4000
@@ -199,7 +199,6 @@ ROMX $27
 	org $4000
 	"Moves"
 	"Alola Dex Order"
-	"Pokemon Pics 50"
 
 ROMX $28
 	org $4000

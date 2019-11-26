@@ -4736,7 +4736,7 @@ BattleCommand_sketch: ; 35a74
 	ld a, b
 	ld [hl], a
 	pop af
-	ld de, MON_PP - MON_MOVES
+	ld de, MON_CUR_PP - MON_MOVES
 	add hl, de
 	ld [hl], a
 .done_copy

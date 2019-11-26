@@ -1673,7 +1673,7 @@ MoveScreenLoop:
 	ld a, MON_MOVES
 	predef GetPartyParamLocation
 	call .swap_location
-	ld a, MON_PP
+	ld a, MON_CUR_PP
 	predef GetPartyParamLocation
 	call .swap_location
 
@@ -1915,7 +1915,7 @@ MoveScreen_ListMoves:
 	ld a, [wMoveScreenMode]
 	cp MOVESCREEN_REMINDER
 	jr z, .got_pp
-	ld a, MON_PP
+	ld a, MON_CUR_PP
 	predef GetPartyParamLocation
 	ld c, NUM_MOVES
 	ld de, wTempMonCurPP

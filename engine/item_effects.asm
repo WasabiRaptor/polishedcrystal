@@ -2600,7 +2600,7 @@ RestorePPEffect: ; f5bf
 	cp SKETCH
 	jr z, .CantUsePPUpOnSketch
 
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES
 	add hl, bc
 	ld a, [hl]
 	cp 3 << 6 ; have 3 PP Ups already been used?
@@ -2681,7 +2681,7 @@ BattleRestorePP: ; f652
 rept NUM_MOVES + 5 ; wBattleMonCurPP - wBattleMonMoves
 	inc de
 endr
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES
 	add hl, bc
 	ld a, [hl]
 	ld [de], a

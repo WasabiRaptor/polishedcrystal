@@ -64,7 +64,7 @@ LearnMove: ; 6508
 .learn
 	ld a, [wPutativeTMHMMove]
 	ld [hl], a
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES
 	add hl, bc
 
 	push hl

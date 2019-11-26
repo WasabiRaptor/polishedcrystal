@@ -62,6 +62,8 @@ battle_struct: MACRO
 \1Species::        db
 \1Item::           dw
 \1Moves::          ds NUM_MOVES
+\1PPUp::
+\1MovesHigh::      ds NUM_MOVES
 ; Mon capture assumes personality comes after DVs
 \1DVs::
 \1HPAtkDV::        db
@@ -75,11 +77,10 @@ battle_struct: MACRO
 \1IsEgg::
 \1IsDead::
 \1Form::           db
-\1PP::             ds NUM_MOVES
 \1Happiness::      db
 \1Level::          db
 \1Status::         db
-\1Unused::         db
+\1CurPP::          ds NUM_MOVES ; once curPP is moved to the party struct, the box struct can use these bytes for a move's group, they're already using two bits for PP up so even with curpp they would still be needed
 \1HP::             dw
 \1MaxHP::          dw
 \1Stats:: ; big endian

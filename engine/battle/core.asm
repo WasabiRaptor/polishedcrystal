@@ -6287,7 +6287,7 @@ SwapBattleMoves:
 	push hl
 	call .swap_bytes
 	pop hl
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES
 	add hl, bc
 
 .swap_bytes

@@ -916,7 +916,7 @@ RestorePPofDepositedPokemon: ; dcb6
 	rst AddNTimes
 	ld b, h
 	ld c, l
-	ld hl, MON_PP
+	ld hl, MON_CUR_PP
 	add hl, bc
 	push hl
 	push bc
