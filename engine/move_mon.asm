@@ -539,6 +539,7 @@ FillPP: ; da6d
 	inc hl
 	inc hl
 	inc hl
+	ld c, a
 	ld a, [hl]
 	and MOVE_HIGH_MASK
 	ld b, a

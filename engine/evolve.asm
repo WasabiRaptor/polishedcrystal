@@ -641,36 +641,34 @@ LearnLevelMoves: ; 42487
 FillMoves: ; 424e1
 ; Fill in moves at de for wCurPartySpecies at wCurPartyLevel
 
-	push hl
-	push de
-	push bc
-	push de ; 1
+	push hl ; 1
+	push de ; 2 ; Address to moves
+	push bc ; 3
+	push de ; 4 ; Address to moves
 	call GetRelevantEvosAttacksPointers
 	ld b, 0
 	dec a
-	add a
-	rl b
 	ld c, a
+	add hl, bc
 	add hl, bc
 	ld c, d ;bank
 	ld a, d ;bank
-	pop de ; 0
+	pop de ; 3 Address to moves
 	call GetFarHalfword
 .GoToAttacks:
 	ld a, c ;bank
 	call GetFarByte
-	inc hl
+	inc hl ; move past evos
 	and a
 	jr nz, .GoToAttacks
 	jr .GetLevel
 
 .NextMove:
-	pop de ; 0
-	ld c, b
+	pop de ; 3 ; Address to moves
 .GetMove:
 	inc hl ; inc from move byte one to move byte two
 	inc hl ; inc from move byte two to level
-.GetLevel:
+.GetLevel
 	ld a, c ;bank
 	call GetFarByte
 	inc hl ; inc from level to move byte 1
@@ -679,139 +677,128 @@ FillMoves: ; 424e1
 	ld b, a
 	ld a, [wCurPartyLevel]
 	cp b
-	jp c, .done
+	jp c, .done ; less than the level we don't need to bother
 	ld a, [wEggMonInheritMoves]
 	and a
-	jr z, .CheckMove
+	jr z, .CheckMove ; eggmons can inherit level moves above their level
 	ld a, [wd002]
 	cp b
-	jr nc, .GetMove
+	jr nc, .GetMove ; not sure what this is
 
 .CheckMove:
-	push de ; 1
-	ld b, c ; bank
-	ld c, NUM_MOVES
+	push de ; 4 ; Address to moves
+	ld b, NUM_MOVES
 .CheckRepeat:
-	ld a, b ;bank
+	ld a, c ;bank
 	call GetFarByte ; get move byte 1
-	push bc ; 2
+	inc hl ; move byte 2
+	push bc ; 5 ; bank is in c loop iterator in b
 	ld b, a
-	ld a, [de]
+	ld a, [de] ; get pokemons first move byte for slot
 	cp b
-	pop bc ; 1
-	jr nz, .Next
-	ld a, b ;bank
-	inc hl ; inc to move byte 2
+	jr nz, .NextRepeat ; first byte doesn't match, move slot isn't empty and move isn't repeated, move on to next slot
+	and a ; check if slot was 0, if so no need to check for any other repeats
+	jr z, .EmptySlot
+	push de ; 6 ; move slot address
+	inc de ; move to second byte of move slot
+	inc de
+	inc de
+	inc de
+	ld a, c ;bank
 	call GetFarByte ; get move byte 2
-	push bc ; 2
 	ld b, a
-	push de
-	inc de ; inc to move byte 2
-	inc de
-	inc de
-	inc de
-	ld a, [de] ; get byte 2 of move slot
-	pop de
+	ld a, [de] ; get pokemons second move byte for slot
+	pop de ; 5 ; move slot address
 	cp b
-	pop bc ; 1
-	dec hl ; dec to move byte 1
-	jr z, .NextMove
-.Next
-	inc de ; inc to byte 1 of next move slot
-	dec c
+.NextRepeat
+	inc de ; next move slot
+	pop bc ; 4 ; bank is in c loop iterator in b
+	jr z, .NextMove ; both bytes matched, this move does not need to be learned
+
+	inc hl ; next move level requirement
+	inc hl ; next move byte 1
+	dec b
 	jr nz, .CheckRepeat
-	pop de ; 0
-	push de ; 1
-	ld c, NUM_MOVES
-.CheckSlot:
-	ld a, [de]
-	and a
-	jr z, .LearnMove
-	inc de
-	dec c ; needs to be preserved as it knows what slot the move is
-	jr nz, .CheckSlot
-	pop de ; 0
-	push de ; 1
-	push hl ; 2
+
+	pop de ; 3 ; Address to moves
+	push de ; 4 ; Address to moves
+	push hl ; 5 ; next move address byte 1
+	push bc ; 6 ; bank in c
 	ld h, d
 	ld l, e
-	push bc ; 3
 	call ShiftMoves
+	push de ; 7 ;last move slot
+	inc de
+	inc hl
 	call ShiftMoves
-	pop bc ; 2
-	ld a, [wEggMonInheritMoves]
-	and a
-	jr z, .ShiftedMove
-	push de ; 3
-	push bc ; 4
-	ld bc, MON_CUR_PP - MON_MOVES_HIGH
+	ld bc, MON_CUR_PP - (MON_MOVES_HIGH + 3)
 	add hl, bc
 	ld d, h
 	ld e, l
 	call ShiftMoves
-	pop bc ; 3
-	pop de ; 2
-
-.ShiftedMove:
-	pop hl ; 1
-
-.LearnMove:
-	ld a, b ;bank
-	call GetFarByte ; get move byte 1
+	pop de ; 6 last move slot
+	pop bc ; 5 ; bank in c
+	pop hl ; 4 ; next move address byte 1
+	dec hl ; next move level
+	dec hl ; move byte 2
+	dec hl ; move byte 1
+	ld a, c
+	call GetFarByte
+	ld b, a
+	inc hl ; move byte 2
+	push bc ; 5 ; bank is in c
+;fallthrough
+.EmptySlot
+	ld a, b ; byte 1 of move was in b
+	pop bc ; 4 ; bank is in c
 	ld [de], a
-	inc hl ; inc to move byte 2
 	inc de ; inc to move slot byte 2
 	inc de
 	inc de
 	inc de
-	ld a, b ;bank
+	ld a, c ;bank
 	call GetFarByte ; get move byte 2
-	dec hl ; dec back to move byte 1
 	ld [de], a
 	ld a, [wEggMonInheritMoves]
 	and a
 	jp z, .NextMove
-	push hl ; 2
-	push bc ; 3
-	ld a, b ;bank
-	call GetFarByte ; get move byte 1, again
-	ld c, a
-	inc hl
-	ld a, b ;bank
+	push hl ; 5
+	push bc ; 6
+	ld a, c ;bank
+	ld c, b ; put low byte of move in c
 	call GetFarByte ; get move byte 2, again
-	ld b, a ; we overwrite the bank here, but we don't use it again and its popped back later so no issue
+	ld b, a ; high byte of move in b
 
 	ld hl, MON_CUR_PP - MON_MOVES_HIGH
+	add hl, de ; de is currently the high byte of move slot
 
-	pop de
-	add hl, de
-	push hl ; 4
+	push hl ; 7 ; should be the address to PP for move slot
 	dec bc ; the move is in bc here
 	ld hl, Moves + MOVE_PP
 	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	pop hl ; 3
+	pop hl ; 6 ; should be the address to PP for move slot
 	ld [hl], a
-	pop bc ; 2
-	pop hl ; 1
+	pop bc ; 5
+	pop hl ; 4
 	jp .NextMove
 
 .done
-	pop bc
-	pop de
-	pop hl
+	pop bc ; 2
+	pop de ; 1
+	pop hl ; 0
 	ret
 ; 4256e
 
 ShiftMoves: ; 4256e
-	ld c, NUM_MOVES - 1
+	ld b, NUM_MOVES - 1
 .loop
 	inc de
 	ld a, [de]
 	ld [hli], a
-	dec c
+	dec b
 	jr nz, .loop
 	ret
 

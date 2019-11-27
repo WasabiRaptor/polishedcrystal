@@ -199,6 +199,11 @@ endr
 	loadvar wPartyMon1Stats+8, 999 / $100
 	loadvar wPartyMon1Stats+9, 999 % $100
 	; hm slaves
+	;loadvar wPartyMon1Moves+0, LOW(FLY)
+	;loadvar wPartyMon1Moves+1, LOW(SURF)
+	;loadvar wPartyMon1MovesHigh+0, HIGH(FLY)
+	;loadvar wPartyMon1MovesHigh+1, HIGH(SURF)
+
 	givepoke MEW, 100, LEFTOVERS
 	givepoke MEW, 100, LEFTOVERS
 	loadvar wPartyMon2Moves+0, LOW(FLY)
