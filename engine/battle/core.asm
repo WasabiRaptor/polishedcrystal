@@ -6018,7 +6018,7 @@ MoveSelectionScreen:
 
 .got_menu_type
 	ld de, wListMoves_MoveIndicesBuffer
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES * 2
 	rst CopyBytes
 	xor a
 	ldh [hBGMapMode], a

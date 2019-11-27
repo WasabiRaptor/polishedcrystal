@@ -92,11 +92,11 @@ wd004:: ds 1 ; TODO: replace with meaningful labels
 
 NEXTU
 wMoveScreenMode:: ds 1 ; normal, learning, reminder, deletion
-wMoveScreenSelectedMove:: ds 1 ; move index
+wMoveScreenSelectedMove:: ds 2 ; move index
 wMoveScreenCursor:: ds 1 ; cursor position
 wMoveScreenOffset:: ds 1 ; offset from top of the list in view
 wMoveScreenNumMoves:: ds 1 ; amount of moves in the list
-wMoveScreenMoves:: ds 55
+wMoveScreenMoves:: ds 55 * 2
 
 NEXTU
 ; miscellaneous
@@ -584,9 +584,9 @@ wEveningEncounterRate:: ds 1
 wNiteEncounterRate:: ds 1
 wWaterEncounterRate:: ds 1
 
-wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
+wListMoves_MoveIndicesBuffer:: ds (NUM_MOVES * 2)
 
-wPutativeTMHMMove:: ds 1
+wPutativeTMHMMove:: ds 2
 
 wForgettingMove:: ds 1
 

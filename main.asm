@@ -3711,7 +3711,12 @@ ListMoves: ; 50d6f
 	push de
 	push hl
 	push hl
-	ld [wCurSpecies], a
+	ld [wCurMove], a
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	ld [wCurMoveHigh], a
 	ld a, MOVE_NAME
 	ld [wNamedObjectTypeBuffer], a
 	call GetName
