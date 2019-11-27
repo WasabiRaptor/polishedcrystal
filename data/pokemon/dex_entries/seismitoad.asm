@@ -1,11 +1,8 @@
-    db "VIBRATION@" ; species name
-    dw 411, 1367 ; height, weight
+	db "VIBRATION@" ; species name
+	dw 15, 620 ; height, weight
 
-    db   "By putting power"
-    next "into its bumps, it"
-    next "creates vibrations"
-
-    page "and increases the"
-    next "power of its"
-    next "punches.@" 
-  
+	db "They shoot paralyzing liquid"
+	next "from their head bumps. They"
+	next "use vibration to hurt their"
+	
+	page "opponents.@"

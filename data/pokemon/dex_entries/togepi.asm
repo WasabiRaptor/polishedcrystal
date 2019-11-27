@@ -1,10 +1,12 @@
 	db "SPIKE BALL@" ; species name
-	dw 100, 30 ; height, weight
+	dw 3, 15 ; height, weight
 
-	db   "It is considered"
-	next "to be a symbol of"
-	next "good luck. Its"
-
-	page "shell is said to"
-	next "be filled with"
-	next "happiness.@"
+	db "As its energy, Togepi uses the"
+	next "positive emotions of"
+	next "compassion and pleasure exuded"
+	
+	page "by people and Pokémon. This"
+	next "Pokémon stores up feelings of"
+	next "happiness inside its shell, then"
+	
+	page "shares them with others.@"

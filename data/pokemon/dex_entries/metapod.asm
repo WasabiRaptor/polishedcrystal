@@ -1,10 +1,9 @@
 	db "COCOON@" ; species name
-	dw 204, 220 ; height, weight
+	dw 7, 99 ; height, weight
 
-	db   "This is its pre-"
-	next "evolved form. At"
-	next "this stage, it can"
-
-	page "only harden, so it"
-	next "remains motionless"
-	next "to avoid attack.@"
+	db "Its shell is filled with a thick"
+	next "liquid. All of the cells"
+	next "throughout its body are being"
+	
+	page "rebuilt in preparation for"
+	next "evolution.@"

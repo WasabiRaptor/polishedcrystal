@@ -1,10 +1,8 @@
-	db "STAGBEETLE@" ; species name
-	dw 411, 1210 ; height, weight
+	db "STAG BEETLE@" ; species name
+	dw 15, 550 ; height, weight
 
-	db   "When the tempera-"
-	next "ture drops at"
-	next "night, it sleeps"
-
-	page "on treetops or"
-	next "among roots where"
-	next "it is well hidden.@"
+	db "It gets into territorial disputes"
+	next "with Vikavolt. For some reason,"
+	next "it apparently gets along well"
+	
+	page "with Heracross in Alola.@"

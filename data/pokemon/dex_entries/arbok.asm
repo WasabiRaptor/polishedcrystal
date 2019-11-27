@@ -1,10 +1,8 @@
 	db "COBRA@" ; species name
-	dw 1106, 1430 ; height, weight
+	dw 35, 650 ; height, weight
 
-	db   "To intimidate"
-	next "foes, it spreads"
-	next "its chest wide and"
-
-	page "makes eerie sounds"
-	next "by expelling air"
-	next "from its mouth.@"
+	db "The latest research has"
+	next "determined that there are over"
+	next "20 possible arrangements of"
+	
+	page "the patterns on its stomach.@"

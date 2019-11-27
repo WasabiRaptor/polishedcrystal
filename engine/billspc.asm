@@ -1080,7 +1080,7 @@ PCMonInfo: ; e2ac6 (38:6ac6)
 	call PlaceString
 
 	hlcoord 1, 12
-	call PrintLevel
+	farcall PrintLevel
 
 	ld a, $3
 	ld [wMonType], a
@@ -1813,7 +1813,7 @@ DepositPokemon: ; e307c (38:707c)
 	ld [wCurPartyMon], a
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
 	predef SentGetPkmnIntoFromBox
@@ -1863,7 +1863,7 @@ TryWithdrawPokemon: ; e30fa (38:70fa)
 	call GetSRAMBank
 	ld a, [wCurPartyMon]
 	ld hl, sBoxMonNicknames
-	call GetNick
+	predef GetNick
 	call CloseSRAM
 	xor a
 	ld [wPokemonWithdrawDepositParameter], a
@@ -1919,12 +1919,7 @@ ReleasePKMN_ByePKMN: ; e3180 (38:7180)
 
 	call ApplyTilemapInVBlank
 	ld a, [wCurPartySpecies]
-	call GetCryIndex
-	jr c, .skip_cry
-	ld e, c
-	ld d, b
-	call PlayCryHeader
-.skip_cry
+	call _PlayCry
 
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
@@ -2154,11 +2149,11 @@ CopyNicknameToTemp: ; e3363 (38:7363)
 	ret
 
 CopyOTNameToTemp: ; e3376 (38:7376)
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 	ld de, wBufferMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 
@@ -2359,13 +2354,13 @@ BillsPC_PrintBoxCountAndCapacity: ; e3632
 	hlcoord 13, 11
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_20
 	jp PlaceString
 ; e3663
 
 .Pokemon: ; e3663
-	db "#mon@"
+	db "Pokémon@"
 ; e3668
 
 .out_of_20 ; e3668
@@ -2389,7 +2384,7 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	hlcoord 1, 1
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_20
 	jp PlaceString
 
@@ -2399,7 +2394,7 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	hlcoord 1, 1
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_6
 	jp PlaceString
 

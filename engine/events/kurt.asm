@@ -62,7 +62,7 @@ Kurt_SelectApricorn: ; 88055
 	ld [wMenuCursorBuffer], a
 	xor a
 	ldh [hBGMapMode], a
-	call InitScrollingMenu
+	farcall InitScrollingMenu
 	call UpdateSprites
 	call ScrollingMenu
 	ld a, [wMenuJoypad]
@@ -178,7 +178,7 @@ PlaceApricornQuantity: ; 88126
 	inc hl
 	ld de, wItemQuantityChangeBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 88139
 
 Kurt_GetQuantityOfApricorn: ; 88139

@@ -30,7 +30,6 @@ HoennIconPointers::
 	add_icon Ralts
 	add_icon Kirlia
 	add_icon Gardevoir
-	add_icon Gallade
 	add_icon Surskit
 	add_icon Masquerain
 	add_icon Shroomish
@@ -40,20 +39,20 @@ HoennIconPointers::
 	add_icon Slaking
 	add_icon Nincada
 	add_icon Ninjask
-	add_icon Shedinja 
- 	add_icon Whismur
+	add_icon Shedinja
+	add_icon Whismur
 	add_icon Loudred
 	add_icon Exploud
 	add_icon Makuhita
 	add_icon Hariyama
+	add_icon Azurill
 	add_icon Nosepass
-	add_icon Probopass
 	add_icon Skitty
 	add_icon Delcatty
 	add_icon Sableye
 	add_icon Mawile
-	add_icon Aron 
- 	add_icon Lairon
+	add_icon Aron
+	add_icon Lairon
 	add_icon Aggron
 	add_icon Meditite
 	add_icon Medicham
@@ -63,9 +62,7 @@ HoennIconPointers::
 	add_icon Minun
 	add_icon Volbeat
 	add_icon Illumise
-	add_icon Budew
 	add_icon Roselia
-	add_icon Roserade
 	add_icon Gulpin
 	add_icon Swalot
 	add_icon Carvanha
@@ -82,8 +79,8 @@ HoennIconPointers::
 	add_icon Vibrava
 	add_icon Flygon
 	add_icon Cacnea
-	add_icon Cacturne 
- 	add_icon Swablu
+	add_icon Cacturne
+	add_icon Swablu
 	add_icon Altaria
 	add_icon Zangoose
 	add_icon Seviper
@@ -101,20 +98,18 @@ HoennIconPointers::
 	add_icon Armaldo
 	add_icon Feebas
 	add_icon Milotic
-	add_icon Castform 
+	add_icon Castform
 	add_icon Kecleon
 	add_icon Shuppet
 	add_icon Banette
 	add_icon Duskull
 	add_icon Dusclops
-	add_icon Dusknoir
 	add_icon Tropius
-	add_icon Chingling
 	add_icon Chimecho
 	add_icon Absol
+	add_icon Wynaut
 	add_icon Snorunt
 	add_icon Glalie
-	add_icon Frosslass
 	add_icon Spheal
 	add_icon Sealeo
 	add_icon Walrein
@@ -134,11 +129,8 @@ HoennIconPointers::
 	add_icon Registeel
 	add_icon Latias
 	add_icon Latios
-	add_icon Kyogre 
- 	add_icon Groudon
+	add_icon Kyogre
+	add_icon Groudon
 	add_icon Rayquaza
 	add_icon Jirachi
-	add_icon Deoxys_Defense
-	add_icon Deoxys_Normal
-	add_icon Deoxys_Attack
-	add_icon Deoxys_Speed
+	add_icon Deoxys

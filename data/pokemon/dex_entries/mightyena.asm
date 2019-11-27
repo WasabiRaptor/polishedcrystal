@@ -1,10 +1,10 @@
 	db "BITE@" ; species name
-	dw 303, 816 ; height, weight
+	dw 10, 370 ; height, weight
 
-	db   "It chases down"
-	next "prey in a pack. It"
-	next "will never disobey"
-
-	page "the commands of"
-	next "a skilled"
-	next "Trainer.@"
+	db "Mightyena travel and act as a"
+	next "pack in the wild. The memory of"
+	next "its life in the wild compels the"
+	
+	page "Pokémon to obey only those"
+	next "Trainers that it recognizes to"
+	next "possess superior skill.@"

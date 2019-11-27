@@ -1,13 +1,8 @@
-    db "SEASON@" ; species name
-    dw 200, 430 ; height, weight
+	db "SEASON@" ; species name
+	dw 6, 195 ; height, weight
 
-    db   "Their coloring"
-    next "changes according"
-    next "to the season and"
-
-    page "can be slightly"
-    next "affected by the"
-    next "temperature and" 
-         
-    page "humidity as well.@"
-     
+	db "The turning of the seasons"
+	next "changes the color and scent of"
+	next "this Pokémon's fur. People use"
+	
+	page "it to mark the seasons.@"

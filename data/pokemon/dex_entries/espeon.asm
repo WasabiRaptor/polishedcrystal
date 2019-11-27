@@ -1,10 +1,9 @@
 	db "SUN@" ; species name
-	dw 211, 580 ; height, weight
+	dw 9, 265 ; height, weight
 
-	db   "The tip of its"
-	next "forked tail"
-	next "quivers when it is"
-
-	page "predicting its"
-	next "opponent's next"
-	next "move.@"
+	db "Although it originally had no"
+	next "powers at all, people say its"
+	next "precognitive faculties were"
+	
+	page "awakened by its need to protect"
+	next "itself.@"

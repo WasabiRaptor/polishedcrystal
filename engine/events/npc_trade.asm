@@ -92,17 +92,17 @@ DoNPCTrade: ; fcc63
 	ld [wOTTrademonSpecies], a
 
 	ld a, [wPlayerTrademonSpecies]
-	ld de, wPlayerTrademonSpeciesName
+	ld de, wPlayerTrademonNickname
 	call GetTradeMonName
 	call CopyTradeName
 
 	ld a, [wOTTrademonSpecies]
-	ld de, wOTTrademonSpeciesName
+	ld de, wOTTrademonNickname
 	call GetTradeMonName
 	call CopyTradeName
 
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	call Trade_GetAttributeOfCurrentPartymon
 	ld de, wPlayerTrademonOTName
 	call CopyTradeName
@@ -189,7 +189,7 @@ DoNPCTrade: ; fcc63
 	call CopyTradeName
 
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	call Trade_GetAttributeOfLastPartymon
 	ld hl, wOTTrademonOTName
 	call CopyTradeName
@@ -298,7 +298,7 @@ GetTradeMonName: ; fcde8
 ; fcdf4
 
 CopyTradeName: ; fcdf4
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 ; fcdfb
@@ -439,7 +439,7 @@ TradedForText: ; 0xfcf80
 
 
 TradeIntroText1: ; 0xfcf97
-	; I collect #MON. Do you have @ ? Want to trade it for my @ ?
+	; I collect Pokémon. Do you have @ ? Want to trade it for my @ ?
 	text_jump UnknownText_0x1bd449
 	db "@"
 ; 0xfcf9c
@@ -471,7 +471,7 @@ TradeAfterText1: ; 0xfcfab
 
 TradeIntroText2:
 TradeIntroText3: ; 0xfcfb0
-	; Hi, I'm looking for this #MON. If you have @ , would you trade it for my @ ?
+	; Hi, I'm looking for this Pokémon. If you have @ , would you trade it for my @ ?
 	text_jump UnknownText_0x1bd512
 	db "@"
 ; 0xfcfb5

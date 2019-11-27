@@ -1,10 +1,12 @@
 	db "GENETIC@" ; species name
-	dw 607, 2690 ; height, weight
+	dw 20, 1220 ; height, weight
 
-	db   "Said to rest qui-"
-	next "etly in an"
-	next "undiscovered cave,"
-
-	page "this #MON was"
-	next "created solely for"
-	next "battling.@"
+	db "Mewtwo is a Pokémon that was"
+	next "created by genetic manipulation.@"
+	next "However, even though the"
+	
+	page "scientific power of humans"
+	next "created this Pokémon's body,"
+	next "they failed to endow Mewtwo"
+	
+	page "with a compassionate heart.@"

@@ -1,14 +1,8 @@
-    db "SWORD@" ; species name
-    dw 207, 99 ; height, weight
+	db "SWORD@" ; species name
+	dw 8, 45 ; height, weight
 
-    db   "Honedge divided"
-    next "into two swords,"
-    next "which cooperate"
-
-    page "via telepathy to"
-    next "coordinate attacks"
-    next "and slash their" 
-         
-    page "enemies into"
-    next "ribbons.@" 
-      
+	db "The complex attack patterns of"
+	next "its two swords are unstoppable,"
+	next "even for an opponent greatly"
+	
+	page "accomplished at swordplay.@"

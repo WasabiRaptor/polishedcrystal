@@ -47,54 +47,6 @@ INCLUDE "home/window.asm"
 INCLUDE "home/flag.asm"
 INCLUDE "home/restore_music.asm"
 
-IsAPokemon::
-; Return carry if species a is not a Pokemon.
-	and a
-	jp z, .not_a_pokemon
-	push hl
-	push bc
-	push de
-	push af
-	call GetMaxNumPokemonForGroup
-	pop de
-	jr nc, .not_a_pokemon_2
-	cp d
-	jr c, .not_a_pokemon_2
-	ld a, d
-	and a
-	pop de
-	pop bc
-	pop hl
-	ret
-
-.not_a_pokemon_2
-	pop de
-	pop bc
-	pop hl
-.not_a_pokemon
-	scf
-	ret
-
-GetMaxNumPokemonForGroup::
-	ld a, [wCurGroup]
-	ld hl, RegionalMaxPokemonTable
-	ld de, 2
-	call IsInArray
-	inc hl
-	ld a, [hl]
-	ret
-
-RegionalMaxPokemonTable:
-	db GROUP_GENERATION_ONE, NUM_KANTO_POKEMON
-	db GROUP_GENERATION_TWO, NUM_JOHTO_POKEMON
-	db GROUP_GENERATION_THREE, NUM_HOENN_POKEMON
-	db GROUP_GENERATION_FOUR, NUM_SINNOH_POKEMON
-	db GROUP_GENERATION_FIVE, NUM_UNOVA_POKEMON
-	db GROUP_GENERATION_SIX, NUM_KALOS_POKEMON
-	db GROUP_GENERATION_SEVEN, NUM_ALOLA_POKEMON
-	db GROUP_GENERATION_EIGHT, NUM_GALAR_POKEMON
-	db -1, 0
-
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a
@@ -117,23 +69,6 @@ EnableSpriteUpdates:: ; 2ee4
 ; 2ef6
 
 INCLUDE "home/string.asm"
-
-IsInJohto:: ; 2f17
-; Return z if the player is in Johto, and nz in Kanto or Shamouti Island.
-	call GetCurrentLandmark
-	cp KANTO_LANDMARK
-	jr nc, .kanto_or_orange
-.johto
-	xor a ; JOHTO_REGION
-	and a
-	ret
-
-.kanto_or_orange
-	ld a, KANTO_REGION
-	and a
-	ret
-; 2f3e
-
 INCLUDE "home/item.asm"
 INCLUDE "home/random.asm"
 INCLUDE "home/sram.asm"
@@ -230,102 +165,9 @@ CopyName2:: ; 30d9
 	cp "@"
 	jr nz, .loop
 	ret
-; 30e1
-
-SkipNames:: ; 0x30f4
-; Skip a names.
-	ld bc, NAME_LENGTH
-	and a
-	ret z
-.loop
-	add hl, bc
-	dec a
-	jr nz, .loop
-	ret
 ; 0x30fe
 
 INCLUDE "home/math.asm"
-
-PrintLetterDelay:: ; 313d
-; Wait before printing the next letter.
-
-; The text speed setting in wOptions1 is actually a frame count:
-; 	fast: 1 frame
-; 	mid:  3 frames
-; 	slow: 5 frames
-
-; wTextBoxFlags[!0] and A or B override text speed with a one-frame delay.
-; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
-
-	ld a, [wTextBoxFlags]
-	bit 1, a
-	ret z
-	bit 0, a
-	jr z, .forceFastScroll
-
-	ld a, [wOptions1]
-	bit NO_TEXT_SCROLL, a
-	ret nz
-	and %11
-	ret z
-	ld a, $1
-	ldh [hBGMapHalf], a
-.forceFastScroll
-	push hl
-	push de
-	push bc
-; force fast scroll?
-	ld a, [wTextBoxFlags]
-	bit 0, a
-	ld a, 2
-	jr z, .updateDelay
-; text speed
-	ld a, [wOptions1]
-	and %11
-	rlca
-.updateDelay
-	dec a
-	ld [wTextDelayFrames], a
-.textDelayLoop
-	ld a, [wTextDelayFrames]
-	and a
-	jr z, .done
-	call DelayFrame
-	call GetJoypad
-; Finish execution if A or B is pressed
-	ldh a, [hJoyDown]
-	and A_BUTTON | B_BUTTON
-	jr z, .textDelayLoop
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-; 318c
-
-CopyDataUntil:: ; 318c
-; Copy [hl .. bc) to de.
-
-; In other words, the source data is
-; from hl up to but not including bc,
-; and the destination is de.
-
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, h
-	cp b
-	jr nz, CopyDataUntil
-	ld a, l
-	cp c
-	jr nz, CopyDataUntil
-	ret
-; 0x3198
-
-PrintNum:: ; 3198
-	homecall _PrintNum
-	ret
-; 31a4
 
 FarPrintText:: ; 31b0
 	ldh [hBuffer], a
@@ -361,28 +203,7 @@ StringCmp:: ; 31db
 	ret
 ; 0x31e4
 
-CompareLong:: ; 31e4
-; Compare bc bytes at de and hl.
-; Return carry if they all match.
 
-	ld a, [de]
-	cp [hl]
-	jr nz, .Diff
-
-	inc de
-	inc hl
-	dec bc
-
-	ld a, b
-	or c
-	jr nz, CompareLong
-
-	scf
-	ret
-
-.Diff:
-	and a
-	ret
 ; 31f3
 
 SetPalettes:: ; 32f9
@@ -492,8 +313,6 @@ GetWeekday:: ; 3376
 	ret
 ; 3380
 
-INCLUDE "home/pokedex_flags.asm"
-
 NamesPointers:: ; 33ab
 	dba KantoNames
 	dba MoveNames
@@ -585,14 +404,14 @@ GetPokemonName:: ; 343b
 	push af
 	push hl
 
-; Each name is ten characters
-	ld a, [wNamedObjectIndexBuffer]
-
 ; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 
-	ld hl, VariantNamePointerTable
+	ld hl, RegionalNamePointerTable
+	call dbwArray
+
+	ld a, [wNamedObjectIndexBuffer]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -601,12 +420,13 @@ GetPokemonName:: ; 343b
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-
+	ld a, [wCurForm]
+	jr c, .variant
 	ld a, [wNamedObjectIndexBuffer]
+.variant
 	dec a
-	ld bc, PKMN_NAME_LENGTH - 1
-	rst AddNTimes
-
+	call GetNthString
+	
 ; Terminator
 	ld de, wStringBuffer1
 	push de
@@ -630,9 +450,6 @@ GetCurItemName::
 	ld [wNamedObjectIndexBuffer], a
 GetItemName:: ; 3468
 ; Get item name wNamedObjectIndexBuffer.
-
-	push hl
-	push bc
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, ITEM_NAME
@@ -644,8 +461,6 @@ GetCurKeyItemName::
 	ld [wNamedObjectIndexBuffer], a
 GetKeyItemName:: ; 3468
 ; Get key item item name wNamedObjectIndexBuffer.
-	push hl
-	push bc
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, KEY_ITEM_NAME
@@ -653,12 +468,12 @@ GetKeyItemName:: ; 3468
 
 GetApricornName::
 ; Get apricorn name wNamedObjectIndexBuffer.
-	push hl
-	push bc
 	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
 	ld a, APRICORN_NAME
 PutNameInBufferAndGetName::
+	push hl
+	push bc
 	ld [wNamedObjectTypeBuffer], a
 	call GetName
 	ld de, wStringBuffer1
@@ -666,113 +481,7 @@ PutNameInBufferAndGetName::
 	pop hl
 	ret
 
-GetTMHMName:: ; 3487
-; Get TM/HM name by item id wNamedObjectIndexBuffer.
-
-	push hl
-	push de
-	push bc
-	ld a, [wNamedObjectIndexBuffer]
-	push af
-
-; TM/HM prefix
-	cp HM01
-	push af
-	jr c, .TM
-
-	ld hl, .HMText
-	ld bc, .HMTextEnd - .HMText
-	jr .asm_34a1
-
-.TM:
-	ld hl, .TMText
-	ld bc, .TMTextEnd - .TMText
-
-.asm_34a1
-	ld de, wStringBuffer1
-	rst CopyBytes
-
-; TM/HM number
-	ld a, [wNamedObjectIndexBuffer]
-	ld c, a
-
-; HM numbers start from 51, not 1
-	pop af
-	ld a, c
-	jr c, .asm_34b9
-	sub NUM_TMS
-.asm_34b9
-	inc a
-
-; Divide and mod by 10 to get the top and bottom digits respectively
-	ld b, "0"
-.mod10
-	sub 10
-	jr c, .asm_34c2
-	inc b
-	jr .mod10
-.asm_34c2
-	add 10
-
-	push af
-	ld a, b
-	ld [de], a
-	inc de
-	pop af
-
-	ld b, "0"
-	add b
-	ld [de], a
-
-; End the string
-	inc de
-	ld a, "@"
-	ld [de], a
-
-	pop af
-	ld [wNamedObjectIndexBuffer], a
-	pop bc
-	pop de
-	pop hl
-	ld de, wStringBuffer1
-	ret
-
-.TMText:
-	db "TM"
-.TMTextEnd:
-	db "@"
-
-.HMText:
-	db "HM"
-.HMTextEnd:
-	db "@"
-; 34df
-
-IsHM:: ; 34df
-	cp HM01
-	jr c, .NotHM
-	scf
-	ret
-.NotHM:
-	and a
-	ret
-; 34e7
-
-IsHMMove:: ; 34e7
-	ld hl, .HMMoves
-	ld de, 1
-	jp IsInArray
-
-.HMMoves:
-	db CUT
-	db FLY
-	db SURF
-	db STRENGTH
-	db WATERFALL
-	db WHIRLPOOL
-	db -1
-; 34f8
-
+	
 GetMoveName:: ; 34f8
 	push hl
 
@@ -814,46 +523,6 @@ ScrollingMenu:: ; 350c
 	jp nz, UpdateTimePals
 	jp SetPalettes
 ; 352f
-
-InitScrollingMenu:: ; 352f
-	ld a, [wMenuBorderTopCoord]
-	dec a
-	ld b, a
-	ld a, [wMenuBorderBottomCoord]
-	sub b
-	ld d, a
-	ld a, [wMenuBorderLeftCoord]
-	dec a
-	ld c, a
-	ld a, [wMenuBorderRightCoord]
-	sub c
-	ld e, a
-	push de
-	call Coord2Tile
-	pop bc
-	jp TextBox
-; 354b
-
-JoyTextDelay_ForcehJoyDown:: ; 354b joypad
-	call DelayFrame
-
-	ldh a, [hInMenu]
-	push af
-	ld a, $1
-	ldh [hInMenu], a
-	call JoyTextDelay
-	pop af
-	ldh [hInMenu], a
-
-	ldh a, [hJoyLast]
-	and D_RIGHT + D_LEFT + D_UP + D_DOWN
-	ld c, a
-	ldh a, [hJoyPressed]
-	and A_BUTTON + B_BUTTON + SELECT + START
-	or c
-	ld c, a
-	ret
-; 3567
 
 HandleStoneQueue:: ; 3567
 	ldh a, [hROMBank]
@@ -1050,7 +719,7 @@ CheckTrainerBattle:: ; 360d
 
 ; Is facing the player...
 	call GetObjectStruct
-	call FacingPlayerDistance_bc
+	homecall FacingPlayerDistance_bc
 	jr nc, .next
 
 ; ...within their sight range
@@ -1167,233 +836,9 @@ LoadTrainer_continue:: ; 367e
 	end_if_just_battled
 	jumpstashedtext
 
-FacingPlayerDistance_bc:: ; 36a5
-	push de
-	call FacingPlayerDistance
-	ld b, d
-	ld c, e
-	pop de
-	ret
-; 36ad
-
-FacingPlayerDistance:: ; 36ad
-; Return carry if the sprite at bc is facing the player,
-; and its distance in d.
-
-	ld hl, OBJECT_NEXT_MAP_X ; x
-	add hl, bc
-	ld d, [hl]
-
-	ld hl, OBJECT_NEXT_MAP_Y ; y
-	add hl, bc
-	ld e, [hl]
-
-	ld a, [wPlayerStandingMapX]
-	cp d
-	jr z, .CheckY
-
-	ld a, [wPlayerStandingMapY]
-	cp e
-	jr z, .CheckX
-
-	and a
-	ret
-
-.CheckY:
-	ld a, [wPlayerStandingMapY]
-	sub e
-	jr z, .NotFacing
-	jr nc, .Above
-
-; Below
-	cpl
-	inc a
-	ld d, a
-	ld e, OW_UP
-	jr .CheckFacing
-
-.Above:
-	ld d, a
-	ld e, OW_DOWN
-	jr .CheckFacing
-
-.CheckX:
-	ld a, [wPlayerStandingMapX]
-	sub d
-	jr z, .NotFacing
-	jr nc, .Left
-
-; Right
-	cpl
-	inc a
-	ld d, a
-	ld e, OW_LEFT
-	jr .CheckFacing
-
-.Left:
-	ld d, a
-	ld e, OW_RIGHT
-
-.CheckFacing:
-	call GetSpriteDirection
-	cp e
-	jr nz, .NotFacing
-	scf
-	ret
-
-.NotFacing:
-	and a
-	ret
-; 36f5
-
-PrintWinLossText:: ; 3718
-	ld a, [wBattleResult]
-	ld hl, wWinTextPointer
-	and $f
-	jr z, .ok
-	ld hl, wLossTextPointer
-
-.ok
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wMapScriptHeaderBank]
-	call FarPrintText
-	call ApplyTilemapInVBlank
-	jp WaitPressAorB_BlinkCursor
-; 3741
-
-DrawBattleHPBar:: ; 3750
-; Draw an HP bar d tiles long at hl
-; Fill it up to e pixels
-
-	push hl
-	push de
-	push bc
-
-; Place 'HP:'
-	ld a, "<HP1>"
-	ld [hli], a
-	inc a ; ld a, "<HP2>"
-	ld [hli], a
-
-; Draw a template
-	push hl
-	inc a ; ld a, "<NOHP>" ; empty bar
-.template
-	ld [hli], a
-	dec d
-	jr nz, .template
-	ld a, "<HPEND>" ; bar end cap
-	ld [hl], a
-	pop hl
-
-; Safety check # pixels
-	ld a, e
-	and a
-	jr nz, .fill
-	ld a, c
-	and a
-	jr z, .done
-	ld e, 1
-
-.fill
-; Keep drawing tiles until pixel length is reached
-	ld a, e
-	sub TILE_WIDTH
-	jr c, .lastbar
-
-	ld e, a
-	ld a, "<FULLHP>"
-	ld [hli], a
-	ld a, e
-	and a
-	jr z, .done
-	jr .fill
-
-.lastbar
-	ld a, "<NOHP>"
-	add e
-	ld [hl], a
-
-.done
-	pop bc
-	pop de
-	pop hl
-	ret
-; 3786
-
-PrepMonFrontpic:: ; 3786
-	ld a, $1
-	ld [wBoxAlignment], a
-
-_PrepMonFrontpic:: ; 378b
-	ld a, [wCurPartySpecies]
-	call IsAPokemon
-	jr c, .not_pokemon
-
-	push hl
-	ld de, VTiles2
-	predef GetFrontpic
-	pop hl
-	xor a
-	ldh [hGraphicStartTile], a
-	lb bc, 7, 7
-	predef PlaceGraphic
-	xor a
-	ld [wBoxAlignment], a
-	ret
-
-.not_pokemon
-	xor a
-	ld [wBoxAlignment], a
-	inc a
-	ld [wCurPartySpecies], a
-	ret
-; 37b6
-
 INCLUDE "home/cry.asm"
 
-PrintLevel:: ; 382d
-; Print wTempMonLevel at hl
-
-	ld a, [wTempMonLevel]
-	ld [hl], "<LV>"
-	inc hl
-
-; How many digits?
-	ld c, 2
-	cp 100
-	jr c, Print8BitNumRightAlign
-
-; 3-digit numbers overwrite the :L.
-	dec hl
-	inc c
-	; fallthrough
-
-Print8BitNumRightAlign:: ; 3842
-	ld [wd265], a
-	ld de, wd265
-	ld b, PRINTNUM_LEFTALIGN | 1
-	jp PrintNum
 ; 384d
-
-GetRelevantBaseData::
-	ld a, [wCurGroup]
-;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
-; returns c for variants, nc for normal species
-	ld hl, VariantBaseDataTable
-	ld de, 4
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
-
-INCLUDE "data/pokemon/variant_base_data_table.asm"
 
 GetBaseData:: ; 3856
 	push bc
@@ -1402,7 +847,7 @@ GetBaseData:: ; 3856
 	ldh a, [hROMBank]
 	push af
 
-	call GetRelevantBaseData
+	homecall GetRelevantBaseData
 	push hl
 
 	ld a, [wCurSpecies]
@@ -1435,67 +880,17 @@ GetBaseData:: ; 3856
 	ret
 ; 389c
 
-
-GetNature::
-; 'b' contains the target Nature to check
-; returns nature in b
-	ld a, [wInitialOptions]
-	bit NATURES_OPT, a
-	jr z, .no_nature
-	ld a, b
-	and NATURE_MASK
-	; assume nature is 0-24
-	ld b, a
-	ret
-
-.no_nature:
-	ld b, NO_NATURE
-	ret
-
-GetLeadAbility::
-; Returns ability of lead mon unless it's an Egg. Used for field
-; abilities
-	ld a, [wPartyMon1IsEgg]
-	and IS_EGG_MASK
-	xor IS_EGG_MASK
-	ret z
-	ld a, [wPartyMon1Species] ;merely making sure that party mon 1 is a pokemon I guess
-	inc a
-	ret z
-	dec a
-	ret z
-	push bc
-	push de
-	push hl
-	ld hl, wPartyMon1Group
-	predef PokemonToGroupSpeciesAndForm
-	ld a, [wCurSpecies]
-	ld c, a
-	ld a, [wPartyMon1Ability]
-	ld b, a
-	call GetAbility
-	ld a, b
-	pop hl
-	pop de
-	pop bc
-	ret
-
 GetAbility::
 ; 'b' contains the target ability to check
-; 'c' contains the target species
 ; returns ability in b
-; preserves curspecies and base data
+; preserves base data
 	push de
 	ldh a, [hROMBank]
 	push af
 	push hl
 	push bc
 
-	call GetRelevantBaseData
-	pop bc
-	push bc
-	ld a, c
-
+	homecall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
@@ -1523,147 +918,6 @@ GetAbility::
 	pop af
 	rst Bankswitch
 	pop de
-	ret
-
-GetCurNick:: ; 389c
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMonNicknames
-
-GetNick:: ; 38a2
-; Get nickname a from list hl.
-
-	push hl
-	push bc
-
-	call SkipNames
-	ld de, wStringBuffer1
-
-	push de
-	ld bc, PKMN_NAME_LENGTH
-	rst CopyBytes
-	pop de
-
-	pop bc
-	pop hl
-	ret
-; 38bb
-
-PrintBCDNumber:: ; 38bb
-; function to print a BCD (Binary-coded decimal) number
-; de = address of BCD number
-; hl = destination address
-; c = flags and length
-; bit 7: if set, do not print leading zeroes
-;        if unset, print leading zeroes
-; bit 6: if set, left-align the string (do not pad empty digits with spaces)
-;        if unset, right-align the string
-; bit 5: if set, print currency symbol at the beginning of the string
-;        if unset, do not print the currency symbol
-; bits 0-4: length of BCD number in bytes
-; Note that bits 5 and 7 are modified during execution. The above reflects
-; their meaning at the beginning of the functions's execution.
-	ld b, c ; save flags in b
-	res 7, c
-	res 6, c
-	res 5, c ; c now holds the length
-	bit 5, b
-	jr z, .loop
-	bit 7, b
-	jr nz, .loop ; skip currency symbol
-	ld [hl], "¥"
-	inc hl
-.loop
-	ld a, [de]
-	swap a
-	call PrintBCDDigit ; print upper digit
-	ld a, [de]
-	call PrintBCDDigit ; print lower digit
-	inc de
-	dec c
-	jr nz, .loop
-	bit 7, b ; were any non-zero digits printed?
-	ret z ; if so, we are done
-.numberEqualsZero ; if every digit of the BCD number is zero
-	bit 6, b ; left or right alignment?
-	jr nz, .skipRightAlignmentAdjustment
-	dec hl ; if the string is right-aligned, it needs to be moved back one space
-.skipRightAlignmentAdjustment
-	bit 5, b
-	jr z, .skipCurrencySymbol
-	ld [hl], "¥" ; currency symbol
-	inc hl
-.skipCurrencySymbol
-	ld [hl], "0"
-	call PrintLetterDelay
-	inc hl
-	ret
-; 0x38f2
-
-PrintBCDDigit:: ; 38f2
-	and a, %00001111
-	and a
-	jr z, .zeroDigit
-.nonzeroDigit
-	bit 7, b ; have any non-space characters been printed?
-	jr z, .outputDigit
-; if bit 7 is set, then no numbers have been printed yet
-	bit 5, b ; print the currency symbol?
-	jr z, .skipCurrencySymbol
-	ld [hl], "¥"
-	inc hl
-	res 5, b
-.skipCurrencySymbol
-	res 7, b ; unset 7 to indicate that a nonzero digit has been reached
-.outputDigit
-	add a, "0"
-	ld [hli], a
-	jp PrintLetterDelay
-
-.zeroDigit
-	bit 7, b ; either printing leading zeroes or already reached a nonzero digit?
-	jr z, .outputDigit ; if so, print a zero digit
-	bit 6, b ; left or right alignment?
-	ret nz
-	ld a, " "
-	ld [hli], a ; if right-aligned, "print" a space by advancing the pointer
-	ret
-; 0x3917
-
-GetEnemyPartyParamLocation::
-	push bc
-	ld hl, wOTPartyMons
-	jr PkmnParamLocation
-GetPartyParamLocation:: ; 3917
-; Get the location of parameter a from wCurPartyMon in hl
-	push bc
-	ld hl, wPartyMons
-PkmnParamLocation:
-	cp MON_GROUP_SPECIES_AND_FORM
-	jp z, .species_and_group
-
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	pop bc
-	ret
-
-.species_and_group
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	predef GetPartyMonGroupSpeciesAndForm
-	pop bc
-	ret
-
-; 3927
-
-GetPartyLocation::
-; Add the length of a PartyMon struct to hl a times.
-	push bc
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	pop bc
 	ret
 
 INCLUDE "home/battle.asm"
@@ -1737,11 +991,91 @@ ReinitSpriteAnimFrame:: ; 3b3c
 
 INCLUDE "home/audio.asm"
 
-Inc16BitNumInHL::
-	inc [hl]
-	ret nz
-	xor a
-	ld [hl], a
-	dec hl
-	inc [hl]
+LoadPalette_White_Col1_Col2_Black::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals)
+	ldh [rSVBK], a
+
+	ld a, (palred 31 + palgreen 31 + palblue 31) % $100
+	ld [de], a
+	inc de
+	ld a, (palred 31 + palgreen 31 + palblue 31) / $100
+	ld [de], a
+	inc de
+
+	ld c, 2 * 2
+.loop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec c
+	jr nz, .loop
+
+	xor a ; RGB 00, 00, 00
+rept 2
+	ld [de], a
+	inc de
+endr
+
+	pop af
+	ldh [rSVBK], a
 	ret
+	
+GetMonPalette::
+	ldh a, [hROMBank]
+	push af
+; given species in wCurPartySpecies, return *Palette in bc
+	push de
+	push bc
+	ld a, [wCurGroup]
+	ld hl, RegionalPaletteTable
+	call dbwArray
+	ld a, [wCurPartySpecies]
+	ld de, 4
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	rst Bankswitch
+
+	ld a, [hli]
+	ld c, a
+	ld b, [hl]
+	ld a, [wCurForm]
+	jr c, .variant
+	ld a, [wCurPartySpecies]
+.variant
+	dec a	
+	ld l, a
+	ld h, $0
+	add hl, hl
+	add hl, hl
+	add hl, hl
+	add hl, bc
+	pop bc
+	homecall CheckShininess
+	jp nc, .not_shiny
+rept 4
+	inc hl
+endr
+.not_shiny
+	pop de
+
+	call LoadPalette_White_Col1_Col2_Black
+
+	pop af
+	rst Bankswitch
+	ret
+
+INCLUDE "data/pokemon/variant_palette_table.asm"
+
+dbwArray::
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+INCLUDE "home/ded.asm"

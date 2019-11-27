@@ -1,10 +1,9 @@
-    db "SWORD@" ; species name
-    dw 207, 44 ; height, weight
+	db "SWORD@" ; species name
+	dw 8, 20 ; height, weight
 
-    db   "If anyone dares to"
-    next "grab its hilt, it"
-    next "wraps a blue cloth"
-
-    page "around their arm"
-    next "and drains their"
-    next "life energy.@" 
+	db "If anyone dares to grab its hilt,"
+	next "it wraps a blue cloth around"
+	next "that person's arm and drains"
+	
+	page "that person's life energy"
+	next "completely.@"

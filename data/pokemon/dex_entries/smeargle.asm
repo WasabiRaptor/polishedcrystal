@@ -1,10 +1,8 @@
 	db "PAINTER@" ; species name
-	dw 311, 1280 ; height, weight
+	dw 12, 580 ; height, weight
 
-	db   "The color of the"
-	next "mysterious fluid"
-	next "secreted from its"
-
-	page "tail is predeter-"
-	next "mined for each"
-	next "SMEARGLE.@"
+	db "The fluid of Smeargle's tail"
+	next "secretions changes in the"
+	next "intensity of its hue as the"
+	
+	page "Pokémon's emotions change.@"

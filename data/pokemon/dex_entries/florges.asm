@@ -1,13 +1,9 @@
-    db "GARDEN@" ; species name
-    dw 307, 220 ; height, weight
+	db "GARDEN@" ; species name
+	dw 11, 100 ; height, weight
 
-    db   "In ancient times,"
-    next "kings of castles"
-    next "would invite"
-
-    page "Florges to create"
-    next "flower gardens to"
-    next "embellish their" 
-         
-    page "castle domains.@"
-     
+	db "It controls the flowers it"
+	next "grows. The petal blizzards that"
+	next "Florges triggers are"
+	
+	page "overwhelming in their beauty"
+	next "and power.@"

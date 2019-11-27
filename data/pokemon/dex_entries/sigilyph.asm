@@ -1,10 +1,8 @@
-    db "AVIANOID@" ; species name
-    dw 407, 309 ; height, weight
+	db "AVIANOID@" ; species name
+	dw 14, 140 ; height, weight
 
-    db   "The guardians of"
-    next "an ancient city,"
-    next "they always fly"
-
-    page "the same route"
-    next "while watching out"
-    next "for invaders.@" 
+	db "The guardians of an ancient"
+	next "city, they always fly the same"
+	next "route while keeping watch for"
+	
+	page "invaders.@"

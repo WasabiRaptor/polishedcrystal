@@ -1,10 +1,8 @@
 	db "GOLDFISH@" ; species name
-	dw 403, 860 ; height, weight
+	dw 13, 390 ; height, weight
 
-	db   "When autumn comes,"
-	next "the males patrol"
-	next "the area around"
-
-	page "their nests in"
-	next "order to protect"
-	next "their offspring.@"
+	db "Its horn spins like a drill to"
+	next "steadily hollow out rocks-even"
+	next "harder ones. The coloration of"
+	
+	page "the male is more vivid.@"

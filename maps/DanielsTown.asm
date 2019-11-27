@@ -51,7 +51,7 @@ checkpokegroupscript:
 
 MysteryDungeonEnterScript:
 	opentext
-	givepoke SENTRET, 5, NO_ITEM, FEMALE, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke SNIVY, 5, NO_ITEM, FEMALE, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	givepoke CYNDAQUIL, 5, NO_ITEM, MALE, LUXURY_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	givepoke DITTO, 5;, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
@@ -105,7 +105,7 @@ TrainerYoungsterJoey:
 YoungsterJoey1SeenText:
 	text "I just lost, so"
 	line "I'm trying to find"
-	cont "more #mon."
+	cont "more Pokémon."
 
 	para "Wait! You look"
 	line "weak! Come on,"
@@ -119,7 +119,7 @@ YoungsterJoey1BeatenText:
 
 YoungsterJoey1AfterText:
 	text "Do I have to have"
-	line "more #mon in"
+	line "more Pokémon in"
 
 	para "order to battle"
 	line "better?"

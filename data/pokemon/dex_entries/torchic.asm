@@ -1,10 +1,10 @@
 	db "CHICK@" ; species name
-	dw 140, 550 ; height, width
+	dw 4, 25 ; height, weight
 
-	db   "It has a flame sac"
-	next "inside its belly"
-	next "that perpetually"
+	db "Torchic has a place inside its"
+	next "body where it keeps its flame.@"
+	next "Give it a hug-it will be glowing"
 	
-	page "burns."
-	next "It feels warm if"
-	next "it is hugged.@"
+	page "with warmth. This Pokémon is"
+	next "covered all over by a fluffy"
+	next "coat of down.@"

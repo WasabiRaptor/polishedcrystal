@@ -82,6 +82,8 @@ WritePartyMenuTilemap: ; 0x5005f
 ; 5009b
 
 PlacePartyNicknames: ; 5009b
+	call InitVariableWidthTiles
+	VWTextStart $a0
 	hlcoord 3, 1
 	ld a, [wPartyCount]
 	and a
@@ -94,7 +96,7 @@ PlacePartyNicknames: ; 5009b
 	push hl
 	ld hl, wPartyMonNicknames
 	ld a, b
-	call GetNick
+	predef GetNick
 	pop hl
 	call PlaceString
 	pop hl
@@ -135,7 +137,7 @@ PlacePartyHPBar: ; 500cf
 	call PlacePartymonHPBar
 	pop hl
 	ld d, $6
-	call DrawBattleHPBar
+	farcall DrawBattleHPBar
 	ld hl, wHPPals
 	ld a, [wHPPalIndex]
 	ld c, a
@@ -206,14 +208,14 @@ PlacePartyMenuHPDigits: ; 50138
 	pop hl
 	push de
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 	pop de
 	ld a, "/"
 	ld [hli], a
 	inc de
 	inc de
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 
 .next
 	pop hl
@@ -256,7 +258,7 @@ PlacePartyMonLevel: ; 50176
 .ThreeDigits:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
 ; .okay
-	call PrintNum
+	predef PrintNum
 
 .next
 	pop hl
@@ -303,6 +305,7 @@ PlacePartyMonStatus: ; 501b2
 ; 501e0
 
 PlacePartyMonTMHMCompatibility: ; 501e0
+	call SetupAbleUnableStrings
 	ld a, [wPartyCount]
 	and a
 	ret z
@@ -317,7 +320,7 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	predef CanLearnTMHMMove
 	pop hl
@@ -339,24 +342,41 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 	ld a, c
 	and a
 	jr nz, .able
-	ld de, .string_not_able
+	ld de, string_not_able
 	ret
 
 .able
-	ld de, .string_able
+	ld de, string_able
 	ret
 ; 50221
 
-.string_able ; 50221
+string_able: ; 50221
+	db $a2, $a3, $a4, "@"
+	;  A    bl   e
+
+string_not_able: ; 50226
+	db $9e, $9f, $a0, $a1, "@"
+	;  U    na   bl   e
+
+SetupAbleUnableStrings:
+	hlcoord $1, $10
+	ld de, .unable
+	VWTextStart $9e
+	call InitVariableWidthTiles
+	call PlaceString
+	ld de, .able
+	call PlaceString
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
+	ret
+
+.able
 	db "Able@"
-; 50226
-
-.string_not_able ; 50226
-	db "Not able@"
-; 5022f
-
+.unable
+	db "Unable@"
 
 PlacePartyMonEvoStoneCompatibility: ; 5022f
+	call SetupAbleUnableStrings
 	ld a, [wPartyCount]
 	and a
 	ret z
@@ -371,7 +391,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
@@ -421,7 +441,8 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 .loop2
 	ld a, [hli]
 	and a
-	jr z, .nope
+	ld de, string_not_able
+	ret z
 	inc hl
 	inc hl
 	cp EVOLVE_ITEM
@@ -433,20 +454,9 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	inc hl
 	inc hl
 	jr nz, .loop2
-	ld de, .string_able
-	ret
-
-.nope
-	ld de, .string_not_able
+	ld de, string_able
 	ret
 ; 502a3
-
-.string_able ; 502a3
-	db "Able@"
-; 502a8
-.string_not_able ; 502a8
-	db "Not able@"
-; 502b1
 
 
 PlacePartyMonGender: ; 502b1
@@ -467,7 +477,7 @@ PlacePartyMonGender: ; 502b1
 	ld [wCurPartyMon], a
 	push hl
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 
 	pop hl
@@ -502,6 +512,7 @@ PlacePartyMonGender: ; 502b1
 
 
 PlacePartyMonRemindable: ; 501e0
+	call SetupAbleUnableStrings
 	ld a, [wPartyCount]
 	and a
 	ret z
@@ -516,7 +527,7 @@ PlacePartyMonRemindable: ; 501e0
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 
 	farcall GetForgottenMoves
@@ -538,23 +549,10 @@ PlacePartyMonRemindable: ; 501e0
 .PlaceAbleNotAble: ; 50215
 	ld a, c
 	and a
-	jr nz, .able
-	ld de, .string_not_able
+	ld de, string_able
+	ret nz
+	ld de, string_not_able
 	ret
-
-.able
-	ld de, .string_able
-	ret
-; 50221
-
-.string_able ; 50221
-	db "Able@"
-; 50226
-
-.string_not_able ; 50226
-	db "Not able@"
-; 5022f
-
 
 PartyMenuCheckEgg: ; 50389
 	ld a, wPartySpecies % $100
@@ -750,6 +748,7 @@ PrintPartyMenuText: ; 5049a
 	set NO_TEXT_SCROLL, a ; disable text delay
 	ld [wOptions1], a
 	hlcoord 1, 16 ; Coord
+	call InitVariableWidthText
 	call PlaceString
 	pop af
 	ld [wOptions1], a
@@ -770,28 +769,28 @@ PartyMenuStrings: ; 0x504d2
 	dw TutorWhichPKMNString
 
 ChooseAMonString: ; 0x504e4
-	db "Choose a #mon.@"
+	db "Choose a Pokémon.@"
 UseOnWhichPKMNString: ; 0x504f3
-	db "Use on which <PK><MN>?@"
+	db "Use on which Pokémon?@"
 WhichPKMNString: ; 0x50504
-	db "Which <PK><MN>?@"
+	db "Which Pokémon?@"
 TeachWhichPKMNString: ; 0x5050e
-	db "Teach which <PK><MN>?@"
+	db "Teach which Pokémon?@"
 TutorWhichPKMNString: ; 0x5050e
-	db "Tutor which <PK><MN>?@"
+	db "Tutor which Pokémon?@"
 MoveToWhereString: ; 0x5051e
 	db "Move to where?@"
 ToWhichPKMNString: ; 0x50549
-	db "To which <PK><MN>?@"
+	db "To which Pokémon?@"
 
 YouHaveNoPKMNString: ; 0x50556
-	db "You have no <PK><MN>!@"
+	db "You have no Pokémon!@"
 
 
 PrintPartyMenuActionText: ; 50566
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	ld a, [wPartyMenuActionText]
 	and $f
 	ld hl, .MenuActionTexts

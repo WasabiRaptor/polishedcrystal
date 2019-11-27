@@ -1,10 +1,8 @@
 	db "BEE FLY@" ; species name
-	dw 4, 4 ; height, weight
+	dw 1, 2 ; height, weight
 
-	db   "Groups of Cutiefly"
-	next "flutter above the"
-	next "heads of people"
+	db "Nectar and pollen are its"
+	next "favorite fare. In fields of"
+	next "flowers, it gets into skirmishes"
 	
-	page "who have auras"
-	next "resembling those"
-	next "of flowers.@"
+	page "with Butterfree over food.@"

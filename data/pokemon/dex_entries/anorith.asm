@@ -1,11 +1,9 @@
-    db "OLD SHRIMP@" ; species name
-    dw 204, 276 ; height, weight
+	db "OLD SHRIMP@" ; species name
+	dw 7, 125 ; height, weight
 
-    db   "A primeval bug"
-    next "Pokémon. With"
-    next "eight wings, it"
-
-    page "could swim a lot"
-    next "faster than you'd"
-    next "expect.@"
-    
+	db "When restored Anorith are"
+	next "released into the ocean, they"
+	next "don't thrive, because the"
+	
+	page "water composition has changed"
+	next "since their era.@"

@@ -3134,7 +3134,7 @@ AI_CheckTypeMatchupAndBeFooledByIllusion:
 
 	ld hl, wPartyMon1Group
 	ld a, [wCurBattleMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	call PutBattleMonTypesIn
 	ret
 

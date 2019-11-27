@@ -1,10 +1,8 @@
 	db "SHADOW@" ; species name
-	dw 411, 890 ; height, weight
+	dw 15, 405 ; height, weight
 
-	db   "Hiding in people's"
-	next "shadows at night,"
-	next "it absorbs their"
-
-	page "heat. The chill it"
-	next "causes makes the"
-	next "victims shake.@"
+	db "You can hear tales told all over"
+	next "the world about how Gengar"
+	next "will pay a visit to children who"
+	
+	page "are naughty.@"

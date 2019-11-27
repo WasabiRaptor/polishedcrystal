@@ -1,10 +1,9 @@
-    db "FLAILING@" ; species name
-    dw 108, 15 ; height, weight
+	db "FLAILING@" ; species name
+	dw 5, 68 ; height, weight
 
-    db   "Stufful hates to"
-    next "be hugged or"
-    next "touched. It will"
-
-    page "squirm, thrash,"
-    next "and resist with"
-    next "amazing power.@" 
+	db "It boasts power enough to split"
+	next "large trees in half. The organ on"
+	next "its rear releases an odor that it"
+	
+	page "uses to communicate with"
+	next "others of its kind.@"

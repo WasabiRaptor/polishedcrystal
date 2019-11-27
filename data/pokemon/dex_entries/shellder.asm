@@ -1,10 +1,9 @@
 	db "BIVALVE@" ; species name
-	dw 100, 90 ; height, weight
+	dw 3, 40 ; height, weight
 
-	db   "Clamping on to an"
-	next "opponent reveals"
-	next "its vulnerable"
-
-	page "parts, so it uses"
-	next "this move only as"
-	next "a last resort.@"
+	db "The sand that accumulates"
+	next "inside its shell eventually"
+	next "becomes a pearl. But the pearl"
+	
+	page "gets in the way, so it spits it"
+	next "out and discards it.@"

@@ -1,10 +1,12 @@
 	db "FLAME@" ; species name
-	dw 507, 2000 ; height, weight
+	dw 17, 905 ; height, weight
 
-	db   "It uses its wings"
-	next "to fly high. The"
-	next "temperature of its"
-
-	page "fire increases as"
-	next "it gains exper-"
-	next "ience in battle.@"
+	db "Charizard flies around the sky"
+	next "in search of powerful"
+	next "opponents. It breathes fire of"
+	
+	page "such great heat that it melts"
+	next "anything. However, it never"
+	next "turns its fiery breath on any"
+	
+	page "opponent weaker than itself.@"

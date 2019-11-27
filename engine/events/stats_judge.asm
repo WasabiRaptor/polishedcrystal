@@ -17,7 +17,7 @@ SpecialStatsJudge: ; 4f0bc
 	cp EGG
 	jr z, .egg
 
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 
 	jp JudgePokemon
@@ -37,7 +37,7 @@ SpecialStatsJudge: ; 4f0bc
 
 	para "I can discern the"
 	line "overall potential"
-	cont "of your #mon."
+	cont "of your Pokémon."
 
 	para "Want me to judge"
 	line "one of your #-"
@@ -45,7 +45,7 @@ SpecialStatsJudge: ; 4f0bc
 	done
 
 .Which
-	text "Which #mon"
+	text "Which Pokémon"
 	line "should I judge?"
 	prompt
 
@@ -61,7 +61,7 @@ SpecialStatsJudge: ; 4f0bc
 
 JudgePokemon:
 	ld a, MON_DVS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	push hl
 	ld hl, .i_see
 	call PrintText
@@ -203,20 +203,20 @@ JudgePokemon:
 	prompt
 
 .decent_total
-	text "This #mon's"
+	text "This Pokémon's"
 	line "potential is"
 	cont "decent all around."
 	prompt
 
 .above_average_total
-	text "This #mon's"
+	text "This Pokémon's"
 	line "potential is"
 	cont "above-average"
 	cont "overall."
 	prompt
 
 .relatively_superior_total
-	text "This #mon's"
+	text "This Pokémon's"
 	line "potential is"
 	cont "relatively"
 	cont "superior"
@@ -224,7 +224,7 @@ JudgePokemon:
 	prompt
 
 .outstanding_total
-	text "This #mon's"
+	text "This Pokémon's"
 	line "potential is"
 	cont "outstanding"
 	cont "overall."
@@ -301,7 +301,7 @@ JudgePokemon:
 	prompt
 
 .fantastic_best
-	text "This #mon has"
+	text "This Pokémon has"
 	line "some fantastic"
 	cont "stats."
 	prompt

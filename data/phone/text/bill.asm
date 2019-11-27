@@ -46,7 +46,7 @@ BillPhoneNotFullText: ; 0x1b452a
 	line "has room for @"
 	text_from_ram wStringBuffer3
 	text ""
-	cont "more #mon."
+	cont "more Pokémon."
 
 	para "Get out there and"
 	line "fill it up!"
@@ -60,7 +60,7 @@ BillPhoneNearlyFullText: ; 0x1b4587
 	line "has room for only"
 	cont "@"
 	text_from_ram wStringBuffer3
-	text " more #mon."
+	text " more Pokémon."
 
 	para "Maybe you should"
 	line "switch your Box."
@@ -77,7 +77,7 @@ BillPhoneFullText: ; 0x1b45ed
 	line "switch Boxes if"
 
 	para "you want to catch"
-	line "more #mon."
+	line "more Pokémon."
 	prompt
 
 BillPhoneNewlyFullText: ; 0x1b4652
@@ -87,7 +87,7 @@ BillPhoneNewlyFullText: ; 0x1b4652
 	para "Thanks for using"
 	line "my Storage System."
 
-	para "That last #mon"
+	para "That last Pokémon"
 	line "you sent filled"
 	cont "your Box up."
 
@@ -95,7 +95,7 @@ BillPhoneNewlyFullText: ; 0x1b4652
 	line "switch Boxes if"
 
 	para "you want to catch"
-	line "more #mon."
+	line "more Pokémon."
 	prompt
 
 BillWholePCFullText:
@@ -103,7 +103,7 @@ BillWholePCFullText:
 	line "a whole server."
 
 	para "You'll have to"
-	line "release #mon"
+	line "release Pokémon"
 	cont "to make space."
 	done
 
@@ -157,7 +157,7 @@ BillPhoneSecondBadgeText:
 	line "Wonder Trading."
 
 	para "You might get a"
-	line "weird #mon"
+	line "weird Pokémon"
 	cont "in exchange."
 
 	para "That's all."

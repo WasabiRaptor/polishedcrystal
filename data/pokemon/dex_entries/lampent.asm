@@ -1,10 +1,6 @@
-    db "LAMP@" ; species name
-    dw 200, 287 ; height, weight
+	db "LAMP@" ; species name
+	dw 6, 130 ; height, weight
 
-    db   "The spirits it"
-    next "absorbs fuel its"
-    next "baleful fire. It"
-
-    page "hangs around"
-    next "hospitals waiting"
-    next "for people to die.@" 
+	db "It arrives near the moment of"
+	next "death and steals spirit from the"
+	next "body.@"

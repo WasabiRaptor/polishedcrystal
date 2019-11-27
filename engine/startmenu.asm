@@ -1,7 +1,7 @@
 StartMenu:: ; 125cd
 
 	call ClearWindowData
-
+	call OtherVariableWidthText
 	ld de, SFX_MENU
 	call PlaySFX
 
@@ -30,6 +30,7 @@ StartMenu:: ; 125cd
 	jr .Select
 
 .Reopen:
+	call OtherVariableWidthText
 	call UpdateSprites
 	call UpdateTimePals
 	call .SetUpMenuItems
@@ -91,13 +92,14 @@ StartMenu:: ; 125cd
 	ld [wMenuSelection], a
 .loop
 	call .PrintMenuClock
-	call .PrintMenuAccount
 	call ReadMenuJoypad
-	ld a, [wMenuJoypad]
+	ld a, [hJoyPressed]
 	cp B_BUTTON
 	jr z, .b
 	cp A_BUTTON
 	jr z, .a
+	and D_PAD
+	jr nz, .dpad
 	jr .loop
 .a
 	call PlayClickSFX
@@ -106,6 +108,9 @@ StartMenu:: ; 125cd
 .b
 	scf
 	ret
+.dpad
+	call .PrintMenuAccount
+	jr .loop
 ; 12691
 
 .ExitMenuRunScript: ; 12691
@@ -144,14 +149,14 @@ StartMenu:: ; 125cd
 
 .MenuDataHeader:
 	db $40 ; tile backup
-	db 0, 10 ; start coords
+	db 0, 12 ; start coords
 	db 17, 19 ; end coords
 	dw .MenuData
 	db 1 ; default selection
 
 .ContestMenuDataHeader:
 	db $40 ; tile backup
-	db 2, 10 ; start coords
+	db 2, 12 ; start coords
 	db 17, 19 ; end coords
 	dw .MenuData
 	db 1 ; default selection
@@ -174,44 +179,37 @@ StartMenu:: ; 125cd
 	dw StartMenu_Pokegear, .PokegearString, .PokegearDesc
 	dw StartMenu_Quit,     .QuitString,     .QuitDesc
 
-.PokedexString: 	db "#dex@"
-.PartyString:   	db "#mon@"
+.PokedexString: 	db "Pokédex@"
+.PartyString:   	db "Pokémon@"
 .PackString:    	db "Bag@"
-.StatusString:  	db "<PLAYER>@"
+.StatusString:  	db "Status@"
 .SaveString:    	db "Save@"
 .OptionString:  	db "Options@"
 .ExitString:    	db "Exit@"
-.PokegearString:	db "#PDA@"
+.PokegearString:	db "PokéPDA@"
 .QuitString:    	db "Quit@"
 
 ; Menu accounts are removed; this is vestigial
 .PokedexDesc:
-	db   ""
-	next "#mon database@"
+	db "Pokémon database@"
 
 .PartyDesc:
-	db   ""
-	next "Party status@"
+	db "Party status@"
 
 .PackDesc:
-	db   ""
-	next "Contains items@"
+	db "Contains items@"
 
 .PokegearDesc:
-	db   ""
-	next "Traveler's device@"
+	db "Traveler's device@"
 
 .StatusDesc:
-	db   ""
-	next "Your own status@"
+	db "Your own status@"
 
 .SaveDesc:
-	db   ""
-	next "Save and reset@"
+	db "Save and reset@"
 
 .OptionDesc:
-	db   ""
-	next "Change settings@"
+	db "Change settings@"
 
 .ExitDesc:	; unused
 	db   "Close this"
@@ -244,10 +242,11 @@ StartMenu:: ; 125cd
 ; 12800
 
 .MenuClock:
+	VWTextStart $c0
 	ld hl, wOptions1
 	set NO_TEXT_SCROLL, [hl]
 	hlcoord 1, 1
-	lb bc, 2, 9
+	lb bc, 2, 7
 	call ClearBox
 	ldh a, [hHours]
 	ld b, a
@@ -255,6 +254,7 @@ StartMenu:: ; 125cd
 	ld c, a
 	decoord 1, 2
 	farcall PrintHoursMins
+	call InitVariableWidthTiles
 	ld hl, .DayText
 	bccoord 1, 1
 	call PlaceWholeStringInBoxAtOnce
@@ -266,6 +266,7 @@ StartMenu:: ; 125cd
 
 .MenuDesc:
 	push de
+	call InitVariableWidthText
 	ld a, [wMenuSelection]
 	cp $ff
 	jr z, .none
@@ -387,10 +388,10 @@ endr
 
 ._DrawMenuClock:
 	hlcoord 0, 0
-	lb bc, 2, 9
+	lb bc, 2, 7
 	call TextBox
 	hlcoord 0, 0
-	lb bc, 2, 9
+	lb bc, 2, 7
 	jp TextBoxPalette
 	ret
 
@@ -399,7 +400,7 @@ endr
 
 .PrintMenuAccount:
 	call ._DrawMenuAccount
-	decoord 1, 14
+	decoord 1, 16
 	jp .MenuDesc
 
 ._DrawMenuAccount:
@@ -568,6 +569,12 @@ StartMenu_Pokemon: ; 12976
 	farcall PartyMenuSelect
 	jr c, .return ; if cancelled or pressed B
 
+if DEF(DEBUG)
+	ldh a, [hJoyDown]
+	bit 3, a
+	jr nz, .editor
+endc
+
 	call PokemonActionSubmenu
 	push af
 	call SFXDelay2
@@ -585,6 +592,11 @@ StartMenu_Pokemon: ; 12976
 	call CloseSubmenu
 	xor a
 	ret
+
+if DEF(DEBUG)
+.editor
+	farcall EditPartyMon
+endc
 
 .quit
 	ld a, b
@@ -616,7 +628,7 @@ HasNoItems: ; 129d5
 TossItemFromPC: ; 129f4
 	push de
 	call PartyMonItemName
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .key_item
@@ -705,11 +717,13 @@ CancelPokemonAction: ; 12a79
 
 
 PokemonActionSubmenu: ; 12a88
+	call InitVariableWidthText
 	hlcoord 1, 15
 	lb bc, 2, 18
 	call ClearBox
 	farcall MonSubmenu
-	call GetCurNick
+	call InitVariableWidthText
+	farcall GetCurNick
 	ld a, [wMenuSelection]
 	ld hl, .Actions
 	ld de, 3
@@ -801,10 +815,9 @@ SwitchPartyMons: ; 12aec
 
 
 GiveTakePartyMonItem: ; 12b60
-
 ; Eggs can't hold items!
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .cancel
 
@@ -825,7 +838,7 @@ GiveTakePartyMonItem: ; 12b60
 	call ExitMenu
 	jr c, .cancel
 
-	call GetCurNick
+	farcall GetCurNick
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, PKMN_NAME_LENGTH
@@ -873,7 +886,7 @@ GiveTakePartyMonItem: ; 12b60
 	cp TM_HM - 1
 	jr z, .next
 
-	call CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .next
@@ -1037,7 +1050,7 @@ CantBeHeldText: ; 12cd2
 GetPartyItemLocation: ; 12cd7
 	push af
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	pop af
 	ret
 ; 12cdf
@@ -1069,7 +1082,7 @@ ComposeMailMessage: ; 12cfe (4:6cfe)
 	farcall _ComposeMailMessage
 	ld hl, wPlayerName
 	ld de, wTempMailAuthor
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ld hl, wPlayerID
 	ld bc, 2
@@ -1211,7 +1224,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 .CheckMonHasEnoughHP:
 ; Need to have at least (MaxHP / 5) HP left.
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ldh [hDividend + 0], a
 	ld a, [hl]
@@ -1221,7 +1234,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 	ld b, 2
 	call Divide
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ldh a, [hQuotient + 2]
 	sub [hl]
 	dec hl
@@ -1378,7 +1391,7 @@ MoveScreenLoop:
 	; Copy over moves from the party struct
 	ld bc, NUM_MOVES
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld de, wMoveScreenMoves
 .movecopy_loop
 	ld a, [hli]
@@ -1537,7 +1550,7 @@ MoveScreenLoop:
 	rst AddNTimes
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
-	call IsAPokemon
+	farcall IsAPokemon
 	ld a, d
 	jr c, .loop_right_invalid
 	ld [wCurPartyMon], a
@@ -1576,7 +1589,7 @@ MoveScreenLoop:
 	rst AddNTimes
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
-	call IsAPokemon
+	farcall IsAPokemon
 	ld a, d
 	jr c, .loop_left_invalid
 	ld [wCurPartyMon], a
@@ -1658,10 +1671,10 @@ MoveScreenLoop:
 
 .regular_swap_move
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call .swap_location
 	ld a, MON_PP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call .swap_location
 
 .finish_swap
@@ -1698,11 +1711,25 @@ MoveScreenLoop:
 	ld [de], a
 	ret
 
+IsHMMove:: ; 34e7
+	ld hl, .HMMoves
+	ld de, 1
+	jp IsInArray
+
+.HMMoves:
+	db CUT
+	db FLY
+	db SURF
+	db STRENGTH
+	db WATERFALL
+	db WHIRLPOOL
+	db -1
+
 GetForgottenMoves::
 ; retrieve a list of a mon's forgotten moves, excluding ones beyond level
 ; and moves the mon already knows
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld a, [wCurPartySpecies]
@@ -1730,10 +1757,10 @@ GetForgottenMoves::
 	push af;1
 	call GetFarByte
 	inc hl
-	dec sp ;0
+	inc sp ;0
 	and a
 	ret z
-	inc sp ;1
+	dec sp ;1
 	cp b
 	ret nc
 	pop af ; 0
@@ -1746,7 +1773,7 @@ GetForgottenMoves::
 	push bc ;3
 	ld b, a
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld c, NUM_MOVES
 	ld a, b
 	call .move_exists
@@ -1816,15 +1843,17 @@ SetUpMoveScreenBG: ; 13172
 	call ClearBox
 	xor a
 	ld [wMonType], a
+	VWTextStart $c6
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	hlcoord 5, 1
 	call PlaceString
 	push bc
 	farcall CopyPkmnToTempMon
 	pop hl
-	call PrintLevel
+	inc hl
+	farcall PrintLevel
 	ld hl, wPlayerHPPal
 	call SetHPPal
 	call SetPalettes
@@ -1851,6 +1880,7 @@ MoveScreen_ListMoves:
 	rst CopyBytes
 	ld a, SCREEN_WIDTH * 2 ; move list spacing
 	ld [wBuffer1], a
+	call OtherVariableWidthText
 	hlcoord 2, 3
 	predef ListMoves
 
@@ -1886,7 +1916,7 @@ MoveScreen_ListMoves:
 	cp MOVESCREEN_REMINDER
 	jr z, .got_pp
 	ld a, MON_PP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld c, NUM_MOVES
 	ld de, wTempMonPP
 	ld a, [wMoveScreenOffset]
@@ -2056,7 +2086,7 @@ PlaceMoveData:
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .place_accuracy
 .no_power
 	ld de, String_na
@@ -2086,7 +2116,7 @@ PlaceMoveData:
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .description
 .no_acc
 	ld de, String_na

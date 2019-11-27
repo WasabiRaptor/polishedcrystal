@@ -30,7 +30,6 @@ HoennBitmasksPointers::
 	add_bitmasks Ralts
 	add_bitmasks Kirlia
 	add_bitmasks Gardevoir
-	add_bitmasks Gallade
 	add_bitmasks Surskit
 	add_bitmasks Masquerain
 	add_bitmasks Shroomish
@@ -40,20 +39,20 @@ HoennBitmasksPointers::
 	add_bitmasks Slaking
 	add_bitmasks Nincada
 	add_bitmasks Ninjask
-	add_bitmasks Shedinja 
- 	add_bitmasks Whismur
+	add_bitmasks Shedinja
+	add_bitmasks Whismur
 	add_bitmasks Loudred
 	add_bitmasks Exploud
 	add_bitmasks Makuhita
 	add_bitmasks Hariyama
+	add_bitmasks Azurill
 	add_bitmasks Nosepass
-	add_bitmasks Probopass
 	add_bitmasks Skitty
 	add_bitmasks Delcatty
 	add_bitmasks Sableye
 	add_bitmasks Mawile
-	add_bitmasks Aron 
- 	add_bitmasks Lairon
+	add_bitmasks Aron
+	add_bitmasks Lairon
 	add_bitmasks Aggron
 	add_bitmasks Meditite
 	add_bitmasks Medicham
@@ -63,9 +62,7 @@ HoennBitmasksPointers::
 	add_bitmasks Minun
 	add_bitmasks Volbeat
 	add_bitmasks Illumise
-	add_bitmasks Budew
 	add_bitmasks Roselia
-	add_bitmasks Roserade
 	add_bitmasks Gulpin
 	add_bitmasks Swalot
 	add_bitmasks Carvanha
@@ -82,8 +79,8 @@ HoennBitmasksPointers::
 	add_bitmasks Vibrava
 	add_bitmasks Flygon
 	add_bitmasks Cacnea
-	add_bitmasks Cacturne 
- 	add_bitmasks Swablu
+	add_bitmasks Cacturne
+	add_bitmasks Swablu
 	add_bitmasks Altaria
 	add_bitmasks Zangoose
 	add_bitmasks Seviper
@@ -101,20 +98,18 @@ HoennBitmasksPointers::
 	add_bitmasks Armaldo
 	add_bitmasks Feebas
 	add_bitmasks Milotic
-	add_bitmasks Castform 
+	add_bitmasks Castform
 	add_bitmasks Kecleon
 	add_bitmasks Shuppet
 	add_bitmasks Banette
 	add_bitmasks Duskull
 	add_bitmasks Dusclops
-	add_bitmasks Dusknoir
 	add_bitmasks Tropius
-	add_bitmasks Chingling
 	add_bitmasks Chimecho
 	add_bitmasks Absol
+	add_bitmasks Wynaut
 	add_bitmasks Snorunt
 	add_bitmasks Glalie
-	add_bitmasks Frosslass
 	add_bitmasks Spheal
 	add_bitmasks Sealeo
 	add_bitmasks Walrein
@@ -134,11 +129,8 @@ HoennBitmasksPointers::
 	add_bitmasks Registeel
 	add_bitmasks Latias
 	add_bitmasks Latios
-	add_bitmasks Kyogre 
- 	add_bitmasks Groudon
+	add_bitmasks Kyogre
+	add_bitmasks Groudon
 	add_bitmasks Rayquaza
 	add_bitmasks Jirachi
-	add_bitmasks Deoxys_Defense
-	add_bitmasks Deoxys_Normal
-	add_bitmasks Deoxys_Attack
-	add_bitmasks Deoxys_Speed
+	add_bitmasks Deoxys

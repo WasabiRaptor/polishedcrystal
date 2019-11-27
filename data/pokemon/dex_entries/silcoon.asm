@@ -1,10 +1,12 @@
 	db "COCOON@" ; species name
-	dw 200, 220 ; height, weight
+	dw 6, 100 ; height, weight
 
-	db   "It drinks dew that"
-	next "collects on its"
-	next "silk and waits for"
-
-	page "evolution."
-	next "Its hard cocoon"
-	next "repels attacks.@"
+	db "Silcoon was thought to endure"
+	next "hunger and not consume"
+	next "anything before its evolution.@"
+	
+	page "However, it is now thought that"
+	next "this Pokémon slakes its thirst"
+	next "by drinking rainwater that"
+	
+	page "collects on its silk.@"

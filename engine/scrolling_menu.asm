@@ -338,6 +338,7 @@ ScrollingMenu_ValidateSwitchItem:
 	ret
 
 ScrollingMenu_UpdateDisplay:
+	VWTextStart $b0
 	call ClearWholeMenuBox
 	ld a, [wMenuData2Flags]
 	bit 4, a

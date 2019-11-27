@@ -30,7 +30,6 @@ HoennPicPointers::
 	add_pics Ralts
 	add_pics Kirlia
 	add_pics Gardevoir
-	add_pics Gallade
 	add_pics Surskit
 	add_pics Masquerain
 	add_pics Shroomish
@@ -40,20 +39,20 @@ HoennPicPointers::
 	add_pics Slaking
 	add_pics Nincada
 	add_pics Ninjask
-	add_pics Shedinja 
- 	add_pics Whismur
+	add_pics Shedinja
+	add_pics Whismur
 	add_pics Loudred
 	add_pics Exploud
 	add_pics Makuhita
 	add_pics Hariyama
+	add_pics Azurill
 	add_pics Nosepass
-	add_pics Probopass
 	add_pics Skitty
 	add_pics Delcatty
 	add_pics Sableye
 	add_pics Mawile
-	add_pics Aron 
- 	add_pics Lairon
+	add_pics Aron
+	add_pics Lairon
 	add_pics Aggron
 	add_pics Meditite
 	add_pics Medicham
@@ -63,9 +62,7 @@ HoennPicPointers::
 	add_pics Minun
 	add_pics Volbeat
 	add_pics Illumise
-	add_pics Budew
 	add_pics Roselia
-	add_pics Roserade
 	add_pics Gulpin
 	add_pics Swalot
 	add_pics Carvanha
@@ -82,8 +79,8 @@ HoennPicPointers::
 	add_pics Vibrava
 	add_pics Flygon
 	add_pics Cacnea
-	add_pics Cacturne 
- 	add_pics Swablu
+	add_pics Cacturne
+	add_pics Swablu
 	add_pics Altaria
 	add_pics Zangoose
 	add_pics Seviper
@@ -101,20 +98,18 @@ HoennPicPointers::
 	add_pics Armaldo
 	add_pics Feebas
 	add_pics Milotic
-	add_pics Castform 
+	add_pics Castform
 	add_pics Kecleon
 	add_pics Shuppet
 	add_pics Banette
 	add_pics Duskull
 	add_pics Dusclops
-	add_pics Dusknoir
 	add_pics Tropius
-	add_pics Chingling
 	add_pics Chimecho
 	add_pics Absol
+	add_pics Wynaut
 	add_pics Snorunt
 	add_pics Glalie
-	add_pics Frosslass
 	add_pics Spheal
 	add_pics Sealeo
 	add_pics Walrein
@@ -134,11 +129,8 @@ HoennPicPointers::
 	add_pics Registeel
 	add_pics Latias
 	add_pics Latios
-	add_pics Kyogre 
- 	add_pics Groudon
+	add_pics Kyogre
+	add_pics Groudon
 	add_pics Rayquaza
 	add_pics Jirachi
-	add_pics Deoxys_Defense
-	add_pics Deoxys_Normal
-	add_pics Deoxys_Attack
-	add_pics Deoxys_Speed
+	add_pics Deoxys

@@ -7,7 +7,9 @@ WILDMON    EQU 4
 
 ; Text box flags
 ; TODO: add the other bits used
-NO_LINE_SPACING EQU 2
+NO_FORCED_FAST_SCROLL	EQU 0
+TEXT_DELAY				EQU 1
+NO_LINE_SPACING 		EQU 2
 
 ; wOptions1: text speed
 INST_TEXT      EQU $0

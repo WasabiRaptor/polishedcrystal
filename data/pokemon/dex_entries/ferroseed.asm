@@ -1,9 +1,8 @@
-    db "THORN SEED@" ; species name
-    dw 200, 414 ; height, weight
+	db "THORN SEED@" ; species name
+	dw 6, 188 ; height, weight
 
-    db   "They stick their"
-    next "spikes into cave"
-    next "walls and absorb"
-
-    page "the minerals they"
-    next "find in the rock.@"
+	db "It absorbs the iron it finds in"
+	next "the rock while clinging to the"
+	next "ceiling. It shoots spikes when in"
+	
+	page "danger.@"

@@ -40,18 +40,23 @@ ClearTileMap::
 	ret z
 	jp ApplyTilemapInVBlank
 
-SpeechTextBox::
-; Standard textbox.
-	ld a, [wTextBoxFlags2]
-	bit NAMEPLATE_FLAG, a
-	jr z, .no_nameplate
+NO_RIGHT_MASK 					EQU %11111011
+NO_LEFT_MASK 					EQU %11110111
+NO_TOP_MASK 					EQU %11111101
+NO_BOTTOM_MASK 					EQU %11111110
+
+SetupNameplate::
+	VWTextStart $c7
 	hlcoord NAMEPLATE_X, NAMEPLATE_Y
 	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
-	call TextBox
-.no_nameplate
+	jr TextBox
+
+SpeechTextBox::
+; Standard textbox.
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
-
+	;fallthrough
+	
 TextBox::
 ; Draw a text box at hl with room for
 ; b lines of c characters each.
@@ -60,74 +65,6 @@ TextBox::
 ; text black-and-white scheme.
 	push bc
 	push hl
-	call TextBoxBorder
-	pop hl
-	pop bc
-	jp TextBoxPalette
-
-NO_RIGHT_MASK 					EQU %11111011
-NO_LEFT_MASK 					EQU %11110111
-NO_TOP_MASK 					EQU %11111101
-NO_BOTTOM_MASK 					EQU %11111110
-
-TextBoxBorder::	
-	ld a, [wTextBoxFlags2]
-	bit NAMEPLATE_FLAG, a
-	jr z, .top
-
-; Nameplate top
-	push hl
-	ld a, [hl]
-	call CheckBorder
-	or "┌"
-	ld [hli], a
-	ld e, NO_BOTTOM_MASK
-	call .PlaceChars
-	ld a, [hl]
-	call CheckBorder
-	or "┐"
-	ld [hl], a
-	pop hl
-
-; Nameplate middle
-	ld de, SCREEN_WIDTH
-	add hl, de
-
-	push hl
-	lb bc, NAMEPLATE_INNERH, NAMEPLATE_INNERW
-	ld a, [hl]
-	call CheckBorder
-	or "│"
-	and NO_RIGHT_MASK
-	ld [hli], a
-	ld a, " "
-	call .PlaceSpace
-	ld a, [hl]
-	call CheckBorder
-	or "│"
-	and NO_LEFT_MASK
-	ld [hl], a
-	pop hl
-
-	ld de, SCREEN_WIDTH
-	add hl, de
-
-; Nameplate bottom
-	ld a, [hl]
-	call CheckBorder
-	or "└"
-	ld [hli], a
-	ld e, NO_TOP_MASK
-	call .PlaceChars
-	ld a, [hl]
-	call CheckBorder
-	or "┘"
-	ld [hl], a
-
-	hlcoord TEXTBOX_X, TEXTBOX_Y
-	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
-
-.top
 ; Top
 	push hl
 	ld a, [hl]
@@ -177,9 +114,11 @@ TextBoxBorder::
 	call CheckBorder
 	or "┘"
 	ld [hl], a
-	ret
-
-.PlaceSpace:
+	pop hl
+	pop bc
+	jr TextBoxPalette
+	
+.PlaceSpace
 ; Place char a c times.
 	ld d, c
 .blankloop
@@ -188,7 +127,7 @@ TextBoxBorder::
 	jr nz, .blankloop
 	ret
 
-.PlaceChars:
+.PlaceChars
 ; Place char a c times.
 	ld d, c
 .loop
@@ -255,15 +194,8 @@ RadioTerminator::
 	ret
 .stop	db "@"
 
-PrintNamedText::
-	ld a, [wTextBoxFlags2]
-	set NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
-	ld a, d
-	ld [wTextBoxNameBuffer], a
-	ld a, e
-	ld [wTextBoxNameBuffer + 1], a
 PrintText::
+	call InitVariableWidthText
 	call SetUpTextBox
 PrintTextNoBox::
 	push hl
@@ -271,46 +203,35 @@ PrintTextNoBox::
 	pop hl
 
 PrintTextBoxText::
-	ld a, [wTextBoxFlags2]
-	bit NAMEPLATE_FLAG, a
-	jr z, .no_nameplate
-	push hl
-	ld hl, wOptions1
-	set NO_TEXT_SCROLL, [hl]
-	bccoord NAMEPLATE_INNERX, NAMEPLATE_INNERY
-	ld a, [wTextBoxNameBuffer]
-	ld h, a
-	ld a, [wTextBoxNameBuffer + 1]
-	ld l, a
-	call PlaceWholeStringInBoxAtOnce
-	pop hl
-.no_nameplate
-	ld a, [wTextBoxFlags2]
-	res NAMEPLATE_FLAG, a
-	ld [wTextBoxFlags2], a
+	call InitVariableWidthText
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	call PlaceWholeStringInBoxAtOnce
-	ret
-
+	jp PlaceWholeStringInBoxAtOnce
+	
 SetUpTextBox::
 	push hl
-	ld a, d
-	ld [wTextBoxNameBuffer], a
-	ld a, e
-	ld [wTextBoxNameBuffer + 1], a
 	call SpeechTextBox
 	call UpdateSprites
 	call ApplyTilemap
 	pop hl
 	ret
 
+PrintNamePlate::
+	push de
+	call SetupNameplate
+	pop de
+	hlcoord $6, $b
+	;fallthrough
 PlaceString::
+	call InitVariableWidthTiles
+PlaceSpecialString::
 	push hl
-
 PlaceNextChar::
 	ld a, [de]
 	cp "@"
 	jr nz, CheckDict
+	push hl
+	call NextVRAMVariableWidthTextTile
+	pop hl
 	ld b, h
 	ld c, l
 	pop hl
@@ -322,7 +243,7 @@ NextChar::
 
 CheckDict::
 	cp $60
-	jp nc, .notDict
+	jp nc, PlaceCharacter
 dict: macro
 if \1 == 0
 	and a
@@ -354,10 +275,11 @@ endm
 	dict "<TRENDY>", PrintTrendyPhrase
 	dict "<DONE>",   DoneText
 	dict "<PROMPT>", PromptText
+	dict "<_NEXT>",  NextTextTile
 	dict "<TARGET>", PlaceMoveTargetsName
 	dict "<USER>",   PlaceMoveUsersName
 	dict "<ENEMY>",  PlaceEnemysName
-	dict "#",        PlacePoke
+	dict "Poké",     PlacePoke
 	dict "le",       PlaceLe
 	dict "ng",       PlaceNg
 	dict "te",       PlaceTe
@@ -372,7 +294,7 @@ endm
 	dict "and",      PlaceAnd
 	dict "the",      PlaceThe
 	dict "you",      PlaceYou
-	dict "#mon",     PlacePokemon
+	dict "Pokémon",  PlacePokemon
 	dict "to",       PlaceTo
 	dict "have",     PlaceHave
 	dict "that",     PlaceThat
@@ -382,10 +304,195 @@ endm
 	dict "ing",      PlaceIng
 	dict2 "¯", " "
 
-.notDict
+PlaceCharacter::
+	push de
+	push af
+	ld a, [wVariableWidthTextTile]
+	inc a
+	jr nz, .VWtext
+
+	pop af
+	pop de
 	ld [hli], a
-	call PrintLetterDelay
+	farcall PrintLetterDelay
 	jp NextChar
+
+.VWtext
+	pop af
+	push af
+	push hl;1
+	ld bc, LEN_1BPP_TILE
+
+	cp " "
+	jr nz, .notspace
+	xor a
+	ld hl, wPerliminaryVariableWidthTile
+	call ByteFill
+	jr .donespace
+.notspace
+	sub "A"
+	ld hl, FontWondermail
+	ld de, wPerliminaryVariableWidthTile
+	rst AddNTimes
+	ld a, BANK(FontWondermail)
+	call FarCopyBytes
+.donespace
+
+	ld hl, wCombinedVaribleWidthTiles
+	ld de, wPerliminaryVariableWidthTile
+	ld b, 8
+	call CombineRows
+
+	pop hl;0
+	pop af
+
+	farcall GetCharacterWidth
+	;ld e, 9
+	ld a, [wVariableWidthTextCurTileColsFilled]
+	add e
+	ld [wVariableWidthTextCurTileColsFilled], a
+; characters all have one collumn of white pixels included in their width to pad them for spacing
+; meaning that if 8 collums are filled, only 7 are in actuality, so knowing this if that extra collumn
+; overflows into the next tile, we don't have to care unless another letter is printed after
+; therefore we only need to move onto the next tile in vram if 10+ collumns are filled
+	cp 10 
+	jr c, .sametile
+	sub 8
+	ld [wVariableWidthTextCurTileColsFilled], a
+	push hl
+
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+	ld de, wCombinedVaribleWidthTiles
+	lb bc, BANK(FontWondermail), 2
+	call GetMaybeOpaque1bpp
+	ld bc, LEN_1BPP_TILE
+	ld de, wCombinedVaribleWidthTiles
+	ld hl, wCombinedVaribleWidthTiles + LEN_1BPP_TILE
+	rst CopyBytes
+
+
+	pop hl
+	ld a, [wVariableWidthTextTile]
+	ld [hli], a
+	inc a
+	ld [hl], a
+	call NextVRAMVariableWidthTextTile
+	jr .letterdelay
+.sametile
+	push hl
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+
+	ld de, wCombinedVaribleWidthTiles
+	lb bc, BANK(FontWondermail), 1
+	call GetMaybeOpaque1bpp
+	pop hl
+	ld a, [wVariableWidthTextTile]
+	ld [hl], a
+.letterdelay
+	pop de	
+	farcall PrintLetterDelay
+	jp NextChar
+
+OtherVariableWidthText::
+	ld a, $a4
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile $a4)
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile $a4)
+	ld [wVariableWidthTextVRAM+1], a
+	jr InitVariableWidthTiles
+
+NextVRAMVariableWidthTextTile:
+	ld a, [wVariableWidthTextTile]
+	inc a
+	ret z
+	cp $e0
+	jr c, notlastVWtile
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM+1], a
+	ret
+
+InitVariableWidthText::
+	;initialize the variable width text values
+	ld a, "A"
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile "A")
+	ld [wVariableWidthTextVRAM+1], a
+InitVariableWidthTiles::
+	push hl
+	xor a
+	ld [wVariableWidthTextCurTileColsFilled], a
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+	pop hl
+	ret
+
+notlastVWtile:
+	push hl
+	ld [wVariableWidthTextTile], a
+
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+	ld bc, 1 tiles
+	add hl, bc
+	ld a, l
+	ld [wVariableWidthTextVRAM], a
+	ld a, h
+	ld [wVariableWidthTextVRAM+1], a
+	pop hl
+	ret
+
+CombineRows::
+	ld a, [wVariableWidthTextCurTileColsFilled]
+	ld c, a
+	inc c
+.loop1
+	ld a, [de]
+	push bc
+	push de
+	push hl
+	ld d, a
+	and a
+	ld e, 0
+	jr z, .done ; no point wasting time copying an empty line
+	;ld d, %10000001
+	;ld c, 2
+.loop
+	dec c
+	jr z, .done
+	rr d
+	rr e	
+	jr .loop
+.done
+	ld a, [hl]
+	or d
+	ld [hl], a
+	ld bc, LEN_1BPP_TILE
+	add hl, bc
+	ld [hl], e
+	pop hl
+	pop de
+	inc hl
+	inc de
+	pop bc
+	dec b
+	jr nz, .loop1
+	ret
 
 print_name: macro
 	push de
@@ -434,7 +541,7 @@ PlaceAnd: print_name .AndText
 .AndText: db "a", "n", "d", "@"
 
 PlacePoke: print_name .PokeText
-.PokeText: db "Poké@"
+.PokeText: db "P", "o", "k", "é", "@"
 
 PlaceThe: print_name .TheText
 .TheText: db "t", "h", "e", "@"
@@ -443,7 +550,7 @@ PlaceYou: print_name .YouText
 .YouText: db "y", "o", "u", "@"
 
 PlacePokemon: print_name .PokemonText
-.PokemonText: db "Pokémon@"
+.PokemonText: db "Poké", "mon@"
 
 PlaceTo: print_name .ToText
 .ToText: db "t", "o", "@"
@@ -465,6 +572,24 @@ PlaceAn: print_name .AnText
 
 PlaceIng: print_name .IngText
 .IngText: db "i", "n", "g", "@"
+
+NextTextTile::
+	call NextVariableWidthTextTile
+	jp NextChar
+
+NextVariableWidthTextTile::
+	push hl
+
+	xor a
+	ld [wVariableWidthTextCurTileColsFilled], a
+	ld bc, 2 * LEN_1BPP_TILE
+	ld hl, wCombinedVaribleWidthTiles
+	call ByteFill
+
+	call NextVRAMVariableWidthTextTile
+
+	pop hl
+	ret
 
 PlaceMoveTargetsName::
 	ldh a, [hBattleTurn]
@@ -505,8 +630,11 @@ PlaceEnemysName::
 	ld h, b
 	ld l, c
 	ld de, .SpaceText
-	call PlaceString
+	call PlaceSpecialString
 	push bc
+	ld a, [wVariableWidthTextTile]
+	inc a
+	call nz, GoBackVWTile
 	farcall Battle_GetTrainerName
 	pop hl
 	ld de, wStringBuffer1
@@ -520,13 +648,35 @@ PlaceEnemysName::
 	db " @"
 
 PlaceCommandCharacter::
-	call PlaceString
+	call PlaceSpecialString
 	ld h, b
 	ld l, c
+	ld a, [wVariableWidthTextTile]
+	inc a
+	call nz, GoBackVWTile
 	pop de
 	jp NextChar
 
+GoBackVWTile:
+	push hl
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+	ld bc, -1 tiles
+	add hl, bc
+	ld a, l
+	ld [wVariableWidthTextVRAM], a
+	ld a, h
+	ld [wVariableWidthTextVRAM+1], a
+	ld a, [wVariableWidthTextTile]
+	dec a
+	ld [wVariableWidthTextTile], a
+	pop hl
+	ret
+
 NextLineChar::
+	call NextVariableWidthTextTile
 	ld a, [wTextBoxFlags]
 	bit NO_LINE_SPACING, a
 	jr nz, LineBreak
@@ -537,6 +687,7 @@ NextLineChar::
 	jp NextChar
 
 LineBreak::
+	call NextVariableWidthTextTile
 	pop hl
 	ld bc, SCREEN_WIDTH
 	add hl, bc
@@ -585,6 +736,14 @@ TextFar::
 	jp NextChar
 
 LineChar::
+	ld a, ("A" + 18)
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles0 tile ("A" + 18))
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles0 tile ("A" + 18))
+	ld [wVariableWidthTextVRAM+1], a
+	call InitVariableWidthTiles
+
 	pop hl
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 2
 	push hl
@@ -592,7 +751,7 @@ LineChar::
 
 Paragraph::
 	push de
-
+	call InitVariableWidthText
 	ld a, [wLinkMode]
 	cp LINK_COLOSSEUM
 	jr z, .linkbattle
@@ -620,6 +779,7 @@ Paragraph::
 	jr .loop
 .got_delay
 	call DelayFrames
+
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	pop de
 	jp NextChar
@@ -651,6 +811,7 @@ ScrollText::
 
 ContText::
 	push de
+	call InitVariableWidthText
 	ld de, .cont
 	ld b, h
 	ld c, l
@@ -677,6 +838,7 @@ PromptText::
 	call UnloadBlinkingCursor
 
 DoneText::
+	call NextVRAMVariableWidthTextTile
 	pop hl
 	ld de, .stop
 	dec de
@@ -686,7 +848,7 @@ DoneText::
 NullChar::
 	ld a, "?"
 	ld [hli], a
-	call PrintLetterDelay
+	farcall PrintLetterDelay
 	jp NextChar
 
 TextScroll::
@@ -760,22 +922,28 @@ FarString::
 	rst Bankswitch
 	ret
 
-PlaceWholeNameInBoxAtOnce::
-	ld a, [wTextBoxFlags]
+FarReadString::
+	ld b, a
+	ldh a, [hROMBank]
 	push af
-	set 1, a
-	ld [wTextBoxFlags], a
 
-	call DoNameUntilTerminator
-
+	ld a, b
+	rst Bankswitch
+.loop
+	ld a, [de]
+	cp "@"
+	inc de
+	jr nz, .loop
+	ld a, [de]
+	ld c, a
 	pop af
-	ld [wTextBoxFlags], a
+	rst Bankswitch
 	ret
 
 PlaceWholeStringInBoxAtOnce::
 	ld a, [wTextBoxFlags]
 	push af
-	set 1, a
+	set TEXT_DELAY, a
 	ld [wTextBoxFlags], a
 
 	call DoTextUntilTerminator
@@ -784,11 +952,6 @@ PlaceWholeStringInBoxAtOnce::
 	ld [wTextBoxFlags], a
 	ret
 
-DoNameUntilTerminator::
-	ld a, [wTextBoxNameBuffer]
-	ld h, a
-	ld a, [wTextBoxNameBuffer + 1]
-	ld l, a
 DoTextUntilTerminator::
 	ld a, [hli]
 	cp "@"
@@ -847,7 +1010,7 @@ Text_Start::
 	ld e, l
 	ld h, b
 	ld l, c
-	call PlaceString
+	call PlaceSpecialString
 	ld h, d
 	ld l, e
 	inc hl
@@ -866,7 +1029,7 @@ Text_FromRAM::
 	push hl
 	ld h, b
 	ld l, c
-	call PlaceString
+	call PlaceSpecialString
 	pop hl
 	ret
 
@@ -885,8 +1048,7 @@ Text_Jump::
 	ld d, a
 	ld a, [hli]
 
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	push hl
 	ld h, d
@@ -895,8 +1057,7 @@ Text_Jump::
 	pop hl
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 	ret
 
 Text_BCD::
@@ -913,7 +1074,7 @@ Text_BCD::
 	ld h, b
 	ld l, c
 	ld c, a
-	call PrintBCDNumber
+	;call PrintBCDNumber
 	ld b, h
 	ld c, l
 	pop hl
@@ -1015,9 +1176,23 @@ Text_PrintNum::
 	swap a
 	set PRINTNUM_LEFTALIGN_F, a
 	ld b, a
-	call PrintNum
-	ld b, h
-	ld c, l
+	push hl
+	push de
+	push bc
+	farcall ResetStringBuffer1
+	pop bc
+	pop de
+	ld hl, wStringBuffer1
+	predef PrintNum
+	pop hl
+	inc hl
+	push de
+	ld de, wStringBuffer1
+	call PlaceSpecialString
+	pop de
+	push hl
+	call GoBackVWTile
+	pop bc
 	pop hl
 	ret
 
@@ -1155,42 +1330,37 @@ Text_StringBuffer::
 	dw wBattleMonNick
 
 Text_WeekDay::
-	call GetWeekday
 	push hl
 	push bc
-	ld c, a
-	ld b, 0
-	ld hl, .Days
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld d, h
-	ld e, l
+	call GetWeekday
+	ld b, a
 	pop hl
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, .Day
-	call PlaceString
+	call PrintDayOfWeek
 	pop hl
 	ret
 
-.Days:
-	dw .Sun
-	dw .Mon
-	dw .Tues
-	dw .Wednes
-	dw .Thurs
-	dw .Fri
-	dw .Satur
+PrintDayOfWeek::
+	push hl
+	ld hl, .Days
+	ld a, b
+	call GetNthString
+	ld d, h
+	ld e, l
+	pop hl
+	call PlaceSpecialString
+	ld h, b
+	ld l, c
+	ld de, .Day
+	jp PlaceSpecialString
 
-.Sun:    db "Sun@"
-.Mon:    db "Mon@"
-.Tues:   db "Tues@"
-.Wednes: db "Wednes@"
-.Thurs:  db "Thurs@"
-.Fri:    db "Fri@"
-.Satur:  db "Satur@"
-.Day:    db "day@"
+.Days: 
+	db "Sun@"
+	db "Mon@"
+	db "Tues@"
+	db "Wednes@"
+	db "Thurs@"
+	db "Fri@"
+	db "Satur@"
+
+.Day: 
+	db "day@"

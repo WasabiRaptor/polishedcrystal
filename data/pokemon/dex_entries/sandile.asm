@@ -1,11 +1,9 @@
-    db "DESERT CROC@" ; species name
-    dw 204, 335 ; height, weight
+	db "DESERT CROC@" ; species name
+	dw 7, 152 ; height, weight
 
-    db   "They live hidden"
-    next "under hot desert"
-    next "sands in order to"
-
-    page "keep their body"
-    next "temperature from"
-    next "dropping.@" 
-    
+	db "Alola, where it's warm all"
+	next "year round, is a comfortable"
+	next "environment for this Pokémon.@"
+	
+	page "Sometimes you'll even see it"
+	next "outside of deserts.@"

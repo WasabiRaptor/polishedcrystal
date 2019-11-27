@@ -420,7 +420,7 @@ GetMartPrice: ; 15bf0
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 6 ; 6 digits
-	call PrintNum
+	predef PrintNum
 	pop hl
 
 	ld de, wStringBuffer1
@@ -779,7 +779,7 @@ BuyTMMenuLoop:
 	ld bc, hMoneyTemp
 	call CompareMoney
 	jp c, MartMenuLoop_InsufficientFunds
-	call ReceiveTMHM
+	farcall ReceiveTMHM
 	call PlayTransactionSound
 	ld de, wMoney
 	ld bc, hMoneyTemp
@@ -900,7 +900,7 @@ BTMartConfirmPurchase:
 TMMartConfirmPurchase:
 	ld a, [wCurTMHM]
 	ld [wd265], a
-	call GetTMHMName
+	farcall GetTMHMName
 	call CopyName1
 
 	; off by one error?
@@ -987,7 +987,7 @@ RooftopSaleAskPurchaseQuantity:
 
 TMMartAskPurchaseQuantity:
 	ld a, [wCurTMHM]
-	call CheckTMHM
+	farcall CheckTMHM
 	jr c, .AlreadyHaveTM
 
 	ld a, 1
@@ -1153,8 +1153,90 @@ MartMenu_PrintBCDPrices: ; 15e30
 	ld bc, SCREEN_WIDTH - 4
 	add hl, bc
 	ld c, PRINTNUM_LEADINGZEROS | PRINTNUM_MONEY | 3
-	jp PrintBCDNumber
+	;jp PrintBCDNumber
+;fallthrough as this is literally only ever used here
+
 ; 15e4a (5:5e4a)
+PrintBCDNumber:: ; 38bb
+; function to print a BCD (Binary-coded decimal) number
+; de = address of BCD number
+; hl = destination address
+; c = flags and length
+; bit 7: if set, do not print leading zeroes
+;        if unset, print leading zeroes
+; bit 6: if set, left-align the string (do not pad empty digits with spaces)
+;        if unset, right-align the string
+; bit 5: if set, print currency symbol at the beginning of the string
+;        if unset, do not print the currency symbol
+; bits 0-4: length of BCD number in bytes
+; Note that bits 5 and 7 are modified during execution. The above reflects
+; their meaning at the beginning of the functions's execution.
+	ld b, c ; save flags in b
+	res 7, c
+	res 6, c
+	res 5, c ; c now holds the length
+	bit 5, b
+	jr z, .loop
+	bit 7, b
+	jr nz, .loop ; skip currency symbol
+	ld [hl], "¥"
+	inc hl
+.loop
+	ld a, [de]
+	swap a
+	call PrintBCDDigit ; print upper digit
+	ld a, [de]
+	call PrintBCDDigit ; print lower digit
+	inc de
+	dec c
+	jr nz, .loop
+	bit 7, b ; were any non-zero digits printed?
+	ret z ; if so, we are done
+.numberEqualsZero ; if every digit of the BCD number is zero
+	bit 6, b ; left or right alignment?
+	jr nz, .skipRightAlignmentAdjustment
+	dec hl ; if the string is right-aligned, it needs to be moved back one space
+.skipRightAlignmentAdjustment
+	bit 5, b
+	jr z, .skipCurrencySymbol
+	ld [hl], "¥" ; currency symbol
+	inc hl
+.skipCurrencySymbol
+	ld [hl], "0"
+	farcall PrintLetterDelay
+	inc hl
+	ret
+; 0x38f2
+
+PrintBCDDigit:: ; 38f2
+	and a, %00001111
+	and a
+	jr z, .zeroDigit
+.nonzeroDigit
+	bit 7, b ; have any non-space characters been printed?
+	jr z, .outputDigit
+; if bit 7 is set, then no numbers have been printed yet
+	bit 5, b ; print the currency symbol?
+	jr z, .skipCurrencySymbol
+	ld [hl], "¥"
+	inc hl
+	res 5, b
+.skipCurrencySymbol
+	res 7, b ; unset 7 to indicate that a nonzero digit has been reached
+.outputDigit
+	add a, "0"
+	ld [hli], a
+	farjp PrintLetterDelay
+
+.zeroDigit
+	bit 7, b ; either printing leading zeroes or already reached a nonzero digit?
+	jr z, .outputDigit ; if so, print a zero digit
+	bit 6, b ; left or right alignment?
+	ret nz
+	ld a, " "
+	ld [hli], a ; if right-aligned, "print" a space by advancing the pointer
+	ret
+; 0x3917
 
 BlueCardMenuDataHeader_Buy:
 	db $40 ; flags
@@ -1178,7 +1260,7 @@ BlueCardMenuDataHeader_Buy:
 	ld bc, SCREEN_WIDTH - 4
 	add hl, bc
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .PointsString
 	jp PlaceString
 
@@ -1207,7 +1289,7 @@ BTMenuDataHeader_Buy:
 	ld bc, SCREEN_WIDTH - 3
 	add hl, bc
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .PointsString
 	jp PlaceString
 
@@ -1227,7 +1309,7 @@ GetCursorItemPointCost:
 	ret
 
 Text_HerbShop_Intro: ; 0x15e4a
-	; Hello, dear. I sell inexpensive herbal medicine. They're good, but a trifle bitter. Your #MON may not like them. Hehehehe…
+	; Hello, dear. I sell inexpensive herbal medicine. They're good, but a trifle bitter. Your Pokémon may not like them. Hehehehe…
 	text_jump UnknownText_0x1c4c28
 	db "@"
 ; 0x15e4f
@@ -1450,7 +1532,7 @@ Text_BTMart_CostsThisMuch:
 	db "@"
 
 Text_BTMart_InsufficientFunds:
-	; I'm sorry, but you don’t have enough BP.
+	; I'm sorry, but you don't have enough BP.
 	text_jump BTMartInsufficientFundsText
 	db "@"
 
@@ -1504,7 +1586,7 @@ SellMenu: ; 15eb3
 ; 15efc
 
 .try_sell ; 15efd
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr z, .okay_to_sell

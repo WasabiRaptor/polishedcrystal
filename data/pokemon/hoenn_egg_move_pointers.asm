@@ -87,8 +87,8 @@ HoennEggMovePointers::
 	add_eggmoves NoHoenn
 	add_eggmoves Zangoose
 	add_eggmoves Seviper
-	add_eggmoves Lunatone
-	add_eggmoves Solrock
+	add_eggmoves NoHoenn
+	add_eggmoves NoHoenn
 	add_eggmoves Barboach
 	add_eggmoves NoHoenn
 	add_eggmoves Corphish
@@ -112,6 +112,7 @@ HoennEggMovePointers::
 	add_eggmoves Chingling
 	add_eggmoves NoHoenn
 	add_eggmoves Absol
+	add_eggmoves Wynaut
 	add_eggmoves Snorunt
 	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn
@@ -126,7 +127,7 @@ HoennEggMovePointers::
 	add_eggmoves Bagon
 	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn
-	add_eggmoves Beldum
+	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn
 	add_eggmoves NoHoenn

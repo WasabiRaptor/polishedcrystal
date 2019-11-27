@@ -81,7 +81,7 @@ _TitleScreen: ; 10ed67
 
 ; 'CRYSTAL VERSION'
 	hlbgcoord 5, 9
-	ld bc, NAME_LENGTH ; length of version text
+	ld bc, PLAYER_NAME_LENGTH ; length of version text
 	ld a, 1
 	call ByteFill
 

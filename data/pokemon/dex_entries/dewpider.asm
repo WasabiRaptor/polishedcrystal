@@ -1,14 +1,9 @@
-    db "WATER BUBBLE@" ; species name
-    dw 100, 88 ; height, weight
+	db "WATER BUBBLE@" ; species name
+	dw 3, 40 ; height, weight
 
-    db   "It crawls onto the"
-    next "land in search of"
-    next "values in its"
-
-    page "food. Its water"
-    next "bubble allows it"
-    next "to breathe and" 
-         
-    page "protects its soft"
-    next "head.@" 
-    
+	db "When two Dewpider meet, they"
+	next "display their water bubbles to"
+	next "each other. Then the one with"
+	
+	page "the smaller bubble gets out of"
+	next "the other's way.@"

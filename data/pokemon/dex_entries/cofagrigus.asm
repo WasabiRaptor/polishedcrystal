@@ -1,10 +1,8 @@
-    db "COFFIN@" ; species name
-    dw 507, 1687 ; height, weight
+	db "COFFIN@" ; species name
+	dw 17, 765 ; height, weight
 
-    db   "Grave robbers who"
-    next "mistake them for"
-    next "real coffins and"
-
-    page "get too close end"
-    next "up trapped inside"
-    next "their bodies.@" 
+	db "Grave robbers who mistake"
+	next "them for real coffins and get"
+	next "too close end up trapped inside"
+	
+	page "their bodies.@"

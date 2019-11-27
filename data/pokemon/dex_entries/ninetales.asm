@@ -1,10 +1,9 @@
 	db "FOX@" ; species name
-	dw 307, 440 ; height, weight
+	dw 11, 199 ; height, weight
 
-	db   "It is said to live"
-	next "a thousand years,"
-	next "and each of its"
-
-	page "tails is loaded"
-	next "with supernatural"
-	next "powers.@"
+	db "It is vindictive and relentless"
+	next "by nature. Those who cross it"
+	next "even once will be cursed for a"
+	
+	page "thousand years, along with their"
+	next "descendants.@"

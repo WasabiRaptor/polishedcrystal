@@ -1,10 +1,8 @@
-    db "TADPOLE@" ; species name
-    dw 108, 99 ; height, weight
+	db "TADPOLE@" ; species name
+	dw 5, 45 ; height, weight
 
-    db   "They warn others"
-    next "of danger by"
-    next "vibrating their"
-
-    page "cheeks to create a"
-    next "high-pitched"
-    next "sound.@" 
+	db "By vibrating its cheeks, it emits"
+	next "sound waves imperceptible to"
+	next "humans. It uses the rhythm of"
+	
+	page "these sounds to talk.@"

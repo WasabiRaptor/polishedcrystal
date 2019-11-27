@@ -1,10 +1,12 @@
-	db "HIBERNANT@" ; species name
-	dw 511, 2770 ; height, weight
+	db "HIBERNATOR@" ; species name
+	dw 18, 1258 ; height, weight
 
-	db   "Although it has a"
-	next "large body, it is"
-	next "quite skilled at"
-
-	page "climbing trees. It"
-	next "eats and sleeps in"
-	next "the treetops.@"
+	db "In the forests inhabited by"
+	next "Ursaring, it is said that there"
+	next "are many streams and towering"
+	
+	page "trees where they gather food.@"
+	next "This Pokémon walks through its"
+	next "forest gathering food every"
+	
+	page "day.@"

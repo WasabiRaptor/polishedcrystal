@@ -16,72 +16,80 @@ JohtoMenuMonIconColors::
 	iconpal RED, PINK ; LEDIAN
 	iconpal GREEN, PURPLE ; SPINARAK
 	iconpal PURPLE, BLUE ; ARIADOS
+	iconpal PURPLE, GREEN ; CROBAT
 	iconpal BLUE, TEAL ; CHINCHOU
 	iconpal BLUE, TEAL ; LANTURN
+	iconpal RED, BLUE ; PICHU
+	iconpal PINK, GREEN ;CLEFFA
+	iconpal PINK, GREEN ;IGGLYBUFF
 	iconpal RED, BLUE ; TOGEPI
 	iconpal RED, BLUE ; TOGETIC
-	iconpal RED, BLUE ; TOGEKISS
 	iconpal GREEN, RED ; NATU
 	iconpal GREEN, RED ; XATU
 	iconpal BLUE, PURPLE ; MAREEP
 	iconpal PINK, RED ; FLAAFFY
 	iconpal BROWN, RED ; AMPHAROS
-	iconpal BLUE, GREEN ; AZURILL
+	iconpal GREEN, PURPLE; BELLOSSOM
 	iconpal BLUE, GREEN ; MARILL
 	iconpal BLUE, BROWN ; AZUMARILL
-	iconpal GREEN, RED ; BONSLY
 	iconpal GREEN, RED ; SUDOWOODO
+	iconpal GREEN, BLUE ; POLITOED
     iconpal PINK, GREEN ; HOPPIP
     iconpal PINK, GREEN ; SKIPLOOM
     iconpal PINK, GREEN ; JUMPLUFF
     iconpal PURPLE, GREEN ; AIPOM
-    iconpal PURPLE, GREEN ; AMBIPOM
 	iconpal GREEN, BROWN ; SUNKERN
 	iconpal GREEN, BROWN ; SUNFLORA
 	iconpal RED, BLUE ; YANMA
-	iconpal RED, BLUE ; YANMEGA
 	iconpal BLUE, RED ; WOOPER
 	iconpal BLUE, RED ; QUAGSIRE
+	iconpal PURPLE, GREEN ; ESPEON
+	iconpal GRAY, BLUE ; UMBREON
 	iconpal BLUE, PURPLE ; MURKROW
-	iconpal BLUE, PURPLE ; HONCHKROW
+	iconpal PINK, GREEN ; SLOWKING
 	iconpal PURPLE, BROWN ; MISDREAVUS
-	iconpal PURPLE, BROWN ; MISMAGIUS
 	iconpal GRAY, BLUE ; UNOWN
-	iconpal BLUE, PURPLE ; WYNAUT
 	iconpal BLUE, PURPLE ; WOBBUFFET
 	iconpal BROWN, BLUE ; GIRAFARIG
 	iconpal GRAY, RED ; PINECO
 	iconpal PURPLE, BROWN ; FORRETRESS
 	iconpal BLUE, RED ; DUNSPARCE
 	iconpal PURPLE, GRAY ; GLIGAR
-	iconpal PURPLE, GRAY ; GLISCOR
+	iconpal GRAY, RED ; STEELIX
 	iconpal PINK, BLUE ; SNUBBULL
 	iconpal PURPLE, GRAY ; GRANBULL
 	iconpal BLUE, PURPLE ; QWILFISH
+	iconpal RED, GREEN ; SCIZOR
     iconpal RED, BLUE ; SHUCKLE
 	iconpal BLUE, PURPLE ; HERACROSS
-	iconpal BLUE, RED ; SNEASEL
-	iconpal BLUE, RED ; WEAVILE
+	iconpal RED, BLUE ; SNEASEL
 	iconpal BROWN, GREEN ; TEDDIURSA
 	iconpal BROWN, GREEN ; URSARING
 	iconpal RED, GRAY ; SLUGMA
 	iconpal RED, BLUE ; MAGCARGO
 	iconpal BROWN, BLUE ; SWINUB
 	iconpal BROWN, GREEN ; PILOSWINE
-	iconpal BROWN, GREEN ; MAMOSWINE
 	iconpal PINK, BLUE ; CORSOLA
 	iconpal BLUE, GRAY ; REMORAID
 	iconpal RED, TEAL ; OCTILLERY
-	iconpal BLUE, BLUE ; MANTYKE
+	iconpal RED, BLUE ; DELIBIRD
 	iconpal BLUE, BLUE ; MANTINE
 	iconpal GRAY, GREEN ; SKARMORY
 	iconpal RED, GRAY ; HOUNDOUR
 	iconpal RED, GRAY ; HOUNDOOM
+	iconpal BLUE, BLUE ; KINGDRA
 	iconpal BLUE, GRAY ; PHANPY
 	iconpal GRAY, RED ; DONPHAN
+	iconpal PINK, BLUE ; PORYGON2
     iconpal BROWN, GREEN ; STANTLER
 	iconpal BROWN, GREEN ; SMEARGLE
+	iconpal RED, RED ; TYROGUE
+	iconpal RED, RED ; HITMONTOP
+	iconpal RED, RED ; SMOOCHUM
+	iconpal RED, RED ; ELEKID
+	iconpal RED, RED ; MAGBY
 	iconpal PINK, BLUE ; MILTANK
+	iconpal PINK, GREEN ; BLISSEY
 	iconpal BROWN, RED ; RAIKOU
 	iconpal RED, BROWN ; ENTEI
 	iconpal BLUE, BLUE ; SUICUNE

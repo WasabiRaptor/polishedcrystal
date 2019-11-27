@@ -3,7 +3,7 @@
 
 	db   "The rocks in its"
     next "mane are sharper"
-    next "than a knife."
+    next "than a knife.@"
 
     page "Fragments that"
     next "break off are"

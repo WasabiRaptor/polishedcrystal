@@ -16,7 +16,7 @@ BattleCommand_thief:
 	; Update parties
 	ld a, [wCurBattleMon]
 	ld hl, wPartyMon1Item
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [wBattleMonItem]
 	ld [hl], a
 	ld b, a
@@ -28,7 +28,7 @@ BattleCommand_thief:
 
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Item
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [wEnemyMonItem]
 	ld [hl], a
 	ret

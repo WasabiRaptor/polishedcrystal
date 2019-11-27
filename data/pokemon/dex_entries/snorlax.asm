@@ -1,10 +1,9 @@
 	db "SLEEPING@" ; species name
-	dw 611, 10140 ; height, weight
+	dw 21, 4600 ; height, weight
 
-	db   "This #MON's"
-	next "stomach is so"
-	next "strong, even"
-
-	page "eating moldy or"
-	next "rotten food will"
-	next "not affect it.@"
+	db "It doesn't do anything other"
+	next "than eat and sleep. When"
+	next "prompted to make a serious"
+	
+	page "effort, though, it apparently"
+	next "displays awesome power.@"

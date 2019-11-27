@@ -1,13 +1,8 @@
-    db "CLAY DOLL@" ; species name
-    dw 108, 474 ; height, weight
+	db "CLAY DOLL@" ; species name
+	dw 5, 215 ; height, weight
 
-    db   "It was discovered"
-    next "in ancient ruins."
-    next "While moving, it"
-
-    page "constantly spins."
-    next "It stands on one"
-    next "foot even when" 
-         
-    page "asleep.@"
-      
+	db "Depictions of Pokémon similar"
+	next "to Baltoy have been found on"
+	next "the walls of caves where"
+	
+	page "primitive humans lived.@"

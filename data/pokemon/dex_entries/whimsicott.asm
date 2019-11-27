@@ -1,11 +1,8 @@
-    db "WINDVEILED@" ; species name
-    dw 204, 146 ; height, weight
+	db "WINDVEILED@" ; species name
+	dw 7, 66 ; height, weight
 
-    db   "Like the wind, it"
-    next "can slip through"
-    next "any gap, no matter"
-
-    page "how small. It"
-    next "leaves behind"
-    next "balls of fluff.@" 
-      
+	db "This nuisance sneaks into"
+	next "people's homes, where it hides"
+	next "important things and scatters"
+	
+	page "cotton all over the place.@"

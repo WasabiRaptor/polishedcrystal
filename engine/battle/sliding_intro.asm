@@ -54,7 +54,6 @@ BattleIntroSlidingPics: ; 4e980
 	pop de
 
 .skip1
-	call DelayFrame
 	pop af
 	dec a
 	jr nz, .loop1

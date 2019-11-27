@@ -101,7 +101,7 @@ box: MACRO
 \1Mons::
 \1Mon1::            box_struct \1Mon1
 \1Mon2::            ds BOXMON_STRUCT_LENGTH * (MONS_PER_BOX +- 1)
-\1MonOT::           ds NAME_LENGTH * MONS_PER_BOX
+\1MonOT::           ds PLAYER_NAME_LENGTH * MONS_PER_BOX
 \1MonNicknames::    ds PKMN_NAME_LENGTH * MONS_PER_BOX
 \1MonNicknamesEnd::
 \1End::             ds 2 ; padding
@@ -156,18 +156,18 @@ channel_struct: MACRO
 ENDM
 
 battle_tower_struct: MACRO
-\1Name:: ds NAME_LENGTH +- 1
-\1TrainerClass:: ds 1
-\1Pkmn1:: party_struct \1Pkmn1
-\1Pkmn1Name:: ds PKMN_NAME_LENGTH
+\1Name:: ;ds PLAYER_NAME_LENGTH +- 1
+\1TrainerClass:: ;ds 1
+\1Pkmn1:: ;party_struct \1Pkmn1
+\1Pkmn1Name:: ;ds PKMN_NAME_LENGTH
 \1Pkmn1NameEnd::
-\1Pkmn2:: party_struct \1Pkmn2
-\1Pkmn2Name:: ds PKMN_NAME_LENGTH
+\1Pkmn2:: ;party_struct \1Pkmn2
+\1Pkmn2Name:: ;ds PKMN_NAME_LENGTH
 \1Pkmn2NameEnd::
-\1Pkmn3:: party_struct \1Pkmn3
-\1Pkmn3Name:: ds PKMN_NAME_LENGTH
+\1Pkmn3:: ;party_struct \1Pkmn3
+\1Pkmn3Name:: ;ds PKMN_NAME_LENGTH
 \1Pkmn3NameEnd::
-\1Padding: ds BATTLETOWER_PADDING_SIZE
+\1Padding: ;ds BATTLETOWER_PADDING_SIZE
 \1TrainerEnd::
 endm
 
@@ -223,10 +223,10 @@ ENDM
 trademon: MACRO
 \1Group:: ds 1
 \1Species:: ds 1 ; wc6d0 | wc702
-\1SpeciesName:: ds PKMN_NAME_LENGTH ; wc6d1 | wc703
+;\1SpeciesName:: ds PKMN_NAME_LENGTH ; wc6d1 | wc703
 \1Nickname:: ds PKMN_NAME_LENGTH ; wc6dc | wc70e
-\1SenderName:: ds NAME_LENGTH ; wc6e7 | wc719
-\1OTName:: ds NAME_LENGTH ; wc6f2 | wc724
+\1SenderName:: ds PLAYER_NAME_LENGTH ; wc6e7 | wc719
+\1OTName:: ds PLAYER_NAME_LENGTH ; wc6f2 | wc724
 \1DVs:: ; wc6fd | wc72f
 \1HPAtkDV:: ds 1
 \1DefSpdDV:: ds 1

@@ -1,11 +1,8 @@
-    db "CURLIPEDE@" ; species name
-    dw 311, 1290 ; height, weight
+	db "CURLIPEDE@" ; species name
+	dw 12, 585 ; height, weight
 
-    db   "Protected by a"
-    next "hard shell, it"
-    next "spins its body"
-
-    page "like a wheel and"
-    next "crashes furiously"
-    next "into its enemies.@" 
-    
+	db "It is usually motionless, but"
+	next "when attacked, it rotates at"
+	next "high speed and then crashes into"
+	
+	page "its opponent.@"

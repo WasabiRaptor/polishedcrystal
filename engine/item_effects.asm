@@ -522,13 +522,13 @@ PokeBallEffect: ; e8a2
 	ld [wd265], a
 
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 
 	ld a, c
 	push af
 	ld a, [wd265]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	pop af
 	and a
 	jr nz, .skip_pokedex
@@ -809,8 +809,11 @@ HeavyBallMultiplier:
 ; else add 30 to catch rate if weight < 409.6 kg
 ; else add 40 to catch rate (never happens)
 	push bc
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld [wd265], a
+	ld [wCurSpecies], a
 	farcall GetDexEntryPointer
 	ld a, b
 	call GetFarHalfword
@@ -1114,7 +1117,7 @@ RepeatBallMultiplier:
 
 	dec a
 	push bc
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop bc
 	ret z
 
@@ -1318,7 +1321,7 @@ endr
 	ret
 
 Text_NoShake: ; 0xedb5
-	; Oh no! The #MON broke free!
+	; Oh no! The Pokémon broke free!
 	text_jump UnknownText_0x1c5aa6
 	db "@"
 ; 0xedba
@@ -1370,7 +1373,7 @@ Text_SentToBillsPC: ; 0xedeb
 ; 0xedf0
 
 Text_AddedToPokedex: ; 0xedf0
-	; 's data was newly added to the #DEX.@ @
+	; 's data was newly added to the Pokédex.@ @
 	text_jump UnknownText_0x1c5b53
 	db "@"
 ; 0xedf5
@@ -1397,7 +1400,7 @@ EvoStoneEffect:
 	jp c, .DecidedNotToUse
 
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	ld a, [hl]
 	cp EVERSTONE
@@ -1434,7 +1437,7 @@ VitaminEffect: ; ee3d
 	call GetEVRelativePointer
 
 	ld a, MON_EVS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	add hl, bc
 	ld a, [hl]
@@ -1524,19 +1527,19 @@ GetEVRelativePointer: ; eed9
 
 RareCandy_StatBooster_GetParameters: ; eef5
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call GetBaseData ;frorm is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	jp GetNick
+	predef_jump GetNick
 ; 0xef14
 
 
@@ -1549,7 +1552,7 @@ RareCandy: ; ef14
 	call RareCandy_StatBooster_GetParameters
 
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	ld a, [hl]
 	cp MAX_LEVEL
@@ -1564,7 +1567,7 @@ RareCandy: ; ef14
 
 	pop de
 	ld a, MON_EXP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	ldh a, [hMultiplicand]
 	ld [hli], a
@@ -1575,7 +1578,7 @@ RareCandy: ; ef14
 
 	push bc
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	push de
 	ld de, wStringBuffer3
 	ld bc, 12
@@ -1650,7 +1653,7 @@ UseStatusHealer: ; efda (3:6fda)
 	ret z
 	call GetItemHealingAction
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and c
 	jr nz, .good
@@ -1690,7 +1693,7 @@ BattlemonRestoreHealth: ; f01e (3:701e)
 	call IsItemUsedOnBattleMon
 	ret nc
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBattleMonHP], a
 	ld a, [hld]
@@ -1850,7 +1853,7 @@ FullRestore: ; f128
 	ld [wLowHealthAlarm], a
 	call ReviveFullHP
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -1991,7 +1994,7 @@ UseItem_DoSelectMon:
 	ret c
 
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr z, .not_egg
 
@@ -2093,7 +2096,7 @@ ReviveFullHP: ; f2c3 (3:72c3)
 	call LoadHPFromBuffer1
 ContinueRevive: ; f2c6 (3:72c6)
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld [hl], d
 	inc hl
 	ld [hl], e
@@ -2101,7 +2104,7 @@ ContinueRevive: ; f2c6 (3:72c6)
 
 RestoreHealth: ; f2d1 (3:72d1)
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	add e
 	ld [hld], a
@@ -2111,11 +2114,11 @@ RestoreHealth: ; f2d1 (3:72d1)
 	jr c, .full_hp
 	call LoadCurHPIntoBuffer5
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld d, h
 	ld e, l
 	ld a, MON_MAXHP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [de]
 	sub [hl]
 	dec de
@@ -2128,7 +2131,7 @@ RestoreHealth: ; f2d1 (3:72d1)
 
 RemoveHP: ; f2f9 (3:72f9)
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	sub e
 	ld [hld], a
@@ -2165,7 +2168,7 @@ IsMonAtFullHealth: ; f31b (3:731b)
 
 LoadCurHPIntoBuffer5: ; f328 (3:7328)
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBuffer6], a
 	ld a, [hl]
@@ -2175,7 +2178,7 @@ LoadCurHPIntoBuffer5: ; f328 (3:7328)
 
 LoadCurHPToBuffer3: ; f348 (3:7348)
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBuffer4], a
 	ld a, [hl]
@@ -2192,7 +2195,7 @@ LoadHPFromBuffer3: ; f356 (3:7356)
 LoadMaxHPToBuffer1: ; f35f (3:735f)
 	push hl
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBuffer2], a
 	ld a, [hl]
@@ -2210,7 +2213,7 @@ LoadHPFromBuffer1: ; f36f (3:736f)
 GetOneFifthMaxHP: ; f378 (3:7378)
 	push bc
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ldh [hDividend + 0], a
 	ld a, [hl]
@@ -2261,7 +2264,7 @@ GetHealingItemAmount: ; f395 (3:7395)
 
 .set_de_to_hp
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
@@ -2333,7 +2336,7 @@ Softboiled_MilkDrinkFunction: ; f3df (3:73df)
 ; f44a (3:744a)
 
 .Text_CantBeUsed: ; 0xf44a
-	; That can't be used on this #MON.
+	; That can't be used on this Pokémon.
 	text_jump UnknownText_0x1c5bac
 	db "@"
 ; 0xf44f
@@ -2492,7 +2495,7 @@ PrintAprValues:
 	lb bc, 1, 2
 	hlcoord 10, 4
 	ld de, wApricorns
-	call PrintNum
+	predef PrintNum
 	hlcoord 16, 4
 	call .print
 	hlcoord 10, 6
@@ -2506,7 +2509,7 @@ PrintAprValues:
 	hlcoord 10, 10
 .print
 	inc de
-	jp PrintNum
+	predef_jump PrintNum
 
 
 OldRod: ; f5a5
@@ -2995,28 +2998,28 @@ DontBeAThiefText: ; 0xf829
 ; 0xf82e
 
 Ball_BoxIsFullText: ; 0xf838
-	; The #MON BOX is full. That can't be used now.
+	; The Pokémon BOX is full. That can't be used now.
 	text_jump UnknownText_0x1c5e3a
 	db "@"
 ; 0xf83d
 
 Ball_MonIsHiddenText:
-	; The #MON can't be seen!
+	; The Pokémon can't be seen!
 	text_jump Text_MonIsHiddenFromBall
 	db "@"
 
 Ball_MonCantBeCaughtText:
-	; The #MON can't be caught!
+	; The Pokémon can't be caught!
 	text_jump Text_MonCantBeCaught
 	db "@"
 
 Ball_NuzlockeFailureText:
-	; You already encountered a #MON here.
+	; You already encountered a Pokémon here.
 	text_jump Text_NuzlockeBallFailure
 	db "@"
 
 Revive_NuzlockeFailureText:
-	; You can't revive #MON in NUZLOCKE mode!
+	; You can't revive Pokémon in NUZLOCKE mode!
 	text_jump Text_NuzlockeReviveFailure
 	db "@"
 
@@ -3029,7 +3032,7 @@ UsedItemText: ; 0xf83d
 
 ApplyPPUp: ; f84c
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	push hl
 	ld de, wBuffer1
 	predef FillPP
@@ -3116,10 +3119,10 @@ ComputeMaxPP: ; f881
 
 RestoreAllPP: ; f8b9
 	ld a, MON_PP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	push hl
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	pop de
 	xor a ; PARTYMON
 	ld [wMenuCursorY], a
@@ -3249,7 +3252,7 @@ AbilityCap:
 
 	push hl
 	ld a, MON_ABILITY
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and ABILITY_MASK
 	cp HIDDEN_ABILITY
@@ -3261,7 +3264,7 @@ AbilityCap:
 	pop hl
 	push hl
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call GetBaseData ;frorm is known
 	ld a, [wBaseAbility1]
 	ld b, a

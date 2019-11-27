@@ -89,6 +89,26 @@ Toss_Sell_Loop: ; 24ff9
 	ret
 ; 2500e
 
+JoyTextDelay_ForcehJoyDown:: ; 354b joypad
+	call DelayFrame
+
+	ldh a, [hInMenu]
+	push af
+	ld a, $1
+	ldh [hInMenu], a
+	call JoyTextDelay
+	pop af
+	ldh [hInMenu], a
+
+	ldh a, [hJoyLast]
+	and D_RIGHT + D_LEFT + D_UP + D_DOWN
+	ld c, a
+	ldh a, [hJoyPressed]
+	and A_BUTTON + B_BUTTON + SELECT + START
+	or c
+	ld c, a
+	ret
+
 BuySellToss_InterpretJoypad: ; 2500e
 	call JoyTextDelay_ForcehJoyDown ; get joypad
 	bit B_BUTTON_F, c
@@ -179,7 +199,7 @@ BuySellToss_UpdateQuantityDisplay: ; 25072
 	inc hl
 	ld de, wItemQuantityChangeBuffer
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
+	predef PrintNum
 	dec hl
 	ld a, [wMenuData2Pointer]
 	ld e, a
@@ -238,7 +258,7 @@ Sell_HalvePrice: ; 250c1
 BuySell_DisplaySubtotal: ; 250d1
 	call DisplayPurchasePriceCommon
 	lb bc, PRINTNUM_MONEY | 3, 7
-	call PrintNum
+	predef PrintNum
 	jp ApplyTilemapInVBlank
 ; 250ed
 
@@ -246,7 +266,7 @@ BTDisplayPurchaseCost:
 	call BuySell_MultiplyPrice
 	call DisplayPurchasePriceCommon
 	lb bc, 3, 4
-	call PrintNum
+	predef PrintNum
 	ld de, .BPString
 	call PlaceString
 	jp ApplyTilemapInVBlank

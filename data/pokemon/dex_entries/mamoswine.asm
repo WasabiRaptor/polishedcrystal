@@ -1,10 +1,8 @@
-    db "TWIN TUSK@" ; species name
-    dw 802, 6145 ; height, weight
+	db "TWIN TUSK@" ; species name
+	dw 25, 2910 ; height, weight
 
-    db   "When temperatures"
-    next "rose at the end of"
-    next "the ice age, most"
-
-    page "Mamoswine"
-    next "disappeared.@"
-   
+	db "Its impressive tusks are made"
+	next "of ice. The population thinned"
+	next "when it turned warm after the"
+	
+	page "ice age.@"

@@ -222,14 +222,14 @@ LoadContestantName: ; 13730
 ; Append the name to wBugContestWinnerName.
 	ld hl, wStringBuffer1
 	pop de
-	ld bc, NAME_LENGTH - 1
+	ld bc, PLAYER_NAME_LENGTH - 1
 	rst CopyBytes
 	ret
 
 .player
 	ld hl, wPlayerName
 	ld de, wBugContestWinnerName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 ; 13783

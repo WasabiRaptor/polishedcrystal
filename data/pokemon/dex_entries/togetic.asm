@@ -1,10 +1,10 @@
 	db "HAPPINESS@" ; species name
-	dw 200, 70 ; height, weight
+	dw 6, 32 ; height, weight
 
-	db   "Although it does"
-	next "not flap its wings"
-	next "very much, it can"
-
-	page "stay up in the air"
-	next "as it tags along"
-	next "after its trainer.@"
+	db "Togetic is said to be a Pokémon"
+	next "that brings good fortune. When"
+	next "the Pokémon spots someone"
+	
+	page "who is pure of heart, it is said"
+	next "to appear and share its"
+	next "happiness with that person.@"

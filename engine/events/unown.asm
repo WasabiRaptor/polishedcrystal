@@ -1,4 +1,4 @@
-SpecialHoOhChamber: ; 0x8addb
+SpecialHo_OhChamber: ; 0x8addb
 	ret
 ; 0x8adef
 

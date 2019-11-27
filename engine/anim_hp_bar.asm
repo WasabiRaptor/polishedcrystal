@@ -1,3 +1,63 @@
+DrawBattleHPBar:: ; 3750
+; Draw an HP bar d tiles long at hl
+; Fill it up to e pixels
+
+	push hl
+	push de
+	push bc
+
+; Place 'HP:'
+	ld a, "<HP1>"
+	ld [hli], a
+	inc a ; ld a, "<HP2>"
+	ld [hli], a
+
+; Draw a template
+	push hl
+	inc a ; ld a, "<NOHP>" ; empty bar
+.template
+	ld [hli], a
+	dec d
+	jr nz, .template
+	ld a, "<HPEND>" ; bar end cap
+	ld [hl], a
+	pop hl
+
+; Safety check # pixels
+	ld a, e
+	and a
+	jr nz, .fill
+	ld a, c
+	and a
+	jr z, .done
+	ld e, 1
+
+.fill
+; Keep drawing tiles until pixel length is reached
+	ld a, e
+	sub TILE_WIDTH
+	jr c, .lastbar
+
+	ld e, a
+	ld a, "<FULLHP>"
+	ld [hli], a
+	ld a, e
+	and a
+	jr z, .done
+	jr .fill
+
+.lastbar
+	ld a, "<NOHP>"
+	add e
+	ld [hl], a
+
+.done
+	pop bc
+	pop de
+	pop hl
+	ret
+; 3786
+
 AnimateHPBar: ; c6e0
 	call ApplyTilemapInVBlank
 	call _AnimateHPBar
@@ -206,7 +266,7 @@ HPBarAnim_UpdateHPRemaining:
 	ld [wStringBuffer2], a
 	ld de, wStringBuffer2
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 	pop hl
 	ret
 

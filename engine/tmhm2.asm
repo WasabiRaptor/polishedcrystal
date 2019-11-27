@@ -160,6 +160,8 @@ TMHM_ScrollPocket: ; 2c9b1 (b:49b1)
 	jp TMHM_ShowTMMoveDescription
 
 TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
+	VWTextStart $b0
+	call InitVariableWidthTiles
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jp z, Tutorial_TMHMPocket
@@ -190,7 +192,7 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	jr nc, .HM
 	ld de, wd265
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
+	predef PrintNum
 	jr .okay
 
 .HM:
@@ -201,7 +203,7 @@ TMHM_DisplayPocketItems: ; 2c9e2 (b:49e2)
 	inc hl
 	ld de, wd265
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	pop af
 	ld [wd265], a
 .okay
@@ -317,6 +319,7 @@ PrintMoveDesc: ; 2cb3e
 	ld e, a
 	ld d, [hl]
 	pop hl
+	call InitVariableWidthText
 	jp PlaceString
 ; 2cb52
 
@@ -385,7 +388,7 @@ ChooseMonToLearnTMHM_NoRefresh: ; 2c80a
 	ret c
 	push af
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	pop bc ; now contains the former contents of af
 	jr nz, .egg
@@ -418,7 +421,7 @@ TeachTMHM: ; 2c867
 	push bc
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	pop bc
 
 	ld a, c
@@ -458,9 +461,18 @@ TeachTMHM: ; 2c867
 	ret
 ; 2c8bf (b:48bf)
 
+IsHM:: ; 34df
+	cp HM01
+	jr c, .NotHM
+	scf
+	ret
+.NotHM:
+	and a
+	ret
+
 KnowsMove: ; f9ea
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wPutativeTMHMMove]
 	ld b, a
 	ld c, NUM_MOVES
@@ -497,7 +509,7 @@ Text_BootedHM: ; 0x2c8c4
 ; 0x2c8c9
 
 Text_ItContained: ; 0x2c8c9
-	; It contained @ . Teach @ to a #MON?
+	; It contained @ . Teach @ to a Pokémon?
 	text_jump UnknownText_0x1c0396
 	db "@"
 ; 0x2c8ce

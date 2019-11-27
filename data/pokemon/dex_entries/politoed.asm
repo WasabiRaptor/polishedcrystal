@@ -1,10 +1,8 @@
 	db "FROG@" ; species name
-	dw 307, 750 ; height, weight
+	dw 11, 339 ; height, weight
 
-	db   "When it expands"
-	next "its throat to"
-	next "croak out a tune,"
-
-	page "nearby POLIWAG and"
-	next "POLIWHIRL gather"
-	next "immediately.@"
+	db "Although its cries sound like"
+	next "screams, a composer created a"
+	next "beautiful ballad that was"
+	
+	page "influenced by the sounds.@"

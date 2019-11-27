@@ -1,7 +1,6 @@
+INCLUDE "constants.asm"
 
-grouped_dex_order_mon: macro
-	db \1, GROUP_\1
-endm
+SECTION "Invar Dex Order", ROMX
 
 InvarDexOrder::
 	grouped_dex_order_mon EEVEE			; 01
@@ -212,11 +211,11 @@ InvarDexOrder::
 	grouped_dex_order_mon CRYOGONAL     ; ce
 	grouped_dex_order_mon SNORUNT      ; cf
 	grouped_dex_order_mon GLALIE        ; d0
-	grouped_dex_order_mon FROSSLASS     ; d1
+	grouped_dex_order_mon FROSLASS     ; d1
 	grouped_dex_order_mon SWINUB        ; d2
 	grouped_dex_order_mon PILOSWINE     ; d3
 	grouped_dex_order_mon MAMOSWINE     ; d4
-	grouped_dex_order_mon DUMMY_UNOWN    		; d5 alt forms
+	grouped_dex_order_mon UNOWN    		; d5 alt forms
 	grouped_dex_order_mon NATU          ; d6
 	grouped_dex_order_mon XATU          ; d7
 	grouped_dex_order_mon SIGILYPH      ; d8

@@ -1,10 +1,8 @@
 	db "NEON@" ; species name
-	dw 311, 529 ; height, weight
+	dw 12, 240 ; height, weight
 
-	db   "It crawls along"
-	next "the seafloor using"
-	next "its long front"
-
-	page "fins like legs. It"
-	next "competes for food"
-	next "with Lanturn.@"     
+	db "Deep down at the bottom of the"
+	next "ocean, prey is scarce. Lumineon"
+	next "get into fierce disputes with"
+	
+	page "Lanturn over food.@"

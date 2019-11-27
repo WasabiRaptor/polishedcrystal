@@ -1,10 +1,9 @@
 	db "SHARP CLAW@" ; species name
-	dw 211, 620 ; height, weight
+	dw 9, 280 ; height, weight
 
-	db   "This cunning"
-	next "#MON hides"
-	next "under the cover"
-
-	page "of darkness,"
-	next "waiting to attack"
-	next "its prey.@"
+	db "They will cooperate to steal"
+	next "eggs from the nests of bird"
+	next "Pokémon, but fights break out"
+	
+	page "to determine which one gets to"
+	next "eat the eggs.@"

@@ -1,10 +1,12 @@
 	db "COCOON@" ; species name
-	dw 200, 220 ; height, weight
+	dw 6, 100 ; height, weight
 
-	db   "Nearly incapable"
-	next "of movement, it"
-	next "leans against"
-
-	page "stout trees while"
-	next "waiting for its"
-	next "evolution.@"
+	db "Kakuna remains virtually"
+	next "immobile as it clings to a tree.@"
+	next "However, on the inside, it is"
+	
+	page "extremely busy as it prepares"
+	next "for its coming evolution. This is"
+	next "evident from how hot the shell"
+	
+	page "becomes to the touch.@"

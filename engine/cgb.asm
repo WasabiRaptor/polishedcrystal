@@ -74,11 +74,13 @@ _CGB_BattleColors: ; 8ddb
 	ld de, wUnknBGPals
 	ld a, [wTempBattleMonGroup]
 	ld [wCurGroup], a
-	call GetBattlemonBackpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurSpecies], a
-
+	ld [wCurPartySpecies], a
+	ld a, [wTempBattleMonForm]
+	ld [wCurForm], a
+	call GetBattlemonBackpicPalette
+	ld a, [wTempBattleMonSpecies]
 	and a
 	jr z, .player_backsprite
 	push de
@@ -89,17 +91,19 @@ _CGB_BattleColors: ; 8ddb
 	ld b, a
 	; vary colors by DVs
 	call CopyDVsToColorVaryDVs
-	ld hl, wUnknBGPals palette PAL_BATTLE_BG_PLAYER + 2
+	ld hl, wUnknBGPals palette PAL_BATTLE_BG_PLAYER
 	call VaryColorsByDVs
 	pop de
 .player_backsprite
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
-	call GetEnemyFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
-
+	ld [wCurPartySpecies], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
+	call GetEnemyFrontpicPalette
+	ld a, [wTempEnemyMonSpecies]
 	and a
 	jr z, .trainer_sprite
 	push de
@@ -110,7 +114,7 @@ _CGB_BattleColors: ; 8ddb
 	ld b, a
 	; vary colors by DVs
 	call CopyDVsToColorVaryDVs
-	ld hl, wUnknBGPals palette PAL_BATTLE_BG_ENEMY + 2
+	ld hl, wUnknBGPals palette PAL_BATTLE_BG_ENEMY
 	call VaryColorsByDVs
 	pop de
 .trainer_sprite
@@ -210,15 +214,15 @@ _CGB_FinishBattleScreenLayout: ; 8e23
 	ld a, $5
 	call FillBoxCGB
 
-	hlcoord 1, 9, wAttrMap
-	lb bc, 1, 6
-	ld a, $6
-	call FillBoxCGB
-
 	hlcoord 0, 12, wAttrMap
 	ld bc, 6 * SCREEN_WIDTH
 	ld a, $7
 	call ByteFill
+
+	hlcoord $d, $d, wAttrMap
+	lb bc, 1, 6
+	ld a, $6
+	call FillBoxCGB
 
 	ld hl, BattleObjectPals
 	ld de, wUnknOBPals palette PAL_BATTLE_OB_GRAY
@@ -266,8 +270,7 @@ _CGB_StatsScreenHPPals: ; 8edb
 .not_egg
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	push de
 	call VaryBGPal1ByTempMonDVs
 	pop de
@@ -327,26 +330,63 @@ _CGB_StatsScreenHPPals: ; 8edb
 
 	jp _CGB_FinishLayout
 ; 8f52
+LoadPokedexIconPals::
+	dec a
+	push hl
+	push bc
+	push de
+	ld hl, PokedexOBPalTable
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	push de
+	farcall GetMenuMonIconPalette.got_shininess
+	pop de
+	ld b, 0
+	ld c, a
+	ld hl, OWPalsTable
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call LoadHLPaletteIntoDE
+	pop de
+	pop bc
+	pop hl
+	ret
 
+OWPalsTable:
+	dw OWRedPal
+	dw OWBluePal
+	dw OWGreenPal
+	dw OWBrownPal
+	dw OWPurplePal
+	dw OWGrayPal
+	dw OWPinkPal
+	dw OWTealPal
+
+PokedexOBPalTable:
+	dw wUnknOBPals palette 5
+	dw wUnknOBPals palette 4
+	dw wUnknOBPals palette 3
+	dw wUnknOBPals palette 2
 
 _CGB_Pokedex: ; 8f70
 	ld de, wUnknBGPals
 	ld hl, PokedexRedPalette
 	call LoadHLPaletteIntoDE
 
-	ld a, [wCurPartySpecies]
-	cp $ff
-	jr nz, .is_pokemon
-	ld hl, GreenPicPalette
-	call LoadHLPaletteIntoDE
-	jr .got_palette
-.is_pokemon
 	ld bc, wDexMonShiny
 	ld [wDexMonForm], a
 	ld a, [wCurPartySpecies]
 
-	call GetMonNormalOrShinyPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetMonPalette
+
 .got_palette
 
 	call WipeAttrMap
@@ -405,32 +445,32 @@ _CGB_PokedexSearchOptionPals: ; 93ba
 	ld bc, 6
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 7
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 6
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 5
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 4
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 3
 	ld bc, 2
 	ld a, $5
 	call FarCopyWRAM
-	ld hl, BlackPalette
+	ld hl, PokedexRedPalette
 	ld de, wUnknBGPals palette 2
 	ld bc, 2
 	ld a, $5
@@ -616,8 +656,7 @@ _CGB_Evolution: ; 91e4
 	ld a, [wHatchOrEvolutionResultGroup]
 	ld [wCurGroup], a
 	ld a, [wHatchOrEvolutionResultSpecies]
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	; hl = DVs
 	ld hl, wPartyMon1DVs
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -838,28 +877,22 @@ _CGB_TrainerCard2: ; 9289
 	call LoadFirstTwoTrainerCardPals
 
 	ld a, FALKNER
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, BUGSY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, WHITNEY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, MORTY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, JASMINE ; CHUCK
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, CLAIR ; PRYCE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	; Badges
 	ld hl, JohtoBadgePalettes
@@ -924,28 +957,22 @@ _CGB_TrainerCard3:
 	call LoadFirstTwoTrainerCardPals
 
 	ld a, BROCK
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, SABRINA ; BLAINE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, ERIKA ; LT_SURGE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, MISTY
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, JANINE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	ld a, BLUE
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	; Badges
 	ld hl, KantoBadgePalettes
@@ -1026,8 +1053,7 @@ LoadFirstTwoTrainerCardPals:
 	jr z, .got_gender
 	ld a, KRIS
 .got_gender
-	call GetTrainerPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetTrainerPalette
 
 	push de
 	; border
@@ -1054,9 +1080,8 @@ _CGB_PokedexUnownMode: ; 903e
 	ld [wCurGroup], a
 
 	ld a, [wCurPartySpecies]
-	call GetMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
-
+	call GetMonPalette
+	
 	call WipeAttrMap
 
 	hlcoord 7, 5, wAttrMap
@@ -1077,17 +1102,8 @@ _CGB_BillsPC: ; 8fca
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 
-	ld a, [wCurPartySpecies]
-	cp $ff
-	jr nz, .GetMonPalette
-	ld hl, .OrangePalette
-	call LoadHLPaletteIntoDE
-	jr .Resume
-
-.GetMonPalette:
 	ld bc, wTempMonPersonality
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	call VaryBGPal1ByTempMonDVs
 
 .Resume:
@@ -1257,8 +1273,7 @@ _CGB_IntroPals: ; 9591
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetFrontpicPalette
 	push de
 	call VaryBGPal0ByTempMonDVs
 	pop de
@@ -1299,8 +1314,7 @@ _CGB_PlayerOrMonFrontpicPals: ; 9529
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetPlayerOrMonPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetPlayerOrMonPalette
 	call VaryBGPal0ByTempMonDVs
 	call WipeAttrMap
 	call ApplyAttrMap
@@ -1317,8 +1331,7 @@ _CGB_TrainerOrMonFrontpicPals: ; 9578
 	ld de, wUnknBGPals
 	ld a, [wCurPartySpecies]
 	ld bc, wTempMonPersonality
-	call GetFrontpicPalettePointer
-	call LoadPalette_White_Col1_Col2_Black
+	call GetFrontpicPalette
 	call VaryBGPal0ByTempMonDVs
 	call WipeAttrMap
 	call ApplyAttrMap

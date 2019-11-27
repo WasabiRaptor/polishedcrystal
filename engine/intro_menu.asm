@@ -35,35 +35,6 @@ _MainMenu: ; 5ae8
 	jp StartTitleScreen
 ; 5b04
 
-PrintDayOfWeek: ; 5b05
-	push de
-	ld hl, .Days
-	ld a, b
-	call GetNthString
-	ld d, h
-	ld e, l
-	pop hl
-	call PlaceString
-	ld h, b
-	ld l, c
-	ld de, .Day
-	jp PlaceString
-; 5b1c
-
-.Days: ; 5b1c
-	db "Sun@"
-	db "Mon@"
-	db "Tues@"
-	db "Wednes@"
-	db "Thurs@"
-	db "Fri@"
-	db "Satur@"
-; 5b40
-
-.Day: ; 5b40
-	db "day@"
-; 5b44
-
 NewGame_ClearTileMapEtc: ; 5b44
 	xor a
 	ldh [hMapAnims], a
@@ -91,8 +62,17 @@ NewGame: ; 5b6b
 _NewGame_FinishSetup:
 	call ResetWRAM
 	call NewGame_ClearTileMapEtc
-	call SetInitialOptions
-	call ProfElmSpeech
+	;call SetInitialOptions
+	;call ProfElmSpeech
+	ld c, 31
+	call FadeToBlack
+	ld c, 31
+	call FadeToWhite
+	ld b, CGB_INTRO_PALS
+	call GetCGBLayout
+	call ClearTileMap
+	call InitGender
+	call NamePlayer
 	call InitializeWorld
 	ld a, 1
 	ld [wPreviousLandmark], a
@@ -349,7 +329,7 @@ InitializeNPCNames: ; 5ce9
 	ld de, wTrendyPhrase
 
 .Copy:
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ret
 
@@ -359,7 +339,7 @@ InitializeNPCNames: ; 5ce9
 ; 5d23
 
 InitializeWorld: ; 5d23
-	call ShrinkPlayer
+	;call ShrinkPlayer
 	farcall SpawnPlayer
 	farjp _InitializeStartDay
 ; 5d33
@@ -542,7 +522,7 @@ Continue_LoadMenuHeader: ; 5ebf
 	db 4 ; items
 	db "Player@"
 	db "Badges@"
-	db "#dex@"
+	db "Pokédex@"
 	db "Time@"
 ; 5efb
 
@@ -579,13 +559,13 @@ Continue_DisplayBadgesDexPlayerName: ; 5f1c
 	push hl
 	decoord 8, 2, 0
 	add hl, de
-	ld de, .Player
-	call PlaceString
+	;ld de, .Player
+	;call PlaceString
 	pop hl
 	ret
 
-.Player:
-	db "<PLAYER>@"
+;.Player:
+;	db "<PLAYER>@"
 ; 5f40
 
 Continue_PrintGameTime: ; 5f40
@@ -612,7 +592,7 @@ Continue_DisplayBadgeCount: ; 5f58
 	pop hl
 	ld de, wd265
 	lb bc, 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 5f6b
 
 Continue_DisplayPokedexNumCaught: ; 5f6b
@@ -630,152 +610,19 @@ ENDC
 	pop hl
 	ld de, wd265
 	lb bc, 1, 3
-	jp PrintNum
+	predef_jump PrintNum
 ; 5f84
 
 Continue_DisplayGameTime: ; 5f84
 	ld de, wGameTimeHours
 	lb bc, 2, 3
-	call PrintNum
-	ld [hl], ":"
+	predef PrintNum
+	ld [hl], "<COLON>"
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 5f99
-
-ProfElmSpeech: ; 0x5f99
-	ld c, 31
-	call FadeToBlack
-	call ClearTileMap
-
-	ld de, MUSIC_ROUTE_30
-	call PlayMusic
-
-	ld c, 31
-	call FadeToWhite
-
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, PROF_ELM
-	ld [wTrainerClass], a
-	call Intro_PrepTrainerPic
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld hl, ElmText1
-	ld de, ElmName
-	call PrintNamedText
-if !DEF(DEBUG)
-	ld c, 15
-	call FadeToWhite
-	call ClearTileMap
-
-	ld a, SYLVEON
-	ld [wCurSpecies], a
-	ld [wCurPartySpecies], a
-	call GetBaseData ;form is known
-
-	hlcoord 6, 4
-	call PrepMonFrontpic
-
-	xor a
-	ld [wTempMonDVs], a
-	ld [wTempMonDVs + 1], a
-	ld [wTempMonDVs + 2], a
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld de, ElmName
-	ld hl, ElmText2
-	call PrintNamedText
-	ld hl, ElmText4
-	call PrintText
-	ld c, 15
-	call FadeToWhite
-	call ClearTileMap
-
-	xor a
-	ld [wCurPartySpecies], a
-	ld a, PROF_ELM
-	ld [wTrainerClass], a
-	call Intro_PrepTrainerPic
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld de, ElmName
-	ld hl, ElmText5
-	call PrintNamedText
-endc
-
-	call InitGender
-
-	ld c, 10
-	call DelayFrames
-
-	ld hl, ElmText6
-	call PrintText
-
-	call NamePlayer
-
-	call ClearTileMap
-	call LoadFontsExtra
-	call ApplyTilemapInVBlank
-	call DrawIntroPlayerPic
-
-	ld b, CGB_INTRO_PALS
-	call GetCGBLayout
-	call InitIntroGradient
-	call Intro_RotatePalettesLeftFrontpic
-
-	ld hl, ElmText7
-	jp PrintText
-
-ElmText1: ; 0x6045
-	text_jump _ElmText1
-	db "@"
-
-ElmText2: ; 0x604a
-	text_jump _ElmText2
-	start_asm
-	ld a, SYLVEON
-	call PlayCry
-	call WaitSFX
-	ld hl, ElmText3
-	ret
-
-ElmText3: ; 0x605b
-	text_jump _ElmText3
-	db "@"
-
-ElmText4: ; 0x6060
-	text_jump _ElmText4
-	db "@"
-
-ElmText5: ; 0x6065
-	text_jump _ElmText5
-	db "@"
-
-ElmText6: ; 0x606a
-	text_jump _ElmText6
-	db "@"
-
-ElmText7: ; 0x606f
-	text_jump _ElmText7
-	db "@"
-
-ElmName:
-	text_jump ProfElmName
-	db "@"
 
 InitGender: ; 48dcb (12:4dcb)
 	ld hl, WhitePal
@@ -833,6 +680,7 @@ InitGender: ; 48dcb (12:4dcb)
 	db 7, 13 ; start coords
 	db 11, 19 ; end coords
 	dw .MenuData2
+	dw .MenuData3
 	db 1 ; default option
 ; 0x48e04
 
@@ -842,6 +690,11 @@ InitGender: ; 48dcb (12:4dcb)
 	db "Boy@"
 	db "Girl@"
 ; 0x48e0f
+.MenuData3:
+	db $c1
+	db 2
+	dbw $c0, VTiles0 tile $c0
+	dbw $c2, VTiles0 tile $c2
 
 AreYouABoyOrAreYouAGirlText: ; 0x48e0f
 	; Are you a boy? Or are you a girl?
@@ -1389,5 +1242,8 @@ GameInit:: ; 642e
 	ld a, $90
 	ldh [hWY], a
 	call ApplyTilemapInVBlank
+
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
 	jp CrystalIntroSequence
 ; 6454

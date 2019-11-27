@@ -1,10 +1,9 @@
 	db "IMITATION@" ; species name
-	dw 311, 840 ; height, weight
+	dw 12, 380 ; height, weight
 
-	db   "If a tree branch"
-	next "shakes when there"
-	next "is no wind, it's a"
-
-	page "SUDOWOODO, not a"
-	next "tree. It hides"
-	next "from the rain.@"
+	db "It's so popular with the elderly"
+	next "that there's a magazine"
+	next "devoted to this Pokémon. Fans"
+	
+	page "obsess over the particular"
+	next "length and angle of its arms.@"

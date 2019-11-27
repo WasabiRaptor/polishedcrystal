@@ -319,7 +319,7 @@ CheckTheItem: ; d349
 	ret
 
 
-_CheckTossableItem:: ; d427
+CheckTossableItem:: ; d427
 ; Return 1 in wItemAttributeParamBuffer and carry if wCurItem can't be removed from the bag.
 	ld a, ITEMATTR_PERMISSIONS
 	call GetItemAttr

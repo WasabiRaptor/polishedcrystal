@@ -232,7 +232,7 @@ Pack: ; 10000
 
 .ItemBallsKey_LoadSubmenu: ; 101c5 (4:41c5)
 	jr nz, PackSortMenu
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .tossable
@@ -674,7 +674,7 @@ GiveItem: ; 103fd
 	farcall PartyMenuSelect
 	jr c, .finish
 	ld a, MON_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr z, .give
 	ld hl, .Egg
@@ -686,7 +686,7 @@ GiveItem: ; 103fd
 	push af
 	ld a, [wcf64]
 	push af
-	call GetCurNick
+	farcall GetCurNick
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, PKMN_NAME_LENGTH
@@ -1704,7 +1704,7 @@ Text_ThisIsntTheTime: ; 0x10af3
 ; 0x10af8
 
 TextJump_YouDontHaveAPkmn: ; 0x10af8
-	; You don't have a #MON!
+	; You don't have a Pokémon!
 	text_jump Text_YouDontHaveAPkmn
 	db "@"
 ; 0x10afd
@@ -1769,7 +1769,7 @@ Special_ChooseItem::
 	cp TM_HM - 1
 	jr z, .next
 
-	call CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .next

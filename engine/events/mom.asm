@@ -319,21 +319,21 @@ Mom_ContinueMenuSetup: ; 1651a
 	hlcoord 11, 2
 	ld de, wMomsMoney
 	lb bc, PRINTNUM_MONEY | 3, 7
-	call PrintNum
+	predef PrintNum
 	hlcoord 1, 4
 	ld de, Mom_HeldString
 	call PlaceString
 	hlcoord 11, 4
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 7
-	call PrintNum
+	predef PrintNum
 	hlcoord 1, 6
 	pop de
 	call PlaceString
 	hlcoord 11, 6
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 7
-	call PrintNum
+	predef PrintNum
 	call UpdateSprites
 	jp CopyTilemapAtOnce
 ; 1656b
@@ -363,7 +363,7 @@ Mom_WithdrawDepositMenuJoypad: ; 16571
 	hlcoord 11, 6
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_MONEY | PRINTNUM_LEADINGZEROS | 3, 7
-	call PrintNum
+	predef PrintNum
 	ldh a, [hVBlankCounter]
 	and $10
 	jr nz, .skip
@@ -476,7 +476,7 @@ Mom_WithdrawDepositMenuJoypad: ; 16571
 ; 16649
 
 UnknownText_0x16649: ; 0x16649
-	; Wow, that's a cute #MON. Where did you get it? … So, you're leaving on an adventure… OK! I'll help too. But what can I do for you? I know! I'll save money for you. On a long journey, money's important. Do you want me to save your money?
+	; Wow, that's a cute Pokémon. Where did you get it? … So, you're leaving on an adventure… OK! I'll help too. But what can I do for you? I know! I'll save money for you. On a long journey, money's important. Do you want me to save your money?
 	text_jump UnknownText_0x1bd77f
 	db "@"
 ; 0x1664e
@@ -488,7 +488,7 @@ UnknownText_0x1664e: ; 0x1664e
 ; 0x16653
 
 UnknownText_0x16653: ; 0x16653
-	; Be careful. #MON are your friends. You need to work as a team. Now, go on!
+	; Be careful. Pokémon are your friends. You need to work as a team. Now, go on!
 	text_jump UnknownText_0x1bd88e
 	db "@"
 ; 0x16658

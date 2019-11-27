@@ -616,7 +616,7 @@ GetCallerName: ; 903a9 (24:43a9)
 	push hl
 	push bc
 	call PlaceString
-	ld a, ":"
+	ld a, "<COLON>"
 	ld [bc], a
 	pop bc
 	pop hl
@@ -652,7 +652,7 @@ GetCallerName: ; 903a9 (24:43a9)
 	ld de, wPokegearNumberBuffer
 	ld [de], a
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .filler
 	jp PlaceString
 
@@ -672,7 +672,7 @@ NonTrainerCallerNames: ; 903d6
 .none db "@"
 .mom db "Mom:@"
 .bill db "Bill:<LNBRK>   #maniac@"
-.elm db "Prof.Elm:<LNBRK>   #mon Prof.@"
+.elm db "Prof.Elm:<LNBRK>   Pokémon Prof.@"
 .bikeshop db "Miracle Cycle:@"
 .lyra db "Lyra:<LNBRK>   <PK><MN> Trainer@"
 .buena db "Buena:<LNBRK>   Disc Jockey@"

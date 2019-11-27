@@ -1,10 +1,8 @@
 	db "MANTIS@" ; species name
-	dw 411, 1230 ; height, weight
+	dw 15, 560 ; height, weight
 
-	db   "It's very proud of"
-	next "its speed. It"
-	next "moves so fast that"
-
-	page "its opponent does"
-	next "not even know what"
-	next "knocked it down.@"
+	db "Its two sharp scythes are more"
+	next "than just weapons. It uses them"
+	next "with dexterity to dress its prey"
+	
+	page "before eating.@"

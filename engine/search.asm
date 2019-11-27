@@ -304,7 +304,7 @@ BoxAddressTable1: ; 4a810
 
 UpdateOTPointer: ; 0x4a83a
 	push hl
-	ld hl, NAME_LENGTH
+	ld hl, PLAYER_NAME_LENGTH
 	add hl, bc
 	ld b, h
 	ld c, l

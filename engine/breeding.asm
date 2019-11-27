@@ -203,7 +203,7 @@ DoEggStep:: ; 16f3e
 	jr z, .no_ability_bonus
 	cp EGG
 	jr z, .ability_next
-	ld c, a
+	ld [wCurSpecies], a
 	ld b, [hl]
 	push de
 	push hl
@@ -295,7 +295,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1IsEgg
@@ -374,7 +374,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	ld [hl], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst AddNTimes
 	ld d, h
 	ld e, l
@@ -575,10 +575,8 @@ InitEggMoves:
 InheritLevelMove:
 ; If move d is part of the level up moveset, inherit that move
 	push de
-	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld b, d
-	ld a, [wEggMonSpecies]
 	dec a
 	ld e, a
 	ld d, 0
@@ -612,7 +610,10 @@ InheritEggMove:
 ; returns c for variants, nc for normal species
 	push de
 	ld a, [wCurGroup]
-	ld hl, VariantEggMovePointerTable
+	ld hl, RegionalEggMovePointerTable
+	call dbwArray
+
+	ld a, [wEggMonSpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -621,8 +622,10 @@ InheritEggMove:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	
+	ld a, [wCurForm]
+	jr c, .variant
 	ld a, [wEggMonSpecies]
+.variant
 	dec a
 	ld e, a
 	ld d, 0
@@ -964,7 +967,7 @@ DayCareMon1Text: ; 0x17467
 DayCareMonCompatibilityText: ; 1746c
 	push bc
 	ld de, wStringBuffer1
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	call CheckBreedmonCompatibility
 	pop bc

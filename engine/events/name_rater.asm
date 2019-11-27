@@ -11,7 +11,7 @@ NameRater: ; fb6ed
 	jr c, .cancel
 ; He can't rename an egg...
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .egg
 ; ... or a Pokemon you got from a trade.
@@ -86,11 +86,11 @@ NameRater: ; fb6ed
 CheckIfMonIsYourOT: ; fb78a
 ; Checks to see if the partymon loaded in [wCurPartyMon] has the different OT as you.  Returns carry if not.
 	ld hl, wPartyMonOT
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	ld a, [wCurPartyMon]
 	rst AddNTimes
 	ld de, wPlayerName
-	ld c, NAME_LENGTH
+	ld c, PLAYER_NAME_LENGTH
 	call .loop
 	jr c, .nope
 
@@ -185,18 +185,41 @@ GetNicknameLength: ; fb802
 	cp PKMN_NAME_LENGTH - 1
 	jr nz, .loop
 	ret
-; fb80f
+
+GetCurNick:: ; 389c
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
+
+GetNick:: ; 38a2
+; Get nickname a from list hl.
+
+	push hl
+	push bc
+
+	farcall SkipPokemonNames
+	ld de, wStringBuffer1
+
+	push de
+	ld bc, PKMN_NAME_LENGTH
+	rst CopyBytes
+	pop de
+
+	pop bc
+	pop hl
+	ret
+; 38bb
+
 
 NameRaterIntroText: ; 0xfb80f
 	; Hello, hello! I'm the NAME RATER.
-	; I rate the names of #MON.
+	; I rate the names of Pokémon.
 	; Would you like me to rate names?
 	text_jump UnknownText_0x1c0043
 	db "@"
 ; 0xfb814
 
 NameRaterWhichMonText: ; 0xfb814
-	; Which #MON's nickname should I rate for you?
+	; Which Pokémon's nickname should I rate for you?
 	text_jump UnknownText_0x1c00a0
 	db "@"
 ; 0xfb819
@@ -248,7 +271,7 @@ NameRaterSameAsBeforeText: ; 0xfb837
 ; 0xfb83c
 
 NameRaterDoneText: ; 0xfb83c
-	; All right. This #MON is now named @ .
+	; All right. This Pokémon is now named @ .
 	text_jump UnknownText_0x1c0272
 	db "@"
 ; 0xfb841

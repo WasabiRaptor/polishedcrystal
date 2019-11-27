@@ -92,7 +92,7 @@ SpecialsPointers::
 	add_special RandomPhoneWildMon
 	add_special RandomPhoneMon
 	add_special MapCallbackSprites_LoadUsedSpritesGFX
-	add_special PlaySlowCry
+	;add_special PlaySlowCry
 	add_special SpecialSnorlaxAwake
 	add_special Special_YoungerHaircutBrother
 	add_special Special_OlderHaircutBrother
@@ -110,7 +110,7 @@ SpecialsPointers::
 	add_special Special_MoveTutor
 	add_special SpecialOmanyteChamber
 	add_special Special_DisplayUnownWords
-	add_special SpecialHoOhChamber
+	add_special SpecialHo_OhChamber
 	add_special Special_CelebiShrineEvent
 	add_special CheckCaughtCelebi
 	add_special SpecialStatsJudge

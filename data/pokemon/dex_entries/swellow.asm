@@ -1,10 +1,10 @@
 	db "SWALLOW@" ; species name
-	dw 204, 437 ; height, weight
+	dw 7, 198 ; height, weight
 
-	db   "It dives at a"
-	next "steep angle as"
-	next "soon as it spots"
-
-	page "its prey. It"
-	next "catches its prey"
-	next "with sharp claws.@"
+	db "Swellow is very conscientious"
+	next "about the upkeep of its glossy"
+	next "wings. Once two Swellow are"
+	
+	page "gathered, they diligently take"
+	next "care of cleaning each other's"
+	next "wings.@"

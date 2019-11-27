@@ -47,7 +47,7 @@ SinnohIconPointers::
 	add_icon Glameow
 	add_icon Purugly
 	add_icon Stunky
-	add_icon Skunktank
+	add_icon Skuntank
 	add_icon Bronzor
 	add_icon Bronzong
 	add_icon Chatot

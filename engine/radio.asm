@@ -8,8 +8,6 @@ PlayRadioShow:
 	bit 0, a ; ENGINE_ROCKETS_IN_RADIO_TOWER
 	jr z, .ok
 ; If we're in Kanto, we don't need to be here.
-	call IsInJohto
-	jr nz, .ok
 ; Team Rocket broadcasts on all stations.
 	ld a, ROCKET_RADIO
 	ld [wCurrentRadioLine], a
@@ -289,7 +287,7 @@ OPT_IntroText1:
 	db "@"
 
 OPT_IntroText2:
-	; #MON TALK!
+	; Pokémon TALK!
 	text_jump _OPT_IntroText2
 	db "@"
 
@@ -572,7 +570,7 @@ OaksPkmnTalk10:
 	ret
 
 OPT_PokemonChannelText:
-	; #MON
+	; Pokémon
 	text_jump _OPT_PokemonChannelText
 	db "@"
 
@@ -589,7 +587,7 @@ OaksPkmnTalk11:
 	jp PlaceRadioString
 
 .pokemon_string
-	db "#mon@"
+	db "Pokémon@"
 
 OaksPkmnTalk12:
 	ld hl, wRadioTextDelay
@@ -601,7 +599,7 @@ OaksPkmnTalk12:
 	jp PlaceRadioString
 
 .pokemon_channel_string
-	db "#mon Channel@"
+	db "Pokémon Channel@"
 
 OaksPkmnTalk13:
 	ld hl, wRadioTextDelay
@@ -668,7 +666,7 @@ PokedexShow1:
 	ld c, a
 	push bc
 	ld a, c
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop bc
 	jr z, .loop
 	inc c
@@ -691,7 +689,7 @@ PokedexShow2:
 	push hl
 	call CopyDexEntryPart1
 	dec hl
-	ld [hl], "<DONE>"
+	ld [hl], "@"
 	ld hl, wPokedexShowPointerAddr
 	call CopyRadioTextToRAM
 	pop hl
@@ -761,7 +759,7 @@ CopyDexEntry:
 	push hl
 	call CopyDexEntryPart1
 	dec hl
-	ld [hl], "<DONE>"
+	ld [hl], "@"
 	ld hl, wPokedexShowPointerAddr
 	call CopyRadioTextToRAM
 	pop hl
@@ -876,7 +874,7 @@ StartPokemonMusicChannel:
 	farjp RadioMusicRestartDE
 
 BenIntroText1:
-	; BEN: #MON MUSIC
+	; BEN: Pokémon MUSIC
 	text_jump _BenIntroText1
 	db "@"
 
@@ -916,12 +914,12 @@ BenFernText2B:
 	db "@"
 
 BenFernText3A:
-	; #MON March!
+	; Pokémon March!
 	text_jump _BenFernText3A
 	db "@"
 
 BenFernText3B:
-	; #MON Lullaby!
+	; Pokémon Lullaby!
 	text_jump _BenFernText3B
 	db "@"
 
@@ -969,7 +967,7 @@ LuckyNumberShow8:
 	ld hl, wStringBuffer1
 	ld de, wLuckyIDNumber
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	ld a, "@"
 	ld [wStringBuffer1 + 5], a
 	ld hl, LC_Text8
@@ -1746,7 +1744,7 @@ BuenasPassword21:
 BuenasPasswordCheckTime:
 	call UpdateTime
 	ldh a, [hHours]
-	cp NITE_HOUR
+	cp MIDNIGHT_HOUR
 	ret
 
 BuenasPasswordChannelName:

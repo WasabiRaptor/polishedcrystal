@@ -1,10 +1,10 @@
 	db "DRILL@" ; species name
-	dw 407, 1370 ; height, weight
+	dw 14, 620 ; height, weight
 
-	db   "It uses its thick"
-	next "arms, legs and"
-	next "tail to attack"
-
-	page "forcefully. Melee"
-	next "combat is its"
-	next "specialty.@"
+	db "Nidoking's thick tail packs"
+	next "enormously destructive power.@"
+	next "With one swing, it can topple a"
+	
+	page "metal transmission tower. Once"
+	next "this Pokémon goes on a"
+	next "rampage, there is no stopping it.@"

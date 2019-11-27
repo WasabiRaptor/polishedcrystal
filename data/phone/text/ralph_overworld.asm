@@ -3,7 +3,7 @@ RalphAskNumber1Text:
 	line "fish anymore?"
 
 	para "I've seen rare"
-	line "#mon while I've"
+	line "Pokémon while I've"
 	cont "been fishing…"
 
 	para "You young people"
@@ -19,12 +19,12 @@ RalphAskNumber1Text:
 RalphAskNumber2Text:
 	text "Hm? So you do want"
 	line "me to phone if I"
-	cont "see rare #mon?"
+	cont "see rare Pokémon?"
 	done
 
 RalphNumberAcceptedText:
 	text "Yep, phone if I"
-	line "see rare #mon."
+	line "see rare Pokémon."
 
 	para "Don't worry, I"
 	line "won't forget!"

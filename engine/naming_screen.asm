@@ -1,4 +1,3 @@
-NAMINGSCREEN_BORDER EQU $60
 NAMINGSCREEN_CURSOR EQU $7e
 
 NAMINGSCREEN_MIDDLELINE EQU $dd
@@ -51,6 +50,7 @@ NamingScreen: ; 116c1
 	call GetCGBLayout
 	call DisableLCD
 	call LoadNamingScreenGFX
+	FullWidthText
 	call NamingScreen_InitText
 	ld a, %11100011
 	ldh [rLCDC], a
@@ -98,7 +98,7 @@ NamingScreen: ; 116c1
 	ld de, .NicknameStrings
 	call PlaceString
 	inc de
-	hlcoord 5, 4
+	hlcoord 5, 3
 	call PlaceString
 	farcall GetGender
 	jr c, .genderless
@@ -228,12 +228,12 @@ NamingScreen: ; 116c1
 
 .StoreMonIconParams: ; 1187b (4:587b)
 	ld a, PKMN_NAME_LENGTH - 1
-	hlcoord 5, 6
+	hlcoord 5, 5
 	jr .StoreParams
 
 .StoreSpriteIconParams: ; 11882 (4:5882)
 	ld a, PLAYER_NAME_LENGTH - 1
-	hlcoord 5, 6
+	hlcoord 5, 5
 	jr .StoreParams
 
 .StoreBoxIconParams: ; 11889 (4:5889)
@@ -264,17 +264,14 @@ NamingScreen_IsTargetBox: ; 1189c
 NamingScreen_InitText: ; 118a8
 	call WaitTop
 	hlcoord 0, 0
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	ld a, NAMINGSCREEN_BORDER
-	call ByteFill
-	hlcoord 1, 1
 	lb bc, 6, 18
-	call NamingScreen_IsTargetBox
-	jr nz, .not_box
-	lb bc, 4, 18
-
-.not_box
-	call ClearBox
+	call TextBox
+	hlcoord 0, 7
+	lb bc, 7, 18
+	call TextBox
+	hlcoord 0, $f
+	lb bc, 1, 18
+	call TextBox
 	ld de, NameInputUpper
 NamingScreen_ApplyTextInputMode: ; 118ca
 	call NamingScreen_IsTargetBox
@@ -837,12 +834,6 @@ LoadNamingScreenGFX: ; 11c51
 	call LoadStandardFont
 	call LoadFontsExtra
 
-	ld de, VTiles2 tile NAMINGSCREEN_BORDER
-	ld hl, NamingScreenGFX_Border
-	ld bc, 1 tiles
-	ld a, BANK(NamingScreenGFX_Border)
-	call FarCopyBytes
-
 	ld de, VTiles0 tile NAMINGSCREEN_CURSOR
 	ld hl, NamingScreenGFX_Cursor
 	ld bc, 2 tiles
@@ -974,10 +965,6 @@ INCBIN "gfx/icons/mail2.2bpp"
 
 .InitCharset: ; 11f84 (4:5f84)
 	call WaitTop
-	hlcoord 0, 0
-	ld bc, 6 * SCREEN_WIDTH
-	ld a, NAMINGSCREEN_BORDER
-	call ByteFill
 	hlcoord 0, 6
 	ld bc, 12 * SCREEN_WIDTH
 	ld a, " "

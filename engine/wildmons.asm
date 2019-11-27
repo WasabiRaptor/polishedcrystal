@@ -644,7 +644,7 @@ CheckRepelEffect::
 
 ApplyAbilityEffectsOnEncounterMon:
 ; Consider making the abilities more useful in non-faithful
-	call GetLeadAbility
+	farcall GetLeadAbility
 	ret z
 	ld hl, .AbilityEffects
 	jp BattleJumptable
@@ -1207,7 +1207,7 @@ RandomPhoneRareWildMon: ; 2a4ab
 	push bc
 	dec c
 	ld a, c
-	call CheckSeenMon
+	farcall CheckSeenMon
 	pop bc
 	jr nz, .done
 ; Since we haven't seen it, have the caller tell us about it.
@@ -1228,7 +1228,7 @@ RandomPhoneRareWildMon: ; 2a4ab
 	ret
 
 .SawRareMonText:
-	; I just saw some rare @  in @ . I'll call you if I see another rare #MON, OK?
+	; I just saw some rare @  in @ . I'll call you if I see another rare Pokémon, OK?
 	text_jump UnknownText_0x1bd34b
 	db "@"
 ; 0x2a51f

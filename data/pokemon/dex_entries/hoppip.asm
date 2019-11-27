@@ -1,10 +1,10 @@
 	db "COTTONWEED@" ; species name
-	dw 104, 10 ; height, weight
+	dw 4, 5 ; height, weight
 
-	db   "It can be carried"
-	next "away on even the"
-	next "gentlest breeze."
-
-	page "It may even float"
-	next "all the way to the"
-	next "next town.@"
+	db "This Pokémon drifts and floats"
+	next "with the wind. If it senses the"
+	next "approach of strong winds,"
+	
+	page "Hoppip links its leaves with"
+	next "other Hoppip to prepare against"
+	next "being blown away.@"

@@ -1,10 +1,12 @@
 	db "LIZARD@" ; species name
-	dw 200, 190 ; height, weight
+	dw 6, 85 ; height, weight
 
-	db   "If it's healthy,"
-	next "the flame on the"
-	next "tip of its tail"
-
-	page "will burn vigor-"
-	next "ously, even if it"
-	next "gets a bit wet.@"
+	db "The flame that burns at the tip"
+	next "of its tail is an indication of its"
+	next "emotions. The flame wavers"
+	
+	page "when Charmander is enjoying"
+	next "itself. If the Pokémon becomes"
+	next "enraged, the flame burns"
+	
+	page "fiercely.@"

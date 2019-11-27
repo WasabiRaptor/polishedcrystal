@@ -1,10 +1,9 @@
-	db "TIMETRAVEL@" ; species name
-	dw 200, 110 ; height, weight
+	db "TIME TRAVEL@" ; species name
+	dw 6, 50 ; height, weight
 
-	db   "Revered as a"
-	next "guardian of the"
-	next "forest, CELEBI"
-
-	page "appears wherever"
-	next "beautiful forests"
-	next "exist.@"
+	db "This Pokémon came from the"
+	next "future by crossing over time. It"
+	next "is thought that so long as Celebi"
+	
+	page "appears, a bright and shining"
+	next "future awaits us.@"

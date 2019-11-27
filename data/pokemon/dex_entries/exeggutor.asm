@@ -1,10 +1,9 @@
 	db "COCONUT@" ; species name
-	dw 607, 2650 ; height, weight
+	dw 20, 1200 ; height, weight
 
-	db   "Living in a good"
-	next "environment makes"
-	next "it grow lots of"
-
-	page "heads. A head that"
-	next "drops off becomes"
-	next "an EXEGGCUTE.@"
+	db "It engages its enemies using"
+	next "psychic powers. Each of its"
+	next "three heads fires off"
+	
+	page "psychokinetic energy, tripling"
+	next "its power.@"

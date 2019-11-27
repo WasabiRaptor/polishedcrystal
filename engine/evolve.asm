@@ -41,16 +41,16 @@ EvolveAfterBattle_MasterLoop:
 	jp z, EvolveAfterBattle_MasterLoop
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartyGroup]
 	ld [wEvolutionOldGroup], a
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wEvolutionOldSpecies], a
+	ld [wCurSpecies], a
 
-	ld a, [wCurGroup]
 	call GetRelevantEvosAttacksPointers
-	ld a, [wEvolutionOldSpecies]
 	dec a
 	ld b, 0
 	ld c, a
@@ -281,7 +281,7 @@ endr
 	ld [wEvolutionNewSpecies], a
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	call CopyName1
 	ld hl, Text_WhatEvolving
 	call PrintText
@@ -394,7 +394,7 @@ endr
 	pop af ; 1
 	ld [wd265], a
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 
 	ld a, [wd265]
 	cp UNOWN
@@ -520,9 +520,7 @@ Text_WhatEvolving: ; 0x42482
 LearnEvolutionMove:
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	ld a, [wCurGroup]
 	call GetRelevantEvolutionMoves
-	ld a, [wCurPartySpecies]
 	dec a
 	ld b, 0
 	ld c, a
@@ -564,9 +562,8 @@ LearnEvolutionMove:
 LearnLevelMoves: ; 42487
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
-	ld a, [wCurGroup]
+	ld [wCurSpecies], a
 	call GetRelevantEvosAttacksPointers
-	ld a, [wCurPartySpecies]
 	dec a
 	ld b, 0
 	ld c, a
@@ -647,11 +644,9 @@ FillMoves: ; 424e1
 	push hl
 	push de
 	push bc
-	ld a, [wCurGroup]
 	push de ; 1
 	call GetRelevantEvosAttacksPointers
 	ld b, 0
-	ld a, [wCurPartySpecies]
 	dec a
 	add a
 	rl b
@@ -801,15 +796,17 @@ GetPreEvolution: ; 42581
 	ld [wCurGroup], a
 
 .grouploop
-	call GetMaxNumPokemonForGroup
-	ld c, a
+	farcall GetMaxNumPokemonForGroup
+	ld [wCurSpecies], a
 .loop ; For each Pokemon...
-	dec c
-	ld a, [wCurGroup]
-	push bc
-	call GetRelevantEvosAttacksPointers
-	pop bc
+	ld a, [wCurSpecies]
+	dec a
+	ld [wCurSpecies], a
 
+	ld a, [wCurGroup]
+	call GetRelevantEvosAttacksPointers
+	dec a
+	ld c, a
 	ld b, 0
 	add hl, bc
 	add hl, bc
@@ -862,17 +859,19 @@ GetPreEvolution: ; 42581
 	ld a, [wCurGroup]
 	ld [wCurPartyGroup], a
 
-	ld a, c
-	inc a
+	ld a, [wCurSpecies]
 	ld [wCurPartySpecies], a
 	scf
 	ret
 ; 425b1
 
 GetRelevantEvosAttacksPointers:
-; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
+; return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
-	ld hl, VariantEvosAttacksPointerTable
+	ld hl, RegionalEvosAttacksPointerTable
+	call dbwArray
+
+	ld a, [wCurPartySpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -881,12 +880,19 @@ GetRelevantEvosAttacksPointers:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	ld a, [wCurForm]
+	ret c
+	ld a, [wCurPartySpecies]
 	ret
 
 GetRelevantEvolutionMoves:
 ; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
-	ld hl, VariantEvolutionMovesPointerTable
+	ld a, [wCurGroup]
+	ld hl, RegionalEvolutionMovesPointerTable
+	call dbwArray
+
+	ld a, [wCurPartySpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -895,6 +901,9 @@ GetRelevantEvolutionMoves:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	ld a, [wCurForm]
+	ret c
+	ld a, [wCurPartySpecies]
 	ret
 
 INCLUDE "data/pokemon/variant_evos_attacks_pointer_table.asm"

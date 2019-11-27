@@ -1,10 +1,9 @@
 	db "FEELING@" ; species name
-	dw 104, 146 ; height, weight
+	dw 4, 66 ; height, weight
 
-	db   "The horns on its"
-	next "head provide a"
-	next "strong power that"
-
-	page "enables it to"
-	next "sense people's"
-	next "emotions.@"
+	db "Ralts has the ability to sense"
+	next "the emotions of people. If its"
+	next "Trainer is in a cheerful mood,"
+	
+	page "this Pokémon grows cheerful"
+	next "and joyous in the same way.@"

@@ -1,10 +1,9 @@
 	db "VIRTUAL@" ; species name
-	dw 207, 800 ; height, weight
+	dw 8, 365 ; height, weight
 
-	db   "An artificial"
-	next "#MON created"
-	next "due to extensive"
-
-	page "research, it can"
-	next "perform only what"
-	next "is in its program.@"
+	db "This Pokémon was created"
+	next "using the cutting-edge science"
+	next "of 20 years ago, so many parts"
+	
+	page "of it have since become"
+	next "obsolete.@"

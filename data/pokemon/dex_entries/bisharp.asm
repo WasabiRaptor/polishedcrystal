@@ -1,10 +1,9 @@
-    db "SWORD BLADE@" ; species name
-    dw 503, 1543 ; height, weight
+	db "SWORD BLADE@" ; species name
+	dw 16, 700 ; height, weight
 
-    db   "It leads a group"
-    next "of Pawniard. It"
-    next "battles to become"
-
-    page "the boss, but will"
-    next "be driven from the"
-    next "group if it loses.@" 
+	db "No matter how strong the"
+	next "Bisharp, it's said that if the"
+	next "blade on its head is chipped, it"
+	
+	page "will retire from its position as"
+	next "the boss.@"

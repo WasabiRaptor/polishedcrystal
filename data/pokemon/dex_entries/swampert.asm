@@ -1,10 +1,10 @@
 	db "MUD FISH@" ; species name
-	dw 411, 1806 ; height, width
+	dw 15, 819 ; height, weight
 
-	db   "Its arms are"
-	next "hard as rock."
-	next "With one swing,"
-	page "it can break"
+	db "Swampert predicts storms by"
+	next "sensing subtle differences in"
+	next "the sounds of waves and tidal"
 	
-	next "a boulder into"
-	next "pieces.@"
+	page "winds with its fins. If a storm"
+	next "is approaching, it piles up"
+	next "boulders to protect itself.@"

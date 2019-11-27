@@ -1,10 +1,9 @@
-    db "FIRE CAT@" ; species name
-    dw 204, 551 ; height, weight
+	db "FIRE CAT@" ; species name
+	dw 7, 250 ; height, weight
 
-    db   "At its throat, it"
-    next "bears a bell of"
-    next "fire. The bell"
-
-    page "rings brightly"
-    next "whenever it spits"
-    next "fire.@" 
+	db "It can act spoiled if it grows"
+	next "close to its Trainer. A powerful"
+	next "Pokémon, its sharp claws can"
+	
+	page "leave its Trainer's whole body"
+	next "covered in scratches.@"

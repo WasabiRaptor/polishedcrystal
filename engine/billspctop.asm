@@ -15,7 +15,7 @@ _BillsPC: ; e3fd
 	ret
 
 .Text_GottaHavePokemon: ; 0xe417
-	; You gotta have #MON to call!
+	; You gotta have Pokémon to call!
 	text_jump UnknownText_0x1c1006
 	db "@"
 
@@ -121,7 +121,7 @@ BillsPC_MovePKMNMenu: ; e4cd
 	ret
 
 .Text_MonHoldingMail: ; 0xe4f9
-	; There is a #MON holding MAIL. Please remove the MAIL.
+	; There is a Pokémon holding MAIL. Please remove the MAIL.
 	text_jump UnknownText_0x1c102b
 	db "@"
 

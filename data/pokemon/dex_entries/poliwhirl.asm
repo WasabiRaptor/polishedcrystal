@@ -1,10 +1,9 @@
 	db "TADPOLE@" ; species name
-	dw 303, 440 ; height, weight
+	dw 10, 200 ; height, weight
 
-	db   "Though it is"
-	next "skilled at walk-"
-	next "ing, it prefers to"
-
-	page "live underwater"
-	next "where there is"
-	next "less danger.@"
+	db "Although it has become capable"
+	next "of living on land, it spends its"
+	next "time in the water, where its"
+	
+	page "prey, fish Pokémon, are"
+	next "plentiful.@"

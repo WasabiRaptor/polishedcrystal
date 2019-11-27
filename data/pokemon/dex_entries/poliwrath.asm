@@ -1,10 +1,8 @@
 	db "TADPOLE@" ; species name
-	dw 403, 1190 ; height, weight
+	dw 13, 540 ; height, weight
 
-	db   "It can use its"
-	next "well-developed"
-	next "arms and legs to"
-
-	page "run on the surface"
-	next "of the water for a"
-	next "split second.@"
+	db "It's quite a gifted swimmer,"
+	next "even among Water-type"
+	next "Pokémon, but it normally"
+	
+	page "spends its time on land.@"

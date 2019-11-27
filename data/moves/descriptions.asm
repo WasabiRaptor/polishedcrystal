@@ -854,7 +854,7 @@ AquaTailDescription:
 
 MetronomeDescription:
 	db   "Randomly uses any"
-	next "#mon move.@"
+	next "Pokémon move.@"
 
 SkillSwapDescription:
 	db   "Swaps abilities"
@@ -1022,7 +1022,7 @@ EncoreDescription:
 
 PursuitDescription:
 	db   "Heavily strikes"
-	next "switching #mon.@"
+	next "switching Pokémon.@"
 
 RapidSpinDescription:
 	db   "A high-speed"
@@ -1038,7 +1038,7 @@ KnockOffDescription:
 
 HiddenPowerDescription:
 	db   "The type varies"
-	next "with the #mon.@"
+	next "with the Pokémon.@"
 
 FutureSightDescription:
 	db   "An attack that"

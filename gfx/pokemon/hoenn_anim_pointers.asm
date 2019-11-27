@@ -30,7 +30,6 @@ HoennAnimationPointers::
 	add_anim Ralts
 	add_anim Kirlia
 	add_anim Gardevoir
-	add_anim Gallade
 	add_anim Surskit
 	add_anim Masquerain
 	add_anim Shroomish
@@ -40,20 +39,20 @@ HoennAnimationPointers::
 	add_anim Slaking
 	add_anim Nincada
 	add_anim Ninjask
-	add_anim Shedinja 
- 	add_anim Whismur
+	add_anim Shedinja
+	add_anim Whismur
 	add_anim Loudred
 	add_anim Exploud
 	add_anim Makuhita
 	add_anim Hariyama
+	add_anim Azurill
 	add_anim Nosepass
-	add_anim Probopass
 	add_anim Skitty
 	add_anim Delcatty
 	add_anim Sableye
 	add_anim Mawile
-	add_anim Aron 
- 	add_anim Lairon
+	add_anim Aron
+	add_anim Lairon
 	add_anim Aggron
 	add_anim Meditite
 	add_anim Medicham
@@ -63,9 +62,7 @@ HoennAnimationPointers::
 	add_anim Minun
 	add_anim Volbeat
 	add_anim Illumise
-	add_anim Budew
 	add_anim Roselia
-	add_anim Roserade
 	add_anim Gulpin
 	add_anim Swalot
 	add_anim Carvanha
@@ -82,8 +79,8 @@ HoennAnimationPointers::
 	add_anim Vibrava
 	add_anim Flygon
 	add_anim Cacnea
-	add_anim Cacturne 
- 	add_anim Swablu
+	add_anim Cacturne
+	add_anim Swablu
 	add_anim Altaria
 	add_anim Zangoose
 	add_anim Seviper
@@ -101,20 +98,18 @@ HoennAnimationPointers::
 	add_anim Armaldo
 	add_anim Feebas
 	add_anim Milotic
-	add_anim Castform 
+	add_anim Castform
 	add_anim Kecleon
 	add_anim Shuppet
 	add_anim Banette
 	add_anim Duskull
 	add_anim Dusclops
-	add_anim Dusknoir
 	add_anim Tropius
-	add_anim Chingling
 	add_anim Chimecho
 	add_anim Absol
+	add_anim Wynaut
 	add_anim Snorunt
 	add_anim Glalie
-	add_anim Frosslass
 	add_anim Spheal
 	add_anim Sealeo
 	add_anim Walrein
@@ -134,11 +129,8 @@ HoennAnimationPointers::
 	add_anim Registeel
 	add_anim Latias
 	add_anim Latios
-	add_anim Kyogre 
- 	add_anim Groudon
+	add_anim Kyogre
+	add_anim Groudon
 	add_anim Rayquaza
 	add_anim Jirachi
-	add_anim Deoxys_Defense
-	add_anim Deoxys_Normal
-	add_anim Deoxys_Attack
-	add_anim Deoxys_Speed
+	add_anim Deoxys

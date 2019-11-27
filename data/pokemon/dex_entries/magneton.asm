@@ -1,10 +1,8 @@
 	db "MAGNET@" ; species name
-	dw 303, 1320 ; height, weight
+	dw 10, 600 ; height, weight
 
-	db   "When many"
-	next "MAGNETON gather"
-	next "together, the"
-
-	page "resulting magnetic"
-	next "storm disrupts"
-	next "radio waves.@"
+	db "Delicate equipment can"
+	next "malfunction in areas inhabited"
+	next "by Magneton, which send out"
+	
+	page "mysterious electrical signals.@"

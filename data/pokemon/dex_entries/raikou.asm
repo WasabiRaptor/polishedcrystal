@@ -1,10 +1,10 @@
 	db "THUNDER@" ; species name
-	dw 603, 3920 ; height, weight
+	dw 19, 1780 ; height, weight
 
-	db   "This rough #MON"
-	next "stores energy"
-	next "inside its body,"
-
-	page "then sweeps across"
-	next "the land, shooting"
-	next "off electricity.@"
+	db "Raikou embodies the speed of"
+	next "lightning. The roars of this"
+	next "Pokémon send shock waves"
+	
+	page "shuddering through the air and"
+	next "shake the ground as if lightning"
+	next "bolts had come crashing down.@"

@@ -67,9 +67,9 @@ endc
 ; Copy name (10 bytes) and class (1 byte) of trainer
 	ld hl, BattleTowerTrainers
 	ld de, wBT_OTName
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst AddNTimes
-	ld bc, NAME_LENGTH
+	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 
 	call CloseSRAM
@@ -126,7 +126,7 @@ PopulateBattleTowerTeam:
 	ld hl, wOTPartyMon1Species
 	ld a, e
 	dec a
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld a, [hl]
 	pop hl
 	cp d
@@ -145,7 +145,7 @@ PopulateBattleTowerTeam:
 	ld b, h
 	ld c, l
 	ld hl, wOTPartyMon1Species
-	call GetPartyLocation
+	predef GetPartyLocation
 	pop de
 
 	; wOTPartyMon in hl, target battle tower data in de
@@ -221,7 +221,7 @@ PopulateBattleTowerTeam:
 	ld a, d
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetEnemyPartyParamLocation
+	farcall GetEnemyPartyParamLocation
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName
@@ -229,7 +229,7 @@ PopulateBattleTowerTeam:
 	pop de
 	push de
 	ld a, d
-	call SkipNames
+	farcall SkipPokemonNames
 	ld d, h
 	ld e, l
 	ld hl, wStringBuffer1
@@ -307,7 +307,7 @@ BT_SetLevel:
 	push hl
 	ld a, e
 	push de
-	call GetPartyLocation
+	predef GetPartyLocation
 
 	push hl
 	predef GetPartyMonGroupSpeciesAndForm

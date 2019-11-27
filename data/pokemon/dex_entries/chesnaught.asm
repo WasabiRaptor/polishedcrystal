@@ -1,11 +1,8 @@
-    db "SPINY ARMOR@" ; species name
-    dw 503, 1984 ; height, weight
+	db "SPINY ARMOR@" ; species name
+	dw 16, 900 ; height, weight
 
-    db   "When it takes a"
-    next "defensive posture"
-    next "with its fists"
-
-    page "guarding its face,"
-    next "it could withstand"
-    next "a bomb blast.@" 
-   
+	db "When it takes a defensive"
+	next "posture with its fists guarding"
+	next "its face, it could withstand a"
+	
+	page "bomb blast.@"

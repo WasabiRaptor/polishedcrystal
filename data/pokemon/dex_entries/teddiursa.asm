@@ -1,10 +1,10 @@
 	db "LITTLE BEAR@" ; species name
-	dw 200, 190 ; height, weight
+	dw 6, 88 ; height, weight
 
-	db   "It always licks"
-	next "honey. Its palm"
-	next "tastes sweet"
-
-	page "because of all the"
-	next "honey it has"
-	next "absorbed.@"
+	db "This Pokémon likes to lick its"
+	next "palms that are sweetened by"
+	next "being soaked in honey. Teddiursa"
+	
+	page "concocts its own honey by"
+	next "blending fruits and pollen"
+	next "collected by Beedrill.@"
