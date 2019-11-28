@@ -695,10 +695,10 @@ FillMoves: ; 424e1
 	push bc ; 5 ; bank is in c loop iterator in b
 	ld b, a
 	ld a, [de] ; get pokemons first move byte for slot
-	cp b
-	jr nz, .NextRepeat ; first byte doesn't match, move slot isn't empty and move isn't repeated, move on to next slot
 	and a ; check if slot was 0, if so no need to check for any other repeats
 	jr z, .EmptySlot
+	cp b
+	jr nz, .NextRepeat ; first byte doesn't match, move slot isn't empty and move isn't repeated, move on to next slot
 	push de ; 6 ; move slot address
 	inc de ; move to second byte of move slot
 	inc de
@@ -710,19 +710,25 @@ FillMoves: ; 424e1
 	ld a, [de] ; get pokemons second move byte for slot
 	pop de ; 5 ; move slot address
 	cp b
+	inc de ; next move slot
+	pop bc ; 4 ; bank is in c loop iterator in b
+	dec hl ; move byte 1
+	jr z, .NextMove ; both bytes matched, this move does not need to be learned
+	dec b
+	jr nz, .CheckRepeat
+	jr .DoShiftMoves
+
 .NextRepeat
 	inc de ; next move slot
 	pop bc ; 4 ; bank is in c loop iterator in b
-	jr z, .NextMove ; both bytes matched, this move does not need to be learned
-
-	inc hl ; next move level requirement
-	inc hl ; next move byte 1
 	dec b
+	dec hl ; move byte 1
 	jr nz, .CheckRepeat
 
+.DoShiftMoves
 	pop de ; 3 ; Address to moves
 	push de ; 4 ; Address to moves
-	push hl ; 5 ; next move address byte 1
+	push hl ; 5 ; move address byte 1
 	push bc ; 6 ; bank in c
 	ld h, d
 	ld l, e
@@ -731,17 +737,14 @@ FillMoves: ; 424e1
 	inc de
 	inc hl
 	call ShiftMoves
-	ld bc, MON_CUR_PP - (MON_MOVES_HIGH + 3)
+	ld bc, MON_CUR_PP - (MON_MOVES_HIGH +3)
 	add hl, bc
 	ld d, h
 	ld e, l
 	call ShiftMoves
 	pop de ; 6 last move slot
 	pop bc ; 5 ; bank in c
-	pop hl ; 4 ; next move address byte 1
-	dec hl ; next move level
-	dec hl ; move byte 2
-	dec hl ; move byte 1
+	pop hl ; 4 ; move address byte 1
 	ld a, c
 	call GetFarByte
 	ld b, a
@@ -762,8 +765,8 @@ FillMoves: ; 424e1
 	ld a, [wEggMonInheritMoves]
 	and a
 	jp z, .NextMove
-	push hl ; 5
-	push bc ; 6
+	push hl ; 5 ; move byte 2
+	push bc ; 6 ; bank in c
 	ld a, c ;bank
 	ld c, b ; put low byte of move in c
 	call GetFarByte ; get move byte 2, again
@@ -781,8 +784,9 @@ FillMoves: ; 424e1
 	call GetFarByte
 	pop hl ; 6 ; should be the address to PP for move slot
 	ld [hl], a
-	pop bc ; 5
-	pop hl ; 4
+	pop bc ; 5 ; bank in c
+	pop hl ; 4 ; move byte 2
+	dec hl ; move byte 1
 	jp .NextMove
 
 .done
