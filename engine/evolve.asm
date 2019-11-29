@@ -691,7 +691,6 @@ FillMoves: ; 424e1
 .CheckRepeat:
 	ld a, c ;bank
 	call GetFarByte ; get move byte 1
-	inc hl ; move byte 2
 	push bc ; 5 ; bank is in c loop iterator in b
 	ld b, a
 	ld a, [de] ; get pokemons first move byte for slot
@@ -699,6 +698,7 @@ FillMoves: ; 424e1
 	jr z, .EmptySlot
 	cp b
 	jr nz, .NextRepeat ; first byte doesn't match, move slot isn't empty and move isn't repeated, move on to next slot
+	inc hl ; move byte 2
 	push de ; 6 ; move slot address
 	inc de ; move to second byte of move slot
 	inc de
@@ -722,17 +722,18 @@ FillMoves: ; 424e1
 	inc de ; next move slot
 	pop bc ; 4 ; bank is in c loop iterator in b
 	dec b
-	dec hl ; move byte 1
 	jr nz, .CheckRepeat
 
 .DoShiftMoves
 	pop de ; 3 ; Address to moves
 	push de ; 4 ; Address to moves
+
 	push hl ; 5 ; move address byte 1
 	push bc ; 6 ; bank in c
 	ld h, d
 	ld l, e
 	call ShiftMoves
+
 	push de ; 7 ;last move slot
 	inc de
 	inc hl
@@ -743,12 +744,12 @@ FillMoves: ; 424e1
 	ld e, l
 	call ShiftMoves
 	pop de ; 6 last move slot
+
 	pop bc ; 5 ; bank in c
 	pop hl ; 4 ; move address byte 1
 	ld a, c
 	call GetFarByte
 	ld b, a
-	inc hl ; move byte 2
 	push bc ; 5 ; bank is in c
 ;fallthrough
 .EmptySlot
@@ -760,15 +761,18 @@ FillMoves: ; 424e1
 	inc de
 	inc de
 	ld a, c ;bank
+	inc hl ; move byte 2
 	call GetFarByte ; get move byte 2
 	ld [de], a
 	ld a, [wEggMonInheritMoves]
 	and a
+	dec hl ; move byte 1
 	jp z, .NextMove
 	push hl ; 5 ; move byte 2
 	push bc ; 6 ; bank in c
 	ld a, c ;bank
 	ld c, b ; put low byte of move in c
+	inc hl ; move byte 2
 	call GetFarByte ; get move byte 2, again
 	ld b, a ; high byte of move in b
 
@@ -785,8 +789,7 @@ FillMoves: ; 424e1
 	pop hl ; 6 ; should be the address to PP for move slot
 	ld [hl], a
 	pop bc ; 5 ; bank in c
-	pop hl ; 4 ; move byte 2
-	dec hl ; move byte 1
+	pop hl ; 4 ; move byte 1
 	jp .NextMove
 
 .done
