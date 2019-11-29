@@ -454,149 +454,6 @@ MoldBreakerSuppressedAbilities:
 	db WONDER_SKIN
 	db -1
 
-ContactMoves::
-	db AERIAL_ACE
-	db AQUA_TAIL
-	db ASTONISH
-	db BITE
-	db BODY_SLAM
-	db BUG_BITE
-	db BULLET_PUNCH
-	db CLOSE_COMBAT
-	db COUNTER
-	db CRABHAMMER
-	db CROSS_CHOP
-	db CRUNCH
-	db CUT
-	db DIG
-	db DIZZY_PUNCH
-	db DOUBLE_KICK
-	db DOUBLE_EDGE
-	db DRAGON_CLAW
-	db DRAIN_KISS
-	db DRAIN_PUNCH
-	db DRILL_PECK
-	db DYNAMICPUNCH
-	db EXTREMESPEED
-	db FALSE_SWIPE
-	db FEINT_ATTACK
-	db FIRE_PUNCH
-	db FLAME_WHEEL
-	db FLARE_BLITZ
-	db FLY
-	db FURY_STRIKES
-	db GYRO_BALL
-	db GIGA_IMPACT
-	db HEADBUTT
-	db HI_JUMP_KICK
-	db HORN_ATTACK
-	db HYPER_FANG
-	db ICE_PUNCH
-	db IRON_HEAD
-	db IRON_TAIL
-	db KARATE_CHOP
-	db KNOCK_OFF
-	db LEECH_LIFE
-	db LICK
-	db LOW_KICK
-	db MACH_PUNCH
-	db MEGAHORN
-	db METAL_CLAW
-	db NIGHT_SLASH
-	db OUTRAGE
-	db PECK
-	db PETAL_DANCE
-	db PLAY_ROUGH
-	db POISON_JAB
-	db POWER_WHIP
-	db PURSUIT
-	db QUICK_ATTACK
-	db RAGE
-	db RAPID_SPIN
-	db RETURN
-	db REVERSAL
-	db ROCK_SMASH
-	db ROLLOUT
-	db SCRATCH
-	db SEISMIC_TOSS
-	db SHADOW_CLAW
-	db SLASH
-	db SPARK
-	db STEEL_WING
-	db STOMP
-	db STRENGTH
-	db SUPER_FANG
-	db TACKLE
-	db TAKE_DOWN
-	db THIEF
-	db THRASH
-	db THUNDERPUNCH
-	db U_TURN
-	db VINE_WHIP
-	db WATERFALL
-	db WILD_CHARGE
-	db WING_ATTACK
-	db WRAP
-	db X_SCISSOR
-	db ZEN_HEADBUTT
-	db -1
-
-PowderMoves::
-	db POISONPOWDER
-	db SLEEP_POWDER
-	db SPORE
-	db STUN_SPORE
-	db -1
-
-PunchingMoves::
-	db BULLET_PUNCH
-	db DIZZY_PUNCH
-	db DRAIN_PUNCH
-	db DYNAMICPUNCH
-	db FIRE_PUNCH
-	db MACH_PUNCH
-	db THUNDERPUNCH
-	db -1
-
-SoundMoves::
-	db BUG_BUZZ
-	db DISARM_VOICE
-	db GROWL
-	db HYPER_VOICE
-	db PERISH_SONG
-	db ROAR
-	db SCREECH
-	db SING
-	db SUPERSONIC
-	db -1
-
-SubstituteBypassMoves::
-; used by Magic Bounce so it can check Substitute unconditionally as long as it isn't here
-; (Sound moves aren't included)
-	db ATTRACT
-	db DISABLE
-	db ENCORE
-	db FORESIGHT
-	db SPIKES
-	db TOXIC_SPIKES
-	db -1
-
-DynamicPowerMoves::
-; used by Forewarn and for move power listing
-	db COUNTER
-	db DRAGON_RAGE
-	db GYRO_BALL
-;   db LOW_KICK
-	db MAGNITUDE
-	db MIRROR_COAT
-	db NIGHT_SHADE
-	db RETURN
-	db REVERSAL
-	db SEISMIC_TOSS
-	db SONIC_BOOM
-	db SUPER_FANG
-	db -1
-
 ; These routines return z if the user is of the given type
 CheckIfTargetIsGrassType::
 	ld a, GRASS
@@ -698,6 +555,62 @@ CompareHP::
 	pop hl
 	ret
 
+CheckMoveProperty::
+	; return c if move bc has property a
+	push de
+
+	ld hl, MovePropertyTable
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ldh a, [hROMBank]
+	push af
+	ld a, BANK(MoveProperties)
+	rst Bankswitch
+
+	ld de, 2
+	call IsBCInArray
+	push af
+	pop bc
+
+	pop af
+	rst Bankswitch
+
+	push bc
+	pop af
+
+	pop de
+	ret
+
+MovePropertyTable::
+	dw ContactMoves
+	dw PowderMoves
+	dw PunchingMoves
+	dw SoundMoves
+	dw SubstituteBypassMoves
+	dw DynamicPowerMoves
+
+IsBCInArray::
+; Find value bc for every de bytes in array hl.
+.loop
+	ld a, [hli]
+	cp 0
+	ret z ; carry can never be set for "cp 0"
+	cp c
+	ld a, [hld]
+	jr nz, .next
+	cp b
+	scf
+	ret z
+.next
+	add hl, de
+	jr .loop
+
 CheckOpponentContactMove::
 	call CallOpponentTurn
 CheckContactMove::
@@ -710,9 +623,8 @@ CheckContactMove::
 	call GetBattleVar
 	cp STRUGGLE
 	ret z
-	ld hl, ContactMoves
-	ld de, 1
-	call IsInArray
+	ld a, CONTACT_MOVE
+	call CheckMoveProperty
 .protective_pads
 	ccf
 	ret
@@ -894,12 +806,12 @@ GetBattleVarAddr:: ; 39e7
 
 .checkiftwobyte
 	ld hl, .twobytevars
-	ld b, .twobytevarsend - .twobytevars
+	ld b, a
 .loop
-	cp [hl]
+	ld a, [hli]
+	cp b
 	jr z, .twobyte
-	inc hl
-	dec b
+	inc a
 	jr z, .nottwobyte
 	jr .loop
 
@@ -922,14 +834,15 @@ GetBattleVarAddr:: ; 39e7
 	ret
 
 .twobytevars:
-	db PLAYER_MOVE_ANIMATION, ENEMY_MOVE_ANIMATION
-	db PLAYER_CUR_MOVE,       ENEMY_CUR_MOVE
-	db ENEMY_CUR_MOVE,        PLAYER_CUR_MOVE
-	db PLAYER_COUNTER_MOVE,   ENEMY_COUNTER_MOVE
-	db ENEMY_COUNTER_MOVE,    PLAYER_COUNTER_MOVE
-	db PLAYER_LAST_MOVE,      ENEMY_LAST_MOVE
-	db ENEMY_LAST_MOVE,       PLAYER_LAST_MOVE
-.twobytevarsend:
+	db PLAYER_MOVE_ANIMATION
+	db ENEMY_MOVE_ANIMATION
+	db PLAYER_CUR_MOVE
+    db ENEMY_CUR_MOVE
+	db PLAYER_COUNTER_MOVE
+	db ENEMY_COUNTER_MOVE
+	db PLAYER_LAST_MOVE
+	db ENEMY_LAST_MOVE
+	db -1
 
 .battlevarpairs
 	dw .substatus1, .substatus2, .substatus3, .substatus4

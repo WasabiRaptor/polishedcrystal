@@ -1497,12 +1497,11 @@ _CheckMatchup:
 
 _CheckTypeMatchup: ; 347d3
 	push hl
-	ld de, 1 ; IsInArray checks below use single-byte arrays
 ; Handle powder moves
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	ld hl, PowderMoves
-	call IsInArray
+	ld a, POWDER_MOVE
+	call CheckMoveProperty
 	jr nc, .skip_powder
 	call GetOpponentItemAfterUnnerve
 	ld a, b
@@ -1629,11 +1628,10 @@ _CheckTypeMatchup: ; 347d3
 ; 34833
 
 BattleCommand_checkpowder:
-	ld de, 1
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	ld hl, PowderMoves
-	call IsInArray
+	ld a, POWDER_MOVE
+	call CheckMoveProperty
 	ret nc
 BattleCommand_resettypematchup: ; 34833
 ; Reset the type matchup multiplier to 1.0, if the type matchup is not 0.
@@ -1741,9 +1739,8 @@ BattleCommand_bounceback:
 	ret z
 
 	; Some moves bypass Substitute
-	ld de, 1
-	ld hl, SubstituteBypassMoves
-	call IsInArray
+	ld a, SUB_BYPASS_MOVE
+	call CheckMoveProperty
 	jr c, .sub_ok
 
 	; Otherwise, Substitute blocks it
@@ -8283,9 +8280,8 @@ CheckSubstituteOpp: ; 37378
 	push hl
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	ld hl, SoundMoves
-	ld de, 1
-	call IsInArray
+	ld a, SOUND_MOVE
+	call CheckMoveProperty
 	pop hl
 	pop de
 	pop bc

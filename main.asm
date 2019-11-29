@@ -5379,6 +5379,11 @@ if DEF(DEBUG)
 INCLUDE "engine/mon_editor.asm"
 endc
 
+SECTION "Move Data", ROMX
+
+INCLUDE "data/battle/move_properties.asm"
+
+
 SECTION "Kanto Base Data", ROMX
 
 evs: MACRO
