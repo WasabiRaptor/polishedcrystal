@@ -31,20 +31,20 @@ LearnMove: ; 6508
 	jr nz, .next
 ; If we're here, we enter the routine for forgetting a move
 ; to make room for the new move we're trying to learn.
-	push de
+	push de ; 1
 	call ForgetMove
 	ld a, e
-	pop de
+	pop de ; 0
 	jp c, .cancel
 
-	push hl
-	push de
-	push af
+	push hl ; 1
+	push de ; 2
+	push af ; 3
 	ld a, c
 	ld [wNamedObjectIndexBuffer], a
 	ld a, b
 	ld [wNamedObjectIndexBuffer+1], a
-	pop af
+	pop af ; 2
 	ld b, a
 	ld a, [wBattleMode]
 	and a
@@ -63,8 +63,8 @@ LearnMove: ; 6508
 
 	ld hl, wForgettingMove
 	set FORGETTING_MOVE_F, [hl]
-	pop de
-	pop hl
+	pop de ; 1
+	pop hl ; 0
 
 .learn
 	ld a, [wPutativeTMHMMove]
@@ -174,7 +174,6 @@ ForgetMove: ; 65d3
 	ld e, a
 	ld d, 0
 	pop hl
-	add hl, de
 	add hl, de
 	ld a, [wMoveScreenSelectedMove+1]
 	and MOVE_HIGH_MASK

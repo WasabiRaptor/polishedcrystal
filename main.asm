@@ -4757,8 +4757,10 @@ PrintTMHMDescription:
 	push de
 	predef GetTMHMMove
 	pop hl
-	ld a, [wd265]
-	ld [wCurSpecies], a
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurMove], a
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wCurMove+1], a
 	predef PrintMoveDesc
 	ret
 

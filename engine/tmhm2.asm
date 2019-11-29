@@ -77,8 +77,10 @@ TMHM_ShowTMMoveDescription: ; 2c946 (b:4946)
 	jr nc, .Cancel
 	ld [wd265], a
 	predef GetTMHMMove
-	ld a, [wd265]
-	ld [wCurSpecies], a
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurMove], a
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wCurMoveHigh], a
 	hlcoord 1, 14
 	call PrintMoveDesc
 	farcall LoadTMHMIcon
@@ -333,8 +335,10 @@ AskTeachTMHM: ; 2c7bf (b:47bf)
 	ld a, [wCurTMHM]
 	ld [wCurTMHMBuffer], a
 	predef GetTMHMMove
-	ld a, [wCurTMHMBuffer]
+	ld a, [wNamedObjectIndexBuffer]
 	ld [wPutativeTMHMMove], a
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wPutativeTMHMMove+1], a
 	call GetMoveName
 	call CopyName1
 	ld hl, Text_BootedTM ; Booted up a TM
@@ -474,13 +478,24 @@ KnowsMove: ; f9ea
 	ld a, MON_MOVES
 	predef GetPartyParamLocation
 	ld a, [wPutativeTMHMMove]
+	ld c, a
+	ld a, [wPutativeTMHMMove+1]
 	ld b, a
-	ld c, NUM_MOVES
+	ld d, NUM_MOVES
 .loop
 	ld a, [hli]
+	cp c
+	jr nz, .next
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
 	cp b
+	pop hl
 	jr z, .knows_move
-	dec c
+.next
+	dec d
 	jr nz, .loop
 	and a
 	ret
