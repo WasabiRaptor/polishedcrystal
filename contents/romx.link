@@ -65,7 +65,6 @@ ROMX $0D
 	org $4000
 	"Code 13"
 	"Unova Cries"
-	"Pokemon Pics 37"
 
 ROMX $0E
 	org $4000

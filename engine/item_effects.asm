@@ -2600,7 +2600,7 @@ RestorePPEffect: ; f5bf
 	cp SKETCH
 	jr z, .CantUsePPUpOnSketch
 
-	ld bc, MON_CUR_PP - MON_MOVES
+	ld bc, MON_MOVES_HIGH - MON_MOVES
 	add hl, bc
 	ld a, [hl]
 	cp 3 << 6 ; have 3 PP Ups already been used?
@@ -2678,7 +2678,7 @@ BattleRestorePP: ; f652
 	push hl
 	push de
 	push bc
-rept NUM_MOVES + 5 ; wBattleMonCurPP - wBattleMonMoves
+rept (NUM_MOVES * 2) + 8 ; wBattleMonCurPP - wBattleMonMoves
 	inc de
 endr
 	ld bc, MON_CUR_PP - MON_MOVES
@@ -3035,7 +3035,7 @@ ApplyPPUp: ; f84c
 	ld de, wBuffer1
 	predef FillPP
 	pop hl
-	ld bc, MON_MOVES_HIGH - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES
 	add hl, bc
 	ld de, wBuffer1
 	ld b, 0
@@ -3054,12 +3054,11 @@ ApplyPPUp: ; f84c
 
 .use
 	ld a, [hl]
-	and PP_UP_USED_MASK
 	push hl
-	ld bc, MON_CUR_PP - MON_MOVES_HIGH
+	ld bc, MON_MOVES_HIGH - MON_CUR_PP
 	add hl, bc
-	ld a, [hl]
 	ld b, a
+	ld a, [hl]
 	pop hl
 	call nz, ComputeMaxPP
 .skip
@@ -3216,18 +3215,17 @@ GetMaxPPOfMove: ; f8ec
 	pop hl
 
 	push bc
-	ld bc, MON_MOVES_HIGH - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES_HIGH
 	ld a, [wMonType]
 	cp WILDMON
 	jr nz, .notwild
 	ld bc, wEnemyMonCurPP - wEnemyMonMovesHigh
 .notwild
-	add hl, bc
 	ld a, [hl]
 	and PP_UP_USED_MASK
+	add hl, bc
 	pop bc
 	push af
-
 	ld a, b
 
 	ld hl, wStringBuffer1 + 1
@@ -3237,7 +3235,6 @@ GetMaxPPOfMove: ; f8ec
 	pop af
 	call ComputeMaxPP
 	ld a, [hl]
-	and (1 << 6) - 1
 	ld [wd265], a
 
 	pop af

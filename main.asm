@@ -3716,6 +3716,7 @@ ListMoves: ; 50d6f
 	inc de
 	inc de
 	ld a, [de]
+	and MOVE_HIGH_MASK
 	ld [wCurMoveHigh], a
 	ld a, MOVE_NAME
 	ld [wNamedObjectTypeBuffer], a
