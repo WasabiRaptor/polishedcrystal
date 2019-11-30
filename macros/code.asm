@@ -111,6 +111,25 @@ retpoke: MACRO
 	ret nz
 ENDM
 
+cp16bcZ: macro
+	ld a, c
+	cp LOW(\1)
+	jr nz, .not_\1
+	ld a, b
+	cp HIGH(\1)
+	jr z, \2
+.not_\1
+endm
+
+cp16bcNZ: macro
+	ld a, c
+	cp LOW(\1)
+	jr nz, \2
+	ld a, b
+	cp HIGH(\1)
+	jr nz, \2
+endm
+
 VWTextStart: macro
 IF _NARG == 2
 	ld a, (\1 + \2)
@@ -139,4 +158,3 @@ ELSE
 	db 0 ;padding
 ENDC
 ENDM
-

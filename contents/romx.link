@@ -212,7 +212,6 @@ ROMX $2A
 	"Enemy Trainer Pointers"
 	"Kalos Dex Order"
 	"Tileset Data - alph_word_room"
-	"Pokemon Pics 38"
 
 ROMX $2B
 	org $4000
