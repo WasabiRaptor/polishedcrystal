@@ -728,7 +728,7 @@ CheckTrainerBattle:: ; 360d
 
 ; Is facing the player...
 	call GetObjectStruct
-	homecall FacingPlayerDistance_bc
+	call FacingPlayerDistance_bc
 	jr nc, .next
 
 ; ...within their sight range
@@ -844,6 +844,85 @@ LoadTrainer_continue:: ; 367e
 .generic_trainer_script
 	end_if_just_battled
 	jumpstashedtext
+
+FacingPlayerDistance_bc:: ; 36a5
+	push de
+	call FacingPlayerDistance
+	ld b, d
+	ld c, e
+	pop de
+	ret
+; 36ad
+
+FacingPlayerDistance:: ; 36ad
+; Return carry if the sprite at bc is facing the player,
+; and its distance in d.
+
+	ld hl, OBJECT_NEXT_MAP_X ; x
+	add hl, bc
+	ld d, [hl]
+
+	ld hl, OBJECT_NEXT_MAP_Y ; y
+	add hl, bc
+	ld e, [hl]
+
+	ld a, [wPlayerStandingMapX]
+	cp d
+	jr z, .CheckY
+
+	ld a, [wPlayerStandingMapY]
+	cp e
+	jr z, .CheckX
+
+	and a
+	ret
+
+.CheckY:
+	ld a, [wPlayerStandingMapY]
+	sub e
+	jr z, .NotFacing
+	jr nc, .Above
+
+; Below
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_UP
+	jr .CheckFacing
+
+.Above:
+	ld d, a
+	ld e, OW_DOWN
+	jr .CheckFacing
+
+.CheckX:
+	ld a, [wPlayerStandingMapX]
+	sub d
+	jr z, .NotFacing
+	jr nc, .Left
+
+; Right
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_LEFT
+	jr .CheckFacing
+
+.Left:
+	ld d, a
+	ld e, OW_RIGHT
+
+.CheckFacing:
+	call GetSpriteDirection
+	cp e
+	jr nz, .NotFacing
+	scf
+	ret
+
+.NotFacing:
+	and a
+	ret
+; 36f5
 
 INCLUDE "home/cry.asm"
 
