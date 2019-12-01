@@ -503,7 +503,9 @@ wLinkBufferEnd::
 
 NEXTU
 ; battle data
+	ds 7
 wCurEnemyItem:: ds 1
+	ds 15
 
 wTempEnemyMon::
 wTempEnemyMonGroup:: ds 1
