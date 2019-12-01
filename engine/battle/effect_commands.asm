@@ -5106,24 +5106,32 @@ UpdateMoveData:
 	; Don't update if the move doesn't exist
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
+	ld a, c
 	and a
 	ret z
-
 	ld [wCurMove], a
 	ld [wNamedObjectIndexBuffer], a
-
-	dec a
+	ld a, b
+	and MOVE_HIGH_MASK
+	ld b, a
+	ld [wCurMoveHigh], a
+	ld [wNamedObjectIndexBuffer+1], a
+	dec bc
 	call GetMoveData
 	call GetMoveName
 	jp CopyName1
 
 GetMoveData::
-; Copy move struct a to de.
+; Copy move struct bc to de.
 	ld hl, Moves
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
+	push bc
+	ld bc, MOVE_LENGTH
 	ld a, Bank(Moves)
-	jp FarCopyBytes
+	call FarCopyBytes
+	pop bc
+	ret
 
 IsOpponentLeafGuardActive:
 	call CallOpponentTurn

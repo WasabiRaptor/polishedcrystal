@@ -467,7 +467,7 @@ GetPokemonName:: ; 343b
 INCLUDE "data/pokemon/variant_name_table.asm"
 
 GetMoveName:: ; 34f8
-	ld a, [wNamedObjectIndexBuffer +1]
+	ld a, [wNamedObjectIndexBuffer+1]
 	ld [wCurGroup], a
 	ld a, MOVE_NAME
 	jr PutNameInBufferAndGetName

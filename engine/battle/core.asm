@@ -123,7 +123,6 @@ DoBattle: ; 3c000
 .not_linked_2
 	call HandleFirstAirBalloon
 	call AutomaticRainWhenOvercast
-	call BoostGiovannisArmoredMewtwo
 	call RunBothActivationAbilities
 	jp BattleTurn
 ; 3c0e5
@@ -3445,15 +3444,15 @@ FinalPkmnMusicAndAnimation:
 	; ...and this trainer has final text...
 	farcall GetFinalPkmnTextPointer
 	ret nc
-	; ...and this is their last PokÃ©mon...
+	; ...and this is their last Pokémon...
 	farcall CheckAnyOtherAliveEnemyMons
 	ret nz
-	; ...then hide the PokÃ©mon...
+	; ...then hide the Pokémon...
 	call EmptyBattleTextBox
 	ld c, 20
 	call DelayFrames
 	call SlideEnemyPicOut
-	; ...play the final PokÃ©mon music...
+	; ...play the final Pokémon music...
 	call IsJohtoGymLeader
 	jr nc, .no_music
 	push de
@@ -3476,7 +3475,7 @@ FinalPkmnMusicAndAnimation:
 	ld [wTempEnemyMonSpecies], a
 	pop af
 	ld [wTempEnemyMonGroup], a
-	; ...and return the PokÃ©mon
+	; ...and return the Pokémon
 	call EmptyBattleTextBox
 	call ApplyTilemapInVBlank
 	call SlideEnemyPicOut
@@ -4101,8 +4100,8 @@ PostBattleTasks::
 	ret
 
 RunBothActivationAbilities:
-; runs both pokÃ©mon's activation abilities (Intimidate, etc.).
-; The faster PokÃ©mon activates abilities first. This mostly
+; runs both pokémon's activation abilities (Intimidate, etc.).
+; The faster Pokémon activates abilities first. This mostly
 ; just matter for weather abilities.
 	ldh a, [hBattleTurn]
 	push af
@@ -4115,7 +4114,7 @@ RunBothActivationAbilities:
 	ret
 
 RunActivationAbilities:
-; Trace will, on failure, copy a later switched in PokÃ©mon's
+; Trace will, on failure, copy a later switched in Pokémon's
 ; Ability. To handle this correctly without redundancy except
 ; on double switch-ins or similar, we need to do some extra
 ; handling around it.
@@ -4134,7 +4133,7 @@ RunActivationAbilities:
 	jp SwitchTurn
 
 SpikesDamage_CheckMoldBreaker:
-; Called when a PokÃ©mon with Mold Breaker uses Roar/Whirlwind.
+; Called when a Pokémon with Mold Breaker uses Roar/Whirlwind.
 ; This is neccessary because it negates Levitate (but not Magic Guard for some reason),
 ; but can't be checked unconditionally since other kind of switches ignore MB as usual.
 	call SwitchTurn
@@ -6101,7 +6100,7 @@ MoveSelectionScreen:
 	ld bc, SCREEN_WIDTH
 	dec a
 	rst AddNTimes
-	ld [hl], "â–·"
+	ld [hl], "?"
 
 .interpret_joypad
 	ld a, $1
@@ -6319,7 +6318,7 @@ MoveInfoBox: ; 3e6c8
 
 	hlcoord $c, $c
 	ld a, [hl]
-	cp "â”¬"
+	cp "?"
 	push af
 	lb bc, 4, 6
 	call TextBox
@@ -6334,6 +6333,14 @@ MoveInfoBox: ; 3e6c8
 	add hl, bc
 	ld a, [hl]
 	ld [wCurPlayerMove], a
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld [wCurPlayerMove+1], a
+	pop hl
 
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
@@ -6360,9 +6367,12 @@ MoveInfoBox: ; 3e6c8
 ; Power and accuracy display code copied from engine/startmenu.asm
 
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -6380,9 +6390,12 @@ MoveInfoBox: ; 3e6c8
 
 .place_accuracy
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_ACC
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -6540,7 +6553,15 @@ CheckUsableMove:
 	ld hl, wEnemyMonMoves
 .got_moves
 	add hl, bc
-	ld c, [hl]
+	ld a, [hli]
+	ld c, a
+	push bc
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
 	push bc
 	farcall GetUserItem
 	ld a, b
@@ -6548,13 +6569,13 @@ CheckUsableMove:
 	cp HELD_CHOICE
 	jr z, .check_choiced
 	cp HELD_ASSAULT_VEST
-	jr nz, .usable
+	jr nz, .popBCusable
 
 	; Assault Vest check
+	dec bc
 	ld hl, Moves + MOVE_CATEGORY
-	ld a, c
-	dec a
 	call GetMoveAttr
+	pop bc
 	cp STATUS
 	ld a, 4
 	jr z, .end
@@ -6563,17 +6584,25 @@ CheckUsableMove:
 	; Check if we did a move yet
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [wPlayerSelectedMove]
+	ld hl, wPlayerSelectedMove
 	jr z, .got_selected_move
-	ld a, [wEnemySelectedMove]
+	ld hl, wEnemySelectedMove
 .got_selected_move
+	ld a, [hli]
 	and a
-	jr z, .usable
+	jr z, .popBCusable
 	cp c
 	ld a, 3
-	jr nz, .end
-
+	jr nz, .popBCend
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	cp b
+	ld a, 3
+	jr nz, .popBCend
 	; fallthrough
+	pop bc
 .usable
 	xor a
 .end
@@ -6582,6 +6611,12 @@ CheckUsableMove:
 	pop de
 	pop bc
 	ret
+.popBCusable
+	pop bc
+	jr .usable
+.popBCend
+	pop bc
+	jr .end
 
 ParseEnemyAction: ; 3e7c1
 	ld a, [wEnemyIsSwitching]
@@ -8062,12 +8097,12 @@ GiveBattleEVs:
 ; prepare registers for EV gain loop.
 ; b: contains EV yield data
 ; c: loop iterator
-; d: bit 0 is set on pokÃ©rus, bit 1 on macho brace
+; d: bit 0 is set on pokérus, bit 1 on macho brace
 ; e: set to abcdef00, where a: HP EV boosted, etc, for
 ; power items
 	push de
 	lb de, 0, 0
-	; check pokÃ©rus
+	; check pokérus
 	ld hl, MON_PKRUS
 	add hl, bc
 	ld a, [hl]
@@ -9134,7 +9169,7 @@ HandleNuzlockeFlags:
 	farcall CheckCaughtMon
 	ret nz
 
-	; Only flag landmarks for Nuzlocke runs after getting PokÃ© Balls
+	; Only flag landmarks for Nuzlocke runs after getting Poké Balls
 	eventflagcheck EVENT_LEARNED_TO_CATCH_POKEMON
 	ret z
 
@@ -10042,19 +10077,6 @@ AutomaticRainWhenOvercast:
 	ld hl, DownpourText
 	call StdBattleTextBox
 	jp EmptyBattleTextBox
-
-BoostGiovannisArmoredMewtwo:
-	ld a, [wOtherTrainerClass]
-	cp GIOVANNI
-	ret nz
-	ld a, [wOtherTrainerID]
-	cp GIOVANNI1
-	ret nz
-	ld a, 1
-	ldh [hBattleTurn], a
-	ld de, ANIM_SHARPEN
-	call Call_PlayBattleAnim
-	farjp BattleCommand_allstatsup
 
 CheckUniqueWildMove: ; this will have to be updated to account for form as well as moves when that happens
 	ld a, [wMapGroup]
