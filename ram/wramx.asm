@@ -65,11 +65,13 @@ wNextRadioLine:: ds 1
 wRadioTextDelay:: ds 1
 wNumRadioLinesPrinted:: ds 1
 wOaksPkmnTalkSegmentCounter:: ds 1
+	ds 5
 wRadioText:: ds 2 * SCREEN_WIDTH
 wRadioTextEnd::
 
 NEXTU
 ; trainer HUD data
+	ds 1
 wPlaceBallsDirection:: ds 1
 wTrainerHUDTiles:: ds 1
 
@@ -77,6 +79,7 @@ NEXTU
 ; movement buffer data
 wMovementBufferCount:: ds 1
 wMovementBufferPerson:: ds 1
+	ds 3
 wMovementBuffer:: ds 55
 
 NEXTU
@@ -102,8 +105,12 @@ NEXTU
 ; miscellaneous
 wTempDayOfWeek::
 wUnusedApricorns:: ds 1
+	ds 2
+
 wStartFlypoint:: ds 1
 wEndFlypoint:: ds 1
+
+	ds 55
 
 UNION
 ; engine buffers
@@ -131,6 +138,7 @@ wCurItemBallQuantity:: ds 1
 NEXTU
 ; fruit tree data
 wCurFruitTree:: ds 1
+	ds 1
 wCurFruit:: ds 1
 
 NEXTU
@@ -156,6 +164,7 @@ wCurSignpostScriptAddr:: ds 1
 
 NEXTU
 ; trainer data
+	ds 3
 wTempTrainerHeader::
 wTempTrainerEventFlagLo:: ds 1
 wTempTrainerEventFlagHi:: ds 1
@@ -168,32 +177,39 @@ wLossTextPointer:: ds 2
 wScriptAfterPointer:: ds 2
 wRunningTrainerBattleScript:: ds 1
 wTempTrainerHeaderEnd::
+	ds 1
 wStashedTextPointer:: ds 2
 
 NEXTU
 ; mart data
+	ds 1
 wMartPointerBank:: ds 1
 wMartPointer:: ds 2
+	ds 1
 wBargainShopFlags:: ds 1
 
 NEXTU
 ; player movement data
 wCurInput:: ds 1
+	ds 3
 wMovementAnimation:: ds 1
 wWalkingDirection:: ds 1
 wFacingDirection:: ds 1
 wWalkingX:: ds 1
 wWalkingY:: ds 1
 wWalkingTile:: ds 1
+	ds 6
 wPlayerTurningDirection:: ds 1
 
 NEXTU
 ; backup menu data
+	ds 7
 wMenuCursorBufferBackup:: ds 1
 wMenuScrollPositionBackup:: ds 1
 
 NEXTU
 ; phone script pointer
+	ds 10
 wPhoneScriptPointer:: ds 2
 
 ENDU
@@ -1045,8 +1061,6 @@ wUnlockedUnowns:: ds 1
 
 wFirstUnownSeen:: ds 1
 wFirstMagikarpSeen:: ds 1
-
-wCurMoveAddress:: ds 2
 
 wDayCareMan::
 ; bit 7: active
