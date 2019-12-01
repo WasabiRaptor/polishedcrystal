@@ -607,7 +607,7 @@ wEnemyIsSwitching::  ds 1
 wPlayerUsedMoves::
 ; add a move that has been used once by the player
 ; added in order of use
-	ds NUM_MOVES
+	ds NUM_MOVES * 2
 
 wEnemyAISwitchScore:: ds 1
 wEnemySwitchMonParam:: ds 1

@@ -462,9 +462,17 @@ IncreaseMetronomeCount:
 .got_move_usage
 	ld a, [de]
 	ld b, a
+	inc de
+	ld a, [de]
+	ld e, b
+	ld d, a
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	cp b
+	ld a, c
+	cp e
+	jr nz, .reset
+	ld a, b
+	cp d
 	jr nz, .reset
 	ld a, [hl]
 	cp 5

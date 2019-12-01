@@ -122,7 +122,7 @@ DoBattle: ; 3c000
 
 .not_linked_2
 	call HandleFirstAirBalloon
-	call AutomaticRainWhenOvercast
+	farcall AutomaticRainWhenOvercast
 	call RunBothActivationAbilities
 	jp BattleTurn
 ; 3c0e5
@@ -608,6 +608,8 @@ ParsePlayerAction: ; 3c434
 	jr z, .not_encored
 	ld a, [wLastPlayerMove]
 	ld [wCurPlayerMove], a
+	ld a, [wLastPlayerMove+1]
+	ld [wCurPlayerMove+1], a
 	jr .encored
 
 .not_encored
@@ -2256,11 +2258,8 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld b, 0
 	call GetRelevantTotalDefeatedPokemonSpeciesPointer
 	add hl, bc
-	ld a, [hl]
-	inc a
-	jr z, .overflow
-	ld [hl], a
-.overflow
+	call Inc16BitNumInHL
+
 	ld hl, wTotalDefeated+1
 	call Inc16BitNumInHL
 
@@ -3990,10 +3989,15 @@ SendOutPlayerMon: ; 3db5f
 	ld [wCurMoveNum], a
 	ld [wTypeModifier], a
 	ld [wPlayerMoveStruct + MOVE_ANIM], a
+	ld [wPlayerMoveStruct + MOVE_ANIM_HIGH], a
 	ld [wPlayerSelectedMove], a
+	ld [wPlayerSelectedMove+1], a
 	ld [wLastEnemyCounterMove], a
+	ld [wLastEnemyCounterMove+1], a
 	ld [wLastPlayerCounterMove], a
+	ld [wLastPlayerCounterMove+1], a
 	ld [wLastPlayerMove], a
+	ld [wLastPlayerMove+1], a
 	call CheckAmuletCoin
 	call FinishBattleAnim
 	xor a
@@ -4033,16 +4037,20 @@ SendOutPlayerMon: ; 3db5f
 NewBattleMonStatus: ; 3dbde
 	xor a
 	ld [wPlayerSelectedMove], a
+	ld [wPlayerSelectedMove+1], a
 	ld [wLastEnemyCounterMove], a
+	ld [wLastEnemyCounterMove+1], a
 	ld [wLastPlayerCounterMove], a
+	ld [wLastPlayerCounterMove+1], a
 	ld [wLastPlayerMove], a
+	ld [wLastPlayerMove+1], a
 	ld hl, wPlayerSubStatus1
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	ld hl, wPlayerUsedMoves
-rept NUM_MOVES + -1
+rept (NUM_MOVES * 2) -1
 	ld [hli], a
 endr
 	ld [hl], a
@@ -5984,21 +5992,34 @@ MoveSelectionScreen:
 	push hl
 	ld hl, wBattleMonMoves
 	ld a, [wPlayerSelectedMove]
+	ld c, a
+	ld a, [wPlayerSelectedMove+1]
 	ld b, a
-	ld c, 4
+	ld d, 4
 .loop
 	ld a, [hli]
 	and a
 	jr z, .sanity_check_done
+	cp c
+	jr nz, .next_sanity
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
 	cp b
+	pop hl
 	jr z, .sanity_check_done
-	dec c
+.next_sanity
+	dec d
 	jr nz, .loop
 .sanity_check_done
 	cp b
 	jr z, .dont_kill_selectedmove
 	xor a
 	ld [wPlayerSelectedMove], a
+	ld [wPlayerSelectedMove+1], a
 .dont_kill_selectedmove
 	pop hl
 	pop bc
@@ -6148,8 +6169,14 @@ MoveSelectionScreen:
 	ld b, 0
 	ld hl, wBattleMonMoves
 	add hl, bc
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurPlayerMove], a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld [wCurPlayerMove+1], a
 	xor a
 	ret
 
@@ -6161,6 +6188,8 @@ MoveSelectionScreen:
 	; Load item into wStringBuffer1, move into wStringBuffer2
 	ld a, [wPlayerSelectedMove]
 	ld [wNamedObjectIndexBuffer], a
+	ld a, [wPlayerSelectedMove+1]
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetMoveName
 
 	; The above places move name into buffer 1, now copy into 2
@@ -6244,6 +6273,8 @@ MoveSelectionScreen:
 SwapBattleMoves:
 	ld hl, wBattleMonMoves
 	call .swap_bytes
+	ld hl, wBattleMonMovesHigh
+	call .swap_bytes
 	ld hl, wBattleMonCurPP
 	call .swap_bytes
 	ld hl, wPlayerDisableCount
@@ -6286,7 +6317,12 @@ SwapBattleMoves:
 	push hl
 	call .swap_bytes
 	pop hl
-	ld bc, MON_CUR_PP - MON_MOVES
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	call .swap_bytes
+	ld bc, MON_CUR_PP - MON_MOVES_HIGH
 	add hl, bc
 
 .swap_bytes
@@ -6796,20 +6832,14 @@ LinkBattleSendReceiveAction: ; 3e8e4
 	ret
 ; 3e8eb
 GetRelevantTotalEncounterdPokemonSpeciesPointer:
-	push bc
-	push de
-	ld a, [wCurGroup]
 	ld hl, EncounterCounterPointerTable
-	call dbwArray
-	pop de
-	pop bc
-	ret
-
+	jr RelevantPointerTableStuff
 GetRelevantTotalDefeatedPokemonSpeciesPointer:
+	ld hl, DefeatedCounterPointerTable
+RelevantPointerTableStuff:
 	push bc
 	push de
 	ld a, [wCurGroup]
-	ld hl, DefeatedCounterPointerTable
 	call dbwArray
 	pop de
 	pop bc
@@ -7362,7 +7392,7 @@ endr
 	; Fill moves based on level
 	predef FillMoves
 
-	call CheckUniqueWildMove
+	farcall CheckUniqueWildMove
 
 	; Fill wild PP
 	ld hl, wEnemyMonMoves
@@ -10063,67 +10093,3 @@ CheckPluralTrainer:
 	ld a, 1
 	and a
 	ret
-
-AutomaticRainWhenOvercast:
-	call GetOvercastIndex
-	and a
-	ret z
-	ld a, WEATHER_RAIN
-	ld [wWeather], a
-	ld a, 255
-	ld [wWeatherCount], a
-	ld de, RAIN_DANCE
-	call Call_PlayBattleAnim
-	ld hl, DownpourText
-	call StdBattleTextBox
-	jp EmptyBattleTextBox
-
-CheckUniqueWildMove: ; this will have to be updated to account for form as well as moves when that happens
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetWorldMapLocation
-	ld c, a
-	ld hl, UniqueWildMoves
-.loop
-	ld a, [hli] ; landmark
-	cp -1
-	ret z
-	cp c
-	jr nz, .inc2andloop
-	ld a, [hli] ; species
-	ld b, a
-	ld a, [wCurPartySpecies]
-	cp b
-	jr nz, .inc1andloop
-	ld a, [hli] ; move
-	ld b, a
-	cp FLY
-	jr nz, .ChanceToTeach
-	ld a, [wPlayerState]
-	cp PLAYER_SURF
-	jr z, .SurfingPikachu
-	cp PLAYER_SURF_PIKA
-	jr nz, .ChanceToTeach
-.SurfingPikachu
-	ld a, SURF
-	ld b, a
-	jr .TeachMove
-.ChanceToTeach
-	call Random
-	cp 50 percent + 1
-	ret nc
-.TeachMove
-	ld hl, wEnemyMonMoves + 1 ; second move
-	ld a, b
-	ld [hl], a
-	ret
-
-.inc2andloop
-	inc hl
-.inc1andloop
-	inc hl
-	jr .loop
-
-INCLUDE "data/pokemon/unique_wild_moves.asm"
