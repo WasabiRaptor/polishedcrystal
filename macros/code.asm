@@ -130,6 +130,16 @@ cp16bcNZ: macro
 	jr nz, \2
 endm
 
+cp16wramZ: macro
+	ld a, [\2]
+	cp LOW(\1)
+	jr nz, .not_\1
+	ld a, [\2 +1]
+	cp HIGH(\1)
+	jr z, \3
+.not_\1
+endm
+
 VWTextStart: macro
 IF _NARG == 2
 	ld a, (\1 + \2)

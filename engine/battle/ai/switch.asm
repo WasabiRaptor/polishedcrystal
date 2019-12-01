@@ -117,12 +117,17 @@ AICheckMatchupForEnemyMon:
 ; Lack of offensive moves count as neutral.
 ; Input is hl (enemy mon moves), bc (enemy mon types). Assumes wEnemyAbility is set
 	; Save old move data/turn
+	ldh a, [hBattleTurn]
+	push af
 	ld a, [wCurPlayerMove]
 	ld d, a
 	ld a, [wCurEnemyMove]
 	ld e, a
-	ldh a, [hBattleTurn]
-	push af
+	push de
+	ld a, [wCurPlayerMove+1]
+	ld d, a
+	ld a, [wCurEnemyMove+1]
+	ld e, a
 	push de
 
 	; Player moves vs enemy
@@ -181,6 +186,11 @@ AICheckMatchupForEnemyMon:
 	; Reset move data
 	pop de
 	ld a, d
+	ld [wCurPlayerMove+1], a
+	ld a, e
+	ld [wCurEnemyMove+1], a
+	pop de
+	ld a, d
 	ld [wCurPlayerMove], a
 	ld a, e
 	ld [wCurEnemyMove], a
@@ -208,9 +218,17 @@ AICheckMatchupForEnemyMon:
 	ret z
 	push hl
 	push bc
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
 	ld b, a
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVarAddr
+	ld a, c
+	ld [hli], a
 	ld [hl], b
 	push de
 	call UpdateMoveData

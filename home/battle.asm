@@ -294,6 +294,7 @@ BattleJumptable::
 
 GetMoveAttr::
 ; Assuming hl = Moves + x, and move is in bc return attribute x of move bc.
+	dec bc
 	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
@@ -753,9 +754,11 @@ CheckSpeed::
 	ret
 
 GetBattleVar:: ; 39e1
-; Preserves hl.
+; Preserves hl and bc.
 	push hl
+	push bc
 	call GetBattleVarAddr
+	pop bc
 	pop hl
 	ret
 ; 39e7

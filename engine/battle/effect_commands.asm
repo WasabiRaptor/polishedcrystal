@@ -377,15 +377,21 @@ BattleCommand_checkturn:
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy6
-	ld a, [wDisabledMove]
+	ld de, wDisabledMove
 	ld hl, wCurPlayerMove
 	jr .ok6
 .enemy6
-	ld a, [wEnemyDisabledMove]
+	ld de, wEnemyDisabledMove
 	ld hl, wCurEnemyMove
 .ok6
+	ld a, [de]
 	and a
 	jr z, .no_disabled_move ; can't disable a move that doesn't exist
+	cp [hl]
+	jr nz, .no_disabled_move
+	inc de
+	inc hl
+	ld a, [de]
 	cp [hl]
 	jr nz, .no_disabled_move
 
@@ -883,8 +889,13 @@ BattleCommand_checkobedience: ; 343db
 	ld b, 0
 	ld hl, wBattleMonMoves
 	add hl, bc
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurPlayerMove], a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld [wCurPlayerMove+1], a
 
 	call SetPlayerTurn
 	call UpdateMoveData
@@ -7824,7 +7835,14 @@ BattleCommand_conversion:
 	jr z, .okay
 	push hl
 	push bc
-	dec a
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
 	ld hl, Moves + MOVE_TYPE
 	call GetMoveAttr
 	ld [de], a

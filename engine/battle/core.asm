@@ -632,9 +632,7 @@ ParsePlayerAction: ; 3c434
 	ld a, $5
 	call FarCopyWRAM
 	call SetPalettes
-	ld a, [wCurPlayerMove]
-	cp STRUGGLE
-	jr z, .struggle
+	cp16wramZ STRUGGLE, wCurPlayerMove, .struggle
 	call PlayClickSFX
 
 .struggle
@@ -3551,7 +3549,9 @@ OfferSwitch: ; 3d74b
 	ld [wCurPartyMon], a
 	xor a
 	ld [wCurEnemyMove], a
+	ld [wCurEnemyMove+1], a
 	ld [wCurPlayerMove], a
+	ld [wCurPlayerMove+1], a
 	and a
 	ret
 
@@ -5941,6 +5941,7 @@ CheckRunSpeed:
 	ld [wCurMoveNum], a
 	xor a
 	ld [wCurPlayerMove], a
+	ld [wCurPlayerMove+1], a
 	call LinkBattleSendReceiveAction
 	call Call_LoadTempTileMapToTileMap
 
@@ -6261,8 +6262,10 @@ MoveSelectionScreen:
 	jp MoveSelectionScreen
 
 .struggle
-	ld a, STRUGGLE
+	ld a, LOW(STRUGGLE)
 	ld [wCurPlayerMove], a
+	ld a, HIGH(STRUGGLE)
+	ld [wCurPlayerMove+1], a
 	ld hl, BattleText_PkmnHasNoMovesLeft
 	call StdBattleTextBox
 	ld c, 60
@@ -6608,7 +6611,6 @@ CheckUsableMove:
 	jr nz, .popBCusable
 
 	; Assault Vest check
-	dec bc
 	ld hl, Moves + MOVE_CATEGORY
 	call GetMoveAttr
 	pop bc
@@ -6813,10 +6815,8 @@ LinkBattleSendReceiveAction: ; 3e8e4
 	ld a, [wBattlePlayerAction]
 	and a
 	jr nz, .switch
-	ld a, [wCurPlayerMove]
 	ld b, BATTLEACTION_STRUGGLE
-	cp STRUGGLE
-	jr z, .struggle
+	cp16wramZ STRUGGLE, wCurPlayerMove, .struggle
 	ld a, [wCurMoveNum]
 	jr .use_move
 
