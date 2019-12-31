@@ -790,7 +790,7 @@ GetBattleVarAddr:: ; 39e7
 ; var id
 	ld a, [hl]
 	ld c, a
-	jr .checkiftwobyte
+	;jr .checkiftwobyte
 .nottwobyte
 	ld b, 0
 
