@@ -2253,7 +2253,7 @@ BattleCommand_lowersub: ; 34eee
 	ld [wFXAnimIDHi], a
 	inc a
 	ld [wKickCounter], a
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	jp LoadAnim
 
 .mimic_anims
@@ -2325,8 +2325,8 @@ BattleCommand_hittargetnosub: ; 34f60
 .triplekick
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld e, a
-	ld d, 0
+	ld e, c
+	ld d, b
 	call PlayFXAnimID
 
 	ld a, BATTLE_VARS_MOVE_ANIM
@@ -2353,8 +2353,8 @@ BattleCommand_hittargetnosub: ; 34f60
 	push af
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld e, a
-	ld d, 0
+	ld e, c
+	ld d, b
 	pop af
 	jp z, PlayFXAnimID
 	xor a
@@ -2423,8 +2423,8 @@ StatUpDownAnim: ; 34feb
 
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld e, a
-	ld d, 0
+	ld e, c
+	ld d, b
 	cp DEFENSE_CURL
 	jr nz, .not_defense_curl
 	ldh a, [hBattleTurn]
@@ -2456,8 +2456,8 @@ StatUpDownAnim: ; 34feb
 	ld [wKickCounter], a
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld e, a
-	ld d, 0
+	ld e, c
+	ld d, b
 	jp PlayFXAnimID
 
 .withdraw_users
@@ -2493,7 +2493,7 @@ BattleCommand_raisesub: ; 35004
 	ld [wFXAnimIDHi], a
 	ld a, $2
 	ld [wKickCounter], a
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	jp LoadAnim
 
 ; 35023
@@ -3029,7 +3029,7 @@ BattleCommand_postfainteffects:
 	ld [wFXAnimIDHi], a
 	inc a
 	ld [wKickCounter], a
-	ld a, DESTINY_BOND
+	ld bc, DESTINY_BOND
 	call LoadAnim
 	call SwitchTurn
 
@@ -7438,7 +7438,7 @@ BattleCommand_substitute: ; 36e7c
 	ld [wNumHits], a
 	ld [wFXAnimIDHi], a
 	ld [wKickCounter], a
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call LoadAnim
 	jr .finish
 
@@ -9539,15 +9539,19 @@ AnimateCurrentMove: ; 37e01
 
 
 PlayDamageAnim: ; 37e19
-	xor a
-	ld [wFXAnimIDHi], a
-
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
+	ld a, c
+	and a
+	jr nz, .WeAllGood
+	ld a, b
 	and a
 	ret z
-
+.WeAllGood
+	ld a, c
 	ld [wFXAnimIDLo], a
+	ld a, b
+	ld [wFXAnimIDHi], a
 
 	ldh a, [hBattleTurn]
 	and a
@@ -9566,19 +9570,26 @@ PlayDamageAnim: ; 37e19
 LoadMoveAnim: ; 37e36
 	xor a
 	ld [wNumHits], a
-	ld [wFXAnimIDHi], a
 
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
+	ld a, c
+	and a
+	jr nz, .WeAllGood
+	ld a, b
 	and a
 	ret z
+.WeAllGood
 
 	; fallthrough
 ; 37e44
 
 
 LoadAnim:
+	ld a, c
 	ld [wFXAnimIDLo], a
+	ld a, b
+	ld [wFXAnimIDHi], a
 	jr PlayUserBattleAnim
 
 PlayOpponentBattleAnim: ; 37e54

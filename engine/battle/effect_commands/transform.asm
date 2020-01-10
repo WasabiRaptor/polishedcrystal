@@ -40,7 +40,7 @@ BattleCommand_transform:
 	jr z, .mimic_substitute
 	call CheckUserIsCharging
 	jr nz, .mimic_substitute
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call LoadAnim
 .mimic_substitute
 	ld a, BATTLE_VARS_SUBSTATUS2
@@ -155,7 +155,7 @@ BattleCommand_transform:
 	ld a, $2
 	ld [wKickCounter], a
 	pop af
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, TransformedText
 	call StdBattleTextBox

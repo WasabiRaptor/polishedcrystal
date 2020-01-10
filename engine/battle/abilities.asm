@@ -631,7 +631,7 @@ StanceChangeAbility:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, StanceChangedText
 	jp StdBattleTextBox
@@ -1259,7 +1259,7 @@ PowerConstructAbility:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, ZygardeFormText
 	jp StdBattleTextBox
