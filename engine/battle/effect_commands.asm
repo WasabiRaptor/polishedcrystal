@@ -127,9 +127,13 @@ BattleCommand_checkturn:
 	; Move 0 immediately ends the turn (Used by Pursuit)
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
+	ld a, c
+	and a
+	jr nz, .WeAllGood
+	ld a, b
 	and a
 	jp z, EndTurn
-
+.WeAllGood
 	xor a
 	ld [wAttackMissed], a
 	ld [wEffectFailed], a

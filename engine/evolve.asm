@@ -695,7 +695,8 @@ FillMoves: ; 424e1
 	ld b, a
 	ld a, [de] ; get pokemons first move byte for slot
 	and a ; check if slot was 0, if so no need to check for any other repeats
-	jr z, .EmptySlot
+	jr z, .MaybeEmptySlot
+.NotEmptySlot
 	cp b
 	jr nz, .NextRepeat ; first byte doesn't match, move slot isn't empty and move isn't repeated, move on to next slot
 	inc hl ; move byte 2
@@ -717,6 +718,18 @@ FillMoves: ; 424e1
 	dec b
 	jr nz, .CheckRepeat
 	jr .DoShiftMoves
+
+.MaybeEmptySlot
+	push de
+	inc de ; move to second byte of move slot
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	pop de
+	and a
+	jr z, .EmptySlot
+	jr .NotEmptySlot
 
 .NextRepeat
 	inc de ; next move slot
