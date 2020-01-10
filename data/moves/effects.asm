@@ -1,5 +1,6 @@
 MoveEffects:
 
+TestMove:
 NormalHit:
 AerialAce:
 Aeroblast:

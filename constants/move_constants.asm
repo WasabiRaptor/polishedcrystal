@@ -258,6 +258,7 @@ endc
 	const PLAY_ROUGH   ; $fd
 	const DISARM_VOICE ; $fe
 	const STRUGGLE     ; $ff
+	const TEST_MOVE
 
 ; Battle animations use the same constants
 ; as the moves up to this point.

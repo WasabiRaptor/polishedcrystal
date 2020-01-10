@@ -3707,7 +3707,8 @@ ListMoves: ; 50d6f
 	ld a, [de]
 	inc de
 	and a
-	jr z, .no_more_moves
+	jr z, .check_highbyte
+.notall0
 	push de
 	push hl
 	push hl
@@ -3741,6 +3742,18 @@ ListMoves: ; 50d6f
 	cp NUM_MOVES
 	ret z
 	jr .moves_loop
+
+.check_highbyte
+	push de
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and a
+	pop de
+	jr z, .no_more_moves
+	xor a
+	jr .notall0
 
 .no_more_moves
 	ld a, b

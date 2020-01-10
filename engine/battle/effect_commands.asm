@@ -5102,8 +5102,8 @@ UpdateMoveData:
 	call GetBattleVar
 	ld a, c
 	and a
-	ret z
-	ld c, a
+	jr z, .checkB
+.weallgood
 	ld [wCurMove], a
 	ld [wNamedObjectIndexBuffer], a
 
@@ -5116,6 +5116,13 @@ UpdateMoveData:
 	call GetMoveData
 	call GetMoveName
 	jp CopyName1
+
+.checkB
+	ld a, b
+	and a
+	ret z
+	ld a, c
+	jr .weallgood
 
 GetMoveData::
 ; Copy move struct bc to de.

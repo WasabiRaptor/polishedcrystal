@@ -255,6 +255,7 @@ BattleAnimations::
 	dw BattleAnim_PlayRough
 	dw BattleAnim_DisarmVoice
 	dw BattleAnim_Struggle
+	dw BattleAnim_TestMove
 ; $100
 	dw BattleAnim_ThrowPokeBall
 	dw BattleAnim_SendOutMon
@@ -2182,6 +2183,7 @@ BattleAnim_ZenHeadbutt:
 	anim_call BattleAnim_ShowMon_0
 	anim_ret
 
+BattleAnim_TestMove
 BattleAnim_Tackle:
 	anim_1gfx ANIM_GFX_HIT
 	anim_call BattleAnim_FollowPlayerHead_0

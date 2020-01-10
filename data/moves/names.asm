@@ -258,3 +258,4 @@ endc
 	db "Play Rough@"
 	db "Disarm Voice@"
 	db "Struggle@"
+	db "Test Move@"
