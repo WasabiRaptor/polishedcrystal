@@ -1144,12 +1144,12 @@ BattleCommand_critical: ; 34631
 	inc c
 
 .CheckCritical:
+	push bc
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld de, 1
+	ld de, 2
 	ld hl, .Criticals
-	push bc
-	call IsInArray
+	call IsBCInArray
 	pop bc
 	jr nc, .ScopeLens
 
@@ -1193,15 +1193,15 @@ BattleCommand_critical: ; 34631
 	ret
 
 .Criticals:
-	db KARATE_CHOP
-	db RAZOR_LEAF
-	db CRABHAMMER
-	db SLASH
-	db AEROBLAST
-	db CROSS_CHOP
-	db SHADOW_CLAW
-	db STONE_EDGE
-	db $ff
+	dw KARATE_CHOP
+	dw RAZOR_LEAF
+	dw CRABHAMMER
+	dw SLASH
+	dw AEROBLAST
+	dw CROSS_CHOP
+	dw SHADOW_CLAW
+	dw STONE_EDGE
+	dw 0
 
 .Chances:
 	; 4.17% 12.5%  50%   100%

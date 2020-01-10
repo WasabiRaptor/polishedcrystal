@@ -84,14 +84,14 @@ ContactMoves::
 	dw WRAP
 	dw X_SCISSOR
 	dw ZEN_HEADBUTT
-	db 0
+	dw 0
 
 PowderMoves::
 	dw POISONPOWDER
 	dw SLEEP_POWDER
 	dw SPORE
 	dw STUN_SPORE
-	db 0
+	dw 0
 
 PunchingMoves::
 	dw BULLET_PUNCH
@@ -101,7 +101,7 @@ PunchingMoves::
 	dw FIRE_PUNCH
 	dw MACH_PUNCH
 	dw THUNDERPUNCH
-	db 0
+	dw 0
 
 SoundMoves::
 	dw BUG_BUZZ
@@ -113,7 +113,7 @@ SoundMoves::
 	dw SCREECH
 	dw SING
 	dw SUPERSONIC
-	db 0
+	dw 0
 
 SubstituteBypassMoves::
 ; used by Magic Bounce so it can check Substitute unconditionally as long as it isn't here

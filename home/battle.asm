@@ -601,7 +601,8 @@ IsBCInArray::
 .loop
 	ld a, [hli]
 	cp 0
-	ret z ; carry can never be set for "cp 0"
+	jr z, .twozero ; carry can never be set for "cp 0"
+.nottwozero
 	cp c
 	ld a, [hld]
 	jr nz, .next
@@ -611,6 +612,13 @@ IsBCInArray::
 .next
 	add hl, de
 	jr .loop
+
+.twozero
+	ld a, [hld]
+	cp 0
+	ret z
+	inc hl
+	jr .nottwozero
 
 CheckOpponentContactMove::
 	call CallOpponentTurn
