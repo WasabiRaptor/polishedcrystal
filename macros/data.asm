@@ -186,3 +186,6 @@ rept 8
 	shift
 endr
 ENDM
+
+NaN EQU 0
+undefined EQU 0
