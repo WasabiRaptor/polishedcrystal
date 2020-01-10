@@ -247,7 +247,7 @@ trademon: MACRO
 ENDM
 
 move_struct: MACRO
-\1Animation:: ds 1
+\1Animation:: ds 2
 \1Effect:: ds 1
 \1Power:: ds 1
 \1Type:: ds 1

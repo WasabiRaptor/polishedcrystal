@@ -754,11 +754,9 @@ CheckSpeed::
 	ret
 
 GetBattleVar:: ; 39e1
-; Preserves hl and bc.
+; Preserves hl.
 	push hl
-	push bc
 	call GetBattleVarAddr
-	pop bc
 	pop hl
 	ret
 ; 39e7
@@ -790,7 +788,7 @@ GetBattleVarAddr:: ; 39e7
 ; var id
 	ld a, [hl]
 	ld c, a
-	;jr .checkiftwobyte
+	jr .checkiftwobyte
 .nottwobyte
 	ld b, 0
 
@@ -834,6 +832,8 @@ GetBattleVarAddr:: ; 39e7
 	ld c, a
 	ld a, [hld]
 	ld b, a
+
+	ld a, c
 	ret
 
 .twobytevars:
@@ -846,6 +846,7 @@ GetBattleVarAddr:: ; 39e7
 	db PLAYER_LAST_MOVE
 	db ENEMY_LAST_MOVE
 	db -1
+.twobytevarsend:
 
 .battlevarpairs
 	dw .substatus1, .substatus2, .substatus3, .substatus4

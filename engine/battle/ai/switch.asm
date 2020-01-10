@@ -225,8 +225,10 @@ AICheckMatchupForEnemyMon:
 	ld a, [hl]
 	and MOVE_HIGH_MASK
 	ld b, a
+	push bc
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVarAddr
+	pop bc
 	ld a, c
 	ld [hli], a
 	ld [hl], b

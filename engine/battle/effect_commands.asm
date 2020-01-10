@@ -41,7 +41,6 @@ DoEnemyTurn: ; 3400a
 
 DoTurn: ; 3401d
 ; Read in and execute the user's move effects for this turn.
-	ld b, b
 	xor a
 	ld [wTurnEnded], a
 
@@ -55,7 +54,6 @@ DoTurn: ; 3401d
 	call UpdateMoveData
 ; 3402c
 
-	ld b,b
 DoMove:
 ; Get the user's move effect.
 	; Increase move usage counter if applicable
@@ -954,7 +952,6 @@ IgnoreSleepOnly: ; 3451f
 
 BattleCommand_usedmovetext: ; 34541
 ;we need to change stance before a move is used
-	ld b, b
 	push af
 	push hl
 	push bc
@@ -1840,7 +1837,8 @@ BattleCommand_checkhit:
 	ret z
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	cp STRUGGLE
+	ld a, c
+	cp LOW(STRUGGLE)
 	ret z
 
 	; Immunity might be set already from Prankster
@@ -5104,15 +5102,10 @@ UpdateMoveData:
 	call GetBattleVar
 	ld a, c
 	and a
-	;ret z
-	ld a, LOW(TACKLE)
+	ret z
 	ld c, a
-
 	ld [wCurMove], a
 	ld [wNamedObjectIndexBuffer], a
-
-	ld a, HIGH(TACKLE)
-	ld b, a
 
 	ld a, b
 	and MOVE_HIGH_MASK
