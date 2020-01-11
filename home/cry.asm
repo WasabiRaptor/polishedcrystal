@@ -12,7 +12,7 @@ PlayStereoCry2::
 	jp _PlayCry
 
 PlayFaintingCry::
-	call PlayFaintingCry2
+	call PlayCry2 ; for the sake of not crashing the game until I can figure that out
 	jp WaitSFX
 
 PlayFaintingCry2::
@@ -82,7 +82,7 @@ PlayCry_PopBCDEHLOff:
 	pop de
 	pop hl
 	ret
-	
+
 LoadCryHeader::
 
 	call GetCryIndex
@@ -108,7 +108,7 @@ LoadCryHeader::
 	ld [wCryLength], a
 	ld a, [hl]
 	ld [wCryLength + 1], a
-	
+
 	pop af
 	rst Bankswitch
 	and a
