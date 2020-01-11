@@ -168,7 +168,6 @@ hTmpd              EQU $fff7
 hTmpe              EQU $fff8
 
 hDEDCryFlag     EQU $fff7
-hDEDVBlankMode  EQU $fff8
 hRunPicAnim     EQU $fff8
 
 

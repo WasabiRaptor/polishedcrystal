@@ -62,23 +62,35 @@ StatsScreenPointerTable: ; 4dd2a
 	dw StatsScreen_Exit
 ; 4dd3a
 
-StatsScreen_WaitAnim: ; 4dd3a (13:5d3a)
+StatsScreen_WaitAnim:
 	ld hl, wcf64
 	bit 6, [hl]
 	jr nz, .try_anim
 	bit 5, [hl]
-	jr nz, .finish
+	jr nz, .finishFrame
 	jp DelayFrame
 
 .try_anim
 	farcall SetUpPokeAnim
-	jr nc, .finish
-	ld hl, wcf64 ; something with the pokeanim it seems
+	ldh a, [hDEDCryFlag]
+	and a
+	jr nz, .playDEDCry
+.checkForPicAnim
+	ldh a, [hRunPicAnim]
+	and a
+	jr nz, .finishFrame
+	ld hl, wcf64
 	res 6, [hl]
-.finish
+.finishFrame
 	ld hl, wcf64
 	res 5, [hl]
 	farjp HDMATransferTileMapToWRAMBank3
+.playDEDCry
+	push af
+	farcall HDMATransferTileMapToWRAMBank3
+	pop af
+	;call _PlayCry
+	jr .checkForPicAnim
 
 StatsScreen_SetJumptableIndex: ; 4dd62 (13:5d62)
 	ld a, [wJumptableIndex]
