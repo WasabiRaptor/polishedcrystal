@@ -245,13 +245,13 @@ BattleCommand_checkturn:
 	; Flame Wheel, Sacred Fire, Scald, and Flare Blitz thaw the user.
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	cp FLAME_WHEEL
+	cp LOW(FLAME_WHEEL)
 	jr z, .thaw
-	cp SACRED_FIRE
+	cp LOW(SACRED_FIRE)
 	jr z, .thaw
-	cp SCALD
+	cp LOW(SCALD)
 	jr z, .thaw
-	cp FLARE_BLITZ
+	cp LOW(FLARE_BLITZ)
 	jr z, .thaw
 
 	; Check for defrosting
@@ -2098,20 +2098,20 @@ BattleCommand_checkhit:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 
-	cp GUST
+	cp LOW(GUST)
 	ret z
-	cp THUNDER
+	cp LOW(THUNDER)
 	ret z
-	cp HURRICANE
+	cp LOW(HURRICANE)
 	ret
 
 .DigMoves:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 
-	cp EARTHQUAKE
+	cp LOW(EARTHQUAKE)
 	ret z
-	cp MAGNITUDE
+	cp LOW(MAGNITUDE)
 	ret
 
 
@@ -2128,16 +2128,16 @@ BattleCommand_checkhit:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 
-	cp THUNDER
+	cp LOW(THUNDER)
 	ret z
-	cp HURRICANE
+	cp LOW(HURRICANE)
 	ret
 
 .HailAccCheck:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
 
-	cp BLIZZARD
+	cp LOW(BLIZZARD)
 	ret
 
 .NoGuardCheck:
@@ -5446,7 +5446,7 @@ SapHealth: ; 36011
 	; for Drain Kiss, we want 75% drain instead of 50%
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	cp DRAIN_KISS
+	cp LOW(DRAINING_KISS)
 	jr nz, .skip_drain_kiss
 	ld h, b
 	ld l, c
@@ -7154,7 +7154,7 @@ BattleCommand_recoil: ; 36cb2
 	ld a, b
 	cp DOUBLE_EDGE
 	jr z, .OneThirdRecoil
-	cp FLARE_BLITZ
+	cp LOW(FLARE_BLITZ)
 	jr z, .OneThirdRecoil
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
@@ -8488,13 +8488,13 @@ INCLUDE "engine/battle/effect_commands/perish_song.asm"
 INCLUDE "engine/battle/effect_commands/rollout.asm"
 
 BoostJumptable:
-	dbw AVALANCHE, DoAvalanche
-	dbw ACROBATICS, DoAcrobatics
-	dbw FACADE, DoFacade
-	dbw HEX, DoHex
-	dbw VENOSHOCK, DoVenoshock
-	dbw KNOCK_OFF, DoKnockOff
-	dbw -1, -1
+	dw AVALANCHE, DoAvalanche
+	dw ACROBATICS, DoAcrobatics
+	dw FACADE, DoFacade
+	dw HEX, DoHex
+	dw VENOSHOCK, DoVenoshock
+	dw KNOCK_OFF, DoKnockOff
+	dw -1, -1
 
 BattleCommand_conditionalboost:
 	ld hl, BoostJumptable

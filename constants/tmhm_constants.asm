@@ -75,7 +75,7 @@ endc
 	add_tm THIEF        ; $2d
 	add_tm STEEL_WING   ; $2e
 	add_tm ROCK_SLIDE   ; $2f
-	add_tm DAZZLINGLEAM ; $30
+	add_tm DAZZLING_GLEAM ; $30
 	add_tm LEECH_LIFE   ; $31
 	add_tm ROOST        ; $32
 	add_tm FOCUS_BLAST  ; $33

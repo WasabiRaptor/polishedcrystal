@@ -206,8 +206,8 @@ endr
 
 	givepoke MEW, 100, LEFTOVERS
 	givepoke MEW, 100, LEFTOVERS
-	loadvar wPartyMon1Moves+0, LOW(TEST_MOVE)
-	loadvar wPartyMon1MovesHigh+0, HIGH(TEST_MOVE)
+	;loadvar wPartyMon1Moves+0, LOW(TEST_MOVE)
+	;loadvar wPartyMon1MovesHigh+0, HIGH(TEST_MOVE)
 
 	loadvar wPartyMon2Moves+0, LOW(FLY)
 	loadvar wPartyMon2Moves+1, LOW(SURF)

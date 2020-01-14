@@ -18,7 +18,7 @@ ContactMoves::
 	dw DOUBLE_KICK
 	dw DOUBLE_EDGE
 	dw DRAGON_CLAW
-	dw DRAIN_KISS
+	dw DRAINING_KISS
 	dw DRAIN_PUNCH
 	dw DRILL_PECK
 	dw DYNAMICPUNCH
@@ -29,7 +29,7 @@ ContactMoves::
 	dw FLAME_WHEEL
 	dw FLARE_BLITZ
 	dw FLY
-	dw FURY_STRIKES
+	dw FURY_SWIPES
 	dw GYRO_BALL
 	dw GIGA_IMPACT
 	dw HEADBUTT
@@ -105,7 +105,7 @@ PunchingMoves::
 
 SoundMoves::
 	dw BUG_BUZZ
-	dw DISARM_VOICE
+	dw DISARMING_VOICE
 	dw GROWL
 	dw HYPER_VOICE
 	dw PERISH_SONG
@@ -138,6 +138,6 @@ DynamicPowerMoves::
 	dw RETURN
 	dw REVERSAL
 	dw SEISMIC_TOSS
-	dw SONIC_BOOM
+	dw SONICBOOM
 	dw SUPER_FANG
 	db -1

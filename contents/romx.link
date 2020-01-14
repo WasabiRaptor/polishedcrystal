@@ -9,7 +9,6 @@ ROMX $02
 	"Code 2"
 	"Trainer Pic Pointers"
 	"Portrait Pic Pointers"
-	"Pokemon Pics 49"
 
 ROMX $03
 	org $4000
@@ -166,7 +165,6 @@ ROMX $20
 ROMX $21
 	org $4000
 	"Pic Animations Frames 1"
-	"Pokemon Pics 44"
 
 ROMX $22
 	org $4000
@@ -205,7 +203,6 @@ ROMX $28
 ROMX $29
 	org $4000
 	"Enemy Trainers"
-	"Pokemon Pics 16"
 
 ROMX $2A
 	org $4000
@@ -234,7 +231,6 @@ ROMX $2E
 	"Map Headers"
 	"Events"
 	"Sinnoh Egg Moves"
-	"Pokemon Pics 4"
 
 ROMX $2F
 	org $4000

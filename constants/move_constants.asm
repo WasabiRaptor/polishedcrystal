@@ -2,7 +2,7 @@
 	const NO_MOVE
 	const POUND
 	const KARATE_CHOP
-	const DOUBLESLAP
+	const DOUBLE_SLAP
 	const COMET_PUNCH
 	const MEGA_PUNCH
 	const PAY_DAY
@@ -75,7 +75,7 @@
 	const LEECH_SEED
 	const GROWTH
 	const RAZOR_LEAF
-	const SOLARBEAM
+	const SOLAR_BEAM
 	const POISONPOWDER
 	const STUN_SPORE
 	const SLEEP_POWDER
@@ -175,7 +175,7 @@
 	const SNORE
 	const CURSE
 	const FLAIL
-	const CONVERSION_2
+	const CONVERSION2
 	const AEROBLAST
 	const COTTON_SPORE
 	const REVERSAL
@@ -184,7 +184,7 @@
 	const PROTECT
 	const MACH_PUNCH
 	const SCARY_FACE
-	const FAINT_ATTACK
+	const FEINT_ATTACK
 	const SWEET_KISS
 	const BELLY_DRUM
 	const SLUDGE_BOMB

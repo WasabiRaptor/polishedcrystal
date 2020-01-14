@@ -903,7 +903,7 @@ if !DEF(MONOCHROME)
 	RGB 31, 23, 09
 	RGB 29, 18, 00
 
-KeyItemIconPalettes: 
+KeyItemIconPalettes:
 ; BICYCLE
 	RGB 22, 12, 12
 	RGB 12, 12, 12
@@ -1081,7 +1081,7 @@ endc
 	db DARK     ; THIEF
 	db STEEL    ; STEEL_WING
 	db ROCK     ; ROCK_SLIDE
-	db FAIRY    ; DAZZLINGLEAM
+	db FAIRY    ; DAZZLING_GLEAM
 	db BUG      ; LEECH_LIFE
 	db FLYING   ; ROOST
 	db FIGHTING ; FOCUS_BLAST

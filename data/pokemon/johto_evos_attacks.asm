@@ -15,9 +15,8 @@ ChikoritaEvosAttacks:
 	learnmove 1, GROWL
 	learnmove 6, RAZOR_LEAF
 	learnmove 9, POISONPOWDER
-	learnmove 12, HEALINGLIGHT ; Synthesis → similar move
 	learnmove 17, REFLECT
-	learnmove 20, DISARM_VOICE ; Magical Leaf → new move
+	learnmove 20, DISARMING_VOICE ; Magical Leaf → new move
 	learnmove 23, ENERGY_BALL ; Natural Gift → tutor move
 	learnmove 28, ANCIENTPOWER ; Sweet Scent → HGSS tutor move
 	learnmove 31, LIGHT_SCREEN
@@ -37,9 +36,8 @@ BayleefEvosAttacks:
 	learnmove 1, GROWL
 	learnmove 6, RAZOR_LEAF
 	learnmove 9, POISONPOWDER
-	learnmove 12, HEALINGLIGHT ; Synthesis → similar move
 	learnmove 18, REFLECT
-	learnmove 22, DISARM_VOICE ; Magical Leaf → new move
+	learnmove 22, DISARMING_VOICE ; Magical Leaf → new move
 	learnmove 26, ENERGY_BALL ; Natural Gift → tutor move
 	learnmove 32, ANCIENTPOWER ; Sweet Scent → HGSS tutor move
 	learnmove 36, LIGHT_SCREEN
@@ -59,9 +57,8 @@ MeganiumEvosAttacks:
 	learnmove 1, GROWL
 	learnmove 6, RAZOR_LEAF
 	learnmove 9, POISONPOWDER
-	learnmove 12, HEALINGLIGHT ; Synthesis → similar move
 	learnmove 18, REFLECT
-	learnmove 22, DISARM_VOICE ; Magical Leaf → new move
+	learnmove 22, DISARMING_VOICE ; Magical Leaf → new move
 	learnmove 26, ENERGY_BALL ; Natural Gift → tutor move
 	learnmove 34, ANCIENTPOWER ; Sweet Scent → HGSS tutor move
 	learnmove 40, LIGHT_SCREEN
@@ -211,7 +208,7 @@ SentretEvosAttacks:
 	learnmove 1, FORESIGHT
 	learnmove 4, DEFENSE_CURL
 	learnmove 7, QUICK_ATTACK
-	learnmove 13, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 13, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 16, DIZZY_PUNCH ; Helping Hand → event move
 	learnmove 19, SUPER_FANG ; Follow Me → HGSS tutor move
 	learnmove 25, HEADBUTT ; Slam → tutor move
@@ -230,7 +227,7 @@ FurretEvosAttacks:
 	learnmove 1, AGILITY ; evolution move
 	learnmove 4, DEFENSE_CURL
 	learnmove 7, QUICK_ATTACK
-	learnmove 13, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 13, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 17, DIZZY_PUNCH ; Helping Hand → event move
 	learnmove 21, SUPER_FANG ; Follow Me → HGSS tutor move
 	learnmove 28, HEADBUTT ; Slam → tutor move
@@ -337,7 +334,7 @@ SpinarakEvosAttacks:
 	learnmove 12, SCARY_FACE
 	learnmove 15, NIGHT_SHADE
 	learnmove 19, GROWTH ; Shadow Sneak → event move
-	learnmove 22, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 22, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 26, SUCKER_PUNCH
 	learnmove 29, MEAN_LOOK ; Spider Web → similar move
 	learnmove 33, AGILITY
@@ -360,7 +357,7 @@ AriadosEvosAttacks:
 	learnmove 12, SCARY_FACE
 	learnmove 15, NIGHT_SHADE
 	learnmove 19, GROWTH ; Shadow Sneak → event move
-	learnmove 23, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 23, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 28, SUCKER_PUNCH
 	learnmove 32, MEAN_LOOK ; Spider Web → similar move
 	learnmove 37, AGILITY
@@ -378,7 +375,7 @@ ChinchouEvosAttacks:
 	learnmove 1, SUPERSONIC
 	learnmove 6, THUNDER_WAVE
 	learnmove 9, THUNDERSHOCK ; Electro Ball → new move
-	learnmove 12, BUBBLE_BEAM ; Water Gun → Bubble Beam
+	learnmove 12, BUBBLEBEAM ; Water Gun → Bubble Beam
 	learnmove 17, CONFUSE_RAY
 	learnmove 20, WATER_PULSE ; Bubble Beam → TM move
 	learnmove 23, SPARK
@@ -398,7 +395,7 @@ LanturnEvosAttacks:
 	learnmove 1, SUPERSONIC
 	learnmove 6, THUNDER_WAVE
 	learnmove 9, THUNDERSHOCK ; Electro Ball → new move
-	learnmove 12, BUBBLE_BEAM ; Water Gun → Bubble Beam
+	learnmove 12, BUBBLEBEAM ; Water Gun → Bubble Beam
 	learnmove 17, CONFUSE_RAY
 	learnmove 20, WATER_PULSE ; Bubble Beam → TM move
 	learnmove 23, SPARK
@@ -436,7 +433,7 @@ TogeticEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, GROWL
 	learnmove 1, CHARM
-	learnmove 1, DISARM_VOICE ; evolution move
+	learnmove 1, DISARMING_VOICE ; evolution move
 	learnmove 5, METRONOME
 	learnmove 9, SWEET_KISS
 	learnmove 13, SING ; Yawn → similar move
@@ -453,7 +450,7 @@ TogeticEvosAttacks:
 
 TogekissEvosAttacks:
 	db 0 ; no more evolutions
-	learnmove 1, DISARM_VOICE ; evolution move
+	learnmove 1, DISARMING_VOICE ; evolution move
 	learnmove 1, HURRICANE ; Sky Attack → new move
 	learnmove 1, EXTREMESPEED
 	learnmove 1, AURA_SPHERE
@@ -515,7 +512,7 @@ MareepEvosAttacks:
 	learnmove 29, POWER_GEM
 	learnmove 32, THUNDERBOLT ; Discharge → TM move
 	learnmove 36, SAFEGUARD ; Cotton Guard → egg move
-	learnmove 39, DAZZLINGLEAM ; Signal Beam → new move
+	learnmove 39, DAZZLING_GLEAM ; Signal Beam → new move
 	learnmove 43, LIGHT_SCREEN
 	learnmove 46, THUNDER
 	db 0 ; no more level-up moves
@@ -535,7 +532,7 @@ FlaaffyEvosAttacks:
 	learnmove 34, POWER_GEM
 	learnmove 38, THUNDERBOLT ; Discharge → TM move
 	learnmove 43, SAFEGUARD ; Cotton Guard → egg move
-	learnmove 47, DAZZLINGLEAM ; Signal Beam → new move
+	learnmove 47, DAZZLING_GLEAM ; Signal Beam → new move
 	learnmove 52, LIGHT_SCREEN
 	learnmove 56, THUNDER
 	db 0 ; no more level-up moves
@@ -557,7 +554,7 @@ AmpharosEvosAttacks:
 	learnmove 35, POWER_GEM
 	learnmove 40, THUNDERBOLT ; Discharge → TM move
 	learnmove 46, SAFEGUARD ; Cotton Guard → egg move
-	learnmove 51, DAZZLINGLEAM ; Signal Beam → new move
+	learnmove 51, DAZZLING_GLEAM ; Signal Beam → new move
 	learnmove 57, LIGHT_SCREEN
 	learnmove 62, THUNDER
 	learnmove 65, DRAGON_PULSE
@@ -573,7 +570,7 @@ MarillEvosAttacks:
 	learnmove 7, AQUA_JET ; Bubble → egg move
 	learnmove 10, DEFENSE_CURL
 	learnmove 10, ROLLOUT
-	learnmove 13, BUBBLE_BEAM
+	learnmove 13, BUBBLEBEAM
 	learnmove 16, DIZZY_PUNCH ; Helping Hand → event move
 	learnmove 20, AQUA_TAIL
 	learnmove 23, PLAY_ROUGH
@@ -592,7 +589,7 @@ AzumarillEvosAttacks:
 	learnmove 7, AQUA_JET ; Bubble → egg move
 	learnmove 10, DEFENSE_CURL
 	learnmove 10, ROLLOUT
-	learnmove 13, BUBBLE_BEAM
+	learnmove 13, BUBBLEBEAM
 	learnmove 16, DIZZY_PUNCH ; Helping Hand → event move
 	learnmove 21, AQUA_TAIL
 	learnmove 25, PLAY_ROUGH
@@ -673,7 +670,6 @@ SunkernEvosAttacks:
 	learnmove 19, PROTECT ; Worry Seed → TM move
 	learnmove 22, GIGA_DRAIN
 	learnmove 25, AGILITY ; Endeavor → new move
-	learnmove 28, HEALINGLIGHT ; Synthesis → similar move
 	learnmove 31, EARTH_POWER ; Natural Gift → tutor move
 	learnmove 34, SOLAR_BEAM
 	learnmove 37, DOUBLE_EDGE
@@ -710,7 +706,7 @@ YanmaEvosAttacks:
 	learnmove 1, BUG_BITE
 	learnmove 6, QUICK_ATTACK
 	learnmove 11, DOUBLE_TEAM
-	learnmove 14, SONIC_BOOM
+	learnmove 14, SONICBOOM
 	learnmove 17, PROTECT ; Detect → similar move
 	learnmove 22, DRAGON_RAGE ; Supersonic → new move
 	learnmove 27, SUPERSONIC ; Uproar → Supersonic
@@ -734,7 +730,7 @@ YanmegaEvosAttacks:
 	learnmove 1, BUG_BITE
 	learnmove 6, QUICK_ATTACK
 	learnmove 11, DOUBLE_TEAM
-	learnmove 14, SONIC_BOOM
+	learnmove 14, SONICBOOM
 	learnmove 17, PROTECT ; Detect → similar move
 	learnmove 22, DRAGON_RAGE ; Supersonic → new move
 	learnmove 27, SUPERSONIC ; Uproar → Supersonic
@@ -823,7 +819,7 @@ MisdreavusEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, GROWL
 	learnmove 1, TELEPORT ; Psywave → new move
-	learnmove 1, DISARM_VOICE ; new move
+	learnmove 1, DISARMING_VOICE ; new move
 	learnmove 5, CONFUSION ; Spite → new move
 	learnmove 10, ASTONISH
 	learnmove 14, CONFUSE_RAY
@@ -834,7 +830,7 @@ MisdreavusEvosAttacks:
 	learnmove 37, DESTINY_BOND ; Payback → egg move
 	learnmove 41, SHADOW_BALL
 	learnmove 46, PERISH_SONG
-	learnmove 50, DAZZLINGLEAM ; Grudge → TM move
+	learnmove 50, DAZZLING_GLEAM ; Grudge → TM move
 	learnmove 55, POWER_GEM
 	learnmove 62, NASTY_PLOT ; egg move
 	db 0 ; no more level-up moves
@@ -844,10 +840,10 @@ MismagiusEvosAttacks:
 	learnmove 1, POWER_GEM
 	learnmove 1, SHADOW_BALL ; Phantom Force → TM move
 	learnmove 1, FLAMETHROWER ; Mystical Fire → TM move
-	learnmove 1, DAZZLINGLEAM ; Magical Leaf → TM move ; evolution move
+	learnmove 1, DAZZLING_GLEAM ; Magical Leaf → TM move ; evolution move
 	learnmove 1, GROWL
 	learnmove 1, TELEPORT ; Psywave → new move
-	learnmove 1, DISARM_VOICE ; new move
+	learnmove 1, DISARMING_VOICE ; new move
 	learnmove 1, CONFUSION ; Spite → new move
 	learnmove 1, ASTONISH
 	db 0 ; no more level-up moves
@@ -946,7 +942,7 @@ DunsparceEvosAttacks:
 	learnmove 8, PURSUIT
 	learnmove 11, SCREECH
 	learnmove 13, MUD_SLAP
-	learnmove 16, FURY_STRIKES ; Yawn → event move (Fury Attack)
+	learnmove 16, FURY_SWIPES ; Yawn → event move (Fury Attack)
 	learnmove 18, ANCIENTPOWER
 	learnmove 21, BODY_SLAM
 	learnmove 23, DRAGON_RAGE ; Drill Run → new move
@@ -1044,7 +1040,7 @@ QwilfishEvosAttacks:
 	learnmove 1, POISON_STING
 	learnmove 5, DEFENSE_CURL ; Harden → TM move
 	learnmove 9, MINIMIZE
-	learnmove 13, BUBBLE_BEAM ; Bubble → similar move
+	learnmove 13, BUBBLEBEAM ; Bubble → similar move
 	learnmove 17, ROLLOUT
 	learnmove 21, TOXIC_SPIKES
 	learnmove 25, PAIN_SPLIT ; Stockpile + Spit Up → HGSS move tutor
@@ -1076,7 +1072,7 @@ HeracrossEvosAttacks:
 	learnmove 10, AERIAL_ACE
 	learnmove 16, LOW_KICK ; Chip Away → HGSS tutor move
 	learnmove 19, COUNTER
-	learnmove 25, FURY_STRIKES ; Fury Attack → similar move
+	learnmove 25, FURY_SWIPES ; Fury Attack → similar move
 	learnmove 28, SEISMIC_TOSS ; Brick Break → tutor move
 	learnmove 31, PIN_MISSILE
 	learnmove 34, TAKE_DOWN
@@ -1094,14 +1090,13 @@ SneaselEvosAttacks:
 	learnmove 8, QUICK_ATTACK
 	learnmove 10, FEINT_ATTACK
 	learnmove 14, ICE_SHARD ; Icy Wind → Ice Shard
-	learnmove 16, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 16, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 20, AGILITY
 	learnmove 22, METAL_CLAW
 	learnmove 25, HONE_CLAWS
 	learnmove 28, ICICLE_CRASH ; Beat Up → egg move
 	learnmove 32, SCREECH
 	learnmove 35, SLASH
-	learnmove 40, HEALINGLIGHT ; Snatch → event move (Moonlight)
 	learnmove 44, X_SCISSOR ; Punishment → TM move
 	learnmove 47, CRUNCH ; Ice Shard → new move
 	db 0 ; no more level-up moves
@@ -1114,14 +1109,13 @@ WeavileEvosAttacks:
 	learnmove 8, QUICK_ATTACK
 	learnmove 10, FEINT_ATTACK
 	learnmove 14, ICE_SHARD ; Icy Wind → Ice Shard
-	learnmove 16, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 16, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 20, NASTY_PLOT
 	learnmove 22, METAL_CLAW
 	learnmove 25, HONE_CLAWS
 	learnmove 28, ICICLE_CRASH ; Fling → egg move
 	learnmove 32, SCREECH
 	learnmove 35, NIGHT_SLASH
-	learnmove 40, HEALINGLIGHT ; Snatch → event move (Moonlight)
 	learnmove 44, X_SCISSOR ; Punishment → TM move
 	learnmove 47, CRUNCH ; Dark Pulse → new move
 	db 0 ; no more level-up moves
@@ -1134,7 +1128,7 @@ TeddiursaEvosAttacks:
 	learnmove 1, GROWL ; Baby-Doll Eyes → similar move
 	learnmove 1, LICK
 	learnmove 1, FOCUS_ENERGY ; Fake Tears → egg move
-	learnmove 8, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 8, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 15, FEINT_ATTACK
 	learnmove 22, BELLY_DRUM ; Sweet Scent → egg move
 	learnmove 25, PLAY_ROUGH ; Play Nice → egg move
@@ -1154,7 +1148,7 @@ UrsaringEvosAttacks:
 	learnmove 1, LEER
 	learnmove 1, LICK
 	learnmove 1, FOCUS_ENERGY ; Fake Tears → egg move
-	learnmove 8, FURY_STRIKES ; Fury Swipes → similar move
+	learnmove 8, FURY_SWIPES ; Fury Swipes → similar move
 	learnmove 15, FEINT_ATTACK
 	learnmove 22, BELLY_DRUM ; Sweet Scent → egg move
 	learnmove 25, PLAY_ROUGH ; Play Nice → egg move
@@ -1230,7 +1224,7 @@ PiloswineEvosAttacks:
 	evolution EVOLVE_MOVE, ANCIENTPOWER, MAMOSWINE
 	db 0 ; no more evolutions
 	learnmove 1, ANCIENTPOWER
-	learnmove 1, FURY_STRIKES ; evolution move (Fury Attack)
+	learnmove 1, FURY_SWIPES ; evolution move (Fury Attack)
 	learnmove 1, PECK
 	learnmove 1, FORESIGHT ; Odor Sleuth → similar move
 	learnmove 5, BITE ; Mud Sport → egg move
@@ -1261,7 +1255,7 @@ MamoswineEvosAttacks:
 	learnmove 21, HAIL
 	learnmove 24, AVALANCHE ; Ice Fang → egg move
 	learnmove 28, TAKE_DOWN
-	learnmove 33, FURY_STRIKES ; Double Hit → Piloswine move
+	learnmove 33, FURY_SWIPES ; Double Hit → Piloswine move
 	learnmove 37, BULLDOZE ; Mist → TM move
 	learnmove 41, THRASH
 	learnmove 46, EARTHQUAKE
@@ -1275,7 +1269,7 @@ CorsolaEvosAttacks:
 	learnmove 1, DEFENSE_CURL ; Harden → similar move
 	learnmove 4, WATER_GUN ; Bubble → similar move
 	learnmove 8, RECOVER
-	learnmove 10, BUBBLE_BEAM
+	learnmove 10, BUBBLEBEAM
 	learnmove 13, SAFEGUARD ; Refresh → egg move
 	learnmove 17, ANCIENTPOWER
 	learnmove 20, ICICLE_SPEAR ; Spike Cannon → new move
@@ -1298,7 +1292,7 @@ RemoraidEvosAttacks:
 	learnmove 6, FORESIGHT ; Lock-On → new move
 	learnmove 10, PSYBEAM
 	learnmove 14, AURORA_BEAM
-	learnmove 18, BUBBLE_BEAM
+	learnmove 18, BUBBLEBEAM
 	learnmove 22, FOCUS_ENERGY
 	learnmove 26, WATER_PULSE
 	learnmove 30, FLAMETHROWER ; Signal Beam → TM move
@@ -1319,7 +1313,7 @@ OctilleryEvosAttacks:
 	learnmove 6, FORESIGHT ; Constrict → new move
 	learnmove 10, PSYBEAM
 	learnmove 14, AURORA_BEAM
-	learnmove 18, BUBBLE_BEAM
+	learnmove 18, BUBBLEBEAM
 	learnmove 22, FOCUS_ENERGY
 	learnmove 26, WRAP ; Wring Out → new move
 	learnmove 28, WATER_PULSE
@@ -1350,7 +1344,7 @@ MantineEvosAttacks:
 	learnmove 1, TACKLE
 	learnmove 1, WATER_GUN ; Bubble → similar move
 	learnmove 3, SUPERSONIC
-	learnmove 7, BUBBLE_BEAM
+	learnmove 7, BUBBLEBEAM
 	learnmove 11, CONFUSE_RAY
 	learnmove 14, WING_ATTACK
 	learnmove 16, HEADBUTT
@@ -1371,7 +1365,7 @@ SkarmoryEvosAttacks:
 	learnmove 6, MUD_SLAP ; Sand Attack → similar move
 	learnmove 9, BITE ; Metal Claw → new move
 	learnmove 12, METAL_CLAW ; Air Cutter → Metal Claw
-	learnmove 17, FURY_STRIKES ; Fury Attack → similar move
+	learnmove 17, FURY_SWIPES ; Fury Attack → similar move
 	learnmove 20, PURSUIT ; Feint → egg move
 	learnmove 23, SWIFT
 	learnmove 28, SPIKES
@@ -1445,7 +1439,7 @@ PhanpyEvosAttacks:
 
 DonphanEvosAttacks:
 	db 0 ; no more evolutions
-	learnmove 1, FURY_STRIKES ; evolution move
+	learnmove 1, FURY_SWIPES ; evolution move
 	learnmove 1, GUNK_SHOT ; HGSS tutor move
 	learnmove 1, HORN_ATTACK
 	learnmove 1, GROWL
@@ -1543,7 +1537,7 @@ SuicuneEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, BITE
 	learnmove 1, LEER
-	learnmove 8, BUBBLE_BEAM
+	learnmove 8, BUBBLEBEAM
 	learnmove 15, RAIN_DANCE
 	learnmove 22, GUST
 	learnmove 29, AURORA_BEAM
@@ -1773,7 +1767,7 @@ KingdraEvosAttacks:
 	learnmove 1, WATER_GUN ; Bubble → similar move
 	learnmove 5, SMOKESCREEN
 	learnmove 9, LEER
-	learnmove 13, BUBBLE_BEAM ; Water Gun → Bubble Beam
+	learnmove 13, BUBBLEBEAM ; Water Gun → Bubble Beam
 	learnmove 17, AQUA_JET ; Twister → new move
 	learnmove 21, WATER_PULSE ; Bubble Beam → TM move
 	learnmove 26, FOCUS_ENERGY
@@ -1892,7 +1886,6 @@ EspeonEvosAttacks:
 	learnmove 20, PSYBEAM
 	learnmove 25, FUTURE_SIGHT
 	learnmove 29, REFLECT ; Psych Up → event move
-	learnmove 33, HEALINGLIGHT ; Morning Sun → similar move
 	learnmove 37, PSYCHIC_M
 	learnmove 41, DOUBLE_EDGE ; Last Resort → tutor move
 	learnmove 45, POWER_GEM ; Power Swap → new move
@@ -1911,7 +1904,6 @@ UmbreonEvosAttacks:
 	learnmove 20, FEINT_ATTACK
 	learnmove 25, TOXIC ; Assurance → TM move
 	learnmove 29, SCREECH
-	learnmove 33, HEALINGLIGHT ; Moonlight → similar move
 	learnmove 37, SUCKER_PUNCH ; Mean Look → tutor move
 	learnmove 41, DOUBLE_EDGE ; Last Resort → tutor move
 	learnmove 45, MEAN_LOOK ; Guard Swap → Mean Look
@@ -1920,7 +1912,7 @@ UmbreonEvosAttacks:
 PolitoedEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, GIGA_DRAIN ; Bounce → TM move ; evolution move
-	learnmove 1, BUBBLE_BEAM
+	learnmove 1, BUBBLEBEAM
 	learnmove 1, HYPNOSIS
 	learnmove 1, DOUBLE_SLAP
 	learnmove 1, PERISH_SONG
