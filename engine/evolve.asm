@@ -582,7 +582,7 @@ LearnLevelMoves: ; 42487
 .find_move
 	ld a, d ;bank
 	call GetFarByte
-	inc hl
+	inc hl ; go to level byte
 	and a
 	jr z, .done
 
@@ -590,41 +590,58 @@ LearnLevelMoves: ; 42487
 	ld a, [wCurPartyLevel]
 	cp b
 	jr z, .found_move
-	inc hl
+	inc hl ; move byte 1
+	inc hl ; move byte 2
 	jr .find_move
 .found_move
 	ld a, d ;bank
 	call GetFarByte
 	inc hl
-	ld c, d ; bank
+	ld c, a ;move low byte
+	ld a, d ;bank
+	call GetFarByte
+	inc hl
+	ld b, a ;move high byte
 
 	push hl
 	push bc
-	ld d, a
 	ld hl, wPartyMon1Moves
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	pop bc
 
-	ld b, NUM_MOVES
+	ld e, NUM_MOVES
 .check_move
 	ld a, [hli]
-	cp d
-	jr z, .has_move
-	dec b
+	cp c
+	jr z, .low_byte_match
+.high_byte_didnt_match
+	dec e
 	jr nz, .check_move
 	jr .learn
+.low_byte_match
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	pop hl
+	and MOVE_HIGH_MASK
+	cp b
+	jr nz, .high_byte_didnt_match
 .has_move
 
 	pop hl
-	ld d, c; bank
 	jr .find_move
 
 .learn
-	ld a, d
+	ld a, c
 	ld [wPutativeTMHMMove], a
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
+	ld a, b
+	ld [wPutativeTMHMMove+1], a
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetMoveName
 	call CopyName1
 	predef LearnMove
