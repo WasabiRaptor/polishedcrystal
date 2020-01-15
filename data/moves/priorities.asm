@@ -14,4 +14,4 @@ MovePriorities:
 	dwb MIRROR_COAT,  -5
 	dwb ROAR,         -6
 	dwb TELEPORT,     -6
-	dw 0
+	dwb 0, 0

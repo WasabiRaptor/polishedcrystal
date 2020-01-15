@@ -833,19 +833,11 @@ GetMovePriority: ; 3c5c5
 	push bc
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	ld b, a
 	ld hl, MovePriorities
-.loop
-	ld a, [hli]
-	cp b
-	jr z, .done
+	call IsBCInArray
 	inc hl
-	cp -1
-	jr nz, .loop
-
-	xor a
-	jr .check_prankster
-.done
+	inc hl
+	inc hl
 	ld a, [hl]
 .check_prankster
 	xor $80 ; treat it as a signed byte
