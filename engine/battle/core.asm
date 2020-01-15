@@ -837,7 +837,6 @@ GetMovePriority: ; 3c5c5
 	call IsBCInArray
 	inc hl
 	inc hl
-	inc hl
 	ld a, [hl]
 .check_prankster
 	xor $80 ; treat it as a signed byte
