@@ -124,7 +124,7 @@ SubstituteBypassMoves::
 	dw FORESIGHT
 	dw SPIKES
 	dw TOXIC_SPIKES
-	db -1
+	dw 0
 
 DynamicPowerMoves::
 ; used by Forewarn and for move power listing
@@ -140,4 +140,4 @@ DynamicPowerMoves::
 	dw SEISMIC_TOSS
 	dw SONICBOOM
 	dw SUPER_FANG
-	db -1
+	dw 0
