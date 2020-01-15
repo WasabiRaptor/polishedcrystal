@@ -2,7 +2,7 @@ AI_Basic: ; 38591
 ; Don't do anything redundant:
 ;  -Using status-only moves if the player can't be statused
 ;  -Using moves that fail if they've already been used
-
+	ld b, b
 	ld hl, wBuffer1 - 1
 	ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1

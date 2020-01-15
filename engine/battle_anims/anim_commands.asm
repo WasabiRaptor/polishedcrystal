@@ -57,22 +57,22 @@ _PlayBattleAnim: ; cc0e4
 
 BattleAnimRunScript: ; cc11c
 
-;	ld a, [wFXAnimIDHi]
-;	and a
-;	jr z, .moveAnim
-;	farcall CheckBattleEffects
-;	jr nc, .hi_byte
-;	ld a, [wFXAnimIDLo]
-;	cp ANIM_IN_SANDSTORM & $ff
-;	jr z, .done
-;	cp ANIM_IN_HAIL & $ff
-;	jr z, .done
-;	cp ANIM_CONFUSED & $ff
-;	jr z, .done
-;	cp ANIM_SLP & $ff
-;	jr z, .done
-;	jr .hi_byte
-;.moveAnim
+	ld a, [wFXAnimIDHi]
+	and a
+	jr z, .moveAnim
+	farcall CheckBattleEffects
+	jr nc, .hi_byte
+	ld a, [wFXAnimIDLo]
+	cp ANIM_IN_SANDSTORM & $ff
+	jr z, .done
+	cp ANIM_IN_HAIL & $ff
+	jr z, .done
+	cp ANIM_CONFUSED & $ff
+	jr z, .done
+	cp ANIM_SLP & $ff
+	jr z, .done
+	jr .hi_byte
+.moveAnim
 
 	farcall CheckBattleEffects
 	jr c, .disabled
