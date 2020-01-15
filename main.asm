@@ -3241,7 +3241,7 @@ PrintStatDifferences: ; 50b7b
 	push de
 	push bc
 	call .PrintStatNames
-	ld bc, 9
+	ld bc, 5
 	add hl, bc
 	pop bc
 	pop de
@@ -3251,7 +3251,7 @@ PrintStatDifferences: ; 50b7b
 .PrintStatNames:
 	ld a, [wStringBuffer3 + 14]
 	push af
-	hlcoord 6, 4
+	hlcoord 10, 5
 .coord_loop
 	dec hl
 	dec a
@@ -3259,13 +3259,18 @@ PrintStatDifferences: ; 50b7b
 	pop af
 	push af
 	ld b, 6
-	ld c, 12
+	ld c, 8
 	add c
 	ld c, a
 	call TextBox
+	hlcoord 8, 5, wAttrMap
+	ld b, 6
+	ld c, 8
+	xor a
+	call FillBoxWithByte
 	pop af
 	push af
-	hlcoord 7, 5
+	hlcoord 11, 6
 .coord_loop2
 	dec hl
 	dec a
@@ -3275,7 +3280,7 @@ PrintStatDifferences: ; 50b7b
 	ld de, AllStatNames
 	call PlaceString
 	pop hl
-	ret
+	farjp ApplyAttrMap
 
 .PrintStats:
 	; Some screen movement is done because internal stat order is different

@@ -83,7 +83,7 @@ WritePartyMenuTilemap: ; 0x5005f
 
 PlacePartyNicknames: ; 5009b
 	call InitVariableWidthTiles
-	VWTextStart $a0
+	VWTextStart2 $80
 	hlcoord 3, 1
 	ld a, [wPartyCount]
 	and a
@@ -98,7 +98,10 @@ PlacePartyNicknames: ; 5009b
 	ld a, b
 	predef GetNick
 	pop hl
+	push hl
 	call PlaceString
+	pop hl
+	call SetNickNameAttributes
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -111,13 +114,24 @@ PlacePartyNicknames: ; 5009b
 	dec hl
 	dec hl
 	ld de, .CANCEL
-	jp PlaceString
+	call PlaceString
+	jp SetNickNameAttributes
 ; 500c8
 
 .CANCEL: ; 500c8
 	db "Cancel@"
 ; 500cf
 
+SetNickNameAttributes:
+	ld bc, wAttrMap - wTileMap
+	add hl, bc
+	ld b, PKMN_TILE_NAME_LENGTH
+	ld a, 0 | TILE_BANK
+.loop
+	ld [hli], a
+	dec b
+	jr nz, .loop
+	ret
 
 PlacePartyHPBar: ; 500cf
 	xor a
@@ -425,7 +439,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	push bc
 	ld de, wStringBuffer1
 	ld bc, 2
-	call FarCopyBytes 
+	call FarCopyBytes
 	ld hl, wStringBuffer1
 	ld a, [hli]
 	ld h, [hl]
