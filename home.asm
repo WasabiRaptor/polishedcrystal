@@ -413,7 +413,8 @@ GetBCthString::
 	jr nz, .readChar
 	dec c
 	jr nz, .readChar
-	and b
+	ld a, b
+	and a
 	ret z
 	dec b
 	jr .readChar
