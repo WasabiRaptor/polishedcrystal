@@ -15,7 +15,7 @@ KalosFramesPointers::
 	add_frames Talonflame
 	add_frames Scatterbug
 	add_frames Spewpa
-	add_frames Vivvilon
+	add_frames Vivillon
 	add_frames Litleo
 	add_frames Pyroar
 	add_frames Flabebe
@@ -38,11 +38,11 @@ KalosFramesPointers::
 	add_frames Inkay
 	add_frames Malamar
 	add_frames Binacle
-	add_frames Barbracle
+	add_frames Barbaracle
 	add_frames Skrelp
 	add_frames Dragalge
 	add_frames Clauncher
-	add_frames Clawlitzer
+	add_frames Clawitzer
 	add_frames Helioptile
 	add_frames Heliolisk
 	add_frames Tyrunt

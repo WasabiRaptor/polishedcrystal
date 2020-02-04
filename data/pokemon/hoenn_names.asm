@@ -107,6 +107,7 @@ HoennNames::
 	db "Tropius@"
 	db "Chimecho@"
 	db "Absol@"
+	db "Wynaut@"
 	db "Snorunt@"
 	db "Glalie@"
 	db "Spheal@"

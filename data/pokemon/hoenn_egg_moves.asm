@@ -7,187 +7,189 @@ INCLUDE "data/pokemon/hoenn_egg_move_pointers.asm"
 
 HoennEggMoves::
 NoHoennEggMoves::
-    db $ff
+    dw 0
 
 TreeckoEggMoves::
-    db $ff
+    dw 0
 
 TorchicEggMoves::
-    db $ff
+    dw 0
 
 MudkipEggMoves::
-    db $ff
+    dw 0
 
 PoochyenaEggMoves::
-    db $ff
+    dw 0
 
 ZigzagoonEggMoves::
-    db $ff
+    dw 0
 
 WurmpleEggMoves::
-    db $ff
+    dw 0
 
 LotadEggMoves::
-    db $ff
+    dw 0
 
 SeedotEggMoves::
-    db $ff
+    dw 0
 
 TaillowEggMoves::
-    db $ff
+    dw 0
 
 WingullEggMoves::
-    db $ff
+    dw 0
 
 RaltsEggMoves::
-    db $ff
+    dw 0
 
 SurskitEggMoves::
-    db $ff
+    dw 0
 
 ShroomishEggMoves::
-    db $ff
+    dw 0
 
 SlakothEggMoves::
-    db $ff
+    dw 0
 
 NincadaEggMoves::
-    db $ff
+    dw 0
 
- 
+
 WhismurEggMoves::
-    db $ff
+    dw 0
 
 MakuhitaEggMoves::
-    db $ff
+    dw 0
 
 NosepassEggMoves::
-    db $ff
+    dw 0
 
 SkittyEggMoves::
-    db $ff
+    dw 0
 
 SableyeEggMoves::
-    db $ff
+    dw 0
 
 MawileEggMoves::
-    db $ff
+    dw 0
 
 AronEggMoves::
-    db $ff
+    dw 0
 
 MedititeEggMoves::
-    db $ff
+    dw 0
 
 ElectrikeEggMoves::
-    db $ff
+    dw 0
 
 PlusleEggMoves::
-    db $ff
+    dw 0
 
 MinunEggMoves::
-    db $ff
+    dw 0
 
 VolbeatEggMoves::
-    db $ff
+    dw 0
 
 IllumiseEggMoves::
-    db $ff
+    dw 0
 
 GulpinEggMoves::
-    db $ff
+    dw 0
 
 CarvanhaEggMoves::
-    db $ff
+    dw 0
 
 WailmerEggMoves::
-    db $ff
+    dw 0
 
 NumelEggMoves::
-    db $ff
+    dw 0
 
 TorkoalEggMoves::
-    db $ff
+    dw 0
 
 SpoinkEggMoves::
-    db $ff
+    dw 0
 
 SpindaEggMoves::
-    db $ff
+    dw 0
 
 TrapinchEggMoves::
-    db $ff
+    dw 0
 
 CacneaEggMoves::
-    db $ff
+    dw 0
 
- 
+
 SwabluEggMoves::
-    db $ff
+    dw 0
 
 ZangooseEggMoves::
-    db $ff
+    dw 0
 
 SeviperEggMoves::
-    db $ff
+    dw 0
 
 LunatoneEggMoves::
-    db $ff
+    dw 0
 
 SolrockEggMoves::
-    db $ff
+    dw 0
 
 BarboachEggMoves::
-    db $ff
+    dw 0
 
 CorphishEggMoves::
-    db $ff
+    dw 0
 
 LileepEggMoves::
-    db $ff
+    dw 0
 
 AnorithEggMoves::
-    db $ff
+    dw 0
 
 FeebasEggMoves::
-    db $ff
+    dw 0
 
 CastformEggMoves::
-    db $ff
+    dw 0
 
 KecleonEggMoves::
-    db $ff
+    dw 0
 
 ShuppetEggMoves::
-    db $ff
+    dw 0
 
 DuskullEggMoves::
-    db $ff
+    dw 0
 
 TropiusEggMoves::
-    db $ff
+    dw 0
 
 AbsolEggMoves::
-    db $ff
+    dw 0
+
+WynautEggMoves::
+    dw 0
 
 SnoruntEggMoves::
-    db $ff
+    dw 0
 
 SphealEggMoves::
-    db $ff
+    dw 0
 
 ClamperlEggMoves::
-    db $ff
+    dw 0
 
 RelicanthEggMoves::
-    db $ff
+    dw 0
 
 LuvdiscEggMoves::
-    db $ff
+    dw 0
 
 BagonEggMoves::
-    db $ff
+    dw 0
 
 BeldumEggMoves::
-    db $ff
-
+    dw 0

@@ -420,7 +420,7 @@ GetMartPrice: ; 15bf0
 	ld hl, wStringBuffer1
 	ld de, wStringBuffer2
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 6 ; 6 digits
-	call PrintNum
+	predef PrintNum
 	pop hl
 
 	ld de, wStringBuffer1
@@ -779,7 +779,7 @@ BuyTMMenuLoop:
 	ld bc, hMoneyTemp
 	call CompareMoney
 	jp c, MartMenuLoop_InsufficientFunds
-	call ReceiveTMHM
+	farcall ReceiveTMHM
 	call PlayTransactionSound
 	ld de, wMoney
 	ld bc, hMoneyTemp
@@ -900,7 +900,7 @@ BTMartConfirmPurchase:
 TMMartConfirmPurchase:
 	ld a, [wCurTMHM]
 	ld [wd265], a
-	call GetTMHMName
+	farcall GetTMHMName
 	call CopyName1
 
 	; off by one error?
@@ -987,7 +987,7 @@ RooftopSaleAskPurchaseQuantity:
 
 TMMartAskPurchaseQuantity:
 	ld a, [wCurTMHM]
-	call CheckTMHM
+	farcall CheckTMHM
 	jr c, .AlreadyHaveTM
 
 	ld a, 1
@@ -1260,7 +1260,7 @@ BlueCardMenuDataHeader_Buy:
 	ld bc, SCREEN_WIDTH - 4
 	add hl, bc
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .PointsString
 	jp PlaceString
 
@@ -1289,7 +1289,7 @@ BTMenuDataHeader_Buy:
 	ld bc, SCREEN_WIDTH - 3
 	add hl, bc
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, .PointsString
 	jp PlaceString
 
@@ -1586,7 +1586,7 @@ SellMenu: ; 15eb3
 ; 15efc
 
 .try_sell ; 15efd
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr z, .okay_to_sell

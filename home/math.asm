@@ -83,38 +83,3 @@ Divide:: ; 3124
 	pop hl
 	ret
 ; 3136
-
-CompareTwoBytes::
-; Returns f
-;  z - bc == de
-; nz = bc != de
-;  c - bc <  de
-; nc - bc >= de
-	push hl
-	xor a
-	ld l, a
-	ld a, b
-	cp d
-	jr nz, .not_equal
-	ld a, c
-	cp e
-	jr nz, .not_equal
-	set 7, l
-
-.not_equal
-	ld a, b
-	cp d
-	jr c, .less_than
-	jr nz, .greater_than
-	ld a, c
-	cp e
-	jr c, .less_than
-	jr .greater_than
-
-.less_than
-	set 4, l
-.greater_than
-	push hl
-	pop af
-	pop hl
-	ret

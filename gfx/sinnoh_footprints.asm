@@ -2,130 +2,127 @@ SECTION "Sinnoh Footprints", ROMX
 
 SinnohFootprints::
 INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/turtwig.1bpp"
+INCBIN "gfx/footprints/grotle.1bpp"
+INCBIN "gfx/footprints/torterra.1bpp"
+INCBIN "gfx/footprints/chimchar.1bpp"
+INCBIN "gfx/footprints/monferno.1bpp"
+INCBIN "gfx/footprints/infernape.1bpp"
+INCBIN "gfx/footprints/piplup.1bpp"
+INCBIN "gfx/footprints/prinplup.1bpp"
+INCBIN "gfx/footprints/empoleon.1bpp"
+INCBIN "gfx/footprints/starly.1bpp"
+INCBIN "gfx/footprints/staravia.1bpp"
+INCBIN "gfx/footprints/staraptor.1bpp"
+INCBIN "gfx/footprints/bidoof.1bpp"
+INCBIN "gfx/footprints/bibarel.1bpp"
+INCBIN "gfx/footprints/kricketot.1bpp"
+INCBIN "gfx/footprints/kricketune.1bpp"
+INCBIN "gfx/footprints/shinx.1bpp"
+INCBIN "gfx/footprints/luxio.1bpp"
+INCBIN "gfx/footprints/luxray.1bpp"
+INCBIN "gfx/footprints/budew.1bpp"
+INCBIN "gfx/footprints/roserade.1bpp"
+INCBIN "gfx/footprints/cranidos.1bpp"
+INCBIN "gfx/footprints/rampardos.1bpp"
+INCBIN "gfx/footprints/shieldon.1bpp"
+INCBIN "gfx/footprints/bastiodon.1bpp"
+;INCBIN "gfx/footprints/burmy.1bpp"
+;INCBIN "gfx/footprints/wormadam.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
+INCBIN "gfx/footprints/mothim.1bpp"
+;INCBIN "gfx/footprints/combee.1bpp"
+;INCBIN "gfx/footprints/vespiquen.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
+INCBIN "gfx/footprints/pachirisu.1bpp"
+INCBIN "gfx/footprints/buizel.1bpp"
+INCBIN "gfx/footprints/floatzel.1bpp"
+INCBIN "gfx/footprints/cherubi.1bpp"
+INCBIN "gfx/footprints/cherrim.1bpp"
+INCBIN "gfx/footprints/shellos.1bpp"
+INCBIN "gfx/footprints/gastrodon.1bpp"
+INCBIN "gfx/footprints/ambipom.1bpp"
+;INCBIN "gfx/footprints/drifloon.1bpp"
+;INCBIN "gfx/footprints/drifblim.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
+INCBIN "gfx/footprints/buneary.1bpp"
+INCBIN "gfx/footprints/lopunny.1bpp"
+INCBIN "gfx/footprints/mismagius.1bpp"
+INCBIN "gfx/footprints/honchkrow.1bpp"
+INCBIN "gfx/footprints/glameow.1bpp"
+INCBIN "gfx/footprints/purugly.1bpp"
+INCBIN "gfx/footprints/chingling.1bpp"
+INCBIN "gfx/footprints/stunky.1bpp"
+INCBIN "gfx/footprints/skuntank.1bpp"
+INCBIN "gfx/footprints/bronzor.1bpp"
+INCBIN "gfx/footprints/bronzong.1bpp"
+INCBIN "gfx/footprints/bonsly.1bpp"
+INCBIN "gfx/footprints/mime_jr.1bpp"
+INCBIN "gfx/footprints/happiny.1bpp"
+INCBIN "gfx/footprints/chatot.1bpp"
+INCBIN "gfx/footprints/spiritomb.1bpp"
+INCBIN "gfx/footprints/gible.1bpp"
+INCBIN "gfx/footprints/gabite.1bpp"
+INCBIN "gfx/footprints/garchomp.1bpp"
+INCBIN "gfx/footprints/munchlax.1bpp"
+INCBIN "gfx/footprints/riolu.1bpp"
+INCBIN "gfx/footprints/lucario.1bpp"
+INCBIN "gfx/footprints/hippopotas.1bpp"
+INCBIN "gfx/footprints/hippowdon.1bpp"
+INCBIN "gfx/footprints/skorupi.1bpp"
+INCBIN "gfx/footprints/drapion.1bpp"
+INCBIN "gfx/footprints/croagunk.1bpp"
+INCBIN "gfx/footprints/toxicroak.1bpp"
+;INCBIN "gfx/footprints/carnivine.1bpp"
+;INCBIN "gfx/footprints/finneon.1bpp"
+;INCBIN "gfx/footprints/lumineon.1bpp"
+;INCBIN "gfx/footprints/mantyke.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+
+INCBIN "gfx/footprints/snover.1bpp"
+INCBIN "gfx/footprints/abomasnow.1bpp"
+INCBIN "gfx/footprints/weavile.1bpp"
+INCBIN "gfx/footprints/magnezone.1bpp"
+INCBIN "gfx/footprints/lickilicky.1bpp"
+INCBIN "gfx/footprints/rhyperior.1bpp"
+INCBIN "gfx/footprints/tangrowth.1bpp"
+INCBIN "gfx/footprints/electivire.1bpp"
+INCBIN "gfx/footprints/magmortar.1bpp"
+INCBIN "gfx/footprints/togekiss.1bpp"
+INCBIN "gfx/footprints/yanmega.1bpp"
+INCBIN "gfx/footprints/leafeon.1bpp"
+INCBIN "gfx/footprints/glaceon.1bpp"
+INCBIN "gfx/footprints/gliscor.1bpp"
+INCBIN "gfx/footprints/mamoswine.1bpp"
+INCBIN "gfx/footprints/porygon_z.1bpp"
+INCBIN "gfx/footprints/gallade.1bpp"
+INCBIN "gfx/footprints/probopass.1bpp"
+INCBIN "gfx/footprints/dusknoir.1bpp"
+INCBIN "gfx/footprints/froslass.1bpp"
+INCBIN "gfx/footprints/rotom.1bpp"
+INCBIN "gfx/footprints/uxie.1bpp"
+INCBIN "gfx/footprints/mesprit.1bpp"
+INCBIN "gfx/footprints/azelf.1bpp"
+INCBIN "gfx/footprints/dialga.1bpp"
+INCBIN "gfx/footprints/palkia.1bpp"
+INCBIN "gfx/footprints/heatran.1bpp"
+INCBIN "gfx/footprints/regigigas.1bpp"
+INCBIN "gfx/footprints/giratina.1bpp"
+;INCBIN "gfx/footprints/cresselia.1bpp"
+;INCBIN "gfx/footprints/phione.1bpp"
+;INCBIN "gfx/footprints/manaphy.1bpp"
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/256.1bpp"  ;dummy
+INCBIN "gfx/footprints/darkrai.1bpp"
+INCBIN "gfx/footprints/shaymin.1bpp"
+INCBIN "gfx/footprints/arceus.1bpp"

@@ -107,6 +107,7 @@ HoennPicPointers::
 	add_pics Tropius
 	add_pics Chimecho
 	add_pics Absol
+	add_pics Wynaut
 	add_pics Snorunt
 	add_pics Glalie
 	add_pics Spheal

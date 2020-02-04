@@ -74,10 +74,13 @@ _CGB_BattleColors: ; 8ddb
 	ld de, wUnknBGPals
 	ld a, [wTempBattleMonGroup]
 	ld [wCurGroup], a
-	call GetBattlemonBackpicPalette
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurSpecies], a
-
+	ld [wCurPartySpecies], a
+	ld a, [wTempBattleMonForm]
+	ld [wCurForm], a
+	call GetBattlemonBackpicPalette
+	ld a, [wTempBattleMonSpecies]
 	and a
 	jr z, .player_backsprite
 	push de
@@ -88,16 +91,19 @@ _CGB_BattleColors: ; 8ddb
 	ld b, a
 	; vary colors by DVs
 	call CopyDVsToColorVaryDVs
-	ld hl, wUnknBGPals palette PAL_BATTLE_BG_PLAYER + 2
+	ld hl, wUnknBGPals palette PAL_BATTLE_BG_PLAYER
 	call VaryColorsByDVs
 	pop de
 .player_backsprite
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
-	call GetEnemyFrontpicPalette
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
-
+	ld [wCurPartySpecies], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
+	call GetEnemyFrontpicPalette
+	ld a, [wTempEnemyMonSpecies]
 	and a
 	jr z, .trainer_sprite
 	push de
@@ -108,7 +114,7 @@ _CGB_BattleColors: ; 8ddb
 	ld b, a
 	; vary colors by DVs
 	call CopyDVsToColorVaryDVs
-	ld hl, wUnknBGPals palette PAL_BATTLE_BG_ENEMY + 2
+	ld hl, wUnknBGPals palette PAL_BATTLE_BG_ENEMY
 	call VaryColorsByDVs
 	pop de
 .trainer_sprite

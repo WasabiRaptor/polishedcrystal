@@ -68,7 +68,7 @@ Rate: ; 0x26616
 	call ByteFill
 	pop hl
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-	jp PrintNum
+	predef_jump PrintNum
 
 FindOakRating: ; 0x2666b
 ; return sound effect in de

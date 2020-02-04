@@ -1,4 +1,4 @@
-_PrintNum:: ; c4c7
+PrintNum:: ; c4c7
 ; Print c digits of the b-byte value from de to hl.
 ; Allows 2 to 7 digits. For 1-digit numbers, add
 ; the value to char "0" instead of calling PrintNum.

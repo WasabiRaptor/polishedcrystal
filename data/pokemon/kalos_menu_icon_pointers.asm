@@ -15,7 +15,7 @@ KalosIconPointers::
 	add_icon Talonflame
 	add_icon Scatterbug
 	add_icon Spewpa
-	add_icon Vivvilon
+	add_icon Vivillon
 	add_icon Litleo
 	add_icon Pyroar
 	add_icon Flabebe
@@ -38,11 +38,11 @@ KalosIconPointers::
 	add_icon Inkay
 	add_icon Malamar
 	add_icon Binacle
-	add_icon Barbracle
+	add_icon Barbaracle
 	add_icon Skrelp
 	add_icon Dragalge
 	add_icon Clauncher
-	add_icon Clawlitzer
+	add_icon Clawitzer
 	add_icon Helioptile
 	add_icon Heliolisk
 	add_icon Tyrunt

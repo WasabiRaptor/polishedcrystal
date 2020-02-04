@@ -1,7 +1,7 @@
 	db "BITE@" ; species name
 	dw 5, 136 ; height, weight
 
-	db "Poochyena is an omnivore—it"
+	db "Poochyena is an omnivore-it"
 	next "will eat anything. A"
 	next "distinguishing feature is how"
 	

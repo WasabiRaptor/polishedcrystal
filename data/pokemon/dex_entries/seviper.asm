@@ -2,7 +2,7 @@
 	dw 27, 525 ; height, weight
 
 	db "Seviper's swordlike tail"
-	next "serves two purposes—it"
+	next "serves two purposes-it"
 	next "slashes foes and douses them"
 	
 	page "with secreted poison. This"

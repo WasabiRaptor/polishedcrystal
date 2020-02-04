@@ -15,7 +15,7 @@ KalosPokedexEntryPointers::
 	add_pokedexentry Talonflame
 	add_pokedexentry Scatterbug
 	add_pokedexentry Spewpa
-	add_pokedexentry Vivvilon
+	add_pokedexentry Vivillon
 	add_pokedexentry Litleo
 	add_pokedexentry Pyroar
 	add_pokedexentry Flabebe
@@ -38,11 +38,11 @@ KalosPokedexEntryPointers::
 	add_pokedexentry Inkay
 	add_pokedexentry Malamar
 	add_pokedexentry Binacle
-	add_pokedexentry Barbracle
+	add_pokedexentry Barbaracle
 	add_pokedexentry Skrelp
 	add_pokedexentry Dragalge
 	add_pokedexentry Clauncher
-	add_pokedexentry Clawlitzer
+	add_pokedexentry Clawitzer
 	add_pokedexentry Helioptile
 	add_pokedexentry Heliolisk
 	add_pokedexentry Tyrunt

@@ -7,113 +7,112 @@ INCLUDE "data/pokemon/sinnoh_egg_move_pointers.asm"
 SinnohEggMoves::
 
 NoSinnohEggMoves::
-    db $ff
+    dw 0
 
 TurtwigEggMoves::
-    db $ff
+    dw 0
 
 ChimcharEggMoves::
-    db $ff
+    dw 0
 
 PiplupEggMoves::
-    db $ff
+    dw 0
 
 StarlyEggMoves::
-    db $ff
+    dw 0
 
 BidoofEggMoves::
-    db $ff
+    dw 0
 
 KricketotEggMoves::
-    db $ff
+    dw 0
 
 ShinxEggMoves::
-    db $ff
+    dw 0
 
 BudewEggMoves::
-    db $ff
+    dw 0
 
 CrainidosEggMoves::
-    db $ff
+    dw 0
 
 SheildonEggMoves::
-    db $ff
+    dw 0
 
 BurmyEggMoves::
-    db $ff
+    dw 0
 
 CombeeEggMoves::
-    db $ff
+    dw 0
 
 PachirisuEggMoves::
-    db $ff
+    dw 0
 
 BuizelEggMoves::
-    db $ff
+    dw 0
 
 CherubiEggMoves::
-    db $ff
+    dw 0
 
 ShellosEggMoves::
-    db $ff
+    dw 0
 
 DrifloonEggMoves::
-    db $ff
+    dw 0
 
 BunearyEggMoves::
-    db $ff
+    dw 0
 
 GlameowEggMoves::
-    db $ff
+    dw 0
 
 ChinglingEggMoves::
-    db $ff
+    dw 0
 
 StunkyEggMoves::
-    db $ff
+    dw 0
 
 BonslyEggMoves::
-    db $ff
+    dw 0
 
 Mime_jrEggMoves::
-    db $ff
+    dw 0
 
 HappinyEggMoves::
-    db $ff
+    dw 0
 
 ChatotEggMoves::
-    db $ff
+    dw 0
 
 SpiritombEggMoves::
-    db $ff
+    dw 0
 
 GibleEggMoves::
-    db $ff
+    dw 0
 
 MunchlaxEggMoves::
-    db $ff
+    dw 0
 
 RioluEggMoves::
-    db $ff
+    dw 0
 
 HippopotasEggMoves::
-    db $ff
+    dw 0
 
 SkorupiEggMoves::
-    db $ff
+    dw 0
 
 CroagunkEggMoves::
-    db $ff
+    dw 0
 
 CarnivineEggMoves::
-    db $ff
+    dw 0
 
 FinneonEggMoves::
-    db $ff
+    dw 0
 
 MantykeEggMoves::
-    db $ff
+    dw 0
 
 SnoverEggMoves::
-    db $ff
-
+    dw 0

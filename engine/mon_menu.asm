@@ -127,7 +127,7 @@ GetMonSubmenuItems: ; 24dd4
 	and a
 	jr nz, .skip_moves
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld d, h
 	ld e, l
 	ld c, NUM_MOVES
@@ -162,7 +162,7 @@ GetMonSubmenuItems: ; 24dd4
 	jr nz, .skip2
 	push hl
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld d, [hl]
 	pop hl
 	ld a, MONMENU_ITEM

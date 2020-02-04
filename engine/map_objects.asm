@@ -254,7 +254,7 @@ SetTallGrassFlags: ; 4661
 	ret
 
 .set
-	set OVERHEAD, [hl]
+	;set OVERHEAD, [hl]
 	ret
 
 EndSpriteMovement:

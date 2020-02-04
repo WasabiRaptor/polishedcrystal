@@ -8,7 +8,7 @@
 		; TRAINERTYPE_DVS:         DVs (3 bytes)
 		; TRAINERTYPE_PERSONALITY: personality (2 bytes)
 		; TRAINERTYPE_NICKNAME:    nickname (max 10 bytes)
-		; TRAINERTYPE_MOVES:       moves (4 bytes)
+		; TRAINERTYPE_MOVES:       moves (8 bytes)
 	; Party
 		; Up to six monsters following the data type
 	; $ff
@@ -46,6 +46,27 @@ trainer_mon: macro
 	endc
 endm
 
+; the high byte of the move contains the bits for PP up, therefore trainers can have mons with PP up applied
+; if you put in five or more args for the moveset, it will assume the arg following each move is 0-3 for the amount of PP ups
+	;moveset TACKLE, 2, GROWL, 1, SPLASH, 0, NO_MOVE, 0
+; above is an example of a moveset where TACKLE would have two PP ups, and GROWL, would have one
+	;moveset TACKLE, GROWL, SPLASH, NO_MOVE
+; if you don't want to bother with them in the definition you can just use four arguments in the macro
+; it takes up the same amount of bytes either way you do it
+
+moveset: macro
+	if _NARG >= 5
+	db LOW(\1), HIGH(\1) | (\2 << 6)
+	db LOW(\3), HIGH(\3) | (\4 << 6)
+	db LOW(\5), HIGH(\5) | (\6 << 6)
+	db LOW(\7), HIGH(\7) | (\8 << 6)
+	else
+	dw \1
+	dw \2
+	dw \3
+	dw \4
+	endc
+endm
 
 SECTION "Enemy Trainer Parties 1", ROMX
 
@@ -477,10 +498,12 @@ YoungsterGroup:
 
 	; YOUNGSTER
 	db "Joey@"
-	db TRAINERTYPE_DVS | TRAINERTYPE_PERSONALITY 
+	db TRAINERTYPE_DVS | TRAINERTYPE_PERSONALITY | TRAINERTYPE_MOVES
 	; party
-	trainer_mon 5, SENTRET, FAKE_PERFECT_DVS, HIDDEN_ABILITY | ADAMANT, MALE 
+	trainer_mon 5, SENTRET, FAKE_PERFECT_DVS, HIDDEN_ABILITY | ADAMANT, MALE
+		moveset TACKLE, 2, GROWL, 1, SPLASH, 0, NO_MOVE, 0
 	trainer_mon 5, SENTRET, FAKE_PERFECT_DVS, ABILITY_2 | ADAMANT, MALE
+		moveset TACKLE, GROWL, SPLASH, NO_MOVE
 	db -1 ; end
 
 ; ================
@@ -1517,8 +1540,6 @@ GiovanniGroup:
 	db "Giovanni@"
 	db TRAINERTYPE_ITEM | TRAINERTYPE_PERSONALITY | TRAINERTYPE_NICKNAME | TRAINERTYPE_MOVES
 	; party
-	db 70, MEWTWO, ARMOR_SUIT, ABILITY_2 | MODEST, MALE, "???@"
-		db SHADOW_BALL, PSYSTRIKE, NASTY_PLOT, AURA_SPHERE
 	db -1 ; end
 
 ; ================
@@ -1956,18 +1977,6 @@ BillGroup:
 	db "Bill@"
 	db TRAINERTYPE_ITEM | TRAINERTYPE_MOVES
 	; party
-	db 62, VAPOREON, MYSTIC_WATER
-		db RECOVER, BARRIER, HAZE, SCALD
-	db 62, JOLTEON, MAGNET
-		db THUNDER_WAVE, THUNDERBOLT, LIGHT_SCREEN, QUICK_ATTACK
-	db 62, FLAREON, CHARCOAL
-		db FLARE_BLITZ, DOUBLE_EDGE, SMOKESCREEN, ROCK_SMASH
-	db 63, LEAFEON, MIRACLE_SEED
-		db SEED_BOMB, SWORDS_DANCE, HEALINGLIGHT, X_SCISSOR
-	db 63, GLACEON, NEVERMELTICE
-		db ICE_BEAM, MIRROR_COAT, RECOVER, QUICK_ATTACK
-	db 66, PORYGON2, EVIOLITE
-		db TRI_ATTACK, THUNDERBOLT, ICE_BEAM, RECOVER
 	db -1 ; end
 
 ; ================

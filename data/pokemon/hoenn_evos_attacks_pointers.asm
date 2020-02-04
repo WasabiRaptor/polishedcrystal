@@ -107,6 +107,7 @@ HoennEvosAttacksPointers::
 	add_evosattacks Tropius
 	add_evosattacks Chimecho
 	add_evosattacks Absol
+	add_evosattacks Wynaut
 	add_evosattacks Snorunt
 	add_evosattacks Glalie
 	add_evosattacks Spheal

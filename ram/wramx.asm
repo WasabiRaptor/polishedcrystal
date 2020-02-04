@@ -10,7 +10,6 @@ UNION
 wBufferMonNick:: ds PKMN_NAME_LENGTH
 wBufferMonOT:: ds PLAYER_NAME_LENGTH
 wBufferMon:: party_struct wBufferMon
-	ds 8
 wMonOrItemNameBuffer:: ds PLAYER_NAME_LENGTH
 
 NEXTU
@@ -25,7 +24,6 @@ wBugContestResults::
 	bugcontestwinner wBugContestThirdPlace
 wBugContestWinnersEnd::
 	bugcontestwinner wBugContestTemp
-	ds 4
 wBugContestWinnerName:: ds PLAYER_NAME_LENGTH
 
 NEXTU
@@ -97,11 +95,11 @@ wd004:: ds 1 ; TODO: replace with meaningful labels
 
 NEXTU
 wMoveScreenMode:: ds 1 ; normal, learning, reminder, deletion
-wMoveScreenSelectedMove:: ds 1 ; move index
+wMoveScreenSelectedMove:: ds 2 ; move index
 wMoveScreenCursor:: ds 1 ; cursor position
 wMoveScreenOffset:: ds 1 ; offset from top of the list in view
 wMoveScreenNumMoves:: ds 1 ; amount of moves in the list
-wMoveScreenMoves:: ds 55
+wMoveScreenMoves:: ds 55 * 2
 
 NEXTU
 ; miscellaneous
@@ -232,8 +230,6 @@ wBattleMenuCursorBuffer:: ds 2
 wCurBattleMon:: ds 1
 wCurMoveNum:: ds 1
 
-	ds 1 ; unused
-
 wPCItemsCursor:: ds 1
 wPartyMenuCursor:: ds 1
 wItemsPocketCursor:: ds 1
@@ -244,7 +240,6 @@ wBerriesPocketCursor:: ds 1
 wKeyItemsPocketCursor:: ds 1
 
 wPCItemsScrollPosition:: ds 1
-wPartyMenuScrollPosition:: ds 1 ; unused
 wItemsPocketScrollPosition:: ds 1
 wMedicinePocketScrollPosition:: ds 1
 wBallsPocketScrollPosition:: ds 1
@@ -376,7 +371,7 @@ wSpinning:: ds 1
 
 wBGMapAnchor:: ds 2
 
-wStairHandler:: ds 1 
+wStairHandler:: ds 1
 
 wOverworldMapAnchor:: ds 2
 wMetatileStandingY:: ds 1
@@ -607,9 +602,9 @@ wEveningEncounterRate:: ds 1
 wNiteEncounterRate:: ds 1
 wWaterEncounterRate:: ds 1
 
-wListMoves_MoveIndicesBuffer:: ds NUM_MOVES
+wListMoves_MoveIndicesBuffer:: ds (NUM_MOVES * 2)
 
-wPutativeTMHMMove:: ds 1
+wPutativeTMHMMove:: ds 2
 
 wForgettingMove:: ds 1
 
@@ -711,8 +706,6 @@ wBugContestSecsRemaining:: ds 1
 
 wMapStatusEnd::
 
-	ds 2
-
 
 SECTION "Game Data", WRAMX
 
@@ -738,12 +731,8 @@ wSpawnAfterChampion:: ds 1
 
 ; init time set at newgame ;probably can be used for other things as well
 wStartDay:: ds 1
-wStartHour:: ds 1 ;unused
-wStartMinute:: ds 1 ;unused
-wStartSecond:: ds 1 ;unused
 
 wGameSaveTime:: ds 8 ; in-game wall clock time at save
-wDST:: ds 1 ;unused
 
 wGameTimeCap:: ds 1 ; flag for timer hitting 999:59:59.00
 wGameTimeHours:: ds 2
@@ -752,16 +741,6 @@ wGameTimeSeconds:: ds 1
 wGameTimeFrames:: ds 1
 
 wCurDay:: ds 1
-
-; do not talk to the RTC hardware in the no-RTC patch
-wNoRTC:: ;actually unused
-wNoRTCDayHi::   ds 1 ; copied to hRTCDayHi ;unused
-wNoRTCDayLo::   ds 1 ; copied to hRTCDayLo ;unused
-wNoRTCHours::   ds 1 ; copied to hRTCHours ;unused
-wNoRTCMinutes:: ds 1 ; copied to hRTCMinutes ;unused
-wNoRTCSeconds:: ds 1 ; copied to hRTCSeconds ;unused
-
-	ds 1
 
 wObjectFollow_Leader:: ds 1
 wObjectFollow_Follower:: ds 1
@@ -817,10 +796,8 @@ wVariableSprites:: ds $100 - SPRITE_VARS
 
 wEnteredMapFromContinue:: ds 1
 
-	ds 2
-
 wTimeOfDayPal:: ds 1
-	ds 4
+
 wTimeOfDayPalFlags:: ds 1
 wCurTimeOfDay:: ds 1
 
@@ -914,9 +891,6 @@ wTradeCenterSceneID:: ds 1
 wColosseumSceneID:: ds 1
 wPlayersHouse1FSceneID:: ds 1
 wMysteryDungeonNorthSouthEastWestSceneID:: ds 1
-
-;unused
-	ds 10 ; placeholder for later
 
 
 wEventFlags:: flag_array NUM_EVENTS
@@ -1016,7 +990,7 @@ wBattlePoints:: ds 1
 wStepCount:: ds 1
 wPoisonStepCount:: ds 1
 
-wPhoneList:: ds CONTACT_LIST_SIZE
+wPhoneList:: ds 1 ;CONTACT_LIST_SIZE ;probably going to remove the phone
 
 wHappinessStepCount:: ds 1
 
@@ -1156,7 +1130,7 @@ wTempTileMap:: ds SCREEN_WIDTH * SCREEN_HEIGHT ; 20x18 grid of 8x8 tiles
 wPokeAnimSceneIndex:: ds 1
 wPokeAnimPointer:: ds 2
 wPokeAnimGroup:: ds 1
-wPokeAnimVariant:: ds 1
+wPokeAnimSpecies:: ds 1
 wPokeAnimSpeciesOrVariant:: ds 1
 wPokeAnimGraphicStartTile:: ds 1
 wPokeAnimCoord:: ds 2
@@ -1177,13 +1151,16 @@ wPokeAnimCurBitmask:: ds 1
 wPokeAnimWaitCounter:: ds 1
 wPokeAnimCommand:: ds 1
 wPokeAnimParameter:: ds 1
-	ds 1
 wPokeAnimBitmaskCurCol:: ds 1
 wPokeAnimBitmaskCurRow:: ds 1
 wPokeAnimBitmaskCurBit:: ds 1
 wPokeAnimBitmaskBuffer:: ds 1
-	ds 8
+wPokeAnimDestination:: ds 2
 wPokeAnimStructEnd::
+
+wDEDTempSamp:: ds 16
+
+wGetDEDByte:: ds $100
 
 
 SECTION "Battle Tower", WRAMX
@@ -1191,9 +1168,7 @@ SECTION "Battle Tower", WRAMX
 ; BattleTower OpponentTrainer-Data (length = 0xe0 = $a + $1 + 3*$3b + $24)
 wBT_OTTrainer:: battle_tower_struct wBT_OT
 
-	ds $20
-
-wBT_TrainerTextIndex:: ds 2
+wBT_TrainerTextIndex::
 
 wBT_OTTrainer1:: battle_tower_struct wBT_OTTrainer1
 wBT_OTTrainer2:: battle_tower_struct wBT_OTTrainer2
@@ -1350,7 +1325,7 @@ wGalarPokedexCaughtEnd::
 wPokedexCaughtEnd::
 
 
-wPokedexSeen:: 
+wPokedexSeen::
 
 wKantoPokedexSeen:: flag_array NUM_KANTO_POKEMON
 wKantoPokedexSeenEnd::

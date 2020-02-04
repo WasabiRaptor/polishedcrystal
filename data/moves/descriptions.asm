@@ -254,8 +254,11 @@ MoveDescriptions::
 	dw PlayRoughDescription
 	dw DisarmVoiceDescription
 	dw StruggleDescription
+	dw TestMoveDescription
 	dw Move00Description
 
+TestMoveDescription:
+	db "by all accounts it shouldn't exist@"
 Move00Description:
 	db "?@"
 

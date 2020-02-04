@@ -252,11 +252,11 @@ InitBattleAnimBuffer: ; ccaaa
 	or a
 	jr nz, .no_sub
 	ld a, [wFXAnimIDLo]
-	cp PSYSTRIKE
+	cp LOW(PSYSTRIKE)
 	jr z, .sub_8
-	cp SOFTBOILED
+	cp LOW(SOFTBOILED)
 	jr z, .sub_8
-	cp MILK_DRINK
+	cp LOW(MILK_DRINK)
 	jr nz, .no_sub
 .sub_8
 	pop af

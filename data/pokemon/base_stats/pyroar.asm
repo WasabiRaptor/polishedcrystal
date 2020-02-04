@@ -9,7 +9,7 @@
         db 177 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_87_5, 4 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/pyroar/front.dimensions"  
+        INCBIN "gfx/pokemon/pyroar_m/front.dimensions"  
         db RIVALRY, UNNERVE     ; abilities
         db MOXIE    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate

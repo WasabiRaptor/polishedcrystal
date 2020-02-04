@@ -107,6 +107,7 @@ HoennBitmasksPointers::
 	add_bitmasks Tropius
 	add_bitmasks Chimecho
 	add_bitmasks Absol
+	add_bitmasks Wynaut
 	add_bitmasks Snorunt
 	add_bitmasks Glalie
 	add_bitmasks Spheal

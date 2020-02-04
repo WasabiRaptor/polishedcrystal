@@ -15,8 +15,12 @@ SRAM $1
 
 SRAM $2
 	org $a000
-	"Boxes 1-6"
+	"Boxes 1-5"
 
 SRAM $3
 	org $a000
-	"Boxes 7-12"
+	"Boxes 6-10"
+
+SRAM $4
+	org $a000
+	"Boxes 11-15"

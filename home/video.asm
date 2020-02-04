@@ -452,3 +452,58 @@ AnimateTileset::
 	pop af
 	ldh [rSVBK], a
 	ret
+
+TransferAnimatingPicDuringHBlank::
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokeAnimCoord)
+	ldh [rSVBK], a
+
+	ld hl, wPokeAnimDestination
+	ld a, [hli]
+	ld d, [hl]
+	ld e, a
+	ld hl, wPokeAnimCoord
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	pop af
+	ldh [rSVBK], a
+
+	lb bc, 7, LOW(rSTAT)
+.loop
+	ldh a, [rLY]
+	cp $90
+	jr nc, .inVBlank
+.waitNoHBlank
+	ldh a, [c]
+	and 3
+	jr z, .waitNoHBlank
+.waitHBlank
+	ldh a, [c]
+	and 3
+	jr nz, .waitHBlank
+.inVBlank
+	rept 7
+	ld a, [hli]
+	ld [de], a
+	inc e
+	endr
+	ld a, [hl]
+	ld [de], a
+
+	ld a, (BG_MAP_WIDTH - 7)
+	add e
+	ld e, a
+	jr nc, .noCarry
+	inc d
+.noCarry
+	ld a, (SCREEN_WIDTH - 7)
+	add l
+	ld l, a
+	jr nc, .noCarry2
+	inc h
+.noCarry2
+	dec b
+	jr nz, .loop
+	ret

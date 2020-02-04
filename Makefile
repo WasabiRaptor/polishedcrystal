@@ -39,11 +39,13 @@ $(BUILD_DIR)home.o \
 $(BUILD_DIR)ram.o \
 $(BUILD_DIR)audio.o \
 $(BUILD_DIR)audio/musicplayer.o \
+$(BUILD_DIR)audio/ded_cries.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_entries.o \
 $(BUILD_DIR)data/pokemon/johto_dex_entries.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_entries.o \
 $(BUILD_DIR)data/pokemon/sinnoh_dex_entries.o \
 $(BUILD_DIR)data/pokemon/unova_dex_entries.o \
+$(BUILD_DIR)data/pokemon/kalos_dex_entries.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_order.o \
 $(BUILD_DIR)data/pokemon/johto_dex_order.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_order.o \
@@ -64,6 +66,8 @@ $(BUILD_DIR)data/pokemon/sinnoh_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/sinnoh_egg_moves.o \
 $(BUILD_DIR)data/pokemon/unova_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/unova_egg_moves.o \
+$(BUILD_DIR)data/pokemon/kalos_evos_attacks.o \
+$(BUILD_DIR)data/pokemon/kalos_egg_moves.o \
 $(BUILD_DIR)data/maps/map_data.o \
 $(BUILD_DIR)data/text/common.o \
 $(BUILD_DIR)data/tilesets.o \
@@ -76,6 +80,7 @@ $(BUILD_DIR)gfx/johto_footprints.o\
 $(BUILD_DIR)gfx/hoenn_footprints.o\
 $(BUILD_DIR)gfx/sinnoh_footprints.o\
 $(BUILD_DIR)gfx/unova_footprints.o\
+$(BUILD_DIR)gfx/kalos_footprints.o\
 
 ### Build targets
 
@@ -109,7 +114,7 @@ tools:
 # It doesn't look like $(shell) can be deferred so there might not be a better way.
 define DEP
 $1: $2 $$(shell tools/scan_includes $2)
-	$$(RGBASM) $$(RGBASM_FLAGS) -L -o $$@ $$<
+	$$(RGBASM) $$(RGBASM_FLAGS) -o $$@ $$<
 endef
 
 # Build tools when building the rom.
@@ -264,6 +269,5 @@ gfx/unknown/unknown_egg.2bpp: rgbgfx += -h
 %.dimensions: %.png
 	tools/png_dimensions $< $@
 
-%.wav:;
-%.pcm: %.wav
-	@$(pcm) $<
+%.wav: ;
+%.ded: %.wav dedenc.py ; $(PYTHON) dedenc.py $< $@

@@ -519,7 +519,7 @@ CardFlip_PrintCoinBalance: ; e049c
 	hlcoord 14, 16
 	ld de, wCoins
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	jp PrintNum
+	predef_jump PrintNum
 ; e04bc
 
 .CoinStr:

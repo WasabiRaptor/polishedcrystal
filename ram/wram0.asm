@@ -386,7 +386,7 @@ wPlayerSubStatus2::
 ; 4 encore
 ; 3 transformed
 ; 2 magic bounce?
-; 1 
+; 1
 ; 0 toxic
 	ds 1
 wPlayerSubStatus3::
@@ -468,8 +468,8 @@ wOTPartyUsedItems::
 
 ; What move was selected last.
 ; Used for Choice locking and the Metronome item
-wPlayerSelectedMove:: ds 1
-wEnemySelectedMove:: ds 1
+wPlayerSelectedMove:: ds 2
+wEnemySelectedMove:: ds 2
 
 ; How much the Metronome item is boosted. (Counts even if you don't have the item.)
 wPlayerMetronomeCount:: ds 1
@@ -514,8 +514,8 @@ wEnemySubstituteHP:: ds 2
 
 wBackupEnemyMonBaseExp:: ds 1
 
-wCurPlayerMove:: ds 1
-wCurEnemyMove:: ds 1
+wCurPlayerMove:: ds 2
+wCurEnemyMove:: ds 2
 
 wLinkBattleRNCount:: ds 1 ; how far through the prng stream
 
@@ -543,14 +543,14 @@ wEnemyBackupForm::
 
 wAlreadyDisobeyed:: ds 1
 
-wDisabledMove:: ds 1
-wEnemyDisabledMove:: ds 1
+wDisabledMove:: ds 2
+wEnemyDisabledMove:: ds 2
 
 wWhichMonFaintedFirst:: ds 1
 
 ; exists so you can't counter on switch
-wLastEnemyCounterMove:: ds 1
-wLastPlayerCounterMove:: ds 1
+wLastEnemyCounterMove:: ds 2
+wLastPlayerCounterMove:: ds 2
 
 wEnemyMinimized:: ds 1
 
@@ -607,7 +607,7 @@ wEnemyIsSwitching::  ds 1
 wPlayerUsedMoves::
 ; add a move that has been used once by the player
 ; added in order of use
-	ds NUM_MOVES
+	ds NUM_MOVES * 2
 
 wEnemyAISwitchScore:: ds 1
 wEnemySwitchMonParam:: ds 1
@@ -617,8 +617,8 @@ wTempLevel:: ds 1
 
 wLastPlayerMon:: ds 1
 
-wLastPlayerMove:: ds 1
-wLastEnemyMove:: ds 1
+wLastPlayerMove:: ds 2
+wLastEnemyMove:: ds 2
 
 wEnemyUsingItem:: ds 1
 wEnemySwitchItemCheck:: ds 1
@@ -628,8 +628,8 @@ wPlayerFutureSightCount:: ds 1
 wEnemyFutureSightCount:: ds 1
 wPlayerFutureSightDamage:: ds 2
 wEnemyFutureSightDamage:: ds 2
-wPlayerTrappingMove:: ds 1
-wEnemyTrappingMove:: ds 1
+wPlayerTrappingMove:: ds 2
+wEnemyTrappingMove:: ds 2
 wPlayerWrapCount:: ds 1
 wEnemyWrapCount:: ds 1
 wPlayerCharging:: ds 1
@@ -641,8 +641,8 @@ wAnimationsDisabled:: ds 1 ; used to temporarily disable animations for abilitie
 
 wBattleEnded:: ds 1
 
-wWildMonMoves:: ds NUM_MOVES
-wWildMonPP:: ds NUM_MOVES
+wWildMonMoves:: ds NUM_MOVES*2
+wWildMonCurPP:: ds NUM_MOVES
 
 wAmuletCoin:: ds 1
 
@@ -782,6 +782,13 @@ wDexCurrentUnownIndex::
 wDexMonForm:: ds 1
 wPokedexDataEnd::
 
+NEXTU
+; Party Editor
+wEditorDummyByte:: ds 1
+wEditorDexNumber:: ds 2
+wEditorFormNumber:: ds 1
+wEditorCursorPosition:: ds 2
+
 ENDU
 
 ENDU
@@ -833,7 +840,7 @@ wLinkPlayerPartyMon6:: party_struct wLinkPlayerPartyMon6
 wLinkPlayerPartyMonOTNames:: ds PARTY_LENGTH * PLAYER_NAME_LENGTH
 wLinkPlayerPartyMonNicks:: ds PARTY_LENGTH * PKMN_NAME_LENGTH
 wLinkPlayerDataEnd::
-	ds 861
+;	ds 861
 wLinkDataEnd::
 
 NEXTU
@@ -853,6 +860,9 @@ wcc4a:: ds 84
 wcc9e:: ds 130
 
 ENDU
+wHasPlayerMoved:: ds 1
+wGrassTileAddress:: ds 2
+wPrevGrassTileAddress:: ds 2
 
 
 SECTION "Video", WRAM0
@@ -867,11 +877,11 @@ wCreditsTimer:: ds 1
 wMemCGBLayout:: ds 1
 
 wHatchOrEvolutionResultSpecies::
-wPlayerHPPal:: 
+wPlayerHPPal::
 	ds 1
 
 wHatchOrEvolutionResultGroup::
-wEnemyHPPal:: 
+wEnemyHPPal::
 	ds 1
 
 wHPPals:: ds PARTY_LENGTH
@@ -906,10 +916,11 @@ wcf5d:: ds 2 ; TODO: replace with meaningful label
 
 wMonType:: ds 1
 
-wCurGroup::	ds 1
 wCurSpecies::
 wCurMove::
 wCreditsSpawn::	ds 1
+wCurMoveHigh::
+wCurGroup::	ds 1
 wCurGender::
 wCurForm:: ds 1
 wCurPersonality:: ds 1
@@ -1143,7 +1154,7 @@ wMinutesSince:: ds 1
 wHoursSince:: ds 1
 wDaysSince:: ds 1
 
-; this is used so often I'm moving it here just incase I break anything 
+; this is used so often I'm moving it here just incase I break anything
 
 wd265:: ; TODO: replace with meaningful labels
 wNamedObjectIndexBuffer::

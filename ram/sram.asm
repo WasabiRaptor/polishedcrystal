@@ -202,28 +202,29 @@ sBTPkmnPrevPrevTrainer2:: ds 1
 sBTPkmnPrevPrevTrainer3:: ds 1
 
 
-SECTION "Boxes 1-6",  SRAM
+SECTION "Boxes 1-5",  SRAM
 
 	box sBox1
 	box sBox2
 	box sBox3
 	box sBox4
 	box sBox5
+
+
+SECTION "Boxes 6-10", SRAM
+
 	box sBox6
-
-
-SECTION "Boxes 7-12", SRAM
-
 	box sBox7
 	box sBox8
 	box sBox9
 	box sBox10
+
+SECTION "Boxes 11-15", SRAM
 	box sBox11
 	box sBox12
-
-SECTION "Boxes 13-4", SRAM
 	box sBox13
 	box sBox14
+	box sBox15
 
 SECTION "Pokedex Caught Seen", SRAM
 

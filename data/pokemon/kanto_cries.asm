@@ -1,8 +1,3 @@
-mon_cry: MACRO
-; index, pitch, length
-	dw \1, \2, \3
-ENDM
-
 KantoCries::
 	mon_cry CRY_BULBASAUR,   $080,  $081 ; BULBASAUR
 	mon_cry CRY_BULBASAUR,   $020,  $100 ; IVYSAUR

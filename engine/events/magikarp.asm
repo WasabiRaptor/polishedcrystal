@@ -52,7 +52,7 @@ Special_CheckMagikarpLength: ; fbb32
 	inc de
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	rst CopyBytes
 	ld a, 3
 	ld [wScriptVar], a
@@ -87,7 +87,7 @@ PrintMagikarpLength: ; fbbdb
 	ld hl, wStringBuffer1
 	ld de, wMagikarpLengthMm
 	lb bc, PRINTNUM_LEFTALIGN | 2, 4
-	call PrintNum
+	predef PrintNum
 	dec hl
 	ld a, [hl]
 	ld [hl], "."
@@ -162,12 +162,12 @@ PrintMagikarpLength: ; fbbdb
 	ld hl, wStringBuffer1
 	ld de, wMagikarpLengthMmHi
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "'"
 	inc hl
 	ld de, wMagikarpLengthMmLo
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "”"
 	inc hl
 	ld [hl], "@"
