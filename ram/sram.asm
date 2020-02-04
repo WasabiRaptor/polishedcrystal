@@ -52,7 +52,7 @@ sMailbox8Backup::  mailmsg sMailbox8Backup
 sMailbox9Backup::  mailmsg sMailbox9Backup
 sMailbox10Backup:: mailmsg sMailbox10Backup
 
-	ds 164
+	ds 164 ; $a4
 
 sRTCStatusFlags:: ds 8
 sLuckyNumberDay:: ds 1
