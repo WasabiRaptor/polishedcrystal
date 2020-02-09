@@ -19,7 +19,10 @@ DisplayUsedMoveText: ; 105db0
 
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld [wd265], a
+	ld a, c
+	ld [wNamedObjectIndexBuffer], a
+	ld a, b
+	ld [wNamedObjectIndexBuffer+1], a
 
 	push hl
 	farcall CheckUserIsCharging
@@ -27,7 +30,12 @@ DisplayUsedMoveText: ; 105db0
 	jr nz, .charging
 
 	; update last move
-	ld a, [wd265]
+	ld a, [wNamedObjectIndexBuffer]
+	ld [hl], a
+	ld [de], a
+	inc de
+	inc hl
+	ld a, [wNamedObjectIndexBuffer+1]
 	ld [hl], a
 	ld [de], a
 

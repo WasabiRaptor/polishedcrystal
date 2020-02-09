@@ -764,12 +764,19 @@ CheckSpeed::
 GetBattleVar:: ; 39e1
 ; Preserves hl.
 	push hl
-	call GetBattleVarAddr
+	call _GetBattleVar
 	pop hl
 	ret
 ; 39e7
 
-GetBattleVarAddr:: ; 39e7
+GetBattleVarAddr::
+; Preserves bc.
+	push bc
+	call _GetBattleVar
+	pop bc
+	ret
+
+_GetBattleVar:: ; 39e7
 ; Get variable from pair a, depending on whose turn it is.
 ; There are 22 variable pairs.
 

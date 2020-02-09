@@ -114,11 +114,11 @@ ENDM
 cp16bcZ: macro
 	ld a, c
 	cp LOW(\1)
-	jr nz, .not_\1
+	jr nz, .not_\@
 	ld a, b
 	cp HIGH(\1)
 	jr z, \2
-.not_\1
+.not_\@
 endm
 
 cp16bcNZ: macro
@@ -133,11 +133,30 @@ endm
 cp16wramZ: macro
 	ld a, [\2]
 	cp LOW(\1)
-	jr nz, .not_\1
+	jr nz, .not_\@
 	ld a, [\2 +1]
 	cp HIGH(\1)
 	jr z, \3
-.not_\1
+.not_\@
+endm
+
+ret16bcZ: macro
+	ld a, c
+	cp LOW(\1)
+	jr nz, .not_\@
+	ld a, b
+	cp HIGH(\1)
+	ret z
+.not_\@
+endm
+
+ret16bcNZ: macro
+	ld a, c
+	cp LOW(\1)
+	ret nz
+	ld a, b
+	cp HIGH(\1)
+	ret nz
 endm
 
 VWTextStart: macro
