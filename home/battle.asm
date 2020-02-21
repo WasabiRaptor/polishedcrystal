@@ -630,8 +630,7 @@ CheckContactMove::
 	jr z, .protective_pads
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
+	ret16bcZ STRUGGLE
 	ld a, CONTACT_MOVE
 	call CheckMoveProperty
 .protective_pads

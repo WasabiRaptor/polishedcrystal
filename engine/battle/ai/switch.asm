@@ -226,7 +226,7 @@ AICheckMatchupForEnemyMon:
 	and MOVE_HIGH_MASK
 	ld b, a
 	push bc
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVarAddr
 	pop bc
 	ld a, c

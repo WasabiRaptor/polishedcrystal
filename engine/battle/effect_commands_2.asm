@@ -1,3 +1,51 @@
+IncreaseMetronomeCount::
+	; Don't arbitrarily boost usage counter twice on a turn
+	farcall CheckUserIsCharging
+	ret nz
+
+	ldh a, [hBattleTurn]
+	and a
+	ld de, wPlayerSelectedMove
+	ld hl, wPlayerMetronomeCount
+	jr z, .got_move_usage
+	ld de, wEnemySelectedMove
+	ld hl, wEnemyMetronomeCount
+.got_move_usage
+	push de
+	ld a, [de]
+	ld b, a
+	inc de
+	ld a, [de]
+	ld e, b
+	ld d, a
+	ld a, BATTLE_VARS_MOVE ; accounts for high byte
+	call GetBattleVar
+	ld a, c
+	cp e
+	jr nz, .reset
+	ld a, b
+	cp d
+	jr nz, .reset
+	pop de
+	ld a, [hl]
+	cp 5
+	ret nc
+	inc [hl]
+	ret
+.reset
+	pop de
+	; Struggle doesn't update last move set but does reset count
+	cp16bcZ STRUGGLE, .done_update_selected_move
+	ld a, c
+	ld [de], a
+	inc de
+	ld a, b
+	ld [de], a
+.done_update_selected_move
+	xor a
+	ld [hl], a
+	ret
+
 
 _BattleCommand_triplekick::
 ; triplekick

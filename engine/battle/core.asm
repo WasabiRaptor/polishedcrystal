@@ -831,7 +831,7 @@ CompareMovePriority: ; 3c5b4
 GetMovePriority: ; 3c5c5
 ; Return the priority (0-9) of move being used.
 	push bc
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high byte
 	call GetBattleVar
 	ld hl, MovePriorities
 	call IsBCInArray
@@ -869,10 +869,9 @@ INCLUDE "data/moves/priorities.asm"
 
 
 GetMoveEffect: ; 3c5ec
-	ld a, b
-	dec a
+	dec bc
 	ld hl, Moves + MOVE_EFFECT
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -1583,10 +1582,12 @@ HandleFutureSight:
 	ld hl, BattleText_TargetWasHitByFutureSight
 	call StdBattleTextBox
 
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	push af
-	ld a, FUTURE_SIGHT
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
+	call _GetBattleVar
+	push bc
+	ld a, LOW(FUTURE_SIGHT)
+	ld [hli], a
+	ld a, HIGH(FUTURE_SIGHT)
 	ld [hl], a
 
 	farcall UpdateMoveData
@@ -1600,9 +1601,12 @@ HandleFutureSight:
 	ld [wCurDamage], a
 	ld [wCurDamage + 1], a
 
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	pop af
+	ld a, BATTLE_VARS_MOVE ;accounts for high byte
+	call _GetBattleVar
+	pop bc
+	ld a, c
+	ld [hli], a
+	ld a, b
 	ld [hl], a
 
 	call UpdateBattleMonInParty
@@ -4286,9 +4290,8 @@ PursuitSwitchIfFirstAndAlive:
 	call HasUserFainted
 	jp z, PursuitSwitch_done
 PursuitSwitch: ; 3dc5b
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	ld b, a
 	call GetMoveEffect
 	ld a, b
 	cp EFFECT_PURSUIT
@@ -4312,6 +4315,7 @@ PursuitSwitch: ; 3dc5b
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVarAddr
 	xor a
+	ld [hli], a
 	ld [hl], a
 
 	pop af
@@ -5577,12 +5581,11 @@ PlayerSwitch: ; 3e3ad
 .not_linked
 	; Clear last enemy action to avoid Pursuit oddities
 	call SetEnemyTurn
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	ld a, [hl]
-	cp PURSUIT
-	jr nz, .dont_reset_enemy_move
+	ld a, BATTLE_VARS_MOVE ; accounts for high byte
+	call _GetBattleVar
+	cp16bcNZ PURSUIT, .dont_reset_enemy_move
 	xor a
+	ld [hli], a
 	ld [hl], a
 
 .dont_reset_enemy_move

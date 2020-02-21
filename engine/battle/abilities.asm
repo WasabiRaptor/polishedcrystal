@@ -1011,7 +1011,7 @@ CheckNullificationAbilities:
 	ret
 
 .soundproof
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
 	ld a, SOUND_MOVE
 	call CheckMoveProperty
@@ -1859,7 +1859,7 @@ SolarPowerAbility:
 
 IronFistAbility:
 ; 120% damage for punching moves
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
 	ld a, PUNCHING_MOVE
 	call CheckMoveProperty
@@ -1886,10 +1886,9 @@ SandForceAbility:
 
 RecklessAbility:
 ; 120% damage for (Hi) Jump Kick and recoil moves except for Struggle
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
+	ret16bcZ STRUGGLE
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_RECOIL_HIT

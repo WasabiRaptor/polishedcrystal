@@ -57,7 +57,7 @@ DoTurn: ; 3401d
 DoMove:
 ; Get the user's move effect.
 	; Increase move usage counter if applicable
-	call IncreaseMetronomeCount
+	farcall IncreaseMetronomeCount
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	ld c, a
@@ -125,7 +125,7 @@ CheckTurn:
 BattleCommand_checkturn:
 ; Repurposed as hardcoded turn handling. Useless as a command.
 	; Move 0 immediately ends the turn (Used by Pursuit)
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high byte
 	call GetBattleVar
 	ld a, c
 	and a
@@ -230,8 +230,7 @@ BattleCommand_checkturn:
 	; Sleep Talk bypasses sleep.
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	cp SLEEP_TALK
-	jr z, .not_asleep
+	cp16bcZ SLEEP_TALK, .not_asleep
 
 	call CantMove
 	jp EndTurn
@@ -243,16 +242,12 @@ BattleCommand_checkturn:
 	jr z, .not_frozen
 
 	; Flame Wheel, Sacred Fire, Scald, and Flare Blitz thaw the user.
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp LOW(FLAME_WHEEL)
-	jr z, .thaw
-	cp LOW(SACRED_FIRE)
-	jr z, .thaw
-	cp LOW(SCALD)
-	jr z, .thaw
-	cp LOW(FLARE_BLITZ)
-	jr z, .thaw
+	cp16bcZ FLAME_WHEEL, .thaw
+	cp16bcZ SACRED_FIRE, .thaw
+	cp16bcZ SCALD, .thaw
+	cp16bcZ FLARE_BLITZ, .thaw
 
 	; Check for defrosting
 	call BattleRandom
@@ -454,48 +449,6 @@ CantMove:
 	jp AppearUserRaiseSub
 
 
-IncreaseMetronomeCount:
-	; Don't arbitrarily boost usage counter twice on a turn
-	call CheckUserIsCharging
-	ret nz
-
-	ldh a, [hBattleTurn]
-	and a
-	ld de, wPlayerSelectedMove
-	ld hl, wPlayerMetronomeCount
-	jr z, .got_move_usage
-	ld de, wEnemySelectedMove
-	ld hl, wEnemyMetronomeCount
-.got_move_usage
-	ld a, [de]
-	ld b, a
-	inc de
-	ld a, [de]
-	ld e, b
-	ld d, a
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVar
-	ld a, c
-	cp e
-	jr nz, .reset
-	ld a, b
-	cp d
-	jr nz, .reset
-	ld a, [hl]
-	cp 5
-	ret nc
-	inc [hl]
-	ret
-.reset
-	; Struggle doesn't update last move set but does reset count
-	cp STRUGGLE
-	jr z, .done_update_selected_move
-	ld [de], a
-.done_update_selected_move
-	xor a
-	ld [hl], a
-	ret
-
 CheckWhiteHerb:
 	call GetUserItemAfterUnnerve
 	ld a, b
@@ -564,9 +517,12 @@ MoveDisabled: ; 3438d
 	call GetBattleVarAddr
 	res SUBSTATUS_CHARGED, [hl]
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ;accounts for high
 	call GetBattleVar
+	ld a, c
 	ld [wNamedObjectIndexBuffer], a
+	ld a, b
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetMoveName
 
 	ld hl, DisabledMoveText
@@ -1037,10 +993,9 @@ BattleConsumePP:
 	call CheckUserIsCharging
 	ret nz
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp STRUGGLE
-	jr z, .end
+	cp16bcZ STRUGGLE, .end
 
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
@@ -1244,10 +1199,9 @@ BattleCommand_stab: ; 346d2
 ; Base value: $10
 ; Max value: $c0 (quad-weak, STAB, good weather modifier
 	; Struggle doesn't apply STAB or matchups
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
+	ret16bcZ STRUGGLE
 
 	; Apply type matchups
 	call BattleCheckTypeMatchup
@@ -1492,7 +1446,7 @@ _CheckMatchup:
 _CheckTypeMatchup: ; 347d3
 	push hl
 ; Handle powder moves
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
 	ld a, POWDER_MOVE
 	call CheckMoveProperty
@@ -1622,7 +1576,7 @@ _CheckTypeMatchup: ; 347d3
 ; 34833
 
 BattleCommand_checkpowder:
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
 	ld a, POWDER_MOVE
 	call CheckMoveProperty
@@ -1748,19 +1702,20 @@ BattleCommand_bounceback:
 	bit SUBSTATUS_MAGIC_BOUNCE, a
 	ret nz
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE; accounts for two byte
 	call GetBattleVar
-	ld b, a
 	push bc
 	call SwitchTurn
 
 	; Store old move and replace with the bounced move
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE; accounts for two byte
 	call GetBattleVarAddr
-	ld a, [hl]
-	pop bc
-	ld [hl], b
-	push af
+	pop de
+	push bc
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hl], a
 
 	farcall ShowAbilityActivation
 
@@ -1787,10 +1742,12 @@ BattleCommand_bounceback:
 	call GetBattleVarAddr
 	res SUBSTATUS_MAGIC_BOUNCE, [hl]
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVarAddr
-	pop af
-	ld [hl], a
+	pop bc
+	ld [hl], c
+	inc hl
+	ld [hl], b
 	call UpdateMoveData
 	jp SwitchTurn
 
@@ -4785,7 +4742,6 @@ BattleCommand_sleeptalk: ; 35b33
 	push de
 	push bc
 
-	ld b, a
 	farcall GetMoveEffect
 	ld a, b
 
@@ -5016,7 +4972,7 @@ UpdateMoveData:
 	ld e, l
 
 	; Don't update if the move doesn't exist
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
 	ld a, c
 	and a
@@ -5358,10 +5314,9 @@ SapHealth: ; 36011
 	ld c, [hl]
 
 	; for Drain Kiss, we want 75% drain instead of 50%
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ;accounts for high
 	call GetBattleVar
-	cp LOW(DRAINING_KISS)
-	jr nz, .skip_drain_kiss
+	cp16bcNZ DRAINING_KISS, .skip_drain_kiss
 	ld h, b
 	ld l, c
 	srl b
@@ -7942,10 +7897,9 @@ BattleCommand_resetstats:
 BattleCommand_heal:
 	farcall CheckFullHP
 	jr z, .hp_full
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp REST
-	jr nz, .not_rest
+	cp16bcNZ REST, .not_rest
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVar
 	and SLP
@@ -8210,7 +8164,7 @@ CheckSubstituteOpp: ; 37378
 	push bc
 	push de
 	push hl
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
 	ld a, SOUND_MOVE
 	call CheckMoveProperty
@@ -8403,14 +8357,30 @@ BoostJumptable:
 	dw HEX, DoHex
 	dw VENOSHOCK, DoVenoshock
 	dw KNOCK_OFF, DoKnockOff
-	dw -1, -1
+	dw 0, 0
 
 BattleCommand_conditionalboost:
 	ld hl, BoostJumptable
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ;accounts for high
 	call GetBattleVar
-	jp BattleJumptable
-
+;HighBattleJumptable::
+; hl = jumptable, a = target. Returns z if no jump was made, nz otherwise
+	; Maybe make this a common function? Maybe one exist?
+	push bc
+	ld de, 4
+	call IsBCInArray
+	jr nc, .end
+	inc hl
+	inc hl
+.got_target
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call _hl_
+	or 1
+.end
+	pop bc
+	ret
 DoAvalanche:
 	call CheckOpponentWentFirst
 	jr DoubleDamageIfNZ
