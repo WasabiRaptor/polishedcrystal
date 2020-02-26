@@ -1,3 +1,9 @@
+; TODO:
+;   Arg 4 (Shiny override [1] | Ability override [2] | Form override [5])
+;   Arg 5 (AI)
+;   Arg 6 (Item)
+
+
 LoadWildMonData: ; 29ff8
 	call _GrassWildmonLookup
 	jr c, .copy ;if it found a map with a wild table it will copy the encounter rates for the time of day
