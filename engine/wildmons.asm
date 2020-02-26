@@ -92,10 +92,6 @@ FindNest: ; 2a01f
 	xor a
 	call ByteFill
 	ld a, e
-	cp KANTO_REGION
-	jr z, .kanto
-	cp ORANGE_REGION
-	jr z, .orange
 	decoord 0, 0
 
 ;here it is getting the region table to load not *very* important, but just mainly which data table it is loading into hl and ending up looking at, easily swapped out
@@ -107,21 +103,6 @@ FindNest: ; 2a01f
 	call .RoamMon1
 	call .RoamMon2
 	jp .RoamMon3
-
-.kanto
-	decoord 0, 0
-	ld hl, KantoGrassWildMons
-	call .FindGrass
-	ld hl, KantoWaterWildMons
-	jp .FindWater
-
-.orange
-	decoord 0, 0
-	ld hl, OrangeGrassWildMons
-	call .FindGrass
-	ld hl, OrangeWaterWildMons
-	jp .FindWater
-; 2a052
 
 .FindGrass: ; 2a052
 	ld a, [hl]
@@ -311,9 +292,9 @@ TryWildEncounter::
 
 GetMapEncounterRate: ; 2a111
 	ld hl, wMornEncounterRate
-	call CheckOnWater
-	ld a, 3
-	jr z, .ok
+	;call CheckOnWater
+	;ld a, 3
+	;jr z, .ok
 	ld a, [wTimeOfDay]
 .ok
 	ld c, a
@@ -650,19 +631,19 @@ ApplyAbilityEffectsOnEncounterMon:
 	jp BattleJumptable
 
 .AbilityEffects:
-	dbw ARENA_TRAP,   .ArenaTrap
-	dbw HUSTLE,       .Hustle
-	dbw ILLUMINATE,   .Illuminate
-	dbw INTIMIDATE,   .Intimidate
-	dbw KEEN_EYE,     .KeenEye
-	dbw MAGNET_PULL,  .MagnetPull
-	dbw NO_GUARD,     .NoGuard
-	dbw PRESSURE,     .Pressure
-	dbw QUICK_FEET,   .QuickFeet
-	dbw STATIC,       .Static
-	dbw STENCH,       .Stench
-	dbw SWARM,        .Swarm
-	dbw VITAL_SPIRIT, .VitalSpirit
+	dbw ARENA_TRAP,   .ArenaTrap    ; double rate
+	dbw HUSTLE,       .Hustle       ; high level
+	dbw ILLUMINATE,   .Illuminate   ; double rate
+	dbw INTIMIDATE,   .Intimidate   ; half low level
+	dbw KEEN_EYE,     .KeenEye      ; half low level
+	dbw MAGNET_PULL,  .MagnetPull   ; steel
+	dbw NO_GUARD,     .NoGuard      ; semi-double rate
+	dbw PRESSURE,     .Pressure     ; high level
+	dbw QUICK_FEET,   .QuickFeet    ; half rate
+	dbw STATIC,       .Static       ; electric
+	dbw STENCH,       .Stench       ; half rate
+	dbw SWARM,        .Swarm        ; semi-double rate
+	dbw VITAL_SPIRIT, .VitalSpirit  ; high level
 	dbw -1, -1
 
 .ArenaTrap:
@@ -758,24 +739,24 @@ _GetGrassWildmonPointer:
 	call RegionCheck
 	ld a, e
 	ld hl, InvarGrassWildMons
-	and a ; cp INVAR_REGION
-	ret z
-	ld hl, KantoGrassWildMons
-	dec a ; cp KANTO_REGION
-	ret z
-	ld hl, OrangeGrassWildMons
+	;and a ; cp INVAR_REGION
+	;ret z
+	;ld hl, KantoGrassWildMons
+	;dec a ; cp KANTO_REGION
+	;ret z
+	;ld hl, OrangeGrassWildMons
 	ret
 
 _GetWaterWildmonPointer:
 	call RegionCheck
 	ld a, e
 	ld hl, InvarWaterWildMons
-	and a ; cp INVAR_REGION
-	ret z
-	ld hl, KantoWaterWildMons
-	dec a ; cp KANTO_REGION
-	ret z
-	ld hl, OrangeWaterWildMons
+	;and a ; cp INVAR_REGION
+	;ret z
+	;ld hl, KantoWaterWildMons
+	;dec a ; cp KANTO_REGION
+	;ret z
+	;ld hl, OrangeWaterWildMons
 	ret
 
 _SwarmWildmonCheck
@@ -1401,17 +1382,17 @@ INCLUDE "data/wild/invar_grass.asm"
 InvarWaterWildMons: ; 0x2b11d
 INCLUDE "data/wild/invar_water.asm"
 
-KantoGrassWildMons: ; 0x2b274
-INCLUDE "data/wild/kanto_grass.asm"
+;KantoGrassWildMons: ; 0x2b274
+;INCLUDE "data/wild/kanto_grass.asm"
 
-KantoWaterWildMons: ; 0x2b7f7
-INCLUDE "data/wild/kanto_water.asm"
+;KantoWaterWildMons: ; 0x2b7f7
+;INCLUDE "data/wild/kanto_water.asm"
 
-OrangeGrassWildMons:
-INCLUDE "data/wild/orange_grass.asm"
+;OrangeGrassWildMons:
+;INCLUDE "data/wild/orange_grass.asm"
 
-OrangeWaterWildMons:
-INCLUDE "data/wild/orange_water.asm"
+;OrangeWaterWildMons:
+;INCLUDE "data/wild/orange_water.asm"
 
 SwarmGrassWildMons: ; 0x2b8d0
 INCLUDE "data/wild/swarm_grass.asm"
