@@ -402,7 +402,7 @@ endr
 
 	ld hl, wTempMonGroup
 	predef GetPartyMonGroupSpeciesAndForm
-	farcall UpdateUnownDex
+	;farcall UpdateUnownDex
 
 .skip_unown
 	pop de ; 0
