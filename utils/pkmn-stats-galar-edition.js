@@ -114,7 +114,7 @@ Hatch Cycles: (\d+)`));
             gender_rate: "FEMALE_50",
         };
         let baseStatData =
-`	dw ${"00000".substring((""+curpkmn.species_id).length)+curpkmn.species_id} ;national dex no
+`	dw ${"00000".substring((""+curpkmn.id).length)+curpkmn.id} ;national dex no
 	
 	db ${curpkmn.stats.map(s=>"   ".substring((""+s).length)+s).join(", ")}
 	evs  ${curpkmn.evs.join(",   ")}
@@ -126,8 +126,8 @@ Hatch Cycles: (\d+)`));
 	db NO_ITEM, NO_ITEM ; items
 	dn ${curpkmn.gender_rate}, ${curpkmn.hatch_counter/5} ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/${curpkmn.name}/front.dimensions"  
-	db ${curpkmn.abilities[0].replace(/-/g,"_").toUpperCase()}, ${((curpkmn.abilities[1] || curpkmn.abilities[0]).replace(/-/g,"_")).toUpperCase()}     ; abilities
-	db ${(curpkmn.abilities[2] || curpkmn.abilities[0]).replace(/-/g,"_").toUpperCase()}    ; hidden ability
+	db ${curpkmn.abilities[0].replace(/[- ]/g,"_").toUpperCase()}, ${((curpkmn.abilities[1] || curpkmn.abilities[0]).replace(/[- ]/g,"_")).toUpperCase()}     ; abilities
+	db ${(curpkmn.abilities[2] || curpkmn.abilities[0]).replace(/[- ]/g,"_").toUpperCase()}    ; hidden ability
 	db ${curpkmn.growth_rate} ; growth rate
 	dn ${curpkmn.egg_groups.join(", ")} ; egg groups
 	
