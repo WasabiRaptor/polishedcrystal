@@ -1116,10 +1116,10 @@ wRoamMons_CurrentMapGroup:: ds 1
 wRoamMons_LastMapNumber:: ds 1
 wRoamMons_LastMapGroup:: ds 1
 
-wBestMagikarpLengthMm::
-wBestMagikarpLengthMmHi:: ds 1
-wBestMagikarpLengthMmLo:: ds 1
-wMagikarpRecordHoldersName:: ds PLAYER_NAME_LENGTH
+;wBestMagikarpLengthMm::
+;wBestMagikarpLengthMmHi:: ds 1
+;wBestMagikarpLengthMmLo:: ds 1
+;wMagikarpRecordHoldersName:: ds PLAYER_NAME_LENGTH
 
 wRegisteredItems::
 ; You can map 4 items, to select + directions

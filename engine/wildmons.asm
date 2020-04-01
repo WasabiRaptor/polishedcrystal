@@ -1155,9 +1155,7 @@ RandomPhoneRareWildMon: ; 2a4ab
 	ld bc, GRASS_WILDDATA_LENGTH
 	call LookUpWildmonsForMapDE
 	jr c, .GetGrassmon
-	ld hl, KantoGrassWildMons
-	call LookUpWildmonsForMapDE
-	jr nc, .done
+	jr .done
 
 .GetGrassmon:
 	push hl
@@ -1228,11 +1226,6 @@ RandomPhoneWildMon: ; 2a51f
 	ld hl, InvarGrassWildMons
 	ld bc, GRASS_WILDDATA_LENGTH
 	call LookUpWildmonsForMapDE
-	jr c, .ok
-	ld hl, KantoGrassWildMons
-	call LookUpWildmonsForMapDE
-
-.ok
 	ld bc, 5 + 0 * 2
 	add hl, bc
 	ld a, [wTimeOfDay]

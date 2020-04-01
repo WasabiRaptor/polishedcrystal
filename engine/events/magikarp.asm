@@ -36,14 +36,14 @@ Special_CheckMagikarpLength: ; fbb32
 
 	; Did we beat the record?
 	ld hl, wMagikarpLengthMm
-	ld de, wBestMagikarpLengthMm
+	;ld de, wBestMagikarpLengthMm
 	ld c, 2
 	call StringCmp
 	jr nc, .not_long_enough
 
 	; NEW RECORD!!! Let's save that.
 	ld hl, wMagikarpLengthMm
-	ld de, wBestMagikarpLengthMm
+	;ld de, wBestMagikarpLengthMm
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -375,9 +375,9 @@ INCLUDE "data/events/magikarp_lengths.asm"
 
 
 Special_MagikarpHouseSign: ; fbcd2
-	ld a, [wBestMagikarpLengthMmHi]
+	;ld a, [wBestMagikarpLengthMmHi]
 	ld [wMagikarpLengthMmHi], a
-	ld a, [wBestMagikarpLengthMmLo]
+	;ld a, [wBestMagikarpLengthMmLo]
 	ld [wMagikarpLengthMmLo], a
 	call PrintMagikarpLength
 	ld hl, .CurrentRecordtext
