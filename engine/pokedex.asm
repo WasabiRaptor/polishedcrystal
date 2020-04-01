@@ -2675,7 +2675,6 @@ Pokedex_LoadAnyFootprintAtTileHL:
 .variant
 	pop af
 	ld a, [wCurForm]
-	dec a
 .notvariant
 	ld bc, LEN_1BPP_TILE * 4
 	rst AddNTimes

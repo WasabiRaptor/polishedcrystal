@@ -908,7 +908,6 @@ GetMonAnimPointer: ; d055c
 	ld l, a
 
 	ld a, [wPokeAnimSpeciesOrVariant]
-	dec a
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -959,7 +958,6 @@ GetMonFramesPointer: ; d05ce
 	ld [wPokeAnimFramesBank], a
 
 	ld a, [wPokeAnimSpeciesOrVariant]
-	dec a
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -989,7 +987,6 @@ GetMonBitmaskPointer: ; d061b
 	ld l, a
 
 	ld a, [wPokeAnimSpeciesOrVariant]
-	dec a
 	ld e, a
 	ld d, 0
 	add hl, de

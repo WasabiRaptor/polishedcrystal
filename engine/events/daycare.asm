@@ -1065,7 +1065,6 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wCurSpecies], a
 
 	farcall GetRelevantBaseData
-	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH

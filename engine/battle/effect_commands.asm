@@ -3246,7 +3246,6 @@ UnevolvedEviolite:
 	push bc
 	push de
 	farcall GetRelevantEvosAttacksPointers
-	dec a
 	ld c, a
 	ld b, 0
 	add hl, bc

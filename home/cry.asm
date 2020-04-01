@@ -130,7 +130,6 @@ GetCryIndex::
 	jr nc, .no
 
 	call GetRelevantCryPointers
-	dec a
 	ld bc, 5
 	rst AddNTimes
 	and a

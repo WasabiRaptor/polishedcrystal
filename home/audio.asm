@@ -147,7 +147,7 @@ PlayCryHeader:: ; 3be3
 
 	ld a, d
 	rst Bankswitch
-	
+
 	ld a, [hli]
 	cp $ff
 	jr z, .ded
@@ -197,6 +197,7 @@ GetRelevantCryPointers::
 	ld a, [wCurForm]
 	ret c
 	ld a, [wCurSpecies]
+	dec a
 	ret
 
 INCLUDE "data/pokemon/variant_cry_table.asm"

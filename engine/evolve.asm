@@ -51,7 +51,6 @@ EvolveAfterBattle_MasterLoop:
 	ld [wCurSpecies], a
 
 	call GetRelevantEvosAttacksPointers
-	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
@@ -521,7 +520,6 @@ LearnEvolutionMove:
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
 	call GetRelevantEvolutionMoves
-	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
@@ -564,7 +562,6 @@ LearnLevelMoves: ; 42487
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	call GetRelevantEvosAttacksPointers
-	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
@@ -664,7 +661,6 @@ FillMoves: ; 424e1
 	push de ; 4 ; Address to moves
 	call GetRelevantEvosAttacksPointers
 	ld b, 0
-	dec a
 	ld c, a
 	add hl, bc
 	add hl, bc
@@ -865,7 +861,6 @@ GetPreEvolution: ; 42581
 
 	ld a, [wCurGroup]
 	call GetRelevantEvosAttacksPointers
-	dec a
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -944,6 +939,7 @@ GetRelevantEvosAttacksPointers:
 	ld a, [wCurForm]
 	ret c
 	ld a, [wCurPartySpecies]
+	dec a
 	ret
 
 GetRelevantEvolutionMoves:
@@ -965,6 +961,7 @@ GetRelevantEvolutionMoves:
 	ld a, [wCurForm]
 	ret c
 	ld a, [wCurPartySpecies]
+	dec a
 	ret
 
 INCLUDE "data/pokemon/variant_evos_attacks_pointer_table.asm"
