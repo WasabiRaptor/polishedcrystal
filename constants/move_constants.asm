@@ -408,7 +408,7 @@
 	const DRAGON_PULSE
 	const DRAGON_RUSH
 	const POWER_GEM
-	const DRAIN_PUNCH
+	const DRAINING_PUNCH
 	const VACUUM_WAVE
 	const FOCUS_BLAST
 	const ENERGY_BALL

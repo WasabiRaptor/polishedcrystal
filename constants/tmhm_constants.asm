@@ -86,7 +86,7 @@ endc
 	add_tm DARK_PULSE   ; $38
 	add_tm ENDURE       ; $39
 	add_tm DRAGON_PULSE ; $3a
-	add_tm DRAIN_PUNCH  ; $3b
+	add_tm DRAINING_PUNCH  ; $3b
 	add_tm WILL_O_WISP  ; $3c
 	add_tm ACROBATICS   ; $3d
 	add_tm WATER_PULSE  ; $3e

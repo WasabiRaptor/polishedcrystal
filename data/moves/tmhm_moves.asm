@@ -58,7 +58,7 @@ TMHMMoves:
 	dw DARK_PULSE   ; TM57 (Dark Cave)
 	dw ENDURE       ; TM58 (Burned Tower)
 	dw DRAGON_PULSE ; TM59 (Clair)
-	dw DRAIN_PUNCH  ; TM60 (Noisy Forest)
+	dw DRAINING_PUNCH  ; TM60 (Noisy Forest)
 	dw WILL_O_WISP  ; TM61 (Blaine)
 	dw ACROBATICS   ; TM62 (Route 39 Farmhouse)
 	dw WATER_PULSE  ; TM63 (Misty)

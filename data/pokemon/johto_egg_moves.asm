@@ -70,7 +70,7 @@ LedybaEggMoves:
 	dw SCREECH
 	dw LIGHT_SCREEN
 	dw KNOCK_OFF
-	dw DRAIN_PUNCH
+	dw DRAINING_PUNCH
 	dw 0
 
 SpinarakEggMoves:
