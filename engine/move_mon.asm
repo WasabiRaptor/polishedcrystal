@@ -350,7 +350,6 @@ endr
 	push bc ;4 ; cute charm results pushed
 	push de ;5 ; dvs are pushed
 	farcall GetRelevantBaseData
-	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
@@ -1389,9 +1388,9 @@ GiveEgg:: ; df8c
 	dec a
 	ld c, a
 	ld d, $0
-	ld hl, wPokedexSeen
-	ld b, RESET_FLAG
-	predef FlagPredef
+	;ld hl, wPokedexSeen
+	;ld b, RESET_FLAG
+	;predef FlagPredef
 
 .skip_seen_flag
 	pop af

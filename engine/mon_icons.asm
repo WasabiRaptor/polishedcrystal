@@ -67,7 +67,7 @@ LoadPartyMenuMonIconColors:
 
 	ld a, MON_GROUP_SPECIES_AND_FORM
 	predef GetPartyParamLocation
-	
+
 	ld a, MON_SHINY
 	predef GetPartyParamLocation
 	call GetMenuMonIconPalette
@@ -142,8 +142,6 @@ GetMenuMonIconPalette::
 	push af
 .got_species:
 	call GetRelevantMonIconColors
-	ld a, [wCurPartySpecies]
-	dec a
 	ld c, a
 	ld b, 0
 	add hl, bc
@@ -496,8 +494,8 @@ GetRelevantIconPointersAndBank:
 	ld a, [wCurForm]
 	jr c, .variant
 	ld a, [wCurIcon]
-.variant
 	dec a
+.variant
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -516,7 +514,7 @@ INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"
 
 GetRelevantMonIconColors:
 	ld a, [wCurGroup]
-; given species in a, return *PicPointers in hl 
+; given species in a, return *PicPointers in hl
 ; returns c for variants, nc for normal species
 	ld hl, RegionalIconPalTable
 	call dbwArray
@@ -531,6 +529,7 @@ GetRelevantMonIconColors:
 	ld a, [wCurForm]
 	ret c
 	ld a, [wCurIcon]
+	dec a
 	ret
 
 INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"

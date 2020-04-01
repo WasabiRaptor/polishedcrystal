@@ -1782,8 +1782,6 @@ GetForgottenMoves::
 	predef GetPartyParamLocation
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
-	ld a, [wCurPartySpecies]
-	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc

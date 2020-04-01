@@ -1623,8 +1623,8 @@ GetDexEntryPointer:: ; 44333
 	ld a, [wCurForm]
 	jp c, .variant
 	ld a, [wCurSpecies]
-.variant
 	dec a
+.variant
 	ld d, 0
 	ld e, a
 	add hl, de
@@ -3476,7 +3476,6 @@ GetGender: ; 50bdd
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	farcall GetRelevantBaseData
-	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
@@ -4981,6 +4980,7 @@ GetRelevantBaseData::
 	ld a, [wCurForm]
 	ret c
 	ld a, [wCurSpecies]
+	dec a
 	ret
 
 INCLUDE "data/pokemon/variant_base_data_table.asm"

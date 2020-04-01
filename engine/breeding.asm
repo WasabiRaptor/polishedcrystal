@@ -582,7 +582,6 @@ InheritLevelMove:
 	push de
 	farcall GetRelevantEvosAttacksPointers
 	ld b, d
-	dec a
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -632,8 +631,8 @@ InheritEggMove:
 	ld a, [wCurForm]
 	jr c, .variant
 	ld a, [wEggMonSpecies]
-.variant
 	dec a
+.variant
 	ld e, a
 	ld d, 0
 	add hl, de

@@ -6875,29 +6875,25 @@ LoadEnemyMon: ; 3e8eb
 	ld [wEnemyMonGroup], a
 	ld [wCurGroup], a
 	ld [wCurPartySpecies], a
+	ld a, [wTempEnemyMonForm]
+    ld [wEnemyMonForm], a
+    ld [wCurForm], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wEnemyMonSpecies], a
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
-    ld a, [wTempEnemyMonForm]
-    ld [wEnemyMonForm], a
-    ld [wCurForm], a
 
 	; Mark as seen
-	dec a
-	ld c, a
-	ld b, SET_FLAG
-	ld hl, wPokedexSeen
-	predef FlagPredef
+	farcall SetSeenMon
 
-	ld a,[wCurPartySpecies]
-	ld c, a
 
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalEncounters)
 	ldh [rSVBK], a
 
+	ld a,[wCurSpecies]
+	ld c, a
 	dec c
 	ld b, 0
 	call GetRelevantTotalEncounterdPokemonSpeciesPointer
@@ -7176,7 +7172,6 @@ endc
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	farcall GetRelevantBaseData
-	dec a
 	ld bc, BASEMON_GENDER
 	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
@@ -7198,7 +7193,7 @@ endc
 .Female
 	ld b, a
 
-	ld a, 1 ; default form for now
+    ld a, [wTempEnemyMonForm]
 .special_form
 	add b
 	ld [hl], a

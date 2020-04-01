@@ -262,13 +262,13 @@ ScriptCommandTable:
 	dw Script_checkegg                   ; c7
 	dw Script_portrait
 	dw Script_closeportrait
-	
+
 	dw Script_givekeyitem                   ; a8
 	dw Script_checkkeyitem                  ; a9
 	dw Script_takekeyitem
 	dw Script_verbosegivekeyitem            ; aa
 	dw Script_keyitemnotify                 ; ab
-	
+
 	dw Script_playimport				; ac
 
 StartScript:
@@ -2785,13 +2785,13 @@ Script_check_save:
 	ret
 
 Script_count_seen_caught:
-	ld hl, wPokedexSeen
-	ld b, wPokedexSeenEnd - wPokedexSeen
-	call CountSetBits
+	;ld hl, wPokedexSeen
+	;ld b, wPokedexSeenEnd - wPokedexSeen
+	;call CountSetBits
 	ld [wd002], a
-	ld hl, wPokedexCaught
-	ld b, wPokedexCaughtEnd - wPokedexCaught
-	call CountSetBits
+	;ld hl, wPokedexCaught
+	;ld b, wPokedexCaughtEnd - wPokedexCaught
+	;call CountSetBits
 	ld [wd003], a
 	ret
 
@@ -3088,4 +3088,3 @@ Script_playimport:
 	call GetScriptByte
 	;jp PlayImportedSoundClip
 	ret
-

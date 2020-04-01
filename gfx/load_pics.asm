@@ -1,4 +1,4 @@
-	
+
 GetPartyMonGroupSpeciesAndForm::
 	push hl
 	push bc
@@ -126,7 +126,6 @@ _GetFrontpic: ; 510a5
 
 GetFrontpicPointer: ; 510d7
 	call GetRelevantPicPointers
-	dec a	
 	ld bc, 6
 	rst AddNTimes
 	ld a, d
@@ -245,7 +244,6 @@ GetBackpic: ; 5116c
 	ldh [rSVBK], a
 	push de
 	call GetRelevantPicPointers
-	dec a	
 	ld bc, 6
 	rst AddNTimes
 	ld bc, 3
@@ -492,6 +490,7 @@ GetRelevantPicPointers:
 	ld a, [wCurForm]
 	ret c
 	ld a, [wCurSpecies]
+	dec a
 	ret
 
 INCLUDE "data/pokemon/variant_pic_pointer_table.asm"

@@ -31,12 +31,12 @@ ProfOaksPCRating: ; 0x26601
 
 Rate: ; 0x26616
 ; calculate Seen/Owned
-	ld hl, wPokedexSeen
-	ld b, wPokedexSeenEnd - wPokedexSeen
+	;ld hl, wPokedexSeen
+	;ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld [wd002], a
-	ld hl, wPokedexCaught
-	ld b, wPokedexCaughtEnd - wPokedexCaught
+	;ld hl, wPokedexCaught
+	;ld b, wPokedexCaughtEnd - wPokedexCaught
 	call CountSetBits
 	ld [wd003], a
 

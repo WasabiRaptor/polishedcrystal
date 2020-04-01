@@ -446,8 +446,8 @@ GetPokemonName:: ; 343b
 	ld a, [wCurForm]
 	jr c, .variant
 	ld a, [wNamedObjectIndexBuffer]
-.variant
 	dec a
+.variant
 	call GetNthString
 
 ; Terminator
@@ -939,8 +939,6 @@ GetBaseData:: ; 3856
 	homecall GetRelevantBaseData
 	push hl
 
-	ld a, [wCurSpecies]
-	dec a
 	ld b, a
 	ld a, d
 	rst Bankswitch
@@ -980,7 +978,6 @@ GetAbility::
 	push bc
 
 	homecall GetRelevantBaseData
-	dec a
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, d
@@ -1133,8 +1130,8 @@ GetMonPalette::
 	ld a, [wCurForm]
 	jr c, .variant
 	ld a, [wCurPartySpecies]
-.variant
 	dec a
+.variant
 	ld l, a
 	ld h, $0
 	add hl, hl
