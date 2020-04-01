@@ -227,7 +227,7 @@ endr
 	ld [wRoamMon3MapNumber], a
 
 	call LoadOrRegenerateLuckyIDNumber
-	call InitializeMagikarpHouse
+	;call InitializeMagikarpHouse
 
 	xor a
 	ld [wMonType], a
@@ -301,20 +301,6 @@ SetDefaultBoxNames: ; 5ca6
 .Box:
 	db "Box@"
 ; 5cd3
-
-InitializeMagikarpHouse: ; 5cd3
-	ld hl, wBestMagikarpLengthMmHi
-	ld a, $3
-	ld [hli], a
-	ld a, $6
-	ld [hli], a
-	ld de, .Ralph
-	jp CopyName2
-; 5ce3
-
-.Ralph: ; 5ce3
-	db "Ralph@"
-; 5ce9
 
 InitializeNPCNames: ; 5ce9
 	ld hl, .Rival

@@ -817,7 +817,7 @@ UnknownText_0x1c123a::
 	text_from_ram wStringBuffer1
 	text " caught by"
 	line "@"
-	text_from_ram wMagikarpRecordHoldersName
+	;text_from_ram wMagikarpRecordHoldersName
 	text_waitbutton
 	db "@@"
 
