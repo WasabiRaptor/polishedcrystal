@@ -108,7 +108,8 @@ wMusicEnd::
 
 SECTION "WRAM 0", WRAM0
 
-	ds 2
+wDummyPlaceholderByte:: ds 1
+	ds 1
 
 wTilesetDataAddress:: ds 2
 
