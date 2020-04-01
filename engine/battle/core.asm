@@ -6821,6 +6821,9 @@ LoadEnemyMon: ; 3e8eb
 	ld [wEnemyMonSpecies], a
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
+    ld a, [wTempEnemyMonForm]
+    ld [wEnemyMonForm], a
+    ld [wCurForm], a
 
 	; Mark as seen
 	dec a
@@ -8965,6 +8968,8 @@ LoadTrainerOrWildMonPic: ; 3f54e
 	ld [wTempEnemyMonGroup], a
 	ld a, [wTempWildMonSpecies]
 	ld [wCurPartySpecies], a
+    ld a, [wTempWildMonForm]
+    ld [wCurForm], a
 
 .Trainer:
 	ld [wTempEnemyMonSpecies], a

@@ -599,6 +599,7 @@ ENDM
 .gotLevel
 	ld [wCurPartyLevel], a
 	ld a, [hli]	; Get Shiny/Ability/Form
+    and FORM_MASK
 	ld [wTempWildMonForm], a
 	ld a, [hli]	; Get AI
 	ld [wTempWildMonAI], a

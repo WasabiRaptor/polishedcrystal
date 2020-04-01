@@ -28,26 +28,26 @@ ENDM
 ; new_wild_mon DUSK_ONLY | WILD_20P, DEWOTT, 2, 0, WILD_TYPESMART | WILD_MOVESMART, EVERSTONE
 new_wild_mon: macro
 	db \1, \2, GROUP_\2
-	if _NARG >= 3	; 1
+	if _NARG >= 3   ; 1
 	db \3
-	if _NARG >= 4	; 2
+	if _NARG >= 4   ; 2
 	db \4
-	if _NARG >= 5	; 3
+	if _NARG >= 5   ; 3
 	db \5
-	if _NARG >= 6	; 4
+	if _NARG >= 6   ; 4
 	db \6
-	else			; 4
+	else            ; 4
 	db 0
-	endc			; 4
-	else			; 3
+	endc            ; 4
+	else            ; 3
 	db 0, 0
-	endc			; 3
-	else			; 2
+	endc            ; 3
+	else            ; 2
 	db 0, 0, 0
-	endc			; 2
-	else			; 1
+	endc            ; 2
+	else            ; 1
 	db 0, 0, 0, 0
-	endc			;1
+	endc            ;1
 endm
 
 end_map: MACRO
@@ -55,14 +55,14 @@ end_map: MACRO
 ENDM
 
 OUEST_PATHWAY_GRASS::	; 478C
-	wild_map OUEST_PATHWAY, 2, 10, COMMON_ALL
+    wild_map OUEST_PATHWAY, 2, 10, COMMON_ALL
 .eevee::
-	new_wild_mon DAY_ENC | WILD_25P, EEVEE			; 4791
+    new_wild_mon DAY_ENC | WILD_25P, EEVEE          ; 4791
 .cyndaquil::
-	new_wild_mon DAY_ENC | WILD_25P, CYNDAQUIL, 1	; 4798
+    new_wild_mon DAY_ENC | WILD_25P, CYNDAQUIL, 1   ; 4798
 .vulpix::
-	new_wild_mon ALL_TIMES | WILD_50P, VULPIX, WILD_LVL_OVER | 50
-	end_map
+    new_wild_mon ALL_TIMES | WILD_50P, VULPIX, WILD_LVL_OVER | 50, ABILITY_1 | 1
+    end_map
 
 
 
