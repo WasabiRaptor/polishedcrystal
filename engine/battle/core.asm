@@ -9025,11 +9025,11 @@ LoadTrainerOrWildMonPic: ; 3f54e
 	ld [wCurPartyGroup], a
 	ld [wTempEnemyMonGroup], a
  	ld a, [wTempWildMonForm]
+ 	ld [wTempEnemyMonForm], a
     ld [wCurForm], a
 	ld a, [wTempWildMonSpecies]
 	ld [wCurPartySpecies], a
-
-
+;fallthrough of the species here
 .Trainer:
 	ld [wTempEnemyMonSpecies], a
 	ret
