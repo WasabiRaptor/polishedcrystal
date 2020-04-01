@@ -70,16 +70,6 @@ EngineFlags: ; 80462
 	engine_flag wKantoBadges, VOLCANOBADGE
 	engine_flag wKantoBadges, EARTHBADGE
 
-	; unown sets
-	engine_flag wUnlockedUnowns, 0 ; 1
-	engine_flag wUnlockedUnowns, 1 ; 2
-	engine_flag wUnlockedUnowns, 2 ; 3
-	engine_flag wUnlockedUnowns, 3 ; 4
-	engine_flag wUnlockedUnowns, 4 ; 5
-	engine_flag wUnlockedUnowns, 5 ; 6
-	engine_flag wUnlockedUnowns, 6 ; 7
-	engine_flag wUnlockedUnowns, 7 ; 8
-
 	; fly
 	engine_flag wVisitedSpawns, 0  ; your house
 	engine_flag wVisitedSpawns, 1  ; pallet
