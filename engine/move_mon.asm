@@ -1259,7 +1259,7 @@ SentPkmnIntoBox: ; de6e
 	jr nz, .not_unown
 	ld hl, sBoxMon1Group
 	predef GetPartyMonGroupSpeciesAndForm
-	farcall UpdateUnownDex
+	;farcall UpdateUnownDex
 
 .not_unown
 	ld hl, sBoxMon1Moves

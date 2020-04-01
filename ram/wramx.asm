@@ -1068,9 +1068,6 @@ wPartyMonOT:: ds PLAYER_NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknames:: ds PKMN_NAME_LENGTH * PARTY_LENGTH
 wPartyMonNicknamesEnd::
 
-wUnownDex:: ds NUM_UNOWN
-wUnlockedUnowns:: ds 1
-
 wFirstUnownSeen:: ds 1
 wFirstMagikarpSeen:: ds 1
 
@@ -1395,6 +1392,8 @@ wTotalDefeatedGalarPokemonSpecies:: ds NUM_GALAR_POKEMON
 
 wTotalEncounters:: ds 2
 wTotalDefeated:: ds 2
+
+wUnownDex:: flag_array NUM_UNOWN
 
 wTotalSavedEncountersEnd::
 

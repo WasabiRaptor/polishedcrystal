@@ -4814,7 +4814,7 @@ INCLUDE "engine/color.asm"
 
 SECTION "wild stuff", ROMX
 
-INCLUDE "data/wild/unlocked_unowns.asm"
+;INCLUDE "data/wild/unlocked_unowns.asm"
 INCLUDE "data/wild/treemons_asleep.asm"
 
 
