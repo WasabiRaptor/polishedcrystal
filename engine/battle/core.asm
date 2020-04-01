@@ -3436,15 +3436,15 @@ FinalPkmnMusicAndAnimation:
 	; ...and this trainer has final text...
 	farcall GetFinalPkmnTextPointer
 	ret nc
-	; ...and this is their last Pokémon...
+	; ...and this is their last Pokï¿½mon...
 	farcall CheckAnyOtherAliveEnemyMons
 	ret nz
-	; ...then hide the Pokémon...
+	; ...then hide the Pokï¿½mon...
 	call EmptyBattleTextBox
 	ld c, 20
 	call DelayFrames
 	call SlideEnemyPicOut
-	; ...play the final Pokémon music...
+	; ...play the final Pokï¿½mon music...
 	call IsJohtoGymLeader
 	jr nc, .no_music
 	push de
@@ -3467,7 +3467,7 @@ FinalPkmnMusicAndAnimation:
 	ld [wTempEnemyMonSpecies], a
 	pop af
 	ld [wTempEnemyMonGroup], a
-	; ...and return the Pokémon
+	; ...and return the Pokï¿½mon
 	call EmptyBattleTextBox
 	call ApplyTilemapInVBlank
 	call SlideEnemyPicOut
@@ -4103,8 +4103,8 @@ PostBattleTasks::
 	ret
 
 RunBothActivationAbilities:
-; runs both pokémon's activation abilities (Intimidate, etc.).
-; The faster Pokémon activates abilities first. This mostly
+; runs both pokï¿½mon's activation abilities (Intimidate, etc.).
+; The faster Pokï¿½mon activates abilities first. This mostly
 ; just matter for weather abilities.
 	ldh a, [hBattleTurn]
 	push af
@@ -4117,7 +4117,7 @@ RunBothActivationAbilities:
 	ret
 
 RunActivationAbilities:
-; Trace will, on failure, copy a later switched in Pokémon's
+; Trace will, on failure, copy a later switched in Pokï¿½mon's
 ; Ability. To handle this correctly without redundancy except
 ; on double switch-ins or similar, we need to do some extra
 ; handling around it.
@@ -4136,7 +4136,7 @@ RunActivationAbilities:
 	jp SwitchTurn
 
 SpikesDamage_CheckMoldBreaker:
-; Called when a Pokémon with Mold Breaker uses Roar/Whirlwind.
+; Called when a Pokï¿½mon with Mold Breaker uses Roar/Whirlwind.
 ; This is neccessary because it negates Levitate (but not Magic Guard for some reason),
 ; but can't be checked unconditionally since other kind of switches ignore MB as usual.
 	call SwitchTurn
@@ -8124,12 +8124,12 @@ GiveBattleEVs:
 ; prepare registers for EV gain loop.
 ; b: contains EV yield data
 ; c: loop iterator
-; d: bit 0 is set on pokérus, bit 1 on macho brace
+; d: bit 0 is set on pokï¿½rus, bit 1 on macho brace
 ; e: set to abcdef00, where a: HP EV boosted, etc, for
 ; power items
 	push de
 	lb de, 0, 0
-	; check pokérus
+	; check pokï¿½rus
 	ld hl, MON_PKRUS
 	add hl, bc
 	ld a, [hl]
@@ -9024,10 +9024,11 @@ LoadTrainerOrWildMonPic: ; 3f54e
 	ld a, [wTempWildMonGroup]
 	ld [wCurPartyGroup], a
 	ld [wTempEnemyMonGroup], a
-	ld a, [wTempWildMonSpecies]
-	ld [wCurPartySpecies], a
     ld a, [wTempWildMonForm]
     ld [wCurForm], a
+    ld [wTempEnemyMonForm], a
+	ld a, [wTempWildMonSpecies]
+	ld [wCurPartySpecies], a
 
 .Trainer:
 	ld [wTempEnemyMonSpecies], a
@@ -9198,7 +9199,7 @@ HandleNuzlockeFlags:
 	farcall CheckCaughtMon
 	ret nz
 
-	; Only flag landmarks for Nuzlocke runs after getting Poké Balls
+	; Only flag landmarks for Nuzlocke runs after getting Pokï¿½ Balls
 	eventflagcheck EVENT_LEARNED_TO_CATCH_POKEMON
 	ret z
 
