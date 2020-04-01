@@ -54,11 +54,10 @@ DoTurn: ; 3401d
 	call UpdateMoveData
 ; 3402c
 
-
 DoMove:
 ; Get the user's move effect.
 	; Increase move usage counter if applicable
-	call IncreaseMetronomeCount
+	farcall IncreaseMetronomeCount
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	ld c, a
@@ -126,11 +125,15 @@ CheckTurn:
 BattleCommand_checkturn:
 ; Repurposed as hardcoded turn handling. Useless as a command.
 	; Move 0 immediately ends the turn (Used by Pursuit)
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high byte
 	call GetBattleVar
+	ld a, c
+	and a
+	jr nz, .WeAllGood
+	ld a, b
 	and a
 	jp z, EndTurn
-
+.WeAllGood
 	xor a
 	ld [wAttackMissed], a
 	ld [wEffectFailed], a
@@ -227,8 +230,7 @@ BattleCommand_checkturn:
 	; Sleep Talk bypasses sleep.
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	cp SLEEP_TALK
-	jr z, .not_asleep
+	cp16bcZ SLEEP_TALK, .not_asleep
 
 	call CantMove
 	jp EndTurn
@@ -240,16 +242,12 @@ BattleCommand_checkturn:
 	jr z, .not_frozen
 
 	; Flame Wheel, Sacred Fire, Scald, and Flare Blitz thaw the user.
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp FLAME_WHEEL
-	jr z, .thaw
-	cp SACRED_FIRE
-	jr z, .thaw
-	cp SCALD
-	jr z, .thaw
-	cp FLARE_BLITZ
-	jr z, .thaw
+	cp16bcZ FLAME_WHEEL, .thaw
+	cp16bcZ SACRED_FIRE, .thaw
+	cp16bcZ SCALD, .thaw
+	cp16bcZ FLARE_BLITZ, .thaw
 
 	; Check for defrosting
 	call BattleRandom
@@ -377,15 +375,21 @@ BattleCommand_checkturn:
 	ldh a, [hBattleTurn]
 	and a
 	jr nz, .enemy6
-	ld a, [wDisabledMove]
+	ld de, wDisabledMove
 	ld hl, wCurPlayerMove
 	jr .ok6
 .enemy6
-	ld a, [wEnemyDisabledMove]
+	ld de, wEnemyDisabledMove
 	ld hl, wCurEnemyMove
 .ok6
+	ld a, [de]
 	and a
 	jr z, .no_disabled_move ; can't disable a move that doesn't exist
+	cp [hl]
+	jr nz, .no_disabled_move
+	inc de
+	inc hl
+	ld a, [de]
 	cp [hl]
 	jr nz, .no_disabled_move
 
@@ -433,53 +437,17 @@ CantMove:
 	and $ff ^ (1<<SUBSTATUS_RAMPAGE + 1<<SUBSTATUS_CHARGED)
 	ld [hl], a
 
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	cp FLY
-	jr z, .fly_dig
+	cp16bcZ FLY, .fly_dig
 
-	cp DIG
-	ret nz
+	ret16bcNZ DIG
 
 .fly_dig
 	res SUBSTATUS_UNDERGROUND, [hl]
 	res SUBSTATUS_FLYING, [hl]
 	jp AppearUserRaiseSub
 
-
-IncreaseMetronomeCount:
-	; Don't arbitrarily boost usage counter twice on a turn
-	call CheckUserIsCharging
-	ret nz
-
-	ldh a, [hBattleTurn]
-	and a
-	ld de, wPlayerSelectedMove
-	ld hl, wPlayerMetronomeCount
-	jr z, .got_move_usage
-	ld de, wEnemySelectedMove
-	ld hl, wEnemyMetronomeCount
-.got_move_usage
-	ld a, [de]
-	ld b, a
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVar
-	cp b
-	jr nz, .reset
-	ld a, [hl]
-	cp 5
-	ret nc
-	inc [hl]
-	ret
-.reset
-	; Struggle doesn't update last move set but does reset count
-	cp STRUGGLE
-	jr z, .done_update_selected_move
-	ld [de], a
-.done_update_selected_move
-	xor a
-	ld [hl], a
-	ret
 
 CheckWhiteHerb:
 	call GetUserItemAfterUnnerve
@@ -549,9 +517,12 @@ MoveDisabled: ; 3438d
 	call GetBattleVarAddr
 	res SUBSTATUS_CHARGED, [hl]
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ;accounts for high
 	call GetBattleVar
+	ld a, c
 	ld [wNamedObjectIndexBuffer], a
+	ld a, b
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetMoveName
 
 	ld hl, DisabledMoveText
@@ -801,13 +772,13 @@ BattleCommand_checkobedience: ; 343db
 	jr nz, .DoNothing
 
 
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld de, wBattleMonMoves
 	lb bc, 0, NUM_MOVES
 
 .GetTotalPP:
 	ld a, [hli]
-	and $3f ; exclude pp up
+	;and $3f ; exclude pp up
 	add b
 	ld b, a
 
@@ -822,7 +793,7 @@ BattleCommand_checkobedience: ; 343db
 
 
 .CheckMovePP:
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld a, [wCurMoveNum]
 	ld e, a
 	ld d, 0
@@ -830,7 +801,6 @@ BattleCommand_checkobedience: ; 343db
 
 ; Can't use another move if only one move has PP.
 	ld a, [hl]
-	and $3f
 	cp b
 	jr z, .DoNothing
 
@@ -861,12 +831,12 @@ BattleCommand_checkobedience: ; 343db
 
 ; Make sure it has PP.
 	ld [wCurMoveNum], a
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld e, a
 	ld d, 0
 	add hl, de
 	ld a, [hl]
-	and $3f
+	and a
 	jr z, .RandomMove
 
 
@@ -876,8 +846,13 @@ BattleCommand_checkobedience: ; 343db
 	ld b, 0
 	ld hl, wBattleMonMoves
 	add hl, bc
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurPlayerMove], a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld [wCurPlayerMove+1], a
 
 	call SetPlayerTurn
 	call UpdateMoveData
@@ -907,11 +882,10 @@ BattleCommand_checkobedience: ; 343db
 
 IgnoreSleepOnly: ; 3451f
 
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
 
-	cp SLEEP_TALK
-	jr z, .CheckSleep
+	cp16bcZ SLEEP_TALK, .CheckSleep
 	and a
 	ret
 
@@ -944,7 +918,7 @@ BattleCommand_usedmovetext: ; 34541
 	pop bc
 	pop hl
 	pop af
-	
+
 ; usedmovetext
 	farjp DisplayUsedMoveText
 
@@ -1019,10 +993,9 @@ BattleConsumePP:
 	call CheckUserIsCharging
 	ret nz
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp STRUGGLE
-	jr z, .end
+	cp16bcZ STRUGGLE, .end
 
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVar
@@ -1033,17 +1006,17 @@ BattleConsumePP:
 	and a
 	ld a, [wCurPartyMon]
 	ld bc, wCurMoveNum
-	ld de, wBattleMonPP
-	ld hl, wPartyMon1PP
+	ld de, wBattleMonCurPP
+	ld hl, wPartyMon1CurPP
 	jr z, .set_party_pp
 	ld a, [wBattleMode]
 	dec a
 	ld a, [wCurOTMon]
 	ld bc, wCurEnemyMoveNum
-	ld de, wEnemyMonPP
-	ld hl, wWildMonPP
+	ld de, wEnemyMonCurPP
+	ld hl, wWildMonCurPP
 	jr z, .pp_vars_ok
-	ld hl, wOTPartyMon1PP
+	ld hl, wOTPartyMon1CurPP
 .set_party_pp
 	predef GetPartyLocation
 .pp_vars_ok
@@ -1060,7 +1033,7 @@ BattleConsumePP:
 
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ret z
 	dec [hl]
 	ld a, BATTLE_VARS_SUBSTATUS2
@@ -1127,12 +1100,12 @@ BattleCommand_critical: ; 34631
 	inc c
 
 .CheckCritical:
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	ld de, 1
-	ld hl, .Criticals
 	push bc
-	call IsInArray
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
+	call GetBattleVar
+	ld de, 2
+	ld hl, .Criticals
+	call IsBCInArray
 	pop bc
 	jr nc, .ScopeLens
 
@@ -1176,15 +1149,15 @@ BattleCommand_critical: ; 34631
 	ret
 
 .Criticals:
-	db KARATE_CHOP
-	db RAZOR_LEAF
-	db CRABHAMMER
-	db SLASH
-	db AEROBLAST
-	db CROSS_CHOP
-	db SHADOW_CLAW
-	db STONE_EDGE
-	db $ff
+	dw KARATE_CHOP
+	dw RAZOR_LEAF
+	dw CRABHAMMER
+	dw SLASH
+	dw AEROBLAST
+	dw CROSS_CHOP
+	dw SHADOW_CLAW
+	dw STONE_EDGE
+	dw 0
 
 .Chances:
 	; 4.17% 12.5%  50%   100%
@@ -1194,32 +1167,7 @@ BattleCommand_critical: ; 34631
 
 
 BattleCommand_triplekick: ; 346b2
-; triplekick
-
-	ld a, [wKickCounter]
-	ld b, a
-	inc b
-	ld hl, wCurDamage + 1
-	ld a, [hld]
-	ld e, a
-	ld a, [hli]
-	ld d, a
-.next_kick
-	dec b
-	ret z
-	ld a, [hl]
-	add e
-	ld [hld], a
-	ld a, [hl]
-	adc d
-	ld [hli], a
-
-; No overflow.
-	jr nc, .next_kick
-	ld a, $ff
-	ld [hld], a
-	ld [hl], a
-	ret
+	farjp _BattleCommand_triplekick
 
 CheckAirBalloon:
 ; Returns z if the user is holding an Air Balloon
@@ -1251,10 +1199,9 @@ BattleCommand_stab: ; 346d2
 ; Base value: $10
 ; Max value: $c0 (quad-weak, STAB, good weather modifier
 	; Struggle doesn't apply STAB or matchups
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
+	ret16bcZ STRUGGLE
 
 	; Apply type matchups
 	call BattleCheckTypeMatchup
@@ -1498,12 +1445,11 @@ _CheckMatchup:
 
 _CheckTypeMatchup: ; 347d3
 	push hl
-	ld de, 1 ; IsInArray checks below use single-byte arrays
 ; Handle powder moves
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	ld hl, PowderMoves
-	call IsInArray
+	ld a, POWDER_MOVE
+	call CheckMoveProperty
 	jr nc, .skip_powder
 	call GetOpponentItemAfterUnnerve
 	ld a, b
@@ -1630,11 +1576,10 @@ _CheckTypeMatchup: ; 347d3
 ; 34833
 
 BattleCommand_checkpowder:
-	ld de, 1
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	ld hl, PowderMoves
-	call IsInArray
+	ld a, POWDER_MOVE
+	call CheckMoveProperty
 	ret nc
 BattleCommand_resettypematchup: ; 34833
 ; Reset the type matchup multiplier to 1.0, if the type matchup is not 0.
@@ -1742,9 +1687,8 @@ BattleCommand_bounceback:
 	ret z
 
 	; Some moves bypass Substitute
-	ld de, 1
-	ld hl, SubstituteBypassMoves
-	call IsInArray
+	ld a, SUB_BYPASS_MOVE
+	call CheckMoveProperty
 	jr c, .sub_ok
 
 	; Otherwise, Substitute blocks it
@@ -1758,19 +1702,20 @@ BattleCommand_bounceback:
 	bit SUBSTATUS_MAGIC_BOUNCE, a
 	ret nz
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE; accounts for two byte
 	call GetBattleVar
-	ld b, a
 	push bc
 	call SwitchTurn
 
 	; Store old move and replace with the bounced move
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE; accounts for two byte
 	call GetBattleVarAddr
-	ld a, [hl]
-	pop bc
-	ld [hl], b
-	push af
+	pop de
+	push bc
+	ld a, e
+	ld [hli], a
+	ld a, d
+	ld [hl], a
 
 	farcall ShowAbilityActivation
 
@@ -1797,10 +1742,12 @@ BattleCommand_bounceback:
 	call GetBattleVarAddr
 	res SUBSTATUS_MAGIC_BOUNCE, [hl]
 
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVarAddr
-	pop af
-	ld [hl], a
+	pop bc
+	ld [hl], c
+	inc hl
+	ld [hl], b
 	call UpdateMoveData
 	jp SwitchTurn
 
@@ -1846,10 +1793,9 @@ BattleCommand_checkhit:
 	ret z
 	cp EFFECT_ROAR
 	ret z
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
+	ret16bcZ STRUGGLE
 
 	; Immunity might be set already from Prankster
 	ld a, [wTypeModifier]
@@ -2012,10 +1958,9 @@ BattleCommand_checkhit:
 ; Return nz if the opponent is behind a Substitute for certain moves
 	call CheckSubstituteOpp
 	jr z, .not_blocked
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	cp SWAGGER
-	jr z, .blocked
+	cp16bcZ SWAGGER, .blocked
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_TRAP
@@ -2044,13 +1989,11 @@ BattleCommand_checkhit:
 	bit SUBSTATUS_FLYING, a
 	jr z, .LockedOn
 
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
 
-	cp EARTHQUAKE
-	ret z
-	cp MAGNITUDE
-	ret z
+	ret16bcZ EARTHQUAKE
+	ret16bcZ MAGNITUDE
 
 .LockedOn:
 	ld a, 1
@@ -2062,9 +2005,13 @@ BattleCommand_checkhit:
 ; Return z if we are a Poison-type using Toxic.
 	call CheckIfUserIsPoisonType
 	ret nz
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ; accounts for high
 	call GetBattleVar
-	cp TOXIC
+	ld a, c
+	cp LOW(TOXIC)
+	ret nz
+	ld a, b
+	cp HIGH(TOXIC)
 	ret
 
 .PursuitCheck:
@@ -2101,23 +2048,20 @@ BattleCommand_checkhit:
 	bit SUBSTATUS_FLYING, a
 	jr z, .DigMoves
 
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ; accounts for high
 	call GetBattleVar
 
-	cp GUST
-	ret z
-	cp THUNDER
-	ret z
-	cp HURRICANE
+	ret16bcZ GUST
+	ret16bcZ THUNDER
+	ret16bcZ HURRICANE
 	ret
 
 .DigMoves:
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ; accounts for high
 	call GetBattleVar
 
-	cp EARTHQUAKE
-	ret z
-	cp MAGNITUDE
+	ret16bcZ EARTHQUAKE
+	ret16bcZ MAGNITUDE
 	ret
 
 
@@ -2131,19 +2075,18 @@ BattleCommand_checkhit:
 	ret
 
 .RainAccCheck:
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;high
 	call GetBattleVar
 
-	cp THUNDER
-	ret z
-	cp HURRICANE
+	ret16bcZ THUNDER
+	ret16bcZ HURRICANE
 	ret
 
 .HailAccCheck:
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;high
 	call GetBattleVar
 
-	cp BLIZZARD
+	ret16bcZ BLIZZARD
 	ret
 
 .NoGuardCheck:
@@ -2164,12 +2107,10 @@ BattleCommand_checkhit:
 	ld a, [hl]
 	and a
 	jr z, .no_minimize
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;high
 	call GetBattleVar
-	cp BODY_SLAM
-	ret z
-	cp STOMP
-	ret z
+	ret16bcZ BODY_SLAM
+	ret16bcZ STOMP
 .no_minimize
 	or 1
 	ret
@@ -2259,7 +2200,7 @@ BattleCommand_lowersub: ; 34eee
 	ld [wFXAnimIDHi], a
 	inc a
 	ld [wKickCounter], a
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	jp LoadAnim
 
 .mimic_anims
@@ -2317,7 +2258,7 @@ BattleCommand_hittargetnosub: ; 34f60
 	cp EFFECT_MULTI_HIT
 	jr z, .multihit
 	cp EFFECT_FURY_STRIKES
-	jr z, .fury_strikes
+	jr z, .multihit
 	cp EFFECT_CONVERSION
 	jr z, .conversion
 	cp EFFECT_DOUBLE_HIT
@@ -2329,18 +2270,17 @@ BattleCommand_hittargetnosub: ; 34f60
 	xor a
 	ld [wKickCounter], a
 .triplekick
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ; accounts for high
 	call GetBattleVar
-	ld e, a
-	ld d, 0
+	ld e, c
+	ld d, b
 	call PlayFXAnimID
 
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	cp FLY
-	jr z, .fly_dig
-	cp DIG
-	ret nz
+	cp16bcZ FLY, .fly_dig
+
+	ret16bcNZ DIG
 
 .fly_dig
 ; clear sprite
@@ -2353,47 +2293,20 @@ BattleCommand_hittargetnosub: ; 34f60
 	and 1
 	xor 1
 	ld [wKickCounter], a
-.fury_attack
 	ld a, [de]
 	cp $1
 	push af
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	ld e, a
-	ld d, 0
+	ld e, c
+	ld d, b
 	pop af
 	jp z, PlayFXAnimID
 	xor a
 	ld [wNumHits], a
 	jp PlayFXAnimID
 
-; Fury Swipes and Fury Attack were merged into Fury Strikes, so use the correct
-; animation for the Pokémon that learned each one
-.fury_strikes
-	push de
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wBattleMonSpecies]
-	jr z, .got_user_species
-	ld a, [wEnemyMonSpecies]
-.got_user_species
-	ld hl, .fury_attack_users
-	ld de, 1
-	call IsInArray
-	pop de
-	jr nc, .multihit
-	ld a, $2
-	ld [wKickCounter], a
-	jr .fury_attack
 
-.fury_attack_users
-	db NIDORAN_F
-	db NIDORINO
-	db NIDOKING
-	db HERACROSS
-	db PILOSWINE
-	db MAMOSWINE
-	db -1
 
 ; 34fd1
 
@@ -2426,59 +2339,13 @@ BattleCommand_statdownanim: ; 34fdb
 
 StatUpDownAnim: ; 34feb
 	ld [wNumHits], a
-
-	ld a, BATTLE_VARS_MOVE_ANIM
-	call GetBattleVar
-	ld e, a
-	ld d, 0
-	cp DEFENSE_CURL
-	jr nz, .not_defense_curl
-	ldh a, [hBattleTurn]
-	and a
-	ld a, [wBattleMonSpecies]
-	jr z, .got_user_species
-	ld a, [wEnemyMonSpecies]
-.got_user_species
-	ld hl, .withdraw_users
-	ld de, 1
-	push af
-	call IsInArray
-	jr nc, .not_withdraw
-	pop af
-	ld a, $1
-	jr .got_kick_counter
-.not_withdraw
-	pop af ; restore species to a
-	inc hl ; ld hl, .harden_users
-	; ld de, 1
-	call IsInArray
-	jr nc, .not_harden
-	ld a, $2
-	jr .got_kick_counter
-.not_harden
-.not_defense_curl
 	xor a
-.got_kick_counter
 	ld [wKickCounter], a
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVar
-	ld e, a
-	ld d, 0
+	ld e, c
+	ld d, b
 	jp PlayFXAnimID
-
-.withdraw_users
-	db DWEBBLE
-	db -1
-
-.harden_users
-	db GRIMER
-	db MUK
-	db HERACROSS
-	db SLUGMA
-	db MAGCARGO
-	db PUPITAR
-	db TYRANITAR
-	db -1
 
 ; 34ffd
 
@@ -2499,7 +2366,7 @@ BattleCommand_raisesub: ; 35004
 	ld [wFXAnimIDHi], a
 	ld a, $2
 	ld [wKickCounter], a
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	jp LoadAnim
 
 ; 35023
@@ -2517,10 +2384,8 @@ BattleCommand_failuretext:
 	ld a, BATTLE_VARS_MOVE_ANIM
 	call GetBattleVarAddr
 
-	cp FLY
-	jr z, .fly_dig
-	cp DIG
-	jr z, .fly_dig
+	cp16bcZ FLY, .fly_dig
+	cp16bcZ DIG, .fly_dig
 
 ; Move effect:
 	inc hl
@@ -3035,7 +2900,7 @@ BattleCommand_postfainteffects:
 	ld [wFXAnimIDHi], a
 	inc a
 	ld [wKickCounter], a
-	ld a, DESTINY_BOND
+	ld bc, DESTINY_BOND
 	call LoadAnim
 	call SwitchTurn
 
@@ -3320,7 +3185,7 @@ DittoMetalPowder: ; 352b1
 	and a
 	ld a, [hl]
 	jr nz, .continue
-	
+
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld b, a
@@ -4460,10 +4325,10 @@ BattleCommand_encore: ; 35864
 	cp b
 	jr nz, .got_move
 
-	ld bc, wBattleMonPP - wBattleMonMoves - 1
+	ld bc, wBattleMonCurPP - wBattleMonMoves - 1
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	jp z, .failed
 	ld a, [wAttackMissed]
 	and a
@@ -4704,7 +4569,7 @@ BattleCommand_sketch: ; 35a74
 	ld hl, Moves + MOVE_PP
 	call GetMoveAttr
 	pop hl
-	ld bc, wBattleMonPP - wBattleMonMoves
+	ld bc, wBattleMonCurPP - wBattleMonMoves
 	add hl, bc
 	ld [hl], a
 	pop bc
@@ -4718,7 +4583,7 @@ BattleCommand_sketch: ; 35a74
 ; wildmon
 	ld a, [hl]
 	push bc
-	ld hl, wWildMonPP
+	ld hl, wWildMonCurPP
 	ld b, 0
 	add hl, bc
 	ld [hl], a
@@ -4737,7 +4602,7 @@ BattleCommand_sketch: ; 35a74
 	ld a, b
 	ld [hl], a
 	pop af
-	ld de, MON_PP - MON_MOVES
+	ld de, MON_CUR_PP - MON_MOVES
 	add hl, de
 	ld [hl], a
 .done_copy
@@ -4877,7 +4742,6 @@ BattleCommand_sleeptalk: ; 35b33
 	push de
 	push bc
 
-	ld b, a
 	farcall GetMoveEffect
 	ld a, b
 
@@ -5102,32 +4966,49 @@ SelfInflictDamageToSubstitute: ; 35de0
 ; 35e40
 
 UpdateMoveData:
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ; accounts for high
 	call GetBattleVarAddr
 	ld d, h
 	ld e, l
 
 	; Don't update if the move doesn't exist
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
+	ld a, c
 	and a
-	ret z
-
+	jr z, .checkB
+.weallgood
 	ld [wCurMove], a
 	ld [wNamedObjectIndexBuffer], a
 
-	dec a
+	ld a, b
+	and MOVE_HIGH_MASK
+	ld b, a
+	ld [wCurMoveHigh], a
+	ld [wNamedObjectIndexBuffer+1], a
+	dec bc
 	call GetMoveData
 	call GetMoveName
 	jp CopyName1
 
+.checkB
+	ld a, b
+	and a
+	ret z
+	ld a, c
+	jr .weallgood
+
 GetMoveData::
-; Copy move struct a to de.
+; Copy move struct bc to de.
 	ld hl, Moves
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
+	push bc
+	ld bc, MOVE_LENGTH
 	ld a, Bank(Moves)
-	jp FarCopyBytes
+	call FarCopyBytes
+	pop bc
+	ret
 
 IsOpponentLeafGuardActive:
 	call CallOpponentTurn
@@ -5433,10 +5314,9 @@ SapHealth: ; 36011
 	ld c, [hl]
 
 	; for Drain Kiss, we want 75% drain instead of 50%
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ;accounts for high
 	call GetBattleVar
-	cp DRAIN_KISS
-	jr nz, .skip_drain_kiss
+	cp16bcNZ DRAINING_KISS, .skip_drain_kiss
 	ld h, b
 	ld l, c
 	srl b
@@ -5847,10 +5727,9 @@ StatUpAnimation:
 	ld bc, wEnemyMinimized
 	ld hl, DropEnemySub
 .do_player
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	cp MINIMIZE
-	ret nz
+	ret16bcNZ MINIMIZE
 
 	ld a, $1
 	ld [bc], a
@@ -6948,12 +6827,10 @@ BattleCommand_charge:
 	inc a
 	ld [wKickCounter], a
 	call LoadMoveAnim
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	cp FLY
-	jr z, .flying
-	cp DIG
-	jr z, .flying
+	cp16bcZ FLY, .flying
+	cp16bcZ DIG, .flying
 	call BattleCommand_raisesub
 	jr .not_flying
 
@@ -6962,13 +6839,10 @@ BattleCommand_charge:
 .not_flying
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	ld b, a
-	cp FLY
-	jr z, .set_flying
-	cp DIG
-	jr nz, .dont_set_digging
+	cp16bcZ FLY, .set_flying
+	cp16bcNZ DIG, .dont_set_digging
 	set SUBSTATUS_UNDERGROUND, [hl]
 	jr .dont_set_digging
 
@@ -6979,11 +6853,15 @@ BattleCommand_charge:
 	; If we called this move from something else, update last move appropriately.
 	call CheckUserIsCharging
 	jr nz, .last_move_ok
-	ld a, BATTLE_VARS_LAST_COUNTER_MOVE
+	ld a, BATTLE_VARS_LAST_COUNTER_MOVE ;accounts for high
 	call GetBattleVarAddr
+	ld a, c
+	ld [hli], a
 	ld [hl], b
-	ld a, BATTLE_VARS_LAST_MOVE
+	ld a, BATTLE_VARS_LAST_MOVE ;accounts for high
 	call GetBattleVarAddr
+	ld a, c
+	ld [hli], a
 	ld [hl], b
 
 .last_move_ok
@@ -7000,15 +6878,13 @@ BattleCommand_charge:
 	call GetBattleVar
 
 	ld hl, .SolarBeam
-	cp SOLAR_BEAM
-	ret z
+	ret16bcZ SOLAR_BEAM
 
 	ld hl, .Fly
-	cp FLY
-	ret z
+	ret16bcZ FLY
 
 	ld hl, .Dig
-	cp DIG
+	ret16bcZ DIG
 	ret
 
 .SolarBeam:
@@ -7071,30 +6947,28 @@ BattleCommand_traptarget: ; 36c2d
 	ld a, 7
 .got_count
 	ld [hl], a
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ; shoulc account for two byte
 	call GetBattleVar
+	ld a, c
 	ld [de], a
-	ld b, a
+	inc de
+	ld a, b
+	ld [de], a
+
 	ld hl, .Traps
-
-.find_trap_text
-	ld a, [hli]
-	cp b
-	jr z, .found_trap_text
+	ld de, 4
+	call IsBCInArray
 	inc hl
 	inc hl
-	jr .find_trap_text
-
-.found_trap_text
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	jp StdBattleTextBox
 
 .Traps:
-	dbw WRAP,      WrappedByText     ; 'was WRAPPED by'
-	dbw FIRE_SPIN, FireSpinTrapText  ; 'was trapped!'
-	dbw WHIRLPOOL, WhirlpoolTrapText ; 'was trapped!'
+	dw WRAP,      WrappedByText     ; 'was WRAPPED by'
+	dw FIRE_SPIN, FireSpinTrapText  ; 'was trapped!'
+	dw WHIRLPOOL, WhirlpoolTrapText ; 'was trapped!'
 ; 36c7e
 
 
@@ -7122,14 +6996,18 @@ BattleCommand_recoil: ; 36cb2
 	ld hl, wBattleMonMaxHP
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [wLastPlayerMove]
+	ld de, wLastPlayerMove
 	jr z, .got_hp
 	ld hl, wEnemyMonMaxHP
-	ld a, [wLastEnemyMove]
+	ld de, wLastEnemyMove
 .got_hp
+	ld a, [de]
+	ld c, a
+	inc de
+	ld a, [de]
 	ld b, a
-	cp STRUGGLE
-	jp z, .StruggleRecoil
+
+	cp16bcZ STRUGGLE, .StruggleRecoil
 
 	; For all other moves, potentially disable
 	; recoil based on ability
@@ -7140,12 +7018,10 @@ BattleCommand_recoil: ; 36cb2
 	cp MAGIC_GUARD
 	ret z
 
-	ld a, b
-	cp DOUBLE_EDGE
-	jr z, .OneThirdRecoil
-	cp FLARE_BLITZ
-	jr z, .OneThirdRecoil
-	ld a, BATTLE_VARS_MOVE_ANIM
+	cp16bcZ DOUBLE_EDGE, .OneThirdRecoil
+	cp16bcZ FLARE_BLITZ, .OneThirdRecoil
+
+	ld a, BATTLE_VARS_MOVE_ANIM ;not sure the point here
 	call GetBattleVar
 	ld d, a
 ; get 1/4 damage or 1 HP, whichever is higher
@@ -7205,7 +7081,7 @@ BattleCommand_recoil: ; 36cb2
 	jp .recoil_text
 
 .OneThirdRecoil
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;not sure of the point here either
 	call GetBattleVar
 	ld d, a
 	ld a, [wCurDamage]
@@ -7427,7 +7303,7 @@ BattleCommand_substitute: ; 36e7c
 	ld [wNumHits], a
 	ld [wFXAnimIDHi], a
 	ld [wKickCounter], a
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call LoadAnim
 	jr .finish
 
@@ -7559,9 +7435,9 @@ BattleCommand_disable: ; 36fed
 
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 	jr z, .got_pp
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 .got_pp
 	ld b, 0
 	add hl, bc
@@ -7812,7 +7688,14 @@ BattleCommand_conversion:
 	jr z, .okay
 	push hl
 	push bc
-	dec a
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
 	ld hl, Moves + MOVE_TYPE
 	call GetMoveAttr
 	ld [de], a
@@ -8014,10 +7897,9 @@ BattleCommand_resetstats:
 BattleCommand_heal:
 	farcall CheckFullHP
 	jr z, .hp_full
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	cp REST
-	jr nz, .not_rest
+	cp16bcNZ REST, .not_rest
 	ld a, BATTLE_VARS_STATUS
 	call GetBattleVar
 	and SLP
@@ -8282,11 +8164,10 @@ CheckSubstituteOpp: ; 37378
 	push bc
 	push de
 	push hl
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	ld hl, SoundMoves
-	ld de, 1
-	call IsInArray
+	ld a, SOUND_MOVE
+	call CheckMoveProperty
 	pop hl
 	pop de
 	pop bc
@@ -8455,7 +8336,6 @@ BattleCommand_defrost: ; 37563
 
 ; 37588
 
-
 INCLUDE "engine/battle/effect_commands/curse.asm"
 
 INCLUDE "engine/battle/effect_commands/protect.asm"
@@ -8471,20 +8351,36 @@ INCLUDE "engine/battle/effect_commands/perish_song.asm"
 INCLUDE "engine/battle/effect_commands/rollout.asm"
 
 BoostJumptable:
-	dbw AVALANCHE, DoAvalanche
-	dbw ACROBATICS, DoAcrobatics
-	dbw FACADE, DoFacade
-	dbw HEX, DoHex
-	dbw VENOSHOCK, DoVenoshock
-	dbw KNOCK_OFF, DoKnockOff
-	dbw -1, -1
+	dw AVALANCHE, DoAvalanche
+	dw ACROBATICS, DoAcrobatics
+	dw FACADE, DoFacade
+	dw HEX, DoHex
+	dw VENOSHOCK, DoVenoshock
+	dw KNOCK_OFF, DoKnockOff
+	dw 0, 0
 
 BattleCommand_conditionalboost:
 	ld hl, BoostJumptable
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ;accounts for high
 	call GetBattleVar
-	jp BattleJumptable
-
+;HighBattleJumptable::
+; hl = jumptable, a = target. Returns z if no jump was made, nz otherwise
+	; Maybe make this a common function? Maybe one exist?
+	push bc
+	ld de, 4
+	call IsBCInArray
+	jr nc, .end
+	inc hl
+	inc hl
+.got_target
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	call _hl_
+	or 1
+.end
+	pop bc
+	ret
 DoAvalanche:
 	call CheckOpponentWentFirst
 	jr DoubleDamageIfNZ
@@ -8570,30 +8466,7 @@ DoKnockOff:
 INCLUDE "engine/battle/effect_commands/attract.asm"
 
 BattleCommand_happinesspower: ; 3784b
-; happinesspower
-	push bc
-	ld hl, wBattleMonHappiness
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .ok
-	ld hl, wEnemyMonHappiness
-.ok
-	xor a
-	ldh [hMultiplicand + 0], a
-	ldh [hMultiplicand + 1], a
-	ld a, [hl]
-	ldh [hMultiplicand + 2], a
-	ld a, 10
-	ldh [hMultiplier], a
-	call Multiply
-	ld a, 25
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-	ldh a, [hQuotient + 2]
-	ld d, a
-	pop bc
-	ret
+	farjp _BattleCommand_happinesspower
 
 ; 37874
 
@@ -8717,73 +8590,7 @@ BattleCommand_getmagnitude: ; 37991
 ; 379c9
 
 BattleCommand_gyroball:
-	push bc
-	push de
-	call SwitchTurn
-	farcall GetSpeed
-	push bc
-	call SwitchTurn
-	farcall GetSpeed
-	pop de
-	; User speed in BC, target speed in DE
-
-	; This is counterintuitive (the logical choice is to set speed to 1),
-	; but is how it's done in VII...
-	ld a, b
-	or c
-	ld a, 1
-	jr z, .got_power
-
-	; We can't divide numbers >255, so scale down speed in that case
-.scaledown_loop
-	ld a, b
-	and a
-	jr z, .scaledown_ok
-	srl b
-	rr c
-	srl d
-	rr e
-	jr .scaledown_loop
-.scaledown_ok
-	; Base Power = 25 * (Target Speed / User Speed), capped at 150
-	xor a
-	ldh [hMultiplicand + 0], a
-	ld a, d
-	ldh [hMultiplicand + 1], a
-	ld a, e
-	ldh [hMultiplicand + 2], a
-	ld a, 25
-	ldh [hMultiplier], a
-	call Multiply
-
-	ld a, c
-	ldh [hDivisor], a
-	ld b, 4
-	call Divide
-
-	; Cap at min 1, max 150
-	ld hl, hMultiplicand
-	ld a, [hli]
-	or [hl]
-	ld a, 150
-	jr nz, .got_power
-	inc hl
-	ld a, [hl]
-	and a
-	jr nz, .nonzero_power
-	ld a, 1
-	jr .got_power
-
-.nonzero_power
-	cp 151
-	jr c, .got_power
-
-	ld a, 150
-.got_power
-	pop de
-	ld d, a
-	pop bc
-	ret
+	farjp _BattleCommand_gyroball
 
 BattleCommand_lowkick:
 	push bc
@@ -8811,7 +8618,7 @@ BattleCommand_lowkick:
 	inc hl
 	inc hl
 	call GetFarHalfword ; now we have weight in hl
-	
+
 	ld a, BATTLE_VARS_ABILITY_OPP
     call GetBattleVar
 	cp HEAVY_METAL
@@ -8820,7 +8627,7 @@ BattleCommand_lowkick:
 .not_heavy
 	ld d, h
 	ld e, l
-	
+
 	ld hl, .WeightTable
 .loop2
 	ld a, [hli]
@@ -9102,81 +8909,13 @@ FailedBatonPass:
 	jp PrintButItFailed
 
 BattleCommand_pursuit: ; 37b1d
-; pursuit
-; Double damage if the opponent is switching.
-
-	ld hl, wEnemyIsSwitching
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .ok
-	ld hl, wPlayerIsSwitching
-.ok
-	ld a, [hl]
-	and a
-	ret z
-
-	ld hl, wCurDamage + 1
-	sla [hl]
-	dec hl
-	rl [hl]
-	ret nc
-
-	ld a, $ff
-	ld [hli], a
-	ld [hl], a
-	ret
+	farjp _BattleCommand_pursuit
 
 ; 37b39
 
 
 BattleCommand_clearhazards: ; 37b39
-; clearhazards
-
-	ld a, BATTLE_VARS_SUBSTATUS4
-	call GetBattleVarAddr
-	bit SUBSTATUS_LEECH_SEED, [hl]
-	jr z, .not_leeched
-	res SUBSTATUS_LEECH_SEED, [hl]
-	ld hl, ShedLeechSeedText
-	call StdBattleTextBox
-.not_leeched
-	ldh a, [hBattleTurn]
-	and a
-	ld hl, wPlayerScreens
-	ld de, wPlayerWrapCount
-	jr z, .got_screens_wrap
-	ld hl, wEnemyScreens
-	ld de, wEnemyWrapCount
-.got_screens_wrap
-	push de
-	ld a, [hl]
-	and SCREENS_SPIKES
-	jr z, .no_spikes
-	cpl
-	and [hl]
-	ld [hl], a
-	push hl
-	ld hl, BlewSpikesText
-	call StdBattleTextBox
-	pop hl
-.no_spikes
-	ld a, [hl]
-	and SCREENS_TOXIC_SPIKES
-	jr z, .no_toxic_spikes
-	cpl
-	and [hl]
-	ld [hl], a
-	ld hl, BlewToxicSpikesText
-	call StdBattleTextBox
-.no_toxic_spikes
-	pop de
-	ld a, [de]
-	and a
-	ret z
-	xor a
-	ld [de], a
-	ld hl, ReleasedByText
-	jp StdBattleTextBox
+	farjp _BattleCommand_clearhazards
 
 ; 37b74
 
@@ -9318,27 +9057,7 @@ BattleCommand_bellydrum: ; 37c1a
 
 
 BattleCommand_doubleminimizedamage: ; 37ce6
-; doubleminimizedamage
-
-	ld hl, wEnemyMinimized
-	ldh a, [hBattleTurn]
-	and a
-	jr z, .ok
-	ld hl, wPlayerMinimized
-.ok
-	ld a, [hl]
-	and a
-	ret z
-	ld hl, wCurDamage + 1
-	sla [hl]
-	dec hl
-	rl [hl]
-	ret nc
-	ld a, $ff
-	ld [hli], a
-	ld [hl], a
-	ret
-
+	farjp _BattleCommand_doubleminimizedamage
 ; 37d02
 
 
@@ -9387,14 +9106,17 @@ BattleCommand_futuresight: ; 37d34
 
 	call CheckUserIsCharging
 	jr nz, .AlreadyChargingFutureSight
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
-	ld b, a
-	ld a, BATTLE_VARS_LAST_COUNTER_MOVE
+	ld a, BATTLE_VARS_LAST_COUNTER_MOVE ; accounts for high
 	call GetBattleVarAddr
+	ld a, c
+	ld [hli], a
 	ld [hl], b
-	ld a, BATTLE_VARS_LAST_MOVE
+	ld a, BATTLE_VARS_LAST_MOVE ;accounts for high
 	call GetBattleVarAddr
+	ld a, c
+	ld [hli], a
 	ld [hl], b
 .AlreadyChargingFutureSight:
 	ld hl, wPlayerFutureSightCount
@@ -9588,15 +9310,19 @@ AnimateCurrentMove: ; 37e01
 
 
 PlayDamageAnim: ; 37e19
-	xor a
-	ld [wFXAnimIDHi], a
-
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ;accounts for high
 	call GetBattleVar
+	ld a, c
+	and a
+	jr nz, .WeAllGood
+	ld a, b
 	and a
 	ret z
-
+.WeAllGood
+	ld a, c
 	ld [wFXAnimIDLo], a
+	ld a, b
+	ld [wFXAnimIDHi], a
 
 	ldh a, [hBattleTurn]
 	and a
@@ -9615,19 +9341,26 @@ PlayDamageAnim: ; 37e19
 LoadMoveAnim: ; 37e36
 	xor a
 	ld [wNumHits], a
-	ld [wFXAnimIDHi], a
 
-	ld a, BATTLE_VARS_MOVE_ANIM
+	ld a, BATTLE_VARS_MOVE_ANIM ; accounts for high
 	call GetBattleVar
+	ld a, c
+	and a
+	jr nz, .WeAllGood
+	ld a, b
 	and a
 	ret z
+.WeAllGood
 
 	; fallthrough
 ; 37e44
 
 
 LoadAnim:
+	ld a, c
 	ld [wFXAnimIDLo], a
+	ld a, b
+	ld [wFXAnimIDHi], a
 	jr PlayUserBattleAnim
 
 PlayOpponentBattleAnim: ; 37e54

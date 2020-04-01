@@ -375,9 +375,8 @@ ForewarnAbility:
 	push af
 	push hl
 	; Check for special cases
-	ld de, 1
-	ld hl, DynamicPowerMoves
-	call IsInArray
+	ld a, DYNAMIC_POWER_MOVE
+	call CheckMoveProperty
 	pop hl
 	pop bc
 	jr nc, .not_special
@@ -591,7 +590,7 @@ StanceChangeAbility:
 	jr nz,.enemyturn
 	call UpdateBattleMonInParty
 
-	farcall UpdatePkmnStats 
+	farcall UpdatePkmnStats
 
 	farcall InitBattleMon
 	jr .donestats
@@ -599,7 +598,7 @@ StanceChangeAbility:
 .enemyturn
 	call UpdateEnemyMonInParty
 
-	farcall UpdateEnemyPkmnStats 
+	farcall UpdateEnemyPkmnStats
 
 	farcall InitEnemyMon
 
@@ -632,7 +631,7 @@ StanceChangeAbility:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, StanceChangedText
 	jp StdBattleTextBox
@@ -777,7 +776,7 @@ BerserkAbility:
 	ret nc
 	res SUBSTATUS_DISGUISE_BROKEN, [hl]
 	ret
-	
+
 RunContactAbilities:
 ; turn perspective is from the attacker
 ; 30% of the time, activate Poison Touch
@@ -794,7 +793,7 @@ RunContactAbilities:
 ; Abilities always run from the ability user's perspective. This is
 ; consistent. Thus, a switchturn happens here. Feel free to rework
 ; the logic if you feel that this reduces readability.
-	
+
 	call GetOpponentAbilityAfterMoldBreaker
 	ld b, a
 
@@ -1012,11 +1011,10 @@ CheckNullificationAbilities:
 	ret
 
 .soundproof
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
-	ld hl, SoundMoves
-	ld de, 1
-	call IsInArray
+	ld a, SOUND_MOVE
+	call CheckMoveProperty
 	ret nc
 
 .ability_ok
@@ -1105,7 +1103,7 @@ MoxieAbility:
 	jr nz, .enemy
 	ld a, [wBattleMode]
 	dec a
-	ret z ;checks if wild battle 
+	ret z ;checks if wild battle
 .enemy
 	farcall CheckAnyOtherAliveOpponentMons ;only boost if there are more pokemon to fight
 	ret z
@@ -1223,13 +1221,13 @@ PowerConstructAbility:
 	push af
 	jr nz,.enemyturn
 	call UpdateBattleMonInParty
-	farcall UpdatePkmnStats 
+	farcall UpdatePkmnStats
 	farcall InitBattleMon
 	jr .donestats
 
 .enemyturn
 	call UpdateEnemyMonInParty
-	farcall UpdateEnemyPkmnStats 
+	farcall UpdateEnemyPkmnStats
 	farcall InitEnemyMon
 
 .donestats
@@ -1261,7 +1259,7 @@ PowerConstructAbility:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, ZygardeFormText
 	jp StdBattleTextBox
@@ -1861,10 +1859,10 @@ SolarPowerAbility:
 
 IronFistAbility:
 ; 120% damage for punching moves
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
-	ld hl, PunchingMoves
-	call IsInArray
+	ld a, PUNCHING_MOVE
+	call CheckMoveProperty
 	ret c
 	ld a, $65
 	jp ApplyDamageMod
@@ -1888,10 +1886,9 @@ SandForceAbility:
 
 RecklessAbility:
 ; 120% damage for (Hi) Jump Kick and recoil moves except for Struggle
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
+	ret16bcZ STRUGGLE
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_RECOIL_HIT

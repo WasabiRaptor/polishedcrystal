@@ -2,7 +2,7 @@ AI_Basic: ; 38591
 ; Don't do anything redundant:
 ;  -Using status-only moves if the player can't be statused
 ;  -Using moves that fail if they've already been used
-
+	;ld b, b
 	ld hl, wBuffer1 - 1
 	ld de, wEnemyMonMoves
 	ld b, NUM_MOVES + 1
@@ -1164,9 +1164,12 @@ AI_Smart_Encore: ; 38c3b
 .asm_38c68
 	push hl
 	ld a, [wPlayerSelectedMove]
+	ld c, a
+	ld a, [wPlayerSelectedMove+1]
+	ld b, a
 	ld hl, .EncoreMoves
-	ld de, 1
-	call IsInArray
+	ld de, 2
+	call IsBCInArray
 	pop hl
 	jr nc, .asm_38c81
 
@@ -1185,29 +1188,29 @@ AI_Smart_Encore: ; 38c3b
 	ret
 
 .EncoreMoves:
-	db AGILITY
-	db CONVERSION
-	db DISABLE
-	db DREAM_EATER
-	db FLAME_WHEEL
-	db FOCUS_ENERGY
-	db GROWTH
-	db HAZE
-	db HONE_CLAWS
-	db LEECH_SEED
-	db LEER
-	db POISONPOWDER
-	db ROAR
-	db SCREECH
-	db SKILL_SWAP
-	db SPLASH
-	db STRING_SHOT
-	db SUBSTITUTE
-	db SUPER_FANG
-	db SWORDS_DANCE
-	db TELEPORT
-	db TRICK
-	db $ff
+	dw AGILITY
+	dw CONVERSION
+	dw DISABLE
+	dw DREAM_EATER
+	dw FLAME_WHEEL
+	dw FOCUS_ENERGY
+	dw GROWTH
+	dw HAZE
+	dw HONE_CLAWS
+	dw LEECH_SEED
+	dw LEER
+	dw POISONPOWDER
+	dw ROAR
+	dw SCREECH
+	dw SKILL_SWAP
+	dw SPLASH
+	dw STRING_SHOT
+	dw SUBSTITUTE
+	dw SUPER_FANG
+	dw SWORDS_DANCE
+	dw TELEPORT
+	dw TRICK
+	dw 0
 ; 38ca4
 
 
@@ -2016,19 +2019,19 @@ AI_Smart_RainDance: ; 390cb
 ; 390e7
 
 RainDanceMoves: ; 390e7
-	db AQUA_TAIL
-	db BUBBLE_BEAM
-	db CRABHAMMER
-	db HYDRO_PUMP
-	db OCTAZOOKA
-	db SCALD
-	db SURF
-	db THUNDER
-	db WATER_GUN
-	db WATER_PULSE
-	db WATERFALL
-	db WHIRLPOOL
-	db $ff
+	dw AQUA_TAIL
+	dw BUBBLEBEAM
+	dw CRABHAMMER
+	dw HYDRO_PUMP
+	dw OCTAZOOKA
+	dw SCALD
+	dw SURF
+	dw THUNDER
+	dw WATER_GUN
+	dw WATER_PULSE
+	dw WATERFALL
+	dw WHIRLPOOL
+	dw 0
 ; 390f3
 
 
@@ -2109,15 +2112,15 @@ AIGoodWeatherType: ; 39122
 
 
 SunnyDayMoves: ; 39134
-	db FIRE_PUNCH
-	db EMBER
-	db FLAMETHROWER
-	db FIRE_SPIN
-	db FIRE_BLAST
-	db SACRED_FIRE
-	db FLARE_BLITZ
-	db HEALINGLIGHT
-	db $ff
+	dw FIRE_PUNCH
+	dw EMBER
+	dw FLAMETHROWER
+	dw FIRE_SPIN
+	dw FIRE_BLAST
+	dw SACRED_FIRE
+	dw FLARE_BLITZ
+
+	dw 0
 ; 3913d
 
 
@@ -2505,27 +2508,31 @@ AIHasMoveInArray: ; 392e6
 	push hl
 	push de
 	push bc
-
-.next
-	ld a, [hli]
-	cp $ff
-	jr z, .done
-
-	ld b, a
 	ld c, NUM_MOVES + 1
 	ld de, wEnemyMonMoves
-
-.check
+	push bc
+.next
+	pop bc
 	dec c
-	jr z, .next
-
+	jr z, .done
+	push bc
 	ld a, [de]
+	ld c, a
 	inc de
-	cp b
-	jr nz, .check
-
-	scf
-
+	push de
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and MOVE_HIGH_MASK
+	ld b, a
+	ld de, 2
+	push hl
+	call IsBCInArray
+	pop hl
+	pop de
+	jr nc, .next
+	pop bc
 .done
 	pop bc
 	pop de
@@ -2536,30 +2543,30 @@ AIHasMoveInArray: ; 392e6
 
 UsefulMoves: ; 39301
 ; Moves that are usable all-around.
-	db DOUBLE_EDGE
-	db SING
-	db FLAMETHROWER
-	db HYDRO_PUMP
-	db SURF
-	db ICE_BEAM
-	db BLIZZARD
-	db HYPER_BEAM
-	db SLEEP_POWDER
-	db THUNDERBOLT
-	db THUNDER
-	db EARTHQUAKE
-	db TOXIC
-	db PSYCHIC_M
-	db HYPNOSIS
-	db WILL_O_WISP
-	db RECOVER
-	db FIRE_BLAST
-	db SOFTBOILED
-	db SUPER_FANG
-	db MOONBLAST
-	db PLAY_ROUGH
-	db HURRICANE
-	db $ff
+	dw DOUBLE_EDGE
+	dw SING
+	dw FLAMETHROWER
+	dw HYDRO_PUMP
+	dw SURF
+	dw ICE_BEAM
+	dw BLIZZARD
+	dw HYPER_BEAM
+	dw SLEEP_POWDER
+	dw THUNDERBOLT
+	dw THUNDER
+	dw EARTHQUAKE
+	dw TOXIC
+	dw PSYCHIC_M
+	dw HYPNOSIS
+	dw WILL_O_WISP
+	dw RECOVER
+	dw FIRE_BLAST
+	dw SOFTBOILED
+	dw SUPER_FANG
+	dw MOONBLAST
+	dw PLAY_ROUGH
+	dw HURRICANE
+	dw 0
 ; 39315
 
 
@@ -2590,14 +2597,21 @@ AI_Opportunist: ; 39315
 	ld a, [de]
 	inc de
 	and a
-	ret z
-
+	jr z, .isnext0
+.weallgood
 	push hl
 	push de
 	push bc
+	ld c, a
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and MOVE_HIGH_MASK
+	ld b, a
 	ld hl, .stallmoves
-	ld de, 1
-	call IsInArray
+	ld de, 2
+	call IsBCInArray
 
 	pop bc
 	pop de
@@ -2607,35 +2621,50 @@ AI_Opportunist: ; 39315
 	inc [hl]
 	jr .checkmove
 
+.isnext0
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and a
+	ret z
+	dec de
+	dec de
+	dec de
+	dec de
+	ld a, [de]
+	inc de
+	jr .weallgood
+
 .stallmoves
-	db AGILITY
-	db BARRIER
-	db BULK_UP
-	db CALM_MIND
-	db CONVERSION
-	db COUNTER
-	db DEFENSE_CURL
-	db DISABLE
-	db DRAGON_DANCE
-	db FOCUS_ENERGY
-	db GROWL
-	db GROWTH
-	db HAZE
-	db HONE_CLAWS
-	db LEECH_SEED
-	db LEER
-	db LIGHT_SCREEN
-	db RAGE
-	db REFLECT
-	db SCREECH
-	db SKILL_SWAP
-	db SPLASH
-	db STRING_SHOT
-	db SUBSTITUTE
-	db SWORDS_DANCE
-	db TRANSFORM
-	db TRICK
-	db $ff
+	dw AGILITY
+	dw BARRIER
+	dw BULK_UP
+	dw CALM_MIND
+	dw CONVERSION
+	dw COUNTER
+	dw DEFENSE_CURL
+	dw DISABLE
+	dw DRAGON_DANCE
+	dw FOCUS_ENERGY
+	dw GROWL
+	dw GROWTH
+	dw HAZE
+	dw HONE_CLAWS
+	dw LEECH_SEED
+	dw LEER
+	dw LIGHT_SCREEN
+	dw RAGE
+	dw REFLECT
+	dw SCREECH
+	dw SKILL_SWAP
+	dw SPLASH
+	dw STRING_SHOT
+	dw SUBSTITUTE
+	dw SWORDS_DANCE
+	dw TRANSFORM
+	dw TRICK
+	dw 0
 ; 39369
 
 
@@ -2797,14 +2826,21 @@ AI_Cautious: ; 39418
 	ld a, [de]
 	inc de
 	and a
-	ret z
-
+	jr z, .isnext0
+.weallgood
 	push hl
 	push de
 	push bc
+	ld c, a
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and MOVE_HIGH_MASK
+	ld b, a
 	ld hl, .residualmoves
-	ld de, 1
-	call IsInArray
+	ld de, 2
+	call IsBCInArray
 
 	pop bc
 	pop de
@@ -2818,18 +2854,33 @@ AI_Cautious: ; 39418
 	inc [hl]
 	jr .asm_39425
 
+.isnext0
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and a
+	ret z
+	dec de
+	dec de
+	dec de
+	dec de
+	ld a, [de]
+	inc de
+	jr .weallgood
+
 .residualmoves
-	db CONVERSION
-	db FOCUS_ENERGY
-	db LEECH_SEED
-	db POISONPOWDER
-	db SPIKES
-	db STUN_SPORE
-	db SUBSTITUTE
-	db THUNDER_WAVE
-	db TOXIC_SPIKES
-	db TRANSFORM
-	db $ff
+	dw CONVERSION
+	dw FOCUS_ENERGY
+	dw LEECH_SEED
+	dw POISONPOWDER
+	dw SPIKES
+	dw STUN_SPORE
+	dw SUBSTITUTE
+	dw THUNDER_WAVE
+	dw TOXIC_SPIKES
+	dw TRANSFORM
+	dw 0
 ; 39453
 
 

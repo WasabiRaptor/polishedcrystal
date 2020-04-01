@@ -56,10 +56,20 @@ ENDM
 evolution: macro
 if _NARG < 4
 	db \1, \2, GROUP_\3, \3
-else 
+else
 	db \1, \2, \3, GROUP_\4, \4
 endc
 endm
+
+learnmove: macro
+if _NARG == 2
+	db \1
+	dw \2
+else
+	dw \1
+endc
+endm
+
 ; Enumerate strings
 
 define: MACRO

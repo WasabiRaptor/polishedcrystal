@@ -1372,13 +1372,14 @@ MoveScreenLoop:
 ;         f = c;     no options existed, move screen was aborted early
 	xor a
 	ld [wMoveScreenSelectedMove], a
+	ld [wMoveScreenSelectedMove+1], a
 	ld [wMoveScreenCursor], a
 	ld [wMoveScreenOffset], a
 	ld [wMoveScreenNumMoves], a
 
 	; Zero the first 4 moves to avoid oddities if we have less than 4 total
 	ld hl, wMoveScreenMoves
-	ld b, NUM_MOVES
+	ld b, NUM_MOVES * 2
 	xor a
 .zero_movescreenmoves
 	ld [hli], a
@@ -1389,16 +1390,24 @@ MoveScreenLoop:
 	jr z, .movecopy_reminder
 
 	; Copy over moves from the party struct
-	ld bc, NUM_MOVES
 	ld a, MON_MOVES
 	predef GetPartyParamLocation
 	ld de, wMoveScreenMoves
+	ld bc, NUM_MOVES
 .movecopy_loop
 	ld a, [hli]
 	and a
 	jr z, .movecopy_done
 	ld [de], a
 	inc de
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld [de], a
+	inc de
+	pop hl
 	inc b
 	dec c
 	jr nz, .movecopy_loop
@@ -1409,6 +1418,9 @@ MoveScreenLoop:
 	cp MOVESCREEN_NEWMOVE
 	jr nz, .newmove_done
 	ld a, [wPutativeTMHMMove]
+	ld [de], a
+	inc de
+	ld a, [wPutativeTMHMMove+1]
 	ld [de], a
 	inc b
 	jr .newmove_done
@@ -1451,7 +1463,7 @@ MoveScreenLoop:
 	rrca
 	jr c, .pressed_start
 	rrca
-	jr c, .pressed_right
+	jp c, .pressed_right
 	rrca
 	jp c, .pressed_left
 	rrca
@@ -1473,14 +1485,21 @@ MoveScreenLoop:
 	ld b, 0
 	ld hl, wMoveScreenMoves
 	add hl, bc
-	ld a, [hl]
+	add hl, bc
+	ld a, [hli]
 	ld [wMoveScreenSelectedMove], a
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld [wMoveScreenSelectedMove+1], a
 	ld a, [wMoveScreenMode]
 	cp MOVESCREEN_NEWMOVE
 	ld a, c
 	jr nz, .ok
-	ld a, [hl]
 	push bc
+	ld a, [wMoveScreenSelectedMove]
+	ld c, a
+	ld a, [wMoveScreenSelectedMove+1]
+	ld b, a
 	call IsHMMove
 	pop bc
 	ld a, c
@@ -1489,7 +1508,7 @@ MoveScreenLoop:
 	jr z, .ok
 	ld hl, Text_CantForgetHM
 	call PrintTextNoBox
-	jr .outer_loop
+	jp .outer_loop
 .ok
 	inc a
 	and a
@@ -1673,13 +1692,16 @@ MoveScreenLoop:
 	ld a, MON_MOVES
 	predef GetPartyParamLocation
 	call .swap_location
-	ld a, MON_PP
+	ld a, MON_MOVES_HIGH
+	predef GetPartyParamLocation
+	call .swap_location
+	ld a, MON_CUR_PP
 	predef GetPartyParamLocation
 	call .swap_location
 
 .finish_swap
 	ld hl, wMoveScreenMoves
-	call .swap_location
+	call .swap_location_two
 	ld de, SFX_SWITCH_POKEMON
 	call PlaySFX
 	call WaitSFX
@@ -1704,6 +1726,34 @@ MoveScreenLoop:
 	dec a
 	ld c, a
 	add hl, bc
+	ld a, [de]
+	ld b, [hl]
+	ld [hl], a
+	ld a, b
+	ld [de], a
+	ret
+
+.swap_location_two
+	ld a, [wMoveScreenCursor]
+	ld b, 0
+	ld c, a
+	push hl
+	add hl, bc
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [wMoveSwapBuffer]
+	dec a
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [de]
+	ld b, [hl]
+	ld [hli], a
+	ld a, b
+	ld [de], a
+	inc de
 	ld a, [de]
 	ld b, [hl]
 	ld [hl], a
@@ -1753,7 +1803,7 @@ GetForgottenMoves::
 	ld b, 100 ; Gen VII behaviour
 	inc b ; so that we can use jr nc
 .loop
-	pop af ;0 
+	pop af ;0
 	push af;1
 	call GetFarByte
 	inc hl
@@ -1875,9 +1925,23 @@ MoveScreen_ListMoves:
 	ld a, [wMoveScreenOffset]
 	ld c, a
 	add hl, bc
+	add hl, bc
 	ld de, wListMoves_MoveIndicesBuffer
-	ld bc, NUM_MOVES
-	rst CopyBytes
+	ld c, NUM_MOVES
+.ChangeIndexOrderLoop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	push de
+	inc de
+	inc de
+	inc de
+	ld a, [hli]
+	ld [de], a
+	pop de
+	dec c
+	jr nz, .ChangeIndexOrderLoop
+
 	ld a, SCREEN_WIDTH * 2 ; move list spacing
 	ld [wBuffer1], a
 	call OtherVariableWidthText
@@ -1887,20 +1951,27 @@ MoveScreen_ListMoves:
 	; Get PP -- either current PP, or default PP for the move
 	ld hl, wListMoves_MoveIndicesBuffer
 	ld de, wTempMonMoves
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES*2
 	rst CopyBytes
 
 	; Get default PP for moves
 	ld c, NUM_MOVES
 	ld hl, wTempMonMoves
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 .defaultpp_loop
 	ld a, [hli]
 	push hl
 	push bc
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
-	dec a
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -1915,10 +1986,10 @@ MoveScreen_ListMoves:
 	ld a, [wMoveScreenMode]
 	cp MOVESCREEN_REMINDER
 	jr z, .got_pp
-	ld a, MON_PP
+	ld a, MON_CUR_PP
 	predef GetPartyParamLocation
 	ld c, NUM_MOVES
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 	ld a, [wMoveScreenOffset]
 .currentpp_loop
 	and a
@@ -1956,8 +2027,14 @@ MoveScreen_ListMovesFast:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurMove], a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld [wCurMoveHigh], a
 
 	hlcoord 1, 1 ; 2 below topmost position
 	ld bc, SCREEN_WIDTH * 2
@@ -2004,6 +2081,7 @@ PlaceMoveData:
 	ld a, [wMoveSwapBuffer]
 	and a
 	jr z, .not_swapping
+	call InitVariableWidthText
 	hlcoord 1, 14
 	ld de, String_MoveSwap
 	call PlaceString
@@ -2014,15 +2092,19 @@ PlaceMoveData:
 .not_swapping
 	xor a
 	ldh [hBGMapMode], a
-
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
 	hlcoord 10, 12
 	ld de, String_PowAcc
 	call PlaceString
-
+	VWTextStart $d7
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_CATEGORY
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2042,9 +2124,12 @@ PlaceMoveData:
 	ld [hl], $5a
 
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_TYPE
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2074,9 +2159,12 @@ PlaceMoveData:
 	ld [hl], $5e
 
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2094,9 +2182,12 @@ PlaceMoveData:
 
 .place_accuracy
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_ACC
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte

@@ -5,202 +5,202 @@ SECTION "Unova Egg Moves", ROMX
 INCLUDE "data/pokemon/unova_egg_move_pointers.asm"
 
 NoUnovaEggMoves::
-    db $ff
+    dw 0
 
 SnivyEggMoves::
-    db $ff
+    dw 0
 
 TepigEggMoves::
-    db $ff
+    dw 0
 
 OshawottEggMoves::
-    db $ff
+    dw 0
 
 PatratEggMoves::
-    db $ff
+    dw 0
 
 LillipupEggMoves::
-    db $ff
+    dw 0
 
 PurrloinEggMoves::
-    db $ff
+    dw 0
 
 PansageEggMoves::
-    db $ff
+    dw 0
 
 PansearEggMoves::
-    db $ff
+    dw 0
 
 PanpourEggMoves::
-    db $ff
+    dw 0
 
 MunnaEggMoves::
-    db $ff
+    dw 0
 
 PidoveEggMoves::
-    db $ff
+    dw 0
 
 BlitzleEggMoves::
-    db $ff
+    dw 0
 
 RoggenrolaEggMoves::
-    db $ff
+    dw 0
 
 WoobatEggMoves::
-    db $ff
+    dw 0
 
 DrilburEggMoves::
-    db $ff
+    dw 0
 
 AudinoEggMoves::
-    db $ff
+    dw 0
 
 TimburrEggMoves::
-    db $ff
+    dw 0
 
 TympoleEggMoves::
-    db $ff
+    dw 0
 
 ThrohEggMoves::
-    db $ff
+    dw 0
 
 SawkEggMoves::
-    db $ff
+    dw 0
 
 SewaddleEggMoves::
-    db $ff
+    dw 0
 
 VenipedeEggMoves::
-    db $ff
+    dw 0
 
 CottoneeEggMoves::
-    db $ff
+    dw 0
 
 PetililEggMoves::
-    db $ff
+    dw 0
 
 BasculinEggMoves::
-    db $ff
+    dw 0
 
 SandileEggMoves::
-    db $ff
+    dw 0
 
 DarumakaEggMoves::
-    db $ff
+    dw 0
 
 MaractusEggMoves::
-    db $ff
+    dw 0
 
 DwebbleEggMoves::
-    db $ff
+    dw 0
 
 ScraggyEggMoves::
-    db $ff
+    dw 0
 
 SigilyphEggMoves::
-    db $ff
+    dw 0
 
 YamaskEggMoves::
-    db $ff
+    dw 0
 
 TirtougaEggMoves::
-    db $ff
+    dw 0
 
 ArchenEggMoves::
-    db $ff
+    dw 0
 
 TrubbishEggMoves::
-    db $ff
+    dw 0
 
 ZoruaEggMoves::
-    db $ff
+    dw 0
 
 MinccinoEggMoves::
-    db $ff
+    dw 0
 
 GothitaEggMoves::
-    db $ff
+    dw 0
 
 SolosisEggMoves::
-    db $ff
+    dw 0
 
 DucklettEggMoves::
-    db $ff
+    dw 0
 
 VanilliteEggMoves::
-    db $ff
+    dw 0
 
 DeerlingEggMoves::
-    db $ff
+    dw 0
 
 EmolgaEggMoves::
-    db $ff
+    dw 0
 
 KarrablastEggMoves::
-    db $ff
+    dw 0
 
 FoongusEggMoves::
-    db $ff
+    dw 0
 
 FrillishEggMoves::
-    db $ff
+    dw 0
 
 AlomomolaEggMoves::
-    db $ff
+    dw 0
 
 JoltikEggMoves::
-    db $ff
+    dw 0
 
 FerroseedEggMoves::
-    db $ff
+    dw 0
 
 TynamoEggMoves::
-    db $ff
+    dw 0
 
 ElgyemEggMoves::
-    db $ff
+    dw 0
 
 LitwickEggMoves::
-    db $ff
+    dw 0
 
 AxewEggMoves::
-    db $ff
+    dw 0
 
 CubchooEggMoves::
-    db $ff
+    dw 0
 
 ShelmetEggMoves::
-    db $ff
+    dw 0
 
 StunfiskEggMoves::
-    db $ff
+    dw 0
 
 MienfooEggMoves::
-    db $ff
+    dw 0
 
 DruddigonEggMoves::
-    db $ff
+    dw 0
 
 PawniardEggMoves::
-    db $ff
+    dw 0
 
 BouffalantEggMoves::
-    db $ff
+    dw 0
 
 RuffletEggMoves::
-    db $ff
+    dw 0
 
 VullabyEggMoves::
-    db $ff
+    dw 0
 
 HeatmorEggMoves::
-    db $ff
+    dw 0
 
 DurantEggMoves::
-    db $ff
+    dw 0
 
 DeinoEggMoves::
-    db $ff
+    dw 0
 
 LarvestaEggMoves::
-    db $ff
+    dw 0

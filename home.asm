@@ -361,10 +361,24 @@ GetName:: ; 33c3
 	ld h, [hl]
 	ld l, a
 
+	ld a, [wNamedObjectTypeBuffer]
+	cp MOVE_NAME
+	jr z, .twobytename
+
 	ld a, [wCurSpecies]
 	dec a
 	call GetNthString
+	jr .got_string
 
+.twobytename
+	ld a, [wCurSpecies]
+	ld c, a
+	ld a, [wCurGroup]
+	ld b, a
+	dec bc
+	call GetBCthString
+
+.got_string
 	ld de, wStringBuffer1
 	ld bc, ITEM_NAME_LENGTH
 	rst CopyBytes
@@ -386,15 +400,24 @@ GetNthString:: ; 3411
 	ret z
 
 	push bc
-	ld b, a
+	ld c, a
+	ld b, 0
+	call GetBCthString
+	pop bc
+	ret
+
+GetBCthString::
 .readChar
 	ld a, [hli]
 	cp "@"
 	jr nz, .readChar
-	dec b
+	dec c
 	jr nz, .readChar
-	pop bc
-	ret
+	ld a, b
+	and a
+	ret z
+	dec b
+	jr .readChar
 ; 3420
 
 GetPokemonName:: ; 343b
@@ -426,7 +449,7 @@ GetPokemonName:: ; 343b
 .variant
 	dec a
 	call GetNthString
-	
+
 ; Terminator
 	ld de, wStringBuffer1
 	push de
@@ -444,14 +467,18 @@ GetPokemonName:: ; 343b
 
 INCLUDE "data/pokemon/variant_name_table.asm"
 
+GetMoveName:: ; 34f8
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wCurGroup], a
+	ld a, MOVE_NAME
+	jr PutNameInBufferAndGetName
+
 GetCurItemName::
 ; Get item name from item in CurItem
 	ld a, [wCurItem]
 	ld [wNamedObjectIndexBuffer], a
 GetItemName:: ; 3468
 ; Get item name wNamedObjectIndexBuffer.
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, ITEM_NAME
 	jr PutNameInBufferAndGetName
 
@@ -461,41 +488,24 @@ GetCurKeyItemName::
 	ld [wNamedObjectIndexBuffer], a
 GetKeyItemName:: ; 3468
 ; Get key item item name wNamedObjectIndexBuffer.
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, KEY_ITEM_NAME
 	jr PutNameInBufferAndGetName
 
 GetApricornName::
 ; Get apricorn name wNamedObjectIndexBuffer.
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, APRICORN_NAME
 PutNameInBufferAndGetName::
 	push hl
 	push bc
 	ld [wNamedObjectTypeBuffer], a
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurSpecies], a
 	call GetName
 	ld de, wStringBuffer1
 	pop bc
 	pop hl
 	ret
 
-	
-GetMoveName:: ; 34f8
-	push hl
-
-	ld a, MOVE_NAME
-	ld [wNamedObjectTypeBuffer], a
-
-	ld a, [wNamedObjectIndexBuffer] ; move id
-	ld [wCurSpecies], a
-
-	call GetName
-	ld de, wStringBuffer1
-
-	pop hl
-	ret
 ; 350c
 
 ScrollingMenu:: ; 350c
@@ -719,7 +729,7 @@ CheckTrainerBattle:: ; 360d
 
 ; Is facing the player...
 	call GetObjectStruct
-	homecall FacingPlayerDistance_bc
+	call FacingPlayerDistance_bc
 	jr nc, .next
 
 ; ...within their sight range
@@ -836,6 +846,85 @@ LoadTrainer_continue:: ; 367e
 	end_if_just_battled
 	jumpstashedtext
 
+FacingPlayerDistance_bc:: ; 36a5
+	push de
+	call FacingPlayerDistance
+	ld b, d
+	ld c, e
+	pop de
+	ret
+; 36ad
+
+FacingPlayerDistance:: ; 36ad
+; Return carry if the sprite at bc is facing the player,
+; and its distance in d.
+
+	ld hl, OBJECT_NEXT_MAP_X ; x
+	add hl, bc
+	ld d, [hl]
+
+	ld hl, OBJECT_NEXT_MAP_Y ; y
+	add hl, bc
+	ld e, [hl]
+
+	ld a, [wPlayerStandingMapX]
+	cp d
+	jr z, .CheckY
+
+	ld a, [wPlayerStandingMapY]
+	cp e
+	jr z, .CheckX
+
+	and a
+	ret
+
+.CheckY:
+	ld a, [wPlayerStandingMapY]
+	sub e
+	jr z, .NotFacing
+	jr nc, .Above
+
+; Below
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_UP
+	jr .CheckFacing
+
+.Above:
+	ld d, a
+	ld e, OW_DOWN
+	jr .CheckFacing
+
+.CheckX:
+	ld a, [wPlayerStandingMapX]
+	sub d
+	jr z, .NotFacing
+	jr nc, .Left
+
+; Right
+	cpl
+	inc a
+	ld d, a
+	ld e, OW_LEFT
+	jr .CheckFacing
+
+.Left:
+	ld d, a
+	ld e, OW_RIGHT
+
+.CheckFacing:
+	call GetSpriteDirection
+	cp e
+	jr nz, .NotFacing
+	scf
+	ret
+
+.NotFacing:
+	and a
+	ret
+; 36f5
+
 INCLUDE "home/cry.asm"
 
 ; 384d
@@ -855,7 +944,7 @@ GetBaseData:: ; 3856
 	ld b, a
 	ld a, d
 	rst Bankswitch
-	
+
 	ld a, b
 ; Get BaseData
 	ld bc, BASEMON_STRUCT_LENGTH
@@ -1021,7 +1110,7 @@ endr
 	pop af
 	ldh [rSVBK], a
 	ret
-	
+
 GetMonPalette::
 	ldh a, [hROMBank]
 	push af
@@ -1045,7 +1134,7 @@ GetMonPalette::
 	jr c, .variant
 	ld a, [wCurPartySpecies]
 .variant
-	dec a	
+	dec a
 	ld l, a
 	ld h, $0
 	add hl, hl

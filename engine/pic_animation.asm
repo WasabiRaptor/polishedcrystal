@@ -236,18 +236,18 @@ PokeAnim_Finish: ; d0171
 
 PokeAnim_Cry:
 	ld a, [wPokeAnimSpecies]
-	call LoadCryHeader
+	;call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	call _PlayCry
+	;call _PlayCry
 	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_CryNoWait:
 	ld a, [wPokeAnimSpecies]
-	call LoadCryHeader
+	;call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	call PlayCry2
+	;call PlayCry2
 	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_StereoCry:

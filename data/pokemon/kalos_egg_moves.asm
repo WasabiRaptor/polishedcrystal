@@ -5,66 +5,66 @@ SECTION "Kalos Egg Moves", ROMX
 INCLUDE "data/pokemon/kalos_egg_move_pointers.asm"
 
 NoKalosEggMoves::
-    db $ff
+    dw 0
 ChespinEggMoves::
-    db $ff
+    dw 0
 FennekinEggMoves::
-    db $ff
+    dw 0
 FroakieEggMoves::
-    db $ff
+    dw 0
 BunnelbyEggMoves::
-    db $ff
+    dw 0
 FletchlingEggMoves::
-    db $ff
+    dw 0
 ScatterbugEggMoves::
-    db $ff
+    dw 0
 LitleoEggMoves::
-    db $ff
+    dw 0
 FlabebeEggMoves::
-    db $ff
+    dw 0
 SkiddoEggMoves::
-    db $ff
+    dw 0
 PanchamEggMoves::
-    db $ff
+    dw 0
 FurfrouEggMoves::
-    db $ff
+    dw 0
 EspurrEggMoves::
-    db $ff
+    dw 0
 HonedgeEggMoves::
-    db $ff
+    dw 0
 SpritzeeEggMoves::
-    db $ff
+    dw 0
 SwirlixEggMoves::
-    db $ff
+    dw 0
 InkayEggMoves::
-    db $ff
+    dw 0
 BinacleEggMoves::
-    db $ff
+    dw 0
 SkrelpEggMoves::
-    db $ff
+    dw 0
 ClauncherEggMoves::
-    db $ff
+    dw 0
 HelioptileEggMoves::
-    db $ff
+    dw 0
 TyruntEggMoves::
-    db $ff
+    dw 0
 AmauraEggMoves::
-    db $ff
+    dw 0
 HawluchaEggMoves::
-    db $ff
+    dw 0
 DedenneEggMoves::
-    db $ff
+    dw 0
 CarbinkEggMoves::
-    db $ff
+    dw 0
 GoomyEggMoves::
-    db $ff
+    dw 0
 KlefkiEggMoves::
-    db $ff
+    dw 0
 PhantumpEggMoves::
-    db $ff
+    dw 0
 PumpkabooEggMoves::
-    db $ff
+    dw 0
 BergmiteEggMoves::
-    db $ff
+    dw 0
 NoibatEggMoves::
-    db $ff
+    dw 0

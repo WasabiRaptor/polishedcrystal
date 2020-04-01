@@ -199,24 +199,40 @@ endr
 	loadvar wPartyMon1Stats+8, 999 / $100
 	loadvar wPartyMon1Stats+9, 999 % $100
 	; hm slaves
+	;loadvar wPartyMon1Moves+0, LOW(FLY)
+	;loadvar wPartyMon1Moves+1, LOW(SURF)
+	;loadvar wPartyMon1MovesHigh+0, HIGH(FLY)
+	;loadvar wPartyMon1MovesHigh+1, HIGH(SURF)
+
 	givepoke MEW, 100, LEFTOVERS
 	givepoke MEW, 100, LEFTOVERS
-	loadvar wPartyMon2Moves+0, FLY
-	loadvar wPartyMon2Moves+1, SURF
-	loadvar wPartyMon2Moves+2, STRENGTH
-	loadvar wPartyMon2Moves+3, CUT
-	loadvar wPartyMon2PP+0, 15
-	loadvar wPartyMon2PP+1, 15
-	loadvar wPartyMon2PP+2, 15
-	loadvar wPartyMon2PP+3, 30
-	loadvar wPartyMon3Moves+0, FLASH
-	loadvar wPartyMon3Moves+1, ROCK_SMASH
-	loadvar wPartyMon3Moves+2, WHIRLPOOL
-	loadvar wPartyMon3Moves+3, WATERFALL
-	loadvar wPartyMon3PP+0, 20
-	loadvar wPartyMon3PP+1, 15
-	loadvar wPartyMon3PP+2, 15
-	loadvar wPartyMon3PP+3, 15
+	;loadvar wPartyMon1Moves+0, LOW(TEST_MOVE)
+	;loadvar wPartyMon1MovesHigh+0, HIGH(TEST_MOVE)
+
+	loadvar wPartyMon2Moves+0, LOW(FLY)
+	loadvar wPartyMon2Moves+1, LOW(SURF)
+	loadvar wPartyMon2Moves+2, LOW(STRENGTH)
+	loadvar wPartyMon2Moves+3, LOW(CUT)
+	loadvar wPartyMon2MovesHigh+0, HIGH(FLY)
+	loadvar wPartyMon2MovesHigh+1, HIGH(SURF)
+	loadvar wPartyMon2MovesHigh+2, HIGH(STRENGTH)
+	loadvar wPartyMon2MovesHigh+3, HIGH(CUT)
+	loadvar wPartyMon2CurPP+0, 15
+	loadvar wPartyMon2CurPP+1, 15
+	loadvar wPartyMon2CurPP+2, 15
+	loadvar wPartyMon2CurPP+3, 30
+	loadvar wPartyMon3Moves+0, LOW(FLASH)
+	loadvar wPartyMon3Moves+1, LOW(ROCK_SMASH)
+	loadvar wPartyMon3Moves+2, LOW(WHIRLPOOL)
+	loadvar wPartyMon3Moves+3, LOW(WATERFALL)
+	loadvar wPartyMon3MovesHigh+0, HIGH(FLASH)
+	loadvar wPartyMon3MovesHigh+1, HIGH(ROCK_SMASH)
+	loadvar wPartyMon3MovesHigh+2, HIGH(WHIRLPOOL)
+	loadvar wPartyMon3MovesHigh+3, HIGH(WATERFALL)
+	loadvar wPartyMon3CurPP+0, 20
+	loadvar wPartyMon3CurPP+1, 15
+	loadvar wPartyMon3CurPP+2, 15
+	loadvar wPartyMon3CurPP+3, 15
 .skipmons
 	; fill pokedex
 	callasm FillPokedex

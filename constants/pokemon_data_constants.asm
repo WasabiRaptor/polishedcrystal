@@ -103,6 +103,8 @@ MON_GROUP                EQUS "(wPartyMon1Group - wPartyMon1)"
 MON_SPECIES              EQUS "(wPartyMon1Species - wPartyMon1)"
 MON_ITEM                 EQUS "(wPartyMon1Item - wPartyMon1)"
 MON_MOVES                EQUS "(wPartyMon1Moves - wPartyMon1)"
+MON_PP_UP                EQUS "(wPartyMon1PPUp - wPartyMon1)"
+MON_MOVES_HIGH           EQUS "(wPartyMon1MovesHigh - wPartyMon1)"
 MON_ID                   EQUS "(wPartyMon1ID - wPartyMon1)"
 MON_EXP                  EQUS "(wPartyMon1Exp - wPartyMon1)"
 MON_EVS                  EQUS "(wPartyMon1EVs - wPartyMon1)"
@@ -121,7 +123,6 @@ MON_GENDER               EQUS "(wPartyMon1Gender - wPartyMon1)"
 MON_IS_EGG               EQUS "(wPartyMon1IsEgg - wPartyMon1)"
 MON_IS_DEAD              EQUS "(wPartyMon1IsDead - wPartyMon1)"
 MON_FORM				 EQUS "(wPartyMon1Form - wPartyMon1)"
-MON_PP                   EQUS "(wPartyMon1PP - wPartyMon1)"
 MON_HAPPINESS            EQUS "(wPartyMon1Happiness - wPartyMon1)"
 MON_PKRUS                EQUS "(wPartyMon1PokerusStatus - wPartyMon1)"
 MON_CAUGHTDATA           EQUS "(wPartyMon1CaughtData - wPartyMon1)"
@@ -132,6 +133,7 @@ MON_CAUGHTLEVEL          EQUS "(wPartyMon1CaughtLevel - wPartyMon1)"
 MON_CAUGHTLOCATION       EQUS "(wPartyMon1CaughtLocation - wPartyMon1)"
 MON_LEVEL                EQUS "(wPartyMon1Level - wPartyMon1)"
 MON_STATUS               EQUS "(wPartyMon1Status - wPartyMon1)"
+MON_CUR_PP				 EQUS "(wPartyMon1CurPP - wPartyMon1)"
 MON_HP                   EQUS "(wPartyMon1HP - wPartyMon1)"
 MON_MAXHP                EQUS "(wPartyMon1MaxHP - wPartyMon1)"
 MON_STATS                EQUS "(wPartyMon1Stats - wPartyMon1)"
@@ -145,9 +147,9 @@ PARTYMON_STRUCT_LENGTH   EQUS "(wPartyMon1StatsEnd - wPartyMon1)"
 
 MON_GROUP_SPECIES_AND_FORM EQU $ff
 
-;PP masks
-PP_UPS_USED_MASK EQU %11000000
-
+; apply to MON_MOVES_HIGH / MON_PP_UP
+PP_UP_USED_MASK EQU %11000000
+MOVE_HIGH_MASK  EQU %00111111
 
 ; apply to MON_GROUP
 SHINY_MASK   EQU %10000000

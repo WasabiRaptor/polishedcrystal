@@ -83,7 +83,7 @@ UpdateUserInParty::
 	jr nz, UpdateEnemyMonInParty
 	; fallthrough
 UpdateBattleMonInParty::
-; Update level, status, current HP, current species or group (if it isn't transformed)
+; Update level, status, current HP, current PP, and current Form
 	ld a, [wCurBattleMon]
 	; fallthrough
 UpdateBattleMon::
@@ -99,7 +99,7 @@ UpdateBattleMon::
 	ld d, h
 	ld e, l
 	ld hl, wBattleMonLevel
-	ld bc, wBattleMonMaxHP - wBattleMonLevel
+	ld bc, wBattleMonMaxHP - wBattleMonLevel ; level, status, cur PP and cur HP are copied
 	rst CopyBytes
 	ret
 
@@ -293,13 +293,12 @@ BattleJumptable::
 	ret
 
 GetMoveAttr::
-; Assuming hl = Moves + x, return attribute x of move a.
-	push bc
-	ld bc, MOVE_LENGTH
+; Assuming hl = Moves + x, and move is in bc return attribute x of move bc.
+	dec bc
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	pop bc
 	ret
 
 ; Damage modifiers. a contains $xy where damage is multiplied by x, then divided by y
@@ -456,149 +455,6 @@ MoldBreakerSuppressedAbilities:
 	db WONDER_SKIN
 	db -1
 
-ContactMoves::
-	db AERIAL_ACE
-	db AQUA_TAIL
-	db ASTONISH
-	db BITE
-	db BODY_SLAM
-	db BUG_BITE
-	db BULLET_PUNCH
-	db CLOSE_COMBAT
-	db COUNTER
-	db CRABHAMMER
-	db CROSS_CHOP
-	db CRUNCH
-	db CUT
-	db DIG
-	db DIZZY_PUNCH
-	db DOUBLE_KICK
-	db DOUBLE_EDGE
-	db DRAGON_CLAW
-	db DRAIN_KISS
-	db DRAIN_PUNCH
-	db DRILL_PECK
-	db DYNAMICPUNCH
-	db EXTREMESPEED
-	db FALSE_SWIPE
-	db FEINT_ATTACK
-	db FIRE_PUNCH
-	db FLAME_WHEEL
-	db FLARE_BLITZ
-	db FLY
-	db FURY_STRIKES
-	db GYRO_BALL
-	db GIGA_IMPACT
-	db HEADBUTT
-	db HI_JUMP_KICK
-	db HORN_ATTACK
-	db HYPER_FANG
-	db ICE_PUNCH
-	db IRON_HEAD
-	db IRON_TAIL
-	db KARATE_CHOP
-	db KNOCK_OFF
-	db LEECH_LIFE
-	db LICK
-	db LOW_KICK
-	db MACH_PUNCH
-	db MEGAHORN
-	db METAL_CLAW
-	db NIGHT_SLASH
-	db OUTRAGE
-	db PECK
-	db PETAL_DANCE
-	db PLAY_ROUGH
-	db POISON_JAB
-	db POWER_WHIP
-	db PURSUIT
-	db QUICK_ATTACK
-	db RAGE
-	db RAPID_SPIN
-	db RETURN
-	db REVERSAL
-	db ROCK_SMASH
-	db ROLLOUT
-	db SCRATCH
-	db SEISMIC_TOSS
-	db SHADOW_CLAW
-	db SLASH
-	db SPARK
-	db STEEL_WING
-	db STOMP
-	db STRENGTH
-	db SUPER_FANG
-	db TACKLE
-	db TAKE_DOWN
-	db THIEF
-	db THRASH
-	db THUNDERPUNCH
-	db U_TURN
-	db VINE_WHIP
-	db WATERFALL
-	db WILD_CHARGE
-	db WING_ATTACK
-	db WRAP
-	db X_SCISSOR
-	db ZEN_HEADBUTT
-	db -1
-
-PowderMoves::
-	db POISONPOWDER
-	db SLEEP_POWDER
-	db SPORE
-	db STUN_SPORE
-	db -1
-
-PunchingMoves::
-	db BULLET_PUNCH
-	db DIZZY_PUNCH
-	db DRAIN_PUNCH
-	db DYNAMICPUNCH
-	db FIRE_PUNCH
-	db MACH_PUNCH
-	db THUNDERPUNCH
-	db -1
-
-SoundMoves::
-	db BUG_BUZZ
-	db DISARM_VOICE
-	db GROWL
-	db HYPER_VOICE
-	db PERISH_SONG
-	db ROAR
-	db SCREECH
-	db SING
-	db SUPERSONIC
-	db -1
-
-SubstituteBypassMoves::
-; used by Magic Bounce so it can check Substitute unconditionally as long as it isn't here
-; (Sound moves aren't included)
-	db ATTRACT
-	db DISABLE
-	db ENCORE
-	db FORESIGHT
-	db SPIKES
-	db TOXIC_SPIKES
-	db -1
-
-DynamicPowerMoves::
-; used by Forewarn and for move power listing
-	db COUNTER
-	db DRAGON_RAGE
-	db GYRO_BALL
-;   db LOW_KICK
-	db MAGNITUDE
-	db MIRROR_COAT
-	db NIGHT_SHADE
-	db RETURN
-	db REVERSAL
-	db SEISMIC_TOSS
-	db SONIC_BOOM
-	db SUPER_FANG
-	db -1
-
 ; These routines return z if the user is of the given type
 CheckIfTargetIsGrassType::
 	ld a, GRASS
@@ -700,6 +556,70 @@ CompareHP::
 	pop hl
 	ret
 
+CheckMoveProperty::
+	; return c if move bc has property a
+	push de
+
+	ld hl, MovePropertyTable
+	ld e, a
+	ld d, 0
+	add hl, de
+	add hl, de
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ldh a, [hROMBank]
+	push af
+	ld a, BANK(MoveProperties)
+	rst Bankswitch
+
+	ld de, 2
+	call IsBCInArray
+	push af
+	pop bc
+
+	pop af
+	rst Bankswitch
+
+	push bc
+	pop af
+
+	pop de
+	ret
+
+MovePropertyTable::
+	dw ContactMoves
+	dw PowderMoves
+	dw PunchingMoves
+	dw SoundMoves
+	dw SubstituteBypassMoves
+	dw DynamicPowerMoves
+
+IsBCInArray::
+; Find value bc for every de bytes in array hl.
+.loop
+	ld a, [hli]
+	cp 0
+	jr z, .twozero ; carry can never be set for "cp 0"
+.nottwozero
+	cp c
+	ld a, [hld]
+	jr nz, .next
+	cp b
+	scf
+	ret z
+.next
+	add hl, de
+	jr .loop
+
+.twozero
+	ld a, [hld]
+	cp 0
+	ret z
+	inc hl
+	jr .nottwozero
+
 CheckOpponentContactMove::
 	call CallOpponentTurn
 CheckContactMove::
@@ -710,11 +630,9 @@ CheckContactMove::
 	jr z, .protective_pads
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
-	ld hl, ContactMoves
-	ld de, 1
-	call IsInArray
+	ret16bcZ STRUGGLE
+	ld a, CONTACT_MOVE
+	call CheckMoveProperty
 .protective_pads
 	ccf
 	ret
@@ -845,12 +763,19 @@ CheckSpeed::
 GetBattleVar:: ; 39e1
 ; Preserves hl.
 	push hl
-	call GetBattleVarAddr
+	call _GetBattleVar
 	pop hl
 	ret
 ; 39e7
 
-GetBattleVarAddr:: ; 39e7
+GetBattleVarAddr::
+; Preserves bc.
+	push bc
+	call _GetBattleVar
+	pop bc
+	ret
+
+_GetBattleVar:: ; 39e7
 ; Get variable from pair a, depending on whose turn it is.
 ; There are 22 variable pairs.
 
@@ -877,6 +802,8 @@ GetBattleVarAddr:: ; 39e7
 ; var id
 	ld a, [hl]
 	ld c, a
+	jr .checkiftwobyte
+.nottwobyte
 	ld b, 0
 
 	ld hl, .vars
@@ -891,6 +818,49 @@ GetBattleVarAddr:: ; 39e7
 
 	pop bc
 	ret
+
+.checkiftwobyte
+	ld hl, .twobytevars
+	ld b, a
+.loop
+	ld a, [hli]
+	cp b
+	jr z, .twobyte
+	inc a
+	jr z, .nottwobyte
+	jr .loop
+
+.twobyte
+	ld b, 0
+
+	ld hl, .vars
+	add hl, bc
+	add hl, bc
+	pop bc
+
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [hli]
+	ld c, a
+	ld a, [hld]
+	ld b, a
+
+	ld a, c
+	ret
+
+.twobytevars:
+	db PLAYER_MOVE_ANIMATION
+	db ENEMY_MOVE_ANIMATION
+	db PLAYER_CUR_MOVE
+    db ENEMY_CUR_MOVE
+	db PLAYER_COUNTER_MOVE
+	db ENEMY_COUNTER_MOVE
+	db PLAYER_LAST_MOVE
+	db ENEMY_LAST_MOVE
+	db -1
+.twobytevarsend:
 
 .battlevarpairs
 	dw .substatus1, .substatus2, .substatus3, .substatus4

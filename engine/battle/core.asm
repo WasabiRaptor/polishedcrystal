@@ -90,7 +90,7 @@ DoBattle: ; 3c000
 	ld [wTempBattleMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempBattleMonSpecies], a
-	
+
 	call SlidePlayerPicOut
 	call LoadTileMapToTempTileMap
 	call ResetBattleParticipants
@@ -122,8 +122,7 @@ DoBattle: ; 3c000
 
 .not_linked_2
 	call HandleFirstAirBalloon
-	call AutomaticRainWhenOvercast
-	call BoostGiovannisArmoredMewtwo
+	farcall AutomaticRainWhenOvercast
 	call RunBothActivationAbilities
 	jp BattleTurn
 ; 3c0e5
@@ -609,6 +608,8 @@ ParsePlayerAction: ; 3c434
 	jr z, .not_encored
 	ld a, [wLastPlayerMove]
 	ld [wCurPlayerMove], a
+	ld a, [wLastPlayerMove+1]
+	ld [wCurPlayerMove+1], a
 	jr .encored
 
 .not_encored
@@ -631,9 +632,7 @@ ParsePlayerAction: ; 3c434
 	ld a, $5
 	call FarCopyWRAM
 	call SetPalettes
-	ld a, [wCurPlayerMove]
-	cp STRUGGLE
-	jr z, .struggle
+	cp16wramZ STRUGGLE, wCurPlayerMove, .struggle
 	call PlayClickSFX
 
 .struggle
@@ -706,13 +705,13 @@ HandleEncore: ; 3c4df
 	dec a
 	ld [wPlayerEncoreCount], a
 	jr z, .end_player_encore
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	ld a, [wCurMoveNum]
 	ld c, a
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ret nz
 
 .end_player_encore
@@ -730,13 +729,13 @@ HandleEncore: ; 3c4df
 	dec a
 	ld [wEnemyEncoreCount], a
 	jr z, .end_enemy_encore
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 	ld a, [wCurEnemyMoveNum]
 	ld c, a
 	ld b, 0
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ret nz
 
 .end_enemy_encore
@@ -832,21 +831,12 @@ CompareMovePriority: ; 3c5b4
 GetMovePriority: ; 3c5c5
 ; Return the priority (0-9) of move being used.
 	push bc
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high byte
 	call GetBattleVar
-	ld b, a
 	ld hl, MovePriorities
-.loop
-	ld a, [hli]
-	cp b
-	jr z, .done
+	call IsBCInArray
 	inc hl
-	cp -1
-	jr nz, .loop
-
-	xor a
-	jr .check_prankster
-.done
+	inc hl
 	ld a, [hl]
 .check_prankster
 	xor $80 ; treat it as a signed byte
@@ -879,10 +869,9 @@ INCLUDE "data/moves/priorities.asm"
 
 
 GetMoveEffect: ; 3c5ec
-	ld a, b
-	dec a
+	dec bc
 	ld hl, Moves + MOVE_EFFECT
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -1389,15 +1378,15 @@ PreparePPRestore:
 	jr nz, .enemy
 	ld hl, wBattleMonMoves
 	push hl
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	jr .copy
 
 .enemy
 	ld hl, wEnemyMonMoves
 	push hl
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 .copy
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	pop hl
@@ -1410,10 +1399,10 @@ GetZeroPPMove:
 ; Returns z if we didn't find a valid move
 	ld bc, 0
 	ld d, NUM_MOVES
-	ld hl, wTempMonPP
+	ld hl, wTempMonCurPP
 .loop
 	ld a, [hli]
-	and $3f ; mask out PP ups
+	and a
 	jr z, .got_zero_pp
 	inc bc
 	dec d
@@ -1442,7 +1431,7 @@ GetNonfullPPMove:
 	ld a, [hl]
 	and a
 	jr z, .all_moves_full
-	ld hl, wTempMonPP
+	ld hl, wTempMonCurPP
 	add hl, bc
 	ld e, [hl]
 	push bc
@@ -1473,7 +1462,7 @@ GetNonfullPPMove:
 
 LeppaRestorePP:
 	; Restore up to 10PP of move bc (0-3)
-	ld hl, wTempMonPP
+	ld hl, wTempMonCurPP
 	add hl, bc
 	ld a, [hl]
 	add 10
@@ -1524,9 +1513,9 @@ LeppaRestorePP:
 	; restore PP of active battle struct
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	jr z, .got_battle_pp
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 .got_battle_pp
 	add hl, bc
 	ld [hl], d
@@ -1540,14 +1529,14 @@ LeppaRestorePP:
 	ldh a, [hBattleTurn]
 	and a
 	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1PP
+	ld hl, wPartyMon1CurPP
 	jr z, .set_party_pp
 	ld a, [wBattleMode]
 	dec a
 	ld a, [wCurOTMon]
-	ld hl, wWildMonPP
+	ld hl, wWildMonCurPP
 	jr z, .pp_vars_ok
-	ld hl, wOTPartyMon1PP
+	ld hl, wOTPartyMon1CurPP
 .set_party_pp
 	push bc
 	push de
@@ -1593,10 +1582,12 @@ HandleFutureSight:
 	ld hl, BattleText_TargetWasHitByFutureSight
 	call StdBattleTextBox
 
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	push af
-	ld a, FUTURE_SIGHT
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
+	call _GetBattleVar
+	push bc
+	ld a, LOW(FUTURE_SIGHT)
+	ld [hli], a
+	ld a, HIGH(FUTURE_SIGHT)
 	ld [hl], a
 
 	farcall UpdateMoveData
@@ -1610,9 +1601,12 @@ HandleFutureSight:
 	ld [wCurDamage], a
 	ld [wCurDamage + 1], a
 
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	pop af
+	ld a, BATTLE_VARS_MOVE ;accounts for high byte
+	call _GetBattleVar
+	pop bc
+	ld a, c
+	ld [hli], a
+	ld a, b
 	ld [hl], a
 
 	call UpdateBattleMonInParty
@@ -2257,11 +2251,8 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 	ld b, 0
 	call GetRelevantTotalDefeatedPokemonSpeciesPointer
 	add hl, bc
-	ld a, [hl]
-	inc a
-	jr z, .overflow
-	ld [hl], a
-.overflow
+	call Inc16BitNumInHL
+
 	ld hl, wTotalDefeated+1
 	call Inc16BitNumInHL
 
@@ -2270,7 +2261,7 @@ UpdateBattleStateAndExperienceAfterEnemyFaint: ; 3ce01
 
 	pop af
 	ldh [rSVBK], a
-	
+
 
 GiveExperiencePointsAfterCatch:
 	call IsAnyMonHoldingExpShare
@@ -3178,7 +3169,7 @@ MonFaintedAnimation: ; 3d444
 	ld a, " "
 rept 7
 	ld [hli], a
-endr	
+endr
 	call ApplyTilemapInVBlank
 	pop hl
 	pop de
@@ -3445,15 +3436,15 @@ FinalPkmnMusicAndAnimation:
 	; ...and this trainer has final text...
 	farcall GetFinalPkmnTextPointer
 	ret nc
-	; ...and this is their last PokÃ©mon...
+	; ...and this is their last Pokémon...
 	farcall CheckAnyOtherAliveEnemyMons
 	ret nz
-	; ...then hide the PokÃ©mon...
+	; ...then hide the Pokémon...
 	call EmptyBattleTextBox
 	ld c, 20
 	call DelayFrames
 	call SlideEnemyPicOut
-	; ...play the final PokÃ©mon music...
+	; ...play the final Pokémon music...
 	call IsJohtoGymLeader
 	jr nc, .no_music
 	push de
@@ -3476,7 +3467,7 @@ FinalPkmnMusicAndAnimation:
 	ld [wTempEnemyMonSpecies], a
 	pop af
 	ld [wTempEnemyMonGroup], a
-	; ...and return the PokÃ©mon
+	; ...and return the Pokémon
 	call EmptyBattleTextBox
 	call ApplyTilemapInVBlank
 	call SlideEnemyPicOut
@@ -3553,7 +3544,9 @@ OfferSwitch: ; 3d74b
 	ld [wCurPartyMon], a
 	xor a
 	ld [wCurEnemyMove], a
+	ld [wCurEnemyMove+1], a
 	ld [wCurPlayerMove], a
+	ld [wCurPlayerMove+1], a
 	and a
 	ret
 
@@ -3595,7 +3588,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
-	call GetBaseData ;form is known 
+	call GetBaseData ;form is known
 	ld a, OTPARTYMON
 	ld [wMonType], a
 	predef CopyPkmnToTempMon ;form is known
@@ -3991,10 +3984,15 @@ SendOutPlayerMon: ; 3db5f
 	ld [wCurMoveNum], a
 	ld [wTypeModifier], a
 	ld [wPlayerMoveStruct + MOVE_ANIM], a
+	ld [wPlayerMoveStruct + MOVE_ANIM_HIGH], a
 	ld [wPlayerSelectedMove], a
+	ld [wPlayerSelectedMove+1], a
 	ld [wLastEnemyCounterMove], a
+	ld [wLastEnemyCounterMove+1], a
 	ld [wLastPlayerCounterMove], a
+	ld [wLastPlayerCounterMove+1], a
 	ld [wLastPlayerMove], a
+	ld [wLastPlayerMove+1], a
 	call CheckAmuletCoin
 	call FinishBattleAnim
 	xor a
@@ -4034,16 +4032,20 @@ SendOutPlayerMon: ; 3db5f
 NewBattleMonStatus: ; 3dbde
 	xor a
 	ld [wPlayerSelectedMove], a
+	ld [wPlayerSelectedMove+1], a
 	ld [wLastEnemyCounterMove], a
+	ld [wLastEnemyCounterMove+1], a
 	ld [wLastPlayerCounterMove], a
+	ld [wLastPlayerCounterMove+1], a
 	ld [wLastPlayerMove], a
+	ld [wLastPlayerMove+1], a
 	ld hl, wPlayerSubStatus1
 	ld [hli], a
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a
 	ld hl, wPlayerUsedMoves
-rept NUM_MOVES + -1
+rept (NUM_MOVES * 2) -1
 	ld [hli], a
 endr
 	ld [hl], a
@@ -4101,8 +4103,8 @@ PostBattleTasks::
 	ret
 
 RunBothActivationAbilities:
-; runs both pokÃ©mon's activation abilities (Intimidate, etc.).
-; The faster PokÃ©mon activates abilities first. This mostly
+; runs both pokémon's activation abilities (Intimidate, etc.).
+; The faster Pokémon activates abilities first. This mostly
 ; just matter for weather abilities.
 	ldh a, [hBattleTurn]
 	push af
@@ -4115,7 +4117,7 @@ RunBothActivationAbilities:
 	ret
 
 RunActivationAbilities:
-; Trace will, on failure, copy a later switched in PokÃ©mon's
+; Trace will, on failure, copy a later switched in Pokémon's
 ; Ability. To handle this correctly without redundancy except
 ; on double switch-ins or similar, we need to do some extra
 ; handling around it.
@@ -4134,7 +4136,7 @@ RunActivationAbilities:
 	jp SwitchTurn
 
 SpikesDamage_CheckMoldBreaker:
-; Called when a PokÃ©mon with Mold Breaker uses Roar/Whirlwind.
+; Called when a Pokémon with Mold Breaker uses Roar/Whirlwind.
 ; This is neccessary because it negates Levitate (but not Magic Guard for some reason),
 ; but can't be checked unconditionally since other kind of switches ignore MB as usual.
 	call SwitchTurn
@@ -4288,9 +4290,8 @@ PursuitSwitchIfFirstAndAlive:
 	call HasUserFainted
 	jp z, PursuitSwitch_done
 PursuitSwitch: ; 3dc5b
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for high
 	call GetBattleVar
-	ld b, a
 	call GetMoveEffect
 	ld a, b
 	cp EFFECT_PURSUIT
@@ -4314,6 +4315,7 @@ PursuitSwitch: ; 3dc5b
 	ld a, BATTLE_VARS_MOVE
 	call GetBattleVarAddr
 	xor a
+	ld [hli], a
 	ld [hl], a
 
 	pop af
@@ -5579,12 +5581,11 @@ PlayerSwitch: ; 3e3ad
 .not_linked
 	; Clear last enemy action to avoid Pursuit oddities
 	call SetEnemyTurn
-	ld a, BATTLE_VARS_MOVE
-	call GetBattleVarAddr
-	ld a, [hl]
-	cp PURSUIT
-	jr nz, .dont_reset_enemy_move
+	ld a, BATTLE_VARS_MOVE ; accounts for high byte
+	call _GetBattleVar
+	cp16bcNZ PURSUIT, .dont_reset_enemy_move
 	xor a
+	ld [hli], a
 	ld [hl], a
 
 .dont_reset_enemy_move
@@ -5934,6 +5935,7 @@ CheckRunSpeed:
 	ld [wCurMoveNum], a
 	xor a
 	ld [wCurPlayerMove], a
+	ld [wCurPlayerMove+1], a
 	call LinkBattleSendReceiveAction
 	call Call_LoadTempTileMapToTileMap
 
@@ -5985,21 +5987,34 @@ MoveSelectionScreen:
 	push hl
 	ld hl, wBattleMonMoves
 	ld a, [wPlayerSelectedMove]
+	ld c, a
+	ld a, [wPlayerSelectedMove+1]
 	ld b, a
-	ld c, 4
+	ld d, 4
 .loop
 	ld a, [hli]
 	and a
 	jr z, .sanity_check_done
+	cp c
+	jr nz, .next_sanity
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
 	cp b
+	pop hl
 	jr z, .sanity_check_done
-	dec c
+.next_sanity
+	dec d
 	jr nz, .loop
 .sanity_check_done
 	cp b
 	jr z, .dont_kill_selectedmove
 	xor a
 	ld [wPlayerSelectedMove], a
+	ld [wPlayerSelectedMove+1], a
 .dont_kill_selectedmove
 	pop hl
 	pop bc
@@ -6018,7 +6033,7 @@ MoveSelectionScreen:
 
 .got_menu_type
 	ld de, wListMoves_MoveIndicesBuffer
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES * 2
 	rst CopyBytes
 	xor a
 	ldh [hBGMapMode], a
@@ -6101,7 +6116,7 @@ MoveSelectionScreen:
 	ld bc, SCREEN_WIDTH
 	dec a
 	rst AddNTimes
-	ld [hl], "â–·"
+	ld [hl], "?"
 
 .interpret_joypad
 	ld a, $1
@@ -6149,8 +6164,14 @@ MoveSelectionScreen:
 	ld b, 0
 	ld hl, wBattleMonMoves
 	add hl, bc
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurPlayerMove], a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld [wCurPlayerMove+1], a
 	xor a
 	ret
 
@@ -6162,6 +6183,8 @@ MoveSelectionScreen:
 	; Load item into wStringBuffer1, move into wStringBuffer2
 	ld a, [wPlayerSelectedMove]
 	ld [wNamedObjectIndexBuffer], a
+	ld a, [wPlayerSelectedMove+1]
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetMoveName
 
 	; The above places move name into buffer 1, now copy into 2
@@ -6233,8 +6256,10 @@ MoveSelectionScreen:
 	jp MoveSelectionScreen
 
 .struggle
-	ld a, STRUGGLE
+	ld a, LOW(STRUGGLE)
 	ld [wCurPlayerMove], a
+	ld a, HIGH(STRUGGLE)
+	ld [wCurPlayerMove+1], a
 	ld hl, BattleText_PkmnHasNoMovesLeft
 	call StdBattleTextBox
 	ld c, 60
@@ -6245,7 +6270,9 @@ MoveSelectionScreen:
 SwapBattleMoves:
 	ld hl, wBattleMonMoves
 	call .swap_bytes
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonMovesHigh
+	call .swap_bytes
+	ld hl, wBattleMonCurPP
 	call .swap_bytes
 	ld hl, wPlayerDisableCount
 	ld a, [hl]
@@ -6287,7 +6314,12 @@ SwapBattleMoves:
 	push hl
 	call .swap_bytes
 	pop hl
-	ld bc, MON_PP - MON_MOVES
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	call .swap_bytes
+	ld bc, MON_CUR_PP - MON_MOVES_HIGH
 	add hl, bc
 
 .swap_bytes
@@ -6319,7 +6351,7 @@ MoveInfoBox: ; 3e6c8
 
 	hlcoord $c, $c
 	ld a, [hl]
-	cp "â”¬"
+	cp "?"
 	push af
 	lb bc, 4, 6
 	call TextBox
@@ -6334,6 +6366,14 @@ MoveInfoBox: ; 3e6c8
 	add hl, bc
 	ld a, [hl]
 	ld [wCurPlayerMove], a
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld [wCurPlayerMove+1], a
+	pop hl
 
 	ld a, [wCurBattleMon]
 	ld [wCurPartyMon], a
@@ -6345,10 +6385,9 @@ MoveInfoBox: ; 3e6c8
 	ld c, [hl]
 	inc [hl]
 	ld b, 0
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	add hl, bc
 	ld a, [hl]
-	and $3f
 	ld [wStringBuffer1], a
 	call .PrintPP
 
@@ -6361,9 +6400,12 @@ MoveInfoBox: ; 3e6c8
 ; Power and accuracy display code copied from engine/startmenu.asm
 
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -6381,9 +6423,12 @@ MoveInfoBox: ; 3e6c8
 
 .place_accuracy
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_ACC
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -6507,13 +6552,13 @@ CheckUsableMove:
 	ld b, 0
 	ldh a, [hBattleTurn]
 	and a
-	ld hl, wBattleMonPP
+	ld hl, wBattleMonCurPP
 	jr z, .got_pp
-	ld hl, wEnemyMonPP
+	ld hl, wEnemyMonCurPP
 .got_pp
 	add hl, bc
 	ld a, [hl]
-	and $3f
+	and a
 	ld a, 1
 	jr z, .end
 
@@ -6541,7 +6586,15 @@ CheckUsableMove:
 	ld hl, wEnemyMonMoves
 .got_moves
 	add hl, bc
-	ld c, [hl]
+	ld a, [hli]
+	ld c, a
+	push bc
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
 	push bc
 	farcall GetUserItem
 	ld a, b
@@ -6549,13 +6602,12 @@ CheckUsableMove:
 	cp HELD_CHOICE
 	jr z, .check_choiced
 	cp HELD_ASSAULT_VEST
-	jr nz, .usable
+	jr nz, .popBCusable
 
 	; Assault Vest check
 	ld hl, Moves + MOVE_CATEGORY
-	ld a, c
-	dec a
 	call GetMoveAttr
+	pop bc
 	cp STATUS
 	ld a, 4
 	jr z, .end
@@ -6564,17 +6616,25 @@ CheckUsableMove:
 	; Check if we did a move yet
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [wPlayerSelectedMove]
+	ld hl, wPlayerSelectedMove
 	jr z, .got_selected_move
-	ld a, [wEnemySelectedMove]
+	ld hl, wEnemySelectedMove
 .got_selected_move
+	ld a, [hli]
 	and a
-	jr z, .usable
+	jr z, .popBCusable
 	cp c
 	ld a, 3
-	jr nz, .end
-
+	jr nz, .popBCend
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	cp b
+	ld a, 3
+	jr nz, .popBCend
 	; fallthrough
+	pop bc
 .usable
 	xor a
 .end
@@ -6583,6 +6643,12 @@ CheckUsableMove:
 	pop de
 	pop bc
 	ret
+.popBCusable
+	pop bc
+	jr .usable
+.popBCend
+	pop bc
+	jr .end
 
 ParseEnemyAction: ; 3e7c1
 	ld a, [wEnemyIsSwitching]
@@ -6743,10 +6809,8 @@ LinkBattleSendReceiveAction: ; 3e8e4
 	ld a, [wBattlePlayerAction]
 	and a
 	jr nz, .switch
-	ld a, [wCurPlayerMove]
 	ld b, BATTLEACTION_STRUGGLE
-	cp STRUGGLE
-	jr z, .struggle
+	cp16wramZ STRUGGLE, wCurPlayerMove, .struggle
 	ld a, [wCurMoveNum]
 	jr .use_move
 
@@ -6762,20 +6826,14 @@ LinkBattleSendReceiveAction: ; 3e8e4
 	ret
 ; 3e8eb
 GetRelevantTotalEncounterdPokemonSpeciesPointer:
-	push bc
-	push de
-	ld a, [wCurGroup]
 	ld hl, EncounterCounterPointerTable
-	call dbwArray
-	pop de
-	pop bc
-	ret
-
+	jr RelevantPointerTableStuff
 GetRelevantTotalDefeatedPokemonSpeciesPointer:
+	ld hl, DefeatedCounterPointerTable
+RelevantPointerTableStuff:
 	push bc
 	push de
 	ld a, [wCurGroup]
-	ld hl, DefeatedCounterPointerTable
 	call dbwArray
 	pop de
 	pop bc
@@ -6834,7 +6892,7 @@ LoadEnemyMon: ; 3e8eb
 
 	ld a,[wCurPartySpecies]
 	ld c, a
-	
+
 	ldh a, [rSVBK]
 	push af
 	ld a, BANK(wTotalEncounters)
@@ -6870,7 +6928,7 @@ LoadEnemyMon: ; 3e8eb
 .initenemymon
 	jp nz, InitEnemyMon
 
-	call GetBaseData ;form is known 
+	call GetBaseData ;form is known
 
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
@@ -7331,11 +7389,11 @@ endr
 	; Fill moves based on level
 	predef FillMoves
 
-	call CheckUniqueWildMove
+	farcall CheckUniqueWildMove
 
 	; Fill wild PP
 	ld hl, wEnemyMonMoves
-	ld de, wEnemyMonPP
+	ld de, wEnemyMonCurPP
 	predef FillPP
 
 	; Only the first five base stats are copied..
@@ -7396,7 +7454,7 @@ SetLevel:
 	call Divide
 	ldh a, [hQuotient + 2]
 	ld b, a
-	
+
 	ld a, [wCurPartyLevel]
 	cp 201
 	jr z, .MatchPlayerLevel
@@ -8066,12 +8124,12 @@ GiveBattleEVs:
 ; prepare registers for EV gain loop.
 ; b: contains EV yield data
 ; c: loop iterator
-; d: bit 0 is set on pokÃ©rus, bit 1 on macho brace
+; d: bit 0 is set on pokérus, bit 1 on macho brace
 ; e: set to abcdef00, where a: HP EV boosted, etc, for
 ; power items
 	push de
 	lb de, 0, 0
-	; check pokÃ©rus
+	; check pokérus
 	ld hl, MON_PKRUS
 	add hl, bc
 	ld a, [hl]
@@ -8839,7 +8897,7 @@ DropEnemySub: ; 3f486
 	push af
 
 	call GetEnemyIllusion
-	
+
 	ld de, VTiles2
 	predef FrontpicPredef
 	pop af
@@ -9061,8 +9119,8 @@ InitEnemyWildmon: ; 3f607
 	ld de, wWildMonMoves
 	ld bc, NUM_MOVES
 	rst CopyBytes
-	ld hl, wEnemyMonPP
-	ld de, wWildMonPP
+	ld hl, wEnemyMonCurPP
+	ld de, wWildMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	ld hl, wEnemyMonDVs
@@ -9140,7 +9198,7 @@ HandleNuzlockeFlags:
 	farcall CheckCaughtMon
 	ret nz
 
-	; Only flag landmarks for Nuzlocke runs after getting PokÃ© Balls
+	; Only flag landmarks for Nuzlocke runs after getting Poké Balls
 	eventflagcheck EVENT_LEARNED_TO_CATCH_POKEMON
 	ret z
 
@@ -9260,8 +9318,8 @@ ShowLinkBattleResult: ; 3f77c
 	ld a, BANK(sLinkBattleStats)
 	call GetSRAMBank
 
-	call AddLastBattleToLinkRecord
-	call ReadAndPrintLinkBattleRecord
+	farcall AddLastBattleToLinkRecord
+	farcall ReadAndPrintLinkBattleRecord
 
 	call CloseSRAM
 
@@ -9278,157 +9336,7 @@ ShowLinkBattleResult: ; 3f77c
 ; 3f80f
 
 
-DisplayLinkRecord: ; 3f836
-	ld a, BANK(sLinkBattleStats)
-	call GetSRAMBank
 
-	call ReadAndPrintLinkBattleRecord
-
-	call CloseSRAM
-	hlcoord 0, 0, wAttrMap
-	xor a
-	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
-	call ByteFill
-	call ApplyAttrAndTilemapInVBlank
-	ld b, CGB_DIPLOMA
-	call GetCGBLayout
-	call SetPalettes
-	ld c, 8
-	call DelayFrames
-	jp WaitPressAorB_BlinkCursor
-; 3f85f
-
-
-ReadAndPrintLinkBattleRecord: ; 3f85f
-	call ClearTileMap
-	call ClearSprites
-	call .PrintBattleRecord
-	hlcoord 0, 8
-	ld b, 5
-	ld de, sLinkBattleRecord + 2
-.loop
-	push bc
-	push hl
-	push de
-	ld a, [de]
-	and a
-	jr z, .PrintFormatString
-	ld a, [wSavedAtLeastOnce]
-	and a
-	jr z, .PrintFormatString
-	push hl
-	push hl
-	ld h, d
-	ld l, e
-	ld de, wd002
-	ld bc, PLAYER_NAME_LENGTH - 1
-	rst CopyBytes
-	ld a, "@"
-	ld [de], a
-	inc de
-	ld bc, 6
-	rst CopyBytes
-	ld de, wd002
-	pop hl
-	call PlaceString
-	pop hl
-	ld de, 26
-	add hl, de
-	push hl
-	ld de, wd002 + 11 ; win
-	lb bc, 2, 4
-	predef PrintNum
-	pop hl
-	ld de, 5
-	add hl, de
-	push hl
-	ld de, wd002 + 13 ; lose
-	lb bc, 2, 4
-	predef PrintNum
-	pop hl
-	ld de, 5
-	add hl, de
-	ld de, wd002 + 15 ; draw
-	lb bc, 2, 4
-	predef PrintNum
-	jr .next
-
-.PrintFormatString:
-	ld de, .Format
-	call PlaceString
-.next
-	pop hl
-	ld bc, 18
-	add hl, bc
-	ld d, h
-	ld e, l
-	pop hl
-	ld bc, 2 * SCREEN_WIDTH
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .loop
-	ret
-
-.PrintBattleRecord:
-	hlcoord 1, 0
-	ld de, .Record
-	call PlaceString
-
-	hlcoord 0, 6
-	ld de, .Result
-	call PlaceString
-
-	hlcoord 0, 2
-	ld de, .Total
-	call PlaceString
-
-	hlcoord 6, 4
-	ld de, sLinkBattleWins
-	call .PrintZerosIfNoSaveFileExists
-	ret c
-
-	lb bc, 2, 4
-	predef PrintNum
-
-	hlcoord 11, 4
-	ld de, sLinkBattleLosses
-	call .PrintZerosIfNoSaveFileExists
-
-	lb bc, 2, 4
-	predef PrintNum
-
-	hlcoord 16, 4
-	ld de, sLinkBattleDraws
-	call .PrintZerosIfNoSaveFileExists
-
-	lb bc, 2, 4
-	predef_jump PrintNum
-
-.PrintZerosIfNoSaveFileExists:
-	ld a, [wSavedAtLeastOnce]
-	and a
-	ret nz
-	ld de, .Scores
-	call PlaceString
-	scf
-	ret
-; 3f938
-
-.Scores:
-	db "   0    0    0@"
-; 3f947
-
-.Format: ; 3f947
-	db "  ---  <LNBRK>"
-	db "         -    -    -@"
-.Record: ; 3f964
-	db "<PLAYER>'s Record@"
-.Result: ; 3f96e
-	db "Result Win Lose Draw@"
-.Total: ; 3f983
-	db "Total  Win Lose Draw@"
-; 3f998
 
 
 BattleEnd_HandleRoamMons: ; 3f998
@@ -9536,237 +9444,6 @@ GetRoamMonSpecies: ; 3fa31
 	ld hl, wRoamMon3Species
 	ret
 ; 3fa42
-
-
-AddLastBattleToLinkRecord: ; 3fa42
-	ld hl, wOTPlayerID
-	ld de, wStringBuffer1
-	ld bc, 2
-	rst CopyBytes
-	ld hl, wOTPlayerName
-	ld bc, PLAYER_NAME_LENGTH - 1
-	rst CopyBytes
-	ld hl, sLinkBattleResults
-	call .StoreResult
-	ld hl, sLinkBattleRecord
-	ld d, 5
-.loop
-	push hl
-	inc hl
-	inc hl
-	ld a, [hl]
-	dec hl
-	dec hl
-	and a
-	jr z, .copy
-	push de
-	ld bc, 12
-	ld de, wStringBuffer1
-	call CompareLong
-	pop de
-	pop hl
-	jr c, .done
-	ld bc, 18
-	add hl, bc
-	dec d
-	jr nz, .loop
-	ld bc, -18
-	add hl, bc
-	push hl
-
-.copy
-	ld d, h
-	ld e, l
-	ld hl, wStringBuffer1
-	ld bc, 12
-	rst CopyBytes
-	ld b, 6
-	xor a
-.loop2
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .loop2
-	pop hl
-
-.done
-	call .StoreResult
-	jp .FindOpponentAndAppendRecord
-; 3faa0
-
-.StoreResult: ; 3faa0
-	ld a, [wBattleResult]
-	and $f
-	cp $1
-	ld bc, sLinkBattleWins + 1 - sLinkBattleResults
-	jr c, .okay
-	ld bc, sLinkBattleLosses + 1 - sLinkBattleResults
-	jr z, .okay
-	ld bc, sLinkBattleDraws + 1 - sLinkBattleResults
-.okay
-	add hl, bc
-	call .CheckOverflow
-	ret nc
-	inc [hl]
-	ret nz
-	dec hl
-	inc [hl]
-	ret
-; 3fabe
-
-.CheckOverflow: ; 3fabe
-	dec hl
-	ld a, [hl]
-	inc hl
-	cp 9999 / $100
-	ret c
-	ld a, [hl]
-	cp 9999 % $100
-	ret
-; 3fac8
-
-.FindOpponentAndAppendRecord: ; 3fac8
-	ld b, 5
-	ld hl, sLinkBattleRecord + 17
-	ld de, wd002
-.loop3
-	push bc
-	push de
-	push hl
-	call .LoadPointer
-	pop hl
-	ld a, e
-	pop de
-	ld [de], a
-	inc de
-	ld a, b
-	ld [de], a
-	inc de
-	ld a, c
-	ld [de], a
-	inc de
-	ld bc, 18
-	add hl, bc
-	pop bc
-	dec b
-	jr nz, .loop3
-	lb bc, $0, $1
-.loop4
-	ld a, b
-	add b
-	add b
-	ld e, a
-	ld d, $0
-	ld hl, wd002
-	add hl, de
-	push hl
-	ld a, c
-	add c
-	add c
-	ld e, a
-	ld d, $0
-	ld hl, wd002
-	add hl, de
-	ld d, h
-	ld e, l
-	pop hl
-	push bc
-	ld c, 3
-	call StringCmp
-	pop bc
-	jr z, .equal
-	jr nc, .done2
-
-.equal
-	inc c
-	ld a, c
-	cp $5
-	jr nz, .loop4
-	inc b
-	ld c, b
-	inc c
-	ld a, b
-	cp $4
-	jr nz, .loop4
-	ret
-
-.done2
-	push bc
-	ld a, b
-	ld bc, 18
-	ld hl, sLinkBattleRecord
-	rst AddNTimes
-	push hl
-	ld de, wd002
-	ld bc, 18
-	rst CopyBytes
-	pop hl
-	pop bc
-	push hl
-	ld a, c
-	ld bc, 18
-	ld hl, sLinkBattleRecord
-	rst AddNTimes
-	pop de
-	push hl
-	ld bc, 18
-	rst CopyBytes
-	ld hl, wd002
-	ld bc, 18
-	pop de
-	rst CopyBytes
-	ret
-; 3fb54
-
-.LoadPointer: ; 3fb54
-	ld e, $0
-	ld a, [hld]
-	ld c, a
-	ld a, [hld]
-	ld b, a
-	ld a, [hld]
-	add c
-	ld c, a
-	ld a, [hld]
-	adc b
-	ld b, a
-	jr nc, .okay2
-	inc e
-
-.okay2
-	ld a, [hld]
-	add c
-	ld c, a
-	ld a, [hl]
-	adc b
-	ld b, a
-	ret nc
-	inc e
-	ret
-; 3fb6c
-
-CompareLong:: ; 31e4
-; Compare bc bytes at de and hl.
-; Return carry if they all match.
-
-	ld a, [de]
-	cp [hl]
-	jr nz, .Diff
-
-	inc de
-	inc hl
-	dec bc
-
-	ld a, b
-	or c
-	jr nz, CompareLong
-
-	scf
-	ret
-
-.Diff:
-	and a
-	ret
 
 InitBattleDisplay: ; 3fb6c
 	call .InitBackPic
@@ -10034,80 +9711,3 @@ CheckPluralTrainer:
 	ld a, 1
 	and a
 	ret
-
-AutomaticRainWhenOvercast:
-	call GetOvercastIndex
-	and a
-	ret z
-	ld a, WEATHER_RAIN
-	ld [wWeather], a
-	ld a, 255
-	ld [wWeatherCount], a
-	ld de, RAIN_DANCE
-	call Call_PlayBattleAnim
-	ld hl, DownpourText
-	call StdBattleTextBox
-	jp EmptyBattleTextBox
-
-BoostGiovannisArmoredMewtwo:
-	ld a, [wOtherTrainerClass]
-	cp GIOVANNI
-	ret nz
-	ld a, [wOtherTrainerID]
-	cp GIOVANNI1
-	ret nz
-	ld a, 1
-	ldh [hBattleTurn], a
-	ld de, ANIM_SHARPEN
-	call Call_PlayBattleAnim
-	farjp BattleCommand_allstatsup
-
-CheckUniqueWildMove: ; this will have to be updated to account for form as well as moves when that happens
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetWorldMapLocation
-	ld c, a
-	ld hl, UniqueWildMoves
-.loop
-	ld a, [hli] ; landmark
-	cp -1
-	ret z
-	cp c
-	jr nz, .inc2andloop
-	ld a, [hli] ; species
-	ld b, a
-	ld a, [wCurPartySpecies]
-	cp b
-	jr nz, .inc1andloop
-	ld a, [hli] ; move
-	ld b, a
-	cp FLY
-	jr nz, .ChanceToTeach
-	ld a, [wPlayerState]
-	cp PLAYER_SURF
-	jr z, .SurfingPikachu
-	cp PLAYER_SURF_PIKA
-	jr nz, .ChanceToTeach
-.SurfingPikachu
-	ld a, SURF
-	ld b, a
-	jr .TeachMove
-.ChanceToTeach
-	call Random
-	cp 50 percent + 1
-	ret nc
-.TeachMove
-	ld hl, wEnemyMonMoves + 1 ; second move
-	ld a, b
-	ld [hl], a
-	ret
-
-.inc2andloop
-	inc hl
-.inc1andloop
-	inc hl
-	jr .loop
-
-INCLUDE "data/pokemon/unique_wild_moves.asm"

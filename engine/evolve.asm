@@ -150,7 +150,7 @@ EvolveAfterBattle_MasterLoop:
 
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	cp TR_ANYTIME
 	jp z, .proceed
 	cp TR_MORNDAY
@@ -171,7 +171,7 @@ EvolveAfterBattle_MasterLoop:
 .item
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	ld b, a
 	ld a, [wCurItem]
 	cp b
@@ -188,7 +188,7 @@ EvolveAfterBattle_MasterLoop:
 .holding
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	ld b, a
 	ld a, [wTempMonItem]
 	cp b
@@ -208,7 +208,7 @@ EvolveAfterBattle_MasterLoop:
 	ld b, a
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	cp b
 	jp nz, .dont_evolve_3
 	jp .proceed
@@ -216,7 +216,7 @@ EvolveAfterBattle_MasterLoop:
 .move
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	push hl
 	push bc
 	ld b, a
@@ -238,7 +238,7 @@ endr
 .evs
 	ld a, d ; bank
 	call GetFarByte
-	inc hl 
+	inc hl
 	push hl
 	push bc
 	ld hl, wTempMonSpecies
@@ -582,7 +582,7 @@ LearnLevelMoves: ; 42487
 .find_move
 	ld a, d ;bank
 	call GetFarByte
-	inc hl
+	inc hl ; go to level byte
 	and a
 	jr z, .done
 
@@ -590,41 +590,58 @@ LearnLevelMoves: ; 42487
 	ld a, [wCurPartyLevel]
 	cp b
 	jr z, .found_move
-	inc hl
+	inc hl ; move byte 1
+	inc hl ; move byte 2
 	jr .find_move
 .found_move
 	ld a, d ;bank
 	call GetFarByte
 	inc hl
-	ld c, d ; bank
+	ld c, a ;move low byte
+	ld a, d ;bank
+	call GetFarByte
+	inc hl
+	ld b, a ;move high byte
 
 	push hl
 	push bc
-	ld d, a
 	ld hl, wPartyMon1Moves
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 	pop bc
 
-	ld b, NUM_MOVES
+	ld e, NUM_MOVES
 .check_move
 	ld a, [hli]
-	cp d
-	jr z, .has_move
-	dec b
+	cp c
+	jr z, .low_byte_match
+.high_byte_didnt_match
+	dec e
 	jr nz, .check_move
 	jr .learn
+.low_byte_match
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	pop hl
+	and MOVE_HIGH_MASK
+	cp b
+	jr nz, .high_byte_didnt_match
 .has_move
 
 	pop hl
-	ld d, c; bank
 	jr .find_move
 
 .learn
-	ld a, d
+	ld a, c
 	ld [wPutativeTMHMMove], a
-	ld [wd265], a
+	ld [wNamedObjectIndexBuffer], a
+	ld a, b
+	ld [wPutativeTMHMMove+1], a
+	ld [wNamedObjectIndexBuffer+1], a
 	call GetMoveName
 	call CopyName1
 	predef LearnMove
@@ -641,143 +658,186 @@ LearnLevelMoves: ; 42487
 FillMoves: ; 424e1
 ; Fill in moves at de for wCurPartySpecies at wCurPartyLevel
 
-	push hl
-	push de
-	push bc
-	push de ; 1
+	push hl ; 1
+	push de ; 2 ; Address to moves
+	push bc ; 3
+	push de ; 4 ; Address to moves
 	call GetRelevantEvosAttacksPointers
 	ld b, 0
 	dec a
-	add a
-	rl b
 	ld c, a
+	add hl, bc
 	add hl, bc
 	ld c, d ;bank
 	ld a, d ;bank
-	pop de ; 0
+	pop de ; 3 Address to moves
 	call GetFarHalfword
 .GoToAttacks:
 	ld a, c ;bank
 	call GetFarByte
-	inc hl
+	inc hl ; move past evos
 	and a
 	jr nz, .GoToAttacks
 	jr .GetLevel
 
 .NextMove:
-	pop de ; 0
-	ld c, b
+	pop de ; 3 ; Address to moves
 .GetMove:
-	inc hl
-.GetLevel:
+	inc hl ; inc from move byte one to move byte two
+	inc hl ; inc from move byte two to level
+.GetLevel
 	ld a, c ;bank
 	call GetFarByte
-	inc hl
+	inc hl ; inc from level to move byte 1
 	and a
 	jp z, .done
 	ld b, a
 	ld a, [wCurPartyLevel]
 	cp b
-	jp c, .done
+	jp c, .done ; less than the level we don't need to bother
 	ld a, [wEggMonInheritMoves]
 	and a
-	jr z, .CheckMove
+	jr z, .CheckMove ; eggmons can inherit level moves above their level
 	ld a, [wd002]
 	cp b
-	jr nc, .GetMove
+	jr nc, .GetMove ; not sure what this is
 
 .CheckMove:
-	push de ; 1
-	ld b, c ; bank
-	ld c, NUM_MOVES
+	push de ; 4 ; Address to moves
+	ld b, NUM_MOVES
 .CheckRepeat:
-	ld a, b ;bank
-	call GetFarByte
-	push bc
+	ld a, c ;bank
+	call GetFarByte ; get move byte 1
+	push bc ; 5 ; bank is in c loop iterator in b
 	ld b, a
-	ld a, [de]
-	inc de
+	ld a, [de] ; get pokemons first move byte for slot
+	and a ; check if slot was 0, if so no need to check for any other repeats
+	jr z, .MaybeEmptySlot
+.NotEmptySlot
 	cp b
-	pop bc
-	jr z, .NextMove
-	dec c
-	jr nz, .CheckRepeat
-	pop de ; 0
-	push de ; 1
-	ld c, NUM_MOVES
-.CheckSlot:
-	ld a, [de]
-	and a
-	jr z, .LearnMove
+	jr nz, .NextRepeat ; first byte doesn't match, move slot isn't empty and move isn't repeated, move on to next slot
+	inc hl ; move byte 2
+	push de ; 6 ; move slot address
+	inc de ; move to second byte of move slot
 	inc de
-	dec c
-	jr nz, .CheckSlot
-	pop de ; 0
-	push de ; 1
-	push hl ; 2
+	inc de
+	inc de
+	ld a, c ;bank
+	call GetFarByte ; get move byte 2
+	ld b, a
+	ld a, [de] ; get pokemons second move byte for slot
+	pop de ; 5 ; move slot address
+	cp b
+	inc de ; next move slot
+	pop bc ; 4 ; bank is in c loop iterator in b
+	dec hl ; move byte 1
+	jr z, .NextMove ; both bytes matched, this move does not need to be learned
+	dec b
+	jr nz, .CheckRepeat
+	jr .DoShiftMoves
+
+.MaybeEmptySlot
+	push de
+	inc de ; move to second byte of move slot
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	pop de
+	and a
+	jr z, .EmptySlot
+	jr .NotEmptySlot
+
+.NextRepeat
+	inc de ; next move slot
+	pop bc ; 4 ; bank is in c loop iterator in b
+	dec b
+	jr nz, .CheckRepeat
+
+.DoShiftMoves
+	pop de ; 3 ; Address to moves
+	push de ; 4 ; Address to moves
+
+	push hl ; 5 ; move address byte 1
+	push bc ; 6 ; bank in c
 	ld h, d
 	ld l, e
 	call ShiftMoves
-	ld a, [wEggMonInheritMoves]
-	and a
-	jr z, .ShiftedMove
-	push de ; 3
-	push bc ; 4
-	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES - 1)
+
+	push de ; 7 ;last move slot
+	inc de
+	inc hl
+	call ShiftMoves
+	ld bc, MON_CUR_PP - (MON_MOVES_HIGH +3)
 	add hl, bc
 	ld d, h
 	ld e, l
 	call ShiftMoves
-	pop bc ; 3
-	pop de ; 2
+	pop de ; 6 last move slot
 
-.ShiftedMove:
-	pop hl ; 1
-
-.LearnMove:
-	ld a, b ;bank
+	pop bc ; 5 ; bank in c
+	pop hl ; 4 ; move address byte 1
+	ld a, c
 	call GetFarByte
+	ld b, a
+	push bc ; 5 ; bank is in c
+;fallthrough
+.EmptySlot
+	ld a, b ; byte 1 of move was in b
+	pop bc ; 4 ; bank is in c
+	ld [de], a
+	inc de ; inc to move slot byte 2
+	inc de
+	inc de
+	inc de
+	ld a, c ;bank
+	inc hl ; move byte 2
+	call GetFarByte ; get move byte 2
 	ld [de], a
 	ld a, [wEggMonInheritMoves]
 	and a
-	jr z, .NextMove
-	push hl ; 2
-	push bc ; 3
-	ld a, b ;bank
-	call GetFarByte
-	ld hl, MON_PP - MON_MOVES
-	add hl, de
-	push hl ; 4
-	dec a
+	dec hl ; move byte 1
+	jp z, .NextMove
+	push hl ; 5 ; move byte 2
+	push bc ; 6 ; bank in c
+	ld a, c ;bank
+	ld c, b ; put low byte of move in c
+	inc hl ; move byte 2
+	call GetFarByte ; get move byte 2, again
+	ld b, a ; high byte of move in b
+
+	ld hl, MON_CUR_PP - MON_MOVES_HIGH
+	add hl, de ; de is currently the high byte of move slot
+
+	push hl ; 7 ; should be the address to PP for move slot
+	dec bc ; the move is in bc here
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
-	pop hl ; 3
+	pop hl ; 6 ; should be the address to PP for move slot
 	ld [hl], a
-	pop bc ; 2
-	pop hl ; 1
+	pop bc ; 5 ; bank in c
+	pop hl ; 4 ; move byte 1
 	jp .NextMove
 
 .done
-	pop bc
-	pop de
-	pop hl
+	pop bc ; 2
+	pop de ; 1
+	pop hl ; 0
 	ret
 ; 4256e
 
 ShiftMoves: ; 4256e
-	ld c, NUM_MOVES - 1
+	ld b, NUM_MOVES - 1
 .loop
 	inc de
 	ld a, [de]
 	ld [hli], a
-	dec c
+	dec b
 	jr nz, .loop
 	ret
-; 42577
-
 
 EvoFlagAction: ; 42577
 	push de
@@ -868,6 +928,7 @@ GetPreEvolution: ; 42581
 GetRelevantEvosAttacksPointers:
 ; return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
+	ld a, [wCurGroup]
 	ld hl, RegionalEvosAttacksPointerTable
 	call dbwArray
 

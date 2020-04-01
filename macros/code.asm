@@ -117,7 +117,57 @@ if DEF(DEBUG)
 endc
 ENDM
 
+cp16bcZ: macro
+	ld a, c
+	cp LOW(\1)
+	jr nz, .not_\@
+	ld a, b
+	cp HIGH(\1)
+	jr z, \2
+.not_\@
+endm
+
+cp16bcNZ: macro
+	ld a, c
+	cp LOW(\1)
+	jr nz, \2
+	ld a, b
+	cp HIGH(\1)
+	jr nz, \2
+endm
+
+cp16wramZ: macro
+	ld a, [\2]
+	cp LOW(\1)
+	jr nz, .not_\@
+	ld a, [\2 +1]
+	cp HIGH(\1)
+	jr z, \3
+.not_\@
+endm
+
+ret16bcZ: macro
+	ld a, c
+	cp LOW(\1)
+	jr nz, .not_\@
+	ld a, b
+	cp HIGH(\1)
+	ret z
+.not_\@
+endm
+
+ret16bcNZ: macro
+	ld a, c
+	cp LOW(\1)
+	ret nz
+	ld a, b
+	cp HIGH(\1)
+	ret nz
+endm
+
 VWTextStart: macro
+	ld a, 0
+	ld [rVBK], a
 IF _NARG == 2
 	ld a, (\1 + \2)
 	ld [wVariableWidthTextTile], a
@@ -135,6 +185,26 @@ else
 endc
 endm
 
+VWTextStart2: macro
+	ld a, 1
+	ld [rVBK], a
+IF _NARG == 2
+	ld a, (\1 + \2)
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles3 tile (\1 + \2))
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles3 tile (\1 + \2))
+	ld [wVariableWidthTextVRAM+1], a
+else
+	ld a, (\1)
+	ld [wVariableWidthTextTile], a
+	ld a, LOW(VTiles3 tile (\1))
+	ld [wVariableWidthTextVRAM], a
+	ld a, HIGH(VTiles3 tile (\1))
+	ld [wVariableWidthTextVRAM+1], a
+endc
+endm
+
 mon_cry: MACRO
 IF _NARG == 3
 	db \1 ;index
@@ -145,4 +215,3 @@ ELSE
 	db 0 ;padding
 ENDC
 ENDM
-

@@ -75,7 +75,7 @@ endc
 	add_tm THIEF        ; $2d
 	add_tm STEEL_WING   ; $2e
 	add_tm ROCK_SLIDE   ; $2f
-	add_tm DAZZLINGLEAM ; $30
+	add_tm DAZZLING_GLEAM ; $30
 	add_tm LEECH_LIFE   ; $31
 	add_tm ROOST        ; $32
 	add_tm FOCUS_BLAST  ; $33
@@ -86,7 +86,7 @@ endc
 	add_tm DARK_PULSE   ; $38
 	add_tm ENDURE       ; $39
 	add_tm DRAGON_PULSE ; $3a
-	add_tm DRAIN_PUNCH  ; $3b
+	add_tm DRAINING_PUNCH  ; $3b
 	add_tm WILL_O_WISP  ; $3c
 	add_tm ACROBATICS   ; $3d
 	add_tm WATER_PULSE  ; $3e

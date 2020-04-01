@@ -1137,7 +1137,7 @@ DisplayDexEntry: ; 4424d
 	VWTextStart $ca
 	call PlaceString
 .skip_weight
-; Page 
+; Page
 	lb bc, 5, SCREEN_WIDTH - 2
 	hlcoord 2, 11
 	call ClearBox
@@ -1181,7 +1181,7 @@ DisplayDexEntry: ; 4424d
 .statpage
 	push bc
 	VWTextStart $b6
-	
+
 	lb bc, 9, 12
 	hlcoord 8, 1
 	call ClearBox
@@ -1237,7 +1237,7 @@ DisplayDexEntry: ; 4424d
 	call PlaceString
 	hlcoord 9, 9
 	call .EvYieldCheck
-	hlcoord 15, 9	
+	hlcoord 15, 9
 	call .EvYieldCheck
 	xor a
 	push af
@@ -1276,7 +1276,7 @@ DisplayDexEntry: ; 4424d
 	push af
 	cp 2
 	hlcoord 2, 11
-	jr z, .hiddenability	
+	jr z, .hiddenability
 	ld de, .Ability
 	call PlaceString
 	hlcoord 10, 11
@@ -3241,7 +3241,7 @@ PrintStatDifferences: ; 50b7b
 	push de
 	push bc
 	call .PrintStatNames
-	ld bc, 9
+	ld bc, 5
 	add hl, bc
 	pop bc
 	pop de
@@ -3251,7 +3251,7 @@ PrintStatDifferences: ; 50b7b
 .PrintStatNames:
 	ld a, [wStringBuffer3 + 14]
 	push af
-	hlcoord 6, 4
+	hlcoord 10, 5
 .coord_loop
 	dec hl
 	dec a
@@ -3259,13 +3259,18 @@ PrintStatDifferences: ; 50b7b
 	pop af
 	push af
 	ld b, 6
-	ld c, 12
+	ld c, 8
 	add c
 	ld c, a
 	call TextBox
+	hlcoord 8, 5, wAttrMap
+	ld b, 6
+	ld c, 8
+	xor a
+	call FillBoxWithByte
 	pop af
 	push af
-	hlcoord 7, 5
+	hlcoord 11, 6
 .coord_loop2
 	dec hl
 	dec a
@@ -3275,7 +3280,7 @@ PrintStatDifferences: ; 50b7b
 	ld de, AllStatNames
 	call PlaceString
 	pop hl
-	ret
+	farjp ApplyAttrMap
 
 .PrintStats:
 	; Some screen movement is done because internal stat order is different
@@ -3473,7 +3478,7 @@ GetGender: ; 50bdd
 	farcall GetRelevantBaseData
 	dec a
 	ld bc, BASEMON_GENDER
-	add hl, bc 
+	add hl, bc
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst AddNTimes
 	ld a, d ;bank
@@ -3562,10 +3567,9 @@ ListMovePP: ; 50c50
 	pop de
 	pop hl
 	push hl
-	ld bc, wTempMonPP - (wTempMonMoves + 1)
+	ld bc, wTempMonCurPP - (wTempMonMoves + 1)
 	add hl, bc
 	ld a, [hl]
-	and $3f
 	ld [wStringBuffer1 + 4], a
 	ld h, d
 	ld l, e
@@ -3708,11 +3712,18 @@ ListMoves: ; 50d6f
 	ld a, [de]
 	inc de
 	and a
-	jr z, .no_more_moves
+	jr z, .check_highbyte
+.notall0
 	push de
 	push hl
 	push hl
-	ld [wCurSpecies], a
+	ld [wCurMove], a
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and MOVE_HIGH_MASK
+	ld [wCurMoveHigh], a
 	ld a, MOVE_NAME
 	ld [wNamedObjectTypeBuffer], a
 	call GetName
@@ -3736,6 +3747,18 @@ ListMoves: ; 50d6f
 	cp NUM_MOVES
 	ret z
 	jr .moves_loop
+
+.check_highbyte
+	push de
+	inc de
+	inc de
+	inc de
+	ld a, [de]
+	and a
+	pop de
+	jr z, .no_more_moves
+	xor a
+	jr .notall0
 
 .no_more_moves
 	ld a, b
@@ -4101,8 +4124,8 @@ InsertPokemonIntoBox: ; 51322
 	ld de, wTempMonMoves
 	ld bc, NUM_MOVES
 	rst CopyBytes
-	ld hl, wBufferMonPP
-	ld de, wTempMonPP
+	ld hl, wBufferMonCurPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	ld a, [wCurPartyMon]
@@ -4278,7 +4301,7 @@ INCLUDE "engine/player_gfx.asm"
 INCLUDE "engine/events/kurt.asm"
 INCLUDE "engine/events/unown.asm"
 INCLUDE "engine/events/buena.asm"
-INCLUDE "engine/events/movesets.asm"
+;INCLUDE "engine/events/movesets.asm"
 INCLUDE "engine/events/battle_tower/battle_tower.asm"
 INCLUDE "engine/events/battle_tower/trainer_text.asm"
 INCLUDE "engine/events/item_maniacs.asm"
@@ -4325,7 +4348,6 @@ INCLUDE "engine/phone_scripts.asm"
 SECTION "Code 21", ROMX
 
 INCLUDE "engine/battle_anims/bg_effects.asm"
-INCLUDE "data/moves/animations.asm"
 
 
 SECTION "Code 22", ROMX
@@ -4407,6 +4429,9 @@ SECTION "Effect Commands", ROMX
 
 INCLUDE "engine/battle/effect_commands.asm"
 
+SECTION "Effect Commands 2", ROMX
+
+INCLUDE "engine/battle/effect_commands_2.asm"
 
 SECTION "Battle Animations", ROMX
 
@@ -4753,8 +4778,10 @@ PrintTMHMDescription:
 	push de
 	predef GetTMHMMove
 	pop hl
-	ld a, [wd265]
-	ld [wCurSpecies], a
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurMove], a
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wCurMove+1], a
 	predef PrintMoveDesc
 	ret
 
@@ -4793,6 +4820,71 @@ INCLUDE "data/wild/treemons_asleep.asm"
 
 SECTION "Code 26", ROMX
 
+AutomaticRainWhenOvercast::
+	call GetOvercastIndex
+	and a
+	ret z
+	ld a, WEATHER_RAIN
+	ld [wWeather], a
+	ld a, 255
+	ld [wWeatherCount], a
+	ld de, RAIN_DANCE
+	farcall Call_PlayBattleAnim
+	ld hl, DownpourText
+	call StdBattleTextBox
+	jp EmptyBattleTextBox
+
+CheckUniqueWildMove:: ; this will have to be updated to account for form as well as moves when that happens
+	ld a, [wMapGroup]
+	ld b, a
+	ld a, [wMapNumber]
+	ld c, a
+	call GetWorldMapLocation
+	ld c, a
+	ld hl, UniqueWildMoves
+.loop
+	ld a, [hli] ; landmark
+	cp -1
+	ret z
+	cp c
+	jr nz, .inc2andloop
+	ld a, [hli] ; species
+	ld b, a
+	ld a, [wCurPartySpecies]
+	cp b
+	jr nz, .inc1andloop
+	ld a, [hli] ; move
+	ld b, a
+	cp FLY
+	jr nz, .ChanceToTeach
+	ld a, [wPlayerState]
+	cp PLAYER_SURF
+	jr z, .SurfingPikachu
+	cp PLAYER_SURF_PIKA
+	jr nz, .ChanceToTeach
+.SurfingPikachu
+	ld a, SURF
+	ld b, a
+	jr .TeachMove
+.ChanceToTeach
+	call Random
+	cp 50 percent + 1
+	ret nc
+.TeachMove
+	ld hl, wEnemyMonMoves + 1 ; second move
+	ld a, b
+	ld [hl], a
+	ret
+
+.inc2andloop
+	inc hl
+.inc1andloop
+	inc hl
+	jr .loop
+
+INCLUDE "data/pokemon/unique_wild_moves.asm"
+
+
 SetSeenAndCaughtMon:: ; 3380
 	ld c, a
 	push af ;1
@@ -4802,7 +4894,7 @@ SetSeenAndCaughtMon:: ; 3380
 	push af ; 2
 	ld a, BANK(wPokedexCaughtSeen)
 	ldh [rSVBK], a
-	
+
 	ld b, SET_FLAG
 	call PokedexFlagAction
 
@@ -4852,7 +4944,7 @@ PokedexFlagAction:: ; 33a1
 GetRelevantSeenPointers::
 	ld hl, RegionalSeenTable
 	jr GetRelevantSeenCaughtPointers
-	
+
 GetRelevantCaughtPointers::
 	ld hl, RegionalCaughtTable
 
@@ -4861,7 +4953,7 @@ GetRelevantSeenCaughtPointers::
 	ld a, [wCurGroup]
 	ld de, 3
 	call IsInArray
-	inc hl 
+	inc hl
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -4869,84 +4961,6 @@ GetRelevantSeenCaughtPointers::
 	ret
 
 INCLUDE "data/pokemon/regional_seen_caught_tables.asm"
-
-FacingPlayerDistance_bc:: ; 36a5
-	push de
-	call FacingPlayerDistance
-	ld b, d
-	ld c, e
-	pop de
-	ret
-; 36ad
-
-FacingPlayerDistance:: ; 36ad
-; Return carry if the sprite at bc is facing the player,
-; and its distance in d.
-
-	ld hl, OBJECT_NEXT_MAP_X ; x
-	add hl, bc
-	ld d, [hl]
-
-	ld hl, OBJECT_NEXT_MAP_Y ; y
-	add hl, bc
-	ld e, [hl]
-
-	ld a, [wPlayerStandingMapX]
-	cp d
-	jr z, .CheckY
-
-	ld a, [wPlayerStandingMapY]
-	cp e
-	jr z, .CheckX
-
-	and a
-	ret
-
-.CheckY:
-	ld a, [wPlayerStandingMapY]
-	sub e
-	jr z, .NotFacing
-	jr nc, .Above
-
-; Below
-	cpl
-	inc a
-	ld d, a
-	ld e, OW_UP
-	jr .CheckFacing
-
-.Above:
-	ld d, a
-	ld e, OW_DOWN
-	jr .CheckFacing
-
-.CheckX:
-	ld a, [wPlayerStandingMapX]
-	sub d
-	jr z, .NotFacing
-	jr nc, .Left
-
-; Right
-	cpl
-	inc a
-	ld d, a
-	ld e, OW_LEFT
-	jr .CheckFacing
-
-.Left:
-	ld d, a
-	ld e, OW_RIGHT
-
-.CheckFacing:
-	call GetSpriteDirection
-	cp e
-	jr nz, .NotFacing
-	scf
-	ret
-
-.NotFacing:
-	and a
-	ret
 
 GetRelevantBaseData::
 ;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
@@ -5370,10 +5384,396 @@ PrintLetterDelay:: ; 313d
 	ret
 ; 318c
 
+DisplayLinkRecord: ; 3f836
+	ld a, BANK(sLinkBattleStats)
+	call GetSRAMBank
+
+	call ReadAndPrintLinkBattleRecord
+
+	call CloseSRAM
+	hlcoord 0, 0, wAttrMap
+	xor a
+	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
+	call ByteFill
+	call ApplyAttrAndTilemapInVBlank
+	ld b, CGB_DIPLOMA
+	call GetCGBLayout
+	call SetPalettes
+	ld c, 8
+	call DelayFrames
+	jp WaitPressAorB_BlinkCursor
+; 3f85f
+
+
+ReadAndPrintLinkBattleRecord: ; 3f85f
+	call ClearTileMap
+	call ClearSprites
+	call .PrintBattleRecord
+	hlcoord 0, 8
+	ld b, 5
+	ld de, sLinkBattleRecord + 2
+.loop
+	push bc
+	push hl
+	push de
+	ld a, [de]
+	and a
+	jr z, .PrintFormatString
+	ld a, [wSavedAtLeastOnce]
+	and a
+	jr z, .PrintFormatString
+	push hl
+	push hl
+	ld h, d
+	ld l, e
+	ld de, wd002
+	ld bc, PLAYER_NAME_LENGTH - 1
+	rst CopyBytes
+	ld a, "@"
+	ld [de], a
+	inc de
+	ld bc, 6
+	rst CopyBytes
+	ld de, wd002
+	pop hl
+	call PlaceString
+	pop hl
+	ld de, 26
+	add hl, de
+	push hl
+	ld de, wd002 + 11 ; win
+	lb bc, 2, 4
+	predef PrintNum
+	pop hl
+	ld de, 5
+	add hl, de
+	push hl
+	ld de, wd002 + 13 ; lose
+	lb bc, 2, 4
+	predef PrintNum
+	pop hl
+	ld de, 5
+	add hl, de
+	ld de, wd002 + 15 ; draw
+	lb bc, 2, 4
+	predef PrintNum
+	jr .next
+
+.PrintFormatString:
+	ld de, .Format
+	call PlaceString
+.next
+	pop hl
+	ld bc, 18
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld bc, 2 * SCREEN_WIDTH
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .loop
+	ret
+
+.PrintBattleRecord:
+	hlcoord 1, 0
+	ld de, .Record
+	call PlaceString
+
+	hlcoord 0, 6
+	ld de, .Result
+	call PlaceString
+
+	hlcoord 0, 2
+	ld de, .Total
+	call PlaceString
+
+	hlcoord 6, 4
+	ld de, sLinkBattleWins
+	call .PrintZerosIfNoSaveFileExists
+	ret c
+
+	lb bc, 2, 4
+	predef PrintNum
+
+	hlcoord 11, 4
+	ld de, sLinkBattleLosses
+	call .PrintZerosIfNoSaveFileExists
+
+	lb bc, 2, 4
+	predef PrintNum
+
+	hlcoord 16, 4
+	ld de, sLinkBattleDraws
+	call .PrintZerosIfNoSaveFileExists
+
+	lb bc, 2, 4
+	predef_jump PrintNum
+
+.PrintZerosIfNoSaveFileExists:
+	ld a, [wSavedAtLeastOnce]
+	and a
+	ret nz
+	ld de, .Scores
+	call PlaceString
+	scf
+	ret
+; 3f938
+
+.Scores:
+	db "   0    0    0@"
+; 3f947
+
+.Format: ; 3f947
+	db "  ---  <LNBRK>"
+	db "         -    -    -@"
+.Record: ; 3f964
+	db "<PLAYER>'s Record@"
+.Result: ; 3f96e
+	db "Result Win Lose Draw@"
+.Total: ; 3f983
+	db "Total  Win Lose Draw@"
+; 3f998
+
+AddLastBattleToLinkRecord: ; 3fa42
+	ld hl, wOTPlayerID
+	ld de, wStringBuffer1
+	ld bc, 2
+	rst CopyBytes
+	ld hl, wOTPlayerName
+	ld bc, PLAYER_NAME_LENGTH - 1
+	rst CopyBytes
+	ld hl, sLinkBattleResults
+	call .StoreResult
+	ld hl, sLinkBattleRecord
+	ld d, 5
+.loop
+	push hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	dec hl
+	dec hl
+	and a
+	jr z, .copy
+	push de
+	ld bc, 12
+	ld de, wStringBuffer1
+	call CompareLong
+	pop de
+	pop hl
+	jr c, .done
+	ld bc, 18
+	add hl, bc
+	dec d
+	jr nz, .loop
+	ld bc, -18
+	add hl, bc
+	push hl
+
+.copy
+	ld d, h
+	ld e, l
+	ld hl, wStringBuffer1
+	ld bc, 12
+	rst CopyBytes
+	ld b, 6
+	xor a
+.loop2
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .loop2
+	pop hl
+
+.done
+	call .StoreResult
+	jp .FindOpponentAndAppendRecord
+; 3faa0
+
+.StoreResult: ; 3faa0
+	ld a, [wBattleResult]
+	and $f
+	cp $1
+	ld bc, sLinkBattleWins + 1 - sLinkBattleResults
+	jr c, .okay
+	ld bc, sLinkBattleLosses + 1 - sLinkBattleResults
+	jr z, .okay
+	ld bc, sLinkBattleDraws + 1 - sLinkBattleResults
+.okay
+	add hl, bc
+	call .CheckOverflow
+	ret nc
+	inc [hl]
+	ret nz
+	dec hl
+	inc [hl]
+	ret
+; 3fabe
+
+.CheckOverflow: ; 3fabe
+	dec hl
+	ld a, [hl]
+	inc hl
+	cp 9999 / $100
+	ret c
+	ld a, [hl]
+	cp 9999 % $100
+	ret
+; 3fac8
+
+.FindOpponentAndAppendRecord: ; 3fac8
+	ld b, 5
+	ld hl, sLinkBattleRecord + 17
+	ld de, wd002
+.loop3
+	push bc
+	push de
+	push hl
+	call .LoadPointer
+	pop hl
+	ld a, e
+	pop de
+	ld [de], a
+	inc de
+	ld a, b
+	ld [de], a
+	inc de
+	ld a, c
+	ld [de], a
+	inc de
+	ld bc, 18
+	add hl, bc
+	pop bc
+	dec b
+	jr nz, .loop3
+	lb bc, $0, $1
+.loop4
+	ld a, b
+	add b
+	add b
+	ld e, a
+	ld d, $0
+	ld hl, wd002
+	add hl, de
+	push hl
+	ld a, c
+	add c
+	add c
+	ld e, a
+	ld d, $0
+	ld hl, wd002
+	add hl, de
+	ld d, h
+	ld e, l
+	pop hl
+	push bc
+	ld c, 3
+	call StringCmp
+	pop bc
+	jr z, .equal
+	jr nc, .done2
+
+.equal
+	inc c
+	ld a, c
+	cp $5
+	jr nz, .loop4
+	inc b
+	ld c, b
+	inc c
+	ld a, b
+	cp $4
+	jr nz, .loop4
+	ret
+
+.done2
+	push bc
+	ld a, b
+	ld bc, 18
+	ld hl, sLinkBattleRecord
+	rst AddNTimes
+	push hl
+	ld de, wd002
+	ld bc, 18
+	rst CopyBytes
+	pop hl
+	pop bc
+	push hl
+	ld a, c
+	ld bc, 18
+	ld hl, sLinkBattleRecord
+	rst AddNTimes
+	pop de
+	push hl
+	ld bc, 18
+	rst CopyBytes
+	ld hl, wd002
+	ld bc, 18
+	pop de
+	rst CopyBytes
+	ret
+; 3fb54
+
+.LoadPointer: ; 3fb54
+	ld e, $0
+	ld a, [hld]
+	ld c, a
+	ld a, [hld]
+	ld b, a
+	ld a, [hld]
+	add c
+	ld c, a
+	ld a, [hld]
+	adc b
+	ld b, a
+	jr nc, .okay2
+	inc e
+
+.okay2
+	ld a, [hld]
+	add c
+	ld c, a
+	ld a, [hl]
+	adc b
+	ld b, a
+	ret nc
+	inc e
+	ret
+; 3fb6c
+
+CompareLong:: ; 31e4
+; Compare bc bytes at de and hl.
+; Return carry if they all match.
+
+	ld a, [de]
+	cp [hl]
+	jr nz, .Diff
+
+	inc de
+	inc hl
+	dec bc
+
+	ld a, b
+	or c
+	jr nz, CompareLong
+
+	scf
+	ret
+
+.Diff:
+	and a
+	ret
 
 if DEF(DEBUG)
 INCLUDE "engine/mon_editor.asm"
 endc
+
+SECTION "Move Data", ROMX
+
+INCLUDE "data/battle/move_properties.asm"
+
 
 SECTION "Kanto Base Data", ROMX
 
@@ -5468,3 +5868,7 @@ INCLUDE "data/pokemon/kalos_palettes.asm"
 
 SECTION "Other Base Data", ROMX
 INCLUDE "data/pokemon/other_base_stats.asm"
+
+SECTION "Move Animations 1", ROMX
+
+INCLUDE "data/moves/animations.asm"

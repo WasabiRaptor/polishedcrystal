@@ -9,7 +9,6 @@ ROMX $02
 	"Code 2"
 	"Trainer Pic Pointers"
 	"Portrait Pic Pointers"
-	"Pokemon Pics 49"
 
 ROMX $03
 	org $4000
@@ -45,7 +44,6 @@ ROMX $08
 ROMX $09
 	org $4000
 	"Code 9"
-	"Trainer Pics 9"
 
 ROMX $0A
 	org $4000
@@ -66,7 +64,6 @@ ROMX $0D
 	org $4000
 	"Code 13"
 	"Unova Cries"
-	"Pokemon Pics 37"
 
 ROMX $0E
 	org $4000
@@ -168,13 +165,12 @@ ROMX $20
 ROMX $21
 	org $4000
 	"Pic Animations Frames 1"
-	"Pokemon Pics 44"
 
 ROMX $22
 	org $4000
 	"Pic Animations Frames 2"
 	"Item Text"
-	
+
 
 ROMX $23
 	org $4000
@@ -199,7 +195,6 @@ ROMX $27
 	org $4000
 	"Moves"
 	"Alola Dex Order"
-	"Pokemon Pics 50"
 
 ROMX $28
 	org $4000
@@ -208,14 +203,12 @@ ROMX $28
 ROMX $29
 	org $4000
 	"Enemy Trainers"
-	"Pokemon Pics 16"
 
 ROMX $2A
 	org $4000
 	"Enemy Trainer Pointers"
 	"Kalos Dex Order"
 	"Tileset Data - alph_word_room"
-	"Pokemon Pics 38"
 
 ROMX $2B
 	org $4000
@@ -238,7 +231,6 @@ ROMX $2E
 	"Map Headers"
 	"Events"
 	"Sinnoh Egg Moves"
-	"Pokemon Pics 4"
 
 ROMX $2F
 	org $4000

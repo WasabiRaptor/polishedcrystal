@@ -169,7 +169,7 @@ PopulateBattleTowerTeam:
 	push hl
 	push de
 	push hl
-	ld bc, wOTPartyMon1PP - wOTPartyMon1Moves
+	ld bc, wOTPartyMon1CurPP - wOTPartyMon1Moves
 	add hl, bc
 	ld d, h
 	ld e, l

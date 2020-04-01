@@ -81,9 +81,12 @@ StageBallTilesData: ; 2c059
 	jr z, .fainted
 
 .got_hp
-	dec hl
-	dec hl
-	dec hl
+	dec hl ; HP byte 1
+	dec hl ; PP byte 4
+	dec hl ; PP byte 3
+	dec hl ; PP byte 2
+	dec hl ; PP byte 1
+	dec hl ; Status
 	ld a, [hl]
 	and a
 	ld b, $32 ; statused

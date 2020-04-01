@@ -31,15 +31,20 @@ LearnMove: ; 6508
 	jr nz, .next
 ; If we're here, we enter the routine for forgetting a move
 ; to make room for the new move we're trying to learn.
-	push de
+	push de ; 1
 	call ForgetMove
-	pop de
+	ld a, e
+	pop de ; 0
 	jp c, .cancel
 
-	push hl
-	push de
-	ld [wd265], a
-
+	push hl ; 1
+	push de ; 2
+	push af ; 3
+	ld a, c
+	ld [wNamedObjectIndexBuffer], a
+	ld a, b
+	ld [wNamedObjectIndexBuffer+1], a
+	pop af ; 2
 	ld b, a
 	ld a, [wBattleMode]
 	and a
@@ -58,20 +63,30 @@ LearnMove: ; 6508
 
 	ld hl, wForgettingMove
 	set FORGETTING_MOVE_F, [hl]
-	pop de
-	pop hl
+	pop de ; 1
+	pop hl ; 0
 
 .learn
 	ld a, [wPutativeTMHMMove]
+	ld [hli], a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [wPutativeTMHMMove+1]
 	ld [hl], a
-	ld bc, MON_PP - MON_MOVES
+
+	ld bc, MON_CUR_PP - MON_MOVES_HIGH
 	add hl, bc
 
 	push hl
 	push de
-	dec a
+	ld a, [wPutativeTMHMMove]
+	ld c, a
+	ld a, [wPutativeTMHMMove+1]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -109,11 +124,11 @@ LearnMove: ; 6508
 	ld h, d
 	ld l, e
 	ld de, wBattleMonMoves
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES * 2
 	rst CopyBytes
-	ld bc, wPartyMon1PP - (wPartyMon1Moves + NUM_MOVES)
+	ld bc, wPartyMon1CurPP - (wPartyMon1Moves + (NUM_MOVES *2))
 	add hl, bc
-	ld de, wBattleMonPP
+	ld de, wBattleMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	jp .learned
@@ -147,7 +162,7 @@ ForgetMove: ; 65d3
 	add hl, bc
 	push hl
 	ld de, wListMoves_MoveIndicesBuffer
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES*2
 	rst CopyBytes
 	ld hl, Text_ForgetWhich
 	call PrintText
@@ -156,11 +171,15 @@ ForgetMove: ; 65d3
 	cp 5 ; user chose the new move itself, meaning cancel
 	jr z, .cancel
 	dec a
-	ld c, a
-	ld b, 0
-	ld a, [wMoveScreenSelectedMove]
+	ld e, a
+	ld d, 0
 	pop hl
-	add hl, bc
+	add hl, de
+	ld a, [wMoveScreenSelectedMove+1]
+	and MOVE_HIGH_MASK
+	ld b, a
+	ld a, [wMoveScreenSelectedMove]
+	ld c, a
 	and a
 	ret
 

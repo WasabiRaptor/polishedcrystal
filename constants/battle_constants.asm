@@ -23,9 +23,19 @@ NO_EFFECT          EQU $00
 	const MULTIPLE_STATS ; used by Curse
 NUM_LEVEL_STATS EQU const_value
 
+; move properties
+	const_def
+	const CONTACT_MOVE
+	const POWDER_MOVE
+	const PUNCHING_MOVE
+	const SOUND_MOVE
+	const SUB_BYPASS_MOVE
+	const DYNAMIC_POWER_MOVE
+
 ; move struct
 	const_def
 	const MOVE_ANIM
+	const MOVE_ANIM_HIGH
 	const MOVE_EFFECT
 	const MOVE_POWER
 	const MOVE_TYPE

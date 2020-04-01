@@ -7,6 +7,8 @@ box_struct: MACRO
 \1Species::        db
 \1Item::           dw
 \1Moves::          ds NUM_MOVES
+\1PPUp::
+\1MovesHigh::      ds NUM_MOVES
 \1ID::             dw
 \1Exp::            ds 3
 \1EVs::
@@ -23,12 +25,11 @@ box_struct: MACRO
 \1Personality::
 \1Shiny::
 \1Ability::
-\1Nature::         db 
+\1Nature::         db
 \1Gender::
 \1IsEgg::
 \1IsDead::
-\1Form::           db 
-\1PP::             ds NUM_MOVES ; once curPP is moved to the party struct, the box struct can use these bytes for a move's group, they're already using two bits for PP up so even with curpp they would still be needed
+\1Form::           db
 \1Happiness::      db
 \1PokerusStatus::  db
 \1CaughtData::
@@ -39,7 +40,7 @@ box_struct: MACRO
 \1CaughtLocation:: db
 \1Level::          db
 \1Status::         db
-\1Unused::         db
+\1CurPP::          ds NUM_MOVES ; once curPP is moved to the party struct, the box struct can use these bytes for a move's group, they're already using two bits for PP up so even with curpp they would still be needed
 \1HP::             dw
 \1End::
 ENDM
@@ -61,6 +62,8 @@ battle_struct: MACRO
 \1Species::        db
 \1Item::           dw
 \1Moves::          ds NUM_MOVES
+\1PPUp::
+\1MovesHigh::      ds NUM_MOVES
 ; Mon capture assumes personality comes after DVs
 \1DVs::
 \1HPAtkDV::        db
@@ -74,11 +77,10 @@ battle_struct: MACRO
 \1IsEgg::
 \1IsDead::
 \1Form::           db
-\1PP::             ds NUM_MOVES
 \1Happiness::      db
 \1Level::          db
 \1Status::         db
-\1Unused::         db
+\1CurPP::          ds NUM_MOVES ; once curPP is moved to the party struct, the box struct can use these bytes for a move's group, they're already using two bits for PP up so even with curpp they would still be needed
 \1HP::             dw
 \1MaxHP::          dw
 \1Stats:: ; big endian
@@ -245,7 +247,7 @@ trademon: MACRO
 ENDM
 
 move_struct: MACRO
-\1Animation:: ds 1
+\1Animation:: ds 2
 \1Effect:: ds 1
 \1Power:: ds 1
 \1Type:: ds 1
