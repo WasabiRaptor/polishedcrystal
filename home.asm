@@ -1124,6 +1124,7 @@ GetMonPalette::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
 	ld a, [wCurForm]
 	ld b, 0
 	ld c, a
