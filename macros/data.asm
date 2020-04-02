@@ -210,7 +210,7 @@ regional_evomoves: macro
 endm
 
 regional_palettes: macro
-    dba \1PalettePointers
+    dba \1PalettePointerTable
 endm
 
 regional_picpointers: macro

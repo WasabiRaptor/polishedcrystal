@@ -900,9 +900,6 @@ GetMonAnimPointer: ; d055c
 	ld bc, 4
 	rst AddNTimes
 
-	ld a, [wPokeAnimPointerBank]
-	call GetFarHalfword
-
 	ld a, [wPokeAnimExtraFlag]
 	and a
 	jr z, .extras
