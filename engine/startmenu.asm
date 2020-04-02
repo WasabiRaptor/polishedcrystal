@@ -1782,8 +1782,6 @@ GetForgottenMoves::
 	predef GetPartyParamLocation
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
-	ld a, d ;bank
-	call GetFarHalfword
 .skip_evos
 	ld a, d ;bank
 	call GetFarByte

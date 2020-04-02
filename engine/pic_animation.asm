@@ -111,7 +111,7 @@ LoadMonAnimation: ; d00a3
 	ld a, [wCurGroup]
 	ld [wPokeAnimGroup], a
 
-	farcall GetRelevantPicPointers
+	ld a, [wCurForm]
 	ld [wPokeAnimForm], a
 
 	call PokeAnim_GetFrontpicDims
@@ -899,6 +899,9 @@ GetMonAnimPointer: ; d055c
 	dec a
 	ld bc, 4
 	rst AddNTimes
+
+	ld a, [wPokeAnimPointerBank]
+	call GetFarHalfword
 
 	ld a, [wPokeAnimExtraFlag]
 	and a

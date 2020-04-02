@@ -4578,12 +4578,6 @@ INCLUDE "engine/pic_animation.asm"
 SECTION "Pic Animations Data Tables", ROMX
 
 ;INCLUDE "data/pokemon/other/anim_data_table.asm"
-INCLUDE "data/pokemon/kanto/anim_data_table.asm"
-INCLUDE "data/pokemon/johto/anim_data_table.asm"
-INCLUDE "data/pokemon/hoenn/anim_data_table.asm"
-INCLUDE "data/pokemon/sinnoh/anim_data_table.asm"
-INCLUDE "data/pokemon/unova/anim_data_table.asm"
-INCLUDE "data/pokemon/kalos/anim_data_table.asm"
 
 ; Pic animations are assembled in 3 parts:
 
@@ -4604,23 +4598,35 @@ INCLUDE "data/pokemon/kalos/anim_data_table.asm"
 ;INCLUDE "data/pokemon/other/anim_pointers.asm"
 ;INCLUDE "data/pokemon/other/anims.asm"
 
-INCLUDE "data/pokemon/kanto/anim_pointers.asm"
-INCLUDE "data/pokemon/kanto/anims.asm"
 
 ; Extra animations, appended to the main animation
 ; Used in the status screen (blinking, tail wags etc.)
 ;INCLUDE "data/pokemon/other/idle_pointers.asm"
 ;INCLUDE "data/pokemon/other/idles.asm"
 
+SECTION "Kanto Pic Animations Data", ROMX
+
+INCLUDE "data/pokemon/kanto/anim_data_table.asm"
+
+INCLUDE "data/pokemon/kanto/anim_pointers.asm"
+INCLUDE "data/pokemon/kanto/anims.asm"
+
 INCLUDE "data/pokemon/kanto/idle_pointers.asm"
 INCLUDE "data/pokemon/kanto/idles.asm"
 
-; Variants have their own animation data despite having entries in the main tables
+SECTION "Johto Pic Animations Data", ROMX
+
+INCLUDE "data/pokemon/johto/anim_data_table.asm"
+
 INCLUDE "data/pokemon/johto/anim_pointers.asm"
 INCLUDE "data/pokemon/johto/anims.asm"
 
 INCLUDE "data/pokemon/johto/idle_pointers.asm"
 INCLUDE "data/pokemon/johto/idles.asm"
+
+SECTION "Hoenn Pic Animations Data", ROMX
+
+INCLUDE "data/pokemon/hoenn/anim_data_table.asm"
 
 INCLUDE "data/pokemon/hoenn/anim_pointers.asm"
 INCLUDE "data/pokemon/hoenn/anims.asm"
@@ -4628,17 +4634,29 @@ INCLUDE "data/pokemon/hoenn/anims.asm"
 INCLUDE "data/pokemon/hoenn/idle_pointers.asm"
 INCLUDE "data/pokemon/hoenn/idles.asm"
 
+SECTION "Sinnoh Pic Animations Data", ROMX
+
+INCLUDE "data/pokemon/sinnoh/anim_data_table.asm"
+
 INCLUDE "data/pokemon/sinnoh/anim_pointers.asm"
 INCLUDE "data/pokemon/sinnoh/anims.asm"
 
 INCLUDE "data/pokemon/sinnoh/idle_pointers.asm"
 INCLUDE "data/pokemon/sinnoh/idles.asm"
 
+SECTION "Unova Pic Animations Data", ROMX
+
+INCLUDE "data/pokemon/unova/anim_data_table.asm"
+
 INCLUDE "data/pokemon/unova/anim_pointers.asm"
 INCLUDE "data/pokemon/unova/anims.asm"
 
 INCLUDE "data/pokemon/unova/idle_pointers.asm"
 INCLUDE "data/pokemon/unova/idles.asm"
+
+SECTION "Kalos Pic Animations Data", ROMX
+
+INCLUDE "data/pokemon/kalos/anim_data_table.asm"
 
 INCLUDE "data/pokemon/kalos/anim_pointers.asm"
 INCLUDE "data/pokemon/kalos/anims.asm"
@@ -5021,8 +5039,7 @@ GetRelevantSeenCaughtPointers::
 INCLUDE "data/pokemon/regional_seen_caught_tables.asm"
 
 GetRelevantBaseData::
-;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
-; returns c for variants, nc for normal species
+	;accounts for group, species and form, returns address in hl
 	ld a, [wCurGroup]
 	ld hl, RegionalBaseDataTable
 	ld bc, 3
@@ -5032,6 +5049,7 @@ GetRelevantBaseData::
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
 	;getting the variant base data table for said region and now checking it
 	ld a, [wCurSpecies]
 	dec a
@@ -5046,7 +5064,8 @@ GetRelevantBaseData::
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ret
+	ld a, d
+	jp GetFarHalfword
 
 INCLUDE "data/pokemon/variant_base_data_table.asm"
 

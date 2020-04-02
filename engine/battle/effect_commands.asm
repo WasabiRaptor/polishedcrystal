@@ -3246,8 +3246,6 @@ UnevolvedEviolite:
 	push bc
 	push de
 	farcall GetRelevantEvosAttacksPointers
-	ld a, d ;bank
-	call GetFarHalfword
 	ld a, d; bank
 	call GetFarByte
 	pop de

@@ -582,12 +582,6 @@ InheritLevelMove:
 	push de
 	farcall GetRelevantEvosAttacksPointers
 	ld b, d
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, b ; bank
-	call GetFarHalfword
 	pop de
 .loop
 	ld a, b; bank
