@@ -2,7 +2,7 @@
 CheckUnownLetter: ; 3eb75
 ; Return carry if the Unown letter hasn't been unlocked yet
 
-	ld a, [wUnlockedUnowns]
+	;ld a, [wUnlockedUnowns]
 	ld c, a
 	ld de, 0
 
