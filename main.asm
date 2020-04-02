@@ -1641,12 +1641,19 @@ GetDexEntryPointer:: ; 44333
 INCLUDE "data/pokemon/variant_dex_entry_pointer_table.asm"
 
 PokedexDataPointerTable: ; 0x44378
-INCLUDE "data/pokemon/kanto_dex_entry_pointers.asm"
-INCLUDE "data/pokemon/johto_dex_entry_pointers.asm"
-INCLUDE "data/pokemon/hoenn_dex_entry_pointers.asm"
-INCLUDE "data/pokemon/sinnoh_dex_entry_pointers.asm"
-INCLUDE "data/pokemon/unova_dex_entry_pointers.asm"
-INCLUDE "data/pokemon/kalos_dex_entry_pointers.asm"
+INCLUDE "data/pokemon/kanto/dex_entry_pointers.asm"
+INCLUDE "data/pokemon/johto/dex_entry_pointers.asm"
+INCLUDE "data/pokemon/hoenn/dex_entry_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/dex_entry_pointers.asm"
+INCLUDE "data/pokemon/unova/dex_entry_pointers.asm"
+INCLUDE "data/pokemon/kalos/dex_entry_pointers.asm"
+
+INCLUDE "data/pokemon/kanto/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/johto/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/unova/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/dex_entry_pointer_table.asm"
 
 
 SECTION "Code 11", ROMX
@@ -3478,8 +3485,6 @@ GetGender: ; 50bdd
 	farcall GetRelevantBaseData
 	ld bc, BASEMON_GENDER
 	add hl, bc
-	ld bc, BASEMON_STRUCT_LENGTH
-	rst AddNTimes
 	ld a, d ;bank
 	pop bc
 	call GetFarByte
@@ -4314,13 +4319,21 @@ INCLUDE "engine/sprites.asm"
 INCLUDE "engine/mon_icons.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
-INCLUDE "data/pokemon/other_menu_icon_pointers.asm"
-INCLUDE "data/pokemon/kanto_menu_icon_pointers.asm"
-INCLUDE "data/pokemon/johto_menu_icon_pointers.asm"
-INCLUDE "data/pokemon/hoenn_menu_icon_pointers.asm"
-INCLUDE "data/pokemon/sinnoh_menu_icon_pointers.asm"
-INCLUDE "data/pokemon/unova_menu_icon_pointers.asm"
-INCLUDE "data/pokemon/kalos_menu_icon_pointers.asm"
+;INCLUDE "data/pokemon/other/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/kanto/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/johto/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/hoenn/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/unova/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/kalos/menu_icon_pointers.asm"
+
+;INCLUDE "data/pokemon/other/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/johto/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/unova/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/menu_icon_pointer_table.asm"
 
 INCLUDE "data/pokemon/menu_icons.asm"
 
@@ -4562,6 +4575,16 @@ SECTION "Pic Animations", ROMX
 
 INCLUDE "engine/pic_animation.asm"
 
+SECTION "Pic Animations Data Tables", ROMX
+
+;INCLUDE "data/pokemon/other/anim_data_table.asm"
+INCLUDE "data/pokemon/kanto/anim_data_table.asm"
+INCLUDE "data/pokemon/johto/anim_data_table.asm"
+INCLUDE "data/pokemon/hoenn/anim_data_table.asm"
+INCLUDE "data/pokemon/sinnoh/anim_data_table.asm"
+INCLUDE "data/pokemon/unova/anim_data_table.asm"
+INCLUDE "data/pokemon/kalos/anim_data_table.asm"
+
 ; Pic animations are assembled in 3 parts:
 
 ; Top-level animations:
@@ -4578,100 +4601,136 @@ INCLUDE "engine/pic_animation.asm"
 ;	following bytes are tile ids mapped to each bit in the mask
 
 ; Main animations (played everywhere)
-INCLUDE "gfx/pokemon/other_anim_pointers.asm"
-INCLUDE "gfx/pokemon/other_anims.asm"
+;INCLUDE "data/pokemon/other/anim_pointers.asm"
+;INCLUDE "data/pokemon/other/anims.asm"
 
-INCLUDE "gfx/pokemon/kanto_anim_pointers.asm"
-INCLUDE "gfx/pokemon/kanto_anims.asm"
+INCLUDE "data/pokemon/kanto/anim_pointers.asm"
+INCLUDE "data/pokemon/kanto/anims.asm"
 
 ; Extra animations, appended to the main animation
 ; Used in the status screen (blinking, tail wags etc.)
-INCLUDE "gfx/pokemon/other_idle_pointers.asm"
-INCLUDE "gfx/pokemon/other_idles.asm"
+;INCLUDE "data/pokemon/other/idle_pointers.asm"
+;INCLUDE "data/pokemon/other/idles.asm"
 
-INCLUDE "gfx/pokemon/kanto_idle_pointers.asm"
-INCLUDE "gfx/pokemon/kanto_idles.asm"
+INCLUDE "data/pokemon/kanto/idle_pointers.asm"
+INCLUDE "data/pokemon/kanto/idles.asm"
 
 ; Variants have their own animation data despite having entries in the main tables
-INCLUDE "gfx/pokemon/johto_anim_pointers.asm"
-INCLUDE "gfx/pokemon/johto_anims.asm"
-INCLUDE "gfx/pokemon/johto_idle_pointers.asm"
-INCLUDE "gfx/pokemon/johto_idles.asm"
+INCLUDE "data/pokemon/johto/anim_pointers.asm"
+INCLUDE "data/pokemon/johto/anims.asm"
 
-INCLUDE "gfx/pokemon/hoenn_anim_pointers.asm"
-INCLUDE "gfx/pokemon/hoenn_anims.asm"
-INCLUDE "gfx/pokemon/hoenn_idle_pointers.asm"
-INCLUDE "gfx/pokemon/hoenn_idles.asm"
+INCLUDE "data/pokemon/johto/idle_pointers.asm"
+INCLUDE "data/pokemon/johto/idles.asm"
 
-INCLUDE "gfx/pokemon/sinnoh_anim_pointers.asm"
-INCLUDE "gfx/pokemon/sinnoh_anims.asm"
-INCLUDE "gfx/pokemon/sinnoh_idle_pointers.asm"
-INCLUDE "gfx/pokemon/sinnoh_idles.asm"
+INCLUDE "data/pokemon/hoenn/anim_pointers.asm"
+INCLUDE "data/pokemon/hoenn/anims.asm"
 
-INCLUDE "gfx/pokemon/unova_anim_pointers.asm"
-INCLUDE "gfx/pokemon/unova_anims.asm"
-INCLUDE "gfx/pokemon/unova_idle_pointers.asm"
-INCLUDE "gfx/pokemon/unova_idles.asm"
+INCLUDE "data/pokemon/hoenn/idle_pointers.asm"
+INCLUDE "data/pokemon/hoenn/idles.asm"
 
-INCLUDE "gfx/pokemon/kalos_anim_pointers.asm"
-INCLUDE "gfx/pokemon/kalos_anims.asm"
-INCLUDE "gfx/pokemon/kalos_idle_pointers.asm"
-INCLUDE "gfx/pokemon/kalos_idles.asm"
+INCLUDE "data/pokemon/sinnoh/anim_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/anims.asm"
+
+INCLUDE "data/pokemon/sinnoh/idle_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/idles.asm"
+
+INCLUDE "data/pokemon/unova/anim_pointers.asm"
+INCLUDE "data/pokemon/unova/anims.asm"
+
+INCLUDE "data/pokemon/unova/idle_pointers.asm"
+INCLUDE "data/pokemon/unova/idles.asm"
+
+INCLUDE "data/pokemon/kalos/anim_pointers.asm"
+INCLUDE "data/pokemon/kalos/anims.asm"
+
+INCLUDE "data/pokemon/kalos/idle_pointers.asm"
+INCLUDE "data/pokemon/kalos/idles.asm"
 
 SECTION "Pic Animations Frames 0", ROMX
 
-INCLUDE "gfx/pokemon/other_frame_pointers.asm"
-INCLUDE "gfx/pokemon/other_frames.asm"
+;INCLUDE "data/pokemon/other/frame_pointer_table.asm"
+;INCLUDE "data/pokemon/other/frame_pointers.asm"
+;INCLUDE "data/pokemon/other/frames.asm"
 
 SECTION "Pic Animations Frames 1", ROMX
 
-INCLUDE "gfx/pokemon/kanto_frame_pointers.asm"
-INCLUDE "gfx/pokemon/kanto_frames.asm"
+INCLUDE "data/pokemon/kanto/frame_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/frame_pointers.asm"
+INCLUDE "data/pokemon/kanto/frames.asm"
 
 
 SECTION "Pic Animations Frames 2", ROMX
 
-INCLUDE "gfx/pokemon/johto_frames.asm"
-INCLUDE "gfx/pokemon/johto_frame_pointers.asm"
+INCLUDE "data/pokemon/johto/frame_pointer_table.asm"
+INCLUDE "data/pokemon/johto/frames.asm"
+INCLUDE "data/pokemon/johto/frame_pointers.asm"
 
 
 SECTION "Pic Animations Frames 3", ROMX
 
-INCLUDE "gfx/pokemon/hoenn_frames.asm"
-INCLUDE "gfx/pokemon/hoenn_frame_pointers.asm"
+INCLUDE "data/pokemon/hoenn/frame_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/frames.asm"
+INCLUDE "data/pokemon/hoenn/frame_pointers.asm"
 
 SECTION "Pic Animations Frames 4", ROMX
 
-INCLUDE "gfx/pokemon/sinnoh_frames.asm"
-INCLUDE "gfx/pokemon/sinnoh_frame_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/frame_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/frames.asm"
+INCLUDE "data/pokemon/sinnoh/frame_pointers.asm"
 
 SECTION "Pic Animations Frames 5", ROMX
 
-INCLUDE "gfx/pokemon/unova_frames.asm"
-INCLUDE "gfx/pokemon/unova_frame_pointers.asm"
+INCLUDE "data/pokemon/unova/frame_pointer_table.asm"
+INCLUDE "data/pokemon/unova/frames.asm"
+INCLUDE "data/pokemon/unova/frame_pointers.asm"
 
 SECTION "Pic Animations Frames 6", ROMX
 
-INCLUDE "gfx/pokemon/kalos_frames.asm"
-INCLUDE "gfx/pokemon/kalos_frame_pointers.asm"
+INCLUDE "data/pokemon/kalos/frame_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/frames.asm"
+INCLUDE "data/pokemon/kalos/frame_pointers.asm"
 
-SECTION "Pic Animations Bitmasks", ROMX
+SECTION "Other Animation Bitmasks", ROMX
 
 ; Bitmasks
-INCLUDE "gfx/pokemon/other_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/other_bitmasks.asm"
-INCLUDE "gfx/pokemon/kanto_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/kanto_bitmasks.asm"
-INCLUDE "gfx/pokemon/johto_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/johto_bitmasks.asm"
-INCLUDE "gfx/pokemon/hoenn_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/hoenn_bitmasks.asm"
-INCLUDE "gfx/pokemon/sinnoh_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/sinnoh_bitmasks.asm"
-INCLUDE "gfx/pokemon/unova_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/unova_bitmasks.asm"
-INCLUDE "gfx/pokemon/kalos_bitmask_pointers.asm"
-INCLUDE "gfx/pokemon/kalos_bitmasks.asm"
+;INCLUDE "data/pokemon/other/bitmask_pointers.asm"
+;INCLUDE "data/pokemon/other/bitmasks.asm"
+
+SECTION "Kanto Animation Bitmasks", ROMX
+
+INCLUDE "data/pokemon/kanto/bitmask_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/bitmask_pointers.asm"
+INCLUDE "data/pokemon/kanto/bitmasks.asm"
+
+SECTION "Johto Animation Bitmasks", ROMX
+
+INCLUDE "data/pokemon/johto/bitmask_pointer_table.asm"
+INCLUDE "data/pokemon/johto/bitmask_pointers.asm"
+INCLUDE "data/pokemon/johto/bitmasks.asm"
+
+SECTION "Hoenn Animation Bitmasks", ROMX
+
+INCLUDE "data/pokemon/hoenn/bitmask_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/bitmask_pointers.asm"
+INCLUDE "data/pokemon/hoenn/bitmasks.asm"
+
+SECTION "Sinnoh Animation Bitmasks", ROMX
+
+INCLUDE "data/pokemon/sinnoh/bitmask_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/bitmask_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/bitmasks.asm"
+
+SECTION "Unova Animation Bitmasks", ROMX
+
+INCLUDE "data/pokemon/unova/bitmask_pointer_table.asm"
+INCLUDE "data/pokemon/unova/bitmask_pointers.asm"
+INCLUDE "data/pokemon/unova/bitmasks.asm"
+
+SECTION "Kalos Animation Bitmasks", ROMX
+
+INCLUDE "data/pokemon/kalos/bitmask_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/bitmask_pointers.asm"
+INCLUDE "data/pokemon/kalos/bitmasks.asm"
 
 
 SECTION "Standard Text", ROMX
@@ -4966,21 +5025,27 @@ GetRelevantBaseData::
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalBaseDataTable
-	call dbwArray
-	;getting the variant base data table for said region and now checking it
-	ld a, [wCurSpecies]
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, [wCurForm]
-	ret c
+	;getting the variant base data table for said region and now checking it
 	ld a, [wCurSpecies]
 	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+	ld a, [wCurForm]
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
 	ret
 
 INCLUDE "data/pokemon/variant_base_data_table.asm"
@@ -5831,43 +5896,110 @@ tms97_112 = tms97_112 >> 8
 endr
 ENDM
 
-INCLUDE "data/pokemon/kanto_base_stats.asm"
-INCLUDE "data/pokemon/kanto_names.asm"
-INCLUDE "data/pokemon/kanto_palettes.asm"
+INCLUDE "data/pokemon/kanto/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/base_stat_pointers.asm"
+INCLUDE "data/pokemon/kanto/base_stats.asm"
+
+INCLUDE "data/pokemon/kanto/name_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/name_pointers.asm"
+INCLUDE "data/pokemon/kanto/names.asm"
+
+INCLUDE "data/pokemon/kanto/palette_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/palette_pointers.asm"
+INCLUDE "data/pokemon/kanto/palettes.asm"
 
 
 SECTION "Johto Base Data", ROMX
 
-INCLUDE "data/pokemon/johto_base_stats.asm"
-INCLUDE "data/pokemon/johto_names.asm"
-INCLUDE "data/pokemon/johto_palettes.asm"
+INCLUDE "data/pokemon/johto/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/johto/base_stat_pointers.asm"
+INCLUDE "data/pokemon/johto/base_stats.asm"
+
+INCLUDE "data/pokemon/johto/name_pointer_table.asm"
+INCLUDE "data/pokemon/johto/name_pointers.asm"
+INCLUDE "data/pokemon/johto/names.asm"
+
+INCLUDE "data/pokemon/johto/palette_pointer_table.asm"
+INCLUDE "data/pokemon/johto/palette_pointers.asm"
+INCLUDE "data/pokemon/johto/palettes.asm"
+
 
 SECTION "Hoenn Base Data", ROMX
 
-INCLUDE "data/pokemon/hoenn_base_stats.asm"
-INCLUDE "data/pokemon/hoenn_names.asm"
-INCLUDE "data/pokemon/hoenn_palettes.asm"
+INCLUDE "data/pokemon/hoenn/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/base_stat_pointers.asm"
+INCLUDE "data/pokemon/hoenn/base_stats.asm"
+
+INCLUDE "data/pokemon/hoenn/name_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/name_pointers.asm"
+INCLUDE "data/pokemon/hoenn/names.asm"
+
+INCLUDE "data/pokemon/hoenn/palette_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/palette_pointers.asm"
+INCLUDE "data/pokemon/hoenn/palettes.asm"
+
 
 SECTION "Sinnoh Base Data", ROMX
 
-INCLUDE "data/pokemon/sinnoh_base_stats.asm"
-INCLUDE "data/pokemon/sinnoh_names.asm"
-INCLUDE "data/pokemon/sinnoh_palettes.asm"
+INCLUDE "data/pokemon/sinnoh/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/base_stat_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/base_stats.asm"
+
+INCLUDE "data/pokemon/sinnoh/name_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/name_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/names.asm"
+
+INCLUDE "data/pokemon/sinnoh/palette_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/palette_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/palettes.asm"
+
+
 
 SECTION "Unova Base Data", ROMX
 
-INCLUDE "data/pokemon/unova_base_stats.asm"
-INCLUDE "data/pokemon/unova_names.asm"
-INCLUDE "data/pokemon/unova_palettes.asm"
+INCLUDE "data/pokemon/unova/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/unova/base_stat_pointers.asm"
+INCLUDE "data/pokemon/unova/base_stats.asm"
+
+INCLUDE "data/pokemon/unova/name_pointer_table.asm"
+INCLUDE "data/pokemon/unova/name_pointers.asm"
+INCLUDE "data/pokemon/unova/names.asm"
+
+INCLUDE "data/pokemon/unova/palette_pointer_table.asm"
+INCLUDE "data/pokemon/unova/palette_pointers.asm"
+INCLUDE "data/pokemon/unova/palettes.asm"
+
+
 
 SECTION "Kalos Base Data", ROMX
 
-INCLUDE "data/pokemon/kalos_base_stats.asm"
-INCLUDE "data/pokemon/kalos_names.asm"
-INCLUDE "data/pokemon/kalos_palettes.asm"
+INCLUDE "data/pokemon/kalos/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/base_stat_pointers.asm"
+INCLUDE "data/pokemon/kalos/base_stats.asm"
+
+INCLUDE "data/pokemon/kalos/name_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/name_pointers.asm"
+INCLUDE "data/pokemon/kalos/names.asm"
+
+INCLUDE "data/pokemon/kalos/palette_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/palette_pointers.asm"
+INCLUDE "data/pokemon/kalos/palettes.asm"
+
+
 
 SECTION "Other Base Data", ROMX
-INCLUDE "data/pokemon/other_base_stats.asm"
+;INCLUDE "data/pokemon/other/base_stat_pointer_table.asm"
+;INCLUDE "data/pokemon/other/base_stat_pointers.asm"
+;INCLUDE "data/pokemon/other/base_stats.asm"
+
+;INCLUDE "data/pokemon/other/name_pointer_table.asm"
+;INCLUDE "data/pokemon/other/name_pointers.asm"
+;INCLUDE "data/pokemon/other/names.asm"
+
+;INCLUDE "data/pokemon/other/palette_pointer_table.asm"
+;INCLUDE "data/pokemon/other/palette_pointers.asm"
+;INCLUDE "data/pokemon/other/palettes.asm"
+
 
 SECTION "Move Animations 1", ROMX
 

@@ -51,10 +51,6 @@ EvolveAfterBattle_MasterLoop:
 	ld [wCurSpecies], a
 
 	call GetRelevantEvosAttacksPointers
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
 	ld a, d ;bank
 	call GetFarHalfword
 
@@ -516,13 +512,12 @@ Text_WhatEvolving: ; 0x42482
 ; 0x42487
 
 
-LearnEvolutionMove:
+LearnEvolutionMove: ; this has to be updated for the farbyte
+	ret
+
 	ld a, [wd265]
 	ld [wCurPartySpecies], a
 	call GetRelevantEvolutionMoves
-	ld b, 0
-	ld c, a
-	add hl, bc
 	ld a, d ;bank
 	call GetFarByte
 	and a
@@ -562,10 +557,6 @@ LearnLevelMoves: ; 42487
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	call GetRelevantEvosAttacksPointers
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
 	ld a, d ;bank
 	call GetFarHalfword
 
@@ -660,10 +651,6 @@ FillMoves: ; 424e1
 	push bc ; 3
 	push de ; 4 ; Address to moves
 	call GetRelevantEvosAttacksPointers
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
 	ld c, d ;bank
 	ld a, d ;bank
 	pop de ; 3 Address to moves
@@ -861,10 +848,6 @@ GetPreEvolution: ; 42581
 
 	ld a, [wCurGroup]
 	call GetRelevantEvosAttacksPointers
-	ld c, a
-	ld b, 0
-	add hl, bc
-	add hl, bc
 	ld a, d ; bank
 	call GetFarHalfword
 .loop2 ; For each evolution...
@@ -925,43 +908,52 @@ GetRelevantEvosAttacksPointers:
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalEvosAttacksPointerTable
-	call dbwArray
-
-	ld a, [wCurPartySpecies]
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
 	ld h, [hl]
-	ld l, a
-	ld a, [wCurForm]
-	ret c
+
 	ld a, [wCurPartySpecies]
 	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+	ld a, [wCurForm]
+	ld c, a
+	add hl, bc
+	add hl, bc
 	ret
 
 GetRelevantEvolutionMoves:
 ; given species in a, return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
 ; returns c for variants, nc for normal species
+
 	ld a, [wCurGroup]
 	ld hl, RegionalEvolutionMovesPointerTable
-	call dbwArray
-
-	ld a, [wCurPartySpecies]
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
 	ld h, [hl]
-	ld l, a
-	ld a, [wCurForm]
-	ret c
+
 	ld a, [wCurPartySpecies]
 	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+	ld a, [wCurForm]
+	ld c, a
+	add hl, bc
+	add hl, bc
 	ret
 
 INCLUDE "data/pokemon/variant_evos_attacks_pointer_table.asm"

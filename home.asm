@@ -937,17 +937,10 @@ GetBaseData:: ; 3856
 	push af
 
 	homecall GetRelevantBaseData
-	push hl
-
 	ld b, a
 	ld a, d
 	rst Bankswitch
 
-	ld a, b
-; Get BaseData
-	ld bc, BASEMON_STRUCT_LENGTH
-	pop hl
-	rst AddNTimes
 	ld de, wCurBaseData
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst CopyBytes
@@ -978,8 +971,7 @@ GetAbility::
 	push bc
 
 	homecall GetRelevantBaseData
-	ld bc, BASEMON_STRUCT_LENGTH
-	rst AddNTimes
+
 	ld a, d
 	rst Bankswitch
 
@@ -1116,28 +1108,23 @@ GetMonPalette::
 	push bc
 	ld a, [wCurGroup]
 	ld hl, RegionalPaletteTable
-	call dbwArray
-	ld a, [wCurPartySpecies]
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	rst Bankswitch
-
-	ld a, [hli]
-	ld c, a
-	ld b, [hl]
-	ld a, [wCurForm]
-	jr c, .variant
 	ld a, [wCurPartySpecies]
 	dec a
-.variant
-	ld l, a
-	ld h, $0
-	add hl, hl
-	add hl, hl
-	add hl, hl
+	ld c, a
 	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, [wCurForm]
+	ld c, a
+	add hl, bc
+	add hl, bc
+
 	pop bc
 	homecall CheckShininess
 	jp nc, .not_shiny

@@ -112,7 +112,7 @@ LoadMonAnimation: ; d00a3
 	ld [wPokeAnimGroup], a
 
 	farcall GetRelevantPicPointers
-	ld [wPokeAnimSpeciesOrVariant], a
+	ld [wPokeAnimForm], a
 
 	call PokeAnim_GetFrontpicDims
 	ld a, c
@@ -886,15 +886,19 @@ PokeAnim_GetAttrMapCoord: ; d0551
 
 GetMonAnimPointer: ; d055c
 	ld a, [wPokeAnimGroup]
-	ld hl, RegionalAnimPointerTable
-	call dbwArray
+	ld hl, RegionalAnimPointerTable ; currently all anims are in this bank, but this may have to be reworked in future again
+	ld bc, 3
+	rst AddNTimes
+	ld a, [hli]
+	ld [wPokeAnimPointerBank], a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 
 	ld a, [wPokeAnimSpecies]
-	ld de, 6
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld c, a
+	dec a
+	ld bc, 4
+	rst AddNTimes
 
 	ld a, [wPokeAnimExtraFlag]
 	and a
@@ -903,18 +907,17 @@ GetMonAnimPointer: ; d055c
 	inc hl
 .extras
 
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld a, [wPokeAnimPointerBank]
+	call GetFarHalfword
 
-	ld a, [wPokeAnimSpeciesOrVariant]
+	ld a, [wPokeAnimForm]
 	ld e, a
 	ld d, 0
 	add hl, de
 	add hl, de
-	ld a, c
-	ld [wPokeAnimPointerBank], a
+	ld a, [wPokeAnimPointerBank]
 	call GetFarHalfword
+
 	ld a, l
 	ld [wPokeAnimPointerAddr], a
 	ld a, h
@@ -941,28 +944,30 @@ PokeAnim_GetFrontpicDims: ; d05b4
 GetMonFramesPointer: ; d05ce
 	ld a, [wPokeAnimGroup]
 	ld hl, RegionalFramesPointerTable
-	call dbwArray
-
-	ld a, [wPokeAnimSpecies]
-	ld de, 5
-	call IsInArray
-	inc hl
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
+	ld [wPokeAnimFramesBank], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, c
-	ld [wPokeAnimFramesBank], a
 
-	ld a, [wPokeAnimSpeciesOrVariant]
+	ld a, [wPokeAnimSpecies]
+	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+
+	ld a, [wPokeAnimFramesBank]
+	call GetFarHalfword
+
+	ld a, [wPokeAnimForm]
 	ld e, a
 	ld d, 0
 	add hl, de
 	add hl, de
-	ld a, b
+	ld a, [wPokeAnimFramesBank]
 	call GetFarHalfword
 	ld a, l
 	ld [wPokeAnimFramesAddr], a
@@ -974,19 +979,26 @@ GetMonFramesPointer: ; d05ce
 GetMonBitmaskPointer: ; d061b
 	ld a, [wPokeAnimGroup]
 	ld hl, RegionalBitmasksPointerTable
-	call dbwArray
-
-	ld a, [wPokeAnimSpecies]
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	ld [wPokeAnimBitmaskBank], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
-	ld a, [wPokeAnimSpeciesOrVariant]
+
+	ld a, [wPokeAnimSpecies]
+	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [wPokeAnimBitmaskBank]
+	call GetFarHalfword
+
+
+	ld a, [wPokeAnimForm]
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -1026,4 +1038,4 @@ HOF_AnimateFrontpic: ; d066e
 	ret
 ; d0695
 
-INCLUDE "gfx/pokemon/variant_anim_data_tables.asm"
+INCLUDE "data/pokemon/variant_anim_data_tables.asm"

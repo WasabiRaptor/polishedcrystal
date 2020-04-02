@@ -174,7 +174,6 @@ ROMX $22
 
 ROMX $23
 	org $4000
-	"Pic Animations Bitmasks"
 
 ROMX $24
 	org $4000

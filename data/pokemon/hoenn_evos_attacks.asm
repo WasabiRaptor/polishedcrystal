@@ -3,9 +3,10 @@ INCLUDE "constants.asm"
 
 SECTION "Hoenn Evolutions and Attacks", ROMX
 
-INCLUDE "data/pokemon/hoenn_evolution_moves.asm"
+INCLUDE "data/pokemon/hoenn/evolution_moves.asm"
 
-INCLUDE "data/pokemon/hoenn_evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/hoenn/evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/hoenn/evos_attacks_pointer_table.asm"
 
 TreeckoEvosAttacks:
 	db 0 ; no more evolutions

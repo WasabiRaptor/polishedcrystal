@@ -2,9 +2,10 @@ INCLUDE "constants.asm"
 
 SECTION "Johto Evolutions and Attacks", ROMX
 
-INCLUDE "data/pokemon/johto_evolution_moves.asm"
+INCLUDE "data/pokemon/johto/evolution_moves.asm"
 
-INCLUDE "data/pokemon/johto_evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/johto/evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/johto/evos_attacks_pointer_table.asm"
 
 JohtoEvosAttacks::
 

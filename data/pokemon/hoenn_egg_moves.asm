@@ -3,7 +3,7 @@ INCLUDE "constants.asm"
 
 SECTION "Hoenn Egg Moves", ROMX
 
-INCLUDE "data/pokemon/hoenn_egg_move_pointers.asm"
+INCLUDE "data/pokemon/hoenn/egg_move_pointers.asm"
 
 HoennEggMoves::
 NoHoennEggMoves::

@@ -2,9 +2,10 @@ INCLUDE "constants.asm"
 
 SECTION "Unova Evolutions and Attacks", ROMX
 
-INCLUDE "data/pokemon/unova_evolution_moves.asm"
+INCLUDE "data/pokemon/unova/evolution_moves.asm"
 
-INCLUDE "data/pokemon/unova_evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/unova/evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/unova/evos_attacks_pointer_table.asm"
 
 VictiniEvosAttacks::
 	db 0 ; no more evolutions

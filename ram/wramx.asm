@@ -1138,7 +1138,7 @@ wPokeAnimSceneIndex:: ds 1
 wPokeAnimPointer:: ds 2
 wPokeAnimGroup:: ds 1
 wPokeAnimSpecies:: ds 1
-wPokeAnimSpeciesOrVariant:: ds 1
+wPokeAnimForm:: ds 1
 wPokeAnimGraphicStartTile:: ds 1
 wPokeAnimCoord:: ds 2
 wPokeAnimFrontpicHeight:: ds 1

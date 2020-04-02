@@ -10,6 +10,20 @@
     const GROUP_GENERATION_EIGHT ;ironic
 NUM_POKEMON_GROUPS EQU const_value +-1
 
+	const_def 0 ;regional forms
+	const KANTONIAN
+	const ALOLAN
+GALARIAN EQU ALOLAN
+
+	const_def 0
+	const DEFAULT_FORM
+	const MEGA_FORM
+	const MEGA_FORM_Y
+	const GIGA_FORM
+
+MEGA_FORM_X EQU MEGA_FORM
+PRIMAL_FORM EQU MEGA_FORM
+
 NUM_POKEMON EQU $fd
 EGG EQU $fe
 
@@ -168,13 +182,37 @@ EGG EQU $fe
 	nat_dexmon MEW
 NUM_KANTO_POKEMON EQU const_value +-1
 
+;for pikachu and its stupid amount of outfits and hats
+	const_def 0
+	const DEFAULT_PIKACHU
+	const COSPLAY_PIKACHU
+	const ROCKSTAR_PIKACHU
+	const PIKACHU_BELLE
+	const PIKACHU_POPSTAR
+	const PIKACHU_PHD
+	const PIKACHU_LIBRE
+	const ORIGINAL_CAP_PIKACHU
+	const HOENN_CAP_PIKACHU
+	const SINNOH_CAP_PIKACHU
+	const UNOVA_CAP_PIKACHU
+	const KALOS_CAP_PIKACHU
+	const ALOLA_CAP_PIKACHU
+	const PARTNER_CAP_PIKACHU
+	const LETS_GO_PIKACHU
+	const GIGA_PIKACHU
+
+	const_def 0
+	const DEFAULT_EEVEE
+	const LETS_GO_EEVEE
+
 ;I hereby dub thee snowshrew, to save thee from a name that makes absolutely no sense
+	nat_dexmon_group SANDSHREW, GROUP_GENERATION_ONE
+	nat_dexmon SNOWSHREW
+	nat_dexmon SNOWSLASH
 
-;SNOWSHREW EQU SANDSHREW
-;SNOWSLASH EQU SANDSLASH
-
-;GROUP_SNOWSHREW EQU GROUP_SANDSHREW
-;GROUP_SNOWSLASH EQU GROUP_SANDSLASH
+; for the sake of fun and little lore bits in the dex
+	nat_dexmon_group VULPIX, GROUP_GENERATION_ONE
+	nat_dexmon KEOKEO
 
 ;johto mons
 	nat_dexmon_group 1, GROUP_GENERATION_TWO
@@ -280,17 +318,21 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon CELEBI
 NUM_JOHTO_POKEMON EQU const_value +-1
 
+	const_def
+	const DEFAULT_PICHU
+	const SPIKY_EARED_PICHU
+
 ; hoo boy Unown you've got a lot of forms
 	const_def
-	const UNOWN_A ;
-	const UNOWN_B ;
-	const UNOWN_C ;
-	const UNOWN_D ;
-	const UNOWN_E ;
-	const UNOWN_F ;
-	const UNOWN_G ;
-	const UNOWN_H ;
-	const UNOWN_I ;
+	const UNOWN_A
+	const UNOWN_B
+	const UNOWN_C
+	const UNOWN_D
+	const UNOWN_E
+	const UNOWN_F
+	const UNOWN_G
+	const UNOWN_H
+	const UNOWN_I
 	const UNOWN_J
 	const UNOWN_K
 	const UNOWN_L
@@ -308,11 +350,11 @@ NUM_JOHTO_POKEMON EQU const_value +-1
 	const UNOWN_X
 	const UNOWN_Y
 	const UNOWN_Z
-	const UNOWN_EXCLAMATION_MARK 	
-	const UNOWN_QUESTION_MARK 		
+	const UNOWN_EXCLAMATION_MARK
+	const UNOWN_QUESTION_MARK
 NUM_UNOWN EQU const_value + -1
 
-;generation hoenn
+; hoenn mons
 	nat_dexmon_group 1, GROUP_GENERATION_THREE
 	nat_dexmon TREECKO
 	nat_dexmon GROVYLE
@@ -451,7 +493,19 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon DEOXYS
 NUM_HOENN_POKEMON EQU const_value +-1
 
-; gen sinnoh mons
+	const_def
+	const NORMAL_CASTFORM
+	const SUNNY_CASTFORM
+	const RAINY_CASTFORM
+	const SNOWY_CASTFORM
+
+	const_def
+	const NORMAL_DEOXYS
+	const ATTACK_DEOXYS
+	const DEFENSE_DEOXYS
+	const SPEED_DEOXYS
+
+; sinnoh mons
 	nat_dexmon_group 1, GROUP_GENERATION_FOUR
 	nat_dexmon TURTWIG
 	nat_dexmon GROTLE
@@ -562,7 +616,38 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon ARCEUS ; types can be handled by the multitype ability via the item it holds and palette can be done in much the same way
 NUM_SINNOH_POKEMON EQU const_value +-1
 
-; gen unova mons
+	const_def 1;for burmy and wormadam
+	const PLANT_CLOAK
+	const SANDY_CLOAK
+	const TRASH_CLOAK
+
+	const_def
+	const CHERRIM_OVERCAST
+	const CHERRIM_SUNSHINE
+
+	const_def  ;shellos and gastrodon
+	const EAST_SEA
+	const WEST_SEA
+
+	const_def
+	const DEFAULT_ROTOM
+	const HEAT_ROTOM
+	const WASH_ROTOM
+	const FROST_ROTOM
+	const FAN_ROTOM
+	const MOW_ROTOM
+	const DEX_ROTOM
+	const PHONE_ROTOM
+
+	const_def
+	const GIRATINA_ALTERED
+	const GIRATINA_ORIGIN
+
+	const_def
+	const SHAYMIN_LAND
+	const SHAYMIN_SKY
+
+; unova mons
 	nat_dexmon_group 1, GROUP_GENERATION_FIVE
 	nat_dexmon VICTINI
 	nat_dexmon SNIVY
@@ -722,7 +807,36 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon GENESECT
 NUM_UNOVA_POKEMON EQU const_value +-1
 
-;Ggen pokemon
+	const_def
+	const DARMANITAN_STANDARD
+	const DARMANITAN_GALAR
+	const DARMANITAN_ZEN
+	const DARMANITAN_GALAR_ZEN
+
+	const_def ;deerling and sawsbuck
+	const SPRING_FORM
+	const SUMMER_FORM
+	const AUTUMN_FORM
+	const WINTER_FORM
+
+	const_def ;for the guys sitting on clouds
+	const INCARNATE_FORM
+	const THERIAN_FORM
+
+	const_def
+	const KYRUEM_DEFAULT
+	const WHITE_KYRUEM
+	const BLACK_KYRUEM
+
+	const_def
+	const KELDEO_ORDINARY
+	const KELDEO_RESOLUTE
+
+	const_def
+	const MELOETTA_ARIA
+	const MELOETTA_PIROUETTE
+
+; kalos pokemon
 	nat_dexmon_group 1, GROUP_GENERATION_SIX
 	nat_dexmon CHESPIN
 	nat_dexmon QUILLADIN
@@ -798,6 +912,69 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon VOLCANION
 NUM_KALOS_POKEMON EQU const_value +-1
 
+	const_def
+	const NORMAL_GRENINJA
+	const BATTLE_BOND_GRENINJA
+	const ASH_GRENINJA
+
+	const_def
+	const VIVILLON_MEADOW
+	const VIVILLON_ARCHIPELEGO
+	const VIVILLON_CONTINENTAL
+	const VIVILLON_ELEGANT
+	const VIVILLON_GARDEN
+	const VIVILLON_HIGH_PLAINS
+	const VIVILLON_ICY_SNOW
+	const VIVILLON_JUNGLE
+	const VIVILLON_MARINE
+	const VIVILLON_MODERN
+	const VIVILLON_MONSOON
+	const VIVILLON_OCEAN
+	const VIVILLON_POLAR
+	const VIVILLON_RIVER
+	const VIVILLON_SANDSTORM
+	const VIVILLON_SAVANNAH
+	const VIVILLON_SUN
+	const VIVILLON_TUNDRA
+	const VIVILLON_POKEBALL
+	const VIVILLON_FANCY
+
+	const_def
+	const NORMAL_FLOETTE
+	const ETERNAL_FLOWER_FLOETTE
+
+	const_def
+	const FURFROU_NORMAL
+	const FURFROU_HEART
+	const FURFROU_STAR
+	const FURFROU_DIAMOND
+	const FURFROU_DEBUTANTE
+	const FURFROU_MATRON
+	const FURFROU_DANDY
+	const FURFROU_LA_REINE
+	const FURFROU_KABUKI
+	const FURFROU_PHARAOH
+
+	const_def
+	const AEGISLASH_SHIELD
+	const AEGISLASH_BLADE
+
+	const_def ;pumpkaboo and gourgeist
+	const SMALL_SIZE
+	const AVERAGE_SIZE
+	const LARGE_SIZE
+	const SUPER_SIZE
+
+	const_def
+	const ZYGARDE_10
+	const ZYGARDE_50
+	const ZYGARDE_100
+	const ZYGARDE_10_COMPLETE
+	const ZYGARDE_50_COMPLETE
+
+	const_def
+	const HOOPA_CONFINED
+	const HOOPA_UNBOUND
 
 ;Gen mons
 	nat_dexmon_group 1, GROUP_GENERATION_SEVEN
@@ -891,6 +1068,35 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon MELMETAL
 NUM_ALOLA_POKEMON EQU const_value +-1
 
+	const_def
+	const NORMAL_ROCKRUFF
+	const OWN_TEMPO_ROCKRUFF
+
+	const_def
+	const LYCANROC_DAWN
+	const LYCANROC_MIDDAY
+	const LYCANROC_DUSK
+	const LYCANROC_MIDNIGHT
+	const LYCANROC_WAFFLE
+
+	const_def
+	const WISHIWASHI_SOLO
+	const WISHIWASHI_SCHOOL
+
+	const_def
+	const MINIOR_SHIELDS_UP
+	const MINIOR_CORE
+
+	const_def
+	const MIMIKYU_DISGUISED
+	const MIMIKYU_BUSTED
+
+	const_def
+	const NORMAL_NECROZMA
+	const DUSK_MANE_NECROZMA
+	const DAWN_WINGS_NECROZMA
+	const ULTRA_NECROZMA
+
 ; IMPORTANT NOTE!
 ; No work is to be put forwards to implement any Galar pokemon or Galarian form pokemon until *after* the game is released and we have the data
 ; these constants are only here as placeholders for pokemon we know exist or will exist so that whenwe finally do have the data, it probably won't break save files
@@ -924,6 +1130,40 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	;nat_dexmon ZACIAN
 	;nat_dexmon ZAMAZENTA
 NUM_GALAR_POKEMON EQU const_value +-1
+
+	const_def
+	const CRAMORANT_NORMAL
+	const CRAMORANT_GULPING
+	const CRAMORANT_GORGING
+
+	const_def
+	const TOXTRICITY_AMPED
+	const TOXRICITY_LOW_KEY
+
+	const_def
+	const STRABERRY_TOPPING
+	const BLUEBERRY_TOPPING
+	const HEART_TOPPING
+	const STAR_TOPPING
+	const SHAMROCK_TOPPING
+	const FLOWER_TOPPING
+	const BOW_TOPPING
+
+	const_def
+	const EISCUE_ICE_FACE
+	const EISCUE_NO_ICE
+
+	const_def
+	const MORPEKO_FULL_BELLY
+	const MORPEKO_HANGRY
+
+	const_def
+	const ZACIAN_HERO
+	const ZACIAN_SWORD
+
+	const_def
+	const ZAMAZENTA_HERO
+	const ZAMAZENTA_ARMORED
 
 grouped_dex_order_mon: macro
 	db \1, GROUP_\1

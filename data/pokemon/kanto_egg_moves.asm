@@ -2,7 +2,7 @@ INCLUDE "constants.asm"
 
 SECTION "Kanto Egg Moves", ROMX
 
-INCLUDE "data/pokemon/kanto_egg_move_pointers.asm"
+INCLUDE "data/pokemon/kanto/egg_move_pointers.asm"
 
 KantoEggMoves::
 

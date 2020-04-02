@@ -2,7 +2,7 @@ INCLUDE "constants.asm"
 
 SECTION "Kalos Egg Moves", ROMX
 
-INCLUDE "data/pokemon/kalos_egg_move_pointers.asm"
+INCLUDE "data/pokemon/kalos/egg_move_pointers.asm"
 
 NoKalosEggMoves::
     dw 0

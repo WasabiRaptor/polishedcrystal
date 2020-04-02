@@ -283,7 +283,7 @@ PrinplupDEDData::  INCBIN "audio/ded/pokemon/prinplup.ded"
 SECTION "Sinnoh DED 4", ROMX
 
 
-EmploeonDEDData::  INCBIN "audio/ded/pokemon/empoleon.ded"
+EmpoleonDEDData::  INCBIN "audio/ded/pokemon/empoleon.ded"
 StarlyDEDData::  INCBIN "audio/ded/pokemon/starly.ded"
 
 SECTION "Sinnoh DED 5", ROMX
@@ -316,13 +316,13 @@ SECTION "Sinnoh DED 9", ROMX
 
 BudewDEDData::  INCBIN "audio/ded/pokemon/budew.ded"
 RoseradeDEDData::  INCBIN "audio/ded/pokemon/roserade.ded"
-CrainidosDEDData::  INCBIN "audio/ded/pokemon/cranidos.ded"
+CranidosDEDData::  INCBIN "audio/ded/pokemon/cranidos.ded"
 
 SECTION "Sinnoh DED 10", ROMX
 
 
 RampardosDEDData::  INCBIN "audio/ded/pokemon/rampardos.ded"
-SheildonDEDData::  INCBIN "audio/ded/pokemon/shieldon.ded"
+ShieldonDEDData::  INCBIN "audio/ded/pokemon/shieldon.ded"
 BastiodonDEDData::  INCBIN "audio/ded/pokemon/bastiodon.ded"
 
 SECTION "Sinnoh DED 11", ROMX

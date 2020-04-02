@@ -2,9 +2,10 @@ INCLUDE "constants.asm"
 
 SECTION "Sinnoh Evolutions and Attacks", ROMX
 
-INCLUDE "data/pokemon/sinnoh_evolution_moves.asm"
+INCLUDE "data/pokemon/sinnoh/evolution_moves.asm"
 
-INCLUDE "data/pokemon/sinnoh_evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/evos_attacks_pointer_table.asm"
 
 TurtwigEvosAttacks::
 	db 0 ; no more evolutions
@@ -46,7 +47,7 @@ PrinplupEvosAttacks::
 	learnmove 1, TACKLE
 	db 0 ; no more level-up moves
 
-EmploeonEvosAttacks::
+EmpoleonEvosAttacks::
 	db 0 ; no more evolutions
 	learnmove 1, TACKLE
 	db 0 ; no more level-up moves
@@ -111,7 +112,7 @@ RoseradeEvosAttacks::
 	learnmove 1, TACKLE
 	db 0 ; no more level-up moves
 
-CrainidosEvosAttacks::
+CranidosEvosAttacks::
 	db 0 ; no more evolutions
 	learnmove 1, TACKLE
 	db 0 ; no more level-up moves
@@ -121,7 +122,7 @@ RampardosEvosAttacks::
 	learnmove 1, TACKLE
 	db 0 ; no more level-up moves
 
-SheildonEvosAttacks::
+ShieldonEvosAttacks::
 	db 0 ; no more evolutions
 	learnmove 1, TACKLE
 	db 0 ; no more level-up moves

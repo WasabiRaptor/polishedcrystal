@@ -2,31 +2,31 @@ INCLUDE "constants.asm"
 
 SECTION "Other Pic Pointers", ROMX
 
-INCLUDE "data/pokemon/other_pic_pointers.asm"
+;INCLUDE "data/pokemon/other/pic_pointers.asm"
 
 SECTION "Kanto Pic Pointers", ROMX
 
-INCLUDE "data/pokemon/kanto_pic_pointers.asm"
+INCLUDE "data/pokemon/kanto/pic_pointers.asm"
 
 SECTION "Johto Pic Pointers", ROMX
 
-INCLUDE "data/pokemon/johto_pic_pointers.asm"
+INCLUDE "data/pokemon/johto/pic_pointers.asm"
 
 SECTION "Hoenn Pic Pointers", ROMX
 
-INCLUDE "data/pokemon/hoenn_pic_pointers.asm"
+INCLUDE "data/pokemon/hoenn/pic_pointers.asm"
 
 SECTION "Sinnoh Pic Pointers", ROMX
 
-INCLUDE "data/pokemon/sinnoh_pic_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/pic_pointers.asm"
 
 SECTION "Unova Pic Pointers", ROMX
 
-INCLUDE "data/pokemon/unova_pic_pointers.asm"
+INCLUDE "data/pokemon/unova/pic_pointers.asm"
 
 SECTION "Kalos Pic Pointers", ROMX
 
-INCLUDE "data/pokemon/kalos_pic_pointers.asm"
+INCLUDE "data/pokemon/kalos/pic_pointers.asm"
 
 SECTION "Trainer Pic Pointers", ROMX
 
@@ -1031,7 +1031,7 @@ MonfernoFrontpic:  INCBIN "gfx/pokemon/monferno/front.animated.2bpp.lz"
 InfernapeFrontpic:  INCBIN "gfx/pokemon/infernape/front.animated.2bpp.lz"
 PiplupFrontpic:  INCBIN "gfx/pokemon/piplup/front.animated.2bpp.lz"
 PrinplupFrontpic:  INCBIN "gfx/pokemon/prinplup/front.animated.2bpp.lz"
-EmploeonFrontpic:  INCBIN "gfx/pokemon/empoleon/front.animated.2bpp.lz"
+EmpoleonFrontpic:  INCBIN "gfx/pokemon/empoleon/front.animated.2bpp.lz"
 StarlyFrontpic:  INCBIN "gfx/pokemon/starly/front.animated.2bpp.lz"
 StaraviaFrontpic:  INCBIN "gfx/pokemon/staravia/front.animated.2bpp.lz"
 StaraptorFrontpic:  INCBIN "gfx/pokemon/staraptor/front.animated.2bpp.lz"
@@ -1047,9 +1047,9 @@ RoseradeFrontpic:  INCBIN "gfx/pokemon/roserade/front.animated.2bpp.lz"
 
 SECTION "Pokemon Pics 49", ROMX
 
-CrainidosFrontpic:  INCBIN "gfx/pokemon/cranidos/front.animated.2bpp.lz"
+CranidosFrontpic:  INCBIN "gfx/pokemon/cranidos/front.animated.2bpp.lz"
 RampardosFrontpic:  INCBIN "gfx/pokemon/rampardos/front.animated.2bpp.lz"
-SheildonFrontpic:  INCBIN "gfx/pokemon/shieldon/front.animated.2bpp.lz"
+ShieldonFrontpic:  INCBIN "gfx/pokemon/shieldon/front.animated.2bpp.lz"
 BastiodonFrontpic:  INCBIN "gfx/pokemon/bastiodon/front.animated.2bpp.lz"
 BurmyFrontpic:  INCBIN "gfx/pokemon/burmy_grass/front.animated.2bpp.lz"
 WormadamFrontpic:  INCBIN "gfx/pokemon/wormadam_grass/front.animated.2bpp.lz"
@@ -1155,7 +1155,7 @@ MonfernoBackpic:  INCBIN "gfx/pokemon/monferno/back.2bpp.lz"
 InfernapeBackpic:  INCBIN "gfx/pokemon/infernape/back.2bpp.lz"
 PiplupBackpic:  INCBIN "gfx/pokemon/piplup/back.2bpp.lz"
 PrinplupBackpic:  INCBIN "gfx/pokemon/prinplup/back.2bpp.lz"
-EmploeonBackpic:  INCBIN "gfx/pokemon/empoleon/back.2bpp.lz"
+EmpoleonBackpic:  INCBIN "gfx/pokemon/empoleon/back.2bpp.lz"
 StarlyBackpic:  INCBIN "gfx/pokemon/starly/back.2bpp.lz"
 StaraviaBackpic:  INCBIN "gfx/pokemon/staravia/back.2bpp.lz"
 StaraptorBackpic:  INCBIN "gfx/pokemon/staraptor/back.2bpp.lz"
@@ -1172,9 +1172,9 @@ RoseradeBackpic:  INCBIN "gfx/pokemon/roserade/back.2bpp.lz"
 
 SECTION "Pokemon Pics 54", ROMX
 
-CrainidosBackpic:  INCBIN "gfx/pokemon/cranidos/back.2bpp.lz"
+CranidosBackpic:  INCBIN "gfx/pokemon/cranidos/back.2bpp.lz"
 RampardosBackpic:  INCBIN "gfx/pokemon/rampardos/back.2bpp.lz"
-SheildonBackpic:  INCBIN "gfx/pokemon/shieldon/back.2bpp.lz"
+ShieldonBackpic:  INCBIN "gfx/pokemon/shieldon/back.2bpp.lz"
 BastiodonBackpic:  INCBIN "gfx/pokemon/bastiodon/back.2bpp.lz"
 BurmyBackpic:  INCBIN "gfx/pokemon/burmy_grass/back.2bpp.lz"
 WormadamBackpic:  INCBIN "gfx/pokemon/wormadam_grass/back.2bpp.lz"

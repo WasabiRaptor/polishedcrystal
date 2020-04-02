@@ -2,7 +2,7 @@ INCLUDE "constants.asm"
 
 SECTION "Sinnoh Egg Moves", ROMX
 
-INCLUDE "data/pokemon/sinnoh_egg_move_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/egg_move_pointers.asm"
 
 SinnohEggMoves::
 
@@ -33,10 +33,10 @@ ShinxEggMoves::
 BudewEggMoves::
     dw 0
 
-CrainidosEggMoves::
+CranidosEggMoves::
     dw 0
 
-SheildonEggMoves::
+ShieldonEggMoves::
     dw 0
 
 BurmyEggMoves::

@@ -126,8 +126,6 @@ _GetFrontpic: ; 510a5
 
 GetFrontpicPointer: ; 510d7
 	call GetRelevantPicPointers
-	ld bc, 6
-	rst AddNTimes
 	ld a, d
 	call GetFarByte
 	push af
@@ -244,8 +242,6 @@ GetBackpic: ; 5116c
 	ldh [rSVBK], a
 	push de
 	call GetRelevantPicPointers
-	ld bc, 6
-	rst AddNTimes
 	ld bc, 3
 	add hl, bc
 	ld a, d
@@ -477,20 +473,31 @@ GetRelevantPicPointers:
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalPicPointerTable
-	call dbwArray
-	ld a, [wCurSpecies]
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
 	ld h, [hl]
-	ld l, a
-	ld a, [wCurForm]
-	ret c
+
 	ld a, [wCurSpecies]
 	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+	ld a, [wCurForm]
+	ld bc, 6
+	rst AddNTimes
 	ret
 
 INCLUDE "data/pokemon/variant_pic_pointer_table.asm"
+
+INCLUDE "data/pokemon/kanto/pic_pointer_table.asm"
+INCLUDE "data/pokemon/johto/pic_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/pic_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/pic_pointer_table.asm"
+INCLUDE "data/pokemon/unova/pic_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/pic_pointer_table.asm"

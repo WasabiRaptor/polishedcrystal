@@ -2,9 +2,10 @@ INCLUDE "constants.asm"
 
 SECTION "Kanto Evolutions and Attacks", ROMX
 
-INCLUDE "data/pokemon/kanto_evolution_moves.asm"
+INCLUDE "data/pokemon/kanto/evolution_moves.asm"
 
-INCLUDE "data/pokemon/kanto_evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/kanto/evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/kanto/evos_attacks_pointer_table.asm"
 
 BulbasaurEvosAttacks:
 	evolution EVOLVE_LEVEL, 16, IVYSAUR

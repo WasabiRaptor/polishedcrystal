@@ -132,20 +132,20 @@
 	const COMPETITIVE
 	const PIXILATE
 	const TANGLING_HAIR
-	const REFRIGERATE ;raptor 
-	const SLUSH_RUSH ;raptor 
-	const STANCE_CHANGE ;raptor 
-	const POWER_OF_ALCHEMY ;raptor 
-	const RECIEVER ;raptor 
-	const ILLUSION ;raptor 
-	const REVERSE_AURA ;thalins 
-	const SOUL_HEART ;thalins 
-	const STORM_DRAIN ;raptor 
-	const MUMMY ;raptor 
-	const HEAVY_METAL ;thalins 
-	const RKS_SYSTEM ;raptor 
+	const REFRIGERATE ;raptor
+	const SLUSH_RUSH ;raptor
+	const STANCE_CHANGE ;raptor
+	const POWER_OF_ALCHEMY ;raptor
+	const RECIEVER ;raptor
+	const ILLUSION ;raptor
+	const REVERSE_AURA ;thalins
+	const SOUL_HEART ;thalins
+	const STORM_DRAIN ;raptor
+	const MUMMY ;raptor
+	const HEAVY_METAL ;thalins
+	const RKS_SYSTEM ;raptor
 	const TOUGH_CLAWS ;raptor
-	const POWER_CONSTRUCT ;thalins 
+	const POWER_CONSTRUCT ;thalins
 	const BERSERK ;raptor
 	const GALE_WINGS ;raptor
 	const TOXIC_BOOST ;thalins
@@ -155,6 +155,7 @@ NUM_ABILITIES EQU const_value
 placeholder_zero: macro
 \1 EQU 0
 endm
+	placeholder_zero AURA_BREAK
 	placeholder_zero DISGUISE ;thalins
 	;placeholder_zero TOXIC_BOOST ;thalins ; basically just guts but only for poison
 	placeholder_zero MAGICIAN ;thalins ;similar to pickpocket but its when you attack instead of get hit

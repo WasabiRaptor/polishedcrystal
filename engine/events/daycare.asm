@@ -1067,8 +1067,6 @@ DayCare_InitBreeding: ; 16a3b
 	farcall GetRelevantBaseData
 	ld bc, BASEMON_GENDER
 	add hl, bc
-	ld bc, BASEMON_STRUCT_LENGTH
-	rst AddNTimes
 	ld a, d ; bank
 	call GetFarByte
 	swap a

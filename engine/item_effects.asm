@@ -930,10 +930,6 @@ GLOBAL EvosAttacksPointers
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	farcall GetRelevantEvosAttacksPointers
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
 	ld a, d ;bank
 	call GetFarHalfword
 	pop bc

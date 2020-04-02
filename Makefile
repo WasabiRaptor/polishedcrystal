@@ -22,7 +22,7 @@ RGBASM_FLAGS =
 RGBLINK_FLAGS = -n $(BUILD_DIR)$(ROM_NAME).sym -m $(BUILD_DIR)$(ROM_NAME).map -l contents/contents.link -p $(FILLER)
 RGBFIX_FLAGS = -Cjv -t $(TITLE) -i $(MCODE) -n $(ROMVERSION) -p $(FILLER) -k 01 -l 0x33 -m 0x1B -r 3
 
-PYTHON := python 
+PYTHON := python
 pcm := $(PYTHON) utils/pcm.py pcm
 
 BUILD_DIR := build/

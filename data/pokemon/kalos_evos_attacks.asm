@@ -2,9 +2,10 @@ INCLUDE "constants.asm"
 
 SECTION "Kalos Evolutions and Attacks", ROMX
 
-INCLUDE "data/pokemon/kalos_evolution_moves.asm"
+INCLUDE "data/pokemon/kalos/evolution_moves.asm"
 
-INCLUDE "data/pokemon/kalos_evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/kalos/evos_attacks_pointers.asm"
+INCLUDE "data/pokemon/kalos/evos_attacks_pointer_table.asm"
 
 KalosEvosAttacks::
 ChespinEvosAttacks::

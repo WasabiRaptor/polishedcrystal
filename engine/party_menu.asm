@@ -410,10 +410,6 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
 	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after
-	ld d, 0
-	ld e, a
-	add hl, de
-	add hl, de
 	call .DetermineCompatibility
 	pop hl
 	call PlaceString

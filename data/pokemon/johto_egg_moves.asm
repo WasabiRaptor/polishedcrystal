@@ -2,7 +2,7 @@ INCLUDE "constants.asm"
 
 SECTION "Johto Egg Moves", ROMX
 
-INCLUDE "data/pokemon/johto_egg_move_pointers.asm"
+INCLUDE "data/pokemon/johto/egg_move_pointers.asm"
 
 JohtoEggMoves::
 

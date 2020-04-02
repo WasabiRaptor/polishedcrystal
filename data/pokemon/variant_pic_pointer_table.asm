@@ -3,35 +3,14 @@ variant_picpointers: macro
 endm
 
 regional_picpointers: macro
-    dbw \1, \2VariantPicPointerTable
+    dba \1PicPointerTable
 endm
 
-RegionalPicPointerTable:  
-    regional_picpointers GROUP_GENERATION_ONE, Kanto
-    regional_picpointers GROUP_GENERATION_TWO, Johto
-    regional_picpointers GROUP_GENERATION_THREE, Hoenn
-    regional_picpointers GROUP_GENERATION_FOUR, Sinnoh
-    regional_picpointers GROUP_GENERATION_FIVE, Unova
-    regional_picpointers GROUP_GENERATION_SIX, Kalos
-	regional_picpointers -1, Kanto
-
-;OtherVariantPicPointerTable:
-    ;variant_picpointers -1, Other
-
-KantoVariantPicPointerTable:
-    variant_picpointers -1, Kanto
-
-JohtoVariantPicPointerTable:
-    variant_picpointers -1, Johto
-
-HoennVariantPicPointerTable:
-    variant_picpointers -1, Hoenn
-
-SinnohVariantPicPointerTable:
-    variant_picpointers -1, Sinnoh
-
-UnovaVariantPicPointerTable:
-    variant_picpointers -1, Unova
-
-KalosVariantPicPointerTable:
-    variant_picpointers -1, Kalos
+RegionalPicPointerTable:
+	regional_picpointers Kanto
+    regional_picpointers Kanto
+    regional_picpointers Johto
+    regional_picpointers Hoenn
+    regional_picpointers Sinnoh
+    regional_picpointers Unova
+    regional_picpointers Kalos
