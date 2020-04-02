@@ -51,8 +51,6 @@ EvolveAfterBattle_MasterLoop:
 	ld [wCurSpecies], a
 
 	call GetRelevantEvosAttacksPointers
-	ld a, d ;bank
-	call GetFarHalfword
 
 	push de
 	push hl
@@ -557,8 +555,6 @@ LearnLevelMoves: ; 42487
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	call GetRelevantEvosAttacksPointers
-	ld a, d ;bank
-	call GetFarHalfword
 
 .skip_evos
 	ld a, d ;bank
@@ -652,9 +648,7 @@ FillMoves: ; 424e1
 	push de ; 4 ; Address to moves
 	call GetRelevantEvosAttacksPointers
 	ld c, d ;bank
-	ld a, d ;bank
 	pop de ; 3 Address to moves
-	call GetFarHalfword
 .GoToAttacks:
 	ld a, c ;bank
 	call GetFarByte
@@ -848,8 +842,6 @@ GetPreEvolution: ; 42581
 
 	ld a, [wCurGroup]
 	call GetRelevantEvosAttacksPointers
-	ld a, d ; bank
-	call GetFarHalfword
 .loop2 ; For each evolution...
 	ld a, d ; bank
 	call GetFarByte
@@ -904,8 +896,6 @@ GetPreEvolution: ; 42581
 ; 425b1
 
 GetRelevantEvosAttacksPointers:
-; return *EvosAttacksPointers in hl and BANK(*EvosAttacksPointers) in d
-; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 	ld hl, RegionalEvosAttacksPointerTable
 	ld bc, 3
@@ -914,6 +904,7 @@ GetRelevantEvosAttacksPointers:
 	ld d, a
 	ld a, [hli]
 	ld h, [hl]
+	ld l, a
 
 	ld a, [wCurPartySpecies]
 	dec a
@@ -927,6 +918,8 @@ GetRelevantEvosAttacksPointers:
 	ld c, a
 	add hl, bc
 	add hl, bc
+	ld a, d
+	call GetFarHalfword
 	ret
 
 GetRelevantEvolutionMoves:
@@ -954,6 +947,8 @@ GetRelevantEvolutionMoves:
 	ld c, a
 	add hl, bc
 	add hl, bc
+	ld a, d
+	call GetFarHalfword
 	ret
 
 INCLUDE "data/pokemon/variant_evos_attacks_pointer_table.asm"

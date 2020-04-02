@@ -937,7 +937,6 @@ GetBaseData:: ; 3856
 	push af
 
 	homecall GetRelevantBaseData
-	ld b, a
 	ld a, d
 	rst Bankswitch
 

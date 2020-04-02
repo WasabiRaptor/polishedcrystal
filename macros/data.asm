@@ -213,6 +213,10 @@ regional_palettes: macro
     dba \1PalettePointers
 endm
 
+regional_picpointers: macro
+    dbw BANK(\1PicPointers), \1PicPointerTable
+endm
+
 dbpixel: MACRO
 if _NARG >= 4
 	db \1 * 8 + \3, \2 * 8 + \4

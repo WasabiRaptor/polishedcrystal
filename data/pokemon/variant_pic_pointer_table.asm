@@ -1,10 +1,4 @@
-variant_picpointers: macro
-    dbba \1, \2PicPointers
-endm
 
-regional_picpointers: macro
-    dba \1PicPointerTable
-endm
 
 RegionalPicPointerTable:
 	regional_picpointers Kanto

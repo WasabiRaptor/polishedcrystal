@@ -479,6 +479,7 @@ GetRelevantPicPointers:
 	ld d, a
 	ld a, [hli]
 	ld h, [hl]
+	ld l, a
 
 	ld a, [wCurSpecies]
 	dec a

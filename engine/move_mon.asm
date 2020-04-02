@@ -79,7 +79,7 @@ TryAddMonToParty: ; d88c
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 GeneratePartyMonStats: ; d906
-	ld e, l ; group is loaded form hl to de
+	ld e, l ; group is loaded from hl to de
 	ld d, h
 	push hl ; 1 ; group is pushed
 
@@ -227,7 +227,7 @@ endr
 	pop af ; 1 curgroup is popped
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
-	push bc ; 2 results form get ability are pushed
+	push bc ; 2 results from get ability are pushed
 	call GetBaseData
 	pop bc ; 1 then popped
 	ld a, b
@@ -369,8 +369,8 @@ endr
 .Female:
 	ld b, a
 
-; Form 1
-	ld a, 1
+; Form 0
+	ld a, 0
 	add b
 	ld [wDVAndPersonalityBuffer + 4], a
 
