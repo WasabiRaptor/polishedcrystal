@@ -487,11 +487,14 @@ GetRelevantPicPointers:
 	ld c, a
 	add hl, bc
 	add hl, bc
-	ld a, d
-	call GetFarHalfword
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
 	ld a, [wCurForm]
 	ld bc, 6
 	rst AddNTimes
+
 	ret
 
 INCLUDE "data/pokemon/variant_pic_pointer_table.asm"

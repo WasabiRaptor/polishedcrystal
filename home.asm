@@ -1111,8 +1111,13 @@ GetMonPalette::
 	rst AddNTimes
 	ld a, [hli]
 	rst Bankswitch
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
 	ld a, [wCurPartySpecies]
 	dec a
+	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
@@ -1120,9 +1125,13 @@ GetMonPalette::
 	ld h, [hl]
 	ld l, a
 	ld a, [wCurForm]
+	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
 
 	pop bc
 	homecall CheckShininess
