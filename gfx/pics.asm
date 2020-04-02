@@ -242,8 +242,8 @@ MagnetonBackpic:          INCBIN "gfx/pokemon/magneton/back.2bpp.lz"
 
 SECTION "Pokemon Pics 11", ROMX
 
-Farfetch_dFrontpic:        INCBIN "gfx/pokemon/farfetch_d/front.animated.2bpp.lz"
-Farfetch_dBackpic:         INCBIN "gfx/pokemon/farfetch_d/back.2bpp.lz"
+FarfetchdFrontpic:        INCBIN "gfx/pokemon/farfetchd/front.animated.2bpp.lz"
+FarfetchdBackpic:         INCBIN "gfx/pokemon/farfetchd/back.2bpp.lz"
 DoduoFrontpic:            INCBIN "gfx/pokemon/doduo/front.animated.2bpp.lz"
 DoduoBackpic:             INCBIN "gfx/pokemon/doduo/back.2bpp.lz"
 DodrioFrontpic:           INCBIN "gfx/pokemon/dodrio/front.animated.2bpp.lz"
@@ -334,8 +334,8 @@ StaryuFrontpic:           INCBIN "gfx/pokemon/staryu/front.animated.2bpp.lz"
 StaryuBackpic:            INCBIN "gfx/pokemon/staryu/back.2bpp.lz"
 StarmieFrontpic:          INCBIN "gfx/pokemon/starmie/front.animated.2bpp.lz"
 StarmieBackpic:           INCBIN "gfx/pokemon/starmie/back.2bpp.lz"
-Mr_MimeFrontpic:           INCBIN "gfx/pokemon/mr__mime/front.animated.2bpp.lz"
-Mr_MimeBackpic:            INCBIN "gfx/pokemon/mr__mime/back.2bpp.lz"
+MrMimeFrontpic:           INCBIN "gfx/pokemon/mrmime/front.animated.2bpp.lz"
+MrMimeBackpic:            INCBIN "gfx/pokemon/mrmime/back.2bpp.lz"
 
 
 SECTION "Pokemon Pics 16", ROMX

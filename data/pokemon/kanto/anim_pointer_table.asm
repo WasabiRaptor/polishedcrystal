@@ -81,7 +81,7 @@ KantoAnimationPointerTable::
 	add_animtable Slowbro
 	add_animtable Magnemite
 	add_animtable Magneton
-	add_animtable Farfetch_d
+	add_animtable Farfetchd
 	add_animtable Doduo
 	add_animtable Dodrio
 	add_animtable Seel
@@ -120,7 +120,7 @@ KantoAnimationPointerTable::
 	add_animtable Seaking
 	add_animtable Staryu
 	add_animtable Starmie
-	add_animtable Mr_Mime
+	add_animtable MrMime
 	add_animtable Scyther
 	add_animtable Jynx
 	add_animtable Electabuzz

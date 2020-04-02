@@ -81,7 +81,7 @@ KantoFramesPointerTable::
 	add_framestable Slowbro
 	add_framestable Magnemite
 	add_framestable Magneton
-	add_framestable Farfetch_d
+	add_framestable Farfetchd
 	add_framestable Doduo
 	add_framestable Dodrio
 	add_framestable Seel
@@ -120,7 +120,7 @@ KantoFramesPointerTable::
 	add_framestable Seaking
 	add_framestable Staryu
 	add_framestable Starmie
-	add_framestable Mr_Mime
+	add_framestable MrMime
 	add_framestable Scyther
 	add_framestable Jynx
 	add_framestable Electabuzz

@@ -1,6 +1,6 @@
         dw 00009 ;national dex no
         
-        db  79,  83, 100,  78,  85, 105
+        db  79, 103, 120,  78, 135, 115
         evs  0,   0,   0,   0,   0,   3
         ;   hp  atk  def  spd  sat  sdf
         
@@ -10,8 +10,8 @@
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_12_5, 4 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/blastoise/front.dimensions"  
-        db TORRENT, TORRENT     ; abilities
-        db RAIN_DISH    ; hidden ability
+        db MEGA_LAUNCHER, MEGA_LAUNCHER     ; abilities
+        db MEGA_LAUNCHER    ; hidden ability
         db GROWTH_MEDIUM_SLOW ; growth rate
         dn EGG_MONSTER, EGG_WATER_1 ; egg groups
         

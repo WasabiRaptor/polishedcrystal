@@ -22,9 +22,9 @@ import os
 import glob
 from collections import defaultdict
 
-# ['bulbasaur', 'ivysaur', ..., 'mr__mime', ..., 'celebi']
+# ['bulbasaur', 'ivysaur', ..., 'mrmime', ..., 'celebi']
 ordered_mons = []
-# {'bulbasaur': 'bulbasaur', 'mrmime': 'mr__mime', ...}
+# {'bulbasaur': 'bulbasaur', 'mrmime': 'mrmime', ...}
 underscore_names = {}
 # {'MONSTER': {'bulbasaur', ...}, 'PLANT': {'bulbasaur', ...}, ...}
 group_mons = defaultdict(lambda: set())
@@ -43,7 +43,7 @@ def get_ordered_mons():
 		for line in file:
 			# Assume that Pokémon constants are defined first in this file
 			if line.startswith('\tconst '):
-				# '\tconst MR__MIME   ; $7a' => 'mr__mime'
+				# '\tconst MRMIME   ; $7a' => 'mrmime'
 				mon = line[7:].split(';')[0].strip().lower()
 				ordered_mons.append(mon)
 				simple_name = mon.replace('_', '')
@@ -78,7 +78,7 @@ def get_level_up_moves():
 			line = line.rstrip()
 			# Assume that evo/attack data is labeled consistently
 			if line.endswith('EvosAttacks:'):
-				# 'Mr_MimeEvosAttacks:' => 'mrmime'
+				# 'MrMimeEvosAttacks:' => 'mrmime'
 				simple_name = line[:-12].lower()
 				if simple_name not in underscore_names:
 					raise RuntimeError('bad EvosAttacks name: %s' % simple_name)
@@ -125,7 +125,7 @@ def get_egg_moves():
 				continue
 			# Assume that egg move data is labeled consistently
 			if line.endswith('EggMoves:'):
-				# 'Mr_MimeEggMoves:' => 'mrmime'
+				# 'MrMimeEggMoves:' => 'mrmime'
 				simple_name = line[:-9].lower()
 				if simple_name not in underscore_names:
 					raise RuntimeError('bad EggMoves name: %s' % simple_name)

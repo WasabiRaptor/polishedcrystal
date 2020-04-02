@@ -245,9 +245,9 @@ MagnemiteShinyPalette:	INCLUDE "gfx/pokemon/magnemite/shiny.pal"
 MagnetonPalettes:
 MagnetonNormalPalette:	INCBIN "gfx/pokemon/magneton/front.gbcpal", middle_colors
 MagnetonShinyPalette:	INCLUDE "gfx/pokemon/magneton/shiny.pal"
-Farfetch_dPalettes:
-Farfetch_dNormalPalette:	INCBIN "gfx/pokemon/farfetch_d/front.gbcpal", middle_colors
-Farfetch_dShinyPalette:	INCLUDE "gfx/pokemon/farfetch_d/shiny.pal"
+FarfetchdPalettes:
+FarfetchdNormalPalette:	INCBIN "gfx/pokemon/farfetchd/front.gbcpal", middle_colors
+FarfetchdShinyPalette:	INCLUDE "gfx/pokemon/farfetchd/shiny.pal"
 DoduoPalettes:
 DoduoNormalPalette:	INCBIN "gfx/pokemon/doduo/front.gbcpal", middle_colors
 DoduoShinyPalette:	INCLUDE "gfx/pokemon/doduo/shiny.pal"
@@ -362,9 +362,9 @@ StaryuShinyPalette:	INCLUDE "gfx/pokemon/staryu/shiny.pal"
 StarmiePalettes:
 StarmieNormalPalette:	INCBIN "gfx/pokemon/starmie/front.gbcpal", middle_colors
 StarmieShinyPalette:	INCLUDE "gfx/pokemon/starmie/shiny.pal"
-Mr_MimePalettes:
-Mr_MimeNormalPalette:	INCBIN "gfx/pokemon/mr__mime/front.gbcpal", middle_colors
-Mr_MimeShinyPalette:	INCLUDE "gfx/pokemon/mr__mime/shiny.pal"
+MrMimePalettes:
+MrMimeNormalPalette:	INCBIN "gfx/pokemon/mrmime/front.gbcpal", middle_colors
+MrMimeShinyPalette:	INCLUDE "gfx/pokemon/mrmime/shiny.pal"
 ScytherPalettes:
 ScytherNormalPalette:	INCBIN "gfx/pokemon/scyther/front.gbcpal", middle_colors
 ScytherShinyPalette:	INCLUDE "gfx/pokemon/scyther/shiny.pal"

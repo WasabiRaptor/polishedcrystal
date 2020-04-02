@@ -81,7 +81,7 @@ KantoNamePointerTable::
 	add_nametable Slowbro
 	add_nametable Magnemite
 	add_nametable Magneton
-	add_nametable Farfetch_d
+	add_nametable Farfetchd
 	add_nametable Doduo
 	add_nametable Dodrio
 	add_nametable Seel
@@ -120,7 +120,7 @@ KantoNamePointerTable::
 	add_nametable Seaking
 	add_nametable Staryu
 	add_nametable Starmie
-	add_nametable Mr_Mime
+	add_nametable MrMime
 	add_nametable Scyther
 	add_nametable Jynx
 	add_nametable Electabuzz

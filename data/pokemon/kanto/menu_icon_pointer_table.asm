@@ -81,7 +81,7 @@ KantoIconPointerTable::
 	add_icontable Slowbro
 	add_icontable Magnemite
 	add_icontable Magneton
-	add_icontable Farfetch_d
+	add_icontable Farfetchd
 	add_icontable Doduo
 	add_icontable Dodrio
 	add_icontable Seel
@@ -120,7 +120,7 @@ KantoIconPointerTable::
 	add_icontable Seaking
 	add_icontable Staryu
 	add_icontable Starmie
-	add_icontable Mr_Mime
+	add_icontable MrMime
 	add_icontable Scyther
 	add_icontable Jynx
 	add_icontable Electabuzz

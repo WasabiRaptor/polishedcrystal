@@ -81,7 +81,7 @@ KantoPokedexEntryPointerTable::
 	add_pokedexentrytable Slowbro
 	add_pokedexentrytable Magnemite
 	add_pokedexentrytable Magneton
-	add_pokedexentrytable Farfetch_d
+	add_pokedexentrytable Farfetchd
 	add_pokedexentrytable Doduo
 	add_pokedexentrytable Dodrio
 	add_pokedexentrytable Seel
@@ -120,7 +120,7 @@ KantoPokedexEntryPointerTable::
 	add_pokedexentrytable Seaking
 	add_pokedexentrytable Staryu
 	add_pokedexentrytable Starmie
-	add_pokedexentrytable Mr_Mime
+	add_pokedexentrytable MrMime
 	add_pokedexentrytable Scyther
 	add_pokedexentrytable Jynx
 	add_pokedexentrytable Electabuzz

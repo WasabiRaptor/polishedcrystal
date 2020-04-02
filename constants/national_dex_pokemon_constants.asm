@@ -111,7 +111,7 @@ EGG EQU $fe
 	nat_dexmon SLOWBRO
 	nat_dexmon MAGNEMITE
 	nat_dexmon MAGNETON
-	nat_dexmon FARFETCH_D
+	nat_dexmon FARFETCHD
 	nat_dexmon DODUO
 	nat_dexmon DODRIO
 	nat_dexmon SEEL
@@ -150,7 +150,7 @@ EGG EQU $fe
 	nat_dexmon SEAKING
 	nat_dexmon STARYU
 	nat_dexmon STARMIE
-	nat_dexmon MR__MIME
+	nat_dexmon MRMIME
 	nat_dexmon SCYTHER
 	nat_dexmon JYNX
 	nat_dexmon ELECTABUZZ

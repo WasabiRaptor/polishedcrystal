@@ -81,7 +81,7 @@ KantoEggMovePointers::
 	add_eggmoves NoKanto
 	add_eggmoves NoKanto
 	add_eggmoves NoKanto
-	add_eggmoves Farfetch_d
+	add_eggmoves Farfetchd
 	add_eggmoves Doduo
 	add_eggmoves NoKanto
 	add_eggmoves Seel

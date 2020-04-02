@@ -81,7 +81,7 @@ KantoAnimationIdlePointerTable::
 	add_idleanimtable Slowbro
 	add_idleanimtable Magnemite
 	add_idleanimtable Magneton
-	add_idleanimtable Farfetch_d
+	add_idleanimtable Farfetchd
 	add_idleanimtable Doduo
 	add_idleanimtable Dodrio
 	add_idleanimtable Seel
@@ -120,7 +120,7 @@ KantoAnimationIdlePointerTable::
 	add_idleanimtable Seaking
 	add_idleanimtable Staryu
 	add_idleanimtable Starmie
-	add_idleanimtable Mr_Mime
+	add_idleanimtable MrMime
 	add_idleanimtable Scyther
 	add_idleanimtable Jynx
 	add_idleanimtable Electabuzz

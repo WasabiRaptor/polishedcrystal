@@ -81,7 +81,7 @@ KantoAnimPointerTable::
 	variant_animdata Slowbro
 	variant_animdata Magnemite
 	variant_animdata Magneton
-	variant_animdata Farfetch_d
+	variant_animdata Farfetchd
 	variant_animdata Doduo
 	variant_animdata Dodrio
 	variant_animdata Seel
@@ -120,7 +120,7 @@ KantoAnimPointerTable::
 	variant_animdata Seaking
 	variant_animdata Staryu
 	variant_animdata Starmie
-	variant_animdata Mr_Mime
+	variant_animdata MrMime
 	variant_animdata Scyther
 	variant_animdata Jynx
 	variant_animdata Electabuzz

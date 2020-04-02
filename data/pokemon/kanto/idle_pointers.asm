@@ -245,8 +245,8 @@ MagnemiteAnimationIdlePointers::
 MagnetonAnimationIdlePointers::
 	add_idleanim Magneton
 
-Farfetch_dAnimationIdlePointers::
-	add_idleanim Farfetch_d
+FarfetchdAnimationIdlePointers::
+	add_idleanim Farfetchd
 
 DoduoAnimationIdlePointers::
 	add_idleanim Doduo
@@ -362,8 +362,8 @@ StaryuAnimationIdlePointers::
 StarmieAnimationIdlePointers::
 	add_idleanim Starmie
 
-Mr_MimeAnimationIdlePointers::
-	add_idleanim Mr_Mime
+MrMimeAnimationIdlePointers::
+	add_idleanim MrMime
 
 ScytherAnimationIdlePointers::
 	add_idleanim Scyther

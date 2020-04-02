@@ -81,7 +81,7 @@ KantoEvosAttacksPointerTable::
 	add_evosattackstable Slowbro
 	add_evosattackstable Magnemite
 	add_evosattackstable Magneton
-	add_evosattackstable Farfetch_d
+	add_evosattackstable Farfetchd
 	add_evosattackstable Doduo
 	add_evosattackstable Dodrio
 	add_evosattackstable Seel
@@ -120,7 +120,7 @@ KantoEvosAttacksPointerTable::
 	add_evosattackstable Seaking
 	add_evosattackstable Staryu
 	add_evosattackstable Starmie
-	add_evosattackstable Mr_Mime
+	add_evosattackstable MrMime
 	add_evosattackstable Scyther
 	add_evosattackstable Jynx
 	add_evosattackstable Electabuzz

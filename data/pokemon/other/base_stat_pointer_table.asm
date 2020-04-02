@@ -81,7 +81,7 @@ KantoBaseDataPointerTable::
 	add_basedatatable Slowbro
 	add_basedatatable Magnemite
 	add_basedatatable Magneton
-	add_basedatatable Farfetch_d
+	add_basedatatable Farfetchd
 	add_basedatatable Doduo
 	add_basedatatable Dodrio
 	add_basedatatable Seel
@@ -120,7 +120,7 @@ KantoBaseDataPointerTable::
 	add_basedatatable Seaking
 	add_basedatatable Staryu
 	add_basedatatable Starmie
-	add_basedatatable Mr_Mime
+	add_basedatatable MrMime
 	add_basedatatable Scyther
 	add_basedatatable Jynx
 	add_basedatatable Electabuzz

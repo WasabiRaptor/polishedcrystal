@@ -245,8 +245,8 @@ MagnemiteIconPointers::
 MagnetonIconPointers::
 	add_icon Magneton
 
-Farfetch_dIconPointers::
-	add_icon Farfetch_d
+FarfetchdIconPointers::
+	add_icon Farfetchd
 
 DoduoIconPointers::
 	add_icon Doduo
@@ -362,8 +362,8 @@ StaryuIconPointers::
 StarmieIconPointers::
 	add_icon Starmie
 
-Mr_MimeIconPointers::
-	add_icon Mr_Mime
+MrMimeIconPointers::
+	add_icon MrMime
 
 ScytherIconPointers::
 	add_icon Scyther

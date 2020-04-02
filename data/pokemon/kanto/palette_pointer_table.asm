@@ -81,7 +81,7 @@ KantoPalettePointerTable::
 	add_palettetable Slowbro
 	add_palettetable Magnemite
 	add_palettetable Magneton
-	add_palettetable Farfetch_d
+	add_palettetable Farfetchd
 	add_palettetable Doduo
 	add_palettetable Dodrio
 	add_palettetable Seel
@@ -120,7 +120,7 @@ KantoPalettePointerTable::
 	add_palettetable Seaking
 	add_palettetable Staryu
 	add_palettetable Starmie
-	add_palettetable Mr_Mime
+	add_palettetable MrMime
 	add_palettetable Scyther
 	add_palettetable Jynx
 	add_palettetable Electabuzz
