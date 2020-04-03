@@ -404,7 +404,7 @@ CheckTimeEvents: ; 9693a
 .do_daily
 	farcall CheckDailyResetTimer
 	farcall CheckPokerusTick
-	farcall CheckPhoneCall
+	;farcall CheckPhoneCall
 	ret c
 
 .nothing
