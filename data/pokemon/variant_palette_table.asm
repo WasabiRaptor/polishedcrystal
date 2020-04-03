@@ -1,13 +1,10 @@
-variant_palettes: macro
-    dbba \1, \2Palettes
-endm
-
-VariantPaletteTable:  
-    variant_palettes GROUP_GENERATION_ONE,  Kanto
-    variant_palettes GROUP_GENERATION_TWO,  Johto
-    variant_palettes GROUP_GENERATION_THREE, Hoenn
-    variant_palettes GROUP_GENERATION_FOUR, Sinnoh
-    variant_palettes GROUP_GENERATION_FIVE, Unova
 
 
-	dbba -1,         KantoPalettes
+RegionalPaletteTable:
+    regional_palettes Kanto
+    regional_palettes Kanto
+    regional_palettes Johto
+    regional_palettes Hoenn
+    regional_palettes Sinnoh
+    regional_palettes Unova
+    regional_palettes Kalos

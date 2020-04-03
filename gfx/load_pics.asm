@@ -1,4 +1,4 @@
-	
+
 GetPartyMonGroupSpeciesAndForm::
 	push hl
 	push bc
@@ -37,7 +37,7 @@ PokemonToGroupSpeciesAndForm::
 GetFrontpic: ; 51077
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 	ldh a, [rSVBK]
 	push af
@@ -72,7 +72,7 @@ GetOtherFrontpicAnimated:
 FrontpicPredef: ; 5108b
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
-	call IsAPokemon
+	farcall IsAPokemon
 	ret c
 	ldh a, [rSVBK]
 	push af
@@ -125,12 +125,7 @@ _GetFrontpic: ; 510a5
 	ret
 
 GetFrontpicPointer: ; 510d7
-	ld a, [wCurGroup]
 	call GetRelevantPicPointers
-	ld a, [wCurPartySpecies]
-	dec a	
-	ld bc, 6
-	rst AddNTimes
 	ld a, d
 	call GetFarByte
 	push af
@@ -237,26 +232,16 @@ GetBackpic: ; 5116c
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
-	call IsAPokemon
+	ld [wCurSpecies], a
+	farcall IsAPokemon
 	ret c
 
-	ld a, [wCurPartySpecies]
-	ld b, a
-	ld a, [wCurPartyGroup]
-	ld c, a
 	ldh a, [rSVBK]
 	push af
 	ld a, $6
 	ldh [rSVBK], a
 	push de
-	ld a, c
-	push bc
 	call GetRelevantPicPointers
-	pop bc
-	ld a, b
-	dec a	
-	ld bc, 6
-	rst AddNTimes
 	ld bc, 3
 	add hl, bc
 	ld a, d
@@ -486,15 +471,37 @@ LoadFrontpic: ; 512f2
 GetRelevantPicPointers:
 ; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
 ; returns c for variants, nc for normal species
-	ld hl, VariantPicPointerTable
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld a, [wCurGroup]
+	ld hl, RegionalPicPointerTable
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	ld d, a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+
+	ld a, [wCurSpecies]
+	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [wCurForm]
+	ld bc, 6
+	rst AddNTimes
+
 	ret
 
 INCLUDE "data/pokemon/variant_pic_pointer_table.asm"
+
+INCLUDE "data/pokemon/kanto/pic_pointer_table.asm"
+INCLUDE "data/pokemon/johto/pic_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/pic_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/pic_pointer_table.asm"
+INCLUDE "data/pokemon/unova/pic_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/pic_pointer_table.asm"

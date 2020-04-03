@@ -79,13 +79,13 @@ TryAddMonToParty: ; d88c
 	ld bc, PARTYMON_STRUCT_LENGTH
 	rst AddNTimes
 GeneratePartyMonStats: ; d906
-	ld e, l ; group is loaded form hl to de
+	ld e, l ; group is loaded from hl to de
 	ld d, h
 	push hl ; 1 ; group is pushed
 
 	ld a, [wCurPartyGroup]; pokemon group
 	ld [wCurGroup], a
-	ld [de], a 
+	ld [de], a
 	inc de ; species is now in de
 
 	ld a, [wCurPartySpecies]; pokemon species
@@ -114,28 +114,27 @@ GeneratePartyMonStats: ; d906
 	and $f
 	jr nz, .randomlygeneratemoves
 	ld de, wEnemyMonMoves
-rept NUM_MOVES + -1
+rept (NUM_MOVES *2) + -1
 	ld a, [de] ; ememy mon moves loaded into the first three moves
 	inc de
 	ld [hli], a
 endr
-	ld a, [de] ; last enemy move is loaded
+	ld a, [de] ; last byte of enemy move is loaded
 	ld [hl], a
 	jr .next
 
 .randomlygeneratemoves
 	xor a
-rept NUM_MOVES + -1
+rept (NUM_MOVES *2) + -1
 	ld [hli], a ; fist three moves made 0
 endr
-	ld [hl], a ; last move made 0
+	ld [hl], a ; last byte of last move made 0
 	ld [wEggMonInheritMoves], a
 	predef FillMoves ; moves are filled
-
 .next
 	pop de ; 1 ; moves are popped
-rept NUM_MOVES
-	inc de ; done four times, now mon id is in de
+rept (NUM_MOVES *2)
+	inc de ; done eight times, now mon id is in de
 endr
 	ld a, [wPlayerID]
 	ld [de], a
@@ -179,10 +178,10 @@ endr
 	ld [wd265], a
 	dec a
 	push de ; 2 ; dvs pushed
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	ld a, [wd265]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	pop de ; 1 ; dvs popped
 	pop hl ; 0 ; group is popped
 	push hl ; 1 ; group is pushed
@@ -217,7 +216,7 @@ endr
 	ld hl, wPartyMon1Group
 	predef PokemonToGroupSpeciesAndForm
 	ld a, [wPartyMon1Species]
-	ld c, a
+	ld [wCurSpecies], a
 	call GetAbility
 	pop hl ; 4
 	pop af ; 3 form is popped
@@ -228,7 +227,7 @@ endr
 	pop af ; 1 curgroup is popped
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
-	push bc ; 2 results form get ability are pushed
+	push bc ; 2 results from get ability are pushed
 	call GetBaseData
 	pop bc ; 1 then popped
 	ld a, b
@@ -277,7 +276,7 @@ endr
 	push hl ;3 ; group is pushed
 	push bc ;4 ; ability results pushed
 	push de ;5 ; dvs are pushed
-	call CheckKeyItem
+	farcall CheckKeyItem
 	pop de ;4 ; dvs popped
 	pop bc ;3 ; ability popped
 	pop hl ;2 ; group popped
@@ -350,13 +349,9 @@ endr
 	push hl ;3 ; group is pushed
 	push bc ;4 ; cute charm results pushed
 	push de ;5 ; dvs are pushed
-	call GetRelevantBaseData
-	ld a, [wCurPartySpecies]
-	dec a
+	farcall GetRelevantBaseData
 	ld bc, BASEMON_GENDER
-	add hl, bc 
-	ld bc, BASEMON_STRUCT_LENGTH
-	rst AddNTimes
+	add hl, bc
 	ld a, d ;bank
 	call GetFarByte
 	swap a
@@ -374,30 +369,18 @@ endr
 .Female:
 	ld b, a
 
-; Form 1
-	ld a, 1
+; Form 0
+	ld a, 0
 	add b
 	ld [wDVAndPersonalityBuffer + 4], a
 
 .initializetrainermonstats
 	ld bc, wDVAndPersonalityBuffer
 rept 5 ; DVs + Personality
-	ld a, [bc] 
+	ld a, [bc]
 	ld [de], a
 	inc bc ; this is done 5 times, loading each DV and then the form into de
-	inc de ; this then leaves PP in de
-endr
-	push hl ;2 ; group is pushed again
-	push de ;3 ; PP is pushed
-	inc hl ; inc group to species
-	inc hl ; inc species to item
-	inc hl ; items are two bytes
-	inc hl ; inc item to moves
-	predef FillPP
-	pop de ;2 ; pop pp
-	pop hl ;1 ; pop group
-rept NUM_MOVES
-	inc de ; inc past pp to happiness
+	inc de ; this then leaves happiness in de
 endr
 	ld a, [wMonType]
 	and $f
@@ -416,18 +399,29 @@ endr
 	ld [de], a
 	inc de ; level is loaded and then inc to status
 	xor a
-rept 2 ; Status
+; status
 	ld [de], a ; status is set to 0
-	inc de ; inc to unused then to HP
+	inc de ; status to cur PP
+	push hl ;2 ; group is pushed again
+	push de ;3 ; cur PP is pushed
+	inc hl ; inc group to species
+	inc hl ; inc species to item
+	inc hl ; items are two bytes
+	inc hl ; inc item to moves
+	predef FillPP
+	pop de ;2 ; pop cur PP
+	pop hl ;1 ; pop group
+rept NUM_MOVES
+	inc de ; inc from CurPP to HP
 endr
 	pop hl ;0 ; pop group
 	push hl ;1 ; push group
-	ld bc, MON_EVS - 1 ; evs -1 would be the last byte of EXP I believe? 
+	ld bc, MON_EVS - 1 ; evs -1 would be the last byte of EXP I believe?
 	add hl, bc ; and then it adds that to hl putting the last byte of exp in there
 	lb bc, FALSE, STAT_HP ; and then calc the HP?
 	call CalcPkmnStatC
 	ldh a, [hProduct + 2]
-	ld [de], a 
+	ld [de], a
 	inc de
 	ldh a, [hProduct + 3]
 	ld [de], a
@@ -441,21 +435,8 @@ rept 5
 	ld a, [hli]
 	ld [de], a
 	inc de ; dvs are in de, and the enemy mon's ain in hl, and this is repeated 5 times
-	; dvs only take three bytes, so this must be copying the personality and form byte as well, ending on PP
+	; dvs only take three bytes, so this must be copying the personality and form byte as well, ending on happiness
 endr
-	pop hl ;1 group is popped
-
-	push hl ;2 and pushed again, without being used at all
-	ld hl, wEnemyMonPP
-	ld b, NUM_MOVES
-.wildmonpploop ; looped four times, with pp in de and in hl, so it does indeed copy the pp over
-	ld a, [hli]
-	ld [de], a
-	inc de
-	dec b
-	jr nz, .wildmonpploop; ending with happiness in de
-	pop hl  ;1 and once more the group is popped, they still don't do anything with it
-
 	ld a, BASE_HAPPINESS
 	ld [de], a ; base happiness is loaded, what a surprise
 	inc de ; pokerus and caught data is here now
@@ -471,12 +452,19 @@ endr
 	; Copy wEnemyMonStatus
 	ld a, [hli]
 	ld [de], a
-	inc de ; next is unused, huh still crashed when I removed it
-	; Copy wEnemyMonUnused
+	inc de ; next after status is the current PP
+
+	;ld hl, wEnemyMonCurPP
+	ld b, NUM_MOVES
+
+.wildmonpploop ; looped four times, with pp in de and in hl, so it does indeed copy the pp over
 	ld a, [hli]
 	ld [de], a
-	inc de ; 
-	; Copy wEnemyMonHP
+	inc de
+	dec b
+	jr nz, .wildmonpploop; ending with cur HP in de
+
+; Copy wEnemyMonHP
 	ld a, [hli]
 	ld [de], a
 	inc de ; and finally the two bytes for current HP
@@ -503,7 +491,7 @@ endr
 	push de ; 2 ; max hp is pushed
 	call CalcPkmnStats
 	pop hl ; 1 ; and max hp is popped into hl
-	push bc ; 2 ; and then bc is pushed, 
+	push bc ; 2 ; and then bc is pushed,
 	inc hl ; and then we inc the max HP, to get its second byte
 	ld c, [hl] ; and we put the second hp byte in c
 	dec hl ; then we dec back to the first max hp byte
@@ -542,21 +530,25 @@ FillPP: ; da6d
 	ld a, [hli]
 	and a
 	jr z, .next
-	dec a
 	push hl
 	push de
 	push bc
-	ld hl, Moves
-	ld bc, MOVE_LENGTH
+	inc hl
+	inc hl
+	inc hl
+	ld c, a
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
+	dec bc
+	ld hl, Moves + MOVE_PP
+	ld a, MOVE_LENGTH
 	rst AddNTimes
-	ld de, wStringBuffer1
 	ld a, BANK(Moves)
-	call FarCopyBytes
+	call GetFarByte
 	pop bc
 	pop de
 	pop hl
-	ld a, [wStringBuffer1 + MOVE_PP]
-
 .next
 	ld [de], a
 	inc de
@@ -565,6 +557,28 @@ FillPP: ; da6d
 	pop bc
 	ret
 ; da96
+
+SkipPokemonNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PKMN_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
+
+SkipPlayerNames:: ; 0x30f4
+; Skip a names.
+	ld bc, PLAYER_NAME_LENGTH
+	and a
+	ret z
+.loop
+	add hl, bc
+	dec a
+	jr nz, .loop
+	ret
 
 AddTempmonToParty: ; da96
 	ld hl, wPartyCount
@@ -623,7 +637,7 @@ AddTempmonToParty: ; da96
 	cp EGG
 	jr z, .egg
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	ld hl, wPartyMon1Happiness
 	ld a, [wPartyCount]
 	dec a
@@ -900,11 +914,11 @@ RestorePPofDepositedPokemon: ; dcb6
 	rst AddNTimes
 	ld b, h
 	ld c, l
-	ld hl, MON_PP
+	ld hl, MON_CUR_PP
 	add hl, bc
 	push hl
 	push bc
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 	pop bc
@@ -1236,13 +1250,13 @@ SentPkmnIntoBox: ; de6e
 	ld [de], a
 	ld a, [wCurPartySpecies]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	ld a, [wCurPartySpecies]
 	cp UNOWN
 	jr nz, .not_unown
 	ld hl, sBoxMon1Group
 	predef GetPartyMonGroupSpeciesAndForm
-	farcall UpdateUnownDex
+	;farcall UpdateUnownDex
 
 .not_unown
 	ld hl, sBoxMon1Moves
@@ -1250,8 +1264,8 @@ SentPkmnIntoBox: ; de6e
 	ld bc, NUM_MOVES
 	rst CopyBytes
 
-	ld hl, sBoxMon1PP
-	ld de, wTempMonPP
+	ld hl, sBoxMon1CurPP
+	ld de, wTempMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 
@@ -1329,10 +1343,10 @@ GiveEgg:: ; df8c
 ; when it is successful.  This routine will make
 ; sure that we aren't newly setting flags.
 	push af
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop af
 	push bc
-	call CheckSeenMon
+	farcall CheckSeenMon
 	push bc
 
 	call TryAddMonToParty
@@ -1372,9 +1386,9 @@ GiveEgg:: ; df8c
 	dec a
 	ld c, a
 	ld d, $0
-	ld hl, wPokedexSeen
-	ld b, RESET_FLAG
-	predef FlagPredef
+	;ld hl, wPokedexSeen
+	;ld b, RESET_FLAG
+	;predef FlagPredef
 
 .skip_seen_flag
 	pop af
@@ -1585,6 +1599,23 @@ RemoveMonFromPartyOrBox: ; e039
 	jp CloseSRAM
 ; e134
 
+CopyDataUntil:: ; 318c
+; Copy [hl .. bc) to de.
+
+; In other words, the source data is
+; from hl up to but not including bc,
+; and the destination is de.
+
+	ld a, [hli]
+	ld [de], a
+	inc de
+	ld a, h
+	cp b
+	jr nz, CopyDataUntil
+	ld a, l
+	cp c
+	jr nz, CopyDataUntil
+	ret
 
 ComputeNPCTrademonStats: ; e134
 	ld a, MON_LEVEL
@@ -1946,7 +1977,57 @@ CalcPkmnStatC: ; e17b
 	pop de ; 1
 	pop hl ; 0
 	ret
-; e277
+
+GetEnemyPartyParamLocation::
+	push bc
+	ld hl, wOTPartyMons
+	jr PkmnParamLocation
+GetPartyParamLocation:: ; 3917
+; Get the location of parameter a from wCurPartyMon in hl
+	push bc
+	ld hl, wPartyMons
+PkmnParamLocation:
+	cp MON_GROUP_SPECIES_AND_FORM
+	ld c, a
+	ld a, [wCurPartyMon]
+	jp z, .species_and_group
+
+	ld b, 0
+	add hl, bc
+	call GetPartyLocation
+	pop bc
+	ret
+
+.species_and_group
+	call GetPartyLocation
+	predef GetPartyMonGroupSpeciesAndForm
+	pop bc
+	ret
+; 3927
+
+GetPartyLocation::
+; Add the length of a PartyMon struct to hl a times.
+	push bc
+	ld bc, PARTYMON_STRUCT_LENGTH
+	rst AddNTimes
+	pop bc
+	ret
+
+GetNature::
+; 'b' contains the target Nature to check
+; returns nature in b
+	ld a, [wInitialOptions]
+	bit NATURES_OPT, a
+	jr z, .no_nature
+	ld a, b
+	and NATURE_MASK
+	; assume nature is 0-24
+	ld b, a
+	ret
+
+.no_nature:
+	ld b, NO_NATURE
+	ret
 
 GetNatureStatMultiplier::
 ; a points to Nature
@@ -2053,6 +2134,8 @@ GivePoke:: ; e277
 	ld [wTempEnemyMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
+	ld a, [wCurForm]
+	ld [wTempEnemyMonForm], a
 	farcall LoadEnemyMon
 	ld a, BANK(sBoxMon1Item)
 	call GetSRAMBank
@@ -2099,6 +2182,8 @@ GivePoke:: ; e277
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld [wTempEnemyMonGroup], a
+	ld a, [wCurForm]
+	ld [wTempEnemyMonForm], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
@@ -2169,7 +2254,7 @@ GivePoke:: ; e277
 	and a
 	jr nz, .giftball
 	ld a, POKE_BALL
-.giftball	
+.giftball
 	ld c, a
 	farcall SetGiftPartyMonCaughtData
 	jr .skip_nickname

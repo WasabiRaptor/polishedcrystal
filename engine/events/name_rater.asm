@@ -11,7 +11,7 @@ NameRater: ; fb6ed
 	jr c, .cancel
 ; He can't rename an egg...
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .egg
 ; ... or a Pokemon you got from a trade.
@@ -185,7 +185,30 @@ GetNicknameLength: ; fb802
 	cp PKMN_NAME_LENGTH - 1
 	jr nz, .loop
 	ret
-; fb80f
+
+GetCurNick:: ; 389c
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
+
+GetNick:: ; 38a2
+; Get nickname a from list hl.
+
+	push hl
+	push bc
+
+	farcall SkipPokemonNames
+	ld de, wStringBuffer1
+
+	push de
+	ld bc, PKMN_NAME_LENGTH
+	rst CopyBytes
+	pop de
+
+	pop bc
+	pop hl
+	ret
+; 38bb
+
 
 NameRaterIntroText: ; 0xfb80f
 	; Hello, hello! I'm the NAME RATER.

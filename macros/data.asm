@@ -70,7 +70,7 @@ ENDM
 
 dba: MACRO ; dbw bank, address
 	rept _NARG
-	dbw BANK(\1), \1
+	dbw LOW(BANK(\1)), \1
 	shift
 	endr
 ENDM
@@ -92,25 +92,73 @@ dbbba: MACRO
 	dba \3
 ENDM
 
+add_pictable: macro
+	dw \1PicPointers
+endm
+
 add_pics: MACRO ; dba Frontpic, Backpic
 	dba \1Frontpic
 	dba \1Backpic
 	ENDM
 
+add_pokedexentrytable: macro
+	dw \1PokedexEntryPointers
+endm
+
 add_pokedexentry: macro
 	dba \1PokedexEntry
+endm
+
+add_basedatatable: macro
+	dw \1BaseDataPointers
+endm
+
+add_basedata: macro
+	dw \1BaseData
+endm
+
+add_nametable: macro
+	dw \1Names
+endm
+
+add_name: macro
+	dw \1Name
+endm
+
+add_palettetable: macro
+	dw \1PalettePointers
+endm
+
+add_palettes: macro
+	dw \1Palettes
+endm
+
+add_evosattackstable: macro
+	dw \1EvosAttacksPointers
 endm
 
 add_evosattacks: macro
 	dw \1EvosAttacks
 endm
 
+add_eggmovestable: macro
+	dw \1EggMovesPointers
+endm
+
 add_eggmoves: macro
 	dw \1EggMoves
 endm
 
+add_icontable: macro
+	dba \1IconPointers
+endm
+
 add_icon: macro
 	dba \1Icon
+endm
+
+add_bitmaskstable: macro
+	dw \1BitmasksPointers
 endm
 
 add_bitmasks: macro
@@ -125,9 +173,49 @@ add_idleanim: macro
 	dw \1AnimationIdle
 endm
 
+add_framestable: macro
+	dw \1FramesPointers
+ENDM
+
 add_frames: macro
 	dw \1Frames
 ENDM
+
+variant_animdata: macro
+    dw \1AnimationPointers, \1AnimationIdlePointers
+endm
+
+regional_animdata: macro
+    dba \1AnimPointerTable
+endm
+
+regional_frames: macro
+    dbw BANK(\1Frames), \1FramesPointerTable
+endm
+
+regional_bitmasks: macro
+    dbw BANK(\1Bitmasks), \1BitmasksPointerTable
+endm
+
+regional_basedata: macro
+    dba \1BaseDataPointerTable
+endm
+
+regional_evosattacks: macro
+    dba \1EvosAttacksPointerTable
+endm
+
+regional_evomoves: macro
+    dba \1EvolutionMovesPointerTable
+endm
+
+regional_palettes: macro
+    dba \1PalettePointerTable
+endm
+
+regional_picpointers: macro
+    dbw BANK(\1PicPointers), \1PicPointerTable
+endm
 
 dbpixel: MACRO
 if _NARG >= 4
@@ -186,3 +274,6 @@ rept 8
 	shift
 endr
 ENDM
+
+NaN EQU 0
+undefined EQU 0

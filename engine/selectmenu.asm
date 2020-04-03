@@ -30,7 +30,7 @@ CheckRegisteredItem:: ; 13345
 	push hl
 	push bc
 	push af
-	call CheckKeyItem
+	farcall CheckKeyItem
 	jr nc, .registration_ok
 
 .registration_ok

@@ -41,12 +41,17 @@ AnimateFrontpic: ; d008e
 	call AnimateMon_CheckIfPokemon
 	ret c
 	call LoadMonAnimation
+	ld a, 1
+	ldh [hRunPicAnim], a
 .loop
 	call SetUpPokeAnim
-	push af
 	farcall HDMATransferTileMapToWRAMBank3
-	pop af
-	jr nc, .loop
+	ldh a, [hDEDCryFlag]
+	and a
+	call nz, _PlayCry
+	ldh a, [hRunPicAnim]
+	and a
+	jr nz, .loop
 	ret
 ; d00a3
 
@@ -91,16 +96,23 @@ LoadMonAnimation: ; d00a3
 ; d = start tile
 	ld a, d
 	ld [wPokeAnimGraphicStartTile], a
+	call ConvertTileMapAddrToBGMap
+	ld a, l
+	ld [wPokeAnimDestination], a
+	ld a, h
+	ld [wPokeAnimDestination + 1], a
 
 	ld a, BANK(wCurPartySpecies)
 	ld hl, wCurPartySpecies
 	call GetFarWRAMByte
-	ld [wPokeAnimSpeciesOrVariant], a
+	ld [wPokeAnimSpecies], a
+	ld [wCurSpecies], a
 
-	ld a, BANK(wCurGroup)
-	ld hl, wCurGroup
-	call GetFarWRAMByte
+	ld a, [wCurGroup]
 	ld [wPokeAnimGroup], a
+
+	ld a, [wCurForm]
+	ld [wPokeAnimForm], a
 
 	call PokeAnim_GetFrontpicDims
 	ld a, c
@@ -111,7 +123,7 @@ LoadMonAnimation: ; d00a3
 	ret
 ; d0228
 
-SetUpPokeAnim: ; d00b4
+SetUpPokeAnim:: ; d00b4
 	ldh a, [rSVBK]
 	push af
 	ld a, $2
@@ -167,41 +179,29 @@ PokeAnim_Wait: ; d00fe
 	ld hl, wPokeAnimWaitCounter
 	dec [hl]
 	ret nz
+PokeAnim_IncrementSceneIndex:
 	ld a, [wPokeAnimSceneIndex]
 	inc a
 	ld [wPokeAnimSceneIndex], a
 	ret
 ; d010b
 
-PokeAnim_Setup: ; d010b
+PokeAnim_Setup:
 	lb bc, 0, FALSE
+	; fallthrough
+
+PokeAnim_Setup_End:
 	call PokeAnim_InitAnim
 	call PokeAnim_SetVBank1
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d011d
+	jr PokeAnim_IncrementSceneIndex
 
-PokeAnim_Setup2: ; d011d
+PokeAnim_Setup2:
 	lb bc, 4, FALSE
-	call PokeAnim_InitAnim
-	call PokeAnim_SetVBank1
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d012f
+	jr PokeAnim_Setup_End
 
-PokeAnim_Extra: ; d012f
+PokeAnim_Extra:
 	lb bc, 0, TRUE
-	call PokeAnim_InitAnim
-	call PokeAnim_SetVBank1
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d0141
+	jr PokeAnim_Setup_End
 
 PokeAnim_Play: ; d0141
 	call PokeAnim_DoAnimScript
@@ -209,10 +209,7 @@ PokeAnim_Play: ; d0141
 	bit 7, a
 	ret z
 	call PokeAnim_PlaceGraphic
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d0155
 
 PokeAnim_Play2: ; d0155
@@ -220,55 +217,52 @@ PokeAnim_Play2: ; d0155
 	ld a, [wPokeAnimJumptableIndex]
 	bit 7, a
 	ret z
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d0166
 
 PokeAnim_BasePic: ; d0166
 	call PokeAnim_DeinitFrames
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d0171
 
 PokeAnim_Finish: ; d0171
 	call PokeAnim_DeinitFrames
 	ld hl, wPokeAnimSceneIndex
 	set 7, [hl]
+	xor a
+	ldh [hRunPicAnim], a
 	ret
 ; d017a
 
-PokeAnim_Cry: ; d017a
-	ld a, [wPokeAnimSpeciesOrVariant]
-	call _PlayCry
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d0188
+PokeAnim_Cry:
+	ld a, [wPokeAnimSpecies]
+	;call LoadCryHeader
+	ld a, [wPokeAnimSpecies]
+	jr c, PokeAnim_DedCry
+	;call _PlayCry
+	jr PokeAnim_IncrementSceneIndex
 
-PokeAnim_CryNoWait: ; d0188
-	ld a, [wPokeAnimSpeciesOrVariant]
-	call PlayCry2
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
-; d0196
+PokeAnim_CryNoWait:
+	ld a, [wPokeAnimSpecies]
+	;call LoadCryHeader
+	ld a, [wPokeAnimSpecies]
+	jr c, PokeAnim_DedCry
+	;call PlayCry2
+	jr PokeAnim_IncrementSceneIndex
 
-PokeAnim_StereoCry: ; d0196
+PokeAnim_StereoCry:
 	ld a, $f
 	ld [wCryTracks], a
-	ld a, [wPokeAnimSpeciesOrVariant]
+	ld a, [wPokeAnimSpecies]
+	call LoadCryHeader
+	ld a, [wPokeAnimSpecies]
+	jr c, PokeAnim_DedCry
 	call PlayStereoCry2
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
-	ret
+	jr PokeAnim_IncrementSceneIndex
 ; d01a9
+PokeAnim_DedCry:
+	ldh [hDEDCryFlag], a
+	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_DeinitFrames: ; d01a9
 	ldh a, [rSVBK]
@@ -288,7 +282,7 @@ AnimateMon_CheckIfPokemon: ; d01c6
 	ld a, [wCurPartySpecies]
 	cp EGG
 	jr z, .fail
-	call IsAPokemon
+	farcall IsAPokemon
 	jr c, .fail
 	and a
 	ret
@@ -298,10 +292,40 @@ AnimateMon_CheckIfPokemon: ; d01c6
 	ret
 ; d01d6
 
+ConvertTileMapAddrToBGMap:
+	ld a, l
+	sub LOW(wTileMap)
+	ld l, a
+	ld a, h
+	sbc HIGH(wTileMap)
+	ld h, a
+	ld bc, -SCREEN_WIDTH
+	ld d, 0
+	jr .handleLoop
+.subtractLoop
+	inc d
+.handleLoop
+	add hl, bc
+	jr c, .subtractLoop
+	ld bc, SCREEN_WIDTH
+	add hl, bc
+	ld e, l
+	ldh a, [hBGMapAddress]
+	ld l, a
+	ldh a, [hBGMapAddress + 1]
+	ld h, a
+	ld bc, BG_MAP_WIDTH
+	ld a, d
+	rst AddNTimes
+	ld c, e
+	ld b, 0
+	add hl, bc
+	ret
+
 PokeAnim_InitAnim: ; d0228
 	ldh a, [rSVBK]
 	push af
-	ld a, $2
+	ld a, BANK(wPokeAnimSceneIndex)
 	ldh [rSVBK], a
 	push bc
 	ld hl, wPokeAnimExtraFlag
@@ -862,12 +886,19 @@ PokeAnim_GetAttrMapCoord: ; d0551
 
 GetMonAnimPointer: ; d055c
 	ld a, [wPokeAnimGroup]
-	ld hl, VariantAnimPointerTable
-	ld de, 6
-	call IsInArray
-	inc hl
+	ld hl, RegionalAnimPointerTable ; currently all anims are in this bank, but this may have to be reworked in future again
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
-	ld c, a
+	ld [wPokeAnimPointerBank], a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [wPokeAnimSpecies]
+	dec a
+	ld bc, 4
+	rst AddNTimes
 
 	ld a, [wPokeAnimExtraFlag]
 	and a
@@ -876,19 +907,17 @@ GetMonAnimPointer: ; d055c
 	inc hl
 .extras
 
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	ld a, [wPokeAnimPointerBank]
+	call GetFarHalfword
 
-	ld a, [wPokeAnimSpeciesOrVariant]
-	dec a
+	ld a, [wPokeAnimForm]
 	ld e, a
 	ld d, 0
 	add hl, de
 	add hl, de
-	ld a, c
-	ld [wPokeAnimPointerBank], a
+	ld a, [wPokeAnimPointerBank]
 	call GetFarHalfword
+
 	ld a, l
 	ld [wPokeAnimPointerAddr], a
 	ld a, h
@@ -914,27 +943,31 @@ PokeAnim_GetFrontpicDims: ; d05b4
 
 GetMonFramesPointer: ; d05ce
 	ld a, [wPokeAnimGroup]
-	ld hl, VariantFramesPointerTable
-	ld de, 5
-	call IsInArray
-	inc hl
+	ld hl, RegionalFramesPointerTable
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
-	ld c, a
-	ld a, [hli]
-	ld b, a
+	ld [wPokeAnimFramesBank], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, c
-	ld [wPokeAnimFramesBank], a
 
-	ld a, [wPokeAnimSpeciesOrVariant]
+	ld a, [wPokeAnimSpecies]
 	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+
+	ld a, [wPokeAnimFramesBank]
+	call GetFarHalfword
+
+	ld a, [wPokeAnimForm]
 	ld e, a
 	ld d, 0
 	add hl, de
 	add hl, de
-	ld a, b
+	ld a, [wPokeAnimFramesBank]
 	call GetFarHalfword
 	ld a, l
 	ld [wPokeAnimFramesAddr], a
@@ -945,18 +978,27 @@ GetMonFramesPointer: ; d05ce
 
 GetMonBitmaskPointer: ; d061b
 	ld a, [wPokeAnimGroup]
-	ld hl, VariantBitmasksPointerTable
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld hl, RegionalBitmasksPointerTable
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	ld [wPokeAnimBitmaskBank], a
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 
-	ld a, [wPokeAnimSpeciesOrVariant]
+
+	ld a, [wPokeAnimSpecies]
 	dec a
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [wPokeAnimBitmaskBank]
+	call GetFarHalfword
+
+
+	ld a, [wPokeAnimForm]
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -996,4 +1038,4 @@ HOF_AnimateFrontpic: ; d066e
 	ret
 ; d0695
 
-INCLUDE "gfx/pokemon/variant_anim_data_tables.asm"
+INCLUDE "data/pokemon/variant_anim_data_tables.asm"

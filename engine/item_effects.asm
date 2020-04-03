@@ -468,11 +468,11 @@ PokeBallEffect: ; e8a2
 
 	ld hl, wWildMonMoves
 	ld de, wEnemyMonMoves
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES * 2
 	rst CopyBytes
 
-	ld hl, wWildMonPP
-	ld de, wEnemyMonPP
+	ld hl, wWildMonCurPP
+	ld de, wEnemyMonCurPP
 	ld bc, NUM_MOVES
 	rst CopyBytes
 
@@ -522,13 +522,13 @@ PokeBallEffect: ; e8a2
 	ld [wd265], a
 
 	dec a
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 
 	ld a, c
 	push af
 	ld a, [wd265]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 	pop af
 	and a
 	jr nz, .skip_pokedex
@@ -809,8 +809,11 @@ HeavyBallMultiplier:
 ; else add 30 to catch rate if weight < 409.6 kg
 ; else add 40 to catch rate (never happens)
 	push bc
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld [wd265], a
+	ld [wCurSpecies], a
 	farcall GetDexEntryPointer
 	ld a, b
 	call GetFarHalfword
@@ -923,15 +926,10 @@ GLOBAL EvosAttacksPointers
 
 	push bc
 	ld a, [wTempEnemyMonGroup]
-	farcall GetRelevantEvosAttacksPointers
+	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
-	ld a, d ;bank
-	call GetFarHalfword
+	ld [wCurSpecies], a
+	farcall GetRelevantEvosAttacksPointers
 	pop bc
 
 	push bc
@@ -1114,7 +1112,7 @@ RepeatBallMultiplier:
 
 	dec a
 	push bc
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop bc
 	ret z
 
@@ -1397,7 +1395,7 @@ EvoStoneEffect:
 	jp c, .DecidedNotToUse
 
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	ld a, [hl]
 	cp EVERSTONE
@@ -1434,7 +1432,7 @@ VitaminEffect: ; ee3d
 	call GetEVRelativePointer
 
 	ld a, MON_EVS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	add hl, bc
 	ld a, [hl]
@@ -1524,19 +1522,19 @@ GetEVRelativePointer: ; eed9
 
 RareCandy_StatBooster_GetParameters: ; eef5
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	ld [wCurPartyLevel], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call GetBaseData ;frorm is known
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	jp GetNick
+	predef_jump GetNick
 ; 0xef14
 
 
@@ -1549,7 +1547,7 @@ RareCandy: ; ef14
 	call RareCandy_StatBooster_GetParameters
 
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	ld a, [hl]
 	cp MAX_LEVEL
@@ -1564,7 +1562,7 @@ RareCandy: ; ef14
 
 	pop de
 	ld a, MON_EXP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 
 	ldh a, [hMultiplicand]
 	ld [hli], a
@@ -1575,7 +1573,7 @@ RareCandy: ; ef14
 
 	push bc
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	push de
 	ld de, wStringBuffer3
 	ld bc, 12
@@ -1593,7 +1591,7 @@ RareCandy: ; ef14
 	ld [wMonType], a
 	predef CopyPkmnToTempMon
 	farcall PrintStatDifferences
-	
+
 	ld hl, wTempMonGroup
 	predef GetPartyMonGroupSpeciesAndForm
 
@@ -1650,7 +1648,7 @@ UseStatusHealer: ; efda (3:6fda)
 	ret z
 	call GetItemHealingAction
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and c
 	jr nz, .good
@@ -1690,7 +1688,7 @@ BattlemonRestoreHealth: ; f01e (3:701e)
 	call IsItemUsedOnBattleMon
 	ret nc
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBattleMonHP], a
 	ld a, [hld]
@@ -1850,7 +1848,7 @@ FullRestore: ; f128
 	ld [wLowHealthAlarm], a
 	call ReviveFullHP
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	xor a
 	ld [hli], a
 	ld [hl], a
@@ -1991,7 +1989,7 @@ UseItem_DoSelectMon:
 	ret c
 
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr z, .not_egg
 
@@ -2093,7 +2091,7 @@ ReviveFullHP: ; f2c3 (3:72c3)
 	call LoadHPFromBuffer1
 ContinueRevive: ; f2c6 (3:72c6)
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld [hl], d
 	inc hl
 	ld [hl], e
@@ -2101,7 +2099,7 @@ ContinueRevive: ; f2c6 (3:72c6)
 
 RestoreHealth: ; f2d1 (3:72d1)
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	add e
 	ld [hld], a
@@ -2111,11 +2109,11 @@ RestoreHealth: ; f2d1 (3:72d1)
 	jr c, .full_hp
 	call LoadCurHPIntoBuffer5
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld d, h
 	ld e, l
 	ld a, MON_MAXHP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [de]
 	sub [hl]
 	dec de
@@ -2128,7 +2126,7 @@ RestoreHealth: ; f2d1 (3:72d1)
 
 RemoveHP: ; f2f9 (3:72f9)
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	sub e
 	ld [hld], a
@@ -2165,7 +2163,7 @@ IsMonAtFullHealth: ; f31b (3:731b)
 
 LoadCurHPIntoBuffer5: ; f328 (3:7328)
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBuffer6], a
 	ld a, [hl]
@@ -2175,7 +2173,7 @@ LoadCurHPIntoBuffer5: ; f328 (3:7328)
 
 LoadCurHPToBuffer3: ; f348 (3:7348)
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBuffer4], a
 	ld a, [hl]
@@ -2192,7 +2190,7 @@ LoadHPFromBuffer3: ; f356 (3:7356)
 LoadMaxHPToBuffer1: ; f35f (3:735f)
 	push hl
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld [wBuffer2], a
 	ld a, [hl]
@@ -2210,7 +2208,7 @@ LoadHPFromBuffer1: ; f36f (3:736f)
 GetOneFifthMaxHP: ; f378 (3:7378)
 	push bc
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ldh [hDividend + 0], a
 	ld a, [hl]
@@ -2261,7 +2259,7 @@ GetHealingItemAmount: ; f395 (3:7395)
 
 .set_de_to_hp
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld d, a
 	ld e, [hl]
@@ -2492,7 +2490,7 @@ PrintAprValues:
 	lb bc, 1, 2
 	hlcoord 10, 4
 	ld de, wApricorns
-	call PrintNum
+	predef PrintNum
 	hlcoord 16, 4
 	call .print
 	hlcoord 10, 6
@@ -2506,7 +2504,7 @@ PrintAprValues:
 	hlcoord 10, 10
 .print
 	inc de
-	jp PrintNum
+	predef_jump PrintNum
 
 
 OldRod: ; f5a5
@@ -2595,7 +2593,7 @@ RestorePPEffect: ; f5bf
 	cp SKETCH
 	jr z, .CantUsePPUpOnSketch
 
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_MOVES_HIGH - MON_MOVES
 	add hl, bc
 	ld a, [hl]
 	cp 3 << 6 ; have 3 PP Ups already been used?
@@ -2649,7 +2647,7 @@ BattleRestorePP: ; f652
 	ld a, [wPlayerSubStatus2]
 	bit SUBSTATUS_TRANSFORMED, a
 	jr nz, .not_in_battle
-	call .UpdateBattleMonPP
+	call .UpdateBattleMonCurPP
 
 .not_in_battle
 	call Play_SFX_FULL_HEAL
@@ -2657,7 +2655,7 @@ BattleRestorePP: ; f652
 	call PrintText
 	jr FinishPPRestore
 
-.UpdateBattleMonPP:
+.UpdateBattleMonCurPP:
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1Moves
 	ld bc, PARTYMON_STRUCT_LENGTH
@@ -2673,10 +2671,10 @@ BattleRestorePP: ; f652
 	push hl
 	push de
 	push bc
-rept NUM_MOVES + 5 ; wBattleMonPP - wBattleMonMoves
+rept (NUM_MOVES * 2) + 8 ; wBattleMonCurPP - wBattleMonMoves
 	inc de
 endr
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES
 	add hl, bc
 	ld a, [hl]
 	ld [de], a
@@ -2742,13 +2740,12 @@ RestorePP: ; f6e8
 	xor a ; PARTYMON
 	ld [wMonType], a
 	call GetMaxPPOfMove
-	ld hl, wPartyMon1PP
+	ld hl, wPartyMon1CurPP
 	ld bc, PARTYMON_STRUCT_LENGTH
 	call GetMthMoveOfNthPartymon
 	ld a, [wd265]
 	ld b, a
 	ld a, [hl]
-	and (1 << 6) - 1
 	cp b
 	jr nc, .dont_restore
 
@@ -2766,16 +2763,13 @@ RestorePP: ; f6e8
 
 .restore_some
 	ld a, [hl]
-	and (1 << 6) - 1
 	add c
 	cp b
 	jr nc, .restore_all
 	ld b, a
 
 .restore_all
-	ld a, [hl]
-	and 3 << 6
-	or b
+	ld a, b
 	ld [hl], a
 	ret
 
@@ -3029,12 +3023,12 @@ UsedItemText: ; 0xf83d
 
 ApplyPPUp: ; f84c
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	push hl
 	ld de, wBuffer1
 	predef FillPP
 	pop hl
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES
 	add hl, bc
 	ld de, wBuffer1
 	ld b, 0
@@ -3053,9 +3047,13 @@ ApplyPPUp: ; f84c
 
 .use
 	ld a, [hl]
-	and 3 << 6
+	push hl
+	ld bc, MON_MOVES_HIGH - MON_CUR_PP
+	add hl, bc
+	ld b, a
+	ld a, [hl]
+	pop hl
 	call nz, ComputeMaxPP
-
 .skip
 	inc hl
 	inc de
@@ -3065,6 +3063,8 @@ ApplyPPUp: ; f84c
 
 
 ComputeMaxPP: ; f881
+	push bc
+	push af ; preserve the PP up input
 	push bc
 	; Divide the base PP by 5.
 	ld a, [de]
@@ -3077,9 +3077,10 @@ ComputeMaxPP: ; f881
 	ldh [hDivisor], a
 	ld b, 4
 	call Divide
-	; Get the number of PP, which are bits 6 and 7 of the PP value stored in RAM.
-	ld a, [hl]
-	ld b, a
+	pop bc ; the current PP is in b
+	; Get the number of PP Ups used, which should be inputted
+	pop af
+	; PP up should not be in the PP byte, therefore it won't be loaded into b, and therefore won't be added
 	swap a
 	and $f
 	srl a
@@ -3090,16 +3091,18 @@ ComputeMaxPP: ; f881
 	jr z, .NoPPUp
 
 .loop
+	; because the current PP is in its own byte now, this should not be an issue
+
 	; Normally, a move with 40 PP would have 64 PP with three PP Ups.
 	; Since this would overflow into bit 6, we prevent that from happening
 	; by decreasing the extra amount of PP each PP Up provides, resulting
 	; in a maximum of 61.
 	ldh a, [hQuotient + 2]
-	cp $8
-	jr c, .okay
-	ld a, $7
+	;cp $8
+	;jr c, .okay
+	;ld a, $7
 
-.okay
+;.okay
 	add b
 	ld b, a
 	ld a, [wd265]
@@ -3115,11 +3118,11 @@ ComputeMaxPP: ; f881
 ; f8b9
 
 RestoreAllPP: ; f8b9
-	ld a, MON_PP
-	call GetPartyParamLocation
+	ld a, MON_CUR_PP
+	predef GetPartyParamLocation
 	push hl
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	pop de
 	xor a ; PARTYMON
 	ld [wMenuCursorY], a
@@ -3135,11 +3138,11 @@ RestoreAllPP: ; f8b9
 	call GetMaxPPOfMove
 	pop bc
 	pop de
-	ld a, [de]
-	and 3 << 6
-	ld b, a
+	;ld a, [de]
+	;and 3 << 6
+	;ld b, a
 	ld a, [wd265]
-	add b
+	;add b
 	ld [de], a
 	inc de
 	ld hl, wMenuCursorY
@@ -3184,12 +3187,18 @@ GetMaxPPOfMove: ; f8ec
 	call GetMthMoveOfNthPartymon
 
 .gotdatmove
+	ld a, [hli]
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
 	ld a, [hl]
-	dec a
-
 	push hl
+	and MOVE_HIGH_MASK
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -3199,25 +3208,26 @@ GetMaxPPOfMove: ; f8ec
 	pop hl
 
 	push bc
-	ld bc, MON_PP - MON_MOVES
+	ld bc, MON_CUR_PP - MON_MOVES_HIGH
 	ld a, [wMonType]
 	cp WILDMON
 	jr nz, .notwild
-	ld bc, wEnemyMonPP - wEnemyMonMoves
+	ld bc, wEnemyMonCurPP - wEnemyMonMovesHigh
 .notwild
-	add hl, bc
 	ld a, [hl]
-	and 3 << 6
+	and PP_UP_USED_MASK
+	add hl, bc
 	pop bc
+	push af
+	ld a, b
 
-	or b
 	ld hl, wStringBuffer1 + 1
 	ld [hl], a
 	xor a
 	ld [wd265], a
+	pop af
 	call ComputeMaxPP
 	ld a, [hl]
-	and (1 << 6) - 1
 	ld [wd265], a
 
 	pop af
@@ -3249,7 +3259,7 @@ AbilityCap:
 
 	push hl
 	ld a, MON_ABILITY
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and ABILITY_MASK
 	cp HIDDEN_ABILITY
@@ -3261,7 +3271,7 @@ AbilityCap:
 	pop hl
 	push hl
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call GetBaseData ;frorm is known
 	ld a, [wBaseAbility1]
 	ld b, a

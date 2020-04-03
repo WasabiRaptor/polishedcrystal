@@ -49,7 +49,7 @@ HealParty: ; c658
 
 HealPartyMon: ; c677
 	ld a, MON_GROUP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld d, h
 	ld e, l
 

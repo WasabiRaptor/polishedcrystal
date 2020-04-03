@@ -6,7 +6,7 @@
 	next "faced with a tight situation in"
 	
 	page "battle, this Pokémon will"
-	next "unleash its amazing power—it"
+	next "unleash its amazing power-it"
 	next "can crush rocks bigger than"
 	
 	page "itself.@"

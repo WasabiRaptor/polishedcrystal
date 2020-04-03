@@ -496,7 +496,7 @@ PrintTwoDigitNumberRightAlign: ; 90867 (24:4867)
 	ld [hl], a
 	pop hl
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	jp PrintNum
+	predef_jump PrintNum
 ; 90874 (24:4874)
 
 ; 0x90fb4
@@ -584,7 +584,7 @@ PrintHoursMins ; 1dd6bb (77:56bb)
 	pop hl
 	ld [hl], " "
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "<COLON>"
 	inc hl
 	ld d, h
@@ -595,7 +595,7 @@ PrintHoursMins ; 1dd6bb (77:56bb)
 	pop de
 	pop hl
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
+	predef PrintNum
 	pop bc
 	ld a, [wOptions2]
 	bit CLOCK_FORMAT, a

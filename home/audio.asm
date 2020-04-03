@@ -10,14 +10,12 @@ MapSetup_Sound_Off:: ; 3b4e
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_MapSetup_Sound_Off)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	call _MapSetup_Sound_Off
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	pop af
 	pop bc
@@ -37,14 +35,12 @@ UpdateSound:: ; 3b6a
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_UpdateSound)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	call _UpdateSound
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	pop af
 	pop bc
@@ -58,15 +54,13 @@ _LoadMusicByte:: ; 3b86
 ; wCurMusicByte = [a:de]
 GLOBAL LoadMusicByte
 
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	ld a, [de]
 	ld [wCurMusicByte], a
 	ld a, BANK(LoadMusicByte)
 
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 	ret
 ; 3b97
 
@@ -90,8 +84,7 @@ PlayMusic:: ; 3b97
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlayMusic) ; and BANK(_MapSetup_Sound_Off)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	ld a, e
 	and a
@@ -105,8 +98,7 @@ PlayMusic:: ; 3b97
 
 .end
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 	pop af
 	pop bc
 	pop de
@@ -126,8 +118,7 @@ PlayMusic2:: ; 3bbc
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlayMusic)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	push de
 	ld de, MUSIC_NONE
@@ -137,8 +128,7 @@ PlayMusic2:: ; 3bbc
 	call _PlayMusic
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	pop af
 	pop bc
@@ -150,30 +140,19 @@ PlayMusic2:: ; 3bbc
 
 
 PlayCryHeader:: ; 3be3
-; Play cry header de.
+; Play cry header at d:hl.
 
-	push hl
-	push de
-	push bc
+	ld a, [hROMBank]
 	push af
 
-	ldh a, [hROMBank]
-	push af
-	push de
-	call GetRelevantCryPointers
 	ld a, d
-	; Cry headers are stuck in one bank.
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
-	pop de
-rept 6
-	add hl, de
-endr
+	rst Bankswitch
 
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
+	ld a, [hli]
+	cp $ff
+	jr z, .ded
+	ld e, a
+	ld d, 0
 
 	ld a, [hli]
 	ld [wCryPitch], a
@@ -185,26 +164,28 @@ endr
 	ld [wCryLength + 1], a
 
 	ld a, BANK(_PlayCryHeader)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
-
+	rst Bankswitch
 	call _PlayCryHeader
+	jr .done
+.ded
+	ld e, 0
+	call LoadDEDCryHeader
+	call PlayDEDCry
 
+.done
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
-
-	pop af
-	pop bc
-	pop de
-	pop hl
+	rst Bankswitch
 	ret
 ; 3c23
-GetRelevantCryPointers:
+
+GetRelevantCryPointers::
 	ld a, [wCurGroup]
-; given species in a, return *Cries in hl and BANK(*Cries) in d
+; return *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
-	ld hl, VariantCryTable
+	ld hl, RegionalCryTable
+	call dbwArray
+
+	ld a, [wCurSpecies]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -213,6 +194,10 @@ GetRelevantCryPointers:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
+	ld a, [wCurForm]
+	ret c
+	ld a, [wCurSpecies]
+	dec a
 	ret
 
 INCLUDE "data/pokemon/variant_cry_table.asm"
@@ -242,16 +227,14 @@ PlaySFX:: ; 3c23
 	ldh a, [hROMBank]
 	push af
 	ld a, BANK(_PlaySFX)
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 	ld a, e
 	ld [wCurSFX], a
 	call _PlaySFX
 
 	pop af
-	ldh [hROMBank], a
-	ld [MBC5RomBank], a
+	rst Bankswitch
 
 .done
 	pop af

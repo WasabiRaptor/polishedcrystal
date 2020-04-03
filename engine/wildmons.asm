@@ -1,6 +1,12 @@
+; TODO:
+;   Arg 4 (Shiny override [1] | Ability override [2] | Form override [5])
+;   Arg 5 (AI)
+;   Arg 6 (Item)
+
+
 LoadWildMonData: ; 29ff8
 	call _GrassWildmonLookup
-	jr c, .copy
+	jr c, .copy ;if it found a map with a wild table it will copy the encounter rates for the time of day
 	ld hl, wMornEncounterRate
 	xor a
 	ld [hli], a
@@ -11,57 +17,98 @@ LoadWildMonData: ; 29ff8
 
 .copy
 	inc hl
-	inc hl
-	ld de, wMornEncounterRate
-	ld bc, 4
+	inc hl;move past the two bytes of the map ID
+	; Copy level minimum and maximum into WRAM
+	ld de, wMinimumLevel
+	ld bc, 2
 	rst CopyBytes
+	ld a, [hl]
+	and MORN_ENCOUNTER_MASK
+	ld b, 6
+	call .shiftLoop
+	call .checkEncounterRate
+	ld [wMornEncounterRate], a
+	ld a, [hl]
+	and DAY_ENCOUNTER_MASK
+	ld b, 4
+	call .shiftLoop
+	call .checkEncounterRate
+	ld [wDayEncounterRate], a
+	ld a, [hl]
+	and DUSK_ENCOUNTER_MASK
+	ld b, 2
+	call .shiftLoop
+	call .checkEncounterRate
+	ld [wDuskEncounterRate], a
+	ld a, [hl]
+	and NIGHT_ENCOUNTER_MASK
+	call .checkEncounterRate
+	ld [wNightEncounterRate], a
 .done_copy
 	call _WaterWildmonLookup
 	ld a, 0 ; not xor a; preserve carry flag
 	jr nc, .no_copy
 	inc hl
 	inc hl
+	; Copy level minimum and maximum into WRAM
+	ld de, wMinimumLevel
+	ld bc, 2
+	rst CopyBytes
 	ld a, [hl]
 .no_copy
 	ld [wWaterEncounterRate], a
 	ret
 
+.shiftLoop
+	sla a
+	dec b
+	jr nz, .shiftLoop
+	ret
+
+.checkEncounterRate
+	cp COMMON
+	jr nz, .not_common
+	ld a, COMMON_RATE
+	ret
+.not_common
+	cp UNCOMMON
+	jr nz, .not_uncommon
+	ld a, UNCOMMON_RATE
+	ret
+.not_uncommon
+	cp RARE
+	jr nz, .not_rare
+	ld a, RARE_RATE
+	ret
+.not_rare
+	cp VERY_RARE
+	jr nz, .error_rate
+	ld a, VERY_RARE_RATE
+	ret
+.error_rate
+	ld a, $ff
+	ret
+
 FindNest: ; 2a01f
 ; Parameters:
-; e: 0 = Johto, 1 = Kanto, 2 = Orange
+; e: 0 = Invar, 1 = Kanto, 2 = Orange
 ; wNamedObjectIndexBuffer: species
 	hlcoord 0, 0
 	ld bc, SCREEN_WIDTH * SCREEN_HEIGHT
 	xor a
 	call ByteFill
 	ld a, e
-	cp KANTO_REGION
-	jr z, .kanto
-	cp ORANGE_REGION
-	jr z, .orange
 	decoord 0, 0
-	ld hl, JohtoGrassWildMons
+
+;here it is getting the region table to load not *very* important, but just mainly which data table it is loading into hl and ending up looking at, easily swapped out
+	ld hl, InvarGrassWildMons
 	call .FindGrass
-	ld hl, JohtoWaterWildMons
+; it calls find grass or find water because they are indeed structured differently, as I don't believe water mons take time of day into account in the current form 
+	ld hl, InvarWaterWildMons
 	call .FindWater
 	call .RoamMon1
 	call .RoamMon2
 	jp .RoamMon3
-
-.kanto
-	decoord 0, 0
-	ld hl, KantoGrassWildMons
-	call .FindGrass
-	ld hl, KantoWaterWildMons
-	jp .FindWater
-
-.orange
-	decoord 0, 0
-	ld hl, OrangeGrassWildMons
-	call .FindGrass
-	ld hl, OrangeWaterWildMons
-	jp .FindWater
-; 2a052
 
 .FindGrass: ; 2a052
 	ld a, [hl]
@@ -70,36 +117,41 @@ FindNest: ; 2a01f
 	push hl
 
 	; assume that navel rock is the first off-screen map, and end the search early
+	;first two bytes are the map ID
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
 	ld c, a
-	inc hl
-	inc hl
-	inc hl
-	inc hl
+	push bc
+; next for bytes are the percentages for the time of day, skip them for now
+	ld bc, WILD_GRASS_SIZE - 1
+	add hl, bc
+	pop bc
+	;7 grass mons per time of day, and 4 times of day
 	ld a, NUM_GRASSMON * 4
 	call .SearchMapForMon
 	jr nc, .next_grass
 	ld [de], a
 	inc de
 
-.next_grass
+.next_grass ;on to the next map I believe this might actually be broken because I don't think I truly verified that GRASS_WILDDATA_LENGTH matched right since it was always getting the first group available
 	pop hl
 	ld bc, GRASS_WILDDATA_LENGTH
 	add hl, bc
 	jr .FindGrass
 ; 2a06e
-
+; never tested water
 .FindWater: ; 2a06e
 	ld a, [hl]
 	cp -1
 	ret z
 	push hl
+	;check mapgroup
 	ld a, [hli]
 	ld b, a
 	ld a, [hli]
 	ld c, a
+	;only one percentage due to water not caring about time of day
 	inc hl
 	ld a, 3
 	call .SearchMapForMon
@@ -123,8 +175,8 @@ FindNest: ; 2a01f
 	inc hl
 	jr z, .found
 .notfound
-	inc hl
-	inc hl
+	ld bc, WILD_POKE_SIZE
+	add hl, bc
 	pop af
 	dec a
 	jr nz, .ScanMapLoop
@@ -246,9 +298,9 @@ TryWildEncounter::
 
 GetMapEncounterRate: ; 2a111
 	ld hl, wMornEncounterRate
-	call CheckOnWater
-	ld a, 3
-	jr z, .ok
+	;call CheckOnWater
+	;ld a, 3
+	;jr z, .ok
 	ld a, [wTimeOfDay]
 .ok
 	ld c, a
@@ -320,7 +372,7 @@ ChooseWildEncounter: ; 2a14f
 	ld c, $ff
 _ChooseWildEncounter:
 	push bc
-	call LoadWildMonDataPointer
+	call LoadWildMonDataPointer ;get the pointer for the list of pokemon on this map again
 	pop bc
 	jp nc, .nowildbattle
 	;push bc
@@ -333,47 +385,45 @@ _ChooseWildEncounter:
 	inc hl
 	push bc
 	call CheckOnWater
+	jr nz, .notWater
+	ld bc, WILD_WATER_SIZE - 3
+	add hl, bc
 	pop bc
-	ld de, WaterMonProbTable
-	ld b, $4
-	jr z, .got_table
-	inc hl
-	inc hl
-	inc hl
-	ld a, [wTimeOfDay]
-	push bc
-	ld bc, NUM_GRASSMON * 3
-	rst AddNTimes
+	jr .got_table ;water only has one percentage so if so we're done
+	
+.notWater
+	ld bc, WILD_GRASS_SIZE - 3
+	add hl, bc
 	pop bc
-	ld de, GrassMonProbTable
-	ld b, (NUM_GRASSMON-1) *3
 
 .got_table
 	; Check if we want to force a type
 	inc c
 	jr z, .get_random_mon
-	dec c
 
+; TODO - NEEDS TO BE UPDATED
+	dec c
 	; Check if we can actually encounter a valid species of the given type
-	push de
-	push hl
-.force_loop
+	push de	; Probability Table 1
+	push hl	; Address? 2
+.force_loop	
 	inc hl ; We don't care about level
 	ld a, [hli]
 	ld [wCurSpecies], a
 	ld a, [hli]
 	ld [wCurGroup], a
-	push bc
-	push hl
+	push bc	; inA 3
+	push hl	; 4
 	call GetBaseData
-	pop hl
-	pop bc
+	pop hl	; 4
+	pop bc	; 3
 	ld a, [wBaseType1]
 	cp c
 	jr z, .can_force_type
 	ld a, [wBaseType2]
 	cp c
 	jr z, .can_force_type
+	;each grassmon is three bytes so lets make sure to dec b three times to make sure everything still lines up
 	dec b
 	dec b
 	dec b
@@ -381,40 +431,110 @@ _ChooseWildEncounter:
 	ld c, $ff
 .can_force_type
 	inc c
-	pop hl
-	pop de
+	pop hl	; 2
+	pop de	; 1
+; END TODO
+
 .get_random_mon
 	dec c
-	push hl ; wild mon data pointer
+	push bc	; Pokemon area size
 	ld a, 100
 	call RandomRange
-	inc a ; 1 <= a <= 100
-	ld b, a
-	ld h, d
-	ld l, e
+	ld c, a
+	ld de, WILD_POKE_SIZE
 ; This next loop chooses which mon to load up.
 .prob_bracket_loop
-	ld a, [hli]
-	cp b
-	jr nc, .got_it
-	inc hl
-	jr .prob_bracket_loop
+	ld a, [hl]
+	inc a
+	jp nz, .continue
+	pop bc
+	jp .nowildbattle
+
+.continue
+	dec a
+	push af	; 3
+	and ENCOUNTER_TIME_MASK
+	ld b, a
+	ld a, [wTimeOfDay]
+	cp MORN
+	jr nz, .notMorn
+	bit 7, b
+	jr nz, .rightTime
+	pop af	; 3
+	jp .nextMon
+
+.notMorn
+	cp DAY
+	jr nz, .notDay
+	bit 6, b
+	jr nz, .rightTime
+	pop af	; 3
+	jp .nextMon
+
+.notDay
+	cp EVENING
+	jr nz, .notDusk
+	bit 5, b
+	jr nz, .rightTime
+	pop af
+	jp .nextMon
+
+.notDusk
+	bit 4, b
+	jr nz, .rightTime
+	pop af	; 3
+	jp .nextMon
+
+.rightTime
+	pop af	; 3
+	
+checkpercent: MACRO
+	cp WILD_\1P
+	jr nz, .not\1
+	ld a, c
+	sub \1
+	jr .doneSubtracting
+.not\1
+ENDM
+
+	and WILD_PERCENT_MASK
+	checkpercent 75
+	checkpercent 60
+	checkpercent 50
+	checkpercent 45
+	checkpercent 40
+	checkpercent 35
+	checkpercent 30
+	checkpercent 25
+	checkpercent 20
+	checkpercent 15
+	checkpercent 10
+	checkpercent 9
+	checkpercent 5
+	checkpercent 4
+	checkpercent 1
+	ld a, c
+.doneSubtracting
+	ld c, a
+	jr nc, .nextMon
+	jr .got_it
+
+.nextMon
+	add hl, de
+	jp .prob_bracket_loop
 
 .got_it
-	ld a, c
-	ld c, [hl]
-	ld b, 0
-	pop hl
-	push hl
-	add hl, bc ; this selects our mon
-	ld c, a
-	ld a, [hli]
+	pop bc ; 2
+	inc hl 
+	ld a, [hli] ; Gets species
 	ld b, a
 ; If the Pokemon is encountered by surfing, we need to give the levels some variety.
-	push bc
+	push bc	; 2
 	call CheckOnWater
-	pop bc
+	pop bc	; 2
 	jr nz, .ok
+
+; TODO - CHECK IF THIS NEEDS UPDATES
 ; Check if we buff the wild mon, and by how much.
 	call Random
 	cp 35 percent
@@ -429,30 +549,19 @@ _ChooseWildEncounter:
 	cp 95 percent
 	jr c, .ok
 	inc b
-; Store the level
+; END TODO
+
 .ok
-	ld a, b
-	ld [wCurPartyLevel], a
-	ld a, [hli]
-	ld b, a
-	ld a, [hl]
+	ld a, [hli]	; Gets group
 	ld [wCurGroup], a
 	ld [wTempWildMonGroup], a
-	ld a, b
-	pop hl
+	ld a, b	; Species
 	call ValidateTempWildMonSpecies
 	jr c, .nowildbattle
-
-	;cp UNOWN
-	;jr nz, .unown_check_done
-
-	;ld a, [wUnlockedUnowns]
-	;and a
-	;jr z, .nowildbattle
-
-.unown_check_done
-	; Check if we're forcing type
 	ld [wCurSpecies], a
+	; Check if we're forcing type
+	inc c
+	jp z, .loadwildmon
 	push bc
 	push hl
 	call GetBaseData
@@ -460,46 +569,53 @@ _ChooseWildEncounter:
 	pop bc
 	ld a, [wBaseType1]
 	cp c
-	jr z, .type_ok
+	jr z, .loadwildmon
 	ld a, [wBaseType2]
 	cp c
-	jr z, .type_ok
-	inc c
-	jr nz, .get_random_mon
+	jr z, .loadwildmon
+	jp .get_random_mon
 
-.type_ok
-	jr .loadwildmon
+.loadwildmon
+	ld a, b	; Make sure Species is in a
+	ld [wTempWildMonSpecies], a
+	ld a, [hli]	; Gets Level info
+	bit 7, a	; Check if Level is offset or override
+	jr nz, .levelOverride
+	ld b, a
+	farcall CalculatePartyAverage
+	add b
+	ld c, a
+	ld a, [wMinimumLevel]
+	cp c	; min(avg, minLevel)
+	jr nc, .gotLevel
+	ld a, [wMaximumLevel]
+	cp c	; max(avg, maxLevel)
+	jr c, .gotLevel
+	ld a, c
+	jr .gotLevel
+
+.levelOverride
+	and WILD_LVL_MASK
+.gotLevel
+	ld [wCurPartyLevel], a
+	ld a, [hli]	; Get Shiny/Ability/Form
+    and FORM_MASK
+	ld [wTempWildMonForm], a
+	ld a, [hli]	; Get AI
+	ld [wTempWildMonAI], a
+	ld a, [hli]	; Get Item
+	ld [wTempWildMonItem], a
+.startwildbattle
+	xor a
+	ret
 
 .nowildbattle
 	ld a, 1
 	and a
 	ret
-
-.loadwildmon
-	ld a, b
-	ld [wTempWildMonSpecies], a
-
-	;ld a, [wMapGroup]
-	;cp GROUP_SOUL_HOUSE_B1F ; Soul House or Lavender Radio Tower
-	;jr nz, .not_ghost
-	;ld a, [wMapNumber]
-	;cp MAP_SOUL_HOUSE_B1F ; first Ghost map in its group
-	;jr c, .not_ghost
-	;ld a, SILPHSCOPE2
-	;ld [wCurItem], a
-	;ld hl, wNumKeyItems
-	;call CheckItem
-	;jr c, .not_ghost
-	;ld a, BATTLETYPE_GHOST
-	;ld [wBattleType], a
-.not_ghost
-
-.startwildbattle
-	xor a
-	ret
 ; 2a1cb
 
-INCLUDE "data/wild/probabilities.asm"
+;INCLUDE "data/wild/probabilities.asm"
 
 CheckRepelEffect::
 ; If there is no active Repel, there's no need to be here.
@@ -522,19 +638,19 @@ ApplyAbilityEffectsOnEncounterMon:
 	jp BattleJumptable
 
 .AbilityEffects:
-	dbw ARENA_TRAP,   .ArenaTrap
-	dbw HUSTLE,       .Hustle
-	dbw ILLUMINATE,   .Illuminate
-	dbw INTIMIDATE,   .Intimidate
-	dbw KEEN_EYE,     .KeenEye
-	dbw MAGNET_PULL,  .MagnetPull
-	dbw NO_GUARD,     .NoGuard
-	dbw PRESSURE,     .Pressure
-	dbw QUICK_FEET,   .QuickFeet
-	dbw STATIC,       .Static
-	dbw STENCH,       .Stench
-	dbw SWARM,        .Swarm
-	dbw VITAL_SPIRIT, .VitalSpirit
+	dbw ARENA_TRAP,   .ArenaTrap    ; double rate
+	dbw HUSTLE,       .Hustle       ; high level
+	dbw ILLUMINATE,   .Illuminate   ; double rate
+	dbw INTIMIDATE,   .Intimidate   ; half low level
+	dbw KEEN_EYE,     .KeenEye      ; half low level
+	dbw MAGNET_PULL,  .MagnetPull   ; steel
+	dbw NO_GUARD,     .NoGuard      ; semi-double rate
+	dbw PRESSURE,     .Pressure     ; high level
+	dbw QUICK_FEET,   .QuickFeet    ; half rate
+	dbw STATIC,       .Static       ; electric
+	dbw STENCH,       .Stench       ; half rate
+	dbw SWARM,        .Swarm        ; semi-double rate
+	dbw VITAL_SPIRIT, .VitalSpirit  ; high level
 	dbw -1, -1
 
 .ArenaTrap:
@@ -629,25 +745,25 @@ _WaterWildmonLookup: ; 2a21d
 _GetGrassWildmonPointer:
 	call RegionCheck
 	ld a, e
-	ld hl, JohtoGrassWildMons
-	and a ; cp JOHTO_REGION
-	ret z
-	ld hl, KantoGrassWildMons
-	dec a ; cp KANTO_REGION
-	ret z
-	ld hl, OrangeGrassWildMons
+	ld hl, InvarGrassWildMons
+	;and a ; cp INVAR_REGION
+	;ret z
+	;ld hl, KantoGrassWildMons
+	;dec a ; cp KANTO_REGION
+	;ret z
+	;ld hl, OrangeGrassWildMons
 	ret
 
 _GetWaterWildmonPointer:
 	call RegionCheck
 	ld a, e
-	ld hl, JohtoWaterWildMons
-	and a ; cp JOHTO_REGION
-	ret z
-	ld hl, KantoWaterWildMons
-	dec a ; cp KANTO_REGION
-	ret z
-	ld hl, OrangeWaterWildMons
+	ld hl, InvarWaterWildMons
+	;and a ; cp INVAR_REGION
+	;ret z
+	;ld hl, KantoWaterWildMons
+	;dec a ; cp KANTO_REGION
+	;ret z
+	;ld hl, OrangeWaterWildMons
 	ret
 
 _SwarmWildmonCheck
@@ -706,27 +822,35 @@ LookUpWildmonsForMapDE: ; 2a288
 .loop
 	push hl
 	ld a, [hl]
-	inc a
-	jr z, .nope
-	ld a, d
+	inc a ;checking for $ff for the end list
+	jr z, .end ; if its the end of the list no wilds
+	ld a, d ;check if the the list its at matches the map id in de
 	cp [hl]
 	jr nz, .next
 	inc hl
 	ld a, e
 	cp [hl]
-	jr z, .yup
-
+	jr z, .match
 .next
 	pop hl
+	ld b, 0
+	ld c, WILD_GRASS_SIZE
 	add hl, bc
+	ld c, WILD_POKE_SIZE
+.poke_loop
+	add hl, bc
+	ld a, [hl]
+	inc a
+	jr nz, .poke_loop
+	inc hl
 	jr .loop
 
-.nope
+.end
 	pop hl
 	and a
 	ret
 
-.yup
+.match ;carry flag is set when it finds the right list
 	pop hl
 	scf
 	ret
@@ -1027,13 +1151,11 @@ RandomPhoneRareWildMon: ; 2a4ab
 	farcall GetCallerLocation
 	ld d, b
 	ld e, c
-	ld hl, JohtoGrassWildMons
+	ld hl, InvarGrassWildMons
 	ld bc, GRASS_WILDDATA_LENGTH
 	call LookUpWildmonsForMapDE
 	jr c, .GetGrassmon
-	ld hl, KantoGrassWildMons
-	call LookUpWildmonsForMapDE
-	jr nc, .done
+	jr .done
 
 .GetGrassmon:
 	push hl
@@ -1071,7 +1193,7 @@ RandomPhoneRareWildMon: ; 2a4ab
 	push bc
 	dec c
 	ld a, c
-	call CheckSeenMon
+	farcall CheckSeenMon
 	pop bc
 	jr nz, .done
 ; Since we haven't seen it, have the caller tell us about it.
@@ -1101,14 +1223,9 @@ RandomPhoneWildMon: ; 2a51f
 	farcall GetCallerLocation
 	ld d, b
 	ld e, c
-	ld hl, JohtoGrassWildMons
+	ld hl, InvarGrassWildMons
 	ld bc, GRASS_WILDDATA_LENGTH
 	call LookUpWildmonsForMapDE
-	jr c, .ok
-	ld hl, KantoGrassWildMons
-	call LookUpWildmonsForMapDE
-
-.ok
 	ld bc, 5 + 0 * 2
 	add hl, bc
 	ld a, [wTimeOfDay]
@@ -1259,23 +1376,23 @@ RandomPhoneMon: ; 2a567
 ; 2a5e9
 
 
-JohtoGrassWildMons: ; 0x2a5e9
-INCLUDE "data/wild/johto_grass.asm"
+InvarGrassWildMons: ; 0x2a5e9
+INCLUDE "data/wild/invar_grass.asm"
 
-JohtoWaterWildMons: ; 0x2b11d
-INCLUDE "data/wild/johto_water.asm"
+InvarWaterWildMons: ; 0x2b11d
+INCLUDE "data/wild/invar_water.asm"
 
-KantoGrassWildMons: ; 0x2b274
-INCLUDE "data/wild/kanto_grass.asm"
+;KantoGrassWildMons: ; 0x2b274
+;INCLUDE "data/wild/kanto_grass.asm"
 
-KantoWaterWildMons: ; 0x2b7f7
-INCLUDE "data/wild/kanto_water.asm"
+;KantoWaterWildMons: ; 0x2b7f7
+;INCLUDE "data/wild/kanto_water.asm"
 
-OrangeGrassWildMons:
-INCLUDE "data/wild/orange_grass.asm"
+;OrangeGrassWildMons:
+;INCLUDE "data/wild/orange_grass.asm"
 
-OrangeWaterWildMons:
-INCLUDE "data/wild/orange_water.asm"
+;OrangeWaterWildMons:
+;INCLUDE "data/wild/orange_water.asm"
 
 SwarmGrassWildMons: ; 0x2b8d0
 INCLUDE "data/wild/swarm_grass.asm"

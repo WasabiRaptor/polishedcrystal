@@ -317,7 +317,7 @@ TrainerCard_PrintTopHalfOfCard: ; 25299 (9:5299)
 	hlcoord 5, 3
 	ld de, wPlayerID
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 
 	hlcoord 14, 1
 	lb bc, 5, 7
@@ -341,7 +341,7 @@ TrainerCard_PrintTopHalfOfCard: ; 25299 (9:5299)
 .print_money
 	ld de, wMoney
 	lb bc, PRINTNUM_MONEY | 3, 7
-	jp PrintNum
+	predef_jump PrintNum
 
 ; 252ec (9:52ec)
 
@@ -368,12 +368,12 @@ TrainerCard_Page1_PrintDexCaught_GameTime: ; 2530a (9:530a)
 	ld de, wd265
 	hlcoord 15, 10
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 
 	ld de, wBattlePoints
 	hlcoord 15, 14
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 
 	call TrainerCard_Page1_PrintGameTime
 
@@ -415,11 +415,11 @@ TrainerCard_Page1_PrintGameTime: ; 25415 (9:5415)
 	hlcoord 11, 12
 	ld de, wGameTimeHours
 	lb bc, 2, 4
-	call PrintNum
+	predef PrintNum
 	inc hl
 	ld de, wGameTimeMinutes
 	lb bc, PRINTNUM_LEADINGZEROS | 1, 2
-	call PrintNum
+	predef PrintNum
 	ldh a, [hVBlankCounter]
 	and $1f
 	ret nz

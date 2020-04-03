@@ -130,3 +130,38 @@ _Divide::
 .div0
 	; deliberately crash the game (maybe make a real crash handler?)
 	rst 0
+
+; Calculates average level of party
+; 
+CalculatePartyAverage::
+	push bc
+	push de
+	push hl
+; ISSOtm optimized party average
+	ld a, [wPartyCount]
+	ld b, a	; b = partyCount
+	ld hl, wPartyMon1Level
+	ld de, PARTYMON_STRUCT_LENGTH
+	xor a
+	ld c, a	; c = 0
+.loop
+	add a, [hl]
+	jr nc, .noCarry
+	inc c
+.noCarry
+	add hl, de
+	dec b	; partyCount--
+	jr nz, .loop
+	ldh [hDividend + 1], a
+	ld a, c
+	ldh [hDividend + 0], a
+	ld a, [wPartyCount]
+	inc a
+	ldh [hDivisor], a
+	ld b, 2
+	call Divide
+	ldh a, [hQuotient + 2]
+	pop hl
+	pop de
+	pop bc
+	ret

@@ -262,13 +262,13 @@ ScriptCommandTable:
 	dw Script_checkegg                   ; c7
 	dw Script_portrait
 	dw Script_closeportrait
-	
+
 	dw Script_givekeyitem                   ; a8
 	dw Script_checkkeyitem                  ; a9
 	dw Script_takekeyitem
 	dw Script_verbosegivekeyitem            ; aa
 	dw Script_keyitemnotify                 ; ab
-	
+
 	dw Script_playimport				; ac
 
 StartScript:
@@ -733,7 +733,7 @@ CurItemName:
 CurTMHMName:
 	ld a, [wCurTMHM]
 	ld [wd265], a
-	jp GetTMHMName
+	farjp GetTMHMName
 
 PutItemInPocketText:
 	text_jump UnknownText_0x1c472c
@@ -1964,7 +1964,7 @@ Script_readmoney:
 	call GetMoneyAccount
 	ld hl, wStringBuffer1
 	lb bc, PRINTNUM_LEFTALIGN | 3, 6
-	call PrintNum
+	predef PrintNum
 	ld de, wStringBuffer1
 	jp ConvertMemToText
 
@@ -1975,7 +1975,7 @@ Script_readcoins:
 	ld hl, wStringBuffer1
 	ld de, wCoins
 	lb bc, PRINTNUM_LEFTALIGN | 2, 6
-	call PrintNum
+	predef PrintNum
 	ld de, wStringBuffer1
 	jp ConvertMemToText
 
@@ -1986,11 +1986,11 @@ Script_RAM2MEM:
 	ld hl, wStringBuffer1
 	ld de, wScriptVar
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-	call PrintNum
+	predef PrintNum
 	ld de, wStringBuffer1
 	jp ConvertMemToText
 
-ResetStringBuffer1:
+ResetStringBuffer1::
 	ld hl, wStringBuffer1
 	ld bc, PKMN_NAME_LENGTH
 	ld a, "@"
@@ -2236,7 +2236,7 @@ Script_checkegg:
 	push af
 	ld [wCurPartyMon], a
 	ld a, MON_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr z, .next
 	ld a, TRUE
@@ -2785,13 +2785,13 @@ Script_check_save:
 	ret
 
 Script_count_seen_caught:
-	ld hl, wPokedexSeen
-	ld b, wPokedexSeenEnd - wPokedexSeen
-	call CountSetBits
+	;ld hl, wPokedexSeen
+	;ld b, wPokedexSeenEnd - wPokedexSeen
+	;call CountSetBits
 	ld [wd002], a
-	ld hl, wPokedexCaught
-	ld b, wPokedexCaughtEnd - wPokedexCaught
-	call CountSetBits
+	;ld hl, wPokedexCaught
+	;ld b, wPokedexCaughtEnd - wPokedexCaught
+	;call CountSetBits
 	ld [wd003], a
 	ret
 
@@ -2812,7 +2812,7 @@ Script_givetmhm:
 	call GetScriptByte
 	ld [wCurTMHM], a
 	ld [wItemQuantityChangeBuffer], a
-	call ReceiveTMHM
+	farcall ReceiveTMHM
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -2829,7 +2829,7 @@ Script_checktmhm:
 	ld [wScriptVar], a
 	call GetScriptByte
 	ld [wCurTMHM], a
-	call CheckTMHM
+	farcall CheckTMHM
 	ret nc
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -2872,7 +2872,7 @@ Script_tmhmtotext:
 	ld a, [wScriptVar]
 .ok
 	ld [wd265], a
-	call GetTMHMName
+	farcall GetTMHMName
 	ld de, wStringBuffer1
 	call ConvertMemToText
 
@@ -3018,7 +3018,7 @@ Script_givekeyitem:
 	call GetScriptByte
 	ld [wCurKeyItem], a
 	ld [wItemQuantityChangeBuffer], a
-	call ReceiveKeyItem
+	farcall ReceiveKeyItem
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -3032,7 +3032,7 @@ Script_checkkeyitem:
 	call GetScriptByte
 	ld [wCurKeyItem], a
 	ld [wItemQuantityChangeBuffer], a
-	call CheckKeyItem
+	farcall CheckKeyItem
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -3046,7 +3046,7 @@ Script_takekeyitem:
 	call GetScriptByte
 	ld [wCurKeyItem], a
 	ld [wItemQuantityChangeBuffer], a
-	call TossKeyItem
+	farcall TossKeyItem
 	jr nc, .full
 	ld a, TRUE
 	ld [wScriptVar], a
@@ -3088,4 +3088,3 @@ Script_playimport:
 	call GetScriptByte
 	;jp PlayImportedSoundClip
 	ret
-

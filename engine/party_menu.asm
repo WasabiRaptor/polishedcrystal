@@ -36,6 +36,14 @@ InitPartyMenuLayout: ; 5003f
 ; 5004f
 
 LoadPartyMenuGFX: ; 5004f
+	ld a, [rVBK]
+	push af
+	ld a, 1
+	ld [rVBK], a
+	farcall LoadFrame
+	pop af
+	ld [rVBK], a
+
 	call LoadFontsBattleExtra
 	farcall InitPartyMenuPalettes ; engine/color.asm
 	farjp ClearSpriteAnims2
@@ -83,7 +91,7 @@ WritePartyMenuTilemap: ; 0x5005f
 
 PlacePartyNicknames: ; 5009b
 	call InitVariableWidthTiles
-	VWTextStart $a0
+	VWTextStart2 $80
 	hlcoord 3, 1
 	ld a, [wPartyCount]
 	and a
@@ -96,9 +104,12 @@ PlacePartyNicknames: ; 5009b
 	push hl
 	ld hl, wPartyMonNicknames
 	ld a, b
-	call GetNick
+	predef GetNick
 	pop hl
+	push hl
 	call PlaceString
+	pop hl
+	call SetNickNameAttributes
 	pop hl
 	ld de, 2 * SCREEN_WIDTH
 	add hl, de
@@ -111,13 +122,24 @@ PlacePartyNicknames: ; 5009b
 	dec hl
 	dec hl
 	ld de, .CANCEL
-	jp PlaceString
+	call PlaceString
+	jp SetNickNameAttributes
 ; 500c8
 
 .CANCEL: ; 500c8
 	db "Cancel@"
 ; 500cf
 
+SetNickNameAttributes:
+	ld bc, wAttrMap - wTileMap
+	add hl, bc
+	ld b, PKMN_TILE_NAME_LENGTH
+	ld a, 0 | TILE_BANK
+.loop
+	ld [hli], a
+	dec b
+	jr nz, .loop
+	ret
 
 PlacePartyHPBar: ; 500cf
 	xor a
@@ -208,14 +230,14 @@ PlacePartyMenuHPDigits: ; 50138
 	pop hl
 	push de
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 	pop de
 	ld a, "/"
 	ld [hli], a
 	inc de
 	inc de
 	lb bc, 2, 3
-	call PrintNum
+	predef PrintNum
 
 .next
 	pop hl
@@ -258,7 +280,7 @@ PlacePartyMonLevel: ; 50176
 .ThreeDigits:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
 ; .okay
-	call PrintNum
+	predef PrintNum
 
 .next
 	pop hl
@@ -320,7 +342,7 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	predef CanLearnTMHMMove
 	pop hl
@@ -351,11 +373,11 @@ PlacePartyMonTMHMCompatibility: ; 501e0
 ; 50221
 
 string_able: ; 50221
-	db $a4, $a5, $a6, "@"
+	db $a2, $a3, $a4, "@"
 	;  A    bl   e
 
 string_not_able: ; 50226
-	db $a0, $a1, $a2, $a3, "@"
+	db $9e, $9f, $a0, $a1, "@"
 	;  U    na   bl   e
 
 SetupAbleUnableStrings:
@@ -391,20 +413,11 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers ; ISSOtm once again saves my ass by telling me I needed a farcall
-	ld a, [wCurPartySpecies]
 	ld b, d ;bank from GetRelevantEvosAttacksPointers into be because de is overwritten after
-	;jr nc, .notvariant
-	;ld a, [wCurGroup]
-;.notvariant
-	dec a
-	ld d, 0
-	ld e, a
-	add hl, de
-	add hl, de
 	call .DetermineCompatibility
 	pop hl
 	call PlaceString
@@ -425,7 +438,7 @@ PlacePartyMonEvoStoneCompatibility: ; 5022f
 	push bc
 	ld de, wStringBuffer1
 	ld bc, 2
-	call FarCopyBytes 
+	call FarCopyBytes
 	ld hl, wStringBuffer1
 	ld a, [hli]
 	ld h, [hl]
@@ -477,7 +490,7 @@ PlacePartyMonGender: ; 502b1
 	ld [wCurPartyMon], a
 	push hl
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 
 	pop hl
@@ -527,7 +540,7 @@ PlacePartyMonRemindable: ; 501e0
 	push hl
 	ld a, b
 	ld hl, wPartyMon1Group
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 
 	farcall GetForgottenMoves
@@ -790,7 +803,7 @@ YouHaveNoPKMNString: ; 0x50556
 PrintPartyMenuActionText: ; 50566
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
-	call GetNick
+	predef GetNick
 	ld a, [wPartyMenuActionText]
 	and $f
 	ld hl, .MenuActionTexts

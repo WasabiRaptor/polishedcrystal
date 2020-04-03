@@ -3,7 +3,7 @@
 
 	db "Torchic has a place inside its"
 	next "body where it keeps its flame.@"
-	next "Give it a hug—it will be glowing"
+	next "Give it a hug-it will be glowing"
 	
 	page "with warmth. This Pokémon is"
 	next "covered all over by a fluffy"

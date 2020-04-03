@@ -5,7 +5,7 @@
 	next "more beautifully if it has"
 	next "evolved from a smelly"
 	
-	page "Gloom—the more stinky the"
+	page "Gloom-the more stinky the"
 	next "better. At night, this Pokémon"
 	next "closes its petals and goes to"
 	

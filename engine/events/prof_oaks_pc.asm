@@ -31,12 +31,12 @@ ProfOaksPCRating: ; 0x26601
 
 Rate: ; 0x26616
 ; calculate Seen/Owned
-	ld hl, wPokedexSeen
-	ld b, wPokedexSeenEnd - wPokedexSeen
+	;ld hl, wPokedexSeen
+	;ld b, wPokedexSeenEnd - wPokedexSeen
 	call CountSetBits
 	ld [wd002], a
-	ld hl, wPokedexCaught
-	ld b, wPokedexCaughtEnd - wPokedexCaught
+	;ld hl, wPokedexCaught
+	;ld b, wPokedexCaughtEnd - wPokedexCaught
 	call CountSetBits
 	ld [wd003], a
 
@@ -68,7 +68,7 @@ Rate: ; 0x26616
 	call ByteFill
 	pop hl
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-	jp PrintNum
+	predef_jump PrintNum
 
 FindOakRating: ; 0x2666b
 ; return sound effect in de

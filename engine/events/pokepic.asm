@@ -15,7 +15,7 @@ Pokepic:: ; 244e3
 	farcall LoadPartyMonPalette
 	ld hl, wPartyMon1Group
 	ld a, [wCurPartyMon]
-	farcall GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
 .got_palette
 	call UpdateTimePals

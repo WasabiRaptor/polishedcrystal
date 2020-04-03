@@ -40,7 +40,7 @@ BattleCommand_transform:
 	jr z, .mimic_substitute
 	call CheckUserIsCharging
 	jr nz, .mimic_substitute
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call LoadAnim
 .mimic_substitute
 	ld a, BATTLE_VARS_SUBSTATUS2
@@ -86,7 +86,7 @@ BattleCommand_transform:
 	ld [de], a
 	inc de
 ; move pointer to stats
-	ld bc, wBattleMonStats - wBattleMonPP
+	ld bc, wBattleMonStats - wBattleMonCurPP
 	add hl, bc
 	push hl
 	ld h, d
@@ -104,7 +104,7 @@ BattleCommand_transform:
 	ld d, h
 	ld e, l
 	pop hl
-	ld bc, wBattleMonPP - wBattleMonStructEnd
+	ld bc, wBattleMonCurPP - wBattleMonStructEnd
 	add hl, bc
 	ld b, NUM_MOVES
 .pp_loop
@@ -155,7 +155,7 @@ BattleCommand_transform:
 	ld a, $2
 	ld [wKickCounter], a
 	pop af
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, TransformedText
 	call StdBattleTextBox

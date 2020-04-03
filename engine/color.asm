@@ -378,7 +378,7 @@ ApplyPartyMenuHPPals: ; 96f3
 	dec a
 	jr .loop
 .done
-	lb bc, 2, 8
+	lb bc, 1, 8
 	ld a, e
 	jp FillBoxCGB
 
@@ -636,7 +636,6 @@ OvercastRoofPals:
 INCLUDE "gfx/tilesets/roofs_overcast.pal"
 
 GetBattlemonBackpicPalette:
-	push de
 	farcall GetPartyMonPersonality
 	ld c, l
 	ld b, h
@@ -644,6 +643,9 @@ GetBattlemonBackpicPalette:
 	push af
 	ld a, [wTempBattleMonSpecies]
 	push af
+	ld a, [wTempBattleMonForm]
+	push af
+	push de
 	ld a, [wPlayerAbility]
 	cp ILLUSION
 	ld a, [wTempBattleMonSpecies]
@@ -657,10 +659,13 @@ GetBattlemonBackpicPalette:
 	farcall GetIllusion
 
 .no_illusion
+	pop de
 	call GetPlayerOrMonPalette
 	pop af
+	ld [wTempBattleMonForm], a
+	pop af
 	ld [wTempBattleMonSpecies], a
-	pop af 
+	pop af
 	ld [wTempBattleMonGroup], a
 	ld a, [wTempBattleMonGroup]
 	ld [wCurPartyGroup], a
@@ -668,12 +673,11 @@ GetBattlemonBackpicPalette:
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-
-	pop de
+	ld a, [wTempBattleMonForm]
+	ld [wCurForm], a
 	ret
 
 GetEnemyFrontpicPalette:
-	push de
 	farcall GetEnemyMonPersonality
 	ld c, l
 	ld b, h
@@ -681,6 +685,9 @@ GetEnemyFrontpicPalette:
 	push af
 	ld a, [wTempEnemyMonSpecies]
 	push af
+	ld a, [wTempEnemyMonForm]
+	push af
+	push de
 	ld a, [wEnemyAbility]
 	cp ILLUSION
 	ld a, [wTempEnemyMonSpecies]
@@ -694,7 +701,10 @@ GetEnemyFrontpicPalette:
 	farcall GetIllusion
 
 .no_illusion
+	pop de
 	call GetFrontpicPalette
+	pop af
+	ld [wTempEnemyMonForm], a
 	pop af
 	ld [wTempEnemyMonSpecies], a
 	pop af
@@ -705,8 +715,8 @@ GetEnemyFrontpicPalette:
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
-
-	pop de
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 	ret
 
 GetPlayerOrMonPalette:
@@ -776,12 +786,12 @@ LoadPartyMonPalette:
 	; bc = personality
 	ld hl, wPartyMon1Group
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
-	
+
 	ld hl, wPartyMon1Personality
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld c, l
 	ld b, h
 	; a = species
@@ -793,7 +803,7 @@ LoadPartyMonPalette:
 	; hl = DVs
 	ld hl, wPartyMon1DVs
 	ld a, [wCurPartyMon]
-	call GetPartyLocation
+	predef GetPartyLocation
 	; b = species
 	ld a, [wCurPartySpecies]
 	ld b, a
@@ -820,6 +830,6 @@ GetPortraitPalettePointer:
 	add hl, hl
 	add hl, hl
 	add hl, bc
-	ret 
+	ret
 
 INCLUDE "data/portraits/portrait_palettes.asm"

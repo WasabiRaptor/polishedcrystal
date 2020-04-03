@@ -1,4 +1,4 @@
-	dw 00009 ;national dex no
+        dw 00009 ;national dex no
         
         db  79,  83, 100,  78,  85, 105
         evs  0,   0,   0,   0,   0,   3

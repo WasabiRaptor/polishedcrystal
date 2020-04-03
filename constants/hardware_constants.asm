@@ -1,9 +1,10 @@
 ; Graciously aped from http://nocash.emubase.de/pandocs.htm .
 
 ; MBC5
-MBC5SRamEnable EQU $0000
-MBC5RomBank    EQU $2000
-MBC5SRamBank   EQU $4000
+MBC5SRamEnable  EQU $0000
+MBC5RomBank     EQU $2000
+HighMBC5RomBank EQU $3000
+MBC5SRamBank    EQU $4000
 
 SRAM_DISABLE EQU $00
 SRAM_ENABLE  EQU $0a
@@ -82,6 +83,7 @@ rNR44       EQU $ff23 ; Channel 4 Counter/consecutive; Inital (R/W)
 rNR50       EQU $ff24 ; Channel control / ON-OFF / wVolume (R/W)
 rNR51       EQU $ff25 ; Selection of Sound output terminal (R/W)
 rNR52       EQU $ff26 ; Sound on/off
+rWAVE       EQU $ff30
 rWave_0     EQU $ff30
 rWave_1     EQU $ff31
 rWave_2     EQU $ff32

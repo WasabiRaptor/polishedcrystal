@@ -127,7 +127,7 @@ DayCareAskDepositPokemon: ; 16798
 	ld d, [hl]
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	and a
 	ret
 
@@ -215,7 +215,7 @@ DayCare_TakeMoney_PlayCry: ; 16850
 	ld a, DAYCARETEXT_WITHDRAW
 	call PrintDayCareText
 	ld a, [wCurPartyGroup]
-	ld [wCurGroup], a 
+	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	call PlayCry
 	ld a, DAYCARETEXT_TOO_SOON
@@ -743,7 +743,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld hl, wEggOT
 	ld bc, PLAYER_NAME_LENGTH
 	call ByteFill
-	
+
 	ld a, [wBreedMon1Group]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
@@ -1019,7 +1019,7 @@ DayCare_InitBreeding: ; 16a3b
 	push hl
 	push bc
 	push de
-	call CheckKeyItem
+	farcall CheckKeyItem
 	pop de
 	pop bc
 	pop hl
@@ -1061,14 +1061,12 @@ DayCare_InitBreeding: ; 16a3b
 	push de
 	ld a, [wEggMonGroup]
 	ld [wCurGroup], a
-
-	call GetRelevantBaseData
 	ld a, [wEggMonSpecies]
-	dec a
+	ld [wCurSpecies], a
+
+	farcall GetRelevantBaseData
 	ld bc, BASEMON_GENDER
 	add hl, bc
-	ld bc, BASEMON_STRUCT_LENGTH
-	rst AddNTimes
 	ld a, d ; bank
 	call GetFarByte
 	swap a
@@ -1113,7 +1111,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld bc, PLAYER_NAME_LENGTH
 	rst CopyBytes
 	ld hl, wEggMonMoves
-	ld de, wEggMonPP
+	ld de, wEggMonCurPP
 	predef FillPP
 	ld hl, wMonOrItemNameBuffer
 	ld de, wStringBuffer1

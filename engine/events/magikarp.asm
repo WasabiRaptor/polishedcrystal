@@ -36,14 +36,14 @@ Special_CheckMagikarpLength: ; fbb32
 
 	; Did we beat the record?
 	ld hl, wMagikarpLengthMm
-	ld de, wBestMagikarpLengthMm
+	;ld de, wBestMagikarpLengthMm
 	ld c, 2
 	call StringCmp
 	jr nc, .not_long_enough
 
 	; NEW RECORD!!! Let's save that.
 	ld hl, wMagikarpLengthMm
-	ld de, wBestMagikarpLengthMm
+	;ld de, wBestMagikarpLengthMm
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -52,7 +52,7 @@ Special_CheckMagikarpLength: ; fbb32
 	inc de
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonOT
-	call SkipPlayerNames
+	farcall SkipPlayerNames
 	rst CopyBytes
 	ld a, 3
 	ld [wScriptVar], a
@@ -87,7 +87,7 @@ PrintMagikarpLength: ; fbbdb
 	ld hl, wStringBuffer1
 	ld de, wMagikarpLengthMm
 	lb bc, PRINTNUM_LEFTALIGN | 2, 4
-	call PrintNum
+	predef PrintNum
 	dec hl
 	ld a, [hl]
 	ld [hl], "."
@@ -162,12 +162,12 @@ PrintMagikarpLength: ; fbbdb
 	ld hl, wStringBuffer1
 	ld de, wMagikarpLengthMmHi
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "'"
 	inc hl
 	ld de, wMagikarpLengthMmLo
 	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	call PrintNum
+	predef PrintNum
 	ld [hl], "”"
 	inc hl
 	ld [hl], "@"
@@ -375,9 +375,9 @@ INCLUDE "data/events/magikarp_lengths.asm"
 
 
 Special_MagikarpHouseSign: ; fbcd2
-	ld a, [wBestMagikarpLengthMmHi]
+	;ld a, [wBestMagikarpLengthMmHi]
 	ld [wMagikarpLengthMmHi], a
-	ld a, [wBestMagikarpLengthMmLo]
+	;ld a, [wBestMagikarpLengthMmLo]
 	ld [wMagikarpLengthMmLo], a
 	call PrintMagikarpLength
 	ld hl, .CurrentRecordtext

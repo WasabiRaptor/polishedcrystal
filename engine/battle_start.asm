@@ -111,48 +111,53 @@ FlashyTransitionToBattle: ; 8c314
 ; 8c323
 
 .dw ; 8c323 (23:4323)
+BattleIntroJumptableStart:
 	dw StartTrainerBattle_DetermineWhichAnimation ; 00
 
 	; Animation 1: cave
+BattleIntroCave:
 	dw StartTrainerBattle_LoadPokeBallGraphics ; 01
 	dw StartTrainerBattle_SetUpBGMap ; 02
 	dw StartTrainerBattle_Flash ; 03
-	dw StartTrainerBattle_Flash ; 04
-	dw StartTrainerBattle_Flash ; 05
-	dw StartTrainerBattle_NextScene ; 06
+	;dw StartTrainerBattle_Flash ; 04
+	;dw StartTrainerBattle_Flash ; 05
+	;dw StartTrainerBattle_NextScene ; 06
 	dw StartTrainerBattle_SetUpForWavyOutro ; 07
 	dw StartTrainerBattle_SineWave ; 08
 
+BattleIntroCaveStronger:
 	; Animation 2: cave, stronger
 	dw StartTrainerBattle_LoadPokeBallGraphics ; 09
 	dw StartTrainerBattle_SetUpBGMap ; 0a
 	dw StartTrainerBattle_Flash ; 0b
-	dw StartTrainerBattle_Flash ; 0c
-	dw StartTrainerBattle_Flash ; 0d
-	dw StartTrainerBattle_NextScene ; 0e
+	;dw StartTrainerBattle_Flash ; 0c
+	;dw StartTrainerBattle_Flash ; 0d
+	;dw StartTrainerBattle_NextScene ; 0e
 	; There is no setup for this one
 	dw StartTrainerBattle_ZoomToBlack ; 0f
 
+BattleIntroNoCave:
 	; Animation 3: no cave
 	dw StartTrainerBattle_LoadPokeBallGraphics ; 10
 	dw StartTrainerBattle_SetUpBGMap ; 11
 	dw StartTrainerBattle_Flash ; 12
-	dw StartTrainerBattle_Flash ; 13
-	dw StartTrainerBattle_Flash ; 14
-	dw StartTrainerBattle_NextScene ; 15
+	;dw StartTrainerBattle_Flash ; 13
+	;dw StartTrainerBattle_Flash ; 14
+	;dw StartTrainerBattle_NextScene ; 15
 	dw StartTrainerBattle_SetUpForSpinOutro ; 16
 	dw StartTrainerBattle_SpinToBlack ; 17
 
+BattleIntroNoCaveStronger:
 	; Animation 4: no cave, stronger
 	dw StartTrainerBattle_LoadPokeBallGraphics ; 18
 	dw StartTrainerBattle_SetUpBGMap ; 19
 	dw StartTrainerBattle_Flash ; 1a
-	dw StartTrainerBattle_Flash ; 1b
-	dw StartTrainerBattle_Flash ; 1c
-	dw StartTrainerBattle_NextScene ; 1d
+	;dw StartTrainerBattle_Flash ; 1b
+	;dw StartTrainerBattle_Flash ; 1c
+	;dw StartTrainerBattle_NextScene ; 1d
 	dw StartTrainerBattle_SetUpForRandomScatterOutro ; 1e
 	dw StartTrainerBattle_SpeckleToBlack ; 1f
-
+BattleIntroFinish:
 	; All animations jump to here.
 	dw StartTrainerBattle_Finish ; 20
 
@@ -190,7 +195,7 @@ endr
 	ld hl, wCurPartyLevel
 	cp [hl]
 	jr nc, .okay
-	set 0, e
+	;set 0, e
 .okay
 	ld a, [wPermission]
 	cp CAVE
@@ -209,8 +214,8 @@ endr
 ; 8c38f (23:438f)
 
 .StartingPoints: ; 8c38f
-	db 1,  9
-	db 16, 24
+	db ((BattleIntroCave - BattleIntroJumptableStart)/2),  ((BattleIntroCaveStronger - BattleIntroJumptableStart)/2)
+	db ((BattleIntroNoCave - BattleIntroJumptableStart)/2), ((BattleIntroNoCaveStronger - BattleIntroJumptableStart)/2)
 ; 8c393
 
 StartTrainerBattle_Finish: ; 8c393 (23:4393)
@@ -262,7 +267,7 @@ StartTrainerBattle_SineWave: ; 8c408 (23:4408)
 	jp .DoSineWave
 
 .end
-	ld a, $20
+	ld a, ((BattleIntroFinish - BattleIntroJumptableStart)/2)
 	ld [wJumptableIndex], a
 	ret
 
@@ -341,13 +346,13 @@ endr
 	sub 3
 	jr nc, .mod_3
 	add 3
-	ret z
-	jp DelayFrame
+	ret 
+	;jp DelayFrame
 
 .end
 	xor a
 	ldh [hBGMapMode], a
-	ld a, $20
+	ld a, ((BattleIntroFinish - BattleIntroJumptableStart)/2)
 	ld [wJumptableIndex], a
 	ret
 ; 8c490 (23:4490)
@@ -492,12 +497,12 @@ StartTrainerBattle_SpeckleToBlack: ; 8c58f (23:458f)
 .done
 	ld a, $1
 	ldh [hBGMapMode], a
-	call DelayFrame
-	call DelayFrame
-	call DelayFrame
+	;call DelayFrame
+	;call DelayFrame
+	;call DelayFrame
 	xor a
 	ldh [hBGMapMode], a
-	ld a, $20
+	ld a, ((BattleIntroFinish - BattleIntroJumptableStart)/2)
 	ld [wJumptableIndex], a
 	ret
 
@@ -819,7 +824,7 @@ StartTrainerBattle_ZoomToBlack: ; 8c768 (23:4768)
 	jr .loop
 
 .done
-	ld a, $20
+	ld a, ((BattleIntroFinish - BattleIntroJumptableStart)/2)
 	ld [wJumptableIndex], a
 	ret
 ; 8c792 (23:4792)

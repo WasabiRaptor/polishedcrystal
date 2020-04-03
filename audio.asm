@@ -364,19 +364,23 @@ INCLUDE "audio/sfx_crystal.asm"
 
 SECTION "Cries", ROMX
 
-
 INCLUDE "audio/cries.asm"
-INCLUDE "data/pokemon/kanto_cries.asm"
-INCLUDE "data/pokemon/johto_cries.asm"
+INCLUDE "audio/ded.asm"
+INCLUDE "data/pokemon/kanto/cries.asm"
+INCLUDE "data/pokemon/johto/cries.asm"
 
 SECTION "Hoenn Cries", ROMX
 
-INCLUDE "data/pokemon/hoenn_cries.asm"
+INCLUDE "data/pokemon/hoenn/cries.asm"
 
 SECTION "Sinnoh Cries", ROMX
 
-INCLUDE "data/pokemon/sinnoh_cries.asm"
+INCLUDE "data/pokemon/sinnoh/cries.asm"
 
 SECTION "Unova Cries", ROMX
 
-INCLUDE "data/pokemon/unova_cries.asm"
+INCLUDE "data/pokemon/unova/cries.asm"
+
+SECTION "Kalos Cries", ROMX
+
+INCLUDE "data/pokemon/kalos/cries.asm"

@@ -77,9 +77,9 @@ _GetVarAction:: ; 80648 (20:4648)
 
 .CountSeenMons: ; 806d3
 ; Seen mons.
-	ld hl, wPokedexSeen
-	ld b, wPokedexSeenEnd - wPokedexSeen
-	call CountSetBits
+	;ld hl, wPokedexSeen
+	;ld b, wPokedexSeenEnd - wPokedexSeen
+	;call CountSetBits
 	ld a, [wd265]
 	jp .loadstringbuffer2
 ; 806e1

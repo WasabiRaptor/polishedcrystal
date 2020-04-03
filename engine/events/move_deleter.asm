@@ -8,11 +8,11 @@ MoveDeletion:
 	farcall SelectMonFromParty
 	jr c, .declined
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .egg
 	ld a, MON_MOVES + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and a
 	jr z, .onlyonemove
@@ -137,7 +137,7 @@ MoveDeletion:
 	dec a
 	ld c, a
 	ld b, 0
-	ld hl, wPartyMon1PP
+	ld hl, wPartyMon1CurPP
 	add hl, bc
 	ld a, [wCurPartyMon]
 	ld bc, PARTYMON_STRUCT_LENGTH

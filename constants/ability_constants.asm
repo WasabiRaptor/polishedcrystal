@@ -132,20 +132,20 @@
 	const COMPETITIVE
 	const PIXILATE
 	const TANGLING_HAIR
-	const REFRIGERATE ;raptor 
-	const SLUSH_RUSH ;raptor 
-	const STANCE_CHANGE ;raptor 
-	const POWER_OF_ALCHEMY ;raptor 
-	const RECIEVER ;raptor 
-	const ILLUSION ;raptor 
-	const REVERSE_AURA ;thalins 
-	const SOUL_HEART ;thalins 
-	const STORM_DRAIN ;raptor 
-	const MUMMY ;raptor 
-	const HEAVY_METAL ;thalins 
-	const RKS_SYSTEM ;raptor 
+	const REFRIGERATE ;raptor
+	const SLUSH_RUSH ;raptor
+	const STANCE_CHANGE ;raptor
+	const POWER_OF_ALCHEMY ;raptor
+	const RECIEVER ;raptor
+	const ILLUSION ;raptor
+	const REVERSE_AURA ;thalins
+	const SOUL_HEART ;thalins
+	const STORM_DRAIN ;raptor
+	const MUMMY ;raptor
+	const HEAVY_METAL ;thalins
+	const RKS_SYSTEM ;raptor
 	const TOUGH_CLAWS ;raptor
-	const POWER_CONSTRUCT ;thalins 
+	const POWER_CONSTRUCT ;thalins
 	const BERSERK ;raptor
 	const GALE_WINGS ;raptor
 	const TOXIC_BOOST ;thalins
@@ -155,6 +155,7 @@ NUM_ABILITIES EQU const_value
 placeholder_zero: macro
 \1 EQU 0
 endm
+	placeholder_zero AURA_BREAK
 	placeholder_zero DISGUISE ;thalins
 	;placeholder_zero TOXIC_BOOST ;thalins ; basically just guts but only for poison
 	placeholder_zero MAGICIAN ;thalins ;similar to pickpocket but its when you attack instead of get hit
@@ -205,6 +206,21 @@ endm
 	placeholder_zero TURBOBLAZE
 	placeholder_zero ZEN_MODE
 	placeholder_zero VICTORY_STAR
+
+	placeholder_zero DARK_AURA
+	placeholder_zero FAIRY_AURA
+	placeholder_zero CHEEK_POUCH
+	placeholder_zero STRONG_JAW
+	placeholder_zero MEGA_LAUNCHER
+	placeholder_zero AROMA_VEIL
+	placeholder_zero GRASS_PELT
+	placeholder_zero AERIALATE
+
+	placeholder_zero SCREEN_CLEANER
+	placeholder_zero PARENTAL_BOND
+	placeholder_zero MISTY_SURGE
+	placeholder_zero NEUTRALIZING_GAS
+	placeholder_zero PASTEL_VEIL
 
 ABILITY_1      EQU %00100000
 ABILITY_2      EQU %01000000

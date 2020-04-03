@@ -5,5 +5,5 @@
 	next "things. It's been known to"
 	next "sneak into the nests of"
 	
-	page "Gabite—noted collectors of"
-	next "jewels—in search of treasure.@"
+	page "Gabite-noted collectors of"
+	next "jewels-in search of treasure.@"

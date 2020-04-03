@@ -54,3 +54,7 @@ PredefPointers::
 	add_predef DoKeyItemEffect
 	add_predef GetPartyMonGroupSpeciesAndForm
 	add_predef PokemonToGroupSpeciesAndForm
+	add_predef GetNick
+	add_predef GetPartyParamLocation
+	add_predef GetPartyLocation
+	add_predef PrintNum

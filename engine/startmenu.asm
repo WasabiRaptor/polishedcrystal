@@ -569,6 +569,12 @@ StartMenu_Pokemon: ; 12976
 	farcall PartyMenuSelect
 	jr c, .return ; if cancelled or pressed B
 
+if DEF(DEBUG)
+	ldh a, [hJoyDown]
+	bit 3, a
+	jr nz, .editor
+endc
+
 	call PokemonActionSubmenu
 	push af
 	call SFXDelay2
@@ -586,6 +592,11 @@ StartMenu_Pokemon: ; 12976
 	call CloseSubmenu
 	xor a
 	ret
+
+if DEF(DEBUG)
+.editor
+	farcall EditPartyMon
+endc
 
 .quit
 	ld a, b
@@ -617,7 +628,7 @@ HasNoItems: ; 129d5
 TossItemFromPC: ; 129f4
 	push de
 	call PartyMonItemName
-	farcall _CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .key_item
@@ -712,7 +723,7 @@ PokemonActionSubmenu: ; 12a88
 	call ClearBox
 	farcall MonSubmenu
 	call InitVariableWidthText
-	call GetCurNick
+	farcall GetCurNick
 	ld a, [wMenuSelection]
 	ld hl, .Actions
 	ld de, 3
@@ -806,7 +817,7 @@ SwitchPartyMons: ; 12aec
 GiveTakePartyMonItem: ; 12b60
 ; Eggs can't hold items!
 	ld a, MON_IS_EGG
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	bit MON_IS_EGG_F, [hl]
 	jr nz, .cancel
 
@@ -827,7 +838,7 @@ GiveTakePartyMonItem: ; 12b60
 	call ExitMenu
 	jr c, .cancel
 
-	call GetCurNick
+	farcall GetCurNick
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer
 	ld bc, PKMN_NAME_LENGTH
@@ -875,7 +886,7 @@ GiveTakePartyMonItem: ; 12b60
 	cp TM_HM - 1
 	jr z, .next
 
-	call CheckTossableItem
+	farcall CheckTossableItem
 	ld a, [wItemAttributeParamBuffer]
 	and a
 	jr nz, .next
@@ -1039,7 +1050,7 @@ CantBeHeldText: ; 12cd2
 GetPartyItemLocation: ; 12cd7
 	push af
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	pop af
 	ret
 ; 12cdf
@@ -1213,7 +1224,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 .CheckMonHasEnoughHP:
 ; Need to have at least (MaxHP / 5) HP left.
 	ld a, MON_MAXHP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ldh [hDividend + 0], a
 	ld a, [hl]
@@ -1223,7 +1234,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 	ld b, 2
 	call Divide
 	ld a, MON_HP + 1
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ldh a, [hQuotient + 2]
 	sub [hl]
 	dec hl
@@ -1361,13 +1372,14 @@ MoveScreenLoop:
 ;         f = c;     no options existed, move screen was aborted early
 	xor a
 	ld [wMoveScreenSelectedMove], a
+	ld [wMoveScreenSelectedMove+1], a
 	ld [wMoveScreenCursor], a
 	ld [wMoveScreenOffset], a
 	ld [wMoveScreenNumMoves], a
 
 	; Zero the first 4 moves to avoid oddities if we have less than 4 total
 	ld hl, wMoveScreenMoves
-	ld b, NUM_MOVES
+	ld b, NUM_MOVES * 2
 	xor a
 .zero_movescreenmoves
 	ld [hli], a
@@ -1378,16 +1390,24 @@ MoveScreenLoop:
 	jr z, .movecopy_reminder
 
 	; Copy over moves from the party struct
-	ld bc, NUM_MOVES
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld de, wMoveScreenMoves
+	ld bc, NUM_MOVES
 .movecopy_loop
 	ld a, [hli]
 	and a
 	jr z, .movecopy_done
 	ld [de], a
 	inc de
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld [de], a
+	inc de
+	pop hl
 	inc b
 	dec c
 	jr nz, .movecopy_loop
@@ -1398,6 +1418,9 @@ MoveScreenLoop:
 	cp MOVESCREEN_NEWMOVE
 	jr nz, .newmove_done
 	ld a, [wPutativeTMHMMove]
+	ld [de], a
+	inc de
+	ld a, [wPutativeTMHMMove+1]
 	ld [de], a
 	inc b
 	jr .newmove_done
@@ -1440,7 +1463,7 @@ MoveScreenLoop:
 	rrca
 	jr c, .pressed_start
 	rrca
-	jr c, .pressed_right
+	jp c, .pressed_right
 	rrca
 	jp c, .pressed_left
 	rrca
@@ -1462,14 +1485,21 @@ MoveScreenLoop:
 	ld b, 0
 	ld hl, wMoveScreenMoves
 	add hl, bc
-	ld a, [hl]
+	add hl, bc
+	ld a, [hli]
 	ld [wMoveScreenSelectedMove], a
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld [wMoveScreenSelectedMove+1], a
 	ld a, [wMoveScreenMode]
 	cp MOVESCREEN_NEWMOVE
 	ld a, c
 	jr nz, .ok
-	ld a, [hl]
 	push bc
+	ld a, [wMoveScreenSelectedMove]
+	ld c, a
+	ld a, [wMoveScreenSelectedMove+1]
+	ld b, a
 	call IsHMMove
 	pop bc
 	ld a, c
@@ -1478,7 +1508,7 @@ MoveScreenLoop:
 	jr z, .ok
 	ld hl, Text_CantForgetHM
 	call PrintTextNoBox
-	jr .outer_loop
+	jp .outer_loop
 .ok
 	inc a
 	and a
@@ -1539,7 +1569,7 @@ MoveScreenLoop:
 	rst AddNTimes
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
-	call IsAPokemon
+	farcall IsAPokemon
 	ld a, d
 	jr c, .loop_right_invalid
 	ld [wCurPartyMon], a
@@ -1578,7 +1608,7 @@ MoveScreenLoop:
 	rst AddNTimes
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurPartySpecies]
-	call IsAPokemon
+	farcall IsAPokemon
 	ld a, d
 	jr c, .loop_left_invalid
 	ld [wCurPartyMon], a
@@ -1660,15 +1690,18 @@ MoveScreenLoop:
 
 .regular_swap_move
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	call .swap_location
-	ld a, MON_PP
-	call GetPartyParamLocation
+	ld a, MON_MOVES_HIGH
+	predef GetPartyParamLocation
+	call .swap_location
+	ld a, MON_CUR_PP
+	predef GetPartyParamLocation
 	call .swap_location
 
 .finish_swap
 	ld hl, wMoveScreenMoves
-	call .swap_location
+	call .swap_location_two
 	ld de, SFX_SWITCH_POKEMON
 	call PlaySFX
 	call WaitSFX
@@ -1700,21 +1733,55 @@ MoveScreenLoop:
 	ld [de], a
 	ret
 
+.swap_location_two
+	ld a, [wMoveScreenCursor]
+	ld b, 0
+	ld c, a
+	push hl
+	add hl, bc
+	add hl, bc
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [wMoveSwapBuffer]
+	dec a
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [de]
+	ld b, [hl]
+	ld [hli], a
+	ld a, b
+	ld [de], a
+	inc de
+	ld a, [de]
+	ld b, [hl]
+	ld [hl], a
+	ld a, b
+	ld [de], a
+	ret
+
+IsHMMove:: ; 34e7
+	ld hl, .HMMoves
+	ld de, 1
+	jp IsInArray
+
+.HMMoves:
+	db CUT
+	db FLY
+	db SURF
+	db STRENGTH
+	db WATERFALL
+	db WHIRLPOOL
+	db -1
+
 GetForgottenMoves::
 ; retrieve a list of a mon's forgotten moves, excluding ones beyond level
 ; and moves the mon already knows
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
-	ld a, [wCurPartySpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
-	ld a, d ;bank
-	call GetFarHalfword
 .skip_evos
 	ld a, d ;bank
 	call GetFarByte
@@ -1728,7 +1795,7 @@ GetForgottenMoves::
 	ld b, 100 ; Gen VII behaviour
 	inc b ; so that we can use jr nc
 .loop
-	pop af ;0 
+	pop af ;0
 	push af;1
 	call GetFarByte
 	inc hl
@@ -1748,7 +1815,7 @@ GetForgottenMoves::
 	push bc ;3
 	ld b, a
 	ld a, MON_MOVES
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld c, NUM_MOVES
 	ld a, b
 	call .move_exists
@@ -1818,14 +1885,16 @@ SetUpMoveScreenBG: ; 13172
 	call ClearBox
 	xor a
 	ld [wMonType], a
+	VWTextStart $c6
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	hlcoord 5, 1
 	call PlaceString
 	push bc
 	farcall CopyPkmnToTempMon
 	pop hl
+	inc hl
 	farcall PrintLevel
 	ld hl, wPlayerHPPal
 	call SetHPPal
@@ -1848,31 +1917,53 @@ MoveScreen_ListMoves:
 	ld a, [wMoveScreenOffset]
 	ld c, a
 	add hl, bc
+	add hl, bc
 	ld de, wListMoves_MoveIndicesBuffer
-	ld bc, NUM_MOVES
-	rst CopyBytes
+	ld c, NUM_MOVES
+.ChangeIndexOrderLoop
+	ld a, [hli]
+	ld [de], a
+	inc de
+	push de
+	inc de
+	inc de
+	inc de
+	ld a, [hli]
+	ld [de], a
+	pop de
+	dec c
+	jr nz, .ChangeIndexOrderLoop
+
 	ld a, SCREEN_WIDTH * 2 ; move list spacing
 	ld [wBuffer1], a
+	call OtherVariableWidthText
 	hlcoord 2, 3
 	predef ListMoves
 
 	; Get PP -- either current PP, or default PP for the move
 	ld hl, wListMoves_MoveIndicesBuffer
 	ld de, wTempMonMoves
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES*2
 	rst CopyBytes
 
 	; Get default PP for moves
 	ld c, NUM_MOVES
 	ld hl, wTempMonMoves
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 .defaultpp_loop
 	ld a, [hli]
 	push hl
 	push bc
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
-	dec a
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -1887,10 +1978,10 @@ MoveScreen_ListMoves:
 	ld a, [wMoveScreenMode]
 	cp MOVESCREEN_REMINDER
 	jr z, .got_pp
-	ld a, MON_PP
-	call GetPartyParamLocation
+	ld a, MON_CUR_PP
+	predef GetPartyParamLocation
 	ld c, NUM_MOVES
-	ld de, wTempMonPP
+	ld de, wTempMonCurPP
 	ld a, [wMoveScreenOffset]
 .currentpp_loop
 	and a
@@ -1928,8 +2019,14 @@ MoveScreen_ListMovesFast:
 	ld c, a
 	ld b, 0
 	add hl, bc
-	ld a, [hl]
+	ld a, [hli]
 	ld [wCurMove], a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld [wCurMoveHigh], a
 
 	hlcoord 1, 1 ; 2 below topmost position
 	ld bc, SCREEN_WIDTH * 2
@@ -1976,6 +2073,7 @@ PlaceMoveData:
 	ld a, [wMoveSwapBuffer]
 	and a
 	jr z, .not_swapping
+	call InitVariableWidthText
 	hlcoord 1, 14
 	ld de, String_MoveSwap
 	call PlaceString
@@ -1986,15 +2084,19 @@ PlaceMoveData:
 .not_swapping
 	xor a
 	ldh [hBGMapMode], a
-
+	ld a, $ff
+	ld [wVariableWidthTextTile], a
 	hlcoord 10, 12
 	ld de, String_PowAcc
 	call PlaceString
-
+	VWTextStart $d7
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_CATEGORY
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2014,9 +2116,12 @@ PlaceMoveData:
 	ld [hl], $5a
 
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_TYPE
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2046,9 +2151,12 @@ PlaceMoveData:
 	ld [hl], $5e
 
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_POWER
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2058,7 +2166,7 @@ PlaceMoveData:
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .place_accuracy
 .no_power
 	ld de, String_na
@@ -2066,9 +2174,12 @@ PlaceMoveData:
 
 .place_accuracy
 	ld a, [wCurMove]
-	dec a
+	ld c, a
+	ld a, [wCurMoveHigh]
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_ACC
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte
@@ -2088,7 +2199,7 @@ PlaceMoveData:
 	ld [wd265], a
 	ld de, wd265
 	lb bc, 1, 3
-	call PrintNum
+	predef PrintNum
 	jr .description
 .no_acc
 	ld de, String_na

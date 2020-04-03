@@ -60,14 +60,14 @@ DoPoisonStep:: ; 505da
 .DamageMonIfPoisoned: ; 5062e
 ; check if mon is poisoned, return if not
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and 1 << PSN
 	ret z
 
 ; check if mon is fainted, return if so
 	ld a, MON_HP
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hli]
 	ld b, a
 	ld c, [hl]
@@ -78,12 +78,12 @@ DoPoisonStep:: ; 505da
 	push hl
 	push bc
 	ld a, MON_ABILITY
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, [hl]
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
-	ld a, [wCurSpecies]
-	ld c, a
+	predef GetPartyParamLocation
+	;ld a, [wCurSpecies]
+	;ld c, a
 	call GetAbility
 	ld a, b
 	pop bc
@@ -104,7 +104,7 @@ DoPoisonStep:: ; 505da
 ; if 1 HP, heal poison
 .heal_poison
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld [hl], 0
 ; set carry and return %10
 	ld c, %10

@@ -198,17 +198,17 @@ OaksPkmnTalk4:
 	; bc now contains the chosen map's group and number indices.
 	push bc
 
-	; Search the JohtoGrassWildMons array for the chosen map.
-	ld hl, JohtoGrassWildMons
+	; Search the InvarGrassWildMons array for the chosen map.
+	ld hl, InvarGrassWildMons
 .loop
-	ld a, BANK(JohtoGrassWildMons)
+	ld a, BANK(InvarGrassWildMons)
 	call GetFarByte
 	cp -1
 	jr z, .overflow
 	inc hl
 	cp b
 	jr nz, .next
-	ld a, BANK(JohtoGrassWildMons)
+	ld a, BANK(InvarGrassWildMons)
 	call GetFarByte
 	cp c
 	jr z, .done
@@ -244,7 +244,7 @@ endr
 	add hl, de
 	add hl, de
 	inc hl ; skip level
-	ld a, BANK(JohtoGrassWildMons)
+	ld a, BANK(InvarGrassWildMons)
 	call GetFarByte
 	ld [wNamedObjectIndexBuffer], a
 	ld [wCurPartySpecies], a
@@ -666,7 +666,7 @@ PokedexShow1:
 	ld c, a
 	push bc
 	ld a, c
-	call CheckCaughtMon
+	farcall CheckCaughtMon
 	pop bc
 	jr z, .loop
 	inc c
@@ -967,7 +967,7 @@ LuckyNumberShow8:
 	ld hl, wStringBuffer1
 	ld de, wLuckyIDNumber
 	lb bc, PRINTNUM_LEADINGZEROS | 2, 5
-	call PrintNum
+	predef PrintNum
 	ld a, "@"
 	ld [wStringBuffer1 + 5], a
 	ld hl, LC_Text8

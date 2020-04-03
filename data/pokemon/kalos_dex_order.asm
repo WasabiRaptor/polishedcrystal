@@ -20,7 +20,7 @@ KalosDexOrder::
 	grouped_dex_order_mon TALONFLAME
 	grouped_dex_order_mon SCATTERBUG
 	grouped_dex_order_mon SPEWPA
-	grouped_dex_order_mon VIVVILON ; oh boy you seem like a bag of worms when we get to you
+	grouped_dex_order_mon VIVILLON ; oh boy you seem like a bag of worms when we get to you
 	grouped_dex_order_mon LITLEO
 	grouped_dex_order_mon PYROAR
 	grouped_dex_order_mon FLABEBE ; the color variance can be handled by vary colors by DVs
@@ -30,7 +30,7 @@ KalosDexOrder::
 	grouped_dex_order_mon GOGOAT
 	grouped_dex_order_mon PANCHAM
 	grouped_dex_order_mon PANGORO
-	grouped_dex_order_mon FURFROU ; you're in the same boat as vivvilon as yours is just cosmetic, not sure if it should be granted more slots really
+	grouped_dex_order_mon FURFROU ; you're in the same boat as vivillon as yours is just cosmetic, not sure if it should be granted more slots really
 	grouped_dex_order_mon ESPURR
 	grouped_dex_order_mon MEOWSTIC
 	grouped_dex_order_mon HONEDGE
@@ -43,17 +43,18 @@ KalosDexOrder::
 	grouped_dex_order_mon INKAY
 	grouped_dex_order_mon MALAMAR
 	grouped_dex_order_mon BINACLE
-	grouped_dex_order_mon BARBRACLE
+	grouped_dex_order_mon BARBARACLE
 	grouped_dex_order_mon SKRELP
 	grouped_dex_order_mon DRAGALGE
 	grouped_dex_order_mon CLAUNCHER
-	grouped_dex_order_mon CLAWLITZER
+	grouped_dex_order_mon CLAWITZER
 	grouped_dex_order_mon HELIOPTILE
 	grouped_dex_order_mon HELIOLISK
 	grouped_dex_order_mon TYRUNT
 	grouped_dex_order_mon TYRANTRUM
 	grouped_dex_order_mon AMAURA
 	grouped_dex_order_mon AURORUS
+	grouped_dex_order_mon SYLVEON
 	grouped_dex_order_mon HAWLUCHA
 	grouped_dex_order_mon DEDENNE
 	grouped_dex_order_mon CARBINK

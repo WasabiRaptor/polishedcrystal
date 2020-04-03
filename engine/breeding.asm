@@ -57,7 +57,7 @@ CheckBreedmonCompatibility: ; 16e1d
 	ld a, [wBreedMon1Species]
 	cp b
 	jr nz, .compare_ids
-	ld c, HIGHLY_COMPATIBLE 
+	ld c, HIGHLY_COMPATIBLE
 .compare_ids
 	; Speed up
 	ld a, [wBreedMon1ID]
@@ -103,7 +103,7 @@ CheckBreedmonCompatibility: ; 16e1d
 ; Ditto is automatically compatible with everything.
 ; If not Ditto, load the breeding groups into b/c and d/e.
 	ld a, [wBreedMon2Species]
-	ld b, a 
+	ld b, a
 	ld a, [wBreedMon2Group]
 	ld [wCurGroup], a
 	cppoke DITTO, .check_compatibility
@@ -203,7 +203,7 @@ DoEggStep:: ; 16f3e
 	jr z, .no_ability_bonus
 	cp EGG
 	jr z, .ability_next
-	ld c, a
+	ld [wCurSpecies], a
 	ld b, [hl]
 	push de
 	push hl
@@ -295,7 +295,7 @@ HatchEggs: ; 16f70 (5:6f70)
 	predef GetPartyMonGroupSpeciesAndForm
 	ld a, [wCurSpecies]
 	dec a
-	call SetSeenAndCaughtMon
+	farcall SetSeenAndCaughtMon
 
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMon1IsEgg
@@ -553,7 +553,7 @@ InitEggMoves:
 
 	; Done, fill PP
 	ld hl, wEggMonMoves
-	ld de, wEggMonPP
+	ld de, wEggMonCurPP
 	predef_jump FillPP
 
 .GetEggMoves:
@@ -564,6 +564,11 @@ InitEggMoves:
 	ret z
 	ld d, a
 	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	ld e, a
 	push bc
 	call InheritEggMove
 	pop bc
@@ -573,19 +578,10 @@ InitEggMoves:
 	ret
 
 InheritLevelMove:
-; If move d is part of the level up moveset, inherit that move
+; If move de is part of the level up moveset, inherit that move
 	push de
-	ld a, [wCurGroup]
 	farcall GetRelevantEvosAttacksPointers
 	ld b, d
-	ld a, [wEggMonSpecies]
-	dec a
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	ld a, b ; bank
-	call GetFarHalfword
 	pop de
 .loop
 	ld a, b; bank
@@ -601,18 +597,23 @@ InheritLevelMove:
 	inc hl
 	ld a, b; bank
 	call GetFarByte
+	inc hl
 	cp d
+	jr nz, .next
+	ld a, b; bank
+	call GetFarByte
+	cp e
 	jr z, InheritMove
+.next
 	inc hl
 	jr .loop2
 
 InheritEggMove:
-; If move d is an egg move, inherit that move
-; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
-; returns c for variants, nc for normal species
+; If move de is an egg move, inherit that move
 	push de
-	ld a, [wCurGroup]
-	ld hl, VariantEggMovePointerTable
+	ld hl, RegionalEggMovePointerTable
+	call dbwArray
+
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -621,9 +622,11 @@ InheritEggMove:
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	
+	ld a, [wCurForm]
+	jr c, .variant
 	ld a, [wEggMonSpecies]
 	dec a
+.variant
 	ld e, a
 	ld d, 0
 	add hl, de
@@ -634,11 +637,16 @@ InheritEggMove:
 .loop
 	ld a, b ;bank
 	call GetFarByte
-	inc a
+	inc hl
+	and a
 	ret z
-	dec a
 	cp d
+	jr nz, .next
+	ld a, b ;bank
+	call GetFarByte
+	cp e
 	jr z, InheritMove
+.next
 	inc hl
 	jr .loop
 
@@ -663,7 +671,13 @@ InheritMove:
 	rst CopyBytes
 .got_move_byte
 	dec hl
+	push hl
 	ld [hl], d
+	inc hl
+	inc hl
+	inc hl
+	inc hl
+	ld [hl], e
 	ret
 
 

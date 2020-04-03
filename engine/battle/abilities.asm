@@ -375,9 +375,8 @@ ForewarnAbility:
 	push af
 	push hl
 	; Check for special cases
-	ld de, 1
-	ld hl, DynamicPowerMoves
-	call IsInArray
+	ld a, DYNAMIC_POWER_MOVE
+	call CheckMoveProperty
 	pop hl
 	pop bc
 	jr nc, .not_special
@@ -512,7 +511,7 @@ RecieverAbility:
 	predef PokemonToGroupSpeciesAndForm
 	pop hl
 	;species of last mon in party
-	ld c, a
+	;ld c, a
 	push bc
 	ld bc, MON_ABILITY
 	add hl, bc
@@ -591,7 +590,7 @@ StanceChangeAbility:
 	jr nz,.enemyturn
 	call UpdateBattleMonInParty
 
-	farcall UpdatePkmnStats 
+	farcall UpdatePkmnStats
 
 	farcall InitBattleMon
 	jr .donestats
@@ -599,7 +598,7 @@ StanceChangeAbility:
 .enemyturn
 	call UpdateEnemyMonInParty
 
-	farcall UpdateEnemyPkmnStats 
+	farcall UpdateEnemyPkmnStats
 
 	farcall InitEnemyMon
 
@@ -632,7 +631,7 @@ StanceChangeAbility:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, StanceChangedText
 	jp StdBattleTextBox
@@ -722,6 +721,41 @@ RunHitAbilities:
 	jp z, BerserkAbility
 	ret
 
+CompareTwoBytes::
+; Returns f
+;  z - bc == de
+; nz = bc != de
+;  c - bc <  de
+; nc - bc >= de
+	push hl
+	xor a
+	ld l, a
+	ld a, b
+	cp d
+	jr nz, .not_equal
+	ld a, c
+	cp e
+	jr nz, .not_equal
+	set 7, l
+
+.not_equal
+	ld a, b
+	cp d
+	jr c, .less_than
+	jr nz, .greater_than
+	ld a, c
+	cp e
+	jr c, .less_than
+	jr .greater_than
+
+.less_than
+	set 4, l
+.greater_than
+	push hl
+	pop af
+	pop hl
+	ret
+
 BerserkAbility:
 	ld a, BATTLE_VARS_SUBSTATUS3
 	call GetBattleVarAddr
@@ -742,7 +776,7 @@ BerserkAbility:
 	ret nc
 	res SUBSTATUS_DISGUISE_BROKEN, [hl]
 	ret
-	
+
 RunContactAbilities:
 ; turn perspective is from the attacker
 ; 30% of the time, activate Poison Touch
@@ -759,7 +793,7 @@ RunContactAbilities:
 ; Abilities always run from the ability user's perspective. This is
 ; consistent. Thus, a switchturn happens here. Feel free to rework
 ; the logic if you feel that this reduces readability.
-	
+
 	call GetOpponentAbilityAfterMoldBreaker
 	ld b, a
 
@@ -813,7 +847,7 @@ BreakDisguise:
 	jr z, .player_backpic
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call SkipPokemonNames
+	farcall SkipPokemonNames
 	ld de, wEnemyMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
@@ -977,11 +1011,10 @@ CheckNullificationAbilities:
 	ret
 
 .soundproof
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
-	ld hl, SoundMoves
-	ld de, 1
-	call IsInArray
+	ld a, SOUND_MOVE
+	call CheckMoveProperty
 	ret nc
 
 .ability_ok
@@ -1070,7 +1103,7 @@ MoxieAbility:
 	jr nz, .enemy
 	ld a, [wBattleMode]
 	dec a
-	ret z ;checks if wild battle 
+	ret z ;checks if wild battle
 .enemy
 	farcall CheckAnyOtherAliveOpponentMons ;only boost if there are more pokemon to fight
 	ret z
@@ -1188,13 +1221,13 @@ PowerConstructAbility:
 	push af
 	jr nz,.enemyturn
 	call UpdateBattleMonInParty
-	farcall UpdatePkmnStats 
+	farcall UpdatePkmnStats
 	farcall InitBattleMon
 	jr .donestats
 
 .enemyturn
 	call UpdateEnemyMonInParty
-	farcall UpdateEnemyPkmnStats 
+	farcall UpdateEnemyPkmnStats
 	farcall InitEnemyMon
 
 .donestats
@@ -1226,7 +1259,7 @@ PowerConstructAbility:
 	ld a, BATTLE_VARS_SUBSTATUS4
 	call GetBattleVarAddr
 	bit SUBSTATUS_SUBSTITUTE, [hl]
-	ld a, SUBSTITUTE
+	ld bc, SUBSTITUTE
 	call nz, LoadAnim
 	ld hl, ZygardeFormText
 	jp StdBattleTextBox
@@ -1568,7 +1601,7 @@ RegainItemByAbility:
 	ld a, [wCurOTMon]
 	ld hl, wOTPartyMon1Item
 .got_item_addr
-	call GetPartyLocation
+	predef GetPartyLocation
 	ld [hl], b
 	ret
 
@@ -1826,10 +1859,10 @@ SolarPowerAbility:
 
 IronFistAbility:
 ; 120% damage for punching moves
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
-	ld hl, PunchingMoves
-	call IsInArray
+	ld a, PUNCHING_MOVE
+	call CheckMoveProperty
 	ret c
 	ld a, $65
 	jp ApplyDamageMod
@@ -1853,10 +1886,9 @@ SandForceAbility:
 
 RecklessAbility:
 ; 120% damage for (Hi) Jump Kick and recoil moves except for Struggle
-	ld a, BATTLE_VARS_MOVE
+	ld a, BATTLE_VARS_MOVE ; accounts for two byte
 	call GetBattleVar
-	cp STRUGGLE
-	ret z
+	ret16bcZ STRUGGLE
 	ld a, BATTLE_VARS_MOVE_EFFECT
 	call GetBattleVar
 	cp EFFECT_RECOIL_HIT
@@ -2053,12 +2085,12 @@ RunPostBattleAbilities::
 
 	push bc
 	ld a, MON_ABILITY
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld b, [hl]
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurSpecies]
-	ld c, a
+	;ld c, a
 	farcall GetAbility
 	ld a, d
 	and $3f
@@ -2080,14 +2112,14 @@ RunPostBattleAbilities::
 .natural_cure:
 	; Heal status
 	ld a, MON_STATUS
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	xor a
 	ld [hl], a
 	ret
 
 .Pickup:
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	and a
 	ret nz
@@ -2097,12 +2129,12 @@ RunPostBattleAbilities::
 	ret nc
 
 	ld a, MON_LEVEL
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [hl]
 	call GetRandomPickupItem
 	ld b, a
 	ld a, MON_ITEM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, b
 	ld [hl], a
 	push bc
@@ -2118,7 +2150,7 @@ RunPostBattleAbilities::
 	push bc
 	push de
 	ld a, MON_GROUP_SPECIES_AND_FORM
-	call GetPartyParamLocation
+	predef GetPartyParamLocation
 	ld a, [wCurSpecies]
 	ld [wNamedObjectIndexBuffer], a
 	call GetPokemonName

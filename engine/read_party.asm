@@ -199,13 +199,23 @@ endr
 
 	ld b, NUM_MOVES
 .copy_moves
+	push bc
 	call GetNextTrainerDataByte
 	ld [de], a
+	ld c, a
 	inc de
-	cp RETURN
-	jr z, .return
-	cp GYRO_BALL
-	jr nz, .done_special_moves
+	push de
+	inc de
+	inc de
+	inc de
+	call GetNextTrainerDataByte
+	ld [de], a
+	and MOVE_HIGH_MASK
+	ld b, a
+	pop de
+
+	cp16bcZ RETURN, .return
+	cp16bcNZ GYRO_BALL, .done_special_moves
 
 	; Set speed EVs and IVs to 0
 	push hl
@@ -247,6 +257,7 @@ endr
 	pop hl
 
 .done_special_moves
+	pop bc
 	dec b
 	jr nz, .copy_moves
 
@@ -259,7 +270,7 @@ endr
 	rst AddNTimes
 	ld d, h
 	ld e, l
-	ld hl, MON_PP
+	ld hl, MON_CUR_PP
 	add hl, de
 
 	push hl
@@ -275,9 +286,16 @@ endr
 
 	push hl
 	push bc
-	dec a
+	ld c, a
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	and MOVE_HIGH_MASK
+	ld b, a
+	dec bc
 	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
+	ld a, MOVE_LENGTH
 	rst AddNTimes
 	ld a, BANK(Moves)
 	call GetFarByte

@@ -37,23 +37,23 @@ checkpokegroupscript:
 	writetext kantotext
 	waitbutton
 	closetext
-	end 
+	end
 .johto
 	writetext johtotext
 	waitbutton
 	closetext
-	end 
+	end
 .hoenn
 	writetext hoenntext
 	waitbutton
 	closetext
-	end 
+	end
 
 MysteryDungeonEnterScript:
 	opentext
-	givepoke SENTRET, 5, NO_ITEM, FEMALE, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke SNIVY, 5, NO_ITEM, FEMALE, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	givepoke CYNDAQUIL, 5, NO_ITEM, MALE, LUXURY_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	givepoke DITTO, 5;, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke VULPIX, 5, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
 	end
 

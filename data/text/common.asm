@@ -14,8 +14,3 @@ INCLUDE "data/text/common_2.asm"
 SECTION "Text 3", ROMX
 
 INCLUDE "data/text/common_3.asm"
-
-
-SECTION "Nameplates", ROMX
-
-INCLUDE "data/text/nameplates.asm"

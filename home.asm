@@ -47,9 +47,6 @@ INCLUDE "home/window.asm"
 INCLUDE "home/flag.asm"
 INCLUDE "home/restore_music.asm"
 
-IsAPokemon::
-	farjp _IsAPokemon
-
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a
@@ -168,57 +165,9 @@ CopyName2:: ; 30d9
 	cp "@"
 	jr nz, .loop
 	ret
-; 30e1
-
-SkipPokemonNames:: ; 0x30f4
-; Skip a names.
-	ld bc, PKMN_NAME_LENGTH
-	and a
-	ret z
-.loop
-	add hl, bc
-	dec a
-	jr nz, .loop
-	ret
-
-SkipPlayerNames:: ; 0x30f4
-; Skip a names.
-	ld bc, PLAYER_NAME_LENGTH
-	and a
-	ret z
-.loop
-	add hl, bc
-	dec a
-	jr nz, .loop
-	ret
-
 ; 0x30fe
 
 INCLUDE "home/math.asm"
-
-CopyDataUntil:: ; 318c
-; Copy [hl .. bc) to de.
-
-; In other words, the source data is
-; from hl up to but not including bc,
-; and the destination is de.
-
-	ld a, [hli]
-	ld [de], a
-	inc de
-	ld a, h
-	cp b
-	jr nz, CopyDataUntil
-	ld a, l
-	cp c
-	jr nz, CopyDataUntil
-	ret
-; 0x3198
-
-PrintNum:: ; 3198
-	homecall _PrintNum
-	ret
-; 31a4
 
 FarPrintText:: ; 31b0
 	ldh [hBuffer], a
@@ -254,28 +203,7 @@ StringCmp:: ; 31db
 	ret
 ; 0x31e4
 
-CompareLong:: ; 31e4
-; Compare bc bytes at de and hl.
-; Return carry if they all match.
 
-	ld a, [de]
-	cp [hl]
-	jr nz, .Diff
-
-	inc de
-	inc hl
-	dec bc
-
-	ld a, b
-	or c
-	jr nz, CompareLong
-
-	scf
-	ret
-
-.Diff:
-	and a
-	ret
 ; 31f3
 
 SetPalettes:: ; 32f9
@@ -385,8 +313,6 @@ GetWeekday:: ; 3376
 	ret
 ; 3380
 
-INCLUDE "home/pokedex_flags.asm"
-
 NamesPointers:: ; 33ab
 	dba KantoNames
 	dba MoveNames
@@ -435,10 +361,24 @@ GetName:: ; 33c3
 	ld h, [hl]
 	ld l, a
 
+	ld a, [wNamedObjectTypeBuffer]
+	cp MOVE_NAME
+	jr z, .twobytename
+
 	ld a, [wCurSpecies]
 	dec a
 	call GetNthString
+	jr .got_string
 
+.twobytename
+	ld a, [wCurSpecies]
+	ld c, a
+	ld a, [wCurGroup]
+	ld b, a
+	dec bc
+	call GetBCthString
+
+.got_string
 	ld de, wStringBuffer1
 	ld bc, ITEM_NAME_LENGTH
 	rst CopyBytes
@@ -460,15 +400,24 @@ GetNthString:: ; 3411
 	ret z
 
 	push bc
-	ld b, a
+	ld c, a
+	ld b, 0
+	call GetBCthString
+	pop bc
+	ret
+
+GetBCthString::
 .readChar
 	ld a, [hli]
 	cp "@"
 	jr nz, .readChar
-	dec b
+	dec c
 	jr nz, .readChar
-	pop bc
-	ret
+	ld a, b
+	and a
+	ret z
+	dec b
+	jr .readChar
 ; 3420
 
 GetPokemonName:: ; 343b
@@ -482,7 +431,10 @@ GetPokemonName:: ; 343b
 ; returns c for variants, nc for normal species
 	ld a, [wCurGroup]
 
-	ld hl, VariantNamePointerTable
+	ld hl, RegionalNamePointerTable
+	call dbwArray
+
+	ld a, [wNamedObjectIndexBuffer]
 	ld de, 4
 	call IsInArray
 	inc hl
@@ -491,11 +443,13 @@ GetPokemonName:: ; 343b
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-
+	ld a, [wCurForm]
+	jr c, .variant
 	ld a, [wNamedObjectIndexBuffer]
 	dec a
+.variant
 	call GetNthString
-	
+
 ; Terminator
 	ld de, wStringBuffer1
 	push de
@@ -513,17 +467,18 @@ GetPokemonName:: ; 343b
 
 INCLUDE "data/pokemon/variant_name_table.asm"
 
+GetMoveName:: ; 34f8
+	ld a, [wNamedObjectIndexBuffer+1]
+	ld [wCurGroup], a
+	ld a, MOVE_NAME
+	jr PutNameInBufferAndGetName
+
 GetCurItemName::
 ; Get item name from item in CurItem
 	ld a, [wCurItem]
 	ld [wNamedObjectIndexBuffer], a
 GetItemName:: ; 3468
 ; Get item name wNamedObjectIndexBuffer.
-
-	push hl
-	push bc
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, ITEM_NAME
 	jr PutNameInBufferAndGetName
 
@@ -533,149 +488,24 @@ GetCurKeyItemName::
 	ld [wNamedObjectIndexBuffer], a
 GetKeyItemName:: ; 3468
 ; Get key item item name wNamedObjectIndexBuffer.
-	push hl
-	push bc
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, KEY_ITEM_NAME
 	jr PutNameInBufferAndGetName
 
 GetApricornName::
 ; Get apricorn name wNamedObjectIndexBuffer.
-	push hl
-	push bc
-	ld a, [wNamedObjectIndexBuffer]
-	ld [wCurSpecies], a
 	ld a, APRICORN_NAME
 PutNameInBufferAndGetName::
-	ld [wNamedObjectTypeBuffer], a
-	call GetName
-	ld de, wStringBuffer1
-	pop bc
-	pop hl
-	ret
-
-GetTMHMName:: ; 3487
-; Get TM/HM name by item id wNamedObjectIndexBuffer.
-
 	push hl
-	push de
 	push bc
-	ld a, [wNamedObjectIndexBuffer]
-	push af
-
-; TM/HM prefix
-	cp HM01
-	push af
-	jr c, .TM
-
-	ld hl, .HMText
-	ld bc, .HMTextEnd - .HMText
-	jr .asm_34a1
-
-.TM:
-	ld hl, .TMText
-	ld bc, .TMTextEnd - .TMText
-
-.asm_34a1
-	ld de, wStringBuffer1
-	rst CopyBytes
-
-; TM/HM number
-	ld a, [wNamedObjectIndexBuffer]
-	ld c, a
-
-; HM numbers start from 51, not 1
-	pop af
-	ld a, c
-	jr c, .asm_34b9
-	sub NUM_TMS
-.asm_34b9
-	inc a
-
-; Divide and mod by 10 to get the top and bottom digits respectively
-	ld b, "0"
-.mod10
-	sub 10
-	jr c, .asm_34c2
-	inc b
-	jr .mod10
-.asm_34c2
-	add 10
-
-	push af
-	ld a, b
-	ld [de], a
-	inc de
-	pop af
-
-	ld b, "0"
-	add b
-	ld [de], a
-
-; End the string
-	inc de
-	ld a, "@"
-	ld [de], a
-
-	pop af
-	ld [wNamedObjectIndexBuffer], a
-	pop bc
-	pop de
-	pop hl
-	ld de, wStringBuffer1
-	ret
-
-.TMText:
-	db "TM"
-.TMTextEnd:
-	db "@"
-
-.HMText:
-	db "HM"
-.HMTextEnd:
-	db "@"
-; 34df
-
-IsHM:: ; 34df
-	cp HM01
-	jr c, .NotHM
-	scf
-	ret
-.NotHM:
-	and a
-	ret
-; 34e7
-
-IsHMMove:: ; 34e7
-	ld hl, .HMMoves
-	ld de, 1
-	jp IsInArray
-
-.HMMoves:
-	db CUT
-	db FLY
-	db SURF
-	db STRENGTH
-	db WATERFALL
-	db WHIRLPOOL
-	db -1
-; 34f8
-
-GetMoveName:: ; 34f8
-	push hl
-
-	ld a, MOVE_NAME
 	ld [wNamedObjectTypeBuffer], a
-
-	ld a, [wNamedObjectIndexBuffer] ; move id
+	ld a, [wNamedObjectIndexBuffer]
 	ld [wCurSpecies], a
-
 	call GetName
 	ld de, wStringBuffer1
-
+	pop bc
 	pop hl
 	ret
+
 ; 350c
 
 ScrollingMenu:: ; 350c
@@ -703,29 +533,6 @@ ScrollingMenu:: ; 350c
 	jp nz, UpdateTimePals
 	jp SetPalettes
 ; 352f
-
-; 354b
-
-JoyTextDelay_ForcehJoyDown:: ; 354b joypad
-	call DelayFrame
-
-	ldh a, [hInMenu]
-	push af
-	ld a, $1
-	ldh [hInMenu], a
-	call JoyTextDelay
-	pop af
-	ldh [hInMenu], a
-
-	ldh a, [hJoyLast]
-	and D_RIGHT + D_LEFT + D_UP + D_DOWN
-	ld c, a
-	ldh a, [hJoyPressed]
-	and A_BUTTON + B_BUTTON + SELECT + START
-	or c
-	ld c, a
-	ret
-; 3567
 
 HandleStoneQueue:: ; 3567
 	ldh a, [hROMBank]
@@ -1118,72 +925,9 @@ FacingPlayerDistance:: ; 36ad
 	ret
 ; 36f5
 
-PrintWinLossText:: ; 3718
-	ld a, [wBattleResult]
-	ld hl, wWinTextPointer
-	and $f
-	jr z, .ok
-	ld hl, wLossTextPointer
-
-.ok
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wMapScriptHeaderBank]
-	call FarPrintText
-	call ApplyTilemapInVBlank
-	jp WaitPressAorB_BlinkCursor
-; 3741
-
-PrepMonFrontpic:: ; 3786
-	ld a, $1
-	ld [wBoxAlignment], a
-
-_PrepMonFrontpic:: ; 378b
-	ld a, [wCurPartySpecies]
-	call IsAPokemon
-	jr c, .not_pokemon
-
-	push hl
-	ld de, VTiles2
-	predef GetFrontpic
-	pop hl
-	xor a
-	ldh [hGraphicStartTile], a
-	lb bc, 7, 7
-	predef PlaceGraphic
-	xor a
-	ld [wBoxAlignment], a
-	ret
-
-.not_pokemon
-	xor a
-	ld [wBoxAlignment], a
-	inc a
-	ld [wCurPartySpecies], a
-	ret
-; 37b6
-
 INCLUDE "home/cry.asm"
 
 ; 384d
-
-GetRelevantBaseData::
-	ld a, [wCurGroup]
-;check if pokemon is a variant and put *BaseData in hl and BANK(*BaseData) in d
-; returns c for variants, nc for normal species
-	ld hl, VariantBaseDataTable
-	ld de, 4
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
-
-INCLUDE "data/pokemon/variant_base_data_table.asm"
 
 GetBaseData:: ; 3856
 	push bc
@@ -1192,20 +936,10 @@ GetBaseData:: ; 3856
 	ldh a, [hROMBank]
 	push af
 
-	call GetRelevantBaseData
-	push hl
-
-	ld a, [wCurSpecies]
-	dec a
-	ld b, a
+	homecall GetRelevantBaseData
 	ld a, d
 	rst Bankswitch
-	
-	ld a, b
-; Get BaseData
-	ld bc, BASEMON_STRUCT_LENGTH
-	pop hl
-	rst AddNTimes
+
 	ld de, wCurBaseData
 	ld bc, BASEMON_STRUCT_LENGTH
 	rst CopyBytes
@@ -1225,43 +959,18 @@ GetBaseData:: ; 3856
 	ret
 ; 389c
 
-
-GetNature::
-; 'b' contains the target Nature to check
-; returns nature in b
-	ld a, [wInitialOptions]
-	bit NATURES_OPT, a
-	jr z, .no_nature
-	ld a, b
-	and NATURE_MASK
-	; assume nature is 0-24
-	ld b, a
-	ret
-
-.no_nature:
-	ld b, NO_NATURE
-	ret
-
-
 GetAbility::
 ; 'b' contains the target ability to check
-; 'c' contains the target species
 ; returns ability in b
-; preserves curspecies and base data
+; preserves base data
 	push de
 	ldh a, [hROMBank]
 	push af
 	push hl
 	push bc
 
-	call GetRelevantBaseData
-	pop bc
-	push bc
-	ld a, c
+	homecall GetRelevantBaseData
 
-	dec a
-	ld bc, BASEMON_STRUCT_LENGTH
-	rst AddNTimes
 	ld a, d
 	rst Bankswitch
 
@@ -1286,65 +995,6 @@ GetAbility::
 	pop af
 	rst Bankswitch
 	pop de
-	ret
-
-GetCurNick:: ; 389c
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMonNicknames
-
-GetNick:: ; 38a2
-; Get nickname a from list hl.
-
-	push hl
-	push bc
-
-	call SkipPokemonNames
-	ld de, wStringBuffer1
-
-	push de
-	ld bc, PKMN_NAME_LENGTH
-	rst CopyBytes
-	pop de
-
-	pop bc
-	pop hl
-	ret
-; 38bb
-
-GetEnemyPartyParamLocation::
-	push bc
-	ld hl, wOTPartyMons
-	jr PkmnParamLocation
-GetPartyParamLocation:: ; 3917
-; Get the location of parameter a from wCurPartyMon in hl
-	push bc
-	ld hl, wPartyMons
-PkmnParamLocation:
-	cp MON_GROUP_SPECIES_AND_FORM
-	jp z, .species_and_group
-
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	pop bc
-	ret
-
-.species_and_group
-	ld a, [wCurPartyMon]
-	call GetPartyLocation
-	predef GetPartyMonGroupSpeciesAndForm
-	pop bc
-	ret
-; 3927
-
-GetPartyLocation::
-; Add the length of a PartyMon struct to hl a times.
-	push bc
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	pop bc
 	ret
 
 INCLUDE "home/battle.asm"
@@ -1418,14 +1068,6 @@ ReinitSpriteAnimFrame:: ; 3b3c
 
 INCLUDE "home/audio.asm"
 
-Inc16BitNumInHL::
-	inc [hl]
-	ret nz
-	dec hl
-	inc [hl]
-	ret
-
-
 LoadPalette_White_Col1_Col2_Black::
 	ldh a, [rSVBK]
 	push af
@@ -1456,7 +1098,7 @@ endr
 	pop af
 	ldh [rSVBK], a
 	ret
-	
+
 GetMonPalette::
 	ldh a, [hROMBank]
 	push af
@@ -1464,25 +1106,34 @@ GetMonPalette::
 	push de
 	push bc
 	ld a, [wCurGroup]
-	ld hl, VariantPaletteTable
-	ld de, 4
-	call IsInArray
-	inc hl
+	ld hl, RegionalPaletteTable
+	ld bc, 3
+	rst AddNTimes
 	ld a, [hli]
 	rst Bankswitch
-
 	ld a, [hli]
-	ld c, a
-	ld b, [hl]
+	ld h, [hl]
+	ld l, a
 
 	ld a, [wCurPartySpecies]
-	dec a	
-	ld l, a
-	ld h, $0
-	add hl, hl
-	add hl, hl
-	add hl, hl
+	dec a
+	ld b, 0
+	ld c, a
 	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [wCurForm]
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
 	pop bc
 	homecall CheckShininess
 	jp nc, .not_shiny
@@ -1499,3 +1150,14 @@ endr
 	ret
 
 INCLUDE "data/pokemon/variant_palette_table.asm"
+
+dbwArray::
+	ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
+
+INCLUDE "home/ded.asm"

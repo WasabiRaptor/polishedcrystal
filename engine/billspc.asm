@@ -1813,7 +1813,7 @@ DepositPokemon: ; e307c (38:707c)
 	ld [wCurPartyMon], a
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
-	call GetNick
+	predef GetNick
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
 	predef SentGetPkmnIntoFromBox
@@ -1863,7 +1863,7 @@ TryWithdrawPokemon: ; e30fa (38:70fa)
 	call GetSRAMBank
 	ld a, [wCurPartyMon]
 	ld hl, sBoxMonNicknames
-	call GetNick
+	predef GetNick
 	call CloseSRAM
 	xor a
 	ld [wPokemonWithdrawDepositParameter], a
@@ -1919,12 +1919,7 @@ ReleasePKMN_ByePKMN: ; e3180 (38:7180)
 
 	call ApplyTilemapInVBlank
 	ld a, [wCurPartySpecies]
-	call GetCryIndex
-	jr c, .skip_cry
-	ld e, c
-	ld d, b
-	call PlayCryHeader
-.skip_cry
+	call _PlayCry
 
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
@@ -2359,7 +2354,7 @@ BillsPC_PrintBoxCountAndCapacity: ; e3632
 	hlcoord 13, 11
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_20
 	jp PlaceString
 ; e3663
@@ -2389,7 +2384,7 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	hlcoord 1, 1
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_20
 	jp PlaceString
 
@@ -2399,7 +2394,7 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	hlcoord 1, 1
 	ld de, wd265
 	lb bc, 1, 2
-	call PrintNum
+	predef PrintNum
 	ld de, .out_of_6
 	jp PlaceString
 
