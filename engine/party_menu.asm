@@ -36,6 +36,14 @@ InitPartyMenuLayout: ; 5003f
 ; 5004f
 
 LoadPartyMenuGFX: ; 5004f
+	ld a, [rVBK]
+	push af
+	ld a, 1
+	ld [rVBK], a
+	farcall LoadFrame
+	pop af
+	ld [rVBK], a
+
 	call LoadFontsBattleExtra
 	farcall InitPartyMenuPalettes ; engine/color.asm
 	farjp ClearSpriteAnims2

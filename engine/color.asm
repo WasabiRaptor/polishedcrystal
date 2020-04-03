@@ -378,7 +378,7 @@ ApplyPartyMenuHPPals: ; 96f3
 	dec a
 	jr .loop
 .done
-	lb bc, 2, 8
+	lb bc, 1, 8
 	ld a, e
 	jp FillBoxCGB
 
@@ -661,7 +661,7 @@ GetBattlemonBackpicPalette:
 	call GetPlayerOrMonPalette
 	pop af
 	ld [wTempBattleMonSpecies], a
-	pop af 
+	pop af
 	ld [wTempBattleMonGroup], a
 	ld a, [wTempBattleMonGroup]
 	ld [wCurPartyGroup], a
@@ -776,7 +776,7 @@ LoadPartyMonPalette:
 	ld a, [wCurPartyMon]
 	predef GetPartyLocation
 	predef GetPartyMonGroupSpeciesAndForm
-	
+
 	ld hl, wPartyMon1Personality
 	ld a, [wCurPartyMon]
 	predef GetPartyLocation
@@ -818,6 +818,6 @@ GetPortraitPalettePointer:
 	add hl, hl
 	add hl, hl
 	add hl, bc
-	ret 
+	ret
 
 INCLUDE "data/portraits/portrait_palettes.asm"

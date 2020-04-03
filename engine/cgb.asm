@@ -618,9 +618,14 @@ _CGB_PartyMenu: ; 91d1
 	call InitPartyMenuOBPals
 
 	hlcoord 10, 2, wAttrMap
-	lb bc, 11, 1
+	ld bc, SCREEN_WIDTH * 2
 	ld a, $4
-	call FillBoxCGB
+	ld d, 6
+.gender_loop
+	ld [hl], a
+	add hl, bc
+	dec d
+	jr nz, .gender_loop
 	jp ApplyAttrMap
 ; 91e4
 
@@ -1081,7 +1086,7 @@ _CGB_PokedexUnownMode: ; 903e
 
 	ld a, [wCurPartySpecies]
 	call GetMonPalette
-	
+
 	call WipeAttrMap
 
 	hlcoord 7, 5, wAttrMap
