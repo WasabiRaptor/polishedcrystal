@@ -245,8 +245,8 @@ MagnemiteNames::
 MagnetonNames::
 	add_name Magneton
 
-Farfetch_dNames::
-	add_name Farfetch_d
+FarfetchdNames::
+	add_name Farfetchd
 
 DoduoNames::
 	add_name Doduo
@@ -362,8 +362,8 @@ StaryuNames::
 StarmieNames::
 	add_name Starmie
 
-Mr_MimeNames::
-	add_name Mr_Mime
+MrMimeNames::
+	add_name MrMime
 
 ScytherNames::
 	add_name Scyther

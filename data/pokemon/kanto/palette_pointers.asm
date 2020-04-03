@@ -245,8 +245,8 @@ MagnemitePalettePointers::
 MagnetonPalettePointers::
 	add_palettes Magneton
 
-Farfetch_dPalettePointers::
-	add_palettes Farfetch_d
+FarfetchdPalettePointers::
+	add_palettes Farfetchd
 
 DoduoPalettePointers::
 	add_palettes Doduo
@@ -362,8 +362,8 @@ StaryuPalettePointers::
 StarmiePalettePointers::
 	add_palettes Starmie
 
-Mr_MimePalettePointers::
-	add_palettes Mr_Mime
+MrMimePalettePointers::
+	add_palettes MrMime
 
 ScytherPalettePointers::
 	add_palettes Scyther

@@ -81,7 +81,7 @@ KantoPicPointerTable::
 	add_pictable Slowbro
 	add_pictable Magnemite
 	add_pictable Magneton
-	add_pictable Farfetch_d
+	add_pictable Farfetchd
 	add_pictable Doduo
 	add_pictable Dodrio
 	add_pictable Seel
@@ -120,7 +120,7 @@ KantoPicPointerTable::
 	add_pictable Seaking
 	add_pictable Staryu
 	add_pictable Starmie
-	add_pictable Mr_Mime
+	add_pictable MrMime
 	add_pictable Scyther
 	add_pictable Jynx
 	add_pictable Electabuzz

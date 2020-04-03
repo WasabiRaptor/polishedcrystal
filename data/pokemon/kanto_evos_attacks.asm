@@ -1578,7 +1578,7 @@ MagnezoneEvosAttacks:
 	learnmove 63, ZAP_CANNON
 	db 0 ; no more level-up moves
 
-Farfetch_dEvosAttacks:
+FarfetchdEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, POISON_JAB
 	learnmove 1, BATON_PASS ; Brave Bird → event move
@@ -2394,7 +2394,7 @@ Mime_JrEvosAttacks:
     learnmove 1, TACKLE
 	db 0 ; no more level-up moves
 
-Mr_MimeEvosAttacks:
+MrMimeEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, BARRIER
 	learnmove 1, CONFUSION

@@ -245,8 +245,8 @@ MagnemiteBaseDataPointers::
 MagnetonBaseDataPointers::
 	add_basedata Magneton
 
-Farfetch_dBaseDataPointers::
-	add_basedata Farfetch_d
+FarfetchdBaseDataPointers::
+	add_basedata Farfetchd
 
 DoduoBaseDataPointers::
 	add_basedata Doduo
@@ -362,8 +362,8 @@ StaryuBaseDataPointers::
 StarmieBaseDataPointers::
 	add_basedata Starmie
 
-Mr_MimeBaseDataPointers::
-	add_basedata Mr_Mime
+MrMimeBaseDataPointers::
+	add_basedata MrMime
 
 ScytherBaseDataPointers::
 	add_basedata Scyther

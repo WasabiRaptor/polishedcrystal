@@ -214,6 +214,14 @@ endm
 	placeholder_zero MEGA_LAUNCHER
 	placeholder_zero AROMA_VEIL
 	placeholder_zero GRASS_PELT
+	placeholder_zero AERIALATE
+
+	placeholder_zero SCREEN_CLEANER
+	placeholder_zero PARENTAL_BOND
+	placeholder_zero MISTY_SURGE
+	placeholder_zero NEUTRALIZING_GAS
+	placeholder_zero PASTEL_VEIL
+
 ABILITY_1      EQU %00100000
 ABILITY_2      EQU %01000000
 HIDDEN_ABILITY EQU %01100000

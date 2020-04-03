@@ -245,8 +245,8 @@ MagnemiteAnimationPointers::
 MagnetonAnimationPointers::
 	add_anim Magneton
 
-Farfetch_dAnimationPointers::
-	add_anim Farfetch_d
+FarfetchdAnimationPointers::
+	add_anim Farfetchd
 
 DoduoAnimationPointers::
 	add_anim Doduo
@@ -362,8 +362,8 @@ StaryuAnimationPointers::
 StarmieAnimationPointers::
 	add_anim Starmie
 
-Mr_MimeAnimationPointers::
-	add_anim Mr_Mime
+MrMimeAnimationPointers::
+	add_anim MrMime
 
 ScytherAnimationPointers::
 	add_anim Scyther

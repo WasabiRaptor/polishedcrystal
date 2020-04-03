@@ -245,8 +245,8 @@ MagnemitePicPointers::
 MagnetonPicPointers::
 	add_pics Magneton
 
-Farfetch_dPicPointers::
-	add_pics Farfetch_d
+FarfetchdPicPointers::
+	add_pics Farfetchd
 
 DoduoPicPointers::
 	add_pics Doduo
@@ -362,8 +362,8 @@ StaryuPicPointers::
 StarmiePicPointers::
 	add_pics Starmie
 
-Mr_MimePicPointers::
-	add_pics Mr_Mime
+MrMimePicPointers::
+	add_pics MrMime
 
 ScytherPicPointers::
 	add_pics Scyther

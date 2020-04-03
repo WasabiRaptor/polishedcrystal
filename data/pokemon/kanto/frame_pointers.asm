@@ -245,8 +245,8 @@ MagnemiteFramesPointers::
 MagnetonFramesPointers::
 	add_frames Magneton
 
-Farfetch_dFramesPointers::
-	add_frames Farfetch_d
+FarfetchdFramesPointers::
+	add_frames Farfetchd
 
 DoduoFramesPointers::
 	add_frames Doduo
@@ -362,8 +362,8 @@ StaryuFramesPointers::
 StarmieFramesPointers::
 	add_frames Starmie
 
-Mr_MimeFramesPointers::
-	add_frames Mr_Mime
+MrMimeFramesPointers::
+	add_frames MrMime
 
 ScytherFramesPointers::
 	add_frames Scyther

@@ -94,7 +94,7 @@ KantoDexOrder::
 	grouped_dex_order_mon MAGNEMITE
 	grouped_dex_order_mon MAGNETON
 	grouped_dex_order_mon MAGNEZONE
-	grouped_dex_order_mon FARFETCH_D
+	grouped_dex_order_mon FARFETCHD
 	grouped_dex_order_mon DODUO
 	grouped_dex_order_mon DODRIO	
 	grouped_dex_order_mon SEEL	
@@ -143,7 +143,7 @@ KantoDexOrder::
 	grouped_dex_order_mon STARYU	
 	grouped_dex_order_mon STARMIE
 	grouped_dex_order_mon MIME_JR
-	grouped_dex_order_mon MR__MIME
+	grouped_dex_order_mon MRMIME
 	grouped_dex_order_mon SCYTHER
 	grouped_dex_order_mon SCIZOR	
 	grouped_dex_order_mon SMOOCHUM

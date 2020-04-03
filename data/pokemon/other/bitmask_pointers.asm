@@ -245,8 +245,8 @@ MagnemiteBitmasksPointers::
 MagnetonBitmasksPointers::
 	add_bitmasks Magneton
 
-Farfetch_dBitmasksPointers::
-	add_bitmasks Farfetch_d
+FarfetchdBitmasksPointers::
+	add_bitmasks Farfetchd
 
 DoduoBitmasksPointers::
 	add_bitmasks Doduo
@@ -362,8 +362,8 @@ StaryuBitmasksPointers::
 StarmieBitmasksPointers::
 	add_bitmasks Starmie
 
-Mr_MimeBitmasksPointers::
-	add_bitmasks Mr_Mime
+MrMimeBitmasksPointers::
+	add_bitmasks MrMime
 
 ScytherBitmasksPointers::
 	add_bitmasks Scyther

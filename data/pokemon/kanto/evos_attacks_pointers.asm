@@ -245,8 +245,8 @@ MagnemiteEvosAttacksPointers::
 MagnetonEvosAttacksPointers::
 	add_evosattacks Magneton
 
-Farfetch_dEvosAttacksPointers::
-	add_evosattacks Farfetch_d
+FarfetchdEvosAttacksPointers::
+	add_evosattacks Farfetchd
 
 DoduoEvosAttacksPointers::
 	add_evosattacks Doduo
@@ -362,8 +362,8 @@ StaryuEvosAttacksPointers::
 StarmieEvosAttacksPointers::
 	add_evosattacks Starmie
 
-Mr_MimeEvosAttacksPointers::
-	add_evosattacks Mr_Mime
+MrMimeEvosAttacksPointers::
+	add_evosattacks MrMime
 
 ScytherEvosAttacksPointers::
 	add_evosattacks Scyther

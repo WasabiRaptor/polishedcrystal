@@ -245,8 +245,8 @@ MagnemitePokedexEntryPointers::
 MagnetonPokedexEntryPointers::
 	add_pokedexentry Magneton
 
-Farfetch_dPokedexEntryPointers::
-	add_pokedexentry Farfetch_d
+FarfetchdPokedexEntryPointers::
+	add_pokedexentry Farfetchd
 
 DoduoPokedexEntryPointers::
 	add_pokedexentry Doduo
@@ -362,8 +362,8 @@ StaryuPokedexEntryPointers::
 StarmiePokedexEntryPointers::
 	add_pokedexentry Starmie
 
-Mr_MimePokedexEntryPointers::
-	add_pokedexentry Mr_Mime
+MrMimePokedexEntryPointers::
+	add_pokedexentry MrMime
 
 ScytherPokedexEntryPointers::
 	add_pokedexentry Scyther

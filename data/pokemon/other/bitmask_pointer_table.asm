@@ -81,7 +81,7 @@ KantoBitmasksPointerTable::
 	add_bitmaskstable Slowbro
 	add_bitmaskstable Magnemite
 	add_bitmaskstable Magneton
-	add_bitmaskstable Farfetch_d
+	add_bitmaskstable Farfetchd
 	add_bitmaskstable Doduo
 	add_bitmaskstable Dodrio
 	add_bitmaskstable Seel
@@ -120,7 +120,7 @@ KantoBitmasksPointerTable::
 	add_bitmaskstable Seaking
 	add_bitmaskstable Staryu
 	add_bitmaskstable Starmie
-	add_bitmaskstable Mr_Mime
+	add_bitmaskstable MrMime
 	add_bitmaskstable Scyther
 	add_bitmaskstable Jynx
 	add_bitmaskstable Electabuzz

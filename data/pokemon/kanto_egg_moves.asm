@@ -284,7 +284,7 @@ SlowpokeEggMoves:
 	dw ZEN_HEADBUTT
 	dw 0
 
-Farfetch_dEggMoves:
+FarfetchdEggMoves:
 	dw FORESIGHT
 	dw GUST
 	dw QUICK_ATTACK

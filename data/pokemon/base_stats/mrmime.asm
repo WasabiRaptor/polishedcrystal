@@ -9,7 +9,7 @@
         db 161 ; base exp
         db NO_ITEM, NO_ITEM ; items
         dn FEMALE_50, 5 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/mr__mime/front.dimensions"  
+        INCBIN "gfx/pokemon/mrmime/front.dimensions"  
         db SOUNDPROOF, FILTER     ; abilities
         db TECHNICIAN    ; hidden ability
         db GROWTH_MEDIUM_FAST ; growth rate

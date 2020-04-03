@@ -85,7 +85,7 @@ KantoMenuMonIconColors::
 	iconpal PINK, PURPLE ; SLOWBRO
 	iconpal GRAY, BROWN ; MAGNEMITE
 	iconpal GRAY, BROWN ; MAGNETON
-	iconpal BROWN, GREEN ; FARFETCH_D
+	iconpal BROWN, GREEN ; FARFETCHD
 	iconpal BROWN, RED ; DODUO
 	iconpal BROWN, RED ; DODRIO
 	iconpal BLUE, PINK ; SEEL
@@ -124,7 +124,7 @@ KantoMenuMonIconColors::
     iconpal RED, GREEN ; SEAKING
 	iconpal BROWN, BLUE ; STARYU
 	iconpal PURPLE, BLUE ; STARMIE
-	iconpal PINK, GREEN ; MR__MIME
+	iconpal PINK, GREEN ; MRMIME
 	iconpal GREEN, RED ; SCYTHER
 	iconpal PURPLE, RED ; JYNX
 	iconpal BROWN, RED ; ELECTABUZZ
