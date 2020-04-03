@@ -938,6 +938,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempBattleMonForm]
+	ld [wCurForm], a
 
 	ld de, VTiles0 tile $00
 	predef GetFrontpic
@@ -950,6 +952,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 
 
 	ld de, VTiles0 tile $00

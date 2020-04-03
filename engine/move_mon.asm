@@ -2134,6 +2134,8 @@ GivePoke:: ; e277
 	ld [wTempEnemyMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
+	ld a, [wCurForm]
+	ld [wTempEnemyMonForm], a
 	farcall LoadEnemyMon
 	ld a, BANK(sBoxMon1Item)
 	call GetSRAMBank
@@ -2180,6 +2182,8 @@ GivePoke:: ; e277
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld [wTempEnemyMonGroup], a
+	ld a, [wCurForm]
+	ld [wTempEnemyMonForm], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wMonOrItemNameBuffer

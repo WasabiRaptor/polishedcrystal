@@ -3395,6 +3395,8 @@ LoadEnemyPkmnToSwitchTo:
 	ld [wTempEnemyMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
+	ld a, [wCurForm]
+	ld [wTempEnemyMonForm], a
 	call LoadEnemyMon
 
 	;ld a, [wCurPartySpecies]
@@ -3460,9 +3462,13 @@ FinalPkmnMusicAndAnimation:
 	push af
 	ld a, [wTempEnemyMonSpecies]
 	push af
+	ld a, [wTempEnemyMonForm]
+	push af
 	call BattleWinSlideInEnemyTrainerFrontpic
 	farcall GetFinalPkmnTextPointer
 	call StdBattleTextBox
+	pop af
+	ld [wTempEnemyMonForm], a
 	pop af
 	ld [wTempEnemyMonSpecies], a
 	pop af
@@ -3588,6 +3594,8 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld a, OTPARTYMON
 	ld [wMonType], a
@@ -3901,6 +3909,8 @@ InitEnemyMon: ; 3dabd
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
 	ld [wCurSpecies], a
+	ld a, [wEnemyMonForm]
+	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
 	ld a, [wCurPartyMon]
@@ -4954,6 +4964,8 @@ DrawEnemyHUD: ; 3e043
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
@@ -6857,7 +6869,7 @@ LoadEnemyMon: ; 3e8eb
 
 	; Clear the whole wEnemyMon struct
 	xor a
-	ld hl, wEnemyMonGroup
+	ld hl, wEnemyMon
 	ld bc, wEnemyMonEnd - wEnemyMon
 	call ByteFill
 
@@ -6883,9 +6895,10 @@ LoadEnemyMon: ; 3e8eb
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 
+	push bc
+	push hl
 	; Mark as seen
 	farcall SetSeenMon
-
 
 	ldh a, [rSVBK]
 	push af
@@ -6921,6 +6934,8 @@ LoadEnemyMon: ; 3e8eb
 
 	ld a, [wBattleMode]
 	dec a
+	pop hl
+	pop bc
 .initenemymon
 	jp nz, InitEnemyMon
 
@@ -6928,69 +6943,6 @@ LoadEnemyMon: ; 3e8eb
 
 	ld a, [wBaseCatchRate]
 	ld [wEnemyMonCatchRate], a
-
-	; Let's get the item:
-	; Force Item1
-	; Used for Snorlax, Ho-Oh, Lugia, and Kanto legendary encounters
-	ld a, [wBattleType]
-	cp BATTLETYPE_FORCEITEM
-	ld a, [wBaseItems]
-	jr z, .UpdateItem
-
-	ld a, [wBattleType]
-	cp BATTLETYPE_LEGENDARY
-	ld a, [wBaseItems]
-	jr z, .UpdateItem
-
-	; Failing that, it's all up to chance
-
-	farcall GetLeadAbility
-if DEF(FAITHFUL)
-	cp COMPOUND_EYES
-	jr nz, .no_compound_eyes_or_amulet_coin
-else
-	cp COMPOUND_EYES
-	jr z, .compound_eyes
-	; If the party lead holds an Amulet Coin, chances are increased
-	ld a, [wPartyMon1Item]
-	cp AMULET_COIN
-	jr nz, .no_compound_eyes_or_amulet_coin
-endc
-
-.compound_eyes:
-	; 60% chance of getting Item1
-	call BattleRandom
-	cp 60 percent
-	ld a, [wBaseItems]
-	jr c, .UpdateItem
-
-	; 20% chance of getting Item2 (50% of (100% - 60%) = 20%)
-	call BattleRandom
-	cp 50 percent
-	ld a, [wBaseItems+1]
-	jr c, .UpdateItem
-
-	; 20% chance of not getting an item (100% - 60% - 20% = 20%)
-	ld a, NO_ITEM
-	jr .UpdateItem
-
-.no_compound_eyes_or_amulet_coin:
-	; 50% chance of getting Item1
-	call BattleRandom
-	cp 50 percent
-	ld a, [wBaseItems]
-	jr c, .UpdateItem
-
-	; 5% chance of getting Item2 (10% of (100% - 50%) = 5%)
-	call BattleRandom
-	cp 10 percent
-	ld a, [wBaseItems+1]
-	jr c, .UpdateItem
-
-	; 45% chance of not getting an item (100% - 50% - 5% = 45%)
-	ld a, NO_ITEM
-.UpdateItem:
-	ld [wEnemyMonItem], a
 
 	; Initialize DVs and personality
 	; Roaming monsters (Entei, Raikou) work differently
@@ -7078,10 +7030,12 @@ endc
 	push hl
 	push bc
 	ld b, a ; still the ability index, 1/2/hidden
-	ld a, [wCurPartyGroup]
+	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
-	ld a, [wCurPartySpecies]
+	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 	call GetAbility
 	ld a, b
 	cp PICKUP
@@ -7167,10 +7121,12 @@ endc
 	push hl
 	push bc
 	push de
-	ld a, [wCurPartyGroup]
+	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
-	ld a, [wCurPartySpecies]
+	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 	farcall GetRelevantBaseData
 	ld bc, BASEMON_GENDER
 	add hl, bc
@@ -7191,8 +7147,8 @@ endc
 .Female
 	ld b, a
 
-    ld a, [wTempEnemyMonForm]
 .special_form
+    ld a, [wTempEnemyMonForm]
 	add b
 	ld [hl], a
 
@@ -7207,93 +7163,6 @@ rept 4
 endr
 	ld a, [bc]
 	ld [hl], a
-
-; all this stuff handling the form shouldn't be run as the form is not re-implemented, and will probably be obsolete
-	; Unown
-	;ld a, [wTempEnemyMonSpecies]
-	;cp UNOWN
-	;jr nz, .Magikarp
-
-;.unown_letter
-	;ld a, NUM_UNOWN
-	;call BattleRandomRange
-	;inc a
-	;ld b, a
-	;ld a, [wEnemyMonGroup]
-	;and $ff - FORM_MASK
-	;add b
-	;ld [wEnemyMonGroup], a
-	; Get letter based on form
-	;ld hl, wEnemyMonGroup
-	;predef GetPokeGroup
-	; Can't use any letters that haven't been unlocked
-	;push de
-	;farcall CheckUnownLetter ;relocated
-	;pop de
-	;jr c, .unown_letter ; re-roll
-	;jp .Happiness
-
-;.Magikarp:
-	;ld a, [wTempEnemyMonSpecies]
-	;ld b, a
-	;ld a, [wTempEnemyMonGroup]
-	;cppoke MAGIKARP, .Happiness
-
-	; Random Magikarp pattern
-	;ld a, NUM_MAGIKARP
-	;call BattleRandomRange
-	;inc a
-	;ld b, a
-	;ld a, [wEnemyMonGroup]
-	;and $ff - FORM_MASK
-	;add b
-	;ld [wEnemyMonGroup], a
-
-	; Get Magikarp's length
-	;ld de, wEnemyMonDVs
-	;ld bc, wPlayerID
-	;farcall CalcMagikarpLength
-
-	; We're clear if the length is < 5'
-	;ld a, [wMagikarpLengthMmHi]
-	;cp 5
-	;jr nz, .CheckMagikarpArea
-
-	; 5% chance of skipping size checks
-	;call Random
-	;cp 5 percent
-	;jr c, .CheckMagikarpArea
-	; Try again if > 3"
-	;ld a, [wMagikarpLengthMmLo]
-	;cp 3
-	;jp nc, .GenerateDVs
-
-	; 20% chance of skipping this check
-	;call Random
-	;cp 20 percent - 1
-	;jr c, .CheckMagikarpArea
-	; Try again if > 2"
-	;ld a, [wMagikarpLengthMmLo]
-	;cp 2
-	;jp nc, .GenerateDVs
-
-;.CheckMagikarpArea:
-	;ld a, [wMapGroup]
-	;cp GROUP_LAKE_OF_RAGE
-	;jr nz, .Happiness
-	;ld a, [wMapNumber]
-	;cp MAP_LAKE_OF_RAGE
-	;jr nz, .Happiness
-	;jr .Happiness
-;.LakeOfRageMagikarp
-	; 40% chance of not flooring
-	;call Random
-	;cp $64 ; / $100
-	;jr c, .Happiness
-	; Floor at length 1024
-	;ld a, [wMagikarpLengthMmHi]
-	;cp 1024 >> 8
-	;jp c, .GenerateDVs ; try again
 
 
 	; Finally done with DVs
@@ -7322,11 +7191,9 @@ endr
 .UpdateStatus:
 	ld hl, wEnemyMonStatus
 	ld [hli], a
-
-	; Unused byte
-	xor a
-	ld [hli], a
-
+rept 4 ; for the cur PP
+	inc hl
+endr
 	; Full HP..
 	ld a, [wEnemyMonMaxHP]
 	ld [hli], a
@@ -7373,7 +7240,7 @@ endr
 	xor a
 	ld h, d
 	ld l, e
-rept NUM_MOVES + -1
+rept NUM_MOVES * 2 + -1
 	ld [hli], a
 endr
 	ld [hl], a
@@ -7400,6 +7267,8 @@ endr
 	dec b
 	jr nz, .loop
 
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
@@ -7605,6 +7474,7 @@ BattleWinSlideInEnemyTrainerFrontpic: ; 3ebd8
 	xor a
 	ld [wTempEnemyMonSpecies], a
 	ld [wTempEnemyMonGroup], a
+	ld [wTempEnemyMonForm], a
 	call FinishBattleAnim
 	ld a, [wOtherTrainerClass]
 	ld [wTrainerClass], a
@@ -9064,6 +8934,7 @@ InitEnemyTrainer: ; 3f594
 	xor a
 	ld [wTempEnemyMonSpecies], a
 	ld [wTempEnemyMonGroup], a
+	ld [wTempEnemyMonForm], a
 	farcall GetTrainerAttributes
 	farcall ReadTrainerParty
 	farcall ComputeTrainerReward

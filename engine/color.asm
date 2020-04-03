@@ -643,6 +643,8 @@ GetBattlemonBackpicPalette:
 	push af
 	ld a, [wTempBattleMonSpecies]
 	push af
+	ld a, [wTempBattleMonForm]
+	push af
 	push de
 	ld a, [wPlayerAbility]
 	cp ILLUSION
@@ -660,6 +662,8 @@ GetBattlemonBackpicPalette:
 	pop de
 	call GetPlayerOrMonPalette
 	pop af
+	ld [wTempBattleMonForm], a
+	pop af
 	ld [wTempBattleMonSpecies], a
 	pop af
 	ld [wTempBattleMonGroup], a
@@ -669,6 +673,8 @@ GetBattlemonBackpicPalette:
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempBattleMonForm]
+	ld [wCurForm], a
 	ret
 
 GetEnemyFrontpicPalette:
@@ -678,6 +684,8 @@ GetEnemyFrontpicPalette:
 	ld a, [wTempEnemyMonGroup]
 	push af
 	ld a, [wTempEnemyMonSpecies]
+	push af
+	ld a, [wTempEnemyMonForm]
 	push af
 	push de
 	ld a, [wEnemyAbility]
@@ -696,6 +704,8 @@ GetEnemyFrontpicPalette:
 	pop de
 	call GetFrontpicPalette
 	pop af
+	ld [wTempEnemyMonForm], a
+	pop af
 	ld [wTempEnemyMonSpecies], a
 	pop af
 	ld [wTempEnemyMonGroup], a
@@ -705,6 +715,8 @@ GetEnemyFrontpicPalette:
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempEnemyMonForm]
+	ld [wCurForm], a
 	ret
 
 GetPlayerOrMonPalette:

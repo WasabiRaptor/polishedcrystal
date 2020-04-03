@@ -28,7 +28,6 @@ ROMX $06
 	org $4000
 	"color"
 	"Kanto Pokedex Entries 1"
-	"Nameplates"
 	"Painting Pic Pointers"
 
 ROMX $07
