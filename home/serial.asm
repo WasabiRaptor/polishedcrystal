@@ -5,9 +5,7 @@ Serial:: ; 6ef
 	push bc
 	push de
 	push hl
-
-	ld a, [wPrinterConnectionOpen]
-
+	
 	ldh a, [hSerialConnectionStatus]
 	inc a ; is it equal to -1?
 	jr z, .init_player_number

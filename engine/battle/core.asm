@@ -2495,10 +2495,6 @@ WinTrainerBattle: ; 3cfa4
 	and a
 	ret nz
 
-	ld a, [wInBattleTowerBattle]
-	bit 0, a
-	jr nz, .battle_tower
-
 	call BattleWinSlideInEnemyTrainerFrontpic
 	ld c, 40
 	call DelayFrames
@@ -2513,25 +2509,6 @@ WinTrainerBattle: ; 3cfa4
 	call PrintWinLossText
 
 .skip_win_loss_text
-	jp .GiveMoney
-
-.battle_tower
-	call BattleWinSlideInEnemyTrainerFrontpic
-	ld c, 40
-	call DelayFrames
-	call EmptyBattleTextBox
-	ld c, $3
-	farcall BattleTowerText
-	call WaitPressAorB_BlinkCursor
-	ld hl, wPayDayMoney
-	ld a, [hli]
-	or [hl]
-	inc hl
-	or [hl]
-	ret nz
-	call ClearTileMap
-	jp ClearBGPalettes
-
 .GiveMoney:
 	ld a, [wAmuletCoin]
 	and a
@@ -3019,10 +2996,6 @@ LostBattle: ; 3d38e
 	ld a, 1
 	ld [wBattleEnded], a
 
-	ld a, [wInBattleTowerBattle]
-	bit 0, a
-	jr nz, .battle_tower
-
 	ld hl, wLossTextPointer
 	ld a, [hli]
 	ld h, [hl]
@@ -3052,24 +3025,6 @@ LostBattle: ; 3d38e
 	ld a, [wBattleType]
 	cp BATTLETYPE_CANLOSE
 	ret z
-	jr .no_loss_text
-
-.battle_tower
-; Remove the enemy from the screen.
-	hlcoord 0, 0
-	lb bc, 8, 21
-	call ClearBox
-	call BattleWinSlideInEnemyTrainerFrontpic
-
-	ld c, 40
-	call DelayFrames
-
-	call EmptyBattleTextBox
-	ld c, 2
-	farcall BattleTowerText
-	call WaitPressAorB_BlinkCursor
-	call ClearTileMap
-	jp ClearBGPalettes
 
 .no_loss_text
 	ld a, [wLinkMode]

@@ -43,45 +43,30 @@ PokemonCenterPC: ; 1559a
 	dw PlayersPC, .String_PlayersPC
 	dw BillsPC, .String_BillsPC
 	dw OaksPC, .String_OaksPC
-	dw HallOfFamePC, .String_HallOfFame
 	dw TurnOffPC, .String_TurnOff
 
 .String_PlayersPC:  db "<PLAYER>'s PC@"
 .String_BillsPC:    db "Bill's PC@"
 .String_OaksPC:     db "Prof.Oak's PC@"
-.String_HallOfFame: db "Hall of Fame@"
 .String_TurnOff:    db "Turn Off@"
 
 .WhichPC:
 	; before pokedex
 	db  3 ; items
-	db  1, 0, 4 ; bill's, player's, turn off
+	db  1, 0, 3 ; bill's, player's, turn off
 	db -1
 
 	; before Hall Of Fame
 	db  4 ; items
-	db  1, 0, 2, 4 ; bill's, player's, oak's, turn off
-	db -1
-
-	; postgame
-	db  5 ; items
-	db  1, 0, 2, 3, 4 ; bill's, player's, oak's, hall of fame, turn off
+	db  1, 0, 2, 3 ; bill's, player's, oak's, turn off
 	db -1
 
 .ChooseWhichPCListToUse:
 	call CheckReceivedDex
-	jr nz, .got_dex
+	ld a, 1
+	ret nz
 	xor a
 	ret
-
-.got_dex
-	ld a, [wHallOfFameCount]
-	and a
-	ld a, $1
-	ret z
-	ld a, $2
-	ret
-; 15650
 
 PC_CheckPartyForPokemon: ; 15650
 	ld a, [wPartyCount]
@@ -127,15 +112,6 @@ OaksPC: ; 15689
 	and a
 	ret
 ; 1569a
-
-HallOfFamePC: ; 1569a
-	call PC_PlayChoosePCSound
-	call FadeToMenu
-	farcall _HallOfFamePC
-	call CloseSubmenu
-	and a
-	ret
-; 156ab
 
 TurnOffPC: ; 156ab
 	ld hl, PokeCenterPCText_LinkClosed

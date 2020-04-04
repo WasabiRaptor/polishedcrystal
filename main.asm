@@ -4244,7 +4244,6 @@ INCLUDE "data/text/battle.asm"
 SECTION "Code 15", ROMX
 
 INCLUDE "gfx/battle_anims.asm"
-INCLUDE "engine/events/halloffame.asm"
 INCLUDE "engine/copy_tilemap_at_once.asm"
 
 PrintAbility:
@@ -4306,8 +4305,6 @@ INCLUDE "engine/events/kurt.asm"
 INCLUDE "engine/events/unown.asm"
 INCLUDE "engine/events/buena.asm"
 ;INCLUDE "engine/events/movesets.asm"
-INCLUDE "engine/events/battle_tower/battle_tower.asm"
-INCLUDE "engine/events/battle_tower/trainer_text.asm"
 INCLUDE "engine/events/item_maniacs.asm"
 
 
@@ -4874,13 +4871,8 @@ INCLUDE "engine/landmarks.asm"
 
 SECTION "Battle Tower Text", ROMX
 
-INCLUDE "data/battle_tower/trainer_text.asm"
-
 
 SECTION "Crystal Data", ROMX
-
-INCLUDE "engine/events/battle_tower/load_trainer.asm"
-INCLUDE "data/events/odd_eggs.asm"
 
 
 SECTION "color", ROMX

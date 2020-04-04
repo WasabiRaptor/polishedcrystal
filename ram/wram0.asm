@@ -966,7 +966,6 @@ NEXTU
 ; miscellaneous
 wDexEntryPrevJumptableIndex::
 wMomBankDigitCursorPosition::
-wNrOfBeatenBattleTowerTrainers::
 	ds 1
 wCurrPocket:: ds 1
 

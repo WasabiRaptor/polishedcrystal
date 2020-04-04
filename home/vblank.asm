@@ -101,8 +101,8 @@ VBlank::
 	dw VBlank0
 	dw VBlank1
 	dw VBlank2
-	dw VBlank3
-	dw VBlank4
+	dw VBlank1
+	dw VBlank1
 	dw VBlank5
 	dw VBlank6
 	dw VBlank7
@@ -206,20 +206,6 @@ VBlank6::
 	call DMATransfer
 	jr VBlankUpdateSound
 
-VBlank4::
-; bg map
-; tiles
-; oam
-; joypad
-; serial
-; sound
-	call UpdateBGMap
-	call Serve2bppRequest
-	call PushOAM
-	call Joypad
-	call AskSerial
-	jr VBlankUpdateSound
-
 VBlank1::
 ; scx, scy
 ; palettes
@@ -238,28 +224,6 @@ VBlank1::
 	call UpdateBGMap
 	call Serve2bppRequest
 	call LYOverrideStackCopy
-
-	jr VBlank1EntryPoint
-
-VBlank3::
-; scx, scy
-; palettes
-; bg map
-; tiles
-; oam
-; sound / lcd stat
-	ldh a, [hSCX]
-	ldh [rSCX], a
-	ldh a, [hSCY]
-	ldh [rSCY], a
-
-	call UpdateCGBPals
-	jr c, VBlank1EntryPoint
-
-	call UpdateBGMap
-	call Serve2bppRequest
-	call LYOverrideStackCopy
-
 VBlank1EntryPoint:
 	call PushOAM
 

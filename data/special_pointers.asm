@@ -105,7 +105,6 @@ SpecialsPointers::
 	add_special Diploma
 
 ; Crystal
-	add_special GiveOddEgg
 	add_special SoftReset
 	add_special Special_MoveTutor
 	add_special SpecialOmanyteChamber
@@ -124,30 +123,11 @@ SpecialsPointers::
 	add_special AskRememberPassword
 	add_special LoadMapPalettes
 
-; Battle Tower
-	add_special Special_BattleTower_FindChallengeLevel
-	add_special Special_BattleTower_Battle
-	add_special Special_BattleTower_ResetTrainersSRAM
-	add_special Special_BattleTower_CheckNewSaveFile
-	add_special Special_BattleTower_GetChallengeState
-	add_special Special_BattleTower_SetChallengeState
-	add_special Special_BattleTower_MarkNewSaveFile
-	add_special Special_BattleTower_SaveLevelGroup
-	add_special Special_BattleTower_LoadLevelGroup
-	add_special Special_BattleTower_CheckSaveFileExistsAndIsYours
-	add_special Special_BattleTower_MaxVolume
-	add_special Special_BattleTower_BeginChallenge
-	add_special Special_BattleTower_LoadOpponentTrainerAndPokemonsWithOTSprite
-	add_special Special_BattleTower_CheckForRules
-	add_special Special_BattleTower_MainMenu
-	add_special Special_BattleTower_Fade
-
 ; Polished Crystal
 	add_special SaveOptions
 	add_special WonderTrade
 	add_special RespawnOneOffs
 	add_special SpecialGiveShinyDitto
-	add_special GiveMystriEgg
 	add_special Special_ReiBlessing
 	add_special BillBoxSwitchCheck
 	add_special BillBoxSwitch

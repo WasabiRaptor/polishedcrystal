@@ -998,11 +998,6 @@ swarm: macro
 	map_id \2 ; map
 	endm
 
-	enum halloffame_command
-halloffame: macro
-	db halloffame_command
-	endm
-
 	enum credits_command
 credits: macro
 	db credits_command

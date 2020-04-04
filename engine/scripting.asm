@@ -217,10 +217,8 @@ ScriptCommandTable:
 	dw Script_verbosegiveitem            ; 9a
 	dw Script_verbosegiveitem2           ; 9b
 	dw Script_swarm                      ; 9c
-	dw Script_halloffame                 ; 9d
 	dw Script_credits                    ; 9e
 	dw Script_warpfacing                 ; 9f
-	dw Script_battletowertext            ; a0
 	dw Script_landmarktotext             ; a1
 	dw Script_trainerclassname           ; a2
 	dw Script_name                       ; a3
@@ -467,7 +465,7 @@ Script_writenamedtext:
 	ld e, a
 	call GetScriptByte
 	ld d, a
-	hlcoord $6, $b
+	hlcoord NAMEPLATE_INNERX, NAMEPLATE_INNERY
 	ld a, [wScriptBank]
 	call FarString
 ;fallthrough
@@ -592,15 +590,6 @@ Script__2dmenu:
 .ok
 	ld [wScriptVar], a
 	ret
-
-Script_battletowertext:
-; parameters:
-;     pointer (PointerLabelBeforeBank)
-;     memory (SingleByteParam)
-	call SetUpTextBox
-	call GetScriptByte
-	ld c, a
-	farjp BattleTowerText
 
 Script_verbosegiveitem:
 ; parameters:
@@ -2746,16 +2735,8 @@ Script_endall:
 	res 0, [hl]
 	jp StopScript
 
-Script_halloffame:
-	ld hl, wGameTimerPause
-	res 0, [hl]
-	farcall HallOfFame
-	ld hl, wGameTimerPause
-	set 0, [hl]
-	jr ReturnFromCredits
-
 Script_credits:
-	farcall LeafCredits
+	farcall Credits
 ReturnFromCredits:
 	call Script_endall
 	ld a, $3
