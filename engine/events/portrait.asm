@@ -71,8 +71,8 @@ ClosePortrait::
 
 PortraitMenuHeader:
 	db $40 ; flags
-	db 7, 0 ; start coords
-	db 12, 5 ; end coords
+	db PORTRAIT_Y, PORTRAIT_X ; start coords
+	db PORTRAIT_Y + PORTRAIT_HEIGHT - 1, PORTRAIT_X + PORTRAIT_WIDTH - 1 ; end coords
 	dw NULL
 	db 1 ; default option
 

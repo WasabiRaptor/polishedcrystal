@@ -219,7 +219,7 @@ PrintNamePlate::
 	push de
 	call SetupNameplate
 	pop de
-	hlcoord $6, $b
+	hlcoord NAMEPLATE_INNERX, NAMEPLATE_INNERY
 	;fallthrough
 PlaceString::
 	call InitVariableWidthTiles
@@ -852,8 +852,8 @@ NullChar::
 	jp NextChar
 
 TextScroll::
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	decoord TEXTBOX_INNERX, TEXTBOX_INNERY - 1
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 1
+	decoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	ld a, TEXTBOX_INNERH - 1
 
 .col
