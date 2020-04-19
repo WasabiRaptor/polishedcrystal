@@ -12,19 +12,19 @@ wBufferMonOT:: ds PLAYER_NAME_LENGTH
 wBufferMon:: party_struct wBufferMon
 wMonOrItemNameBuffer:: ds PLAYER_NAME_LENGTH
 
-NEXTU
+;NEXTU
 ; mail temp storage
-wTempMail:: mailmsg wTempMail
+;wTempMail:: mailmsg wTempMail
 
-NEXTU
+;NEXTU
 ; bug-catching contest
-wBugContestResults::
-	bugcontestwinner wBugContestFirstPlace
-	bugcontestwinner wBugContestSecondPlace
-	bugcontestwinner wBugContestThirdPlace
-wBugContestWinnersEnd::
-	bugcontestwinner wBugContestTemp
-wBugContestWinnerName:: ds PLAYER_NAME_LENGTH
+;wBugContestResults::
+;	bugcontestwinner wBugContestFirstPlace
+;	bugcontestwinner wBugContestSecondPlace
+;	bugcontestwinner wBugContestThirdPlace
+;wBugContestWinnersEnd::
+;	bugcontestwinner wBugContestTemp
+;wBugContestWinnerName:: ds PLAYER_NAME_LENGTH
 
 NEXTU
 ; mart items
@@ -103,8 +103,8 @@ wMoveScreenMoves:: ds 55 * 2
 
 NEXTU
 ; miscellaneous
-wTempDayOfWeek::
-wUnusedApricorns:: ds 1
+;wTempDayOfWeek::
+;wUnusedApricorns:: ds 1
 	ds 2
 
 wStartFlypoint:: ds 1

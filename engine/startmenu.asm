@@ -177,7 +177,6 @@ StartMenu:: ; 125cd
 	dw StartMenu_Option,   .OptionString,   .OptionDesc
 	dw StartMenu_Exit,     .ExitString,     .ExitDesc
 	dw StartMenu_Pokegear, .PokegearString, .PokegearDesc
-	dw StartMenu_Quit,     .QuitString,     .QuitDesc
 
 .PokedexString: 	db "Pokédex@"
 .PartyString:   	db "Pokémon@"
@@ -187,7 +186,6 @@ StartMenu:: ; 125cd
 .OptionString:  	db "Options@"
 .ExitString:    	db "Exit@"
 .PokegearString:	db "PokéPDA@"
-.QuitString:    	db "Quit@"
 
 ; Menu accounts are removed; this is vestigial
 .PokedexDesc:
@@ -435,29 +433,6 @@ StartMenu_Exit: ; 128ed
 	ld a, 1
 	ret
 ; 128f0
-
-
-StartMenu_Quit: ; 128f0
-; Retire from the bug catching contest.
-
-	ld hl, .EndTheContestText
-	call StartMenuYesNo
-	jr c, .DontEndContest
-	ld a, BANK(BugCatchingContestReturnToGateScript)
-	ld hl, BugCatchingContestReturnToGateScript
-	call FarQueueScript
-	ld a, 4
-	ret
-
-.DontEndContest:
-	xor a
-	ret
-
-.EndTheContestText:
-	text_jump UnknownText_0x1c1a6c
-	db "@"
-; 1290b
-
 
 StartMenu_Save: ; 1290b
 ; Save the game.
@@ -1075,35 +1050,6 @@ StartMenuYesNo: ; 12cf5
 	call YesNoBox
 	jp ExitMenu
 ; 12cfe
-
-
-ComposeMailMessage: ; 12cfe (4:6cfe)
-	ld de, wTempMailMessage
-	farcall _ComposeMailMessage
-	ld hl, wPlayerName
-	ld de, wTempMailAuthor
-	ld bc, PLAYER_NAME_LENGTH - 1
-	rst CopyBytes
-	ld hl, wPlayerID
-	ld bc, 2
-	rst CopyBytes
-	ld a, [wCurPartySpecies]
-	ld [de], a
-	inc de
-	ld a, [wCurItem]
-	ld [de], a
-	ld a, [wCurPartyMon]
-	ld hl, sPartyMail
-	ld bc, MAIL_STRUCT_LENGTH
-	rst AddNTimes
-	ld d, h
-	ld e, l
-	ld hl, wTempMail
-	ld bc, MAIL_STRUCT_LENGTH
-	ld a, BANK(sPartyMail)
-	call GetSRAMBank
-	rst CopyBytes
-	jp CloseSRAM
 
 OpenPartyStats: ; 12e00
 	call LoadStandardMenuDataHeader

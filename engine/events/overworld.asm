@@ -704,7 +704,6 @@ FlyFunction: ; ca3b
 	callasm PrepareOverworldMove
 	scall FieldMovePokepicScript
 	callasm FlyFromAnim
-	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	callasm DelayLoadingNewSprites
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
@@ -962,7 +961,6 @@ dig_incave
 .UsedDigOrEscapeRopeScript: ; 0xcc3c
 	playsound SFX_WARP_TO
 	applymovement PLAYER, .DigOut
-	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_DOOR
@@ -1036,7 +1034,6 @@ TeleportFunction: ; cc61
 	special UpdateTimePals
 	playsound SFX_WARP_TO
 	applymovement PLAYER, .TeleportFrom
-	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	writecode VAR_MOVEMENT, PLAYER_NORMAL
 	newloadmap MAPSETUP_TELEPORT

@@ -395,9 +395,7 @@ CheckTimeEvents: ; 9693a
 	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	jr z, .do_daily
-
-	farcall CheckBugContestTimer
-	jr c, .end_bug_contest
+	
 	xor a
 	ret
 
@@ -409,13 +407,6 @@ CheckTimeEvents: ; 9693a
 
 .nothing
 	xor a
-	ret
-
-.end_bug_contest
-	ld a, BANK(BugCatchingContestOverScript)
-	ld hl, BugCatchingContestOverScript
-	call CallScript
-	scf
 	ret
 ; 96970
 
@@ -1165,8 +1156,6 @@ RandomEncounter:: ; 97cc0
 	ld hl, wStatusFlags2
 	bit 1, [hl] ; ENGINE_SAFARI_GAME
 	jr nz, .safari_game
-	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
-	jr nz, .bug_contest
 	farcall TryWildEncounter
 	jr nz, .nope
 .ok
@@ -1182,13 +1171,6 @@ RandomEncounter:: ; 97cc0
 	jr nz, .nope
 	ld a, BANK(SafariGameBattleScript)
 	ld hl, SafariGameBattleScript
-	jr .done
-
-.bug_contest
-	call _TryWildEncounter_BugContest
-	jr nc, .nope
-	ld a, BANK(BugCatchingContestBattleScript)
-	ld hl, BugCatchingContestBattleScript
 	jr .done
 
 .nope

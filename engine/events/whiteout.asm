@@ -27,7 +27,6 @@ Script_Whiteout: ; 0x124ce
 	checkflag ENGINE_BUG_CONTEST_TIMER
 	iftrue .bug_contest
 	callasm GetWhiteoutSpawn
-	farscall Script_AbortBugContest
 	special WarpToSpawnPoint
 	newloadmap MAPSETUP_WARP
 	endall

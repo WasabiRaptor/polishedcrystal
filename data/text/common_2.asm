@@ -742,65 +742,6 @@ UnknownText_0x1c10dd::
 	text "."
 	prompt
 
-ContestJudging_FirstPlaceText::
-	text "This Bug-Catching"
-	line "Contest winner is@"
-	interpret_data
-	text "…"
-
-	para "@"
-	text_from_ram wBugContestWinnerName
-	text ","
-	line "who caught a"
-	cont "@"
-	text_from_ram wStringBuffer1
-	text "!@@"
-
-ContestJudging_FirstPlaceScoreText::
-	text ""
-
-	para "The winning score"
-	line "was @"
-	deciram wBugContestFirstPlaceScore, 2, 3
-	text " points!"
-	prompt
-
-ContestJudging_SecondPlaceText::
-	text "Placing second was"
-	line "@"
-	text_from_ram wBugContestWinnerName
-	text ","
-	para "who caught a"
-	line "@"
-	text_from_ram wStringBuffer1
-	text "!@@"
-
-ContestJudging_SecondPlaceScoreText::
-	text ""
-	para "The score was"
-	line "@"
-	deciram wBugContestSecondPlaceScore, 2, 3
-	text " points!"
-	prompt
-
-ContestJudging_ThirdPlaceText::
-	text "Placing third was"
-	line "@"
-	text_from_ram wBugContestWinnerName
-	text ","
-	para "who caught a"
-	line "@"
-	text_from_ram wStringBuffer1
-	text "!@@"
-
-ContestJudging_ThirdPlaceScoreText::
-	text ""
-	para "The score was"
-	line "@"
-	deciram wBugContestThirdPlaceScore, 2, 3
-	text " points!"
-	prompt
-
 UnknownText_0x1c1203::
 	text "Let me measure"
 	line "that Magikarp."
