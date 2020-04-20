@@ -21,11 +21,9 @@ StartMenu:: ; 125cd
 	call .DrawMenuClock
 	call .DrawMenuAccount
 	call DrawVariableLengthMenuBox
-	call .DrawBugContestStatusBox
 	call SafeUpdateSprites
 	call BGMapAnchorTopLeft
 	farcall LoadFonts_NoOAMUpdate
-	call .DrawBugContestStatus
 	call UpdateTimePals
 	jr .Select
 
@@ -141,7 +139,6 @@ StartMenu:: ; 125cd
 	call .DrawMenuClock
 	call .DrawMenuAccount
 	call DrawVariableLengthMenuBox
-	call .DrawBugContestStatus
 	call UpdateSprites
 	call FinishExitMenu
 	jp .Reopen
@@ -409,23 +406,6 @@ endr
 	lb bc, 1, 18
 	;ld c, 8
 	jp TextBoxPalette
-
-.DrawBugContestStatusBox: ; 128d1
-	ld hl, wStatusFlags2
-	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
-	ret z
-	farjp StartMenu_DrawBugContestStatusBox
-; 128de
-
-.DrawBugContestStatus: ; 128de
-	ld hl, wStatusFlags2
-	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
-	jr nz, .contest
-	ret
-.contest
-	farjp StartMenu_PrintBugContestStatus
-; 128ed
-
 
 StartMenu_Exit: ; 128ed
 ; Exit the menu.

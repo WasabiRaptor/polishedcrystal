@@ -382,17 +382,6 @@ CoinVendor_CancelText:
 	line "Come again!"
 	done
 
-BugContestPrizeNoRoomText:
-	text "Oh? Your Bag is"
-	line "full."
-
-	para "We'll keep this"
-	line "for you today, so"
-
-	para "come back when you"
-	line "make room for it."
-	done
-
 HappinessText3:
 	text "Wow! You and your"
 	line "Pokémon are really"

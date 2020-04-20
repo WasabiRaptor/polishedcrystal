@@ -547,8 +547,6 @@ PokeBallEffect: ; e8a2
 
 .skip_pokedex
 	ld a, [wBattleType]
-	cp BATTLETYPE_CONTEST
-	jp z, .catch_bug_contest_mon
 	cp BATTLETYPE_LEGENDARY
 	jr nz, .not_celebi ; false positive for other legendaries, but that's okay
 	ld hl, wBattleResult
@@ -712,10 +710,6 @@ PokeBallEffect: ; e8a2
 	call FadeToWhite
 
 	call LoadStandardFont
-	jr .return_from_capture
-
-.catch_bug_contest_mon
-	farcall BugContest_SetCaughtContestMon
 	jr .return_from_capture
 
 .FinishTutorial:

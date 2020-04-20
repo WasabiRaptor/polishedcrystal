@@ -21,11 +21,6 @@ SpecialsPointers::
 	add_special Special_CableClubCheckWhichChris
 
 ; Map Events
-	add_special BugContestJudging ; unused
-	add_special CheckPartyFullAfterContest
-	add_special ContestDropOffMons
-	add_special ContestReturnMons
-	add_special Special_GiveParkBalls
 	add_special Special_CheckMagikarpLength
 	add_special Special_MagikarpHouseSign
 	add_special HealParty
@@ -67,7 +62,6 @@ SpecialsPointers::
 	add_special Special_FindThatSpeciesYourTrainerID
 	add_special Special_DayCareMon1
 	add_special Special_DayCareMon2
-	add_special Special_SelectRandomBugContestContestants
 	add_special Special_ActivateFishingSwarm
 	add_special ToggleMaptileDecorations
 	add_special ToggleDecorationsVisibility

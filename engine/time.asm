@@ -147,52 +147,6 @@ Special_SampleKenjiBreakCountdown: ; 11485
 	ret
 ; 11490
 
-StartBugContestTimer: ; 11490
-	ld a, 20 * NO_RTC_SPEEDUP
-	ld [wBugContestMinsRemaining], a
-	xor a
-	ld [wBugContestSecsRemaining], a
-	call UpdateTime
-	ld hl, wBugContestStartTime
-	jp CopyDayHourMinSecToHL
-; 114a4
-
-
-CheckBugContestTimer:: ; 114a4 (4:54a4)
-	ld hl, wBugContestStartTime
-	call CalcSecsMinsHoursDaysSince
-	ld a, [wDaysSince]
-	and a
-	jr nz, .timed_out
-	ld a, [wHoursSince]
-	and a
-	jr nz, .timed_out
-	ld a, [wSecondsSince]
-	ld b, a
-	ld a, [wBugContestSecsRemaining]
-	sub b
-	jr nc, .okay
-	add 60
-
-.okay
-	ld [wBugContestSecsRemaining], a
-	ld a, [wMinutesSince]
-	ld b, a
-	ld a, [wBugContestMinsRemaining]
-	sbc b
-	ld [wBugContestMinsRemaining], a
-	jr c, .timed_out
-	and a
-	ret
-
-.timed_out
-	xor a
-	ld [wBugContestMinsRemaining], a
-	ld [wBugContestSecsRemaining], a
-	scf
-	ret
-
-
 InitializeStartDay: ; 114dd
 	call UpdateTime
 	ld hl, wTimerStartDay
