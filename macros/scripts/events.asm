@@ -1012,12 +1012,6 @@ warpfacing: macro
 	db \4 ; y
 	endm
 
-	enum battletowertext_command
-battletowertext: macro
-	db battletowertext_command
-	db \1 ; memory
-	endm
-
 	enum landmarktotext_command
 landmarktotext: macro
 	db landmarktotext_command
