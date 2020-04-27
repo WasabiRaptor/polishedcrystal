@@ -52,14 +52,14 @@ EngineFlags: ; 80462
 	engine_flag wOWState, OWSTATE_WATERFALL
 	engine_flag wOWState, OWSTATE_CUT
 
-	engine_flag wJohtoBadges, ZEPHYRBADGE
-	engine_flag wJohtoBadges, HIVEBADGE
-	engine_flag wJohtoBadges, PLAINBADGE
-	engine_flag wJohtoBadges, FOGBADGE
-	engine_flag wJohtoBadges, MINERALBADGE
-	engine_flag wJohtoBadges, STORMBADGE
-	engine_flag wJohtoBadges, GLACIERBADGE
-	engine_flag wJohtoBadges, RISINGBADGE
+	engine_flag wCycleCount, ZEPHYRBADGE
+	engine_flag wCycleCount, HIVEBADGE
+	engine_flag wCycleCount, PLAINBADGE
+	engine_flag wCycleCount, FOGBADGE
+	engine_flag wCycleCount, MINERALBADGE
+	engine_flag wCycleCount, STORMBADGE
+	engine_flag wCycleCount, GLACIERBADGE
+	engine_flag wCycleCount, RISINGBADGE
 
 	engine_flag wKantoBadges, BOULDERBADGE
 	engine_flag wKantoBadges, CASCADEBADGE

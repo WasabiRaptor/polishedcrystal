@@ -81,7 +81,7 @@ GetMenu2::
 YesNoBox::
 	ld a, [wInPokegear]
 	and a
-	lb bc, SCREEN_WIDTH - 5, 8
+	lb bc, SCREEN_WIDTH - 5, 7 ; x and y for where the yesno box is placed
 	jr z, .got_position
 	dec b
 .got_position
@@ -465,7 +465,7 @@ Place2DMenuItemName::
 	push af
 	ldh a, [hBuffer]
 	rst Bankswitch
-	
+
 	call PlaceString
 	pop af
 	rst Bankswitch

@@ -232,7 +232,7 @@ endr
 	xor a
 	ld [wMonType], a
 
-	ld [wJohtoBadges], a
+	ld [wCycleCount], a
 	ld [wKantoBadges], a
 
 	ld [wCoins], a
@@ -461,7 +461,7 @@ FinishContinueFunction: ; 5e5d
 ; 5e85
 
 DisplaySaveInfoOnContinue: ; 5e85
-	lb de, 4, 8
+	lb de, 4, 5
 	jr DisplayNormalContinueData
 ; 5e9a
 
@@ -484,12 +484,6 @@ Continue_LoadMenuHeader: ; 5ebf
 	xor a
 	ldh [hBGMapMode], a
 	ld hl, .MenuDataHeader_Dex
-	ld a, [wStatusFlags]
-	bit 0, a ; pokedex
-	jr nz, .pokedex_header
-	ld hl, .MenuDataHeader_NoDex
-
-.pokedex_header
 	call _OffsetMenuDataHeader
 	call MenuBox
 	jp PlaceVerticalMenuItems
@@ -498,70 +492,44 @@ Continue_LoadMenuHeader: ; 5ebf
 .MenuDataHeader_Dex: ; 5ed9
 	db $40 ; flags
 	db 00, 00 ; start coords
-	db 09, 15 ; end coords
+	db 06, 11 ; end coords
 	dw .MenuData2_Dex
 	db 1 ; default option
 ; 5ee1
 
 .MenuData2_Dex: ; 5ee1
-	db $00 ; flags
-	db 4 ; items
-	db "Player@"
-	db "Badges@"
-	db "Pokédex@"
-	db "Time@"
-; 5efb
-
-.MenuDataHeader_NoDex: ; 5efb
-	db $40 ; flags
-	db 00, 00 ; start coords
-	db 09, 15 ; end coords
-	dw .MenuData2_NoDex
-	db 1 ; default option
-; 5f03
-
-.MenuData2_NoDex: ; 5f03
-	db $00 ; flags
-	db 4 ; items
-	db "Player <PLAYER>@"
-	db "Badges@"
-	db " @"
-	db "Time@"
+	db $00 | 1 << 6 ; flags
+	db 1 ; items
+	db "Player:<LNBRK><_NEXT><PLAYER><LNBRK>"
+	db "Cycles:<LNBRK>"
+	db "Pokédex:<LNBRK>"
+	db "Time:@"
 ; 5f1c
 
 
 Continue_DisplayBadgesDexPlayerName: ; 5f1c
 	call MenuBoxCoord2Tile
 	push hl
-	decoord 13, 4, 0
+	decoord 8, 3, 0
 	add hl, de
-	call Continue_DisplayBadgeCount
+	call Continue_DisplayCycleCount
 	pop hl
 	push hl
-	decoord 12, 6, 0
+	decoord 7, 4, 0
 	add hl, de
 	call Continue_DisplayPokedexNumCaught
 	pop hl
-	push hl
-	decoord 8, 2, 0
-	add hl, de
-	;ld de, .Player
-	;call PlaceString
-	pop hl
 	ret
 
-;.Player:
-;	db "<PLAYER>@"
-; 5f40
 
 Continue_PrintGameTime: ; 5f40
-	decoord 9, 8, 0
+	decoord 5, 5, 0
 	add hl, de
 	jp Continue_DisplayGameTime
 ; 5f48
 
 Continue_UnknownGameTime: ; 5f48
-	decoord 9, 8, 0
+	decoord 5, 5, 0
 	add hl, de
 	ld de, .three_question_marks
 	jp PlaceString
@@ -570,14 +538,9 @@ Continue_UnknownGameTime: ; 5f48
 	db " ???@"
 ; 5f58
 
-Continue_DisplayBadgeCount: ; 5f58
-	push hl
-	ld hl, wJohtoBadges
-	ld b, 2
-	call CountSetBits
-	pop hl
-	ld de, wd265
-	lb bc, 1, 2
+Continue_DisplayCycleCount: ; 5f58
+	ld de, wCycleCount
+	lb bc, 1 | PRINTNUM_LEFTALIGN, 3
 	predef_jump PrintNum
 ; 5f6b
 
@@ -587,21 +550,28 @@ Continue_DisplayPokedexNumCaught: ; 5f6b
 	ret z
 	push hl
 	ld hl, wPokedexCaught
-IF NUM_POKEMON % 8
-	ld b, NUM_POKEMON / 8 + 1
-ELSE
-	ld b, NUM_POKEMON / 8
-ENDC
-	call CountSetBits
+
+	ldh a, [rSVBK]
+	push af ; 1
+	ld a, BANK(wPokedexCaughtSeen)
+	ldh [rSVBK], a
+
+	ld hl, wPokedexCaught
+	ld bc, wPokedexCaughtEnd - wPokedexCaught
+	farcall PokedexCountSeenCaught
+
+	pop af ; 0
+	ldh [rSVBK], a
+
 	pop hl
-	ld de, wd265
-	lb bc, 1, 3
+	ld de, wPokedexSeenCaughtCount
+	lb bc, 2, 4
 	predef_jump PrintNum
 ; 5f84
 
 Continue_DisplayGameTime: ; 5f84
 	ld de, wGameTimeHours
-	lb bc, 2, 3
+	lb bc, PRINTNUM_LEADINGZEROS | 2, 3
 	predef PrintNum
 	ld [hl], "<COLON>"
 	inc hl

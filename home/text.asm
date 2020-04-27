@@ -589,6 +589,7 @@ NextVariableWidthTextTile::
 	call NextVRAMVariableWidthTextTile
 
 	pop hl
+	inc hl
 	ret
 
 PlaceMoveTargetsName::
@@ -852,8 +853,8 @@ NullChar::
 	jp NextChar
 
 TextScroll::
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	decoord TEXTBOX_INNERX, TEXTBOX_INNERY - 1
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY +1
+	decoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	ld a, TEXTBOX_INNERH
 
 .col

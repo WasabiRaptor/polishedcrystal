@@ -842,7 +842,7 @@ wMomSavingMoney:: ds 1
 wCoins:: ds 2
 
 wBadges::
-wJohtoBadges:: flag_array NUM_JOHTO_BADGES
+wCycleCount:: ds 1
 wKantoBadges:: flag_array NUM_KANTO_BADGES
 wBadgesEnd::
 

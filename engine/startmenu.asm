@@ -1,9 +1,9 @@
 StartMenu:: ; 125cd
-
-	call ClearWindowData
-	call OtherVariableWidthText
 	ld de, SFX_MENU
 	call PlaySFX
+StartMenuNoSFX::
+	call ClearWindowData
+	call OtherVariableWidthText
 
 	farcall ReanchorBGMap_NoOAMUpdate
 
@@ -419,13 +419,12 @@ StartMenu_Save: ; 1290b
 ; Save the game.
 
 	call BufferScreen
+	call ExitMenu
+	call OtherVariableWidthText
 	farcall SaveMenu
-	jr nc, .asm_12919
-	xor a
-	ret
-.asm_12919
-	ld a, 1
-	ret
+	call c, StartMenuNoSFX
+	call CloseText
+	jp UpdateTimePals
 ; 1291c
 
 
