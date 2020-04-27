@@ -1,6 +1,6 @@
 ClearSpeechBox::
 	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	lb bc, TEXTBOX_INNERH - 1, TEXTBOX_INNERW
+	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
 ClearBox::
 ; Fill a c*b box at hl with blank tiles.
 	ld a, " "
@@ -852,9 +852,9 @@ NullChar::
 	jp NextChar
 
 TextScroll::
-	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY + 1
-	decoord TEXTBOX_INNERX, TEXTBOX_INNERY
-	ld a, TEXTBOX_INNERH - 1
+	hlcoord TEXTBOX_INNERX, TEXTBOX_INNERY
+	decoord TEXTBOX_INNERX, TEXTBOX_INNERY - 1
+	ld a, TEXTBOX_INNERH
 
 .col
 	push af
