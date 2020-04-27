@@ -579,11 +579,11 @@ _CGB_Diploma: ; 91ad
 	call WipeAttrMap
 	jp ApplyAttrMap
 ; 91c8
-
+; most menu screens seem to use this palette
 .DiplomaPalette
 if !DEF(MONOCHROME)
 	RGB 31, 31, 31
-	RGB 30, 22, 17
+	RGB 31, 31, 31
 	RGB 16, 14, 19
 	RGB 00, 00, 00
 else
@@ -632,7 +632,7 @@ _CGB_PartyMenu: ; 91d1
 .PartyMenuBGPalette:
 if !DEF(MONOCHROME)
 	RGB 31, 31, 31
-	RGB 17, 19, 31
+	RGB 31, 31, 31
 	RGB 14, 16, 31
 	RGB 00, 00, 00
 else

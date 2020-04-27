@@ -43,7 +43,7 @@ LoadPartyMenuGFX: ; 5004f
 	farcall LoadFrame
 	pop af
 	ld [rVBK], a
-
+	call LoadStandardFont
 	call LoadFontsBattleExtra
 	farcall InitPartyMenuPalettes ; engine/color.asm
 	farjp ClearSpriteAnims2

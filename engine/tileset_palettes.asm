@@ -6,10 +6,11 @@ LoadBlindingFlashPalette:: ; 49409
 	jp FarCopyWRAM
 ; 49418
 
+OverworldTextboxPalette:
 BlindingFlashPalette: ; 49418
 if !DEF(MONOCHROME)
 	RGB 31, 31, 31
-	RGB 08, 19, 28
+	RGB 31, 31, 31
 	RGB 05, 05, 16
 	RGB 00, 00, 00
 else
@@ -316,11 +317,11 @@ LoadSpecialMapOBPalette:
 
 .not_overcast
 	ld a, [wMapGroup]
-	cp GROUP_KRISS_HOUSE_2F 
+	cp GROUP_KRISS_HOUSE_2F
 	jr nz, .not_lyras_house_2f_or_kriss_house_2f
 	cp MAP_KRISS_HOUSE_2F
 	jp z, .load_party_mon_palettes
-	
+
 .load_single_palette:
 	ld bc, 1 palettes
 .load_ob_palettes:

@@ -2351,6 +2351,8 @@ IsObjectOnScreen: ; 56a3
 ; 56cd
 
 CheckCurSpriteCoveredByTextBox: ; 56cd
+ ;somewhat repurposed to make sure they're not behind the portrait, as that will use objects to have more pals
+
 ; x coord
 	ld a, [wPlayerBGMapOffsetX]
 	ld d, a
@@ -2445,7 +2447,7 @@ CheckCurSpriteCoveredByTextBox: ; 56cd
 	call Coord2Tile
 	pop bc
 	ld a, [hl]
-	cp $7f ; hide sprites standing on tiles $$7f or $ff
+	cp $d0 ; hide sprites standing on tiles $$d0-$df as those are portrait tiles
 	jr nc, .nope
 .ok8
 	dec d
@@ -2457,6 +2459,8 @@ CheckCurSpriteCoveredByTextBox: ; 56cd
 	ret
 
 .nope
+	cp $e0
+	jr nc, .ok8
 	scf
 	ret
 ; 576a

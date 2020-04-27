@@ -1872,7 +1872,7 @@ ReloadTilesetAndPalettes:: ; 2bae
 	call DisableLCD
 	call ClearSprites
 	farcall ReloadVisibleSprites
-	call LoadStandardFont
+	call LoadStandardOpaqueFont
 	call LoadFontsExtra
 	ldh a, [hROMBank]
 	push af

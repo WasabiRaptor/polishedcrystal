@@ -72,10 +72,7 @@ INCBIN "gfx/frames/painting.2bpp"
 
 _LoadStandardOpaqueFont::
 	ld a, TRUE
-	call _LoadStandardMaybeOpaqueFont
-	ld hl, VTiles2 tile " "
-	ld de, TextBoxSpaceGFX
-	jp GetOpaque1bppFontTile
+	jp _LoadStandardMaybeOpaqueFont
 
 _LoadStandardFont::
 	xor a
@@ -88,7 +85,13 @@ _LoadStandardMaybeOpaqueFont:
 	ld e, l
 	ld hl, VTiles0 tile $80
 	lb bc, BANK(FontNormal), 112
+	call GetMaybeOpaque1bpp
+
+	ld hl, VTiles2 tile " "
+	ld de, TextBoxSpaceGFX
+	lb bc, BANK(FontNormal), 1
 	jp GetMaybeOpaque1bpp
+
 
 LoadStandardFontPointer::
 	ld hl, .FontPointers
@@ -128,7 +131,7 @@ LoadFrame:: ; fb4cc
 	ld e, l
 	ld hl, VTiles0 tile "▼"
 	lb bc, BANK(Frames), 16
-	jp Get1bpp
+	jp GetMaybeOpaque1bpp
 ; fb4f2
 GetFrame:
 	ld a, [wTextBoxFrame]

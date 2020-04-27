@@ -63,6 +63,7 @@ OpenText:: ; 2e08
 	call SpeechTextBox
 	call BGMapAnchorTopLeft
 	call LoadFonts_NoOAMUpdate
+	call LoadFontsExtra
 	pop af
 	rst Bankswitch
 

@@ -70,6 +70,7 @@ StartMenu:: ; 125cd
 	push af
 	ld a, 1
 	ldh [hOAMUpdate], a
+	ldh [hRequestOpaque1bpp], a
 	call LoadFontsExtra
 	pop af
 	ldh [hOAMUpdate], a

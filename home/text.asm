@@ -56,7 +56,7 @@ SpeechTextBox::
 	hlcoord TEXTBOX_X, TEXTBOX_Y
 	lb bc, TEXTBOX_INNERH, TEXTBOX_INNERW
 	;fallthrough
-	
+
 TextBox::
 ; Draw a text box at hl with room for
 ; b lines of c characters each.
@@ -117,7 +117,7 @@ TextBox::
 	pop hl
 	pop bc
 	jr TextBoxPalette
-	
+
 .PlaceSpace
 ; Place char a c times.
 	ld d, c
@@ -148,7 +148,7 @@ TextBoxPalette::
 	inc b
 	inc c
 	inc c
-	ld a, PAL_BG_TEXT
+	ld a, PAL_BG_TEXT | BEHIND_BG
 .col
 	push bc
 	push hl
@@ -206,7 +206,7 @@ PrintTextBoxText::
 	call InitVariableWidthText
 	bccoord TEXTBOX_INNERX, TEXTBOX_INNERY
 	jp PlaceWholeStringInBoxAtOnce
-	
+
 SetUpTextBox::
 	push hl
 	call SpeechTextBox
@@ -355,7 +355,7 @@ PlaceCharacter::
 ; meaning that if 8 collums are filled, only 7 are in actuality, so knowing this if that extra collumn
 ; overflows into the next tile, we don't have to care unless another letter is printed after
 ; therefore we only need to move onto the next tile in vram if 10+ collumns are filled
-	cp 10 
+	cp 10
 	jr c, .sametile
 	sub 8
 	ld [wVariableWidthTextCurTileColsFilled], a
@@ -395,7 +395,7 @@ PlaceCharacter::
 	ld a, [wVariableWidthTextTile]
 	ld [hl], a
 .letterdelay
-	pop de	
+	pop de
 	farcall PrintLetterDelay
 	jp NextChar
 
@@ -476,7 +476,7 @@ CombineRows::
 	dec c
 	jr z, .done
 	rr d
-	rr e	
+	rr e
 	jr .loop
 .done
 	ld a, [hl]
@@ -1353,7 +1353,7 @@ PrintDayOfWeek::
 	ld de, .Day
 	jp PlaceSpecialString
 
-.Days: 
+.Days:
 	db "Sun@"
 	db "Mon@"
 	db "Tues@"
@@ -1362,5 +1362,5 @@ PrintDayOfWeek::
 	db "Fri@"
 	db "Satur@"
 
-.Day: 
+.Day:
 	db "day@"

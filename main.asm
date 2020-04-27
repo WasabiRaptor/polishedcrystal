@@ -79,7 +79,7 @@ LoadFonts_NoOAMUpdate:: ; 64bf
 	ld a, $90
 	ldh [hWY], a
 	call SafeUpdateSprites
-	call LoadStandardFont
+	call LoadStandardOpaqueFont
 
 	pop af
 	ldh [hOAMUpdate], a
