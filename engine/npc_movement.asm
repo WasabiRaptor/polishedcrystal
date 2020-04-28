@@ -54,17 +54,17 @@ Function6ec1: ; 6ec1
 Function6f07: ; 6f07
 	call Function6f5f
 	ret c
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	ld hl, OBJECT_PALETTE
 	add hl, bc
 	bit 7, [hl]
 	jp nz, Function6fa1
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	ld d, a
@@ -78,7 +78,7 @@ Function6f07: ; 6f07
 Function6f2c: ; 6f2c
 	call Function6f5f
 	ret c
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	call GetTileCollision
@@ -89,13 +89,13 @@ Function6f2c: ; 6f2c
 ; 6f3e
 
 Function6f3e: ; 6f3e
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	call Function6f7f
 	ret nc
 	push af
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	and 3
@@ -115,13 +115,13 @@ Function6f3e: ; 6f3e
 ; 6f5f
 
 Function6f5f: ; 6f5f
-	ld hl, OBJECT_STANDING_TILE
+	ld hl, OBJECT_LAST_TILE
 	add hl, bc
 	ld a, [hl]
 	call Function6f7f
 	ret nc
 	push af
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	and 3
 	ld e, a
@@ -167,7 +167,7 @@ Function6f7f: ; 6f7f
 ; 6fa1
 
 Function6fa1: ; 6fa1
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	and 3
@@ -246,7 +246,7 @@ CheckFacingObject:: ; 6fd9
 	ldh [hMapObjectIndexBuffer], a
 	call IsNPCAtCoord
 	ret nc
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	cp STANDING
@@ -261,10 +261,10 @@ CheckFacingObject:: ; 6fd9
 
 
 WillPersonBumpIntoSomeoneElse: ; 7009
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 IsNPCAtCoord: ; 7041
@@ -290,12 +290,12 @@ IsNPCAtCoord: ; 7041
 	jr .ok2
 
 .got
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
 	cp d
 	jr nz, .ok
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld a, [hl]
 	cp e
@@ -309,12 +309,12 @@ IsNPCAtCoord: ; 7041
 	jr nz, .setcarry
 
 .ok
-	ld hl, OBJECT_MAP_X
+	ld hl, OBJECT_LAST_X
 	add hl, bc
 	ld a, [hl]
 	cp d
 	jr nz, .next
-	ld hl, OBJECT_MAP_Y
+	ld hl, OBJECT_LAST_Y
 	add hl, bc
 	ld a, [hl]
 	cp e
@@ -360,7 +360,7 @@ HasPersonReachedMovementLimit: ; 70a4
 	ld a, [hl]
 	add e
 	ld e, a
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
 	cp d
@@ -385,7 +385,7 @@ HasPersonReachedMovementLimit: ; 70a4
 	ld a, [hl]
 	add e
 	ld e, a
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld a, [hl]
 	cp d
@@ -403,7 +403,7 @@ HasPersonReachedMovementLimit: ; 70a4
 ; 70ed
 
 IsPersonMovingOffEdgeOfScreen: ; 70ed
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [wXCoord]
 	cp [hl]
@@ -414,7 +414,7 @@ IsPersonMovingOffEdgeOfScreen: ; 70ed
 	jr c, .yes
 
 .check_y
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld a, [wYCoord]
 	cp [hl]
@@ -434,14 +434,14 @@ IsPersonMovingOffEdgeOfScreen: ; 70ed
 ; 7113
 
 Function7171: ; 7171
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, d
 	sub [hl]
 	jr c, .nope
 	cp $2
 	jr nc, .nope
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld a, e
 	sub [hl]

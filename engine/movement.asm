@@ -147,7 +147,7 @@ Movement_step_dig: ; 5145
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_03
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -164,7 +164,7 @@ Movement_return_dig: ; 516a
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_STEP_TYPE
@@ -217,7 +217,7 @@ Movement_step_loop: ; 51b8
 Movement_step_resume:
 Movement_step_end:
 	call RestoreDefaultMovement
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld [hl], a
 
@@ -240,7 +240,7 @@ Movement_remove_person: ; 51fd
 	ldh a, [hMapObjectIndexBuffer]
 	cp [hl]
 	jr nz, .not_leading
-	ld [hl], -1
+	ld [hl], NO_FOLLOWER
 
 .not_leading
 	ld hl, wVramState
@@ -313,7 +313,7 @@ Movement_step_sleep_common: ; 5247
 	add hl, bc
 	ld [hl], PERSON_ACTION_STAND
 
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -333,7 +333,7 @@ Movement_step_bump: ; 525f
 	add hl, bc
 	ld [hl], PERSON_ACTION_BUMP
 
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -353,7 +353,7 @@ Movement_tree_shake: ; 5279
 	add hl, bc
 	ld [hl], PERSON_ACTION_WEIRD_TREE
 
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -437,7 +437,7 @@ Movement_turn_head_right: ; 52ea
 	; fallthrough
 
 TurnHead: ; 52ee
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
 
@@ -445,7 +445,7 @@ TurnHead: ; 52ee
 	add hl, bc
 	ld [hl], PERSON_ACTION_STAND
 
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -765,7 +765,7 @@ NormalStep: ; 5412
 	bit INVISIBLE, [hl]
 	jr nz, .skip_effect
 
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	cp COLL_LONG_GRASS

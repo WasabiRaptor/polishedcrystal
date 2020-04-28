@@ -290,7 +290,7 @@ ApplyDeletionToMapObject:: ; 1967
 	ret nz
 .ok
 	farcall StopFollow
-	ld a, -1
+	ld a, NO_FOLLOWER
 	ld [wObjectFollow_Leader], a
 	ld [wObjectFollow_Follower], a
 	ret
@@ -315,6 +315,33 @@ CopyPlayerObjectTemplate:: ; 19a6
 	ret
 ; 19b8
 
+DeleteCast::
+	call GetMapObject
+	ld hl, MAPOBJECT_OBJECT_STRUCT_ID
+	add hl, bc
+	ld a, [hl]
+	push af
+	ld [hl], -1
+	inc hl
+	ld bc, OBJECT_LENGTH - 1
+	xor a
+	call ByteFill
+	pop af
+	cp -1
+	ret z
+	cp $d
+	ret nc
+	ld b, a
+	ld a, [wObjectFollow_Leader]
+	cp b
+	jr nz, .ok
+	ld a, NO_FOLLOWER
+	ld [wObjectFollow_Leader], a
+.ok
+	ld a, b
+	call GetObjectStruct
+	farjp DeleteMapObject
+
 LoadMovementDataPointer:: ; 19e9
 ; Load the movement data pointer for person a.
 	ld [wMovementPerson], a
@@ -329,7 +356,7 @@ LoadMovementDataPointer:: ; 19e9
 	call CheckObjectVisibility
 	ret c
 
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld [hl], SPRITEMOVEDATA_SCRIPTED
 
@@ -374,7 +401,7 @@ FindFirstEmptyObjectStruct:: ; 1a13
 ; 1a2f
 
 GetSpriteMovementFunction:: ; 1a2f
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld a, [hl]
 	cp NUM_SPRITEMOVEDATA
@@ -430,7 +457,7 @@ CopySpriteMovementData:: ; 1a61
 ; 1a71
 
 .CopyData: ; 1a71
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, de
 	ld [hl], a
 
@@ -450,7 +477,7 @@ endr
 	rlca
 	rlca
 	and %00001100
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, de
 	ld [hl], a
 
@@ -535,7 +562,7 @@ DoesObjectHaveASprite:: ; 1af1
 SetSpriteDirection:: ; 1af8
 	; preserves other flags
 	push af
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
 	and %11110011
@@ -548,7 +575,7 @@ SetSpriteDirection:: ; 1af8
 ; 1b07
 
 GetSpriteDirection:: ; 1b07
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
 	and %00001100

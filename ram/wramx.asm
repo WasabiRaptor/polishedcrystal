@@ -760,6 +760,7 @@ wFollowMovementQueue:: ds 5
 
 wObjectStructs::
 	object_struct wPlayer
+	object_struct wFollower
 	object_struct wObject1
 	object_struct wObject2
 	object_struct wObject3
@@ -771,13 +772,14 @@ wObjectStructs::
 	object_struct wObject9
 	object_struct wObject10
 	object_struct wObject11
-	object_struct wObject12
+	;object_struct wObject12
 wObjectStructsEnd::
 
 wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
 wMapObjects::
 	map_object wPlayer
+	map_object wFollower
 	map_object wMap1
 	map_object wMap2
 	map_object wMap3
@@ -797,7 +799,7 @@ wMapObjects::
 	map_object wMap17
 	map_object wMap18
 	map_object wMap19
-	map_object wMap20
+	;map_object wMap20
 wMapObjectsEnd::
 
 wObjectMasks:: ds NUM_OBJECTS

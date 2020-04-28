@@ -16,7 +16,7 @@ BlankScreen: ; 8000
 	jp SetPalettes
 
 SpawnPlayer: ; 8029
-	ld a, -1
+	ld a, NO_FOLLOWER
 	ld [wObjectFollow_Leader], a
 	ld [wObjectFollow_Follower], a
 	xor a
@@ -85,10 +85,10 @@ WritePersonXY:: ; 80a1
 	call CheckObjectVisibility
 	ret c
 
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	ldh a, [hMapObjectIndexBuffer]
@@ -104,7 +104,7 @@ RefreshPlayerCoords: ; 80b8
 	ld hl, wPlayerStandingMapX
 	sub [hl]
 	ld [hl], d
-	ld hl, wMapObjects + MAPOBJECT_X_COORD
+	ld hl, wPlayerObjectXCoord
 	ld [hl], d
 	ld hl, wPlayerLastMapX
 	ld [hl], d
@@ -120,10 +120,109 @@ RefreshPlayerCoords: ; 80b8
 	ld hl, wPlayerLastMapY
 	ld [hl], e
 	ld e, a
+
+; Follower
 	ld a, [wObjectFollow_Leader]
-	cp $0
-	ret nz ; wtf
+	cp 0
+	ret nz ; no longer wtf
+	ld a, [wObjectFollow_Follower]
+	cp NO_FOLLOWER
+	ret z
+
+	call GetObjectStruct
+
+	ld hl, OBJECT_STANDING_X
+	add hl, bc
+	ld a, [hl]
+	add a, d
+	ld [hl], a
+	ld [wFollowerObjectXCoord], a
+
+	ld hl, OBJECT_LAST_X
+	add hl, bc
+	ld a, [hl]
+	add a, d
+	ld [hl], a
+
+	ld hl, OBJECT_STANDING_Y
+	add hl, bc
+	ld a, [hl]
+	add a, e
+	ld [hl], a
+	ld [wFollowerObjectYCoord], a
+
+	ld hl, OBJECT_LAST_Y
+	add hl, bc
+	ld a, [hl]
+	add a, e
+	ld [hl], a
 	ret
+
+TrimPetParam:
+	ld a, [wObjectFollow_Follower]
+	cp NO_FOLLOWER
+	ret z
+
+	ld a, wMapObjects - wFollowerObject
+	call ApplyDeletionToMapObject
+
+	ld b, wMapObjects - wFollowerObject
+	call PlayerSpawn_ConvertCoords
+
+	ld a, wMapObjects - wFollowerObject
+	call SetPetActor
+	ld a, [wPlayerDirection]
+	ld [wFollowerDirection], a
+
+	ld b, wMapObjects - wPlayerObject
+	ld c, wMapObjects - wFollowerObject
+	jp StartFollow
+
+FollowPetSetup:
+	call SetPetCastData
+
+	ld a, [hUsedSpriteIndex + 1]
+	ld [wFollowerObjectSprite], a
+	ld a, wMapObjects - wFollowerObject
+	call SetPetActor
+
+	ld b, wMapObjects - wPlayerObject
+	ld c, wMapObjects - wFollowerObject
+	jp StartFollow
+
+FollowPetCancel:
+	ld a, wMapObjects - wFollowerObject
+	call DeleteCast
+
+	ld a, NO_FOLLOWER
+	ld [wObjectFollow_Follower], a
+	ld [wObjectFollow_Leader], a
+	ret
+
+SetPetActor:
+	ldh [hMapObjectIndexBuffer], a
+	call GetMapObject
+
+	ld a, wObjectStructs - wFollowerStruct
+	ldh [hObjectStructIndexBuffer], a
+	ld de, wFollowerStruct
+	jr CopyMapObjectToObjectStruct
+
+SetPetCastData:
+	ld a, wMapObjects - wFollowerObject
+	ld hl, .PetCastData
+	call CopyPlayerObjectTemplate
+
+	ld a, [wPlayerStandingMapX]
+	ld d, a
+	ld a, [wPlayerStandingMapY]
+	dec a
+	ld e, a
+	ld b, wMapObjects - wFollowerObject
+	jp CopyDECoordsToMapObject
+
+.PetCastData:
+	object_event -4, -4, SPRITE_BULBASAUR, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
 
 CopyObjectStruct:: ; 80e7
 	call CheckObjectMask
@@ -435,7 +534,7 @@ CopyTempObjectToObjectStruct: ; 8286
 	add hl, de
 	ld [hl], STEP_TYPE_00
 
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, de
 	ld [hl], STANDING
 
@@ -455,7 +554,7 @@ CopyTempObjectToObjectStruct: ; 8286
 	add hl, de
 	ld [hl], a
 
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, de
 	ld [hl], a
 
@@ -474,7 +573,7 @@ CopyTempObjectToObjectStruct: ; 8286
 	ld hl, OBJECT_INIT_X
 	add hl, de
 	ld [hl], a
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, de
 	ld [hl], a
 	ld hl, wXCoord
@@ -539,19 +638,19 @@ TrainerWalkToPlayer: ; 831e
 	call GetObjectStruct
 
 ; get last talked coords, load to bc
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld c, [hl]
 	ld b, a
 
 ; get player coords, load to de
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, de
 	ld a, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, de
 	ld e, [hl]
 	ld d, a
@@ -598,15 +697,15 @@ FollowNotExact:: ; 839e
 	ret c
 
 ; Person 2 is now in bc, person 1 is now in de
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld c, [hl]
 	ld b, a
 
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, de
 	ld a, [hl]
 	cp b
@@ -620,7 +719,7 @@ FollowNotExact:: ; 839e
 	jr .continue
 
 .same_x
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, de
 	ld a, [hl]
 	cp c
@@ -633,7 +732,7 @@ FollowNotExact:: ; 839e
 	dec c
 
 .continue
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, de
 	ld [hl], b
 	ld a, b
@@ -646,7 +745,7 @@ FollowNotExact:: ; 839e
 	ld hl, OBJECT_SPRITE_X
 	add hl, de
 	ld [hl], a
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, de
 	ld [hl], c
 	ld a, c
@@ -663,7 +762,7 @@ FollowNotExact:: ; 839e
 	ld hl, OBJECT_RANGE
 	add hl, de
 	ld [hl], a
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, de
 	ld [hl], SPRITEMOVEDATA_FOLLOWNOTEXACT
 	ld hl, OBJECT_STEP_TYPE
@@ -700,10 +799,10 @@ GetRelativeFacing:: ; 8417
 ; load the coordinates of object d into bc
 	ld a, d
 	call GetObjectStruct
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld c, [hl]
 	ld b, a
@@ -711,10 +810,10 @@ GetRelativeFacing:: ; 8417
 ; load the coordinates of object e into de
 	ld a, e
 	call GetObjectStruct
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	pop bc
@@ -792,15 +891,15 @@ QueueFollowerFirstStep: ; 848a
 .QueueFirstStep:
 	ld a, [wObjectFollow_Leader]
 	call GetObjectStruct
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	ld a, [wObjectFollow_Follower]
 	call GetObjectStruct
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, d
 	cp [hl]
@@ -816,7 +915,7 @@ QueueFollowerFirstStep: ; 848a
 	ret
 
 .check_y
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld a, e
 	cp [hl]
