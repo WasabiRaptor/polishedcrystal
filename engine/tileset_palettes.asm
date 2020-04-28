@@ -325,7 +325,7 @@ LoadSpecialMapOBPalette:
 	and FORM_MASK
 	ld [wCurForm], a
 	ld a, [wPartyMon1Species]
-	ld [wCurIcon], a
+	ld [wCurSpecies], a
 
 	ld a, [wTimeOfDayPal]
 	jp GetRelevantMonOverworldPalettes

@@ -1160,7 +1160,7 @@ GetRelevantMonOverworldPalettes::
 	ld h, [hl]
 	ld l, a
 
-	ld a, [wCurIcon]
+	ld a, [wCurSpecies]
 	dec a
 	call NextHLTable
 

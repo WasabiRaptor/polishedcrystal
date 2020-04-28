@@ -65,7 +65,6 @@ LoadPartyMenuMonIconColors:
 	ld a, MON_SHINY
 	predef GetPartyParamLocation
 	call GetMenuMonIconPalette
-	push af
 
 	ld hl, wSprites + 3
 	ld a, [wCurPartyMon]
@@ -75,8 +74,8 @@ LoadPartyMenuMonIconColors:
 	ld e, a
 
 	add hl, de
-	pop af
-
+	ld a, [wCurPartyMon]
+	inc a
 	ld de, 4
 	ld [hl], a
 	add hl, de
@@ -134,7 +133,7 @@ GetMenuMonIconPalette::
 	and a
 .got_shininess:
 .got_species:
-	ld hl, wUnknOBPals
+	ld hl, wUnknOBPals palette 1
 	ld bc, 1 palettes
 	ld a, [wCurPartyMon]
 	rst AddNTimes
@@ -142,11 +141,7 @@ GetMenuMonIconPalette::
 	ld e, l
 
 	ld a, MIDDAY
-	call GetRelevantMonOverworldPalettes
-	ld a, [wCurPartyMon]
-	inc a
-	ld l, a
-	ret
+	jp GetRelevantMonOverworldPalettes
 
 LoadPartyMenuMonIcon:
 	call LoadPartyMenuMonIconColors
