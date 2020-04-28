@@ -15,11 +15,25 @@ DanielsTown_MapScriptHeader:
 
 	db 0 ; bg events
 
-	db 2 ; object events
-	object_event  9,  8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, GivePokemonScript, -1
+	db 3 ; object events
+	object_event 15,  7, SPRITE_LYRA, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, DTFollow, -1
+	object_event  9,  8, SPRITE_KRIS, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, GivePokemonScript, -1
 	object_event  7, 27, SPRITE_YOUNGSTER, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, 0, PERSONTYPE_TRAINER, 3, TrainerYoungsterJoey, -1
-	;object_event 10,  8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, checkpokegroupscript, -1
-	;object_event 11,  8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, setjohtoscript, -1
+	;object_event 10, 8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, checkpokegroupscript, -1
+	;object_event 11, 8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, setjohtoscript, -1
+
+	const_def 2
+	const FOLLOWER
+
+DTFollow:
+	follow PLAYER, FOLLOWER
+	applymovement PLAYER, DTFollowTestMovementData
+	stopfollow
+	end
+
+DTFollowTestMovementData:
+	step_left
+	step_end
 
 setjohtoscript:
 	;loadvar wPartyMon1Group, GROUP_GENERATION_THREE
