@@ -98,7 +98,7 @@ endr
 
 	ld a, [wTimeOfDay]
 	and 3
-	cp NITE
+	cp MIDNIGHT
 	jr c, .time_species
 	inc hl
 	inc hl

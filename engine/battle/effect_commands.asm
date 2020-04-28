@@ -614,7 +614,7 @@ BattleCommand_checkobedience: ; 343db
 
 .obeylevel
 	; The maximum obedience level is constrained by owned badges:
-	ld hl, wJohtoBadges
+	ld hl, wCycleCount
 
 	; risingbadge
 	bit RISINGBADGE, [hl]
@@ -8936,7 +8936,7 @@ BattleCommand_healweather:
 	cp GRASS
 	jr z, .synthesis_anim
 	ld a, [wTimeOfDay]
-	cp NITE
+	cp MIDNIGHT
 	jr nc, .moonlight_anim
 	xor a ; Morning Sun anim
 	jr .got_anim

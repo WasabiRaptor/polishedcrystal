@@ -157,7 +157,7 @@ CheckPhoneContactTimeOfDay: ; 900ad (24:40ad)
 
 	farcall CheckTime
 	pop af
-	and (1 << MORN) + (1 << DAY) + (1 << NITE)
+	and (1 << DAWN) + (1 << MIDDAY) + (1 << MIDNIGHT)
 	and c
 
 	pop de

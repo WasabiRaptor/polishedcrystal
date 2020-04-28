@@ -1193,7 +1193,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	call PokedexCountSeenCaught
 	ld de, wPokedexSeenCaughtCount
 	hlcoord 10, 2
-	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
+	lb bc, 2 | PRINTNUM_LEFTALIGN, 4
 	predef PrintNum
 	hlcoord 14, 1
 	ld de, String_OWN
@@ -1203,7 +1203,7 @@ Pokedex_DrawMainScreenBG: ; 4074c (10:474c)
 	call PokedexCountSeenCaught
 	ld de, wPokedexSeenCaughtCount
 	hlcoord 15, 2
-	lb bc, 2 | PRINTNUM_LEFTALIGN, 3
+	lb bc, 2 | PRINTNUM_LEFTALIGN, 4
 	predef PrintNum
 
 	pop af ; 0

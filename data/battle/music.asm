@@ -105,7 +105,7 @@ PlayBattleMusic: ; 2ee6c
 	and a ; Johto
 	jr nz, .ok
 	ld a, [wTimeOfDay]
-	cp NITE
+	cp MIDNIGHT
 	jr nz, .ok
 	ld e, 3 ; Johto at night
 .ok

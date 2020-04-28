@@ -133,6 +133,14 @@ add_palettes: macro
 	dw \1Palettes
 endm
 
+add_overworldpalettetable: macro
+	dw \1OverworldPalettePointers
+endm
+
+add_overworldpalettes: macro
+	dw \1OverworldPalettes
+endm
+
 add_evosattackstable: macro
 	dw \1EvosAttacksPointers
 endm
@@ -212,6 +220,11 @@ endm
 regional_palettes: macro
     dba \1PalettePointerTable
 endm
+
+regional_overworldpalettes: macro
+    dba \1OverworldPalettePointerTable
+endm
+
 
 regional_picpointers: macro
     dbw BANK(\1PicPointers), \1PicPointerTable

@@ -518,13 +518,13 @@ PrintHour: ; 90b3e (24:4b3e)
 GetTimeOfDayString: ; 90b58 (24:4b58)
 	ld a, c
 	cp DAWN_HOUR
-	ld de, .NITE
+	ld de, .MIDNIGHT
 	ret c
 	cp MIDDAY_HOUR
-	ld de, .MORN
+	ld de, .DAWN
 	ret c
 	cp DUSK_HOUR
-	ld de, .DAY
+	ld de, .MIDDAY
 	ret c
 	cp MIDNIGHT_HOUR
 	ld de, .DUSK
@@ -532,9 +532,9 @@ GetTimeOfDayString: ; 90b58 (24:4b58)
 
 ; 90b71 (24:4b71)
 
-.NITE: db "Midnight@"
-.MORN: db "Dawn@"
-.DAY: db "Midday@"
+.MIDNIGHT: db "Midnight@"
+.DAWN: db "Dawn@"
+.MIDDAY: db "Midday@"
 .DUSK: db "Dusk@"
 ; 90b7f
 
@@ -788,7 +788,7 @@ PokegearMap_InitPlayerIcon: ; 9106a
 	push af
 	depixel 0, 0
 	ld b, SPRITE_ANIM_INDEX_RED_WALK
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .got_gender
 	ld b, SPRITE_ANIM_INDEX_BLUE_WALK
@@ -2669,7 +2669,7 @@ _Area: ; 91d11
 	inc de
 	push bc
 	ld c, 0 ; RED
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .got_gender
 	inc c   ; BLUE
@@ -2923,7 +2923,7 @@ TownMapPlayerIcon: ; 91fa6
 ; Animation/palette
 	depixel 0, 0
 	ld b, SPRITE_ANIM_INDEX_RED_WALK ; Male
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .got_gender
 	ld b, SPRITE_ANIM_INDEX_BLUE_WALK ; Female

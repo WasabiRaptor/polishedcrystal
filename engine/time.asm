@@ -347,12 +347,12 @@ GetTimeOfDay::
 
 ; hours for the time of day
 TimesOfDay:
-	db DAWN_HOUR, NITE
-	db MIDDAY_HOUR, MORN
-	db DUSK_HOUR, DAY
-	db MIDNIGHT_HOUR, EVENING
-	db 24, NITE
-	db -1, MORN
+	db DAWN_HOUR, MIDNIGHT
+	db MIDDAY_HOUR, DAWN
+	db DUSK_HOUR, MIDDAY
+	db MIDNIGHT_HOUR, DUSK
+	db 24, MIDNIGHT
+	db -1, DAWN
 
 StageTimeForSave:
 	call UpdateTime

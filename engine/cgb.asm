@@ -346,15 +346,15 @@ LoadPokedexIconPals::
 	push de
 	farcall GetMenuMonIconPalette.got_shininess
 	pop de
-	ld b, 0
-	ld c, a
-	ld hl, OWPalsTable
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call LoadHLPaletteIntoDE
+	;ld b, 0
+	;ld c, a
+	;ld hl, OWPalsTable
+	;add hl, bc
+	;add hl, bc
+	;ld a, [hli]
+	;ld h, [hl]
+	;ld l, a
+	;call LoadHLPaletteIntoDE
 	pop de
 	pop bc
 	pop hl
@@ -788,7 +788,7 @@ _CGB_PackPals: ; 93d3
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jr z, .tutorial_female
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .male
 .tutorial_female
@@ -1052,7 +1052,7 @@ LoadFirstTwoTrainerCardPals:
 	call LoadPalette_White_Col1_Col2_Black
 
 	; player sprite
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	and a
 	ld a, CHRIS
 	jr z, .got_gender
