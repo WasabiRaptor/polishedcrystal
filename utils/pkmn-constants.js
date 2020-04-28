@@ -50,7 +50,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             list.map(poke=>`${poke.title}PokedexEntryPointers::\n\tadd_pokedexentry ${poke.title}\n\n`).join(""),
         "utf8");
 
-        fs.writeFileSync(`data/pokemon/${region.lower}/dex_entries.asm`,
+        fs.writeFileSync(`data/pokemon/${region.lower}_dex_entries.asm`,
             `INCLUDE "constants.asm"\n` +
             list.map((poke,i)=>
                 (i % 30 ? "" : `\nSECTION "${region.title} Pokedex Entries ${i/30+1}", ROMX\n\n`) +
@@ -192,10 +192,10 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_palette_pointers.asm`,
             `${region.title}OverworldPalettePointers::\n` +
-            list.map(poke=>`${poke.title}PalettePointers::\n\tadd_overworldpalettes ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}OverworldPalettePointers::\n\tadd_overworldpalettes ${poke.title}\n\n`).join(""),
         "utf8");
 
-        fs.writeFileSync(`data/pokemon/${region.lower}/palettes.asm`,
+        fs.writeFileSync(`data/pokemon/${region.lower}/overworld_palettes.asm`,
             `${region.title}OverworldPalettes:\n` +
             list.map(poke=>`${poke.title}OverworldPalettes:\n` +
             `${poke.title}NormalOverworldPaletteDawn:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
