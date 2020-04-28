@@ -301,202 +301,31 @@ rept 8
 endr
 endc
 
+PlayerPaletteOptions:
+INCLUDE "gfx/overworld/npc_sprites.pal" ;duplicating this for now
+
 LoadSpecialMapOBPalette:
-	call GetOvercastIndex
-	and a
-	jr z, .not_overcast
-	ld hl, OvercastOBPalette
+	ld hl, PlayerPaletteOptions
 	ld a, [wTimeOfDayPal]
-	and 3
 	ld bc, 8 palettes
 	rst AddNTimes
-	ld a, $5
+	ld a, [wPlayerOverworldPalette]
+	ld bc, 1 palettes
+	rst AddNTimes
+
 	ld de, wUnknOBPals
-	ld bc, 8 palettes
-	jp FarCopyWRAM
+	ld a, BANK(wUnknOBPals)
+	call FarCopyWRAM
 
-.not_overcast
-	ld a, [wMapGroup]
-	cp GROUP_KRISS_HOUSE_2F
-	jr nz, .not_lyras_house_2f_or_kriss_house_2f
-	cp MAP_KRISS_HOUSE_2F
-	jp z, .load_party_mon_palettes
+	ld de, wUnknOBPals palette 1
 
-.load_single_palette:
-	ld bc, 1 palettes
-.load_ob_palettes:
-	ld a, $5
-	jp FarCopyWRAM
+	ld a, [wPartyMon1Group]
+	ld [wCurGroup], a
+	ld a, [wPartyMon1Form]
+	and FORM_MASK
+	ld [wCurForm], a
+	ld a, [wPartyMon1Species]
+	ld [wCurSpecies], a
 
-.not_lyras_house_2f_or_kriss_house_2f
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetWorldMapLocation
-	;cp CINNABAR_VOLCANO
-	;jr z, .load_bg_rock_palette
-	;cp DIM_CAVE
-	;jr z, .load_bg_rock_palette
-	;cp ICE_PATH
-	;jr z, .load_bg_rock_palette
-	;cp SEAFOAM_ISLANDS
-	;jr z, .load_bg_rock_palette
-	;cp WHIRL_ISLANDS
-	;ret z
-.load_bg_rock_palette
-	ld hl, wUnknBGPals palette PAL_BG_BROWN
-.load_rock_palette
-	ld de, wUnknOBPals palette PAL_OW_ROCK
-	jp .load_single_palette
-
-.get_timeofday_party_mon_palettes:
-	ld hl, OverworldPartyMonPalettes
 	ld a, [wTimeOfDayPal]
-	and 3
-	ld bc, 3 palettes
-	rst AddNTimes
-	ret
-
-.load_gray_party_mon_palette:
-	call .get_timeofday_party_mon_palettes
-	ld de, wUnknOBPals palette PAL_OW_ROCK
-	ld bc, 1 palettes
-	ld a, $5
-	jp FarCopyWRAM
-
-.load_party_mon_palettes:
-	call .get_timeofday_party_mon_palettes
-	ld de, wUnknOBPals palette PAL_OW_SILVER
-	ld bc, 3 palettes
-	ld a, $5
-	jp FarCopyWRAM
-
-VermilionGymOBPalette_Tree:
-if !DEF(MONOCHROME)
-	RGB 27, 31, 27
-	RGB 31, 31, 30
-	RGB 19, 24, 31
-	RGB 05, 10, 27
-else
-	MONOCHROME_RGB_FOUR_OW
-endc
-
-LightningIslandOBPalette_Tree:
-if !DEF(MONOCHROME)
-	RGB 19, 15, 10
-	RGB 31, 31, 31
-	RGB 31, 27, 01
-	RGB 31, 16, 01
-else
-	MONOCHROME_RGB_FOUR_OW
-endc
-
-RockTunnelOBPalette_Tree:
-if !DEF(MONOCHROME)
-	RGB 15, 14, 24
-	RGB 31, 30, 31
-	RGB 24, 18, 31
-	RGB 12, 08, 18
-else
-	MONOCHROME_RGB_FOUR_OW
-endc
-
-LyrasHouse2FOBPalette_Rock:
-if !DEF(MONOCHROME)
-	RGB 30, 28, 26
-	RGB 30, 28, 02
-	RGB 08, 14, 24
-	RGB 07, 07, 07
-else
-	MONOCHROME_RGB_FOUR
-endc
-
-GoldenrodHarborOBPalette_Purple:
-if !DEF(MONOCHROME)
-; morn
-	RGB 28, 31, 16
-	RGB 28, 31, 16
-	RGB 18, 19, 31
-	RGB 07, 07, 07
-; day
-	RGB 27, 31, 27
-	RGB 27, 31, 27
-	RGB 18, 19, 31
-	RGB 07, 07, 07
-; nite
-	RGB 15, 14, 24
-	RGB 15, 14, 24
-	RGB 10, 09, 20
-	RGB 00, 00, 00
-else
-	MONOCHROME_RGB_FOUR_OW
-	MONOCHROME_RGB_FOUR_OW
-	MONOCHROME_RGB_FOUR_OW_NIGHT
-endc
-
-PokecomCenter1FOBPalette_Rock:
-if !DEF(MONOCHROME)
-	RGB 30, 28, 26
-	RGB 30, 28, 26
-	RGB 11, 13, 31
-	RGB 07, 07, 07
-else
-	MONOCHROME_RGB_FOUR
-endc
-
-PokecomCenterOfficeOBPalette_Purple:
-if !DEF(MONOCHROME)
-	RGB 28, 31, 16
-	RGB 31, 22, 10
-	RGB 07, 17, 21
-	RGB 00, 00, 00
-else
-	MONOCHROME_RGB_FOUR_OW
-endc
-
-GoldenrodMuseumOBPalettes_TreeRock:
-if !DEF(MONOCHROME)
-	RGB 30, 28, 26
-	RGB 30, 28, 26
-	RGB 13, 13, 13
-	RGB 07, 07, 07
-
-	RGB 30, 28, 26
-	RGB 31, 28, 28
-	RGB 22, 27, 26
-	RGB 09, 10, 10
-else
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-endc
-
-OverworldPartyMonPalettes:
-if !DEF(MONOCHROME)
-; morn
-	RGB 28,31,16, 31,22,10, 13,13,13, 00,00,00 ; gray
-	RGB 28,31,16, 31,22,10, 31,10,11, 00,00,00 ; pink
-	RGB 28,31,16, 31,22,10, 03,23,21, 00,00,00 ; teal
-; day
-	RGB 27,31,27, 31,19,10, 13,13,13, 00,00,00 ; gray
-	RGB 27,31,27, 31,19,10, 31,10,11, 00,00,00 ; pink
-	RGB 27,31,27, 31,19,10, 03,23,21, 00,00,00 ; teal
-; nite
-	RGB 15,14,24, 16,09,09, 07,07,10, 00,00,00 ; gray
-	RGB 15,14,24, 16,09,09, 17,07,08, 00,00,00 ; pink
-	RGB 15,14,24, 16,09,09, 02,12,16, 00,00,00 ; teal
-else
-rept 6
-	MONOCHROME_RGB_FOUR_OW
-endr
-rept 3
-	MONOCHROME_RGB_FOUR_OW_NIGHT
-endr
-endc
+	jp GetRelevantMonOverworldPalettes

@@ -5,7 +5,7 @@ GetPlayerIcon: ; 8832c
 	ld de, ChrisSpriteGFX
 	ld b, BANK(ChrisSpriteGFX)
 
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	ret z
 
@@ -17,7 +17,7 @@ GetPlayerIcon: ; 8832c
 
 GetCardPic: ; 8833e
 	ld hl, ChrisCardPic
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .GotClass
 	ld hl, KrisCardPic
@@ -36,7 +36,7 @@ INCBIN "gfx/trainer_card/kris_card.5x7.2bpp"
 
 GetPlayerBackpic: ; 88825
 	ld hl, ChrisBackpic
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .ok
 	ld hl, KrisBackpic
@@ -61,7 +61,7 @@ HOF_LoadTrainerFrontpic: ; 88840
 	xor a
 	ldh [hBGMapMode], a
 	ld e, 0
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .GotClass
 	ld e, 1
@@ -70,7 +70,7 @@ HOF_LoadTrainerFrontpic: ; 88840
 	ld a, e
 	ld [wTrainerClass], a
 	ld de, ChrisCardPic
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .GotPic
 	ld de, KrisCardPic

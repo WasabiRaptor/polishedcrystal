@@ -611,7 +611,7 @@ TrainerCard_JohtoBadgesOAM: ; 254c9
 	; cycle 1: face tile, in1 tile, in2 tile, in3 tile
 	; cycle 2: face tile, in1 tile, in2 tile, in3 tile
 
-	dw wJohtoBadges
+	dw wCycleCount
 
 	; Zephyr Badge
 	db $68, $18, 0, 0, 0, 0

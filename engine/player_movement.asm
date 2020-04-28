@@ -980,9 +980,11 @@ SetTallGrassAttributes::
 	ld [wPrevGrassTileAddress+1], a
 
 	call GetBGMapPlayerOffset
-	ld a, h
-	ld [wGrassTileAddress], a
+	ld bc, BG_MAP_WIDTH
+	add hl, bc
 	ld a, l
+	ld [wGrassTileAddress], a
+	ld a, h
 	ld [wGrassTileAddress+1], a
 	ret
 

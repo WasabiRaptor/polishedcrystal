@@ -447,7 +447,7 @@ GetGSBallPichu:
 	predef TryAddMonToParty
 
 	ld b, MALE
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	and a
 	jr z, .male_ot_pikachu
 	ld b, FEMALE

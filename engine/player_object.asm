@@ -32,7 +32,7 @@ SpawnPlayer: ; 8029
 	ld a, [wPlayerSpriteSetupFlags]
 	bit 2, a
 	jr nz, .ok
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .ok
 	ln e, (1 << 3) | PAL_OW_BLUE, PERSONTYPE_SCRIPT

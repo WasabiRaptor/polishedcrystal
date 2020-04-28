@@ -1472,9 +1472,9 @@ UnknownScript_0xa0a00:
 	jump PhoneScript_HangupText_Male
 
 UnknownScript_0xa0a08:
-	checktime 1 << MORN
+	checktime 1 << DAWN
 	iftrue UnknownScript_0xa0a1d
-	checktime 1 << NITE
+	checktime 1 << MIDNIGHT
 	iftrue UnknownScript_0xa0a25
 	setevent EVENT_KENJI_ON_BREAK
 	farwritetext UnknownText_0x66f11

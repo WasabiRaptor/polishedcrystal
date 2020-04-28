@@ -1,9 +1,3 @@
-INCLUDE "data/pokemon/kanto/menu_icon_pals.asm"
-INCLUDE "data/pokemon/johto/menu_icon_pals.asm"
-INCLUDE "data/pokemon/hoenn/menu_icon_pals.asm"
-INCLUDE "data/pokemon/sinnoh/menu_icon_pals.asm"
-INCLUDE "data/pokemon/unova/menu_icon_pals.asm"
-INCLUDE "data/pokemon/kalos/menu_icon_pals.asm"
 
 LoadOverworldMonIcon: ; 8e82b
 	ld a, e
@@ -71,7 +65,6 @@ LoadPartyMenuMonIconColors:
 	ld a, MON_SHINY
 	predef GetPartyParamLocation
 	call GetMenuMonIconPalette
-	push af
 
 	ld hl, wSprites + 3
 	ld a, [wCurPartyMon]
@@ -81,8 +74,8 @@ LoadPartyMenuMonIconColors:
 	ld e, a
 
 	add hl, de
-	pop af
-
+	ld a, [wCurPartyMon]
+	inc a
 	ld de, 4
 	ld [hl], a
 	add hl, de
@@ -139,22 +132,16 @@ GetMenuMonIconPalette::
 .not_shiny
 	and a
 .got_shininess:
-	push af
 .got_species:
-	call GetRelevantMonIconColors
-	ld c, a
-	ld b, 0
-	add hl, bc
-	ld e, [hl]
-	pop af
-	ld a, e
-	jr c, .shiny
-	swap a
-.shiny
-	and $f
-.done
-	ld l, a
-	ret
+	ld hl, wUnknOBPals palette 1
+	ld bc, 1 palettes
+	ld a, [wCurPartyMon]
+	rst AddNTimes
+	ld d, h
+	ld e, l
+
+	ld a, MIDDAY
+	jp GetRelevantMonOverworldPalettes
 
 LoadPartyMenuMonIcon:
 	call LoadPartyMenuMonIconColors
@@ -511,25 +498,3 @@ GetRelevantIconPointersAndBank:
 	ret
 
 INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"
-
-GetRelevantMonIconColors:
-	ld a, [wCurGroup]
-; given species in a, return *PicPointers in hl
-; returns c for variants, nc for normal species
-	ld hl, RegionalIconPalTable
-	call dbwArray
-
-	ld de, 4
-	call IsInArray
-	inc hl
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ld a, [wCurForm]
-	ret c
-	ld a, [wCurIcon]
-	dec a
-	ret
-
-INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"

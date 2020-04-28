@@ -9348,7 +9348,7 @@ GetTrainerBackpic: ; 3fbff
 	ld a, [wPlayerSpriteSetupFlags]
 	bit 2, a ; transformed to male
 	jr nz, .Decompress
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .Decompress
 

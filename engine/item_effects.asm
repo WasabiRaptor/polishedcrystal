@@ -1291,7 +1291,7 @@ DuskBallMultiplier:
 	jr z, .dusk
 
 	ld a, [wTimeOfDay]
-	cp 1 << NITE
+	cp 1 << MIDNIGHT
 	jr z, .dusk
 
 	ret

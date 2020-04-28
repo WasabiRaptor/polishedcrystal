@@ -1312,7 +1312,7 @@ DrawPackGFX: ; 1089d
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jr z, .female
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	rrca
 	jr c, .male
 .female

@@ -206,7 +206,7 @@ GetTimePalette: ; 8c117
 	and 1 << 2 ;flash
 	ld a, DARKNESS
 	ret nz
-	ld a, DAY
+	ld a, MIDDAY
 	ret
 DmgToCgbTimePals: ; 8c14e
 	push hl

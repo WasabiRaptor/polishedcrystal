@@ -22,9 +22,9 @@ KrissHouse1F_MapScriptHeader:
 
 	db 5 ; object events
 	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_1
-	object_event  3,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MORN), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << DAY), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	object_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << NITE), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	object_event  3,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << DAWN), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << MIDDAY), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	object_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MIDNIGHT), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
 	object_event  6,  4, SPRITE_MATRON, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
 
 	const_def 1 ; object constants
@@ -114,11 +114,11 @@ TVScript:
 	line "rolling too!"
 	done
 
-MomScript:	
+MomScript:
 	opentext
 	playmusic MUSIC_NONE
 	special RestartMapMusic
-	givekeyitem BICYCLE 
+	givekeyitem BICYCLE
 	;givepoke ZYGARDE_10, 5, SWEET_HONEY, TEN_PERCENT_ZYGARDE, CHERISH_BALL, HIDDEN_ABILITY
 	closetext
 	end
@@ -259,11 +259,11 @@ NeighborScript:
 	faceplayer
 	opentext
 	portrait ZYGARDE_NEUTRAL
-	checktime 1 << MORN
+	checktime 1 << DAWN
 	iftrue .MornScript
-	checktime 1 << DAY
+	checktime 1 << MIDDAY
 	iftrue .DayScript
-	checktime 1 << NITE
+	checktime 1 << MIDNIGHT
 	iftrue .NiteScript
 
 .MornScript:
@@ -322,4 +322,3 @@ NeighborScript:
 
 .NeighborNameText:
 	db "Zygarde@"
-

@@ -1,8 +1,6 @@
 TrainerPalettes:
 
-if !DEF(MONOCHROME)
-wPlayerPalette:           INCLUDE "gfx/trainers/cal.pal"
-KrisPalette:
+PlayerPalette:           INCLUDE "gfx/trainers/cal.pal"
 CarriePalette:           INCLUDE "gfx/trainers/carrie.pal"
 CalPalette:              INCLUDE "gfx/trainers/cal.pal"
 FalknerPalette:          INCLUDE "gfx/trainers/falkner.pal"
@@ -154,11 +152,3 @@ AerodactylFossilPalette: INCLUDE "gfx/trainers/aerodactyl_fossil.pal"
 CuboneArmorPalette:      INCLUDE "gfx/trainers/cubone_armor.pal"
 MeteoritePalette:        INCLUDE "gfx/trainers/meteorite.pal"
 SilhouettePalette:       INCLUDE "gfx/trainers/silhouette.pal"
-else
-wPlayerPalette:
-KrisPalette:
-Lyra1Palette:
-rept NUM_TRAINER_CLASSES
-	MONOCHROME_RGB_TWO
-endr
-endc

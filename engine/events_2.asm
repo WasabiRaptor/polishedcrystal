@@ -813,7 +813,7 @@ LoadFishingGFX: ; b84b3
 	ldh [rVBK], a
 
 	ld de, FishingGFX
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .got_gender
 	ld de, KrisFishingGFX
