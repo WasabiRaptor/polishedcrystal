@@ -86,9 +86,9 @@ BGMapAnchorTopLeft::
 ; 2e31
 ResetGrassTileCenter::
 	hlcoord $14, $14
-	ld a, h
-	ld [wGrassTileAddress], a
 	ld a, l
+	ld [wGrassTileAddress], a
+	ld a, h
 	ld [wGrassTileAddress+1], a
 	ld a, 1
 	ld [wHasPlayerMoved], a
