@@ -788,7 +788,7 @@ _CGB_PackPals: ; 93d3
 	ld a, [wBattleType]
 	cp BATTLETYPE_TUTORIAL
 	jr z, .tutorial_female
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .male
 .tutorial_female
@@ -1052,7 +1052,7 @@ LoadFirstTwoTrainerCardPals:
 	call LoadPalette_White_Col1_Col2_Black
 
 	; player sprite
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	and a
 	ld a, CHRIS
 	jr z, .got_gender

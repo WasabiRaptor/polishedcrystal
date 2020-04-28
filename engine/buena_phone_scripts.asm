@@ -13,9 +13,9 @@ BuenaPhoneScript2:
 	jump BuenaPhoneScript_Random2
 
 BuenaPhoneScript_CheckTimeOfDay1:
-	checktime 1 << MORN
+	checktime 1 << DAWN
 	iftrue .morn
-	checktime 1 << DAY
+	checktime 1 << MIDDAY
 	iftrue .day
 	writetext UnknownText_0xa0d42
 	buttonsound
@@ -38,9 +38,9 @@ BuenaPhoneScript_AfterMidnight1:
 BuenaPhoneScript_CheckTimeOfDay2:
 	checkcode VAR_HOUR
 	ifgreater 17, BuenaPhoneScript_AfterMidnight2
-	checktime 1 << MORN
+	checktime 1 << DAWN
 	iftrue .morn
-	checktime 1 << DAY
+	checktime 1 << MIDDAY
 	iftrue .day
 	writetext UnknownText_0xa0e29
 	buttonsound

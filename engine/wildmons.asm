@@ -103,7 +103,7 @@ FindNest: ; 2a01f
 ;here it is getting the region table to load not *very* important, but just mainly which data table it is loading into hl and ending up looking at, easily swapped out
 	ld hl, InvarGrassWildMons
 	call .FindGrass
-; it calls find grass or find water because they are indeed structured differently, as I don't believe water mons take time of day into account in the current form 
+; it calls find grass or find water because they are indeed structured differently, as I don't believe water mons take time of day into account in the current form
 	ld hl, InvarWaterWildMons
 	call .FindWater
 	call .RoamMon1
@@ -390,7 +390,7 @@ _ChooseWildEncounter:
 	add hl, bc
 	pop bc
 	jr .got_table ;water only has one percentage so if so we're done
-	
+
 .notWater
 	ld bc, WILD_GRASS_SIZE - 3
 	add hl, bc
@@ -406,7 +406,7 @@ _ChooseWildEncounter:
 	; Check if we can actually encounter a valid species of the given type
 	push de	; Probability Table 1
 	push hl	; Address? 2
-.force_loop	
+.force_loop
 	inc hl ; We don't care about level
 	ld a, [hli]
 	ld [wCurSpecies], a
@@ -456,7 +456,7 @@ _ChooseWildEncounter:
 	and ENCOUNTER_TIME_MASK
 	ld b, a
 	ld a, [wTimeOfDay]
-	cp MORN
+	cp DAWN
 	jr nz, .notMorn
 	bit 7, b
 	jr nz, .rightTime
@@ -464,7 +464,7 @@ _ChooseWildEncounter:
 	jp .nextMon
 
 .notMorn
-	cp DAY
+	cp MIDDAY
 	jr nz, .notDay
 	bit 6, b
 	jr nz, .rightTime
@@ -472,7 +472,7 @@ _ChooseWildEncounter:
 	jp .nextMon
 
 .notDay
-	cp EVENING
+	cp DUSK
 	jr nz, .notDusk
 	bit 5, b
 	jr nz, .rightTime
@@ -487,7 +487,7 @@ _ChooseWildEncounter:
 
 .rightTime
 	pop af	; 3
-	
+
 checkpercent: MACRO
 	cp WILD_\1P
 	jr nz, .not\1
@@ -525,7 +525,7 @@ ENDM
 
 .got_it
 	pop bc ; 2
-	inc hl 
+	inc hl
 	ld a, [hli] ; Gets species
 	ld b, a
 ; If the Pokemon is encountered by surfing, we need to give the levels some variety.

@@ -38,7 +38,7 @@ CheckSleepingTreeMon:: ; 3eb38
 ; Get list for the time of day
 	ld hl, AsleepTreeMonsMorn
 	ld a, [wTimeOfDay]
-	cp DAY
+	cp MIDDAY
 	jr c, .Check
 	ld hl, AsleepTreeMonsDay
 	jr z, .Check
@@ -58,4 +58,3 @@ CheckSleepingTreeMon:: ; 3eb38
 .NotSleeping:
 	and a
 	ret
-

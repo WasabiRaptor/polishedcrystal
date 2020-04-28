@@ -63,11 +63,11 @@ PokeCenterNurseScript:
 	opentext
 	checkevent EVENT_NURSE_SAW_FOUR_TRAINER_STARS
 	iftrue .four_star_center
-	checktime 1 << MORN
+	checktime 1 << DAWN
 	iftrue .morn
-	checktime 1 << DAY
+	checktime 1 << MIDDAY
 	iftrue .day
-	checktime 1 << NITE
+	checktime 1 << MIDNIGHT
 	iftrue .nite
 	jump .ok
 
@@ -345,8 +345,8 @@ RadioTowerRocketsScript:
 	end
 
 BugContestResultsWarpScript:
-	
-	
+
+
 BugContestResultsScript:
 	ret
 InitializeEventsScript:

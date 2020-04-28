@@ -126,7 +126,7 @@ NamingScreen: ; 116c1
 
 .Player: ; 1178d (4:578d)
 	farcall GetPlayerIcon
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	ld c, SPRITE_ANIM_INDEX_RED_WALK
 	jr z, .got_player_walk

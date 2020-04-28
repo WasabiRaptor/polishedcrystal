@@ -185,7 +185,7 @@ ResetWRAM: ; 5ba7
 	xor a
 	ld [wMonStatusFlags], a
 
-	ld [wPlayerGender], a
+	ld [wPlayerOverworldSprite], a
 
 	ld hl, wNumItems
 	call _ResetWRAM_InitList
@@ -608,7 +608,7 @@ InitGender: ; 48dcb (12:4dcb)
 	call CloseWindow
 	ld a, [wMenuCursorY]
 	dec a
-	ld [wPlayerGender], a
+	ld [wPlayerOverworldSprite], a
 
 	call ClearTileMap
 	call DrawIntroPlayerPic
@@ -619,7 +619,7 @@ InitGender: ; 48dcb (12:4dcb)
 	call Intro_RotatePalettesLeftFrontpic
 
 	ld hl, SoYoureABoyText
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	and a
 	jr z, .boy
 	ld hl, SoYoureAGirlText
@@ -674,7 +674,7 @@ NamePlayer: ; 0x6074
 	farcall NamingScreen
 	ld hl, wPlayerName
 	ld de, DefaultMalePlayerName
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .Male
 	ld de, DefaultFemalePlayerName
@@ -762,7 +762,7 @@ IntroFadePalettesEnd
 DrawIntroPlayerPic:
 	xor a
 	ld [wCurPartySpecies], a
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .male
 	ld a, CARRIE
@@ -814,7 +814,7 @@ Intro_PlacePlayerSprite: ; 61cd
 	ld [hli], a
 
 	ld b, 0
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	bit 0, a
 	jr z, .male
 	ld b, 1

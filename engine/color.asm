@@ -607,7 +607,7 @@ LoadMapPals:
 	add hl, de
 	ld a, [wTimeOfDayPal]
 	and 3
-	cp NITE
+	cp MIDNIGHT
 	jr c, .morn_day
 rept 4
 	inc hl
@@ -722,25 +722,10 @@ GetEnemyFrontpicPalette:
 GetPlayerOrMonPalette:
 	and a
 	jp nz, GetMonPalette
-	ld a, [wPlayerSpriteSetupFlags]
-	bit 2, a ; transformed to male
-	jr nz, .male
-	ld a, [wPlayerGender]
-	and a
-	jr z, .male
-	ld a, [wBattleType]
-	cp BATTLETYPE_TUTORIAL
-	jr z, .lyra
-	ld hl, KrisPalette
-	ret
-
-.male
-	ld hl, wPlayerPalette
-	jr .gotPal
-
-.lyra
-	ld hl, Lyra1Palette
-.gotPal
+	ld hl, PlayerPalette
+	ld a, wPlayerOverworldPalette
+	ld bc, 4
+	rst AddNTimes
 	jp LoadPalette_White_Col1_Col2_Black
 
 GetFrontpicPalette:

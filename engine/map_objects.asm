@@ -3050,6 +3050,7 @@ PRIORITY_HIGH EQU $30
 
 .Addresses: ; 5ace
 	dw wPlayerStruct
+	dw wPetFollowerStruct
 	dw wObject1Struct
 	dw wObject2Struct
 	dw wObject3Struct
@@ -3061,5 +3062,4 @@ PRIORITY_HIGH EQU $30
 	dw wObject9Struct
 	dw wObject10Struct
 	dw wObject11Struct
-	dw wObject12Struct
 ; 5ae8

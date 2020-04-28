@@ -161,7 +161,7 @@ EngineFlags: ; 80462
 
 	engine_flag wGameTimerPause, 7 ; game timer pause
 
-	engine_flag wPlayerGender, 0 ; player is female
+	engine_flag wPlayerOverworldSprite, 0 ; player is female
 
 	engine_flag wCelebiEvent, 2 ; have gs ball after kurt examined it
 	engine_flag wCelebiEvent, 3 ; have silphscope2

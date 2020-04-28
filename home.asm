@@ -1116,22 +1116,12 @@ GetMonPalette::
 
 	ld a, [wCurPartySpecies]
 	dec a
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call NextHLTable
+
 
 	ld a, [wCurForm]
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
+	call NextHLTable
+
 
 	pop bc
 	homecall CheckShininess
@@ -1149,6 +1139,64 @@ endr
 	ret
 
 INCLUDE "data/pokemon/variant_palette_table.asm"
+
+GetRelevantMonOverworldPalettes:
+	ld b, a
+	ldh a, [hROMBank]
+	push af
+
+	push de
+	ld a, b
+	push af ; preserve the inputted time of day and flag for shiny
+
+
+	ld a, [wCurGroup]
+	ld hl, RegionalOverworldPalTable
+	ld bc, 3
+	rst AddNTimes
+	ld a, [hli]
+	rst Bankswitch
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, [wCurIcon]
+	dec a
+	call NextHLTable
+
+
+	ld a, [wCurForm]
+	call NextHLTable
+	pop af ; get the inputted time of day pal and flag for shiny
+	push af
+	ld bc, 4 ; two colors in the palettes
+	rst AddNTimes
+	pop af
+	jr nc, .not_shiny
+	ld bc, 4 * 5
+	add hl, bc
+.not_shiny
+
+	pop de
+
+	call LoadPalette_White_Col1_Col2_Black
+
+	pop af
+	rst Bankswitch
+	ret
+
+
+INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"
+
+NextHLTable::
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ret
 
 dbwArray::
 	ld de, 3

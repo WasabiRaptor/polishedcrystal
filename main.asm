@@ -177,10 +177,10 @@ CheckTime:: ; c000
 	ret
 
 TimeOfDayTable: ; c012
-	db MORN, 1 << MORN
-	db DAY,  1 << DAY
-	db NITE, 1 << NITE
-	db NITE, 1 << NITE
+	db DAWN, 1 << DAWN
+	db MIDDAY,  1 << MIDDAY
+	db MIDNIGHT, 1 << MIDNIGHT
+	db MIDNIGHT, 1 << MIDNIGHT
 	db -1
 
 GetBreedMon1LevelGrowth: ; e698
@@ -2336,7 +2336,7 @@ SetCaughtData: ; 4db49
 	predef GetPartyLocation
 SetBoxmonOrEggmonCaughtData: ; 4db53
 	; CaughtGender
-	ld a, [wPlayerGender]
+	ld a, [wPlayerOverworldSprite]
 	and a
 	jr z, .male
 	ld a, FEMALE
@@ -5712,6 +5712,10 @@ INCLUDE "data/pokemon/kanto/palette_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/palette_pointers.asm"
 INCLUDE "data/pokemon/kanto/palettes.asm"
 
+INCLUDE "data/pokemon/kanto/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/overworld_palette__pointers.asm"
+INCLUDE "data/pokemon/kanto/overworld_palettes.asm"
+
 
 SECTION "Johto Base Data", ROMX
 
@@ -5726,6 +5730,10 @@ INCLUDE "data/pokemon/johto/names.asm"
 INCLUDE "data/pokemon/johto/palette_pointer_table.asm"
 INCLUDE "data/pokemon/johto/palette_pointers.asm"
 INCLUDE "data/pokemon/johto/palettes.asm"
+
+INCLUDE "data/pokemon/johto/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/johto/overworld_palette__pointers.asm"
+INCLUDE "data/pokemon/johto/overworld_palettes.asm"
 
 
 SECTION "Hoenn Base Data", ROMX
@@ -5742,6 +5750,10 @@ INCLUDE "data/pokemon/hoenn/palette_pointer_table.asm"
 INCLUDE "data/pokemon/hoenn/palette_pointers.asm"
 INCLUDE "data/pokemon/hoenn/palettes.asm"
 
+INCLUDE "data/pokemon/hoenn/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/overworld_palette__pointers.asm"
+INCLUDE "data/pokemon/hoenn/overworld_palettes.asm"
+
 
 SECTION "Sinnoh Base Data", ROMX
 
@@ -5757,6 +5769,9 @@ INCLUDE "data/pokemon/sinnoh/palette_pointer_table.asm"
 INCLUDE "data/pokemon/sinnoh/palette_pointers.asm"
 INCLUDE "data/pokemon/sinnoh/palettes.asm"
 
+INCLUDE "data/pokemon/sinnoh/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/overworld_palette__pointers.asm"
+INCLUDE "data/pokemon/sinnoh/overworld_palettes.asm"
 
 
 SECTION "Unova Base Data", ROMX
@@ -5773,6 +5788,9 @@ INCLUDE "data/pokemon/unova/palette_pointer_table.asm"
 INCLUDE "data/pokemon/unova/palette_pointers.asm"
 INCLUDE "data/pokemon/unova/palettes.asm"
 
+INCLUDE "data/pokemon/unova/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/unova/overworld_palette__pointers.asm"
+INCLUDE "data/pokemon/unova/overworld_palettes.asm"
 
 
 SECTION "Kalos Base Data", ROMX
@@ -5789,6 +5807,9 @@ INCLUDE "data/pokemon/kalos/palette_pointer_table.asm"
 INCLUDE "data/pokemon/kalos/palette_pointers.asm"
 INCLUDE "data/pokemon/kalos/palettes.asm"
 
+INCLUDE "data/pokemon/kalos/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/overworld_palette__pointers.asm"
+INCLUDE "data/pokemon/kalos/overworld_palettes.asm"
 
 
 SECTION "Other Base Data", ROMX

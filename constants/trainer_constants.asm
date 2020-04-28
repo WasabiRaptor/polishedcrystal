@@ -722,7 +722,7 @@ KRIS EQU __enum__
 	const KARA
 	const WENDY
 	const MARY
-	const DAWN
+	const DAWN_TRAINER
 	const NICOLE
 	const LORI
 	const NIKKI
