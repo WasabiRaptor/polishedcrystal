@@ -486,7 +486,7 @@ CopyMapObjectHeaders:: ; 2457
 
 ClearObjectStructs:: ; 2471
 	ld hl, wObject1Struct
-	ld bc, OBJECT_STRUCT_LENGTH * (NUM_OBJECT_STRUCTS - 1)
+	ld bc, OBJECT_STRUCT_LENGTH * (NUM_OBJECT_STRUCTS - 2)
 	xor a
 	jp ByteFill
 ; 248a
