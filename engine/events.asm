@@ -101,6 +101,7 @@ EnterMap: ; 9673e
 ; 9676d
 
 HandleMap:
+	call MaybeSetGrassAttributes
 	call ResetOverworldDelay
 	call HandleMapTimeAndJoypad
 	call HandleCmdQueue
@@ -163,6 +164,73 @@ HandleMapBackground:
 	farcall _UpdateSprites
 	farcall ScrollScreen
 	farjp PlaceMapNameSign
+
+MaybeSetGrassAttributes::
+	ld a, [wPlayerStandingTile]
+	cp COLL_TALL_GRASS
+	ret nz
+	ld a, 1
+	ld [rVBK], a
+.waitLY
+	ldh a, [rLY]
+	cp GRASS_SCANLINE_PX
+	jr z, .SetGrass
+	cp GRASS_SCANLINE_PX+GRASS_SCANLINE_COVER
+	jr z, .UnsetGrass
+
+	cp GRASS_SCANLINE_PX+16
+	jr z, .SetGrass
+	cp GRASS_SCANLINE_PX+16+GRASS_SCANLINE_COVER
+	jr z, .UnsetGrass
+
+	cp GRASS_SCANLINE_PX+32
+	jr z, .SetGrass
+	cp GRASS_SCANLINE_PX+32+GRASS_SCANLINE_COVER
+	jr z, .UnsetGrass
+	jr c, .waitLY
+	xor a
+	ld [rVBK], a
+	ret
+
+.SetGrass
+	ld a, [wHasPlayerMoved]
+	cp 1
+	jr z, .UnsetGrass
+
+	ld hl, wGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2 | BEHIND_BG
+	ld [hli], a
+	ld [hl], a
+	ld hl, wPrevGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2 | BEHIND_BG
+	ld [hli], a
+	ld [hl], a
+	jr .waitLY
+
+
+.UnsetGrass
+	ld hl, wGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	ld hl, wPrevGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	jr .waitLY
+
 
 CheckPlayerState: ; 967f4
 	ld a, [wPlayerStepFlags]
@@ -395,7 +463,7 @@ CheckTimeEvents: ; 9693a
 	ld hl, wStatusFlags2
 	bit 2, [hl] ; ENGINE_BUG_CONTEST_TIMER
 	jr z, .do_daily
-	
+
 	xor a
 	ret
 

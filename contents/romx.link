@@ -85,7 +85,6 @@ ROMX $11
 ROMX $12
 	org $4000
 	"Code 18"
-	"Sinnoh Pokedex Entries 2"
 
 ROMX $13
 	org $4000
@@ -116,7 +115,6 @@ ROMX $17
 ROMX $18
 	org $4000
 	"Code 24"
-	"Johto Pokedex Entries 2"
 
 ROMX $19
 	org $4000

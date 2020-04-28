@@ -205,7 +205,7 @@ CopyNextCoordsTileToStandingCoordsTile:
 	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld [hl], a
-	call SetTallGrassFlags
+	;call SetTallGrassFlags
 	ld hl, OBJECT_NEXT_TILE
 	add hl, bc
 	ld a, [hl]
@@ -234,28 +234,13 @@ UpdateTallGrassFlags:
 	ld hl, OBJECT_NEXT_TILE
 	add hl, bc
 	ld a, [hl]
-	call SetTallGrassFlags
+	;call SetTallGrassFlags
 .ok
 	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	ret
 
-SetTallGrassFlags: ; 4661
-	ld hl, OBJECT_FLAGS2
-	add hl, bc
-	cp COLL_OVERHEAD
-	jr z, .set
-	cp COLL_LONG_GRASS
-	jr z, .set
-	cp COLL_TALL_GRASS
-	jr z, .set
-	res OVERHEAD, [hl]
-	ret
-
-.set
-	;set OVERHEAD, [hl]
-	ret
 
 EndSpriteMovement:
 	xor a
