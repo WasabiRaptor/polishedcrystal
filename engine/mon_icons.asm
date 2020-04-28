@@ -144,6 +144,7 @@ GetMenuMonIconPalette::
 	ld a, MIDDAY
 	call GetRelevantMonOverworldPalettes
 	ld a, [wCurPartyMon]
+	inc a
 	ld l, a
 	ret
 

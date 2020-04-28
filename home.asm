@@ -1140,7 +1140,7 @@ endr
 
 INCLUDE "data/pokemon/variant_palette_table.asm"
 
-GetRelevantMonOverworldPalettes:
+GetRelevantMonOverworldPalettes::
 	ld b, a
 	ldh a, [hROMBank]
 	push af

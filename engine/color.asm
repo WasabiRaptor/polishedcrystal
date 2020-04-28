@@ -315,7 +315,7 @@ ApplyPals:
 	ld hl, wUnknBGPals
 	ld de, wBGPals
 	ld bc, 16 palettes
-	ld a, $5
+	ld a, BANK(wBGPals)
 	jp FarCopyWRAM
 
 ApplyAttrMap:
@@ -385,8 +385,8 @@ ApplyPartyMenuHPPals: ; 96f3
 InitPartyMenuOBPals:
 	ld hl, PartyMenuOBPals
 	ld de, wUnknOBPals
-	ld bc, 8 palettes
-	ld a, $5
+	ld bc, 1 palettes
+	ld a, BANK(wUnknOBPals)
 	jp FarCopyWRAM
 
 InitPokegearPalettes:
@@ -394,7 +394,7 @@ InitPokegearPalettes:
 	ld hl, PokegearOBPals
 	ld de, wUnknOBPals
 	ld bc, 2 palettes
-	ld a, $5
+	ld a, BANK(wUnknOBPals)
 	jp FarCopyWRAM
 
 INCLUDE "engine/palettes.asm"
@@ -723,7 +723,7 @@ GetPlayerOrMonPalette:
 	and a
 	jp nz, GetMonPalette
 	ld hl, PlayerPalette
-	ld a, wPlayerOverworldPalette
+	ld a, [wPlayerOverworldPalette]
 	ld bc, 4
 	rst AddNTimes
 	jp LoadPalette_White_Col1_Col2_Black

@@ -51,7 +51,6 @@ ROMX $0A
 ROMX $0B
 	org $4000
 	"Code 11"
-	"Pokemon Pics 8"
 
 ROMX $0C
 	org $4000

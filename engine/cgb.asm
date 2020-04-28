@@ -346,15 +346,15 @@ LoadPokedexIconPals::
 	push de
 	farcall GetMenuMonIconPalette.got_shininess
 	pop de
-	ld b, 0
-	ld c, a
-	ld hl, OWPalsTable
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	call LoadHLPaletteIntoDE
+	;ld b, 0
+	;ld c, a
+	;ld hl, OWPalsTable
+	;add hl, bc
+	;add hl, bc
+	;ld a, [hli]
+	;ld h, [hl]
+	;ld l, a
+	;call LoadHLPaletteIntoDE
 	pop de
 	pop bc
 	pop hl
