@@ -93,14 +93,14 @@ SetFacingStandFlip:
 	rrca
 	add FACING_STEP_DOWN_FLIP
 SetFixedFacing:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
 ; 44b5
 
 SetFacingStandAction:
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld a, [hl]
 	and 1
@@ -125,7 +125,7 @@ SetFacingBumpAction:
 	ld d, a
 	call GetSpriteDirection
 	or d
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret
@@ -153,7 +153,7 @@ SetFacingSkyfall:
 
 SetFacingCounterclockwiseSpin: ; 4529
 	call CounterclockwiseSpinAction
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
 	jr SetFixedFacing
@@ -194,7 +194,7 @@ CounterclockwiseSpinAction:
 	ld hl, .Directions
 	add hl, de
 	ld a, [hl]
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
 	ret
@@ -298,7 +298,7 @@ SetFacingRun:
 	ld d, a
 	call GetSpriteDirection
 	or d
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], a
 	ret

@@ -757,7 +757,7 @@ wFollowMovementQueue:: ds 5
 
 wObjectStructs::
 	object_struct wPlayer
-	object_struct wPetFollower
+	object_struct wFollower
 	object_struct wObject1
 	object_struct wObject2
 	object_struct wObject3
@@ -775,7 +775,7 @@ wCmdQueue:: ds CMDQUEUE_CAPACITY * CMDQUEUE_ENTRY_SIZE
 
 wMapObjects::
 	map_object wPlayer
-	map_object wPetFollower
+	map_object wFollower
 	map_object wMap1
 	map_object wMap2
 	map_object wMap3

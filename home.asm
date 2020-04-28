@@ -575,10 +575,10 @@ HandleStoneQueue:: ; 3567
 .IsPersonOnWarp: ; 3599
 	push de
 
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, de
 	ld a, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, de
 	ld e, [hl]
 
@@ -858,11 +858,11 @@ FacingPlayerDistance:: ; 36ad
 ; Return carry if the sprite at bc is facing the player,
 ; and its distance in d.
 
-	ld hl, OBJECT_NEXT_MAP_X ; x
+	ld hl, OBJECT_STANDING_X ; x
 	add hl, bc
 	ld d, [hl]
 
-	ld hl, OBJECT_NEXT_MAP_Y ; y
+	ld hl, OBJECT_STANDING_Y ; y
 	add hl, bc
 	ld e, [hl]
 

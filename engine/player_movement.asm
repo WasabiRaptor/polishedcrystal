@@ -705,14 +705,18 @@ DoPlayerMovement:: ; 80000
 	ld e, a
 ; Find an object struct with coordinates equal to d,e
 	farcall IsNPCAtCoord
-	jr nc, .is_npc
+	jr nc, .no_npc
+
+	call .PushPetCheck
+	jr nc, .no_npc
+
 	call .CheckStrengthBoulder
 	jr c, .no_bump
 
 	xor a
 	ret
 
-.is_npc
+.no_npc
 	ld a, 1
 	ret
 
@@ -727,7 +731,7 @@ DoPlayerMovement:: ; 80000
 	bit OWSTATE_STRENGTH, [hl]
 	jr z, .not_boulder
 
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	cp STANDING
@@ -758,6 +762,32 @@ DoPlayerMovement:: ; 80000
 	xor a
 	ret
 ; 8039e
+
+.PushPetCheck:
+	ld hl, wDummyPlaceholderByte	; push pet count
+	ld a, [hObjectStructIndexBuffer]
+	cp 1
+	jr z, .cnt
+
+	xor a
+	ld [hl], a
+	scf
+	ret
+
+.cnt:
+	ld a, [hl]
+	inc a
+	cp 5
+	ld [hl], a
+	jr z, .move_enable
+
+	scf
+	ret
+
+.move_enable:
+	xor a
+	ld [hl], a
+	ret
 
 .CheckLandPerms: ; 8039e
 ; Return 0 if walking onto land and tile permissions allow it.

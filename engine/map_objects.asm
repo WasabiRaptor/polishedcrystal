@@ -48,7 +48,7 @@ HandleCurNPCStep:
 .notPlayer
 	ld a, [wXCoord]
 	ld e, a
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
 	inc a
@@ -58,7 +58,7 @@ HandleCurNPCStep:
 	jr nc, .ok
 	ld a, [wYCoord]
 	ld e, a
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld a, [hl]
 	inc a
@@ -187,41 +187,42 @@ asm_444d:
 INCLUDE "engine/map_object_action.asm"
 
 CopyNextCoordsTileToStandingCoordsTile:
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_MAP_X
+	ld hl, OBJECT_LAST_X
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_MAP_Y
+	ld hl, OBJECT_LAST_Y
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_NEXT_TILE
-	add hl, bc
-	ld a, [hl]
 	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
+	ld a, [hl]
+	ld hl, OBJECT_LAST_TILE
+	add hl, bc
 	ld [hl], a
-	;call SetTallGrassFlags
-	ld hl, OBJECT_NEXT_TILE
+
+	ld hl, OBJECT_STANDING_TILE
+
 	add hl, bc
 	ld a, [hl]
 	ret
 
 CopyCurCoordsToNextCoords:
-	ld hl, OBJECT_MAP_X
+	ld hl, OBJECT_LAST_X
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_MAP_Y
+	ld hl, OBJECT_LAST_Y
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld [hl], a
 	ret
@@ -231,12 +232,12 @@ UpdateTallGrassFlags:
 	add hl, bc
 	bit OVERHEAD, [hl]
 	jr z, .ok
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	;call SetTallGrassFlags
 .ok
-	ld hl, OBJECT_STANDING_TILE
+	ld hl, OBJECT_LAST_TILE
 	add hl, bc
 	ld a, [hl]
 	ret
@@ -253,13 +254,13 @@ EndSpriteMovement:
 	ld [hli], a
 	ld [hli], a
 	ld [hl], a ; OBJECT_30
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
 
 InitStep:
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], a
 	ld hl, OBJECT_FLAGS1
@@ -269,7 +270,7 @@ InitStep:
 	add a
 	add a
 	and %00001100
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
 GetNextTile:
@@ -279,26 +280,26 @@ GetNextTile:
 	ld [hl], a
 	ld a, d
 	call GetStepVectorSign
-	ld hl, OBJECT_MAP_X
+	ld hl, OBJECT_LAST_X
 	add hl, bc
 	add [hl]
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld [hl], a
 	ld d, a
 	ld a, e
 	call GetStepVectorSign
-	ld hl, OBJECT_MAP_Y
+	ld hl, OBJECT_LAST_Y
 	add hl, bc
 	add [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld [hl], a
 	ld e, a
 	push bc
 	call GetCoordTile
 	pop bc
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld [hl], a
 	ret
@@ -327,7 +328,7 @@ AddStepVector:
 
 GetStepVector:
 ; Return (x, y, duration, speed) in (d, e, a, h).
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	and %00001111
@@ -345,7 +346,7 @@ GetStepVector:
 	ld h, [hl]
 	push af
 	push hl
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	cp (STEP_SLOW << 2 | RIGHT) + 1
@@ -392,7 +393,7 @@ GetStepVectorSign:
 	ret    ; 129 - 255
 
 UpdatePlayerStep:
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	and %00000011
@@ -467,16 +468,16 @@ Object28AnonymousJumptable:
 	ret
 
 ObjectMovementReset:
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	push bc
 	call GetCoordTile
 	pop bc
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld [hl], a
 	call CopyNextCoordsTileToStandingCoordsTile
@@ -548,13 +549,13 @@ MapObjectMovementPattern:
 	call Random
 	ldh a, [hRandomAdd]
 	and %00001100
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
 	jp RandomStepDuration_Slow
 
 .RandomSpin2:
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
 	and %00001100
@@ -600,7 +601,7 @@ MapObjectMovementPattern:
 	dw .Strength_Stop
 
 .Strength_Start:
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld a, [hl]
 	cp COLL_HOLE
@@ -629,7 +630,7 @@ MapObjectMovementPattern:
 .ok2
 	call CopyCurCoordsToNextCoords
 .ok
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -637,16 +638,16 @@ MapObjectMovementPattern:
 .on_pit
 	call IncrementObjectMovementByteIndex
 .Strength_Stop:
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
 
 .FollowNotExact:
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	ld hl, OBJECT_RANGE
@@ -654,12 +655,12 @@ MapObjectMovementPattern:
 	ld a, [hl]
 	push bc
 	call GetObjectStruct
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	cp STANDING
 	jr z, .standing
-	ld hl, OBJECT_MAP_X
+	ld hl, OBJECT_LAST_X
 	add hl, bc
 	ld a, [hl]
 	cp d
@@ -673,7 +674,7 @@ MapObjectMovementPattern:
 	jr .done
 
 .equal
-	ld hl, OBJECT_MAP_Y
+	ld hl, OBJECT_LAST_Y
 	add hl, bc
 	ld a, [hl]
 	cp e
@@ -686,7 +687,7 @@ MapObjectMovementPattern:
 	ld a, 1
 .done
 	ld d, a
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld a, [hl]
 	and %00001100
@@ -696,7 +697,7 @@ MapObjectMovementPattern:
 
 .standing
 	pop bc
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_ACTION
@@ -795,7 +796,7 @@ MapObjectMovementPattern:
 	db OW_LEFT, OW_RIGHT, OW_UP, OW_DOWN
 
 .MovementSpinNextFacing:
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld a, [hl]
 	and %00001100
@@ -824,7 +825,7 @@ MapObjectMovementPattern:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, de
 	ld a, [hl]
 	and 3
@@ -880,7 +881,7 @@ MapObjectMovementPattern:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, de
 	ld a, [hl]
 	and %00000011
@@ -1032,7 +1033,7 @@ SetRandomStepDuration: ; 4b2d
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_ACTION
@@ -1121,7 +1122,7 @@ PlayerDiagonalStairs:
 	jr z, .got_dir
 	ld a, UP
 .got_dir
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], a
 
@@ -1548,7 +1549,7 @@ ReturnDigStep: ; 4dc8
 ; 4ddd
 
 StepType03: ; 4ddd
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_STEP_DURATION
@@ -1581,12 +1582,12 @@ StepType05: ; 4e0c
 .Reset:
 	call RestoreDefaultMovement
 	call GetInitialFacing
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
 	call IncrementObjectStructField28
 StepType04: ; 4e21
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ret
@@ -1599,7 +1600,7 @@ NPCStep: ; 4e2b
 	dec [hl]
 	ret nz
 	call CopyNextCoordsTileToStandingCoordsTile
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_STEP_TYPE
@@ -1638,7 +1639,7 @@ PlayerStep: ; 4e56
 	ld hl, wPlayerStepFlags
 	set 6, [hl]
 	call CopyNextCoordsTileToStandingCoordsTile
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_STEP_TYPE
@@ -1656,7 +1657,7 @@ PlayerOrNPCTurnStep:
 	dw .step2
 
 .init1
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_STEP_FRAME
@@ -1678,7 +1679,7 @@ PlayerOrNPCTurnStep:
 	ld hl, OBJECT_29 ; new facing
 	add hl, bc
 	ld a, [hl]
-	ld hl, OBJECT_FACING
+	ld hl, OBJECT_DIRECTION
 	add hl, bc
 	ld [hl], a
 	ld hl, OBJECT_STEP_DURATION
@@ -1711,10 +1712,10 @@ StepType0f: ; 4ecd
 	dec [hl]
 	ret nz
 	push bc
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	ld hl, OBJECT_MAP_OBJECT_INDEX
@@ -1727,7 +1728,7 @@ StepType0f: ; 4ecd
 	add hl, bc
 	res 2, [hl]
 	call CopyNextCoordsTileToStandingCoordsTile
-	ld hl, OBJECT_DIRECTION_WALKING
+	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], STANDING
 	ld hl, OBJECT_STEP_TYPE
@@ -1950,7 +1951,7 @@ INCLUDE "engine/movement.asm"
 ApplyMovementToFollower: ; 54b8
 	ld e, a
 	ld a, [wObjectFollow_Follower]
-	cp -1
+	cp NO_FOLLOWER
 	ret z
 	ld a, [wObjectFollow_Leader]
 	ld d, a
@@ -2008,7 +2009,7 @@ GetFollowerNextMovementByte: ; 54e6
 
 .CancelFollowIfLeaderMissing:
 	ld a, [wObjectFollow_Leader]
-	cp -1
+	cp NO_FOLLOWER
 	jr z, .nope
 	push bc
 	call GetObjectStruct
@@ -2171,10 +2172,10 @@ CopyTempObjectData: ; 55b9
 	ldh a, [hMapObjectIndexBuffer]
 	ld [hli], a
 	push hl
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	pop hl
@@ -2277,15 +2278,15 @@ UpdateCurObjectData: ; 565c
 	call IsObjectOnScreen
 	jr c, SetFacing_Standing
 	push bc
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	call GetCoordTile
 	pop bc
-	ld hl, OBJECT_NEXT_TILE
+	ld hl, OBJECT_STANDING_TILE
 	add hl, bc
 	ld [hl], a
 	call UpdateTallGrassFlags
@@ -2295,7 +2296,7 @@ UpdateCurObjectData: ; 565c
 ; 5673
 
 SetFacing_Standing: ; 5680
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld [hl], STANDING
 	scf
@@ -2303,10 +2304,10 @@ SetFacing_Standing: ; 5680
 ; 5688
 
 IsObjectOnScreen: ; 56a3
-	ld hl, OBJECT_NEXT_MAP_X
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld d, [hl]
-	ld hl, OBJECT_NEXT_MAP_Y
+	ld hl, OBJECT_STANDING_Y
 	add hl, bc
 	ld e, [hl]
 	inc d
@@ -2568,7 +2569,7 @@ SetFollowerIfVisible: ; 582c
 	pop af
 	call CheckObjectVisibility
 	ret c
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld [hl], SPRITEMOVEDATA_FOLLOWING
 	ld hl, OBJECT_STEP_TYPE
@@ -2580,7 +2581,7 @@ SetFollowerIfVisible: ; 582c
 ; 5847
 
 StopFollow:: ; 581f
-	ld a, -1
+	ld a, NO_FOLLOWER
 	ld [wObjectFollow_Leader], a
 	; fallthrough
 ResetFollower: ; 5847
@@ -2632,7 +2633,7 @@ Function587a: ; 587a
 
 SetFlagsForMovement_2:: ; 5897
 	ld a, [wObjectFollow_Leader]
-	cp -1
+	cp NO_FOLLOWER
 	ret z
 	push bc
 	call GetObjectStruct
@@ -2688,7 +2689,7 @@ Function58e3: ; 58e3
 	add hl, bc
 	ld a, [hl]
 	pop bc
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld [hl], a
 	ld hl, OBJECT_STEP_TYPE
@@ -2706,7 +2707,7 @@ Function5903: ; 5903
 	ld hl, .standing_movefns
 	add hl, de
 	ld a, [hl]
-	ld hl, OBJECT_MOVEMENTTYPE
+	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld [hl], a
 	ld hl, OBJECT_STEP_TYPE
@@ -2824,7 +2825,7 @@ PRIORITY_HIGH EQU $30
 	push hl
 	call DoesObjectHaveASprite
 	jr z, .skip
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld a, [hl]
 	cp STANDING
@@ -2941,7 +2942,7 @@ PRIORITY_HIGH EQU $30
 	ld a, [wPlayerBGMapOffsetY]
 	add e
 	ldh [hCurSpriteYPixel], a
-	ld hl, OBJECT_FACING_STEP
+	ld hl, OBJECT_FACING
 	add hl, bc
 	ld a, [hl]
 	cp STANDING
@@ -3035,7 +3036,7 @@ PRIORITY_HIGH EQU $30
 
 .Addresses: ; 5ace
 	dw wPlayerStruct
-	dw wPetFollowerStruct
+	dw wFollowerStruct
 	dw wObject1Struct
 	dw wObject2Struct
 	dw wObject3Struct
