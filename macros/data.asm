@@ -141,6 +141,14 @@ add_overworldpalettes: macro
 	dw \1OverworldPalettes
 endm
 
+add_overworldspritetable: macro
+	dw \1OverworldSpritePointers
+endm
+
+add_overworldsprite: macro
+	dba \1OverworldSprite
+endm
+
 add_evosattackstable: macro
 	dw \1EvosAttacksPointers
 endm
@@ -223,6 +231,10 @@ endm
 
 regional_overworldpalettes: macro
     dba \1OverworldPalettePointerTable
+endm
+
+regional_overworldsprites: macro
+    dba \1OverworldSpritePointerTable
 endm
 
 

@@ -3,6 +3,7 @@ INCLUDE "constants.asm"
 
 SECTION "Overworld Sprites 1", ROMX
 
+FollowerSpriteGFX::
 ChrisSpriteGFX::               INCBIN "gfx/sprites/chris.2bpp"
 ChrisBikeSpriteGFX::           INCBIN "gfx/sprites/chris_bike.2bpp"
 ChrisSurfSpriteGFX::           INCBIN "gfx/sprites/chris_surf.2bpp"

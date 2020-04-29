@@ -7,6 +7,7 @@
 	const SPRITE_KRIS ; 04
 	const SPRITE_KRIS_BIKE ; 05
 	const SPRITE_KRIS_SURF ; 06
+	const SPRITE_FOLLOWER
 	const SPRITE_MOM ; 07
 	const SPRITE_DAD ; 08
 	const SPRITE_LYRA ; 09

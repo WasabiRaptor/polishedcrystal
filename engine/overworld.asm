@@ -147,6 +147,8 @@ GetSprite:: ; 1423c
 	call GetMonSprite
 	ret c
 
+	cp SPRITE_FOLLOWER
+	jr z, .GetFollowerSpriteAddresses
 	ld hl, SpriteHeaders ; address
 	dec a
 	ld c, a
@@ -172,7 +174,50 @@ GetSprite:: ; 1423c
 	ld c, 12
 	ret
 ; 14259
+.GetFollowerSpriteAddresses
+	ld a, [wPartyMon1Species]
+	ld [wCurSpecies], a
+	ld a, [wPartyMon1Form]
+	ld [wCurForm], a
 
+	ld a, [wPartyMon1Group]
+	ld [wCurGroup], a
+	ld hl, RegionalOverworldSpriteTable
+	ld bc, 3
+	rst AddNTimes
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, d
+	call GetFarHalfword
+	ld a, [wCurSpecies]
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+	ld a, [wCurForm]
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarByte
+	ld b, a
+	inc hl
+	ld a, d
+	call GetFarHalfword
+	ld d, h
+	ld e, l
+	ld h, b
+	ld l, WALKING_SPRITE
+	ld c, 15
+	ret
+
+INCLUDE "data/pokemon/regional_overworld_sprite_table.asm"
 
 GetMonSprite: ; 14259
 ; Return carry if a monster sprite was loaded.
@@ -311,7 +356,7 @@ _GetSpritePalette:: ; 142c4
 	ld c, PAL_OW_ROCK
 	ret z
 	cp PAL_OW_PINK
-	ld c, PAL_OW_RED
+	ld c, PAL_OW_PLAYER
 	ret z
 	cp PAL_OW_TEAL
 	ld c, PAL_OW_GREEN
@@ -320,7 +365,7 @@ _GetSpritePalette:: ; 142c4
 	ret
 
 .not_daycare
-	ld c, PAL_OW_RED
+	ld c, PAL_OW_PLAYER
 	ret
 ; 142db
 

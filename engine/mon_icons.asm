@@ -88,7 +88,7 @@ LoadPartyMenuMonIconColors:
 	ld d, a
 	ld a, [wCurIconMonHasItemOrMail]
 	and a
-	ld a, PAL_OW_RED ; same color for item or mail
+	ld a, PAL_OW_PLAYER ; same color for item or mail
 	jr nz, .ok
 	ld a, d
 .ok

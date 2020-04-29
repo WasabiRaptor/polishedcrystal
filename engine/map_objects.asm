@@ -2088,7 +2088,7 @@ SplashPuddle:
 	jp PlaySFX
 
 .puddle_data
-	db $80, PAL_OW_BLUE, SPRITEMOVEDATA_PUDDLE
+	db $80, PAL_OW_FOLLOWER, SPRITEMOVEDATA_PUDDLE
 ; 5565
 
 ShakeScreen: ; 5565

@@ -16,8 +16,8 @@ NUM_SPRITEHEADER_FIELDS EQU const_value
 
 ; sprite palettes
 	const_def
-	const PAL_OW_RED    ; 0
-	const PAL_OW_BLUE   ; 1
+	const PAL_OW_PLAYER    ; 0
+	const PAL_OW_FOLLOWER   ; 1
 	const PAL_OW_GREEN  ; 2
 	const PAL_OW_BROWN  ; 3
 	const PAL_OW_PURPLE ; 4
