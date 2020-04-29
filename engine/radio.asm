@@ -1126,7 +1126,7 @@ PeoplePlaces4: ; People
 	bit 6, a ; ENGINE_CREDITS_SKIP
 	jr z, .ok
 	ld hl, PnP_HiddenPeople_BeatE4
-	ld a, [wKantoBadges]
+	ld a, [wDummyPlaceholderByte]
 	cp %11111111
 	jr nz, .ok
 	ld hl, PnP_HiddenPeople_BeatKanto

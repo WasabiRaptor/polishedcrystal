@@ -749,6 +749,14 @@ wGameTimeFrames:: ds 1
 
 wCurDay:: ds 1
 
+wFollowerStatus::
+; bit 7: Enable
+; bit 6: ???
+; bit 3-5: Temp index
+; bit 0-2: Index
+;  0: No follower
+;  7: Override
+	ds 1
 wObjectFollow_Leader:: ds 1
 wObjectFollow_Follower:: ds 1
 wCenteredObject:: ds 1
@@ -840,7 +848,7 @@ wCoins:: ds 2
 
 wBadges::
 wCycleCount:: ds 1
-wKantoBadges:: flag_array NUM_KANTO_BADGES
+;wKantoBadges:: flag_array NUM_KANTO_BADGES
 wBadgesEnd::
 
 wPokemonJournals:: flag_array NUM_POKEMON_JOURNALS

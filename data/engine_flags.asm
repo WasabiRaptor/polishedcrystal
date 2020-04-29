@@ -61,14 +61,14 @@ EngineFlags: ; 80462
 	engine_flag wCycleCount, GLACIERBADGE
 	engine_flag wCycleCount, RISINGBADGE
 
-	engine_flag wKantoBadges, BOULDERBADGE
-	engine_flag wKantoBadges, CASCADEBADGE
-	engine_flag wKantoBadges, THUNDERBADGE
-	engine_flag wKantoBadges, RAINBOWBADGE
-	engine_flag wKantoBadges, MARSHBADGE
-	engine_flag wKantoBadges, SOULBADGE
-	engine_flag wKantoBadges, VOLCANOBADGE
-	engine_flag wKantoBadges, EARTHBADGE
+	engine_flag wDummyPlaceholderByte, BOULDERBADGE
+	engine_flag wDummyPlaceholderByte, CASCADEBADGE
+	engine_flag wDummyPlaceholderByte, THUNDERBADGE
+	engine_flag wDummyPlaceholderByte, RAINBOWBADGE
+	engine_flag wDummyPlaceholderByte, MARSHBADGE
+	engine_flag wDummyPlaceholderByte, SOULBADGE
+	engine_flag wDummyPlaceholderByte, VOLCANOBADGE
+	engine_flag wDummyPlaceholderByte, EARTHBADGE
 
 	; unown sets
 	engine_flag wDummyPlaceholderByte, 0 ; 1

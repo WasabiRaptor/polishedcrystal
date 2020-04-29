@@ -162,7 +162,7 @@ TrainerCard_Page2_Joypad: ; 25221 (9:5221)
 	ret
 
 .pressed_right
-	ld a, [wKantoBadges]
+	ld a, [wDummyPlaceholderByte]
 	and a
 	ret z
 	ld a, $4
@@ -170,7 +170,7 @@ TrainerCard_Page2_Joypad: ; 25221 (9:5221)
 	ret
 
 .pressed_a
-	ld a, [wKantoBadges]
+	ld a, [wDummyPlaceholderByte]
 	and a
 	jr z, .quit
 	ld a, $4
@@ -661,7 +661,7 @@ TrainerCard_KantoBadgesOAM:
 	; cycle 1: face tile, in1 tile, in2 tile, in3 tile
 	; cycle 2: face tile, in1 tile, in2 tile, in3 tile
 
-	dw wKantoBadges
+	dw wDummyPlaceholderByte
 
 	; Boulder Badge
 	db $80, $38, 0, 0, 0, 0

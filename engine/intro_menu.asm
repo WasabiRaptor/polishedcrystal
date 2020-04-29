@@ -233,7 +233,6 @@ endr
 	ld [wMonType], a
 
 	ld [wCycleCount], a
-	ld [wKantoBadges], a
 
 	ld [wCoins], a
 	ld [wCoins + 1], a
