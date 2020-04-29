@@ -210,6 +210,24 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             `${poke.title}ShinyOverworldPaletteDark:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n`).join(""),
         "utf8");
 
+        //Overworld Sprites
+        fs.writeFileSync(`data/pokemon/${region.lower}/overworld_sprite_pointer_table.asm`,
+            `${region.title}OverworldSpritePointerTable::\n` +
+            list.map(poke=>`\tadd_overworldspritetable ${poke.title}\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`data/pokemon/${region.lower}/overworld_sprite_pointers.asm`,
+            `${region.title}OverworldSpritePointers::\n` +
+            list.map(poke=>`${poke.title}OverworldSpritePointers::\n\tadd_overworldsprite ${poke.title}\n\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`data/pokemon/${region.lower}/overworld_sprites.asm`,
+            list.map((poke,i)=>
+                (i % 30 ? "" : `\nSECTION "${region.title} Overworld Sprites ${i/30+1}", ROMX\n\n`) +
+                `${poke.title}OverworldSprite::\tINCLUDE "gfx/sprites/pokemon/${poke.lower}/overworld.2bpp"\n`
+            ).join(""),
+        "utf8");
+
         return match;
     });
 });
