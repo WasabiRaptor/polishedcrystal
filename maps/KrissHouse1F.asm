@@ -258,7 +258,7 @@ MomDoItText:
 NeighborScript:
 	faceplayer
 	opentext
-	portrait ZYGARDE_NEUTRAL
+	portrait LOKI_SMUG
 	checktime 1 << DAWN
 	iftrue .MornScript
 	checktime 1 << MIDDAY
@@ -282,9 +282,10 @@ NeighborScript:
 	jump .Main
 
 .Main:
-	portrait ZYGARDE_ANGRY
+	portrait LOKI_UWU
 	writenamedtext .NeighborNameText, .NeighborText
 	waitbutton
+	closeportrait
 	closetext
 	turnobject LAST_TALKED, RIGHT
 	end
@@ -292,33 +293,23 @@ NeighborScript:
 .MornIntroText:
 	text "This just feels really really"
 	line "unnatural, but its very real."
-
-	para "I'm visiting!"
 	done
 
 .DayIntroText:
-	text "Hello, <PLAYER>!"
-	line "I'm visiting!"
+	text "Somethimg Something VW Text"
+	line ""
 	done
 
 .NiteIntroText:
-	text "The quick brown fox jumped"
-	line "over the lazy dog. 0123456789"
+	text "Oh hey, looks like I'm the test"
+	line "NPC now"
 	done
 
 .NeighborText:
-	text "THE QUICK BROWN FOX JUMPED"
-	line "OVER THE LAZY DOG!?"
 
-	para "My daughter is"
-	line "adamant about"
-
-	para "becoming Prof."
-	line "Elm's assistant."
-
-	para "She really loves"
-	line "Pokémon!"
+	text "▶Pet    Pet    Pet    Pet    Pet"
+	line "   Pet    Pet    Pet    Pet    Pet"
 	done
 
 .NeighborNameText:
-	db "Zygarde@"
+	db "Loki@"

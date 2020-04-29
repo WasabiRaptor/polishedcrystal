@@ -796,25 +796,3 @@ LoadPartyMonPalette:
 	call CopyDVsToColorVaryDVs
 	ld hl, wUnknBGPals palette PAL_BG_TEXT + 2
 	jp VaryColorsByDVs
-
-LoadPortraitPalette:
-	call GetPortraitPalettePointer
-	ld de, wUnknBGPals palette PAL_BG_TEXT
-	ld bc, 1 palettes
-	ld a, BANK(wUnknBGPals)
-	jp FarCopyWRAM
-
-GetPortraitPalettePointer:
-	ld a, [wCurSpecies]
-	ld l, a
-	ld h, 0
-
-	ld bc, PortraitPalettes ;changed this of course
-
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	add hl, bc
-	ret
-
-INCLUDE "data/portraits/portrait_palettes.asm"

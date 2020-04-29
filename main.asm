@@ -255,7 +255,6 @@ INCLUDE "engine/breeding.asm"
 SECTION "Code 7", ROMX
 
 INCLUDE "engine/events/pokepic.asm"
-INCLUDE "engine/events/portrait.asm"
 INCLUDE "engine/scrolling_menu.asm"
 INCLUDE "engine/switch_items.asm"
 INCLUDE "engine/menu.asm"
@@ -4680,6 +4679,9 @@ INCLUDE "data/wild/treemons_asleep.asm"
 
 
 SECTION "Code 26", ROMX
+
+INCLUDE "engine/events/portrait.asm"
+
 
 AutomaticRainWhenOvercast::
 	call GetOvercastIndex

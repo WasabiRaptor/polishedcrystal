@@ -8,7 +8,6 @@ ROMX $02
 	org $4000
 	"Code 2"
 	"Trainer Pic Pointers"
-	"Portrait Pic Pointers"
 
 ROMX $03
 	org $4000

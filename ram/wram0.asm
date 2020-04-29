@@ -861,6 +861,7 @@ wcc4a:: ds 84
 wcc9e:: ds 130
 
 ENDU
+wIsPortraitOnScreen:: ds 1
 wHasPlayerMoved:: ds 1
 wGrassTileAddress:: ds 2
 wPrevGrassTileAddress:: ds 2

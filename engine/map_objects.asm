@@ -2433,7 +2433,7 @@ CheckCurSpriteCoveredByTextBox: ; 56cd
 	call Coord2Tile
 	pop bc
 	ld a, [hl]
-	cp $d0 ; hide sprites standing on tiles $$d0-$df as those are portrait tiles
+	cp $d0 ; hide sprites standing on tiles $$d0-$df as those are portrait tiles unless they're pal 7
 	jr nc, .nope
 .ok8
 	dec d
@@ -2753,8 +2753,19 @@ _UpdateSprites:: ; 5920
 	ld a, b
 	ld c, SCREEN_HEIGHT_PX + 16
 .loop
+	push hl
+	inc hl
+	inc hl
+	inc hl
+	ld a, [hl]
+	cp 7 | TILE_BANK
+	pop hl
+	jr z, .dont_put_offscreen ; don't put sprites with pal 7 from the high bank offscreen (portraits)
 	ld [hl], c
+.dont_put_offscreen
+	ld de, 4
 	add hl, de
+	ld a, b
 	cp l
 	jr nz, .loop
 	ret

@@ -36,10 +36,6 @@ SECTION "Painting Pic Pointers", ROMX
 
 INCLUDE "data/events/paintings/pic_pointers.asm"
 
-SECTION "Portrait Pic Pointers", ROMX
-
-INCLUDE "data/portraits/portrait_pointers.asm"
-
 
 SECTION "Pokemon Pics 1", ROMX
 
@@ -1919,11 +1915,12 @@ SECTION "Mewtwo Pics", ROMX
 
 SECTION "Portrait Pics", ROMX
 
-BeautyPortrait: 		INCBIN "gfx/portraits/beauty.2bpp.lz"
-ZygardeNeutralPortrait: INCBIN "gfx/portraits/Zygarde_neutral.2bpp.lz"
-ZygardeAngryPortrait: 	INCBIN "gfx/portraits/Zygarde_angry.2bpp.lz"
-CelebiNeutralPortrait:  INCBIN "gfx/portraits/Celebi_neutral.2bpp.lz"
-
+PortraitPalettes:
+LokiSmugPortrait::
+LokiSmugPortraitBG::		INCBIN "gfx/portraits/loki/smugBG.2bpp.lz"
+LokiSmugPortraitOAM::	    INCBIN "gfx/portraits/loki/smugOAM.2bpp.lz"
+LokiUwUPortraitBG::		    INCBIN "gfx/portraits/loki/uwuBG.2bpp.lz"
+LokiUwUPortraitOAM::		INCBIN "gfx/portraits/loki/uwuOAM.2bpp.lz"
 
 SECTION "Trainer Pics 1", ROMX
 
