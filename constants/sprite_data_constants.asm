@@ -27,8 +27,8 @@ NUM_SPRITEHEADER_FIELDS EQU const_value
 
 ; for object_events
 	const_def (1 << 3)
-	const PAL_NPC_RED    ; 8
-	const PAL_NPC_BLUE   ; 9
+	const PAL_NPC_COPY_PLAYER    ; 8
+	const PAL_NPC_FOLLOWER   ; 9
 	const PAL_NPC_GREEN  ; a
 	const PAL_NPC_BROWN  ; b
 	const PAL_NPC_PURPLE ; c

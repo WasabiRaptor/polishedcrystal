@@ -178,10 +178,13 @@ GetSprite:: ; 1423c
 	ld a, [wPartyMon1Species]
 	ld [wCurSpecies], a
 	ld a, [wPartyMon1Form]
+	and FORM_MASK
 	ld [wCurForm], a
-
 	ld a, [wPartyMon1Group]
 	ld [wCurGroup], a
+	;fallthrough
+GetPokemonOverWorldSprite:
+	ld a, [wCurGroup]
 	ld hl, RegionalOverworldSpriteTable
 	ld bc, 3
 	rst AddNTimes
@@ -190,31 +193,34 @@ GetSprite:: ; 1423c
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
-	ld a, d
-	call GetFarHalfword
+
+	;we now have the pointer table for that region
 	ld a, [wCurSpecies]
+	dec a
 	ld b, 0
 	ld c, a
 	add hl, bc
 	add hl, bc
 	ld a, d
 	call GetFarHalfword
+
+	;we should now have the pointer table for that species
 	ld a, [wCurForm]
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
+	ld bc, 3 ;three bytes long
+	rst AddNTimes
 	ld a, d
 	call GetFarByte
-	ld b, a
+	ld b, a ; load the sprite bank into b
 	inc hl
 	ld a, d
 	call GetFarHalfword
+
+	; load the address into de
 	ld d, h
 	ld e, l
-	ld h, b
-	ld l, WALKING_SPRITE
-	ld c, 15
+	ld h, b ; load the sprite bank into h
+	ld l, WALKING_SPRITE ; load the sprite type into l
+	ld c, 12 ; load the length into c
 	ret
 
 INCLUDE "data/pokemon/regional_overworld_sprite_table.asm"

@@ -5720,10 +5720,6 @@ INCLUDE "data/pokemon/kanto/overworld_palette_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/overworld_palette_pointers.asm"
 INCLUDE "data/pokemon/kanto/overworld_palettes.asm"
 
-INCLUDE "data/pokemon/kanto/overworld_sprite_pointer_table.asm"
-INCLUDE "data/pokemon/kanto/overworld_sprite_pointers.asm"
-INCLUDE "data/pokemon/kanto/overworld_sprites.asm"
-
 
 SECTION "Johto Base Data 1", ROMX
 

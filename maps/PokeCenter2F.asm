@@ -62,7 +62,7 @@ Script_WalkOutOfLinkRoom:
 	clearflag ENGINE_KRIS_IN_CABLE_CLUB
 	playsound SFX_TINGLE
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingRight
-	writebyte (PAL_NPC_BLUE) << 4
+	writebyte (PAL_NPC_FOLLOWER) << 4
 	special Special_SetPlayerPalette
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingLeft
 	special ReplaceKrisSprite
@@ -225,7 +225,7 @@ PokeCenter2F_CheckGender:
 	showtext Text_ChangeTheLook
 	playsound SFX_TINGLE
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingRight
-	writebyte (PAL_NPC_RED) << 4
+	writebyte (PAL_NPC_COPY_PLAYER) << 4
 	special Special_SetPlayerPalette
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingLeft
 	setflag ENGINE_KRIS_IN_CABLE_CLUB

@@ -225,3 +225,10 @@ ElectricFenceLeftSpriteGFX::   INCBIN "gfx/sprites/electric_fence_left.2bpp"
 ElectricFenceRightSpriteGFX::  INCBIN "gfx/sprites/electric_fence_right.2bpp"
 SailboatSpriteGFX::            INCBIN "gfx/sprites/sailboat.2bpp"
 MiscOverheadSpriteGFX::        INCBIN "gfx/sprites/misc_overhead.2bpp"
+
+SECTION "Pokemon Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/kanto/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/overworld_sprite_pointers.asm"
+
+INCLUDE "data/pokemon/kanto/overworld_sprites.asm"
