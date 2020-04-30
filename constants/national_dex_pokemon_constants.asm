@@ -27,6 +27,8 @@ GIGA_FORM EQU MEGA_FORM
 NUM_POKEMON EQU $fd
 EGG EQU $fe
 
+nat_dexmon_form: macro
+endm
 ; the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is, bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
 	nat_dexmon_group 1, GROUP_GENERATION_ONE
 	nat_dexmon BULBASAUR

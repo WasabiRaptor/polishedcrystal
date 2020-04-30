@@ -1,18 +1,29 @@
 const fs = require('fs');
-const region_regex = /nat_dexmon_group \d, GROUP_GENERATION_\w+\n((?:\t;?nat_dexmon \w+(?:\s*;.*)?\n)*)NUM_(\w+?)_POKEMON EQU const_value \+-1/g;
+const region_regex = /nat_dexmon_group \d, GROUP_GENERATION_\w+\n((?:\t;?nat_dexmon(?:_form)? \w+(?:\s*;.*)?\n)*)NUM_(\w+?)_POKEMON EQU const_value \+-1/g;
 
 fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) => {
     if (err) {
         console.error(err);
         process.exit(1);
     }
+    let lastNotForm;
+
     data.replace(region_regex, (match, list, region) => { //using this as a foreach type thing, not actually using the output at all
         list = list.split("\n").slice(0,-1).map(poke=>{
-            let name = poke.match(/^\tnat_dexmon (\w+)/)[1];
-            return {
-                lower: name.toLowerCase(),
-                upper: name.toUpperCase(),
-                title: titleCase(name),
+            let match = poke.match(/^\tnat_dexmon(_form)? (\w+)/);
+            let isForm = match[1];
+            let name = match[2]
+            if (isForm){
+                return {
+                }
+            }
+            else{
+                lastNotForm = name
+                return {
+                    lower: name.toLowerCase(),
+                    upper: name.toUpperCase(),
+                    title: titleCase(name),
+                }
             }
         });
         region = {
@@ -30,8 +41,11 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/base_stat_pointers.asm`,
-            `${region.title}BaseDataPointers::\n` +
-            list.map(poke=>`${poke.title}BaseDataPointers::\n\tadd_basedata ${poke.title}\n\n`).join(""),
+            `${region.title}BaseDataPointers::\n\n` +
+            list.map(poke=>`${poke.title}BaseDataPointers::\n\tadd_basedata ${poke.title}\n` +
+            //thing for tacking on the forms would go right here
+
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/base_stats.asm`,
