@@ -2004,6 +2004,18 @@ GetFollowerNextMovementByte: ; 54e6
 .done
 	call .CancelFollowIfLeaderMissing
 	ret c
+	ld a, [wFollowerRadius] ; I don't think this will be used in any of the follower's calcs so I'm gonig to use it to store the timing for random turns haha
+	and a
+	jr nz, .dont_turn
+	call Random
+	ldh a, [hRandomAdd]
+	and %00001100
+	ld [wFollowerDirection], a
+	ldh a, [hRandomAdd]
+	or %00001111
+.dont_turn
+	dec a
+	ld [wFollowerRadius], a
 	ld a, movement_step_sleep_1
 	ret
 
