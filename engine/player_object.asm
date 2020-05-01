@@ -87,7 +87,7 @@ StartFollowerFollowing::
 	jp QueueFollowerFirstStep
 
 FollowerObjectTemplate:
-	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
+	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1
 
 CopyDECoordsToMapObject:: ; 807e
 	push de

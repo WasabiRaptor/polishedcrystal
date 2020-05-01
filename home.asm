@@ -1208,3 +1208,7 @@ dbwArray::
 	ret
 
 INCLUDE "home/ded.asm"
+
+FollowerInteractScript::
+	farscall _FollowerInteractScript
+	end

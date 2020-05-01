@@ -5646,6 +5646,11 @@ SECTION "Move Data", ROMX
 INCLUDE "data/battle/move_properties.asm"
 
 
+SECTION "Follower Scripts", ROMX
+
+INCLUDE "engine/events/follower_scripts.asm"
+
+
 SECTION "Kanto Base Data 1", ROMX
 
 evs: MACRO

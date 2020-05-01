@@ -27,7 +27,7 @@ KrissHouse1F_MapScriptHeader:
 	object_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MIDNIGHT), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
 	object_event  6,  4, SPRITE_MATRON, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, -1, -1, PAL_NPC_COPY_PLAYER, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
 
-	const_def 1 ; object constants
+	const_def 2 ; object constants
 	const KRISSHOUSE1F_MOM1
 
 MomTrigger1:
