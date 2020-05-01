@@ -43,9 +43,9 @@ SpawnPlayer: ; 8029
 	ld [hl], e
 	xor a ; 0 for PLAYER
 	ldh [hMapObjectIndexBuffer], a
-	ld bc, wMapObjects
+	ld bc, wPlayerObject
 	ldh [hObjectStructIndexBuffer], a
-	ld de, wObjectStructs
+	ld de, wPlayerStruct
 	call CopyMapObjectToObjectStruct
 	ld a, PLAYER
 	ld [wCenteredObject], a
@@ -74,9 +74,9 @@ SpawnFollower::
 	ld [hl], e
 	ld a, FOLLOWER
 	ldh [hMapObjectIndexBuffer], a
-	ld bc, wMapObjects
+	ld bc, wFollowerObject
 	ldh [hObjectStructIndexBuffer], a
-	ld de, wObjectStructs
+	ld de, wFollowerStruct
 	jp CopyMapObjectToObjectStruct
 
 StartFollowerFollowing::

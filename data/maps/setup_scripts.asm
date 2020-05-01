@@ -139,6 +139,7 @@ MapSetupScript_ReloadMap: ; 153e7
 	db map_fade_in_palettes
 	db map_animations_on
 	db map_wildmons
+	db map_start_follower_following
 	db map_end
 
 MapSetupScript_LinkReturn: ; 153f7
@@ -158,6 +159,7 @@ MapSetupScript_LinkReturn: ; 153f7
 	db map_fade_in_palettes
 	db map_animations_on
 	db map_wildmons
+	db map_start_follower_following
 	db map_end
 
 MapSetupScript_Continue: ; 15408
@@ -185,4 +187,5 @@ MapSetupScript_Continue: ; 15408
 MapSetupScript_Submenu: ; 1541a
 	db map_load_blocks
 	db map_connection_blocks
+	db map_start_follower_following
 	db map_end
