@@ -352,7 +352,6 @@ GetQuantityInBag:
 
 ;stuff for registered items I might need later
 
-
 PlaceMenuItemName:
 ; places a star near the name if registered
 	push hl

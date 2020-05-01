@@ -534,13 +534,13 @@ endc
 	push af
 	call SFXDelay2
 	pop af
-	cp 3
+	cp MONSUBMENU_RELOAD
 	jr z, .menu
-	cp 0
+	cp MONSUBMENU_CHOOSE
 	jr z, .choosemenu
-	cp 1
+	cp MONSUBMENU_NORELOAD
 	jr z, .menunoreload
-	cp 2
+	cp MONSUBMENU_QUIT
 	jr z, .quit
 
 .return
@@ -714,6 +714,8 @@ PokemonActionSubmenu: ; 12a88
 	dbw MONMENU_ITEM,       GiveTakePartyMonItem
 	dbw MONMENU_CANCEL,     CancelPokemonAction
 	dbw MONMENU_MOVE,       ManagePokemonMoves ; move
+	dbw MONMENU_FOLLOW,     SetFollower
+	dbw MONMENU_STOPFOLLOW, StopFollower
 ; 12aec
 
 
@@ -759,7 +761,7 @@ SwitchPartyMons: ; 12aec
 	farcall InitPartyMenuWithCancel
 	farcall InitPartyMenuGFX
 
-	ld a, 1
+	ld a, MONSUBMENU_NORELOAD
 	ret
 
 .DontSwitch:
@@ -808,16 +810,16 @@ GiveTakePartyMonItem: ; 12b60
 	call ClearPalettes
 	call LoadFontsBattleExtra
 	call ExitMenu
-	xor a
+	ld a, MONSUBMENU_CHOOSE
 	ret
 
 .take
 	call TakePartyItem
-	ld a, 3
+	ld a, MONSUBMENU_RELOAD
 	ret
 
 .cancel
-	ld a, 3
+	ld a, MONSUBMENU_RELOAD
 	ret
 ; 12ba9
 
@@ -1041,7 +1043,7 @@ OpenPartyStats: ; 12e00
 	predef StatsScreenInit
 	call MaxVolume
 	call ExitMenu
-	xor a
+	ld a, MONSUBMENU_CHOOSE
 	ret
 ; 12e1b
 
@@ -1058,7 +1060,7 @@ _MonMenu_StandardSuccess:
 	ret
 
 _MonMenu_StandardFail:
-	ld a, $3
+	ld a, MONSUBMENU_RELOAD
 	ret
 ; 12e30
 
@@ -1072,7 +1074,7 @@ MonMenu_Fly: ; 12e30
 	jr _MonMenu_StandardSuccess
 
 .Error:
-	xor a
+	ld a, MONSUBMENU_CHOOSE
 	ret
 
 MonMenu_Flash: ; 12e55
@@ -1137,7 +1139,7 @@ MonMenu_Softboiled_MilkDrink: ; 12ee6
 .finish
 	xor a
 	ld [wPartyMenuActionText], a
-	ld a, $3
+	ld a, MONSUBMENU_RELOAD
 	ret
 ; 12f00
 
@@ -1287,7 +1289,7 @@ ManagePokemonMoves: ; 12fba
 	call ClearBGPalettes
 
 .egg
-	xor a
+	ld a, MONSUBMENU_CHOOSE
 	ret
 ; 12fd5
 
@@ -2149,3 +2151,22 @@ Text_CantForgetHM:
 ; HM moves can't be forgotten now.
 	text_jump UnknownText_0x1c5772
 	db "@"
+
+SetFollower::
+	break
+	ld a, [wCurPartyMon]
+	inc a
+	ld b, a
+	jr SaveFollower
+
+StopFollower::
+	xor a
+	ld a, b
+; fallthrough
+SaveFollower:
+	ld a, [wFollowerStatus]
+	and ~FOLLOWER_MASK
+	or b
+	ld [wFollowerStatus], a
+	ld a, MONSUBMENU_RELOAD
+	ret

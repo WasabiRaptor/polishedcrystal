@@ -20,7 +20,7 @@ MonSubmenu: ; 24d19
 
 .MenuDataHeader: ; 24d3f
 	db $40 ; tile backup
-	db 00, 06 ; start coords
+	db 00, 13 ; start coords
 	db 17, 19 ; end coords
 	dw 0
 	db 1 ; default option
@@ -141,7 +141,7 @@ GetMonSubmenuItems: ; 24dd4
 	call IsFieldMove
 	pop hl
 	jr nc, .next
-	call AddMonMenuItem
+	;call AddMonMenuItem ; TEMP
 
 .next
 	pop de
@@ -153,9 +153,21 @@ GetMonSubmenuItems: ; 24dd4
 .skip_moves
 	ld a, MONMENU_STATS
 	call AddMonMenuItem
+	ld a, MONMENU_MOVE
+	call AddMonMenuItem
 	ld a, MONMENU_SWITCH
 	call AddMonMenuItem
-	ld a, MONMENU_MOVE
+	break
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	ld b, a
+	ld a, [wCurPartyMon]
+	cp b
+	ld a, MONMENU_FOLLOW
+	jr nz, .not_following
+	ld a, MONMENU_STOPFOLLOW
+.not_following:
 	call AddMonMenuItem
 	ld a, [wLinkMode]
 	and a
