@@ -3,7 +3,6 @@ INCLUDE "constants.asm"
 
 SECTION "Overworld Sprites 1", ROMX
 
-FollowerSpriteGFX::
 ChrisSpriteGFX::               INCBIN "gfx/sprites/chris.2bpp"
 ChrisBikeSpriteGFX::           INCBIN "gfx/sprites/chris_bike.2bpp"
 ChrisSurfSpriteGFX::           INCBIN "gfx/sprites/chris_surf.2bpp"
@@ -232,3 +231,5 @@ INCLUDE "data/pokemon/kanto/overworld_sprite_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/overworld_sprite_pointers.asm"
 
 INCLUDE "data/pokemon/kanto/overworld_sprites.asm"
+;blank one for when you have no follower
+FollowerSpriteGFX::        INCBIN "gfx/sprites/pokemon/aa_dummy/overworld.2bpp"

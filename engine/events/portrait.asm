@@ -3,8 +3,6 @@ Portrait::
 	call CopyMenuDataHeader
 	call MenuBox
 	call UpdateSprites
-	ld a, 1
-	ld [wIsPortraitOnScreen], a
 
 	;this gets overwritten with the pokemon thats needed every time it is pulled, so I'm just using it here to hold the thing for later
 	ld a, [wCurSpecies]

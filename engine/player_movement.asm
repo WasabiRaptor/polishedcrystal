@@ -764,9 +764,9 @@ DoPlayerMovement:: ; 80000
 ; 8039e
 
 .PushPetCheck:
-	ld hl, wDummyPlaceholderByte	; push pet count
+	ld hl, wPushPetCount	; push pet count
 	ld a, [hObjectStructIndexBuffer]
-	cp 1
+	cp FOLLOWER
 	jr z, .cnt
 
 	xor a

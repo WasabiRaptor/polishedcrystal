@@ -23,10 +23,10 @@ DanielsTown_MapScriptHeader:
 	;object_event 11, 8, SPRITE_KRIS,  SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, -1, PAL_NPC_GREEN, PERSONTYPE_SCRIPT, 0, setjohtoscript, -1
 
 	const_def 2
-	const FOLLOWER
+	const TEST_FOLLOWER
 
 DTFollow:
-	follow PLAYER, FOLLOWER
+	follow PLAYER, TEST_FOLLOWER
 	applymovement PLAYER, DTFollowTestMovementData
 	stopfollow
 	end

@@ -148,7 +148,8 @@ GetSprite:: ; 1423c
 	ret c
 
 	cp SPRITE_FOLLOWER
-	jr z, .GetFollowerSpriteAddresses
+	jr z, GetFollowerSpriteAddresses
+NoFollower:
 	ld hl, SpriteHeaders ; address
 	dec a
 	ld c, a
@@ -174,7 +175,7 @@ GetSprite:: ; 1423c
 	ld c, 12
 	ret
 ; 14259
-.GetFollowerSpriteAddresses
+GetFollowerSpriteAddresses:
 	ld a, [wPartyMon1Species]
 	ld [wCurSpecies], a
 	ld a, [wPartyMon1Form]
@@ -183,8 +184,10 @@ GetSprite:: ; 1423c
 	ld a, [wPartyMon1Group]
 	ld [wCurGroup], a
 	;fallthrough
-GetPokemonOverWorldSprite:
+GetPokemonOverworldSprite:
 	ld a, [wCurGroup]
+	and a
+	jr z, .no_follower
 	ld hl, RegionalOverworldSpriteTable
 	ld bc, 3
 	rst AddNTimes
@@ -222,6 +225,10 @@ GetPokemonOverWorldSprite:
 	ld l, WALKING_SPRITE ; load the sprite type into l
 	ld c, 12 ; load the length into c
 	ret
+
+.no_follower
+	ld a, SPRITE_FOLLOWER
+	jp NoFollower
 
 INCLUDE "data/pokemon/regional_overworld_sprite_table.asm"
 

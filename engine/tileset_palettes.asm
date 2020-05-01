@@ -309,7 +309,8 @@ LoadSpecialMapOBPalette:
 	ld a, [wTimeOfDayPal]
 	ld bc, 8 palettes
 	rst AddNTimes
-	ld a, [wPlayerOverworldPalette]
+	;ld a, [wPlayerOverworldPalette]
+	ld a, [wPlayerOverworldSprite]
 	ld bc, 1 palettes
 	rst AddNTimes
 

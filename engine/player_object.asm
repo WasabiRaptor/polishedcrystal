@@ -32,10 +32,12 @@ SpawnPlayer: ; 8029
 	ld a, [wPlayerSpriteSetupFlags]
 	bit 2, a
 	jr nz, .ok
-	ld a, [wPlayerOverworldSprite]
-	bit 0, a
-	jr z, .ok
-	ln e, (1 << 3) | PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT
+	;the pal for the player is dynamically loaded now, so we don't need this as the blue pal gets loaded int OB0 and what was originally the blue pal is now the follower pal
+
+	;ld a, [wPlayerOverworldSprite]
+	;bit 0, a
+	;jr z, .ok
+	;ln e, (1 << 3) | PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT
 
 .ok
 	ld [hl], e
@@ -123,7 +125,7 @@ RefreshPlayerCoords: ; 80b8
 
 ; Follower
 	ld a, [wObjectFollow_Leader]
-	cp 0
+	cp PLAYER
 	ret nz ; no longer wtf
 	ld a, [wObjectFollow_Follower]
 	cp NO_FOLLOWER
@@ -163,19 +165,19 @@ TrimPetParam:
 	cp NO_FOLLOWER
 	ret z
 
-	ld a, wMapObjects - wFollowerObject
+	ld a, FOLLOWER
 	call ApplyDeletionToMapObject
 
-	ld b, wMapObjects - wFollowerObject
+	ld b, FOLLOWER
 	call PlayerSpawn_ConvertCoords
 
-	ld a, wMapObjects - wFollowerObject
+	ld a, FOLLOWER
 	call SetPetActor
 	ld a, [wPlayerDirection]
 	ld [wFollowerDirection], a
 
-	ld b, wMapObjects - wPlayerObject
-	ld c, wMapObjects - wFollowerObject
+	ld b, PLAYER
+	ld c, FOLLOWER
 	jp StartFollow
 
 FollowPetSetup:
@@ -183,15 +185,15 @@ FollowPetSetup:
 
 	ld a, [hUsedSpriteIndex + 1]
 	ld [wFollowerObjectSprite], a
-	ld a, wMapObjects - wFollowerObject
+	ld a, FOLLOWER
 	call SetPetActor
 
-	ld b, wMapObjects - wPlayerObject
-	ld c, wMapObjects - wFollowerObject
+	ld b, PLAYER
+	ld c, FOLLOWER
 	jp StartFollow
 
 FollowPetCancel:
-	ld a, wMapObjects - wFollowerObject
+	ld a, FOLLOWER
 	call DeleteCast
 
 	ld a, NO_FOLLOWER
@@ -203,13 +205,13 @@ SetPetActor:
 	ldh [hMapObjectIndexBuffer], a
 	call GetMapObject
 
-	ld a, wObjectStructs - wFollowerStruct
+	ld a, FOLLOWER
 	ldh [hObjectStructIndexBuffer], a
 	ld de, wFollowerStruct
 	jr CopyMapObjectToObjectStruct
 
 SetPetCastData:
-	ld a, wMapObjects - wFollowerObject
+	ld a, FOLLOWER
 	ld hl, .PetCastData
 	call CopyPlayerObjectTemplate
 
@@ -218,11 +220,11 @@ SetPetCastData:
 	ld a, [wPlayerStandingMapY]
 	dec a
 	ld e, a
-	ld b, wMapObjects - wFollowerObject
+	ld b, FOLLOWER
 	jp CopyDECoordsToMapObject
 
 .PetCastData:
-	object_event -4, -4, SPRITE_BULBASAUR, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
+	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
 
 CopyObjectStruct:: ; 80e7
 	call CheckObjectMask
