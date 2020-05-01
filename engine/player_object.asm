@@ -19,12 +19,12 @@ SpawnPlayer: ; 8029
 	ld a, NO_FOLLOWER
 	ld [wObjectFollow_Leader], a
 	ld [wObjectFollow_Follower], a
-	xor a
+	xor a ; 0 for PLAYER
 	ld hl, PlayerObjectTemplate
 	call CopyPlayerObjectTemplate
-	ld b, $0
+	ld b, PLAYER
 	call PlayerSpawn_ConvertCoords
-	xor a
+	xor a ; 0 for PLAYER
 	call GetMapObject
 	ld hl, MAPOBJECT_COLOR
 	add hl, bc
@@ -41,7 +41,7 @@ SpawnPlayer: ; 8029
 
 .ok
 	ld [hl], e
-	xor a
+	xor a ; 0 for PLAYER
 	ldh [hMapObjectIndexBuffer], a
 	ld bc, wMapObjects
 	ldh [hObjectStructIndexBuffer], a
@@ -57,6 +57,37 @@ PlayerObjectTemplate: ; 8071
 ; Said bytes seem to be unused, but the game freezes when you first spawn
 ; in your room if this is not loaded.
 	object_event -4, -4, SPRITE_CHRIS, SPRITEMOVEDATA_PLAYER, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
+
+SpawnFollower::
+	ld a, FOLLOWER
+	ld hl, FollowerObjectTemplate
+	call CopyPlayerObjectTemplate
+
+	ld b, FOLLOWER
+	call PlayerSpawn_ConvertCoords
+
+	ld a, FOLLOWER
+	call GetMapObject
+	ld hl, MAPOBJECT_COLOR
+	add hl, bc
+	ln e, (1 << 3) | PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT
+	ld [hl], e
+	ld a, FOLLOWER
+	ldh [hMapObjectIndexBuffer], a
+	ld bc, wMapObjects
+	ldh [hObjectStructIndexBuffer], a
+	ld de, wObjectStructs
+	jp CopyMapObjectToObjectStruct
+
+StartFollowerFollowing::
+	ld a, PLAYER
+	ld [wObjectFollow_Leader], a
+	ld a, FOLLOWER
+	ld [wObjectFollow_Follower], a
+	ret
+
+FollowerObjectTemplate:
+	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
 
 CopyDECoordsToMapObject:: ; 807e
 	push de
@@ -159,72 +190,6 @@ RefreshPlayerCoords: ; 80b8
 	add a, e
 	ld [hl], a
 	ret
-
-TrimPetParam:
-	ld a, [wObjectFollow_Follower]
-	cp NO_FOLLOWER
-	ret z
-
-	ld a, FOLLOWER
-	call ApplyDeletionToMapObject
-
-	ld b, FOLLOWER
-	call PlayerSpawn_ConvertCoords
-
-	ld a, FOLLOWER
-	call SetPetActor
-	ld a, [wPlayerDirection]
-	ld [wFollowerDirection], a
-
-	ld b, PLAYER
-	ld c, FOLLOWER
-	jp StartFollow
-
-FollowPetSetup:
-	call SetPetCastData
-
-	ld a, [hUsedSpriteIndex + 1]
-	ld [wFollowerObjectSprite], a
-	ld a, FOLLOWER
-	call SetPetActor
-
-	ld b, PLAYER
-	ld c, FOLLOWER
-	jp StartFollow
-
-FollowPetCancel:
-	ld a, FOLLOWER
-	call DeleteCast
-
-	ld a, NO_FOLLOWER
-	ld [wObjectFollow_Follower], a
-	ld [wObjectFollow_Leader], a
-	ret
-
-SetPetActor:
-	ldh [hMapObjectIndexBuffer], a
-	call GetMapObject
-
-	ld a, FOLLOWER
-	ldh [hObjectStructIndexBuffer], a
-	ld de, wFollowerStruct
-	jr CopyMapObjectToObjectStruct
-
-SetPetCastData:
-	ld a, FOLLOWER
-	ld hl, .PetCastData
-	call CopyPlayerObjectTemplate
-
-	ld a, [wPlayerStandingMapX]
-	ld d, a
-	ld a, [wPlayerStandingMapY]
-	dec a
-	ld e, a
-	ld b, FOLLOWER
-	jp CopyDECoordsToMapObject
-
-.PetCastData:
-	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
 
 CopyObjectStruct:: ; 80e7
 	call CheckObjectMask

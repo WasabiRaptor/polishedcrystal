@@ -25,6 +25,7 @@ MapSetupScript_Warp: ; 15392
 	db map_load_attributes
 	db map_change_callback
 	db map_spawn_coord
+	db map_follower_spawn_coord
 	db map_player_coord
 	db map_anchor_screen
 	db map_load_blocks
@@ -42,6 +43,7 @@ MapSetupScript_Warp: ; 15392
 	db map_fade_in_palettes
 	db map_animations_on
 	db map_wildmons
+	db map_start_follower_following
 	db map_end
 
 MapSetupScript_BadWarp: ; 153a9
@@ -49,6 +51,7 @@ MapSetupScript_BadWarp: ; 153a9
 	db map_load_attributes
 	db map_change_callback
 	db map_spawn_coord
+	db map_follower_spawn_coord
 	db map_player_coord
 	db map_anchor_screen
 	db map_load_blocks
@@ -67,6 +70,7 @@ MapSetupScript_BadWarp: ; 153a9
 	db map_fade_in_palettes
 	db map_animations_on
 	db map_wildmons
+	db map_start_follower_following
 	db map_end
 
 MapSetupScript_Connection: ; 153bf
@@ -86,6 +90,7 @@ MapSetupScript_Connection: ; 153bf
 	db map_wildmons
 	db map_update_roam
 	db map_animations_on
+	db map_start_follower_following
 	db map_end
 
 MapSetupScript_Fall: ; 153d0
@@ -114,6 +119,7 @@ MapSetupScript_Train: ; 153d2
 	db map_animations_on
 	db map_wildmons
 	db map_update_roam
+	db map_start_follower_following
 	db map_end
 
 MapSetupScript_ReloadMap: ; 153e7
@@ -173,6 +179,7 @@ MapSetupScript_Continue: ; 15408
 	db map_fade_in_palettes
 	db map_animations_on
 	db map_wildmons
+	db map_start_follower_following
 	db map_end
 
 MapSetupScript_Submenu: ; 1541a

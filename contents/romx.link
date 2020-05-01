@@ -9,7 +9,6 @@ ROMX $02
 	"Code 2"
 	"Trainer Pic Pointers"
 	"wild stuff"
-	"Pokemon Pics 50"
 
 ROMX $03
 	org $4000

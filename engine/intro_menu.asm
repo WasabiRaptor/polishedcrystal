@@ -326,6 +326,7 @@ InitializeNPCNames: ; 5ce9
 InitializeWorld: ; 5d23
 	;call ShrinkPlayer
 	farcall SpawnPlayer
+	farcall SpawnFollower
 	farjp _InitializeStartDay
 ; 5d33
 

@@ -69,4 +69,6 @@
 	const map_keep_palettes       ; 2b
 	const map_stop_script         ; 2c
 	const map_decompress_metatiles ; 2d
+	const map_follower_spawn_coord
+	const map_start_follower_following
 map_end EQU -1

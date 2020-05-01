@@ -107,6 +107,8 @@ MapSetupCommands: ; 15440
 	dba RetainOldPalettes ; 2b
 	dba ReturnFromMapSetupScript ; 2c
 	dba DecompressMetatiles ; 2d
+	dba SpawnFollower
+	dba StartFollowerFollowing
 ; 154ca
 
 ActivateMapAnims: ; 154cf
