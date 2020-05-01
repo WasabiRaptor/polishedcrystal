@@ -6,26 +6,31 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         console.error(err);
         process.exit(1);
     }
-    let lastNotForm;
 
     data.replace(region_regex, (match, list, region) => { //using this as a foreach type thing, not actually using the output at all
+        let lastSpecies;
         list = list.split("\n").slice(0,-1).map(poke=>{
             let match = poke.match(/^\tnat_dexmon(_form)? (\w+)/);
             let isForm = match[1];
             let name = match[2]
             if (isForm){
-                return {
-                }
+                lastSpecies.forms.push({
+                    lower: lastSpecies.lower + "_" + name.toLowerCase(),
+                    upper: lastSpecies.upper + "_" + name.toUpperCase(),
+                    title: lastSpecies.title + titleCase(name)
+                })
+                return null
             }
             else{
-                lastNotForm = name
-                return {
+                lastSpecies = {
                     lower: name.toLowerCase(),
                     upper: name.toUpperCase(),
                     title: titleCase(name),
+                    forms: []
                 }
+                return lastSpecies
             }
-        });
+        }).filter(x => x != null);
         region = {
             lower: region.toLowerCase(),
             upper: region.toUpperCase(),
@@ -43,8 +48,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/base_stat_pointers.asm`,
             `${region.title}BaseDataPointers::\n\n` +
             list.map(poke=>`${poke.title}BaseDataPointers::\n\tadd_basedata ${poke.title}\n` +
-            //thing for tacking on the forms would go right here
-
+                poke.forms.map(form => `\tadd_basedata ${form.title}`)
             `\n`).join(""),
         "utf8");
 
