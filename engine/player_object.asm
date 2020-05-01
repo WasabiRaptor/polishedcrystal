@@ -84,7 +84,7 @@ StartFollowerFollowing::
 	ld [wObjectFollow_Leader], a
 	ld a, FOLLOWER
 	ld [wObjectFollow_Follower], a
-	ret
+	jp QueueFollowerFirstStep
 
 FollowerObjectTemplate:
 	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
