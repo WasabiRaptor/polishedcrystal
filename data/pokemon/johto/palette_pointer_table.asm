@@ -97,5 +97,5 @@ JohtoPalettePointerTable::
 	add_palettetable Pupitar
 	add_palettetable Tyranitar
 	add_palettetable Lugia
-	add_palettetable Ho_Oh
+	add_palettetable Ho_oh
 	add_palettetable Celebi

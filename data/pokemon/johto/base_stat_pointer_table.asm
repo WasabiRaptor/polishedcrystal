@@ -97,5 +97,5 @@ JohtoBaseDataPointerTable::
 	add_basedatatable Pupitar
 	add_basedatatable Tyranitar
 	add_basedatatable Lugia
-	add_basedatatable Ho_Oh
+	add_basedatatable Ho_oh
 	add_basedatatable Celebi

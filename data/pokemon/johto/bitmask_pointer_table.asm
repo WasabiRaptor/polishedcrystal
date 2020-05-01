@@ -97,5 +97,5 @@ JohtoBitmasksPointerTable::
 	add_bitmaskstable Pupitar
 	add_bitmaskstable Tyranitar
 	add_bitmaskstable Lugia
-	add_bitmaskstable Ho_Oh
+	add_bitmaskstable Ho_oh
 	add_bitmaskstable Celebi

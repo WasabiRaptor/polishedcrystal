@@ -7,6 +7,8 @@ IvysaurOverworldSpritePointers::
 
 VenusaurOverworldSpritePointers::
 	add_overworldsprite Venusaur
+	add_overworldsprite VenusaurMega
+	add_overworldsprite VenusaurGiga
 
 CharmanderOverworldSpritePointers::
 	add_overworldsprite Charmander

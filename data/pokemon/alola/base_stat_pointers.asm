@@ -1,4 +1,5 @@
 AlolaBaseDataPointers::
+
 RowletBaseDataPointers::
 	add_basedata Rowlet
 

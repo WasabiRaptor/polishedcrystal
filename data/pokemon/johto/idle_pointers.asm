@@ -293,8 +293,9 @@ TyranitarAnimationIdlePointers::
 LugiaAnimationIdlePointers::
 	add_idleanim Lugia
 
-Ho_OhAnimationIdlePointers::
-	add_idleanim Ho_Oh
+Ho_ohAnimationIdlePointers::
+	add_idleanim Ho_oh
 
 CelebiAnimationIdlePointers::
 	add_idleanim Celebi
+

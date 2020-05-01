@@ -3,6 +3,8 @@
 
 SECTION "Mon Icons 1", ROMX
 
+VenusaurMegaIcon::
+VenusaurGigaIcon::
 Icons1::
 NullIcon::
 BulbasaurIcon::    INCBIN "gfx/icons/bulbasaur.2bpp"
@@ -33,10 +35,10 @@ PikachuIcon::      INCBIN "gfx/icons/pikachu.2bpp"
 RaichuIcon::       INCBIN "gfx/icons/raichu.2bpp"
 SandshrewIcon::    INCBIN "gfx/icons/sandshrew.2bpp"
 SandslashIcon::    INCBIN "gfx/icons/sandslash.2bpp"
-Nidoran_FIcon::     INCBIN "gfx/icons/nidoran_f.2bpp"
+Nidoran_fIcon::     INCBIN "gfx/icons/nidoran_f.2bpp"
 NidorinaIcon::     INCBIN "gfx/icons/nidorina.2bpp"
 NidoqueenIcon::    INCBIN "gfx/icons/nidoqueen.2bpp"
-Nidoran_MIcon::     INCBIN "gfx/icons/nidoran_m.2bpp"
+Nidoran_mIcon::     INCBIN "gfx/icons/nidoran_m.2bpp"
 NidorinoIcon::     INCBIN "gfx/icons/nidorino.2bpp"
 NidokingIcon::     INCBIN "gfx/icons/nidoking.2bpp"
 ClefairyIcon::     INCBIN "gfx/icons/clefairy.2bpp"
@@ -125,7 +127,7 @@ TogepiIcon::       INCBIN "gfx/icons/togepi.2bpp"
 TogeticIcon::      INCBIN "gfx/icons/togetic.2bpp"
 StaryuIcon::       INCBIN "gfx/icons/staryu.2bpp"
 StarmieIcon::      INCBIN "gfx/icons/starmie.2bpp"
-MrMimeIcon::       ;INCBIN "gfx/icons/mrmime.2bpp"
+MrmimeIcon::       ;INCBIN "gfx/icons/mrmime.2bpp"
 ScytherIcon::      INCBIN "gfx/icons/scyther.2bpp"
 JynxIcon::         INCBIN "gfx/icons/jynx.2bpp"
 ElectabuzzIcon::   INCBIN "gfx/icons/electabuzz.2bpp"
@@ -243,7 +245,7 @@ LarvitarIcon::     INCBIN "gfx/icons/larvitar.2bpp"
 PupitarIcon::      INCBIN "gfx/icons/pupitar.2bpp"
 TyranitarIcon::    INCBIN "gfx/icons/tyranitar.2bpp"
 LugiaIcon::        INCBIN "gfx/icons/lugia.2bpp"
-Ho_OhIcon::         INCBIN "gfx/icons/ho_oh.2bpp"
+Ho_ohIcon::         INCBIN "gfx/icons/ho_oh.2bpp"
 CelebiIcon::       INCBIN "gfx/icons/celebi.2bpp"
 PorygonZIcon::     INCBIN "gfx/icons/porygon_z.2bpp"
 EggIcon::          INCBIN "gfx/icons/egg.2bpp"

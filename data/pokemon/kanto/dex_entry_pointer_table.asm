@@ -27,10 +27,10 @@ KantoPokedexEntryPointerTable::
 	add_pokedexentrytable Raichu
 	add_pokedexentrytable Sandshrew
 	add_pokedexentrytable Sandslash
-	add_pokedexentrytable Nidoran_F
+	add_pokedexentrytable Nidoran_f
 	add_pokedexentrytable Nidorina
 	add_pokedexentrytable Nidoqueen
-	add_pokedexentrytable Nidoran_M
+	add_pokedexentrytable Nidoran_m
 	add_pokedexentrytable Nidorino
 	add_pokedexentrytable Nidoking
 	add_pokedexentrytable Clefairy
@@ -120,7 +120,7 @@ KantoPokedexEntryPointerTable::
 	add_pokedexentrytable Seaking
 	add_pokedexentrytable Staryu
 	add_pokedexentrytable Starmie
-	add_pokedexentrytable MrMime
+	add_pokedexentrytable Mrmime
 	add_pokedexentrytable Scyther
 	add_pokedexentrytable Jynx
 	add_pokedexentrytable Electabuzz

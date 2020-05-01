@@ -83,8 +83,8 @@ SandshrewEvosAttacksPointers::
 SandslashEvosAttacksPointers::
 	add_evosattacks Sandslash
 
-Nidoran_FEvosAttacksPointers::
-	add_evosattacks Nidoran_F
+Nidoran_fEvosAttacksPointers::
+	add_evosattacks Nidoran_f
 
 NidorinaEvosAttacksPointers::
 	add_evosattacks Nidorina
@@ -92,8 +92,8 @@ NidorinaEvosAttacksPointers::
 NidoqueenEvosAttacksPointers::
 	add_evosattacks Nidoqueen
 
-Nidoran_MEvosAttacksPointers::
-	add_evosattacks Nidoran_M
+Nidoran_mEvosAttacksPointers::
+	add_evosattacks Nidoran_m
 
 NidorinoEvosAttacksPointers::
 	add_evosattacks Nidorino
@@ -362,8 +362,8 @@ StaryuEvosAttacksPointers::
 StarmieEvosAttacksPointers::
 	add_evosattacks Starmie
 
-MrMimeEvosAttacksPointers::
-	add_evosattacks MrMime
+MrmimeEvosAttacksPointers::
+	add_evosattacks Mrmime
 
 ScytherEvosAttacksPointers::
 	add_evosattacks Scyther

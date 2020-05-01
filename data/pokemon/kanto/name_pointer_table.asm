@@ -27,10 +27,10 @@ KantoNamePointerTable::
 	add_nametable Raichu
 	add_nametable Sandshrew
 	add_nametable Sandslash
-	add_nametable Nidoran_F
+	add_nametable Nidoran_f
 	add_nametable Nidorina
 	add_nametable Nidoqueen
-	add_nametable Nidoran_M
+	add_nametable Nidoran_m
 	add_nametable Nidorino
 	add_nametable Nidoking
 	add_nametable Clefairy
@@ -120,7 +120,7 @@ KantoNamePointerTable::
 	add_nametable Seaking
 	add_nametable Staryu
 	add_nametable Starmie
-	add_nametable MrMime
+	add_nametable Mrmime
 	add_nametable Scyther
 	add_nametable Jynx
 	add_nametable Electabuzz

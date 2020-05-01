@@ -97,5 +97,5 @@ JohtoFramesPointerTable::
 	add_framestable Pupitar
 	add_framestable Tyranitar
 	add_framestable Lugia
-	add_framestable Ho_Oh
+	add_framestable Ho_oh
 	add_framestable Celebi

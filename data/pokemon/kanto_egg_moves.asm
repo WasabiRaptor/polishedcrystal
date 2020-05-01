@@ -84,7 +84,7 @@ SandshrewEggMoves:
 Sandshrew_AlolaEggMoves:
 	dw 0
 
-Nidoran_FEggMoves:
+Nidoran_fEggMoves:
 	dw CHARM
 	dw DISABLE
 	dw FOCUS_ENERGY
@@ -93,7 +93,7 @@ Nidoran_FEggMoves:
 	dw TAKE_DOWN
 	dw 0
 
-Nidoran_MEggMoves:
+Nidoran_mEggMoves:
 	dw AMNESIA
 	dw CONFUSION
 	dw DISABLE

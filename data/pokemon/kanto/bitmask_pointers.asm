@@ -7,6 +7,8 @@ IvysaurBitmasksPointers::
 
 VenusaurBitmasksPointers::
 	add_bitmasks Venusaur
+	add_bitmasks VenusaurMega
+	add_bitmasks VenusaurGiga
 
 CharmanderBitmasksPointers::
 	add_bitmasks Charmander
@@ -83,8 +85,8 @@ SandshrewBitmasksPointers::
 SandslashBitmasksPointers::
 	add_bitmasks Sandslash
 
-Nidoran_FBitmasksPointers::
-	add_bitmasks Nidoran_F
+Nidoran_fBitmasksPointers::
+	add_bitmasks Nidoran_f
 
 NidorinaBitmasksPointers::
 	add_bitmasks Nidorina
@@ -92,8 +94,8 @@ NidorinaBitmasksPointers::
 NidoqueenBitmasksPointers::
 	add_bitmasks Nidoqueen
 
-Nidoran_MBitmasksPointers::
-	add_bitmasks Nidoran_M
+Nidoran_mBitmasksPointers::
+	add_bitmasks Nidoran_m
 
 NidorinoBitmasksPointers::
 	add_bitmasks Nidorino
@@ -362,8 +364,8 @@ StaryuBitmasksPointers::
 StarmieBitmasksPointers::
 	add_bitmasks Starmie
 
-MrMimeBitmasksPointers::
-	add_bitmasks MrMime
+MrmimeBitmasksPointers::
+	add_bitmasks Mrmime
 
 ScytherBitmasksPointers::
 	add_bitmasks Scyther
@@ -451,3 +453,4 @@ MewtwoBitmasksPointers::
 
 MewBitmasksPointers::
 	add_bitmasks Mew
+

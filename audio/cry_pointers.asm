@@ -1,6 +1,6 @@
 Cries:
-	dba Cry_Nidoran_M
-	dba Cry_Nidoran_F
+	dba Cry_Nidoran_m
+	dba Cry_Nidoran_f
 	dba Cry_Slowpoke
 	dba Cry_Kangaskhan
 	dba Cry_Charmander

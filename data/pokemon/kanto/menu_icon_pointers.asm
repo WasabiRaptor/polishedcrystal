@@ -7,6 +7,8 @@ IvysaurIconPointers::
 
 VenusaurIconPointers::
 	add_icon Venusaur
+	add_icon VenusaurMega
+	add_icon VenusaurGiga
 
 CharmanderIconPointers::
 	add_icon Charmander
@@ -83,8 +85,8 @@ SandshrewIconPointers::
 SandslashIconPointers::
 	add_icon Sandslash
 
-Nidoran_FIconPointers::
-	add_icon Nidoran_F
+Nidoran_fIconPointers::
+	add_icon Nidoran_f
 
 NidorinaIconPointers::
 	add_icon Nidorina
@@ -92,8 +94,8 @@ NidorinaIconPointers::
 NidoqueenIconPointers::
 	add_icon Nidoqueen
 
-Nidoran_MIconPointers::
-	add_icon Nidoran_M
+Nidoran_mIconPointers::
+	add_icon Nidoran_m
 
 NidorinoIconPointers::
 	add_icon Nidorino
@@ -362,8 +364,8 @@ StaryuIconPointers::
 StarmieIconPointers::
 	add_icon Starmie
 
-MrMimeIconPointers::
-	add_icon MrMime
+MrmimeIconPointers::
+	add_icon Mrmime
 
 ScytherIconPointers::
 	add_icon Scyther
@@ -451,3 +453,4 @@ MewtwoIconPointers::
 
 MewIconPointers::
 	add_icon Mew
+

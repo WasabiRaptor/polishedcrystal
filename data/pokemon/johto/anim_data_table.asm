@@ -97,5 +97,5 @@ JohtoAnimPointerTable::
 	variant_animdata Pupitar
 	variant_animdata Tyranitar
 	variant_animdata Lugia
-	variant_animdata Ho_Oh
+	variant_animdata Ho_oh
 	variant_animdata Celebi

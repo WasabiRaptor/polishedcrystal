@@ -27,10 +27,10 @@ KantoPalettePointerTable::
 	add_palettetable Raichu
 	add_palettetable Sandshrew
 	add_palettetable Sandslash
-	add_palettetable Nidoran_F
+	add_palettetable Nidoran_f
 	add_palettetable Nidorina
 	add_palettetable Nidoqueen
-	add_palettetable Nidoran_M
+	add_palettetable Nidoran_m
 	add_palettetable Nidorino
 	add_palettetable Nidoking
 	add_palettetable Clefairy
@@ -120,7 +120,7 @@ KantoPalettePointerTable::
 	add_palettetable Seaking
 	add_palettetable Staryu
 	add_palettetable Starmie
-	add_palettetable MrMime
+	add_palettetable Mrmime
 	add_palettetable Scyther
 	add_palettetable Jynx
 	add_palettetable Electabuzz

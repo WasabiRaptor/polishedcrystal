@@ -97,5 +97,5 @@ JohtoPicPointerTable::
 	add_pictable Pupitar
 	add_pictable Tyranitar
 	add_pictable Lugia
-	add_pictable Ho_Oh
+	add_pictable Ho_oh
 	add_pictable Celebi

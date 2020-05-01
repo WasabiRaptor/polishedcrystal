@@ -27,10 +27,10 @@ KantoAnimPointerTable::
 	variant_animdata Raichu
 	variant_animdata Sandshrew
 	variant_animdata Sandslash
-	variant_animdata Nidoran_F
+	variant_animdata Nidoran_f
 	variant_animdata Nidorina
 	variant_animdata Nidoqueen
-	variant_animdata Nidoran_M
+	variant_animdata Nidoran_m
 	variant_animdata Nidorino
 	variant_animdata Nidoking
 	variant_animdata Clefairy
@@ -120,7 +120,7 @@ KantoAnimPointerTable::
 	variant_animdata Seaking
 	variant_animdata Staryu
 	variant_animdata Starmie
-	variant_animdata MrMime
+	variant_animdata Mrmime
 	variant_animdata Scyther
 	variant_animdata Jynx
 	variant_animdata Electabuzz

@@ -27,10 +27,10 @@ KantoBaseDataPointerTable::
 	add_basedatatable Raichu
 	add_basedatatable Sandshrew
 	add_basedatatable Sandslash
-	add_basedatatable Nidoran_F
+	add_basedatatable Nidoran_f
 	add_basedatatable Nidorina
 	add_basedatatable Nidoqueen
-	add_basedatatable Nidoran_M
+	add_basedatatable Nidoran_m
 	add_basedatatable Nidorino
 	add_basedatatable Nidoking
 	add_basedatatable Clefairy
@@ -120,7 +120,7 @@ KantoBaseDataPointerTable::
 	add_basedatatable Seaking
 	add_basedatatable Staryu
 	add_basedatatable Starmie
-	add_basedatatable MrMime
+	add_basedatatable Mrmime
 	add_basedatatable Scyther
 	add_basedatatable Jynx
 	add_basedatatable Electabuzz

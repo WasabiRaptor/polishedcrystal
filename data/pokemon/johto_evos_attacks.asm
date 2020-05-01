@@ -1639,7 +1639,7 @@ LugiaEvosAttacks:
 	learnmove 99, HURRICANE ; Sky Attack → new move
 	db 0 ; no more level-up moves
 
-Ho_OhEvosAttacks:
+Ho_ohEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, ROAR ; Whirlwind → similar move
 	learnmove 9, GUST

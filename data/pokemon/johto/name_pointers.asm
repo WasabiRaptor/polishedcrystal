@@ -293,8 +293,9 @@ TyranitarNames::
 LugiaNames::
 	add_name Lugia
 
-Ho_OhNames::
-	add_name Ho_Oh
+Ho_ohNames::
+	add_name Ho_oh
 
 CelebiNames::
 	add_name Celebi
+

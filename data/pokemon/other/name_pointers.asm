@@ -83,8 +83,8 @@ SandshrewNames::
 SandslashNames::
 	add_name Sandslash
 
-Nidoran_FNames::
-	add_name Nidoran_F
+Nidoran_fNames::
+	add_name Nidoran_f
 
 NidorinaNames::
 	add_name Nidorina
@@ -92,8 +92,8 @@ NidorinaNames::
 NidoqueenNames::
 	add_name Nidoqueen
 
-Nidoran_MNames::
-	add_name Nidoran_M
+Nidoran_mNames::
+	add_name Nidoran_m
 
 NidorinoNames::
 	add_name Nidorino
@@ -362,8 +362,8 @@ StaryuNames::
 StarmieNames::
 	add_name Starmie
 
-MrMimeNames::
-	add_name MrMime
+MrmimeNames::
+	add_name Mrmime
 
 ScytherNames::
 	add_name Scyther

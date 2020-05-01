@@ -27,10 +27,10 @@ KantoEggMovePointers::
 	add_eggmoves NoKanto
 	add_eggmoves Sandshrew
 	add_eggmoves NoKanto
-	add_eggmoves Nidoran_F
+	add_eggmoves Nidoran_f
 	add_eggmoves NoKanto
 	add_eggmoves NoKanto
-	add_eggmoves Nidoran_M
+	add_eggmoves Nidoran_m
 	add_eggmoves NoKanto
 	add_eggmoves NoKanto
 	add_eggmoves NoKanto

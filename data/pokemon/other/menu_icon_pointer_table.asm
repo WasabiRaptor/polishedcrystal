@@ -27,10 +27,10 @@ KantoIconPointerTable::
 	add_icontable Raichu
 	add_icontable Sandshrew
 	add_icontable Sandslash
-	add_icontable Nidoran_F
+	add_icontable Nidoran_f
 	add_icontable Nidorina
 	add_icontable Nidoqueen
-	add_icontable Nidoran_M
+	add_icontable Nidoran_m
 	add_icontable Nidorino
 	add_icontable Nidoking
 	add_icontable Clefairy
@@ -120,7 +120,7 @@ KantoIconPointerTable::
 	add_icontable Seaking
 	add_icontable Staryu
 	add_icontable Starmie
-	add_icontable MrMime
+	add_icontable Mrmime
 	add_icontable Scyther
 	add_icontable Jynx
 	add_icontable Electabuzz

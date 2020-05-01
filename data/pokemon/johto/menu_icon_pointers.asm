@@ -293,8 +293,9 @@ TyranitarIconPointers::
 LugiaIconPointers::
 	add_icon Lugia
 
-Ho_OhIconPointers::
-	add_icon Ho_Oh
+Ho_ohIconPointers::
+	add_icon Ho_oh
 
 CelebiIconPointers::
 	add_icon Celebi
+

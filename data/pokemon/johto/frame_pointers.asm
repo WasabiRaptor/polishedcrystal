@@ -293,8 +293,9 @@ TyranitarFramesPointers::
 LugiaFramesPointers::
 	add_frames Lugia
 
-Ho_OhFramesPointers::
-	add_frames Ho_Oh
+Ho_ohFramesPointers::
+	add_frames Ho_oh
 
 CelebiFramesPointers::
 	add_frames Celebi
+

@@ -7,6 +7,8 @@ IvysaurOverworldPalettePointers::
 
 VenusaurOverworldPalettePointers::
 	add_overworldpalettes Venusaur
+	add_overworldpalettes VenusaurMega
+	add_overworldpalettes VenusaurGiga
 
 CharmanderOverworldPalettePointers::
 	add_overworldpalettes Charmander

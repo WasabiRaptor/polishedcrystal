@@ -27,10 +27,10 @@ KantoBitmasksPointerTable::
 	add_bitmaskstable Raichu
 	add_bitmaskstable Sandshrew
 	add_bitmaskstable Sandslash
-	add_bitmaskstable Nidoran_F
+	add_bitmaskstable Nidoran_f
 	add_bitmaskstable Nidorina
 	add_bitmaskstable Nidoqueen
-	add_bitmaskstable Nidoran_M
+	add_bitmaskstable Nidoran_m
 	add_bitmaskstable Nidorino
 	add_bitmaskstable Nidoking
 	add_bitmaskstable Clefairy
@@ -120,7 +120,7 @@ KantoBitmasksPointerTable::
 	add_bitmaskstable Seaking
 	add_bitmaskstable Staryu
 	add_bitmaskstable Starmie
-	add_bitmaskstable MrMime
+	add_bitmaskstable Mrmime
 	add_bitmaskstable Scyther
 	add_bitmaskstable Jynx
 	add_bitmaskstable Electabuzz

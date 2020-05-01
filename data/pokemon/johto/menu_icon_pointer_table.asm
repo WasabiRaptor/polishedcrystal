@@ -97,5 +97,5 @@ JohtoIconPointerTable::
 	add_icontable Pupitar
 	add_icontable Tyranitar
 	add_icontable Lugia
-	add_icontable Ho_Oh
+	add_icontable Ho_oh
 	add_icontable Celebi

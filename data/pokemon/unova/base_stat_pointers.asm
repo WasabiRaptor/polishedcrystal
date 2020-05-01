@@ -1,4 +1,5 @@
 UnovaBaseDataPointers::
+
 VictiniBaseDataPointers::
 	add_basedata Victini
 

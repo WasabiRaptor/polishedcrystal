@@ -293,8 +293,9 @@ TyranitarEvosAttacksPointers::
 LugiaEvosAttacksPointers::
 	add_evosattacks Lugia
 
-Ho_OhEvosAttacksPointers::
-	add_evosattacks Ho_Oh
+Ho_ohEvosAttacksPointers::
+	add_evosattacks Ho_oh
 
 CelebiEvosAttacksPointers::
 	add_evosattacks Celebi
+

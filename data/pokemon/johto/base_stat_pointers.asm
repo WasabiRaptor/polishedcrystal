@@ -1,4 +1,5 @@
 JohtoBaseDataPointers::
+
 ChikoritaBaseDataPointers::
 	add_basedata Chikorita
 
@@ -293,8 +294,9 @@ TyranitarBaseDataPointers::
 LugiaBaseDataPointers::
 	add_basedata Lugia
 
-Ho_OhBaseDataPointers::
-	add_basedata Ho_Oh
+Ho_ohBaseDataPointers::
+	add_basedata Ho_oh
 
 CelebiBaseDataPointers::
 	add_basedata Celebi
+

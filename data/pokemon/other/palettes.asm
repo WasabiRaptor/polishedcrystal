@@ -83,18 +83,18 @@ SandshrewShinyPalette:	INCLUDE "gfx/pokemon/sandshrew/shiny.pal"
 SandslashPalettes:
 SandslashNormalPalette:	INCBIN "gfx/pokemon/sandslash/front.gbcpal", middle_colors
 SandslashShinyPalette:	INCLUDE "gfx/pokemon/sandslash/shiny.pal"
-Nidoran_FPalettes:
-Nidoran_FNormalPalette:	INCBIN "gfx/pokemon/nidoran_f/front.gbcpal", middle_colors
-Nidoran_FShinyPalette:	INCLUDE "gfx/pokemon/nidoran_f/shiny.pal"
+Nidoran_fPalettes:
+Nidoran_fNormalPalette:	INCBIN "gfx/pokemon/nidoran_f/front.gbcpal", middle_colors
+Nidoran_fShinyPalette:	INCLUDE "gfx/pokemon/nidoran_f/shiny.pal"
 NidorinaPalettes:
 NidorinaNormalPalette:	INCBIN "gfx/pokemon/nidorina/front.gbcpal", middle_colors
 NidorinaShinyPalette:	INCLUDE "gfx/pokemon/nidorina/shiny.pal"
 NidoqueenPalettes:
 NidoqueenNormalPalette:	INCBIN "gfx/pokemon/nidoqueen/front.gbcpal", middle_colors
 NidoqueenShinyPalette:	INCLUDE "gfx/pokemon/nidoqueen/shiny.pal"
-Nidoran_MPalettes:
-Nidoran_MNormalPalette:	INCBIN "gfx/pokemon/nidoran_m/front.gbcpal", middle_colors
-Nidoran_MShinyPalette:	INCLUDE "gfx/pokemon/nidoran_m/shiny.pal"
+Nidoran_mPalettes:
+Nidoran_mNormalPalette:	INCBIN "gfx/pokemon/nidoran_m/front.gbcpal", middle_colors
+Nidoran_mShinyPalette:	INCLUDE "gfx/pokemon/nidoran_m/shiny.pal"
 NidorinoPalettes:
 NidorinoNormalPalette:	INCBIN "gfx/pokemon/nidorino/front.gbcpal", middle_colors
 NidorinoShinyPalette:	INCLUDE "gfx/pokemon/nidorino/shiny.pal"
@@ -362,9 +362,9 @@ StaryuShinyPalette:	INCLUDE "gfx/pokemon/staryu/shiny.pal"
 StarmiePalettes:
 StarmieNormalPalette:	INCBIN "gfx/pokemon/starmie/front.gbcpal", middle_colors
 StarmieShinyPalette:	INCLUDE "gfx/pokemon/starmie/shiny.pal"
-MrMimePalettes:
-MrMimeNormalPalette:	INCBIN "gfx/pokemon/mrmime/front.gbcpal", middle_colors
-MrMimeShinyPalette:	INCLUDE "gfx/pokemon/mrmime/shiny.pal"
+MrmimePalettes:
+MrmimeNormalPalette:	INCBIN "gfx/pokemon/mrmime/front.gbcpal", middle_colors
+MrmimeShinyPalette:	INCLUDE "gfx/pokemon/mrmime/shiny.pal"
 ScytherPalettes:
 ScytherNormalPalette:	INCBIN "gfx/pokemon/scyther/front.gbcpal", middle_colors
 ScytherShinyPalette:	INCLUDE "gfx/pokemon/scyther/shiny.pal"

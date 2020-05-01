@@ -7,6 +7,8 @@ IvysaurAnimationPointers::
 
 VenusaurAnimationPointers::
 	add_anim Venusaur
+	add_anim VenusaurMega
+	add_anim VenusaurGiga
 
 CharmanderAnimationPointers::
 	add_anim Charmander
@@ -83,8 +85,8 @@ SandshrewAnimationPointers::
 SandslashAnimationPointers::
 	add_anim Sandslash
 
-Nidoran_FAnimationPointers::
-	add_anim Nidoran_F
+Nidoran_fAnimationPointers::
+	add_anim Nidoran_f
 
 NidorinaAnimationPointers::
 	add_anim Nidorina
@@ -92,8 +94,8 @@ NidorinaAnimationPointers::
 NidoqueenAnimationPointers::
 	add_anim Nidoqueen
 
-Nidoran_MAnimationPointers::
-	add_anim Nidoran_M
+Nidoran_mAnimationPointers::
+	add_anim Nidoran_m
 
 NidorinoAnimationPointers::
 	add_anim Nidorino
@@ -362,8 +364,8 @@ StaryuAnimationPointers::
 StarmieAnimationPointers::
 	add_anim Starmie
 
-MrMimeAnimationPointers::
-	add_anim MrMime
+MrmimeAnimationPointers::
+	add_anim Mrmime
 
 ScytherAnimationPointers::
 	add_anim Scyther
@@ -451,3 +453,4 @@ MewtwoAnimationPointers::
 
 MewAnimationPointers::
 	add_anim Mew
+

@@ -827,15 +827,15 @@ Cry_Aipom_Ch8:
 	noise C_,  5, $a3, $4c
 	endchannel
 
-Cry_Nidoran_M:
-	musicheader 3, 5, Cry_Nidoran_M_Ch5
-	musicheader 1, 6, Cry_Nidoran_M_Ch6
-	musicheader 1, 8, Cry_Nidoran_M_Ch8
+Cry_Nidoran_m:
+	musicheader 3, 5, Cry_Nidoran_m_Ch5
+	musicheader 1, 6, Cry_Nidoran_m_Ch6
+	musicheader 1, 8, Cry_Nidoran_m_Ch8
 
-Cry_Nidoran_F:
-	musicheader 3, 5, Cry_Nidoran_F_Ch5
-	musicheader 1, 6, Cry_Nidoran_F_Ch6
-	musicheader 1, 8, Cry_Nidoran_F_Ch8
+Cry_Nidoran_f:
+	musicheader 3, 5, Cry_Nidoran_f_Ch5
+	musicheader 1, 6, Cry_Nidoran_f_Ch6
+	musicheader 1, 8, Cry_Nidoran_f_Ch8
 
 Cry_Slowpoke:
 	musicheader 3, 5, Cry_Slowpoke_Ch5
@@ -1282,21 +1282,21 @@ Cry_Spearow_Ch8:
 	noise __,  5, $71, $20
 	endchannel
 
-Cry_Nidoran_M_Ch5:
+Cry_Nidoran_m_Ch5:
 	sound_duty 1, 1, 3, 3
 	sound __,  5, $f3, $0718
 	sound __, 16, $e5, $0798
 	sound __,  9, $91, $0758
 	endchannel
 
-Cry_Nidoran_M_Ch6:
+Cry_Nidoran_m_Ch6:
 	sound_duty 0, 0, 2, 2
 	sound __,  6, $b3, $0708
 	sound __, 16, $c5, $0788
 	sound __,  9, $71, $0748
 	endchannel
 
-Cry_Nidoran_M_Ch8:
+Cry_Nidoran_m_Ch8:
 	noise __,  4, $a1, $1c
 	noise __, 15, $94, $2c
 	noise __,  9, $81, $1c
@@ -1498,7 +1498,7 @@ Cry_Drowzee_Ch8:
 	noise __,  5, $a1, $3c
 	endchannel
 
-Cry_Nidoran_F_Ch5:
+Cry_Nidoran_f_Ch5:
 	sound_duty 0, 0, 2, 2
 	sound __,  5, $f3, $0600
 	sound __,  9, $d5, $0760
@@ -1506,7 +1506,7 @@ Cry_Nidoran_F_Ch5:
 	sound __,  9, $d1, $0710
 	endchannel
 
-Cry_Nidoran_F_Ch6:
+Cry_Nidoran_f_Ch6:
 	sound_duty 2, 2, 1, 1
 	sound __,  6, $b3, $06f1
 	sound __,  8, $c5, $0752
@@ -1514,7 +1514,7 @@ Cry_Nidoran_F_Ch6:
 	sound __,  9, $b1, $0601
 	endchannel
 
-Cry_Nidoran_F_Ch8:
+Cry_Nidoran_f_Ch8:
 	noise __,  4, $a2, $3c
 	noise __, 13, $94, $2c
 	noise __,  4, $82, $1c

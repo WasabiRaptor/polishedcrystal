@@ -293,8 +293,9 @@ TyranitarPicPointers::
 LugiaPicPointers::
 	add_pics Lugia
 
-Ho_OhPicPointers::
-	add_pics Ho_Oh
+Ho_ohPicPointers::
+	add_pics Ho_oh
 
 CelebiPicPointers::
 	add_pics Celebi
+

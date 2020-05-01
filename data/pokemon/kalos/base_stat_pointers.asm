@@ -1,4 +1,5 @@
 KalosBaseDataPointers::
+
 ChespinBaseDataPointers::
 	add_basedata Chespin
 

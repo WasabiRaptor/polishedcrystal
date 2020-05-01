@@ -97,5 +97,5 @@ JohtoEvosAttacksPointerTable::
 	add_evosattackstable Pupitar
 	add_evosattackstable Tyranitar
 	add_evosattackstable Lugia
-	add_evosattackstable Ho_Oh
+	add_evosattackstable Ho_oh
 	add_evosattackstable Celebi

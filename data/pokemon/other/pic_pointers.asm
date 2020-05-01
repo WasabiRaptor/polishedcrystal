@@ -83,8 +83,8 @@ SandshrewPicPointers::
 SandslashPicPointers::
 	add_pics Sandslash
 
-Nidoran_FPicPointers::
-	add_pics Nidoran_F
+Nidoran_fPicPointers::
+	add_pics Nidoran_f
 
 NidorinaPicPointers::
 	add_pics Nidorina
@@ -92,8 +92,8 @@ NidorinaPicPointers::
 NidoqueenPicPointers::
 	add_pics Nidoqueen
 
-Nidoran_MPicPointers::
-	add_pics Nidoran_M
+Nidoran_mPicPointers::
+	add_pics Nidoran_m
 
 NidorinoPicPointers::
 	add_pics Nidorino
@@ -362,8 +362,8 @@ StaryuPicPointers::
 StarmiePicPointers::
 	add_pics Starmie
 
-MrMimePicPointers::
-	add_pics MrMime
+MrmimePicPointers::
+	add_pics Mrmime
 
 ScytherPicPointers::
 	add_pics Scyther

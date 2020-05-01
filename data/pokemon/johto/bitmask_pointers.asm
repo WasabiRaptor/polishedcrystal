@@ -293,8 +293,9 @@ TyranitarBitmasksPointers::
 LugiaBitmasksPointers::
 	add_bitmasks Lugia
 
-Ho_OhBitmasksPointers::
-	add_bitmasks Ho_Oh
+Ho_ohBitmasksPointers::
+	add_bitmasks Ho_oh
 
 CelebiBitmasksPointers::
 	add_bitmasks Celebi
+

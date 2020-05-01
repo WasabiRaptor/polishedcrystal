@@ -83,8 +83,8 @@ SandshrewPalettePointers::
 SandslashPalettePointers::
 	add_palettes Sandslash
 
-Nidoran_FPalettePointers::
-	add_palettes Nidoran_F
+Nidoran_fPalettePointers::
+	add_palettes Nidoran_f
 
 NidorinaPalettePointers::
 	add_palettes Nidorina
@@ -92,8 +92,8 @@ NidorinaPalettePointers::
 NidoqueenPalettePointers::
 	add_palettes Nidoqueen
 
-Nidoran_MPalettePointers::
-	add_palettes Nidoran_M
+Nidoran_mPalettePointers::
+	add_palettes Nidoran_m
 
 NidorinoPalettePointers::
 	add_palettes Nidorino
@@ -362,8 +362,8 @@ StaryuPalettePointers::
 StarmiePalettePointers::
 	add_palettes Starmie
 
-MrMimePalettePointers::
-	add_palettes MrMime
+MrmimePalettePointers::
+	add_palettes Mrmime
 
 ScytherPalettePointers::
 	add_palettes Scyther

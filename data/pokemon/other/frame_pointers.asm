@@ -83,8 +83,8 @@ SandshrewFramesPointers::
 SandslashFramesPointers::
 	add_frames Sandslash
 
-Nidoran_FFramesPointers::
-	add_frames Nidoran_F
+Nidoran_fFramesPointers::
+	add_frames Nidoran_f
 
 NidorinaFramesPointers::
 	add_frames Nidorina
@@ -92,8 +92,8 @@ NidorinaFramesPointers::
 NidoqueenFramesPointers::
 	add_frames Nidoqueen
 
-Nidoran_MFramesPointers::
-	add_frames Nidoran_M
+Nidoran_mFramesPointers::
+	add_frames Nidoran_m
 
 NidorinoFramesPointers::
 	add_frames Nidorino
@@ -362,8 +362,8 @@ StaryuFramesPointers::
 StarmieFramesPointers::
 	add_frames Starmie
 
-MrMimeFramesPointers::
-	add_frames MrMime
+MrmimeFramesPointers::
+	add_frames Mrmime
 
 ScytherFramesPointers::
 	add_frames Scyther

@@ -160,7 +160,7 @@ Music:
 	dba Music_LugiasSong2000_NoIntro
 	dba Music_LugiaBattleHGSS
 	dba Music_SummoningDanceHGSS
-	dba Music_Ho_OhBattleHGSS
+	dba Music_Ho_ohBattleHGSS
 	dba Music_CeruleanCaveRBY
 	dba Music_MewtwoBattleStadium
 	dba Music_AbandonedShipRSE

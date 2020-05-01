@@ -293,8 +293,9 @@ TyranitarPalettePointers::
 LugiaPalettePointers::
 	add_palettes Lugia
 
-Ho_OhPalettePointers::
-	add_palettes Ho_Oh
+Ho_ohPalettePointers::
+	add_palettes Ho_oh
 
 CelebiPalettePointers::
 	add_palettes Celebi
+

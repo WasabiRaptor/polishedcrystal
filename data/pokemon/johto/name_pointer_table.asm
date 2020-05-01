@@ -97,5 +97,5 @@ JohtoNamePointerTable::
 	add_nametable Pupitar
 	add_nametable Tyranitar
 	add_nametable Lugia
-	add_nametable Ho_Oh
+	add_nametable Ho_oh
 	add_nametable Celebi

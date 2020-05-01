@@ -34,6 +34,8 @@ endm
 	nat_dexmon BULBASAUR
 	nat_dexmon IVYSAUR
 	nat_dexmon VENUSAUR
+	nat_dexmon_form MEGA
+	nat_dexmon_form GIGA
 	nat_dexmon CHARMANDER
 	nat_dexmon CHARMELEON
 	nat_dexmon CHARIZARD

@@ -1,4 +1,5 @@
 SinnohBaseDataPointers::
+
 TurtwigBaseDataPointers::
 	add_basedata Turtwig
 

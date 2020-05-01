@@ -83,8 +83,8 @@ SandshrewBaseDataPointers::
 SandslashBaseDataPointers::
 	add_basedata Sandslash
 
-Nidoran_FBaseDataPointers::
-	add_basedata Nidoran_F
+Nidoran_fBaseDataPointers::
+	add_basedata Nidoran_f
 
 NidorinaBaseDataPointers::
 	add_basedata Nidorina
@@ -92,8 +92,8 @@ NidorinaBaseDataPointers::
 NidoqueenBaseDataPointers::
 	add_basedata Nidoqueen
 
-Nidoran_MBaseDataPointers::
-	add_basedata Nidoran_M
+Nidoran_mBaseDataPointers::
+	add_basedata Nidoran_m
 
 NidorinoBaseDataPointers::
 	add_basedata Nidorino
@@ -362,8 +362,8 @@ StaryuBaseDataPointers::
 StarmieBaseDataPointers::
 	add_basedata Starmie
 
-MrMimeBaseDataPointers::
-	add_basedata MrMime
+MrmimeBaseDataPointers::
+	add_basedata Mrmime
 
 ScytherBaseDataPointers::
 	add_basedata Scyther

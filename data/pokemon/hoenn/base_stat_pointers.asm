@@ -1,4 +1,5 @@
 HoennBaseDataPointers::
+
 TreeckoBaseDataPointers::
 	add_basedata Treecko
 

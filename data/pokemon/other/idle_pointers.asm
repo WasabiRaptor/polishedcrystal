@@ -83,8 +83,8 @@ SandshrewAnimationIdlePointers::
 SandslashAnimationIdlePointers::
 	add_idleanim Sandslash
 
-Nidoran_FAnimationIdlePointers::
-	add_idleanim Nidoran_F
+Nidoran_fAnimationIdlePointers::
+	add_idleanim Nidoran_f
 
 NidorinaAnimationIdlePointers::
 	add_idleanim Nidorina
@@ -92,8 +92,8 @@ NidorinaAnimationIdlePointers::
 NidoqueenAnimationIdlePointers::
 	add_idleanim Nidoqueen
 
-Nidoran_MAnimationIdlePointers::
-	add_idleanim Nidoran_M
+Nidoran_mAnimationIdlePointers::
+	add_idleanim Nidoran_m
 
 NidorinoAnimationIdlePointers::
 	add_idleanim Nidorino
@@ -362,8 +362,8 @@ StaryuAnimationIdlePointers::
 StarmieAnimationIdlePointers::
 	add_idleanim Starmie
 
-MrMimeAnimationIdlePointers::
-	add_idleanim MrMime
+MrmimeAnimationIdlePointers::
+	add_idleanim Mrmime
 
 ScytherAnimationIdlePointers::
 	add_idleanim Scyther

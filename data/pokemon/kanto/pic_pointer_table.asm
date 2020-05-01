@@ -27,10 +27,10 @@ KantoPicPointerTable::
 	add_pictable Raichu
 	add_pictable Sandshrew
 	add_pictable Sandslash
-	add_pictable Nidoran_F
+	add_pictable Nidoran_f
 	add_pictable Nidorina
 	add_pictable Nidoqueen
-	add_pictable Nidoran_M
+	add_pictable Nidoran_m
 	add_pictable Nidorino
 	add_pictable Nidoking
 	add_pictable Clefairy
@@ -120,7 +120,7 @@ KantoPicPointerTable::
 	add_pictable Seaking
 	add_pictable Staryu
 	add_pictable Starmie
-	add_pictable MrMime
+	add_pictable Mrmime
 	add_pictable Scyther
 	add_pictable Jynx
 	add_pictable Electabuzz

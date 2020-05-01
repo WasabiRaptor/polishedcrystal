@@ -45,6 +45,8 @@ IvysaurEvosAttacks:
 	learnmove 50, SLUDGE_BOMB ; TM move
 	db 0 ; no more level-up moves
 
+VenusaurMegaEvosAttacks:
+VenusaurGigaEvosAttacks:
 VenusaurEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, PETAL_DANCE ; evolution move
@@ -501,7 +503,7 @@ Sandslash_AlolaEvosAttacks:
     learnmove 1, TACKLE
 	db 0 ; no more level-up moves
 
-Nidoran_FEvosAttacks:
+Nidoran_fEvosAttacks:
 	evolution EVOLVE_LEVEL, 16, NIDORINA
 	db 0 ; no more evolutions
 	learnmove 1, GROWL
@@ -548,7 +550,7 @@ NidoqueenEvosAttacks:
 	learnmove 58, CLOSE_COMBAT ; Superpower → similar move
 	db 0 ; no more level-up moves
 
-Nidoran_MEvosAttacks:
+Nidoran_mEvosAttacks:
 	evolution EVOLVE_LEVEL, 16, NIDORINO
 	db 0 ; no more evolutions
 	learnmove 1, LEER
@@ -2394,7 +2396,7 @@ Mime_JrEvosAttacks:
     learnmove 1, TACKLE
 	db 0 ; no more level-up moves
 
-MrMimeEvosAttacks:
+MrmimeEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, BARRIER
 	learnmove 1, CONFUSION

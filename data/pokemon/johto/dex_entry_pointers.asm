@@ -293,8 +293,9 @@ TyranitarPokedexEntryPointers::
 LugiaPokedexEntryPointers::
 	add_pokedexentry Lugia
 
-Ho_OhPokedexEntryPointers::
-	add_pokedexentry Ho_Oh
+Ho_ohPokedexEntryPointers::
+	add_pokedexentry Ho_oh
 
 CelebiPokedexEntryPointers::
 	add_pokedexentry Celebi
+

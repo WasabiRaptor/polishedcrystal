@@ -97,5 +97,5 @@ JohtoPokedexEntryPointerTable::
 	add_pokedexentrytable Pupitar
 	add_pokedexentrytable Tyranitar
 	add_pokedexentrytable Lugia
-	add_pokedexentrytable Ho_Oh
+	add_pokedexentrytable Ho_oh
 	add_pokedexentrytable Celebi

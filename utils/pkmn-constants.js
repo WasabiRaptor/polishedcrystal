@@ -48,13 +48,15 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/base_stat_pointers.asm`,
             `${region.title}BaseDataPointers::\n\n` +
             list.map(poke=>`${poke.title}BaseDataPointers::\n\tadd_basedata ${poke.title}\n` +
-                poke.forms.map(form => `\tadd_basedata ${form.title}`)
+                poke.forms.map(form=>`\tadd_basedata ${form.title}\n`).join("") +
             `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/base_stats.asm`,
             `${region.title}BaseData::\n` +
-            list.map(poke=>`${poke.title}BaseData::\tINCLUDE "data/pokemon/base_stats/${poke.lower}.asm"\n`).join(""),
+            list.map(poke=>`${poke.title}BaseData::\tINCLUDE "data/pokemon/base_stats/${poke.lower}.asm"\n`+
+                poke.forms.map(form=>`${form.title}BaseData::\tINCLUDE "data/pokemon/base_stats/${form.lower}.asm"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         //dex entries
@@ -65,15 +67,18 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/dex_entry_pointers.asm`,
             `${region.title}PokedexEntryPointers::\n` +
-            list.map(poke=>`${poke.title}PokedexEntryPointers::\n\tadd_pokedexentry ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}PokedexEntryPointers::\n\tadd_pokedexentry ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_pokedexentry ${form.title}\n`).join("") +
+        `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}_dex_entries.asm`,
             `INCLUDE "constants.asm"\n` +
             list.map((poke,i)=>
                 (i % 30 ? "" : `\nSECTION "${region.title} Pokedex Entries ${i/30+1}", ROMX\n\n`) +
-                `${poke.title}PokedexEntry::\tINCLUDE "data/pokemon/dex_entries/${poke.lower}.asm"\n`
-            ).join(""),
+                `${poke.title}PokedexEntry::\tINCLUDE "data/pokemon/dex_entries/${poke.lower}.asm"\n`+
+                    poke.forms.map(form=>`${form.title}PokedexEntry::\tINCLUDE "data/pokemon/dex_entries/${form.lower}.asm"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // evos attacks
@@ -84,7 +89,9 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/evos_attacks_pointers.asm`,
             `${region.title}EvosAttacksPointers::\n` +
-            list.map(poke=>`${poke.title}EvosAttacksPointers::\n\tadd_evosattacks ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}EvosAttacksPointers::\n\tadd_evosattacks ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_evosattacks ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // menu icon
@@ -95,7 +102,9 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/menu_icon_pointers.asm`,
             `${region.title}IconPointers::\n` +
-            list.map(poke=>`${poke.title}IconPointers::\n\tadd_icon ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}IconPointers::\n\tadd_icon ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_icon ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // names
@@ -106,7 +115,9 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/name_pointers.asm`,
             `${region.title}NamePointers::\n` +
-            list.map(poke=>`${poke.title}Names::\n\tadd_name ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}Names::\n\tadd_name ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_name ${poke.title}\n`).join("") + //forms that change a pokemon's name are the exception, not the rule, so those will be defined manually and the generated pointer will point to the normal name
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/names.asm`,
@@ -122,13 +133,20 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/palette_pointers.asm`,
             `${region.title}PalettePointers::\n` +
-            list.map(poke=>`${poke.title}PalettePointers::\n\tadd_palettes ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}PalettePointers::\n\tadd_palettes ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_palettes ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/palettes.asm`,
             `${region.title}Palettes:\n` +
-            list.map(poke=>`${poke.title}Palettes:\n${poke.title}NormalPalette:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
-            `${poke.title}ShinyPalette:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n`).join(""),
+            list.map(poke=>`${poke.title}Palettes:\n`+
+            `${poke.title}NormalPalette:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
+            `${poke.title}ShinyPalette:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n`+
+                poke.forms.map(form=>`${form.title}Palettes:\n`+
+                `${form.title}NormalPalette:\tINCBIN "gfx/pokemon/${form.lower}/front.gbcpal", middle_colors\n`+
+                `${form.title}ShinyPalette:\tINCLUDE "gfx/pokemon/${form.lower}/shiny.pal"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // pics
@@ -139,7 +157,19 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/pic_pointers.asm`,
             `${region.title}PicPointers::\n` +
-            list.map(poke=>`${poke.title}PicPointers::\n\tadd_pics ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}PicPointers::\n\tadd_pics ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_pics ${form.title}\n`).join("") +
+            `\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`gfx/pokemon/${region.lower}_pics.asm`,
+        list.map((poke,i)=>
+            (i % 10 ? "" : `\nSECTION "${region.title} Pokemon Pics ${i/10+1}", ROMX\n\n`) +
+            `${poke.title}Frontpic::\tINCBIN "gfx/pokemon/${poke.lower}/front.animated.2bpp.lz"\n`+
+            `${poke.title}Backpic::\tINCBIN "gfx/pokemon/${poke.lower}/back.2bpp.lz"\n`+
+                poke.forms.map(form=>`${form.title}Frontpic::\tINCBIN "gfx/pokemon/${form.lower}/front.animated.2bpp.lz"\n`+
+                `${form.title}Backpic::\tINCBIN "gfx/pokemon/${form.lower}/back.2bpp.lz"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // bitmasks
@@ -150,12 +180,16 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/bitmask_pointers.asm`,
             `${region.title}BitmasksPointers::\n` +
-            list.map(poke=>`${poke.title}BitmasksPointers::\n\tadd_bitmasks ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}BitmasksPointers::\n\tadd_bitmasks ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_bitmasks ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/bitmasks.asm`,
             `${region.title}Bitmasks:\n` +
-            list.map(poke=>`${poke.title}Bitmasks:\tINCLUDE "gfx/pokemon/${poke.lower}/bitmask.asm"\n`).join(""),
+            list.map(poke=>`${poke.title}Bitmasks:\tINCLUDE "gfx/pokemon/${poke.lower}/bitmask.asm"\n`+
+                poke.forms.map(form=>`${form.title}Bitmasks::\tINCLUDE "gfx/pokemon/${form.lower}/bitmask.asm"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // frames
@@ -166,34 +200,46 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/frame_pointers.asm`,
             `${region.title}FramesPointers::\n` +
-            list.map(poke=>`${poke.title}FramesPointers::\n\tadd_frames ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}FramesPointers::\n\tadd_frames ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_frames ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/frames.asm`,
             `${region.title}Frames: ; used only for BANK(${region.title}Frames)\n` +
-            list.map(poke=>`${poke.title}Frames:\tINCLUDE "gfx/pokemon/${poke.lower}/frames.asm"\n`).join(""),
+            list.map(poke=>`${poke.title}Frames:\tINCLUDE "gfx/pokemon/${poke.lower}/frames.asm"\n`+
+                poke.forms.map(form=>`${form.title}Frames::\tINCLUDE "gfx/pokemon/${form.lower}/frames.asm"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // anims
         fs.writeFileSync(`data/pokemon/${region.lower}/anim_pointers.asm`,
             `${region.title}AnimationPointers::\n` +
-            list.map(poke=>`${poke.title}AnimationPointers::\n\tadd_anim ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}AnimationPointers::\n\tadd_anim ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_anim ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/anims.asm`,
             `${region.title}Animations:\n` +
-            list.map(poke=>`${poke.title}Animation:\tINCLUDE "gfx/pokemon/${poke.lower}/anim.asm"\n`).join(""),
+            list.map(poke=>`${poke.title}Animation:\tINCLUDE "gfx/pokemon/${poke.lower}/anim.asm"\n`+
+                poke.forms.map(form=>`${form.title}Animation::\tINCLUDE "gfx/pokemon/${form.lower}/anim.asm"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         // idles
         fs.writeFileSync(`data/pokemon/${region.lower}/idle_pointers.asm`,
             `${region.title}AnimationIdlePointers::\n` +
-            list.map(poke=>`${poke.title}AnimationIdlePointers::\n\tadd_idleanim ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}AnimationIdlePointers::\n\tadd_idleanim ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_idleanim ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/idles.asm`,
             `${region.title}AnimationsIdle:\n` +
-            list.map(poke=>`${poke.title}AnimationIdle:\tINCLUDE "gfx/pokemon/${poke.lower}/anim_idle.asm"\n`).join(""),
+            list.map(poke=>`${poke.title}AnimationIdle:\tINCLUDE "gfx/pokemon/${poke.lower}/anim_idle.asm"\n`+
+                poke.forms.map(form=>`${form.title}AnimationIdle::\tINCLUDE "gfx/pokemon/${form.lower}/anim_idle.asm"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         //animdata
@@ -210,22 +256,36 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_palette_pointers.asm`,
             `${region.title}OverworldPalettePointers::\n` +
-            list.map(poke=>`${poke.title}OverworldPalettePointers::\n\tadd_overworldpalettes ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}OverworldPalettePointers::\n\tadd_overworldpalettes ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_overworldpalettes ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_palettes.asm`,
             `${region.title}OverworldPalettes:\n` +
             list.map(poke=>`${poke.title}OverworldPalettes:\n` +
-            `${poke.title}NormalOverworldPaletteDawn:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteDay:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteDusk:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteMidnight:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteDark:\tINCBIN "gfx/pokemon/${poke.lower}/front.gbcpal", middle_colors\n`+
-            `${poke.title}ShinyOverworldPaletteDawn:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteDay:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteDusk:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteMidnight:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteDark:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n`).join(""),
+            `${poke.title}NormalOverworldPaletteDawn:\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
+            `${poke.title}NormalOverworldPaletteDay:\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
+            `${poke.title}NormalOverworldPaletteDusk:\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
+            `${poke.title}NormalOverworldPaletteMidnight:\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
+            `${poke.title}NormalOverworldPaletteDark:\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
+            `${poke.title}ShinyOverworldPaletteDawn:\tINCLUDE "gfx/sprites/pokemon/${poke.lower}/shiny.pal"\n` +
+            `${poke.title}ShinyOverworldPaletteDay:\tINCLUDE "gfx/sprites/pokemon/${poke.lower}/shiny.pal"\n` +
+            `${poke.title}ShinyOverworldPaletteDusk:\tINCLUDE "gfx/sprites/pokemon/${poke.lower}/shiny.pal"\n` +
+            `${poke.title}ShinyOverworldPaletteMidnight:\tINCLUDE "gfx/sprites/pokemon/${poke.lower}/shiny.pal"\n` +
+            `${poke.title}ShinyOverworldPaletteDark:\tINCLUDE "gfx/sprites/pokemon/${poke.lower}/shiny.pal"\n`+
+            poke.forms.map(form=>`${form.title}OverworldPalettes::\n`+
+            `${form.title}NormalOverworldPaletteDawn:\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
+            `${form.title}NormalOverworldPaletteDay:\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
+            `${form.title}NormalOverworldPaletteDusk:\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
+            `${form.title}NormalOverworldPaletteMidnight:\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
+            `${form.title}NormalOverworldPaletteDark:\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
+            `${form.title}ShinyOverworldPaletteDawn:\tINCLUDE "gfx/sprites/pokemon/${form.lower}/shiny.pal"\n` +
+            `${form.title}ShinyOverworldPaletteDay:\tINCLUDE "gfx/sprites/pokemon/${form.lower}/shiny.pal"\n` +
+            `${form.title}ShinyOverworldPaletteDusk:\tINCLUDE "gfx/sprites/pokemon/${form.lower}/shiny.pal"\n` +
+            `${form.title}ShinyOverworldPaletteMidnight:\tINCLUDE "gfx/sprites/pokemon/${form.lower}/shiny.pal"\n` +
+            `${form.title}ShinyOverworldPaletteDark:\tINCLUDE "gfx/sprites/pokemon/${form.lower}/shiny.pal"\n`).join("") +
+        `\n`).join(""),
         "utf8");
 
         //Overworld Sprites
@@ -236,14 +296,17 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_sprite_pointers.asm`,
             `${region.title}OverworldSpritePointers::\n` +
-            list.map(poke=>`${poke.title}OverworldSpritePointers::\n\tadd_overworldsprite ${poke.title}\n\n`).join(""),
+            list.map(poke=>`${poke.title}OverworldSpritePointers::\n\tadd_overworldsprite ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_overworldsprite ${form.title}\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_sprites.asm`,
             list.map((poke,i)=>
                 (i % 30 ? "" : `\nSECTION "${region.title} Overworld Sprites ${i/30+1}", ROMX\n\n`) +
-                `${poke.title}OverworldSprite::\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.2bpp"\n`
-            ).join(""),
+                `${poke.title}OverworldSprite::\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.2bpp"\n`+
+                    poke.forms.map(form=>`${form.title}OverworldSprite::\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.2bpp"\n`).join("") +
+            `\n`).join(""),
         "utf8");
 
         return match;

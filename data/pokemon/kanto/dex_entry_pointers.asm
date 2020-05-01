@@ -7,6 +7,8 @@ IvysaurPokedexEntryPointers::
 
 VenusaurPokedexEntryPointers::
 	add_pokedexentry Venusaur
+	add_pokedexentry VenusaurMega
+	add_pokedexentry VenusaurGiga
 
 CharmanderPokedexEntryPointers::
 	add_pokedexentry Charmander
@@ -83,8 +85,8 @@ SandshrewPokedexEntryPointers::
 SandslashPokedexEntryPointers::
 	add_pokedexentry Sandslash
 
-Nidoran_FPokedexEntryPointers::
-	add_pokedexentry Nidoran_F
+Nidoran_fPokedexEntryPointers::
+	add_pokedexentry Nidoran_f
 
 NidorinaPokedexEntryPointers::
 	add_pokedexentry Nidorina
@@ -92,8 +94,8 @@ NidorinaPokedexEntryPointers::
 NidoqueenPokedexEntryPointers::
 	add_pokedexentry Nidoqueen
 
-Nidoran_MPokedexEntryPointers::
-	add_pokedexentry Nidoran_M
+Nidoran_mPokedexEntryPointers::
+	add_pokedexentry Nidoran_m
 
 NidorinoPokedexEntryPointers::
 	add_pokedexentry Nidorino
@@ -362,8 +364,8 @@ StaryuPokedexEntryPointers::
 StarmiePokedexEntryPointers::
 	add_pokedexentry Starmie
 
-MrMimePokedexEntryPointers::
-	add_pokedexentry MrMime
+MrmimePokedexEntryPointers::
+	add_pokedexentry Mrmime
 
 ScytherPokedexEntryPointers::
 	add_pokedexentry Scyther
@@ -451,3 +453,4 @@ MewtwoPokedexEntryPointers::
 
 MewPokedexEntryPointers::
 	add_pokedexentry Mew
+

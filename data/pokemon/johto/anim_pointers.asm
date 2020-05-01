@@ -293,8 +293,9 @@ TyranitarAnimationPointers::
 LugiaAnimationPointers::
 	add_anim Lugia
 
-Ho_OhAnimationPointers::
-	add_anim Ho_Oh
+Ho_ohAnimationPointers::
+	add_anim Ho_oh
 
 CelebiAnimationPointers::
 	add_anim Celebi
+
