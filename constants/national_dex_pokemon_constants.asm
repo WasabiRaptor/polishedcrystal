@@ -1171,4 +1171,9 @@ NUM_GALAR_POKEMON EQU const_value +-1
 
 grouped_dex_order_mon: macro
 	db \1, GROUP_\1
+if _NARG == 2
+	db \2
+else
+	db 0
+endc
 endm

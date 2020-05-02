@@ -1,14 +1,14 @@
 regional_dex_order: macro
-    dbbba \1, ((\2DexOrderEnd - \2DexOrder)/2), \2DexOrder
+    dbba ((\1DexOrderEnd - \1DexOrder)/3), \1DexOrder
 endm
 
 RegionDexOrderTable:
-    regional_dex_order GROUP_GENERATION_ONE, Kanto
-    regional_dex_order GROUP_GENERATION_TWO, Johto
-    regional_dex_order GROUP_GENERATION_THREE, Hoenn
-    regional_dex_order GROUP_GENERATION_FOUR, Sinnoh
-    regional_dex_order GROUP_GENERATION_FIVE, Unova
-    regional_dex_order GROUP_GENERATION_SIX, Kalos
-    regional_dex_order GROUP_GENERATION_SEVEN, Alola
-    regional_dex_order GROUP_GENERATION_EIGHT, Galar 
-    dbbba -1, 1, KantoDexOrder
+    regional_dex_order Kanto
+    regional_dex_order Kanto
+    regional_dex_order Johto
+    regional_dex_order Hoenn
+    regional_dex_order Sinnoh
+    regional_dex_order Unova
+    regional_dex_order Kalos
+    regional_dex_order Alola
+    regional_dex_order Galar

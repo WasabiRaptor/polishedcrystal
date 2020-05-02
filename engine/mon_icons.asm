@@ -139,7 +139,7 @@ GetMenuMonIconPalette::
 	rst AddNTimes
 	ld d, h
 	ld e, l
-
+GetPokedexIconPalette::
 	ld a, MIDDAY
 	jp GetRelevantMonOverworldPalettes
 

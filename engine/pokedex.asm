@@ -150,6 +150,7 @@ Pokedex_InitCursorPosition: ; 400b4
 	ret z
 	inc hl
 	inc hl
+	inc hl
 	ld a, [wDexListingScrollOffset]
 	inc a
 	ld [wDexListingScrollOffset], a
@@ -1725,6 +1726,7 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	ld hl, wPokedexOrder
 	add hl, de
 	add hl, de
+	add hl, de
 	ld e, l
 	ld d, h
 	hlcoord 0, 2
@@ -1735,9 +1737,13 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	call .getPokedexOrderByte
 	ld [wPokedexCurrentMon], a
 	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	inc de
 	call .getPokedexOrderByte
 	ld [wCurGroup], a
+	inc de
+	call .getPokedexOrderByte
+	ld [wCurForm], a
 	pop hl
 	pop af
 	push af
@@ -1935,14 +1941,21 @@ Pokedex_GetSelectedMon: ; 40bb1
 	ld hl, wPokedexOrder
 	add hl, de
 	add hl, de
+	add hl, de
 	ld a, BANK(wPokedexOrder)
 	call GetFarWRAMByte
 	ld [wPokedexCurrentMon], a
+	ld [wCurSpecies], a
 	inc hl
 	ld a, BANK(wPokedexOrder)
 	call GetFarWRAMByte
 	;ld [wDexMonGroup], a
 	ld [wCurGroup], a
+	inc hl
+	ld a, BANK(wPokedexOrder)
+	call GetFarWRAMByte
+	ld [wCurForm], a
+
 	ld a, [wPokedexCurrentMon]
 	ret
 
@@ -1980,7 +1993,6 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld [wDexListingEnd], a
 	ld hl, wPokedexOrder
 	ld bc, wPokedexOrderEnd - wPokedexOrder
-	xor a
 	call ByteFill
 
 
@@ -2001,7 +2013,7 @@ Pokedex_OrderMonsByMode: ; 40bdc
 .OldMode: ; 40c08 (10:4c08)
 	ld hl, InvarDexOrder
 	ld de, wPokedexOrder
-	ld c, (InvarDexOrderEnd - InvarDexOrder) / 2
+	ld c, (InvarDexOrderEnd - InvarDexOrder) / 3
 	ld b, BANK(InvarDexOrder)
 	jr .loop1abc
 
@@ -2009,9 +2021,8 @@ Pokedex_OrderMonsByMode: ; 40bdc
 ;Get Relevant Pokedex Region Order Pointers
 	ld a, [wPokedexRegion]
 	ld hl, RegionDexOrderTable
-	ld de, 5
-	call IsInArray
-	inc hl
+	ld bc, 4
+	rst AddNTimes
 	ld a, [hli]
 	ld c, a
 	ld a, [hli]
@@ -2026,9 +2037,14 @@ Pokedex_OrderMonsByMode: ; 40bdc
 .Pokedex_ABCMode: ; 40c30
 	ld de, wPokedexOrder
 	ld hl, AlphabeticalPokedexOrder
-	ld c, (AlphabeticalPokedexOrderEnd - AlphabeticalPokedexOrder) / 2
+	ld c, (AlphabeticalPokedexOrderEnd - AlphabeticalPokedexOrder) / 3
 	ld b, BANK(AlphabeticalPokedexOrder)
 .loop1abc
+	ld a, b
+	call GetFarByte
+	ld [de], a
+	inc hl
+	inc de
 	ld a, b
 	call GetFarByte
 	ld [de], a
@@ -2042,7 +2058,6 @@ Pokedex_OrderMonsByMode: ; 40bdc
 	ld a, [wDexListingEnd]
 	inc a
 	ld [wDexListingEnd], a
-
 	dec c
 	jr nz, .loop1abc
 	ret
@@ -2239,6 +2254,9 @@ Pokedex_SearchForMons: ; 41086
 	ld [de], a
 	inc de
 	ld a, [wCurGroup]
+	ld [de], a
+	inc de
+	ld a, [wCurForm]
 	ld [de], a
 	inc de
 	ld a, [wDexSearchResultCount]

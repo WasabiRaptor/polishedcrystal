@@ -1304,7 +1304,7 @@ wSurfWaveBGEffectEnd::
 
 SECTION "Pokedex List", WRAMX
 
-wPokedexOrder:: ds (NUM_POKEMON * 2)
+wPokedexOrder:: ds (NUM_POKEMON * 3)
 wPokedexOrderEnd:: ds 12
 
 SECTION "Pokedex Caught And Seen", WRAMX
