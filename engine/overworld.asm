@@ -172,7 +172,7 @@ NoFollower:
 	ld a, l
 	cp BIG_GYARADOS_SPRITE
 	ret z
-	ld c, 12
+	ld c, 16
 	ret
 ; 14259
 GetFollowerSpriteAddresses:
@@ -223,7 +223,7 @@ GetPokemonOverworldSprite:
 	ld e, l
 	ld h, b ; load the sprite bank into h
 	ld l, WALKING_SPRITE ; load the sprite type into l
-	ld c, 12 ; load the length into c
+	ld c, 16 ; load the length into c
 	ret
 
 .no_follower

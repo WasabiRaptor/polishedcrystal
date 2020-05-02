@@ -68,18 +68,18 @@ FacingWeirdTree2:
 
 FacingStepDown1:
 	db 4 ; #
-	db  0,  0, 0, $80
-	db  0,  8, 0, $81
-	db  8,  0, 2, $82
-	db  8,  8, 2, $83
+	db  0,  0, 0, $0c
+	db  0,  8, 0, $0d
+	db  8,  0, 2, $0e
+	db  8,  8, 2, $0f
 ; 40ad
 
 FacingStepDown3:
 	db 4 ; #
-	db  0,  8, 0 | X_FLIP, $80
-	db  0,  0, 0 | X_FLIP, $81
-	db  8,  8, 2 | X_FLIP, $82
-	db  8,  0, 2 | X_FLIP, $83
+	db  0,  0, 0, $88
+	db  0,  8, 0, $89
+	db  8,  0, 2, $8a
+	db  8,  8, 2, $8b
 ; 40be
 
 FacingStepUp0:
@@ -93,18 +93,18 @@ FacingStepUp2:
 
 FacingStepUp1:
 	db 4 ; #
-	db  0,  0, 0, $84
-	db  0,  8, 0, $85
-	db  8,  0, 2, $86
-	db  8,  8, 2, $87
+	db  0,  0, 0, $80
+	db  0,  8, 0, $81
+	db  8,  0, 2, $82
+	db  8,  8, 2, $83
 ; 40e0
 
 FacingStepUp3:
 	db 4 ; #
-	db  0,  8, 0 | X_FLIP, $84
-	db  0,  0, 0 | X_FLIP, $85
-	db  8,  8, 2 | X_FLIP, $86
-	db  8,  0, 2 | X_FLIP, $87
+	db  0,  0, 0, $8c
+	db  0,  8, 0, $8d
+	db  8,  0, 2, $8e
+	db  8,  8, 2, $8f
 ; 40f1
 
 FacingStepLeft0:
@@ -128,19 +128,19 @@ FacingStepRight2:
 FacingStepLeft1:
 FacingStepLeft3:
 	db 4 ; #
-	db  0,  0, 0, $88
-	db  0,  8, 0, $89
-	db  8,  0, 2, $8a
-	db  8,  8, 2, $8b
+	db  0,  0, 0, $84
+	db  0,  8, 0, $85
+	db  8,  0, 2, $86
+	db  8,  8, 2, $87
 ; 4124
 
 FacingStepRight1:
 FacingStepRight3:
 	db 4 ; #
-	db  0,  8, 0 | X_FLIP, $88
-	db  0,  0, 0 | X_FLIP, $89
-	db  8,  8, 2 | X_FLIP, $8a
-	db  8,  0, 2 | X_FLIP, $8b
+	db  0,  8, 0 | X_FLIP, $84
+	db  0,  0, 0 | X_FLIP, $85
+	db  8,  8, 2 | X_FLIP, $86
+	db  8,  0, 2 | X_FLIP, $87
 ; 4135
 
 FacingFishDown:
