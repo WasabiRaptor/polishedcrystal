@@ -3,36 +3,15 @@ variant_dexentry: macro
 endm
 
 regional_dexentry: macro
-    dbw \1, \2VariantPokedexEntryPointerTable
+    dba \1PokedexEntryPointerTable
 endm
 
 
 RegionalPokedexEntryPointerTable:
-    regional_dexentry GROUP_GENERATION_ONE, Kanto 
-    regional_dexentry GROUP_GENERATION_TWO, Johto 
-    regional_dexentry GROUP_GENERATION_THREE, Hoenn
-    regional_dexentry GROUP_GENERATION_FOUR, Sinnoh
-    regional_dexentry GROUP_GENERATION_FIVE, Unova
-    regional_dexentry GROUP_GENERATION_SIX, Kalos
-	regional_dexentry -1, Kanto
-
-;OtherVariantPokedexEntryPointerTable:
-    ;variant_dexentry -1, Other
-
-KantoVariantPokedexEntryPointerTable:
-    variant_dexentry -1, Kanto
-
-JohtoVariantPokedexEntryPointerTable:
-    variant_dexentry -1, Johto
-
-HoennVariantPokedexEntryPointerTable:
-    variant_dexentry -1, Hoenn
-
-SinnohVariantPokedexEntryPointerTable:
-    variant_dexentry -1, Sinnoh
-
-UnovaVariantPokedexEntryPointerTable:
-    variant_dexentry -1, Unova
-
-KalosVariantPokedexEntryPointerTable:
-    variant_dexentry -1, Kalos
+	regional_dexentry Kanto
+    regional_dexentry Kanto
+    regional_dexentry Johto
+    regional_dexentry Hoenn
+    regional_dexentry Sinnoh
+    regional_dexentry Unova
+    regional_dexentry Kalos

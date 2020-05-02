@@ -1406,45 +1406,23 @@ GetDexEntryPointer:: ; 44333
 ; return dex entry pointer b:de
 	push hl
 ;get relevant pointers
-	ld a, [wCurGroup]
 	ld hl, RegionalPokedexEntryPointerTable
-	call dbwArray
-	ld a, [wCurSpecies]
-	call dbwArray
+	call ProcessPokemonPointertable
+	ld bc, 3
 	ld a, [wCurForm]
-	jp c, .variant
-	ld a, [wCurSpecies]
-	dec a
-.variant
-	ld d, 0
-	ld e, a
-	add hl, de
-	add hl, de
-	add hl, de
-	ld b, [hl]
+	rst AddNTimes
+	ld a, d
+	call GetFarByte
+	ld b, a
 	inc hl
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
+	ld a, d
+	call GetFarHalfword
+	ld d, h
+	ld e, l
 	pop hl
 	ret
 
 INCLUDE "data/pokemon/variant_dex_entry_pointer_table.asm"
-
-PokedexDataPointerTable: ; 0x44378
-INCLUDE "data/pokemon/kanto/dex_entry_pointers.asm"
-INCLUDE "data/pokemon/johto/dex_entry_pointers.asm"
-INCLUDE "data/pokemon/hoenn/dex_entry_pointers.asm"
-INCLUDE "data/pokemon/sinnoh/dex_entry_pointers.asm"
-INCLUDE "data/pokemon/unova/dex_entry_pointers.asm"
-INCLUDE "data/pokemon/kalos/dex_entry_pointers.asm"
-
-INCLUDE "data/pokemon/kanto/dex_entry_pointer_table.asm"
-INCLUDE "data/pokemon/johto/dex_entry_pointer_table.asm"
-INCLUDE "data/pokemon/hoenn/dex_entry_pointer_table.asm"
-INCLUDE "data/pokemon/sinnoh/dex_entry_pointer_table.asm"
-INCLUDE "data/pokemon/unova/dex_entry_pointer_table.asm"
-INCLUDE "data/pokemon/kalos/dex_entry_pointer_table.asm"
 
 
 SECTION "Code 11", ROMX
@@ -5713,6 +5691,8 @@ INCLUDE "data/pokemon/kanto/menu_icon_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/menu_icon_pointers.asm"
 INCLUDE "data/pokemon/kanto/menu_icons.asm"
 
+INCLUDE "data/pokemon/kanto/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/dex_entry_pointers.asm"
 
 SECTION "Johto Base Data 1", ROMX
 
@@ -5740,6 +5720,8 @@ INCLUDE "data/pokemon/johto/menu_icon_pointer_table.asm"
 INCLUDE "data/pokemon/johto/menu_icon_pointers.asm"
 INCLUDE "data/pokemon/johto/menu_icons.asm"
 
+INCLUDE "data/pokemon/johto/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/johto/dex_entry_pointers.asm"
 
 SECTION "Hoenn Base Data 1", ROMX
 
@@ -5767,6 +5749,8 @@ INCLUDE "data/pokemon/hoenn/menu_icon_pointer_table.asm"
 INCLUDE "data/pokemon/hoenn/menu_icon_pointers.asm"
 INCLUDE "data/pokemon/hoenn/menu_icons.asm"
 
+INCLUDE "data/pokemon/hoenn/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/dex_entry_pointers.asm"
 
 SECTION "Sinnoh Base Data 1", ROMX
 
@@ -5794,6 +5778,8 @@ INCLUDE "data/pokemon/sinnoh/menu_icon_pointer_table.asm"
 INCLUDE "data/pokemon/sinnoh/menu_icon_pointers.asm"
 INCLUDE "data/pokemon/sinnoh/menu_icons.asm"
 
+INCLUDE "data/pokemon/sinnoh/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/dex_entry_pointers.asm"
 
 SECTION "Unova Base Data 1", ROMX
 
@@ -5821,6 +5807,8 @@ INCLUDE "data/pokemon/unova/menu_icon_pointer_table.asm"
 INCLUDE "data/pokemon/unova/menu_icon_pointers.asm"
 INCLUDE "data/pokemon/unova/menu_icons.asm"
 
+INCLUDE "data/pokemon/unova/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/unova/dex_entry_pointers.asm"
 
 SECTION "Kalos Base Data 1", ROMX
 
@@ -5848,6 +5836,8 @@ INCLUDE "data/pokemon/kalos/menu_icon_pointer_table.asm"
 INCLUDE "data/pokemon/kalos/menu_icon_pointers.asm"
 INCLUDE "data/pokemon/kalos/menu_icons.asm"
 
+INCLUDE "data/pokemon/kalos/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/dex_entry_pointers.asm"
 
 SECTION "Other Base Data", ROMX
 ;INCLUDE "data/pokemon/other/base_stat_pointer_table.asm"

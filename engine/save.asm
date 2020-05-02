@@ -240,13 +240,13 @@ SaveGameData:: ; 14c10
 	call SavePlayerData
 	call SavePokemonData
 	call SaveBox
-	call SavePokedexCaughtSeenEncounterData
 	call SaveChecksum
 	call ValidateBackupSave
 	call SaveBackupOptions
 	call SaveBackupPlayerData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
+	call SavePokedexCaughtSeenEncounterData
 	ld a, BANK(sBattleTowerChallengeState)
 	call GetSRAMBank
 	ld a, [sBattleTowerChallengeState]
@@ -356,32 +356,30 @@ SavePokemonData: ; 14df7
 SavePokedexCaughtSeenEncounterData:
 	ldh a, [rSVBK]
 	push af
+
 	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
-
 	ld a, BANK(sTotalSavedEncounters)
 	call GetSRAMBank
-
 	ld hl, wTotalSavedEncounters
 	ld de, sTotalSavedEncounters
 	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
 	rst CopyBytes
+	call CloseSRAM
 
 	ld a, BANK(wPokedexCaughtSeen)
 	ldh [rSVBK], a
-
 	ld a, BANK(sPokedexCaughtSeen)
 	call GetSRAMBank
-
 	ld hl, wPokedexCaughtSeen
 	ld de, sPokedexCaughtSeen
 	ld bc, wPokedexCaughtSeenEnd - wPokedexCaughtSeen
 	rst CopyBytes
+	call CloseSRAM
 
 	pop af
 	ldh [rSVBK], a
-
-	jp CloseSRAM
+	ret
 
 SaveBox: ; 14e0c
 	call GetBoxAddress
@@ -465,12 +463,12 @@ TryLoadSaveFile: ; 14ea5 (5:4ea5)
 	call LoadPlayerData
 	call LoadPokemonData
 	call LoadBox
-	call LoadPokedexCaughtSeenEncounterData
 	call ValidateBackupSave
 	call SaveBackupOptions
 	call SaveBackupPlayerData
 	call SaveBackupPokemonData
 	call SaveBackupChecksum
+	call LoadPokedexCaughtSeenEncounterData
 	and a
 	ret
 
@@ -480,12 +478,12 @@ TryLoadSaveFile: ; 14ea5 (5:4ea5)
 	call LoadBackupPlayerData
 	call LoadBackupPokemonData
 	call LoadBox
-	call LoadPokedexCaughtSeenEncounterData
 	call ValidateSave
 	call SaveOptions
 	call SavePlayerData
 	call SavePokemonData
 	call SaveChecksum
+	call LoadPokedexCaughtSeenEncounterData
 	and a
 	ret
 
@@ -631,32 +629,30 @@ LoadBox: ; 15021 (5:5021)
 LoadPokedexCaughtSeenEncounterData:
 	ldh a, [rSVBK]
 	push af
+
 	ld a, BANK(wTotalSavedEncounters)
 	ldh [rSVBK], a
-
 	ld a, BANK(sTotalSavedEncounters)
 	call GetSRAMBank
-
 	ld hl, sTotalSavedEncounters
 	ld de, wTotalSavedEncounters
 	ld bc, wTotalSavedEncountersEnd - wTotalSavedEncounters
 	rst CopyBytes
+	call CloseSRAM
 
 	ld a, BANK(wPokedexCaughtSeen)
 	ldh [rSVBK], a
-
 	ld a, BANK(sPokedexCaughtSeen)
 	call GetSRAMBank
-
 	ld hl, sPokedexCaughtSeen
 	ld de, wPokedexCaughtSeen
 	ld bc, wPokedexCaughtSeenEnd - wPokedexCaughtSeen
 	rst CopyBytes
+	call CloseSRAM
 
 	pop af
 	ldh [rSVBK], a
-
-	jp CloseSRAM
+	ret
 
 VerifyChecksum: ; 15028 (5:5028)
 	ld hl, sGameData

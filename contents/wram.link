@@ -46,6 +46,9 @@ WRAMX $5
 	"GBC Video"
 	org $d300
 	"Battle Animations RAM"
+	"Pokedex List"
+	"Pokedex Caught And Seen"
+	"Encounter counters"
 
 WRAMX $6
 	org $d000

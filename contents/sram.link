@@ -24,3 +24,16 @@ SRAM $3
 SRAM $4
 	org $a000
 	"Boxes 11-15"
+
+SRAM $5
+	org $a000
+	"Pokedex Caught Seen"
+	"Total Pokemon Encountered"
+	"Quick Save"
+	"Backup Quick Save"
+
+SRAM $6
+	org $a000
+
+SRAM $7
+	org $a000
