@@ -40,7 +40,6 @@ ROMX $07
 ROMX $08
 	org $4000
 	"Code 8"
-	"Mon Icons 3"
 
 ROMX $09
 	org $4000
@@ -70,7 +69,6 @@ ROMX $0D
 ROMX $0E
 	org $4000
 	"Code 14"
-	"Mon Icons 9"
 
 ROMX $0F
 	org $4000
@@ -132,7 +130,6 @@ ROMX $19
 ROMX $1A
 	org $4000
 	"Introduction"
-	"Hoenn Pic Pointers"
 
 ROMX $1B
 	org $4000
@@ -183,7 +180,6 @@ ROMX $24
 	org $4000
 	"Kanto Pic Pointers"
 	"Johto Pic Pointers"
-	"Mon Icons 2"
 	"Collision Permissions"
 
 ROMX $25
@@ -248,8 +244,6 @@ ROMX $30
 
 ROMX $31
 	org $4000
-	"Mon Icons 1"
-	"Mon Icons 15"
 
 ROMX $32
 	org $4000

@@ -166,7 +166,7 @@ add_eggmoves: macro
 endm
 
 add_icontable: macro
-	dba \1IconPointers
+	dw \1IconPointers
 endm
 
 add_icon: macro

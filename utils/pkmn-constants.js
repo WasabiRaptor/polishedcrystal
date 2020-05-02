@@ -107,6 +107,15 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             `\n`).join(""),
         "utf8");
 
+        fs.writeFileSync(`data/pokemon/${region.lower}/menu_icons.asm`,
+            list.map((poke,i)=>
+                (i % 15 ? "" : `\nSECTION "${region.title} Icons ${i/15+1}", ROMX\n\n`) +
+                    `${poke.title}Icon::\tINCBIN "gfx/icons/${poke.lower}.2bpp"\n`+
+                    poke.forms.map(form=>`${form.title}Icon::\tINCBIN "gfx/icons/${form.lower}.2bpp"\n`).join("") +
+            `\n`).join(""),
+        "utf8");
+
+
         // names
         fs.writeFileSync(`data/pokemon/${region.lower}/name_pointer_table.asm`,
             `${region.title}NamePointerTable::\n` +

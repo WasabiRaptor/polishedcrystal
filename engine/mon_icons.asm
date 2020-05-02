@@ -470,31 +470,22 @@ HoldSwitchmonIcon: ; 8ea8c
 	ret
 
 GetRelevantIconPointersAndBank:
-; given species in wCurIcon, return *IconPointers in hl and BANK(*Icon) in b
-; returns c for variants, nc for normal species
-	ld a, [wCurGroup]
+	ld a, [wCurIcon]
+	ld [wCurSpecies], a
 	ld hl, RegionalIconPointerTable
-	call dbwArray
-
-	ld a, [wCurIcon]
-	call dbwArray
+	call ProcessPokemonPointertable
+	ld bc, 3
 	ld a, [wCurForm]
-	jr c, .variant
-	ld a, [wCurIcon]
-	dec a
-.variant
-	ld e, a
-	ld d, 0
-	add hl, de
-	add hl, de
-	add hl, de
-	ld b, [hl]
+	rst AddNTimes
+	ld a, d
+	call GetFarByte
+	ld b, a
 	inc hl
-	ld a, [hli]
-	ld e, a
-	ld d, [hl]
-;get the bank
-	ld c, 8
+	ld a, d
+	call GetFarHalfword
+	ld d, h
+	ld e, l
+	ld c, 8 ; size of the icon
 	ret
 
 INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"

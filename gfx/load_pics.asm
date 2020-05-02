@@ -469,39 +469,12 @@ LoadFrontpic: ; 512f2
 	ret
 
 GetRelevantPicPointers:
-; given species in a, return *PicPointers in hl and BANK(*PicPointers) in d
-; returns c for variants, nc for normal species
-	ld a, [wCurGroup]
+	;returns the pointers for the relevant pokemin in wCurGroup, wCurSpecies and wCurForm
 	ld hl, RegionalPicPointerTable
-	ld bc, 3
-	rst AddNTimes
-	ld a, [hli]
-	ld d, a
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
-	ld a, [wCurSpecies]
-	dec a
-	ld b, 0
-	ld c, a
-	add hl, bc
-	add hl, bc
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
+	call ProcessPokemonPointertable
 	ld a, [wCurForm]
 	ld bc, 6
 	rst AddNTimes
-
 	ret
 
 INCLUDE "data/pokemon/variant_pic_pointer_table.asm"
-
-INCLUDE "data/pokemon/kanto/pic_pointer_table.asm"
-INCLUDE "data/pokemon/johto/pic_pointer_table.asm"
-INCLUDE "data/pokemon/hoenn/pic_pointer_table.asm"
-INCLUDE "data/pokemon/sinnoh/pic_pointer_table.asm"
-INCLUDE "data/pokemon/unova/pic_pointer_table.asm"
-INCLUDE "data/pokemon/kalos/pic_pointer_table.asm"

@@ -1188,6 +1188,29 @@ GetRelevantMonOverworldPalettes::
 
 INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"
 
+ProcessPokemonPointertable::
+	ld a, [hROMBank]
+	push af
+	ld a, [wCurGroup]
+	ld bc, 3
+	rst AddNTimes
+	ld a, [hli]
+	ld d, a
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	ld a, d
+	rst Bankswitch
+
+	ld a, [wCurSpecies]
+	dec a
+	call NextHLTable
+
+	pop af
+	rst Bankswitch
+	ret
+
 NextHLTable::
 	ld b, 0
 	ld c, a

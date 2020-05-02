@@ -10,10 +10,10 @@ IvysaurShinyPalette:	INCLUDE "gfx/pokemon/ivysaur/shiny.pal"
 VenusaurPalettes:
 VenusaurNormalPalette:	INCBIN "gfx/pokemon/venusaur/front.gbcpal", middle_colors
 VenusaurShinyPalette:	INCLUDE "gfx/pokemon/venusaur/shiny.pal"
-VenusaurMegaPalettes
+VenusaurMegaPalettes:
 VenusaurMegaNormalPalette:	INCBIN "gfx/pokemon/venusaur_mega/front.gbcpal", middle_colors
 VenusaurMegaShinyPalette:	INCLUDE "gfx/pokemon/venusaur_mega/shiny.pal"
-VenusaurGigaPalettes
+VenusaurGigaPalettes:
 VenusaurGigaNormalPalette:	INCBIN "gfx/pokemon/venusaur_giga/front.gbcpal", middle_colors
 VenusaurGigaShinyPalette:	INCLUDE "gfx/pokemon/venusaur_giga/shiny.pal"
 
@@ -608,3 +608,4 @@ MewtwoShinyPalette:	INCLUDE "gfx/pokemon/mewtwo/shiny.pal"
 MewPalettes:
 MewNormalPalette:	INCBIN "gfx/pokemon/mew/front.gbcpal", middle_colors
 MewShinyPalette:	INCLUDE "gfx/pokemon/mew/shiny.pal"
+

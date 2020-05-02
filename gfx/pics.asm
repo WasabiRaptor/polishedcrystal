@@ -7,43 +7,43 @@ SECTION "Other Pic Pointers", ROMX
 
 SECTION "Kanto Pic Pointers", ROMX
 
+INCLUDE "data/pokemon/kanto/pic_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/pic_pointers.asm"
-
 INCLUDE "gfx/pokemon/kanto_pics.asm"
 
 
 SECTION "Johto Pic Pointers", ROMX
 
+INCLUDE "data/pokemon/johto/pic_pointer_table.asm"
 INCLUDE "data/pokemon/johto/pic_pointers.asm"
-
 INCLUDE "gfx/pokemon/johto_pics.asm"
 
 
 SECTION "Hoenn Pic Pointers", ROMX
 
+INCLUDE "data/pokemon/hoenn/pic_pointer_table.asm"
 INCLUDE "data/pokemon/hoenn/pic_pointers.asm"
-
 INCLUDE "gfx/pokemon/hoenn_pics.asm"
 
 
 SECTION "Sinnoh Pic Pointers", ROMX
 
+INCLUDE "data/pokemon/sinnoh/pic_pointer_table.asm"
 INCLUDE "data/pokemon/sinnoh/pic_pointers.asm"
-
 INCLUDE "gfx/pokemon/sinnoh_pics.asm"
 
 
 SECTION "Unova Pic Pointers", ROMX
 
+INCLUDE "data/pokemon/unova/pic_pointer_table.asm"
 INCLUDE "data/pokemon/unova/pic_pointers.asm"
-
 INCLUDE "gfx/pokemon/unova_pics.asm"
 
 
 SECTION "Kalos Pic Pointers", ROMX
 
+INCLUDE "data/pokemon/kalos/pic_pointer_table.asm"
 INCLUDE "data/pokemon/kalos/pic_pointers.asm"
-
 INCLUDE "gfx/pokemon/kalos_pics.asm"
 
 

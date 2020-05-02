@@ -4107,23 +4107,6 @@ INCLUDE "engine/sprites.asm"
 INCLUDE "engine/mon_icons.asm"
 INCLUDE "engine/events/field_moves.asm"
 INCLUDE "engine/events/magnet_train.asm"
-;INCLUDE "data/pokemon/other/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/kanto/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/johto/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/hoenn/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/sinnoh/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/unova/menu_icon_pointers.asm"
-INCLUDE "data/pokemon/kalos/menu_icon_pointers.asm"
-
-;INCLUDE "data/pokemon/other/menu_icon_pointer_table.asm"
-INCLUDE "data/pokemon/kanto/menu_icon_pointer_table.asm"
-INCLUDE "data/pokemon/johto/menu_icon_pointer_table.asm"
-INCLUDE "data/pokemon/hoenn/menu_icon_pointer_table.asm"
-INCLUDE "data/pokemon/sinnoh/menu_icon_pointer_table.asm"
-INCLUDE "data/pokemon/unova/menu_icon_pointer_table.asm"
-INCLUDE "data/pokemon/kalos/menu_icon_pointer_table.asm"
-
-INCLUDE "data/pokemon/menu_icons.asm"
 
 
 SECTION "Code 18", ROMX
@@ -5724,6 +5707,12 @@ INCLUDE "data/pokemon/kanto/overworld_palette_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/overworld_palette_pointers.asm"
 INCLUDE "data/pokemon/kanto/overworld_palettes.asm"
 
+SECTION "Kanto Base Data 3", ROMX
+
+INCLUDE "data/pokemon/kanto/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/kanto/menu_icons.asm"
+
 
 SECTION "Johto Base Data 1", ROMX
 
@@ -5744,6 +5733,12 @@ SECTION "Johto Base Data 2", ROMX
 ;INCLUDE "data/pokemon/johto/overworld_palette_pointer_table.asm"
 ;INCLUDE "data/pokemon/johto/overworld_palette_pointers.asm"
 ;INCLUDE "data/pokemon/johto/overworld_palettes.asm"
+
+SECTION "Johto Base Data 3", ROMX
+
+INCLUDE "data/pokemon/johto/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/johto/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/johto/menu_icons.asm"
 
 
 SECTION "Hoenn Base Data 1", ROMX
@@ -5766,6 +5761,12 @@ SECTION "Hoenn Base Data 2", ROMX
 ;INCLUDE "data/pokemon/hoenn/overworld_palette_pointers.asm"
 ;INCLUDE "data/pokemon/hoenn/overworld_palettes.asm"
 
+SECTION "Hoenn Base Data 3", ROMX
+
+INCLUDE "data/pokemon/hoenn/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/hoenn/menu_icons.asm"
+
 
 SECTION "Sinnoh Base Data 1", ROMX
 
@@ -5786,6 +5787,12 @@ SECTION "Sinnoh Base Data 2", ROMX
 ;INCLUDE "data/pokemon/sinnoh/overworld_palette_pointer_table.asm"
 ;INCLUDE "data/pokemon/sinnoh/overworld_palette_pointers.asm"
 ;INCLUDE "data/pokemon/sinnoh/overworld_palettes.asm"
+
+SECTION "Sinnoh Base Data 3", ROMX
+
+INCLUDE "data/pokemon/sinnoh/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/menu_icons.asm"
 
 
 SECTION "Unova Base Data 1", ROMX
@@ -5808,6 +5815,12 @@ SECTION "Unova Base Data 2", ROMX
 ;INCLUDE "data/pokemon/unova/overworld_palette_pointers.asm"
 ;INCLUDE "data/pokemon/unova/overworld_palettes.asm"
 
+SECTION "Unova Base Data 3", ROMX
+
+INCLUDE "data/pokemon/unova/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/unova/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/unova/menu_icons.asm"
+
 
 SECTION "Kalos Base Data 1", ROMX
 
@@ -5828,6 +5841,12 @@ SECTION "Kalos Base Data 2", ROMX
 ;INCLUDE "data/pokemon/kalos/overworld_palette_pointer_table.asm"
 ;INCLUDE "data/pokemon/kalos/overworld_palette_pointers.asm"
 ;INCLUDE "data/pokemon/kalos/overworld_palettes.asm"
+
+SECTION "Kalos Base Data 3", ROMX
+
+INCLUDE "data/pokemon/kalos/menu_icon_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/menu_icon_pointers.asm"
+INCLUDE "data/pokemon/kalos/menu_icons.asm"
 
 
 SECTION "Other Base Data", ROMX
