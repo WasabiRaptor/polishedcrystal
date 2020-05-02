@@ -46,6 +46,7 @@ GetSpriteVTile:: ; 180e
 	ld b, a
 	add a, b
 	add a, b
+	add a, b; add a fourth frame to the thing?
 	ldh [hUsedSpriteTile], a
 	push af
 	farcall GetUsedSprite
