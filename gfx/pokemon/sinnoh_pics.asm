@@ -348,6 +348,8 @@ DarkraiBackpic::	INCBIN "gfx/pokemon/darkrai/back.2bpp.lz"
 
 ShayminFrontpic::	INCBIN "gfx/pokemon/shaymin/front.animated.2bpp.lz"
 ShayminBackpic::	INCBIN "gfx/pokemon/shaymin/back.2bpp.lz"
+ShayminSkyFrontpic::	INCBIN "gfx/pokemon/shaymin_sky/front.animated.2bpp.lz"
+ShayminSkyBackpic::	INCBIN "gfx/pokemon/shaymin_sky/back.2bpp.lz"
 
 ArceusFrontpic::	INCBIN "gfx/pokemon/arceus/front.animated.2bpp.lz"
 ArceusBackpic::	INCBIN "gfx/pokemon/arceus/back.2bpp.lz"

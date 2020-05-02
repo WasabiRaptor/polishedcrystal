@@ -316,6 +316,7 @@ DarkraiBitmasksPointers::
 
 ShayminBitmasksPointers::
 	add_bitmasks Shaymin
+	add_bitmasks ShayminSky
 
 ArceusBitmasksPointers::
 	add_bitmasks Arceus

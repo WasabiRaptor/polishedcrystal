@@ -316,6 +316,7 @@ DarkraiIconPointers::
 
 ShayminIconPointers::
 	add_icon Shaymin
+	add_icon ShayminSky
 
 ArceusIconPointers::
 	add_icon Arceus

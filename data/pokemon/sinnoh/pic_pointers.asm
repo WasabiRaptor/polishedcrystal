@@ -316,6 +316,7 @@ DarkraiPicPointers::
 
 ShayminPicPointers::
 	add_pics Shaymin
+	add_pics ShayminSky
 
 ArceusPicPointers::
 	add_pics Arceus

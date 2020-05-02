@@ -317,6 +317,7 @@ DarkraiBaseDataPointers::
 
 ShayminBaseDataPointers::
 	add_basedata Shaymin
+	add_basedata ShayminSky
 
 ArceusBaseDataPointers::
 	add_basedata Arceus

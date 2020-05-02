@@ -316,6 +316,7 @@ DarkraiFramesPointers::
 
 ShayminFramesPointers::
 	add_frames Shaymin
+	add_frames ShayminSky
 
 ArceusFramesPointers::
 	add_frames Arceus

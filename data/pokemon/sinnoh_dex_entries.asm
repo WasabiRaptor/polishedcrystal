@@ -222,6 +222,7 @@ ManaphyPokedexEntry::	INCLUDE "data/pokemon/dex_entries/manaphy.asm"
 DarkraiPokedexEntry::	INCLUDE "data/pokemon/dex_entries/darkrai.asm"
 
 ShayminPokedexEntry::	INCLUDE "data/pokemon/dex_entries/shaymin.asm"
+ShayminSkyPokedexEntry::	INCLUDE "data/pokemon/dex_entries/shaymin_sky.asm"
 
 ArceusPokedexEntry::	INCLUDE "data/pokemon/dex_entries/arceus.asm"
 

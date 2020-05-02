@@ -2324,6 +2324,9 @@ GivePoke:: ; e277
 	call InitNickname
 
 .skip_nickname
+	farcall LoadSpecialMapOBPalette
+	farcall ApplyPals
+	call UpdateTimePals
 	pop bc
 	pop de
 	ld a, b

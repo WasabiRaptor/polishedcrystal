@@ -316,6 +316,7 @@ DarkraiNames::
 
 ShayminNames::
 	add_name Shaymin
+	add_name Shaymin
 
 ArceusNames::
 	add_name Arceus

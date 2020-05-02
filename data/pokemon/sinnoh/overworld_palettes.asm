@@ -1270,6 +1270,17 @@ ShayminShinyOverworldPaletteDay:	INCLUDE "gfx/sprites/pokemon/shaymin/shiny.pal"
 ShayminShinyOverworldPaletteDusk:	INCLUDE "gfx/sprites/pokemon/shaymin/shiny.pal"
 ShayminShinyOverworldPaletteMidnight:	INCLUDE "gfx/sprites/pokemon/shaymin/shiny.pal"
 ShayminShinyOverworldPaletteDark:	INCLUDE "gfx/sprites/pokemon/shaymin/shiny.pal"
+ShayminSkyOverworldPalettes::
+ShayminSkyNormalOverworldPaletteDawn:	INCBIN "gfx/sprites/pokemon/shaymin_sky/overworld.gbcpal", middle_colors
+ShayminSkyNormalOverworldPaletteDay:	INCBIN "gfx/sprites/pokemon/shaymin_sky/overworld.gbcpal", middle_colors
+ShayminSkyNormalOverworldPaletteDusk:	INCBIN "gfx/sprites/pokemon/shaymin_sky/overworld.gbcpal", middle_colors
+ShayminSkyNormalOverworldPaletteMidnight:	INCBIN "gfx/sprites/pokemon/shaymin_sky/overworld.gbcpal", middle_colors
+ShayminSkyNormalOverworldPaletteDark:	INCBIN "gfx/sprites/pokemon/shaymin_sky/overworld.gbcpal", middle_colors
+ShayminSkyShinyOverworldPaletteDawn:	INCLUDE "gfx/sprites/pokemon/shaymin_sky/shiny.pal"
+ShayminSkyShinyOverworldPaletteDay:	INCLUDE "gfx/sprites/pokemon/shaymin_sky/shiny.pal"
+ShayminSkyShinyOverworldPaletteDusk:	INCLUDE "gfx/sprites/pokemon/shaymin_sky/shiny.pal"
+ShayminSkyShinyOverworldPaletteMidnight:	INCLUDE "gfx/sprites/pokemon/shaymin_sky/shiny.pal"
+ShayminSkyShinyOverworldPaletteDark:	INCLUDE "gfx/sprites/pokemon/shaymin_sky/shiny.pal"
 
 ArceusOverworldPalettes:
 ArceusNormalOverworldPaletteDawn:	INCBIN "gfx/sprites/pokemon/arceus/overworld.gbcpal", middle_colors

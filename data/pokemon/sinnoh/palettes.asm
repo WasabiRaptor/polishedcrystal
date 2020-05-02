@@ -422,6 +422,9 @@ DarkraiShinyPalette:	INCLUDE "gfx/pokemon/darkrai/shiny.pal"
 ShayminPalettes:
 ShayminNormalPalette:	INCBIN "gfx/pokemon/shaymin/front.gbcpal", middle_colors
 ShayminShinyPalette:	INCLUDE "gfx/pokemon/shaymin/shiny.pal"
+ShayminSkyPalettes:
+ShayminSkyNormalPalette:	INCBIN "gfx/pokemon/shaymin_sky/front.gbcpal", middle_colors
+ShayminSkyShinyPalette:	INCLUDE "gfx/pokemon/shaymin_sky/shiny.pal"
 
 ArceusPalettes:
 ArceusNormalPalette:	INCBIN "gfx/pokemon/arceus/front.gbcpal", middle_colors

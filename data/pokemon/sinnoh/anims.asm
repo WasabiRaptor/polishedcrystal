@@ -210,6 +210,7 @@ ManaphyAnimation:	INCLUDE "gfx/pokemon/manaphy/anim.asm"
 DarkraiAnimation:	INCLUDE "gfx/pokemon/darkrai/anim.asm"
 
 ShayminAnimation:	INCLUDE "gfx/pokemon/shaymin/anim.asm"
+ShayminSkyAnimation::	INCLUDE "gfx/pokemon/shaymin_sky/anim.asm"
 
 ArceusAnimation:	INCLUDE "gfx/pokemon/arceus/anim.asm"
 

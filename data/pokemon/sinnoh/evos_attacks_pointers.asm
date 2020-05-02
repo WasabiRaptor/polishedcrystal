@@ -316,6 +316,7 @@ DarkraiEvosAttacksPointers::
 
 ShayminEvosAttacksPointers::
 	add_evosattacks Shaymin
+	add_evosattacks ShayminSky
 
 ArceusEvosAttacksPointers::
 	add_evosattacks Arceus

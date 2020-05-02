@@ -316,6 +316,7 @@ DarkraiAnimationPointers::
 
 ShayminAnimationPointers::
 	add_anim Shaymin
+	add_anim ShayminSky
 
 ArceusAnimationPointers::
 	add_anim Arceus

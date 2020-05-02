@@ -316,6 +316,7 @@ DarkraiOverworldSpritePointers::
 
 ShayminOverworldSpritePointers::
 	add_overworldsprite Shaymin
+	add_overworldsprite ShayminSky
 
 ArceusOverworldSpritePointers::
 	add_overworldsprite Arceus

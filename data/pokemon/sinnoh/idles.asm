@@ -210,6 +210,7 @@ ManaphyAnimationIdle:	INCLUDE "gfx/pokemon/manaphy/anim_idle.asm"
 DarkraiAnimationIdle:	INCLUDE "gfx/pokemon/darkrai/anim_idle.asm"
 
 ShayminAnimationIdle:	INCLUDE "gfx/pokemon/shaymin/anim_idle.asm"
+ShayminSkyAnimationIdle::	INCLUDE "gfx/pokemon/shaymin_sky/anim_idle.asm"
 
 ArceusAnimationIdle:	INCLUDE "gfx/pokemon/arceus/anim_idle.asm"
 

@@ -617,6 +617,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon MANAPHY
 	nat_dexmon DARKRAI
 	nat_dexmon SHAYMIN
+	nat_dexmon_form SKY
 	nat_dexmon ARCEUS ; types can be handled by the multitype ability via the item it holds and palette can be done in much the same way
 NUM_SINNOH_POKEMON EQU const_value +-1
 

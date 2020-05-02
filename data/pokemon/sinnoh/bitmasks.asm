@@ -210,6 +210,7 @@ ManaphyBitmasks:	INCLUDE "gfx/pokemon/manaphy/bitmask.asm"
 DarkraiBitmasks:	INCLUDE "gfx/pokemon/darkrai/bitmask.asm"
 
 ShayminBitmasks:	INCLUDE "gfx/pokemon/shaymin/bitmask.asm"
+ShayminSkyBitmasks::	INCLUDE "gfx/pokemon/shaymin_sky/bitmask.asm"
 
 ArceusBitmasks:	INCLUDE "gfx/pokemon/arceus/bitmask.asm"
 

@@ -316,6 +316,7 @@ DarkraiAnimationIdlePointers::
 
 ShayminAnimationIdlePointers::
 	add_idleanim Shaymin
+	add_idleanim ShayminSky
 
 ArceusAnimationIdlePointers::
 	add_idleanim Arceus

@@ -221,6 +221,7 @@ ManaphyOverworldSprite::	INCBIN "gfx/sprites/pokemon/manaphy/overworld.2bpp"
 DarkraiOverworldSprite::	INCBIN "gfx/sprites/pokemon/darkrai/overworld.2bpp"
 
 ShayminOverworldSprite::	INCBIN "gfx/sprites/pokemon/shaymin/overworld.2bpp"
+ShayminSkyOverworldSprite::	INCBIN "gfx/sprites/pokemon/shaymin_sky/overworld.2bpp"
 
 ArceusOverworldSprite::	INCBIN "gfx/sprites/pokemon/arceus/overworld.2bpp"
 

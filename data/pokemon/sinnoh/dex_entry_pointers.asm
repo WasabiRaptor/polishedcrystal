@@ -316,6 +316,7 @@ DarkraiPokedexEntryPointers::
 
 ShayminPokedexEntryPointers::
 	add_pokedexentry Shaymin
+	add_pokedexentry ShayminSky
 
 ArceusPokedexEntryPointers::
 	add_pokedexentry Arceus

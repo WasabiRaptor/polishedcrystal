@@ -210,6 +210,7 @@ ManaphyBaseData::	INCLUDE "data/pokemon/base_stats/manaphy.asm"
 DarkraiBaseData::	INCLUDE "data/pokemon/base_stats/darkrai.asm"
 
 ShayminBaseData::	INCLUDE "data/pokemon/base_stats/shaymin.asm"
+ShayminSkyBaseData::	INCLUDE "data/pokemon/base_stats/shaymin_sky.asm"
 
 ArceusBaseData::	INCLUDE "data/pokemon/base_stats/arceus.asm"
 

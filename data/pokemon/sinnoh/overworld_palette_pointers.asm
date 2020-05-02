@@ -316,6 +316,7 @@ DarkraiOverworldPalettePointers::
 
 ShayminOverworldPalettePointers::
 	add_overworldpalettes Shaymin
+	add_overworldpalettes ShayminSky
 
 ArceusOverworldPalettePointers::
 	add_overworldpalettes Arceus

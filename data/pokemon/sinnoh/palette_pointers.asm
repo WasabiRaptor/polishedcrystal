@@ -316,6 +316,7 @@ DarkraiPalettePointers::
 
 ShayminPalettePointers::
 	add_palettes Shaymin
+	add_palettes ShayminSky
 
 ArceusPalettePointers::
 	add_palettes Arceus

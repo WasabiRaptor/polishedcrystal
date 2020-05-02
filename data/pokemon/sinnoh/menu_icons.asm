@@ -233,6 +233,7 @@ DarkraiIcon::	INCBIN "gfx/icons/darkrai.2bpp"
 SECTION "Sinnoh Icons 8", ROMX
 
 ShayminIcon::	INCBIN "gfx/icons/shaymin.2bpp"
+ShayminSkyIcon::	INCBIN "gfx/icons/shaymin_sky.2bpp"
 
 ArceusIcon::	INCBIN "gfx/icons/arceus.2bpp"
 

@@ -5710,9 +5710,9 @@ INCLUDE "data/pokemon/johto/palettes.asm"
 
 SECTION "Johto Base Data 2", ROMX
 
-;INCLUDE "data/pokemon/johto/overworld_palette_pointer_table.asm"
-;INCLUDE "data/pokemon/johto/overworld_palette_pointers.asm"
-;INCLUDE "data/pokemon/johto/overworld_palettes.asm"
+INCLUDE "data/pokemon/johto/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/johto/overworld_palette_pointers.asm"
+INCLUDE "data/pokemon/johto/overworld_palettes.asm"
 
 SECTION "Johto Base Data 3", ROMX
 
@@ -5739,9 +5739,9 @@ INCLUDE "data/pokemon/hoenn/palettes.asm"
 
 SECTION "Hoenn Base Data 2", ROMX
 
-;INCLUDE "data/pokemon/hoenn/overworld_palette_pointer_table.asm"
-;INCLUDE "data/pokemon/hoenn/overworld_palette_pointers.asm"
-;INCLUDE "data/pokemon/hoenn/overworld_palettes.asm"
+INCLUDE "data/pokemon/hoenn/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/overworld_palette_pointers.asm"
+INCLUDE "data/pokemon/hoenn/overworld_palettes.asm"
 
 SECTION "Hoenn Base Data 3", ROMX
 
@@ -5768,9 +5768,9 @@ INCLUDE "data/pokemon/sinnoh/palettes.asm"
 
 SECTION "Sinnoh Base Data 2", ROMX
 
-;INCLUDE "data/pokemon/sinnoh/overworld_palette_pointer_table.asm"
-;INCLUDE "data/pokemon/sinnoh/overworld_palette_pointers.asm"
-;INCLUDE "data/pokemon/sinnoh/overworld_palettes.asm"
+INCLUDE "data/pokemon/sinnoh/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/overworld_palette_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/overworld_palettes.asm"
 
 SECTION "Sinnoh Base Data 3", ROMX
 
@@ -5856,3 +5856,34 @@ SECTION "Other Base Data", ROMX
 SECTION "Move Animations 1", ROMX
 
 INCLUDE "data/moves/animations.asm"
+
+
+SECTION "Kanto Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/kanto/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/kanto/overworld_sprites.asm"
+
+
+SECTION "Johto Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/johto/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/johto/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/johto/overworld_sprites.asm"
+
+
+SECTION "Hoenn Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/hoenn/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/hoenn/overworld_sprites.asm"
+
+
+SECTION "Sinnoh Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/sinnoh/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/sinnoh/overworld_sprites.asm"
+
+;blank one for when you have no follower
+FollowerSpriteGFX::        INCBIN "gfx/sprites/pokemon/aa_dummy/overworld.2bpp"

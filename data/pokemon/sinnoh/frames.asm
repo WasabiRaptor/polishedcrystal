@@ -210,6 +210,7 @@ ManaphyFrames:	INCLUDE "gfx/pokemon/manaphy/frames.asm"
 DarkraiFrames:	INCLUDE "gfx/pokemon/darkrai/frames.asm"
 
 ShayminFrames:	INCLUDE "gfx/pokemon/shaymin/frames.asm"
+ShayminSkyFrames::	INCLUDE "gfx/pokemon/shaymin_sky/frames.asm"
 
 ArceusFrames:	INCLUDE "gfx/pokemon/arceus/frames.asm"
 

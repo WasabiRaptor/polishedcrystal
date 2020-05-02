@@ -7,8 +7,10 @@ ROMX $01
 ROMX $02
 	org $4000
 	"Code 2"
-	"Trainer Pic Pointers"
 	"wild stuff"
+	"Johto Egg Moves"
+	"Kanto Pokemon Pics 1"
+	"Trainer Pic Pointers"
 
 ROMX $03
 	org $4000
@@ -25,10 +27,12 @@ ROMX $05
 	org $4000
 	"Code 5"
 	"Other Base Data"
+	"Unova Pokedex Entries 3"
 
 ROMX $06
 	org $4000
 	"color"
+	"Music 9"
 	"Painting Pic Pointers"
 
 ROMX $07
@@ -36,10 +40,12 @@ ROMX $07
 	"Code 7"
 	"Move Data"
 	"Johto Dex Order"
+	"Sinnoh Dex Order"
 
 ROMX $08
 	org $4000
 	"Code 8"
+	"Overworld Sprites 1"
 
 ROMX $09
 	org $4000
@@ -50,10 +56,14 @@ ROMX $0A
 	org $4000
 	"Code 10"
 	"Kanto Pokedex Entries 6"
+	"Kalos Pokedex Entries 3"
+	"Johto Pokemon Pics 10"
 
 ROMX $0B
 	org $4000
 	"Code 11"
+	"Follower Scripts"
+	"Unova Pokemon Pics 15"
 
 ROMX $0C
 	org $4000
@@ -65,10 +75,12 @@ ROMX $0D
 	org $4000
 	"Code 13"
 	"Unova Cries"
+	"Sinnoh Pokemon Pics 8"
 
 ROMX $0E
 	org $4000
 	"Code 14"
+	"Hoenn Pokedex Entries 5"
 
 ROMX $0F
 	org $4000
@@ -79,11 +91,14 @@ ROMX $0F
 ROMX $10
 	org $4000
 	"Code 16"
+	"Kalos Base Data 3"
+	"Sinnoh Pokemon Pics 9"
 
 ROMX $11
 	org $4000
 	"Code 17"
 	"Tileset Data - invar"
+	"Hoenn Footprints"
 
 ROMX $12
 	org $4000
@@ -106,6 +121,7 @@ ROMX $15
 	"Code 21"
 	"Enemy Trainer Parties 2"
 	"Hoenn Egg Moves"
+	"Kanto Pokemon Pics 8"
 
 ROMX $16
 	org $4000
@@ -126,6 +142,8 @@ ROMX $18
 ROMX $19
 	org $4000
 	"Code 25"
+	"Sinnoh Evolutions and Attacks"
+	"Kanto Pokemon Pics 15"
 
 ROMX $1A
 	org $4000
@@ -145,6 +163,7 @@ ROMX $1C
 ROMX $1D
 	org $4000
 	"Audio"
+	"Kanto Pokemon Pics 3"
 
 ROMX $1E
 	org $4000
@@ -155,16 +174,21 @@ ROMX $1E
 ROMX $1F
 	org $4000
 	"Crystal Sound Effects"
+	"Tileset Data - facility"
+	"Kanto Pokemon Pics 11"
 	"Unova Pic Pointers"
 
 ROMX $20
 	org $4000
 	"Pic Animations"
+	"RBY Music 1"
 	"Kalos Egg Moves"
+	"Kanto Pokemon Pics 4"
 
 ROMX $21
 	org $4000
 	"Pic Animations Frames 1"
+	"Unova Pokemon Pics 9"
 
 ROMX $22
 	org $4000
@@ -174,12 +198,15 @@ ROMX $22
 
 ROMX $23
 	org $4000
+	"Music 3"
 	"Unova Dex Order"
+	"Kanto Pokemon Pics 9"
 
 ROMX $24
 	org $4000
 	"Kanto Pic Pointers"
 	"Johto Pic Pointers"
+	"Kanto Pokemon Pics 13"
 	"Collision Permissions"
 
 ROMX $25
@@ -196,6 +223,7 @@ ROMX $27
 	org $4000
 	"Moves"
 	"Alola Dex Order"
+	"Hoenn Pokemon Pics 5"
 
 ROMX $28
 	org $4000
@@ -204,6 +232,7 @@ ROMX $28
 ROMX $29
 	org $4000
 	"Enemy Trainers"
+	"Hoenn Pokemon Pics 10"
 
 ROMX $2A
 	org $4000
@@ -211,6 +240,7 @@ ROMX $2A
 	"Kalos Dex Order"
 	"Tileset Data - alph_word_room"
 	"Key Item Icons"
+	"Kanto Overworld Sprites 1"
 
 ROMX $2B
 	org $4000
@@ -226,28 +256,37 @@ ROMX $2C
 ROMX $2D
 	org $4000
 	"Pokedex"
+	"Johto Pokemon Pics 8"
 
 ROMX $2E
 	org $4000
 	"Map Headers"
 	"Events"
 	"Sinnoh Egg Moves"
+	"Kanto Pokemon Pics 14"
 
 ROMX $2F
 	org $4000
 	"Second Map Headers"
 	"Tileset Data - pokemon_mansion"
+	"Kalos Cries"
+	"Kanto Overworld Sprites 2"
 
 ROMX $30
 	org $4000
 	"Phone Scripts"
+	"Kanto Pokemon Pics 5"
 
 ROMX $31
 	org $4000
+	"Kanto Pokedex Entries 1"
+	"Kanto Overworld Sprites 3"
 
 ROMX $32
 	org $4000
 	"Battle Graphics"
+	"Kanto Pokedex Entries 3"
+	"Kanto Overworld Sprites 4"
 
 ROMX $33
 	org $4000
@@ -257,20 +296,27 @@ ROMX $33
 ROMX $34
 	org $4000
 	"Tileset Data - battle_tower_outside"
+	"Tileset Data - pokecenter"
+	"Kanto Overworld Sprites 5"
 
 ROMX $35
 	org $4000
 	"Tileset Data - safari_zone"
+	"Johto Pokemon Pics 1"
 
 ROMX $36
 	org $4000
 	"Diploma"
+	"Go Music"
+	"Kanto Pokemon Pics 7"
 	"Portrait Pics"
 
 ROMX $37
 	org $4000
 	"Load Map Part"
 	"Battle Tower Text"
+	"Overworld Map Blocks"
+	"Hoenn Pokemon Pics 9"
 
 
 ROMX $38
@@ -281,207 +327,459 @@ ROMX $38
 
 ROMX $39
 	org $4000
+	"Kanto Pokemon Pics 12"
+	"Trainer Pics 8"
 
 ROMX $3a
 	org $4000
+	"Tileset Data - shamouti_island"
+	"Kanto Pokemon Pics 10"
 
 ROMX $3b
 	org $4000
+	"Johto Pokemon Pics 7"
+	"Trainer Pics 9"
 
 ROMX $3c
 	org $4000
+	"Unova Base Data 1"
+	"Text 1"
 
 ROMX $3d
 	org $4000
+	"Johto Pokemon Pics 4"
+	"Trainer Pics 4"
 
 ROMX $3e
 	org $4000
+	"Item Icons 1"
+	"Unova Pokemon Pics 6"
 
 ROMX $3f
 	org $4000
+	"Kanto Pokemon Pics 2"
+	"Unova Pokemon Pics 5"
 
 ROMX $40
 	org $4000
+	"Sinnoh Pokemon Pics 3"
+	"Overworld Sprites 8"
 
 ROMX $41
 	org $4000
+	"Kanto Pokemon Pics 6"
+	"Unova Pokemon Pics 2"
 
 ROMX $42
 	org $4000
+	"Kanto Base Data 1"
+	"Trainer Pics 6"
 
 ROMX $43
 	org $4000
+	"Johto Base Data 1"
+	"Sinnoh Pokemon Pics 7"
 
 ROMX $44
 	org $4000
+	"Sinnoh Pokemon Pics 6"
+	"Unova Pokemon Pics 4"
 
 ROMX $45
 	org $4000
+	"Johto Pokemon Pics 9"
+	"Unova Pokemon Pics 11"
 
 ROMX $46
 	org $4000
+	"Text 2"
+	"Sinnoh Pokemon Pics 5"
 
 ROMX $47
 	org $4000
+	"Pic Animations Frames 3"
+	"Johto Pokemon Pics 6"
 
 ROMX $48
 	org $4000
+	"Item Icons 2"
 
 ROMX $49
 	org $4000
+	"Sinnoh Pokemon Pics 1"
+	"Johto Pokemon Pics 2"
 
 ROMX $4a
 	org $4000
+	"Hoenn Pokemon Pics 6"
+	"Kalos Pokemon Pics 4"
 
 ROMX $4b
 	org $4000
+	"Sinnoh Base Data 1"
+	"Hoenn Pokemon Pics 13"
 
 ROMX $4c
 	org $4000
+	"Johto Pokemon Pics 5"
+	"Sinnoh Pokemon Pics 10"
 
 ROMX $4d
 	org $4000
+	"Hoenn Pokemon Pics 11"
+	"Unova Pokemon Pics 8"
 
 ROMX $4e
 	org $4000
+	"Hoenn Pokemon Pics 8"
+	"Unova Pokemon Pics 3"
 
 ROMX $4f
 	org $4000
+	"Hoenn Pokemon Pics 1"
+	"Sinnoh Pokemon Pics 2"
 
 ROMX $50
 	org $4000
+	"Hoenn Base Data 1"
+	"Kalos Pokemon Pics 6"
 
 ROMX $51
 	org $4000
+	"Move and Landmark Text"
+	"Kalos Pokemon Pics 5"
 
 ROMX $52
 	org $4000
+	"Kanto Evolutions and Attacks"
+	"Overworld Sprites 3"
 
 ROMX $53
 	org $4000
+	"Hoenn Pokemon Pics 3"
+	"Hoenn Pokemon Pics 4"
 
 ROMX $54
 	org $4000
+	"RSE Music 1"
+	"BW Music 2"
 
 ROMX $55
 	org $4000
+	"Phone Text 1"
+	"Johto Pokemon Pics 3"
 
 ROMX $56
 	org $4000
+	"Overworld Sprites 5"
+	"Overworld Sprites 6"
 
 ROMX $57
 	org $4000
+	"Unova Egg Moves"
+	"Kalos Pokemon Pics 1"
+	"Overworld Sprites 7"
 
 ROMX $58
 	org $4000
+	"Kanto Egg Moves"
+	"Unova Pokemon Pics 13"
+	"Kalos Pokemon Pics 3"
 
 ROMX $59
 	org $4000
+	"Sinnoh Pokedex Entries 4"
+	"Kalos Pokemon Pics 7"
 
 ROMX $5a
 	org $4000
+	"Kanto Icons 1"
+	"Hoenn Pokemon Pics 7"
+	"Hoenn Pokemon Pics 12"
 
 ROMX $5b
 	org $4000
+	"SM Music 2"
+	"Sinnoh Pokemon Pics 4"
+	"Unova Pokemon Pics 1"
 
 ROMX $5c
 	org $4000
+	"Tileset Data - lab"
+	"Unova Pokemon Pics 10"
+	"Kalos Pokemon Pics 2"
 
 ROMX $5d
 	org $4000
+	"Tileset Data - lighthouse"
+	"Hoenn Pokemon Pics 2"
+	"Unova Pokemon Pics 14"
 
 ROMX $5e
 	org $4000
+	"Kanto Base Data 2"
+	"Kalos Pokedex Entries 1"
+	"Unova Pokemon Pics 12"
 
 ROMX $5f
 	org $4000
+	"Hoenn Pokedex Entries 4"
+	"Hoenn Pokemon Pics 14"
+	"Trainer Pics 7"
 
 ROMX $60
 	org $4000
+	"Music Player"
+	"Tileset Data - museum"
+	"Trainer Pics 5"
 
 ROMX $61
 	org $4000
+	"Hoenn Pokedex Entries 3"
+	"Tileset Data - kanto"
+	"Trainer Pics 1"
 
 ROMX $62
 	org $4000
+	"Tileset Data - johto_modern"
+	"Tileset Data - indigo_plateau"
+	"Trainer Pics 2"
 
 ROMX $63
 	org $4000
+	"XY Music 1"
+	"Johto Evolutions and Attacks"
 
 ROMX $64
 	org $4000
+	"Effect Commands 2"
+	"Music 6"
+	"Text 3"
+	"Tileset Data - johto_overcast"
 
 ROMX $65
 	org $4000
+	"Kanto Pic Animations Data"
+	"StartingTown Map Scripts"
+	"Tileset Data - johto_house"
+	"Kanto Pokemon Pics 16"
 
 ROMX $66
 	org $4000
+	"Pic Animations Frames 4"
+	"Kanto Icons 11"
+	"HGSS Music 2"
+	"Unova Pokemon Pics 16"
 
 ROMX $67
 	org $4000
+	"Music 10"
+	"Johto Pokedex Entries 4"
+	"Overworld Sprites 9"
+	"Unova Footprints"
 
 ROMX $68
 	org $4000
+	"Music 1"
+	"Music 5"
+	"RSE Music 2"
+	"Kanto Footprints"
 
 ROMX $69
 	org $4000
+	"Sinnoh Pic Animations Data"
+	"Phone Text 2"
+	"Kalos Base Data 1"
+	"Hoenn Pokedex Entries 1"
 
 ROMX $6a
 	org $4000
+	"Hoenn Animation Bitmasks"
+	"HGSS Music 1"
+	"Tileset Data - kanto_house"
+	"Tileset Data - forest"
 
 ROMX $6b
 	org $4000
+	"Music 11"
+	"Johto Pokedex Entries 2"
+	"Tileset Data - gate"
+	"Tileset Data - sprout_tower"
 
 ROMX $6c
 	org $4000
+	"Music 8"
+	"BW Music 1"
+	"Stadium Music"
+	"Kanto Pokedex Entries 4"
 
 ROMX $6d
 	org $4000
+	"Kanto Animation Bitmasks"
+	"B2W2 Music 2"
+	"Prism Music"
+	"Kanto Pokedex Entries 2"
+	"Kalos Pic Pointers"
 
 ROMX $6e
 	org $4000
+	"Kanto Icons 2"
+	"Kanto Pokedex Entries 5"
+	"Kalos Pokedex Entries 2"
+	"Tileset Data - mart"
+	"Tileset Data - tunnel"
 
 ROMX $6f
 	org $4000
+	"Music 4"
+	"Music 13"
+	"Tileset Data - pokecom_center"
+	"Tileset Data - ice_path"
+	"Tileset Data - park"
 
 ROMX $70
 	org $4000
+	"Hoenn Pic Animations Data"
+	"B2W2 Music 1"
+	"Unova Pokedex Entries 5"
+	"Tileset Data - radio_tower"
+	"Sinnoh Footprints"
 
 ROMX $71
 	org $4000
+	"XY Music 2"
+	"Unova Pokedex Entries 2"
+	"Tileset Data - faraway_island"
+	"Tileset Data - champions_room"
+	"Tileset Data - port"
 
 ROMX $72
 	org $4000
+	"Johto Pic Animations Data"
+	"Sinnoh Pokedex Entries 3"
+	"Tileset Data - ruins_of_alph"
+	"Painting Pics"
+	"Johto Footprints"
 
 ROMX $73
 	org $4000
+	"Roofs"
+	"Music 12"
+	"Music Player Graphics"
+	"Unova Pokedex Entries 1"
+	"Unova Pokedex Entries 4"
+	"Tileset Data - magnet_train"
 
 ROMX $74
 	org $4000
+	"Pic Animations Frames 6"
+	"Code 26"
+	"Hoenn Icons 9"
+	"Tileset Data - traditional_house"
+	"Tileset Data - gym"
+	"Tileset Data - hotel"
+	"Sinnoh Pic Pointers"
+	"Kalos Footprints"
 
 ROMX $75
 	org $4000
+	"Kanto Icons 3"
+	"Kanto Icons 4"
+	"Kanto Icons 5"
+	"Kanto Icons 7"
+	"SM Music 1"
+	"Mystery Dungeon Map Scripts"
+	"Tileset Data - celadon_mansion"
+	"Tileset Data - home_decor_store"
 
 ROMX $76
 	org $4000
+	"Kanto Icons 10"
+	"Johto Icons 1"
+	"Johto Icons 4"
+	"Hoenn Icons 1"
+	"Hoenn Icons 2"
+	"Hoenn Icons 3"
+	"Hoenn Icons 4"
+	"Hoenn Icons 5"
+	"Unova Base Data 3"
 
 ROMX $77
 	org $4000
+	"Enemy Trainer Parties 1"
+	"Hoenn Icons 6"
+	"Hoenn Icons 7"
+	"Hoenn Icons 8"
+	"Sinnoh Icons 1"
+	"Sinnoh Icons 2"
+	"Sinnoh Icons 3"
+	"Sinnoh Icons 4"
+	"Sinnoh Icons 5"
 
 ROMX $78
 	org $4000
+	"Sinnoh Icons 6"
+	"Sinnoh Icons 7"
+	"Unova Icons 1"
+	"Unova Icons 2"
+	"Unova Icons 3"
+	"Unova Icons 4"
+	"Unova Icons 5"
+	"Unova Icons 6"
+	"Kanto Overworld Sprites 6"
 
 ROMX $79
 	org $4000
+	"Kanto Base Data 3"
+	"Unova Icons 7"
+	"Unova Icons 8"
+	"Unova Icons 9"
+	"Unova Icons 10"
+	"Kalos Icons 1"
+	"Kalos Icons 2"
+	"Kalos Icons 3"
+	"Kalos Icons 4"
 
 ROMX $7a
 	org $4000
+	"Sinnoh Animation Bitmasks"
+	"Kanto Icons 6"
+	"Kanto Icons 9"
+	"Johto Icons 2"
+	"Johto Icons 5"
+	"Johto Icons 6"
+	"Johto Icons 7"
+	"Kalos Icons 5"
+	"Kalos Pokemon Pics 8"
 
 ROMX $7b
 	org $4000
+	"Unova Pic Animations Data"
+	"Kalos Pic Animations Data"
+	"Kanto Icons 8"
+	"Johto Icons 3"
+	"Unova Icons 11"
+	"XY Music 3"
+	"Invar Dex Order"
+	"Dex Order Alpha"
+	"Unova Evolutions and Attacks"
+	"Utility Map Scripts"
+	"Tileset Data - valencia_island"
+	"Tileset Data - underground"
 
 ROMX $7c
 	org $4000
+	"Pic Animations Frames 5"
+	"Unova Animation Bitmasks"
+	"Johto Base Data 3"
+	"Hoenn Base Data 3"
+	"Sinnoh Base Data 3"
+	"Movie 2000 Music"
+	"Sinnoh Cries"
+	"Unova Pokedex Entries 6"
+	"Kanto Dex Order"
+	"Map Blocks 1"
+	"Overworld Map Scripts"
 
 ROMX $7d
 	org $4000

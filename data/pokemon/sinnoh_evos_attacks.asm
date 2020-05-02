@@ -532,6 +532,7 @@ DarkraiEvosAttacks::
 	learnmove 1, TACKLE
 	db 0 ; no more level-up moves
 
+ShayminSkyEvosAttacks::
 ShayminEvosAttacks::
 	db 0 ; no more evolutions
 	learnmove 1, TACKLE
