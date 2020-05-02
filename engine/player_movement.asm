@@ -764,29 +764,14 @@ DoPlayerMovement:: ; 80000
 ; 8039e
 
 .PushPetCheck:
-	ld hl, wPushPetCount	; push pet count
 	ld a, [hObjectStructIndexBuffer]
 	cp FOLLOWER
-	jr z, .cnt
-
-	xor a
-	ld [hl], a
-	scf
-	ret
-
-.cnt:
-	ld a, [hl]
-	inc a
-	cp 5
-	ld [hl], a
 	jr z, .move_enable
-
 	scf
 	ret
 
 .move_enable:
 	xor a
-	ld [hl], a
 	ret
 
 .CheckLandPerms: ; 8039e

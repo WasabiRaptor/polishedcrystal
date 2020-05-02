@@ -426,28 +426,15 @@ GetPokemonName:: ; 343b
 	push af
 	push hl
 
-; given species in a, return *NamePointers in hl and BANK(*NamePointers) in d
-; returns c for variants, nc for normal species
-	ld a, [wCurGroup]
+	ld a, [wNamedObjectIndexBuffer]
+	ld [wCurSpecies], a
 
 	ld hl, RegionalNamePointerTable
-	call dbwArray
-
-	ld a, [wNamedObjectIndexBuffer]
-	ld de, 4
-	call IsInArray
-	inc hl
-	ld a, [hli]
+	call ProcessPokemonPointertable
+	ld a, d
 	rst Bankswitch
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
 	ld a, [wCurForm]
-	jr c, .variant
-	ld a, [wNamedObjectIndexBuffer]
-	dec a
-.variant
-	call GetNthString
+	call NextHLTable
 
 ; Terminator
 	ld de, wStringBuffer1
