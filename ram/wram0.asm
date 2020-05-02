@@ -863,7 +863,7 @@ wcc9e:: ds 130
 ENDU
 wHasPlayerMoved:: ds 1
 wGrassTileAddress:: ds 2
-wPrevGrassTileAddress:: ds 2
+wFollowerGrassTileAddress:: ds 2
 
 
 SECTION "Video", WRAM0

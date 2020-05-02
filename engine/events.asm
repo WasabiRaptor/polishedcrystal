@@ -166,9 +166,13 @@ HandleMapBackground:
 	farjp PlaceMapNameSign
 
 MaybeSetGrassAttributes::
+	ld a, [wFollowerStandingTile]
+	cp COLL_TALL_GRASS
+	jr z, .PlayerOrFollowerOnGrass ; by all accounts it shoudl be setting it, but it just isn't argh
 	ld a, [wPlayerStandingTile]
 	cp COLL_TALL_GRASS
 	ret nz
+.PlayerOrFollowerOnGrass
 	ld a, 1
 	ld [rVBK], a
 .waitLY
@@ -204,7 +208,7 @@ MaybeSetGrassAttributes::
 	ld a, 2 | BEHIND_BG
 	ld [hli], a
 	ld [hl], a
-	ld hl, wPrevGrassTileAddress
+	ld hl, wFollowerGrassTileAddress
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
@@ -222,7 +226,7 @@ MaybeSetGrassAttributes::
 	ld a, 2
 	ld [hli], a
 	ld [hl], a
-	ld hl, wPrevGrassTileAddress
+	ld hl, wFollowerGrassTileAddress
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a

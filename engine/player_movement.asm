@@ -951,19 +951,15 @@ StopPlayerForEvent:: ; 80422
 ; 80430
 
 SetTallGrassAttributes::
+	ld a, [wFollowerStandingTile]
+	cp COLL_TALL_GRASS
+	call z, .setFollowerGrassAddress
+
 	ld a, [wPlayerStandingTile]
 	cp COLL_TALL_GRASS
 	ret nz
-	ld a, [wHasPlayerMoved]
-	and a
-	ret z
 	xor a
 	ld [wHasPlayerMoved], a
-	ld a, [wGrassTileAddress]
-	ld [wPrevGrassTileAddress], a
-	ld a, [wGrassTileAddress+1]
-	ld [wPrevGrassTileAddress+1], a
-
 	call GetBGMapPlayerOffset
 	ld bc, BG_MAP_WIDTH
 	add hl, bc
@@ -971,6 +967,36 @@ SetTallGrassAttributes::
 	ld [wGrassTileAddress], a
 	ld a, h
 	ld [wGrassTileAddress+1], a
+	ret
+
+.setFollowerGrassAddress:
+	ld hl, wPlayerStandingMapX
+	ld a, [wFollowerStandingMapX]
+	cp [hl]
+	jr c, .left
+	inc hl ;wPlayerStandingMapY
+	ld a, [wFollowerStandingMapY]
+	cp [hl]
+	jr z, .right
+	jr c, .above
+.below
+	ld bc, BG_MAP_WIDTH * 3
+	jr .done
+.left
+	ld bc, BG_MAP_WIDTH - 2
+	jr .done
+.right
+	ld bc, BG_MAP_WIDTH + 2
+	jr .done
+.above
+	ld bc, -BG_MAP_WIDTH
+.done
+	call GetBGMapPlayerOffset
+	add hl, bc
+	ld a, l
+	ld [wFollowerGrassTileAddress], a
+	ld a, h
+	ld [wFollowerGrassTileAddress+1], a
 	ret
 
 GetBGMapPlayerOffset::
