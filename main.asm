@@ -60,7 +60,7 @@ ReanchorBGMap_NoOAMUpdate:: ; 6454
 	ldh [hBGMapAddress + 1], a
 	ld [wBGMapAnchor + 1], a
 	call ApplyBGMapAnchorToObjects
-
+	farcall SetTallGrassAttributes
 	pop af
 	ldh [hBGMapMode], a
 	pop af

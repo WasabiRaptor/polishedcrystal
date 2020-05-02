@@ -78,21 +78,12 @@ BGMapAnchorTopLeft::
 
 	ld b, 0
 	call SafeCopyTilemapAtOnce
-	call ResetGrassTileCenter
+	farcall SetTallGrassAttributes
 
 	pop af
 	ldh [hOAMUpdate], a
 	ret
 ; 2e31
-ResetGrassTileCenter::
-	hlcoord $14, $14
-	ld a, l
-	ld [wGrassTileAddress], a
-	ld a, h
-	ld [wGrassTileAddress+1], a
-	ld a, 1
-	ld [wHasPlayerMoved], a
-	farjp SetTallGrassAttributes
 
 SafeUpdateSprites:: ; 2e31
 	ldh a, [hOAMUpdate]

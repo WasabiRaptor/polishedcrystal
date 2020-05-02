@@ -8980,7 +8980,7 @@ InitEnemyWildmon: ; 3f607
 
 ExitBattle: ; 3f69e
 	call .HandleEndOfBattle
-	call ResetGrassTileCenter
+	farcall SetTallGrassAttributes
 	call HandleNuzlockeFlags
 	jp CleanUpBattleRAM
 ; 3f6a5
