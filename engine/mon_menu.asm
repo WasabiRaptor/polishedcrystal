@@ -157,7 +157,7 @@ GetMonSubmenuItems: ; 24dd4
 	call AddMonMenuItem
 	ld a, MONMENU_SWITCH
 	call AddMonMenuItem
-	break
+	;break
 	ld a, [wFollowerStatus]
 	and FOLLOWER_MASK
 	dec a

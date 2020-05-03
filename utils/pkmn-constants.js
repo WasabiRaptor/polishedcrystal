@@ -68,7 +68,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/dex_entry_pointers.asm`,
             `${region.title}PokedexEntryPointers::\n` +
             list.map(poke=>`${poke.title}PokedexEntryPointers::\n\tadd_pokedexentry ${poke.title}\n`+
-                poke.forms.map(form=>`\tadd_pokedexentry ${form.title}\n`).join("") +
+                poke.forms.map(form=>`\tadd_pokedexentry ${poke.title}\n`).join("") + //see below
         `\n`).join(""),
         "utf8");
 
@@ -77,7 +77,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             list.map((poke,i)=>
                 (i % 30 ? "" : `\nSECTION "${region.title} Pokedex Entries ${i/30+1}", ROMX\n\n`) +
                 `${poke.title}PokedexEntry::\tINCLUDE "data/pokemon/dex_entries/${poke.lower}.asm"\n`+
-                    poke.forms.map(form=>`${form.title}PokedexEntry::\tINCLUDE "data/pokemon/dex_entries/${form.lower}.asm"\n`).join("") +
+                    //poke.forms.map((form,i)=>`${form.title}PokedexEntry::\tINCLUDE "data/pokemon/dex_entries/${form.lower}.asm"\n`).join("") + //not every form is going to have a seperate dex entry, and most do not
             `\n`).join(""),
         "utf8");
 
@@ -111,7 +111,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             list.map((poke,i)=>
                 (i % 15 ? "" : `\nSECTION "${region.title} Icons ${i/15+1}", ROMX\n\n`) +
                     `${poke.title}Icon::\tINCBIN "gfx/icons/${poke.lower}.2bpp"\n`+
-                    poke.forms.map(form=>`${form.title}Icon::\tINCBIN "gfx/icons/${form.lower}.2bpp"\n`).join("") +
+                    poke.forms.map((form,i)=>`${form.title}Icon::\tINCBIN "gfx/icons/${form.lower}.2bpp"\n`).join("") +
             `\n`).join(""),
         "utf8");
 
@@ -176,7 +176,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             (i % 10 ? "" : `\nSECTION "${region.title} Pokemon Pics ${i/10+1}", ROMX\n\n`) +
             `${poke.title}Frontpic::\tINCBIN "gfx/pokemon/${poke.lower}/front.animated.2bpp.lz"\n`+
             `${poke.title}Backpic::\tINCBIN "gfx/pokemon/${poke.lower}/back.2bpp.lz"\n`+
-                poke.forms.map(form=>`${form.title}Frontpic::\tINCBIN "gfx/pokemon/${form.lower}/front.animated.2bpp.lz"\n`+
+                poke.forms.map((form,i)=>`${form.title}Frontpic::\tINCBIN "gfx/pokemon/${form.lower}/front.animated.2bpp.lz"\n`+
                 `${form.title}Backpic::\tINCBIN "gfx/pokemon/${form.lower}/back.2bpp.lz"\n`).join("") +
             `\n`).join(""),
         "utf8");
@@ -313,6 +313,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_sprites.asm`,
             list.map((poke,i)=>
                 (i % 30 ? "" : `\nSECTION "${region.title} Overworld Sprites ${i/30+1}", ROMX\n\n`) +
+                `\nSECTION "${poke.title} Overworld Sprites", ROMX\n\n`+
                 `${poke.title}OverworldSprite::\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.2bpp"\n`+
                     poke.forms.map(form=>`${form.title}OverworldSprite::\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.2bpp"\n`).join("") +
             `\n`).join(""),

@@ -526,7 +526,7 @@ StartMenu_Pokemon: ; 12976
 
 if DEF(DEBUG)
 	ldh a, [hJoyDown]
-	bit 3, a
+	and START
 	jr nz, .editor
 endc
 

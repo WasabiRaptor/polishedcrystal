@@ -5862,6 +5862,10 @@ SECTION "Kanto Overworld Sprites", ROMX
 
 INCLUDE "data/pokemon/kanto/overworld_sprite_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/overworld_sprite_pointers.asm"
+
+;blank one for when you have no follower
+FollowerSpriteGFX::        INCBIN "gfx/sprites/pokemon/aa_dummy/overworld.2bpp"
+
 INCLUDE "data/pokemon/kanto/overworld_sprites.asm"
 
 
@@ -5884,6 +5888,3 @@ SECTION "Sinnoh Overworld Sprites", ROMX
 INCLUDE "data/pokemon/sinnoh/overworld_sprite_pointer_table.asm"
 INCLUDE "data/pokemon/sinnoh/overworld_sprite_pointers.asm"
 INCLUDE "data/pokemon/sinnoh/overworld_sprites.asm"
-
-;blank one for when you have no follower
-FollowerSpriteGFX::        INCBIN "gfx/sprites/pokemon/aa_dummy/overworld.2bpp"

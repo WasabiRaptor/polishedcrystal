@@ -7,8 +7,6 @@ BulbasaurPokedexEntry::	INCLUDE "data/pokemon/dex_entries/bulbasaur.asm"
 IvysaurPokedexEntry::	INCLUDE "data/pokemon/dex_entries/ivysaur.asm"
 
 VenusaurPokedexEntry::	INCLUDE "data/pokemon/dex_entries/venusaur.asm"
-VenusaurMegaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/venusaur_mega.asm"
-VenusaurGigaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/venusaur_giga.asm"
 
 CharmanderPokedexEntry::	INCLUDE "data/pokemon/dex_entries/charmander.asm"
 

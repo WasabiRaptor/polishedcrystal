@@ -27,7 +27,6 @@ ROMX $05
 	org $4000
 	"Code 5"
 	"Other Base Data"
-	"Unova Pokedex Entries 3"
 
 ROMX $06
 	org $4000
@@ -721,7 +720,6 @@ ROMX $78
 	"Unova Icons 4"
 	"Unova Icons 5"
 	"Unova Icons 6"
-	"Kanto Overworld Sprites 6"
 
 ROMX $79
 	org $4000

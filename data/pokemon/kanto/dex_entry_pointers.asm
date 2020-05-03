@@ -7,8 +7,8 @@ IvysaurPokedexEntryPointers::
 
 VenusaurPokedexEntryPointers::
 	add_pokedexentry Venusaur
-	add_pokedexentry VenusaurMega
-	add_pokedexentry VenusaurGiga
+	add_pokedexentry Venusaur
+	add_pokedexentry Venusaur
 
 CharmanderPokedexEntryPointers::
 	add_pokedexentry Charmander
