@@ -256,6 +256,9 @@ START_ITEM_TRIGGER_BALANCE EQU 2300
 
 	farcall InitDecorations
 
+	ld a, %10000001 ;follower enabled, pokemon slot 1 for default
+	ld [wFollowerStatus], a
+
 	jp ResetGameTime
 ; 5ca1
 

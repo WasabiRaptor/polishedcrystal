@@ -318,15 +318,15 @@ LoadSpecialMapOBPalette:
 	ld a, BANK(wUnknOBPals)
 	call FarCopyWRAM
 
+	ld a, [wFollowerStatus]
+	bit FOLLOWER_ENABLE, a
+	ret z
+	and FOLLOWER_MASK
+	dec a
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+
 	ld de, wUnknOBPals palette 1
-
-	ld a, [wPartyMon1Group]
-	ld [wCurGroup], a
-	ld a, [wPartyMon1Form]
-	and FORM_MASK
-	ld [wCurForm], a
-	ld a, [wPartyMon1Species]
-	ld [wCurSpecies], a
-
 	ld a, [wTimeOfDayPal]
 	jp GetRelevantMonOverworldPalettes

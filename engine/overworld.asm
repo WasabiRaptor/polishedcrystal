@@ -176,13 +176,14 @@ NoFollower:
 	ret
 ; 14259
 GetFollowerSpriteAddresses:
-	ld a, [wPartyMon1Species]
-	ld [wCurSpecies], a
-	ld a, [wPartyMon1Form]
-	and FORM_MASK
-	ld [wCurForm], a
-	ld a, [wPartyMon1Group]
-	ld [wCurGroup], a
+	ld a, [wFollowerStatus]
+	bit FOLLOWER_ENABLE, a
+	jr z, GetPokemonOverworldSprite.no_follower
+	and FOLLOWER_MASK
+	dec a
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
 	;fallthrough
 GetPokemonOverworldSprite:
 	ld a, [wCurGroup]

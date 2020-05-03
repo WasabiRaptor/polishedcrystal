@@ -2153,7 +2153,7 @@ Text_CantForgetHM:
 	db "@"
 
 SetFollower::
-	break
+	;break
 	ld a, [wCurPartyMon]
 	inc a
 	ld b, a
