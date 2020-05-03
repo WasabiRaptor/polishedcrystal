@@ -44,7 +44,6 @@ ROMX $07
 ROMX $08
 	org $4000
 	"Code 8"
-	"Overworld Sprites 1"
 
 ROMX $09
 	org $4000
@@ -570,7 +569,6 @@ ROMX $67
 	"Music 10"
 	"Johto Pokedex Entries 4"
 	"Overworld Sprites 9"
-	"Unova Footprints"
 
 ROMX $68
 	org $4000
