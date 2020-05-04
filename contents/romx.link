@@ -722,60 +722,79 @@ ROMX $7c
 
 ROMX $7d
 	org $4000
+	"Kanto Overworld Sprites 1"
 
 ROMX $7e
 	org $4000
+	"Kanto Overworld Sprites 2"
 
 ROMX $7f
 	org $4000
+	"Kanto Overworld Sprites 3"
 
 ROMX $80
 	org $4000
+	"Kanto Overworld Sprites 4"
 
 ROMX $81
 	org $4000
+	"Kanto Overworld Sprites 5"
 
 ROMX $82
 	org $4000
+	"Kanto Overworld Sprites 6"
 
 ROMX $83
 	org $4000
+	"Sinnoh Overworld Sprites 1"
 
 ROMX $84
 	org $4000
+	"Sinnoh Overworld Sprites 2"
 
 ROMX $85
 	org $4000
+	"Sinnoh Overworld Sprites 3"
 
 ROMX $86
 	org $4000
+	"Sinnoh Overworld Sprites 4"
 
 ROMX $87
 	org $4000
+	"Johto Overworld Sprites 1"
 
 ROMX $88
 	org $4000
+	"Johto Overworld Sprites 2"
 
 ROMX $89
 	org $4000
+	"Johto Overworld Sprites 3"
 
 ROMX $8a
 	org $4000
+	"Johto Overworld Sprites 4"
 
 ROMX $8b
 	org $4000
+	 "Hoenn Overworld Sprites 1"
 
 ROMX $8c
 	org $4000
+	 "Hoenn Overworld Sprites 2"
 
 ROMX $8d
 	org $4000
+	 "Hoenn Overworld Sprites 3"
 
 ROMX $8e
 	org $4000
+	 "Hoenn Overworld Sprites 4"
 
 ROMX $8f
 	org $4000
+	 "Hoenn Overworld Sprites 5"
 
 ROMX $90
 	org $4000
