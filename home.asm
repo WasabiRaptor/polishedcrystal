@@ -1172,7 +1172,6 @@ GetRelevantMonOverworldPalettes::
 	rst Bankswitch
 	ret
 
-
 INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"
 
 ProcessPokemonPointertable::

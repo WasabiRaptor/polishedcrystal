@@ -57,31 +57,43 @@ SpriteAnimFrameData: ; 8d6e6
 .Frameset_01:
 	frame SPRITE_ANIM_FRAME_IDX_00,  8
 	frame SPRITE_ANIM_FRAME_IDX_01,  8
+	frame SPRITE_ANIM_FRAME_IDX_00,  8
+	frame SPRITE_ANIM_FRAME_PARTY_FRAME_3,  8
 	dorestart
 
 .Frameset_02:
 	frame SPRITE_ANIM_FRAME_IDX_3D,  8
 	frame SPRITE_ANIM_FRAME_IDX_3E,  8
+	frame SPRITE_ANIM_FRAME_IDX_3D,  8
+	frame SPRITE_ANIM_FRAME_PARTY_ITEM_FRAME_3,  8
 	dorestart
 
 .Frameset_03:
 	frame SPRITE_ANIM_FRAME_IDX_3F,  8
 	frame SPRITE_ANIM_FRAME_IDX_40,  8
+	frame SPRITE_ANIM_FRAME_IDX_3F,  8
+	frame SPRITE_ANIM_FRAME_PARTY_ITEM_FRAME_3,  8
 	dorestart
 
 .Frameset_04:
 	frame SPRITE_ANIM_FRAME_IDX_00,  4
 	frame SPRITE_ANIM_FRAME_IDX_01,  4
+	frame SPRITE_ANIM_FRAME_IDX_00,  4
+	frame SPRITE_ANIM_FRAME_PARTY_FRAME_3,  4
 	dorestart
 
 .Frameset_05:
 	frame SPRITE_ANIM_FRAME_IDX_3D,  4
 	frame SPRITE_ANIM_FRAME_IDX_3E,  4
+	frame SPRITE_ANIM_FRAME_IDX_3D,  4
+	frame SPRITE_ANIM_FRAME_PARTY_ITEM_FRAME_3,  4
 	dorestart
 
 .Frameset_06:
 	frame SPRITE_ANIM_FRAME_IDX_3F,  4
 	frame SPRITE_ANIM_FRAME_IDX_40,  4
+	frame SPRITE_ANIM_FRAME_IDX_3F,  4
+	frame SPRITE_ANIM_FRAME_PARTY_ITEM_FRAME_3,  4
 	dorestart
 
 .Frameset_11:

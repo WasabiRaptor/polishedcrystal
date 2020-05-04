@@ -96,7 +96,6 @@ ROMX $11
 	org $4000
 	"Code 17"
 	"Tileset Data - invar"
-	"Hoenn Footprints"
 
 ROMX $12
 	org $4000
@@ -221,7 +220,6 @@ ROMX $27
 	org $4000
 	"Moves"
 	"Alola Dex Order"
-	"Hoenn Pokemon Pics 5"
 
 ROMX $28
 	org $4000
@@ -486,7 +484,6 @@ ROMX $59
 
 ROMX $5a
 	org $4000
-	"Kanto Icons 1"
 	"Hoenn Pokemon Pics 7"
 	"Hoenn Pokemon Pics 12"
 
@@ -560,7 +557,6 @@ ROMX $65
 ROMX $66
 	org $4000
 	"Pic Animations Frames 4"
-	"Kanto Icons 11"
 	"HGSS Music 2"
 	"Unova Pokemon Pics 16"
 
@@ -615,7 +611,6 @@ ROMX $6d
 
 ROMX $6e
 	org $4000
-	"Kanto Icons 2"
 	"Kanto Pokedex Entries 5"
 	"Kalos Pokedex Entries 2"
 	"Tileset Data - mart"
@@ -666,7 +661,6 @@ ROMX $74
 	org $4000
 	"Pic Animations Frames 6"
 	"Code 26"
-	"Hoenn Icons 9"
 	"Tileset Data - traditional_house"
 	"Tileset Data - gym"
 	"Tileset Data - hotel"
@@ -675,10 +669,6 @@ ROMX $74
 
 ROMX $75
 	org $4000
-	"Kanto Icons 3"
-	"Kanto Icons 4"
-	"Kanto Icons 5"
-	"Kanto Icons 7"
 	"SM Music 1"
 	"Mystery Dungeon Map Scripts"
 	"Tileset Data - celadon_mansion"
@@ -686,70 +676,28 @@ ROMX $75
 
 ROMX $76
 	org $4000
-	"Kanto Icons 10"
-	"Johto Icons 1"
-	"Johto Icons 4"
-	"Hoenn Icons 1"
-	"Hoenn Icons 2"
-	"Hoenn Icons 3"
-	"Hoenn Icons 4"
-	"Hoenn Icons 5"
 	"Unova Base Data 3"
 
 ROMX $77
 	org $4000
 	"Enemy Trainer Parties 1"
-	"Hoenn Icons 6"
-	"Hoenn Icons 7"
-	"Hoenn Icons 8"
-	"Sinnoh Icons 1"
-	"Sinnoh Icons 2"
-	"Sinnoh Icons 3"
-	"Sinnoh Icons 4"
-	"Sinnoh Icons 5"
 
 ROMX $78
 	org $4000
-	"Sinnoh Icons 6"
-	"Sinnoh Icons 7"
-	"Unova Icons 1"
-	"Unova Icons 2"
-	"Unova Icons 3"
-	"Unova Icons 4"
-	"Unova Icons 5"
-	"Unova Icons 6"
 
 ROMX $79
 	org $4000
 	"Kanto Base Data 3"
-	"Unova Icons 7"
-	"Unova Icons 8"
-	"Unova Icons 9"
-	"Unova Icons 10"
-	"Kalos Icons 1"
-	"Kalos Icons 2"
-	"Kalos Icons 3"
-	"Kalos Icons 4"
 
 ROMX $7a
 	org $4000
 	"Sinnoh Animation Bitmasks"
-	"Kanto Icons 6"
-	"Kanto Icons 9"
-	"Johto Icons 2"
-	"Johto Icons 5"
-	"Johto Icons 6"
-	"Johto Icons 7"
-	"Kalos Icons 5"
 	"Kalos Pokemon Pics 8"
 
 ROMX $7b
 	org $4000
 	"Unova Pic Animations Data"
 	"Kalos Pic Animations Data"
-	"Kanto Icons 8"
-	"Johto Icons 3"
-	"Unova Icons 11"
 	"XY Music 3"
 	"Invar Dex Order"
 	"Dex Order Alpha"
