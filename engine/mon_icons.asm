@@ -1,8 +1,9 @@
 
 LoadOverworldMonIcon: ; 8e82b
-	ld a, e
-	ld [wCurIcon], a
-	jp GetRelevantIconPointersAndBank
+	ret
+	;ld a, e
+	;ld [wCurIcon], a
+	;jp GetRelevantIconPointersAndBank
 
 ; 8e83f
 
@@ -331,13 +332,13 @@ GetMemIconGFX:: ; 8e9db (23:69db)
 	ld a, [wCurIconTile]
 GetIconGFX: ; 8e9de
 	call GetIcon_a
-	ld de, $80 ; 8 tiles
+	ld de, 12 tiles
 	add hl, de
 	ld de, HeldItemIcons
 	lb bc, BANK(HeldItemIcons), 2
 	call Request2bpp
 	ld a, [wCurIconTile]
-	add 10
+	add 14
 	ld [wCurIconTile], a
 	ret
 
@@ -361,26 +362,52 @@ endr
 
 	ld de, VTiles0
 	add hl, de
-	push hl
-	push hl
-; The icons are contiguous, in order and of the same
-; size, so the pointer table is somewhat redundant.
-	call GetRelevantIconPointersAndBank
-	pop hl
-	call Request2bpp
-	pop hl
-	ret
-; 8ea3f
+	push hl ;1
+	push hl ;2
+	push hl ;3
+	push hl ;4
+	ld a, [wCurIcon]
+	ld [wCurSpecies], a
 
-; Extended icon bank routine by com3tiin
-; http://www.pokecommunity.com/showthread.php?t=338470
-;GetMonIconBank:
-;	ld a, [wCurIcon]
-;	cp AZUMARILL ; first mon in Icons2
-;	lb bc, BANK(Icons1), 8
-;	ret c
-;	lb bc, BANK(Icons2), 8
-;	ret
+	farcall GetPokemonOverworldSprite
+	pop hl ;3
+	ld c, 4
+	push bc ;4
+	push de ;5
+	call Request2bpp
+
+	pop de ;4
+	ld hl, 12 tiles
+	add hl, de
+	ld d, h
+	ld e, l
+	pop bc ;3
+	pop hl ;2
+
+	push de ;3
+	ld de, 4 tiles
+	add hl, de
+	pop de;2
+	push bc ;3
+	push de ;4
+	call Request2bpp
+
+	pop de ;3
+	ld hl, 12 tiles
+	add hl, de
+	ld d, h
+	ld e, l
+	pop bc ;2
+	pop hl ;1
+
+	push de ;2
+	ld de, 8 tiles
+	add hl, de
+	pop de ;1
+	call Request2bpp
+
+	pop hl;0
+	ret
 
 FreezeMonIcons: ; 8ea4a
 	ld hl, wSpriteAnimationStructs
@@ -468,24 +495,3 @@ HoldSwitchmonIcon: ; 8ea8c
 	dec e
 	jr nz, .loop
 	ret
-
-GetRelevantIconPointersAndBank:
-	ld a, [wCurIcon]
-	ld [wCurSpecies], a
-	ld hl, RegionalIconPointerTable
-	call ProcessPokemonPointertable
-	ld bc, 3
-	ld a, [wCurForm]
-	rst AddNTimes
-	ld a, d
-	call GetFarByte
-	ld b, a
-	inc hl
-	ld a, d
-	call GetFarHalfword
-	ld d, h
-	ld e, l
-	ld c, 8 ; size of the icon
-	ret
-
-INCLUDE "data/pokemon/variant_menu_icon_pointer_table.asm"

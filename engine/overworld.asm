@@ -178,17 +178,18 @@ NoFollower:
 GetFollowerSpriteAddresses:
 	ld a, [wFollowerStatus]
 	bit FOLLOWER_ENABLE, a
-	jr z, GetPokemonOverworldSprite.no_follower
+	jr z, no_follower
 	and FOLLOWER_MASK
 	dec a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
 	predef GetPartyParamLocation
-	;fallthrough
-GetPokemonOverworldSprite:
 	ld a, [wCurGroup]
 	and a
-	jr z, .no_follower
+	jr z, no_follower
+	;fallthrough
+GetPokemonOverworldSprite::
+	ld a, [wCurGroup]
 	ld hl, RegionalOverworldSpriteTable
 	ld bc, 3
 	rst AddNTimes
@@ -227,7 +228,7 @@ GetPokemonOverworldSprite:
 	ld c, 16 ; load the length into c
 	ret
 
-.no_follower
+no_follower:
 	ld a, SPRITE_FOLLOWER
 	jp NoFollower
 

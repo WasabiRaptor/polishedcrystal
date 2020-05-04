@@ -46,9 +46,9 @@ LanturnIcon::	INCBIN "gfx/icons/lanturn.2bpp"
 
 PichuIcon::	INCBIN "gfx/icons/pichu.2bpp"
 
-CleffaIcon::	;INCBIN "gfx/icons/cleffa.2bpp"
+CleffaIcon::	INCBIN "gfx/icons/cleffa.2bpp"
 
-IgglybuffIcon::	;INCBIN "gfx/icons/igglybuff.2bpp"
+IgglybuffIcon::	INCBIN "gfx/icons/igglybuff.2bpp"
 
 TogepiIcon::	INCBIN "gfx/icons/togepi.2bpp"
 
@@ -77,13 +77,13 @@ SudowoodoIcon::	INCBIN "gfx/icons/sudowoodo.2bpp"
 
 PolitoedIcon::	INCBIN "gfx/icons/politoed.2bpp"
 
-HoppipIcon::	;INCBIN "gfx/icons/hoppip.2bpp"
+HoppipIcon::	INCBIN "gfx/icons/hoppip.2bpp"
 
-SkiploomIcon::	;INCBIN "gfx/icons/skiploom.2bpp"
+SkiploomIcon::	INCBIN "gfx/icons/skiploom.2bpp"
 
-JumpluffIcon::	;INCBIN "gfx/icons/jumpluff.2bpp"
+JumpluffIcon::	INCBIN "gfx/icons/jumpluff.2bpp"
 
-AipomIcon::	;INCBIN "gfx/icons/aipom.2bpp"
+AipomIcon::	INCBIN "gfx/icons/aipom.2bpp"
 
 SunkernIcon::	INCBIN "gfx/icons/sunkern.2bpp"
 
@@ -135,7 +135,7 @@ SECTION "Johto Icons 5", ROMX
 
 ScizorIcon::	INCBIN "gfx/icons/scizor.2bpp"
 
-ShuckleIcon::	;INCBIN "gfx/icons/shuckle.2bpp"
+ShuckleIcon::	INCBIN "gfx/icons/shuckle.2bpp"
 
 HeracrossIcon::	INCBIN "gfx/icons/heracross.2bpp"
 
@@ -159,7 +159,7 @@ RemoraidIcon::	INCBIN "gfx/icons/remoraid.2bpp"
 
 OctilleryIcon::	INCBIN "gfx/icons/octillery.2bpp"
 
-DelibirdIcon::	;INCBIN "gfx/icons/delibird.2bpp"
+DelibirdIcon::	INCBIN "gfx/icons/delibird.2bpp"
 
 MantineIcon::	INCBIN "gfx/icons/mantine.2bpp"
 
@@ -180,7 +180,7 @@ DonphanIcon::	INCBIN "gfx/icons/donphan.2bpp"
 
 Porygon2Icon::	INCBIN "gfx/icons/porygon2.2bpp"
 
-StantlerIcon::	;INCBIN "gfx/icons/stantler.2bpp"
+StantlerIcon::	INCBIN "gfx/icons/stantler.2bpp"
 
 SmeargleIcon::	INCBIN "gfx/icons/smeargle.2bpp"
 
@@ -188,7 +188,7 @@ TyrogueIcon::	INCBIN "gfx/icons/tyrogue.2bpp"
 
 HitmontopIcon::	INCBIN "gfx/icons/hitmontop.2bpp"
 
-SmoochumIcon::	;INCBIN "gfx/icons/smoochum.2bpp"
+SmoochumIcon::	INCBIN "gfx/icons/smoochum.2bpp"
 
 ElekidIcon::	INCBIN "gfx/icons/elekid.2bpp"
 
@@ -218,3 +218,4 @@ LugiaIcon::	INCBIN "gfx/icons/lugia.2bpp"
 Ho_ohIcon::	INCBIN "gfx/icons/ho_oh.2bpp"
 
 CelebiIcon::	INCBIN "gfx/icons/celebi.2bpp"
+

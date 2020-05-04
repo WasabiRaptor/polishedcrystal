@@ -4,6 +4,7 @@ AddNTimes  EQU $18
 CopyBytes  EQU $20
 JumpTable  EQU $28
 Predef     EQU $30
+FarJP 	   EQU $38
 
 anonbankpush: macro
 	call AnonBankPush
@@ -16,8 +17,8 @@ farcall: macro ; bank, address
 endm
 
 farjp: macro ; bank, address
-	rst FarCall
-	dbw BANK(\1) | $80, \1
+	rst FarJP
+	dbw BANK(\1), \1
 endm
 
 homecall: macro ; bank, address

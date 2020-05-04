@@ -50,10 +50,4 @@ PushWindow::
 	farjp _PushWindow
 
 SECTION "rst38", ROM0
-	rst $38
-
-ExitMenu::
-	push af
-	farcall _ExitMenu
-	pop af
-	ret
+	jp RstFarJP

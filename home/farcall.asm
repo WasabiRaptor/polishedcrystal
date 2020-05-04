@@ -69,7 +69,7 @@ StackCallInBankA:
 	push af
 	jr DoFarCall
 
-RstFarCall::
+PreserveFarcallOrJPaddresses:
 ; Call the following dba pointer on the stack.
 ; Preserves a, bc, de, hl
 	ldh [hFarCallSavedA], a
@@ -77,17 +77,27 @@ RstFarCall::
 	ldh [hPredefTemp + 1], a
 	ld a, l
 	ldh [hPredefTemp], a
+	ret
+
+RstFarJP::
+	call PreserveFarcallOrJPaddresses
 	pop hl
 	ld a, [hli]
 	ldh [hBuffer], a
-	add a
-	jr c, .farjp
+	jr RstFarCallOrJP
+
+RstFarCall::
+	call PreserveFarcallOrJPaddresses
+	pop hl
+	ld a, [hli]
+	ldh [hBuffer], a
 	inc hl
 	inc hl
 	push hl
 	dec hl
 	dec hl
-.farjp
+;fallthrough
+RstFarCallOrJP:
 	ldh a, [hROMBank]
 	push af
 	ld a, [hli]
@@ -96,7 +106,7 @@ RstFarCall::
 DoFarCall:
 	ldh a, [hBuffer]
 DoFarCall_BankInA:
-	and $7f
+	;break
 	rst Bankswitch
 	call RetrieveHLAndCallFunction
 

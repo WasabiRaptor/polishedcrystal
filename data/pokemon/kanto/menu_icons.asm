@@ -6,8 +6,8 @@ BulbasaurIcon::	INCBIN "gfx/icons/bulbasaur.2bpp"
 IvysaurIcon::	INCBIN "gfx/icons/ivysaur.2bpp"
 
 VenusaurIcon::	INCBIN "gfx/icons/venusaur.2bpp"
-VenusaurMegaIcon::	;INCBIN "gfx/icons/venusaur_mega.2bpp"
-VenusaurGigaIcon::	;INCBIN "gfx/icons/venusaur_giga.2bpp"
+VenusaurMegaIcon::	INCBIN "gfx/icons/venusaur_mega.2bpp"
+VenusaurGigaIcon::	INCBIN "gfx/icons/venusaur_giga.2bpp"
 
 CharmanderIcon::	INCBIN "gfx/icons/charmander.2bpp"
 
@@ -46,9 +46,9 @@ RattataIcon::	INCBIN "gfx/icons/rattata.2bpp"
 
 RaticateIcon::	INCBIN "gfx/icons/raticate.2bpp"
 
-SpearowIcon::	;INCBIN "gfx/icons/spearow.2bpp"
+SpearowIcon::	INCBIN "gfx/icons/spearow.2bpp"
 
-FearowIcon::	;INCBIN "gfx/icons/fearow.2bpp"
+FearowIcon::	INCBIN "gfx/icons/fearow.2bpp"
 
 EkansIcon::	INCBIN "gfx/icons/ekans.2bpp"
 
@@ -182,7 +182,7 @@ MagnemiteIcon::	INCBIN "gfx/icons/magnemite.2bpp"
 
 MagnetonIcon::	INCBIN "gfx/icons/magneton.2bpp"
 
-FarfetchdIcon::	;INCBIN "gfx/icons/farfetchd.2bpp"
+FarfetchdIcon::	INCBIN "gfx/icons/farfetchd.2bpp"
 
 DoduoIcon::	INCBIN "gfx/icons/doduo.2bpp"
 
@@ -238,7 +238,7 @@ HitmonleeIcon::	INCBIN "gfx/icons/hitmonlee.2bpp"
 
 HitmonchanIcon::	INCBIN "gfx/icons/hitmonchan.2bpp"
 
-LickitungIcon::	;INCBIN "gfx/icons/lickitung.2bpp"
+LickitungIcon::	INCBIN "gfx/icons/lickitung.2bpp"
 
 KoffingIcon::	INCBIN "gfx/icons/koffing.2bpp"
 
@@ -258,9 +258,9 @@ HorseaIcon::	INCBIN "gfx/icons/horsea.2bpp"
 
 SeadraIcon::	INCBIN "gfx/icons/seadra.2bpp"
 
-GoldeenIcon::	;INCBIN "gfx/icons/goldeen.2bpp"
+GoldeenIcon::	INCBIN "gfx/icons/goldeen.2bpp"
 
-SeakingIcon::	;INCBIN "gfx/icons/seaking.2bpp"
+SeakingIcon::	INCBIN "gfx/icons/seaking.2bpp"
 
 StaryuIcon::	INCBIN "gfx/icons/staryu.2bpp"
 
@@ -269,7 +269,7 @@ SECTION "Kanto Icons 9", ROMX
 
 StarmieIcon::	INCBIN "gfx/icons/starmie.2bpp"
 
-MrmimeIcon::	;INCBIN "gfx/icons/mrmime.2bpp"
+MrmimeIcon::	INCBIN "gfx/icons/mrmime.2bpp"
 
 ScytherIcon::	INCBIN "gfx/icons/scyther.2bpp"
 
@@ -334,3 +334,4 @@ MewtwoIcon::	INCBIN "gfx/icons/mewtwo.2bpp"
 SECTION "Kanto Icons 11", ROMX
 
 MewIcon::	INCBIN "gfx/icons/mew.2bpp"
+

@@ -46,6 +46,12 @@ INCLUDE "home/window.asm"
 INCLUDE "home/flag.asm"
 INCLUDE "home/restore_music.asm"
 
+ExitMenu::
+	push af
+	farcall _ExitMenu
+	pop af
+	ret
+
 DisableSpriteUpdates:: ; 0x2ed3
 ; disables overworld sprite updating?
 	xor a
@@ -1171,7 +1177,6 @@ GetRelevantMonOverworldPalettes::
 	pop af
 	rst Bankswitch
 	ret
-
 
 INCLUDE "data/pokemon/variant_menu_icon_pal_table.asm"
 

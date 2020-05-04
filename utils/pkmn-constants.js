@@ -313,7 +313,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_sprites.asm`,
             list.map((poke,i)=>
                 (i % 30 ? "" : `\nSECTION "${region.title} Overworld Sprites ${i/30+1}", ROMX\n\n`) +
-                `\nSECTION "${poke.title} Overworld Sprites", ROMX\n\n`+
+                //`\nSECTION "${poke.title} Overworld Sprites", ROMX\n\n`+
                 `${poke.title}OverworldSprite::\tINCBIN "gfx/sprites/pokemon/${poke.lower}/overworld.2bpp"\n`+
                     poke.forms.map(form=>`${form.title}OverworldSprite::\tINCBIN "gfx/sprites/pokemon/${form.lower}/overworld.2bpp"\n`).join("") +
             `\n`).join(""),

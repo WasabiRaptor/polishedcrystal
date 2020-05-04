@@ -75,6 +75,9 @@ SpriteAnimOAMData: ; 8d94d
 	dbw $04, .OAMData_84 ; SPRITE_ANIM_FRAME_IDX_8A
 	dbw $00, .OAMData_84 ; SPRITE_ANIM_FRAME_IDX_8B
 
+	dbw $08, .OAMData_85 ; SPRITE_ANIM_FRAME_PARTY_FRAME_3
+	dbw $00, .OAMData_Mon_WIthItemFrame3 ; SPRITE_ANIM_FRAME_PARTY_ITEM_FRAME_3
+
 .OAMData_02:
 	db 1
 	dsprite -1,  4, -1,  4, $00, $0
@@ -171,7 +174,7 @@ SpriteAnimOAMData: ; 8d94d
 	db 4
 	dsprite -1,  0, -1,  0, $00, -1
 	dsprite -1,  0,  0,  0, $01, -1
-	dsprite  0,  0, -1,  0, $09, $0
+	dsprite  0,  0, -1,  0, $0d, $0
 	dsprite  0,  0,  0,  0, $03, -1
 
 .OAMData_40:
@@ -179,8 +182,16 @@ SpriteAnimOAMData: ; 8d94d
 	db 4
 	dsprite -1,  0, -1,  0, $04, -1
 	dsprite -1,  0,  0,  0, $05, -1
-	dsprite  0,  0, -1,  0, $09, $0
+	dsprite  0,  0, -1,  0, $0d, $0
 	dsprite  0,  0,  0,  0, $07, -1
+
+.OAMData_Mon_WIthItemFrame3:
+; party menu icon with item, frame 3
+	db 4
+	dsprite -1,  0, -1,  0, $08, -1
+	dsprite -1,  0,  0,  0, $09, -1
+	dsprite  0,  0, -1,  0, $0d, $0
+	dsprite  0,  0,  0,  0, $0b, -1
 
 .OAMData_4f:
 	db 1

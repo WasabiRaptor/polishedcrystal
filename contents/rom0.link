@@ -14,7 +14,7 @@ ROM0
 	"rst28"
 	org $0030 ; Predef
 	"rst30"
-	org $0038 ; unused
+	org $0038 ; farjp
 	"rst38"
 	org $0040
 	"vblank"
