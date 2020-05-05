@@ -8,7 +8,7 @@ endm
 
 
 RegionalPokedexEntryPointerTable:
-	regional_dexentry Other
+	regional_dexentry Kanto
     regional_dexentry Kanto
     regional_dexentry Johto
     regional_dexentry Hoenn

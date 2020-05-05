@@ -5973,8 +5973,8 @@ INCLUDE "data/pokemon/other/overworld_palettes.asm"
 
 SECTION "Other Base Data 3", ROMX
 
-INCLUDE "data/pokemon/other/dex_entry_pointer_table.asm"
-INCLUDE "data/pokemon/other/dex_entry_pointers.asm"
+;INCLUDE "data/pokemon/other/dex_entry_pointer_table.asm"
+;INCLUDE "data/pokemon/other/dex_entry_pointers.asm"
 
 
 SECTION "Move Animations 1", ROMX

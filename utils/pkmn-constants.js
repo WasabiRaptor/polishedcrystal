@@ -320,6 +320,30 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             `\n`).join(""),
         "utf8");
 
+        // footprints
+        fs.writeFileSync(`data/pokemon/${region.lower}/footprint_pointer_table.asm`,
+            `${region.title}FootprintPointerTable::\n` +
+            list.map(poke=>`\tadd_footrpinttable ${poke.title}\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`data/pokemon/${region.lower}/footprint_pointers.asm`,
+            `${region.title}FootprintPointers::\n` +
+            list.map(poke=>`${poke.title}FootprintPointers::\n\tadd_footprint ${poke.title}\n`+
+                poke.forms.map(form=>`\tadd_footprint ${form.title}\n`).join("") +
+            `\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`gfx/${region.lower}_footprints.asm`,
+        `\nSECTION "${region.title} Footprints", ROMX\n\n` +
+        `${region.title}Footprints::\n`+
+        list.map((poke,i)=>
+            //`\nSECTION "${poke.title} Footprints", ROMX\n\n`+
+            `${poke.title}Footprint::\tINCBIN "gfx/pokemon/${poke.lower}/footprint.1bpp"\n`+
+                //poke.forms.map((form,i)=>`${form.title}Footprint::\tINCBIN "gfx/pokemon/${form.lower}/footprint.1bpp"\n`+
+            `\n`).join(""),
+        "utf8");
+
+
         return match;
     });
 });

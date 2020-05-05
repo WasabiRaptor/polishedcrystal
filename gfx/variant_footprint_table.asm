@@ -6,13 +6,15 @@ regional_footprints: macro
     dbw \1, \2VariantFootprintTable
 endm
 
-RegionalFootprintTable:  
+RegionalFootprintTable:
     regional_footprints GROUP_GENERATION_ONE, Kanto
     regional_footprints GROUP_GENERATION_TWO, Johto
     regional_footprints GROUP_GENERATION_THREE, Hoenn
     regional_footprints GROUP_GENERATION_FOUR, Sinnoh
     regional_footprints GROUP_GENERATION_FIVE, Unova
     regional_footprints GROUP_GENERATION_SIX, Kalos
+    regional_footprints GROUP_GENERATION_SEVEN, Alola
+    regional_footprints GROUP_GENERATION_EIGHT, Galar
 	regional_footprints -1, Kanto
 
 ;OtherVariantFootprintTable:
@@ -35,3 +37,9 @@ UnovaVariantFootprintTable:
 
 KalosVariantFootprintTable:
     variant_footprints -1, Kalos
+
+AlolaVariantFootprintTable:
+    variant_footprints -1, Alola
+
+GalarVariantFootprintTable:
+    variant_footprints -1, Galar

@@ -47,6 +47,7 @@ $(BUILD_DIR)data/pokemon/sinnoh_dex_entries.o \
 $(BUILD_DIR)data/pokemon/unova_dex_entries.o \
 $(BUILD_DIR)data/pokemon/kalos_dex_entries.o \
 $(BUILD_DIR)data/pokemon/alola_dex_entries.o \
+$(BUILD_DIR)data/pokemon/galar_dex_entries.o \
 $(BUILD_DIR)data/pokemon/kanto_dex_order.o \
 $(BUILD_DIR)data/pokemon/johto_dex_order.o \
 $(BUILD_DIR)data/pokemon/hoenn_dex_order.o \
@@ -71,6 +72,8 @@ $(BUILD_DIR)data/pokemon/kalos_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/kalos_egg_moves.o \
 $(BUILD_DIR)data/pokemon/alola_evos_attacks.o \
 $(BUILD_DIR)data/pokemon/alola_egg_moves.o \
+$(BUILD_DIR)data/pokemon/galar_evos_attacks.o \
+$(BUILD_DIR)data/pokemon/galar_egg_moves.o \
 $(BUILD_DIR)data/maps/map_data.o \
 $(BUILD_DIR)data/text/common.o \
 $(BUILD_DIR)data/tilesets.o \
@@ -85,6 +88,7 @@ $(BUILD_DIR)gfx/sinnoh_footprints.o\
 $(BUILD_DIR)gfx/unova_footprints.o\
 $(BUILD_DIR)gfx/kalos_footprints.o\
 $(BUILD_DIR)gfx/alola_footprints.o\
+$(BUILD_DIR)gfx/galar_footprints.o\
 
 ### Build targets
 

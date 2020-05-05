@@ -1,122 +1,148 @@
+
 SECTION "Kalos Footprints", ROMX
 
 KalosFootprints::
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/chespin.1bpp"
-;INCBIN "gfx/footprints/quilladin.1bpp"
-;INCBIN "gfx/footprints/chesnaught.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/fennekin.1bpp"
-INCBIN "gfx/footprints/braixen.1bpp"
-INCBIN "gfx/footprints/delphox.1bpp"
-;INCBIN "gfx/footprints/froakie.1bpp"
-;INCBIN "gfx/footprints/frogadier.1bpp"
-;INCBIN "gfx/footprints/greninja.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/bunnelby.1bpp"
-;INCBIN "gfx/footprints/diggersby.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/fletchling.1bpp"
-INCBIN "gfx/footprints/fletchinder.1bpp"
-INCBIN "gfx/footprints/talonflame.1bpp"
-;INCBIN "gfx/footprints/scatterbug.1bpp"
-;INCBIN "gfx/footprints/spewpa.1bpp"
-;INCBIN "gfx/footprints/vivillon.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/litleo.1bpp"
-;INCBIN "gfx/footprints/pyroar.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/flabebe.1bpp"
-INCBIN "gfx/footprints/floette.1bpp"
-INCBIN "gfx/footprints/florges.1bpp"
-;INCBIN "gfx/footprints/skiddo.1bpp"
-;INCBIN "gfx/footprints/gogoat.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/pancham.1bpp"
-;INCBIN "gfx/footprints/pangoro.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/furfrou.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/espurr.1bpp"
-INCBIN "gfx/footprints/meowstic.1bpp"
-INCBIN "gfx/footprints/honedge.1bpp"
-INCBIN "gfx/footprints/doublade.1bpp"
-INCBIN "gfx/footprints/aegislash.1bpp"
-;INCBIN "gfx/footprints/spritzee.1bpp"
-;INCBIN "gfx/footprints/aromatisse.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/swirlix.1bpp"
-;INCBIN "gfx/footprints/slurpuff.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/inkay.1bpp"
-;INCBIN "gfx/footprints/malamar.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/binacle.1bpp"
-;INCBIN "gfx/footprints/barbaracle.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/skrelp.1bpp"
-;INCBIN "gfx/footprints/dragalge.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/clauncher.1bpp"
-;INCBIN "gfx/footprints/clawitzer.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/helioptile.1bpp"
-;INCBIN "gfx/footprints/heliolisk.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/tyrunt.1bpp"
-;INCBIN "gfx/footprints/tyrantrum.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/amaura.1bpp"
-INCBIN "gfx/footprints/aurorus.1bpp"
-INCBIN "gfx/footprints/sylveon.1bpp"
-;INCBIN "gfx/footprints/hawlucha.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/dedenne.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/carbink.1bpp"
-INCBIN "gfx/footprints/goomy.1bpp"
-INCBIN "gfx/footprints/sliggoo.1bpp"
-INCBIN "gfx/footprints/goodra.1bpp"
-;INCBIN "gfx/footprints/klefki.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/phantump.1bpp"
-INCBIN "gfx/footprints/trevenant.1bpp"
-;INCBIN "gfx/footprints/pumpkaboo.1bpp"
-;INCBIN "gfx/footprints/gourgeist.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-;INCBIN "gfx/footprints/bergmite.1bpp"
-;INCBIN "gfx/footprints/avalugg.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/noibat.1bpp"
-INCBIN "gfx/footprints/noivern.1bpp"
-;INCBIN "gfx/footprints/xerneas.1bpp"
-;INCBIN "gfx/footprints/yveltal.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/zygarde.1bpp"
-;INCBIN "gfx/footprints/diancie.1bpp"
-;INCBIN "gfx/footprints/hoopa.1bpp"
-;INCBIN "gfx/footprints/volcanion.1bpp"
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
-INCBIN "gfx/footprints/256.1bpp"  ;dummy
+ChespinFootprint::	INCBIN "gfx/pokemon/chespin/footprint.1bpp"
+
+QuilladinFootprint::	INCBIN "gfx/pokemon/quilladin/footprint.1bpp"
+
+ChesnaughtFootprint::	INCBIN "gfx/pokemon/chesnaught/footprint.1bpp"
+
+FennekinFootprint::	INCBIN "gfx/pokemon/fennekin/footprint.1bpp"
+
+BraixenFootprint::	INCBIN "gfx/pokemon/braixen/footprint.1bpp"
+
+DelphoxFootprint::	INCBIN "gfx/pokemon/delphox/footprint.1bpp"
+
+FroakieFootprint::	INCBIN "gfx/pokemon/froakie/footprint.1bpp"
+
+FrogadierFootprint::	INCBIN "gfx/pokemon/frogadier/footprint.1bpp"
+
+GreninjaFootprint::	INCBIN "gfx/pokemon/greninja/footprint.1bpp"
+
+BunnelbyFootprint::	INCBIN "gfx/pokemon/bunnelby/footprint.1bpp"
+
+DiggersbyFootprint::	INCBIN "gfx/pokemon/diggersby/footprint.1bpp"
+
+FletchlingFootprint::	INCBIN "gfx/pokemon/fletchling/footprint.1bpp"
+
+FletchinderFootprint::	INCBIN "gfx/pokemon/fletchinder/footprint.1bpp"
+
+TalonflameFootprint::	INCBIN "gfx/pokemon/talonflame/footprint.1bpp"
+
+ScatterbugFootprint::	INCBIN "gfx/pokemon/scatterbug/footprint.1bpp"
+
+SpewpaFootprint::	INCBIN "gfx/pokemon/spewpa/footprint.1bpp"
+
+VivillonFootprint::	INCBIN "gfx/pokemon/vivillon/footprint.1bpp"
+
+LitleoFootprint::	INCBIN "gfx/pokemon/litleo/footprint.1bpp"
+
+PyroarFootprint::	INCBIN "gfx/pokemon/pyroar/footprint.1bpp"
+
+FlabebeFootprint::	INCBIN "gfx/pokemon/flabebe/footprint.1bpp"
+
+FloetteFootprint::	INCBIN "gfx/pokemon/floette/footprint.1bpp"
+
+FlorgesFootprint::	INCBIN "gfx/pokemon/florges/footprint.1bpp"
+
+SkiddoFootprint::	INCBIN "gfx/pokemon/skiddo/footprint.1bpp"
+
+GogoatFootprint::	INCBIN "gfx/pokemon/gogoat/footprint.1bpp"
+
+PanchamFootprint::	INCBIN "gfx/pokemon/pancham/footprint.1bpp"
+
+PangoroFootprint::	INCBIN "gfx/pokemon/pangoro/footprint.1bpp"
+
+FurfrouFootprint::	INCBIN "gfx/pokemon/furfrou/footprint.1bpp"
+
+EspurrFootprint::	INCBIN "gfx/pokemon/espurr/footprint.1bpp"
+
+MeowsticFootprint::	INCBIN "gfx/pokemon/meowstic/footprint.1bpp"
+
+HonedgeFootprint::	INCBIN "gfx/pokemon/honedge/footprint.1bpp"
+
+DoubladeFootprint::	INCBIN "gfx/pokemon/doublade/footprint.1bpp"
+
+AegislashFootprint::	INCBIN "gfx/pokemon/aegislash/footprint.1bpp"
+
+SpritzeeFootprint::	INCBIN "gfx/pokemon/spritzee/footprint.1bpp"
+
+AromatisseFootprint::	INCBIN "gfx/pokemon/aromatisse/footprint.1bpp"
+
+SwirlixFootprint::	INCBIN "gfx/pokemon/swirlix/footprint.1bpp"
+
+SlurpuffFootprint::	INCBIN "gfx/pokemon/slurpuff/footprint.1bpp"
+
+InkayFootprint::	INCBIN "gfx/pokemon/inkay/footprint.1bpp"
+
+MalamarFootprint::	INCBIN "gfx/pokemon/malamar/footprint.1bpp"
+
+BinacleFootprint::	INCBIN "gfx/pokemon/binacle/footprint.1bpp"
+
+BarbaracleFootprint::	INCBIN "gfx/pokemon/barbaracle/footprint.1bpp"
+
+SkrelpFootprint::	INCBIN "gfx/pokemon/skrelp/footprint.1bpp"
+
+DragalgeFootprint::	INCBIN "gfx/pokemon/dragalge/footprint.1bpp"
+
+ClauncherFootprint::	INCBIN "gfx/pokemon/clauncher/footprint.1bpp"
+
+ClawitzerFootprint::	INCBIN "gfx/pokemon/clawitzer/footprint.1bpp"
+
+HelioptileFootprint::	INCBIN "gfx/pokemon/helioptile/footprint.1bpp"
+
+HelioliskFootprint::	INCBIN "gfx/pokemon/heliolisk/footprint.1bpp"
+
+TyruntFootprint::	INCBIN "gfx/pokemon/tyrunt/footprint.1bpp"
+
+TyrantrumFootprint::	INCBIN "gfx/pokemon/tyrantrum/footprint.1bpp"
+
+AmauraFootprint::	INCBIN "gfx/pokemon/amaura/footprint.1bpp"
+
+AurorusFootprint::	INCBIN "gfx/pokemon/aurorus/footprint.1bpp"
+
+SylveonFootprint::	INCBIN "gfx/pokemon/sylveon/footprint.1bpp"
+
+HawluchaFootprint::	INCBIN "gfx/pokemon/hawlucha/footprint.1bpp"
+
+DedenneFootprint::	INCBIN "gfx/pokemon/dedenne/footprint.1bpp"
+
+CarbinkFootprint::	INCBIN "gfx/pokemon/carbink/footprint.1bpp"
+
+GoomyFootprint::	INCBIN "gfx/pokemon/goomy/footprint.1bpp"
+
+SliggooFootprint::	INCBIN "gfx/pokemon/sliggoo/footprint.1bpp"
+
+GoodraFootprint::	INCBIN "gfx/pokemon/goodra/footprint.1bpp"
+
+KlefkiFootprint::	INCBIN "gfx/pokemon/klefki/footprint.1bpp"
+
+PhantumpFootprint::	INCBIN "gfx/pokemon/phantump/footprint.1bpp"
+
+TrevenantFootprint::	INCBIN "gfx/pokemon/trevenant/footprint.1bpp"
+
+PumpkabooFootprint::	INCBIN "gfx/pokemon/pumpkaboo/footprint.1bpp"
+
+GourgeistFootprint::	INCBIN "gfx/pokemon/gourgeist/footprint.1bpp"
+
+BergmiteFootprint::	INCBIN "gfx/pokemon/bergmite/footprint.1bpp"
+
+AvaluggFootprint::	INCBIN "gfx/pokemon/avalugg/footprint.1bpp"
+
+NoibatFootprint::	INCBIN "gfx/pokemon/noibat/footprint.1bpp"
+
+NoivernFootprint::	INCBIN "gfx/pokemon/noivern/footprint.1bpp"
+
+XerneasFootprint::	INCBIN "gfx/pokemon/xerneas/footprint.1bpp"
+
+YveltalFootprint::	INCBIN "gfx/pokemon/yveltal/footprint.1bpp"
+
+ZygardeFootprint::	INCBIN "gfx/pokemon/zygarde/footprint.1bpp"
+
+DiancieFootprint::	INCBIN "gfx/pokemon/diancie/footprint.1bpp"
+
+HoopaFootprint::	INCBIN "gfx/pokemon/hoopa/footprint.1bpp"
+
+VolcanionFootprint::	INCBIN "gfx/pokemon/volcanion/footprint.1bpp"
+

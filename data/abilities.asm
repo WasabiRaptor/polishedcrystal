@@ -135,7 +135,7 @@ AbilityNames:
 	dw SlushRush
 	dw StanceChange
 	dw PowerOfAlchemy
-	dw Reciever
+	dw Receiver
 	dw Illusion
 	dw ReverseAura
 	dw SoulHeart
@@ -285,7 +285,7 @@ Refrigerate:   db "R","e","f","r","i","g","e","r","a","t","e","@"
 SlushRush:     db "S","l","u","s","h"," ","R","u","s","h","@"
 StanceChange:  db "S","t","a","n","c","e"," ","C","h","a","n","g","e","@"
 PowerOfAlchemy:db "P","o","w","e","r"," ","O","f"," ","A","l","c","h","e","m","y","@"
-Reciever:	   db "R","e","c","i","e","v","e","r","@"
+Receiver:	   db "R","e","c","i","e","v","e","r","@"
 Illusion:	   db "I","l","l","u","s","i","o","n","@"
 ReverseAura:   db "R","e","v","e","r","s","e"," ","A","u","r","a","@"
 SoulHeart:     db "S","o","u","l","-","H","e","a","r","t","@"
@@ -1001,7 +1001,7 @@ SoulHeartDescription:
 HeavyMetalDescription:
 	db    "Doubles user's"
 	next1 "weight.@"
-	
+
 StormDrainDescription:
 	db    "Drains water moves"
 	next1 "and boosts Sp.Atk.@"

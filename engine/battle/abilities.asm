@@ -31,7 +31,7 @@ BattleEntryAbilities:
 	dbw FRISK, FriskAbility
 	dbw UNNERVE, UnnerveAbility
 	dbw POWER_OF_ALCHEMY, RecieverAbility
-	dbw RECIEVER, RecieverAbility
+	dbw RECEIVER, RecieverAbility
 
 	; fallthrough
 StatusHealAbilities:
@@ -125,7 +125,7 @@ UntraceableAbilities:
 	ret z
 	cp STANCE_CHANGE
 	ret z
-	cp RECIEVER
+	cp RECEIVER
 	ret z
 	cp POWER_OF_ALCHEMY
 	ret z
