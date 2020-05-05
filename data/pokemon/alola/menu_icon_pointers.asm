@@ -20,8 +20,8 @@ IncineroarIconPointers::
 PopplioIconPointers::
 	add_icon Popplio
 
-BrioneIconPointers::
-	add_icon Brione
+BrionneIconPointers::
+	add_icon Brionne
 
 PrimarinaIconPointers::
 	add_icon Primarina
@@ -58,6 +58,9 @@ CrabominableIconPointers::
 
 OricorioIconPointers::
 	add_icon Oricorio
+	add_icon OricorioPom_pom
+	add_icon OricorioPau
+	add_icon OricorioSensu
 
 CutieflyIconPointers::
 	add_icon Cutiefly
@@ -67,12 +70,17 @@ RibombeeIconPointers::
 
 RockruffIconPointers::
 	add_icon Rockruff
+	add_icon RockruffOwn_tempo
 
 LycanrocIconPointers::
 	add_icon Lycanroc
+	add_icon LycanrocMidday
+	add_icon LycanrocDusk
+	add_icon LycanrocMidnight
 
 WishiwashiIconPointers::
 	add_icon Wishiwashi
+	add_icon WishiwashiSchool
 
 MareanieIconPointers::
 	add_icon Mareanie
@@ -157,6 +165,7 @@ SilvallyIconPointers::
 
 MiniorIconPointers::
 	add_icon Minior
+	add_icon MiniorCore
 
 KomalaIconPointers::
 	add_icon Komala
@@ -169,6 +178,7 @@ TogedemaruIconPointers::
 
 MimikyuIconPointers::
 	add_icon Mimikyu
+	add_icon MimikyuBusted
 
 BruxishIconPointers::
 	add_icon Bruxish
@@ -235,6 +245,9 @@ GuzzlordIconPointers::
 
 NecrozmaIconPointers::
 	add_icon Necrozma
+	add_icon NecrozmaDawn_wings
+	add_icon NecrozmaDusk_mane
+	add_icon NecrozmaUltra
 
 MagearnaIconPointers::
 	add_icon Magearna
@@ -262,4 +275,5 @@ MeltanIconPointers::
 
 MelmetalIconPointers::
 	add_icon Melmetal
+	add_icon MelmetalGiga
 

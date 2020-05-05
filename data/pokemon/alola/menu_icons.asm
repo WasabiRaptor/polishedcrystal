@@ -15,7 +15,7 @@ IncineroarIcon::	INCBIN "gfx/icons/incineroar.2bpp"
 
 PopplioIcon::	INCBIN "gfx/icons/popplio.2bpp"
 
-BrioneIcon::	INCBIN "gfx/icons/brione.2bpp"
+BrionneIcon::	INCBIN "gfx/icons/brionne.2bpp"
 
 PrimarinaIcon::	INCBIN "gfx/icons/primarina.2bpp"
 
@@ -43,16 +43,24 @@ CrabrawlerIcon::	INCBIN "gfx/icons/crabrawler.2bpp"
 CrabominableIcon::	INCBIN "gfx/icons/crabominable.2bpp"
 
 OricorioIcon::	INCBIN "gfx/icons/oricorio.2bpp"
+OricorioPom_pomIcon::	INCBIN "gfx/icons/oricorio_pom_pom.2bpp"
+OricorioPauIcon::	INCBIN "gfx/icons/oricorio_pau.2bpp"
+OricorioSensuIcon::	INCBIN "gfx/icons/oricorio_sensu.2bpp"
 
 CutieflyIcon::	INCBIN "gfx/icons/cutiefly.2bpp"
 
 RibombeeIcon::	INCBIN "gfx/icons/ribombee.2bpp"
 
 RockruffIcon::	INCBIN "gfx/icons/rockruff.2bpp"
+RockruffOwn_tempoIcon::	INCBIN "gfx/icons/rockruff_own_tempo.2bpp"
 
 LycanrocIcon::	INCBIN "gfx/icons/lycanroc.2bpp"
+LycanrocMiddayIcon::	INCBIN "gfx/icons/lycanroc_midday.2bpp"
+LycanrocDuskIcon::	INCBIN "gfx/icons/lycanroc_dusk.2bpp"
+LycanrocMidnightIcon::	INCBIN "gfx/icons/lycanroc_midnight.2bpp"
 
 WishiwashiIcon::	INCBIN "gfx/icons/wishiwashi.2bpp"
+WishiwashiSchoolIcon::	INCBIN "gfx/icons/wishiwashi_school.2bpp"
 
 MareanieIcon::	INCBIN "gfx/icons/mareanie.2bpp"
 
@@ -115,6 +123,7 @@ Type_nullIcon::	INCBIN "gfx/icons/type_null.2bpp"
 SilvallyIcon::	INCBIN "gfx/icons/silvally.2bpp"
 
 MiniorIcon::	INCBIN "gfx/icons/minior.2bpp"
+MiniorCoreIcon::	INCBIN "gfx/icons/minior_core.2bpp"
 
 KomalaIcon::	INCBIN "gfx/icons/komala.2bpp"
 
@@ -123,6 +132,7 @@ TurtonatorIcon::	INCBIN "gfx/icons/turtonator.2bpp"
 TogedemaruIcon::	INCBIN "gfx/icons/togedemaru.2bpp"
 
 MimikyuIcon::	INCBIN "gfx/icons/mimikyu.2bpp"
+MimikyuBustedIcon::	INCBIN "gfx/icons/mimikyu_busted.2bpp"
 
 BruxishIcon::	INCBIN "gfx/icons/bruxish.2bpp"
 
@@ -173,6 +183,9 @@ KartanaIcon::	INCBIN "gfx/icons/kartana.2bpp"
 GuzzlordIcon::	INCBIN "gfx/icons/guzzlord.2bpp"
 
 NecrozmaIcon::	INCBIN "gfx/icons/necrozma.2bpp"
+NecrozmaDawn_wingsIcon::	INCBIN "gfx/icons/necrozma_dawn_wings.2bpp"
+NecrozmaDusk_maneIcon::	INCBIN "gfx/icons/necrozma_dusk_mane.2bpp"
+NecrozmaUltraIcon::	INCBIN "gfx/icons/necrozma_ultra.2bpp"
 
 MagearnaIcon::	INCBIN "gfx/icons/magearna.2bpp"
 
@@ -191,4 +204,5 @@ ZeraoraIcon::	INCBIN "gfx/icons/zeraora.2bpp"
 MeltanIcon::	INCBIN "gfx/icons/meltan.2bpp"
 
 MelmetalIcon::	INCBIN "gfx/icons/melmetal.2bpp"
+MelmetalGigaIcon::	INCBIN "gfx/icons/melmetal_giga.2bpp"
 

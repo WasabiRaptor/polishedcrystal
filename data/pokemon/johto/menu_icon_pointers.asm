@@ -61,6 +61,7 @@ LanturnIconPointers::
 
 PichuIconPointers::
 	add_icon Pichu
+	add_icon PichuSpiky_eared
 
 CleffaIconPointers::
 	add_icon Cleffa
@@ -88,6 +89,7 @@ FlaaffyIconPointers::
 
 AmpharosIconPointers::
 	add_icon Ampharos
+	add_icon AmpharosMega
 
 BellossomIconPointers::
 	add_icon Bellossom
@@ -148,6 +150,34 @@ MisdreavusIconPointers::
 
 UnownIconPointers::
 	add_icon Unown
+	add_icon UnownA
+	add_icon UnownB
+	add_icon UnownC
+	add_icon UnownD
+	add_icon UnownE
+	add_icon UnownF
+	add_icon UnownG
+	add_icon UnownH
+	add_icon UnownI
+	add_icon UnownJ
+	add_icon UnownK
+	add_icon UnownL
+	add_icon UnownM
+	add_icon UnownN
+	add_icon UnownO
+	add_icon UnownP
+	add_icon UnownQ
+	add_icon UnownR
+	add_icon UnownS
+	add_icon UnownT
+	add_icon UnownU
+	add_icon UnownV
+	add_icon UnownW
+	add_icon UnownX
+	add_icon UnownY
+	add_icon UnownZ
+	add_icon UnownExclamation_mark
+	add_icon UnownQuestion_mark
 
 WobbuffetIconPointers::
 	add_icon Wobbuffet
@@ -169,6 +199,7 @@ GligarIconPointers::
 
 SteelixIconPointers::
 	add_icon Steelix
+	add_icon SteelixMega
 
 SnubbullIconPointers::
 	add_icon Snubbull
@@ -181,12 +212,14 @@ QwilfishIconPointers::
 
 ScizorIconPointers::
 	add_icon Scizor
+	add_icon ScizorMega
 
 ShuckleIconPointers::
 	add_icon Shuckle
 
 HeracrossIconPointers::
 	add_icon Heracross
+	add_icon HeracrossMega
 
 SneaselIconPointers::
 	add_icon Sneasel
@@ -211,6 +244,7 @@ PiloswineIconPointers::
 
 CorsolaIconPointers::
 	add_icon Corsola
+	add_icon CorsolaGalar
 
 RemoraidIconPointers::
 	add_icon Remoraid
@@ -232,6 +266,7 @@ HoundourIconPointers::
 
 HoundoomIconPointers::
 	add_icon Houndoom
+	add_icon HoundoomMega
 
 KingdraIconPointers::
 	add_icon Kingdra
@@ -289,6 +324,7 @@ PupitarIconPointers::
 
 TyranitarIconPointers::
 	add_icon Tyranitar
+	add_icon TyranitarMega
 
 LugiaIconPointers::
 	add_icon Lugia

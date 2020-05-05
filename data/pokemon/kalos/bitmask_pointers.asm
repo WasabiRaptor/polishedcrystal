@@ -25,6 +25,8 @@ FrogadierBitmasksPointers::
 
 GreninjaBitmasksPointers::
 	add_bitmasks Greninja
+	add_bitmasks GreninjaBattle_bond
+	add_bitmasks GreninjaAsh
 
 BunnelbyBitmasksPointers::
 	add_bitmasks Bunnelby
@@ -49,18 +51,39 @@ SpewpaBitmasksPointers::
 
 VivillonBitmasksPointers::
 	add_bitmasks Vivillon
+	add_bitmasks VivillonArchipelego
+	add_bitmasks VivillonContinental
+	add_bitmasks VivillonElegant
+	add_bitmasks VivillonGarden
+	add_bitmasks VivillonHigh_plains
+	add_bitmasks VivillonIcy_snow
+	add_bitmasks VivillonJungle
+	add_bitmasks VivillonMarine
+	add_bitmasks VivillonModern
+	add_bitmasks VivillonMonsoon
+	add_bitmasks VivillonOcean
+	add_bitmasks VivillonPolar
+	add_bitmasks VivillonRiver
+	add_bitmasks VivillonSandstorm
+	add_bitmasks VivillonSavannah
+	add_bitmasks VivillonSun
+	add_bitmasks VivillonTundra
+	add_bitmasks VivillonPokeball
+	add_bitmasks VivillonFancy
 
 LitleoBitmasksPointers::
 	add_bitmasks Litleo
 
 PyroarBitmasksPointers::
 	add_bitmasks Pyroar
+	add_bitmasks PyroarF
 
 FlabebeBitmasksPointers::
 	add_bitmasks Flabebe
 
 FloetteBitmasksPointers::
 	add_bitmasks Floette
+	add_bitmasks FloetteEternal_flower
 
 FlorgesBitmasksPointers::
 	add_bitmasks Florges
@@ -79,12 +102,22 @@ PangoroBitmasksPointers::
 
 FurfrouBitmasksPointers::
 	add_bitmasks Furfrou
+	add_bitmasks FurfrouHeart
+	add_bitmasks FurfrouStar
+	add_bitmasks FurfrouDiamond
+	add_bitmasks FurfrouDebutante
+	add_bitmasks FurfrouMatron
+	add_bitmasks FurfrouDandy
+	add_bitmasks FurfrouLa_reine
+	add_bitmasks FurfrouKabuki
+	add_bitmasks FurfrouPharaoh
 
 EspurrBitmasksPointers::
 	add_bitmasks Espurr
 
 MeowsticBitmasksPointers::
 	add_bitmasks Meowstic
+	add_bitmasks MeowsticF
 
 HonedgeBitmasksPointers::
 	add_bitmasks Honedge
@@ -94,6 +127,7 @@ DoubladeBitmasksPointers::
 
 AegislashBitmasksPointers::
 	add_bitmasks Aegislash
+	add_bitmasks AegislashBlade
 
 SpritzeeBitmasksPointers::
 	add_bitmasks Spritzee
@@ -181,9 +215,15 @@ TrevenantBitmasksPointers::
 
 PumpkabooBitmasksPointers::
 	add_bitmasks Pumpkaboo
+	add_bitmasks PumpkabooAverage
+	add_bitmasks PumpkabooLarge
+	add_bitmasks PumpkabooSuper
 
 GourgeistBitmasksPointers::
 	add_bitmasks Gourgeist
+	add_bitmasks GourgeistAverage
+	add_bitmasks GourgeistLarge
+	add_bitmasks GourgeistSuper
 
 BergmiteBitmasksPointers::
 	add_bitmasks Bergmite
@@ -205,12 +245,18 @@ YveltalBitmasksPointers::
 
 ZygardeBitmasksPointers::
 	add_bitmasks Zygarde
+	add_bitmasks ZygardeFifty_percent
+	add_bitmasks ZygardeComplete
+	add_bitmasks ZygardeComplete
+	add_bitmasks ZygardeComplete
 
 DiancieBitmasksPointers::
 	add_bitmasks Diancie
+	add_bitmasks DiancieMega
 
 HoopaBitmasksPointers::
 	add_bitmasks Hoopa
+	add_bitmasks HoopaUnbound
 
 VolcanionBitmasksPointers::
 	add_bitmasks Volcanion

@@ -20,8 +20,8 @@ IncineroarPokedexEntryPointers::
 PopplioPokedexEntryPointers::
 	add_pokedexentry Popplio
 
-BrionePokedexEntryPointers::
-	add_pokedexentry Brione
+BrionnePokedexEntryPointers::
+	add_pokedexentry Brionne
 
 PrimarinaPokedexEntryPointers::
 	add_pokedexentry Primarina
@@ -58,6 +58,9 @@ CrabominablePokedexEntryPointers::
 
 OricorioPokedexEntryPointers::
 	add_pokedexentry Oricorio
+	add_pokedexentry Oricorio
+	add_pokedexentry Oricorio
+	add_pokedexentry Oricorio
 
 CutieflyPokedexEntryPointers::
 	add_pokedexentry Cutiefly
@@ -67,11 +70,16 @@ RibombeePokedexEntryPointers::
 
 RockruffPokedexEntryPointers::
 	add_pokedexentry Rockruff
+	add_pokedexentry Rockruff
 
 LycanrocPokedexEntryPointers::
 	add_pokedexentry Lycanroc
+	add_pokedexentry Lycanroc
+	add_pokedexentry Lycanroc
+	add_pokedexentry Lycanroc
 
 WishiwashiPokedexEntryPointers::
+	add_pokedexentry Wishiwashi
 	add_pokedexentry Wishiwashi
 
 MareaniePokedexEntryPointers::
@@ -157,6 +165,7 @@ SilvallyPokedexEntryPointers::
 
 MiniorPokedexEntryPointers::
 	add_pokedexentry Minior
+	add_pokedexentry Minior
 
 KomalaPokedexEntryPointers::
 	add_pokedexentry Komala
@@ -168,6 +177,7 @@ TogedemaruPokedexEntryPointers::
 	add_pokedexentry Togedemaru
 
 MimikyuPokedexEntryPointers::
+	add_pokedexentry Mimikyu
 	add_pokedexentry Mimikyu
 
 BruxishPokedexEntryPointers::
@@ -235,6 +245,9 @@ GuzzlordPokedexEntryPointers::
 
 NecrozmaPokedexEntryPointers::
 	add_pokedexentry Necrozma
+	add_pokedexentry Necrozma
+	add_pokedexentry Necrozma
+	add_pokedexentry Necrozma
 
 MagearnaPokedexEntryPointers::
 	add_pokedexentry Magearna
@@ -261,5 +274,6 @@ MeltanPokedexEntryPointers::
 	add_pokedexentry Meltan
 
 MelmetalPokedexEntryPointers::
+	add_pokedexentry Melmetal
 	add_pokedexentry Melmetal
 

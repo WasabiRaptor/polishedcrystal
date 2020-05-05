@@ -54,6 +54,7 @@ PidoveBaseData::	INCLUDE "data/pokemon/base_stats/pidove.asm"
 TranquillBaseData::	INCLUDE "data/pokemon/base_stats/tranquill.asm"
 
 UnfezantBaseData::	INCLUDE "data/pokemon/base_stats/unfezant.asm"
+UnfezantFBaseData::	INCLUDE "data/pokemon/base_stats/unfezant_f.asm"
 
 BlitzleBaseData::	INCLUDE "data/pokemon/base_stats/blitzle.asm"
 
@@ -74,6 +75,7 @@ DrilburBaseData::	INCLUDE "data/pokemon/base_stats/drilbur.asm"
 ExcadrillBaseData::	INCLUDE "data/pokemon/base_stats/excadrill.asm"
 
 AudinoBaseData::	INCLUDE "data/pokemon/base_stats/audino.asm"
+AudinoMegaBaseData::	INCLUDE "data/pokemon/base_stats/audino_mega.asm"
 
 TimburrBaseData::	INCLUDE "data/pokemon/base_stats/timburr.asm"
 
@@ -120,8 +122,12 @@ KrokorokBaseData::	INCLUDE "data/pokemon/base_stats/krokorok.asm"
 KrookodileBaseData::	INCLUDE "data/pokemon/base_stats/krookodile.asm"
 
 DarumakaBaseData::	INCLUDE "data/pokemon/base_stats/darumaka.asm"
+DarumakaGalarBaseData::	INCLUDE "data/pokemon/base_stats/darumaka_galar.asm"
 
 DarmanitanBaseData::	INCLUDE "data/pokemon/base_stats/darmanitan.asm"
+DarmanitanZenBaseData::	INCLUDE "data/pokemon/base_stats/darmanitan_zen.asm"
+DarmanitanGalarBaseData::	INCLUDE "data/pokemon/base_stats/darmanitan_galar.asm"
+DarmanitanGalar_zenBaseData::	INCLUDE "data/pokemon/base_stats/darmanitan_galar_zen.asm"
 
 MaractusBaseData::	INCLUDE "data/pokemon/base_stats/maractus.asm"
 
@@ -136,6 +142,7 @@ ScraftyBaseData::	INCLUDE "data/pokemon/base_stats/scrafty.asm"
 SigilyphBaseData::	INCLUDE "data/pokemon/base_stats/sigilyph.asm"
 
 YamaskBaseData::	INCLUDE "data/pokemon/base_stats/yamask.asm"
+YamaskGalarBaseData::	INCLUDE "data/pokemon/base_stats/yamask_galar.asm"
 
 CofagrigusBaseData::	INCLUDE "data/pokemon/base_stats/cofagrigus.asm"
 
@@ -150,6 +157,7 @@ ArcheopsBaseData::	INCLUDE "data/pokemon/base_stats/archeops.asm"
 TrubbishBaseData::	INCLUDE "data/pokemon/base_stats/trubbish.asm"
 
 GarbodorBaseData::	INCLUDE "data/pokemon/base_stats/garbodor.asm"
+GarbodorGigaBaseData::	INCLUDE "data/pokemon/base_stats/garbodor_giga.asm"
 
 ZoruaBaseData::	INCLUDE "data/pokemon/base_stats/zorua.asm"
 
@@ -182,8 +190,14 @@ VanillishBaseData::	INCLUDE "data/pokemon/base_stats/vanillish.asm"
 VanilluxeBaseData::	INCLUDE "data/pokemon/base_stats/vanilluxe.asm"
 
 DeerlingBaseData::	INCLUDE "data/pokemon/base_stats/deerling.asm"
+DeerlingSummerBaseData::	INCLUDE "data/pokemon/base_stats/deerling_summer.asm"
+DeerlingAutumnBaseData::	INCLUDE "data/pokemon/base_stats/deerling_autumn.asm"
+DeerlingWinterBaseData::	INCLUDE "data/pokemon/base_stats/deerling_winter.asm"
 
 SawsbuckBaseData::	INCLUDE "data/pokemon/base_stats/sawsbuck.asm"
+SawsbuckSummerBaseData::	INCLUDE "data/pokemon/base_stats/sawsbuck_summer.asm"
+SawsbuckAutumnBaseData::	INCLUDE "data/pokemon/base_stats/sawsbuck_autumn.asm"
+SawsbuckWinterBaseData::	INCLUDE "data/pokemon/base_stats/sawsbuck_winter.asm"
 
 EmolgaBaseData::	INCLUDE "data/pokemon/base_stats/emolga.asm"
 
@@ -248,6 +262,7 @@ ShelmetBaseData::	INCLUDE "data/pokemon/base_stats/shelmet.asm"
 AccelgorBaseData::	INCLUDE "data/pokemon/base_stats/accelgor.asm"
 
 StunfiskBaseData::	INCLUDE "data/pokemon/base_stats/stunfisk.asm"
+StunfiskGalarBaseData::	INCLUDE "data/pokemon/base_stats/stunfisk_galar.asm"
 
 MienfooBaseData::	INCLUDE "data/pokemon/base_stats/mienfoo.asm"
 
@@ -294,20 +309,27 @@ TerrakionBaseData::	INCLUDE "data/pokemon/base_stats/terrakion.asm"
 VirizionBaseData::	INCLUDE "data/pokemon/base_stats/virizion.asm"
 
 TornadusBaseData::	INCLUDE "data/pokemon/base_stats/tornadus.asm"
+TornadusTherianBaseData::	INCLUDE "data/pokemon/base_stats/tornadus_therian.asm"
 
 ThundurusBaseData::	INCLUDE "data/pokemon/base_stats/thundurus.asm"
+ThundurusTherianBaseData::	INCLUDE "data/pokemon/base_stats/thundurus_therian.asm"
 
 ReshiramBaseData::	INCLUDE "data/pokemon/base_stats/reshiram.asm"
 
 ZekromBaseData::	INCLUDE "data/pokemon/base_stats/zekrom.asm"
 
 LandorusBaseData::	INCLUDE "data/pokemon/base_stats/landorus.asm"
+LandorusTherianBaseData::	INCLUDE "data/pokemon/base_stats/landorus_therian.asm"
 
 KyuremBaseData::	INCLUDE "data/pokemon/base_stats/kyurem.asm"
+KyuremBlackBaseData::	INCLUDE "data/pokemon/base_stats/kyurem_black.asm"
+KyuremWhiteBaseData::	INCLUDE "data/pokemon/base_stats/kyurem_white.asm"
 
 KeldeoBaseData::	INCLUDE "data/pokemon/base_stats/keldeo.asm"
+KeldeoResoluteBaseData::	INCLUDE "data/pokemon/base_stats/keldeo_resolute.asm"
 
 MeloettaBaseData::	INCLUDE "data/pokemon/base_stats/meloetta.asm"
+MeloettaPirouetteBaseData::	INCLUDE "data/pokemon/base_stats/meloetta_pirouette.asm"
 
 GenesectBaseData::	INCLUDE "data/pokemon/base_stats/genesect.asm"
 

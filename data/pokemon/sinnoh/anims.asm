@@ -50,8 +50,12 @@ ShieldonAnimation:	INCLUDE "gfx/pokemon/shieldon/anim.asm"
 BastiodonAnimation:	INCLUDE "gfx/pokemon/bastiodon/anim.asm"
 
 BurmyAnimation:	INCLUDE "gfx/pokemon/burmy/anim.asm"
+BurmySandAnimation::	INCLUDE "gfx/pokemon/burmy_sand/anim.asm"
+BurmyTrashAnimation::	INCLUDE "gfx/pokemon/burmy_trash/anim.asm"
 
 WormadamAnimation:	INCLUDE "gfx/pokemon/wormadam/anim.asm"
+WormadamSandAnimation::	INCLUDE "gfx/pokemon/wormadam_sand/anim.asm"
+WormadamTrashAnimation::	INCLUDE "gfx/pokemon/wormadam_trash/anim.asm"
 
 MothimAnimation:	INCLUDE "gfx/pokemon/mothim/anim.asm"
 
@@ -68,10 +72,13 @@ FloatzelAnimation:	INCLUDE "gfx/pokemon/floatzel/anim.asm"
 CherubiAnimation:	INCLUDE "gfx/pokemon/cherubi/anim.asm"
 
 CherrimAnimation:	INCLUDE "gfx/pokemon/cherrim/anim.asm"
+CherrimOvercastAnimation::	INCLUDE "gfx/pokemon/cherrim_overcast/anim.asm"
 
 ShellosAnimation:	INCLUDE "gfx/pokemon/shellos/anim.asm"
+ShellosWestAnimation::	INCLUDE "gfx/pokemon/shellos_west/anim.asm"
 
 GastrodonAnimation:	INCLUDE "gfx/pokemon/gastrodon/anim.asm"
+GastrodonWestAnimation::	INCLUDE "gfx/pokemon/gastrodon_west/anim.asm"
 
 AmbipomAnimation:	INCLUDE "gfx/pokemon/ambipom/anim.asm"
 
@@ -82,6 +89,7 @@ DrifblimAnimation:	INCLUDE "gfx/pokemon/drifblim/anim.asm"
 BunearyAnimation:	INCLUDE "gfx/pokemon/buneary/anim.asm"
 
 LopunnyAnimation:	INCLUDE "gfx/pokemon/lopunny/anim.asm"
+LopunnyMegaAnimation::	INCLUDE "gfx/pokemon/lopunny_mega/anim.asm"
 
 MismagiusAnimation:	INCLUDE "gfx/pokemon/mismagius/anim.asm"
 
@@ -116,12 +124,14 @@ GibleAnimation:	INCLUDE "gfx/pokemon/gible/anim.asm"
 GabiteAnimation:	INCLUDE "gfx/pokemon/gabite/anim.asm"
 
 GarchompAnimation:	INCLUDE "gfx/pokemon/garchomp/anim.asm"
+GarchompMegaAnimation::	INCLUDE "gfx/pokemon/garchomp_mega/anim.asm"
 
 MunchlaxAnimation:	INCLUDE "gfx/pokemon/munchlax/anim.asm"
 
 RioluAnimation:	INCLUDE "gfx/pokemon/riolu/anim.asm"
 
 LucarioAnimation:	INCLUDE "gfx/pokemon/lucario/anim.asm"
+LucarioMegaAnimation::	INCLUDE "gfx/pokemon/lucario_mega/anim.asm"
 
 HippopotasAnimation:	INCLUDE "gfx/pokemon/hippopotas/anim.asm"
 
@@ -146,6 +156,7 @@ MantykeAnimation:	INCLUDE "gfx/pokemon/mantyke/anim.asm"
 SnoverAnimation:	INCLUDE "gfx/pokemon/snover/anim.asm"
 
 AbomasnowAnimation:	INCLUDE "gfx/pokemon/abomasnow/anim.asm"
+AbomasnowMegaAnimation::	INCLUDE "gfx/pokemon/abomasnow_mega/anim.asm"
 
 WeavileAnimation:	INCLUDE "gfx/pokemon/weavile/anim.asm"
 
@@ -176,6 +187,7 @@ MamoswineAnimation:	INCLUDE "gfx/pokemon/mamoswine/anim.asm"
 Porygon_zAnimation:	INCLUDE "gfx/pokemon/porygon_z/anim.asm"
 
 GalladeAnimation:	INCLUDE "gfx/pokemon/gallade/anim.asm"
+GalladeMegaAnimation::	INCLUDE "gfx/pokemon/gallade_mega/anim.asm"
 
 ProbopassAnimation:	INCLUDE "gfx/pokemon/probopass/anim.asm"
 
@@ -184,6 +196,12 @@ DusknoirAnimation:	INCLUDE "gfx/pokemon/dusknoir/anim.asm"
 FroslassAnimation:	INCLUDE "gfx/pokemon/froslass/anim.asm"
 
 RotomAnimation:	INCLUDE "gfx/pokemon/rotom/anim.asm"
+RotomHeatAnimation::	INCLUDE "gfx/pokemon/rotom_heat/anim.asm"
+RotomWashAnimation::	INCLUDE "gfx/pokemon/rotom_wash/anim.asm"
+RotomFrostAnimation::	INCLUDE "gfx/pokemon/rotom_frost/anim.asm"
+RotomFanAnimation::	INCLUDE "gfx/pokemon/rotom_fan/anim.asm"
+RotomMowAnimation::	INCLUDE "gfx/pokemon/rotom_mow/anim.asm"
+RotomDexAnimation::	INCLUDE "gfx/pokemon/rotom_dex/anim.asm"
 
 UxieAnimation:	INCLUDE "gfx/pokemon/uxie/anim.asm"
 
@@ -200,6 +218,7 @@ HeatranAnimation:	INCLUDE "gfx/pokemon/heatran/anim.asm"
 RegigigasAnimation:	INCLUDE "gfx/pokemon/regigigas/anim.asm"
 
 GiratinaAnimation:	INCLUDE "gfx/pokemon/giratina/anim.asm"
+GiratinaOriginAnimation::	INCLUDE "gfx/pokemon/giratina_origin/anim.asm"
 
 CresseliaAnimation:	INCLUDE "gfx/pokemon/cresselia/anim.asm"
 

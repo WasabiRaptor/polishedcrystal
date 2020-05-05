@@ -50,8 +50,12 @@ ShieldonFrames:	INCLUDE "gfx/pokemon/shieldon/frames.asm"
 BastiodonFrames:	INCLUDE "gfx/pokemon/bastiodon/frames.asm"
 
 BurmyFrames:	INCLUDE "gfx/pokemon/burmy/frames.asm"
+BurmySandFrames::	INCLUDE "gfx/pokemon/burmy_sand/frames.asm"
+BurmyTrashFrames::	INCLUDE "gfx/pokemon/burmy_trash/frames.asm"
 
 WormadamFrames:	INCLUDE "gfx/pokemon/wormadam/frames.asm"
+WormadamSandFrames::	INCLUDE "gfx/pokemon/wormadam_sand/frames.asm"
+WormadamTrashFrames::	INCLUDE "gfx/pokemon/wormadam_trash/frames.asm"
 
 MothimFrames:	INCLUDE "gfx/pokemon/mothim/frames.asm"
 
@@ -68,10 +72,13 @@ FloatzelFrames:	INCLUDE "gfx/pokemon/floatzel/frames.asm"
 CherubiFrames:	INCLUDE "gfx/pokemon/cherubi/frames.asm"
 
 CherrimFrames:	INCLUDE "gfx/pokemon/cherrim/frames.asm"
+CherrimOvercastFrames::	INCLUDE "gfx/pokemon/cherrim_overcast/frames.asm"
 
 ShellosFrames:	INCLUDE "gfx/pokemon/shellos/frames.asm"
+ShellosWestFrames::	INCLUDE "gfx/pokemon/shellos_west/frames.asm"
 
 GastrodonFrames:	INCLUDE "gfx/pokemon/gastrodon/frames.asm"
+GastrodonWestFrames::	INCLUDE "gfx/pokemon/gastrodon_west/frames.asm"
 
 AmbipomFrames:	INCLUDE "gfx/pokemon/ambipom/frames.asm"
 
@@ -82,6 +89,7 @@ DrifblimFrames:	INCLUDE "gfx/pokemon/drifblim/frames.asm"
 BunearyFrames:	INCLUDE "gfx/pokemon/buneary/frames.asm"
 
 LopunnyFrames:	INCLUDE "gfx/pokemon/lopunny/frames.asm"
+LopunnyMegaFrames::	INCLUDE "gfx/pokemon/lopunny_mega/frames.asm"
 
 MismagiusFrames:	INCLUDE "gfx/pokemon/mismagius/frames.asm"
 
@@ -116,12 +124,14 @@ GibleFrames:	INCLUDE "gfx/pokemon/gible/frames.asm"
 GabiteFrames:	INCLUDE "gfx/pokemon/gabite/frames.asm"
 
 GarchompFrames:	INCLUDE "gfx/pokemon/garchomp/frames.asm"
+GarchompMegaFrames::	INCLUDE "gfx/pokemon/garchomp_mega/frames.asm"
 
 MunchlaxFrames:	INCLUDE "gfx/pokemon/munchlax/frames.asm"
 
 RioluFrames:	INCLUDE "gfx/pokemon/riolu/frames.asm"
 
 LucarioFrames:	INCLUDE "gfx/pokemon/lucario/frames.asm"
+LucarioMegaFrames::	INCLUDE "gfx/pokemon/lucario_mega/frames.asm"
 
 HippopotasFrames:	INCLUDE "gfx/pokemon/hippopotas/frames.asm"
 
@@ -146,6 +156,7 @@ MantykeFrames:	INCLUDE "gfx/pokemon/mantyke/frames.asm"
 SnoverFrames:	INCLUDE "gfx/pokemon/snover/frames.asm"
 
 AbomasnowFrames:	INCLUDE "gfx/pokemon/abomasnow/frames.asm"
+AbomasnowMegaFrames::	INCLUDE "gfx/pokemon/abomasnow_mega/frames.asm"
 
 WeavileFrames:	INCLUDE "gfx/pokemon/weavile/frames.asm"
 
@@ -176,6 +187,7 @@ MamoswineFrames:	INCLUDE "gfx/pokemon/mamoswine/frames.asm"
 Porygon_zFrames:	INCLUDE "gfx/pokemon/porygon_z/frames.asm"
 
 GalladeFrames:	INCLUDE "gfx/pokemon/gallade/frames.asm"
+GalladeMegaFrames::	INCLUDE "gfx/pokemon/gallade_mega/frames.asm"
 
 ProbopassFrames:	INCLUDE "gfx/pokemon/probopass/frames.asm"
 
@@ -184,6 +196,12 @@ DusknoirFrames:	INCLUDE "gfx/pokemon/dusknoir/frames.asm"
 FroslassFrames:	INCLUDE "gfx/pokemon/froslass/frames.asm"
 
 RotomFrames:	INCLUDE "gfx/pokemon/rotom/frames.asm"
+RotomHeatFrames::	INCLUDE "gfx/pokemon/rotom_heat/frames.asm"
+RotomWashFrames::	INCLUDE "gfx/pokemon/rotom_wash/frames.asm"
+RotomFrostFrames::	INCLUDE "gfx/pokemon/rotom_frost/frames.asm"
+RotomFanFrames::	INCLUDE "gfx/pokemon/rotom_fan/frames.asm"
+RotomMowFrames::	INCLUDE "gfx/pokemon/rotom_mow/frames.asm"
+RotomDexFrames::	INCLUDE "gfx/pokemon/rotom_dex/frames.asm"
 
 UxieFrames:	INCLUDE "gfx/pokemon/uxie/frames.asm"
 
@@ -200,6 +218,7 @@ HeatranFrames:	INCLUDE "gfx/pokemon/heatran/frames.asm"
 RegigigasFrames:	INCLUDE "gfx/pokemon/regigigas/frames.asm"
 
 GiratinaFrames:	INCLUDE "gfx/pokemon/giratina/frames.asm"
+GiratinaOriginFrames::	INCLUDE "gfx/pokemon/giratina_origin/frames.asm"
 
 CresseliaFrames:	INCLUDE "gfx/pokemon/cresselia/frames.asm"
 

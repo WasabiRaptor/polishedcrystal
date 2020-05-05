@@ -16,7 +16,7 @@ IncineroarPokedexEntry::	INCLUDE "data/pokemon/dex_entries/incineroar.asm"
 
 PopplioPokedexEntry::	INCLUDE "data/pokemon/dex_entries/popplio.asm"
 
-BrionePokedexEntry::	INCLUDE "data/pokemon/dex_entries/brione.asm"
+BrionnePokedexEntry::	INCLUDE "data/pokemon/dex_entries/brionne.asm"
 
 PrimarinaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/primarina.asm"
 

@@ -77,9 +77,13 @@ BastiodonBaseDataPointers::
 
 BurmyBaseDataPointers::
 	add_basedata Burmy
+	add_basedata BurmySand
+	add_basedata BurmyTrash
 
 WormadamBaseDataPointers::
 	add_basedata Wormadam
+	add_basedata WormadamSand
+	add_basedata WormadamTrash
 
 MothimBaseDataPointers::
 	add_basedata Mothim
@@ -104,12 +108,15 @@ CherubiBaseDataPointers::
 
 CherrimBaseDataPointers::
 	add_basedata Cherrim
+	add_basedata CherrimOvercast
 
 ShellosBaseDataPointers::
 	add_basedata Shellos
+	add_basedata ShellosWest
 
 GastrodonBaseDataPointers::
 	add_basedata Gastrodon
+	add_basedata GastrodonWest
 
 AmbipomBaseDataPointers::
 	add_basedata Ambipom
@@ -125,6 +132,7 @@ BunearyBaseDataPointers::
 
 LopunnyBaseDataPointers::
 	add_basedata Lopunny
+	add_basedata LopunnyMega
 
 MismagiusBaseDataPointers::
 	add_basedata Mismagius
@@ -176,6 +184,7 @@ GabiteBaseDataPointers::
 
 GarchompBaseDataPointers::
 	add_basedata Garchomp
+	add_basedata GarchompMega
 
 MunchlaxBaseDataPointers::
 	add_basedata Munchlax
@@ -185,6 +194,7 @@ RioluBaseDataPointers::
 
 LucarioBaseDataPointers::
 	add_basedata Lucario
+	add_basedata LucarioMega
 
 HippopotasBaseDataPointers::
 	add_basedata Hippopotas
@@ -221,6 +231,7 @@ SnoverBaseDataPointers::
 
 AbomasnowBaseDataPointers::
 	add_basedata Abomasnow
+	add_basedata AbomasnowMega
 
 WeavileBaseDataPointers::
 	add_basedata Weavile
@@ -266,6 +277,7 @@ Porygon_zBaseDataPointers::
 
 GalladeBaseDataPointers::
 	add_basedata Gallade
+	add_basedata GalladeMega
 
 ProbopassBaseDataPointers::
 	add_basedata Probopass
@@ -278,6 +290,12 @@ FroslassBaseDataPointers::
 
 RotomBaseDataPointers::
 	add_basedata Rotom
+	add_basedata RotomHeat
+	add_basedata RotomWash
+	add_basedata RotomFrost
+	add_basedata RotomFan
+	add_basedata RotomMow
+	add_basedata RotomDex
 
 UxieBaseDataPointers::
 	add_basedata Uxie
@@ -302,6 +320,7 @@ RegigigasBaseDataPointers::
 
 GiratinaBaseDataPointers::
 	add_basedata Giratina
+	add_basedata GiratinaOrigin
 
 CresseliaBaseDataPointers::
 	add_basedata Cresselia

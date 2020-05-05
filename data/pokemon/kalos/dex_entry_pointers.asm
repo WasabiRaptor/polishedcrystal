@@ -25,6 +25,8 @@ FrogadierPokedexEntryPointers::
 
 GreninjaPokedexEntryPointers::
 	add_pokedexentry Greninja
+	add_pokedexentry Greninja
+	add_pokedexentry Greninja
 
 BunnelbyPokedexEntryPointers::
 	add_pokedexentry Bunnelby
@@ -49,17 +51,38 @@ SpewpaPokedexEntryPointers::
 
 VivillonPokedexEntryPointers::
 	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
+	add_pokedexentry Vivillon
 
 LitleoPokedexEntryPointers::
 	add_pokedexentry Litleo
 
 PyroarPokedexEntryPointers::
 	add_pokedexentry Pyroar
+	add_pokedexentry Pyroar
 
 FlabebePokedexEntryPointers::
 	add_pokedexentry Flabebe
 
 FloettePokedexEntryPointers::
+	add_pokedexentry Floette
 	add_pokedexentry Floette
 
 FlorgesPokedexEntryPointers::
@@ -79,11 +102,21 @@ PangoroPokedexEntryPointers::
 
 FurfrouPokedexEntryPointers::
 	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
+	add_pokedexentry Furfrou
 
 EspurrPokedexEntryPointers::
 	add_pokedexentry Espurr
 
 MeowsticPokedexEntryPointers::
+	add_pokedexentry Meowstic
 	add_pokedexentry Meowstic
 
 HonedgePokedexEntryPointers::
@@ -93,6 +126,7 @@ DoubladePokedexEntryPointers::
 	add_pokedexentry Doublade
 
 AegislashPokedexEntryPointers::
+	add_pokedexentry Aegislash
 	add_pokedexentry Aegislash
 
 SpritzeePokedexEntryPointers::
@@ -181,8 +215,14 @@ TrevenantPokedexEntryPointers::
 
 PumpkabooPokedexEntryPointers::
 	add_pokedexentry Pumpkaboo
+	add_pokedexentry Pumpkaboo
+	add_pokedexentry Pumpkaboo
+	add_pokedexentry Pumpkaboo
 
 GourgeistPokedexEntryPointers::
+	add_pokedexentry Gourgeist
+	add_pokedexentry Gourgeist
+	add_pokedexentry Gourgeist
 	add_pokedexentry Gourgeist
 
 BergmitePokedexEntryPointers::
@@ -205,11 +245,17 @@ YveltalPokedexEntryPointers::
 
 ZygardePokedexEntryPointers::
 	add_pokedexentry Zygarde
+	add_pokedexentry Zygarde
+	add_pokedexentry Zygarde
+	add_pokedexentry Zygarde
+	add_pokedexentry Zygarde
 
 DianciePokedexEntryPointers::
 	add_pokedexentry Diancie
+	add_pokedexentry Diancie
 
 HoopaPokedexEntryPointers::
+	add_pokedexentry Hoopa
 	add_pokedexentry Hoopa
 
 VolcanionPokedexEntryPointers::

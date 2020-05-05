@@ -6,7 +6,7 @@ AlolaPicPointerTable::
 	add_pictable Torracat
 	add_pictable Incineroar
 	add_pictable Popplio
-	add_pictable Brione
+	add_pictable Brionne
 	add_pictable Primarina
 	add_pictable Pikipeck
 	add_pictable Trumbeak

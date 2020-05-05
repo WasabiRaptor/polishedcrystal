@@ -76,9 +76,13 @@ BastiodonOverworldPalettePointers::
 
 BurmyOverworldPalettePointers::
 	add_overworldpalettes Burmy
+	add_overworldpalettes BurmySand
+	add_overworldpalettes BurmyTrash
 
 WormadamOverworldPalettePointers::
 	add_overworldpalettes Wormadam
+	add_overworldpalettes WormadamSand
+	add_overworldpalettes WormadamTrash
 
 MothimOverworldPalettePointers::
 	add_overworldpalettes Mothim
@@ -103,12 +107,15 @@ CherubiOverworldPalettePointers::
 
 CherrimOverworldPalettePointers::
 	add_overworldpalettes Cherrim
+	add_overworldpalettes CherrimOvercast
 
 ShellosOverworldPalettePointers::
 	add_overworldpalettes Shellos
+	add_overworldpalettes ShellosWest
 
 GastrodonOverworldPalettePointers::
 	add_overworldpalettes Gastrodon
+	add_overworldpalettes GastrodonWest
 
 AmbipomOverworldPalettePointers::
 	add_overworldpalettes Ambipom
@@ -124,6 +131,7 @@ BunearyOverworldPalettePointers::
 
 LopunnyOverworldPalettePointers::
 	add_overworldpalettes Lopunny
+	add_overworldpalettes LopunnyMega
 
 MismagiusOverworldPalettePointers::
 	add_overworldpalettes Mismagius
@@ -175,6 +183,7 @@ GabiteOverworldPalettePointers::
 
 GarchompOverworldPalettePointers::
 	add_overworldpalettes Garchomp
+	add_overworldpalettes GarchompMega
 
 MunchlaxOverworldPalettePointers::
 	add_overworldpalettes Munchlax
@@ -184,6 +193,7 @@ RioluOverworldPalettePointers::
 
 LucarioOverworldPalettePointers::
 	add_overworldpalettes Lucario
+	add_overworldpalettes LucarioMega
 
 HippopotasOverworldPalettePointers::
 	add_overworldpalettes Hippopotas
@@ -220,6 +230,7 @@ SnoverOverworldPalettePointers::
 
 AbomasnowOverworldPalettePointers::
 	add_overworldpalettes Abomasnow
+	add_overworldpalettes AbomasnowMega
 
 WeavileOverworldPalettePointers::
 	add_overworldpalettes Weavile
@@ -265,6 +276,7 @@ Porygon_zOverworldPalettePointers::
 
 GalladeOverworldPalettePointers::
 	add_overworldpalettes Gallade
+	add_overworldpalettes GalladeMega
 
 ProbopassOverworldPalettePointers::
 	add_overworldpalettes Probopass
@@ -277,6 +289,12 @@ FroslassOverworldPalettePointers::
 
 RotomOverworldPalettePointers::
 	add_overworldpalettes Rotom
+	add_overworldpalettes RotomHeat
+	add_overworldpalettes RotomWash
+	add_overworldpalettes RotomFrost
+	add_overworldpalettes RotomFan
+	add_overworldpalettes RotomMow
+	add_overworldpalettes RotomDex
 
 UxieOverworldPalettePointers::
 	add_overworldpalettes Uxie
@@ -301,6 +319,7 @@ RegigigasOverworldPalettePointers::
 
 GiratinaOverworldPalettePointers::
 	add_overworldpalettes Giratina
+	add_overworldpalettes GiratinaOrigin
 
 CresseliaOverworldPalettePointers::
 	add_overworldpalettes Cresselia

@@ -20,8 +20,8 @@ IncineroarOverworldPalettePointers::
 PopplioOverworldPalettePointers::
 	add_overworldpalettes Popplio
 
-BrioneOverworldPalettePointers::
-	add_overworldpalettes Brione
+BrionneOverworldPalettePointers::
+	add_overworldpalettes Brionne
 
 PrimarinaOverworldPalettePointers::
 	add_overworldpalettes Primarina
@@ -58,6 +58,9 @@ CrabominableOverworldPalettePointers::
 
 OricorioOverworldPalettePointers::
 	add_overworldpalettes Oricorio
+	add_overworldpalettes OricorioPom_pom
+	add_overworldpalettes OricorioPau
+	add_overworldpalettes OricorioSensu
 
 CutieflyOverworldPalettePointers::
 	add_overworldpalettes Cutiefly
@@ -67,12 +70,17 @@ RibombeeOverworldPalettePointers::
 
 RockruffOverworldPalettePointers::
 	add_overworldpalettes Rockruff
+	add_overworldpalettes RockruffOwn_tempo
 
 LycanrocOverworldPalettePointers::
 	add_overworldpalettes Lycanroc
+	add_overworldpalettes LycanrocMidday
+	add_overworldpalettes LycanrocDusk
+	add_overworldpalettes LycanrocMidnight
 
 WishiwashiOverworldPalettePointers::
 	add_overworldpalettes Wishiwashi
+	add_overworldpalettes WishiwashiSchool
 
 MareanieOverworldPalettePointers::
 	add_overworldpalettes Mareanie
@@ -157,6 +165,7 @@ SilvallyOverworldPalettePointers::
 
 MiniorOverworldPalettePointers::
 	add_overworldpalettes Minior
+	add_overworldpalettes MiniorCore
 
 KomalaOverworldPalettePointers::
 	add_overworldpalettes Komala
@@ -169,6 +178,7 @@ TogedemaruOverworldPalettePointers::
 
 MimikyuOverworldPalettePointers::
 	add_overworldpalettes Mimikyu
+	add_overworldpalettes MimikyuBusted
 
 BruxishOverworldPalettePointers::
 	add_overworldpalettes Bruxish
@@ -235,6 +245,9 @@ GuzzlordOverworldPalettePointers::
 
 NecrozmaOverworldPalettePointers::
 	add_overworldpalettes Necrozma
+	add_overworldpalettes NecrozmaDawn_wings
+	add_overworldpalettes NecrozmaDusk_mane
+	add_overworldpalettes NecrozmaUltra
 
 MagearnaOverworldPalettePointers::
 	add_overworldpalettes Magearna
@@ -262,4 +275,5 @@ MeltanOverworldPalettePointers::
 
 MelmetalOverworldPalettePointers::
 	add_overworldpalettes Melmetal
+	add_overworldpalettes MelmetalGiga
 

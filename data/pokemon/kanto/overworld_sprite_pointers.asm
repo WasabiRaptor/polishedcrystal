@@ -18,6 +18,9 @@ CharmeleonOverworldSpritePointers::
 
 CharizardOverworldSpritePointers::
 	add_overworldsprite Charizard
+	add_overworldsprite CharizardMega_x
+	add_overworldsprite CharizardMega_y
+	add_overworldsprite CharizardGiga
 
 SquirtleOverworldSpritePointers::
 	add_overworldsprite Squirtle
@@ -27,6 +30,8 @@ WartortleOverworldSpritePointers::
 
 BlastoiseOverworldSpritePointers::
 	add_overworldsprite Blastoise
+	add_overworldsprite BlastoiseMega
+	add_overworldsprite BlastoiseGiga
 
 CaterpieOverworldSpritePointers::
 	add_overworldsprite Caterpie
@@ -36,6 +41,7 @@ MetapodOverworldSpritePointers::
 
 ButterfreeOverworldSpritePointers::
 	add_overworldsprite Butterfree
+	add_overworldsprite ButterfreeGiga
 
 WeedleOverworldSpritePointers::
 	add_overworldsprite Weedle
@@ -45,6 +51,7 @@ KakunaOverworldSpritePointers::
 
 BeedrillOverworldSpritePointers::
 	add_overworldsprite Beedrill
+	add_overworldsprite BeedrillMega
 
 PidgeyOverworldSpritePointers::
 	add_overworldsprite Pidgey
@@ -54,12 +61,15 @@ PidgeottoOverworldSpritePointers::
 
 PidgeotOverworldSpritePointers::
 	add_overworldsprite Pidgeot
+	add_overworldsprite PidgeotMega
 
 RattataOverworldSpritePointers::
 	add_overworldsprite Rattata
+	add_overworldsprite RattataAlola
 
 RaticateOverworldSpritePointers::
 	add_overworldsprite Raticate
+	add_overworldsprite RaticateAlola
 
 SpearowOverworldSpritePointers::
 	add_overworldsprite Spearow
@@ -75,15 +85,33 @@ ArbokOverworldSpritePointers::
 
 PikachuOverworldSpritePointers::
 	add_overworldsprite Pikachu
+	add_overworldsprite PikachuCosplay
+	add_overworldsprite PikachuRockstar
+	add_overworldsprite PikachuBelle
+	add_overworldsprite PikachuPopstar
+	add_overworldsprite PikachuPhd
+	add_overworldsprite PikachuLibre
+	add_overworldsprite PikachuOg_cap
+	add_overworldsprite PikachuHoenn_cap
+	add_overworldsprite PikachuSinnoh_cap
+	add_overworldsprite PikachuUnova_cap
+	add_overworldsprite PikachuKalos_cap
+	add_overworldsprite PikachuAlola_cap
+	add_overworldsprite PikachuPartner_cap
+	add_overworldsprite PikachuLets_go
+	add_overworldsprite PikachuGiga
 
 RaichuOverworldSpritePointers::
 	add_overworldsprite Raichu
+	add_overworldsprite RaichuAlola
 
 SandshrewOverworldSpritePointers::
 	add_overworldsprite Sandshrew
+	add_overworldsprite SandshrewAlola
 
 SandslashOverworldSpritePointers::
 	add_overworldsprite Sandslash
+	add_overworldsprite SandslashAlola
 
 Nidoran_fOverworldSpritePointers::
 	add_overworldsprite Nidoran_f
@@ -111,9 +139,15 @@ ClefableOverworldSpritePointers::
 
 VulpixOverworldSpritePointers::
 	add_overworldsprite Vulpix
+	add_overworldsprite VulpixAlola
+	add_overworldsprite VulpixLoki
+	add_overworldsprite VulpixLoki_winter
 
 NinetalesOverworldSpritePointers::
 	add_overworldsprite Ninetales
+	add_overworldsprite NinetalesAlola
+	add_overworldsprite NinetalesLoki
+	add_overworldsprite NinetalesLoki_winter
 
 JigglypuffOverworldSpritePointers::
 	add_overworldsprite Jigglypuff
@@ -150,15 +184,21 @@ VenomothOverworldSpritePointers::
 
 DiglettOverworldSpritePointers::
 	add_overworldsprite Diglett
+	add_overworldsprite DiglettAlola
 
 DugtrioOverworldSpritePointers::
 	add_overworldsprite Dugtrio
+	add_overworldsprite DugtrioAlola
 
 MeowthOverworldSpritePointers::
 	add_overworldsprite Meowth
+	add_overworldsprite MeowthAlola
+	add_overworldsprite MeowthGalar
+	add_overworldsprite MeowthKanto_giga
 
 PersianOverworldSpritePointers::
 	add_overworldsprite Persian
+	add_overworldsprite PersianAlola
 
 PsyduckOverworldSpritePointers::
 	add_overworldsprite Psyduck
@@ -195,6 +235,7 @@ KadabraOverworldSpritePointers::
 
 AlakazamOverworldSpritePointers::
 	add_overworldsprite Alakazam
+	add_overworldsprite AlakazamMega
 
 MachopOverworldSpritePointers::
 	add_overworldsprite Machop
@@ -204,6 +245,7 @@ MachokeOverworldSpritePointers::
 
 MachampOverworldSpritePointers::
 	add_overworldsprite Machamp
+	add_overworldsprite MachampGiga
 
 BellsproutOverworldSpritePointers::
 	add_overworldsprite Bellsprout
@@ -222,24 +264,31 @@ TentacruelOverworldSpritePointers::
 
 GeodudeOverworldSpritePointers::
 	add_overworldsprite Geodude
+	add_overworldsprite GeodudeAlola
 
 GravelerOverworldSpritePointers::
 	add_overworldsprite Graveler
+	add_overworldsprite GravelerAlola
 
 GolemOverworldSpritePointers::
 	add_overworldsprite Golem
+	add_overworldsprite GolemAlola
 
 PonytaOverworldSpritePointers::
 	add_overworldsprite Ponyta
+	add_overworldsprite PonytaGalar
 
 RapidashOverworldSpritePointers::
 	add_overworldsprite Rapidash
+	add_overworldsprite RapidashGalar
 
 SlowpokeOverworldSpritePointers::
 	add_overworldsprite Slowpoke
+	add_overworldsprite SlowpokeGalar
 
 SlowbroOverworldSpritePointers::
 	add_overworldsprite Slowbro
+	add_overworldsprite SlowbroMega
 
 MagnemiteOverworldSpritePointers::
 	add_overworldsprite Magnemite
@@ -249,6 +298,7 @@ MagnetonOverworldSpritePointers::
 
 FarfetchdOverworldSpritePointers::
 	add_overworldsprite Farfetchd
+	add_overworldsprite FarfetchdGalar
 
 DoduoOverworldSpritePointers::
 	add_overworldsprite Doduo
@@ -264,9 +314,11 @@ DewgongOverworldSpritePointers::
 
 GrimerOverworldSpritePointers::
 	add_overworldsprite Grimer
+	add_overworldsprite GrimerAlola
 
 MukOverworldSpritePointers::
 	add_overworldsprite Muk
+	add_overworldsprite MukAlola
 
 ShellderOverworldSpritePointers::
 	add_overworldsprite Shellder
@@ -282,6 +334,8 @@ HaunterOverworldSpritePointers::
 
 GengarOverworldSpritePointers::
 	add_overworldsprite Gengar
+	add_overworldsprite GengarMega
+	add_overworldsprite GengarGiga
 
 OnixOverworldSpritePointers::
 	add_overworldsprite Onix
@@ -297,6 +351,7 @@ KrabbyOverworldSpritePointers::
 
 KinglerOverworldSpritePointers::
 	add_overworldsprite Kingler
+	add_overworldsprite KinglerGiga
 
 VoltorbOverworldSpritePointers::
 	add_overworldsprite Voltorb
@@ -309,12 +364,14 @@ ExeggcuteOverworldSpritePointers::
 
 ExeggutorOverworldSpritePointers::
 	add_overworldsprite Exeggutor
+	add_overworldsprite ExeggutorAlola
 
 CuboneOverworldSpritePointers::
 	add_overworldsprite Cubone
 
 MarowakOverworldSpritePointers::
 	add_overworldsprite Marowak
+	add_overworldsprite MarowakAlola
 
 HitmonleeOverworldSpritePointers::
 	add_overworldsprite Hitmonlee
@@ -330,6 +387,7 @@ KoffingOverworldSpritePointers::
 
 WeezingOverworldSpritePointers::
 	add_overworldsprite Weezing
+	add_overworldsprite WeezingGalar
 
 RhyhornOverworldSpritePointers::
 	add_overworldsprite Rhyhorn
@@ -345,6 +403,7 @@ TangelaOverworldSpritePointers::
 
 KangaskhanOverworldSpritePointers::
 	add_overworldsprite Kangaskhan
+	add_overworldsprite KangaskhanMega
 
 HorseaOverworldSpritePointers::
 	add_overworldsprite Horsea
@@ -366,6 +425,7 @@ StarmieOverworldSpritePointers::
 
 MrmimeOverworldSpritePointers::
 	add_overworldsprite Mrmime
+	add_overworldsprite MrmimeGalar
 
 ScytherOverworldSpritePointers::
 	add_overworldsprite Scyther
@@ -381,6 +441,7 @@ MagmarOverworldSpritePointers::
 
 PinsirOverworldSpritePointers::
 	add_overworldsprite Pinsir
+	add_overworldsprite PinsirMega
 
 TaurosOverworldSpritePointers::
 	add_overworldsprite Tauros
@@ -390,15 +451,19 @@ MagikarpOverworldSpritePointers::
 
 GyaradosOverworldSpritePointers::
 	add_overworldsprite Gyarados
+	add_overworldsprite GyaradosMega
 
 LaprasOverworldSpritePointers::
 	add_overworldsprite Lapras
+	add_overworldsprite LaprasGiga
 
 DittoOverworldSpritePointers::
 	add_overworldsprite Ditto
 
 EeveeOverworldSpritePointers::
 	add_overworldsprite Eevee
+	add_overworldsprite EeveeLets_go
+	add_overworldsprite EeveeGiga
 
 VaporeonOverworldSpritePointers::
 	add_overworldsprite Vaporeon
@@ -408,6 +473,7 @@ JolteonOverworldSpritePointers::
 
 FlareonOverworldSpritePointers::
 	add_overworldsprite Flareon
+	add_overworldsprite FlareonDonut
 
 PorygonOverworldSpritePointers::
 	add_overworldsprite Porygon
@@ -426,18 +492,23 @@ KabutopsOverworldSpritePointers::
 
 AerodactylOverworldSpritePointers::
 	add_overworldsprite Aerodactyl
+	add_overworldsprite AerodactylMega
 
 SnorlaxOverworldSpritePointers::
 	add_overworldsprite Snorlax
+	add_overworldsprite SnorlaxGiga
 
 ArticunoOverworldSpritePointers::
 	add_overworldsprite Articuno
+	add_overworldsprite ArticunoGalar
 
 ZapdosOverworldSpritePointers::
 	add_overworldsprite Zapdos
+	add_overworldsprite ZapdosGalar
 
 MoltresOverworldSpritePointers::
 	add_overworldsprite Moltres
+	add_overworldsprite MoltresGalar
 
 DratiniOverworldSpritePointers::
 	add_overworldsprite Dratini
@@ -450,6 +521,8 @@ DragoniteOverworldSpritePointers::
 
 MewtwoOverworldSpritePointers::
 	add_overworldsprite Mewtwo
+	add_overworldsprite MewtwoMega_x
+	add_overworldsprite MewtwoMega_y
 
 MewOverworldSpritePointers::
 	add_overworldsprite Mew

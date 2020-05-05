@@ -6,7 +6,7 @@ AlolaPokedexEntryPointerTable::
 	add_pokedexentrytable Torracat
 	add_pokedexentrytable Incineroar
 	add_pokedexentrytable Popplio
-	add_pokedexentrytable Brione
+	add_pokedexentrytable Brionne
 	add_pokedexentrytable Primarina
 	add_pokedexentrytable Pikipeck
 	add_pokedexentrytable Trumbeak

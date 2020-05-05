@@ -82,6 +82,7 @@ TranquillIconPointers::
 
 UnfezantIconPointers::
 	add_icon Unfezant
+	add_icon UnfezantF
 
 BlitzleIconPointers::
 	add_icon Blitzle
@@ -112,6 +113,7 @@ ExcadrillIconPointers::
 
 AudinoIconPointers::
 	add_icon Audino
+	add_icon AudinoMega
 
 TimburrIconPointers::
 	add_icon Timburr
@@ -181,9 +183,13 @@ KrookodileIconPointers::
 
 DarumakaIconPointers::
 	add_icon Darumaka
+	add_icon DarumakaGalar
 
 DarmanitanIconPointers::
 	add_icon Darmanitan
+	add_icon DarmanitanZen
+	add_icon DarmanitanGalar
+	add_icon DarmanitanGalar_zen
 
 MaractusIconPointers::
 	add_icon Maractus
@@ -205,6 +211,7 @@ SigilyphIconPointers::
 
 YamaskIconPointers::
 	add_icon Yamask
+	add_icon YamaskGalar
 
 CofagrigusIconPointers::
 	add_icon Cofagrigus
@@ -226,6 +233,7 @@ TrubbishIconPointers::
 
 GarbodorIconPointers::
 	add_icon Garbodor
+	add_icon GarbodorGiga
 
 ZoruaIconPointers::
 	add_icon Zorua
@@ -274,9 +282,15 @@ VanilluxeIconPointers::
 
 DeerlingIconPointers::
 	add_icon Deerling
+	add_icon DeerlingSummer
+	add_icon DeerlingAutumn
+	add_icon DeerlingWinter
 
 SawsbuckIconPointers::
 	add_icon Sawsbuck
+	add_icon SawsbuckSummer
+	add_icon SawsbuckAutumn
+	add_icon SawsbuckWinter
 
 EmolgaIconPointers::
 	add_icon Emolga
@@ -373,6 +387,7 @@ AccelgorIconPointers::
 
 StunfiskIconPointers::
 	add_icon Stunfisk
+	add_icon StunfiskGalar
 
 MienfooIconPointers::
 	add_icon Mienfoo
@@ -442,9 +457,11 @@ VirizionIconPointers::
 
 TornadusIconPointers::
 	add_icon Tornadus
+	add_icon TornadusTherian
 
 ThundurusIconPointers::
 	add_icon Thundurus
+	add_icon ThundurusTherian
 
 ReshiramIconPointers::
 	add_icon Reshiram
@@ -454,15 +471,20 @@ ZekromIconPointers::
 
 LandorusIconPointers::
 	add_icon Landorus
+	add_icon LandorusTherian
 
 KyuremIconPointers::
 	add_icon Kyurem
+	add_icon KyuremBlack
+	add_icon KyuremWhite
 
 KeldeoIconPointers::
 	add_icon Keldeo
+	add_icon KeldeoResolute
 
 MeloettaIconPointers::
 	add_icon Meloetta
+	add_icon MeloettaPirouette
 
 GenesectIconPointers::
 	add_icon Genesect

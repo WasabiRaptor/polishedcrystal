@@ -82,6 +82,7 @@ TranquillBitmasksPointers::
 
 UnfezantBitmasksPointers::
 	add_bitmasks Unfezant
+	add_bitmasks UnfezantF
 
 BlitzleBitmasksPointers::
 	add_bitmasks Blitzle
@@ -112,6 +113,7 @@ ExcadrillBitmasksPointers::
 
 AudinoBitmasksPointers::
 	add_bitmasks Audino
+	add_bitmasks AudinoMega
 
 TimburrBitmasksPointers::
 	add_bitmasks Timburr
@@ -181,9 +183,13 @@ KrookodileBitmasksPointers::
 
 DarumakaBitmasksPointers::
 	add_bitmasks Darumaka
+	add_bitmasks DarumakaGalar
 
 DarmanitanBitmasksPointers::
 	add_bitmasks Darmanitan
+	add_bitmasks DarmanitanZen
+	add_bitmasks DarmanitanGalar
+	add_bitmasks DarmanitanGalar_zen
 
 MaractusBitmasksPointers::
 	add_bitmasks Maractus
@@ -205,6 +211,7 @@ SigilyphBitmasksPointers::
 
 YamaskBitmasksPointers::
 	add_bitmasks Yamask
+	add_bitmasks YamaskGalar
 
 CofagrigusBitmasksPointers::
 	add_bitmasks Cofagrigus
@@ -226,6 +233,7 @@ TrubbishBitmasksPointers::
 
 GarbodorBitmasksPointers::
 	add_bitmasks Garbodor
+	add_bitmasks GarbodorGiga
 
 ZoruaBitmasksPointers::
 	add_bitmasks Zorua
@@ -274,9 +282,15 @@ VanilluxeBitmasksPointers::
 
 DeerlingBitmasksPointers::
 	add_bitmasks Deerling
+	add_bitmasks DeerlingSummer
+	add_bitmasks DeerlingAutumn
+	add_bitmasks DeerlingWinter
 
 SawsbuckBitmasksPointers::
 	add_bitmasks Sawsbuck
+	add_bitmasks SawsbuckSummer
+	add_bitmasks SawsbuckAutumn
+	add_bitmasks SawsbuckWinter
 
 EmolgaBitmasksPointers::
 	add_bitmasks Emolga
@@ -373,6 +387,7 @@ AccelgorBitmasksPointers::
 
 StunfiskBitmasksPointers::
 	add_bitmasks Stunfisk
+	add_bitmasks StunfiskGalar
 
 MienfooBitmasksPointers::
 	add_bitmasks Mienfoo
@@ -442,9 +457,11 @@ VirizionBitmasksPointers::
 
 TornadusBitmasksPointers::
 	add_bitmasks Tornadus
+	add_bitmasks TornadusTherian
 
 ThundurusBitmasksPointers::
 	add_bitmasks Thundurus
+	add_bitmasks ThundurusTherian
 
 ReshiramBitmasksPointers::
 	add_bitmasks Reshiram
@@ -454,15 +471,20 @@ ZekromBitmasksPointers::
 
 LandorusBitmasksPointers::
 	add_bitmasks Landorus
+	add_bitmasks LandorusTherian
 
 KyuremBitmasksPointers::
 	add_bitmasks Kyurem
+	add_bitmasks KyuremBlack
+	add_bitmasks KyuremWhite
 
 KeldeoBitmasksPointers::
 	add_bitmasks Keldeo
+	add_bitmasks KeldeoResolute
 
 MeloettaBitmasksPointers::
 	add_bitmasks Meloetta
+	add_bitmasks MeloettaPirouette
 
 GenesectBitmasksPointers::
 	add_bitmasks Genesect

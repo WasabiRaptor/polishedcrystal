@@ -76,9 +76,13 @@ BastiodonOverworldSpritePointers::
 
 BurmyOverworldSpritePointers::
 	add_overworldsprite Burmy
+	add_overworldsprite BurmySand
+	add_overworldsprite BurmyTrash
 
 WormadamOverworldSpritePointers::
 	add_overworldsprite Wormadam
+	add_overworldsprite WormadamSand
+	add_overworldsprite WormadamTrash
 
 MothimOverworldSpritePointers::
 	add_overworldsprite Mothim
@@ -103,12 +107,15 @@ CherubiOverworldSpritePointers::
 
 CherrimOverworldSpritePointers::
 	add_overworldsprite Cherrim
+	add_overworldsprite CherrimOvercast
 
 ShellosOverworldSpritePointers::
 	add_overworldsprite Shellos
+	add_overworldsprite ShellosWest
 
 GastrodonOverworldSpritePointers::
 	add_overworldsprite Gastrodon
+	add_overworldsprite GastrodonWest
 
 AmbipomOverworldSpritePointers::
 	add_overworldsprite Ambipom
@@ -124,6 +131,7 @@ BunearyOverworldSpritePointers::
 
 LopunnyOverworldSpritePointers::
 	add_overworldsprite Lopunny
+	add_overworldsprite LopunnyMega
 
 MismagiusOverworldSpritePointers::
 	add_overworldsprite Mismagius
@@ -175,6 +183,7 @@ GabiteOverworldSpritePointers::
 
 GarchompOverworldSpritePointers::
 	add_overworldsprite Garchomp
+	add_overworldsprite GarchompMega
 
 MunchlaxOverworldSpritePointers::
 	add_overworldsprite Munchlax
@@ -184,6 +193,7 @@ RioluOverworldSpritePointers::
 
 LucarioOverworldSpritePointers::
 	add_overworldsprite Lucario
+	add_overworldsprite LucarioMega
 
 HippopotasOverworldSpritePointers::
 	add_overworldsprite Hippopotas
@@ -220,6 +230,7 @@ SnoverOverworldSpritePointers::
 
 AbomasnowOverworldSpritePointers::
 	add_overworldsprite Abomasnow
+	add_overworldsprite AbomasnowMega
 
 WeavileOverworldSpritePointers::
 	add_overworldsprite Weavile
@@ -265,6 +276,7 @@ Porygon_zOverworldSpritePointers::
 
 GalladeOverworldSpritePointers::
 	add_overworldsprite Gallade
+	add_overworldsprite GalladeMega
 
 ProbopassOverworldSpritePointers::
 	add_overworldsprite Probopass
@@ -277,6 +289,12 @@ FroslassOverworldSpritePointers::
 
 RotomOverworldSpritePointers::
 	add_overworldsprite Rotom
+	add_overworldsprite RotomHeat
+	add_overworldsprite RotomWash
+	add_overworldsprite RotomFrost
+	add_overworldsprite RotomFan
+	add_overworldsprite RotomMow
+	add_overworldsprite RotomDex
 
 UxieOverworldSpritePointers::
 	add_overworldsprite Uxie
@@ -301,6 +319,7 @@ RegigigasOverworldSpritePointers::
 
 GiratinaOverworldSpritePointers::
 	add_overworldsprite Giratina
+	add_overworldsprite GiratinaOrigin
 
 CresseliaOverworldSpritePointers::
 	add_overworldsprite Cresselia

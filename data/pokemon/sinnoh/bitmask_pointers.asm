@@ -76,9 +76,13 @@ BastiodonBitmasksPointers::
 
 BurmyBitmasksPointers::
 	add_bitmasks Burmy
+	add_bitmasks BurmySand
+	add_bitmasks BurmyTrash
 
 WormadamBitmasksPointers::
 	add_bitmasks Wormadam
+	add_bitmasks WormadamSand
+	add_bitmasks WormadamTrash
 
 MothimBitmasksPointers::
 	add_bitmasks Mothim
@@ -103,12 +107,15 @@ CherubiBitmasksPointers::
 
 CherrimBitmasksPointers::
 	add_bitmasks Cherrim
+	add_bitmasks CherrimOvercast
 
 ShellosBitmasksPointers::
 	add_bitmasks Shellos
+	add_bitmasks ShellosWest
 
 GastrodonBitmasksPointers::
 	add_bitmasks Gastrodon
+	add_bitmasks GastrodonWest
 
 AmbipomBitmasksPointers::
 	add_bitmasks Ambipom
@@ -124,6 +131,7 @@ BunearyBitmasksPointers::
 
 LopunnyBitmasksPointers::
 	add_bitmasks Lopunny
+	add_bitmasks LopunnyMega
 
 MismagiusBitmasksPointers::
 	add_bitmasks Mismagius
@@ -175,6 +183,7 @@ GabiteBitmasksPointers::
 
 GarchompBitmasksPointers::
 	add_bitmasks Garchomp
+	add_bitmasks GarchompMega
 
 MunchlaxBitmasksPointers::
 	add_bitmasks Munchlax
@@ -184,6 +193,7 @@ RioluBitmasksPointers::
 
 LucarioBitmasksPointers::
 	add_bitmasks Lucario
+	add_bitmasks LucarioMega
 
 HippopotasBitmasksPointers::
 	add_bitmasks Hippopotas
@@ -220,6 +230,7 @@ SnoverBitmasksPointers::
 
 AbomasnowBitmasksPointers::
 	add_bitmasks Abomasnow
+	add_bitmasks AbomasnowMega
 
 WeavileBitmasksPointers::
 	add_bitmasks Weavile
@@ -265,6 +276,7 @@ Porygon_zBitmasksPointers::
 
 GalladeBitmasksPointers::
 	add_bitmasks Gallade
+	add_bitmasks GalladeMega
 
 ProbopassBitmasksPointers::
 	add_bitmasks Probopass
@@ -277,6 +289,12 @@ FroslassBitmasksPointers::
 
 RotomBitmasksPointers::
 	add_bitmasks Rotom
+	add_bitmasks RotomHeat
+	add_bitmasks RotomWash
+	add_bitmasks RotomFrost
+	add_bitmasks RotomFan
+	add_bitmasks RotomMow
+	add_bitmasks RotomDex
 
 UxieBitmasksPointers::
 	add_bitmasks Uxie
@@ -301,6 +319,7 @@ RegigigasBitmasksPointers::
 
 GiratinaBitmasksPointers::
 	add_bitmasks Giratina
+	add_bitmasks GiratinaOrigin
 
 CresseliaBitmasksPointers::
 	add_bitmasks Cresselia

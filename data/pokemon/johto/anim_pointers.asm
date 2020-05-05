@@ -61,6 +61,7 @@ LanturnAnimationPointers::
 
 PichuAnimationPointers::
 	add_anim Pichu
+	add_anim PichuSpiky_eared
 
 CleffaAnimationPointers::
 	add_anim Cleffa
@@ -88,6 +89,7 @@ FlaaffyAnimationPointers::
 
 AmpharosAnimationPointers::
 	add_anim Ampharos
+	add_anim AmpharosMega
 
 BellossomAnimationPointers::
 	add_anim Bellossom
@@ -148,6 +150,34 @@ MisdreavusAnimationPointers::
 
 UnownAnimationPointers::
 	add_anim Unown
+	add_anim UnownA
+	add_anim UnownB
+	add_anim UnownC
+	add_anim UnownD
+	add_anim UnownE
+	add_anim UnownF
+	add_anim UnownG
+	add_anim UnownH
+	add_anim UnownI
+	add_anim UnownJ
+	add_anim UnownK
+	add_anim UnownL
+	add_anim UnownM
+	add_anim UnownN
+	add_anim UnownO
+	add_anim UnownP
+	add_anim UnownQ
+	add_anim UnownR
+	add_anim UnownS
+	add_anim UnownT
+	add_anim UnownU
+	add_anim UnownV
+	add_anim UnownW
+	add_anim UnownX
+	add_anim UnownY
+	add_anim UnownZ
+	add_anim UnownExclamation_mark
+	add_anim UnownQuestion_mark
 
 WobbuffetAnimationPointers::
 	add_anim Wobbuffet
@@ -169,6 +199,7 @@ GligarAnimationPointers::
 
 SteelixAnimationPointers::
 	add_anim Steelix
+	add_anim SteelixMega
 
 SnubbullAnimationPointers::
 	add_anim Snubbull
@@ -181,12 +212,14 @@ QwilfishAnimationPointers::
 
 ScizorAnimationPointers::
 	add_anim Scizor
+	add_anim ScizorMega
 
 ShuckleAnimationPointers::
 	add_anim Shuckle
 
 HeracrossAnimationPointers::
 	add_anim Heracross
+	add_anim HeracrossMega
 
 SneaselAnimationPointers::
 	add_anim Sneasel
@@ -211,6 +244,7 @@ PiloswineAnimationPointers::
 
 CorsolaAnimationPointers::
 	add_anim Corsola
+	add_anim CorsolaGalar
 
 RemoraidAnimationPointers::
 	add_anim Remoraid
@@ -232,6 +266,7 @@ HoundourAnimationPointers::
 
 HoundoomAnimationPointers::
 	add_anim Houndoom
+	add_anim HoundoomMega
 
 KingdraAnimationPointers::
 	add_anim Kingdra
@@ -289,6 +324,7 @@ PupitarAnimationPointers::
 
 TyranitarAnimationPointers::
 	add_anim Tyranitar
+	add_anim TyranitarMega
 
 LugiaAnimationPointers::
 	add_anim Lugia

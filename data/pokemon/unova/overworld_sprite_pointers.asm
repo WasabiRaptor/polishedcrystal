@@ -82,6 +82,7 @@ TranquillOverworldSpritePointers::
 
 UnfezantOverworldSpritePointers::
 	add_overworldsprite Unfezant
+	add_overworldsprite UnfezantF
 
 BlitzleOverworldSpritePointers::
 	add_overworldsprite Blitzle
@@ -112,6 +113,7 @@ ExcadrillOverworldSpritePointers::
 
 AudinoOverworldSpritePointers::
 	add_overworldsprite Audino
+	add_overworldsprite AudinoMega
 
 TimburrOverworldSpritePointers::
 	add_overworldsprite Timburr
@@ -181,9 +183,13 @@ KrookodileOverworldSpritePointers::
 
 DarumakaOverworldSpritePointers::
 	add_overworldsprite Darumaka
+	add_overworldsprite DarumakaGalar
 
 DarmanitanOverworldSpritePointers::
 	add_overworldsprite Darmanitan
+	add_overworldsprite DarmanitanZen
+	add_overworldsprite DarmanitanGalar
+	add_overworldsprite DarmanitanGalar_zen
 
 MaractusOverworldSpritePointers::
 	add_overworldsprite Maractus
@@ -205,6 +211,7 @@ SigilyphOverworldSpritePointers::
 
 YamaskOverworldSpritePointers::
 	add_overworldsprite Yamask
+	add_overworldsprite YamaskGalar
 
 CofagrigusOverworldSpritePointers::
 	add_overworldsprite Cofagrigus
@@ -226,6 +233,7 @@ TrubbishOverworldSpritePointers::
 
 GarbodorOverworldSpritePointers::
 	add_overworldsprite Garbodor
+	add_overworldsprite GarbodorGiga
 
 ZoruaOverworldSpritePointers::
 	add_overworldsprite Zorua
@@ -274,9 +282,15 @@ VanilluxeOverworldSpritePointers::
 
 DeerlingOverworldSpritePointers::
 	add_overworldsprite Deerling
+	add_overworldsprite DeerlingSummer
+	add_overworldsprite DeerlingAutumn
+	add_overworldsprite DeerlingWinter
 
 SawsbuckOverworldSpritePointers::
 	add_overworldsprite Sawsbuck
+	add_overworldsprite SawsbuckSummer
+	add_overworldsprite SawsbuckAutumn
+	add_overworldsprite SawsbuckWinter
 
 EmolgaOverworldSpritePointers::
 	add_overworldsprite Emolga
@@ -373,6 +387,7 @@ AccelgorOverworldSpritePointers::
 
 StunfiskOverworldSpritePointers::
 	add_overworldsprite Stunfisk
+	add_overworldsprite StunfiskGalar
 
 MienfooOverworldSpritePointers::
 	add_overworldsprite Mienfoo
@@ -442,9 +457,11 @@ VirizionOverworldSpritePointers::
 
 TornadusOverworldSpritePointers::
 	add_overworldsprite Tornadus
+	add_overworldsprite TornadusTherian
 
 ThundurusOverworldSpritePointers::
 	add_overworldsprite Thundurus
+	add_overworldsprite ThundurusTherian
 
 ReshiramOverworldSpritePointers::
 	add_overworldsprite Reshiram
@@ -454,15 +471,20 @@ ZekromOverworldSpritePointers::
 
 LandorusOverworldSpritePointers::
 	add_overworldsprite Landorus
+	add_overworldsprite LandorusTherian
 
 KyuremOverworldSpritePointers::
 	add_overworldsprite Kyurem
+	add_overworldsprite KyuremBlack
+	add_overworldsprite KyuremWhite
 
 KeldeoOverworldSpritePointers::
 	add_overworldsprite Keldeo
+	add_overworldsprite KeldeoResolute
 
 MeloettaOverworldSpritePointers::
 	add_overworldsprite Meloetta
+	add_overworldsprite MeloettaPirouette
 
 GenesectOverworldSpritePointers::
 	add_overworldsprite Genesect

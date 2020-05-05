@@ -6,7 +6,7 @@ AlolaBitmasksPointerTable::
 	add_bitmaskstable Torracat
 	add_bitmaskstable Incineroar
 	add_bitmaskstable Popplio
-	add_bitmaskstable Brione
+	add_bitmaskstable Brionne
 	add_bitmaskstable Primarina
 	add_bitmaskstable Pikipeck
 	add_bitmaskstable Trumbeak

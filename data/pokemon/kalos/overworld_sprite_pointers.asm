@@ -25,6 +25,8 @@ FrogadierOverworldSpritePointers::
 
 GreninjaOverworldSpritePointers::
 	add_overworldsprite Greninja
+	add_overworldsprite GreninjaBattle_bond
+	add_overworldsprite GreninjaAsh
 
 BunnelbyOverworldSpritePointers::
 	add_overworldsprite Bunnelby
@@ -49,18 +51,39 @@ SpewpaOverworldSpritePointers::
 
 VivillonOverworldSpritePointers::
 	add_overworldsprite Vivillon
+	add_overworldsprite VivillonArchipelego
+	add_overworldsprite VivillonContinental
+	add_overworldsprite VivillonElegant
+	add_overworldsprite VivillonGarden
+	add_overworldsprite VivillonHigh_plains
+	add_overworldsprite VivillonIcy_snow
+	add_overworldsprite VivillonJungle
+	add_overworldsprite VivillonMarine
+	add_overworldsprite VivillonModern
+	add_overworldsprite VivillonMonsoon
+	add_overworldsprite VivillonOcean
+	add_overworldsprite VivillonPolar
+	add_overworldsprite VivillonRiver
+	add_overworldsprite VivillonSandstorm
+	add_overworldsprite VivillonSavannah
+	add_overworldsprite VivillonSun
+	add_overworldsprite VivillonTundra
+	add_overworldsprite VivillonPokeball
+	add_overworldsprite VivillonFancy
 
 LitleoOverworldSpritePointers::
 	add_overworldsprite Litleo
 
 PyroarOverworldSpritePointers::
 	add_overworldsprite Pyroar
+	add_overworldsprite PyroarF
 
 FlabebeOverworldSpritePointers::
 	add_overworldsprite Flabebe
 
 FloetteOverworldSpritePointers::
 	add_overworldsprite Floette
+	add_overworldsprite FloetteEternal_flower
 
 FlorgesOverworldSpritePointers::
 	add_overworldsprite Florges
@@ -79,12 +102,22 @@ PangoroOverworldSpritePointers::
 
 FurfrouOverworldSpritePointers::
 	add_overworldsprite Furfrou
+	add_overworldsprite FurfrouHeart
+	add_overworldsprite FurfrouStar
+	add_overworldsprite FurfrouDiamond
+	add_overworldsprite FurfrouDebutante
+	add_overworldsprite FurfrouMatron
+	add_overworldsprite FurfrouDandy
+	add_overworldsprite FurfrouLa_reine
+	add_overworldsprite FurfrouKabuki
+	add_overworldsprite FurfrouPharaoh
 
 EspurrOverworldSpritePointers::
 	add_overworldsprite Espurr
 
 MeowsticOverworldSpritePointers::
 	add_overworldsprite Meowstic
+	add_overworldsprite MeowsticF
 
 HonedgeOverworldSpritePointers::
 	add_overworldsprite Honedge
@@ -94,6 +127,7 @@ DoubladeOverworldSpritePointers::
 
 AegislashOverworldSpritePointers::
 	add_overworldsprite Aegislash
+	add_overworldsprite AegislashBlade
 
 SpritzeeOverworldSpritePointers::
 	add_overworldsprite Spritzee
@@ -181,9 +215,15 @@ TrevenantOverworldSpritePointers::
 
 PumpkabooOverworldSpritePointers::
 	add_overworldsprite Pumpkaboo
+	add_overworldsprite PumpkabooAverage
+	add_overworldsprite PumpkabooLarge
+	add_overworldsprite PumpkabooSuper
 
 GourgeistOverworldSpritePointers::
 	add_overworldsprite Gourgeist
+	add_overworldsprite GourgeistAverage
+	add_overworldsprite GourgeistLarge
+	add_overworldsprite GourgeistSuper
 
 BergmiteOverworldSpritePointers::
 	add_overworldsprite Bergmite
@@ -205,12 +245,18 @@ YveltalOverworldSpritePointers::
 
 ZygardeOverworldSpritePointers::
 	add_overworldsprite Zygarde
+	add_overworldsprite ZygardeFifty_percent
+	add_overworldsprite ZygardeComplete
+	add_overworldsprite ZygardeComplete
+	add_overworldsprite ZygardeComplete
 
 DiancieOverworldSpritePointers::
 	add_overworldsprite Diancie
+	add_overworldsprite DiancieMega
 
 HoopaOverworldSpritePointers::
 	add_overworldsprite Hoopa
+	add_overworldsprite HoopaUnbound
 
 VolcanionOverworldSpritePointers::
 	add_overworldsprite Volcanion

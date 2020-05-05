@@ -6,26 +6,31 @@ TreeckoIcon::	INCBIN "gfx/icons/treecko.2bpp"
 GrovyleIcon::	INCBIN "gfx/icons/grovyle.2bpp"
 
 SceptileIcon::	INCBIN "gfx/icons/sceptile.2bpp"
+SceptileMegaIcon::	INCBIN "gfx/icons/sceptile_mega.2bpp"
 
 TorchicIcon::	INCBIN "gfx/icons/torchic.2bpp"
 
 CombuskenIcon::	INCBIN "gfx/icons/combusken.2bpp"
 
 BlazikenIcon::	INCBIN "gfx/icons/blaziken.2bpp"
+BlazikenMegaIcon::	INCBIN "gfx/icons/blaziken_mega.2bpp"
 
 MudkipIcon::	INCBIN "gfx/icons/mudkip.2bpp"
 
 MarshtompIcon::	INCBIN "gfx/icons/marshtomp.2bpp"
 
 SwampertIcon::	INCBIN "gfx/icons/swampert.2bpp"
+SwampertMegaIcon::	INCBIN "gfx/icons/swampert_mega.2bpp"
 
 PoochyenaIcon::	INCBIN "gfx/icons/poochyena.2bpp"
 
 MightyenaIcon::	INCBIN "gfx/icons/mightyena.2bpp"
 
 ZigzagoonIcon::	INCBIN "gfx/icons/zigzagoon.2bpp"
+ZigzagoonGalarIcon::	INCBIN "gfx/icons/zigzagoon_galar.2bpp"
 
 LinooneIcon::	INCBIN "gfx/icons/linoone.2bpp"
+LinooneGalarIcon::	INCBIN "gfx/icons/linoone_galar.2bpp"
 
 WurmpleIcon::	INCBIN "gfx/icons/wurmple.2bpp"
 
@@ -68,6 +73,7 @@ KirliaIcon::	INCBIN "gfx/icons/kirlia.2bpp"
 SECTION "Hoenn Icons 3", ROMX
 
 GardevoirIcon::	INCBIN "gfx/icons/gardevoir.2bpp"
+GardevoirMegaIcon::	INCBIN "gfx/icons/gardevoir_mega.2bpp"
 
 SurskitIcon::	INCBIN "gfx/icons/surskit.2bpp"
 
@@ -111,22 +117,27 @@ SkittyIcon::	INCBIN "gfx/icons/skitty.2bpp"
 DelcattyIcon::	INCBIN "gfx/icons/delcatty.2bpp"
 
 SableyeIcon::	INCBIN "gfx/icons/sableye.2bpp"
+SableyeMegaIcon::	INCBIN "gfx/icons/sableye_mega.2bpp"
 
 MawileIcon::	INCBIN "gfx/icons/mawile.2bpp"
+MawileMegaIcon::	INCBIN "gfx/icons/mawile_mega.2bpp"
 
 AronIcon::	INCBIN "gfx/icons/aron.2bpp"
 
 LaironIcon::	INCBIN "gfx/icons/lairon.2bpp"
 
 AggronIcon::	INCBIN "gfx/icons/aggron.2bpp"
+AggronMegaIcon::	INCBIN "gfx/icons/aggron_mega.2bpp"
 
 MedititeIcon::	INCBIN "gfx/icons/meditite.2bpp"
 
 MedichamIcon::	INCBIN "gfx/icons/medicham.2bpp"
+MedichamMegaIcon::	INCBIN "gfx/icons/medicham_mega.2bpp"
 
 ElectrikeIcon::	INCBIN "gfx/icons/electrike.2bpp"
 
 ManectricIcon::	INCBIN "gfx/icons/manectric.2bpp"
+ManectricMegaIcon::	INCBIN "gfx/icons/manectric_mega.2bpp"
 
 PlusleIcon::	INCBIN "gfx/icons/plusle.2bpp"
 
@@ -148,6 +159,7 @@ SwalotIcon::	INCBIN "gfx/icons/swalot.2bpp"
 CarvanhaIcon::	INCBIN "gfx/icons/carvanha.2bpp"
 
 SharpedoIcon::	INCBIN "gfx/icons/sharpedo.2bpp"
+SharpedoMegaIcon::	INCBIN "gfx/icons/sharpedo_mega.2bpp"
 
 WailmerIcon::	INCBIN "gfx/icons/wailmer.2bpp"
 
@@ -156,6 +168,7 @@ WailordIcon::	INCBIN "gfx/icons/wailord.2bpp"
 NumelIcon::	INCBIN "gfx/icons/numel.2bpp"
 
 CameruptIcon::	INCBIN "gfx/icons/camerupt.2bpp"
+CameruptMegaIcon::	INCBIN "gfx/icons/camerupt_mega.2bpp"
 
 TorkoalIcon::	INCBIN "gfx/icons/torkoal.2bpp"
 
@@ -181,6 +194,7 @@ CacturneIcon::	INCBIN "gfx/icons/cacturne.2bpp"
 SwabluIcon::	INCBIN "gfx/icons/swablu.2bpp"
 
 AltariaIcon::	INCBIN "gfx/icons/altaria.2bpp"
+AltariaMegaIcon::	INCBIN "gfx/icons/altaria_mega.2bpp"
 
 ZangooseIcon::	INCBIN "gfx/icons/zangoose.2bpp"
 
@@ -218,12 +232,16 @@ FeebasIcon::	INCBIN "gfx/icons/feebas.2bpp"
 MiloticIcon::	INCBIN "gfx/icons/milotic.2bpp"
 
 CastformIcon::	INCBIN "gfx/icons/castform.2bpp"
+CastformSunIcon::	INCBIN "gfx/icons/castform_sun.2bpp"
+CastformRainIcon::	INCBIN "gfx/icons/castform_rain.2bpp"
+CastformSnowIcon::	INCBIN "gfx/icons/castform_snow.2bpp"
 
 KecleonIcon::	INCBIN "gfx/icons/kecleon.2bpp"
 
 ShuppetIcon::	INCBIN "gfx/icons/shuppet.2bpp"
 
 BanetteIcon::	INCBIN "gfx/icons/banette.2bpp"
+BanetteMegaIcon::	INCBIN "gfx/icons/banette_mega.2bpp"
 
 DuskullIcon::	INCBIN "gfx/icons/duskull.2bpp"
 
@@ -237,12 +255,14 @@ TropiusIcon::	INCBIN "gfx/icons/tropius.2bpp"
 ChimechoIcon::	INCBIN "gfx/icons/chimecho.2bpp"
 
 AbsolIcon::	INCBIN "gfx/icons/absol.2bpp"
+AbsolMegaIcon::	INCBIN "gfx/icons/absol_mega.2bpp"
 
 WynautIcon::	INCBIN "gfx/icons/wynaut.2bpp"
 
 SnoruntIcon::	INCBIN "gfx/icons/snorunt.2bpp"
 
 GlalieIcon::	INCBIN "gfx/icons/glalie.2bpp"
+GlalieMegaIcon::	INCBIN "gfx/icons/glalie_mega.2bpp"
 
 SphealIcon::	INCBIN "gfx/icons/spheal.2bpp"
 
@@ -268,12 +288,14 @@ SECTION "Hoenn Icons 9", ROMX
 ShelgonIcon::	INCBIN "gfx/icons/shelgon.2bpp"
 
 SalamenceIcon::	INCBIN "gfx/icons/salamence.2bpp"
+SalamenceMegaIcon::	INCBIN "gfx/icons/salamence_mega.2bpp"
 
 BeldumIcon::	INCBIN "gfx/icons/beldum.2bpp"
 
 MetangIcon::	INCBIN "gfx/icons/metang.2bpp"
 
 MetagrossIcon::	INCBIN "gfx/icons/metagross.2bpp"
+MetagrossMegaIcon::	INCBIN "gfx/icons/metagross_mega.2bpp"
 
 RegirockIcon::	INCBIN "gfx/icons/regirock.2bpp"
 
@@ -282,16 +304,24 @@ RegiceIcon::	INCBIN "gfx/icons/regice.2bpp"
 RegisteelIcon::	INCBIN "gfx/icons/registeel.2bpp"
 
 LatiasIcon::	INCBIN "gfx/icons/latias.2bpp"
+LatiasMegaIcon::	INCBIN "gfx/icons/latias_mega.2bpp"
 
 LatiosIcon::	INCBIN "gfx/icons/latios.2bpp"
+LatiosMegaIcon::	INCBIN "gfx/icons/latios_mega.2bpp"
 
 KyogreIcon::	INCBIN "gfx/icons/kyogre.2bpp"
+KyogrePrimalIcon::	INCBIN "gfx/icons/kyogre_primal.2bpp"
 
 GroudonIcon::	INCBIN "gfx/icons/groudon.2bpp"
+GroudonPrimalIcon::	INCBIN "gfx/icons/groudon_primal.2bpp"
 
 RayquazaIcon::	INCBIN "gfx/icons/rayquaza.2bpp"
+RayquazaMegaIcon::	INCBIN "gfx/icons/rayquaza_mega.2bpp"
 
 JirachiIcon::	INCBIN "gfx/icons/jirachi.2bpp"
 
 DeoxysIcon::	INCBIN "gfx/icons/deoxys.2bpp"
+DeoxysAttackIcon::	INCBIN "gfx/icons/deoxys_attack.2bpp"
+DeoxysDefenseIcon::	INCBIN "gfx/icons/deoxys_defense.2bpp"
+DeoxysSpeedIcon::	INCBIN "gfx/icons/deoxys_speed.2bpp"
 

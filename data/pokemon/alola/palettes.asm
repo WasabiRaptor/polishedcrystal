@@ -27,9 +27,9 @@ PopplioPalettes:
 PopplioNormalPalette:	INCBIN "gfx/pokemon/popplio/front.gbcpal", middle_colors
 PopplioShinyPalette:	INCLUDE "gfx/pokemon/popplio/shiny.pal"
 
-BrionePalettes:
-BrioneNormalPalette:	INCBIN "gfx/pokemon/brione/front.gbcpal", middle_colors
-BrioneShinyPalette:	INCLUDE "gfx/pokemon/brione/shiny.pal"
+BrionnePalettes:
+BrionneNormalPalette:	INCBIN "gfx/pokemon/brionne/front.gbcpal", middle_colors
+BrionneShinyPalette:	INCLUDE "gfx/pokemon/brionne/shiny.pal"
 
 PrimarinaPalettes:
 PrimarinaNormalPalette:	INCBIN "gfx/pokemon/primarina/front.gbcpal", middle_colors
@@ -78,6 +78,15 @@ CrabominableShinyPalette:	INCLUDE "gfx/pokemon/crabominable/shiny.pal"
 OricorioPalettes:
 OricorioNormalPalette:	INCBIN "gfx/pokemon/oricorio/front.gbcpal", middle_colors
 OricorioShinyPalette:	INCLUDE "gfx/pokemon/oricorio/shiny.pal"
+OricorioPom_pomPalettes:
+OricorioPom_pomNormalPalette:	INCBIN "gfx/pokemon/oricorio_pom_pom/front.gbcpal", middle_colors
+OricorioPom_pomShinyPalette:	INCLUDE "gfx/pokemon/oricorio_pom_pom/shiny.pal"
+OricorioPauPalettes:
+OricorioPauNormalPalette:	INCBIN "gfx/pokemon/oricorio_pau/front.gbcpal", middle_colors
+OricorioPauShinyPalette:	INCLUDE "gfx/pokemon/oricorio_pau/shiny.pal"
+OricorioSensuPalettes:
+OricorioSensuNormalPalette:	INCBIN "gfx/pokemon/oricorio_sensu/front.gbcpal", middle_colors
+OricorioSensuShinyPalette:	INCLUDE "gfx/pokemon/oricorio_sensu/shiny.pal"
 
 CutieflyPalettes:
 CutieflyNormalPalette:	INCBIN "gfx/pokemon/cutiefly/front.gbcpal", middle_colors
@@ -90,14 +99,29 @@ RibombeeShinyPalette:	INCLUDE "gfx/pokemon/ribombee/shiny.pal"
 RockruffPalettes:
 RockruffNormalPalette:	INCBIN "gfx/pokemon/rockruff/front.gbcpal", middle_colors
 RockruffShinyPalette:	INCLUDE "gfx/pokemon/rockruff/shiny.pal"
+RockruffOwn_tempoPalettes:
+RockruffOwn_tempoNormalPalette:	INCBIN "gfx/pokemon/rockruff_own_tempo/front.gbcpal", middle_colors
+RockruffOwn_tempoShinyPalette:	INCLUDE "gfx/pokemon/rockruff_own_tempo/shiny.pal"
 
 LycanrocPalettes:
 LycanrocNormalPalette:	INCBIN "gfx/pokemon/lycanroc/front.gbcpal", middle_colors
 LycanrocShinyPalette:	INCLUDE "gfx/pokemon/lycanroc/shiny.pal"
+LycanrocMiddayPalettes:
+LycanrocMiddayNormalPalette:	INCBIN "gfx/pokemon/lycanroc_midday/front.gbcpal", middle_colors
+LycanrocMiddayShinyPalette:	INCLUDE "gfx/pokemon/lycanroc_midday/shiny.pal"
+LycanrocDuskPalettes:
+LycanrocDuskNormalPalette:	INCBIN "gfx/pokemon/lycanroc_dusk/front.gbcpal", middle_colors
+LycanrocDuskShinyPalette:	INCLUDE "gfx/pokemon/lycanroc_dusk/shiny.pal"
+LycanrocMidnightPalettes:
+LycanrocMidnightNormalPalette:	INCBIN "gfx/pokemon/lycanroc_midnight/front.gbcpal", middle_colors
+LycanrocMidnightShinyPalette:	INCLUDE "gfx/pokemon/lycanroc_midnight/shiny.pal"
 
 WishiwashiPalettes:
 WishiwashiNormalPalette:	INCBIN "gfx/pokemon/wishiwashi/front.gbcpal", middle_colors
 WishiwashiShinyPalette:	INCLUDE "gfx/pokemon/wishiwashi/shiny.pal"
+WishiwashiSchoolPalettes:
+WishiwashiSchoolNormalPalette:	INCBIN "gfx/pokemon/wishiwashi_school/front.gbcpal", middle_colors
+WishiwashiSchoolShinyPalette:	INCLUDE "gfx/pokemon/wishiwashi_school/shiny.pal"
 
 MareaniePalettes:
 MareanieNormalPalette:	INCBIN "gfx/pokemon/mareanie/front.gbcpal", middle_colors
@@ -210,6 +234,9 @@ SilvallyShinyPalette:	INCLUDE "gfx/pokemon/silvally/shiny.pal"
 MiniorPalettes:
 MiniorNormalPalette:	INCBIN "gfx/pokemon/minior/front.gbcpal", middle_colors
 MiniorShinyPalette:	INCLUDE "gfx/pokemon/minior/shiny.pal"
+MiniorCorePalettes:
+MiniorCoreNormalPalette:	INCBIN "gfx/pokemon/minior_core/front.gbcpal", middle_colors
+MiniorCoreShinyPalette:	INCLUDE "gfx/pokemon/minior_core/shiny.pal"
 
 KomalaPalettes:
 KomalaNormalPalette:	INCBIN "gfx/pokemon/komala/front.gbcpal", middle_colors
@@ -226,6 +253,9 @@ TogedemaruShinyPalette:	INCLUDE "gfx/pokemon/togedemaru/shiny.pal"
 MimikyuPalettes:
 MimikyuNormalPalette:	INCBIN "gfx/pokemon/mimikyu/front.gbcpal", middle_colors
 MimikyuShinyPalette:	INCLUDE "gfx/pokemon/mimikyu/shiny.pal"
+MimikyuBustedPalettes:
+MimikyuBustedNormalPalette:	INCBIN "gfx/pokemon/mimikyu_busted/front.gbcpal", middle_colors
+MimikyuBustedShinyPalette:	INCLUDE "gfx/pokemon/mimikyu_busted/shiny.pal"
 
 BruxishPalettes:
 BruxishNormalPalette:	INCBIN "gfx/pokemon/bruxish/front.gbcpal", middle_colors
@@ -314,6 +344,15 @@ GuzzlordShinyPalette:	INCLUDE "gfx/pokemon/guzzlord/shiny.pal"
 NecrozmaPalettes:
 NecrozmaNormalPalette:	INCBIN "gfx/pokemon/necrozma/front.gbcpal", middle_colors
 NecrozmaShinyPalette:	INCLUDE "gfx/pokemon/necrozma/shiny.pal"
+NecrozmaDawn_wingsPalettes:
+NecrozmaDawn_wingsNormalPalette:	INCBIN "gfx/pokemon/necrozma_dawn_wings/front.gbcpal", middle_colors
+NecrozmaDawn_wingsShinyPalette:	INCLUDE "gfx/pokemon/necrozma_dawn_wings/shiny.pal"
+NecrozmaDusk_manePalettes:
+NecrozmaDusk_maneNormalPalette:	INCBIN "gfx/pokemon/necrozma_dusk_mane/front.gbcpal", middle_colors
+NecrozmaDusk_maneShinyPalette:	INCLUDE "gfx/pokemon/necrozma_dusk_mane/shiny.pal"
+NecrozmaUltraPalettes:
+NecrozmaUltraNormalPalette:	INCBIN "gfx/pokemon/necrozma_ultra/front.gbcpal", middle_colors
+NecrozmaUltraShinyPalette:	INCLUDE "gfx/pokemon/necrozma_ultra/shiny.pal"
 
 MagearnaPalettes:
 MagearnaNormalPalette:	INCBIN "gfx/pokemon/magearna/front.gbcpal", middle_colors
@@ -350,4 +389,7 @@ MeltanShinyPalette:	INCLUDE "gfx/pokemon/meltan/shiny.pal"
 MelmetalPalettes:
 MelmetalNormalPalette:	INCBIN "gfx/pokemon/melmetal/front.gbcpal", middle_colors
 MelmetalShinyPalette:	INCLUDE "gfx/pokemon/melmetal/shiny.pal"
+MelmetalGigaPalettes:
+MelmetalGigaNormalPalette:	INCBIN "gfx/pokemon/melmetal_giga/front.gbcpal", middle_colors
+MelmetalGigaShinyPalette:	INCLUDE "gfx/pokemon/melmetal_giga/shiny.pal"
 

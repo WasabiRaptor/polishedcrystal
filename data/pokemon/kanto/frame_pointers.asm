@@ -18,6 +18,9 @@ CharmeleonFramesPointers::
 
 CharizardFramesPointers::
 	add_frames Charizard
+	add_frames CharizardMega_x
+	add_frames CharizardMega_y
+	add_frames CharizardGiga
 
 SquirtleFramesPointers::
 	add_frames Squirtle
@@ -27,6 +30,8 @@ WartortleFramesPointers::
 
 BlastoiseFramesPointers::
 	add_frames Blastoise
+	add_frames BlastoiseMega
+	add_frames BlastoiseGiga
 
 CaterpieFramesPointers::
 	add_frames Caterpie
@@ -36,6 +41,7 @@ MetapodFramesPointers::
 
 ButterfreeFramesPointers::
 	add_frames Butterfree
+	add_frames ButterfreeGiga
 
 WeedleFramesPointers::
 	add_frames Weedle
@@ -45,6 +51,7 @@ KakunaFramesPointers::
 
 BeedrillFramesPointers::
 	add_frames Beedrill
+	add_frames BeedrillMega
 
 PidgeyFramesPointers::
 	add_frames Pidgey
@@ -54,12 +61,15 @@ PidgeottoFramesPointers::
 
 PidgeotFramesPointers::
 	add_frames Pidgeot
+	add_frames PidgeotMega
 
 RattataFramesPointers::
 	add_frames Rattata
+	add_frames RattataAlola
 
 RaticateFramesPointers::
 	add_frames Raticate
+	add_frames RaticateAlola
 
 SpearowFramesPointers::
 	add_frames Spearow
@@ -75,15 +85,33 @@ ArbokFramesPointers::
 
 PikachuFramesPointers::
 	add_frames Pikachu
+	add_frames PikachuCosplay
+	add_frames PikachuRockstar
+	add_frames PikachuBelle
+	add_frames PikachuPopstar
+	add_frames PikachuPhd
+	add_frames PikachuLibre
+	add_frames PikachuOg_cap
+	add_frames PikachuHoenn_cap
+	add_frames PikachuSinnoh_cap
+	add_frames PikachuUnova_cap
+	add_frames PikachuKalos_cap
+	add_frames PikachuAlola_cap
+	add_frames PikachuPartner_cap
+	add_frames PikachuLets_go
+	add_frames PikachuGiga
 
 RaichuFramesPointers::
 	add_frames Raichu
+	add_frames RaichuAlola
 
 SandshrewFramesPointers::
 	add_frames Sandshrew
+	add_frames SandshrewAlola
 
 SandslashFramesPointers::
 	add_frames Sandslash
+	add_frames SandslashAlola
 
 Nidoran_fFramesPointers::
 	add_frames Nidoran_f
@@ -111,9 +139,15 @@ ClefableFramesPointers::
 
 VulpixFramesPointers::
 	add_frames Vulpix
+	add_frames VulpixAlola
+	add_frames VulpixLoki
+	add_frames VulpixLoki_winter
 
 NinetalesFramesPointers::
 	add_frames Ninetales
+	add_frames NinetalesAlola
+	add_frames NinetalesLoki
+	add_frames NinetalesLoki_winter
 
 JigglypuffFramesPointers::
 	add_frames Jigglypuff
@@ -150,15 +184,21 @@ VenomothFramesPointers::
 
 DiglettFramesPointers::
 	add_frames Diglett
+	add_frames DiglettAlola
 
 DugtrioFramesPointers::
 	add_frames Dugtrio
+	add_frames DugtrioAlola
 
 MeowthFramesPointers::
 	add_frames Meowth
+	add_frames MeowthAlola
+	add_frames MeowthGalar
+	add_frames MeowthKanto_giga
 
 PersianFramesPointers::
 	add_frames Persian
+	add_frames PersianAlola
 
 PsyduckFramesPointers::
 	add_frames Psyduck
@@ -195,6 +235,7 @@ KadabraFramesPointers::
 
 AlakazamFramesPointers::
 	add_frames Alakazam
+	add_frames AlakazamMega
 
 MachopFramesPointers::
 	add_frames Machop
@@ -204,6 +245,7 @@ MachokeFramesPointers::
 
 MachampFramesPointers::
 	add_frames Machamp
+	add_frames MachampGiga
 
 BellsproutFramesPointers::
 	add_frames Bellsprout
@@ -222,24 +264,31 @@ TentacruelFramesPointers::
 
 GeodudeFramesPointers::
 	add_frames Geodude
+	add_frames GeodudeAlola
 
 GravelerFramesPointers::
 	add_frames Graveler
+	add_frames GravelerAlola
 
 GolemFramesPointers::
 	add_frames Golem
+	add_frames GolemAlola
 
 PonytaFramesPointers::
 	add_frames Ponyta
+	add_frames PonytaGalar
 
 RapidashFramesPointers::
 	add_frames Rapidash
+	add_frames RapidashGalar
 
 SlowpokeFramesPointers::
 	add_frames Slowpoke
+	add_frames SlowpokeGalar
 
 SlowbroFramesPointers::
 	add_frames Slowbro
+	add_frames SlowbroMega
 
 MagnemiteFramesPointers::
 	add_frames Magnemite
@@ -249,6 +298,7 @@ MagnetonFramesPointers::
 
 FarfetchdFramesPointers::
 	add_frames Farfetchd
+	add_frames FarfetchdGalar
 
 DoduoFramesPointers::
 	add_frames Doduo
@@ -264,9 +314,11 @@ DewgongFramesPointers::
 
 GrimerFramesPointers::
 	add_frames Grimer
+	add_frames GrimerAlola
 
 MukFramesPointers::
 	add_frames Muk
+	add_frames MukAlola
 
 ShellderFramesPointers::
 	add_frames Shellder
@@ -282,6 +334,8 @@ HaunterFramesPointers::
 
 GengarFramesPointers::
 	add_frames Gengar
+	add_frames GengarMega
+	add_frames GengarGiga
 
 OnixFramesPointers::
 	add_frames Onix
@@ -297,6 +351,7 @@ KrabbyFramesPointers::
 
 KinglerFramesPointers::
 	add_frames Kingler
+	add_frames KinglerGiga
 
 VoltorbFramesPointers::
 	add_frames Voltorb
@@ -309,12 +364,14 @@ ExeggcuteFramesPointers::
 
 ExeggutorFramesPointers::
 	add_frames Exeggutor
+	add_frames ExeggutorAlola
 
 CuboneFramesPointers::
 	add_frames Cubone
 
 MarowakFramesPointers::
 	add_frames Marowak
+	add_frames MarowakAlola
 
 HitmonleeFramesPointers::
 	add_frames Hitmonlee
@@ -330,6 +387,7 @@ KoffingFramesPointers::
 
 WeezingFramesPointers::
 	add_frames Weezing
+	add_frames WeezingGalar
 
 RhyhornFramesPointers::
 	add_frames Rhyhorn
@@ -345,6 +403,7 @@ TangelaFramesPointers::
 
 KangaskhanFramesPointers::
 	add_frames Kangaskhan
+	add_frames KangaskhanMega
 
 HorseaFramesPointers::
 	add_frames Horsea
@@ -366,6 +425,7 @@ StarmieFramesPointers::
 
 MrmimeFramesPointers::
 	add_frames Mrmime
+	add_frames MrmimeGalar
 
 ScytherFramesPointers::
 	add_frames Scyther
@@ -381,6 +441,7 @@ MagmarFramesPointers::
 
 PinsirFramesPointers::
 	add_frames Pinsir
+	add_frames PinsirMega
 
 TaurosFramesPointers::
 	add_frames Tauros
@@ -390,15 +451,19 @@ MagikarpFramesPointers::
 
 GyaradosFramesPointers::
 	add_frames Gyarados
+	add_frames GyaradosMega
 
 LaprasFramesPointers::
 	add_frames Lapras
+	add_frames LaprasGiga
 
 DittoFramesPointers::
 	add_frames Ditto
 
 EeveeFramesPointers::
 	add_frames Eevee
+	add_frames EeveeLets_go
+	add_frames EeveeGiga
 
 VaporeonFramesPointers::
 	add_frames Vaporeon
@@ -408,6 +473,7 @@ JolteonFramesPointers::
 
 FlareonFramesPointers::
 	add_frames Flareon
+	add_frames FlareonDonut
 
 PorygonFramesPointers::
 	add_frames Porygon
@@ -426,18 +492,23 @@ KabutopsFramesPointers::
 
 AerodactylFramesPointers::
 	add_frames Aerodactyl
+	add_frames AerodactylMega
 
 SnorlaxFramesPointers::
 	add_frames Snorlax
+	add_frames SnorlaxGiga
 
 ArticunoFramesPointers::
 	add_frames Articuno
+	add_frames ArticunoGalar
 
 ZapdosFramesPointers::
 	add_frames Zapdos
+	add_frames ZapdosGalar
 
 MoltresFramesPointers::
 	add_frames Moltres
+	add_frames MoltresGalar
 
 DratiniFramesPointers::
 	add_frames Dratini
@@ -450,6 +521,8 @@ DragoniteFramesPointers::
 
 MewtwoFramesPointers::
 	add_frames Mewtwo
+	add_frames MewtwoMega_x
+	add_frames MewtwoMega_y
 
 MewFramesPointers::
 	add_frames Mew

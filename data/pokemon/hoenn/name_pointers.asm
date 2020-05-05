@@ -7,6 +7,7 @@ GrovyleNames::
 
 SceptileNames::
 	add_name Sceptile
+	add_name Sceptile
 
 TorchicNames::
 	add_name Torchic
@@ -15,6 +16,7 @@ CombuskenNames::
 	add_name Combusken
 
 BlazikenNames::
+	add_name Blaziken
 	add_name Blaziken
 
 MudkipNames::
@@ -25,6 +27,7 @@ MarshtompNames::
 
 SwampertNames::
 	add_name Swampert
+	add_name Swampert
 
 PoochyenaNames::
 	add_name Poochyena
@@ -34,8 +37,10 @@ MightyenaNames::
 
 ZigzagoonNames::
 	add_name Zigzagoon
+	add_name Zigzagoon
 
 LinooneNames::
+	add_name Linoone
 	add_name Linoone
 
 WurmpleNames::
@@ -90,6 +95,7 @@ KirliaNames::
 	add_name Kirlia
 
 GardevoirNames::
+	add_name Gardevoir
 	add_name Gardevoir
 
 SurskitNames::
@@ -151,8 +157,10 @@ DelcattyNames::
 
 SableyeNames::
 	add_name Sableye
+	add_name Sableye
 
 MawileNames::
+	add_name Mawile
 	add_name Mawile
 
 AronNames::
@@ -163,17 +171,20 @@ LaironNames::
 
 AggronNames::
 	add_name Aggron
+	add_name Aggron
 
 MedititeNames::
 	add_name Meditite
 
 MedichamNames::
 	add_name Medicham
+	add_name Medicham
 
 ElectrikeNames::
 	add_name Electrike
 
 ManectricNames::
+	add_name Manectric
 	add_name Manectric
 
 PlusleNames::
@@ -202,6 +213,7 @@ CarvanhaNames::
 
 SharpedoNames::
 	add_name Sharpedo
+	add_name Sharpedo
 
 WailmerNames::
 	add_name Wailmer
@@ -213,6 +225,7 @@ NumelNames::
 	add_name Numel
 
 CameruptNames::
+	add_name Camerupt
 	add_name Camerupt
 
 TorkoalNames::
@@ -246,6 +259,7 @@ SwabluNames::
 	add_name Swablu
 
 AltariaNames::
+	add_name Altaria
 	add_name Altaria
 
 ZangooseNames::
@@ -298,6 +312,9 @@ MiloticNames::
 
 CastformNames::
 	add_name Castform
+	add_name Castform
+	add_name Castform
+	add_name Castform
 
 KecleonNames::
 	add_name Kecleon
@@ -306,6 +323,7 @@ ShuppetNames::
 	add_name Shuppet
 
 BanetteNames::
+	add_name Banette
 	add_name Banette
 
 DuskullNames::
@@ -322,6 +340,7 @@ ChimechoNames::
 
 AbsolNames::
 	add_name Absol
+	add_name Absol
 
 WynautNames::
 	add_name Wynaut
@@ -330,6 +349,7 @@ SnoruntNames::
 	add_name Snorunt
 
 GlalieNames::
+	add_name Glalie
 	add_name Glalie
 
 SphealNames::
@@ -364,6 +384,7 @@ ShelgonNames::
 
 SalamenceNames::
 	add_name Salamence
+	add_name Salamence
 
 BeldumNames::
 	add_name Beldum
@@ -372,6 +393,7 @@ MetangNames::
 	add_name Metang
 
 MetagrossNames::
+	add_name Metagross
 	add_name Metagross
 
 RegirockNames::
@@ -385,22 +407,30 @@ RegisteelNames::
 
 LatiasNames::
 	add_name Latias
+	add_name Latias
 
 LatiosNames::
+	add_name Latios
 	add_name Latios
 
 KyogreNames::
 	add_name Kyogre
+	add_name Kyogre
 
 GroudonNames::
 	add_name Groudon
+	add_name Groudon
 
 RayquazaNames::
+	add_name Rayquaza
 	add_name Rayquaza
 
 JirachiNames::
 	add_name Jirachi
 
 DeoxysNames::
+	add_name Deoxys
+	add_name Deoxys
+	add_name Deoxys
 	add_name Deoxys
 

@@ -50,8 +50,12 @@ ShieldonBaseData::	INCLUDE "data/pokemon/base_stats/shieldon.asm"
 BastiodonBaseData::	INCLUDE "data/pokemon/base_stats/bastiodon.asm"
 
 BurmyBaseData::	INCLUDE "data/pokemon/base_stats/burmy.asm"
+BurmySandBaseData::	INCLUDE "data/pokemon/base_stats/burmy_sand.asm"
+BurmyTrashBaseData::	INCLUDE "data/pokemon/base_stats/burmy_trash.asm"
 
 WormadamBaseData::	INCLUDE "data/pokemon/base_stats/wormadam.asm"
+WormadamSandBaseData::	INCLUDE "data/pokemon/base_stats/wormadam_sand.asm"
+WormadamTrashBaseData::	INCLUDE "data/pokemon/base_stats/wormadam_trash.asm"
 
 MothimBaseData::	INCLUDE "data/pokemon/base_stats/mothim.asm"
 
@@ -68,10 +72,13 @@ FloatzelBaseData::	INCLUDE "data/pokemon/base_stats/floatzel.asm"
 CherubiBaseData::	INCLUDE "data/pokemon/base_stats/cherubi.asm"
 
 CherrimBaseData::	INCLUDE "data/pokemon/base_stats/cherrim.asm"
+CherrimOvercastBaseData::	INCLUDE "data/pokemon/base_stats/cherrim_overcast.asm"
 
 ShellosBaseData::	INCLUDE "data/pokemon/base_stats/shellos.asm"
+ShellosWestBaseData::	INCLUDE "data/pokemon/base_stats/shellos_west.asm"
 
 GastrodonBaseData::	INCLUDE "data/pokemon/base_stats/gastrodon.asm"
+GastrodonWestBaseData::	INCLUDE "data/pokemon/base_stats/gastrodon_west.asm"
 
 AmbipomBaseData::	INCLUDE "data/pokemon/base_stats/ambipom.asm"
 
@@ -82,6 +89,7 @@ DrifblimBaseData::	INCLUDE "data/pokemon/base_stats/drifblim.asm"
 BunearyBaseData::	INCLUDE "data/pokemon/base_stats/buneary.asm"
 
 LopunnyBaseData::	INCLUDE "data/pokemon/base_stats/lopunny.asm"
+LopunnyMegaBaseData::	INCLUDE "data/pokemon/base_stats/lopunny_mega.asm"
 
 MismagiusBaseData::	INCLUDE "data/pokemon/base_stats/mismagius.asm"
 
@@ -116,12 +124,14 @@ GibleBaseData::	INCLUDE "data/pokemon/base_stats/gible.asm"
 GabiteBaseData::	INCLUDE "data/pokemon/base_stats/gabite.asm"
 
 GarchompBaseData::	INCLUDE "data/pokemon/base_stats/garchomp.asm"
+GarchompMegaBaseData::	INCLUDE "data/pokemon/base_stats/garchomp_mega.asm"
 
 MunchlaxBaseData::	INCLUDE "data/pokemon/base_stats/munchlax.asm"
 
 RioluBaseData::	INCLUDE "data/pokemon/base_stats/riolu.asm"
 
 LucarioBaseData::	INCLUDE "data/pokemon/base_stats/lucario.asm"
+LucarioMegaBaseData::	INCLUDE "data/pokemon/base_stats/lucario_mega.asm"
 
 HippopotasBaseData::	INCLUDE "data/pokemon/base_stats/hippopotas.asm"
 
@@ -146,6 +156,7 @@ MantykeBaseData::	INCLUDE "data/pokemon/base_stats/mantyke.asm"
 SnoverBaseData::	INCLUDE "data/pokemon/base_stats/snover.asm"
 
 AbomasnowBaseData::	INCLUDE "data/pokemon/base_stats/abomasnow.asm"
+AbomasnowMegaBaseData::	INCLUDE "data/pokemon/base_stats/abomasnow_mega.asm"
 
 WeavileBaseData::	INCLUDE "data/pokemon/base_stats/weavile.asm"
 
@@ -176,6 +187,7 @@ MamoswineBaseData::	INCLUDE "data/pokemon/base_stats/mamoswine.asm"
 Porygon_zBaseData::	INCLUDE "data/pokemon/base_stats/porygon_z.asm"
 
 GalladeBaseData::	INCLUDE "data/pokemon/base_stats/gallade.asm"
+GalladeMegaBaseData::	INCLUDE "data/pokemon/base_stats/gallade_mega.asm"
 
 ProbopassBaseData::	INCLUDE "data/pokemon/base_stats/probopass.asm"
 
@@ -184,6 +196,12 @@ DusknoirBaseData::	INCLUDE "data/pokemon/base_stats/dusknoir.asm"
 FroslassBaseData::	INCLUDE "data/pokemon/base_stats/froslass.asm"
 
 RotomBaseData::	INCLUDE "data/pokemon/base_stats/rotom.asm"
+RotomHeatBaseData::	INCLUDE "data/pokemon/base_stats/rotom_heat.asm"
+RotomWashBaseData::	INCLUDE "data/pokemon/base_stats/rotom_wash.asm"
+RotomFrostBaseData::	INCLUDE "data/pokemon/base_stats/rotom_frost.asm"
+RotomFanBaseData::	INCLUDE "data/pokemon/base_stats/rotom_fan.asm"
+RotomMowBaseData::	INCLUDE "data/pokemon/base_stats/rotom_mow.asm"
+RotomDexBaseData::	INCLUDE "data/pokemon/base_stats/rotom_dex.asm"
 
 UxieBaseData::	INCLUDE "data/pokemon/base_stats/uxie.asm"
 
@@ -200,6 +218,7 @@ HeatranBaseData::	INCLUDE "data/pokemon/base_stats/heatran.asm"
 RegigigasBaseData::	INCLUDE "data/pokemon/base_stats/regigigas.asm"
 
 GiratinaBaseData::	INCLUDE "data/pokemon/base_stats/giratina.asm"
+GiratinaOriginBaseData::	INCLUDE "data/pokemon/base_stats/giratina_origin.asm"
 
 CresseliaBaseData::	INCLUDE "data/pokemon/base_stats/cresselia.asm"
 

@@ -20,8 +20,8 @@ IncineroarOverworldSpritePointers::
 PopplioOverworldSpritePointers::
 	add_overworldsprite Popplio
 
-BrioneOverworldSpritePointers::
-	add_overworldsprite Brione
+BrionneOverworldSpritePointers::
+	add_overworldsprite Brionne
 
 PrimarinaOverworldSpritePointers::
 	add_overworldsprite Primarina
@@ -58,6 +58,9 @@ CrabominableOverworldSpritePointers::
 
 OricorioOverworldSpritePointers::
 	add_overworldsprite Oricorio
+	add_overworldsprite OricorioPom_pom
+	add_overworldsprite OricorioPau
+	add_overworldsprite OricorioSensu
 
 CutieflyOverworldSpritePointers::
 	add_overworldsprite Cutiefly
@@ -67,12 +70,17 @@ RibombeeOverworldSpritePointers::
 
 RockruffOverworldSpritePointers::
 	add_overworldsprite Rockruff
+	add_overworldsprite RockruffOwn_tempo
 
 LycanrocOverworldSpritePointers::
 	add_overworldsprite Lycanroc
+	add_overworldsprite LycanrocMidday
+	add_overworldsprite LycanrocDusk
+	add_overworldsprite LycanrocMidnight
 
 WishiwashiOverworldSpritePointers::
 	add_overworldsprite Wishiwashi
+	add_overworldsprite WishiwashiSchool
 
 MareanieOverworldSpritePointers::
 	add_overworldsprite Mareanie
@@ -157,6 +165,7 @@ SilvallyOverworldSpritePointers::
 
 MiniorOverworldSpritePointers::
 	add_overworldsprite Minior
+	add_overworldsprite MiniorCore
 
 KomalaOverworldSpritePointers::
 	add_overworldsprite Komala
@@ -169,6 +178,7 @@ TogedemaruOverworldSpritePointers::
 
 MimikyuOverworldSpritePointers::
 	add_overworldsprite Mimikyu
+	add_overworldsprite MimikyuBusted
 
 BruxishOverworldSpritePointers::
 	add_overworldsprite Bruxish
@@ -235,6 +245,9 @@ GuzzlordOverworldSpritePointers::
 
 NecrozmaOverworldSpritePointers::
 	add_overworldsprite Necrozma
+	add_overworldsprite NecrozmaDawn_wings
+	add_overworldsprite NecrozmaDusk_mane
+	add_overworldsprite NecrozmaUltra
 
 MagearnaOverworldSpritePointers::
 	add_overworldsprite Magearna
@@ -262,4 +275,5 @@ MeltanOverworldSpritePointers::
 
 MelmetalOverworldSpritePointers::
 	add_overworldsprite Melmetal
+	add_overworldsprite MelmetalGiga
 

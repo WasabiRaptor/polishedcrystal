@@ -76,9 +76,13 @@ BastiodonAnimationPointers::
 
 BurmyAnimationPointers::
 	add_anim Burmy
+	add_anim BurmySand
+	add_anim BurmyTrash
 
 WormadamAnimationPointers::
 	add_anim Wormadam
+	add_anim WormadamSand
+	add_anim WormadamTrash
 
 MothimAnimationPointers::
 	add_anim Mothim
@@ -103,12 +107,15 @@ CherubiAnimationPointers::
 
 CherrimAnimationPointers::
 	add_anim Cherrim
+	add_anim CherrimOvercast
 
 ShellosAnimationPointers::
 	add_anim Shellos
+	add_anim ShellosWest
 
 GastrodonAnimationPointers::
 	add_anim Gastrodon
+	add_anim GastrodonWest
 
 AmbipomAnimationPointers::
 	add_anim Ambipom
@@ -124,6 +131,7 @@ BunearyAnimationPointers::
 
 LopunnyAnimationPointers::
 	add_anim Lopunny
+	add_anim LopunnyMega
 
 MismagiusAnimationPointers::
 	add_anim Mismagius
@@ -175,6 +183,7 @@ GabiteAnimationPointers::
 
 GarchompAnimationPointers::
 	add_anim Garchomp
+	add_anim GarchompMega
 
 MunchlaxAnimationPointers::
 	add_anim Munchlax
@@ -184,6 +193,7 @@ RioluAnimationPointers::
 
 LucarioAnimationPointers::
 	add_anim Lucario
+	add_anim LucarioMega
 
 HippopotasAnimationPointers::
 	add_anim Hippopotas
@@ -220,6 +230,7 @@ SnoverAnimationPointers::
 
 AbomasnowAnimationPointers::
 	add_anim Abomasnow
+	add_anim AbomasnowMega
 
 WeavileAnimationPointers::
 	add_anim Weavile
@@ -265,6 +276,7 @@ Porygon_zAnimationPointers::
 
 GalladeAnimationPointers::
 	add_anim Gallade
+	add_anim GalladeMega
 
 ProbopassAnimationPointers::
 	add_anim Probopass
@@ -277,6 +289,12 @@ FroslassAnimationPointers::
 
 RotomAnimationPointers::
 	add_anim Rotom
+	add_anim RotomHeat
+	add_anim RotomWash
+	add_anim RotomFrost
+	add_anim RotomFan
+	add_anim RotomMow
+	add_anim RotomDex
 
 UxieAnimationPointers::
 	add_anim Uxie
@@ -301,6 +319,7 @@ RegigigasAnimationPointers::
 
 GiratinaAnimationPointers::
 	add_anim Giratina
+	add_anim GiratinaOrigin
 
 CresseliaAnimationPointers::
 	add_anim Cresselia

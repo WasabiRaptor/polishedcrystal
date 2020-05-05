@@ -18,6 +18,9 @@ CharmeleonAnimationIdlePointers::
 
 CharizardAnimationIdlePointers::
 	add_idleanim Charizard
+	add_idleanim CharizardMega_x
+	add_idleanim CharizardMega_y
+	add_idleanim CharizardGiga
 
 SquirtleAnimationIdlePointers::
 	add_idleanim Squirtle
@@ -27,6 +30,8 @@ WartortleAnimationIdlePointers::
 
 BlastoiseAnimationIdlePointers::
 	add_idleanim Blastoise
+	add_idleanim BlastoiseMega
+	add_idleanim BlastoiseGiga
 
 CaterpieAnimationIdlePointers::
 	add_idleanim Caterpie
@@ -36,6 +41,7 @@ MetapodAnimationIdlePointers::
 
 ButterfreeAnimationIdlePointers::
 	add_idleanim Butterfree
+	add_idleanim ButterfreeGiga
 
 WeedleAnimationIdlePointers::
 	add_idleanim Weedle
@@ -45,6 +51,7 @@ KakunaAnimationIdlePointers::
 
 BeedrillAnimationIdlePointers::
 	add_idleanim Beedrill
+	add_idleanim BeedrillMega
 
 PidgeyAnimationIdlePointers::
 	add_idleanim Pidgey
@@ -54,12 +61,15 @@ PidgeottoAnimationIdlePointers::
 
 PidgeotAnimationIdlePointers::
 	add_idleanim Pidgeot
+	add_idleanim PidgeotMega
 
 RattataAnimationIdlePointers::
 	add_idleanim Rattata
+	add_idleanim RattataAlola
 
 RaticateAnimationIdlePointers::
 	add_idleanim Raticate
+	add_idleanim RaticateAlola
 
 SpearowAnimationIdlePointers::
 	add_idleanim Spearow
@@ -75,15 +85,33 @@ ArbokAnimationIdlePointers::
 
 PikachuAnimationIdlePointers::
 	add_idleanim Pikachu
+	add_idleanim PikachuCosplay
+	add_idleanim PikachuRockstar
+	add_idleanim PikachuBelle
+	add_idleanim PikachuPopstar
+	add_idleanim PikachuPhd
+	add_idleanim PikachuLibre
+	add_idleanim PikachuOg_cap
+	add_idleanim PikachuHoenn_cap
+	add_idleanim PikachuSinnoh_cap
+	add_idleanim PikachuUnova_cap
+	add_idleanim PikachuKalos_cap
+	add_idleanim PikachuAlola_cap
+	add_idleanim PikachuPartner_cap
+	add_idleanim PikachuLets_go
+	add_idleanim PikachuGiga
 
 RaichuAnimationIdlePointers::
 	add_idleanim Raichu
+	add_idleanim RaichuAlola
 
 SandshrewAnimationIdlePointers::
 	add_idleanim Sandshrew
+	add_idleanim SandshrewAlola
 
 SandslashAnimationIdlePointers::
 	add_idleanim Sandslash
+	add_idleanim SandslashAlola
 
 Nidoran_fAnimationIdlePointers::
 	add_idleanim Nidoran_f
@@ -111,9 +139,15 @@ ClefableAnimationIdlePointers::
 
 VulpixAnimationIdlePointers::
 	add_idleanim Vulpix
+	add_idleanim VulpixAlola
+	add_idleanim VulpixLoki
+	add_idleanim VulpixLoki_winter
 
 NinetalesAnimationIdlePointers::
 	add_idleanim Ninetales
+	add_idleanim NinetalesAlola
+	add_idleanim NinetalesLoki
+	add_idleanim NinetalesLoki_winter
 
 JigglypuffAnimationIdlePointers::
 	add_idleanim Jigglypuff
@@ -150,15 +184,21 @@ VenomothAnimationIdlePointers::
 
 DiglettAnimationIdlePointers::
 	add_idleanim Diglett
+	add_idleanim DiglettAlola
 
 DugtrioAnimationIdlePointers::
 	add_idleanim Dugtrio
+	add_idleanim DugtrioAlola
 
 MeowthAnimationIdlePointers::
 	add_idleanim Meowth
+	add_idleanim MeowthAlola
+	add_idleanim MeowthGalar
+	add_idleanim MeowthKanto_giga
 
 PersianAnimationIdlePointers::
 	add_idleanim Persian
+	add_idleanim PersianAlola
 
 PsyduckAnimationIdlePointers::
 	add_idleanim Psyduck
@@ -195,6 +235,7 @@ KadabraAnimationIdlePointers::
 
 AlakazamAnimationIdlePointers::
 	add_idleanim Alakazam
+	add_idleanim AlakazamMega
 
 MachopAnimationIdlePointers::
 	add_idleanim Machop
@@ -204,6 +245,7 @@ MachokeAnimationIdlePointers::
 
 MachampAnimationIdlePointers::
 	add_idleanim Machamp
+	add_idleanim MachampGiga
 
 BellsproutAnimationIdlePointers::
 	add_idleanim Bellsprout
@@ -222,24 +264,31 @@ TentacruelAnimationIdlePointers::
 
 GeodudeAnimationIdlePointers::
 	add_idleanim Geodude
+	add_idleanim GeodudeAlola
 
 GravelerAnimationIdlePointers::
 	add_idleanim Graveler
+	add_idleanim GravelerAlola
 
 GolemAnimationIdlePointers::
 	add_idleanim Golem
+	add_idleanim GolemAlola
 
 PonytaAnimationIdlePointers::
 	add_idleanim Ponyta
+	add_idleanim PonytaGalar
 
 RapidashAnimationIdlePointers::
 	add_idleanim Rapidash
+	add_idleanim RapidashGalar
 
 SlowpokeAnimationIdlePointers::
 	add_idleanim Slowpoke
+	add_idleanim SlowpokeGalar
 
 SlowbroAnimationIdlePointers::
 	add_idleanim Slowbro
+	add_idleanim SlowbroMega
 
 MagnemiteAnimationIdlePointers::
 	add_idleanim Magnemite
@@ -249,6 +298,7 @@ MagnetonAnimationIdlePointers::
 
 FarfetchdAnimationIdlePointers::
 	add_idleanim Farfetchd
+	add_idleanim FarfetchdGalar
 
 DoduoAnimationIdlePointers::
 	add_idleanim Doduo
@@ -264,9 +314,11 @@ DewgongAnimationIdlePointers::
 
 GrimerAnimationIdlePointers::
 	add_idleanim Grimer
+	add_idleanim GrimerAlola
 
 MukAnimationIdlePointers::
 	add_idleanim Muk
+	add_idleanim MukAlola
 
 ShellderAnimationIdlePointers::
 	add_idleanim Shellder
@@ -282,6 +334,8 @@ HaunterAnimationIdlePointers::
 
 GengarAnimationIdlePointers::
 	add_idleanim Gengar
+	add_idleanim GengarMega
+	add_idleanim GengarGiga
 
 OnixAnimationIdlePointers::
 	add_idleanim Onix
@@ -297,6 +351,7 @@ KrabbyAnimationIdlePointers::
 
 KinglerAnimationIdlePointers::
 	add_idleanim Kingler
+	add_idleanim KinglerGiga
 
 VoltorbAnimationIdlePointers::
 	add_idleanim Voltorb
@@ -309,12 +364,14 @@ ExeggcuteAnimationIdlePointers::
 
 ExeggutorAnimationIdlePointers::
 	add_idleanim Exeggutor
+	add_idleanim ExeggutorAlola
 
 CuboneAnimationIdlePointers::
 	add_idleanim Cubone
 
 MarowakAnimationIdlePointers::
 	add_idleanim Marowak
+	add_idleanim MarowakAlola
 
 HitmonleeAnimationIdlePointers::
 	add_idleanim Hitmonlee
@@ -330,6 +387,7 @@ KoffingAnimationIdlePointers::
 
 WeezingAnimationIdlePointers::
 	add_idleanim Weezing
+	add_idleanim WeezingGalar
 
 RhyhornAnimationIdlePointers::
 	add_idleanim Rhyhorn
@@ -345,6 +403,7 @@ TangelaAnimationIdlePointers::
 
 KangaskhanAnimationIdlePointers::
 	add_idleanim Kangaskhan
+	add_idleanim KangaskhanMega
 
 HorseaAnimationIdlePointers::
 	add_idleanim Horsea
@@ -366,6 +425,7 @@ StarmieAnimationIdlePointers::
 
 MrmimeAnimationIdlePointers::
 	add_idleanim Mrmime
+	add_idleanim MrmimeGalar
 
 ScytherAnimationIdlePointers::
 	add_idleanim Scyther
@@ -381,6 +441,7 @@ MagmarAnimationIdlePointers::
 
 PinsirAnimationIdlePointers::
 	add_idleanim Pinsir
+	add_idleanim PinsirMega
 
 TaurosAnimationIdlePointers::
 	add_idleanim Tauros
@@ -390,15 +451,19 @@ MagikarpAnimationIdlePointers::
 
 GyaradosAnimationIdlePointers::
 	add_idleanim Gyarados
+	add_idleanim GyaradosMega
 
 LaprasAnimationIdlePointers::
 	add_idleanim Lapras
+	add_idleanim LaprasGiga
 
 DittoAnimationIdlePointers::
 	add_idleanim Ditto
 
 EeveeAnimationIdlePointers::
 	add_idleanim Eevee
+	add_idleanim EeveeLets_go
+	add_idleanim EeveeGiga
 
 VaporeonAnimationIdlePointers::
 	add_idleanim Vaporeon
@@ -408,6 +473,7 @@ JolteonAnimationIdlePointers::
 
 FlareonAnimationIdlePointers::
 	add_idleanim Flareon
+	add_idleanim FlareonDonut
 
 PorygonAnimationIdlePointers::
 	add_idleanim Porygon
@@ -426,18 +492,23 @@ KabutopsAnimationIdlePointers::
 
 AerodactylAnimationIdlePointers::
 	add_idleanim Aerodactyl
+	add_idleanim AerodactylMega
 
 SnorlaxAnimationIdlePointers::
 	add_idleanim Snorlax
+	add_idleanim SnorlaxGiga
 
 ArticunoAnimationIdlePointers::
 	add_idleanim Articuno
+	add_idleanim ArticunoGalar
 
 ZapdosAnimationIdlePointers::
 	add_idleanim Zapdos
+	add_idleanim ZapdosGalar
 
 MoltresAnimationIdlePointers::
 	add_idleanim Moltres
+	add_idleanim MoltresGalar
 
 DratiniAnimationIdlePointers::
 	add_idleanim Dratini
@@ -450,6 +521,8 @@ DragoniteAnimationIdlePointers::
 
 MewtwoAnimationIdlePointers::
 	add_idleanim Mewtwo
+	add_idleanim MewtwoMega_x
+	add_idleanim MewtwoMega_y
 
 MewAnimationIdlePointers::
 	add_idleanim Mew

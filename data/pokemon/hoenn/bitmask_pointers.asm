@@ -7,6 +7,7 @@ GrovyleBitmasksPointers::
 
 SceptileBitmasksPointers::
 	add_bitmasks Sceptile
+	add_bitmasks SceptileMega
 
 TorchicBitmasksPointers::
 	add_bitmasks Torchic
@@ -16,6 +17,7 @@ CombuskenBitmasksPointers::
 
 BlazikenBitmasksPointers::
 	add_bitmasks Blaziken
+	add_bitmasks BlazikenMega
 
 MudkipBitmasksPointers::
 	add_bitmasks Mudkip
@@ -25,6 +27,7 @@ MarshtompBitmasksPointers::
 
 SwampertBitmasksPointers::
 	add_bitmasks Swampert
+	add_bitmasks SwampertMega
 
 PoochyenaBitmasksPointers::
 	add_bitmasks Poochyena
@@ -34,9 +37,11 @@ MightyenaBitmasksPointers::
 
 ZigzagoonBitmasksPointers::
 	add_bitmasks Zigzagoon
+	add_bitmasks ZigzagoonGalar
 
 LinooneBitmasksPointers::
 	add_bitmasks Linoone
+	add_bitmasks LinooneGalar
 
 WurmpleBitmasksPointers::
 	add_bitmasks Wurmple
@@ -91,6 +96,7 @@ KirliaBitmasksPointers::
 
 GardevoirBitmasksPointers::
 	add_bitmasks Gardevoir
+	add_bitmasks GardevoirMega
 
 SurskitBitmasksPointers::
 	add_bitmasks Surskit
@@ -151,9 +157,11 @@ DelcattyBitmasksPointers::
 
 SableyeBitmasksPointers::
 	add_bitmasks Sableye
+	add_bitmasks SableyeMega
 
 MawileBitmasksPointers::
 	add_bitmasks Mawile
+	add_bitmasks MawileMega
 
 AronBitmasksPointers::
 	add_bitmasks Aron
@@ -163,18 +171,21 @@ LaironBitmasksPointers::
 
 AggronBitmasksPointers::
 	add_bitmasks Aggron
+	add_bitmasks AggronMega
 
 MedititeBitmasksPointers::
 	add_bitmasks Meditite
 
 MedichamBitmasksPointers::
 	add_bitmasks Medicham
+	add_bitmasks MedichamMega
 
 ElectrikeBitmasksPointers::
 	add_bitmasks Electrike
 
 ManectricBitmasksPointers::
 	add_bitmasks Manectric
+	add_bitmasks ManectricMega
 
 PlusleBitmasksPointers::
 	add_bitmasks Plusle
@@ -202,6 +213,7 @@ CarvanhaBitmasksPointers::
 
 SharpedoBitmasksPointers::
 	add_bitmasks Sharpedo
+	add_bitmasks SharpedoMega
 
 WailmerBitmasksPointers::
 	add_bitmasks Wailmer
@@ -214,6 +226,7 @@ NumelBitmasksPointers::
 
 CameruptBitmasksPointers::
 	add_bitmasks Camerupt
+	add_bitmasks CameruptMega
 
 TorkoalBitmasksPointers::
 	add_bitmasks Torkoal
@@ -247,6 +260,7 @@ SwabluBitmasksPointers::
 
 AltariaBitmasksPointers::
 	add_bitmasks Altaria
+	add_bitmasks AltariaMega
 
 ZangooseBitmasksPointers::
 	add_bitmasks Zangoose
@@ -298,6 +312,9 @@ MiloticBitmasksPointers::
 
 CastformBitmasksPointers::
 	add_bitmasks Castform
+	add_bitmasks CastformSun
+	add_bitmasks CastformRain
+	add_bitmasks CastformSnow
 
 KecleonBitmasksPointers::
 	add_bitmasks Kecleon
@@ -307,6 +324,7 @@ ShuppetBitmasksPointers::
 
 BanetteBitmasksPointers::
 	add_bitmasks Banette
+	add_bitmasks BanetteMega
 
 DuskullBitmasksPointers::
 	add_bitmasks Duskull
@@ -322,6 +340,7 @@ ChimechoBitmasksPointers::
 
 AbsolBitmasksPointers::
 	add_bitmasks Absol
+	add_bitmasks AbsolMega
 
 WynautBitmasksPointers::
 	add_bitmasks Wynaut
@@ -331,6 +350,7 @@ SnoruntBitmasksPointers::
 
 GlalieBitmasksPointers::
 	add_bitmasks Glalie
+	add_bitmasks GlalieMega
 
 SphealBitmasksPointers::
 	add_bitmasks Spheal
@@ -364,6 +384,7 @@ ShelgonBitmasksPointers::
 
 SalamenceBitmasksPointers::
 	add_bitmasks Salamence
+	add_bitmasks SalamenceMega
 
 BeldumBitmasksPointers::
 	add_bitmasks Beldum
@@ -373,6 +394,7 @@ MetangBitmasksPointers::
 
 MetagrossBitmasksPointers::
 	add_bitmasks Metagross
+	add_bitmasks MetagrossMega
 
 RegirockBitmasksPointers::
 	add_bitmasks Regirock
@@ -385,22 +407,30 @@ RegisteelBitmasksPointers::
 
 LatiasBitmasksPointers::
 	add_bitmasks Latias
+	add_bitmasks LatiasMega
 
 LatiosBitmasksPointers::
 	add_bitmasks Latios
+	add_bitmasks LatiosMega
 
 KyogreBitmasksPointers::
 	add_bitmasks Kyogre
+	add_bitmasks KyogrePrimal
 
 GroudonBitmasksPointers::
 	add_bitmasks Groudon
+	add_bitmasks GroudonPrimal
 
 RayquazaBitmasksPointers::
 	add_bitmasks Rayquaza
+	add_bitmasks RayquazaMega
 
 JirachiBitmasksPointers::
 	add_bitmasks Jirachi
 
 DeoxysBitmasksPointers::
 	add_bitmasks Deoxys
+	add_bitmasks DeoxysAttack
+	add_bitmasks DeoxysDefense
+	add_bitmasks DeoxysSpeed
 

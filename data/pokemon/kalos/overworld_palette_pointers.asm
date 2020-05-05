@@ -25,6 +25,8 @@ FrogadierOverworldPalettePointers::
 
 GreninjaOverworldPalettePointers::
 	add_overworldpalettes Greninja
+	add_overworldpalettes GreninjaBattle_bond
+	add_overworldpalettes GreninjaAsh
 
 BunnelbyOverworldPalettePointers::
 	add_overworldpalettes Bunnelby
@@ -49,18 +51,39 @@ SpewpaOverworldPalettePointers::
 
 VivillonOverworldPalettePointers::
 	add_overworldpalettes Vivillon
+	add_overworldpalettes VivillonArchipelego
+	add_overworldpalettes VivillonContinental
+	add_overworldpalettes VivillonElegant
+	add_overworldpalettes VivillonGarden
+	add_overworldpalettes VivillonHigh_plains
+	add_overworldpalettes VivillonIcy_snow
+	add_overworldpalettes VivillonJungle
+	add_overworldpalettes VivillonMarine
+	add_overworldpalettes VivillonModern
+	add_overworldpalettes VivillonMonsoon
+	add_overworldpalettes VivillonOcean
+	add_overworldpalettes VivillonPolar
+	add_overworldpalettes VivillonRiver
+	add_overworldpalettes VivillonSandstorm
+	add_overworldpalettes VivillonSavannah
+	add_overworldpalettes VivillonSun
+	add_overworldpalettes VivillonTundra
+	add_overworldpalettes VivillonPokeball
+	add_overworldpalettes VivillonFancy
 
 LitleoOverworldPalettePointers::
 	add_overworldpalettes Litleo
 
 PyroarOverworldPalettePointers::
 	add_overworldpalettes Pyroar
+	add_overworldpalettes PyroarF
 
 FlabebeOverworldPalettePointers::
 	add_overworldpalettes Flabebe
 
 FloetteOverworldPalettePointers::
 	add_overworldpalettes Floette
+	add_overworldpalettes FloetteEternal_flower
 
 FlorgesOverworldPalettePointers::
 	add_overworldpalettes Florges
@@ -79,12 +102,22 @@ PangoroOverworldPalettePointers::
 
 FurfrouOverworldPalettePointers::
 	add_overworldpalettes Furfrou
+	add_overworldpalettes FurfrouHeart
+	add_overworldpalettes FurfrouStar
+	add_overworldpalettes FurfrouDiamond
+	add_overworldpalettes FurfrouDebutante
+	add_overworldpalettes FurfrouMatron
+	add_overworldpalettes FurfrouDandy
+	add_overworldpalettes FurfrouLa_reine
+	add_overworldpalettes FurfrouKabuki
+	add_overworldpalettes FurfrouPharaoh
 
 EspurrOverworldPalettePointers::
 	add_overworldpalettes Espurr
 
 MeowsticOverworldPalettePointers::
 	add_overworldpalettes Meowstic
+	add_overworldpalettes MeowsticF
 
 HonedgeOverworldPalettePointers::
 	add_overworldpalettes Honedge
@@ -94,6 +127,7 @@ DoubladeOverworldPalettePointers::
 
 AegislashOverworldPalettePointers::
 	add_overworldpalettes Aegislash
+	add_overworldpalettes AegislashBlade
 
 SpritzeeOverworldPalettePointers::
 	add_overworldpalettes Spritzee
@@ -181,9 +215,15 @@ TrevenantOverworldPalettePointers::
 
 PumpkabooOverworldPalettePointers::
 	add_overworldpalettes Pumpkaboo
+	add_overworldpalettes PumpkabooAverage
+	add_overworldpalettes PumpkabooLarge
+	add_overworldpalettes PumpkabooSuper
 
 GourgeistOverworldPalettePointers::
 	add_overworldpalettes Gourgeist
+	add_overworldpalettes GourgeistAverage
+	add_overworldpalettes GourgeistLarge
+	add_overworldpalettes GourgeistSuper
 
 BergmiteOverworldPalettePointers::
 	add_overworldpalettes Bergmite
@@ -205,12 +245,18 @@ YveltalOverworldPalettePointers::
 
 ZygardeOverworldPalettePointers::
 	add_overworldpalettes Zygarde
+	add_overworldpalettes ZygardeFifty_percent
+	add_overworldpalettes ZygardeComplete
+	add_overworldpalettes ZygardeComplete
+	add_overworldpalettes ZygardeComplete
 
 DiancieOverworldPalettePointers::
 	add_overworldpalettes Diancie
+	add_overworldpalettes DiancieMega
 
 HoopaOverworldPalettePointers::
 	add_overworldpalettes Hoopa
+	add_overworldpalettes HoopaUnbound
 
 VolcanionOverworldPalettePointers::
 	add_overworldpalettes Volcanion

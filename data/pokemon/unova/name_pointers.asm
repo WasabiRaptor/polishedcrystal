@@ -82,6 +82,7 @@ TranquillNames::
 
 UnfezantNames::
 	add_name Unfezant
+	add_name Unfezant
 
 BlitzleNames::
 	add_name Blitzle
@@ -111,6 +112,7 @@ ExcadrillNames::
 	add_name Excadrill
 
 AudinoNames::
+	add_name Audino
 	add_name Audino
 
 TimburrNames::
@@ -181,8 +183,12 @@ KrookodileNames::
 
 DarumakaNames::
 	add_name Darumaka
+	add_name Darumaka
 
 DarmanitanNames::
+	add_name Darmanitan
+	add_name Darmanitan
+	add_name Darmanitan
 	add_name Darmanitan
 
 MaractusNames::
@@ -205,6 +211,7 @@ SigilyphNames::
 
 YamaskNames::
 	add_name Yamask
+	add_name Yamask
 
 CofagrigusNames::
 	add_name Cofagrigus
@@ -225,6 +232,7 @@ TrubbishNames::
 	add_name Trubbish
 
 GarbodorNames::
+	add_name Garbodor
 	add_name Garbodor
 
 ZoruaNames::
@@ -274,8 +282,14 @@ VanilluxeNames::
 
 DeerlingNames::
 	add_name Deerling
+	add_name Deerling
+	add_name Deerling
+	add_name Deerling
 
 SawsbuckNames::
+	add_name Sawsbuck
+	add_name Sawsbuck
+	add_name Sawsbuck
 	add_name Sawsbuck
 
 EmolgaNames::
@@ -373,6 +387,7 @@ AccelgorNames::
 
 StunfiskNames::
 	add_name Stunfisk
+	add_name Stunfisk
 
 MienfooNames::
 	add_name Mienfoo
@@ -442,8 +457,10 @@ VirizionNames::
 
 TornadusNames::
 	add_name Tornadus
+	add_name Tornadus
 
 ThundurusNames::
+	add_name Thundurus
 	add_name Thundurus
 
 ReshiramNames::
@@ -454,14 +471,19 @@ ZekromNames::
 
 LandorusNames::
 	add_name Landorus
+	add_name Landorus
 
 KyuremNames::
+	add_name Kyurem
+	add_name Kyurem
 	add_name Kyurem
 
 KeldeoNames::
 	add_name Keldeo
+	add_name Keldeo
 
 MeloettaNames::
+	add_name Meloetta
 	add_name Meloetta
 
 GenesectNames::

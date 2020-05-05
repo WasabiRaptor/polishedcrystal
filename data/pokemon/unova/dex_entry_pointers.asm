@@ -82,6 +82,7 @@ TranquillPokedexEntryPointers::
 
 UnfezantPokedexEntryPointers::
 	add_pokedexentry Unfezant
+	add_pokedexentry Unfezant
 
 BlitzlePokedexEntryPointers::
 	add_pokedexentry Blitzle
@@ -111,6 +112,7 @@ ExcadrillPokedexEntryPointers::
 	add_pokedexentry Excadrill
 
 AudinoPokedexEntryPointers::
+	add_pokedexentry Audino
 	add_pokedexentry Audino
 
 TimburrPokedexEntryPointers::
@@ -181,8 +183,12 @@ KrookodilePokedexEntryPointers::
 
 DarumakaPokedexEntryPointers::
 	add_pokedexentry Darumaka
+	add_pokedexentry Darumaka
 
 DarmanitanPokedexEntryPointers::
+	add_pokedexentry Darmanitan
+	add_pokedexentry Darmanitan
+	add_pokedexentry Darmanitan
 	add_pokedexentry Darmanitan
 
 MaractusPokedexEntryPointers::
@@ -205,6 +211,7 @@ SigilyphPokedexEntryPointers::
 
 YamaskPokedexEntryPointers::
 	add_pokedexentry Yamask
+	add_pokedexentry Yamask
 
 CofagrigusPokedexEntryPointers::
 	add_pokedexentry Cofagrigus
@@ -225,6 +232,7 @@ TrubbishPokedexEntryPointers::
 	add_pokedexentry Trubbish
 
 GarbodorPokedexEntryPointers::
+	add_pokedexentry Garbodor
 	add_pokedexentry Garbodor
 
 ZoruaPokedexEntryPointers::
@@ -274,8 +282,14 @@ VanilluxePokedexEntryPointers::
 
 DeerlingPokedexEntryPointers::
 	add_pokedexentry Deerling
+	add_pokedexentry Deerling
+	add_pokedexentry Deerling
+	add_pokedexentry Deerling
 
 SawsbuckPokedexEntryPointers::
+	add_pokedexentry Sawsbuck
+	add_pokedexentry Sawsbuck
+	add_pokedexentry Sawsbuck
 	add_pokedexentry Sawsbuck
 
 EmolgaPokedexEntryPointers::
@@ -373,6 +387,7 @@ AccelgorPokedexEntryPointers::
 
 StunfiskPokedexEntryPointers::
 	add_pokedexentry Stunfisk
+	add_pokedexentry Stunfisk
 
 MienfooPokedexEntryPointers::
 	add_pokedexentry Mienfoo
@@ -442,8 +457,10 @@ VirizionPokedexEntryPointers::
 
 TornadusPokedexEntryPointers::
 	add_pokedexentry Tornadus
+	add_pokedexentry Tornadus
 
 ThundurusPokedexEntryPointers::
+	add_pokedexentry Thundurus
 	add_pokedexentry Thundurus
 
 ReshiramPokedexEntryPointers::
@@ -454,14 +471,19 @@ ZekromPokedexEntryPointers::
 
 LandorusPokedexEntryPointers::
 	add_pokedexentry Landorus
+	add_pokedexentry Landorus
 
 KyuremPokedexEntryPointers::
+	add_pokedexentry Kyurem
+	add_pokedexentry Kyurem
 	add_pokedexentry Kyurem
 
 KeldeoPokedexEntryPointers::
 	add_pokedexentry Keldeo
+	add_pokedexentry Keldeo
 
 MeloettaPokedexEntryPointers::
+	add_pokedexentry Meloetta
 	add_pokedexentry Meloetta
 
 GenesectPokedexEntryPointers::

@@ -18,6 +18,9 @@ CharmeleonAnimationPointers::
 
 CharizardAnimationPointers::
 	add_anim Charizard
+	add_anim CharizardMega_x
+	add_anim CharizardMega_y
+	add_anim CharizardGiga
 
 SquirtleAnimationPointers::
 	add_anim Squirtle
@@ -27,6 +30,8 @@ WartortleAnimationPointers::
 
 BlastoiseAnimationPointers::
 	add_anim Blastoise
+	add_anim BlastoiseMega
+	add_anim BlastoiseGiga
 
 CaterpieAnimationPointers::
 	add_anim Caterpie
@@ -36,6 +41,7 @@ MetapodAnimationPointers::
 
 ButterfreeAnimationPointers::
 	add_anim Butterfree
+	add_anim ButterfreeGiga
 
 WeedleAnimationPointers::
 	add_anim Weedle
@@ -45,6 +51,7 @@ KakunaAnimationPointers::
 
 BeedrillAnimationPointers::
 	add_anim Beedrill
+	add_anim BeedrillMega
 
 PidgeyAnimationPointers::
 	add_anim Pidgey
@@ -54,12 +61,15 @@ PidgeottoAnimationPointers::
 
 PidgeotAnimationPointers::
 	add_anim Pidgeot
+	add_anim PidgeotMega
 
 RattataAnimationPointers::
 	add_anim Rattata
+	add_anim RattataAlola
 
 RaticateAnimationPointers::
 	add_anim Raticate
+	add_anim RaticateAlola
 
 SpearowAnimationPointers::
 	add_anim Spearow
@@ -75,15 +85,33 @@ ArbokAnimationPointers::
 
 PikachuAnimationPointers::
 	add_anim Pikachu
+	add_anim PikachuCosplay
+	add_anim PikachuRockstar
+	add_anim PikachuBelle
+	add_anim PikachuPopstar
+	add_anim PikachuPhd
+	add_anim PikachuLibre
+	add_anim PikachuOg_cap
+	add_anim PikachuHoenn_cap
+	add_anim PikachuSinnoh_cap
+	add_anim PikachuUnova_cap
+	add_anim PikachuKalos_cap
+	add_anim PikachuAlola_cap
+	add_anim PikachuPartner_cap
+	add_anim PikachuLets_go
+	add_anim PikachuGiga
 
 RaichuAnimationPointers::
 	add_anim Raichu
+	add_anim RaichuAlola
 
 SandshrewAnimationPointers::
 	add_anim Sandshrew
+	add_anim SandshrewAlola
 
 SandslashAnimationPointers::
 	add_anim Sandslash
+	add_anim SandslashAlola
 
 Nidoran_fAnimationPointers::
 	add_anim Nidoran_f
@@ -111,9 +139,15 @@ ClefableAnimationPointers::
 
 VulpixAnimationPointers::
 	add_anim Vulpix
+	add_anim VulpixAlola
+	add_anim VulpixLoki
+	add_anim VulpixLoki_winter
 
 NinetalesAnimationPointers::
 	add_anim Ninetales
+	add_anim NinetalesAlola
+	add_anim NinetalesLoki
+	add_anim NinetalesLoki_winter
 
 JigglypuffAnimationPointers::
 	add_anim Jigglypuff
@@ -150,15 +184,21 @@ VenomothAnimationPointers::
 
 DiglettAnimationPointers::
 	add_anim Diglett
+	add_anim DiglettAlola
 
 DugtrioAnimationPointers::
 	add_anim Dugtrio
+	add_anim DugtrioAlola
 
 MeowthAnimationPointers::
 	add_anim Meowth
+	add_anim MeowthAlola
+	add_anim MeowthGalar
+	add_anim MeowthKanto_giga
 
 PersianAnimationPointers::
 	add_anim Persian
+	add_anim PersianAlola
 
 PsyduckAnimationPointers::
 	add_anim Psyduck
@@ -195,6 +235,7 @@ KadabraAnimationPointers::
 
 AlakazamAnimationPointers::
 	add_anim Alakazam
+	add_anim AlakazamMega
 
 MachopAnimationPointers::
 	add_anim Machop
@@ -204,6 +245,7 @@ MachokeAnimationPointers::
 
 MachampAnimationPointers::
 	add_anim Machamp
+	add_anim MachampGiga
 
 BellsproutAnimationPointers::
 	add_anim Bellsprout
@@ -222,24 +264,31 @@ TentacruelAnimationPointers::
 
 GeodudeAnimationPointers::
 	add_anim Geodude
+	add_anim GeodudeAlola
 
 GravelerAnimationPointers::
 	add_anim Graveler
+	add_anim GravelerAlola
 
 GolemAnimationPointers::
 	add_anim Golem
+	add_anim GolemAlola
 
 PonytaAnimationPointers::
 	add_anim Ponyta
+	add_anim PonytaGalar
 
 RapidashAnimationPointers::
 	add_anim Rapidash
+	add_anim RapidashGalar
 
 SlowpokeAnimationPointers::
 	add_anim Slowpoke
+	add_anim SlowpokeGalar
 
 SlowbroAnimationPointers::
 	add_anim Slowbro
+	add_anim SlowbroMega
 
 MagnemiteAnimationPointers::
 	add_anim Magnemite
@@ -249,6 +298,7 @@ MagnetonAnimationPointers::
 
 FarfetchdAnimationPointers::
 	add_anim Farfetchd
+	add_anim FarfetchdGalar
 
 DoduoAnimationPointers::
 	add_anim Doduo
@@ -264,9 +314,11 @@ DewgongAnimationPointers::
 
 GrimerAnimationPointers::
 	add_anim Grimer
+	add_anim GrimerAlola
 
 MukAnimationPointers::
 	add_anim Muk
+	add_anim MukAlola
 
 ShellderAnimationPointers::
 	add_anim Shellder
@@ -282,6 +334,8 @@ HaunterAnimationPointers::
 
 GengarAnimationPointers::
 	add_anim Gengar
+	add_anim GengarMega
+	add_anim GengarGiga
 
 OnixAnimationPointers::
 	add_anim Onix
@@ -297,6 +351,7 @@ KrabbyAnimationPointers::
 
 KinglerAnimationPointers::
 	add_anim Kingler
+	add_anim KinglerGiga
 
 VoltorbAnimationPointers::
 	add_anim Voltorb
@@ -309,12 +364,14 @@ ExeggcuteAnimationPointers::
 
 ExeggutorAnimationPointers::
 	add_anim Exeggutor
+	add_anim ExeggutorAlola
 
 CuboneAnimationPointers::
 	add_anim Cubone
 
 MarowakAnimationPointers::
 	add_anim Marowak
+	add_anim MarowakAlola
 
 HitmonleeAnimationPointers::
 	add_anim Hitmonlee
@@ -330,6 +387,7 @@ KoffingAnimationPointers::
 
 WeezingAnimationPointers::
 	add_anim Weezing
+	add_anim WeezingGalar
 
 RhyhornAnimationPointers::
 	add_anim Rhyhorn
@@ -345,6 +403,7 @@ TangelaAnimationPointers::
 
 KangaskhanAnimationPointers::
 	add_anim Kangaskhan
+	add_anim KangaskhanMega
 
 HorseaAnimationPointers::
 	add_anim Horsea
@@ -366,6 +425,7 @@ StarmieAnimationPointers::
 
 MrmimeAnimationPointers::
 	add_anim Mrmime
+	add_anim MrmimeGalar
 
 ScytherAnimationPointers::
 	add_anim Scyther
@@ -381,6 +441,7 @@ MagmarAnimationPointers::
 
 PinsirAnimationPointers::
 	add_anim Pinsir
+	add_anim PinsirMega
 
 TaurosAnimationPointers::
 	add_anim Tauros
@@ -390,15 +451,19 @@ MagikarpAnimationPointers::
 
 GyaradosAnimationPointers::
 	add_anim Gyarados
+	add_anim GyaradosMega
 
 LaprasAnimationPointers::
 	add_anim Lapras
+	add_anim LaprasGiga
 
 DittoAnimationPointers::
 	add_anim Ditto
 
 EeveeAnimationPointers::
 	add_anim Eevee
+	add_anim EeveeLets_go
+	add_anim EeveeGiga
 
 VaporeonAnimationPointers::
 	add_anim Vaporeon
@@ -408,6 +473,7 @@ JolteonAnimationPointers::
 
 FlareonAnimationPointers::
 	add_anim Flareon
+	add_anim FlareonDonut
 
 PorygonAnimationPointers::
 	add_anim Porygon
@@ -426,18 +492,23 @@ KabutopsAnimationPointers::
 
 AerodactylAnimationPointers::
 	add_anim Aerodactyl
+	add_anim AerodactylMega
 
 SnorlaxAnimationPointers::
 	add_anim Snorlax
+	add_anim SnorlaxGiga
 
 ArticunoAnimationPointers::
 	add_anim Articuno
+	add_anim ArticunoGalar
 
 ZapdosAnimationPointers::
 	add_anim Zapdos
+	add_anim ZapdosGalar
 
 MoltresAnimationPointers::
 	add_anim Moltres
+	add_anim MoltresGalar
 
 DratiniAnimationPointers::
 	add_anim Dratini
@@ -450,6 +521,8 @@ DragoniteAnimationPointers::
 
 MewtwoAnimationPointers::
 	add_anim Mewtwo
+	add_anim MewtwoMega_x
+	add_anim MewtwoMega_y
 
 MewAnimationPointers::
 	add_anim Mew

@@ -61,6 +61,7 @@ LanturnPicPointers::
 
 PichuPicPointers::
 	add_pics Pichu
+	add_pics PichuSpiky_eared
 
 CleffaPicPointers::
 	add_pics Cleffa
@@ -88,6 +89,7 @@ FlaaffyPicPointers::
 
 AmpharosPicPointers::
 	add_pics Ampharos
+	add_pics AmpharosMega
 
 BellossomPicPointers::
 	add_pics Bellossom
@@ -148,6 +150,34 @@ MisdreavusPicPointers::
 
 UnownPicPointers::
 	add_pics Unown
+	add_pics UnownA
+	add_pics UnownB
+	add_pics UnownC
+	add_pics UnownD
+	add_pics UnownE
+	add_pics UnownF
+	add_pics UnownG
+	add_pics UnownH
+	add_pics UnownI
+	add_pics UnownJ
+	add_pics UnownK
+	add_pics UnownL
+	add_pics UnownM
+	add_pics UnownN
+	add_pics UnownO
+	add_pics UnownP
+	add_pics UnownQ
+	add_pics UnownR
+	add_pics UnownS
+	add_pics UnownT
+	add_pics UnownU
+	add_pics UnownV
+	add_pics UnownW
+	add_pics UnownX
+	add_pics UnownY
+	add_pics UnownZ
+	add_pics UnownExclamation_mark
+	add_pics UnownQuestion_mark
 
 WobbuffetPicPointers::
 	add_pics Wobbuffet
@@ -169,6 +199,7 @@ GligarPicPointers::
 
 SteelixPicPointers::
 	add_pics Steelix
+	add_pics SteelixMega
 
 SnubbullPicPointers::
 	add_pics Snubbull
@@ -181,12 +212,14 @@ QwilfishPicPointers::
 
 ScizorPicPointers::
 	add_pics Scizor
+	add_pics ScizorMega
 
 ShucklePicPointers::
 	add_pics Shuckle
 
 HeracrossPicPointers::
 	add_pics Heracross
+	add_pics HeracrossMega
 
 SneaselPicPointers::
 	add_pics Sneasel
@@ -211,6 +244,7 @@ PiloswinePicPointers::
 
 CorsolaPicPointers::
 	add_pics Corsola
+	add_pics CorsolaGalar
 
 RemoraidPicPointers::
 	add_pics Remoraid
@@ -232,6 +266,7 @@ HoundourPicPointers::
 
 HoundoomPicPointers::
 	add_pics Houndoom
+	add_pics HoundoomMega
 
 KingdraPicPointers::
 	add_pics Kingdra
@@ -289,6 +324,7 @@ PupitarPicPointers::
 
 TyranitarPicPointers::
 	add_pics Tyranitar
+	add_pics TyranitarMega
 
 LugiaPicPointers::
 	add_pics Lugia

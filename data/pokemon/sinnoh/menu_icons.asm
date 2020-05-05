@@ -55,8 +55,12 @@ ShieldonIcon::	INCBIN "gfx/icons/shieldon.2bpp"
 BastiodonIcon::	INCBIN "gfx/icons/bastiodon.2bpp"
 
 BurmyIcon::	INCBIN "gfx/icons/burmy.2bpp"
+BurmySandIcon::	INCBIN "gfx/icons/burmy_sand.2bpp"
+BurmyTrashIcon::	INCBIN "gfx/icons/burmy_trash.2bpp"
 
 WormadamIcon::	INCBIN "gfx/icons/wormadam.2bpp"
+WormadamSandIcon::	INCBIN "gfx/icons/wormadam_sand.2bpp"
+WormadamTrashIcon::	INCBIN "gfx/icons/wormadam_trash.2bpp"
 
 MothimIcon::	INCBIN "gfx/icons/mothim.2bpp"
 
@@ -76,10 +80,13 @@ FloatzelIcon::	INCBIN "gfx/icons/floatzel.2bpp"
 CherubiIcon::	INCBIN "gfx/icons/cherubi.2bpp"
 
 CherrimIcon::	INCBIN "gfx/icons/cherrim.2bpp"
+CherrimOvercastIcon::	INCBIN "gfx/icons/cherrim_overcast.2bpp"
 
 ShellosIcon::	INCBIN "gfx/icons/shellos.2bpp"
+ShellosWestIcon::	INCBIN "gfx/icons/shellos_west.2bpp"
 
 GastrodonIcon::	INCBIN "gfx/icons/gastrodon.2bpp"
+GastrodonWestIcon::	INCBIN "gfx/icons/gastrodon_west.2bpp"
 
 AmbipomIcon::	INCBIN "gfx/icons/ambipom.2bpp"
 
@@ -90,6 +97,7 @@ DrifblimIcon::	INCBIN "gfx/icons/drifblim.2bpp"
 BunearyIcon::	INCBIN "gfx/icons/buneary.2bpp"
 
 LopunnyIcon::	INCBIN "gfx/icons/lopunny.2bpp"
+LopunnyMegaIcon::	INCBIN "gfx/icons/lopunny_mega.2bpp"
 
 MismagiusIcon::	INCBIN "gfx/icons/mismagius.2bpp"
 
@@ -127,6 +135,7 @@ GibleIcon::	INCBIN "gfx/icons/gible.2bpp"
 GabiteIcon::	INCBIN "gfx/icons/gabite.2bpp"
 
 GarchompIcon::	INCBIN "gfx/icons/garchomp.2bpp"
+GarchompMegaIcon::	INCBIN "gfx/icons/garchomp_mega.2bpp"
 
 MunchlaxIcon::	INCBIN "gfx/icons/munchlax.2bpp"
 
@@ -136,6 +145,7 @@ SECTION "Sinnoh Icons 5", ROMX
 RioluIcon::	INCBIN "gfx/icons/riolu.2bpp"
 
 LucarioIcon::	INCBIN "gfx/icons/lucario.2bpp"
+LucarioMegaIcon::	INCBIN "gfx/icons/lucario_mega.2bpp"
 
 HippopotasIcon::	INCBIN "gfx/icons/hippopotas.2bpp"
 
@@ -160,6 +170,7 @@ MantykeIcon::	INCBIN "gfx/icons/mantyke.2bpp"
 SnoverIcon::	INCBIN "gfx/icons/snover.2bpp"
 
 AbomasnowIcon::	INCBIN "gfx/icons/abomasnow.2bpp"
+AbomasnowMegaIcon::	INCBIN "gfx/icons/abomasnow_mega.2bpp"
 
 WeavileIcon::	INCBIN "gfx/icons/weavile.2bpp"
 
@@ -193,6 +204,7 @@ MamoswineIcon::	INCBIN "gfx/icons/mamoswine.2bpp"
 Porygon_zIcon::	INCBIN "gfx/icons/porygon_z.2bpp"
 
 GalladeIcon::	INCBIN "gfx/icons/gallade.2bpp"
+GalladeMegaIcon::	INCBIN "gfx/icons/gallade_mega.2bpp"
 
 ProbopassIcon::	INCBIN "gfx/icons/probopass.2bpp"
 
@@ -204,6 +216,12 @@ DusknoirIcon::	INCBIN "gfx/icons/dusknoir.2bpp"
 FroslassIcon::	INCBIN "gfx/icons/froslass.2bpp"
 
 RotomIcon::	INCBIN "gfx/icons/rotom.2bpp"
+RotomHeatIcon::	INCBIN "gfx/icons/rotom_heat.2bpp"
+RotomWashIcon::	INCBIN "gfx/icons/rotom_wash.2bpp"
+RotomFrostIcon::	INCBIN "gfx/icons/rotom_frost.2bpp"
+RotomFanIcon::	INCBIN "gfx/icons/rotom_fan.2bpp"
+RotomMowIcon::	INCBIN "gfx/icons/rotom_mow.2bpp"
+RotomDexIcon::	INCBIN "gfx/icons/rotom_dex.2bpp"
 
 UxieIcon::	INCBIN "gfx/icons/uxie.2bpp"
 
@@ -220,6 +238,7 @@ HeatranIcon::	INCBIN "gfx/icons/heatran.2bpp"
 RegigigasIcon::	INCBIN "gfx/icons/regigigas.2bpp"
 
 GiratinaIcon::	INCBIN "gfx/icons/giratina.2bpp"
+GiratinaOriginIcon::	INCBIN "gfx/icons/giratina_origin.2bpp"
 
 CresseliaIcon::	INCBIN "gfx/icons/cresselia.2bpp"
 

@@ -61,6 +61,7 @@ LanturnOverworldSpritePointers::
 
 PichuOverworldSpritePointers::
 	add_overworldsprite Pichu
+	add_overworldsprite PichuSpiky_eared
 
 CleffaOverworldSpritePointers::
 	add_overworldsprite Cleffa
@@ -88,6 +89,7 @@ FlaaffyOverworldSpritePointers::
 
 AmpharosOverworldSpritePointers::
 	add_overworldsprite Ampharos
+	add_overworldsprite AmpharosMega
 
 BellossomOverworldSpritePointers::
 	add_overworldsprite Bellossom
@@ -148,6 +150,34 @@ MisdreavusOverworldSpritePointers::
 
 UnownOverworldSpritePointers::
 	add_overworldsprite Unown
+	add_overworldsprite UnownA
+	add_overworldsprite UnownB
+	add_overworldsprite UnownC
+	add_overworldsprite UnownD
+	add_overworldsprite UnownE
+	add_overworldsprite UnownF
+	add_overworldsprite UnownG
+	add_overworldsprite UnownH
+	add_overworldsprite UnownI
+	add_overworldsprite UnownJ
+	add_overworldsprite UnownK
+	add_overworldsprite UnownL
+	add_overworldsprite UnownM
+	add_overworldsprite UnownN
+	add_overworldsprite UnownO
+	add_overworldsprite UnownP
+	add_overworldsprite UnownQ
+	add_overworldsprite UnownR
+	add_overworldsprite UnownS
+	add_overworldsprite UnownT
+	add_overworldsprite UnownU
+	add_overworldsprite UnownV
+	add_overworldsprite UnownW
+	add_overworldsprite UnownX
+	add_overworldsprite UnownY
+	add_overworldsprite UnownZ
+	add_overworldsprite UnownExclamation_mark
+	add_overworldsprite UnownQuestion_mark
 
 WobbuffetOverworldSpritePointers::
 	add_overworldsprite Wobbuffet
@@ -169,6 +199,7 @@ GligarOverworldSpritePointers::
 
 SteelixOverworldSpritePointers::
 	add_overworldsprite Steelix
+	add_overworldsprite SteelixMega
 
 SnubbullOverworldSpritePointers::
 	add_overworldsprite Snubbull
@@ -181,12 +212,14 @@ QwilfishOverworldSpritePointers::
 
 ScizorOverworldSpritePointers::
 	add_overworldsprite Scizor
+	add_overworldsprite ScizorMega
 
 ShuckleOverworldSpritePointers::
 	add_overworldsprite Shuckle
 
 HeracrossOverworldSpritePointers::
 	add_overworldsprite Heracross
+	add_overworldsprite HeracrossMega
 
 SneaselOverworldSpritePointers::
 	add_overworldsprite Sneasel
@@ -211,6 +244,7 @@ PiloswineOverworldSpritePointers::
 
 CorsolaOverworldSpritePointers::
 	add_overworldsprite Corsola
+	add_overworldsprite CorsolaGalar
 
 RemoraidOverworldSpritePointers::
 	add_overworldsprite Remoraid
@@ -232,6 +266,7 @@ HoundourOverworldSpritePointers::
 
 HoundoomOverworldSpritePointers::
 	add_overworldsprite Houndoom
+	add_overworldsprite HoundoomMega
 
 KingdraOverworldSpritePointers::
 	add_overworldsprite Kingdra
@@ -289,6 +324,7 @@ PupitarOverworldSpritePointers::
 
 TyranitarOverworldSpritePointers::
 	add_overworldsprite Tyranitar
+	add_overworldsprite TyranitarMega
 
 LugiaOverworldSpritePointers::
 	add_overworldsprite Lugia

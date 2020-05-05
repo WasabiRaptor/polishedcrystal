@@ -8,6 +8,7 @@ GrovyleBaseDataPointers::
 
 SceptileBaseDataPointers::
 	add_basedata Sceptile
+	add_basedata SceptileMega
 
 TorchicBaseDataPointers::
 	add_basedata Torchic
@@ -17,6 +18,7 @@ CombuskenBaseDataPointers::
 
 BlazikenBaseDataPointers::
 	add_basedata Blaziken
+	add_basedata BlazikenMega
 
 MudkipBaseDataPointers::
 	add_basedata Mudkip
@@ -26,6 +28,7 @@ MarshtompBaseDataPointers::
 
 SwampertBaseDataPointers::
 	add_basedata Swampert
+	add_basedata SwampertMega
 
 PoochyenaBaseDataPointers::
 	add_basedata Poochyena
@@ -35,9 +38,11 @@ MightyenaBaseDataPointers::
 
 ZigzagoonBaseDataPointers::
 	add_basedata Zigzagoon
+	add_basedata ZigzagoonGalar
 
 LinooneBaseDataPointers::
 	add_basedata Linoone
+	add_basedata LinooneGalar
 
 WurmpleBaseDataPointers::
 	add_basedata Wurmple
@@ -92,6 +97,7 @@ KirliaBaseDataPointers::
 
 GardevoirBaseDataPointers::
 	add_basedata Gardevoir
+	add_basedata GardevoirMega
 
 SurskitBaseDataPointers::
 	add_basedata Surskit
@@ -152,9 +158,11 @@ DelcattyBaseDataPointers::
 
 SableyeBaseDataPointers::
 	add_basedata Sableye
+	add_basedata SableyeMega
 
 MawileBaseDataPointers::
 	add_basedata Mawile
+	add_basedata MawileMega
 
 AronBaseDataPointers::
 	add_basedata Aron
@@ -164,18 +172,21 @@ LaironBaseDataPointers::
 
 AggronBaseDataPointers::
 	add_basedata Aggron
+	add_basedata AggronMega
 
 MedititeBaseDataPointers::
 	add_basedata Meditite
 
 MedichamBaseDataPointers::
 	add_basedata Medicham
+	add_basedata MedichamMega
 
 ElectrikeBaseDataPointers::
 	add_basedata Electrike
 
 ManectricBaseDataPointers::
 	add_basedata Manectric
+	add_basedata ManectricMega
 
 PlusleBaseDataPointers::
 	add_basedata Plusle
@@ -203,6 +214,7 @@ CarvanhaBaseDataPointers::
 
 SharpedoBaseDataPointers::
 	add_basedata Sharpedo
+	add_basedata SharpedoMega
 
 WailmerBaseDataPointers::
 	add_basedata Wailmer
@@ -215,6 +227,7 @@ NumelBaseDataPointers::
 
 CameruptBaseDataPointers::
 	add_basedata Camerupt
+	add_basedata CameruptMega
 
 TorkoalBaseDataPointers::
 	add_basedata Torkoal
@@ -248,6 +261,7 @@ SwabluBaseDataPointers::
 
 AltariaBaseDataPointers::
 	add_basedata Altaria
+	add_basedata AltariaMega
 
 ZangooseBaseDataPointers::
 	add_basedata Zangoose
@@ -299,6 +313,9 @@ MiloticBaseDataPointers::
 
 CastformBaseDataPointers::
 	add_basedata Castform
+	add_basedata CastformSun
+	add_basedata CastformRain
+	add_basedata CastformSnow
 
 KecleonBaseDataPointers::
 	add_basedata Kecleon
@@ -308,6 +325,7 @@ ShuppetBaseDataPointers::
 
 BanetteBaseDataPointers::
 	add_basedata Banette
+	add_basedata BanetteMega
 
 DuskullBaseDataPointers::
 	add_basedata Duskull
@@ -323,6 +341,7 @@ ChimechoBaseDataPointers::
 
 AbsolBaseDataPointers::
 	add_basedata Absol
+	add_basedata AbsolMega
 
 WynautBaseDataPointers::
 	add_basedata Wynaut
@@ -332,6 +351,7 @@ SnoruntBaseDataPointers::
 
 GlalieBaseDataPointers::
 	add_basedata Glalie
+	add_basedata GlalieMega
 
 SphealBaseDataPointers::
 	add_basedata Spheal
@@ -365,6 +385,7 @@ ShelgonBaseDataPointers::
 
 SalamenceBaseDataPointers::
 	add_basedata Salamence
+	add_basedata SalamenceMega
 
 BeldumBaseDataPointers::
 	add_basedata Beldum
@@ -374,6 +395,7 @@ MetangBaseDataPointers::
 
 MetagrossBaseDataPointers::
 	add_basedata Metagross
+	add_basedata MetagrossMega
 
 RegirockBaseDataPointers::
 	add_basedata Regirock
@@ -386,22 +408,30 @@ RegisteelBaseDataPointers::
 
 LatiasBaseDataPointers::
 	add_basedata Latias
+	add_basedata LatiasMega
 
 LatiosBaseDataPointers::
 	add_basedata Latios
+	add_basedata LatiosMega
 
 KyogreBaseDataPointers::
 	add_basedata Kyogre
+	add_basedata KyogrePrimal
 
 GroudonBaseDataPointers::
 	add_basedata Groudon
+	add_basedata GroudonPrimal
 
 RayquazaBaseDataPointers::
 	add_basedata Rayquaza
+	add_basedata RayquazaMega
 
 JirachiBaseDataPointers::
 	add_basedata Jirachi
 
 DeoxysBaseDataPointers::
 	add_basedata Deoxys
+	add_basedata DeoxysAttack
+	add_basedata DeoxysDefense
+	add_basedata DeoxysSpeed
 

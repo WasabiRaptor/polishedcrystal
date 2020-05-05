@@ -18,6 +18,9 @@ CharmeleonBitmasksPointers::
 
 CharizardBitmasksPointers::
 	add_bitmasks Charizard
+	add_bitmasks CharizardMega_x
+	add_bitmasks CharizardMega_y
+	add_bitmasks CharizardGiga
 
 SquirtleBitmasksPointers::
 	add_bitmasks Squirtle
@@ -27,6 +30,8 @@ WartortleBitmasksPointers::
 
 BlastoiseBitmasksPointers::
 	add_bitmasks Blastoise
+	add_bitmasks BlastoiseMega
+	add_bitmasks BlastoiseGiga
 
 CaterpieBitmasksPointers::
 	add_bitmasks Caterpie
@@ -36,6 +41,7 @@ MetapodBitmasksPointers::
 
 ButterfreeBitmasksPointers::
 	add_bitmasks Butterfree
+	add_bitmasks ButterfreeGiga
 
 WeedleBitmasksPointers::
 	add_bitmasks Weedle
@@ -45,6 +51,7 @@ KakunaBitmasksPointers::
 
 BeedrillBitmasksPointers::
 	add_bitmasks Beedrill
+	add_bitmasks BeedrillMega
 
 PidgeyBitmasksPointers::
 	add_bitmasks Pidgey
@@ -54,12 +61,15 @@ PidgeottoBitmasksPointers::
 
 PidgeotBitmasksPointers::
 	add_bitmasks Pidgeot
+	add_bitmasks PidgeotMega
 
 RattataBitmasksPointers::
 	add_bitmasks Rattata
+	add_bitmasks RattataAlola
 
 RaticateBitmasksPointers::
 	add_bitmasks Raticate
+	add_bitmasks RaticateAlola
 
 SpearowBitmasksPointers::
 	add_bitmasks Spearow
@@ -75,15 +85,33 @@ ArbokBitmasksPointers::
 
 PikachuBitmasksPointers::
 	add_bitmasks Pikachu
+	add_bitmasks PikachuCosplay
+	add_bitmasks PikachuRockstar
+	add_bitmasks PikachuBelle
+	add_bitmasks PikachuPopstar
+	add_bitmasks PikachuPhd
+	add_bitmasks PikachuLibre
+	add_bitmasks PikachuOg_cap
+	add_bitmasks PikachuHoenn_cap
+	add_bitmasks PikachuSinnoh_cap
+	add_bitmasks PikachuUnova_cap
+	add_bitmasks PikachuKalos_cap
+	add_bitmasks PikachuAlola_cap
+	add_bitmasks PikachuPartner_cap
+	add_bitmasks PikachuLets_go
+	add_bitmasks PikachuGiga
 
 RaichuBitmasksPointers::
 	add_bitmasks Raichu
+	add_bitmasks RaichuAlola
 
 SandshrewBitmasksPointers::
 	add_bitmasks Sandshrew
+	add_bitmasks SandshrewAlola
 
 SandslashBitmasksPointers::
 	add_bitmasks Sandslash
+	add_bitmasks SandslashAlola
 
 Nidoran_fBitmasksPointers::
 	add_bitmasks Nidoran_f
@@ -111,9 +139,15 @@ ClefableBitmasksPointers::
 
 VulpixBitmasksPointers::
 	add_bitmasks Vulpix
+	add_bitmasks VulpixAlola
+	add_bitmasks VulpixLoki
+	add_bitmasks VulpixLoki_winter
 
 NinetalesBitmasksPointers::
 	add_bitmasks Ninetales
+	add_bitmasks NinetalesAlola
+	add_bitmasks NinetalesLoki
+	add_bitmasks NinetalesLoki_winter
 
 JigglypuffBitmasksPointers::
 	add_bitmasks Jigglypuff
@@ -150,15 +184,21 @@ VenomothBitmasksPointers::
 
 DiglettBitmasksPointers::
 	add_bitmasks Diglett
+	add_bitmasks DiglettAlola
 
 DugtrioBitmasksPointers::
 	add_bitmasks Dugtrio
+	add_bitmasks DugtrioAlola
 
 MeowthBitmasksPointers::
 	add_bitmasks Meowth
+	add_bitmasks MeowthAlola
+	add_bitmasks MeowthGalar
+	add_bitmasks MeowthKanto_giga
 
 PersianBitmasksPointers::
 	add_bitmasks Persian
+	add_bitmasks PersianAlola
 
 PsyduckBitmasksPointers::
 	add_bitmasks Psyduck
@@ -195,6 +235,7 @@ KadabraBitmasksPointers::
 
 AlakazamBitmasksPointers::
 	add_bitmasks Alakazam
+	add_bitmasks AlakazamMega
 
 MachopBitmasksPointers::
 	add_bitmasks Machop
@@ -204,6 +245,7 @@ MachokeBitmasksPointers::
 
 MachampBitmasksPointers::
 	add_bitmasks Machamp
+	add_bitmasks MachampGiga
 
 BellsproutBitmasksPointers::
 	add_bitmasks Bellsprout
@@ -222,24 +264,31 @@ TentacruelBitmasksPointers::
 
 GeodudeBitmasksPointers::
 	add_bitmasks Geodude
+	add_bitmasks GeodudeAlola
 
 GravelerBitmasksPointers::
 	add_bitmasks Graveler
+	add_bitmasks GravelerAlola
 
 GolemBitmasksPointers::
 	add_bitmasks Golem
+	add_bitmasks GolemAlola
 
 PonytaBitmasksPointers::
 	add_bitmasks Ponyta
+	add_bitmasks PonytaGalar
 
 RapidashBitmasksPointers::
 	add_bitmasks Rapidash
+	add_bitmasks RapidashGalar
 
 SlowpokeBitmasksPointers::
 	add_bitmasks Slowpoke
+	add_bitmasks SlowpokeGalar
 
 SlowbroBitmasksPointers::
 	add_bitmasks Slowbro
+	add_bitmasks SlowbroMega
 
 MagnemiteBitmasksPointers::
 	add_bitmasks Magnemite
@@ -249,6 +298,7 @@ MagnetonBitmasksPointers::
 
 FarfetchdBitmasksPointers::
 	add_bitmasks Farfetchd
+	add_bitmasks FarfetchdGalar
 
 DoduoBitmasksPointers::
 	add_bitmasks Doduo
@@ -264,9 +314,11 @@ DewgongBitmasksPointers::
 
 GrimerBitmasksPointers::
 	add_bitmasks Grimer
+	add_bitmasks GrimerAlola
 
 MukBitmasksPointers::
 	add_bitmasks Muk
+	add_bitmasks MukAlola
 
 ShellderBitmasksPointers::
 	add_bitmasks Shellder
@@ -282,6 +334,8 @@ HaunterBitmasksPointers::
 
 GengarBitmasksPointers::
 	add_bitmasks Gengar
+	add_bitmasks GengarMega
+	add_bitmasks GengarGiga
 
 OnixBitmasksPointers::
 	add_bitmasks Onix
@@ -297,6 +351,7 @@ KrabbyBitmasksPointers::
 
 KinglerBitmasksPointers::
 	add_bitmasks Kingler
+	add_bitmasks KinglerGiga
 
 VoltorbBitmasksPointers::
 	add_bitmasks Voltorb
@@ -309,12 +364,14 @@ ExeggcuteBitmasksPointers::
 
 ExeggutorBitmasksPointers::
 	add_bitmasks Exeggutor
+	add_bitmasks ExeggutorAlola
 
 CuboneBitmasksPointers::
 	add_bitmasks Cubone
 
 MarowakBitmasksPointers::
 	add_bitmasks Marowak
+	add_bitmasks MarowakAlola
 
 HitmonleeBitmasksPointers::
 	add_bitmasks Hitmonlee
@@ -330,6 +387,7 @@ KoffingBitmasksPointers::
 
 WeezingBitmasksPointers::
 	add_bitmasks Weezing
+	add_bitmasks WeezingGalar
 
 RhyhornBitmasksPointers::
 	add_bitmasks Rhyhorn
@@ -345,6 +403,7 @@ TangelaBitmasksPointers::
 
 KangaskhanBitmasksPointers::
 	add_bitmasks Kangaskhan
+	add_bitmasks KangaskhanMega
 
 HorseaBitmasksPointers::
 	add_bitmasks Horsea
@@ -366,6 +425,7 @@ StarmieBitmasksPointers::
 
 MrmimeBitmasksPointers::
 	add_bitmasks Mrmime
+	add_bitmasks MrmimeGalar
 
 ScytherBitmasksPointers::
 	add_bitmasks Scyther
@@ -381,6 +441,7 @@ MagmarBitmasksPointers::
 
 PinsirBitmasksPointers::
 	add_bitmasks Pinsir
+	add_bitmasks PinsirMega
 
 TaurosBitmasksPointers::
 	add_bitmasks Tauros
@@ -390,15 +451,19 @@ MagikarpBitmasksPointers::
 
 GyaradosBitmasksPointers::
 	add_bitmasks Gyarados
+	add_bitmasks GyaradosMega
 
 LaprasBitmasksPointers::
 	add_bitmasks Lapras
+	add_bitmasks LaprasGiga
 
 DittoBitmasksPointers::
 	add_bitmasks Ditto
 
 EeveeBitmasksPointers::
 	add_bitmasks Eevee
+	add_bitmasks EeveeLets_go
+	add_bitmasks EeveeGiga
 
 VaporeonBitmasksPointers::
 	add_bitmasks Vaporeon
@@ -408,6 +473,7 @@ JolteonBitmasksPointers::
 
 FlareonBitmasksPointers::
 	add_bitmasks Flareon
+	add_bitmasks FlareonDonut
 
 PorygonBitmasksPointers::
 	add_bitmasks Porygon
@@ -426,18 +492,23 @@ KabutopsBitmasksPointers::
 
 AerodactylBitmasksPointers::
 	add_bitmasks Aerodactyl
+	add_bitmasks AerodactylMega
 
 SnorlaxBitmasksPointers::
 	add_bitmasks Snorlax
+	add_bitmasks SnorlaxGiga
 
 ArticunoBitmasksPointers::
 	add_bitmasks Articuno
+	add_bitmasks ArticunoGalar
 
 ZapdosBitmasksPointers::
 	add_bitmasks Zapdos
+	add_bitmasks ZapdosGalar
 
 MoltresBitmasksPointers::
 	add_bitmasks Moltres
+	add_bitmasks MoltresGalar
 
 DratiniBitmasksPointers::
 	add_bitmasks Dratini
@@ -450,6 +521,8 @@ DragoniteBitmasksPointers::
 
 MewtwoBitmasksPointers::
 	add_bitmasks Mewtwo
+	add_bitmasks MewtwoMega_x
+	add_bitmasks MewtwoMega_y
 
 MewBitmasksPointers::
 	add_bitmasks Mew

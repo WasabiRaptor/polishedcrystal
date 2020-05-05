@@ -61,6 +61,7 @@ LanturnNames::
 
 PichuNames::
 	add_name Pichu
+	add_name Pichu
 
 CleffaNames::
 	add_name Cleffa
@@ -87,6 +88,7 @@ FlaaffyNames::
 	add_name Flaaffy
 
 AmpharosNames::
+	add_name Ampharos
 	add_name Ampharos
 
 BellossomNames::
@@ -148,6 +150,34 @@ MisdreavusNames::
 
 UnownNames::
 	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
+	add_name Unown
 
 WobbuffetNames::
 	add_name Wobbuffet
@@ -169,6 +199,7 @@ GligarNames::
 
 SteelixNames::
 	add_name Steelix
+	add_name Steelix
 
 SnubbullNames::
 	add_name Snubbull
@@ -181,11 +212,13 @@ QwilfishNames::
 
 ScizorNames::
 	add_name Scizor
+	add_name Scizor
 
 ShuckleNames::
 	add_name Shuckle
 
 HeracrossNames::
+	add_name Heracross
 	add_name Heracross
 
 SneaselNames::
@@ -211,6 +244,7 @@ PiloswineNames::
 
 CorsolaNames::
 	add_name Corsola
+	add_name Corsola
 
 RemoraidNames::
 	add_name Remoraid
@@ -231,6 +265,7 @@ HoundourNames::
 	add_name Houndour
 
 HoundoomNames::
+	add_name Houndoom
 	add_name Houndoom
 
 KingdraNames::
@@ -288,6 +323,7 @@ PupitarNames::
 	add_name Pupitar
 
 TyranitarNames::
+	add_name Tyranitar
 	add_name Tyranitar
 
 LugiaNames::

@@ -20,8 +20,8 @@ IncineroarPicPointers::
 PopplioPicPointers::
 	add_pics Popplio
 
-BrionePicPointers::
-	add_pics Brione
+BrionnePicPointers::
+	add_pics Brionne
 
 PrimarinaPicPointers::
 	add_pics Primarina
@@ -58,6 +58,9 @@ CrabominablePicPointers::
 
 OricorioPicPointers::
 	add_pics Oricorio
+	add_pics OricorioPom_pom
+	add_pics OricorioPau
+	add_pics OricorioSensu
 
 CutieflyPicPointers::
 	add_pics Cutiefly
@@ -67,12 +70,17 @@ RibombeePicPointers::
 
 RockruffPicPointers::
 	add_pics Rockruff
+	add_pics RockruffOwn_tempo
 
 LycanrocPicPointers::
 	add_pics Lycanroc
+	add_pics LycanrocMidday
+	add_pics LycanrocDusk
+	add_pics LycanrocMidnight
 
 WishiwashiPicPointers::
 	add_pics Wishiwashi
+	add_pics WishiwashiSchool
 
 MareaniePicPointers::
 	add_pics Mareanie
@@ -157,6 +165,7 @@ SilvallyPicPointers::
 
 MiniorPicPointers::
 	add_pics Minior
+	add_pics MiniorCore
 
 KomalaPicPointers::
 	add_pics Komala
@@ -169,6 +178,7 @@ TogedemaruPicPointers::
 
 MimikyuPicPointers::
 	add_pics Mimikyu
+	add_pics MimikyuBusted
 
 BruxishPicPointers::
 	add_pics Bruxish
@@ -235,6 +245,9 @@ GuzzlordPicPointers::
 
 NecrozmaPicPointers::
 	add_pics Necrozma
+	add_pics NecrozmaDawn_wings
+	add_pics NecrozmaDusk_mane
+	add_pics NecrozmaUltra
 
 MagearnaPicPointers::
 	add_pics Magearna
@@ -262,4 +275,5 @@ MeltanPicPointers::
 
 MelmetalPicPointers::
 	add_pics Melmetal
+	add_pics MelmetalGiga
 

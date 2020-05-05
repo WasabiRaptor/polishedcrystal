@@ -6,7 +6,7 @@ AlolaPalettePointerTable::
 	add_palettetable Torracat
 	add_palettetable Incineroar
 	add_palettetable Popplio
-	add_palettetable Brione
+	add_palettetable Brionne
 	add_palettetable Primarina
 	add_palettetable Pikipeck
 	add_palettetable Trumbeak

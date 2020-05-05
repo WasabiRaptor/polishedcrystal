@@ -6,7 +6,7 @@ AlolaBaseDataPointerTable::
 	add_basedatatable Torracat
 	add_basedatatable Incineroar
 	add_basedatatable Popplio
-	add_basedatatable Brione
+	add_basedatatable Brionne
 	add_basedatatable Primarina
 	add_basedatatable Pikipeck
 	add_basedatatable Trumbeak

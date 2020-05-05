@@ -7,6 +7,7 @@ GrovyleAnimationPointers::
 
 SceptileAnimationPointers::
 	add_anim Sceptile
+	add_anim SceptileMega
 
 TorchicAnimationPointers::
 	add_anim Torchic
@@ -16,6 +17,7 @@ CombuskenAnimationPointers::
 
 BlazikenAnimationPointers::
 	add_anim Blaziken
+	add_anim BlazikenMega
 
 MudkipAnimationPointers::
 	add_anim Mudkip
@@ -25,6 +27,7 @@ MarshtompAnimationPointers::
 
 SwampertAnimationPointers::
 	add_anim Swampert
+	add_anim SwampertMega
 
 PoochyenaAnimationPointers::
 	add_anim Poochyena
@@ -34,9 +37,11 @@ MightyenaAnimationPointers::
 
 ZigzagoonAnimationPointers::
 	add_anim Zigzagoon
+	add_anim ZigzagoonGalar
 
 LinooneAnimationPointers::
 	add_anim Linoone
+	add_anim LinooneGalar
 
 WurmpleAnimationPointers::
 	add_anim Wurmple
@@ -91,6 +96,7 @@ KirliaAnimationPointers::
 
 GardevoirAnimationPointers::
 	add_anim Gardevoir
+	add_anim GardevoirMega
 
 SurskitAnimationPointers::
 	add_anim Surskit
@@ -151,9 +157,11 @@ DelcattyAnimationPointers::
 
 SableyeAnimationPointers::
 	add_anim Sableye
+	add_anim SableyeMega
 
 MawileAnimationPointers::
 	add_anim Mawile
+	add_anim MawileMega
 
 AronAnimationPointers::
 	add_anim Aron
@@ -163,18 +171,21 @@ LaironAnimationPointers::
 
 AggronAnimationPointers::
 	add_anim Aggron
+	add_anim AggronMega
 
 MedititeAnimationPointers::
 	add_anim Meditite
 
 MedichamAnimationPointers::
 	add_anim Medicham
+	add_anim MedichamMega
 
 ElectrikeAnimationPointers::
 	add_anim Electrike
 
 ManectricAnimationPointers::
 	add_anim Manectric
+	add_anim ManectricMega
 
 PlusleAnimationPointers::
 	add_anim Plusle
@@ -202,6 +213,7 @@ CarvanhaAnimationPointers::
 
 SharpedoAnimationPointers::
 	add_anim Sharpedo
+	add_anim SharpedoMega
 
 WailmerAnimationPointers::
 	add_anim Wailmer
@@ -214,6 +226,7 @@ NumelAnimationPointers::
 
 CameruptAnimationPointers::
 	add_anim Camerupt
+	add_anim CameruptMega
 
 TorkoalAnimationPointers::
 	add_anim Torkoal
@@ -247,6 +260,7 @@ SwabluAnimationPointers::
 
 AltariaAnimationPointers::
 	add_anim Altaria
+	add_anim AltariaMega
 
 ZangooseAnimationPointers::
 	add_anim Zangoose
@@ -298,6 +312,9 @@ MiloticAnimationPointers::
 
 CastformAnimationPointers::
 	add_anim Castform
+	add_anim CastformSun
+	add_anim CastformRain
+	add_anim CastformSnow
 
 KecleonAnimationPointers::
 	add_anim Kecleon
@@ -307,6 +324,7 @@ ShuppetAnimationPointers::
 
 BanetteAnimationPointers::
 	add_anim Banette
+	add_anim BanetteMega
 
 DuskullAnimationPointers::
 	add_anim Duskull
@@ -322,6 +340,7 @@ ChimechoAnimationPointers::
 
 AbsolAnimationPointers::
 	add_anim Absol
+	add_anim AbsolMega
 
 WynautAnimationPointers::
 	add_anim Wynaut
@@ -331,6 +350,7 @@ SnoruntAnimationPointers::
 
 GlalieAnimationPointers::
 	add_anim Glalie
+	add_anim GlalieMega
 
 SphealAnimationPointers::
 	add_anim Spheal
@@ -364,6 +384,7 @@ ShelgonAnimationPointers::
 
 SalamenceAnimationPointers::
 	add_anim Salamence
+	add_anim SalamenceMega
 
 BeldumAnimationPointers::
 	add_anim Beldum
@@ -373,6 +394,7 @@ MetangAnimationPointers::
 
 MetagrossAnimationPointers::
 	add_anim Metagross
+	add_anim MetagrossMega
 
 RegirockAnimationPointers::
 	add_anim Regirock
@@ -385,22 +407,30 @@ RegisteelAnimationPointers::
 
 LatiasAnimationPointers::
 	add_anim Latias
+	add_anim LatiasMega
 
 LatiosAnimationPointers::
 	add_anim Latios
+	add_anim LatiosMega
 
 KyogreAnimationPointers::
 	add_anim Kyogre
+	add_anim KyogrePrimal
 
 GroudonAnimationPointers::
 	add_anim Groudon
+	add_anim GroudonPrimal
 
 RayquazaAnimationPointers::
 	add_anim Rayquaza
+	add_anim RayquazaMega
 
 JirachiAnimationPointers::
 	add_anim Jirachi
 
 DeoxysAnimationPointers::
 	add_anim Deoxys
+	add_anim DeoxysAttack
+	add_anim DeoxysDefense
+	add_anim DeoxysSpeed
 

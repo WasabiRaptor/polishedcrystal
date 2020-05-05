@@ -1,0 +1,269 @@
+GalarOverworldPalettePointers::
+GrookeyOverworldPalettePointers::
+	add_overworldpalettes Grookey
+
+ThwackeyOverworldPalettePointers::
+	add_overworldpalettes Thwackey
+
+RillaboomOverworldPalettePointers::
+	add_overworldpalettes Rillaboom
+	add_overworldpalettes RillaboomGiga
+
+ScorbunnyOverworldPalettePointers::
+	add_overworldpalettes Scorbunny
+
+RabootOverworldPalettePointers::
+	add_overworldpalettes Raboot
+
+CinderaceOverworldPalettePointers::
+	add_overworldpalettes Cinderace
+	add_overworldpalettes CinderaceGiga
+
+SobbleOverworldPalettePointers::
+	add_overworldpalettes Sobble
+
+DrizzileOverworldPalettePointers::
+	add_overworldpalettes Drizzile
+
+InteleonOverworldPalettePointers::
+	add_overworldpalettes Inteleon
+	add_overworldpalettes InteleonGiga
+
+SkwovetOverworldPalettePointers::
+	add_overworldpalettes Skwovet
+
+GreedentOverworldPalettePointers::
+	add_overworldpalettes Greedent
+
+RookideeOverworldPalettePointers::
+	add_overworldpalettes Rookidee
+
+CorvisquireOverworldPalettePointers::
+	add_overworldpalettes Corvisquire
+
+CorviknightOverworldPalettePointers::
+	add_overworldpalettes Corviknight
+	add_overworldpalettes CorviknightGiga
+
+BlipbugOverworldPalettePointers::
+	add_overworldpalettes Blipbug
+
+DottlerOverworldPalettePointers::
+	add_overworldpalettes Dottler
+
+OrbeetleOverworldPalettePointers::
+	add_overworldpalettes Orbeetle
+	add_overworldpalettes OrbeetleGiga
+
+NickitOverworldPalettePointers::
+	add_overworldpalettes Nickit
+
+ThievulOverworldPalettePointers::
+	add_overworldpalettes Thievul
+
+GrossifleurOverworldPalettePointers::
+	add_overworldpalettes Grossifleur
+
+EldegrossOverworldPalettePointers::
+	add_overworldpalettes Eldegross
+
+WoolooOverworldPalettePointers::
+	add_overworldpalettes Wooloo
+
+DubwoolOverworldPalettePointers::
+	add_overworldpalettes Dubwool
+
+ChewtleOverworldPalettePointers::
+	add_overworldpalettes Chewtle
+
+DrednawOverworldPalettePointers::
+	add_overworldpalettes Drednaw
+	add_overworldpalettes DrednawGiga
+
+YamperOverworldPalettePointers::
+	add_overworldpalettes Yamper
+
+BoltundOverworldPalettePointers::
+	add_overworldpalettes Boltund
+
+RolycolyOverworldPalettePointers::
+	add_overworldpalettes Rolycoly
+
+CarkoalOverworldPalettePointers::
+	add_overworldpalettes Carkoal
+
+CoalossalOverworldPalettePointers::
+	add_overworldpalettes Coalossal
+	add_overworldpalettes CoalossalGiga
+
+ApplinOverworldPalettePointers::
+	add_overworldpalettes Applin
+
+FlappleOverworldPalettePointers::
+	add_overworldpalettes Flapple
+	add_overworldpalettes FlappleGiga
+
+AppletunOverworldPalettePointers::
+	add_overworldpalettes Appletun
+	add_overworldpalettes AppletunGiga
+
+SilicobraOverworldPalettePointers::
+	add_overworldpalettes Silicobra
+
+SandacondaOverworldPalettePointers::
+	add_overworldpalettes Sandaconda
+	add_overworldpalettes SandacondaGiga
+
+CramorantOverworldPalettePointers::
+	add_overworldpalettes Cramorant
+	add_overworldpalettes CramorantGulping
+	add_overworldpalettes CramorantGorging
+
+ArrokudaOverworldPalettePointers::
+	add_overworldpalettes Arrokuda
+
+BarraskewdaOverworldPalettePointers::
+	add_overworldpalettes Barraskewda
+
+ToxelOverworldPalettePointers::
+	add_overworldpalettes Toxel
+
+ToxtricityOverworldPalettePointers::
+	add_overworldpalettes Toxtricity
+	add_overworldpalettes ToxtricityLow_key
+	add_overworldpalettes ToxtricityGiga
+
+SizzlipedeOverworldPalettePointers::
+	add_overworldpalettes Sizzlipede
+
+CentiskorchOverworldPalettePointers::
+	add_overworldpalettes Centiskorch
+	add_overworldpalettes CentiskorchGiga
+
+ClobbopusOverworldPalettePointers::
+	add_overworldpalettes Clobbopus
+
+GrapploctOverworldPalettePointers::
+	add_overworldpalettes Grapploct
+
+SinisteaOverworldPalettePointers::
+	add_overworldpalettes Sinistea
+
+PolteageistOverworldPalettePointers::
+	add_overworldpalettes Polteageist
+
+HatrennaOverworldPalettePointers::
+	add_overworldpalettes Hatrenna
+
+HattremOverworldPalettePointers::
+	add_overworldpalettes Hattrem
+
+HattereneOverworldPalettePointers::
+	add_overworldpalettes Hatterene
+	add_overworldpalettes HattereneGiga
+
+ImpidimpOverworldPalettePointers::
+	add_overworldpalettes Impidimp
+
+MorgremOverworldPalettePointers::
+	add_overworldpalettes Morgrem
+
+GrimmsnarlOverworldPalettePointers::
+	add_overworldpalettes Grimmsnarl
+	add_overworldpalettes GrimmsnarlGiga
+
+ObstagoonOverworldPalettePointers::
+	add_overworldpalettes Obstagoon
+
+PerrserkerOverworldPalettePointers::
+	add_overworldpalettes Perrserker
+
+CursolaOverworldPalettePointers::
+	add_overworldpalettes Cursola
+
+SirfetchdOverworldPalettePointers::
+	add_overworldpalettes Sirfetchd
+
+MrrimeOverworldPalettePointers::
+	add_overworldpalettes Mrrime
+
+RunerigusOverworldPalettePointers::
+	add_overworldpalettes Runerigus
+
+MilceryOverworldPalettePointers::
+	add_overworldpalettes Milcery
+
+AlcremieOverworldPalettePointers::
+	add_overworldpalettes Alcremie
+	add_overworldpalettes AlcremieGiga
+
+FalinksOverworldPalettePointers::
+	add_overworldpalettes Falinks
+
+PincurchinOverworldPalettePointers::
+	add_overworldpalettes Pincurchin
+
+SnomOverworldPalettePointers::
+	add_overworldpalettes Snom
+
+FrosmothOverworldPalettePointers::
+	add_overworldpalettes Frosmoth
+
+StonjournerOverworldPalettePointers::
+	add_overworldpalettes Stonjourner
+
+EiscueOverworldPalettePointers::
+	add_overworldpalettes Eiscue
+	add_overworldpalettes EiscueNo_ice
+
+IndeedeeOverworldPalettePointers::
+	add_overworldpalettes Indeedee
+
+MorpekoOverworldPalettePointers::
+	add_overworldpalettes Morpeko
+	add_overworldpalettes MorpekoHangry
+
+CufantOverworldPalettePointers::
+	add_overworldpalettes Cufant
+
+CopperajahOverworldPalettePointers::
+	add_overworldpalettes Copperajah
+	add_overworldpalettes CopperajahGiga
+
+DracozoltOverworldPalettePointers::
+	add_overworldpalettes Dracozolt
+
+ArctozoltOverworldPalettePointers::
+	add_overworldpalettes Arctozolt
+
+DracovishOverworldPalettePointers::
+	add_overworldpalettes Dracovish
+
+ArctovishOverworldPalettePointers::
+	add_overworldpalettes Arctovish
+
+DuraldonOverworldPalettePointers::
+	add_overworldpalettes Duraldon
+	add_overworldpalettes DuraldonGiga
+
+DreepyOverworldPalettePointers::
+	add_overworldpalettes Dreepy
+
+DrakloakOverworldPalettePointers::
+	add_overworldpalettes Drakloak
+
+DragapultOverworldPalettePointers::
+	add_overworldpalettes Dragapult
+
+ZacianOverworldPalettePointers::
+	add_overworldpalettes Zacian
+	add_overworldpalettes ZacianSword
+
+ZamazentaOverworldPalettePointers::
+	add_overworldpalettes Zamazenta
+	add_overworldpalettes ZamazentaSheild
+
+EternatusOverworldPalettePointers::
+	add_overworldpalettes Eternatus
+	add_overworldpalettes EternatusEternamax
+

@@ -18,6 +18,9 @@ CharmeleonNames::
 
 CharizardNames::
 	add_name Charizard
+	add_name Charizard
+	add_name Charizard
+	add_name Charizard
 
 SquirtleNames::
 	add_name Squirtle
@@ -26,6 +29,8 @@ WartortleNames::
 	add_name Wartortle
 
 BlastoiseNames::
+	add_name Blastoise
+	add_name Blastoise
 	add_name Blastoise
 
 CaterpieNames::
@@ -36,6 +41,7 @@ MetapodNames::
 
 ButterfreeNames::
 	add_name Butterfree
+	add_name Butterfree
 
 WeedleNames::
 	add_name Weedle
@@ -44,6 +50,7 @@ KakunaNames::
 	add_name Kakuna
 
 BeedrillNames::
+	add_name Beedrill
 	add_name Beedrill
 
 PidgeyNames::
@@ -54,11 +61,14 @@ PidgeottoNames::
 
 PidgeotNames::
 	add_name Pidgeot
+	add_name Pidgeot
 
 RattataNames::
 	add_name Rattata
+	add_name Rattata
 
 RaticateNames::
+	add_name Raticate
 	add_name Raticate
 
 SpearowNames::
@@ -75,14 +85,32 @@ ArbokNames::
 
 PikachuNames::
 	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
+	add_name Pikachu
 
 RaichuNames::
+	add_name Raichu
 	add_name Raichu
 
 SandshrewNames::
 	add_name Sandshrew
+	add_name Sandshrew
 
 SandslashNames::
+	add_name Sandslash
 	add_name Sandslash
 
 Nidoran_fNames::
@@ -111,8 +139,14 @@ ClefableNames::
 
 VulpixNames::
 	add_name Vulpix
+	add_name Vulpix
+	add_name Vulpix
+	add_name Vulpix
 
 NinetalesNames::
+	add_name Ninetales
+	add_name Ninetales
+	add_name Ninetales
 	add_name Ninetales
 
 JigglypuffNames::
@@ -150,14 +184,20 @@ VenomothNames::
 
 DiglettNames::
 	add_name Diglett
+	add_name Diglett
 
 DugtrioNames::
+	add_name Dugtrio
 	add_name Dugtrio
 
 MeowthNames::
 	add_name Meowth
+	add_name Meowth
+	add_name Meowth
+	add_name Meowth
 
 PersianNames::
+	add_name Persian
 	add_name Persian
 
 PsyduckNames::
@@ -195,6 +235,7 @@ KadabraNames::
 
 AlakazamNames::
 	add_name Alakazam
+	add_name Alakazam
 
 MachopNames::
 	add_name Machop
@@ -203,6 +244,7 @@ MachokeNames::
 	add_name Machoke
 
 MachampNames::
+	add_name Machamp
 	add_name Machamp
 
 BellsproutNames::
@@ -222,23 +264,30 @@ TentacruelNames::
 
 GeodudeNames::
 	add_name Geodude
+	add_name Geodude
 
 GravelerNames::
+	add_name Graveler
 	add_name Graveler
 
 GolemNames::
 	add_name Golem
+	add_name Golem
 
 PonytaNames::
+	add_name Ponyta
 	add_name Ponyta
 
 RapidashNames::
 	add_name Rapidash
+	add_name Rapidash
 
 SlowpokeNames::
 	add_name Slowpoke
+	add_name Slowpoke
 
 SlowbroNames::
+	add_name Slowbro
 	add_name Slowbro
 
 MagnemiteNames::
@@ -248,6 +297,7 @@ MagnetonNames::
 	add_name Magneton
 
 FarfetchdNames::
+	add_name Farfetchd
 	add_name Farfetchd
 
 DoduoNames::
@@ -264,8 +314,10 @@ DewgongNames::
 
 GrimerNames::
 	add_name Grimer
+	add_name Grimer
 
 MukNames::
+	add_name Muk
 	add_name Muk
 
 ShellderNames::
@@ -282,6 +334,8 @@ HaunterNames::
 
 GengarNames::
 	add_name Gengar
+	add_name Gengar
+	add_name Gengar
 
 OnixNames::
 	add_name Onix
@@ -297,6 +351,7 @@ KrabbyNames::
 
 KinglerNames::
 	add_name Kingler
+	add_name Kingler
 
 VoltorbNames::
 	add_name Voltorb
@@ -309,11 +364,13 @@ ExeggcuteNames::
 
 ExeggutorNames::
 	add_name Exeggutor
+	add_name Exeggutor
 
 CuboneNames::
 	add_name Cubone
 
 MarowakNames::
+	add_name Marowak
 	add_name Marowak
 
 HitmonleeNames::
@@ -330,6 +387,7 @@ KoffingNames::
 
 WeezingNames::
 	add_name Weezing
+	add_name Weezing
 
 RhyhornNames::
 	add_name Rhyhorn
@@ -344,6 +402,7 @@ TangelaNames::
 	add_name Tangela
 
 KangaskhanNames::
+	add_name Kangaskhan
 	add_name Kangaskhan
 
 HorseaNames::
@@ -366,6 +425,7 @@ StarmieNames::
 
 MrmimeNames::
 	add_name Mrmime
+	add_name Mrmime
 
 ScytherNames::
 	add_name Scyther
@@ -381,6 +441,7 @@ MagmarNames::
 
 PinsirNames::
 	add_name Pinsir
+	add_name Pinsir
 
 TaurosNames::
 	add_name Tauros
@@ -390,14 +451,18 @@ MagikarpNames::
 
 GyaradosNames::
 	add_name Gyarados
+	add_name Gyarados
 
 LaprasNames::
+	add_name Lapras
 	add_name Lapras
 
 DittoNames::
 	add_name Ditto
 
 EeveeNames::
+	add_name Eevee
+	add_name Eevee
 	add_name Eevee
 
 VaporeonNames::
@@ -407,6 +472,7 @@ JolteonNames::
 	add_name Jolteon
 
 FlareonNames::
+	add_name Flareon
 	add_name Flareon
 
 PorygonNames::
@@ -426,17 +492,22 @@ KabutopsNames::
 
 AerodactylNames::
 	add_name Aerodactyl
+	add_name Aerodactyl
 
 SnorlaxNames::
+	add_name Snorlax
 	add_name Snorlax
 
 ArticunoNames::
 	add_name Articuno
+	add_name Articuno
 
 ZapdosNames::
 	add_name Zapdos
+	add_name Zapdos
 
 MoltresNames::
+	add_name Moltres
 	add_name Moltres
 
 DratiniNames::
@@ -449,6 +520,8 @@ DragoniteNames::
 	add_name Dragonite
 
 MewtwoNames::
+	add_name Mewtwo
+	add_name Mewtwo
 	add_name Mewtwo
 
 MewNames::

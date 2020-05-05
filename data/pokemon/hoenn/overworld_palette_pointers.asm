@@ -7,6 +7,7 @@ GrovyleOverworldPalettePointers::
 
 SceptileOverworldPalettePointers::
 	add_overworldpalettes Sceptile
+	add_overworldpalettes SceptileMega
 
 TorchicOverworldPalettePointers::
 	add_overworldpalettes Torchic
@@ -16,6 +17,7 @@ CombuskenOverworldPalettePointers::
 
 BlazikenOverworldPalettePointers::
 	add_overworldpalettes Blaziken
+	add_overworldpalettes BlazikenMega
 
 MudkipOverworldPalettePointers::
 	add_overworldpalettes Mudkip
@@ -25,6 +27,7 @@ MarshtompOverworldPalettePointers::
 
 SwampertOverworldPalettePointers::
 	add_overworldpalettes Swampert
+	add_overworldpalettes SwampertMega
 
 PoochyenaOverworldPalettePointers::
 	add_overworldpalettes Poochyena
@@ -34,9 +37,11 @@ MightyenaOverworldPalettePointers::
 
 ZigzagoonOverworldPalettePointers::
 	add_overworldpalettes Zigzagoon
+	add_overworldpalettes ZigzagoonGalar
 
 LinooneOverworldPalettePointers::
 	add_overworldpalettes Linoone
+	add_overworldpalettes LinooneGalar
 
 WurmpleOverworldPalettePointers::
 	add_overworldpalettes Wurmple
@@ -91,6 +96,7 @@ KirliaOverworldPalettePointers::
 
 GardevoirOverworldPalettePointers::
 	add_overworldpalettes Gardevoir
+	add_overworldpalettes GardevoirMega
 
 SurskitOverworldPalettePointers::
 	add_overworldpalettes Surskit
@@ -151,9 +157,11 @@ DelcattyOverworldPalettePointers::
 
 SableyeOverworldPalettePointers::
 	add_overworldpalettes Sableye
+	add_overworldpalettes SableyeMega
 
 MawileOverworldPalettePointers::
 	add_overworldpalettes Mawile
+	add_overworldpalettes MawileMega
 
 AronOverworldPalettePointers::
 	add_overworldpalettes Aron
@@ -163,18 +171,21 @@ LaironOverworldPalettePointers::
 
 AggronOverworldPalettePointers::
 	add_overworldpalettes Aggron
+	add_overworldpalettes AggronMega
 
 MedititeOverworldPalettePointers::
 	add_overworldpalettes Meditite
 
 MedichamOverworldPalettePointers::
 	add_overworldpalettes Medicham
+	add_overworldpalettes MedichamMega
 
 ElectrikeOverworldPalettePointers::
 	add_overworldpalettes Electrike
 
 ManectricOverworldPalettePointers::
 	add_overworldpalettes Manectric
+	add_overworldpalettes ManectricMega
 
 PlusleOverworldPalettePointers::
 	add_overworldpalettes Plusle
@@ -202,6 +213,7 @@ CarvanhaOverworldPalettePointers::
 
 SharpedoOverworldPalettePointers::
 	add_overworldpalettes Sharpedo
+	add_overworldpalettes SharpedoMega
 
 WailmerOverworldPalettePointers::
 	add_overworldpalettes Wailmer
@@ -214,6 +226,7 @@ NumelOverworldPalettePointers::
 
 CameruptOverworldPalettePointers::
 	add_overworldpalettes Camerupt
+	add_overworldpalettes CameruptMega
 
 TorkoalOverworldPalettePointers::
 	add_overworldpalettes Torkoal
@@ -247,6 +260,7 @@ SwabluOverworldPalettePointers::
 
 AltariaOverworldPalettePointers::
 	add_overworldpalettes Altaria
+	add_overworldpalettes AltariaMega
 
 ZangooseOverworldPalettePointers::
 	add_overworldpalettes Zangoose
@@ -298,6 +312,9 @@ MiloticOverworldPalettePointers::
 
 CastformOverworldPalettePointers::
 	add_overworldpalettes Castform
+	add_overworldpalettes CastformSun
+	add_overworldpalettes CastformRain
+	add_overworldpalettes CastformSnow
 
 KecleonOverworldPalettePointers::
 	add_overworldpalettes Kecleon
@@ -307,6 +324,7 @@ ShuppetOverworldPalettePointers::
 
 BanetteOverworldPalettePointers::
 	add_overworldpalettes Banette
+	add_overworldpalettes BanetteMega
 
 DuskullOverworldPalettePointers::
 	add_overworldpalettes Duskull
@@ -322,6 +340,7 @@ ChimechoOverworldPalettePointers::
 
 AbsolOverworldPalettePointers::
 	add_overworldpalettes Absol
+	add_overworldpalettes AbsolMega
 
 WynautOverworldPalettePointers::
 	add_overworldpalettes Wynaut
@@ -331,6 +350,7 @@ SnoruntOverworldPalettePointers::
 
 GlalieOverworldPalettePointers::
 	add_overworldpalettes Glalie
+	add_overworldpalettes GlalieMega
 
 SphealOverworldPalettePointers::
 	add_overworldpalettes Spheal
@@ -364,6 +384,7 @@ ShelgonOverworldPalettePointers::
 
 SalamenceOverworldPalettePointers::
 	add_overworldpalettes Salamence
+	add_overworldpalettes SalamenceMega
 
 BeldumOverworldPalettePointers::
 	add_overworldpalettes Beldum
@@ -373,6 +394,7 @@ MetangOverworldPalettePointers::
 
 MetagrossOverworldPalettePointers::
 	add_overworldpalettes Metagross
+	add_overworldpalettes MetagrossMega
 
 RegirockOverworldPalettePointers::
 	add_overworldpalettes Regirock
@@ -385,22 +407,30 @@ RegisteelOverworldPalettePointers::
 
 LatiasOverworldPalettePointers::
 	add_overworldpalettes Latias
+	add_overworldpalettes LatiasMega
 
 LatiosOverworldPalettePointers::
 	add_overworldpalettes Latios
+	add_overworldpalettes LatiosMega
 
 KyogreOverworldPalettePointers::
 	add_overworldpalettes Kyogre
+	add_overworldpalettes KyogrePrimal
 
 GroudonOverworldPalettePointers::
 	add_overworldpalettes Groudon
+	add_overworldpalettes GroudonPrimal
 
 RayquazaOverworldPalettePointers::
 	add_overworldpalettes Rayquaza
+	add_overworldpalettes RayquazaMega
 
 JirachiOverworldPalettePointers::
 	add_overworldpalettes Jirachi
 
 DeoxysOverworldPalettePointers::
 	add_overworldpalettes Deoxys
+	add_overworldpalettes DeoxysAttack
+	add_overworldpalettes DeoxysDefense
+	add_overworldpalettes DeoxysSpeed
 

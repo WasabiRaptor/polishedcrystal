@@ -82,6 +82,7 @@ TranquillAnimationPointers::
 
 UnfezantAnimationPointers::
 	add_anim Unfezant
+	add_anim UnfezantF
 
 BlitzleAnimationPointers::
 	add_anim Blitzle
@@ -112,6 +113,7 @@ ExcadrillAnimationPointers::
 
 AudinoAnimationPointers::
 	add_anim Audino
+	add_anim AudinoMega
 
 TimburrAnimationPointers::
 	add_anim Timburr
@@ -181,9 +183,13 @@ KrookodileAnimationPointers::
 
 DarumakaAnimationPointers::
 	add_anim Darumaka
+	add_anim DarumakaGalar
 
 DarmanitanAnimationPointers::
 	add_anim Darmanitan
+	add_anim DarmanitanZen
+	add_anim DarmanitanGalar
+	add_anim DarmanitanGalar_zen
 
 MaractusAnimationPointers::
 	add_anim Maractus
@@ -205,6 +211,7 @@ SigilyphAnimationPointers::
 
 YamaskAnimationPointers::
 	add_anim Yamask
+	add_anim YamaskGalar
 
 CofagrigusAnimationPointers::
 	add_anim Cofagrigus
@@ -226,6 +233,7 @@ TrubbishAnimationPointers::
 
 GarbodorAnimationPointers::
 	add_anim Garbodor
+	add_anim GarbodorGiga
 
 ZoruaAnimationPointers::
 	add_anim Zorua
@@ -274,9 +282,15 @@ VanilluxeAnimationPointers::
 
 DeerlingAnimationPointers::
 	add_anim Deerling
+	add_anim DeerlingSummer
+	add_anim DeerlingAutumn
+	add_anim DeerlingWinter
 
 SawsbuckAnimationPointers::
 	add_anim Sawsbuck
+	add_anim SawsbuckSummer
+	add_anim SawsbuckAutumn
+	add_anim SawsbuckWinter
 
 EmolgaAnimationPointers::
 	add_anim Emolga
@@ -373,6 +387,7 @@ AccelgorAnimationPointers::
 
 StunfiskAnimationPointers::
 	add_anim Stunfisk
+	add_anim StunfiskGalar
 
 MienfooAnimationPointers::
 	add_anim Mienfoo
@@ -442,9 +457,11 @@ VirizionAnimationPointers::
 
 TornadusAnimationPointers::
 	add_anim Tornadus
+	add_anim TornadusTherian
 
 ThundurusAnimationPointers::
 	add_anim Thundurus
+	add_anim ThundurusTherian
 
 ReshiramAnimationPointers::
 	add_anim Reshiram
@@ -454,15 +471,20 @@ ZekromAnimationPointers::
 
 LandorusAnimationPointers::
 	add_anim Landorus
+	add_anim LandorusTherian
 
 KyuremAnimationPointers::
 	add_anim Kyurem
+	add_anim KyuremBlack
+	add_anim KyuremWhite
 
 KeldeoAnimationPointers::
 	add_anim Keldeo
+	add_anim KeldeoResolute
 
 MeloettaAnimationPointers::
 	add_anim Meloetta
+	add_anim MeloettaPirouette
 
 GenesectAnimationPointers::
 	add_anim Genesect

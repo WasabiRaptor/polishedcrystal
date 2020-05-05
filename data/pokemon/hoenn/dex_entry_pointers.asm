@@ -7,6 +7,7 @@ GrovylePokedexEntryPointers::
 
 SceptilePokedexEntryPointers::
 	add_pokedexentry Sceptile
+	add_pokedexentry Sceptile
 
 TorchicPokedexEntryPointers::
 	add_pokedexentry Torchic
@@ -15,6 +16,7 @@ CombuskenPokedexEntryPointers::
 	add_pokedexentry Combusken
 
 BlazikenPokedexEntryPointers::
+	add_pokedexentry Blaziken
 	add_pokedexentry Blaziken
 
 MudkipPokedexEntryPointers::
@@ -25,6 +27,7 @@ MarshtompPokedexEntryPointers::
 
 SwampertPokedexEntryPointers::
 	add_pokedexentry Swampert
+	add_pokedexentry Swampert
 
 PoochyenaPokedexEntryPointers::
 	add_pokedexentry Poochyena
@@ -34,8 +37,10 @@ MightyenaPokedexEntryPointers::
 
 ZigzagoonPokedexEntryPointers::
 	add_pokedexentry Zigzagoon
+	add_pokedexentry Zigzagoon
 
 LinoonePokedexEntryPointers::
+	add_pokedexentry Linoone
 	add_pokedexentry Linoone
 
 WurmplePokedexEntryPointers::
@@ -90,6 +95,7 @@ KirliaPokedexEntryPointers::
 	add_pokedexentry Kirlia
 
 GardevoirPokedexEntryPointers::
+	add_pokedexentry Gardevoir
 	add_pokedexentry Gardevoir
 
 SurskitPokedexEntryPointers::
@@ -151,8 +157,10 @@ DelcattyPokedexEntryPointers::
 
 SableyePokedexEntryPointers::
 	add_pokedexentry Sableye
+	add_pokedexentry Sableye
 
 MawilePokedexEntryPointers::
+	add_pokedexentry Mawile
 	add_pokedexentry Mawile
 
 AronPokedexEntryPointers::
@@ -163,17 +171,20 @@ LaironPokedexEntryPointers::
 
 AggronPokedexEntryPointers::
 	add_pokedexentry Aggron
+	add_pokedexentry Aggron
 
 MedititePokedexEntryPointers::
 	add_pokedexentry Meditite
 
 MedichamPokedexEntryPointers::
 	add_pokedexentry Medicham
+	add_pokedexentry Medicham
 
 ElectrikePokedexEntryPointers::
 	add_pokedexentry Electrike
 
 ManectricPokedexEntryPointers::
+	add_pokedexentry Manectric
 	add_pokedexentry Manectric
 
 PluslePokedexEntryPointers::
@@ -202,6 +213,7 @@ CarvanhaPokedexEntryPointers::
 
 SharpedoPokedexEntryPointers::
 	add_pokedexentry Sharpedo
+	add_pokedexentry Sharpedo
 
 WailmerPokedexEntryPointers::
 	add_pokedexentry Wailmer
@@ -213,6 +225,7 @@ NumelPokedexEntryPointers::
 	add_pokedexentry Numel
 
 CameruptPokedexEntryPointers::
+	add_pokedexentry Camerupt
 	add_pokedexentry Camerupt
 
 TorkoalPokedexEntryPointers::
@@ -246,6 +259,7 @@ SwabluPokedexEntryPointers::
 	add_pokedexentry Swablu
 
 AltariaPokedexEntryPointers::
+	add_pokedexentry Altaria
 	add_pokedexentry Altaria
 
 ZangoosePokedexEntryPointers::
@@ -298,6 +312,9 @@ MiloticPokedexEntryPointers::
 
 CastformPokedexEntryPointers::
 	add_pokedexentry Castform
+	add_pokedexentry Castform
+	add_pokedexentry Castform
+	add_pokedexentry Castform
 
 KecleonPokedexEntryPointers::
 	add_pokedexentry Kecleon
@@ -306,6 +323,7 @@ ShuppetPokedexEntryPointers::
 	add_pokedexentry Shuppet
 
 BanettePokedexEntryPointers::
+	add_pokedexentry Banette
 	add_pokedexentry Banette
 
 DuskullPokedexEntryPointers::
@@ -322,6 +340,7 @@ ChimechoPokedexEntryPointers::
 
 AbsolPokedexEntryPointers::
 	add_pokedexentry Absol
+	add_pokedexentry Absol
 
 WynautPokedexEntryPointers::
 	add_pokedexentry Wynaut
@@ -330,6 +349,7 @@ SnoruntPokedexEntryPointers::
 	add_pokedexentry Snorunt
 
 GlaliePokedexEntryPointers::
+	add_pokedexentry Glalie
 	add_pokedexentry Glalie
 
 SphealPokedexEntryPointers::
@@ -364,6 +384,7 @@ ShelgonPokedexEntryPointers::
 
 SalamencePokedexEntryPointers::
 	add_pokedexentry Salamence
+	add_pokedexentry Salamence
 
 BeldumPokedexEntryPointers::
 	add_pokedexentry Beldum
@@ -372,6 +393,7 @@ MetangPokedexEntryPointers::
 	add_pokedexentry Metang
 
 MetagrossPokedexEntryPointers::
+	add_pokedexentry Metagross
 	add_pokedexentry Metagross
 
 RegirockPokedexEntryPointers::
@@ -385,22 +407,30 @@ RegisteelPokedexEntryPointers::
 
 LatiasPokedexEntryPointers::
 	add_pokedexentry Latias
+	add_pokedexentry Latias
 
 LatiosPokedexEntryPointers::
+	add_pokedexentry Latios
 	add_pokedexentry Latios
 
 KyogrePokedexEntryPointers::
 	add_pokedexentry Kyogre
+	add_pokedexentry Kyogre
 
 GroudonPokedexEntryPointers::
 	add_pokedexentry Groudon
+	add_pokedexentry Groudon
 
 RayquazaPokedexEntryPointers::
+	add_pokedexentry Rayquaza
 	add_pokedexentry Rayquaza
 
 JirachiPokedexEntryPointers::
 	add_pokedexentry Jirachi
 
 DeoxysPokedexEntryPointers::
+	add_pokedexentry Deoxys
+	add_pokedexentry Deoxys
+	add_pokedexentry Deoxys
 	add_pokedexentry Deoxys
 

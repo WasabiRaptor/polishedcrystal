@@ -20,8 +20,8 @@ IncineroarEvosAttacksPointers::
 PopplioEvosAttacksPointers::
 	add_evosattacks Popplio
 
-BrioneEvosAttacksPointers::
-	add_evosattacks Brione
+BrionneEvosAttacksPointers::
+	add_evosattacks Brionne
 
 PrimarinaEvosAttacksPointers::
 	add_evosattacks Primarina
@@ -58,6 +58,9 @@ CrabominableEvosAttacksPointers::
 
 OricorioEvosAttacksPointers::
 	add_evosattacks Oricorio
+	add_evosattacks OricorioPom_pom
+	add_evosattacks OricorioPau
+	add_evosattacks OricorioSensu
 
 CutieflyEvosAttacksPointers::
 	add_evosattacks Cutiefly
@@ -67,12 +70,17 @@ RibombeeEvosAttacksPointers::
 
 RockruffEvosAttacksPointers::
 	add_evosattacks Rockruff
+	add_evosattacks RockruffOwn_tempo
 
 LycanrocEvosAttacksPointers::
 	add_evosattacks Lycanroc
+	add_evosattacks LycanrocMidday
+	add_evosattacks LycanrocDusk
+	add_evosattacks LycanrocMidnight
 
 WishiwashiEvosAttacksPointers::
 	add_evosattacks Wishiwashi
+	add_evosattacks WishiwashiSchool
 
 MareanieEvosAttacksPointers::
 	add_evosattacks Mareanie
@@ -157,6 +165,7 @@ SilvallyEvosAttacksPointers::
 
 MiniorEvosAttacksPointers::
 	add_evosattacks Minior
+	add_evosattacks MiniorCore
 
 KomalaEvosAttacksPointers::
 	add_evosattacks Komala
@@ -169,6 +178,7 @@ TogedemaruEvosAttacksPointers::
 
 MimikyuEvosAttacksPointers::
 	add_evosattacks Mimikyu
+	add_evosattacks MimikyuBusted
 
 BruxishEvosAttacksPointers::
 	add_evosattacks Bruxish
@@ -235,6 +245,9 @@ GuzzlordEvosAttacksPointers::
 
 NecrozmaEvosAttacksPointers::
 	add_evosattacks Necrozma
+	add_evosattacks NecrozmaDawn_wings
+	add_evosattacks NecrozmaDusk_mane
+	add_evosattacks NecrozmaUltra
 
 MagearnaEvosAttacksPointers::
 	add_evosattacks Magearna
@@ -262,4 +275,5 @@ MeltanEvosAttacksPointers::
 
 MelmetalEvosAttacksPointers::
 	add_evosattacks Melmetal
+	add_evosattacks MelmetalGiga
 

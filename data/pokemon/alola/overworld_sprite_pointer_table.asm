@@ -6,7 +6,7 @@ AlolaOverworldSpritePointerTable::
 	add_overworldspritetable Torracat
 	add_overworldspritetable Incineroar
 	add_overworldspritetable Popplio
-	add_overworldspritetable Brione
+	add_overworldspritetable Brionne
 	add_overworldspritetable Primarina
 	add_overworldspritetable Pikipeck
 	add_overworldspritetable Trumbeak

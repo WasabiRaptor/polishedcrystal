@@ -22,8 +22,8 @@ IncineroarBackpic::	INCBIN "gfx/pokemon/incineroar/back.2bpp.lz"
 PopplioFrontpic::	INCBIN "gfx/pokemon/popplio/front.animated.2bpp.lz"
 PopplioBackpic::	INCBIN "gfx/pokemon/popplio/back.2bpp.lz"
 
-BrioneFrontpic::	INCBIN "gfx/pokemon/brione/front.animated.2bpp.lz"
-BrioneBackpic::	INCBIN "gfx/pokemon/brione/back.2bpp.lz"
+BrionneFrontpic::	INCBIN "gfx/pokemon/brionne/front.animated.2bpp.lz"
+BrionneBackpic::	INCBIN "gfx/pokemon/brionne/back.2bpp.lz"
 
 PrimarinaFrontpic::	INCBIN "gfx/pokemon/primarina/front.animated.2bpp.lz"
 PrimarinaBackpic::	INCBIN "gfx/pokemon/primarina/back.2bpp.lz"
@@ -63,6 +63,12 @@ CrabominableBackpic::	INCBIN "gfx/pokemon/crabominable/back.2bpp.lz"
 
 OricorioFrontpic::	INCBIN "gfx/pokemon/oricorio/front.animated.2bpp.lz"
 OricorioBackpic::	INCBIN "gfx/pokemon/oricorio/back.2bpp.lz"
+OricorioPom_pomFrontpic::	INCBIN "gfx/pokemon/oricorio_pom_pom/front.animated.2bpp.lz"
+OricorioPom_pomBackpic::	INCBIN "gfx/pokemon/oricorio_pom_pom/back.2bpp.lz"
+OricorioPauFrontpic::	INCBIN "gfx/pokemon/oricorio_pau/front.animated.2bpp.lz"
+OricorioPauBackpic::	INCBIN "gfx/pokemon/oricorio_pau/back.2bpp.lz"
+OricorioSensuFrontpic::	INCBIN "gfx/pokemon/oricorio_sensu/front.animated.2bpp.lz"
+OricorioSensuBackpic::	INCBIN "gfx/pokemon/oricorio_sensu/back.2bpp.lz"
 
 
 SECTION "Alola Pokemon Pics 3", ROMX
@@ -75,12 +81,22 @@ RibombeeBackpic::	INCBIN "gfx/pokemon/ribombee/back.2bpp.lz"
 
 RockruffFrontpic::	INCBIN "gfx/pokemon/rockruff/front.animated.2bpp.lz"
 RockruffBackpic::	INCBIN "gfx/pokemon/rockruff/back.2bpp.lz"
+RockruffOwn_tempoFrontpic::	INCBIN "gfx/pokemon/rockruff_own_tempo/front.animated.2bpp.lz"
+RockruffOwn_tempoBackpic::	INCBIN "gfx/pokemon/rockruff_own_tempo/back.2bpp.lz"
 
 LycanrocFrontpic::	INCBIN "gfx/pokemon/lycanroc/front.animated.2bpp.lz"
 LycanrocBackpic::	INCBIN "gfx/pokemon/lycanroc/back.2bpp.lz"
+LycanrocMiddayFrontpic::	INCBIN "gfx/pokemon/lycanroc_midday/front.animated.2bpp.lz"
+LycanrocMiddayBackpic::	INCBIN "gfx/pokemon/lycanroc_midday/back.2bpp.lz"
+LycanrocDuskFrontpic::	INCBIN "gfx/pokemon/lycanroc_dusk/front.animated.2bpp.lz"
+LycanrocDuskBackpic::	INCBIN "gfx/pokemon/lycanroc_dusk/back.2bpp.lz"
+LycanrocMidnightFrontpic::	INCBIN "gfx/pokemon/lycanroc_midnight/front.animated.2bpp.lz"
+LycanrocMidnightBackpic::	INCBIN "gfx/pokemon/lycanroc_midnight/back.2bpp.lz"
 
 WishiwashiFrontpic::	INCBIN "gfx/pokemon/wishiwashi/front.animated.2bpp.lz"
 WishiwashiBackpic::	INCBIN "gfx/pokemon/wishiwashi/back.2bpp.lz"
+WishiwashiSchoolFrontpic::	INCBIN "gfx/pokemon/wishiwashi_school/front.animated.2bpp.lz"
+WishiwashiSchoolBackpic::	INCBIN "gfx/pokemon/wishiwashi_school/back.2bpp.lz"
 
 MareanieFrontpic::	INCBIN "gfx/pokemon/mareanie/front.animated.2bpp.lz"
 MareanieBackpic::	INCBIN "gfx/pokemon/mareanie/back.2bpp.lz"
@@ -174,6 +190,8 @@ SilvallyBackpic::	INCBIN "gfx/pokemon/silvally/back.2bpp.lz"
 
 MiniorFrontpic::	INCBIN "gfx/pokemon/minior/front.animated.2bpp.lz"
 MiniorBackpic::	INCBIN "gfx/pokemon/minior/back.2bpp.lz"
+MiniorCoreFrontpic::	INCBIN "gfx/pokemon/minior_core/front.animated.2bpp.lz"
+MiniorCoreBackpic::	INCBIN "gfx/pokemon/minior_core/back.2bpp.lz"
 
 KomalaFrontpic::	INCBIN "gfx/pokemon/komala/front.animated.2bpp.lz"
 KomalaBackpic::	INCBIN "gfx/pokemon/komala/back.2bpp.lz"
@@ -186,6 +204,8 @@ TogedemaruBackpic::	INCBIN "gfx/pokemon/togedemaru/back.2bpp.lz"
 
 MimikyuFrontpic::	INCBIN "gfx/pokemon/mimikyu/front.animated.2bpp.lz"
 MimikyuBackpic::	INCBIN "gfx/pokemon/mimikyu/back.2bpp.lz"
+MimikyuBustedFrontpic::	INCBIN "gfx/pokemon/mimikyu_busted/front.animated.2bpp.lz"
+MimikyuBustedBackpic::	INCBIN "gfx/pokemon/mimikyu_busted/back.2bpp.lz"
 
 BruxishFrontpic::	INCBIN "gfx/pokemon/bruxish/front.animated.2bpp.lz"
 BruxishBackpic::	INCBIN "gfx/pokemon/bruxish/back.2bpp.lz"
@@ -258,6 +278,12 @@ GuzzlordBackpic::	INCBIN "gfx/pokemon/guzzlord/back.2bpp.lz"
 
 NecrozmaFrontpic::	INCBIN "gfx/pokemon/necrozma/front.animated.2bpp.lz"
 NecrozmaBackpic::	INCBIN "gfx/pokemon/necrozma/back.2bpp.lz"
+NecrozmaDawn_wingsFrontpic::	INCBIN "gfx/pokemon/necrozma_dawn_wings/front.animated.2bpp.lz"
+NecrozmaDawn_wingsBackpic::	INCBIN "gfx/pokemon/necrozma_dawn_wings/back.2bpp.lz"
+NecrozmaDusk_maneFrontpic::	INCBIN "gfx/pokemon/necrozma_dusk_mane/front.animated.2bpp.lz"
+NecrozmaDusk_maneBackpic::	INCBIN "gfx/pokemon/necrozma_dusk_mane/back.2bpp.lz"
+NecrozmaUltraFrontpic::	INCBIN "gfx/pokemon/necrozma_ultra/front.animated.2bpp.lz"
+NecrozmaUltraBackpic::	INCBIN "gfx/pokemon/necrozma_ultra/back.2bpp.lz"
 
 MagearnaFrontpic::	INCBIN "gfx/pokemon/magearna/front.animated.2bpp.lz"
 MagearnaBackpic::	INCBIN "gfx/pokemon/magearna/back.2bpp.lz"
@@ -288,4 +314,6 @@ MeltanBackpic::	INCBIN "gfx/pokemon/meltan/back.2bpp.lz"
 
 MelmetalFrontpic::	INCBIN "gfx/pokemon/melmetal/front.animated.2bpp.lz"
 MelmetalBackpic::	INCBIN "gfx/pokemon/melmetal/back.2bpp.lz"
+MelmetalGigaFrontpic::	INCBIN "gfx/pokemon/melmetal_giga/front.animated.2bpp.lz"
+MelmetalGigaBackpic::	INCBIN "gfx/pokemon/melmetal_giga/back.2bpp.lz"
 

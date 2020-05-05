@@ -53,6 +53,18 @@ GROUP_\1 EQU __enum__
 	const \1
 ENDM
 
+nat_dexmon_form: macro
+endm
+
+grouped_dex_order_mon: macro
+	db \1, GROUP_\1
+if _NARG == 2
+	db \2
+else
+	db 0
+endc
+endm
+
 evolution: macro
 if _NARG < 4
 	db \1, \2, GROUP_\3, \3

@@ -6,7 +6,7 @@ AlolaEvosAttacksPointerTable::
 	add_evosattackstable Torracat
 	add_evosattackstable Incineroar
 	add_evosattackstable Popplio
-	add_evosattackstable Brione
+	add_evosattackstable Brionne
 	add_evosattackstable Primarina
 	add_evosattackstable Pikipeck
 	add_evosattackstable Trumbeak

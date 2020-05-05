@@ -13,7 +13,7 @@ IncineroarAnimation:	INCLUDE "gfx/pokemon/incineroar/anim.asm"
 
 PopplioAnimation:	INCLUDE "gfx/pokemon/popplio/anim.asm"
 
-BrioneAnimation:	INCLUDE "gfx/pokemon/brione/anim.asm"
+BrionneAnimation:	INCLUDE "gfx/pokemon/brionne/anim.asm"
 
 PrimarinaAnimation:	INCLUDE "gfx/pokemon/primarina/anim.asm"
 
@@ -38,16 +38,24 @@ CrabrawlerAnimation:	INCLUDE "gfx/pokemon/crabrawler/anim.asm"
 CrabominableAnimation:	INCLUDE "gfx/pokemon/crabominable/anim.asm"
 
 OricorioAnimation:	INCLUDE "gfx/pokemon/oricorio/anim.asm"
+OricorioPom_pomAnimation::	INCLUDE "gfx/pokemon/oricorio_pom_pom/anim.asm"
+OricorioPauAnimation::	INCLUDE "gfx/pokemon/oricorio_pau/anim.asm"
+OricorioSensuAnimation::	INCLUDE "gfx/pokemon/oricorio_sensu/anim.asm"
 
 CutieflyAnimation:	INCLUDE "gfx/pokemon/cutiefly/anim.asm"
 
 RibombeeAnimation:	INCLUDE "gfx/pokemon/ribombee/anim.asm"
 
 RockruffAnimation:	INCLUDE "gfx/pokemon/rockruff/anim.asm"
+RockruffOwn_tempoAnimation::	INCLUDE "gfx/pokemon/rockruff_own_tempo/anim.asm"
 
 LycanrocAnimation:	INCLUDE "gfx/pokemon/lycanroc/anim.asm"
+LycanrocMiddayAnimation::	INCLUDE "gfx/pokemon/lycanroc_midday/anim.asm"
+LycanrocDuskAnimation::	INCLUDE "gfx/pokemon/lycanroc_dusk/anim.asm"
+LycanrocMidnightAnimation::	INCLUDE "gfx/pokemon/lycanroc_midnight/anim.asm"
 
 WishiwashiAnimation:	INCLUDE "gfx/pokemon/wishiwashi/anim.asm"
+WishiwashiSchoolAnimation::	INCLUDE "gfx/pokemon/wishiwashi_school/anim.asm"
 
 MareanieAnimation:	INCLUDE "gfx/pokemon/mareanie/anim.asm"
 
@@ -104,6 +112,7 @@ Type_nullAnimation:	INCLUDE "gfx/pokemon/type_null/anim.asm"
 SilvallyAnimation:	INCLUDE "gfx/pokemon/silvally/anim.asm"
 
 MiniorAnimation:	INCLUDE "gfx/pokemon/minior/anim.asm"
+MiniorCoreAnimation::	INCLUDE "gfx/pokemon/minior_core/anim.asm"
 
 KomalaAnimation:	INCLUDE "gfx/pokemon/komala/anim.asm"
 
@@ -112,6 +121,7 @@ TurtonatorAnimation:	INCLUDE "gfx/pokemon/turtonator/anim.asm"
 TogedemaruAnimation:	INCLUDE "gfx/pokemon/togedemaru/anim.asm"
 
 MimikyuAnimation:	INCLUDE "gfx/pokemon/mimikyu/anim.asm"
+MimikyuBustedAnimation::	INCLUDE "gfx/pokemon/mimikyu_busted/anim.asm"
 
 BruxishAnimation:	INCLUDE "gfx/pokemon/bruxish/anim.asm"
 
@@ -156,6 +166,9 @@ KartanaAnimation:	INCLUDE "gfx/pokemon/kartana/anim.asm"
 GuzzlordAnimation:	INCLUDE "gfx/pokemon/guzzlord/anim.asm"
 
 NecrozmaAnimation:	INCLUDE "gfx/pokemon/necrozma/anim.asm"
+NecrozmaDawn_wingsAnimation::	INCLUDE "gfx/pokemon/necrozma_dawn_wings/anim.asm"
+NecrozmaDusk_maneAnimation::	INCLUDE "gfx/pokemon/necrozma_dusk_mane/anim.asm"
+NecrozmaUltraAnimation::	INCLUDE "gfx/pokemon/necrozma_ultra/anim.asm"
 
 MagearnaAnimation:	INCLUDE "gfx/pokemon/magearna/anim.asm"
 
@@ -174,4 +187,5 @@ ZeraoraAnimation:	INCLUDE "gfx/pokemon/zeraora/anim.asm"
 MeltanAnimation:	INCLUDE "gfx/pokemon/meltan/anim.asm"
 
 MelmetalAnimation:	INCLUDE "gfx/pokemon/melmetal/anim.asm"
+MelmetalGigaAnimation::	INCLUDE "gfx/pokemon/melmetal_giga/anim.asm"
 

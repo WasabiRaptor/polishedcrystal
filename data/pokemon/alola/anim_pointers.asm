@@ -20,8 +20,8 @@ IncineroarAnimationPointers::
 PopplioAnimationPointers::
 	add_anim Popplio
 
-BrioneAnimationPointers::
-	add_anim Brione
+BrionneAnimationPointers::
+	add_anim Brionne
 
 PrimarinaAnimationPointers::
 	add_anim Primarina
@@ -58,6 +58,9 @@ CrabominableAnimationPointers::
 
 OricorioAnimationPointers::
 	add_anim Oricorio
+	add_anim OricorioPom_pom
+	add_anim OricorioPau
+	add_anim OricorioSensu
 
 CutieflyAnimationPointers::
 	add_anim Cutiefly
@@ -67,12 +70,17 @@ RibombeeAnimationPointers::
 
 RockruffAnimationPointers::
 	add_anim Rockruff
+	add_anim RockruffOwn_tempo
 
 LycanrocAnimationPointers::
 	add_anim Lycanroc
+	add_anim LycanrocMidday
+	add_anim LycanrocDusk
+	add_anim LycanrocMidnight
 
 WishiwashiAnimationPointers::
 	add_anim Wishiwashi
+	add_anim WishiwashiSchool
 
 MareanieAnimationPointers::
 	add_anim Mareanie
@@ -157,6 +165,7 @@ SilvallyAnimationPointers::
 
 MiniorAnimationPointers::
 	add_anim Minior
+	add_anim MiniorCore
 
 KomalaAnimationPointers::
 	add_anim Komala
@@ -169,6 +178,7 @@ TogedemaruAnimationPointers::
 
 MimikyuAnimationPointers::
 	add_anim Mimikyu
+	add_anim MimikyuBusted
 
 BruxishAnimationPointers::
 	add_anim Bruxish
@@ -235,6 +245,9 @@ GuzzlordAnimationPointers::
 
 NecrozmaAnimationPointers::
 	add_anim Necrozma
+	add_anim NecrozmaDawn_wings
+	add_anim NecrozmaDusk_mane
+	add_anim NecrozmaUltra
 
 MagearnaAnimationPointers::
 	add_anim Magearna
@@ -262,4 +275,5 @@ MeltanAnimationPointers::
 
 MelmetalAnimationPointers::
 	add_anim Melmetal
+	add_anim MelmetalGiga
 

@@ -54,6 +54,7 @@ PidoveFrames:	INCLUDE "gfx/pokemon/pidove/frames.asm"
 TranquillFrames:	INCLUDE "gfx/pokemon/tranquill/frames.asm"
 
 UnfezantFrames:	INCLUDE "gfx/pokemon/unfezant/frames.asm"
+UnfezantFFrames::	INCLUDE "gfx/pokemon/unfezant_f/frames.asm"
 
 BlitzleFrames:	INCLUDE "gfx/pokemon/blitzle/frames.asm"
 
@@ -74,6 +75,7 @@ DrilburFrames:	INCLUDE "gfx/pokemon/drilbur/frames.asm"
 ExcadrillFrames:	INCLUDE "gfx/pokemon/excadrill/frames.asm"
 
 AudinoFrames:	INCLUDE "gfx/pokemon/audino/frames.asm"
+AudinoMegaFrames::	INCLUDE "gfx/pokemon/audino_mega/frames.asm"
 
 TimburrFrames:	INCLUDE "gfx/pokemon/timburr/frames.asm"
 
@@ -120,8 +122,12 @@ KrokorokFrames:	INCLUDE "gfx/pokemon/krokorok/frames.asm"
 KrookodileFrames:	INCLUDE "gfx/pokemon/krookodile/frames.asm"
 
 DarumakaFrames:	INCLUDE "gfx/pokemon/darumaka/frames.asm"
+DarumakaGalarFrames::	INCLUDE "gfx/pokemon/darumaka_galar/frames.asm"
 
 DarmanitanFrames:	INCLUDE "gfx/pokemon/darmanitan/frames.asm"
+DarmanitanZenFrames::	INCLUDE "gfx/pokemon/darmanitan_zen/frames.asm"
+DarmanitanGalarFrames::	INCLUDE "gfx/pokemon/darmanitan_galar/frames.asm"
+DarmanitanGalar_zenFrames::	INCLUDE "gfx/pokemon/darmanitan_galar_zen/frames.asm"
 
 MaractusFrames:	INCLUDE "gfx/pokemon/maractus/frames.asm"
 
@@ -136,6 +142,7 @@ ScraftyFrames:	INCLUDE "gfx/pokemon/scrafty/frames.asm"
 SigilyphFrames:	INCLUDE "gfx/pokemon/sigilyph/frames.asm"
 
 YamaskFrames:	INCLUDE "gfx/pokemon/yamask/frames.asm"
+YamaskGalarFrames::	INCLUDE "gfx/pokemon/yamask_galar/frames.asm"
 
 CofagrigusFrames:	INCLUDE "gfx/pokemon/cofagrigus/frames.asm"
 
@@ -150,6 +157,7 @@ ArcheopsFrames:	INCLUDE "gfx/pokemon/archeops/frames.asm"
 TrubbishFrames:	INCLUDE "gfx/pokemon/trubbish/frames.asm"
 
 GarbodorFrames:	INCLUDE "gfx/pokemon/garbodor/frames.asm"
+GarbodorGigaFrames::	INCLUDE "gfx/pokemon/garbodor_giga/frames.asm"
 
 ZoruaFrames:	INCLUDE "gfx/pokemon/zorua/frames.asm"
 
@@ -182,8 +190,14 @@ VanillishFrames:	INCLUDE "gfx/pokemon/vanillish/frames.asm"
 VanilluxeFrames:	INCLUDE "gfx/pokemon/vanilluxe/frames.asm"
 
 DeerlingFrames:	INCLUDE "gfx/pokemon/deerling/frames.asm"
+DeerlingSummerFrames::	INCLUDE "gfx/pokemon/deerling_summer/frames.asm"
+DeerlingAutumnFrames::	INCLUDE "gfx/pokemon/deerling_autumn/frames.asm"
+DeerlingWinterFrames::	INCLUDE "gfx/pokemon/deerling_winter/frames.asm"
 
 SawsbuckFrames:	INCLUDE "gfx/pokemon/sawsbuck/frames.asm"
+SawsbuckSummerFrames::	INCLUDE "gfx/pokemon/sawsbuck_summer/frames.asm"
+SawsbuckAutumnFrames::	INCLUDE "gfx/pokemon/sawsbuck_autumn/frames.asm"
+SawsbuckWinterFrames::	INCLUDE "gfx/pokemon/sawsbuck_winter/frames.asm"
 
 EmolgaFrames:	INCLUDE "gfx/pokemon/emolga/frames.asm"
 
@@ -248,6 +262,7 @@ ShelmetFrames:	INCLUDE "gfx/pokemon/shelmet/frames.asm"
 AccelgorFrames:	INCLUDE "gfx/pokemon/accelgor/frames.asm"
 
 StunfiskFrames:	INCLUDE "gfx/pokemon/stunfisk/frames.asm"
+StunfiskGalarFrames::	INCLUDE "gfx/pokemon/stunfisk_galar/frames.asm"
 
 MienfooFrames:	INCLUDE "gfx/pokemon/mienfoo/frames.asm"
 
@@ -294,20 +309,27 @@ TerrakionFrames:	INCLUDE "gfx/pokemon/terrakion/frames.asm"
 VirizionFrames:	INCLUDE "gfx/pokemon/virizion/frames.asm"
 
 TornadusFrames:	INCLUDE "gfx/pokemon/tornadus/frames.asm"
+TornadusTherianFrames::	INCLUDE "gfx/pokemon/tornadus_therian/frames.asm"
 
 ThundurusFrames:	INCLUDE "gfx/pokemon/thundurus/frames.asm"
+ThundurusTherianFrames::	INCLUDE "gfx/pokemon/thundurus_therian/frames.asm"
 
 ReshiramFrames:	INCLUDE "gfx/pokemon/reshiram/frames.asm"
 
 ZekromFrames:	INCLUDE "gfx/pokemon/zekrom/frames.asm"
 
 LandorusFrames:	INCLUDE "gfx/pokemon/landorus/frames.asm"
+LandorusTherianFrames::	INCLUDE "gfx/pokemon/landorus_therian/frames.asm"
 
 KyuremFrames:	INCLUDE "gfx/pokemon/kyurem/frames.asm"
+KyuremBlackFrames::	INCLUDE "gfx/pokemon/kyurem_black/frames.asm"
+KyuremWhiteFrames::	INCLUDE "gfx/pokemon/kyurem_white/frames.asm"
 
 KeldeoFrames:	INCLUDE "gfx/pokemon/keldeo/frames.asm"
+KeldeoResoluteFrames::	INCLUDE "gfx/pokemon/keldeo_resolute/frames.asm"
 
 MeloettaFrames:	INCLUDE "gfx/pokemon/meloetta/frames.asm"
+MeloettaPirouetteFrames::	INCLUDE "gfx/pokemon/meloetta_pirouette/frames.asm"
 
 GenesectFrames:	INCLUDE "gfx/pokemon/genesect/frames.asm"
 

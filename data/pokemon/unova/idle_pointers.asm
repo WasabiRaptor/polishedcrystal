@@ -82,6 +82,7 @@ TranquillAnimationIdlePointers::
 
 UnfezantAnimationIdlePointers::
 	add_idleanim Unfezant
+	add_idleanim UnfezantF
 
 BlitzleAnimationIdlePointers::
 	add_idleanim Blitzle
@@ -112,6 +113,7 @@ ExcadrillAnimationIdlePointers::
 
 AudinoAnimationIdlePointers::
 	add_idleanim Audino
+	add_idleanim AudinoMega
 
 TimburrAnimationIdlePointers::
 	add_idleanim Timburr
@@ -181,9 +183,13 @@ KrookodileAnimationIdlePointers::
 
 DarumakaAnimationIdlePointers::
 	add_idleanim Darumaka
+	add_idleanim DarumakaGalar
 
 DarmanitanAnimationIdlePointers::
 	add_idleanim Darmanitan
+	add_idleanim DarmanitanZen
+	add_idleanim DarmanitanGalar
+	add_idleanim DarmanitanGalar_zen
 
 MaractusAnimationIdlePointers::
 	add_idleanim Maractus
@@ -205,6 +211,7 @@ SigilyphAnimationIdlePointers::
 
 YamaskAnimationIdlePointers::
 	add_idleanim Yamask
+	add_idleanim YamaskGalar
 
 CofagrigusAnimationIdlePointers::
 	add_idleanim Cofagrigus
@@ -226,6 +233,7 @@ TrubbishAnimationIdlePointers::
 
 GarbodorAnimationIdlePointers::
 	add_idleanim Garbodor
+	add_idleanim GarbodorGiga
 
 ZoruaAnimationIdlePointers::
 	add_idleanim Zorua
@@ -274,9 +282,15 @@ VanilluxeAnimationIdlePointers::
 
 DeerlingAnimationIdlePointers::
 	add_idleanim Deerling
+	add_idleanim DeerlingSummer
+	add_idleanim DeerlingAutumn
+	add_idleanim DeerlingWinter
 
 SawsbuckAnimationIdlePointers::
 	add_idleanim Sawsbuck
+	add_idleanim SawsbuckSummer
+	add_idleanim SawsbuckAutumn
+	add_idleanim SawsbuckWinter
 
 EmolgaAnimationIdlePointers::
 	add_idleanim Emolga
@@ -373,6 +387,7 @@ AccelgorAnimationIdlePointers::
 
 StunfiskAnimationIdlePointers::
 	add_idleanim Stunfisk
+	add_idleanim StunfiskGalar
 
 MienfooAnimationIdlePointers::
 	add_idleanim Mienfoo
@@ -442,9 +457,11 @@ VirizionAnimationIdlePointers::
 
 TornadusAnimationIdlePointers::
 	add_idleanim Tornadus
+	add_idleanim TornadusTherian
 
 ThundurusAnimationIdlePointers::
 	add_idleanim Thundurus
+	add_idleanim ThundurusTherian
 
 ReshiramAnimationIdlePointers::
 	add_idleanim Reshiram
@@ -454,15 +471,20 @@ ZekromAnimationIdlePointers::
 
 LandorusAnimationIdlePointers::
 	add_idleanim Landorus
+	add_idleanim LandorusTherian
 
 KyuremAnimationIdlePointers::
 	add_idleanim Kyurem
+	add_idleanim KyuremBlack
+	add_idleanim KyuremWhite
 
 KeldeoAnimationIdlePointers::
 	add_idleanim Keldeo
+	add_idleanim KeldeoResolute
 
 MeloettaAnimationIdlePointers::
 	add_idleanim Meloetta
+	add_idleanim MeloettaPirouette
 
 GenesectAnimationIdlePointers::
 	add_idleanim Genesect

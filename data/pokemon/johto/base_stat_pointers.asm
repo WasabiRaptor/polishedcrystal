@@ -62,6 +62,7 @@ LanturnBaseDataPointers::
 
 PichuBaseDataPointers::
 	add_basedata Pichu
+	add_basedata PichuSpiky_eared
 
 CleffaBaseDataPointers::
 	add_basedata Cleffa
@@ -89,6 +90,7 @@ FlaaffyBaseDataPointers::
 
 AmpharosBaseDataPointers::
 	add_basedata Ampharos
+	add_basedata AmpharosMega
 
 BellossomBaseDataPointers::
 	add_basedata Bellossom
@@ -149,6 +151,34 @@ MisdreavusBaseDataPointers::
 
 UnownBaseDataPointers::
 	add_basedata Unown
+	add_basedata UnownA
+	add_basedata UnownB
+	add_basedata UnownC
+	add_basedata UnownD
+	add_basedata UnownE
+	add_basedata UnownF
+	add_basedata UnownG
+	add_basedata UnownH
+	add_basedata UnownI
+	add_basedata UnownJ
+	add_basedata UnownK
+	add_basedata UnownL
+	add_basedata UnownM
+	add_basedata UnownN
+	add_basedata UnownO
+	add_basedata UnownP
+	add_basedata UnownQ
+	add_basedata UnownR
+	add_basedata UnownS
+	add_basedata UnownT
+	add_basedata UnownU
+	add_basedata UnownV
+	add_basedata UnownW
+	add_basedata UnownX
+	add_basedata UnownY
+	add_basedata UnownZ
+	add_basedata UnownExclamation_mark
+	add_basedata UnownQuestion_mark
 
 WobbuffetBaseDataPointers::
 	add_basedata Wobbuffet
@@ -170,6 +200,7 @@ GligarBaseDataPointers::
 
 SteelixBaseDataPointers::
 	add_basedata Steelix
+	add_basedata SteelixMega
 
 SnubbullBaseDataPointers::
 	add_basedata Snubbull
@@ -182,12 +213,14 @@ QwilfishBaseDataPointers::
 
 ScizorBaseDataPointers::
 	add_basedata Scizor
+	add_basedata ScizorMega
 
 ShuckleBaseDataPointers::
 	add_basedata Shuckle
 
 HeracrossBaseDataPointers::
 	add_basedata Heracross
+	add_basedata HeracrossMega
 
 SneaselBaseDataPointers::
 	add_basedata Sneasel
@@ -212,6 +245,7 @@ PiloswineBaseDataPointers::
 
 CorsolaBaseDataPointers::
 	add_basedata Corsola
+	add_basedata CorsolaGalar
 
 RemoraidBaseDataPointers::
 	add_basedata Remoraid
@@ -233,6 +267,7 @@ HoundourBaseDataPointers::
 
 HoundoomBaseDataPointers::
 	add_basedata Houndoom
+	add_basedata HoundoomMega
 
 KingdraBaseDataPointers::
 	add_basedata Kingdra
@@ -290,6 +325,7 @@ PupitarBaseDataPointers::
 
 TyranitarBaseDataPointers::
 	add_basedata Tyranitar
+	add_basedata TyranitarMega
 
 LugiaBaseDataPointers::
 	add_basedata Lugia

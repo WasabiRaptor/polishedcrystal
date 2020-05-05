@@ -61,6 +61,7 @@ LanturnPalettePointers::
 
 PichuPalettePointers::
 	add_palettes Pichu
+	add_palettes PichuSpiky_eared
 
 CleffaPalettePointers::
 	add_palettes Cleffa
@@ -88,6 +89,7 @@ FlaaffyPalettePointers::
 
 AmpharosPalettePointers::
 	add_palettes Ampharos
+	add_palettes AmpharosMega
 
 BellossomPalettePointers::
 	add_palettes Bellossom
@@ -148,6 +150,34 @@ MisdreavusPalettePointers::
 
 UnownPalettePointers::
 	add_palettes Unown
+	add_palettes UnownA
+	add_palettes UnownB
+	add_palettes UnownC
+	add_palettes UnownD
+	add_palettes UnownE
+	add_palettes UnownF
+	add_palettes UnownG
+	add_palettes UnownH
+	add_palettes UnownI
+	add_palettes UnownJ
+	add_palettes UnownK
+	add_palettes UnownL
+	add_palettes UnownM
+	add_palettes UnownN
+	add_palettes UnownO
+	add_palettes UnownP
+	add_palettes UnownQ
+	add_palettes UnownR
+	add_palettes UnownS
+	add_palettes UnownT
+	add_palettes UnownU
+	add_palettes UnownV
+	add_palettes UnownW
+	add_palettes UnownX
+	add_palettes UnownY
+	add_palettes UnownZ
+	add_palettes UnownExclamation_mark
+	add_palettes UnownQuestion_mark
 
 WobbuffetPalettePointers::
 	add_palettes Wobbuffet
@@ -169,6 +199,7 @@ GligarPalettePointers::
 
 SteelixPalettePointers::
 	add_palettes Steelix
+	add_palettes SteelixMega
 
 SnubbullPalettePointers::
 	add_palettes Snubbull
@@ -181,12 +212,14 @@ QwilfishPalettePointers::
 
 ScizorPalettePointers::
 	add_palettes Scizor
+	add_palettes ScizorMega
 
 ShucklePalettePointers::
 	add_palettes Shuckle
 
 HeracrossPalettePointers::
 	add_palettes Heracross
+	add_palettes HeracrossMega
 
 SneaselPalettePointers::
 	add_palettes Sneasel
@@ -211,6 +244,7 @@ PiloswinePalettePointers::
 
 CorsolaPalettePointers::
 	add_palettes Corsola
+	add_palettes CorsolaGalar
 
 RemoraidPalettePointers::
 	add_palettes Remoraid
@@ -232,6 +266,7 @@ HoundourPalettePointers::
 
 HoundoomPalettePointers::
 	add_palettes Houndoom
+	add_palettes HoundoomMega
 
 KingdraPalettePointers::
 	add_palettes Kingdra
@@ -289,6 +324,7 @@ PupitarPalettePointers::
 
 TyranitarPalettePointers::
 	add_palettes Tyranitar
+	add_palettes TyranitarMega
 
 LugiaPalettePointers::
 	add_palettes Lugia

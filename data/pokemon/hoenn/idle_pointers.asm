@@ -7,6 +7,7 @@ GrovyleAnimationIdlePointers::
 
 SceptileAnimationIdlePointers::
 	add_idleanim Sceptile
+	add_idleanim SceptileMega
 
 TorchicAnimationIdlePointers::
 	add_idleanim Torchic
@@ -16,6 +17,7 @@ CombuskenAnimationIdlePointers::
 
 BlazikenAnimationIdlePointers::
 	add_idleanim Blaziken
+	add_idleanim BlazikenMega
 
 MudkipAnimationIdlePointers::
 	add_idleanim Mudkip
@@ -25,6 +27,7 @@ MarshtompAnimationIdlePointers::
 
 SwampertAnimationIdlePointers::
 	add_idleanim Swampert
+	add_idleanim SwampertMega
 
 PoochyenaAnimationIdlePointers::
 	add_idleanim Poochyena
@@ -34,9 +37,11 @@ MightyenaAnimationIdlePointers::
 
 ZigzagoonAnimationIdlePointers::
 	add_idleanim Zigzagoon
+	add_idleanim ZigzagoonGalar
 
 LinooneAnimationIdlePointers::
 	add_idleanim Linoone
+	add_idleanim LinooneGalar
 
 WurmpleAnimationIdlePointers::
 	add_idleanim Wurmple
@@ -91,6 +96,7 @@ KirliaAnimationIdlePointers::
 
 GardevoirAnimationIdlePointers::
 	add_idleanim Gardevoir
+	add_idleanim GardevoirMega
 
 SurskitAnimationIdlePointers::
 	add_idleanim Surskit
@@ -151,9 +157,11 @@ DelcattyAnimationIdlePointers::
 
 SableyeAnimationIdlePointers::
 	add_idleanim Sableye
+	add_idleanim SableyeMega
 
 MawileAnimationIdlePointers::
 	add_idleanim Mawile
+	add_idleanim MawileMega
 
 AronAnimationIdlePointers::
 	add_idleanim Aron
@@ -163,18 +171,21 @@ LaironAnimationIdlePointers::
 
 AggronAnimationIdlePointers::
 	add_idleanim Aggron
+	add_idleanim AggronMega
 
 MedititeAnimationIdlePointers::
 	add_idleanim Meditite
 
 MedichamAnimationIdlePointers::
 	add_idleanim Medicham
+	add_idleanim MedichamMega
 
 ElectrikeAnimationIdlePointers::
 	add_idleanim Electrike
 
 ManectricAnimationIdlePointers::
 	add_idleanim Manectric
+	add_idleanim ManectricMega
 
 PlusleAnimationIdlePointers::
 	add_idleanim Plusle
@@ -202,6 +213,7 @@ CarvanhaAnimationIdlePointers::
 
 SharpedoAnimationIdlePointers::
 	add_idleanim Sharpedo
+	add_idleanim SharpedoMega
 
 WailmerAnimationIdlePointers::
 	add_idleanim Wailmer
@@ -214,6 +226,7 @@ NumelAnimationIdlePointers::
 
 CameruptAnimationIdlePointers::
 	add_idleanim Camerupt
+	add_idleanim CameruptMega
 
 TorkoalAnimationIdlePointers::
 	add_idleanim Torkoal
@@ -247,6 +260,7 @@ SwabluAnimationIdlePointers::
 
 AltariaAnimationIdlePointers::
 	add_idleanim Altaria
+	add_idleanim AltariaMega
 
 ZangooseAnimationIdlePointers::
 	add_idleanim Zangoose
@@ -298,6 +312,9 @@ MiloticAnimationIdlePointers::
 
 CastformAnimationIdlePointers::
 	add_idleanim Castform
+	add_idleanim CastformSun
+	add_idleanim CastformRain
+	add_idleanim CastformSnow
 
 KecleonAnimationIdlePointers::
 	add_idleanim Kecleon
@@ -307,6 +324,7 @@ ShuppetAnimationIdlePointers::
 
 BanetteAnimationIdlePointers::
 	add_idleanim Banette
+	add_idleanim BanetteMega
 
 DuskullAnimationIdlePointers::
 	add_idleanim Duskull
@@ -322,6 +340,7 @@ ChimechoAnimationIdlePointers::
 
 AbsolAnimationIdlePointers::
 	add_idleanim Absol
+	add_idleanim AbsolMega
 
 WynautAnimationIdlePointers::
 	add_idleanim Wynaut
@@ -331,6 +350,7 @@ SnoruntAnimationIdlePointers::
 
 GlalieAnimationIdlePointers::
 	add_idleanim Glalie
+	add_idleanim GlalieMega
 
 SphealAnimationIdlePointers::
 	add_idleanim Spheal
@@ -364,6 +384,7 @@ ShelgonAnimationIdlePointers::
 
 SalamenceAnimationIdlePointers::
 	add_idleanim Salamence
+	add_idleanim SalamenceMega
 
 BeldumAnimationIdlePointers::
 	add_idleanim Beldum
@@ -373,6 +394,7 @@ MetangAnimationIdlePointers::
 
 MetagrossAnimationIdlePointers::
 	add_idleanim Metagross
+	add_idleanim MetagrossMega
 
 RegirockAnimationIdlePointers::
 	add_idleanim Regirock
@@ -385,22 +407,30 @@ RegisteelAnimationIdlePointers::
 
 LatiasAnimationIdlePointers::
 	add_idleanim Latias
+	add_idleanim LatiasMega
 
 LatiosAnimationIdlePointers::
 	add_idleanim Latios
+	add_idleanim LatiosMega
 
 KyogreAnimationIdlePointers::
 	add_idleanim Kyogre
+	add_idleanim KyogrePrimal
 
 GroudonAnimationIdlePointers::
 	add_idleanim Groudon
+	add_idleanim GroudonPrimal
 
 RayquazaAnimationIdlePointers::
 	add_idleanim Rayquaza
+	add_idleanim RayquazaMega
 
 JirachiAnimationIdlePointers::
 	add_idleanim Jirachi
 
 DeoxysAnimationIdlePointers::
 	add_idleanim Deoxys
+	add_idleanim DeoxysAttack
+	add_idleanim DeoxysDefense
+	add_idleanim DeoxysSpeed
 

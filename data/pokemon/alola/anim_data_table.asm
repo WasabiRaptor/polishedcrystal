@@ -6,7 +6,7 @@ AlolaAnimPointerTable::
 	variant_animdata Torracat
 	variant_animdata Incineroar
 	variant_animdata Popplio
-	variant_animdata Brione
+	variant_animdata Brionne
 	variant_animdata Primarina
 	variant_animdata Pikipeck
 	variant_animdata Trumbeak

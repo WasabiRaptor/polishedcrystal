@@ -13,7 +13,7 @@ IncineroarFrames:	INCLUDE "gfx/pokemon/incineroar/frames.asm"
 
 PopplioFrames:	INCLUDE "gfx/pokemon/popplio/frames.asm"
 
-BrioneFrames:	INCLUDE "gfx/pokemon/brione/frames.asm"
+BrionneFrames:	INCLUDE "gfx/pokemon/brionne/frames.asm"
 
 PrimarinaFrames:	INCLUDE "gfx/pokemon/primarina/frames.asm"
 
@@ -38,16 +38,24 @@ CrabrawlerFrames:	INCLUDE "gfx/pokemon/crabrawler/frames.asm"
 CrabominableFrames:	INCLUDE "gfx/pokemon/crabominable/frames.asm"
 
 OricorioFrames:	INCLUDE "gfx/pokemon/oricorio/frames.asm"
+OricorioPom_pomFrames::	INCLUDE "gfx/pokemon/oricorio_pom_pom/frames.asm"
+OricorioPauFrames::	INCLUDE "gfx/pokemon/oricorio_pau/frames.asm"
+OricorioSensuFrames::	INCLUDE "gfx/pokemon/oricorio_sensu/frames.asm"
 
 CutieflyFrames:	INCLUDE "gfx/pokemon/cutiefly/frames.asm"
 
 RibombeeFrames:	INCLUDE "gfx/pokemon/ribombee/frames.asm"
 
 RockruffFrames:	INCLUDE "gfx/pokemon/rockruff/frames.asm"
+RockruffOwn_tempoFrames::	INCLUDE "gfx/pokemon/rockruff_own_tempo/frames.asm"
 
 LycanrocFrames:	INCLUDE "gfx/pokemon/lycanroc/frames.asm"
+LycanrocMiddayFrames::	INCLUDE "gfx/pokemon/lycanroc_midday/frames.asm"
+LycanrocDuskFrames::	INCLUDE "gfx/pokemon/lycanroc_dusk/frames.asm"
+LycanrocMidnightFrames::	INCLUDE "gfx/pokemon/lycanroc_midnight/frames.asm"
 
 WishiwashiFrames:	INCLUDE "gfx/pokemon/wishiwashi/frames.asm"
+WishiwashiSchoolFrames::	INCLUDE "gfx/pokemon/wishiwashi_school/frames.asm"
 
 MareanieFrames:	INCLUDE "gfx/pokemon/mareanie/frames.asm"
 
@@ -104,6 +112,7 @@ Type_nullFrames:	INCLUDE "gfx/pokemon/type_null/frames.asm"
 SilvallyFrames:	INCLUDE "gfx/pokemon/silvally/frames.asm"
 
 MiniorFrames:	INCLUDE "gfx/pokemon/minior/frames.asm"
+MiniorCoreFrames::	INCLUDE "gfx/pokemon/minior_core/frames.asm"
 
 KomalaFrames:	INCLUDE "gfx/pokemon/komala/frames.asm"
 
@@ -112,6 +121,7 @@ TurtonatorFrames:	INCLUDE "gfx/pokemon/turtonator/frames.asm"
 TogedemaruFrames:	INCLUDE "gfx/pokemon/togedemaru/frames.asm"
 
 MimikyuFrames:	INCLUDE "gfx/pokemon/mimikyu/frames.asm"
+MimikyuBustedFrames::	INCLUDE "gfx/pokemon/mimikyu_busted/frames.asm"
 
 BruxishFrames:	INCLUDE "gfx/pokemon/bruxish/frames.asm"
 
@@ -156,6 +166,9 @@ KartanaFrames:	INCLUDE "gfx/pokemon/kartana/frames.asm"
 GuzzlordFrames:	INCLUDE "gfx/pokemon/guzzlord/frames.asm"
 
 NecrozmaFrames:	INCLUDE "gfx/pokemon/necrozma/frames.asm"
+NecrozmaDawn_wingsFrames::	INCLUDE "gfx/pokemon/necrozma_dawn_wings/frames.asm"
+NecrozmaDusk_maneFrames::	INCLUDE "gfx/pokemon/necrozma_dusk_mane/frames.asm"
+NecrozmaUltraFrames::	INCLUDE "gfx/pokemon/necrozma_ultra/frames.asm"
 
 MagearnaFrames:	INCLUDE "gfx/pokemon/magearna/frames.asm"
 
@@ -174,4 +187,5 @@ ZeraoraFrames:	INCLUDE "gfx/pokemon/zeraora/frames.asm"
 MeltanFrames:	INCLUDE "gfx/pokemon/meltan/frames.asm"
 
 MelmetalFrames:	INCLUDE "gfx/pokemon/melmetal/frames.asm"
+MelmetalGigaFrames::	INCLUDE "gfx/pokemon/melmetal_giga/frames.asm"
 

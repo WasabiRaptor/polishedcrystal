@@ -82,6 +82,7 @@ TranquillOverworldPalettePointers::
 
 UnfezantOverworldPalettePointers::
 	add_overworldpalettes Unfezant
+	add_overworldpalettes UnfezantF
 
 BlitzleOverworldPalettePointers::
 	add_overworldpalettes Blitzle
@@ -112,6 +113,7 @@ ExcadrillOverworldPalettePointers::
 
 AudinoOverworldPalettePointers::
 	add_overworldpalettes Audino
+	add_overworldpalettes AudinoMega
 
 TimburrOverworldPalettePointers::
 	add_overworldpalettes Timburr
@@ -181,9 +183,13 @@ KrookodileOverworldPalettePointers::
 
 DarumakaOverworldPalettePointers::
 	add_overworldpalettes Darumaka
+	add_overworldpalettes DarumakaGalar
 
 DarmanitanOverworldPalettePointers::
 	add_overworldpalettes Darmanitan
+	add_overworldpalettes DarmanitanZen
+	add_overworldpalettes DarmanitanGalar
+	add_overworldpalettes DarmanitanGalar_zen
 
 MaractusOverworldPalettePointers::
 	add_overworldpalettes Maractus
@@ -205,6 +211,7 @@ SigilyphOverworldPalettePointers::
 
 YamaskOverworldPalettePointers::
 	add_overworldpalettes Yamask
+	add_overworldpalettes YamaskGalar
 
 CofagrigusOverworldPalettePointers::
 	add_overworldpalettes Cofagrigus
@@ -226,6 +233,7 @@ TrubbishOverworldPalettePointers::
 
 GarbodorOverworldPalettePointers::
 	add_overworldpalettes Garbodor
+	add_overworldpalettes GarbodorGiga
 
 ZoruaOverworldPalettePointers::
 	add_overworldpalettes Zorua
@@ -274,9 +282,15 @@ VanilluxeOverworldPalettePointers::
 
 DeerlingOverworldPalettePointers::
 	add_overworldpalettes Deerling
+	add_overworldpalettes DeerlingSummer
+	add_overworldpalettes DeerlingAutumn
+	add_overworldpalettes DeerlingWinter
 
 SawsbuckOverworldPalettePointers::
 	add_overworldpalettes Sawsbuck
+	add_overworldpalettes SawsbuckSummer
+	add_overworldpalettes SawsbuckAutumn
+	add_overworldpalettes SawsbuckWinter
 
 EmolgaOverworldPalettePointers::
 	add_overworldpalettes Emolga
@@ -373,6 +387,7 @@ AccelgorOverworldPalettePointers::
 
 StunfiskOverworldPalettePointers::
 	add_overworldpalettes Stunfisk
+	add_overworldpalettes StunfiskGalar
 
 MienfooOverworldPalettePointers::
 	add_overworldpalettes Mienfoo
@@ -442,9 +457,11 @@ VirizionOverworldPalettePointers::
 
 TornadusOverworldPalettePointers::
 	add_overworldpalettes Tornadus
+	add_overworldpalettes TornadusTherian
 
 ThundurusOverworldPalettePointers::
 	add_overworldpalettes Thundurus
+	add_overworldpalettes ThundurusTherian
 
 ReshiramOverworldPalettePointers::
 	add_overworldpalettes Reshiram
@@ -454,15 +471,20 @@ ZekromOverworldPalettePointers::
 
 LandorusOverworldPalettePointers::
 	add_overworldpalettes Landorus
+	add_overworldpalettes LandorusTherian
 
 KyuremOverworldPalettePointers::
 	add_overworldpalettes Kyurem
+	add_overworldpalettes KyuremBlack
+	add_overworldpalettes KyuremWhite
 
 KeldeoOverworldPalettePointers::
 	add_overworldpalettes Keldeo
+	add_overworldpalettes KeldeoResolute
 
 MeloettaOverworldPalettePointers::
 	add_overworldpalettes Meloetta
+	add_overworldpalettes MeloettaPirouette
 
 GenesectOverworldPalettePointers::
 	add_overworldpalettes Genesect

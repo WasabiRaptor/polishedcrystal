@@ -76,9 +76,13 @@ BastiodonIconPointers::
 
 BurmyIconPointers::
 	add_icon Burmy
+	add_icon BurmySand
+	add_icon BurmyTrash
 
 WormadamIconPointers::
 	add_icon Wormadam
+	add_icon WormadamSand
+	add_icon WormadamTrash
 
 MothimIconPointers::
 	add_icon Mothim
@@ -103,12 +107,15 @@ CherubiIconPointers::
 
 CherrimIconPointers::
 	add_icon Cherrim
+	add_icon CherrimOvercast
 
 ShellosIconPointers::
 	add_icon Shellos
+	add_icon ShellosWest
 
 GastrodonIconPointers::
 	add_icon Gastrodon
+	add_icon GastrodonWest
 
 AmbipomIconPointers::
 	add_icon Ambipom
@@ -124,6 +131,7 @@ BunearyIconPointers::
 
 LopunnyIconPointers::
 	add_icon Lopunny
+	add_icon LopunnyMega
 
 MismagiusIconPointers::
 	add_icon Mismagius
@@ -175,6 +183,7 @@ GabiteIconPointers::
 
 GarchompIconPointers::
 	add_icon Garchomp
+	add_icon GarchompMega
 
 MunchlaxIconPointers::
 	add_icon Munchlax
@@ -184,6 +193,7 @@ RioluIconPointers::
 
 LucarioIconPointers::
 	add_icon Lucario
+	add_icon LucarioMega
 
 HippopotasIconPointers::
 	add_icon Hippopotas
@@ -220,6 +230,7 @@ SnoverIconPointers::
 
 AbomasnowIconPointers::
 	add_icon Abomasnow
+	add_icon AbomasnowMega
 
 WeavileIconPointers::
 	add_icon Weavile
@@ -265,6 +276,7 @@ Porygon_zIconPointers::
 
 GalladeIconPointers::
 	add_icon Gallade
+	add_icon GalladeMega
 
 ProbopassIconPointers::
 	add_icon Probopass
@@ -277,6 +289,12 @@ FroslassIconPointers::
 
 RotomIconPointers::
 	add_icon Rotom
+	add_icon RotomHeat
+	add_icon RotomWash
+	add_icon RotomFrost
+	add_icon RotomFan
+	add_icon RotomMow
+	add_icon RotomDex
 
 UxieIconPointers::
 	add_icon Uxie
@@ -301,6 +319,7 @@ RegigigasIconPointers::
 
 GiratinaIconPointers::
 	add_icon Giratina
+	add_icon GiratinaOrigin
 
 CresseliaIconPointers::
 	add_icon Cresselia

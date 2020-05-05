@@ -27,8 +27,6 @@ GIGA_FORM EQU MEGA_FORM
 NUM_POKEMON EQU $fd
 EGG EQU $fe
 
-nat_dexmon_form: macro
-endm
 ; the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is, bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
 	nat_dexmon_group 1, GROUP_GENERATION_ONE
 	nat_dexmon BULBASAUR
@@ -39,28 +37,56 @@ endm
 	nat_dexmon CHARMANDER
 	nat_dexmon CHARMELEON
 	nat_dexmon CHARIZARD
+	nat_dexmon_form MEGA_X
+	nat_dexmon_form MEGA_Y
+	nat_dexmon_form GIGA
 	nat_dexmon SQUIRTLE
 	nat_dexmon WARTORTLE
 	nat_dexmon BLASTOISE
+	nat_dexmon_form MEGA
+	nat_dexmon_form GIGA
 	nat_dexmon CATERPIE
 	nat_dexmon METAPOD
 	nat_dexmon BUTTERFREE
+	nat_dexmon_form GIGA
 	nat_dexmon WEEDLE
 	nat_dexmon KAKUNA
 	nat_dexmon BEEDRILL
+	nat_dexmon_form MEGA
 	nat_dexmon PIDGEY
 	nat_dexmon PIDGEOTTO
 	nat_dexmon PIDGEOT
+	nat_dexmon_form MEGA
 	nat_dexmon RATTATA
+	nat_dexmon_form ALOLA
 	nat_dexmon RATICATE
+	nat_dexmon_form ALOLA
 	nat_dexmon SPEAROW
 	nat_dexmon FEAROW
 	nat_dexmon EKANS
 	nat_dexmon ARBOK
 	nat_dexmon PIKACHU
+	nat_dexmon_form COSPLAY
+	nat_dexmon_form ROCKSTAR
+	nat_dexmon_form BELLE
+	nat_dexmon_form POPSTAR
+	nat_dexmon_form PHD
+	nat_dexmon_form LIBRE
+	nat_dexmon_form OG_CAP
+	nat_dexmon_form HOENN_CAP
+	nat_dexmon_form SINNOH_CAP
+	nat_dexmon_form UNOVA_CAP
+	nat_dexmon_form KALOS_CAP
+	nat_dexmon_form ALOLA_CAP
+	nat_dexmon_form PARTNER_CAP
+	nat_dexmon_form LETS_GO
+	nat_dexmon_form GIGA
 	nat_dexmon RAICHU
+	nat_dexmon_form ALOLA
 	nat_dexmon SANDSHREW
+	nat_dexmon_form ALOLA
 	nat_dexmon SANDSLASH
+	nat_dexmon_form ALOLA
 	nat_dexmon NIDORAN_F
 	nat_dexmon NIDORINA
 	nat_dexmon NIDOQUEEN
@@ -70,7 +96,13 @@ endm
 	nat_dexmon CLEFAIRY
 	nat_dexmon CLEFABLE
 	nat_dexmon VULPIX
+	nat_dexmon_form ALOLA
+	nat_dexmon_form LOKI
+	nat_dexmon_form LOKI_WINTER
 	nat_dexmon NINETALES
+	nat_dexmon_form ALOLA
+	nat_dexmon_form LOKI
+	nat_dexmon_form LOKI_WINTER
 	nat_dexmon JIGGLYPUFF
 	nat_dexmon WIGGLYTUFF
 	nat_dexmon ZUBAT
@@ -83,9 +115,15 @@ endm
 	nat_dexmon VENONAT
 	nat_dexmon VENOMOTH
 	nat_dexmon DIGLETT
+	nat_dexmon_form ALOLA
 	nat_dexmon DUGTRIO
+	nat_dexmon_form ALOLA
 	nat_dexmon MEOWTH
+	nat_dexmon_form ALOLA
+	nat_dexmon_form GALAR
+	nat_dexmon_form KANTO_GIGA
 	nat_dexmon PERSIAN
+	nat_dexmon_form ALOLA
 	nat_dexmon PSYDUCK
 	nat_dexmon GOLDUCK
 	nat_dexmon MANKEY
@@ -98,56 +136,75 @@ endm
 	nat_dexmon ABRA
 	nat_dexmon KADABRA
 	nat_dexmon ALAKAZAM
+	nat_dexmon_form MEGA
 	nat_dexmon MACHOP
 	nat_dexmon MACHOKE
 	nat_dexmon MACHAMP
+	nat_dexmon_form GIGA
 	nat_dexmon BELLSPROUT
 	nat_dexmon WEEPINBELL
 	nat_dexmon VICTREEBEL
 	nat_dexmon TENTACOOL
 	nat_dexmon TENTACRUEL
 	nat_dexmon GEODUDE
+	nat_dexmon_form ALOLA
 	nat_dexmon GRAVELER
+	nat_dexmon_form ALOLA
 	nat_dexmon GOLEM
+	nat_dexmon_form ALOLA
 	nat_dexmon PONYTA
+	nat_dexmon_form GALAR
 	nat_dexmon RAPIDASH
+	nat_dexmon_form GALAR
 	nat_dexmon SLOWPOKE
+	nat_dexmon_form GALAR
 	nat_dexmon SLOWBRO
+	nat_dexmon_form MEGA
 	nat_dexmon MAGNEMITE
 	nat_dexmon MAGNETON
 	nat_dexmon FARFETCHD
+	nat_dexmon_form GALAR
 	nat_dexmon DODUO
 	nat_dexmon DODRIO
 	nat_dexmon SEEL
 	nat_dexmon DEWGONG
 	nat_dexmon GRIMER
+	nat_dexmon_form ALOLA
 	nat_dexmon MUK
+	nat_dexmon_form ALOLA
 	nat_dexmon SHELLDER
 	nat_dexmon CLOYSTER
 	nat_dexmon GASTLY
 	nat_dexmon HAUNTER
 	nat_dexmon GENGAR
+	nat_dexmon_form MEGA
+	nat_dexmon_form GIGA
 	nat_dexmon ONIX
 	nat_dexmon DROWZEE
 	nat_dexmon HYPNO
 	nat_dexmon KRABBY
 	nat_dexmon KINGLER
+	nat_dexmon_form GIGA
 	nat_dexmon VOLTORB
 	nat_dexmon ELECTRODE
 	nat_dexmon EXEGGCUTE
 	nat_dexmon EXEGGUTOR
+	nat_dexmon_form ALOLA
 	nat_dexmon CUBONE
 	nat_dexmon MAROWAK
+	nat_dexmon_form ALOLA
 	nat_dexmon HITMONLEE
 	nat_dexmon HITMONCHAN
 	nat_dexmon LICKITUNG
 	nat_dexmon KOFFING
 	nat_dexmon WEEZING
+	nat_dexmon_form GALAR
 	nat_dexmon RHYHORN
 	nat_dexmon RHYDON
 	nat_dexmon CHANSEY
 	nat_dexmon TANGELA
 	nat_dexmon KANGASKHAN
+	nat_dexmon_form MEGA
 	nat_dexmon HORSEA
 	nat_dexmon SEADRA
 	nat_dexmon GOLDEEN
@@ -155,34 +212,48 @@ endm
 	nat_dexmon STARYU
 	nat_dexmon STARMIE
 	nat_dexmon MRMIME
+	nat_dexmon_form GALAR
 	nat_dexmon SCYTHER
 	nat_dexmon JYNX
 	nat_dexmon ELECTABUZZ
 	nat_dexmon MAGMAR
 	nat_dexmon PINSIR
+	nat_dexmon_form MEGA
 	nat_dexmon TAUROS
 	nat_dexmon MAGIKARP
 	nat_dexmon GYARADOS
+	nat_dexmon_form MEGA
 	nat_dexmon LAPRAS
+	nat_dexmon_form GIGA
 	nat_dexmon DITTO
 	nat_dexmon EEVEE
+	nat_dexmon_form LETS_GO
+	nat_dexmon_form GIGA
 	nat_dexmon VAPOREON
 	nat_dexmon JOLTEON
 	nat_dexmon FLAREON
+	nat_dexmon_form DONUT
 	nat_dexmon PORYGON
 	nat_dexmon OMANYTE
 	nat_dexmon OMASTAR
 	nat_dexmon KABUTO
 	nat_dexmon KABUTOPS
 	nat_dexmon AERODACTYL
+	nat_dexmon_form MEGA
 	nat_dexmon SNORLAX
+	nat_dexmon_form GIGA
 	nat_dexmon ARTICUNO
+	nat_dexmon_form GALAR
 	nat_dexmon ZAPDOS
+	nat_dexmon_form GALAR
 	nat_dexmon MOLTRES
+	nat_dexmon_form GALAR
 	nat_dexmon DRATINI
 	nat_dexmon DRAGONAIR
 	nat_dexmon DRAGONITE
 	nat_dexmon MEWTWO
+	nat_dexmon_form MEGA_X
+	nat_dexmon_form MEGA_Y
 	nat_dexmon MEW
 NUM_KANTO_POKEMON EQU const_value +-1
 
@@ -241,6 +312,7 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon CHINCHOU
 	nat_dexmon LANTURN
 	nat_dexmon PICHU
+	nat_dexmon_form SPIKY_EARED
 	nat_dexmon CLEFFA
 	nat_dexmon IGGLYBUFF
 	nat_dexmon TOGEPI
@@ -250,6 +322,7 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon MAREEP
 	nat_dexmon FLAAFFY
 	nat_dexmon AMPHAROS
+	nat_dexmon_form MEGA
 	nat_dexmon BELLOSSOM
 	nat_dexmon MARILL
 	nat_dexmon AZUMARILL
@@ -270,6 +343,34 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon SLOWKING
 	nat_dexmon MISDREAVUS
 	nat_dexmon UNOWN
+	nat_dexmon_form A
+	nat_dexmon_form B
+	nat_dexmon_form C
+	nat_dexmon_form D
+	nat_dexmon_form E
+	nat_dexmon_form F
+	nat_dexmon_form G
+	nat_dexmon_form H
+	nat_dexmon_form I
+	nat_dexmon_form J
+	nat_dexmon_form K
+	nat_dexmon_form L
+	nat_dexmon_form M
+	nat_dexmon_form N
+	nat_dexmon_form O
+	nat_dexmon_form P
+	nat_dexmon_form Q
+	nat_dexmon_form R
+	nat_dexmon_form S
+	nat_dexmon_form T
+	nat_dexmon_form U
+	nat_dexmon_form V
+	nat_dexmon_form W
+	nat_dexmon_form X
+	nat_dexmon_form Y
+	nat_dexmon_form Z
+	nat_dexmon_form EXCLAMATION_MARK
+	nat_dexmon_form QUESTION_MARK
 	nat_dexmon WOBBUFFET
 	nat_dexmon GIRAFARIG
 	nat_dexmon PINECO
@@ -277,12 +378,15 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon DUNSPARCE
 	nat_dexmon GLIGAR
 	nat_dexmon STEELIX
+	nat_dexmon_form MEGA
 	nat_dexmon SNUBBULL
 	nat_dexmon GRANBULL
 	nat_dexmon QWILFISH
 	nat_dexmon SCIZOR
+	nat_dexmon_form MEGA
 	nat_dexmon SHUCKLE
 	nat_dexmon HERACROSS
+	nat_dexmon_form MEGA
 	nat_dexmon SNEASEL
 	nat_dexmon TEDDIURSA
 	nat_dexmon URSARING
@@ -291,6 +395,7 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon SWINUB
 	nat_dexmon PILOSWINE
 	nat_dexmon CORSOLA
+	nat_dexmon_form GALAR
 	nat_dexmon REMORAID
 	nat_dexmon OCTILLERY
 	nat_dexmon DELIBIRD
@@ -298,6 +403,7 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon SKARMORY
 	nat_dexmon HOUNDOUR
 	nat_dexmon HOUNDOOM
+	nat_dexmon_form MEGA
 	nat_dexmon KINGDRA
 	nat_dexmon PHANPY
 	nat_dexmon DONPHAN
@@ -317,6 +423,7 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon LARVITAR
 	nat_dexmon PUPITAR
 	nat_dexmon TYRANITAR
+	nat_dexmon_form MEGA
 	nat_dexmon LUGIA
 	nat_dexmon HO_OH
 	nat_dexmon CELEBI
@@ -363,16 +470,21 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon TREECKO
 	nat_dexmon GROVYLE
 	nat_dexmon SCEPTILE
+	nat_dexmon_form MEGA
 	nat_dexmon TORCHIC
 	nat_dexmon COMBUSKEN
 	nat_dexmon BLAZIKEN
+	nat_dexmon_form MEGA
 	nat_dexmon MUDKIP
 	nat_dexmon MARSHTOMP
 	nat_dexmon SWAMPERT
+	nat_dexmon_form MEGA
 	nat_dexmon POOCHYENA
 	nat_dexmon MIGHTYENA
 	nat_dexmon ZIGZAGOON
+	nat_dexmon_form GALAR
 	nat_dexmon LINOONE
+	nat_dexmon_form GALAR
 	nat_dexmon WURMPLE
 	nat_dexmon SILCOON
 	nat_dexmon BEAUTIFLY
@@ -391,6 +503,7 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon RALTS
 	nat_dexmon KIRLIA
 	nat_dexmon GARDEVOIR
+	nat_dexmon_form MEGA
 	nat_dexmon SURSKIT
 	nat_dexmon MASQUERAIN
 	nat_dexmon SHROOMISH
@@ -411,14 +524,19 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon SKITTY
 	nat_dexmon DELCATTY
 	nat_dexmon SABLEYE
+	nat_dexmon_form MEGA
 	nat_dexmon MAWILE
+	nat_dexmon_form MEGA
 	nat_dexmon ARON
 	nat_dexmon LAIRON
 	nat_dexmon AGGRON
+	nat_dexmon_form MEGA
 	nat_dexmon MEDITITE
 	nat_dexmon MEDICHAM
+	nat_dexmon_form MEGA
 	nat_dexmon ELECTRIKE
 	nat_dexmon MANECTRIC
+	nat_dexmon_form MEGA
 	nat_dexmon PLUSLE
 	nat_dexmon MINUN
 	nat_dexmon VOLBEAT
@@ -428,10 +546,12 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon SWALOT
 	nat_dexmon CARVANHA
 	nat_dexmon SHARPEDO
+	nat_dexmon_form MEGA
 	nat_dexmon WAILMER
 	nat_dexmon WAILORD
 	nat_dexmon NUMEL
 	nat_dexmon CAMERUPT
+	nat_dexmon_form MEGA
 	nat_dexmon TORKOAL
 	nat_dexmon SPOINK
 	nat_dexmon GRUMPIG
@@ -443,6 +563,7 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon CACTURNE
 	nat_dexmon SWABLU
 	nat_dexmon ALTARIA
+	nat_dexmon_form MEGA
 	nat_dexmon ZANGOOSE
 	nat_dexmon SEVIPER
 	nat_dexmon LUNATONE
@@ -459,18 +580,24 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon ARMALDO
 	nat_dexmon FEEBAS
 	nat_dexmon MILOTIC
-	nat_dexmon CASTFORM ;  castform's forms are controlled by the weather, and cannot exist independent of it outside battle, and merely change the pic and type, but not the stats therefore only one entry
+	nat_dexmon CASTFORM
+	nat_dexmon_form SUN
+	nat_dexmon_form RAIN
+	nat_dexmon_form SNOW
 	nat_dexmon KECLEON
 	nat_dexmon SHUPPET
 	nat_dexmon BANETTE
+	nat_dexmon_form MEGA
 	nat_dexmon DUSKULL
 	nat_dexmon DUSCLOPS
 	nat_dexmon TROPIUS
 	nat_dexmon CHIMECHO
 	nat_dexmon ABSOL
+	nat_dexmon_form MEGA
 	nat_dexmon WYNAUT
 	nat_dexmon SNORUNT
 	nat_dexmon GLALIE
+	nat_dexmon_form MEGA
 	nat_dexmon SPHEAL
 	nat_dexmon SEALEO
 	nat_dexmon WALREIN
@@ -482,19 +609,29 @@ NUM_UNOWN EQU const_value + -1
 	nat_dexmon BAGON
 	nat_dexmon SHELGON
 	nat_dexmon SALAMENCE
+	nat_dexmon_form MEGA
 	nat_dexmon BELDUM
 	nat_dexmon METANG
 	nat_dexmon METAGROSS
+	nat_dexmon_form MEGA
 	nat_dexmon REGIROCK
 	nat_dexmon REGICE
 	nat_dexmon REGISTEEL
 	nat_dexmon LATIAS
+	nat_dexmon_form MEGA
 	nat_dexmon LATIOS
+	nat_dexmon_form MEGA
 	nat_dexmon KYOGRE
+	nat_dexmon_form PRIMAL
 	nat_dexmon GROUDON
+	nat_dexmon_form PRIMAL
 	nat_dexmon RAYQUAZA
+	nat_dexmon_form MEGA
 	nat_dexmon JIRACHI
 	nat_dexmon DEOXYS
+	nat_dexmon_form ATTACK
+	nat_dexmon_form DEFENSE
+	nat_dexmon_form SPEED
 NUM_HOENN_POKEMON EQU const_value +-1
 
 	const_def
@@ -537,7 +674,11 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon SHIELDON
 	nat_dexmon BASTIODON
 	nat_dexmon BURMY
+	nat_dexmon_form SAND
+	nat_dexmon_form TRASH
 	nat_dexmon WORMADAM
+	nat_dexmon_form SAND
+	nat_dexmon_form TRASH
 	nat_dexmon MOTHIM
 	nat_dexmon COMBEE
 	nat_dexmon VESPIQUEN
@@ -545,14 +686,18 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon BUIZEL
 	nat_dexmon FLOATZEL
 	nat_dexmon CHERUBI
-	nat_dexmon CHERRIM ; same reasons as castform
+	nat_dexmon CHERRIM
+	nat_dexmon_form OVERCAST
 	nat_dexmon SHELLOS
+	nat_dexmon_form WEST
 	nat_dexmon GASTRODON
+	nat_dexmon_form WEST
 	nat_dexmon AMBIPOM
 	nat_dexmon DRIFLOON
 	nat_dexmon DRIFBLIM
 	nat_dexmon BUNEARY
 	nat_dexmon LOPUNNY
+	nat_dexmon_form MEGA
 	nat_dexmon MISMAGIUS
 	nat_dexmon HONCHKROW
 	nat_dexmon GLAMEOW
@@ -570,9 +715,11 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon GIBLE
 	nat_dexmon GABITE
 	nat_dexmon GARCHOMP
+	nat_dexmon_form MEGA
 	nat_dexmon MUNCHLAX
 	nat_dexmon RIOLU
 	nat_dexmon LUCARIO
+	nat_dexmon_form MEGA
 	nat_dexmon HIPPOPOTAS
 	nat_dexmon HIPPOWDON
 	nat_dexmon SKORUPI
@@ -585,6 +732,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon MANTYKE
 	nat_dexmon SNOVER
 	nat_dexmon ABOMASNOW
+	nat_dexmon_form MEGA
 	nat_dexmon WEAVILE
 	nat_dexmon MAGNEZONE
 	nat_dexmon LICKILICKY
@@ -600,10 +748,17 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon MAMOSWINE
 	nat_dexmon PORYGON_Z
 	nat_dexmon GALLADE
+	nat_dexmon_form MEGA
 	nat_dexmon PROBOPASS
 	nat_dexmon DUSKNOIR
 	nat_dexmon FROSLASS
 	nat_dexmon ROTOM
+	nat_dexmon_form HEAT
+	nat_dexmon_form WASH
+	nat_dexmon_form FROST
+	nat_dexmon_form FAN
+	nat_dexmon_form MOW
+	nat_dexmon_form DEX
 	nat_dexmon UXIE
 	nat_dexmon MESPRIT
 	nat_dexmon AZELF
@@ -612,6 +767,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon HEATRAN
 	nat_dexmon REGIGIGAS
 	nat_dexmon GIRATINA
+	nat_dexmon_form ORIGIN
 	nat_dexmon CRESSELIA
 	nat_dexmon PHIONE
 	nat_dexmon MANAPHY
@@ -621,7 +777,7 @@ NUM_HOENN_POKEMON EQU const_value +-1
 	nat_dexmon ARCEUS ; types can be handled by the multitype ability via the item it holds and palette can be done in much the same way
 NUM_SINNOH_POKEMON EQU const_value +-1
 
-	const_def 1;for burmy and wormadam
+	const_def ;for burmy and wormadam
 	const PLANT_CLOAK
 	const SANDY_CLOAK
 	const TRASH_CLOAK
@@ -682,6 +838,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon PIDOVE
 	nat_dexmon TRANQUILL
 	nat_dexmon UNFEZANT
+	nat_dexmon_form F
 	nat_dexmon BLITZLE
 	nat_dexmon ZEBSTRIKA
 	nat_dexmon ROGGENROLA
@@ -692,6 +849,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon DRILBUR
 	nat_dexmon EXCADRILL
 	nat_dexmon AUDINO
+	nat_dexmon_form MEGA
 	nat_dexmon TIMBURR
 	nat_dexmon GURDURR
 	nat_dexmon CONKELDURR
@@ -715,7 +873,11 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon KROKOROK
 	nat_dexmon KROOKODILE
 	nat_dexmon DARUMAKA
+	nat_dexmon_form GALAR
 	nat_dexmon DARMANITAN
+	nat_dexmon_form ZEN
+	nat_dexmon_form GALAR
+	nat_dexmon_form GALAR_ZEN
 	nat_dexmon MARACTUS
 	nat_dexmon DWEBBLE
 	nat_dexmon CRUSTLE
@@ -723,6 +885,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon SCRAFTY
 	nat_dexmon SIGILYPH
 	nat_dexmon YAMASK
+	nat_dexmon_form GALAR
 	nat_dexmon COFAGRIGUS
 	nat_dexmon TIRTOUGA
 	nat_dexmon CARRACOSTA
@@ -730,6 +893,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon ARCHEOPS
 	nat_dexmon TRUBBISH
 	nat_dexmon GARBODOR
+	nat_dexmon_form GIGA
 	nat_dexmon ZORUA
 	nat_dexmon ZOROARK
 	nat_dexmon MINCCINO
@@ -746,7 +910,13 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon VANILLISH
 	nat_dexmon VANILLUXE
 	nat_dexmon DEERLING
+	nat_dexmon_form SUMMER
+	nat_dexmon_form AUTUMN
+	nat_dexmon_form WINTER
 	nat_dexmon SAWSBUCK
+	nat_dexmon_form SUMMER
+	nat_dexmon_form AUTUMN
+	nat_dexmon_form WINTER
 	nat_dexmon EMOLGA
 	nat_dexmon KARRABLAST
 	nat_dexmon ESCAVALIER
@@ -779,6 +949,7 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon SHELMET
 	nat_dexmon ACCELGOR
 	nat_dexmon STUNFISK
+	nat_dexmon_form GALAR
 	nat_dexmon MIENFOO
 	nat_dexmon MIENSHAO
 	nat_dexmon DRUDDIGON
@@ -802,13 +973,20 @@ NUM_SINNOH_POKEMON EQU const_value +-1
 	nat_dexmon TERRAKION
 	nat_dexmon VIRIZION
 	nat_dexmon TORNADUS
+	nat_dexmon_form THERIAN
 	nat_dexmon THUNDURUS
+	nat_dexmon_form THERIAN
 	nat_dexmon RESHIRAM
 	nat_dexmon ZEKROM
 	nat_dexmon LANDORUS
+	nat_dexmon_form THERIAN
 	nat_dexmon KYUREM
+	nat_dexmon_form BLACK
+	nat_dexmon_form WHITE
 	nat_dexmon KELDEO
+	nat_dexmon_form RESOLUTE
 	nat_dexmon MELOETTA
+	nat_dexmon_form PIROUETTE
 	nat_dexmon GENESECT
 NUM_UNOVA_POKEMON EQU const_value +-1
 
@@ -852,6 +1030,8 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon FROAKIE
 	nat_dexmon FROGADIER
 	nat_dexmon GRENINJA
+	nat_dexmon_form BATTLE_BOND
+	nat_dexmon_form ASH
 	nat_dexmon BUNNELBY
 	nat_dexmon DIGGERSBY
 	nat_dexmon FLETCHLING
@@ -860,21 +1040,53 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon SCATTERBUG
 	nat_dexmon SPEWPA
 	nat_dexmon VIVILLON ; oh boy you seem like a bag of worms when we get to you
+	nat_dexmon_form ARCHIPELEGO
+	nat_dexmon_form CONTINENTAL
+	nat_dexmon_form ELEGANT
+	nat_dexmon_form GARDEN
+	nat_dexmon_form HIGH_PLAINS
+	nat_dexmon_form ICY_SNOW
+	nat_dexmon_form JUNGLE
+	nat_dexmon_form MARINE
+	nat_dexmon_form MODERN
+	nat_dexmon_form MONSOON
+	nat_dexmon_form OCEAN
+	nat_dexmon_form POLAR
+	nat_dexmon_form RIVER
+	nat_dexmon_form SANDSTORM
+	nat_dexmon_form SAVANNAH
+	nat_dexmon_form SUN
+	nat_dexmon_form TUNDRA
+	nat_dexmon_form POKEBALL
+	nat_dexmon_form FANCY
 	nat_dexmon LITLEO
 	nat_dexmon PYROAR
+	nat_dexmon_form F
 	nat_dexmon FLABEBE ; the color variance can be handled by vary colors by DVs
 	nat_dexmon FLOETTE
+	nat_dexmon_form ETERNAL_FLOWER
 	nat_dexmon FLORGES
 	nat_dexmon SKIDDO
 	nat_dexmon GOGOAT
 	nat_dexmon PANCHAM
 	nat_dexmon PANGORO
-	nat_dexmon FURFROU ; you're in the same boat as vivillon as yours is just cosmetic, not sure if it should be granted more slots really
+	nat_dexmon FURFROU
+	nat_dexmon_form HEART
+	nat_dexmon_form STAR
+	nat_dexmon_form DIAMOND
+	nat_dexmon_form DEBUTANTE
+	nat_dexmon_form MATRON
+	nat_dexmon_form DANDY
+	nat_dexmon_form LA_REINE
+	nat_dexmon_form KABUKI
+	nat_dexmon_form PHARAOH
 	nat_dexmon ESPURR
 	nat_dexmon MEOWSTIC
+	nat_dexmon_form F
 	nat_dexmon HONEDGE
 	nat_dexmon DOUBLADE
 	nat_dexmon AEGISLASH
+	nat_dexmon_form BLADE
 	nat_dexmon SPRITZEE
 	nat_dexmon AROMATISSE
 	nat_dexmon SWIRLIX
@@ -904,7 +1116,13 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon PHANTUMP
 	nat_dexmon TREVENANT
 	nat_dexmon PUMPKABOO
+	nat_dexmon_form AVERAGE
+	nat_dexmon_form LARGE
+	nat_dexmon_form SUPER
 	nat_dexmon GOURGEIST
+	nat_dexmon_form AVERAGE
+	nat_dexmon_form LARGE
+	nat_dexmon_form SUPER
 	nat_dexmon BERGMITE
 	nat_dexmon AVALUGG
 	nat_dexmon NOIBAT
@@ -912,8 +1130,14 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon XERNEAS ; neutral mode and active mode do absoluely nothing
 	nat_dexmon YVELTAL
 	nat_dexmon ZYGARDE
+	nat_dexmon_form FIFTY_PERCENT
+	nat_dexmon_form COMPLETE
+	nat_dexmon_form COMPLETE
+	nat_dexmon_form COMPLETE
 	nat_dexmon DIANCIE
+	nat_dexmon_form MEGA
 	nat_dexmon HOOPA
+	nat_dexmon_form UNBOUND
 	nat_dexmon VOLCANION
 NUM_KALOS_POKEMON EQU const_value +-1
 
@@ -990,7 +1214,7 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon TORRACAT
 	nat_dexmon INCINEROAR
 	nat_dexmon POPPLIO
-	nat_dexmon BRIONE
+	nat_dexmon BRIONNE
 	nat_dexmon PRIMARINA
 	nat_dexmon PIKIPECK
 	nat_dexmon TRUMBEAK
@@ -1003,11 +1227,19 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon CRABRAWLER
 	nat_dexmon CRABOMINABLE ; objectively worst looking pokemon
 	nat_dexmon ORICORIO
+	nat_dexmon_form POM_POM
+	nat_dexmon_form PAU
+	nat_dexmon_form SENSU
 	nat_dexmon CUTIEFLY
 	nat_dexmon RIBOMBEE
 	nat_dexmon ROCKRUFF
-	nat_dexmon LYCANROC
+	nat_dexmon_form OWN_TEMPO
+	nat_dexmon LYCANROC ;time of day indexes would put dawn as 0 so thats where it goes
+	nat_dexmon_form MIDDAY
+	nat_dexmon_form DUSK
+	nat_dexmon_form MIDNIGHT
 	nat_dexmon WISHIWASHI
+	nat_dexmon_form SCHOOL
 	nat_dexmon MAREANIE
 	nat_dexmon TOXAPEX
 	nat_dexmon MUDBRAY
@@ -1036,10 +1268,12 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon TYPE_NULL
 	nat_dexmon SILVALLY ; types are handled by the RKS system ability via the item it holds and palette can be done in much the same way
 	nat_dexmon MINIOR
+	nat_dexmon_form CORE
 	nat_dexmon KOMALA
 	nat_dexmon TURTONATOR
 	nat_dexmon TOGEDEMARU
-	nat_dexmon MIMIKYU ; some people may argue its disguise breaking is a form change but it does not change type or stats and can be handled without another entry
+	nat_dexmon MIMIKYU
+	nat_dexmon_form BUSTED
 	nat_dexmon BRUXISH
 	nat_dexmon DRAMPA
 	nat_dexmon DHELMISE
@@ -1062,6 +1296,9 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon KARTANA
 	nat_dexmon GUZZLORD
 	nat_dexmon NECROZMA
+	nat_dexmon_form DAWN_WINGS
+	nat_dexmon_form DUSK_MANE
+	nat_dexmon_form ULTRA
 	nat_dexmon MAGEARNA
 	nat_dexmon MARSHADOW ;zenith does absolutely nothing, didn't even know it changed
 	nat_dexmon POIPOLE
@@ -1071,6 +1308,7 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon ZERAORA
 	nat_dexmon MELTAN
 	nat_dexmon MELMETAL
+	nat_dexmon_form GIGA
 NUM_ALOLA_POKEMON EQU const_value +-1
 
 	const_def
@@ -1102,40 +1340,116 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	const DAWN_WINGS_NECROZMA
 	const ULTRA_NECROZMA
 
-; IMPORTANT NOTE!
-; No work is to be put forwards to implement any Galar pokemon or Galarian form pokemon until *after* the game is released and we have the data
-; these constants are only here as placeholders for pokemon we know exist or will exist so that whenwe finally do have the data, it probably won't break save files
-; *probably*
 	nat_dexmon_group 1, GROUP_GENERATION_EIGHT
-	;nat_dexmon GROOKEY
-	;nat_dexmon GROOKEY_STAGE_1
-	;nat_dexmon GROOKEY_STAGE_2
-	;nat_dexmon SCORBUNNY
-	;nat_dexmon SCORBUNNY_STAGE_1
-	;nat_dexmon SCORBUNNY_STAGE_2
-	;nat_dexmon SOBBLE
-	;nat_dexmon SOBBLE_STAGE_1
-	;nat_dexmon SOBBLE_STAGE_2
-	;nat_dexmon GOSSIFLEUR
-	;nat_dexmon ELDEGOSS
-	;nat_dexmon WOOLOO
-	;nat_dexmon CORVIKNIGHT
-	;nat_dexmon DREADNAW
-	;nat_dexmon YAMPER
-	;nat_dexmon IMPIDIMP
-	;nat_dexmon ALCREMIE
-	;nat_dexmon ROLYCOLY
-	;nat_dexmon DURALDUON
-	;nat_dexmon MORPEKO
-	;nat_dexmon OBSTAGOON
-	;nat_dexmon CRAMORANT
-	;nat_dexmon POLTEAGEIST
-	;nat_dexmon SIRFETCH_D
-
-	;nat_dexmon ZACIAN
-	;nat_dexmon ZAMAZENTA
+	nat_dexmon GROOKEY
+	nat_dexmon THWACKEY
+	nat_dexmon RILLABOOM
+	nat_dexmon_form GIGA
+	nat_dexmon SCORBUNNY
+	nat_dexmon RABOOT
+	nat_dexmon CINDERACE ;the hot bun
+	nat_dexmon_form GIGA
+	nat_dexmon SOBBLE
+	nat_dexmon DRIZZILE
+	nat_dexmon INTELEON ;the rantsona
+	nat_dexmon_form GIGA
+	nat_dexmon SKWOVET
+	nat_dexmon GREEDENT
+	nat_dexmon ROOKIDEE
+	nat_dexmon CORVISQUIRE
+	nat_dexmon CORVIKNIGHT
+	nat_dexmon_form GIGA
+	nat_dexmon BLIPBUG
+	nat_dexmon DOTTLER
+	nat_dexmon ORBEETLE
+	nat_dexmon_form GIGA
+	nat_dexmon NICKIT
+	nat_dexmon THIEVUL
+	nat_dexmon GROSSIFLEUR
+	nat_dexmon ELDEGROSS
+	nat_dexmon WOOLOO ; now you're blue
+	nat_dexmon DUBWOOL
+	nat_dexmon CHEWTLE
+	nat_dexmon DREDNAW
+	nat_dexmon_form GIGA
+	nat_dexmon YAMPER
+	nat_dexmon BOLTUND
+	nat_dexmon ROLYCOLY
+	nat_dexmon CARKOAL ; ree
+	nat_dexmon COALOSSAL ; you ruined my roly coal boi ceast to exist you Rhydon 2
+	nat_dexmon_form GIGA
+	nat_dexmon APPLIN
+	nat_dexmon FLAPPLE
+	nat_dexmon_form GIGA
+	nat_dexmon APPLETUN
+	nat_dexmon_form GIGA
+	nat_dexmon SILICOBRA
+	nat_dexmon SANDACONDA
+	nat_dexmon_form GIGA
+	nat_dexmon CRAMORANT
+	nat_dexmon_form GULPING
+	nat_dexmon_form GORGING
+	nat_dexmon ARROKUDA
+	nat_dexmon BARRASKEWDA
+	nat_dexmon TOXEL
+	nat_dexmon TOXTRICITY
+	nat_dexmon_form LOW_KEY
+	nat_dexmon_form GIGA
+	nat_dexmon SIZZLIPEDE
+	nat_dexmon CENTISKORCH
+	nat_dexmon_form GIGA
+	nat_dexmon CLOBBOPUS
+	nat_dexmon GRAPPLOCT
+	nat_dexmon SINISTEA
+	nat_dexmon POLTEAGEIST
+	nat_dexmon HATRENNA
+	nat_dexmon HATTREM
+	nat_dexmon HATTERENE
+	nat_dexmon_form GIGA
+	nat_dexmon IMPIDIMP
+	nat_dexmon MORGREM
+	nat_dexmon GRIMMSNARL
+	nat_dexmon_form GIGA
+	nat_dexmon OBSTAGOON
+	nat_dexmon PERRSERKER
+	nat_dexmon CURSOLA
+	nat_dexmon SIRFETCHD
+	nat_dexmon MRRIME
+	nat_dexmon RUNERIGUS
+	nat_dexmon MILCERY
+	nat_dexmon ALCREMIE
+	nat_dexmon_form GIGA
+	nat_dexmon FALINKS
+	nat_dexmon PINCURCHIN
+	nat_dexmon SNOM
+	nat_dexmon FROSMOTH
+	nat_dexmon STONJOURNER
+	nat_dexmon EISCUE
+	nat_dexmon_form NO_ICE
+	nat_dexmon INDEEDEE
+	nat_dexmon MORPEKO
+	nat_dexmon_form HANGRY
+	nat_dexmon CUFANT
+	nat_dexmon COPPERAJAH
+	nat_dexmon_form GIGA
+	nat_dexmon DRACOZOLT;why
+	nat_dexmon ARCTOZOLT	;god why
+	nat_dexmon DRACOVISH		;oh god please why
+	nat_dexmon ARCTOVISH 			;these should never have been made
+	nat_dexmon DURALDON
+	nat_dexmon_form GIGA
+	nat_dexmon DREEPY
+	nat_dexmon DRAKLOAK
+	nat_dexmon DRAGAPULT
+	nat_dexmon ZACIAN
+	nat_dexmon_form SWORD
+	nat_dexmon ZAMAZENTA
+	nat_dexmon_form SHEILD
+	nat_dexmon ETERNATUS
+	nat_dexmon_form ETERNAMAX
 NUM_GALAR_POKEMON EQU const_value +-1
 
+;and theres more later, why gen 8, why must you be stupid
 	const_def
 	const CRAMORANT_NORMAL
 	const CRAMORANT_GULPING
@@ -1169,12 +1483,3 @@ NUM_GALAR_POKEMON EQU const_value +-1
 	const_def
 	const ZAMAZENTA_HERO
 	const ZAMAZENTA_ARMORED
-
-grouped_dex_order_mon: macro
-	db \1, GROUP_\1
-if _NARG == 2
-	db \2
-else
-	db 0
-endc
-endm

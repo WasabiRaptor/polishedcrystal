@@ -18,6 +18,9 @@ CharmeleonOverworldPalettePointers::
 
 CharizardOverworldPalettePointers::
 	add_overworldpalettes Charizard
+	add_overworldpalettes CharizardMega_x
+	add_overworldpalettes CharizardMega_y
+	add_overworldpalettes CharizardGiga
 
 SquirtleOverworldPalettePointers::
 	add_overworldpalettes Squirtle
@@ -27,6 +30,8 @@ WartortleOverworldPalettePointers::
 
 BlastoiseOverworldPalettePointers::
 	add_overworldpalettes Blastoise
+	add_overworldpalettes BlastoiseMega
+	add_overworldpalettes BlastoiseGiga
 
 CaterpieOverworldPalettePointers::
 	add_overworldpalettes Caterpie
@@ -36,6 +41,7 @@ MetapodOverworldPalettePointers::
 
 ButterfreeOverworldPalettePointers::
 	add_overworldpalettes Butterfree
+	add_overworldpalettes ButterfreeGiga
 
 WeedleOverworldPalettePointers::
 	add_overworldpalettes Weedle
@@ -45,6 +51,7 @@ KakunaOverworldPalettePointers::
 
 BeedrillOverworldPalettePointers::
 	add_overworldpalettes Beedrill
+	add_overworldpalettes BeedrillMega
 
 PidgeyOverworldPalettePointers::
 	add_overworldpalettes Pidgey
@@ -54,12 +61,15 @@ PidgeottoOverworldPalettePointers::
 
 PidgeotOverworldPalettePointers::
 	add_overworldpalettes Pidgeot
+	add_overworldpalettes PidgeotMega
 
 RattataOverworldPalettePointers::
 	add_overworldpalettes Rattata
+	add_overworldpalettes RattataAlola
 
 RaticateOverworldPalettePointers::
 	add_overworldpalettes Raticate
+	add_overworldpalettes RaticateAlola
 
 SpearowOverworldPalettePointers::
 	add_overworldpalettes Spearow
@@ -75,15 +85,33 @@ ArbokOverworldPalettePointers::
 
 PikachuOverworldPalettePointers::
 	add_overworldpalettes Pikachu
+	add_overworldpalettes PikachuCosplay
+	add_overworldpalettes PikachuRockstar
+	add_overworldpalettes PikachuBelle
+	add_overworldpalettes PikachuPopstar
+	add_overworldpalettes PikachuPhd
+	add_overworldpalettes PikachuLibre
+	add_overworldpalettes PikachuOg_cap
+	add_overworldpalettes PikachuHoenn_cap
+	add_overworldpalettes PikachuSinnoh_cap
+	add_overworldpalettes PikachuUnova_cap
+	add_overworldpalettes PikachuKalos_cap
+	add_overworldpalettes PikachuAlola_cap
+	add_overworldpalettes PikachuPartner_cap
+	add_overworldpalettes PikachuLets_go
+	add_overworldpalettes PikachuGiga
 
 RaichuOverworldPalettePointers::
 	add_overworldpalettes Raichu
+	add_overworldpalettes RaichuAlola
 
 SandshrewOverworldPalettePointers::
 	add_overworldpalettes Sandshrew
+	add_overworldpalettes SandshrewAlola
 
 SandslashOverworldPalettePointers::
 	add_overworldpalettes Sandslash
+	add_overworldpalettes SandslashAlola
 
 Nidoran_fOverworldPalettePointers::
 	add_overworldpalettes Nidoran_f
@@ -111,9 +139,15 @@ ClefableOverworldPalettePointers::
 
 VulpixOverworldPalettePointers::
 	add_overworldpalettes Vulpix
+	add_overworldpalettes VulpixAlola
+	add_overworldpalettes VulpixLoki
+	add_overworldpalettes VulpixLoki_winter
 
 NinetalesOverworldPalettePointers::
 	add_overworldpalettes Ninetales
+	add_overworldpalettes NinetalesAlola
+	add_overworldpalettes NinetalesLoki
+	add_overworldpalettes NinetalesLoki_winter
 
 JigglypuffOverworldPalettePointers::
 	add_overworldpalettes Jigglypuff
@@ -150,15 +184,21 @@ VenomothOverworldPalettePointers::
 
 DiglettOverworldPalettePointers::
 	add_overworldpalettes Diglett
+	add_overworldpalettes DiglettAlola
 
 DugtrioOverworldPalettePointers::
 	add_overworldpalettes Dugtrio
+	add_overworldpalettes DugtrioAlola
 
 MeowthOverworldPalettePointers::
 	add_overworldpalettes Meowth
+	add_overworldpalettes MeowthAlola
+	add_overworldpalettes MeowthGalar
+	add_overworldpalettes MeowthKanto_giga
 
 PersianOverworldPalettePointers::
 	add_overworldpalettes Persian
+	add_overworldpalettes PersianAlola
 
 PsyduckOverworldPalettePointers::
 	add_overworldpalettes Psyduck
@@ -195,6 +235,7 @@ KadabraOverworldPalettePointers::
 
 AlakazamOverworldPalettePointers::
 	add_overworldpalettes Alakazam
+	add_overworldpalettes AlakazamMega
 
 MachopOverworldPalettePointers::
 	add_overworldpalettes Machop
@@ -204,6 +245,7 @@ MachokeOverworldPalettePointers::
 
 MachampOverworldPalettePointers::
 	add_overworldpalettes Machamp
+	add_overworldpalettes MachampGiga
 
 BellsproutOverworldPalettePointers::
 	add_overworldpalettes Bellsprout
@@ -222,24 +264,31 @@ TentacruelOverworldPalettePointers::
 
 GeodudeOverworldPalettePointers::
 	add_overworldpalettes Geodude
+	add_overworldpalettes GeodudeAlola
 
 GravelerOverworldPalettePointers::
 	add_overworldpalettes Graveler
+	add_overworldpalettes GravelerAlola
 
 GolemOverworldPalettePointers::
 	add_overworldpalettes Golem
+	add_overworldpalettes GolemAlola
 
 PonytaOverworldPalettePointers::
 	add_overworldpalettes Ponyta
+	add_overworldpalettes PonytaGalar
 
 RapidashOverworldPalettePointers::
 	add_overworldpalettes Rapidash
+	add_overworldpalettes RapidashGalar
 
 SlowpokeOverworldPalettePointers::
 	add_overworldpalettes Slowpoke
+	add_overworldpalettes SlowpokeGalar
 
 SlowbroOverworldPalettePointers::
 	add_overworldpalettes Slowbro
+	add_overworldpalettes SlowbroMega
 
 MagnemiteOverworldPalettePointers::
 	add_overworldpalettes Magnemite
@@ -249,6 +298,7 @@ MagnetonOverworldPalettePointers::
 
 FarfetchdOverworldPalettePointers::
 	add_overworldpalettes Farfetchd
+	add_overworldpalettes FarfetchdGalar
 
 DoduoOverworldPalettePointers::
 	add_overworldpalettes Doduo
@@ -264,9 +314,11 @@ DewgongOverworldPalettePointers::
 
 GrimerOverworldPalettePointers::
 	add_overworldpalettes Grimer
+	add_overworldpalettes GrimerAlola
 
 MukOverworldPalettePointers::
 	add_overworldpalettes Muk
+	add_overworldpalettes MukAlola
 
 ShellderOverworldPalettePointers::
 	add_overworldpalettes Shellder
@@ -282,6 +334,8 @@ HaunterOverworldPalettePointers::
 
 GengarOverworldPalettePointers::
 	add_overworldpalettes Gengar
+	add_overworldpalettes GengarMega
+	add_overworldpalettes GengarGiga
 
 OnixOverworldPalettePointers::
 	add_overworldpalettes Onix
@@ -297,6 +351,7 @@ KrabbyOverworldPalettePointers::
 
 KinglerOverworldPalettePointers::
 	add_overworldpalettes Kingler
+	add_overworldpalettes KinglerGiga
 
 VoltorbOverworldPalettePointers::
 	add_overworldpalettes Voltorb
@@ -309,12 +364,14 @@ ExeggcuteOverworldPalettePointers::
 
 ExeggutorOverworldPalettePointers::
 	add_overworldpalettes Exeggutor
+	add_overworldpalettes ExeggutorAlola
 
 CuboneOverworldPalettePointers::
 	add_overworldpalettes Cubone
 
 MarowakOverworldPalettePointers::
 	add_overworldpalettes Marowak
+	add_overworldpalettes MarowakAlola
 
 HitmonleeOverworldPalettePointers::
 	add_overworldpalettes Hitmonlee
@@ -330,6 +387,7 @@ KoffingOverworldPalettePointers::
 
 WeezingOverworldPalettePointers::
 	add_overworldpalettes Weezing
+	add_overworldpalettes WeezingGalar
 
 RhyhornOverworldPalettePointers::
 	add_overworldpalettes Rhyhorn
@@ -345,6 +403,7 @@ TangelaOverworldPalettePointers::
 
 KangaskhanOverworldPalettePointers::
 	add_overworldpalettes Kangaskhan
+	add_overworldpalettes KangaskhanMega
 
 HorseaOverworldPalettePointers::
 	add_overworldpalettes Horsea
@@ -366,6 +425,7 @@ StarmieOverworldPalettePointers::
 
 MrmimeOverworldPalettePointers::
 	add_overworldpalettes Mrmime
+	add_overworldpalettes MrmimeGalar
 
 ScytherOverworldPalettePointers::
 	add_overworldpalettes Scyther
@@ -381,6 +441,7 @@ MagmarOverworldPalettePointers::
 
 PinsirOverworldPalettePointers::
 	add_overworldpalettes Pinsir
+	add_overworldpalettes PinsirMega
 
 TaurosOverworldPalettePointers::
 	add_overworldpalettes Tauros
@@ -390,15 +451,19 @@ MagikarpOverworldPalettePointers::
 
 GyaradosOverworldPalettePointers::
 	add_overworldpalettes Gyarados
+	add_overworldpalettes GyaradosMega
 
 LaprasOverworldPalettePointers::
 	add_overworldpalettes Lapras
+	add_overworldpalettes LaprasGiga
 
 DittoOverworldPalettePointers::
 	add_overworldpalettes Ditto
 
 EeveeOverworldPalettePointers::
 	add_overworldpalettes Eevee
+	add_overworldpalettes EeveeLets_go
+	add_overworldpalettes EeveeGiga
 
 VaporeonOverworldPalettePointers::
 	add_overworldpalettes Vaporeon
@@ -408,6 +473,7 @@ JolteonOverworldPalettePointers::
 
 FlareonOverworldPalettePointers::
 	add_overworldpalettes Flareon
+	add_overworldpalettes FlareonDonut
 
 PorygonOverworldPalettePointers::
 	add_overworldpalettes Porygon
@@ -426,18 +492,23 @@ KabutopsOverworldPalettePointers::
 
 AerodactylOverworldPalettePointers::
 	add_overworldpalettes Aerodactyl
+	add_overworldpalettes AerodactylMega
 
 SnorlaxOverworldPalettePointers::
 	add_overworldpalettes Snorlax
+	add_overworldpalettes SnorlaxGiga
 
 ArticunoOverworldPalettePointers::
 	add_overworldpalettes Articuno
+	add_overworldpalettes ArticunoGalar
 
 ZapdosOverworldPalettePointers::
 	add_overworldpalettes Zapdos
+	add_overworldpalettes ZapdosGalar
 
 MoltresOverworldPalettePointers::
 	add_overworldpalettes Moltres
+	add_overworldpalettes MoltresGalar
 
 DratiniOverworldPalettePointers::
 	add_overworldpalettes Dratini
@@ -450,6 +521,8 @@ DragoniteOverworldPalettePointers::
 
 MewtwoOverworldPalettePointers::
 	add_overworldpalettes Mewtwo
+	add_overworldpalettes MewtwoMega_x
+	add_overworldpalettes MewtwoMega_y
 
 MewOverworldPalettePointers::
 	add_overworldpalettes Mew

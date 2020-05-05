@@ -82,6 +82,7 @@ TranquillPalettePointers::
 
 UnfezantPalettePointers::
 	add_palettes Unfezant
+	add_palettes UnfezantF
 
 BlitzlePalettePointers::
 	add_palettes Blitzle
@@ -112,6 +113,7 @@ ExcadrillPalettePointers::
 
 AudinoPalettePointers::
 	add_palettes Audino
+	add_palettes AudinoMega
 
 TimburrPalettePointers::
 	add_palettes Timburr
@@ -181,9 +183,13 @@ KrookodilePalettePointers::
 
 DarumakaPalettePointers::
 	add_palettes Darumaka
+	add_palettes DarumakaGalar
 
 DarmanitanPalettePointers::
 	add_palettes Darmanitan
+	add_palettes DarmanitanZen
+	add_palettes DarmanitanGalar
+	add_palettes DarmanitanGalar_zen
 
 MaractusPalettePointers::
 	add_palettes Maractus
@@ -205,6 +211,7 @@ SigilyphPalettePointers::
 
 YamaskPalettePointers::
 	add_palettes Yamask
+	add_palettes YamaskGalar
 
 CofagrigusPalettePointers::
 	add_palettes Cofagrigus
@@ -226,6 +233,7 @@ TrubbishPalettePointers::
 
 GarbodorPalettePointers::
 	add_palettes Garbodor
+	add_palettes GarbodorGiga
 
 ZoruaPalettePointers::
 	add_palettes Zorua
@@ -274,9 +282,15 @@ VanilluxePalettePointers::
 
 DeerlingPalettePointers::
 	add_palettes Deerling
+	add_palettes DeerlingSummer
+	add_palettes DeerlingAutumn
+	add_palettes DeerlingWinter
 
 SawsbuckPalettePointers::
 	add_palettes Sawsbuck
+	add_palettes SawsbuckSummer
+	add_palettes SawsbuckAutumn
+	add_palettes SawsbuckWinter
 
 EmolgaPalettePointers::
 	add_palettes Emolga
@@ -373,6 +387,7 @@ AccelgorPalettePointers::
 
 StunfiskPalettePointers::
 	add_palettes Stunfisk
+	add_palettes StunfiskGalar
 
 MienfooPalettePointers::
 	add_palettes Mienfoo
@@ -442,9 +457,11 @@ VirizionPalettePointers::
 
 TornadusPalettePointers::
 	add_palettes Tornadus
+	add_palettes TornadusTherian
 
 ThundurusPalettePointers::
 	add_palettes Thundurus
+	add_palettes ThundurusTherian
 
 ReshiramPalettePointers::
 	add_palettes Reshiram
@@ -454,15 +471,20 @@ ZekromPalettePointers::
 
 LandorusPalettePointers::
 	add_palettes Landorus
+	add_palettes LandorusTherian
 
 KyuremPalettePointers::
 	add_palettes Kyurem
+	add_palettes KyuremBlack
+	add_palettes KyuremWhite
 
 KeldeoPalettePointers::
 	add_palettes Keldeo
+	add_palettes KeldeoResolute
 
 MeloettaPalettePointers::
 	add_palettes Meloetta
+	add_palettes MeloettaPirouette
 
 GenesectPalettePointers::
 	add_palettes Genesect

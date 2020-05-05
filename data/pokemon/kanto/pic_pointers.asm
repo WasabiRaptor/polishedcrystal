@@ -18,6 +18,9 @@ CharmeleonPicPointers::
 
 CharizardPicPointers::
 	add_pics Charizard
+	add_pics CharizardMega_x
+	add_pics CharizardMega_y
+	add_pics CharizardGiga
 
 SquirtlePicPointers::
 	add_pics Squirtle
@@ -27,6 +30,8 @@ WartortlePicPointers::
 
 BlastoisePicPointers::
 	add_pics Blastoise
+	add_pics BlastoiseMega
+	add_pics BlastoiseGiga
 
 CaterpiePicPointers::
 	add_pics Caterpie
@@ -36,6 +41,7 @@ MetapodPicPointers::
 
 ButterfreePicPointers::
 	add_pics Butterfree
+	add_pics ButterfreeGiga
 
 WeedlePicPointers::
 	add_pics Weedle
@@ -45,6 +51,7 @@ KakunaPicPointers::
 
 BeedrillPicPointers::
 	add_pics Beedrill
+	add_pics BeedrillMega
 
 PidgeyPicPointers::
 	add_pics Pidgey
@@ -54,12 +61,15 @@ PidgeottoPicPointers::
 
 PidgeotPicPointers::
 	add_pics Pidgeot
+	add_pics PidgeotMega
 
 RattataPicPointers::
 	add_pics Rattata
+	add_pics RattataAlola
 
 RaticatePicPointers::
 	add_pics Raticate
+	add_pics RaticateAlola
 
 SpearowPicPointers::
 	add_pics Spearow
@@ -75,15 +85,33 @@ ArbokPicPointers::
 
 PikachuPicPointers::
 	add_pics Pikachu
+	add_pics PikachuCosplay
+	add_pics PikachuRockstar
+	add_pics PikachuBelle
+	add_pics PikachuPopstar
+	add_pics PikachuPhd
+	add_pics PikachuLibre
+	add_pics PikachuOg_cap
+	add_pics PikachuHoenn_cap
+	add_pics PikachuSinnoh_cap
+	add_pics PikachuUnova_cap
+	add_pics PikachuKalos_cap
+	add_pics PikachuAlola_cap
+	add_pics PikachuPartner_cap
+	add_pics PikachuLets_go
+	add_pics PikachuGiga
 
 RaichuPicPointers::
 	add_pics Raichu
+	add_pics RaichuAlola
 
 SandshrewPicPointers::
 	add_pics Sandshrew
+	add_pics SandshrewAlola
 
 SandslashPicPointers::
 	add_pics Sandslash
+	add_pics SandslashAlola
 
 Nidoran_fPicPointers::
 	add_pics Nidoran_f
@@ -111,9 +139,15 @@ ClefablePicPointers::
 
 VulpixPicPointers::
 	add_pics Vulpix
+	add_pics VulpixAlola
+	add_pics VulpixLoki
+	add_pics VulpixLoki_winter
 
 NinetalesPicPointers::
 	add_pics Ninetales
+	add_pics NinetalesAlola
+	add_pics NinetalesLoki
+	add_pics NinetalesLoki_winter
 
 JigglypuffPicPointers::
 	add_pics Jigglypuff
@@ -150,15 +184,21 @@ VenomothPicPointers::
 
 DiglettPicPointers::
 	add_pics Diglett
+	add_pics DiglettAlola
 
 DugtrioPicPointers::
 	add_pics Dugtrio
+	add_pics DugtrioAlola
 
 MeowthPicPointers::
 	add_pics Meowth
+	add_pics MeowthAlola
+	add_pics MeowthGalar
+	add_pics MeowthKanto_giga
 
 PersianPicPointers::
 	add_pics Persian
+	add_pics PersianAlola
 
 PsyduckPicPointers::
 	add_pics Psyduck
@@ -195,6 +235,7 @@ KadabraPicPointers::
 
 AlakazamPicPointers::
 	add_pics Alakazam
+	add_pics AlakazamMega
 
 MachopPicPointers::
 	add_pics Machop
@@ -204,6 +245,7 @@ MachokePicPointers::
 
 MachampPicPointers::
 	add_pics Machamp
+	add_pics MachampGiga
 
 BellsproutPicPointers::
 	add_pics Bellsprout
@@ -222,24 +264,31 @@ TentacruelPicPointers::
 
 GeodudePicPointers::
 	add_pics Geodude
+	add_pics GeodudeAlola
 
 GravelerPicPointers::
 	add_pics Graveler
+	add_pics GravelerAlola
 
 GolemPicPointers::
 	add_pics Golem
+	add_pics GolemAlola
 
 PonytaPicPointers::
 	add_pics Ponyta
+	add_pics PonytaGalar
 
 RapidashPicPointers::
 	add_pics Rapidash
+	add_pics RapidashGalar
 
 SlowpokePicPointers::
 	add_pics Slowpoke
+	add_pics SlowpokeGalar
 
 SlowbroPicPointers::
 	add_pics Slowbro
+	add_pics SlowbroMega
 
 MagnemitePicPointers::
 	add_pics Magnemite
@@ -249,6 +298,7 @@ MagnetonPicPointers::
 
 FarfetchdPicPointers::
 	add_pics Farfetchd
+	add_pics FarfetchdGalar
 
 DoduoPicPointers::
 	add_pics Doduo
@@ -264,9 +314,11 @@ DewgongPicPointers::
 
 GrimerPicPointers::
 	add_pics Grimer
+	add_pics GrimerAlola
 
 MukPicPointers::
 	add_pics Muk
+	add_pics MukAlola
 
 ShellderPicPointers::
 	add_pics Shellder
@@ -282,6 +334,8 @@ HaunterPicPointers::
 
 GengarPicPointers::
 	add_pics Gengar
+	add_pics GengarMega
+	add_pics GengarGiga
 
 OnixPicPointers::
 	add_pics Onix
@@ -297,6 +351,7 @@ KrabbyPicPointers::
 
 KinglerPicPointers::
 	add_pics Kingler
+	add_pics KinglerGiga
 
 VoltorbPicPointers::
 	add_pics Voltorb
@@ -309,12 +364,14 @@ ExeggcutePicPointers::
 
 ExeggutorPicPointers::
 	add_pics Exeggutor
+	add_pics ExeggutorAlola
 
 CubonePicPointers::
 	add_pics Cubone
 
 MarowakPicPointers::
 	add_pics Marowak
+	add_pics MarowakAlola
 
 HitmonleePicPointers::
 	add_pics Hitmonlee
@@ -330,6 +387,7 @@ KoffingPicPointers::
 
 WeezingPicPointers::
 	add_pics Weezing
+	add_pics WeezingGalar
 
 RhyhornPicPointers::
 	add_pics Rhyhorn
@@ -345,6 +403,7 @@ TangelaPicPointers::
 
 KangaskhanPicPointers::
 	add_pics Kangaskhan
+	add_pics KangaskhanMega
 
 HorseaPicPointers::
 	add_pics Horsea
@@ -366,6 +425,7 @@ StarmiePicPointers::
 
 MrmimePicPointers::
 	add_pics Mrmime
+	add_pics MrmimeGalar
 
 ScytherPicPointers::
 	add_pics Scyther
@@ -381,6 +441,7 @@ MagmarPicPointers::
 
 PinsirPicPointers::
 	add_pics Pinsir
+	add_pics PinsirMega
 
 TaurosPicPointers::
 	add_pics Tauros
@@ -390,15 +451,19 @@ MagikarpPicPointers::
 
 GyaradosPicPointers::
 	add_pics Gyarados
+	add_pics GyaradosMega
 
 LaprasPicPointers::
 	add_pics Lapras
+	add_pics LaprasGiga
 
 DittoPicPointers::
 	add_pics Ditto
 
 EeveePicPointers::
 	add_pics Eevee
+	add_pics EeveeLets_go
+	add_pics EeveeGiga
 
 VaporeonPicPointers::
 	add_pics Vaporeon
@@ -408,6 +473,7 @@ JolteonPicPointers::
 
 FlareonPicPointers::
 	add_pics Flareon
+	add_pics FlareonDonut
 
 PorygonPicPointers::
 	add_pics Porygon
@@ -426,18 +492,23 @@ KabutopsPicPointers::
 
 AerodactylPicPointers::
 	add_pics Aerodactyl
+	add_pics AerodactylMega
 
 SnorlaxPicPointers::
 	add_pics Snorlax
+	add_pics SnorlaxGiga
 
 ArticunoPicPointers::
 	add_pics Articuno
+	add_pics ArticunoGalar
 
 ZapdosPicPointers::
 	add_pics Zapdos
+	add_pics ZapdosGalar
 
 MoltresPicPointers::
 	add_pics Moltres
+	add_pics MoltresGalar
 
 DratiniPicPointers::
 	add_pics Dratini
@@ -450,6 +521,8 @@ DragonitePicPointers::
 
 MewtwoPicPointers::
 	add_pics Mewtwo
+	add_pics MewtwoMega_x
+	add_pics MewtwoMega_y
 
 MewPicPointers::
 	add_pics Mew

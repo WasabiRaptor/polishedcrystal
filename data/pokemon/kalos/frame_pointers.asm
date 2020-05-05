@@ -25,6 +25,8 @@ FrogadierFramesPointers::
 
 GreninjaFramesPointers::
 	add_frames Greninja
+	add_frames GreninjaBattle_bond
+	add_frames GreninjaAsh
 
 BunnelbyFramesPointers::
 	add_frames Bunnelby
@@ -49,18 +51,39 @@ SpewpaFramesPointers::
 
 VivillonFramesPointers::
 	add_frames Vivillon
+	add_frames VivillonArchipelego
+	add_frames VivillonContinental
+	add_frames VivillonElegant
+	add_frames VivillonGarden
+	add_frames VivillonHigh_plains
+	add_frames VivillonIcy_snow
+	add_frames VivillonJungle
+	add_frames VivillonMarine
+	add_frames VivillonModern
+	add_frames VivillonMonsoon
+	add_frames VivillonOcean
+	add_frames VivillonPolar
+	add_frames VivillonRiver
+	add_frames VivillonSandstorm
+	add_frames VivillonSavannah
+	add_frames VivillonSun
+	add_frames VivillonTundra
+	add_frames VivillonPokeball
+	add_frames VivillonFancy
 
 LitleoFramesPointers::
 	add_frames Litleo
 
 PyroarFramesPointers::
 	add_frames Pyroar
+	add_frames PyroarF
 
 FlabebeFramesPointers::
 	add_frames Flabebe
 
 FloetteFramesPointers::
 	add_frames Floette
+	add_frames FloetteEternal_flower
 
 FlorgesFramesPointers::
 	add_frames Florges
@@ -79,12 +102,22 @@ PangoroFramesPointers::
 
 FurfrouFramesPointers::
 	add_frames Furfrou
+	add_frames FurfrouHeart
+	add_frames FurfrouStar
+	add_frames FurfrouDiamond
+	add_frames FurfrouDebutante
+	add_frames FurfrouMatron
+	add_frames FurfrouDandy
+	add_frames FurfrouLa_reine
+	add_frames FurfrouKabuki
+	add_frames FurfrouPharaoh
 
 EspurrFramesPointers::
 	add_frames Espurr
 
 MeowsticFramesPointers::
 	add_frames Meowstic
+	add_frames MeowsticF
 
 HonedgeFramesPointers::
 	add_frames Honedge
@@ -94,6 +127,7 @@ DoubladeFramesPointers::
 
 AegislashFramesPointers::
 	add_frames Aegislash
+	add_frames AegislashBlade
 
 SpritzeeFramesPointers::
 	add_frames Spritzee
@@ -181,9 +215,15 @@ TrevenantFramesPointers::
 
 PumpkabooFramesPointers::
 	add_frames Pumpkaboo
+	add_frames PumpkabooAverage
+	add_frames PumpkabooLarge
+	add_frames PumpkabooSuper
 
 GourgeistFramesPointers::
 	add_frames Gourgeist
+	add_frames GourgeistAverage
+	add_frames GourgeistLarge
+	add_frames GourgeistSuper
 
 BergmiteFramesPointers::
 	add_frames Bergmite
@@ -205,12 +245,18 @@ YveltalFramesPointers::
 
 ZygardeFramesPointers::
 	add_frames Zygarde
+	add_frames ZygardeFifty_percent
+	add_frames ZygardeComplete
+	add_frames ZygardeComplete
+	add_frames ZygardeComplete
 
 DiancieFramesPointers::
 	add_frames Diancie
+	add_frames DiancieMega
 
 HoopaFramesPointers::
 	add_frames Hoopa
+	add_frames HoopaUnbound
 
 VolcanionFramesPointers::
 	add_frames Volcanion

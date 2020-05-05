@@ -20,8 +20,8 @@ IncineroarFramesPointers::
 PopplioFramesPointers::
 	add_frames Popplio
 
-BrioneFramesPointers::
-	add_frames Brione
+BrionneFramesPointers::
+	add_frames Brionne
 
 PrimarinaFramesPointers::
 	add_frames Primarina
@@ -58,6 +58,9 @@ CrabominableFramesPointers::
 
 OricorioFramesPointers::
 	add_frames Oricorio
+	add_frames OricorioPom_pom
+	add_frames OricorioPau
+	add_frames OricorioSensu
 
 CutieflyFramesPointers::
 	add_frames Cutiefly
@@ -67,12 +70,17 @@ RibombeeFramesPointers::
 
 RockruffFramesPointers::
 	add_frames Rockruff
+	add_frames RockruffOwn_tempo
 
 LycanrocFramesPointers::
 	add_frames Lycanroc
+	add_frames LycanrocMidday
+	add_frames LycanrocDusk
+	add_frames LycanrocMidnight
 
 WishiwashiFramesPointers::
 	add_frames Wishiwashi
+	add_frames WishiwashiSchool
 
 MareanieFramesPointers::
 	add_frames Mareanie
@@ -157,6 +165,7 @@ SilvallyFramesPointers::
 
 MiniorFramesPointers::
 	add_frames Minior
+	add_frames MiniorCore
 
 KomalaFramesPointers::
 	add_frames Komala
@@ -169,6 +178,7 @@ TogedemaruFramesPointers::
 
 MimikyuFramesPointers::
 	add_frames Mimikyu
+	add_frames MimikyuBusted
 
 BruxishFramesPointers::
 	add_frames Bruxish
@@ -235,6 +245,9 @@ GuzzlordFramesPointers::
 
 NecrozmaFramesPointers::
 	add_frames Necrozma
+	add_frames NecrozmaDawn_wings
+	add_frames NecrozmaDusk_mane
+	add_frames NecrozmaUltra
 
 MagearnaFramesPointers::
 	add_frames Magearna
@@ -262,4 +275,5 @@ MeltanFramesPointers::
 
 MelmetalFramesPointers::
 	add_frames Melmetal
+	add_frames MelmetalGiga
 

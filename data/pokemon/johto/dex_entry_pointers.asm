@@ -61,6 +61,7 @@ LanturnPokedexEntryPointers::
 
 PichuPokedexEntryPointers::
 	add_pokedexentry Pichu
+	add_pokedexentry Pichu
 
 CleffaPokedexEntryPointers::
 	add_pokedexentry Cleffa
@@ -87,6 +88,7 @@ FlaaffyPokedexEntryPointers::
 	add_pokedexentry Flaaffy
 
 AmpharosPokedexEntryPointers::
+	add_pokedexentry Ampharos
 	add_pokedexentry Ampharos
 
 BellossomPokedexEntryPointers::
@@ -148,6 +150,34 @@ MisdreavusPokedexEntryPointers::
 
 UnownPokedexEntryPointers::
 	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
+	add_pokedexentry Unown
 
 WobbuffetPokedexEntryPointers::
 	add_pokedexentry Wobbuffet
@@ -169,6 +199,7 @@ GligarPokedexEntryPointers::
 
 SteelixPokedexEntryPointers::
 	add_pokedexentry Steelix
+	add_pokedexentry Steelix
 
 SnubbullPokedexEntryPointers::
 	add_pokedexentry Snubbull
@@ -181,11 +212,13 @@ QwilfishPokedexEntryPointers::
 
 ScizorPokedexEntryPointers::
 	add_pokedexentry Scizor
+	add_pokedexentry Scizor
 
 ShucklePokedexEntryPointers::
 	add_pokedexentry Shuckle
 
 HeracrossPokedexEntryPointers::
+	add_pokedexentry Heracross
 	add_pokedexentry Heracross
 
 SneaselPokedexEntryPointers::
@@ -211,6 +244,7 @@ PiloswinePokedexEntryPointers::
 
 CorsolaPokedexEntryPointers::
 	add_pokedexentry Corsola
+	add_pokedexentry Corsola
 
 RemoraidPokedexEntryPointers::
 	add_pokedexentry Remoraid
@@ -231,6 +265,7 @@ HoundourPokedexEntryPointers::
 	add_pokedexentry Houndour
 
 HoundoomPokedexEntryPointers::
+	add_pokedexentry Houndoom
 	add_pokedexentry Houndoom
 
 KingdraPokedexEntryPointers::
@@ -288,6 +323,7 @@ PupitarPokedexEntryPointers::
 	add_pokedexentry Pupitar
 
 TyranitarPokedexEntryPointers::
+	add_pokedexentry Tyranitar
 	add_pokedexentry Tyranitar
 
 LugiaPokedexEntryPointers::

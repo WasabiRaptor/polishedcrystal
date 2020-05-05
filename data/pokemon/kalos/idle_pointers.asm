@@ -25,6 +25,8 @@ FrogadierAnimationIdlePointers::
 
 GreninjaAnimationIdlePointers::
 	add_idleanim Greninja
+	add_idleanim GreninjaBattle_bond
+	add_idleanim GreninjaAsh
 
 BunnelbyAnimationIdlePointers::
 	add_idleanim Bunnelby
@@ -49,18 +51,39 @@ SpewpaAnimationIdlePointers::
 
 VivillonAnimationIdlePointers::
 	add_idleanim Vivillon
+	add_idleanim VivillonArchipelego
+	add_idleanim VivillonContinental
+	add_idleanim VivillonElegant
+	add_idleanim VivillonGarden
+	add_idleanim VivillonHigh_plains
+	add_idleanim VivillonIcy_snow
+	add_idleanim VivillonJungle
+	add_idleanim VivillonMarine
+	add_idleanim VivillonModern
+	add_idleanim VivillonMonsoon
+	add_idleanim VivillonOcean
+	add_idleanim VivillonPolar
+	add_idleanim VivillonRiver
+	add_idleanim VivillonSandstorm
+	add_idleanim VivillonSavannah
+	add_idleanim VivillonSun
+	add_idleanim VivillonTundra
+	add_idleanim VivillonPokeball
+	add_idleanim VivillonFancy
 
 LitleoAnimationIdlePointers::
 	add_idleanim Litleo
 
 PyroarAnimationIdlePointers::
 	add_idleanim Pyroar
+	add_idleanim PyroarF
 
 FlabebeAnimationIdlePointers::
 	add_idleanim Flabebe
 
 FloetteAnimationIdlePointers::
 	add_idleanim Floette
+	add_idleanim FloetteEternal_flower
 
 FlorgesAnimationIdlePointers::
 	add_idleanim Florges
@@ -79,12 +102,22 @@ PangoroAnimationIdlePointers::
 
 FurfrouAnimationIdlePointers::
 	add_idleanim Furfrou
+	add_idleanim FurfrouHeart
+	add_idleanim FurfrouStar
+	add_idleanim FurfrouDiamond
+	add_idleanim FurfrouDebutante
+	add_idleanim FurfrouMatron
+	add_idleanim FurfrouDandy
+	add_idleanim FurfrouLa_reine
+	add_idleanim FurfrouKabuki
+	add_idleanim FurfrouPharaoh
 
 EspurrAnimationIdlePointers::
 	add_idleanim Espurr
 
 MeowsticAnimationIdlePointers::
 	add_idleanim Meowstic
+	add_idleanim MeowsticF
 
 HonedgeAnimationIdlePointers::
 	add_idleanim Honedge
@@ -94,6 +127,7 @@ DoubladeAnimationIdlePointers::
 
 AegislashAnimationIdlePointers::
 	add_idleanim Aegislash
+	add_idleanim AegislashBlade
 
 SpritzeeAnimationIdlePointers::
 	add_idleanim Spritzee
@@ -181,9 +215,15 @@ TrevenantAnimationIdlePointers::
 
 PumpkabooAnimationIdlePointers::
 	add_idleanim Pumpkaboo
+	add_idleanim PumpkabooAverage
+	add_idleanim PumpkabooLarge
+	add_idleanim PumpkabooSuper
 
 GourgeistAnimationIdlePointers::
 	add_idleanim Gourgeist
+	add_idleanim GourgeistAverage
+	add_idleanim GourgeistLarge
+	add_idleanim GourgeistSuper
 
 BergmiteAnimationIdlePointers::
 	add_idleanim Bergmite
@@ -205,12 +245,18 @@ YveltalAnimationIdlePointers::
 
 ZygardeAnimationIdlePointers::
 	add_idleanim Zygarde
+	add_idleanim ZygardeFifty_percent
+	add_idleanim ZygardeComplete
+	add_idleanim ZygardeComplete
+	add_idleanim ZygardeComplete
 
 DiancieAnimationIdlePointers::
 	add_idleanim Diancie
+	add_idleanim DiancieMega
 
 HoopaAnimationIdlePointers::
 	add_idleanim Hoopa
+	add_idleanim HoopaUnbound
 
 VolcanionAnimationIdlePointers::
 	add_idleanim Volcanion

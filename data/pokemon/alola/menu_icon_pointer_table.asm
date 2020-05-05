@@ -6,7 +6,7 @@ AlolaIconPointerTable::
 	add_icontable Torracat
 	add_icontable Incineroar
 	add_icontable Popplio
-	add_icontable Brione
+	add_icontable Brionne
 	add_icontable Primarina
 	add_icontable Pikipeck
 	add_icontable Trumbeak

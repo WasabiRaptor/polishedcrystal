@@ -76,9 +76,13 @@ BastiodonAnimationIdlePointers::
 
 BurmyAnimationIdlePointers::
 	add_idleanim Burmy
+	add_idleanim BurmySand
+	add_idleanim BurmyTrash
 
 WormadamAnimationIdlePointers::
 	add_idleanim Wormadam
+	add_idleanim WormadamSand
+	add_idleanim WormadamTrash
 
 MothimAnimationIdlePointers::
 	add_idleanim Mothim
@@ -103,12 +107,15 @@ CherubiAnimationIdlePointers::
 
 CherrimAnimationIdlePointers::
 	add_idleanim Cherrim
+	add_idleanim CherrimOvercast
 
 ShellosAnimationIdlePointers::
 	add_idleanim Shellos
+	add_idleanim ShellosWest
 
 GastrodonAnimationIdlePointers::
 	add_idleanim Gastrodon
+	add_idleanim GastrodonWest
 
 AmbipomAnimationIdlePointers::
 	add_idleanim Ambipom
@@ -124,6 +131,7 @@ BunearyAnimationIdlePointers::
 
 LopunnyAnimationIdlePointers::
 	add_idleanim Lopunny
+	add_idleanim LopunnyMega
 
 MismagiusAnimationIdlePointers::
 	add_idleanim Mismagius
@@ -175,6 +183,7 @@ GabiteAnimationIdlePointers::
 
 GarchompAnimationIdlePointers::
 	add_idleanim Garchomp
+	add_idleanim GarchompMega
 
 MunchlaxAnimationIdlePointers::
 	add_idleanim Munchlax
@@ -184,6 +193,7 @@ RioluAnimationIdlePointers::
 
 LucarioAnimationIdlePointers::
 	add_idleanim Lucario
+	add_idleanim LucarioMega
 
 HippopotasAnimationIdlePointers::
 	add_idleanim Hippopotas
@@ -220,6 +230,7 @@ SnoverAnimationIdlePointers::
 
 AbomasnowAnimationIdlePointers::
 	add_idleanim Abomasnow
+	add_idleanim AbomasnowMega
 
 WeavileAnimationIdlePointers::
 	add_idleanim Weavile
@@ -265,6 +276,7 @@ Porygon_zAnimationIdlePointers::
 
 GalladeAnimationIdlePointers::
 	add_idleanim Gallade
+	add_idleanim GalladeMega
 
 ProbopassAnimationIdlePointers::
 	add_idleanim Probopass
@@ -277,6 +289,12 @@ FroslassAnimationIdlePointers::
 
 RotomAnimationIdlePointers::
 	add_idleanim Rotom
+	add_idleanim RotomHeat
+	add_idleanim RotomWash
+	add_idleanim RotomFrost
+	add_idleanim RotomFan
+	add_idleanim RotomMow
+	add_idleanim RotomDex
 
 UxieAnimationIdlePointers::
 	add_idleanim Uxie
@@ -301,6 +319,7 @@ RegigigasAnimationIdlePointers::
 
 GiratinaAnimationIdlePointers::
 	add_idleanim Giratina
+	add_idleanim GiratinaOrigin
 
 CresseliaAnimationIdlePointers::
 	add_idleanim Cresselia

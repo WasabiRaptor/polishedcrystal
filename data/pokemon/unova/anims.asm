@@ -54,6 +54,7 @@ PidoveAnimation:	INCLUDE "gfx/pokemon/pidove/anim.asm"
 TranquillAnimation:	INCLUDE "gfx/pokemon/tranquill/anim.asm"
 
 UnfezantAnimation:	INCLUDE "gfx/pokemon/unfezant/anim.asm"
+UnfezantFAnimation::	INCLUDE "gfx/pokemon/unfezant_f/anim.asm"
 
 BlitzleAnimation:	INCLUDE "gfx/pokemon/blitzle/anim.asm"
 
@@ -74,6 +75,7 @@ DrilburAnimation:	INCLUDE "gfx/pokemon/drilbur/anim.asm"
 ExcadrillAnimation:	INCLUDE "gfx/pokemon/excadrill/anim.asm"
 
 AudinoAnimation:	INCLUDE "gfx/pokemon/audino/anim.asm"
+AudinoMegaAnimation::	INCLUDE "gfx/pokemon/audino_mega/anim.asm"
 
 TimburrAnimation:	INCLUDE "gfx/pokemon/timburr/anim.asm"
 
@@ -120,8 +122,12 @@ KrokorokAnimation:	INCLUDE "gfx/pokemon/krokorok/anim.asm"
 KrookodileAnimation:	INCLUDE "gfx/pokemon/krookodile/anim.asm"
 
 DarumakaAnimation:	INCLUDE "gfx/pokemon/darumaka/anim.asm"
+DarumakaGalarAnimation::	INCLUDE "gfx/pokemon/darumaka_galar/anim.asm"
 
 DarmanitanAnimation:	INCLUDE "gfx/pokemon/darmanitan/anim.asm"
+DarmanitanZenAnimation::	INCLUDE "gfx/pokemon/darmanitan_zen/anim.asm"
+DarmanitanGalarAnimation::	INCLUDE "gfx/pokemon/darmanitan_galar/anim.asm"
+DarmanitanGalar_zenAnimation::	INCLUDE "gfx/pokemon/darmanitan_galar_zen/anim.asm"
 
 MaractusAnimation:	INCLUDE "gfx/pokemon/maractus/anim.asm"
 
@@ -136,6 +142,7 @@ ScraftyAnimation:	INCLUDE "gfx/pokemon/scrafty/anim.asm"
 SigilyphAnimation:	INCLUDE "gfx/pokemon/sigilyph/anim.asm"
 
 YamaskAnimation:	INCLUDE "gfx/pokemon/yamask/anim.asm"
+YamaskGalarAnimation::	INCLUDE "gfx/pokemon/yamask_galar/anim.asm"
 
 CofagrigusAnimation:	INCLUDE "gfx/pokemon/cofagrigus/anim.asm"
 
@@ -150,6 +157,7 @@ ArcheopsAnimation:	INCLUDE "gfx/pokemon/archeops/anim.asm"
 TrubbishAnimation:	INCLUDE "gfx/pokemon/trubbish/anim.asm"
 
 GarbodorAnimation:	INCLUDE "gfx/pokemon/garbodor/anim.asm"
+GarbodorGigaAnimation::	INCLUDE "gfx/pokemon/garbodor_giga/anim.asm"
 
 ZoruaAnimation:	INCLUDE "gfx/pokemon/zorua/anim.asm"
 
@@ -182,8 +190,14 @@ VanillishAnimation:	INCLUDE "gfx/pokemon/vanillish/anim.asm"
 VanilluxeAnimation:	INCLUDE "gfx/pokemon/vanilluxe/anim.asm"
 
 DeerlingAnimation:	INCLUDE "gfx/pokemon/deerling/anim.asm"
+DeerlingSummerAnimation::	INCLUDE "gfx/pokemon/deerling_summer/anim.asm"
+DeerlingAutumnAnimation::	INCLUDE "gfx/pokemon/deerling_autumn/anim.asm"
+DeerlingWinterAnimation::	INCLUDE "gfx/pokemon/deerling_winter/anim.asm"
 
 SawsbuckAnimation:	INCLUDE "gfx/pokemon/sawsbuck/anim.asm"
+SawsbuckSummerAnimation::	INCLUDE "gfx/pokemon/sawsbuck_summer/anim.asm"
+SawsbuckAutumnAnimation::	INCLUDE "gfx/pokemon/sawsbuck_autumn/anim.asm"
+SawsbuckWinterAnimation::	INCLUDE "gfx/pokemon/sawsbuck_winter/anim.asm"
 
 EmolgaAnimation:	INCLUDE "gfx/pokemon/emolga/anim.asm"
 
@@ -248,6 +262,7 @@ ShelmetAnimation:	INCLUDE "gfx/pokemon/shelmet/anim.asm"
 AccelgorAnimation:	INCLUDE "gfx/pokemon/accelgor/anim.asm"
 
 StunfiskAnimation:	INCLUDE "gfx/pokemon/stunfisk/anim.asm"
+StunfiskGalarAnimation::	INCLUDE "gfx/pokemon/stunfisk_galar/anim.asm"
 
 MienfooAnimation:	INCLUDE "gfx/pokemon/mienfoo/anim.asm"
 
@@ -294,20 +309,27 @@ TerrakionAnimation:	INCLUDE "gfx/pokemon/terrakion/anim.asm"
 VirizionAnimation:	INCLUDE "gfx/pokemon/virizion/anim.asm"
 
 TornadusAnimation:	INCLUDE "gfx/pokemon/tornadus/anim.asm"
+TornadusTherianAnimation::	INCLUDE "gfx/pokemon/tornadus_therian/anim.asm"
 
 ThundurusAnimation:	INCLUDE "gfx/pokemon/thundurus/anim.asm"
+ThundurusTherianAnimation::	INCLUDE "gfx/pokemon/thundurus_therian/anim.asm"
 
 ReshiramAnimation:	INCLUDE "gfx/pokemon/reshiram/anim.asm"
 
 ZekromAnimation:	INCLUDE "gfx/pokemon/zekrom/anim.asm"
 
 LandorusAnimation:	INCLUDE "gfx/pokemon/landorus/anim.asm"
+LandorusTherianAnimation::	INCLUDE "gfx/pokemon/landorus_therian/anim.asm"
 
 KyuremAnimation:	INCLUDE "gfx/pokemon/kyurem/anim.asm"
+KyuremBlackAnimation::	INCLUDE "gfx/pokemon/kyurem_black/anim.asm"
+KyuremWhiteAnimation::	INCLUDE "gfx/pokemon/kyurem_white/anim.asm"
 
 KeldeoAnimation:	INCLUDE "gfx/pokemon/keldeo/anim.asm"
+KeldeoResoluteAnimation::	INCLUDE "gfx/pokemon/keldeo_resolute/anim.asm"
 
 MeloettaAnimation:	INCLUDE "gfx/pokemon/meloetta/anim.asm"
+MeloettaPirouetteAnimation::	INCLUDE "gfx/pokemon/meloetta_pirouette/anim.asm"
 
 GenesectAnimation:	INCLUDE "gfx/pokemon/genesect/anim.asm"
 

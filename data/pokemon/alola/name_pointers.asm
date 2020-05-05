@@ -20,8 +20,8 @@ IncineroarNames::
 PopplioNames::
 	add_name Popplio
 
-BrioneNames::
-	add_name Brione
+BrionneNames::
+	add_name Brionne
 
 PrimarinaNames::
 	add_name Primarina
@@ -58,6 +58,9 @@ CrabominableNames::
 
 OricorioNames::
 	add_name Oricorio
+	add_name Oricorio
+	add_name Oricorio
+	add_name Oricorio
 
 CutieflyNames::
 	add_name Cutiefly
@@ -67,11 +70,16 @@ RibombeeNames::
 
 RockruffNames::
 	add_name Rockruff
+	add_name Rockruff
 
 LycanrocNames::
 	add_name Lycanroc
+	add_name Lycanroc
+	add_name Lycanroc
+	add_name Lycanroc
 
 WishiwashiNames::
+	add_name Wishiwashi
 	add_name Wishiwashi
 
 MareanieNames::
@@ -157,6 +165,7 @@ SilvallyNames::
 
 MiniorNames::
 	add_name Minior
+	add_name Minior
 
 KomalaNames::
 	add_name Komala
@@ -168,6 +177,7 @@ TogedemaruNames::
 	add_name Togedemaru
 
 MimikyuNames::
+	add_name Mimikyu
 	add_name Mimikyu
 
 BruxishNames::
@@ -235,6 +245,9 @@ GuzzlordNames::
 
 NecrozmaNames::
 	add_name Necrozma
+	add_name Necrozma
+	add_name Necrozma
+	add_name Necrozma
 
 MagearnaNames::
 	add_name Magearna
@@ -261,5 +274,6 @@ MeltanNames::
 	add_name Meltan
 
 MelmetalNames::
+	add_name Melmetal
 	add_name Melmetal
 

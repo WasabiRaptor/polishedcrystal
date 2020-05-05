@@ -61,6 +61,7 @@ LanturnBitmasksPointers::
 
 PichuBitmasksPointers::
 	add_bitmasks Pichu
+	add_bitmasks PichuSpiky_eared
 
 CleffaBitmasksPointers::
 	add_bitmasks Cleffa
@@ -88,6 +89,7 @@ FlaaffyBitmasksPointers::
 
 AmpharosBitmasksPointers::
 	add_bitmasks Ampharos
+	add_bitmasks AmpharosMega
 
 BellossomBitmasksPointers::
 	add_bitmasks Bellossom
@@ -148,6 +150,34 @@ MisdreavusBitmasksPointers::
 
 UnownBitmasksPointers::
 	add_bitmasks Unown
+	add_bitmasks UnownA
+	add_bitmasks UnownB
+	add_bitmasks UnownC
+	add_bitmasks UnownD
+	add_bitmasks UnownE
+	add_bitmasks UnownF
+	add_bitmasks UnownG
+	add_bitmasks UnownH
+	add_bitmasks UnownI
+	add_bitmasks UnownJ
+	add_bitmasks UnownK
+	add_bitmasks UnownL
+	add_bitmasks UnownM
+	add_bitmasks UnownN
+	add_bitmasks UnownO
+	add_bitmasks UnownP
+	add_bitmasks UnownQ
+	add_bitmasks UnownR
+	add_bitmasks UnownS
+	add_bitmasks UnownT
+	add_bitmasks UnownU
+	add_bitmasks UnownV
+	add_bitmasks UnownW
+	add_bitmasks UnownX
+	add_bitmasks UnownY
+	add_bitmasks UnownZ
+	add_bitmasks UnownExclamation_mark
+	add_bitmasks UnownQuestion_mark
 
 WobbuffetBitmasksPointers::
 	add_bitmasks Wobbuffet
@@ -169,6 +199,7 @@ GligarBitmasksPointers::
 
 SteelixBitmasksPointers::
 	add_bitmasks Steelix
+	add_bitmasks SteelixMega
 
 SnubbullBitmasksPointers::
 	add_bitmasks Snubbull
@@ -181,12 +212,14 @@ QwilfishBitmasksPointers::
 
 ScizorBitmasksPointers::
 	add_bitmasks Scizor
+	add_bitmasks ScizorMega
 
 ShuckleBitmasksPointers::
 	add_bitmasks Shuckle
 
 HeracrossBitmasksPointers::
 	add_bitmasks Heracross
+	add_bitmasks HeracrossMega
 
 SneaselBitmasksPointers::
 	add_bitmasks Sneasel
@@ -211,6 +244,7 @@ PiloswineBitmasksPointers::
 
 CorsolaBitmasksPointers::
 	add_bitmasks Corsola
+	add_bitmasks CorsolaGalar
 
 RemoraidBitmasksPointers::
 	add_bitmasks Remoraid
@@ -232,6 +266,7 @@ HoundourBitmasksPointers::
 
 HoundoomBitmasksPointers::
 	add_bitmasks Houndoom
+	add_bitmasks HoundoomMega
 
 KingdraBitmasksPointers::
 	add_bitmasks Kingdra
@@ -289,6 +324,7 @@ PupitarBitmasksPointers::
 
 TyranitarBitmasksPointers::
 	add_bitmasks Tyranitar
+	add_bitmasks TyranitarMega
 
 LugiaBitmasksPointers::
 	add_bitmasks Lugia

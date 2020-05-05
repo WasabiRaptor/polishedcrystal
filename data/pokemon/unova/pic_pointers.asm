@@ -82,6 +82,7 @@ TranquillPicPointers::
 
 UnfezantPicPointers::
 	add_pics Unfezant
+	add_pics UnfezantF
 
 BlitzlePicPointers::
 	add_pics Blitzle
@@ -112,6 +113,7 @@ ExcadrillPicPointers::
 
 AudinoPicPointers::
 	add_pics Audino
+	add_pics AudinoMega
 
 TimburrPicPointers::
 	add_pics Timburr
@@ -181,9 +183,13 @@ KrookodilePicPointers::
 
 DarumakaPicPointers::
 	add_pics Darumaka
+	add_pics DarumakaGalar
 
 DarmanitanPicPointers::
 	add_pics Darmanitan
+	add_pics DarmanitanZen
+	add_pics DarmanitanGalar
+	add_pics DarmanitanGalar_zen
 
 MaractusPicPointers::
 	add_pics Maractus
@@ -205,6 +211,7 @@ SigilyphPicPointers::
 
 YamaskPicPointers::
 	add_pics Yamask
+	add_pics YamaskGalar
 
 CofagrigusPicPointers::
 	add_pics Cofagrigus
@@ -226,6 +233,7 @@ TrubbishPicPointers::
 
 GarbodorPicPointers::
 	add_pics Garbodor
+	add_pics GarbodorGiga
 
 ZoruaPicPointers::
 	add_pics Zorua
@@ -274,9 +282,15 @@ VanilluxePicPointers::
 
 DeerlingPicPointers::
 	add_pics Deerling
+	add_pics DeerlingSummer
+	add_pics DeerlingAutumn
+	add_pics DeerlingWinter
 
 SawsbuckPicPointers::
 	add_pics Sawsbuck
+	add_pics SawsbuckSummer
+	add_pics SawsbuckAutumn
+	add_pics SawsbuckWinter
 
 EmolgaPicPointers::
 	add_pics Emolga
@@ -373,6 +387,7 @@ AccelgorPicPointers::
 
 StunfiskPicPointers::
 	add_pics Stunfisk
+	add_pics StunfiskGalar
 
 MienfooPicPointers::
 	add_pics Mienfoo
@@ -442,9 +457,11 @@ VirizionPicPointers::
 
 TornadusPicPointers::
 	add_pics Tornadus
+	add_pics TornadusTherian
 
 ThundurusPicPointers::
 	add_pics Thundurus
+	add_pics ThundurusTherian
 
 ReshiramPicPointers::
 	add_pics Reshiram
@@ -454,15 +471,20 @@ ZekromPicPointers::
 
 LandorusPicPointers::
 	add_pics Landorus
+	add_pics LandorusTherian
 
 KyuremPicPointers::
 	add_pics Kyurem
+	add_pics KyuremBlack
+	add_pics KyuremWhite
 
 KeldeoPicPointers::
 	add_pics Keldeo
+	add_pics KeldeoResolute
 
 MeloettaPicPointers::
 	add_pics Meloetta
+	add_pics MeloettaPirouette
 
 GenesectPicPointers::
 	add_pics Genesect

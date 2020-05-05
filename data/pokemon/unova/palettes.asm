@@ -110,6 +110,9 @@ TranquillShinyPalette:	INCLUDE "gfx/pokemon/tranquill/shiny.pal"
 UnfezantPalettes:
 UnfezantNormalPalette:	INCBIN "gfx/pokemon/unfezant/front.gbcpal", middle_colors
 UnfezantShinyPalette:	INCLUDE "gfx/pokemon/unfezant/shiny.pal"
+UnfezantFPalettes:
+UnfezantFNormalPalette:	INCBIN "gfx/pokemon/unfezant_f/front.gbcpal", middle_colors
+UnfezantFShinyPalette:	INCLUDE "gfx/pokemon/unfezant_f/shiny.pal"
 
 BlitzlePalettes:
 BlitzleNormalPalette:	INCBIN "gfx/pokemon/blitzle/front.gbcpal", middle_colors
@@ -150,6 +153,9 @@ ExcadrillShinyPalette:	INCLUDE "gfx/pokemon/excadrill/shiny.pal"
 AudinoPalettes:
 AudinoNormalPalette:	INCBIN "gfx/pokemon/audino/front.gbcpal", middle_colors
 AudinoShinyPalette:	INCLUDE "gfx/pokemon/audino/shiny.pal"
+AudinoMegaPalettes:
+AudinoMegaNormalPalette:	INCBIN "gfx/pokemon/audino_mega/front.gbcpal", middle_colors
+AudinoMegaShinyPalette:	INCLUDE "gfx/pokemon/audino_mega/shiny.pal"
 
 TimburrPalettes:
 TimburrNormalPalette:	INCBIN "gfx/pokemon/timburr/front.gbcpal", middle_colors
@@ -242,10 +248,22 @@ KrookodileShinyPalette:	INCLUDE "gfx/pokemon/krookodile/shiny.pal"
 DarumakaPalettes:
 DarumakaNormalPalette:	INCBIN "gfx/pokemon/darumaka/front.gbcpal", middle_colors
 DarumakaShinyPalette:	INCLUDE "gfx/pokemon/darumaka/shiny.pal"
+DarumakaGalarPalettes:
+DarumakaGalarNormalPalette:	INCBIN "gfx/pokemon/darumaka_galar/front.gbcpal", middle_colors
+DarumakaGalarShinyPalette:	INCLUDE "gfx/pokemon/darumaka_galar/shiny.pal"
 
 DarmanitanPalettes:
 DarmanitanNormalPalette:	INCBIN "gfx/pokemon/darmanitan/front.gbcpal", middle_colors
 DarmanitanShinyPalette:	INCLUDE "gfx/pokemon/darmanitan/shiny.pal"
+DarmanitanZenPalettes:
+DarmanitanZenNormalPalette:	INCBIN "gfx/pokemon/darmanitan_zen/front.gbcpal", middle_colors
+DarmanitanZenShinyPalette:	INCLUDE "gfx/pokemon/darmanitan_zen/shiny.pal"
+DarmanitanGalarPalettes:
+DarmanitanGalarNormalPalette:	INCBIN "gfx/pokemon/darmanitan_galar/front.gbcpal", middle_colors
+DarmanitanGalarShinyPalette:	INCLUDE "gfx/pokemon/darmanitan_galar/shiny.pal"
+DarmanitanGalar_zenPalettes:
+DarmanitanGalar_zenNormalPalette:	INCBIN "gfx/pokemon/darmanitan_galar_zen/front.gbcpal", middle_colors
+DarmanitanGalar_zenShinyPalette:	INCLUDE "gfx/pokemon/darmanitan_galar_zen/shiny.pal"
 
 MaractusPalettes:
 MaractusNormalPalette:	INCBIN "gfx/pokemon/maractus/front.gbcpal", middle_colors
@@ -274,6 +292,9 @@ SigilyphShinyPalette:	INCLUDE "gfx/pokemon/sigilyph/shiny.pal"
 YamaskPalettes:
 YamaskNormalPalette:	INCBIN "gfx/pokemon/yamask/front.gbcpal", middle_colors
 YamaskShinyPalette:	INCLUDE "gfx/pokemon/yamask/shiny.pal"
+YamaskGalarPalettes:
+YamaskGalarNormalPalette:	INCBIN "gfx/pokemon/yamask_galar/front.gbcpal", middle_colors
+YamaskGalarShinyPalette:	INCLUDE "gfx/pokemon/yamask_galar/shiny.pal"
 
 CofagrigusPalettes:
 CofagrigusNormalPalette:	INCBIN "gfx/pokemon/cofagrigus/front.gbcpal", middle_colors
@@ -302,6 +323,9 @@ TrubbishShinyPalette:	INCLUDE "gfx/pokemon/trubbish/shiny.pal"
 GarbodorPalettes:
 GarbodorNormalPalette:	INCBIN "gfx/pokemon/garbodor/front.gbcpal", middle_colors
 GarbodorShinyPalette:	INCLUDE "gfx/pokemon/garbodor/shiny.pal"
+GarbodorGigaPalettes:
+GarbodorGigaNormalPalette:	INCBIN "gfx/pokemon/garbodor_giga/front.gbcpal", middle_colors
+GarbodorGigaShinyPalette:	INCLUDE "gfx/pokemon/garbodor_giga/shiny.pal"
 
 ZoruaPalettes:
 ZoruaNormalPalette:	INCBIN "gfx/pokemon/zorua/front.gbcpal", middle_colors
@@ -366,10 +390,28 @@ VanilluxeShinyPalette:	INCLUDE "gfx/pokemon/vanilluxe/shiny.pal"
 DeerlingPalettes:
 DeerlingNormalPalette:	INCBIN "gfx/pokemon/deerling/front.gbcpal", middle_colors
 DeerlingShinyPalette:	INCLUDE "gfx/pokemon/deerling/shiny.pal"
+DeerlingSummerPalettes:
+DeerlingSummerNormalPalette:	INCBIN "gfx/pokemon/deerling_summer/front.gbcpal", middle_colors
+DeerlingSummerShinyPalette:	INCLUDE "gfx/pokemon/deerling_summer/shiny.pal"
+DeerlingAutumnPalettes:
+DeerlingAutumnNormalPalette:	INCBIN "gfx/pokemon/deerling_autumn/front.gbcpal", middle_colors
+DeerlingAutumnShinyPalette:	INCLUDE "gfx/pokemon/deerling_autumn/shiny.pal"
+DeerlingWinterPalettes:
+DeerlingWinterNormalPalette:	INCBIN "gfx/pokemon/deerling_winter/front.gbcpal", middle_colors
+DeerlingWinterShinyPalette:	INCLUDE "gfx/pokemon/deerling_winter/shiny.pal"
 
 SawsbuckPalettes:
 SawsbuckNormalPalette:	INCBIN "gfx/pokemon/sawsbuck/front.gbcpal", middle_colors
 SawsbuckShinyPalette:	INCLUDE "gfx/pokemon/sawsbuck/shiny.pal"
+SawsbuckSummerPalettes:
+SawsbuckSummerNormalPalette:	INCBIN "gfx/pokemon/sawsbuck_summer/front.gbcpal", middle_colors
+SawsbuckSummerShinyPalette:	INCLUDE "gfx/pokemon/sawsbuck_summer/shiny.pal"
+SawsbuckAutumnPalettes:
+SawsbuckAutumnNormalPalette:	INCBIN "gfx/pokemon/sawsbuck_autumn/front.gbcpal", middle_colors
+SawsbuckAutumnShinyPalette:	INCLUDE "gfx/pokemon/sawsbuck_autumn/shiny.pal"
+SawsbuckWinterPalettes:
+SawsbuckWinterNormalPalette:	INCBIN "gfx/pokemon/sawsbuck_winter/front.gbcpal", middle_colors
+SawsbuckWinterShinyPalette:	INCLUDE "gfx/pokemon/sawsbuck_winter/shiny.pal"
 
 EmolgaPalettes:
 EmolgaNormalPalette:	INCBIN "gfx/pokemon/emolga/front.gbcpal", middle_colors
@@ -498,6 +540,9 @@ AccelgorShinyPalette:	INCLUDE "gfx/pokemon/accelgor/shiny.pal"
 StunfiskPalettes:
 StunfiskNormalPalette:	INCBIN "gfx/pokemon/stunfisk/front.gbcpal", middle_colors
 StunfiskShinyPalette:	INCLUDE "gfx/pokemon/stunfisk/shiny.pal"
+StunfiskGalarPalettes:
+StunfiskGalarNormalPalette:	INCBIN "gfx/pokemon/stunfisk_galar/front.gbcpal", middle_colors
+StunfiskGalarShinyPalette:	INCLUDE "gfx/pokemon/stunfisk_galar/shiny.pal"
 
 MienfooPalettes:
 MienfooNormalPalette:	INCBIN "gfx/pokemon/mienfoo/front.gbcpal", middle_colors
@@ -590,10 +635,16 @@ VirizionShinyPalette:	INCLUDE "gfx/pokemon/virizion/shiny.pal"
 TornadusPalettes:
 TornadusNormalPalette:	INCBIN "gfx/pokemon/tornadus/front.gbcpal", middle_colors
 TornadusShinyPalette:	INCLUDE "gfx/pokemon/tornadus/shiny.pal"
+TornadusTherianPalettes:
+TornadusTherianNormalPalette:	INCBIN "gfx/pokemon/tornadus_therian/front.gbcpal", middle_colors
+TornadusTherianShinyPalette:	INCLUDE "gfx/pokemon/tornadus_therian/shiny.pal"
 
 ThundurusPalettes:
 ThundurusNormalPalette:	INCBIN "gfx/pokemon/thundurus/front.gbcpal", middle_colors
 ThundurusShinyPalette:	INCLUDE "gfx/pokemon/thundurus/shiny.pal"
+ThundurusTherianPalettes:
+ThundurusTherianNormalPalette:	INCBIN "gfx/pokemon/thundurus_therian/front.gbcpal", middle_colors
+ThundurusTherianShinyPalette:	INCLUDE "gfx/pokemon/thundurus_therian/shiny.pal"
 
 ReshiramPalettes:
 ReshiramNormalPalette:	INCBIN "gfx/pokemon/reshiram/front.gbcpal", middle_colors
@@ -606,18 +657,33 @@ ZekromShinyPalette:	INCLUDE "gfx/pokemon/zekrom/shiny.pal"
 LandorusPalettes:
 LandorusNormalPalette:	INCBIN "gfx/pokemon/landorus/front.gbcpal", middle_colors
 LandorusShinyPalette:	INCLUDE "gfx/pokemon/landorus/shiny.pal"
+LandorusTherianPalettes:
+LandorusTherianNormalPalette:	INCBIN "gfx/pokemon/landorus_therian/front.gbcpal", middle_colors
+LandorusTherianShinyPalette:	INCLUDE "gfx/pokemon/landorus_therian/shiny.pal"
 
 KyuremPalettes:
 KyuremNormalPalette:	INCBIN "gfx/pokemon/kyurem/front.gbcpal", middle_colors
 KyuremShinyPalette:	INCLUDE "gfx/pokemon/kyurem/shiny.pal"
+KyuremBlackPalettes:
+KyuremBlackNormalPalette:	INCBIN "gfx/pokemon/kyurem_black/front.gbcpal", middle_colors
+KyuremBlackShinyPalette:	INCLUDE "gfx/pokemon/kyurem_black/shiny.pal"
+KyuremWhitePalettes:
+KyuremWhiteNormalPalette:	INCBIN "gfx/pokemon/kyurem_white/front.gbcpal", middle_colors
+KyuremWhiteShinyPalette:	INCLUDE "gfx/pokemon/kyurem_white/shiny.pal"
 
 KeldeoPalettes:
 KeldeoNormalPalette:	INCBIN "gfx/pokemon/keldeo/front.gbcpal", middle_colors
 KeldeoShinyPalette:	INCLUDE "gfx/pokemon/keldeo/shiny.pal"
+KeldeoResolutePalettes:
+KeldeoResoluteNormalPalette:	INCBIN "gfx/pokemon/keldeo_resolute/front.gbcpal", middle_colors
+KeldeoResoluteShinyPalette:	INCLUDE "gfx/pokemon/keldeo_resolute/shiny.pal"
 
 MeloettaPalettes:
 MeloettaNormalPalette:	INCBIN "gfx/pokemon/meloetta/front.gbcpal", middle_colors
 MeloettaShinyPalette:	INCLUDE "gfx/pokemon/meloetta/shiny.pal"
+MeloettaPirouettePalettes:
+MeloettaPirouetteNormalPalette:	INCBIN "gfx/pokemon/meloetta_pirouette/front.gbcpal", middle_colors
+MeloettaPirouetteShinyPalette:	INCLUDE "gfx/pokemon/meloetta_pirouette/shiny.pal"
 
 GenesectPalettes:
 GenesectNormalPalette:	INCBIN "gfx/pokemon/genesect/front.gbcpal", middle_colors

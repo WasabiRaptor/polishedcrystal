@@ -25,6 +25,8 @@ FrogadierPicPointers::
 
 GreninjaPicPointers::
 	add_pics Greninja
+	add_pics GreninjaBattle_bond
+	add_pics GreninjaAsh
 
 BunnelbyPicPointers::
 	add_pics Bunnelby
@@ -49,18 +51,39 @@ SpewpaPicPointers::
 
 VivillonPicPointers::
 	add_pics Vivillon
+	add_pics VivillonArchipelego
+	add_pics VivillonContinental
+	add_pics VivillonElegant
+	add_pics VivillonGarden
+	add_pics VivillonHigh_plains
+	add_pics VivillonIcy_snow
+	add_pics VivillonJungle
+	add_pics VivillonMarine
+	add_pics VivillonModern
+	add_pics VivillonMonsoon
+	add_pics VivillonOcean
+	add_pics VivillonPolar
+	add_pics VivillonRiver
+	add_pics VivillonSandstorm
+	add_pics VivillonSavannah
+	add_pics VivillonSun
+	add_pics VivillonTundra
+	add_pics VivillonPokeball
+	add_pics VivillonFancy
 
 LitleoPicPointers::
 	add_pics Litleo
 
 PyroarPicPointers::
 	add_pics Pyroar
+	add_pics PyroarF
 
 FlabebePicPointers::
 	add_pics Flabebe
 
 FloettePicPointers::
 	add_pics Floette
+	add_pics FloetteEternal_flower
 
 FlorgesPicPointers::
 	add_pics Florges
@@ -79,12 +102,22 @@ PangoroPicPointers::
 
 FurfrouPicPointers::
 	add_pics Furfrou
+	add_pics FurfrouHeart
+	add_pics FurfrouStar
+	add_pics FurfrouDiamond
+	add_pics FurfrouDebutante
+	add_pics FurfrouMatron
+	add_pics FurfrouDandy
+	add_pics FurfrouLa_reine
+	add_pics FurfrouKabuki
+	add_pics FurfrouPharaoh
 
 EspurrPicPointers::
 	add_pics Espurr
 
 MeowsticPicPointers::
 	add_pics Meowstic
+	add_pics MeowsticF
 
 HonedgePicPointers::
 	add_pics Honedge
@@ -94,6 +127,7 @@ DoubladePicPointers::
 
 AegislashPicPointers::
 	add_pics Aegislash
+	add_pics AegislashBlade
 
 SpritzeePicPointers::
 	add_pics Spritzee
@@ -181,9 +215,15 @@ TrevenantPicPointers::
 
 PumpkabooPicPointers::
 	add_pics Pumpkaboo
+	add_pics PumpkabooAverage
+	add_pics PumpkabooLarge
+	add_pics PumpkabooSuper
 
 GourgeistPicPointers::
 	add_pics Gourgeist
+	add_pics GourgeistAverage
+	add_pics GourgeistLarge
+	add_pics GourgeistSuper
 
 BergmitePicPointers::
 	add_pics Bergmite
@@ -205,12 +245,18 @@ YveltalPicPointers::
 
 ZygardePicPointers::
 	add_pics Zygarde
+	add_pics ZygardeFifty_percent
+	add_pics ZygardeComplete
+	add_pics ZygardeComplete
+	add_pics ZygardeComplete
 
 DianciePicPointers::
 	add_pics Diancie
+	add_pics DiancieMega
 
 HoopaPicPointers::
 	add_pics Hoopa
+	add_pics HoopaUnbound
 
 VolcanionPicPointers::
 	add_pics Volcanion

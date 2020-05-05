@@ -76,8 +76,12 @@ BastiodonNames::
 
 BurmyNames::
 	add_name Burmy
+	add_name Burmy
+	add_name Burmy
 
 WormadamNames::
+	add_name Wormadam
+	add_name Wormadam
 	add_name Wormadam
 
 MothimNames::
@@ -103,11 +107,14 @@ CherubiNames::
 
 CherrimNames::
 	add_name Cherrim
+	add_name Cherrim
 
 ShellosNames::
 	add_name Shellos
+	add_name Shellos
 
 GastrodonNames::
+	add_name Gastrodon
 	add_name Gastrodon
 
 AmbipomNames::
@@ -123,6 +130,7 @@ BunearyNames::
 	add_name Buneary
 
 LopunnyNames::
+	add_name Lopunny
 	add_name Lopunny
 
 MismagiusNames::
@@ -175,6 +183,7 @@ GabiteNames::
 
 GarchompNames::
 	add_name Garchomp
+	add_name Garchomp
 
 MunchlaxNames::
 	add_name Munchlax
@@ -183,6 +192,7 @@ RioluNames::
 	add_name Riolu
 
 LucarioNames::
+	add_name Lucario
 	add_name Lucario
 
 HippopotasNames::
@@ -219,6 +229,7 @@ SnoverNames::
 	add_name Snover
 
 AbomasnowNames::
+	add_name Abomasnow
 	add_name Abomasnow
 
 WeavileNames::
@@ -265,6 +276,7 @@ Porygon_zNames::
 
 GalladeNames::
 	add_name Gallade
+	add_name Gallade
 
 ProbopassNames::
 	add_name Probopass
@@ -276,6 +288,12 @@ FroslassNames::
 	add_name Froslass
 
 RotomNames::
+	add_name Rotom
+	add_name Rotom
+	add_name Rotom
+	add_name Rotom
+	add_name Rotom
+	add_name Rotom
 	add_name Rotom
 
 UxieNames::
@@ -300,6 +318,7 @@ RegigigasNames::
 	add_name Regigigas
 
 GiratinaNames::
+	add_name Giratina
 	add_name Giratina
 
 CresseliaNames::

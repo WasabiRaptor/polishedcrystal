@@ -7,6 +7,7 @@ GrovyleIconPointers::
 
 SceptileIconPointers::
 	add_icon Sceptile
+	add_icon SceptileMega
 
 TorchicIconPointers::
 	add_icon Torchic
@@ -16,6 +17,7 @@ CombuskenIconPointers::
 
 BlazikenIconPointers::
 	add_icon Blaziken
+	add_icon BlazikenMega
 
 MudkipIconPointers::
 	add_icon Mudkip
@@ -25,6 +27,7 @@ MarshtompIconPointers::
 
 SwampertIconPointers::
 	add_icon Swampert
+	add_icon SwampertMega
 
 PoochyenaIconPointers::
 	add_icon Poochyena
@@ -34,9 +37,11 @@ MightyenaIconPointers::
 
 ZigzagoonIconPointers::
 	add_icon Zigzagoon
+	add_icon ZigzagoonGalar
 
 LinooneIconPointers::
 	add_icon Linoone
+	add_icon LinooneGalar
 
 WurmpleIconPointers::
 	add_icon Wurmple
@@ -91,6 +96,7 @@ KirliaIconPointers::
 
 GardevoirIconPointers::
 	add_icon Gardevoir
+	add_icon GardevoirMega
 
 SurskitIconPointers::
 	add_icon Surskit
@@ -151,9 +157,11 @@ DelcattyIconPointers::
 
 SableyeIconPointers::
 	add_icon Sableye
+	add_icon SableyeMega
 
 MawileIconPointers::
 	add_icon Mawile
+	add_icon MawileMega
 
 AronIconPointers::
 	add_icon Aron
@@ -163,18 +171,21 @@ LaironIconPointers::
 
 AggronIconPointers::
 	add_icon Aggron
+	add_icon AggronMega
 
 MedititeIconPointers::
 	add_icon Meditite
 
 MedichamIconPointers::
 	add_icon Medicham
+	add_icon MedichamMega
 
 ElectrikeIconPointers::
 	add_icon Electrike
 
 ManectricIconPointers::
 	add_icon Manectric
+	add_icon ManectricMega
 
 PlusleIconPointers::
 	add_icon Plusle
@@ -202,6 +213,7 @@ CarvanhaIconPointers::
 
 SharpedoIconPointers::
 	add_icon Sharpedo
+	add_icon SharpedoMega
 
 WailmerIconPointers::
 	add_icon Wailmer
@@ -214,6 +226,7 @@ NumelIconPointers::
 
 CameruptIconPointers::
 	add_icon Camerupt
+	add_icon CameruptMega
 
 TorkoalIconPointers::
 	add_icon Torkoal
@@ -247,6 +260,7 @@ SwabluIconPointers::
 
 AltariaIconPointers::
 	add_icon Altaria
+	add_icon AltariaMega
 
 ZangooseIconPointers::
 	add_icon Zangoose
@@ -298,6 +312,9 @@ MiloticIconPointers::
 
 CastformIconPointers::
 	add_icon Castform
+	add_icon CastformSun
+	add_icon CastformRain
+	add_icon CastformSnow
 
 KecleonIconPointers::
 	add_icon Kecleon
@@ -307,6 +324,7 @@ ShuppetIconPointers::
 
 BanetteIconPointers::
 	add_icon Banette
+	add_icon BanetteMega
 
 DuskullIconPointers::
 	add_icon Duskull
@@ -322,6 +340,7 @@ ChimechoIconPointers::
 
 AbsolIconPointers::
 	add_icon Absol
+	add_icon AbsolMega
 
 WynautIconPointers::
 	add_icon Wynaut
@@ -331,6 +350,7 @@ SnoruntIconPointers::
 
 GlalieIconPointers::
 	add_icon Glalie
+	add_icon GlalieMega
 
 SphealIconPointers::
 	add_icon Spheal
@@ -364,6 +384,7 @@ ShelgonIconPointers::
 
 SalamenceIconPointers::
 	add_icon Salamence
+	add_icon SalamenceMega
 
 BeldumIconPointers::
 	add_icon Beldum
@@ -373,6 +394,7 @@ MetangIconPointers::
 
 MetagrossIconPointers::
 	add_icon Metagross
+	add_icon MetagrossMega
 
 RegirockIconPointers::
 	add_icon Regirock
@@ -385,22 +407,30 @@ RegisteelIconPointers::
 
 LatiasIconPointers::
 	add_icon Latias
+	add_icon LatiasMega
 
 LatiosIconPointers::
 	add_icon Latios
+	add_icon LatiosMega
 
 KyogreIconPointers::
 	add_icon Kyogre
+	add_icon KyogrePrimal
 
 GroudonIconPointers::
 	add_icon Groudon
+	add_icon GroudonPrimal
 
 RayquazaIconPointers::
 	add_icon Rayquaza
+	add_icon RayquazaMega
 
 JirachiIconPointers::
 	add_icon Jirachi
 
 DeoxysIconPointers::
 	add_icon Deoxys
+	add_icon DeoxysAttack
+	add_icon DeoxysDefense
+	add_icon DeoxysSpeed
 

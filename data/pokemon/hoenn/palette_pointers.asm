@@ -7,6 +7,7 @@ GrovylePalettePointers::
 
 SceptilePalettePointers::
 	add_palettes Sceptile
+	add_palettes SceptileMega
 
 TorchicPalettePointers::
 	add_palettes Torchic
@@ -16,6 +17,7 @@ CombuskenPalettePointers::
 
 BlazikenPalettePointers::
 	add_palettes Blaziken
+	add_palettes BlazikenMega
 
 MudkipPalettePointers::
 	add_palettes Mudkip
@@ -25,6 +27,7 @@ MarshtompPalettePointers::
 
 SwampertPalettePointers::
 	add_palettes Swampert
+	add_palettes SwampertMega
 
 PoochyenaPalettePointers::
 	add_palettes Poochyena
@@ -34,9 +37,11 @@ MightyenaPalettePointers::
 
 ZigzagoonPalettePointers::
 	add_palettes Zigzagoon
+	add_palettes ZigzagoonGalar
 
 LinoonePalettePointers::
 	add_palettes Linoone
+	add_palettes LinooneGalar
 
 WurmplePalettePointers::
 	add_palettes Wurmple
@@ -91,6 +96,7 @@ KirliaPalettePointers::
 
 GardevoirPalettePointers::
 	add_palettes Gardevoir
+	add_palettes GardevoirMega
 
 SurskitPalettePointers::
 	add_palettes Surskit
@@ -151,9 +157,11 @@ DelcattyPalettePointers::
 
 SableyePalettePointers::
 	add_palettes Sableye
+	add_palettes SableyeMega
 
 MawilePalettePointers::
 	add_palettes Mawile
+	add_palettes MawileMega
 
 AronPalettePointers::
 	add_palettes Aron
@@ -163,18 +171,21 @@ LaironPalettePointers::
 
 AggronPalettePointers::
 	add_palettes Aggron
+	add_palettes AggronMega
 
 MedititePalettePointers::
 	add_palettes Meditite
 
 MedichamPalettePointers::
 	add_palettes Medicham
+	add_palettes MedichamMega
 
 ElectrikePalettePointers::
 	add_palettes Electrike
 
 ManectricPalettePointers::
 	add_palettes Manectric
+	add_palettes ManectricMega
 
 PluslePalettePointers::
 	add_palettes Plusle
@@ -202,6 +213,7 @@ CarvanhaPalettePointers::
 
 SharpedoPalettePointers::
 	add_palettes Sharpedo
+	add_palettes SharpedoMega
 
 WailmerPalettePointers::
 	add_palettes Wailmer
@@ -214,6 +226,7 @@ NumelPalettePointers::
 
 CameruptPalettePointers::
 	add_palettes Camerupt
+	add_palettes CameruptMega
 
 TorkoalPalettePointers::
 	add_palettes Torkoal
@@ -247,6 +260,7 @@ SwabluPalettePointers::
 
 AltariaPalettePointers::
 	add_palettes Altaria
+	add_palettes AltariaMega
 
 ZangoosePalettePointers::
 	add_palettes Zangoose
@@ -298,6 +312,9 @@ MiloticPalettePointers::
 
 CastformPalettePointers::
 	add_palettes Castform
+	add_palettes CastformSun
+	add_palettes CastformRain
+	add_palettes CastformSnow
 
 KecleonPalettePointers::
 	add_palettes Kecleon
@@ -307,6 +324,7 @@ ShuppetPalettePointers::
 
 BanettePalettePointers::
 	add_palettes Banette
+	add_palettes BanetteMega
 
 DuskullPalettePointers::
 	add_palettes Duskull
@@ -322,6 +340,7 @@ ChimechoPalettePointers::
 
 AbsolPalettePointers::
 	add_palettes Absol
+	add_palettes AbsolMega
 
 WynautPalettePointers::
 	add_palettes Wynaut
@@ -331,6 +350,7 @@ SnoruntPalettePointers::
 
 GlaliePalettePointers::
 	add_palettes Glalie
+	add_palettes GlalieMega
 
 SphealPalettePointers::
 	add_palettes Spheal
@@ -364,6 +384,7 @@ ShelgonPalettePointers::
 
 SalamencePalettePointers::
 	add_palettes Salamence
+	add_palettes SalamenceMega
 
 BeldumPalettePointers::
 	add_palettes Beldum
@@ -373,6 +394,7 @@ MetangPalettePointers::
 
 MetagrossPalettePointers::
 	add_palettes Metagross
+	add_palettes MetagrossMega
 
 RegirockPalettePointers::
 	add_palettes Regirock
@@ -385,22 +407,30 @@ RegisteelPalettePointers::
 
 LatiasPalettePointers::
 	add_palettes Latias
+	add_palettes LatiasMega
 
 LatiosPalettePointers::
 	add_palettes Latios
+	add_palettes LatiosMega
 
 KyogrePalettePointers::
 	add_palettes Kyogre
+	add_palettes KyogrePrimal
 
 GroudonPalettePointers::
 	add_palettes Groudon
+	add_palettes GroudonPrimal
 
 RayquazaPalettePointers::
 	add_palettes Rayquaza
+	add_palettes RayquazaMega
 
 JirachiPalettePointers::
 	add_palettes Jirachi
 
 DeoxysPalettePointers::
 	add_palettes Deoxys
+	add_palettes DeoxysAttack
+	add_palettes DeoxysDefense
+	add_palettes DeoxysSpeed
 

@@ -20,8 +20,8 @@ IncineroarPalettePointers::
 PopplioPalettePointers::
 	add_palettes Popplio
 
-BrionePalettePointers::
-	add_palettes Brione
+BrionnePalettePointers::
+	add_palettes Brionne
 
 PrimarinaPalettePointers::
 	add_palettes Primarina
@@ -58,6 +58,9 @@ CrabominablePalettePointers::
 
 OricorioPalettePointers::
 	add_palettes Oricorio
+	add_palettes OricorioPom_pom
+	add_palettes OricorioPau
+	add_palettes OricorioSensu
 
 CutieflyPalettePointers::
 	add_palettes Cutiefly
@@ -67,12 +70,17 @@ RibombeePalettePointers::
 
 RockruffPalettePointers::
 	add_palettes Rockruff
+	add_palettes RockruffOwn_tempo
 
 LycanrocPalettePointers::
 	add_palettes Lycanroc
+	add_palettes LycanrocMidday
+	add_palettes LycanrocDusk
+	add_palettes LycanrocMidnight
 
 WishiwashiPalettePointers::
 	add_palettes Wishiwashi
+	add_palettes WishiwashiSchool
 
 MareaniePalettePointers::
 	add_palettes Mareanie
@@ -157,6 +165,7 @@ SilvallyPalettePointers::
 
 MiniorPalettePointers::
 	add_palettes Minior
+	add_palettes MiniorCore
 
 KomalaPalettePointers::
 	add_palettes Komala
@@ -169,6 +178,7 @@ TogedemaruPalettePointers::
 
 MimikyuPalettePointers::
 	add_palettes Mimikyu
+	add_palettes MimikyuBusted
 
 BruxishPalettePointers::
 	add_palettes Bruxish
@@ -235,6 +245,9 @@ GuzzlordPalettePointers::
 
 NecrozmaPalettePointers::
 	add_palettes Necrozma
+	add_palettes NecrozmaDawn_wings
+	add_palettes NecrozmaDusk_mane
+	add_palettes NecrozmaUltra
 
 MagearnaPalettePointers::
 	add_palettes Magearna
@@ -262,4 +275,5 @@ MeltanPalettePointers::
 
 MelmetalPalettePointers::
 	add_palettes Melmetal
+	add_palettes MelmetalGiga
 

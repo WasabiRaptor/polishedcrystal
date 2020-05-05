@@ -20,8 +20,8 @@ IncineroarAnimationIdlePointers::
 PopplioAnimationIdlePointers::
 	add_idleanim Popplio
 
-BrioneAnimationIdlePointers::
-	add_idleanim Brione
+BrionneAnimationIdlePointers::
+	add_idleanim Brionne
 
 PrimarinaAnimationIdlePointers::
 	add_idleanim Primarina
@@ -58,6 +58,9 @@ CrabominableAnimationIdlePointers::
 
 OricorioAnimationIdlePointers::
 	add_idleanim Oricorio
+	add_idleanim OricorioPom_pom
+	add_idleanim OricorioPau
+	add_idleanim OricorioSensu
 
 CutieflyAnimationIdlePointers::
 	add_idleanim Cutiefly
@@ -67,12 +70,17 @@ RibombeeAnimationIdlePointers::
 
 RockruffAnimationIdlePointers::
 	add_idleanim Rockruff
+	add_idleanim RockruffOwn_tempo
 
 LycanrocAnimationIdlePointers::
 	add_idleanim Lycanroc
+	add_idleanim LycanrocMidday
+	add_idleanim LycanrocDusk
+	add_idleanim LycanrocMidnight
 
 WishiwashiAnimationIdlePointers::
 	add_idleanim Wishiwashi
+	add_idleanim WishiwashiSchool
 
 MareanieAnimationIdlePointers::
 	add_idleanim Mareanie
@@ -157,6 +165,7 @@ SilvallyAnimationIdlePointers::
 
 MiniorAnimationIdlePointers::
 	add_idleanim Minior
+	add_idleanim MiniorCore
 
 KomalaAnimationIdlePointers::
 	add_idleanim Komala
@@ -169,6 +178,7 @@ TogedemaruAnimationIdlePointers::
 
 MimikyuAnimationIdlePointers::
 	add_idleanim Mimikyu
+	add_idleanim MimikyuBusted
 
 BruxishAnimationIdlePointers::
 	add_idleanim Bruxish
@@ -235,6 +245,9 @@ GuzzlordAnimationIdlePointers::
 
 NecrozmaAnimationIdlePointers::
 	add_idleanim Necrozma
+	add_idleanim NecrozmaDawn_wings
+	add_idleanim NecrozmaDusk_mane
+	add_idleanim NecrozmaUltra
 
 MagearnaAnimationIdlePointers::
 	add_idleanim Magearna
@@ -262,4 +275,5 @@ MeltanAnimationIdlePointers::
 
 MelmetalAnimationIdlePointers::
 	add_idleanim Melmetal
+	add_idleanim MelmetalGiga
 

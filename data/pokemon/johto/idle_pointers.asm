@@ -61,6 +61,7 @@ LanturnAnimationIdlePointers::
 
 PichuAnimationIdlePointers::
 	add_idleanim Pichu
+	add_idleanim PichuSpiky_eared
 
 CleffaAnimationIdlePointers::
 	add_idleanim Cleffa
@@ -88,6 +89,7 @@ FlaaffyAnimationIdlePointers::
 
 AmpharosAnimationIdlePointers::
 	add_idleanim Ampharos
+	add_idleanim AmpharosMega
 
 BellossomAnimationIdlePointers::
 	add_idleanim Bellossom
@@ -148,6 +150,34 @@ MisdreavusAnimationIdlePointers::
 
 UnownAnimationIdlePointers::
 	add_idleanim Unown
+	add_idleanim UnownA
+	add_idleanim UnownB
+	add_idleanim UnownC
+	add_idleanim UnownD
+	add_idleanim UnownE
+	add_idleanim UnownF
+	add_idleanim UnownG
+	add_idleanim UnownH
+	add_idleanim UnownI
+	add_idleanim UnownJ
+	add_idleanim UnownK
+	add_idleanim UnownL
+	add_idleanim UnownM
+	add_idleanim UnownN
+	add_idleanim UnownO
+	add_idleanim UnownP
+	add_idleanim UnownQ
+	add_idleanim UnownR
+	add_idleanim UnownS
+	add_idleanim UnownT
+	add_idleanim UnownU
+	add_idleanim UnownV
+	add_idleanim UnownW
+	add_idleanim UnownX
+	add_idleanim UnownY
+	add_idleanim UnownZ
+	add_idleanim UnownExclamation_mark
+	add_idleanim UnownQuestion_mark
 
 WobbuffetAnimationIdlePointers::
 	add_idleanim Wobbuffet
@@ -169,6 +199,7 @@ GligarAnimationIdlePointers::
 
 SteelixAnimationIdlePointers::
 	add_idleanim Steelix
+	add_idleanim SteelixMega
 
 SnubbullAnimationIdlePointers::
 	add_idleanim Snubbull
@@ -181,12 +212,14 @@ QwilfishAnimationIdlePointers::
 
 ScizorAnimationIdlePointers::
 	add_idleanim Scizor
+	add_idleanim ScizorMega
 
 ShuckleAnimationIdlePointers::
 	add_idleanim Shuckle
 
 HeracrossAnimationIdlePointers::
 	add_idleanim Heracross
+	add_idleanim HeracrossMega
 
 SneaselAnimationIdlePointers::
 	add_idleanim Sneasel
@@ -211,6 +244,7 @@ PiloswineAnimationIdlePointers::
 
 CorsolaAnimationIdlePointers::
 	add_idleanim Corsola
+	add_idleanim CorsolaGalar
 
 RemoraidAnimationIdlePointers::
 	add_idleanim Remoraid
@@ -232,6 +266,7 @@ HoundourAnimationIdlePointers::
 
 HoundoomAnimationIdlePointers::
 	add_idleanim Houndoom
+	add_idleanim HoundoomMega
 
 KingdraAnimationIdlePointers::
 	add_idleanim Kingdra
@@ -289,6 +324,7 @@ PupitarAnimationIdlePointers::
 
 TyranitarAnimationIdlePointers::
 	add_idleanim Tyranitar
+	add_idleanim TyranitarMega
 
 LugiaAnimationIdlePointers::
 	add_idleanim Lugia

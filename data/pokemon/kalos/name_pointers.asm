@@ -25,6 +25,8 @@ FrogadierNames::
 
 GreninjaNames::
 	add_name Greninja
+	add_name Greninja
+	add_name Greninja
 
 BunnelbyNames::
 	add_name Bunnelby
@@ -49,17 +51,38 @@ SpewpaNames::
 
 VivillonNames::
 	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
+	add_name Vivillon
 
 LitleoNames::
 	add_name Litleo
 
 PyroarNames::
 	add_name Pyroar
+	add_name Pyroar
 
 FlabebeNames::
 	add_name Flabebe
 
 FloetteNames::
+	add_name Floette
 	add_name Floette
 
 FlorgesNames::
@@ -79,11 +102,21 @@ PangoroNames::
 
 FurfrouNames::
 	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
+	add_name Furfrou
 
 EspurrNames::
 	add_name Espurr
 
 MeowsticNames::
+	add_name Meowstic
 	add_name Meowstic
 
 HonedgeNames::
@@ -93,6 +126,7 @@ DoubladeNames::
 	add_name Doublade
 
 AegislashNames::
+	add_name Aegislash
 	add_name Aegislash
 
 SpritzeeNames::
@@ -181,8 +215,14 @@ TrevenantNames::
 
 PumpkabooNames::
 	add_name Pumpkaboo
+	add_name Pumpkaboo
+	add_name Pumpkaboo
+	add_name Pumpkaboo
 
 GourgeistNames::
+	add_name Gourgeist
+	add_name Gourgeist
+	add_name Gourgeist
 	add_name Gourgeist
 
 BergmiteNames::
@@ -205,11 +245,17 @@ YveltalNames::
 
 ZygardeNames::
 	add_name Zygarde
+	add_name Zygarde
+	add_name Zygarde
+	add_name Zygarde
+	add_name Zygarde
 
 DiancieNames::
 	add_name Diancie
+	add_name Diancie
 
 HoopaNames::
+	add_name Hoopa
 	add_name Hoopa
 
 VolcanionNames::

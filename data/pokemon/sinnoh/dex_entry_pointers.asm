@@ -76,8 +76,12 @@ BastiodonPokedexEntryPointers::
 
 BurmyPokedexEntryPointers::
 	add_pokedexentry Burmy
+	add_pokedexentry Burmy
+	add_pokedexentry Burmy
 
 WormadamPokedexEntryPointers::
+	add_pokedexentry Wormadam
+	add_pokedexentry Wormadam
 	add_pokedexentry Wormadam
 
 MothimPokedexEntryPointers::
@@ -103,11 +107,14 @@ CherubiPokedexEntryPointers::
 
 CherrimPokedexEntryPointers::
 	add_pokedexentry Cherrim
+	add_pokedexentry Cherrim
 
 ShellosPokedexEntryPointers::
 	add_pokedexentry Shellos
+	add_pokedexentry Shellos
 
 GastrodonPokedexEntryPointers::
+	add_pokedexentry Gastrodon
 	add_pokedexentry Gastrodon
 
 AmbipomPokedexEntryPointers::
@@ -123,6 +130,7 @@ BunearyPokedexEntryPointers::
 	add_pokedexentry Buneary
 
 LopunnyPokedexEntryPointers::
+	add_pokedexentry Lopunny
 	add_pokedexentry Lopunny
 
 MismagiusPokedexEntryPointers::
@@ -175,6 +183,7 @@ GabitePokedexEntryPointers::
 
 GarchompPokedexEntryPointers::
 	add_pokedexentry Garchomp
+	add_pokedexentry Garchomp
 
 MunchlaxPokedexEntryPointers::
 	add_pokedexentry Munchlax
@@ -183,6 +192,7 @@ RioluPokedexEntryPointers::
 	add_pokedexentry Riolu
 
 LucarioPokedexEntryPointers::
+	add_pokedexentry Lucario
 	add_pokedexentry Lucario
 
 HippopotasPokedexEntryPointers::
@@ -219,6 +229,7 @@ SnoverPokedexEntryPointers::
 	add_pokedexentry Snover
 
 AbomasnowPokedexEntryPointers::
+	add_pokedexentry Abomasnow
 	add_pokedexentry Abomasnow
 
 WeavilePokedexEntryPointers::
@@ -265,6 +276,7 @@ Porygon_zPokedexEntryPointers::
 
 GalladePokedexEntryPointers::
 	add_pokedexentry Gallade
+	add_pokedexentry Gallade
 
 ProbopassPokedexEntryPointers::
 	add_pokedexentry Probopass
@@ -276,6 +288,12 @@ FroslassPokedexEntryPointers::
 	add_pokedexentry Froslass
 
 RotomPokedexEntryPointers::
+	add_pokedexentry Rotom
+	add_pokedexentry Rotom
+	add_pokedexentry Rotom
+	add_pokedexentry Rotom
+	add_pokedexentry Rotom
+	add_pokedexentry Rotom
 	add_pokedexentry Rotom
 
 UxiePokedexEntryPointers::
@@ -300,6 +318,7 @@ RegigigasPokedexEntryPointers::
 	add_pokedexentry Regigigas
 
 GiratinaPokedexEntryPointers::
+	add_pokedexentry Giratina
 	add_pokedexentry Giratina
 
 CresseliaPokedexEntryPointers::

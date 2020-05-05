@@ -7,6 +7,7 @@ GrovyleOverworldSpritePointers::
 
 SceptileOverworldSpritePointers::
 	add_overworldsprite Sceptile
+	add_overworldsprite SceptileMega
 
 TorchicOverworldSpritePointers::
 	add_overworldsprite Torchic
@@ -16,6 +17,7 @@ CombuskenOverworldSpritePointers::
 
 BlazikenOverworldSpritePointers::
 	add_overworldsprite Blaziken
+	add_overworldsprite BlazikenMega
 
 MudkipOverworldSpritePointers::
 	add_overworldsprite Mudkip
@@ -25,6 +27,7 @@ MarshtompOverworldSpritePointers::
 
 SwampertOverworldSpritePointers::
 	add_overworldsprite Swampert
+	add_overworldsprite SwampertMega
 
 PoochyenaOverworldSpritePointers::
 	add_overworldsprite Poochyena
@@ -34,9 +37,11 @@ MightyenaOverworldSpritePointers::
 
 ZigzagoonOverworldSpritePointers::
 	add_overworldsprite Zigzagoon
+	add_overworldsprite ZigzagoonGalar
 
 LinooneOverworldSpritePointers::
 	add_overworldsprite Linoone
+	add_overworldsprite LinooneGalar
 
 WurmpleOverworldSpritePointers::
 	add_overworldsprite Wurmple
@@ -91,6 +96,7 @@ KirliaOverworldSpritePointers::
 
 GardevoirOverworldSpritePointers::
 	add_overworldsprite Gardevoir
+	add_overworldsprite GardevoirMega
 
 SurskitOverworldSpritePointers::
 	add_overworldsprite Surskit
@@ -151,9 +157,11 @@ DelcattyOverworldSpritePointers::
 
 SableyeOverworldSpritePointers::
 	add_overworldsprite Sableye
+	add_overworldsprite SableyeMega
 
 MawileOverworldSpritePointers::
 	add_overworldsprite Mawile
+	add_overworldsprite MawileMega
 
 AronOverworldSpritePointers::
 	add_overworldsprite Aron
@@ -163,18 +171,21 @@ LaironOverworldSpritePointers::
 
 AggronOverworldSpritePointers::
 	add_overworldsprite Aggron
+	add_overworldsprite AggronMega
 
 MedititeOverworldSpritePointers::
 	add_overworldsprite Meditite
 
 MedichamOverworldSpritePointers::
 	add_overworldsprite Medicham
+	add_overworldsprite MedichamMega
 
 ElectrikeOverworldSpritePointers::
 	add_overworldsprite Electrike
 
 ManectricOverworldSpritePointers::
 	add_overworldsprite Manectric
+	add_overworldsprite ManectricMega
 
 PlusleOverworldSpritePointers::
 	add_overworldsprite Plusle
@@ -202,6 +213,7 @@ CarvanhaOverworldSpritePointers::
 
 SharpedoOverworldSpritePointers::
 	add_overworldsprite Sharpedo
+	add_overworldsprite SharpedoMega
 
 WailmerOverworldSpritePointers::
 	add_overworldsprite Wailmer
@@ -214,6 +226,7 @@ NumelOverworldSpritePointers::
 
 CameruptOverworldSpritePointers::
 	add_overworldsprite Camerupt
+	add_overworldsprite CameruptMega
 
 TorkoalOverworldSpritePointers::
 	add_overworldsprite Torkoal
@@ -247,6 +260,7 @@ SwabluOverworldSpritePointers::
 
 AltariaOverworldSpritePointers::
 	add_overworldsprite Altaria
+	add_overworldsprite AltariaMega
 
 ZangooseOverworldSpritePointers::
 	add_overworldsprite Zangoose
@@ -298,6 +312,9 @@ MiloticOverworldSpritePointers::
 
 CastformOverworldSpritePointers::
 	add_overworldsprite Castform
+	add_overworldsprite CastformSun
+	add_overworldsprite CastformRain
+	add_overworldsprite CastformSnow
 
 KecleonOverworldSpritePointers::
 	add_overworldsprite Kecleon
@@ -307,6 +324,7 @@ ShuppetOverworldSpritePointers::
 
 BanetteOverworldSpritePointers::
 	add_overworldsprite Banette
+	add_overworldsprite BanetteMega
 
 DuskullOverworldSpritePointers::
 	add_overworldsprite Duskull
@@ -322,6 +340,7 @@ ChimechoOverworldSpritePointers::
 
 AbsolOverworldSpritePointers::
 	add_overworldsprite Absol
+	add_overworldsprite AbsolMega
 
 WynautOverworldSpritePointers::
 	add_overworldsprite Wynaut
@@ -331,6 +350,7 @@ SnoruntOverworldSpritePointers::
 
 GlalieOverworldSpritePointers::
 	add_overworldsprite Glalie
+	add_overworldsprite GlalieMega
 
 SphealOverworldSpritePointers::
 	add_overworldsprite Spheal
@@ -364,6 +384,7 @@ ShelgonOverworldSpritePointers::
 
 SalamenceOverworldSpritePointers::
 	add_overworldsprite Salamence
+	add_overworldsprite SalamenceMega
 
 BeldumOverworldSpritePointers::
 	add_overworldsprite Beldum
@@ -373,6 +394,7 @@ MetangOverworldSpritePointers::
 
 MetagrossOverworldSpritePointers::
 	add_overworldsprite Metagross
+	add_overworldsprite MetagrossMega
 
 RegirockOverworldSpritePointers::
 	add_overworldsprite Regirock
@@ -385,22 +407,30 @@ RegisteelOverworldSpritePointers::
 
 LatiasOverworldSpritePointers::
 	add_overworldsprite Latias
+	add_overworldsprite LatiasMega
 
 LatiosOverworldSpritePointers::
 	add_overworldsprite Latios
+	add_overworldsprite LatiosMega
 
 KyogreOverworldSpritePointers::
 	add_overworldsprite Kyogre
+	add_overworldsprite KyogrePrimal
 
 GroudonOverworldSpritePointers::
 	add_overworldsprite Groudon
+	add_overworldsprite GroudonPrimal
 
 RayquazaOverworldSpritePointers::
 	add_overworldsprite Rayquaza
+	add_overworldsprite RayquazaMega
 
 JirachiOverworldSpritePointers::
 	add_overworldsprite Jirachi
 
 DeoxysOverworldSpritePointers::
 	add_overworldsprite Deoxys
+	add_overworldsprite DeoxysAttack
+	add_overworldsprite DeoxysDefense
+	add_overworldsprite DeoxysSpeed
 

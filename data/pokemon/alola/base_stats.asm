@@ -13,7 +13,7 @@ IncineroarBaseData::	INCLUDE "data/pokemon/base_stats/incineroar.asm"
 
 PopplioBaseData::	INCLUDE "data/pokemon/base_stats/popplio.asm"
 
-BrioneBaseData::	INCLUDE "data/pokemon/base_stats/brione.asm"
+BrionneBaseData::	INCLUDE "data/pokemon/base_stats/brionne.asm"
 
 PrimarinaBaseData::	INCLUDE "data/pokemon/base_stats/primarina.asm"
 
@@ -38,16 +38,24 @@ CrabrawlerBaseData::	INCLUDE "data/pokemon/base_stats/crabrawler.asm"
 CrabominableBaseData::	INCLUDE "data/pokemon/base_stats/crabominable.asm"
 
 OricorioBaseData::	INCLUDE "data/pokemon/base_stats/oricorio.asm"
+OricorioPom_pomBaseData::	INCLUDE "data/pokemon/base_stats/oricorio_pom_pom.asm"
+OricorioPauBaseData::	INCLUDE "data/pokemon/base_stats/oricorio_pau.asm"
+OricorioSensuBaseData::	INCLUDE "data/pokemon/base_stats/oricorio_sensu.asm"
 
 CutieflyBaseData::	INCLUDE "data/pokemon/base_stats/cutiefly.asm"
 
 RibombeeBaseData::	INCLUDE "data/pokemon/base_stats/ribombee.asm"
 
 RockruffBaseData::	INCLUDE "data/pokemon/base_stats/rockruff.asm"
+RockruffOwn_tempoBaseData::	INCLUDE "data/pokemon/base_stats/rockruff_own_tempo.asm"
 
 LycanrocBaseData::	INCLUDE "data/pokemon/base_stats/lycanroc.asm"
+LycanrocMiddayBaseData::	INCLUDE "data/pokemon/base_stats/lycanroc_midday.asm"
+LycanrocDuskBaseData::	INCLUDE "data/pokemon/base_stats/lycanroc_dusk.asm"
+LycanrocMidnightBaseData::	INCLUDE "data/pokemon/base_stats/lycanroc_midnight.asm"
 
 WishiwashiBaseData::	INCLUDE "data/pokemon/base_stats/wishiwashi.asm"
+WishiwashiSchoolBaseData::	INCLUDE "data/pokemon/base_stats/wishiwashi_school.asm"
 
 MareanieBaseData::	INCLUDE "data/pokemon/base_stats/mareanie.asm"
 
@@ -104,6 +112,7 @@ Type_nullBaseData::	INCLUDE "data/pokemon/base_stats/type_null.asm"
 SilvallyBaseData::	INCLUDE "data/pokemon/base_stats/silvally.asm"
 
 MiniorBaseData::	INCLUDE "data/pokemon/base_stats/minior.asm"
+MiniorCoreBaseData::	INCLUDE "data/pokemon/base_stats/minior_core.asm"
 
 KomalaBaseData::	INCLUDE "data/pokemon/base_stats/komala.asm"
 
@@ -112,6 +121,7 @@ TurtonatorBaseData::	INCLUDE "data/pokemon/base_stats/turtonator.asm"
 TogedemaruBaseData::	INCLUDE "data/pokemon/base_stats/togedemaru.asm"
 
 MimikyuBaseData::	INCLUDE "data/pokemon/base_stats/mimikyu.asm"
+MimikyuBustedBaseData::	INCLUDE "data/pokemon/base_stats/mimikyu_busted.asm"
 
 BruxishBaseData::	INCLUDE "data/pokemon/base_stats/bruxish.asm"
 
@@ -156,6 +166,9 @@ KartanaBaseData::	INCLUDE "data/pokemon/base_stats/kartana.asm"
 GuzzlordBaseData::	INCLUDE "data/pokemon/base_stats/guzzlord.asm"
 
 NecrozmaBaseData::	INCLUDE "data/pokemon/base_stats/necrozma.asm"
+NecrozmaDawn_wingsBaseData::	INCLUDE "data/pokemon/base_stats/necrozma_dawn_wings.asm"
+NecrozmaDusk_maneBaseData::	INCLUDE "data/pokemon/base_stats/necrozma_dusk_mane.asm"
+NecrozmaUltraBaseData::	INCLUDE "data/pokemon/base_stats/necrozma_ultra.asm"
 
 MagearnaBaseData::	INCLUDE "data/pokemon/base_stats/magearna.asm"
 
@@ -174,4 +187,5 @@ ZeraoraBaseData::	INCLUDE "data/pokemon/base_stats/zeraora.asm"
 MeltanBaseData::	INCLUDE "data/pokemon/base_stats/meltan.asm"
 
 MelmetalBaseData::	INCLUDE "data/pokemon/base_stats/melmetal.asm"
+MelmetalGigaBaseData::	INCLUDE "data/pokemon/base_stats/melmetal_giga.asm"
 

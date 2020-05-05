@@ -82,6 +82,7 @@ TranquillFramesPointers::
 
 UnfezantFramesPointers::
 	add_frames Unfezant
+	add_frames UnfezantF
 
 BlitzleFramesPointers::
 	add_frames Blitzle
@@ -112,6 +113,7 @@ ExcadrillFramesPointers::
 
 AudinoFramesPointers::
 	add_frames Audino
+	add_frames AudinoMega
 
 TimburrFramesPointers::
 	add_frames Timburr
@@ -181,9 +183,13 @@ KrookodileFramesPointers::
 
 DarumakaFramesPointers::
 	add_frames Darumaka
+	add_frames DarumakaGalar
 
 DarmanitanFramesPointers::
 	add_frames Darmanitan
+	add_frames DarmanitanZen
+	add_frames DarmanitanGalar
+	add_frames DarmanitanGalar_zen
 
 MaractusFramesPointers::
 	add_frames Maractus
@@ -205,6 +211,7 @@ SigilyphFramesPointers::
 
 YamaskFramesPointers::
 	add_frames Yamask
+	add_frames YamaskGalar
 
 CofagrigusFramesPointers::
 	add_frames Cofagrigus
@@ -226,6 +233,7 @@ TrubbishFramesPointers::
 
 GarbodorFramesPointers::
 	add_frames Garbodor
+	add_frames GarbodorGiga
 
 ZoruaFramesPointers::
 	add_frames Zorua
@@ -274,9 +282,15 @@ VanilluxeFramesPointers::
 
 DeerlingFramesPointers::
 	add_frames Deerling
+	add_frames DeerlingSummer
+	add_frames DeerlingAutumn
+	add_frames DeerlingWinter
 
 SawsbuckFramesPointers::
 	add_frames Sawsbuck
+	add_frames SawsbuckSummer
+	add_frames SawsbuckAutumn
+	add_frames SawsbuckWinter
 
 EmolgaFramesPointers::
 	add_frames Emolga
@@ -373,6 +387,7 @@ AccelgorFramesPointers::
 
 StunfiskFramesPointers::
 	add_frames Stunfisk
+	add_frames StunfiskGalar
 
 MienfooFramesPointers::
 	add_frames Mienfoo
@@ -442,9 +457,11 @@ VirizionFramesPointers::
 
 TornadusFramesPointers::
 	add_frames Tornadus
+	add_frames TornadusTherian
 
 ThundurusFramesPointers::
 	add_frames Thundurus
+	add_frames ThundurusTherian
 
 ReshiramFramesPointers::
 	add_frames Reshiram
@@ -454,15 +471,20 @@ ZekromFramesPointers::
 
 LandorusFramesPointers::
 	add_frames Landorus
+	add_frames LandorusTherian
 
 KyuremFramesPointers::
 	add_frames Kyurem
+	add_frames KyuremBlack
+	add_frames KyuremWhite
 
 KeldeoFramesPointers::
 	add_frames Keldeo
+	add_frames KeldeoResolute
 
 MeloettaFramesPointers::
 	add_frames Meloetta
+	add_frames MeloettaPirouette
 
 GenesectFramesPointers::
 	add_frames Genesect

@@ -6,7 +6,7 @@ AlolaNamePointerTable::
 	add_nametable Torracat
 	add_nametable Incineroar
 	add_nametable Popplio
-	add_nametable Brione
+	add_nametable Brionne
 	add_nametable Primarina
 	add_nametable Pikipeck
 	add_nametable Trumbeak

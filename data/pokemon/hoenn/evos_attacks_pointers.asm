@@ -7,6 +7,7 @@ GrovyleEvosAttacksPointers::
 
 SceptileEvosAttacksPointers::
 	add_evosattacks Sceptile
+	add_evosattacks SceptileMega
 
 TorchicEvosAttacksPointers::
 	add_evosattacks Torchic
@@ -16,6 +17,7 @@ CombuskenEvosAttacksPointers::
 
 BlazikenEvosAttacksPointers::
 	add_evosattacks Blaziken
+	add_evosattacks BlazikenMega
 
 MudkipEvosAttacksPointers::
 	add_evosattacks Mudkip
@@ -25,6 +27,7 @@ MarshtompEvosAttacksPointers::
 
 SwampertEvosAttacksPointers::
 	add_evosattacks Swampert
+	add_evosattacks SwampertMega
 
 PoochyenaEvosAttacksPointers::
 	add_evosattacks Poochyena
@@ -34,9 +37,11 @@ MightyenaEvosAttacksPointers::
 
 ZigzagoonEvosAttacksPointers::
 	add_evosattacks Zigzagoon
+	add_evosattacks ZigzagoonGalar
 
 LinooneEvosAttacksPointers::
 	add_evosattacks Linoone
+	add_evosattacks LinooneGalar
 
 WurmpleEvosAttacksPointers::
 	add_evosattacks Wurmple
@@ -91,6 +96,7 @@ KirliaEvosAttacksPointers::
 
 GardevoirEvosAttacksPointers::
 	add_evosattacks Gardevoir
+	add_evosattacks GardevoirMega
 
 SurskitEvosAttacksPointers::
 	add_evosattacks Surskit
@@ -151,9 +157,11 @@ DelcattyEvosAttacksPointers::
 
 SableyeEvosAttacksPointers::
 	add_evosattacks Sableye
+	add_evosattacks SableyeMega
 
 MawileEvosAttacksPointers::
 	add_evosattacks Mawile
+	add_evosattacks MawileMega
 
 AronEvosAttacksPointers::
 	add_evosattacks Aron
@@ -163,18 +171,21 @@ LaironEvosAttacksPointers::
 
 AggronEvosAttacksPointers::
 	add_evosattacks Aggron
+	add_evosattacks AggronMega
 
 MedititeEvosAttacksPointers::
 	add_evosattacks Meditite
 
 MedichamEvosAttacksPointers::
 	add_evosattacks Medicham
+	add_evosattacks MedichamMega
 
 ElectrikeEvosAttacksPointers::
 	add_evosattacks Electrike
 
 ManectricEvosAttacksPointers::
 	add_evosattacks Manectric
+	add_evosattacks ManectricMega
 
 PlusleEvosAttacksPointers::
 	add_evosattacks Plusle
@@ -202,6 +213,7 @@ CarvanhaEvosAttacksPointers::
 
 SharpedoEvosAttacksPointers::
 	add_evosattacks Sharpedo
+	add_evosattacks SharpedoMega
 
 WailmerEvosAttacksPointers::
 	add_evosattacks Wailmer
@@ -214,6 +226,7 @@ NumelEvosAttacksPointers::
 
 CameruptEvosAttacksPointers::
 	add_evosattacks Camerupt
+	add_evosattacks CameruptMega
 
 TorkoalEvosAttacksPointers::
 	add_evosattacks Torkoal
@@ -247,6 +260,7 @@ SwabluEvosAttacksPointers::
 
 AltariaEvosAttacksPointers::
 	add_evosattacks Altaria
+	add_evosattacks AltariaMega
 
 ZangooseEvosAttacksPointers::
 	add_evosattacks Zangoose
@@ -298,6 +312,9 @@ MiloticEvosAttacksPointers::
 
 CastformEvosAttacksPointers::
 	add_evosattacks Castform
+	add_evosattacks CastformSun
+	add_evosattacks CastformRain
+	add_evosattacks CastformSnow
 
 KecleonEvosAttacksPointers::
 	add_evosattacks Kecleon
@@ -307,6 +324,7 @@ ShuppetEvosAttacksPointers::
 
 BanetteEvosAttacksPointers::
 	add_evosattacks Banette
+	add_evosattacks BanetteMega
 
 DuskullEvosAttacksPointers::
 	add_evosattacks Duskull
@@ -322,6 +340,7 @@ ChimechoEvosAttacksPointers::
 
 AbsolEvosAttacksPointers::
 	add_evosattacks Absol
+	add_evosattacks AbsolMega
 
 WynautEvosAttacksPointers::
 	add_evosattacks Wynaut
@@ -331,6 +350,7 @@ SnoruntEvosAttacksPointers::
 
 GlalieEvosAttacksPointers::
 	add_evosattacks Glalie
+	add_evosattacks GlalieMega
 
 SphealEvosAttacksPointers::
 	add_evosattacks Spheal
@@ -364,6 +384,7 @@ ShelgonEvosAttacksPointers::
 
 SalamenceEvosAttacksPointers::
 	add_evosattacks Salamence
+	add_evosattacks SalamenceMega
 
 BeldumEvosAttacksPointers::
 	add_evosattacks Beldum
@@ -373,6 +394,7 @@ MetangEvosAttacksPointers::
 
 MetagrossEvosAttacksPointers::
 	add_evosattacks Metagross
+	add_evosattacks MetagrossMega
 
 RegirockEvosAttacksPointers::
 	add_evosattacks Regirock
@@ -385,22 +407,30 @@ RegisteelEvosAttacksPointers::
 
 LatiasEvosAttacksPointers::
 	add_evosattacks Latias
+	add_evosattacks LatiasMega
 
 LatiosEvosAttacksPointers::
 	add_evosattacks Latios
+	add_evosattacks LatiosMega
 
 KyogreEvosAttacksPointers::
 	add_evosattacks Kyogre
+	add_evosattacks KyogrePrimal
 
 GroudonEvosAttacksPointers::
 	add_evosattacks Groudon
+	add_evosattacks GroudonPrimal
 
 RayquazaEvosAttacksPointers::
 	add_evosattacks Rayquaza
+	add_evosattacks RayquazaMega
 
 JirachiEvosAttacksPointers::
 	add_evosattacks Jirachi
 
 DeoxysEvosAttacksPointers::
 	add_evosattacks Deoxys
+	add_evosattacks DeoxysAttack
+	add_evosattacks DeoxysDefense
+	add_evosattacks DeoxysSpeed
 

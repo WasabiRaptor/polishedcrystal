@@ -18,6 +18,9 @@ CharmeleonPokedexEntryPointers::
 
 CharizardPokedexEntryPointers::
 	add_pokedexentry Charizard
+	add_pokedexentry Charizard
+	add_pokedexentry Charizard
+	add_pokedexentry Charizard
 
 SquirtlePokedexEntryPointers::
 	add_pokedexentry Squirtle
@@ -26,6 +29,8 @@ WartortlePokedexEntryPointers::
 	add_pokedexentry Wartortle
 
 BlastoisePokedexEntryPointers::
+	add_pokedexentry Blastoise
+	add_pokedexentry Blastoise
 	add_pokedexentry Blastoise
 
 CaterpiePokedexEntryPointers::
@@ -36,6 +41,7 @@ MetapodPokedexEntryPointers::
 
 ButterfreePokedexEntryPointers::
 	add_pokedexentry Butterfree
+	add_pokedexentry Butterfree
 
 WeedlePokedexEntryPointers::
 	add_pokedexentry Weedle
@@ -44,6 +50,7 @@ KakunaPokedexEntryPointers::
 	add_pokedexentry Kakuna
 
 BeedrillPokedexEntryPointers::
+	add_pokedexentry Beedrill
 	add_pokedexentry Beedrill
 
 PidgeyPokedexEntryPointers::
@@ -54,11 +61,14 @@ PidgeottoPokedexEntryPointers::
 
 PidgeotPokedexEntryPointers::
 	add_pokedexentry Pidgeot
+	add_pokedexentry Pidgeot
 
 RattataPokedexEntryPointers::
 	add_pokedexentry Rattata
+	add_pokedexentry Rattata
 
 RaticatePokedexEntryPointers::
+	add_pokedexentry Raticate
 	add_pokedexentry Raticate
 
 SpearowPokedexEntryPointers::
@@ -75,14 +85,32 @@ ArbokPokedexEntryPointers::
 
 PikachuPokedexEntryPointers::
 	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
+	add_pokedexentry Pikachu
 
 RaichuPokedexEntryPointers::
+	add_pokedexentry Raichu
 	add_pokedexentry Raichu
 
 SandshrewPokedexEntryPointers::
 	add_pokedexentry Sandshrew
+	add_pokedexentry Sandshrew
 
 SandslashPokedexEntryPointers::
+	add_pokedexentry Sandslash
 	add_pokedexentry Sandslash
 
 Nidoran_fPokedexEntryPointers::
@@ -111,8 +139,14 @@ ClefablePokedexEntryPointers::
 
 VulpixPokedexEntryPointers::
 	add_pokedexentry Vulpix
+	add_pokedexentry Vulpix
+	add_pokedexentry Vulpix
+	add_pokedexentry Vulpix
 
 NinetalesPokedexEntryPointers::
+	add_pokedexentry Ninetales
+	add_pokedexentry Ninetales
+	add_pokedexentry Ninetales
 	add_pokedexentry Ninetales
 
 JigglypuffPokedexEntryPointers::
@@ -150,14 +184,20 @@ VenomothPokedexEntryPointers::
 
 DiglettPokedexEntryPointers::
 	add_pokedexentry Diglett
+	add_pokedexentry Diglett
 
 DugtrioPokedexEntryPointers::
+	add_pokedexentry Dugtrio
 	add_pokedexentry Dugtrio
 
 MeowthPokedexEntryPointers::
 	add_pokedexentry Meowth
+	add_pokedexentry Meowth
+	add_pokedexentry Meowth
+	add_pokedexentry Meowth
 
 PersianPokedexEntryPointers::
+	add_pokedexentry Persian
 	add_pokedexentry Persian
 
 PsyduckPokedexEntryPointers::
@@ -195,6 +235,7 @@ KadabraPokedexEntryPointers::
 
 AlakazamPokedexEntryPointers::
 	add_pokedexentry Alakazam
+	add_pokedexentry Alakazam
 
 MachopPokedexEntryPointers::
 	add_pokedexentry Machop
@@ -203,6 +244,7 @@ MachokePokedexEntryPointers::
 	add_pokedexentry Machoke
 
 MachampPokedexEntryPointers::
+	add_pokedexentry Machamp
 	add_pokedexentry Machamp
 
 BellsproutPokedexEntryPointers::
@@ -222,23 +264,30 @@ TentacruelPokedexEntryPointers::
 
 GeodudePokedexEntryPointers::
 	add_pokedexentry Geodude
+	add_pokedexentry Geodude
 
 GravelerPokedexEntryPointers::
+	add_pokedexentry Graveler
 	add_pokedexentry Graveler
 
 GolemPokedexEntryPointers::
 	add_pokedexentry Golem
+	add_pokedexentry Golem
 
 PonytaPokedexEntryPointers::
+	add_pokedexentry Ponyta
 	add_pokedexentry Ponyta
 
 RapidashPokedexEntryPointers::
 	add_pokedexentry Rapidash
+	add_pokedexentry Rapidash
 
 SlowpokePokedexEntryPointers::
 	add_pokedexentry Slowpoke
+	add_pokedexentry Slowpoke
 
 SlowbroPokedexEntryPointers::
+	add_pokedexentry Slowbro
 	add_pokedexentry Slowbro
 
 MagnemitePokedexEntryPointers::
@@ -248,6 +297,7 @@ MagnetonPokedexEntryPointers::
 	add_pokedexentry Magneton
 
 FarfetchdPokedexEntryPointers::
+	add_pokedexentry Farfetchd
 	add_pokedexentry Farfetchd
 
 DoduoPokedexEntryPointers::
@@ -264,8 +314,10 @@ DewgongPokedexEntryPointers::
 
 GrimerPokedexEntryPointers::
 	add_pokedexentry Grimer
+	add_pokedexentry Grimer
 
 MukPokedexEntryPointers::
+	add_pokedexentry Muk
 	add_pokedexentry Muk
 
 ShellderPokedexEntryPointers::
@@ -282,6 +334,8 @@ HaunterPokedexEntryPointers::
 
 GengarPokedexEntryPointers::
 	add_pokedexentry Gengar
+	add_pokedexentry Gengar
+	add_pokedexentry Gengar
 
 OnixPokedexEntryPointers::
 	add_pokedexentry Onix
@@ -297,6 +351,7 @@ KrabbyPokedexEntryPointers::
 
 KinglerPokedexEntryPointers::
 	add_pokedexentry Kingler
+	add_pokedexentry Kingler
 
 VoltorbPokedexEntryPointers::
 	add_pokedexentry Voltorb
@@ -309,11 +364,13 @@ ExeggcutePokedexEntryPointers::
 
 ExeggutorPokedexEntryPointers::
 	add_pokedexentry Exeggutor
+	add_pokedexentry Exeggutor
 
 CubonePokedexEntryPointers::
 	add_pokedexentry Cubone
 
 MarowakPokedexEntryPointers::
+	add_pokedexentry Marowak
 	add_pokedexentry Marowak
 
 HitmonleePokedexEntryPointers::
@@ -330,6 +387,7 @@ KoffingPokedexEntryPointers::
 
 WeezingPokedexEntryPointers::
 	add_pokedexentry Weezing
+	add_pokedexentry Weezing
 
 RhyhornPokedexEntryPointers::
 	add_pokedexentry Rhyhorn
@@ -344,6 +402,7 @@ TangelaPokedexEntryPointers::
 	add_pokedexentry Tangela
 
 KangaskhanPokedexEntryPointers::
+	add_pokedexentry Kangaskhan
 	add_pokedexentry Kangaskhan
 
 HorseaPokedexEntryPointers::
@@ -366,6 +425,7 @@ StarmiePokedexEntryPointers::
 
 MrmimePokedexEntryPointers::
 	add_pokedexentry Mrmime
+	add_pokedexentry Mrmime
 
 ScytherPokedexEntryPointers::
 	add_pokedexentry Scyther
@@ -381,6 +441,7 @@ MagmarPokedexEntryPointers::
 
 PinsirPokedexEntryPointers::
 	add_pokedexentry Pinsir
+	add_pokedexentry Pinsir
 
 TaurosPokedexEntryPointers::
 	add_pokedexentry Tauros
@@ -390,14 +451,18 @@ MagikarpPokedexEntryPointers::
 
 GyaradosPokedexEntryPointers::
 	add_pokedexentry Gyarados
+	add_pokedexentry Gyarados
 
 LaprasPokedexEntryPointers::
+	add_pokedexentry Lapras
 	add_pokedexentry Lapras
 
 DittoPokedexEntryPointers::
 	add_pokedexentry Ditto
 
 EeveePokedexEntryPointers::
+	add_pokedexentry Eevee
+	add_pokedexentry Eevee
 	add_pokedexentry Eevee
 
 VaporeonPokedexEntryPointers::
@@ -407,6 +472,7 @@ JolteonPokedexEntryPointers::
 	add_pokedexentry Jolteon
 
 FlareonPokedexEntryPointers::
+	add_pokedexentry Flareon
 	add_pokedexentry Flareon
 
 PorygonPokedexEntryPointers::
@@ -426,17 +492,22 @@ KabutopsPokedexEntryPointers::
 
 AerodactylPokedexEntryPointers::
 	add_pokedexentry Aerodactyl
+	add_pokedexentry Aerodactyl
 
 SnorlaxPokedexEntryPointers::
+	add_pokedexentry Snorlax
 	add_pokedexentry Snorlax
 
 ArticunoPokedexEntryPointers::
 	add_pokedexentry Articuno
+	add_pokedexentry Articuno
 
 ZapdosPokedexEntryPointers::
 	add_pokedexentry Zapdos
+	add_pokedexentry Zapdos
 
 MoltresPokedexEntryPointers::
+	add_pokedexentry Moltres
 	add_pokedexentry Moltres
 
 DratiniPokedexEntryPointers::
@@ -449,6 +520,8 @@ DragonitePokedexEntryPointers::
 	add_pokedexentry Dragonite
 
 MewtwoPokedexEntryPointers::
+	add_pokedexentry Mewtwo
+	add_pokedexentry Mewtwo
 	add_pokedexentry Mewtwo
 
 MewPokedexEntryPointers::

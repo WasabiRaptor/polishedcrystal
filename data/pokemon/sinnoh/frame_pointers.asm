@@ -76,9 +76,13 @@ BastiodonFramesPointers::
 
 BurmyFramesPointers::
 	add_frames Burmy
+	add_frames BurmySand
+	add_frames BurmyTrash
 
 WormadamFramesPointers::
 	add_frames Wormadam
+	add_frames WormadamSand
+	add_frames WormadamTrash
 
 MothimFramesPointers::
 	add_frames Mothim
@@ -103,12 +107,15 @@ CherubiFramesPointers::
 
 CherrimFramesPointers::
 	add_frames Cherrim
+	add_frames CherrimOvercast
 
 ShellosFramesPointers::
 	add_frames Shellos
+	add_frames ShellosWest
 
 GastrodonFramesPointers::
 	add_frames Gastrodon
+	add_frames GastrodonWest
 
 AmbipomFramesPointers::
 	add_frames Ambipom
@@ -124,6 +131,7 @@ BunearyFramesPointers::
 
 LopunnyFramesPointers::
 	add_frames Lopunny
+	add_frames LopunnyMega
 
 MismagiusFramesPointers::
 	add_frames Mismagius
@@ -175,6 +183,7 @@ GabiteFramesPointers::
 
 GarchompFramesPointers::
 	add_frames Garchomp
+	add_frames GarchompMega
 
 MunchlaxFramesPointers::
 	add_frames Munchlax
@@ -184,6 +193,7 @@ RioluFramesPointers::
 
 LucarioFramesPointers::
 	add_frames Lucario
+	add_frames LucarioMega
 
 HippopotasFramesPointers::
 	add_frames Hippopotas
@@ -220,6 +230,7 @@ SnoverFramesPointers::
 
 AbomasnowFramesPointers::
 	add_frames Abomasnow
+	add_frames AbomasnowMega
 
 WeavileFramesPointers::
 	add_frames Weavile
@@ -265,6 +276,7 @@ Porygon_zFramesPointers::
 
 GalladeFramesPointers::
 	add_frames Gallade
+	add_frames GalladeMega
 
 ProbopassFramesPointers::
 	add_frames Probopass
@@ -277,6 +289,12 @@ FroslassFramesPointers::
 
 RotomFramesPointers::
 	add_frames Rotom
+	add_frames RotomHeat
+	add_frames RotomWash
+	add_frames RotomFrost
+	add_frames RotomFan
+	add_frames RotomMow
+	add_frames RotomDex
 
 UxieFramesPointers::
 	add_frames Uxie
@@ -301,6 +319,7 @@ RegigigasFramesPointers::
 
 GiratinaFramesPointers::
 	add_frames Giratina
+	add_frames GiratinaOrigin
 
 CresseliaFramesPointers::
 	add_frames Cresselia

@@ -7,6 +7,7 @@ GrovylePicPointers::
 
 SceptilePicPointers::
 	add_pics Sceptile
+	add_pics SceptileMega
 
 TorchicPicPointers::
 	add_pics Torchic
@@ -16,6 +17,7 @@ CombuskenPicPointers::
 
 BlazikenPicPointers::
 	add_pics Blaziken
+	add_pics BlazikenMega
 
 MudkipPicPointers::
 	add_pics Mudkip
@@ -25,6 +27,7 @@ MarshtompPicPointers::
 
 SwampertPicPointers::
 	add_pics Swampert
+	add_pics SwampertMega
 
 PoochyenaPicPointers::
 	add_pics Poochyena
@@ -34,9 +37,11 @@ MightyenaPicPointers::
 
 ZigzagoonPicPointers::
 	add_pics Zigzagoon
+	add_pics ZigzagoonGalar
 
 LinoonePicPointers::
 	add_pics Linoone
+	add_pics LinooneGalar
 
 WurmplePicPointers::
 	add_pics Wurmple
@@ -91,6 +96,7 @@ KirliaPicPointers::
 
 GardevoirPicPointers::
 	add_pics Gardevoir
+	add_pics GardevoirMega
 
 SurskitPicPointers::
 	add_pics Surskit
@@ -151,9 +157,11 @@ DelcattyPicPointers::
 
 SableyePicPointers::
 	add_pics Sableye
+	add_pics SableyeMega
 
 MawilePicPointers::
 	add_pics Mawile
+	add_pics MawileMega
 
 AronPicPointers::
 	add_pics Aron
@@ -163,18 +171,21 @@ LaironPicPointers::
 
 AggronPicPointers::
 	add_pics Aggron
+	add_pics AggronMega
 
 MedititePicPointers::
 	add_pics Meditite
 
 MedichamPicPointers::
 	add_pics Medicham
+	add_pics MedichamMega
 
 ElectrikePicPointers::
 	add_pics Electrike
 
 ManectricPicPointers::
 	add_pics Manectric
+	add_pics ManectricMega
 
 PluslePicPointers::
 	add_pics Plusle
@@ -202,6 +213,7 @@ CarvanhaPicPointers::
 
 SharpedoPicPointers::
 	add_pics Sharpedo
+	add_pics SharpedoMega
 
 WailmerPicPointers::
 	add_pics Wailmer
@@ -214,6 +226,7 @@ NumelPicPointers::
 
 CameruptPicPointers::
 	add_pics Camerupt
+	add_pics CameruptMega
 
 TorkoalPicPointers::
 	add_pics Torkoal
@@ -247,6 +260,7 @@ SwabluPicPointers::
 
 AltariaPicPointers::
 	add_pics Altaria
+	add_pics AltariaMega
 
 ZangoosePicPointers::
 	add_pics Zangoose
@@ -298,6 +312,9 @@ MiloticPicPointers::
 
 CastformPicPointers::
 	add_pics Castform
+	add_pics CastformSun
+	add_pics CastformRain
+	add_pics CastformSnow
 
 KecleonPicPointers::
 	add_pics Kecleon
@@ -307,6 +324,7 @@ ShuppetPicPointers::
 
 BanettePicPointers::
 	add_pics Banette
+	add_pics BanetteMega
 
 DuskullPicPointers::
 	add_pics Duskull
@@ -322,6 +340,7 @@ ChimechoPicPointers::
 
 AbsolPicPointers::
 	add_pics Absol
+	add_pics AbsolMega
 
 WynautPicPointers::
 	add_pics Wynaut
@@ -331,6 +350,7 @@ SnoruntPicPointers::
 
 GlaliePicPointers::
 	add_pics Glalie
+	add_pics GlalieMega
 
 SphealPicPointers::
 	add_pics Spheal
@@ -364,6 +384,7 @@ ShelgonPicPointers::
 
 SalamencePicPointers::
 	add_pics Salamence
+	add_pics SalamenceMega
 
 BeldumPicPointers::
 	add_pics Beldum
@@ -373,6 +394,7 @@ MetangPicPointers::
 
 MetagrossPicPointers::
 	add_pics Metagross
+	add_pics MetagrossMega
 
 RegirockPicPointers::
 	add_pics Regirock
@@ -385,22 +407,30 @@ RegisteelPicPointers::
 
 LatiasPicPointers::
 	add_pics Latias
+	add_pics LatiasMega
 
 LatiosPicPointers::
 	add_pics Latios
+	add_pics LatiosMega
 
 KyogrePicPointers::
 	add_pics Kyogre
+	add_pics KyogrePrimal
 
 GroudonPicPointers::
 	add_pics Groudon
+	add_pics GroudonPrimal
 
 RayquazaPicPointers::
 	add_pics Rayquaza
+	add_pics RayquazaMega
 
 JirachiPicPointers::
 	add_pics Jirachi
 
 DeoxysPicPointers::
 	add_pics Deoxys
+	add_pics DeoxysAttack
+	add_pics DeoxysDefense
+	add_pics DeoxysSpeed
 

@@ -18,6 +18,9 @@ CharmeleonIconPointers::
 
 CharizardIconPointers::
 	add_icon Charizard
+	add_icon CharizardMega_x
+	add_icon CharizardMega_y
+	add_icon CharizardGiga
 
 SquirtleIconPointers::
 	add_icon Squirtle
@@ -27,6 +30,8 @@ WartortleIconPointers::
 
 BlastoiseIconPointers::
 	add_icon Blastoise
+	add_icon BlastoiseMega
+	add_icon BlastoiseGiga
 
 CaterpieIconPointers::
 	add_icon Caterpie
@@ -36,6 +41,7 @@ MetapodIconPointers::
 
 ButterfreeIconPointers::
 	add_icon Butterfree
+	add_icon ButterfreeGiga
 
 WeedleIconPointers::
 	add_icon Weedle
@@ -45,6 +51,7 @@ KakunaIconPointers::
 
 BeedrillIconPointers::
 	add_icon Beedrill
+	add_icon BeedrillMega
 
 PidgeyIconPointers::
 	add_icon Pidgey
@@ -54,12 +61,15 @@ PidgeottoIconPointers::
 
 PidgeotIconPointers::
 	add_icon Pidgeot
+	add_icon PidgeotMega
 
 RattataIconPointers::
 	add_icon Rattata
+	add_icon RattataAlola
 
 RaticateIconPointers::
 	add_icon Raticate
+	add_icon RaticateAlola
 
 SpearowIconPointers::
 	add_icon Spearow
@@ -75,15 +85,33 @@ ArbokIconPointers::
 
 PikachuIconPointers::
 	add_icon Pikachu
+	add_icon PikachuCosplay
+	add_icon PikachuRockstar
+	add_icon PikachuBelle
+	add_icon PikachuPopstar
+	add_icon PikachuPhd
+	add_icon PikachuLibre
+	add_icon PikachuOg_cap
+	add_icon PikachuHoenn_cap
+	add_icon PikachuSinnoh_cap
+	add_icon PikachuUnova_cap
+	add_icon PikachuKalos_cap
+	add_icon PikachuAlola_cap
+	add_icon PikachuPartner_cap
+	add_icon PikachuLets_go
+	add_icon PikachuGiga
 
 RaichuIconPointers::
 	add_icon Raichu
+	add_icon RaichuAlola
 
 SandshrewIconPointers::
 	add_icon Sandshrew
+	add_icon SandshrewAlola
 
 SandslashIconPointers::
 	add_icon Sandslash
+	add_icon SandslashAlola
 
 Nidoran_fIconPointers::
 	add_icon Nidoran_f
@@ -111,9 +139,15 @@ ClefableIconPointers::
 
 VulpixIconPointers::
 	add_icon Vulpix
+	add_icon VulpixAlola
+	add_icon VulpixLoki
+	add_icon VulpixLoki_winter
 
 NinetalesIconPointers::
 	add_icon Ninetales
+	add_icon NinetalesAlola
+	add_icon NinetalesLoki
+	add_icon NinetalesLoki_winter
 
 JigglypuffIconPointers::
 	add_icon Jigglypuff
@@ -150,15 +184,21 @@ VenomothIconPointers::
 
 DiglettIconPointers::
 	add_icon Diglett
+	add_icon DiglettAlola
 
 DugtrioIconPointers::
 	add_icon Dugtrio
+	add_icon DugtrioAlola
 
 MeowthIconPointers::
 	add_icon Meowth
+	add_icon MeowthAlola
+	add_icon MeowthGalar
+	add_icon MeowthKanto_giga
 
 PersianIconPointers::
 	add_icon Persian
+	add_icon PersianAlola
 
 PsyduckIconPointers::
 	add_icon Psyduck
@@ -195,6 +235,7 @@ KadabraIconPointers::
 
 AlakazamIconPointers::
 	add_icon Alakazam
+	add_icon AlakazamMega
 
 MachopIconPointers::
 	add_icon Machop
@@ -204,6 +245,7 @@ MachokeIconPointers::
 
 MachampIconPointers::
 	add_icon Machamp
+	add_icon MachampGiga
 
 BellsproutIconPointers::
 	add_icon Bellsprout
@@ -222,24 +264,31 @@ TentacruelIconPointers::
 
 GeodudeIconPointers::
 	add_icon Geodude
+	add_icon GeodudeAlola
 
 GravelerIconPointers::
 	add_icon Graveler
+	add_icon GravelerAlola
 
 GolemIconPointers::
 	add_icon Golem
+	add_icon GolemAlola
 
 PonytaIconPointers::
 	add_icon Ponyta
+	add_icon PonytaGalar
 
 RapidashIconPointers::
 	add_icon Rapidash
+	add_icon RapidashGalar
 
 SlowpokeIconPointers::
 	add_icon Slowpoke
+	add_icon SlowpokeGalar
 
 SlowbroIconPointers::
 	add_icon Slowbro
+	add_icon SlowbroMega
 
 MagnemiteIconPointers::
 	add_icon Magnemite
@@ -249,6 +298,7 @@ MagnetonIconPointers::
 
 FarfetchdIconPointers::
 	add_icon Farfetchd
+	add_icon FarfetchdGalar
 
 DoduoIconPointers::
 	add_icon Doduo
@@ -264,9 +314,11 @@ DewgongIconPointers::
 
 GrimerIconPointers::
 	add_icon Grimer
+	add_icon GrimerAlola
 
 MukIconPointers::
 	add_icon Muk
+	add_icon MukAlola
 
 ShellderIconPointers::
 	add_icon Shellder
@@ -282,6 +334,8 @@ HaunterIconPointers::
 
 GengarIconPointers::
 	add_icon Gengar
+	add_icon GengarMega
+	add_icon GengarGiga
 
 OnixIconPointers::
 	add_icon Onix
@@ -297,6 +351,7 @@ KrabbyIconPointers::
 
 KinglerIconPointers::
 	add_icon Kingler
+	add_icon KinglerGiga
 
 VoltorbIconPointers::
 	add_icon Voltorb
@@ -309,12 +364,14 @@ ExeggcuteIconPointers::
 
 ExeggutorIconPointers::
 	add_icon Exeggutor
+	add_icon ExeggutorAlola
 
 CuboneIconPointers::
 	add_icon Cubone
 
 MarowakIconPointers::
 	add_icon Marowak
+	add_icon MarowakAlola
 
 HitmonleeIconPointers::
 	add_icon Hitmonlee
@@ -330,6 +387,7 @@ KoffingIconPointers::
 
 WeezingIconPointers::
 	add_icon Weezing
+	add_icon WeezingGalar
 
 RhyhornIconPointers::
 	add_icon Rhyhorn
@@ -345,6 +403,7 @@ TangelaIconPointers::
 
 KangaskhanIconPointers::
 	add_icon Kangaskhan
+	add_icon KangaskhanMega
 
 HorseaIconPointers::
 	add_icon Horsea
@@ -366,6 +425,7 @@ StarmieIconPointers::
 
 MrmimeIconPointers::
 	add_icon Mrmime
+	add_icon MrmimeGalar
 
 ScytherIconPointers::
 	add_icon Scyther
@@ -381,6 +441,7 @@ MagmarIconPointers::
 
 PinsirIconPointers::
 	add_icon Pinsir
+	add_icon PinsirMega
 
 TaurosIconPointers::
 	add_icon Tauros
@@ -390,15 +451,19 @@ MagikarpIconPointers::
 
 GyaradosIconPointers::
 	add_icon Gyarados
+	add_icon GyaradosMega
 
 LaprasIconPointers::
 	add_icon Lapras
+	add_icon LaprasGiga
 
 DittoIconPointers::
 	add_icon Ditto
 
 EeveeIconPointers::
 	add_icon Eevee
+	add_icon EeveeLets_go
+	add_icon EeveeGiga
 
 VaporeonIconPointers::
 	add_icon Vaporeon
@@ -408,6 +473,7 @@ JolteonIconPointers::
 
 FlareonIconPointers::
 	add_icon Flareon
+	add_icon FlareonDonut
 
 PorygonIconPointers::
 	add_icon Porygon
@@ -426,18 +492,23 @@ KabutopsIconPointers::
 
 AerodactylIconPointers::
 	add_icon Aerodactyl
+	add_icon AerodactylMega
 
 SnorlaxIconPointers::
 	add_icon Snorlax
+	add_icon SnorlaxGiga
 
 ArticunoIconPointers::
 	add_icon Articuno
+	add_icon ArticunoGalar
 
 ZapdosIconPointers::
 	add_icon Zapdos
+	add_icon ZapdosGalar
 
 MoltresIconPointers::
 	add_icon Moltres
+	add_icon MoltresGalar
 
 DratiniIconPointers::
 	add_icon Dratini
@@ -450,6 +521,8 @@ DragoniteIconPointers::
 
 MewtwoIconPointers::
 	add_icon Mewtwo
+	add_icon MewtwoMega_x
+	add_icon MewtwoMega_y
 
 MewIconPointers::
 	add_icon Mew

@@ -18,6 +18,9 @@ CharmeleonPalettePointers::
 
 CharizardPalettePointers::
 	add_palettes Charizard
+	add_palettes CharizardMega_x
+	add_palettes CharizardMega_y
+	add_palettes CharizardGiga
 
 SquirtlePalettePointers::
 	add_palettes Squirtle
@@ -27,6 +30,8 @@ WartortlePalettePointers::
 
 BlastoisePalettePointers::
 	add_palettes Blastoise
+	add_palettes BlastoiseMega
+	add_palettes BlastoiseGiga
 
 CaterpiePalettePointers::
 	add_palettes Caterpie
@@ -36,6 +41,7 @@ MetapodPalettePointers::
 
 ButterfreePalettePointers::
 	add_palettes Butterfree
+	add_palettes ButterfreeGiga
 
 WeedlePalettePointers::
 	add_palettes Weedle
@@ -45,6 +51,7 @@ KakunaPalettePointers::
 
 BeedrillPalettePointers::
 	add_palettes Beedrill
+	add_palettes BeedrillMega
 
 PidgeyPalettePointers::
 	add_palettes Pidgey
@@ -54,12 +61,15 @@ PidgeottoPalettePointers::
 
 PidgeotPalettePointers::
 	add_palettes Pidgeot
+	add_palettes PidgeotMega
 
 RattataPalettePointers::
 	add_palettes Rattata
+	add_palettes RattataAlola
 
 RaticatePalettePointers::
 	add_palettes Raticate
+	add_palettes RaticateAlola
 
 SpearowPalettePointers::
 	add_palettes Spearow
@@ -75,15 +85,33 @@ ArbokPalettePointers::
 
 PikachuPalettePointers::
 	add_palettes Pikachu
+	add_palettes PikachuCosplay
+	add_palettes PikachuRockstar
+	add_palettes PikachuBelle
+	add_palettes PikachuPopstar
+	add_palettes PikachuPhd
+	add_palettes PikachuLibre
+	add_palettes PikachuOg_cap
+	add_palettes PikachuHoenn_cap
+	add_palettes PikachuSinnoh_cap
+	add_palettes PikachuUnova_cap
+	add_palettes PikachuKalos_cap
+	add_palettes PikachuAlola_cap
+	add_palettes PikachuPartner_cap
+	add_palettes PikachuLets_go
+	add_palettes PikachuGiga
 
 RaichuPalettePointers::
 	add_palettes Raichu
+	add_palettes RaichuAlola
 
 SandshrewPalettePointers::
 	add_palettes Sandshrew
+	add_palettes SandshrewAlola
 
 SandslashPalettePointers::
 	add_palettes Sandslash
+	add_palettes SandslashAlola
 
 Nidoran_fPalettePointers::
 	add_palettes Nidoran_f
@@ -111,9 +139,15 @@ ClefablePalettePointers::
 
 VulpixPalettePointers::
 	add_palettes Vulpix
+	add_palettes VulpixAlola
+	add_palettes VulpixLoki
+	add_palettes VulpixLoki_winter
 
 NinetalesPalettePointers::
 	add_palettes Ninetales
+	add_palettes NinetalesAlola
+	add_palettes NinetalesLoki
+	add_palettes NinetalesLoki_winter
 
 JigglypuffPalettePointers::
 	add_palettes Jigglypuff
@@ -150,15 +184,21 @@ VenomothPalettePointers::
 
 DiglettPalettePointers::
 	add_palettes Diglett
+	add_palettes DiglettAlola
 
 DugtrioPalettePointers::
 	add_palettes Dugtrio
+	add_palettes DugtrioAlola
 
 MeowthPalettePointers::
 	add_palettes Meowth
+	add_palettes MeowthAlola
+	add_palettes MeowthGalar
+	add_palettes MeowthKanto_giga
 
 PersianPalettePointers::
 	add_palettes Persian
+	add_palettes PersianAlola
 
 PsyduckPalettePointers::
 	add_palettes Psyduck
@@ -195,6 +235,7 @@ KadabraPalettePointers::
 
 AlakazamPalettePointers::
 	add_palettes Alakazam
+	add_palettes AlakazamMega
 
 MachopPalettePointers::
 	add_palettes Machop
@@ -204,6 +245,7 @@ MachokePalettePointers::
 
 MachampPalettePointers::
 	add_palettes Machamp
+	add_palettes MachampGiga
 
 BellsproutPalettePointers::
 	add_palettes Bellsprout
@@ -222,24 +264,31 @@ TentacruelPalettePointers::
 
 GeodudePalettePointers::
 	add_palettes Geodude
+	add_palettes GeodudeAlola
 
 GravelerPalettePointers::
 	add_palettes Graveler
+	add_palettes GravelerAlola
 
 GolemPalettePointers::
 	add_palettes Golem
+	add_palettes GolemAlola
 
 PonytaPalettePointers::
 	add_palettes Ponyta
+	add_palettes PonytaGalar
 
 RapidashPalettePointers::
 	add_palettes Rapidash
+	add_palettes RapidashGalar
 
 SlowpokePalettePointers::
 	add_palettes Slowpoke
+	add_palettes SlowpokeGalar
 
 SlowbroPalettePointers::
 	add_palettes Slowbro
+	add_palettes SlowbroMega
 
 MagnemitePalettePointers::
 	add_palettes Magnemite
@@ -249,6 +298,7 @@ MagnetonPalettePointers::
 
 FarfetchdPalettePointers::
 	add_palettes Farfetchd
+	add_palettes FarfetchdGalar
 
 DoduoPalettePointers::
 	add_palettes Doduo
@@ -264,9 +314,11 @@ DewgongPalettePointers::
 
 GrimerPalettePointers::
 	add_palettes Grimer
+	add_palettes GrimerAlola
 
 MukPalettePointers::
 	add_palettes Muk
+	add_palettes MukAlola
 
 ShellderPalettePointers::
 	add_palettes Shellder
@@ -282,6 +334,8 @@ HaunterPalettePointers::
 
 GengarPalettePointers::
 	add_palettes Gengar
+	add_palettes GengarMega
+	add_palettes GengarGiga
 
 OnixPalettePointers::
 	add_palettes Onix
@@ -297,6 +351,7 @@ KrabbyPalettePointers::
 
 KinglerPalettePointers::
 	add_palettes Kingler
+	add_palettes KinglerGiga
 
 VoltorbPalettePointers::
 	add_palettes Voltorb
@@ -309,12 +364,14 @@ ExeggcutePalettePointers::
 
 ExeggutorPalettePointers::
 	add_palettes Exeggutor
+	add_palettes ExeggutorAlola
 
 CubonePalettePointers::
 	add_palettes Cubone
 
 MarowakPalettePointers::
 	add_palettes Marowak
+	add_palettes MarowakAlola
 
 HitmonleePalettePointers::
 	add_palettes Hitmonlee
@@ -330,6 +387,7 @@ KoffingPalettePointers::
 
 WeezingPalettePointers::
 	add_palettes Weezing
+	add_palettes WeezingGalar
 
 RhyhornPalettePointers::
 	add_palettes Rhyhorn
@@ -345,6 +403,7 @@ TangelaPalettePointers::
 
 KangaskhanPalettePointers::
 	add_palettes Kangaskhan
+	add_palettes KangaskhanMega
 
 HorseaPalettePointers::
 	add_palettes Horsea
@@ -366,6 +425,7 @@ StarmiePalettePointers::
 
 MrmimePalettePointers::
 	add_palettes Mrmime
+	add_palettes MrmimeGalar
 
 ScytherPalettePointers::
 	add_palettes Scyther
@@ -381,6 +441,7 @@ MagmarPalettePointers::
 
 PinsirPalettePointers::
 	add_palettes Pinsir
+	add_palettes PinsirMega
 
 TaurosPalettePointers::
 	add_palettes Tauros
@@ -390,15 +451,19 @@ MagikarpPalettePointers::
 
 GyaradosPalettePointers::
 	add_palettes Gyarados
+	add_palettes GyaradosMega
 
 LaprasPalettePointers::
 	add_palettes Lapras
+	add_palettes LaprasGiga
 
 DittoPalettePointers::
 	add_palettes Ditto
 
 EeveePalettePointers::
 	add_palettes Eevee
+	add_palettes EeveeLets_go
+	add_palettes EeveeGiga
 
 VaporeonPalettePointers::
 	add_palettes Vaporeon
@@ -408,6 +473,7 @@ JolteonPalettePointers::
 
 FlareonPalettePointers::
 	add_palettes Flareon
+	add_palettes FlareonDonut
 
 PorygonPalettePointers::
 	add_palettes Porygon
@@ -426,18 +492,23 @@ KabutopsPalettePointers::
 
 AerodactylPalettePointers::
 	add_palettes Aerodactyl
+	add_palettes AerodactylMega
 
 SnorlaxPalettePointers::
 	add_palettes Snorlax
+	add_palettes SnorlaxGiga
 
 ArticunoPalettePointers::
 	add_palettes Articuno
+	add_palettes ArticunoGalar
 
 ZapdosPalettePointers::
 	add_palettes Zapdos
+	add_palettes ZapdosGalar
 
 MoltresPalettePointers::
 	add_palettes Moltres
+	add_palettes MoltresGalar
 
 DratiniPalettePointers::
 	add_palettes Dratini
@@ -450,6 +521,8 @@ DragonitePalettePointers::
 
 MewtwoPalettePointers::
 	add_palettes Mewtwo
+	add_palettes MewtwoMega_x
+	add_palettes MewtwoMega_y
 
 MewPalettePointers::
 	add_palettes Mew

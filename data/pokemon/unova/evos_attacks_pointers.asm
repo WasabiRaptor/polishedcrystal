@@ -82,6 +82,7 @@ TranquillEvosAttacksPointers::
 
 UnfezantEvosAttacksPointers::
 	add_evosattacks Unfezant
+	add_evosattacks UnfezantF
 
 BlitzleEvosAttacksPointers::
 	add_evosattacks Blitzle
@@ -112,6 +113,7 @@ ExcadrillEvosAttacksPointers::
 
 AudinoEvosAttacksPointers::
 	add_evosattacks Audino
+	add_evosattacks AudinoMega
 
 TimburrEvosAttacksPointers::
 	add_evosattacks Timburr
@@ -181,9 +183,13 @@ KrookodileEvosAttacksPointers::
 
 DarumakaEvosAttacksPointers::
 	add_evosattacks Darumaka
+	add_evosattacks DarumakaGalar
 
 DarmanitanEvosAttacksPointers::
 	add_evosattacks Darmanitan
+	add_evosattacks DarmanitanZen
+	add_evosattacks DarmanitanGalar
+	add_evosattacks DarmanitanGalar_zen
 
 MaractusEvosAttacksPointers::
 	add_evosattacks Maractus
@@ -205,6 +211,7 @@ SigilyphEvosAttacksPointers::
 
 YamaskEvosAttacksPointers::
 	add_evosattacks Yamask
+	add_evosattacks YamaskGalar
 
 CofagrigusEvosAttacksPointers::
 	add_evosattacks Cofagrigus
@@ -226,6 +233,7 @@ TrubbishEvosAttacksPointers::
 
 GarbodorEvosAttacksPointers::
 	add_evosattacks Garbodor
+	add_evosattacks GarbodorGiga
 
 ZoruaEvosAttacksPointers::
 	add_evosattacks Zorua
@@ -274,9 +282,15 @@ VanilluxeEvosAttacksPointers::
 
 DeerlingEvosAttacksPointers::
 	add_evosattacks Deerling
+	add_evosattacks DeerlingSummer
+	add_evosattacks DeerlingAutumn
+	add_evosattacks DeerlingWinter
 
 SawsbuckEvosAttacksPointers::
 	add_evosattacks Sawsbuck
+	add_evosattacks SawsbuckSummer
+	add_evosattacks SawsbuckAutumn
+	add_evosattacks SawsbuckWinter
 
 EmolgaEvosAttacksPointers::
 	add_evosattacks Emolga
@@ -373,6 +387,7 @@ AccelgorEvosAttacksPointers::
 
 StunfiskEvosAttacksPointers::
 	add_evosattacks Stunfisk
+	add_evosattacks StunfiskGalar
 
 MienfooEvosAttacksPointers::
 	add_evosattacks Mienfoo
@@ -442,9 +457,11 @@ VirizionEvosAttacksPointers::
 
 TornadusEvosAttacksPointers::
 	add_evosattacks Tornadus
+	add_evosattacks TornadusTherian
 
 ThundurusEvosAttacksPointers::
 	add_evosattacks Thundurus
+	add_evosattacks ThundurusTherian
 
 ReshiramEvosAttacksPointers::
 	add_evosattacks Reshiram
@@ -454,15 +471,20 @@ ZekromEvosAttacksPointers::
 
 LandorusEvosAttacksPointers::
 	add_evosattacks Landorus
+	add_evosattacks LandorusTherian
 
 KyuremEvosAttacksPointers::
 	add_evosattacks Kyurem
+	add_evosattacks KyuremBlack
+	add_evosattacks KyuremWhite
 
 KeldeoEvosAttacksPointers::
 	add_evosattacks Keldeo
+	add_evosattacks KeldeoResolute
 
 MeloettaEvosAttacksPointers::
 	add_evosattacks Meloetta
+	add_evosattacks MeloettaPirouette
 
 GenesectEvosAttacksPointers::
 	add_evosattacks Genesect

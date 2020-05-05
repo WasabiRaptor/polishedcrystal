@@ -7,6 +7,7 @@ GrovyleFramesPointers::
 
 SceptileFramesPointers::
 	add_frames Sceptile
+	add_frames SceptileMega
 
 TorchicFramesPointers::
 	add_frames Torchic
@@ -16,6 +17,7 @@ CombuskenFramesPointers::
 
 BlazikenFramesPointers::
 	add_frames Blaziken
+	add_frames BlazikenMega
 
 MudkipFramesPointers::
 	add_frames Mudkip
@@ -25,6 +27,7 @@ MarshtompFramesPointers::
 
 SwampertFramesPointers::
 	add_frames Swampert
+	add_frames SwampertMega
 
 PoochyenaFramesPointers::
 	add_frames Poochyena
@@ -34,9 +37,11 @@ MightyenaFramesPointers::
 
 ZigzagoonFramesPointers::
 	add_frames Zigzagoon
+	add_frames ZigzagoonGalar
 
 LinooneFramesPointers::
 	add_frames Linoone
+	add_frames LinooneGalar
 
 WurmpleFramesPointers::
 	add_frames Wurmple
@@ -91,6 +96,7 @@ KirliaFramesPointers::
 
 GardevoirFramesPointers::
 	add_frames Gardevoir
+	add_frames GardevoirMega
 
 SurskitFramesPointers::
 	add_frames Surskit
@@ -151,9 +157,11 @@ DelcattyFramesPointers::
 
 SableyeFramesPointers::
 	add_frames Sableye
+	add_frames SableyeMega
 
 MawileFramesPointers::
 	add_frames Mawile
+	add_frames MawileMega
 
 AronFramesPointers::
 	add_frames Aron
@@ -163,18 +171,21 @@ LaironFramesPointers::
 
 AggronFramesPointers::
 	add_frames Aggron
+	add_frames AggronMega
 
 MedititeFramesPointers::
 	add_frames Meditite
 
 MedichamFramesPointers::
 	add_frames Medicham
+	add_frames MedichamMega
 
 ElectrikeFramesPointers::
 	add_frames Electrike
 
 ManectricFramesPointers::
 	add_frames Manectric
+	add_frames ManectricMega
 
 PlusleFramesPointers::
 	add_frames Plusle
@@ -202,6 +213,7 @@ CarvanhaFramesPointers::
 
 SharpedoFramesPointers::
 	add_frames Sharpedo
+	add_frames SharpedoMega
 
 WailmerFramesPointers::
 	add_frames Wailmer
@@ -214,6 +226,7 @@ NumelFramesPointers::
 
 CameruptFramesPointers::
 	add_frames Camerupt
+	add_frames CameruptMega
 
 TorkoalFramesPointers::
 	add_frames Torkoal
@@ -247,6 +260,7 @@ SwabluFramesPointers::
 
 AltariaFramesPointers::
 	add_frames Altaria
+	add_frames AltariaMega
 
 ZangooseFramesPointers::
 	add_frames Zangoose
@@ -298,6 +312,9 @@ MiloticFramesPointers::
 
 CastformFramesPointers::
 	add_frames Castform
+	add_frames CastformSun
+	add_frames CastformRain
+	add_frames CastformSnow
 
 KecleonFramesPointers::
 	add_frames Kecleon
@@ -307,6 +324,7 @@ ShuppetFramesPointers::
 
 BanetteFramesPointers::
 	add_frames Banette
+	add_frames BanetteMega
 
 DuskullFramesPointers::
 	add_frames Duskull
@@ -322,6 +340,7 @@ ChimechoFramesPointers::
 
 AbsolFramesPointers::
 	add_frames Absol
+	add_frames AbsolMega
 
 WynautFramesPointers::
 	add_frames Wynaut
@@ -331,6 +350,7 @@ SnoruntFramesPointers::
 
 GlalieFramesPointers::
 	add_frames Glalie
+	add_frames GlalieMega
 
 SphealFramesPointers::
 	add_frames Spheal
@@ -364,6 +384,7 @@ ShelgonFramesPointers::
 
 SalamenceFramesPointers::
 	add_frames Salamence
+	add_frames SalamenceMega
 
 BeldumFramesPointers::
 	add_frames Beldum
@@ -373,6 +394,7 @@ MetangFramesPointers::
 
 MetagrossFramesPointers::
 	add_frames Metagross
+	add_frames MetagrossMega
 
 RegirockFramesPointers::
 	add_frames Regirock
@@ -385,22 +407,30 @@ RegisteelFramesPointers::
 
 LatiasFramesPointers::
 	add_frames Latias
+	add_frames LatiasMega
 
 LatiosFramesPointers::
 	add_frames Latios
+	add_frames LatiosMega
 
 KyogreFramesPointers::
 	add_frames Kyogre
+	add_frames KyogrePrimal
 
 GroudonFramesPointers::
 	add_frames Groudon
+	add_frames GroudonPrimal
 
 RayquazaFramesPointers::
 	add_frames Rayquaza
+	add_frames RayquazaMega
 
 JirachiFramesPointers::
 	add_frames Jirachi
 
 DeoxysFramesPointers::
 	add_frames Deoxys
+	add_frames DeoxysAttack
+	add_frames DeoxysDefense
+	add_frames DeoxysSpeed
 

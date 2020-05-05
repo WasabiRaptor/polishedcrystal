@@ -61,6 +61,7 @@ LanturnFramesPointers::
 
 PichuFramesPointers::
 	add_frames Pichu
+	add_frames PichuSpiky_eared
 
 CleffaFramesPointers::
 	add_frames Cleffa
@@ -88,6 +89,7 @@ FlaaffyFramesPointers::
 
 AmpharosFramesPointers::
 	add_frames Ampharos
+	add_frames AmpharosMega
 
 BellossomFramesPointers::
 	add_frames Bellossom
@@ -148,6 +150,34 @@ MisdreavusFramesPointers::
 
 UnownFramesPointers::
 	add_frames Unown
+	add_frames UnownA
+	add_frames UnownB
+	add_frames UnownC
+	add_frames UnownD
+	add_frames UnownE
+	add_frames UnownF
+	add_frames UnownG
+	add_frames UnownH
+	add_frames UnownI
+	add_frames UnownJ
+	add_frames UnownK
+	add_frames UnownL
+	add_frames UnownM
+	add_frames UnownN
+	add_frames UnownO
+	add_frames UnownP
+	add_frames UnownQ
+	add_frames UnownR
+	add_frames UnownS
+	add_frames UnownT
+	add_frames UnownU
+	add_frames UnownV
+	add_frames UnownW
+	add_frames UnownX
+	add_frames UnownY
+	add_frames UnownZ
+	add_frames UnownExclamation_mark
+	add_frames UnownQuestion_mark
 
 WobbuffetFramesPointers::
 	add_frames Wobbuffet
@@ -169,6 +199,7 @@ GligarFramesPointers::
 
 SteelixFramesPointers::
 	add_frames Steelix
+	add_frames SteelixMega
 
 SnubbullFramesPointers::
 	add_frames Snubbull
@@ -181,12 +212,14 @@ QwilfishFramesPointers::
 
 ScizorFramesPointers::
 	add_frames Scizor
+	add_frames ScizorMega
 
 ShuckleFramesPointers::
 	add_frames Shuckle
 
 HeracrossFramesPointers::
 	add_frames Heracross
+	add_frames HeracrossMega
 
 SneaselFramesPointers::
 	add_frames Sneasel
@@ -211,6 +244,7 @@ PiloswineFramesPointers::
 
 CorsolaFramesPointers::
 	add_frames Corsola
+	add_frames CorsolaGalar
 
 RemoraidFramesPointers::
 	add_frames Remoraid
@@ -232,6 +266,7 @@ HoundourFramesPointers::
 
 HoundoomFramesPointers::
 	add_frames Houndoom
+	add_frames HoundoomMega
 
 KingdraFramesPointers::
 	add_frames Kingdra
@@ -289,6 +324,7 @@ PupitarFramesPointers::
 
 TyranitarFramesPointers::
 	add_frames Tyranitar
+	add_frames TyranitarMega
 
 LugiaFramesPointers::
 	add_frames Lugia

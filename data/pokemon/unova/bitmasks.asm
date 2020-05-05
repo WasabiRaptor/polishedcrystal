@@ -54,6 +54,7 @@ PidoveBitmasks:	INCLUDE "gfx/pokemon/pidove/bitmask.asm"
 TranquillBitmasks:	INCLUDE "gfx/pokemon/tranquill/bitmask.asm"
 
 UnfezantBitmasks:	INCLUDE "gfx/pokemon/unfezant/bitmask.asm"
+UnfezantFBitmasks::	INCLUDE "gfx/pokemon/unfezant_f/bitmask.asm"
 
 BlitzleBitmasks:	INCLUDE "gfx/pokemon/blitzle/bitmask.asm"
 
@@ -74,6 +75,7 @@ DrilburBitmasks:	INCLUDE "gfx/pokemon/drilbur/bitmask.asm"
 ExcadrillBitmasks:	INCLUDE "gfx/pokemon/excadrill/bitmask.asm"
 
 AudinoBitmasks:	INCLUDE "gfx/pokemon/audino/bitmask.asm"
+AudinoMegaBitmasks::	INCLUDE "gfx/pokemon/audino_mega/bitmask.asm"
 
 TimburrBitmasks:	INCLUDE "gfx/pokemon/timburr/bitmask.asm"
 
@@ -120,8 +122,12 @@ KrokorokBitmasks:	INCLUDE "gfx/pokemon/krokorok/bitmask.asm"
 KrookodileBitmasks:	INCLUDE "gfx/pokemon/krookodile/bitmask.asm"
 
 DarumakaBitmasks:	INCLUDE "gfx/pokemon/darumaka/bitmask.asm"
+DarumakaGalarBitmasks::	INCLUDE "gfx/pokemon/darumaka_galar/bitmask.asm"
 
 DarmanitanBitmasks:	INCLUDE "gfx/pokemon/darmanitan/bitmask.asm"
+DarmanitanZenBitmasks::	INCLUDE "gfx/pokemon/darmanitan_zen/bitmask.asm"
+DarmanitanGalarBitmasks::	INCLUDE "gfx/pokemon/darmanitan_galar/bitmask.asm"
+DarmanitanGalar_zenBitmasks::	INCLUDE "gfx/pokemon/darmanitan_galar_zen/bitmask.asm"
 
 MaractusBitmasks:	INCLUDE "gfx/pokemon/maractus/bitmask.asm"
 
@@ -136,6 +142,7 @@ ScraftyBitmasks:	INCLUDE "gfx/pokemon/scrafty/bitmask.asm"
 SigilyphBitmasks:	INCLUDE "gfx/pokemon/sigilyph/bitmask.asm"
 
 YamaskBitmasks:	INCLUDE "gfx/pokemon/yamask/bitmask.asm"
+YamaskGalarBitmasks::	INCLUDE "gfx/pokemon/yamask_galar/bitmask.asm"
 
 CofagrigusBitmasks:	INCLUDE "gfx/pokemon/cofagrigus/bitmask.asm"
 
@@ -150,6 +157,7 @@ ArcheopsBitmasks:	INCLUDE "gfx/pokemon/archeops/bitmask.asm"
 TrubbishBitmasks:	INCLUDE "gfx/pokemon/trubbish/bitmask.asm"
 
 GarbodorBitmasks:	INCLUDE "gfx/pokemon/garbodor/bitmask.asm"
+GarbodorGigaBitmasks::	INCLUDE "gfx/pokemon/garbodor_giga/bitmask.asm"
 
 ZoruaBitmasks:	INCLUDE "gfx/pokemon/zorua/bitmask.asm"
 
@@ -182,8 +190,14 @@ VanillishBitmasks:	INCLUDE "gfx/pokemon/vanillish/bitmask.asm"
 VanilluxeBitmasks:	INCLUDE "gfx/pokemon/vanilluxe/bitmask.asm"
 
 DeerlingBitmasks:	INCLUDE "gfx/pokemon/deerling/bitmask.asm"
+DeerlingSummerBitmasks::	INCLUDE "gfx/pokemon/deerling_summer/bitmask.asm"
+DeerlingAutumnBitmasks::	INCLUDE "gfx/pokemon/deerling_autumn/bitmask.asm"
+DeerlingWinterBitmasks::	INCLUDE "gfx/pokemon/deerling_winter/bitmask.asm"
 
 SawsbuckBitmasks:	INCLUDE "gfx/pokemon/sawsbuck/bitmask.asm"
+SawsbuckSummerBitmasks::	INCLUDE "gfx/pokemon/sawsbuck_summer/bitmask.asm"
+SawsbuckAutumnBitmasks::	INCLUDE "gfx/pokemon/sawsbuck_autumn/bitmask.asm"
+SawsbuckWinterBitmasks::	INCLUDE "gfx/pokemon/sawsbuck_winter/bitmask.asm"
 
 EmolgaBitmasks:	INCLUDE "gfx/pokemon/emolga/bitmask.asm"
 
@@ -248,6 +262,7 @@ ShelmetBitmasks:	INCLUDE "gfx/pokemon/shelmet/bitmask.asm"
 AccelgorBitmasks:	INCLUDE "gfx/pokemon/accelgor/bitmask.asm"
 
 StunfiskBitmasks:	INCLUDE "gfx/pokemon/stunfisk/bitmask.asm"
+StunfiskGalarBitmasks::	INCLUDE "gfx/pokemon/stunfisk_galar/bitmask.asm"
 
 MienfooBitmasks:	INCLUDE "gfx/pokemon/mienfoo/bitmask.asm"
 
@@ -294,20 +309,27 @@ TerrakionBitmasks:	INCLUDE "gfx/pokemon/terrakion/bitmask.asm"
 VirizionBitmasks:	INCLUDE "gfx/pokemon/virizion/bitmask.asm"
 
 TornadusBitmasks:	INCLUDE "gfx/pokemon/tornadus/bitmask.asm"
+TornadusTherianBitmasks::	INCLUDE "gfx/pokemon/tornadus_therian/bitmask.asm"
 
 ThundurusBitmasks:	INCLUDE "gfx/pokemon/thundurus/bitmask.asm"
+ThundurusTherianBitmasks::	INCLUDE "gfx/pokemon/thundurus_therian/bitmask.asm"
 
 ReshiramBitmasks:	INCLUDE "gfx/pokemon/reshiram/bitmask.asm"
 
 ZekromBitmasks:	INCLUDE "gfx/pokemon/zekrom/bitmask.asm"
 
 LandorusBitmasks:	INCLUDE "gfx/pokemon/landorus/bitmask.asm"
+LandorusTherianBitmasks::	INCLUDE "gfx/pokemon/landorus_therian/bitmask.asm"
 
 KyuremBitmasks:	INCLUDE "gfx/pokemon/kyurem/bitmask.asm"
+KyuremBlackBitmasks::	INCLUDE "gfx/pokemon/kyurem_black/bitmask.asm"
+KyuremWhiteBitmasks::	INCLUDE "gfx/pokemon/kyurem_white/bitmask.asm"
 
 KeldeoBitmasks:	INCLUDE "gfx/pokemon/keldeo/bitmask.asm"
+KeldeoResoluteBitmasks::	INCLUDE "gfx/pokemon/keldeo_resolute/bitmask.asm"
 
 MeloettaBitmasks:	INCLUDE "gfx/pokemon/meloetta/bitmask.asm"
+MeloettaPirouetteBitmasks::	INCLUDE "gfx/pokemon/meloetta_pirouette/bitmask.asm"
 
 GenesectBitmasks:	INCLUDE "gfx/pokemon/genesect/bitmask.asm"
 

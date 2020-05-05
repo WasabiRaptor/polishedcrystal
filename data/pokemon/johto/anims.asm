@@ -40,6 +40,7 @@ ChinchouAnimation:	INCLUDE "gfx/pokemon/chinchou/anim.asm"
 LanturnAnimation:	INCLUDE "gfx/pokemon/lanturn/anim.asm"
 
 PichuAnimation:	INCLUDE "gfx/pokemon/pichu/anim.asm"
+PichuSpiky_earedAnimation::	INCLUDE "gfx/pokemon/pichu_spiky_eared/anim.asm"
 
 CleffaAnimation:	INCLUDE "gfx/pokemon/cleffa/anim.asm"
 
@@ -58,6 +59,7 @@ MareepAnimation:	INCLUDE "gfx/pokemon/mareep/anim.asm"
 FlaaffyAnimation:	INCLUDE "gfx/pokemon/flaaffy/anim.asm"
 
 AmpharosAnimation:	INCLUDE "gfx/pokemon/ampharos/anim.asm"
+AmpharosMegaAnimation::	INCLUDE "gfx/pokemon/ampharos_mega/anim.asm"
 
 BellossomAnimation:	INCLUDE "gfx/pokemon/bellossom/anim.asm"
 
@@ -98,6 +100,34 @@ SlowkingAnimation:	INCLUDE "gfx/pokemon/slowking/anim.asm"
 MisdreavusAnimation:	INCLUDE "gfx/pokemon/misdreavus/anim.asm"
 
 UnownAnimation:	INCLUDE "gfx/pokemon/unown/anim.asm"
+UnownAAnimation::	INCLUDE "gfx/pokemon/unown_a/anim.asm"
+UnownBAnimation::	INCLUDE "gfx/pokemon/unown_b/anim.asm"
+UnownCAnimation::	INCLUDE "gfx/pokemon/unown_c/anim.asm"
+UnownDAnimation::	INCLUDE "gfx/pokemon/unown_d/anim.asm"
+UnownEAnimation::	INCLUDE "gfx/pokemon/unown_e/anim.asm"
+UnownFAnimation::	INCLUDE "gfx/pokemon/unown_f/anim.asm"
+UnownGAnimation::	INCLUDE "gfx/pokemon/unown_g/anim.asm"
+UnownHAnimation::	INCLUDE "gfx/pokemon/unown_h/anim.asm"
+UnownIAnimation::	INCLUDE "gfx/pokemon/unown_i/anim.asm"
+UnownJAnimation::	INCLUDE "gfx/pokemon/unown_j/anim.asm"
+UnownKAnimation::	INCLUDE "gfx/pokemon/unown_k/anim.asm"
+UnownLAnimation::	INCLUDE "gfx/pokemon/unown_l/anim.asm"
+UnownMAnimation::	INCLUDE "gfx/pokemon/unown_m/anim.asm"
+UnownNAnimation::	INCLUDE "gfx/pokemon/unown_n/anim.asm"
+UnownOAnimation::	INCLUDE "gfx/pokemon/unown_o/anim.asm"
+UnownPAnimation::	INCLUDE "gfx/pokemon/unown_p/anim.asm"
+UnownQAnimation::	INCLUDE "gfx/pokemon/unown_q/anim.asm"
+UnownRAnimation::	INCLUDE "gfx/pokemon/unown_r/anim.asm"
+UnownSAnimation::	INCLUDE "gfx/pokemon/unown_s/anim.asm"
+UnownTAnimation::	INCLUDE "gfx/pokemon/unown_t/anim.asm"
+UnownUAnimation::	INCLUDE "gfx/pokemon/unown_u/anim.asm"
+UnownVAnimation::	INCLUDE "gfx/pokemon/unown_v/anim.asm"
+UnownWAnimation::	INCLUDE "gfx/pokemon/unown_w/anim.asm"
+UnownXAnimation::	INCLUDE "gfx/pokemon/unown_x/anim.asm"
+UnownYAnimation::	INCLUDE "gfx/pokemon/unown_y/anim.asm"
+UnownZAnimation::	INCLUDE "gfx/pokemon/unown_z/anim.asm"
+UnownExclamation_markAnimation::	INCLUDE "gfx/pokemon/unown_exclamation_mark/anim.asm"
+UnownQuestion_markAnimation::	INCLUDE "gfx/pokemon/unown_question_mark/anim.asm"
 
 WobbuffetAnimation:	INCLUDE "gfx/pokemon/wobbuffet/anim.asm"
 
@@ -112,6 +142,7 @@ DunsparceAnimation:	INCLUDE "gfx/pokemon/dunsparce/anim.asm"
 GligarAnimation:	INCLUDE "gfx/pokemon/gligar/anim.asm"
 
 SteelixAnimation:	INCLUDE "gfx/pokemon/steelix/anim.asm"
+SteelixMegaAnimation::	INCLUDE "gfx/pokemon/steelix_mega/anim.asm"
 
 SnubbullAnimation:	INCLUDE "gfx/pokemon/snubbull/anim.asm"
 
@@ -120,10 +151,12 @@ GranbullAnimation:	INCLUDE "gfx/pokemon/granbull/anim.asm"
 QwilfishAnimation:	INCLUDE "gfx/pokemon/qwilfish/anim.asm"
 
 ScizorAnimation:	INCLUDE "gfx/pokemon/scizor/anim.asm"
+ScizorMegaAnimation::	INCLUDE "gfx/pokemon/scizor_mega/anim.asm"
 
 ShuckleAnimation:	INCLUDE "gfx/pokemon/shuckle/anim.asm"
 
 HeracrossAnimation:	INCLUDE "gfx/pokemon/heracross/anim.asm"
+HeracrossMegaAnimation::	INCLUDE "gfx/pokemon/heracross_mega/anim.asm"
 
 SneaselAnimation:	INCLUDE "gfx/pokemon/sneasel/anim.asm"
 
@@ -140,6 +173,7 @@ SwinubAnimation:	INCLUDE "gfx/pokemon/swinub/anim.asm"
 PiloswineAnimation:	INCLUDE "gfx/pokemon/piloswine/anim.asm"
 
 CorsolaAnimation:	INCLUDE "gfx/pokemon/corsola/anim.asm"
+CorsolaGalarAnimation::	INCLUDE "gfx/pokemon/corsola_galar/anim.asm"
 
 RemoraidAnimation:	INCLUDE "gfx/pokemon/remoraid/anim.asm"
 
@@ -154,6 +188,7 @@ SkarmoryAnimation:	INCLUDE "gfx/pokemon/skarmory/anim.asm"
 HoundourAnimation:	INCLUDE "gfx/pokemon/houndour/anim.asm"
 
 HoundoomAnimation:	INCLUDE "gfx/pokemon/houndoom/anim.asm"
+HoundoomMegaAnimation::	INCLUDE "gfx/pokemon/houndoom_mega/anim.asm"
 
 KingdraAnimation:	INCLUDE "gfx/pokemon/kingdra/anim.asm"
 
@@ -192,6 +227,7 @@ LarvitarAnimation:	INCLUDE "gfx/pokemon/larvitar/anim.asm"
 PupitarAnimation:	INCLUDE "gfx/pokemon/pupitar/anim.asm"
 
 TyranitarAnimation:	INCLUDE "gfx/pokemon/tyranitar/anim.asm"
+TyranitarMegaAnimation::	INCLUDE "gfx/pokemon/tyranitar_mega/anim.asm"
 
 LugiaAnimation:	INCLUDE "gfx/pokemon/lugia/anim.asm"
 

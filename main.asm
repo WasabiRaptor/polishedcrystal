@@ -5690,6 +5690,7 @@ SECTION "Kanto Base Data 3", ROMX
 INCLUDE "data/pokemon/kanto/dex_entry_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/dex_entry_pointers.asm"
 
+
 SECTION "Johto Base Data 1", ROMX
 
 INCLUDE "data/pokemon/johto/base_stat_pointer_table.asm"
@@ -5714,6 +5715,7 @@ SECTION "Johto Base Data 3", ROMX
 
 INCLUDE "data/pokemon/johto/dex_entry_pointer_table.asm"
 INCLUDE "data/pokemon/johto/dex_entry_pointers.asm"
+
 
 SECTION "Hoenn Base Data 1", ROMX
 
@@ -5740,6 +5742,7 @@ SECTION "Hoenn Base Data 3", ROMX
 INCLUDE "data/pokemon/hoenn/dex_entry_pointer_table.asm"
 INCLUDE "data/pokemon/hoenn/dex_entry_pointers.asm"
 
+
 SECTION "Sinnoh Base Data 1", ROMX
 
 INCLUDE "data/pokemon/sinnoh/base_stat_pointer_table.asm"
@@ -5765,6 +5768,7 @@ SECTION "Sinnoh Base Data 3", ROMX
 INCLUDE "data/pokemon/sinnoh/dex_entry_pointer_table.asm"
 INCLUDE "data/pokemon/sinnoh/dex_entry_pointers.asm"
 
+
 SECTION "Unova Base Data 1", ROMX
 
 INCLUDE "data/pokemon/unova/base_stat_pointer_table.asm"
@@ -5781,14 +5785,15 @@ INCLUDE "data/pokemon/unova/palettes.asm"
 
 SECTION "Unova Base Data 2", ROMX
 
-;INCLUDE "data/pokemon/unova/overworld_palette_pointer_table.asm"
-;INCLUDE "data/pokemon/unova/overworld_palette_pointers.asm"
-;INCLUDE "data/pokemon/unova/overworld_palettes.asm"
+INCLUDE "data/pokemon/unova/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/unova/overworld_palette_pointers.asm"
+INCLUDE "data/pokemon/unova/overworld_palettes.asm"
 
 SECTION "Unova Base Data 3", ROMX
 
 INCLUDE "data/pokemon/unova/dex_entry_pointer_table.asm"
 INCLUDE "data/pokemon/unova/dex_entry_pointers.asm"
+
 
 SECTION "Kalos Base Data 1", ROMX
 
@@ -5806,14 +5811,67 @@ INCLUDE "data/pokemon/kalos/palettes.asm"
 
 SECTION "Kalos Base Data 2", ROMX
 
-;INCLUDE "data/pokemon/kalos/overworld_palette_pointer_table.asm"
-;INCLUDE "data/pokemon/kalos/overworld_palette_pointers.asm"
-;INCLUDE "data/pokemon/kalos/overworld_palettes.asm"
+INCLUDE "data/pokemon/kalos/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/overworld_palette_pointers.asm"
+INCLUDE "data/pokemon/kalos/overworld_palettes.asm"
 
 SECTION "Kalos Base Data 3", ROMX
 
 INCLUDE "data/pokemon/kalos/dex_entry_pointer_table.asm"
 INCLUDE "data/pokemon/kalos/dex_entry_pointers.asm"
+
+
+SECTION "Alola Base Data 1", ROMX
+
+INCLUDE "data/pokemon/alola/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/alola/base_stat_pointers.asm"
+INCLUDE "data/pokemon/alola/base_stats.asm"
+
+INCLUDE "data/pokemon/alola/name_pointer_table.asm"
+INCLUDE "data/pokemon/alola/name_pointers.asm"
+INCLUDE "data/pokemon/alola/names.asm"
+
+INCLUDE "data/pokemon/alola/palette_pointer_table.asm"
+INCLUDE "data/pokemon/alola/palette_pointers.asm"
+INCLUDE "data/pokemon/alola/palettes.asm"
+
+SECTION "Alola Base Data 2", ROMX
+
+INCLUDE "data/pokemon/alola/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/alola/overworld_palette_pointers.asm"
+INCLUDE "data/pokemon/alola/overworld_palettes.asm"
+
+SECTION "Alola Base Data 3", ROMX
+
+INCLUDE "data/pokemon/alola/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/alola/dex_entry_pointers.asm"
+
+
+SECTION "Galar Base Data 1", ROMX
+
+INCLUDE "data/pokemon/galar/base_stat_pointer_table.asm"
+INCLUDE "data/pokemon/galar/base_stat_pointers.asm"
+INCLUDE "data/pokemon/galar/base_stats.asm"
+
+INCLUDE "data/pokemon/galar/name_pointer_table.asm"
+INCLUDE "data/pokemon/galar/name_pointers.asm"
+INCLUDE "data/pokemon/galar/names.asm"
+
+INCLUDE "data/pokemon/galar/palette_pointer_table.asm"
+INCLUDE "data/pokemon/galar/palette_pointers.asm"
+INCLUDE "data/pokemon/galar/palettes.asm"
+
+SECTION "Galar Base Data 2", ROMX
+
+INCLUDE "data/pokemon/galar/overworld_palette_pointer_table.asm"
+INCLUDE "data/pokemon/galar/overworld_palette_pointers.asm"
+INCLUDE "data/pokemon/galar/overworld_palettes.asm"
+
+SECTION "Galar Base Data 3", ROMX
+
+INCLUDE "data/pokemon/galar/dex_entry_pointer_table.asm"
+INCLUDE "data/pokemon/galar/dex_entry_pointers.asm"
+
 
 SECTION "Other Base Data", ROMX
 ;INCLUDE "data/pokemon/other/base_stat_pointer_table.asm"
@@ -5860,6 +5918,34 @@ SECTION "Sinnoh Overworld Sprites", ROMX
 INCLUDE "data/pokemon/sinnoh/overworld_sprite_pointer_table.asm"
 INCLUDE "data/pokemon/sinnoh/overworld_sprite_pointers.asm"
 INCLUDE "data/pokemon/sinnoh/overworld_sprites.asm"
+
+
+SECTION "Unova Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/unova/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/unova/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/unova/overworld_sprites.asm"
+
+
+SECTION "Kalos Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/kalos/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/kalos/overworld_sprites.asm"
+
+
+SECTION "Alola Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/alola/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/alola/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/alola/overworld_sprites.asm"
+
+
+SECTION "Galar Overworld Sprites", ROMX
+
+INCLUDE "data/pokemon/galar/overworld_sprite_pointer_table.asm"
+INCLUDE "data/pokemon/galar/overworld_sprite_pointers.asm"
+INCLUDE "data/pokemon/galar/overworld_sprites.asm"
 
 ;blank one for when you have no follower
 FollowerSpriteGFX::        INCBIN "gfx/sprites/pokemon/aa_dummy/overworld.2bpp"

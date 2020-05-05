@@ -61,6 +61,7 @@ LanturnOverworldPalettePointers::
 
 PichuOverworldPalettePointers::
 	add_overworldpalettes Pichu
+	add_overworldpalettes PichuSpiky_eared
 
 CleffaOverworldPalettePointers::
 	add_overworldpalettes Cleffa
@@ -88,6 +89,7 @@ FlaaffyOverworldPalettePointers::
 
 AmpharosOverworldPalettePointers::
 	add_overworldpalettes Ampharos
+	add_overworldpalettes AmpharosMega
 
 BellossomOverworldPalettePointers::
 	add_overworldpalettes Bellossom
@@ -148,6 +150,34 @@ MisdreavusOverworldPalettePointers::
 
 UnownOverworldPalettePointers::
 	add_overworldpalettes Unown
+	add_overworldpalettes UnownA
+	add_overworldpalettes UnownB
+	add_overworldpalettes UnownC
+	add_overworldpalettes UnownD
+	add_overworldpalettes UnownE
+	add_overworldpalettes UnownF
+	add_overworldpalettes UnownG
+	add_overworldpalettes UnownH
+	add_overworldpalettes UnownI
+	add_overworldpalettes UnownJ
+	add_overworldpalettes UnownK
+	add_overworldpalettes UnownL
+	add_overworldpalettes UnownM
+	add_overworldpalettes UnownN
+	add_overworldpalettes UnownO
+	add_overworldpalettes UnownP
+	add_overworldpalettes UnownQ
+	add_overworldpalettes UnownR
+	add_overworldpalettes UnownS
+	add_overworldpalettes UnownT
+	add_overworldpalettes UnownU
+	add_overworldpalettes UnownV
+	add_overworldpalettes UnownW
+	add_overworldpalettes UnownX
+	add_overworldpalettes UnownY
+	add_overworldpalettes UnownZ
+	add_overworldpalettes UnownExclamation_mark
+	add_overworldpalettes UnownQuestion_mark
 
 WobbuffetOverworldPalettePointers::
 	add_overworldpalettes Wobbuffet
@@ -169,6 +199,7 @@ GligarOverworldPalettePointers::
 
 SteelixOverworldPalettePointers::
 	add_overworldpalettes Steelix
+	add_overworldpalettes SteelixMega
 
 SnubbullOverworldPalettePointers::
 	add_overworldpalettes Snubbull
@@ -181,12 +212,14 @@ QwilfishOverworldPalettePointers::
 
 ScizorOverworldPalettePointers::
 	add_overworldpalettes Scizor
+	add_overworldpalettes ScizorMega
 
 ShuckleOverworldPalettePointers::
 	add_overworldpalettes Shuckle
 
 HeracrossOverworldPalettePointers::
 	add_overworldpalettes Heracross
+	add_overworldpalettes HeracrossMega
 
 SneaselOverworldPalettePointers::
 	add_overworldpalettes Sneasel
@@ -211,6 +244,7 @@ PiloswineOverworldPalettePointers::
 
 CorsolaOverworldPalettePointers::
 	add_overworldpalettes Corsola
+	add_overworldpalettes CorsolaGalar
 
 RemoraidOverworldPalettePointers::
 	add_overworldpalettes Remoraid
@@ -232,6 +266,7 @@ HoundourOverworldPalettePointers::
 
 HoundoomOverworldPalettePointers::
 	add_overworldpalettes Houndoom
+	add_overworldpalettes HoundoomMega
 
 KingdraOverworldPalettePointers::
 	add_overworldpalettes Kingdra
@@ -289,6 +324,7 @@ PupitarOverworldPalettePointers::
 
 TyranitarOverworldPalettePointers::
 	add_overworldpalettes Tyranitar
+	add_overworldpalettes TyranitarMega
 
 LugiaOverworldPalettePointers::
 	add_overworldpalettes Lugia

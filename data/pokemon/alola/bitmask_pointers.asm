@@ -20,8 +20,8 @@ IncineroarBitmasksPointers::
 PopplioBitmasksPointers::
 	add_bitmasks Popplio
 
-BrioneBitmasksPointers::
-	add_bitmasks Brione
+BrionneBitmasksPointers::
+	add_bitmasks Brionne
 
 PrimarinaBitmasksPointers::
 	add_bitmasks Primarina
@@ -58,6 +58,9 @@ CrabominableBitmasksPointers::
 
 OricorioBitmasksPointers::
 	add_bitmasks Oricorio
+	add_bitmasks OricorioPom_pom
+	add_bitmasks OricorioPau
+	add_bitmasks OricorioSensu
 
 CutieflyBitmasksPointers::
 	add_bitmasks Cutiefly
@@ -67,12 +70,17 @@ RibombeeBitmasksPointers::
 
 RockruffBitmasksPointers::
 	add_bitmasks Rockruff
+	add_bitmasks RockruffOwn_tempo
 
 LycanrocBitmasksPointers::
 	add_bitmasks Lycanroc
+	add_bitmasks LycanrocMidday
+	add_bitmasks LycanrocDusk
+	add_bitmasks LycanrocMidnight
 
 WishiwashiBitmasksPointers::
 	add_bitmasks Wishiwashi
+	add_bitmasks WishiwashiSchool
 
 MareanieBitmasksPointers::
 	add_bitmasks Mareanie
@@ -157,6 +165,7 @@ SilvallyBitmasksPointers::
 
 MiniorBitmasksPointers::
 	add_bitmasks Minior
+	add_bitmasks MiniorCore
 
 KomalaBitmasksPointers::
 	add_bitmasks Komala
@@ -169,6 +178,7 @@ TogedemaruBitmasksPointers::
 
 MimikyuBitmasksPointers::
 	add_bitmasks Mimikyu
+	add_bitmasks MimikyuBusted
 
 BruxishBitmasksPointers::
 	add_bitmasks Bruxish
@@ -235,6 +245,9 @@ GuzzlordBitmasksPointers::
 
 NecrozmaBitmasksPointers::
 	add_bitmasks Necrozma
+	add_bitmasks NecrozmaDawn_wings
+	add_bitmasks NecrozmaDusk_mane
+	add_bitmasks NecrozmaUltra
 
 MagearnaBitmasksPointers::
 	add_bitmasks Magearna
@@ -262,4 +275,5 @@ MeltanBitmasksPointers::
 
 MelmetalBitmasksPointers::
 	add_bitmasks Melmetal
+	add_bitmasks MelmetalGiga
 

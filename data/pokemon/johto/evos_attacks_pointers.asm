@@ -61,6 +61,7 @@ LanturnEvosAttacksPointers::
 
 PichuEvosAttacksPointers::
 	add_evosattacks Pichu
+	add_evosattacks PichuSpiky_eared
 
 CleffaEvosAttacksPointers::
 	add_evosattacks Cleffa
@@ -88,6 +89,7 @@ FlaaffyEvosAttacksPointers::
 
 AmpharosEvosAttacksPointers::
 	add_evosattacks Ampharos
+	add_evosattacks AmpharosMega
 
 BellossomEvosAttacksPointers::
 	add_evosattacks Bellossom
@@ -148,6 +150,34 @@ MisdreavusEvosAttacksPointers::
 
 UnownEvosAttacksPointers::
 	add_evosattacks Unown
+	add_evosattacks UnownA
+	add_evosattacks UnownB
+	add_evosattacks UnownC
+	add_evosattacks UnownD
+	add_evosattacks UnownE
+	add_evosattacks UnownF
+	add_evosattacks UnownG
+	add_evosattacks UnownH
+	add_evosattacks UnownI
+	add_evosattacks UnownJ
+	add_evosattacks UnownK
+	add_evosattacks UnownL
+	add_evosattacks UnownM
+	add_evosattacks UnownN
+	add_evosattacks UnownO
+	add_evosattacks UnownP
+	add_evosattacks UnownQ
+	add_evosattacks UnownR
+	add_evosattacks UnownS
+	add_evosattacks UnownT
+	add_evosattacks UnownU
+	add_evosattacks UnownV
+	add_evosattacks UnownW
+	add_evosattacks UnownX
+	add_evosattacks UnownY
+	add_evosattacks UnownZ
+	add_evosattacks UnownExclamation_mark
+	add_evosattacks UnownQuestion_mark
 
 WobbuffetEvosAttacksPointers::
 	add_evosattacks Wobbuffet
@@ -169,6 +199,7 @@ GligarEvosAttacksPointers::
 
 SteelixEvosAttacksPointers::
 	add_evosattacks Steelix
+	add_evosattacks SteelixMega
 
 SnubbullEvosAttacksPointers::
 	add_evosattacks Snubbull
@@ -181,12 +212,14 @@ QwilfishEvosAttacksPointers::
 
 ScizorEvosAttacksPointers::
 	add_evosattacks Scizor
+	add_evosattacks ScizorMega
 
 ShuckleEvosAttacksPointers::
 	add_evosattacks Shuckle
 
 HeracrossEvosAttacksPointers::
 	add_evosattacks Heracross
+	add_evosattacks HeracrossMega
 
 SneaselEvosAttacksPointers::
 	add_evosattacks Sneasel
@@ -211,6 +244,7 @@ PiloswineEvosAttacksPointers::
 
 CorsolaEvosAttacksPointers::
 	add_evosattacks Corsola
+	add_evosattacks CorsolaGalar
 
 RemoraidEvosAttacksPointers::
 	add_evosattacks Remoraid
@@ -232,6 +266,7 @@ HoundourEvosAttacksPointers::
 
 HoundoomEvosAttacksPointers::
 	add_evosattacks Houndoom
+	add_evosattacks HoundoomMega
 
 KingdraEvosAttacksPointers::
 	add_evosattacks Kingdra
@@ -289,6 +324,7 @@ PupitarEvosAttacksPointers::
 
 TyranitarEvosAttacksPointers::
 	add_evosattacks Tyranitar
+	add_evosattacks TyranitarMega
 
 LugiaEvosAttacksPointers::
 	add_evosattacks Lugia

@@ -76,9 +76,13 @@ BastiodonPalettePointers::
 
 BurmyPalettePointers::
 	add_palettes Burmy
+	add_palettes BurmySand
+	add_palettes BurmyTrash
 
 WormadamPalettePointers::
 	add_palettes Wormadam
+	add_palettes WormadamSand
+	add_palettes WormadamTrash
 
 MothimPalettePointers::
 	add_palettes Mothim
@@ -103,12 +107,15 @@ CherubiPalettePointers::
 
 CherrimPalettePointers::
 	add_palettes Cherrim
+	add_palettes CherrimOvercast
 
 ShellosPalettePointers::
 	add_palettes Shellos
+	add_palettes ShellosWest
 
 GastrodonPalettePointers::
 	add_palettes Gastrodon
+	add_palettes GastrodonWest
 
 AmbipomPalettePointers::
 	add_palettes Ambipom
@@ -124,6 +131,7 @@ BunearyPalettePointers::
 
 LopunnyPalettePointers::
 	add_palettes Lopunny
+	add_palettes LopunnyMega
 
 MismagiusPalettePointers::
 	add_palettes Mismagius
@@ -175,6 +183,7 @@ GabitePalettePointers::
 
 GarchompPalettePointers::
 	add_palettes Garchomp
+	add_palettes GarchompMega
 
 MunchlaxPalettePointers::
 	add_palettes Munchlax
@@ -184,6 +193,7 @@ RioluPalettePointers::
 
 LucarioPalettePointers::
 	add_palettes Lucario
+	add_palettes LucarioMega
 
 HippopotasPalettePointers::
 	add_palettes Hippopotas
@@ -220,6 +230,7 @@ SnoverPalettePointers::
 
 AbomasnowPalettePointers::
 	add_palettes Abomasnow
+	add_palettes AbomasnowMega
 
 WeavilePalettePointers::
 	add_palettes Weavile
@@ -265,6 +276,7 @@ Porygon_zPalettePointers::
 
 GalladePalettePointers::
 	add_palettes Gallade
+	add_palettes GalladeMega
 
 ProbopassPalettePointers::
 	add_palettes Probopass
@@ -277,6 +289,12 @@ FroslassPalettePointers::
 
 RotomPalettePointers::
 	add_palettes Rotom
+	add_palettes RotomHeat
+	add_palettes RotomWash
+	add_palettes RotomFrost
+	add_palettes RotomFan
+	add_palettes RotomMow
+	add_palettes RotomDex
 
 UxiePalettePointers::
 	add_palettes Uxie
@@ -301,6 +319,7 @@ RegigigasPalettePointers::
 
 GiratinaPalettePointers::
 	add_palettes Giratina
+	add_palettes GiratinaOrigin
 
 CresseliaPalettePointers::
 	add_palettes Cresselia

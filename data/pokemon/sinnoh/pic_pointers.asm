@@ -76,9 +76,13 @@ BastiodonPicPointers::
 
 BurmyPicPointers::
 	add_pics Burmy
+	add_pics BurmySand
+	add_pics BurmyTrash
 
 WormadamPicPointers::
 	add_pics Wormadam
+	add_pics WormadamSand
+	add_pics WormadamTrash
 
 MothimPicPointers::
 	add_pics Mothim
@@ -103,12 +107,15 @@ CherubiPicPointers::
 
 CherrimPicPointers::
 	add_pics Cherrim
+	add_pics CherrimOvercast
 
 ShellosPicPointers::
 	add_pics Shellos
+	add_pics ShellosWest
 
 GastrodonPicPointers::
 	add_pics Gastrodon
+	add_pics GastrodonWest
 
 AmbipomPicPointers::
 	add_pics Ambipom
@@ -124,6 +131,7 @@ BunearyPicPointers::
 
 LopunnyPicPointers::
 	add_pics Lopunny
+	add_pics LopunnyMega
 
 MismagiusPicPointers::
 	add_pics Mismagius
@@ -175,6 +183,7 @@ GabitePicPointers::
 
 GarchompPicPointers::
 	add_pics Garchomp
+	add_pics GarchompMega
 
 MunchlaxPicPointers::
 	add_pics Munchlax
@@ -184,6 +193,7 @@ RioluPicPointers::
 
 LucarioPicPointers::
 	add_pics Lucario
+	add_pics LucarioMega
 
 HippopotasPicPointers::
 	add_pics Hippopotas
@@ -220,6 +230,7 @@ SnoverPicPointers::
 
 AbomasnowPicPointers::
 	add_pics Abomasnow
+	add_pics AbomasnowMega
 
 WeavilePicPointers::
 	add_pics Weavile
@@ -265,6 +276,7 @@ Porygon_zPicPointers::
 
 GalladePicPointers::
 	add_pics Gallade
+	add_pics GalladeMega
 
 ProbopassPicPointers::
 	add_pics Probopass
@@ -277,6 +289,12 @@ FroslassPicPointers::
 
 RotomPicPointers::
 	add_pics Rotom
+	add_pics RotomHeat
+	add_pics RotomWash
+	add_pics RotomFrost
+	add_pics RotomFan
+	add_pics RotomMow
+	add_pics RotomDex
 
 UxiePicPointers::
 	add_pics Uxie
@@ -301,6 +319,7 @@ RegigigasPicPointers::
 
 GiratinaPicPointers::
 	add_pics Giratina
+	add_pics GiratinaOrigin
 
 CresseliaPicPointers::
 	add_pics Cresselia

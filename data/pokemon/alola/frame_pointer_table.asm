@@ -6,7 +6,7 @@ AlolaFramesPointerTable::
 	add_framestable Torracat
 	add_framestable Incineroar
 	add_framestable Popplio
-	add_framestable Brione
+	add_framestable Brionne
 	add_framestable Primarina
 	add_framestable Pikipeck
 	add_framestable Trumbeak
