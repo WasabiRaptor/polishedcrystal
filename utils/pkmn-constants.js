@@ -90,30 +90,30 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/evos_attacks_pointers.asm`,
             `${region.title}EvosAttacksPointers::\n` +
             list.map(poke=>`${poke.title}EvosAttacksPointers::\n\tadd_evosattacks ${poke.title}\n`+
-                poke.forms.map(form=>`\tadd_evosattacks ${form.title}\n`).join("") +
+                //poke.forms.map(form=>`\tadd_evosattacks ${form.title}\n`).join("") + // see above
             `\n`).join(""),
         "utf8");
 
         // menu icon
-        fs.writeFileSync(`data/pokemon/${region.lower}/menu_icon_pointer_table.asm`,
-            `${region.title}IconPointerTable::\n` +
-            list.map(poke=>`\tadd_icontable ${poke.title}\n`).join(""),
-        "utf8");
+        //fs.writeFileSync(`data/pokemon/${region.lower}/menu_icon_pointer_table.asm`,
+        //    `${region.title}IconPointerTable::\n` +
+        //    list.map(poke=>`\tadd_icontable ${poke.title}\n`).join(""),
+        //"utf8");
 
-        fs.writeFileSync(`data/pokemon/${region.lower}/menu_icon_pointers.asm`,
-            `${region.title}IconPointers::\n` +
-            list.map(poke=>`${poke.title}IconPointers::\n\tadd_icon ${poke.title}\n`+
-                poke.forms.map(form=>`\tadd_icon ${form.title}\n`).join("") +
-            `\n`).join(""),
-        "utf8");
+        //fs.writeFileSync(`data/pokemon/${region.lower}/menu_icon_pointers.asm`,
+        //    `${region.title}IconPointers::\n` +
+        //    list.map(poke=>`${poke.title}IconPointers::\n\tadd_icon ${poke.title}\n`+
+        //        poke.forms.map(form=>`\tadd_icon ${form.title}\n`).join("") +
+        //    `\n`).join(""),
+        //"utf8");
 
-        fs.writeFileSync(`data/pokemon/${region.lower}/menu_icons.asm`,
-            list.map((poke,i)=>
-                (i % 15 ? "" : `\nSECTION "${region.title} Icons ${i/15+1}", ROMX\n\n`) +
-                    `${poke.title}Icon::\tINCBIN "gfx/icons/${poke.lower}.2bpp"\n`+
-                    poke.forms.map((form,i)=>`${form.title}Icon::\tINCBIN "gfx/icons/${form.lower}.2bpp"\n`).join("") +
-            `\n`).join(""),
-        "utf8");
+        //fs.writeFileSync(`data/pokemon/${region.lower}/menu_icons.asm`,
+        //    list.map((poke,i)=>
+        //        (i % 15 ? "" : `\nSECTION "${region.title} Icons ${i/15+1}", ROMX\n\n`) +
+        //            `${poke.title}Icon::\tINCBIN "gfx/icons/${poke.lower}.2bpp"\n`+
+        //            poke.forms.map((form,i)=>`${form.title}Icon::\tINCBIN "gfx/icons/${form.lower}.2bpp"\n`).join("") +
+        //    `\n`).join(""),
+        //"utf8");
 
 
         // names

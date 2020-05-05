@@ -1082,176 +1082,347 @@ VolcanionDEDData::  INCBIN "audio/ded/pokemon/volcanion.ded"
 
 SECTION "Alola DED 1", ROMX
 
-RowletPokedexEntry::	INCBIN "audio/ded/pokemon/rowlet.ded"
-DartrixPokedexEntry::	INCBIN "audio/ded/pokemon/dartrix.ded"
-DecidueyePokedexEntry::	INCBIN "audio/ded/pokemon/decidueye.ded"
+RowletDEDData::	INCBIN "audio/ded/pokemon/rowlet.ded"
+DartrixDEDData::	;INCBIN "audio/ded/pokemon/dartrix.ded"
+DecidueyeDEDData::	;INCBIN "audio/ded/pokemon/decidueye.ded"
 
-LittenPokedexEntry::	INCBIN "audio/ded/pokemon/litten.ded"
+LittenDEDData::	;INCBIN "audio/ded/pokemon/litten.ded"
 
-TorracatPokedexEntry::	INCBIN "audio/ded/pokemon/torracat.ded"
+TorracatDEDData::	;INCBIN "audio/ded/pokemon/torracat.ded"
 
-IncineroarPokedexEntry::	INCBIN "audio/ded/pokemon/incineroar.ded"
+IncineroarDEDData::	;INCBIN "audio/ded/pokemon/incineroar.ded"
 
-PopplioPokedexEntry::	INCBIN "audio/ded/pokemon/popplio.ded"
+PopplioDEDData::	;INCBIN "audio/ded/pokemon/popplio.ded"
 
-BrionnePokedexEntry::	INCBIN "audio/ded/pokemon/brionne.ded"
+BrionneDEDData::	;INCBIN "audio/ded/pokemon/brionne.ded"
 
-PrimarinaPokedexEntry::	INCBIN "audio/ded/pokemon/primarina.ded"
+PrimarinaDEDData::	;INCBIN "audio/ded/pokemon/primarina.ded"
 
-PikipekPokedexEntry::	INCBIN "audio/ded/pokemon/pikipek.ded"
+PikipekDEDData::	;INCBIN "audio/ded/pokemon/pikipek.ded"
 
-TrumbeakPokedexEntry::	INCBIN "audio/ded/pokemon/trumbeak.ded"
+TrumbeakDEDData::	;INCBIN "audio/ded/pokemon/trumbeak.ded"
 
-ToucannonPokedexEntry::	INCBIN "audio/ded/pokemon/toucannon.ded"
+ToucannonDEDData::	;INCBIN "audio/ded/pokemon/toucannon.ded"
 
-YungoosPokedexEntry::	INCBIN "audio/ded/pokemon/yungoos.ded"
+YungoosDEDData::	;INCBIN "audio/ded/pokemon/yungoos.ded"
 
-GumshoosPokedexEntry::	INCBIN "audio/ded/pokemon/gumshoos.ded"
+GumshoosDEDData::	;INCBIN "audio/ded/pokemon/gumshoos.ded"
 
-GrubbinPokedexEntry::	INCBIN "audio/ded/pokemon/grubbin.ded"
+GrubbinDEDData::	;INCBIN "audio/ded/pokemon/grubbin.ded"
 
-CharjabugPokedexEntry::	INCBIN "audio/ded/pokemon/charjabug.ded"
+CharjabugDEDData::	;INCBIN "audio/ded/pokemon/charjabug.ded"
 
-VikavoltPokedexEntry::	INCBIN "audio/ded/pokemon/vikavolt.ded"
+VikavoltDEDData::	;INCBIN "audio/ded/pokemon/vikavolt.ded"
 
-CrabrawlerPokedexEntry::	INCBIN "audio/ded/pokemon/crabrawler.ded"
+CrabrawlerDEDData::	;INCBIN "audio/ded/pokemon/crabrawler.ded"
 
-CrabominablePokedexEntry::	INCBIN "audio/ded/pokemon/crabominable.ded"
+CrabominableDEDData::	;INCBIN "audio/ded/pokemon/crabominable.ded"
 
-OricorioPokedexEntry::	INCBIN "audio/ded/pokemon/oricorio.ded"
+OricorioDEDData::	;INCBIN "audio/ded/pokemon/oricorio.ded"
 
-CutieflyPokedexEntry::	INCBIN "audio/ded/pokemon/cutiefly.ded"
+CutieflyDEDData::	;INCBIN "audio/ded/pokemon/cutiefly.ded"
 
-RibombeePokedexEntry::	INCBIN "audio/ded/pokemon/ribombee.ded"
+RibombeeDEDData::	;INCBIN "audio/ded/pokemon/ribombee.ded"
 
-RockruffPokedexEntry::	INCBIN "audio/ded/pokemon/rockruff.ded"
+RockruffDEDData::	;INCBIN "audio/ded/pokemon/rockruff.ded"
 
-LycanrocPokedexEntry::	INCBIN "audio/ded/pokemon/lycanroc.ded"
+LycanrocDEDData::	;INCBIN "audio/ded/pokemon/lycanroc.ded"
 
-WishiwashiPokedexEntry::	INCBIN "audio/ded/pokemon/wishiwashi.ded"
+WishiwashiDEDData::	;INCBIN "audio/ded/pokemon/wishiwashi.ded"
 
-MareaniePokedexEntry::	INCBIN "audio/ded/pokemon/mareanie.ded"
+MareanieDEDData::	;INCBIN "audio/ded/pokemon/mareanie.ded"
 
-ToxapexPokedexEntry::	INCBIN "audio/ded/pokemon/toxapex.ded"
+ToxapexDEDData::	;INCBIN "audio/ded/pokemon/toxapex.ded"
 
-MudbrayPokedexEntry::	INCBIN "audio/ded/pokemon/mudbray.ded"
+MudbrayDEDData::	;INCBIN "audio/ded/pokemon/mudbray.ded"
 
-MudsdalePokedexEntry::	INCBIN "audio/ded/pokemon/mudsdale.ded"
+MudsdaleDEDData::	;INCBIN "audio/ded/pokemon/mudsdale.ded"
 
-DewpiderPokedexEntry::	INCBIN "audio/ded/pokemon/dewpider.ded"
+DewpiderDEDData::	;INCBIN "audio/ded/pokemon/dewpider.ded"
 
-AraquanidPokedexEntry::	INCBIN "audio/ded/pokemon/araquanid.ded"
+AraquanidDEDData::	;INCBIN "audio/ded/pokemon/araquanid.ded"
 
-FomantisPokedexEntry::	INCBIN "audio/ded/pokemon/fomantis.ded"
+FomantisDEDData::	;INCBIN "audio/ded/pokemon/fomantis.ded"
 
-LurantisPokedexEntry::	INCBIN "audio/ded/pokemon/lurantis.ded"
+LurantisDEDData::	;INCBIN "audio/ded/pokemon/lurantis.ded"
 
-MorelullPokedexEntry::	INCBIN "audio/ded/pokemon/morelull.ded"
+MorelullDEDData::	;INCBIN "audio/ded/pokemon/morelull.ded"
 
-ShiinoticPokedexEntry::	INCBIN "audio/ded/pokemon/shiinotic.ded"
+ShiinoticDEDData::	;INCBIN "audio/ded/pokemon/shiinotic.ded"
 
-SalanditPokedexEntry::	INCBIN "audio/ded/pokemon/salandit.ded"
+SalanditDEDData::	;INCBIN "audio/ded/pokemon/salandit.ded"
 
-SalazzlePokedexEntry::	INCBIN "audio/ded/pokemon/salazzle.ded"
+SalazzleDEDData::	;INCBIN "audio/ded/pokemon/salazzle.ded"
 
-StuffulPokedexEntry::	INCBIN "audio/ded/pokemon/stufful.ded"
+StuffulDEDData::	;INCBIN "audio/ded/pokemon/stufful.ded"
 
-BewearPokedexEntry::	INCBIN "audio/ded/pokemon/bewear.ded"
+BewearDEDData::	;INCBIN "audio/ded/pokemon/bewear.ded"
 
-BounsweetPokedexEntry::	INCBIN "audio/ded/pokemon/bounsweet.ded"
+BounsweetDEDData::	;INCBIN "audio/ded/pokemon/bounsweet.ded"
 
-SteeneePokedexEntry::	INCBIN "audio/ded/pokemon/steenee.ded"
+SteeneeDEDData::	;INCBIN "audio/ded/pokemon/steenee.ded"
 
-TsareenaPokedexEntry::	INCBIN "audio/ded/pokemon/tsareena.ded"
+TsareenaDEDData::	;INCBIN "audio/ded/pokemon/tsareena.ded"
 
-ComfeyPokedexEntry::	INCBIN "audio/ded/pokemon/comfey.ded"
+ComfeyDEDData::	;INCBIN "audio/ded/pokemon/comfey.ded"
 
-OranguruPokedexEntry::	INCBIN "audio/ded/pokemon/oranguru.ded"
+OranguruDEDData::	;INCBIN "audio/ded/pokemon/oranguru.ded"
 
-PassimianPokedexEntry::	INCBIN "audio/ded/pokemon/passimian.ded"
+PassimianDEDData::	;INCBIN "audio/ded/pokemon/passimian.ded"
 
-WimpodPokedexEntry::	INCBIN "audio/ded/pokemon/wimpod.ded"
+WimpodDEDData::	;INCBIN "audio/ded/pokemon/wimpod.ded"
 
-GolisopodPokedexEntry::	INCBIN "audio/ded/pokemon/golisopod.ded"
+GolisopodDEDData::	;INCBIN "audio/ded/pokemon/golisopod.ded"
 
-SandygastPokedexEntry::	INCBIN "audio/ded/pokemon/sandygast.ded"
+SandygastDEDData::	;INCBIN "audio/ded/pokemon/sandygast.ded"
 
-PalossandPokedexEntry::	INCBIN "audio/ded/pokemon/palossand.ded"
+PalossandDEDData::	;INCBIN "audio/ded/pokemon/palossand.ded"
 
-PyukumukuPokedexEntry::	INCBIN "audio/ded/pokemon/pyukumuku.ded"
+PyukumukuDEDData::	;INCBIN "audio/ded/pokemon/pyukumuku.ded"
 
-Type_nullPokedexEntry::	INCBIN "audio/ded/pokemon/type_null.ded"
+Type_nullDEDData::	;INCBIN "audio/ded/pokemon/type_null.ded"
 
-SilvallyPokedexEntry::	INCBIN "audio/ded/pokemon/silvally.ded"
+SilvallyDEDData::	;INCBIN "audio/ded/pokemon/silvally.ded"
 
-MiniorPokedexEntry::	INCBIN "audio/ded/pokemon/minior.ded"
+MiniorDEDData::	;INCBIN "audio/ded/pokemon/minior.ded"
 
-KomalaPokedexEntry::	INCBIN "audio/ded/pokemon/komala.ded"
+KomalaDEDData::	;INCBIN "audio/ded/pokemon/komala.ded"
 
-TurtonatorPokedexEntry::	INCBIN "audio/ded/pokemon/turtonator.ded"
+TurtonatorDEDData::	;INCBIN "audio/ded/pokemon/turtonator.ded"
 
-TogedemaruPokedexEntry::	INCBIN "audio/ded/pokemon/togedemaru.ded"
+TogedemaruDEDData::	;INCBIN "audio/ded/pokemon/togedemaru.ded"
 
-MimikyuPokedexEntry::	INCBIN "audio/ded/pokemon/mimikyu.ded"
+MimikyuDEDData::	;INCBIN "audio/ded/pokemon/mimikyu.ded"
 
-BruxishPokedexEntry::	INCBIN "audio/ded/pokemon/bruxish.ded"
+BruxishDEDData::	;INCBIN "audio/ded/pokemon/bruxish.ded"
 
-DrampaPokedexEntry::	INCBIN "audio/ded/pokemon/drampa.ded"
+DrampaDEDData::	;INCBIN "audio/ded/pokemon/drampa.ded"
 
-DhelmisePokedexEntry::	INCBIN "audio/ded/pokemon/dhelmise.ded"
+DhelmiseDEDData::	;INCBIN "audio/ded/pokemon/dhelmise.ded"
 
-Jangmo_oPokedexEntry::	INCBIN "audio/ded/pokemon/jangmo_o.ded"
+Jangmo_oDEDData::	;INCBIN "audio/ded/pokemon/jangmo_o.ded"
 
-Hakamo_oPokedexEntry::	INCBIN "audio/ded/pokemon/hakamo_o.ded"
+Hakamo_oDEDData::	;INCBIN "audio/ded/pokemon/hakamo_o.ded"
 
-Kommo_oPokedexEntry::	INCBIN "audio/ded/pokemon/kommo_o.ded"
+Kommo_oDEDData::	;INCBIN "audio/ded/pokemon/kommo_o.ded"
 
-Tapu_kokoPokedexEntry::	INCBIN "audio/ded/pokemon/tapu_koko.ded"
+Tapu_kokoDEDData::	;INCBIN "audio/ded/pokemon/tapu_koko.ded"
 
-Tapu_lelePokedexEntry::	INCBIN "audio/ded/pokemon/tapu_lele.ded"
+Tapu_leleDEDData::	;INCBIN "audio/ded/pokemon/tapu_lele.ded"
 
-Tapu_buluPokedexEntry::	INCBIN "audio/ded/pokemon/tapu_bulu.ded"
+Tapu_buluDEDData::	;INCBIN "audio/ded/pokemon/tapu_bulu.ded"
 
-Tapu_finiPokedexEntry::	INCBIN "audio/ded/pokemon/tapu_fini.ded"
+Tapu_finiDEDData::	;INCBIN "audio/ded/pokemon/tapu_fini.ded"
 
-CosmogPokedexEntry::	INCBIN "audio/ded/pokemon/cosmog.ded"
+CosmogDEDData::	;INCBIN "audio/ded/pokemon/cosmog.ded"
 
-CosmoemPokedexEntry::	INCBIN "audio/ded/pokemon/cosmoem.ded"
+CosmoemDEDData::	;INCBIN "audio/ded/pokemon/cosmoem.ded"
 
-SolgaleoPokedexEntry::	INCBIN "audio/ded/pokemon/solgaleo.ded"
+SolgaleoDEDData::	;INCBIN "audio/ded/pokemon/solgaleo.ded"
 
-LunalaPokedexEntry::	INCBIN "audio/ded/pokemon/lunala.ded"
+LunalaDEDData::	;INCBIN "audio/ded/pokemon/lunala.ded"
 
-NihilegoPokedexEntry::	INCBIN "audio/ded/pokemon/nihilego.ded"
+NihilegoDEDData::	;INCBIN "audio/ded/pokemon/nihilego.ded"
 
-BuzzwolePokedexEntry::	INCBIN "audio/ded/pokemon/buzzwole.ded"
+BuzzwoleDEDData::	;INCBIN "audio/ded/pokemon/buzzwole.ded"
 
-PheromosaPokedexEntry::	INCBIN "audio/ded/pokemon/pheromosa.ded"
+PheromosaDEDData::	;INCBIN "audio/ded/pokemon/pheromosa.ded"
 
-XurkitreePokedexEntry::	INCBIN "audio/ded/pokemon/xurkitree.ded"
+XurkitreeDEDData::	;INCBIN "audio/ded/pokemon/xurkitree.ded"
 
-CelesteelaPokedexEntry::	INCBIN "audio/ded/pokemon/celesteela.ded"
+CelesteelaDEDData::	;INCBIN "audio/ded/pokemon/celesteela.ded"
 
-KartanaPokedexEntry::	INCBIN "audio/ded/pokemon/kartana.ded"
+KartanaDEDData::	;INCBIN "audio/ded/pokemon/kartana.ded"
 
-GuzzlordPokedexEntry::	INCBIN "audio/ded/pokemon/guzzlord.ded"
+GuzzlordDEDData::	;INCBIN "audio/ded/pokemon/guzzlord.ded"
 
-NecrozmaPokedexEntry::	INCBIN "audio/ded/pokemon/necrozma.ded"
+NecrozmaDEDData::	;INCBIN "audio/ded/pokemon/necrozma.ded"
 
-MagearnaPokedexEntry::	INCBIN "audio/ded/pokemon/magearna.ded"
+MagearnaDEDData::	;INCBIN "audio/ded/pokemon/magearna.ded"
 
-MarshadowPokedexEntry::	INCBIN "audio/ded/pokemon/marshadow.ded"
+MarshadowDEDData::	;INCBIN "audio/ded/pokemon/marshadow.ded"
 
-PoipolePokedexEntry::	INCBIN "audio/ded/pokemon/poipole.ded"
+PoipoleDEDData::	;INCBIN "audio/ded/pokemon/poipole.ded"
 
-NaganadelPokedexEntry::	INCBIN "audio/ded/pokemon/naganadel.ded"
+NaganadelDEDData::	;INCBIN "audio/ded/pokemon/naganadel.ded"
 
-StakatakaPokedexEntry::	INCBIN "audio/ded/pokemon/stakataka.ded"
+StakatakaDEDData::	;INCBIN "audio/ded/pokemon/stakataka.ded"
 
-BlacephalonPokedexEntry::	INCBIN "audio/ded/pokemon/blacephalon.ded"
+BlacephalonDEDData::	;INCBIN "audio/ded/pokemon/blacephalon.ded"
 
-ZeraoraPokedexEntry::	INCBIN "audio/ded/pokemon/zeraora.ded"
+ZeraoraDEDData::	;INCBIN "audio/ded/pokemon/zeraora.ded"
 
-MeltanPokedexEntry::	INCBIN "audio/ded/pokemon/meltan.ded"
+MeltanDEDData::	;INCBIN "audio/ded/pokemon/meltan.ded"
 
-MelmetalPokedexEntry::	INCBIN "audio/ded/pokemon/melmetal.ded"
+MelmetalDEDData::	;INCBIN "audio/ded/pokemon/melmetal.ded"
+
+INCBIN "audio/ded/pokemon/rowlet.ded"
+
+
+
+SECTION "Galar DED 1", ROMX
+
+
+GrookeyDEDData::	;INCBIN "audio/ded/pokemon/grookey.ded"
+
+ThwackeyDEDData::	;INCBIN "audio/ded/pokemon/thwackey.ded"
+
+RillaboomDEDData::	;INCBIN "audio/ded/pokemon/rillaboom.ded"
+
+ScorbunnyDEDData::	;INCBIN "audio/ded/pokemon/scorbunny.ded"
+
+RabootDEDData::	;INCBIN "audio/ded/pokemon/raboot.ded"
+
+CinderaceDEDData::	;INCBIN "audio/ded/pokemon/cinderace.ded"
+
+SobbleDEDData::	;INCBIN "audio/ded/pokemon/sobble.ded"
+
+DrizzileDEDData::	;INCBIN "audio/ded/pokemon/drizzile.ded"
+
+InteleonDEDData::	;INCBIN "audio/ded/pokemon/inteleon.ded"
+
+SkwovetDEDData::	;INCBIN "audio/ded/pokemon/skwovet.ded"
+
+GreedentDEDData::	;INCBIN "audio/ded/pokemon/greedent.ded"
+
+RookideeDEDData::	;INCBIN "audio/ded/pokemon/rookidee.ded"
+
+CorvisquireDEDData::	;INCBIN "audio/ded/pokemon/corvisquire.ded"
+
+CorviknightDEDData::	;INCBIN "audio/ded/pokemon/corviknight.ded"
+
+BlipbugDEDData::	;INCBIN "audio/ded/pokemon/blipbug.ded"
+
+DottlerDEDData::	;INCBIN "audio/ded/pokemon/dottler.ded"
+
+OrbeetleDEDData::	;INCBIN "audio/ded/pokemon/orbeetle.ded"
+
+NickitDEDData::	;INCBIN "audio/ded/pokemon/nickit.ded"
+
+ThievulDEDData::	;INCBIN "audio/ded/pokemon/thievul.ded"
+
+GossifleurDEDData::	;INCBIN "audio/ded/pokemon/gossifleur.ded"
+
+EldegossDEDData::	;INCBIN "audio/ded/pokemon/eldegoss.ded"
+
+WoolooDEDData::	;INCBIN "audio/ded/pokemon/wooloo.ded"
+
+DubwoolDEDData::	;INCBIN "audio/ded/pokemon/dubwool.ded"
+
+ChewtleDEDData::	;INCBIN "audio/ded/pokemon/chewtle.ded"
+
+DrednawDEDData::	;INCBIN "audio/ded/pokemon/drednaw.ded"
+
+YamperDEDData::	;INCBIN "audio/ded/pokemon/yamper.ded"
+
+BoltundDEDData::	;INCBIN "audio/ded/pokemon/boltund.ded"
+
+RolycolyDEDData::	;INCBIN "audio/ded/pokemon/rolycoly.ded"
+
+CarkolDEDData::	;INCBIN "audio/ded/pokemon/carkol.ded"
+
+CoalossalDEDData::	;INCBIN "audio/ded/pokemon/coalossal.ded"
+
+ApplinDEDData::	;INCBIN "audio/ded/pokemon/applin.ded"
+
+FlappleDEDData::	;INCBIN "audio/ded/pokemon/flapple.ded"
+
+AppletunDEDData::	;INCBIN "audio/ded/pokemon/appletun.ded"
+
+SilicobraDEDData::	;INCBIN "audio/ded/pokemon/silicobra.ded"
+
+SandacondaDEDData::	;INCBIN "audio/ded/pokemon/sandaconda.ded"
+
+CramorantDEDData::	;INCBIN "audio/ded/pokemon/cramorant.ded"
+
+ArrokudaDEDData::	;INCBIN "audio/ded/pokemon/arrokuda.ded"
+
+BarraskewdaDEDData::	;INCBIN "audio/ded/pokemon/barraskewda.ded"
+
+ToxelDEDData::	;INCBIN "audio/ded/pokemon/toxel.ded"
+
+ToxtricityDEDData::	;INCBIN "audio/ded/pokemon/toxtricity.ded"
+
+SizzlipedeDEDData::	;INCBIN "audio/ded/pokemon/sizzlipede.ded"
+
+CentiskorchDEDData::	;INCBIN "audio/ded/pokemon/centiskorch.ded"
+
+ClobbopusDEDData::	;INCBIN "audio/ded/pokemon/clobbopus.ded"
+
+GrapploctDEDData::	;INCBIN "audio/ded/pokemon/grapploct.ded"
+
+SinisteaDEDData::	;INCBIN "audio/ded/pokemon/sinistea.ded"
+
+PolteageistDEDData::	;INCBIN "audio/ded/pokemon/polteageist.ded"
+
+HatennaDEDData::	;INCBIN "audio/ded/pokemon/hatenna.ded"
+
+HattremDEDData::	;INCBIN "audio/ded/pokemon/hattrem.ded"
+
+HattereneDEDData::	;INCBIN "audio/ded/pokemon/hatterene.ded"
+
+ImpidimpDEDData::	;INCBIN "audio/ded/pokemon/impidimp.ded"
+
+MorgremDEDData::	;INCBIN "audio/ded/pokemon/morgrem.ded"
+
+GrimmsnarlDEDData::	;INCBIN "audio/ded/pokemon/grimmsnarl.ded"
+
+ObstagoonDEDData::	;INCBIN "audio/ded/pokemon/obstagoon.ded"
+
+PerrserkerDEDData::	;INCBIN "audio/ded/pokemon/perrserker.ded"
+
+CursolaDEDData::	;INCBIN "audio/ded/pokemon/cursola.ded"
+
+SirfetchdDEDData::	;INCBIN "audio/ded/pokemon/sirfetchd.ded"
+
+MrrimeDEDData::	;INCBIN "audio/ded/pokemon/mrrime.ded"
+
+RunerigusDEDData::	;INCBIN "audio/ded/pokemon/runerigus.ded"
+
+MilceryDEDData::	;INCBIN "audio/ded/pokemon/milcery.ded"
+
+AlcremieDEDData::	;INCBIN "audio/ded/pokemon/alcremie.ded"
+
+FalinksDEDData::	;INCBIN "audio/ded/pokemon/falinks.ded"
+
+PincurchinDEDData::	;INCBIN "audio/ded/pokemon/pincurchin.ded"
+
+SnomDEDData::	;INCBIN "audio/ded/pokemon/snom.ded"
+
+FrosmothDEDData::	;INCBIN "audio/ded/pokemon/frosmoth.ded"
+
+StonjournerDEDData::	;INCBIN "audio/ded/pokemon/stonjourner.ded"
+
+EiscueDEDData::	;INCBIN "audio/ded/pokemon/eiscue.ded"
+
+IndeedeeDEDData::	;INCBIN "audio/ded/pokemon/indeedee.ded"
+
+MorpekoDEDData::	;INCBIN "audio/ded/pokemon/morpeko.ded"
+
+CufantDEDData::	;INCBIN "audio/ded/pokemon/cufant.ded"
+
+CopperajahDEDData::	;INCBIN "audio/ded/pokemon/copperajah.ded"
+
+DracozoltDEDData::	;INCBIN "audio/ded/pokemon/dracozolt.ded"
+
+ArctozoltDEDData::	;INCBIN "audio/ded/pokemon/arctozolt.ded"
+
+DracovishDEDData::	;INCBIN "audio/ded/pokemon/dracovish.ded"
+
+ArctovishDEDData::	;INCBIN "audio/ded/pokemon/arctovish.ded"
+
+DuraludonDEDData::	;INCBIN "audio/ded/pokemon/duraludon.ded"
+
+DreepyDEDData::	;INCBIN "audio/ded/pokemon/dreepy.ded"
+
+DrakloakDEDData::	;INCBIN "audio/ded/pokemon/drakloak.ded"
+
+DragapultDEDData::	;INCBIN "audio/ded/pokemon/dragapult.ded"
+
+ZacianDEDData::	;INCBIN "audio/ded/pokemon/zacian.ded"
+
+ZamazentaDEDData::	;INCBIN "audio/ded/pokemon/zamazenta.ded"
+
+EternatusDEDData::	;INCBIN "audio/ded/pokemon/eternatus.ded"
+
+INCBIN "audio/ded/pokemon/rowlet.ded"

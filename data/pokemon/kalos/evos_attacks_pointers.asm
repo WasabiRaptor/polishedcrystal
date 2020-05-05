@@ -25,8 +25,6 @@ FrogadierEvosAttacksPointers::
 
 GreninjaEvosAttacksPointers::
 	add_evosattacks Greninja
-	add_evosattacks GreninjaBattle_bond
-	add_evosattacks GreninjaAsh
 
 BunnelbyEvosAttacksPointers::
 	add_evosattacks Bunnelby
@@ -51,39 +49,18 @@ SpewpaEvosAttacksPointers::
 
 VivillonEvosAttacksPointers::
 	add_evosattacks Vivillon
-	add_evosattacks VivillonArchipelego
-	add_evosattacks VivillonContinental
-	add_evosattacks VivillonElegant
-	add_evosattacks VivillonGarden
-	add_evosattacks VivillonHigh_plains
-	add_evosattacks VivillonIcy_snow
-	add_evosattacks VivillonJungle
-	add_evosattacks VivillonMarine
-	add_evosattacks VivillonModern
-	add_evosattacks VivillonMonsoon
-	add_evosattacks VivillonOcean
-	add_evosattacks VivillonPolar
-	add_evosattacks VivillonRiver
-	add_evosattacks VivillonSandstorm
-	add_evosattacks VivillonSavannah
-	add_evosattacks VivillonSun
-	add_evosattacks VivillonTundra
-	add_evosattacks VivillonPokeball
-	add_evosattacks VivillonFancy
 
 LitleoEvosAttacksPointers::
 	add_evosattacks Litleo
 
 PyroarEvosAttacksPointers::
 	add_evosattacks Pyroar
-	add_evosattacks PyroarF
 
 FlabebeEvosAttacksPointers::
 	add_evosattacks Flabebe
 
 FloetteEvosAttacksPointers::
 	add_evosattacks Floette
-	add_evosattacks FloetteEternal_flower
 
 FlorgesEvosAttacksPointers::
 	add_evosattacks Florges
@@ -102,22 +79,12 @@ PangoroEvosAttacksPointers::
 
 FurfrouEvosAttacksPointers::
 	add_evosattacks Furfrou
-	add_evosattacks FurfrouHeart
-	add_evosattacks FurfrouStar
-	add_evosattacks FurfrouDiamond
-	add_evosattacks FurfrouDebutante
-	add_evosattacks FurfrouMatron
-	add_evosattacks FurfrouDandy
-	add_evosattacks FurfrouLa_reine
-	add_evosattacks FurfrouKabuki
-	add_evosattacks FurfrouPharaoh
 
 EspurrEvosAttacksPointers::
 	add_evosattacks Espurr
 
 MeowsticEvosAttacksPointers::
 	add_evosattacks Meowstic
-	add_evosattacks MeowsticF
 
 HonedgeEvosAttacksPointers::
 	add_evosattacks Honedge
@@ -127,7 +94,6 @@ DoubladeEvosAttacksPointers::
 
 AegislashEvosAttacksPointers::
 	add_evosattacks Aegislash
-	add_evosattacks AegislashBlade
 
 SpritzeeEvosAttacksPointers::
 	add_evosattacks Spritzee
@@ -215,15 +181,9 @@ TrevenantEvosAttacksPointers::
 
 PumpkabooEvosAttacksPointers::
 	add_evosattacks Pumpkaboo
-	add_evosattacks PumpkabooAverage
-	add_evosattacks PumpkabooLarge
-	add_evosattacks PumpkabooSuper
 
 GourgeistEvosAttacksPointers::
 	add_evosattacks Gourgeist
-	add_evosattacks GourgeistAverage
-	add_evosattacks GourgeistLarge
-	add_evosattacks GourgeistSuper
 
 BergmiteEvosAttacksPointers::
 	add_evosattacks Bergmite
@@ -245,16 +205,12 @@ YveltalEvosAttacksPointers::
 
 ZygardeEvosAttacksPointers::
 	add_evosattacks Zygarde
-	add_evosattacks ZygardeFifty_percent
-	add_evosattacks ZygardeComplete
 
 DiancieEvosAttacksPointers::
 	add_evosattacks Diancie
-	add_evosattacks DiancieMega
 
 HoopaEvosAttacksPointers::
 	add_evosattacks Hoopa
-	add_evosattacks HoopaUnbound
 
 VolcanionEvosAttacksPointers::
 	add_evosattacks Volcanion

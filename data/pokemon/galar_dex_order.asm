@@ -24,8 +24,8 @@ GalarDexOrder::
 	grouped_dex_order_mon ORBEETLE
 	grouped_dex_order_mon NICKIT
 	grouped_dex_order_mon THIEVUL
-	grouped_dex_order_mon GROSSIFLEUR
-	grouped_dex_order_mon ELDEGROSS
+	grouped_dex_order_mon GOSSIFLEUR
+	grouped_dex_order_mon ELDEGOSS
 	grouped_dex_order_mon WOOLOO ; now you're blue
 	grouped_dex_order_mon DUBWOOL
 	grouped_dex_order_mon CHEWTLE
@@ -33,7 +33,7 @@ GalarDexOrder::
 	grouped_dex_order_mon YAMPER
 	grouped_dex_order_mon BOLTUND
 	grouped_dex_order_mon ROLYCOLY
-	grouped_dex_order_mon CARKOAL ; ree
+	grouped_dex_order_mon CARKOL ; ree
 	grouped_dex_order_mon COALOSSAL ; you ruined my roly coal boi ceast to exist you Rhydon 2
 	grouped_dex_order_mon APPLIN
 	grouped_dex_order_mon FLAPPLE
@@ -51,7 +51,7 @@ GalarDexOrder::
 	grouped_dex_order_mon GRAPPLOCT
 	grouped_dex_order_mon SINISTEA
 	grouped_dex_order_mon POLTEAGEIST
-	grouped_dex_order_mon HATRENNA
+	grouped_dex_order_mon HATENNA
 	grouped_dex_order_mon HATTREM
 	grouped_dex_order_mon HATTERENE
 	grouped_dex_order_mon IMPIDIMP
@@ -79,7 +79,7 @@ GalarDexOrder::
 	grouped_dex_order_mon ARCTOZOLT	;god why
 	grouped_dex_order_mon DRACOVISH		;oh god please why
 	grouped_dex_order_mon ARCTOVISH 			;these should never have been made
-	grouped_dex_order_mon DURALDON
+	grouped_dex_order_mon DURALUDON
 	grouped_dex_order_mon DREEPY
 	grouped_dex_order_mon DRAKLOAK
 	grouped_dex_order_mon DRAGAPULT

@@ -1078,9 +1078,11 @@ ROMX $162
 
 ROMX $163
 	org $4000
+	"Galar DED 1"
 
 ROMX $164
 	org $4000
+	"Alola DED 1"
 
 ROMX $165
 	org $4000

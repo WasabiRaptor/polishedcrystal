@@ -76,13 +76,9 @@ BastiodonEvosAttacksPointers::
 
 BurmyEvosAttacksPointers::
 	add_evosattacks Burmy
-	add_evosattacks BurmySand
-	add_evosattacks BurmyTrash
 
 WormadamEvosAttacksPointers::
 	add_evosattacks Wormadam
-	add_evosattacks WormadamSand
-	add_evosattacks WormadamTrash
 
 MothimEvosAttacksPointers::
 	add_evosattacks Mothim
@@ -107,15 +103,12 @@ CherubiEvosAttacksPointers::
 
 CherrimEvosAttacksPointers::
 	add_evosattacks Cherrim
-	add_evosattacks CherrimOvercast
 
 ShellosEvosAttacksPointers::
 	add_evosattacks Shellos
-	add_evosattacks ShellosWest
 
 GastrodonEvosAttacksPointers::
 	add_evosattacks Gastrodon
-	add_evosattacks GastrodonWest
 
 AmbipomEvosAttacksPointers::
 	add_evosattacks Ambipom
@@ -131,7 +124,6 @@ BunearyEvosAttacksPointers::
 
 LopunnyEvosAttacksPointers::
 	add_evosattacks Lopunny
-	add_evosattacks LopunnyMega
 
 MismagiusEvosAttacksPointers::
 	add_evosattacks Mismagius
@@ -183,7 +175,6 @@ GabiteEvosAttacksPointers::
 
 GarchompEvosAttacksPointers::
 	add_evosattacks Garchomp
-	add_evosattacks GarchompMega
 
 MunchlaxEvosAttacksPointers::
 	add_evosattacks Munchlax
@@ -193,7 +184,6 @@ RioluEvosAttacksPointers::
 
 LucarioEvosAttacksPointers::
 	add_evosattacks Lucario
-	add_evosattacks LucarioMega
 
 HippopotasEvosAttacksPointers::
 	add_evosattacks Hippopotas
@@ -230,7 +220,6 @@ SnoverEvosAttacksPointers::
 
 AbomasnowEvosAttacksPointers::
 	add_evosattacks Abomasnow
-	add_evosattacks AbomasnowMega
 
 WeavileEvosAttacksPointers::
 	add_evosattacks Weavile
@@ -276,7 +265,6 @@ Porygon_zEvosAttacksPointers::
 
 GalladeEvosAttacksPointers::
 	add_evosattacks Gallade
-	add_evosattacks GalladeMega
 
 ProbopassEvosAttacksPointers::
 	add_evosattacks Probopass
@@ -289,12 +277,6 @@ FroslassEvosAttacksPointers::
 
 RotomEvosAttacksPointers::
 	add_evosattacks Rotom
-	add_evosattacks RotomHeat
-	add_evosattacks RotomWash
-	add_evosattacks RotomFrost
-	add_evosattacks RotomFan
-	add_evosattacks RotomMow
-	add_evosattacks RotomDex
 
 UxieEvosAttacksPointers::
 	add_evosattacks Uxie
@@ -319,7 +301,6 @@ RegigigasEvosAttacksPointers::
 
 GiratinaEvosAttacksPointers::
 	add_evosattacks Giratina
-	add_evosattacks GiratinaOrigin
 
 CresseliaEvosAttacksPointers::
 	add_evosattacks Cresselia
@@ -335,7 +316,6 @@ DarkraiEvosAttacksPointers::
 
 ShayminEvosAttacksPointers::
 	add_evosattacks Shaymin
-	add_evosattacks ShayminSky
 
 ArceusEvosAttacksPointers::
 	add_evosattacks Arceus

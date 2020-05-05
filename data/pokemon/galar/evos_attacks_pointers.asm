@@ -7,7 +7,6 @@ ThwackeyEvosAttacksPointers::
 
 RillaboomEvosAttacksPointers::
 	add_evosattacks Rillaboom
-	add_evosattacks RillaboomGiga
 
 ScorbunnyEvosAttacksPointers::
 	add_evosattacks Scorbunny
@@ -17,7 +16,6 @@ RabootEvosAttacksPointers::
 
 CinderaceEvosAttacksPointers::
 	add_evosattacks Cinderace
-	add_evosattacks CinderaceGiga
 
 SobbleEvosAttacksPointers::
 	add_evosattacks Sobble
@@ -27,7 +25,6 @@ DrizzileEvosAttacksPointers::
 
 InteleonEvosAttacksPointers::
 	add_evosattacks Inteleon
-	add_evosattacks InteleonGiga
 
 SkwovetEvosAttacksPointers::
 	add_evosattacks Skwovet
@@ -43,7 +40,6 @@ CorvisquireEvosAttacksPointers::
 
 CorviknightEvosAttacksPointers::
 	add_evosattacks Corviknight
-	add_evosattacks CorviknightGiga
 
 BlipbugEvosAttacksPointers::
 	add_evosattacks Blipbug
@@ -53,7 +49,6 @@ DottlerEvosAttacksPointers::
 
 OrbeetleEvosAttacksPointers::
 	add_evosattacks Orbeetle
-	add_evosattacks OrbeetleGiga
 
 NickitEvosAttacksPointers::
 	add_evosattacks Nickit
@@ -78,7 +73,6 @@ ChewtleEvosAttacksPointers::
 
 DrednawEvosAttacksPointers::
 	add_evosattacks Drednaw
-	add_evosattacks DrednawGiga
 
 YamperEvosAttacksPointers::
 	add_evosattacks Yamper
@@ -94,30 +88,24 @@ CarkolEvosAttacksPointers::
 
 CoalossalEvosAttacksPointers::
 	add_evosattacks Coalossal
-	add_evosattacks CoalossalGiga
 
 ApplinEvosAttacksPointers::
 	add_evosattacks Applin
 
 FlappleEvosAttacksPointers::
 	add_evosattacks Flapple
-	add_evosattacks FlappleGiga
 
 AppletunEvosAttacksPointers::
 	add_evosattacks Appletun
-	add_evosattacks AppletunGiga
 
 SilicobraEvosAttacksPointers::
 	add_evosattacks Silicobra
 
 SandacondaEvosAttacksPointers::
 	add_evosattacks Sandaconda
-	add_evosattacks SandacondaGiga
 
 CramorantEvosAttacksPointers::
 	add_evosattacks Cramorant
-	add_evosattacks CramorantGulping
-	add_evosattacks CramorantGorging
 
 ArrokudaEvosAttacksPointers::
 	add_evosattacks Arrokuda
@@ -130,15 +118,12 @@ ToxelEvosAttacksPointers::
 
 ToxtricityEvosAttacksPointers::
 	add_evosattacks Toxtricity
-	add_evosattacks ToxtricityLow_key
-	add_evosattacks ToxtricityGiga
 
 SizzlipedeEvosAttacksPointers::
 	add_evosattacks Sizzlipede
 
 CentiskorchEvosAttacksPointers::
 	add_evosattacks Centiskorch
-	add_evosattacks CentiskorchGiga
 
 ClobbopusEvosAttacksPointers::
 	add_evosattacks Clobbopus
@@ -160,7 +145,6 @@ HattremEvosAttacksPointers::
 
 HattereneEvosAttacksPointers::
 	add_evosattacks Hatterene
-	add_evosattacks HattereneGiga
 
 ImpidimpEvosAttacksPointers::
 	add_evosattacks Impidimp
@@ -170,7 +154,6 @@ MorgremEvosAttacksPointers::
 
 GrimmsnarlEvosAttacksPointers::
 	add_evosattacks Grimmsnarl
-	add_evosattacks GrimmsnarlGiga
 
 ObstagoonEvosAttacksPointers::
 	add_evosattacks Obstagoon
@@ -195,7 +178,6 @@ MilceryEvosAttacksPointers::
 
 AlcremieEvosAttacksPointers::
 	add_evosattacks Alcremie
-	add_evosattacks AlcremieGiga
 
 FalinksEvosAttacksPointers::
 	add_evosattacks Falinks
@@ -214,21 +196,18 @@ StonjournerEvosAttacksPointers::
 
 EiscueEvosAttacksPointers::
 	add_evosattacks Eiscue
-	add_evosattacks EiscueNo_ice
 
 IndeedeeEvosAttacksPointers::
 	add_evosattacks Indeedee
 
 MorpekoEvosAttacksPointers::
 	add_evosattacks Morpeko
-	add_evosattacks MorpekoHangry
 
 CufantEvosAttacksPointers::
 	add_evosattacks Cufant
 
 CopperajahEvosAttacksPointers::
 	add_evosattacks Copperajah
-	add_evosattacks CopperajahGiga
 
 DracozoltEvosAttacksPointers::
 	add_evosattacks Dracozolt
@@ -244,7 +223,6 @@ ArctovishEvosAttacksPointers::
 
 DuraludonEvosAttacksPointers::
 	add_evosattacks Duraludon
-	add_evosattacks DuraludonGiga
 
 DreepyEvosAttacksPointers::
 	add_evosattacks Dreepy
@@ -257,13 +235,10 @@ DragapultEvosAttacksPointers::
 
 ZacianEvosAttacksPointers::
 	add_evosattacks Zacian
-	add_evosattacks ZacianSword
 
 ZamazentaEvosAttacksPointers::
 	add_evosattacks Zamazenta
-	add_evosattacks ZamazentaShield
 
 EternatusEvosAttacksPointers::
 	add_evosattacks Eternatus
-	add_evosattacks EternatusEternamax
 
