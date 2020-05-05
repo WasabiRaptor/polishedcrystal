@@ -1271,7 +1271,7 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon WIMPOD
 	nat_dexmon GOLISOPOD
 	nat_dexmon SANDYGAST
-	nat_dexmon PALLOSSAND
+	nat_dexmon PALOSSAND
 	nat_dexmon PYUKUMUKU
 	nat_dexmon TYPE_NULL
 	nat_dexmon SILVALLY ; types are handled by the RKS system ability via the item it holds and palette can be done in much the same way
@@ -1297,7 +1297,7 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon SOLGALEO ; radiant sun phase does nothing
 	nat_dexmon LUNALA ; full moon phase does nothing
 	nat_dexmon NIHILEGO
-	nat_dexmon BUZZSWOLE
+	nat_dexmon BUZZWOLE
 	nat_dexmon PHEROMOSA
 	nat_dexmon XURKITREE
 	nat_dexmon CELESTEELA

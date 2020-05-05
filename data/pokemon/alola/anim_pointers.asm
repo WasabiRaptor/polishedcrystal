@@ -151,8 +151,8 @@ GolisopodAnimationPointers::
 SandygastAnimationPointers::
 	add_anim Sandygast
 
-PallossandAnimationPointers::
-	add_anim Pallossand
+PalossandAnimationPointers::
+	add_anim Palossand
 
 PyukumukuAnimationPointers::
 	add_anim Pyukumuku
@@ -225,8 +225,8 @@ LunalaAnimationPointers::
 NihilegoAnimationPointers::
 	add_anim Nihilego
 
-BuzzswoleAnimationPointers::
-	add_anim Buzzswole
+BuzzwoleAnimationPointers::
+	add_anim Buzzwole
 
 PheromosaAnimationPointers::
 	add_anim Pheromosa

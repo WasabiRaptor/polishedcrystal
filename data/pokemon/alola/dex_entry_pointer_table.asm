@@ -47,7 +47,7 @@ AlolaPokedexEntryPointerTable::
 	add_pokedexentrytable Wimpod
 	add_pokedexentrytable Golisopod
 	add_pokedexentrytable Sandygast
-	add_pokedexentrytable Pallossand
+	add_pokedexentrytable Palossand
 	add_pokedexentrytable Pyukumuku
 	add_pokedexentrytable Type_null
 	add_pokedexentrytable Silvally
@@ -71,7 +71,7 @@ AlolaPokedexEntryPointerTable::
 	add_pokedexentrytable Solgaleo
 	add_pokedexentrytable Lunala
 	add_pokedexentrytable Nihilego
-	add_pokedexentrytable Buzzswole
+	add_pokedexentrytable Buzzwole
 	add_pokedexentrytable Pheromosa
 	add_pokedexentrytable Xurkitree
 	add_pokedexentrytable Celesteela

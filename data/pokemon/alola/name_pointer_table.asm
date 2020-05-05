@@ -47,7 +47,7 @@ AlolaNamePointerTable::
 	add_nametable Wimpod
 	add_nametable Golisopod
 	add_nametable Sandygast
-	add_nametable Pallossand
+	add_nametable Palossand
 	add_nametable Pyukumuku
 	add_nametable Type_null
 	add_nametable Silvally
@@ -71,7 +71,7 @@ AlolaNamePointerTable::
 	add_nametable Solgaleo
 	add_nametable Lunala
 	add_nametable Nihilego
-	add_nametable Buzzswole
+	add_nametable Buzzwole
 	add_nametable Pheromosa
 	add_nametable Xurkitree
 	add_nametable Celesteela

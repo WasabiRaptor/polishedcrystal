@@ -103,7 +103,7 @@ GolisopodBitmasks:	INCLUDE "gfx/pokemon/golisopod/bitmask.asm"
 
 SandygastBitmasks:	INCLUDE "gfx/pokemon/sandygast/bitmask.asm"
 
-PallossandBitmasks:	INCLUDE "gfx/pokemon/pallossand/bitmask.asm"
+PalossandBitmasks:	INCLUDE "gfx/pokemon/palossand/bitmask.asm"
 
 PyukumukuBitmasks:	INCLUDE "gfx/pokemon/pyukumuku/bitmask.asm"
 
@@ -153,7 +153,7 @@ LunalaBitmasks:	INCLUDE "gfx/pokemon/lunala/bitmask.asm"
 
 NihilegoBitmasks:	INCLUDE "gfx/pokemon/nihilego/bitmask.asm"
 
-BuzzswoleBitmasks:	INCLUDE "gfx/pokemon/buzzswole/bitmask.asm"
+BuzzwoleBitmasks:	INCLUDE "gfx/pokemon/buzzwole/bitmask.asm"
 
 PheromosaBitmasks:	INCLUDE "gfx/pokemon/pheromosa/bitmask.asm"
 

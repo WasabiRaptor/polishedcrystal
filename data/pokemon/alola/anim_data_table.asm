@@ -47,7 +47,7 @@ AlolaAnimPointerTable::
 	variant_animdata Wimpod
 	variant_animdata Golisopod
 	variant_animdata Sandygast
-	variant_animdata Pallossand
+	variant_animdata Palossand
 	variant_animdata Pyukumuku
 	variant_animdata Type_null
 	variant_animdata Silvally
@@ -71,7 +71,7 @@ AlolaAnimPointerTable::
 	variant_animdata Solgaleo
 	variant_animdata Lunala
 	variant_animdata Nihilego
-	variant_animdata Buzzswole
+	variant_animdata Buzzwole
 	variant_animdata Pheromosa
 	variant_animdata Xurkitree
 	variant_animdata Celesteela

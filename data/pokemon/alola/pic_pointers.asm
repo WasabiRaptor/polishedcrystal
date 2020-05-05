@@ -151,8 +151,8 @@ GolisopodPicPointers::
 SandygastPicPointers::
 	add_pics Sandygast
 
-PallossandPicPointers::
-	add_pics Pallossand
+PalossandPicPointers::
+	add_pics Palossand
 
 PyukumukuPicPointers::
 	add_pics Pyukumuku
@@ -225,8 +225,8 @@ LunalaPicPointers::
 NihilegoPicPointers::
 	add_pics Nihilego
 
-BuzzswolePicPointers::
-	add_pics Buzzswole
+BuzzwolePicPointers::
+	add_pics Buzzwole
 
 PheromosaPicPointers::
 	add_pics Pheromosa

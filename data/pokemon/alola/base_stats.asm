@@ -95,7 +95,7 @@ GolisopodBaseData::	INCLUDE "data/pokemon/base_stats/golisopod.asm"
 
 SandygastBaseData::	INCLUDE "data/pokemon/base_stats/sandygast.asm"
 
-PallossandBaseData::	INCLUDE "data/pokemon/base_stats/pallossand.asm"
+PalossandBaseData::	INCLUDE "data/pokemon/base_stats/palossand.asm"
 
 PyukumukuBaseData::	INCLUDE "data/pokemon/base_stats/pyukumuku.asm"
 
@@ -143,7 +143,7 @@ LunalaBaseData::	INCLUDE "data/pokemon/base_stats/lunala.asm"
 
 NihilegoBaseData::	INCLUDE "data/pokemon/base_stats/nihilego.asm"
 
-BuzzswoleBaseData::	INCLUDE "data/pokemon/base_stats/buzzswole.asm"
+BuzzwoleBaseData::	INCLUDE "data/pokemon/base_stats/buzzwole.asm"
 
 PheromosaBaseData::	INCLUDE "data/pokemon/base_stats/pheromosa.asm"
 

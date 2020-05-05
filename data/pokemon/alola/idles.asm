@@ -103,7 +103,7 @@ GolisopodAnimationIdle:	INCLUDE "gfx/pokemon/golisopod/anim_idle.asm"
 
 SandygastAnimationIdle:	INCLUDE "gfx/pokemon/sandygast/anim_idle.asm"
 
-PallossandAnimationIdle:	INCLUDE "gfx/pokemon/pallossand/anim_idle.asm"
+PalossandAnimationIdle:	INCLUDE "gfx/pokemon/palossand/anim_idle.asm"
 
 PyukumukuAnimationIdle:	INCLUDE "gfx/pokemon/pyukumuku/anim_idle.asm"
 
@@ -153,7 +153,7 @@ LunalaAnimationIdle:	INCLUDE "gfx/pokemon/lunala/anim_idle.asm"
 
 NihilegoAnimationIdle:	INCLUDE "gfx/pokemon/nihilego/anim_idle.asm"
 
-BuzzswoleAnimationIdle:	INCLUDE "gfx/pokemon/buzzswole/anim_idle.asm"
+BuzzwoleAnimationIdle:	INCLUDE "gfx/pokemon/buzzwole/anim_idle.asm"
 
 PheromosaAnimationIdle:	INCLUDE "gfx/pokemon/pheromosa/anim_idle.asm"
 

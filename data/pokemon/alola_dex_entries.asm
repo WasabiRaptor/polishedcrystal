@@ -101,7 +101,7 @@ GolisopodPokedexEntry::	INCLUDE "data/pokemon/dex_entries/golisopod.asm"
 
 SandygastPokedexEntry::	INCLUDE "data/pokemon/dex_entries/sandygast.asm"
 
-PallossandPokedexEntry::	INCLUDE "data/pokemon/dex_entries/pallossand.asm"
+PalossandPokedexEntry::	INCLUDE "data/pokemon/dex_entries/palossand.asm"
 
 PyukumukuPokedexEntry::	INCLUDE "data/pokemon/dex_entries/pyukumuku.asm"
 
@@ -152,7 +152,7 @@ LunalaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/lunala.asm"
 
 NihilegoPokedexEntry::	INCLUDE "data/pokemon/dex_entries/nihilego.asm"
 
-BuzzswolePokedexEntry::	INCLUDE "data/pokemon/dex_entries/buzzswole.asm"
+BuzzwolePokedexEntry::	INCLUDE "data/pokemon/dex_entries/buzzwole.asm"
 
 PheromosaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/pheromosa.asm"
 

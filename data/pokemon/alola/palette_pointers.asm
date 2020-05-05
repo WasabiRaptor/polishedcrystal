@@ -151,8 +151,8 @@ GolisopodPalettePointers::
 SandygastPalettePointers::
 	add_palettes Sandygast
 
-PallossandPalettePointers::
-	add_palettes Pallossand
+PalossandPalettePointers::
+	add_palettes Palossand
 
 PyukumukuPalettePointers::
 	add_palettes Pyukumuku
@@ -225,8 +225,8 @@ LunalaPalettePointers::
 NihilegoPalettePointers::
 	add_palettes Nihilego
 
-BuzzswolePalettePointers::
-	add_palettes Buzzswole
+BuzzwolePalettePointers::
+	add_palettes Buzzwole
 
 PheromosaPalettePointers::
 	add_palettes Pheromosa

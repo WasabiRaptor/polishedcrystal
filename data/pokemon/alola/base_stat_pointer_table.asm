@@ -47,7 +47,7 @@ AlolaBaseDataPointerTable::
 	add_basedatatable Wimpod
 	add_basedatatable Golisopod
 	add_basedatatable Sandygast
-	add_basedatatable Pallossand
+	add_basedatatable Palossand
 	add_basedatatable Pyukumuku
 	add_basedatatable Type_null
 	add_basedatatable Silvally
@@ -71,7 +71,7 @@ AlolaBaseDataPointerTable::
 	add_basedatatable Solgaleo
 	add_basedatatable Lunala
 	add_basedatatable Nihilego
-	add_basedatatable Buzzswole
+	add_basedatatable Buzzwole
 	add_basedatatable Pheromosa
 	add_basedatatable Xurkitree
 	add_basedatatable Celesteela

@@ -151,8 +151,8 @@ GolisopodNames::
 SandygastNames::
 	add_name Sandygast
 
-PallossandNames::
-	add_name Pallossand
+PalossandNames::
+	add_name Palossand
 
 PyukumukuNames::
 	add_name Pyukumuku
@@ -225,8 +225,8 @@ LunalaNames::
 NihilegoNames::
 	add_name Nihilego
 
-BuzzswoleNames::
-	add_name Buzzswole
+BuzzwoleNames::
+	add_name Buzzwole
 
 PheromosaNames::
 	add_name Pheromosa

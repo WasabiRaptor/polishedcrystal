@@ -47,7 +47,7 @@ AlolaEvosAttacksPointerTable::
 	add_evosattackstable Wimpod
 	add_evosattackstable Golisopod
 	add_evosattackstable Sandygast
-	add_evosattackstable Pallossand
+	add_evosattackstable Palossand
 	add_evosattackstable Pyukumuku
 	add_evosattackstable Type_null
 	add_evosattackstable Silvally
@@ -71,7 +71,7 @@ AlolaEvosAttacksPointerTable::
 	add_evosattackstable Solgaleo
 	add_evosattackstable Lunala
 	add_evosattackstable Nihilego
-	add_evosattackstable Buzzswole
+	add_evosattackstable Buzzwole
 	add_evosattackstable Pheromosa
 	add_evosattackstable Xurkitree
 	add_evosattackstable Celesteela

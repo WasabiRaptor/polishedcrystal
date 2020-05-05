@@ -215,9 +215,9 @@ SandygastPalettes:
 SandygastNormalPalette:	INCBIN "gfx/pokemon/sandygast/front.gbcpal", middle_colors
 SandygastShinyPalette:	INCLUDE "gfx/pokemon/sandygast/shiny.pal"
 
-PallossandPalettes:
-PallossandNormalPalette:	INCBIN "gfx/pokemon/pallossand/front.gbcpal", middle_colors
-PallossandShinyPalette:	INCLUDE "gfx/pokemon/pallossand/shiny.pal"
+PalossandPalettes:
+PalossandNormalPalette:	INCBIN "gfx/pokemon/palossand/front.gbcpal", middle_colors
+PalossandShinyPalette:	INCLUDE "gfx/pokemon/palossand/shiny.pal"
 
 PyukumukuPalettes:
 PyukumukuNormalPalette:	INCBIN "gfx/pokemon/pyukumuku/front.gbcpal", middle_colors
@@ -317,9 +317,9 @@ NihilegoPalettes:
 NihilegoNormalPalette:	INCBIN "gfx/pokemon/nihilego/front.gbcpal", middle_colors
 NihilegoShinyPalette:	INCLUDE "gfx/pokemon/nihilego/shiny.pal"
 
-BuzzswolePalettes:
-BuzzswoleNormalPalette:	INCBIN "gfx/pokemon/buzzswole/front.gbcpal", middle_colors
-BuzzswoleShinyPalette:	INCLUDE "gfx/pokemon/buzzswole/shiny.pal"
+BuzzwolePalettes:
+BuzzwoleNormalPalette:	INCBIN "gfx/pokemon/buzzwole/front.gbcpal", middle_colors
+BuzzwoleShinyPalette:	INCLUDE "gfx/pokemon/buzzwole/shiny.pal"
 
 PheromosaPalettes:
 PheromosaNormalPalette:	INCBIN "gfx/pokemon/pheromosa/front.gbcpal", middle_colors

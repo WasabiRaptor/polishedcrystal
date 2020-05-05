@@ -47,7 +47,7 @@ AlolaIconPointerTable::
 	add_icontable Wimpod
 	add_icontable Golisopod
 	add_icontable Sandygast
-	add_icontable Pallossand
+	add_icontable Palossand
 	add_icontable Pyukumuku
 	add_icontable Type_null
 	add_icontable Silvally
@@ -71,7 +71,7 @@ AlolaIconPointerTable::
 	add_icontable Solgaleo
 	add_icontable Lunala
 	add_icontable Nihilego
-	add_icontable Buzzswole
+	add_icontable Buzzwole
 	add_icontable Pheromosa
 	add_icontable Xurkitree
 	add_icontable Celesteela

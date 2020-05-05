@@ -47,7 +47,7 @@ AlolaPicPointerTable::
 	add_pictable Wimpod
 	add_pictable Golisopod
 	add_pictable Sandygast
-	add_pictable Pallossand
+	add_pictable Palossand
 	add_pictable Pyukumuku
 	add_pictable Type_null
 	add_pictable Silvally
@@ -71,7 +71,7 @@ AlolaPicPointerTable::
 	add_pictable Solgaleo
 	add_pictable Lunala
 	add_pictable Nihilego
-	add_pictable Buzzswole
+	add_pictable Buzzwole
 	add_pictable Pheromosa
 	add_pictable Xurkitree
 	add_pictable Celesteela

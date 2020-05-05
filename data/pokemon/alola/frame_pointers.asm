@@ -151,8 +151,8 @@ GolisopodFramesPointers::
 SandygastFramesPointers::
 	add_frames Sandygast
 
-PallossandFramesPointers::
-	add_frames Pallossand
+PalossandFramesPointers::
+	add_frames Palossand
 
 PyukumukuFramesPointers::
 	add_frames Pyukumuku
@@ -225,8 +225,8 @@ LunalaFramesPointers::
 NihilegoFramesPointers::
 	add_frames Nihilego
 
-BuzzswoleFramesPointers::
-	add_frames Buzzswole
+BuzzwoleFramesPointers::
+	add_frames Buzzwole
 
 PheromosaFramesPointers::
 	add_frames Pheromosa

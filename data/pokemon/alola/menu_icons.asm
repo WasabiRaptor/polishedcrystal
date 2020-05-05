@@ -114,7 +114,7 @@ GolisopodIcon::	INCBIN "gfx/icons/golisopod.2bpp"
 
 SandygastIcon::	INCBIN "gfx/icons/sandygast.2bpp"
 
-PallossandIcon::	INCBIN "gfx/icons/pallossand.2bpp"
+PalossandIcon::	INCBIN "gfx/icons/palossand.2bpp"
 
 PyukumukuIcon::	INCBIN "gfx/icons/pyukumuku.2bpp"
 
@@ -167,7 +167,7 @@ LunalaIcon::	INCBIN "gfx/icons/lunala.2bpp"
 
 NihilegoIcon::	INCBIN "gfx/icons/nihilego.2bpp"
 
-BuzzswoleIcon::	INCBIN "gfx/icons/buzzswole.2bpp"
+BuzzwoleIcon::	INCBIN "gfx/icons/buzzwole.2bpp"
 
 PheromosaIcon::	INCBIN "gfx/icons/pheromosa.2bpp"
 

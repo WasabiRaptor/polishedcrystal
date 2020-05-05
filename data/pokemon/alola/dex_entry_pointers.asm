@@ -151,8 +151,8 @@ GolisopodPokedexEntryPointers::
 SandygastPokedexEntryPointers::
 	add_pokedexentry Sandygast
 
-PallossandPokedexEntryPointers::
-	add_pokedexentry Pallossand
+PalossandPokedexEntryPointers::
+	add_pokedexentry Palossand
 
 PyukumukuPokedexEntryPointers::
 	add_pokedexentry Pyukumuku
@@ -225,8 +225,8 @@ LunalaPokedexEntryPointers::
 NihilegoPokedexEntryPointers::
 	add_pokedexentry Nihilego
 
-BuzzswolePokedexEntryPointers::
-	add_pokedexentry Buzzswole
+BuzzwolePokedexEntryPointers::
+	add_pokedexentry Buzzwole
 
 PheromosaPokedexEntryPointers::
 	add_pokedexentry Pheromosa

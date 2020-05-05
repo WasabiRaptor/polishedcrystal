@@ -47,7 +47,7 @@ AlolaOverworldSpritePointerTable::
 	add_overworldspritetable Wimpod
 	add_overworldspritetable Golisopod
 	add_overworldspritetable Sandygast
-	add_overworldspritetable Pallossand
+	add_overworldspritetable Palossand
 	add_overworldspritetable Pyukumuku
 	add_overworldspritetable Type_null
 	add_overworldspritetable Silvally
@@ -71,7 +71,7 @@ AlolaOverworldSpritePointerTable::
 	add_overworldspritetable Solgaleo
 	add_overworldspritetable Lunala
 	add_overworldspritetable Nihilego
-	add_overworldspritetable Buzzswole
+	add_overworldspritetable Buzzwole
 	add_overworldspritetable Pheromosa
 	add_overworldspritetable Xurkitree
 	add_overworldspritetable Celesteela

@@ -47,7 +47,7 @@ AlolaFramesPointerTable::
 	add_framestable Wimpod
 	add_framestable Golisopod
 	add_framestable Sandygast
-	add_framestable Pallossand
+	add_framestable Palossand
 	add_framestable Pyukumuku
 	add_framestable Type_null
 	add_framestable Silvally
@@ -71,7 +71,7 @@ AlolaFramesPointerTable::
 	add_framestable Solgaleo
 	add_framestable Lunala
 	add_framestable Nihilego
-	add_framestable Buzzswole
+	add_framestable Buzzwole
 	add_framestable Pheromosa
 	add_framestable Xurkitree
 	add_framestable Celesteela

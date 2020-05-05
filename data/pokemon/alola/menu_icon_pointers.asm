@@ -151,8 +151,8 @@ GolisopodIconPointers::
 SandygastIconPointers::
 	add_icon Sandygast
 
-PallossandIconPointers::
-	add_icon Pallossand
+PalossandIconPointers::
+	add_icon Palossand
 
 PyukumukuIconPointers::
 	add_icon Pyukumuku
@@ -225,8 +225,8 @@ LunalaIconPointers::
 NihilegoIconPointers::
 	add_icon Nihilego
 
-BuzzswoleIconPointers::
-	add_icon Buzzswole
+BuzzwoleIconPointers::
+	add_icon Buzzwole
 
 PheromosaIconPointers::
 	add_icon Pheromosa

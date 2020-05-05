@@ -151,8 +151,8 @@ GolisopodOverworldPalettePointers::
 SandygastOverworldPalettePointers::
 	add_overworldpalettes Sandygast
 
-PallossandOverworldPalettePointers::
-	add_overworldpalettes Pallossand
+PalossandOverworldPalettePointers::
+	add_overworldpalettes Palossand
 
 PyukumukuOverworldPalettePointers::
 	add_overworldpalettes Pyukumuku
@@ -225,8 +225,8 @@ LunalaOverworldPalettePointers::
 NihilegoOverworldPalettePointers::
 	add_overworldpalettes Nihilego
 
-BuzzswoleOverworldPalettePointers::
-	add_overworldpalettes Buzzswole
+BuzzwoleOverworldPalettePointers::
+	add_overworldpalettes Buzzwole
 
 PheromosaOverworldPalettePointers::
 	add_overworldpalettes Pheromosa

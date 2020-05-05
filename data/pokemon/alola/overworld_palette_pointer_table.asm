@@ -47,7 +47,7 @@ AlolaOverworldPalettePointerTable::
 	add_overworldpalettetable Wimpod
 	add_overworldpalettetable Golisopod
 	add_overworldpalettetable Sandygast
-	add_overworldpalettetable Pallossand
+	add_overworldpalettetable Palossand
 	add_overworldpalettetable Pyukumuku
 	add_overworldpalettetable Type_null
 	add_overworldpalettetable Silvally
@@ -71,7 +71,7 @@ AlolaOverworldPalettePointerTable::
 	add_overworldpalettetable Solgaleo
 	add_overworldpalettetable Lunala
 	add_overworldpalettetable Nihilego
-	add_overworldpalettetable Buzzswole
+	add_overworldpalettetable Buzzwole
 	add_overworldpalettetable Pheromosa
 	add_overworldpalettetable Xurkitree
 	add_overworldpalettetable Celesteela

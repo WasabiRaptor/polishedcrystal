@@ -173,8 +173,8 @@ GolisopodBackpic::	INCBIN "gfx/pokemon/golisopod/back.2bpp.lz"
 SandygastFrontpic::	INCBIN "gfx/pokemon/sandygast/front.animated.2bpp.lz"
 SandygastBackpic::	INCBIN "gfx/pokemon/sandygast/back.2bpp.lz"
 
-PallossandFrontpic::	INCBIN "gfx/pokemon/pallossand/front.animated.2bpp.lz"
-PallossandBackpic::	INCBIN "gfx/pokemon/pallossand/back.2bpp.lz"
+PalossandFrontpic::	INCBIN "gfx/pokemon/palossand/front.animated.2bpp.lz"
+PalossandBackpic::	INCBIN "gfx/pokemon/palossand/back.2bpp.lz"
 
 PyukumukuFrontpic::	INCBIN "gfx/pokemon/pyukumuku/front.animated.2bpp.lz"
 PyukumukuBackpic::	INCBIN "gfx/pokemon/pyukumuku/back.2bpp.lz"
@@ -258,8 +258,8 @@ LunalaBackpic::	INCBIN "gfx/pokemon/lunala/back.2bpp.lz"
 NihilegoFrontpic::	INCBIN "gfx/pokemon/nihilego/front.animated.2bpp.lz"
 NihilegoBackpic::	INCBIN "gfx/pokemon/nihilego/back.2bpp.lz"
 
-BuzzswoleFrontpic::	INCBIN "gfx/pokemon/buzzswole/front.animated.2bpp.lz"
-BuzzswoleBackpic::	INCBIN "gfx/pokemon/buzzswole/back.2bpp.lz"
+BuzzwoleFrontpic::	INCBIN "gfx/pokemon/buzzwole/front.animated.2bpp.lz"
+BuzzwoleBackpic::	INCBIN "gfx/pokemon/buzzwole/back.2bpp.lz"
 
 PheromosaFrontpic::	INCBIN "gfx/pokemon/pheromosa/front.animated.2bpp.lz"
 PheromosaBackpic::	INCBIN "gfx/pokemon/pheromosa/back.2bpp.lz"

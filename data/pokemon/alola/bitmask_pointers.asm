@@ -151,8 +151,8 @@ GolisopodBitmasksPointers::
 SandygastBitmasksPointers::
 	add_bitmasks Sandygast
 
-PallossandBitmasksPointers::
-	add_bitmasks Pallossand
+PalossandBitmasksPointers::
+	add_bitmasks Palossand
 
 PyukumukuBitmasksPointers::
 	add_bitmasks Pyukumuku
@@ -225,8 +225,8 @@ LunalaBitmasksPointers::
 NihilegoBitmasksPointers::
 	add_bitmasks Nihilego
 
-BuzzswoleBitmasksPointers::
-	add_bitmasks Buzzswole
+BuzzwoleBitmasksPointers::
+	add_bitmasks Buzzwole
 
 PheromosaBitmasksPointers::
 	add_bitmasks Pheromosa

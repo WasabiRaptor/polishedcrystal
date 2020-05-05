@@ -103,7 +103,7 @@ GolisopodAnimation:	INCLUDE "gfx/pokemon/golisopod/anim.asm"
 
 SandygastAnimation:	INCLUDE "gfx/pokemon/sandygast/anim.asm"
 
-PallossandAnimation:	INCLUDE "gfx/pokemon/pallossand/anim.asm"
+PalossandAnimation:	INCLUDE "gfx/pokemon/palossand/anim.asm"
 
 PyukumukuAnimation:	INCLUDE "gfx/pokemon/pyukumuku/anim.asm"
 
@@ -153,7 +153,7 @@ LunalaAnimation:	INCLUDE "gfx/pokemon/lunala/anim.asm"
 
 NihilegoAnimation:	INCLUDE "gfx/pokemon/nihilego/anim.asm"
 
-BuzzswoleAnimation:	INCLUDE "gfx/pokemon/buzzswole/anim.asm"
+BuzzwoleAnimation:	INCLUDE "gfx/pokemon/buzzwole/anim.asm"
 
 PheromosaAnimation:	INCLUDE "gfx/pokemon/pheromosa/anim.asm"
 

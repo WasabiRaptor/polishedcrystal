@@ -151,8 +151,8 @@ GolisopodOverworldSpritePointers::
 SandygastOverworldSpritePointers::
 	add_overworldsprite Sandygast
 
-PallossandOverworldSpritePointers::
-	add_overworldsprite Pallossand
+PalossandOverworldSpritePointers::
+	add_overworldsprite Palossand
 
 PyukumukuOverworldSpritePointers::
 	add_overworldsprite Pyukumuku
@@ -225,8 +225,8 @@ LunalaOverworldSpritePointers::
 NihilegoOverworldSpritePointers::
 	add_overworldsprite Nihilego
 
-BuzzswoleOverworldSpritePointers::
-	add_overworldsprite Buzzswole
+BuzzwoleOverworldSpritePointers::
+	add_overworldsprite Buzzwole
 
 PheromosaOverworldSpritePointers::
 	add_overworldsprite Pheromosa

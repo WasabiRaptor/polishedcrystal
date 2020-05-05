@@ -103,7 +103,7 @@ GolisopodFrames:	INCLUDE "gfx/pokemon/golisopod/frames.asm"
 
 SandygastFrames:	INCLUDE "gfx/pokemon/sandygast/frames.asm"
 
-PallossandFrames:	INCLUDE "gfx/pokemon/pallossand/frames.asm"
+PalossandFrames:	INCLUDE "gfx/pokemon/palossand/frames.asm"
 
 PyukumukuFrames:	INCLUDE "gfx/pokemon/pyukumuku/frames.asm"
 
@@ -153,7 +153,7 @@ LunalaFrames:	INCLUDE "gfx/pokemon/lunala/frames.asm"
 
 NihilegoFrames:	INCLUDE "gfx/pokemon/nihilego/frames.asm"
 
-BuzzswoleFrames:	INCLUDE "gfx/pokemon/buzzswole/frames.asm"
+BuzzwoleFrames:	INCLUDE "gfx/pokemon/buzzwole/frames.asm"
 
 PheromosaFrames:	INCLUDE "gfx/pokemon/pheromosa/frames.asm"
 

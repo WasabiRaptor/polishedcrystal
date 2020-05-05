@@ -108,7 +108,7 @@ GolisopodOverworldSprite::	INCBIN "gfx/pokemon/golisopod/overworld.2bpp"
 
 SandygastOverworldSprite::	INCBIN "gfx/pokemon/sandygast/overworld.2bpp"
 
-PallossandOverworldSprite::	INCBIN "gfx/pokemon/pallossand/overworld.2bpp"
+PalossandOverworldSprite::	INCBIN "gfx/pokemon/palossand/overworld.2bpp"
 
 PyukumukuOverworldSprite::	INCBIN "gfx/pokemon/pyukumuku/overworld.2bpp"
 
@@ -161,7 +161,7 @@ LunalaOverworldSprite::	INCBIN "gfx/pokemon/lunala/overworld.2bpp"
 
 NihilegoOverworldSprite::	INCBIN "gfx/pokemon/nihilego/overworld.2bpp"
 
-BuzzswoleOverworldSprite::	INCBIN "gfx/pokemon/buzzswole/overworld.2bpp"
+BuzzwoleOverworldSprite::	INCBIN "gfx/pokemon/buzzwole/overworld.2bpp"
 
 PheromosaOverworldSprite::	INCBIN "gfx/pokemon/pheromosa/overworld.2bpp"
 

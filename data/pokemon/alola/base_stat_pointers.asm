@@ -152,8 +152,8 @@ GolisopodBaseDataPointers::
 SandygastBaseDataPointers::
 	add_basedata Sandygast
 
-PallossandBaseDataPointers::
-	add_basedata Pallossand
+PalossandBaseDataPointers::
+	add_basedata Palossand
 
 PyukumukuBaseDataPointers::
 	add_basedata Pyukumuku
@@ -226,8 +226,8 @@ LunalaBaseDataPointers::
 NihilegoBaseDataPointers::
 	add_basedata Nihilego
 
-BuzzswoleBaseDataPointers::
-	add_basedata Buzzswole
+BuzzwoleBaseDataPointers::
+	add_basedata Buzzwole
 
 PheromosaBaseDataPointers::
 	add_basedata Pheromosa

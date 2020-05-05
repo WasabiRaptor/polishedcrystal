@@ -47,7 +47,7 @@ AlolaBitmasksPointerTable::
 	add_bitmaskstable Wimpod
 	add_bitmaskstable Golisopod
 	add_bitmaskstable Sandygast
-	add_bitmaskstable Pallossand
+	add_bitmaskstable Palossand
 	add_bitmaskstable Pyukumuku
 	add_bitmaskstable Type_null
 	add_bitmaskstable Silvally
@@ -71,7 +71,7 @@ AlolaBitmasksPointerTable::
 	add_bitmaskstable Solgaleo
 	add_bitmaskstable Lunala
 	add_bitmaskstable Nihilego
-	add_bitmaskstable Buzzswole
+	add_bitmaskstable Buzzwole
 	add_bitmaskstable Pheromosa
 	add_bitmaskstable Xurkitree
 	add_bitmaskstable Celesteela

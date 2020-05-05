@@ -151,8 +151,8 @@ GolisopodEvosAttacksPointers::
 SandygastEvosAttacksPointers::
 	add_evosattacks Sandygast
 
-PallossandEvosAttacksPointers::
-	add_evosattacks Pallossand
+PalossandEvosAttacksPointers::
+	add_evosattacks Palossand
 
 PyukumukuEvosAttacksPointers::
 	add_evosattacks Pyukumuku
@@ -225,8 +225,8 @@ LunalaEvosAttacksPointers::
 NihilegoEvosAttacksPointers::
 	add_evosattacks Nihilego
 
-BuzzswoleEvosAttacksPointers::
-	add_evosattacks Buzzswole
+BuzzwoleEvosAttacksPointers::
+	add_evosattacks Buzzwole
 
 PheromosaEvosAttacksPointers::
 	add_evosattacks Pheromosa
