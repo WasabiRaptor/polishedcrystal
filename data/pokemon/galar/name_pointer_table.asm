@@ -18,8 +18,8 @@ GalarNamePointerTable::
 	add_nametable Orbeetle
 	add_nametable Nickit
 	add_nametable Thievul
-	add_nametable Grossifleur
-	add_nametable Eldegross
+	add_nametable Gossifleur
+	add_nametable Eldegoss
 	add_nametable Wooloo
 	add_nametable Dubwool
 	add_nametable Chewtle
@@ -27,7 +27,7 @@ GalarNamePointerTable::
 	add_nametable Yamper
 	add_nametable Boltund
 	add_nametable Rolycoly
-	add_nametable Carkoal
+	add_nametable Carkol
 	add_nametable Coalossal
 	add_nametable Applin
 	add_nametable Flapple
@@ -45,7 +45,7 @@ GalarNamePointerTable::
 	add_nametable Grapploct
 	add_nametable Sinistea
 	add_nametable Polteageist
-	add_nametable Hatrenna
+	add_nametable Hatenna
 	add_nametable Hattrem
 	add_nametable Hatterene
 	add_nametable Impidimp
@@ -73,7 +73,7 @@ GalarNamePointerTable::
 	add_nametable Arctozolt
 	add_nametable Dracovish
 	add_nametable Arctovish
-	add_nametable Duraldon
+	add_nametable Duraludon
 	add_nametable Dreepy
 	add_nametable Drakloak
 	add_nametable Dragapult

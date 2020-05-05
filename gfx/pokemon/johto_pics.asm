@@ -166,8 +166,6 @@ MisdreavusBackpic::	INCBIN "gfx/pokemon/misdreavus/back.2bpp.lz"
 
 UnownFrontpic::	INCBIN "gfx/pokemon/unown/front.animated.2bpp.lz"
 UnownBackpic::	INCBIN "gfx/pokemon/unown/back.2bpp.lz"
-UnownAFrontpic::	INCBIN "gfx/pokemon/unown_a/front.animated.2bpp.lz"
-UnownABackpic::	INCBIN "gfx/pokemon/unown_a/back.2bpp.lz"
 UnownBFrontpic::	INCBIN "gfx/pokemon/unown_b/front.animated.2bpp.lz"
 UnownBBackpic::	INCBIN "gfx/pokemon/unown_b/back.2bpp.lz"
 UnownCFrontpic::	INCBIN "gfx/pokemon/unown_c/front.animated.2bpp.lz"

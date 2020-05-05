@@ -150,7 +150,6 @@ MisdreavusPalettePointers::
 
 UnownPalettePointers::
 	add_palettes Unown
-	add_palettes UnownA
 	add_palettes UnownB
 	add_palettes UnownC
 	add_palettes UnownD

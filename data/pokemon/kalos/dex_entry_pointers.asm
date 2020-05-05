@@ -247,8 +247,6 @@ ZygardePokedexEntryPointers::
 	add_pokedexentry Zygarde
 	add_pokedexentry Zygarde
 	add_pokedexentry Zygarde
-	add_pokedexentry Zygarde
-	add_pokedexentry Zygarde
 
 DianciePokedexEntryPointers::
 	add_pokedexentry Diancie

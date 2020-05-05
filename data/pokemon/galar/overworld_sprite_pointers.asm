@@ -61,11 +61,11 @@ NickitOverworldSpritePointers::
 ThievulOverworldSpritePointers::
 	add_overworldsprite Thievul
 
-GrossifleurOverworldSpritePointers::
-	add_overworldsprite Grossifleur
+GossifleurOverworldSpritePointers::
+	add_overworldsprite Gossifleur
 
-EldegrossOverworldSpritePointers::
-	add_overworldsprite Eldegross
+EldegossOverworldSpritePointers::
+	add_overworldsprite Eldegoss
 
 WoolooOverworldSpritePointers::
 	add_overworldsprite Wooloo
@@ -89,8 +89,8 @@ BoltundOverworldSpritePointers::
 RolycolyOverworldSpritePointers::
 	add_overworldsprite Rolycoly
 
-CarkoalOverworldSpritePointers::
-	add_overworldsprite Carkoal
+CarkolOverworldSpritePointers::
+	add_overworldsprite Carkol
 
 CoalossalOverworldSpritePointers::
 	add_overworldsprite Coalossal
@@ -152,8 +152,8 @@ SinisteaOverworldSpritePointers::
 PolteageistOverworldSpritePointers::
 	add_overworldsprite Polteageist
 
-HatrennaOverworldSpritePointers::
-	add_overworldsprite Hatrenna
+HatennaOverworldSpritePointers::
+	add_overworldsprite Hatenna
 
 HattremOverworldSpritePointers::
 	add_overworldsprite Hattrem
@@ -242,9 +242,9 @@ DracovishOverworldSpritePointers::
 ArctovishOverworldSpritePointers::
 	add_overworldsprite Arctovish
 
-DuraldonOverworldSpritePointers::
-	add_overworldsprite Duraldon
-	add_overworldsprite DuraldonGiga
+DuraludonOverworldSpritePointers::
+	add_overworldsprite Duraludon
+	add_overworldsprite DuraludonGiga
 
 DreepyOverworldSpritePointers::
 	add_overworldsprite Dreepy

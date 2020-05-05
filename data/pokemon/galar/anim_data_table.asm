@@ -18,8 +18,8 @@ GalarAnimPointerTable::
 	variant_animdata Orbeetle
 	variant_animdata Nickit
 	variant_animdata Thievul
-	variant_animdata Grossifleur
-	variant_animdata Eldegross
+	variant_animdata Gossifleur
+	variant_animdata Eldegoss
 	variant_animdata Wooloo
 	variant_animdata Dubwool
 	variant_animdata Chewtle
@@ -27,7 +27,7 @@ GalarAnimPointerTable::
 	variant_animdata Yamper
 	variant_animdata Boltund
 	variant_animdata Rolycoly
-	variant_animdata Carkoal
+	variant_animdata Carkol
 	variant_animdata Coalossal
 	variant_animdata Applin
 	variant_animdata Flapple
@@ -45,7 +45,7 @@ GalarAnimPointerTable::
 	variant_animdata Grapploct
 	variant_animdata Sinistea
 	variant_animdata Polteageist
-	variant_animdata Hatrenna
+	variant_animdata Hatenna
 	variant_animdata Hattrem
 	variant_animdata Hatterene
 	variant_animdata Impidimp
@@ -73,7 +73,7 @@ GalarAnimPointerTable::
 	variant_animdata Arctozolt
 	variant_animdata Dracovish
 	variant_animdata Arctovish
-	variant_animdata Duraldon
+	variant_animdata Duraludon
 	variant_animdata Dreepy
 	variant_animdata Drakloak
 	variant_animdata Dragapult

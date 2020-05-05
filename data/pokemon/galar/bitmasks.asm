@@ -42,9 +42,9 @@ NickitBitmasks:	INCLUDE "gfx/pokemon/nickit/bitmask.asm"
 
 ThievulBitmasks:	INCLUDE "gfx/pokemon/thievul/bitmask.asm"
 
-GrossifleurBitmasks:	INCLUDE "gfx/pokemon/grossifleur/bitmask.asm"
+GossifleurBitmasks:	INCLUDE "gfx/pokemon/gossifleur/bitmask.asm"
 
-EldegrossBitmasks:	INCLUDE "gfx/pokemon/eldegross/bitmask.asm"
+EldegossBitmasks:	INCLUDE "gfx/pokemon/eldegoss/bitmask.asm"
 
 WoolooBitmasks:	INCLUDE "gfx/pokemon/wooloo/bitmask.asm"
 
@@ -61,7 +61,7 @@ BoltundBitmasks:	INCLUDE "gfx/pokemon/boltund/bitmask.asm"
 
 RolycolyBitmasks:	INCLUDE "gfx/pokemon/rolycoly/bitmask.asm"
 
-CarkoalBitmasks:	INCLUDE "gfx/pokemon/carkoal/bitmask.asm"
+CarkolBitmasks:	INCLUDE "gfx/pokemon/carkol/bitmask.asm"
 
 CoalossalBitmasks:	INCLUDE "gfx/pokemon/coalossal/bitmask.asm"
 CoalossalGigaBitmasks::	INCLUDE "gfx/pokemon/coalossal_giga/bitmask.asm"
@@ -106,7 +106,7 @@ SinisteaBitmasks:	INCLUDE "gfx/pokemon/sinistea/bitmask.asm"
 
 PolteageistBitmasks:	INCLUDE "gfx/pokemon/polteageist/bitmask.asm"
 
-HatrennaBitmasks:	INCLUDE "gfx/pokemon/hatrenna/bitmask.asm"
+HatennaBitmasks:	INCLUDE "gfx/pokemon/hatenna/bitmask.asm"
 
 HattremBitmasks:	INCLUDE "gfx/pokemon/hattrem/bitmask.asm"
 
@@ -168,8 +168,8 @@ DracovishBitmasks:	INCLUDE "gfx/pokemon/dracovish/bitmask.asm"
 
 ArctovishBitmasks:	INCLUDE "gfx/pokemon/arctovish/bitmask.asm"
 
-DuraldonBitmasks:	INCLUDE "gfx/pokemon/duraldon/bitmask.asm"
-DuraldonGigaBitmasks::	INCLUDE "gfx/pokemon/duraldon_giga/bitmask.asm"
+DuraludonBitmasks:	INCLUDE "gfx/pokemon/duraludon/bitmask.asm"
+DuraludonGigaBitmasks::	INCLUDE "gfx/pokemon/duraludon_giga/bitmask.asm"
 
 DreepyBitmasks:	INCLUDE "gfx/pokemon/dreepy/bitmask.asm"
 

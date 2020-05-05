@@ -1,199 +1,454 @@
 
-SECTION "Alola Overworld Sprites 1", ROMX
+SECTION "Rowlet Overworld Sprites", ROMX
 
-RowletOverworldSprite::	INCBIN "gfx/pokemon/rowlet/overworld.2bpp"
+RowletOverworldSprite::	INCBIN "gfx/pokemon/rowlet/overworld.2bpp" ;0
 
-DartrixOverworldSprite::	INCBIN "gfx/pokemon/dartrix/overworld.2bpp"
 
-DecidueyeOverworldSprite::	INCBIN "gfx/pokemon/decidueye/overworld.2bpp"
+SECTION "Dartrix Overworld Sprites", ROMX
 
-LittenOverworldSprite::	INCBIN "gfx/pokemon/litten/overworld.2bpp"
+DartrixOverworldSprite::	INCBIN "gfx/pokemon/dartrix/overworld.2bpp" ;0
 
-TorracatOverworldSprite::	INCBIN "gfx/pokemon/torracat/overworld.2bpp"
 
-IncineroarOverworldSprite::	INCBIN "gfx/pokemon/incineroar/overworld.2bpp"
+SECTION "Decidueye Overworld Sprites", ROMX
 
-PopplioOverworldSprite::	INCBIN "gfx/pokemon/popplio/overworld.2bpp"
+DecidueyeOverworldSprite::	INCBIN "gfx/pokemon/decidueye/overworld.2bpp" ;0
 
-BrionneOverworldSprite::	INCBIN "gfx/pokemon/brionne/overworld.2bpp"
 
-PrimarinaOverworldSprite::	INCBIN "gfx/pokemon/primarina/overworld.2bpp"
+SECTION "Litten Overworld Sprites", ROMX
 
-PikipekOverworldSprite::	INCBIN "gfx/pokemon/pikipek/overworld.2bpp"
+LittenOverworldSprite::	INCBIN "gfx/pokemon/litten/overworld.2bpp" ;0
 
-TrumbeakOverworldSprite::	INCBIN "gfx/pokemon/trumbeak/overworld.2bpp"
 
-ToucannonOverworldSprite::	INCBIN "gfx/pokemon/toucannon/overworld.2bpp"
+SECTION "Torracat Overworld Sprites", ROMX
 
-YungoosOverworldSprite::	INCBIN "gfx/pokemon/yungoos/overworld.2bpp"
+TorracatOverworldSprite::	INCBIN "gfx/pokemon/torracat/overworld.2bpp" ;0
 
-GumshoosOverworldSprite::	INCBIN "gfx/pokemon/gumshoos/overworld.2bpp"
 
-GrubbinOverworldSprite::	INCBIN "gfx/pokemon/grubbin/overworld.2bpp"
+SECTION "Incineroar Overworld Sprites", ROMX
 
-CharjabugOverworldSprite::	INCBIN "gfx/pokemon/charjabug/overworld.2bpp"
+IncineroarOverworldSprite::	INCBIN "gfx/pokemon/incineroar/overworld.2bpp" ;0
 
-VikavoltOverworldSprite::	INCBIN "gfx/pokemon/vikavolt/overworld.2bpp"
 
-CrabrawlerOverworldSprite::	INCBIN "gfx/pokemon/crabrawler/overworld.2bpp"
+SECTION "Popplio Overworld Sprites", ROMX
 
-CrabominableOverworldSprite::	INCBIN "gfx/pokemon/crabominable/overworld.2bpp"
+PopplioOverworldSprite::	INCBIN "gfx/pokemon/popplio/overworld.2bpp" ;0
 
-OricorioOverworldSprite::	INCBIN "gfx/pokemon/oricorio/overworld.2bpp"
-OricorioPom_pomOverworldSprite::	INCBIN "gfx/pokemon/oricorio_pom_pom/overworld.2bpp"
-OricorioPauOverworldSprite::	INCBIN "gfx/pokemon/oricorio_pau/overworld.2bpp"
-OricorioSensuOverworldSprite::	INCBIN "gfx/pokemon/oricorio_sensu/overworld.2bpp"
 
-CutieflyOverworldSprite::	INCBIN "gfx/pokemon/cutiefly/overworld.2bpp"
+SECTION "Brionne Overworld Sprites", ROMX
 
-RibombeeOverworldSprite::	INCBIN "gfx/pokemon/ribombee/overworld.2bpp"
+BrionneOverworldSprite::	INCBIN "gfx/pokemon/brionne/overworld.2bpp" ;0
 
-RockruffOverworldSprite::	INCBIN "gfx/pokemon/rockruff/overworld.2bpp"
-RockruffOwn_tempoOverworldSprite::	INCBIN "gfx/pokemon/rockruff_own_tempo/overworld.2bpp"
 
-LycanrocOverworldSprite::	INCBIN "gfx/pokemon/lycanroc/overworld.2bpp"
-LycanrocMiddayOverworldSprite::	INCBIN "gfx/pokemon/lycanroc_midday/overworld.2bpp"
-LycanrocDuskOverworldSprite::	INCBIN "gfx/pokemon/lycanroc_dusk/overworld.2bpp"
-LycanrocMidnightOverworldSprite::	INCBIN "gfx/pokemon/lycanroc_midnight/overworld.2bpp"
+SECTION "Primarina Overworld Sprites", ROMX
 
-WishiwashiOverworldSprite::	INCBIN "gfx/pokemon/wishiwashi/overworld.2bpp"
-WishiwashiSchoolOverworldSprite::	INCBIN "gfx/pokemon/wishiwashi_school/overworld.2bpp"
+PrimarinaOverworldSprite::	INCBIN "gfx/pokemon/primarina/overworld.2bpp" ;0
 
-MareanieOverworldSprite::	INCBIN "gfx/pokemon/mareanie/overworld.2bpp"
 
-ToxapexOverworldSprite::	INCBIN "gfx/pokemon/toxapex/overworld.2bpp"
+SECTION "Pikipek Overworld Sprites", ROMX
 
-MudbrayOverworldSprite::	INCBIN "gfx/pokemon/mudbray/overworld.2bpp"
+PikipekOverworldSprite::	INCBIN "gfx/pokemon/pikipek/overworld.2bpp" ;0
 
-MudsdaleOverworldSprite::	INCBIN "gfx/pokemon/mudsdale/overworld.2bpp"
 
-DewpiderOverworldSprite::	INCBIN "gfx/pokemon/dewpider/overworld.2bpp"
+SECTION "Trumbeak Overworld Sprites", ROMX
 
+TrumbeakOverworldSprite::	INCBIN "gfx/pokemon/trumbeak/overworld.2bpp" ;0
 
-SECTION "Alola Overworld Sprites 2", ROMX
 
-AraquanidOverworldSprite::	INCBIN "gfx/pokemon/araquanid/overworld.2bpp"
+SECTION "Toucannon Overworld Sprites", ROMX
 
-FomantisOverworldSprite::	INCBIN "gfx/pokemon/fomantis/overworld.2bpp"
+ToucannonOverworldSprite::	INCBIN "gfx/pokemon/toucannon/overworld.2bpp" ;0
 
-LurantisOverworldSprite::	INCBIN "gfx/pokemon/lurantis/overworld.2bpp"
 
-MorelullOverworldSprite::	INCBIN "gfx/pokemon/morelull/overworld.2bpp"
+SECTION "Yungoos Overworld Sprites", ROMX
 
-ShiinoticOverworldSprite::	INCBIN "gfx/pokemon/shiinotic/overworld.2bpp"
+YungoosOverworldSprite::	INCBIN "gfx/pokemon/yungoos/overworld.2bpp" ;0
 
-SalanditOverworldSprite::	INCBIN "gfx/pokemon/salandit/overworld.2bpp"
 
-SalazzleOverworldSprite::	INCBIN "gfx/pokemon/salazzle/overworld.2bpp"
+SECTION "Gumshoos Overworld Sprites", ROMX
 
-StuffulOverworldSprite::	INCBIN "gfx/pokemon/stufful/overworld.2bpp"
+GumshoosOverworldSprite::	INCBIN "gfx/pokemon/gumshoos/overworld.2bpp" ;0
 
-BewearOverworldSprite::	INCBIN "gfx/pokemon/bewear/overworld.2bpp"
 
-BounsweetOverworldSprite::	INCBIN "gfx/pokemon/bounsweet/overworld.2bpp"
+SECTION "Grubbin Overworld Sprites", ROMX
 
-SteeneeOverworldSprite::	INCBIN "gfx/pokemon/steenee/overworld.2bpp"
+GrubbinOverworldSprite::	INCBIN "gfx/pokemon/grubbin/overworld.2bpp" ;0
 
-TsareenaOverworldSprite::	INCBIN "gfx/pokemon/tsareena/overworld.2bpp"
 
-ComfeyOverworldSprite::	INCBIN "gfx/pokemon/comfey/overworld.2bpp"
+SECTION "Charjabug Overworld Sprites", ROMX
 
-OranguruOverworldSprite::	INCBIN "gfx/pokemon/oranguru/overworld.2bpp"
+CharjabugOverworldSprite::	INCBIN "gfx/pokemon/charjabug/overworld.2bpp" ;0
 
-PassimianOverworldSprite::	INCBIN "gfx/pokemon/passimian/overworld.2bpp"
 
-WimpodOverworldSprite::	INCBIN "gfx/pokemon/wimpod/overworld.2bpp"
+SECTION "Vikavolt Overworld Sprites", ROMX
 
-GolisopodOverworldSprite::	INCBIN "gfx/pokemon/golisopod/overworld.2bpp"
+VikavoltOverworldSprite::	INCBIN "gfx/pokemon/vikavolt/overworld.2bpp" ;0
 
-SandygastOverworldSprite::	INCBIN "gfx/pokemon/sandygast/overworld.2bpp"
 
-PalossandOverworldSprite::	INCBIN "gfx/pokemon/palossand/overworld.2bpp"
+SECTION "Crabrawler Overworld Sprites", ROMX
 
-PyukumukuOverworldSprite::	INCBIN "gfx/pokemon/pyukumuku/overworld.2bpp"
+CrabrawlerOverworldSprite::	INCBIN "gfx/pokemon/crabrawler/overworld.2bpp" ;0
 
-Type_nullOverworldSprite::	INCBIN "gfx/pokemon/type_null/overworld.2bpp"
 
-SilvallyOverworldSprite::	INCBIN "gfx/pokemon/silvally/overworld.2bpp"
+SECTION "Crabominable Overworld Sprites", ROMX
 
-MiniorOverworldSprite::	INCBIN "gfx/pokemon/minior/overworld.2bpp"
-MiniorCoreOverworldSprite::	INCBIN "gfx/pokemon/minior_core/overworld.2bpp"
+CrabominableOverworldSprite::	INCBIN "gfx/pokemon/crabominable/overworld.2bpp" ;0
 
-KomalaOverworldSprite::	INCBIN "gfx/pokemon/komala/overworld.2bpp"
 
-TurtonatorOverworldSprite::	INCBIN "gfx/pokemon/turtonator/overworld.2bpp"
+SECTION "Oricorio Overworld Sprites", ROMX
 
-TogedemaruOverworldSprite::	INCBIN "gfx/pokemon/togedemaru/overworld.2bpp"
+OricorioOverworldSprite::	INCBIN "gfx/pokemon/oricorio/overworld.2bpp" ;0
+OricorioPom_pomOverworldSprite::	INCBIN "gfx/pokemon/oricorio_pom_pom/overworld.2bpp" ;1
+OricorioPauOverworldSprite::	INCBIN "gfx/pokemon/oricorio_pau/overworld.2bpp" ;2
+OricorioSensuOverworldSprite::	INCBIN "gfx/pokemon/oricorio_sensu/overworld.2bpp" ;3
 
-MimikyuOverworldSprite::	INCBIN "gfx/pokemon/mimikyu/overworld.2bpp"
-MimikyuBustedOverworldSprite::	INCBIN "gfx/pokemon/mimikyu_busted/overworld.2bpp"
 
-BruxishOverworldSprite::	INCBIN "gfx/pokemon/bruxish/overworld.2bpp"
+SECTION "Cutiefly Overworld Sprites", ROMX
 
-DrampaOverworldSprite::	INCBIN "gfx/pokemon/drampa/overworld.2bpp"
+CutieflyOverworldSprite::	INCBIN "gfx/pokemon/cutiefly/overworld.2bpp" ;0
 
-DhelmiseOverworldSprite::	INCBIN "gfx/pokemon/dhelmise/overworld.2bpp"
 
+SECTION "Ribombee Overworld Sprites", ROMX
 
-SECTION "Alola Overworld Sprites 3", ROMX
+RibombeeOverworldSprite::	INCBIN "gfx/pokemon/ribombee/overworld.2bpp" ;0
 
-Jangmo_oOverworldSprite::	INCBIN "gfx/pokemon/jangmo_o/overworld.2bpp"
 
-Hakamo_oOverworldSprite::	INCBIN "gfx/pokemon/hakamo_o/overworld.2bpp"
+SECTION "Rockruff Overworld Sprites", ROMX
 
-Kommo_oOverworldSprite::	INCBIN "gfx/pokemon/kommo_o/overworld.2bpp"
+RockruffOverworldSprite::	INCBIN "gfx/pokemon/rockruff/overworld.2bpp" ;0
+RockruffOwn_tempoOverworldSprite::	INCBIN "gfx/pokemon/rockruff_own_tempo/overworld.2bpp" ;1
 
-Tapu_kokoOverworldSprite::	INCBIN "gfx/pokemon/tapu_koko/overworld.2bpp"
 
-Tapu_leleOverworldSprite::	INCBIN "gfx/pokemon/tapu_lele/overworld.2bpp"
+SECTION "Lycanroc Overworld Sprites", ROMX
 
-Tapu_buluOverworldSprite::	INCBIN "gfx/pokemon/tapu_bulu/overworld.2bpp"
+LycanrocOverworldSprite::	INCBIN "gfx/pokemon/lycanroc/overworld.2bpp" ;0
+LycanrocMiddayOverworldSprite::	INCBIN "gfx/pokemon/lycanroc_midday/overworld.2bpp" ;1
+LycanrocDuskOverworldSprite::	INCBIN "gfx/pokemon/lycanroc_dusk/overworld.2bpp" ;2
+LycanrocMidnightOverworldSprite::	INCBIN "gfx/pokemon/lycanroc_midnight/overworld.2bpp" ;3
 
-Tapu_finiOverworldSprite::	INCBIN "gfx/pokemon/tapu_fini/overworld.2bpp"
 
-CosmogOverworldSprite::	INCBIN "gfx/pokemon/cosmog/overworld.2bpp"
+SECTION "Wishiwashi Overworld Sprites", ROMX
 
-CosmoemOverworldSprite::	INCBIN "gfx/pokemon/cosmoem/overworld.2bpp"
+WishiwashiOverworldSprite::	INCBIN "gfx/pokemon/wishiwashi/overworld.2bpp" ;0
+WishiwashiSchoolOverworldSprite::	INCBIN "gfx/pokemon/wishiwashi_school/overworld.2bpp" ;1
 
-SolgaleoOverworldSprite::	INCBIN "gfx/pokemon/solgaleo/overworld.2bpp"
 
-LunalaOverworldSprite::	INCBIN "gfx/pokemon/lunala/overworld.2bpp"
+SECTION "Mareanie Overworld Sprites", ROMX
 
-NihilegoOverworldSprite::	INCBIN "gfx/pokemon/nihilego/overworld.2bpp"
+MareanieOverworldSprite::	INCBIN "gfx/pokemon/mareanie/overworld.2bpp" ;0
 
-BuzzwoleOverworldSprite::	INCBIN "gfx/pokemon/buzzwole/overworld.2bpp"
 
-PheromosaOverworldSprite::	INCBIN "gfx/pokemon/pheromosa/overworld.2bpp"
+SECTION "Toxapex Overworld Sprites", ROMX
 
-XurkitreeOverworldSprite::	INCBIN "gfx/pokemon/xurkitree/overworld.2bpp"
+ToxapexOverworldSprite::	INCBIN "gfx/pokemon/toxapex/overworld.2bpp" ;0
 
-CelesteelaOverworldSprite::	INCBIN "gfx/pokemon/celesteela/overworld.2bpp"
 
-KartanaOverworldSprite::	INCBIN "gfx/pokemon/kartana/overworld.2bpp"
+SECTION "Mudbray Overworld Sprites", ROMX
 
-GuzzlordOverworldSprite::	INCBIN "gfx/pokemon/guzzlord/overworld.2bpp"
+MudbrayOverworldSprite::	INCBIN "gfx/pokemon/mudbray/overworld.2bpp" ;0
 
-NecrozmaOverworldSprite::	INCBIN "gfx/pokemon/necrozma/overworld.2bpp"
-NecrozmaDawn_wingsOverworldSprite::	INCBIN "gfx/pokemon/necrozma_dawn_wings/overworld.2bpp"
-NecrozmaDusk_maneOverworldSprite::	INCBIN "gfx/pokemon/necrozma_dusk_mane/overworld.2bpp"
-NecrozmaUltraOverworldSprite::	INCBIN "gfx/pokemon/necrozma_ultra/overworld.2bpp"
 
-MagearnaOverworldSprite::	INCBIN "gfx/pokemon/magearna/overworld.2bpp"
+SECTION "Mudsdale Overworld Sprites", ROMX
 
-MarshadowOverworldSprite::	INCBIN "gfx/pokemon/marshadow/overworld.2bpp"
+MudsdaleOverworldSprite::	INCBIN "gfx/pokemon/mudsdale/overworld.2bpp" ;0
 
-PoipoleOverworldSprite::	INCBIN "gfx/pokemon/poipole/overworld.2bpp"
 
-NaganadelOverworldSprite::	INCBIN "gfx/pokemon/naganadel/overworld.2bpp"
+SECTION "Dewpider Overworld Sprites", ROMX
 
-StakatakaOverworldSprite::	INCBIN "gfx/pokemon/stakataka/overworld.2bpp"
+DewpiderOverworldSprite::	INCBIN "gfx/pokemon/dewpider/overworld.2bpp" ;0
 
-BlacephalonOverworldSprite::	INCBIN "gfx/pokemon/blacephalon/overworld.2bpp"
 
-ZeraoraOverworldSprite::	INCBIN "gfx/pokemon/zeraora/overworld.2bpp"
+SECTION "Araquanid Overworld Sprites", ROMX
 
-MeltanOverworldSprite::	INCBIN "gfx/pokemon/meltan/overworld.2bpp"
+AraquanidOverworldSprite::	INCBIN "gfx/pokemon/araquanid/overworld.2bpp" ;0
 
-MelmetalOverworldSprite::	INCBIN "gfx/pokemon/melmetal/overworld.2bpp"
-MelmetalGigaOverworldSprite::	INCBIN "gfx/pokemon/melmetal_giga/overworld.2bpp"
+
+SECTION "Fomantis Overworld Sprites", ROMX
+
+FomantisOverworldSprite::	INCBIN "gfx/pokemon/fomantis/overworld.2bpp" ;0
+
+
+SECTION "Lurantis Overworld Sprites", ROMX
+
+LurantisOverworldSprite::	INCBIN "gfx/pokemon/lurantis/overworld.2bpp" ;0
+
+
+SECTION "Morelull Overworld Sprites", ROMX
+
+MorelullOverworldSprite::	INCBIN "gfx/pokemon/morelull/overworld.2bpp" ;0
+
+
+SECTION "Shiinotic Overworld Sprites", ROMX
+
+ShiinoticOverworldSprite::	INCBIN "gfx/pokemon/shiinotic/overworld.2bpp" ;0
+
+
+SECTION "Salandit Overworld Sprites", ROMX
+
+SalanditOverworldSprite::	INCBIN "gfx/pokemon/salandit/overworld.2bpp" ;0
+
+
+SECTION "Salazzle Overworld Sprites", ROMX
+
+SalazzleOverworldSprite::	INCBIN "gfx/pokemon/salazzle/overworld.2bpp" ;0
+
+
+SECTION "Stufful Overworld Sprites", ROMX
+
+StuffulOverworldSprite::	INCBIN "gfx/pokemon/stufful/overworld.2bpp" ;0
+
+
+SECTION "Bewear Overworld Sprites", ROMX
+
+BewearOverworldSprite::	INCBIN "gfx/pokemon/bewear/overworld.2bpp" ;0
+
+
+SECTION "Bounsweet Overworld Sprites", ROMX
+
+BounsweetOverworldSprite::	INCBIN "gfx/pokemon/bounsweet/overworld.2bpp" ;0
+
+
+SECTION "Steenee Overworld Sprites", ROMX
+
+SteeneeOverworldSprite::	INCBIN "gfx/pokemon/steenee/overworld.2bpp" ;0
+
+
+SECTION "Tsareena Overworld Sprites", ROMX
+
+TsareenaOverworldSprite::	INCBIN "gfx/pokemon/tsareena/overworld.2bpp" ;0
+
+
+SECTION "Comfey Overworld Sprites", ROMX
+
+ComfeyOverworldSprite::	INCBIN "gfx/pokemon/comfey/overworld.2bpp" ;0
+
+
+SECTION "Oranguru Overworld Sprites", ROMX
+
+OranguruOverworldSprite::	INCBIN "gfx/pokemon/oranguru/overworld.2bpp" ;0
+
+
+SECTION "Passimian Overworld Sprites", ROMX
+
+PassimianOverworldSprite::	INCBIN "gfx/pokemon/passimian/overworld.2bpp" ;0
+
+
+SECTION "Wimpod Overworld Sprites", ROMX
+
+WimpodOverworldSprite::	INCBIN "gfx/pokemon/wimpod/overworld.2bpp" ;0
+
+
+SECTION "Golisopod Overworld Sprites", ROMX
+
+GolisopodOverworldSprite::	INCBIN "gfx/pokemon/golisopod/overworld.2bpp" ;0
+
+
+SECTION "Sandygast Overworld Sprites", ROMX
+
+SandygastOverworldSprite::	INCBIN "gfx/pokemon/sandygast/overworld.2bpp" ;0
+
+
+SECTION "Palossand Overworld Sprites", ROMX
+
+PalossandOverworldSprite::	INCBIN "gfx/pokemon/palossand/overworld.2bpp" ;0
+
+
+SECTION "Pyukumuku Overworld Sprites", ROMX
+
+PyukumukuOverworldSprite::	INCBIN "gfx/pokemon/pyukumuku/overworld.2bpp" ;0
+
+
+SECTION "Type_null Overworld Sprites", ROMX
+
+Type_nullOverworldSprite::	INCBIN "gfx/pokemon/type_null/overworld.2bpp" ;0
+
+
+SECTION "Silvally Overworld Sprites", ROMX
+
+SilvallyOverworldSprite::	INCBIN "gfx/pokemon/silvally/overworld.2bpp" ;0
+
+
+SECTION "Minior Overworld Sprites", ROMX
+
+MiniorOverworldSprite::	INCBIN "gfx/pokemon/minior/overworld.2bpp" ;0
+MiniorCoreOverworldSprite::	INCBIN "gfx/pokemon/minior_core/overworld.2bpp" ;1
+
+
+SECTION "Komala Overworld Sprites", ROMX
+
+KomalaOverworldSprite::	INCBIN "gfx/pokemon/komala/overworld.2bpp" ;0
+
+
+SECTION "Turtonator Overworld Sprites", ROMX
+
+TurtonatorOverworldSprite::	INCBIN "gfx/pokemon/turtonator/overworld.2bpp" ;0
+
+
+SECTION "Togedemaru Overworld Sprites", ROMX
+
+TogedemaruOverworldSprite::	INCBIN "gfx/pokemon/togedemaru/overworld.2bpp" ;0
+
+
+SECTION "Mimikyu Overworld Sprites", ROMX
+
+MimikyuOverworldSprite::	INCBIN "gfx/pokemon/mimikyu/overworld.2bpp" ;0
+MimikyuBustedOverworldSprite::	INCBIN "gfx/pokemon/mimikyu_busted/overworld.2bpp" ;1
+
+
+SECTION "Bruxish Overworld Sprites", ROMX
+
+BruxishOverworldSprite::	INCBIN "gfx/pokemon/bruxish/overworld.2bpp" ;0
+
+
+SECTION "Drampa Overworld Sprites", ROMX
+
+DrampaOverworldSprite::	INCBIN "gfx/pokemon/drampa/overworld.2bpp" ;0
+
+
+SECTION "Dhelmise Overworld Sprites", ROMX
+
+DhelmiseOverworldSprite::	INCBIN "gfx/pokemon/dhelmise/overworld.2bpp" ;0
+
+
+SECTION "Jangmo_o Overworld Sprites", ROMX
+
+Jangmo_oOverworldSprite::	INCBIN "gfx/pokemon/jangmo_o/overworld.2bpp" ;0
+
+
+SECTION "Hakamo_o Overworld Sprites", ROMX
+
+Hakamo_oOverworldSprite::	INCBIN "gfx/pokemon/hakamo_o/overworld.2bpp" ;0
+
+
+SECTION "Kommo_o Overworld Sprites", ROMX
+
+Kommo_oOverworldSprite::	INCBIN "gfx/pokemon/kommo_o/overworld.2bpp" ;0
+
+
+SECTION "Tapu_koko Overworld Sprites", ROMX
+
+Tapu_kokoOverworldSprite::	INCBIN "gfx/pokemon/tapu_koko/overworld.2bpp" ;0
+
+
+SECTION "Tapu_lele Overworld Sprites", ROMX
+
+Tapu_leleOverworldSprite::	INCBIN "gfx/pokemon/tapu_lele/overworld.2bpp" ;0
+
+
+SECTION "Tapu_bulu Overworld Sprites", ROMX
+
+Tapu_buluOverworldSprite::	INCBIN "gfx/pokemon/tapu_bulu/overworld.2bpp" ;0
+
+
+SECTION "Tapu_fini Overworld Sprites", ROMX
+
+Tapu_finiOverworldSprite::	INCBIN "gfx/pokemon/tapu_fini/overworld.2bpp" ;0
+
+
+SECTION "Cosmog Overworld Sprites", ROMX
+
+CosmogOverworldSprite::	INCBIN "gfx/pokemon/cosmog/overworld.2bpp" ;0
+
+
+SECTION "Cosmoem Overworld Sprites", ROMX
+
+CosmoemOverworldSprite::	INCBIN "gfx/pokemon/cosmoem/overworld.2bpp" ;0
+
+
+SECTION "Solgaleo Overworld Sprites", ROMX
+
+SolgaleoOverworldSprite::	INCBIN "gfx/pokemon/solgaleo/overworld.2bpp" ;0
+
+
+SECTION "Lunala Overworld Sprites", ROMX
+
+LunalaOverworldSprite::	INCBIN "gfx/pokemon/lunala/overworld.2bpp" ;0
+
+
+SECTION "Nihilego Overworld Sprites", ROMX
+
+NihilegoOverworldSprite::	INCBIN "gfx/pokemon/nihilego/overworld.2bpp" ;0
+
+
+SECTION "Buzzwole Overworld Sprites", ROMX
+
+BuzzwoleOverworldSprite::	INCBIN "gfx/pokemon/buzzwole/overworld.2bpp" ;0
+
+
+SECTION "Pheromosa Overworld Sprites", ROMX
+
+PheromosaOverworldSprite::	INCBIN "gfx/pokemon/pheromosa/overworld.2bpp" ;0
+
+
+SECTION "Xurkitree Overworld Sprites", ROMX
+
+XurkitreeOverworldSprite::	INCBIN "gfx/pokemon/xurkitree/overworld.2bpp" ;0
+
+
+SECTION "Celesteela Overworld Sprites", ROMX
+
+CelesteelaOverworldSprite::	INCBIN "gfx/pokemon/celesteela/overworld.2bpp" ;0
+
+
+SECTION "Kartana Overworld Sprites", ROMX
+
+KartanaOverworldSprite::	INCBIN "gfx/pokemon/kartana/overworld.2bpp" ;0
+
+
+SECTION "Guzzlord Overworld Sprites", ROMX
+
+GuzzlordOverworldSprite::	INCBIN "gfx/pokemon/guzzlord/overworld.2bpp" ;0
+
+
+SECTION "Necrozma Overworld Sprites", ROMX
+
+NecrozmaOverworldSprite::	INCBIN "gfx/pokemon/necrozma/overworld.2bpp" ;0
+NecrozmaDawn_wingsOverworldSprite::	INCBIN "gfx/pokemon/necrozma_dawn_wings/overworld.2bpp" ;1
+NecrozmaDusk_maneOverworldSprite::	INCBIN "gfx/pokemon/necrozma_dusk_mane/overworld.2bpp" ;2
+NecrozmaUltraOverworldSprite::	INCBIN "gfx/pokemon/necrozma_ultra/overworld.2bpp" ;3
+
+
+SECTION "Magearna Overworld Sprites", ROMX
+
+MagearnaOverworldSprite::	INCBIN "gfx/pokemon/magearna/overworld.2bpp" ;0
+
+
+SECTION "Marshadow Overworld Sprites", ROMX
+
+MarshadowOverworldSprite::	INCBIN "gfx/pokemon/marshadow/overworld.2bpp" ;0
+
+
+SECTION "Poipole Overworld Sprites", ROMX
+
+PoipoleOverworldSprite::	INCBIN "gfx/pokemon/poipole/overworld.2bpp" ;0
+
+
+SECTION "Naganadel Overworld Sprites", ROMX
+
+NaganadelOverworldSprite::	INCBIN "gfx/pokemon/naganadel/overworld.2bpp" ;0
+
+
+SECTION "Stakataka Overworld Sprites", ROMX
+
+StakatakaOverworldSprite::	INCBIN "gfx/pokemon/stakataka/overworld.2bpp" ;0
+
+
+SECTION "Blacephalon Overworld Sprites", ROMX
+
+BlacephalonOverworldSprite::	INCBIN "gfx/pokemon/blacephalon/overworld.2bpp" ;0
+
+
+SECTION "Zeraora Overworld Sprites", ROMX
+
+ZeraoraOverworldSprite::	INCBIN "gfx/pokemon/zeraora/overworld.2bpp" ;0
+
+
+SECTION "Meltan Overworld Sprites", ROMX
+
+MeltanOverworldSprite::	INCBIN "gfx/pokemon/meltan/overworld.2bpp" ;0
+
+
+SECTION "Melmetal Overworld Sprites", ROMX
+
+MelmetalOverworldSprite::	INCBIN "gfx/pokemon/melmetal/overworld.2bpp" ;0
+MelmetalGigaOverworldSprite::	INCBIN "gfx/pokemon/melmetal_giga/overworld.2bpp" ;1
 

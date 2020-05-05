@@ -178,8 +178,6 @@ YveltalAnimation:	INCLUDE "gfx/pokemon/yveltal/anim.asm"
 ZygardeAnimation:	INCLUDE "gfx/pokemon/zygarde/anim.asm"
 ZygardeFifty_percentAnimation::	INCLUDE "gfx/pokemon/zygarde_fifty_percent/anim.asm"
 ZygardeCompleteAnimation::	INCLUDE "gfx/pokemon/zygarde_complete/anim.asm"
-ZygardeCompleteAnimation::	INCLUDE "gfx/pokemon/zygarde_complete/anim.asm"
-ZygardeCompleteAnimation::	INCLUDE "gfx/pokemon/zygarde_complete/anim.asm"
 
 DiancieAnimation:	INCLUDE "gfx/pokemon/diancie/anim.asm"
 DiancieMegaAnimation::	INCLUDE "gfx/pokemon/diancie_mega/anim.asm"

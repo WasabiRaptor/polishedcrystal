@@ -42,9 +42,9 @@ NickitAnimationIdle:	INCLUDE "gfx/pokemon/nickit/anim_idle.asm"
 
 ThievulAnimationIdle:	INCLUDE "gfx/pokemon/thievul/anim_idle.asm"
 
-GrossifleurAnimationIdle:	INCLUDE "gfx/pokemon/grossifleur/anim_idle.asm"
+GossifleurAnimationIdle:	INCLUDE "gfx/pokemon/gossifleur/anim_idle.asm"
 
-EldegrossAnimationIdle:	INCLUDE "gfx/pokemon/eldegross/anim_idle.asm"
+EldegossAnimationIdle:	INCLUDE "gfx/pokemon/eldegoss/anim_idle.asm"
 
 WoolooAnimationIdle:	INCLUDE "gfx/pokemon/wooloo/anim_idle.asm"
 
@@ -61,7 +61,7 @@ BoltundAnimationIdle:	INCLUDE "gfx/pokemon/boltund/anim_idle.asm"
 
 RolycolyAnimationIdle:	INCLUDE "gfx/pokemon/rolycoly/anim_idle.asm"
 
-CarkoalAnimationIdle:	INCLUDE "gfx/pokemon/carkoal/anim_idle.asm"
+CarkolAnimationIdle:	INCLUDE "gfx/pokemon/carkol/anim_idle.asm"
 
 CoalossalAnimationIdle:	INCLUDE "gfx/pokemon/coalossal/anim_idle.asm"
 CoalossalGigaAnimationIdle::	INCLUDE "gfx/pokemon/coalossal_giga/anim_idle.asm"
@@ -106,7 +106,7 @@ SinisteaAnimationIdle:	INCLUDE "gfx/pokemon/sinistea/anim_idle.asm"
 
 PolteageistAnimationIdle:	INCLUDE "gfx/pokemon/polteageist/anim_idle.asm"
 
-HatrennaAnimationIdle:	INCLUDE "gfx/pokemon/hatrenna/anim_idle.asm"
+HatennaAnimationIdle:	INCLUDE "gfx/pokemon/hatenna/anim_idle.asm"
 
 HattremAnimationIdle:	INCLUDE "gfx/pokemon/hattrem/anim_idle.asm"
 
@@ -168,8 +168,8 @@ DracovishAnimationIdle:	INCLUDE "gfx/pokemon/dracovish/anim_idle.asm"
 
 ArctovishAnimationIdle:	INCLUDE "gfx/pokemon/arctovish/anim_idle.asm"
 
-DuraldonAnimationIdle:	INCLUDE "gfx/pokemon/duraldon/anim_idle.asm"
-DuraldonGigaAnimationIdle::	INCLUDE "gfx/pokemon/duraldon_giga/anim_idle.asm"
+DuraludonAnimationIdle:	INCLUDE "gfx/pokemon/duraludon/anim_idle.asm"
+DuraludonGigaAnimationIdle::	INCLUDE "gfx/pokemon/duraludon_giga/anim_idle.asm"
 
 DreepyAnimationIdle:	INCLUDE "gfx/pokemon/dreepy/anim_idle.asm"
 

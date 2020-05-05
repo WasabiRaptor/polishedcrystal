@@ -150,7 +150,6 @@ MisdreavusAnimationPointers::
 
 UnownAnimationPointers::
 	add_anim Unown
-	add_anim UnownA
 	add_anim UnownB
 	add_anim UnownC
 	add_anim UnownD

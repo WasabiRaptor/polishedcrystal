@@ -100,7 +100,6 @@ SlowkingFrames:	INCLUDE "gfx/pokemon/slowking/frames.asm"
 MisdreavusFrames:	INCLUDE "gfx/pokemon/misdreavus/frames.asm"
 
 UnownFrames:	INCLUDE "gfx/pokemon/unown/frames.asm"
-UnownAFrames::	INCLUDE "gfx/pokemon/unown_a/frames.asm"
 UnownBFrames::	INCLUDE "gfx/pokemon/unown_b/frames.asm"
 UnownCFrames::	INCLUDE "gfx/pokemon/unown_c/frames.asm"
 UnownDFrames::	INCLUDE "gfx/pokemon/unown_d/frames.asm"

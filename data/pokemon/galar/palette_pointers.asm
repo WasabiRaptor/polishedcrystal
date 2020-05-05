@@ -61,11 +61,11 @@ NickitPalettePointers::
 ThievulPalettePointers::
 	add_palettes Thievul
 
-GrossifleurPalettePointers::
-	add_palettes Grossifleur
+GossifleurPalettePointers::
+	add_palettes Gossifleur
 
-EldegrossPalettePointers::
-	add_palettes Eldegross
+EldegossPalettePointers::
+	add_palettes Eldegoss
 
 WoolooPalettePointers::
 	add_palettes Wooloo
@@ -89,8 +89,8 @@ BoltundPalettePointers::
 RolycolyPalettePointers::
 	add_palettes Rolycoly
 
-CarkoalPalettePointers::
-	add_palettes Carkoal
+CarkolPalettePointers::
+	add_palettes Carkol
 
 CoalossalPalettePointers::
 	add_palettes Coalossal
@@ -152,8 +152,8 @@ SinisteaPalettePointers::
 PolteageistPalettePointers::
 	add_palettes Polteageist
 
-HatrennaPalettePointers::
-	add_palettes Hatrenna
+HatennaPalettePointers::
+	add_palettes Hatenna
 
 HattremPalettePointers::
 	add_palettes Hattrem
@@ -242,9 +242,9 @@ DracovishPalettePointers::
 ArctovishPalettePointers::
 	add_palettes Arctovish
 
-DuraldonPalettePointers::
-	add_palettes Duraldon
-	add_palettes DuraldonGiga
+DuraludonPalettePointers::
+	add_palettes Duraludon
+	add_palettes DuraludonGiga
 
 DreepyPalettePointers::
 	add_palettes Dreepy

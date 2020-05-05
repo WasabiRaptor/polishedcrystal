@@ -61,11 +61,11 @@ NickitNames::
 ThievulNames::
 	add_name Thievul
 
-GrossifleurNames::
-	add_name Grossifleur
+GossifleurNames::
+	add_name Gossifleur
 
-EldegrossNames::
-	add_name Eldegross
+EldegossNames::
+	add_name Eldegoss
 
 WoolooNames::
 	add_name Wooloo
@@ -89,8 +89,8 @@ BoltundNames::
 RolycolyNames::
 	add_name Rolycoly
 
-CarkoalNames::
-	add_name Carkoal
+CarkolNames::
+	add_name Carkol
 
 CoalossalNames::
 	add_name Coalossal
@@ -152,8 +152,8 @@ SinisteaNames::
 PolteageistNames::
 	add_name Polteageist
 
-HatrennaNames::
-	add_name Hatrenna
+HatennaNames::
+	add_name Hatenna
 
 HattremNames::
 	add_name Hattrem
@@ -242,9 +242,9 @@ DracovishNames::
 ArctovishNames::
 	add_name Arctovish
 
-DuraldonNames::
-	add_name Duraldon
-	add_name Duraldon
+DuraludonNames::
+	add_name Duraludon
+	add_name Duraludon
 
 DreepyNames::
 	add_name Dreepy

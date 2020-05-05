@@ -247,8 +247,6 @@ ZygardeEvosAttacksPointers::
 	add_evosattacks Zygarde
 	add_evosattacks ZygardeFifty_percent
 	add_evosattacks ZygardeComplete
-	add_evosattacks ZygardeComplete
-	add_evosattacks ZygardeComplete
 
 DiancieEvosAttacksPointers::
 	add_evosattacks Diancie

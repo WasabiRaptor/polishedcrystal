@@ -247,8 +247,6 @@ ZygardeOverworldSpritePointers::
 	add_overworldsprite Zygarde
 	add_overworldsprite ZygardeFifty_percent
 	add_overworldsprite ZygardeComplete
-	add_overworldsprite ZygardeComplete
-	add_overworldsprite ZygardeComplete
 
 DiancieOverworldSpritePointers::
 	add_overworldsprite Diancie

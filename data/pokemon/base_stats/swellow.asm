@@ -1,20 +1,21 @@
-	dw 00277 ;national dex no
 
-        db  60,  85,  60, 125,  75,  50
-        evs  0,   0,   0,   2,   0,   0
-        ;   hp  atk  def  spd  sat  sdf
+    dw 00277 ;national dex no
 
-        db NORMAL, FLYING ; type
-        db 45 ; catch rate
-        db 159 ; base exp
-        db NO_ITEM, NO_ITEM ; items
-        dn FEMALE_50, 3 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/swellow/front.dimensions"
-        db GUTS, GUTS     ; abilities
-        db SCRAPPY    ; hidden ability
-        db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_FLYING ; egg groups
+    db  60,  85,  60, 125,  75,  50
+    evs  0,   0,   0,   2,   0,   0
+    ;   hp  atk  def  spd  sat  sdf
 
-        ; tm/hm learnset
-        tmhm
-        ; end
+    db NORMAL, FLYING ; type
+    db 45 ; catch rate
+    db 159 ; base exp
+    db NO_ITEM, NO_ITEM ; items
+    dn FEMALE_50, 3 ; gender, step cycles to hatch
+    INCBIN "gfx/pokemon/swellow/front.dimensions"
+    db GUTS, GUTS     ; abilities
+    db SCRAPPY    ; hidden ability
+    db GROWTH_MEDIUM_SLOW ; growth rate
+    dn EGG_FLYING ; egg groups
+
+    ; tm/hm learnset
+    tmhm
+    ; end

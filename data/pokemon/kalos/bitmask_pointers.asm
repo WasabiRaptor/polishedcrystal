@@ -247,8 +247,6 @@ ZygardeBitmasksPointers::
 	add_bitmasks Zygarde
 	add_bitmasks ZygardeFifty_percent
 	add_bitmasks ZygardeComplete
-	add_bitmasks ZygardeComplete
-	add_bitmasks ZygardeComplete
 
 DiancieBitmasksPointers::
 	add_bitmasks Diancie

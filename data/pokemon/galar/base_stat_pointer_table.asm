@@ -18,8 +18,8 @@ GalarBaseDataPointerTable::
 	add_basedatatable Orbeetle
 	add_basedatatable Nickit
 	add_basedatatable Thievul
-	add_basedatatable Grossifleur
-	add_basedatatable Eldegross
+	add_basedatatable Gossifleur
+	add_basedatatable Eldegoss
 	add_basedatatable Wooloo
 	add_basedatatable Dubwool
 	add_basedatatable Chewtle
@@ -27,7 +27,7 @@ GalarBaseDataPointerTable::
 	add_basedatatable Yamper
 	add_basedatatable Boltund
 	add_basedatatable Rolycoly
-	add_basedatatable Carkoal
+	add_basedatatable Carkol
 	add_basedatatable Coalossal
 	add_basedatatable Applin
 	add_basedatatable Flapple
@@ -45,7 +45,7 @@ GalarBaseDataPointerTable::
 	add_basedatatable Grapploct
 	add_basedatatable Sinistea
 	add_basedatatable Polteageist
-	add_basedatatable Hatrenna
+	add_basedatatable Hatenna
 	add_basedatatable Hattrem
 	add_basedatatable Hatterene
 	add_basedatatable Impidimp
@@ -73,7 +73,7 @@ GalarBaseDataPointerTable::
 	add_basedatatable Arctozolt
 	add_basedatatable Dracovish
 	add_basedatatable Arctovish
-	add_basedatatable Duraldon
+	add_basedatatable Duraludon
 	add_basedatatable Dreepy
 	add_basedatatable Drakloak
 	add_basedatatable Dragapult

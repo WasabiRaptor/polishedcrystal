@@ -150,7 +150,6 @@ MisdreavusOverworldPalettePointers::
 
 UnownOverworldPalettePointers::
 	add_overworldpalettes Unown
-	add_overworldpalettes UnownA
 	add_overworldpalettes UnownB
 	add_overworldpalettes UnownC
 	add_overworldpalettes UnownD

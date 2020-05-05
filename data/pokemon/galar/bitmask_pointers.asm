@@ -61,11 +61,11 @@ NickitBitmasksPointers::
 ThievulBitmasksPointers::
 	add_bitmasks Thievul
 
-GrossifleurBitmasksPointers::
-	add_bitmasks Grossifleur
+GossifleurBitmasksPointers::
+	add_bitmasks Gossifleur
 
-EldegrossBitmasksPointers::
-	add_bitmasks Eldegross
+EldegossBitmasksPointers::
+	add_bitmasks Eldegoss
 
 WoolooBitmasksPointers::
 	add_bitmasks Wooloo
@@ -89,8 +89,8 @@ BoltundBitmasksPointers::
 RolycolyBitmasksPointers::
 	add_bitmasks Rolycoly
 
-CarkoalBitmasksPointers::
-	add_bitmasks Carkoal
+CarkolBitmasksPointers::
+	add_bitmasks Carkol
 
 CoalossalBitmasksPointers::
 	add_bitmasks Coalossal
@@ -152,8 +152,8 @@ SinisteaBitmasksPointers::
 PolteageistBitmasksPointers::
 	add_bitmasks Polteageist
 
-HatrennaBitmasksPointers::
-	add_bitmasks Hatrenna
+HatennaBitmasksPointers::
+	add_bitmasks Hatenna
 
 HattremBitmasksPointers::
 	add_bitmasks Hattrem
@@ -242,9 +242,9 @@ DracovishBitmasksPointers::
 ArctovishBitmasksPointers::
 	add_bitmasks Arctovish
 
-DuraldonBitmasksPointers::
-	add_bitmasks Duraldon
-	add_bitmasks DuraldonGiga
+DuraludonBitmasksPointers::
+	add_bitmasks Duraludon
+	add_bitmasks DuraludonGiga
 
 DreepyBitmasksPointers::
 	add_bitmasks Dreepy

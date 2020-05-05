@@ -61,11 +61,11 @@ NickitAnimationPointers::
 ThievulAnimationPointers::
 	add_anim Thievul
 
-GrossifleurAnimationPointers::
-	add_anim Grossifleur
+GossifleurAnimationPointers::
+	add_anim Gossifleur
 
-EldegrossAnimationPointers::
-	add_anim Eldegross
+EldegossAnimationPointers::
+	add_anim Eldegoss
 
 WoolooAnimationPointers::
 	add_anim Wooloo
@@ -89,8 +89,8 @@ BoltundAnimationPointers::
 RolycolyAnimationPointers::
 	add_anim Rolycoly
 
-CarkoalAnimationPointers::
-	add_anim Carkoal
+CarkolAnimationPointers::
+	add_anim Carkol
 
 CoalossalAnimationPointers::
 	add_anim Coalossal
@@ -152,8 +152,8 @@ SinisteaAnimationPointers::
 PolteageistAnimationPointers::
 	add_anim Polteageist
 
-HatrennaAnimationPointers::
-	add_anim Hatrenna
+HatennaAnimationPointers::
+	add_anim Hatenna
 
 HattremAnimationPointers::
 	add_anim Hattrem
@@ -242,9 +242,9 @@ DracovishAnimationPointers::
 ArctovishAnimationPointers::
 	add_anim Arctovish
 
-DuraldonAnimationPointers::
-	add_anim Duraldon
-	add_anim DuraldonGiga
+DuraludonAnimationPointers::
+	add_anim Duraludon
+	add_anim DuraludonGiga
 
 DreepyAnimationPointers::
 	add_anim Dreepy

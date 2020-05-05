@@ -247,8 +247,6 @@ ZygardePicPointers::
 	add_pics Zygarde
 	add_pics ZygardeFifty_percent
 	add_pics ZygardeComplete
-	add_pics ZygardeComplete
-	add_pics ZygardeComplete
 
 DianciePicPointers::
 	add_pics Diancie

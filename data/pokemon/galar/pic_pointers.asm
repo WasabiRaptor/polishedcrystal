@@ -61,11 +61,11 @@ NickitPicPointers::
 ThievulPicPointers::
 	add_pics Thievul
 
-GrossifleurPicPointers::
-	add_pics Grossifleur
+GossifleurPicPointers::
+	add_pics Gossifleur
 
-EldegrossPicPointers::
-	add_pics Eldegross
+EldegossPicPointers::
+	add_pics Eldegoss
 
 WoolooPicPointers::
 	add_pics Wooloo
@@ -89,8 +89,8 @@ BoltundPicPointers::
 RolycolyPicPointers::
 	add_pics Rolycoly
 
-CarkoalPicPointers::
-	add_pics Carkoal
+CarkolPicPointers::
+	add_pics Carkol
 
 CoalossalPicPointers::
 	add_pics Coalossal
@@ -152,8 +152,8 @@ SinisteaPicPointers::
 PolteageistPicPointers::
 	add_pics Polteageist
 
-HatrennaPicPointers::
-	add_pics Hatrenna
+HatennaPicPointers::
+	add_pics Hatenna
 
 HattremPicPointers::
 	add_pics Hattrem
@@ -242,9 +242,9 @@ DracovishPicPointers::
 ArctovishPicPointers::
 	add_pics Arctovish
 
-DuraldonPicPointers::
-	add_pics Duraldon
-	add_pics DuraldonGiga
+DuraludonPicPointers::
+	add_pics Duraludon
+	add_pics DuraludonGiga
 
 DreepyPicPointers::
 	add_pics Dreepy

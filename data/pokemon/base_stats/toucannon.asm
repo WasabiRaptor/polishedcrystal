@@ -1,20 +1,21 @@
-	dw 00733 ;national dex no
 
-        db  80, 120,  75,  60,  75,  75
-        evs  0,   3,   0,   0,   0,   0
-        ;   hp  atk  def  spd  sat  sdf
+    dw 00733 ;national dex no
 
-        db NORMAL, FLYING ; type
-        db 45 ; catch rate
-        db 218 ; base exp
-        db NO_ITEM, NO_ITEM ; items
-        dn FEMALE_50, 3 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/toucannon/front.dimensions"
-        db KEEN_EYE, SKILL_LINK     ; abilities
-        db SHEER_FORCE    ; hidden ability
-        db GROWTH_MEDIUM_FAST ; growth rate
-        dn EGG_FLYING ; egg groups
+    db  80, 120,  75,  60,  75,  75
+    evs  0,   3,   0,   0,   0,   0
+    ;   hp  atk  def  spd  sat  sdf
 
-        ; tm/hm learnset
-        tmhm
-        ; end
+    db NORMAL, FLYING ; type
+    db 45 ; catch rate
+    db 218 ; base exp
+    db NO_ITEM, NO_ITEM ; items
+    dn FEMALE_50, 3 ; gender, step cycles to hatch
+    INCBIN "gfx/pokemon/toucannon/front.dimensions"
+    db KEEN_EYE, SKILL_LINK     ; abilities
+    db SHEER_FORCE    ; hidden ability
+    db GROWTH_MEDIUM_FAST ; growth rate
+    dn EGG_FLYING ; egg groups
+
+    ; tm/hm learnset
+    tmhm
+    ; end

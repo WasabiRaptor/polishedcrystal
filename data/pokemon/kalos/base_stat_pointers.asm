@@ -248,8 +248,6 @@ ZygardeBaseDataPointers::
 	add_basedata Zygarde
 	add_basedata Zygarde
 	add_basedata Zygarde
-	add_basedata Zygarde
-	add_basedata Zygarde
 
 DiancieBaseDataPointers::
 	add_basedata Diancie

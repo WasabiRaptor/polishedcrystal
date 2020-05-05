@@ -150,7 +150,6 @@ MisdreavusAnimationIdlePointers::
 
 UnownAnimationIdlePointers::
 	add_idleanim Unown
-	add_idleanim UnownA
 	add_idleanim UnownB
 	add_idleanim UnownC
 	add_idleanim UnownD

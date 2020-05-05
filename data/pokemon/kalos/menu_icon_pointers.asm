@@ -247,8 +247,6 @@ ZygardeIconPointers::
 	add_icon Zygarde
 	add_icon ZygardeFifty_percent
 	add_icon ZygardeComplete
-	add_icon ZygardeComplete
-	add_icon ZygardeComplete
 
 DiancieIconPointers::
 	add_icon Diancie

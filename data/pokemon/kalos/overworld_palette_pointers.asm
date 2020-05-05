@@ -247,8 +247,6 @@ ZygardeOverworldPalettePointers::
 	add_overworldpalettes Zygarde
 	add_overworldpalettes ZygardeFifty_percent
 	add_overworldpalettes ZygardeComplete
-	add_overworldpalettes ZygardeComplete
-	add_overworldpalettes ZygardeComplete
 
 DiancieOverworldPalettePointers::
 	add_overworldpalettes Diancie

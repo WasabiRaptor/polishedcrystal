@@ -309,10 +309,6 @@ ZygardeFifty_percentFrontpic::	INCBIN "gfx/pokemon/zygarde_fifty_percent/front.a
 ZygardeFifty_percentBackpic::	INCBIN "gfx/pokemon/zygarde_fifty_percent/back.2bpp.lz"
 ZygardeCompleteFrontpic::	INCBIN "gfx/pokemon/zygarde_complete/front.animated.2bpp.lz"
 ZygardeCompleteBackpic::	INCBIN "gfx/pokemon/zygarde_complete/back.2bpp.lz"
-ZygardeCompleteFrontpic::	INCBIN "gfx/pokemon/zygarde_complete/front.animated.2bpp.lz"
-ZygardeCompleteBackpic::	INCBIN "gfx/pokemon/zygarde_complete/back.2bpp.lz"
-ZygardeCompleteFrontpic::	INCBIN "gfx/pokemon/zygarde_complete/front.animated.2bpp.lz"
-ZygardeCompleteBackpic::	INCBIN "gfx/pokemon/zygarde_complete/back.2bpp.lz"
 
 DiancieFrontpic::	INCBIN "gfx/pokemon/diancie/front.animated.2bpp.lz"
 DiancieBackpic::	INCBIN "gfx/pokemon/diancie/back.2bpp.lz"

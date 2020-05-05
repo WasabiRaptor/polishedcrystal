@@ -47,9 +47,9 @@ NickitIcon::	INCBIN "gfx/icons/nickit.2bpp"
 
 ThievulIcon::	INCBIN "gfx/icons/thievul.2bpp"
 
-GrossifleurIcon::	INCBIN "gfx/icons/grossifleur.2bpp"
+GossifleurIcon::	INCBIN "gfx/icons/gossifleur.2bpp"
 
-EldegrossIcon::	INCBIN "gfx/icons/eldegross.2bpp"
+EldegossIcon::	INCBIN "gfx/icons/eldegoss.2bpp"
 
 WoolooIcon::	INCBIN "gfx/icons/wooloo.2bpp"
 
@@ -66,7 +66,7 @@ BoltundIcon::	INCBIN "gfx/icons/boltund.2bpp"
 
 RolycolyIcon::	INCBIN "gfx/icons/rolycoly.2bpp"
 
-CarkoalIcon::	INCBIN "gfx/icons/carkoal.2bpp"
+CarkolIcon::	INCBIN "gfx/icons/carkol.2bpp"
 
 CoalossalIcon::	INCBIN "gfx/icons/coalossal.2bpp"
 CoalossalGigaIcon::	INCBIN "gfx/icons/coalossal_giga.2bpp"
@@ -117,7 +117,7 @@ SECTION "Galar Icons 4", ROMX
 
 PolteageistIcon::	INCBIN "gfx/icons/polteageist.2bpp"
 
-HatrennaIcon::	INCBIN "gfx/icons/hatrenna.2bpp"
+HatennaIcon::	INCBIN "gfx/icons/hatenna.2bpp"
 
 HattremIcon::	INCBIN "gfx/icons/hattrem.2bpp"
 
@@ -182,8 +182,8 @@ DracovishIcon::	INCBIN "gfx/icons/dracovish.2bpp"
 
 ArctovishIcon::	INCBIN "gfx/icons/arctovish.2bpp"
 
-DuraldonIcon::	INCBIN "gfx/icons/duraldon.2bpp"
-DuraldonGigaIcon::	INCBIN "gfx/icons/duraldon_giga.2bpp"
+DuraludonIcon::	INCBIN "gfx/icons/duraludon.2bpp"
+DuraludonGigaIcon::	INCBIN "gfx/icons/duraludon_giga.2bpp"
 
 
 SECTION "Galar Icons 6", ROMX

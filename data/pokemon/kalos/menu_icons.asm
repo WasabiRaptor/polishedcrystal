@@ -192,8 +192,6 @@ YveltalIcon::	INCBIN "gfx/icons/yveltal.2bpp"
 ZygardeIcon::	INCBIN "gfx/icons/zygarde.2bpp"
 ZygardeFifty_percentIcon::	INCBIN "gfx/icons/zygarde_fifty_percent.2bpp"
 ZygardeCompleteIcon::	INCBIN "gfx/icons/zygarde_complete.2bpp"
-ZygardeCompleteIcon::	INCBIN "gfx/icons/zygarde_complete.2bpp"
-ZygardeCompleteIcon::	INCBIN "gfx/icons/zygarde_complete.2bpp"
 
 DiancieIcon::	INCBIN "gfx/icons/diancie.2bpp"
 DiancieMegaIcon::	INCBIN "gfx/icons/diancie_mega.2bpp"

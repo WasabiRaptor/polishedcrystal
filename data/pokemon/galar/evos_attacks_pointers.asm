@@ -61,11 +61,11 @@ NickitEvosAttacksPointers::
 ThievulEvosAttacksPointers::
 	add_evosattacks Thievul
 
-GrossifleurEvosAttacksPointers::
-	add_evosattacks Grossifleur
+GossifleurEvosAttacksPointers::
+	add_evosattacks Gossifleur
 
-EldegrossEvosAttacksPointers::
-	add_evosattacks Eldegross
+EldegossEvosAttacksPointers::
+	add_evosattacks Eldegoss
 
 WoolooEvosAttacksPointers::
 	add_evosattacks Wooloo
@@ -89,8 +89,8 @@ BoltundEvosAttacksPointers::
 RolycolyEvosAttacksPointers::
 	add_evosattacks Rolycoly
 
-CarkoalEvosAttacksPointers::
-	add_evosattacks Carkoal
+CarkolEvosAttacksPointers::
+	add_evosattacks Carkol
 
 CoalossalEvosAttacksPointers::
 	add_evosattacks Coalossal
@@ -152,8 +152,8 @@ SinisteaEvosAttacksPointers::
 PolteageistEvosAttacksPointers::
 	add_evosattacks Polteageist
 
-HatrennaEvosAttacksPointers::
-	add_evosattacks Hatrenna
+HatennaEvosAttacksPointers::
+	add_evosattacks Hatenna
 
 HattremEvosAttacksPointers::
 	add_evosattacks Hattrem
@@ -242,9 +242,9 @@ DracovishEvosAttacksPointers::
 ArctovishEvosAttacksPointers::
 	add_evosattacks Arctovish
 
-DuraldonEvosAttacksPointers::
-	add_evosattacks Duraldon
-	add_evosattacks DuraldonGiga
+DuraludonEvosAttacksPointers::
+	add_evosattacks Duraludon
+	add_evosattacks DuraludonGiga
 
 DreepyEvosAttacksPointers::
 	add_evosattacks Dreepy

@@ -1288,28 +1288,6 @@ ZygardeCompleteShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/zygarde_complete/s
 ZygardeCompleteShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
 ZygardeCompleteShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
 ZygardeCompleteShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteOverworldPalettes::
-ZygardeCompleteNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteOverworldPalettes::
-ZygardeCompleteNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/zygarde_complete/overworld.gbcpal", middle_colors
-ZygardeCompleteShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
-ZygardeCompleteShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/zygarde_complete/shiny_overworld.pal"
 
 DiancieOverworldPalettes:
 DiancieNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/diancie/overworld.gbcpal", middle_colors

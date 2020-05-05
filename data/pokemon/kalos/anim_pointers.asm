@@ -247,8 +247,6 @@ ZygardeAnimationPointers::
 	add_anim Zygarde
 	add_anim ZygardeFifty_percent
 	add_anim ZygardeComplete
-	add_anim ZygardeComplete
-	add_anim ZygardeComplete
 
 DiancieAnimationPointers::
 	add_anim Diancie

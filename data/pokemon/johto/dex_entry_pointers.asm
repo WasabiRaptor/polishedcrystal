@@ -177,7 +177,6 @@ UnownPokedexEntryPointers::
 	add_pokedexentry Unown
 	add_pokedexentry Unown
 	add_pokedexentry Unown
-	add_pokedexentry Unown
 
 WobbuffetPokedexEntryPointers::
 	add_pokedexentry Wobbuffet

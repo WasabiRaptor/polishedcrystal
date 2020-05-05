@@ -247,8 +247,6 @@ ZygardePalettePointers::
 	add_palettes Zygarde
 	add_palettes ZygardeFifty_percent
 	add_palettes ZygardeComplete
-	add_palettes ZygardeComplete
-	add_palettes ZygardeComplete
 
 DianciePalettePointers::
 	add_palettes Diancie

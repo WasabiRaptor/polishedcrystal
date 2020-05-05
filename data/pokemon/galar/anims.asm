@@ -42,9 +42,9 @@ NickitAnimation:	INCLUDE "gfx/pokemon/nickit/anim.asm"
 
 ThievulAnimation:	INCLUDE "gfx/pokemon/thievul/anim.asm"
 
-GrossifleurAnimation:	INCLUDE "gfx/pokemon/grossifleur/anim.asm"
+GossifleurAnimation:	INCLUDE "gfx/pokemon/gossifleur/anim.asm"
 
-EldegrossAnimation:	INCLUDE "gfx/pokemon/eldegross/anim.asm"
+EldegossAnimation:	INCLUDE "gfx/pokemon/eldegoss/anim.asm"
 
 WoolooAnimation:	INCLUDE "gfx/pokemon/wooloo/anim.asm"
 
@@ -61,7 +61,7 @@ BoltundAnimation:	INCLUDE "gfx/pokemon/boltund/anim.asm"
 
 RolycolyAnimation:	INCLUDE "gfx/pokemon/rolycoly/anim.asm"
 
-CarkoalAnimation:	INCLUDE "gfx/pokemon/carkoal/anim.asm"
+CarkolAnimation:	INCLUDE "gfx/pokemon/carkol/anim.asm"
 
 CoalossalAnimation:	INCLUDE "gfx/pokemon/coalossal/anim.asm"
 CoalossalGigaAnimation::	INCLUDE "gfx/pokemon/coalossal_giga/anim.asm"
@@ -106,7 +106,7 @@ SinisteaAnimation:	INCLUDE "gfx/pokemon/sinistea/anim.asm"
 
 PolteageistAnimation:	INCLUDE "gfx/pokemon/polteageist/anim.asm"
 
-HatrennaAnimation:	INCLUDE "gfx/pokemon/hatrenna/anim.asm"
+HatennaAnimation:	INCLUDE "gfx/pokemon/hatenna/anim.asm"
 
 HattremAnimation:	INCLUDE "gfx/pokemon/hattrem/anim.asm"
 
@@ -168,8 +168,8 @@ DracovishAnimation:	INCLUDE "gfx/pokemon/dracovish/anim.asm"
 
 ArctovishAnimation:	INCLUDE "gfx/pokemon/arctovish/anim.asm"
 
-DuraldonAnimation:	INCLUDE "gfx/pokemon/duraldon/anim.asm"
-DuraldonGigaAnimation::	INCLUDE "gfx/pokemon/duraldon_giga/anim.asm"
+DuraludonAnimation:	INCLUDE "gfx/pokemon/duraludon/anim.asm"
+DuraludonGigaAnimation::	INCLUDE "gfx/pokemon/duraludon_giga/anim.asm"
 
 DreepyAnimation:	INCLUDE "gfx/pokemon/dreepy/anim.asm"
 

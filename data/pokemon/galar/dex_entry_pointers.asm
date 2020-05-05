@@ -61,11 +61,11 @@ NickitPokedexEntryPointers::
 ThievulPokedexEntryPointers::
 	add_pokedexentry Thievul
 
-GrossifleurPokedexEntryPointers::
-	add_pokedexentry Grossifleur
+GossifleurPokedexEntryPointers::
+	add_pokedexentry Gossifleur
 
-EldegrossPokedexEntryPointers::
-	add_pokedexentry Eldegross
+EldegossPokedexEntryPointers::
+	add_pokedexentry Eldegoss
 
 WoolooPokedexEntryPointers::
 	add_pokedexentry Wooloo
@@ -89,8 +89,8 @@ BoltundPokedexEntryPointers::
 RolycolyPokedexEntryPointers::
 	add_pokedexentry Rolycoly
 
-CarkoalPokedexEntryPointers::
-	add_pokedexentry Carkoal
+CarkolPokedexEntryPointers::
+	add_pokedexentry Carkol
 
 CoalossalPokedexEntryPointers::
 	add_pokedexentry Coalossal
@@ -152,8 +152,8 @@ SinisteaPokedexEntryPointers::
 PolteageistPokedexEntryPointers::
 	add_pokedexentry Polteageist
 
-HatrennaPokedexEntryPointers::
-	add_pokedexentry Hatrenna
+HatennaPokedexEntryPointers::
+	add_pokedexentry Hatenna
 
 HattremPokedexEntryPointers::
 	add_pokedexentry Hattrem
@@ -242,9 +242,9 @@ DracovishPokedexEntryPointers::
 ArctovishPokedexEntryPointers::
 	add_pokedexentry Arctovish
 
-DuraldonPokedexEntryPointers::
-	add_pokedexentry Duraldon
-	add_pokedexentry Duraldon
+DuraludonPokedexEntryPointers::
+	add_pokedexentry Duraludon
+	add_pokedexentry Duraludon
 
 DreepyPokedexEntryPointers::
 	add_pokedexentry Dreepy

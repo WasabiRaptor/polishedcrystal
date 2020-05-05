@@ -18,8 +18,8 @@ GalarPalettePointerTable::
 	add_palettetable Orbeetle
 	add_palettetable Nickit
 	add_palettetable Thievul
-	add_palettetable Grossifleur
-	add_palettetable Eldegross
+	add_palettetable Gossifleur
+	add_palettetable Eldegoss
 	add_palettetable Wooloo
 	add_palettetable Dubwool
 	add_palettetable Chewtle
@@ -27,7 +27,7 @@ GalarPalettePointerTable::
 	add_palettetable Yamper
 	add_palettetable Boltund
 	add_palettetable Rolycoly
-	add_palettetable Carkoal
+	add_palettetable Carkol
 	add_palettetable Coalossal
 	add_palettetable Applin
 	add_palettetable Flapple
@@ -45,7 +45,7 @@ GalarPalettePointerTable::
 	add_palettetable Grapploct
 	add_palettetable Sinistea
 	add_palettetable Polteageist
-	add_palettetable Hatrenna
+	add_palettetable Hatenna
 	add_palettetable Hattrem
 	add_palettetable Hatterene
 	add_palettetable Impidimp
@@ -73,7 +73,7 @@ GalarPalettePointerTable::
 	add_palettetable Arctozolt
 	add_palettetable Dracovish
 	add_palettetable Arctovish
-	add_palettetable Duraldon
+	add_palettetable Duraludon
 	add_palettetable Dreepy
 	add_palettetable Drakloak
 	add_palettetable Dragapult

@@ -204,9 +204,6 @@ MisdreavusShinyPalette:	INCLUDE "gfx/pokemon/misdreavus/shiny.pal"
 UnownPalettes:
 UnownNormalPalette:	INCBIN "gfx/pokemon/unown/front.gbcpal", middle_colors
 UnownShinyPalette:	INCLUDE "gfx/pokemon/unown/shiny.pal"
-UnownAPalettes:
-UnownANormalPalette:	INCBIN "gfx/pokemon/unown_a/front.gbcpal", middle_colors
-UnownAShinyPalette:	INCLUDE "gfx/pokemon/unown_a/shiny.pal"
 UnownBPalettes:
 UnownBNormalPalette:	INCBIN "gfx/pokemon/unown_b/front.gbcpal", middle_colors
 UnownBShinyPalette:	INCLUDE "gfx/pokemon/unown_b/shiny.pal"

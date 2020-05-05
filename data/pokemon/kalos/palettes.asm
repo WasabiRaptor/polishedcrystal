@@ -400,12 +400,6 @@ ZygardeFifty_percentShinyPalette:	INCLUDE "gfx/pokemon/zygarde_fifty_percent/shi
 ZygardeCompletePalettes:
 ZygardeCompleteNormalPalette:	INCBIN "gfx/pokemon/zygarde_complete/front.gbcpal", middle_colors
 ZygardeCompleteShinyPalette:	INCLUDE "gfx/pokemon/zygarde_complete/shiny.pal"
-ZygardeCompletePalettes:
-ZygardeCompleteNormalPalette:	INCBIN "gfx/pokemon/zygarde_complete/front.gbcpal", middle_colors
-ZygardeCompleteShinyPalette:	INCLUDE "gfx/pokemon/zygarde_complete/shiny.pal"
-ZygardeCompletePalettes:
-ZygardeCompleteNormalPalette:	INCBIN "gfx/pokemon/zygarde_complete/front.gbcpal", middle_colors
-ZygardeCompleteShinyPalette:	INCLUDE "gfx/pokemon/zygarde_complete/shiny.pal"
 
 DianciePalettes:
 DiancieNormalPalette:	INCBIN "gfx/pokemon/diancie/front.gbcpal", middle_colors

@@ -100,7 +100,6 @@ SlowkingAnimation:	INCLUDE "gfx/pokemon/slowking/anim.asm"
 MisdreavusAnimation:	INCLUDE "gfx/pokemon/misdreavus/anim.asm"
 
 UnownAnimation:	INCLUDE "gfx/pokemon/unown/anim.asm"
-UnownAAnimation::	INCLUDE "gfx/pokemon/unown_a/anim.asm"
 UnownBAnimation::	INCLUDE "gfx/pokemon/unown_b/anim.asm"
 UnownCAnimation::	INCLUDE "gfx/pokemon/unown_c/anim.asm"
 UnownDAnimation::	INCLUDE "gfx/pokemon/unown_d/anim.asm"

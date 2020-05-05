@@ -620,17 +620,6 @@ UnownShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/unown/shiny.pal"
 UnownShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/unown/shiny.pal"
 UnownShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/unown/shiny.pal"
 UnownShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/unown/shiny.pal"
-UnownAOverworldPalettes::
-UnownANormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/unown_a/overworld.gbcpal", middle_colors
-UnownANormalOverworldPaletteDay:	INCBIN "gfx/pokemon/unown_a/overworld.gbcpal", middle_colors
-UnownANormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/unown_a/overworld.gbcpal", middle_colors
-UnownANormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/unown_a/overworld.gbcpal", middle_colors
-UnownANormalOverworldPaletteDark:	INCBIN "gfx/pokemon/unown_a/overworld.gbcpal", middle_colors
-UnownAShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/unown_a/shiny_overworld.pal"
-UnownAShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/unown_a/shiny_overworld.pal"
-UnownAShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/unown_a/shiny_overworld.pal"
-UnownAShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/unown_a/shiny_overworld.pal"
-UnownAShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/unown_a/shiny_overworld.pal"
 UnownBOverworldPalettes::
 UnownBNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/unown_b/overworld.gbcpal", middle_colors
 UnownBNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/unown_b/overworld.gbcpal", middle_colors

@@ -37,9 +37,9 @@ NickitBaseData::	INCLUDE "data/pokemon/base_stats/nickit.asm"
 
 ThievulBaseData::	INCLUDE "data/pokemon/base_stats/thievul.asm"
 
-GrossifleurBaseData::	INCLUDE "data/pokemon/base_stats/grossifleur.asm"
+GossifleurBaseData::	INCLUDE "data/pokemon/base_stats/gossifleur.asm"
 
-EldegrossBaseData::	INCLUDE "data/pokemon/base_stats/eldegross.asm"
+EldegossBaseData::	INCLUDE "data/pokemon/base_stats/eldegoss.asm"
 
 WoolooBaseData::	INCLUDE "data/pokemon/base_stats/wooloo.asm"
 
@@ -55,7 +55,7 @@ BoltundBaseData::	INCLUDE "data/pokemon/base_stats/boltund.asm"
 
 RolycolyBaseData::	INCLUDE "data/pokemon/base_stats/rolycoly.asm"
 
-CarkoalBaseData::	INCLUDE "data/pokemon/base_stats/carkoal.asm"
+CarkolBaseData::	INCLUDE "data/pokemon/base_stats/carkol.asm"
 
 CoalossalBaseData::	INCLUDE "data/pokemon/base_stats/coalossal.asm"
 
@@ -91,7 +91,7 @@ SinisteaBaseData::	INCLUDE "data/pokemon/base_stats/sinistea.asm"
 
 PolteageistBaseData::	INCLUDE "data/pokemon/base_stats/polteageist.asm"
 
-HatrennaBaseData::	INCLUDE "data/pokemon/base_stats/hatrenna.asm"
+HatennaBaseData::	INCLUDE "data/pokemon/base_stats/hatenna.asm"
 
 HattremBaseData::	INCLUDE "data/pokemon/base_stats/hattrem.asm"
 
@@ -147,7 +147,7 @@ DracovishBaseData::	INCLUDE "data/pokemon/base_stats/dracovish.asm"
 
 ArctovishBaseData::	INCLUDE "data/pokemon/base_stats/arctovish.asm"
 
-DuraldonBaseData::	INCLUDE "data/pokemon/base_stats/duraldon.asm"
+DuraludonBaseData::	INCLUDE "data/pokemon/base_stats/duraludon.asm"
 
 DreepyBaseData::	INCLUDE "data/pokemon/base_stats/dreepy.asm"
 

@@ -150,7 +150,6 @@ MisdreavusEvosAttacksPointers::
 
 UnownEvosAttacksPointers::
 	add_evosattacks Unown
-	add_evosattacks UnownA
 	add_evosattacks UnownB
 	add_evosattacks UnownC
 	add_evosattacks UnownD

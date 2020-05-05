@@ -18,8 +18,8 @@ GalarPicPointerTable::
 	add_pictable Orbeetle
 	add_pictable Nickit
 	add_pictable Thievul
-	add_pictable Grossifleur
-	add_pictable Eldegross
+	add_pictable Gossifleur
+	add_pictable Eldegoss
 	add_pictable Wooloo
 	add_pictable Dubwool
 	add_pictable Chewtle
@@ -27,7 +27,7 @@ GalarPicPointerTable::
 	add_pictable Yamper
 	add_pictable Boltund
 	add_pictable Rolycoly
-	add_pictable Carkoal
+	add_pictable Carkol
 	add_pictable Coalossal
 	add_pictable Applin
 	add_pictable Flapple
@@ -45,7 +45,7 @@ GalarPicPointerTable::
 	add_pictable Grapploct
 	add_pictable Sinistea
 	add_pictable Polteageist
-	add_pictable Hatrenna
+	add_pictable Hatenna
 	add_pictable Hattrem
 	add_pictable Hatterene
 	add_pictable Impidimp
@@ -73,7 +73,7 @@ GalarPicPointerTable::
 	add_pictable Arctozolt
 	add_pictable Dracovish
 	add_pictable Arctovish
-	add_pictable Duraldon
+	add_pictable Duraludon
 	add_pictable Dreepy
 	add_pictable Drakloak
 	add_pictable Dragapult

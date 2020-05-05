@@ -177,7 +177,6 @@ UnownNames::
 	add_name Unown
 	add_name Unown
 	add_name Unown
-	add_name Unown
 
 WobbuffetNames::
 	add_name Wobbuffet

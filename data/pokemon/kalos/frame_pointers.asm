@@ -247,8 +247,6 @@ ZygardeFramesPointers::
 	add_frames Zygarde
 	add_frames ZygardeFifty_percent
 	add_frames ZygardeComplete
-	add_frames ZygardeComplete
-	add_frames ZygardeComplete
 
 DiancieFramesPointers::
 	add_frames Diancie

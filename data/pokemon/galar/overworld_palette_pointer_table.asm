@@ -18,8 +18,8 @@ GalarOverworldPalettePointerTable::
 	add_overworldpalettetable Orbeetle
 	add_overworldpalettetable Nickit
 	add_overworldpalettetable Thievul
-	add_overworldpalettetable Grossifleur
-	add_overworldpalettetable Eldegross
+	add_overworldpalettetable Gossifleur
+	add_overworldpalettetable Eldegoss
 	add_overworldpalettetable Wooloo
 	add_overworldpalettetable Dubwool
 	add_overworldpalettetable Chewtle
@@ -27,7 +27,7 @@ GalarOverworldPalettePointerTable::
 	add_overworldpalettetable Yamper
 	add_overworldpalettetable Boltund
 	add_overworldpalettetable Rolycoly
-	add_overworldpalettetable Carkoal
+	add_overworldpalettetable Carkol
 	add_overworldpalettetable Coalossal
 	add_overworldpalettetable Applin
 	add_overworldpalettetable Flapple
@@ -45,7 +45,7 @@ GalarOverworldPalettePointerTable::
 	add_overworldpalettetable Grapploct
 	add_overworldpalettetable Sinistea
 	add_overworldpalettetable Polteageist
-	add_overworldpalettetable Hatrenna
+	add_overworldpalettetable Hatenna
 	add_overworldpalettetable Hattrem
 	add_overworldpalettetable Hatterene
 	add_overworldpalettetable Impidimp
@@ -73,7 +73,7 @@ GalarOverworldPalettePointerTable::
 	add_overworldpalettetable Arctozolt
 	add_overworldpalettetable Dracovish
 	add_overworldpalettetable Arctovish
-	add_overworldpalettetable Duraldon
+	add_overworldpalettetable Duraludon
 	add_overworldpalettetable Dreepy
 	add_overworldpalettetable Drakloak
 	add_overworldpalettetable Dragapult

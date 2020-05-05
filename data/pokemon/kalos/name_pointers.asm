@@ -247,8 +247,6 @@ ZygardeNames::
 	add_name Zygarde
 	add_name Zygarde
 	add_name Zygarde
-	add_name Zygarde
-	add_name Zygarde
 
 DiancieNames::
 	add_name Diancie

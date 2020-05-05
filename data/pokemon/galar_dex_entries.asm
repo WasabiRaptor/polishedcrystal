@@ -40,9 +40,9 @@ NickitPokedexEntry::	INCLUDE "data/pokemon/dex_entries/nickit.asm"
 
 ThievulPokedexEntry::	INCLUDE "data/pokemon/dex_entries/thievul.asm"
 
-GrossifleurPokedexEntry::	INCLUDE "data/pokemon/dex_entries/grossifleur.asm"
+GossifleurPokedexEntry::	INCLUDE "data/pokemon/dex_entries/gossifleur.asm"
 
-EldegrossPokedexEntry::	INCLUDE "data/pokemon/dex_entries/eldegross.asm"
+EldegossPokedexEntry::	INCLUDE "data/pokemon/dex_entries/eldegoss.asm"
 
 WoolooPokedexEntry::	INCLUDE "data/pokemon/dex_entries/wooloo.asm"
 
@@ -58,7 +58,7 @@ BoltundPokedexEntry::	INCLUDE "data/pokemon/dex_entries/boltund.asm"
 
 RolycolyPokedexEntry::	INCLUDE "data/pokemon/dex_entries/rolycoly.asm"
 
-CarkoalPokedexEntry::	INCLUDE "data/pokemon/dex_entries/carkoal.asm"
+CarkolPokedexEntry::	INCLUDE "data/pokemon/dex_entries/carkol.asm"
 
 CoalossalPokedexEntry::	INCLUDE "data/pokemon/dex_entries/coalossal.asm"
 
@@ -97,7 +97,7 @@ SinisteaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/sinistea.asm"
 
 PolteageistPokedexEntry::	INCLUDE "data/pokemon/dex_entries/polteageist.asm"
 
-HatrennaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/hatrenna.asm"
+HatennaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/hatenna.asm"
 
 HattremPokedexEntry::	INCLUDE "data/pokemon/dex_entries/hattrem.asm"
 
@@ -156,7 +156,7 @@ DracovishPokedexEntry::	INCLUDE "data/pokemon/dex_entries/dracovish.asm"
 
 ArctovishPokedexEntry::	INCLUDE "data/pokemon/dex_entries/arctovish.asm"
 
-DuraldonPokedexEntry::	INCLUDE "data/pokemon/dex_entries/duraldon.asm"
+DuraludonPokedexEntry::	INCLUDE "data/pokemon/dex_entries/duraludon.asm"
 
 DreepyPokedexEntry::	INCLUDE "data/pokemon/dex_entries/dreepy.asm"
 

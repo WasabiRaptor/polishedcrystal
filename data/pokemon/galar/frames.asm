@@ -42,9 +42,9 @@ NickitFrames:	INCLUDE "gfx/pokemon/nickit/frames.asm"
 
 ThievulFrames:	INCLUDE "gfx/pokemon/thievul/frames.asm"
 
-GrossifleurFrames:	INCLUDE "gfx/pokemon/grossifleur/frames.asm"
+GossifleurFrames:	INCLUDE "gfx/pokemon/gossifleur/frames.asm"
 
-EldegrossFrames:	INCLUDE "gfx/pokemon/eldegross/frames.asm"
+EldegossFrames:	INCLUDE "gfx/pokemon/eldegoss/frames.asm"
 
 WoolooFrames:	INCLUDE "gfx/pokemon/wooloo/frames.asm"
 
@@ -61,7 +61,7 @@ BoltundFrames:	INCLUDE "gfx/pokemon/boltund/frames.asm"
 
 RolycolyFrames:	INCLUDE "gfx/pokemon/rolycoly/frames.asm"
 
-CarkoalFrames:	INCLUDE "gfx/pokemon/carkoal/frames.asm"
+CarkolFrames:	INCLUDE "gfx/pokemon/carkol/frames.asm"
 
 CoalossalFrames:	INCLUDE "gfx/pokemon/coalossal/frames.asm"
 CoalossalGigaFrames::	INCLUDE "gfx/pokemon/coalossal_giga/frames.asm"
@@ -106,7 +106,7 @@ SinisteaFrames:	INCLUDE "gfx/pokemon/sinistea/frames.asm"
 
 PolteageistFrames:	INCLUDE "gfx/pokemon/polteageist/frames.asm"
 
-HatrennaFrames:	INCLUDE "gfx/pokemon/hatrenna/frames.asm"
+HatennaFrames:	INCLUDE "gfx/pokemon/hatenna/frames.asm"
 
 HattremFrames:	INCLUDE "gfx/pokemon/hattrem/frames.asm"
 
@@ -168,8 +168,8 @@ DracovishFrames:	INCLUDE "gfx/pokemon/dracovish/frames.asm"
 
 ArctovishFrames:	INCLUDE "gfx/pokemon/arctovish/frames.asm"
 
-DuraldonFrames:	INCLUDE "gfx/pokemon/duraldon/frames.asm"
-DuraldonGigaFrames::	INCLUDE "gfx/pokemon/duraldon_giga/frames.asm"
+DuraludonFrames:	INCLUDE "gfx/pokemon/duraludon/frames.asm"
+DuraludonGigaFrames::	INCLUDE "gfx/pokemon/duraludon_giga/frames.asm"
 
 DreepyFrames:	INCLUDE "gfx/pokemon/dreepy/frames.asm"
 

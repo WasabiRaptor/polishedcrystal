@@ -150,7 +150,6 @@ MisdreavusPicPointers::
 
 UnownPicPointers::
 	add_pics Unown
-	add_pics UnownA
 	add_pics UnownB
 	add_pics UnownC
 	add_pics UnownD

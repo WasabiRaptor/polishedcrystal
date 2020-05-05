@@ -178,7 +178,6 @@ UnownBaseDataPointers::
 	add_basedata Unown
 	add_basedata Unown
 	add_basedata Unown
-	add_basedata Unown
 
 WobbuffetBaseDataPointers::
 	add_basedata Wobbuffet

@@ -247,8 +247,6 @@ ZygardeAnimationIdlePointers::
 	add_idleanim Zygarde
 	add_idleanim ZygardeFifty_percent
 	add_idleanim ZygardeComplete
-	add_idleanim ZygardeComplete
-	add_idleanim ZygardeComplete
 
 DiancieAnimationIdlePointers::
 	add_idleanim Diancie

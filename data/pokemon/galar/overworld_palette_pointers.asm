@@ -61,11 +61,11 @@ NickitOverworldPalettePointers::
 ThievulOverworldPalettePointers::
 	add_overworldpalettes Thievul
 
-GrossifleurOverworldPalettePointers::
-	add_overworldpalettes Grossifleur
+GossifleurOverworldPalettePointers::
+	add_overworldpalettes Gossifleur
 
-EldegrossOverworldPalettePointers::
-	add_overworldpalettes Eldegross
+EldegossOverworldPalettePointers::
+	add_overworldpalettes Eldegoss
 
 WoolooOverworldPalettePointers::
 	add_overworldpalettes Wooloo
@@ -89,8 +89,8 @@ BoltundOverworldPalettePointers::
 RolycolyOverworldPalettePointers::
 	add_overworldpalettes Rolycoly
 
-CarkoalOverworldPalettePointers::
-	add_overworldpalettes Carkoal
+CarkolOverworldPalettePointers::
+	add_overworldpalettes Carkol
 
 CoalossalOverworldPalettePointers::
 	add_overworldpalettes Coalossal
@@ -152,8 +152,8 @@ SinisteaOverworldPalettePointers::
 PolteageistOverworldPalettePointers::
 	add_overworldpalettes Polteageist
 
-HatrennaOverworldPalettePointers::
-	add_overworldpalettes Hatrenna
+HatennaOverworldPalettePointers::
+	add_overworldpalettes Hatenna
 
 HattremOverworldPalettePointers::
 	add_overworldpalettes Hattrem
@@ -242,9 +242,9 @@ DracovishOverworldPalettePointers::
 ArctovishOverworldPalettePointers::
 	add_overworldpalettes Arctovish
 
-DuraldonOverworldPalettePointers::
-	add_overworldpalettes Duraldon
-	add_overworldpalettes DuraldonGiga
+DuraludonOverworldPalettePointers::
+	add_overworldpalettes Duraludon
+	add_overworldpalettes DuraludonGiga
 
 DreepyOverworldPalettePointers::
 	add_overworldpalettes Dreepy

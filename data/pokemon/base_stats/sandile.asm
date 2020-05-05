@@ -1,20 +1,21 @@
-	dw 00551 ;national dex no
 
-        db  50,  72,  35,  65,  35,  35
-        evs  0,   1,   0,   0,   0,   0
-        ;   hp  atk  def  spd  sat  sdf
+    dw 00551 ;national dex no
 
-        db GROUND, DARK ; type
-        db 180 ; catch rate
-        db 58 ; base exp
-        db NO_ITEM, NO_ITEM ; items
-        dn FEMALE_50, 4 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/sandile/front.dimensions"
-        db INTIMIDATE, MOXIE     ; abilities
-        db ANGER_POINT    ; hidden ability
-        db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_FIELD ; egg groups
+    db  50,  72,  35,  65,  35,  35
+    evs  0,   1,   0,   0,   0,   0
+    ;   hp  atk  def  spd  sat  sdf
 
-        ; tm/hm learnset
-        tmhm
-        ; end
+    db GROUND, DARK ; type
+    db 180 ; catch rate
+    db 58 ; base exp
+    db NO_ITEM, NO_ITEM ; items
+    dn FEMALE_50, 4 ; gender, step cycles to hatch
+    INCBIN "gfx/pokemon/sandile/front.dimensions"
+    db INTIMIDATE, MOXIE     ; abilities
+    db ANGER_POINT    ; hidden ability
+    db GROWTH_MEDIUM_SLOW ; growth rate
+    dn EGG_FIELD ; egg groups
+
+    ; tm/hm learnset
+    tmhm
+    ; end

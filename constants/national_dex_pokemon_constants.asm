@@ -348,7 +348,6 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon SLOWKING
 	nat_dexmon MISDREAVUS
 	nat_dexmon UNOWN
-	nat_dexmon_form A
 	nat_dexmon_form B
 	nat_dexmon_form C
 	nat_dexmon_form D
@@ -1140,8 +1139,6 @@ NUM_UNOVA_POKEMON EQU const_value +-1
 	nat_dexmon ZYGARDE
 	nat_dexmon_form FIFTY_PERCENT
 	nat_dexmon_form COMPLETE
-	nat_dexmon_form COMPLETE
-	nat_dexmon_form COMPLETE
 	nat_dexmon DIANCIE
 	nat_dexmon_form MEGA
 	nat_dexmon HOOPA
@@ -1373,8 +1370,8 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	nat_dexmon_form GIGA
 	nat_dexmon NICKIT
 	nat_dexmon THIEVUL
-	nat_dexmon GROSSIFLEUR
-	nat_dexmon ELDEGROSS
+	nat_dexmon GOSSIFLEUR
+	nat_dexmon ELDEGOSS
 	nat_dexmon WOOLOO ; now you're blue
 	nat_dexmon DUBWOOL
 	nat_dexmon CHEWTLE
@@ -1383,7 +1380,7 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	nat_dexmon YAMPER
 	nat_dexmon BOLTUND
 	nat_dexmon ROLYCOLY
-	nat_dexmon CARKOAL ; ree
+	nat_dexmon CARKOL ; ree
 	nat_dexmon COALOSSAL ; you ruined my roly coal boi ceast to exist you Rhydon 2
 	nat_dexmon_form GIGA
 	nat_dexmon APPLIN
@@ -1410,7 +1407,7 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	nat_dexmon GRAPPLOCT
 	nat_dexmon SINISTEA
 	nat_dexmon POLTEAGEIST
-	nat_dexmon HATRENNA
+	nat_dexmon HATENNA
 	nat_dexmon HATTREM
 	nat_dexmon HATTERENE
 	nat_dexmon_form GIGA
@@ -1444,7 +1441,7 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	nat_dexmon ARCTOZOLT	;god why
 	nat_dexmon DRACOVISH		;oh god please why
 	nat_dexmon ARCTOVISH 			;these should never have been made
-	nat_dexmon DURALDON
+	nat_dexmon DURALUDON
 	nat_dexmon_form GIGA
 	nat_dexmon DREEPY
 	nat_dexmon DRAKLOAK

@@ -282,29 +282,29 @@ ThievulShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/thievul/shiny.pal"
 ThievulShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/thievul/shiny.pal"
 ThievulShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/thievul/shiny.pal"
 
-GrossifleurOverworldPalettes:
-GrossifleurNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/grossifleur/overworld.gbcpal", middle_colors
-GrossifleurNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/grossifleur/overworld.gbcpal", middle_colors
-GrossifleurNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/grossifleur/overworld.gbcpal", middle_colors
-GrossifleurNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/grossifleur/overworld.gbcpal", middle_colors
-GrossifleurNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/grossifleur/overworld.gbcpal", middle_colors
-GrossifleurShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/grossifleur/shiny.pal"
-GrossifleurShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/grossifleur/shiny.pal"
-GrossifleurShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/grossifleur/shiny.pal"
-GrossifleurShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/grossifleur/shiny.pal"
-GrossifleurShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/grossifleur/shiny.pal"
+GossifleurOverworldPalettes:
+GossifleurNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/gossifleur/overworld.gbcpal", middle_colors
+GossifleurNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/gossifleur/overworld.gbcpal", middle_colors
+GossifleurNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/gossifleur/overworld.gbcpal", middle_colors
+GossifleurNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/gossifleur/overworld.gbcpal", middle_colors
+GossifleurNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/gossifleur/overworld.gbcpal", middle_colors
+GossifleurShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/gossifleur/shiny.pal"
+GossifleurShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/gossifleur/shiny.pal"
+GossifleurShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/gossifleur/shiny.pal"
+GossifleurShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/gossifleur/shiny.pal"
+GossifleurShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/gossifleur/shiny.pal"
 
-EldegrossOverworldPalettes:
-EldegrossNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/eldegross/overworld.gbcpal", middle_colors
-EldegrossNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/eldegross/overworld.gbcpal", middle_colors
-EldegrossNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/eldegross/overworld.gbcpal", middle_colors
-EldegrossNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/eldegross/overworld.gbcpal", middle_colors
-EldegrossNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/eldegross/overworld.gbcpal", middle_colors
-EldegrossShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/eldegross/shiny.pal"
-EldegrossShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/eldegross/shiny.pal"
-EldegrossShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/eldegross/shiny.pal"
-EldegrossShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/eldegross/shiny.pal"
-EldegrossShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/eldegross/shiny.pal"
+EldegossOverworldPalettes:
+EldegossNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/eldegoss/overworld.gbcpal", middle_colors
+EldegossNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/eldegoss/overworld.gbcpal", middle_colors
+EldegossNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/eldegoss/overworld.gbcpal", middle_colors
+EldegossNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/eldegoss/overworld.gbcpal", middle_colors
+EldegossNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/eldegoss/overworld.gbcpal", middle_colors
+EldegossShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/eldegoss/shiny.pal"
+EldegossShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/eldegoss/shiny.pal"
+EldegossShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/eldegoss/shiny.pal"
+EldegossShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/eldegoss/shiny.pal"
+EldegossShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/eldegoss/shiny.pal"
 
 WoolooOverworldPalettes:
 WoolooNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/wooloo/overworld.gbcpal", middle_colors
@@ -401,17 +401,17 @@ RolycolyShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/rolycoly/shiny.pal"
 RolycolyShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/rolycoly/shiny.pal"
 RolycolyShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/rolycoly/shiny.pal"
 
-CarkoalOverworldPalettes:
-CarkoalNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/carkoal/overworld.gbcpal", middle_colors
-CarkoalNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/carkoal/overworld.gbcpal", middle_colors
-CarkoalNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/carkoal/overworld.gbcpal", middle_colors
-CarkoalNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/carkoal/overworld.gbcpal", middle_colors
-CarkoalNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/carkoal/overworld.gbcpal", middle_colors
-CarkoalShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/carkoal/shiny.pal"
-CarkoalShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/carkoal/shiny.pal"
-CarkoalShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/carkoal/shiny.pal"
-CarkoalShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/carkoal/shiny.pal"
-CarkoalShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/carkoal/shiny.pal"
+CarkolOverworldPalettes:
+CarkolNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/carkol/overworld.gbcpal", middle_colors
+CarkolNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/carkol/overworld.gbcpal", middle_colors
+CarkolNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/carkol/overworld.gbcpal", middle_colors
+CarkolNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/carkol/overworld.gbcpal", middle_colors
+CarkolNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/carkol/overworld.gbcpal", middle_colors
+CarkolShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/carkol/shiny.pal"
+CarkolShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/carkol/shiny.pal"
+CarkolShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/carkol/shiny.pal"
+CarkolShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/carkol/shiny.pal"
+CarkolShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/carkol/shiny.pal"
 
 CoalossalOverworldPalettes:
 CoalossalNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/coalossal/overworld.gbcpal", middle_colors
@@ -716,17 +716,17 @@ PolteageistShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/polteageist/shiny.pal
 PolteageistShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/polteageist/shiny.pal"
 PolteageistShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/polteageist/shiny.pal"
 
-HatrennaOverworldPalettes:
-HatrennaNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/hatrenna/overworld.gbcpal", middle_colors
-HatrennaNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/hatrenna/overworld.gbcpal", middle_colors
-HatrennaNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/hatrenna/overworld.gbcpal", middle_colors
-HatrennaNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/hatrenna/overworld.gbcpal", middle_colors
-HatrennaNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/hatrenna/overworld.gbcpal", middle_colors
-HatrennaShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/hatrenna/shiny.pal"
-HatrennaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/hatrenna/shiny.pal"
-HatrennaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/hatrenna/shiny.pal"
-HatrennaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/hatrenna/shiny.pal"
-HatrennaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/hatrenna/shiny.pal"
+HatennaOverworldPalettes:
+HatennaNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/hatenna/overworld.gbcpal", middle_colors
+HatennaNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/hatenna/overworld.gbcpal", middle_colors
+HatennaNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/hatenna/overworld.gbcpal", middle_colors
+HatennaNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/hatenna/overworld.gbcpal", middle_colors
+HatennaNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/hatenna/overworld.gbcpal", middle_colors
+HatennaShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/hatenna/shiny.pal"
+HatennaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/hatenna/shiny.pal"
+HatennaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/hatenna/shiny.pal"
+HatennaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/hatenna/shiny.pal"
+HatennaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/hatenna/shiny.pal"
 
 HattremOverworldPalettes:
 HattremNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/hattrem/overworld.gbcpal", middle_colors
@@ -1118,28 +1118,28 @@ ArctovishShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/arctovish/shiny.pal"
 ArctovishShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/arctovish/shiny.pal"
 ArctovishShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/arctovish/shiny.pal"
 
-DuraldonOverworldPalettes:
-DuraldonNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/duraldon/overworld.gbcpal", middle_colors
-DuraldonNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/duraldon/overworld.gbcpal", middle_colors
-DuraldonNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/duraldon/overworld.gbcpal", middle_colors
-DuraldonNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/duraldon/overworld.gbcpal", middle_colors
-DuraldonNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/duraldon/overworld.gbcpal", middle_colors
-DuraldonShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/duraldon/shiny.pal"
-DuraldonShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/duraldon/shiny.pal"
-DuraldonShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/duraldon/shiny.pal"
-DuraldonShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/duraldon/shiny.pal"
-DuraldonShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/duraldon/shiny.pal"
-DuraldonGigaOverworldPalettes::
-DuraldonGigaNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/duraldon_giga/overworld.gbcpal", middle_colors
-DuraldonGigaNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/duraldon_giga/overworld.gbcpal", middle_colors
-DuraldonGigaNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/duraldon_giga/overworld.gbcpal", middle_colors
-DuraldonGigaNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/duraldon_giga/overworld.gbcpal", middle_colors
-DuraldonGigaNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/duraldon_giga/overworld.gbcpal", middle_colors
-DuraldonGigaShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/duraldon_giga/shiny_overworld.pal"
-DuraldonGigaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/duraldon_giga/shiny_overworld.pal"
-DuraldonGigaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/duraldon_giga/shiny_overworld.pal"
-DuraldonGigaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/duraldon_giga/shiny_overworld.pal"
-DuraldonGigaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/duraldon_giga/shiny_overworld.pal"
+DuraludonOverworldPalettes:
+DuraludonNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/duraludon/overworld.gbcpal", middle_colors
+DuraludonNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/duraludon/overworld.gbcpal", middle_colors
+DuraludonNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/duraludon/overworld.gbcpal", middle_colors
+DuraludonNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/duraludon/overworld.gbcpal", middle_colors
+DuraludonNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/duraludon/overworld.gbcpal", middle_colors
+DuraludonShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/duraludon/shiny.pal"
+DuraludonShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/duraludon/shiny.pal"
+DuraludonShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/duraludon/shiny.pal"
+DuraludonShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/duraludon/shiny.pal"
+DuraludonShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/duraludon/shiny.pal"
+DuraludonGigaOverworldPalettes::
+DuraludonGigaNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/duraludon_giga/overworld.gbcpal", middle_colors
+DuraludonGigaNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/duraludon_giga/overworld.gbcpal", middle_colors
+DuraludonGigaNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/duraludon_giga/overworld.gbcpal", middle_colors
+DuraludonGigaNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/duraludon_giga/overworld.gbcpal", middle_colors
+DuraludonGigaNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/duraludon_giga/overworld.gbcpal", middle_colors
+DuraludonGigaShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/duraludon_giga/shiny_overworld.pal"
+DuraludonGigaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/duraludon_giga/shiny_overworld.pal"
+DuraludonGigaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/duraludon_giga/shiny_overworld.pal"
+DuraludonGigaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/duraludon_giga/shiny_overworld.pal"
+DuraludonGigaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/duraludon_giga/shiny_overworld.pal"
 
 DreepyOverworldPalettes:
 DreepyNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/dreepy/overworld.gbcpal", middle_colors

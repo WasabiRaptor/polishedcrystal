@@ -18,8 +18,8 @@ GalarFramesPointerTable::
 	add_framestable Orbeetle
 	add_framestable Nickit
 	add_framestable Thievul
-	add_framestable Grossifleur
-	add_framestable Eldegross
+	add_framestable Gossifleur
+	add_framestable Eldegoss
 	add_framestable Wooloo
 	add_framestable Dubwool
 	add_framestable Chewtle
@@ -27,7 +27,7 @@ GalarFramesPointerTable::
 	add_framestable Yamper
 	add_framestable Boltund
 	add_framestable Rolycoly
-	add_framestable Carkoal
+	add_framestable Carkol
 	add_framestable Coalossal
 	add_framestable Applin
 	add_framestable Flapple
@@ -45,7 +45,7 @@ GalarFramesPointerTable::
 	add_framestable Grapploct
 	add_framestable Sinistea
 	add_framestable Polteageist
-	add_framestable Hatrenna
+	add_framestable Hatenna
 	add_framestable Hattrem
 	add_framestable Hatterene
 	add_framestable Impidimp
@@ -73,7 +73,7 @@ GalarFramesPointerTable::
 	add_framestable Arctozolt
 	add_framestable Dracovish
 	add_framestable Arctovish
-	add_framestable Duraldon
+	add_framestable Duraludon
 	add_framestable Dreepy
 	add_framestable Drakloak
 	add_framestable Dragapult

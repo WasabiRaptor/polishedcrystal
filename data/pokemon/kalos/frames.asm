@@ -178,8 +178,6 @@ YveltalFrames:	INCLUDE "gfx/pokemon/yveltal/frames.asm"
 ZygardeFrames:	INCLUDE "gfx/pokemon/zygarde/frames.asm"
 ZygardeFifty_percentFrames::	INCLUDE "gfx/pokemon/zygarde_fifty_percent/frames.asm"
 ZygardeCompleteFrames::	INCLUDE "gfx/pokemon/zygarde_complete/frames.asm"
-ZygardeCompleteFrames::	INCLUDE "gfx/pokemon/zygarde_complete/frames.asm"
-ZygardeCompleteFrames::	INCLUDE "gfx/pokemon/zygarde_complete/frames.asm"
 
 DiancieFrames:	INCLUDE "gfx/pokemon/diancie/frames.asm"
 DiancieMegaFrames::	INCLUDE "gfx/pokemon/diancie_mega/frames.asm"

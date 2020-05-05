@@ -111,7 +111,6 @@ SlowkingIcon::	INCBIN "gfx/icons/slowking.2bpp"
 MisdreavusIcon::	INCBIN "gfx/icons/misdreavus.2bpp"
 
 UnownIcon::	INCBIN "gfx/icons/unown.2bpp"
-UnownAIcon::	INCBIN "gfx/icons/unown_a.2bpp"
 UnownBIcon::	INCBIN "gfx/icons/unown_b.2bpp"
 UnownCIcon::	INCBIN "gfx/icons/unown_c.2bpp"
 UnownDIcon::	INCBIN "gfx/icons/unown_d.2bpp"

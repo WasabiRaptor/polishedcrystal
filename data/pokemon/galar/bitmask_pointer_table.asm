@@ -18,8 +18,8 @@ GalarBitmasksPointerTable::
 	add_bitmaskstable Orbeetle
 	add_bitmaskstable Nickit
 	add_bitmaskstable Thievul
-	add_bitmaskstable Grossifleur
-	add_bitmaskstable Eldegross
+	add_bitmaskstable Gossifleur
+	add_bitmaskstable Eldegoss
 	add_bitmaskstable Wooloo
 	add_bitmaskstable Dubwool
 	add_bitmaskstable Chewtle
@@ -27,7 +27,7 @@ GalarBitmasksPointerTable::
 	add_bitmaskstable Yamper
 	add_bitmaskstable Boltund
 	add_bitmaskstable Rolycoly
-	add_bitmaskstable Carkoal
+	add_bitmaskstable Carkol
 	add_bitmaskstable Coalossal
 	add_bitmaskstable Applin
 	add_bitmaskstable Flapple
@@ -45,7 +45,7 @@ GalarBitmasksPointerTable::
 	add_bitmaskstable Grapploct
 	add_bitmaskstable Sinistea
 	add_bitmaskstable Polteageist
-	add_bitmaskstable Hatrenna
+	add_bitmaskstable Hatenna
 	add_bitmaskstable Hattrem
 	add_bitmaskstable Hatterene
 	add_bitmaskstable Impidimp
@@ -73,7 +73,7 @@ GalarBitmasksPointerTable::
 	add_bitmaskstable Arctozolt
 	add_bitmaskstable Dracovish
 	add_bitmaskstable Arctovish
-	add_bitmaskstable Duraldon
+	add_bitmaskstable Duraludon
 	add_bitmaskstable Dreepy
 	add_bitmaskstable Drakloak
 	add_bitmaskstable Dragapult

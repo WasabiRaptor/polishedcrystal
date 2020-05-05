@@ -18,8 +18,8 @@ GalarPokedexEntryPointerTable::
 	add_pokedexentrytable Orbeetle
 	add_pokedexentrytable Nickit
 	add_pokedexentrytable Thievul
-	add_pokedexentrytable Grossifleur
-	add_pokedexentrytable Eldegross
+	add_pokedexentrytable Gossifleur
+	add_pokedexentrytable Eldegoss
 	add_pokedexentrytable Wooloo
 	add_pokedexentrytable Dubwool
 	add_pokedexentrytable Chewtle
@@ -27,7 +27,7 @@ GalarPokedexEntryPointerTable::
 	add_pokedexentrytable Yamper
 	add_pokedexentrytable Boltund
 	add_pokedexentrytable Rolycoly
-	add_pokedexentrytable Carkoal
+	add_pokedexentrytable Carkol
 	add_pokedexentrytable Coalossal
 	add_pokedexentrytable Applin
 	add_pokedexentrytable Flapple
@@ -45,7 +45,7 @@ GalarPokedexEntryPointerTable::
 	add_pokedexentrytable Grapploct
 	add_pokedexentrytable Sinistea
 	add_pokedexentrytable Polteageist
-	add_pokedexentrytable Hatrenna
+	add_pokedexentrytable Hatenna
 	add_pokedexentrytable Hattrem
 	add_pokedexentrytable Hatterene
 	add_pokedexentrytable Impidimp
@@ -73,7 +73,7 @@ GalarPokedexEntryPointerTable::
 	add_pokedexentrytable Arctozolt
 	add_pokedexentrytable Dracovish
 	add_pokedexentrytable Arctovish
-	add_pokedexentrytable Duraldon
+	add_pokedexentrytable Duraludon
 	add_pokedexentrytable Dreepy
 	add_pokedexentrytable Drakloak
 	add_pokedexentrytable Dragapult

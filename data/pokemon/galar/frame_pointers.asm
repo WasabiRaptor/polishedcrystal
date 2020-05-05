@@ -61,11 +61,11 @@ NickitFramesPointers::
 ThievulFramesPointers::
 	add_frames Thievul
 
-GrossifleurFramesPointers::
-	add_frames Grossifleur
+GossifleurFramesPointers::
+	add_frames Gossifleur
 
-EldegrossFramesPointers::
-	add_frames Eldegross
+EldegossFramesPointers::
+	add_frames Eldegoss
 
 WoolooFramesPointers::
 	add_frames Wooloo
@@ -89,8 +89,8 @@ BoltundFramesPointers::
 RolycolyFramesPointers::
 	add_frames Rolycoly
 
-CarkoalFramesPointers::
-	add_frames Carkoal
+CarkolFramesPointers::
+	add_frames Carkol
 
 CoalossalFramesPointers::
 	add_frames Coalossal
@@ -152,8 +152,8 @@ SinisteaFramesPointers::
 PolteageistFramesPointers::
 	add_frames Polteageist
 
-HatrennaFramesPointers::
-	add_frames Hatrenna
+HatennaFramesPointers::
+	add_frames Hatenna
 
 HattremFramesPointers::
 	add_frames Hattrem
@@ -242,9 +242,9 @@ DracovishFramesPointers::
 ArctovishFramesPointers::
 	add_frames Arctovish
 
-DuraldonFramesPointers::
-	add_frames Duraldon
-	add_frames DuraldonGiga
+DuraludonFramesPointers::
+	add_frames Duraludon
+	add_frames DuraludonGiga
 
 DreepyFramesPointers::
 	add_frames Dreepy

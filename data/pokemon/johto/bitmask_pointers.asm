@@ -150,7 +150,6 @@ MisdreavusBitmasksPointers::
 
 UnownBitmasksPointers::
 	add_bitmasks Unown
-	add_bitmasks UnownA
 	add_bitmasks UnownB
 	add_bitmasks UnownC
 	add_bitmasks UnownD

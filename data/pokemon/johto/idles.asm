@@ -100,7 +100,6 @@ SlowkingAnimationIdle:	INCLUDE "gfx/pokemon/slowking/anim_idle.asm"
 MisdreavusAnimationIdle:	INCLUDE "gfx/pokemon/misdreavus/anim_idle.asm"
 
 UnownAnimationIdle:	INCLUDE "gfx/pokemon/unown/anim_idle.asm"
-UnownAAnimationIdle::	INCLUDE "gfx/pokemon/unown_a/anim_idle.asm"
 UnownBAnimationIdle::	INCLUDE "gfx/pokemon/unown_b/anim_idle.asm"
 UnownCAnimationIdle::	INCLUDE "gfx/pokemon/unown_c/anim_idle.asm"
 UnownDAnimationIdle::	INCLUDE "gfx/pokemon/unown_d/anim_idle.asm"

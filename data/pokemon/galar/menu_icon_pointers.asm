@@ -61,11 +61,11 @@ NickitIconPointers::
 ThievulIconPointers::
 	add_icon Thievul
 
-GrossifleurIconPointers::
-	add_icon Grossifleur
+GossifleurIconPointers::
+	add_icon Gossifleur
 
-EldegrossIconPointers::
-	add_icon Eldegross
+EldegossIconPointers::
+	add_icon Eldegoss
 
 WoolooIconPointers::
 	add_icon Wooloo
@@ -89,8 +89,8 @@ BoltundIconPointers::
 RolycolyIconPointers::
 	add_icon Rolycoly
 
-CarkoalIconPointers::
-	add_icon Carkoal
+CarkolIconPointers::
+	add_icon Carkol
 
 CoalossalIconPointers::
 	add_icon Coalossal
@@ -152,8 +152,8 @@ SinisteaIconPointers::
 PolteageistIconPointers::
 	add_icon Polteageist
 
-HatrennaIconPointers::
-	add_icon Hatrenna
+HatennaIconPointers::
+	add_icon Hatenna
 
 HattremIconPointers::
 	add_icon Hattrem
@@ -242,9 +242,9 @@ DracovishIconPointers::
 ArctovishIconPointers::
 	add_icon Arctovish
 
-DuraldonIconPointers::
-	add_icon Duraldon
-	add_icon DuraldonGiga
+DuraludonIconPointers::
+	add_icon Duraludon
+	add_icon DuraludonGiga
 
 DreepyIconPointers::
 	add_icon Dreepy

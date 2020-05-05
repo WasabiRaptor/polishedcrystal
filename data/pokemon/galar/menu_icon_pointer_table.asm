@@ -18,8 +18,8 @@ GalarIconPointerTable::
 	add_icontable Orbeetle
 	add_icontable Nickit
 	add_icontable Thievul
-	add_icontable Grossifleur
-	add_icontable Eldegross
+	add_icontable Gossifleur
+	add_icontable Eldegoss
 	add_icontable Wooloo
 	add_icontable Dubwool
 	add_icontable Chewtle
@@ -27,7 +27,7 @@ GalarIconPointerTable::
 	add_icontable Yamper
 	add_icontable Boltund
 	add_icontable Rolycoly
-	add_icontable Carkoal
+	add_icontable Carkol
 	add_icontable Coalossal
 	add_icontable Applin
 	add_icontable Flapple
@@ -45,7 +45,7 @@ GalarIconPointerTable::
 	add_icontable Grapploct
 	add_icontable Sinistea
 	add_icontable Polteageist
-	add_icontable Hatrenna
+	add_icontable Hatenna
 	add_icontable Hattrem
 	add_icontable Hatterene
 	add_icontable Impidimp
@@ -73,7 +73,7 @@ GalarIconPointerTable::
 	add_icontable Arctozolt
 	add_icontable Dracovish
 	add_icontable Arctovish
-	add_icontable Duraldon
+	add_icontable Duraludon
 	add_icontable Dreepy
 	add_icontable Drakloak
 	add_icontable Dragapult

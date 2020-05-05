@@ -100,7 +100,6 @@ SlowkingBitmasks:	INCLUDE "gfx/pokemon/slowking/bitmask.asm"
 MisdreavusBitmasks:	INCLUDE "gfx/pokemon/misdreavus/bitmask.asm"
 
 UnownBitmasks:	INCLUDE "gfx/pokemon/unown/bitmask.asm"
-UnownABitmasks::	INCLUDE "gfx/pokemon/unown_a/bitmask.asm"
 UnownBBitmasks::	INCLUDE "gfx/pokemon/unown_b/bitmask.asm"
 UnownCBitmasks::	INCLUDE "gfx/pokemon/unown_c/bitmask.asm"
 UnownDBitmasks::	INCLUDE "gfx/pokemon/unown_d/bitmask.asm"

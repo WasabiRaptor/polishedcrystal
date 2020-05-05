@@ -150,7 +150,6 @@ MisdreavusIconPointers::
 
 UnownIconPointers::
 	add_icon Unown
-	add_icon UnownA
 	add_icon UnownB
 	add_icon UnownC
 	add_icon UnownD

@@ -178,8 +178,6 @@ YveltalBitmasks:	INCLUDE "gfx/pokemon/yveltal/bitmask.asm"
 ZygardeBitmasks:	INCLUDE "gfx/pokemon/zygarde/bitmask.asm"
 ZygardeFifty_percentBitmasks::	INCLUDE "gfx/pokemon/zygarde_fifty_percent/bitmask.asm"
 ZygardeCompleteBitmasks::	INCLUDE "gfx/pokemon/zygarde_complete/bitmask.asm"
-ZygardeCompleteBitmasks::	INCLUDE "gfx/pokemon/zygarde_complete/bitmask.asm"
-ZygardeCompleteBitmasks::	INCLUDE "gfx/pokemon/zygarde_complete/bitmask.asm"
 
 DiancieBitmasks:	INCLUDE "gfx/pokemon/diancie/bitmask.asm"
 DiancieMegaBitmasks::	INCLUDE "gfx/pokemon/diancie_mega/bitmask.asm"

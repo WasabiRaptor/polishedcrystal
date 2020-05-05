@@ -62,11 +62,11 @@ NickitBaseDataPointers::
 ThievulBaseDataPointers::
 	add_basedata Thievul
 
-GrossifleurBaseDataPointers::
-	add_basedata Grossifleur
+GossifleurBaseDataPointers::
+	add_basedata Gossifleur
 
-EldegrossBaseDataPointers::
-	add_basedata Eldegross
+EldegossBaseDataPointers::
+	add_basedata Eldegoss
 
 WoolooBaseDataPointers::
 	add_basedata Wooloo
@@ -90,8 +90,8 @@ BoltundBaseDataPointers::
 RolycolyBaseDataPointers::
 	add_basedata Rolycoly
 
-CarkoalBaseDataPointers::
-	add_basedata Carkoal
+CarkolBaseDataPointers::
+	add_basedata Carkol
 
 CoalossalBaseDataPointers::
 	add_basedata Coalossal
@@ -153,8 +153,8 @@ SinisteaBaseDataPointers::
 PolteageistBaseDataPointers::
 	add_basedata Polteageist
 
-HatrennaBaseDataPointers::
-	add_basedata Hatrenna
+HatennaBaseDataPointers::
+	add_basedata Hatenna
 
 HattremBaseDataPointers::
 	add_basedata Hattrem
@@ -243,9 +243,9 @@ DracovishBaseDataPointers::
 ArctovishBaseDataPointers::
 	add_basedata Arctovish
 
-DuraldonBaseDataPointers::
-	add_basedata Duraldon
-	add_basedata Duraldon
+DuraludonBaseDataPointers::
+	add_basedata Duraludon
+	add_basedata Duraludon
 
 DreepyBaseDataPointers::
 	add_basedata Dreepy

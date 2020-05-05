@@ -150,7 +150,6 @@ MisdreavusOverworldSpritePointers::
 
 UnownOverworldSpritePointers::
 	add_overworldsprite Unown
-	add_overworldsprite UnownA
 	add_overworldsprite UnownB
 	add_overworldsprite UnownC
 	add_overworldsprite UnownD

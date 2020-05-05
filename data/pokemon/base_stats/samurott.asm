@@ -1,20 +1,21 @@
-	dw 00503 ;national dex no
 
-        db  95, 100,  85,  70, 108,  70
-        evs  0,   0,   0,   0,   3,   0
-        ;   hp  atk  def  spd  sat  sdf
+    dw 00503 ;national dex no
 
-        db WATER, WATER ; type
-        db 45 ; catch rate
-        db 238 ; base exp
-        db NO_ITEM, NO_ITEM ; items
-        dn FEMALE_12_5, 4 ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/samurott/front.dimensions"
-        db TORRENT, TORRENT     ; abilities
-        db SHELL_ARMOR    ; hidden ability
-        db GROWTH_MEDIUM_SLOW ; growth rate
-        dn EGG_FIELD ; egg groups
+    db  95, 100,  85,  70, 108,  70
+    evs  0,   0,   0,   0,   3,   0
+    ;   hp  atk  def  spd  sat  sdf
 
-        ; tm/hm learnset
-        tmhm
-        ; end
+    db WATER, WATER ; type
+    db 45 ; catch rate
+    db 238 ; base exp
+    db NO_ITEM, NO_ITEM ; items
+    dn FEMALE_12_5, 4 ; gender, step cycles to hatch
+    INCBIN "gfx/pokemon/samurott/front.dimensions"
+    db TORRENT, TORRENT     ; abilities
+    db SHELL_ARMOR    ; hidden ability
+    db GROWTH_MEDIUM_SLOW ; growth rate
+    dn EGG_FIELD ; egg groups
+
+    ; tm/hm learnset
+    tmhm
+    ; end

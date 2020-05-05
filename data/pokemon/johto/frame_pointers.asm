@@ -150,7 +150,6 @@ MisdreavusFramesPointers::
 
 UnownFramesPointers::
 	add_frames Unown
-	add_frames UnownA
 	add_frames UnownB
 	add_frames UnownC
 	add_frames UnownD

@@ -6,7 +6,7 @@ You must first clone https://github.com/veekun/pokedex into the same folder that
 /*
 Output format:
     dw 00001 ;national dex no                       dex
-    
+
     db 100, 100, 100, 100, 100, 100                 stats
     evs  0,   0,   0,   0,   0,   0                 evs
     ;   hp  atk  def  spd  sat  sdf
@@ -14,22 +14,22 @@ Output format:
     db NORMAL, NORMAL ; type                        types[0,1]
     db 50 ; catch rate                              capture_rate
     db 200 ; base exp                               base_experience
-    db NO_ITEM, NO_ITEM ; items                     
+    db NO_ITEM, NO_ITEM ; items
     dn FEMALE_50, 3 ; gender, step cycles to hatch  gender_rate, hatch_counter
-    INCBIN "gfx/pokemon/aa_dummy/front.dimensions"  
+    INCBIN "gfx/pokemon/aa_dummy/front.dimensions"
     db 0, 0    ; abilities                          abilities[0,1]
     db 0    ; hidden ability                        abilities[2]
     db GROWTH_SLOW ; growth rate                    growth_rate_id
     dn NO_EGGS, NO_EGGS ; egg groups                egg_groups[0,1]
 
     ; tm/hm learnset
-    tmhm                                            
+    tmhm
     ; end
 */
 
 const fs = require("fs");
-const inDir = "../../pokedex/pokedex/data/csv/";
-const outDir = "../data/pokemon/base_stats/";
+const inDir = "pokedex/pokedex/data/csv/";
+const outDir = "data/pokemon/base_stats/";
 
 const pkmndata = [];
 const csv = {}
@@ -149,26 +149,27 @@ console.log("Writing " + pkmndata.length + " pokemon...");
 pkmndata.forEach((curpkmn, index) => {
     if (index > 10000) return; //forms are missing a bunch of stuff and I'm too lazy to figure out a good way to use the base things
     let baseStatData =
-    `	dw ${"00000".substring((""+curpkmn.species_id).length)+curpkmn.species_id} ;national dex no
-        
-        db ${curpkmn.stats.map(s=>"   ".substring((""+s).length)+s).join(", ")}
-        evs  ${curpkmn.evs.join(",   ")}
-        ;   hp  atk  def  spd  sat  sdf
-        
-        db ${curpkmn.types[0].toUpperCase()}, ${curpkmn.types[curpkmn.types.length-1].toUpperCase()} ; type
-        db ${curpkmn.capture_rate} ; catch rate
-        db ${curpkmn.base_experience} ; base exp
-        db NO_ITEM, NO_ITEM ; items
-        dn ${curpkmn.gender_rate}, ${curpkmn.hatch_counter/5} ; gender, step cycles to hatch
-        INCBIN "gfx/pokemon/${curpkmn.identifier.replace(/-/g,"_")}/front.dimensions"  
-        db ${curpkmn.abilities[0].replace(/-/g,"_").toUpperCase()}, ${((curpkmn.abilities[1] || curpkmn.abilities[0]).replace(/-/g,"_")).toUpperCase()}     ; abilities
-        db ${(curpkmn.abilities[2] || curpkmn.abilities[0]).replace(/-/g,"_").toUpperCase()}    ; hidden ability
-        db ${curpkmn.growth_rate} ; growth rate
-        dn ${curpkmn.egg_groups.join(", ")} ; egg groups
-        
-        ; tm/hm learnset
-        tmhm                                            
-        ; end\n`;
+`
+    dw ${"00000".substring((""+curpkmn.species_id).length)+curpkmn.species_id} ;national dex no
+
+    db ${curpkmn.stats.map(s=>"   ".substring((""+s).length)+s).join(", ")}
+    evs  ${curpkmn.evs.join(",   ")}
+    ;   hp  atk  def  spd  sat  sdf
+
+    db ${curpkmn.types[0].toUpperCase()}, ${curpkmn.types[curpkmn.types.length-1].toUpperCase()} ; type
+    db ${curpkmn.capture_rate} ; catch rate
+    db ${curpkmn.base_experience} ; base exp
+    db NO_ITEM, NO_ITEM ; items
+    dn ${curpkmn.gender_rate}, ${curpkmn.hatch_counter/5} ; gender, step cycles to hatch
+    INCBIN "gfx/pokemon/${curpkmn.identifier.replace(/-/g,"_")}/front.dimensions"
+    db ${curpkmn.abilities[0].replace(/-/g,"_").toUpperCase()}, ${((curpkmn.abilities[1] || curpkmn.abilities[0]).replace(/-/g,"_")).toUpperCase()}     ; abilities
+    db ${(curpkmn.abilities[2] || curpkmn.abilities[0]).replace(/-/g,"_").toUpperCase()}    ; hidden ability
+    db ${curpkmn.growth_rate} ; growth rate
+    dn ${curpkmn.egg_groups.join(", ")} ; egg groups
+
+    ; tm/hm learnset
+    tmhm
+    ; end\n`;
     fs.writeFileSync(outDir+curpkmn.identifier.replace(/-/g,"_")+".asm", baseStatData);
     console.log("Wrote " + curpkmn.identifier.replace(/-/g,"_")+".asm");
 });

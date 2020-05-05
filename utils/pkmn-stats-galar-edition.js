@@ -22,14 +22,14 @@ tmhm could be gotten too, from the other pages, but it would need to be tailored
 
 Output format:
 	dw 00001 ;national dex no                       dex
-	
+
 	db 100, 100, 100, 100, 100, 100                 stats
 	evs  0,   0,   0,   0,   0,   0                 evs
 	;   hp  atk  def  spd  sat  sdf
 
 	db NORMAL, NORMAL ; type                        types[0,1]
-	db 50 ; catch rate                              
-	db 200 ; base exp                               
+	db 50 ; catch rate
+	db 200 ; base exp
 	db NO_ITEM, NO_ITEM ; items                     items?
 	dn FEMALE_50, 3 ; gender, step cycles to hatch  hatch_cycles
 	INCBIN "gfx/pokemon/aa_dummy/front.dimensions"  name
@@ -49,7 +49,7 @@ const raw = x=>x.raw[0];
 const fs = require("fs");
 const request = require("request");
 const inURL = "https://pastebin.com/raw/mBKX1Byd";
-const outDir = "../data/pokemon/base_stats/";
+const outDir = "data/pokemon/base_stats/";
 
 const growth_rates = {
     MediumFast: "GROWTH_MEDIUM_FAST",
@@ -106,31 +106,32 @@ Hatch Cycles: (\d+)`));
             abilities: [data[14], data[15], data[16]],
             types: [data[17], data[18] || data[17]],
             items: [data[19] || "NO_ITEM", data[20] || "NO_ITEM", data[21]], // third item is unused (for now?)
-            growth_rate: data[22],
+            growth_rate: growth_rates[data[22]],
             egg_groups: [egg_groups[data[23]], egg_groups[data[24]] || egg_groups[data[23]]],
-            hatch_counter: growth_rates[data[25]],
+            hatch_counter: data[25],
             capture_rate: 50,
             base_experience: 200,
             gender_rate: "FEMALE_50",
         };
         let baseStatData =
-`	dw ${"00000".substring((""+curpkmn.id).length)+curpkmn.id} ;national dex no
-	
+`
+	dw ${"00000".substring((""+curpkmn.id).length)+curpkmn.id} ;national dex no
+
 	db ${curpkmn.stats.map(s=>"   ".substring((""+s).length)+s).join(", ")}
 	evs  ${curpkmn.evs.join(",   ")}
 	;   hp  atk  def  spd  sat  sdf
-	
+
 	db ${curpkmn.types[0].toUpperCase()}, ${curpkmn.types[1].toUpperCase()} ; type
 	db ${curpkmn.capture_rate} ; catch rate
 	db ${curpkmn.base_experience} ; base exp
 	db NO_ITEM, NO_ITEM ; items
 	dn ${curpkmn.gender_rate}, ${curpkmn.hatch_counter/5} ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/${curpkmn.name}/front.dimensions"  
+	INCBIN "gfx/pokemon/${curpkmn.name}/front.dimensions"
 	db ${curpkmn.abilities[0].replace(/[- ]/g,"_").toUpperCase()}, ${((curpkmn.abilities[1] || curpkmn.abilities[0]).replace(/[- ]/g,"_")).toUpperCase()}     ; abilities
 	db ${(curpkmn.abilities[2] || curpkmn.abilities[0]).replace(/[- ]/g,"_").toUpperCase()}    ; hidden ability
 	db ${curpkmn.growth_rate} ; growth rate
 	dn ${curpkmn.egg_groups.join(", ")} ; egg groups
-	
+
 	; tm/hm learnset
 	tmhm
 	; end

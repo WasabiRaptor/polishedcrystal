@@ -18,8 +18,8 @@ GalarOverworldSpritePointerTable::
 	add_overworldspritetable Orbeetle
 	add_overworldspritetable Nickit
 	add_overworldspritetable Thievul
-	add_overworldspritetable Grossifleur
-	add_overworldspritetable Eldegross
+	add_overworldspritetable Gossifleur
+	add_overworldspritetable Eldegoss
 	add_overworldspritetable Wooloo
 	add_overworldspritetable Dubwool
 	add_overworldspritetable Chewtle
@@ -27,7 +27,7 @@ GalarOverworldSpritePointerTable::
 	add_overworldspritetable Yamper
 	add_overworldspritetable Boltund
 	add_overworldspritetable Rolycoly
-	add_overworldspritetable Carkoal
+	add_overworldspritetable Carkol
 	add_overworldspritetable Coalossal
 	add_overworldspritetable Applin
 	add_overworldspritetable Flapple
@@ -45,7 +45,7 @@ GalarOverworldSpritePointerTable::
 	add_overworldspritetable Grapploct
 	add_overworldspritetable Sinistea
 	add_overworldspritetable Polteageist
-	add_overworldspritetable Hatrenna
+	add_overworldspritetable Hatenna
 	add_overworldspritetable Hattrem
 	add_overworldspritetable Hatterene
 	add_overworldspritetable Impidimp
@@ -73,7 +73,7 @@ GalarOverworldSpritePointerTable::
 	add_overworldspritetable Arctozolt
 	add_overworldspritetable Dracovish
 	add_overworldspritetable Arctovish
-	add_overworldspritetable Duraldon
+	add_overworldspritetable Duraludon
 	add_overworldspritetable Dreepy
 	add_overworldspritetable Drakloak
 	add_overworldspritetable Dragapult

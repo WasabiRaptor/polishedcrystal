@@ -18,8 +18,8 @@ GalarEvosAttacksPointerTable::
 	add_evosattackstable Orbeetle
 	add_evosattackstable Nickit
 	add_evosattackstable Thievul
-	add_evosattackstable Grossifleur
-	add_evosattackstable Eldegross
+	add_evosattackstable Gossifleur
+	add_evosattackstable Eldegoss
 	add_evosattackstable Wooloo
 	add_evosattackstable Dubwool
 	add_evosattackstable Chewtle
@@ -27,7 +27,7 @@ GalarEvosAttacksPointerTable::
 	add_evosattackstable Yamper
 	add_evosattackstable Boltund
 	add_evosattackstable Rolycoly
-	add_evosattackstable Carkoal
+	add_evosattackstable Carkol
 	add_evosattackstable Coalossal
 	add_evosattackstable Applin
 	add_evosattackstable Flapple
@@ -45,7 +45,7 @@ GalarEvosAttacksPointerTable::
 	add_evosattackstable Grapploct
 	add_evosattackstable Sinistea
 	add_evosattackstable Polteageist
-	add_evosattackstable Hatrenna
+	add_evosattackstable Hatenna
 	add_evosattackstable Hattrem
 	add_evosattackstable Hatterene
 	add_evosattackstable Impidimp
@@ -73,7 +73,7 @@ GalarEvosAttacksPointerTable::
 	add_evosattackstable Arctozolt
 	add_evosattackstable Dracovish
 	add_evosattackstable Arctovish
-	add_evosattackstable Duraldon
+	add_evosattackstable Duraludon
 	add_evosattackstable Dreepy
 	add_evosattackstable Drakloak
 	add_evosattackstable Dragapult

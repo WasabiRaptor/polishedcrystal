@@ -7,7 +7,7 @@
 	db 3 ; catch rate
 	db 255 ; base exp
 	db NO_ITEM, NO_ITEM ; items
-	dn GENDERLESS, 15 ; gender, step cycles to hatch
+
 	INCBIN "gfx/pokemon/raikou_beta/front.dimensions"
 	db 0, 0	; abilities
 	db 0	; hidden ability
