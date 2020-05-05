@@ -6045,4 +6045,4 @@ INCLUDE "data/pokemon/other/overworld_sprite_pointers.asm"
 INCLUDE "data/pokemon/other/overworld_sprites.asm"
 
 ;blank one for when you have no follower
-FollowerSpriteGFX::        INCBIN "gfx/sprites/pokemon/aa_dummy/overworld.2bpp"
+FollowerSpriteGFX::        INCBIN "gfx/pokemon/aa_dummy/overworld.2bpp"

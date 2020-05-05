@@ -173,7 +173,8 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
 
         fs.writeFileSync(`gfx/pokemon/${region.lower}_pics.asm`,
         list.map((poke,i)=>
-            (i % 10 ? "" : `\nSECTION "${region.title} Pokemon Pics ${i/10+1}", ROMX\n\n`) +
+            //(i % 10 ? "" : `\nSECTION "${region.title} Pokemon Pics ${i/10+1}", ROMX\n\n`) +
+            `\nSECTION "${poke.title} Pics", ROMX\n\n`+
             `${poke.title}Frontpic::\tINCBIN "gfx/pokemon/${poke.lower}/front.animated.2bpp.lz"\n`+
             `${poke.title}Backpic::\tINCBIN "gfx/pokemon/${poke.lower}/back.2bpp.lz"\n`+
                 poke.forms.map((form,i)=>`${form.title}Frontpic::\tINCBIN "gfx/pokemon/${form.lower}/front.animated.2bpp.lz"\n`+

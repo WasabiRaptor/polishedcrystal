@@ -1,4 +1,4 @@
-KantoCries::
+OtherCries::
 	mon_cry CRY_BULBASAUR,   $080,  $081 ; BULBASAUR
 	mon_cry CRY_BULBASAUR,   $020,  $100 ; IVYSAUR
 	mon_cry CRY_BULBASAUR,   $000,  $140 ; VENUSAUR
