@@ -323,6 +323,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         // footprints
         fs.writeFileSync(`data/pokemon/${region.lower}/footprint_pointer_table.asm`,
             `${region.title}FootprintPointerTable::\n` +
+
             list.map(poke=>`\tadd_footrpinttable ${poke.title}\n`).join(""),
         "utf8");
 

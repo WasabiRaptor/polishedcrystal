@@ -638,7 +638,7 @@ Pokedex_UpdateOptionScreen: ; 403be (10:43be)
 .MenuAction_VariantMode: ; 40411 (10:4411)
 	ld a, [wPokedexRegion]
 	inc a
-	cp GROUP_GENERATION_SIX + 1 ; the max dex group
+	cp GROUP_GENERATION_EIGHT + 1 ; the max dex group
 	jr c, .next_group
 	ld a, GROUP_GENERATION_ONE
 .next_group
@@ -2691,6 +2691,7 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	ld l, a
 	jr c, .variant
 	pop af
+	dec a
 	jr .notvariant
 .variant
 	pop af
