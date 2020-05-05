@@ -26,8 +26,8 @@ BrionneEvosAttacksPointers::
 PrimarinaEvosAttacksPointers::
 	add_evosattacks Primarina
 
-PikipeckEvosAttacksPointers::
-	add_evosattacks Pikipeck
+PikipekEvosAttacksPointers::
+	add_evosattacks Pikipek
 
 TrumbeakEvosAttacksPointers::
 	add_evosattacks Trumbeak

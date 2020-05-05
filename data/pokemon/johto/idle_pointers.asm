@@ -309,12 +309,15 @@ BlisseyAnimationIdlePointers::
 
 RaikouAnimationIdlePointers::
 	add_idleanim Raikou
+	add_idleanim RaikouBeta
 
 EnteiAnimationIdlePointers::
 	add_idleanim Entei
+	add_idleanim EnteiBeta
 
 SuicuneAnimationIdlePointers::
 	add_idleanim Suicune
+	add_idleanim SuicuneBeta
 
 LarvitarAnimationIdlePointers::
 	add_idleanim Larvitar

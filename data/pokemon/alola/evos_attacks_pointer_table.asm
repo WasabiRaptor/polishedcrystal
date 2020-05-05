@@ -8,7 +8,7 @@ AlolaEvosAttacksPointerTable::
 	add_evosattackstable Popplio
 	add_evosattackstable Brionne
 	add_evosattackstable Primarina
-	add_evosattackstable Pikipeck
+	add_evosattackstable Pikipek
 	add_evosattackstable Trumbeak
 	add_evosattackstable Toucannon
 	add_evosattackstable Yungoos

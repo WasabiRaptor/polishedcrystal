@@ -309,12 +309,15 @@ BlisseyEvosAttacksPointers::
 
 RaikouEvosAttacksPointers::
 	add_evosattacks Raikou
+	add_evosattacks RaikouBeta
 
 EnteiEvosAttacksPointers::
 	add_evosattacks Entei
+	add_evosattacks EnteiBeta
 
 SuicuneEvosAttacksPointers::
 	add_evosattacks Suicune
+	add_evosattacks SuicuneBeta
 
 LarvitarEvosAttacksPointers::
 	add_evosattacks Larvitar

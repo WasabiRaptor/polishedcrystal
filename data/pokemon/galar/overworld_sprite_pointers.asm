@@ -261,7 +261,7 @@ ZacianOverworldSpritePointers::
 
 ZamazentaOverworldSpritePointers::
 	add_overworldsprite Zamazenta
-	add_overworldsprite ZamazentaSheild
+	add_overworldsprite ZamazentaShield
 
 EternatusOverworldSpritePointers::
 	add_overworldsprite Eternatus

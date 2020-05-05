@@ -107,17 +107,17 @@ PrimarinaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/primarina/shiny.pal"
 PrimarinaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/primarina/shiny.pal"
 PrimarinaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/primarina/shiny.pal"
 
-PikipeckOverworldPalettes:
-PikipeckNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/pikipeck/overworld.gbcpal", middle_colors
-PikipeckNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/pikipeck/overworld.gbcpal", middle_colors
-PikipeckNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/pikipeck/overworld.gbcpal", middle_colors
-PikipeckNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/pikipeck/overworld.gbcpal", middle_colors
-PikipeckNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/pikipeck/overworld.gbcpal", middle_colors
-PikipeckShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/pikipeck/shiny.pal"
-PikipeckShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/pikipeck/shiny.pal"
-PikipeckShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/pikipeck/shiny.pal"
-PikipeckShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/pikipeck/shiny.pal"
-PikipeckShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/pikipeck/shiny.pal"
+PikipekOverworldPalettes:
+PikipekNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/pikipek/overworld.gbcpal", middle_colors
+PikipekNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/pikipek/overworld.gbcpal", middle_colors
+PikipekNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/pikipek/overworld.gbcpal", middle_colors
+PikipekNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/pikipek/overworld.gbcpal", middle_colors
+PikipekNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/pikipek/overworld.gbcpal", middle_colors
+PikipekShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/pikipek/shiny.pal"
+PikipekShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/pikipek/shiny.pal"
+PikipekShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/pikipek/shiny.pal"
+PikipekShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/pikipek/shiny.pal"
+PikipekShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/pikipek/shiny.pal"
 
 TrumbeakOverworldPalettes:
 TrumbeakNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/trumbeak/overworld.gbcpal", middle_colors

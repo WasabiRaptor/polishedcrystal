@@ -26,8 +26,8 @@ BrionneOverworldSpritePointers::
 PrimarinaOverworldSpritePointers::
 	add_overworldsprite Primarina
 
-PikipeckOverworldSpritePointers::
-	add_overworldsprite Pikipeck
+PikipekOverworldSpritePointers::
+	add_overworldsprite Pikipek
 
 TrumbeakOverworldSpritePointers::
 	add_overworldsprite Trumbeak

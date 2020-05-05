@@ -27,8 +27,8 @@ BrionneBaseDataPointers::
 PrimarinaBaseDataPointers::
 	add_basedata Primarina
 
-PikipeckBaseDataPointers::
-	add_basedata Pikipeck
+PikipekBaseDataPointers::
+	add_basedata Pikipek
 
 TrumbeakBaseDataPointers::
 	add_basedata Trumbeak
@@ -59,9 +59,9 @@ CrabominableBaseDataPointers::
 
 OricorioBaseDataPointers::
 	add_basedata Oricorio
-	add_basedata OricorioPom_pom
-	add_basedata OricorioPau
-	add_basedata OricorioSensu
+	add_basedata Oricorio
+	add_basedata Oricorio
+	add_basedata Oricorio
 
 CutieflyBaseDataPointers::
 	add_basedata Cutiefly
@@ -71,17 +71,17 @@ RibombeeBaseDataPointers::
 
 RockruffBaseDataPointers::
 	add_basedata Rockruff
-	add_basedata RockruffOwn_tempo
+	add_basedata Rockruff
 
 LycanrocBaseDataPointers::
 	add_basedata Lycanroc
-	add_basedata LycanrocMidday
-	add_basedata LycanrocDusk
-	add_basedata LycanrocMidnight
+	add_basedata Lycanroc
+	add_basedata Lycanroc
+	add_basedata Lycanroc
 
 WishiwashiBaseDataPointers::
 	add_basedata Wishiwashi
-	add_basedata WishiwashiSchool
+	add_basedata Wishiwashi
 
 MareanieBaseDataPointers::
 	add_basedata Mareanie
@@ -166,7 +166,7 @@ SilvallyBaseDataPointers::
 
 MiniorBaseDataPointers::
 	add_basedata Minior
-	add_basedata MiniorCore
+	add_basedata Minior
 
 KomalaBaseDataPointers::
 	add_basedata Komala
@@ -179,7 +179,7 @@ TogedemaruBaseDataPointers::
 
 MimikyuBaseDataPointers::
 	add_basedata Mimikyu
-	add_basedata MimikyuBusted
+	add_basedata Mimikyu
 
 BruxishBaseDataPointers::
 	add_basedata Bruxish
@@ -246,9 +246,9 @@ GuzzlordBaseDataPointers::
 
 NecrozmaBaseDataPointers::
 	add_basedata Necrozma
-	add_basedata NecrozmaDawn_wings
-	add_basedata NecrozmaDusk_mane
-	add_basedata NecrozmaUltra
+	add_basedata Necrozma
+	add_basedata Necrozma
+	add_basedata Necrozma
 
 MagearnaBaseDataPointers::
 	add_basedata Magearna
@@ -276,5 +276,5 @@ MeltanBaseDataPointers::
 
 MelmetalBaseDataPointers::
 	add_basedata Melmetal
-	add_basedata MelmetalGiga
+	add_basedata Melmetal
 

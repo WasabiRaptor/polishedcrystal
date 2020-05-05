@@ -62,7 +62,7 @@ LanturnBaseDataPointers::
 
 PichuBaseDataPointers::
 	add_basedata Pichu
-	add_basedata PichuSpiky_eared
+	add_basedata Pichu
 
 CleffaBaseDataPointers::
 	add_basedata Cleffa
@@ -90,7 +90,7 @@ FlaaffyBaseDataPointers::
 
 AmpharosBaseDataPointers::
 	add_basedata Ampharos
-	add_basedata AmpharosMega
+	add_basedata Ampharos
 
 BellossomBaseDataPointers::
 	add_basedata Bellossom
@@ -151,34 +151,34 @@ MisdreavusBaseDataPointers::
 
 UnownBaseDataPointers::
 	add_basedata Unown
-	add_basedata UnownA
-	add_basedata UnownB
-	add_basedata UnownC
-	add_basedata UnownD
-	add_basedata UnownE
-	add_basedata UnownF
-	add_basedata UnownG
-	add_basedata UnownH
-	add_basedata UnownI
-	add_basedata UnownJ
-	add_basedata UnownK
-	add_basedata UnownL
-	add_basedata UnownM
-	add_basedata UnownN
-	add_basedata UnownO
-	add_basedata UnownP
-	add_basedata UnownQ
-	add_basedata UnownR
-	add_basedata UnownS
-	add_basedata UnownT
-	add_basedata UnownU
-	add_basedata UnownV
-	add_basedata UnownW
-	add_basedata UnownX
-	add_basedata UnownY
-	add_basedata UnownZ
-	add_basedata UnownExclamation_mark
-	add_basedata UnownQuestion_mark
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
+	add_basedata Unown
 
 WobbuffetBaseDataPointers::
 	add_basedata Wobbuffet
@@ -200,7 +200,7 @@ GligarBaseDataPointers::
 
 SteelixBaseDataPointers::
 	add_basedata Steelix
-	add_basedata SteelixMega
+	add_basedata Steelix
 
 SnubbullBaseDataPointers::
 	add_basedata Snubbull
@@ -213,14 +213,14 @@ QwilfishBaseDataPointers::
 
 ScizorBaseDataPointers::
 	add_basedata Scizor
-	add_basedata ScizorMega
+	add_basedata Scizor
 
 ShuckleBaseDataPointers::
 	add_basedata Shuckle
 
 HeracrossBaseDataPointers::
 	add_basedata Heracross
-	add_basedata HeracrossMega
+	add_basedata Heracross
 
 SneaselBaseDataPointers::
 	add_basedata Sneasel
@@ -245,7 +245,7 @@ PiloswineBaseDataPointers::
 
 CorsolaBaseDataPointers::
 	add_basedata Corsola
-	add_basedata CorsolaGalar
+	add_basedata Corsola
 
 RemoraidBaseDataPointers::
 	add_basedata Remoraid
@@ -267,7 +267,7 @@ HoundourBaseDataPointers::
 
 HoundoomBaseDataPointers::
 	add_basedata Houndoom
-	add_basedata HoundoomMega
+	add_basedata Houndoom
 
 KingdraBaseDataPointers::
 	add_basedata Kingdra
@@ -310,11 +310,14 @@ BlisseyBaseDataPointers::
 
 RaikouBaseDataPointers::
 	add_basedata Raikou
+	add_basedata Raikou
 
 EnteiBaseDataPointers::
 	add_basedata Entei
+	add_basedata Entei
 
 SuicuneBaseDataPointers::
+	add_basedata Suicune
 	add_basedata Suicune
 
 LarvitarBaseDataPointers::
@@ -325,7 +328,7 @@ PupitarBaseDataPointers::
 
 TyranitarBaseDataPointers::
 	add_basedata Tyranitar
-	add_basedata TyranitarMega
+	add_basedata Tyranitar
 
 LugiaBaseDataPointers::
 	add_basedata Lugia

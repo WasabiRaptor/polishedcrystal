@@ -8,7 +8,7 @@ AlolaBitmasksPointerTable::
 	add_bitmaskstable Popplio
 	add_bitmaskstable Brionne
 	add_bitmaskstable Primarina
-	add_bitmaskstable Pikipeck
+	add_bitmaskstable Pikipek
 	add_bitmaskstable Trumbeak
 	add_bitmaskstable Toucannon
 	add_bitmaskstable Yungoos

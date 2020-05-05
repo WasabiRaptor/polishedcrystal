@@ -28,8 +28,8 @@ BrionneBackpic::	INCBIN "gfx/pokemon/brionne/back.2bpp.lz"
 PrimarinaFrontpic::	INCBIN "gfx/pokemon/primarina/front.animated.2bpp.lz"
 PrimarinaBackpic::	INCBIN "gfx/pokemon/primarina/back.2bpp.lz"
 
-PikipeckFrontpic::	INCBIN "gfx/pokemon/pikipeck/front.animated.2bpp.lz"
-PikipeckBackpic::	INCBIN "gfx/pokemon/pikipeck/back.2bpp.lz"
+PikipekFrontpic::	INCBIN "gfx/pokemon/pikipek/front.animated.2bpp.lz"
+PikipekBackpic::	INCBIN "gfx/pokemon/pikipek/back.2bpp.lz"
 
 
 SECTION "Alola Pokemon Pics 2", ROMX

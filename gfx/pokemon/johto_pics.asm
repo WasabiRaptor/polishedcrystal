@@ -373,12 +373,18 @@ BlisseyBackpic::	INCBIN "gfx/pokemon/blissey/back.2bpp.lz"
 
 RaikouFrontpic::	INCBIN "gfx/pokemon/raikou/front.animated.2bpp.lz"
 RaikouBackpic::	INCBIN "gfx/pokemon/raikou/back.2bpp.lz"
+RaikouBetaFrontpic::	INCBIN "gfx/pokemon/raikou_beta/front.animated.2bpp.lz"
+RaikouBetaBackpic::	INCBIN "gfx/pokemon/raikou_beta/back.2bpp.lz"
 
 EnteiFrontpic::	INCBIN "gfx/pokemon/entei/front.animated.2bpp.lz"
 EnteiBackpic::	INCBIN "gfx/pokemon/entei/back.2bpp.lz"
+EnteiBetaFrontpic::	INCBIN "gfx/pokemon/entei_beta/front.animated.2bpp.lz"
+EnteiBetaBackpic::	INCBIN "gfx/pokemon/entei_beta/back.2bpp.lz"
 
 SuicuneFrontpic::	INCBIN "gfx/pokemon/suicune/front.animated.2bpp.lz"
 SuicuneBackpic::	INCBIN "gfx/pokemon/suicune/back.2bpp.lz"
+SuicuneBetaFrontpic::	INCBIN "gfx/pokemon/suicune_beta/front.animated.2bpp.lz"
+SuicuneBetaBackpic::	INCBIN "gfx/pokemon/suicune_beta/back.2bpp.lz"
 
 LarvitarFrontpic::	INCBIN "gfx/pokemon/larvitar/front.animated.2bpp.lz"
 LarvitarBackpic::	INCBIN "gfx/pokemon/larvitar/back.2bpp.lz"

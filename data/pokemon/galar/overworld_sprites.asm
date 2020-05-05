@@ -189,7 +189,7 @@ ZacianOverworldSprite::	INCBIN "gfx/pokemon/zacian/overworld.2bpp"
 ZacianSwordOverworldSprite::	INCBIN "gfx/pokemon/zacian_sword/overworld.2bpp"
 
 ZamazentaOverworldSprite::	INCBIN "gfx/pokemon/zamazenta/overworld.2bpp"
-ZamazentaSheildOverworldSprite::	INCBIN "gfx/pokemon/zamazenta_sheild/overworld.2bpp"
+ZamazentaShieldOverworldSprite::	INCBIN "gfx/pokemon/zamazenta_shield/overworld.2bpp"
 
 EternatusOverworldSprite::	INCBIN "gfx/pokemon/eternatus/overworld.2bpp"
 EternatusEternamaxOverworldSprite::	INCBIN "gfx/pokemon/eternatus_eternamax/overworld.2bpp"

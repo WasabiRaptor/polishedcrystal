@@ -8,7 +8,7 @@ ThwackeyBaseDataPointers::
 
 RillaboomBaseDataPointers::
 	add_basedata Rillaboom
-	add_basedata RillaboomGiga
+	add_basedata Rillaboom
 
 ScorbunnyBaseDataPointers::
 	add_basedata Scorbunny
@@ -18,7 +18,7 @@ RabootBaseDataPointers::
 
 CinderaceBaseDataPointers::
 	add_basedata Cinderace
-	add_basedata CinderaceGiga
+	add_basedata Cinderace
 
 SobbleBaseDataPointers::
 	add_basedata Sobble
@@ -28,7 +28,7 @@ DrizzileBaseDataPointers::
 
 InteleonBaseDataPointers::
 	add_basedata Inteleon
-	add_basedata InteleonGiga
+	add_basedata Inteleon
 
 SkwovetBaseDataPointers::
 	add_basedata Skwovet
@@ -44,7 +44,7 @@ CorvisquireBaseDataPointers::
 
 CorviknightBaseDataPointers::
 	add_basedata Corviknight
-	add_basedata CorviknightGiga
+	add_basedata Corviknight
 
 BlipbugBaseDataPointers::
 	add_basedata Blipbug
@@ -54,7 +54,7 @@ DottlerBaseDataPointers::
 
 OrbeetleBaseDataPointers::
 	add_basedata Orbeetle
-	add_basedata OrbeetleGiga
+	add_basedata Orbeetle
 
 NickitBaseDataPointers::
 	add_basedata Nickit
@@ -79,7 +79,7 @@ ChewtleBaseDataPointers::
 
 DrednawBaseDataPointers::
 	add_basedata Drednaw
-	add_basedata DrednawGiga
+	add_basedata Drednaw
 
 YamperBaseDataPointers::
 	add_basedata Yamper
@@ -95,30 +95,30 @@ CarkoalBaseDataPointers::
 
 CoalossalBaseDataPointers::
 	add_basedata Coalossal
-	add_basedata CoalossalGiga
+	add_basedata Coalossal
 
 ApplinBaseDataPointers::
 	add_basedata Applin
 
 FlappleBaseDataPointers::
 	add_basedata Flapple
-	add_basedata FlappleGiga
+	add_basedata Flapple
 
 AppletunBaseDataPointers::
 	add_basedata Appletun
-	add_basedata AppletunGiga
+	add_basedata Appletun
 
 SilicobraBaseDataPointers::
 	add_basedata Silicobra
 
 SandacondaBaseDataPointers::
 	add_basedata Sandaconda
-	add_basedata SandacondaGiga
+	add_basedata Sandaconda
 
 CramorantBaseDataPointers::
 	add_basedata Cramorant
-	add_basedata CramorantGulping
-	add_basedata CramorantGorging
+	add_basedata Cramorant
+	add_basedata Cramorant
 
 ArrokudaBaseDataPointers::
 	add_basedata Arrokuda
@@ -131,15 +131,15 @@ ToxelBaseDataPointers::
 
 ToxtricityBaseDataPointers::
 	add_basedata Toxtricity
-	add_basedata ToxtricityLow_key
-	add_basedata ToxtricityGiga
+	add_basedata Toxtricity
+	add_basedata Toxtricity
 
 SizzlipedeBaseDataPointers::
 	add_basedata Sizzlipede
 
 CentiskorchBaseDataPointers::
 	add_basedata Centiskorch
-	add_basedata CentiskorchGiga
+	add_basedata Centiskorch
 
 ClobbopusBaseDataPointers::
 	add_basedata Clobbopus
@@ -161,7 +161,7 @@ HattremBaseDataPointers::
 
 HattereneBaseDataPointers::
 	add_basedata Hatterene
-	add_basedata HattereneGiga
+	add_basedata Hatterene
 
 ImpidimpBaseDataPointers::
 	add_basedata Impidimp
@@ -171,7 +171,7 @@ MorgremBaseDataPointers::
 
 GrimmsnarlBaseDataPointers::
 	add_basedata Grimmsnarl
-	add_basedata GrimmsnarlGiga
+	add_basedata Grimmsnarl
 
 ObstagoonBaseDataPointers::
 	add_basedata Obstagoon
@@ -196,7 +196,7 @@ MilceryBaseDataPointers::
 
 AlcremieBaseDataPointers::
 	add_basedata Alcremie
-	add_basedata AlcremieGiga
+	add_basedata Alcremie
 
 FalinksBaseDataPointers::
 	add_basedata Falinks
@@ -215,21 +215,21 @@ StonjournerBaseDataPointers::
 
 EiscueBaseDataPointers::
 	add_basedata Eiscue
-	add_basedata EiscueNo_ice
+	add_basedata Eiscue
 
 IndeedeeBaseDataPointers::
 	add_basedata Indeedee
 
 MorpekoBaseDataPointers::
 	add_basedata Morpeko
-	add_basedata MorpekoHangry
+	add_basedata Morpeko
 
 CufantBaseDataPointers::
 	add_basedata Cufant
 
 CopperajahBaseDataPointers::
 	add_basedata Copperajah
-	add_basedata CopperajahGiga
+	add_basedata Copperajah
 
 DracozoltBaseDataPointers::
 	add_basedata Dracozolt
@@ -245,7 +245,7 @@ ArctovishBaseDataPointers::
 
 DuraldonBaseDataPointers::
 	add_basedata Duraldon
-	add_basedata DuraldonGiga
+	add_basedata Duraldon
 
 DreepyBaseDataPointers::
 	add_basedata Dreepy
@@ -258,13 +258,13 @@ DragapultBaseDataPointers::
 
 ZacianBaseDataPointers::
 	add_basedata Zacian
-	add_basedata ZacianSword
+	add_basedata Zacian
 
 ZamazentaBaseDataPointers::
 	add_basedata Zamazenta
-	add_basedata ZamazentaSheild
+	add_basedata Zamazenta
 
 EternatusBaseDataPointers::
 	add_basedata Eternatus
-	add_basedata EternatusEternamax
+	add_basedata Eternatus
 

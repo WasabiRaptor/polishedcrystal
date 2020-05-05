@@ -26,8 +26,8 @@ BrionneBitmasksPointers::
 PrimarinaBitmasksPointers::
 	add_bitmasks Primarina
 
-PikipeckBitmasksPointers::
-	add_bitmasks Pikipeck
+PikipekBitmasksPointers::
+	add_bitmasks Pikipek
 
 TrumbeakBitmasksPointers::
 	add_bitmasks Trumbeak

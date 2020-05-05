@@ -26,8 +26,8 @@ FrogadierBaseDataPointers::
 
 GreninjaBaseDataPointers::
 	add_basedata Greninja
-	add_basedata GreninjaBattle_bond
-	add_basedata GreninjaAsh
+	add_basedata Greninja
+	add_basedata Greninja
 
 BunnelbyBaseDataPointers::
 	add_basedata Bunnelby
@@ -52,39 +52,39 @@ SpewpaBaseDataPointers::
 
 VivillonBaseDataPointers::
 	add_basedata Vivillon
-	add_basedata VivillonArchipelego
-	add_basedata VivillonContinental
-	add_basedata VivillonElegant
-	add_basedata VivillonGarden
-	add_basedata VivillonHigh_plains
-	add_basedata VivillonIcy_snow
-	add_basedata VivillonJungle
-	add_basedata VivillonMarine
-	add_basedata VivillonModern
-	add_basedata VivillonMonsoon
-	add_basedata VivillonOcean
-	add_basedata VivillonPolar
-	add_basedata VivillonRiver
-	add_basedata VivillonSandstorm
-	add_basedata VivillonSavannah
-	add_basedata VivillonSun
-	add_basedata VivillonTundra
-	add_basedata VivillonPokeball
-	add_basedata VivillonFancy
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
+	add_basedata Vivillon
 
 LitleoBaseDataPointers::
 	add_basedata Litleo
 
 PyroarBaseDataPointers::
 	add_basedata Pyroar
-	add_basedata PyroarF
+	add_basedata Pyroar
 
 FlabebeBaseDataPointers::
 	add_basedata Flabebe
 
 FloetteBaseDataPointers::
 	add_basedata Floette
-	add_basedata FloetteEternal_flower
+	add_basedata Floette
 
 FlorgesBaseDataPointers::
 	add_basedata Florges
@@ -103,22 +103,22 @@ PangoroBaseDataPointers::
 
 FurfrouBaseDataPointers::
 	add_basedata Furfrou
-	add_basedata FurfrouHeart
-	add_basedata FurfrouStar
-	add_basedata FurfrouDiamond
-	add_basedata FurfrouDebutante
-	add_basedata FurfrouMatron
-	add_basedata FurfrouDandy
-	add_basedata FurfrouLa_reine
-	add_basedata FurfrouKabuki
-	add_basedata FurfrouPharaoh
+	add_basedata Furfrou
+	add_basedata Furfrou
+	add_basedata Furfrou
+	add_basedata Furfrou
+	add_basedata Furfrou
+	add_basedata Furfrou
+	add_basedata Furfrou
+	add_basedata Furfrou
+	add_basedata Furfrou
 
 EspurrBaseDataPointers::
 	add_basedata Espurr
 
 MeowsticBaseDataPointers::
 	add_basedata Meowstic
-	add_basedata MeowsticF
+	add_basedata Meowstic
 
 HonedgeBaseDataPointers::
 	add_basedata Honedge
@@ -128,7 +128,7 @@ DoubladeBaseDataPointers::
 
 AegislashBaseDataPointers::
 	add_basedata Aegislash
-	add_basedata AegislashBlade
+	add_basedata Aegislash
 
 SpritzeeBaseDataPointers::
 	add_basedata Spritzee
@@ -216,15 +216,15 @@ TrevenantBaseDataPointers::
 
 PumpkabooBaseDataPointers::
 	add_basedata Pumpkaboo
-	add_basedata PumpkabooAverage
-	add_basedata PumpkabooLarge
-	add_basedata PumpkabooSuper
+	add_basedata Pumpkaboo
+	add_basedata Pumpkaboo
+	add_basedata Pumpkaboo
 
 GourgeistBaseDataPointers::
 	add_basedata Gourgeist
-	add_basedata GourgeistAverage
-	add_basedata GourgeistLarge
-	add_basedata GourgeistSuper
+	add_basedata Gourgeist
+	add_basedata Gourgeist
+	add_basedata Gourgeist
 
 BergmiteBaseDataPointers::
 	add_basedata Bergmite
@@ -246,18 +246,18 @@ YveltalBaseDataPointers::
 
 ZygardeBaseDataPointers::
 	add_basedata Zygarde
-	add_basedata ZygardeFifty_percent
-	add_basedata ZygardeComplete
-	add_basedata ZygardeComplete
-	add_basedata ZygardeComplete
+	add_basedata Zygarde
+	add_basedata Zygarde
+	add_basedata Zygarde
+	add_basedata Zygarde
 
 DiancieBaseDataPointers::
 	add_basedata Diancie
-	add_basedata DiancieMega
+	add_basedata Diancie
 
 HoopaBaseDataPointers::
 	add_basedata Hoopa
-	add_basedata HoopaUnbound
+	add_basedata Hoopa
 
 VolcanionBaseDataPointers::
 	add_basedata Volcanion

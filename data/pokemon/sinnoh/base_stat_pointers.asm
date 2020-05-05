@@ -77,13 +77,13 @@ BastiodonBaseDataPointers::
 
 BurmyBaseDataPointers::
 	add_basedata Burmy
-	add_basedata BurmySand
-	add_basedata BurmyTrash
+	add_basedata Burmy
+	add_basedata Burmy
 
 WormadamBaseDataPointers::
 	add_basedata Wormadam
-	add_basedata WormadamSand
-	add_basedata WormadamTrash
+	add_basedata Wormadam
+	add_basedata Wormadam
 
 MothimBaseDataPointers::
 	add_basedata Mothim
@@ -108,15 +108,15 @@ CherubiBaseDataPointers::
 
 CherrimBaseDataPointers::
 	add_basedata Cherrim
-	add_basedata CherrimOvercast
+	add_basedata Cherrim
 
 ShellosBaseDataPointers::
 	add_basedata Shellos
-	add_basedata ShellosWest
+	add_basedata Shellos
 
 GastrodonBaseDataPointers::
 	add_basedata Gastrodon
-	add_basedata GastrodonWest
+	add_basedata Gastrodon
 
 AmbipomBaseDataPointers::
 	add_basedata Ambipom
@@ -132,7 +132,7 @@ BunearyBaseDataPointers::
 
 LopunnyBaseDataPointers::
 	add_basedata Lopunny
-	add_basedata LopunnyMega
+	add_basedata Lopunny
 
 MismagiusBaseDataPointers::
 	add_basedata Mismagius
@@ -184,7 +184,7 @@ GabiteBaseDataPointers::
 
 GarchompBaseDataPointers::
 	add_basedata Garchomp
-	add_basedata GarchompMega
+	add_basedata Garchomp
 
 MunchlaxBaseDataPointers::
 	add_basedata Munchlax
@@ -194,7 +194,7 @@ RioluBaseDataPointers::
 
 LucarioBaseDataPointers::
 	add_basedata Lucario
-	add_basedata LucarioMega
+	add_basedata Lucario
 
 HippopotasBaseDataPointers::
 	add_basedata Hippopotas
@@ -231,7 +231,7 @@ SnoverBaseDataPointers::
 
 AbomasnowBaseDataPointers::
 	add_basedata Abomasnow
-	add_basedata AbomasnowMega
+	add_basedata Abomasnow
 
 WeavileBaseDataPointers::
 	add_basedata Weavile
@@ -277,7 +277,7 @@ Porygon_zBaseDataPointers::
 
 GalladeBaseDataPointers::
 	add_basedata Gallade
-	add_basedata GalladeMega
+	add_basedata Gallade
 
 ProbopassBaseDataPointers::
 	add_basedata Probopass
@@ -290,12 +290,12 @@ FroslassBaseDataPointers::
 
 RotomBaseDataPointers::
 	add_basedata Rotom
-	add_basedata RotomHeat
-	add_basedata RotomWash
-	add_basedata RotomFrost
-	add_basedata RotomFan
-	add_basedata RotomMow
-	add_basedata RotomDex
+	add_basedata Rotom
+	add_basedata Rotom
+	add_basedata Rotom
+	add_basedata Rotom
+	add_basedata Rotom
+	add_basedata Rotom
 
 UxieBaseDataPointers::
 	add_basedata Uxie
@@ -320,7 +320,7 @@ RegigigasBaseDataPointers::
 
 GiratinaBaseDataPointers::
 	add_basedata Giratina
-	add_basedata GiratinaOrigin
+	add_basedata Giratina
 
 CresseliaBaseDataPointers::
 	add_basedata Cresselia
@@ -336,7 +336,7 @@ DarkraiBaseDataPointers::
 
 ShayminBaseDataPointers::
 	add_basedata Shaymin
-	add_basedata ShayminSky
+	add_basedata Shaymin
 
 ArceusBaseDataPointers::
 	add_basedata Arceus

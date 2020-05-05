@@ -26,8 +26,8 @@ BrionneAnimationIdlePointers::
 PrimarinaAnimationIdlePointers::
 	add_idleanim Primarina
 
-PikipeckAnimationIdlePointers::
-	add_idleanim Pikipeck
+PikipekAnimationIdlePointers::
+	add_idleanim Pikipek
 
 TrumbeakAnimationIdlePointers::
 	add_idleanim Trumbeak

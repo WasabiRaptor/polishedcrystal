@@ -17,7 +17,7 @@ BrionneBitmasks:	INCLUDE "gfx/pokemon/brionne/bitmask.asm"
 
 PrimarinaBitmasks:	INCLUDE "gfx/pokemon/primarina/bitmask.asm"
 
-PikipeckBitmasks:	INCLUDE "gfx/pokemon/pikipeck/bitmask.asm"
+PikipekBitmasks:	INCLUDE "gfx/pokemon/pikipek/bitmask.asm"
 
 TrumbeakBitmasks:	INCLUDE "gfx/pokemon/trumbeak/bitmask.asm"
 

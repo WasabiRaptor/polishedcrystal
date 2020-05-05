@@ -19,7 +19,7 @@ BrionneOverworldSprite::	INCBIN "gfx/pokemon/brionne/overworld.2bpp"
 
 PrimarinaOverworldSprite::	INCBIN "gfx/pokemon/primarina/overworld.2bpp"
 
-PikipeckOverworldSprite::	INCBIN "gfx/pokemon/pikipeck/overworld.2bpp"
+PikipekOverworldSprite::	INCBIN "gfx/pokemon/pikipek/overworld.2bpp"
 
 TrumbeakOverworldSprite::	INCBIN "gfx/pokemon/trumbeak/overworld.2bpp"
 

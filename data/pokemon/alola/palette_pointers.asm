@@ -26,8 +26,8 @@ BrionnePalettePointers::
 PrimarinaPalettePointers::
 	add_palettes Primarina
 
-PikipeckPalettePointers::
-	add_palettes Pikipeck
+PikipekPalettePointers::
+	add_palettes Pikipek
 
 TrumbeakPalettePointers::
 	add_palettes Trumbeak

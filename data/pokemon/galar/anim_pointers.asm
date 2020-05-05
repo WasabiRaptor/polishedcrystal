@@ -261,7 +261,7 @@ ZacianAnimationPointers::
 
 ZamazentaAnimationPointers::
 	add_anim Zamazenta
-	add_anim ZamazentaSheild
+	add_anim ZamazentaShield
 
 EternatusAnimationPointers::
 	add_anim Eternatus

@@ -8,8 +8,8 @@ IvysaurBaseDataPointers::
 
 VenusaurBaseDataPointers::
 	add_basedata Venusaur
-	add_basedata VenusaurMega
-	add_basedata VenusaurGiga
+	add_basedata Venusaur
+	add_basedata Venusaur
 
 CharmanderBaseDataPointers::
 	add_basedata Charmander
@@ -19,9 +19,9 @@ CharmeleonBaseDataPointers::
 
 CharizardBaseDataPointers::
 	add_basedata Charizard
-	add_basedata CharizardMega_x
-	add_basedata CharizardMega_y
-	add_basedata CharizardGiga
+	add_basedata Charizard
+	add_basedata Charizard
+	add_basedata Charizard
 
 SquirtleBaseDataPointers::
 	add_basedata Squirtle
@@ -31,8 +31,8 @@ WartortleBaseDataPointers::
 
 BlastoiseBaseDataPointers::
 	add_basedata Blastoise
-	add_basedata BlastoiseMega
-	add_basedata BlastoiseGiga
+	add_basedata Blastoise
+	add_basedata Blastoise
 
 CaterpieBaseDataPointers::
 	add_basedata Caterpie
@@ -42,7 +42,7 @@ MetapodBaseDataPointers::
 
 ButterfreeBaseDataPointers::
 	add_basedata Butterfree
-	add_basedata ButterfreeGiga
+	add_basedata Butterfree
 
 WeedleBaseDataPointers::
 	add_basedata Weedle
@@ -52,7 +52,7 @@ KakunaBaseDataPointers::
 
 BeedrillBaseDataPointers::
 	add_basedata Beedrill
-	add_basedata BeedrillMega
+	add_basedata Beedrill
 
 PidgeyBaseDataPointers::
 	add_basedata Pidgey
@@ -62,15 +62,15 @@ PidgeottoBaseDataPointers::
 
 PidgeotBaseDataPointers::
 	add_basedata Pidgeot
-	add_basedata PidgeotMega
+	add_basedata Pidgeot
 
 RattataBaseDataPointers::
 	add_basedata Rattata
-	add_basedata RattataAlola
+	add_basedata Rattata
 
 RaticateBaseDataPointers::
 	add_basedata Raticate
-	add_basedata RaticateAlola
+	add_basedata Raticate
 
 SpearowBaseDataPointers::
 	add_basedata Spearow
@@ -86,33 +86,33 @@ ArbokBaseDataPointers::
 
 PikachuBaseDataPointers::
 	add_basedata Pikachu
-	add_basedata PikachuCosplay
-	add_basedata PikachuRockstar
-	add_basedata PikachuBelle
-	add_basedata PikachuPopstar
-	add_basedata PikachuPhd
-	add_basedata PikachuLibre
-	add_basedata PikachuOg_cap
-	add_basedata PikachuHoenn_cap
-	add_basedata PikachuSinnoh_cap
-	add_basedata PikachuUnova_cap
-	add_basedata PikachuKalos_cap
-	add_basedata PikachuAlola_cap
-	add_basedata PikachuPartner_cap
-	add_basedata PikachuLets_go
-	add_basedata PikachuGiga
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
+	add_basedata Pikachu
 
 RaichuBaseDataPointers::
 	add_basedata Raichu
-	add_basedata RaichuAlola
+	add_basedata Raichu
 
 SandshrewBaseDataPointers::
 	add_basedata Sandshrew
-	add_basedata SandshrewAlola
+	add_basedata Sandshrew
 
 SandslashBaseDataPointers::
 	add_basedata Sandslash
-	add_basedata SandslashAlola
+	add_basedata Sandslash
 
 Nidoran_fBaseDataPointers::
 	add_basedata Nidoran_f
@@ -140,15 +140,15 @@ ClefableBaseDataPointers::
 
 VulpixBaseDataPointers::
 	add_basedata Vulpix
-	add_basedata VulpixAlola
-	add_basedata VulpixLoki
-	add_basedata VulpixLoki_winter
+	add_basedata Vulpix
+	add_basedata Vulpix
+	add_basedata Vulpix
 
 NinetalesBaseDataPointers::
 	add_basedata Ninetales
-	add_basedata NinetalesAlola
-	add_basedata NinetalesLoki
-	add_basedata NinetalesLoki_winter
+	add_basedata Ninetales
+	add_basedata Ninetales
+	add_basedata Ninetales
 
 JigglypuffBaseDataPointers::
 	add_basedata Jigglypuff
@@ -185,21 +185,21 @@ VenomothBaseDataPointers::
 
 DiglettBaseDataPointers::
 	add_basedata Diglett
-	add_basedata DiglettAlola
+	add_basedata Diglett
 
 DugtrioBaseDataPointers::
 	add_basedata Dugtrio
-	add_basedata DugtrioAlola
+	add_basedata Dugtrio
 
 MeowthBaseDataPointers::
 	add_basedata Meowth
-	add_basedata MeowthAlola
-	add_basedata MeowthGalar
-	add_basedata MeowthKanto_giga
+	add_basedata Meowth
+	add_basedata Meowth
+	add_basedata Meowth
 
 PersianBaseDataPointers::
 	add_basedata Persian
-	add_basedata PersianAlola
+	add_basedata Persian
 
 PsyduckBaseDataPointers::
 	add_basedata Psyduck
@@ -236,7 +236,7 @@ KadabraBaseDataPointers::
 
 AlakazamBaseDataPointers::
 	add_basedata Alakazam
-	add_basedata AlakazamMega
+	add_basedata Alakazam
 
 MachopBaseDataPointers::
 	add_basedata Machop
@@ -246,7 +246,7 @@ MachokeBaseDataPointers::
 
 MachampBaseDataPointers::
 	add_basedata Machamp
-	add_basedata MachampGiga
+	add_basedata Machamp
 
 BellsproutBaseDataPointers::
 	add_basedata Bellsprout
@@ -265,31 +265,31 @@ TentacruelBaseDataPointers::
 
 GeodudeBaseDataPointers::
 	add_basedata Geodude
-	add_basedata GeodudeAlola
+	add_basedata Geodude
 
 GravelerBaseDataPointers::
 	add_basedata Graveler
-	add_basedata GravelerAlola
+	add_basedata Graveler
 
 GolemBaseDataPointers::
 	add_basedata Golem
-	add_basedata GolemAlola
+	add_basedata Golem
 
 PonytaBaseDataPointers::
 	add_basedata Ponyta
-	add_basedata PonytaGalar
+	add_basedata Ponyta
 
 RapidashBaseDataPointers::
 	add_basedata Rapidash
-	add_basedata RapidashGalar
+	add_basedata Rapidash
 
 SlowpokeBaseDataPointers::
 	add_basedata Slowpoke
-	add_basedata SlowpokeGalar
+	add_basedata Slowpoke
 
 SlowbroBaseDataPointers::
 	add_basedata Slowbro
-	add_basedata SlowbroMega
+	add_basedata Slowbro
 
 MagnemiteBaseDataPointers::
 	add_basedata Magnemite
@@ -299,7 +299,7 @@ MagnetonBaseDataPointers::
 
 FarfetchdBaseDataPointers::
 	add_basedata Farfetchd
-	add_basedata FarfetchdGalar
+	add_basedata Farfetchd
 
 DoduoBaseDataPointers::
 	add_basedata Doduo
@@ -315,11 +315,11 @@ DewgongBaseDataPointers::
 
 GrimerBaseDataPointers::
 	add_basedata Grimer
-	add_basedata GrimerAlola
+	add_basedata Grimer
 
 MukBaseDataPointers::
 	add_basedata Muk
-	add_basedata MukAlola
+	add_basedata Muk
 
 ShellderBaseDataPointers::
 	add_basedata Shellder
@@ -335,8 +335,8 @@ HaunterBaseDataPointers::
 
 GengarBaseDataPointers::
 	add_basedata Gengar
-	add_basedata GengarMega
-	add_basedata GengarGiga
+	add_basedata Gengar
+	add_basedata Gengar
 
 OnixBaseDataPointers::
 	add_basedata Onix
@@ -352,7 +352,7 @@ KrabbyBaseDataPointers::
 
 KinglerBaseDataPointers::
 	add_basedata Kingler
-	add_basedata KinglerGiga
+	add_basedata Kingler
 
 VoltorbBaseDataPointers::
 	add_basedata Voltorb
@@ -365,14 +365,14 @@ ExeggcuteBaseDataPointers::
 
 ExeggutorBaseDataPointers::
 	add_basedata Exeggutor
-	add_basedata ExeggutorAlola
+	add_basedata Exeggutor
 
 CuboneBaseDataPointers::
 	add_basedata Cubone
 
 MarowakBaseDataPointers::
 	add_basedata Marowak
-	add_basedata MarowakAlola
+	add_basedata Marowak
 
 HitmonleeBaseDataPointers::
 	add_basedata Hitmonlee
@@ -388,7 +388,7 @@ KoffingBaseDataPointers::
 
 WeezingBaseDataPointers::
 	add_basedata Weezing
-	add_basedata WeezingGalar
+	add_basedata Weezing
 
 RhyhornBaseDataPointers::
 	add_basedata Rhyhorn
@@ -404,7 +404,7 @@ TangelaBaseDataPointers::
 
 KangaskhanBaseDataPointers::
 	add_basedata Kangaskhan
-	add_basedata KangaskhanMega
+	add_basedata Kangaskhan
 
 HorseaBaseDataPointers::
 	add_basedata Horsea
@@ -426,7 +426,7 @@ StarmieBaseDataPointers::
 
 MrmimeBaseDataPointers::
 	add_basedata Mrmime
-	add_basedata MrmimeGalar
+	add_basedata Mrmime
 
 ScytherBaseDataPointers::
 	add_basedata Scyther
@@ -442,7 +442,7 @@ MagmarBaseDataPointers::
 
 PinsirBaseDataPointers::
 	add_basedata Pinsir
-	add_basedata PinsirMega
+	add_basedata Pinsir
 
 TaurosBaseDataPointers::
 	add_basedata Tauros
@@ -452,19 +452,19 @@ MagikarpBaseDataPointers::
 
 GyaradosBaseDataPointers::
 	add_basedata Gyarados
-	add_basedata GyaradosMega
+	add_basedata Gyarados
 
 LaprasBaseDataPointers::
 	add_basedata Lapras
-	add_basedata LaprasGiga
+	add_basedata Lapras
 
 DittoBaseDataPointers::
 	add_basedata Ditto
 
 EeveeBaseDataPointers::
 	add_basedata Eevee
-	add_basedata EeveeLets_go
-	add_basedata EeveeGiga
+	add_basedata Eevee
+	add_basedata Eevee
 
 VaporeonBaseDataPointers::
 	add_basedata Vaporeon
@@ -474,7 +474,7 @@ JolteonBaseDataPointers::
 
 FlareonBaseDataPointers::
 	add_basedata Flareon
-	add_basedata FlareonDonut
+	add_basedata Flareon
 
 PorygonBaseDataPointers::
 	add_basedata Porygon
@@ -493,23 +493,23 @@ KabutopsBaseDataPointers::
 
 AerodactylBaseDataPointers::
 	add_basedata Aerodactyl
-	add_basedata AerodactylMega
+	add_basedata Aerodactyl
 
 SnorlaxBaseDataPointers::
 	add_basedata Snorlax
-	add_basedata SnorlaxGiga
+	add_basedata Snorlax
 
 ArticunoBaseDataPointers::
 	add_basedata Articuno
-	add_basedata ArticunoGalar
+	add_basedata Articuno
 
 ZapdosBaseDataPointers::
 	add_basedata Zapdos
-	add_basedata ZapdosGalar
+	add_basedata Zapdos
 
 MoltresBaseDataPointers::
 	add_basedata Moltres
-	add_basedata MoltresGalar
+	add_basedata Moltres
 
 DratiniBaseDataPointers::
 	add_basedata Dratini
@@ -522,8 +522,8 @@ DragoniteBaseDataPointers::
 
 MewtwoBaseDataPointers::
 	add_basedata Mewtwo
-	add_basedata MewtwoMega_x
-	add_basedata MewtwoMega_y
+	add_basedata Mewtwo
+	add_basedata Mewtwo
 
 MewBaseDataPointers::
 	add_basedata Mew

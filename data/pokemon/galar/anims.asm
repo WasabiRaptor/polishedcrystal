@@ -181,7 +181,7 @@ ZacianAnimation:	INCLUDE "gfx/pokemon/zacian/anim.asm"
 ZacianSwordAnimation::	INCLUDE "gfx/pokemon/zacian_sword/anim.asm"
 
 ZamazentaAnimation:	INCLUDE "gfx/pokemon/zamazenta/anim.asm"
-ZamazentaSheildAnimation::	INCLUDE "gfx/pokemon/zamazenta_sheild/anim.asm"
+ZamazentaShieldAnimation::	INCLUDE "gfx/pokemon/zamazenta_shield/anim.asm"
 
 EternatusAnimation:	INCLUDE "gfx/pokemon/eternatus/anim.asm"
 EternatusEternamaxAnimation::	INCLUDE "gfx/pokemon/eternatus_eternamax/anim.asm"

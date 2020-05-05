@@ -8,7 +8,7 @@ AlolaPicPointerTable::
 	add_pictable Popplio
 	add_pictable Brionne
 	add_pictable Primarina
-	add_pictable Pikipeck
+	add_pictable Pikipek
 	add_pictable Trumbeak
 	add_pictable Toucannon
 	add_pictable Yungoos

@@ -471,14 +471,23 @@ BlisseyShinyPalette:	INCLUDE "gfx/pokemon/blissey/shiny.pal"
 RaikouPalettes:
 RaikouNormalPalette:	INCBIN "gfx/pokemon/raikou/front.gbcpal", middle_colors
 RaikouShinyPalette:	INCLUDE "gfx/pokemon/raikou/shiny.pal"
+RaikouBetaPalettes:
+RaikouBetaNormalPalette:	INCBIN "gfx/pokemon/raikou_beta/front.gbcpal", middle_colors
+RaikouBetaShinyPalette:	INCLUDE "gfx/pokemon/raikou_beta/shiny.pal"
 
 EnteiPalettes:
 EnteiNormalPalette:	INCBIN "gfx/pokemon/entei/front.gbcpal", middle_colors
 EnteiShinyPalette:	INCLUDE "gfx/pokemon/entei/shiny.pal"
+EnteiBetaPalettes:
+EnteiBetaNormalPalette:	INCBIN "gfx/pokemon/entei_beta/front.gbcpal", middle_colors
+EnteiBetaShinyPalette:	INCLUDE "gfx/pokemon/entei_beta/shiny.pal"
 
 SuicunePalettes:
 SuicuneNormalPalette:	INCBIN "gfx/pokemon/suicune/front.gbcpal", middle_colors
 SuicuneShinyPalette:	INCLUDE "gfx/pokemon/suicune/shiny.pal"
+SuicuneBetaPalettes:
+SuicuneBetaNormalPalette:	INCBIN "gfx/pokemon/suicune_beta/front.gbcpal", middle_colors
+SuicuneBetaShinyPalette:	INCLUDE "gfx/pokemon/suicune_beta/shiny.pal"
 
 LarvitarPalettes:
 LarvitarNormalPalette:	INCBIN "gfx/pokemon/larvitar/front.gbcpal", middle_colors

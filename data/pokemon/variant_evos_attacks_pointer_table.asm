@@ -8,6 +8,8 @@ RegionalEvosAttacksPointerTable:
     regional_evosattacks Sinnoh
     regional_evosattacks Unova
     regional_evosattacks Kalos
+    regional_evosattacks Alola
+    regional_evosattacks Galar
 
 
 RegionalEvolutionMovesPointerTable:

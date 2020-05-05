@@ -217,10 +217,13 @@ MiltankBitmasks:	INCLUDE "gfx/pokemon/miltank/bitmask.asm"
 BlisseyBitmasks:	INCLUDE "gfx/pokemon/blissey/bitmask.asm"
 
 RaikouBitmasks:	INCLUDE "gfx/pokemon/raikou/bitmask.asm"
+RaikouBetaBitmasks::	INCLUDE "gfx/pokemon/raikou_beta/bitmask.asm"
 
 EnteiBitmasks:	INCLUDE "gfx/pokemon/entei/bitmask.asm"
+EnteiBetaBitmasks::	INCLUDE "gfx/pokemon/entei_beta/bitmask.asm"
 
 SuicuneBitmasks:	INCLUDE "gfx/pokemon/suicune/bitmask.asm"
+SuicuneBetaBitmasks::	INCLUDE "gfx/pokemon/suicune_beta/bitmask.asm"
 
 LarvitarBitmasks:	INCLUDE "gfx/pokemon/larvitar/bitmask.asm"
 

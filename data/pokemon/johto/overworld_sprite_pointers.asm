@@ -309,12 +309,15 @@ BlisseyOverworldSpritePointers::
 
 RaikouOverworldSpritePointers::
 	add_overworldsprite Raikou
+	add_overworldsprite RaikouBeta
 
 EnteiOverworldSpritePointers::
 	add_overworldsprite Entei
+	add_overworldsprite EnteiBeta
 
 SuicuneOverworldSpritePointers::
 	add_overworldsprite Suicune
+	add_overworldsprite SuicuneBeta
 
 LarvitarOverworldSpritePointers::
 	add_overworldsprite Larvitar

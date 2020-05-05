@@ -261,7 +261,7 @@ ZacianOverworldPalettePointers::
 
 ZamazentaOverworldPalettePointers::
 	add_overworldpalettes Zamazenta
-	add_overworldpalettes ZamazentaSheild
+	add_overworldpalettes ZamazentaShield
 
 EternatusOverworldPalettePointers::
 	add_overworldpalettes Eternatus

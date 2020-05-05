@@ -309,11 +309,14 @@ BlisseyNames::
 
 RaikouNames::
 	add_name Raikou
+	add_name Raikou
 
 EnteiNames::
 	add_name Entei
+	add_name Entei
 
 SuicuneNames::
+	add_name Suicune
 	add_name Suicune
 
 LarvitarNames::

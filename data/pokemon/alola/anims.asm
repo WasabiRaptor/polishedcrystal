@@ -17,7 +17,7 @@ BrionneAnimation:	INCLUDE "gfx/pokemon/brionne/anim.asm"
 
 PrimarinaAnimation:	INCLUDE "gfx/pokemon/primarina/anim.asm"
 
-PikipeckAnimation:	INCLUDE "gfx/pokemon/pikipeck/anim.asm"
+PikipekAnimation:	INCLUDE "gfx/pokemon/pikipek/anim.asm"
 
 TrumbeakAnimation:	INCLUDE "gfx/pokemon/trumbeak/anim.asm"
 

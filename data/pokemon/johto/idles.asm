@@ -217,10 +217,13 @@ MiltankAnimationIdle:	INCLUDE "gfx/pokemon/miltank/anim_idle.asm"
 BlisseyAnimationIdle:	INCLUDE "gfx/pokemon/blissey/anim_idle.asm"
 
 RaikouAnimationIdle:	INCLUDE "gfx/pokemon/raikou/anim_idle.asm"
+RaikouBetaAnimationIdle::	INCLUDE "gfx/pokemon/raikou_beta/anim_idle.asm"
 
 EnteiAnimationIdle:	INCLUDE "gfx/pokemon/entei/anim_idle.asm"
+EnteiBetaAnimationIdle::	INCLUDE "gfx/pokemon/entei_beta/anim_idle.asm"
 
 SuicuneAnimationIdle:	INCLUDE "gfx/pokemon/suicune/anim_idle.asm"
+SuicuneBetaAnimationIdle::	INCLUDE "gfx/pokemon/suicune_beta/anim_idle.asm"
 
 LarvitarAnimationIdle:	INCLUDE "gfx/pokemon/larvitar/anim_idle.asm"
 

@@ -217,10 +217,13 @@ MiltankFrames:	INCLUDE "gfx/pokemon/miltank/frames.asm"
 BlisseyFrames:	INCLUDE "gfx/pokemon/blissey/frames.asm"
 
 RaikouFrames:	INCLUDE "gfx/pokemon/raikou/frames.asm"
+RaikouBetaFrames::	INCLUDE "gfx/pokemon/raikou_beta/frames.asm"
 
 EnteiFrames:	INCLUDE "gfx/pokemon/entei/frames.asm"
+EnteiBetaFrames::	INCLUDE "gfx/pokemon/entei_beta/frames.asm"
 
 SuicuneFrames:	INCLUDE "gfx/pokemon/suicune/frames.asm"
+SuicuneBetaFrames::	INCLUDE "gfx/pokemon/suicune_beta/frames.asm"
 
 LarvitarFrames:	INCLUDE "gfx/pokemon/larvitar/frames.asm"
 

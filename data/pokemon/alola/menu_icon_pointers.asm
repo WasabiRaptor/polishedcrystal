@@ -26,8 +26,8 @@ BrionneIconPointers::
 PrimarinaIconPointers::
 	add_icon Primarina
 
-PikipeckIconPointers::
-	add_icon Pikipeck
+PikipekIconPointers::
+	add_icon Pikipek
 
 TrumbeakIconPointers::
 	add_icon Trumbeak

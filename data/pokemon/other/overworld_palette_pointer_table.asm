@@ -1,0 +1,2 @@
+OtherOverworldPalettePointerTable::
+	add_overworldpalettetable Pokemon_egg

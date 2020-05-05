@@ -309,11 +309,14 @@ BlisseyPokedexEntryPointers::
 
 RaikouPokedexEntryPointers::
 	add_pokedexentry Raikou
+	add_pokedexentry Raikou
 
 EnteiPokedexEntryPointers::
 	add_pokedexentry Entei
+	add_pokedexentry Entei
 
 SuicunePokedexEntryPointers::
+	add_pokedexentry Suicune
 	add_pokedexentry Suicune
 
 LarvitarPokedexEntryPointers::

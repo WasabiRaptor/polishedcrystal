@@ -8,10 +8,12 @@ endm
 
 
 RegionalPokedexEntryPointerTable:
-	regional_dexentry Kanto
+	regional_dexentry Other
     regional_dexentry Kanto
     regional_dexentry Johto
     regional_dexentry Hoenn
     regional_dexentry Sinnoh
     regional_dexentry Unova
     regional_dexentry Kalos
+    regional_dexentry Alola
+    regional_dexentry Galar

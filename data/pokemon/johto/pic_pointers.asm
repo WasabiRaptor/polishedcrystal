@@ -309,12 +309,15 @@ BlisseyPicPointers::
 
 RaikouPicPointers::
 	add_pics Raikou
+	add_pics RaikouBeta
 
 EnteiPicPointers::
 	add_pics Entei
+	add_pics EnteiBeta
 
 SuicunePicPointers::
 	add_pics Suicune
+	add_pics SuicuneBeta
 
 LarvitarPicPointers::
 	add_pics Larvitar

@@ -8,7 +8,7 @@ AlolaOverworldPalettePointerTable::
 	add_overworldpalettetable Popplio
 	add_overworldpalettetable Brionne
 	add_overworldpalettetable Primarina
-	add_overworldpalettetable Pikipeck
+	add_overworldpalettetable Pikipek
 	add_overworldpalettetable Trumbeak
 	add_overworldpalettetable Toucannon
 	add_overworldpalettetable Yungoos

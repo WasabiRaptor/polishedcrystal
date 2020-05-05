@@ -17,7 +17,7 @@ BrionneFrames:	INCLUDE "gfx/pokemon/brionne/frames.asm"
 
 PrimarinaFrames:	INCLUDE "gfx/pokemon/primarina/frames.asm"
 
-PikipeckFrames:	INCLUDE "gfx/pokemon/pikipeck/frames.asm"
+PikipekFrames:	INCLUDE "gfx/pokemon/pikipek/frames.asm"
 
 TrumbeakFrames:	INCLUDE "gfx/pokemon/trumbeak/frames.asm"
 

@@ -181,7 +181,7 @@ ZacianBitmasks:	INCLUDE "gfx/pokemon/zacian/bitmask.asm"
 ZacianSwordBitmasks::	INCLUDE "gfx/pokemon/zacian_sword/bitmask.asm"
 
 ZamazentaBitmasks:	INCLUDE "gfx/pokemon/zamazenta/bitmask.asm"
-ZamazentaSheildBitmasks::	INCLUDE "gfx/pokemon/zamazenta_sheild/bitmask.asm"
+ZamazentaShieldBitmasks::	INCLUDE "gfx/pokemon/zamazenta_shield/bitmask.asm"
 
 EternatusBitmasks:	INCLUDE "gfx/pokemon/eternatus/bitmask.asm"
 EternatusEternamaxBitmasks::	INCLUDE "gfx/pokemon/eternatus_eternamax/bitmask.asm"

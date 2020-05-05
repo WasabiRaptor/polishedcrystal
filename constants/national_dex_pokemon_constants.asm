@@ -1,5 +1,6 @@
 
-    const_def 1
+    const_def
+	const GROUP_GENERATION_ZERO
     const GROUP_GENERATION_ONE
     const GROUP_GENERATION_TWO
     const GROUP_GENERATION_THREE
@@ -26,6 +27,10 @@ GIGA_FORM EQU MEGA_FORM
 
 NUM_POKEMON EQU $fd
 EGG EQU $fe
+
+	nat_dexmon_group 1, GROUP_GENERATION_ZERO
+	nat_dexmon POKEMON_EGG
+NUM_OTHER_POKEMON EQU const_value +-1
 
 ; the national dex number that is shown is defined in the base data struct, it doesn't matter what constant a pokemon is, bulbasaur could be $ab and as long as its base data is defined right it will always display as #001
 	nat_dexmon_group 1, GROUP_GENERATION_ONE
@@ -418,8 +423,11 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon MILTANK
 	nat_dexmon BLISSEY
 	nat_dexmon RAIKOU
+	nat_dexmon_form BETA
 	nat_dexmon ENTEI
+	nat_dexmon_form BETA
 	nat_dexmon SUICUNE
+	nat_dexmon_form BETA
 	nat_dexmon LARVITAR
 	nat_dexmon PUPITAR
 	nat_dexmon TYRANITAR
@@ -1216,7 +1224,7 @@ NUM_KALOS_POKEMON EQU const_value +-1
 	nat_dexmon POPPLIO
 	nat_dexmon BRIONNE
 	nat_dexmon PRIMARINA
-	nat_dexmon PIKIPECK
+	nat_dexmon PIKIPEK
 	nat_dexmon TRUMBEAK
 	nat_dexmon TOUCANNON
 	nat_dexmon YUNGOOS
@@ -1444,7 +1452,7 @@ NUM_ALOLA_POKEMON EQU const_value +-1
 	nat_dexmon ZACIAN
 	nat_dexmon_form SWORD
 	nat_dexmon ZAMAZENTA
-	nat_dexmon_form SHEILD
+	nat_dexmon_form SHIELD
 	nat_dexmon ETERNATUS
 	nat_dexmon_form ETERNAMAX
 NUM_GALAR_POKEMON EQU const_value +-1

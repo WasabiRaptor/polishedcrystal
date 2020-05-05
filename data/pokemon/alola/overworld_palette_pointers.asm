@@ -26,8 +26,8 @@ BrionneOverworldPalettePointers::
 PrimarinaOverworldPalettePointers::
 	add_overworldpalettes Primarina
 
-PikipeckOverworldPalettePointers::
-	add_overworldpalettes Pikipeck
+PikipekOverworldPalettePointers::
+	add_overworldpalettes Pikipek
 
 TrumbeakOverworldPalettePointers::
 	add_overworldpalettes Trumbeak

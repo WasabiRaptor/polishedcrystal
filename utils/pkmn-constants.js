@@ -48,14 +48,14 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/base_stat_pointers.asm`,
             `${region.title}BaseDataPointers::\n\n` +
             list.map(poke=>`${poke.title}BaseDataPointers::\n\tadd_basedata ${poke.title}\n` +
-                poke.forms.map(form=>`\tadd_basedata ${form.title}\n`).join("") +
+                poke.forms.map(form=>`\tadd_basedata ${poke.title}\n`).join("") +
             `\n`).join(""),
         "utf8");
 
         fs.writeFileSync(`data/pokemon/${region.lower}/base_stats.asm`,
             `${region.title}BaseData::\n` +
             list.map(poke=>`${poke.title}BaseData::\tINCLUDE "data/pokemon/base_stats/${poke.lower}.asm"\n`+
-                poke.forms.map(form=>`${form.title}BaseData::\tINCLUDE "data/pokemon/base_stats/${form.lower}.asm"\n`).join("") +
+                //poke.forms.map(form=>`${form.title}BaseData::\tINCLUDE "data/pokemon/base_stats/${form.lower}.asm"\n`).join("") + //similar brainwave to below, most forms actually don't change base data, and are just visual, so for less headache, when it generates it'll just point to the normal one
             `\n`).join(""),
         "utf8");
 

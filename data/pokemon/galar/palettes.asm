@@ -387,9 +387,9 @@ ZacianSwordShinyPalette:	INCLUDE "gfx/pokemon/zacian_sword/shiny.pal"
 ZamazentaPalettes:
 ZamazentaNormalPalette:	INCBIN "gfx/pokemon/zamazenta/front.gbcpal", middle_colors
 ZamazentaShinyPalette:	INCLUDE "gfx/pokemon/zamazenta/shiny.pal"
-ZamazentaSheildPalettes:
-ZamazentaSheildNormalPalette:	INCBIN "gfx/pokemon/zamazenta_sheild/front.gbcpal", middle_colors
-ZamazentaSheildShinyPalette:	INCLUDE "gfx/pokemon/zamazenta_sheild/shiny.pal"
+ZamazentaShieldPalettes:
+ZamazentaShieldNormalPalette:	INCBIN "gfx/pokemon/zamazenta_shield/front.gbcpal", middle_colors
+ZamazentaShieldShinyPalette:	INCLUDE "gfx/pokemon/zamazenta_shield/shiny.pal"
 
 EternatusPalettes:
 EternatusNormalPalette:	INCBIN "gfx/pokemon/eternatus/front.gbcpal", middle_colors

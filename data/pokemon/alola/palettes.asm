@@ -35,9 +35,9 @@ PrimarinaPalettes:
 PrimarinaNormalPalette:	INCBIN "gfx/pokemon/primarina/front.gbcpal", middle_colors
 PrimarinaShinyPalette:	INCLUDE "gfx/pokemon/primarina/shiny.pal"
 
-PikipeckPalettes:
-PikipeckNormalPalette:	INCBIN "gfx/pokemon/pikipeck/front.gbcpal", middle_colors
-PikipeckShinyPalette:	INCLUDE "gfx/pokemon/pikipeck/shiny.pal"
+PikipekPalettes:
+PikipekNormalPalette:	INCBIN "gfx/pokemon/pikipek/front.gbcpal", middle_colors
+PikipekShinyPalette:	INCLUDE "gfx/pokemon/pikipek/shiny.pal"
 
 TrumbeakPalettes:
 TrumbeakNormalPalette:	INCBIN "gfx/pokemon/trumbeak/front.gbcpal", middle_colors

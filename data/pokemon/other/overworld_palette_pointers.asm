@@ -1,0 +1,4 @@
+OtherOverworldPalettePointers::
+Pokemon_eggOverworldPalettePointers::
+	add_overworldpalettes Pokemon_egg
+

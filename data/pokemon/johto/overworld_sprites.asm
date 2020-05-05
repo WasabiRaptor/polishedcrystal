@@ -228,10 +228,13 @@ SECTION "Johto Overworld Sprites 4", ROMX
 BlisseyOverworldSprite::	INCBIN "gfx/pokemon/blissey/overworld.2bpp"
 
 RaikouOverworldSprite::	INCBIN "gfx/pokemon/raikou/overworld.2bpp"
+RaikouBetaOverworldSprite::	INCBIN "gfx/pokemon/raikou_beta/overworld.2bpp"
 
 EnteiOverworldSprite::	INCBIN "gfx/pokemon/entei/overworld.2bpp"
+EnteiBetaOverworldSprite::	INCBIN "gfx/pokemon/entei_beta/overworld.2bpp"
 
 SuicuneOverworldSprite::	INCBIN "gfx/pokemon/suicune/overworld.2bpp"
+SuicuneBetaOverworldSprite::	INCBIN "gfx/pokemon/suicune_beta/overworld.2bpp"
 
 LarvitarOverworldSprite::	INCBIN "gfx/pokemon/larvitar/overworld.2bpp"
 

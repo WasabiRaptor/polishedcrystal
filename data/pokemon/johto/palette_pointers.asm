@@ -309,12 +309,15 @@ BlisseyPalettePointers::
 
 RaikouPalettePointers::
 	add_palettes Raikou
+	add_palettes RaikouBeta
 
 EnteiPalettePointers::
 	add_palettes Entei
+	add_palettes EnteiBeta
 
 SuicunePalettePointers::
 	add_palettes Suicune
+	add_palettes SuicuneBeta
 
 LarvitarPalettePointers::
 	add_palettes Larvitar

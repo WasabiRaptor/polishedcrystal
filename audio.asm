@@ -384,3 +384,15 @@ INCLUDE "data/pokemon/unova/cries.asm"
 SECTION "Kalos Cries", ROMX
 
 INCLUDE "data/pokemon/kalos/cries.asm"
+
+SECTION "Alola Cries", ROMX
+
+INCLUDE "data/pokemon/alola/cries.asm"
+
+SECTION "Galar Cries", ROMX
+
+INCLUDE "data/pokemon/galar/cries.asm"
+
+SECTION "Other Cries", ROMX
+
+INCLUDE "data/pokemon/other/cries.asm"

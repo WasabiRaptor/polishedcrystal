@@ -1,0 +1,4 @@
+OtherOverworldSpritePointers::
+Pokemon_eggOverworldSpritePointers::
+	add_overworldsprite Pokemon_egg
+

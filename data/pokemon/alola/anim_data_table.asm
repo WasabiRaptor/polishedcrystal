@@ -8,7 +8,7 @@ AlolaAnimPointerTable::
 	variant_animdata Popplio
 	variant_animdata Brionne
 	variant_animdata Primarina
-	variant_animdata Pikipeck
+	variant_animdata Pikipek
 	variant_animdata Trumbeak
 	variant_animdata Toucannon
 	variant_animdata Yungoos

@@ -26,8 +26,8 @@ BrionneNames::
 PrimarinaNames::
 	add_name Primarina
 
-PikipeckNames::
-	add_name Pikipeck
+PikipekNames::
+	add_name Pikipek
 
 TrumbeakNames::
 	add_name Trumbeak

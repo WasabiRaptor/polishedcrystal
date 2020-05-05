@@ -1211,17 +1211,17 @@ ZamazentaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/zamazenta/shiny.pal"
 ZamazentaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/zamazenta/shiny.pal"
 ZamazentaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/zamazenta/shiny.pal"
 ZamazentaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/zamazenta/shiny.pal"
-ZamazentaSheildOverworldPalettes::
-ZamazentaSheildNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/zamazenta_sheild/overworld.gbcpal", middle_colors
-ZamazentaSheildNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/zamazenta_sheild/overworld.gbcpal", middle_colors
-ZamazentaSheildNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/zamazenta_sheild/overworld.gbcpal", middle_colors
-ZamazentaSheildNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/zamazenta_sheild/overworld.gbcpal", middle_colors
-ZamazentaSheildNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/zamazenta_sheild/overworld.gbcpal", middle_colors
-ZamazentaSheildShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/zamazenta_sheild/shiny_overworld.pal"
-ZamazentaSheildShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/zamazenta_sheild/shiny_overworld.pal"
-ZamazentaSheildShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/zamazenta_sheild/shiny_overworld.pal"
-ZamazentaSheildShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/zamazenta_sheild/shiny_overworld.pal"
-ZamazentaSheildShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/zamazenta_sheild/shiny_overworld.pal"
+ZamazentaShieldOverworldPalettes::
+ZamazentaShieldNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/zamazenta_shield/overworld.gbcpal", middle_colors
+ZamazentaShieldNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/zamazenta_shield/overworld.gbcpal", middle_colors
+ZamazentaShieldNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/zamazenta_shield/overworld.gbcpal", middle_colors
+ZamazentaShieldNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/zamazenta_shield/overworld.gbcpal", middle_colors
+ZamazentaShieldNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/zamazenta_shield/overworld.gbcpal", middle_colors
+ZamazentaShieldShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/zamazenta_shield/shiny_overworld.pal"
+ZamazentaShieldShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/zamazenta_shield/shiny_overworld.pal"
+ZamazentaShieldShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/zamazenta_shield/shiny_overworld.pal"
+ZamazentaShieldShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/zamazenta_shield/shiny_overworld.pal"
+ZamazentaShieldShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/zamazenta_shield/shiny_overworld.pal"
 
 EternatusOverworldPalettes:
 EternatusNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/eternatus/overworld.gbcpal", middle_colors

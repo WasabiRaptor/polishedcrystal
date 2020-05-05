@@ -7,10 +7,12 @@ regional_names: macro
 endm
 
 RegionalNamePointerTable:
-    regional_names Kanto
+    regional_names Other
     regional_names Kanto
     regional_names Johto
     regional_names Hoenn
     regional_names Sinnoh
     regional_names Unova
     regional_names Kalos
+    regional_names Alola
+    regional_names Galar

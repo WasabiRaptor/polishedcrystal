@@ -2,7 +2,9 @@ INCLUDE "constants.asm"
 
 SECTION "Other Pic Pointers", ROMX
 
-;INCLUDE "data/pokemon/other/pic_pointers.asm"
+INCLUDE "data/pokemon/other/pic_pointer_table.asm"
+INCLUDE "data/pokemon/other/pic_pointers.asm"
+INCLUDE "gfx/pokemon/other_pics.asm"
 
 
 SECTION "Kanto Pic Pointers", ROMX
@@ -45,6 +47,20 @@ SECTION "Kalos Pic Pointers", ROMX
 INCLUDE "data/pokemon/kalos/pic_pointer_table.asm"
 INCLUDE "data/pokemon/kalos/pic_pointers.asm"
 INCLUDE "gfx/pokemon/kalos_pics.asm"
+
+
+SECTION "Alola Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/alola/pic_pointer_table.asm"
+INCLUDE "data/pokemon/alola/pic_pointers.asm"
+INCLUDE "gfx/pokemon/alola_pics.asm"
+
+
+SECTION "Galar Pic Pointers", ROMX
+
+INCLUDE "data/pokemon/galar/pic_pointer_table.asm"
+INCLUDE "data/pokemon/galar/pic_pointers.asm"
+INCLUDE "gfx/pokemon/galar_pics.asm"
 
 
 SECTION "Trainer Pic Pointers", ROMX

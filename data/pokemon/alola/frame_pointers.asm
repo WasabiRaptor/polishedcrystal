@@ -26,8 +26,8 @@ BrionneFramesPointers::
 PrimarinaFramesPointers::
 	add_frames Primarina
 
-PikipeckFramesPointers::
-	add_frames Pikipeck
+PikipekFramesPointers::
+	add_frames Pikipek
 
 TrumbeakFramesPointers::
 	add_frames Trumbeak

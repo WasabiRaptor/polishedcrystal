@@ -198,7 +198,7 @@ ZacianIcon::	INCBIN "gfx/icons/zacian.2bpp"
 ZacianSwordIcon::	INCBIN "gfx/icons/zacian_sword.2bpp"
 
 ZamazentaIcon::	INCBIN "gfx/icons/zamazenta.2bpp"
-ZamazentaSheildIcon::	INCBIN "gfx/icons/zamazenta_sheild.2bpp"
+ZamazentaShieldIcon::	INCBIN "gfx/icons/zamazenta_shield.2bpp"
 
 EternatusIcon::	INCBIN "gfx/icons/eternatus.2bpp"
 EternatusEternamaxIcon::	INCBIN "gfx/icons/eternatus_eternamax.2bpp"

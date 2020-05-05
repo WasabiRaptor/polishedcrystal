@@ -1,0 +1,2 @@
+OtherOverworldSpritePointerTable::
+	add_overworldspritetable Pokemon_egg

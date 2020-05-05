@@ -17,7 +17,7 @@ BrionneAnimationIdle:	INCLUDE "gfx/pokemon/brionne/anim_idle.asm"
 
 PrimarinaAnimationIdle:	INCLUDE "gfx/pokemon/primarina/anim_idle.asm"
 
-PikipeckAnimationIdle:	INCLUDE "gfx/pokemon/pikipeck/anim_idle.asm"
+PikipekAnimationIdle:	INCLUDE "gfx/pokemon/pikipek/anim_idle.asm"
 
 TrumbeakAnimationIdle:	INCLUDE "gfx/pokemon/trumbeak/anim_idle.asm"
 

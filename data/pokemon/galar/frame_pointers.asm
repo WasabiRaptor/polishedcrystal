@@ -261,7 +261,7 @@ ZacianFramesPointers::
 
 ZamazentaFramesPointers::
 	add_frames Zamazenta
-	add_frames ZamazentaSheild
+	add_frames ZamazentaShield
 
 EternatusFramesPointers::
 	add_frames Eternatus

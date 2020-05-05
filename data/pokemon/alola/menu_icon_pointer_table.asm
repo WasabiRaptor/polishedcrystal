@@ -8,7 +8,7 @@ AlolaIconPointerTable::
 	add_icontable Popplio
 	add_icontable Brionne
 	add_icontable Primarina
-	add_icontable Pikipeck
+	add_icontable Pikipek
 	add_icontable Trumbeak
 	add_icontable Toucannon
 	add_icontable Yungoos

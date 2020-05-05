@@ -26,8 +26,8 @@ BrionnePicPointers::
 PrimarinaPicPointers::
 	add_pics Primarina
 
-PikipeckPicPointers::
-	add_pics Pikipeck
+PikipekPicPointers::
+	add_pics Pikipek
 
 TrumbeakPicPointers::
 	add_pics Trumbeak

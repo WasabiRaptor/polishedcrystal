@@ -261,7 +261,7 @@ ZacianIconPointers::
 
 ZamazentaIconPointers::
 	add_icon Zamazenta
-	add_icon ZamazentaSheild
+	add_icon ZamazentaShield
 
 EternatusIconPointers::
 	add_icon Eternatus

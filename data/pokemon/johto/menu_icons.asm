@@ -237,10 +237,13 @@ SECTION "Johto Icons 7", ROMX
 BlisseyIcon::	INCBIN "gfx/icons/blissey.2bpp"
 
 RaikouIcon::	INCBIN "gfx/icons/raikou.2bpp"
+RaikouBetaIcon::	INCBIN "gfx/icons/raikou_beta.2bpp"
 
 EnteiIcon::	INCBIN "gfx/icons/entei.2bpp"
+EnteiBetaIcon::	INCBIN "gfx/icons/entei_beta.2bpp"
 
 SuicuneIcon::	INCBIN "gfx/icons/suicune.2bpp"
+SuicuneBetaIcon::	INCBIN "gfx/icons/suicune_beta.2bpp"
 
 LarvitarIcon::	INCBIN "gfx/icons/larvitar.2bpp"
 

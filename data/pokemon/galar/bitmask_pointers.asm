@@ -261,7 +261,7 @@ ZacianBitmasksPointers::
 
 ZamazentaBitmasksPointers::
 	add_bitmasks Zamazenta
-	add_bitmasks ZamazentaSheild
+	add_bitmasks ZamazentaShield
 
 EternatusBitmasksPointers::
 	add_bitmasks Eternatus

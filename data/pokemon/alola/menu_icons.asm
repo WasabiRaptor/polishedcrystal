@@ -19,7 +19,7 @@ BrionneIcon::	INCBIN "gfx/icons/brionne.2bpp"
 
 PrimarinaIcon::	INCBIN "gfx/icons/primarina.2bpp"
 
-PikipeckIcon::	INCBIN "gfx/icons/pikipeck.2bpp"
+PikipekIcon::	INCBIN "gfx/icons/pikipek.2bpp"
 
 TrumbeakIcon::	INCBIN "gfx/icons/trumbeak.2bpp"
 

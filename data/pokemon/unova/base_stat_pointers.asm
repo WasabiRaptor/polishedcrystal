@@ -83,7 +83,7 @@ TranquillBaseDataPointers::
 
 UnfezantBaseDataPointers::
 	add_basedata Unfezant
-	add_basedata UnfezantF
+	add_basedata Unfezant
 
 BlitzleBaseDataPointers::
 	add_basedata Blitzle
@@ -114,7 +114,7 @@ ExcadrillBaseDataPointers::
 
 AudinoBaseDataPointers::
 	add_basedata Audino
-	add_basedata AudinoMega
+	add_basedata Audino
 
 TimburrBaseDataPointers::
 	add_basedata Timburr
@@ -184,13 +184,13 @@ KrookodileBaseDataPointers::
 
 DarumakaBaseDataPointers::
 	add_basedata Darumaka
-	add_basedata DarumakaGalar
+	add_basedata Darumaka
 
 DarmanitanBaseDataPointers::
 	add_basedata Darmanitan
-	add_basedata DarmanitanZen
-	add_basedata DarmanitanGalar
-	add_basedata DarmanitanGalar_zen
+	add_basedata Darmanitan
+	add_basedata Darmanitan
+	add_basedata Darmanitan
 
 MaractusBaseDataPointers::
 	add_basedata Maractus
@@ -212,7 +212,7 @@ SigilyphBaseDataPointers::
 
 YamaskBaseDataPointers::
 	add_basedata Yamask
-	add_basedata YamaskGalar
+	add_basedata Yamask
 
 CofagrigusBaseDataPointers::
 	add_basedata Cofagrigus
@@ -234,7 +234,7 @@ TrubbishBaseDataPointers::
 
 GarbodorBaseDataPointers::
 	add_basedata Garbodor
-	add_basedata GarbodorGiga
+	add_basedata Garbodor
 
 ZoruaBaseDataPointers::
 	add_basedata Zorua
@@ -283,15 +283,15 @@ VanilluxeBaseDataPointers::
 
 DeerlingBaseDataPointers::
 	add_basedata Deerling
-	add_basedata DeerlingSummer
-	add_basedata DeerlingAutumn
-	add_basedata DeerlingWinter
+	add_basedata Deerling
+	add_basedata Deerling
+	add_basedata Deerling
 
 SawsbuckBaseDataPointers::
 	add_basedata Sawsbuck
-	add_basedata SawsbuckSummer
-	add_basedata SawsbuckAutumn
-	add_basedata SawsbuckWinter
+	add_basedata Sawsbuck
+	add_basedata Sawsbuck
+	add_basedata Sawsbuck
 
 EmolgaBaseDataPointers::
 	add_basedata Emolga
@@ -388,7 +388,7 @@ AccelgorBaseDataPointers::
 
 StunfiskBaseDataPointers::
 	add_basedata Stunfisk
-	add_basedata StunfiskGalar
+	add_basedata Stunfisk
 
 MienfooBaseDataPointers::
 	add_basedata Mienfoo
@@ -458,11 +458,11 @@ VirizionBaseDataPointers::
 
 TornadusBaseDataPointers::
 	add_basedata Tornadus
-	add_basedata TornadusTherian
+	add_basedata Tornadus
 
 ThundurusBaseDataPointers::
 	add_basedata Thundurus
-	add_basedata ThundurusTherian
+	add_basedata Thundurus
 
 ReshiramBaseDataPointers::
 	add_basedata Reshiram
@@ -472,20 +472,20 @@ ZekromBaseDataPointers::
 
 LandorusBaseDataPointers::
 	add_basedata Landorus
-	add_basedata LandorusTherian
+	add_basedata Landorus
 
 KyuremBaseDataPointers::
 	add_basedata Kyurem
-	add_basedata KyuremBlack
-	add_basedata KyuremWhite
+	add_basedata Kyurem
+	add_basedata Kyurem
 
 KeldeoBaseDataPointers::
 	add_basedata Keldeo
-	add_basedata KeldeoResolute
+	add_basedata Keldeo
 
 MeloettaBaseDataPointers::
 	add_basedata Meloetta
-	add_basedata MeloettaPirouette
+	add_basedata Meloetta
 
 GenesectBaseDataPointers::
 	add_basedata Genesect

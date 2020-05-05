@@ -309,12 +309,15 @@ BlisseyFramesPointers::
 
 RaikouFramesPointers::
 	add_frames Raikou
+	add_frames RaikouBeta
 
 EnteiFramesPointers::
 	add_frames Entei
+	add_frames EnteiBeta
 
 SuicuneFramesPointers::
 	add_frames Suicune
+	add_frames SuicuneBeta
 
 LarvitarFramesPointers::
 	add_frames Larvitar

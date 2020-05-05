@@ -307,8 +307,8 @@ ZacianSwordBackpic::	INCBIN "gfx/pokemon/zacian_sword/back.2bpp.lz"
 
 ZamazentaFrontpic::	INCBIN "gfx/pokemon/zamazenta/front.animated.2bpp.lz"
 ZamazentaBackpic::	INCBIN "gfx/pokemon/zamazenta/back.2bpp.lz"
-ZamazentaSheildFrontpic::	INCBIN "gfx/pokemon/zamazenta_sheild/front.animated.2bpp.lz"
-ZamazentaSheildBackpic::	INCBIN "gfx/pokemon/zamazenta_sheild/back.2bpp.lz"
+ZamazentaShieldFrontpic::	INCBIN "gfx/pokemon/zamazenta_shield/front.animated.2bpp.lz"
+ZamazentaShieldBackpic::	INCBIN "gfx/pokemon/zamazenta_shield/back.2bpp.lz"
 
 
 SECTION "Galar Pokemon Pics 9", ROMX

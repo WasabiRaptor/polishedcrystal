@@ -309,12 +309,15 @@ BlisseyOverworldPalettePointers::
 
 RaikouOverworldPalettePointers::
 	add_overworldpalettes Raikou
+	add_overworldpalettes RaikouBeta
 
 EnteiOverworldPalettePointers::
 	add_overworldpalettes Entei
+	add_overworldpalettes EnteiBeta
 
 SuicuneOverworldPalettePointers::
 	add_overworldpalettes Suicune
+	add_overworldpalettes SuicuneBeta
 
 LarvitarOverworldPalettePointers::
 	add_overworldpalettes Larvitar

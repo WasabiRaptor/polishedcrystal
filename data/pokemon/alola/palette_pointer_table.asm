@@ -8,7 +8,7 @@ AlolaPalettePointerTable::
 	add_palettetable Popplio
 	add_palettetable Brionne
 	add_palettetable Primarina
-	add_palettetable Pikipeck
+	add_palettetable Pikipek
 	add_palettetable Trumbeak
 	add_palettetable Toucannon
 	add_palettetable Yungoos

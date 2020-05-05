@@ -261,7 +261,7 @@ ZacianAnimationIdlePointers::
 
 ZamazentaAnimationIdlePointers::
 	add_idleanim Zamazenta
-	add_idleanim ZamazentaSheild
+	add_idleanim ZamazentaShield
 
 EternatusAnimationIdlePointers::
 	add_idleanim Eternatus

@@ -8,7 +8,7 @@ AlolaNamePointerTable::
 	add_nametable Popplio
 	add_nametable Brionne
 	add_nametable Primarina
-	add_nametable Pikipeck
+	add_nametable Pikipek
 	add_nametable Trumbeak
 	add_nametable Toucannon
 	add_nametable Yungoos

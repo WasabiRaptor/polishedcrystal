@@ -8,7 +8,7 @@ AlolaOverworldSpritePointerTable::
 	add_overworldspritetable Popplio
 	add_overworldspritetable Brionne
 	add_overworldspritetable Primarina
-	add_overworldspritetable Pikipeck
+	add_overworldspritetable Pikipek
 	add_overworldspritetable Trumbeak
 	add_overworldspritetable Toucannon
 	add_overworldspritetable Yungoos

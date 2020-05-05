@@ -20,7 +20,7 @@ BrionnePokedexEntry::	INCLUDE "data/pokemon/dex_entries/brionne.asm"
 
 PrimarinaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/primarina.asm"
 
-PikipeckPokedexEntry::	INCLUDE "data/pokemon/dex_entries/pikipeck.asm"
+PikipekPokedexEntry::	INCLUDE "data/pokemon/dex_entries/pikipek.asm"
 
 TrumbeakPokedexEntry::	INCLUDE "data/pokemon/dex_entries/trumbeak.asm"
 

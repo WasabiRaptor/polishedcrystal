@@ -26,8 +26,8 @@ BrionnePokedexEntryPointers::
 PrimarinaPokedexEntryPointers::
 	add_pokedexentry Primarina
 
-PikipeckPokedexEntryPointers::
-	add_pokedexentry Pikipeck
+PikipekPokedexEntryPointers::
+	add_pokedexentry Pikipek
 
 TrumbeakPokedexEntryPointers::
 	add_pokedexentry Trumbeak

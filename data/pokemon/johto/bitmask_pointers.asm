@@ -309,12 +309,15 @@ BlisseyBitmasksPointers::
 
 RaikouBitmasksPointers::
 	add_bitmasks Raikou
+	add_bitmasks RaikouBeta
 
 EnteiBitmasksPointers::
 	add_bitmasks Entei
+	add_bitmasks EnteiBeta
 
 SuicuneBitmasksPointers::
 	add_bitmasks Suicune
+	add_bitmasks SuicuneBeta
 
 LarvitarBitmasksPointers::
 	add_bitmasks Larvitar

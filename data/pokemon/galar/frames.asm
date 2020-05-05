@@ -181,7 +181,7 @@ ZacianFrames:	INCLUDE "gfx/pokemon/zacian/frames.asm"
 ZacianSwordFrames::	INCLUDE "gfx/pokemon/zacian_sword/frames.asm"
 
 ZamazentaFrames:	INCLUDE "gfx/pokemon/zamazenta/frames.asm"
-ZamazentaSheildFrames::	INCLUDE "gfx/pokemon/zamazenta_sheild/frames.asm"
+ZamazentaShieldFrames::	INCLUDE "gfx/pokemon/zamazenta_shield/frames.asm"
 
 EternatusFrames:	INCLUDE "gfx/pokemon/eternatus/frames.asm"
 EternatusEternamaxFrames::	INCLUDE "gfx/pokemon/eternatus_eternamax/frames.asm"

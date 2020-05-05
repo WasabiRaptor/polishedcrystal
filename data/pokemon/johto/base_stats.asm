@@ -40,7 +40,6 @@ ChinchouBaseData::	INCLUDE "data/pokemon/base_stats/chinchou.asm"
 LanturnBaseData::	INCLUDE "data/pokemon/base_stats/lanturn.asm"
 
 PichuBaseData::	INCLUDE "data/pokemon/base_stats/pichu.asm"
-PichuSpiky_earedBaseData::	INCLUDE "data/pokemon/base_stats/pichu_spiky_eared.asm"
 
 CleffaBaseData::	INCLUDE "data/pokemon/base_stats/cleffa.asm"
 
@@ -59,7 +58,6 @@ MareepBaseData::	INCLUDE "data/pokemon/base_stats/mareep.asm"
 FlaaffyBaseData::	INCLUDE "data/pokemon/base_stats/flaaffy.asm"
 
 AmpharosBaseData::	INCLUDE "data/pokemon/base_stats/ampharos.asm"
-AmpharosMegaBaseData::	INCLUDE "data/pokemon/base_stats/ampharos_mega.asm"
 
 BellossomBaseData::	INCLUDE "data/pokemon/base_stats/bellossom.asm"
 
@@ -100,34 +98,6 @@ SlowkingBaseData::	INCLUDE "data/pokemon/base_stats/slowking.asm"
 MisdreavusBaseData::	INCLUDE "data/pokemon/base_stats/misdreavus.asm"
 
 UnownBaseData::	INCLUDE "data/pokemon/base_stats/unown.asm"
-UnownABaseData::	INCLUDE "data/pokemon/base_stats/unown_a.asm"
-UnownBBaseData::	INCLUDE "data/pokemon/base_stats/unown_b.asm"
-UnownCBaseData::	INCLUDE "data/pokemon/base_stats/unown_c.asm"
-UnownDBaseData::	INCLUDE "data/pokemon/base_stats/unown_d.asm"
-UnownEBaseData::	INCLUDE "data/pokemon/base_stats/unown_e.asm"
-UnownFBaseData::	INCLUDE "data/pokemon/base_stats/unown_f.asm"
-UnownGBaseData::	INCLUDE "data/pokemon/base_stats/unown_g.asm"
-UnownHBaseData::	INCLUDE "data/pokemon/base_stats/unown_h.asm"
-UnownIBaseData::	INCLUDE "data/pokemon/base_stats/unown_i.asm"
-UnownJBaseData::	INCLUDE "data/pokemon/base_stats/unown_j.asm"
-UnownKBaseData::	INCLUDE "data/pokemon/base_stats/unown_k.asm"
-UnownLBaseData::	INCLUDE "data/pokemon/base_stats/unown_l.asm"
-UnownMBaseData::	INCLUDE "data/pokemon/base_stats/unown_m.asm"
-UnownNBaseData::	INCLUDE "data/pokemon/base_stats/unown_n.asm"
-UnownOBaseData::	INCLUDE "data/pokemon/base_stats/unown_o.asm"
-UnownPBaseData::	INCLUDE "data/pokemon/base_stats/unown_p.asm"
-UnownQBaseData::	INCLUDE "data/pokemon/base_stats/unown_q.asm"
-UnownRBaseData::	INCLUDE "data/pokemon/base_stats/unown_r.asm"
-UnownSBaseData::	INCLUDE "data/pokemon/base_stats/unown_s.asm"
-UnownTBaseData::	INCLUDE "data/pokemon/base_stats/unown_t.asm"
-UnownUBaseData::	INCLUDE "data/pokemon/base_stats/unown_u.asm"
-UnownVBaseData::	INCLUDE "data/pokemon/base_stats/unown_v.asm"
-UnownWBaseData::	INCLUDE "data/pokemon/base_stats/unown_w.asm"
-UnownXBaseData::	INCLUDE "data/pokemon/base_stats/unown_x.asm"
-UnownYBaseData::	INCLUDE "data/pokemon/base_stats/unown_y.asm"
-UnownZBaseData::	INCLUDE "data/pokemon/base_stats/unown_z.asm"
-UnownExclamation_markBaseData::	INCLUDE "data/pokemon/base_stats/unown_exclamation_mark.asm"
-UnownQuestion_markBaseData::	INCLUDE "data/pokemon/base_stats/unown_question_mark.asm"
 
 WobbuffetBaseData::	INCLUDE "data/pokemon/base_stats/wobbuffet.asm"
 
@@ -142,7 +112,6 @@ DunsparceBaseData::	INCLUDE "data/pokemon/base_stats/dunsparce.asm"
 GligarBaseData::	INCLUDE "data/pokemon/base_stats/gligar.asm"
 
 SteelixBaseData::	INCLUDE "data/pokemon/base_stats/steelix.asm"
-SteelixMegaBaseData::	INCLUDE "data/pokemon/base_stats/steelix_mega.asm"
 
 SnubbullBaseData::	INCLUDE "data/pokemon/base_stats/snubbull.asm"
 
@@ -151,12 +120,10 @@ GranbullBaseData::	INCLUDE "data/pokemon/base_stats/granbull.asm"
 QwilfishBaseData::	INCLUDE "data/pokemon/base_stats/qwilfish.asm"
 
 ScizorBaseData::	INCLUDE "data/pokemon/base_stats/scizor.asm"
-ScizorMegaBaseData::	INCLUDE "data/pokemon/base_stats/scizor_mega.asm"
 
 ShuckleBaseData::	INCLUDE "data/pokemon/base_stats/shuckle.asm"
 
 HeracrossBaseData::	INCLUDE "data/pokemon/base_stats/heracross.asm"
-HeracrossMegaBaseData::	INCLUDE "data/pokemon/base_stats/heracross_mega.asm"
 
 SneaselBaseData::	INCLUDE "data/pokemon/base_stats/sneasel.asm"
 
@@ -173,7 +140,6 @@ SwinubBaseData::	INCLUDE "data/pokemon/base_stats/swinub.asm"
 PiloswineBaseData::	INCLUDE "data/pokemon/base_stats/piloswine.asm"
 
 CorsolaBaseData::	INCLUDE "data/pokemon/base_stats/corsola.asm"
-CorsolaGalarBaseData::	INCLUDE "data/pokemon/base_stats/corsola_galar.asm"
 
 RemoraidBaseData::	INCLUDE "data/pokemon/base_stats/remoraid.asm"
 
@@ -188,7 +154,6 @@ SkarmoryBaseData::	INCLUDE "data/pokemon/base_stats/skarmory.asm"
 HoundourBaseData::	INCLUDE "data/pokemon/base_stats/houndour.asm"
 
 HoundoomBaseData::	INCLUDE "data/pokemon/base_stats/houndoom.asm"
-HoundoomMegaBaseData::	INCLUDE "data/pokemon/base_stats/houndoom_mega.asm"
 
 KingdraBaseData::	INCLUDE "data/pokemon/base_stats/kingdra.asm"
 
@@ -227,7 +192,6 @@ LarvitarBaseData::	INCLUDE "data/pokemon/base_stats/larvitar.asm"
 PupitarBaseData::	INCLUDE "data/pokemon/base_stats/pupitar.asm"
 
 TyranitarBaseData::	INCLUDE "data/pokemon/base_stats/tyranitar.asm"
-TyranitarMegaBaseData::	INCLUDE "data/pokemon/base_stats/tyranitar_mega.asm"
 
 LugiaBaseData::	INCLUDE "data/pokemon/base_stats/lugia.asm"
 

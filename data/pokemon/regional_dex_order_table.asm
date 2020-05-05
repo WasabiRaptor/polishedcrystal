@@ -3,7 +3,7 @@ regional_dex_order: macro
 endm
 
 RegionDexOrderTable:
-    regional_dex_order Kanto
+    regional_dex_order Other
     regional_dex_order Kanto
     regional_dex_order Johto
     regional_dex_order Hoenn

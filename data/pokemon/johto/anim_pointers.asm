@@ -309,12 +309,15 @@ BlisseyAnimationPointers::
 
 RaikouAnimationPointers::
 	add_anim Raikou
+	add_anim RaikouBeta
 
 EnteiAnimationPointers::
 	add_anim Entei
+	add_anim EnteiBeta
 
 SuicuneAnimationPointers::
 	add_anim Suicune
+	add_anim SuicuneBeta
 
 LarvitarAnimationPointers::
 	add_anim Larvitar

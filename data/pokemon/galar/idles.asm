@@ -181,7 +181,7 @@ ZacianAnimationIdle:	INCLUDE "gfx/pokemon/zacian/anim_idle.asm"
 ZacianSwordAnimationIdle::	INCLUDE "gfx/pokemon/zacian_sword/anim_idle.asm"
 
 ZamazentaAnimationIdle:	INCLUDE "gfx/pokemon/zamazenta/anim_idle.asm"
-ZamazentaSheildAnimationIdle::	INCLUDE "gfx/pokemon/zamazenta_sheild/anim_idle.asm"
+ZamazentaShieldAnimationIdle::	INCLUDE "gfx/pokemon/zamazenta_shield/anim_idle.asm"
 
 EternatusAnimationIdle:	INCLUDE "gfx/pokemon/eternatus/anim_idle.asm"
 EternatusEternamaxAnimationIdle::	INCLUDE "gfx/pokemon/eternatus_eternamax/anim_idle.asm"

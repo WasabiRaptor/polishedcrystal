@@ -8,7 +8,7 @@ AlolaFramesPointerTable::
 	add_framestable Popplio
 	add_framestable Brionne
 	add_framestable Primarina
-	add_framestable Pikipeck
+	add_framestable Pikipek
 	add_framestable Trumbeak
 	add_framestable Toucannon
 	add_framestable Yungoos

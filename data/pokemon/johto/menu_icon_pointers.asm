@@ -309,12 +309,15 @@ BlisseyIconPointers::
 
 RaikouIconPointers::
 	add_icon Raikou
+	add_icon RaikouBeta
 
 EnteiIconPointers::
 	add_icon Entei
+	add_icon EnteiBeta
 
 SuicuneIconPointers::
 	add_icon Suicune
+	add_icon SuicuneBeta
 
 LarvitarIconPointers::
 	add_icon Larvitar

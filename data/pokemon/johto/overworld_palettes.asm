@@ -1487,6 +1487,17 @@ RaikouShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/raikou/shiny.pal"
 RaikouShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/raikou/shiny.pal"
 RaikouShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/raikou/shiny.pal"
 RaikouShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/raikou/shiny.pal"
+RaikouBetaOverworldPalettes::
+RaikouBetaNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/raikou_beta/overworld.gbcpal", middle_colors
+RaikouBetaNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/raikou_beta/overworld.gbcpal", middle_colors
+RaikouBetaNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/raikou_beta/overworld.gbcpal", middle_colors
+RaikouBetaNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/raikou_beta/overworld.gbcpal", middle_colors
+RaikouBetaNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/raikou_beta/overworld.gbcpal", middle_colors
+RaikouBetaShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/raikou_beta/shiny_overworld.pal"
+RaikouBetaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/raikou_beta/shiny_overworld.pal"
+RaikouBetaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/raikou_beta/shiny_overworld.pal"
+RaikouBetaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/raikou_beta/shiny_overworld.pal"
+RaikouBetaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/raikou_beta/shiny_overworld.pal"
 
 EnteiOverworldPalettes:
 EnteiNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/entei/overworld.gbcpal", middle_colors
@@ -1499,6 +1510,17 @@ EnteiShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/entei/shiny.pal"
 EnteiShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/entei/shiny.pal"
 EnteiShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/entei/shiny.pal"
 EnteiShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/entei/shiny.pal"
+EnteiBetaOverworldPalettes::
+EnteiBetaNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/entei_beta/overworld.gbcpal", middle_colors
+EnteiBetaNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/entei_beta/overworld.gbcpal", middle_colors
+EnteiBetaNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/entei_beta/overworld.gbcpal", middle_colors
+EnteiBetaNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/entei_beta/overworld.gbcpal", middle_colors
+EnteiBetaNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/entei_beta/overworld.gbcpal", middle_colors
+EnteiBetaShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/entei_beta/shiny_overworld.pal"
+EnteiBetaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/entei_beta/shiny_overworld.pal"
+EnteiBetaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/entei_beta/shiny_overworld.pal"
+EnteiBetaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/entei_beta/shiny_overworld.pal"
+EnteiBetaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/entei_beta/shiny_overworld.pal"
 
 SuicuneOverworldPalettes:
 SuicuneNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/suicune/overworld.gbcpal", middle_colors
@@ -1511,6 +1533,17 @@ SuicuneShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/suicune/shiny.pal"
 SuicuneShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/suicune/shiny.pal"
 SuicuneShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/suicune/shiny.pal"
 SuicuneShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/suicune/shiny.pal"
+SuicuneBetaOverworldPalettes::
+SuicuneBetaNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/suicune_beta/overworld.gbcpal", middle_colors
+SuicuneBetaNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/suicune_beta/overworld.gbcpal", middle_colors
+SuicuneBetaNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/suicune_beta/overworld.gbcpal", middle_colors
+SuicuneBetaNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/suicune_beta/overworld.gbcpal", middle_colors
+SuicuneBetaNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/suicune_beta/overworld.gbcpal", middle_colors
+SuicuneBetaShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/suicune_beta/shiny_overworld.pal"
+SuicuneBetaShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/suicune_beta/shiny_overworld.pal"
+SuicuneBetaShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/suicune_beta/shiny_overworld.pal"
+SuicuneBetaShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/suicune_beta/shiny_overworld.pal"
+SuicuneBetaShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/suicune_beta/shiny_overworld.pal"
 
 LarvitarOverworldPalettes:
 LarvitarNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/larvitar/overworld.gbcpal", middle_colors

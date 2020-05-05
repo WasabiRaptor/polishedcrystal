@@ -217,10 +217,13 @@ MiltankAnimation:	INCLUDE "gfx/pokemon/miltank/anim.asm"
 BlisseyAnimation:	INCLUDE "gfx/pokemon/blissey/anim.asm"
 
 RaikouAnimation:	INCLUDE "gfx/pokemon/raikou/anim.asm"
+RaikouBetaAnimation::	INCLUDE "gfx/pokemon/raikou_beta/anim.asm"
 
 EnteiAnimation:	INCLUDE "gfx/pokemon/entei/anim.asm"
+EnteiBetaAnimation::	INCLUDE "gfx/pokemon/entei_beta/anim.asm"
 
 SuicuneAnimation:	INCLUDE "gfx/pokemon/suicune/anim.asm"
+SuicuneBetaAnimation::	INCLUDE "gfx/pokemon/suicune_beta/anim.asm"
 
 LarvitarAnimation:	INCLUDE "gfx/pokemon/larvitar/anim.asm"
 

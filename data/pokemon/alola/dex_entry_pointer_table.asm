@@ -8,7 +8,7 @@ AlolaPokedexEntryPointerTable::
 	add_pokedexentrytable Popplio
 	add_pokedexentrytable Brionne
 	add_pokedexentrytable Primarina
-	add_pokedexentrytable Pikipeck
+	add_pokedexentrytable Pikipek
 	add_pokedexentrytable Trumbeak
 	add_pokedexentrytable Toucannon
 	add_pokedexentrytable Yungoos

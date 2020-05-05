@@ -26,8 +26,8 @@ BrionneAnimationPointers::
 PrimarinaAnimationPointers::
 	add_anim Primarina
 
-PikipeckAnimationPointers::
-	add_anim Pikipeck
+PikipekAnimationPointers::
+	add_anim Pikipek
 
 TrumbeakAnimationPointers::
 	add_anim Trumbeak

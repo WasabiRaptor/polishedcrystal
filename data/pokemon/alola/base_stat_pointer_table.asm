@@ -8,7 +8,7 @@ AlolaBaseDataPointerTable::
 	add_basedatatable Popplio
 	add_basedatatable Brionne
 	add_basedatatable Primarina
-	add_basedatatable Pikipeck
+	add_basedatatable Pikipek
 	add_basedatatable Trumbeak
 	add_basedatatable Toucannon
 	add_basedatatable Yungoos

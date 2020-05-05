@@ -261,7 +261,7 @@ ZacianEvosAttacksPointers::
 
 ZamazentaEvosAttacksPointers::
 	add_evosattacks Zamazenta
-	add_evosattacks ZamazentaSheild
+	add_evosattacks ZamazentaShield
 
 EternatusEvosAttacksPointers::
 	add_evosattacks Eternatus

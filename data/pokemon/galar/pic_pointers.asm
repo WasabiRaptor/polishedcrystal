@@ -261,7 +261,7 @@ ZacianPicPointers::
 
 ZamazentaPicPointers::
 	add_pics Zamazenta
-	add_pics ZamazentaSheild
+	add_pics ZamazentaShield
 
 EternatusPicPointers::
 	add_pics Eternatus
