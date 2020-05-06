@@ -56,7 +56,6 @@ ROMX $0C
 	org $4000
 	"Code 12"
 	"Tileset Headers"
-	"Overworld Sprites 4"
 
 ROMX $0D
 	org $4000

@@ -7,7 +7,7 @@
 	db 3 ; catch rate
 	db 107 ; base exp
 	db NO_ITEM, NO_ITEM ; items
-
+    dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/silvally-null/front.dimensions"
 	db BATTLE_ARMOR, BATTLE_ARMOR	; abilities
 	db BATTLE_ARMOR	; hidden ability

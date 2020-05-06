@@ -7,7 +7,7 @@
 	db 45 ; catch rate
 	db 255 ; base exp
 	db NO_ITEM, NO_ITEM ; items
-
+    dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/shaymin/front.dimensions"
 	db NATURAL_CURE, NATURAL_CURE	; abilities
 	db NATURAL_CURE	; hidden ability

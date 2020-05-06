@@ -7,7 +7,7 @@
 	db 3 ; catch rate
 	db 255 ; base exp
 	db NO_ITEM, NO_ITEM ; items
-
+    dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/zygarde_fifty_percent/front.dimensions"
 	db REVERSE_AURA, REVERSE_AURA	; abilities
 	db POWER_CONSTRUCT	; hidden ability
