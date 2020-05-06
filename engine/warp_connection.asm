@@ -322,6 +322,17 @@ RefreshMapSprites: ; 1047f0
 	call GetMovementPermissions
 	farcall RefreshPlayerSprite
 	farcall CheckReplaceKrisSprite
+	ld hl, wFollowerStatus
+	res FOLLOWER_ENABLE, [hl]
+
+	ld de, 2 ; permission
+	call GetMapHeaderMember
+	bit FOLLOWER_DISABLE_F, c
+	ld hl, wFollowerStatus
+	set FOLLOWER_ENABLE, [hl]
+	jr nz, .done
+	res FOLLOWER_ENABLE, [hl]
+.done
 	ld hl, wPlayerSpriteSetupFlags
 	bit 6, [hl]
 	jr nz, .skip

@@ -2063,6 +2063,7 @@ GetMapPermission:: ; 2c8a
 	ld de, 2 ; permission
 	call GetMapHeaderMember
 	ld a, c
+	and %01111111 ; opposite of follower disable flag
 	pop bc
 	pop de
 	pop hl

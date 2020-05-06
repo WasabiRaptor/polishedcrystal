@@ -1719,7 +1719,7 @@ PlayerStep: ; 4e56
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
-	;adding this just incase
+	;adding this just incase it messes up to clear the value
 	xor a
 	ld [wPlayerGoingUpStairs], a
 	ret
