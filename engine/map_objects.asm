@@ -1143,6 +1143,7 @@ PlayerDiagonalStairs:
 	ld a, [wPlayerGoingLeftRightStairs]
 	ld [wPlayerStepDirection], a
 	ld a, [wPlayerGoingUpStairs]
+	dec a
 	call UpdateDiagonalStairsPosition
 	call UpdatePlayerStep
 	ld hl, OBJECT_STEP_DURATION
@@ -1155,7 +1156,6 @@ PlayerDiagonalStairs:
 	res 3, [hl]
 	ld hl, wPlayerStepFlags
 	set 6, [hl]
-	set 4, [hl]
 	jp IncrementObjectStructField28
 
 .InitVertical:
@@ -1167,6 +1167,7 @@ PlayerDiagonalStairs:
 	ld [hl], PERSON_ACTION_STAND
 
 	ld a, [wPlayerGoingUpStairs]
+	dec a
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], a
@@ -1186,9 +1187,11 @@ PlayerDiagonalStairs:
 	ld [hl], STEP_TYPE_SLEEP
 	ld hl, wPlayerStepFlags
 	set 6, [hl]
-
 	ld a, [wPlayerGoingUpStairs]
+	dec a
 	ld [wFollowerGoingUpStairs], a
+	xor a
+	ld [wPlayerGoingUpStairs], a
 	ret
 
 UpdateDiagonalStairsPosition:
@@ -1219,9 +1222,11 @@ UpdatePlayerStepVertical:
 	ld a, [wPlayerStepDirection]
 
 	ld a, [wPlayerGoingUpStairs]
+	dec a
 	ld [wPlayerStepDirection], a
 
 	ld a, [wPlayerGoingUpStairs]
+	dec a
 	and a
 	ld e, 1
 	jr z, .goingdown
@@ -1713,6 +1718,9 @@ PlayerStep: ; 4e56
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
+	;adding this just incase
+	xor a
+	ld [wPlayerGoingUpStairs], a
 	ret
 ; 4e83
 

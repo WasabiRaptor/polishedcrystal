@@ -244,6 +244,8 @@ CheckPlayerState: ; 967f4
 	jr z, .noevents
 	bit 4, a ; in midair
 	jr nz, .noevents
+	bit 3, a ; stairs
+	jr nz, .noevents
 	call EnableEvents
 .events
 	xor a ; events

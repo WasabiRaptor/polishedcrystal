@@ -364,7 +364,8 @@ wPlayerStepFlags:: ds 1
 ; bit 6: Stop step
 ; bit 5: Doing step
 ; bit 4: In midair
-; bits 0-3: unused
+; bit 3: on stairs
+; bits 0-2: unused
 wPlayerStepDirection:: ds 1
 
 wSpinning:: ds 1

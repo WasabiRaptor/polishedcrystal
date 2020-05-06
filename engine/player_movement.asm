@@ -396,6 +396,10 @@ DoPlayerMovement:: ; 80000
 ; 80226
 
 .TryDiagonalStairs:
+	ld a, [wPlayerGoingUpStairs]
+	and a
+	jr nz, .DontJumpOrDiagonalStairs
+
 	ld a, [wPlayerStandingTile]
 	ld e, a
 	and $f0
@@ -413,9 +417,9 @@ DoPlayerMovement:: ; 80000
 	jr z, .DontJumpOrDiagonalStairs
 	ld a, [wPlayerStandingTile]
 	cp COLL_STAIRS_RIGHT_UP
-	ld a, DOWN
+	ld a, DOWN + 1
 	jr c, .goingdown
-	inc a ; UP
+	inc a ; UP + 1
 .goingdown
 	ld [wPlayerGoingUpStairs], a
 	ld a, [wFacingDirection]
