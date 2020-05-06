@@ -403,7 +403,7 @@ DoPlayerMovement:: ; 80000
 	jr nz, .DontJumpOrDiagonalStairs
 
 	ld a, e
-	and 7
+	and $0f
 	ld e, a
 	ld d, 0
 	ld hl, .FacingStairsTable
@@ -411,6 +411,15 @@ DoPlayerMovement:: ; 80000
 	ld a, [wFacingDirection]
 	and [hl]
 	jr z, .DontJumpOrDiagonalStairs
+	ld a, [wPlayerStandingTile]
+	cp COLL_STAIRS_RIGHT_UP
+	ld a, DOWN
+	jr c, .goingdown
+	inc a ; UP
+.goingdown
+	ld [wPlayerGoingUpStairs], a
+	ld a, [wFacingDirection]
+	ld [wPlayerGoingLeftRightStairs], a
 
 	ld a, STEP_DIAGONAL_STAIRS
 	call .DoStep
@@ -419,6 +428,8 @@ DoPlayerMovement:: ; 80000
 	ret
 
 .FacingStairsTable:
+	db FACE_RIGHT
+	db FACE_LEFT
 	db FACE_RIGHT
 	db FACE_LEFT
 

@@ -1074,7 +1074,52 @@ StepTypesJumptable: ; 4b45
 ; 4b79
 
 NPCDiagonalStairs:
-	; TODO
+	call Object28AnonymousJumptable
+; anonymous dw
+	dw .InitHorizontal1
+	dw .StepHorizontal
+	dw .InitHorizontal2
+	dw .StepHorizontal
+	dw .InitVertical
+	dw .StepVertical
+
+.InitHorizontal2:
+	call GetNextTile
+.InitHorizontal1:
+	call IncrementObjectStructField28
+.StepHorizontal:
+	ld a, [wFollowerGoingUpStairs]
+	;ld a, UP
+	call UpdateDiagonalStairsPosition
+	call AddStepVector
+	ld hl, OBJECT_STEP_DURATION
+	add hl, bc
+	dec [hl]
+	ret nz
+	call CopyNextCoordsTileToStandingCoordsTile
+	ld hl, OBJECT_FLAGS2
+	add hl, bc
+	res 3, [hl]
+	jp IncrementObjectStructField28
+
+.InitVertical:
+ 	ld hl, OBJECT_ACTION
+	add hl, bc
+	ld [hl], PERSON_ACTION_STAND
+
+	ld a, [wFollowerGoingUpStairs]
+	;ld a, UP
+	ld hl, OBJECT_WALKING
+	add hl, bc
+	ld [hl], a
+
+	call GetNextTile
+	call IncrementObjectStructField28
+.StepVertical:
+	call CopyNextCoordsTileToStandingCoordsTile
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_SLEEP
 	ret
 
 PlayerDiagonalStairs:
@@ -1090,10 +1135,14 @@ PlayerDiagonalStairs:
 .InitHorizontal2:
 	call GetNextTile
 .InitHorizontal1:
+
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
 	call IncrementObjectStructField28
 .StepHorizontal:
+	ld a, [wPlayerGoingLeftRightStairs]
+	ld [wPlayerStepDirection], a
+	ld a, [wPlayerGoingUpStairs]
 	call UpdateDiagonalStairsPosition
 	call UpdatePlayerStep
 	ld hl, OBJECT_STEP_DURATION
@@ -1110,61 +1159,80 @@ PlayerDiagonalStairs:
 	jp IncrementObjectStructField28
 
 .InitVertical:
+	ld hl, wPlayerStepFlags
+	set 7, [hl]
+
  	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], PERSON_ACTION_STAND
 
-; If you start on the bottom half of a block, you go up;
-; if you start on the top half, you go down.
-	ld a, [wMetatileStandingY]
-	and a
-	ld a, DOWN
-	jr z, .got_dir
-	ld a, UP
-.got_dir
+	ld a, [wPlayerGoingUpStairs]
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], a
 
 	call GetNextTile
-	ld hl, wPlayerStepFlags
-	set 7, [hl]
 	call IncrementObjectStructField28
 .StepVertical:
-	call UpdateDiagonalStairsPosition
-	call UpdatePlayerStep
+	call UpdatePlayerStepVertical
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	dec [hl]
 	ret nz
-	ld hl, wPlayerStepFlags
-	set 6, [hl]
+
 	call CopyNextCoordsTileToStandingCoordsTile
-	call UpdateDiagonalStairsPositionSkipHandler
-	call UpdateDiagonalStairsPositionSkipHandler
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
+	ld hl, wPlayerStepFlags
+	set 6, [hl]
+
+	ld a, [wPlayerGoingUpStairs]
+	ld [wFollowerGoingUpStairs], a
 	ret
 
 UpdateDiagonalStairsPosition:
-	ld a, [wStairHandler]
-	inc a
-	ld [wStairHandler], a
-	and %00000001
-	ret z
-UpdateDiagonalStairsPositionSkipHandler:
-	ld a, [wMetatileStandingY]
 	and a
 	ld e, 1
 	jr z, .goingdown
 	ld e, -1
 .goingdown
+	ld hl, OBJECT_STEP_DURATION
+	add hl, bc
+	ld a, [hl]
+	and 1
+	ret z
+
 	ld hl, OBJECT_SPRITE_Y_OFFSET
 	add hl, bc
 	ld a, [hl]
 	add e
 	ld [hl], a
+	ret
+
+UpdatePlayerStepVertical:
+	ld hl, OBJECT_STEP_DURATION
+	add hl, bc
+	ld a, [hl]
+	and 1
+	ret nz
+	ld a, [wPlayerStepDirection]
+
+	ld a, [wPlayerGoingUpStairs]
+	ld [wPlayerStepDirection], a
+
+	ld a, [wPlayerGoingUpStairs]
+	and a
+	ld e, 1
+	jr z, .goingdown
+	ld e, -1
+.goingdown
+	ld a, [wPlayerStepVectorY]
+	add e
+	ld [wPlayerStepVectorY], a
+	ld hl, wPlayerStepFlags
+	set 5, [hl]
+
 	ret
 
 WaitStep_InPlace: ; 4b79

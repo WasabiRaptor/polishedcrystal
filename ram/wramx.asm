@@ -371,8 +371,6 @@ wSpinning:: ds 1
 
 wBGMapAnchor:: ds 2
 
-wStairHandler:: ds 1
-
 wOverworldMapAnchor:: ds 2
 wMetatileStandingY:: ds 1
 wMetatileStandingX:: ds 1
@@ -759,6 +757,11 @@ wFollowerStatus::
 	ds 1
 wObjectFollow_Leader:: ds 1
 wObjectFollow_Follower:: ds 1
+
+wPlayerGoingUpStairs:: ds 1
+wFollowerGoingUpStairs:: ds 1
+wPlayerGoingLeftRightStairs:: ds 1
+
 wCenteredObject:: ds 1
 wFollowerMovementQueueLength:: ds 1
 wFollowMovementQueue:: ds 5

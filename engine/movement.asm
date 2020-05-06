@@ -909,9 +909,7 @@ DiagonalStairsStep:
 	ld hl, OBJECT_ACTION
 	add hl, bc
 	ld [hl], PERSON_ACTION_STEP
-	xor a
-	ld [wStairHandler], a
-	
+
 	ld hl, wCenteredObject
 	ldh a, [hMapObjectIndexBuffer]
 	cp [hl]
