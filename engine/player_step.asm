@@ -94,6 +94,7 @@ UpdateOverworldMap: ; d536 (3:5536)
 	dec a
 	ret nz
 ; step right
+.stepRight
 	call .ScrollOverworldMapRight
 	call _LoadMapPart
 	jp ScrollMapLeft

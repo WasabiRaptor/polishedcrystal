@@ -1101,6 +1101,8 @@ NPCDiagonalStairs:
 
 .MaybeVertical:
 	ld a, [wFollowerStairsType]
+	inc a
+	ld [wFollowerStairsType], a
 	and 1
 	jr nz, .StepVertical
 	jp IncrementObjectStructField28
@@ -1129,6 +1131,8 @@ PlayerDiagonalStairs:
 	dw .finish
 
 .InitHorizontal:
+	push bc
+	pop bc
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
 	call IncrementObjectStructField28
@@ -1153,6 +1157,9 @@ PlayerDiagonalStairs:
 	jp IncrementObjectStructField28
 
 .MaybeVertical:
+	ld a, -1
+	ld [wPlayerStepDirection], a
+
 	ld a, [wPlayerStairsType]
 	inc a
 	ld [wPlayerStairsType], a
@@ -1174,6 +1181,9 @@ PlayerDiagonalStairs:
 	call CopyNextCoordsTileToStandingCoordsTile
 	call IncrementObjectStructField28
 .finish:
+	ld a, -1
+	ld [wPlayerStepDirection], a
+
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
@@ -1182,8 +1192,6 @@ PlayerDiagonalStairs:
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	ld [wFollowerGoingUpStairs], a
-	ld a, [wPlayerStairsType]
-	ld [wFollowerStairsType], a
 	xor a
 	ld [wPlayerGoingUpStairs], a
 	ret
@@ -1213,7 +1221,7 @@ UpdatePlayerStepVertical:
 	ld a, [hl]
 	and %11
 	ret nz
-	ld a, [wPlayerStepDirection]
+	;ld a, [wPlayerStepDirection]
 
 	;ld a, [wPlayerGoingUpStairs]
 	;dec a
