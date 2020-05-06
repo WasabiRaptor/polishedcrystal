@@ -50,11 +50,11 @@ DoPlayerMovement:: ; 80000
 	ret c
 	call .CheckTurning
 	ret c
+	call .TryDiagonalStairs
+	ret c
 	call .TryStep
 	ret c
 	call .TryJump
-	ret c
-	call .TryDiagonalStairs
 	ret c
 	call .CheckWarp
 	ret c
@@ -78,11 +78,11 @@ DoPlayerMovement:: ; 80000
 	ret c
 	call .CheckTurning
 	ret c
+	call .TryDiagonalStairs
+	ret c
 	call .TryStep
 	ret c
 	call .TryJump
-	ret c
-	call .TryDiagonalStairs
 	ret c
 	call .CheckWarp
 	ret c
@@ -396,9 +396,9 @@ DoPlayerMovement:: ; 80000
 ; 80226
 
 .TryDiagonalStairs:
-	ld a, [wPlayerGoingUpStairs]
-	and a
-	jr nz, .DontJumpOrDiagonalStairs
+	;ld a, [wPlayerGoingUpStairs]
+	;and a
+	;jr nz, .DontJumpOrDiagonalStairs
 
 	ld a, [wPlayerStandingTile]
 	ld e, a
@@ -416,9 +416,12 @@ DoPlayerMovement:: ; 80000
 	and [hl]
 	jr z, .DontJumpOrDiagonalStairs
 	ld a, [wPlayerStandingTile]
+	cp COLL_STAIRS_RIGHT_UP_MID
+	jr nc, .MiddleStairs
 	cp COLL_STAIRS_RIGHT_UP
 	ld a, DOWN + 1
 	jr c, .goingdown
+.goingup
 	inc a ; UP + 1
 .goingdown
 	ld [wPlayerGoingUpStairs], a
@@ -431,11 +434,28 @@ DoPlayerMovement:: ; 80000
 	scf
 	ret
 
+.MiddleStairs
+	ld a, [wFacingDirection]
+	jr z, .right_middle
+.left_middle
+	cp FACE_RIGHT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	jr .goingup
+.right_middle
+	cp FACE_LEFT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	jr .goingup
+
+
 .FacingStairsTable:
 	db FACE_RIGHT
 	db FACE_LEFT
 	db FACE_RIGHT
 	db FACE_LEFT
+	db FACE_RIGHT | FACE_LEFT
+	db FACE_LEFT | FACE_RIGHT
 
 .CheckWarp: ; 80226
 

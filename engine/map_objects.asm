@@ -1076,16 +1076,13 @@ StepTypesJumptable: ; 4b45
 NPCDiagonalStairs:
 	call Object28AnonymousJumptable
 ; anonymous dw
-	dw .InitHorizontal1
+	dw .InitHorizontal
 	dw .StepHorizontal
-	dw .InitHorizontal2
-	dw .StepHorizontal
-	dw .InitVertical
-	dw .StepVertical
+	dw .MaybeVertical
+	dw .finish
 
-.InitHorizontal2:
-	call GetNextTile
-.InitHorizontal1:
+
+.InitHorizontal:
 	call IncrementObjectStructField28
 .StepHorizontal:
 	ld a, [wFollowerGoingUpStairs]
@@ -1102,21 +1099,22 @@ NPCDiagonalStairs:
 	res 3, [hl]
 	jp IncrementObjectStructField28
 
-.InitVertical:
- 	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], PERSON_ACTION_STAND
+.MaybeVertical:
+	ld a, [wFollowerStairsType]
+	and 1
+	jr nz, .StepVertical
+	jp IncrementObjectStructField28
 
+.StepVertical:
 	ld a, [wFollowerGoingUpStairs]
-	;ld a, UP
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], a
 
 	call GetNextTile
-	call IncrementObjectStructField28
-.StepVertical:
 	call CopyNextCoordsTileToStandingCoordsTile
+	call IncrementObjectStructField28
+.finish:
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
@@ -1125,17 +1123,12 @@ NPCDiagonalStairs:
 PlayerDiagonalStairs:
 	call Object28AnonymousJumptable
 ; anonymous dw
-	dw .InitHorizontal1
+	dw .InitHorizontal
 	dw .StepHorizontal
-	dw .InitHorizontal2
-	dw .StepHorizontal
-	dw .InitVertical
-	dw .StepVertical
+	dw .MaybeVertical
+	dw .finish
 
-.InitHorizontal2:
-	call GetNextTile
-.InitHorizontal1:
-
+.InitHorizontal:
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
 	call IncrementObjectStructField28
@@ -1146,6 +1139,7 @@ PlayerDiagonalStairs:
 	dec a
 	call UpdateDiagonalStairsPosition
 	call UpdatePlayerStep
+	call UpdatePlayerStepVertical
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	dec [hl]
@@ -1158,13 +1152,17 @@ PlayerDiagonalStairs:
 	set 6, [hl]
 	jp IncrementObjectStructField28
 
-.InitVertical:
+.MaybeVertical:
+	ld a, [wPlayerStairsType]
+	inc a
+	ld [wPlayerStairsType], a
+	and 1
+	jr nz, .StepVertical
+	jp IncrementObjectStructField28
+
+.StepVertical:
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
-
- 	ld hl, OBJECT_ACTION
-	add hl, bc
-	ld [hl], PERSON_ACTION_STAND
 
 	ld a, [wPlayerGoingUpStairs]
 	dec a
@@ -1173,16 +1171,9 @@ PlayerDiagonalStairs:
 	ld [hl], a
 
 	call GetNextTile
-	call IncrementObjectStructField28
-.StepVertical:
-	call UpdatePlayerStepVertical
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	dec [hl]
-	dec [hl]
-	ret nz
-
 	call CopyNextCoordsTileToStandingCoordsTile
+	call IncrementObjectStructField28
+.finish:
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
@@ -1191,6 +1182,8 @@ PlayerDiagonalStairs:
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	ld [wFollowerGoingUpStairs], a
+	ld a, [wPlayerStairsType]
+	ld [wFollowerStairsType], a
 	xor a
 	ld [wPlayerGoingUpStairs], a
 	ret
@@ -1222,23 +1215,25 @@ UpdatePlayerStepVertical:
 	ret nz
 	ld a, [wPlayerStepDirection]
 
-	ld a, [wPlayerGoingUpStairs]
-	dec a
-	ld [wPlayerStepDirection], a
+	;ld a, [wPlayerGoingUpStairs]
+	;dec a
+	;ld [wPlayerStepDirection], a
 
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	and a
-	ld e, 2
+	ld e, 1
 	jr z, .goingdown
-	ld e, -2
+	ld e, -1
 .goingdown
-	ld a, [wPlayerStepVectorY]
-	add e
-	ld [wPlayerStepVectorY], a
+	;ld a, [hSCY]
+	;add e
+	;ld [hSCY], a
+	;ld a, [wPlayerBGMapOffsetY]
+	;sub e
+	;ld [wPlayerBGMapOffsetY], a
 	ld hl, wPlayerStepFlags
 	set 5, [hl]
-
 	ret
 
 WaitStep_InPlace: ; 4b79

@@ -762,6 +762,8 @@ wObjectFollow_Follower:: ds 1
 wPlayerGoingUpStairs:: ds 1
 wFollowerGoingUpStairs:: ds 1
 wPlayerGoingLeftRightStairs:: ds 1
+wPlayerStairsType:: ds 1
+wFollowerStairsType:: ds 1
 
 wCenteredObject:: ds 1
 wFollowerMovementQueueLength:: ds 1
