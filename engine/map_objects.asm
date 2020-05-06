@@ -1179,6 +1179,7 @@ PlayerDiagonalStairs:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	dec [hl]
+	dec [hl]
 	ret nz
 
 	call CopyNextCoordsTileToStandingCoordsTile
@@ -1217,7 +1218,7 @@ UpdatePlayerStepVertical:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld a, [hl]
-	and 1
+	and %11
 	ret nz
 	ld a, [wPlayerStepDirection]
 
@@ -1228,9 +1229,9 @@ UpdatePlayerStepVertical:
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	and a
-	ld e, 1
+	ld e, 2
 	jr z, .goingdown
-	ld e, -1
+	ld e, -2
 .goingdown
 	ld a, [wPlayerStepVectorY]
 	add e
