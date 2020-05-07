@@ -1194,7 +1194,7 @@ PlayerDiagonalStairs:
 
 	ld a, [wPlayerStairsType]
 	and %1
-	jr z, .StepVertical
+	jr nz, .StepVertical
 	jp IncrementObjectStructField28
 
 .StepVertical:
