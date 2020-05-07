@@ -763,6 +763,10 @@ wPlayerGoingUpStairs:: ds 1
 wFollowerGoingUpStairs:: ds 1
 wPlayerGoingLeftRightStairs:: ds 1
 wPlayerStairsType:: ds 1
+;bit 0, move up a tile
+;bit 1, diagonal on second half of block
+;bit 2, diagonal on first half of block
+; 3-7 unused
 wFollowerStairsType:: ds 1
 
 wCenteredObject:: ds 1

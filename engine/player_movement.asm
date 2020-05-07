@@ -416,15 +416,23 @@ DoPlayerMovement:: ; 80000
 	and [hl]
 	jr z, .DontJumpOrDiagonalStairs
 	ld a, [wPlayerStandingTile]
+	cp COLL_STAIRS_RIGHT_UP_TOP
+	jr nc, .TopStairs
+	cp COLL_STAIRS_RIGHT_UP_BOTTOM
+	jr nc, .BottomStairs
 	cp COLL_STAIRS_RIGHT_UP_MID
 	jr nc, .MiddleStairs
 	cp COLL_STAIRS_RIGHT_UP
+	ld b, %10 ; diagonal on second half of block, no going up a tile yet
 	ld a, DOWN + 1
 	jr c, .goingdown
 .goingup
 	inc a ; UP + 1
 .goingdown
 	ld [wPlayerGoingUpStairs], a
+	ld a, b
+	ld [wPlayerStairsType], a
+
 	ld a, [wFacingDirection]
 	ld [wPlayerGoingLeftRightStairs], a
 
@@ -434,8 +442,58 @@ DoPlayerMovement:: ; 80000
 	scf
 	ret
 
+.HalfStairs
+	ld a, [wFacingDirection]
+	ld b, %101 ; going up/down a tile, diagonal on first half
+	jr z, .right_half
+.left_half
+	cp FACE_RIGHT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	jr .goingup
+.right_half
+	cp FACE_LEFT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	jr .goingup
+
+.BottomStairs
+	ld a, [wFacingDirection]
+	ld b, %100 ; not going up/down a tile, diagonal on first half
+	jr z, .right_bottom
+.left_bottom
+	cp FACE_RIGHT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	ld b, %111 ;going up/down a tile, diagonal on both halves
+	jr .goingup
+.right_bottom
+	cp FACE_LEFT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	ld b, %111 ;going up/down a tile, diagonal on both halves
+	jr .goingup
+
+.TopStairs
+	ld a, [wFacingDirection]
+	ld b, %111 ;going up/down a tile, diagonal on both halves
+	jr z, .right_top
+.left_top
+	cp FACE_RIGHT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	ld b, %100 ; not going up/down a tile, diagonal on first half
+	jr .goingup
+.right_top
+	cp FACE_LEFT
+	ld a, DOWN + 1
+	jr z, .goingdown
+	ld b, %100 ; not going up/down a tile, diagonal on first half
+	jr .goingup
+
 .MiddleStairs
 	ld a, [wFacingDirection]
+	ld b, %111 ;going up/down a tile, diagonal on both halves
 	jr z, .right_middle
 .left_middle
 	cp FACE_RIGHT
@@ -454,6 +512,14 @@ DoPlayerMovement:: ; 80000
 	db FACE_LEFT
 	db FACE_RIGHT
 	db FACE_LEFT
+	db FACE_RIGHT | FACE_LEFT
+	db FACE_LEFT | FACE_RIGHT
+	db FACE_RIGHT | FACE_LEFT
+	db FACE_LEFT | FACE_RIGHT
+	db FACE_RIGHT | FACE_LEFT
+	db FACE_LEFT | FACE_RIGHT
+	db FACE_RIGHT | FACE_LEFT
+	db FACE_LEFT | FACE_RIGHT
 	db FACE_RIGHT | FACE_LEFT
 	db FACE_LEFT | FACE_RIGHT
 

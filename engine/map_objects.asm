@@ -1086,8 +1086,21 @@ NPCDiagonalStairs:
 	call IncrementObjectStructField28
 .StepHorizontal:
 	ld a, [wFollowerGoingUpStairs]
-	;ld a, UP
-	call UpdateDiagonalStairsPosition
+	ld hl, OBJECT_STEP_DURATION
+	add hl, bc
+	ld a, [hl]
+	cp 9
+	ld a, [wFollowerStairsType]
+	jr nc, .firsthalf
+.secondhalf:
+	and %10
+	call nz, .FollowerUpdatePosition
+	jr .donehalfcheck
+.firsthalf:
+	and %100
+	call nz, .FollowerUpdatePosition
+.donehalfcheck:
+
 	call AddStepVector
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
@@ -1099,11 +1112,13 @@ NPCDiagonalStairs:
 	res 3, [hl]
 	jp IncrementObjectStructField28
 
+.FollowerUpdatePosition:
+	ld a, [wFollowerGoingUpStairs]
+	jp UpdateDiagonalStairsPosition
+
 .MaybeVertical:
 	ld a, [wFollowerStairsType]
-	inc a
-	ld [wFollowerStairsType], a
-	and 1
+	and %1
 	jr nz, .StepVertical
 	jp IncrementObjectStructField28
 
@@ -1139,11 +1154,22 @@ PlayerDiagonalStairs:
 .StepHorizontal:
 	ld a, [wPlayerGoingLeftRightStairs]
 	ld [wPlayerStepDirection], a
-	ld a, [wPlayerGoingUpStairs]
-	dec a
-	call UpdateDiagonalStairsPosition
+
+	ld hl, OBJECT_STEP_DURATION
+	add hl, bc
+	ld a, [hl]
+	cp 9
+	ld a, [wPlayerStairsType]
+	jr nc, .firsthalf
+.secondhalf:
+	and %10
+	call nz, .PlayerUpdatePosition
+	jr .donehalfcheck
+.firsthalf:
+	and %100
+	call nz, .PlayerUpdatePosition
+.donehalfcheck:
 	call UpdatePlayerStep
-	call UpdatePlayerStepVertical
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	dec [hl]
@@ -1156,14 +1182,18 @@ PlayerDiagonalStairs:
 	set 6, [hl]
 	jp IncrementObjectStructField28
 
+.PlayerUpdatePosition:
+	call UpdatePlayerStepVertical
+	ld a, [wPlayerGoingUpStairs]
+	dec a
+	jp UpdateDiagonalStairsPosition
+
 .MaybeVertical:
 	ld a, -1
 	ld [wPlayerStepDirection], a
 
 	ld a, [wPlayerStairsType]
-	inc a
-	ld [wPlayerStairsType], a
-	and 1
+	and %1
 	jr z, .StepVertical
 	jp IncrementObjectStructField28
 
@@ -1196,6 +1226,8 @@ PlayerDiagonalStairs:
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	ld [wFollowerGoingUpStairs], a
+	ld a, [wPlayerStairsType]
+	ld [wFollowerStairsType], a
 	xor a
 	ld [wPlayerGoingUpStairs], a
 	ret
@@ -1206,11 +1238,6 @@ UpdateDiagonalStairsPosition:
 	jr z, .goingdown
 	ld e, -1
 .goingdown
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld a, [hl]
-	and 1
-	ret z
 
 	ld hl, OBJECT_SPRITE_Y_OFFSET
 	add hl, bc
@@ -1220,12 +1247,6 @@ UpdateDiagonalStairsPosition:
 	ret
 
 UpdatePlayerStepVertical:
-	ld hl, OBJECT_STEP_DURATION
-	add hl, bc
-	ld a, [hl]
-	and %1
-	ret nz
-
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	and a
