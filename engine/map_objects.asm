@@ -1200,15 +1200,12 @@ PlayerDiagonalStairs:
 .StepVertical:
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
-
+	set 5, [hl]
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], a
-
-	ld a, [wPlayerGoingUpStairs]
-	dec a
 	ld [wPlayerStepDirection], a
 
 	call GetNextTile
@@ -1249,7 +1246,6 @@ UpdateDiagonalStairsPosition:
 UpdatePlayerStepVertical:
 	ld a, [wPlayerGoingUpStairs]
 	dec a
-	and a
 	ld e, 1
 	jr z, .goingdown
 	ld e, -1
