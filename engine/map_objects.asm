@@ -1164,7 +1164,7 @@ PlayerDiagonalStairs:
 	inc a
 	ld [wPlayerStairsType], a
 	and 1
-	jr nz, .StepVertical
+	jr z, .StepVertical
 	jp IncrementObjectStructField28
 
 .StepVertical:
@@ -1177,12 +1177,16 @@ PlayerDiagonalStairs:
 	add hl, bc
 	ld [hl], a
 
+	ld a, [wPlayerGoingUpStairs]
+	dec a
+	ld [wPlayerStepDirection], a
+
 	call GetNextTile
 	call CopyNextCoordsTileToStandingCoordsTile
 	call IncrementObjectStructField28
 .finish:
-	ld a, -1
-	ld [wPlayerStepDirection], a
+	;ld a, -1
+	;ld [wPlayerStepDirection], a
 
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
@@ -1219,13 +1223,8 @@ UpdatePlayerStepVertical:
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld a, [hl]
-	and %11
+	and %1
 	ret nz
-	;ld a, [wPlayerStepDirection]
-
-	;ld a, [wPlayerGoingUpStairs]
-	;dec a
-	;ld [wPlayerStepDirection], a
 
 	ld a, [wPlayerGoingUpStairs]
 	dec a
@@ -1234,12 +1233,12 @@ UpdatePlayerStepVertical:
 	jr z, .goingdown
 	ld e, -1
 .goingdown
-	;ld a, [hSCY]
-	;add e
-	;ld [hSCY], a
-	;ld a, [wPlayerBGMapOffsetY]
-	;sub e
-	;ld [wPlayerBGMapOffsetY], a
+	ld a, [hSCY]
+	add e
+	ld [hSCY], a
+	ld a, [wPlayerBGMapOffsetY]
+	sub e
+	ld [wPlayerBGMapOffsetY], a
 	ld hl, wPlayerStepFlags
 	set 5, [hl]
 	ret
