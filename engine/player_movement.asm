@@ -396,9 +396,9 @@ DoPlayerMovement:: ; 80000
 ; 80226
 
 .TryDiagonalStairs:
-	;ld a, [wPlayerGoingUpStairs]
-	;and a
-	;jr nz, .DontJumpOrDiagonalStairs
+	ld a, [wPlayerGoingUpStairs]
+	and a
+	jr nz, .DontJumpOrDiagonalStairs
 
 	ld a, [wPlayerStandingTile]
 	ld e, a

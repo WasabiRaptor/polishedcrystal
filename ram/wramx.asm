@@ -768,6 +768,7 @@ wPlayerStairsType:: ds 1
 ;bit 2, diagonal on first half of block
 ; 3-7 unused
 wFollowerStairsType:: ds 1
+wPlayerLastStairsY:: ds 1
 
 wCenteredObject:: ds 1
 wFollowerMovementQueueLength:: ds 1
