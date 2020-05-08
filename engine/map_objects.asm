@@ -1708,6 +1708,11 @@ NPCStep: ; 4e2b
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
+	ld a, [hMapObjectIndexBuffer]
+	cp FOLLOWER
+	ret nz
+	xor a
+	ld[wFollowerGoingUpStairs], a
 	ret
 ; 4e47
 
@@ -2085,6 +2090,39 @@ ApplyMovementToFollower: ; 54b8
 ; 54e6
 
 GetFollowerNextMovementByte: ; 54e6
+	ld a, [wFollowerGoingUpStairs]
+	and a
+	jr nz, .DontUpdateStairsYet
+
+	ld a, [wFollowerStandingTile]
+	and $f0
+	cp HI_NYBBLE_DIAGONAL_STAIRS
+	jr nz, .DontUpdateStairsYet
+
+	ld a, [wFollowerStandingTile]
+	and $f
+	ld d, 0
+	ld e, a
+
+	ld hl, .FacingStairsTable
+	add hl, de
+	add hl, de
+	ld a, [wFollowerDirection]
+	and OW_RIGHT | OW_LEFT
+	cp OW_LEFT
+	ld a, [hli]
+	ld e, [hl]
+	jr z, .dont_swap
+	swap a
+	swap e
+.dont_swap
+	and $f
+	ld [wFollowerGoingUpStairs], a
+	ld a, e
+	and $f
+	ld [wFollowerStairsType], a
+
+.DontUpdateStairsYet
 	ld hl, wFollowerMovementQueueLength
 	ld a, [hl]
 	and a
@@ -2109,7 +2147,15 @@ GetFollowerNextMovementByte: ; 54e6
 .done
 	call .CancelFollowIfLeaderMissing
 	ret c
+	ld a, [wFollowerGoingUpStairs]
+	and a
 	ld a, [wFollowerRadius] ; I don't think this will be used in any of the follower's calcs so I'm gonig to use it to store the timing for random turns haha
+	jr nz, .dont_turn
+	ld a, [wFollowerStandingTile]
+	and $f0
+	cp HI_NYBBLE_DIAGONAL_STAIRS
+	ld a, [wFollowerRadius] ; I don't think this will be used in any of the follower's calcs so I'm gonig to use it to store the timing for random turns haha
+	jr z, .dont_turn
 	and a
 	jr nz, .dont_turn
 	call Random
@@ -2146,6 +2192,26 @@ GetFollowerNextMovementByte: ; 54e6
 	scf
 	ret
 ; 5529
+stairtable2: macro
+	dn \1, \2
+	dn \3, \4
+endm
+
+.FacingStairsTable:
+	stairtable2 DOWN+1, DOWN+1,  %11,  %11 ;COLL_STAIRS_RIGHT_DOWN
+	stairtable2 DOWN+1, DOWN+1,  %11,  %11 ;COLL_STAIRS_LEFT_DOWN
+	stairtable2 UP+1, 	UP+1,  	 %10,  %10 ;COLL_STAIRS_RIGHT_UP
+	stairtable2 UP+1, 	UP+1, 	 %10,  %10 ;COLL_STAIRS_LEFT_UP
+	stairtable2 UP+1, 	DOWN+1,	 %10,  %10 ;COLL_STAIRS_RIGHT_UP_FLAT
+	stairtable2 DOWN+1, UP+1,  	 %10,  %10 ;COLL_STAIRS_LEFT_UP_FLAT
+	stairtable2 UP+1, 	DOWN+1,	%111, %111 ;COLL_STAIRS_RIGHT_UP_MID
+	stairtable2 DOWN+1, UP+1, 	%111, %111 ;COLL_STAIRS_LEFT_UP_MID
+	stairtable2 UP+1, 	DOWN+1,	%111, %100 ;COLL_STAIRS_RIGHT_UP_BOTTOM
+	stairtable2 DOWN+1, UP+1, 	%100, %111 ;COLL_STAIRS_LEFT_UP_BOTTOM
+	stairtable2 UP+1, 	DOWN+1, %101, %111 ;COLL_STAIRS_RIGHT_UP_TOP
+	stairtable2 DOWN+1, UP+1, 	%111, %101 ;COLL_STAIRS_LEFT_UP_TOP
+	stairtable2 UP+1, 	DOWN+1, %101, %100 ;COLL_STAIRS_RIGHT_UP_HALF
+	stairtable2 DOWN+1, UP+1, 	%100, %101 ;COLL_STAIRS_LEFT_UP_HALF
 
 SpawnShadow: ; 5529
 	push bc
