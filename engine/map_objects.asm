@@ -1120,23 +1120,23 @@ NPCDiagonalStairs:
 	;ld a, [wPlayerLastStairsY]
 	;ld [wFollowerStandingMapY], a
 
-	;ld a, [wFollowerStairsType]
-	;and %1
-	;jr nz, .StepVertical
-	;jp IncrementObjectStructField28
+	ld a, [wFollowerStairsType]
+	and %1
+	jr nz, .StepVertical
+	jp IncrementObjectStructField28
 
-;.StepVertical:
-	;ld a, [wFollowerGoingUpStairs]
-	;ld hl, OBJECT_WALKING
-	;add hl, bc
-	;ld [hl], a
+.StepVertical:
+	ld a, [wFollowerGoingUpStairs]
+	ld hl, OBJECT_WALKING
+	add hl, bc
+	ld [hl], a
 
-	;call GetNextTile
-	;call CopyNextCoordsTileToStandingCoordsTile
+	call GetNextTile
+	call CopyNextCoordsTileToStandingCoordsTile
 	call IncrementObjectStructField28
 .finish:
-	ld a, [wPlayerLastStairsY]
-	ld [wFollowerStandingMapY], a
+	;ld a, [wPlayerLastStairsY]
+	;ld [wFollowerStandingMapY], a
 
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
