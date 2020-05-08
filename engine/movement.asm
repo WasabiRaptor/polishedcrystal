@@ -915,6 +915,38 @@ DiagonalStairsStep:
 	cp [hl]
 	jr z, .player
 
+	ld a, [wFollowerGoingUpStairs]
+	and a
+	jr nz, .DontUpdateYet
+
+	ld hl, OBJECT_STANDING_TILE
+	add hl, bc
+	ld a, [hl]
+	and $f
+	ld d, 0
+	ld e, a
+
+	ld hl, OBJECT_FACING
+	add hl, bc
+	ld a, [hl]
+
+	ld hl, .FacingStairsTable
+	add hl, de
+	add hl, de
+	cp FACE_LEFT
+	ld a, [hli]
+	ld e, [hl]
+	jr z, .dont_swap
+	swap a
+	swap e
+.dont_swap
+	and $f
+	ld [wFollowerGoingUpStairs], a
+	ld a, e
+	and $f
+	ld [wFollowerStairsType], a
+
+.DontUpdateYet
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_NPC_DIAGONAL_STAIRS
@@ -925,3 +957,24 @@ DiagonalStairsStep:
 	add hl, bc
 	ld [hl], STEP_TYPE_PLAYER_DIAGONAL_STAIRS
 	ret
+
+stairtable2: macro
+	dn \1, \2
+	dn \3, \4
+endm
+
+.FacingStairsTable:
+	stairtable2 DOWN+1, DOWN+1, %11,  %11 ;COLL_STAIRS_RIGHT_DOWN
+	stairtable2 DOWN+1, DOWN+1, %11,  %11 ;COLL_STAIRS_LEFT_DOWN
+	stairtable2 UP+1, 	UP+1,   %10,  %10 ;COLL_STAIRS_RIGHT_UP
+	stairtable2 UP+1, 	UP+1, 	%10,  %10 ;COLL_STAIRS_LEFT_UP
+	stairtable2 UP+1, 	DOWN+1,	%10,  %10 ;COLL_STAIRS_RIGHT_UP_FLAT
+	stairtable2 DOWN+1, UP+1,  	%10,  %10 ;COLL_STAIRS_LEFT_UP_FLAT
+	stairtable2 UP+1, 	DOWN+1,	%111, %111 ;COLL_STAIRS_RIGHT_UP_MID
+	stairtable2 DOWN+1, UP+1, 	%111, %111 ;COLL_STAIRS_LEFT_UP_MID
+	stairtable2 UP+1, 	DOWN+1,	%111, %100 ;COLL_STAIRS_RIGHT_UP_BOTTOM
+	stairtable2 DOWN+1, UP+1, 	%100, %111 ;COLL_STAIRS_LEFT_UP_BOTTOM
+	stairtable2 UP+1, 	DOWN+1, %101, %111 ;COLL_STAIRS_RIGHT_UP_TOP
+	stairtable2 DOWN+1,	UP+1, 	%111, %101 ;COLL_STAIRS_LEFT_UP_TOP
+	stairtable2 UP+1,  	DOWN+1, %101, %100 ;COLL_STAIRS_RIGHT_UP_HALF
+	stairtable2 DOWN+1,	UP+1, 	%100, %101 ;COLL_STAIRS_LEFT_UP_HALF

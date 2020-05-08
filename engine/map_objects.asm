@@ -1078,14 +1078,13 @@ NPCDiagonalStairs:
 ; anonymous dw
 	dw .InitHorizontal
 	dw .StepHorizontal
-	;dw .MaybeVertical
+	dw .MaybeVertical
 	dw .finish
 
 
 .InitHorizontal:
 	call IncrementObjectStructField28
 .StepHorizontal:
-	ld a, [wFollowerGoingUpStairs]
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld a, [hl]
@@ -1114,6 +1113,7 @@ NPCDiagonalStairs:
 
 .FollowerUpdatePosition:
 	ld a, [wFollowerGoingUpStairs]
+	dec a
 	jp UpdateDiagonalStairsPosition
 
 .MaybeVertical:
@@ -1127,6 +1127,7 @@ NPCDiagonalStairs:
 
 .StepVertical:
 	ld a, [wFollowerGoingUpStairs]
+	dec a
 	ld hl, OBJECT_WALKING
 	add hl, bc
 	ld [hl], a
@@ -1143,6 +1144,7 @@ NPCDiagonalStairs:
 	ld [hl], STEP_TYPE_SLEEP
 
 	xor a
+	ld [wFollowerGoingUpStairs], a
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
@@ -1232,13 +1234,6 @@ PlayerDiagonalStairs:
 	ld [hl], STEP_TYPE_SLEEP
 	ld hl, wPlayerStepFlags
 	set 6, [hl]
-	ld a, [wPlayerGoingUpStairs]
-	dec a
-	ld [wFollowerGoingUpStairs], a
-	ld a, [wPlayerStandingMapY]
-	ld [wPlayerLastStairsY], a
-	ld a, [wPlayerStairsType]
-	ld [wFollowerStairsType], a
 	xor a
 	ld [wPlayerGoingUpStairs], a
 	ret
