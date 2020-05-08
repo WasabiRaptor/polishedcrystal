@@ -1223,6 +1223,7 @@ PlayerDiagonalStairs:
 	call CopyNextCoordsTileToStandingCoordsTile
 	call IncrementObjectStructField28
 .finish:
+	farcall UpdatePlayerCoords
 	;ld a, -1
 	;ld [wPlayerStepDirection], a
 
