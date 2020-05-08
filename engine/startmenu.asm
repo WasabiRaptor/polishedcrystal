@@ -2,6 +2,8 @@ StartMenu:: ; 125cd
 	ld de, SFX_MENU
 	call PlaySFX
 StartMenuNoSFX::
+	ld a, 1
+	ldh [hRequestOpaque1bpp], a
 	call ClearWindowData
 	call OtherVariableWidthText
 
@@ -28,6 +30,8 @@ StartMenuNoSFX::
 	jr .Select
 
 .Reopen:
+	ld a, 1
+	ldh [hRequestOpaque1bpp], a
 	call OtherVariableWidthText
 	call UpdateSprites
 	call UpdateTimePals
@@ -70,7 +74,6 @@ StartMenuNoSFX::
 	push af
 	ld a, 1
 	ldh [hOAMUpdate], a
-	ldh [hRequestOpaque1bpp], a
 	call LoadFontsExtra
 	pop af
 	ldh [hOAMUpdate], a

@@ -48,6 +48,7 @@ Pack: ; 10000
 .InitGFX: ; 10046 (4:4046)
 	xor a
 	ldh [hBGMapMode], a
+	ldh [hRequestOpaque1bpp], a
 	call Pack_InitGFX
 	ld a, [wcf64]
 	ld [wJumptableIndex], a
@@ -1420,6 +1421,8 @@ Pack_InterpretJoypad: ; 108d4 (4:48d4)
 	ret
 
 Pack_InitGFX: ; 10955
+	call LoadStandardFont
+	call LoadFontsExtra
 	call ClearBGPalettes
 	call ClearTileMap
 	call ClearSprites

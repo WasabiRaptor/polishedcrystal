@@ -16,8 +16,6 @@ ROMX $03
 ROMX $04
 	org $4000
 	"Code 4"
-	"Tileset Data - game_corner"
-	"Other Pic Pointers"
 
 ROMX $05
 	org $4000
