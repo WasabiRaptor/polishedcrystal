@@ -2090,39 +2090,6 @@ ApplyMovementToFollower: ; 54b8
 ; 54e6
 
 GetFollowerNextMovementByte: ; 54e6
-	ld a, [wFollowerGoingUpStairs]
-	and a
-	jr nz, .DontUpdateStairsYet
-
-	ld a, [wFollowerStandingTile]
-	and $f0
-	cp HI_NYBBLE_DIAGONAL_STAIRS
-	jr nz, .DontUpdateStairsYet
-
-	ld a, [wFollowerStandingTile]
-	and $f
-	ld d, 0
-	ld e, a
-
-	ld hl, .FacingStairsTable
-	add hl, de
-	add hl, de
-	ld a, [wFollowerDirection]
-	and OW_RIGHT | OW_LEFT
-	cp OW_LEFT
-	ld a, [hli]
-	ld e, [hl]
-	jr z, .dont_swap
-	swap a
-	swap e
-.dont_swap
-	and $f
-	ld [wFollowerGoingUpStairs], a
-	ld a, e
-	and $f
-	ld [wFollowerStairsType], a
-
-.DontUpdateStairsYet
 	ld hl, wFollowerMovementQueueLength
 	ld a, [hl]
 	and a
@@ -2142,6 +2109,9 @@ GetFollowerNextMovementByte: ; 54e6
 	ld a, d
 	dec e
 	jr nz, .loop
+	push af
+	call .TryStairs
+	pop af
 	ret
 
 .done
@@ -2191,6 +2161,47 @@ GetFollowerNextMovementByte: ; 54e6
 	ld a, movement_step_end
 	scf
 	ret
+
+.TryStairs:
+	and RIGHT | LEFT
+	rlca
+	rlca
+	ld [wFollowerDirection], a
+
+	ld a, [wFollowerGoingUpStairs]
+	and a
+	jr nz, .DontUpdateStairsYet
+
+	ld a, [wFollowerStandingTile]
+	and $f0
+	cp HI_NYBBLE_DIAGONAL_STAIRS
+	jr nz, .DontUpdateStairsYet
+
+	ld a, [wFollowerStandingTile]
+	and $f
+	ld d, 0
+	ld e, a
+
+	ld hl, .FacingStairsTable
+	add hl, de
+	add hl, de
+	ld a, [wFollowerDirection]
+	and OW_RIGHT | OW_LEFT
+	cp OW_LEFT
+	ld a, [hli]
+	ld e, [hl]
+	jr z, .dont_swap
+	swap a
+	swap e
+.dont_swap
+	and $f
+	ld [wFollowerGoingUpStairs], a
+	ld a, e
+	and $f
+	ld [wFollowerStairsType], a
+.DontUpdateStairsYet
+	ret
+
 ; 5529
 stairtable2: macro
 	dn \1, \2
