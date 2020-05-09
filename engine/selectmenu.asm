@@ -1,4 +1,7 @@
 SelectMenu::
+	ld a, [wPlayerStairsType]
+	and a
+	ret nz
 	call CheckRegisteredItem
 	jr z, .NotRegistered
 	jp UseRegisteredItem
@@ -170,7 +173,7 @@ GetRegisteredItem:
 	push de
 	push hl
 	push af
-	call GetKeyItemName	
+	call GetKeyItemName
 	pop af
 	pop hl
 	push hl

@@ -1,4 +1,8 @@
 StartMenu:: ; 125cd
+	ld a, [wPlayerStairsType]
+	and a
+	ret nz
+
 	ld de, SFX_MENU
 	call PlaySFX
 StartMenuNoSFX::

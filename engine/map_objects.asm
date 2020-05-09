@@ -1253,6 +1253,7 @@ PlayerDiagonalStairs:
 	res 3, [hl]
 	ld hl, wPlayerStepFlags
 	set 6, [hl]
+	set 4, [hl]
 	jp IncrementObjectStructField28
 
 .PlayerUpdatePosition:
@@ -1274,6 +1275,7 @@ PlayerDiagonalStairs:
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
 	set 5, [hl]
+	set 4, [hl]
 	ld a, [wPlayerGoingUpStairs]
 	dec a
 	ld hl, OBJECT_WALKING
@@ -1296,6 +1298,11 @@ PlayerDiagonalStairs:
 	set 6, [hl]
 	xor a
 	ld [wPlayerGoingUpStairs], a
+	ld a, [wPlayerStandingTile]
+	cp COLL_STAIRS_RIGHT_UP_MID
+	ret nc
+	xor a
+	ld [wPlayerStairsType], a
 	ret
 
 UpdateDiagonalStairsPosition:
