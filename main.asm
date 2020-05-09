@@ -3382,15 +3382,17 @@ GetStatusConditionIndex:
 ; de points to status, e.g. from a party_struct or battle_struct
 ; return the status condition index in a
 	push de
+	inc de ;inc from status to PP
+rept 4
 	inc de
-	inc de
-	ld a, [de]
+endr
+	ld a, [de] ;load one byte of cur HP
 	ld b, a
 	inc de
-	ld a, [de]
-	or b
+	ld a, [de] ;load another byte of cur HP
+	or b ;or them together, if there is any HP at all the output won't be z
 	pop de
-	jr z, .fnt
+	jr z, .fnt ;if we have zero HP, we're fainted
 	ld a, [de]
 	ld b, a
 	and SLP
