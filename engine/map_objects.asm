@@ -1153,14 +1153,56 @@ NPCDiagonalStairs:
 PlayerDiagonalStairs:
 	call Object28AnonymousJumptable
 ; anonymous dw
+	dw .PreLoadMapParts1
+	dw .PreLoadMapParts2
+	dw .PreLoadMapParts3
+	dw .PreLoadMapParts4
 	dw .InitHorizontal
 	dw .StepHorizontal
 	dw .MaybeVertical
 	dw .finish
 
+.PreLoadMapParts1:
+	push bc
+	ld a, [wPlayerGoingUpStairs]
+	dec a
+	farcall UpdateOverworldMap.SkipDirection
+	pop bc
+	jp IncrementObjectStructField28
+
+.PreLoadMapParts2:
+	push bc
+	ld a, [wPlayerGoingLeftRightStairs]
+	cp FACE_RIGHT
+	ld a, RIGHT
+	jr z, .done2
+	dec a ; LEFT
+.done2
+	farcall UpdateOverworldMap.SkipDirection
+	pop bc
+	jp IncrementObjectStructField28
+
+.PreLoadMapParts3:
+	push bc
+	ld a, [wPlayerGoingUpStairs]
+	and UP | DOWN
+	farcall UpdateOverworldMap.SkipDirection
+	pop bc
+	jp IncrementObjectStructField28
+
+.PreLoadMapParts4:
+	push bc
+	ld a, [wPlayerGoingLeftRightStairs]
+	cp FACE_RIGHT
+	ld a, LEFT
+	jr z, .done4
+	inc a ; RIGHT
+.done4
+	farcall UpdateOverworldMap.SkipDirection
+	pop bc
+	jp IncrementObjectStructField28
+
 .InitHorizontal:
-	;push bc
-	;pop bc
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
 	call IncrementObjectStructField28
