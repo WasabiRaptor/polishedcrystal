@@ -85,6 +85,7 @@ UpdatePlayerCoords: ; d511 (3:5511)
 
 UpdateOverworldMap: ; d536 (3:5536)
 	ld a, [wPlayerStepDirection]
+.SkipDirection
 	and a
 	jr z, .stepDown
 	dec a

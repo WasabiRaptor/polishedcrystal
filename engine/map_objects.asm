@@ -1159,14 +1159,14 @@ PlayerDiagonalStairs:
 	dw .finish
 
 .InitHorizontal:
-	push bc
-	pop bc
+	;push bc
+	;pop bc
 	ld hl, wPlayerStepFlags
 	set 7, [hl]
 	call IncrementObjectStructField28
 .StepHorizontal:
-	ld a, [wPlayerGoingLeftRightStairs]
-	ld [wPlayerStepDirection], a
+	;ld a, [wPlayerGoingLeftRightStairs]
+	;ld [wPlayerStepDirection], a
 
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
