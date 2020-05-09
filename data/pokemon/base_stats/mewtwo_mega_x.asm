@@ -8,7 +8,7 @@
         db 3 ; catch rate
         db 255 ; base exp
         db NO_ITEM, NO_ITEM ; items
-
+        dn GENDERLESS, 15 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/mewtwo/front.dimensions"
         db STEADFAST, STEADFAST     ; abilities
         db STEADFAST    ; hidden ability

@@ -25,7 +25,6 @@ ROMX $06
 	org $4000
 	"color"
 	"Music 9"
-	"Painting Pic Pointers"
 
 ROMX $07
 	org $4000

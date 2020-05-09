@@ -256,7 +256,7 @@ PlacePartyMonLevel: ; 50176
 	ret z
 	ld c, a
 	ld b, 0
-	hlcoord 7, 2
+	hlcoord 6, 2
 .loop
 	push bc
 	push hl
@@ -271,15 +271,9 @@ PlacePartyMonLevel: ; 50176
 	ld d, h
 	pop hl
 	ld a, [de]
-	cp 100 ; This is distinct from MAX_LEVEL.
-	jr nc, .ThreeDigits
 	ld a, "<LV>"
 	ld [hli], a
-	lb bc, PRINTNUM_LEFTALIGN | 1, 2
-	; jr .okay
-.ThreeDigits:
 	lb bc, PRINTNUM_LEFTALIGN | 1, 3
-; .okay
 	predef PrintNum
 
 .next
@@ -313,7 +307,11 @@ PlacePartyMonStatus: ; 501b2
 	ld e, l
 	ld d, h
 	pop hl
+	ld a, 1
+	ldh [rVBK], a
 	call PlaceStatusString
+	xor a
+	ldh [rVBK], a
 
 .next
 	pop hl

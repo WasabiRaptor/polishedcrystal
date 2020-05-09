@@ -3443,16 +3443,7 @@ PlaceStatusString: ; 50d0a
 	ld a, [hl]
 	ld d, a
 	pop hl
-
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	inc de
-	ld [hli], a
-	ld a, [de]
-	ld [hl], a
-
+	call PlaceString
 	pop de
 	ld a, $1
 	and a

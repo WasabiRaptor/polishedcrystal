@@ -9,7 +9,7 @@
 	db 50 ; catch rate
 	db 200 ; base exp
 	db NO_ITEM, NO_ITEM ; items
-	dn FEMALE_50, 24 ; gender, step cycles to hatch
+    dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/meltan/front.dimensions"
 	db MAGNET_PULL, MAGNET_PULL     ; abilities
 	db MAGNET_PULL    ; hidden ability

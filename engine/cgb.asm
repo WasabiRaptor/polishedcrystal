@@ -605,6 +605,18 @@ _CGB_PartyMenu: ; 91d1
 	add hl, bc
 	dec d
 	jr nz, .gender_loop
+
+	hlcoord 4, 2, wAttrMap
+	ld bc, SCREEN_WIDTH * 2 - 1
+	ld a, 0 | TILE_BANK
+	ld d, 6
+.status_loop
+	ld [hli], a
+	ld [hl], a
+	add hl, bc
+	dec d
+	jr nz, .status_loop
+
 	jp ApplyAttrMap
 ; 91e4
 
