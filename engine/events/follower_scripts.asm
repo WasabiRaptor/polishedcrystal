@@ -2,17 +2,21 @@
 
 
 _FollowerInteractScript::
+    copybytetovar wPlayerStairsType
+    iftrue EndFollowerInteract
+
 UwUFakePetCommandMenuScript::
     faceplayer
     opentext
 	portrait LOKI_UWU
-    writetext .FakePetCommandMenuText
+    writetext FakePetCommandMenuText
     waitbutton
     closeportrait
     closetext
+EndFollowerInteract::
     end
 
-.FakePetCommandMenuText:
+FakePetCommandMenuText:
 	text "▶Pet    Pet    Pet    Pet    Pet"
 	line "   Pet    Pet    Pet    Pet    Pet"
 	done

@@ -1153,14 +1153,24 @@ NPCDiagonalStairs:
 PlayerDiagonalStairs:
 	call Object28AnonymousJumptable
 ; anonymous dw
+	dw .PreLoadMapParts0
 	dw .PreLoadMapParts1
 	dw .PreLoadMapParts2
 	dw .PreLoadMapParts3
 	dw .PreLoadMapParts4
+	dw .PreLoadMapParts5
 	dw .InitHorizontal
 	dw .StepHorizontal
 	dw .MaybeVertical
 	dw .finish
+
+.PreLoadMapParts0:
+	push bc
+	ld a, [wPlayerGoingUpStairs]
+	dec a
+	farcall UpdateOverworldMap.SkipDirection
+	pop bc
+	jp IncrementObjectStructField28
 
 .PreLoadMapParts1:
 	push bc
@@ -1192,12 +1202,20 @@ PlayerDiagonalStairs:
 
 .PreLoadMapParts4:
 	push bc
+	ld a, [wPlayerGoingUpStairs]
+	and UP | DOWN
+	farcall UpdateOverworldMap.SkipDirection
+	pop bc
+	jp IncrementObjectStructField28
+
+.PreLoadMapParts5:
+	push bc
 	ld a, [wPlayerGoingLeftRightStairs]
 	cp FACE_RIGHT
 	ld a, LEFT
-	jr z, .done4
+	jr z, .done5
 	inc a ; RIGHT
-.done4
+.done5
 	farcall UpdateOverworldMap.SkipDirection
 	pop bc
 	jp IncrementObjectStructField28
@@ -1797,6 +1815,7 @@ PlayerStep: ; 4e56
 	;adding this just incase it messes up to clear the value
 	xor a
 	ld [wPlayerGoingUpStairs], a
+	ld [wPlayerStairsType], a
 	ret
 ; 4e83
 
