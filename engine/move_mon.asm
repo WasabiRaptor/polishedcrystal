@@ -50,6 +50,8 @@ TryAddMonToParty: ; d88c
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wNamedObjectIndexBuffer], a
+	ld [wCurSpecies], a
+
 	call GetPokemonName
 	ld a, [wMonType]
 	and $f
@@ -370,7 +372,7 @@ endr
 	ld b, a
 
 ; Form 0
-	ld a, 0
+	ld a, [wCurForm]
 	add b
 	ld [wDVAndPersonalityBuffer + 4], a
 
@@ -454,7 +456,7 @@ endr
 	ld [de], a
 	inc de ; next after status is the current PP
 
-	;ld hl, wEnemyMonCurPP
+	ld hl, wEnemyMonCurPP
 	ld b, NUM_MOVES
 
 .wildmonpploop ; looped four times, with pp in de and in hl, so it does indeed copy the pp over
@@ -2095,16 +2097,16 @@ GivePoke:: ; e277
 	push de
 	push af
 
-.formAndGender
-	ld a, [wCurForm]
-	and a
-	jr z, .item
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMon1Form
-	ld bc, PARTYMON_STRUCT_LENGTH
-	rst AddNTimes
-	ld a, [wCurForm]
-	ld [hl], a
+;.formAndGender
+;	ld a, [wCurForm]
+;	and a
+;	jr z, .item
+;	ld a, [wCurPartyMon]
+;	ld hl, wPartyMon1Form
+;	ld bc, PARTYMON_STRUCT_LENGTH
+;	rst AddNTimes
+;	ld a, [wCurForm]
+;	ld [hl], a
 
 .item
 	ld a, [wCurItem]

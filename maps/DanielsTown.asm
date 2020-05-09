@@ -65,9 +65,12 @@ checkpokegroupscript:
 
 GivePokemonScript:
 	opentext
-	givepoke SHAYMIN, 5, NO_ITEM, SHAYMIN_SKY, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	;givepoke CYNDAQUIL, 5, NO_ITEM, MALE, LUXURY_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	;givepoke VULPIX, 5, NO_ITEM, FEMALE | ALOLAN, LUXURY_BALL, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke BULBASAUR, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke CHIKORITA, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke TREECKO, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke TURTWIG, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke SNIVY, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke CHESPIN, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
 	end
 
