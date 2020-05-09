@@ -3756,12 +3756,12 @@ InitBattleMon: ; 3da0d
 	add hl, bc ; skip ID, Exp, EVs
 	ld de, wBattleMonDVs
 	ld bc, MON_PKRUS - MON_DVS
-	rst CopyBytes ; copy DVs, Personality, PP, Happiness
+	rst CopyBytes ; copy DVs, Personality, Form, Happiness
 	ld bc, MON_LEVEL - MON_PKRUS
 	add hl, bc ; skip PokerusStatus, CaughtData
 	ld de, wBattleMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
-	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
+	rst CopyBytes ; copy Level, Status, CurPP, HP, MaxHP, Stats
 	ld a, [wBattleMonGroup]
 	ld [wTempBattleMonGroup], a
 	ld [wCurPartyGroup], a
@@ -3770,6 +3770,10 @@ InitBattleMon: ; 3da0d
 	ld [wTempBattleMonSpecies], a
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wBattleMonForm]
+	and FORM_MASK
+	ld [wTempBattleMonForm], a
+	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a
@@ -3854,17 +3858,21 @@ InitEnemyMon: ; 3dabd
 	add hl, bc ; skip ID, Exp, EVs
 	ld de, wEnemyMonDVs
 	ld bc, MON_PKRUS - MON_DVS
-	rst CopyBytes ; copy DVs, Personality, PP, Happiness
+	rst CopyBytes ; copy DVs, Personality, Form, Happiness
 	ld bc, MON_LEVEL - MON_PKRUS
 	add hl, bc ; skip PokerusStatus, CaughtData
 	ld de, wEnemyMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
-	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
+	rst CopyBytes ; copy Level, Status, CurPP, HP, MaxHP, Stats
 	ld a, [wEnemyMonGroup]
+	ld [wTempEnemyMonGroup], a
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
+	ld [wTempEnemyMonSpecies], a
 	ld [wCurSpecies], a
 	ld a, [wEnemyMonForm]
+	and FORM_MASK
+	ld [wTempEnemyMonForm], a
 	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames

@@ -3554,11 +3554,12 @@ ThickClubOrLightBallBoost: ; 353b5
 	push bc
 	push de
 	push hl
-	ld a, MON_SPECIES
-	call UserPartyAttr
+	ld a, [wTempBattleMonGroup]
+	ld [wCurGroup], a
+	ld a, [wTempBattleMonSpecies]
+	ld [wCurSpecies], a
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [hl]
 	jr z, .PlayerTurn
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
@@ -3612,7 +3613,6 @@ SpeciesItemBoost: ; 353d1
 
 	ldh a, [hBattleTurn]
 	and a
-	ld a, [hl]
 	jr z, .CompareSpecies
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
