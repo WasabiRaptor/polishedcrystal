@@ -531,6 +531,26 @@ CopyTempObjectToObjectStruct: ; 8286
 	swap a
 	ld hl, wPlayerBGMapOffsetY
 	sub [hl]
+
+	push de
+	push af
+	ld e, 0
+	ld a, [wPlayerStairsType]
+	and %1
+	jr z, .player_not_on_stairs
+	ld a, [wPlayerGoingUpStairs]
+	and a
+	jr z, .player_not_on_stairs
+	dec a
+	ld e, 8
+	jr z, .goingdown
+	ld e, -8
+.goingdown
+.player_not_on_stairs
+	pop af
+	sub e
+	pop de
+
 	ld hl, OBJECT_SPRITE_Y
 	add hl, de
 	ld [hl], a
