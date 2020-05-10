@@ -101,6 +101,7 @@ _CGB_BattleColors: ; 8ddb
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	ld [wCurForm], a
 	call GetEnemyFrontpicPalette
 	ld a, [wTempEnemyMonSpecies]

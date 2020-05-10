@@ -3550,6 +3550,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
 	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld a, OTPARTYMON
@@ -3756,12 +3757,12 @@ InitBattleMon: ; 3da0d
 	add hl, bc ; skip ID, Exp, EVs
 	ld de, wBattleMonDVs
 	ld bc, MON_PKRUS - MON_DVS
-	rst CopyBytes ; copy DVs, Personality, PP, Happiness
+	rst CopyBytes ; copy DVs, Personality, form, Happiness
 	ld bc, MON_LEVEL - MON_PKRUS
 	add hl, bc ; skip PokerusStatus, CaughtData
 	ld de, wBattleMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
-	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
+	rst CopyBytes ; copy Level, Status, CurPP, HP, MaxHP, Stats
 	ld a, [wBattleMonGroup]
 	ld [wTempBattleMonGroup], a
 	ld [wCurPartyGroup], a
@@ -3770,6 +3771,10 @@ InitBattleMon: ; 3da0d
 	ld [wTempBattleMonSpecies], a
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wBattleMonForm]
+	and FORM_MASK
+	ld [wTempBattleMonForm], a
+	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld a, [wBaseType1]
 	ld [wBattleMonType1], a
@@ -3854,17 +3859,21 @@ InitEnemyMon: ; 3dabd
 	add hl, bc ; skip ID, Exp, EVs
 	ld de, wEnemyMonDVs
 	ld bc, MON_PKRUS - MON_DVS
-	rst CopyBytes ; copy DVs, Personality, PP, Happiness
+	rst CopyBytes ; copy DVs, Personality, Form, Happiness
 	ld bc, MON_LEVEL - MON_PKRUS
 	add hl, bc ; skip PokerusStatus, CaughtData
 	ld de, wEnemyMonLevel
 	ld bc, PARTYMON_STRUCT_LENGTH - MON_LEVEL
-	rst CopyBytes ; copy Level, Status, Unused, HP, MaxHP, Stats
+	rst CopyBytes ; copy Level, Status, CurPP, HP, MaxHP, Stats
 	ld a, [wEnemyMonGroup]
+	ld [wTempEnemyMonGroup], a
 	ld [wCurGroup], a
 	ld a, [wEnemyMonSpecies]
+	ld [wTempEnemyMonSpecies], a
 	ld [wCurSpecies], a
 	ld a, [wEnemyMonForm]
+	ld [wTempEnemyMonForm], a
+	and FORM_MASK
 	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld hl, wOTPartyMonNicknames
@@ -4920,6 +4929,7 @@ DrawEnemyHUD: ; 3e043
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
@@ -5273,12 +5283,17 @@ BattleMenu_SafariBall:
 	call ClearPalettes
 	call DelayFrame
 	call _LoadBattleFontsHPBar
+	break
 	call GetMonBackpic
+	break
 	call GetMonFrontpic
+	break
 	call ExitMenu
+	break
 	call ApplyTilemapInVBlank
 	call FinishBattleAnim
 	call LoadTileMapToTempTileMap
+	break
 	jp BattleMenu
 ; 3e22b
 
@@ -6844,6 +6859,7 @@ LoadEnemyMon: ; 3e8eb
 	ld [wCurPartySpecies], a
 	ld a, [wTempEnemyMonForm]
     ld [wEnemyMonForm], a
+	and FORM_MASK
     ld [wCurForm], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wEnemyMonSpecies], a
@@ -6990,6 +7006,7 @@ LoadEnemyMon: ; 3e8eb
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	ld [wCurForm], a
 	call GetAbility
 	ld a, b
@@ -7081,6 +7098,7 @@ LoadEnemyMon: ; 3e8eb
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurSpecies], a
 	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	ld [wCurForm], a
 	farcall GetRelevantBaseData
 	ld bc, BASEMON_GENDER
@@ -7104,6 +7122,7 @@ LoadEnemyMon: ; 3e8eb
 
 .special_form
     ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	add b
 	ld [hl], a
 
@@ -7224,6 +7243,7 @@ endr
 	jr nz, .loop
 
 	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	ld [wCurForm], a
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
@@ -8583,11 +8603,19 @@ DropPlayerSub: ; 3f447
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
+	ld a, [wBattleMonForm]
+	push af
+	and FORM_MASK
+	ld [wCurForm], a
 
 	call GetPlayerIllusion
 
 	ld de, VTiles2 tile $31
 	predef GetBackpic
+	pop af
+	ld [wBattleMonForm], a
+	and FORM_MASK
+	ld [wCurForm], a
 	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
@@ -8638,11 +8666,20 @@ DropEnemySub: ; 3f486
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
 	push af
+	ld a, [wEnemyMonForm]
+	push af
+	and FORM_MASK
+	ld [wCurForm], a
 
 	call GetEnemyIllusion
 
 	ld de, VTiles2
 	predef FrontpicPredef
+	pop af
+	ld [wEnemyMonForm], a
+	and FORM_MASK
+	ld [wCurForm], a
+
 	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
@@ -8768,8 +8805,9 @@ LoadTrainerOrWildMonPic: ; 3f54e
 	ld [wCurPartyGroup], a
 	ld [wTempEnemyMonGroup], a
     ld a, [wTempWildMonForm]
-    ld [wCurForm], a
     ld [wTempEnemyMonForm], a
+	and FORM_MASK
+    ld [wCurForm], a
 	ld a, [wTempWildMonSpecies]
 	ld [wCurPartySpecies], a
 

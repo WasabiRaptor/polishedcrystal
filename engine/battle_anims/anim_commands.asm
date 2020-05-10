@@ -953,6 +953,7 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
 	ld [wCurForm], a
 
 

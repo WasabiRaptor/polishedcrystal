@@ -1,5 +1,6 @@
 
 GetPartyMonGroupSpeciesAndForm::
+	push af
 	push hl
 	push bc
 	ld a, [hli]
@@ -15,9 +16,11 @@ GetPartyMonGroupSpeciesAndForm::
 	ld [wCurForm], a
 	pop bc
 	pop hl
+	pop af
 	ret
 
 PokemonToGroupSpeciesAndForm::
+	push af
 	push hl
 	push bc
 	ld a, [hli]
@@ -31,6 +34,7 @@ PokemonToGroupSpeciesAndForm::
 	ld [wCurForm], a
 	pop bc
 	pop hl
+	pop af
 	ret
 
 
