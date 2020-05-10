@@ -264,6 +264,7 @@ endm
 	dict "<FAR>",    TextFar
 	dict "<LNBRK>",  LineBreak
 	dict "<NEXT>",   NextChar
+	dict "<NEXT1>",  NextTextTile1
 	dict "<_CONT>",  LinkButtonSound
 	dict "<SCRL2>",  ScrollText
 	dict "<NL>",     NextLineChar
@@ -575,6 +576,10 @@ PlaceIng: print_name .IngText
 
 NextTextTile::
 	call NextVariableWidthTextTile
+	jp NextChar
+
+NextTextTile1::
+	inc hl
 	jp NextChar
 
 NextVariableWidthTextTile::

@@ -31,11 +31,11 @@ ReadTrainerParty: ; 39771
 
 	ld [wCurPartyLevel], a
 
-	push hl
+	;push hl
 
-	farcall SetLevel
+	;farcall SetLevel
 
-	pop hl
+	;pop hl
 
 ; species
 	call GetNextTrainerDataByte

@@ -399,7 +399,7 @@ _ChooseWildEncounter:
 .got_table
 	; Check if we want to force a type
 	inc c
-	jr z, .get_random_mon
+	jr .get_random_mon
 
 ; TODO - NEEDS TO BE UPDATED
 	dec c
@@ -527,41 +527,14 @@ ENDM
 	pop bc ; 2
 	inc hl
 	ld a, [hli] ; Gets species
-	ld b, a
-; If the Pokemon is encountered by surfing, we need to give the levels some variety.
-	push bc	; 2
-	call CheckOnWater
-	pop bc	; 2
-	jr nz, .ok
-
-; TODO - CHECK IF THIS NEEDS UPDATES
-; Check if we buff the wild mon, and by how much.
-	call Random
-	cp 35 percent
-	jr c, .ok
-	inc b
-	cp 65 percent
-	jr c, .ok
-	inc b
-	cp 85 percent
-	jr c, .ok
-	inc b
-	cp 95 percent
-	jr c, .ok
-	inc b
-; END TODO
-
-.ok
+	ld [wCurSpecies], a
 	ld a, [hli]	; Gets group
 	ld [wCurGroup], a
 	ld [wTempWildMonGroup], a
-	ld a, b	; Species
-	call ValidateTempWildMonSpecies
-	jr c, .nowildbattle
-	ld [wCurSpecies], a
 	; Check if we're forcing type
 	inc c
-	jp z, .loadwildmon
+	jp .loadwildmon
+
 	push bc
 	push hl
 	call GetBaseData
@@ -576,7 +549,7 @@ ENDM
 	jp .get_random_mon
 
 .loadwildmon
-	ld a, b	; Make sure Species is in a
+	ld a, [wCurSpecies]	; Make sure Species is in a
 	ld [wTempWildMonSpecies], a
 	ld a, [hli]	; Gets Level info
 	bit 7, a	; Check if Level is offset or override

@@ -33,8 +33,9 @@
 	; unused: $23
 	; unused: $24
 	charmap "<NEXT>",   $25
+	charmap "<NEXT1>",   $26
 
-	; unused: $26 - $2b
+	; unused: $27 - $2b
 
 	charmap "le",       $2c
 	charmap "ng",       $2d
@@ -99,7 +100,6 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "<FULLHP>", $6d
 	charmap "<HPEND>",  $6e
 
-	charmap "_",        $6f
 	charmap "◢",        $70
 	charmap "—",        $71
 	charmap "◣",        $72
@@ -218,6 +218,7 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "%",        $dc
 
 	charmap "↑",        $dd
+	charmap "_",        $de
 	charmap "↓",        $de
 	charmap "<SHARP>",  $df
 
@@ -256,10 +257,10 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "│",        $f3
 	charmap "┌",        $f5
 	charmap "└",        $f6
-	charmap "├",   		$f7	
+	charmap "├",   		$f7
 	charmap "┐",        $f9
 	charmap "┘",        $fa
-	charmap "┤",  		$fb 
+	charmap "┤",  		$fb
 	charmap "─",        $fc
 	charmap "┬",        $fd
 	charmap "┴",        $fe

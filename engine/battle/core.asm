@@ -7136,7 +7136,8 @@ endr
 	ld [wEnemyMonHappiness], a
 
 	; Set level
-	call SetLevel
+	ld a, [wCurPartyLevel]
+	ld [wEnemyMonLevel], a
 
 	; Fill stats
 	ld de, wEnemyMonMaxHP
@@ -7236,88 +7237,12 @@ endr
 	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wNamedObjectIndexBuffer], a
+	ld [wCurSpecies], a
 	call GetPokemonName
 	ld hl, wStringBuffer1
 	ld de, wEnemyMonNick
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
-	ret
-
-SetLevel:
-	ld a, [wCurPartyLevel]
-	cp 101
-	jr c, .DoNotAverageLevels
-
-; ISSOtm optimized party average
-	ld a, [wPartyCount]
-	ld b, a
-
-	ld hl, wPartyMon1Level
-	ld de, PARTYMON_STRUCT_LENGTH
-	xor a
-	ld c, a
-.loop2
-	add a, [hl]
-	jr nc, .noCarry
-	inc c
-.noCarry
-	add hl, de
-	dec b
-	jr nz, .loop2
-
-	ld h, c
-	ld l, a
-
-	ld a, h
-	ldh [hDividend + 0], a
-	ld a, l
-	ldh [hDividend + 1], a
-	ld a, [wPartyCount]
-	inc a
-	ldh [hDivisor], a
-	ld b, 2
-	call Divide
-	ldh a, [hQuotient + 2]
-	ld b, a
-
-	ld a, [wCurPartyLevel]
-	cp 201
-	jr z, .MatchPlayerLevel
-	sub a, 100
-	cp b
-	jr nc, .RandomLevel
-	ld a, b
-
-.RandomLevel
-	ld c, a
-	ld a, 3
-	call RandomRange
-	inc a
-	inc a
-	inc a
-	ld d, a
-	ld a, c
-	sub a, d
-	cp 1
-	jr nc, .SetLevel
-	inc a
-	jr .SetLevel
-
-.MatchPlayerLevel
-	ld a, [wCurPartyLevel]
-	sub 200
-	ld c, a
-	ld a, b
-	cp c
-	jr nc, .SetLevel
-	ld a, c
-	cp 101
-	jr c, .SetLevel
-	ld a, 100
-.SetLevel
-	ld [wCurPartyLevel], a
-.DoNotAverageLevels
-	ld [wEnemyMonLevel], a
 	ret
 
 ApplyLegendaryDVs:
@@ -8945,7 +8870,7 @@ InitEnemyWildmon: ; 3f607
 	call LoadEnemyMon
 	ld hl, wEnemyMonMoves
 	ld de, wWildMonMoves
-	ld bc, NUM_MOVES
+	ld bc, NUM_MOVES * 2
 	rst CopyBytes
 	ld hl, wEnemyMonCurPP
 	ld de, wWildMonCurPP

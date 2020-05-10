@@ -31,6 +31,13 @@ BSOD:
 	lb bc, BANK(FontNormal), 111
 	call Get1bpp
 
+	ld hl, VTiles2 tile " "
+	ld de, TextBoxSpaceGFX
+	lb bc, BANK(FontNormal), 1
+	call Get1bpp
+
+	call InitVariableWidthText
+
 	ld de, .Message
 	hlcoord 1, 1
 	call PlaceString
@@ -56,12 +63,13 @@ else
 endc
 
 .Message: ; 4eb38
-	db   "      Pokémon"
-	next " Polished Crystal"
-	next "       ERROR"
-	next "------------------"
-	next "Please report this"
-	next "crash to the deve-"
-	next "loper, Rangi42, at"
-	next "tinyurl.com/pkpc3.@"
+	db "<NEXT1><NEXT1><NEXT1><NEXT1><NEXT1>Pok", $c8, "mon Brass"
+	next "<NEXT1><NEXT1><NEXT1><NEXT1><NEXT1>Alpha ver X.X"
+	next "<NEXT1><NEXT1><NEXT1><NEXT1><NEXT1><NEXT1><NEXT1>ERROR"
+	next " Please report the cause of this"
+	next "<NEXT1><NEXT1> crash to the developers"
+	next "<NEXT1><NEXT1><NEXT1>Wasabi_Raptor<SHARP>1533"
+	next "<NEXT1><NEXT1><NEXT1>Notnat Tlikehis<SHARP>0404"
+	next "<NEXT1><NEXT1><NEXT1><NEXT1><NEXT1>Thalins<SHARP>0502@"
+
 ; 4eb76
