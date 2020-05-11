@@ -100,6 +100,7 @@ BATTLEEXTRA_GFX_START EQU $5f
 	charmap "<FULLHP>", $6d
 	charmap "<HPEND>",  $6e
 
+	charmap "<SPLITLINE>",        $6f
 	charmap "◢",        $70
 	charmap "—",        $71
 	charmap "◣",        $72

@@ -91,6 +91,9 @@ PokeGear: ; 90b8d (24:4b8d)
 Pokegear_LoadGFX: ; 90c4e
 	call ClearVBank1
 
+	call LoadStandardFont
+	call LoadFontsExtra
+
 	ld hl, TownMapGFX
 	ld de, VTiles2
 	ld a, BANK(TownMapGFX)
