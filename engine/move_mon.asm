@@ -436,7 +436,7 @@ endr
 rept 5
 	ld a, [hli]
 	ld [de], a
-	inc de ; dvs are in de, and the enemy mon's ain in hl, and this is repeated 5 times
+	inc de ; dvs are in de, and the enemy mon's in in hl, and this is repeated 5 times
 	; dvs only take three bytes, so this must be copying the personality and form byte as well, ending on happiness
 endr
 	ld a, BASE_HAPPINESS
@@ -473,6 +473,7 @@ endr
 	ld a, [hl]
 	ld [de], a
 	inc de ;that leaves max hp in de now
+	pop hl ; 1 group is popped
 
 .next2 ; and thus we meet back up with the trainer party both at the same point in the stack
 	ld a, [wBattleMode]

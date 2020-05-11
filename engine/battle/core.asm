@@ -5283,17 +5283,12 @@ BattleMenu_SafariBall:
 	call ClearPalettes
 	call DelayFrame
 	call _LoadBattleFontsHPBar
-	break
 	call GetMonBackpic
-	break
 	call GetMonFrontpic
-	break
 	call ExitMenu
-	break
 	call ApplyTilemapInVBlank
 	call FinishBattleAnim
 	call LoadTileMapToTempTileMap
-	break
 	jp BattleMenu
 ; 3e22b
 
