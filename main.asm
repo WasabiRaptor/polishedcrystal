@@ -2312,15 +2312,7 @@ SetCaughtData: ; 4db49
 	predef GetPartyLocation
 SetBoxmonOrEggmonCaughtData: ; 4db53
 	; CaughtGender
-	ld a, [wPlayerOverworldSprite]
-	and a
-	jr z, .male
-	ld a, FEMALE
-	jr .ok
-.male
-	ld a, MALE
-.ok
-	ld b, a
+	ld b, 0
 	; CaughtTime
 	ld a, [wTimeOfDay]
 	rrca

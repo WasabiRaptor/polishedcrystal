@@ -460,6 +460,9 @@ PokeBallEffect: ; e8a2
 	ld [wEnemyMonGroup], a
 	ld a, [wTempEnemyMonSpecies]
 	ld [wEnemyMonSpecies], a
+	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
+	ld [wCurForm], a
 
 	ld hl, wEnemyBackupDVs
 	ld de, wEnemyMonDVs
@@ -507,8 +510,6 @@ PokeBallEffect: ; e8a2
 	ld a, [wEnemyMonLevel]
 	ld [wCurPartyLevel], a
 
-	ld hl, wEnemyMonGroup
-	predef GetPartyMonGroupSpeciesAndForm
 	call GetBaseData ;form is known
 
 	ld de, wEnemyMonMaxHP
@@ -659,12 +660,12 @@ PokeBallEffect: ; e8a2
 	bit NUZLOCKE_MODE, a
 	jr nz, .AlwaysNicknameBox
 
-	ld hl, Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	call GetPokemonName
+
+	ld hl, Text_AskNicknameNewlyCaughtMon
+	call PrintText
 
 	call YesNoBox
 	jr c, .SkipBoxMonNickname
