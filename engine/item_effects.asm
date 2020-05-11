@@ -593,12 +593,12 @@ PokeBallEffect: ; e8a2
 	bit NUZLOCKE_MODE, a
 	jr nz, .AlwaysNickname
 
-	ld hl, Text_AskNicknameNewlyCaughtMon
-	call PrintText
-
 	ld a, [wCurPartySpecies]
 	ld [wd265], a
 	call GetPokemonName
+
+	ld hl, Text_AskNicknameNewlyCaughtMon
+	call PrintText
 
 	call YesNoBox
 	jp c, .return_from_capture
@@ -1369,7 +1369,7 @@ Text_AddedToPokedex: ; 0xedf0
 
 Text_AskNicknameNewlyCaughtMon: ; 0xedf5
 	; Give a nickname to @ ?
-	text_jump UnknownText_0x1c5b7f
+	text_jump _Text_AskNicknameNewlyCaughtMon
 	db "@"
 ; 0xedfa
 

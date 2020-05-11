@@ -767,7 +767,7 @@ UnknownText_0x1c5b53::
 	text_waitbutton
 	db "@@"
 
-UnknownText_0x1c5b7f::
+_Text_AskNicknameNewlyCaughtMon::
 	text "Give a nickname to"
 	line "@"
 	text_from_ram wStringBuffer1

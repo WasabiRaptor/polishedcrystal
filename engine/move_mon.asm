@@ -474,6 +474,15 @@ endr
 	ld [de], a
 	inc de ;that leaves max hp in de now
 	pop hl ; 1 group is popped
+	ld a, [wEnemyMonSpecies]
+	ld [wCurSpecies], a
+	ld [wCurPartySpecies], a
+	ld a, [wEnemyMonGroup]
+	ld [wCurGroup], a
+	ld [wCurPartyGroup], a
+	ld a, [wEnemyMonForm]
+	and FORM_MASK
+	ld [wCurForm], a
 
 .next2 ; and thus we meet back up with the trainer party both at the same point in the stack
 	ld a, [wBattleMode]
