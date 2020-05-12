@@ -1743,9 +1743,11 @@ Pokedex_PrintListing: ; 40b0f (10:4b0f)
 	inc de
 	call .getPokedexOrderByte
 	ld [wCurGroup], a
+	ld [wCurPartyGroup], a
 	inc de
 	call .getPokedexOrderByte
 	ld [wCurForm], a
+	ld [wCurPartyForm], a
 	pop hl
 	pop af
 	push af

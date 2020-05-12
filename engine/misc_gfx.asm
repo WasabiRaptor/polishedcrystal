@@ -104,6 +104,30 @@ CallInSafeGFXMode:
 	ldh [hBGMapMode], a
 	ret
 
+HDMAHBlankTransferTileMap_DuringDI:
+	call CallInSafeGFXMode
+
+.Function
+	decoord 0, 0
+	ld hl, wScratchTileMap
+	call CutAndPasteTilemap
+	ld a, BANK(VBGMap0)
+	ldh [rVBK], a
+	ld hl, wScratchTileMap
+	jr DoHBlankHDMATransfer_toBGMap
+
+HDMAHBlankTransferAttrMap_DuringDI:
+	call CallInSafeGFXMode
+
+.Function
+	decoord 0, 0, wAttrMap
+	ld hl, wScratchAttrMap
+	call CutAndPasteAttrMap
+	ld a, BANK(VBGMap2)
+	ldh [rVBK], a
+	ld hl, wScratchAttrMap
+	; fallthrough
+
 DoHBlankHDMATransfer_toBGMap:
 	ldh a, [hBGMapAddress + 1]
 	ld d, a

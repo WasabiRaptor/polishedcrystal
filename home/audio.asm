@@ -141,13 +141,11 @@ PlayMusic2:: ; 3bbc
 
 PlayCryHeader:: ; 3be3
 ; Play cry header at d:hl.
-
-	ld a, [hROMBank]
-	push af
-
+	anonbankpush KantoCries
 	ld a, d
 	rst Bankswitch
 
+PlayCryHeader_BankPush:
 	ld a, [hli]
 	cp $ff
 	jr z, .ded
@@ -171,10 +169,7 @@ PlayCryHeader:: ; 3be3
 	ld e, 0
 	call LoadDEDCryHeader
 	call PlayDEDCry
-
 .done
-	pop af
-	rst Bankswitch
 	ret
 ; 3c23
 

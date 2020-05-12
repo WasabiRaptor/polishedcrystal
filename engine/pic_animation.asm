@@ -63,7 +63,7 @@ AnimateFrontpic:
 	farcall HDMATransferTileMapToWRAMBank3
 	ldh a, [hDEDCryFlag]
 	and a
-	call nz, _PlayCry
+	;call nz, _PlayCry
 	ldh a, [hRunPicAnim]
 	and a
 	jr nz, .loop
@@ -125,17 +125,18 @@ endm
 	setup_command PokeAnim_StereoCry
 ; d00f2
 
-PokeAnim_SetWait: ; d00f2
+PokeAnim_SetWait:
 	ld a, 18
 	ld [wPokeAnimWaitCounter], a
-	ld a, [wPokeAnimSceneIndex]
-	inc a
-	ld [wPokeAnimSceneIndex], a
+	call PokeAnim_IncrementSceneIndex
+	; fallthrough
 
-PokeAnim_Wait: ; d00fe
+PokeAnim_Wait:
 	ld hl, wPokeAnimWaitCounter
 	dec [hl]
 	ret nz
+	; fallthrough
+
 PokeAnim_IncrementSceneIndex:
 	ld a, [wPokeAnimSceneIndex]
 	inc a
@@ -200,7 +201,7 @@ PokeAnim_Cry:
 	call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	call _PlayCry
+	;call _PlayCry
 	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_CryNoWait:
@@ -212,7 +213,7 @@ PokeAnim_CryNoWait:
 	call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	call PlayCry2
+	;call PlayCry2
 	jp PokeAnim_IncrementSceneIndex
 
 PokeAnim_StereoCry:
@@ -226,11 +227,11 @@ PokeAnim_StereoCry:
 	call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	call PlayStereoCry2
+	;call PlayStereoCry2
 	jp PokeAnim_IncrementSceneIndex
 ; d01a9
 PokeAnim_DedCry:
-	ldh [hDEDCryFlag], a
+	;ldh [hDEDCryFlag], a
 	jp PokeAnim_IncrementSceneIndex
 
 PokeAnim_DeinitFrames: ; d01a9
@@ -239,9 +240,9 @@ PokeAnim_DeinitFrames: ; d01a9
 	ld a, $2
 	ldh [rSVBK], a
 	call PokeAnim_PlaceGraphic
-	farcall HDMATransferTileMapToWRAMBank3
+	farcall HDMAHBlankTransferTileMap_DuringDI
 	call PokeAnim_SetVBank0
-	farcall HDMATransferAttrMapToWRAMBank3
+	farcall HDMAHBlankTransferAttrMap_DuringDI
 	pop af
 	ldh [rSVBK], a
 	ret
@@ -790,18 +791,19 @@ endm
 	ret
 ; d04bd
 
-PokeAnim_PlaceGraphic: ; d04bd
+PokeAnim_PlaceGraphic:
 	call .ClearBox
 	ld a, [wBoxAlignment]
 	and a
-	jr nz, .flipped
 	ld de, 1
-	ld bc, 0
-	jr .okay
+	ld b, d
+	ld c, d
+	jr z, .okay
 
 .flipped
-	ld de, -1
-	ld bc, 6
+	dec de
+	dec de
+	ld c, 6
 
 .okay
 	ld hl, wPokeAnimCoord
@@ -829,16 +831,14 @@ PokeAnim_PlaceGraphic: ; d04bd
 	dec c
 	jr nz, .loop
 	ret
-; d04f6
 
-.ClearBox: ; d04f6
+.ClearBox
 	ld hl, wPokeAnimCoord
 	ld a, [hli]
 	ld h, [hl]
 	ld l, a
 	lb bc, 7, 7
 	jp ClearBox
-; d0504
 
 PokeAnim_SetVBank1: ; d0504
 	ldh a, [rSVBK]
@@ -847,14 +847,30 @@ PokeAnim_SetVBank1: ; d0504
 	ldh [rSVBK], a
 	xor a
 	ldh [hBGMapMode], a
-	call .SetFlag
-	farcall HDMATransferAttrMapToWRAMBank3
+
+	call PokeAnim_GetAttrMapCoord
+	lb bc, 7, 7
+	ld de, SCREEN_WIDTH
+.row
+	push bc
+	push hl
+.col
+	set 3, [hl]
+	add hl, de
+	dec c
+	jr nz, .col
+	pop hl
+	inc hl
+	pop bc
+	dec b
+	jr nz, .row
+
+	farcall HDMAHBlankTransferAttrMap_DuringDI
 	pop af
 	ldh [rSVBK], a
 	ret
-; d051b
 
-.SetFlag: ; d051b
+PokeAnim_SetVBank0:
 	call PokeAnim_GetAttrMapCoord
 	lb bc, 7, 7
 	ld de, SCREEN_WIDTH
@@ -862,9 +878,7 @@ PokeAnim_SetVBank1: ; d0504
 	push bc
 	push hl
 .col
-	ld a, [hl]
-	or 8
-	ld [hl], a
+	res 3, [hl]
 	add hl, de
 	dec c
 	jr nz, .col
@@ -874,29 +888,6 @@ PokeAnim_SetVBank1: ; d0504
 	dec b
 	jr nz, .row
 	ret
-; d0536
-
-PokeAnim_SetVBank0: ; d0536
-	call PokeAnim_GetAttrMapCoord
-	lb bc, 7, 7
-	ld de, SCREEN_WIDTH
-.row
-	push bc
-	push hl
-.col
-	ld a, [hl]
-	and $f7
-	ld [hl], a
-	add hl, de
-	dec c
-	jr nz, .col
-	pop hl
-	inc hl
-	pop bc
-	dec b
-	jr nz, .row
-	ret
-; d0551
 
 PokeAnim_GetAttrMapCoord: ; d0551
 	ld hl, wPokeAnimCoord
