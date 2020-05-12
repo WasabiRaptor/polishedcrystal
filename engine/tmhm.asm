@@ -10,6 +10,8 @@ CanLearnTMHMMove: ; 11639
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
+	ld a, [wCurPartyForm]
+	ld [wCurForm], a
 	call GetBaseData
 	ld hl, wBaseTMHM
 	push hl

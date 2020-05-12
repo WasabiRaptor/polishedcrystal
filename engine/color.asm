@@ -674,6 +674,8 @@ GetBattlemonBackpicPalette:
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld a, [wTempBattleMonForm]
+	and FORM_MASK
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	ret
 
@@ -717,6 +719,7 @@ GetEnemyFrontpicPalette:
 	ld [wCurSpecies], a
 	ld a, [wTempEnemyMonForm]
 	and FORM_MASK
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	ret
 

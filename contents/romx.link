@@ -24,7 +24,6 @@ ROMX $05
 ROMX $06
 	org $4000
 	"color"
-	"Music 9"
 
 ROMX $07
 	org $4000

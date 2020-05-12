@@ -179,6 +179,10 @@ CheckOppositeGender: ; 377f5
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempBattleMonForm]
+	and FORM_MASK
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 
 
 	ld a, [wCurBattleMon]

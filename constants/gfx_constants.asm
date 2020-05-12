@@ -36,12 +36,12 @@ HP_YELLOW EQU 1
 HP_RED    EQU 2
 
 	const_def
-	const ANIM_MON_SLOW    ; 0
-	const ANIM_MON_NORMAL  ; 1
-	const ANIM_MON_MENU    ; 2
-	const ANIM_MON_TRADE   ; 3
-	const ANIM_MON_EVOLVE  ; 4
-	const ANIM_MON_HATCH   ; 5
-	const ANIM_MON_UNUSED  ; 6
-	const ANIM_MON_EGG1    ; 7
-	const ANIM_MON_EGG2    ; 8
+	const ANIM_MON_SLOW           ; 0
+	const ANIM_MON_NORMAL         ; 1
+	const ANIM_MON_MENU           ; 2
+	const ANIM_MON_MENU_REPEATING ; 3
+	const ANIM_MON_TRADE          ; 4
+	const ANIM_MON_EVOLVE         ; 5
+	const ANIM_MON_HATCH          ; 6
+	const ANIM_MON_EGG1           ; 7
+	const ANIM_MON_EGG2           ; 8

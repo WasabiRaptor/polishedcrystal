@@ -977,6 +977,10 @@ LoveBallMultiplier:
 	ld a, [wTempBattleMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempBattleMonForm]
+	and FORM_MASK
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 
 	xor a ; PARTYMON
 	ld [wMonType], a
@@ -998,6 +1002,10 @@ LoveBallMultiplier:
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 
 	ld a, WILDMON
 	ld [wMonType], a
@@ -1104,6 +1112,10 @@ RepeatBallMultiplier:
 	ld a, [wTempEnemyMonSpecies]
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
+	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 
 	dec a
 	push bc
@@ -2013,6 +2025,8 @@ ItemActionText: ; f24a (3:724a)
 	push af
 	ld a, [wCurPartyGroup]
 	push af
+	ld a, [wCurPartyForm]
+	push af
 	ld a, [wCurPartyMon]
 	push af
 	push hl
@@ -2028,6 +2042,8 @@ ItemActionText: ; f24a (3:724a)
 	pop hl
 	pop af
 	ld [wCurPartyMon], a
+	pop af
+	ld [wCurPartyForm], a
 	pop af
 	ld [wCurPartyGroup], a
 	pop af

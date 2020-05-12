@@ -216,6 +216,8 @@ DayCare_TakeMoney_PlayCry: ; 16850
 	call PrintDayCareText
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
+	ld a, [wCurPartyForm]
+	ld [wCurForm], a
 	ld a, [wCurPartySpecies]
 	call PlayCry
 	ld a, DAYCARETEXT_TOO_SOON
@@ -747,6 +749,10 @@ DayCare_InitBreeding: ; 16a3b
 	ld a, [wBreedMon1Group]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
+	ld a, [wBreedMon1Form]
+	and FORM_MASK
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 	ld a, [wBreedMon1Species]
 	ld [wCurPartySpecies], a
 	ld a, [wBreedMon1Gender]
@@ -781,12 +787,20 @@ DayCare_InitBreeding: ; 16a3b
 	ld a, [wBreedMon1Group]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
+	ld a, [wBreedMon1Form]
+	and FORM_MASK
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 	ld a, [wBreedMon1Species]
 	jr z, .GotMother
 
 	ld a, [wBreedMon2Group]
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
+	ld a, [wBreedMon2Form]
+	and FORM_MASK
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 	ld a, [wBreedMon2Species]
 .GotMother:
 	ld [wCurPartySpecies], a

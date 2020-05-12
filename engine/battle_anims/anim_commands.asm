@@ -925,6 +925,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ldh [rSVBK], a
 	ld a, [wCurPartyGroup]
 	push af
+	ld a, [wCurPartyForm]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 
@@ -939,6 +941,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ld [wCurPartySpecies], a
 	ld [wCurSpecies], a
 	ld a, [wTempBattleMonForm]
+	and FORM_MASK
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 
 	ld de, VTiles0 tile $00
@@ -954,6 +958,7 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 	ld [wCurSpecies], a
 	ld a, [wTempEnemyMonForm]
 	and FORM_MASK
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 
 
@@ -963,6 +968,8 @@ BattleAnimCmd_Transform: ; cc5dc (33:45dc)
 .done
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
+	pop af
+	ld [wCurPartyForm], a
 	pop af
 	ld [wCurPartyGroup], a
 	pop af
@@ -1183,6 +1190,8 @@ BattleAnimCmd_DropSub: ; cc750 (33:4750)
 
 	ld a, [wCurPartyGroup]
 	push af
+	ld a, [wCurPartyForm]
+	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
 	ldh a, [hBattleTurn]
@@ -1199,6 +1208,8 @@ BattleAnimCmd_DropSub: ; cc750 (33:4750)
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
 	pop af
+	ld [wCurPartyForm], a
+	pop af
 	ld [wCurPartyGroup], a
 	pop af
 	ldh [rSVBK], a
@@ -1210,6 +1221,8 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	ld a, $1
 	ldh [rSVBK], a
 	ld a, [wCurPartyGroup]
+	push af
+	ld a, [wCurPartyForm]
 	push af
 	ld a, [wCurPartySpecies] ; CurPartySpecies
 	push af
@@ -1236,6 +1249,8 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 .done
 	pop af
 	ld [wCurPartySpecies], a ; CurPartySpecies
+	pop af
+	ld [wCurPartyForm], a
 	pop af
 	ld [wCurPartyGroup], a
 	ld b, CGB_BATTLE_COLORS

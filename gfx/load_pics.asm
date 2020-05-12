@@ -13,6 +13,7 @@ GetPartyMonGroupSpeciesAndForm::
 	add hl, bc
 	ld a, [hl]	;form
 	and FORM_MASK
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	pop bc
 	pop hl
@@ -39,6 +40,10 @@ PokemonToGroupSpeciesAndForm::
 
 
 GetFrontpic: ; 51077
+	ld a, [wCurPartyGroup]
+	ld [wCurGroup], a
+	ld a, [wCurPartyForm]
+	ld [wCurForm], a
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	farcall IsAPokemon
@@ -235,6 +240,8 @@ LoadFrontpicTiles: ; 5114f
 GetBackpic: ; 5116c
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
+	ld a, [wCurPartyForm]
+	ld [wCurForm], a
 	ld a, [wCurPartySpecies]
 	ld [wCurSpecies], a
 	farcall IsAPokemon

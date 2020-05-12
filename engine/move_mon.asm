@@ -210,7 +210,7 @@ endr
 	push af ;2 curgroup is pushed
 	ld a, [wCurPartySpecies]
 	push af ; 3 species is pushed
-	ld a, [wCurForm]
+	ld a, [wCurPartyForm]
 	push af ; 4 form is pushed
 	push hl ; 5
 	ld a, [wPartyMon1Ability]
@@ -222,6 +222,7 @@ endr
 	call GetAbility
 	pop hl ; 4
 	pop af ; 3 form is popped
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	pop af ; 2 curspecies is popped
 	ld [wCurPartySpecies], a
@@ -310,13 +311,14 @@ endr
 	push af ;2 curgroup is pushed
 	ld a, [wCurPartySpecies]
 	push af ; 3 species is pushed
-	ld a, [wCurForm]
+	ld a, [wCurPartyForm]
 	push af ; 4 form is pushed
 
 	farcall GetLeadAbility
 	ld b, a
 
 	pop af ; 3 form is popped
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	pop af ; 2 curspecies is popped
 	ld [wCurPartySpecies], a
@@ -483,6 +485,7 @@ endr
 	ld a, [wEnemyMonForm]
 	and FORM_MASK
 	ld [wCurForm], a
+	ld [wCurPartyForm], a
 
 .next2 ; and thus we meet back up with the trainer party both at the same point in the stack
 	ld a, [wBattleMode]
@@ -642,6 +645,8 @@ AddTempmonToParty: ; da96
 	ld bc, PKMN_NAME_LENGTH
 	rst CopyBytes
 
+	ld a, [wCurPartyForm]
+	ld [wCurForm], a
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
@@ -1169,6 +1174,8 @@ SentPkmnIntoBox: ; de6e
 	inc a
 	ld [de], a
 
+	ld a, [wCurPartyForm]
+	ld [wCurForm], a
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld a, [wCurPartySpecies]
@@ -2146,7 +2153,7 @@ GivePoke:: ; e277
 	ld [wTempEnemyMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
-	ld a, [wCurForm]
+	ld a, [wCurPartyForm]
 	ld [wTempEnemyMonForm], a
 	farcall LoadEnemyMon
 	ld a, BANK(sBoxMon1Item)
@@ -2194,7 +2201,7 @@ GivePoke:: ; e277
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
 	ld [wTempEnemyMonGroup], a
-	ld a, [wCurForm]
+	ld a, [wCurPartyForm]
 	ld [wTempEnemyMonForm], a
 	call GetPokemonName
 	ld hl, wStringBuffer1

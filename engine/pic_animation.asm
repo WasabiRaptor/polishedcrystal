@@ -1,4 +1,19 @@
 ; Pic animation arrangement.
+AnimateMon_Menu:
+	lb de, 0, ANIM_MON_MENU
+	jp AnimateFrontpic
+
+AnimateMon_Trade:
+	lb de, 0, ANIM_MON_TRADE
+	jp AnimateFrontpic
+
+AnimateMon_Evolve:
+	lb de, 0, ANIM_MON_EVOLVE
+	jp AnimateFrontpic
+
+AnimateMon_Hatch:
+	lb de, 0, ANIM_MON_HATCH
+	jp AnimateFrontpic
 
 POKEANIM: MACRO
 	rept _NARG
@@ -15,29 +30,29 @@ endc
 	db (PokeAnim_Finish_ - PokeAnim_SetupCommands) / 2
 ENDM
 
-
-PokeAnims: ; d0042
+PokeAnims:
 	dw .Slow
 	dw .Normal
 	dw .Menu
+	dw .MenuRepeating
 	dw .Trade
 	dw .Evolve
 	dw .Hatch
-	dw .Menu ; unused
 	dw .Egg1
 	dw .Egg2
 
-.Slow:   POKEANIM StereoCry, Setup2, Play
-.Normal: POKEANIM StereoCry, Setup, Play
-.Menu:   POKEANIM CryNoWait, Setup, Play, SetWait, Wait, Extra, Play
-.Trade:  POKEANIM Extra, Play2, Extra, Play, SetWait, Wait, Cry, Setup, Play
-.Evolve: POKEANIM Extra, Play, SetWait, Wait, CryNoWait, Setup, Play
-.Hatch:  POKEANIM Extra, Play, CryNoWait, Setup, Play, SetWait, Wait, Extra, Play
-.Egg1:   POKEANIM Setup, Play
-.Egg2:   POKEANIM Extra, Play
+.Slow:          POKEANIM StereoCry, Setup2, Play
+.Normal:        POKEANIM StereoCry, Setup, Play
+.Menu:          db (PokeAnim_CryNoWait_ - PokeAnim_SetupCommands) / 2
+.MenuRepeating: POKEANIM Setup, Play, SetWait, Wait, Extra, Play
+.Trade:         POKEANIM Extra, Play2, Extra, Play, SetWait, Wait, Cry, Setup, Play
+.Evolve:        POKEANIM Extra, Play, SetWait, Wait, CryNoWait, Setup, Play
+.Hatch:         POKEANIM Extra, Play, CryNoWait, Setup, Play, SetWait, Wait, Extra, Play
+.Egg1:          POKEANIM Setup, Play
+.Egg2:          POKEANIM Extra, Play
 
 
-AnimateFrontpic: ; d008e
+AnimateFrontpic:
 	call AnimateMon_CheckIfPokemon
 	ret c
 	call LoadMonAnimation
@@ -53,9 +68,8 @@ AnimateFrontpic: ; d008e
 	and a
 	jr nz, .loop
 	ret
-; d00a3
 
-LoadMonAnimation: ; d00a3
+LoadMonAnimation:
 	push hl
 	ld c, e
 	ld b, 0
@@ -66,67 +80,12 @@ LoadMonAnimation: ; d00a3
 	ld b, [hl]
 	ld c, a
 	pop hl
+	jp PokeAnim_InitPicAttributes
 
+SetUpPokeAnim::
 	ldh a, [rSVBK]
 	push af
-	ld a, $2
-	ldh [rSVBK], a
-
-	push bc
-	push de
-	push hl
-	ld hl, wPokeAnimSceneIndex
-	ld bc, wPokeAnimStructEnd - wPokeAnimSceneIndex
-	xor a
-	call ByteFill
-	pop hl
-	pop de
-	pop bc
-
-; bc contains anim pointer
-	ld a, c
-	ld [wPokeAnimPointer], a
-	ld a, b
-	ld [wPokeAnimPointer + 1], a
-; hl contains TileMap coords
-	ld a, l
-	ld [wPokeAnimCoord], a
-	ld a, h
-	ld [wPokeAnimCoord + 1], a
-; d = start tile
-	ld a, d
-	ld [wPokeAnimGraphicStartTile], a
-	call ConvertTileMapAddrToBGMap
-	ld a, l
-	ld [wPokeAnimDestination], a
-	ld a, h
-	ld [wPokeAnimDestination + 1], a
-
-	ld a, BANK(wCurPartySpecies)
-	ld hl, wCurPartySpecies
-	call GetFarWRAMByte
-	ld [wPokeAnimSpecies], a
-	ld [wCurSpecies], a
-
-	ld a, [wCurGroup]
-	ld [wPokeAnimGroup], a
-
-	ld a, [wCurForm]
-	ld [wPokeAnimForm], a
-
-	call PokeAnim_GetFrontpicDims
-	ld a, c
-	ld [wPokeAnimFrontpicHeight], a
-
-	pop af
-	ldh [rSVBK], a
-	ret
-; d0228
-
-SetUpPokeAnim:: ; d00b4
-	ldh a, [rSVBK]
-	push af
-	ld a, $2
+	ld a, BANK(wPokeAnimSceneIndex)
 	ldh [rSVBK], a
 	ld a, [wPokeAnimSceneIndex]
 	ld c, a
@@ -144,9 +103,7 @@ SetUpPokeAnim:: ; d00b4
 	pop af
 	ldh [rSVBK], a
 	ld a, c
-	and $80
-	ret z
-	scf
+	add a, a
 	ret
 ; d00da
 
@@ -303,6 +260,61 @@ AnimateMon_CheckIfPokemon: ; d01c6
 	scf
 	ret
 ; d01d6
+
+PokeAnim_InitPicAttributes:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wPokeAnimSceneIndex)
+	ldh [rSVBK], a
+
+	push bc
+	push hl
+	ld hl, wPokeAnimSceneIndex
+	ld bc, wPokeAnimStructEnd - wPokeAnimSceneIndex
+	xor a
+	call ByteFill
+	pop hl
+	pop bc
+
+; bc contains anim pointer
+	ld a, c
+	ld [wPokeAnimPointer], a
+	ld a, b
+	ld [wPokeAnimPointer + 1], a
+; hl contains tilemap coords
+	ld a, l
+	ld [wPokeAnimCoord], a
+	ld a, h
+	ld [wPokeAnimCoord + 1], a
+; d = start tile
+	ld a, d
+	ld [wPokeAnimGraphicStartTile], a
+; convert tilemap coord to BGMap coords
+	call ConvertTileMapAddrToBGMap
+	ld a, l
+	ld [wPokeAnimDestination], a
+	ld a, h
+	ld [wPokeAnimDestination + 1], a
+	ld a, BANK(wCurPartySpecies)
+	ld hl, wCurPartySpecies
+	call GetFarWRAMByte
+	ld [wPokeAnimSpecies], a
+	ld a, BANK(wCurPartyGroup)
+	ld hl, wCurPartyGroup
+	call GetFarWRAMByte
+	ld [wPokeAnimGroup], a
+	ld a, BANK(wCurPartyForm)
+	ld hl, wCurPartyForm
+	call GetFarWRAMByte
+	ld [wPokeAnimForm], a
+
+	call PokeAnim_GetFrontpicDims
+	ld a, c
+	ld [wPokeAnimFrontpicHeight], a
+
+	pop af
+	ldh [rSVBK], a
+	ret
 
 ConvertTileMapAddrToBGMap:
 	ld a, l

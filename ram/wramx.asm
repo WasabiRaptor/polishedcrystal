@@ -305,6 +305,8 @@ wCurPartyGroup::
 	ds 1
 wCurPartySpecies::
 	ds 1
+wCurPartyForm::
+	ds 1
 
 wCurPartyMon::
 ; contains which monster in a party

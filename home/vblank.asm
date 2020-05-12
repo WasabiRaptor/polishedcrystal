@@ -74,13 +74,13 @@ VBlank::
 .doGrowlOrRoarAnim
 	ldh a, [rSVBK]
 	push af
-	ld a, $5 ;GBC video 
+	ld a, $5 ;GBC video
 	ldh [rSVBK], a
 
 	call ForcePushOAM
 
 	ld a, BANK(CopyGrowlOrRoarPals)
-	call Bankswitch
+	rst Bankswitch
 
 	ldh a, [hCGBPalUpdate]
 	and a
@@ -93,7 +93,7 @@ VBlank::
 .doPokeAnim
 	call TransferAnimatingPicDuringHBlank
 	ld a, BANK(SetUpPokeAnim)
-	call Bankswitch
+	rst Bankswitch
 	call SetUpPokeAnim
 	jr .doGameTime
 

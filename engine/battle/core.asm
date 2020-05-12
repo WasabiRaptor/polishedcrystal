@@ -90,6 +90,8 @@ DoBattle: ; 3c000
 	ld [wTempBattleMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempBattleMonSpecies], a
+	ld a, [wCurPartyForm]
+	ld [wTempBattleMonForm], a
 
 	call SlidePlayerPicOut
 	call LoadTileMapToTempTileMap
@@ -3350,7 +3352,7 @@ LoadEnemyPkmnToSwitchTo:
 	ld [wTempEnemyMonGroup], a
 	ld a, [wCurPartySpecies]
 	ld [wTempEnemyMonSpecies], a
-	ld a, [wCurForm]
+	ld a, [wCurPartyForm]
 	ld [wTempEnemyMonForm], a
 	call LoadEnemyMon
 
@@ -3551,6 +3553,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	ld [wCurGroup], a
 	ld a, [wTempEnemyMonForm]
 	and FORM_MASK
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld a, OTPARTYMON
@@ -3583,7 +3586,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	push af
 	ld a, [wCurPartyGroup]
 	push af
-	ld a, [wCurForm]
+	ld a, [wCurPartyForm]
 	push af
 
 	call GetEnemyIllusion
@@ -3593,6 +3596,7 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	predef AnimateFrontpic
 
 	pop af
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	pop af
 	ld [wCurPartyGroup], a
@@ -3783,6 +3787,7 @@ InitBattleMon: ; 3da0d
 	ld a, [wBattleMonForm]
 	and FORM_MASK
 	ld [wTempBattleMonForm], a
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld a, [wBaseType1]
@@ -4939,6 +4944,7 @@ DrawEnemyHUD: ; 3e043
 	ld [wCurPartySpecies], a
 	ld a, [wTempEnemyMonForm]
 	and FORM_MASK
+	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	call GetBaseData ;form is known
 	ld de, wEnemyMonNick
@@ -8611,6 +8617,7 @@ DropPlayerSub: ; 3f447
 	push af
 	and FORM_MASK
 	ld [wCurForm], a
+	ld [wCurPartyForm], a
 
 	call GetPlayerIllusion
 
@@ -8620,6 +8627,7 @@ DropPlayerSub: ; 3f447
 	ld [wBattleMonForm], a
 	and FORM_MASK
 	ld [wCurForm], a
+	ld [wCurPartyForm], a
 	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
@@ -8674,16 +8682,18 @@ DropEnemySub: ; 3f486
 	push af
 	and FORM_MASK
 	ld [wCurForm], a
+	ld [wCurPartyForm], a
 
 	call GetEnemyIllusion
 
 	ld de, VTiles2
 	predef FrontpicPredef
+
 	pop af
 	ld [wEnemyMonForm], a
 	and FORM_MASK
 	ld [wCurForm], a
-
+	ld [wCurPartyForm], a
 	pop af
 	ld [wCurSpecies], a
 	ld [wCurPartySpecies], a
@@ -8811,7 +8821,7 @@ LoadTrainerOrWildMonPic: ; 3f54e
     ld a, [wTempWildMonForm]
     ld [wTempEnemyMonForm], a
 	and FORM_MASK
-    ld [wCurForm], a
+    ld [wCurPartyForm], a
 	ld a, [wTempWildMonSpecies]
 	ld [wCurPartySpecies], a
 
@@ -9402,9 +9412,9 @@ BattleStartMessage: ; 3fc8b
 	farcall Battle_GetTrainerName
 	ld hl, WantToBattleText
 	call CheckPluralTrainer
-	jr nz, .PlaceBattleStartText
+	jp nz, .PlaceBattleStartText
 	ld hl, WantsToBattleText
-	jr .PlaceBattleStartText
+	jp .PlaceBattleStartText
 
 .wild
 	call BattleCheckEnemyShininess
@@ -9430,6 +9440,8 @@ BattleStartMessage: ; 3fc8b
 	push af
 	ld a, [wCurPartyGroup]
 	push af
+	ld a, [wCurPartyForm]
+	push af
 
 	call GetEnemyIllusion
 
@@ -9437,6 +9449,9 @@ BattleStartMessage: ; 3fc8b
 	lb de, $0, ANIM_MON_NORMAL
 	predef AnimateFrontpic
 
+	pop af
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 	pop af
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a

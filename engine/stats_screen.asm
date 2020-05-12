@@ -1127,7 +1127,7 @@ StatsScreen_PlaceFrontpic_common:
 	ret
 
 ReAnimateStatsScreenMon:
-	lb de, 0, ANIM_MON_MENU
+	lb de, 0, ANIM_MON_MENU_REPEATING
 	jr StatsScreen_PlaceFrontpic_common
 
 
@@ -1272,6 +1272,8 @@ PrepEggFrontpic:
 	xor a
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
 	call GetBaseData
 	farcall GetOtherFrontpic
 	pop hl

@@ -689,6 +689,9 @@ GetEggFrontpic: ; 17224 (5:7224)
 	xor a
 	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
+	ld [wCurPartyForm], a
+	ld [wCurForm], a
+
 	call GetBaseData
 	pop de
 	farjp GetOtherFrontpic

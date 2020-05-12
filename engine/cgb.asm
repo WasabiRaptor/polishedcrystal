@@ -1098,6 +1098,8 @@ _CGB_BillsPC: ; 8fca
 	call LoadHLPaletteIntoDE
 	ld a, [wCurPartyGroup]
 	ld [wCurGroup], a
+	ld a, [wCurPartyForm]
+	ld [wCurForm], a
 
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalette
