@@ -279,5 +279,5 @@ gfx/unknown/unknown_egg.2bpp: rgbgfx += -h
 
 %.wav: ;
 
-%.ded: %.wav dedenc.py
-	$(PYTHON) dedenc.py $< $@
+#%.ded: %.wav dedenc.py
+#	$(PYTHON) dedenc.py $< $@
