@@ -3583,6 +3583,8 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	push af
 	ld a, [wCurPartyGroup]
 	push af
+	ld a, [wCurForm]
+	push af
 
 	call GetEnemyIllusion
 
@@ -3591,14 +3593,21 @@ Function_SetEnemyPkmnAndSendOutAnimation: ; 3d7c7
 	predef AnimateFrontpic
 
 	pop af
+	ld [wCurForm], a
+	pop af
 	ld [wCurPartyGroup], a
+	ld [wCurGroup], a
 	pop af
 	ld [wCurPartySpecies], a
+	ld [wCurSpecies], a
 	jr .skip_cry
 
 .cry_no_anim
 	ld a, $f
 	ld [wCryTracks], a
+	ld a, [wTempEnemyMonForm]
+	and FORM_MASK
+	ld [wCurForm], a
 	ld a, [wTempEnemyMonGroup]
 	ld [wCurGroup], a
 	ld a, [wTempEnemyMonSpecies]

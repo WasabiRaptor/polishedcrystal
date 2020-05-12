@@ -84,12 +84,12 @@ PlayCry_PopBCDEHLOff:
 	ret
 
 LoadCryHeader::
+; Load cry header bc.
 
 	call GetCryIndex
 	ret c
 
-	ld a, [hROMBank]
-	push af
+	anonbankpush KantoCries
 	ld a, d
 	rst Bankswitch
 
@@ -108,9 +108,6 @@ LoadCryHeader::
 	ld [wCryLength], a
 	ld a, [hl]
 	ld [wCryLength + 1], a
-
-	pop af
-	rst Bankswitch
 	and a
 	ret
 
@@ -126,8 +123,6 @@ GetCryIndex::
 	jr z, .no
 	cp EGG
 	jr z, .no
-	cp NUM_POKEMON + 1
-	jr nc, .no
 
 	call GetRelevantCryPointers
 	ld bc, 5

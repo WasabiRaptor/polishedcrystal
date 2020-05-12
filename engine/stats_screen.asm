@@ -1,5 +1,4 @@
 StatsScreenInit: ; 4dc8a
-	ld hl, StatsScreenMain
 	ldh a, [hMapAnims]
 	push af
 	xor a
@@ -12,13 +11,11 @@ StatsScreenInit: ; 4dc8a
 	ld c, a
 
 	push bc
-	push hl
 	call ClearBGPalettes
 	call ClearTileMap
 	call UpdateSprites
 	farcall LoadStatsScreenGFX
-	pop hl
-	call _hl_
+	call StatsScreenMain
 	call ClearBGPalettes
 	call ClearTileMap
 	pop bc
@@ -35,19 +32,37 @@ StatsScreenInit: ; 4dc8a
 	ret
 ; 0x4dcd2
 
-StatsScreenMain: ; 0x4dcd2
+StatsClearPokemonBox:
+	push af
+	push bc
+	push de
+	push hl
+	ld a, " "
+	hlcoord 0, 0
+	lb bc, 7, 7
+	call FillBoxWithByte
+	pop hl
+	pop de
+	pop bc
+	pop af
+	ret
+
+StatsScreenMain:
 	xor a
 	ld [wJumptableIndex], a
+	and $f8
+	or 1
 	ld [wcf64], a
-.loop ; 4dce3
+
+.loop
 	ld a, [wJumptableIndex]
 	and $7f
 	ld hl, StatsScreenPointerTable
 	rst JumpTable
 	call StatsScreen_WaitAnim ; check for keys?
 	ld a, [wJumptableIndex]
-	bit 7, a
-	jr z, .loop
+	add a, a
+	jr nc, .loop
 	ret
 ; 0x4dcf7
 
@@ -89,23 +104,27 @@ StatsScreen_WaitAnim:
 	push af
 	farcall HDMATransferTileMapToWRAMBank3
 	pop af
-	;call _PlayCry
+	call _PlayCry
 	jr .checkForPicAnim
 
-StatsScreen_SetJumptableIndex: ; 4dd62 (13:5d62)
+StatsScreen_SetJumptableIndex:
 	ld a, [wJumptableIndex]
 	and $80
 	or h
 	ld [wJumptableIndex], a
 	ret
 
-StatsScreen_Exit: ; 4dd6c (13:5d6c)
+StatsScreen_Exit:
 	ld hl, wJumptableIndex
 	set 7, [hl]
+	xor a
+	ldh [hRunPicAnim], a
 	ret
 
-MonStatsInit: ; 4dd72 (13:5d72)
-	ld hl, wcf64 ; what is this for hm?
+MonStatsInit:
+	xor a
+	ldh [hRunPicAnim], a
+	ld hl, wcf64
 	res 6, [hl]
 	call ClearBGPalettes
 	call ClearTileMap
@@ -113,31 +132,34 @@ MonStatsInit: ; 4dd72 (13:5d72)
 	call StatsScreen_CopyToTempMon
 	ld a, [wTempMonIsEgg]
 	bit MON_IS_EGG_F, a
-	jr nz, .egg
+	jr nz, MonStatsInit_egg
 	call StatsScreen_InitUpperHalf
 	ld hl, wcf64
 	set 4, [hl]
 	ld h, 4
-	jp StatsScreen_SetJumptableIndex
+	call StatsScreen_SetJumptableIndex
 
-.egg
+InitStatsScreenAnimCounter:
+	ld a, 90 ; 1.5 seconds
+	ld [wcf65], a
+	ret
+
+MonStatsInit_egg:
 	ld h, 1
-	jp StatsScreen_SetJumptableIndex
+	jr StatsScreen_SetJumptableIndex
 
-EggStatsInit: ; 4dda1
+EggStatsInit:
 	call EggStatsScreen
 	ld a, [wJumptableIndex]
 	inc a
 	ld [wJumptableIndex], a
 	ret
-; 0x4ddac
 
-
-EggStatsJoypad: ; 4ddac (13:5dac)
+EggStatsJoypad:
 	call StatsScreen_GetJoypad
 	jr nc, .check
 	ld h, 0
-	jp StatsScreen_SetJumptableIndex
+	jr StatsScreen_SetJumptableIndex
 
 .check
 	bit A_BUTTON_F, a
@@ -147,7 +169,7 @@ EggStatsJoypad: ; 4ddac (13:5dac)
 
 .quit
 	ld h, 7
-	jp StatsScreen_SetJumptableIndex
+	jr StatsScreen_SetJumptableIndex
 
 StatsScreen_LoadPage: ; 4ddc6 (13:5dc6)
 	call InitVariableWidthText
@@ -159,7 +181,7 @@ StatsScreen_LoadPage: ; 4ddc6 (13:5dc6)
 	ld [wJumptableIndex], a
 	ret
 
-MonStatsJoypad: ; 4ddd6 (13:5dd6)
+MonStatsJoypad:
 	call StatsScreen_GetJoypad
 	jr nc, .next
 	ld h, 0
@@ -167,9 +189,24 @@ MonStatsJoypad: ; 4ddd6 (13:5dd6)
 
 .next
 	and D_DOWN | D_UP | D_LEFT | D_RIGHT | A_BUTTON | B_BUTTON
-	jp StatsScreen_JoypadAction
+	call StatsScreen_JoypadAction
+	ldh a, [hRunPicAnim]
+	and a
+	ret nz
+	call StatsScreen_GetAnimationParam
+	ret nc
+	ld hl, wcf65
+	dec [hl]
+	ret nz
+	ld a, [wJumptableIndex]
+	and a
+	ret z
+	cp 7
+	ret z
+	call InitStatsScreenAnimCounter
+	jp ReAnimateStatsScreenMon
 
-StatsScreenWaitCry: ; 4dde6 (13:5de6)
+StatsScreenWaitCry:
 	call IsSFXPlaying
 	ret nc
 	ld a, [wJumptableIndex]
@@ -177,7 +214,7 @@ StatsScreenWaitCry: ; 4dde6 (13:5de6)
 	ld [wJumptableIndex], a
 	ret
 
-StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
+StatsScreen_CopyToTempMon:
 	ld a, [wMonType]
 	cp BREEDMON
 	jr nz, .breedmon
@@ -203,7 +240,7 @@ StatsScreen_CopyToTempMon: ; 4ddf2 (13:5df2)
 	and a
 	ret
 
-StatsScreen_GetJoypad: ; 4de2c (13:5e2c)
+StatsScreen_GetJoypad:
 	call GetJoypad
 	ld a, [wMonType]
 	cp BREEDMON
@@ -231,10 +268,10 @@ StatsScreen_GetJoypad: ; 4de2c (13:5e2c)
 	scf
 	ret
 
-StatsScreen_JoypadAction: ; 4de54 (13:5e54)
+StatsScreen_JoypadAction:
 	push af
 	ld a, [wcf64]
-	and $3
+	and 7
 	ld c, a
 	pop af
 	bit B_BUTTON_F, a
@@ -262,57 +299,76 @@ StatsScreen_JoypadAction: ; 4de54 (13:5e54)
 .next_mon
 	ld b, a
 	ld a, [wCurPartyMon]
+	ld c, a
+.checkValidMonLoop_down
+	ld a, [wCurPartyMon]
 	inc a
 	cp b
-	ret z
+	jr nz, .notEnd_down
+	ld a, c
 	ld [wCurPartyMon], a
-	ld b, a
+	ret
+.notEnd_down
+	ld [wCurPartyMon], a
 	ld a, [wMonType]
 	and a
-	jr nz, .load_mon
-	ld a, b
+	jr nz, .checkMonSpecies_down
+	ld a, [wCurPartyMon]
 	inc a
 	ld [wPartyMenuCursor], a
 	jr .load_mon
+.checkMonSpecies_down
+	call .CheckOTMonSpecies
+	jr nz, .load_mon
+	jr .checkValidMonLoop_down
 
 .d_up
 	ld a, [wCurPartyMon]
+	ld c, a
+.checkValidMonLoop_up
+	ld a, [wCurPartyMon]
 	and a
-	ret z
+	jr nz, .notEnd_up
+	ld a, c
+	ld [wCurPartyMon], a
+	ret
+.notEnd_up
 	dec a
 	ld [wCurPartyMon], a
 	ld b, a
 	ld a, [wMonType]
 	and a
-	jr nz, .load_mon
+	jr nz, .checkMonSpecies_up
 	ld a, b
 	inc a
 	ld [wPartyMenuCursor], a
 	jr .load_mon
+.checkMonSpecies_up
+	call .CheckOTMonSpecies
+	jr nz, .load_mon
+	jr .checkValidMonLoop_up
+
+.d_left
+	dec c
+	jr nz, .set_page
+	ld c, 4
+	jr .set_page
 
 .a_button
 	ld a, c
-	cp $3
+	cp 4
 	jr z, .b_button
 .d_right
 	inc c
-	ld a, $3
+	ld a, 4
 	cp c
 	jr nc, .set_page
-	ld c, 0
+	ld c, 1
 	jr .set_page
-
-.d_left
-	ld a, c
-	dec c
-	and a
-	jr nz, .set_page
-	ld c, $3
-	; fallthrough
 
 .set_page
 	ld a, [wcf64]
-	and %11111100
+	and %11111000
 	or c
 	ld [wcf64], a
 	ld h, 4
@@ -322,9 +378,21 @@ StatsScreen_JoypadAction: ; 4de54 (13:5e54)
 	ld h, 0
 	jp StatsScreen_SetJumptableIndex
 
-.b_button ; 4dee4 (13:5ee4)
+.b_button
 	ld h, 7
 	jp StatsScreen_SetJumptableIndex
+
+.CheckOTMonSpecies:
+	ld a, [wCurPartyMon]
+	ld hl, wOTPartySpecies
+	add l
+	ld l, a
+	jr nc, .noCarry_down
+	inc h
+.noCarry_down
+	ld a, [hl]
+	and a
+	ret
 
 StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 	call .PlaceHPBar
@@ -402,7 +470,7 @@ StatsScreen_InitUpperHalf: ; 4deea (13:5eea)
 StatsScreen_PlaceHorizontalDivider: ; 4df8f (13:5f8f)
 	hlcoord 0, 7
 	ld b, SCREEN_WIDTH
-	ld a, "_"
+	ld a, "<SPLITLINE>"
 .loop
 	ld [hli], a
 	dec b
@@ -1016,70 +1084,52 @@ _PrepMonFrontpic:: ; 378b
 	ld [wCurPartySpecies], a
 	ret
 
-StatsScreen_PlaceFrontpic: ; 4e226 (13:6226)
-	ld hl, wTempMonGroup
-	predef GetPartyMonGroupSpeciesAndForm
+StatsScreen_PlaceFrontpic:
 	call StatsScreen_GetAnimationParam
-	jr c, .egg
-	and a
-	jr z, .no_cry
-	jr .cry
-
-.egg
-	call .AnimateEgg
-	jp SetPalettes
-
-.no_cry
-	call .AnimateMon
-	jp SetPalettes
-
-.cry
+	jr c, .notFainted
+	jr z, .fainted
+; wild mon
 	call SetPalettes
 	call .AnimateMon
 	ld a, [wCurPartySpecies]
 	jp PlayCry2
+.fainted
+	call .AnimateEgg
+	jr .SetPalettes
+.notFainted
+	call .AnimateMon
+.SetPalettes
+	jp SetPalettes
 
-.AnimateMon: ; 4e253 (13:6253)
+.AnimateEgg
 	ld hl, wcf64
 	set 5, [hl]
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unown
 	hlcoord 0, 0
 	jp PrepMonFrontpic
 
-.unown
-	xor a
-	ld [wBoxAlignment], a
-	hlcoord 0, 0
-	jp _PrepMonFrontpic
-
-.AnimateEgg: ; 4e271 (13:6271)
-	ld a, [wCurPartySpecies]
-	cp UNOWN
-	jr z, .unownegg
+.AnimateMon
 	ld a, TRUE
 	ld [wBoxAlignment], a
-	jr .get_animation
-
-.unownegg
-	xor a
-	ld [wBoxAlignment], a
-	; fallthrough
-
-.get_animation ; 4e289 (13:6289)
 	ld a, [wCurPartySpecies]
 	farcall IsAPokemon
 	ret c
 	call StatsScreen_LoadTextBoxSpaceGFX
 	ld de, VTiles2 tile $00
 	predef FrontpicPredef
+	lb de, 0, ANIM_MON_MENU
+StatsScreen_PlaceFrontpic_common:
 	hlcoord 0, 0
-	lb de, $0, $2
 	predef LoadMonAnimation
 	ld hl, wcf64
 	set 6, [hl]
+	ld a, 1
+	ldh [hRunPicAnim], a
 	ret
+
+ReAnimateStatsScreenMon:
+	lb de, 0, ANIM_MON_MENU
+	jr StatsScreen_PlaceFrontpic_common
+
 
 StatsScreen_GetAnimationParam: ; 4e2ad (13:62ad)
 	ld a, [wMonType]

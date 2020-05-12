@@ -61,7 +61,7 @@ OUEST_PATHWAY_GRASS::	; 478C
 .cyndaquil::
     new_wild_mon DAY_ENC | WILD_25P, CYNDAQUIL, 1   ; 4798
 .vulpix::
-    new_wild_mon ALL_TIMES | WILD_50P, SNIVY, 50
+    new_wild_mon ALL_TIMES | WILD_50P, TREECKO, 50
     end_map
 
 
