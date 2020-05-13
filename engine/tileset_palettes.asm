@@ -322,6 +322,7 @@ LoadSpecialMapOBPalette:
 	bit FOLLOWER_ENABLE, a
 	ret z
 	and FOLLOWER_MASK
+	ret z
 	dec a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM

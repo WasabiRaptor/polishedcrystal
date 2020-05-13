@@ -65,12 +65,12 @@ checkpokegroupscript:
 
 GivePokemonScript:
 	opentext
-	givepoke BULBASAUR, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	givepoke CHIKORITA, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	givepoke TREECKO, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	givepoke TURTWIG, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	givepoke SNIVY, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	givepoke CHESPIN, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	;givepoke BULBASAUR, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke SQUIRTLE, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke TOTODILE, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	;givepoke TURTWIG, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	;givepoke SNIVY, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	;givepoke CHESPIN, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
 	end
 

@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 45 ; catch rate
     db 63 ; base exp
-	dw 0 ; field capabilities
+	dw FIELD_SURF ; field capabilities
     dn FEMALE_12_5, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/totodile/front.dimensions"
     db TORRENT, TORRENT     ; abilities

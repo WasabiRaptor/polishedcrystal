@@ -171,6 +171,22 @@ CAUGHTBALL_MASK   EQU %00011111
 MALE   EQU %00000000
 FEMALE EQU %10000000
 
+; Field Capalility constants
+
+	const_def 0
+	shift_const FIELD_SURF
+	shift_const FIELD_WATERFALL
+	shift_const FIELD_WHIRLPOOL
+	shift_const FIELD_CUT
+	shift_const FIELD_FLASH
+	shift_const FIELD_STRENGTH
+	shift_const FIELD_FLY
+	shift_const FIELD_DIG
+	shift_const FIELD_TELEPORT
+	shift_const FIELD_SWEET_SCENT
+
+
+
 BATTLEMON_STRUCT_LENGTH EQUS "(wBattleMonStructEnd - wBattleMonSpecies)"
 
 

@@ -2168,7 +2168,7 @@ SetFollower::
 
 StopFollower::
 	xor a
-	ld a, b
+	ld b, a
 ; fallthrough
 SaveFollower:
 	ld a, [wFollowerStatus]

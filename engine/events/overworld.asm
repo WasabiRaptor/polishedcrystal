@@ -61,6 +61,45 @@ CheckBadge: ; c731
 	text_jump _BadgeRequiredText
 	db "@"
 
+CheckPartyFieldCapability:
+; Check if a monster in your party has Field Capabilities de, checks the active follower first
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	call .Check
+	ret z
+	xor a
+.loop
+	call .Check
+	ret z
+	ld a, [wCurGroup]
+	and a
+	jr z, .done
+	ld a, [wCurPartyMon]
+	inc a
+	cp 6
+	jr nz, .loop
+.done
+	scf
+	ret
+
+.Check:
+	push de
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	call GetBaseData
+	pop de
+	ld a, [wBaseFieldCapabilities]
+	and e ; and out the bits we want
+	cp e ; check if they match
+	ret nz
+	ld a, [wBaseFieldCapabilities+1]
+	and d ; and out the bits we want
+	cp d ; check if they match
+	ret
+
+
 CheckPartyMove: ; c742
 ; Check if a monster in your party has move d.
 
@@ -106,8 +145,8 @@ CheckPartyMove: ; c742
 	ret
 
 CheckForSurfingPikachu:
-	ld d, SURF
-	call CheckPartyMove
+	ld de, FIELD_SURF
+	call CheckPartyFieldCapability
 	jr c, .no
 	;ld a, [wCurPartyMon]
 	;ld e, a
@@ -130,8 +169,8 @@ FieldMovePokepicScript:
 	copybytetovar wBuffer6
 	refreshscreen
 	;pokepic 0, 1
-	cry 0
-	waitsfx
+	;cry 0
+	;waitsfx
 	closepokepic
 	reloadmappart
 	end
@@ -579,12 +618,8 @@ TrySurfOW:: ; c9e7
 	call CheckDirection
 	jr c, .quit
 
-	ld de, ENGINE_FOGBADGE
-	call CheckEngineFlag
-	jr c, .quit
-
-	ld d, SURF
-	call CheckPartyMove
+	ld de, FIELD_SURF
+	call CheckPartyFieldCapability
 	jr c, .quit
 
 	ld hl, wOWState
@@ -801,11 +836,8 @@ Script_AutoWaterfall:
 	step_end
 
 TryWaterfallOW:: ; cb56
-	ld d, WATERFALL
-	call CheckPartyMove
-	jr c, .failed
-	ld de, ENGINE_RISINGBADGE
-	call CheckEngineFlag
+	ld de, FIELD_WATERFALL
+	call CheckPartyFieldCapability
 	jr c, .failed
 	call CheckMapCanWaterfall
 	jr c, .failed
@@ -1142,12 +1174,8 @@ UnknownText_0xcd73: ; 0xcd73
 	db "@"
 
 TryStrengthOW: ; cd78
-	ld d, STRENGTH
-	call CheckPartyMove
-	jr c, .nope
-
-	ld de, ENGINE_PLAINBADGE
-	call CheckEngineFlag
+	ld de, FIELD_STRENGTH
+	call CheckPartyFieldCapability
 	jr c, .nope
 
 	ld hl, wOWState
@@ -1297,11 +1325,8 @@ Script_AutoWhirlpool:
 	step_end
 
 TryWhirlpoolOW:: ; ce3e
-	ld d, WHIRLPOOL
-	call CheckPartyMove
-	jr c, .failed
-	ld de, ENGINE_GLACIERBADGE
-	call CheckEngineFlag
+	ld de, FIELD_WHIRLPOOL
+	call CheckPartyFieldCapability
 	jr c, .failed
 	call TryWhirlpoolMenu
 	jr c, .failed
@@ -1543,8 +1568,8 @@ UnknownText_0xcf77: ; 0xcf77
 	db "@"
 
 HasRockSmash: ; cf7c
-	ld d, ROCK_SMASH
-	call CheckPartyMove
+	ld de, FIELD_STRENGTH
+	call CheckPartyFieldCapability
 	ld a, 1
 	jr c, .done
 	xor a
@@ -1928,14 +1953,9 @@ GotOffTheBikeText: ; 0xd181
 	db "@"
 
 HasCutAvailable:: ; d186
-	ld d, CUT
-	call CheckPartyMove
+	ld de, FIELD_CUT
+	call CheckPartyFieldCapability
 	jr c, .no
-
-	ld de, ENGINE_HIVEBADGE
-	call CheckEngineFlag
-	jr c, .no
-
 .yes
 	xor a
 	jr .done

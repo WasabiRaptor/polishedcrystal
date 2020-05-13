@@ -180,6 +180,7 @@ GetFollowerSpriteAddresses:
 	bit FOLLOWER_ENABLE, a
 	jr z, no_follower
 	and FOLLOWER_MASK
+	jr z, no_follower
 	dec a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
