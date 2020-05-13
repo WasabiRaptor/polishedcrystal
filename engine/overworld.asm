@@ -67,9 +67,13 @@ GetPlayerSprite: ; 14183
 	ld [wFollowerObjectSprite], a
 	ld a, c
 	ld [wPlayerPalette], a
+	swap a
+	or PERSONTYPE_SCRIPT | (1 << 7)
 	ld [wPlayerObjectColor], a
 	ld a, d
 	ld [wFollowerPalette], a
+	swap a
+	or PERSONTYPE_SCRIPT | (1 << 7)
 	ld [wFollowerObjectColor], a
 	ret
 
