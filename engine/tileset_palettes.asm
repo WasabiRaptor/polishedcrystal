@@ -321,7 +321,15 @@ LoadSpecialMapOBPalette:
 	ld a, [wFollowerStatus]
 	bit FOLLOWER_ENABLE, a
 	ret z
+	and TEMP_FOLLOWER_MASK
+	jr z, .no_Forced_Follower
+	rlca
+	swap a
+	jr .got_follower
+.no_Forced_Follower
+	ld a, [wFollowerStatus]
 	and FOLLOWER_MASK
+.got_follower
 	ret z
 	dec a
 	ld [wCurPartyMon], a

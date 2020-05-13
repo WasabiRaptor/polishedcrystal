@@ -927,6 +927,7 @@ endm
 	push bc
 	ld a, PLAYER_NORMAL
 	ld [wPlayerState], a
+	farcall RemoveForcedFollower
 	call ReplaceKrisSprite ; UpdateSprites
 	pop bc
 	ret

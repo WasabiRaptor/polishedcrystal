@@ -61,6 +61,27 @@ CheckBadge: ; c731
 	text_jump _BadgeRequiredText
 	db "@"
 
+RemoveForcedFollower:
+	xor a
+	ld b, a
+	jr SetTempFollower
+
+ForceFollower:
+	ld a, [wCurPartyMon]
+	inc a
+	;moving the bits three to the left by swaping the nybbles and then rotating right, takes less cycles
+	swap a
+	rrca
+	ld b, a
+	;fallthrough
+SetTempFollower:
+	ld a, [wFollowerStatus]
+	and ~TEMP_FOLLOWER_MASK
+	or b
+	ld [wFollowerStatus], a
+	ret
+
+
 CheckPartyFieldCapability:
 ; Check if a monster in your party has Field Capabilities de, checks the active follower first
 	ld a, [wFollowerStatus]
@@ -625,6 +646,8 @@ TrySurfOW:: ; c9e7
 	ld hl, wOWState
 	bit OWSTATE_BIKING_FORCED, [hl]
 	jr nz, .quit
+
+	call ForceFollower
 
 	call GetSurfType
 	ld [wBuffer2], a

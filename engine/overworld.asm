@@ -6,7 +6,15 @@ _ReplaceKrisSprite:: ; 14135
 	ldh [hUsedSpriteTile], a
 	ld hl, wSpriteFlags
 	res 5, [hl]
-	jp GetUsedSprite
+	call GetUsedSprite
+	ld a, $10
+	ldh [hUsedSpriteTile], a
+	ld a, [wFollowerSprite]
+	ldh [hUsedSpriteIndex], a
+	call GetUsedSprite
+	farcall LoadSpecialMapOBPalette
+	farcall ApplyPals
+	jp UpdateTimePals
 ; 14146
 
 GetPlayerSprite: ; 14183
@@ -28,6 +36,7 @@ GetPlayerSprite: ; 14183
 	cp c
 	jr z, .good
 	inc hl
+	inc hl
 	cp $ff
 	jr nz, .loop
 
@@ -35,28 +44,47 @@ GetPlayerSprite: ; 14183
 	xor a ; ld a, PLAYER_NORMAL
 	ld [wPlayerState], a
 	ld a, SPRITE_CHRIS
+	ld b, SPRITE_FOLLOWER
+	ld c, 0
+	ld d, 1
 	jr .finish
 
 .good
-	ld a, [hl]
+	ld a, [hli]
+	ld b, [hl]
+	cp SPRITE_FOLLOWER
+	ld c, 0
+	ld d, 1
+	jr nz, .finish
+	ld c, 1
+	ld d, 0
 
 .finish
 	ld [wPlayerSprite], a
 	ld [wPlayerObjectSprite], a
+	ld a, b
+	ld [wFollowerSprite], a
+	ld [wFollowerObjectSprite], a
+	ld a, c
+	ld [wPlayerPalette], a
+	ld [wPlayerObjectColor], a
+	ld a, d
+	ld [wFollowerPalette], a
+	ld [wFollowerObjectColor], a
 	ret
 
 .Chris:
-	db PLAYER_NORMAL,    SPRITE_CHRIS
-	db PLAYER_BIKE,      SPRITE_CHRIS_BIKE
-	db PLAYER_SURF,      SPRITE_CHRIS_SURF
-	db PLAYER_SURF_PIKA, SPRITE_SURFING_PIKACHU
+	db PLAYER_NORMAL,    SPRITE_CHRIS, 				SPRITE_FOLLOWER
+	db PLAYER_BIKE,      SPRITE_CHRIS_BIKE, 		SPRITE_FOLLOWER
+	db PLAYER_SURF,      SPRITE_FOLLOWER, 			SPRITE_CHRIS_SURF
+	db PLAYER_SURF_PIKA, SPRITE_SURFING_PIKACHU, 	SPRITE_CHRIS_SURF
 	db $ff
 
 .Kris:
-	db PLAYER_NORMAL,    SPRITE_KRIS
-	db PLAYER_BIKE,      SPRITE_KRIS_BIKE
-	db PLAYER_SURF,      SPRITE_KRIS_SURF
-	db PLAYER_SURF_PIKA, SPRITE_SURFING_PIKACHU
+	db PLAYER_NORMAL,    SPRITE_KRIS, 				SPRITE_FOLLOWER
+	db PLAYER_BIKE,      SPRITE_KRIS_BIKE, 			SPRITE_FOLLOWER
+	db PLAYER_SURF,      SPRITE_FOLLOWER, 			SPRITE_KRIS_SURF
+	db PLAYER_SURF_PIKA, SPRITE_SURFING_PIKACHU, 	SPRITE_KRIS_SURF
 	db $ff
 ; 141c9
 
@@ -70,6 +98,9 @@ ReloadVisibleSprites::
 	push bc
 	call GetPlayerSprite
 	xor a
+	ldh [hUsedSpriteIndex], a
+	call ReloadSpriteIndex
+	ld a, 1
 	ldh [hUsedSpriteIndex], a
 	call ReloadSpriteIndex
 	call LoadEmoteGFX
@@ -179,8 +210,16 @@ GetFollowerSpriteAddresses:
 	ld a, [wFollowerStatus]
 	bit FOLLOWER_ENABLE, a
 	jr z, no_follower
+	and TEMP_FOLLOWER_MASK
+	jr z, .no_Forced_Follower
+	swap a
+	rlca
+	jr .got_follower
+.no_Forced_Follower
+	ld a, [wFollowerStatus]
 	and FOLLOWER_MASK
 	jr z, no_follower
+.got_follower
 	dec a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
