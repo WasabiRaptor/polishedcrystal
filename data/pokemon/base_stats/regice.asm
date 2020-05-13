@@ -8,7 +8,7 @@
     db ICE, ICE ; type
     db 3 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/regice/front.dimensions"
     db CLEAR_BODY, CLEAR_BODY     ; abilities

@@ -8,7 +8,7 @@
     db WATER, PSYCHIC ; type
     db 70 ; catch rate
     db 172 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/slowking/front.dimensions"
     db OBLIVIOUS, OWN_TEMPO     ; abilities

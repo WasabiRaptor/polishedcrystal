@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 3 ; catch rate
     db 107 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/type_null/front.dimensions"
     db BATTLE_ARMOR, BATTLE_ARMOR     ; abilities

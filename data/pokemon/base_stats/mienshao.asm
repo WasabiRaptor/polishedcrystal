@@ -8,7 +8,7 @@
     db FIGHTING, FIGHTING ; type
     db 45 ; catch rate
     db 179 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/mienshao/front.dimensions"
     db INNER_FOCUS, REGENERATOR     ; abilities

@@ -14,7 +14,7 @@ Output format:
     db NORMAL, NORMAL ; type                        types[0,1]
     db 50 ; catch rate                              capture_rate
     db 200 ; base exp                               base_experience
-    db NO_ITEM, NO_ITEM ; items
+    dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch  gender_rate, hatch_counter
     INCBIN "gfx/pokemon/aa_dummy/front.dimensions"
     db 0, 0    ; abilities                          abilities[0,1]
@@ -159,7 +159,7 @@ pkmndata.forEach((curpkmn, index) => {
     db ${curpkmn.types[0].toUpperCase()}, ${curpkmn.types[curpkmn.types.length-1].toUpperCase()} ; type
     db ${curpkmn.capture_rate} ; catch rate
     db ${curpkmn.base_experience} ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ${curpkmn.gender_rate}, ${curpkmn.hatch_counter/5} ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/${curpkmn.identifier.replace(/-/g,"_")}/front.dimensions"
     db ${curpkmn.abilities[0].replace(/-/g,"_").toUpperCase()}, ${((curpkmn.abilities[1] || curpkmn.abilities[0]).replace(/-/g,"_")).toUpperCase()}     ; abilities

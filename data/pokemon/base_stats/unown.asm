@@ -8,7 +8,7 @@
     db PSYCHIC, PSYCHIC ; type
     db 225 ; catch rate
     db 118 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/unown/front.dimensions"
     db LEVITATE, LEVITATE     ; abilities

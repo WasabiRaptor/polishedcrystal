@@ -8,7 +8,7 @@
     db DARK, DARK ; type
     db 3 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/darkrai/front.dimensions"
     db BAD_DREAMS, BAD_DREAMS     ; abilities

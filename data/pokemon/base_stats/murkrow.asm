@@ -8,7 +8,7 @@
     db DARK, FLYING ; type
     db 30 ; catch rate
     db 81 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/murkrow/front.dimensions"
     db INSOMNIA, SUPER_LUCK     ; abilities

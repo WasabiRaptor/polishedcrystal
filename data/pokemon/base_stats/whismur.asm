@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 190 ; catch rate
     db 48 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/whismur/front.dimensions"
     db SOUNDPROOF, SOUNDPROOF     ; abilities

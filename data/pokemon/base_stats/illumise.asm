@@ -8,7 +8,7 @@
     db BUG, BUG ; type
     db 150 ; catch rate
     db 151 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/illumise/front.dimensions"
     db OBLIVIOUS, TINTED_LENS     ; abilities

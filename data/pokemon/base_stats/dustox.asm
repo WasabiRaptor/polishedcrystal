@@ -8,7 +8,7 @@
     db BUG, POISON ; type
     db 45 ; catch rate
     db 173 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/dustox/front.dimensions"
     db SHIELD_DUST, SHIELD_DUST     ; abilities

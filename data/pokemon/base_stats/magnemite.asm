@@ -8,7 +8,7 @@
     db ELECTRIC, STEEL ; type
     db 190 ; catch rate
     db 65 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/magnemite/front.dimensions"
     db MAGNET_PULL, STURDY     ; abilities

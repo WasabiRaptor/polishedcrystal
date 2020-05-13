@@ -8,7 +8,7 @@
     db FIGHTING, PSYCHIC ; type
     db 90 ; catch rate
     db 144 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/medicham/front.dimensions"
     db PURE_POWER, PURE_POWER     ; abilities

@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 25 ; catch rate
     db 161 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/basculin_red_striped/front.dimensions"
     db RECKLESS, ADAPTABILITY     ; abilities

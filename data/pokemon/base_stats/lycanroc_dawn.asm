@@ -6,9 +6,9 @@
 	db ROCK, ROCK ; type
 	db 90 ; catch rate
 	db 170 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
-	INCBIN "gfx/pokemon/lycanroc_dawn/front.dimensions" 
+	INCBIN "gfx/pokemon/lycanroc_dawn/front.dimensions"
 	db 0, 0	; abilities
 	db 0	; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
@@ -17,4 +17,3 @@
 	; tm/hm learnset
 	tmhm
 	; end
-	

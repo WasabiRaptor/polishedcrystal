@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 255 ; catch rate
     db 52 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_75, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/skitty/front.dimensions"
     db CUTE_CHARM, NORMALIZE     ; abilities

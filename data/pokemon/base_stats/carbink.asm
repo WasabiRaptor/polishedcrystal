@@ -8,7 +8,7 @@
     db ROCK, FAIRY ; type
     db 60 ; catch rate
     db 100 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/carbink/front.dimensions"
     db CLEAR_BODY, CLEAR_BODY     ; abilities

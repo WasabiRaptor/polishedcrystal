@@ -8,7 +8,7 @@
     db POISON, GROUND ; type
     db 45 ; catch rate
     db 227 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_MALE, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/nidoking/front.dimensions"
     db POISON_POINT, RIVALRY     ; abilities

@@ -8,7 +8,7 @@
     db GRASS, GRASS ; type
     db 45 ; catch rate
     db 62 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_12_5, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/snivy/front.dimensions"
     db OVERGROW, OVERGROW     ; abilities

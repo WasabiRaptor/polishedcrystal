@@ -6,7 +6,7 @@
 	db PSYCHIC, PSYCHIC ; type
 	db 75 ; catch rate
 	db 163 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/meowstic_m/front.dimensions"
 	db KEEN_EYE, INFILTRATOR	; abilities
@@ -17,4 +17,3 @@
 	; tm/hm learnset the main difference between male and female meowstic is the learnset, male is more defense female is more offense
 	tmhm
 	; end
-	

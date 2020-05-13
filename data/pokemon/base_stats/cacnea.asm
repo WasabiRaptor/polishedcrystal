@@ -8,7 +8,7 @@
     db GRASS, GRASS ; type
     db 190 ; catch rate
     db 67 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/cacnea/front.dimensions"
     db SAND_VEIL, SAND_VEIL     ; abilities

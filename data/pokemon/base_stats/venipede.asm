@@ -8,7 +8,7 @@
     db BUG, POISON ; type
     db 255 ; catch rate
     db 52 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/venipede/front.dimensions"
     db POISON_POINT, SWARM     ; abilities

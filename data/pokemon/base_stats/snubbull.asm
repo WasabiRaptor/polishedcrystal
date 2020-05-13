@@ -8,7 +8,7 @@
     db FAIRY, FAIRY ; type
     db 190 ; catch rate
     db 60 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_75, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/snubbull/front.dimensions"
     db INTIMIDATE, RUN_AWAY     ; abilities

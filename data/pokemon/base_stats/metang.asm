@@ -8,7 +8,7 @@
     db STEEL, PSYCHIC ; type
     db 3 ; catch rate
     db 147 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/metang/front.dimensions"
     db CLEAR_BODY, CLEAR_BODY     ; abilities

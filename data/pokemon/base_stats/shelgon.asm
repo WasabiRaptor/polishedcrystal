@@ -8,7 +8,7 @@
     db DRAGON, DRAGON ; type
     db 45 ; catch rate
     db 147 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/shelgon/front.dimensions"
     db ROCK_HEAD, ROCK_HEAD     ; abilities

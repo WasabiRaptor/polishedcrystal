@@ -8,7 +8,7 @@
     db GRASS, FLYING ; type
     db 200 ; catch rate
     db 161 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/tropius/front.dimensions"
     db CHLOROPHYLL, SOLAR_POWER     ; abilities

@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 127 ; catch rate
     db 146 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/gumshoos/front.dimensions"
     db STAKEOUT, STRONG_JAW     ; abilities

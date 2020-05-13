@@ -8,7 +8,7 @@
     db WATER, FLYING ; type
     db 45 ; catch rate
     db 166 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/swanna/front.dimensions"
     db KEEN_EYE, BIG_PECKS     ; abilities

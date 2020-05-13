@@ -8,7 +8,7 @@
     db NORMAL, WATER ; type
     db 127 ; catch rate
     db 144 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/bibarel/front.dimensions"
     db SIMPLE, UNAWARE     ; abilities

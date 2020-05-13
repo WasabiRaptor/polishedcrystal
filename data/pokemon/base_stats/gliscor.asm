@@ -8,7 +8,7 @@
     db GROUND, FLYING ; type
     db 30 ; catch rate
     db 179 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/gliscor/front.dimensions"
     db HYPER_CUTTER, SAND_VEIL     ; abilities

@@ -8,7 +8,7 @@
     db GRASS, GRASS ; type
     db 235 ; catch rate
     db 36 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/sunkern/front.dimensions"
     db CHLOROPHYLL, SOLAR_POWER     ; abilities

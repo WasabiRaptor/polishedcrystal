@@ -8,7 +8,7 @@
     db NORMAL, FLYING ; type
     db 30 ; catch rate
     db 144 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/chatot/front.dimensions"
     db KEEN_EYE, TANGLED_FEET     ; abilities

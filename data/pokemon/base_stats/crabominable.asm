@@ -8,7 +8,7 @@
     db FIGHTING, ICE ; type
     db 60 ; catch rate
     db 167 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/crabominable/front.dimensions"
     db HYPER_CUTTER, IRON_FIST     ; abilities

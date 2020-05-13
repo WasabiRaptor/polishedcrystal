@@ -8,7 +8,7 @@
     db DRAGON, DRAGON ; type
     db 45 ; catch rate
     db 147 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/dragonair/front.dimensions"
     db SHED_SKIN, SHED_SKIN     ; abilities

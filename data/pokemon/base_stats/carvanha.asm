@@ -8,7 +8,7 @@
     db WATER, DARK ; type
     db 225 ; catch rate
     db 61 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/carvanha/front.dimensions"
     db ROUGH_SKIN, ROUGH_SKIN     ; abilities

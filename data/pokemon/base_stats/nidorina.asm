@@ -8,7 +8,7 @@
     db POISON, POISON ; type
     db 120 ; catch rate
     db 128 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/nidorina/front.dimensions"
     db POISON_POINT, RIVALRY     ; abilities

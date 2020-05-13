@@ -8,7 +8,7 @@
     db DRAGON, FLYING ; type
     db 45 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/rayquaza/front.dimensions"
     db AIR_LOCK, AIR_LOCK     ; abilities

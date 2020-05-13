@@ -8,7 +8,7 @@
     db FIRE, FLYING ; type
     db 45 ; catch rate
     db 167 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_75, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/oricorio_baile/front.dimensions"
     db DANCER, DANCER     ; abilities

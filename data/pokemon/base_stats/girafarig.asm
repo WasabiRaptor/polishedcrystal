@@ -8,7 +8,7 @@
     db NORMAL, PSYCHIC ; type
     db 60 ; catch rate
     db 159 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/girafarig/front.dimensions"
     db INNER_FOCUS, EARLY_BIRD     ; abilities

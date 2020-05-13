@@ -8,7 +8,7 @@
     db PSYCHIC, FAIRY ; type
     db 145 ; catch rate
     db 62 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/mime_jr/front.dimensions"
     db SOUNDPROOF, FILTER     ; abilities

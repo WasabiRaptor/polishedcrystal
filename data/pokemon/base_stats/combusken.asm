@@ -8,7 +8,7 @@
     db FIRE, FIGHTING ; type
     db 45 ; catch rate
     db 142 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_12_5, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/combusken/front.dimensions"
     db BLAZE, BLAZE     ; abilities

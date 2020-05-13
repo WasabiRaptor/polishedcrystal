@@ -8,7 +8,7 @@
     db FIRE, FIRE ; type
     db 190 ; catch rate
     db 63 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_12_5, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/pansear/front.dimensions"
     db GLUTTONY, GLUTTONY     ; abilities

@@ -8,7 +8,7 @@
     db FAIRY, FAIRY ; type
     db 120 ; catch rate
     db 130 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/floette/front.dimensions"
     db FLOWER_VEIL, FLOWER_VEIL     ; abilities

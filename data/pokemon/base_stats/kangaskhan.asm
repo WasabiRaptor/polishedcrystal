@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 45 ; catch rate
     db 172 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/kangaskhan/front.dimensions"
     db EARLY_BIRD, SCRAPPY     ; abilities

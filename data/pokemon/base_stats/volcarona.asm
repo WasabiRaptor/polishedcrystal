@@ -8,7 +8,7 @@
     db BUG, FIRE ; type
     db 15 ; catch rate
     db 248 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/volcarona/front.dimensions"
     db FLAME_BODY, FLAME_BODY     ; abilities

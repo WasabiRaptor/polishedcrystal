@@ -8,7 +8,7 @@
     db WATER, ICE ; type
     db 75 ; catch rate
     db 166 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/dewgong/front.dimensions"
     db THICK_FAT, HYDRATION     ; abilities

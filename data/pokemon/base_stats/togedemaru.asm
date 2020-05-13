@@ -8,7 +8,7 @@
 	db ELECTRIC, STEEL ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 2 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/togedemaru/front.dimensions"
 	db IRON_BARBS, LIGHTNING_ROD     ; abilities

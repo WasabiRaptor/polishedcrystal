@@ -8,7 +8,7 @@
     db FIRE, STEEL ; type
     db 3 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 2 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/heatran/front.dimensions"
     db FLASH_FIRE, FLASH_FIRE     ; abilities

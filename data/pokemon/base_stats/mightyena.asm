@@ -8,7 +8,7 @@
     db DARK, DARK ; type
     db 127 ; catch rate
     db 147 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/mightyena/front.dimensions"
     db INTIMIDATE, QUICK_FEET     ; abilities

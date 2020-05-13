@@ -8,7 +8,7 @@
     db WATER, PSYCHIC ; type
     db 60 ; catch rate
     db 182 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/starmie/front.dimensions"
     db ILLUMINATE, NATURAL_CURE     ; abilities

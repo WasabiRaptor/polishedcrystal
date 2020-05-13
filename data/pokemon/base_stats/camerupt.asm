@@ -8,7 +8,7 @@
     db FIRE, GROUND ; type
     db 150 ; catch rate
     db 161 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/camerupt/front.dimensions"
     db MAGMA_ARMOR, SOLID_ROCK     ; abilities

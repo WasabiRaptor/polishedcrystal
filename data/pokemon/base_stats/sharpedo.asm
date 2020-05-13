@@ -8,7 +8,7 @@
     db WATER, DARK ; type
     db 60 ; catch rate
     db 161 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/sharpedo/front.dimensions"
     db ROUGH_SKIN, ROUGH_SKIN     ; abilities

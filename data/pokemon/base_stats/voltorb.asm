@@ -8,7 +8,7 @@
     db ELECTRIC, ELECTRIC ; type
     db 190 ; catch rate
     db 66 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/voltorb/front.dimensions"
     db SOUNDPROOF, STATIC     ; abilities

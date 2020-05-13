@@ -8,7 +8,7 @@
     db BUG, GRASS ; type
     db 45 ; catch rate
     db 148 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/wormadam_plant/front.dimensions"
     db ANTICIPATION, ANTICIPATION     ; abilities

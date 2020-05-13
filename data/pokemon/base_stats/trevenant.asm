@@ -8,7 +8,7 @@
 	db GHOST, GRASS ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/trevenant/front.dimensions"
 	db NATURAL_CURE, FRISK     ; abilities

@@ -8,7 +8,7 @@
     db GHOST, FAIRY ; type
     db 45 ; catch rate
     db 167 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/mimikyu_disguised/front.dimensions"
     db DISGUISE, DISGUISE     ; abilities

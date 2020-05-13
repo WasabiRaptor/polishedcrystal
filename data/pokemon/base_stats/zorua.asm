@@ -8,7 +8,7 @@
     db DARK, DARK ; type
     db 75 ; catch rate
     db 66 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_12_5, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/zorua/front.dimensions"
     db ILLUSION, ILLUSION     ; abilities

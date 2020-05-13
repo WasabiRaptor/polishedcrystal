@@ -8,7 +8,7 @@
     db ROCK, ROCK ; type
     db 190 ; catch rate
     db 56 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/rockruff/front.dimensions"
     db KEEN_EYE, VITAL_SPIRIT     ; abilities

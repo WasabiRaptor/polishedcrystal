@@ -8,7 +8,7 @@
 	db DARK, PSYCHIC ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/malamar/front.dimensions"
 	db CONTRARY, SUCTION_CUPS     ; abilities

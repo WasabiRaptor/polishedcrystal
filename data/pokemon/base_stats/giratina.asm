@@ -7,7 +7,7 @@
         db GHOST, DRAGON ; type
         db 3 ; catch rate
         db 255 ; base exp
-        db NO_ITEM, NO_ITEM ; items
+        dw 0 ; field capabilities
 
         INCBIN "gfx/pokemon/giratina/front.dimensions"
         db PRESSURE, PRESSURE     ; abilities

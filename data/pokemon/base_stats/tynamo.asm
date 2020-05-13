@@ -8,7 +8,7 @@
     db ELECTRIC, ELECTRIC ; type
     db 190 ; catch rate
     db 55 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/tynamo/front.dimensions"
     db LEVITATE, LEVITATE     ; abilities

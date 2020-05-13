@@ -8,7 +8,7 @@
     db BUG, WATER ; type
     db 200 ; catch rate
     db 54 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/surskit/front.dimensions"
     db SWIFT_SWIM, SWIFT_SWIM     ; abilities

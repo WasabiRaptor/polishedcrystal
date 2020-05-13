@@ -8,7 +8,7 @@
     db GHOST, GROUND ; type
     db 140 ; catch rate
     db 64 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/sandygast/front.dimensions"
     db WATER_COMPACTION, WATER_COMPACTION     ; abilities

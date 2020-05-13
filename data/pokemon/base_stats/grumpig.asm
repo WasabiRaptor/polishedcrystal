@@ -8,7 +8,7 @@
     db PSYCHIC, PSYCHIC ; type
     db 60 ; catch rate
     db 165 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/grumpig/front.dimensions"
     db THICK_FAT, OWN_TEMPO     ; abilities

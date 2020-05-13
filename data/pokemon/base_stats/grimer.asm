@@ -8,7 +8,7 @@
     db POISON, POISON ; type
     db 190 ; catch rate
     db 65 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/grimer/front.dimensions"
     db STENCH, STICKY_HOLD     ; abilities

@@ -8,7 +8,7 @@
     db NORMAL, FLYING ; type
     db 45 ; catch rate
     db 216 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/pidgeot/front.dimensions"
     db KEEN_EYE, TANGLED_FEET     ; abilities

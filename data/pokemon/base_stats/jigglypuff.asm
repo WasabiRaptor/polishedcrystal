@@ -8,7 +8,7 @@
     db NORMAL, FAIRY ; type
     db 170 ; catch rate
     db 95 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_75, 2 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/jigglypuff/front.dimensions"
     db CUTE_CHARM, COMPETITIVE     ; abilities

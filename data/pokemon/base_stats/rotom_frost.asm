@@ -7,7 +7,7 @@
 	db ELECTRIC, ICE ; type
 	db 45 ; catch rate
 	db 154 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn GENDERLESS, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/rotom_frost/front.dimensions"
 	db LEVITATE, LEVITATE	; abilities

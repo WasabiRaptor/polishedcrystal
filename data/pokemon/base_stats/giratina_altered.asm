@@ -7,8 +7,8 @@
 
     db GHOST, DRAGON ; type
     db 3 ; catch rate
-    db 306 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+    db 255 ; base exp
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/giratina_altered/front.dimensions"
     db PRESSURE, PRESSURE     ; abilities

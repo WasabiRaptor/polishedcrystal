@@ -8,7 +8,7 @@
     db WATER, PSYCHIC ; type
     db 80 ; catch rate
     db 166 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/bruxish/front.dimensions"
     db DAZZLING, STRONG_JAW     ; abilities

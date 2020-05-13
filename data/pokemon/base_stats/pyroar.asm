@@ -8,7 +8,7 @@
     db FIRE, NORMAL ; type
     db 65 ; catch rate
     db 177 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_87_5, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/pyroar/front.dimensions"
     db RIVALRY, UNNERVE     ; abilities

@@ -8,7 +8,7 @@
     db ELECTRIC, ELECTRIC ; type
     db 45 ; catch rate
     db 235 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/luxray/front.dimensions"
     db RIVALRY, INTIMIDATE     ; abilities

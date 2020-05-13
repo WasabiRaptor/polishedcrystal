@@ -8,7 +8,7 @@
     db ICE, PSYCHIC ; type
     db 45 ; catch rate
     db 159 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/jynx/front.dimensions"
     db OBLIVIOUS, FOREWARN     ; abilities

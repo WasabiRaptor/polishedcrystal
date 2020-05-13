@@ -8,7 +8,7 @@
     db BUG, FLYING ; type
     db 45 ; catch rate
     db 100 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/scyther/front.dimensions"
     db SWARM, TECHNICIAN     ; abilities

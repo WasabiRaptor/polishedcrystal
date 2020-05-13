@@ -8,7 +8,7 @@
     db GHOST, DARK ; type
     db 100 ; catch rate
     db 170 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 6 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/spiritomb/front.dimensions"
     db PRESSURE, PRESSURE     ; abilities

@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 190 ; catch rate
     db 64 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/psyduck/front.dimensions"
     db DAMP, CLOUD_NINE     ; abilities

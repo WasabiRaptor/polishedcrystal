@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 200 ; catch rate
     db 154 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/kecleon/front.dimensions"
     db COLOR_CHANGE, COLOR_CHANGE     ; abilities

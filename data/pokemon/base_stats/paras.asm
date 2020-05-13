@@ -8,7 +8,7 @@
     db BUG, GRASS ; type
     db 190 ; catch rate
     db 57 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/paras/front.dimensions"
     db EFFECT_SPORE, DRY_SKIN     ; abilities

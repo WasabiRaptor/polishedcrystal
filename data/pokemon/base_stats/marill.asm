@@ -8,7 +8,7 @@
     db WATER, FAIRY ; type
     db 190 ; catch rate
     db 88 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 2 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/marill/front.dimensions"
     db THICK_FAT, HUGE_POWER     ; abilities

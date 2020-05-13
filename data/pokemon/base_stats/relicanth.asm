@@ -8,7 +8,7 @@
     db WATER, ROCK ; type
     db 25 ; catch rate
     db 170 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_12_5, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/relicanth/front.dimensions"
     db SWIFT_SWIM, ROCK_HEAD     ; abilities

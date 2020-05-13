@@ -8,7 +8,7 @@
     db ELECTRIC, ELECTRIC ; type
     db 235 ; catch rate
     db 53 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/shinx/front.dimensions"
     db RIVALRY, INTIMIDATE     ; abilities

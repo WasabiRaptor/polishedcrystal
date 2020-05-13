@@ -8,7 +8,7 @@
     db PSYCHIC, FIRE ; type
     db 3 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/victini/front.dimensions"
     db VICTORY_STAR, VICTORY_STAR     ; abilities

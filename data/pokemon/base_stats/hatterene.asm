@@ -8,7 +8,7 @@
 	db PSYCHIC, FAIRY ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 4 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/hatterene/front.dimensions"
 	db HEALER, ANTICIPATION     ; abilities

@@ -8,8 +8,8 @@
 	db NORMAL, NORMAL ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
-	dn FEMALE_50, 24 ; gender, step cycles to hatch
+	dw 0 ; field capabilities
+	dn FEMALE_50, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/type__null/front.dimensions"
 	db BATTLE_ARMOR, BATTLE_ARMOR     ; abilities
 	db BATTLE_ARMOR    ; hidden ability

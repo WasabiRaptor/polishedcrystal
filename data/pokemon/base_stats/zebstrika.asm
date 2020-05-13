@@ -8,7 +8,7 @@
     db ELECTRIC, ELECTRIC ; type
     db 75 ; catch rate
     db 174 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/zebstrika/front.dimensions"
     db LIGHTNING_ROD, MOTOR_DRIVE     ; abilities

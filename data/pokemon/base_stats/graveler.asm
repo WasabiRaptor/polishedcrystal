@@ -8,7 +8,7 @@
     db ROCK, GROUND ; type
     db 120 ; catch rate
     db 137 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/graveler/front.dimensions"
     db ROCK_HEAD, STURDY     ; abilities

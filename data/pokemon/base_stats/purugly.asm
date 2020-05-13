@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 75 ; catch rate
     db 158 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_75, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/purugly/front.dimensions"
     db THICK_FAT, OWN_TEMPO     ; abilities

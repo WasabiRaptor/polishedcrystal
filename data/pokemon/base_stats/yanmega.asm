@@ -8,7 +8,7 @@
     db BUG, FLYING ; type
     db 30 ; catch rate
     db 180 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/yanmega/front.dimensions"
     db SPEED_BOOST, TINTED_LENS     ; abilities

@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 45 ; catch rate
     db 180 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/porygon2/front.dimensions"
     db TRACE, DOWNLOAD     ; abilities

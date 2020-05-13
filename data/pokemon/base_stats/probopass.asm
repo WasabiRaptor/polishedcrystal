@@ -8,7 +8,7 @@
     db ROCK, STEEL ; type
     db 60 ; catch rate
     db 184 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/probopass/front.dimensions"
     db STURDY, MAGNET_PULL     ; abilities

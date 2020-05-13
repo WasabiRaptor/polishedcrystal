@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 45 ; catch rate
     db 225 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/politoed/front.dimensions"
     db WATER_ABSORB, DAMP     ; abilities

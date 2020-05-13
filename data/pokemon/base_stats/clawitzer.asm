@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 55 ; catch rate
     db 100 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/clawitzer/front.dimensions"
     db MEGA_LAUNCHER, MEGA_LAUNCHER     ; abilities

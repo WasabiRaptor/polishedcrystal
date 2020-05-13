@@ -8,7 +8,7 @@
 	db STEEL, DRAGON ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 6 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/duraludon/front.dimensions"
 	db LIGHT_METAL, HEAVY_METAL     ; abilities

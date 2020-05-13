@@ -6,7 +6,7 @@
 	db GRASS, GRASS ; type
 	db 45 ; catch rate
 	db 255 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/shaymin/front.dimensions"
 	db NATURAL_CURE, NATURAL_CURE	; abilities

@@ -8,7 +8,7 @@
     db PSYCHIC, FLYING ; type
     db 3 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 15 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/lugia/front.dimensions"
     db PRESSURE, PRESSURE     ; abilities

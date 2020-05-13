@@ -8,7 +8,7 @@
     db ICE, WATER ; type
     db 120 ; catch rate
     db 144 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/sealeo/front.dimensions"
     db THICK_FAT, ICE_BODY     ; abilities

@@ -7,7 +7,7 @@
 	db NORMAL, NORMAL ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/pokemon_egg/front.dimensions"
 	db 0, 0	; abilities

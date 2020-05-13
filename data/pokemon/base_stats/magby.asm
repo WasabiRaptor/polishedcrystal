@@ -8,7 +8,7 @@
     db FIRE, FIRE ; type
     db 45 ; catch rate
     db 73 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_25, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/magby/front.dimensions"
     db FLAME_BODY, FLAME_BODY     ; abilities

@@ -8,7 +8,7 @@
     db GRASS, GRASS ; type
     db 120 ; catch rate
     db 149 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/sunflora/front.dimensions"
     db CHLOROPHYLL, SOLAR_POWER     ; abilities

@@ -8,7 +8,7 @@
     db GHOST, GHOST ; type
     db 225 ; catch rate
     db 59 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/shuppet/front.dimensions"
     db INSOMNIA, FRISK     ; abilities

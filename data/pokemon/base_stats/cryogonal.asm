@@ -8,7 +8,7 @@
     db ICE, ICE ; type
     db 25 ; catch rate
     db 180 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/cryogonal/front.dimensions"
     db LEVITATE, LEVITATE     ; abilities

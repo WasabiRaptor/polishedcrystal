@@ -8,7 +8,7 @@
     db ROCK, BUG ; type
     db 45 ; catch rate
     db 71 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_12_5, 6 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/anorith/front.dimensions"
     db BATTLE_ARMOR, BATTLE_ARMOR     ; abilities

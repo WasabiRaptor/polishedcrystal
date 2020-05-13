@@ -8,7 +8,7 @@
     db PSYCHIC, PSYCHIC ; type
     db 100 ; catch rate
     db 140 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_25, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/kadabra/front.dimensions"
     db SYNCHRONIZE, INNER_FOCUS     ; abilities

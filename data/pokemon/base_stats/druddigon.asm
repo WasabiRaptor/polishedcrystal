@@ -8,7 +8,7 @@
     db DRAGON, DRAGON ; type
     db 45 ; catch rate
     db 170 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 6 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/druddigon/front.dimensions"
     db ROUGH_SKIN, SHEER_FORCE     ; abilities

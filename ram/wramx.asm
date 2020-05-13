@@ -585,7 +585,7 @@ wBaseType1:: ds 1
 wBaseType2:: ds 1
 wBaseCatchRate:: ds 1
 wBaseExp:: ds 1
-wBaseItems:: ds 2
+wBaseFieldCapabilities:: ds 2
 wBaseGender::
 wBaseEggSteps:: ds 1
 wBasePicSize:: ds 1

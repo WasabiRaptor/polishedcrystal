@@ -8,7 +8,7 @@
     db ROCK, DRAGON ; type
     db 45 ; catch rate
     db 182 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_12_5, 6 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/tyrantrum/front.dimensions"
     db STRONG_JAW, STRONG_JAW     ; abilities

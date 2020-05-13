@@ -7,7 +7,7 @@
         db ROCK, FLYING ; type
         db 30 ; catch rate
         db 154 ; base exp
-        db NO_ITEM, NO_ITEM ; items
+        dw 0 ; field capabilities
         dn GENDERLESS, 5 ; gender, step cycles to hatch
         INCBIN "gfx/pokemon/minior/front.dimensions"
         db SHIELDS_DOWN, SHIELDS_DOWN     ; abilities

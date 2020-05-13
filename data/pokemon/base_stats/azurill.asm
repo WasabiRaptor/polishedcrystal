@@ -8,7 +8,7 @@
     db NORMAL, FAIRY ; type
     db 150 ; catch rate
     db 38 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_75, 2 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/azurill/front.dimensions"
     db THICK_FAT, HUGE_POWER     ; abilities

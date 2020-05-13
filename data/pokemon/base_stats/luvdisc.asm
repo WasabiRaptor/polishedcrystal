@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 225 ; catch rate
     db 116 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_75, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/luvdisc/front.dimensions"
     db SWIFT_SWIM, SWIFT_SWIM     ; abilities

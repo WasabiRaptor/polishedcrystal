@@ -8,7 +8,7 @@
     db PSYCHIC, FAIRY ; type
     db 3 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/tapu_lele/front.dimensions"
     db PSYCHIC_SURGE, PSYCHIC_SURGE     ; abilities

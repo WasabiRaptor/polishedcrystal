@@ -1,5 +1,5 @@
 	dw 00000 ;national dex no
-	
+
 	db 100, 100, 100, 100, 100, 100
     evs  0,   0,   0,   0,   0,   0
 	;   hp  atk  def  spd  sat  sdf
@@ -7,7 +7,7 @@
 	db NORMAL, NORMAL ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/aa_dummy/front.dimensions"
 	db 0, 0	; abilities

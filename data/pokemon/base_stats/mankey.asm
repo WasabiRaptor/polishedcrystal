@@ -8,7 +8,7 @@
     db FIGHTING, FIGHTING ; type
     db 190 ; catch rate
     db 61 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/mankey/front.dimensions"
     db VITAL_SPIRIT, ANGER_POINT     ; abilities

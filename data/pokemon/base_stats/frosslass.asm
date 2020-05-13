@@ -6,7 +6,7 @@
 	db ICE, GHOST ; type
 	db 75 ; catch rate
 	db 168 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn ALL_FEMALE, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/froslass/front.dimensions"
 	db SNOW_CLOAK, SNOW_CLOAK	; abilities
@@ -17,4 +17,3 @@
 	; tm/hm learnset
 	tmhm
 	; end
-	

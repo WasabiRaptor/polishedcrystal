@@ -8,7 +8,7 @@
     db NORMAL, NORMAL ; type
     db 30 ; catch rate
     db 255 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/chansey/front.dimensions"
     db NATURAL_CURE, SERENE_GRACE     ; abilities

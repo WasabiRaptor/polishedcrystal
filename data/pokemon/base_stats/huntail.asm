@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 60 ; catch rate
     db 170 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/huntail/front.dimensions"
     db SWIFT_SWIM, SWIFT_SWIM     ; abilities

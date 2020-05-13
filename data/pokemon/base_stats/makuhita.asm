@@ -8,7 +8,7 @@
     db FIGHTING, FIGHTING ; type
     db 180 ; catch rate
     db 47 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_25, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/makuhita/front.dimensions"
     db THICK_FAT, GUTS     ; abilities

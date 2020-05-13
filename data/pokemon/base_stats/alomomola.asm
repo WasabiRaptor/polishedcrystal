@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 75 ; catch rate
     db 165 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/alomomola/front.dimensions"
     db HEALER, HYDRATION     ; abilities

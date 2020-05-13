@@ -8,7 +8,7 @@
     db GRASS, GRASS ; type
     db 190 ; catch rate
     db 56 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn ALL_FEMALE, 4 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/petilil/front.dimensions"
     db CHLOROPHYLL, OWN_TEMPO     ; abilities

@@ -8,7 +8,7 @@
     db WATER, WATER ; type
     db 30 ; catch rate
     db 216 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn GENDERLESS, 8 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/phione/front.dimensions"
     db HYDRATION, HYDRATION     ; abilities

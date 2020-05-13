@@ -8,7 +8,7 @@
     db DARK, DARK ; type
     db 30 ; catch rate
     db 163 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 5 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/absol/front.dimensions"
     db PRESSURE, SUPER_LUCK     ; abilities

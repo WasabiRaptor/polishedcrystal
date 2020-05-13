@@ -6,7 +6,7 @@
 	db STEEL, STEEL ; type
 	db 255 ; catch rate
 	db 69 ; base exp
-	db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
 	dn FEMALE_50, 3 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/meowth_alola/front.dimensions"
 	db PICKUP, TOUGH_CLAWS	; abilities

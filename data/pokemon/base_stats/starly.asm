@@ -8,7 +8,7 @@
     db NORMAL, FLYING ; type
     db 255 ; catch rate
     db 49 ; base exp
-    db NO_ITEM, NO_ITEM ; items
+	dw 0 ; field capabilities
     dn FEMALE_50, 3 ; gender, step cycles to hatch
     INCBIN "gfx/pokemon/starly/front.dimensions"
     db KEEN_EYE, KEEN_EYE     ; abilities
