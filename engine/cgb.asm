@@ -231,6 +231,16 @@ _CGB_FinishBattleScreenLayout: ; 8e23
 	ld a, $5
 	call FarCopyWRAM
 
+	hlcoord 10, 7, wAttrMap ; player name
+	lb bc, 1, PKMN_TILE_NAME_LENGTH
+	ld a, 7 | TILE_BANK
+	call FillBoxCGB
+
+	hlcoord 1, 0, wAttrMap ; enemy name
+	lb bc, 1, PKMN_TILE_NAME_LENGTH
+	ld a, 7 | TILE_BANK
+	call FillBoxCGB
+
 	jp ApplyAttrMap
 ; 8e85
 

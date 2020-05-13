@@ -4857,16 +4857,12 @@ CheckDanger: ; 3df9e
 ; 3dfbf
 
 PrintPlayerHUD: ; 3dfbf
-	VWTextStart $bc
+	VWTextStart2 $c0
 	ld de, wBattleMonNick
-	hlcoord 11, 7
-	ld a, [wBattleMonNick + PKMN_NAME_LENGTH - 2]
-	cp "@"
-	jr z, .short_name
-	dec hl ; hlcoord 10, 7
-.short_name
+	hlcoord 10, 7
 	call PlaceString
-
+	xor a
+	ldh [rVBK], a
 	push bc
 
 	ld a, [wCurBattleMon]
@@ -4953,9 +4949,13 @@ DrawEnemyHUD: ; 3e043
 	ld [wCurPartyForm], a
 	ld [wCurForm], a
 	call GetBaseData ;form is known
+
+	VWTextStart2 $d0
 	ld de, wEnemyMonNick
 	hlcoord 1, 0
 	call PlaceString
+	xor a
+	ldh [rVBK], a
 	ld h, b
 	ld l, c
 	dec hl
@@ -8608,11 +8608,8 @@ DropPlayerSub: ; 3f447
 	and a
 	ld hl, BattleAnimCmd_MinimizeOpp
 	jr nz, GetBackpic_DoAnim
-	ld a, [wCurPartyGroup]
-	push af
-	ld a, [wCurPartySpecies]
-	push af
 	ld a, [wBattleMonGroup]
+	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
 	push af
 	ld a, [wBattleMonSpecies]
@@ -8641,11 +8638,8 @@ DropPlayerSub: ; 3f447
 	pop af
 	ld [wCurGroup], a
 	ld [wBattleMonGroup], a
-	call GetBaseData; form is known
-	pop af
-	ld [wCurPartySpecies], a
-	pop af
 	ld [wCurPartyGroup], a
+	call GetBaseData; form is known
 	ret
 ; 3f46f
 
@@ -8673,11 +8667,8 @@ DropEnemySub: ; 3f486
 	ld hl, BattleAnimCmd_MinimizeOpp
 	jr nz, GetFrontpic_DoAnim
 
-	ld a, [wCurPartyGroup]
-	push af
-	ld a, [wCurPartySpecies]
-	push af
 	ld a, [wEnemyMonGroup]
+	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
 	push af
 	ld a, [wEnemyMonSpecies]
@@ -8706,12 +8697,9 @@ DropEnemySub: ; 3f486
 	ld [wEnemyMonSpecies], a
 	pop af
 	ld [wEnemyMonGroup], a
+	ld [wCurPartyGroup], a
 	ld [wCurGroup], a
 	call GetBaseData; form is known
-	pop af
-	ld [wCurPartySpecies], a
-	pop af
-	ld [wCurPartyGroup], a
 	ret
 ; 3f4b4
 
