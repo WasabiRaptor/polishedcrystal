@@ -63,7 +63,7 @@ AnimateFrontpic:
 	farcall HDMATransferTileMapToWRAMBank3
 	ldh a, [hDEDCryFlag]
 	and a
-	;call nz, _PlayCry
+	call nz, _PlayCry
 	ldh a, [hRunPicAnim]
 	and a
 	jr nz, .loop
@@ -87,6 +87,13 @@ SetUpPokeAnim::
 	push af
 	ld a, BANK(wPokeAnimSceneIndex)
 	ldh [rSVBK], a
+	ld a, [wPokeAnimGroup]
+	ld [wCurGroup], a
+	ld a, [wPokeAnimForm]
+	ld [wCurForm], a
+	ld a, [wPokeAnimSpecies]
+	ld [wCurSpecies], a
+
 	ld a, [wPokeAnimSceneIndex]
 	ld c, a
 	ld b, 0
@@ -193,46 +200,34 @@ PokeAnim_Finish: ; d0171
 ; d017a
 
 PokeAnim_Cry:
-	ld a, [wPokeAnimGroup]
-	ld [wCurGroup], a
-	ld a, [wPokeAnimForm]
-	ld [wCurForm], a
 	ld a, [wPokeAnimSpecies]
 	call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	;call _PlayCry
+	call _PlayCry
 	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_CryNoWait:
-	ld a, [wPokeAnimGroup]
-	ld [wCurGroup], a
-	ld a, [wPokeAnimForm]
-	ld [wCurForm], a
 	ld a, [wPokeAnimSpecies]
 	call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	;call PlayCry2
-	jp PokeAnim_IncrementSceneIndex
+	call PlayCry2
+	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_StereoCry:
 	ld a, $f
 	ld [wCryTracks], a
-	ld a, [wPokeAnimGroup]
-	ld [wCurGroup], a
-	ld a, [wPokeAnimForm]
-	ld [wCurForm], a
 	ld a, [wPokeAnimSpecies]
 	call LoadCryHeader
 	ld a, [wPokeAnimSpecies]
 	jr c, PokeAnim_DedCry
-	;call PlayStereoCry2
-	jp PokeAnim_IncrementSceneIndex
+	call PlayStereoCry2
+	jr PokeAnim_IncrementSceneIndex
 ; d01a9
 PokeAnim_DedCry:
-	;ldh [hDEDCryFlag], a
-	jp PokeAnim_IncrementSceneIndex
+	ldh [hDEDCryFlag], a
+	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_DeinitFrames: ; d01a9
 	ldh a, [rSVBK]

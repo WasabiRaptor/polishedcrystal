@@ -2365,6 +2365,9 @@ FaintYourPokemon: ; 3cef1
 	ld [wCryTracks], a
 	ld a, [wBattleMonGroup]
 	ld [wCurGroup], a
+	ld a, [wBattleMonForm]
+	and FORM_MASK
+	ld [wCurForm], a
 	ld a, [wBattleMonSpecies]
 	call PlayFaintingCry
 	ld de, SFX_KINESIS
@@ -2383,6 +2386,9 @@ FaintEnemyPokemon: ; 3cf14
 	ld [wCryTracks], a
 	ld a, [wEnemyMonGroup]
 	ld [wCurGroup], a
+	ld a, [wEnemyMonForm]
+	and FORM_MASK
+	ld [wCurForm], a
 	ld a, [wEnemyMonSpecies]
 	call PlayFaintingCry
 	ld de, SFX_KINESIS

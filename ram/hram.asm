@@ -5,9 +5,11 @@ hROMBankBackup     EQU $ff8a
 hBuffer            EQU $ff8b
 hLYOverrideStackCopyAmount EQU $ff8c
 
-hRTCDayHi          EQU $ff8d
-hRTCDayLo          EQU $ff8e
-hRTCHours          EQU $ff8f
+hDEDCryFlag         EQU $ff8d
+hRunPicAnim         EQU $ff8e
+
+hHighRomBank       EQU $ff8f
+
 hRTCMinutes        EQU $ff90
 hRTCSeconds        EQU $ff91
 
@@ -166,10 +168,6 @@ hRequestedVTileSource  EQU $fff5
 
 hTmpd              EQU $fff7
 hTmpe              EQU $fff8
-
-hDEDCryFlag     EQU $fff7
-hRunPicAnim     EQU $fff8
-
 
 hFastMusicUpdate   EQU $fff9
 

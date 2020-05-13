@@ -18,6 +18,9 @@ VBlank::
 
 	ldh a, [hROMBank]
 	ldh [hROMBankBackup], a
+	xor a
+	ld [HighMBC5RomBank], a
+
 
 	ldh a, [hVBlank]
 	cp 7
@@ -51,6 +54,9 @@ VBlank::
 
 	ldh a, [hROMBankBackup]
 	rst Bankswitch
+
+	ldh a, [hHighRomBank]
+	ld [HighMBC5RomBank], a
 
 	pop hl
 	pop de

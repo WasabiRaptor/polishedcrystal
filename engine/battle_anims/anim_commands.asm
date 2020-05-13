@@ -1337,6 +1337,7 @@ BattleAnimCmd_Cry: ; cc807 (33:4807)
 	ld a, [hli]
 	ld [wCurGroup], a
 	ld a, [hl]
+	ld [wCurSpecies], a
 	ld b, a
 	push bc
 	call LoadCryHeader
