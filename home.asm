@@ -1225,5 +1225,4 @@ dbwArray::
 INCLUDE "home/ded.asm"
 
 FollowerInteractScript::
-	farscall _FollowerInteractScript
-	end
+	farjump _FollowerInteractScript
