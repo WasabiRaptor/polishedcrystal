@@ -69,7 +69,7 @@ GivePokemonScript:
 	givepoke SQUIRTLE, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	givepoke TOTODILE, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	;givepoke TURTWIG, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
-	;givepoke SNIVY, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
+	givepoke SNIVY, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	;givepoke CHESPIN, 5, NO_ITEM, 0, POKE_BALL;, SHINY_MASK | ABILITY_1, $2345, AlolaName, IndigoOT
 	closetext
 	end

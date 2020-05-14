@@ -190,8 +190,8 @@ FieldMovePokepicScript:
 	copybytetovar wBuffer6
 	refreshscreen
 	;pokepic 0, 1
-	;cry 0
-	;waitsfx
+	cry 0
+	waitsfx
 	closepokepic
 	reloadmappart
 	end

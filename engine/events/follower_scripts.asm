@@ -14,6 +14,37 @@ EndFollowerInteract::
     end
 
 FollowerCommandMenu:
+	ld a, [wFollowerStatus]
+	bit FOLLOWER_ENABLE, a
+	ret z
+	and TEMP_FOLLOWER_MASK
+	jr z, .no_Forced_Follower
+	rlca
+	swap a
+	jr .got_follower
+.no_Forced_Follower
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	ret z
+.got_follower
+	dec a
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	ld a, [wCurGroup]
+	and a
+    ret z
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
+	farcall SkipPokemonNames
+	ld d, h
+	ld e, l
+    call PrintNamePlate
+    call ApplyAttrAndTilemapInVBlank
+
+    ld a, [wCurSpecies]
+    call PlayCry
+
     ld hl, FollowerCommandMenuDataHeader
 	call LoadMenuDataHeader
 	call InitVariableWidthText
