@@ -847,12 +847,6 @@ UnknownText_0x1c5d50::
 	line "on an Egg."
 	prompt
 
-UnknownText_0x1c5d6e::
-	text "Oak: <PLAYER>!"
-	line "This isn't the"
-	cont "time to use that!"
-	prompt
-
 UnknownText_0x1c5db6::
 	text "It won't have any"
 	line "effect."

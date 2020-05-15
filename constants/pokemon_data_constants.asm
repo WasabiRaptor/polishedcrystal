@@ -22,6 +22,7 @@ BASEMON_GROWTH_RATE   EQUS "(wBaseGrowthRate - wCurBaseData)"
 BASEMON_EGG_GROUPS    EQUS "(wBaseEggGroups - wCurBaseData)"
 BASEMON_EV_YIELD_1    EQUS "(wBaseEVYield1 - wCurBaseData)"
 BASEMON_EV_YIELD_2    EQUS "(wBaseEVYield2 - wCurBaseData)"
+BASEMON_NUM_PORTRAITS EQUS "(wBaseNumPortraitEmotes - wCurBaseData)"
 BASEMON_TMHM          EQUS "(wBaseTMHM - wCurBaseData)"
 BASEMON_STRUCT_LENGTH EQUS "(wCurBaseDataEnd - wCurBaseData)"
 
@@ -95,6 +96,22 @@ GENDERLESS EQU %1111
 
 EGG_GROUP_1_MASK EQU %11110000
 EGG_GROUP_2_MASK EQU %00001111
+
+; Field Capalility constants
+; for now, all the ones that can be done from the menu should be within the first 8 listed
+	const_def 0
+	shift_const FIELD_FLY
+	shift_const FIELD_DIG
+	shift_const FIELD_TELEPORT
+	shift_const FIELD_HEAL
+	shift_const FIELD_SWEET_SCENT
+	shift_const FIELD_SURF
+	shift_const FIELD_WATERFALL
+	shift_const FIELD_WHIRLPOOL
+	shift_const FIELD_STRENGTH
+	shift_const FIELD_CUT
+	shift_const FIELD_FLASH
+
 
 ; pokemon structure in RAM
 MON_GROUP                EQUS "(wPartyMon1Group - wPartyMon1)"
@@ -170,22 +187,6 @@ CAUGHTBALL_MASK   EQU %00011111
 ; gender values
 MALE   EQU %00000000
 FEMALE EQU %10000000
-
-; Field Capalility constants
-; for now, all the ones that can be done from the menu should be within the first 8 listed
-	const_def 0
-	shift_const FIELD_FLY
-	shift_const FIELD_DIG
-	shift_const FIELD_TELEPORT
-	shift_const FIELD_HEAL
-	shift_const FIELD_SWEET_SCENT
-	shift_const FIELD_SURF
-	shift_const FIELD_WATERFALL
-	shift_const FIELD_WHIRLPOOL
-	shift_const FIELD_STRENGTH
-	shift_const FIELD_CUT
-	shift_const FIELD_FLASH
-
 
 
 BATTLEMON_STRUCT_LENGTH EQUS "(wBattleMonStructEnd - wBattleMonSpecies)"

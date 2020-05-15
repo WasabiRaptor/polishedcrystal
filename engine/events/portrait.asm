@@ -1,7 +1,15 @@
 Portrait::
 	ld [wScriptVar], a
+	ld b, a
+	ld a, [wBaseNumPortraitEmotes]
+	cp b
+	jr c, .emote_ok
+	xor a ; if the pokemon doesn't have the number of emotes needed for the one requested, use the default neutral one
+	ld [wScriptVar], a
+.emote_ok
 	call CheckIfPortraitWouldKillObjects
 	ret c
+
 
 	ld hl, PortraitMenuHeader
 	call CopyMenuDataHeader

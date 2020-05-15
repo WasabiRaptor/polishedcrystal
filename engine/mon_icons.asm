@@ -369,7 +369,7 @@ endr
 	ld a, [wCurIcon]
 	ld [wCurSpecies], a
 
-	farcall GetPokemonOverworldSprite
+	farcall GetPokemonOrPlayerOverworldSprite
 	pop hl ;3
 	ld c, 4
 	push bc ;4

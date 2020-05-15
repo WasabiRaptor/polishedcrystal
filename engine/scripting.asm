@@ -2996,6 +2996,7 @@ Script_portrait:
 	ld [wCurSpecies], a
 	call GetScriptByte
 	ld [wCurForm], a
+	call GetBaseData
 	call GetScriptByte
 	farjp Portrait
 

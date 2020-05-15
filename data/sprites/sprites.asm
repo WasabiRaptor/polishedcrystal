@@ -1,3 +1,20 @@
+
+
+PlayerSpriteTable:
+	dw ChrisOverworldSprites
+	dw KrisOverworldSprites
+
+ChrisOverworldSprites:
+	dba ChrisSpriteGFX
+	dba ChrisBikeSpriteGFX
+	dba ChrisSurfSpriteGFX
+
+KrisOverworldSprites:
+	dba KrisSpriteGFX
+	dba KrisBikeSpriteGFX
+	dba KrisSurfSpriteGFX
+
+
 overworld_sprite: MACRO
 ; pointer, bank, type, palette
 	dab \1

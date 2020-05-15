@@ -305,37 +305,70 @@ PlayerPaletteOptions:
 INCLUDE "gfx/overworld/npc_sprites.pal" ;duplicating this for now
 
 LoadSpecialMapOBPalette:
+
+	ld a, [wPlayerOverworldStatus]
+	bit 1, a ; is player riding a pokemon?
+	jr nz, .riding_temp_follower
+	bit 0, a ; is player a pokemon themselves?
+	jr nz, .is_a_pokemon
+
 	ld hl, PlayerPaletteOptions
 	ld a, [wTimeOfDayPal]
 	ld bc, 8 palettes
 	rst AddNTimes
-	;ld a, [wPlayerOverworldPalette]
-	ld a, [wPlayerOverworldSprite]
+	ld a, [wPlayerOverworldPalette]
 	ld bc, 1 palettes
 	rst AddNTimes
 
 	ld de, wUnknOBPals
 	ld a, BANK(wUnknOBPals)
 	call FarCopyWRAM
+	jr .got_player_pal
 
+.riding_temp_follower
+	ld a, [wFollowerStatus]
+	and TEMP_FOLLOWER_MASK
+	swap a
+	rlca
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	jr .get_player_mon_pal
+
+.is_a_pokemon
+	ld hl, wPlayerMonGroup
+	predef PokemonToGroupSpeciesAndForm
+
+.get_player_mon_pal
+	call OWCheckShininess
+	ld de, wUnknOBPals
+	ld a, [wTimeOfDayPal]
+	call GetRelevantMonOverworldPalettes
+
+.got_player_pal
 	ld a, [wFollowerStatus]
 	bit FOLLOWER_ENABLE, a
 	ret z
-	and TEMP_FOLLOWER_MASK
-	jr z, .no_Forced_Follower
-	rlca
-	swap a
-	jr .got_follower
-.no_Forced_Follower
-	ld a, [wFollowerStatus]
 	and FOLLOWER_MASK
-.got_follower
 	ret z
 	dec a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
 	predef GetPartyParamLocation
+	call OWCheckShininess
 
 	ld de, wUnknOBPals palette 1
 	ld a, [wTimeOfDayPal]
 	jp GetRelevantMonOverworldPalettes
+
+OWCheckShininess:
+	ld bc, MON_SHINY - MON_GROUP
+	add hl, bc
+	bit MON_SHINY_F, [hl]
+	jr z, .NotShiny
+	scf
+	ret
+
+.NotShiny:
+	and a
+	ret

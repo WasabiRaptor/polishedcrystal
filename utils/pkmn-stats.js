@@ -166,6 +166,7 @@ pkmndata.forEach((curpkmn, index) => {
     db ${(curpkmn.abilities[2] || curpkmn.abilities[0]).replace(/-/g,"_").toUpperCase()}    ; hidden ability
     db ${curpkmn.growth_rate} ; growth rate
     dn ${curpkmn.egg_groups.join(", ")} ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

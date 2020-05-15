@@ -19,79 +19,15 @@ _ReplaceKrisSprite:: ; 14135
 
 GetPlayerSprite: ; 14183
 ; Get Chris or Kris's sprite.
-	ld hl, .Chris
-	ld a, [wPlayerSpriteSetupFlags]
-	bit 2, a
-	jr nz, .go
-	ld a, [wPlayerOverworldSprite]
-	bit 0, a
-	jr z, .go
-	ld hl, .Kris
-
-.go
+	ld hl, wPlayerOverworldStatus
 	ld a, [wPlayerState]
-	ld c, a
-.loop
-	ld a, [hli]
-	cp c
-	jr z, .good
-	inc hl
-	inc hl
-	cp $ff
-	jr nz, .loop
-
-; Any player state not in the array defaults to Chris's sprite.
-	xor a ; ld a, PLAYER_NORMAL
-	ld [wPlayerState], a
-	ld a, SPRITE_CHRIS
-	ld b, SPRITE_FOLLOWER
-	ld c, 0
-	ld d, 1
-	jr .finish
-
-.good
-	ld a, [hli]
-	ld b, [hl]
-	cp SPRITE_FOLLOWER
-	ld c, 0
-	ld d, 1
-	jr nz, .finish
-	ld c, 1
-	ld d, 0
-
-.finish
-	ld [wPlayerSprite], a
-	ld [wPlayerObjectSprite], a
-	ld a, b
-	ld [wFollowerSprite], a
-	ld [wFollowerObjectSprite], a
-	ld a, c
-	ld [wPlayerPalette], a
-	swap a
-	or PERSONTYPE_SCRIPT | (1 << 7)
-	ld [wPlayerObjectColor], a
-	ld a, d
-	ld [wFollowerPalette], a
-	swap a
-	or PERSONTYPE_SCRIPT | (1 << 7)
-	ld [wFollowerObjectColor], a
+	cp PLAYER_BIKE
+	jr nz, .not_biking
+	set 2, [hl]
 	ret
-
-.Chris:
-	db PLAYER_NORMAL,    SPRITE_CHRIS, 				SPRITE_FOLLOWER
-	db PLAYER_BIKE,      SPRITE_CHRIS_BIKE, 		SPRITE_FOLLOWER
-	db PLAYER_SURF,      SPRITE_FOLLOWER, 			SPRITE_CHRIS_SURF
-	db PLAYER_SURF_PIKA, SPRITE_SURFING_PIKACHU, 	SPRITE_CHRIS_SURF
-	db $ff
-
-.Kris:
-	db PLAYER_NORMAL,    SPRITE_KRIS, 				SPRITE_FOLLOWER
-	db PLAYER_BIKE,      SPRITE_KRIS_BIKE, 			SPRITE_FOLLOWER
-	db PLAYER_SURF,      SPRITE_FOLLOWER, 			SPRITE_KRIS_SURF
-	db PLAYER_SURF_PIKA, SPRITE_SURFING_PIKACHU, 	SPRITE_KRIS_SURF
-	db $ff
-; 141c9
-
+.not_biking
+	res 2, [hl]
+	ret
 
 MapCallbackSprites_LoadUsedSpritesGFX: ; 14209
 	ld a, MAPCALLBACK_SPRITES
@@ -184,6 +120,8 @@ GetSprite:: ; 1423c
 
 	cp SPRITE_FOLLOWER
 	jr z, GetFollowerSpriteAddresses
+	cp SPRITE_PLAYER
+	jr z, GetPlayerSpriteAddresses
 NoFollower:
 	ld hl, SpriteHeaders ; address
 	dec a
@@ -210,20 +148,57 @@ NoFollower:
 	ld c, 16
 	ret
 ; 14259
+GetPlayerSpriteAddresses:
+	ld a, [wPlayerOverworldStatus]
+	bit 1, a ; is player riding a pokemon?
+	jr nz, .riding_temp_follower
+	bit 0, a ; is player a pokemon themselves?
+	jr nz, .is_a_pokemon
+	bit 2, a ; is the player biking or walking?
+
+	ld d, BANK(PlayerSpriteTable)
+	ld hl, PlayerSpriteTable
+	ld a, 1
+	jr nz, .biking
+	xor a
+.biking
+	ld [wCurForm], a
+	ld a, [wPlayerOverworldSprite]
+	jr GetPlayerOverworldSprite
+
+.is_a_pokemon
+	ld hl, wPlayerMonGroup
+	predef PokemonToGroupSpeciesAndForm
+	jr GetPokemonOrPlayerOverworldSprite
+
+.riding_temp_follower
+	ld a, [wFollowerStatus]
+	and TEMP_FOLLOWER_MASK
+	swap a
+	rlca
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	ld a, [wCurGroup]
+	and a
+	jr z, no_follower
+	jr GetPokemonOrPlayerOverworldSprite
+
 GetFollowerSpriteAddresses:
 	ld a, [wFollowerStatus]
 	bit FOLLOWER_ENABLE, a
 	jr z, no_follower
 	and TEMP_FOLLOWER_MASK
-	jr z, .no_Forced_Follower
+	jr z, .no_temp_follower
 	swap a
 	rlca
-	jr .got_follower
-.no_Forced_Follower
+	ld b, a
+.no_temp_follower
 	ld a, [wFollowerStatus]
 	and FOLLOWER_MASK
 	jr z, no_follower
-.got_follower
+	cp b ; if the player is riding the temp follower, we should not have them be duplicated
+	jr z, no_follower
 	dec a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
@@ -232,7 +207,7 @@ GetFollowerSpriteAddresses:
 	and a
 	jr z, no_follower
 	;fallthrough
-GetPokemonOverworldSprite::
+GetPokemonOrPlayerOverworldSprite::
 	ld a, [wCurGroup]
 	ld hl, RegionalOverworldSpriteTable
 	ld bc, 3
@@ -246,6 +221,7 @@ GetPokemonOverworldSprite::
 	;we now have the pointer table for that region
 	ld a, [wCurSpecies]
 	dec a
+GetPlayerOverworldSprite:
 	ld b, 0
 	ld c, a
 	add hl, bc

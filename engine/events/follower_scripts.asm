@@ -56,13 +56,10 @@ PokemonPartyCommandMenu::
     xor a
     ld [wBuffer1], a ; intit this value as it'll be checked later
 
-    ld a, [wBaseFieldCapabilities]
-    and FIELD_FLY | FIELD_DIG | FIELD_TELEPORT | FIELD_HEAL
-    ld hl, FollowerPetCommandMenuDataHeader
-    jr z, .Got_menu
     ld bc, 0
     ld de, wStringBuffer1
 
+    ld a, [wBaseFieldCapabilities]
     ld hl, FlyString
     and FIELD_FLY
     call nz, AddToFollowerMenu
@@ -91,13 +88,16 @@ PokemonPartyCommandMenu::
     ld hl, StayString
     call AddToFollowerMenu
 
-.fill_remaining_slots_with_pet
     ld hl, PlayString
+    call AddToFollowerMenu
+
+.fill_remaining_slots_with_no
+    ld hl, NoActionString
     call AddToFollowerMenu
 
     ld a, c
     cp 8
-    jr c, .fill_remaining_slots_with_pet
+    jr c, .fill_remaining_slots_with_no
 
     ld hl, FollowerCommandMenuDataHeader
 .Got_menu
@@ -115,6 +115,10 @@ PokemonPartyCommandMenu::
     add hl, bc
     ld a, [hl]
 	ld [wScriptVar], a ; output menu action
+    cp NUM_FOLLOWER_WITHIN_MENU_ACTIONS + 1
+    ret nc
+    ld hl, FollowerCommandMenuActionTable
+	rst JumpTable
     ret
 
 .pressed_b
@@ -139,7 +143,22 @@ AddToFollowerMenu:
     inc c
     ret
 
+FollowerCommandMenuDataHeader:
+	db BACKUP_TILES ; flags
+	db 13, 0 ; start coords
+	db 17, 19 ; end coords
+	dw .MenuData2
+	db 1 ; default option
 
+.MenuData2:
+	db MENU2_ONE_X | MENU2_ONE_Y ; flags
+	dn 2, 4 ; rows, columns
+	db 4 ; spacing
+	dba wStringBuffer1
+	dbw BANK(.MenuData2), 0
+
+NoActionString:
+    db "-@", 0
 
 FlyString:
     db "Fly@", FOLLOWER_MENU_ACTION_FLY
@@ -165,19 +184,45 @@ LeadString:
 StayString:
     db "Stay@", FOLLOWER_MENU_ACTION_STAY
 
-FollowerCommandMenuDataHeader:
-	db BACKUP_TILES ; flags
-	db 13, 0 ; start coords
-	db 17, 19 ; end coords
-	dw .MenuData2
-	db 1 ; default option
+FollowerCommandMenuActionTable:
+    dw NoFollowerMenuAction
+    dw PlayFollowerMenuAction
+    dw FlyFollowerMenuAction
+    dw DigFollowerMenuAction
+    dw TeleportFollowerMenuAction
+    dw HealFollowerMenuAction
+    dw LeadFollowerMenuAction
+    dw SwitchFollowerMenuAction
+    dw StayFollowerMenuAction
 
-.MenuData2:
-	db MENU2_ONE_X | MENU2_ONE_Y ; flags
-	dn 2, 4 ; rows, columns
-	db 4 ; spacing
-	dba wStringBuffer1
-	dbw BANK(.MenuData2), 0
+NoFollowerMenuAction:
+    scf
+    ret
+
+PlayFollowerMenuAction:
+    ret
+
+FlyFollowerMenuAction:
+    ret
+
+DigFollowerMenuAction:
+    ret
+
+TeleportFollowerMenuAction:
+    ret
+
+HealFollowerMenuAction:
+    ret
+
+LeadFollowerMenuAction:
+    ret
+
+SwitchFollowerMenuAction:
+    ret
+
+StayFollowerMenuAction:
+    ret
+
 
 FollowerPetCommandMenuDataHeader:
 	db BACKUP_TILES ; flags

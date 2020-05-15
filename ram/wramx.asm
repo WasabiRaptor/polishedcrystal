@@ -594,6 +594,7 @@ wBaseAbility2:: ds 1
 wBaseHiddenAbility:: ds 1
 wBaseGrowthRate:: ds 1
 wBaseEggGroups:: ds 1
+wBaseNumPortraitEmotes:: ds 1
 wBaseTMHM:: flag_array NUM_TMHMS
 wCurBaseDataEnd::
 
@@ -726,6 +727,13 @@ wPlayerID:: ds 2
 
 wPlayerOverworldSprite::	ds 1
 wPlayerOverworldPalette::	ds 1
+
+wPlayerOverworldStatus:: ds 1
+; 0 - player is a pokemon if set
+; 1 - player is riding temp follower if set
+; 2 - Biking
+
+wPlayerMon:: box_struct wPlayerMon
 
 wPlayerName:: ds PLAYER_NAME_LENGTH
 wRivalName:: ds PLAYER_NAME_LENGTH
@@ -873,20 +881,21 @@ wTMsHMsEnd::
 wKeyItems:: flag_array NUM_KEY_ITEMS
 wKeyItemsEnd::
 
+; I'm probably never going to end up doing high byte items, and even if I do, I'd probably be moving the inventory to another wram bank
 wNumItems:: ds 1
-wItems:: ds MAX_ITEMS * 3 + 1
+wItems:: ds MAX_ITEMS * 2 + 1
 wItemsEnd::
 wNumMedicine:: ds 1
-wMedicine:: ds MAX_MEDICINE * 3 + 1
+wMedicine:: ds MAX_MEDICINE * 2 + 1
 wMedicineEnd::
 wNumBalls:: ds 1
-wBalls:: ds MAX_BALLS * 3 + 1
+wBalls:: ds MAX_BALLS * 2 + 1
 wBallsEnd::
 wNumBerries:: ds 1
-wBerries:: ds MAX_BERRIES * 3 + 1
+wBerries:: ds MAX_BERRIES * 2 + 1
 wBerriesEnd::
 wNumPCItems:: ds 1
-wPCItems:: ds MAX_PC_ITEMS * 3 + 1
+wPCItems:: ds MAX_PC_ITEMS * 2 + 1
 wPCItemsEnd::
 
 wApricorns:: ds NUM_APRICORNS

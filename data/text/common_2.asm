@@ -508,10 +508,8 @@ UnknownText_0x1c0bd8::
 	text "(s)."
 	prompt
 
-UnknownText_0x1c0bee::
-	text "Oak: <PLAYER>!"
-	line "This isn't the"
-	cont "time to use that!"
+Text_ICantUseThatNow::
+	text "I can't use that right now"
 	prompt
 
 Text_YouDontHaveAPkmn::
@@ -1100,12 +1098,6 @@ UnknownText_0x1c1adf::
 	line "tant to toss out!"
 	prompt
 
-UnknownText_0x1c1b03::
-	text "Oak: <PLAYER>!"
-	line "This isn't the"
-	cont "time to use that!"
-	done
-
 UnknownText_0x1c1b2c::
 	text "Took @"
 	text_from_ram wMonOrItemNameBuffer
@@ -1305,7 +1297,7 @@ SixthDayText::
 	line "Sixth Day…"
 	para "48 hours remain…"
 	done
-	
+
 SeventhDayText::
 	text "Dawn of the"
 	line "Final Day…"
@@ -1331,7 +1323,7 @@ ItsRightNearText::
 	text "It's right near!"
 	line "It's gusting hard!"
 	done
-	
+
 EndOfCycleText::
 	text "You can keep"
 	line "them safe..."

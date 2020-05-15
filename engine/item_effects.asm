@@ -2977,7 +2977,7 @@ CantUseOnEggText: ; 0xf810
 
 IsntTheTimeText: ; 0xf815
 	; OAK:  ! This isn't the time to use that!
-	text_jump UnknownText_0x1c5d6e
+	text_jump Text_ICantUseThatNow
 	db "@"
 ; 0xf81a
 

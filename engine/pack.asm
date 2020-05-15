@@ -1702,7 +1702,7 @@ Text_ThrewAway: ; 0x10aee
 
 Text_ThisIsntTheTime: ; 0x10af3
 	; OAK:  ! This isn't the time to use that!
-	text_jump UnknownText_0x1c0bee
+	text_jump Text_ICantUseThatNow
 	db "@"
 ; 0x10af8
 

@@ -62,11 +62,17 @@ CheckBadge: ; c731
 	db "@"
 
 RemoveForcedFollower:
+	ld hl, wPlayerOverworldStatus
+	res 1, [hl] ; player is no longer riding a pokemon
+
 	xor a
 	ld b, a
 	jr SetTempFollower
 
 ForceFollower:
+	ld hl, wPlayerOverworldStatus
+	set 1, [hl] ; player is riding a pokemon
+
 	ld a, [wCurPartyMon]
 	inc a
 	;moving the bits three to the left by swaping the nybbles and then rotating right, takes less cycles
@@ -1858,6 +1864,9 @@ BikeFunction: ; d0b3
 .TryBike: ; d0bc
 	call .CheckEnvironment
 	jr c, .CannotUseBike
+	ld a, [wPlayerOverworldStatus]
+	and %11 ; player is a pokemon or is riding a pokemon
+	jr nz, .CannotUseBike
 	ld a, [wPlayerState]
 	and a ; cp PLAYER_NORMAL
 	jr z, .GetOnBike

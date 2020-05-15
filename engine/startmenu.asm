@@ -657,7 +657,7 @@ CantUseItem: ; 12a60
 ; 12a67
 
 CantUseItemText: ; 12a67
-	text_jump UnknownText_0x1c1b03
+	text_jump Text_ICantUseThatNow
 	db "@"
 ; 12a6c
 
