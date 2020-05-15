@@ -8,8 +8,8 @@
 	db PSYCHIC, PSYCHIC ; type
 	db 50 ; catch rate
 	db 200 ; base exp
-	dw 0 ; field capabilities
-	dn FEMALE_50, 15 ; gender, step cycles to hatch
+	dw $FFFF ; field capabilities
+	dn GENDERLESS, 15 ; gender, step cycles to hatch
 	INCBIN "gfx/pokemon/mew/front.dimensions"
 	db SYNCHRONIZE, SYNCHRONIZE     ; abilities
 	db SYNCHRONIZE    ; hidden ability

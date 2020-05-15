@@ -330,6 +330,7 @@ LoadSpecialMapOBPalette:
 	and TEMP_FOLLOWER_MASK
 	swap a
 	rlca
+	dec a
 	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
 	predef GetPartyParamLocation
