@@ -15,6 +15,7 @@
 	db LEVITATE    ; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

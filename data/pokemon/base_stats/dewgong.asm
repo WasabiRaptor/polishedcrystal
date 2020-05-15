@@ -15,6 +15,7 @@
     db ICE_BODY    ; hidden ability
     db GROWTH_MEDIUM_FAST ; growth rate
     dn EGG_WATER_1, EGG_FIELD ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

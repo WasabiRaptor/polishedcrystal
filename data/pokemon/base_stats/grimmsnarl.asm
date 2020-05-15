@@ -15,6 +15,7 @@
 	db PICKPOCKET    ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_FAIRY, EGG_HUMAN_LIKE ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

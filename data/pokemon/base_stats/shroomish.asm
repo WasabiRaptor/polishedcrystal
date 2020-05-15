@@ -15,6 +15,7 @@
     db QUICK_FEET    ; hidden ability
     db GROWTH_FLUCTUATING ; growth rate
     dn EGG_FAIRY, EGG_GRASS ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

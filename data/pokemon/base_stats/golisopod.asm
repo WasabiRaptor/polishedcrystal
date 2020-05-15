@@ -15,6 +15,7 @@
 	db EMERGENCY_EXIT    ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_BUG, EGG_WATER_3 ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

@@ -15,6 +15,7 @@
     db WATER_ABSORB    ; hidden ability
     db GROWTH_MEDIUM_SLOW ; growth rate
     dn EGG_GRASS, EGG_HUMAN_LIKE ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

@@ -15,6 +15,7 @@
     db NATURAL_CURE    ; hidden ability
     db GROWTH_FAST ; growth rate
     dn EGG_GRASS ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

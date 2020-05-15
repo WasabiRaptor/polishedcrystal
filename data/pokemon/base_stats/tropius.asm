@@ -15,6 +15,7 @@
     db HARVEST    ; hidden ability
     db GROWTH_SLOW ; growth rate
     dn EGG_MONSTER, EGG_GRASS ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

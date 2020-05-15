@@ -15,6 +15,7 @@
     db UNNERVE    ; hidden ability
     db GROWTH_MEDIUM_FAST ; growth rate
     dn EGG_FIELD, EGG_DRAGON ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

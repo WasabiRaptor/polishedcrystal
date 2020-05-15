@@ -15,6 +15,7 @@
 	db SUPER_LUCK    ; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_NONE, EGG_NONE ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

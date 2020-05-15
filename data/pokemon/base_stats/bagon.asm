@@ -15,6 +15,7 @@
     db SHEER_FORCE    ; hidden ability
     db GROWTH_SLOW ; growth rate
     dn EGG_DRAGON ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

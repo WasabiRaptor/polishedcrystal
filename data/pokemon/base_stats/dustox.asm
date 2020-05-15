@@ -15,6 +15,7 @@
     db COMPOUND_EYES    ; hidden ability
     db GROWTH_MEDIUM_FAST ; growth rate
     dn EGG_BUG ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

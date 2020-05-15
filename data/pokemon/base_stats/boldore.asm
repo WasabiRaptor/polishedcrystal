@@ -15,6 +15,7 @@
 	db SAND_FORCE    ; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_MINERAL, EGG_MINERAL ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

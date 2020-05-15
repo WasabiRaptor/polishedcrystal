@@ -15,6 +15,7 @@
 	db JUSTIFIED    ; hidden ability
 	db GROWTH_SLOW ; growth rate
 	dn EGG_HUMAN_LIKE, EGG_AMORPHOUS ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

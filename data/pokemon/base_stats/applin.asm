@@ -15,6 +15,7 @@
 	db BULLETPROOF    ; hidden ability
 	db GROWTH_ERRATIC ; growth rate
 	dn EGG_GRASS, EGG_DRAGON ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

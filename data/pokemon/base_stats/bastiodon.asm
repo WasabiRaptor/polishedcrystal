@@ -15,6 +15,7 @@
     db SOUNDPROOF    ; hidden ability
     db GROWTH_ERRATIC ; growth rate
     dn EGG_MONSTER ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

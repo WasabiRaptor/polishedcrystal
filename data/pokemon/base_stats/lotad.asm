@@ -15,6 +15,7 @@
 	db OWN_TEMPO    ; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_WATER_1, EGG_GRASS ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

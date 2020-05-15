@@ -15,6 +15,7 @@
 	db FRISK    ; hidden ability
 	db GROWTH_FAST ; growth rate
 	dn EGG_AMORPHOUS, EGG_AMORPHOUS ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

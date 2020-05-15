@@ -15,6 +15,7 @@
 	db WANDERING_SPIRIT    ; hidden ability
 	db GROWTH_MEDIUM_FAST ; growth rate
 	dn EGG_MINERAL, EGG_AMORPHOUS ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

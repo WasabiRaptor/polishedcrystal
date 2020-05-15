@@ -15,6 +15,7 @@
     db DEFEATIST    ; hidden ability
     db GROWTH_MEDIUM_FAST ; growth rate
     dn EGG_FLYING, EGG_WATER_3 ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

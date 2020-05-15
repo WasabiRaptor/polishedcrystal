@@ -15,6 +15,7 @@
     db TOXIC_BOOST    ; hidden ability
     db GROWTH_ERRATIC ; growth rate
     dn EGG_FIELD ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

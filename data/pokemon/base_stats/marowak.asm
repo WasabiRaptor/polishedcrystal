@@ -15,6 +15,7 @@
     db BATTLE_ARMOR    ; hidden ability
     db GROWTH_MEDIUM_FAST ; growth rate
     dn EGG_MONSTER ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm

@@ -15,6 +15,7 @@
 	db SHADOW_TAG    ; hidden ability
 	db GROWTH_MEDIUM_SLOW ; growth rate
 	dn EGG_HUMAN_LIKE, EGG_HUMAN_LIKE ; egg groups
+	db 3 ; number of portrait emotes
 
 	; tm/hm learnset
 	tmhm

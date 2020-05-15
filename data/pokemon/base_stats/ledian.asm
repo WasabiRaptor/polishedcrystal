@@ -15,6 +15,7 @@
     db IRON_FIST    ; hidden ability
     db GROWTH_FAST ; growth rate
     dn EGG_BUG ; egg groups
+    db 3 ; number of portrait emotes
 
     ; tm/hm learnset
     tmhm
