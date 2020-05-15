@@ -49,7 +49,6 @@ FollowerCommandMenu:
     farcall Portrait
     ; fallthrough
 PokemonPartyCommandMenu::
-	ld [wCurPartyMon], a
 	ld a, MON_GROUP_SPECIES_AND_FORM
 	predef GetPartyParamLocation
 
