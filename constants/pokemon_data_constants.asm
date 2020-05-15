@@ -172,18 +172,19 @@ MALE   EQU %00000000
 FEMALE EQU %10000000
 
 ; Field Capalility constants
-
+; for now, all the ones that can be done from the menu should be within the first 8 listed
 	const_def 0
-	shift_const FIELD_SURF
-	shift_const FIELD_WATERFALL
-	shift_const FIELD_WHIRLPOOL
-	shift_const FIELD_CUT
-	shift_const FIELD_FLASH
-	shift_const FIELD_STRENGTH
 	shift_const FIELD_FLY
 	shift_const FIELD_DIG
 	shift_const FIELD_TELEPORT
+	shift_const FIELD_HEAL
 	shift_const FIELD_SWEET_SCENT
+	shift_const FIELD_SURF
+	shift_const FIELD_WATERFALL
+	shift_const FIELD_WHIRLPOOL
+	shift_const FIELD_STRENGTH
+	shift_const FIELD_CUT
+	shift_const FIELD_FLASH
 
 
 
