@@ -40,10 +40,13 @@ FollowerCommandMenu:
 	ld d, h
 	ld e, l
     call PrintNamePlate
-    call ApplyAttrAndTilemapInVBlank
+    ld a, 1 ; happy
+    farcall Portrait
 
     ld a, [wCurSpecies]
     call PlayCry
+    ld a, 0 ; neutral
+    farcall Portrait
 
     ld hl, FollowerCommandMenuDataHeader
 	call LoadMenuDataHeader

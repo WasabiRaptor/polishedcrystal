@@ -1,0 +1,6 @@
+OtherPortraitPalettePointers::
+Pokemon_eggPortraitPalettePointers::
+	add_portraitpalette Pokemon_eggNeutral
+	add_portraitpalette Pokemon_eggHappy
+
+

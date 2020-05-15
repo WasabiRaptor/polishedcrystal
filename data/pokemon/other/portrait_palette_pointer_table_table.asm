@@ -1,0 +1,2 @@
+OtherPortraitPalettePointerTableTable::
+	add_portraitpalettetabletable Pokemon_egg

@@ -258,7 +258,7 @@ MomDoItText:
 NeighborScript:
 	faceplayer
 	opentext
-	portrait LOKI_SMUG
+	portrait VULPIX, LOKI, 0
 	checktime 1 << DAWN
 	iftrue .MornScript
 	checktime 1 << MIDDAY
@@ -282,7 +282,7 @@ NeighborScript:
 	jump .Main
 
 .Main:
-	portrait LOKI_UWU
+	;portrait LOKI_UWU
 	writenamedtext .NeighborNameText, .NeighborText
 	waitbutton
 	closeportrait

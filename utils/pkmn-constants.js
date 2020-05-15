@@ -344,6 +344,96 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             `\n`).join(""),
         "utf8");
 
+        // portraits
+        fs.writeFileSync(`data/pokemon/${region.lower}/portrait_pointer_table_table.asm`,
+            `${region.title}PortraitPointerTableTable::\n` +
+            list.map(poke=>`\tadd_portraittabletable ${poke.title}\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`data/pokemon/${region.lower}/portrait_pointer_table.asm`,
+            `${region.title}PortraitPointerTable::\n` +
+            list.map(poke=>
+                `${poke.title}PortraitPointerTable::\n` +
+                `\tadd_portraittable ${poke.title}\n` +
+                poke.forms.map(form=>
+                    `\tadd_portraittable ${form.title}\n`).join("") +
+            `\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`data/pokemon/${region.lower}/portrait_pointers.asm`,
+            `${region.title}PortraitPointers::\n` +
+            list.map(poke=>`${poke.title}PortraitPointers::\n`+
+                `\tadd_portrait ${poke.title}Neutral\n`+
+                `\tadd_portrait ${poke.title}Happy\n\n`+
+                poke.forms.map(form=>
+                    `${form.title}PortraitPointers::\n`+
+                    `\tadd_portrait ${form.title}Neutral\n`+
+                    `\tadd_portrait ${form.title}Happy\n\n`).join("") +
+            `\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`gfx/pokemon/${region.lower}_portraits.asm`,
+        list.map((poke,i)=>
+            //(i % 10 ? "" : `\nSECTION "${region.title} Pokemon Pics ${i/10+1}", ROMX\n\n`) +
+            `\nSECTION "${poke.title} Portraits", ROMX\n\n`+
+            `${poke.title}NeutralBG::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/neutralBG.2bpp.lz"\n`+
+            `${poke.title}NeutralOAM::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/neutralOAM.2bpp.lz"\n`+
+            `${poke.title}HappyBG::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/happyBG.2bpp.lz"\n`+
+            `${poke.title}HappyOAM::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/happyOAM.2bpp.lz"\n\n`+
+                poke.forms.map((form,i)=>
+                `\nSECTION "${form.title} Portraits", ROMX\n\n`+
+                `${form.title}NeutralBG::\tINCBIN "gfx/pokemon/${form.lower}/portraits/neutralBG.2bpp.lz"\n`+
+                `${form.title}NeutralOAM::\tINCBIN "gfx/pokemon/${form.lower}/portraits/neutralOAM.2bpp.lz"\n`+
+                `${form.title}HappyBG::\tINCBIN "gfx/pokemon/${form.lower}/portraits/happyBG.2bpp.lz"\n`+
+                `${form.title}HappyOAM::\tINCBIN "gfx/pokemon/${form.lower}/portraits/happyOAM.2bpp.lz"\n\n`).join("") +
+                `\n`).join(""),
+        "utf8");
+
+        // portrait pals
+        fs.writeFileSync(`data/pokemon/${region.lower}/portrait_palette_pointer_table_table.asm`,
+            `${region.title}PortraitPalettePointerTableTable::\n` +
+            list.map(poke=>`\tadd_portraitpalettetabletable ${poke.title}\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`data/pokemon/${region.lower}/portrait_palette_pointer_table.asm`,
+            `${region.title}PortraitPalettePointerTable::\n` +
+            list.map(poke=>
+                `${poke.title}PortraitPalettePointerTable::\n` +
+                `\tadd_portraitpalettetable ${poke.title}\n` +
+                poke.forms.map(form=>
+                    `\tadd_portraitpalettetable ${form.title}\n`).join("") +
+            `\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`data/pokemon/${region.lower}/portrait_palette_pointers.asm`,
+            `${region.title}PortraitPalettePointers::\n` +
+            list.map(poke=>`${poke.title}PortraitPalettePointers::\n`+
+                `\tadd_portraitpalette ${poke.title}Neutral\n`+
+                `\tadd_portraitpalette ${poke.title}Happy\n\n`+
+                poke.forms.map(form=>
+                    `${form.title}PortraitPalettePointers::\n`+
+                    `\tadd_portraitpalette ${form.title}Neutral\n`+
+                    `\tadd_portraitpalette ${form.title}Happy\n\n`).join("") +
+            `\n`).join(""),
+        "utf8");
+
+        fs.writeFileSync(`gfx/pokemon/${region.lower}_portrait_palettes.asm`,
+        list.map((poke,i)=>
+            `${poke.title}NeutralPalette::\n`+
+            `${poke.title}NeutralBGPalette::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/neutralBG.gbcpal"\n`+
+            `${poke.title}NeutralOAMPalette::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/neutralOAM.gbcpal"\n`+
+            `${poke.title}HappyPalette::\n`+
+            `${poke.title}HappyBGPalette::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/happyBG.gbcpal"\n`+
+            `${poke.title}HappyOAMPalette::\tINCBIN "gfx/pokemon/${poke.lower}/portraits/happyOAM.gbcpal"\n\n`+
+                poke.forms.map((form,i)=>
+                `${form.title}NeutralPalette::\n`+
+                `${form.title}NeutralBGPalette::\tINCBIN "gfx/pokemon/${form.lower}/portraits/neutralBG.gbcpal"\n`+
+                `${form.title}NeutralOAMPalette::\tINCBIN "gfx/pokemon/${form.lower}/portraits/neutralOAM.gbcpal"\n`+
+                `${form.title}HappyPalette::\n`+
+                `${form.title}HappyBGPalette::\tINCBIN "gfx/pokemon/${form.lower}/portraits/happyBG.gbcpal"\n`+
+                `${form.title}HappyOAMPalette::\tINCBIN "gfx/pokemon/${form.lower}/portraits/happyOAM.gbcpal"\n\n`).join("") +
+                `\n`).join(""),
+        "utf8");
 
         return match;
     });

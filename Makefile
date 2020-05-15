@@ -187,6 +187,8 @@ gfx/pokemon/%/back.2bpp: rgbgfx += -h
 gfx/trainers/%.2bpp: rgbgfx += -h
 
 gfx/portraits/%.2bpp: rgbgfx += -h
+%OAM.2bpp: rgbgfx += -h
+%BG.2bpp: rgbgfx += -h
 
 
 

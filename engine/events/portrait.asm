@@ -1,39 +1,90 @@
 Portrait::
+	ld [wScriptVar], a
+	call CheckIfPortraitWouldKillObjects
+	ret c
+
 	ld hl, PortraitMenuHeader
 	call CopyMenuDataHeader
 	call MenuBox
 	call UpdateSprites
 
-	;this gets overwritten with the pokemon thats needed every time it is pulled, so I'm just using it here to hold the thing for later
-	ld a, [wCurSpecies]
-	call LoadPortraitPalette
+;load portrait palettes
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wUnknBGPals)
+	ldh [rSVBK], a
+
+	ld hl, RegionalPortraitPalTable
+	call ProcessPokemonPointertable
+	ld a, d
+	push af
+	ld a, [wCurForm]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+	ld a, [wScriptVar]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+	ld de, wUnknBGPals palette PAL_BG_TEXT
+	ld bc, 1 palettes
+	pop af
+	push af
+	call FarCopyBytes
+
+	ld de, wUnknOBPals palette 7
+	ld bc, 1 palettes
+	pop af
+	call FarCopyBytes
+
 	call UpdateTimePals
 
 	;everything below here loads the pic in a similar way to how pokemon pics are loaded, but doesn't force the grayscale pal and is working as intended
 	xor a
 	ldh [hBGMapMode], a
-	ldh a, [rSVBK]
-	push af
 
-	ld a, [wCurSpecies]
-	ld hl, PortraitPicPointers
+	ld hl, RegionalPortraitTable
+	call ProcessPokemonPointertable
+	ld a, [wCurForm]
+	ld c, a
+	ld b, 0
+	add hl, bc
+	add hl, bc
+	ld a, d
+	call GetFarHalfword
+
+	ld a, [wScriptVar]
 	ld bc, 5
 	rst AddNTimes
 
+	ld a, d
+	call GetFarByte
+	inc hl
+	push af ;1
+	ld a, d
+	push af ;2
+	push hl ;3
+	call GetFarHalfword
+	ld d, h
+	ld e, l
+	pop hl ;2
+	pop af ;1
+	inc hl
+	inc hl
+	call GetFarHalfword
+	pop af ;0
+	push af ;1
+	push de ;2
+	push af ;3
+
 	ld a, BANK(wDecompressScratch)
 	ldh [rSVBK], a
-
-	ld a, [hli]
-	push af ;1
-	ld e, [hl]
-	inc hl
-	ld d, [hl]
-	inc hl
-	push de ;2
-	push af; 3
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
 	; and now we insert a thing here to get OAM stuff decompressed
 	ld a, 1
 	ld [rVBK], a
@@ -95,32 +146,41 @@ ClosePortrait::
 	call SafeCopyTilemapAtOnce
 	farjp ReloadVisibleSprites
 
+CheckIfPortraitWouldKillObjects:
+	ld a, [wPlayerStandingMapY]
+	ld e, 3
+	ld d, NUM_OBJECT_STRUCTS -1
+	ld hl, wFollowerStandingMapY
+	ld bc, OBJECT_STRUCT_LENGTH
+	call .Check
+	ret c
+
+	ld a, [wPlayerStandingMapY]
+	inc a
+	ld e, 4
+	ld d, NUM_OBJECT_STRUCTS -1
+	ld hl, wFollowerStandingMapY
+.Check:
+.loop
+	cp [hl]
+	jr nz, .next
+	dec e
+	jr nz, .next
+	scf
+	ret
+.next
+	add hl, bc
+	dec d
+	jr nz, .loop
+	and a
+	ret
+
 PortraitMenuHeader:
 	db $40 ; flags
 	db PORTRAIT_Y, PORTRAIT_X ; start coords
 	db PORTRAIT_Y + PORTRAIT_HEIGHT - 1, PORTRAIT_X + PORTRAIT_WIDTH - 1 ; end coords
 	dw NULL
 	db 1 ; default option
-
-LoadPortraitPalette:
-
-
-	ld a, [wCurSpecies]
-	ld hl, PortraitPalettePointers
-	call NextHLTable
-
-	ld de, wUnknBGPals palette PAL_BG_TEXT
-	ld bc, 1 palettes
-	ld a, BANK(wUnknBGPals)
-	call FarCopyWRAM
-
-	ld de, wUnknOBPals palette 7
-	ld bc, 1 palettes
-	ld a, BANK(wUnknOBPals)
-	jp FarCopyWRAM
-
-
-
 
 PORTRAIT_TOP_LEFT_CORNER_Y EQU 88
 PORTRAIT_TOP_LEFT_CORNER_X EQU 16
@@ -154,25 +214,24 @@ PortraitOAM:
 	db PORTRAIT_TOP_LEFT_CORNER_Y+24, PORTRAIT_TOP_LEFT_CORNER_X+24, $ff ,7 | TILE_BANK
 PortraitOAMEnd:
 
-add_portrait: macro
-	dba \1PortraitBG
-	dw \1PortraitOAM
-endm
+RegionalPortraitTable:
+	regional_portraits Other; Other
+    regional_portraits Kanto
+    regional_portraits Johto
+    regional_portraits Hoenn
+    regional_portraits Sinnoh
+    regional_portraits Unova
+    regional_portraits Kalos
+    regional_portraits Alola
+    regional_portraits Galar
 
-add_portraitpal: macro
-	dw \1PortraitPalettes
-endm
-
-PortraitPicPointers::
-	add_portrait LokiSmug
-	add_portrait LokiUwU
-
-PortraitPalettePointers:
-	add_portraitpal LokiSmug
-	add_portraitpal LokiSmug
-
-
-PortraitPalettes:
-LokiSmugPortraitPalettes:
-LokiSmugPortraitBGPalette:		INCBIN "gfx/portraits/loki/smugBG.gbcpal"
-LokiSmugPortraitOAMPalette:		INCBIN "gfx/portraits/loki/smugOAM.gbcpal"
+RegionalPortraitPalTable:
+	regional_portraitpalettes Other; Other
+    regional_portraitpalettes Kanto
+    regional_portraitpalettes Johto
+    regional_portraitpalettes Hoenn
+    regional_portraitpalettes Sinnoh
+    regional_portraitpalettes Unova
+    regional_portraitpalettes Kalos
+    regional_portraitpalettes Alola
+    regional_portraitpalettes Galar

@@ -237,10 +237,43 @@ regional_overworldsprites: macro
     dba \1OverworldSpritePointerTable
 endm
 
-
 regional_picpointers: macro
     dbw BANK(\1PicPointers), \1PicPointerTable
 endm
+
+regional_portraitpalettes: macro
+    dba \1PortraitPalettePointerTableTable
+endm
+
+regional_portraits: macro
+    dba \1PortraitPointerTableTable
+endm
+
+add_portrait: macro
+	dba \1BG
+	dw \1OAM
+endm
+
+add_portraitpalette: macro
+	dw \1Palette
+endm
+
+add_portraittabletable: macro
+	dw \1PortraitPointerTable
+endm
+
+add_portraittable: macro
+	dw \1PortraitPointers
+endm
+
+add_portraitpalettetabletable: macro
+	dw \1PortraitPalettePointerTable
+endm
+
+add_portraitpalettetable: macro
+	dw \1PortraitPalettePointers
+endm
+
 
 dbpixel: MACRO
 if _NARG >= 4

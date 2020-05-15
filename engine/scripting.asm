@@ -2991,7 +2991,12 @@ Script_paintingpic:
 
 Script_portrait:
 	call GetScriptByte
+	ld [wCurGroup], a
+	call GetScriptByte
 	ld [wCurSpecies], a
+	call GetScriptByte
+	ld [wCurForm], a
+	call GetScriptByte
 	farjp Portrait
 
 Script_closeportrait:

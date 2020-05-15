@@ -1,0 +1,529 @@
+KantoPortraitPalettePointerTable::
+BulbasaurPortraitPalettePointerTable::
+	add_portraitpalettetable Bulbasaur
+
+IvysaurPortraitPalettePointerTable::
+	add_portraitpalettetable Ivysaur
+
+VenusaurPortraitPalettePointerTable::
+	add_portraitpalettetable Venusaur
+	add_portraitpalettetable VenusaurMega
+	add_portraitpalettetable VenusaurGiga
+
+CharmanderPortraitPalettePointerTable::
+	add_portraitpalettetable Charmander
+
+CharmeleonPortraitPalettePointerTable::
+	add_portraitpalettetable Charmeleon
+
+CharizardPortraitPalettePointerTable::
+	add_portraitpalettetable Charizard
+	add_portraitpalettetable CharizardMega_x
+	add_portraitpalettetable CharizardMega_y
+	add_portraitpalettetable CharizardGiga
+
+SquirtlePortraitPalettePointerTable::
+	add_portraitpalettetable Squirtle
+
+WartortlePortraitPalettePointerTable::
+	add_portraitpalettetable Wartortle
+
+BlastoisePortraitPalettePointerTable::
+	add_portraitpalettetable Blastoise
+	add_portraitpalettetable BlastoiseMega
+	add_portraitpalettetable BlastoiseGiga
+
+CaterpiePortraitPalettePointerTable::
+	add_portraitpalettetable Caterpie
+
+MetapodPortraitPalettePointerTable::
+	add_portraitpalettetable Metapod
+
+ButterfreePortraitPalettePointerTable::
+	add_portraitpalettetable Butterfree
+	add_portraitpalettetable ButterfreeGiga
+
+WeedlePortraitPalettePointerTable::
+	add_portraitpalettetable Weedle
+
+KakunaPortraitPalettePointerTable::
+	add_portraitpalettetable Kakuna
+
+BeedrillPortraitPalettePointerTable::
+	add_portraitpalettetable Beedrill
+	add_portraitpalettetable BeedrillMega
+
+PidgeyPortraitPalettePointerTable::
+	add_portraitpalettetable Pidgey
+
+PidgeottoPortraitPalettePointerTable::
+	add_portraitpalettetable Pidgeotto
+
+PidgeotPortraitPalettePointerTable::
+	add_portraitpalettetable Pidgeot
+	add_portraitpalettetable PidgeotMega
+
+RattataPortraitPalettePointerTable::
+	add_portraitpalettetable Rattata
+	add_portraitpalettetable RattataAlola
+
+RaticatePortraitPalettePointerTable::
+	add_portraitpalettetable Raticate
+	add_portraitpalettetable RaticateAlola
+
+SpearowPortraitPalettePointerTable::
+	add_portraitpalettetable Spearow
+
+FearowPortraitPalettePointerTable::
+	add_portraitpalettetable Fearow
+
+EkansPortraitPalettePointerTable::
+	add_portraitpalettetable Ekans
+
+ArbokPortraitPalettePointerTable::
+	add_portraitpalettetable Arbok
+
+PikachuPortraitPalettePointerTable::
+	add_portraitpalettetable Pikachu
+	add_portraitpalettetable PikachuCosplay
+	add_portraitpalettetable PikachuRockstar
+	add_portraitpalettetable PikachuBelle
+	add_portraitpalettetable PikachuPopstar
+	add_portraitpalettetable PikachuPhd
+	add_portraitpalettetable PikachuLibre
+	add_portraitpalettetable PikachuOg_cap
+	add_portraitpalettetable PikachuHoenn_cap
+	add_portraitpalettetable PikachuSinnoh_cap
+	add_portraitpalettetable PikachuUnova_cap
+	add_portraitpalettetable PikachuKalos_cap
+	add_portraitpalettetable PikachuAlola_cap
+	add_portraitpalettetable PikachuPartner_cap
+	add_portraitpalettetable PikachuLets_go
+	add_portraitpalettetable PikachuGiga
+
+RaichuPortraitPalettePointerTable::
+	add_portraitpalettetable Raichu
+	add_portraitpalettetable RaichuAlola
+
+SandshrewPortraitPalettePointerTable::
+	add_portraitpalettetable Sandshrew
+	add_portraitpalettetable SandshrewAlola
+
+SandslashPortraitPalettePointerTable::
+	add_portraitpalettetable Sandslash
+	add_portraitpalettetable SandslashAlola
+
+Nidoran_fPortraitPalettePointerTable::
+	add_portraitpalettetable Nidoran_f
+
+NidorinaPortraitPalettePointerTable::
+	add_portraitpalettetable Nidorina
+
+NidoqueenPortraitPalettePointerTable::
+	add_portraitpalettetable Nidoqueen
+
+Nidoran_mPortraitPalettePointerTable::
+	add_portraitpalettetable Nidoran_m
+
+NidorinoPortraitPalettePointerTable::
+	add_portraitpalettetable Nidorino
+
+NidokingPortraitPalettePointerTable::
+	add_portraitpalettetable Nidoking
+
+ClefairyPortraitPalettePointerTable::
+	add_portraitpalettetable Clefairy
+
+ClefablePortraitPalettePointerTable::
+	add_portraitpalettetable Clefable
+
+VulpixPortraitPalettePointerTable::
+	add_portraitpalettetable Vulpix
+	add_portraitpalettetable VulpixAlola
+	add_portraitpalettetable VulpixLoki
+	add_portraitpalettetable VulpixLoki_winter
+
+NinetalesPortraitPalettePointerTable::
+	add_portraitpalettetable Ninetales
+	add_portraitpalettetable NinetalesAlola
+	add_portraitpalettetable NinetalesLoki
+	add_portraitpalettetable NinetalesLoki_winter
+
+JigglypuffPortraitPalettePointerTable::
+	add_portraitpalettetable Jigglypuff
+
+WigglytuffPortraitPalettePointerTable::
+	add_portraitpalettetable Wigglytuff
+
+ZubatPortraitPalettePointerTable::
+	add_portraitpalettetable Zubat
+
+GolbatPortraitPalettePointerTable::
+	add_portraitpalettetable Golbat
+
+OddishPortraitPalettePointerTable::
+	add_portraitpalettetable Oddish
+
+GloomPortraitPalettePointerTable::
+	add_portraitpalettetable Gloom
+
+VileplumePortraitPalettePointerTable::
+	add_portraitpalettetable Vileplume
+
+ParasPortraitPalettePointerTable::
+	add_portraitpalettetable Paras
+
+ParasectPortraitPalettePointerTable::
+	add_portraitpalettetable Parasect
+
+VenonatPortraitPalettePointerTable::
+	add_portraitpalettetable Venonat
+
+VenomothPortraitPalettePointerTable::
+	add_portraitpalettetable Venomoth
+
+DiglettPortraitPalettePointerTable::
+	add_portraitpalettetable Diglett
+	add_portraitpalettetable DiglettAlola
+
+DugtrioPortraitPalettePointerTable::
+	add_portraitpalettetable Dugtrio
+	add_portraitpalettetable DugtrioAlola
+
+MeowthPortraitPalettePointerTable::
+	add_portraitpalettetable Meowth
+	add_portraitpalettetable MeowthAlola
+	add_portraitpalettetable MeowthGalar
+	add_portraitpalettetable MeowthKanto_giga
+
+PersianPortraitPalettePointerTable::
+	add_portraitpalettetable Persian
+	add_portraitpalettetable PersianAlola
+
+PsyduckPortraitPalettePointerTable::
+	add_portraitpalettetable Psyduck
+
+GolduckPortraitPalettePointerTable::
+	add_portraitpalettetable Golduck
+
+MankeyPortraitPalettePointerTable::
+	add_portraitpalettetable Mankey
+
+PrimeapePortraitPalettePointerTable::
+	add_portraitpalettetable Primeape
+
+GrowlithePortraitPalettePointerTable::
+	add_portraitpalettetable Growlithe
+
+ArcaninePortraitPalettePointerTable::
+	add_portraitpalettetable Arcanine
+
+PoliwagPortraitPalettePointerTable::
+	add_portraitpalettetable Poliwag
+
+PoliwhirlPortraitPalettePointerTable::
+	add_portraitpalettetable Poliwhirl
+
+PoliwrathPortraitPalettePointerTable::
+	add_portraitpalettetable Poliwrath
+
+AbraPortraitPalettePointerTable::
+	add_portraitpalettetable Abra
+
+KadabraPortraitPalettePointerTable::
+	add_portraitpalettetable Kadabra
+
+AlakazamPortraitPalettePointerTable::
+	add_portraitpalettetable Alakazam
+	add_portraitpalettetable AlakazamMega
+
+MachopPortraitPalettePointerTable::
+	add_portraitpalettetable Machop
+
+MachokePortraitPalettePointerTable::
+	add_portraitpalettetable Machoke
+
+MachampPortraitPalettePointerTable::
+	add_portraitpalettetable Machamp
+	add_portraitpalettetable MachampGiga
+
+BellsproutPortraitPalettePointerTable::
+	add_portraitpalettetable Bellsprout
+
+WeepinbellPortraitPalettePointerTable::
+	add_portraitpalettetable Weepinbell
+
+VictreebelPortraitPalettePointerTable::
+	add_portraitpalettetable Victreebel
+
+TentacoolPortraitPalettePointerTable::
+	add_portraitpalettetable Tentacool
+
+TentacruelPortraitPalettePointerTable::
+	add_portraitpalettetable Tentacruel
+
+GeodudePortraitPalettePointerTable::
+	add_portraitpalettetable Geodude
+	add_portraitpalettetable GeodudeAlola
+
+GravelerPortraitPalettePointerTable::
+	add_portraitpalettetable Graveler
+	add_portraitpalettetable GravelerAlola
+
+GolemPortraitPalettePointerTable::
+	add_portraitpalettetable Golem
+	add_portraitpalettetable GolemAlola
+
+PonytaPortraitPalettePointerTable::
+	add_portraitpalettetable Ponyta
+	add_portraitpalettetable PonytaGalar
+
+RapidashPortraitPalettePointerTable::
+	add_portraitpalettetable Rapidash
+	add_portraitpalettetable RapidashGalar
+
+SlowpokePortraitPalettePointerTable::
+	add_portraitpalettetable Slowpoke
+	add_portraitpalettetable SlowpokeGalar
+
+SlowbroPortraitPalettePointerTable::
+	add_portraitpalettetable Slowbro
+	add_portraitpalettetable SlowbroMega
+
+MagnemitePortraitPalettePointerTable::
+	add_portraitpalettetable Magnemite
+
+MagnetonPortraitPalettePointerTable::
+	add_portraitpalettetable Magneton
+
+FarfetchdPortraitPalettePointerTable::
+	add_portraitpalettetable Farfetchd
+	add_portraitpalettetable FarfetchdGalar
+
+DoduoPortraitPalettePointerTable::
+	add_portraitpalettetable Doduo
+
+DodrioPortraitPalettePointerTable::
+	add_portraitpalettetable Dodrio
+
+SeelPortraitPalettePointerTable::
+	add_portraitpalettetable Seel
+
+DewgongPortraitPalettePointerTable::
+	add_portraitpalettetable Dewgong
+
+GrimerPortraitPalettePointerTable::
+	add_portraitpalettetable Grimer
+	add_portraitpalettetable GrimerAlola
+
+MukPortraitPalettePointerTable::
+	add_portraitpalettetable Muk
+	add_portraitpalettetable MukAlola
+
+ShellderPortraitPalettePointerTable::
+	add_portraitpalettetable Shellder
+
+CloysterPortraitPalettePointerTable::
+	add_portraitpalettetable Cloyster
+
+GastlyPortraitPalettePointerTable::
+	add_portraitpalettetable Gastly
+
+HaunterPortraitPalettePointerTable::
+	add_portraitpalettetable Haunter
+
+GengarPortraitPalettePointerTable::
+	add_portraitpalettetable Gengar
+	add_portraitpalettetable GengarMega
+	add_portraitpalettetable GengarGiga
+
+OnixPortraitPalettePointerTable::
+	add_portraitpalettetable Onix
+
+DrowzeePortraitPalettePointerTable::
+	add_portraitpalettetable Drowzee
+
+HypnoPortraitPalettePointerTable::
+	add_portraitpalettetable Hypno
+
+KrabbyPortraitPalettePointerTable::
+	add_portraitpalettetable Krabby
+
+KinglerPortraitPalettePointerTable::
+	add_portraitpalettetable Kingler
+	add_portraitpalettetable KinglerGiga
+
+VoltorbPortraitPalettePointerTable::
+	add_portraitpalettetable Voltorb
+
+ElectrodePortraitPalettePointerTable::
+	add_portraitpalettetable Electrode
+
+ExeggcutePortraitPalettePointerTable::
+	add_portraitpalettetable Exeggcute
+
+ExeggutorPortraitPalettePointerTable::
+	add_portraitpalettetable Exeggutor
+	add_portraitpalettetable ExeggutorAlola
+
+CubonePortraitPalettePointerTable::
+	add_portraitpalettetable Cubone
+
+MarowakPortraitPalettePointerTable::
+	add_portraitpalettetable Marowak
+	add_portraitpalettetable MarowakAlola
+
+HitmonleePortraitPalettePointerTable::
+	add_portraitpalettetable Hitmonlee
+
+HitmonchanPortraitPalettePointerTable::
+	add_portraitpalettetable Hitmonchan
+
+LickitungPortraitPalettePointerTable::
+	add_portraitpalettetable Lickitung
+
+KoffingPortraitPalettePointerTable::
+	add_portraitpalettetable Koffing
+
+WeezingPortraitPalettePointerTable::
+	add_portraitpalettetable Weezing
+	add_portraitpalettetable WeezingGalar
+
+RhyhornPortraitPalettePointerTable::
+	add_portraitpalettetable Rhyhorn
+
+RhydonPortraitPalettePointerTable::
+	add_portraitpalettetable Rhydon
+
+ChanseyPortraitPalettePointerTable::
+	add_portraitpalettetable Chansey
+
+TangelaPortraitPalettePointerTable::
+	add_portraitpalettetable Tangela
+
+KangaskhanPortraitPalettePointerTable::
+	add_portraitpalettetable Kangaskhan
+	add_portraitpalettetable KangaskhanMega
+
+HorseaPortraitPalettePointerTable::
+	add_portraitpalettetable Horsea
+
+SeadraPortraitPalettePointerTable::
+	add_portraitpalettetable Seadra
+
+GoldeenPortraitPalettePointerTable::
+	add_portraitpalettetable Goldeen
+
+SeakingPortraitPalettePointerTable::
+	add_portraitpalettetable Seaking
+
+StaryuPortraitPalettePointerTable::
+	add_portraitpalettetable Staryu
+
+StarmiePortraitPalettePointerTable::
+	add_portraitpalettetable Starmie
+
+MrmimePortraitPalettePointerTable::
+	add_portraitpalettetable Mrmime
+	add_portraitpalettetable MrmimeGalar
+
+ScytherPortraitPalettePointerTable::
+	add_portraitpalettetable Scyther
+
+JynxPortraitPalettePointerTable::
+	add_portraitpalettetable Jynx
+
+ElectabuzzPortraitPalettePointerTable::
+	add_portraitpalettetable Electabuzz
+
+MagmarPortraitPalettePointerTable::
+	add_portraitpalettetable Magmar
+
+PinsirPortraitPalettePointerTable::
+	add_portraitpalettetable Pinsir
+	add_portraitpalettetable PinsirMega
+
+TaurosPortraitPalettePointerTable::
+	add_portraitpalettetable Tauros
+
+MagikarpPortraitPalettePointerTable::
+	add_portraitpalettetable Magikarp
+
+GyaradosPortraitPalettePointerTable::
+	add_portraitpalettetable Gyarados
+	add_portraitpalettetable GyaradosMega
+
+LaprasPortraitPalettePointerTable::
+	add_portraitpalettetable Lapras
+	add_portraitpalettetable LaprasGiga
+
+DittoPortraitPalettePointerTable::
+	add_portraitpalettetable Ditto
+
+EeveePortraitPalettePointerTable::
+	add_portraitpalettetable Eevee
+	add_portraitpalettetable EeveeLets_go
+	add_portraitpalettetable EeveeGiga
+
+VaporeonPortraitPalettePointerTable::
+	add_portraitpalettetable Vaporeon
+
+JolteonPortraitPalettePointerTable::
+	add_portraitpalettetable Jolteon
+
+FlareonPortraitPalettePointerTable::
+	add_portraitpalettetable Flareon
+	add_portraitpalettetable FlareonDonut
+
+PorygonPortraitPalettePointerTable::
+	add_portraitpalettetable Porygon
+
+OmanytePortraitPalettePointerTable::
+	add_portraitpalettetable Omanyte
+
+OmastarPortraitPalettePointerTable::
+	add_portraitpalettetable Omastar
+
+KabutoPortraitPalettePointerTable::
+	add_portraitpalettetable Kabuto
+
+KabutopsPortraitPalettePointerTable::
+	add_portraitpalettetable Kabutops
+
+AerodactylPortraitPalettePointerTable::
+	add_portraitpalettetable Aerodactyl
+	add_portraitpalettetable AerodactylMega
+
+SnorlaxPortraitPalettePointerTable::
+	add_portraitpalettetable Snorlax
+	add_portraitpalettetable SnorlaxGiga
+
+ArticunoPortraitPalettePointerTable::
+	add_portraitpalettetable Articuno
+	add_portraitpalettetable ArticunoGalar
+
+ZapdosPortraitPalettePointerTable::
+	add_portraitpalettetable Zapdos
+	add_portraitpalettetable ZapdosGalar
+
+MoltresPortraitPalettePointerTable::
+	add_portraitpalettetable Moltres
+	add_portraitpalettetable MoltresGalar
+
+DratiniPortraitPalettePointerTable::
+	add_portraitpalettetable Dratini
+
+DragonairPortraitPalettePointerTable::
+	add_portraitpalettetable Dragonair
+
+DragonitePortraitPalettePointerTable::
+	add_portraitpalettetable Dragonite
+
+MewtwoPortraitPalettePointerTable::
+	add_portraitpalettetable Mewtwo
+	add_portraitpalettetable MewtwoMega_x
+	add_portraitpalettetable MewtwoMega_y
+
+MewPortraitPalettePointerTable::
+	add_portraitpalettetable Mew
+

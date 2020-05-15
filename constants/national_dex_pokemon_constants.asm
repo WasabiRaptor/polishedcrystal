@@ -294,6 +294,9 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon_group VULPIX, GROUP_GENERATION_ONE
 	nat_dexmon KEOKEO
 
+	const_def 2
+	const LOKI
+	const LOKI_WINTER
 ;johto mons
 	nat_dexmon_group 1, GROUP_GENERATION_TWO
 	nat_dexmon CHIKORITA

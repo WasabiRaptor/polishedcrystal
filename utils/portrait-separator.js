@@ -70,12 +70,12 @@ loadImage(filename).then(inImage => {
 
     // save images
     bgctx.putImageData(bgImageData, 0, 0)
-    let bgWriter = fs.createWriteStream(filename.replace(".png", "-bg.png"))
+    let bgWriter = fs.createWriteStream(filename.replace(".png", "BG.png"))
     let bgStream = bgCanvas.createPNGStream()
     bgStream.pipe(bgWriter)
 
     fgctx.putImageData(fgImageData, 0, 0)
-    let fgWriter = fs.createWriteStream(filename.replace(".png", "-fg.png"))
+    let fgWriter = fs.createWriteStream(filename.replace(".png", "OAM.png"))
     let fgStream = fgCanvas.createPNGStream()
     fgStream.pipe(fgWriter)
 })

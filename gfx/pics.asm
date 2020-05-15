@@ -6,12 +6,40 @@ INCLUDE "data/pokemon/other/pic_pointer_table.asm"
 INCLUDE "data/pokemon/other/pic_pointers.asm"
 INCLUDE "gfx/pokemon/other_pics.asm"
 
+SECTION "Other Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/other/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/other/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/other/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/other_portrait_palettes.asm"
+
+SECTION "Other Portraits", ROMX
+
+INCLUDE "data/pokemon/other/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/other/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/other/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/other_portraits.asm"
+
 
 SECTION "Kanto Pic Pointers", ROMX
 
 INCLUDE "data/pokemon/kanto/pic_pointer_table.asm"
 INCLUDE "data/pokemon/kanto/pic_pointers.asm"
 INCLUDE "gfx/pokemon/kanto_pics.asm"
+
+SECTION "Kanto Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/kanto/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/kanto/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_portrait_palettes.asm"
+
+SECTION "Kanto Portraits", ROMX
+
+INCLUDE "data/pokemon/kanto/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/kanto/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/kanto/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/kanto_portraits.asm"
 
 
 SECTION "Johto Pic Pointers", ROMX
@@ -20,12 +48,40 @@ INCLUDE "data/pokemon/johto/pic_pointer_table.asm"
 INCLUDE "data/pokemon/johto/pic_pointers.asm"
 INCLUDE "gfx/pokemon/johto_pics.asm"
 
+SECTION "Johto Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/johto/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/johto/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/johto/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/johto_portrait_palettes.asm"
+
+SECTION "Johto Portraits", ROMX
+
+INCLUDE "data/pokemon/johto/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/johto/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/johto/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/johto_portraits.asm"
+
 
 SECTION "Hoenn Pic Pointers", ROMX
 
 INCLUDE "data/pokemon/hoenn/pic_pointer_table.asm"
 INCLUDE "data/pokemon/hoenn/pic_pointers.asm"
 INCLUDE "gfx/pokemon/hoenn_pics.asm"
+
+SECTION "Hoenn Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/hoenn/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/hoenn/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_portrait_palettes.asm"
+
+SECTION "Hoenn Portraits", ROMX
+
+INCLUDE "data/pokemon/hoenn/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/hoenn/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/hoenn/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/hoenn_portraits.asm"
 
 
 SECTION "Sinnoh Pic Pointers", ROMX
@@ -34,6 +90,20 @@ INCLUDE "data/pokemon/sinnoh/pic_pointer_table.asm"
 INCLUDE "data/pokemon/sinnoh/pic_pointers.asm"
 INCLUDE "gfx/pokemon/sinnoh_pics.asm"
 
+SECTION "Sinnoh Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/sinnoh/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/sinnoh/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_portrait_palettes.asm"
+
+SECTION "Sinnoh Portraits", ROMX
+
+INCLUDE "data/pokemon/sinnoh/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/sinnoh/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/sinnoh/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/sinnoh_portraits.asm"
+
 
 SECTION "Unova Pic Pointers", ROMX
 
@@ -41,12 +111,39 @@ INCLUDE "data/pokemon/unova/pic_pointer_table.asm"
 INCLUDE "data/pokemon/unova/pic_pointers.asm"
 INCLUDE "gfx/pokemon/unova_pics.asm"
 
+SECTION "Unova Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/unova/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/unova/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/unova/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/unova_portrait_palettes.asm"
+
+SECTION "Unova Portraits", ROMX
+
+INCLUDE "data/pokemon/unova/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/unova/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/unova/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/unova_portraits.asm"
 
 SECTION "Kalos Pic Pointers", ROMX
 
 INCLUDE "data/pokemon/kalos/pic_pointer_table.asm"
 INCLUDE "data/pokemon/kalos/pic_pointers.asm"
 INCLUDE "gfx/pokemon/kalos_pics.asm"
+
+SECTION "Kalos Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/kalos/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/kalos/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/kalos_portrait_palettes.asm"
+
+SECTION "Kalos Portraits", ROMX
+
+INCLUDE "data/pokemon/kalos/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/kalos/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/kalos/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/kalos_portraits.asm"
 
 
 SECTION "Alola Pic Pointers", ROMX
@@ -55,12 +152,40 @@ INCLUDE "data/pokemon/alola/pic_pointer_table.asm"
 INCLUDE "data/pokemon/alola/pic_pointers.asm"
 INCLUDE "gfx/pokemon/alola_pics.asm"
 
+SECTION "Alola Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/alola/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/alola/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/alola/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/alola_portrait_palettes.asm"
+
+SECTION "Alola Portraits", ROMX
+
+INCLUDE "data/pokemon/alola/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/alola/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/alola/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/alola_portraits.asm"
+
 
 SECTION "Galar Pic Pointers", ROMX
 
 INCLUDE "data/pokemon/galar/pic_pointer_table.asm"
 INCLUDE "data/pokemon/galar/pic_pointers.asm"
 INCLUDE "gfx/pokemon/galar_pics.asm"
+
+SECTION "Galar Portrait Pals", ROMX
+
+INCLUDE "data/pokemon/galar/portrait_palette_pointer_table_table.asm"
+INCLUDE "data/pokemon/galar/portrait_palette_pointer_table.asm"
+INCLUDE "data/pokemon/galar/portrait_palette_pointers.asm"
+INCLUDE "gfx/pokemon/galar_portrait_palettes.asm"
+
+SECTION "Galar Portraits", ROMX
+
+INCLUDE "data/pokemon/galar/portrait_pointer_table_table.asm"
+INCLUDE "data/pokemon/galar/portrait_pointer_table.asm"
+INCLUDE "data/pokemon/galar/portrait_pointers.asm"
+INCLUDE "gfx/pokemon/galar_portraits.asm"
 
 
 SECTION "Trainer Pic Pointers", ROMX

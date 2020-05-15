@@ -1,0 +1,537 @@
+KalosPortraitPalettePointers::
+ChespinPortraitPalettePointers::
+	add_portraitpalette ChespinNeutral
+	add_portraitpalette ChespinHappy
+
+
+QuilladinPortraitPalettePointers::
+	add_portraitpalette QuilladinNeutral
+	add_portraitpalette QuilladinHappy
+
+
+ChesnaughtPortraitPalettePointers::
+	add_portraitpalette ChesnaughtNeutral
+	add_portraitpalette ChesnaughtHappy
+
+
+FennekinPortraitPalettePointers::
+	add_portraitpalette FennekinNeutral
+	add_portraitpalette FennekinHappy
+
+
+BraixenPortraitPalettePointers::
+	add_portraitpalette BraixenNeutral
+	add_portraitpalette BraixenHappy
+
+
+DelphoxPortraitPalettePointers::
+	add_portraitpalette DelphoxNeutral
+	add_portraitpalette DelphoxHappy
+
+
+FroakiePortraitPalettePointers::
+	add_portraitpalette FroakieNeutral
+	add_portraitpalette FroakieHappy
+
+
+FrogadierPortraitPalettePointers::
+	add_portraitpalette FrogadierNeutral
+	add_portraitpalette FrogadierHappy
+
+
+GreninjaPortraitPalettePointers::
+	add_portraitpalette GreninjaNeutral
+	add_portraitpalette GreninjaHappy
+
+GreninjaBattle_bondPortraitPalettePointers::
+	add_portraitpalette GreninjaBattle_bondNeutral
+	add_portraitpalette GreninjaBattle_bondHappy
+
+GreninjaAshPortraitPalettePointers::
+	add_portraitpalette GreninjaAshNeutral
+	add_portraitpalette GreninjaAshHappy
+
+
+BunnelbyPortraitPalettePointers::
+	add_portraitpalette BunnelbyNeutral
+	add_portraitpalette BunnelbyHappy
+
+
+DiggersbyPortraitPalettePointers::
+	add_portraitpalette DiggersbyNeutral
+	add_portraitpalette DiggersbyHappy
+
+
+FletchlingPortraitPalettePointers::
+	add_portraitpalette FletchlingNeutral
+	add_portraitpalette FletchlingHappy
+
+
+FletchinderPortraitPalettePointers::
+	add_portraitpalette FletchinderNeutral
+	add_portraitpalette FletchinderHappy
+
+
+TalonflamePortraitPalettePointers::
+	add_portraitpalette TalonflameNeutral
+	add_portraitpalette TalonflameHappy
+
+
+ScatterbugPortraitPalettePointers::
+	add_portraitpalette ScatterbugNeutral
+	add_portraitpalette ScatterbugHappy
+
+
+SpewpaPortraitPalettePointers::
+	add_portraitpalette SpewpaNeutral
+	add_portraitpalette SpewpaHappy
+
+
+VivillonPortraitPalettePointers::
+	add_portraitpalette VivillonNeutral
+	add_portraitpalette VivillonHappy
+
+VivillonArchipelegoPortraitPalettePointers::
+	add_portraitpalette VivillonArchipelegoNeutral
+	add_portraitpalette VivillonArchipelegoHappy
+
+VivillonContinentalPortraitPalettePointers::
+	add_portraitpalette VivillonContinentalNeutral
+	add_portraitpalette VivillonContinentalHappy
+
+VivillonElegantPortraitPalettePointers::
+	add_portraitpalette VivillonElegantNeutral
+	add_portraitpalette VivillonElegantHappy
+
+VivillonGardenPortraitPalettePointers::
+	add_portraitpalette VivillonGardenNeutral
+	add_portraitpalette VivillonGardenHappy
+
+VivillonHigh_plainsPortraitPalettePointers::
+	add_portraitpalette VivillonHigh_plainsNeutral
+	add_portraitpalette VivillonHigh_plainsHappy
+
+VivillonIcy_snowPortraitPalettePointers::
+	add_portraitpalette VivillonIcy_snowNeutral
+	add_portraitpalette VivillonIcy_snowHappy
+
+VivillonJunglePortraitPalettePointers::
+	add_portraitpalette VivillonJungleNeutral
+	add_portraitpalette VivillonJungleHappy
+
+VivillonMarinePortraitPalettePointers::
+	add_portraitpalette VivillonMarineNeutral
+	add_portraitpalette VivillonMarineHappy
+
+VivillonModernPortraitPalettePointers::
+	add_portraitpalette VivillonModernNeutral
+	add_portraitpalette VivillonModernHappy
+
+VivillonMonsoonPortraitPalettePointers::
+	add_portraitpalette VivillonMonsoonNeutral
+	add_portraitpalette VivillonMonsoonHappy
+
+VivillonOceanPortraitPalettePointers::
+	add_portraitpalette VivillonOceanNeutral
+	add_portraitpalette VivillonOceanHappy
+
+VivillonPolarPortraitPalettePointers::
+	add_portraitpalette VivillonPolarNeutral
+	add_portraitpalette VivillonPolarHappy
+
+VivillonRiverPortraitPalettePointers::
+	add_portraitpalette VivillonRiverNeutral
+	add_portraitpalette VivillonRiverHappy
+
+VivillonSandstormPortraitPalettePointers::
+	add_portraitpalette VivillonSandstormNeutral
+	add_portraitpalette VivillonSandstormHappy
+
+VivillonSavannahPortraitPalettePointers::
+	add_portraitpalette VivillonSavannahNeutral
+	add_portraitpalette VivillonSavannahHappy
+
+VivillonSunPortraitPalettePointers::
+	add_portraitpalette VivillonSunNeutral
+	add_portraitpalette VivillonSunHappy
+
+VivillonTundraPortraitPalettePointers::
+	add_portraitpalette VivillonTundraNeutral
+	add_portraitpalette VivillonTundraHappy
+
+VivillonPokeballPortraitPalettePointers::
+	add_portraitpalette VivillonPokeballNeutral
+	add_portraitpalette VivillonPokeballHappy
+
+VivillonFancyPortraitPalettePointers::
+	add_portraitpalette VivillonFancyNeutral
+	add_portraitpalette VivillonFancyHappy
+
+
+LitleoPortraitPalettePointers::
+	add_portraitpalette LitleoNeutral
+	add_portraitpalette LitleoHappy
+
+
+PyroarPortraitPalettePointers::
+	add_portraitpalette PyroarNeutral
+	add_portraitpalette PyroarHappy
+
+PyroarFPortraitPalettePointers::
+	add_portraitpalette PyroarFNeutral
+	add_portraitpalette PyroarFHappy
+
+
+FlabebePortraitPalettePointers::
+	add_portraitpalette FlabebeNeutral
+	add_portraitpalette FlabebeHappy
+
+
+FloettePortraitPalettePointers::
+	add_portraitpalette FloetteNeutral
+	add_portraitpalette FloetteHappy
+
+FloetteEternal_flowerPortraitPalettePointers::
+	add_portraitpalette FloetteEternal_flowerNeutral
+	add_portraitpalette FloetteEternal_flowerHappy
+
+
+FlorgesPortraitPalettePointers::
+	add_portraitpalette FlorgesNeutral
+	add_portraitpalette FlorgesHappy
+
+
+SkiddoPortraitPalettePointers::
+	add_portraitpalette SkiddoNeutral
+	add_portraitpalette SkiddoHappy
+
+
+GogoatPortraitPalettePointers::
+	add_portraitpalette GogoatNeutral
+	add_portraitpalette GogoatHappy
+
+
+PanchamPortraitPalettePointers::
+	add_portraitpalette PanchamNeutral
+	add_portraitpalette PanchamHappy
+
+
+PangoroPortraitPalettePointers::
+	add_portraitpalette PangoroNeutral
+	add_portraitpalette PangoroHappy
+
+
+FurfrouPortraitPalettePointers::
+	add_portraitpalette FurfrouNeutral
+	add_portraitpalette FurfrouHappy
+
+FurfrouHeartPortraitPalettePointers::
+	add_portraitpalette FurfrouHeartNeutral
+	add_portraitpalette FurfrouHeartHappy
+
+FurfrouStarPortraitPalettePointers::
+	add_portraitpalette FurfrouStarNeutral
+	add_portraitpalette FurfrouStarHappy
+
+FurfrouDiamondPortraitPalettePointers::
+	add_portraitpalette FurfrouDiamondNeutral
+	add_portraitpalette FurfrouDiamondHappy
+
+FurfrouDebutantePortraitPalettePointers::
+	add_portraitpalette FurfrouDebutanteNeutral
+	add_portraitpalette FurfrouDebutanteHappy
+
+FurfrouMatronPortraitPalettePointers::
+	add_portraitpalette FurfrouMatronNeutral
+	add_portraitpalette FurfrouMatronHappy
+
+FurfrouDandyPortraitPalettePointers::
+	add_portraitpalette FurfrouDandyNeutral
+	add_portraitpalette FurfrouDandyHappy
+
+FurfrouLa_reinePortraitPalettePointers::
+	add_portraitpalette FurfrouLa_reineNeutral
+	add_portraitpalette FurfrouLa_reineHappy
+
+FurfrouKabukiPortraitPalettePointers::
+	add_portraitpalette FurfrouKabukiNeutral
+	add_portraitpalette FurfrouKabukiHappy
+
+FurfrouPharaohPortraitPalettePointers::
+	add_portraitpalette FurfrouPharaohNeutral
+	add_portraitpalette FurfrouPharaohHappy
+
+
+EspurrPortraitPalettePointers::
+	add_portraitpalette EspurrNeutral
+	add_portraitpalette EspurrHappy
+
+
+MeowsticPortraitPalettePointers::
+	add_portraitpalette MeowsticNeutral
+	add_portraitpalette MeowsticHappy
+
+MeowsticFPortraitPalettePointers::
+	add_portraitpalette MeowsticFNeutral
+	add_portraitpalette MeowsticFHappy
+
+
+HonedgePortraitPalettePointers::
+	add_portraitpalette HonedgeNeutral
+	add_portraitpalette HonedgeHappy
+
+
+DoubladePortraitPalettePointers::
+	add_portraitpalette DoubladeNeutral
+	add_portraitpalette DoubladeHappy
+
+
+AegislashPortraitPalettePointers::
+	add_portraitpalette AegislashNeutral
+	add_portraitpalette AegislashHappy
+
+AegislashBladePortraitPalettePointers::
+	add_portraitpalette AegislashBladeNeutral
+	add_portraitpalette AegislashBladeHappy
+
+
+SpritzeePortraitPalettePointers::
+	add_portraitpalette SpritzeeNeutral
+	add_portraitpalette SpritzeeHappy
+
+
+AromatissePortraitPalettePointers::
+	add_portraitpalette AromatisseNeutral
+	add_portraitpalette AromatisseHappy
+
+
+SwirlixPortraitPalettePointers::
+	add_portraitpalette SwirlixNeutral
+	add_portraitpalette SwirlixHappy
+
+
+SlurpuffPortraitPalettePointers::
+	add_portraitpalette SlurpuffNeutral
+	add_portraitpalette SlurpuffHappy
+
+
+InkayPortraitPalettePointers::
+	add_portraitpalette InkayNeutral
+	add_portraitpalette InkayHappy
+
+
+MalamarPortraitPalettePointers::
+	add_portraitpalette MalamarNeutral
+	add_portraitpalette MalamarHappy
+
+
+BinaclePortraitPalettePointers::
+	add_portraitpalette BinacleNeutral
+	add_portraitpalette BinacleHappy
+
+
+BarbaraclePortraitPalettePointers::
+	add_portraitpalette BarbaracleNeutral
+	add_portraitpalette BarbaracleHappy
+
+
+SkrelpPortraitPalettePointers::
+	add_portraitpalette SkrelpNeutral
+	add_portraitpalette SkrelpHappy
+
+
+DragalgePortraitPalettePointers::
+	add_portraitpalette DragalgeNeutral
+	add_portraitpalette DragalgeHappy
+
+
+ClauncherPortraitPalettePointers::
+	add_portraitpalette ClauncherNeutral
+	add_portraitpalette ClauncherHappy
+
+
+ClawitzerPortraitPalettePointers::
+	add_portraitpalette ClawitzerNeutral
+	add_portraitpalette ClawitzerHappy
+
+
+HelioptilePortraitPalettePointers::
+	add_portraitpalette HelioptileNeutral
+	add_portraitpalette HelioptileHappy
+
+
+HelioliskPortraitPalettePointers::
+	add_portraitpalette HelioliskNeutral
+	add_portraitpalette HelioliskHappy
+
+
+TyruntPortraitPalettePointers::
+	add_portraitpalette TyruntNeutral
+	add_portraitpalette TyruntHappy
+
+
+TyrantrumPortraitPalettePointers::
+	add_portraitpalette TyrantrumNeutral
+	add_portraitpalette TyrantrumHappy
+
+
+AmauraPortraitPalettePointers::
+	add_portraitpalette AmauraNeutral
+	add_portraitpalette AmauraHappy
+
+
+AurorusPortraitPalettePointers::
+	add_portraitpalette AurorusNeutral
+	add_portraitpalette AurorusHappy
+
+
+SylveonPortraitPalettePointers::
+	add_portraitpalette SylveonNeutral
+	add_portraitpalette SylveonHappy
+
+
+HawluchaPortraitPalettePointers::
+	add_portraitpalette HawluchaNeutral
+	add_portraitpalette HawluchaHappy
+
+
+DedennePortraitPalettePointers::
+	add_portraitpalette DedenneNeutral
+	add_portraitpalette DedenneHappy
+
+
+CarbinkPortraitPalettePointers::
+	add_portraitpalette CarbinkNeutral
+	add_portraitpalette CarbinkHappy
+
+
+GoomyPortraitPalettePointers::
+	add_portraitpalette GoomyNeutral
+	add_portraitpalette GoomyHappy
+
+
+SliggooPortraitPalettePointers::
+	add_portraitpalette SliggooNeutral
+	add_portraitpalette SliggooHappy
+
+
+GoodraPortraitPalettePointers::
+	add_portraitpalette GoodraNeutral
+	add_portraitpalette GoodraHappy
+
+
+KlefkiPortraitPalettePointers::
+	add_portraitpalette KlefkiNeutral
+	add_portraitpalette KlefkiHappy
+
+
+PhantumpPortraitPalettePointers::
+	add_portraitpalette PhantumpNeutral
+	add_portraitpalette PhantumpHappy
+
+
+TrevenantPortraitPalettePointers::
+	add_portraitpalette TrevenantNeutral
+	add_portraitpalette TrevenantHappy
+
+
+PumpkabooPortraitPalettePointers::
+	add_portraitpalette PumpkabooNeutral
+	add_portraitpalette PumpkabooHappy
+
+PumpkabooAveragePortraitPalettePointers::
+	add_portraitpalette PumpkabooAverageNeutral
+	add_portraitpalette PumpkabooAverageHappy
+
+PumpkabooLargePortraitPalettePointers::
+	add_portraitpalette PumpkabooLargeNeutral
+	add_portraitpalette PumpkabooLargeHappy
+
+PumpkabooSuperPortraitPalettePointers::
+	add_portraitpalette PumpkabooSuperNeutral
+	add_portraitpalette PumpkabooSuperHappy
+
+
+GourgeistPortraitPalettePointers::
+	add_portraitpalette GourgeistNeutral
+	add_portraitpalette GourgeistHappy
+
+GourgeistAveragePortraitPalettePointers::
+	add_portraitpalette GourgeistAverageNeutral
+	add_portraitpalette GourgeistAverageHappy
+
+GourgeistLargePortraitPalettePointers::
+	add_portraitpalette GourgeistLargeNeutral
+	add_portraitpalette GourgeistLargeHappy
+
+GourgeistSuperPortraitPalettePointers::
+	add_portraitpalette GourgeistSuperNeutral
+	add_portraitpalette GourgeistSuperHappy
+
+
+BergmitePortraitPalettePointers::
+	add_portraitpalette BergmiteNeutral
+	add_portraitpalette BergmiteHappy
+
+
+AvaluggPortraitPalettePointers::
+	add_portraitpalette AvaluggNeutral
+	add_portraitpalette AvaluggHappy
+
+
+NoibatPortraitPalettePointers::
+	add_portraitpalette NoibatNeutral
+	add_portraitpalette NoibatHappy
+
+
+NoivernPortraitPalettePointers::
+	add_portraitpalette NoivernNeutral
+	add_portraitpalette NoivernHappy
+
+
+XerneasPortraitPalettePointers::
+	add_portraitpalette XerneasNeutral
+	add_portraitpalette XerneasHappy
+
+
+YveltalPortraitPalettePointers::
+	add_portraitpalette YveltalNeutral
+	add_portraitpalette YveltalHappy
+
+
+ZygardePortraitPalettePointers::
+	add_portraitpalette ZygardeNeutral
+	add_portraitpalette ZygardeHappy
+
+ZygardeFifty_percentPortraitPalettePointers::
+	add_portraitpalette ZygardeFifty_percentNeutral
+	add_portraitpalette ZygardeFifty_percentHappy
+
+ZygardeCompletePortraitPalettePointers::
+	add_portraitpalette ZygardeCompleteNeutral
+	add_portraitpalette ZygardeCompleteHappy
+
+
+DianciePortraitPalettePointers::
+	add_portraitpalette DiancieNeutral
+	add_portraitpalette DiancieHappy
+
+DiancieMegaPortraitPalettePointers::
+	add_portraitpalette DiancieMegaNeutral
+	add_portraitpalette DiancieMegaHappy
+
+
+HoopaPortraitPalettePointers::
+	add_portraitpalette HoopaNeutral
+	add_portraitpalette HoopaHappy
+
+HoopaUnboundPortraitPalettePointers::
+	add_portraitpalette HoopaUnboundNeutral
+	add_portraitpalette HoopaUnboundHappy
+
+
+VolcanionPortraitPalettePointers::
+	add_portraitpalette VolcanionNeutral
+	add_portraitpalette VolcanionHappy
+
+
