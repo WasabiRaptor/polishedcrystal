@@ -48,20 +48,12 @@ FollowerCommandMenu:
 
     ld a, [wCurSpecies]
     call PlayCry
-    ; fallthrough
-PokemonPartyCommandMenu::
-	ld a, MON_GROUP_SPECIES_AND_FORM
-	predef GetPartyParamLocation
-	ld a, [wCurPartyMon]
-	ld hl, wPartyMonNicknames
-	farcall SkipPokemonNames
-	ld d, h
-	ld e, l
-    call PrintNamePlate
-    xor a ; neutral
+
+	xor a ; neutral
     farcall Portrait
 
-    call GetBaseData
+    ; fallthrough
+PokemonPartyCommandMenu::
     xor a
     ld [wBuffer1], a ; intit this value as it'll be checked later
 
@@ -238,25 +230,49 @@ TeleportFollowerMenuAction:
 	jr FinishFolloweMonAction
 
 HealFollowerMenuAction:
-	call ClearBGPalettes
-	call ClearTileMap
-	call ApplyTilemapInVBlank
-
-	farcall InitPartyMenuWithCancel
-	farcall WritePartyMenuTilemap
-	farcall PrintPartyMenuText
+	ld a, [wCurPartyMon]
+	push af
+	call PrepForPartyMenu
     farcall MonMenu_Softboiled_MilkDrink
 	call ReloadPokemonPartyCommandMenu
-	jr FinishFolloweMonAction
+	pop af
+	ld [wCurPartyMon], a
+	jp PokemonPartyCommandMenu
 
 LeadFollowerMenuAction:
     ret
 
 SwitchFollowerMenuAction:
-    ret
+	call PrepForPartyMenu
+	farcall PartyMenuSelect
+	jr c, .didnt_select 	;carry is set if a selection wasn't made, making sure to set the follower to what it was if that selection wasn't made
+	ld a, [wCurPartyMon]
+	farcall SetFollower
+	call ReturnToMapWithSpeechTextbox
+	jp FollowerCommandMenu
+
+.didnt_select
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	ld [wCurPartyMon], a
+	call ReloadPokemonPartyCommandMenu
+	jp PokemonPartyCommandMenu
 
 StayFollowerMenuAction:
     ret
+
+
+PrepForPartyMenu:
+	call DisableSpriteUpdates
+	xor a
+	ld [wPartyMenuActionText], a
+	call ClearBGPalettes
+	farcall InitPartyMenuLayout
+	call ApplyTilemapInVBlank
+	call SetPalettes
+	call DelayFrame
+	ret
 
 ReloadPokemonPartyCommandMenu:
 	push hl
@@ -264,6 +280,20 @@ ReloadPokemonPartyCommandMenu:
 	push de
 	push af
 	call ReturnToMapWithSpeechTextbox
+
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	call GetBaseData
+
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
+	farcall SkipPokemonNames
+	ld d, h
+	ld e, l
+    call PrintNamePlate
+    xor a ; neutral
+    farcall Portrait
+
 	pop af
 	pop de
 	pop bc
