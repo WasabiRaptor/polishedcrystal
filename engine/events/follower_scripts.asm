@@ -35,6 +35,8 @@ FollowerCommandMenu:
 	ld a, [wCurGroup]
 	and a
     ret z
+    call GetBaseData
+
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	farcall SkipPokemonNames

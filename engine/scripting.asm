@@ -2997,6 +2997,7 @@ Script_portrait:
 	call GetScriptByte
 	ld [wCurForm], a
 	call GetBaseData
+
 	call GetScriptByte
 	farjp Portrait
 
