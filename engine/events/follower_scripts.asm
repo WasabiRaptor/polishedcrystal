@@ -213,10 +213,12 @@ PlayFollowerMenuAction:
 
 FlyFollowerMenuAction:
 	farcall MonMenu_Fly
+	cp MONSUBMENU_QUIT
+	call nz, ReloadPokemonPartyCommandMenu
 	;fallthrough
 FinishFolloweMonAction:
 	cp MONSUBMENU_QUIT
-	jp nz, ReloadPokemonPartyCommandMenu
+	jp nz, PokemonPartyCommandMenu
 	ld a, b
 	push af
 	call ExitAllMenus
@@ -236,7 +238,15 @@ TeleportFollowerMenuAction:
 	jr FinishFolloweMonAction
 
 HealFollowerMenuAction:
+	call ClearBGPalettes
+	call ClearTileMap
+	call ApplyTilemapInVBlank
+
+	farcall InitPartyMenuWithCancel
+	farcall WritePartyMenuTilemap
+	farcall PrintPartyMenuText
     farcall MonMenu_Softboiled_MilkDrink
+	call ReloadPokemonPartyCommandMenu
 	jr FinishFolloweMonAction
 
 LeadFollowerMenuAction:
@@ -249,8 +259,16 @@ StayFollowerMenuAction:
     ret
 
 ReloadPokemonPartyCommandMenu:
+	push hl
+	push bc
+	push de
+	push af
 	call ReturnToMapWithSpeechTextbox
-	jp PokemonPartyCommandMenu
+	pop af
+	pop de
+	pop bc
+	pop hl
+	ret
 
 FollowerPetCommandMenuDataHeader:
 	db BACKUP_TILES ; flags
