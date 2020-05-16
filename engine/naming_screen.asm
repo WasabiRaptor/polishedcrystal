@@ -125,6 +125,7 @@ NamingScreen: ; 116c1
 ; 1178d
 
 .Player: ; 1178d (4:578d)
+	xor a
 	farcall GetPlayerIcon
 	ld a, [wPlayerOverworldSprite]
 	bit 0, a
@@ -132,7 +133,7 @@ NamingScreen: ; 116c1
 	jr z, .got_player_walk
 	ld c, SPRITE_ANIM_INDEX_BLUE_WALK
 .got_player_walk
-	call .LoadSprite
+	;call .LoadSprite
 	hlcoord 5, 2
 	ld de, .PlayerNameString
 	call PlaceString

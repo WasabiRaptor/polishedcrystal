@@ -1850,8 +1850,8 @@ ReturnToMapWithSpeechTextbox:: ; 0x2b74
 	call ClearBGPalettes
 	call ClearSprites
 	call ReloadTilesetAndPalettes
-	hlcoord 0, 12
-	lb bc, 4, 18
+	hlcoord 0, 13
+	lb bc, 3, 18
 	call TextBox
 	ld hl, wVramState
 	set 0, [hl]

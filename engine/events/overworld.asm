@@ -61,7 +61,7 @@ CheckBadge: ; c731
 	text_jump _BadgeRequiredText
 	db "@"
 
-RemoveForcedFollower:
+RemoveRidePokemon:
 	ld hl, wPlayerOverworldStatus
 	res 1, [hl] ; player is no longer riding a pokemon
 
@@ -69,7 +69,7 @@ RemoveForcedFollower:
 	ld b, a
 	jr SetTempFollower
 
-ForceFollower:
+SetRidePokemon:
 	ld hl, wPlayerOverworldStatus
 	set 1, [hl] ; player is riding a pokemon
 
@@ -653,7 +653,7 @@ TrySurfOW:: ; c9e7
 	bit OWSTATE_BIKING_FORCED, [hl]
 	jr nz, .quit
 
-	call ForceFollower
+	call SetRidePokemon
 
 	call GetSurfType
 	ld [wBuffer2], a
@@ -713,9 +713,6 @@ FlyFunction: ; ca3b
 
 .TryFly: ; ca52
 ; Fly
-	ld de, ENGINE_STORMBADGE
-	call CheckBadge
-	jr c, .nostormbadge
 	call CheckFlyAllowedOnMap
 	jr nz, .indoors
 
@@ -751,6 +748,7 @@ FlyFunction: ; ca3b
 	ret
 
 .DoFly: ; ca94
+	call SetRidePokemon
 	ld hl, .FlyScript
 	call QueueScript
 	ld a, $81
@@ -779,6 +777,7 @@ FlyFunction: ; ca3b
 
 .ReturnFromFly: ; cacb
 	farcall ReturnFromFly_SpawnOnlyPlayer
+	call RemoveRidePokemon
 	call DelayFrame
 	jp ReplaceKrisSprite
 

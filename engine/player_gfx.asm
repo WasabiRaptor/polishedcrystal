@@ -1,18 +1,4 @@
-GetPlayerIcon: ; 8832c
-; Get the player icon corresponding to gender
 
-; Male
-	ld de, ChrisSpriteGFX
-	ld b, BANK(ChrisSpriteGFX)
-
-	ld a, [wPlayerOverworldSprite]
-	bit 0, a
-	ret z
-
-; Female
-	ld de, KrisSpriteGFX
-	ld b, BANK(KrisSpriteGFX)
-	ret
 
 
 GetCardPic: ; 8833e

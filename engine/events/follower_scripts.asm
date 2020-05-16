@@ -9,9 +9,10 @@ _FollowerInteractScript::
     callasm FollowerCommandMenu
 
 EndFollowerInteract::
+	reloadmappart
     closeportrait
     closetext
-    end
+    farjump StartMenuCallback
 
 FollowerCommandMenu:
 	ld a, [wFollowerStatus]
@@ -45,12 +46,18 @@ FollowerCommandMenu:
 
     ld a, [wCurSpecies]
     call PlayCry
-    xor a ; neutral
-    farcall Portrait
     ; fallthrough
 PokemonPartyCommandMenu::
 	ld a, MON_GROUP_SPECIES_AND_FORM
 	predef GetPartyParamLocation
+	ld a, [wCurPartyMon]
+	ld hl, wPartyMonNicknames
+	farcall SkipPokemonNames
+	ld d, h
+	ld e, l
+    call PrintNamePlate
+    xor a ; neutral
+    farcall Portrait
 
     call GetBaseData
     xor a
@@ -203,16 +210,32 @@ PlayFollowerMenuAction:
     ret
 
 FlyFollowerMenuAction:
-    ret
+	farcall MonMenu_Fly
+	;fallthrough
+FinishFolloweMonAction:
+	cp MONSUBMENU_QUIT
+	jp nz, ReloadPokemonPartyCommandMenu
+	ld a, b
+	push af
+	call ExitAllMenus
+	pop af
+	cp 4
+	ret nz
+	ld a, HMENURETURN_SCRIPT
+	ldh [hMenuReturn], a
+	ret
 
 DigFollowerMenuAction:
-    ret
+    farcall MonMenu_Dig
+	jr FinishFolloweMonAction
 
 TeleportFollowerMenuAction:
-    ret
+    farcall MonMenu_Teleport
+	jr FinishFolloweMonAction
 
 HealFollowerMenuAction:
-    ret
+    farcall MonMenu_Softboiled_MilkDrink
+	jr FinishFolloweMonAction
 
 LeadFollowerMenuAction:
     ret
@@ -223,6 +246,9 @@ SwitchFollowerMenuAction:
 StayFollowerMenuAction:
     ret
 
+ReloadPokemonPartyCommandMenu:
+	call ReturnToMapWithSpeechTextbox
+	jp PokemonPartyCommandMenu
 
 FollowerPetCommandMenuDataHeader:
 	db BACKUP_TILES ; flags

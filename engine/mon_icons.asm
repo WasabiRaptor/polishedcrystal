@@ -39,7 +39,13 @@ LoadFlyMonColor:
 	predef GetPartyParamLocation
 	ld a, MON_SHINY
 	predef GetPartyParamLocation
+	ld a, [wCurPartyMon]
+	push af
+	ld [wCurPartyMon], a
 	call GetMenuMonIconPalette
+	pop af
+	ld [wCurPartyMon], a
+	ld a, 1
 	jp ProcessMenuMonIconColor
 
 LoadPartyMenuMonIconColors:
@@ -134,9 +140,10 @@ GetMenuMonIconPalette::
 	and a
 .got_shininess:
 .got_species:
-	ld hl, wUnknOBPals palette 1
+	ld hl, wUnknOBPals
 	ld bc, 1 palettes
 	ld a, [wCurPartyMon]
+	inc a
 	rst AddNTimes
 	ld d, h
 	ld e, l
@@ -346,6 +353,27 @@ HeldItemIcons:
 INCBIN "gfx/icons/mail.2bpp"
 INCBIN "gfx/icons/item.2bpp"
 ; 8ea17
+GetPlayerIcon::
+	ld l, a
+	ld h, 0
+; One tile is 16 bytes long.
+rept 4
+	add hl, hl
+endr
+	ld de, VTiles0
+	add hl, de
+	push hl ;1
+	push hl ;2
+	push hl ;3
+	push hl ;4
+
+	ld a, [wCurPartyMon]
+	push af ;5
+	farcall GetPlayerSpriteAddresses
+	pop af ;4
+	ld [wCurPartyMon], a
+	jr LoadTheIcon
+
 
 GetIcon_a: ; 8ea1b
 ; Load icon graphics into VRAM starting from tile a.
@@ -370,6 +398,7 @@ endr
 	ld [wCurSpecies], a
 
 	farcall GetPokemonOrPlayerOverworldSprite
+LoadTheIcon:
 	pop hl ;3
 	ld c, 4
 	push bc ;4

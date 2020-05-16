@@ -794,10 +794,8 @@ FinishPrepIntroPic:
 ; 61cd
 
 Intro_PlacePlayerSprite: ; 61cd
+	xor a
 	farcall GetPlayerIcon
-	ld c, $c
-	ld hl, VTiles0
-	call Request2bpp
 
 	ld hl, wSprites
 	ld de, .sprites

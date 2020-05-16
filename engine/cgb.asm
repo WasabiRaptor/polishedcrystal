@@ -252,6 +252,14 @@ _CGB_PokegearPals: ; 8eb9
 	ld a, $5
 	call FarCopyWRAM
 
+	ld a, [wTimeOfDayPal]
+	push af
+	ld a, MIDDAY
+	ld [wTimeOfDayPal], a
+	farcall LoadSpecialMapOBPalette
+	pop af
+	ld [wTimeOfDayPal], a
+
 	call ApplyPals
 	ld a, $1
 	ldh [hCGBPalUpdate], a

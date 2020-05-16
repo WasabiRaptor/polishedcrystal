@@ -115,24 +115,8 @@ Pokegear_LoadGFX: ; 90c4e
 	;jr z, .sinjoh
 	;cp MYSTRI_STAGE
 	;jr z, .sinjoh
-	farcall GetPlayerIcon
-	push de
-	ld h, d
-	ld l, e
-	ld a, b
-	; standing sprite
-	push af
-	ld de, VTiles0 tile $10
-	ld bc, 4 tiles
-	call FarCopyBytes
-	pop af
-	pop hl
-	; walking sprite
-	ld de, 12 tiles
-	add hl, de
-	ld de, VTiles0 tile $14
-	ld bc, 4 tiles
-	jp FarCopyBytes
+	ld a, 0
+	farjp GetPlayerIcon
 
 .ssaqua
 	ld hl, FastShipGFX
@@ -789,18 +773,19 @@ CheckSkipFarawayIsland:
 
 PokegearMap_InitPlayerIcon: ; 9106a
 	push af
+	xor a
+	farcall GetPlayerIcon
+
+; Animation/palette
 	depixel 0, 0
-	ld b, SPRITE_ANIM_INDEX_RED_WALK
-	ld a, [wPlayerOverworldSprite]
-	bit 0, a
-	jr z, .got_gender
-	ld b, SPRITE_ANIM_INDEX_BLUE_WALK
-.got_gender
-	ld a, b
+	ld a, SPRITE_ANIM_INDEX_PARTY_MON ; Male
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
-	ld [hl], $10
+	ld [hl], 0
+	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
+	add hl, bc
+	ld [hl], SPRITE_ANIM_SEQ_NULL
 	pop af
 	ld e, a
 	push bc
@@ -2108,6 +2093,8 @@ PokegearMap: ; 91ae1
 ; 91af3
 
 _FlyMap: ; 91af3
+	call LoadStandardFont
+	call LoadFontsExtra
 	call ClearBGPalettes
 	call ClearTileMap
 	call ClearSprites
@@ -2218,13 +2205,13 @@ FlyMapScroll: ; 91b73
 
 TownMapBubble: ; 91bb5
 ; Draw the bubble containing the location text in the town map HUD
-	hlcoord 6,0
+	hlcoord SCREEN_WIDTH-9,0
 	ld a, $17
 	ld [hl], a
-	hlcoord 6,1
+	hlcoord SCREEN_WIDTH-9,1
 	ld a, $26
 	ld [hli], a
-	ld bc, 12
+	ld bc, 7
 	ld a, $7
 	call ByteFill
 	ld a, $17
@@ -2234,7 +2221,7 @@ TownMapBubble: ; 91bb5
 	ld a, " "
 	call ByteFill
 ; Print "Where?"
-	hlcoord SCREEN_WIDTH-13, 0
+	hlcoord SCREEN_WIDTH-8, 0
 	ld de, .FlyToWhere
 	call PlaceString
 
@@ -2246,7 +2233,7 @@ TownMapBubble: ; 91bb5
 	ret
 
 .FlyToWhere:
-	db "fly to where?@"
+	db " fly to where?@"
 .FlyToWhereEnd:
 .Name:
 ; We need the map location of the default flypoint
@@ -2340,9 +2327,9 @@ FlyMap: ; 91c90
 	call FillInvarMap
 	call TownMapBubble
 	call TownMapPals
-	hlcoord SCREEN_WIDTH-14, 0, wAttrMap
-	lb bc, 2, 13
-	xor a
+	hlcoord 11, 0, wAttrMap
+	lb bc, 2, 8
+	ld a, 0 | BEHIND_BG
 	call FillBoxWithByte
 
 	call .MapHud
@@ -2888,7 +2875,7 @@ TownMapMon: ; 91f7b
 	ld a, [hl]
 	ld [wd265], a
 ; Get FlyMon icon
-	ld e, 8 ; starting tile in VRAM
+	ld e, $20 ; starting tile in VRAM
 	farcall PokegearFlyMap_GetMonIcon
 ; Animation/palette
 	depixel 0, 0
@@ -2896,7 +2883,7 @@ TownMapMon: ; 91f7b
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
-	ld [hl], $8
+	ld [hl], $20
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
 	add hl, bc
 	ld [hl], SPRITE_ANIM_SEQ_NULL
@@ -2907,35 +2894,19 @@ TownMapMon: ; 91f7b
 TownMapPlayerIcon: ; 91fa6
 ; Draw the player icon at town map location in a
 	push af
+	xor a
 	farcall GetPlayerIcon
-; Standing icon
-	ld hl, VTiles0 tile $10
-	ld c, 4 ; # tiles
-	push bc
-	push de
-	call Request2bpp
-	pop de
-	pop bc
-; Walking icon
-	ld hl, $c0
-	add hl, de
-	ld d, h
-	ld e, l
-	ld hl, VTiles0 tile $14
-	call Request2bpp
+
 ; Animation/palette
 	depixel 0, 0
-	ld b, SPRITE_ANIM_INDEX_RED_WALK ; Male
-	ld a, [wPlayerOverworldSprite]
-	bit 0, a
-	jr z, .got_gender
-	ld b, SPRITE_ANIM_INDEX_BLUE_WALK ; Female
-.got_gender
-	ld a, b
+	ld a, SPRITE_ANIM_INDEX_PARTY_MON ; Male
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
-	ld [hl], $10
+	ld [hl], 0
+	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
+	add hl, bc
+	ld [hl], SPRITE_ANIM_SEQ_NULL
 	pop af
 	ld e, a
 	push bc
