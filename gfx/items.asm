@@ -327,11 +327,13 @@ SECTION "Key Item Icons", ROMX
 
 KeyItemIcons::
 BicycleIcon:      INCBIN "gfx/items/bicycle.2bpp.lz"
+LokiMaskIcon: 	  INCBIN "gfx/items/tf_mask.2bpp.lz"
+WeaverMaskIcon:   INCBIN "gfx/items/tf_mask.2bpp.lz"
+ItemfinderIcon:   INCBIN "gfx/items/itemfinder.2bpp.lz"
 OldRodIcon:       INCBIN "gfx/items/old_rod.2bpp.lz"
 GoodRodIcon:      INCBIN "gfx/items/good_rod.2bpp.lz"
 SuperRodIcon:     INCBIN "gfx/items/super_rod.2bpp.lz"
 CoinCaseIcon:     INCBIN "gfx/items/coin_case.2bpp.lz"
-ItemfinderIcon:   INCBIN "gfx/items/itemfinder.2bpp.lz"
 ShinyCharmIcon:   INCBIN "gfx/items/shiny_charm.2bpp.lz"
 OvalCharmIcon:    INCBIN "gfx/items/oval_charm.2bpp.lz"
 ApricornBoxIcon:  INCBIN "gfx/items/apricorn_box.2bpp.lz"

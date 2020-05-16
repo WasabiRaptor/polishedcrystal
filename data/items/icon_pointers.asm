@@ -224,11 +224,13 @@ ItemIconPointers:
 
 KeyItemIconPointers:
 	dw BicycleIcon
+	dw LokiMaskIcon
+	dw WeaverMaskIcon
+	dw ItemfinderIcon
 	dw OldRodIcon
 	dw GoodRodIcon
 	dw SuperRodIcon
 	dw CoinCaseIcon
-	dw ItemfinderIcon
 	dw ShinyCharmIcon
 	dw OvalCharmIcon
 	dw ApricornBoxIcon

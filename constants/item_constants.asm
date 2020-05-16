@@ -501,11 +501,13 @@ NUM_APRICORNS EQU const_value +- 1
 ; Key item constants
 	const_def 0
 	const BICYCLE      ; 55
+	const LOKI_MASK
+	const WEAVER_MASK
+	const ITEMFINDER   ; 5a
 	const OLD_ROD      ; 56
 	const GOOD_ROD     ; 57
 	const SUPER_ROD    ; 58
 	const COIN_CASE    ; 59
-	const ITEMFINDER   ; 5a
 	const SHINY_CHARM  ; 6e
 	const OVAL_CHARM   ; 6f
 	const APRICORN_BOX ; 71

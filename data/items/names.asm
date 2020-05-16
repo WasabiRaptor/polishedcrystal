@@ -221,11 +221,13 @@ endc
 
 KeyItemNames::
 	db "Bicycle@"
+	db "Loki Mask@"
+	db "Weaver Mask@"
+	db "Itemfinder@"
 	db "Old Rod@"
 	db "Good Rod@"
 	db "Super Rod@"
 	db "Coin Case@"
-	db "Itemfinder@"
 	db "Shiny Charm@"
 	db "Oval Charm@"
 	db "Apricorn Box@"

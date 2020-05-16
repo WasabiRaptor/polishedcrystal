@@ -1984,6 +1984,33 @@ GotOffTheBikeText: ; 0xd181
 	text_jump UnknownText_0x1c09c7
 	db "@"
 
+TransformPlayer::
+	ld a, [wPlayerOverworldStatus]
+	xor 1 ; swap the bit that says if you're transformed into a pokemon or not
+	ld [wPlayerOverworldStatus], a
+	ld hl, Script_TransformPlayer
+	call QueueScript
+	ld a, 1
+	ld [wFieldMoveSucceeded], a
+	ret
+
+LoadPlayerSpeciesValues:
+	ld hl, wPlayerMon
+	predef PokemonToGroupSpeciesAndForm
+	ld a, [wCurSpecies]
+	ld [wScriptVar], a
+	ret
+
+Script_TransformPlayer:
+	callasm LoadPlayerSpeciesValues
+	refreshscreen
+	;musicfadeout
+	cry 0
+	waitsfx
+	closetext
+	special ReplaceKrisSprite
+	end
+
 HasCutAvailable:: ; d186
 	ld de, FIELD_CUT
 	call CheckPartyFieldCapability

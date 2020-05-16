@@ -907,6 +907,11 @@ KeyItemIconPalettes:
 ; BICYCLE
 	RGB 22, 12, 12
 	RGB 12, 12, 12
+INCBIN "gfx/items/tf_mask.gbcpal", middle_colors ; LOKI_MASK
+INCBIN "gfx/items/tf_mask.gbcpal", middle_colors ; WEAVER_MASK
+; ITEMFINDER
+	RGB 08, 17, 25
+	RGB 26, 12, 12
 ; OLD ROD
 	RGB 24, 19, 08
 	RGB 19, 13, 01
@@ -919,9 +924,6 @@ KeyItemIconPalettes:
 ; COIN CASE
 	RGB 24, 21, 07
 	RGB 21, 07, 07
-; ITEMFINDER
-	RGB 08, 17, 25
-	RGB 26, 12, 12
 ; SHINY CHARM
 	RGB 07, 26, 31
 	RGB 10, 15, 29
