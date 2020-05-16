@@ -29,26 +29,29 @@ SpawnPlayer: ; 8029
 	ld hl, MAPOBJECT_COLOR
 	add hl, bc
 	ln e, (1 << 3) | PAL_OW_PLAYER, PERSONTYPE_SCRIPT
-	ld a, [wPlayerSpriteSetupFlags]
-	bit 2, a
-	jr nz, .ok
-	;the pal for the player is dynamically loaded now, so we don't need this as the blue pal gets loaded int OB0 and what was originally the blue pal is now the follower pal
-
-	;ld a, [wPlayerOverworldSprite]
-	;bit 0, a
-	;jr z, .ok
-	;ln e, (1 << 3) | PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT
-
-.ok
 	ld [hl], e
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	jr nz, .follower_is_lead
+
+	ld a, PLAYER
+	ld [wCenteredObject], a
+	jr .got_lead
+
+.follower_is_lead
+	ld a, FOLLOWER
+	ld [wCenteredObject], a
+	ld hl, MAPOBJECT_MOVEMENT
+	add hl, bc
+	ld a, SPRITEMOVEDATA_FOLLOWING
+	ld [hl], a
+.got_lead
 	xor a ; 0 for PLAYER
 	ldh [hMapObjectIndexBuffer], a
 	ld bc, wPlayerObject
 	ldh [hObjectStructIndexBuffer], a
 	ld de, wPlayerStruct
 	call CopyMapObjectToObjectStruct
-	ld a, PLAYER
-	ld [wCenteredObject], a
 	ret
 
 PlayerObjectTemplate: ; 8071
@@ -72,6 +75,17 @@ SpawnFollower::
 	add hl, bc
 	ln e, (1 << 3) | PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT
 	ld [hl], e
+
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	jr z, .follower_isnt_lead
+
+	ld hl, MAPOBJECT_MOVEMENT
+	add hl, bc
+	ld a, SPRITEMOVEDATA_PLAYER
+	ld [hl], a
+.follower_isnt_lead
+
 	ld a, FOLLOWER
 	ldh [hMapObjectIndexBuffer], a
 	ld bc, wFollowerObject
@@ -80,10 +94,22 @@ SpawnFollower::
 	jp CopyMapObjectToObjectStruct
 
 StartFollowerFollowing::
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	jr nz, .follower_is_lead
 	ld a, PLAYER
 	ld [wObjectFollow_Leader], a
 	ld a, FOLLOWER
 	ld [wObjectFollow_Follower], a
+	jr .got_lead
+
+.follower_is_lead
+	ld a, FOLLOWER
+	ld [wObjectFollow_Leader], a
+	ld a, PLAYER
+	ld [wObjectFollow_Follower], a
+.got_lead
+
 	jp QueueFollowerFirstStep
 
 FollowerObjectTemplate:

@@ -200,6 +200,15 @@ NoFollowerMenuAction:
     scf
     ret
 
+LeadFollowerMenuAction:
+	ld a, [wPlayerOverworldStatus]
+	xor 1 << 3
+	ld [wPlayerOverworldStatus], a
+    ret
+
+StayFollowerMenuAction:
+    ret
+
 PlayFollowerMenuAction:
     ret
 
@@ -239,9 +248,6 @@ HealFollowerMenuAction:
 	ld [wCurPartyMon], a
 	jp PokemonPartyCommandMenu
 
-LeadFollowerMenuAction:
-    ret
-
 SwitchFollowerMenuAction:
 	call PrepForPartyMenu
 	farcall PartyMenuSelect
@@ -258,9 +264,6 @@ SwitchFollowerMenuAction:
 	ld [wCurPartyMon], a
 	call ReloadPokemonPartyCommandMenu
 	jp PokemonPartyCommandMenu
-
-StayFollowerMenuAction:
-    ret
 
 
 PrepForPartyMenu:

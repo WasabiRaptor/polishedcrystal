@@ -732,6 +732,7 @@ wPlayerOverworldStatus:: ds 1
 ; 0 - player is a pokemon if set
 ; 1 - player is riding temp follower if set
 ; 2 - Biking
+; 3 - Follower is lead
 
 wPlayerMon:: box_struct wPlayerMon
 
