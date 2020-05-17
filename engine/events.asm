@@ -887,12 +887,15 @@ CheckMenuOW: ; 96b30
 	xor a
 	ldh [hMenuReturn], a
 	ldh [hMenuReturn + 1], a
-	ldh a, [hJoyPressed]
+	ldh a, [hJoyDown]
 
-	bit 2, a ; SELECT
+	bit A_BUTTON_F, a
+	jr nz, .Self
+
+	bit SELECT_F, a ; SELECT
 	jr nz, .Select
 
-	bit 3, a ; START
+	bit START_F, a ; START
 	jr z, .NoMenu
 
 	ld a, BANK(StartMenuScript)
@@ -911,6 +914,19 @@ CheckMenuOW: ; 96b30
 	call CallScript
 	scf
 	ret
+
+.Self:
+	bit B_BUTTON_F, a
+	jr z, .NoMenu
+
+	ld a, [wCenteredObject]
+	ldh [hLastTalked], a
+	ld a, BANK(_FollowerInteractScript)
+	ld hl, _FollowerInteractScript
+	call CallScript
+	scf
+	ret
+
 ; 96b58
 
 StartMenuScript: ; 96b58

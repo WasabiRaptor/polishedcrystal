@@ -1065,8 +1065,10 @@ ApplyMovement:
 	jp StopScript
 
 Script_faceplayer:
+	ld a, [wCenteredObject]
+	ld b, a
 	ldh a, [hLastTalked]
-	and a
+	cp b
 	ret z
 	ld d, $0
 	ldh a, [hLastTalked]
