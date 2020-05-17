@@ -15,7 +15,7 @@ BlankScreen: ; 8000
 	call ApplyAttrAndTilemapInVBlank
 	jp SetPalettes
 
-SpawnPlayer: ; 8029
+SpawnPlayer:: ; 8029
 	ld a, NO_FOLLOWER
 	ld [wObjectFollow_Leader], a
 	ld [wObjectFollow_Follower], a
@@ -24,28 +24,26 @@ SpawnPlayer: ; 8029
 	call CopyPlayerObjectTemplate
 	ld b, PLAYER
 	call PlayerSpawn_ConvertCoords
+
 	xor a ; 0 for PLAYER
 	call GetMapObject
 	ld hl, MAPOBJECT_COLOR
 	add hl, bc
 	ln e, (1 << 3) | PAL_OW_PLAYER, PERSONTYPE_SCRIPT
 	ld [hl], e
-	ld a, [wPlayerOverworldStatus]
-	bit 3, a
-	jr nz, .follower_is_lead
 
-	ld a, PLAYER
-	ld [wCenteredObject], a
-	jr .got_lead
-
-.follower_is_lead
-	ld a, FOLLOWER
-	ld [wCenteredObject], a
 	ld hl, MAPOBJECT_MOVEMENT
 	add hl, bc
-	ld a, SPRITEMOVEDATA_FOLLOWING
-	ld [hl], a
-.got_lead
+
+	ld a, [wPlayerOverworldStatus]
+	bit 4, a
+	call nz, SetSpinRandomSpriteMoveData
+
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	ld a, PLAYER
+	call z, SetPlayerSpriteMoveData
+
 	xor a ; 0 for PLAYER
 	ldh [hMapObjectIndexBuffer], a
 	ld bc, wPlayerObject
@@ -59,7 +57,7 @@ PlayerObjectTemplate: ; 8071
 ; Shorter than the actual amount copied by two bytes.
 ; Said bytes seem to be unused, but the game freezes when you first spawn
 ; in your room if this is not loaded.
-	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_PLAYER, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
+	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, 0, -1
 
 SpawnFollower::
 	ld a, FOLLOWER
@@ -69,6 +67,7 @@ SpawnFollower::
 	ld b, FOLLOWER
 	call PlayerSpawn_ConvertCoords
 
+RefreshFollower::
 	ld a, FOLLOWER
 	call GetMapObject
 	ld hl, MAPOBJECT_COLOR
@@ -76,15 +75,17 @@ SpawnFollower::
 	ln e, (1 << 3) | PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT
 	ld [hl], e
 
-	ld a, [wPlayerOverworldStatus]
-	bit 3, a
-	jr z, .follower_isnt_lead
-
 	ld hl, MAPOBJECT_MOVEMENT
 	add hl, bc
-	ld a, SPRITEMOVEDATA_PLAYER
-	ld [hl], a
-.follower_isnt_lead
+
+	ld a, [wPlayerOverworldStatus]
+	bit 4, a
+	call nz, SetSpinRandomSpriteMoveData
+
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	ld a, FOLLOWER
+	call nz, SetPlayerSpriteMoveData
 
 	ld a, FOLLOWER
 	ldh [hMapObjectIndexBuffer], a
@@ -92,6 +93,18 @@ SpawnFollower::
 	ldh [hObjectStructIndexBuffer], a
 	ld de, wFollowerStruct
 	jp CopyMapObjectToObjectStruct
+
+SetPlayerSpriteMoveData::
+	ld [wCenteredObject], a
+	ld a, SPRITEMOVEDATA_PLAYER
+	ld [hl], a
+	ret
+
+SetSpinRandomSpriteMoveData::
+	ld a, SPRITEMOVEDATA_SPINRANDOM_SLOW
+	ld [hl], a
+	ret
+
 
 StartFollowerFollowing::
 	ld a, [wPlayerOverworldStatus]
@@ -156,46 +169,66 @@ WritePersonXY:: ; 80a1
 	and a
 	ret
 
-RefreshPlayerCoords: ; 80b8
+RefreshPlayerCoords:: ; 80b8
+	ld a, [wCenteredObject]
+	call GetObjectStruct
+
 	ld a, [wXCoord]
 	add 4
 	ld d, a
-	ld hl, wPlayerStandingMapX
-	sub [hl]
-	ld [hl], d
-	ld hl, wPlayerObjectXCoord
-	ld [hl], d
-	ld hl, wPlayerLastMapX
-	ld [hl], d
-	ld d, a
-	ld a, [wYCoord]
-	add 4
-	ld e, a
-	ld hl, wPlayerStandingMapY
-	sub [hl]
-	ld [hl], e
-	ld hl, wMapObjects + MAPOBJECT_Y_COORD
-	ld [hl], e
-	ld hl, wPlayerLastMapY
-	ld [hl], e
-	ld e, a
-
-; Follower
-	ld a, [wObjectFollow_Leader]
-	cp PLAYER
-	ret nz ; no longer wtf
-	ld a, [wObjectFollow_Follower]
-	cp NO_FOLLOWER
-	ret z
-
-	call GetObjectStruct
 
 	ld hl, OBJECT_STANDING_X
 	add hl, bc
-	ld a, [hl]
-	add a, d
-	ld [hl], a
-	ld [wFollowerObjectXCoord], a
+	sub [hl]
+	push af
+	ld [hl], d
+	ld hl, OBJECT_LAST_X
+	add hl, bc
+	ld [hl], d
+
+	ld a, [wYCoord]
+	add 4
+	ld e, a
+
+	ld hl, OBJECT_STANDING_Y
+	add hl, bc
+	sub [hl]
+	push af
+	ld [hl], e
+	ld hl, OBJECT_LAST_Y
+	add hl, bc
+	ld [hl], e
+
+	ld a, [wCenteredObject]
+	call GetMapObject
+
+	ld hl, MAPOBJECT_X_COORD
+	add hl, bc
+	ld [hl], d
+
+	ld hl, MAPOBJECT_Y_COORD
+	add hl, bc
+	ld [hl], e
+
+	pop af
+	ld e, a
+	pop af
+	ld d, a
+
+; Follower
+	ld a, [wObjectFollow_Leader]
+	cp FOLLOWER
+	jr z, .follower_leading
+	cp PLAYER
+	ret nz ; if neither the player nor follower are leading then we probably shouldn't be doing anything here
+
+.follower_leading
+	ld a, [wObjectFollow_Follower]
+	cp NO_FOLLOWER
+	ret z
+	;fallthrough
+
+	call GetObjectStruct
 
 	ld hl, OBJECT_LAST_X
 	add hl, bc
@@ -203,18 +236,37 @@ RefreshPlayerCoords: ; 80b8
 	add a, d
 	ld [hl], a
 
-	ld hl, OBJECT_STANDING_Y
+	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hl]
-	add a, e
+	add a, d
 	ld [hl], a
-	ld [wFollowerObjectYCoord], a
+	ld d, a
 
 	ld hl, OBJECT_LAST_Y
 	add hl, bc
 	ld a, [hl]
 	add a, e
 	ld [hl], a
+
+	ld hl, OBJECT_STANDING_Y
+	add hl, bc
+	ld a, [hl]
+	add a, e
+	ld [hl], a
+	ld e, a
+
+	ld a, [wObjectFollow_Follower]
+	call GetMapObject
+
+	ld hl, MAPOBJECT_X_COORD
+	add hl, bc
+	ld [hl], d
+
+	ld hl, MAPOBJECT_Y_COORD
+	add hl, bc
+	ld [hl], e
+
 	ret
 
 CopyObjectStruct:: ; 80e7
@@ -679,7 +731,9 @@ Special_SurfStartStep: ; 8379
 	jp AppendToMovementBuffer
 
 .GetMovementData: ; 8388
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	srl a
 	srl a
 	and 3

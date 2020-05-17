@@ -118,10 +118,12 @@ GetDestinationWarpNumber:: ; 2252
 ; 2266
 
 .GetDestinationWarpNumber: ; 2266
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	sub $4
 	ld e, a
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	sub $4
 	ld d, a
 	ld a, [wCurrMapWarpCount]
@@ -1401,22 +1403,51 @@ SaveScreen_LoadNeighbor:: ; 28f7
 	ret
 ; 2914
 
+GetCenteredObjectStructParam::
+	push hl
+	predef GetCenteredObjectStructParamAddress
+	ld a, [hl]
+	pop hl
+	ret
+
+GetCenteredObjectStructParamAddress::
+	push bc
+	push af
+	ld hl, wObjectStructs
+	ld b, 0
+	ld c, a
+	add hl, bc
+
+	ld bc, OBJECT_STRUCT_LENGTH
+	ld a, [wCenteredObject]
+	rst AddNTimes
+	pop af
+	pop bc
+	ret
+
 GetMovementPermissions:: ; 2914
 	xor a
 	ld [wTilePermissions], a
 	call .LeftRight
 	call .UpDown
 ; get coords of current tile
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	ld d, a
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	ld e, a
 	call GetCoordTile
-	ld [wPlayerStandingTile], a
+	push af
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParamAddress
+	pop af
+	ld [hl], a
 	call .CheckHiNybble
 	ret nz
 
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	and 7
 	ld hl, .MovementPermissionsData
 	add l
@@ -1443,9 +1474,11 @@ GetMovementPermissions:: ; 2914
 ; 294d
 
 .UpDown:
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	ld d, a
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	ld e, a
 
 	push de
@@ -1462,9 +1495,11 @@ GetMovementPermissions:: ; 2914
 ; 296c
 
 .LeftRight:
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	ld d, a
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	ld e, a
 
 	push de
@@ -1568,7 +1603,9 @@ GetFacingTileCoord:: ; 2a07
 ; Return map coordinates in (d, e) and tile id in a
 ; of the tile the player is facing.
 
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and %1100
 	srl a
 	srl a
@@ -1588,10 +1625,12 @@ GetFacingTileCoord:: ; 2a07
 	ld h, [hl]
 	ld l, a
 
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	add d
 	ld d, a
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	add e
 	ld e, a
 	ld a, [hl]
@@ -1765,10 +1804,12 @@ CheckCurrentMapXYTriggers:: ; 2ad4
 	call CheckTriggers
 	ld b, a
 ; Load your current coordinates into de.  This will be used to check if your position is in the xy-trigger table for the current map.
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	sub 4
 	ld d, a
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	sub 4
 	ld e, a
 

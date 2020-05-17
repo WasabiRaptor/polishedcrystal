@@ -227,14 +227,16 @@ CheckFacingObject:: ; 6fd9
 	cp COLL_COUNTER
 	jr nz, .asm_6ff1
 
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	sub d
 	cpl
 	inc a
 	add d
 	ld d, a
 
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	sub e
 	cpl
 	inc a

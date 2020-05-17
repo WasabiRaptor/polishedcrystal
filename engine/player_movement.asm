@@ -120,7 +120,8 @@ DoPlayerMovement:: ; 80000
 ; Tiles such as waterfalls and warps move the player
 ; in a given direction, overriding input.
 
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	ld c, a
 	cp COLL_WHIRLPOOL
 	jr nz, .not_whirlpool
@@ -199,7 +200,9 @@ DoPlayerMovement:: ; 80000
 	jr z, .not_turning
 
 	ld e, a
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	rrca
 	rrca
 	and 3
@@ -239,7 +242,8 @@ DoPlayerMovement:: ; 80000
 	and a
 	jr nz, .spin
 
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_ICE
 	jr z, .ice
 
@@ -356,7 +360,8 @@ DoPlayerMovement:: ; 80000
 ; 801f3
 
 .TryJump: ; 801f3
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	ld e, a
 	and $f0
 	cp $a0 ; ledge
@@ -400,7 +405,8 @@ DoPlayerMovement:: ; 80000
 	and a
 	jr nz, .DontJumpOrDiagonalStairs
 
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	ld e, a
 	and $f0
 	cp HI_NYBBLE_DIAGONAL_STAIRS
@@ -469,7 +475,8 @@ endm
 	ld d, 0
 	ld hl, .EdgeWarps
 	add hl, de
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp [hl]
 	jr nz, .not_warp
 
@@ -478,7 +485,9 @@ endm
 	jr z, .not_warp
 
 	ld e, a
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	rrca
 	rrca
 	and 3
@@ -667,7 +676,13 @@ endm
 .GetAction: ; 802ec
 ; Poll player input and update movement info.
 
-	ld hl, .table
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	ld hl, .tablePlayer
+	jr z, .got_it
+	ld hl, .tableFollower
+.got_it
+
 	ld de, .table2 - .table1
 	ld a, [wCurInput]
 	bit D_DOWN_F, a
@@ -702,7 +717,7 @@ endm
 	ld [wWalkingTile], a
 	ret
 
-.table
+.tablePlayer
 ; struct:
 ;	walk direction
 ;	facing
@@ -722,6 +737,26 @@ endm
 	db DOWN,  FACE_DOWN,   0,  1
 	dw wTileDown
 ; 80341
+.tableFollower
+; struct:
+;	walk direction
+;	facing
+;	x movement
+;	y movement
+;	tile collision pointer
+.table11
+	db STANDING, FACE_CURRENT, 0, 0
+	dw wFollowerStandingTile
+.table22
+	db RIGHT, FACE_RIGHT,  1,  0
+	dw wTileRight
+	db LEFT,  FACE_LEFT,  -1,  0
+	dw wTileLeft
+	db UP,    FACE_UP,     0, -1
+	dw wTileUp
+	db DOWN,  FACE_DOWN,   0,  1
+	dw wTileDown
+
 
 .CheckNPC: ; 80341
 ; Returns 0 if there is an NPC in front that you can't move
@@ -730,13 +765,15 @@ endm
 	xor a
 	ldh [hMapObjectIndexBuffer], a
 ; Load the next X coordinate into d
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	ld d, a
 	ld a, [wWalkingX]
 	add d
 	ld d, a
 ; Load the next Y coordinate into e
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	ld e, a
 	ld a, [wWalkingY]
 	add e
@@ -802,9 +839,16 @@ endm
 ; 8039e
 
 .PushPetCheck:
+	ld a, [wPlayerOverworldStatus]
+	bit 4, a
+	jr nz, .move_disable
+
 	ld a, [hObjectStructIndexBuffer]
 	cp FOLLOWER
 	jr z, .move_enable
+	cp PLAYER
+	jr z, .move_enable
+.move_disable
 	scf
 	ret
 
@@ -939,7 +983,8 @@ CheckStandingOnIce:: ; 80404
 	jr z, .not_ice
 	cp $f0
 	jr z, .not_ice
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_ICE
 	jr z, .ice
 	ld a, [wPlayerState]
@@ -956,7 +1001,8 @@ CheckStandingOnIce:: ; 80404
 ; 80422
 
 CheckSpinning::
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	call CheckSpinTile
 	jr z, .start_spin
 	cp COLL_STOP_SPIN
@@ -990,11 +1036,14 @@ StopPlayerForEvent:: ; 80422
 ; 80430
 
 SetTallGrassAttributes::
-	ld a, [wFollowerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	call GetFollowObjectStructParam
+
 	cp COLL_TALL_GRASS
 	call z, .setFollowerGrassAddress
 
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_TALL_GRASS
 	ret nz
 	xor a
@@ -1009,12 +1058,15 @@ SetTallGrassAttributes::
 	ret
 
 .setFollowerGrassAddress:
-	ld hl, wPlayerStandingMapX
-	ld a, [wFollowerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParamAddress
+	ld a, OBJECT_STANDING_X
+	call GetFollowObjectStructParam
 	cp [hl]
 	jr c, .left
-	inc hl ;wPlayerStandingMapY
-	ld a, [wFollowerStandingMapY]
+	inc hl ;wPlayer/FollowerStandingMapY
+	ld a, OBJECT_STANDING_Y
+	call GetFollowObjectStructParam
 	cp [hl]
 	jr z, .right
 	jr c, .above

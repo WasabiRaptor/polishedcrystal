@@ -612,7 +612,13 @@ InheritEggMove:
 ; If move de is an egg move, inherit that move
 	push de
 	ld hl, RegionalEggMovePointerTable
-	call dbwArray
+		ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
 
 	ld de, 4
 	call IsInArray

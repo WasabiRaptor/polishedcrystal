@@ -859,11 +859,13 @@ FacingPlayerDistance:: ; 36ad
 	add hl, bc
 	ld e, [hl]
 
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	cp d
 	jr z, .CheckY
 
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	cp e
 	jr z, .CheckX
 
@@ -871,7 +873,8 @@ FacingPlayerDistance:: ; 36ad
 	ret
 
 .CheckY:
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	sub e
 	jr z, .NotFacing
 	jr nc, .Above
@@ -889,7 +892,8 @@ FacingPlayerDistance:: ; 36ad
 	jr .CheckFacing
 
 .CheckX:
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	sub d
 	jr z, .NotFacing
 	jr nc, .Left
@@ -1111,10 +1115,8 @@ GetMonPalette::
 	dec a
 	call NextHLTable
 
-
 	ld a, [wCurForm]
 	call NextHLTable
-
 
 	pop bc
 	homecall CheckShininess
@@ -1143,20 +1145,10 @@ GetRelevantMonOverworldPalettes::
 	push af ; preserve the inputted time of day and flag for shiny
 
 
-	ld a, [wCurGroup]
 	ld hl, RegionalOverworldPalTable
-	ld bc, 3
-	rst AddNTimes
-	ld a, [hli]
+	call ProcessPokemonPointertable
+	ld a, d
 	rst Bankswitch
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-
-	ld a, [wCurSpecies]
-	dec a
-	call NextHLTable
-
 
 	ld a, [wCurForm]
 	call NextHLTable
@@ -1198,7 +1190,6 @@ ProcessPokemonPointertable::
 	ld a, [wCurSpecies]
 	dec a
 	call NextHLTable
-
 	pop af
 	rst Bankswitch
 	ret
@@ -1213,16 +1204,9 @@ NextHLTable::
 	ld l, a
 	ret
 
-dbwArray::
-	ld de, 3
-	call IsInArray
-	inc hl
-	ld a, [hli]
-	ld h, [hl]
-	ld l, a
-	ret
 
 INCLUDE "home/ded.asm"
+
 
 FollowerInteractScript::
 	farjump _FollowerInteractScript

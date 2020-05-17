@@ -733,6 +733,7 @@ wPlayerOverworldStatus:: ds 1
 ; 1 - player is riding temp follower if set
 ; 2 - Biking
 ; 3 - Follower is lead
+; 4 - party is split
 
 wPlayerMon:: box_struct wPlayerMon
 

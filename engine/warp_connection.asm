@@ -361,7 +361,8 @@ CheckMovingOffEdgeOfMap:: ; 104820 (41:4820)
 	ret
 
 .down
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	sub 4
 	ld b, a
 	ld a, [wMapHeight]
@@ -372,7 +373,8 @@ CheckMovingOffEdgeOfMap:: ; 104820 (41:4820)
 	ret
 
 .up
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	sub 4
 	cp -1
 	jr z, .ok
@@ -380,7 +382,8 @@ CheckMovingOffEdgeOfMap:: ; 104820 (41:4820)
 	ret
 
 .left
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	sub $4
 	cp -1
 	jr z, .ok
@@ -388,7 +391,8 @@ CheckMovingOffEdgeOfMap:: ; 104820 (41:4820)
 	ret
 
 .right
-	ld a, [wPlayerStandingMapX]
+	ld a, OBJECT_STANDING_X
+	predef GetCenteredObjectStructParam
 	sub 4
 	ld b, a
 	ld a, [wMapWidth]

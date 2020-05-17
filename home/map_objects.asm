@@ -88,14 +88,16 @@ DoesSpriteHaveFacings:: ; 1836
 ; 184a
 
 GetPlayerStandingTile:: ; 184a
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	call GetTileCollision
 	ld b, a
 	ret
 ; 1852
 
 CheckOnWater:: ; 1852
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	call GetTileCollision
 	sub WATERTILE
 	ret z
@@ -147,7 +149,8 @@ CheckSpinTile::
 	ret
 
 CheckStandingOnEntrance:: ; 18c3
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_DOOR
 	ret z
 	cp COLL_STAIRCASE

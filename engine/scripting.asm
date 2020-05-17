@@ -966,7 +966,8 @@ Script_waitsfx:
 	jp WaitSFX
 
 Script_warpsound:
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	ld de, SFX_ENTER_DOOR
 	cp COLL_DOOR
 	jr z, .play

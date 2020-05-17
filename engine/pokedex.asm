@@ -2680,7 +2680,13 @@ Pokedex_LoadAnyFootprintAtTileHL:
 	push af
 	ld a, [wCurGroup]
 	ld hl, RegionalFootprintTable
-	call dbwArray
+		ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
 	pop af
 	push af
 	ld de, 4

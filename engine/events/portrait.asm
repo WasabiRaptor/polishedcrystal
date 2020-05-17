@@ -157,7 +157,8 @@ ClosePortrait::
 	farjp ReloadVisibleSprites
 
 CheckIfPortraitWouldKillObjects:
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	ld e, 3
 	ld d, NUM_OBJECT_STRUCTS -1
 	ld hl, wFollowerStandingMapY
@@ -165,7 +166,8 @@ CheckIfPortraitWouldKillObjects:
 	call .Check
 	ret c
 
-	ld a, [wPlayerStandingMapY]
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
 	inc a
 	ld e, 4
 	ld d, NUM_OBJECT_STRUCTS -1

@@ -6832,7 +6832,13 @@ RelevantPointerTableStuff:
 	push bc
 	push de
 	ld a, [wCurGroup]
-	call dbwArray
+		ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
 	pop de
 	pop bc
 	ret

@@ -166,10 +166,12 @@ HandleMapBackground:
 	farjp PlaceMapNameSign
 
 MaybeSetGrassAttributes::
-	ld a, [wFollowerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	call GetFollowObjectStructParam
 	cp COLL_TALL_GRASS
 	jr z, .PlayerOrFollowerOnGrass ; by all accounts it shoudl be setting it, but it just isn't argh
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_TALL_GRASS
 	ret nz
 .PlayerOrFollowerOnGrass
@@ -370,7 +372,8 @@ CheckTileEvent: ; 96874
 	ret
 
 .warp_tile
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_HOLE
 	jr nz, .not_pit
 	ld a, PLAYEREVENT_FALL
@@ -680,7 +683,9 @@ TryReadSign: ; 96a38
 	; fallthrough
 
 .checkdir
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and %1100
 	cp b
 	jp nz, .dontread
@@ -1273,7 +1278,8 @@ CanUseSweetScent:: ; 97cfd
 	jr nc, .no
 
 .ice_check
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_ICE
 	jr z, .no
 	scf

@@ -598,7 +598,9 @@ CheckDirection: ; c9cb
 ; from moving in the direction you're facing.
 
 ; Get player direction
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and a, %00001100 ; bits 2 and 3 contain direction
 	rrca
 	rrca
@@ -806,7 +808,9 @@ WaterfallFunction: ; cade
 	ret
 
 CheckMapCanWaterfall: ; cb07
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and FACE_UP | FACE_DOWN
 	cp FACE_UP
 	jr nz, .failed
@@ -852,7 +856,8 @@ Script_AutoWaterfall:
 .CheckContinueWaterfall: ; cb38
 	xor a
 	ld [wScriptVar], a
-	ld a, [wPlayerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	predef GetCenteredObjectStructParam
 	cp COLL_WATERFALL
 	ret z
 	ld a, $1
@@ -1805,7 +1810,9 @@ Movement_RestoreRod: ; d069
 	step_end
 
 Fishing_CheckFacingUp: ; d06c
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and $c
 	cp OW_UP
 	ld a, $1

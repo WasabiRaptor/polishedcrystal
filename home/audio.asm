@@ -178,7 +178,13 @@ GetRelevantCryPointers::
 ; return *Cries in hl and BANK(*Cries) in d
 ; returns c for variants, nc for normal species
 	ld hl, RegionalCryTable
-	call dbwArray
+		ld de, 3
+	call IsInArray
+	inc hl
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
 
 	ld a, [wCurSpecies]
 	ld de, 4

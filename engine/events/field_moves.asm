@@ -72,7 +72,9 @@ INCBIN "gfx/overworld/headbutt_tree.2bpp"
 HideHeadbuttTree: ; 8c913
 	xor a
 	ldh [hBGMapMode], a
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and %00001100
 	srl a
 	ld e, a
@@ -249,7 +251,9 @@ Cut_GetLeafSpawnCoords: ; 8ca8e (23:4a8e)
 	jr z, .top_side
 	set 1, e
 .top_side
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and %00001100
 	add e
 	ld e, a
@@ -285,7 +289,9 @@ Cut_GetLeafSpawnCoords: ; 8ca8e (23:4a8e)
 ; 8cad3
 
 Cut_Headbutt_GetPixelFacing: ; 8cad3 (23:4ad3)
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and %00001100
 	srl a
 	ld e, a

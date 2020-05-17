@@ -58,3 +58,5 @@ PredefPointers::
 	add_predef GetPartyParamLocation
 	add_predef GetPartyLocation
 	add_predef PrintNum
+	add_predef GetCenteredObjectStructParam
+	add_predef GetCenteredObjectStructParamAddress

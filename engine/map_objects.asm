@@ -1298,7 +1298,9 @@ PlayerDiagonalStairs:
 	set 6, [hl]
 	xor a
 	ld [wPlayerGoingUpStairs], a
-	ld a, [wPlayerStandingTile]
+	ld hl, OBJECT_STANDING_TILE
+	add hl, bc
+	ld a, [hl]
 	cp COLL_STAIRS_RIGHT_UP_MID
 	ret nc
 	xor a
@@ -2157,6 +2159,27 @@ ApplyMovementToFollower: ; 54b8
 	ret
 ; 54e6
 
+GetFollowObjectStructParam::
+	push hl
+	call GetFollowObjectStructParamAddress
+	ld a, [hl]
+	pop hl
+	ret
+
+GetFollowObjectStructParamAddress::
+	push bc
+	ld hl, wObjectStructs
+	ld b, 0
+	ld c, a
+	add hl, bc
+
+	ld bc, OBJECT_STRUCT_LENGTH
+	ld a, [wObjectFollow_Follower]
+	rst AddNTimes
+	pop bc
+	ret
+
+
 GetFollowerNextMovementByte: ; 54e6
 	ld hl, wFollowerMovementQueueLength
 	ld a, [hl]
@@ -2189,7 +2212,9 @@ GetFollowerNextMovementByte: ; 54e6
 	and a
 	ld a, [wFollowerRadius] ; I don't think this will be used in any of the follower's calcs so I'm gonig to use it to store the timing for random turns haha
 	jr nz, .dont_turn
-	ld a, [wFollowerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	call GetFollowObjectStructParam
+
 	and $f0
 	cp HI_NYBBLE_DIAGONAL_STAIRS
 	ld a, [wFollowerRadius] ; I don't think this will be used in any of the follower's calcs so I'm gonig to use it to store the timing for random turns haha
@@ -2197,9 +2222,11 @@ GetFollowerNextMovementByte: ; 54e6
 	and a
 	jr nz, .dont_turn
 	call Random
+	ld a, OBJECT_DIRECTION
+	call GetFollowObjectStructParamAddress
 	ldh a, [hRandomAdd]
 	and %00001100
-	ld [wFollowerDirection], a
+	ld [hl], a
 	ldh a, [hRandomAdd]
 	or %00001111
 .dont_turn
@@ -2234,18 +2261,26 @@ GetFollowerNextMovementByte: ; 54e6
 	and RIGHT | LEFT
 	rlca
 	rlca
-	ld [wFollowerDirection], a
+	push af
+	ld a, OBJECT_DIRECTION
+	call GetFollowObjectStructParamAddress
+	pop af
+	ld [hl], a
 
 	ld a, [wFollowerGoingUpStairs]
 	and a
 	jr nz, .DontUpdateStairsYet
 
-	ld a, [wFollowerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	call GetFollowObjectStructParam
+
 	and $f0
 	cp HI_NYBBLE_DIAGONAL_STAIRS
 	jr nz, .DontUpdateStairsYet
 
-	ld a, [wFollowerStandingTile]
+	ld a, OBJECT_STANDING_TILE
+	call GetFollowObjectStructParam
+
 	and $f
 	ld d, 0
 	ld e, a
@@ -2253,7 +2288,8 @@ GetFollowerNextMovementByte: ; 54e6
 	ld hl, .FacingStairsTable
 	add hl, de
 	add hl, de
-	ld a, [wFollowerDirection]
+	ld a, OBJECT_DIRECTION
+	call GetFollowObjectStructParam
 	and OW_RIGHT | OW_LEFT
 	cp OW_LEFT
 	ld a, [hli]
@@ -2748,9 +2784,12 @@ RefreshPlayerSprite: ; 579d
 	ld a, movement_step_sleep_1
 	ld [wPlayerNextMovement], a
 	ld [wPlayerMovement], a
+	ld a, OBJECT_STEP_FRAME
+	predef GetCenteredObjectStructParamAddress
 	xor a
+	ld [hl], a
 	ld [wPlayerTurningDirection], a
-	ld [wPlayerObjectStepFrame], a
+
 	call .TryResetPlayerAction
 	farcall CheckWarpFacingDown
 	call c, SpawnInFacingDown

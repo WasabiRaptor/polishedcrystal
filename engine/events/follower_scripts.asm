@@ -200,14 +200,58 @@ NoFollowerMenuAction:
     scf
     ret
 
+StayFollowerMenuAction:
+	ld a, [wPlayerOverworldStatus]
+	xor 1 << 4
+	ld [wPlayerOverworldStatus], a
+	jr ReApplyMovementAndCoordsToPlayerAndFollower
+
 LeadFollowerMenuAction:
 	ld a, [wPlayerOverworldStatus]
 	xor 1 << 3
 	ld [wPlayerOverworldStatus], a
-    ret
+	;fallthough
+ReApplyMovementAndCoordsToPlayerAndFollower:
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
 
-StayFollowerMenuAction:
-    ret
+	ld a, PLAYER
+	ld bc, wPlayerStruct
+	ld de, wFollowerStruct
+
+	jr z, .got_it1
+	ld a, FOLLOWER
+	ld bc, wFollowerStruct
+	ld de, wPlayerStruct
+.got_it1
+
+	ld [wCenteredObject], a
+
+	ld hl, OBJECT_STANDING_X
+	add hl, bc
+	ld a, [hli]
+	sub 4
+	ld [wXCoord], a
+	ld a, [hl]
+	sub 4
+	ld [wYCoord], a
+	ld hl, OBJECT_MOVEMENT_TYPE
+	add hl, bc
+	ld a, SPRITEMOVEDATA_PLAYER
+	ld [hl], a
+
+	ld a, [wPlayerOverworldStatus]
+	bit 4, a
+	ld a, SPRITEMOVEDATA_FOLLOWING
+	jr z, .got_it2
+	ld a, SPRITEMOVEDATA_SPINRANDOM_SLOW
+.got_it2
+	ld hl, OBJECT_MOVEMENT_TYPE
+	add hl, de
+	ld [hl], a
+
+	farcall StartFollowerFollowing
+	ret
 
 PlayFollowerMenuAction:
     ret

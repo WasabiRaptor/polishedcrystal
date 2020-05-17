@@ -93,7 +93,9 @@ _GetVarAction:: ; 80648 (20:4648)
 
 .wPlayerFacing: ; 806ef
 ; The direction the player is facing.
-	ld a, [wPlayerDirection]
+	ld a, OBJECT_DIRECTION
+	predef GetCenteredObjectStructParam
+
 	and $c
 	rrca
 	rrca
