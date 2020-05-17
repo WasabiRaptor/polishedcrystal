@@ -5,7 +5,8 @@ ENDM
 box_struct: MACRO
 \1Group::          ds 1 ; one next to the other so we can just inc hl to the next
 \1Species::        ds 1
-\1Item::           ds 2
+\1Item::           ds 1
+\1Mood::           ds 1
 \1Moves::          ds NUM_MOVES
 \1PPUp::
 \1MovesHigh::      ds NUM_MOVES

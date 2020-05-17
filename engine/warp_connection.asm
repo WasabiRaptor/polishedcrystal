@@ -323,7 +323,7 @@ RefreshMapSprites: ; 1047f0
 	farcall RefreshPlayerSprite
 	farcall CheckReplaceKrisSprite
 	ld hl, wFollowerStatus
-	res FOLLOWER_ENABLE, [hl]
+	;res FOLLOWER_ENABLE, [hl]
 
 	;ld de, 2 ; permission
 	;call GetMapHeaderMember

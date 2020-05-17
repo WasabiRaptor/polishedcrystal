@@ -921,8 +921,8 @@ CheckMenuOW: ; 96b30
 
 	ld a, [wCenteredObject]
 	ldh [hLastTalked], a
-	ld a, BANK(_FollowerInteractScript)
-	ld hl, _FollowerInteractScript
+	ld a, BANK(SelfInteractScript)
+	ld hl, SelfInteractScript
 	call CallScript
 	scf
 	ret

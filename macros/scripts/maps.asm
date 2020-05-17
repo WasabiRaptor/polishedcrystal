@@ -2,6 +2,11 @@ map_id: MACRO
 	db GROUP_\1, MAP_\1
 ENDM
 
+stairtable: macro
+	db \1
+	dn \2, \3
+	dn \4, \5
+endm
 
 scene_script: MACRO
 	dw \1 ; script

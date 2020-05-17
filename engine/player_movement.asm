@@ -445,11 +445,7 @@ DoPlayerMovement:: ; 80000
 	ld a, 7
 	scf
 	ret
-stairtable: macro
-	db \1
-	dn \2, \3
-	dn \4, \5
-endm
+
 .FacingStairsTable:
 	stairtable FACE_RIGHT, 				DOWN+1, DOWN+1,  %11,  %11 ;COLL_STAIRS_RIGHT_DOWN
 	stairtable FACE_LEFT, 				DOWN+1, DOWN+1,  %11,  %11 ;COLL_STAIRS_LEFT_DOWN

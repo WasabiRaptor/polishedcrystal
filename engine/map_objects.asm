@@ -1123,7 +1123,8 @@ NPCDiagonalStairs:
 	ld a, [wFollowerStairsType]
 	and %1
 	jr nz, .StepVertical
-	jp IncrementObjectStructField28
+	call IncrementObjectStructField28
+	jr .finish
 
 .StepVertical:
 	ld a, [wFollowerGoingUpStairs]
@@ -1138,16 +1139,23 @@ NPCDiagonalStairs:
 .finish:
 	;ld a, [wPlayerLastStairsY]
 	;ld [wFollowerStandingMapY], a
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_SLEEP
-
 	xor a
 	ld [wFollowerGoingUpStairs], a
 	ld hl, OBJECT_STEP_DURATION
 	add hl, bc
 	ld [hl], a
+
+	ld hl, OBJECT_STANDING_TILE
+	add hl, bc
+	ld a, [hl]
+	cp COLL_STAIRS_RIGHT_UP_MID
+	jr nc, .no
+	xor a
+	ld [wFollowerStairsType], a
+.no
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_SLEEP
 	ret
 
 PlayerDiagonalStairs:
@@ -1269,7 +1277,8 @@ PlayerDiagonalStairs:
 	ld a, [wPlayerStairsType]
 	and %1
 	jr nz, .StepVertical
-	jp IncrementObjectStructField28
+	call IncrementObjectStructField28
+	jr .finish
 
 .StepVertical:
 	ld hl, wPlayerStepFlags
@@ -1290,10 +1299,6 @@ PlayerDiagonalStairs:
 	farcall UpdatePlayerCoords
 	;ld a, -1
 	;ld [wPlayerStepDirection], a
-
-	ld hl, OBJECT_STEP_TYPE
-	add hl, bc
-	ld [hl], STEP_TYPE_SLEEP
 	ld hl, wPlayerStepFlags
 	set 6, [hl]
 	xor a
@@ -1302,9 +1307,13 @@ PlayerDiagonalStairs:
 	add hl, bc
 	ld a, [hl]
 	cp COLL_STAIRS_RIGHT_UP_MID
-	ret nc
+	jr nc, .no
 	xor a
 	ld [wPlayerStairsType], a
+.no
+	ld hl, OBJECT_STEP_TYPE
+	add hl, bc
+	ld [hl], STEP_TYPE_SLEEP
 	ret
 
 UpdateDiagonalStairsPosition:

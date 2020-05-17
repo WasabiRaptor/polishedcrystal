@@ -790,6 +790,13 @@ NormalStep: ; 5412
 	ld hl, OBJECT_STEP_TYPE
 	add hl, bc
 	ld [hl], STEP_TYPE_NPC_WALK
+
+	ld hl, wObjectFollow_Follower
+	ldh a, [hMapObjectIndexBuffer]
+	cp [hl]
+	ret nz
+	xor a
+	ld [wFollowerStairsType], a
 	ret
 
 .player

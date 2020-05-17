@@ -3370,7 +3370,7 @@ ListMovePP: ; 50c50
 	jr nz, .load_loop
 	ret
 
-GetStatusConditionIndex:
+GetStatusConditionIndex::
 ; de points to status, e.g. from a party_struct or battle_struct
 ; return the status condition index in a
 	push de

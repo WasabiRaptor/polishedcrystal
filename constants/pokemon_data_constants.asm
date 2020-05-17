@@ -117,6 +117,7 @@ EGG_GROUP_2_MASK EQU %00001111
 MON_GROUP                EQUS "(wPartyMon1Group - wPartyMon1)"
 MON_SPECIES              EQUS "(wPartyMon1Species - wPartyMon1)"
 MON_ITEM                 EQUS "(wPartyMon1Item - wPartyMon1)"
+MON_MOOD				 EQUS "(wPartyMon1Mood - wPartyMon1)"
 MON_MOVES                EQUS "(wPartyMon1Moves - wPartyMon1)"
 MON_PP_UP                EQUS "(wPartyMon1PPUp - wPartyMon1)"
 MON_MOVES_HIGH           EQUS "(wPartyMon1MovesHigh - wPartyMon1)"
@@ -165,6 +166,15 @@ MON_GROUP_SPECIES_AND_FORM EQU $ff
 ; apply to MON_MOVES_HIGH / MON_PP_UP
 PP_UP_USED_MASK EQU %11000000
 MOVE_HIGH_MASK  EQU %00111111
+
+; apply to MON_MOOD
+MON_BELLY_MASK	EQU %00000111
+MON_PET_MASK	EQU %00111000
+
+MON_IS_PLAYER_F	EQU 6
+MON_NO_BOX_F	EQU 7
+MON_NO_BOX		EQU 1 << MON_NO_BOX_F
+MON_IS_PLAYER	EQU 1 << MON_IS_PLAYER_F
 
 ; apply to MON_GROUP
 SHINY_MASK   EQU %10000000

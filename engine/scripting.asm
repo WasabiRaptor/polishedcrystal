@@ -2995,14 +2995,60 @@ Script_paintingpic:
 Script_portrait:
 	call GetScriptByte
 	ld [wCurGroup], a
+	ld [wScriptVar], a
 	call GetScriptByte
 	ld [wCurSpecies], a
+	and a
+	jr z, .GetFollower
 	call GetScriptByte
 	ld [wCurForm], a
 	call GetBaseData
 
 	call GetScriptByte
+.done
 	farjp Portrait
+
+.GetFollower
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	call GetBaseData
+
+	ld a, [wScriptVar]
+	cp $ff
+	jr nz, .done
+
+	ld a, MON_MOOD
+	predef GetPartyParamLocation
+	ld a, [hl]
+	and MON_BELLY_MASK
+	cp 4
+	jr c, .sad
+	ld a, MON_STATUS
+	predef GetPartyParamLocation
+	farcall GetStatusConditionIndex
+	and a
+	jr nz, .sad
+
+	ld a, MON_HAPPINESS
+	predef GetPartyParamLocation
+	ld a, [hl]
+	cp 220
+	jr nc, .happy
+	cp 50
+	jr c, .sad
+.neutral
+	xor a ; neutral
+	jr .done
+.sad
+	ld a, 2 ; sad
+	jr .done
+.happy
+	ld a, 1 ; happy
+	jr .done
 
 Script_closeportrait:
 	farjp ClosePortrait

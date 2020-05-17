@@ -1251,10 +1251,20 @@ endm
 	enum portrait_command ; $ab
 portrait: MACRO
 	db portrait_command
+if _NARG == 1
+	db $ff
+	db 0
+else
+if \1 == 0
+	db \2
+	db 0
+else
 	db GROUP_\1 ;group
 	db \1 ;species
 	db \2 ;form
 	db \3 ;emote
+endc
+endc
 ENDM
 
 	enum closeportrait_command ; $ac

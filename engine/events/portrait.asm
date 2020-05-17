@@ -10,7 +10,7 @@ Portrait::
 	ld [wScriptVar], a
 
 	call CheckIfPortraitWouldKillObjects
-	ret c
+	jp c, .done
 
 
 	ld hl, PortraitMenuHeader
@@ -134,8 +134,11 @@ Portrait::
 
 
 	ld b, 1
-	jp SafeCopyTilemapAtOnce
-
+	call SafeCopyTilemapAtOnce
+.done
+	ld a, [wCurSpecies]
+	ld [wScriptVar], a
+	ret
 
 ClosePortrait::
 	ld hl, wSpritesEnd - (16 * 4) ; only use the last 16 sprites of the 40 available

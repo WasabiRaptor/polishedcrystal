@@ -2,19 +2,57 @@
 
 
 _FollowerInteractScript::
-    copybytetovar wPlayerStairsType
-    iftrue EndFollowerInteract
+    callasm CheckIfFollowerInteract
+    iffalse JustEnd
     faceplayer
     opentext
-    callasm FollowerCommandMenu
+	callasm CurPartyNicknameNameplate
+	scall FollowerScripts
+	jump FollowerCommandMenuScript
 
+
+FollowerScripts:: ; we'll do our map specific special or mood based interactions here
+	portrait 0
+	cry 0
+
+	writetext BorkText
+	waitbutton
+	;fallthrough
+JustEnd::
+	end
+
+BorkText::
+	text "Bork!"
+	done
+
+SelfInteractScript::
+    copybytetovar wFollowerStairsType
+    iftrue JustEnd
+    copybytetovar wPlayerStairsType
+    iftrue JustEnd
+    opentext
+	;fallthrough
+
+FollowerCommandMenuScript:
+    callasm FollowerCommandMenu
+	;fallthrough
 EndFollowerInteract::
-	reloadmappart
     closeportrait
     closetext
     farjump StartMenuCallback
 
-FollowerCommandMenu:
+
+CheckIfFollowerInteract::
+	xor a ;false
+	ld [wScriptVar], a
+
+	ld a, [wFollowerStairsType]
+	and a
+	ret nz
+	ld a, [wPlayerStairsType]
+	and a
+	ret nz
+
 	ld a, [wFollowerStatus]
 	bit FOLLOWER_ENABLE, a
 	ret z
@@ -35,23 +73,21 @@ FollowerCommandMenu:
 	ld a, [wCurGroup]
 	and a
     ret z
-    call GetBaseData
+	ld a, TRUE
+	ld [wScriptVar], a
+	ret
 
+CurPartyNicknameNameplate::
 	ld a, [wCurPartyMon]
 	ld hl, wPartyMonNicknames
 	farcall SkipPokemonNames
 	ld d, h
 	ld e, l
     call PrintNamePlate
-    ld a, 1 ; happy
-    farcall Portrait
+	xor a
+	ret
 
-    ld a, [wCurSpecies]
-    call PlayCry
-
-	xor a ; neutral
-    farcall Portrait
-
+FollowerCommandMenu::
     ; fallthrough
 PokemonPartyCommandMenu::
     xor a
