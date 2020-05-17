@@ -1403,27 +1403,6 @@ SaveScreen_LoadNeighbor:: ; 28f7
 	ret
 ; 2914
 
-GetCenteredObjectStructParam::
-	push hl
-	predef GetCenteredObjectStructParamAddress
-	ld a, [hl]
-	pop hl
-	ret
-
-GetCenteredObjectStructParamAddress::
-	push bc
-	push af
-	ld hl, wObjectStructs
-	ld b, 0
-	ld c, a
-	add hl, bc
-
-	ld bc, OBJECT_STRUCT_LENGTH
-	ld a, [wCenteredObject]
-	rst AddNTimes
-	pop af
-	pop bc
-	ret
 
 GetMovementPermissions:: ; 2914
 	xor a

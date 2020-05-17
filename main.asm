@@ -4705,6 +4705,27 @@ SECTION "Code 26", ROMX
 
 INCLUDE "engine/events/portrait.asm"
 
+GetCenteredObjectStructParam::
+	push hl
+	call GetCenteredObjectStructParamAddress
+	ld a, [hl]
+	pop hl
+	ret
+
+GetCenteredObjectStructParamAddress::
+	push bc
+	push af
+	ld hl, wObjectStructs
+	ld b, 0
+	ld c, a
+	add hl, bc
+
+	ld bc, OBJECT_STRUCT_LENGTH
+	ld a, [wCenteredObject]
+	rst AddNTimes
+	pop af
+	pop bc
+	ret
 
 AutomaticRainWhenOvercast::
 	call GetOvercastIndex

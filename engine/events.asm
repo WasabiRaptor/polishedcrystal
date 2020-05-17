@@ -167,7 +167,7 @@ HandleMapBackground:
 
 MaybeSetGrassAttributes::
 	ld a, OBJECT_STANDING_TILE
-	call GetFollowObjectStructParam
+	farcall GetFollowObjectStructParam
 	cp COLL_TALL_GRASS
 	jr z, .PlayerOrFollowerOnGrass ; by all accounts it shoudl be setting it, but it just isn't argh
 	ld a, OBJECT_STANDING_TILE
