@@ -2138,7 +2138,12 @@ HandleEnemyMonFaint: ; 3cd55
 .dont_flee
 	call ForcePlayerMonChoice
 
-	ld [wPlayerAction], a
+	push af
+	ld a, OBJECT_ACTION
+	predef GetCenteredObjectStructParamAddress
+	pop af
+	ld [hl], a
+
 	call HandleEnemySwitch
 	jp z, WildFled_EnemyFled_LinkBattleCanceled
 	jr DoubleSwitch

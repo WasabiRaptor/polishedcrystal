@@ -41,7 +41,7 @@ _GetVarAction:: ; 80648 (20:4648)
 	dwb .CountSeenMons,                 RETVAR_EXECUTE
 	dwb .CountBadges,                   RETVAR_EXECUTE
 	dwb wPlayerState,                   RETVAR_ADDR_DE
-	dwb .wPlayerFacing,                 RETVAR_EXECUTE
+	dwb .CenteredObjectFacing,          RETVAR_EXECUTE
 	dwb hHours,                         RETVAR_STRBUF2
 	dwb .DayOfWeek,                     RETVAR_EXECUTE
 	dwb wMapGroup,                      RETVAR_STRBUF2
@@ -91,7 +91,7 @@ _GetVarAction:: ; 80648 (20:4648)
 	jp .loadstringbuffer2
 ; 806ef
 
-.wPlayerFacing: ; 806ef
+.CenteredObjectFacing: ; 806ef
 ; The direction the player is facing.
 	ld a, OBJECT_DIRECTION
 	predef GetCenteredObjectStructParam

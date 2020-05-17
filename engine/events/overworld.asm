@@ -1841,8 +1841,10 @@ MovementData_0xd093: ; d093
 PutTheRodAway: ; d095
 	xor a
 	ldh [hBGMapMode], a
+	ld a, OBJECT_ACTION
+	predef GetCenteredObjectStructParamAddress
 	ld a, $1
-	ld [wPlayerAction], a
+	ld [hl], a
 	call UpdateSprites
 	jp ReplaceKrisSprite
 

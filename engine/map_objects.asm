@@ -2800,8 +2800,10 @@ RefreshPlayerSprite: ; 579d
 	ld hl, wPlayerSpriteSetupFlags
 	bit 7, [hl]
 	ret z
+	ld a, OBJECT_ACTION
+	predef GetCenteredObjectStructParamAddress
 	xor a
-	ld [wPlayerAction], a
+	ld [hl], a
 	ret
 ; 57ca
 
