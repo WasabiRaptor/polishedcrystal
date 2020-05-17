@@ -1074,6 +1074,9 @@ wYCoord:: ds 1 ; current y coordinate relative to top-left corner of current map
 wXCoord:: ds 1 ; current x coordinate relative to top-left corner of current map
 wScreenSave:: ds 6 * 5
 
+wFollowYCoord:: ds 1
+wFollowXCoord:: ds 1
+
 wMapDataEnd::
 
 

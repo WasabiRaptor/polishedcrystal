@@ -11,6 +11,8 @@ MapSetupScripts: ; 15377
 	dw MapSetupScript_Submenu
 	dw MapSetupScript_BadWarp
 	dw MapSetupScript_Fly
+	dw MapSetupScript_Switch_Leader
+
 ; 1538f
 
 MapSetupScript_Teleport: ; 1538f
@@ -103,6 +105,8 @@ MapSetupScript_Train: ; 153d2
 	db map_warp_face
 	db map_change_callback
 	db map_player_coord
+	db map_spawn_coord
+	db map_follower_spawn_coord
 	db map_load_blocks
 	db map_buffer_screen
 	db map_lcd_off
@@ -187,5 +191,33 @@ MapSetupScript_Continue: ; 15408
 MapSetupScript_Submenu: ; 1541a
 	db map_load_blocks
 	db map_connection_blocks
+	db map_start_follower_following
+	db map_end
+
+MapSetupScript_Switch_Leader: ; 15392
+	db map_fade_out_palettes
+	db map_buffer_screen
+	db map_lcd_off
+	db map_sound_off
+	db map_load_attributes
+	db map_change_callback
+	db map_spawn_coord
+	db map_follower_spawn_coord
+	db map_player_coord
+	db map_anchor_screen
+	db map_load_blocks
+	db map_buffer_screen
+	db map_load_graphics
+	db map_decompress_metatiles
+	db map_time_of_day
+	db map_load_objects
+	db map_lcd_on
+	db map_sprites
+	db map_palettes
+	db map_bike_music
+	db map_max_volume
+	db map_fade_in_palettes
+	db map_animations_on
+	db map_wildmons
 	db map_start_follower_following
 	db map_end

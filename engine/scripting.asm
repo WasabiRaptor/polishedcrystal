@@ -279,7 +279,7 @@ CheckScript:
 	bit SCRIPT_RUNNING, [hl]
 	ret
 
-StopScript:
+StopScript::
 	ld hl, wScriptFlags
 	res SCRIPT_RUNNING, [hl]
 	ret
@@ -1425,7 +1425,7 @@ Script_reloadmapafterbattle:
 .done
 ; fallthrough
 
-Script_reloadmap:
+Script_reloadmap::
 	xor a
 	ld [wBattleScriptFlags], a
 	ld a, MAPSETUP_RELOADMAP

@@ -250,8 +250,20 @@ ReApplyMovementAndCoordsToPlayerAndFollower:
 	add hl, de
 	ld [hl], a
 
-	farcall StartFollowerFollowing
-	ret
+	ld hl, OBJECT_STANDING_X
+	add hl, de
+	ld a, [hli]
+	ld [wFollowXCoord], a
+	ld a, [hl]
+	ld [wFollowYCoord], a
+
+
+	ld a, MAPSETUP_SWITCH_LEADER
+	;ld a, MAPSETUP_WARP
+	ldh [hMapEntryMethod], a
+	ld a, 1
+	farcall LoadMapStatus
+	farjp StopScript
 
 PlayFollowerMenuAction:
     ret

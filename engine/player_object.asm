@@ -22,9 +22,23 @@ SpawnPlayer:: ; 8029
 	xor a ; 0 for PLAYER
 	ld hl, PlayerObjectTemplate
 	call CopyPlayerObjectTemplate
-	ld b, PLAYER
-	call PlayerSpawn_ConvertCoords
 
+	ld b, PLAYER
+
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	jr nz, .check_entry
+.player_spawn
+	call PlayerSpawn_ConvertCoords
+	jr .done
+
+.check_entry
+	ldh a, [hMapEntryMethod]
+	cp MAPSETUP_SWITCH_LEADER
+	jr nz, .player_spawn
+
+	call FollowerSpawn_ConvertCoords
+.done
 	xor a ; 0 for PLAYER
 	call GetMapObject
 	ld hl, MAPOBJECT_COLOR
@@ -65,9 +79,22 @@ SpawnFollower::
 	call CopyPlayerObjectTemplate
 
 	ld b, FOLLOWER
-	call PlayerSpawn_ConvertCoords
 
-RefreshFollower::
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+	jr z, .check_entry
+.player_spawn
+	call PlayerSpawn_ConvertCoords
+	jr .done
+
+.check_entry
+	ldh a, [hMapEntryMethod]
+	cp MAPSETUP_SWITCH_LEADER
+	jr nz, .player_spawn
+
+	call FollowerSpawn_ConvertCoords
+.done
+
 	ld a, FOLLOWER
 	call GetMapObject
 	ld hl, MAPOBJECT_COLOR
@@ -142,14 +169,19 @@ CopyDECoordsToMapObject:: ; 807e
 	ret
 
 PlayerSpawn_ConvertCoords: ; 808f
-	push bc
 	ld a, [wXCoord]
 	add 4
 	ld d, a
 	ld a, [wYCoord]
 	add 4
 	ld e, a
-	pop bc
+	jp CopyDECoordsToMapObject
+
+FollowerSpawn_ConvertCoords: ; 808f
+	ld a, [wFollowXCoord]
+	ld d, a
+	ld a, [wFollowYCoord]
+	ld e, a
 	jp CopyDECoordsToMapObject
 
 WritePersonXY:: ; 80a1
