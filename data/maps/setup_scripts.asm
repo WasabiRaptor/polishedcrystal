@@ -198,7 +198,6 @@ MapSetupScript_Switch_Leader: ; 15392
 	db map_fade_out_palettes
 	db map_buffer_screen
 	db map_lcd_off
-	db map_sound_off
 	db map_load_attributes
 	db map_change_callback
 	db map_spawn_coord
@@ -214,8 +213,7 @@ MapSetupScript_Switch_Leader: ; 15392
 	db map_lcd_on
 	db map_sprites
 	db map_palettes
-	db map_bike_music
-	db map_max_volume
+	db map_fade_music
 	db map_fade_in_palettes
 	db map_animations_on
 	db map_wildmons

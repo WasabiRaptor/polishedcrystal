@@ -1323,7 +1323,7 @@ UpdateDiagonalStairsPosition:
 	ld e, -1
 .goingdown
 
-	ld hl, OBJECT_SPRITE_Y_OFFSET
+	ld hl, OBJECT_SPRITE_Y
 	add hl, bc
 	ld a, [hl]
 	add e

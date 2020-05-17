@@ -128,7 +128,7 @@ SetSpinRandomSpriteMoveData::
 StartFollowerFollowing::
 	ld a, [wPlayerOverworldStatus]
 	bit 4, a
-	ret nz
+	jr nz, .stop_follow
 	bit 3, a
 	jr nz, .follower_is_lead
 	ld a, PLAYER
@@ -143,8 +143,10 @@ StartFollowerFollowing::
 	ld a, PLAYER
 	ld [wObjectFollow_Follower], a
 .got_lead
-
 	jp QueueFollowerFirstStep
+
+.stop_follow
+	farjp StopFollow
 
 FollowerObjectTemplate:
 	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1

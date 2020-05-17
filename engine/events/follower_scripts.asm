@@ -238,10 +238,6 @@ NoFollowerMenuAction:
 
 StayFollowerMenuAction:
 	ld a, [wPlayerOverworldStatus]
-	xor 1 << 4
-	ld [wPlayerOverworldStatus], a
-
-	ld a, [wPlayerOverworldStatus]
 	bit 3, a
 
 	ld bc, wPlayerStruct
@@ -252,10 +248,17 @@ StayFollowerMenuAction:
 	ld de, wPlayerStruct
 .got_it
 
+	ld a, [wPlayerOverworldStatus]
+	xor 1 << 4
+	ld [wPlayerOverworldStatus], a
+	bit 4, a
+
 	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, de
+	ld a, SPRITEMOVEDATA_FOLLOWING
+	jr z, .got_it2
 	ld a, SPRITEMOVEDATA_SPINRANDOM_SLOW
-	ld [hl], a
+.got_it2
 
 	ld hl, OBJECT_STANDING_X
 	add hl, de
@@ -263,15 +266,12 @@ StayFollowerMenuAction:
 	ld [wFollowXCoord], a
 	ld a, [hl]
 	ld [wFollowYCoord], a
-	farjp StopFollow
+	farjp StartFollowerFollowing
 
 LeadFollowerMenuAction:
 	ld a, [wPlayerOverworldStatus]
 	xor 1 << 3
 	ld [wPlayerOverworldStatus], a
-	;fallthough
-ReApplyMovementAndCoordsToPlayerAndFollower:
-	ld a, [wPlayerOverworldStatus]
 	bit 3, a
 
 	ld a, PLAYER
@@ -286,14 +286,25 @@ ReApplyMovementAndCoordsToPlayerAndFollower:
 
 	ld [wCenteredObject], a
 
+	ld a, [wPlayerOverworldStatus]
+	bit 4, a
+	jr nz, .got_it2
+
 	ld hl, OBJECT_STANDING_X
 	add hl, bc
 	ld a, [hli]
+	ld [wFollowXCoord], a
+	ld a, [hl]
+	ld [wFollowYCoord], a
+
+.got_it2
+	ld a, [wFollowXCoord]
 	sub 4
 	ld [wXCoord], a
-	ld a, [hl]
+	ld a, [wFollowYCoord]
 	sub 4
 	ld [wYCoord], a
+
 	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, bc
 	ld a, SPRITEMOVEDATA_PLAYER
@@ -302,9 +313,10 @@ ReApplyMovementAndCoordsToPlayerAndFollower:
 	ld a, [wPlayerOverworldStatus]
 	bit 4, a
 	ld a, SPRITEMOVEDATA_FOLLOWING
-	jr z, .got_it2
+	jr z, .got_it3
 	ld a, SPRITEMOVEDATA_SPINRANDOM_SLOW
-.got_it2
+
+.got_it3
 	ld hl, OBJECT_MOVEMENT_TYPE
 	add hl, de
 	ld [hl], a
