@@ -240,7 +240,30 @@ StayFollowerMenuAction:
 	ld a, [wPlayerOverworldStatus]
 	xor 1 << 4
 	ld [wPlayerOverworldStatus], a
-	jr ReApplyMovementAndCoordsToPlayerAndFollower
+
+	ld a, [wPlayerOverworldStatus]
+	bit 3, a
+
+	ld bc, wPlayerStruct
+	ld de, wFollowerStruct
+
+	jr z, .got_it
+	ld bc, wFollowerStruct
+	ld de, wPlayerStruct
+.got_it
+
+	ld hl, OBJECT_MOVEMENT_TYPE
+	add hl, de
+	ld a, SPRITEMOVEDATA_SPINRANDOM_SLOW
+	ld [hl], a
+
+	ld hl, OBJECT_STANDING_X
+	add hl, de
+	ld a, [hli]
+	ld [wFollowXCoord], a
+	ld a, [hl]
+	ld [wFollowYCoord], a
+	ret
 
 LeadFollowerMenuAction:
 	ld a, [wPlayerOverworldStatus]
