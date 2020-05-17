@@ -127,6 +127,8 @@ SetSpinRandomSpriteMoveData::
 
 StartFollowerFollowing::
 	ld a, [wPlayerOverworldStatus]
+	bit 4, a
+	ret nz
 	bit 3, a
 	jr nz, .follower_is_lead
 	ld a, PLAYER

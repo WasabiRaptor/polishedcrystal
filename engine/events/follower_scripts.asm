@@ -263,7 +263,7 @@ StayFollowerMenuAction:
 	ld [wFollowXCoord], a
 	ld a, [hl]
 	ld [wFollowYCoord], a
-	ret
+	farjp StopFollow
 
 LeadFollowerMenuAction:
 	ld a, [wPlayerOverworldStatus]
