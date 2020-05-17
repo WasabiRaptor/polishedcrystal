@@ -41,10 +41,6 @@ SpawnPlayer:: ; 8029
 .done
 	xor a ; 0 for PLAYER
 	call GetMapObject
-	ld hl, MAPOBJECT_COLOR
-	add hl, bc
-	ln e, (1 << 3) | PAL_OW_PLAYER, PERSONTYPE_SCRIPT
-	ld [hl], e
 
 	ld hl, MAPOBJECT_MOVEMENT
 	add hl, bc
@@ -71,7 +67,7 @@ PlayerObjectTemplate: ; 8071
 ; Shorter than the actual amount copied by two bytes.
 ; Said bytes seem to be unused, but the game freezes when you first spawn
 ; in your room if this is not loaded.
-	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1
+	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_PLAYER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1
 
 SpawnFollower::
 	ld a, FOLLOWER
@@ -97,10 +93,6 @@ SpawnFollower::
 
 	ld a, FOLLOWER
 	call GetMapObject
-	ld hl, MAPOBJECT_COLOR
-	add hl, bc
-	ln e, (1 << 3) | PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT
-	ld [hl], e
 
 	ld hl, MAPOBJECT_MOVEMENT
 	add hl, bc
@@ -153,7 +145,7 @@ StartFollowerFollowing::
 	jp QueueFollowerFirstStep
 
 FollowerObjectTemplate:
-	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 15, 15, -1, -1, 0, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1
+	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1
 
 CopyDECoordsToMapObject:: ; 807e
 	push de

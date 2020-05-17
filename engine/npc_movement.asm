@@ -306,6 +306,11 @@ IsNPCAtCoord: ; 7041
 .ok2
 	ldh a, [hMapObjectIndexBuffer]
 	ld l, a
+	and a
+	jr z, .setcarry
+	dec a
+	jr z, .setcarry
+
 	ldh a, [hObjectStructIndexBuffer]
 	cp l
 	jr nz, .setcarry
@@ -323,6 +328,11 @@ IsNPCAtCoord: ; 7041
 	jr nz, .next
 	ldh a, [hMapObjectIndexBuffer]
 	ld l, a
+	and a
+	jr z, .setcarry
+	dec a
+	jr z, .setcarry
+
 	ldh a, [hObjectStructIndexBuffer]
 	cp l
 	jr nz, .setcarry

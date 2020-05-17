@@ -2,12 +2,13 @@
 	const_def
 	const SPRITE_NONE ; 00
 	const SPRITE_PLAYER ; 01
+	const SPRITE_FOLLOWER
+
 	const SPRITE_CHRIS_BIKE ; 02
 	const SPRITE_CHRIS_SURF ; 03
 	const SPRITE_KRIS ; 04
 	const SPRITE_KRIS_BIKE ; 05
 	const SPRITE_KRIS_SURF ; 06
-	const SPRITE_FOLLOWER
 	const SPRITE_MOM ; 07
 	const SPRITE_DAD ; 08
 	const SPRITE_LYRA ; 09
