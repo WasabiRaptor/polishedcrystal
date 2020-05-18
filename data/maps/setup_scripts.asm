@@ -107,6 +107,7 @@ MapSetupScript_Train: ; 153d2
 	db map_player_coord
 	db map_spawn_coord
 	db map_follower_spawn_coord
+	db map_player_coord ; just making sure
 	db map_load_blocks
 	db map_buffer_screen
 	db map_lcd_off

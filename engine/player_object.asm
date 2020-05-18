@@ -107,10 +107,13 @@ SpawnPlayer:: ; 8029
 	jr .done
 
 .check_entry
+	bit PLAYER_PARTY_SPLIT_F, a
+	jr nz, .split_party
+
 	ldh a, [hMapEntryMethod]
 	cp MAPSETUP_SWITCH_LEADER
 	jr nz, .player_spawn
-
+.split_party
 	call FollowerSpawn_ConvertCoords
 .done
 	xor a ; 0 for PLAYER
@@ -128,12 +131,18 @@ SpawnPlayer:: ; 8029
 	ld a, PLAYER
 	call z, SetPlayerSpriteMoveData
 
+	ld a, [wPlayerDirection]
+	push af
+
 	xor a ; 0 for PLAYER
 	ldh [hMapObjectIndexBuffer], a
 	ld bc, wPlayerObject
 	ldh [hObjectStructIndexBuffer], a
 	ld de, wPlayerStruct
 	call CopyMapObjectToObjectStruct
+
+	pop af
+	ld [wPlayerDirection], a
 	ret
 
 PlayerObjectTemplate: ; 8071
@@ -158,10 +167,14 @@ SpawnFollower::
 	jr .done
 
 .check_entry
+	bit PLAYER_PARTY_SPLIT_F, a
+	jr nz, .split_party
+
 	ldh a, [hMapEntryMethod]
 	cp MAPSETUP_SWITCH_LEADER
 	jr nz, .player_spawn
 
+.split_party
 	call FollowerSpawn_ConvertCoords
 .done
 
@@ -180,12 +193,20 @@ SpawnFollower::
 	ld a, FOLLOWER
 	call nz, SetPlayerSpriteMoveData
 
+	ld a, [wFollowerDirection]
+	push af
+
 	ld a, FOLLOWER
 	ldh [hMapObjectIndexBuffer], a
 	ld bc, wFollowerObject
 	ldh [hObjectStructIndexBuffer], a
 	ld de, wFollowerStruct
-	jp CopyMapObjectToObjectStruct
+	call CopyMapObjectToObjectStruct
+
+	pop af
+	ld [wFollowerDirection], a
+	ret
+
 
 SetPlayerSpriteMoveData::
 	ld [wCenteredObject], a
@@ -271,7 +292,35 @@ WritePersonXY:: ; 80a1
 	and a
 	ret
 
+UnKillPlayerSprite:
+	ld a, SPRITE_PLAYER
+	ld [hl], a
+	ret
+
+UnKillFollowerSprite:
+	ld a, SPRITE_FOLLOWER
+	ld [hl], a
+	ret
+
+KillSprite:
+	xor a
+	ld [hl], a
+	ret
+
 RefreshPlayerCoords:: ; 80b8
+	call CheckPlayerFollowerExist
+
+	eventflagcheck EVENT_PLAYER_EXISTS
+	ld hl, wPlayerSprite
+	call z, KillSprite
+	call nz, UnKillPlayerSprite
+
+	eventflagcheck EVENT_FOLLOWER_EXISTS
+	ld hl, wFollowerSprite
+	call z, KillSprite
+	call nz, UnKillFollowerSprite
+
+
 	ld a, [wCenteredObject]
 	call GetObjectStruct
 

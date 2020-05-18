@@ -2520,7 +2520,7 @@ UpdateMapObjectDataAndSprites:: ; 55e0
 
 BattleStart_HideAllSpritesExceptBattleParticipants: ; 5602, called at battle start
 	call MaskAllObjectStructs ; clear sprites
-	ld a, PLAYER
+	ld a, [wCenteredObject]
 	call RespawnObject ; respawn player
 	ld a, [wBattleScriptFlags]
 	bit 7, a
@@ -2535,7 +2535,7 @@ BattleStart_HideAllSpritesExceptBattleParticipants: ; 5602, called at battle sta
 
 ReturnFromFly_SpawnOnlyPlayer: ; 561d
 	call MaskAllObjectStructs ; clear sprites
-	ld a, PLAYER
+	ld a, [wCenteredObject]
 	call RespawnObject ; respawn player
 	jp _UpdateSprites
 ; 5629
