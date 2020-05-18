@@ -163,8 +163,8 @@ CheckIfPortraitWouldKillObjects:
 	ld a, OBJECT_STANDING_Y
 	predef GetCenteredObjectStructParam
 	ld e, 3
-	ld d, NUM_OBJECT_STRUCTS -1
-	ld hl, wFollowerStandingMapY
+	ld d, NUM_OBJECT_STRUCTS
+	ld hl, wPlayerStandingMapY
 	ld bc, OBJECT_STRUCT_LENGTH
 	call .Check
 	ret c
@@ -173,8 +173,8 @@ CheckIfPortraitWouldKillObjects:
 	predef GetCenteredObjectStructParam
 	inc a
 	ld e, 4
-	ld d, NUM_OBJECT_STRUCTS -1
-	ld hl, wFollowerStandingMapY
+	ld d, NUM_OBJECT_STRUCTS
+	ld hl, wPlayerStandingMapY
 .Check:
 .loop
 	cp [hl]
