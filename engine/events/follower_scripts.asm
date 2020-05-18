@@ -240,25 +240,30 @@ StayFollowerMenuAction:
 	ld a, [wPlayerOverworldStatus]
 	bit 3, a
 
-	ld bc, wPlayerStruct
+	ld bc, wFollowerObject
 	ld de, wFollowerStruct
 
-	jr z, .got_it
-	ld bc, wFollowerStruct
+	jr z, .got_it1
+	ld bc, wPlayerObject
 	ld de, wPlayerStruct
-.got_it
+.got_it1
 
 	ld a, [wPlayerOverworldStatus]
 	xor 1 << 4
 	ld [wPlayerOverworldStatus], a
 	bit 4, a
 
-	ld hl, OBJECT_MOVEMENT_TYPE
-	add hl, de
 	ld a, SPRITEMOVEDATA_FOLLOWING
 	jr z, .got_it2
 	ld a, SPRITEMOVEDATA_SPINRANDOM_SLOW
 .got_it2
+	ld hl, MAPOBJECT_MOVEMENT
+	add hl, bc
+	ld [hl], a
+
+	ld hl, OBJECT_MOVEMENT_TYPE
+	add hl, de
+	ld [hl], a
 
 	ld hl, OBJECT_STANDING_X
 	add hl, de
@@ -304,22 +309,6 @@ LeadFollowerMenuAction:
 	ld a, [wFollowYCoord]
 	sub 4
 	ld [wYCoord], a
-
-	ld hl, OBJECT_MOVEMENT_TYPE
-	add hl, bc
-	ld a, SPRITEMOVEDATA_PLAYER
-	ld [hl], a
-
-	ld a, [wPlayerOverworldStatus]
-	bit 4, a
-	ld a, SPRITEMOVEDATA_FOLLOWING
-	jr z, .got_it3
-	ld a, SPRITEMOVEDATA_SPINRANDOM_SLOW
-
-.got_it3
-	ld hl, OBJECT_MOVEMENT_TYPE
-	add hl, de
-	ld [hl], a
 
 	ld hl, OBJECT_STANDING_X
 	add hl, de
