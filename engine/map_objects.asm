@@ -35,8 +35,9 @@ HandleCurNPCStep:
 	ld hl, OBJECT_FLAGS2
 	add hl, bc
 	res 6, [hl]
+	ld hl, wCenteredObject
 	ldh a, [hMapObjectIndexBuffer]
-	and a
+	cp [hl]
 	jr nz, .notPlayer
 ; hardcode for crossing over connections
 	ld a, [wYCoord]

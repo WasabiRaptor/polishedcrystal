@@ -389,8 +389,8 @@ CopyMapObjectToObjectStruct: ; 8116
 	jp CopyTempObjectToObjectStruct
 
 InitializeVisibleSprites: ; 8177
-	ld bc, wMapObjects + OBJECT_LENGTH
-	ld a, 1
+	ld bc, wMapObjects
+	xor a
 .loop
 	ldh [hMapObjectIndexBuffer], a
 	ld hl, MAPOBJECT_SPRITE
@@ -472,8 +472,8 @@ CheckObjectEnteringVisibleRange:: ; 81ca
 	ld d, a
 	ld a, [wXCoord]
 	ld e, a
-	ld bc, wMapObjects + OBJECT_LENGTH
-	ld a, 1
+	ld bc, wMapObjects
+	xor a
 .loop_v
 	ldh [hMapObjectIndexBuffer], a
 	ld hl, MAPOBJECT_SPRITE
@@ -528,8 +528,8 @@ CheckObjectEnteringVisibleRange:: ; 81ca
 	ld e, a
 	ld a, [wYCoord]
 	ld d, a
-	ld bc, wMapObjects + OBJECT_LENGTH
-	ld a, 1
+	ld bc, wMapObjects
+	xor a
 .loop_h
 	ldh [hMapObjectIndexBuffer], a
 	ld hl, MAPOBJECT_SPRITE
