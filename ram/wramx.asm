@@ -1077,6 +1077,12 @@ wScreenSave:: ds 6 * 5
 wFollowYCoord:: ds 1
 wFollowXCoord:: ds 1
 
+wPlayerObjectMapGroup:: ds 1 ; map group of current map
+wPlayerObjectMapNumber:: ds 1 ; map number of current map
+
+wFollowerObjectMapGroup:: ds 1 ; map group of current map
+wFollowerObjectMapNumber:: ds 1 ; map number of current map
+
 wMapDataEnd::
 
 

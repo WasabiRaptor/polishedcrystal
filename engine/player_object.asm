@@ -15,7 +15,81 @@ BlankScreen: ; 8000
 	call ApplyAttrAndTilemapInVBlank
 	jp SetPalettes
 
+CheckPlayerFollowerExist::
+	ld a, [wPlayerOverworldStatus]
+	bit PLAYER_PARTY_SPLIT_F, a
+	jr z, .both_exist
+	bit PLAYER_CONTROL_FOLLOWER_F, a
+	jr nz, .follower_exist
+
+	ld hl, wMapGroup
+	ld bc, wPlayerObjectMapGroup
+	ld a, [hli]
+	ld [bc], a
+	inc bc
+	ld a, [hl]
+	ld [bc], a
+
+	eventflagset EVENT_PLAYER_EXISTS
+	eventflagreset EVENT_FOLLOWER_EXISTS
+	call .checksamemap
+	ret c
+	eventflagset EVENT_FOLLOWER_EXISTS
+	ret
+
+
+.follower_exist
+	ld hl, wMapGroup
+	ld bc, wFollowerObjectMapGroup
+	ld a, [hli]
+	ld [bc], a
+	inc bc
+	ld a, [hl]
+	ld [bc], a
+
+	eventflagset EVENT_FOLLOWER_EXISTS
+	eventflagreset EVENT_PLAYER_EXISTS
+	call .checksamemap
+	ret c
+	eventflagset EVENT_PLAYER_EXISTS
+	ret
+
+.both_exist
+	ld hl, wMapGroup
+	ld bc, wPlayerObjectMapGroup
+	ld de, wFollowerObjectMapGroup
+	ld a, [hli]
+	ld [bc], a
+	ld [de], a
+	inc bc
+	inc de
+	ld a, [hl]
+	ld [bc], a
+	ld [de], a
+
+	eventflagset EVENT_PLAYER_EXISTS
+	eventflagset EVENT_FOLLOWER_EXISTS
+	ret
+
+.checksamemap:
+	ld a, [wFollowerObjectMapGroup]
+	ld b, a
+	ld a, [wPlayerObjectMapGroup]
+	cp b
+	jr nz, .notsamemap
+	ld a, [wFollowerObjectMapNumber]
+	ld b, a
+	ld a, [wPlayerObjectMapNumber]
+	cp b
+	ret z
+.notsamemap
+	scf
+	ret
+
+
 SpawnPlayer:: ; 8029
+	call CheckPlayerFollowerExist
+
 	ld a, NO_FOLLOWER
 	ld [wObjectFollow_Leader], a
 	ld [wObjectFollow_Follower], a
@@ -26,7 +100,7 @@ SpawnPlayer:: ; 8029
 	ld b, PLAYER
 
 	ld a, [wPlayerOverworldStatus]
-	bit 3, a
+	bit PLAYER_CONTROL_FOLLOWER_F, a
 	jr nz, .check_entry
 .player_spawn
 	call PlayerSpawn_ConvertCoords
@@ -46,11 +120,11 @@ SpawnPlayer:: ; 8029
 	add hl, bc
 
 	ld a, [wPlayerOverworldStatus]
-	bit 4, a
+	bit PLAYER_PARTY_SPLIT_F, a
 	call nz, SetSpinRandomSpriteMoveData
 
 	ld a, [wPlayerOverworldStatus]
-	bit 3, a
+	bit PLAYER_CONTROL_FOLLOWER_F, a
 	ld a, PLAYER
 	call z, SetPlayerSpriteMoveData
 
@@ -67,7 +141,7 @@ PlayerObjectTemplate: ; 8071
 ; Shorter than the actual amount copied by two bytes.
 ; Said bytes seem to be unused, but the game freezes when you first spawn
 ; in your room if this is not loaded.
-	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_PLAYER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1
+	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_PLAYER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, EVENT_PLAYER_EXISTS
 
 SpawnFollower::
 	ld a, FOLLOWER
@@ -77,7 +151,7 @@ SpawnFollower::
 	ld b, FOLLOWER
 
 	ld a, [wPlayerOverworldStatus]
-	bit 3, a
+	bit PLAYER_CONTROL_FOLLOWER_F, a
 	jr z, .check_entry
 .player_spawn
 	call PlayerSpawn_ConvertCoords
@@ -98,11 +172,11 @@ SpawnFollower::
 	add hl, bc
 
 	ld a, [wPlayerOverworldStatus]
-	bit 4, a
+	bit PLAYER_PARTY_SPLIT_F, a
 	call nz, SetSpinRandomSpriteMoveData
 
 	ld a, [wPlayerOverworldStatus]
-	bit 3, a
+	bit PLAYER_CONTROL_FOLLOWER_F, a
 	ld a, FOLLOWER
 	call nz, SetPlayerSpriteMoveData
 
@@ -127,9 +201,9 @@ SetSpinRandomSpriteMoveData::
 
 StartFollowerFollowing::
 	ld a, [wPlayerOverworldStatus]
-	bit 4, a
+	bit PLAYER_PARTY_SPLIT_F, a
 	jr nz, .stop_follow
-	bit 3, a
+	bit PLAYER_CONTROL_FOLLOWER_F, a
 	jr nz, .follower_is_lead
 	ld a, PLAYER
 	ld [wObjectFollow_Leader], a
@@ -149,7 +223,7 @@ StartFollowerFollowing::
 	farjp StopFollow
 
 FollowerObjectTemplate:
-	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, -1
+	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, EVENT_FOLLOWER_EXISTS
 
 CopyDECoordsToMapObject:: ; 807e
 	push de

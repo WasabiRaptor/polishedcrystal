@@ -2337,9 +2337,9 @@
 	const EVENT_MAGNET_TUNNEL_EAST_CUT_TREE
 	const EVENT_CHERRYGROVE_BAY_CUT_TREE
 
-; Unused placeholder events
-	const EVENT_883
-	const EVENT_884
+; Player and Follower Events
+	const EVENT_PLAYER_EXISTS
+	const EVENT_FOLLOWER_EXISTS
 	const EVENT_885
 	const EVENT_886
 	const EVENT_887

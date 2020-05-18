@@ -244,7 +244,24 @@ StayFollowerMenuAction:
 	jp c, PokemonPartyCommandMenu
 
 	ld a, [wPlayerOverworldStatus]
-	bit 3, a
+	bit PLAYER_CONTROL_FOLLOWER_F, a
+
+	ld hl, wMapGroup
+
+	ld bc, wPlayerObjectMapGroup
+	ld de, wFollowerObjectMapGroup
+
+	;map group
+	ld a, [hli]
+	ld [de], a
+	ld [bc], a
+	inc de
+	inc bc
+
+	;map number
+	ld a, [hl]
+	ld [de], a
+	ld [bc], a
 
 	ld bc, wFollowerObject
 	ld de, wFollowerStruct
@@ -255,9 +272,9 @@ StayFollowerMenuAction:
 .got_it1
 
 	ld a, [wPlayerOverworldStatus]
-	xor 1 << 4
+	xor PLAYER_PARTY_SPLIT
 	ld [wPlayerOverworldStatus], a
-	bit 4, a
+	bit PLAYER_PARTY_SPLIT_F, a
 
 	ld a, SPRITEMOVEDATA_FOLLOWING
 	jr z, .got_it2
@@ -284,9 +301,35 @@ LeadFollowerMenuAction:
 	jp c, PokemonPartyCommandMenu
 
 	ld a, [wPlayerOverworldStatus]
-	xor 1 << 3
+	xor PLAYER_CONTROL_FOLLOWER
 	ld [wPlayerOverworldStatus], a
-	bit 3, a
+	bit PLAYER_CONTROL_FOLLOWER_F, a
+
+	ld hl, wMapGroup
+
+	ld bc, wPlayerObjectMapGroup
+	ld de, wFollowerObjectMapGroup
+	jr z, .got_it
+	ld bc, wFollowerObjectMapGroup
+	ld de, wPlayerObjectMapGroup
+.got_it
+
+	;map group
+	ld a, [hl]
+	ld [de], a
+	inc de
+	ld a, [bc]
+	inc bc
+	ld [hli], a
+
+	;map number
+	ld a, [hl]
+	ld [de], a
+	inc de
+	ld a, [bc]
+	inc bc
+	ld [hl], a
+
 
 	ld a, PLAYER
 	ld bc, wPlayerStruct
@@ -301,7 +344,7 @@ LeadFollowerMenuAction:
 	ld [wCenteredObject], a
 
 	ld a, [wPlayerOverworldStatus]
-	bit 4, a
+	bit PLAYER_PARTY_SPLIT_F, a
 	jr nz, .got_it2
 
 	ld hl, OBJECT_STANDING_X
