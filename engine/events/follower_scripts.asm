@@ -116,14 +116,52 @@ PokemonPartyCommandMenu::
     and FIELD_HEAL
     call nz, AddToFollowerMenu
 
+	ld a, [wCenteredObject]
+	ld h, a
+	ld a, [hLastTalked]
+	cp h
+
     ld hl, SwitchString
-    call AddToFollowerMenu
+    call nz, AddToFollowerMenu
+
+	ld a, [wCenteredObject]
+	ld h, a
+	ld a, [hLastTalked]
+	cp h
+	jr z, .follow_or_wait
 
     ld hl, LeadString
     call AddToFollowerMenu
+	jr .stay
 
+.follow_or_wait
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_PARTY_SPLIT
+    ld hl, FollowLeadString
+    call z, AddToFollowerMenu
+
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_PARTY_SPLIT
+    ld hl, WaitLeadString
+    call nz, AddToFollowerMenu
+
+
+.stay
+	ld a, [wCenteredObject]
+	ld h, a
+	ld a, [hLastTalked]
+	cp h
+	jr z, .fill_remaining_slots_with_no
+
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_PARTY_SPLIT
+    ld hl, FollowStayString
+    call nz, AddToFollowerMenu
+
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_PARTY_SPLIT
     ld hl, StayString
-    call AddToFollowerMenu
+    call z, AddToFollowerMenu
 
     ld hl, PlayString
     call AddToFollowerMenu
@@ -218,8 +256,17 @@ SwitchString:
 LeadString:
     db "Lead@", FOLLOWER_MENU_ACTION_LEAD
 
+WaitLeadString:
+    db "Wait@", FOLLOWER_MENU_ACTION_LEAD
+
+FollowLeadString:
+    db "Follow@", FOLLOWER_MENU_ACTION_LEAD
+
 StayString:
     db "Stay@", FOLLOWER_MENU_ACTION_STAY
+
+FollowStayString:
+    db "Follow@", FOLLOWER_MENU_ACTION_STAY
 
 FollowerCommandMenuActionTable:
     dw NoFollowerMenuAction
