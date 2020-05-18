@@ -1788,7 +1788,11 @@ NPCStep: ; 4e2b
 	add hl, bc
 	ld [hl], STEP_TYPE_SLEEP
 	ld a, [hMapObjectIndexBuffer]
-	cp FOLLOWER
+	push hl ; can someone tell me how the fuck not preserving HL here kills everything?
+	ld h, a
+	ld a, [wObjectFollow_Follower]
+	cp h
+	pop hl
 	ret nz
 	xor a
 	ld[wFollowerGoingUpStairs], a
