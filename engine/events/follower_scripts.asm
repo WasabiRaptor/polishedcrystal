@@ -236,7 +236,13 @@ NoFollowerMenuAction:
     scf
     ret
 
+PlayFollowerMenuAction:
+    ret
+
 StayFollowerMenuAction:
+	call CheckSafeToSwichLeader
+	jp c, PokemonPartyCommandMenu
+
 	ld a, [wPlayerOverworldStatus]
 	bit 3, a
 
@@ -274,6 +280,9 @@ StayFollowerMenuAction:
 	farjp StartFollowerFollowing
 
 LeadFollowerMenuAction:
+	call CheckSafeToSwichLeader
+	jp c, PokemonPartyCommandMenu
+
 	ld a, [wPlayerOverworldStatus]
 	xor 1 << 3
 	ld [wPlayerOverworldStatus], a
@@ -325,8 +334,44 @@ LeadFollowerMenuAction:
 	farcall LoadMapStatus
 	farjp StopScript
 
-PlayFollowerMenuAction:
-    ret
+CheckSafeToSwichLeader::
+
+	ld a, [wPlayerStandingTile]
+	call .Check
+	jr c, .print_unsafe
+
+	ld a, [wFollowerStandingTile]
+	call .Check
+	jr c, .print_unsafe
+
+	and a
+	ret
+
+.Check:
+	cp COLL_TALL_GRASS
+	jr z, .unsafe_location
+	cp COLL_UNSAFE_FLOOR
+	jr z, .unsafe_location
+	call GetTileCollision
+	cp LANDTILE
+	jr nz, .unsafe_location
+	and a
+	ret
+
+.print_unsafe
+	ld hl, ProbablyNotString
+	call PrintText
+	call WaitButton
+.unsafe_location
+	scf
+	ret
+
+
+
+ProbablyNotString:
+	text "I'm probably not in the best"
+	next "place to do that right now."
+	done
 
 FlyFollowerMenuAction:
 	farcall MonMenu_Fly
