@@ -163,8 +163,8 @@ PokemonPartyCommandMenu::
     ld hl, StayString
     call z, AddToFollowerMenu
 
-    ld hl, PlayString
-    call AddToFollowerMenu
+    ;ld hl, PlayString
+    ;call AddToFollowerMenu
 
 .fill_remaining_slots_with_no
     ld hl, NoActionString
