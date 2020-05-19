@@ -8,8 +8,8 @@ DanielsTown_MapScriptHeader:
 	db 0 ; callbacks
 
 	db 2 ; warp events
-	warp_event 19,  7, KRISS_HOUSE_1F, 2
-	warp_event  6,  7, DAYCARE, 1
+	warp_event 25,  7, KRISS_HOUSE_1F, 2
+	warp_event 20,  7, DAYCARE, 1
 
 	db 0 ; coord events
 
