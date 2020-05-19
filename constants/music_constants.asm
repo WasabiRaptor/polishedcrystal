@@ -109,7 +109,6 @@
 	const MUSIC_ROUTE_209_DPPT                 ; 6b
 	const MUSIC_ROUTE_210_DPPT                 ; 6c
 	const MUSIC_ROUTE_225_DPPT                 ; 6d
-	const MUSIC_WILD_BATTLE_GO                 ; 6e
 	const MUSIC_DIGLETTS_CAVE_RBY              ; 6f
 	const MUSIC_VIRIDIAN_FOREST                ; 70
 	const MUSIC_HIKER_ENCOUNTER                ; 71
@@ -162,14 +161,12 @@
 	const MUSIC_SUMMONING_DANCE_HGSS           ; a0
 	const MUSIC_HO_OH_BATTLE_HGSS              ; a1
 	const MUSIC_CERULEAN_CAVE_RBY              ; a2
-	const MUSIC_MEWTWO_BATTLE_STADIUM          ; a3
 	const MUSIC_ABANDONED_SHIP_RSE             ; a4
 	const MUSIC_KANTO_LEGEND_BATTLE_XY         ; a5
 	const MUSIC_GYM_LEADER_BATTLE_RSE          ; a6
 	const MUSIC_GYM_LEADER_BATTLE_DPPT         ; a7
 	const MUSIC_GYM_LEADER_BATTLE_BW           ; a8
 	const MUSIC_GYM_LEADER_BATTLE_XY           ; a9
-	const MUSIC_GYM_LEADER_BATTLE_GO           ; aa
 	const MUSIC_ELITE_FOUR_BATTLE_BW           ; ab
 	const MUSIC_CELESTIAL_TOWER_BW             ; ac
 	const MUSIC_CHAMPION_BATTLE_RSE            ; ad

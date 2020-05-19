@@ -109,7 +109,6 @@ Music:
 	dba Music_Route209DPPt
 	dba Music_Route210DPPt
 	dba Music_Route225DPPt
-	dba Music_WildBattleGo
 	dba Music_DiglettsCaveRBY
 	dba Music_ViridianForest
 	dba Music_LookHiker
@@ -162,14 +161,12 @@ Music:
 	dba Music_SummoningDanceHGSS
 	dba Music_Ho_ohBattleHGSS
 	dba Music_CeruleanCaveRBY
-	dba Music_MewtwoBattleStadium
 	dba Music_AbandonedShipRSE
 	dba Music_KantoLegendBattleXY
 	dba Music_GymLeaderBattleRSE
 	dba Music_GymLeaderBattleDPPt
 	dba Music_GymLeaderBattleBW
 	dba Music_GymLeaderBattleXY
-	dba Music_GymLeaderBattleGo
 	dba Music_EliteFourBattleBW
 	dba Music_CelestialTowerBW_NoIntro
 	dba Music_ChampionBattleRSE

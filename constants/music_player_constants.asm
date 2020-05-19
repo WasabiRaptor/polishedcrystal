@@ -57,7 +57,6 @@ NUM_MP_EDIT_FIELDS EQU const_value
 	const COMPOSER_PUM                           ; 0d
 	const COMPOSER_SHANTYTOWN                    ; 0e
 	const COMPOSER_PIGU                          ; 0f
-	const COMPOSER_SHOCKSLAYER                   ; 10
 	const COMPOSER_MONSTARULES                   ; 11
 	const COMPOSER_PIGU_PIKALAXALT               ; 12
 	const COMPOSER_GACT_PIGU                     ; 13
