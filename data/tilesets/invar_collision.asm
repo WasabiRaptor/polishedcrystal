@@ -31,11 +31,11 @@
 	tilecoll WALL, WALL, WALL, WALL ; 1e
 	tilecoll FLOOR, FLOOR, WALL, WALL ; 1f
 	tilecoll WALL, WALL, WALL, WALL ; 20
-	tilecoll WALL, WALL, WALL, WALL ; 21
+	tilecoll FLOOR, FLOOR, FLOOR, FLOOR ; 21
 	tilecoll WALL, WALL, WALL, WALL ; 22
 	tilecoll WALL, WALL, WALL, WALL ; 23
 	tilecoll WALL, WALL, WALL, DOOR ; 24
-	tilecoll WALL, WALL, WALL, WALL ; 25
+	tilecoll WALL, WALL, WALL, DOOR ; 25
 	tilecoll WALL, WALL, WALL, WALL ; 26
 	tilecoll WALL, WALL, WALL, DOOR ; 27
 	tilecoll FLOOR, FLOOR, WALL, WALL ; 28
