@@ -30,11 +30,11 @@ CheckPlayerFollowerExist::
 	ld a, [hl]
 	ld [bc], a
 
-	eventflagset EVENT_PLAYER_EXISTS
-	eventflagreset EVENT_FOLLOWER_EXISTS
+	eventflagreset EVENT_PLAYER_EXISTS
+	eventflagset EVENT_FOLLOWER_EXISTS
 	call .checksamemap
 	ret c
-	eventflagset EVENT_FOLLOWER_EXISTS
+	eventflagreset EVENT_FOLLOWER_EXISTS
 	ret
 
 
@@ -47,11 +47,11 @@ CheckPlayerFollowerExist::
 	ld a, [hl]
 	ld [bc], a
 
-	eventflagset EVENT_FOLLOWER_EXISTS
-	eventflagreset EVENT_PLAYER_EXISTS
+	eventflagreset EVENT_FOLLOWER_EXISTS
+	eventflagset EVENT_PLAYER_EXISTS
 	call .checksamemap
 	ret c
-	eventflagset EVENT_PLAYER_EXISTS
+	eventflagreset EVENT_PLAYER_EXISTS
 	ret
 
 .both_exist
@@ -67,8 +67,8 @@ CheckPlayerFollowerExist::
 	ld [bc], a
 	ld [de], a
 
-	eventflagset EVENT_PLAYER_EXISTS
-	eventflagset EVENT_FOLLOWER_EXISTS
+	eventflagreset EVENT_PLAYER_EXISTS
+	eventflagreset EVENT_FOLLOWER_EXISTS
 	ret
 
 .checksamemap:
@@ -81,18 +81,23 @@ CheckPlayerFollowerExist::
 	ld b, a
 	ld a, [wPlayerObjectMapNumber]
 	cp b
-	ret z
+	jr nz, .notsamemap
+
+	xor a
+	ret
 .notsamemap
 	scf
 	ret
 
 
 SpawnPlayer:: ; 8029
-	call CheckPlayerFollowerExist
-
 	ld a, NO_FOLLOWER
 	ld [wObjectFollow_Leader], a
 	ld [wObjectFollow_Follower], a
+
+	eventflagcheck EVENT_PLAYER_EXISTS
+	ret nz
+
 	xor a ; 0 for PLAYER
 	ld hl, PlayerObjectTemplate
 	call CopyPlayerObjectTemplate
@@ -153,6 +158,9 @@ PlayerObjectTemplate: ; 8071
 	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 0, 0, -1, -1, PAL_OW_PLAYER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, EVENT_PLAYER_EXISTS
 
 SpawnFollower::
+	eventflagcheck EVENT_FOLLOWER_EXISTS
+	ret nz
+
 	ld a, FOLLOWER
 	ld hl, FollowerObjectTemplate
 	call CopyPlayerObjectTemplate
@@ -292,34 +300,8 @@ WritePersonXY:: ; 80a1
 	and a
 	ret
 
-UnKillPlayerSprite:
-	ld a, SPRITE_PLAYER
-	ld [hl], a
-	ret
-
-UnKillFollowerSprite:
-	ld a, SPRITE_FOLLOWER
-	ld [hl], a
-	ret
-
-KillSprite:
-	xor a
-	ld [hl], a
-	ret
 
 RefreshPlayerCoords:: ; 80b8
-	call CheckPlayerFollowerExist
-
-	eventflagcheck EVENT_PLAYER_EXISTS
-	ld hl, wPlayerSprite
-	call z, KillSprite
-	call nz, UnKillPlayerSprite
-
-	eventflagcheck EVENT_FOLLOWER_EXISTS
-	ld hl, wFollowerSprite
-	call z, KillSprite
-	call nz, UnKillFollowerSprite
-
 
 	ld a, [wCenteredObject]
 	call GetObjectStruct
@@ -424,12 +406,12 @@ CopyObjectStruct:: ; 80e7
 	call CheckObjectMask
 	and a
 	ret nz ; masked
-	ld hl, wObjectStructs + OBJECT_STRUCT_LENGTH * 1
-	ld a, 1
+	ld hl, wObjectStructs
+	xor a
 	ld de, OBJECT_STRUCT_LENGTH
 .loop
 	ldh [hObjectStructIndexBuffer], a
-	ld a, [hl]
+	ld a, [hl] ;sprite
 	and a
 	jr z, .done
 	add hl, de

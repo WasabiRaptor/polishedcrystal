@@ -380,7 +380,7 @@ FindFirstEmptyObjectStruct:: ; 1a13
 ; Preserves BC and DE.
 	push bc
 	push de
-	ld hl, wObjectStructs
+	ld hl, wObjectStructs + (OBJECT_STRUCT_LENGTH * 2)
 	ld de, OBJECT_STRUCT_LENGTH
 	ld c, NUM_OBJECT_STRUCTS
 .loop

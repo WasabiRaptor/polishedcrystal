@@ -95,8 +95,10 @@ DoBattle: ; 3c000
 
 	ld a, MON_MOOD
 	predef GetPartyParamLocation
-	bit MON_IS_PLAYER_F, [hl]
-	jr nz, .dont_slide_pic
+	ld a, [hl]
+	and MON_SPECIAL
+	cp MON_IS_PLAYER
+	jr z, .dont_slide_pic
 
 	ld a, [wPlayerOverworldStatus]
 	and PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
@@ -4121,8 +4123,10 @@ SendOutPlayerMon: ; 3db5f
 
 	ld a, MON_MOOD
 	predef GetPartyParamLocation
-	bit MON_IS_PLAYER_F, [hl]
-	jr z, .not_player_mon
+	ld a, [hl]
+	and MON_SPECIAL
+	cp MON_IS_PLAYER
+	jr nz, .not_player_mon
 	ld a, [wBattleHasJustStarted]
 	and a
 	jr z, .slide_in

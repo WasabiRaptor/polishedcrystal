@@ -287,7 +287,7 @@ ReadObjectEvents:: ; 241f
 ; get NUM_OBJECTS - 1 - [wCurrentMapPersonEventCount]
 	ld a, [wCurrentMapPersonEventCount]
 	ld c, a
-	ld a, NUM_OBJECTS - 1
+	ld a, NUM_OBJECTS - 2
 	sub c
 	jr z, .skip
 	jr c, .skip

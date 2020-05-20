@@ -109,6 +109,7 @@ MapSetupCommands: ; 15440
 	dba DecompressMetatiles ; 2d
 	dba SpawnFollower
 	dba StartFollowerFollowing
+	dba CheckPlayerFollowerExist
 ; 154ca
 
 ActivateMapAnims: ; 154cf

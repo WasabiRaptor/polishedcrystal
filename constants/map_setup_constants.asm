@@ -72,4 +72,5 @@
 	const map_decompress_metatiles ; 2d
 	const map_follower_spawn_coord
 	const map_start_follower_following
+	const map_check_player_follower_exist
 map_end EQU -1

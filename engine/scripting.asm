@@ -1070,7 +1070,7 @@ Script_faceplayer:
 	ldh a, [hLastTalked]
 	cp b
 	ret z
-	ld d, $0
+	ld d, b ; centered object
 	ldh a, [hLastTalked]
 	ld e, a
 	farcall GetRelativeFacing
