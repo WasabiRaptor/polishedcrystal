@@ -1,3 +1,5 @@
+
+;wFollowerStatus
 NO_FOLLOWER EQU -1
 
 FOLLOWER_ENABLE EQU 7

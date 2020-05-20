@@ -683,7 +683,7 @@ CheckTrainerBattle2:: ; 3600
 CheckTrainerBattle:: ; 360d
 	;check if the party is split
 	ld a, [wPlayerOverworldStatus]
-	bit PlAYER_IS_POKEMON_F, a
+	bit PLAYER_IS_POKEMON_F, a
 	jr nz, .dont_trainer_battle
 	bit PLAYER_PARTY_SPLIT_F, a
 	jr z, .check_trainer_battle

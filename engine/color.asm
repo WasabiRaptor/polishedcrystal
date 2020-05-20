@@ -726,11 +726,39 @@ GetEnemyFrontpicPalette:
 GetPlayerOrMonPalette:
 	and a
 	jp nz, GetMonPalette
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	cp PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	jr z, .IsFollower
+	ld a, [wPlayerOverworldStatus]
+	bit PLAYER_IS_POKEMON_F, a
+	jr nz, .IsPokemon
+
 	ld hl, PlayerPalette
 	ld a, [wPlayerOverworldPalette]
 	ld bc, 4
 	rst AddNTimes
 	jp LoadPalette_White_Col1_Col2_Black
+
+.IsPokemon
+	ld hl, wPlayerMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
+	ld bc, wPlayerMonShiny
+	jp GetMonPalette
+
+.IsFollower
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	ld a, MON_SHINY
+	predef GetPartyParamLocation
+	ld b, h
+	ld c, l
+	jp GetMonPalette
+
 
 GetFrontpicPalette:
 	and a

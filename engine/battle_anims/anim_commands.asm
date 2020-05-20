@@ -1234,14 +1234,14 @@ BattleAnimCmd_BeatUp: ; cc776 (33:4776)
 	and a
 	jr z, .player
 
-	ld hl, wBattleMonGroup
+	ld hl, wEnemyMonGroup
 	predef GetPartyMonGroupSpeciesAndForm
 	ld de, VTiles2 tile $00
 	predef GetFrontpic
 	jr .done
 
 .player
-	ld hl, wEnemyMonGroup
+	ld hl, wBattleMonGroup
 	predef GetPartyMonGroupSpeciesAndForm
 	ld de, VTiles2 tile $31
 	predef GetBackpic

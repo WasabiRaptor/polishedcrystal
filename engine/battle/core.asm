@@ -93,7 +93,19 @@ DoBattle: ; 3c000
 	ld a, [wCurPartyForm]
 	ld [wTempBattleMonForm], a
 
+	ld a, MON_MOOD
+	predef GetPartyParamLocation
+	bit MON_IS_PLAYER_F, [hl]
+	jr nz, .dont_slide_pic
+
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	cp PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	jr z, .dont_slide_pic
+
 	call SlidePlayerPicOut
+
+.dont_slide_pic
 	call LoadTileMapToTempTileMap
 	call ResetBattleParticipants
 	call InitBattleMon
@@ -3208,6 +3220,74 @@ SlideBattlePicOut: ; 3d490
 	ret
 ; 3d4c3
 
+SlidePlayerPicIn:
+	ld a, 7
+	ldh [hMapObjectIndexBuffer], a
+
+	hlcoord 0, 6
+	ld a, $4f
+	ld c, 6
+	ld de, SCREEN_WIDTH
+.loop1
+	ld [hl], a
+	add hl, de
+	inc a
+	dec c
+	jr nz, .loop1
+
+	call SafeCopyTilemapAtOnce
+
+	hlcoord 6, 6
+	ldh a, [hMapObjectIndexBuffer]
+	ld c, a
+
+.loop
+	push bc
+	push hl
+	call SafeCopyTilemapAtOnce
+	ld b, $6
+.loop2
+	push hl
+	call .DoFrame
+	pop hl
+	ld de, SCREEN_WIDTH
+	add hl, de
+	dec b
+	jr nz, .loop2
+	pop hl
+	pop bc
+	dec c
+	jr nz, .loop
+
+	hlcoord 0, 6
+	ld a, $7f
+	ld c, 6
+	ld de, SCREEN_WIDTH
+.loop3
+	ld [hl], a
+	add hl, de
+	dec c
+	jr nz, .loop3
+	jp SafeCopyTilemapAtOnce
+
+; 3d4ae
+
+.DoFrame: ; 3d4ae
+	ldh a, [hMapObjectIndexBuffer]
+	ld c, a
+.forward
+	ld a, [hli]
+	ld [hld], a
+	cp $7f
+	jr z, .skip
+	sub 6
+	ld [hl], a
+.skip
+	dec hl
+	dec c
+	jr nz, .forward
+	ret
+
 
 ForceEnemySwitch: ; 3d4c3
 	call ResetEnemyBattleVars
@@ -4008,10 +4088,10 @@ SendOutPlayerMon: ; 3db5f
 	ld a, MON_GROUP_SPECIES_AND_FORM
 	predef GetPartyParamLocation
 
-	hlcoord 1, 5
-	lb bc, 7, 8
-	call ClearBox
-	call ApplyTilemapInVBlank
+	;hlcoord 1, 5
+	;lb bc, 7, 8
+	;call ClearBox
+	;call ApplyTilemapInVBlank
 	xor a
 	ldh [hBGMapMode], a
 	call GetMonBackpic
@@ -4038,8 +4118,38 @@ SendOutPlayerMon: ; 3db5f
 	xor a
 	ld [wNumHits], a
 	ld [wBattleAnimParam], a
+
+	ld a, MON_MOOD
+	predef GetPartyParamLocation
+	bit MON_IS_PLAYER_F, [hl]
+	jr z, .not_player_mon
+	ld a, [wBattleHasJustStarted]
+	and a
+	jr z, .slide_in
+	jr .anim_next
+
+.not_player_mon
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	cp PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	jr z, .anim_next
+
+	ld a, [wCurPartyMon]
+	ld b, a
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	cp b
+	jr nz, .not_follower
+.slide_in
+	call SlidePlayerPicIn
+	jr .anim_next
+
+.not_follower
 	ld de, ANIM_SEND_OUT_MON
 	call Call_PlayBattleAnim
+
+.anim_next
 	call BattleCheckPlayerShininess
 	jr nc, .not_shiny
 	ld a, 1
@@ -9354,6 +9464,13 @@ InitBattleDisplay: ; 3fb6c
 
 GetTrainerBackpic: ; 3fbff
 ; Load the player character's backpic (6x6) into VRAM starting from VTiles2 tile $31.
+	ld a, [wPlayerOverworldStatus]
+	and PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	cp PLAYER_CONTROL_FOLLOWER | PLAYER_PARTY_SPLIT
+	jr z, .IsFollower
+	ld a, [wPlayerOverworldStatus]
+	bit PLAYER_IS_POKEMON_F, a
+	jr nz, .IsPokemon
 
 	ld b, BANK(LyraBackpic) ; BANK(ChrisBackpic), BANK(KrisBackpic)
 
@@ -9379,6 +9496,24 @@ GetTrainerBackpic: ; 3fbff
 	ld c, 6 * 6
 	predef DecompressPredef
 	ret
+
+.IsPokemon
+	ld hl, wPlayerMonGroup
+	predef GetPartyMonGroupSpeciesAndForm
+	jr .GetPokemonBackpic
+
+.IsFollower
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	ld [wCurPartyMon], a
+	ld a, MON_GROUP_SPECIES_AND_FORM
+	predef GetPartyParamLocation
+	;fallthough
+.GetPokemonBackpic
+	ld de, VTiles2 tile $31
+	predef_jump GetBackpic
+
 ; 3fc30
 
 CopyBackpic: ; 3fc30

@@ -3131,12 +3131,12 @@ Script_playimport:
 ; I have no fucking idea why it doesn't like me using the constants here
 Script_endifpokemon:
 	ld a, [wPlayerOverworldStatus]
-	and %1001;PLAYER_IS_POKEMON | PLAYER_CONTROL_FOLLOWER
+	and PLAYER_IS_POKEMON | PLAYER_CONTROL_FOLLOWER
 	ret z
 	jp Script_end
 
 Script_ifpokemon:
 	ld a, [wPlayerOverworldStatus]
-	and %1001;PLAYER_IS_POKEMON | PLAYER_CONTROL_FOLLOWER
+	and PLAYER_IS_POKEMON | PLAYER_CONTROL_FOLLOWER
 	jp nz, Script_jump
 	jp SkipTwoScriptBytes
