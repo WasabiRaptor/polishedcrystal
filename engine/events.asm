@@ -177,26 +177,52 @@ MaybeSetGrassAttributes::
 .PlayerOrFollowerOnGrass
 	ld a, 1
 	ld [rVBK], a
+
+
+	ld a, OBJECT_STANDING_Y
+	farcall GetFollowObjectStructParam
+	ld b, a
+
+	ld a, OBJECT_STANDING_Y
+	predef GetCenteredObjectStructParam
+	ld c, a
+	cp b
+	call z, .SetGrass
+
 .waitLY
+	ld a, b
+	cp c
+	jr c, .FollowerAbove
+
+	ld a, c
+	cp b
+	jr c, .FollowerBelow
+.done
+	xor a
+	ld [rVBK], a
+	ret
+
+.FollowerAbove
 	ldh a, [rLY]
 	cp GRASS_SCANLINE_PX
 	jr z, .SetGrass
 	cp GRASS_SCANLINE_PX+GRASS_SCANLINE_COVER
 	jr z, .UnsetGrass
+	cp GRASS_SCANLINE_PX+GRASS_SCANLINE_COVER+8
+	jr z, .SetGrass
+	jr c, .FollowerAbove
+	jr .done
 
+.FollowerBelow
+	ldh a, [rLY]
 	cp GRASS_SCANLINE_PX+16
 	jr z, .SetGrass
 	cp GRASS_SCANLINE_PX+16+GRASS_SCANLINE_COVER
 	jr z, .UnsetGrass
-
-	cp GRASS_SCANLINE_PX+32
+	cp GRASS_SCANLINE_PX+16+GRASS_SCANLINE_COVER+8
 	jr z, .SetGrass
-	cp GRASS_SCANLINE_PX+32+GRASS_SCANLINE_COVER
-	jr z, .UnsetGrass
-	jr c, .waitLY
-	xor a
-	ld [rVBK], a
-	ret
+	jr c, .FollowerBelow
+	jr .done
 
 .SetGrass
 	ld a, [wHasPlayerMoved]

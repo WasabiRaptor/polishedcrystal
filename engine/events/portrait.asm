@@ -162,7 +162,7 @@ ClosePortrait::
 CheckIfPortraitWouldKillObjects:
 	ld a, OBJECT_STANDING_Y
 	predef GetCenteredObjectStructParam
-	ld e, 3
+	ld e, 4
 	ld d, NUM_OBJECT_STRUCTS
 	ld hl, wPlayerStandingMapY
 	ld bc, OBJECT_STRUCT_LENGTH

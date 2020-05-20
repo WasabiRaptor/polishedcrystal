@@ -206,9 +206,8 @@ CopyNextCoordsTileToStandingCoordsTile:
 	ld hl, OBJECT_LAST_TILE
 	add hl, bc
 	ld [hl], a
-
+	;call SetTallGrassFlags
 	ld hl, OBJECT_STANDING_TILE
-
 	add hl, bc
 	ld a, [hl]
 	ret

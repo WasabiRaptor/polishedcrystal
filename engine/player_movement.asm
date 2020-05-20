@@ -1033,8 +1033,7 @@ StopPlayerForEvent:: ; 80422
 
 SetTallGrassAttributes::
 	ld a, OBJECT_STANDING_TILE
-	call GetFollowObjectStructParam
-
+	farcall GetFollowObjectStructParam
 	cp COLL_TALL_GRASS
 	call z, .setFollowerGrassAddress
 
@@ -1057,12 +1056,12 @@ SetTallGrassAttributes::
 	ld a, OBJECT_STANDING_X
 	predef GetCenteredObjectStructParamAddress
 	ld a, OBJECT_STANDING_X
-	call GetFollowObjectStructParam
+	farcall GetFollowObjectStructParam
 	cp [hl]
 	jr c, .left
 	inc hl ;wPlayer/FollowerStandingMapY
 	ld a, OBJECT_STANDING_Y
-	call GetFollowObjectStructParam
+	farcall GetFollowObjectStructParam
 	cp [hl]
 	jr z, .right
 	jr c, .above
