@@ -3745,7 +3745,7 @@ CheckIfCurPartyMonIsFitToFight: ; 3d887
 	predef GetPartyLocation
 	ld a, [hli]
 	or [hl]
-	ret nz
+	jr nz, .has_hp
 
 	ld a, [wBattleHasJustStarted]
 	and a
@@ -3768,6 +3768,44 @@ CheckIfCurPartyMonIsFitToFight: ; 3d887
 .finish_fail
 	xor a
 	ret
+
+.has_hp
+	ld a, [wPlayerOverworldStatus]
+	bit PLAYER_PARTY_SPLIT_F, a
+	ld hl, wCurPartyMon
+	jr z, .not_split
+
+	ld a, [wPlayerOverworldStatus]
+	bit PLAYER_CONTROL_FOLLOWER_F, a
+	jr z, .split_player
+
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	cp [hl]
+	jr z, .not_split
+	jr .split
+
+.split_player
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	cp [hl]
+	jr nz, .not_split
+
+.split
+	ld a, [wBattleHasJustStarted]
+	and a
+	jr nz, .finish_fail
+
+	ld hl, BattleText_SplitFromParty
+	jr .print_textbox
+
+
+.not_split
+	inc a ; unset z
+	ret
+
 ; 3d8b3
 
 

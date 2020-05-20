@@ -422,6 +422,11 @@ BattleText_AnEGGCantBattle: ; 0x80b26
 	prompt
 ; 0x80b3b
 
+BattleText_SplitFromParty: ; 0x80b0b
+	text "That Pokemon is split from"
+	line "the party right now!"
+	prompt
+
 BattleText_CantEscape: ; 0x80ba0
 	text "Can't escape!"
 	prompt
@@ -2052,4 +2057,3 @@ LawrenceFinalPkmnText:
 ReiFinalPkmnText:
 	text "I'm not done yet."
 	prompt
-
