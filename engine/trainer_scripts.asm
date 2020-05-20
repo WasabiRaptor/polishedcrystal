@@ -1,4 +1,5 @@
 TalkToTrainerScript:: ; 0xbe66a
+	endifpokemon
 	faceplayer
 	trainerflagaction CHECK_FLAG
 	iftrue AlreadyBeatenTrainerScript

@@ -1306,3 +1306,14 @@ playimport: MACRO
 	db playimport_command
 	db (\1_id - ImportedSoundsPointerTable) / 3 ; sound to play
 ENDM
+
+	enum endifpokemon_command
+endifpokemon: MACRO
+	db endifpokemon_command
+ENDM
+
+	enum ifpokemon_command
+ifpokemon: MACRO
+	db ifpokemon_command
+	dw \1
+ENDM

@@ -681,11 +681,25 @@ CheckTrainerBattle2:: ; 3600
 ; 360d
 
 CheckTrainerBattle:: ; 360d
+	;check if the party is split
+	ld a, [wPlayerOverworldStatus]
+	bit PlAYER_IS_POKEMON_F, a
+	jr nz, .dont_trainer_battle
+	bit PLAYER_PARTY_SPLIT_F, a
+	jr z, .check_trainer_battle
+	bit PLAYER_CONTROL_FOLLOWER_F, a
+	jr z, .check_trainer_battle
+
+.dont_trainer_battle
+	xor a
+	ret
+
+.check_trainer_battle
 ; Check if any trainer on the map sees the player and wants to battle.
 
-; Skip the player object.
-	ld a, 1
-	ld de, wMapObjects + OBJECT_LENGTH
+; Skip the player and follower object.
+	ld a, 2
+	ld de, wMapObjects + (OBJECT_LENGTH *2)
 
 .loop
 

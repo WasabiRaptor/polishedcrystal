@@ -260,14 +260,14 @@ ScriptCommandTable:
 	dw Script_checkegg                   ; c7
 	dw Script_portrait
 	dw Script_closeportrait
-
-	dw Script_givekeyitem                   ; a8
-	dw Script_checkkeyitem                  ; a9
+	dw Script_givekeyitem
+	dw Script_checkkeyitem
 	dw Script_takekeyitem
-	dw Script_verbosegivekeyitem            ; aa
-	dw Script_keyitemnotify                 ; ab
-
-	dw Script_playimport				; ac
+	dw Script_verbosegivekeyitem
+	dw Script_keyitemnotify
+	dw Script_playimport
+	dw Script_endifpokemon
+	dw Script_ifpokemon
 
 StartScript:
 	ld hl, wScriptFlags
@@ -3127,3 +3127,16 @@ Script_playimport:
 	call GetScriptByte
 	;jp PlayImportedSoundClip
 	ret
+
+; I have no fucking idea why it doesn't like me using the constants here
+Script_endifpokemon:
+	ld a, [wPlayerOverworldStatus]
+	and %1001;PLAYER_IS_POKEMON | PLAYER_CONTROL_FOLLOWER
+	ret z
+	jp Script_end
+
+Script_ifpokemon:
+	ld a, [wPlayerOverworldStatus]
+	and %1001;PLAYER_IS_POKEMON | PLAYER_CONTROL_FOLLOWER
+	jp nz, Script_jump
+	jp SkipTwoScriptBytes
