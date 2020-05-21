@@ -104,7 +104,10 @@ GeneratePartyMonStats: ; d906
 
 .skipitem
 	ld [de], a
-	inc de ; item is two bytes
+	inc de ; mood byte
+	ld a, DEFAULT_MOOD
+	ld [de], a
+
 	inc de ; moves are now in de
 	push de ; 2 ; moves are pushed
 	ld h, d ;moves now in hl
@@ -410,8 +413,8 @@ endr
 	push de ;3 ; cur PP is pushed
 	inc hl ; inc group to species
 	inc hl ; inc species to item
-	inc hl ; items are two bytes
-	inc hl ; inc item to moves
+	inc hl ; mood byte
+	inc hl ; inc mood to moves
 	predef FillPP
 	pop de ;2 ; pop cur PP
 	pop hl ;1 ; pop group

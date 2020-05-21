@@ -735,7 +735,7 @@ wPlayerOverworldStatus:: ds 1
 ; 3 - Follower is lead
 ; 4 - party is split
 
-wPlayerMon:: box_struct wPlayerMon
+wPlayerMon:: party_struct wPlayerMon
 
 wPlayerName:: ds PLAYER_NAME_LENGTH
 wRivalName:: ds PLAYER_NAME_LENGTH

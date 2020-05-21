@@ -224,6 +224,7 @@ ItemIconPointers:
 
 KeyItemIconPointers:
 	dw BicycleIcon
+	dw TransformationMaskIcon
 	dw LokiMaskIcon
 	dw WeaverMaskIcon
 	dw ItemfinderIcon

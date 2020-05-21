@@ -221,6 +221,7 @@ endc
 
 KeyItemNames::
 	db "Bicycle@"
+	db "Transform Mask@"
 	db "Loki Mask@"
 	db "Weaver Mask@"
 	db "Itemfinder@"

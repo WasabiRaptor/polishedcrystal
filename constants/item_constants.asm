@@ -501,6 +501,7 @@ NUM_APRICORNS EQU const_value +- 1
 ; Key item constants
 	const_def 0
 	const BICYCLE      ; 55
+	const TRANSFORMATION_MASK
 	const LOKI_MASK
 	const WEAVER_MASK
 	const ITEMFINDER   ; 5a

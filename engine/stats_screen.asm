@@ -631,7 +631,12 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 	ld de, wTempMonID
 	predef PrintNum
 	ld hl, .OTNamePointers
-	call GetNicknamePointer
+	ld a, [wMonType]
+	call NextHLTable
+	ld bc, PLAYER_NAME_LENGTH
+	ld a, [wCurPartyMon]
+	rst AddNTimes
+
 	call CopyNickname
 	hlcoord 0, 15
 	call PlaceString

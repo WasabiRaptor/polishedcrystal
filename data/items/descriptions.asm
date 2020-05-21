@@ -214,6 +214,7 @@ ItemDescriptions:
 
 KeyItemDescriptions:
 	dw BicycleDesc
+	dw TransformationMaskDesc
 	dw LokiMaskDesc
 	dw WeaverMaskDesc
 	dw ItemfinderDesc
@@ -225,13 +226,17 @@ KeyItemDescriptions:
 	dw OvalCharmDesc
 	dw ApricornBoxDesc
 
+TransformationMaskDesc:
+	db "A debug mask that transforms"
+	next "you into a pokemon.@"
+
 LokiMaskDesc:
 	db "A debug mask that transforms"
-	next "you into a certain Vulpix@"
+	next "you into a certain Vulpix.@"
 
 WeaverMaskDesc:
 	db "A debug mask that transforms"
-	next "you into a certain Sylveon@"
+	next "you into a certain Sylveon.@"
 
 PokeBallDesc:
 	db   "An item for catch-"

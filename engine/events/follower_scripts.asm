@@ -4,6 +4,7 @@
 _FollowerInteractScript::
     callasm CheckIfFollowerInteract
     iffalse JustEnd
+	ifequal 1, SelfInteractScript
     faceplayer
     opentext
 	callasm CurPartyNicknameNameplate
@@ -53,6 +54,16 @@ CheckIfFollowerInteract::
 	and a
 	ret nz
 
+
+	ld a, [hLastTalked]
+	and a
+	jr nz, .not_player
+	ld a, 1
+	ld [wScriptVar], a
+	ret
+
+.not_player
+
 	ld a, [wFollowerStatus]
 	bit FOLLOWER_ENABLE, a
 	ret z
@@ -73,7 +84,7 @@ CheckIfFollowerInteract::
 	ld a, [wCurGroup]
 	and a
     ret z
-	ld a, TRUE
+	ld a, 2
 	ld [wScriptVar], a
 	ret
 
@@ -120,15 +131,12 @@ PokemonPartyCommandMenu::
 	ld h, a
 	ld a, [hLastTalked]
 	cp h
+	jr z, .follow_or_wait
 
+	ld a, [hLastTalked]
+	and a
     ld hl, SwitchString
     call nz, AddToFollowerMenu
-
-	ld a, [wCenteredObject]
-	ld h, a
-	ld a, [hLastTalked]
-	cp h
-	jr z, .follow_or_wait
 
     ld hl, LeadString
     call AddToFollowerMenu

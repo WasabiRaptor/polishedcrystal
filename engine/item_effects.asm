@@ -242,6 +242,7 @@ DoKeyItemEffect:: ; e722
 ;key items
 KeyItemEffects:
 	dw Bicycle          ; BICYCLE
+	dw TransformationMask
 	dw LokiMask
 	dw WeaverMask
 	dw Itemfinder       ; ITEMFINDER
@@ -253,29 +254,14 @@ KeyItemEffects:
 	dw NoEffect         ; OVAL_CHARM
 	dw ApricornBox      ; APRICORN_BOX
 
-LokiMask:
-	ld a, GROUP_VULPIX
-	ld [wPlayerMonGroup], a
-	ld [wCurGroup], a
-	ld a, VULPIX
-	ld [wPlayerMonSpecies], a
-	ld [wCurSpecies], a
-	ld a, LOKI | MALE
-	ld [wPlayerMonForm], a
-	ld [wCurForm], a
-	farjp TransformPlayer
+TransformationMask::
+	farjp _TransformationMask
 
-WeaverMask:
-	ld a, GROUP_SYLVEON
-	ld [wPlayerMonGroup], a
-	ld [wCurGroup], a
-	ld a, SYLVEON
-	ld [wPlayerMonSpecies], a
-	ld [wCurSpecies], a
-	ld a, MALE
-	ld [wPlayerMonForm], a
-	ld [wCurForm], a
-	farjp TransformPlayer
+LokiMask::
+	farjp _LokiMask
+
+WeaverMask::
+	farjp _WeaverMask
 
 PokeBallEffect: ; e8a2
 	farcall DoesNuzlockeModePreventCapture

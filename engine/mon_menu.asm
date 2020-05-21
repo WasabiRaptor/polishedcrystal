@@ -157,7 +157,11 @@ GetMonSubmenuItems: ; 24dd4
 	call AddMonMenuItem
 	ld a, MONMENU_SWITCH
 	call AddMonMenuItem
-	;break
+
+	ld a, [wPlayerOverworldStatus]
+	bit PLAYER_PARTY_SPLIT_F, a
+	jr nz, .skip_follow_action
+
 	ld a, [wFollowerStatus]
 	and FOLLOWER_MASK
 	dec a
@@ -169,6 +173,8 @@ GetMonSubmenuItems: ; 24dd4
 	ld a, MONMENU_STOPFOLLOW
 .not_following:
 	call AddMonMenuItem
+
+.skip_follow_action
 	ld a, [wLinkMode]
 	and a
 	jr nz, .skip2

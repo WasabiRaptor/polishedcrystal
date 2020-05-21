@@ -327,6 +327,7 @@ SECTION "Key Item Icons", ROMX
 
 KeyItemIcons::
 BicycleIcon:      INCBIN "gfx/items/bicycle.2bpp.lz"
+TransformationMaskIcon: INCBIN "gfx/items/tf_mask.2bpp.lz"
 LokiMaskIcon: 	  INCBIN "gfx/items/tf_mask.2bpp.lz"
 WeaverMaskIcon:   INCBIN "gfx/items/tf_mask.2bpp.lz"
 ItemfinderIcon:   INCBIN "gfx/items/itemfinder.2bpp.lz"

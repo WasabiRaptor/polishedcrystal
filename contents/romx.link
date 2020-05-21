@@ -46,7 +46,6 @@ ROMX $0A
 ROMX $0B
 	org $4000
 	"Code 11"
-	"Follower Scripts"
 
 ROMX $0C
 	org $4000
@@ -98,7 +97,6 @@ ROMX $15
 ROMX $16
 	org $4000
 	"Code 22"
-	"Music 7"
 
 ROMX $17
 	org $4000
@@ -271,6 +269,7 @@ ROMX $3b
 
 ROMX $3c
 	org $4000
+	"Follower and Transformation Scripts"
 
 ROMX $3d
 	org $4000

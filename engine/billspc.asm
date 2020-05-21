@@ -1655,6 +1655,15 @@ BillsPC_CheckMail_PreventBlackout: ; e2f18 (38:6f18)
 	ld [wCurPartyMon], a
 	farcall CheckCurPartyMonFainted
 	jr c, .AllOthersFainted
+	ld a, MON_MOOD
+	predef GetPartyParamLocation
+	ld a, [hl]
+	and MON_SPECIAL
+	cp MON_IS_PLAYER
+	jr z, .self
+	cp MON_NO_BOX
+	jr z, .rental
+
 	ld a, [wBillsPC_MonHasMail]
 	and a
 	jr nz, .HasMail
@@ -1668,6 +1677,14 @@ BillsPC_CheckMail_PreventBlackout: ; e2f18 (38:6f18)
 
 .AllOthersFainted:
 	ld de, PCString_NoMoreUsablePKMN
+	jr .NotOkay
+
+.self
+	ld de, PCString_NoReleaseSelf
+	jr .NotOkay
+
+.rental
+	ld de, PCString_NoReleaseRental
 	jr .NotOkay
 
 .ItsYourLastPokemon:
@@ -1695,6 +1712,7 @@ BillsPC_IsMonAnEgg: ; e2f5f (38:6f5f)
 	call WaitSFX
 	scf
 	ret
+
 
 BillsPC_StatsScreen: ; e2f7e (38:6f7e)
 	call LowVolume
@@ -1811,6 +1829,16 @@ DepositPokemon: ; e307c (38:707c)
 	ld hl, wBillsPC_ScrollPosition
 	add [hl]
 	ld [wCurPartyMon], a
+DepositCurPartyMon::
+	ld a, MON_MOOD
+	predef GetPartyParamLocation
+	ld a, [hl]
+	and MON_SPECIAL
+	cp MON_IS_PLAYER
+	jr z, .asm_no_boxing_self
+	cp MON_NO_BOX
+	jr z, .asm_no_boxing_rental
+
 	ld hl, wPartyMonNicknames
 	ld a, [wCurPartyMon]
 	predef GetNick
@@ -1847,12 +1875,22 @@ DepositPokemon: ; e307c (38:707c)
 
 .asm_boxisfull
 	ld de, PCString_BoxFull
+.nope
 	call BillsPC_PlaceString
 	ld de, SFX_WRONG
 	call WaitPlaySFX
 	call WaitSFX
 	scf
 	ret
+
+.asm_no_boxing_self
+	ld de, PCString_NoBoxSelf
+	jr .nope
+
+.asm_no_boxing_rental
+	ld de, PCString_NoBoxRental
+	jr .nope
+
 
 TryWithdrawPokemon: ; e30fa (38:70fa)
 	ld a, [wBillsPC_CursorPosition]
@@ -2256,6 +2294,11 @@ PCString_BoxFull: db "The Box is full.@"
 PCString_PartyFull: db "The party's full!@"
 PCString_NoReleasingEGGS: db "No releasing Eggs!@"
 PCString_NoHeldItem: db "No held item@"
+PCString_NoBoxSelf: db "You can't box yourself!@"
+PCString_NoReleaseSelf: db "You can't release yourself!@"
+PCString_NoBoxRental: db "You can't box a rental!@"
+PCString_NoReleaseRental: db "You can't release a rental!@"
+
 ; e35aa
 
 
