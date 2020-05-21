@@ -1206,6 +1206,7 @@ wPokeAnimStructEnd::
 wDEDTempSamp:: ds 16
 
 wGetDEDByte:: ds $100
+wGetDEDByteEnd::
 
 
 SECTION "Battle Tower", WRAMX

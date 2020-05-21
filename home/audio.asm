@@ -163,14 +163,13 @@ PlayCryHeader_BankPush:
 
 	ld a, BANK(_PlayCryHeader)
 	rst Bankswitch
-	call _PlayCryHeader
-	jr .done
+	jp _PlayCryHeader
+
 .ded
 	ld e, 0
 	call LoadDEDCryHeader
-	call PlayDEDCry
-.done
-	ret
+	jp PlayDEDCry
+
 ; 3c23
 
 GetRelevantCryPointers::

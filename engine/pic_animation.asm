@@ -63,7 +63,7 @@ AnimateFrontpic:
 	farcall HDMATransferTileMapToWRAMBank3
 	ldh a, [hDEDCryFlag]
 	and a
-	;call nz, _PlayCry
+	;call nz, _PlayCry 				;DED BROKEN HERE
 	ldh a, [hRunPicAnim]
 	and a
 	jr nz, .loop
@@ -226,13 +226,13 @@ PokeAnim_StereoCry:
 	jr PokeAnim_IncrementSceneIndex
 ; d01a9
 PokeAnim_DedCry:
-	ldh [hDEDCryFlag], a
+	;ldh [hDEDCryFlag], a				;DED BROKEN HERE
 	jr PokeAnim_IncrementSceneIndex
 
 PokeAnim_DeinitFrames: ; d01a9
 	ldh a, [rSVBK]
 	push af
-	ld a, $2
+	ld a, BANK(wPokeAnimSceneIndex)
 	ldh [rSVBK], a
 	call PokeAnim_PlaceGraphic
 	farcall HDMAHBlankTransferTileMap_DuringDI
@@ -841,7 +841,7 @@ PokeAnim_PlaceGraphic:
 PokeAnim_SetVBank1: ; d0504
 	ldh a, [rSVBK]
 	push af
-	ld a, $2
+	ld a, BANK(wPokeAnimSceneIndex)
 	ldh [rSVBK], a
 	xor a
 	ldh [hBGMapMode], a

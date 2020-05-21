@@ -18,8 +18,13 @@ VBlank::
 
 	ldh a, [hROMBank]
 	ldh [hROMBankBackup], a
+
+	ldh a, [hHighRomBank]
+	ldh [hHighROMBankBackup], a
+
 	xor a
 	ld [HighMBC5RomBank], a
+	ldh [hHighRomBank], a
 
 
 	ldh a, [hVBlank]
@@ -55,7 +60,8 @@ VBlank::
 	ldh a, [hROMBankBackup]
 	rst Bankswitch
 
-	ldh a, [hHighRomBank]
+	ldh a, [hHighROMBankBackup]
+	ldh [hHighRomBank], a
 	ld [HighMBC5RomBank], a
 
 	pop hl
@@ -65,8 +71,12 @@ VBlank::
 	reti
 
 .skipToGameTime
-	ldh a, [hROMBank]
-	ldh [hROMBankBackup], a
+; didn't we just back these up a few instructions ago?
+	;ldh a, [hROMBank]
+	;ldh [hROMBankBackup], a
+	;ldh a, [hHighRomBank]
+	;ldh [hHighROMBankBackup], a
+
 	ldh a, [hRunPicAnim]
 	and a
 	jr z, .tryDoMapAnims

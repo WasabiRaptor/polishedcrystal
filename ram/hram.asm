@@ -9,8 +9,8 @@ hDEDCryFlag         EQU $ff8d
 hRunPicAnim         EQU $ff8e
 
 hHighRomBank       EQU $ff8f
+hHighROMBankBackup EQU $ff90
 
-hRTCMinutes        EQU $ff90
 hRTCSeconds        EQU $ff91
 
 hHours             EQU $ff94

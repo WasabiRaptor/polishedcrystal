@@ -202,32 +202,80 @@ MaybeSetGrassAttributes::
 	ld [rVBK], a
 	ret
 
+.UnsetPlayerGrass
+	ld hl, wGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	jr .waitLY
+
+.UnsetFollowerGrass
+	ld hl, wFollowerGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2
+	ld [hli], a
+	ld [hl], a
+	jr .waitLY
+
 .FollowerAbove
 	ldh a, [rLY]
-	cp GRASS_SCANLINE_PX
-	jr z, .SetGrass
+	cp GRASS_SCANLINE_PX-8
+	jr z, .SetFollowerGrass
 	cp GRASS_SCANLINE_PX+GRASS_SCANLINE_COVER
-	jr z, .UnsetGrass
+	jr z, .UnsetFollowerGrass
 	cp GRASS_SCANLINE_PX+GRASS_SCANLINE_COVER+8
-	jr z, .SetGrass
+	jr z, .SetPlayerGrass
 	jr c, .FollowerAbove
 	jr .done
 
 .FollowerBelow
 	ldh a, [rLY]
-	cp GRASS_SCANLINE_PX+16
-	jr z, .SetGrass
+	cp GRASS_SCANLINE_PX+16-8
+	jr z, .SetPlayerGrass
 	cp GRASS_SCANLINE_PX+16+GRASS_SCANLINE_COVER
-	jr z, .UnsetGrass
+	jr z, .UnsetPlayerGrass
 	cp GRASS_SCANLINE_PX+16+GRASS_SCANLINE_COVER+8
-	jr z, .SetGrass
+	jr z, .SetFollowerGrass
 	jr c, .FollowerBelow
 	jr .done
 
+.SetPlayerGrass
+	ld a, [wHasPlayerMoved]
+	and a
+	jr nz, .UnsetPlayerGrass
+
+	ld hl, wGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2 | BEHIND_BG
+	ld [hli], a
+	ld [hl], a
+	jr .waitLY
+
+.SetFollowerGrass
+	ld a, [wHasPlayerMoved]
+	and a
+	jr nz, .UnsetFollowerGrass
+
+	ld hl, wFollowerGrassTileAddress
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+	ld a, 2 | BEHIND_BG
+	ld [hli], a
+	ld [hl], a
+	jr .waitLY
+
 .SetGrass
 	ld a, [wHasPlayerMoved]
-	cp 1
-	jr z, .UnsetGrass
+	and a
+	jr nz, .UnsetGrass
 
 	ld hl, wGrassTileAddress
 	ld a, [hli]
@@ -243,8 +291,7 @@ MaybeSetGrassAttributes::
 	ld a, 2 | BEHIND_BG
 	ld [hli], a
 	ld [hl], a
-	jr .waitLY
-
+	ret
 
 .UnsetGrass
 	ld hl, wGrassTileAddress
@@ -261,7 +308,7 @@ MaybeSetGrassAttributes::
 	ld a, 2
 	ld [hli], a
 	ld [hl], a
-	jr .waitLY
+	ret
 
 
 CheckPlayerState: ; 967f4
