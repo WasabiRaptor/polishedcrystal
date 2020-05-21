@@ -1479,8 +1479,21 @@ RemoveMonFromPartyOrBox: ; e039
 	ld a, BANK(sBoxCount)
 	call GetSRAMBank
 	ld hl, sBoxCount
+	jr .skip_follow_remove_check
 
 .okay
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	ld b, a
+	ld a, [wCurPartyMon]
+	cp b
+	jr nz, .skip_follow_remove_check
+	ld a, [wFollowerStatus]
+	and ~FOLLOWER_MASK
+	ld [wFollowerStatus], a
+
+.skip_follow_remove_check
 	ld a, [hl]
 	dec a
 	ld [hli], a

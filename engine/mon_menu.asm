@@ -162,6 +162,13 @@ GetMonSubmenuItems: ; 24dd4
 	bit PLAYER_PARTY_SPLIT_F, a
 	jr nz, .skip_follow_action
 
+	ld a, MON_MOOD
+	predef GetPartyParamLocation
+	ld a, [hl]
+	and MON_SPECIAL
+	cp MON_IS_PLAYER
+	jr z, .skip_follow_action
+
 	ld a, [wFollowerStatus]
 	and FOLLOWER_MASK
 	dec a

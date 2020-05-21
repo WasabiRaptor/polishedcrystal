@@ -3814,29 +3814,57 @@ _SwitchPartyMons:
 	pop de
 	ld hl, wd002
 	call .CopyName
-	ld hl, sPartyMail
-	ld a, [wBuffer2]
-	ld bc, MAIL_STRUCT_LENGTH
-	rst AddNTimes
-	push hl
-	ld de, wd002
-	ld bc, MAIL_STRUCT_LENGTH
-	ld a, BANK(sPartyMail)
-	call GetSRAMBank
-	rst CopyBytes
-	ld hl, sPartyMail
+
+	ld a, [wFollowerStatus]
+	and FOLLOWER_MASK
+	dec a
+	ld b, a
 	ld a, [wBuffer3]
-	ld bc, MAIL_STRUCT_LENGTH
-	rst AddNTimes
-	pop de
-	push hl
-	ld bc, MAIL_STRUCT_LENGTH
-	rst CopyBytes
-	pop de
-	ld hl, wd002
-	ld bc, MAIL_STRUCT_LENGTH
-	rst CopyBytes
-	call CloseSRAM
+	cp b
+	jr nz, .switch_mon_not_follower
+	ld a, [wBuffer2]
+	;fallthrough
+.set_follower
+	inc a
+	ld b, a
+	ld a, [wFollowerStatus]
+	and ~FOLLOWER_MASK
+	or b
+	ld [wFollowerStatus], a
+	jr .follow_switch_done
+
+.switch_mon_not_follower
+	ld a, [wBuffer2]
+	cp b
+	jr nz, .follow_switch_done
+	ld a, [wBuffer3]
+	jr .set_follower
+
+.follow_switch_done
+	;ld hl, sPartyMail
+	;ld a, [wBuffer2]
+	;ld bc, MAIL_STRUCT_LENGTH
+	;rst AddNTimes
+	;push hl
+	;ld de, wd002
+	;ld bc, MAIL_STRUCT_LENGTH
+	;ld a, BANK(sPartyMail)
+	;call GetSRAMBank
+	;rst CopyBytes
+	;ld hl, sPartyMail
+	;ld a, [wBuffer3]
+	;ld bc, MAIL_STRUCT_LENGTH
+	;rst AddNTimes
+	;pop de
+	;push hl
+	;ld bc, MAIL_STRUCT_LENGTH
+	;rst CopyBytes
+	;pop de
+	;ld hl, wd002
+	;ld bc, MAIL_STRUCT_LENGTH
+	;rst CopyBytes
+	;call CloseSRAM
+
 	pop bc
 	pop de
 	pop hl

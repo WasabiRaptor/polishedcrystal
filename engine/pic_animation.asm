@@ -63,7 +63,7 @@ AnimateFrontpic:
 	farcall HDMATransferTileMapToWRAMBank3
 	ldh a, [hDEDCryFlag]
 	and a
-	call nz, _PlayCry
+	;call nz, _PlayCry
 	ldh a, [hRunPicAnim]
 	and a
 	jr nz, .loop
@@ -623,6 +623,9 @@ PokeAnim_ConvertAndApplyBitmask: ; d036b
 	add [hl]
 	pop hl
 	ld [hl], a
+	cp $7f
+	ret c
+	inc [hl]
 	ret
 ; d03cd
 

@@ -3239,15 +3239,14 @@ SlidePlayerPicIn:
 
 	call SafeCopyTilemapAtOnce
 
-	hlcoord 6, 6
 	ldh a, [hMapObjectIndexBuffer]
 	ld c, a
 
 .loop
 	push bc
-	push hl
 	call SafeCopyTilemapAtOnce
 	ld b, $6
+	hlcoord 6, 6
 .loop2
 	push hl
 	call .DoFrame
@@ -3256,11 +3255,18 @@ SlidePlayerPicIn:
 	add hl, de
 	dec b
 	jr nz, .loop2
-	pop hl
 	pop bc
 	dec c
+	push af
+	ld a, c
+	cp 2
+	call c, .ClearLeftCol
+	pop af
 	jr nz, .loop
+	jp SafeCopyTilemapAtOnce
 
+.ClearLeftCol:
+	push bc
 	hlcoord 0, 6
 	ld a, $7f
 	ld c, 6
@@ -3270,8 +3276,8 @@ SlidePlayerPicIn:
 	add hl, de
 	dec c
 	jr nz, .loop3
-	jp SafeCopyTilemapAtOnce
-
+	pop bc
+	ret
 ; 3d4ae
 
 .DoFrame: ; 3d4ae

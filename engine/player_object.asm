@@ -18,7 +18,7 @@ BlankScreen: ; 8000
 CheckPlayerFollowerExist::
 	ld a, [wPlayerOverworldStatus]
 	bit PLAYER_PARTY_SPLIT_F, a
-	jr z, .both_exist
+	jr z, .both_exist_maybe
 	bit PLAYER_CONTROL_FOLLOWER_F, a
 	jr nz, .follower_exist
 
@@ -54,7 +54,7 @@ CheckPlayerFollowerExist::
 	eventflagreset EVENT_PLAYER_EXISTS
 	ret
 
-.both_exist
+.both_exist_maybe
 	ld hl, wMapGroup
 	ld bc, wPlayerObjectMapGroup
 	ld de, wFollowerObjectMapGroup
@@ -69,6 +69,17 @@ CheckPlayerFollowerExist::
 
 	eventflagreset EVENT_PLAYER_EXISTS
 	eventflagreset EVENT_FOLLOWER_EXISTS
+	ld hl, wFollowerStatus
+	set FOLLOWER_ENABLE, [hl]
+
+	ld de, 2 ; permission
+	call GetMapHeaderMember
+	bit FOLLOWER_DISABLE_F, c
+	ret z
+	ld hl, wFollowerStatus
+	res FOLLOWER_ENABLE, [hl]
+
+	eventflagset EVENT_FOLLOWER_EXISTS
 	ret
 
 .checksamemap:
