@@ -5280,24 +5280,28 @@ PrintLetterDelay:: ; 313d
 
 ; wTextBoxFlags[!0] and A or B override text speed with a one-frame delay.
 ; wOptions1[4] and wTextBoxFlags[!1] disable the delay.
+	push af ;preserve the letter input
 
 	ld a, [wTextBoxFlags]
 	bit TEXT_DELAY, a
-	ret z
+	jr z, .popAFandRet
+
 	bit NO_FORCED_FAST_SCROLL, a
 	jr z, .forceFastScroll
 
 	ld a, [wOptions1]
 	bit NO_TEXT_SCROLL, a
-	ret nz
+	jr nz, .popAFandRet
 	and %11
-	ret z
+	jr z, .popAFandRet
 	ld a, $1
 	ldh [hBGMapHalf], a
 .forceFastScroll
+	pop af
 	push hl
 	push de
 	push bc
+	push af
 ; force fast scroll?
 	ld a, [wTextBoxFlags]
 	bit NO_FORCED_FAST_SCROLL, a
@@ -5314,8 +5318,6 @@ PrintLetterDelay:: ; 313d
 	ld a, [wTextDelayFrames]
 	and a
 	jr z, .done
-	;ld de, SFX_TEXTSCROLL
-	;call PlaySFX
 	call DelayFrame
 	call GetJoypad
 ; Finish execution if A or B is pressed
@@ -5323,9 +5325,21 @@ PrintLetterDelay:: ; 313d
 	and A_BUTTON | B_BUTTON
 	jr z, .textDelayLoop
 .done
+	pop af
+	cp " "
+	jr z, .no_sound
+
+	ld de, SFX_TEXTSCROLL
+	call PlaySFX
+	;call WaitSFX
+.no_sound
 	pop bc
 	pop de
 	pop hl
+	ret
+
+.popAFandRet
+	pop af
 	ret
 ; 318c
 
