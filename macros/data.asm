@@ -307,7 +307,7 @@ x = x + (\1) * $40000
 	endr
 ENDM
 
-assert: MACRO
+assertpc: MACRO
 	if !(\1)
 		if _NARG > 1
 			fail \2
