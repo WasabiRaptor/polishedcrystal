@@ -210,3 +210,5 @@
 	const SFX_TWINKLE                     ; ce
 
 	const SFX_PUDDLE                      ; cf
+
+	const SFX_TEXTSCROLL

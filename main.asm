@@ -5314,6 +5314,8 @@ PrintLetterDelay:: ; 313d
 	ld a, [wTextDelayFrames]
 	and a
 	jr z, .done
+	;ld de, SFX_TEXTSCROLL
+	;call PlaySFX
 	call DelayFrame
 	call GetJoypad
 ; Finish execution if A or B is pressed

@@ -311,3 +311,13 @@ Sfx_Puddle_Ch5:
 	sound __, 16, $98, $0700
 	soundinput $8
 	endchannel
+
+Sfx_TextScroll:
+	musicheader 1, 6, Sfx_TextScroll_Ch6
+
+Sfx_TextScroll_Ch6:
+	dutycycle 0
+	notetype $C, $82
+	octave 2
+	note A_, 1
+	endchannel

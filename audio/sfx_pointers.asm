@@ -213,3 +213,6 @@ SFX:
 ; Polished Crystal adds the following SFX:
 
 	dba Sfx_Puddle
+
+; Brass adds the following SFX:
+	dba Sfx_TextScroll
