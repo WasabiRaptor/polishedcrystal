@@ -247,6 +247,8 @@ StartMenuNoSFX::
 .MenuClock:
 	VWTextStart $c0
 	ld hl, wOptions1
+	ld a, [hl]
+	push af
 	set NO_TEXT_SCROLL, [hl]
 	hlcoord 1, 1
 	lb bc, 2, 7
@@ -261,6 +263,8 @@ StartMenuNoSFX::
 	ld hl, .DayText
 	bccoord 1, 1
 	call PlaceWholeStringInBoxAtOnce
+	pop af
+	ld [wOptions1], a
 	ret
 
 .DayText:
