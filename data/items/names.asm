@@ -223,6 +223,8 @@ KeyItemNames::
 	db "Bicycle@"
 	db "Transform Mask@"
 	db "Loki Mask@"
+	db "Solen Mask@"
+	db "Thalins Mask@"
 	db "Weaver Mask@"
 	db "Itemfinder@"
 	db "Old Rod@"

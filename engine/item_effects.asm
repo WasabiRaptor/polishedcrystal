@@ -244,6 +244,8 @@ KeyItemEffects:
 	dw Bicycle          ; BICYCLE
 	dw TransformationMask
 	dw LokiMask
+	dw SolenMask
+	dw ThalinsMask
 	dw WeaverMask
 	dw Itemfinder       ; ITEMFINDER
 	dw OldRod           ; OLD_ROD
@@ -259,6 +261,12 @@ TransformationMask::
 
 LokiMask::
 	farjp _LokiMask
+
+SolenMask::
+	farjp _SolenMask
+
+ThalinsMask::
+	farjp _ThalinsMask
 
 WeaverMask::
 	farjp _WeaverMask

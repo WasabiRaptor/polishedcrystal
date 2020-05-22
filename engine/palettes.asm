@@ -909,6 +909,8 @@ KeyItemIconPalettes:
 	RGB 12, 12, 12
 INCBIN "gfx/items/tf_mask.gbcpal", middle_colors ; TRANSFORMATION_MASK
 INCBIN "gfx/items/tf_mask.gbcpal", middle_colors ; LOKI_MASK
+INCBIN "gfx/items/tf_mask.gbcpal", middle_colors ; SOLEN_MASK
+INCBIN "gfx/items/tf_mask.gbcpal", middle_colors ; THALINS_MASK
 INCBIN "gfx/items/tf_mask.gbcpal", middle_colors ; WEAVER_MASK
 ; ITEMFINDER
 	RGB 08, 17, 25

@@ -48,7 +48,7 @@ LokiPokestruct:
 	db $ff ; SAtk and SDef
 
 	; personality
-	db ABILITY_1 | (QUIRKY -1)
+	db ABILITY_1 | QUIRKY ; hm, nature seems to not be setting
 	db MALE | LOKI ; gender and form
 	db BASE_HAPPINESS ; happiness
 	db 0 ; pokerus status
@@ -65,6 +65,75 @@ LokiPokestruct:
 	db 0, 0, 0, 0 ; cur PP
 	dw 0 ; HP
 
+SolenPokestruct:
+	pokestruct_species LUXIO ;species
+	db NO_ITEM ; item
+	db MON_IS_PLAYER | DEFAULT_MOOD ; mood
+	pokesetruct_moveset THUNDER_FANG, WILD_CHARGE, ACID_ARMOR, RECOVER ; moveset
+	dw2 0404 ; ID
+	db 0, 0, 0 ; exp, don't worry it'll be filled in later
+
+	; EVs
+	db 255, 255, 255, 255, 255, 255
+	;  HP   Atk  Def  Spd  SAtk SDef
+
+	; DVs
+	db $ff ; HP and Atk
+	db $ff ; Def and Spd
+	db $ff ; SAtk and SDef
+
+	; personality
+	db ABILITY_1 | QUIRKY ; hm, nature seems to not be setting
+	db MALE ; gender and form
+	db BASE_HAPPINESS ; happiness
+	db 0 ; pokerus status
+
+	; caught data
+	db 0 ; caught gender, time, and ball
+	db 0 ; caught level
+	db 0 ; caught location
+
+	db 50 ; level
+	db 0 ; status
+
+	; these will be filled in a moment
+	db 0, 0, 0, 0 ; cur PP
+	dw 0 ; HP
+
+ThalinsPokestruct:
+	pokestruct_species DEWOTT ;species
+	db NO_ITEM ; item
+	db MON_IS_PLAYER | DEFAULT_MOOD ; mood
+	pokesetruct_moveset RAZOR_SHELL, AQUA_JET, SCALD, SACRED_SWORD ; moveset
+	dw2 0502 ; ID
+	db 0, 0, 0 ; exp, don't worry it'll be filled in later
+
+	; EVs
+	db 255, 255, 255, 255, 255, 255
+	;  HP   Atk  Def  Spd  SAtk SDef
+
+	; DVs
+	db $ff ; HP and Atk
+	db $ff ; Def and Spd
+	db $ff ; SAtk and SDef
+
+	; personality
+	db ABILITY_1 | QUIRKY ; hm, nature seems to not be setting
+	db MALE ; gender and form
+	db BASE_HAPPINESS ; happiness
+	db 0 ; pokerus status
+
+	; caught data
+	db 0 ; caught gender, time, and ball
+	db 0 ; caught level
+	db 0 ; caught location
+
+	db 50 ; level
+	db 0 ; status
+
+	; these will be filled in a moment
+	db 0, 0, 0, 0 ; cur PP
+	dw 0 ; HP
 
 WeaverPokestruct:
 	pokestruct_species SYLVEON ;species
@@ -84,7 +153,7 @@ WeaverPokestruct:
 	db $ff ; SAtk and SDef
 
 	; personality
-	db HIDDEN_ABILITY | (QUIRKY -1)
+	db HIDDEN_ABILITY | QUIRKY
 	db MALE ; gender and form
 	db BASE_HAPPINESS ; happiness
 	db 0 ; pokerus status
@@ -104,6 +173,14 @@ WeaverPokestruct:
 
 _LokiMask::
 	ld hl, LokiPokestruct
+	jr CopyPokestructToPlayerMon
+
+_SolenMask::
+	ld hl, SolenPokestruct
+	jr CopyPokestructToPlayerMon
+
+_ThalinsMask::
+	ld hl, ThalinsPokestruct
 	jr CopyPokestructToPlayerMon
 
 _WeaverMask::

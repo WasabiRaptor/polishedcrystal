@@ -503,6 +503,8 @@ NUM_APRICORNS EQU const_value +- 1
 	const BICYCLE      ; 55
 	const TRANSFORMATION_MASK
 	const LOKI_MASK
+	const SOLEN_MASK
+	const THALINS_MASK
 	const WEAVER_MASK
 	const ITEMFINDER   ; 5a
 	const OLD_ROD      ; 56

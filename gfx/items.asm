@@ -329,6 +329,8 @@ KeyItemIcons::
 BicycleIcon:      INCBIN "gfx/items/bicycle.2bpp.lz"
 TransformationMaskIcon: INCBIN "gfx/items/tf_mask.2bpp.lz"
 LokiMaskIcon: 	  INCBIN "gfx/items/tf_mask.2bpp.lz"
+SolenMaskIcon: 	  INCBIN "gfx/items/tf_mask.2bpp.lz"
+ThalinsMaskIcon:  INCBIN "gfx/items/tf_mask.2bpp.lz"
 WeaverMaskIcon:   INCBIN "gfx/items/tf_mask.2bpp.lz"
 ItemfinderIcon:   INCBIN "gfx/items/itemfinder.2bpp.lz"
 OldRodIcon:       INCBIN "gfx/items/old_rod.2bpp.lz"

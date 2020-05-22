@@ -226,6 +226,8 @@ KeyItemIconPointers:
 	dw BicycleIcon
 	dw TransformationMaskIcon
 	dw LokiMaskIcon
+	dw SolenMaskIcon
+	dw ThalinsMaskIcon
 	dw WeaverMaskIcon
 	dw ItemfinderIcon
 	dw OldRodIcon

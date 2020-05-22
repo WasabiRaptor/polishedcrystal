@@ -216,6 +216,8 @@ KeyItemDescriptions:
 	dw BicycleDesc
 	dw TransformationMaskDesc
 	dw LokiMaskDesc
+	dw SolenMaskDesc
+	dw ThalinsMaskDesc
 	dw WeaverMaskDesc
 	dw ItemfinderDesc
 	dw OldRodDesc
@@ -233,6 +235,14 @@ TransformationMaskDesc:
 LokiMaskDesc:
 	db "A debug mask that transforms"
 	next "you into a certain Vulpix.@"
+
+SolenMaskDesc:
+	db "A debug mask that transforms"
+	next "you into a certain Luxio.@"
+
+ThalinsMaskDesc:
+	db "A debug mask that transforms"
+	next "you into a certain Dewott.@"
 
 WeaverMaskDesc:
 	db "A debug mask that transforms"
