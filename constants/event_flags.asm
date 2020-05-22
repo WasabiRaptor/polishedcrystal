@@ -2465,4 +2465,4 @@
 	const EVENT_8FF
 NUM_EVENTS EQU const_value
 
-	assert NUM_EVENTS == $8ff, "Too many event flags defined"
+	assertpc NUM_EVENTS == $8ff, "Too many event flags defined"
