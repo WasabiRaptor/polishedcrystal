@@ -25,13 +25,17 @@ pokesetruct_moveset: macro
 	endc
 endm
 
+dw2: macro
+	db HIGH(\1), LOW(\1)
+endm
+
 
 LokiPokestruct:
 	pokestruct_species VULPIX ;species
 	db NO_ITEM ; item
 	db MON_IS_PLAYER | DEFAULT_MOOD ; mood
 	pokesetruct_moveset FLAMETHROWER, HYPNOSIS, HEX, WILL_O_WISP ; moveset
-	dw 1533 ; ID
+	dw2 1533 ; ID
 	db 0, 0, 0 ; exp, don't worry it'll be filled in later
 
 	; EVs
@@ -67,7 +71,7 @@ WeaverPokestruct:
 	db NO_ITEM ; item
 	db MON_IS_PLAYER | DEFAULT_MOOD ; mood
 	pokesetruct_moveset MOONBLAST, HYPER_VOICE, SHADOW_BALL, LIGHT_SCREEN ; moveset
-	dw 7114 ; ID
+	dw2 7114 ; ID
 	db 0, 0, 0 ; exp, don't worry it'll be filled in later
 
 	; EVs
