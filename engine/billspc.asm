@@ -78,6 +78,9 @@ _DepositPKMN: ; e2391 (38:6391)
 	ld a, [hl]
 	and A_BUTTON
 	jr nz, .a_button
+	ld a, [hl]
+	and SELECT | START
+	jr nz, .select_button
 	call Withdraw_UpDown
 	and a
 	ret z
@@ -87,7 +90,18 @@ _DepositPKMN: ; e2391 (38:6391)
 	call BillsPC_RefreshTextboxes
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
+	ld a, CGB_BILLS_PC
+	call BillsPC_ApplyPalettes
 	jp ApplyAttrAndTilemapInVBlank
+
+.select_button
+	call DepositPokemon
+	ret c
+	xor a
+	ld [wJumptableIndex], a
+	ld [wBillsPC_CursorPosition], a
+	ld [wBillsPC_ScrollPosition], a
+	ret
 
 .a_button
 	call BillsPC_GetSelectedPokemonSpecies
@@ -177,7 +191,8 @@ BillsPCDepositFuncStats: ; e24c8 (38:64c8)
 	call BillsPC_GetSelectedPokemonSpecies
 	ld [wCurPartySpecies], a
 	ld a, CGB_BILLS_PC
-	jp BillsPC_ApplyPalettes
+	call BillsPC_ApplyPalettes
+	jp ApplyAttrAndTilemapInVBlank
 
 BillsPCDepositFuncRelease: ; e24e0 (38:64e0)
 	call BillsPC_CheckMail_PreventBlackout
@@ -322,6 +337,9 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	ld a, [hl]
 	and A_BUTTON
 	jr nz, .a_button
+	ld a, [hl]
+	and SELECT | START
+	jr nz, .select_button
 	call Withdraw_UpDown
 	and a
 	ret z
@@ -331,6 +349,8 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	call BillsPC_RefreshTextboxes
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
+	ld a, CGB_BILLS_PC
+	call BillsPC_ApplyPalettes
 	jp ApplyAttrAndTilemapInVBlank
 
 .a_button
@@ -347,7 +367,16 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	ld a, $4
 	ld [wJumptableIndex], a
 	ret
-; e2655
+
+.select_button
+	call TryWithdrawPokemon
+	ret c
+	xor a
+	ld [wJumptableIndex], a
+	ld [wBillsPC_CursorPosition], a
+	ld [wBillsPC_ScrollPosition], a
+	ret
+
 
 .PrepSubmenu: ; e2655 (38:6655)
 	xor a
@@ -413,7 +442,8 @@ BillsPC_Withdraw: ; e2675 (38:6675)
 	call BillsPC_GetSelectedPokemonSpecies
 	ld [wCurPartySpecies], a
 	ld a, CGB_BILLS_PC
-	jp BillsPC_ApplyPalettes
+	call BillsPC_ApplyPalettes
+	jp ApplyAttrAndTilemapInVBlank
 
 .release ; e26d8 (38:66d8)
 	ld a, [wMenuCursorY]
@@ -572,10 +602,16 @@ _MovePKMNWithoutMail: ; e2759
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
 	call BillsPC_RefreshTextboxes
-	call ApplyAttrAndTilemapInVBlank
-	jp DelayFrame
+	ld a, CGB_BILLS_PC
+	call BillsPC_ApplyPalettes
+	jp ApplyAttrAndTilemapInVBlank
 
 .d_pad
+	hlcoord 9, 1, wAttrMap
+	lb bc, 1, 10
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+
 	hlcoord 9, 3, wAttrMap
 	lb bc, 10, 10
 	ld a, 7 | TILE_BANK
@@ -669,7 +705,8 @@ _MovePKMNWithoutMail: ; e2759
 	call BillsPC_GetSelectedPokemonSpecies
 	ld [wCurPartySpecies], a
 	ld a, CGB_BILLS_PC
-	jp BillsPC_ApplyPalettes
+	call BillsPC_ApplyPalettes
+	jp ApplyAttrAndTilemapInVBlank
 ; e28bd
 
 .Cancel: ; e28bd
@@ -706,6 +743,8 @@ _MovePKMNWithoutMail: ; e2759
 	call ClearSprites
 	call BillsPC_UpdateInsertCursor
 	call BillsPC_RefreshTextboxes
+	ld a, CGB_BILLS_PC
+	call BillsPC_ApplyPalettes
 	call ApplyAttrAndTilemapInVBlank
 	jp BillsPC_IncrementJumptableIndex
 ; e2903
@@ -726,6 +765,8 @@ _MovePKMNWithoutMail: ; e2759
 	xor a
 	ldh [hBGMapMode], a
 	call BillsPC_RefreshTextboxes
+	ld a, CGB_BILLS_PC
+	call BillsPC_ApplyPalettes
 	jp ApplyAttrAndTilemapInVBlank
 
 .dpad_2
@@ -949,12 +990,20 @@ BillsPC_JoypadDidNothing: ; e2a65 (38:6a65)
 	ret
 
 BillsPC_UpDownDidSomething: ; e2a68 (38:6a68)
+	ld a, CGB_BILLS_PC
+	call BillsPC_ApplyPalettes
+	call ApplyAttrAndTilemapInVBlank
+
 	ld a, TRUE
 	and a
 	ret
 ; e2a6c (38:6a6c)
 
 BillsPC_LeftRightDidSomething: ; e2a6c
+	ld a, CGB_BILLS_PC
+	call BillsPC_ApplyPalettes
+	call ApplyAttrAndTilemapInVBlank
+
 	scf
 	ret
 ; e2a6e
@@ -1869,8 +1918,8 @@ DepositCurPartyMon::
 	xor a
 	ld [wPokemonWithdrawDepositParameter], a
 	farcall RemoveMonFromPartyOrBox
-	ld a, [wCurPartySpecies]
-	call PlayCry
+	;ld a, [wCurPartySpecies]
+	;call PlayCry
 	hlcoord 0, 0
 	lb bc, 15, 8
 	call ClearBox
@@ -1930,8 +1979,8 @@ TryWithdrawPokemon: ; e30fa (38:70fa)
 	ld a, PC_DEPOSIT
 	ld [wPokemonWithdrawDepositParameter], a
 	farcall RemoveMonFromPartyOrBox
-	ld a, [wCurPartySpecies]
-	call PlayCry
+	;ld a, [wCurPartySpecies]
+	;call PlayCry
 	hlcoord 0, 0
 	lb bc, 15, 8
 	call ClearBox

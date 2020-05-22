@@ -71,7 +71,7 @@ _BillsPC: ; e3fd
 	dw BillsPC_DepositMenu
 	dw BillsPC_ChangeBoxMenu
 	dw BillsPC_MovePKMNMenu
-	dw BillsPC_SeeYa
+	dw BillsPC_QuickDeposit
 	dw BillsPC_SeeYa
 
 .items ; e4c4
@@ -86,6 +86,10 @@ _BillsPC: ; e3fd
 
 BillsPC_SeeYa: ; e4cb
 	scf
+	ret
+
+BillsPC_QuickDeposit
+	and a
 	ret
 
 BillsPC_MovePKMNMenu: ; e4cd

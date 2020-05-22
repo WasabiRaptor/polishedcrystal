@@ -1138,24 +1138,28 @@ _CGB_BillsPC: ; 8fca
 	ld a, 7 | TILE_BANK
 	call FillBoxWithByte
 
-	hlcoord 9, 1, wAttrMap
-	lb bc, 1, 10
-	ld a, 7 | TILE_BANK
-	call FillBoxWithByte
-
 	hlcoord 9, 3, wAttrMap
 	lb bc, 10, 10
 	ld a, 7
 	call FillBoxWithByte
 
 	ld a, [wJumptableIndex]
+	cp 4
+	jr nc, .yes
 	cp 2
 	jr nc, .skip
+.yes
 	hlcoord 9, 3, wAttrMap
 	lb bc, 10, 10
 	ld a, 7 | TILE_BANK
 	call FillBoxWithByte
 .skip
+
+	hlcoord 9, 1, wAttrMap
+	lb bc, 1, 10
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+
 	call InitPartyMenuOBPals
 
 	jp _CGB_FinishLayout
