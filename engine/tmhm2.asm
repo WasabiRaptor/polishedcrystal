@@ -44,7 +44,6 @@ TMHM_PocketLoop: ; 2c8d3 (b:48d3)
 	jr TMHM_ShowTMMoveDescription
 
 TMHM_JoypadLoop: ; 2c915 (b:4915)
-	call TMHM_DisplayPocketItems
 	call DoMenuJoypadLoop
 	ld b, a
 	ld a, [wMenuCursorY]
