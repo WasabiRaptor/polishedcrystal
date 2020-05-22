@@ -313,11 +313,18 @@ Sfx_Puddle_Ch5:
 	endchannel
 
 Sfx_TextScroll:
-	musicheader 1, 6, Sfx_TextScroll_Ch6
+	musicheader 1, 5, Sfx_TextScroll_Ch5
 
-Sfx_TextScroll_Ch6:
-	dutycycle 0
-	notetype $C, $82
-	octave 2
-	note A_, 1
+Sfx_TextScroll_Ch5:
+	togglesfx
+	tempo 160
+	volume $77
+	dutycycle $3
+	tone $0001
+	vibrato $10, $15
+	dutycycle $3
+	tone $0001
+	notetype $c, $92
+	octave 3
+	note C#, 1
 	endchannel

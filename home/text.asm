@@ -346,6 +346,7 @@ PlaceCharacter::
 
 	pop hl;0
 	pop af
+	push af
 
 	farcall GetCharacterWidth
 	;ld e, 9
@@ -396,6 +397,7 @@ PlaceCharacter::
 	ld a, [wVariableWidthTextTile]
 	ld [hl], a
 .letterdelay
+	pop af
 	pop de
 	farcall PrintLetterDelay
 	jp NextChar
