@@ -310,8 +310,7 @@ _2DMenuInterpretJoypad: ; 24270
 	cp [hl]
 	jr z, .check_wrap_around_down
 	inc [hl]
-	xor a
-	ret
+	jr .play_menu_sound
 
 .check_wrap_around_down
 	ld a, [w2DMenuFlags1]
@@ -324,8 +323,7 @@ _2DMenuInterpretJoypad: ; 24270
 
 .wrap_around_down
 	ld [hl], $1
-	xor a
-	ret
+	jr .play_menu_sound
 
 .d_up
 	ld hl, wMenuCursorY
@@ -333,8 +331,7 @@ _2DMenuInterpretJoypad: ; 24270
 	dec a
 	jr z, .check_wrap_around_up
 	ld [hl], a
-	xor a
-	ret
+	jr .play_menu_sound
 
 .check_wrap_around_up
 	ld a, [w2DMenuFlags1]
@@ -348,8 +345,7 @@ _2DMenuInterpretJoypad: ; 24270
 .wrap_around_up
 	ld a, [w2DMenuNumRows]
 	ld [hl], a
-	xor a
-	ret
+	jr .play_menu_sound
 
 .d_left
 	ld hl, wMenuCursorX
@@ -357,8 +353,7 @@ _2DMenuInterpretJoypad: ; 24270
 	dec a
 	jr z, .check_wrap_around_left
 	ld [hl], a
-	xor a
-	ret
+	jr .play_menu_sound
 
 .check_wrap_around_left
 	ld a, [w2DMenuFlags1]
@@ -372,8 +367,8 @@ _2DMenuInterpretJoypad: ; 24270
 .wrap_around_left
 	ld a, [w2DMenuNumCols]
 	ld [hl], a
-	xor a
-	ret
+	jr .play_menu_sound
+
 
 .d_right
 	ld hl, wMenuCursorX
@@ -381,8 +376,7 @@ _2DMenuInterpretJoypad: ; 24270
 	cp [hl]
 	jr z, .check_wrap_around_right
 	inc [hl]
-	xor a
-	ret
+	jr .play_menu_sound
 
 .check_wrap_around_right
 	ld a, [w2DMenuFlags1]
@@ -395,8 +389,7 @@ _2DMenuInterpretJoypad: ; 24270
 
 .wrap_around_right
 	ld [hl], $1
-	xor a
-	ret
+	jr .play_menu_sound
 ; 24318
 
 .b_button
@@ -409,6 +402,15 @@ _2DMenuInterpretJoypad: ; 24270
 	ld [wMenuCursorY], a
 .a_start_select
 .no_b_run
+	xor a
+	ret
+
+.play_menu_sound
+	call IsSFXPlaying
+	jr nc, .no_sound
+	ld de, SFX_TEXTSCROLL
+	call PlaySFX
+.no_sound
 	xor a
 	ret
 

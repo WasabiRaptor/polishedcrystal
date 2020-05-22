@@ -134,6 +134,13 @@ KeyItems_ScrollPocket: ; 2c9b1 (b:49b1)
 	and a
 	jp z, KeyItems_JoypadLoop
 	dec [hl]
+
+	call IsSFXPlaying
+	jr nc, .no_sound
+	ld de, SFX_TEXTSCROLL
+	call PlaySFX
+.no_sound
+
 	call KeyItems_DisplayPocketItems
 	jp KeyItems_ShowDescription
 
@@ -151,6 +158,13 @@ KeyItems_ScrollPocket: ; 2c9b1 (b:49b1)
 	jr nz, .loop
 	ld hl, wKeyItemsPocketScrollPosition
 	inc [hl]
+
+	call IsSFXPlaying
+	jr nc, .no_sound2
+	ld de, SFX_TEXTSCROLL
+	call PlaySFX
+.no_sound2
+
 	call KeyItems_DisplayPocketItems
 	jp KeyItems_ShowDescription
 

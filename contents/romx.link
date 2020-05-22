@@ -37,7 +37,6 @@ ROMX $08
 ROMX $09
 	org $4000
 	"Code 9"
-	"Trainer Pics 3"
 
 ROMX $0A
 	org $4000

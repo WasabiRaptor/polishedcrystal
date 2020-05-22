@@ -156,8 +156,7 @@ ScrollingMenuJoyAction:
 	jr z, .checkCallFunction3
 	ld hl, wMenuScrollPosition
 	dec [hl]
-	xor a
-	ret
+	jr .play_menu_sound
 
 .d_down
 	call ScrollingMenu_GetCursorPosition
@@ -170,14 +169,22 @@ ScrollingMenuJoyAction:
 	jr z, .checkCallFunction3
 	ld hl, wMenuScrollPosition
 	inc [hl]
-	xor a
-	ret
+	jr .play_menu_sound
 
 .checkCallFunction3
 	call ScrollingMenu_CheckCallFunction3
 .unsetZeroFlag
 	xor a
 	dec a
+	ret
+
+.play_menu_sound
+	call IsSFXPlaying
+	jr nc, .no_sound
+	ld de, SFX_TEXTSCROLL
+	call PlaySFX
+.no_sound
+	xor a
 	ret
 
 ScrollingMenu_GetCursorPosition: ; 246fc

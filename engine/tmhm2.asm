@@ -140,6 +140,13 @@ TMHM_ScrollPocket: ; 2c9b1 (b:49b1)
 	and a
 	jp z, TMHM_JoypadLoop
 	dec [hl]
+
+	call IsSFXPlaying
+	jr nc, .no_sound
+	ld de, SFX_TEXTSCROLL
+	call PlaySFX
+.no_sound
+
 	call TMHM_DisplayPocketItems
 	jp TMHM_ShowTMMoveDescription
 
@@ -157,6 +164,13 @@ TMHM_ScrollPocket: ; 2c9b1 (b:49b1)
 	jr nz, .loop
 	ld hl, wTMHMPocketScrollPosition
 	inc [hl]
+
+	call IsSFXPlaying
+	jr nc, .no_sound2
+	ld de, SFX_TEXTSCROLL
+	call PlaySFX
+.no_sound2
+
 	call TMHM_DisplayPocketItems
 	jp TMHM_ShowTMMoveDescription
 
