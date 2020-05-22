@@ -316,6 +316,9 @@ Sfx_TextScroll:
 	musicheader 1, 5, Sfx_TextScroll_Ch5
 
 Sfx_TextScroll_Ch5:
-	dutycycle $0
-	sound __, 1, $ff, $0600
+	togglesfx
+	dutycycle $2
+	notetype $1, $61
+	octave 4
+	note C_, 1
 	endchannel
