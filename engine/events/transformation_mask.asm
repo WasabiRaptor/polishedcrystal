@@ -282,7 +282,7 @@ TransformPlayerToPokemon:
 	ld [wCurPartyMon], a
 	inc a
 	ld [wPartyCount], a
-
+	dec a
 	ld hl, wPartySpecies ; legacy stuff that hasn't been dealt with yet
 	ld b, 0
 	ld c, a
