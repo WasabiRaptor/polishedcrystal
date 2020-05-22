@@ -956,6 +956,9 @@ DoPlayerMovement:: ; 80000
 ; 803ee
 
 .BumpSound: ; 803ee
+	ld a, [wPlayerGoingUpStairs]
+	and a
+	ret nz
 
 	call CheckSFX
 	ret c
