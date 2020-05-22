@@ -996,6 +996,22 @@ CheckStandingOnIce:: ; 80404
 	ret
 ; 80422
 
+CheckSpinTile::
+	cp COLL_SPIN_UP
+	ld c, UP
+	ret z
+	cp COLL_SPIN_DOWN
+	ld c, DOWN
+	ret z
+	cp COLL_SPIN_LEFT
+	ld c, LEFT
+	ret z
+	cp COLL_SPIN_RIGHT
+	ld c, RIGHT
+	ret z
+	ld c, STANDING
+	ret
+
 CheckSpinning::
 	ld a, OBJECT_STANDING_TILE
 	predef GetCenteredObjectStructParam

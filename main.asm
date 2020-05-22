@@ -2302,7 +2302,7 @@ GiveANickname_YesNo: ; 4db3b
 
 TextJump_GiveANickname: ; 0x4db44
 	; Give a nickname to the @  you received?
-	text_jump UnknownText_0x1c12fc
+	text_jump Text_GiveANickName
 	db "@"
 
 SetCaughtData: ; 4db49
@@ -5328,10 +5328,10 @@ PrintLetterDelay:: ; 313d
 	pop af
 	cp " "
 	jr z, .no_sound
-
+	call IsSFXPlaying
+	jr nc, .no_sound
 	ld de, SFX_TEXTSCROLL
 	call PlaySFX
-	;call WaitSFX
 .no_sound
 	pop bc
 	pop de

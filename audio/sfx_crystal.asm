@@ -316,15 +316,6 @@ Sfx_TextScroll:
 	musicheader 1, 5, Sfx_TextScroll_Ch5
 
 Sfx_TextScroll_Ch5:
-	togglesfx
-	tempo 160
-	volume $77
-	dutycycle $3
-	tone $0001
-	vibrato $10, $15
-	dutycycle $3
-	tone $0001
-	notetype $c, $92
-	octave 3
-	note C#, 1
+	dutycycle $0
+	sound __, 1, $ff, $0600
 	endchannel

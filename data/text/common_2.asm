@@ -701,9 +701,9 @@ MailMovedFromBoxText::
 	prompt
 
 Text_WasSentToBillsPC::
+	text "@"
 	text_from_ram wStringBuffer1
-	text " was"
-	line "sent to Bill's PC."
+	text " was sent to Bill's PC."
 	prompt
 
 UnknownText_0x1c1006::
@@ -784,12 +784,10 @@ UnknownText_0x1c12ae::
 	line "your PC Box."
 	prompt
 
-UnknownText_0x1c12fc::
-	text "Give a nickname to"
-	line "the @"
+Text_GiveANickName::
+	text "Give a nickname to the @"
 	text_from_ram wStringBuffer1
-	text " you"
-	cont "received?"
+	text "<LINE>you received?"
 	done
 
 UnknownText_0x1c1328::

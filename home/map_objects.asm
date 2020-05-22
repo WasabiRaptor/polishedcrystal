@@ -132,22 +132,6 @@ GetTileCollision:: ; 185d
 	ret
 ; 1875
 
-CheckSpinTile::
-	cp COLL_SPIN_UP
-	ld c, UP
-	ret z
-	cp COLL_SPIN_DOWN
-	ld c, DOWN
-	ret z
-	cp COLL_SPIN_LEFT
-	ld c, LEFT
-	ret z
-	cp COLL_SPIN_RIGHT
-	ld c, RIGHT
-	ret z
-	ld c, STANDING
-	ret
-
 CheckStandingOnEntrance:: ; 18c3
 	ld a, OBJECT_STANDING_TILE
 	predef GetCenteredObjectStructParam

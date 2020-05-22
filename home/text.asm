@@ -416,7 +416,7 @@ NextVRAMVariableWidthTextTile:
 	inc a
 	ret z
 	cp $e0
-	jr c, notlastVWtile
+	jr nz, notlastVWtile
 	ld a, "A"
 	ld [wVariableWidthTextTile], a
 	ld a, LOW(VTiles0 tile "A")
@@ -1035,8 +1035,24 @@ Text_FromRAM::
 	ld a, [hli]
 	ld d, a
 	push hl
-	ld h, b
-	ld l, c
+	push bc
+
+	ld a, [wVariableWidthTextVRAM]
+	ld l, a
+	ld a, [wVariableWidthTextVRAM+1]
+	ld h, a
+	ld bc, -1 tiles
+	add hl, bc
+	ld a, l
+	ld [wVariableWidthTextVRAM], a
+	ld a, h
+	ld [wVariableWidthTextVRAM+1], a
+
+	ld a, [wVariableWidthTextTile]
+	dec a
+	ld [wVariableWidthTextTile], a
+
+	pop hl
 	call PlaceSpecialString
 	pop hl
 	ret
