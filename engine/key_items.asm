@@ -137,7 +137,7 @@ KeyItems_ScrollPocket: ; 2c9b1 (b:49b1)
 
 	call IsSFXPlaying
 	jr nc, .no_sound
-	ld de, SFX_TEXTSCROLL
+	ld de, SFX_SCROLL
 	call PlaySFX
 .no_sound
 
@@ -161,7 +161,7 @@ KeyItems_ScrollPocket: ; 2c9b1 (b:49b1)
 
 	call IsSFXPlaying
 	jr nc, .no_sound2
-	ld de, SFX_TEXTSCROLL
+	ld de, SFX_SCROLL
 	call PlaySFX
 .no_sound2
 

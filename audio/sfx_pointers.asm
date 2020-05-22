@@ -216,3 +216,6 @@ SFX:
 
 ; Brass adds the following SFX:
 	dba Sfx_TextScroll
+	dba Sfx_Scroll
+	dba Sfx_Accept
+	dba Sfx_Cancel
