@@ -82,28 +82,23 @@ UnknownText_0x1c4212::
 	done
 
 UnknownText_0x1c454b::
-	text "Would you like to"
-	line "save the game?"
+	text "Would you like to save the game?"
 	done
 
 UnknownText_0x1c456d::
-	text "Saving… Don't turn"
-	line "off the power!"
+	text "Saving… Don't turn off the power!"
 	done
 
 UnknownText_0x1c4590::
-	text "<PLAYER> saved"
-	line "the game."
+	text "<PLAYER> saved the game."
 	done
 
 UnknownText_0x1c45d9::
-	text "Warning! There is"
-	line "a save file from"
-	cont "another game."
+	text "Warning! There is a save file"
+	line "from another game."
 
-	para "Is it OK to over-"
-	line "write the other"
-	cont "save file?"
+	para "Is it OK to overwrite the other"
+	line "save file?"
 	done
 
 UnknownText_0x1c460d::
@@ -112,9 +107,8 @@ UnknownText_0x1c460d::
 	prompt
 
 UnknownText_0x1c462a::
-	text "When you change a"
-	line "Pokémon Box, data"
-	cont "will be saved. OK?"
+	text "When you change a Pokémon Box,"
+	line "data will be saved. OK?"
 	done
 
 UnknownText_0x1c465f::
@@ -134,17 +128,14 @@ _ObjectEventText::
 
 UnknownText_0x1c4719::
 	text "<PLAYER> received"
-	line "@"
 	text_from_ram wStringBuffer4
 	text "."
 	done
 
 UnknownText_0x1c472c::
 	text "<PLAYER> put the"
-	line "@"
 	text_from_ram wStringBuffer1
-	text " in"
-	cont "the @"
+	line "in the @"
 	text_from_ram wStringBuffer3
 	text "."
 	prompt
@@ -753,9 +744,10 @@ Text_Waitbutton_2::
 	db "@@"
 
 UnknownText_0x1c5b38::
+	text "@"
 	text_from_ram wMonOrItemNameBuffer
-	text " was"
-	line "sent to Bill's PC."
+	text " was sent to"
+	line "your Pokemon Storage BOX."
 	prompt
 
 UnknownText_0x1c5b53::

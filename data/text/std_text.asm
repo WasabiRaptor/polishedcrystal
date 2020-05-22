@@ -303,7 +303,7 @@ ContestResults_PartyFullText:
 	line "so the Pokémon was"
 
 	para "sent to your BOX"
-	line "in Bill's PC."
+	line "in Pokemon Storage."
 	done
 
 GymStatue_CityGymText:

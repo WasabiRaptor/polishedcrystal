@@ -674,7 +674,7 @@ NonTrainerCallerNames: ; 903d6
 .bill db "Bill:<LNBRK>   #maniac@"
 .elm db "Prof.Elm:<LNBRK>   Pokémon Prof.@"
 .bikeshop db "Miracle Cycle:@"
-.lyra db "Lyra:<LNBRK>   <PK><MN> Trainer@"
+.lyra db "Lyra:<LNBRK>   Pokemon Trainer@"
 .buena db "Buena:<LNBRK>   Disc Jockey@"
 ; 90423
 

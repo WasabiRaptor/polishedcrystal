@@ -703,7 +703,7 @@ MailMovedFromBoxText::
 Text_WasSentToBillsPC::
 	text "@"
 	text_from_ram wStringBuffer1
-	text " was sent to Bill's PC."
+	text " was stored away."
 	prompt
 
 UnknownText_0x1c1006::
@@ -849,32 +849,23 @@ _KrissPCDepositItemsText::
 	prompt
 
 _KrissPCNoRoomDepositText::
-	text "There's no room to"
-	line "store items."
+	text "There's no room to store items."
 	prompt
 
 UnknownText_0x1c144d::
-	text "<PLAYER> turned on"
-	line "the PC."
+	text "<PLAYER> turned on the PC."
 	prompt
 
 UnknownText_0x1c1462::
-	text "Access whose PC?"
+	text "Access which system?"
 	done
 
 UnknownText_0x1c1474::
-	text "Bill's PC"
-	line "accessed."
-
-	para "Pokémon Storage"
-	line "System opened."
+	text "Pokémon Storage System opened."
 	prompt
 
 UnknownText_0x1c14a4::
-	text "Accessed own PC."
-
-	para "Item Storage"
-	line "System opened."
+	text "Item Storage System opened."
 	prompt
 
 UnknownText_0x1c14d2::

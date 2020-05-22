@@ -2091,15 +2091,15 @@ Pokedex_DisplayModeDescription: ; 40e5b
 	dw .UnownMode
 
 .RegionalMode: ; 40e85
-	db   "<PK><MN> native to"
+	db   "Pokemon native to"
 	next "the Invar region.@"
 
 .VariantMode: ; 40ea6
-	db   "<PK><MN> native"
+	db   "Pokemon native"
 	next "to other lands.@"
 
 .ABCMode: ; 40ec6
-	db   "<PK><MN> are listed"
+	db   "Pokemon are listed"
 	next "alphabetically.@"
 
 .UnownMode: ; 40ee4

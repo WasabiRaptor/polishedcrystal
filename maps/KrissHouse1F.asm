@@ -78,7 +78,7 @@ MomEventScript:
 	end
 
 GearName:
-	db "#gear@"
+	db "Pokegear@"
 
 FridgeText:
 	text "Let's see what's"

@@ -82,7 +82,7 @@ endr
 	ret
 
 .OT:
-	db "Mr.<PK><MN>@"
+	db "Mr.Pokemon@"
 .Nickname:
 	db "Masuda@"
 

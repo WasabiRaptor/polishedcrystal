@@ -52,7 +52,7 @@ DoAnimFrame: ; 8d24b
 
 	ld hl, SPRITEANIMSTRUCT_XCOORD
 	add hl, bc
-	ld [hl], 8 * 2
+	ld [hl], 8 * 2 + 4
 
 	ld hl, SPRITEANIMSTRUCT_YOFFSET
 	add hl, bc

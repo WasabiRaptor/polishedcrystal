@@ -60,14 +60,13 @@ _DepositPKMN: ; e2391 (38:6391)
 	call BillsPC_PlaceString
 	ld a, $5
 	ld [wBillsPC_NumMonsOnScreen], a
-	call BillsPC_RefreshTextboxes
 	call PCMonInfo
+
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
-	ld a, $ff
-	ld [wCurPartySpecies], a
 	ld a, CGB_BILLS_PC
 	call BillsPC_ApplyPalettes
-	call ApplyTilemapInVBlank
+	call BillsPC_RefreshTextboxes
+	call ApplyAttrAndTilemapInVBlank
 	call BillsPC_UpdateSelectionCursor
 	jp BillsPC_IncrementJumptableIndex
 
@@ -88,10 +87,7 @@ _DepositPKMN: ; e2391 (38:6391)
 	call BillsPC_RefreshTextboxes
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
-	ld a, $1
-	ldh [hBGMapMode], a
-	call DelayFrame
-	jp DelayFrame
+	jp ApplyAttrAndTilemapInVBlank
 
 .a_button
 	call BillsPC_GetSelectedPokemonSpecies
@@ -117,6 +113,7 @@ _DepositPKMN: ; e2391 (38:6391)
 .WhatsUp: ; e245d (38:645d)
 	xor a
 	ldh [hBGMapMode], a
+	ldh [rVBK], a
 	call ClearSprites
 	call BillsPC_GetSelectedPokemonSpecies
 	ld [wCurPartySpecies], a
@@ -129,6 +126,7 @@ _DepositPKMN: ; e2391 (38:6391)
 	jp BillsPC_IncrementJumptableIndex
 
 .Submenu: ; e247d (38:647d)
+	call InitVariableWidthText
 	ld hl, BillsPCDepositMenuDataHeader
 	call CopyMenuDataHeader
 	ld a, [wMenuCursorY]
@@ -307,14 +305,12 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	call BillsPC_PlaceString
 	ld a, $5
 	ld [wBillsPC_NumMonsOnScreen], a
-	call BillsPC_RefreshTextboxes
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
-	ld a, $ff
-	ld [wCurPartySpecies], a
 	ld a, CGB_BILLS_PC
 	call BillsPC_ApplyPalettes
-	call ApplyTilemapInVBlank
+	call BillsPC_RefreshTextboxes
+	call ApplyAttrAndTilemapInVBlank
 	call BillsPC_UpdateSelectionCursor
 	jp BillsPC_IncrementJumptableIndex
 
@@ -335,10 +331,7 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	call BillsPC_RefreshTextboxes
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
-	ld a, $1
-	ldh [hBGMapMode], a
-	call DelayFrame
-	jp DelayFrame
+	jp ApplyAttrAndTilemapInVBlank
 
 .a_button
 	call BillsPC_GetSelectedPokemonSpecies
@@ -371,6 +364,7 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	jp BillsPC_IncrementJumptableIndex
 
 BillsPC_Withdraw: ; e2675 (38:6675)
+	call InitVariableWidthText
 	ld hl, .MenuDataHeader
 	call CopyMenuDataHeader
 	ld a, [wMenuCursorY]
@@ -548,20 +542,19 @@ _MovePKMNWithoutMail: ; e2759
 	call BillsPC_PlaceString
 	ld a, 5
 	ld [wBillsPC_NumMonsOnScreen], a
-	call BillsPC_RefreshTextboxes
 	call BillsPC_MoveMonWOMail_BoxNameAndArrows
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
-	ld a, $ff
-	ld [wCurPartySpecies], a
 	ld a, CGB_BILLS_PC
 	call BillsPC_ApplyPalettes
-	call ApplyTilemapInVBlank
 	call BillsPC_UpdateSelectionCursor
+	call BillsPC_RefreshTextboxes
+	call ApplyAttrAndTilemapInVBlank
 	jp BillsPC_IncrementJumptableIndex
 ; e27eb
 
 .Joypad: ; e27eb
+
 	ld hl, hJoyPressed
 	ld a, [hl]
 	and B_BUTTON
@@ -576,15 +569,19 @@ _MovePKMNWithoutMail: ; e2759
 	call BillsPC_UpdateSelectionCursor
 	xor a
 	ldh [hBGMapMode], a
-	call BillsPC_RefreshTextboxes
 	call PCMonInfo
 	call BillsPC_PrintBoxCountAndCapacityInsideBox
-	ld a, $1
-	ldh [hBGMapMode], a
-	call DelayFrame
+	call BillsPC_RefreshTextboxes
+	call ApplyAttrAndTilemapInVBlank
 	jp DelayFrame
 
 .d_pad
+	hlcoord 9, 3, wAttrMap
+	lb bc, 10, 10
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+	call ApplyAttrAndTilemapInVBlank
+
 	xor a
 	ld [wBillsPC_CursorPosition], a
 	ld [wBillsPC_ScrollPosition], a
@@ -623,6 +620,7 @@ _MovePKMNWithoutMail: ; e2759
 ; e285d
 
 .MoveMonWOMailSubmenu: ; e285d
+	call InitVariableWidthText
 	ld hl, .MenuDataHeader
 	call CopyMenuDataHeader
 	ld a, [wMenuCursorY]
@@ -704,11 +702,11 @@ _MovePKMNWithoutMail: ; e2759
 	call BillsPC_PlaceString
 	ld a, $5
 	ld [wBillsPC_NumMonsOnScreen], a
-	call BillsPC_RefreshTextboxes
 	call BillsPC_MoveMonWOMail_BoxNameAndArrows
 	call ClearSprites
 	call BillsPC_UpdateInsertCursor
-	call ApplyTilemapInVBlank
+	call BillsPC_RefreshTextboxes
+	call ApplyAttrAndTilemapInVBlank
 	jp BillsPC_IncrementJumptableIndex
 ; e2903
 
@@ -728,12 +726,15 @@ _MovePKMNWithoutMail: ; e2759
 	xor a
 	ldh [hBGMapMode], a
 	call BillsPC_RefreshTextboxes
-	ld a, $1
-	ldh [hBGMapMode], a
-	call DelayFrame
-	jp DelayFrame
+	jp ApplyAttrAndTilemapInVBlank
 
 .dpad_2
+	hlcoord 9, 3, wAttrMap
+	lb bc, 10, 10
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+	call ApplyAttrAndTilemapInVBlank
+
 	xor a
 	ld [wBillsPC_CursorPosition], a
 	ld [wBillsPC_ScrollPosition], a
@@ -959,6 +960,7 @@ BillsPC_LeftRightDidSomething: ; e2a6c
 ; e2a6e
 
 BillsPC_PlaceString: ; e2a6e (38:6a6e)
+	VWTextStart $c0
 	push de
 	hlcoord 0, 15
 	lb bc, 1, 18
@@ -978,6 +980,10 @@ BillsPC_MoveMonWOMail_BoxNameAndArrows: ; e2a80
 ; e2a8e
 
 BillsPC_BoxName: ; e2a8e (38:6a8e)
+	call InitVariableWidthText
+	ld a, 1
+	ldh [rVBK], a
+
 	hlcoord 8, 0
 	lb bc, 1, 10
 	call TextBox
@@ -1004,14 +1010,18 @@ BillsPC_BoxName: ; e2a8e (38:6a8e)
 	ld de, .PartyPKMN
 .print
 	hlcoord 10, 1
-	jp PlaceString
+	call PlaceString
+	xor a
+	ldh [rVBK], a
+	ret
 ; e2abd (38:6abd)
 
 .PartyPKMN:
-	db "Party <PK><MN>@"
+	db "Party Pokemon@"
 ; e2ac6
 
 PCMonInfo: ; e2ac6 (38:6ac6)
+	VWTextStart $b0
 ; Display a monster's pic and
 ; attributes when highlighting
 ; it in a PC menu.
@@ -1301,6 +1311,8 @@ BillsPC_RefreshTextboxes: ; e2c2c (38:6c2c)
 	add hl, de
 	ld e, l
 	ld d, h
+	VWTextStart2 $a0
+
 	hlcoord 9, 4
 	ld a, [wBillsPC_NumMonsOnScreen]
 .loop
@@ -1318,6 +1330,14 @@ BillsPC_RefreshTextboxes: ; e2c2c (38:6c2c)
 	pop af
 	dec a
 	jr nz, .loop
+
+	hlcoord 9, 3, wAttrMap
+	lb bc, 10, 10
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+
+	xor a
+	ldh [rVBK], a
 	ret
 ; e2c67 (38:6c67)
 
@@ -2278,15 +2298,15 @@ PCSelectLZ: INCBIN "gfx/pc/pc.2bpp.lz"
 PCMailGFX:  INCBIN "gfx/pc/mail.2bpp"
 ; e34dd
 
-PCString_ChooseaPKMN: db "Choose a <PK><MN>.@"
+PCString_ChooseaPKMN: db "Choose a Pokemon.@"
 PCString_WhatsUp: db "What's up?@"
-PCString_ReleasePKMN: db "Release <PK><MN>?@"
+PCString_ReleasePKMN: db "Release Pokemon?@"
 PCString_MoveToWhere: db "Move to where?@"
-PCString_ItsYourLastPKMN: db "It's your last <PK><MN>!@"
+PCString_ItsYourLastPKMN: db "It's your last Pokemon!@"
 PCString_TheresNoRoom: db "There's no room!@"
-PCString_NoMoreUsablePKMN: db "No more usable <PK><MN>!@"
+PCString_NoMoreUsablePKMN: db "No more usable Pokemon!@"
 PCString_RemoveMail: db "Remove Mail.@"
-PCString_ReleasedPKMN: db "Released <PK><MN>.@"
+PCString_ReleasedPKMN: db "Released Pokemon.@"
 PCString_Bye: db "Bye,@"
 PCString_Stored: db "Stored @"
 PCString_Got: db "Got @"
@@ -2308,12 +2328,19 @@ _ChangeBox: ; e35aa (38:75aa)
 .loop
 	xor a
 	ldh [hBGMapMode], a
+	ld a, 1
+	ldh [rVBK], a
+	call InitVariableWidthText
+
 	call BillsPC_PrintBoxName
+	VWTextStart $d0
 	call BillsPC_PlaceChooseABoxString
+	call ApplyAttrAndTilemapInVBlank
 	ld hl, _ChangeBox_menudataheader
 	call CopyMenuDataHeader
 	xor a
 	ld [wMenuScrollPosition], a
+
 	hlcoord 0, 4
 	lb bc, 8, 9
 	call TextBox
@@ -2383,6 +2410,7 @@ GetBoxName: ; e3626 (38:7626)
 ; e3632 (38:7632)
 
 BillsPC_PrintBoxCountAndCapacity: ; e3632
+	call InitVariableWidthText
 	hlcoord 11, 7
 	lb bc, 5, 7
 	call TextBox
@@ -2418,6 +2446,14 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	hlcoord 0, 0
 	lb bc, 1, 5
 	call TextBox
+
+	hlcoord 3, 1, wAttrMap
+	lb bc, 1, 3
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+
+	VWTextStart2 $90
+
 	ld a, [wBillsPC_LoadedBox]
 	and a
 	jr z, .party
@@ -2429,7 +2465,8 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	lb bc, 1, 2
 	predef PrintNum
 	ld de, .out_of_20
-	jp PlaceString
+	call PlaceString
+	jr .done
 
 .party
 	ld a, [wPartyCount]
@@ -2439,7 +2476,11 @@ BillsPC_PrintBoxCountAndCapacityInsideBox:
 	lb bc, 1, 2
 	predef PrintNum
 	ld de, .out_of_6
-	jp PlaceString
+	call PlaceString
+.done
+	xor a
+	ldh [rVBK], a
+	ret
 
 .out_of_20
 	; db "/20@"
@@ -2530,24 +2571,33 @@ BoxSelectionJumpIn:
 ; e36cf
 
 BillsPC_PrintBoxName: ; e36cf (38:76cf)
+
 	hlcoord 0, 0
 	lb bc, 2, 18
 	call TextBox
+
+	hlcoord 1, 1, wAttrMap
+	lb bc, 2, 18
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+
 	hlcoord 1, 2
 	ld de, .Current
 	call PlaceString
+	push bc
 	ld a, [wCurBox]
 	and $f
 	call GetBoxName
-	hlcoord 11, 2
-	jp PlaceString
+	pop hl
+	jp PlaceSpecialString
 ; e36f1 (38:76f1)
 
 .Current: ; e36f1
-	db "Current@"
+	db "Current Box: @"
 ; e36f9
 
 BillsPC_ChangeBoxSubmenu: ; e36f9 (38:76f9)
+	call InitVariableWidthText
 	ld hl, .MenuDataHeader
 	call LoadMenuDataHeader
 	call VerticalMenu

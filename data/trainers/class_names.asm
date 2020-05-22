@@ -1,6 +1,6 @@
 TrainerClassNames::
-	db "<PK><MN> Trainer@" ; CARRIE
-	db "<PK><MN> Trainer@" ; CAL
+	db "Pokemon Trainer@" ; CARRIE
+	db "Pokemon Trainer@" ; CAL
 	db "Leader@"           ; FALKNER
 	db "Leader@"           ; BUGSY
 	db "Leader@"           ; WHITNEY
@@ -22,13 +22,13 @@ TrainerClassNames::
 	db "Leader@"           ; SABRINA
 	db "Leader@"           ; BLAINE
 	db "Leader@"           ; BLUE
-	db "<PK><MN> Trainer@" ; RED
-	db "<PK><MN> Trainer@" ; LEAF
+	db "Pokemon Trainer@" ; RED
+	db "Pokemon Trainer@" ; LEAF
 	db "Strange@"          ; RIVAL0
 	db "Rival@"            ; RIVAL1
 	db "Rival@"            ; RIVAL2
-	db "<PK><MN> Trainer@" ; LYRA1
-	db "<PK><MN> Trainer@" ; LYRA2
+	db "Pokemon Trainer@" ; LYRA1
+	db "Pokemon Trainer@" ; LYRA2
 	db "Youngster@"        ; YOUNGSTER
 	db "Bug Catcher@"      ; BUG_CATCHER
 	db "Camper@"           ; CAMPER
@@ -121,25 +121,25 @@ TrainerClassNames::
 	db "Rock Hound@"       ; STEVEN
 	db "Researcher@"       ; CYNTHIA
 	db "Psychic@"          ; INVER
-	db "<PK><MN> Trainer@" ; CHERYL
-	db "<PK><MN> Trainer@" ; RILEY
-	db "<PK><MN> Trainer@" ; BUCK
-	db "<PK><MN> Trainer@" ; MARLEY
-	db "<PK><MN> Trainer@" ; MIRA
-	db "<PK><MN> Trainer@" ; ANABEL
+	db "Pokemon Trainer@" ; CHERYL
+	db "Pokemon Trainer@" ; RILEY
+	db "Pokemon Trainer@" ; BUCK
+	db "Pokemon Trainer@" ; MARLEY
+	db "Pokemon Trainer@" ; MIRA
+	db "Pokemon Trainer@" ; ANABEL
 	db "Valet@"            ; DARACH
 	db "Lady@"             ; CAITLIN
-	db "<PK><MN> Trainer@" ; CANDELA
-	db "<PK><MN> Trainer@" ; BLANCHE
-	db "<PK><MN> Trainer@" ; SPARK_T
+	db "Pokemon Trainer@" ; CANDELA
+	db "Pokemon Trainer@" ; BLANCHE
+	db "Pokemon Trainer@" ; SPARK_T
 	db "Trainer@"          ; FLANNERY
 	db "Fighter@"          ; MAYLENE
 	db "Pilot@"            ; SKYLA
 	db "Designer@"         ; VALERIE
-	db "<PK><MN> Trainer@" ; KUKUI
+	db "Pokemon Trainer@" ; KUKUI
 	db "Surfer@"           ; VICTOR
 	db "#Maniac@"          ; BILL_T
-	db "<PK><MN> Trainer@" ; YELLOW
+	db "Pokemon Trainer@" ; YELLOW
 	db "Ex-Leader@"        ; WALKER
 	db "Student@"          ; IMAKUNI
 	db "Collector@"        ; LAWRENCE

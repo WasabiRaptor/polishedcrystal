@@ -1,11 +1,12 @@
 PokemonCenterPC: ; 1559a
-	call PC_CheckPartyForPokemon
-	ret c
+	;call PC_CheckPartyForPokemon
+	;ret c
 	call PC_PlayBootSound
 	ld hl, PokeCenterPCText_BootedUpPC
 	call PC_DisplayText
 	ld hl, PokeCenterPCText_AccessWhosePC
 	call PC_DisplayTextWaitMenu
+	call OtherVariableWidthText
 	ld hl, .TopMenu
 	call LoadMenuDataHeader
 .loop
@@ -45,8 +46,8 @@ PokemonCenterPC: ; 1559a
 	dw OaksPC, .String_OaksPC
 	dw TurnOffPC, .String_TurnOff
 
-.String_PlayersPC:  db "<PLAYER>'s PC@"
-.String_BillsPC:    db "Bill's PC@"
+.String_PlayersPC:  db "Item Storage@"
+.String_BillsPC:    db "Pokemon Storage@"
 .String_OaksPC:     db "Prof.Oak's PC@"
 .String_TurnOff:    db "Turn Off@"
 
@@ -90,8 +91,8 @@ BillsPC: ; 15668
 	ld hl, PokeCenterPCText_AccessedBillsPC
 	call PC_DisplayText
 	farcall _BillsPC
-	and a
-	ret
+	jr ReturnFromPCMenu
+
 ; 15679 (5:5679)
 
 PlayersPC: ; 15679
@@ -100,8 +101,7 @@ PlayersPC: ; 15679
 	call PC_DisplayText
 	ld b, $0
 	call _PlayersPC
-	and a
-	ret
+	jr ReturnFromPCMenu
 ; 15689
 
 OaksPC: ; 15689
@@ -109,6 +109,24 @@ OaksPC: ; 15689
 	ld hl, PokeCenterPCText_AccessedOaksPC
 	call PC_DisplayText
 	farcall ProfOaksPC
+	;fallthrough
+
+ReturnFromPCMenu:
+	push af
+
+	ld a, [wOptions1]
+	push af
+	set NO_TEXT_SCROLL, a
+	ld [wOptions1], a
+
+	ld hl, PokeCenterPCText_AccessWhosePC
+	call PrintText
+	call OtherVariableWidthText
+
+	pop af
+	ld [wOptions1], a
+
+	pop af
 	and a
 	ret
 ; 1569a

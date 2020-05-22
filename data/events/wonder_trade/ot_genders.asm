@@ -73,7 +73,7 @@ WonderTradeOTGenders2:
 	genders FEMALE,  MALE,    MALE,    MALE,    FEMALE,  MALE,    FEMALE,  MALE
 	;       Hari,    Joy,     Jenny,   Delia,   Daisy,   Fuji,    Baoba,   Copycat
 	genders MALE,    FEMALE,  FEMALE,  FEMALE,  FEMALE,  MALE,    MALE,    FEMALE
-	;       Primo,   Lostele, Teala,   Selphy,  Joey,    Cal,     Carrie,  Mr.<PK><MN>
+	;       Primo,   Lostele, Teala,   Selphy,  Joey,    Cal,     Carrie,  Mr.Pokemon
 	genders MALE,    FEMALE,  FEMALE,  FEMALE,  MALE,    MALE,    FEMALE,  MALE
 	;       Eusine,  Cameron, Earl,    Kurt,    Ben,     Mary,    Reed,    Fern
 	genders MALE,    MALE,    MALE,    MALE,    MALE,    FEMALE,  MALE,    MALE

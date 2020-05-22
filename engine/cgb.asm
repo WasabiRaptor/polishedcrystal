@@ -1118,6 +1118,8 @@ _CGB_BillsPC: ; 8fca
 	ld [wCurGroup], a
 	ld a, [wCurPartyForm]
 	ld [wCurForm], a
+	ld a, [wCurPartySpecies]
+	ld [wCurSpecies], a
 
 	ld bc, wTempMonPersonality
 	call GetPlayerOrMonPalette
@@ -1131,6 +1133,29 @@ _CGB_BillsPC: ; 8fca
 	ld a, $1
 	call FillBoxCGB
 
+	hlcoord 3, 1, wAttrMap
+	lb bc, 1, 3
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+
+	hlcoord 9, 1, wAttrMap
+	lb bc, 1, 10
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+
+	hlcoord 9, 3, wAttrMap
+	lb bc, 10, 10
+	ld a, 7
+	call FillBoxWithByte
+
+	ld a, [wJumptableIndex]
+	cp 2
+	jr nc, .skip
+	hlcoord 9, 3, wAttrMap
+	lb bc, 10, 10
+	ld a, 7 | TILE_BANK
+	call FillBoxWithByte
+.skip
 	call InitPartyMenuOBPals
 
 	jp _CGB_FinishLayout

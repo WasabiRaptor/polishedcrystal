@@ -1,23 +1,7 @@
 _BillsPC: ; e3fd
-	call .CheckCanUsePC
-	ret c
 	call .LogIn
 	call .UseBillsPC
 	jp .LogOut
-
-.CheckCanUsePC: ; e40a (3:640a)
-	ld a, [wPartyCount]
-	and a
-	ret nz
-	ld hl, .Text_GottaHavePokemon
-	call MenuTextBoxBackup
-	scf
-	ret
-
-.Text_GottaHavePokemon: ; 0xe417
-	; You gotta have Pokémon to call!
-	text_jump UnknownText_0x1c1006
-	db "@"
 
 .LogIn: ; e41c (3:641c)
 	xor a
@@ -28,16 +12,11 @@ _BillsPC: ; e3fd
 	ld a, [hl]
 	push af
 	set NO_TEXT_SCROLL, [hl]
-	ld hl, .Text_What
-	call PrintText
 	pop af
 	ld [wOptions1], a
+	call LoadStandardFont
+	call LoadFontsExtra
 	jp LoadFontsBattleExtra
-
-.Text_What: ; 0xe43a
-	; What?
-	text_jump UnknownText_0x1c1024
-	db "@"
 
 .LogOut: ; e43f (3:643f)
 	jp CloseSubmenu
@@ -80,10 +59,11 @@ _BillsPC: ; e3fd
 	dw .strings
 
 .strings ; e47f
-	db "Withdraw <PK><MN>@"
-	db "Deposit <PK><MN>@"
+	db "Withdraw Pokemon@"
+	db "Deposit Pokemon@"
 	db "Change Box@"
-	db "Move <PK><MN> w/o Mail@"
+	db "Move Pokemon@"
+	db "Quick Deposit@"
 	db "See ya!@"
 
 .Jumptable: ; e4ba (3:64ba)
@@ -92,14 +72,16 @@ _BillsPC: ; e3fd
 	dw BillsPC_ChangeBoxMenu
 	dw BillsPC_MovePKMNMenu
 	dw BillsPC_SeeYa
+	dw BillsPC_SeeYa
 
 .items ; e4c4
-	db 5
+	db 6
 	db 0 ; WITHDRAW
-	db 1;  DEPOSIT
+	db 1 ; DEPOSIT
 	db 2 ; CHANGE BOX
 	db 3 ; MOVE PKMN
-	db 4 ; SEE YA!
+	db 4 ; QUICK DEPOSIT
+	db 5 ; SEE YA!
 	db -1
 
 BillsPC_SeeYa: ; e4cb
@@ -174,10 +156,12 @@ BillsPC_WithdrawMenu: ; e559 (3:6559)
 
 BillsPC_ChangeBoxMenu: ; e583 (3:6583)
 	farcall _ChangeBox
+	call ClearPCItemScreen
 	and a
 	ret
 
 ClearPCItemScreen: ; e58b
+	call OtherVariableWidthText
 	call DisableSpriteUpdates
 	xor a
 	ldh [hBGMapMode], a
@@ -187,12 +171,10 @@ ClearPCItemScreen: ; e58b
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	ld a, " "
 	call ByteFill
-	hlcoord 0, 0
-	lb bc, 10, 18
-	call TextBox
-	hlcoord 0, 12
-	lb bc, 4, 18
-	call TextBox
+	hlcoord 0, 0, wAttrMap
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	ld a, 7
+	call ByteFill
 	call ApplyAttrAndTilemapInVBlank
 	jp SetPalettes ; load regular palettes?
 

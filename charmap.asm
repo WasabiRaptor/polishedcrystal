@@ -72,6 +72,8 @@
 	charmap "<PLAYER>", $52
 	charmap "<RIVAL>",  $53
 	charmap "Poké",     $54
+	charmap "Poke",     $54
+
 	charmap "<CONT>",   $55
 	charmap "<TRENDY>", $56
 	charmap "<DONE>",   $57
@@ -83,6 +85,7 @@
 	charmap "the",      $5c
 	charmap "you",      $5d
 	charmap "Pokémon",  $5e
+	charmap "Pokemon",  $5e
 
 ; Battle characters
 
