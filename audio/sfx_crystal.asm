@@ -318,7 +318,7 @@ Sfx_TextScroll:
 Sfx_TextScroll_Ch5:
 	togglesfx
 	dutycycle $2
-	notetype $1, $61
+	notetype $1, $b1
 	octave 4
 	note D_, 1
 	endchannel
