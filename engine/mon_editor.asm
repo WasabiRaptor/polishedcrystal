@@ -509,3 +509,4 @@ CloseEditor:
 	; close menu
 	ld b, 0
 	ret ; return from the *entire* EditPartyMon script, back to the party menu, which falls through into .quit
+	

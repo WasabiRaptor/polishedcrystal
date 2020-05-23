@@ -160,7 +160,7 @@ Special_BankOfMom: ; 16218
 	jr z, .CancelDeposit
 	ld de, wMoney
 	ld bc, wStringBuffer2
-	farcall CompareMoney
+	call CompareMoney
 	jr c, .DontHaveThatMuchToDeposit
 	ld hl, wStringBuffer2
 	ld de, wStringBuffer2 + 3
@@ -168,11 +168,11 @@ Special_BankOfMom: ; 16218
 	rst CopyBytes
 	ld bc, wMomsMoney
 	ld de, wStringBuffer2
-	farcall GiveMoney
+	call GiveMoney
 	jr c, .CantDepositThatMuch
 	ld bc, wStringBuffer2 + 3
 	ld de, wMoney
-	farcall TakeMoney
+	call TakeMoney
 	ld hl, wStringBuffer2
 	ld de, wMomsMoney
 	ld bc, 3
@@ -229,15 +229,15 @@ Special_BankOfMom: ; 16218
 	rst CopyBytes
 	ld de, wMomsMoney
 	ld bc, wStringBuffer2
-	farcall CompareMoney
+	call CompareMoney
 	jr c, .InsufficientFundsInBank
 	ld bc, wMoney
 	ld de, wStringBuffer2
-	farcall GiveMoney
+	call GiveMoney
 	jr c, .NotEnoughRoomInWallet
 	ld bc, wStringBuffer2 + 3
 	ld de, wMomsMoney
-	farcall TakeMoney
+	call TakeMoney
 	ld hl, wStringBuffer2
 	ld de, wMoney
 	ld bc, 3
@@ -426,7 +426,7 @@ Mom_WithdrawDepositMenuJoypad: ; 16571
 	ld c, l
 	ld b, h
 	ld de, wStringBuffer2
-	farjp GiveMoney
+	jp GiveMoney
 
 .decrementdigit
 	ld hl, .DigitQuantities
@@ -434,7 +434,7 @@ Mom_WithdrawDepositMenuJoypad: ; 16571
 	ld c, l
 	ld b, h
 	ld de, wStringBuffer2
-	farjp TakeMoney
+	jp TakeMoney
 ; 16607
 
 .getdigitquantity ; 16607

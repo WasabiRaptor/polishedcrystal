@@ -606,7 +606,7 @@ PokeBallEffect: ; e8a2
 	ld a, [wPartyCount]
 	dec a
 	ld [wCurPartyMon], a
-	farcall HealPartyMonEvenForNuzlocke
+	call HealPartyMonEvenForNuzlocke
 .SkipPartyMonHealBall:
 
 	ld a, [wInitialOptions]
@@ -1410,7 +1410,7 @@ ReturnToBattle_UseBall: ; edfa (3:6dfa)
 
 
 Bicycle: ; ee08
-	farjp BikeFunction
+	jp BikeFunction
 ; ee0f
 
 
@@ -1474,7 +1474,7 @@ VitaminEffect: ; ee3d
 
 .ev_value_ok
 	ld [hl], a
-	farcall UpdatePkmnStats
+	call UpdatePkmnStats
 
 	call GetEVRelativePointer
 
@@ -1539,7 +1539,7 @@ StatStrings: ; eeab
 
 GetEVRelativePointer: ; eed9
 	ld a, [wCurItem]
-	farcall CheckItemParam
+	call CheckItemParam
 	ld c, a
 	ld b, 0
 	ret
@@ -1607,7 +1607,7 @@ RareCandy: ; ef14
 	pop de
 	pop bc
 
-	farcall UpdatePkmnStats
+	call UpdatePkmnStats
 	farcall LevelUpHappinessMod
 
 	ld a, PARTYMENUTEXT_LEVEL_UP
@@ -1737,7 +1737,7 @@ HealStatus: ; f030 (3:7030)
 GetItemHealingAction: ; f058 (3:7058)
 	push hl
 	ld a, [wCurItem]
-	farcall CheckItemParam
+	call CheckItemParam
 	ld c, a
 	ld hl, .StatusHealingActionTexts
 .next
@@ -2261,7 +2261,7 @@ GetHealingItemAmount: ; f395 (3:7395)
 	cp FIGY_BERRY
 	jr z, .figy_berry
 
-	farcall CheckItemParam
+	call CheckItemParam
 	ld e, a
 	ld d, 0
 	cp -1
@@ -2370,7 +2370,7 @@ Softboiled_MilkDrinkFunction: ; f3df (3:73df)
 EscapeRope: ; f44f
 	xor a
 	ld [wItemEffectSucceeded], a
-	farcall EscapeRopeFunction
+	call EscapeRopeFunction
 
 	ld a, [wItemEffectSucceeded]
 	cp 1
@@ -2385,7 +2385,7 @@ RepelEffect: ; f46c
 	ld hl, TextJump_RepelUsedEarlierIsStillInEffect
 	jp nz, PrintText
 
-	farcall CheckItemParam
+	call CheckItemParam
 	ld [wRepelEffect], a
 
 	ld a, [wCurItem]
@@ -2440,7 +2440,7 @@ DireHit: ; f4b8
 XItemEffect: ; f4c5
 	call UseItemText
 
-	farcall CheckItemParam
+	call CheckItemParam
 	ld b, a
 
 	xor a
@@ -2552,7 +2552,7 @@ SuperRod: ; f5ad
 	; fallthrough
 
 UseRod: ; f5b1
-	farjp FishFunction
+	jp FishFunction
 ; f5b8
 
 

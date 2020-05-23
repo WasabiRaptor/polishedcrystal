@@ -185,7 +185,7 @@ EvolutionAnimation: ; 4e5e1
 .PlaceFrontpic: ; 4e708
 	call GetBaseData ;form is known
 	hlcoord 7, 2
-	farjp PrepMonFrontpic
+	jp PrepMonFrontpic
 ; 4e711
 
 .LoadFrontpic: ; 4e711
@@ -288,7 +288,7 @@ EvolutionAnimation: ; 4e5e1
 	predef GetPartyMonGroupSpeciesAndForm
 	ld b, h
 	ld c, l
-	farjp CheckFaintedFrzSlp
+	jp CheckFaintedFrzSlp
 ; 4e7a6
 
 .PlayEvolvedSFX: ; 4e7a6

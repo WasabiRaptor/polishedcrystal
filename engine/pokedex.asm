@@ -2801,7 +2801,7 @@ NewPokedexEntry: ; fb877
 .NewPokedexEntry:
 	xor a
 	ldh [hBGMapMode], a
-	farcall Pokedex_DrawDexEntryScreenRightEdge
+	call Pokedex_DrawDexEntryScreenRightEdge
 	call Pokedex_ResetBGMapMode
 	call DisableLCD
 	call LoadStandardFont

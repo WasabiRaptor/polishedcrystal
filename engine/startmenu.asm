@@ -493,7 +493,7 @@ StartMenu_Pokegear: ; 1294c
 StartMenu_Pack: ; 1295b
 
 	call FadeToMenu
-	farcall Pack
+	call Pack
 	ld a, [wcf66]
 	and a
 	jr nz, .used_item
@@ -839,10 +839,10 @@ GiveTakePartyMonItem: ; 12b60
 
 .GiveItem:
 
-	farcall DepositSellInitPackBuffers
+	call DepositSellInitPackBuffers
 
 .loop
-	farcall DepositSellPack
+	call DepositSellPack
 
 	ld a, [wcf66]
 	and a

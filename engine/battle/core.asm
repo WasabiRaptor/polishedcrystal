@@ -4993,7 +4993,7 @@ DrawPlayerHUD: ; 3df58
 	ld [hl], $55
 	inc hl
 	ld [hl], $56
-	farjp FinishBattleAnim
+	jp FinishBattleAnim
 ; 3df98
 
 CheckDanger: ; 3df9e
@@ -5229,7 +5229,7 @@ endr
 	ld [hl], $57
 	inc hl
 	ld [hl], $58
-	farjp FinishBattleAnim
+	jp FinishBattleAnim
 ; 3e127
 
 BattleAnimateHPBar:

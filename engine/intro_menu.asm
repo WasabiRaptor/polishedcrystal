@@ -437,7 +437,7 @@ Continue_CheckEGO_ResetInitialOptions:
 	ld a, [wInitialOptions]
 	bit RESET_INIT_OPTS, a
 	jr z, .pass
-	farcall SetInitialOptions
+	call SetInitialOptions
 .pass
 	xor a
 	ret

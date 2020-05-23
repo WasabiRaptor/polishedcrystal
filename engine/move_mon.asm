@@ -968,7 +968,7 @@ RestorePPofDepositedPokemon: ; dcb6
 	push bc
 	push hl
 	push de
-	farcall GetMaxPPOfMove
+	call GetMaxPPOfMove
 	pop de
 	pop hl
 	ld a, [wd265]
@@ -1104,7 +1104,7 @@ Functiondd64: ; dd64
 	ld a, [wPartyCount]
 	dec a
 	ld [wCurPartyMon], a
-	farcall HealPartyMonEvenForNuzlocke
+	call HealPartyMonEvenForNuzlocke
 	ld a, [wCurPartyLevel]
 	ld d, a
 	farcall CalcExpAtLevel

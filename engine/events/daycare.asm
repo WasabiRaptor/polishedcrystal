@@ -184,7 +184,7 @@ DayCare_AskWithdrawBreedMon: ; 16807
 .check_money
 	ld de, wMoney
 	ld bc, wStringBuffer2 + 2
-	farcall CompareMoney
+	call CompareMoney
 	jr c, .not_enough_money
 	ld a, [wPartyCount]
 	cp PARTY_LENGTH
@@ -211,7 +211,7 @@ DayCare_AskWithdrawBreedMon: ; 16807
 DayCare_TakeMoney_PlayCry: ; 16850
 	ld bc, wStringBuffer2 + 2
 	ld de, wMoney
-	farcall TakeMoney
+	call TakeMoney
 	ld a, DAYCARETEXT_WITHDRAW
 	call PrintDayCareText
 	ld a, [wCurPartyGroup]
@@ -724,7 +724,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld a, [wDayCareMan]
 	bit 0, a
 	ret z
-	farcall CheckBreedmonCompatibility
+	call CheckBreedmonCompatibility
 	ld a, [wd265]
 	and a
 	ret z
@@ -866,7 +866,7 @@ DayCare_InitBreeding: ; 16a3b
 	ld [wEggMonItem], a
 
 	; Set moves for the egg
-	farcall InitEggMoves
+	call InitEggMoves
 
 	; Set OTID to the player
 	ld hl, wEggMonID

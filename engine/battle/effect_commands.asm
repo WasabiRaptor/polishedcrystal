@@ -2776,7 +2776,7 @@ BattleCommand_supereffectivetext: ; 351ad
 .print_msg
 	ld b, a
 	inc b
-	farcall GetStatName
+	call GetStatName
 	ld hl, BattleText_ItemSharplyRaised
 	jp StdBattleTextBox
 
@@ -7775,7 +7775,7 @@ BattleCommand_conversion:
 	ld [wCurPlayerMove], a
 
 	push bc
-	farcall UpdateMoveData
+	call UpdateMoveData
 	pop bc
 	ld a, b
 	jr .validate_choice

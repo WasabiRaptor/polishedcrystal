@@ -590,7 +590,7 @@ ShowLinkBattleParticipants: ; 2ee18
 	and a
 	ret z
 
-	farcall _ShowLinkBattleParticipants
+	call _ShowLinkBattleParticipants
 	ld c, 150
 	call DelayFrames
 	call ClearTileMap
@@ -1727,7 +1727,7 @@ _DeleteSaveData: ; 4d54c
 	ld a, [wMenuCursorY]
 	cp $1
 	ret z
-	farjp EmptyAllSRAMBanks
+	jp EmptyAllSRAMBanks
 
 .Text_ClearAllSaveData: ; 0x4d580
 	; Clear all save data?

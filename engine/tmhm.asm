@@ -3,7 +3,7 @@ CanLearnTMHMMove: ; 11639
 	and a
 	jr nz, .tm_tutor
 
-	farjp GetForgottenMoves
+	jp GetForgottenMoves
 
 .tm_tutor
 	ld a, [wCurPartyGroup]

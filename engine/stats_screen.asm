@@ -769,7 +769,7 @@ StatsScreen_LoadGFX: ; 4dfb6 (13:5fb6)
 	db "Nature/@"
 
 .OrangePage:
-	farjp OrangePage_
+	jp OrangePage_
 
 
 ; Fourth stats page code by TPP Anniversary Crystal 251

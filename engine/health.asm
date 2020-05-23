@@ -87,7 +87,7 @@ HealPartyMon: ; c677
 	ld a, [hl]
 	ld [bc], a
 
-	farjp RestoreAllPP
+	jp RestoreAllPP
 
 ComputeHPBarPixels: ; c699
 ; e = bc * (6 * 8) / de

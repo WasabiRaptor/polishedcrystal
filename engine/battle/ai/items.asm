@@ -379,12 +379,12 @@ AI_Items: ; 39196
 	ld a, [bc]
 	bit CONTEXT_USE_F, a
 	jr nz, .CheckHalfOrQuarterHP
-	farcall AICheckEnemyHalfHP
+	call AICheckEnemyHalfHP
 	jp c, .DontUse
 	ld a, [bc]
 	bit UNKNOWN_USE_F, a
 	jp nz, .CheckQuarterHP
-	farcall AICheckEnemyQuarterHP
+	call AICheckEnemyQuarterHP
 	jp nc, .UseHealItem
 	call Random
 	cp 1 + 50 percent
@@ -392,7 +392,7 @@ AI_Items: ; 39196
 	jp .DontUse
 
 .CheckQuarterHP: ; 38254 (e:4254)
-	farcall AICheckEnemyQuarterHP
+	call AICheckEnemyQuarterHP
 	jp c, .DontUse
 	call Random
 	cp -1 + 20 percent
@@ -400,9 +400,9 @@ AI_Items: ; 39196
 	jr .UseHealItem
 
 .CheckHalfOrQuarterHP: ; 38267 (e:4267)
-	farcall AICheckEnemyHalfHP
+	call AICheckEnemyHalfHP
 	jp c, .DontUse
-	farcall AICheckEnemyQuarterHP
+	call AICheckEnemyQuarterHP
 	jp nc, .UseHealItem
 	call Random
 	cp -1 + 20 percent

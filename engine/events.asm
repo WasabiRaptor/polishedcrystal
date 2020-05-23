@@ -125,7 +125,7 @@ MapEvents: ; 96795
 	ret nz
 	call PlayerEvents
 	call DisableEvents
-	farcall ScriptEvents
+	call ScriptEvents
 	ret
 
 ResetOverworldDelay:
@@ -370,7 +370,7 @@ PlayerEvents: ; 9681f
 
 .ok
 	push af
-	farcall EnableScriptMode
+	call EnableScriptMode
 	pop af
 
 	ld [wScriptRunning], a
@@ -516,8 +516,8 @@ DoMapTrigger: ; 968ec
 	ld hl, wScriptFlags
 	res 3, [hl]
 
-	farcall EnableScriptMode
-	farcall ScriptEvents
+	call EnableScriptMode
+	call ScriptEvents
 
 	ld hl, wScriptFlags
 	bit 3, [hl]
@@ -1082,7 +1082,7 @@ CountStep: ; 96b79
 	jr c, .doscript
 
 .skip_poison
-	farcall DoBikeStep
+	call DoBikeStep
 
 .done
 	xor a

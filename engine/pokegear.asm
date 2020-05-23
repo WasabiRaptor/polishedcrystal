@@ -269,7 +269,7 @@ InitPokegearTilemap: ; 90da8 (24:4da8)
 ; 90e36 (24:4e36)
 
 .Map: ; 90e3f
-	farcall PokegearMap
+	call PokegearMap
 	hlcoord $b, 0
 	ld a, $17
 	ld [hl], a
@@ -1065,7 +1065,7 @@ PokegearPhone_MakePhoneCall: ; 911eb (24:51eb)
 	ret
 
 .no_service
-	farcall Phone_NoSignal
+	call Phone_NoSignal
 	ld hl, .OutOfServiceArea
 	call PrintText
 	ld a, $a
@@ -1093,7 +1093,7 @@ PokegearPhone_FinishPhoneCall: ; 91256 (24:5256)
 	ldh a, [hJoyPressed]
 	and A_BUTTON | B_BUTTON
 	ret z
-	farcall HangUp
+	call HangUp
 	ld a, $a
 	ld [wJumptableIndex], a
 	ld hl, PokegearText_WhomToCall
@@ -1252,7 +1252,7 @@ PokegearPhoneContactSubmenu: ; 91342 (24:5342)
 	ld d, 0
 	add hl, de
 	ld c, [hl]
-	farcall CheckCanDeletePhoneNumber
+	call CheckCanDeletePhoneNumber
 	ld a, c
 	and a
 	jr z, .cant_delete
@@ -1989,7 +1989,7 @@ _TownMap: ; 9191c
 ; 91a04
 
 .InitTilemap: ; 91a04
-	farcall PokegearMap
+	call PokegearMap
 	ld a, [wTownMapCursorLandmark]
 	call PokegearMap_UpdateLandmarkName
 	jp TownMapPals

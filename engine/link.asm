@@ -1119,7 +1119,7 @@ Function28926: ; 28926
 	ld de, wPartyMonOT
 	ld a, PARTY_OT_NAME
 	ld [wNamedObjectTypeBuffer], a
-	farcall LinkMonStatsScreen
+	call LinkMonStatsScreen
 	call Call_LoadTempTileMapToTileMap
 	hlcoord 6, 1
 	lb bc, 6, 1

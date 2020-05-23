@@ -1,16 +1,16 @@
 BlindingFlash:: ; 8c7e1
-	farcall FadeOutPalettes
+	call FadeOutPalettes
 	ld hl, wStatusFlags
 	set 2, [hl] ; Flash
-	farcall UpdateTimeOfDayPal
+	call UpdateTimeOfDayPal
 	ld b, CGB_MAPPALS
 	call GetCGBLayout
 	farcall LoadBlindingFlashPalette
-	farjp FadeInPalettes
+	jp FadeInPalettes
 ; 8c80a
 
 ShakeHeadbuttTree: ; 8c80a
-	farcall ClearSpriteAnims
+	call ClearSpriteAnims
 	ld de, CutGrassGFX
 	ld hl, VTiles1
 	lb bc, BANK(CutGrassGFX), 4
@@ -27,7 +27,7 @@ ShakeHeadbuttTree: ; 8c80a
 	ld [hl], $84
 	ld a, 36 * 4
 	ld [wCurrSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call HideHeadbuttTree
 	ld a, $20
 	ld [wcf64], a
@@ -42,7 +42,7 @@ ShakeHeadbuttTree: ; 8c80a
 	dec [hl]
 	ld a, 36 * 4
 	ld [wCurrSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call DelayFrame
 	jr .loop
 
@@ -51,7 +51,7 @@ ShakeHeadbuttTree: ; 8c80a
 	call ApplyTilemapInVBlank
 	xor a
 	ldh [hBGMapMode], a
-	farcall ClearSpriteAnims
+	call ClearSpriteAnims
 	ld hl, wSprites + 36 * 4
 	ld bc, wSpritesEnd - (wSprites + 36 * 4)
 	xor a
@@ -122,7 +122,7 @@ OWCutAnimation: ; 8c940
 	ret nz
 	ld a, 36 * 4
 	ld [wCurrSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call OWCutJumptable
 	call DelayFrame
 	jr .loop
@@ -336,7 +336,7 @@ FlyFromAnim: ; 8caed
 	jr nz, .exit
 	xor a
 	ld [wCurrSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call FlyFunction_FrameTimer
 	call DelayFrame
 	jr .loop
@@ -374,7 +374,7 @@ FlyToAnim: ; 8cb33
 	jr nz, .exit
 	xor a
 	ld [wCurrSpriteOAMAddr], a
-	farcall DoNextFrameForAllSprites
+	call DoNextFrameForAllSprites
 	call FlyFunction_FrameTimer
 	call DelayFrame
 	jr .loop
@@ -399,7 +399,7 @@ FlyToAnim: ; 8cb33
 	jp ByteFill
 
 FlyFunction_InitGFX: ; 8cb9b (23:4b9b)
-	farcall ClearSpriteAnims
+	call ClearSpriteAnims
 	ld de, CutGrassGFX
 	ld hl, VTiles1 tile $00
 	lb bc, BANK(CutGrassGFX), 4
@@ -412,7 +412,7 @@ FlyFunction_InitGFX: ; 8cb9b (23:4b9b)
 	ld a, [hl]
 	ld [wd265], a
 	ld e, $84
-	farcall FlyFunction_GetMonIcon
+	call FlyFunction_GetMonIcon
 	xor a
 	ld [wJumptableIndex], a
 	ret
