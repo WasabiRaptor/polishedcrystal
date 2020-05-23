@@ -9,6 +9,7 @@ _DepositPKMN: ; e2391 (38:6391)
 	ld [wVramState], a
 	ldh a, [hInMenu]
 	push af
+.skip_push
 	ld a, $1
 	ldh [hInMenu], a
 	xor a
@@ -79,7 +80,10 @@ _DepositPKMN: ; e2391 (38:6391)
 	and A_BUTTON
 	jr nz, .a_button
 	ld a, [hl]
-	and SELECT | START
+	and START
+	jr nz, .start_button
+	ld a, [hl]
+	and SELECT
 	jr nz, .select_button
 	call Withdraw_UpDown
 	and a
@@ -94,7 +98,11 @@ _DepositPKMN: ; e2391 (38:6391)
 	call BillsPC_ApplyPalettes
 	jp ApplyAttrAndTilemapInVBlank
 
-.select_button
+.start_button
+	call BillsPC_GetSelectedPokemonSpecies
+	inc a
+	ret z
+
 	call DepositPokemon
 	ret c
 	xor a
@@ -102,6 +110,15 @@ _DepositPKMN: ; e2391 (38:6391)
 	ld [wBillsPC_CursorPosition], a
 	ld [wBillsPC_ScrollPosition], a
 	ret
+
+.select_button
+	xor a
+	ld [wJumptableIndex], a
+	ld [wBillsPC_CursorPosition], a
+	ld [wBillsPC_ScrollPosition], a
+	pop hl ; go back a point in the stack
+	jp _WithdrawPKMN.skip_push
+
 
 .a_button
 	call BillsPC_GetSelectedPokemonSpecies
@@ -267,6 +284,7 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	ld [wVramState], a
 	ldh a, [hInMenu]
 	push af
+.skip_push
 	ld a, $1
 	ldh [hInMenu], a
 	xor a
@@ -338,7 +356,10 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	and A_BUTTON
 	jr nz, .a_button
 	ld a, [hl]
-	and SELECT | START
+	and START
+	jr nz, .start_button
+	ld a, [hl]
+	and SELECT
 	jr nz, .select_button
 	call Withdraw_UpDown
 	and a
@@ -368,7 +389,11 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	ld [wJumptableIndex], a
 	ret
 
-.select_button
+.start_button
+	call BillsPC_GetSelectedPokemonSpecies
+	inc a
+	ret z
+
 	call TryWithdrawPokemon
 	ret c
 	xor a
@@ -376,6 +401,14 @@ _WithdrawPKMN: ; e2583 (38:6583)
 	ld [wBillsPC_CursorPosition], a
 	ld [wBillsPC_ScrollPosition], a
 	ret
+
+.select_button
+	xor a
+	ld [wJumptableIndex], a
+	ld [wBillsPC_CursorPosition], a
+	ld [wBillsPC_ScrollPosition], a
+	pop hl ; go back a point in the stack
+	jp _DepositPKMN.skip_push
 
 
 .PrepSubmenu: ; e2655 (38:6655)
