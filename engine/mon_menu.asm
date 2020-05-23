@@ -49,8 +49,6 @@ MonMenuLoop: ; 24d59
 	ld hl, w2DMenuFlags1
 	set 6, [hl]
 	call DoMenuJoypadLoop
-	ld de, SFX_READ_TEXT_2
-	call PlaySFX
 	ldh a, [hJoyPressed]
 	bit 0, a ; A
 	jr nz, .select
@@ -59,10 +57,14 @@ MonMenuLoop: ; 24d59
 	jr .loop
 
 .cancel
+	ld de, SFX_READ_TEXT_2
+	call PlaySFX
 	ld a, MONMENU_CANCEL ; CANCEL
 	ret
 
 .select
+	ld de, SFX_ACCEPT
+	call PlaySFX
 	ld a, [wMenuCursorY]
 	dec a
 	ld c, a

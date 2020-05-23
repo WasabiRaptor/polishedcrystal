@@ -348,9 +348,9 @@ Sfx_Accept:
 Sfx_Accept_Ch5:
 	togglesfx
 	dutycycle $2
-	notetype $1, $bb
+	notetype $1, $b1
 	octave 5
-	note G_, 1
+	note F#, 2
 	endchannel
 
 Sfx_Cancel:

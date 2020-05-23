@@ -714,7 +714,7 @@ PartyMenuSelect: ; 0x50457
 	ld a, [hl]
 	ld [wCurPartySpecies], a
 
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_ACCEPT
 	call PlaySFX
 	push bc
 	call SFXDelay2
