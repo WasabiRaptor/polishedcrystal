@@ -112,9 +112,8 @@ UnknownText_0x1c462a::
 	done
 
 UnknownText_0x1c465f::
-	text "Each time you move"
-	line "a Pokémon, data"
-	cont "will be saved. OK?"
+	text "Each time you move a Pokémon,"
+	line "data will be saved. OK?"
 	done
 
 UnknownText_0x1c46b7::

@@ -79,7 +79,7 @@ endc
 	db "Super Repel@"
 	db "Max Repel@"
 	db "Escape Rope@"
-	db "# Doll@"
+	db "PokeDoll@"
 	db "Ability Cap@"
 	db "Leaf Stone@"
 	db "Fire Stone@"

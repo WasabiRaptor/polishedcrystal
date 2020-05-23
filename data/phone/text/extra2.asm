@@ -512,7 +512,7 @@ UnknownText_0x174d86: ; 0x174d86
 	line "catch it when I"
 
 	para "noticed that I was"
-	line "all out of #"
+	line "all out of Poke"
 	cont "Balls."
 
 	para "If you don't check"
@@ -1077,7 +1077,7 @@ UnknownText_0x175c9f: ; 0x175c9f
 	para "I was feeling down"
 	line "about it until he"
 
-	para "shared his #"
+	para "shared his Poke"
 	line "Balls with me."
 
 	para "Hahah, that sure"
