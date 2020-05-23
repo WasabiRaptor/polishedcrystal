@@ -440,11 +440,13 @@ NamingScreenJoypadLoop: ; 11915
 	jr c, .start
 	ld a, [wcf64]
 	and a ; 0?
-	ret nz
+	jr nz, .play_menu_sound1
 	ld a, [wNamingScreenCurrNameLength]
 	dec a ; 1?
 	jr z, .select
-	ret
+.play_menu_sound1
+	ld de, SFX_ACCEPT
+	jp PlaySFX
 
 .start
 	ld hl, wNamingScreenCursorObjectPointer
@@ -458,18 +460,20 @@ NamingScreenJoypadLoop: ; 11915
 	add hl, bc
 	ld [hl], $4
 	call NamingScreen_IsTargetBox
-	ret nz
+	jr nz, .play_menu_sound1
 	inc [hl]
-	ret
+	jr .play_menu_sound1
 
 .b
-	jp NamingScreen_DeleteCharacter
+	call NamingScreen_DeleteCharacter
+	ld de, SFX_CANCEL
+	jp PlaySFX
 
 .end
 	call NamingScreen_StoreEntry
 	ld hl, wJumptableIndex
 	set 7, [hl]
-	ret
+	jr .play_menu_sound1
 
 .select
 	ld hl, wcf64
@@ -478,11 +482,13 @@ NamingScreenJoypadLoop: ; 11915
 	ld [hl], a
 	jr z, .upper
 	ld de, NameInputLower
-	jp NamingScreen_ApplyTextInputMode
+	call NamingScreen_ApplyTextInputMode
+	jr .play_menu_sound1
 
 .upper
 	ld de, NameInputUpper
-	jp NamingScreen_ApplyTextInputMode
+	call NamingScreen_ApplyTextInputMode
+	jr .play_menu_sound1
 
 .GetCursorPosition: ; 11a0b (4:5a0b)
 	ld hl, wNamingScreenCursorObjectPointer
@@ -600,11 +606,12 @@ NamingScreen_AnimateCursor: ; 11a3b (4:5a3b)
 	cp $8
 	jr nc, .asm_11ab4
 	inc [hl]
-	ret
+	jr .play_menu_sound
 
 .asm_11ab4
 	ld [hl], $0
-	ret
+	jr .play_menu_sound
+
 
 .asm_11ab7
 	cp $3
@@ -617,7 +624,7 @@ NamingScreen_AnimateCursor: ; 11a3b (4:5a3b)
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld [hl], a
-	ret
+	jr .play_menu_sound
 
 .left
 	call NamingScreen_GetCursorPosition
@@ -629,11 +636,11 @@ NamingScreen_AnimateCursor: ; 11a3b (4:5a3b)
 	and a
 	jr z, .asm_11ad5
 	dec [hl]
-	ret
+	jr .play_menu_sound
 
 .asm_11ad5
 	ld [hl], $8
-	ret
+	jr .play_menu_sound
 
 .asm_11ad8
 	cp $1
@@ -648,7 +655,7 @@ NamingScreen_AnimateCursor: ; 11a3b (4:5a3b)
 	ld hl, SPRITEANIMSTRUCT_0C
 	add hl, bc
 	ld [hl], a
-	ret
+	jr .play_menu_sound
 
 .down
 	ld hl, SPRITEANIMSTRUCT_0D
@@ -659,17 +666,17 @@ NamingScreen_AnimateCursor: ; 11a3b (4:5a3b)
 	cp $5
 	jr nc, .asm_11aff
 	inc [hl]
-	ret
+	jr .play_menu_sound
 
 .asm_11af9
 	cp $4
 	jr nc, .asm_11aff
 	inc [hl]
-	ret
+	jr .play_menu_sound
 
 .asm_11aff
 	ld [hl], $0
-	ret
+	jr .play_menu_sound
 
 .up
 	ld hl, SPRITEANIMSTRUCT_0D
@@ -678,14 +685,19 @@ NamingScreen_AnimateCursor: ; 11a3b (4:5a3b)
 	and a
 	jr z, .asm_11b0c
 	dec [hl]
-	ret
+	jr .play_menu_sound
 
 .asm_11b0c
 	ld [hl], $4
 	call NamingScreen_IsTargetBox
-	ret nz
+	jr nz, .play_menu_sound
 	inc [hl]
-	ret
+;fallthrough
+.play_menu_sound
+	call IsSFXPlaying
+	ret nc
+	ld de, SFX_SCROLL
+	jp PlaySFX
 
 NamingScreen_TryAddCharacter: ; 11b14 (4:5b14)
 MailComposition_TryAddCharacter: ; 11b17 (4:5b17)
