@@ -7,6 +7,7 @@ para   EQUS "db \"<PARA>\","  ; Start a new paragraph.
 cont   EQUS "db \"<CONT>\","  ; Scroll to the next line.
 done   EQUS "db \"<DONE>\""   ; End a text box.
 prompt EQUS "db \"<PROMPT>\"" ; Prompt the player to end a text box (initiating some other event).
+textdelay EQUS "db \"<DELAY>\"," ; delay for the number of frames of the byte after this character
 
 text_from_ram: macro
 	db "<RAM>"

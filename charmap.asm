@@ -34,8 +34,8 @@
 	; unused: $24
 	charmap "<NEXT>",   $25
 	charmap "<NEXT1>",   $26
-
-	; unused: $27 - $2b
+	charmap "<DELAY>",   $27
+	; unused: $28 - $2b
 
 	charmap "le",       $2c
 	charmap "ng",       $2d

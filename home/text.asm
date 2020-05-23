@@ -280,6 +280,7 @@ endm
 	dict "<TARGET>", PlaceMoveTargetsName
 	dict "<USER>",   PlaceMoveUsersName
 	dict "<ENEMY>",  PlaceEnemysName
+	dict "<DELAY>",  ArtificialTextDelay
 	dict "Poké",     PlacePoke
 	dict "le",       PlaceLe
 	dict "ng",       PlaceNg
@@ -400,6 +401,13 @@ PlaceCharacter::
 	pop af
 	pop de
 	farcall PrintLetterDelay
+	jp NextChar
+
+ArtificialTextDelay::
+	inc de
+	ld a, [de]
+	ld c, a
+	call DelayFrames
 	jp NextChar
 
 OtherVariableWidthText::

@@ -307,8 +307,33 @@ NeighborScript:
 
 .NeighborText:
 
-	text "▶Pet    Pet    Pet    Pet    Pet"
-	line "   Pet    Pet    Pet    Pet    Pet"
+	text ". "
+	textdelay 10
+	db ". "
+	textdelay 10
+	db ". "
+	textdelay 10
+	db ". "
+	textdelay 20
+	db ".  "
+	textdelay 20
+	db ".  "
+	textdelay 20
+	db ".  "
+	textdelay 30
+	db ".   "
+	textdelay 30
+	db ".   "
+	textdelay 30
+	db ".   "
+	textdelay 40
+	db ".    "
+	textdelay 40
+	db ".    "
+	textdelay 40
+	db ".    "
+	textdelay 50
+	db "meme"
 	done
 
 .NeighborNameText:
