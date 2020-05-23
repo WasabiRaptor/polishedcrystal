@@ -57,7 +57,7 @@ MonMenuLoop: ; 24d59
 	jr .loop
 
 .cancel
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_CANCEL
 	call PlaySFX
 	ld a, MONMENU_CANCEL ; CANCEL
 	ret

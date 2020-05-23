@@ -446,10 +446,13 @@ MenuClickSound::
 	pop af
 	ret
 
-
 PlayClickSFX::
 	push de
 	ld de, SFX_ACCEPT
+	bit A_BUTTON_F, a
+	jr nz, .ok
+	ld de, SFX_CANCEL
+.ok:
 	call PlaySFX
 	pop de
 	ret

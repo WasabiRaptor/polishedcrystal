@@ -723,7 +723,7 @@ PartyMenuSelect: ; 0x50457
 	ret
 
 .exitmenu
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_CANCEL
 	call PlaySFX
 	push bc
 	call SFXDelay2

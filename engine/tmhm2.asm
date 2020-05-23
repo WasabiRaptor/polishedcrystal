@@ -120,7 +120,7 @@ TMHM_GetCurrentTMHM: ; 2c98a (b:498a)
 	ret
 
 TMHM_ExitPack: ; 2c9a5 (b:49a5)
-	call TMHM_PlaySFX_ReadText2
+	call TMHM_PlaySFX_Cancel
 _TMHM_ExitPack: ; 2c9a8 (b:49a8)
 	ld a, $2
 	ld [wMenuJoypad], a
@@ -294,6 +294,13 @@ Tutorial_TMHMPocket: ; 2caca (b:4aca)
 TMHM_PlaySFX_Accept:
 	push de
 	ld de, SFX_ACCEPT
+	call PlaySFX
+	pop de
+	ret
+
+TMHM_PlaySFX_Cancel:
+	push de
+	ld de, SFX_CANCEL
 	call PlaySFX
 	pop de
 	ret
