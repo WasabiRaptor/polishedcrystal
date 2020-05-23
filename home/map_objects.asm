@@ -173,69 +173,37 @@ CheckObjectVisibility:: ; 18de
 ; 18f5
 
 CheckObjectTime:: ; 18f5
-	ld hl, MAPOBJECT_HOUR
+	ld hl, MAPOBJECT_CYCLE_START_HOUR
 	add hl, bc
 	ld a, [hl]
-	cp -1
-	jr nz, .check_hour
-	ld hl, MAPOBJECT_TIMEOFDAY
+	and MAPOBJECT_HOUR_MASK
+	ld d, a
+
+	ld hl, MAPOBJECT_CYCLE_END_HOUR
 	add hl, bc
 	ld a, [hl]
-	cp -1
-	jr z, .timeofday_always
-	ld hl, .TimeOfDayValues_191e
-	ld a, [wTimeOfDay]
-	add l
-	ld l, a
-	jr nc, .ok
-	inc h
+	and MAPOBJECT_HOUR_MASK
+	ld e, a
 
-.ok
-	ld a, [hl]
-	ld hl, MAPOBJECT_TIMEOFDAY
-	add hl, bc
-	and [hl]
-	jr nz, .timeofday_always
-	scf
-	ret
-
-.timeofday_always
-	and a
-	ret
-
-.TimeOfDayValues_191e:
-	db 1 << DAWN ; 1
-	db 1 << MIDDAY  ; 2
-	db 1 << MIDNIGHT ; 4
-
-.check_hour
-	ld hl, MAPOBJECT_HOUR
-	add hl, bc
-	ld d, [hl]
-	ld hl, MAPOBJECT_TIMEOFDAY
-	add hl, bc
-	ld e, [hl]
-	ld hl, hHours
-	ld a, d
+	ld a, [wHoursRemaining]
+	bit MAPOBJECT_DAILY_F, e
+	jr z, .skip1
+	ld a, [hHours]
+.skip1
 	cp e
-	jr z, .yes
-	jr c, .check_timeofday
-	ld a, [hl]
-	cp d
-	jr nc, .yes
-	cp e
-	jr c, .yes
-	jr z, .yes
-	jr .no
+	jr c, .no ; if the hours remaining is less than the end hour, then the object shouldn't be there, c is never set for 0 so 0 is always exist
 
-.check_timeofday
-	ld a, e
-	cp [hl]
-	jr c, .no
-	ld a, [hl]
-	cp d
-	jr nc, .yes
-	jr .no
+	ld a, [wHoursRemaining]
+
+	bit MAPOBJECT_DAILY_F, e
+	jr z, .skip2
+	ld a, [hHours]
+.skip2
+
+	ld e, a ; put hours remaining in e
+	ld a, d ; put start hour in a
+	cp e
+	jr c, .no ; if the start hour is less than the hours remaining, don't spawn the object
 
 .yes
 	and a

@@ -259,6 +259,9 @@ START_ITEM_TRIGGER_BALANCE EQU 2300
 	ld a, %10000001 ;follower enabled, pokemon slot 1 for default
 	ld [wFollowerStatus], a
 
+	ld a, NUM_CYCLE_HOURS
+	ld [wHoursRemaining], a
+
 	jp ResetGameTime
 ; 5ca1
 

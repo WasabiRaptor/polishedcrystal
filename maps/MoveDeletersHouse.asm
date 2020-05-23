@@ -13,8 +13,8 @@ MoveDeletersHouse_MapScriptHeader:
 	bg_event  7,  1, SIGNPOST_JUMPSTD, difficultbookshelf
 
 	db 2 ; object events
-	object_event  2,  3, SPRITE_POKEMANIAC, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MoveDeleterScript, -1
-	object_event  5,  3, SPRITE_COSPLAYER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, -1, -1, 0, PERSONTYPE_SCRIPT, 0, MoveReminderScript, -1
+	object_event  2,  3, SPRITE_POKEMANIAC, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_SCRIPT, 0, MoveDeleterScript, -1
+	object_event  5,  3, SPRITE_COSPLAYER, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_SCRIPT, 0, MoveReminderScript, -1
 
 MoveDeleterScript:
 	faceplayer

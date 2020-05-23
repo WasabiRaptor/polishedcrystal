@@ -57,6 +57,7 @@ PERSON_EVENT_NARG = _NARG
 	db \8 ; clock_daytime
 	shift
 	dn \8, \9 ; color, persontype
+	db 0 ; color 2
 	shift
 if \8 == PERSONTYPE_COMMAND
 	db \9_command ; command id

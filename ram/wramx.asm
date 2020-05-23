@@ -1017,6 +1017,7 @@ wYanmaMapNumber:: ds 1
 wVermilionGymTrashCan1:: ds 1
 wVermilionGymTrashCan2:: ds 1
 
+wHoursRemaining:: ds 1
 wCycleProgress:: ds 1
 ; 0 Nothing
 ; 1 Something is stirring...
