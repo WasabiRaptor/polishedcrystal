@@ -403,7 +403,7 @@ LoadTheIcon:
 	ld c, 4
 	push bc ;4
 	push de ;5
-	call Request2bpp
+	call Get2bpp
 
 	pop de ;4
 	ld hl, 12 tiles
@@ -419,7 +419,7 @@ LoadTheIcon:
 	pop de;2
 	push bc ;3
 	push de ;4
-	call Request2bpp
+	call Get2bpp
 
 	pop de ;3
 	ld hl, 12 tiles
@@ -433,7 +433,7 @@ LoadTheIcon:
 	ld de, 8 tiles
 	add hl, de
 	pop de ;1
-	call Request2bpp
+	call Get2bpp
 
 	pop hl;0
 	ret

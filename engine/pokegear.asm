@@ -104,19 +104,20 @@ Pokegear_LoadGFX: ; 90c4e
 	ld a, BANK(PokegearSpritesGFX)
 	call Decompress
 
-	ld a, [wMapGroup]
-	ld b, a
-	ld a, [wMapNumber]
-	ld c, a
-	call GetWorldMapLocation
+	;ld a, [wMapGroup]
+	;ld b, a
+	;ld a, [wMapNumber]
+	;ld c, a
+	;call GetWorldMapLocation
 	;cp FAST_SHIP
 	;jr z, .ssaqua
 	;cp SINJOH_RUINS
 	;jr z, .sinjoh
 	;cp MYSTRI_STAGE
 	;jr z, .sinjoh
-	ld a, 0
-	farjp GetPlayerIcon
+	ld a, $10
+	farcall GetPlayerIcon
+	ret
 
 .ssaqua
 	ld hl, FastShipGFX
@@ -773,7 +774,7 @@ CheckSkipFarawayIsland:
 
 PokegearMap_InitPlayerIcon: ; 9106a
 	push af
-	xor a
+	ld a, $10
 	farcall GetPlayerIcon
 
 ; Animation/palette
@@ -782,7 +783,7 @@ PokegearMap_InitPlayerIcon: ; 9106a
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
-	ld [hl], 0
+	ld [hl], $10
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
 	add hl, bc
 	ld [hl], SPRITE_ANIM_SEQ_NULL
@@ -2731,6 +2732,7 @@ _Area: ; 91d11
 	;jr z, .Sinjoh
 	;cp MYSTRI_STAGE
 	;jr z, .Sinjoh
+	ld a, $10
 	farjp GetPlayerIcon
 
 .FastShip:
@@ -2894,7 +2896,7 @@ TownMapMon: ; 91f7b
 TownMapPlayerIcon: ; 91fa6
 ; Draw the player icon at town map location in a
 	push af
-	xor a
+	ld a, $10
 	farcall GetPlayerIcon
 
 ; Animation/palette
@@ -2903,7 +2905,7 @@ TownMapPlayerIcon: ; 91fa6
 	call _InitSpriteAnimStruct
 	ld hl, SPRITEANIMSTRUCT_TILE_ID
 	add hl, bc
-	ld [hl], 0
+	ld [hl], $10
 	ld hl, SPRITEANIMSTRUCT_ANIM_SEQ_ID
 	add hl, bc
 	ld [hl], SPRITE_ANIM_SEQ_NULL
