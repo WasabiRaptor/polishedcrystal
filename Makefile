@@ -105,8 +105,8 @@ brass: $(NAME)-$(VERSION).gbc
 
 clean:
 	$(RM) $(brass_obj) $(wildcard $(BUILD_DIR)$(NAME)-*.gbc) $(wildcard $(BUILD_DIR)$(NAME)-*.map) $(wildcard $(BUILD_DIR)$(NAME)-*.sym) $(wildcard $(DEBUG_BUILD_DIR)$(NAME)-*.gbc) $(wildcard $(DEBUG_BUILD_DIR)$(NAME)-*.map) $(wildcard $(DEBUG_BUILD_DIR)$(NAME)-*.sym)
-	rm -r $(BUILD_DIR)
-	rm -r $(DEBUG_BUILD_DIR)
+	rm -rf $(BUILD_DIR)
+	rm -rf $(DEBUG_BUILD_DIR)
 	$(MAKE) clean -C tools/
 
 debug: brass
