@@ -408,7 +408,7 @@ _2DMenuInterpretJoypad: ; 24270
 .play_menu_sound
 	call IsSFXPlaying
 	jr nc, .no_sound
-	ld de, SFX_TEXTSCROLL
+	ld de, SFX_SCROLL
 	call PlaySFX
 .no_sound
 	xor a

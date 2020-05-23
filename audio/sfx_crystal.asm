@@ -313,12 +313,54 @@ Sfx_Puddle_Ch5:
 	endchannel
 
 Sfx_TextScroll:
-	musicheader 1, 5, Sfx_TextScroll_Ch5
+	musicheader 1, 5, Sfx_TextScroll2_Ch5
 
-Sfx_TextScroll_Ch5:
+Sfx_TextScroll_Ch5: ; Explorers-style
 	togglesfx
 	dutycycle $2
 	notetype $1, $b1
 	octave 4
 	note D_, 1
+	endchannel
+
+Sfx_TextScroll2_Ch5: ; RT-Style
+	togglesfx
+	dutycycle $2
+	notetype $1, $b1
+	octave 3
+	note A_, 1
+	endchannel
+
+Sfx_Scroll:
+	musicheader 1, 5, Sfx_Scroll_Ch5
+
+Sfx_Scroll_Ch5:
+	togglesfx
+	dutycycle $2
+	notetype $1, $b1
+	octave 5
+	note C_, 2
+	endchannel
+
+Sfx_Accept:
+	musicheader 1, 5, Sfx_Accept_Ch5
+
+Sfx_Accept_Ch5:
+	togglesfx
+	dutycycle $2
+	notetype $1, $bb
+	octave 5
+	note G_, 1
+	endchannel
+
+Sfx_Cancel:
+	musicheader 1, 5, Sfx_Cancel_Ch5
+
+Sfx_Cancel_Ch5:
+	togglesfx
+	dutycycle $2
+	notetype $1, $bb
+	octave 3
+	note A#, 1
+	note G_, 1
 	endchannel
