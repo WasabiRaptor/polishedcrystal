@@ -312,25 +312,6 @@ Sfx_Puddle_Ch5:
 	soundinput $8
 	endchannel
 
-Sfx_TextScroll:
-	musicheader 1, 5, Sfx_TextScroll2_Ch5
-
-Sfx_TextScroll_Ch5: ; Explorers-style
-	togglesfx
-	dutycycle $2
-	notetype $1, $b1
-	octave 4
-	note D_, 1
-	endchannel
-
-Sfx_TextScroll2_Ch5: ; RT-Style
-	togglesfx
-	dutycycle $2
-	notetype $1, $b1
-	octave 3
-	note A_, 1
-	endchannel
-
 Sfx_Scroll:
 	musicheader 1, 5, Sfx_Scroll_Ch5
 
@@ -363,4 +344,34 @@ Sfx_Cancel_Ch5:
 	octave 2
 	note A#, 2
 	note G_, 2
+	endchannel
+
+Sfx_DefaultVoice:
+	musicheader 1, 5, Sfx_DefaultVoice_Ch5
+Sfx_DefaultVoice_Ch5: ; RT-Style
+	togglesfx
+	dutycycle $2
+	notetype $1, $b1
+	octave 3
+	note A_, 1
+	endchannel
+
+Sfx_HighVoice:
+	musicheader 1, 5, Sfx_HighVoice_Ch5
+Sfx_HighVoice_Ch5: ; Explorers-style
+	togglesfx
+	dutycycle $2
+	notetype $1, $b1
+	octave 4
+	note D_, 1
+	endchannel
+
+Sfx_LowVoice:
+	musicheader 1, 5, Sfx_LowVoice_Ch5
+Sfx_LowVoice_Ch5: ; Explorers-style
+	togglesfx
+	dutycycle $2
+	notetype $1, $b1
+	octave 2
+	note A_, 1
 	endchannel

@@ -5330,7 +5330,7 @@ PrintLetterDelay:: ; 313d
 	jr z, .no_sound
 	call IsSFXPlaying
 	jr nc, .no_sound
-	ld de, SFX_TEXTSCROLL
+	ld de, SFX_DEFAULT_VOICE
 	call PlaySFX
 .no_sound
 	pop bc

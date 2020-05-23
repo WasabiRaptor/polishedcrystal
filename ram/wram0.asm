@@ -1113,7 +1113,7 @@ wOptions1::
 
 wSaveFileExists:: ds 1
 
-wTextBoxFrame::
+wTextBoxOptions::
 ; bits 0-3: textbox frame 0-8
 	ds 1
 

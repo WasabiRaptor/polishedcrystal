@@ -134,7 +134,8 @@ LoadFrame:: ; fb4cc
 	jp GetMaybeOpaque1bpp
 ; fb4f2
 GetFrame:
-	ld a, [wTextBoxFrame]
+	ld a, [wTextBoxOptions]
+	and TEXTBOX_FRAME_MASK
 	ld bc, TILES_PER_FRAME * LEN_1BPP_TILE
 	ld hl, Frames
 	rst AddNTimes

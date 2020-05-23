@@ -211,7 +211,9 @@
 
 	const SFX_PUDDLE                      ; cf
 
-	const SFX_TEXTSCROLL
 	const SFX_SCROLL
 	const SFX_ACCEPT
 	const SFX_CANCEL
+	const SFX_DEFAULT_VOICE
+	const SFX_HIGH_VOICE
+	const SFX_LOW_VOICE

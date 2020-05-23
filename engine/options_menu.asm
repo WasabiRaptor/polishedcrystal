@@ -355,7 +355,7 @@ Options_RunningShoes: ; e44c1
 
 NUM_TEXTBOX_FRAMES EQU 14
 Options_Frame: ; e44fa
-	ld hl, wTextBoxFrame
+	ld hl, wTextBoxOptions
 	ldh a, [hJoyPressed]
 	bit D_LEFT_F, a
 	jr nz, .LeftPressed
@@ -366,6 +366,7 @@ Options_Frame: ; e44fa
 
 .RightPressed:
 	ld a, [hl]
+	and TEXTBOX_FRAME_MASK
 	inc a
 	cp NUM_TEXTBOX_FRAMES
 	jr nz, .Save
@@ -374,15 +375,21 @@ Options_Frame: ; e44fa
 
 .LeftPressed:
 	ld a, [hl]
+	and TEXTBOX_FRAME_MASK
 	dec a
 	cp $ff
 	jr nz, .Save
 	ld a, NUM_TEXTBOX_FRAMES -1
 
 .Save:
+	ld b, a
+	ld a, [hl]
+	and ~TEXTBOX_FRAME_MASK
+	or b
 	ld [hl], a
 UpdateFrame: ; e4512
-	ld a, [wTextBoxFrame]
+	ld a, [wTextBoxOptions]
+	and TEXTBOX_FRAME_MASK
 	hlcoord 16, 11 ; where on the screen the number is drawn
 	add "A"
 	ld [hl], a

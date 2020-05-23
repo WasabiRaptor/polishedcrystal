@@ -215,7 +215,9 @@ SFX:
 	dba Sfx_Puddle
 
 ; Brass adds the following SFX:
-	dba Sfx_TextScroll
 	dba Sfx_Scroll
 	dba Sfx_Accept
 	dba Sfx_Cancel
+	dba Sfx_DefaultVoice
+	dba Sfx_HighVoice
+	dba Sfx_LowVoice
