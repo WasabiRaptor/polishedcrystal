@@ -1414,7 +1414,7 @@ MoveScreenLoop:
 	ld a, [wMoveScreenMode]
 	and a ; cp MOVESCREEN_NORMAL
 	jr z, .swap_move
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_ACCEPT
 	call PlaySFX
 	ld a, [wMoveScreenCursor]
 	ld c, a

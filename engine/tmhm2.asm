@@ -90,7 +90,7 @@ TMHM_ShowTMMoveDescription: ; 2c946 (b:4946)
 	jp TMHM_JoypadLoop
 
 TMHM_ChooseTMorHM: ; 2c974 (b:4974)
-	call TMHM_PlaySFX_ReadText2
+	call TMHM_PlaySFX_Accept
 	call CountTMsHMs ; This stores the count to wd265.
 	ld a, [wMenuCursorY]
 	dec a
@@ -291,13 +291,19 @@ Tutorial_TMHMPocket: ; 2caca (b:4aca)
 	pop de
 	ret
 
-TMHM_PlaySFX_ReadText2: ; 2cad6 (b:4ad6)
+TMHM_PlaySFX_Accept:
+	push de
+	ld de, SFX_ACCEPT
+	call PlaySFX
+	pop de
+	ret
+
+TMHM_PlaySFX_ReadText2:
 	push de
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
 	pop de
 	ret
-; 2cadf (b:4adf)
 
 CountTMsHMs: ; 2cb2a (b:4b2a)
 	ld hl, wTMsHMs

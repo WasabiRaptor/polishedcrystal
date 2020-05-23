@@ -83,7 +83,7 @@ KeyItems_ShowDescription: ; 2c946 (b:4946)
 	jp KeyItems_JoypadLoop
 
 KeyItems_ChooseKeyItem: ; 2c974 (b:4974)
-	call KeyItems_PlaySFX_ReadText2
+	call KeyItems_PlaySFX_Accept
 	call CountKeyItems ; This stores the count to wd265.
 	ld a, [wMenuCursorY]
 	dec a
@@ -290,13 +290,19 @@ KeyItems_GetCurrentPocketPosition: ; 2cab5 (b:4ab5)
 	dec c
 	ret
 
-KeyItems_PlaySFX_ReadText2: ; 2cad6 (b:4ad6)
+KeyItems_PlaySFX_Accept: ; 2cad6 (b:4ad6)
+	push de
+	ld de, SFX_ACCEPT
+	call PlaySFX
+	pop de
+	ret
+	
+KeyItems_PlaySFX_ReadText2:
 	push de
 	ld de, SFX_READ_TEXT_2
 	call PlaySFX
 	pop de
 	ret
-; 2cadf (b:4adf)
 
 CountKeyItems: ; 2cb2a (b:4b2a)
 	ld hl, wKeyItems

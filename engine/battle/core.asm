@@ -5601,7 +5601,7 @@ BattleMenuPKMN_Loop:
 	ld hl, w2DMenuFlags1
 	set 6, [hl]
 	call DoMenuJoypadLoop
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_READ_TEXT_2 ; TODO: Come back and fix this
 	call PlaySFX
 	ldh a, [hJoyPressed]
 	bit B_BUTTON_F, a

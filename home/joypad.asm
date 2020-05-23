@@ -388,7 +388,7 @@ ButtonSound:: ; aaf
 	jr nz, .link
 	call .wait_input
 	push de
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_READ_TEXT_2 ; TODO: Does this need to be fixed?
 	call PlaySFX
 	pop de
 	ret
