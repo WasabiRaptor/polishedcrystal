@@ -114,7 +114,7 @@ KeyItems_GetCurrentKeyItem: ; 2c98a (b:498a)
 	ret
 
 KeyItems_ExitPack: ; 2c9a5 (b:49a5)
-	call KeyItems_PlaySFX_ReadText2
+	call KeyItems_PlaySFX_Cancel
 _KeyItems_ExitPack: ; 2c9a8 (b:49a8)
 	ld a, $2
 	ld [wMenuJoypad], a
@@ -297,6 +297,13 @@ KeyItems_PlaySFX_Accept: ; 2cad6 (b:4ad6)
 	pop de
 	ret
 	
+KeyItems_PlaySFX_Cancel: ; 2cad6 (b:4ad6)
+	push de
+	ld de, SFX_CANCEL
+	call PlaySFX
+	pop de
+	ret
+
 KeyItems_PlaySFX_ReadText2:
 	push de
 	ld de, SFX_READ_TEXT_2

@@ -1453,7 +1453,7 @@ MoveScreenLoop:
 	and a
 	ret
 .pressed_b
-	ld de, SFX_READ_TEXT_2
+	ld de, SFX_CANCEL
 	call PlaySFX
 	ld a, [wMoveSwapBuffer]
 	and a
