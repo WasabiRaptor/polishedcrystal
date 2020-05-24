@@ -1,18 +1,5 @@
 ; Functions handling map objects.
 
-GetSpritePalette:: ; 17ff
-	push hl
-	push de
-	push bc
-	ld c, a
-
-	farcall _GetSpritePalette
-
-	ld a, c
-	pop bc
-	pop de
-	pop hl
-	ret
 ; 180e
 
 GetSpriteVTile:: ; 180e
@@ -191,7 +178,7 @@ CheckObjectTime:: ; 18f5
 	ld a, [hHours]
 .skip1
 	cp e
-	jr c, .no ; if the hours remaining is less than the end hour, then the object shouldn't be there, c is never set for 0 so 0 is always exist
+	jr c, .no ; if the hours remaining is less than the end hour, then the object shouldn't be there, c is never set for 0 cp 0 so it is always exist
 
 	ld a, [wHoursRemaining]
 
@@ -203,7 +190,7 @@ CheckObjectTime:: ; 18f5
 	ld e, a ; put hours remaining in e
 	ld a, d ; put start hour in a
 	cp e
-	jr c, .no ; if the start hour is less than the hours remaining, don't spawn the object
+	jr c, .no ; if the start hour is less than the hours remaining, don't spawn the object so as long as the hour is greater than the number of hours in the cycle, its always exist
 
 .yes
 	and a

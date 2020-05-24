@@ -166,7 +166,7 @@ PlayerObjectTemplate: ; 8071
 ; Shorter than the actual amount copied by two bytes.
 ; Said bytes seem to be unused, but the game freezes when you first spawn
 ; in your room if this is not loaded.
-	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, PAL_OW_PLAYER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, EVENT_PLAYER_EXISTS
+	object_event -4, -4, SPRITE_PLAYER, SPRITEMOVEDATA_FOLLOWING, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_PLAYER, PAL_NPC_RED, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, EVENT_PLAYER_EXISTS
 
 SpawnFollower::
 	eventflagcheck EVENT_FOLLOWER_EXISTS
@@ -245,25 +245,21 @@ StartFollowerFollowing::
 	jr nz, .stop_follow
 	bit PLAYER_CONTROL_FOLLOWER_F, a
 	jr nz, .follower_is_lead
-	ld a, PLAYER
-	ld [wObjectFollow_Leader], a
-	ld a, FOLLOWER
-	ld [wObjectFollow_Follower], a
+	ld b, PLAYER
+	ld c, FOLLOWER
 	jr .got_lead
 
 .follower_is_lead
-	ld a, FOLLOWER
-	ld [wObjectFollow_Leader], a
-	ld a, PLAYER
-	ld [wObjectFollow_Follower], a
+	ld b, FOLLOWER
+	ld c, PLAYER
 .got_lead
-	jp QueueFollowerFirstStep
+	farjp StartFollow
 
 .stop_follow
 	farjp StopFollow
 
 FollowerObjectTemplate:
-	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, PAL_OW_FOLLOWER, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, EVENT_FOLLOWER_EXISTS
+	object_event -4, -4, SPRITE_FOLLOWER, SPRITEMOVEDATA_FOLLOWING, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_FOLLOWER, PAL_NPC_BLUE, PERSONTYPE_SCRIPT, 0, FollowerInteractScript, EVENT_FOLLOWER_EXISTS
 
 CopyDECoordsToMapObject:: ; 807e
 	push de
@@ -455,6 +451,10 @@ CopyMapObjectToObjectStruct: ; 8116
 	ldh a, [hMapObjectIndexBuffer]
 	ld [wTempObjectCopyMapObjectIndex], a
 
+	ld hl, OBJECT_MAP_OBJECT_INDEX
+	add hl, de
+	ld [hl], a
+
 	ld hl, MAPOBJECT_SPRITE
 	add hl, bc
 	ld a, [hl]
@@ -463,20 +463,13 @@ CopyMapObjectToObjectStruct: ; 8116
 	call GetSpriteVTile
 	ld [wTempObjectCopySpriteVTile], a
 
-	ld a, [hl]
-	call GetSpritePalette
-	ld [wTempObjectCopyPalette], a
-
 	ld hl, MAPOBJECT_COLOR
 	add hl, bc
 	ld a, [hl]
 	and $f0
-	jr z, .skip_color_override
 	swap a
-	and $7 ; OAM_PALETTE
 	ld [wTempObjectCopyPalette], a
 
-.skip_color_override
 	ld hl, MAPOBJECT_MOVEMENT
 	add hl, bc
 	ld a, [hl]
@@ -760,9 +753,9 @@ CopyTempObjectToObjectStruct: ; 8286
 	ld a, [wPlayerStairsType]
 	and %1
 	jr z, .player_not_on_stairs
-	ld a, [wPlayerGoingUpStairs]
-	and a
-	jr z, .player_not_on_stairs
+	;ld a, [wPlayerGoingUpStairs]
+	;and a
+	;jr z, .player_not_on_stairs
 	dec a
 	ld e, 8
 	jr z, .goingdown
@@ -817,7 +810,8 @@ TrainerWalkToPlayer: ; 831e
 	call AppendToMovementBuffer
 	ldh a, [hLastTalked]
 	ld b, a
-	ld c, PLAYER
+	ld a, [wCenteredObject]
+	ld c, a
 	ld d, 1
 	call .GetPathToPlayer
 	call DecrementMovementBufferCount

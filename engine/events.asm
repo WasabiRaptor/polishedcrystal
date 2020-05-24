@@ -646,7 +646,7 @@ TryObjectEvent: ; 969b5
 	dw .pokeball ; PERSONTYPE_POKEBALL
 	dw .trainer  ; PERSONTYPE_TRAINER
 	dw .trainer  ; PERSONTYPE_GENERICTRAINER
-	dw .pokemon  ; PERSONTYPE_POKEMON
+	dw .script   ; PERSONTYPE_POKEMON
 	dw .command  ; PERSONTYPE_COMMAND
 
 .script:
@@ -677,27 +677,6 @@ TryObjectEvent: ; 969b5
 	ld a, PLAYEREVENT_TALKTOTRAINER
 	scf
 	ret
-
-.pokemon:
-	ld hl, MAPOBJECT_RANGE
-	add hl, bc
-	ld a, [hli]
-	ld [wScriptVar], a
-	ld de, wTemporaryScriptBuffer
-	ld a, showcrytext_command
-	ld [de], a
-	inc de
-rept 2
-	ld a, [hli]
-	ld [de], a
-	inc de
-endr
-	xor a
-	ld [de], a
-	inc de
-	ld a, end_command
-	ld [de], a
-	jr .callTemporaryScriptBuffer
 
 .command:
 	ld hl, MAPOBJECT_RANGE

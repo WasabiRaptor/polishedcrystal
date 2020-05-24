@@ -115,14 +115,14 @@ HealMachineAnim: ; 12324
 ; 123db
 
 .PC_ElmsLab_OAM: ; 123dc
-	dsprite   4, 0,   4, 2, $7c, PAL_OW_TREE
-	dsprite   4, 0,   4, 6, $7c, PAL_OW_TREE
-	dsprite   4, 6,   4, 0, $7d, PAL_OW_TREE
-	dsprite   4, 6,   5, 0, $7d, PAL_OW_TREE | X_FLIP
-	dsprite   5, 3,   4, 0, $7d, PAL_OW_TREE
-	dsprite   5, 3,   5, 0, $7d, PAL_OW_TREE | X_FLIP
-	dsprite   6, 0,   4, 0, $7d, PAL_OW_TREE
-	dsprite   6, 0,   5, 0, $7d, PAL_OW_TREE | X_FLIP
+	dsprite   4, 0,   4, 2, $7c, OW_GRASS_OR_PORTRAIT
+	dsprite   4, 0,   4, 6, $7c, OW_GRASS_OR_PORTRAIT
+	dsprite   4, 6,   4, 0, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   4, 6,   5, 0, $7d, OW_GRASS_OR_PORTRAIT | X_FLIP
+	dsprite   5, 3,   4, 0, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   5, 3,   5, 0, $7d, OW_GRASS_OR_PORTRAIT | X_FLIP
+	dsprite   6, 0,   4, 0, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   6, 0,   5, 0, $7d, OW_GRASS_OR_PORTRAIT | X_FLIP
 ; 123fc
 
 .HealMachineGFX: ; 123fc
@@ -130,17 +130,17 @@ INCBIN "gfx/overworld/heal_machine.2bpp"
 ; 1241c
 
 .HOF_OAM: ; 1241c
-	dsprite   7, 4,  10, 1, $7d, PAL_OW_TREE
-	dsprite   7, 4,  10, 6, $7d, PAL_OW_TREE
-	dsprite   7, 3,   9, 5, $7d, PAL_OW_TREE
-	dsprite   7, 3,  11, 2, $7d, PAL_OW_TREE
-	dsprite   7, 1,   9, 1, $7d, PAL_OW_TREE
-	dsprite   7, 1,  11, 5, $7d, PAL_OW_TREE
+	dsprite   7, 4,  10, 1, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   7, 4,  10, 6, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   7, 3,   9, 5, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   7, 3,  11, 2, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   7, 1,   9, 1, $7d, OW_GRASS_OR_PORTRAIT
+	dsprite   7, 1,  11, 5, $7d, OW_GRASS_OR_PORTRAIT
 ; 12434
 
 .LoadPalettes: ; 12434
 	ld hl, .palettes
-	ld de, wOBPals palette PAL_OW_TREE
+	ld de, wOBPals palette OW_GRASS_OR_PORTRAIT
 	ld bc, 1 palettes
 	ld a, $5
 	call FarCopyWRAM
@@ -179,7 +179,7 @@ endc
 	ld a, $5
 	ldh [rSVBK], a
 
-	ld hl, wOBPals palette PAL_OW_TREE
+	ld hl, wOBPals palette OW_GRASS_OR_PORTRAIT
 	ld a, [hli]
 	ld e, a
 	ld a, [hli]

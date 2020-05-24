@@ -304,6 +304,17 @@ endc
 PlayerPaletteOptions:
 INCLUDE "gfx/overworld/npc_sprites.pal" ;duplicating this for now
 
+LoadNPCPalette::
+	ld hl, PlayerPaletteOptions
+	ld bc, 1 palettes
+	rst AddNTimes
+	ld a, [wTimeOfDayPal]
+	ld bc, 8 palettes
+	rst AddNTimes
+
+	ld a, BANK(wUnknOBPals)
+	jp FarCopyWRAM
+
 LoadSpecialMapOBPalette:
 
 	ld a, [wPlayerOverworldStatus]

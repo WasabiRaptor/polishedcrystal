@@ -74,7 +74,7 @@ ReloadSpriteIndex::
 	push hl
 	inc hl
 	inc hl
-	ld [hl], a
+	ld [hl], a ;sprite tile
 	pop hl
 .done
 	add hl, de
@@ -114,14 +114,70 @@ SafeGetSprite: ; 14236
 	ret
 ; 1423c
 
-GetSprite:: ; 1423c
-	call GetMonSprite
-	ret c
+GetOverworldPokemonSprite:
+	pop af
+	ld [wCurSpecies], a
+	ld a, [hli]
+	swap a
+	and $f
+	push af
+	ld a, [hl] ; MAPOBJECT_COLOR2
+	and $f
+	ld [wCurGroup], a
+	ld a, [hl]
+	swap a
+	and $f
+	ld [wCurForm], a
+	pop af
+	ld hl, wUnknOBPals
+	ld bc, 1 palettes
+	rst AddNTimes
+	ld d, h
+	ld e, l
+	ld a, [wTimeOfDayPal]
+	call GetRelevantMonOverworldPalettes
+	farcall ApplyPals
 
+	jp GetPokemonOrPlayerOverworldSprite
+
+
+GetSprite:: ; 1423c
 	cp SPRITE_FOLLOWER
-	jr z, GetFollowerSpriteAddresses
+	jp z, GetFollowerSpriteAddresses
 	cp SPRITE_PLAYER
 	jr z, GetPlayerSpriteAddresses
+
+	push af
+
+	ld a, [hObjectStructIndexBuffer]
+	call GetObjectStruct
+	ld hl, OBJECT_MAP_OBJECT_INDEX
+	add hl, bc
+	ld a, [hl]
+	call GetMapObject
+	ld hl, MAPOBJECT_COLOR
+	add hl, bc
+	ld a, [hl]
+	and $f
+	cp PERSONTYPE_POKEMON
+	jr z, GetOverworldPokemonSprite
+
+	ld a, [hli]
+	swap a
+	and $f
+	push hl
+	ld hl, wUnknOBPals
+	ld bc, 1 palettes
+	rst AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [hl] ; color 2
+	farcall LoadNPCPalette
+	farcall ApplyPals
+
+	pop af
+	;fallthrough
 NoFollower:
 	ld hl, SpriteHeaders ; address
 	dec a
@@ -147,7 +203,7 @@ NoFollower:
 	ret z
 	ld c, 16
 	ret
-; 14259
+
 GetPlayerSpriteAddresses:
 	ld a, [wPlayerOverworldStatus]
 	bit 1, a ; is player riding a pokemon?
@@ -255,89 +311,6 @@ no_follower:
 
 INCLUDE "data/pokemon/regional_overworld_sprite_table.asm"
 
-GetMonSprite: ; 14259
-; Return carry if a monster sprite was loaded.
-
-	cp SPRITE_POKEMON
-	jr c, .Normal
-	cp SPRITE_MON_DOLL_1
-	jr z, .MonDoll1
-	cp SPRITE_MON_DOLL_2
-	jr z, .MonDoll2
-	cp SPRITE_DAYCARE_MON_1
-	jr z, .BreedMon1
-	cp SPRITE_DAYCARE_MON_2
-	jr z, .BreedMon2
-	cp SPRITE_GROTTO_MON
-	jr z, .GrottoMon
-	cp SPRITE_VARS
-	jr nc, .Variable
-	jr .Icon
-
-.Normal:
-	and a
-	ret
-
-.Icon:
-	sub SPRITE_POKEMON
-	ld e, a
-	ld d, 0
-	ld hl, SpriteMons
-	add hl, de
-	ld a, [hl]
-	jr .Mon
-
-.BreedMon1
-	ld a, [wBreedMon1Species]
-	jr .Mon
-
-.BreedMon2
-	ld a, [wBreedMon2Species]
-	jr .Mon
-
-.GrottoMon
-	farcall GetHiddenGrottoContents
-	ld a, [hl]
-	jr .Mon
-
-.MonDoll1
-	ld a, [wLeftOrnament]
-	farcall GetDecorationSpecies
-	jr .Mon
-
-.MonDoll2
-	ld a, [wRightOrnament]
-	farcall GetDecorationSpecies
-
-.Mon:
-	ld e, a
-	and a
-	jr z, .NoBreedmon
-
-	farcall LoadOverworldMonIcon
-
-	lb hl, 0, MON_SPRITE
-	scf
-	ret
-
-.Variable:
-	sub SPRITE_VARS
-	ld e, a
-	ld d, 0
-	ld hl, wVariableSprites
-	add hl, de
-	ld a, [hl]
-	and a
-	jp nz, GetMonSprite
-
-.NoBreedmon:
-	ld a, 1
-	lb hl, 0, MON_SPRITE
-	and a
-	ret
-; 142a7
-
-
 _DoesSpriteHaveFacings:: ; 142a7
 ; Checks to see whether we can apply a facing to a sprite.
 ; Returns zero for Pokémon sprites, carry for the rest.
@@ -352,58 +325,6 @@ _DoesSpriteHaveFacings:: ; 142a7
 	and a
 	ret
 ; 142c4
-
-
-_GetSpritePalette:: ; 142c4
-	ld a, c
-	call GetMonSprite
-	jr c, .is_pokemon
-
-	ld hl, SpriteHeaders + SPRITEHEADER_PALETTE
-	dec a
-	ld c, a
-	ld b, 0
-	ld a, NUM_SPRITEHEADER_FIELDS
-	rst AddNTimes
-	ld c, [hl]
-	ret
-
-.is_pokemon
-	ld a, [wMapGroup]
-	cp GROUP_KRISS_HOUSE_2F
-	jr nz, .not_doll
-	ld a, [wMapNumber]
-	cp MAP_KRISS_HOUSE_2F
-	jr nz, .not_doll
-	farcall GetMonIconPalette
-	ld c, a
-	ret
-
-.not_doll
-	;cp GROUP_ROUTE_34
-	;jr nz, .not_daycare
-	;ld a, [wMapNumber]
-	;cp MAP_ROUTE_34
-	;jr nz, .not_daycare
-	jr .not_daycare
-
-	farcall GetMonIconPalette
-	cp PAL_OW_GRAY
-	ld c, PAL_OW_ROCK
-	ret z
-	cp PAL_OW_PINK
-	ld c, PAL_OW_PLAYER
-	ret z
-	cp PAL_OW_TEAL
-	ld c, PAL_OW_GREEN
-	ret z
-	ld c, a
-	ret
-
-.not_daycare
-	ld c, PAL_OW_PLAYER
-	ret
-; 142db
 
 
 GetUsedSprite:: ; 143c8

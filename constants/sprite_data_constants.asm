@@ -16,28 +16,26 @@ NUM_SPRITEHEADER_FIELDS EQU const_value
 
 ; sprite palettes
 	const_def
-	const PAL_OW_PLAYER    ; 0
-	const PAL_OW_FOLLOWER   ; 1
-	const PAL_OW_GREEN  ; 2
-	const PAL_OW_BROWN  ; 3
-	const PAL_OW_PURPLE ; 4
-	const PAL_OW_SILVER ; 5
-	const PAL_OW_TREE   ; 6
-	const PAL_OW_ROCK   ; 7
+	const OW_PLAYER   			 ; 0
+	const OW_FOLLOWER  			 ; 1
+	const OW_NPC1 				 ; 2
+	const OW_NPC2 				 ; 3
+	const OW_NPC3				 ; 4
+	const OW_NPC4 				 ; 5
+	const OW_NPC5   			 ; 6
+	const OW_GRASS_OR_PORTRAIT   ; 7
 
-; for object_events
-	const_def (1 << 3)
-	const PAL_NPC_COPY_PLAYER    ; 8
-	const PAL_NPC_FOLLOWER   ; 9
-	const PAL_NPC_GREEN  ; a
-	const PAL_NPC_BROWN  ; b
-	const PAL_NPC_PURPLE ; c
-	const PAL_NPC_SILVER ; d
-	const PAL_NPC_TREE   ; e
-	const PAL_NPC_ROCK   ; f
+	const PAL_NPC_RED    ; 0
+	const PAL_NPC_BLUE   ; 1
+	const PAL_NPC_GREEN  ; 2
+	const PAL_NPC_BROWN  ; 3
+	const PAL_NPC_PURPLE ; 4
+	const PAL_NPC_5 	 ; 5
+	const PAL_NPC_6   	 ; 6
+	const PAL_NPC_7   	 ; 7
 
 ; for party menu icons
-	const_def PAL_OW_SILVER
-	const PAL_OW_GRAY   ; 5
-	const PAL_OW_PINK   ; 6
-	const PAL_OW_TEAL   ; 7
+	const_def OW_NPC4
+	const OW_GRAY   ; 5
+	const OW_PINK   ; 6
+	const OW_TEAL   ; 7

@@ -17,9 +17,9 @@ PokeCenter2F_MapScriptHeader:
 	bg_event  7,  3, SIGNPOST_READ, PokeCenter2FLinkRecordSign
 
 	db 2 ; object events
-	object_event  5,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Trade, -1
-	object_event  9,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Battle, -1
-	;object_event 13,  3, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_COMMAND, jumptextfaceplayer, Text_TimeCapsuleClosed, -1
+	object_event  5,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_NPC1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Trade, -1
+	object_event  9,  2, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_NPC1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, LinkReceptionistScript_Battle, -1
+	;object_event 13,  3, SPRITE_LINK_RECEPTIONIST, SPRITEMOVEDATA_STANDING_DOWN, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_NPC1, PAL_NPC_PURPLE, PERSONTYPE_COMMAND, jumptextfaceplayer, Text_TimeCapsuleClosed, -1
 
 	const_def 1 ; object constants
 	const POKECENTER2F_TRADE_RECEPTIONIST
@@ -62,7 +62,7 @@ Script_WalkOutOfLinkRoom:
 	clearflag ENGINE_KRIS_IN_CABLE_CLUB
 	playsound SFX_TINGLE
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingRight
-	writebyte (PAL_NPC_FOLLOWER) << 4
+	;writebyte (PAL_NPC_FOLLOWER) << 4
 	special Special_SetPlayerPalette
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingLeft
 	special ReplaceKrisSprite
@@ -225,7 +225,7 @@ PokeCenter2F_CheckGender:
 	showtext Text_ChangeTheLook
 	playsound SFX_TINGLE
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingRight
-	writebyte (PAL_NPC_COPY_PLAYER) << 4
+	;writebyte (PAL_NPC_COPY_PLAYER) << 4
 	special Special_SetPlayerPalette
 	applymovement PLAYER, PokeCenter2FMovementData_PlayerSpinsClockwiseEndsFacingLeft
 	setflag ENGINE_KRIS_IN_CABLE_CLUB

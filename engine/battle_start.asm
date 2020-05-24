@@ -346,7 +346,7 @@ endr
 	sub 3
 	jr nc, .mod_3
 	add 3
-	ret 
+	ret
 	;jp DelayFrame
 
 .end
@@ -656,9 +656,7 @@ StartTrainerBattle_LoadPokeBallGraphics: ; 8c5dc (23:45dc)
 	call .copy
 	ld de, wUnknBGPals palette PAL_BG_TEXT
 	call .copy
-	ld de, wUnknOBPals palette PAL_OW_ROCK
-	call .copy
-	ld de, wUnknOBPals palette PAL_OW_TREE
+	ld de, wUnknOBPals palette OW_GRASS_OR_PORTRAIT
 
 .copy ; 8c698 (23:4698)
 	push hl

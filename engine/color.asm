@@ -311,7 +311,7 @@ WipeAttrMap:
 	xor a
 	jp ByteFill
 
-ApplyPals:
+ApplyPals::
 	ld hl, wUnknBGPals
 	ld de, wBGPals
 	ld bc, 16 palettes
@@ -558,15 +558,15 @@ LoadMapPals:
 	ldh [rSVBK], a
 
 .got_pals
-	ld a, [wTimeOfDayPal]
-	and 3
-	ld bc, 8 palettes
-	ld hl, MapObjectPals
-	rst AddNTimes
-	ld de, wUnknOBPals
-	ld bc, 8 palettes
-	ld a, BANK(wUnknOBPals)
-	call FarCopyWRAM
+	;ld a, [wTimeOfDayPal]
+	;and 3
+	;ld bc, 8 palettes
+	;ld hl, MapObjectPals
+	;rst AddNTimes
+	;ld de, wUnknOBPals
+	;ld bc, 8 palettes
+	;ld a, BANK(wUnknOBPals)
+	;call FarCopyWRAM
 
 	farcall LoadSpecialMapOBPalette
 

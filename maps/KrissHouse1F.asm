@@ -20,12 +20,12 @@ KrissHouse1F_MapScriptHeader:
 	bg_event  3,  1, SIGNPOST_JUMPTEXT, StoveText
 	bg_event  6,  1, SIGNPOST_UP, TVScript
 
-	db 5 ; object events
-	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_1
-	object_event  3,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	;object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << MIDDAY), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	;object_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MIDNIGHT), 0, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
-	object_event  6,  4, SPRITE_MATRON, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, 0, PERSONTYPE_SCRIPT, 0, NeighborScript, EVENT_KRISS_HOUSE_1F_NEIGHBOR
+	db 3 ; object events
+	object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_NPC1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_1
+	object_event  3,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_NPC1, PAL_NPC_PURPLE, PERSONTYPE_SCRIPT, 0, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	;object_event  9,  4, SPRITE_MOM, SPRITEMOVEDATA_STANDING_LEFT, 0, 0, -1, (1 << MIDDAY), 0, PERSONTYPE_SCRIPT, OW_NPC1, PAL_NPC_PURPLE, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	;object_event  1,  2, SPRITE_MOM, SPRITEMOVEDATA_STANDING_UP, 0, 0, -1, (1 << MIDNIGHT), 0, PERSONTYPE_SCRIPT, OW_NPC1, PAL_NPC_PURPLE, MomScript, EVENT_KRISS_HOUSE_MOM_2
+	pokemon_event  6,  4, VULPIX, LOKI, SPRITEMOVEDATA_STANDING_RIGHT, 0, 0, START_OF_CYCLE_EXIST, END_OF_CYCLE_EXIST, OW_NPC2, 0, LokiScript, -1
 
 	const_def 2 ; object constants
 	const KRISSHOUSE1F_MOM1
@@ -255,7 +255,7 @@ MomDoItText:
 	line "the way!"
 	done
 
-NeighborScript:
+LokiScript:
 	faceplayer
 	opentext
 	portrait VULPIX, LOKI, 0
@@ -267,23 +267,23 @@ NeighborScript:
 	iftrue .NiteScript
 
 .MornScript:
-	writenamedtext .NeighborNameText, .MornIntroText
+	writenamedtext .LokiNameText, .MornIntroText
 	buttonsound
 	jump .Main
 
 .DayScript:
-	writenamedtext .NeighborNameText, .DayIntroText
+	writenamedtext .LokiNameText, .DayIntroText
 	buttonsound
 	jump .Main
 
 .NiteScript:
-	writenamedtext .NeighborNameText, .NiteIntroText
+	writenamedtext .LokiNameText, .NiteIntroText
 	buttonsound
 	jump .Main
 
 .Main:
 	;portrait LOKI_UWU
-	writenamedtext .NeighborNameText, .NeighborText
+	writenamedtext .LokiNameText, .LokiText
 	waitbutton
 	closeportrait
 	closetext
@@ -305,7 +305,7 @@ NeighborScript:
 	line "NPC now"
 	done
 
-.NeighborText:
+.LokiText:
 
 	text ". "
 	textdelay 10
@@ -336,5 +336,5 @@ NeighborScript:
 	db "meme"
 	done
 
-.NeighborNameText:
+.LokiNameText:
 	db "Loki@"
