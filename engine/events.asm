@@ -337,7 +337,10 @@ _CheckObjectEnteringVisibleRange: ; 96812
 	ld hl, wPlayerStepFlags
 	bit 6, [hl]
 	ret z
-	farjp CheckObjectEnteringVisibleRange
+	farcall CheckObjectEnteringVisibleRange
+	farcall ApplyPals
+	jp UpdateTimePals
+
 ; 9681f
 
 PlayerEvents: ; 9681f
