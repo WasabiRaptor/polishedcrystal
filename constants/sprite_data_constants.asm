@@ -25,6 +25,7 @@ NUM_SPRITEHEADER_FIELDS EQU const_value
 	const OW_NPC5   			 ; 6
 	const OW_GRASS_OR_PORTRAIT   ; 7
 
+	const_def
 	const PAL_NPC_RED    ; 0
 	const PAL_NPC_BLUE   ; 1
 	const PAL_NPC_GREEN  ; 2
