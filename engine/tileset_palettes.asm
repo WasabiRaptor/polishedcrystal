@@ -305,11 +305,13 @@ PlayerPaletteOptions:
 INCLUDE "gfx/overworld/npc_sprites.pal" ;duplicating this for now
 
 LoadNPCPalette::
-	ld hl, PlayerPaletteOptions
-	ld bc, 1 palettes
-	rst AddNTimes
+	push af
 	ld a, [wTimeOfDayPal]
+	ld hl, PlayerPaletteOptions
 	ld bc, 8 palettes
+	rst AddNTimes
+	pop af
+	ld bc, 1 palettes
 	rst AddNTimes
 
 	ld a, BANK(wUnknOBPals)
