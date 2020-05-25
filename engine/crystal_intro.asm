@@ -450,12 +450,15 @@ IntroSceneJumper: ; e490f
 ; e491e
 
 IntroScenes: ; e491e (39:491e)
-	dw IntroScene3
-	dw IntroScene4
-	dw IntroScene7
-	dw IntroScene8
-	dw IntroScene9
-	dw IntroScene10
+	dw BrassIntroSetup1
+	dw IntroSceneSomethingSomethingPresents
+	dw BrassIntroScrolldown1
+	dw BrassIntroSetup2
+	dw BrassIntroScrolldown2
+	dw BrassIntroSetupZygarde
+	dw IntroSceneZygardeRun
+	;dw IntroScene9
+	;dw IntroScene10
 	dw IntroScene28
 
 NextIntroScene: ; e4956 (39:4956)
@@ -463,88 +466,153 @@ NextIntroScene: ; e4956 (39:4956)
 	inc [hl]
 	ret
 
-IntroScene3: ; e49fd (39:49fd)
-; More setup. Transition to the outdoor scene.
-	call Intro_ClearBGPals
-	call ClearSprites
-	call ClearTileMap
+BrassIntroSetup1:
 	xor a
 	ldh [hBGMapMode], a
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, IntroTilemap003
-	debgcoord 0, 0
-	call Intro_DecompressRequest2bpp_64Tiles
-	xor a
-	ldh [rVBK], a
-	call Intro_SetupCommonScenery
-	call Intro_ResetLYOverrides
-	call Intro_SetCGBPalUpdate
-	xor a
-	ld [wIntroSceneFrameCounter], a
-	jp NextIntroScene
-
-IntroScene4: ; e4a69 (39:4a69)
-; Scroll the outdoor panorama for a bit.
-	call Intro_PerspectiveScrollBG
-	ld hl, wIntroSceneFrameCounter
-	ld a, [hl]
-	cp $80
-	jr z, .endscene
-	inc [hl]
-	ret
-
-.endscene
-	jp NextIntroScene
-
-IntroScene7: ; e4b3f (39:4b3f)
-; Back to the outdoor scene.
-	call Intro_ClearBGPals
-	call ClearSprites
-	call ClearTileMap
-	xor a
-	ldh [hBGMapMode], a
-
-	ld a, $1
-	ldh [rVBK], a
-	ld hl, IntroTilemap003
-	debgcoord 0, 0
-	call Intro_DecompressRequest2bpp_64Tiles
-
-	ld hl, IntroPichuWooperGFX
-	ld de, VTiles0 tile $00
-	call Intro_DecompressRequest2bpp_128Tiles
-
-	xor a
 	ldh [rVBK], a
 	ld hl, IntroSuicuneRunGFX
 	ld de, VTiles0 tile $00
 	call Intro_DecompressRequest2bpp_255Tiles
 
-	call Intro_SetupCommonScenery
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals)
+	ldh [rSVBK], a
 
-	call Intro_ResetLYOverrides
-	farcall ClearSpriteAnims
+	ld hl, BrassIntroPals
+	ld de, wUnknBGPals
+	ld bc, 16 palettes
+	rst CopyBytes
+
+	ld hl, BrassIntroPals
+	ld de, wBGPals
+	ld bc, 16 palettes
+	rst CopyBytes
+
+	pop af
+	ldh [rSVBK], a
+
+
+	call Intro_SetCGBPalUpdate
+
+	call .setup
+	jr NextIntroScene
+
+.setup
+	ld hl, BrassIntro1Tileset
+	ld de, VTiles2 tile $00
+	call Intro_DecompressRequest2bpp_64Tiles
+
+	ld hl, BrassIntro2Tileset
+	ld de, VTiles2 tile $40
+	call Intro_DecompressRequest2bpp_64Tiles
+
+	ld hl, BrassIntro1Attrmap
+	push hl
+	ld hl, BrassIntro1Tilemap
+	jr BrassIntroLoadTileMapAttrMap
+
+BrassIntroSetup2:
+	xor a
+	ldh [hBGMapMode], a
+	call .setup
+	jr NextIntroScene
+
+.setup
+	ld hl, BrassIntro2Attrmap
+	push hl
+	ld hl, BrassIntro2Tilemap
+	;fallthrough
+BrassIntroLoadTileMapAttrMap:
+	xor a
+	ldh [hBGMapMode], a
+	ldh [rVBK], a
+	call .loadTilemapOrAttrmap
+	ld a, 1
+	ldh [rVBK], a
+	pop hl
+	call .loadTilemapOrAttrmap
+	xor a
+	ldh [rVBK], a
+	ret
+
+.loadTilemapOrAttrmap
+	ld de, VBGMap0
+	ld c, BG_MAP_HEIGHT
+
+.loop
+	ld b, SCREEN_WIDTH
+.loop1
+.waitVblank1
+	ldh a, [rSTAT]
+	and 3 ; no mode 2 or 3
+	jr z, .waitVblank1
+.waitVblank2
+	ldh a, [rSTAT]
+	and 3
+	jr nz, .waitVblank2
+
+	ld a, [hli]
+	ld [de], a
+	inc de
+	dec b
+	jr nz, .loop1
+	push hl
+	ld hl, BG_MAP_WIDTH - SCREEN_WIDTH
+	add hl, de
+	ld e, l
+	ld d, h
+	pop hl
+	dec c
+	jr nz, .loop
+	ret
+
+IntroSceneSomethingSomethingPresents:
+	ld c, 30
+	call DelayFrames
+	jp NextIntroScene
+
+
+BrassIntroScrolldown1:
+	ld a, [hSCY]
+	cp SCREEN_HEIGHT_PX
+	jp z, NextIntroScene
+	inc a
+	ld [hSCY], a
+	ret
+
+BrassIntroScrolldown2:
+	ld a, [hSCY]
+	and a ; 0
+	jp z, NextIntroScene
+	inc a
+	ld [hSCY], a
+	ret
+
+BrassIntroSetupZygarde:
 	depixel 13, 27, 4, 0
 	ld a, SPRITE_ANIM_INDEX_INTRO_SUICUNE
 	call _InitSpriteAnimStruct
 	ld a, $f0
 	ld [wGlobalAnimXOffset], a
-	call Intro_SetCGBPalUpdate
 	xor a
 	ld [wIntroSceneFrameCounter], a
 	ld [wcf65], a
 	jp NextIntroScene
 
-IntroScene8: ; e4bd3 (39:4bd3)
-; Scroll the scene, then show Suicune running across the screen.
+
+IntroSceneZygardeRun: ; e4bd3 (39:4bd3)
+; show Zygarde running across the screen.
+	xor a
+	ldh [hBGMapMode], a
+
 	ld hl, wIntroSceneFrameCounter
 	ld a, [hl]
 	inc [hl]
 	cp $40
 	jr z, .suicune_sound
 	jr nc, .animate_suicune
-	jp Intro_PerspectiveScrollBG
+	ret
 
 .suicune_sound
 	ld de, SFX_INTRO_SUICUNE_3
@@ -975,88 +1043,6 @@ endr
 endc
 ; e5348
 
-Intro_Scene20_AppearUnown: ; e5348 (39:5348)
-; Spawn the palette for the nth Unown
-	and a
-	jr nz, .load_pal_2
-
-	ld hl, .pal1
-	jr .got_pointer
-
-.load_pal_2
-	ld hl, .pal2
-
-.got_pointer
-	ld a, [wcf65]
-	and $7
-	add a
-	add a
-	add a
-	ld c, a
-	ldh a, [rSVBK]
-	push af
-	ld a, $5
-	ldh [rSVBK], a
-
-	push bc
-	ld de, wBGPals
-
-	ld a, c
-	add e
-	ld e, a
-	ld a, 0 ; not xor a; preserve carry flag?
-	adc d
-	ld d, a
-
-	ld bc, 8
-	rst CopyBytes
-	pop bc
-
-	ld de, wUnknBGPals
-	ld a, c
-	add e
-	ld e, a
-	ld a, 0 ; not xor a; preserve carry flag?
-	adc d
-	ld d, a
-
-	ld bc, 8
-	rst CopyBytes
-
-	pop af
-	ldh [rSVBK], a
-	ld a, $1
-	ldh [hCGBPalUpdate], a
-	ret
-; e538d (39:538d)
-
-.pal1 ; e538d
-if !DEF(MONOCHROME)
-	RGB 24, 12, 09
-	RGB 31, 31, 31
-	RGB 12, 00, 31
-	RGB 00, 00, 00
-else
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-endc
-; e5395
-
-.pal2 ; e5395
-if !DEF(MONOCHROME)
-	RGB 24, 12, 09
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-else
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-endc
-; e539d
 
 Intro_FadeUnownWordPals: ; e539d (39:539d)
 	add a
@@ -1155,7 +1141,7 @@ endc
 Intro_LoadTilemap: ; e541b (39:541b)
 	ldh a, [rSVBK]
 	push af
-	ld a, $6
+	ld a, BANK(wScratchTileMap)
 	ldh [rSVBK], a
 
 	ld hl, wScratchTileMap
@@ -1213,8 +1199,8 @@ Intro_ColoredSuicuneFrameSwap: ; e5451 (39:5451)
 	ld a, c
 	or b
 	jr nz, .loop
-	ld a, $1
-	ldh [hBGMapMode], a
+	;ld a, $1
+	;ldh [hBGMapMode], a
 	ret
 
 Intro_RustleGrass: ; e546d (39:546d)
@@ -1295,7 +1281,7 @@ Intro_DecompressRequest2bpp_255Tiles: ; e54de (39:54de)
 Intro_DecompressRequest2bpp:
 	ldh a, [rSVBK]
 	push af
-	ld a, $6
+	ld a, BANK(wDecompressScratch)
 	ldh [rSVBK], a
 
 	push bc
@@ -1315,7 +1301,7 @@ Intro_DecompressRequest2bpp:
 Intro_ResetLYOverrides: ; e5516 (39:5516)
 	ldh a, [rSVBK]
 	push af
-	ld a, $5
+	ld a, BANK(wLYOverrides)
 	ldh [rSVBK], a
 
 	ld hl, wLYOverrides
@@ -1332,7 +1318,7 @@ Intro_ResetLYOverrides: ; e5516 (39:5516)
 Intro_PerspectiveScrollBG: ; e552f (39:552f)
 	ldh a, [rSVBK]
 	push af
-	ld a, $5
+	ld a, BANK(wLYOverrides)
 	ldh [rSVBK], a
 	; Scroll the grass every frame.
 	; Scroll the trees every other frame and at half speed.
@@ -1360,6 +1346,91 @@ Intro_PerspectiveScrollBG: ; e552f (39:552f)
 	ldh [rSVBK], a
 	ret
 
+BrassIntroPals:
+BrassIntroBGPals:
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+BrassIntroOBPals:
+SuicuneRunPal:
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+	RGB 31, 31, 31
+	RGB 31, 31, 31
+	RGB 12,  0, 31
+	RGB  0,  0,  0
+
+
 IntroSuicuneRunGFX: ; e555d
 INCBIN "gfx/intro/suicune_run.2bpp.lz"
 ; e592d
@@ -1372,677 +1443,6 @@ IntroTilemap003: ; e5ecd
 INCBIN "gfx/intro/003.tilemap.lz"
 ; e5edd
 
-Intro_SetupCommonScenery:
-	ld hl, IntroBackgroundGFX
-	ld de, VTiles2 tile $00
-	call Intro_DecompressRequest2bpp_128Tiles
-
-	ld hl, IntroTilemap004
-	debgcoord 0, 0
-	call Intro_DecompressRequest2bpp_64Tiles
-
-	ldh a, [rSVBK]
-	push af
-	ld a, $5
-	ldh [rSVBK], a
-
-	ld hl, Palette_e5edd
-	ld de, wUnknBGPals
-	ld bc, 16 palettes
-	rst CopyBytes
-
-	ld hl, Palette_e5edd
-	ld de, wBGPals
-	ld bc, 16 palettes
-	rst CopyBytes
-
-	pop af
-	ldh [rSVBK], a
-
-	xor a
-	ldh [hSCX], a
-	ldh [hSCY], a
-
-	ld a, $7
-	ldh [hWX], a
-
-	ld a, $90
-	ldh [hWY], a
-	ret
-
-IntroBackgroundGFX: ; e5c7d
-INCBIN "gfx/intro/background.2bpp.lz"
-; e5e6d
-
-IntroTilemap004: ; e5e6d
-INCBIN "gfx/intro/004.tilemap.lz"
-; e5ecd
-
-Palette_e5edd: ; e5edd
-if !DEF(MONOCHROME)
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB  0,  4,  5
-	RGB  1,  8,  5
-	RGB  4, 12,  9
-	RGB 24, 12,  9
-
-	RGB  0,  4,  5
-	RGB  9,  6,  8
-	RGB  8, 16,  5
-	RGB  5, 10,  4
-
-	RGB 31, 31, 31
-	RGB  9,  6,  8
-	RGB 18,  9,  9
-	RGB 13,  8,  9
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB  2,  5, 22
-	RGB  1,  5, 12
-
-	RGB 31, 31, 31
-	RGB 31, 10, 25
-	RGB 31, 21,  0
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 21, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-else
-	MONOCHROME_RGB_FOUR
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_BLACK
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-endc
-
-IntroUnownsGFX: ; e5f5d
-INCBIN "gfx/intro/unowns.2bpp.lz"
-; e634d
-
-IntroPulseGFX: ; e634d
-INCBIN "gfx/intro/pulse.2bpp.lz"
-; e63dd
-
-IntroTilemap002: ; e63dd
-INCBIN "gfx/intro/002.tilemap.lz"
-; e641d
-
-IntroTilemap001: ; e641d
-INCBIN "gfx/intro/001.tilemap.lz"
-; e642d
-
-IntroTilemap006: ; e642d
-INCBIN "gfx/intro/006.tilemap.lz"
-; e647d
-
-IntroTilemap005: ; e647d
-INCBIN "gfx/intro/005.tilemap.lz"
-; e649d
-
-IntroTilemap008: ; e649d
-INCBIN "gfx/intro/008.tilemap.lz"
-; e655d
-
-IntroTilemap007: ; e655d
-INCBIN "gfx/intro/007.tilemap.lz"
-; e65ad
-
-Palette_365ad: ; e65ad
-if !DEF(MONOCHROME)
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 10,  0, 10
-	RGB 19,  0, 19
-	RGB 31,  0, 31
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-else
-rept 8
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_BLACK
-endr
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-endc
-
-IntroCrystalUnownsGFX: ; e662d
-INCBIN "gfx/intro/crystal_unowns.2bpp.lz"
-; e672d
-
-IntroTilemap017: ; e672d
-INCBIN "gfx/intro/017.tilemap.lz"
-; e676d
-
-IntroTilemap015: ; e676d
-INCBIN "gfx/intro/015.tilemap.lz"
-; e679d
-
-Palette_e679d: ; e679d
-if !DEF(MONOCHROME)
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-else
-rept 8
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-endr
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-endc
-
-IntroSuicuneCloseGFX: ; e681d
-INCBIN "gfx/intro/suicune_close.2bpp.lz"
-; e6c3d
-
-IntroTilemap012: ; e6c3d
-INCBIN "gfx/intro/012.tilemap.lz"
-; e6d0d
-
-IntroTilemap011: ; e6d0d
-INCBIN "gfx/intro/011.tilemap.lz"
-; e6d6d
-
-Palette_e6d6d: ; e6d6d
-if !DEF(MONOCHROME)
-	RGB 24, 12,  9
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 24, 12,  9
-	RGB 31, 31, 31
-	RGB  8,  9, 31
-	RGB  0,  0,  0
-
-	RGB 24, 12,  9
-	RGB 12, 20, 31
-	RGB 19,  8, 31
-	RGB  0,  0,  0
-
-	RGB 12, 20, 31
-	RGB  8,  9, 31
-	RGB 19,  8, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 12, 20, 31
-	RGB  8,  9, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-else
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-endc
-
-IntroSuicuneJumpGFX: ; e6ded
-INCBIN "gfx/intro/suicune_jump.2bpp.lz"
-; e72ad
-
-IntroSuicuneBackGFX: ; e72ad
-INCBIN "gfx/intro/suicune_back.2bpp.lz"
-; e764d
-
-IntroTilemap010: ; e764d
-INCBIN "gfx/intro/010.tilemap.lz"
-; e76ad
-
-IntroTilemap009: ; e76ad
-INCBIN "gfx/intro/009.tilemap.lz"
-; e76bd
-
-IntroTilemap014: ; e76bd
-INCBIN "gfx/intro/014.tilemap.lz"
-; e778d
-
-IntroTilemap013: ; e778d
-INCBIN "gfx/intro/013.tilemap.lz"
-; e77dd
-
-Palette_e77dd: ; e77dd
-if !DEF(MONOCHROME)
-	RGB 24, 12,  9
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 24, 12,  9
-	RGB 31, 31, 31
-	RGB  8,  9, 31
-	RGB  0,  0,  0
-
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-	RGB 24, 12,  9
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 21,  9,  0
-	RGB 21,  9,  0
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 20, 20, 20
-	RGB 11, 11, 11
-	RGB  0,  0,  0
-else
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-rept 6
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_LIGHT
-endr
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-	MONOCHROME_RGB_FOUR
-endc
-
-IntroUnownBackGFX: ; e785d
-INCBIN "gfx/intro/unown_back.2bpp.lz"
-; e799d
-
 IntroGrass1GFX: ; e799d
 INCBIN "gfx/intro/grass1.2bpp"
 IntroGrass2GFX: ; e79dd
@@ -2054,3 +1454,21 @@ INCBIN "gfx/intro/grass4.2bpp"
 
 IntroLogoGFX: ; 109407
 INCBIN "gfx/intro/logo.2bpp.lz"
+
+BrassIntro1Tileset:
+INCBIN "gfx/intro/brass_intro1_tileset.2bpp.lz"
+
+BrassIntro2Tileset:
+INCBIN "gfx/intro/brass_intro2_tileset.2bpp.lz"
+
+BrassIntro1Tilemap:
+INCBIN "gfx/intro/brass_intro1_tileset.tilemap"
+
+BrassIntro2Tilemap:
+INCBIN "gfx/intro/brass_intro2_tileset.tilemap"
+
+BrassIntro1Attrmap:
+INCBIN "gfx/intro/brass_intro1_tileset.attrmap"
+
+BrassIntro2Attrmap:
+INCBIN "gfx/intro/brass_intro2_tileset.attrmap"

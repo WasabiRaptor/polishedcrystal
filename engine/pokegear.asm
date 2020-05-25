@@ -2933,11 +2933,11 @@ LoadTownMapGFX: ; 91ff2
 ; 91fff
 
 InvarMap: ; 91fff
-INCBIN "gfx/town_map/invar.bin"
+INCBIN "gfx/town_map/invar.tilemap"
 ; 92168
 
 InvarMapPals:
-INCBIN "gfx/town_map/invar_pals.bin"
+INCBIN "gfx/town_map/invar.attrmap"
 
 KantoMap: ; 92168
 INCBIN "gfx/town_map/kanto.bin"
