@@ -4177,8 +4177,6 @@ INCBIN "gfx/splash/copyright.2bpp"
 
 SECTION "Title Screen", ROMX
 
-INCLUDE "engine/title.asm"
-
 
 SECTION "Diploma", ROMX
 

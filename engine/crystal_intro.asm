@@ -30,22 +30,22 @@ Copyright_GFPresents: ; e4579
 	call SetPalettes
 	call .GetGFLogoGFX
 .joy_loop
-	call JoyTextDelay
-	ldh a, [hJoyLast]
-	and BUTTONS
-	jr nz, .pressed_button
-	ld a, [wJumptableIndex]
-	bit 7, a
-	jr nz, .finish
-	call PlaceGameFreakPresents
-	farcall PlaySpriteAnimations
-	call DelayFrame
-	jr .joy_loop
+	;call JoyTextDelay
+	;ldh a, [hJoyLast]
+	;and BUTTONS
+	;jr nz, .pressed_button
+	;ld a, [wJumptableIndex]
+	;bit 7, a
+	;jr nz, .finish
+	;call PlaceGameFreakPresents
+	;farcall PlaySpriteAnimations
+	;call DelayFrame
+	;jr .joy_loop
 
-.pressed_button
-	call .StopGamefreakAnim
-	scf
-	ret
+;.pressed_button
+	;call .StopGamefreakAnim
+	;scf
+	;ret
 
 .finish
 	call .StopGamefreakAnim
@@ -404,10 +404,11 @@ CrystalIntro: ; e48ac
 	call PlayMusic
 
 .done
-	call ClearBGPalettes
-	call ClearSprites
-	call ClearTileMap
+	;call ClearBGPalettes
+	;call ClearSprites
+	;call ClearTileMap
 	xor a
+
 	ldh [hSCX], a
 	ldh [hSCY], a
 	ld a, $7
@@ -459,7 +460,7 @@ IntroScenes: ; e491e (39:491e)
 	dw IntroSceneZygardeRun
 	;dw IntroScene9
 	;dw IntroScene10
-	dw IntroScene28
+	dw IntroSceneEnd
 
 NextIntroScene: ; e4956 (39:4956)
 	ld hl, wJumptableIndex
@@ -492,13 +493,6 @@ BrassIntroSetup1:
 	pop af
 	ldh [rSVBK], a
 
-
-	call Intro_SetCGBPalUpdate
-
-	call .setup
-	jr NextIntroScene
-
-.setup
 	ld hl, BrassIntro1Tileset
 	ld de, VTiles2 tile $00
 	call Intro_DecompressRequest2bpp_64Tiles
@@ -507,6 +501,12 @@ BrassIntroSetup1:
 	ld de, VTiles2 tile $40
 	call Intro_DecompressRequest2bpp_64Tiles
 
+	call Intro_SetCGBPalUpdate
+
+	call .setup
+	jr NextIntroScene
+
+.setup
 	ld hl, BrassIntro1Attrmap
 	push hl
 	ld hl, BrassIntro1Tilemap
@@ -543,14 +543,10 @@ BrassIntroLoadTileMapAttrMap:
 .loop
 	ld b, SCREEN_WIDTH
 .loop1
-.waitVblank1
+.waitVblank
 	ldh a, [rSTAT]
-	and 3 ; no mode 2 or 3
-	jr z, .waitVblank1
-.waitVblank2
-	ldh a, [rSTAT]
-	and 3
-	jr nz, .waitVblank2
+	and 2 ; we don't want mode 2 or 3
+	jr nz, .waitVblank
 
 	ld a, [hli]
 	ld [de], a
@@ -697,23 +693,13 @@ IntroScene10: ; e4c4f (39:4c4f)
 .done
 	jp NextIntroScene
 
-IntroScene28: ; e5152 (39:5152)
+IntroSceneEnd: ; e5152 (39:5152)
 ; Cut out when the music ends, and lead into the title screen.
 	ld hl, wIntroSceneFrameCounter
 	ld a, [hl]
 	and a
 	jr z, .done
-	dec [hl]
-	cp $30
-	jr z, .clear
-	cp $10
-	ret nz
-
-	ld de, SFX_TITLE_SCREEN_INTRO
-	jp PlaySFX
-
-.clear
-	jp ClearBGPalettes
+	;ret ;just having it end right away now
 
 .done
 	ld hl, wJumptableIndex
@@ -1345,6 +1331,50 @@ Intro_PerspectiveScrollBG: ; e552f (39:552f)
 	pop af
 	ldh [rSVBK], a
 	ret
+
+BrassTitleScreenSetup::
+	xor a
+	ldh [hBGMapMode], a
+	ldh [hSCX], a
+	ldh [hSCY], a
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wBGPals)
+	ldh [rSVBK], a
+
+	ld hl, BrassIntroPals
+	ld de, wUnknBGPals
+	ld bc, 16 palettes
+	rst CopyBytes
+
+	ld hl, BrassIntroPals
+	ld de, wBGPals
+	ld bc, 16 palettes
+	rst CopyBytes
+
+	pop af
+	ldh [rSVBK], a
+
+	call Intro_SetCGBPalUpdate
+
+	ld hl, BrassIntro1Tileset
+	ld de, VTiles2 tile $00
+	call Intro_DecompressRequest2bpp_64Tiles
+
+	ld hl, BrassIntro2Tileset
+	ld de, VTiles2 tile $40
+	call Intro_DecompressRequest2bpp_64Tiles
+
+	decoord 0, 0, wAttrMap
+	ld hl, BrassIntro2Attrmap
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	rst CopyBytes
+	decoord 0, 0
+	ld hl, BrassIntro2Tilemap
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	rst CopyBytes
+	jp ApplyAttrAndTilemapInVBlank
 
 BrassIntroPals:
 BrassIntroBGPals:

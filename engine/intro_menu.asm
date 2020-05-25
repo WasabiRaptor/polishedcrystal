@@ -844,17 +844,12 @@ CrystalIntroSequence: ; 620b
 	farcall Copyright_GFPresents
 	jr c, StartTitleScreen
 	farcall CrystalIntro
-
+	jr nc, StartTitleScreen.already_got_graphics
 StartTitleScreen: ; 6219
-	ld hl, rIE
-	set LCD_STAT, [hl]
-	ldh a, [rSVBK]
-	push af
-	ld a, $5
-	ldh [rSVBK], a
-
-	farcall _TitleScreen
-	call DelayFrame
+	farcall BrassTitleScreenSetup
+.already_got_graphics
+	xor a
+	ld [wJumptableIndex], a
 .loop
 	call RunTitleScreen
 	jr nc, .loop
@@ -862,13 +857,6 @@ StartTitleScreen: ; 6219
 	call ClearSprites
 	call ClearBGPalettes
 
-	pop af
-	ldh [rSVBK], a
-
-	ld hl, rIE
-	res LCD_STAT, [hl]
-	ld hl, rLCDC
-	res 2, [hl] ; 8x8 sprites
 	call ClearScreen
 	call ApplyAttrAndTilemapInVBlank
 	xor a
@@ -913,7 +901,6 @@ RunTitleScreen: ; 627b
 	bit 7, a
 	jr nz, .done_title
 	call TitleScreenScene
-	farcall SuicuneFrameIterator
 	call DelayFrame
 	and a
 	ret
@@ -945,43 +932,9 @@ TitleScreenScene: ; 62a3
 
 TitleScreenEntrance: ; 62bc
 
-; Animate the logo:
-; Move each line by 4 pixels until our count hits 0.
-	ldh a, [hSCX]
-	and a
-	jr z, .done
-	sub 4
-	ldh [hSCX], a
-
-; Lay out a base (all lines scrolling together).
-	ld e, a
-	ld hl, wLYOverrides
-	ld bc, 8 * 10 ; logo height
-	call ByteFill
-
-; Reversed signage for every other line's position.
-; This is responsible for the interlaced effect.
-	ld a, e
-	cpl
-	inc a
-
-	ld b, 8 * 10 / 2 ; logo height / 2
-	ld hl, wLYOverrides + 1
-.loop
-	ld [hli], a
-	inc hl
-	dec b
-	jr nz, .loop
-
-	farjp AnimateTitleCrystal
-
-.done
 ; Next scene
 	ld hl, wJumptableIndex
 	inc [hl]
-
-	xor a
-	ldh [hLCDCPointer], a
 
 	ld a, BANK(sPlayerData)
 	call GetSRAMBank
@@ -1003,8 +956,6 @@ TitleScreenEntrance: ; 62bc
 .ok
 	call PlayMusic
 
-	ld a, $88
-	ldh [hWY], a
 	ret
 ; 62f6
 
@@ -1049,7 +1000,7 @@ TitleScreenMain: ; 6304
 	ld d, [hl]
 	ld a, e
 	or d
-	jr z, .end
+	;jr z, .end
 
 	dec de
 	ld [hl], d
