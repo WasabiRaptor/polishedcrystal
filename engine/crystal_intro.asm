@@ -373,6 +373,25 @@ endc
 GameFreakLogo: ; e47cc
 INCBIN "gfx/splash/logo.1bpp"
 ; e48ac
+StartTitleScreen2:
+	ld hl, rIE
+	set LCD_STAT, [hl]
+	ldh a, [rSVBK]
+	push af
+	ld a, 5
+	ldh [rSVBK], a
+	ldh a, [hInMenu]
+	push af
+	ldh a, [hVBlank]
+	push af
+	xor a
+	ldh [hVBlank], a
+	ld a, $1
+	ldh [hInMenu], a
+	xor a
+	ldh [hMapAnims], a
+	call BrassTitleScreenSetup
+	jr CrystalIntro.loop
 
 CrystalIntro: ; e48ac
 	ld hl, rIE
@@ -387,10 +406,7 @@ CrystalIntro: ; e48ac
 	push af
 	call .InitRAMAddrs
 .loop ; e48bc
-	call JoyTextDelay
-	ldh a, [hJoyLast]
-	and BUTTONS
-	jr nz, .ShutOffMusic
+	call TitleScreenMain
 	ld a, [wJumptableIndex]
 	bit 7, a
 	jr nz, .done
@@ -408,7 +424,6 @@ CrystalIntro: ; e48ac
 	;call ClearSprites
 	;call ClearTileMap
 	xor a
-
 	ldh [hSCX], a
 	ldh [hSCY], a
 	ld a, $7
@@ -449,6 +464,16 @@ IntroSceneJumper: ; e490f
 	ld l, a
 	jp hl
 ; e491e
+	const_def 1
+	const INTRO_SETUP1
+	const INTRO_PRESENTS
+	const INTRO_SCROLL1
+	const INTRO_SCROLL2
+	const INTRO_ZYGARDE_SETUP
+	const INTRO_ZYGARDE_RUN
+	const INTRO_TITLE_SETUP
+	const INTRO_TITLE_RISE
+	const INTRO_END
 
 IntroScenes: ; e491e (39:491e)
 	dw BrassIntroSetup1
@@ -460,6 +485,8 @@ IntroScenes: ; e491e (39:491e)
 	dw IntroSceneZygardeRun
 	;dw IntroScene9
 	;dw IntroScene10
+	dw IntroTitleSetup
+	dw IntroTitleRise
 	dw IntroSceneEnd
 
 NextIntroScene: ; e4956 (39:4956)
@@ -507,6 +534,9 @@ BrassIntroSetup1:
 	call Intro_SetCGBPalUpdate
 
 	call .setup
+
+	ld de, MUSIC_NONE
+	call PlayMusic
 	jr NextIntroScene
 
 .setup
@@ -620,7 +650,7 @@ BrassIntroScrolldown2:
 
 BrassIntroSetupZygarde:
 	call Intro_ResetLYOverrides
-	farcall InitTitleWater
+	call InitTitleWater
 
 	depixel 15, 27, 4, 0
 	ld a, SPRITE_ANIM_INDEX_INTRO_SUICUNE
@@ -752,21 +782,24 @@ IntroScene10: ; e4c4f (39:4c4f)
 .done
 	jp NextIntroScene
 
-IntroSceneEnd: ; e5152 (39:5152)
-; Cut out when the music ends, and lead into the title screen.
+IntroTitleSetup:
 	call RippleTitleWaterIntro
-
 	ld hl, wIntroSceneFrameCounter
-	ld a, [hl]
-	and a
-	jr z, .done
 	inc [hl]
-	ret ;just having it end right away now
+	jp NextIntroScene
 
-.done
-	ld hl, wJumptableIndex
-	set 7, [hl]
+IntroTitleRise:
+	call RippleTitleWaterIntro
+	ld hl, wIntroSceneFrameCounter
+	inc [hl]
+	jp NextIntroScene
+
+IntroSceneEnd:
+	call RippleTitleWaterIntro
+	ld hl, wIntroSceneFrameCounter
+	inc [hl]
 	ret
+
 
 Intro_Scene24_ApplyPaletteFade: ; e5172 (39:5172)
 ; load the (a)th palette from .FadePals to all wBGPals
@@ -1394,7 +1427,7 @@ Intro_PerspectiveScrollBG: ; e552f (39:552f)
 	ldh [rSVBK], a
 	ret
 
-BrassTitleScreenSetup::
+BrassTitleScreenSetup:
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hSCX], a
@@ -1428,7 +1461,12 @@ BrassTitleScreenSetup::
 	ld de, VTiles2 tile $10
 	call Intro_DecompressRequest2bpp_128Tiles
 
+	call Intro_ResetLYOverrides
+	call InitTitleWater
 	call SetWaterEdgeForRipple
+
+	ld a, INTRO_TITLE_SETUP
+	ld [wJumptableIndex], a
 
 	decoord 0, 0, wAttrMap
 	ld hl, BrassIntro2Attrmap
@@ -1438,7 +1476,119 @@ BrassTitleScreenSetup::
 	ld hl, BrassIntro2Tilemap
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 	rst CopyBytes
-	jp ApplyAttrAndTilemapInVBlank
+	call ApplyAttrAndTilemapInVBlank
+	xor a
+	ldh [hBGMapMode], a
+	ld de, MUSIC_NONE
+	call PlayMusic
+	ret
+
+InitTitleWater:
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wLYOverrides)
+	ldh [rSVBK], a
+	call .init
+	pop af
+	ldh [rSVBK], a
+	ret
+
+.init
+	ld hl, wLYOverrides + 3 + (10 * 8) ;where the water ripple should start
+	xor a ;0
+	ld [hli], a
+	call .initThreeLines
+	inc a ;1
+	call .initThreeLines
+	inc a ;2
+	ld [hli], a
+	call .initThreeLines
+	dec a ;1
+	call .initThreeLines
+	dec a ;0
+	ld [hli], a
+	call .initThreeLines
+	dec a ;-1
+	call .initThreeLines
+	dec a ;-2
+	ld [hli], a
+	call .initThreeLines
+	inc a ;-1
+	;fallthrough
+.initThreeLines
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ret
+
+TitleScreenMain: ; 6304
+
+; Save data can be deleted by pressing Up + B + Select.
+	call GetJoypad
+	ld hl, hJoyDown
+
+	ld a, [hl]
+	and D_UP + B_BUTTON + SELECT
+	cp  D_UP + B_BUTTON + SELECT
+	jr z, .delete_save_data
+
+; The clock can be reset by pressing Down + B.
+	ld a, [hl]
+	and D_DOWN + B_BUTTON
+	cp  D_DOWN + B_BUTTON
+	jr z, .clock_reset
+
+; The early game options can be reset by pressing Left + B.
+	ld a, [hl]
+	and D_LEFT + B_BUTTON
+	cp  D_LEFT + B_BUTTON
+	jr z, .early_option_reset
+
+; Press Start or A to start the game.
+.check_start
+	ld a, [hl]
+	and START | A_BUTTON
+	jr nz, .start_game
+	ret
+
+.done
+	ld [wIntroSceneFrameCounter], a
+; Return to the intro sequence.
+	ld hl, wJumptableIndex
+	set 7, [hl]
+	ret
+
+.end
+; Next scene
+	ld hl, wJumptableIndex
+	inc [hl]
+
+; Fade out the title screen music
+	xor a
+	ld [wMusicFadeIDLo], a
+	ld [wMusicFadeIDHi], a
+	ld hl, wMusicFade
+	ld [hl], 8 ; 1 second
+
+	ld hl, wcf65
+	inc [hl]
+	ret
+
+.start_game
+	xor a
+	jr .done
+
+.delete_save_data
+	ld a, 1
+	jr .done
+
+.clock_reset
+	ld a, 4
+	jr .done
+
+.early_option_reset
+	ld a, 5
+	jr .done
 
 BrassIntroPals:
 BrassIntroBGPals:
