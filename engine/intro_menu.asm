@@ -847,9 +847,21 @@ CrystalIntroSequence: ; 620b
 	jr nc, StartTitleScreen.already_got_graphics
 StartTitleScreen: ; 6219
 	farcall BrassTitleScreenSetup
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wLYOverrides)
+	ldh [rSVBK], a
+
+	call InitTitleWater
+
+	pop af
+	ldh [rSVBK], a
 .already_got_graphics
 	ld hl, rIE
 	set LCD_STAT, [hl]
+	ld a, LOW(rSCX)
+	ldh [hLCDCPointer], a
 
 	xor a
 	ld [wJumptableIndex], a
@@ -937,20 +949,6 @@ TitleScreenScene: ; 62a3
 
 
 TitleScreenEntrance: ; 62bc
-	ldh a, [rSVBK]
-	push af
-	ld a, BANK(wLYOverrides)
-	ldh [rSVBK], a
-
-	call InitTitleWater
-
-	pop af
-	ldh [rSVBK], a
-
-	ld a, LOW(rSCX)
-	ldh [hLCDCPointer], a
-
-; Next scene
 	ld hl, wJumptableIndex
 	inc [hl]
 
@@ -1076,8 +1074,6 @@ TitleScreenMain: ; 6304
 	ld [hl], d
 	dec hl
 	ld [hl], e
-
-	call DelayFrame
 
 ; Save data can be deleted by pressing Up + B + Select.
 	call GetJoypad

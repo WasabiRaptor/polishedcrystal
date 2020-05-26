@@ -518,6 +518,7 @@ BrassIntroSetup1:
 BrassIntroSetup2:
 	xor a
 	ldh [hBGMapMode], a
+	call SetWaterEdgeForRipple
 	call .setup
 	jr NextIntroScene
 
@@ -564,6 +565,34 @@ BrassIntroLoadTileMapAttrMap:
 	pop hl
 	dec c
 	jr nz, .loop
+	ret
+
+WATER_RIPPLE_EDGE_TILE 	EQU $e4
+WATER_RIPPLE_PAL		EQU 1
+
+SetWaterEdgeForRipple:
+	ld b, WATER_RIPPLE_EDGE_TILE
+	hlbgcoord $14, $0a
+	call .setcol
+	hlbgcoord $1f, $0a
+	ld a, 1
+	ldh [rVBK], a
+	ld b, WATER_RIPPLE_PAL
+	hlbgcoord $14, $0a
+	call .setcol
+	hlbgcoord $1f, $0a
+	;fallthrough
+.setcol
+	ld c, 5
+	ld de, BG_MAP_WIDTH
+.waitVblank
+	ldh a, [rSTAT]
+	and 2 ; we don't want mode 2 or 3
+	jr nz, .waitVblank
+	ld [hl], b
+	add hl, de
+	dec c
+	jr nz, .waitVblank
 	ret
 
 IntroSceneSomethingSomethingPresents:
@@ -1397,6 +1426,8 @@ BrassTitleScreenSetup::
 	ld hl, BrassIntro1Tileset
 	ld de, VTiles2 tile $10
 	call Intro_DecompressRequest2bpp_128Tiles
+
+	call SetWaterEdgeForRipple
 
 	decoord 0, 0, wAttrMap
 	ld hl, BrassIntro2Attrmap
