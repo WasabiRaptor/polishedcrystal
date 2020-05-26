@@ -558,7 +558,7 @@ BrassIntroSetup1:
 
 	ld de, MUSIC_NONE
 	call PlayMusic
-	jr NextIntroScene
+	jp NextIntroScene
 
 .setup
 	ld hl, BrassIntro1Attrmap
@@ -634,13 +634,6 @@ BrassIntroLoadTileMapAttrMap:
 	jr nz, .loop
 	ret
 
-MoonPalFadePal:
-	RGB 00, 00, 08
-	RGB 00, 00, 08
-	RGB 00, 00, 06
-	RGB 00, 00, 00
-
-
 WATER_RIPPLE_EDGE_TILE 	EQU $75
 WATER_RIPPLE_PAL		EQU 2
 
@@ -671,9 +664,13 @@ SetWaterEdgeForRipple:
 	ret
 
 IntroSceneSomethingSomethingPresents:
-	ld c, 30
-	call DelayFrames
-	jp NextIntroScene
+	ld a, [wIntroSceneFrameCounter]
+	cp 30
+	call nc, FadeMoonPaletteIn
+	ld hl, wIntroSceneFrameCounter
+	inc [hl]
+	jp z, NextIntroScene
+	ret
 
 
 BrassIntroScrolldown1:
@@ -685,13 +682,22 @@ BrassIntroScrolldown1:
 	ret
 
 BrassIntroScrolldown2:
+	call FadeMoonPaletteIn
+	ld a, [hSCY]
+	and a ; 0
+	jp z, NextIntroScene
+	inc a
+	ld [hSCY], a
+	ret
+
+FadeMoonPaletteIn:
 	ld hl, wUnknBGPals palette MOON_PALETTE
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
 
 	cp LOW(palred (31) + palgreen (31) + palblue (31))
-	jr z, .skip
+	ret z
 	ld hl, (palred (1) + palgreen (1) + palblue (0))
 	ld a, d
 	and HIGH(palred (0) + palgreen (0) + palblue (31))
@@ -714,15 +720,7 @@ BrassIntroScrolldown2:
 	ld [de], a
 	ld d, h
 	ld e, l
-
-	call Intro_SetCGBPalUpdate
-.skip
-	ld a, [hSCY]
-	and a ; 0
-	jp z, NextIntroScene
-	inc a
-	ld [hSCY], a
-	ret
+	jp Intro_SetCGBPalUpdate
 
 BrassIntroSetupZygarde:
 	call Intro_ResetLYOverrides
@@ -1709,8 +1707,8 @@ BrassIntroBGPals:
 	RGB 03, 08, 10
 	RGB 03, 04, 06
 	RGB 02, 03, 12
-; palette 5
-	RGB 31, 31, 31
+MoonPalFadePal:
+	RGB 00, 00, 08
 	RGB 00, 00, 08
 	RGB 00, 00, 06
 	RGB 00, 00, 00
