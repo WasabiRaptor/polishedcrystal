@@ -848,6 +848,9 @@ CrystalIntroSequence: ; 620b
 StartTitleScreen: ; 6219
 	farcall BrassTitleScreenSetup
 .already_got_graphics
+	ld hl, rIE
+	set LCD_STAT, [hl]
+
 	xor a
 	ld [wJumptableIndex], a
 .loop
@@ -856,6 +859,9 @@ StartTitleScreen: ; 6219
 
 	call ClearSprites
 	call ClearBGPalettes
+
+	ld hl, rIE
+	res LCD_STAT, [hl]
 
 	call ClearScreen
 	call ApplyAttrAndTilemapInVBlank
@@ -991,8 +997,17 @@ TitleScreenTimer: ; 62f6
 	ret
 ; 6304
 
-TitleScreenMain: ; 6304
+RippleTitleWater:
+	ld hl, wLYOverrides + 4 + (10 * 8) ;where the water ripple should start
+	ld c, 4 + (3 * 8) ; number of lines of the water ripple
+.loop
+	;stuff goes here to make it go wavy wavy?
+	dec c
+	jr nz, .loop
+	ret
 
+TitleScreenMain: ; 6304
+	call RippleTitleWater
 ; Run the timer down.
 	ld hl, wcf65
 	ld e, [hl]
