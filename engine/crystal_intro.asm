@@ -494,13 +494,15 @@ NextIntroScene: ; e4956 (39:4956)
 	inc [hl]
 	ret
 
+MOON_PALETTE EQU 5
+
 BrassIntroSetup1:
 	call DisableLCD
 	xor a
 	ldh [hBGMapMode], a
 	ld a, 1
 	ldh [rVBK], a
-	ld hl, IntroSuicuneRunGFX
+	ld hl, IntroZygardeRunGFX
 	ld de, VTiles0 tile $00
 	call Intro_DecompressRequest2bpp_255Tiles
 
@@ -529,12 +531,25 @@ BrassIntroSetup1:
 	call Intro_DecompressRequest2bpp_128Tiles
 
 	ld hl, BrassIntro2Tileset
-	ld de, VTiles1
-	call Intro_DecompressRequest2bpp_255Tiles
+	ld de, VTiles2
+	call Intro_DecompressRequest2bpp_128Tiles
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wDecompressScratch)
+	ldh [rSVBK], a
+
+	ld de, wDecompressScratch + 128 tiles
+	ld hl, VTiles1
+	lb bc, 1, 128
+	call Get2bpp
+
+	pop af
+	ldh [rSVBK], a
 
 	ld hl, BrassIntro1Tileset
-	ld de, VTiles2 tile $10
-	call Intro_DecompressRequest2bpp_128Tiles
+	ld de, VTiles1 tile $20
+	call Intro_DecompressRequest2bpp_64Tiles
 
 	call Intro_SetCGBPalUpdate
 
@@ -553,12 +568,12 @@ BrassIntroSetup1:
 
 BrassIntroSetup2:
 	ld hl, MoonPalFadePal
-	ld de, wUnknBGPals palette 4
+	ld de, wUnknBGPals palette MOON_PALETTE
 	ld bc, 1 palettes
 	rst CopyBytes
 
 	ld hl, MoonPalFadePal
-	ld de, wBGPals palette 4
+	ld de, wBGPals palette MOON_PALETTE
 	ld bc, 1 palettes
 	rst CopyBytes
 
@@ -626,8 +641,8 @@ MoonPalFadePal:
 	RGB 00, 00, 00
 
 
-WATER_RIPPLE_EDGE_TILE 	EQU $e4
-WATER_RIPPLE_PAL		EQU 1
+WATER_RIPPLE_EDGE_TILE 	EQU $75
+WATER_RIPPLE_PAL		EQU 2
 
 SetWaterEdgeForRipple:
 	ld b, WATER_RIPPLE_EDGE_TILE
@@ -670,7 +685,7 @@ BrassIntroScrolldown1:
 	ret
 
 BrassIntroScrolldown2:
-	ld hl, wUnknBGPals palette 4
+	ld hl, wUnknBGPals palette MOON_PALETTE
 	ld a, [hli]
 	ld e, a
 	ld d, [hl]
@@ -687,8 +702,8 @@ BrassIntroScrolldown2:
 .do_color_add
 	add hl, de
 
-	ld bc, wUnknBGPals palette 4
-	ld de, wBGPals palette 4
+	ld bc, wUnknBGPals palette MOON_PALETTE
+	ld de, wBGPals palette MOON_PALETTE
 	ld a, l
 	ld [bc], a
 	ld [de], a
@@ -1333,20 +1348,20 @@ Intro_LoadTilemap: ; e541b (39:541b)
 	ldh [rSVBK], a
 	ret
 
-Intro_Scene16_AnimateSuicune: ; e5441 (39:5441)
+Intro_Scene16_AnimateZygarde: ; e5441 (39:5441)
 	ld a, [wIntroSceneFrameCounter]
 	and $3
-	jr z, Intro_ColoredSuicuneFrameSwap
+	jr z, Intro_ColoredZygardeFrameSwap
 	cp $3
-	jr z, .PrepareForSuicuneSwap
+	jr z, .PrepareForZygardeSwap
 	ret
 
-.PrepareForSuicuneSwap:
+.PrepareForZygardeSwap:
 	xor a
 	ldh [hBGMapMode], a
 	ret
 
-Intro_ColoredSuicuneFrameSwap: ; e5451 (39:5451)
+Intro_ColoredZygardeFrameSwap: ; e5451 (39:5451)
 	hlcoord 0, 0
 	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
 .loop
@@ -1670,34 +1685,34 @@ TitleScreenMain: ; 6304
 BrassIntroPals:
 BrassIntroBGPals:
 ; palette 0
-	RGB 03, 08, 10
-	RGB 05, 05, 09
-	RGB 03, 04, 06
+	RGB 00, 00, 08
+	RGB 04, 04, 07
 	RGB 03, 03, 05
+	RGB 05, 05, 09
 ; palette 1
 	RGB 03, 08, 10
 	RGB 05, 05, 09
 	RGB 03, 04, 06
-	RGB 02, 03, 12
+	RGB 03, 03, 05
 ; palette 2
+	RGB 03, 08, 10
+	RGB 05, 05, 09
+	RGB 03, 04, 06
+	RGB 02, 03, 12
+; palette 3
 	RGB 15, 16, 25
 	RGB 03, 04, 15
 	RGB 03, 04, 06
 	RGB 02, 03, 12
-; palette 3
+; palette 4
 	RGB 05, 10, 11
 	RGB 03, 08, 10
 	RGB 03, 04, 06
 	RGB 02, 03, 12
-; palette 4
+; palette 5
 	RGB 31, 31, 31
 	RGB 00, 00, 08
 	RGB 00, 00, 06
-	RGB 00, 00, 00
-; palette 5
-	RGB 05, 05, 09
-	RGB 03, 03, 05
-	RGB 00, 00, 08
 	RGB 00, 00, 00
 ; palette 6
 	RGB 31, 31, 31
@@ -1711,11 +1726,8 @@ BrassIntroBGPals:
 	RGB 00, 00, 00
 
 BrassIntroOBPals:
-SuicuneRunPal:
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
+ZygardeRunPal:
+INCBIN "gfx/intro/zygarde_run.gbcpal"
 
 INCBIN "gfx/intro/brass_title.gbcpal"
 
@@ -1750,8 +1762,8 @@ INCBIN "gfx/intro/brass_title.gbcpal"
 	RGB  0,  0,  0
 
 
-IntroSuicuneRunGFX: ; e555d
-INCBIN "gfx/intro/suicune_run.2bpp.lz"
+IntroZygardeRunGFX: ; e555d
+INCBIN "gfx/intro/zygarde_run.2bpp.lz"
 ; e592d
 
 IntroPichuWooperGFX: ; e592d
