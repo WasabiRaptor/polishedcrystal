@@ -470,6 +470,7 @@ NextIntroScene: ; e4956 (39:4956)
 BrassIntroSetup1:
 	xor a
 	ldh [hBGMapMode], a
+	ld a, 1
 	ldh [rVBK], a
 	ld hl, IntroSuicuneRunGFX
 	ld de, VTiles0 tile $00
@@ -492,14 +493,16 @@ BrassIntroSetup1:
 
 	pop af
 	ldh [rSVBK], a
-
-	ld hl, BrassIntro1Tileset
-	ld de, VTiles2 tile $00
-	call Intro_DecompressRequest2bpp_64Tiles
+	xor a
+	ldh [rVBK], a
 
 	ld hl, BrassIntro2Tileset
-	ld de, VTiles2 tile $40
-	call Intro_DecompressRequest2bpp_64Tiles
+	ld de, VTiles1
+	call Intro_DecompressRequest2bpp_255Tiles
+
+	ld hl, BrassIntro1Tileset
+	ld de, VTiles2 tile $10
+	call Intro_DecompressRequest2bpp_128Tiles
 
 	call Intro_SetCGBPalUpdate
 
@@ -586,7 +589,7 @@ BrassIntroScrolldown2:
 	ret
 
 BrassIntroSetupZygarde:
-	depixel 13, 27, 4, 0
+	depixel 15, 27, 4, 0
 	ld a, SPRITE_ANIM_INDEX_INTRO_SUICUNE
 	call _InitSpriteAnimStruct
 	ld a, $f0
@@ -1358,13 +1361,13 @@ BrassTitleScreenSetup::
 
 	call Intro_SetCGBPalUpdate
 
-	ld hl, BrassIntro1Tileset
-	ld de, VTiles2 tile $00
-	call Intro_DecompressRequest2bpp_64Tiles
-
 	ld hl, BrassIntro2Tileset
-	ld de, VTiles2 tile $40
-	call Intro_DecompressRequest2bpp_64Tiles
+	ld de, VTiles1
+	call Intro_DecompressRequest2bpp_255Tiles
+
+	ld hl, BrassIntro1Tileset
+	ld de, VTiles2 tile $10
+	call Intro_DecompressRequest2bpp_128Tiles
 
 	decoord 0, 0, wAttrMap
 	ld hl, BrassIntro2Attrmap
@@ -1378,45 +1381,46 @@ BrassTitleScreenSetup::
 
 BrassIntroPals:
 BrassIntroBGPals:
+; palette 0
+	RGB 03, 08, 10
+	RGB 05, 05, 09
+	RGB 03, 04, 06
+	RGB 03, 03, 05
+; palette 1
+	RGB 03, 08, 10
+	RGB 05, 05, 09
+	RGB 03, 04, 06
+	RGB 02, 03, 12
+; palette 2
+	RGB 15, 16, 25
+	RGB 03, 04, 15
+	RGB 03, 04, 06
+	RGB 02, 03, 12
+; palette 3
+	RGB 05, 10, 11
+	RGB 03, 08, 10
+	RGB 03, 04, 06
+	RGB 02, 03, 12
+; palette 4
 	RGB 31, 31, 31
+	RGB 00, 00, 08
+	RGB 00, 00, 06
+	RGB 00, 00, 00
+; palette 5
+	RGB 05, 05, 09
+	RGB 03, 03, 05
+	RGB 00, 00, 08
+	RGB 00, 00, 00
+; palette 6
 	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
-
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
+	RGB 15, 16, 25
+	RGB 03, 04, 15
+	RGB 00, 00, 00
+; palette 7
+	RGB 03, 08, 10
+	RGB 02, 06, 07
+	RGB 00, 00, 00
+	RGB 00, 00, 00
 
 BrassIntroOBPals:
 SuicuneRunPal:
@@ -1468,10 +1472,6 @@ INCBIN "gfx/intro/suicune_run.2bpp.lz"
 IntroPichuWooperGFX: ; e592d
 INCBIN "gfx/intro/pichu_wooper.2bpp.lz"
 ; e5c7d
-
-IntroTilemap003: ; e5ecd
-INCBIN "gfx/intro/003.tilemap.lz"
-; e5edd
 
 IntroGrass1GFX: ; e799d
 INCBIN "gfx/intro/grass1.2bpp"
