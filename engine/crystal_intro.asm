@@ -589,6 +589,9 @@ BrassIntroScrolldown2:
 	ret
 
 BrassIntroSetupZygarde:
+	call Intro_ResetLYOverrides
+	farcall InitTitleWater
+
 	depixel 15, 27, 4, 0
 	ld a, SPRITE_ANIM_INDEX_INTRO_SUICUNE
 	call _InitSpriteAnimStruct
@@ -599,11 +602,34 @@ BrassIntroSetupZygarde:
 	ld [wcf65], a
 	jp NextIntroScene
 
+RippleTitleWaterIntro:
+	ld a, [wIntroSceneFrameCounter]
+	and 3
+	ret nz
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wLYOverrides)
+	ldh [rSVBK], a
+
+	ld hl, wLYOverrides + 3 + (10 * 8) ;where the water ripple should start
+	ld c, 4 + (3 * 8) ; number of lines of the water ripple
+	ld a, [wLYOverrides + 2 + (10 * 8) + 4 + (3 * 8)] ;the last ripple
+	ld b, a
+.loop
+	ld a, [hl]
+	ld [hl], b
+	ld b, a
+	inc hl
+	dec c
+	jr nz, .loop
+	pop af
+	ldh [rSVBK], a
+	ret
 
 IntroSceneZygardeRun: ; e4bd3 (39:4bd3)
-; show Zygarde running across the screen.
-	xor a
-	ldh [hBGMapMode], a
+; show Zygarde running across the screen while rippling water
+	call RippleTitleWaterIntro
 
 	ld hl, wIntroSceneFrameCounter
 	ld a, [hl]
@@ -698,11 +724,14 @@ IntroScene10: ; e4c4f (39:4c4f)
 
 IntroSceneEnd: ; e5152 (39:5152)
 ; Cut out when the music ends, and lead into the title screen.
+	call RippleTitleWaterIntro
+
 	ld hl, wIntroSceneFrameCounter
 	ld a, [hl]
 	and a
 	jr z, .done
-	;ret ;just having it end right away now
+	inc [hl]
+	ret ;just having it end right away now
 
 .done
 	ld hl, wJumptableIndex

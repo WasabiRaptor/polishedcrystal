@@ -937,6 +937,18 @@ TitleScreenScene: ; 62a3
 
 
 TitleScreenEntrance: ; 62bc
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wLYOverrides)
+	ldh [rSVBK], a
+
+	call InitTitleWater
+
+	pop af
+	ldh [rSVBK], a
+
+	ld a, LOW(rSCX)
+	ldh [hLCDCPointer], a
 
 ; Next scene
 	ld hl, wJumptableIndex
@@ -996,22 +1008,65 @@ TitleScreenTimer: ; 62f6
 	ld [hl], d
 	ret
 ; 6304
+InitTitleWater::
+	ld hl, wLYOverrides + 4 + (10 * 8) ;where the water ripple should start
+	xor a ;0
+	ld [hli], a
+	call .initThreeLines
+	inc a ;1
+	call .initThreeLines
+	inc a ;2
+	ld [hli], a
+	call .initThreeLines
+	dec a ;1
+	call .initThreeLines
+	dec a ;0
+	ld [hli], a
+	call .initThreeLines
+	dec a ;-1
+	call .initThreeLines
+	dec a ;-2
+	ld [hli], a
+	call .initThreeLines
+	inc a ;-1
+	;fallthrough
+.initThreeLines
+	ld [hli], a
+	ld [hli], a
+	ld [hli], a
+	ret
+
 
 RippleTitleWater:
-	ld hl, wLYOverrides + 4 + (10 * 8) ;where the water ripple should start
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wLYOverrides)
+	ldh [rSVBK], a
+
+	ld hl, wLYOverrides + 3 + (10 * 8) ;where the water ripple should start
 	ld c, 4 + (3 * 8) ; number of lines of the water ripple
+	ld a, [wLYOverrides + 2 + (10 * 8) + 4 + (3 * 8)] ;the last ripple
+	ld b, a
 .loop
-	;stuff goes here to make it go wavy wavy?
+	ld a, [hl]
+	ld [hl], b
+	ld b, a
+	inc hl
 	dec c
 	jr nz, .loop
+	pop af
+	ldh [rSVBK], a
 	ret
 
 TitleScreenMain: ; 6304
-	call RippleTitleWater
+
 ; Run the timer down.
 	ld hl, wcf65
-	ld e, [hl]
-	inc hl
+	ld a, [hli]
+	ld e, a
+	and 3
+	call z, RippleTitleWater
+
 	ld d, [hl]
 	ld a, e
 	or d
@@ -1021,6 +1076,8 @@ TitleScreenMain: ; 6304
 	ld [hl], d
 	dec hl
 	ld [hl], e
+
+	call DelayFrame
 
 ; Save data can be deleted by pressing Up + B + Select.
 	call GetJoypad
