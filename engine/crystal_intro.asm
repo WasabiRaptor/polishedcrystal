@@ -575,6 +575,7 @@ SetWaterEdgeForRipple:
 	hlbgcoord $14, $0a
 	call .setcol
 	hlbgcoord $1f, $0a
+	call .setcol
 	ld a, 1
 	ldh [rVBK], a
 	ld b, WATER_RIPPLE_PAL
