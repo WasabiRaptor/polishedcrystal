@@ -880,7 +880,7 @@ IntroTitleSetup:
 
 IntroTitleRise:
 	ld a, [wIntroSceneFrameCounter]
-	cp (8 * 3 + 6)
+	cp (8 * 3 + 3)
 	jp nc, NextIntroScene
 	ld hl, wGlobalAnimYOffset
 	dec [hl]
@@ -1551,13 +1551,26 @@ BrassTitleScreenSetup:
 
 	call Intro_SetCGBPalUpdate
 
-	ld hl, BrassIntro2Tileset
-	ld de, VTiles1
-	call Intro_DecompressRequest2bpp_255Tiles
-
-	ld hl, BrassIntro1Tileset
-	ld de, VTiles2 tile $10
+	ld hl, BrassTitleImage
+	ld de, VTiles0
 	call Intro_DecompressRequest2bpp_128Tiles
+
+	ld hl, BrassIntro2Tileset
+	ld de, VTiles2
+	call Intro_DecompressRequest2bpp_128Tiles
+
+	ldh a, [rSVBK]
+	push af
+	ld a, BANK(wDecompressScratch)
+	ldh [rSVBK], a
+
+	ld de, wDecompressScratch + 128 tiles
+	ld hl, VTiles1
+	lb bc, 1, 128
+	call Get2bpp
+
+	pop af
+	ldh [rSVBK], a
 
 	call Intro_ResetLYOverrides
 	call InitTitleWater
