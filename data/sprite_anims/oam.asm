@@ -78,6 +78,8 @@ SpriteAnimOAMData: ; 8d94d
 	dbw $08, .OAMData_85 ; SPRITE_ANIM_FRAME_PARTY_FRAME_3
 	dbw $00, .OAMData_Mon_WIthItemFrame3 ; SPRITE_ANIM_FRAME_PARTY_ITEM_FRAME_3
 
+	dbw $00, .OAMData_Brass_Title ; SPRITE_ANIM_FRAME_BRASS_TITLE
+
 .OAMData_02:
 	db 1
 	dsprite -1,  4, -1,  4, $00, $0
@@ -641,3 +643,47 @@ SpriteAnimOAMData: ; 8d94d
 	dsprite  0,  0,  0,  4, $52, $1
 	dsprite  0,  0,  1,  4, $53, $1
 ; 8e706
+BRASS_TITLE_START_TILE EQU $0
+
+.OAMData_Brass_Title
+	db 40
+	dsprite  0,  0,  0,  0, BRASS_TITLE_START_TILE, $1
+	dsprite  0,  0,  1,  0, BRASS_TITLE_START_TILE+1, $1
+	dsprite  0,  0,  2,  0, BRASS_TITLE_START_TILE+2, $1
+	dsprite  0,  0,  3,  0, BRASS_TITLE_START_TILE+3, $1
+	dsprite  0,  0,  4,  0, BRASS_TITLE_START_TILE+4, $1
+	dsprite  0,  0,  5,  0, BRASS_TITLE_START_TILE+5, $1
+	dsprite  0,  0,  6,  0, BRASS_TITLE_START_TILE+6, $1
+	dsprite  0,  0,  7,  0, BRASS_TITLE_START_TILE+7, $1
+	dsprite  0,  0,  8,  0, BRASS_TITLE_START_TILE+8, $1
+	dsprite  0,  0,  9,  0, BRASS_TITLE_START_TILE+9, $1
+	dsprite  1,  0,  0,  0, BRASS_TITLE_START_TILE+10, $1
+	dsprite  1,  0,  1,  0, BRASS_TITLE_START_TILE+11, $1
+	dsprite  1,  0,  2,  0, BRASS_TITLE_START_TILE+12, $1
+	dsprite  1,  0,  3,  0, BRASS_TITLE_START_TILE+13, $1
+	dsprite  1,  0,  4,  0, BRASS_TITLE_START_TILE+14, $1
+	dsprite  1,  0,  5,  0, BRASS_TITLE_START_TILE+15, $1
+	dsprite  1,  0,  6,  0, BRASS_TITLE_START_TILE+16, $1
+	dsprite  1,  0,  7,  0, BRASS_TITLE_START_TILE+17, $1
+	dsprite  1,  0,  8,  0, BRASS_TITLE_START_TILE+18, $1
+	dsprite  1,  0,  9,  0, BRASS_TITLE_START_TILE+19, $1
+	dsprite  2,  0,  0,  0, BRASS_TITLE_START_TILE+20, $1
+	dsprite  2,  0,  1,  0, BRASS_TITLE_START_TILE+21, $1
+	dsprite  2,  0,  2,  0, BRASS_TITLE_START_TILE+22, $1
+	dsprite  2,  0,  3,  0, BRASS_TITLE_START_TILE+23, $1
+	dsprite  2,  0,  4,  0, BRASS_TITLE_START_TILE+24, $1
+	dsprite  2,  0,  5,  0, BRASS_TITLE_START_TILE+25, $1
+	dsprite  2,  0,  6,  0, BRASS_TITLE_START_TILE+26, $1
+	dsprite  2,  0,  7,  0, BRASS_TITLE_START_TILE+27, $1
+	dsprite  2,  0,  8,  0, BRASS_TITLE_START_TILE+28, $1
+	dsprite  2,  0,  9,  0, BRASS_TITLE_START_TILE+29, $1
+	dsprite  3,  0,  0,  0, BRASS_TITLE_START_TILE+30, $1
+	dsprite  3,  0,  1,  0, BRASS_TITLE_START_TILE+31, $1
+	dsprite  3,  0,  2,  0, BRASS_TITLE_START_TILE+32, $1
+	dsprite  3,  0,  3,  0, BRASS_TITLE_START_TILE+33, $1
+	dsprite  3,  0,  4,  0, BRASS_TITLE_START_TILE+34, $1
+	dsprite  3,  0,  5,  0, BRASS_TITLE_START_TILE+35, $1
+	dsprite  3,  0,  6,  0, BRASS_TITLE_START_TILE+36, $1
+	dsprite  3,  0,  7,  0, BRASS_TITLE_START_TILE+37, $1
+	dsprite  3,  0,  8,  0, BRASS_TITLE_START_TILE+38, $1
+	dsprite  3,  0,  9,  0, BRASS_TITLE_START_TILE+39, $1

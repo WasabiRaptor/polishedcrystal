@@ -72,12 +72,12 @@ Copyright_GFPresents: ; e4579
 	ld hl, VTiles0
 	ld de, wDecompressScratch
 	lb bc, 1, 8 tiles
-	call Request2bpp
+	call Get2bpp
 
 	ld hl, VTiles1
 	ld de, wDecompressScratch + $80 tiles
 	lb bc, 1, 8 tiles
-	call Request2bpp
+	call Get2bpp
 
 	pop af
 	ldh [rSVBK], a
@@ -495,6 +495,7 @@ NextIntroScene: ; e4956 (39:4956)
 	ret
 
 BrassIntroSetup1:
+	call DisableLCD
 	xor a
 	ldh [hBGMapMode], a
 	ld a, 1
@@ -523,6 +524,10 @@ BrassIntroSetup1:
 	xor a
 	ldh [rVBK], a
 
+	ld hl, BrassTitleImage
+	ld de, VTiles0
+	call Intro_DecompressRequest2bpp_128Tiles
+
 	ld hl, BrassIntro2Tileset
 	ld de, VTiles1
 	call Intro_DecompressRequest2bpp_255Tiles
@@ -534,6 +539,7 @@ BrassIntroSetup1:
 	call Intro_SetCGBPalUpdate
 
 	call .setup
+	call EnableLCD
 
 	ld de, MUSIC_NONE
 	call PlayMusic
@@ -546,11 +552,24 @@ BrassIntroSetup1:
 	jr BrassIntroLoadTileMapAttrMap
 
 BrassIntroSetup2:
+	ld hl, MoonPalFadePal
+	ld de, wUnknBGPals palette 4
+	ld bc, 1 palettes
+	rst CopyBytes
+
+	ld hl, MoonPalFadePal
+	ld de, wBGPals palette 4
+	ld bc, 1 palettes
+	rst CopyBytes
+
+	call Intro_SetCGBPalUpdate
+	call DelayFrame
+
 	xor a
 	ldh [hBGMapMode], a
 	call SetWaterEdgeForRipple
 	call .setup
-	jr NextIntroScene
+	jp NextIntroScene
 
 .setup
 	ld hl, BrassIntro2Attrmap
@@ -578,10 +597,13 @@ BrassIntroLoadTileMapAttrMap:
 	ld b, SCREEN_WIDTH
 .loop1
 .waitVblank
+	ldh a, [rLCDC]
+	and  1 << 7
+	jr z, .no_wait
 	ldh a, [rSTAT]
 	and 2 ; we don't want mode 2 or 3
 	jr nz, .waitVblank
-
+.no_wait
 	ld a, [hli]
 	ld [de], a
 	inc de
@@ -596,6 +618,13 @@ BrassIntroLoadTileMapAttrMap:
 	dec c
 	jr nz, .loop
 	ret
+
+MoonPalFadePal:
+	RGB 00, 00, 08
+	RGB 00, 00, 08
+	RGB 00, 00, 06
+	RGB 00, 00, 00
+
 
 WATER_RIPPLE_EDGE_TILE 	EQU $e4
 WATER_RIPPLE_PAL		EQU 1
@@ -641,6 +670,38 @@ BrassIntroScrolldown1:
 	ret
 
 BrassIntroScrolldown2:
+	ld hl, wUnknBGPals palette 4
+	ld a, [hli]
+	ld e, a
+	ld d, [hl]
+
+	cp LOW(palred (31) + palgreen (31) + palblue (31))
+	jr z, .skip
+	ld hl, (palred (1) + palgreen (1) + palblue (0))
+	ld a, d
+	and HIGH(palred (0) + palgreen (0) + palblue (31))
+	cp HIGH(palred (0) + palgreen (0) + palblue (31))
+	jr z, .do_color_add ; if blue has already hit 31, don't add more
+
+	ld hl, (palred (1) + palgreen (1) + palblue (1))
+.do_color_add
+	add hl, de
+
+	ld bc, wUnknBGPals palette 4
+	ld de, wBGPals palette 4
+	ld a, l
+	ld [bc], a
+	ld [de], a
+	inc de
+	inc bc
+	ld a, h
+	ld [bc], a
+	ld [de], a
+	ld d, h
+	ld e, l
+
+	call Intro_SetCGBPalUpdate
+.skip
 	ld a, [hSCY]
 	and a ; 0
 	jp z, NextIntroScene
@@ -783,16 +844,38 @@ IntroScene10: ; e4c4f (39:4c4f)
 	jp NextIntroScene
 
 IntroTitleSetup:
-	call RippleTitleWaterIntro
-	ld hl, wIntroSceneFrameCounter
-	inc [hl]
+	decoord 0, 0, wAttrMap
+	ld hl, BrassIntro2Attrmap
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	rst CopyBytes
+	farcall ApplyAttrMap
+
+	decoord 0, 0
+	ld hl, BrassIntro2Tilemap
+	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
+	rst CopyBytes
+	call SafeCopyTilemapAtOnce
+
+	depixel 7, 5, 1, 6
+	ld a, SPRITE_ANIM_INDEX_BRASS_TITLE
+	call _InitSpriteAnimStruct
+	xor a
+	ld [wGlobalAnimXOffset], a
+	ld [wGlobalAnimYOffset], a
+	ld [wIntroSceneFrameCounter], a
 	jp NextIntroScene
 
 IntroTitleRise:
+	ld a, [wIntroSceneFrameCounter]
+	cp (8 * 3 + 6)
+	jp nc, NextIntroScene
+	ld hl, wGlobalAnimYOffset
+	dec [hl]
+
 	call RippleTitleWaterIntro
 	ld hl, wIntroSceneFrameCounter
 	inc [hl]
-	jp NextIntroScene
+	ret
 
 IntroSceneEnd:
 	call RippleTitleWaterIntro
@@ -1373,7 +1456,7 @@ Intro_DecompressRequest2bpp:
 	pop bc
 
 	ld de, wDecompressScratch
-	call Request2bpp
+	call Get2bpp
 
 	pop af
 	ldh [rSVBK], a
@@ -1428,6 +1511,8 @@ Intro_PerspectiveScrollBG: ; e552f (39:552f)
 	ret
 
 BrassTitleScreenSetup:
+	call DisableLCD
+
 	xor a
 	ldh [hBGMapMode], a
 	ldh [hSCX], a
@@ -1468,15 +1553,7 @@ BrassTitleScreenSetup:
 	ld a, INTRO_TITLE_SETUP
 	ld [wJumptableIndex], a
 
-	decoord 0, 0, wAttrMap
-	ld hl, BrassIntro2Attrmap
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	rst CopyBytes
-	decoord 0, 0
-	ld hl, BrassIntro2Tilemap
-	ld bc, SCREEN_HEIGHT * SCREEN_WIDTH
-	rst CopyBytes
-	call ApplyAttrAndTilemapInVBlank
+	call EnableLCD
 	xor a
 	ldh [hBGMapMode], a
 	ld de, MUSIC_NONE
@@ -1640,10 +1717,7 @@ SuicuneRunPal:
 	RGB 12,  0, 31
 	RGB  0,  0,  0
 
-	RGB 31, 31, 31
-	RGB 31, 31, 31
-	RGB 12,  0, 31
-	RGB  0,  0,  0
+INCBIN "gfx/intro/brass_title.gbcpal"
 
 	RGB 31, 31, 31
 	RGB 31, 31, 31
@@ -1695,6 +1769,9 @@ INCBIN "gfx/intro/grass4.2bpp"
 
 IntroLogoGFX: ; 109407
 INCBIN "gfx/intro/logo.2bpp.lz"
+
+BrassTitleImage:
+INCBIN "gfx/intro/brass_title.2bpp.lz"
 
 BrassIntro1Tileset:
 INCBIN "gfx/intro/brass_intro1_tileset.2bpp.lz"
