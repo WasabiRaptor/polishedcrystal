@@ -39,7 +39,7 @@ MAP_NONE   EQU 0
 	map_const BRIDGE,                             			9,   25  ;  2
 	map_const ASAOKA_CITY,                             		20,  18 ;  3
 
-	map_const GELID_RAVINE_2,                       27,  12 ;  4 
+	map_const GELID_RAVINE_2,                       27,  12 ;  4
 	map_const GELID_RAVINE,                         27,  18 ;  5
 	map_const ROUTE_N_E_2,                         	18,  9  ;  6
 
@@ -98,4 +98,3 @@ MAP_NONE   EQU 0
 	map_const MYSTERY_DUNGEON_SOUTH,					    5,  5 ;  13
 	map_const MYSTERY_DUNGEON_EAST,						    5,  5 ;  14
 	map_const MYSTERY_DUNGEON_WEST,						    5,  5 ;  15
-

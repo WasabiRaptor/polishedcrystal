@@ -83,6 +83,7 @@ UnknownText_0x1bc089::
 	done
 
 UnknownText_0x1bc0a2::
+	text "@"
 	text_from_ram wStringBuffer1
 	text ""
 	line "recovered @"
@@ -91,48 +92,56 @@ UnknownText_0x1bc0a2::
 	done
 
 UnknownText_0x1bc0bb::
+	text "@"
 	text_from_ram wStringBuffer1
 	text "'s"
 	line "cured of poison."
 	done
 
 UnknownText_0x1bc0d2::
+	text "@"
 	text_from_ram wStringBuffer1
 	text "'s"
 	line "rid of paralysis."
 	done
 
 UnknownText_0x1bc0ea::
+	text "@"
 	text_from_ram wStringBuffer1
 	text "'s"
 	line "burn was healed."
 	done
 
 UnknownText_0x1bc101::
+	text "@"
 	text_from_ram wStringBuffer1
 	text ""
 	line "was defrosted."
 	done
 
 UnknownText_0x1bc115::
+	text "@"
 	text_from_ram wStringBuffer1
 	text ""
 	line "woke up."
 	done
 
 UnknownText_0x1bc123::
+	text "@"
 	text_from_ram wStringBuffer1
 	text "'s"
 	line "health returned."
 	done
 
 UnknownText_0x1bc13a::
+	text "@"
 	text_from_ram wStringBuffer1
 	text ""
 	line "is revitalized."
 	done
 
 UnknownText_0x1bc14f::
+	text "@"
 	text_from_ram wStringBuffer1
 	text " grew to"
 	line "level @"
@@ -143,6 +152,7 @@ UnknownText_0x1bc14f::
 	db "@@"
 
 UnknownText_0x1bc16e::
+	text "@"
 	text_from_ram wStringBuffer1
 	text " came"
 	line "to its senses."
@@ -327,6 +337,7 @@ UnknownText_0x1bc6c7::
 	done
 
 UnknownText_0x1bc6e9::
+	text "@"
 	text_from_ram wPlayerTrademonNickname
 	text " was"
 	line "sent to @"
@@ -339,12 +350,14 @@ UnknownText_0x1bc701::
 	done
 
 UnknownText_0x1bc703::
+	text "@"
 	text_from_ram wOTTrademonSenderName
 	text " bids"
 	line "farewell to"
 	done
 
 UnknownText_0x1bc719::
+	text "@"
 	text_from_ram wOTTrademonNickname
 	text "."
 	done
@@ -366,6 +379,7 @@ UnknownText_0x1bc739::
 	done
 
 UnknownText_0x1bc74c::
+	text "@"
 	text_from_ram wOTTrademonSenderName
 	text " sends"
 	line "@"
@@ -374,6 +388,7 @@ UnknownText_0x1bc74c::
 	done
 
 UnknownText_0x1bc75e::
+	text "@"
 	text_from_ram wOTTrademonSenderName
 	text " will"
 	line "trade @"

@@ -95,7 +95,6 @@ MapSetupScript_Connection: ; 153bf
 	db map_wildmons
 	db map_update_roam
 	db map_animations_on
-	db map_start_follower_following
 	db map_end
 
 MapSetupScript_Fall: ; 153d0
