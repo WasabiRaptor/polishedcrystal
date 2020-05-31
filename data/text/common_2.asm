@@ -85,6 +85,7 @@ UnknownText_0x1c0272::
 	prompt
 
 Text_Gained::
+	text "@"
 	text_from_ram wStringBuffer1
 	text " gained@@"
 
@@ -118,11 +119,13 @@ Text_YourFoesWeakGetmPkmn::
 	line "Get'm, @@"
 
 Text_BattleMonNick01::
+	text "@"
 	text_from_ram wBattleMonNick
 	text "!"
 	done
 
 Text_BattleMonNickComma::
+	text "@"
 	text_from_ram wBattleMonNick
 	text ",@@"
 
@@ -164,6 +167,7 @@ UnknownText_0x1c0396::
 	done
 
 UnknownText_0x1c03c2::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " is"
 	line "not compatible"
@@ -188,6 +192,7 @@ UnknownText_0x1c05c8::
 	prompt
 
 UnknownText_0x1c05dd::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " used"
 	line "Cut!"
@@ -205,6 +210,7 @@ UnknownText_0x1c0609::
 	db "@@"
 
 _UsedSurfText::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " used"
 	line "Surf!"
@@ -226,6 +232,7 @@ _AskSurfText::
 	done
 
 UnknownText_0x1c068e::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " used"
 	line "Waterfall!"
@@ -242,6 +249,7 @@ UnknownText_0x1c06bf::
 	done
 
 UnknownText_0x1c06de::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " used"
 	line "Dig!"
@@ -265,12 +273,14 @@ UnknownText_0x1c073b::
 	done
 
 UnknownText_0x1c0774::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " used"
 	line "Strength!"
 	done
 
 UnknownText_0x1c0788::
+	text "@"
 	text_from_ram wStringBuffer1
 	text " can"
 	line "move boulders."
@@ -295,6 +305,7 @@ UnknownText_0x1c07f4::
 	done
 
 UnknownText_0x1c0816::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " used"
 	line "Whirlpool!"
@@ -317,6 +328,7 @@ UnknownText_0x1c0864::
 	done
 
 UnknownText_0x1c0897::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " did a"
 	line "Headbutt!"
@@ -335,6 +347,7 @@ UnknownText_0x1c08bc::
 	done
 
 UnknownText_0x1c08f0::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " used"
 if DEF(FAITHFUL)
@@ -463,6 +476,7 @@ UnknownText_0x1c0aa9::
 	prompt
 
 UnknownText_0x1c0acc::
+	text "@"
 	text_from_ram wStringBuffer3
 	text ""
 	line "recovered from"
@@ -608,6 +622,7 @@ UnknownText_0x1c0db8::
 	done
 
 UnknownText_0x1c0dba::
+	text "@"
 	text_from_ram wStringBuffer1
 	text " came"
 	line "out of its Egg!@"
@@ -892,6 +907,7 @@ _OakPCText2::
 	prompt
 
 _OakPCText3::
+	text "@"
 	text_from_ram wStringBuffer3
 	text " Pokémon seen"
 	line "@"
@@ -1116,6 +1132,7 @@ UnknownText_0x1c1b6f::
 	prompt
 
 UnknownText_0x1c1b8e::
+	text "@"
 	text_from_ram wMonOrItemNameBuffer
 	text " isn't"
 	line "holding anything."
@@ -1136,6 +1153,7 @@ UnknownText_0x1c1bc4::
 	prompt
 
 UnknownText_0x1c1bdc::
+	text "@"
 	text_from_ram wMonOrItemNameBuffer
 	text " is"
 	line "already holding"

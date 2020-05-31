@@ -307,6 +307,7 @@ ContestResults_PartyFullText:
 	done
 
 GymStatue_CityGymText:
+	text "@"
 	text_from_ram wStringBuffer3
 	text ""
 	line "Pokémon Gym"

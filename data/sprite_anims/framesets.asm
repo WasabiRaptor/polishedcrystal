@@ -47,6 +47,8 @@ SpriteAnimFrameData: ; 8d6e6
 	dw .Frameset_3f ; SPRITE_ANIM_FRAMESET_INTRO_UNOWN_F
 	dw .Frameset_40 ; SPRITE_ANIM_FRAMESET_CELEBI_LEFT
 	dw .Frameset_41 ; SPRITE_ANIM_FRAMESET_CELEBI_RIGHT
+	dw .Frameset_Brass_Title ; SPRITE_ANIM_FRAMESET_BRASS_TITLE
+
 ; 8d76a
 
 ; OAM idx (see SpriteAnimOAMData), flip flags/duration
@@ -333,5 +335,10 @@ SpriteAnimFrameData: ; 8d6e6
 .Frameset_41:
 	frame SPRITE_ANIM_FRAME_IDX_7F,  8, OAM_X_FLIP
 	frame SPRITE_ANIM_FRAME_IDX_80,  8, OAM_X_FLIP
+	endanim
+
+
+.Frameset_Brass_Title
+	frame SPRITE_ANIM_FRAME_BRASS_TITLE, 1
 	endanim
 ; 8d94d

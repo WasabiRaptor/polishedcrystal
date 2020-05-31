@@ -94,16 +94,16 @@ ENDM
 
 
 	map_attributes DanielsTown, DANIELS_TOWN, $61, WEST
-	connection west, Bridge, BRIDGE, -3 
+	connection west, Bridge, BRIDGE, -3
 
 	map_attributes Bridge, BRIDGE, $61, WEST | EAST | SOUTH
-	connection south, Lake3, LAKE_3, 2 
+	connection south, Lake3, LAKE_3, 2
 	connection west, AsaokaCity, ASAOKA_CITY, 11
-	connection east, DanielsTown, DANIELS_TOWN, 3 
+	connection east, DanielsTown, DANIELS_TOWN, 3
 
 	map_attributes AsaokaCity, ASAOKA_CITY, $61, EAST | WEST
-	connection west, OuestPathway, OUEST_PATHWAY, 9 
-	connection east, Bridge, BRIDGE, -11 
+	connection west, OuestPathway, OUEST_PATHWAY, 9
+	connection east, Bridge, BRIDGE, -11
 
 	map_attributes GelidRavine, GELID_RAVINE, $61, NORTH | SOUTH | EAST
 	connection north, KikunoTown, KIKUNO_TOWN, -1
@@ -175,18 +175,18 @@ ENDM
 
 	map_attributes Lake1, LAKE_1, $61, NORTH | SOUTH | WEST
 	connection north, GelidRavine2, GELID_RAVINE_2, 14
-	connection south, Lake2, LAKE_2, 10
+	connection south, Lake2, LAKE_2, 8
 	connection west, Lake3, LAKE_3, 2
 
 	map_attributes Lake2, LAKE_2, $61, NORTH | SOUTH
-	connection north, Lake1, LAKE_1, -10
+	connection north, Lake1, LAKE_1, -8
 	connection south, RouteSE1, ROUTE_S_E_1, -10
 
 	map_attributes Lake3, LAKE_3, $61, NORTH | EAST
 	connection north, Bridge, BRIDGE, -2
 	connection east, Lake1, LAKE_1, -2
 
-	map_attributes RouteFakeExit, ROUTE_FAKE_EXIT, $61, NORTH | SOUTH 
+	map_attributes RouteFakeExit, ROUTE_FAKE_EXIT, $61, NORTH | SOUTH
 	connection north, MinamiWetlands, MINAMI_WETLANDS, -10
 	connection south, RouteFakeExitLoop, ROUTE_FAKE_EXIT_LOOP, 0
 

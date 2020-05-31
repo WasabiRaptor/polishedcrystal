@@ -249,6 +249,7 @@ UnknownText_0x1c4d47::
 	done
 
 UnknownText_0x1c4db0::
+	text "@"
 	text_from_ram wStringBuffer2
 	text " costs"
 	line "¥@"
@@ -498,6 +499,7 @@ ResetInitialOptionsText::
 	done
 
 UnknownText_0x1c5660::
+	text "@"
 	text_from_ram wMonOrItemNameBuffer
 	text " learned"
 	line "@"
@@ -520,6 +522,7 @@ UnknownText_0x1c5699::
 	done
 
 UnknownText_0x1c56af::
+	text "@"
 	text_from_ram wMonOrItemNameBuffer
 	text ""
 	line "did not learn"
@@ -529,6 +532,7 @@ UnknownText_0x1c56af::
 	prompt
 
 UnknownText_0x1c56c9::
+	text "@"
 	text_from_ram wMonOrItemNameBuffer
 	text ""
 	line "wants to learn"
@@ -642,6 +646,7 @@ UnknownText_0x1c589f::
 	done
 
 UnknownText_0x1c58bc::
+	text "@"
 	text_from_ram wStringBuffer1
 	text "?"
 	line "Is that right?"
@@ -704,6 +709,7 @@ Text_YouCantTakeAnEgg::
 	done
 
 Text_UberRestriction::
+	text "@"
 	text_from_ram wStringBuffer1
 	text " must be"
 	line "<LV>70 or higher."
@@ -750,6 +756,7 @@ UnknownText_0x1c5b38::
 	prompt
 
 UnknownText_0x1c5b53::
+	text "@"
 	text_from_ram wEnemyMonNick
 	text "'s data"
 	line "was newly added to"
@@ -808,18 +815,21 @@ Text_RestoreThePPOfWhichMove::
 	done
 
 Text_PPIsMaxedOut::
+	text "@"
 	text_from_ram wStringBuffer2
 	text "'s PP"
 	line "is maxed out."
 	prompt
 
 Text_PPsIncreased::
+	text "@"
 	text_from_ram wStringBuffer2
 	text "'s PP"
 	line "increased."
 	prompt
 
 Text_PPsMaximized::
+	text "@"
 	text_from_ram wStringBuffer2
 	text "'s PP"
 	line "maximized."
@@ -888,6 +898,7 @@ UnknownText_0x1c5e68::
 	done
 
 UnknownText_0x1c5ea8::
+	text "@"
 	text_from_ram wStringBuffer1
 	text " knows"
 	line "@"

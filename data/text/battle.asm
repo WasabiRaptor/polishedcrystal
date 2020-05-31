@@ -35,6 +35,7 @@ HookedPokemonAttackedText: ; 0x8075c
 ; 0x80778
 
 PokemonFellFromTreeText: ; 0x80778
+	text "@"
 	text_from_ram wEnemyMonNick
 	text " fell"
 	line "out of the tree!"
@@ -236,6 +237,7 @@ BattleText_SafeguardFaded: ; 0x808d2
 ; 0x808e7
 
 BattleText_PkmnLightScreenFell: ; 0x808e7
+	text "@"
 	text_from_ram wStringBuffer1
 	text " Pokémon's"
 	line "Light Screen fell!"
@@ -243,6 +245,7 @@ BattleText_PkmnLightScreenFell: ; 0x808e7
 ; 0x80905
 
 BattleText_PkmnReflectFaded: ; 0x80905
+	text "@"
 	text_from_ram wStringBuffer1
 	text " Pokémon's"
 	line "Reflect faded!"
@@ -342,6 +345,7 @@ SentAllToMomText:
 	prompt
 
 BattleText_PkmnFainted: ; 0x80a75
+	text "@"
 	text_from_ram wBattleMonNick
 	text ""
 	line "fainted!"
@@ -488,6 +492,7 @@ BattleText_ItemsCantBeUsedHere: ; 0x80bf3
 ; 0x80c0d
 
 BattleText_PkmnIsAlreadyOut: ; 0x80c0d
+	text "@"
 	text_from_ram wBattleMonNick
 	text ""
 	line "is already out."
@@ -495,6 +500,7 @@ BattleText_PkmnIsAlreadyOut: ; 0x80c0d
 ; 0x80c22
 
 BattleText_PkmnCantBeRecalled: ; 0x80c22
+	text "@"
 	text_from_ram wBattleMonNick
 	text ""
 	line "can't be recalled!"
@@ -541,6 +547,7 @@ BattleText_TheMoveIsDisabled: ; 0x80c5b
 ; 0x80c72
 
 BattleText_PkmnHasNoMovesLeft: ; 0x80c72
+	text "@"
 	text_from_ram wBattleMonNick
 	text ""
 	line "has no moves left!"
@@ -554,6 +561,7 @@ BattleText_TargetsEncoreEnded: ; 0x80c8a
 ; 0x80c9c
 
 BattleText_StringBuffer1GrewToLevel: ; 0x80c9c
+	text "@"
 	text_from_ram wStringBuffer1
 	text " grew to"
 	line "level @"
@@ -776,6 +784,7 @@ UsedMoveInsteadText:
 	done
 
 LoafingAroundText: ; 0x80f19
+	text "@"
 	text_from_ram wBattleMonNick
 	text " is"
 	line "loafing around."
@@ -783,6 +792,7 @@ LoafingAroundText: ; 0x80f19
 ; 0x80f31
 
 BeganToNapText: ; 0x80f31
+	text "@"
 	text_from_ram wBattleMonNick
 	text " began"
 	line "to nap!"
@@ -790,6 +800,7 @@ BeganToNapText: ; 0x80f31
 ; 0x80f44
 
 WontObeyText: ; 0x80f44
+	text "@"
 	text_from_ram wBattleMonNick
 	text " won't"
 	line "obey!"
@@ -797,6 +808,7 @@ WontObeyText: ; 0x80f44
 ; 0x80f54
 
 TurnedAwayText: ; 0x80f54
+	text "@"
 	text_from_ram wBattleMonNick
 	text " turned"
 	line "away!"
@@ -804,6 +816,7 @@ TurnedAwayText: ; 0x80f54
 ; 0x80f66
 
 IgnoredOrdersText: ; 0x80f66
+	text "@"
 	text_from_ram wBattleMonNick
 	text " ignored"
 	line "orders!"
@@ -811,6 +824,7 @@ IgnoredOrdersText: ; 0x80f66
 ; 0x80f7b
 
 IgnoredSleepingText: ; 0x80f7b
+	text "@"
 	text_from_ram wBattleMonNick
 	text " ignored"
 	line "orders…sleeping!"
