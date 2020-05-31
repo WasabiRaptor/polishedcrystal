@@ -239,7 +239,7 @@ ROMX $35
 ROMX $36
 	org $4000
 	"Diploma"
-	"Go Music"
+	"PMD Music"
 	"Portrait Pics"
 
 ROMX $37
