@@ -184,6 +184,7 @@
 	const MUSIC_TRAINER_BATTLE_PRISM           ; b9 ; unused
 	const MUSIC_GYM_LEADER_BATTLE_PRISM        ; ba ; unused
 	const MUSIC_PALETTE_BATTLE_PRISM           ; bb ; unused
+	const MUSIC_RUN_AWAY_PMD
 NUM_SONGS EQU const_value
 
 ; special

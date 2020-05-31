@@ -23,3 +23,4 @@ SongArtists:
 	db "GRonnoc@"
 	db "Cat333Pokemon@"
 	db "NotFroggestSpirit@"
+	db "Arata Iiyoshi@"
