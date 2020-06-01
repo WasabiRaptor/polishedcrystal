@@ -335,7 +335,7 @@ INCLUDE "audio/music/prism/gymleaderbattle.asm"
 INCLUDE "audio/music/prism/palettebattle.asm"
 
 
-SECTION "Go Music", ROMX
+SECTION "PMD Music", ROMX
 
 
 
