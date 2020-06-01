@@ -142,16 +142,16 @@ PlaceMapNameSign:: ; b8098 (2e:4098)
 	pop hl
 .graphics_ok
 	ld a, [hl]
-	cp $5d
+	cp $5d + 8
 	jr nc, .sliding_in
-	cp $10
+	cp $10 - 8
 	jr c, .sliding_out
-	ld a, $70
+	ld a, $70 + 8
 	jr .got_value
 .sliding_in
-	sub $5d
+	sub $5d + 8
 	add a
-	add $70
+	add $70 + 8
 	jr .got_value
 .sliding_out
 	push bc
@@ -194,89 +194,10 @@ LoadMapNameSignGFX: ; b80c6
 	ld a, [wCurrentLandmark]
 	ld e, a
 	farcall GetLandmarkName
-	; c = length of landmark name
-	ld c, 0
-	push hl
-	ld hl, wStringBuffer1
-.length_loop
-	ld a, [hli]
-	cp "@"
-	jr z, .got_length
-	inc c
-	jr .length_loop
-.got_length
-	pop hl
-	; bc = byte offset to center landmark name
-	ld a, SCREEN_WIDTH - 2
-	sub c
-	srl a
-	ld h, 0
-	ld l, a
-rept 4
-	add hl, hl
-endr
-	ld b, h
-	ld c, l
-	ld hl, VTiles3 tile POPUP_MAP_NAME_START
-	add hl, bc
-	; de = start of vram buffer
-	ld d, h
-	ld e, l
-	; hl = start of landmark name
-	ld hl, wStringBuffer1
-.loop
-	; a = tile offset into font graphic
-	ld a, [hli]
-	cp "@"
-	ret z
-	; save position in landmark name
-	push hl
-	; spaces are unique
-	cp "¯"
-	jr z, .space
-	cp " "
-	jr nz, .not_space
-.space
-	ld hl, TextBoxSpaceGFX
-	jr .got_tile
-.not_space
-	sub $80
-	; bc = byte offset into font graphic (a * 8)
-	push hl
-	ld h, 0
-	ld l, a
-	add hl, hl
-	add hl, hl
-	add hl, hl
-	ld b, h
-	ld c, l
-	pop hl
-	; hl = start of font tile graphic
-	push de
-	farcall LoadStandardFontPointer
-	pop de
-	add hl, bc
-.got_tile
-	; save position in vram
-	push de
-	; swap hl and de, so de = font tile graphic, and hl = vram
-	push hl
-	ld h, d
-	ld l, e
-	pop de
-	; get font tile into vram
-	call GetOpaque1bppFontTile
-	; restore hl = position in vram
-	pop hl
-	; increment position in vram
-	ld bc, LEN_2BPP_TILE
-	add hl, bc
-	; de = position in vram
-	ld d, h
-	ld e, l
-	; restore hl = position in landmark name
-	pop hl
-	jr .loop
+	ld de, wStringBuffer1
+	ld hl, wStringBuffer2
+	VWTextStart POPUP_MAP_NAME_START + 1
+	jp PlaceString
 ; b80d3
 
 InitMapNameFrame: ; b80d3
@@ -290,15 +211,13 @@ InitMapNameFrame: ; b80d3
 	call ByteFill
 	or X_FLIP
 	ld [hli], a
-	; middle rows
-rept 2
+	; middle row
 	and $ff - X_FLIP
 	ld [hli], a
 	ld bc, SCREEN_WIDTH - 2
 	call ByteFill
 	or X_FLIP
 	ld [hli], a
-endr
 	; bottom row
 	and $ff - X_FLIP
 	ld bc, SCREEN_WIDTH - 1
@@ -318,11 +237,6 @@ endr
 	ld [hli], a
 	; left, first line
 	ld a, POPUP_MAP_FRAME_START + 3 ; $fb
-	ld [hli], a
-	; first line
-	call .FillUpperMiddle
-	; right, first line
-	ld [hli], a
 	; left, second line
 	inc a ; $fc
 	ld [hli], a
