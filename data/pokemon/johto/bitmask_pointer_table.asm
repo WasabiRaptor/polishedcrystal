@@ -7,7 +7,7 @@ JohtoBitmasksPointerTable::
 	add_bitmaskstable Typhlosion
 	add_bitmaskstable Totodile
 	add_bitmaskstable Croconaw
-	add_bitmaskstable Feraligatr
+	add_bitmaskstable Feraligator
 	add_bitmaskstable Sentret
 	add_bitmaskstable Furret
 	add_bitmaskstable Hoothoot

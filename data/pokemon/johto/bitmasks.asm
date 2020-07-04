@@ -15,7 +15,7 @@ TotodileBitmasks:	INCLUDE "gfx/pokemon/totodile/bitmask.asm"
 
 CroconawBitmasks:	INCLUDE "gfx/pokemon/croconaw/bitmask.asm"
 
-FeraligatrBitmasks:	INCLUDE "gfx/pokemon/feraligatr/bitmask.asm"
+FeraligatorBitmasks:	INCLUDE "gfx/pokemon/feraligator/bitmask.asm"
 
 SentretBitmasks:	INCLUDE "gfx/pokemon/sentret/bitmask.asm"
 
@@ -236,4 +236,3 @@ LugiaBitmasks:	INCLUDE "gfx/pokemon/lugia/bitmask.asm"
 Ho_ohBitmasks:	INCLUDE "gfx/pokemon/ho_oh/bitmask.asm"
 
 CelebiBitmasks:	INCLUDE "gfx/pokemon/celebi/bitmask.asm"
-

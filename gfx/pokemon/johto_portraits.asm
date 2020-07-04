@@ -71,12 +71,12 @@ CroconawHappyOAM::	INCBIN "gfx/pokemon/croconaw/portraits/happyOAM.2bpp.lz"
 
 
 
-SECTION "Feraligatr Portraits", ROMX
+SECTION "Feraligator Portraits", ROMX
 
-FeraligatrNeutralBG::	INCBIN "gfx/pokemon/feraligatr/portraits/neutralBG.2bpp.lz"
-FeraligatrNeutralOAM::	INCBIN "gfx/pokemon/feraligatr/portraits/neutralOAM.2bpp.lz"
-FeraligatrHappyBG::	INCBIN "gfx/pokemon/feraligatr/portraits/happyBG.2bpp.lz"
-FeraligatrHappyOAM::	INCBIN "gfx/pokemon/feraligatr/portraits/happyOAM.2bpp.lz"
+FeraligatorNeutralBG::	INCBIN "gfx/pokemon/feraligator/portraits/neutralBG.2bpp.lz"
+FeraligatorNeutralOAM::	INCBIN "gfx/pokemon/feraligator/portraits/neutralOAM.2bpp.lz"
+FeraligatorHappyBG::	INCBIN "gfx/pokemon/feraligator/portraits/happyBG.2bpp.lz"
+FeraligatorHappyOAM::	INCBIN "gfx/pokemon/feraligator/portraits/happyOAM.2bpp.lz"
 
 
 
@@ -1200,5 +1200,3 @@ CelebiNeutralBG::	INCBIN "gfx/pokemon/celebi/portraits/neutralBG.2bpp.lz"
 CelebiNeutralOAM::	INCBIN "gfx/pokemon/celebi/portraits/neutralOAM.2bpp.lz"
 CelebiHappyBG::	INCBIN "gfx/pokemon/celebi/portraits/happyBG.2bpp.lz"
 CelebiHappyOAM::	INCBIN "gfx/pokemon/celebi/portraits/happyOAM.2bpp.lz"
-
-

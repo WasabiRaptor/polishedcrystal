@@ -23,8 +23,8 @@ TotodileFramesPointers::
 CroconawFramesPointers::
 	add_frames Croconaw
 
-FeraligatrFramesPointers::
-	add_frames Feraligatr
+FeraligatorFramesPointers::
+	add_frames Feraligator
 
 SentretFramesPointers::
 	add_frames Sentret
@@ -336,4 +336,3 @@ Ho_ohFramesPointers::
 
 CelebiFramesPointers::
 	add_frames Celebi
-

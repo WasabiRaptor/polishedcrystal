@@ -23,8 +23,8 @@ TotodileBitmasksPointers::
 CroconawBitmasksPointers::
 	add_bitmasks Croconaw
 
-FeraligatrBitmasksPointers::
-	add_bitmasks Feraligatr
+FeraligatorBitmasksPointers::
+	add_bitmasks Feraligator
 
 SentretBitmasksPointers::
 	add_bitmasks Sentret
@@ -336,4 +336,3 @@ Ho_ohBitmasksPointers::
 
 CelebiBitmasksPointers::
 	add_bitmasks Celebi
-

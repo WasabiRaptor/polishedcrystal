@@ -23,8 +23,8 @@ TotodilePicPointers::
 CroconawPicPointers::
 	add_pics Croconaw
 
-FeraligatrPicPointers::
-	add_pics Feraligatr
+FeraligatorPicPointers::
+	add_pics Feraligator
 
 SentretPicPointers::
 	add_pics Sentret
@@ -336,4 +336,3 @@ Ho_ohPicPointers::
 
 CelebiPicPointers::
 	add_pics Celebi
-

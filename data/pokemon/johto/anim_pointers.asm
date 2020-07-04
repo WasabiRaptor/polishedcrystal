@@ -23,8 +23,8 @@ TotodileAnimationPointers::
 CroconawAnimationPointers::
 	add_anim Croconaw
 
-FeraligatrAnimationPointers::
-	add_anim Feraligatr
+FeraligatorAnimationPointers::
+	add_anim Feraligator
 
 SentretAnimationPointers::
 	add_anim Sentret
@@ -336,4 +336,3 @@ Ho_ohAnimationPointers::
 
 CelebiAnimationPointers::
 	add_anim Celebi
-

@@ -7,7 +7,7 @@ JohtoBaseDataPointerTable::
 	add_basedatatable Typhlosion
 	add_basedatatable Totodile
 	add_basedatatable Croconaw
-	add_basedatatable Feraligatr
+	add_basedatatable Feraligator
 	add_basedatatable Sentret
 	add_basedatatable Furret
 	add_basedatatable Hoothoot

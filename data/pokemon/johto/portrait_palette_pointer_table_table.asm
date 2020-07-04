@@ -7,7 +7,7 @@ JohtoPortraitPalettePointerTableTable::
 	add_portraitpalettetabletable Typhlosion
 	add_portraitpalettetabletable Totodile
 	add_portraitpalettetabletable Croconaw
-	add_portraitpalettetabletable Feraligatr
+	add_portraitpalettetabletable Feraligator
 	add_portraitpalettetabletable Sentret
 	add_portraitpalettetabletable Furret
 	add_portraitpalettetabletable Hoothoot

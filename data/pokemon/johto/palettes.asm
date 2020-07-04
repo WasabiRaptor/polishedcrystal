@@ -31,9 +31,9 @@ CroconawPalettes:
 CroconawNormalPalette:	INCBIN "gfx/pokemon/croconaw/front.gbcpal", middle_colors
 CroconawShinyPalette:	INCLUDE "gfx/pokemon/croconaw/shiny.pal"
 
-FeraligatrPalettes:
-FeraligatrNormalPalette:	INCBIN "gfx/pokemon/feraligatr/front.gbcpal", middle_colors
-FeraligatrShinyPalette:	INCLUDE "gfx/pokemon/feraligatr/shiny.pal"
+FeraligatorPalettes:
+FeraligatorNormalPalette:	INCBIN "gfx/pokemon/feraligator/front.gbcpal", middle_colors
+FeraligatorShinyPalette:	INCLUDE "gfx/pokemon/feraligator/shiny.pal"
 
 SentretPalettes:
 SentretNormalPalette:	INCBIN "gfx/pokemon/sentret/front.gbcpal", middle_colors
@@ -512,4 +512,3 @@ Ho_ohShinyPalette:	INCLUDE "gfx/pokemon/ho_oh/shiny.pal"
 CelebiPalettes:
 CelebiNormalPalette:	INCBIN "gfx/pokemon/celebi/front.gbcpal", middle_colors
 CelebiShinyPalette:	INCLUDE "gfx/pokemon/celebi/shiny.pal"
-

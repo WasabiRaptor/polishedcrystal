@@ -7,7 +7,7 @@ JohtoPokedexEntryPointerTable::
 	add_pokedexentrytable Typhlosion
 	add_pokedexentrytable Totodile
 	add_pokedexentrytable Croconaw
-	add_pokedexentrytable Feraligatr
+	add_pokedexentrytable Feraligator
 	add_pokedexentrytable Sentret
 	add_pokedexentrytable Furret
 	add_pokedexentrytable Hoothoot

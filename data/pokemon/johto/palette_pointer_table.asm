@@ -7,7 +7,7 @@ JohtoPalettePointerTable::
 	add_palettetable Typhlosion
 	add_palettetable Totodile
 	add_palettetable Croconaw
-	add_palettetable Feraligatr
+	add_palettetable Feraligator
 	add_palettetable Sentret
 	add_palettetable Furret
 	add_palettetable Hoothoot

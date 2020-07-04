@@ -47,10 +47,10 @@ CroconawFrontpic::	INCBIN "gfx/pokemon/croconaw/front.animated.2bpp.lz"
 CroconawBackpic::	INCBIN "gfx/pokemon/croconaw/back.2bpp.lz"
 
 
-SECTION "Feraligatr Pics", ROMX
+SECTION "Feraligator Pics", ROMX
 
-FeraligatrFrontpic::	INCBIN "gfx/pokemon/feraligatr/front.animated.2bpp.lz"
-FeraligatrBackpic::	INCBIN "gfx/pokemon/feraligatr/back.2bpp.lz"
+FeraligatorFrontpic::	INCBIN "gfx/pokemon/feraligator/front.animated.2bpp.lz"
+FeraligatorBackpic::	INCBIN "gfx/pokemon/feraligator/back.2bpp.lz"
 
 
 SECTION "Sentret Pics", ROMX
@@ -673,4 +673,3 @@ SECTION "Celebi Pics", ROMX
 
 CelebiFrontpic::	INCBIN "gfx/pokemon/celebi/front.animated.2bpp.lz"
 CelebiBackpic::	INCBIN "gfx/pokemon/celebi/back.2bpp.lz"
-

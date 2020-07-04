@@ -7,7 +7,7 @@ JohtoNamePointerTable::
 	add_nametable Typhlosion
 	add_nametable Totodile
 	add_nametable Croconaw
-	add_nametable Feraligatr
+	add_nametable Feraligator
 	add_nametable Sentret
 	add_nametable Furret
 	add_nametable Hoothoot

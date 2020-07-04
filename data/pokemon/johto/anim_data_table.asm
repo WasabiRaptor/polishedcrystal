@@ -7,7 +7,7 @@ JohtoAnimPointerTable::
 	variant_animdata Typhlosion
 	variant_animdata Totodile
 	variant_animdata Croconaw
-	variant_animdata Feraligatr
+	variant_animdata Feraligator
 	variant_animdata Sentret
 	variant_animdata Furret
 	variant_animdata Hoothoot

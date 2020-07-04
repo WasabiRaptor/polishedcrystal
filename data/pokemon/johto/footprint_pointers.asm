@@ -23,8 +23,8 @@ TotodileFootprintPointers::
 CroconawFootprintPointers::
 	add_footprint Croconaw
 
-FeraligatrFootprintPointers::
-	add_footprint Feraligatr
+FeraligatorFootprintPointers::
+	add_footprint Feraligator
 
 SentretFootprintPointers::
 	add_footprint Sentret
@@ -336,4 +336,3 @@ Ho_ohFootprintPointers::
 
 CelebiFootprintPointers::
 	add_footprint Celebi
-

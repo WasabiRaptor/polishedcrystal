@@ -15,7 +15,7 @@ TotodileFrames:	INCLUDE "gfx/pokemon/totodile/frames.asm"
 
 CroconawFrames:	INCLUDE "gfx/pokemon/croconaw/frames.asm"
 
-FeraligatrFrames:	INCLUDE "gfx/pokemon/feraligatr/frames.asm"
+FeraligatorFrames:	INCLUDE "gfx/pokemon/feraligator/frames.asm"
 
 SentretFrames:	INCLUDE "gfx/pokemon/sentret/frames.asm"
 
@@ -236,4 +236,3 @@ LugiaFrames:	INCLUDE "gfx/pokemon/lugia/frames.asm"
 Ho_ohFrames:	INCLUDE "gfx/pokemon/ho_oh/frames.asm"
 
 CelebiFrames:	INCLUDE "gfx/pokemon/celebi/frames.asm"
-

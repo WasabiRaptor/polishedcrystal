@@ -7,7 +7,7 @@ JohtoOverworldSpritePointerTable::
 	add_overworldspritetable Typhlosion
 	add_overworldspritetable Totodile
 	add_overworldspritetable Croconaw
-	add_overworldspritetable Feraligatr
+	add_overworldspritetable Feraligator
 	add_overworldspritetable Sentret
 	add_overworldspritetable Furret
 	add_overworldspritetable Hoothoot

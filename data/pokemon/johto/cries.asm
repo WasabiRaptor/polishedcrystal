@@ -8,7 +8,7 @@ JohtoCries::
 	mon_cry CRY_TYPHLOSION,  $f00,  $0d4 ; TYPHLOSION
 	mon_cry CRY_TOTODILE,    $46c,  $0e8 ; TOTODILE
 	mon_cry CRY_TOTODILE,    $440,  $110 ; CROCONAW
-	mon_cry CRY_TOTODILE,    $3fc,  $180 ; FERALIGATR
+	mon_cry CRY_TOTODILE,    $3fc,  $180 ; FERALIGATOR
 	mon_cry CRY_SENTRET,     $08a,  $0b8 ; SENTRET
 	mon_cry CRY_SENTRET,     $06b,  $102 ; FURRET
 	mon_cry CRY_HOOTHOOT,    $091,  $0d8 ; HOOTHOOT
@@ -100,4 +100,3 @@ JohtoCries::
 	mon_cry CRY_TYPHLOSION,  $000,  $100 ; LUGIA
 	mon_cry CRY_AIPOM,       $000,  $180 ; HO_OH
 	mon_cry CRY_ENTEI,       $14a,  $111 ; CELEBI
-    

@@ -7,7 +7,7 @@ JohtoFramesPointerTable::
 	add_framestable Typhlosion
 	add_framestable Totodile
 	add_framestable Croconaw
-	add_framestable Feraligatr
+	add_framestable Feraligator
 	add_framestable Sentret
 	add_framestable Furret
 	add_framestable Hoothoot

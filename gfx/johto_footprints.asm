@@ -18,7 +18,7 @@ TotodileFootprint::	INCBIN "gfx/pokemon/totodile/footprint.1bpp"
 
 CroconawFootprint::	INCBIN "gfx/pokemon/croconaw/footprint.1bpp"
 
-FeraligatrFootprint::	INCBIN "gfx/pokemon/feraligatr/footprint.1bpp"
+FeraligatorFootprint::	INCBIN "gfx/pokemon/feraligator/footprint.1bpp"
 
 SentretFootprint::	INCBIN "gfx/pokemon/sentret/footprint.1bpp"
 
@@ -201,4 +201,3 @@ LugiaFootprint::	INCBIN "gfx/pokemon/lugia/footprint.1bpp"
 Ho_ohFootprint::	INCBIN "gfx/pokemon/ho_oh/footprint.1bpp"
 
 CelebiFootprint::	INCBIN "gfx/pokemon/celebi/footprint.1bpp"
-

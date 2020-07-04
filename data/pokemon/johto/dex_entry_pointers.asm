@@ -23,8 +23,8 @@ TotodilePokedexEntryPointers::
 CroconawPokedexEntryPointers::
 	add_pokedexentry Croconaw
 
-FeraligatrPokedexEntryPointers::
-	add_pokedexentry Feraligatr
+FeraligatorPokedexEntryPointers::
+	add_pokedexentry Feraligator
 
 SentretPokedexEntryPointers::
 	add_pokedexentry Sentret
@@ -336,4 +336,3 @@ Ho_ohPokedexEntryPointers::
 
 CelebiPokedexEntryPointers::
 	add_pokedexentry Celebi
-

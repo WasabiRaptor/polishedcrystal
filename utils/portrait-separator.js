@@ -90,9 +90,9 @@ loadImage(filename).then(inImage => {
 
         // put it in the right place
         if (bg) {
-            let j = 2
+            let j = 1
             if (bg1 && compareColor(color, bg1)) j = 0
-            if (bg2 && compareColor(color, bg2)) j = 1
+            if (bg2 && compareColor(color, bg2)) j = 2
             if (compareColor(color, black)) j = 3
             bgData[i] = j
             fgData[i] = 0
@@ -109,7 +109,7 @@ loadImage(filename).then(inImage => {
     // save images
     bgctx.putImageData(bgImageData, 0, 0)
     let bgWriter = fs.createWriteStream(filename.replace(".png", "BG.png"))
-    let bgStream = bgCanvas.createPNGStream({palette: new Uint8ClampedArray(bg1.concat(bg2 || white).concat(white).concat(black))})
+    let bgStream = bgCanvas.createPNGStream({palette: new Uint8ClampedArray(bg1.concat(white).concat(bg2 || white).concat(black))})
     bgStream.pipe(bgWriter)
 
     fgctx.putImageData(fgImageData, 0, 0)

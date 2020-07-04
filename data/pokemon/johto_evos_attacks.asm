@@ -146,7 +146,7 @@ TotodileEvosAttacks:
 	learnmove 15, SCARY_FACE
 	learnmove 20, METAL_CLAW ; Ice Fang → egg move
 	learnmove 22, REVERSAL ; Flail → similar move
-	learnmove 27, AGILITY ; Feraligatr move
+	learnmove 27, AGILITY ; Feraligator move
 	learnmove 29, CRUNCH
 	learnmove 34, ANCIENTPOWER ; Chip Away → HGSS tutor move
 	learnmove 36, SLASH
@@ -158,7 +158,7 @@ TotodileEvosAttacks:
 	db 0 ; no more level-up moves
 
 CroconawEvosAttacks:
-	evolution EVOLVE_LEVEL, 30, FERALIGATR
+	evolution EVOLVE_LEVEL, 30, FERALIGATOR
 	db 0 ; no more evolutions
 	learnmove 1, SCRATCH
 	learnmove 1, LEER
@@ -168,7 +168,7 @@ CroconawEvosAttacks:
 	learnmove 15, SCARY_FACE
 	learnmove 21, METAL_CLAW ; Ice Fang → egg move
 	learnmove 24, REVERSAL ; Flail → similar move
-	learnmove 30, AGILITY ; Feraligatr move
+	learnmove 30, AGILITY ; Feraligator move
 	learnmove 33, CRUNCH
 	learnmove 39, ANCIENTPOWER ; Chip Away → HGSS tutor move
 	learnmove 42, SLASH
@@ -179,7 +179,7 @@ CroconawEvosAttacks:
 	learnmove 66, HYDRO_PUMP
 	db 0 ; no more level-up moves
 
-FeraligatrEvosAttacks:
+FeraligatorEvosAttacks:
 	db 0 ; no more evolutions
 	learnmove 1, NIGHT_SLASH ; evolution move
 	learnmove 1, SCRATCH

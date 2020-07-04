@@ -7,7 +7,7 @@ JohtoOverworldPalettePointerTable::
 	add_overworldpalettetable Typhlosion
 	add_overworldpalettetable Totodile
 	add_overworldpalettetable Croconaw
-	add_overworldpalettetable Feraligatr
+	add_overworldpalettetable Feraligator
 	add_overworldpalettetable Sentret
 	add_overworldpalettetable Furret
 	add_overworldpalettetable Hoothoot
