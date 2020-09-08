@@ -583,7 +583,7 @@ else
 endc
 
 _CGB_MapPals: ; 91c8
-	call LoadMapPals
+	farcall LoadMapPals
 	ld a, CGB_MAPPALS
 	ld [wMemCGBLayout], a
 	ret

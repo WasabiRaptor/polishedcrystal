@@ -263,11 +263,78 @@ INCLUDE "gfx/tilesets/link_trade.pal"
 PlayerPaletteOptions:
 INCLUDE "gfx/overworld/npc_sprites.pal" ;duplicating this for now
 
+
+LoadMapPals::
+	call LoadSpecialMapPalette
+	call LoadPlayerFollowerOWPalsTimeOfDay
+
+	ld c, NUM_OBJECT_STRUCTS-2
+	ld hl, wObject1Sprite
+.NPColorsLoop
+	ld a, [hli] ; inc to the mapobject index
+	and a
+	ret z ; if theres no sprite here, nothing left to do
+	push af
+	push bc
+
+	ld a, [hl] ;get the mapobject index to get the color and slot to put the color in
+	call GetMapObject
+	ld hl, MAPOBJECT_COLOR
+	add hl, bc
+	ld a, [hl]
+	and $f
+	cp PERSONTYPE_POKEMON
+	jr z, .GetNPCPokemonPalette
+
+	ld a, [hli]
+	swap a
+	and $f
+	push hl
+	ld hl, wUnknOBPals
+	ld bc, 1 palettes
+	rst AddNTimes
+	ld d, h
+	ld e, l
+	pop hl
+	ld a, [hl] ; color 2
+	call LoadNPCPalette
+
+	pop bc
+	pop af
+	dec c
+	jr nz, .NPColorsLoop
+	ret
+
+.GetNPCPokemonPalette
+	pop af
+	ld [wCurSpecies], a
+	ld a, [hli]
+	swap a
+	and $f
+	push af
+	ld a, [hl] ; MAPOBJECT_COLOR2
+	and $f
+	ld [wCurGroup], a
+	ld a, [hl]
+	swap a
+	and $f
+	ld [wCurForm], a
+	pop af
+	ld hl, wUnknOBPals
+	ld bc, 1 palettes
+	rst AddNTimes
+	ld d, h
+	ld e, l
+	push de
+	call GetRelevantMonOverworldPalettes
+	jr NPCOrPokemonPaletteToD
+
 LoadNPCPalette::
 	push de
 	ld hl, PlayerPaletteOptions
 	ld bc, 1 palettes
 	rst AddNTimes
+NPCOrPokemonPaletteToD:
 	ld a, [wTimeOfDayPal]
 	push af
 	ld a, BANK(wUnknOBPals)

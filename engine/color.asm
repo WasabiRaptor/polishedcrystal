@@ -496,10 +496,6 @@ ClearBytes: ; 0x9a5b
 	ret
 ; 0x9a64
 
-LoadMapPals:
-	farcall LoadSpecialMapPalette
-	farjp LoadPlayerFollowerOWPalsTimeOfDay
-
 GetBattlemonBackpicPalette:
 	farcall GetPartyMonPersonality
 	ld c, l
