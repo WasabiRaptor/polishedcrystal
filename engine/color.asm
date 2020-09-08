@@ -568,7 +568,7 @@ LoadMapPals:
 	;ld a, BANK(wUnknOBPals)
 	;call FarCopyWRAM
 
-	farcall LoadSpecialMapOBPalette
+	farcall LoadPlayerFollowerOWPalsTimeOfDay
 
 	ld a, [wTileset]
 	cp TILESET_FOREST ; for Yellow Forest

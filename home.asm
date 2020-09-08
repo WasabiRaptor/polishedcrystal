@@ -1150,13 +1150,11 @@ endr
 INCLUDE "data/pokemon/variant_palette_table.asm"
 
 GetRelevantMonOverworldPalettes::
-	ld b, a
 	ldh a, [hROMBank]
 	push af
 
 	push de
-	ld a, b
-	push af ; preserve the inputted time of day and flag for shiny
+	push af ; preserve flag for shiny
 
 
 	ld hl, RegionalOverworldPalTable
@@ -1167,10 +1165,6 @@ GetRelevantMonOverworldPalettes::
 	ld a, [wCurForm]
 	call NextHLTable
 	pop af ; get the inputted time of day pal and flag for shiny
-	push af
-	ld bc, 4 ; two colors in the palettes
-	rst AddNTimes
-	pop af
 	jr nc, .not_shiny
 	ld bc, 4 * 5
 	add hl, bc
