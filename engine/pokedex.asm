@@ -16,8 +16,8 @@
 
 POKEDEX_SCY EQU 0
 POKEDEX_SCX EQU 5
-GLOBAL POKEDEX_SCX
-GLOBAL POKEDEX_SCY
+EXPORT POKEDEX_SCX
+EXPORT POKEDEX_SCY
 
 Pokedex: ; 40000
 	ldh a, [hWX]
@@ -383,7 +383,7 @@ Pokedex_PrintTotalEncounters:
 
 StringEncounters:
 	db "Total Encounters@"
-StringThisCycle
+StringThisCycle:
 	db "On This Cycle@"
 
 Pokedex_InitDexEntryScreen: ; 40217 (10:4217)
@@ -1918,7 +1918,7 @@ Pokedex_PlaceDefaultStringIfNotSeen: ; 40b8d (10:4b8d)
 Pokedex_DrawFootprint: ; 40ba0
 	hlcoord 18, 1
 	ld a, $6f
-Pokedex_DrawFootprint_at_HL
+Pokedex_DrawFootprint_at_HL:
 	;push bc ;not sure if necessary
 	ld [hli], a
 	inc a

@@ -15,6 +15,7 @@ BlindingFlashPalette: ; 49418
 ; 49420
 
 LoadSpecialMapPalette: ; 494ac
+	EXPORT GenericMart_BlockData
 	call GetMapHeaderTimeOfDayNybble
 	cp PALETTE_DARK
 	jr nz, .not_dark

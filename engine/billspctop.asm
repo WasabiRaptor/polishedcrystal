@@ -88,7 +88,7 @@ BillsPC_SeeYa: ; e4cb
 	scf
 	ret
 
-BillsPC_QuickDeposit
+BillsPC_QuickDeposit:
 	and a
 	ret
 

@@ -80,7 +80,7 @@ kantotext:
 johtotext:
 	text "johto"
 	done
-hoenntext
+hoenntext:
 	text "hoenn"
 	done
 
