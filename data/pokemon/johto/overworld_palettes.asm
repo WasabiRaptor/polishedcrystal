@@ -95,17 +95,17 @@ CroconawShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/croconaw/shiny.pal"
 CroconawShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/croconaw/shiny.pal"
 CroconawShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/croconaw/shiny.pal"
 
-FeraligatrOverworldPalettes:
-FeraligatrNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/feraligatr/overworld.gbcpal", middle_colors
-FeraligatrNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/feraligatr/overworld.gbcpal", middle_colors
-FeraligatrNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/feraligatr/overworld.gbcpal", middle_colors
-FeraligatrNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/feraligatr/overworld.gbcpal", middle_colors
-FeraligatrNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/feraligatr/overworld.gbcpal", middle_colors
-FeraligatrShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/feraligatr/shiny.pal"
-FeraligatrShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/feraligatr/shiny.pal"
-FeraligatrShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/feraligatr/shiny.pal"
-FeraligatrShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/feraligatr/shiny.pal"
-FeraligatrShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/feraligatr/shiny.pal"
+FeraligatorOverworldPalettes:
+FeraligatorNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/feraligator/overworld.gbcpal", middle_colors
+FeraligatorNormalOverworldPaletteDay:	INCBIN "gfx/pokemon/feraligator/overworld.gbcpal", middle_colors
+FeraligatorNormalOverworldPaletteDusk:	INCBIN "gfx/pokemon/feraligator/overworld.gbcpal", middle_colors
+FeraligatorNormalOverworldPaletteMidnight:	INCBIN "gfx/pokemon/feraligator/overworld.gbcpal", middle_colors
+FeraligatorNormalOverworldPaletteDark:	INCBIN "gfx/pokemon/feraligator/overworld.gbcpal", middle_colors
+FeraligatorShinyOverworldPaletteDawn:	INCLUDE "gfx/pokemon/feraligator/shiny.pal"
+FeraligatorShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/feraligator/shiny.pal"
+FeraligatorShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/feraligator/shiny.pal"
+FeraligatorShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/feraligator/shiny.pal"
+FeraligatorShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/feraligator/shiny.pal"
 
 SentretOverworldPalettes:
 SentretNormalOverworldPaletteDawn:	INCBIN "gfx/pokemon/sentret/overworld.gbcpal", middle_colors
@@ -1616,4 +1616,3 @@ CelebiShinyOverworldPaletteDay:	INCLUDE "gfx/pokemon/celebi/shiny.pal"
 CelebiShinyOverworldPaletteDusk:	INCLUDE "gfx/pokemon/celebi/shiny.pal"
 CelebiShinyOverworldPaletteMidnight:	INCLUDE "gfx/pokemon/celebi/shiny.pal"
 CelebiShinyOverworldPaletteDark:	INCLUDE "gfx/pokemon/celebi/shiny.pal"
-

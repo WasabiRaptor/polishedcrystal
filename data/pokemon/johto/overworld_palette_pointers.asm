@@ -23,8 +23,8 @@ TotodileOverworldPalettePointers::
 CroconawOverworldPalettePointers::
 	add_overworldpalettes Croconaw
 
-FeraligatrOverworldPalettePointers::
-	add_overworldpalettes Feraligatr
+FeraligatorOverworldPalettePointers::
+	add_overworldpalettes Feraligator
 
 SentretOverworldPalettePointers::
 	add_overworldpalettes Sentret
@@ -336,4 +336,3 @@ Ho_ohOverworldPalettePointers::
 
 CelebiOverworldPalettePointers::
 	add_overworldpalettes Celebi
-

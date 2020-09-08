@@ -7,7 +7,7 @@ JohtoFootprintPointerTable::
 	add_footrpinttable Typhlosion
 	add_footrpinttable Totodile
 	add_footrpinttable Croconaw
-	add_footrpinttable Feraligatr
+	add_footrpinttable Feraligator
 	add_footrpinttable Sentret
 	add_footrpinttable Furret
 	add_footrpinttable Hoothoot

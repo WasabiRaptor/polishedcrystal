@@ -12,7 +12,7 @@ _ReplaceKrisSprite:: ; 14135
 	ld a, [wFollowerSprite]
 	ldh [hUsedSpriteIndex], a
 	call GetUsedSprite
-	farcall LoadSpecialMapOBPalette
+	farcall LoadPlayerFollowerOWPalsTimeOfDay
 	farcall ApplyPals
 	jp UpdateTimePals
 ; 14146

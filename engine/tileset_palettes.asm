@@ -305,20 +305,51 @@ PlayerPaletteOptions:
 INCLUDE "gfx/overworld/npc_sprites.pal" ;duplicating this for now
 
 LoadNPCPalette::
-	push af
-	ld a, [wTimeOfDayPal]
+	push de
 	ld hl, PlayerPaletteOptions
-	ld bc, 8 palettes
-	rst AddNTimes
-	pop af
 	ld bc, 1 palettes
 	rst AddNTimes
-
+	ld a, [wTimeOfDayPal]
+	push af
 	ld a, BANK(wUnknOBPals)
-	jp FarCopyWRAM
+	ldh [rSVBK], a
+	rst CopyBytes
+	pop af
+	pop hl
+	inc hl
+	inc hl
+	call GetOBJTimeOfDayPal
+	ld a, BANK(wTimeOfDayPal)
+	ldh [rSVBK], a
+	ret
 
-LoadSpecialMapOBPalette:
+GetOBJTimeOfDayPal:
+	push af
+	call GetColorToD
+	pop af
+	push af
+	call GetColorToD
+	pop af
+	jp GetColorToD
 
+LoadPlayerFollowerOWPalsTimeOfDay::
+	call LoadPlayerFollowerOWPals
+	ld a, [wTimeOfDayPal]
+	push af
+	ld a, BANK(wUnknOBPals)
+	ldh [rSVBK], a
+	pop af
+	ld hl, wUnknOBPals palette 0 color 1
+	push af
+	call GetOBJTimeOfDayPal
+	pop af
+	ld hl, wUnknOBPals palette 1 color 1
+	call GetOBJTimeOfDayPal
+	ld a, BANK(wTimeOfDayPal)
+	ldh [rSVBK], a
+	ret
+
+LoadPlayerFollowerOWPals::
 	ld a, [wPlayerOverworldStatus]
 	bit 1, a ; is player riding a pokemon?
 	jr nz, .riding_temp_follower
@@ -326,9 +357,6 @@ LoadSpecialMapOBPalette:
 	jr nz, .is_a_pokemon
 
 	ld hl, PlayerPaletteOptions
-	ld a, [wTimeOfDayPal]
-	ld bc, 8 palettes
-	rst AddNTimes
 	ld a, [wPlayerOverworldPalette]
 	ld bc, 1 palettes
 	rst AddNTimes
@@ -356,7 +384,6 @@ LoadSpecialMapOBPalette:
 .get_player_mon_pal
 	call OWCheckShininess
 	ld de, wUnknOBPals
-	ld a, [wTimeOfDayPal]
 	call GetRelevantMonOverworldPalettes
 
 .got_player_pal
@@ -372,7 +399,6 @@ LoadSpecialMapOBPalette:
 	call OWCheckShininess
 
 	ld de, wUnknOBPals palette 1
-	ld a, [wTimeOfDayPal]
 	jp GetRelevantMonOverworldPalettes
 
 OWCheckShininess:
@@ -386,3 +412,137 @@ OWCheckShininess:
 .NotShiny:
 	and a
 	ret
+
+GetColorToD::
+	cp MIDDAY
+	ret z
+	;inputs
+	;a = ToD Pal to use
+	;hl = wram color adress
+
+	;outputs
+	;ToD color to hl
+	push hl
+
+	ld e, [hl]
+	inc hl
+	ld d, [hl]
+
+; de = colors
+; e = gggr:rrrr
+; d = 0bbb:bbgg
+
+	bit 7, d ; if this bit is set, the color should not be affected by ToD and be consistent across all times, used for glowing things
+	jr z, .DoToDColor
+	pop hl
+	ret
+
+.DoToDColor
+;red first
+	ld hl, ToDRGBTables
+	ld b, 0
+	ld c, a
+	add hl, bc
+	add hl, bc
+	ld a, [hli]
+	ld h, [hl]
+	ld l, a
+
+	push hl; RGB table R address
+
+	;get Red for the ToD
+	ld a, e
+	and %00011111
+	ld c, a
+	;b is already 0
+	add hl, bc ;looking up what value R should be for the ToD from the table
+	;
+	ld c, [hl]
+	ld a, e
+	and %11100000
+	or c
+	ld e, a ;put the converted value back in
+
+	pop hl
+	ld c, 32
+	add hl, bc ;get from the table for R to the table for G
+	push hl
+
+	;get the G for the ToD
+	rr d
+	rra
+	rr d
+	rra
+	; rotate the bits for g through carry from d into a
+	rrca
+	rrca
+	rrca
+	and %00011111
+	ld c, a
+	;b is still 0
+	add hl, bc ;looking up what value G should be for the ToD from the table
+	ld a, [hl]
+	;values are already bitshifted 3 left
+	rla
+	rl d
+	rla
+	rl d
+	;rotate the new bits into d
+	and %11100000
+	ld c, a
+	ld a, e
+	and %00011111
+	or c
+	ld e, a ; and the correct G bits are in e now
+
+	pop hl
+	ld c, 32
+	add hl, bc ;get from the table for G to the table for B
+
+	;get B
+	ld a, d
+	rrca
+	rrca
+	and %00011111
+	ld c, a
+	;b is still 0
+	add hl, bc ;looking up what value B should be for the ToD from the table
+	ld c, [hl]
+	ld a, d
+	and %00000011
+	or c
+	ld d, a ; get the values for B into it
+
+	pop hl
+	ld [hl], e
+	inc hl
+	ld [hl], d
+	inc hl
+	ret
+
+ToDRGBTables:
+	dw DawnR
+	dw DawnR
+	dw DuskR
+	dw NightR
+
+DawnR:
+    db 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31
+DawnG:
+    db 0 << 3, 1 << 3, 1 << 3, 2 << 3, 3 << 3, 4 << 3, 4 << 3, 5 << 3, 6 << 3, 6 << 3, 7 << 3, 8 << 3, 9 << 3, 9 << 3, 10 << 3, 11 << 3, 11 << 3, 12 << 3, 13 << 3, 14 << 3, 14 << 3, 15 << 3, 16 << 3, 16 << 3, 17 << 3, 18 << 3, 19 << 3, 19 << 3, 20 << 3, 21 << 3, 21 << 3, 22 << 3
+DawnB:
+    db 0 << 2, 1 << 2, 1 << 2, 2 << 2, 2 << 2, 3 << 2, 3 << 2, 4 << 2, 4 << 2, 5 << 2, 5 << 2, 6 << 2, 6 << 2, 7 << 2, 7 << 2, 8 << 2, 8 << 2, 9 << 2, 9 << 2, 10 << 2, 10 << 2, 11 << 2, 11 << 2, 12 << 2, 12 << 2, 13 << 2, 13 << 2, 14 << 2, 14 << 2, 15 << 2, 15 << 2, 16 << 2
+
+DuskR:
+    db 0, 1, 2, 3, 4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 26, 27, 28
+DuskG:
+    db 0 << 3, 1 << 3, 1 << 3, 2 << 3, 3 << 3, 3 << 3, 4 << 3, 5 << 3, 5 << 3, 6 << 3, 7 << 3, 7 << 3, 8 << 3, 9 << 3, 9 << 3, 10 << 3, 10 << 3, 11 << 3, 12 << 3, 12 << 3, 13 << 3, 14 << 3, 14 << 3, 15 << 3, 16 << 3, 16 << 3, 17 << 3, 18 << 3, 18 << 3, 19 << 3, 20 << 3, 20 << 3
+DuskB:
+    db 0 << 2, 1 << 2, 1 << 2, 2 << 2, 3 << 2, 4 << 2, 4 << 2, 5 << 2, 6 << 2, 7 << 2, 7 << 2, 8 << 2, 9 << 2, 10 << 2, 10 << 2, 11 << 2, 12 << 2, 12 << 2, 13 << 2, 14 << 2, 15 << 2, 15 << 2, 16 << 2, 17 << 2, 18 << 2, 18 << 2, 19 << 2, 20 << 2, 21 << 2, 21 << 2, 22 << 2, 23 << 2
+
+NightR:
+    db 0, 0, 1, 1, 2, 2, 3, 3, 3, 4, 4, 5, 5, 6, 6, 6, 7, 7, 8, 8, 9, 9, 9, 10, 10, 11, 11, 12, 12, 12, 13, 13
+NightG:
+    db 0 << 3, 0 << 3, 1 << 3, 1 << 3, 2 << 3, 2 << 3, 3 << 3, 3 << 3, 3 << 3, 4 << 3, 4 << 3, 5 << 3, 5 << 3, 6 << 3, 6 << 3, 6 << 3, 7 << 3, 7 << 3, 8 << 3, 8 << 3, 8 << 3, 9 << 3, 9 << 3, 10 << 3, 10 << 3, 11 << 3, 11 << 3, 11 << 3, 12 << 3, 12 << 3, 13 << 3, 13 << 3
+NightB:
+    db 0 << 2, 1 << 2, 1 << 2, 2 << 2, 3 << 2, 3 << 2, 4 << 2, 5 << 2, 5 << 2, 6 << 2, 7 << 2, 7 << 2, 8 << 2, 9 << 2, 9 << 2, 10 << 2, 11 << 2, 11 << 2, 12 << 2, 13 << 2, 13 << 2, 14 << 2, 15 << 2, 15 << 2, 16 << 2, 17 << 2, 17 << 2, 18 << 2, 19 << 2, 19 << 2, 20 << 2, 21 << 2

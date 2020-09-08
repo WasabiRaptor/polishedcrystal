@@ -62,12 +62,12 @@ CroconawHappyBGPalette::	INCBIN "gfx/pokemon/croconaw/portraits/happyBG.gbcpal"
 CroconawHappyOAMPalette::	INCBIN "gfx/pokemon/croconaw/portraits/happyOAM.gbcpal"
 
 
-FeraligatrNeutralPalette::
-FeraligatrNeutralBGPalette::	INCBIN "gfx/pokemon/feraligatr/portraits/neutralBG.gbcpal"
-FeraligatrNeutralOAMPalette::	INCBIN "gfx/pokemon/feraligatr/portraits/neutralOAM.gbcpal"
-FeraligatrHappyPalette::
-FeraligatrHappyBGPalette::	INCBIN "gfx/pokemon/feraligatr/portraits/happyBG.gbcpal"
-FeraligatrHappyOAMPalette::	INCBIN "gfx/pokemon/feraligatr/portraits/happyOAM.gbcpal"
+FeraligatorNeutralPalette::
+FeraligatorNeutralBGPalette::	INCBIN "gfx/pokemon/feraligator/portraits/neutralBG.gbcpal"
+FeraligatorNeutralOAMPalette::	INCBIN "gfx/pokemon/feraligator/portraits/neutralOAM.gbcpal"
+FeraligatorHappyPalette::
+FeraligatorHappyBGPalette::	INCBIN "gfx/pokemon/feraligator/portraits/happyBG.gbcpal"
+FeraligatorHappyOAMPalette::	INCBIN "gfx/pokemon/feraligator/portraits/happyOAM.gbcpal"
 
 
 SentretNeutralPalette::
@@ -1062,5 +1062,3 @@ CelebiNeutralOAMPalette::	INCBIN "gfx/pokemon/celebi/portraits/neutralOAM.gbcpal
 CelebiHappyPalette::
 CelebiHappyBGPalette::	INCBIN "gfx/pokemon/celebi/portraits/happyBG.gbcpal"
 CelebiHappyOAMPalette::	INCBIN "gfx/pokemon/celebi/portraits/happyOAM.gbcpal"
-
-

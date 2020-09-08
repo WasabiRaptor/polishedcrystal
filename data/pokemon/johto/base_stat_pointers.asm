@@ -24,8 +24,8 @@ TotodileBaseDataPointers::
 CroconawBaseDataPointers::
 	add_basedata Croconaw
 
-FeraligatrBaseDataPointers::
-	add_basedata Feraligatr
+FeraligatorBaseDataPointers::
+	add_basedata Feraligator
 
 SentretBaseDataPointers::
 	add_basedata Sentret
@@ -337,4 +337,3 @@ Ho_ohBaseDataPointers::
 
 CelebiBaseDataPointers::
 	add_basedata Celebi
-

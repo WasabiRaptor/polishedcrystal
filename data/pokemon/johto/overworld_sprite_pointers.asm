@@ -23,8 +23,8 @@ TotodileOverworldSpritePointers::
 CroconawOverworldSpritePointers::
 	add_overworldsprite Croconaw
 
-FeraligatrOverworldSpritePointers::
-	add_overworldsprite Feraligatr
+FeraligatorOverworldSpritePointers::
+	add_overworldsprite Feraligator
 
 SentretOverworldSpritePointers::
 	add_overworldsprite Sentret
@@ -336,4 +336,3 @@ Ho_ohOverworldSpritePointers::
 
 CelebiOverworldSpritePointers::
 	add_overworldsprite Celebi
-

@@ -23,8 +23,8 @@ TotodileIconPointers::
 CroconawIconPointers::
 	add_icon Croconaw
 
-FeraligatrIconPointers::
-	add_icon Feraligatr
+FeraligatorIconPointers::
+	add_icon Feraligator
 
 SentretIconPointers::
 	add_icon Sentret
@@ -336,4 +336,3 @@ Ho_ohIconPointers::
 
 CelebiIconPointers::
 	add_icon Celebi
-

@@ -17,7 +17,7 @@ TotodileIcon::	INCBIN "gfx/icons/totodile.2bpp"
 
 CroconawIcon::	INCBIN "gfx/icons/croconaw.2bpp"
 
-FeraligatrIcon::	INCBIN "gfx/icons/feraligatr.2bpp"
+FeraligatorIcon::	INCBIN "gfx/icons/feraligator.2bpp"
 
 SentretIcon::	INCBIN "gfx/icons/sentret.2bpp"
 
@@ -256,4 +256,3 @@ LugiaIcon::	INCBIN "gfx/icons/lugia.2bpp"
 Ho_ohIcon::	INCBIN "gfx/icons/ho_oh.2bpp"
 
 CelebiIcon::	INCBIN "gfx/icons/celebi.2bpp"
-

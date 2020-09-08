@@ -15,7 +15,7 @@ TotodileBaseData::	INCLUDE "data/pokemon/base_stats/totodile.asm"
 
 CroconawBaseData::	INCLUDE "data/pokemon/base_stats/croconaw.asm"
 
-FeraligatrBaseData::	INCLUDE "data/pokemon/base_stats/feraligatr.asm"
+FeraligatorBaseData::	INCLUDE "data/pokemon/base_stats/feraligator.asm"
 
 SentretBaseData::	INCLUDE "data/pokemon/base_stats/sentret.asm"
 
@@ -198,4 +198,3 @@ LugiaBaseData::	INCLUDE "data/pokemon/base_stats/lugia.asm"
 Ho_ohBaseData::	INCLUDE "data/pokemon/base_stats/ho_oh.asm"
 
 CelebiBaseData::	INCLUDE "data/pokemon/base_stats/celebi.asm"
-

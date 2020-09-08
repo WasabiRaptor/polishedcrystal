@@ -28,20 +28,20 @@ Landmarks: ; 0x1ca8c3
 	landmark 	$d,	$c, CrystalineLakeName, 0, -4
 
 
-SpecialMapName:        	db "?","@"
+SpecialMapName:        	db "?@"
 ;"¯" for splitting to newline in certain places
-DanielsTownName:		db "D","a","n","i","e","l","s","¯","T","o","w","n","@"
-AsaokaCityName:			db "A","s","a","o","k","a","¯","C","i","t","y","@"
-KikunoTownName:			db "K","i","k","u","n","o","¯","T","o","w","n","@"
-BreguetRuinsName:		db "B","r","e","g","u","e","t","¯","R","u","i","n","s","@"
-HetzeltronName:			db "H","e","t","z","e","l","t","r","o","n","@"
-HattoriVillageName:		db "H","a","t","t","o","r","i","¯","V","i","l","l","a","g","e","@"
-CendreLowlandName:		db "C","e","n","d","r","é","¯","L","o","w","l","a","n","d","@" ;ashen lowlands
-MtInductorName:			db "M","t","."," ","I","n","d","u","c","t","o","r","@"
-MtInductorPeakName:		db "M","t","."," ","I","n","d","u","c","t","o","r","¯","P","e","a","k","@"
-OuestPathwayName:		db "O","u","e","s","t","¯","P","a","t","h","w","a","y","@" ;west pathway
-MinamiWetlandsName:		db "M","i","n","a","m","i","¯","W","e","t","l","a","n","d","s","@" ; south wetlands
-SylvanTrailName:		db "S","y","l","v","a","n","¯","T","r","a","i","l","@" ;wooded trail
-GelidRavineName:		db "G","e","l","i","d","¯","R","a","v","i","n","e","@"
-CrystalineLakeName:		db "C","r","y","s","t","a","l","i","n","e","¯","L","a","k","e","@"
-TaniRiverName:			db "T","a","n","i","¯","R","i","v","e","r","@"
+DanielsTownName:		db "Daniels Town@"
+AsaokaCityName:			db "Asaoka City@"
+KikunoTownName:			db "Kikuno Town@"
+BreguetRuinsName:		db "Breguet Ruins@"
+HetzeltronName:			db "Hetzeltron@"
+HattoriVillageName:		db "Hattori Village@"
+CendreLowlandName:		db "Cendré Lowland@" ;ashen lowlands
+MtInductorName:			db "Mt. Inductor@"
+MtInductorPeakName:		db "Mt. Inductor Peak@"
+OuestPathwayName:		db "Ouest Pathway@" ;west pathway
+MinamiWetlandsName:		db "Minami Wetlands@" ; south wetlands
+SylvanTrailName:		db "Sylvan Trail@" ;wooded trail
+GelidRavineName:		db "Gelid Ravine@"
+CrystalineLakeName:		db "Crystaline Lake@"
+TaniRiverName:			db "Tani River@"

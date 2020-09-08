@@ -23,8 +23,8 @@ TotodileAnimationIdlePointers::
 CroconawAnimationIdlePointers::
 	add_idleanim Croconaw
 
-FeraligatrAnimationIdlePointers::
-	add_idleanim Feraligatr
+FeraligatorAnimationIdlePointers::
+	add_idleanim Feraligator
 
 SentretAnimationIdlePointers::
 	add_idleanim Sentret
@@ -336,4 +336,3 @@ Ho_ohAnimationIdlePointers::
 
 CelebiAnimationIdlePointers::
 	add_idleanim Celebi
-

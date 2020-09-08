@@ -23,8 +23,8 @@ TotodileNames::
 CroconawNames::
 	add_name Croconaw
 
-FeraligatrNames::
-	add_name Feraligatr
+FeraligatorNames::
+	add_name Feraligator
 
 SentretNames::
 	add_name Sentret
@@ -336,4 +336,3 @@ Ho_ohNames::
 
 CelebiNames::
 	add_name Celebi
-

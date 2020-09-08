@@ -7,7 +7,7 @@ JohtoEvosAttacksPointerTable::
 	add_evosattackstable Typhlosion
 	add_evosattackstable Totodile
 	add_evosattackstable Croconaw
-	add_evosattackstable Feraligatr
+	add_evosattackstable Feraligator
 	add_evosattackstable Sentret
 	add_evosattackstable Furret
 	add_evosattackstable Hoothoot

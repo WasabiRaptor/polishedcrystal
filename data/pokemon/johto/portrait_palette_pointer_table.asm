@@ -23,8 +23,8 @@ TotodilePortraitPalettePointerTable::
 CroconawPortraitPalettePointerTable::
 	add_portraitpalettetable Croconaw
 
-FeraligatrPortraitPalettePointerTable::
-	add_portraitpalettetable Feraligatr
+FeraligatorPortraitPalettePointerTable::
+	add_portraitpalettetable Feraligator
 
 SentretPortraitPalettePointerTable::
 	add_portraitpalettetable Sentret
@@ -336,4 +336,3 @@ Ho_ohPortraitPalettePointerTable::
 
 CelebiPortraitPalettePointerTable::
 	add_portraitpalettetable Celebi
-

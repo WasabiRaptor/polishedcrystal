@@ -39,9 +39,9 @@ SECTION "Croconaw Overworld Sprites", ROMX
 CroconawOverworldSprite::	INCBIN "gfx/pokemon/croconaw/overworld.2bpp" ;0
 
 
-SECTION "Feraligatr Overworld Sprites", ROMX
+SECTION "Feraligator Overworld Sprites", ROMX
 
-FeraligatrOverworldSprite::	INCBIN "gfx/pokemon/feraligatr/overworld.2bpp" ;0
+FeraligatorOverworldSprite::	INCBIN "gfx/pokemon/feraligator/overworld.2bpp" ;0
 
 
 SECTION "Sentret Overworld Sprites", ROMX
@@ -535,4 +535,3 @@ Ho_ohOverworldSprite::	INCBIN "gfx/pokemon/ho_oh/overworld.2bpp" ;0
 SECTION "Celebi Overworld Sprites", ROMX
 
 CelebiOverworldSprite::	INCBIN "gfx/pokemon/celebi/overworld.2bpp" ;0
-

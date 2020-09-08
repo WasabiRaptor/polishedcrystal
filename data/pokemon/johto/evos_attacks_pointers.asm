@@ -23,8 +23,8 @@ TotodileEvosAttacksPointers::
 CroconawEvosAttacksPointers::
 	add_evosattacks Croconaw
 
-FeraligatrEvosAttacksPointers::
-	add_evosattacks Feraligatr
+FeraligatorEvosAttacksPointers::
+	add_evosattacks Feraligator
 
 SentretEvosAttacksPointers::
 	add_evosattacks Sentret
@@ -298,4 +298,3 @@ Ho_ohEvosAttacksPointers::
 
 CelebiEvosAttacksPointers::
 	add_evosattacks Celebi
-

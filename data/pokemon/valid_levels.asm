@@ -160,7 +160,7 @@ ValidPokemonLevels:
 	db  36, 100 ; Typhlosion
 	db   1,  17 ; Totodile
 	db  18,  29 ; Croconaw
-	db  30, 100 ; Feraligatr
+	db  30, 100 ; Feraligator
 	db   1,  14 ; Sentret
 	db  15, 100 ; Furret
 	db   1,  19 ; Hoothoot

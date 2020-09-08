@@ -15,7 +15,7 @@ TotodileAnimation:	INCLUDE "gfx/pokemon/totodile/anim.asm"
 
 CroconawAnimation:	INCLUDE "gfx/pokemon/croconaw/anim.asm"
 
-FeraligatrAnimation:	INCLUDE "gfx/pokemon/feraligatr/anim.asm"
+FeraligatorAnimation:	INCLUDE "gfx/pokemon/feraligator/anim.asm"
 
 SentretAnimation:	INCLUDE "gfx/pokemon/sentret/anim.asm"
 
@@ -236,4 +236,3 @@ LugiaAnimation:	INCLUDE "gfx/pokemon/lugia/anim.asm"
 Ho_ohAnimation:	INCLUDE "gfx/pokemon/ho_oh/anim.asm"
 
 CelebiAnimation:	INCLUDE "gfx/pokemon/celebi/anim.asm"
-

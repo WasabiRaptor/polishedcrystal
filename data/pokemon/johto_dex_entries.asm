@@ -18,7 +18,7 @@ TotodilePokedexEntry::	INCLUDE "data/pokemon/dex_entries/totodile.asm"
 
 CroconawPokedexEntry::	INCLUDE "data/pokemon/dex_entries/croconaw.asm"
 
-FeraligatrPokedexEntry::	INCLUDE "data/pokemon/dex_entries/feraligatr.asm"
+FeraligatorPokedexEntry::	INCLUDE "data/pokemon/dex_entries/feraligator.asm"
 
 SentretPokedexEntry::	INCLUDE "data/pokemon/dex_entries/sentret.asm"
 
@@ -210,4 +210,3 @@ LugiaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/lugia.asm"
 Ho_ohPokedexEntry::	INCLUDE "data/pokemon/dex_entries/ho_oh.asm"
 
 CelebiPokedexEntry::	INCLUDE "data/pokemon/dex_entries/celebi.asm"
-

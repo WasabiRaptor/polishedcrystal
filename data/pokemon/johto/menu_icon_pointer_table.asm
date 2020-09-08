@@ -7,7 +7,7 @@ JohtoIconPointerTable::
 	add_icontable Typhlosion
 	add_icontable Totodile
 	add_icontable Croconaw
-	add_icontable Feraligatr
+	add_icontable Feraligator
 	add_icontable Sentret
 	add_icontable Furret
 	add_icontable Hoothoot

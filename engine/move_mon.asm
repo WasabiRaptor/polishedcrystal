@@ -2359,7 +2359,7 @@ GivePoke:: ; e277
 	call InitNickname
 
 .skip_nickname
-	farcall LoadSpecialMapOBPalette
+	farcall LoadPlayerFollowerOWPalsTimeOfDay
 	farcall ApplyPals
 	call UpdateTimePals
 	pop bc

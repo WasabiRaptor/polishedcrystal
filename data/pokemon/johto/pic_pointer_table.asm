@@ -7,7 +7,7 @@ JohtoPicPointerTable::
 	add_pictable Typhlosion
 	add_pictable Totodile
 	add_pictable Croconaw
-	add_pictable Feraligatr
+	add_pictable Feraligator
 	add_pictable Sentret
 	add_pictable Furret
 	add_pictable Hoothoot

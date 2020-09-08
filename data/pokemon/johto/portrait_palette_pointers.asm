@@ -39,9 +39,9 @@ CroconawPortraitPalettePointers::
 	add_portraitpalette CroconawHappy
 
 
-FeraligatrPortraitPalettePointers::
-	add_portraitpalette FeraligatrNeutral
-	add_portraitpalette FeraligatrHappy
+FeraligatorPortraitPalettePointers::
+	add_portraitpalette FeraligatorNeutral
+	add_portraitpalette FeraligatorHappy
 
 
 SentretPortraitPalettePointers::
@@ -649,5 +649,3 @@ Ho_ohPortraitPalettePointers::
 CelebiPortraitPalettePointers::
 	add_portraitpalette CelebiNeutral
 	add_portraitpalette CelebiHappy
-
-

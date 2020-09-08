@@ -15,7 +15,7 @@ TotodileAnimationIdle:	INCLUDE "gfx/pokemon/totodile/anim_idle.asm"
 
 CroconawAnimationIdle:	INCLUDE "gfx/pokemon/croconaw/anim_idle.asm"
 
-FeraligatrAnimationIdle:	INCLUDE "gfx/pokemon/feraligatr/anim_idle.asm"
+FeraligatorAnimationIdle:	INCLUDE "gfx/pokemon/feraligator/anim_idle.asm"
 
 SentretAnimationIdle:	INCLUDE "gfx/pokemon/sentret/anim_idle.asm"
 
@@ -236,4 +236,3 @@ LugiaAnimationIdle:	INCLUDE "gfx/pokemon/lugia/anim_idle.asm"
 Ho_ohAnimationIdle:	INCLUDE "gfx/pokemon/ho_oh/anim_idle.asm"
 
 CelebiAnimationIdle:	INCLUDE "gfx/pokemon/celebi/anim_idle.asm"
-

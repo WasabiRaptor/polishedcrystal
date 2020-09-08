@@ -23,8 +23,8 @@ TotodilePalettePointers::
 CroconawPalettePointers::
 	add_palettes Croconaw
 
-FeraligatrPalettePointers::
-	add_palettes Feraligatr
+FeraligatorPalettePointers::
+	add_palettes Feraligator
 
 SentretPalettePointers::
 	add_palettes Sentret
@@ -336,4 +336,3 @@ Ho_ohPalettePointers::
 
 CelebiPalettePointers::
 	add_palettes Celebi
-

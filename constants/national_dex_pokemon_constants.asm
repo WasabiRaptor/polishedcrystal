@@ -307,7 +307,7 @@ NUM_KANTO_POKEMON EQU const_value +-1
 	nat_dexmon TYPHLOSION
 	nat_dexmon TOTODILE
 	nat_dexmon CROCONAW
-	nat_dexmon FERALIGATR
+	nat_dexmon FERALIGATOR
 	nat_dexmon SENTRET
 	nat_dexmon FURRET
 	nat_dexmon HOOTHOOT

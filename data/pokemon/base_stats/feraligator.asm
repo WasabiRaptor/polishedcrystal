@@ -10,7 +10,7 @@
     db 239 ; base exp
 	dw 0 ; field capabilities
     dn FEMALE_12_5, 4 ; gender, step cycles to hatch
-    INCBIN "gfx/pokemon/feraligatr/front.dimensions"
+    INCBIN "gfx/pokemon/feraligator/front.dimensions"
     db TORRENT, TORRENT     ; abilities
     db SHEER_FORCE    ; hidden ability
     db GROWTH_MEDIUM_SLOW ; growth rate

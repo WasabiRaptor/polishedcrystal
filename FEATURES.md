@@ -184,7 +184,7 @@ These are *most* of the new features as of 2.2.0. Some would be spoilers.
 * Golduck is Water/Psychic.
 * Meganium is Grass/Fairy.
 * Typhlosion is Fire/Ground.
-* Feraligatr is Water/Dark.
+* Feraligator is Water/Dark.
 * Noctowl is Flying/Psychic.
 * Ledian is Bug/Fighting.
 * Sunflora is Grass/Fire.
