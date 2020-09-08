@@ -298,3 +298,4 @@ Ho_ohEvosAttacksPointers::
 
 CelebiEvosAttacksPointers::
 	add_evosattacks Celebi
+

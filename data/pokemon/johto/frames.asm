@@ -236,3 +236,4 @@ LugiaFrames:	INCLUDE "gfx/pokemon/lugia/frames.asm"
 Ho_ohFrames:	INCLUDE "gfx/pokemon/ho_oh/frames.asm"
 
 CelebiFrames:	INCLUDE "gfx/pokemon/celebi/frames.asm"
+

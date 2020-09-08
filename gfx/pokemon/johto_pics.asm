@@ -673,3 +673,4 @@ SECTION "Celebi Pics", ROMX
 
 CelebiFrontpic::	INCBIN "gfx/pokemon/celebi/front.animated.2bpp.lz"
 CelebiBackpic::	INCBIN "gfx/pokemon/celebi/back.2bpp.lz"
+

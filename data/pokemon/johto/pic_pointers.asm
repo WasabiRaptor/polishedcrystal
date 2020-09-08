@@ -336,3 +336,4 @@ Ho_ohPicPointers::
 
 CelebiPicPointers::
 	add_pics Celebi
+

@@ -512,3 +512,4 @@ Ho_ohShinyPalette:	INCLUDE "gfx/pokemon/ho_oh/shiny.pal"
 CelebiPalettes:
 CelebiNormalPalette:	INCBIN "gfx/pokemon/celebi/front.gbcpal", middle_colors
 CelebiShinyPalette:	INCLUDE "gfx/pokemon/celebi/shiny.pal"
+

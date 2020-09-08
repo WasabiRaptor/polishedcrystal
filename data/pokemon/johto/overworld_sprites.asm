@@ -535,3 +535,4 @@ Ho_ohOverworldSprite::	INCBIN "gfx/pokemon/ho_oh/overworld.2bpp" ;0
 SECTION "Celebi Overworld Sprites", ROMX
 
 CelebiOverworldSprite::	INCBIN "gfx/pokemon/celebi/overworld.2bpp" ;0
+

@@ -236,3 +236,4 @@ LugiaBitmasks:	INCLUDE "gfx/pokemon/lugia/bitmask.asm"
 Ho_ohBitmasks:	INCLUDE "gfx/pokemon/ho_oh/bitmask.asm"
 
 CelebiBitmasks:	INCLUDE "gfx/pokemon/celebi/bitmask.asm"
+

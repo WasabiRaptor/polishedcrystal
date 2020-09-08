@@ -336,3 +336,4 @@ Ho_ohPortraitPointerTable::
 
 CelebiPortraitPointerTable::
 	add_portraittable Celebi
+

@@ -336,3 +336,4 @@ Ho_ohOverworldSpritePointers::
 
 CelebiOverworldSpritePointers::
 	add_overworldsprite Celebi
+

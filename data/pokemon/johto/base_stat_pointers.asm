@@ -337,3 +337,4 @@ Ho_ohBaseDataPointers::
 
 CelebiBaseDataPointers::
 	add_basedata Celebi
+

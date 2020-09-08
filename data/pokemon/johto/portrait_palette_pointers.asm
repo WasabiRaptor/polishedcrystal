@@ -649,3 +649,5 @@ Ho_ohPortraitPalettePointers::
 CelebiPortraitPalettePointers::
 	add_portraitpalette CelebiNeutral
 	add_portraitpalette CelebiHappy
+
+

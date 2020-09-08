@@ -8,30 +8,26 @@ LoadBlindingFlashPalette:: ; 49409
 
 OverworldTextboxPalette:
 BlindingFlashPalette: ; 49418
-if !DEF(MONOCHROME)
 	RGB 31, 31, 31
 	RGB 31, 31, 31
 	RGB 05, 05, 16
 	RGB 00, 00, 00
-else
-	MONOCHROME_RGB_FOUR
-endc
 ; 49420
 
 LoadSpecialMapPalette: ; 494ac
-	GLOBAL GenericMart_BlockData
 	call GetMapHeaderTimeOfDayNybble
 	cp PALETTE_DARK
 	jr nz, .not_dark
 	ld a, [wStatusFlags]
 	bit 2, a ; Flash
-	jp z, .do_nothing
+	jp z, .default_palette
 .not_dark
 
 	ld a, [wTileset]
 
+	ld hl, PokeCenterPalette
 	cp TILESET_POKECENTER
-	jp z, .pokecenter
+	jp z, .load_eight_bg_palettes
 	ld hl, MartPalette
 	cp TILESET_MART
 	jp z, .load_eight_bg_palettes
@@ -40,14 +36,9 @@ LoadSpecialMapPalette: ; 494ac
 
 	call GetOvercastIndex
 	and a
-	jp z, .do_nothing
+	jp z, .default_palette
 	ld hl, OvercastBGPalette
 	jp .load_eight_time_of_day_bg_palettes
-
-.do_nothing
-	and a
-	ret
-; 494f2
 
 .pokecenter
 	ld hl, PokeCenterPalette
@@ -80,10 +71,10 @@ LoadSpecialMapPalette: ; 494ac
 .maybe_special_forest
 	ld a, [wMapGroup]
 	cp GROUP_HIDDEN_TREE_GROTTO
-	jp nz, .do_nothing
+	jp nz, .default_palette
 	ld a, [wMapNumber]
 	cp MAP_HIDDEN_TREE_GROTTO
-	jp nz, .do_nothing
+	jp nz, .default_palette
 	ld hl, HiddenTreeGrottoPalette
 	jp .load_eight_bg_palettes
 
@@ -107,8 +98,8 @@ LoadSpecialMapPalette: ; 494ac
 	;cp DIM_CAVE
 	;jp z, .load_eight_bg_palettes
 	;cp NAVEL_ROCK
-	jp .do_nothing
-	;jp nz, .do_nothing
+	jp .default_palette
+	;jp nz, .default_palette
 	;ld hl, NavelRockPalette
 	;ld a, [wMapGroup]
 	;cp GROUP_NAVEL_ROCK_ROOF
@@ -116,101 +107,76 @@ LoadSpecialMapPalette: ; 494ac
 	;ld a, [wMapNumber]
 	;cp MAP_NAVEL_ROCK_ROOF
 	;jp nz, .load_eight_bg_palettes
+
+.default_palette
+	ld a, [wPermission]
+	ld hl, IndoorPalette
+	cp INDOOR
+	jr z, .load_eight_bg_palettes
+	ld hl, InvarPalette
+
 .load_eight_time_of_day_bg_palettes:
 	ld a, [wTimeOfDayPal]
-	and 3
-	ld bc, 8 palettes
-	rst AddNTimes
-	ld a, $5
+	push af
+	ld a, BANK(wUnknBGPals)
+	ldh [rSVBK], a
 	ld de, wUnknBGPals
 	ld bc, 8 palettes
-	call FarCopyWRAM
+	rst CopyBytes
+
+	pop af
+	ld b, a
+	ld c, 32
+	ld hl, wUnknBGPals
+.BGColorLoop
+	push bc
+	call GetColorToD
+	pop bc
+	ld a, b
+	dec c
+	jr nz, .BGColorLoop
+
+	;copy this for the tall grass effects
+	ld hl, wUnknBGPals palette 2
+	ld de, wUnknOBPals palette 7
+	ld bc, 1 palettes
+	rst CopyBytes
+
+	ld a, BANK(wTimeOfDayPal)
+	ldh [rSVBK], a
 	scf
 	ret
 
+InvarPalette:
+INCLUDE "gfx/tilesets/invar.pal"
+
+IndoorPalette:
+INCLUDE "gfx/tilesets/indoor.pal"
+
 PokeCenterPalette:
-if !DEF(MONOCHROME)
 INCLUDE "gfx/tilesets/pokecenter.pal"
-else
-rept 6
-	MONOCHROME_RGB_FOUR
-endr
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-endc
 
 MartPalette:
-if !DEF(MONOCHROME)
 INCLUDE "gfx/tilesets/mart.pal"
-else
-rept 7
-	MONOCHROME_RGB_FOUR
-endr
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-endc
 
 HiddenTreeGrottoPalette:
-if !DEF(MONOCHROME)
 INCLUDE "maps/HiddenTreeGrotto.pal"
-else
-rept 7
-	MONOCHROME_RGB_FOUR_NIGHT
-endr
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-endc
 
 HiddenCaveGrottoPalette:
-if !DEF(MONOCHROME)
 INCLUDE "maps/HiddenCaveGrotto.pal"
-else
-rept 7
-	MONOCHROME_RGB_FOUR_NIGHT
-endr
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_WHITE
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_BLACK
-endc
 
 OvercastBGPalette:
-if DEF(HGSS)
-INCLUDE "gfx/tilesets/palettes/hgss/ob.pal"
-elif DEF(MONOCHROME)
-INCLUDE "gfx/tilesets/palettes/monochrome/ob.pal"
-else
 INCLUDE "gfx/tilesets/bg_tiles_overcast.pal"
-endc
 
 OvercastOBPalette:
-if DEF(HGSS)
-INCLUDE "gfx/tilesets/palettes/hgss/ob_overcast.pal"
-elif DEF(MONOCHROME)
-INCLUDE "gfx/tilesets/palettes/monochrome/ob_overcast.pal"
-else
 INCLUDE "gfx/overworld/npc_sprites_overcast.pal"
-endc
 
 MartBluePalette:
-if !DEF(MONOCHROME)
 	RGB 20, 27, 28
 	RGB 06, 22, 25
 	RGB 04, 17, 19
 	RGB 07, 07, 07
-else
-	MONOCHROME_RGB_FOUR
-endc
+
 
 LinkTrade_Layout_FillBox: ; 49336
 .row
@@ -290,16 +256,8 @@ LoadLinkTradePalette: ; 49811
 ; 49826
 
 LinkTradePalette:
-if !DEF(MONOCHROME)
 INCLUDE "gfx/tilesets/link_trade.pal"
-else
-rept 8
-	RGB_MONOCHROME_BLACK
-	RGB_MONOCHROME_DARK
-	RGB_MONOCHROME_LIGHT
-	RGB_MONOCHROME_WHITE
-endr
-endc
+
 
 PlayerPaletteOptions:
 INCLUDE "gfx/overworld/npc_sprites.pal" ;duplicating this for now
@@ -435,6 +393,8 @@ GetColorToD::
 	bit 7, d ; if this bit is set, the color should not be affected by ToD and be consistent across all times, used for glowing things
 	jr z, .DoToDColor
 	pop hl
+	inc hl
+	inc hl
 	ret
 
 .DoToDColor

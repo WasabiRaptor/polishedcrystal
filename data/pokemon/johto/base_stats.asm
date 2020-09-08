@@ -198,3 +198,4 @@ LugiaBaseData::	INCLUDE "data/pokemon/base_stats/lugia.asm"
 Ho_ohBaseData::	INCLUDE "data/pokemon/base_stats/ho_oh.asm"
 
 CelebiBaseData::	INCLUDE "data/pokemon/base_stats/celebi.asm"
+

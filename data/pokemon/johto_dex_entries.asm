@@ -210,3 +210,4 @@ LugiaPokedexEntry::	INCLUDE "data/pokemon/dex_entries/lugia.asm"
 Ho_ohPokedexEntry::	INCLUDE "data/pokemon/dex_entries/ho_oh.asm"
 
 CelebiPokedexEntry::	INCLUDE "data/pokemon/dex_entries/celebi.asm"
+

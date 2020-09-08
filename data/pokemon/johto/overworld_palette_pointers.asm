@@ -336,3 +336,4 @@ Ho_ohOverworldPalettePointers::
 
 CelebiOverworldPalettePointers::
 	add_overworldpalettes Celebi
+

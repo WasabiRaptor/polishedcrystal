@@ -236,3 +236,4 @@ LugiaAnimation:	INCLUDE "gfx/pokemon/lugia/anim.asm"
 Ho_ohAnimation:	INCLUDE "gfx/pokemon/ho_oh/anim.asm"
 
 CelebiAnimation:	INCLUDE "gfx/pokemon/celebi/anim.asm"
+

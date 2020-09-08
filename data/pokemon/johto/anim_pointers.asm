@@ -336,3 +336,4 @@ Ho_ohAnimationPointers::
 
 CelebiAnimationPointers::
 	add_anim Celebi
+

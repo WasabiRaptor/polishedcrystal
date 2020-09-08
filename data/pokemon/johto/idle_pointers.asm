@@ -336,3 +336,4 @@ Ho_ohAnimationIdlePointers::
 
 CelebiAnimationIdlePointers::
 	add_idleanim Celebi
+

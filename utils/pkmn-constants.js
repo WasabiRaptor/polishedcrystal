@@ -274,27 +274,11 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
         fs.writeFileSync(`data/pokemon/${region.lower}/overworld_palettes.asm`,
             `${region.title}OverworldPalettes:\n` +
             list.map(poke=>`${poke.title}OverworldPalettes:\n` +
-            `${poke.title}NormalOverworldPaletteDawn:\tINCBIN "gfx/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteDay:\tINCBIN "gfx/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteDusk:\tINCBIN "gfx/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteMidnight:\tINCBIN "gfx/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
-            `${poke.title}NormalOverworldPaletteDark:\tINCBIN "gfx/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
-            `${poke.title}ShinyOverworldPaletteDawn:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteDay:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteDusk:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteMidnight:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
-            `${poke.title}ShinyOverworldPaletteDark:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n`+
+            `${poke.title}NormalOverworldPalette:\tINCBIN "gfx/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
+            `${poke.title}ShinyOverworldPalette:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
             poke.forms.map(form=>`${form.title}OverworldPalettes::\n`+
-            `${form.title}NormalOverworldPaletteDawn:\tINCBIN "gfx/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
-            `${form.title}NormalOverworldPaletteDay:\tINCBIN "gfx/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
-            `${form.title}NormalOverworldPaletteDusk:\tINCBIN "gfx/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
-            `${form.title}NormalOverworldPaletteMidnight:\tINCBIN "gfx/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
-            `${form.title}NormalOverworldPaletteDark:\tINCBIN "gfx/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
-            `${form.title}ShinyOverworldPaletteDawn:\tINCLUDE "gfx/pokemon/${form.lower}/shiny_overworld.pal"\n` +
-            `${form.title}ShinyOverworldPaletteDay:\tINCLUDE "gfx/pokemon/${form.lower}/shiny_overworld.pal"\n` +
-            `${form.title}ShinyOverworldPaletteDusk:\tINCLUDE "gfx/pokemon/${form.lower}/shiny_overworld.pal"\n` +
-            `${form.title}ShinyOverworldPaletteMidnight:\tINCLUDE "gfx/pokemon/${form.lower}/shiny_overworld.pal"\n` +
-            `${form.title}ShinyOverworldPaletteDark:\tINCLUDE "gfx/pokemon/${form.lower}/shiny_overworld.pal"\n`).join("") +
+            `${form.title}NormalOverworldPalette:\tINCBIN "gfx/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
+            `${form.title}ShinyOverworldPalette:\tINCLUDE "gfx/pokemon/${form.lower}/shiny_overworld.pal"\n`).join("") +
         `\n`).join(""),
         "utf8");
 

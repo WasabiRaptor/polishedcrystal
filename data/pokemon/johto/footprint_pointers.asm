@@ -336,3 +336,4 @@ Ho_ohFootprintPointers::
 
 CelebiFootprintPointers::
 	add_footprint Celebi
+

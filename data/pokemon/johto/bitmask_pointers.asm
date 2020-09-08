@@ -336,3 +336,4 @@ Ho_ohBitmasksPointers::
 
 CelebiBitmasksPointers::
 	add_bitmasks Celebi
+

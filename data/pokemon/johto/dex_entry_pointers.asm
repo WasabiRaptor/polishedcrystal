@@ -336,3 +336,4 @@ Ho_ohPokedexEntryPointers::
 
 CelebiPokedexEntryPointers::
 	add_pokedexentry Celebi
+

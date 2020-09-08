@@ -336,3 +336,4 @@ Ho_ohFramesPointers::
 
 CelebiFramesPointers::
 	add_frames Celebi
+

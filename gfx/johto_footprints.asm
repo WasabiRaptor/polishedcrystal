@@ -201,3 +201,4 @@ LugiaFootprint::	INCBIN "gfx/pokemon/lugia/footprint.1bpp"
 Ho_ohFootprint::	INCBIN "gfx/pokemon/ho_oh/footprint.1bpp"
 
 CelebiFootprint::	INCBIN "gfx/pokemon/celebi/footprint.1bpp"
+

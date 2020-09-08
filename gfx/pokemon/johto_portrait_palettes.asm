@@ -1062,3 +1062,5 @@ CelebiNeutralOAMPalette::	INCBIN "gfx/pokemon/celebi/portraits/neutralOAM.gbcpal
 CelebiHappyPalette::
 CelebiHappyBGPalette::	INCBIN "gfx/pokemon/celebi/portraits/happyBG.gbcpal"
 CelebiHappyOAMPalette::	INCBIN "gfx/pokemon/celebi/portraits/happyOAM.gbcpal"
+
+

@@ -1200,3 +1200,5 @@ CelebiNeutralBG::	INCBIN "gfx/pokemon/celebi/portraits/neutralBG.2bpp.lz"
 CelebiNeutralOAM::	INCBIN "gfx/pokemon/celebi/portraits/neutralOAM.2bpp.lz"
 CelebiHappyBG::	INCBIN "gfx/pokemon/celebi/portraits/happyBG.2bpp.lz"
 CelebiHappyOAM::	INCBIN "gfx/pokemon/celebi/portraits/happyOAM.2bpp.lz"
+
+

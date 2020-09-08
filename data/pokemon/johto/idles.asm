@@ -236,3 +236,4 @@ LugiaAnimationIdle:	INCLUDE "gfx/pokemon/lugia/anim_idle.asm"
 Ho_ohAnimationIdle:	INCLUDE "gfx/pokemon/ho_oh/anim_idle.asm"
 
 CelebiAnimationIdle:	INCLUDE "gfx/pokemon/celebi/anim_idle.asm"
+

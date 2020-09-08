@@ -336,3 +336,4 @@ Ho_ohPalettePointers::
 
 CelebiPalettePointers::
 	add_palettes Celebi
+
