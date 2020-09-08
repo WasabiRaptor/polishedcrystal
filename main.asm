@@ -22,7 +22,7 @@ PushOAMCode: ; 403f
 	dec a
 	jr nz, .loop
 	ret
-PushOAMCodeEnd
+PushOAMCodeEnd:
 
 ReanchorBGMap_NoOAMUpdate:: ; 6454
 	ldh a, [hOAMUpdate]

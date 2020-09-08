@@ -19,7 +19,7 @@ endc
 ; 49420
 
 LoadSpecialMapPalette: ; 494ac
-	GLOBAL GenericMart_BlockData
+	EXPORT GenericMart_BlockData
 	call GetMapHeaderTimeOfDayNybble
 	cp PALETTE_DARK
 	jr nz, .not_dark

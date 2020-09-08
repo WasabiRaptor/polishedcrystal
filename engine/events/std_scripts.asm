@@ -291,7 +291,7 @@ SmashRockScript:
 PokeCenterSignScript:
 	farjumptext PokeCenterSignText
 
-MartSignScript
+MartSignScript:
 	farjumptext MartSignText
 
 DayToTextScript:
