@@ -356,7 +356,7 @@ LoadPokedexIconPals::
 	ld a, [hli]
 	ld d, [hl]
 	ld e, a
-	farcall GetPokedexIconPalette
+	jp GetRelevantMonOverworldPalettes
 	pop de
 	pop bc
 	pop hl

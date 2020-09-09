@@ -140,15 +140,15 @@ GetMenuMonIconPalette::
 	and a
 .got_shininess:
 .got_species:
+	push af
 	ld hl, wUnknOBPals
 	ld bc, 1 palettes
 	ld a, [wCurPartyMon]
 	inc a
 	rst AddNTimes
+	pop af
 	ld d, h
 	ld e, l
-GetPokedexIconPalette::
-	ld a, MIDDAY
 	jp GetRelevantMonOverworldPalettes
 
 LoadPartyMenuMonIcon:

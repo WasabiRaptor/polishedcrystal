@@ -275,7 +275,7 @@ fs.readFile("constants/national_dex_pokemon_constants.asm", "utf8", (err, data) 
             `${region.title}OverworldPalettes:\n` +
             list.map(poke=>`${poke.title}OverworldPalettes:\n` +
             `${poke.title}NormalOverworldPalette:\tINCBIN "gfx/pokemon/${poke.lower}/overworld.gbcpal", middle_colors\n`+
-            `${poke.title}ShinyOverworldPalette:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny.pal"\n` +
+            `${poke.title}ShinyOverworldPalette:\tINCLUDE "gfx/pokemon/${poke.lower}/shiny_overworld.pal"\n` +
             poke.forms.map(form=>`${form.title}OverworldPalettes::\n`+
             `${form.title}NormalOverworldPalette:\tINCBIN "gfx/pokemon/${form.lower}/overworld.gbcpal", middle_colors\n`+
             `${form.title}ShinyOverworldPalette:\tINCLUDE "gfx/pokemon/${form.lower}/shiny_overworld.pal"\n`).join("") +

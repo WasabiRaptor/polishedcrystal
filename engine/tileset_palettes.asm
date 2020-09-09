@@ -274,8 +274,9 @@ LoadMapPals::
 	ld a, [hli] ; inc to the mapobject index
 	and a
 	ret z ; if theres no sprite here, nothing left to do
-	push af
+	push hl
 	push bc
+	push af
 
 	ld a, [hl] ;get the mapobject index to get the color and slot to put the color in
 	call GetMapObject
@@ -299,11 +300,15 @@ LoadMapPals::
 	ld a, [hl] ; color 2
 	call LoadNPCPalette
 
-	pop bc
 	pop af
+.GotPokemonPal
+	pop bc
+	pop hl
 	dec c
-	jr nz, .NPColorsLoop
-	ret
+	ret z
+	ld de, OBJECT_STRUCT_LENGTH -1
+	add hl, de
+	jr .NPColorsLoop
 
 .GetNPCPokemonPalette
 	pop af
@@ -327,8 +332,12 @@ LoadMapPals::
 	ld e, l
 	push de
 	call GetRelevantMonOverworldPalettes
+	pop de
+	call PokemonPalToD
+	jr .GotPokemonPal
+PokemonPalToD:
+	push de
 	jr NPCOrPokemonPaletteToD
-
 LoadNPCPalette::
 	push de
 	ld hl, PlayerPaletteOptions

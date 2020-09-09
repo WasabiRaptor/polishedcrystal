@@ -134,7 +134,6 @@ GetOverworldPokemonSprite:
 	rst AddNTimes
 	ld d, h
 	ld e, l
-	ld a, [wTimeOfDayPal]
 	call GetRelevantMonOverworldPalettes
 	farcall ApplyPals
 

@@ -1133,7 +1133,7 @@ GetMonPalette::
 	call NextHLTable
 
 	pop bc
-	homecall CheckShininess
+	call CheckShininess
 	jp nc, .not_shiny
 rept 4
 	inc hl
@@ -1145,6 +1145,19 @@ endr
 
 	pop af
 	rst Bankswitch
+	ret
+
+CheckShininess::
+; Check if a mon is shiny by personality at bc.
+; Return carry if shiny.
+	ld a, [bc]
+	and SHINY_MASK
+	jr z, .NotShiny
+	scf
+	ret
+
+.NotShiny:
+	and a
 	ret
 
 INCLUDE "data/pokemon/variant_palette_table.asm"
@@ -1166,7 +1179,7 @@ GetRelevantMonOverworldPalettes::
 	call NextHLTable
 	pop af ; get the inputted time of day pal and flag for shiny
 	jr nc, .not_shiny
-	ld bc, 4 * 5
+	ld bc, PAL_COLOR_SIZE * 2
 	add hl, bc
 .not_shiny
 

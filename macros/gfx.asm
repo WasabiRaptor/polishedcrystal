@@ -12,6 +12,20 @@ endc
 endr
 ENDM
 
+; used for making a color fullbright in ToD pallettes
+RGBfb: MACRO
+rept _NARG / 3
+if DEF(NOIR)
+x = (299 * \1 + 587 * \2 + 114 * \3) / 1000
+	dw palred x + palgreen x + palblue x | %1000000000000000
+else
+	dw palred (\1) + palgreen (\2) + palblue (\3) | %1000000000000000
+endc
+	shift
+	shift
+	shift
+endr
+ENDM
 palred   EQUS "(1 << 0) *"
 palgreen EQUS "(1 << 5) *"
 palblue  EQUS "(1 << 10) *"

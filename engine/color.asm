@@ -4,19 +4,6 @@ INCLUDE "engine/cgb.asm"
 
 INCLUDE "engine/sgb_border.asm"
 
-CheckShininess::
-; Check if a mon is shiny by personality at bc.
-; Return carry if shiny.
-	ld a, [bc]
-	and SHINY_MASK
-	jr z, .NotShiny
-	scf
-	ret
-
-.NotShiny:
-	and a
-	ret
-
 InitPartyMenuPalettes:
 	ld de, wUnknBGPals
 	ld hl, PartyMenuBGPals
