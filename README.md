@@ -1,5 +1,7 @@
 # hey heads up I am very very very victim to feature creep, so while I intend this to be its own game, all of the readmes and such are still the exact same as polished's haha
 
+Code made for Brass within this project is free to use as long as the source is made open within a reasonable amount of time of release of a project, the Crystal Clear project and anyone associated are not allowed to use any of such code. Defer to Polished Crystal's devs for permissions regarding the rest.
+
 
 # Pokémon Polished Crystal
 
